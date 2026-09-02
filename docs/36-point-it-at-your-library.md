@@ -3,9 +3,9 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **nine archetypes**
+> plugin can run in any file. It works today for **ten archetypes**
 > (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1, radio@1,
-> textarea@1) and has been proven on **libraries
+> textarea@1, alert@1) and has been proven on **libraries
 > the recipe path was never taught** — Chakra UI, shadcn, Altitude, Fluent and
 > Carbon — including six Chakra controls captured for the first time the same
 > day (a person wrote the config entry, the command did the rest; the Switch's
@@ -90,6 +90,13 @@ which the legacy contract path quarantines on `text-underline-offset` — is
 scored against the real render anyway (the quarantine path now keeps the
 `--keep-originals` screenshots: the pixels are a measurement, not the
 contract's to refuse) and is a named one-row rasterisation difference.
+
+On alert@1, the four status glyphs are the capture's own path data and the
+package's viewBox is the one reviewed leaf; MUI's and AntD's proposals score
+their hand rows (the drafter takes AntD's icon-bearing cell over its
+showIcon=false base by asking which svg's paint changes across statuses),
+and Chakra's Alert — captured the same day, its own icons — is held out at
+3.03% (`recipe/evidence/fidelity-v1/f1-alert-proposed/`).
 
 On textarea@1, the label plane is decided by what the label does between
 the empty and value combos (an absolutely positioned label whose transform
@@ -177,10 +184,14 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** Nine of the thirteen boilerplate archetypes have
+- **Other archetypes.** Ten of the thirteen boilerplate archetypes have
   proposers today (checkbox, switch, avatar, tooltip, chip, link, tabs,
-  radio, textarea); the other four — badge, alert, dialog, menu — still have
-  hand tables only.
+  radio, textarea, alert); the other three — badge, dialog, menu — still
+  have hand tables only.
+- **An svg's viewBox.** The capture records computed style, and a viewBox
+  is an attribute; the asset file the capture writes carries the rendered
+  size there. alert@1 reads the glyph paths from the capture and takes the
+  viewBox as one reviewed leaf with a package citation.
 - **A labelled composition the capture cannot mount.** The capture config's
   axis props go to the root component, so a Field + Label + Textarea
   composition whose value lives on the child cannot be captured yet; the
@@ -242,6 +253,7 @@ files), what stays as archive, and the three decisions that are the owner's.
 | `recipe/fixture-reader/schema-tabs.ts`, `propose-tabs.ts` | tabs@1: list, selected/rest tabs, an indicator part or the selected tab's bottom border |
 | `recipe/fixture-reader/schema-radio.ts`, `propose-radio.ts` | radio@1: hit, ring, dot (part or pseudo-element, transform × `scale`), label, row; list leaves are spellings |
 | `recipe/fixture-reader/schema-textarea.ts`, `propose-textarea.ts` | textarea@1: box, outline, inner, label (or the bare cell), legend; the label plane from the label's transform |
+| `recipe/fixture-reader/schema-alert.ts`, `propose-alert.ts` | alert@1: box, icon svg + its one path (glyph d, fill-rule, fill), title; the viewBox reviewed |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

@@ -8,7 +8,7 @@ import { canonicalAlertRecipeInstance } from "./alert.js";
 import { readCaptureGlyph } from "./capture-glyph.js";
 import type { AlertRecipeInstance } from "../recipes/alert.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): AlertRecipeInstance["tokens"] => {
@@ -420,7 +420,7 @@ const captureContent = {
   antd: { title: "Alert message" }, // configs/antd.json Alert fixedProps.message
 } as const;
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -537,7 +537,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedAlertSource,
   tokens: AlertRecipeInstance["tokens"],
@@ -546,6 +546,8 @@ const buildConfig = (
   refusals: ReviewedAlertSourceFact[],
   extraIr: ReviewedAlertSourceFact[],
   unsupported: string[],
+  // A proposed fixture passes the captured title; the hand tables keep their pinned capture strings.
+  content: AlertRecipeInstance["content"] = captureContent[slug as keyof typeof captureContent],
 ): ReviewedAlertAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -575,7 +577,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: structuredClone(captureContent[slug as keyof typeof captureContent]),
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     axes: structuredClone(axes),
     sourceFacts: facts,
@@ -599,7 +601,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedAlertSource,
 ): ReviewedAlertSourceFact[] => [
@@ -616,7 +618,7 @@ const anatomyFacts = (
   },
 ];
 
-const statusAxis = (
+export const statusAxis = (
   defaultStatus: "info" | "success" | "warning" | "error",
 ): AlertRecipeInstance["axes"] => ({
   status: {

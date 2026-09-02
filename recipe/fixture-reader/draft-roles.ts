@@ -28,6 +28,7 @@ import type { LinkRoles } from "./schema-link.js";
 import type { TabsRoles } from "./schema-tabs.js";
 import type { RadioComboMap, RadioRoles } from "./schema-radio.js";
 import type { TextareaComboMap, TextareaRoles } from "./schema-textarea.js";
+import { ALERT_STATUSES, type AlertComboMap, type AlertRoles } from "./schema-alert.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -728,5 +729,119 @@ export function draftTextareaRoles(ledger: Ledger): TextareaRoleDraft {
     evidence.opacityOn = { selector: roles.opacityOn!, why: dimmed ? `${dimmed.tag} opacity ${dimmed.style.opacity} → ${disBy.get(dimmed.idxPath)!.style.opacity} when disabled` : "nothing dims when disabled; the box carries opacity 1", confidence: "high" };
   }
 
+  return { roles, combos, evidence, unresolved };
+}
+
+
+export interface AlertRoleDraft {
+  roles: Partial<AlertRoles>;
+  combos: Partial<AlertComboMap>;
+  evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
+  unresolved: string[];
+}
+
+/**
+ * alert@1 combos: one captured combo per status. The declared base cell may
+ * lack the status icon (AntD's base is showIcon=false), so among the cells
+ * that share the base's other tokens the drafter takes the NEAREST pattern
+ * (fewest tokens changed) whose svg paint changes across the four statuses
+ * — the status icon, not a close button.
+ */
+export function draftAlertCombos(ledger: Ledger): { combos: Partial<AlertComboMap>; evidence: string[]; unresolved: string[] } {
+  const keys = ledger.keys().filter((k) => k.endsWith("__default")).map((k) => k.slice(0, -"__default".length));
+  const STATUS = /(^|\.)(info|success|warning|error)(\.|$)/;
+  const combos: Partial<AlertComboMap> = {};
+  const evidence: string[] = [], unresolved: string[] = [];
+  const base = ledger.baseKey?.replace(/__default$/, "");
+  const withStatus = (pattern: string, status: string): string => pattern.replace("{status}", status);
+  const patterns = new Map<string, number>(); // pattern → token distance from the base pattern
+  const basePattern = base && STATUS.test(base) ? base.replace(STATUS, (_m, pre: string, _v: string, post: string) => `${pre}{status}${post}`) : null;
+  for (const k of keys) {
+    if (!STATUS.test(k)) continue;
+    const pat = k.replace(STATUS, (_m, pre: string, _v: string, post: string) => `${pre}{status}${post}`);
+    if (patterns.has(pat)) continue;
+    const dist = basePattern ? pat.split(".").filter((t, i) => t !== basePattern.split(".")[i]).length + Math.abs(pat.split(".").length - basePattern.split(".").length) : pat.length;
+    patterns.set(pat, dist);
+  }
+  const svgPaintChanges = (pat: string): boolean => {
+    const caps = ALERT_STATUSES.map((st) => withStatus(pat, st)).filter((k) => keys.includes(k)).map((k) => ledger.capture(`${k}__default`));
+    if (caps.length !== ALERT_STATUSES.length) return false;
+    const svgs = caps[0]!.parts.filter((p) => p.tag === "svg");
+    return svgs.some((svg) => caps.slice(1).some((c) => { const o = c.parts.find((p) => p.idxPath === svg.idxPath); return !!o && ((o.style.fill ?? "") !== (svg.style.fill ?? "") || (o.style.color ?? "") !== (svg.style.color ?? "")); }));
+  };
+  const ordered = [...patterns.entries()].sort((a, b) => a[1] - b[1] || a[0].length - b[0].length).map(([pat]) => pat);
+  const chosen = ordered.find(svgPaintChanges) ?? ordered.find((pat) => ALERT_STATUSES.every((st) => keys.includes(withStatus(pat, st))));
+  if (!chosen) {
+    unresolved.push(`no captured cell pattern carries all four statuses (captured: ${keys.slice(0, 8).join(" ")}${keys.length > 8 ? " …" : ""})`);
+    return { combos, evidence, unresolved };
+  }
+  const why = chosen === basePattern ? `the declared base cell ${base}` : `the nearest cell to the declared base ${base ?? "(none)"} whose svg paint changes across statuses (${patterns.get(chosen)} token(s) changed)${svgPaintChanges(chosen) ? "" : " — NOTE: no svg paint changes across statuses in any pattern; the first complete pattern was taken"}`;
+  for (const status of ALERT_STATUSES) {
+    const k = withStatus(chosen, status);
+    if (keys.includes(k)) { combos[status] = k; evidence.push(`${status} ← ${k} (${why})`); }
+    else unresolved.push(`${status}: ${k} was not captured`);
+  }
+  return { combos, evidence, unresolved };
+}
+
+/**
+ * Draft the alert@1 role map by what the parts DO: the icon is the first svg
+ * whose paint changes across statuses, its path the svg's one drawn path
+ * (two or more is unresolved — alert@1 carries one filled glyph), the wrapper
+ * the svg's parent when it is not the box; the title is the text part; the
+ * box is the nearest common ancestor of icon and title that paints.
+ */
+export function draftAlertRoles(ledger: Ledger): AlertRoleDraft {
+  const { combos, evidence: comboEvidence, unresolved: comboUnresolved } = draftAlertCombos(ledger);
+  const evidence: AlertRoleDraft["evidence"] = {};
+  const unresolved: string[] = [...comboUnresolved];
+  const roles: AlertRoleDraft["roles"] = {};
+  evidence.combos = { selector: null, why: comboEvidence.join("; ") || "no combo resolved", confidence: comboUnresolved.length ? "low" : "high" };
+  if (!combos.info) return { roles, combos, evidence, unresolved };
+  const base = ledger.capture(`${combos.info}__default`);
+  const other = ALERT_STATUSES.filter((s) => s !== "info" && combos[s]).map((s) => ledger.capture(`${combos[s]}__default`));
+  const byPath = (cap: { parts: LedgerPart[] }) => new Map(cap.parts.map((p) => [p.idxPath, p] as const));
+  const baseBy = byPath(base);
+  const otherBy = other.map(byPath);
+  const paintChanges = (p: LedgerPart, channels: string[]): boolean => otherBy.some((m) => { const o = m.get(p.idxPath); return !!o && channels.some((ch) => (o.style[ch] ?? "") !== (p.style[ch] ?? "")); });
+
+  // TITLE: the text part.
+  const title = base.parts.find(hasTextPart);
+  if (title) { roles.title = sel(title); evidence.title = { selector: roles.title, why: `${title.tag}${title.classes.length ? "." + title.classes[0] : ""} carries text ${JSON.stringify(title.text.find((t) => t.trim()))}`, confidence: "high" }; }
+  else { unresolved.push("title: no part carries text"); evidence.title = { selector: null, why: "no candidate", confidence: "low" }; }
+
+  // ICON: an svg whose fill/color changes across statuses (else the first svg).
+  const svgs = base.parts.filter((p) => p.tag === "svg");
+  const icon = svgs.find((p) => paintChanges(p, ["fill", "color"])) ?? svgs[0] ?? null;
+  if (icon) {
+    roles.icon = sel(icon);
+    evidence.icon = { selector: roles.icon, why: `svg ${icon.style.width}×${icon.style.height} fill ${icon.style.fill}${paintChanges(icon, ["fill", "color"]) ? " — its paint changes across statuses" : " (the only svg; paint does not change across statuses)"}`, confidence: paintChanges(icon, ["fill", "color"]) ? "high" : "medium" };
+    const paths = base.parts.filter((p) => p.tag === "path" && p.idxPath.startsWith(icon.idxPath + "."));
+    if (paths.length === 1) { roles.iconPath = sel(paths[0]!); evidence.iconPath = { selector: roles.iconPath, why: `the svg's one path, fill ${paths[0]!.style.fill}, fill-rule ${paths[0]!.style["fill-rule"]}, d=${(paths[0]!.style.d ?? "").slice(0, 40)}…`, confidence: "high" }; }
+    else unresolved.push(`iconPath: the icon svg has ${paths.length} path children — alert@1 carries one filled glyph per status`);
+    const pp = parentPath(icon.idxPath);
+    const parent = pp !== null ? baseBy.get(pp) : undefined;
+    if (parent && parent.idxPath !== "" && !hasTextPart(parent)) {
+      roles.iconWrap = sel(parent);
+      evidence.iconWrap = { selector: roles.iconWrap, why: `the svg's parent ${parent.tag} (opacity ${parent.style.opacity}, margin-right ${parent.style["margin-right"]})`, confidence: "high" };
+    }
+  } else { unresolved.push("icon: no svg part"); evidence.icon = { selector: null, why: "no candidate", confidence: "low" }; }
+
+  // BOX: nearest common ancestor of icon and title that paints (fill or border), else the root.
+  if (icon && title) {
+    let a: string | null = icon.idxPath; const ancestors = new Set<string>();
+    while (a !== null) { ancestors.add(a); a = parentPath(a); }
+    let b: string | null = title.idxPath, common: string | null = null;
+    while (b !== null) { if (ancestors.has(b) && b !== icon.idxPath && b !== title.idxPath) { common = b; break; } b = parentPath(b); }
+    let idx: string | null = common;
+    let box: LedgerPart | undefined;
+    while (idx !== null) { const p = baseBy.get(idx); if (p && (!isTransparent(p.style["background-color"]) || num(p.style["border-top-width"]) > 0)) { box = p; break; } idx = parentPath(idx); }
+    box = box ?? baseBy.get("");
+    if (box) {
+      roles.box = sel(box);
+      if (roles.iconWrap === roles.box) delete roles.iconWrap;
+      evidence.box = { selector: roles.box, why: `${box.tag}${box.classes.length ? "." + box.classes[0] : ""} bg ${box.style["background-color"]} border ${box.style["border-top-width"]} padding ${box.style["padding-top"]}/${box.style["padding-left"]} gap ${box.style["column-gap"]} — the painted ancestor of icon and title`, confidence: "high" };
+    }
+  }
   return { roles, combos, evidence, unresolved };
 }

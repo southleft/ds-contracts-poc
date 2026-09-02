@@ -1,0 +1,48 @@
+{
+  "roles": {
+    "title": "idx:1",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info.standard",
+    "success": "success.standard",
+    "warning": "warning.standard",
+    "error": "error.standard"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "info ← info.standard (the declared base cell info.standard); success ← success.standard (the declared base cell info.standard); warning ← warning.standard (the declared base cell info.standard); error ← error.standard (the declared base cell info.standard)",
+      "confidence": "high"
+    },
+    "title": {
+      "selector": "idx:1",
+      "why": "div.MuiAlert-message carries text \"This is an alert — check it out!\"",
+      "confidence": "high"
+    },
+    "icon": {
+      "selector": "idx:0.0",
+      "why": "svg 22px×22px fill rgba(2, 136, 209, 1) — its paint changes across statuses",
+      "confidence": "high"
+    },
+    "iconPath": {
+      "selector": "idx:0.0.0",
+      "why": "the svg's one path, fill rgba(2, 136, 209, 1), fill-rule nonzero, d=path(\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.5…",
+      "confidence": "high"
+    },
+    "iconWrap": {
+      "selector": "idx:0",
+      "why": "the svg's parent div (opacity 0.9, margin-right 12px)",
+      "confidence": "high"
+    },
+    "box": {
+      "selector": "root",
+      "why": "div.MuiPaper-root bg rgba(229, 246, 253, 1) border 0px padding 6px/16px gap normal — the painted ancestor of icon and title",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

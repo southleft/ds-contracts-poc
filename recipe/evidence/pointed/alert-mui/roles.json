@@ -1,0 +1,13 @@
+{
+  "title": "idx:1",
+  "icon": "idx:0.0",
+  "iconPath": "idx:0.0.0",
+  "iconWrap": "idx:0",
+  "box": "root",
+  "combos": {
+    "info": "info.standard",
+    "success": "success.standard",
+    "warning": "warning.standard",
+    "error": "error.standard"
+  }
+}

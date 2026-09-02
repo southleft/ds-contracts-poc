@@ -1,0 +1,274 @@
+{
+  "archetype": "alert",
+  "library": "chakra",
+  "ledger": "extract/computed/out/chakra/alert/captured-truth.json",
+  "provenance": {
+    "package": "@chakra-ui/react",
+    "version": "3.37.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "title": "idx:1.0",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info",
+    "success": "success",
+    "warning": "warning",
+    "error": "error"
+  },
+  "leaves": {
+    "box.height": {
+      "value": 52,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.height | extract/computed/out/chakra/alert/captured-truth.json#info__default root.box-sizing | extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-top | extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-bottom | extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-width | extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-bottom-width",
+      "formula": "the box's border-box height as captured with the one-line title (a content-box height plus its padding and border)"
+    },
+    "box.paddingX": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-width"
+    },
+    "box.gap": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.column-gap | extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.margin-right | extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.margin-left",
+      "formula": "the space between the icon and the title: box column-gap + icon (wrapper) margin-right + title margin-left (keywords read 0)"
+    },
+    "icon.size": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.width"
+    },
+    "icon.viewBox": {
+      "value": 24,
+      "from": "set",
+      "why": "Chakra's InfoIcon/WarningIcon/CheckCircleIcon are authored in viewBox 0 0 24 24 (examples/chakra/.chakra-sandbox/node_modules/@chakra-ui/react/dist/esm/components/icons.js)"
+    },
+    "titleFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.font-size"
+    },
+    "titleLineHeight": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.line-height"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "recipe anatomy spelling — the box's border draws inside"
+    },
+    "states.info.boxFill": {
+      "value": "#dbeafeff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.background-color"
+    },
+    "states.info.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-color"
+    },
+    "states.info.title": {
+      "value": "#173da6ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.color"
+    },
+    "states.info.iconFill": {
+      "value": "#173da6ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.info.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.opacity | extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.info.path": {
+      "value": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 7 H 13 V 9 H 11 V 7 Z M 11 11 H 13 V 17 H 11 V 11 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.info.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.success.boxFill": {
+      "value": "#dcfce7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#success__default root.background-color"
+    },
+    "states.success.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#success__default root.border-top-color"
+    },
+    "states.success.title": {
+      "value": "#116932ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:1.0.color"
+    },
+    "states.success.iconFill": {
+      "value": "#116932ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.success.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.opacity | extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.success.path": {
+      "value": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11.0026 16 L 6.75999 11.7574 L 8.17421 10.3431 L 11.0026 13.1716 L 16.6595 7.51472 L 18.0737 8.92893 L 11.0026 16 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.success.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.warning.boxFill": {
+      "value": "#ffedd5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#warning__default root.background-color"
+    },
+    "states.warning.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#warning__default root.border-top-color"
+    },
+    "states.warning.title": {
+      "value": "#92310aff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:1.0.color"
+    },
+    "states.warning.iconFill": {
+      "value": "#92310aff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.warning.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.opacity | extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.warning.path": {
+      "value": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.warning.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.error.boxFill": {
+      "value": "#fee2e2ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#error__default root.background-color"
+    },
+    "states.error.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#error__default root.border-top-color"
+    },
+    "states.error.title": {
+      "value": "#991919ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:1.0.color"
+    },
+    "states.error.iconFill": {
+      "value": "#991919ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.error.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.opacity | extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.error.path": {
+      "value": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.error.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "typography.title.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.font-family",
+      "formula": "first family of the title's computed stack"
+    },
+    "typography.title.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.font-weight",
+      "formula": "title font-weight → style word"
+    }
+  },
+  "receipts": [
+    {
+      "path": "icon.viewBox",
+      "why": "the package's viewBox is not a computed channel (the capture asset carries the RENDERED size there); give --set icon.viewBox=<size | x y w h> --why with the package citation",
+      "evidence": "Chakra's InfoIcon/WarningIcon/CheckCircleIcon are authored in viewBox 0 0 24 24 (examples/chakra/.chakra-sandbox/node_modules/@chakra-ui/react/dist/esm/components/icons.js)",
+      "value": 24
+    }
+  ],
+  "refused": [],
+  "content": {
+    "title": "This is an alert — check it out!"
+  },
+  "viewBox": {
+    "x": 0,
+    "y": 0,
+    "width": 24,
+    "height": 24,
+    "citation": "Chakra's InfoIcon/WarningIcon/CheckCircleIcon are authored in viewBox 0 0 24 24 (examples/chakra/.chakra-sandbox/node_modules/@chakra-ui/react/dist/esm/components/icons.js)"
+  },
+  "typography": {
+    "family": "Inter",
+    "style": "Medium",
+    "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+  }
+}

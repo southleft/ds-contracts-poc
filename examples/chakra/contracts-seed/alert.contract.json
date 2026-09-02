@@ -1,0 +1,58 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Alert capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition from the package's flat exports: AlertRoot ⊃ (AlertIndicator, AlertContent ⊃ AlertTitle). Authored 2026-09-02 as the person's step of docs/36 for alert@1. `status` is the four-value enum alert@1 carries (Chakra also ships neutral, held fixed out); AlertIndicator renders the package's own status icon.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "status",
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "SwitchRoot"
+      }
+    }
+  }
+}

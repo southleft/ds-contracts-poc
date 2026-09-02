@@ -1,0 +1,48 @@
+{
+  "roles": {
+    "title": "idx:1.0",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info.icon.off.off",
+    "success": "success.icon.off.off",
+    "warning": "warning.icon.off.off",
+    "error": "error.icon.off.off"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "info ← info.icon.off.off (the nearest cell to the declared base info.noIcon.off.off whose svg paint changes across statuses (1 token(s) changed)); success ← success.icon.off.off (the nearest cell to the declared base info.noIcon.off.off whose svg paint changes across statuses (1 token(s) changed)); warning ← warning.icon.off.off (the nearest cell to the declared base info.noIcon.off.off whose svg paint changes across statuses (1 token(s) changed)); error ← error.icon.off.off (the nearest cell to the declared base info.noIcon.off.off whose svg paint changes across statuses (1 token(s) changed))",
+      "confidence": "high"
+    },
+    "title": {
+      "selector": "idx:1.0",
+      "why": "div.ant-alert-message carries text \"Alert message\"",
+      "confidence": "high"
+    },
+    "icon": {
+      "selector": "idx:0.0",
+      "why": "svg 14px×14px fill rgba(22, 119, 255, 1) — its paint changes across statuses",
+      "confidence": "high"
+    },
+    "iconPath": {
+      "selector": "idx:0.0.0",
+      "why": "the svg's one path, fill rgba(22, 119, 255, 1), fill-rule nonzero, d=path(\"M 512 64 C 264.6 64 64 264.6 64 51…",
+      "confidence": "high"
+    },
+    "iconWrap": {
+      "selector": "idx:0",
+      "why": "the svg's parent span (opacity 1, margin-right 8px)",
+      "confidence": "high"
+    },
+    "box": {
+      "selector": "root",
+      "why": "div.ant-alert bg rgba(230, 244, 255, 1) border 1px padding 8px/12px gap normal — the painted ancestor of icon and title",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

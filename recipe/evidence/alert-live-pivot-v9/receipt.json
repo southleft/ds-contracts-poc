@@ -1,0 +1,77 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "alert-live-pivot-v9-prepare",
+  "teaching": "Status info|success|warning|error compiled from named Banner/Alert facts; do not invent a shared default status; SVG glyphs receipted as colour+size boxes",
+  "runIdentity": "4c13ca24-9b4bd337-b8dd06ed-eb151709-83c23591-3cc66b45-alert-v9",
+  "pageName": "Recipe Pivot / Alert / 4c13ca24-9b4bd337-b8dd06ed-eb151709-83c23591-3cc66b45-alert-v9",
+  "namespace": "ds.contracts.alert.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "4c13ca24d271870e9e6c9b50f754ad42f0be0e390c4feb1fb10aabfa0e0b8145",
+    "MUI": "9b4bd3375d4bd4c846972da58119ee67e6897853a3e6db88d8dc776a1cfb672a",
+    "Ant Design": "b8dd06ed1dd6201afda491e78ff2551e2b1275badcb0961cff7a25e5053f2fc7",
+    "MUI (proposed)": "eb151709b5102ab147731a741dfbf1777810cb4fd124c558448b3f8ff799403f",
+    "Ant Design (proposed)": "83c235917b89e1b9ca0f2ae6ff552a31698ac5d31ee6024da23cc03d0eecc7c2",
+    "Chakra (proposed)": "3cc66b45a14a5f8d25812b55e8005017a446f54fbc7ca18af23cac54a3e6a92f"
+  },
+  "writerSha256": "9d4fd8dca1b0c19297732dd9774f3225504a3a1915c67b8c2a57ed20444f176f",
+  "pageId": "219:92824",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-92824",
+  "live": {
+    "recordedFrom": "alert-v9-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Alert / 4c13ca24-9b4bd337-b8dd06ed-eb151709-83c23591-3cc66b45-alert-v9",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-alert-reviewed-v1",
+        "sectionId": "219:92825",
+        "setId": "219:92868",
+        "collectionId": "VariableCollectionId:219:92826",
+        "variantCount": 4,
+        "comparedIrFacts": 93
+      },
+      {
+        "adapterIdentity": "mui-alert-reviewed-v1",
+        "sectionId": "219:92869",
+        "setId": "219:92912",
+        "collectionId": "VariableCollectionId:219:92870",
+        "variantCount": 4,
+        "comparedIrFacts": 93
+      },
+      {
+        "adapterIdentity": "antd-alert-reviewed-v1",
+        "sectionId": "219:92913",
+        "setId": "219:92956",
+        "collectionId": "VariableCollectionId:219:92914",
+        "variantCount": 4,
+        "comparedIrFacts": 93
+      },
+      {
+        "adapterIdentity": "mui-alert-proposed-v1",
+        "sectionId": "219:92957",
+        "setId": "219:93000",
+        "collectionId": "VariableCollectionId:219:92958",
+        "variantCount": 4,
+        "comparedIrFacts": 93
+      },
+      {
+        "adapterIdentity": "antd-alert-proposed-v1",
+        "sectionId": "219:93001",
+        "setId": "219:93044",
+        "collectionId": "VariableCollectionId:219:93002",
+        "variantCount": 4,
+        "comparedIrFacts": 93
+      },
+      {
+        "adapterIdentity": "chakra-alert-proposed-v1",
+        "sectionId": "219:93045",
+        "setId": "219:93088",
+        "collectionId": "VariableCollectionId:219:93046",
+        "variantCount": 4,
+        "comparedIrFacts": 93
+      }
+    ]
+  }
+}

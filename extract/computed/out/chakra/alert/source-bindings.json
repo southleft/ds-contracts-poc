@@ -1,0 +1,73 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Alert",
+  "varPrefix": "--chakra-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info",
+      "axisValues": {
+        "status": "info"
+      },
+      "token": "colors-color-palette-fg",
+      "varName": "--chakra-colors-color-palette-fg",
+      "anchor": {
+        "selector": ".css-19zwwf0"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success",
+      "axisValues": {
+        "status": "success"
+      },
+      "token": "colors-color-palette-fg",
+      "varName": "--chakra-colors-color-palette-fg",
+      "anchor": {
+        "selector": ".css-11of37g"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning",
+      "axisValues": {
+        "status": "warning"
+      },
+      "token": "colors-color-palette-fg",
+      "varName": "--chakra-colors-color-palette-fg",
+      "anchor": {
+        "selector": ".css-2sxmgm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "error",
+      "axisValues": {
+        "status": "error"
+      },
+      "token": "colors-color-palette-fg",
+      "varName": "--chakra-colors-color-palette-fg",
+      "anchor": {
+        "selector": ".css-183hdgy"
+      }
+    }
+  ],
+  "skips": [
+    "icon.height: candidate --chakra-sizes-full → \"sizes-full\" = 100% (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "icon.width: candidate --chakra-sizes-full → \"sizes-full\" = 100% (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "label.font-weight: candidate --chakra-font-weights-medium → \"font-weights-medium\" = 500 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "part-0.font-size: candidate --chakra-font-sizes-xl → \"font-sizes-xl\" = 1.25rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "root.font-size: candidate --chakra-font-sizes-sm → \"font-sizes-sm\" = 0.875rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "root.width: candidate --chakra-sizes-full → \"sizes-full\" = 100% (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

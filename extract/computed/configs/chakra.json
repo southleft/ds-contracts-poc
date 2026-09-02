@@ -172,6 +172,48 @@
       ]
     },
     {
+      "__note": "Authored 2026-09-02 as the person's step of docs/36 for alert@1. Composition from the package's flat exports: AlertRoot ⊃ (AlertIndicator, AlertContent ⊃ AlertTitle). status enumerates alert@1's four values (neutral held out). Title text pinned so typography identity is scorable; id pinned for determinism. blockStage so the alert takes the stage width, as it does in a page.",
+      "name": "Alert",
+      "importName": "AlertRoot",
+      "contract": "examples/chakra/contracts-seed/alert.contract.json",
+      "sampleText": "",
+      "axes": [
+        "status"
+      ],
+      "axisValueMap": {
+        "status": {
+          "info": "info",
+          "success": "success",
+          "warning": "warning",
+          "error": "error"
+        }
+      },
+      "stateProps": [],
+      "fixedProps": {
+        "id": "chakra-alert"
+      },
+      "childrenSpec": [
+        {
+          "importName": "AlertIndicator"
+        },
+        {
+          "importName": "AlertContent",
+          "children": [
+            {
+              "importName": "AlertTitle",
+              "text": "This is an alert — check it out!"
+            }
+          ]
+        }
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 360,
+        "height": 120,
+        "padding": 16
+      }
+    },
+    {
       "__note": "Authored 2026-09-02 as the person's step of docs/36 for radio@1. Composition from the package's flat exports: RadioGroupRoot ⊃ RadioGroupItem(value a) ⊃ (RadioGroupItemHiddenInput, RadioGroupItemIndicator, RadioGroupItemText). ItemIndicator is the package's control-with-dot (it renders ItemControl asChild around Radiomark, whose `.dot` span is the disc — radio-group.js); a first entry used the bare ItemControl and captured a solid disc with no dot, which the real render confirmed. The selected plane is the Root's `value` prop ('' = no item matches, 'a' = the item). Label text pinned 'Option'; id pinned for determinism.",
       "name": "Radio",
       "importName": "RadioGroupRoot",

@@ -181,33 +181,66 @@
     },
     {
       "label": "alert/astryx",
-      "page": "218:90060",
+      "page": "219:92824",
       "set": "alert/set :: Astryx Banner",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-astryx-info-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-astryx-info-shared-v9.png",
       "reference": "extract/computed/out/astryx-core/banner/orig-shots/info.card__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "alert/mui",
-      "page": "218:90060",
+      "page": "219:92824",
       "set": "alert/set :: MUI Alert",
       "variant": "Status=success",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-success-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-success-shared-v9.png",
       "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "alert/antd",
-      "page": "218:90060",
+      "page": "219:92824",
       "set": "alert/set :: Ant Design Alert",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-info-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-info-shared-v9.png",
       "reference": "extract/computed/out/antd/alert/orig-shots/info.icon.off.off__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
+    },
+    {
+      "label": "alert/mui-proposed",
+      "page": "219:92824",
+      "set": "alert/set :: MUI (proposed) Alert",
+      "variant": "Status=success",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-proposed-v9.png",
+      "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png",
+      "widthNormalised": true,
+      "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised",
+      "_proposedWhy": "PROPOSED from MUI's own capture by the alert@1 role schema (39 read, 1 reviewed \u2014 the SvgIcon viewBox 0 0 24 24 with its citation \u2014 0 invented): the four glyphs are the capture's own path data. Scored beside the hand row."
+    },
+    {
+      "label": "alert/antd-proposed",
+      "page": "219:92824",
+      "set": "alert/set :: Ant Design (proposed) Alert",
+      "variant": "Status=info",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-proposed-v9.png",
+      "reference": "extract/computed/out/antd/alert/orig-shots/info.icon.off.off__default.png",
+      "widthNormalised": true,
+      "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised",
+      "_proposedWhy": "PROPOSED from AntD's own capture: the drafter took the nearest cell to the showIcon=false base whose svg paint changes across statuses (info.icon.off.off); viewBox 64 64 896 896 reviewed with its citation; 39 read, 0 invented."
+    },
+    {
+      "label": "alert/chakra",
+      "page": "219:92824",
+      "set": "alert/set :: Chakra (proposed) Alert",
+      "variant": "Status=info",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-chakra-v9.png",
+      "reference": "extract/computed/out/chakra/alert/orig-shots/info__default.png",
+      "widthNormalised": true,
+      "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised",
+      "_proposedWhy": "HELD OUT: Chakra's Alert, captured 2026-09-02 from a config entry a person wrote (AlertRoot \u2283 AlertIndicator + AlertContent \u2283 AlertTitle; AlertIndicator renders the package's own status icons). 39 read, 1 reviewed (the icons' viewBox 0 0 24 24, cited), 0 invented."
     },
     {
       "label": "chip/astryx",

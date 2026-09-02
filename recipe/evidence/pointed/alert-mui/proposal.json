@@ -1,0 +1,274 @@
+{
+  "archetype": "alert",
+  "library": "mui",
+  "ledger": "extract/computed/out/mui/alert/captured-truth.json",
+  "provenance": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "title": "idx:1",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info.standard",
+    "success": "success.standard",
+    "warning": "warning.standard",
+    "error": "error.standard"
+  },
+  "leaves": {
+    "box.height": {
+      "value": 48.016,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.height | extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.box-sizing | extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-top | extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-bottom | extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-width | extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-bottom-width",
+      "formula": "the box's border-box height as captured with the one-line title (a content-box height plus its padding and border)"
+    },
+    "box.paddingX": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 4,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-width"
+    },
+    "box.gap": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.column-gap | extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.margin-right | extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.margin-left",
+      "formula": "the space between the icon and the title: box column-gap + icon (wrapper) margin-right + title margin-left (keywords read 0)"
+    },
+    "icon.size": {
+      "value": 22,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.width"
+    },
+    "icon.viewBox": {
+      "value": 24,
+      "from": "set",
+      "why": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)"
+    },
+    "titleFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.font-size"
+    },
+    "titleLineHeight": {
+      "value": 20.02,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.line-height"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "recipe anatomy spelling — the box's border draws inside"
+    },
+    "states.info.boxFill": {
+      "value": "#e5f6fdff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.background-color"
+    },
+    "states.info.boxBorder": {
+      "value": "#014361ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-color"
+    },
+    "states.info.title": {
+      "value": "#014361ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.color"
+    },
+    "states.info.iconFill": {
+      "value": "#0288d1ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.info.iconOpacity": {
+      "value": 0.9,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.opacity | extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.info.path": {
+      "value": "M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.info.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.success.boxFill": {
+      "value": "#edf7edff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default root.background-color"
+    },
+    "states.success.boxBorder": {
+      "value": "#1e4620ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default root.border-top-color"
+    },
+    "states.success.title": {
+      "value": "#1e4620ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:1.color"
+    },
+    "states.success.iconFill": {
+      "value": "#2e7d32ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.success.iconOpacity": {
+      "value": 0.9,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.opacity | extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.success.path": {
+      "value": "M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.success.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.warning.boxFill": {
+      "value": "#fff4e5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default root.background-color"
+    },
+    "states.warning.boxBorder": {
+      "value": "#663c00ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default root.border-top-color"
+    },
+    "states.warning.title": {
+      "value": "#663c00ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:1.color"
+    },
+    "states.warning.iconFill": {
+      "value": "#ed6c02ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.warning.iconOpacity": {
+      "value": 0.9,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.opacity | extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.warning.path": {
+      "value": "M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.warning.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.error.boxFill": {
+      "value": "#fdededff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default root.background-color"
+    },
+    "states.error.boxBorder": {
+      "value": "#5f2120ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default root.border-top-color"
+    },
+    "states.error.title": {
+      "value": "#5f2120ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:1.color"
+    },
+    "states.error.iconFill": {
+      "value": "#d32f2fff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.error.iconOpacity": {
+      "value": 0.9,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.opacity | extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.error.path": {
+      "value": "M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.error.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "typography.title.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.font-family",
+      "formula": "first family of the title's computed stack"
+    },
+    "typography.title.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.font-weight",
+      "formula": "title font-weight → style word"
+    }
+  },
+  "receipts": [
+    {
+      "path": "icon.viewBox",
+      "why": "the package's viewBox is not a computed channel (the capture asset carries the RENDERED size there); give --set icon.viewBox=<size | x y w h> --why with the package citation",
+      "evidence": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)",
+      "value": 24
+    }
+  ],
+  "refused": [],
+  "content": {
+    "title": "This is an alert — check it out!"
+  },
+  "viewBox": {
+    "x": 0,
+    "y": 0,
+    "width": 24,
+    "height": 24,
+    "citation": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)"
+  },
+  "typography": {
+    "family": "Roboto",
+    "style": "Regular",
+    "stack": "Roboto, Helvetica, Arial, sans-serif"
+  }
+}

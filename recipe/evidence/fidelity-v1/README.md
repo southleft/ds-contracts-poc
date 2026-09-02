@@ -464,3 +464,18 @@ quarantines it; the quarantine path keeps the originals), is held out at
     textarea/mui-proposed 9.52% (named, = hand) · textarea/antd-proposed 1.25% · textarea/chakra 1.64%
 
     37 pass · 0 fringe · 16 known
+
+### 2026-09-02 — alert@1 gets a proposer; the glyphs are read, the viewBox reviewed
+
+The tenth archetype with a proposer. The four status glyphs are the
+capture's own path data (computed `d` + `fill-rule`); the package's
+viewBox, which no computed channel carries, is the one reviewed leaf with a
+citation. MUI from its own capture scores 3.99% (hand 3.95%), AntD 3.35%
+(= hand; the drafter took the icon-bearing cell over the showIcon=false
+base by asking which svg's paint changes across statuses), and Chakra's
+Alert — captured the same day from a config entry a person wrote — is held
+out at 3.03%. Minted as alert v9 with six sources. See `f1-alert-proposed/`.
+
+    alert/mui-proposed 3.99% · alert/antd-proposed 3.35% · alert/chakra 3.03%
+
+    40 pass · 0 fringe · 16 known

@@ -481,6 +481,15 @@
     },
     {
       "library": "chakra",
+      "component": "Alert",
+      "rerunPctEqual": 57.00483091787439,
+      "cellsCompared": 3312,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 57.00483091787439,
+      "gapCause": ""
+    },
+    {
+      "library": "chakra",
       "component": "Avatar",
       "rerunPctEqual": 89.1891891891892,
       "cellsCompared": 296,

@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 53,
-  "passed": 37,
+  "subjects": 56,
+  "passed": 40,
   "failed": 16,
   "fringeExcused": 0,
   "knownFailures": 16,
@@ -151,6 +151,30 @@
       "pctAAMasked": 3.35,
       "canvasPx": "139x40",
       "realPx": "288x40",
+      "convergesAt": null
+    },
+    {
+      "label": "alert/mui-proposed",
+      "status": "pass",
+      "pctAAMasked": 3.99,
+      "canvasPx": "251x48",
+      "realPx": "288x48",
+      "convergesAt": null
+    },
+    {
+      "label": "alert/antd-proposed",
+      "status": "pass",
+      "pctAAMasked": 3.35,
+      "canvasPx": "139x40",
+      "realPx": "288x40",
+      "convergesAt": null
+    },
+    {
+      "label": "alert/chakra",
+      "status": "pass",
+      "pctAAMasked": 3.03,
+      "canvasPx": "266x52",
+      "realPx": "328x52",
       "convergesAt": null
     },
     {

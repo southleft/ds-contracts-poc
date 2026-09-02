@@ -691,5 +691,881 @@
         "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-message.font-weight"
       }
     }
+  },
+  {
+    "library": "mui-proposed",
+    "archetype": "alert",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Alert"
+    },
+    "ledger": "extract/computed/out/mui/alert/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 48.016,
+        "proposed": 48.016,
+        "verdict": "match",
+        "captured": 48.016,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.height ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.box-sizing ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-top ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-bottom ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-width ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-bottom-width — the box's border-box height as captured with the one-line title (a content-box height plus its padding and border)"
+      },
+      "box.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-width"
+      },
+      "box.gap": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.column-gap ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.margin-right ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.margin-left — the space between the icon and the title: box column-gap + icon (wrapper) margin-right + title margin-left (keywords read 0)"
+      },
+      "icon.size": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.width"
+      },
+      "titleFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 20.02,
+        "proposed": 20.02,
+        "verdict": "match",
+        "captured": 20.02,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.line-height"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling — the box's border draws inside [reviewed inside]"
+      },
+      "states.info.boxFill": {
+        "fixture": "#e5f6fdff",
+        "proposed": "#e5f6fdff",
+        "verdict": "match",
+        "captured": "#e5f6fdff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.background-color"
+      },
+      "states.info.boxBorder": {
+        "fixture": "#014361ff",
+        "proposed": "#014361ff",
+        "verdict": "match",
+        "captured": "#014361ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default root.border-top-color"
+      },
+      "states.info.title": {
+        "fixture": "#014361ff",
+        "proposed": "#014361ff",
+        "verdict": "match",
+        "captured": "#014361ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.color"
+      },
+      "states.info.iconFill": {
+        "fixture": "#0288d1ff",
+        "proposed": "#0288d1ff",
+        "verdict": "match",
+        "captured": "#0288d1ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.info.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.opacity ; extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.info.path": {
+        "fixture": "M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z",
+        "proposed": "M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z",
+        "verdict": "match",
+        "captured": "M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.info.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.success.boxFill": {
+        "fixture": "#edf7edff",
+        "proposed": "#edf7edff",
+        "verdict": "match",
+        "captured": "#edf7edff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default root.background-color"
+      },
+      "states.success.boxBorder": {
+        "fixture": "#1e4620ff",
+        "proposed": "#1e4620ff",
+        "verdict": "match",
+        "captured": "#1e4620ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default root.border-top-color"
+      },
+      "states.success.title": {
+        "fixture": "#1e4620ff",
+        "proposed": "#1e4620ff",
+        "verdict": "match",
+        "captured": "#1e4620ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:1.color"
+      },
+      "states.success.iconFill": {
+        "fixture": "#2e7d32ff",
+        "proposed": "#2e7d32ff",
+        "verdict": "match",
+        "captured": "#2e7d32ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.success.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.opacity ; extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.success.path": {
+        "fixture": "M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z",
+        "proposed": "M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z",
+        "verdict": "match",
+        "captured": "M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.success.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.warning.boxFill": {
+        "fixture": "#fff4e5ff",
+        "proposed": "#fff4e5ff",
+        "verdict": "match",
+        "captured": "#fff4e5ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default root.background-color"
+      },
+      "states.warning.boxBorder": {
+        "fixture": "#663c00ff",
+        "proposed": "#663c00ff",
+        "verdict": "match",
+        "captured": "#663c00ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default root.border-top-color"
+      },
+      "states.warning.title": {
+        "fixture": "#663c00ff",
+        "proposed": "#663c00ff",
+        "verdict": "match",
+        "captured": "#663c00ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:1.color"
+      },
+      "states.warning.iconFill": {
+        "fixture": "#ed6c02ff",
+        "proposed": "#ed6c02ff",
+        "verdict": "match",
+        "captured": "#ed6c02ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.warning.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.opacity ; extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.warning.path": {
+        "fixture": "M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z",
+        "proposed": "M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z",
+        "verdict": "match",
+        "captured": "M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.warning.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.error.boxFill": {
+        "fixture": "#fdededff",
+        "proposed": "#fdededff",
+        "verdict": "match",
+        "captured": "#fdededff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default root.background-color"
+      },
+      "states.error.boxBorder": {
+        "fixture": "#5f2120ff",
+        "proposed": "#5f2120ff",
+        "verdict": "match",
+        "captured": "#5f2120ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default root.border-top-color"
+      },
+      "states.error.title": {
+        "fixture": "#5f2120ff",
+        "proposed": "#5f2120ff",
+        "verdict": "match",
+        "captured": "#5f2120ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:1.color"
+      },
+      "states.error.iconFill": {
+        "fixture": "#d32f2fff",
+        "proposed": "#d32f2fff",
+        "verdict": "match",
+        "captured": "#d32f2fff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.error.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.opacity ; extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.error.path": {
+        "fixture": "M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z",
+        "proposed": "M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z",
+        "verdict": "match",
+        "captured": "M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.error.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "typography.title.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.font-family — first family of the title's computed stack"
+      },
+      "typography.title.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default idx:1.font-weight — title font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "antd-proposed",
+    "archetype": "alert",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Alert"
+    },
+    "ledger": "extract/computed/out/antd/alert/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 40,
+        "proposed": 40,
+        "verdict": "match",
+        "captured": 40,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.height ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.box-sizing ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-top ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-bottom ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-width ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-bottom-width — the box's border-box height as captured with the one-line title (a content-box height plus its padding and border)"
+      },
+      "box.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-width"
+      },
+      "box.gap": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.column-gap ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.margin-right ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.margin-left — the space between the icon and the title: box column-gap + icon (wrapper) margin-right + title margin-left (keywords read 0)"
+      },
+      "icon.size": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.width"
+      },
+      "titleFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.line-height"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling — the box's border draws inside [reviewed inside]"
+      },
+      "states.info.boxFill": {
+        "fixture": "#e6f4ffff",
+        "proposed": "#e6f4ffff",
+        "verdict": "match",
+        "captured": "#e6f4ffff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.background-color"
+      },
+      "states.info.boxBorder": {
+        "fixture": "#91caffff",
+        "proposed": "#91caffff",
+        "verdict": "match",
+        "captured": "#91caffff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-color"
+      },
+      "states.info.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.color"
+      },
+      "states.info.iconFill": {
+        "fixture": "#1677ffff",
+        "proposed": "#1677ffff",
+        "verdict": "match",
+        "captured": "#1677ffff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.info.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.opacity ; extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.info.path": {
+        "fixture": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 544 728 C 544 732.4 540.4 736 536 736 H 488 C 483.6 736 480 732.4 480 728 V 456 C 480 451.6 483.6 448 488 448 H 536 C 540.4 448 544 451.6 544 456 V 728 Z M 512 384 A 48.01 48.01 0 0 1 512 288 A 48.01 48.01 0 0 1 512 384 Z",
+        "proposed": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 544 728 C 544 732.4 540.4 736 536 736 H 488 C 483.6 736 480 732.4 480 728 V 456 C 480 451.6 483.6 448 488 448 H 536 C 540.4 448 544 451.6 544 456 V 728 Z M 512 384 A 48.01 48.01 0 0 1 512 288 A 48.01 48.01 0 0 1 512 384 Z",
+        "verdict": "match",
+        "captured": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 544 728 C 544 732.4 540.4 736 536 736 H 488 C 483.6 736 480 732.4 480 728 V 456 C 480 451.6 483.6 448 488 448 H 536 C 540.4 448 544 451.6 544 456 V 728 Z M 512 384 A 48.01 48.01 0 0 1 512 288 A 48.01 48.01 0 0 1 512 384 Z",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.info.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.success.boxFill": {
+        "fixture": "#f6ffedff",
+        "proposed": "#f6ffedff",
+        "verdict": "match",
+        "captured": "#f6ffedff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default root.background-color"
+      },
+      "states.success.boxBorder": {
+        "fixture": "#b7eb8fff",
+        "proposed": "#b7eb8fff",
+        "verdict": "match",
+        "captured": "#b7eb8fff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default root.border-top-color"
+      },
+      "states.success.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:1.0.color"
+      },
+      "states.success.iconFill": {
+        "fixture": "#52c41aff",
+        "proposed": "#52c41aff",
+        "verdict": "match",
+        "captured": "#52c41aff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.success.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.opacity ; extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.success.path": {
+        "fixture": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z",
+        "proposed": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z",
+        "verdict": "match",
+        "captured": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.success.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.warning.boxFill": {
+        "fixture": "#fffbe6ff",
+        "proposed": "#fffbe6ff",
+        "verdict": "match",
+        "captured": "#fffbe6ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default root.background-color"
+      },
+      "states.warning.boxBorder": {
+        "fixture": "#ffe58fff",
+        "proposed": "#ffe58fff",
+        "verdict": "match",
+        "captured": "#ffe58fff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default root.border-top-color"
+      },
+      "states.warning.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:1.0.color"
+      },
+      "states.warning.iconFill": {
+        "fixture": "#faad14ff",
+        "proposed": "#faad14ff",
+        "verdict": "match",
+        "captured": "#faad14ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.warning.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.opacity ; extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.warning.path": {
+        "fixture": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 480 296 C 480 291.6 483.6 288 488 288 H 536 C 540.4 288 544 291.6 544 296 V 568 C 544 572.4 540.4 576 536 576 H 488 C 483.6 576 480 572.4 480 568 V 296 Z M 512 736 A 48.01 48.01 0 0 1 512 640 A 48.01 48.01 0 0 1 512 736 Z",
+        "proposed": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 480 296 C 480 291.6 483.6 288 488 288 H 536 C 540.4 288 544 291.6 544 296 V 568 C 544 572.4 540.4 576 536 576 H 488 C 483.6 576 480 572.4 480 568 V 296 Z M 512 736 A 48.01 48.01 0 0 1 512 640 A 48.01 48.01 0 0 1 512 736 Z",
+        "verdict": "match",
+        "captured": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 480 296 C 480 291.6 483.6 288 488 288 H 536 C 540.4 288 544 291.6 544 296 V 568 C 544 572.4 540.4 576 536 576 H 488 C 483.6 576 480 572.4 480 568 V 296 Z M 512 736 A 48.01 48.01 0 0 1 512 640 A 48.01 48.01 0 0 1 512 736 Z",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.warning.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.error.boxFill": {
+        "fixture": "#fff2f0ff",
+        "proposed": "#fff2f0ff",
+        "verdict": "match",
+        "captured": "#fff2f0ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default root.background-color"
+      },
+      "states.error.boxBorder": {
+        "fixture": "#ffccc7ff",
+        "proposed": "#ffccc7ff",
+        "verdict": "match",
+        "captured": "#ffccc7ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default root.border-top-color"
+      },
+      "states.error.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:1.0.color"
+      },
+      "states.error.iconFill": {
+        "fixture": "#ff4d4fff",
+        "proposed": "#ff4d4fff",
+        "verdict": "match",
+        "captured": "#ff4d4fff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.error.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.opacity ; extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.error.path": {
+        "fixture": "M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z",
+        "proposed": "M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z",
+        "verdict": "match",
+        "captured": "M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.error.winding": {
+        "fixture": "evenodd",
+        "proposed": "evenodd",
+        "verdict": "match",
+        "captured": "evenodd",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "typography.title.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.font-family — first family of the title's computed stack"
+      },
+      "typography.title.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.font-weight — title font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "chakra",
+    "archetype": "alert",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Alert"
+    },
+    "ledger": "extract/computed/out/chakra/alert/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 52,
+        "proposed": 52,
+        "verdict": "match",
+        "captured": 52,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.height ; extract/computed/out/chakra/alert/captured-truth.json#info__default root.box-sizing ; extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-top ; extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-bottom ; extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-width ; extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-bottom-width — the box's border-box height as captured with the one-line title (a content-box height plus its padding and border)"
+      },
+      "box.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-width"
+      },
+      "box.gap": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.column-gap ; extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.margin-right ; extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.margin-left — the space between the icon and the title: box column-gap + icon (wrapper) margin-right + title margin-left (keywords read 0)"
+      },
+      "icon.size": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.width"
+      },
+      "titleFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.line-height"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling — the box's border draws inside [reviewed inside]"
+      },
+      "states.info.boxFill": {
+        "fixture": "#dbeafeff",
+        "proposed": "#dbeafeff",
+        "verdict": "match",
+        "captured": "#dbeafeff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.background-color"
+      },
+      "states.info.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default root.border-top-color"
+      },
+      "states.info.title": {
+        "fixture": "#173da6ff",
+        "proposed": "#173da6ff",
+        "verdict": "match",
+        "captured": "#173da6ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.color"
+      },
+      "states.info.iconFill": {
+        "fixture": "#173da6ff",
+        "proposed": "#173da6ff",
+        "verdict": "match",
+        "captured": "#173da6ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.info.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.opacity ; extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.info.path": {
+        "fixture": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 7 H 13 V 9 H 11 V 7 Z M 11 11 H 13 V 17 H 11 V 11 Z",
+        "proposed": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 7 H 13 V 9 H 11 V 7 Z M 11 11 H 13 V 17 H 11 V 11 Z",
+        "verdict": "match",
+        "captured": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 7 H 13 V 9 H 11 V 7 Z M 11 11 H 13 V 17 H 11 V 11 Z",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.info.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.success.boxFill": {
+        "fixture": "#dcfce7ff",
+        "proposed": "#dcfce7ff",
+        "verdict": "match",
+        "captured": "#dcfce7ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#success__default root.background-color"
+      },
+      "states.success.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#success__default root.border-top-color"
+      },
+      "states.success.title": {
+        "fixture": "#116932ff",
+        "proposed": "#116932ff",
+        "verdict": "match",
+        "captured": "#116932ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:1.0.color"
+      },
+      "states.success.iconFill": {
+        "fixture": "#116932ff",
+        "proposed": "#116932ff",
+        "verdict": "match",
+        "captured": "#116932ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.success.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.opacity ; extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.success.path": {
+        "fixture": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11.0026 16 L 6.75999 11.7574 L 8.17421 10.3431 L 11.0026 13.1716 L 16.6595 7.51472 L 18.0737 8.92893 L 11.0026 16 Z",
+        "proposed": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11.0026 16 L 6.75999 11.7574 L 8.17421 10.3431 L 11.0026 13.1716 L 16.6595 7.51472 L 18.0737 8.92893 L 11.0026 16 Z",
+        "verdict": "match",
+        "captured": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11.0026 16 L 6.75999 11.7574 L 8.17421 10.3431 L 11.0026 13.1716 L 16.6595 7.51472 L 18.0737 8.92893 L 11.0026 16 Z",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.success.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#success__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.warning.boxFill": {
+        "fixture": "#ffedd5ff",
+        "proposed": "#ffedd5ff",
+        "verdict": "match",
+        "captured": "#ffedd5ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#warning__default root.background-color"
+      },
+      "states.warning.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#warning__default root.border-top-color"
+      },
+      "states.warning.title": {
+        "fixture": "#92310aff",
+        "proposed": "#92310aff",
+        "verdict": "match",
+        "captured": "#92310aff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:1.0.color"
+      },
+      "states.warning.iconFill": {
+        "fixture": "#92310aff",
+        "proposed": "#92310aff",
+        "verdict": "match",
+        "captured": "#92310aff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.warning.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.opacity ; extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.warning.path": {
+        "fixture": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+        "proposed": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+        "verdict": "match",
+        "captured": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.warning.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#warning__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "states.error.boxFill": {
+        "fixture": "#fee2e2ff",
+        "proposed": "#fee2e2ff",
+        "verdict": "match",
+        "captured": "#fee2e2ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#error__default root.background-color"
+      },
+      "states.error.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#error__default root.border-top-color"
+      },
+      "states.error.title": {
+        "fixture": "#991919ff",
+        "proposed": "#991919ff",
+        "verdict": "match",
+        "captured": "#991919ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:1.0.color"
+      },
+      "states.error.iconFill": {
+        "fixture": "#991919ff",
+        "proposed": "#991919ff",
+        "verdict": "match",
+        "captured": "#991919ff",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.0.fill — the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+      },
+      "states.error.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.opacity ; extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.opacity — the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+      },
+      "icon.glyphs.error.path": {
+        "fixture": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+        "proposed": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+        "verdict": "match",
+        "captured": "M 12 22 C 6.47715 22 2 17.5228 2 12 C 2 6.47715 6.47715 2 12 2 C 17.5228 2 22 6.47715 22 12 C 22 17.5228 17.5228 22 12 22 Z M 12 20 C 16.4183 20 20 16.4183 20 12 C 20 7.58172 16.4183 4 12 4 C 7.58172 4 4 7.58172 4 12 C 4 16.4183 7.58172 20 12 20 Z M 11 15 H 13 V 17 H 11 V 15 Z M 11 7 H 13 V 13 H 11 V 7 Z",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.0.d — the glyph path's computed d, in the package's coordinate units"
+      },
+      "icon.glyphs.error.winding": {
+        "fixture": "nonzero",
+        "proposed": "nonzero",
+        "verdict": "match",
+        "captured": "nonzero",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#error__default idx:0.0.0.fill-rule — the path's fill-rule"
+      },
+      "typography.title.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.font-family — first family of the title's computed stack"
+      },
+      "typography.title.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/chakra/alert/captured-truth.json#info__default idx:1.0.font-weight — title font-weight → style word"
+      }
+    }
   }
 ]

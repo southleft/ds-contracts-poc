@@ -1,0 +1,314 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Alert capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition from the package's flat exports: AlertRoot ⊃ (AlertIndicator, AlertContent ⊃ AlertTitle). Authored 2026-09-02 as the person's step of docs/36 for alert@1. `status` is the four-value enum alert@1 carries (Chakra also ships neutral, held fixed out); AlertIndicator renders the package's own status icon. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "status",
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "start"
+      },
+      "parts": {
+        "part-0": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "parts": {
+            "part-0-info": {
+              "icon": {
+                "asset": "alert-part-0-info",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "status",
+                "equals": "info"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=info."
+            },
+            "part-0-success": {
+              "icon": {
+                "asset": "alert-part-0-success",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "status",
+                "equals": "success"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=success."
+            },
+            "part-0-warning": {
+              "icon": {
+                "asset": "alert-part-0-warning",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "status",
+                "equals": "warning"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=warning."
+            },
+            "part-0-error": {
+              "icon": {
+                "asset": "alert-part-0-error",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "status",
+                "equals": "error"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=error."
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "text-rendering": "optimizelegibility"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "flex-shrink": "{imported.alert.part-0.flex-shrink}",
+            "font-size": "{imported.shared.size-20}",
+            "line-height": "{imported.alert.part-0.line-height}",
+            "tab-size": "{imported.shared.num-4}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "status",
+              "map": {
+                "error": {
+                  "color": "{imported.alert.part-0.color.error}"
+                },
+                "info": {
+                  "color": "{imported.alert.part-0.color.info}"
+                },
+                "success": {
+                  "color": "{imported.alert.part-0.color.success}"
+                },
+                "warning": {
+                  "color": "{imported.alert.part-0.color.warning}"
+                }
+              }
+            }
+          ]
+        },
+        "alert__content": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|alert__content — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "grow": true
+          },
+          "parts": {
+            "label": {
+              "text": "This is an alert — check it out!",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|alert__title — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                "font-feature-settings": "\"cv11\"",
+                "text-rendering": "optimizelegibility"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-e4e4e7}",
+                "border-left-color": "{imported.shared.color-e4e4e7}",
+                "border-right-color": "{imported.shared.color-e4e4e7}",
+                "border-top-color": "{imported.shared.color-e4e4e7}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.alert.label.font-weight}",
+                "line-height": "{imported.shared.size-20}",
+                "tab-size": "{imported.shared.num-4}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "status",
+                  "map": {
+                    "error": {
+                      "color": "{imported.alert.label.color.error}"
+                    },
+                    "info": {
+                      "color": "{imported.alert.label.color.info}"
+                    },
+                    "success": {
+                      "color": "{imported.alert.label.color.success}"
+                    },
+                    "warning": {
+                      "color": "{imported.alert.label.color.warning}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "text-rendering": "optimizelegibility"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "column-gap": "{imported.alert.alert-content.column-gap}",
+            "flex-grow": "{imported.alert.alert-content.flex-grow}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-20}",
+            "row-gap": "{imported.alert.alert-content.row-gap}",
+            "tab-size": "{imported.shared.num-4}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "status",
+              "map": {
+                "error": {
+                  "color": "{imported.alert.alert-content.color.error}"
+                },
+                "info": {
+                  "color": "{imported.alert.alert-content.color.info}"
+                },
+                "success": {
+                  "color": "{imported.alert.alert-content.color.success}"
+                },
+                "warning": {
+                  "color": "{imported.alert.alert-content.color.warning}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "position": "relative",
+        "text-rendering": "optimizelegibility"
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-bottom-left-radius": "{imported.shared.size-6}",
+        "border-bottom-right-radius": "{imported.shared.size-6}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "border-top-left-radius": "{imported.shared.size-6}",
+        "border-top-right-radius": "{imported.shared.size-6}",
+        "bottom": "{imported.shared.size-0}",
+        "column-gap": "{imported.alert.root.column-gap}",
+        "font-size": "{imported.shared.size-14}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-20}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.shared.size-16}",
+        "padding-left": "{imported.shared.size-16}",
+        "padding-right": "{imported.shared.size-16}",
+        "padding-top": "{imported.shared.size-16}",
+        "right": "{imported.shared.size-0}",
+        "row-gap": "{imported.alert.root.row-gap}",
+        "tab-size": "{imported.shared.num-4}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.alert.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "status",
+          "map": {
+            "error": {
+              "background-color": "{imported.alert.root.background-color.error}",
+              "color": "{imported.alert.root.color.error}"
+            },
+            "info": {
+              "background-color": "{imported.alert.root.background-color.info}",
+              "color": "{imported.alert.root.color.info}"
+            },
+            "success": {
+              "background-color": "{imported.alert.root.background-color.success}",
+              "color": "{imported.alert.root.color.success}"
+            },
+            "warning": {
+              "background-color": "{imported.alert.root.background-color.warning}",
+              "color": "{imported.alert.root.color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "SwitchRoot"
+      }
+    }
+  }
+}

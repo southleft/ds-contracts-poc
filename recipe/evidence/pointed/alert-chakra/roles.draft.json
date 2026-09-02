@@ -1,0 +1,48 @@
+{
+  "roles": {
+    "title": "idx:1.0",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info",
+    "success": "success",
+    "warning": "warning",
+    "error": "error"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "info ← info (the declared base cell info); success ← success (the declared base cell info); warning ← warning (the declared base cell info); error ← error (the declared base cell info)",
+      "confidence": "high"
+    },
+    "title": {
+      "selector": "idx:1.0",
+      "why": "div.chakra-alert__title carries text \"This is an alert — check it out!\"",
+      "confidence": "high"
+    },
+    "icon": {
+      "selector": "idx:0.0",
+      "why": "svg 20px×20px fill rgba(23, 61, 166, 1) — its paint changes across statuses",
+      "confidence": "high"
+    },
+    "iconPath": {
+      "selector": "idx:0.0.0",
+      "why": "the svg's one path, fill rgba(23, 61, 166, 1), fill-rule nonzero, d=path(\"M 12 22 C 6.47715 22 2 17.5228 2 1…",
+      "confidence": "high"
+    },
+    "iconWrap": {
+      "selector": "idx:0",
+      "why": "the svg's parent span (opacity 1, margin-right 0px)",
+      "confidence": "high"
+    },
+    "box": {
+      "selector": "root",
+      "why": "div.chakra-alert__root bg rgba(219, 234, 254, 1) border 0px padding 16px/16px gap 12px — the painted ancestor of icon and title",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

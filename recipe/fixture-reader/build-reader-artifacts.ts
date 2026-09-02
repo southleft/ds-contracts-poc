@@ -29,6 +29,9 @@ import { CHAKRA_RADIO_LEDGER, chakraRadioAdapterConfig, chakraRadioMappings } fr
 import { MUI_TEXTAREA_LEDGER as MUI_TEXTAREA_LEDGER_PROPOSED, muiTextareaAdapterConfig as muiTextareaProposedConfig, muiTextareaMappings as muiTextareaProposedMappings } from "../fixtures/generated/textarea.mui.js";
 import { ANTD_TEXTAREA_LEDGER as ANTD_TEXTAREA_LEDGER_PROPOSED, antdTextareaAdapterConfig as antdTextareaProposedConfig, antdTextareaMappings as antdTextareaProposedMappings } from "../fixtures/generated/textarea.antd.js";
 import { CHAKRA_TEXTAREA_LEDGER, chakraTextareaAdapterConfig, chakraTextareaMappings } from "../fixtures/generated/textarea.chakra.js";
+import { MUI_ALERT_LEDGER as MUI_ALERT_LEDGER_PROPOSED, muiAlertAdapterConfig as muiAlertProposedConfig, muiAlertMappings as muiAlertProposedMappings } from "../fixtures/generated/alert.mui.js";
+import { CHAKRA_ALERT_LEDGER, chakraAlertAdapterConfig, chakraAlertMappings } from "../fixtures/generated/alert.chakra.js";
+import { ANTD_ALERT_LEDGER as ANTD_ALERT_LEDGER_PROPOSED, antdAlertAdapterConfig as antdAlertProposedConfig, antdAlertMappings as antdAlertProposedMappings } from "../fixtures/generated/alert.antd.js";
 import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
 import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
 import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
@@ -270,6 +273,8 @@ const EXTRA_KEYS = [
   "tab.contentAlign",
   // textarea@1 / radio@1 proposals map these string leaves (the hand tables do not)
   "labelPlacement", "outlineTreatment", "boxClips",
+  // alert@1 proposals read the four glyphs from the capture
+  "icon.glyphs.info.path", "icon.glyphs.info.winding", "icon.glyphs.success.path", "icon.glyphs.success.winding", "icon.glyphs.warning.path", "icon.glyphs.warning.winding", "icon.glyphs.error.path", "icon.glyphs.error.winding",
 ] as const;
 
 const atPath = (tokens: Record<string, unknown>, dotted: string): unknown =>
@@ -579,6 +584,36 @@ const SUBJECTS: Subject[] = [
     tokens: antdAlertAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: antdAlertMappings,
     extras: extrasFor(antdAlertAdapterConfig.tokens as unknown as Record<string, unknown>, antdAlertMappings),
+  },
+  {
+    // PROPOSED from MUI's own capture by the alert@1 role schema (2026-09-02): four glyphs from the capture's path data; viewBox reviewed.
+    archetype: "alert",
+    library: "mui-proposed",
+    source: src(muiAlertProposedConfig),
+    ledgerFile: MUI_ALERT_LEDGER_PROPOSED,
+    tokens: muiAlertProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiAlertProposedMappings,
+    extras: extrasFor(muiAlertProposedConfig.tokens as unknown as Record<string, unknown>, muiAlertProposedMappings),
+  },
+  {
+    // PROPOSED from AntD's own capture: the drafter took info.icon.off.off (the nearest cell to the showIcon=false base whose svg paint changes across statuses).
+    archetype: "alert",
+    library: "antd-proposed",
+    source: src(antdAlertProposedConfig),
+    ledgerFile: ANTD_ALERT_LEDGER_PROPOSED,
+    tokens: antdAlertProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: antdAlertProposedMappings,
+    extras: extrasFor(antdAlertProposedConfig.tokens as unknown as Record<string, unknown>, antdAlertProposedMappings),
+  },
+  {
+    // HELD OUT (2026-09-02): Chakra's Alert, captured the same day (AlertIndicator's own status icons); 39 read, 1 reviewed (viewBox), 0 invented.
+    archetype: "alert",
+    library: "chakra",
+    source: src(chakraAlertAdapterConfig),
+    ledgerFile: CHAKRA_ALERT_LEDGER,
+    tokens: chakraAlertAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraAlertMappings,
+    extras: extrasFor(chakraAlertAdapterConfig.tokens as unknown as Record<string, unknown>, chakraAlertMappings),
   },
   {
     archetype: "chip",

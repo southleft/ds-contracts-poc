@@ -330,3 +330,29 @@ test("textarea@1 reads MUI's floating notched label from the label's transform a
   assert.equal(Object.values(a.proposal.leaves).filter((l) => l.from === "set").length, 0, "nothing reviewed, nothing invented");
   assert.match(readFileSync(path.join(REPO, a.modulePath.startsWith("/") ? path.relative(REPO, a.modulePath) : a.modulePath), "utf8"), /refusal-bare-label/);
 });
+
+import { draftAlertRoles } from "./draft-roles.js";
+import { proposeAlertFixture } from "./propose-alert.js";
+import type { AlertComboMap, AlertRoles } from "./schema-alert.js";
+
+test("alert@1 reads the four status glyphs from the capture's path data and takes AntD's icon-bearing cell over its showIcon=false base; the viewBox is the one reviewed leaf", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const mui = draftAlertRoles(new Ledger(REPO, "extract/computed/out/mui/alert/captured-truth.json"));
+  assert.deepEqual(mui.unresolved, []);
+  assert.deepEqual(mui.combos, { info: "info.standard", success: "success.standard", warning: "warning.standard", error: "error.standard" });
+  const noVb = proposeAlertFixture({ library: "mui", ledger: "extract/computed/out/mui/alert/captured-truth.json", roles: mui.roles as AlertRoles, combos: mui.combos as AlertComboMap, out: path.relative(REPO, path.join(dir, "alert.mui.ts")), unsupported: ["hover"] });
+  assert.ok(noVb.refused.some((r) => r.startsWith("icon.viewBox:")), "without a reviewed viewBox the proposal refuses by name");
+  const m = proposeAlertFixture({ library: "mui", ledger: "extract/computed/out/mui/alert/captured-truth.json", roles: mui.roles as AlertRoles, combos: mui.combos as AlertComboMap, out: path.relative(REPO, path.join(dir, "alert.mui.ts")), unsupported: ["hover"], sets: { "icon.viewBox": { value: "24", why: "SvgIcon.js viewBox 0 0 24 24" } } });
+  assert.deepEqual(m.refused, []);
+  for (const [k, v] of [["box.paddingX", 16], ["box.paddingY", 6], ["box.radius", 4], ["box.gap", 12], ["icon.size", 22], ["titleFontSize", 14], ["states.info.iconOpacity", 0.9], ["states.info.iconFill", "#0288d1ff"], ["icon.glyphs.info.winding", "nonzero"]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
+  assert.match(String(m.proposal.leaves["icon.glyphs.info.path"]?.value), /^M 11 9 H 13 V 7 H 11/);
+  assert.deepEqual({ x: m.proposal.viewBox.x, w: m.proposal.viewBox.width }, { x: 0, w: 24 });
+  assert.equal(Object.values(m.proposal.leaves).filter((l) => l.from === "set").length, 1, "one reviewed leaf: the viewBox");
+
+  const antd = draftAlertRoles(new Ledger(REPO, "extract/computed/out/antd/alert/captured-truth.json"));
+  assert.deepEqual(antd.unresolved, []);
+  assert.equal(antd.combos.info, "info.icon.off.off", "the nearest cell to the showIcon=false base whose svg paint changes across statuses");
+  const a = proposeAlertFixture({ library: "antd", ledger: "extract/computed/out/antd/alert/captured-truth.json", roles: antd.roles as AlertRoles, combos: antd.combos as AlertComboMap, out: path.relative(REPO, path.join(dir, "alert.antd.ts")), unsupported: ["hover"], sets: { "icon.viewBox": { value: "64 64 896 896", why: "@ant-design/icons-svg" } } });
+  assert.deepEqual(a.refused, []);
+  assert.deepEqual({ x: a.proposal.viewBox.x, y: a.proposal.viewBox.y, w: a.proposal.viewBox.width }, { x: 64, y: 64, w: 896 });
+});

@@ -1,0 +1,274 @@
+{
+  "archetype": "alert",
+  "library": "antd",
+  "ledger": "extract/computed/out/antd/alert/captured-truth.json",
+  "provenance": {
+    "package": "antd",
+    "version": "5.29.3",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "title": "idx:1.0",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info.icon.off.off",
+    "success": "success.icon.off.off",
+    "warning": "warning.icon.off.off",
+    "error": "error.icon.off.off"
+  },
+  "leaves": {
+    "box.height": {
+      "value": 40,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.height | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.box-sizing | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-top | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-bottom | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-width | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-bottom-width",
+      "formula": "the box's border-box height as captured with the one-line title (a content-box height plus its padding and border)"
+    },
+    "box.paddingX": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-width"
+    },
+    "box.gap": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.column-gap | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.margin-right | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.margin-left",
+      "formula": "the space between the icon and the title: box column-gap + icon (wrapper) margin-right + title margin-left (keywords read 0)"
+    },
+    "icon.size": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.width"
+    },
+    "icon.viewBox": {
+      "value": "64 64 896 896",
+      "from": "set",
+      "why": "@ant-design/icons-svg icons are authored in viewBox 64 64 896 896 (node_modules/@ant-design/icons-svg/lib/asn/InfoCircleFilled.js attrs.viewBox)"
+    },
+    "titleFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.font-size"
+    },
+    "titleLineHeight": {
+      "value": 22,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.line-height"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "recipe anatomy spelling — the box's border draws inside"
+    },
+    "states.info.boxFill": {
+      "value": "#e6f4ffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.background-color"
+    },
+    "states.info.boxBorder": {
+      "value": "#91caffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default root.border-top-color"
+    },
+    "states.info.title": {
+      "value": "#000000e0",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.color"
+    },
+    "states.info.iconFill": {
+      "value": "#1677ffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.info.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.opacity | extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.info.path": {
+      "value": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 544 728 C 544 732.4 540.4 736 536 736 H 488 C 483.6 736 480 732.4 480 728 V 456 C 480 451.6 483.6 448 488 448 H 536 C 540.4 448 544 451.6 544 456 V 728 Z M 512 384 A 48.01 48.01 0 0 1 512 288 A 48.01 48.01 0 0 1 512 384 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.info.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.success.boxFill": {
+      "value": "#f6ffedff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default root.background-color"
+    },
+    "states.success.boxBorder": {
+      "value": "#b7eb8fff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default root.border-top-color"
+    },
+    "states.success.title": {
+      "value": "#000000e0",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:1.0.color"
+    },
+    "states.success.iconFill": {
+      "value": "#52c41aff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.success.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.opacity | extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.success.path": {
+      "value": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.success.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.warning.boxFill": {
+      "value": "#fffbe6ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default root.background-color"
+    },
+    "states.warning.boxBorder": {
+      "value": "#ffe58fff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default root.border-top-color"
+    },
+    "states.warning.title": {
+      "value": "#000000e0",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:1.0.color"
+    },
+    "states.warning.iconFill": {
+      "value": "#faad14ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.warning.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.opacity | extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.warning.path": {
+      "value": "M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 480 296 C 480 291.6 483.6 288 488 288 H 536 C 540.4 288 544 291.6 544 296 V 568 C 544 572.4 540.4 576 536 576 H 488 C 483.6 576 480 572.4 480 568 V 296 Z M 512 736 A 48.01 48.01 0 0 1 512 640 A 48.01 48.01 0 0 1 512 736 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.warning.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.error.boxFill": {
+      "value": "#fff2f0ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default root.background-color"
+    },
+    "states.error.boxBorder": {
+      "value": "#ffccc7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default root.border-top-color"
+    },
+    "states.error.title": {
+      "value": "#000000e0",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:1.0.color"
+    },
+    "states.error.iconFill": {
+      "value": "#ff4d4fff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.error.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.opacity | extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.error.path": {
+      "value": "M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.error.winding": {
+      "value": "evenodd",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "typography.title.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.font-family",
+      "formula": "first family of the title's computed stack"
+    },
+    "typography.title.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default idx:1.0.font-weight",
+      "formula": "title font-weight → style word"
+    }
+  },
+  "receipts": [
+    {
+      "path": "icon.viewBox",
+      "why": "the package's viewBox is not a computed channel (the capture asset carries the RENDERED size there); give --set icon.viewBox=<size | x y w h> --why with the package citation",
+      "evidence": "@ant-design/icons-svg icons are authored in viewBox 64 64 896 896 (node_modules/@ant-design/icons-svg/lib/asn/InfoCircleFilled.js attrs.viewBox)",
+      "value": "64 64 896 896"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "title": "Alert message"
+  },
+  "viewBox": {
+    "x": 64,
+    "y": 64,
+    "width": 896,
+    "height": 896,
+    "citation": "@ant-design/icons-svg icons are authored in viewBox 64 64 896 896 (node_modules/@ant-design/icons-svg/lib/asn/InfoCircleFilled.js attrs.viewBox)"
+  },
+  "typography": {
+    "family": "Roboto",
+    "style": "Regular",
+    "stack": "Roboto, Helvetica, Arial, sans-serif"
+  }
+}

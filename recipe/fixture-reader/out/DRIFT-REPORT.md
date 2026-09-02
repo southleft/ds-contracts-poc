@@ -168,6 +168,24 @@ ledger `extract/computed/out/antd/alert/captured-truth.json` · 32 facts: **28 m
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### mui-proposed — @mui/material@9.2.0#Alert
+
+ledger `extract/computed/out/mui/alert/captured-truth.json` · 40 facts: **39 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### antd-proposed — antd@5.29.3#Alert
+
+ledger `extract/computed/out/antd/alert/captured-truth.json` · 40 facts: **39 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### chakra — @chakra-ui/react@3.37.0#Alert
+
+ledger `extract/computed/out/chakra/alert/captured-truth.json` · 40 facts: **39 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ## Chip
 
 ### astryx — @astryxdesign/core@0.1.6#Token
@@ -763,6 +781,9 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **alert/antd** `box.gap` = `8` — Alert icon margin-inline-end is 8 — not a CSS gap on the root; 8 is the recipe spelling _[genAlertStyle icon margin — reviewed 8]_
 - **alert/antd** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
 - **alert/antd** `typography.title.family` = `-apple-system` — the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites _[theme.getDesignToken().fontFamily starts -apple-system]_
+- **alert/mui-proposed** `strokeAlign` = `inside` — recipe anatomy spelling — the box's border draws inside _[reviewed inside]_
+- **alert/antd-proposed** `strokeAlign` = `inside` — recipe anatomy spelling — the box's border draws inside _[reviewed inside]_
+- **alert/chakra** `strokeAlign` = `inside` — recipe anatomy spelling — the box's border draws inside _[reviewed inside]_
 - **chip/astryx** `rest.boxBorder` = `#00000000` — Token draws no painted border — transparent is the recipe spelling (ledger border color is ink, not a stroke) _[Token.tsx border none — reviewed #00000000]_
 - **chip/astryx** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
 - **chip/mui** `rest.boxBorder` = `#00000000` — filled Chip draws no visible border — transparent is the recipe's spelling (ledger border-top-color is the ink color, not a painted stroke) _[Chip.js filled border none — reviewed #00000000]_

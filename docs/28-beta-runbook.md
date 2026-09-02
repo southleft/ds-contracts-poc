@@ -156,7 +156,7 @@ axes; fills/radii/spacing bound to variables (inspect a fill and follow the
 alias). For the reference experience without your own code, paste
 `examples/mui/figma/mui.bundle.json` from a clone into the **Build** tab —
 5 sets, 121 variants, ~30 seconds. The measured bar per captured component is
-**86.6% mean computed-style equality** against the original npm package
+**86.3% mean computed-style equality** against the original npm package
 rendering ([docs/24 §3](24-what-works.md)).
 
 **THE WALL YOU ARE MOST LIKELY TO HIT — blank frames ([§B.15](23-known-limitations.md)).**
