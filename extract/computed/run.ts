@@ -172,6 +172,25 @@ async function main() {
   await reloadHarnessPage(page, pageHtml);
 
   const scratchShots = path.join(OUT_ROOT, '.orig-shots');
+  /** Copy every real-library screenshot of one component from the scratch
+   *  dir into `<out>/<comp>/orig-shots/<combo>__<interaction>.png`. Used by
+   *  the success path AND the quarantine path — the pixels are a measurement
+   *  either way. Returns the count kept. */
+  const keepOriginals = (compName: string, space: { enumeration: { combos: Array<{ key: string }> } }, outDir: string): number => {
+    const origDir = path.join(outDir, 'orig-shots');
+    mkdirSync(origDir, { recursive: true });
+    let kept = 0;
+    for (const combo of space.enumeration.combos) {
+      for (const inter of INTERACTIONS) {
+        const key = `${combo.key}__${inter}`;
+        const from = path.join(scratchShots, `${compName}--${key}.png`);
+        if (!existsSync(from)) continue;
+        writeFileSync(path.join(origDir, `${key}.png`), readFileSync(from));
+        kept++;
+      }
+    }
+    return kept;
+  };
   rmSync(scratchShots, { recursive: true, force: true });
 
   console.log('phase 1 — capture sweep…');
@@ -1334,17 +1353,7 @@ async function main() {
     // deliberately asks for the originals.
     if (KEEP_ORIGINALS) {
       const origDir = path.join(outDir, 'orig-shots');
-      mkdirSync(origDir, { recursive: true });
-      let kept = 0;
-      for (const combo of space.enumeration.combos) {
-        for (const inter of INTERACTIONS) {
-          const key = `${combo.key}__${inter}`;
-          const from = path.join(scratchShots, `${comp.name}--${key}.png`);
-          if (!existsSync(from)) continue;
-          writeFileSync(path.join(origDir, `${key}.png`), readFileSync(from));
-          kept++;
-        }
-      }
+      const kept = keepOriginals(comp.name, space, outDir);
       console.log(`  --keep-originals: ${kept} REAL-LIBRARY screenshot(s) → ${path.relative(process.cwd(), origDir)} (gate-shots/ is the CONTRACT render, not this)`);
     }
 
@@ -1583,6 +1592,13 @@ async function main() {
         reason: e.quarantine.reason,
         detail: e.quarantine.detail,
         capturedTruthWritten: existsSync(path.join(outDir, 'captured-truth.json')),
+        // The REAL-LIBRARY screenshots are a measurement, not the contract's to
+        // refuse (2026-09-02, walked live on Chakra's Link: quarantined on an
+        // unregistered `text-underline-offset`, and the only pixels of the real
+        // package were deleted with the scratch dir, so the recipe path had a
+        // proposal and nothing to score it against). Kept under the same flag
+        // and the same file names as the success path.
+        origShotsKept: KEEP_ORIGINALS ? keepOriginals(comp.name, space, outDir) : null,
       };
       writeFileSync(path.join(outDir, 'refusal.json'), JSON.stringify(record, null, 2) + '\n');
       writeFileSync(
@@ -1595,6 +1611,7 @@ async function main() {
           `- library: \`${record.library}\``,
           `- reason: **${record.reason}**`,
           `- captured-truth.json written: **${record.capturedTruthWritten}** (the measurement survives the refusal)`,
+          ...(record.origShotsKept === null ? [] : [`- real-library screenshots kept: **${record.origShotsKept}** → \`orig-shots/\` (\`--keep-originals\`; the measurement survives the refusal)`]),
           '',
           '## What was refused',
           '',

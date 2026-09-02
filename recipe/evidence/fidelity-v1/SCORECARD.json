@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 47,
+  "subjects": 48,
   "passed": 33,
-  "failed": 14,
+  "failed": 15,
   "fringeExcused": 0,
-  "knownFailures": 14,
+  "knownFailures": 15,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -304,6 +304,14 @@
       "canvasPx": "31x15",
       "realPx": "31x14",
       "convergesAt": 240
+    },
+    {
+      "label": "link/chakra",
+      "status": "fail",
+      "pctAAMasked": 10.26,
+      "canvasPx": "30x12",
+      "realPx": "30x13",
+      "convergesAt": null
     },
     {
       "label": "tabs/mui",

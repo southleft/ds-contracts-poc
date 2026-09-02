@@ -353,6 +353,14 @@
       "_proposedWhy": "PROPOSED from MUI's own capture at the primary.always combo (14 read, 0 invented): the capture's computed face is 'Times' (the sandbox mounts Link without a Typography provider), carried as a reviewed, named fallback to Times New Roman \u2014 the capture's own face, where the hand row pins Roboto and scores 49%."
     },
     {
+      "label": "link/chakra",
+      "page": "219:91726",
+      "component": "link/variant/default :: Chakra (proposed) Link",
+      "shot": "recipe/evidence/fidelity-v1/shots/link-chakra-default-v8.png",
+      "reference": "extract/computed/out/chakra/link/orig-shots/__default.png",
+      "_proposedWhy": "HELD OUT: Chakra's Link, captured 2026-09-02 from a config entry a person wrote (14 read, 0 invented). The legacy contract path QUARANTINES this capture (text-underline-offset is not a token channel) \u2014 the real render is scored anyway, because the quarantine path now keeps the real-library screenshots under --keep-originals."
+    },
+    {
       "label": "tabs/mui",
       "page": "218:91353",
       "component": "tabs/variant/default :: MUI Tabs",

@@ -56,7 +56,7 @@ What it has done, measured against the real package's own render
 | avatar | Altitude 0.38%, shadcn 0.29%, Fluent 0.00%, Chakra 0.38% (captured the same morning) | MUI **0.00%**, AntD **0.00%** (the hand rows: 4%, 2.73%) | Fluent's Segoe UI is a named fallback |
 | tooltip | shadcn 4.73% | AntD = its hand row · Chakra held out, 8.83% named (Inter advance widths) | MUI's closed popper is unstable to capture |
 | chip | Altitude **0.07%**, Carbon 8.56% and Chakra 8.09% (named: glyph rasterisation; Chakra's inset-shadow ring is lowered to a border) | MUI, AntD = their hand rows | — |
-| link | Altitude 5.56% (named: glyph + underline row); Chakra proposed, no render to score | MUI 20% (the hand row: 49%) | a serif the sandbox rendered by accident, carried as its fallback |
+| link | Altitude 5.56% (named: glyph + underline row); Chakra held out, 10.26% named (one glyph row) | MUI 20% (the hand row: 49%) | a serif the sandbox rendered by accident, carried as its fallback |
 | tabs | Carbon 9.57% (named: the capture mounts three tabs and a panel; the archetype draws two) | MUI = its hand row | shadcn's filled selected tab has no indicator; refused by name |
 
 Every proposal reads its values from the capture (13–43 leaves each), records

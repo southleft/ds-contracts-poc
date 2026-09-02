@@ -57,6 +57,10 @@
     "tooltip/chakra": {
       "class": "font-substrate",
       "cause": "8.83% at 216x24 vs 218x24 — HELD-OUT proposal (Chakra Tooltip, captured 2026-09-02 through the portal path from a config entry a person wrote; 14 leaves read, 0 invented; placement, arrow and open delay refused from the capture). Inter Medium 12px resolved EXACT in Figma, yet Chromium hugs the label at 217.016px and Figma at 216: the face's advance widths differ by one column across the sentence, so the box is 2px narrower and every glyph shifts. Padding (10/4), fill, radius and height agree."
+    },
+    "link/chakra": {
+      "class": "font-substrate",
+      "cause": "10.26% at 30x12 vs 30x13 — HELD-OUT proposal (Chakra Link, captured 2026-09-02 from a config entry a person wrote; 14 leaves read, 0 invented). The legacy contract path quarantines this capture on `text-underline-offset`; the real render exists only because the quarantine path now keeps `--keep-originals` screenshots. Inter Regular 16px resolved EXACT in Figma; the glyph masks agree in width (30) and differ by one row in height: Chromium rasterises 'Link' 13 rows tall, Figma 12 — the face's hinting at this size, the same class as MUI's proposed link (31x15 vs 31x14). Colour, line-height (24px) and no-underline agree."
     }
   }
 }

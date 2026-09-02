@@ -417,3 +417,19 @@ row. See `f1-tooltip-proposed/`.
     tooltip/chakra 8.83% (named)
 
     33 pass · 0 fringe · 14 known
+
+### 2026-09-02 — the quarantined link gets its render
+
+Chakra's Link was a proposal with nothing to score: the legacy contract path
+quarantines the capture on `text-underline-offset` (not a token channel),
+and the quarantine path deleted the real-package screenshots with the
+scratch dir. `extract/computed/run.ts` now keeps `--keep-originals` on the
+quarantine path too — the pixels are a measurement, not the contract's to
+refuse — and the refusal record says how many it kept. No remint: link v8
+already carried the Chakra source. Inter Regular 16px resolved exact; the
+glyph masks agree in width and differ by one row in height (Chromium 13,
+Figma 12), the same class as MUI's proposed link. Named `font-substrate`.
+
+    link/chakra 10.26% (named)
+
+    33 pass · 0 fringe · 15 known

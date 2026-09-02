@@ -84,9 +84,11 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 On Chakra's Avatar, Tag and Link — all three captured the same morning from
 config entries a person wrote — the avatar scores 0.38% held out, the tag's
-inset ring is lowered to a border and its glyphs are named, and the link
-proposes without a render because the legacy contract path quarantined its
-capture before keeping screenshots.
+inset ring is lowered to a border and its glyphs are named, and the link —
+which the legacy contract path quarantines on `text-underline-offset` — is
+scored against the real render anyway (the quarantine path now keeps the
+`--keep-originals` screenshots: the pixels are a measurement, not the
+contract's to refuse) and is a named one-row rasterisation difference.
 
 On tabs@1, the indicator is read as a part (MUI) or as the selected tab's
 bottom border (Carbon): MUI from its own capture scores the hand row's

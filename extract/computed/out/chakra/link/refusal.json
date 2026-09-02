@@ -9,5 +9,6 @@
     "chakra.link: part \"root\" states.active sets \"text-underline-offset\" which is not a token channel (TOKEN_CHANNELS registry — no emitter renders it; register the channel with its canvas verdict and its CSS spelling, or move the fact to declared/literals)",
     "chakra.link: part \"root\" states.hover sets \"text-underline-offset\" which is not a token channel (TOKEN_CHANNELS registry — no emitter renders it; register the channel with its canvas verdict and its CSS spelling, or move the fact to declared/literals)"
   ],
-  "capturedTruthWritten": true
+  "capturedTruthWritten": true,
+  "origShotsKept": 4
 }
