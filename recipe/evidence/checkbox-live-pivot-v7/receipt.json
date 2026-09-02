@@ -1,0 +1,68 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "checkbox-live-pivot-v7-prepare",
+  "teaching": "MUI even-odd primary icon on paper; AntD pre-rotated L is a check; AntD dash is 8×2 not an 8×8 tile",
+  "runIdentity": "548cf953-296f37b2-ff3a8565-5e8642f1-3ecd6666-checkbox-v7",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-5e8642f1-3ecd6666-checkbox-v7",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "548cf95362cf7ea99fd42cf4b4d21c6a7fe01495bce805029cf3a85a1267f51b",
+    "MUI": "296f37b23f86a224a7dee5fb41e301753b827869e09991f9a7ac9169d26863fa",
+    "Ant Design": "ff3a8565ebbe2c34e83b34f8200804b9aa81be71cc4521e6b5a72bc9df4c6e56",
+    "Chakra": "5e8642f19996528381f65612c3f5c31b7ead76bfe5a2be35f1cf876eb75419b3",
+    "shadcn": "3ecd666670d29858bfac103a462cef613a138e90e0531525322300b19d6add66"
+  },
+  "writerSha256": "564dea11562dd8d8333da9c1f37c7c0eb9dd9f4870577d32ab4497b0cf595173",
+  "pageId": "217:82808",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=217-82808",
+  "live": {
+    "recordedFrom": "checkbox-v7-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-5e8642f1-3ecd6666-checkbox-v7",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-checkbox-reviewed-v1",
+        "sectionId": "217:82809",
+        "setId": "217:82896",
+        "collectionId": "VariableCollectionId:217:82810",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      },
+      {
+        "adapterIdentity": "mui-checkbox-reviewed-v1",
+        "sectionId": "217:82897",
+        "setId": "217:82983",
+        "collectionId": "VariableCollectionId:217:82898",
+        "variantCount": 6,
+        "comparedIrFacts": 211
+      },
+      {
+        "adapterIdentity": "antd-checkbox-reviewed-v1",
+        "sectionId": "217:82984",
+        "setId": "217:83071",
+        "collectionId": "VariableCollectionId:217:82985",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      },
+      {
+        "adapterIdentity": "chakra-checkbox-proposed-v1",
+        "sectionId": "217:83072",
+        "setId": "217:83159",
+        "collectionId": "VariableCollectionId:217:83073",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      },
+      {
+        "adapterIdentity": "shadcn-checkbox-proposed-v1",
+        "sectionId": "217:83160",
+        "setId": "217:83234",
+        "collectionId": "VariableCollectionId:217:83161",
+        "variantCount": 6,
+        "comparedIrFacts": 199
+      }
+    ]
+  }
+}

@@ -4,8 +4,9 @@
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
 > plugin can run in any file. It works today for **one archetype**
-> (checkbox@1) and has been proven on **one library the recipe path was
-> never taught** (Chakra UI). Everything it cannot do refuses by name.
+> (checkbox@1) and has been proven on **two libraries the recipe path was
+> never taught**: Chakra UI, and shadcn — a bare control with no label, colours
+> declared in oklch. Everything it cannot do refuses by name.
 
 ## The sentence this serves
 
@@ -65,8 +66,9 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 - **Review the role map.** The drafter is a heuristic with evidence, not an
   oracle. On Chakra it drafted the same map a person had written; on MUI and
-  shadcn it reports, correctly, that the mount has no label; on AntD it
-  reports that the glyph is drawn by a pseudo-element it does not read.
+  shadcn it reports, as evidence, that the mount has no label (the bare cell);
+  on AntD it reports that the glyph is drawn by a pseudo-element it does not
+  read.
 - **Cite the glyph.** An SVG polyline's points are not a computed style
   channel, so the check glyph's geometry comes from the package source, in a
   small JSON with the file it was read from (`glyph.json`). A `<path d>` the
@@ -75,6 +77,14 @@ README that repeats what was read, what you reviewed, and what to do next.
   line lowered to a rounded rectangle is three numbers and a sentence each.
 
 ## What it proved
+
+On shadcn's Checkbox — a bare `<button role=checkbox>` with no label part and
+every colour in `oklch()` — the drafter reported the missing label as evidence,
+the proposer wrote the label-less cell (28 leaves read, 6 reviewed, 0
+invented), and four of six states scored at or under the bar against the real
+render, two of them pixel-identical; the two indeterminate cells are a named
+gap, and the checked state misses by 0.15 on a shadow the archetype does not
+carry. See `recipe/evidence/fidelity-v1/f1-shadcn-checkbox/`.
 
 On `@chakra-ui/react`'s Checkbox — a library no fixture had ever been
 written for — the proposer read the whole state matrix from the capture,
@@ -96,9 +106,11 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 - **Other archetypes.** Only checkbox@1 has a proposer today. The switch
   schema and drafter exist (`schema-switch.ts`, `draft-roles.ts`) and
   re-derive the hand tables; the switch *module renderer* is next.
-- **Label-less controls.** checkbox@1 and switch@1 compile a label. MUI's
-  and shadcn's bare mounts have none, so they cannot be proposed until the
-  grammar has a label-less cell.
+- **A box shadow.** checkbox@1 has no shadow leaf; shadcn's `shadow-xs` is
+  the difference between 5.15% and the bar on its checked state.
+- **A glyph as the indeterminate mark.** checkbox@1's indeterminate cell is a
+  dash. shadcn draws the check glyph there; those two cells are a named gap
+  (`recipe/evidence/fidelity-v1/f1-shadcn-checkbox/`).
 - **Pseudo-element glyphs.** AntD draws its check with `::after` borders;
   the drafter does not read pseudo-elements for the glyph role (the hand
   mapping does).

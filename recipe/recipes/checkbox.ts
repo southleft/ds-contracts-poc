@@ -110,12 +110,14 @@ export interface CheckboxRecipeInstance {
   };
   content: {
     /**
-     * Shared fixture label. Astryx CheckboxInput.tsx example is
+     * `null` is the BARE CELL: the mount has no label (MUI's Checkbox,
+     * shadcn's), so no text node is compiled and the label tokens are inert
+     * spellings. Shared fixture label. Astryx CheckboxInput.tsx example is
      * "Accept terms". MUI Checkbox has no label (FormControlLabel is a
      * reviewed pairing). AntD uses children. Named as recipe content,
      * not a library-invented string per root.
      */
-    label: string;
+    label: string | null;
   };
   tokens: {
     wrapper: { size: CheckboxNumberParameter };
@@ -228,7 +230,7 @@ export const CheckboxRecipeInstanceSchema = z.strictObject({
     }),
   }),
   content: z.strictObject({
-    label: z.string().min(1),
+    label: z.string().min(1).nullable(),
   }),
   tokens: z.strictObject({
     wrapper: z.strictObject({ size: NumberParameterSchema }),
@@ -355,7 +357,7 @@ const labelText = (
   kind: "text",
   role: "checkbox/label",
   label: "checkbox/label",
-  characters: instance.content.label,
+  characters: instance.content.label ?? "",
   type: {
     fontFamily: instance.tokens.typography.label.resolvedFamily,
     fontStyle: instance.tokens.typography.label.resolvedStyle,
@@ -633,7 +635,11 @@ const variantComponent = (
     },
     fills: [],
     bindings: [bind("layout.itemSpacing", instance.tokens.row.gap)],
-    children: [hitNode(instance, checked, cell), labelText(instance, cell)],
+    // The bare cell (content.label null) compiles no label node at all.
+    children:
+      instance.content.label === null
+        ? [hitNode(instance, checked, cell)]
+        : [hitNode(instance, checked, cell), labelText(instance, cell)],
   };
 };
 
@@ -790,6 +796,7 @@ export function validateCheckboxStructure(root: IRNode): void {
       "checkbox/set must carry every Checked × Disabled variant",
     ]);
   const aligns = new Set<string>();
+  const labelled = new Set<boolean>();
   for (const checked of CHECKBOX_CHECKED) {
     for (const disabled of CHECKBOX_DISABLED) {
       const variant = componentFor(set, {
@@ -829,9 +836,13 @@ export function validateCheckboxStructure(root: IRNode): void {
         throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
           `${variant.role}: check glyph is only for checked`,
         ]);
-      direct(variant, "checkbox/label", "text");
+      labelled.add(hasLabel(variant));
     }
   }
+  if (labelled.size !== 1)
+    throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
+      "every variant carries a label, or none does (the bare cell) — not a mix",
+    ]);
   if (aligns.size !== 1)
     throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
       "rowAlign must be one value for the whole instance — not per-variant cosmetics",
@@ -876,8 +887,28 @@ const firstDifference = (
   return undefined;
 };
 
+/**
+ * BARE CELL SPELLINGS — a control with no label still carries label tokens
+ * (the recipe's shape is one table for every library); with no text node
+ * they render nothing, so their values are the recipe's named spelling, not
+ * a library fact: size 0, transparent, and a font that is declared inert.
+ */
+export const BARE_LABEL_FONT_SIZE = 0;
+export const BARE_LABEL_COLOR = "#00000000";
+export const bareLabelFont = (): CheckboxFontSpec => ({
+  requestedFamily: "Arial",
+  requestedStyle: "Regular",
+  requestSource: "bare cell — no label is compiled; this spec is inert",
+  fallbackChain: [{ family: "Arial", style: "Regular" }],
+  resolvedFamily: "Arial",
+  resolvedStyle: "Regular",
+  resolution: "requested",
+});
+const hasLabel = (variant: ComponentNode): boolean =>
+  (variant.children ?? []).some((c) => c.role === "checkbox/label" && c.kind === "text");
+
 const cellFromVariant = (variant: ComponentNode): StateCell => {
-  const label = direct(variant, "checkbox/label", "text");
+  const label = hasLabel(variant) ? direct(variant, "checkbox/label", "text") : null;
   const hit = direct(variant, "checkbox/hit", "frame");
   const box = direct(hit, "checkbox/box", "frame");
   const dash = direct(box, "checkbox/glyph/dash", "frame");
@@ -905,11 +936,9 @@ const cellFromVariant = (variant: ComponentNode): StateCell => {
       variable: "checkbox.boxOpacity",
       fallback: box.opacity ?? 1,
     },
-    label: colorFrom(
-      label,
-      "fills.0.color",
-      solidColor(label.fills[0], label.role!),
-    ),
+    label: label
+      ? colorFrom(label, "fills.0.color", solidColor(label.fills[0], label.role!))
+      : { variable: `${variant.role}-label`, fallback: BARE_LABEL_COLOR },
     dashFill: colorFrom(
       dash,
       "fills.0.color",
@@ -948,7 +977,7 @@ export function collapseCheckboxRecipe(
   const check = checkVectorFrom(checkedBox);
   const checkHost = checkHostFrom(checkedBox);
   const checkStroke = check.strokes?.[0];
-  const label = direct(baseline, "checkbox/label", "text");
+  const label = hasLabel(baseline) ? direct(baseline, "checkbox/label", "text") : null;
   const stateOf = (checked: CheckboxChecked, disabled: CheckboxDisabled) =>
     cellFromVariant(componentFor(set, { Checked: checked, Disabled: disabled }));
   const enabledUnchecked = stateOf("unchecked", "false");
@@ -967,7 +996,7 @@ export function collapseCheckboxRecipe(
         default: "false",
       },
     },
-    content: { label: label.characters },
+    content: { label: label ? label.characters : null },
     tokens: {
       wrapper: {
         size: numberFrom(
@@ -1078,12 +1107,10 @@ export function collapseCheckboxRecipe(
           disabled: stateOf("indeterminate", "true"),
         },
       },
-      labelFontSize: numberFrom(
-        label,
-        "type.fontSize",
-        label.type.fontSize,
-      ),
-      typography: { label: fontFrom(label) },
+      labelFontSize: label
+        ? numberFrom(label, "type.fontSize", label.type.fontSize)
+        : { variable: `${envelope.id}.labelFontSize`, fallback: BARE_LABEL_FONT_SIZE },
+      typography: { label: label ? fontFrom(label) : bareLabelFont() },
     },
     inputFacts: [
       ...envelope.accounting.carried,

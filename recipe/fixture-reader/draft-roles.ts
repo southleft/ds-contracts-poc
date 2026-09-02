@@ -81,8 +81,9 @@ export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
     roles.label = sel(label);
     evidence.label = { selector: roles.label, why: `${label.tag}${label.classes.length ? "." + label.classes[0] : ""} carries text ${JSON.stringify(label.text[0])}`, confidence: "high" };
   } else {
-    unresolved.push("label: no part carries text — this library mounts a bare control; checkbox@1 needs a label (or a label-less cell the grammar does not have yet)");
-    evidence.label = { selector: null, why: "no text part", confidence: "low" };
+    // A BARE CONTROL: no part carries text. Not unresolved — the recipe has a
+    // label-less cell, and every label leaf becomes the bare-cell spelling.
+    evidence.label = { selector: null, why: "no part carries text — a bare control; the recipe compiles no label node and label leaves become bare-cell spellings", confidence: "medium" };
   }
 
   // ROW: nearest common ancestor of box and label that lays out with flex.
@@ -96,7 +97,7 @@ export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
       roles.row = sel(row);
       evidence.row = { selector: roles.row, why: `nearest common ancestor of box and label: ${row.tag} display ${row.style.display}, column-gap ${row.style["column-gap"]}, align-items ${row.style["align-items"]}`, confidence: /flex/.test(row.style.display ?? "") ? "high" : "medium" };
     }
-  } else if (box) { roles.row = "root"; evidence.row = { selector: "root", why: "no label; the root is the row", confidence: "low" }; }
+  } else if (box) { evidence.row = { selector: null, why: "no label, so no row is read (row.gap and rowAlign are bare-cell spellings)", confidence: "medium" }; }
 
   // HIT: the box's parent when it is a larger square; else the box.
   if (box) {

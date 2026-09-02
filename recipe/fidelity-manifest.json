@@ -1,50 +1,61 @@
 {
-  "_marker": "RECIPE FIDELITY MANIFEST — every subject scored by npm run recipe:fidelity:check",
+  "_marker": "RECIPE FIDELITY MANIFEST \u2014 every subject scored by npm run recipe:fidelity:check",
   "_note": "The check is OFFLINE: it scores committed canvas shots against committed real-package references, so it runs in CI with no Figma access. `npm run recipe:fidelity:capture` re-exports the shots from the live canvas (read-only exportAsync) and is the only step that needs the plugin. A shot and its reference are both committed bytes, so a score is reproducible from the repo alone.",
-  "_referenceRule": "The reference MUST be orig-shots/ — the real package rendered in Chromium by extract/computed. Never a gate-shot (the pipeline's own re-render) and never another mint. Comparing a mint to a mint measures nothing, and the scorer refuses a gate-shot path outright.",
-  "_astryxMountNote": "Astryx subjects reference extract/computed/out/astryx-core/, the un-themed @astryxdesign/core mount, because that is the surface recipe/fixtures/library-*.ts transcribes. The themed astryx/ capture mounts <Theme theme={neutralTheme}>, which is a different real surface — scoring against it would fail on the theme rather than on the mint.",
+  "_referenceRule": "The reference MUST be orig-shots/ \u2014 the real package rendered in Chromium by extract/computed. Never a gate-shot (the pipeline's own re-render) and never another mint. Comparing a mint to a mint measures nothing, and the scorer refuses a gate-shot path outright.",
+  "_astryxMountNote": "Astryx subjects reference extract/computed/out/astryx-core/, the un-themed @astryxdesign/core mount, because that is the surface recipe/fixtures/library-*.ts transcribes. The themed astryx/ capture mounts <Theme theme={neutralTheme}>, which is a different real surface \u2014 scoring against it would fail on the theme rather than on the mint.",
   "bar": {
     "pctAAMaskedMax": 5
   },
   "subjects": [
     {
       "label": "checkbox/astryx",
-      "page": "212:82228",
+      "page": "217:82808",
       "set": "checkbox/set :: Astryx CheckboxInput",
       "variant": "Checked=unchecked, Disabled=false",
       "child": "checkbox/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-astryx-glyph-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-astryx-glyph-v7.png",
       "reference": "extract/computed/out/astryx-core/checkboxinput/orig-shots/unchecked.md.no-isDisabled__default.png",
       "referenceControlOnly": true
     },
     {
       "label": "checkbox/mui",
-      "page": "212:82228",
+      "page": "217:82808",
       "set": "checkbox/set :: MUI Checkbox",
       "variant": "Checked=unchecked, Disabled=false",
       "child": "checkbox/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-mui-glyph-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-mui-glyph-v7.png",
       "reference": "extract/computed/out/mui/checkbox/orig-shots/unchecked.enabled__default.png",
       "referenceControlOnly": true
     },
     {
       "label": "checkbox/chakra",
-      "page": "212:82228",
+      "page": "217:82808",
       "set": "checkbox/set :: Chakra Checkbox",
       "variant": "Checked=unchecked, Disabled=false",
       "child": "checkbox/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-chakra-glyph-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-chakra-glyph-v7.png",
       "reference": "extract/computed/out/chakra/checkbox/orig-shots/unchecked.enabled__default.png",
       "referenceControlOnly": true,
-      "_proposedWhy": "the Chakra fixture was PROPOSED by recipe/fixture-reader/propose-fixture.ts from the capture ledger (42 leaves read, 3 reviewed, 10 archetype spellings, 0 invented) — the first library the recipe path was pointed at rather than taught"
+      "_proposedWhy": "the Chakra fixture was PROPOSED by recipe/fixture-reader/propose-fixture.ts from the capture ledger (42 leaves read, 3 reviewed, 10 archetype spellings, 0 invented) \u2014 the first library the recipe path was pointed at rather than taught"
+    },
+    {
+      "label": "checkbox/shadcn",
+      "page": "217:82808",
+      "set": "checkbox/set :: shadcn Checkbox",
+      "variant": "Checked=unchecked, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-shadcn-glyph-v7.png",
+      "reference": "extract/computed/out/shadcn/checkbox/orig-shots/unchecked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_proposedWhy": "the shadcn fixture was PROPOSED from the capture ledger (28 leaves read, 6 reviewed, 21 archetype spellings, 0 invented) \u2014 the first BARE control: no label part, so the recipe's label-less cell; colours declared in oklch and read through the ledger's CSS Color 4 conversion (pinned to the render's own pixels); the indeterminate state draws the check glyph, which checkbox@1 cannot express \u2014 a named gap, not scored as a pass"
     },
     {
       "label": "checkbox/antd",
-      "page": "212:82228",
+      "page": "217:82808",
       "set": "checkbox/set :: Ant Design Checkbox",
       "variant": "Checked=unchecked, Disabled=false",
       "child": "checkbox/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-antd-glyph-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-antd-glyph-v7.png",
       "reference": "extract/computed/out/antd/checkbox/orig-shots/unchecked.enabled__default.png",
       "referenceControlOnly": true
     },
@@ -83,7 +94,7 @@
       "shot": "recipe/evidence/fidelity-v1/shots/switch-antd-hit-v5.png",
       "reference": "extract/computed/out/antd/switch/orig-shots/default.unchecked.enabled__default.png",
       "referenceControlOnly": true,
-      "_fringeRetired": "2026-09-01: the 44x24-vs-44x22 band was NOT anti-aliasing — it was the handle's real drop shadow (handleShadow 0 2px 4px rgba(0,35,11,.2)) that the hand fixture recorded as none; found by the role schema re-derivation. The row must pass on its own now."
+      "_fringeRetired": "2026-09-01: the 44x24-vs-44x22 band was NOT anti-aliasing \u2014 it was the handle's real drop shadow (handleShadow 0 2px 4px rgba(0,35,11,.2)) that the hand fixture recorded as none; found by the role schema re-derivation. The row must pass on its own now."
     },
     {
       "label": "radio/mui",
@@ -241,7 +252,7 @@
     }
   ],
   "_excluded": {
-    "radio/astryx": "Astryx ships RadioList, and extract/computed/configs/astryx.json declares no Radio component — there is no real-package render to score against. Not a defect in the mint; a gap in the capture corpus. EYEBALL NOTE, unverified: on the v3 page the Astryx UNSELECTED radio reads as a solid white circle with no visible border, where a radio normally carries one. That may be correct for Astryx or may be a missing stroke — it cannot be decided here, which is the whole point of the exclusion. Capturing Astryx Radio would settle it.",
+    "radio/astryx": "Astryx ships RadioList, and extract/computed/configs/astryx.json declares no Radio component \u2014 there is no real-package render to score against. Not a defect in the mint; a gap in the capture corpus. EYEBALL NOTE, unverified: on the v3 page the Astryx UNSELECTED radio reads as a solid white circle with no visible border, where a radio normally carries one. That may be correct for Astryx or may be a missing stroke \u2014 it cannot be decided here, which is the whole point of the exclusion. Capturing Astryx Radio would settle it.",
     "dialog/*, menu/*": "the only references (mui/dialog, mui/menu) are 900x1000 full-viewport overlay captures with a backdrop, so an ink trim cannot isolate the surface; a surface-only reference capture is needed before these can be scored.",
     "button/altitude, input/mui, combobox/mui, table/mui": "the signed pages carry two component sets with IDENTICAL names (one per library leg); the name resolver cannot pick a leg deterministically. Needs a per-leg set rename or a section-scoped resolver. References exist (altitude/button, mui/textfield, mui/autocomplete, mui/table)."
   },

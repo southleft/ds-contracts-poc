@@ -173,14 +173,51 @@ export function num(v: string): number {
   return n;
 }
 
-/** rgb()/rgba() → the fixture tables' #rrggbbaa spelling (lowercase). */
+/**
+ * rgb()/rgba() or oklch() → the fixture tables' #rrggbbaa spelling (lowercase).
+ *
+ * Chromium reports an oklch()-declared colour (Tailwind v4 / shadcn) verbatim
+ * in computed style. The conversion is CSS Color 4's, exactly: oklch → oklab →
+ * LMS (cube) → linear sRGB → sRGB transfer, then 8-bit rounding, and it is
+ * pinned against the real render — oklch(0.205 0 0) paints (23,23,23) and
+ * oklch(0.922 0 0) paints (229,229,229) in the shadcn orig-shots. A component
+ * outside sRGB is clipped to [0,1] (Chromium's behaviour for these inputs is
+ * also a clip); a colour whose clip moves any channel by more than 1/255 is
+ * refused so a wide-gamut fact is never quietly reported as its clipped cousin.
+ */
 export function hex8(v: string): string {
-  const m = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)$/.exec(v);
-  if (!m) throw new LedgerReadError(`not an rgb()/rgba() color: "${v}"`);
-  const [r, g, b] = [Number(m[1]), Number(m[2]), Number(m[3])];
-  const a = m[4] === undefined ? 1 : Number(m[4]);
   const h = (n: number): string => n.toString(16).padStart(2, "0");
-  return `#${h(r)}${h(g)}${h(b)}${h(Math.round(a * 255))}`;
+  const rgb = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)$/.exec(v);
+  if (rgb) {
+    const [r, g, b] = [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+    const a = rgb[4] === undefined ? 1 : Number(rgb[4]);
+    return `#${h(r)}${h(g)}${h(b)}${h(Math.round(a * 255))}`;
+  }
+  const ok = /^oklch\(\s*([\d.]+%?)\s+([\d.]+%?)\s+([-\d.]+)(?:deg)?\s*(?:\/\s*([\d.]+%?))?\s*\)$/.exec(v);
+  if (!ok) throw new LedgerReadError(`not an rgb()/rgba()/oklch() color: "${v}"`);
+  const pct = (t: string, scale: number): number => (t.endsWith("%") ? (Number(t.slice(0, -1)) / 100) * scale : Number(t));
+  const L = pct(ok[1]!, 1), C = pct(ok[2]!, 0.4), H = Number(ok[3]);
+  const alpha = ok[4] === undefined ? 1 : pct(ok[4], 1);
+  const a = C * Math.cos((H * Math.PI) / 180), b = C * Math.sin((H * Math.PI) / 180);
+  // oklab → LMS' (Björn Ottosson's M2⁻¹), cube, → linear sRGB (M1⁻¹)
+  const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
+  const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
+  const s_ = L - 0.0894841775 * a - 1.291485548 * b;
+  const l = l_ ** 3, m = m_ ** 3, s = s_ ** 3;
+  const lin = [
+    +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+    -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+    -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
+  ];
+  const transfer = (c: number): number => (c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055);
+  const out = lin.map((c) => {
+    const clipped = Math.min(1, Math.max(0, c));
+    const srgb = transfer(clipped);
+    const unclipped = transfer(Math.max(0, c));
+    if (Math.abs(unclipped - srgb) > 1 / 255 || c < -1 / 255) throw new LedgerReadError(`oklch colour outside sRGB by more than 1/255 — not carried as its clipped cousin: "${v}"`);
+    return Math.round(srgb * 255);
+  });
+  return `#${h(out[0]!)}${h(out[1]!)}${h(out[2]!)}${h(Math.round(alpha * 255))}`;
 }
 
 /** `matrix(a, b, c, d, tx, ty)` → the six components. `none` → identity. */

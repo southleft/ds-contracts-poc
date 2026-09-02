@@ -27,7 +27,9 @@ import {
 
 export const CHECKBOX_FIGMA_NAMESPACE = "ds.contracts.checkbox.recipe.v1";
 export const CHECKBOX_FIGMA_WRITER_VERSION = 3;
-export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v6";
+export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v7";
+/** v6 stay (shadcn bare cell (label-less) as the fifth source, proposed from the capture) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHECKBOX_V6_PAGE_ID = "212:82228";
 /** v5 stay (proposed Chakra fixture joins the set) is preserved as evidence and never written again. */
 export const FORBIDDEN_CHECKBOX_V5_PAGE_ID = "212:81535";
 /** v4 stay (shared-runtime proof) is preserved as evidence and never written again. */
@@ -253,6 +255,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "checkboxSet"
   },
   "forbiddenPages": [
+    { "id": "212:82228", "marker": "CHECKBOX-V6-PAGE" },
     { "id": "212:81535", "marker": "CHECKBOX-V5-PAGE" },
     { "id": "199:78556", "marker": "CHECKBOX-V4-PAGE" },
     {

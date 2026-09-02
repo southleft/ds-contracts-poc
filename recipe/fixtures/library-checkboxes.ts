@@ -616,7 +616,7 @@ export const buildConfig = (
   refusals: ReviewedCheckboxSourceFact[],
   extraIr: ReviewedCheckboxSourceFact[],
   unsupported: string[],
-  content: { label: string } = sharedContent,
+  content: { label: string | null } = sharedContent,
 ): ReviewedCheckboxAdapterConfig => {
   const facts = [
     ...tokenFacts(slug, `${source.packageName} ${source.exportName} source review`, tokens),

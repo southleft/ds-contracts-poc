@@ -245,3 +245,28 @@ had excused as anti-aliasing fringe. The excuse is retired, the shadow is
 carried, and switch v5 (page `214:82669`) scores **0.00% at 44×24**.
 
     18 pass · 0 fringe · 7 known
+
+## 2026-09-02 — the bare cell: shadcn, no label, oklch, and a gap named
+
+checkbox@1 and switch@1 now have a **label-less cell** (`content.label:
+null` compiles no label node; the label tokens are the recipe's inert
+spellings; a mix of labelled and bare variants refuses). The reader treats a
+missing label as evidence, not a refusal, so shadcn's bare
+`<button role=checkbox>` could be **proposed** from its capture: 28 leaves
+read, 6 reviewed, 0 invented. Its colours are `oklch()`; `ledger.ts hex8`
+converts by CSS Color 4 and the conversion is pinned to the render's pixels
+(`oklch(0.205 0 0)` → 23, `oklch(0.922 0 0)` → 229). Minted as the fifth
+source of checkbox v7 (page `217:82808`):
+
+    unchecked      0.00%   unchecked.disabled 0.00%   checked.disabled 3.13%
+    checked        5.15% FAIL (by 0.15: shadcn's shadow-xs, which checkbox@1 has no leaf for)
+    indeterminate  NOT EXPRESSIBLE — shadcn draws the check glyph there; the
+                   dash is a zero-size reviewed receipt. The scorer says 2.94%
+                   and 3.13%; those are the AA mask excusing a whole 1.17px
+                   stroke (ink 22 vs 39), and are not reported as passes.
+
+Per-state shots, scorecards and the instrument note are in
+`f1-shadcn-checkbox/`. The next grammar increment is a box-shadow leaf, not
+a fixture value.
+
+    19 pass · 0 fringe · 7 known

@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 25,
-  "passed": 18,
+  "subjects": 26,
+  "passed": 19,
   "failed": 7,
   "fringeExcused": 0,
   "knownFailures": 7,
@@ -32,6 +32,14 @@
       "canvasPx": "20x20",
       "realPx": "20x20",
       "convergesAt": 250
+    },
+    {
+      "label": "checkbox/shadcn",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x17",
+      "convergesAt": 245
     },
     {
       "label": "checkbox/antd",

@@ -26,7 +26,7 @@ import path from "node:path";
 
 import { Ledger, hex8, num, px } from "./ledger.js";
 import { isReceipt, type FactMapping, type LedgerMapping } from "./reader.js";
-import { CHECKBOX_SPELLINGS, checkboxSchemaMappings, type CheckboxRoles, type CheckboxSchemaOptions, type Spelling } from "./schema-checkbox.js";
+import { CHECKBOX_SPELLINGS, checkboxSchemaMappings, type CheckboxRoles, type CheckboxSchemaOptions, type Spelling, spellingsFor } from "./schema-checkbox.js";
 import { toFigmaVectorPath, transformVectorPath, vectorPathHullBounds } from "../figma-vector-path.js";
 
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
@@ -64,7 +64,8 @@ export interface Proposal {
   leaves: Record<string, { value: number | string; from: "ledger" | "set" | "spelling"; key?: string; formula?: string; why?: string }>;
   receipts: Array<{ path: string; why: string; evidence: string; value: number | string }>;
   refused: string[];
-  content: { label: string };
+  /** `label: null` is the bare cell — no label part in the mount, no label node compiled. */
+  content: { label: string | null };
   typography: { family: string; style: string; stack: string };
   glyph: { asIs: GlyphSpec; scaled: { path: string; width: number; height: number; strokeWidth: number } };
 }
@@ -174,6 +175,7 @@ function renderModule(p: Proposal, opts: { slug: string; displayName: string; ex
 // names its ledger key or its reviewed evidence. Re-run the proposer to regenerate.
 import type { ReviewedCheckboxSource } from "../../adapters/checkbox.js";
 import { anatomyFacts, buildConfig, cloneTokens, makeRefusals } from "../library-checkboxes.js";
+${p.content.label === null ? 'import { bareLabelFont } from "../../recipes/checkbox.js";' : ""}
 import { checkboxSchemaMappings, type CheckboxRoles } from "../../fixture-reader/schema-checkbox.js";
 
 export const ${opts.slug.toUpperCase()}_CHECKBOX_LEDGER = ${q(p.ledger)};
@@ -200,20 +202,7 @@ ${opts.slug}Tokens.check = {
   rotation: 0,
   placement: "center",
 };
-${opts.slug}Tokens.typography = {
-  label: {
-    requestedFamily: ${q(p.typography.family)},
-    requestedStyle: ${q(style)},
-    requestSource: ${q(`${p.ledger} label font-family/font-weight: ${p.typography.stack.slice(0, 80)} / ${style}`)},
-    fallbackChain: [
-      { family: ${q(p.typography.family)}, style: ${q(style)} },
-      { family: "Arial", style: ${q(style === "Regular" ? "Regular" : "Bold")} },
-    ],
-    resolvedFamily: ${q(p.typography.family)},
-    resolvedStyle: ${q(style)},
-    resolution: "requested",
-  },
-};
+${opts.slug}Tokens.typography = ${typographyBlock(p, style)};
 
 export const ${opts.slug}CheckboxSource: ReviewedCheckboxSource = {
   packageName: ${q(p.provenance.package)},
@@ -225,11 +214,11 @@ export const ${opts.slug}CheckboxSource: ReviewedCheckboxSource = {
     root: ${q(`ledger part ${p.roles.hit} (hit) / ${p.roles.row} (row)`)},
     control: ${q(`ledger part ${p.roles.box}: ${p.leaves["box.size"]?.value}px, border ${p.leaves["box.borderWidth"]?.value}, radius ${p.leaves["box.radius"]?.value}`)},
     glyph: ${q(`${p.glyph.asIs.source}; rendered ${p.leaves["check.width"]?.value}x${p.leaves["check.height"]?.value}`)},
-    label: ${q(`ledger part ${p.roles.label}: ${p.typography.family} ${style} ${p.leaves["labelFontSize"]?.value}px; text ${JSON.stringify(p.content.label)}`)},
+    label: ${q(p.content.label === null ? "no label part in the mount (bare control): the recipe compiles no label node" : `ledger part ${p.roles.label}: ${p.typography.family} ${style} ${p.leaves["labelFontSize"]?.value}px; text ${JSON.stringify(p.content.label)}`)},
   },
   api: { generated: "proposed from the capture ledger; no API review" },
   styleSources: [${q(p.ledger)}],
-  fontSources: [${q(`${p.ledger} label`)}],
+  fontSources: [${q(p.content.label === null ? "no label — the bare cell's font spec is inert (recipes/checkbox.ts bareLabelFont)" : `${p.ledger} label`)}],
 };
 
 const ${opts.slug}Refusals = makeRefusals(${q(opts.slug)}, [
@@ -250,6 +239,25 @@ export const ${opts.slug}CheckboxAdapterConfig = buildConfig(
 /** The same schema the proposer evaluated, for the drift gate. */
 export const ${opts.slug}CheckboxMappings = checkboxSchemaMappings(${opts.slug}CheckboxRoles, ${q(schemaOptionsFor(p))});
 `;
+}
+
+/** The label's font spec for the generated module; the bare cell's is the recipe's inert spec. */
+function typographyBlock(p: Proposal, style: string): string {
+  if (p.content.label === null) return "{ label: bareLabelFont() }";
+  return `{
+  label: {
+    requestedFamily: ${q(p.typography.family)},
+    requestedStyle: ${q(style)},
+    requestSource: ${q(`${p.ledger} label font-family/font-weight: ${p.typography.stack.slice(0, 80)} / ${style}`)},
+    fallbackChain: [
+      { family: ${q(p.typography.family)}, style: ${q(style)} },
+      { family: "Arial", style: ${q(style === "Regular" ? "Regular" : "Bold")} },
+    ],
+    resolvedFamily: ${q(p.typography.family)},
+    resolvedStyle: ${q(style)},
+    resolution: "requested",
+  },
+}`;
 }
 
 function schemaOptionsFor(p: Proposal): CheckboxSchemaOptions {
@@ -293,16 +301,16 @@ export function proposeCheckboxFixture(input: ProposeInput): ProposeResult {
   receiptsForSchema["check.path"] = { why: "glyph geometry is cited from the package source (--glyph), not a computed channel", evidence: glyph.source };
   const mappings = checkboxSchemaMappings(roles, { glyphPaint: glyph.paint, glyphViewBox: glyph.viewBox, receipts: receiptsForSchema });
   sets.set("check.path", { value: "(see glyph)", why: glyph.source });
-  const evaluated = evaluate(ledger, mappings, sets);
+  const evaluated = evaluate(ledger, mappings, sets, spellingsFor(roles));
   const proposalPath = path.join(REPO, "recipe/fixture-reader/out/proposals", `checkbox.${library}.json`);
   if (evaluated.refused.length > 0) {
     return { proposal: null as unknown as Proposal, modulePath: path.join(REPO, out), proposalPath, refused: evaluated.refused };
   }
-  const labelPart = ledger.capture("unchecked.enabled__default").parts.find((p) => selectorMatches(p, roles.label));
-  const labelText = (labelPart?.text ?? [])[0] ?? "";
+  const labelPart = roles.label ? ledger.capture("unchecked.enabled__default").parts.find((p) => selectorMatches(p, roles.label!)) : undefined;
+  const labelText: string | null = roles.label ? ((labelPart?.text ?? [])[0] ?? "") : null;
   const family = String(evaluated.leaves["typography.label.family"]?.value ?? "");
   const style = String(evaluated.leaves["typography.label.style"]?.value ?? "");
-  const stack = ledger.raw("unchecked.enabled__default", roles.label, "font-family");
+  const stack = roles.label ? ledger.raw("unchecked.enabled__default", roles.label, "font-family") : "(bare cell — no label part)";
   const renderedWidth = Number(evaluated.leaves["check.width"]?.value);
   const scaled = scaleGlyph(glyph, renderedWidth);
   const proposal: Proposal = {

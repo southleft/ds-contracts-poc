@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "checkbox/shadcn/unchecked.disabled",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 14.453125,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "canvasPx": "16x16",
+    "realPx": "16x16",
+    "inkCanvasPct": 23.046875,
+    "inkRealPct": 20.3125
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/canvas-unchecked.disabled.png",
+    "sha256": "05993f20a0cfbbab0a76b673e602e2dc5c98046d09b2293777e769e5f9c0f741"
+  },
+  "reference": {
+    "path": "extract/computed/out/shadcn/checkbox/orig-shots/unchecked.disabled__default.png",
+    "sha256": "e61877d0fa7c85360c700557a01c850151e708a4be4fe9ce33c44ce15243f138"
+  },
+  "diff": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/score-unchecked.disabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    },
+    {
+      "threshold": 245,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    },
+    {
+      "threshold": 240,
+      "canvas": "empty",
+      "reference": "empty",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "empty",
+      "reference": "empty",
+      "agree": true
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

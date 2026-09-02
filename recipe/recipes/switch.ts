@@ -106,7 +106,7 @@ export interface SwitchRecipeInstance {
      * "Enable notifications". MUI FormControlLabel is a reviewed
      * pairing. AntD children are optional inner text (receipted).
      */
-    label: string;
+    label: string | null;
   };
   tokens: {
     wrapper: {
@@ -219,7 +219,7 @@ export const SwitchRecipeInstanceSchema = z.strictObject({
     }),
   }),
   content: z.strictObject({
-    label: z.string().min(1),
+    label: z.string().min(1).nullable(),
   }),
   tokens: z.strictObject({
     wrapper: z.strictObject({
@@ -349,7 +349,7 @@ const labelText = (
   kind: "text",
   role: "switch/label",
   label: "switch/label",
-  characters: instance.content.label,
+  characters: instance.content.label ?? "",
   type: {
     fontFamily: instance.tokens.typography.label.resolvedFamily,
     fontStyle: instance.tokens.typography.label.resolvedStyle,
@@ -514,7 +514,11 @@ const variantComponent = (
     },
     fills: [],
     bindings: [bind("layout.itemSpacing", instance.tokens.row.gap)],
-    children: [hitNode(instance, checked, cell), labelText(instance, cell)],
+    // The bare cell (content.label null) compiles no label node at all.
+    children:
+      instance.content.label === null
+        ? [hitNode(instance, checked, cell)]
+        : [hitNode(instance, checked, cell), labelText(instance, cell)],
   };
 };
 
@@ -653,6 +657,7 @@ export function validateSwitchStructure(root: IRNode): void {
       "switch/set must carry every Checked × Disabled variant",
     ]);
   const aligns = new Set<string>();
+  const labelled = new Set<boolean>();
   const hitClips = new Set<string>();
   const trackClips = new Set<string>();
   for (const checked of SWITCH_CHECKED) {
@@ -689,9 +694,13 @@ export function validateSwitchStructure(root: IRNode): void {
         throw new RecipeRefusal(SWITCH_RECIPE_REF, [
           `${variant.role}: the thumb must carry a named size`,
         ]);
-      direct(variant, "switch/label", "text");
+      labelled.add(hasLabel(variant));
     }
   }
+  if (labelled.size !== 1)
+    throw new RecipeRefusal(SWITCH_RECIPE_REF, [
+      "every variant carries a label, or none does (the bare cell) — not a mix",
+    ]);
   if (aligns.size !== 1)
     throw new RecipeRefusal(SWITCH_RECIPE_REF, [
       "rowAlign must be one value for the whole instance — not per-variant cosmetics",
@@ -740,8 +749,22 @@ const firstDifference = (
   return undefined;
 };
 
+export const BARE_LABEL_FONT_SIZE = 0;
+export const BARE_LABEL_COLOR = "#00000000";
+export const bareLabelFont = (): SwitchFontSpec => ({
+  requestedFamily: "Arial",
+  requestedStyle: "Regular",
+  requestSource: "bare cell — no label is compiled; this spec is inert",
+  fallbackChain: [{ family: "Arial", style: "Regular" }],
+  resolvedFamily: "Arial",
+  resolvedStyle: "Regular",
+  resolution: "requested",
+});
+const hasLabel = (variant: ComponentNode): boolean =>
+  (variant.children ?? []).some((c) => c.role === "switch/label" && c.kind === "text");
+
 const cellFromVariant = (variant: ComponentNode): StateCell => {
-  const label = direct(variant, "switch/label", "text");
+  const label = hasLabel(variant) ? direct(variant, "switch/label", "text") : null;
   const hit = direct(variant, "switch/hit", "frame");
   const track = direct(hit, "switch/track", "frame");
   const thumb = direct(track, "switch/thumb", "frame");
@@ -760,11 +783,9 @@ const cellFromVariant = (variant: ComponentNode): StateCell => {
       variable: "switch.trackOpacity",
       fallback: track.opacity ?? 1,
     },
-    label: colorFrom(
-      label,
-      "fills.0.color",
-      solidColor(label.fills[0], label.role!),
-    ),
+    label: label
+      ? colorFrom(label, "fills.0.color", solidColor(label.fills[0], label.role!))
+      : { variable: `${variant.role}-label`, fallback: BARE_LABEL_COLOR },
   };
 };
 
@@ -785,7 +806,7 @@ export function collapseSwitchRecipe(
   const thumbOff = direct(track, "switch/thumb", "frame");
   const trackOn = direct(direct(on, "switch/hit", "frame"), "switch/track", "frame");
   const thumbOn = direct(trackOn, "switch/thumb", "frame");
-  const label = direct(off, "switch/label", "text");
+  const label = hasLabel(off) ? direct(off, "switch/label", "text") : null;
   const offPad = track.layout.padding.left;
   const onPad = trackOn.layout.padding.left;
   const instance = normalizeSwitchRecipeInstance({
@@ -803,7 +824,7 @@ export function collapseSwitchRecipe(
         default: "false",
       },
     },
-    content: { label: label.characters },
+    content: { label: label ? label.characters : null },
     tokens: {
       wrapper: {
         width: numberFrom(
@@ -879,8 +900,10 @@ export function collapseSwitchRecipe(
           ),
         },
       },
-      labelFontSize: numberFrom(label, "type.fontSize", label.type.fontSize),
-      typography: { label: fontFrom(label) },
+      labelFontSize: label
+        ? numberFrom(label, "type.fontSize", label.type.fontSize)
+        : { variable: `${envelope.id}.labelFontSize`, fallback: BARE_LABEL_FONT_SIZE },
+      typography: { label: label ? fontFrom(label) : bareLabelFont() },
     },
     inputFacts: [
       ...envelope.accounting.carried,

@@ -1,0 +1,52 @@
+{
+  "roles": {
+    "box": "root",
+    "glyph": "tag:svg",
+    "glyphPath": "tag:path",
+    "hit": "root",
+    "opacityOn": "root"
+  },
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "square 16px button whose paint changes unchecked → checked (bg rgba(0, 0, 0, 0) → oklch(0.205 0 0))",
+      "confidence": "high"
+    },
+    "glyph": {
+      "selector": "tag:svg",
+      "why": "svg 14px×14px present in the checked combo",
+      "confidence": "high"
+    },
+    "glyphPath": {
+      "selector": "tag:path",
+      "why": "path inside the svg, stroke oklch(0.985 0 0) 2px, d=path(\"M 20 6 L 9 17 L 4 12\")",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": null,
+      "why": "no part carries text — a bare control; the recipe compiles no label node and label leaves become bare-cell spellings",
+      "confidence": "medium"
+    },
+    "row": {
+      "selector": null,
+      "why": "no label, so no row is read (row.gap and rowAlign are bare-cell spellings)",
+      "confidence": "medium"
+    },
+    "hit": {
+      "selector": "root",
+      "why": "no larger square parent; the box is its own hit area",
+      "confidence": "medium"
+    },
+    "dash": {
+      "selector": null,
+      "why": "no distinct indeterminate mark part; dash leaves will be receipts",
+      "confidence": "medium"
+    },
+    "opacityOn": {
+      "selector": "root",
+      "why": "button opacity 1 → 0.5 when disabled",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

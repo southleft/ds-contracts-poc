@@ -17,6 +17,7 @@
 import type { FactMapping } from "./reader.js";
 import { num, px } from "./ledger.js";
 import { firstFam, styleForWeight } from "./mappings-util.js";
+import { BARE_LABEL_COLOR, BARE_LABEL_FONT_SIZE, bareLabelFont } from "../recipes/checkbox.js";
 
 export interface CheckboxRoles {
   /** The hit area / wrapper (wrapper.size). Often the root. */
@@ -29,10 +30,14 @@ export interface CheckboxRoles {
   glyphPath: string;
   /** The indeterminate mark element, when it is a distinct part. */
   dash?: { part: string; pseudo?: string };
-  /** The label text element. */
-  label: string;
-  /** The row that lays out box + label (gap, align-items). */
-  row: string;
+  /**
+   * The label text element. Absent for a BARE CONTROL (MUI's Checkbox,
+   * shadcn's): the recipe then compiles no label node and every label leaf
+   * is the bare-cell spelling (BARE_CHECKBOX_SPELLINGS), never a read.
+   */
+  label?: string;
+  /** The row that lays out box + label (gap, align-items). Absent with the label. */
+  row?: string;
   /** Where the box's opacity is expressed when disabled (default: the box). */
   opacityOn?: string;
 }
@@ -107,6 +112,26 @@ for (const fix of ["unchecked.enabled", "unchecked.disabled", "indeterminate.ena
   };
 }
 
+/**
+ * BARE-CELL SPELLINGS — merged over CHECKBOX_SPELLINGS only when the role map
+ * has no label. Kept apart so a labelled library whose label read fails still
+ * refuses instead of silently becoming a bare control. The values are the
+ * recipe's own constants (recipes/checkbox.ts), so there is one truth.
+ */
+const BARE_FONT = bareLabelFont();
+export const BARE_CHECKBOX_SPELLINGS: Record<string, Spelling> = {
+  labelFontSize: BARE_LABEL_FONT_SIZE,
+  "row.gap": 0,
+  rowAlign: "center",
+  "typography.label.family": BARE_FONT.requestedFamily,
+  "typography.label.style": BARE_FONT.requestedStyle,
+};
+for (const fix of Object.keys(IDENTITY_COMBOS)) BARE_CHECKBOX_SPELLINGS[`states.${fix}.label`] = BARE_LABEL_COLOR;
+export const spellingsFor = (roles: Pick<CheckboxRoles, "label">): Record<string, Spelling> =>
+  roles.label ? CHECKBOX_SPELLINGS : { ...CHECKBOX_SPELLINGS, ...BARE_CHECKBOX_SPELLINGS };
+
+const BARE = "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling";
+
 export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchemaOptions = {}): FactMapping[] {
   const combos = opts.combos ?? IDENTITY_COMBOS;
   const base = combos["unchecked.enabled"];
@@ -123,7 +148,7 @@ export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchem
     R("box.radius", () => one("box.radius", "px", { combo: base, part: roles.box, channel: "border-top-left-radius" })),
     R("box.borderWidth", () => one("box.borderWidth", "px", { combo: base, part: roles.box, channel: "border-top-width" })),
     R("box.padding", () => one("box.padding", "px", { combo: base, part: roles.box, channel: "padding-top" })),
-    R("row.gap", () => one("row.gap", "px", { combo: base, part: roles.row, channel: "column-gap" })),
+    R("row.gap", () => (roles.row ? one("row.gap", "px", { combo: base, part: roles.row, channel: "column-gap" }) : receipt("row.gap", BARE, "reviewed 0"))),
     R("dash.width", () =>
       roles.dash
         ? one("dash.width", "px", { combo: indeterminate, part: roles.dash.part, pseudo: roles.dash.pseudo, channel: "width" })
@@ -162,7 +187,7 @@ export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchem
     ),
     receipt("check.offsetX", "glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel", "reviewed 0"),
     receipt("check.offsetY", "same as check.offsetX", "reviewed 0"),
-    R("labelFontSize", () => one("labelFontSize", "px", { combo: base, part: roles.label, channel: "font-size" })),
+    R("labelFontSize", () => (roles.label ? one("labelFontSize", "px", { combo: base, part: roles.label, channel: "font-size" }) : receipt("labelFontSize", BARE, `reviewed ${BARE_LABEL_FONT_SIZE}`))),
   ];
   for (const fix of Object.keys(combos) as Array<keyof CheckboxComboMap>) {
     const combo = combos[fix];
@@ -171,7 +196,7 @@ export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchem
       R(`states.${fix}.boxFill`, () => one(`states.${fix}.boxFill`, "color", { combo, part: roles.box, channel: "background-color" })),
       R(`states.${fix}.boxBorder`, () => one(`states.${fix}.boxBorder`, "color", { combo, part: roles.box, channel: "border-top-color" })),
       R(`states.${fix}.boxOpacity`, () => one(`states.${fix}.boxOpacity`, "number", { combo, part: opacityPart, channel: "opacity" })),
-      R(`states.${fix}.label`, () => one(`states.${fix}.label`, "color", { combo, part: roles.label, channel: "color" })),
+      R(`states.${fix}.label`, () => (roles.label ? one(`states.${fix}.label`, "color", { combo, part: roles.label, channel: "color" }) : receipt(`states.${fix}.label`, BARE, `reviewed ${BARE_LABEL_COLOR}`))),
     );
     if (fix.startsWith("indeterminate")) {
       rows.push(
@@ -203,18 +228,22 @@ export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchem
     }
   }
   rows.push(
-    R("rowAlign", () => one("rowAlign", "string", { combo: base, part: roles.row, channel: "align-items" })),
+    R("rowAlign", () => (roles.row ? one("rowAlign", "string", { combo: base, part: roles.row, channel: "align-items" }) : receipt("rowAlign", BARE, "reviewed center"))),
     R("typography.label.family", () =>
-      one("typography.label.family", "string", { combo: base, part: roles.label, channel: "font-family" }, {
-        formula: "first family of the label's computed stack",
-        combine: firstFam,
-      }),
+      roles.label
+        ? one("typography.label.family", "string", { combo: base, part: roles.label, channel: "font-family" }, {
+            formula: "first family of the label's computed stack",
+            combine: firstFam,
+          })
+        : receipt("typography.label.family", BARE, `reviewed ${BARE_FONT.requestedFamily} (inert)`),
     ),
     R("typography.label.style", () =>
-      one("typography.label.style", "string", { combo: base, part: roles.label, channel: "font-weight" }, {
-        formula: "label font-weight → style word",
-        combine: (raw) => styleForWeight(num(raw.v)),
-      }),
+      roles.label
+        ? one("typography.label.style", "string", { combo: base, part: roles.label, channel: "font-weight" }, {
+            formula: "label font-weight → style word",
+            combine: (raw) => styleForWeight(num(raw.v)),
+          })
+        : receipt("typography.label.style", BARE, `reviewed ${BARE_FONT.requestedStyle} (inert)`),
     ),
     R("check.path", () =>
       one("check.path", "string", { combo: checked, part: roles.glyphPath, channel: "d" }, {

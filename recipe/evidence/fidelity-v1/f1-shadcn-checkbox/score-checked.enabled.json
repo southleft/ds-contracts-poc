@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "checkbox/shadcn/checked.enabled",
+  "status": "fail",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 31.25,
+    "pctAAUnmasked": 5.147058823529411,
+    "pctAAMasked": 5.147058823529411,
+    "canvasPx": "16x16",
+    "realPx": "16x17",
+    "inkCanvasPct": 91.54411764705883,
+    "inkRealPct": 94.85294117647058
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/canvas-checked.enabled.png",
+    "sha256": "7d59d14fc217c83b715a23295e83adcd6861a094e5d46de7070dd329e046d768"
+  },
+  "reference": {
+    "path": "extract/computed/out/shadcn/checkbox/orig-shots/checked.enabled__default.png",
+    "sha256": "56085aeac960cce895b14cc9fb865c0a91440ff7cae93f24844da35dde6040e1"
+  },
+  "diff": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/score-checked.enabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "16x16",
+      "reference": "16x17",
+      "agree": false
+    },
+    {
+      "threshold": 245,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    },
+    {
+      "threshold": 240,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "checkbox/shadcn/indeterminate.enabled",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 30.14705882352941,
+    "pctAAUnmasked": 2.941176470588235,
+    "pctAAMasked": 2.941176470588235,
+    "canvasPx": "16x16",
+    "realPx": "16x17",
+    "inkCanvasPct": 22.058823529411764,
+    "inkRealPct": 38.970588235294116
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/canvas-indeterminate.enabled.png",
+    "sha256": "abb6d6ff6202eaf3bd56fe29e1c4073b8c368dd756c95bcd17bf00abb3867afd"
+  },
+  "reference": {
+    "path": "extract/computed/out/shadcn/checkbox/orig-shots/indeterminate.enabled__default.png",
+    "sha256": "d01ad367570e2c34f15800bdc118b902aca29ff433adae7c85a3a8a3e82d49dc"
+  },
+  "diff": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/score-indeterminate.enabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "16x16",
+      "reference": "16x17",
+      "agree": false
+    },
+    {
+      "threshold": 245,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    },
+    {
+      "threshold": 240,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "16x16",
+      "reference": "16x16",
+      "agree": true
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}
