@@ -26,7 +26,9 @@ import {
 
 export const RADIO_FIGMA_NAMESPACE = "ds.contracts.radio.recipe.v1";
 export const RADIO_FIGMA_WRITER_VERSION = 2;
-export const RADIO_FIGMA_RUN_SUFFIX = "radio-v8";
+export const RADIO_FIGMA_RUN_SUFFIX = "radio-v9";
+/** v8 stay (radio@1 proposer: AntD from its own capture and Chakra held out (RadioGroup captured today through ItemIndicator)) is preserved as evidence and never written again. */
+export const FORBIDDEN_RADIO_V8_PAGE_ID = "218:89839";
 /** v7 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
 export const FORBIDDEN_RADIO_V7_PAGE_ID = "218:87203";
 /** v6 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
@@ -259,6 +261,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "radioSet"
   },
   "forbiddenPages": [
+    { "id": "218:89839", "marker": "RADIO-V8-PAGE" },
     { "id": "218:87203", "marker": "RADIO-V7-PAGE" },
     { "id": "218:85710", "marker": "RADIO-V6-PAGE" },
     { "id": "218:84228", "marker": "RADIO-V5-PAGE" },

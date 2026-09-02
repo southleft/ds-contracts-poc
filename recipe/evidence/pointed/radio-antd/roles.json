@@ -1,0 +1,18 @@
+{
+  "circle": "idx:0.1",
+  "dot": {
+    "part": "idx:0.1",
+    "pseudo": "::after",
+    "paint": "background-color"
+  },
+  "label": "idx:1",
+  "row": "root",
+  "hit": "idx:0.1",
+  "opacityOn": "idx:0.1",
+  "combos": {
+    "unselected.enabled": "unchecked.enabled",
+    "unselected.disabled": "unchecked.disabled",
+    "selected.enabled": "checked.enabled",
+    "selected.disabled": "checked.disabled"
+  }
+}

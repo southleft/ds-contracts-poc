@@ -499,6 +499,15 @@
     },
     {
       "library": "chakra",
+      "component": "Radio",
+      "rerunPctEqual": 89.06666666666666,
+      "cellsCompared": 3000,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 89.06666666666666,
+      "gapCause": ""
+    },
+    {
+      "library": "chakra",
       "component": "Switch",
       "rerunPctEqual": 88.5989010989011,
       "cellsCompared": 2912,

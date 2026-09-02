@@ -1,0 +1,68 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "radio-live-pivot-v9-prepare",
+  "teaching": "AntD Radio labels center to the 16px control via named alignSelf center + lineHeight 22; Figma BASELINE on the circle frame is not the CSS pairing",
+  "runIdentity": "0b0ee218-44f74e33-6c11de88-a645c0bf-feb4dea1-radio-v9",
+  "pageName": "Recipe Pivot / Radio / 0b0ee218-44f74e33-6c11de88-a645c0bf-feb4dea1-radio-v9",
+  "namespace": "ds.contracts.radio.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "0b0ee218bd3d92519e1beaa053bcb757c67c1e51309cee95e52da8580a2926e8",
+    "MUI": "44f74e3351670c33a94222ee2dafc967c9b36f4674fe39acc20c3d58e0af5712",
+    "Ant Design": "6c11de888eae8927c92059454b61e14d08dd44dfcab0c472d467476266d0eb52",
+    "Ant Design (proposed)": "a645c0bf456762a4bd50cdbd389afbf01e1ebc5d477b1ef4c58d6d2e79fb67ad",
+    "Chakra (proposed)": "feb4dea1a06b3c061fce9b252665139ea50af8ec959ca9eae27201b039b0cf3c"
+  },
+  "writerSha256": "f8e88152d461db858a1cec7003fd6e01dc065946ebc0a674d592bedaba7e8d5f",
+  "pageId": "219:92148",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-92148",
+  "live": {
+    "recordedFrom": "radio-v9-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Radio / 0b0ee218-44f74e33-6c11de88-a645c0bf-feb4dea1-radio-v9",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-radio-reviewed-v1",
+        "sectionId": "219:92149",
+        "setId": "219:92221",
+        "collectionId": "VariableCollectionId:219:92150",
+        "variantCount": 4,
+        "comparedIrFacts": 249
+      },
+      {
+        "adapterIdentity": "mui-radio-reviewed-v1",
+        "sectionId": "219:92222",
+        "setId": "219:92294",
+        "collectionId": "VariableCollectionId:219:92223",
+        "variantCount": 4,
+        "comparedIrFacts": 249
+      },
+      {
+        "adapterIdentity": "antd-radio-reviewed-v1",
+        "sectionId": "219:92295",
+        "setId": "219:92368",
+        "collectionId": "VariableCollectionId:219:92296",
+        "variantCount": 4,
+        "comparedIrFacts": 257
+      },
+      {
+        "adapterIdentity": "antd-radio-proposed-v1",
+        "sectionId": "219:92369",
+        "setId": "219:92442",
+        "collectionId": "VariableCollectionId:219:92370",
+        "variantCount": 4,
+        "comparedIrFacts": 257
+      },
+      {
+        "adapterIdentity": "chakra-radio-proposed-v1",
+        "sectionId": "219:92443",
+        "setId": "219:92516",
+        "collectionId": "VariableCollectionId:219:92444",
+        "variantCount": 4,
+        "comparedIrFacts": 257
+      }
+    ]
+  }
+}

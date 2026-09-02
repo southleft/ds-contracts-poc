@@ -1,9 +1,9 @@
 {
   "_marker": "THE FUSION-SURFACE FRESHNESS RECORD. Re-derived offline from every committed captured-truth.json by extract/computed/fusion-geometry-census.ts. A row that moves means that component has been re-fused by a changed door and its committed enriched.*/LEDGER.md/contract are stale — see the header of that file for the per-library remedy.",
   "generatedBy": "extract/computed/fusion-geometry-census.ts --write",
-  "components": 126,
+  "components": 127,
   "__extensionFresh": "Per row: whether that component's COMMITTED enriched.extension.json geometry receipts still match the engine. A `false` here is a component whose shipped drop ledger is stale — mostly captures that predate a door nobody re-ran, measured as 83 of 104 on the previous engine as well. It is pinned so that a CHANGE in either direction is red and has to be re-recorded deliberately.",
-  "extensionsStale": 81,
+  "extensionsStale": 82,
   "rows": {
     "altitude/Avatar": {
       "carried": {
@@ -1476,6 +1476,45 @@
       "receipts": "1f7dec7ba8765c0e",
       "receiptCount": 1,
       "extensionFresh": true
+    },
+    "chakra/Radio": {
+      "carried": {
+        "part-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-1": [
+          "height",
+          "width"
+        ],
+        "part-0-1-0": [
+          "height",
+          "width"
+        ],
+        "radio-group__item": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "0cd7d02c52bd9558",
+      "receiptCount": 14,
+      "extensionFresh": false
     },
     "chakra/Switch": {
       "carried": {

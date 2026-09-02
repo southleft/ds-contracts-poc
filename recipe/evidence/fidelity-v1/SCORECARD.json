@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 48,
-  "passed": 33,
+  "subjects": 50,
+  "passed": 35,
   "failed": 15,
   "fringeExcused": 0,
   "knownFailures": 15,
@@ -111,6 +111,22 @@
       "pctAAMasked": 0,
       "canvasPx": "16x16",
       "realPx": "16x16",
+      "convergesAt": 250
+    },
+    {
+      "label": "radio/antd-proposed",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250
+    },
+    {
+      "label": "radio/chakra",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "20x20",
+      "realPx": "20x20",
       "convergesAt": 250
     },
     {

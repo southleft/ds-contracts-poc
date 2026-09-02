@@ -7,7 +7,7 @@ import type {
 import { canonicalRadioRecipeInstance } from "./radio.js";
 import type { RadioRecipeInstance } from "../recipes/radio.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): RadioRecipeInstance["tokens"] => {
@@ -396,7 +396,7 @@ const sharedContent = {
   ],
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -537,7 +537,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedRadioSource,
   tokens: RadioRecipeInstance["tokens"],
@@ -545,6 +545,9 @@ const buildConfig = (
   refusals: ReviewedRadioSourceFact[],
   extraIr: ReviewedRadioSourceFact[],
   unsupported: string[],
+  // A proposed fixture passes the captured label for both items; the hand
+  // tables keep the shared Email/Phone pairing.
+  content: RadioRecipeInstance["content"] = sharedContent,
 ): ReviewedRadioAdapterConfig => {
   const facts = [
     ...tokenFacts(slug, `${source.packageName} ${source.exportName} source review`, tokens),
@@ -570,7 +573,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: structuredClone(sharedContent),
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -593,7 +596,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedRadioSource,
 ): ReviewedRadioSourceFact[] => [

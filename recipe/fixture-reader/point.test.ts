@@ -278,3 +278,28 @@ test("tabs@1 drafts MUI's indicator bar, Carbon's bottom-border indicator, and r
     assert.equal(r.proposal.content.selected, expect.selected, lib);
   }
 });
+
+import { draftRadioRoles } from "./draft-roles.js";
+import { proposeRadioFixture } from "./propose-radio.js";
+import type { RadioComboMap, RadioRoles } from "./schema-radio.js";
+
+test("radio@1 proposes AntD's radio from its own capture (the ::after disc scaled to 6, its 16px radius clamped to 3, the label's padding as item.gap) and refuses MUI's bare mount by name", () => {
+  const antd = draftRadioRoles(new Ledger(REPO, "extract/computed/out/antd/radio/captured-truth.json"));
+  assert.deepEqual(antd.unresolved, []);
+  assert.deepEqual(antd.roles.dot, { part: "idx:0.1", pseudo: "::after", paint: "background-color" });
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const out = path.relative(REPO, path.join(dir, "radio.antd.ts"));
+  const r = proposeRadioFixture({ library: "antd", ledger: "extract/computed/out/antd/radio/captured-truth.json", roles: antd.roles as RadioRoles, combos: antd.combos as RadioComboMap, sets: {}, out, unsupported: ["hover"] });
+  assert.deepEqual(r.refused, []);
+  for (const [k, v] of [["circle.size", 16], ["circle.radius", 8], ["circle.borderWidth", 1], ["dot.size", 6], ["dot.radius", 3], ["item.gap", 8], ["labelLineHeight", 22], ["labelLineHeightUnit", "px"], ["itemAlign", "center"], ["states.selected.enabled.dotFill", "#ffffffff"], ["states.unselected.enabled.dotFill", "#00000000"]] as const) {
+    assert.equal(r.proposal.leaves[k]?.value, v, k);
+  }
+  assert.equal(r.proposal.leaves["list.gap"]?.from, "spelling");
+  assert.deepEqual(r.proposal.content.items.map((i) => i.label), ["Radio", "Radio"]);
+  const module = readFileSync(path.join(REPO, out), "utf8");
+  assert.match(module, /refusal-dot-pseudo/);
+  assert.equal(Object.values(r.proposal.leaves).filter((l) => l.from === "set").length, 0, "nothing reviewed, nothing invented");
+
+  const mui = draftRadioRoles(new Ledger(REPO, "extract/computed/out/mui/radio/captured-truth.json"));
+  assert.ok(mui.unresolved.some((u) => u.startsWith("label:")), `MUI's bare Radio has no label part; radio@1 has no bare cell: ${mui.unresolved.join(" | ")}`);
+});

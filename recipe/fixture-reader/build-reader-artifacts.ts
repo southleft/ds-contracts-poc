@@ -24,6 +24,8 @@ import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
 import { CHAKRA_TOOLTIP_LEDGER, chakraTooltipAdapterConfig, chakraTooltipMappings } from "../fixtures/generated/tooltip.chakra.js";
+import { ANTD_RADIO_LEDGER as ANTD_RADIO_LEDGER_PROPOSED, antdRadioAdapterConfig as antdRadioProposedConfig, antdRadioMappings as antdRadioProposedMappings } from "../fixtures/generated/radio.antd.js";
+import { CHAKRA_RADIO_LEDGER, chakraRadioAdapterConfig, chakraRadioMappings } from "../fixtures/generated/radio.chakra.js";
 import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
 import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
 import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
@@ -433,6 +435,28 @@ const SUBJECTS: Subject[] = [
     tokens: antdRadioAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: antdRadioMappings,
     extras: extrasFor(antdRadioAdapterConfig.tokens as unknown as Record<string, unknown>, antdRadioMappings),
+  },
+  {
+    // PROPOSED from AntD's own capture by the radio@1 role schema (2026-09-02):
+    // 32 read, 4 spellings, 0 invented; scored beside the hand row.
+    archetype: "radio",
+    library: "antd-proposed",
+    source: src(antdRadioProposedConfig),
+    ledgerFile: ANTD_RADIO_LEDGER_PROPOSED,
+    tokens: antdRadioProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: antdRadioProposedMappings,
+    extras: extrasFor(antdRadioProposedConfig.tokens as unknown as Record<string, unknown>, antdRadioProposedMappings),
+  },
+  {
+    // HELD OUT (2026-09-02): Chakra's RadioGroup, captured the same day through
+    // ItemIndicator; 32 read, 0 invented; the dot is a `.dot` span at scale 0.4.
+    archetype: "radio",
+    library: "chakra",
+    source: src(chakraRadioAdapterConfig),
+    ledgerFile: CHAKRA_RADIO_LEDGER,
+    tokens: chakraRadioAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraRadioMappings,
+    extras: extrasFor(chakraRadioAdapterConfig.tokens as unknown as Record<string, unknown>, chakraRadioMappings),
   },
   {
     archetype: "switch",

@@ -1,0 +1,409 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.radio",
+  "name": "Radio",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI RadioGroup capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Canonical composition pinned from the package's flat exports: RadioGroupRoot ⊃ RadioGroupItem(value a) ⊃ (RadioGroupItemHiddenInput, RadioGroupItemIndicator (the control-with-dot: ItemControl asChild around Radiomark and its .dot span), RadioGroupItemText). Authored 2026-09-02 as the person's step of docs/36 for radio@1 (the capture config makes the capture, so the reader cannot draft it). The selected plane is the Root's `value` prop, declared as the two-value enum the harness enumerates: unchecked = '' (no item matches), checked = 'a' (the one item's value). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "position": "relative",
+        "text-rendering": "optimizelegibility"
+      },
+      "parts": {
+        "radio-group__item": {
+          "element": "label",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|radio-group__item — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "inline-flex",
+            "align": "center"
+          },
+          "parts": {
+            "part-0-0": {
+              "element": "input",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "appearance": "auto",
+                "box-sizing": "border-box",
+                "cursor": "default",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                "font-feature-settings": "\"cv11\"",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "position": "absolute",
+                "text-wrap-mode": "nowrap"
+              },
+              "declaredStates": {
+                "focus-visible": {
+                  "outline-style": "auto"
+                }
+              },
+              "tokens": {
+                "bottom": "{imported.radio.part-0-0.bottom}",
+                "color": "{imported.shared.color-09090b}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-500}",
+                "height": "{imported.shared.size-1}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-20}",
+                "margin-bottom": "{imported.shared.size-neg-1}",
+                "margin-left": "{imported.shared.size-neg-1}",
+                "margin-right": "{imported.shared.size-neg-1}",
+                "margin-top": "{imported.shared.size-neg-1}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "outline-color": "{imported.shared.color-09090b}",
+                "right": "{imported.radio.part-0-0.right}",
+                "tab-size": "{imported.shared.num-4}",
+                "top": "{imported.radio.part-0-0.top}",
+                "width": "{imported.shared.size-1}"
+              },
+              "codeOnly": [
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-offset",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
+            },
+            "part-0-1": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "parts": {
+                "part-0-1-0": {
+                  "element": "span",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "cursor": "default",
+                    "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                    "font-feature-settings": "\"cv11\"",
+                    "text-rendering": "optimizelegibility"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "value",
+                      "equals": "unchecked",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "disabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "background-color": "{imported.shared.color-ffffff}",
+                    "border-bottom-color": "{imported.shared.color-e4e4e7}",
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-left-color": "{imported.shared.color-e4e4e7}",
+                    "border-right-color": "{imported.shared.color-e4e4e7}",
+                    "border-top-color": "{imported.shared.color-e4e4e7}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "color": "{imported.shared.color-ffffff}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "line-height": "{imported.shared.size-20}",
+                    "scale": "{imported.radio.part-0-1-0.scale}",
+                    "tab-size": "{imported.shared.num-4}",
+                    "width": "{imported.radio.part-0-1-0.width}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "cursor": "default",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                "font-feature-settings": "\"cv11\"",
+                "text-rendering": "optimizelegibility"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                },
+                "focus-visible": {
+                  "outline-style": "solid"
+                }
+              },
+              "tokens": {
+                "border-bottom-left-radius": "{imported.shared.size-9999}",
+                "border-bottom-right-radius": "{imported.shared.size-9999}",
+                "border-bottom-width": "{imported.shared.size-1}",
+                "border-left-width": "{imported.shared.size-1}",
+                "border-right-width": "{imported.shared.size-1}",
+                "border-top-left-radius": "{imported.shared.size-9999}",
+                "border-top-right-radius": "{imported.shared.size-9999}",
+                "border-top-width": "{imported.shared.size-1}",
+                "color": "{imported.shared.color-ffffff}",
+                "flex-shrink": "{imported.radio.part-0-1.flex-shrink}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-500}",
+                "height": "{imported.shared.size-20}",
+                "line-height": "{imported.shared.size-20}",
+                "outline-color": "{imported.shared.color-ffffff}",
+                "tab-size": "{imported.shared.num-4}",
+                "width": "{imported.shared.size-20}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "value",
+                  "map": {
+                    "checked": {
+                      "background-color": "{imported.radio.part-0-1.background-color.checked}",
+                      "border-bottom-color": "{imported.radio.part-0-1.border-bottom-color.checked}",
+                      "border-left-color": "{imported.radio.part-0-1.border-left-color.checked}",
+                      "border-right-color": "{imported.radio.part-0-1.border-right-color.checked}",
+                      "border-top-color": "{imported.radio.part-0-1.border-top-color.checked}"
+                    },
+                    "unchecked": {
+                      "background-color": "{imported.radio.part-0-1.background-color.unchecked}",
+                      "border-bottom-color": "{imported.radio.part-0-1.border-bottom-color.unchecked}",
+                      "border-left-color": "{imported.radio.part-0-1.border-left-color.unchecked}",
+                      "border-right-color": "{imported.radio.part-0-1.border-right-color.unchecked}",
+                      "border-top-color": "{imported.radio.part-0-1.border-top-color.unchecked}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "opacity",
+                  "value": "0.5",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#a1a1aa",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-offset",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
+            },
+            "label": {
+              "text": "Option",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|radio-group__itemText — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "cursor": "default",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                "font-feature-settings": "\"cv11\"",
+                "text-rendering": "optimizelegibility"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-e4e4e7}",
+                "border-left-color": "{imported.shared.color-e4e4e7}",
+                "border-right-color": "{imported.shared.color-e4e4e7}",
+                "border-top-color": "{imported.shared.color-e4e4e7}",
+                "color": "{imported.shared.color-09090b}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-500}",
+                "line-height": "{imported.shared.size-20}",
+                "tab-size": "{imported.shared.num-4}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "position": "relative",
+            "text-rendering": "optimizelegibility"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-09090b}",
+            "column-gap": "{imported.radio.radio-group-item.column-gap}",
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.shared.num-500}",
+            "height": "{imported.shared.size-20}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-20}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "row-gap": "{imported.radio.radio-group-item.row-gap}",
+            "tab-size": "{imported.shared.num-4}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.radio.radio-group-item.width}"
+          }
+        }
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-09090b}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.radio.root.line-height}",
+        "right": "{imported.shared.size-0}",
+        "tab-size": "{imported.shared.num-4}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.radio.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "value",
+          "map": {
+            "checked": {
+              "height": "{imported.radio.root.height.checked}"
+            },
+            "unchecked": {
+              "height": "{imported.radio.root.height.unchecked}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "SwitchRoot"
+      }
+    }
+  }
+}

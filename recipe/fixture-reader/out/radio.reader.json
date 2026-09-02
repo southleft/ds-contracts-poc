@@ -1007,5 +1007,785 @@
       "receipt": 8,
       "unread": 0
     }
+  },
+  {
+    "archetype": "radio",
+    "library": "antd-proposed",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Radio"
+    },
+    "ledgerFile": "extract/computed/out/antd/radio/captured-truth.json",
+    "rows": [
+      {
+        "path": "list.gap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture mounts one radio; the two-item list is the recipe's shape, not a captured part",
+        "evidence": "recipe spelling 0 unless reviewed"
+      },
+      {
+        "path": "listMode",
+        "fixtureValue": "vertical",
+        "verdict": "receipt",
+        "proposedValue": "vertical",
+        "receipt": "the capture mounts one radio; the two-item list is the recipe's shape, not a captured part",
+        "evidence": "recipe spelling vertical unless reviewed"
+      },
+      {
+        "path": "item.gap",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default root.column-gap",
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.padding-left",
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.margin-left",
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.margin-right"
+        ],
+        "formula": "the space between the control and the label: row column-gap + label padding-left + label margin-left + hit margin-right (keywords read 0)"
+      },
+      {
+        "path": "wrapper.size",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+        ]
+      },
+      {
+        "path": "circle.size",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+        ]
+      },
+      {
+        "path": "circle.radius",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-left-radius",
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the circle's width (50% of 16 = 8); clamped to half the width as CSS clamps it (9999px on a 20px ring paints 10)"
+      },
+      {
+        "path": "circle.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-width"
+        ]
+      },
+      {
+        "path": "circle.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.padding-top"
+        ]
+      },
+      {
+        "path": "dot.size",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.width",
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.transform",
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.scale"
+        ],
+        "formula": "the dot's width × its transform scale × its `scale` property (a disc is often sized full and scaled down: matrix(s,0,0,s,…) → s; scale: 0.4 → 0.4)"
+      },
+      {
+        "path": "dot.radius",
+        "fixtureValue": 3,
+        "verdict": "match",
+        "capturedValue": 3,
+        "proposedValue": 3,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.border-top-left-radius",
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.width",
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.transform",
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.scale"
+        ],
+        "formula": "the dot's radius (a percentage is of its painted width) × its transform and `scale` scales, clamped to half the painted size as CSS clamps it (a 16px radius on a 6px disc paints a 3px one)"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 22,
+        "verdict": "match",
+        "capturedValue": 22,
+        "proposedValue": 22,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.line-height"
+        ],
+        "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "labelLineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.line-height"
+        ],
+        "formula": "`normal` → auto (hug the face); a length → px"
+      },
+      {
+        "path": "itemAlign",
+        "fixtureValue": "center",
+        "verdict": "match",
+        "capturedValue": "center",
+        "proposedValue": "center",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default root.align-items"
+        ],
+        "formula": "the row's align-items: center → center; baseline → center (Figma's BASELINE aligns to the circle frame's bottom edge, not the text baseline — the recipe's named lowering); normal/stretch → center (the label box fills the row and its text sits on its own line box)"
+      },
+      {
+        "path": "states.unselected.enabled.circleFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.circleBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.circleOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "match",
+        "capturedValue": "#000000e0",
+        "proposedValue": "#000000e0",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.color"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.dotFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dot does not render in the unselected state; transparent is the recipe's spelling of absent",
+        "evidence": "no dot at combo unchecked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unselected.disabled.circleFill",
+        "fixtureValue": "#0000000a",
+        "verdict": "match",
+        "capturedValue": "#0000000a",
+        "proposedValue": "#0000000a",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.circleBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.circleOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:1.color"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.dotFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dot does not render in the unselected state; transparent is the recipe's spelling of absent",
+        "evidence": "no dot at combo unchecked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.selected.enabled.circleFill",
+        "fixtureValue": "#1677ffff",
+        "verdict": "match",
+        "capturedValue": "#1677ffff",
+        "proposedValue": "#1677ffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.circleBorder",
+        "fixtureValue": "#1677ffff",
+        "verdict": "match",
+        "capturedValue": "#1677ffff",
+        "proposedValue": "#1677ffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.circleOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "match",
+        "capturedValue": "#000000e0",
+        "proposedValue": "#000000e0",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:1.color"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.dotFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.background-color"
+        ],
+        "formula": "the dot's paint (background-color)"
+      },
+      {
+        "path": "states.selected.disabled.circleFill",
+        "fixtureValue": "#0000000a",
+        "verdict": "match",
+        "capturedValue": "#0000000a",
+        "proposedValue": "#0000000a",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.circleBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.circleOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:1.color"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.dotFill",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1::after.background-color"
+        ],
+        "formula": "the dot's paint (background-color)"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 32,
+      "drift": 0,
+      "receipt": 4,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "radio",
+    "library": "chakra",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "RadioGroup"
+    },
+    "ledgerFile": "extract/computed/out/chakra/radio/captured-truth.json",
+    "rows": [
+      {
+        "path": "list.gap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture mounts one radio; the two-item list is the recipe's shape, not a captured part",
+        "evidence": "recipe spelling 0 unless reviewed"
+      },
+      {
+        "path": "listMode",
+        "fixtureValue": "vertical",
+        "verdict": "receipt",
+        "proposedValue": "vertical",
+        "receipt": "the capture mounts one radio; the two-item list is the recipe's shape, not a captured part",
+        "evidence": "recipe spelling vertical unless reviewed"
+      },
+      {
+        "path": "item.gap",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.column-gap",
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.padding-left",
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.margin-left",
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.margin-right"
+        ],
+        "formula": "the space between the control and the label: row column-gap + label padding-left + label margin-left + hit margin-right (keywords read 0)"
+      },
+      {
+        "path": "wrapper.size",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+        ]
+      },
+      {
+        "path": "circle.size",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+        ]
+      },
+      {
+        "path": "circle.radius",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-left-radius",
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the circle's width (50% of 16 = 8); clamped to half the width as CSS clamps it (9999px on a 20px ring paints 10)"
+      },
+      {
+        "path": "circle.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-width"
+        ]
+      },
+      {
+        "path": "circle.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.padding-top"
+        ]
+      },
+      {
+        "path": "dot.size",
+        "fixtureValue": 7.2,
+        "verdict": "match",
+        "capturedValue": 7.2,
+        "proposedValue": 7.2,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.width",
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.transform",
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.scale"
+        ],
+        "formula": "the dot's width × its transform scale × its `scale` property (a disc is often sized full and scaled down: matrix(s,0,0,s,…) → s; scale: 0.4 → 0.4)"
+      },
+      {
+        "path": "dot.radius",
+        "fixtureValue": 3.6,
+        "verdict": "match",
+        "capturedValue": 3.6,
+        "proposedValue": 3.6,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.border-top-left-radius",
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.width",
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.transform",
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.scale"
+        ],
+        "formula": "the dot's radius (a percentage is of its painted width) × its transform and `scale` scales, clamped to half the painted size as CSS clamps it (a 16px radius on a 6px disc paints a 3px one)"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.line-height"
+        ],
+        "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "labelLineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.line-height"
+        ],
+        "formula": "`normal` → auto (hug the face); a length → px"
+      },
+      {
+        "path": "itemAlign",
+        "fixtureValue": "center",
+        "verdict": "match",
+        "capturedValue": "center",
+        "proposedValue": "center",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.align-items"
+        ],
+        "formula": "the row's align-items: center → center; baseline → center (Figma's BASELINE aligns to the circle frame's bottom edge, not the text baseline — the recipe's named lowering); normal/stretch → center (the label box fills the row and its text sits on its own line box)"
+      },
+      {
+        "path": "states.unselected.enabled.circleFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.circleBorder",
+        "fixtureValue": "#d4d4d8ff",
+        "verdict": "match",
+        "capturedValue": "#d4d4d8ff",
+        "proposedValue": "#d4d4d8ff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.circleOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.color"
+        ]
+      },
+      {
+        "path": "states.unselected.enabled.dotFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dot does not render in the unselected state; transparent is the recipe's spelling of absent",
+        "evidence": "no dot at combo unchecked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unselected.disabled.circleFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.disabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.circleBorder",
+        "fixtureValue": "#d4d4d8ff",
+        "verdict": "match",
+        "capturedValue": "#d4d4d8ff",
+        "proposedValue": "#d4d4d8ff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.disabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.circleOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.disabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.disabled__default idx:0.2.color"
+        ]
+      },
+      {
+        "path": "states.unselected.disabled.dotFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dot does not render in the unselected state; transparent is the recipe's spelling of absent",
+        "evidence": "no dot at combo unchecked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.selected.enabled.circleFill",
+        "fixtureValue": "#18181bff",
+        "verdict": "match",
+        "capturedValue": "#18181bff",
+        "proposedValue": "#18181bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.circleBorder",
+        "fixtureValue": "#18181bff",
+        "verdict": "match",
+        "capturedValue": "#18181bff",
+        "proposedValue": "#18181bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.circleOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.2.color"
+        ]
+      },
+      {
+        "path": "states.selected.enabled.dotFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.enabled__default idx:0.1.0.background-color"
+        ],
+        "formula": "the dot's paint (background-color)"
+      },
+      {
+        "path": "states.selected.disabled.circleFill",
+        "fixtureValue": "#18181bff",
+        "verdict": "match",
+        "capturedValue": "#18181bff",
+        "proposedValue": "#18181bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.disabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.circleBorder",
+        "fixtureValue": "#18181bff",
+        "verdict": "match",
+        "capturedValue": "#18181bff",
+        "proposedValue": "#18181bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.disabled__default idx:0.1.border-top-color"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.circleOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.disabled__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.disabled__default idx:0.2.color"
+        ]
+      },
+      {
+        "path": "states.selected.disabled.dotFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#checked.disabled__default idx:0.1.0.background-color"
+        ],
+        "formula": "the dot's paint (background-color)"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Inter",
+        "verdict": "match",
+        "capturedValue": "Inter",
+        "proposedValue": "Inter",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/radio/captured-truth.json#unchecked.enabled__default idx:0.2.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 32,
+      "drift": 0,
+      "receipt": 4,
+      "unread": 0
+    }
   }
 ]

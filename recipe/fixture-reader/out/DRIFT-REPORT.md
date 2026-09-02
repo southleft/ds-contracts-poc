@@ -80,6 +80,18 @@ ledger `extract/computed/out/antd/radio/captured-truth.json` · 36 facts: **28 m
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### antd-proposed — antd@5.29.3#Radio
+
+ledger `extract/computed/out/antd/radio/captured-truth.json` · 36 facts: **32 match**, **0 drift**, 4 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### chakra — @chakra-ui/react@3.37.0#RadioGroup
+
+ledger `extract/computed/out/chakra/radio/captured-truth.json` · 36 facts: **32 match**, **0 drift**, 4 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ## Switch
 
 ### astryx — @astryxdesign/core@0.1.6#Switch
@@ -602,6 +614,14 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **radio/antd** `itemAlign` = `center` — the wrapper's align-items is baseline (antd's own) — the v2 stay respelled CENTER so the label optically centers on the 16px circle; that respelling is a recipe fact, not a ledger channel _[radio-live-pivot-v2 stay accuracyLoop — reviewed center]_
 - **radio/antd** `labelLineHeightUnit` = `px` — the label line-height is a px length (22) _[reviewed px]_
 - **radio/antd** `typography.label.family` = `-apple-system` — the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites _[theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily]_
+- **radio/antd-proposed** `list.gap` = `0` — the capture mounts one radio; the two-item list is the recipe's shape, not a captured part _[recipe spelling 0 unless reviewed]_
+- **radio/antd-proposed** `listMode` = `vertical` — the capture mounts one radio; the two-item list is the recipe's shape, not a captured part _[recipe spelling vertical unless reviewed]_
+- **radio/antd-proposed** `states.unselected.enabled.dotFill` = `#00000000` — the dot does not render in the unselected state; transparent is the recipe's spelling of absent _[no dot at combo unchecked.enabled — reviewed #00000000]_
+- **radio/antd-proposed** `states.unselected.disabled.dotFill` = `#00000000` — the dot does not render in the unselected state; transparent is the recipe's spelling of absent _[no dot at combo unchecked.disabled — reviewed #00000000]_
+- **radio/chakra** `list.gap` = `0` — the capture mounts one radio; the two-item list is the recipe's shape, not a captured part _[recipe spelling 0 unless reviewed]_
+- **radio/chakra** `listMode` = `vertical` — the capture mounts one radio; the two-item list is the recipe's shape, not a captured part _[recipe spelling vertical unless reviewed]_
+- **radio/chakra** `states.unselected.enabled.dotFill` = `#00000000` — the dot does not render in the unselected state; transparent is the recipe's spelling of absent _[no dot at combo unchecked.enabled — reviewed #00000000]_
+- **radio/chakra** `states.unselected.disabled.dotFill` = `#00000000` — the dot does not render in the unselected state; transparent is the recipe's spelling of absent _[no dot at combo unchecked.disabled — reviewed #00000000]_
 - **switch/astryx** `wrapper.padding` = `0` — the 40×24 wrapper has no extra padding outside the track — 0 is the recipe's spelling _[Switch.tsx switchWrapper 40×24 — reviewed 0]_
 - **switch/astryx** `thumb.onSize` = `20` — the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered _[Switch.tsx THUMB_SIZE_ON 20 — reviewed 20]_
 - **switch/astryx** `thumb.travel` = `14` — the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered _[Switch.tsx THUMB_TRAVEL_ON 14 — reviewed 14]_

@@ -1,0 +1,49 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Radio",
+  "varPrefix": "--chakra-",
+  "facts": [
+    {
+      "part": "part-0-1",
+      "channel": "color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "value": "checked"
+      },
+      "token": "colors-color-palette-contrast",
+      "varName": "--chakra-colors-color-palette-contrast",
+      "anchor": {
+        "selector": ".css-14fg0p7:is(:checked, [data-checked], [aria-checked=\"true\"], [data-state=\"checked\"])"
+      }
+    },
+    {
+      "part": "part-0-1",
+      "channel": "color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "value": "checked"
+      },
+      "token": "colors-color-palette-contrast",
+      "varName": "--chakra-colors-color-palette-contrast",
+      "anchor": {
+        "selector": ".css-14fg0p7:is(:checked, [data-checked], [aria-checked=\"true\"], [data-state=\"checked\"])"
+      }
+    }
+  ],
+  "skips": [
+    "part-0-1.cursor: candidates --chakra-cursor-disabled → \"cursor-disabled\" = not-allowed (value MATCHES the computed value); --chakra-cursor-radio → \"cursor-radio\" = default (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "part-0-1.height: candidate --chakra-sizes-5 → \"sizes-5\" = 1.25rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "part-0-1.width: candidate --chakra-sizes-5 → \"sizes-5\" = 1.25rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "radio-group__item.cursor: candidate --chakra-cursor-disabled → \"cursor-disabled\" = not-allowed (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "radio-group__item.font-size: candidate --chakra-font-sizes-sm → \"font-sizes-sm\" = 0.875rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "radio-group__item.font-weight: candidate --chakra-font-weights-medium → \"font-weights-medium\" = 500 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "part-0-1.background: SHORTHAND carrying var(--chakra-colors-color-palette-solid) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

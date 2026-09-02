@@ -1,5 +1,5 @@
 {
-  "__note": "docs/35 Phase 4 \u2014 Chakra UI (@chakra-ui/react@3.37.0) as a reader subject (runtime Emotion). Mount recipe from Chakra's own docs: ChakraProvider value={defaultSystem}. Flat exports CheckboxRoot / Textarea (the package also ships Checkbox.Root namespace form; flat names avoid a sandbox barrel). classAllow keeps chakra-* identity classes and drops Emotion css-<hash> classes so part identity does not thrash across builds. varPrefix --chakra- matches the :root custom properties defaultSystem injects. No hand-authored recipe fixture table \u2014 capture + reader proposal only.",
+  "__note": "docs/35 Phase 4 — Chakra UI (@chakra-ui/react@3.37.0) as a reader subject (runtime Emotion). Mount recipe from Chakra's own docs: ChakraProvider value={defaultSystem}. Flat exports CheckboxRoot / Textarea (the package also ships Checkbox.Root namespace form; flat names avoid a sandbox barrel). classAllow keeps chakra-* identity classes and drops Emotion css-<hash> classes so part identity does not thrash across builds. varPrefix --chakra- matches the :root custom properties defaultSystem injects. No hand-authored recipe fixture table — capture + reader proposal only.",
   "library": {
     "package": "@chakra-ui/react",
     "version": "3.37.0",
@@ -9,7 +9,7 @@
     "varPrefix": "--chakra-"
   },
   "mount": {
-    "__note": "ChakraProvider is REQUIRED \u2014 without it, defaultSystem tokens never land on :root and Emotion recipes resolve against nothing. value={defaultSystem} is the library's documented default theme. Probe-witnessed 2026-08-31: CheckboxRoot + Textarea mount and paint real computed styles (control 20\u00d720, checked fill rgb(24,24,27)).",
+    "__note": "ChakraProvider is REQUIRED — without it, defaultSystem tokens never land on :root and Emotion recipes resolve against nothing. value={defaultSystem} is the library's documented default theme. Probe-witnessed 2026-08-31: CheckboxRoot + Textarea mount and paint real computed styles (control 20×20, checked fill rgb(24,24,27)).",
     "imports": [
       "import { ChakraProvider, defaultSystem } from '@chakra-ui/react';"
     ],
@@ -130,7 +130,7 @@
       }
     },
     {
-      "__note": "Authored 2026-09-02 as the person's step of docs/36 (the capture config makes the capture, so it cannot be drafted from one). Composition from the package's flat exports: SwitchRoot \u2283 (SwitchHiddenInput, SwitchControl \u2283 SwitchThumb, SwitchLabel). Label text pinned 'Enable' so typography identity is scorable; id pinned for determinism. checked is a plain boolean axis.",
+      "__note": "Authored 2026-09-02 as the person's step of docs/36 (the capture config makes the capture, so it cannot be drafted from one). Composition from the package's flat exports: SwitchRoot ⊃ (SwitchHiddenInput, SwitchControl ⊃ SwitchThumb, SwitchLabel). Label text pinned 'Enable' so typography identity is scorable; id pinned for determinism. checked is a plain boolean axis.",
       "name": "Switch",
       "importName": "SwitchRoot",
       "contract": "examples/chakra/contracts-seed/switch.contract.json",
@@ -172,7 +172,52 @@
       ]
     },
     {
-      "__note": "Authored 2026-09-02 (person's step of docs/36). AvatarRoot \u2283 AvatarFallback with initials 'AB' so the avatar@1 proposer's label path is measured; no axes.",
+      "__note": "Authored 2026-09-02 as the person's step of docs/36 for radio@1. Composition from the package's flat exports: RadioGroupRoot ⊃ RadioGroupItem(value a) ⊃ (RadioGroupItemHiddenInput, RadioGroupItemIndicator, RadioGroupItemText). ItemIndicator is the package's control-with-dot (it renders ItemControl asChild around Radiomark, whose `.dot` span is the disc — radio-group.js); a first entry used the bare ItemControl and captured a solid disc with no dot, which the real render confirmed. The selected plane is the Root's `value` prop ('' = no item matches, 'a' = the item). Label text pinned 'Option'; id pinned for determinism.",
+      "name": "Radio",
+      "importName": "RadioGroupRoot",
+      "contract": "examples/chakra/contracts-seed/radio.contract.json",
+      "sampleText": "",
+      "axes": [
+        "value"
+      ],
+      "axisValueMap": {
+        "value": {
+          "unchecked": "",
+          "checked": "a"
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "id": "chakra-radio"
+      },
+      "childrenSpec": [
+        {
+          "importName": "RadioGroupItem",
+          "props": {
+            "value": "a"
+          },
+          "children": [
+            {
+              "importName": "RadioGroupItemHiddenInput"
+            },
+            {
+              "importName": "RadioGroupItemIndicator"
+            },
+            {
+              "importName": "RadioGroupItemText",
+              "text": "Option"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__note": "Authored 2026-09-02 (person's step of docs/36). AvatarRoot ⊃ AvatarFallback with initials 'AB' so the avatar@1 proposer's label path is measured; no axes.",
       "name": "Avatar",
       "importName": "AvatarRoot",
       "contract": "examples/chakra/contracts-seed/avatar.contract.json",
@@ -189,7 +234,7 @@
       ]
     },
     {
-      "__note": "Authored 2026-09-02 (person's step of docs/36). TagRoot \u2283 TagLabel 'Tag' \u2014 read as chip@1 via --capture tag; no axes.",
+      "__note": "Authored 2026-09-02 (person's step of docs/36). TagRoot ⊃ TagLabel 'Tag' — read as chip@1 via --capture tag; no axes.",
       "name": "Tag",
       "importName": "TagRoot",
       "contract": "examples/chakra/contracts-seed/tag.contract.json",
@@ -218,7 +263,7 @@
       }
     },
     {
-      "__note": "Authored 2026-09-02 (person's step of docs/36). Portal: openDriver {open:true} on TooltipRoot; TooltipTrigger 'Hover' + Portal \u2283 TooltipPositioner \u2283 TooltipContent \u2014 Chakra's documented composition; without the Portal the positioner renders in-stage and the harness's single-root fusion refuses (MULTI-ROOT-CAPTURE, named).",
+      "__note": "Authored 2026-09-02 (person's step of docs/36). Portal: openDriver {open:true} on TooltipRoot; TooltipTrigger 'Hover' + Portal ⊃ TooltipPositioner ⊃ TooltipContent — Chakra's documented composition; without the Portal the positioner renders in-stage and the harness's single-root fusion refuses (MULTI-ROOT-CAPTURE, named).",
       "name": "Tooltip",
       "importName": "TooltipRoot",
       "contract": "examples/chakra/contracts-seed/tooltip.contract.json",

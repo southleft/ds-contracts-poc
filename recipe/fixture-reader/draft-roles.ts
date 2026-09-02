@@ -26,6 +26,7 @@ import type { TooltipRoles } from "./schema-tooltip.js";
 import type { ChipRoles } from "./schema-chip.js";
 import type { LinkRoles } from "./schema-link.js";
 import type { TabsRoles } from "./schema-tabs.js";
+import type { RadioComboMap, RadioRoles } from "./schema-radio.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -452,4 +453,148 @@ export function draftTabsRoles(ledger: Ledger): SimpleRoleDraft<TabsRoles> {
   else if (num(selected.style["border-bottom-width"]) > 0 && selected.style["border-bottom-color"] !== rest.style["border-bottom-color"]) { roles.indicatorIsBorder = true; evidence.indicator = { selector: roles.selectedTab, why: `no indicator part; the selected tab's bottom border (${selected.style["border-bottom-width"]} ${selected.style["border-bottom-color"]}) differs from a rest tab's (${rest.style["border-bottom-color"]}) — the indicator is that border`, confidence: "medium" }; }
   else unresolved.push(`indicator: no absolute painted bar and no distinct bottom border on the selected tab (selected bg ${selected.style["background-color"]}, rest bg ${rest.style["background-color"]}) — tabs@1 draws an indicator, not a selected-tab fill`);
   return { roles, combo, evidence, unresolved };
+}
+
+
+export interface RadioRoleDraft {
+  roles: Partial<RadioRoles>;
+  combos: Partial<RadioComboMap>;
+  evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
+  unresolved: string[];
+}
+
+/** The radio@1 combo map is the switch's plane (OFF/ON × enabled/disabled) under the archetype's own names. */
+export function draftRadioCombos(ledger: Ledger): { combos: Partial<RadioComboMap>; evidence: string[]; unresolved: string[] } {
+  const sw = draftSwitchCombos(ledger);
+  const rename: Record<keyof SwitchComboMap, keyof RadioComboMap> = { "false.enabled": "unselected.enabled", "false.disabled": "unselected.disabled", "true.enabled": "selected.enabled", "true.disabled": "selected.disabled" };
+  const combos: Partial<RadioComboMap> = {};
+  for (const [k, v] of Object.entries(sw.combos) as Array<[keyof SwitchComboMap, string]>) combos[rename[k]] = v;
+  const re = (t: string): string => t.replace(/\b(false|true)\.(enabled|disabled)\b/g, (_, a: string, b: string) => `${a === "false" ? "unselected" : "selected"}.${b}`);
+  return { combos, evidence: sw.evidence.map(re), unresolved: sw.unresolved.map(re) };
+}
+
+const isRound = (p: LedgerPart): boolean => {
+  const r = (p.style["border-top-left-radius"] ?? "0").trim();
+  const w = num(p.style.width);
+  return r.endsWith("%") ? parseFloat(r) >= 50 : w > 0 && num(r) >= w / 2 - 1;
+};
+const isVisibleDisc = (style: Record<string, string> | undefined): boolean => {
+  if (!style) return false;
+  const t = style.transform ?? "none";
+  const m = /^matrix\(([-0-9.e]+),/.exec(t);
+  const sc = style.scale && style.scale.trim() !== "none" ? parseFloat(style.scale) : 1;
+  const scale = (m ? Number(m[1]) : 1) * (Number.isFinite(sc) ? sc : 1);
+  return num(style.width) * scale > 0.5 && num(style.opacity ?? "1") > 0 && !isTransparent(style["background-color"]) && style.display !== "none";
+};
+
+/**
+ * Draft the radio@1 role map from a capture ledger, by what the parts DO:
+ * the circle is the smallest round square whose paint changes unselected →
+ * selected; the dot is what renders inside it only when selected — a part or
+ * the circle's own pseudo-element; the label is the part carrying text (no
+ * bare cell in radio@1: a mount without one is unresolved); the row is their
+ * nearest common ancestor; the hit is the circle's parent when it is a larger
+ * square; opacity is read from whichever of circle/hit/row dims when disabled.
+ */
+export function draftRadioRoles(ledger: Ledger): RadioRoleDraft {
+  const { combos, evidence: comboEvidence, unresolved: comboUnresolved } = draftRadioCombos(ledger);
+  const evidence: RadioRoleDraft["evidence"] = {};
+  const unresolved: string[] = [...comboUnresolved];
+  const roles: RadioRoleDraft["roles"] = {};
+  evidence.combos = { selector: null, why: comboEvidence.join("; ") || "no combo resolved", confidence: comboUnresolved.length ? "low" : "high" };
+  if (!combos["unselected.enabled"] || !combos["selected.enabled"]) return { roles, combos, evidence, unresolved };
+  const base = ledger.capture(`${combos["unselected.enabled"]}__default`);
+  const selected = ledger.capture(`${combos["selected.enabled"]}__default`);
+  const disabled = combos["unselected.disabled"] ? ledger.capture(`${combos["unselected.disabled"]}__default`) : null;
+  const byPath = (cap: { parts: LedgerPart[] }) => new Map(cap.parts.map((p) => [p.idxPath, p] as const));
+  const baseBy = byPath(base), selBy = byPath(selected);
+
+  // CIRCLE: the smallest round square (not svg/path/input) whose paint changes.
+  const paintChanges = (p: LedgerPart): boolean => {
+    const c = selBy.get(p.idxPath);
+    return !!c && (p.style["background-color"] !== c.style["background-color"] || p.style["border-top-color"] !== c.style["border-top-color"]);
+  };
+  const squares = base.parts.filter((p) => isSquare(p) && !["svg", "path", "input", "circle"].includes(p.tag));
+  const round = squares.filter((p) => isRound(p) && paintChanges(p)).sort((a, b) => num(a.style.width) - num(b.style.width));
+  const anyChange = squares.filter(paintChanges).sort((a, b) => num(a.style.width) - num(b.style.width));
+  const circle = round[0] ?? anyChange[0] ?? null;
+  if (circle) {
+    roles.circle = sel(circle);
+    evidence.circle = { selector: roles.circle, why: `${round[0] ? "round" : "NOT round —"} square ${circle.style.width} ${circle.tag}${circle.classes.length ? "." + circle.classes[0] : ""} radius ${circle.style["border-top-left-radius"]} whose paint changes unselected → selected`, confidence: round[0] ? "high" : "low" };
+  } else {
+    unresolved.push("circle: no square part changes paint between unselected and selected");
+    evidence.circle = { selector: null, why: "no candidate", confidence: "low" };
+  }
+
+  // DOT: inside the circle, visible only when selected — a descendant part, or a pseudo-element of the circle / a descendant.
+  if (circle) {
+    const inside = (idx: string): boolean => circle.idxPath === "" ? idx !== "" : idx.startsWith(circle.idxPath + ".");
+    const cands: Array<{ part: LedgerPart; pseudo?: string; paint: "background-color" | "fill" | "color" }> = [];
+    for (const p of selected.parts) {
+      if (!inside(p.idxPath) && p.idxPath !== circle.idxPath) continue;
+      const b = baseBy.get(p.idxPath);
+      if (p.idxPath !== circle.idxPath && p.tag !== "input") {
+        if (p.tag === "path" || p.tag === "circle") { if (!b || (b.style.fill ?? "") !== (p.style.fill ?? "") || !b) cands.push({ part: p, paint: "fill" }); }
+        else if (isVisibleDisc(p.style) && !isVisibleDisc(b?.style)) cands.push({ part: p, paint: "background-color" });
+      }
+      for (const ps of Object.keys(p.pseudo)) {
+        if (isVisibleDisc(p.pseudo[ps]) && !isVisibleDisc(b?.pseudo[ps])) cands.push({ part: p, pseudo: ps, paint: "background-color" });
+      }
+    }
+    const dot = cands[0];
+    if (dot) {
+      roles.dot = { part: dot.part.tag === "path" || dot.part.tag === "circle" ? `tag:${dot.part.tag}` : sel(dot.part), ...(dot.pseudo ? { pseudo: dot.pseudo } : {}), paint: dot.paint };
+      const st = dot.pseudo ? dot.part.pseudo[dot.pseudo]! : dot.part.style;
+      evidence.dot = { selector: `${roles.dot.part}${dot.pseudo ?? ""}`, why: `${dot.pseudo ? `pseudo ${dot.pseudo} of ${dot.part.tag}` : dot.part.tag} ${st.width} transform ${st.transform ?? "none"} ${dot.paint} ${st[dot.paint]} renders only in the selected combo`, confidence: cands.length === 1 ? "high" : "medium" };
+    } else {
+      evidence.dot = { selector: null, why: "nothing inside the circle renders only when selected; dot leaves will be receipts", confidence: "medium" };
+    }
+  }
+
+  // LABEL: the part carrying text. radio@1 has no bare cell.
+  const label = base.parts.find((p) => p.text && p.text.some((t) => t.trim().length > 0) && p.tag !== "input");
+  if (label) {
+    roles.label = sel(label);
+    evidence.label = { selector: roles.label, why: `${label.tag}${label.classes.length ? "." + label.classes[0] : ""} carries text ${JSON.stringify(label.text[0])}`, confidence: "high" };
+  } else {
+    unresolved.push("label: no part carries text — radio@1 has no bare cell; capture a mount with a label");
+    evidence.label = { selector: null, why: "no part carries text", confidence: "low" };
+  }
+
+  // ROW: nearest common ancestor of circle and label.
+  if (circle && label) {
+    let a: string | null = circle.idxPath; const ancestors = new Set<string>();
+    while (a !== null) { ancestors.add(a); a = parentPath(a); }
+    let b: string | null = label.idxPath, common: string | null = null;
+    while (b !== null) { if (ancestors.has(b)) { common = b; break; } b = parentPath(b); }
+    const row = common !== null ? baseBy.get(common) : undefined;
+    if (row) {
+      roles.row = sel(row);
+      evidence.row = { selector: roles.row, why: `nearest common ancestor of circle and label: ${row.tag} display ${row.style.display}, align-items ${row.style["align-items"]}, column-gap ${row.style["column-gap"]}; label padding-left ${label.style["padding-left"]}`, confidence: "high" };
+    }
+  }
+
+  // HIT: the circle's parent when it is a larger square; else the circle.
+  if (circle) {
+    const pp = parentPath(circle.idxPath);
+    const parent = pp !== null ? baseBy.get(pp) : undefined;
+    if (parent && isSquare(parent) && num(parent.style.width) > num(circle.style.width)) {
+      roles.hit = sel(parent);
+      evidence.hit = { selector: roles.hit, why: `the circle's parent is a larger square (${parent.style.width}) — the hit area`, confidence: "high" };
+    } else {
+      roles.hit = roles.circle!;
+      evidence.hit = { selector: roles.hit, why: "no larger square parent; the circle is its own hit area", confidence: "medium" };
+    }
+  }
+
+  // OPACITY: whichever of circle / hit / row dims when disabled.
+  if (disabled && circle) {
+    const disBy = byPath(disabled);
+    const cands = [circle, roles.hit !== roles.circle ? baseBy.get(roles.hit!.replace(/^idx:/, "").replace(/^root$/, "")) : undefined, roles.row ? baseBy.get(roles.row.replace(/^idx:/, "").replace(/^root$/, "")) : undefined].filter((p): p is LedgerPart => !!p);
+    const dimmed = cands.find((p) => num(disBy.get(p.idxPath)?.style.opacity ?? "1") < num(p.style.opacity ?? "1"));
+    roles.opacityOn = dimmed ? sel(dimmed) : roles.circle;
+    evidence.opacityOn = { selector: roles.opacityOn!, why: dimmed ? `${dimmed.tag} opacity ${dimmed.style.opacity} → ${disBy.get(dimmed.idxPath)!.style.opacity} when disabled` : "nothing dims when disabled; the circle carries opacity 1", confidence: "high" };
+  }
+
+  return { roles, combos, evidence, unresolved };
 }

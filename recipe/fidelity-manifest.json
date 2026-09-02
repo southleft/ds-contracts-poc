@@ -137,25 +137,47 @@
     },
     {
       "label": "radio/mui",
-      "page": "218:89839",
+      "page": "219:92148",
       "set": "radio/set :: MUI Radio + RadioGroup",
       "variant": "Selected=a, Disabled=false",
       "child": "radio/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/radio-mui-hit-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/radio-mui-hit-shared-v9.png",
       "reference": "extract/computed/out/mui/radio/orig-shots/primary.checked.enabled__default.png",
       "referenceControlOnly": true,
       "_variantPairing": "MUI's radio has a COLOUR axis and the capture's leading segment is that colour, not a default-ness. The fixture carries #1976d2 (primary), so the reference must be primary.*. Pairing it with default.* compared our blue radio to MUI's grey one and read 36% as a mint defect. The Figma variant is Selected=a, so the control is the CHECKED state."
     },
     {
       "label": "radio/antd",
-      "page": "218:89839",
+      "page": "219:92148",
       "set": "radio/set :: Ant Design Radio.Group",
       "variant": "Selected=a, Disabled=false",
       "child": "radio/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/radio-antd-hit-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/radio-antd-hit-shared-v9.png",
       "reference": "extract/computed/out/antd/radio/orig-shots/checked.enabled__default.png",
       "referenceControlOnly": true,
       "_variantPairing": "The Figma variant is Selected=a, so radio/item/a's control is the SELECTED state. It must be scored against the library's CHECKED render; pairing it with unchecked.enabled__default compared our filled radio to their empty one and read 55% as a mint defect."
+    },
+    {
+      "label": "radio/antd-proposed",
+      "page": "219:92148",
+      "set": "radio/set :: Ant Design (proposed) Radio",
+      "variant": "Selected=a, Disabled=false",
+      "child": "radio/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/radio-antd-proposed-hit-v9.png",
+      "reference": "extract/computed/out/antd/radio/orig-shots/checked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_proposedWhy": "PROPOSED from AntD's own capture by the radio@1 role schema (32 read, 4 spellings, 0 invented): the ::after disc read at 16 \u00d7 scale 0.375 = 6, its 16px radius clamped to 3 as CSS clamps it. Scored beside the hand row."
+    },
+    {
+      "label": "radio/chakra",
+      "page": "219:92148",
+      "set": "radio/set :: Chakra (proposed) Radio",
+      "variant": "Selected=a, Disabled=false",
+      "child": "radio/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/radio-chakra-hit-v9.png",
+      "reference": "extract/computed/out/chakra/radio/orig-shots/checked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_proposedWhy": "HELD OUT: Chakra's RadioGroup, captured 2026-09-02 from a config entry a person wrote (ItemIndicator is the control-with-dot; a first entry with the bare ItemControl captured a solid disc with no dot and the real render agreed). 32 read, 0 invented; the .dot span read at 18 \u00d7 scale 0.4 = 7.2; the 9999px ring radius clamped to 10."
     },
     {
       "label": "alert/astryx",

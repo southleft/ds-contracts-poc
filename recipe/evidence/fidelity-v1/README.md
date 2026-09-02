@@ -433,3 +433,18 @@ Figma 12), the same class as MUI's proposed link. Named `font-substrate`.
     link/chakra 10.26% (named)
 
     33 pass · 0 fringe · 15 known
+
+### 2026-09-02 — radio@1 gets a proposer; two pixel-identical rows
+
+The eighth archetype with a proposer. AntD from its own capture (the ring's
+`::after` disc read at 16 × 0.375 = 6, its 16px radius clamped to 3 as CSS
+clamps it) scores its hand row's 0.00%. Chakra's RadioGroup, captured the
+same day from a config entry a person wrote — the package's `ItemIndicator`
+is the control-with-dot; a first entry with the bare `ItemControl` captured
+a solid disc and the real render agreed — reads the `.dot` span at 18 ×
+`scale: 0.4` = 7.2 and is pixel-identical held out. Minted as radio v9 with
+five sources. See `f1-radio-proposed/`.
+
+    radio/antd-proposed 0.00% · radio/chakra 0.00%
+
+    35 pass · 0 fringe · 15 known

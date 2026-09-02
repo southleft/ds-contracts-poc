@@ -1,0 +1,240 @@
+{
+  "archetype": "radio",
+  "library": "antd",
+  "ledger": "extract/computed/out/antd/radio/captured-truth.json",
+  "provenance": {
+    "package": "antd",
+    "version": "5.29.3",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "circle": "idx:0.1",
+    "dot": {
+      "part": "idx:0.1",
+      "pseudo": "::after",
+      "paint": "background-color"
+    },
+    "label": "idx:1",
+    "row": "root",
+    "hit": "idx:0.1",
+    "opacityOn": "idx:0.1"
+  },
+  "combos": {
+    "unselected.enabled": "unchecked.enabled",
+    "unselected.disabled": "unchecked.disabled",
+    "selected.enabled": "checked.enabled",
+    "selected.disabled": "checked.disabled"
+  },
+  "leaves": {
+    "list.gap": {
+      "value": 0,
+      "from": "spelling",
+      "why": "the capture mounts one radio; the two-item list is the recipe's shape, not a captured part"
+    },
+    "listMode": {
+      "value": "vertical",
+      "from": "spelling",
+      "why": "the capture mounts one radio; the two-item list is the recipe's shape, not a captured part"
+    },
+    "item.gap": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default root.column-gap | extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.padding-left | extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.margin-left | extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.margin-right",
+      "formula": "the space between the control and the label: row column-gap + label padding-left + label margin-left + hit margin-right (keywords read 0)"
+    },
+    "wrapper.size": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+    },
+    "circle.size": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width"
+    },
+    "circle.radius": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-left-radius | extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.width",
+      "formula": "border-top-left-radius; a percentage is of the circle's width (50% of 16 = 8); clamped to half the width as CSS clamps it (9999px on a 20px ring paints 10)"
+    },
+    "circle.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-width"
+    },
+    "circle.padding": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.padding-top"
+    },
+    "dot.size": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.width | extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.transform | extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.scale",
+      "formula": "the dot's width × its transform scale × its `scale` property (a disc is often sized full and scaled down: matrix(s,0,0,s,…) → s; scale: 0.4 → 0.4)"
+    },
+    "dot.radius": {
+      "value": 3,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.border-top-left-radius | extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.width | extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.transform | extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.scale",
+      "formula": "the dot's radius (a percentage is of its painted width) × its transform and `scale` scales, clamped to half the painted size as CSS clamps it (a 16px radius on a 6px disc paints a 3px one)"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.font-size"
+    },
+    "labelLineHeight": {
+      "value": 22,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.line-height",
+      "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+    },
+    "labelLineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.line-height",
+      "formula": "`normal` → auto (hug the face); a length → px"
+    },
+    "itemAlign": {
+      "value": "center",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default root.align-items",
+      "formula": "the row's align-items: center → center; baseline → center (Figma's BASELINE aligns to the circle frame's bottom edge, not the text baseline — the recipe's named lowering); normal/stretch → center (the label box fills the row and its text sits on its own line box)"
+    },
+    "states.unselected.enabled.circleFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.background-color"
+    },
+    "states.unselected.enabled.circleBorder": {
+      "value": "#d9d9d9ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.border-top-color"
+    },
+    "states.unselected.enabled.circleOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:0.1.opacity"
+    },
+    "states.unselected.enabled.label": {
+      "value": "#000000e0",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.color"
+    },
+    "states.unselected.enabled.dotFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the dot does not render in the unselected state; transparent is the recipe's spelling of absent"
+    },
+    "states.unselected.disabled.circleFill": {
+      "value": "#0000000a",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:0.1.background-color"
+    },
+    "states.unselected.disabled.circleBorder": {
+      "value": "#d9d9d9ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:0.1.border-top-color"
+    },
+    "states.unselected.disabled.circleOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:0.1.opacity"
+    },
+    "states.unselected.disabled.label": {
+      "value": "#00000040",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default idx:1.color"
+    },
+    "states.unselected.disabled.dotFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the dot does not render in the unselected state; transparent is the recipe's spelling of absent"
+    },
+    "states.selected.enabled.circleFill": {
+      "value": "#1677ffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1.background-color"
+    },
+    "states.selected.enabled.circleBorder": {
+      "value": "#1677ffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1.border-top-color"
+    },
+    "states.selected.enabled.circleOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1.opacity"
+    },
+    "states.selected.enabled.label": {
+      "value": "#000000e0",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:1.color"
+    },
+    "states.selected.enabled.dotFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default idx:0.1::after.background-color",
+      "formula": "the dot's paint (background-color)"
+    },
+    "states.selected.disabled.circleFill": {
+      "value": "#0000000a",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1.background-color"
+    },
+    "states.selected.disabled.circleBorder": {
+      "value": "#d9d9d9ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1.border-top-color"
+    },
+    "states.selected.disabled.circleOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1.opacity"
+    },
+    "states.selected.disabled.label": {
+      "value": "#00000040",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:1.color"
+    },
+    "states.selected.disabled.dotFill": {
+      "value": "#00000040",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default idx:0.1::after.background-color",
+      "formula": "the dot's paint (background-color)"
+    },
+    "typography.label.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default idx:1.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "items": [
+      {
+        "id": "a",
+        "label": "Radio"
+      },
+      {
+        "id": "b",
+        "label": "Radio"
+      }
+    ]
+  },
+  "typography": {
+    "family": "Roboto",
+    "style": "Regular",
+    "stack": "Roboto, Helvetica, Arial, sans-serif"
+  }
+}

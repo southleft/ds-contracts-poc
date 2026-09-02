@@ -1,0 +1,57 @@
+{
+  "roles": {
+    "circle": "idx:0.1",
+    "dot": {
+      "part": "idx:0.1.0",
+      "paint": "background-color"
+    },
+    "label": "idx:0.2",
+    "row": "idx:0",
+    "hit": "idx:0.1",
+    "opacityOn": "idx:0.1"
+  },
+  "combos": {
+    "unselected.enabled": "unchecked.enabled",
+    "unselected.disabled": "unchecked.disabled",
+    "selected.enabled": "checked.enabled",
+    "selected.disabled": "checked.disabled"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "unselected.enabled ← unchecked.enabled (from the declared base unchecked.enabled); unselected.disabled ← unchecked.disabled (from the declared base unchecked.enabled); selected.enabled ← checked.enabled (from the declared base unchecked.enabled); selected.disabled ← checked.disabled (from the declared base unchecked.enabled)",
+      "confidence": "high"
+    },
+    "circle": {
+      "selector": "idx:0.1",
+      "why": "round square 20px span radius 9999px whose paint changes unselected → selected",
+      "confidence": "high"
+    },
+    "dot": {
+      "selector": "idx:0.1.0",
+      "why": "span 18px transform none background-color rgba(255, 255, 255, 1) renders only in the selected combo",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0.2",
+      "why": "span.chakra-radio-group__itemText carries text \"Option\"",
+      "confidence": "high"
+    },
+    "row": {
+      "selector": "idx:0",
+      "why": "nearest common ancestor of circle and label: label display inline-flex, align-items center, column-gap 10px; label padding-left 0px",
+      "confidence": "high"
+    },
+    "hit": {
+      "selector": "idx:0.1",
+      "why": "no larger square parent; the circle is its own hit area",
+      "confidence": "medium"
+    },
+    "opacityOn": {
+      "selector": "idx:0.1",
+      "why": "span opacity 1 → 0.5 when disabled",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

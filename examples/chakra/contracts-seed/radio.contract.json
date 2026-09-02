@@ -1,0 +1,73 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.radio",
+  "name": "Radio",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI RadioGroup capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Canonical composition pinned from the package's flat exports: RadioGroupRoot ⊃ RadioGroupItem(value a) ⊃ (RadioGroupItemHiddenInput, RadioGroupItemIndicator (the control-with-dot: ItemControl asChild around Radiomark and its .dot span), RadioGroupItemText). Authored 2026-09-02 as the person's step of docs/36 for radio@1 (the capture config makes the capture, so the reader cannot draft it). The selected plane is the Root's `value` prop, declared as the two-value enum the harness enumerates: unchecked = '' (no item matches), checked = 'a' (the one item's value).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "SwitchRoot"
+      }
+    }
+  }
+}
