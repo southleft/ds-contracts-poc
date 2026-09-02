@@ -53,6 +53,9 @@ measured cause.
 
 Fidelity gate 48 pass · 0 fringe · 17 named (updated the same evening: menu and dialog gained proposers and Chakra held-outs). The plugin's paste verb was
 exercised by the owner on 2026-09-02 (`recipe/evidence/pointed/switch-chakra/paste-verb-exercised.json`).
+The same evening every proposed row's plugin-target program was run the way the
+plugin runs it and scored against the same reference as its gate row: 39 rows,
+39 identical to the hundredth (`recipe/evidence/fidelity-v1/plugin-target/`).
 
 ## The proposed replacement for the docs/26 status box
 

@@ -1,0 +1,15 @@
+{
+  "label": "avatar/antd-proposed",
+  "archetype": "avatar",
+  "slug": "antd",
+  "page": "230:95241",
+  "pageName": "Recipe Pivot / Avatar / 0f8d4b37-avatar-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/avatar-antd-proposed-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/avatar-antd-proposed-default-v7.png",
+  "reference": "extract/computed/out/antd/avatar/orig-shots/default.circle__default.png",
+  "pluginPct": 0,
+  "manifestPct": 0,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

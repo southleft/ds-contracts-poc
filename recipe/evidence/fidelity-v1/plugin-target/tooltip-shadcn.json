@@ -1,0 +1,15 @@
+{
+  "label": "tooltip/shadcn",
+  "archetype": "tooltip",
+  "slug": "shadcn",
+  "page": "230:95471",
+  "pageName": "Recipe Pivot / Tooltip / 332e14d0-tooltip-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/tooltip-shadcn-default-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/tooltip-shadcn-default-v9.png",
+  "reference": "extract/computed/out/shadcn/tooltip/orig-shots/__default.png",
+  "pluginPct": 4.73,
+  "manifestPct": 4.73,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

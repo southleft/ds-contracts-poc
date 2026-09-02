@@ -1,0 +1,15 @@
+{
+  "label": "switch/shadcn",
+  "archetype": "switch",
+  "slug": "shadcn",
+  "page": "230:94775",
+  "pageName": "Recipe Pivot / Switch / a68d9a8f-switch-v13",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/switch-shadcn-hit-v13-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/switch-shadcn-hit-v13.png",
+  "reference": "extract/computed/out/shadcn/switch/orig-shots/default.unchecked.enabled__default.png",
+  "pluginPct": 0,
+  "manifestPct": 0,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

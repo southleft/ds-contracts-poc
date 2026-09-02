@@ -1,0 +1,15 @@
+{
+  "label": "checkbox/chakra",
+  "archetype": "checkbox",
+  "slug": "chakra",
+  "page": "230:94572",
+  "pageName": "Recipe Pivot / Checkbox / 11419528-checkbox-v12",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/checkbox-chakra-glyph-v12-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/checkbox-chakra-glyph-v12.png",
+  "reference": "extract/computed/out/chakra/checkbox/orig-shots/unchecked.enabled__default.png",
+  "pluginPct": 0,
+  "manifestPct": 0,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

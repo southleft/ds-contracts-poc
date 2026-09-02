@@ -1,0 +1,15 @@
+{
+  "label": "avatar/mui-proposed",
+  "archetype": "avatar",
+  "slug": "mui",
+  "page": "230:95225",
+  "pageName": "Recipe Pivot / Avatar / a76bc632-avatar-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/avatar-mui-proposed-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/avatar-mui-proposed-default-v7.png",
+  "reference": "extract/computed/out/mui/avatar/orig-shots/circular__default.png",
+  "pluginPct": 0,
+  "manifestPct": 0,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

@@ -1,0 +1,15 @@
+{
+  "label": "avatar/shadcn",
+  "archetype": "avatar",
+  "slug": "shadcn",
+  "page": "230:95273",
+  "pageName": "Recipe Pivot / Avatar / ea8faf59-avatar-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/avatar-shadcn-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/avatar-shadcn-default-v7.png",
+  "reference": "extract/computed/out/shadcn/avatar/orig-shots/default__default.png",
+  "pluginPct": 0.29,
+  "manifestPct": 0.29,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

@@ -1,0 +1,15 @@
+{
+  "label": "tooltip/antd-proposed",
+  "archetype": "tooltip",
+  "slug": "antd",
+  "page": "230:95456",
+  "pageName": "Recipe Pivot / Tooltip / f66661d3-tooltip-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-proposed-default-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-proposed-default-v9.png",
+  "reference": "extract/computed/out/antd/tooltip/orig-shots/__default.png",
+  "pluginPct": 3.01,
+  "manifestPct": 3.01,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

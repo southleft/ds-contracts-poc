@@ -313,6 +313,9 @@ jobs:
       - name: recipe:fidelity:check (minted components scored against the real package's own Chromium render)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:fidelity:check
+      - name: recipe:fidelity:plugin:check (the paste-verb program of every proposed row, re-scored offline against the same reference; parity with the gate row)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:fidelity:plugin:check
       # The thirteen boilerplate archetypes plus the button scene inversion. Each
       # was gate-shaped and unlaned: ci:lanes reported 33 scripts no workflow ran
       # and 39 test files no CI-invoked script named. They were never expensive —

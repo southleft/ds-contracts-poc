@@ -1,0 +1,15 @@
+{
+  "label": "menu/mui-proposed",
+  "archetype": "menu",
+  "slug": "mui",
+  "page": "230:95737",
+  "pageName": "Recipe Pivot / Menu / 25b7db99-menu-v8",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/menu-mui-proposed-default-v8-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/menu-mui-proposed-default-v8.png",
+  "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
+  "pluginPct": 4.73,
+  "manifestPct": 4.73,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

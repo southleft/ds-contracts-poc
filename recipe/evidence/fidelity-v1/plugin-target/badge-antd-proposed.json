@@ -1,0 +1,15 @@
+{
+  "label": "badge/antd-proposed",
+  "archetype": "badge",
+  "slug": "antd",
+  "page": "230:95342",
+  "pageName": "Recipe Pivot / Badge / 5ecb1cc3-badge-v11",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/badge-antd-proposed-default-v11-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/badge-antd-proposed-default-v11.png",
+  "reference": "extract/computed/out/antd/badge/orig-shots/count.unset__default.png",
+  "pluginPct": 1.98,
+  "manifestPct": 1.98,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

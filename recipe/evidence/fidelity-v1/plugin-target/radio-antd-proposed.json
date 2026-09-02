@@ -1,0 +1,15 @@
+{
+  "label": "radio/antd-proposed",
+  "archetype": "radio",
+  "slug": "antd",
+  "page": "230:94860",
+  "pageName": "Recipe Pivot / Radio / a645c0bf-radio-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/radio-antd-proposed-hit-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/radio-antd-proposed-hit-v9.png",
+  "reference": "extract/computed/out/antd/radio/orig-shots/checked.enabled__default.png",
+  "pluginPct": 0,
+  "manifestPct": 0,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

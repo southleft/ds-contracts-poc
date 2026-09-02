@@ -1,0 +1,15 @@
+{
+  "label": "dialog/mui-proposed",
+  "archetype": "dialog",
+  "slug": "mui",
+  "page": "230:95701",
+  "pageName": "Recipe Pivot / Dialog / 346a147b-dialog-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/dialog-mui-proposed-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/dialog-mui-proposed-default-v7.png",
+  "reference": "extract/computed/out/mui/dialog/orig-shots/sm__default.png",
+  "pluginPct": 4.92,
+  "manifestPct": 4.92,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

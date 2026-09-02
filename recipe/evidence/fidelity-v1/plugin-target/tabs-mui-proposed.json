@@ -1,0 +1,15 @@
+{
+  "label": "tabs/mui-proposed",
+  "archetype": "tabs",
+  "slug": "mui",
+  "page": "230:95407",
+  "pageName": "Recipe Pivot / Tabs / 1dcf1c6d-tabs-v13",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/tabs-mui-proposed-default-v13-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/tabs-mui-proposed-default-v13.png",
+  "reference": "extract/computed/out/mui/tabs/orig-shots/primary.primary__default.png",
+  "pluginPct": 7.73,
+  "manifestPct": 7.73,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

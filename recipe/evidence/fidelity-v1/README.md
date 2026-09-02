@@ -540,6 +540,16 @@ v7 with five sources. See `f1-menu-proposed/`.
 
     menu/mui-proposed 4.73% · menu/chakra 5.64% (named) · menu/mui 6.79% (named)
 
+### 2026-09-02 (late) — the paste verb, proven per row
+
+`recipe/plugin-target-proof.ts` emits every proposed row's plugin-target
+program (no pin, no page list — what Paste-a-script executes) from the
+current generated module, runs it in Scratch the way the plugin does,
+exports the same cell and scores it against the same reference as the gate
+row. 39 rows · 39 same · 0 drift — every score identical to the hundredth.
+`recipe:fidelity:plugin:check` re-scores the committed `-plugin` shots
+offline and is a fast-lane step. See `plugin-target/README.md`.
+
 ### 2026-09-02 (later) — menu@1 reads the panel's minimum width; the Chakra residual is named as font
 
 menu@1 gained a `panel.minWidth` leaf (Chakra reads 128px, MUI's Popover

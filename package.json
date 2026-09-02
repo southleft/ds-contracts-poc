@@ -50,6 +50,8 @@
     "recipe:propose-fixture": "tsx recipe/fixture-reader/propose-fixture.ts",
     "recipe:fixture-drift:check": "tsx recipe/fixture-reader/build-reader-artifacts.ts --check && node --import tsx --test recipe/fixture-reader/fixture-drift.test.ts",
     "recipe:fidelity:check": "tsx recipe/fidelity-check.ts",
+    "recipe:fidelity:plugin:proof": "tsx recipe/plugin-target-proof.ts",
+    "recipe:fidelity:plugin:check": "tsx recipe/plugin-target-proof.ts --check",
     "recipe:lowering:check": "node --import tsx --test recipe/figma-vector-path.test.ts recipe/css-box-shadow.test.ts",
     "recipe:boilerplate:generated:check": "npm run recipe:alert:live:v9:generated:check && npm run recipe:avatar:live:v7:generated:check && npm run recipe:badge:live:v11:generated:check && npm run recipe:chip:live:v11:generated:check && npm run recipe:checkbox:live:v12:generated:check && npm run recipe:dialog:live:v7:generated:check && npm run recipe:link:live:v8:generated:check && npm run recipe:menu:live:v8:generated:check && npm run recipe:radio:live:v9:generated:check && npm run recipe:switch:live:v13:generated:check && npm run recipe:tabs:live:v13:generated:check && npm run recipe:textarea:live:v11:generated:check && npm run recipe:tooltip:live:v9:generated:check",
     "recipe:fidelity:capture": "node scripts/capture-fidelity-shots.mjs",

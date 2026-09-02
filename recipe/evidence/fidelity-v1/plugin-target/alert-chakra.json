@@ -1,0 +1,15 @@
+{
+  "label": "alert/chakra",
+  "archetype": "alert",
+  "slug": "chakra",
+  "page": "230:95100",
+  "pageName": "Recipe Pivot / Alert / 3cc66b45-alert-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/alert-chakra-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/alert-chakra-v9.png",
+  "reference": "extract/computed/out/chakra/alert/orig-shots/info__default.png",
+  "pluginPct": 3.03,
+  "manifestPct": 3.03,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

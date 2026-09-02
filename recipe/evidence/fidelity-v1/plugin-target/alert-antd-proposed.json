@@ -1,0 +1,15 @@
+{
+  "label": "alert/antd-proposed",
+  "archetype": "alert",
+  "slug": "antd",
+  "page": "230:95055",
+  "pageName": "Recipe Pivot / Alert / 83c23591-alert-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/alert-antd-proposed-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/alert-antd-proposed-v9.png",
+  "reference": "extract/computed/out/antd/alert/orig-shots/info.icon.off.off__default.png",
+  "pluginPct": 3.35,
+  "manifestPct": 3.35,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

@@ -1,0 +1,15 @@
+{
+  "label": "chip/antd-proposed",
+  "archetype": "chip",
+  "slug": "antd",
+  "page": "230:95177",
+  "pageName": "Recipe Pivot / Chip / 5b25bd6a-chip-v11",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/chip-antd-proposed-default-v11-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/chip-antd-proposed-default-v11.png",
+  "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png",
+  "pluginPct": 1.89,
+  "manifestPct": 1.89,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

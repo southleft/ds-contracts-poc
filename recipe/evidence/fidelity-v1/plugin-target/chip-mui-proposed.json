@@ -1,0 +1,15 @@
+{
+  "label": "chip/mui-proposed",
+  "archetype": "chip",
+  "slug": "mui",
+  "page": "230:95161",
+  "pageName": "Recipe Pivot / Chip / d900b3b5-chip-v11",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/chip-mui-proposed-default-v11-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/chip-mui-proposed-default-v11.png",
+  "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png",
+  "pluginPct": 0.61,
+  "manifestPct": 0.61,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

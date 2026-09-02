@@ -1,0 +1,15 @@
+{
+  "label": "chip/chakra",
+  "archetype": "chip",
+  "slug": "chakra",
+  "page": "230:95209",
+  "pageName": "Recipe Pivot / Chip / b3441869-chip-v11",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/chip-chakra-default-v11-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/chip-chakra-default-v11.png",
+  "reference": "extract/computed/out/chakra/tag/orig-shots/__default.png",
+  "pluginPct": 8.09,
+  "manifestPct": 8.09,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

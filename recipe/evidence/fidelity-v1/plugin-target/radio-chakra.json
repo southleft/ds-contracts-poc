@@ -1,0 +1,15 @@
+{
+  "label": "radio/chakra",
+  "archetype": "radio",
+  "slug": "chakra",
+  "page": "230:94935",
+  "pageName": "Recipe Pivot / Radio / feb4dea1-radio-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/radio-chakra-hit-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/radio-chakra-hit-v9.png",
+  "reference": "extract/computed/out/chakra/radio/orig-shots/checked.enabled__default.png",
+  "pluginPct": 0,
+  "manifestPct": 0,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

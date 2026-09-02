@@ -1,0 +1,15 @@
+{
+  "label": "switch/mui-proposed",
+  "archetype": "switch",
+  "slug": "mui",
+  "page": "230:94737",
+  "pageName": "Recipe Pivot / Switch / 81fc98c9-switch-v13",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/switch-mui-proposed-variant-v13-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/switch-mui-proposed-variant-v13.png",
+  "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.unchecked.enabled__default.png",
+  "pluginPct": 4.57,
+  "manifestPct": 4.57,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

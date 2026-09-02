@@ -1,0 +1,15 @@
+{
+  "label": "link/chakra",
+  "archetype": "link",
+  "slug": "chakra",
+  "page": "230:95392",
+  "pageName": "Recipe Pivot / Link / 3c37b1a8-link-v8",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/link-chakra-default-v8-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/link-chakra-default-v8.png",
+  "reference": "extract/computed/out/chakra/link/orig-shots/__default.png",
+  "pluginPct": 10.26,
+  "manifestPct": 10.26,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

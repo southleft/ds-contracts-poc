@@ -1,0 +1,15 @@
+{
+  "label": "dialog/chakra",
+  "archetype": "dialog",
+  "slug": "chakra",
+  "page": "230:95719",
+  "pageName": "Recipe Pivot / Dialog / 22e17299-dialog-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/dialog-chakra-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/dialog-chakra-default-v7.png",
+  "reference": "extract/computed/out/chakra/dialog/orig-shots/__default.png",
+  "pluginPct": 2.57,
+  "manifestPct": 2.57,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

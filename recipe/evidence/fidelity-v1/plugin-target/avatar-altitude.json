@@ -1,0 +1,15 @@
+{
+  "label": "avatar/altitude",
+  "archetype": "avatar",
+  "slug": "altitude",
+  "page": "230:95257",
+  "pageName": "Recipe Pivot / Avatar / 712d7ffe-avatar-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/avatar-altitude-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/avatar-altitude-default-v7.png",
+  "reference": "extract/computed/out/altitude/avatar/orig-shots/unset.off__default.png",
+  "pluginPct": 0.38,
+  "manifestPct": 0.38,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

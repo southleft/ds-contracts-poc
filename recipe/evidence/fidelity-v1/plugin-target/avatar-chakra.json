@@ -1,0 +1,15 @@
+{
+  "label": "avatar/chakra",
+  "archetype": "avatar",
+  "slug": "chakra",
+  "page": "230:95305",
+  "pageName": "Recipe Pivot / Avatar / 72628709-avatar-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/avatar-chakra-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/avatar-chakra-default-v7.png",
+  "reference": "extract/computed/out/chakra/avatar/orig-shots/__default.png",
+  "pluginPct": 0.38,
+  "manifestPct": 0.38,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

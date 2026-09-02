@@ -1,0 +1,15 @@
+{
+  "label": "avatar/fluent",
+  "archetype": "avatar",
+  "slug": "fluent",
+  "page": "230:95289",
+  "pageName": "Recipe Pivot / Avatar / af315e26-avatar-v7",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/avatar-fluent-default-v7-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/avatar-fluent-default-v7.png",
+  "reference": "extract/computed/out/fluent/avatar/orig-shots/circular.none.unset__default.png",
+  "pluginPct": 0,
+  "manifestPct": 0,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

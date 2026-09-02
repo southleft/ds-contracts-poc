@@ -1,0 +1,15 @@
+{
+  "label": "chip/altitude",
+  "archetype": "chip",
+  "slug": "altitude",
+  "page": "230:95145",
+  "pageName": "Recipe Pivot / Chip / c9e6d710-chip-v11",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/chip-altitude-default-v11-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/chip-altitude-default-v11.png",
+  "reference": "extract/computed/out/altitude/chip/orig-shots/unset.unset__default.png",
+  "pluginPct": 0.07,
+  "manifestPct": 0.07,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

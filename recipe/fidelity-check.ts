@@ -36,7 +36,7 @@ const OUT = path.join(REPO, "recipe/evidence/fidelity-v1/SCORECARD.json");
  */
 const KNOWN = path.join(REPO, "recipe/evidence/fidelity-v1/KNOWN-FAILURES.json");
 
-interface Subject {
+export interface Subject {
   label: string;
   page: string;
   /** A component SET on the page, resolved by name, plus the variant name … */
@@ -64,7 +64,7 @@ interface Subject {
   referenceCrop?: string;
 }
 
-function referenceCropBox(referencePath: string, selector: string, label: string): [number, number, number, number] {
+export function referenceCropBox(referencePath: string, selector: string, label: string): [number, number, number, number] {
   const sidecar = referencePath.replace(/\.png$/, ".rects.json");
   if (!existsSync(sidecar)) throw new Error(`${label}: referenceCrop needs ${path.relative(REPO, sidecar)} — re-capture the component with --keep-originals (the portal capture writes it beside the PNG)`);
   const { parts } = JSON.parse(readFileSync(sidecar, "utf8")) as { parts: Array<{ idxPath: string; tag: string; classes: string[]; x: number; y: number; w: number; h: number }> };

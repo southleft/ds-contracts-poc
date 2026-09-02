@@ -1,0 +1,15 @@
+{
+  "label": "tooltip/chakra",
+  "archetype": "tooltip",
+  "slug": "chakra",
+  "page": "230:95486",
+  "pageName": "Recipe Pivot / Tooltip / 5e0f0a44-tooltip-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/tooltip-chakra-default-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/tooltip-chakra-default-v9.png",
+  "reference": "extract/computed/out/chakra/tooltip/orig-shots/__default.png",
+  "pluginPct": 8.83,
+  "manifestPct": 8.83,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

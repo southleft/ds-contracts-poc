@@ -1,0 +1,15 @@
+{
+  "label": "alert/mui-proposed",
+  "archetype": "alert",
+  "slug": "mui",
+  "page": "230:95010",
+  "pageName": "Recipe Pivot / Alert / eb151709-alert-v9",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/alert-mui-proposed-v9-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/alert-mui-proposed-v9.png",
+  "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png",
+  "pluginPct": 3.99,
+  "manifestPct": 3.99,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

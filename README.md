@@ -10,7 +10,7 @@
 > grown out of the [2026-09-01 audit](parity/receipts/v1/HONEST-SCORECARD.md).
 > It is proven for **all thirteen archetypes** and on **libraries it was
 > never taught**, and every number below is from a gate run on `main`.
-> Product **v1 is not complete**: the plugin's paste verb has been exercised by a person exactly once, the plugin's paste verb has been exercised by a person exactly once (the Chakra switch, 2 September), and
+> Product **v1 is not complete**: the plugin's paste verb has been exercised by a person exactly once (the Chakra switch, 2 September) — though every proposed row's paste-verb program now scores identically to its gate row when run the way the plugin runs it (39 of 39) — and
 > the capture step needs a config entry a person writes. The older
 > universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
 > ships and is described further down this page; it is not the v1 proof.

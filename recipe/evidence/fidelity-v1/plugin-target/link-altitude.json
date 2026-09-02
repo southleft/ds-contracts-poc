@@ -1,0 +1,15 @@
+{
+  "label": "link/altitude",
+  "archetype": "link",
+  "slug": "altitude",
+  "page": "230:95363",
+  "pageName": "Recipe Pivot / Link / 46536054-link-v8",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/link-altitude-default-v8-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/link-altitude-default-v8.png",
+  "reference": "extract/computed/out/altitude/link/orig-shots/unset__default.png",
+  "pluginPct": 5.56,
+  "manifestPct": 5.56,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

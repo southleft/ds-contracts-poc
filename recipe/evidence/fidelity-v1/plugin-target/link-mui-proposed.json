@@ -1,0 +1,15 @@
+{
+  "label": "link/mui-proposed",
+  "archetype": "link",
+  "slug": "mui",
+  "page": "230:95378",
+  "pageName": "Recipe Pivot / Link / 51646118-link-v8",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/link-mui-proposed-default-v8-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/link-mui-proposed-default-v8.png",
+  "reference": "extract/computed/out/mui/link/orig-shots/primary.always__default.png",
+  "pluginPct": 20.22,
+  "manifestPct": 20.22,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

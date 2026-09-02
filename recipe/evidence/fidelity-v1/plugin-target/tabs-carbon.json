@@ -1,0 +1,15 @@
+{
+  "label": "tabs/carbon",
+  "archetype": "tabs",
+  "slug": "carbon",
+  "page": "230:95432",
+  "pageName": "Recipe Pivot / Tabs / e77937f5-tabs-v13",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/tabs-carbon-default-v13-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/tabs-carbon-default-v13.png",
+  "reference": "extract/computed/out/carbon/tabs/orig-shots/__default.png",
+  "pluginPct": 9.57,
+  "manifestPct": 9.57,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

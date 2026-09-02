@@ -1,0 +1,15 @@
+{
+  "label": "menu/chakra",
+  "archetype": "menu",
+  "slug": "chakra",
+  "page": "230:95757",
+  "pageName": "Recipe Pivot / Menu / b786ac54-menu-v8",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/menu-chakra-default-v8-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/menu-chakra-default-v8.png",
+  "reference": "extract/computed/out/chakra/menu/orig-shots/__default.png",
+  "pluginPct": 5.64,
+  "manifestPct": 5.64,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

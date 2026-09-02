@@ -1,0 +1,15 @@
+{
+  "label": "textarea/chakra-field",
+  "archetype": "textarea",
+  "slug": "chakra-field",
+  "page": "230:95647",
+  "pageName": "Recipe Pivot / Textarea / 8460784d-textarea-v11",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/textarea-chakra-field-empty-v11-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/textarea-chakra-field-empty-v11.png",
+  "reference": "extract/computed/out/chakra/textareafield/orig-shots/empty.enabled__default.png",
+  "pluginPct": 2.02,
+  "manifestPct": 2.02,
+  "pluginStatus": "pass",
+  "manifestStatus": "pass",
+  "parity": "same"
+}

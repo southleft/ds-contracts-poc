@@ -1,0 +1,15 @@
+{
+  "label": "chip/carbon",
+  "archetype": "chip",
+  "slug": "carbon",
+  "page": "230:95193",
+  "pageName": "Recipe Pivot / Chip / fa41578a-chip-v11",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/chip-carbon-default-v11-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/chip-carbon-default-v11.png",
+  "reference": "extract/computed/out/carbon/tag/orig-shots/unset.unset__default.png",
+  "pluginPct": 8.56,
+  "manifestPct": 8.56,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

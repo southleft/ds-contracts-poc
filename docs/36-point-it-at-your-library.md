@@ -223,6 +223,19 @@ the one was a real drop shadow on AntD's knob that the hand table had
 recorded as none, which the gate had been excusing as anti-aliasing. See
 `recipe/fixture-reader/rederive.ts`.
 
+### The paste verb, proven per row
+
+The sentence ends with a paste, and the fidelity gate scored the developer
+protocol's programs — pinned to a file and its pages — not the program the
+plugin executes. `npm run recipe:fidelity:plugin:proof` now emits every
+proposed row's **plugin-target** program from its current generated module,
+runs it the way the plugin does (no pin, its own page), exports the same
+cell, and scores it against the same real render as the gate row. On
+2026-09-02: **39 rows, 39 identical to the hundredth, 0 drift** — passes and
+named failures alike. `recipe:fidelity:plugin:check` re-scores the committed
+shots offline in the fast lane. See
+`recipe/evidence/fidelity-v1/plugin-target/`.
+
 ## What it does not do yet
 
 - **Overlay archetypes are scored through a crop.** Dialog and menu's real
