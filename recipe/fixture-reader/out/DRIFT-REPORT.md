@@ -262,6 +262,18 @@ ledger `extract/computed/out/antd/badge/captured-truth.json` · 19 facts: **14 m
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### mui-proposed — @mui/material@9.2.0#Badge
+
+ledger `extract/computed/out/mui/badge/captured-truth.json` · 19 facts: **19 match**, **0 drift**, 0 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### antd-proposed — antd@5.29.3#Badge
+
+ledger `extract/computed/out/antd/badge/captured-truth.json` · 19 facts: **19 match**, **0 drift**, 0 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ## Avatar
 
 ### astryx — @astryxdesign/core@0.1.6#Avatar

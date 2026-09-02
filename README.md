@@ -8,9 +8,9 @@
 > **Current state (2026-09-02).** The product is the one command below
 > ([docs/36 — point it at your library](docs/36-point-it-at-your-library.md)),
 > grown out of the [2026-09-01 audit](parity/receipts/v1/HONEST-SCORECARD.md).
-> It is proven for **ten of thirteen archetypes** and on **libraries it was
+> It is proven for **eleven of thirteen archetypes** and on **libraries it was
 > never taught**, and every number below is from a gate run on `main`.
-> Product **v1 is not complete**: three archetypes still rest on hand-written
+> Product **v1 is not complete**: two archetypes still rest on hand-written
 > tables, the plugin's paste verb has not yet been exercised by a person, and
 > the capture step needs a config entry a person writes. The older
 > universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
@@ -61,6 +61,7 @@ What it has done, measured against the real package's own render
 | radio | Chakra **0.00%** (captured the same day through ItemIndicator) | AntD **0.00%** = its hand row | MUI's bare Radio has no label; radio@1 has no bare cell, refused by name |
 | textarea | Chakra 1.64% (the bare cell) and Chakra Field 2.02% (labelled; captured with the value on the child) | AntD 1.25% (bare; the hand row is a named content mismatch), MUI = its hand row (named) | the notch knockout colour and a placeholder hidden at rest and focus are reviewed, with citations |
 | alert | Chakra 3.03% (captured the same day; its own status icons read from the capture) | MUI 3.99%, AntD 3.35% = their hand rows | the icons' viewBox is reviewed with a citation — no computed channel carries it |
+| badge | — (no foreign anchored badge in the corpus; the others are inline labels, refused by name) | MUI 3.11% (its default cell), AntD 1.98% = its hand row | the offset read as transform minus the anchor inset; a box-shadow ring lowered to a border |
 
 Every proposal reads its values from the capture (13–43 leaves each), records
 its ledger key on the line, and names what it refused — an interaction the

@@ -29,6 +29,7 @@ import type { TabsRoles } from "./schema-tabs.js";
 import type { RadioComboMap, RadioRoles } from "./schema-radio.js";
 import type { TextareaComboMap, TextareaRoles } from "./schema-textarea.js";
 import { ALERT_STATUSES, type AlertComboMap, type AlertRoles } from "./schema-alert.js";
+import type { BadgeRoles } from "./schema-badge.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -844,4 +845,38 @@ export function draftAlertRoles(ledger: Ledger): AlertRoleDraft {
     }
   }
   return { roles, combos, evidence, unresolved };
+}
+
+
+/**
+ * Draft the badge@1 role map by what the parts DO: the pip is the absolutely
+ * positioned part with a transform translation that carries text (itself or
+ * a descendant); the host is the largest square sibling-or-ancestor part that
+ * paints; the label is the innermost descendant of the pip that carries the
+ * count when the pip itself does not. The cell is the declared base, else the
+ * one whose tokens say default/standard/unset.
+ */
+export function draftBadgeRoles(ledger: Ledger): SimpleRoleDraft<BadgeRoles> {
+  const evidence: SimpleRoleDraft<BadgeRoles>["evidence"] = {};
+  const unresolved: string[] = [];
+  const roles: Partial<BadgeRoles> = {};
+  const combo = pickCombo(ledger, /(^|\.)(default|standard|unset|count)(\.|$)/);
+  if (combo === null) { unresolved.push("combo: no captured cell"); return { roles, combo: null, evidence, unresolved }; }
+  const cap = ledger.capture(`${combo}__default`);
+  const byPath = new Map(cap.parts.map((p) => [p.idxPath, p] as const));
+  const carriesText = (p: LedgerPart): boolean => hasTextPart(p) || cap.parts.some((c) => c.idxPath.startsWith(p.idxPath + ".") && hasTextPart(c));
+  const pip = cap.parts.find((p) => p.style.position === "absolute" && /^matrix/.test(p.style.transform ?? "") && carriesText(p) && p.tag !== "input");
+  if (pip) {
+    roles.indicator = sel(pip);
+    evidence.indicator = { selector: roles.indicator, why: `absolute ${pip.tag}${pip.classes.length ? "." + pip.classes[0] : ""} ${pip.style.width}×${pip.style.height} transform ${pip.style.transform}, top ${pip.style.top} right ${pip.style.right}, carrying the count`, confidence: "high" };
+    if (!hasTextPart(pip)) {
+      const inner = cap.parts.filter((p) => p.idxPath.startsWith(pip.idxPath + ".") && hasTextPart(p)).sort((a, b) => b.idxPath.length - a.idxPath.length)[0];
+      if (inner) { roles.label = sel(inner); evidence.label = { selector: roles.label, why: `${inner.tag} inside the pip carries the count ${JSON.stringify(inner.text.find((t) => t.trim()))}`, confidence: "high" }; }
+    }
+  } else unresolved.push("indicator: no absolutely positioned, translated part carries the count");
+  const host = cap.parts.filter((p) => p !== pip && !(pip && p.idxPath.startsWith(pip.idxPath + ".")) && isSquare(p) && (!isTransparent(p.style["background-color"]) || num(p.style["border-top-width"]) > 0) && p.tag !== "input").sort((a, b) => num(b.style.width) - num(a.style.width))[0];
+  if (host) { roles.host = sel(host); evidence.host = { selector: roles.host, why: `square ${host.style.width} ${host.tag}${host.classes.length ? "." + host.classes[0] : ""} bg ${host.style["background-color"]} — the anchored host`, confidence: "high" }; }
+  else unresolved.push("host: no painted square part besides the pip");
+  void byPath;
+  return { roles, combo, evidence, unresolved };
 }

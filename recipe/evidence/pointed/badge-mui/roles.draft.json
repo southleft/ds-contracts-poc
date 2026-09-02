@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "indicator": "idx:1",
+    "host": "idx:0"
+  },
+  "combo": "default.standard",
+  "evidence": {
+    "indicator": {
+      "selector": "idx:1",
+      "why": "absolute span.MuiBadge-badge 20px×20px transform matrix(1, 0, 0, 1, 10, -10), top 5.59375px right 5.59375px, carrying the count",
+      "confidence": "high"
+    },
+    "host": {
+      "selector": "idx:0",
+      "why": "square 40px div.MuiAvatar-root bg rgba(189, 189, 189, 1) — the anchored host",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

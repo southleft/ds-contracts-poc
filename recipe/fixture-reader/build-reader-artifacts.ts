@@ -33,6 +33,8 @@ import { CHAKRAFIELD_TEXTAREA_LEDGER as CHAKRA_FIELD_TEXTAREA_LEDGER, chakraFiel
 import { MUI_ALERT_LEDGER as MUI_ALERT_LEDGER_PROPOSED, muiAlertAdapterConfig as muiAlertProposedConfig, muiAlertMappings as muiAlertProposedMappings } from "../fixtures/generated/alert.mui.js";
 import { CHAKRA_ALERT_LEDGER, chakraAlertAdapterConfig, chakraAlertMappings } from "../fixtures/generated/alert.chakra.js";
 import { ANTD_ALERT_LEDGER as ANTD_ALERT_LEDGER_PROPOSED, antdAlertAdapterConfig as antdAlertProposedConfig, antdAlertMappings as antdAlertProposedMappings } from "../fixtures/generated/alert.antd.js";
+import { MUI_BADGE_LEDGER as MUI_BADGE_LEDGER_PROPOSED, muiBadgeAdapterConfig as muiBadgeProposedConfig, muiBadgeMappings as muiBadgeProposedMappings } from "../fixtures/generated/badge.mui.js";
+import { ANTD_BADGE_LEDGER as ANTD_BADGE_LEDGER_PROPOSED, antdBadgeAdapterConfig as antdBadgeProposedConfig, antdBadgeMappings as antdBadgeProposedMappings } from "../fixtures/generated/badge.antd.js";
 import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
 import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
 import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
@@ -733,6 +735,26 @@ const SUBJECTS: Subject[] = [
     tokens: antdBadgeAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: antdBadgeMappings,
     extras: extrasFor(antdBadgeAdapterConfig.tokens as unknown as Record<string, unknown>, antdBadgeMappings),
+  },
+  {
+    // PROPOSED from MUI's own capture by the badge@1 role schema (2026-09-02): the library's DEFAULT cell (a transparent pip — the hand row chose color=error); the offset read as transform minus the 14% inset.
+    archetype: "badge",
+    library: "mui-proposed",
+    source: src(muiBadgeProposedConfig),
+    ledgerFile: MUI_BADGE_LEDGER_PROPOSED,
+    tokens: muiBadgeProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiBadgeProposedMappings,
+    extras: extrasFor(muiBadgeProposedConfig.tokens as unknown as Record<string, unknown>, muiBadgeProposedMappings),
+  },
+  {
+    // PROPOSED from AntD's own capture: the white ring read from the zero-offset outset box-shadow (border 1, stroke outside); the host's real radius 6 (the hand row spelled a circle).
+    archetype: "badge",
+    library: "antd-proposed",
+    source: src(antdBadgeProposedConfig),
+    ledgerFile: ANTD_BADGE_LEDGER_PROPOSED,
+    tokens: antdBadgeProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: antdBadgeProposedMappings,
+    extras: extrasFor(antdBadgeProposedConfig.tokens as unknown as Record<string, unknown>, antdBadgeProposedMappings),
   },
   {
     archetype: "avatar",

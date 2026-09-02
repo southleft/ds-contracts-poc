@@ -367,22 +367,43 @@
     },
     {
       "label": "badge/mui",
-      "page": "218:90239",
+      "page": "219:93811",
       "component": "badge/variant/default :: MUI Badge",
       "_referenceWhy": "the fixture proof cell is the documented Color demo color=error; color=default paints no fill (recipe/fixtures/library-badges.ts refusal-color-default)",
-      "shot": "recipe/evidence/fidelity-v1/shots/badge-mui-default-shared-v10.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/badge-mui-default-shared-v11.png",
       "reference": "extract/computed/out/mui/badge/orig-shots/error.standard__default.png",
       "exportParent": true,
       "_exportParentWhy": "the indicator overhangs the host on two sides and a node-box export clips it (measured 40x40 / 32x32 against 44x44 / 42x42 renders, even with useAbsoluteBounds); the wrap frame holds the overhang and the ink trim drops its margin"
     },
     {
       "label": "badge/antd",
-      "page": "218:90239",
+      "page": "219:93811",
       "component": "badge/variant/default :: Ant Design Badge",
-      "shot": "recipe/evidence/fidelity-v1/shots/badge-antd-default-shared-v10.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/badge-antd-default-shared-v11.png",
       "reference": "extract/computed/out/antd/badge/orig-shots/count.unset__default.png",
       "exportParent": true,
       "_exportParentWhy": "the indicator overhangs the host on two sides and a node-box export clips it (measured 40x40 / 32x32 against 44x44 / 42x42 renders, even with useAbsoluteBounds); the wrap frame holds the overhang and the ink trim drops its margin"
+    },
+    {
+      "label": "badge/mui-proposed",
+      "page": "219:93811",
+      "component": "badge/variant/default :: MUI (proposed) Badge",
+      "_referenceWhy": "the fixture proof cell is the documented Color demo color=error; color=default paints no fill (recipe/fixtures/library-badges.ts refusal-color-default)",
+      "shot": "recipe/evidence/fidelity-v1/shots/badge-mui-proposed-default-v11.png",
+      "reference": "extract/computed/out/mui/badge/orig-shots/default.standard__default.png",
+      "exportParent": true,
+      "_exportParentWhy": "the indicator overhangs the host on two sides and a node-box export clips it (measured 40x40 / 32x32 against 44x44 / 42x42 renders, even with useAbsoluteBounds); the wrap frame holds the overhang and the ink trim drops its margin",
+      "_proposedWhy": "PROPOSED from MUI's own capture by the badge@1 role schema (19 read, 0 invented) at the library's DEFAULT cell \u2014 a transparent pip with a black count (the hand row reviews color=error for a visible pip; the proposal takes what the default renders). The offset is read as transform minus the 14% circular-overlap inset (4.406), the number the hand table had reviewed."
+    },
+    {
+      "label": "badge/antd-proposed",
+      "page": "219:93811",
+      "component": "badge/variant/default :: Ant Design (proposed) Badge",
+      "shot": "recipe/evidence/fidelity-v1/shots/badge-antd-proposed-default-v11.png",
+      "reference": "extract/computed/out/antd/badge/orig-shots/count.unset__default.png",
+      "exportParent": true,
+      "_exportParentWhy": "the indicator overhangs the host on two sides and a node-box export clips it (measured 40x40 / 32x32 against 44x44 / 42x42 renders, even with useAbsoluteBounds); the wrap frame holds the overhang and the ink trim drops its margin",
+      "_proposedWhy": "PROPOSED from AntD's own capture (19 read, 0 invented): the white ring is read from the zero-offset outset box-shadow as a 1px border with the stroke outside; the host's real radius (6) is read where the hand row spelled a circle."
     },
     {
       "label": "link/mui",

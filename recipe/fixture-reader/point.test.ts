@@ -356,3 +356,28 @@ test("alert@1 reads the four status glyphs from the capture's path data and take
   assert.deepEqual(a.refused, []);
   assert.deepEqual({ x: a.proposal.viewBox.x, y: a.proposal.viewBox.y, w: a.proposal.viewBox.width }, { x: 64, y: 64, w: 896 });
 });
+
+import { draftBadgeRoles } from "./draft-roles.js";
+import { proposeBadgeFixture } from "./propose-badge.js";
+import type { BadgeRoles } from "./schema-badge.js";
+
+test("badge@1 reads the pip's offset as transform minus the anchor inset (MUI 4.406) and AntD's white ring from its outset box-shadow, with the count from a nested part", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const mui = draftBadgeRoles(new Ledger(REPO, "extract/computed/out/mui/badge/captured-truth.json"));
+  assert.deepEqual(mui.unresolved, []);
+  const m = proposeBadgeFixture({ library: "mui", ledger: "extract/computed/out/mui/badge/captured-truth.json", roles: mui.roles as BadgeRoles, combo: "error.standard", out: path.relative(REPO, path.join(dir, "badge.mui.ts")), unsupported: ["hover"] });
+  assert.deepEqual(m.refused, []);
+  for (const [k, v] of [["host.size", 40], ["host.radius", 20], ["indicator.translateX", 4.406], ["indicator.translateY", -4.406], ["indicator.borderWidth", 0], ["indicator.border", "#00000000"], ["indicator.fill", "#d32f2fff"], ["strokeAlign", "inside"], ["labelLineHeight", 12]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
+  assert.equal(m.proposal.content.count, "4");
+
+  const antd = draftBadgeRoles(new Ledger(REPO, "extract/computed/out/antd/badge/captured-truth.json"));
+  assert.deepEqual(antd.unresolved, []);
+  assert.equal(antd.combo, "count.unset");
+  assert.equal(antd.roles.label, "idx:1.0.0.0", "the count sits three levels inside the pip");
+  const a = proposeBadgeFixture({ library: "antd", ledger: "extract/computed/out/antd/badge/captured-truth.json", roles: antd.roles as BadgeRoles, combo: antd.combo!, out: path.relative(REPO, path.join(dir, "badge.antd.ts")), unsupported: ["hover"] });
+  assert.deepEqual(a.refused, []);
+  for (const [k, v] of [["host.radius", 6], ["indicator.borderWidth", 1], ["indicator.border", "#ffffffff"], ["strokeAlign", "outside"], ["indicator.translateX", 10], ["indicator.translateY", -10], ["indicator.fill", "#ff4d4fff"]] as const) assert.equal(a.proposal.leaves[k]?.value, v, k);
+  assert.equal(a.proposal.content.count, "5");
+  assert.match(readFileSync(path.join(REPO, path.relative(REPO, a.modulePath)), "utf8"), /refusal-ring-shadow/);
+  assert.equal(Object.values(a.proposal.leaves).filter((l) => l.from !== "ledger").length, 0, "every leaf read");
+});

@@ -495,3 +495,18 @@ the resize grip and a 2px offset). textarea v11, seven sources.
     textarea/astryx 3.20% (closed) · textarea/chakra-field 2.02% · textarea/mui 8.28% (named)
 
     42 pass · 0 fringe · 15 known
+
+### 2026-09-02 — badge@1 gets a proposer (no held-out exists for it)
+
+The eleventh archetype with a proposer. The pip's offset is read as its
+transform minus the anchor inset (MUI's 14% circular overlap → 4.406, the
+number the hand table had reviewed), AntD's white ring from its outset
+box-shadow as a border with the stroke outside, and the host's radius as it
+renders. MUI's proposal takes the library's default cell (a transparent
+pip) and scores 3.11%; AntD's scores its hand row's 1.98%. No foreign
+anchored badge exists in the corpus to hold out. badge v11, four sources.
+See `f1-badge-proposed/`.
+
+    badge/mui-proposed 3.11% · badge/antd-proposed 1.98%
+
+    44 pass · 0 fringe · 15 known

@@ -1,0 +1,6 @@
+{
+  "indicator": "idx:1",
+  "label": "idx:1.0.0.0",
+  "host": "idx:0",
+  "combo": "count.unset"
+}

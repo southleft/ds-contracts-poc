@@ -1,0 +1,26 @@
+{
+  "roles": {
+    "indicator": "idx:1",
+    "label": "idx:1.0.0.0",
+    "host": "idx:0"
+  },
+  "combo": "count.unset",
+  "evidence": {
+    "indicator": {
+      "selector": "idx:1",
+      "why": "absolute sup.ant-scroll-number 20px×20px transform matrix(1, 0, 0, 1, 10, -10), top 0px right 0px, carrying the count",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:1.0.0.0",
+      "why": "span inside the pip carries the count \"5\"",
+      "confidence": "high"
+    },
+    "host": {
+      "selector": "idx:0",
+      "why": "square 32px span.ant-avatar bg rgba(0, 0, 0, 0.25) — the anchored host",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

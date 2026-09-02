@@ -7,7 +7,7 @@ import type {
 import { canonicalBadgeRecipeInstance } from "./badge.js";
 import type { BadgeRecipeInstance } from "../recipes/badge.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): BadgeRecipeInstance["tokens"] => {
@@ -242,7 +242,7 @@ const tokenFacts = (
   return facts;
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -315,7 +315,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedBadgeSource,
   tokens: BadgeRecipeInstance["tokens"],
@@ -323,6 +323,8 @@ const buildConfig = (
   refusals: ReviewedBadgeSourceFact[],
   extraIr: ReviewedBadgeSourceFact[],
   unsupported: string[],
+  // A proposed fixture passes the captured count; the hand tables keep their seeds.
+  content: BadgeRecipeInstance["content"] = { count: slug === "mui" ? "4" : "5" },
 ): ReviewedBadgeAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -353,7 +355,7 @@ const buildConfig = (
     },
     identity,
     // mui: the capture mounts badgeContent 4 (configs/mui.json Badge fixedProps).
-    content: { count: slug === "mui" ? "4" : "5" },
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -376,7 +378,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedBadgeSource,
 ): ReviewedBadgeSourceFact[] => [

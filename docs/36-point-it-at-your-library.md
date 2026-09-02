@@ -3,9 +3,9 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **ten archetypes**
+> plugin can run in any file. It works today for **eleven archetypes**
 > (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1, radio@1,
-> textarea@1, alert@1) and has been proven on **libraries
+> textarea@1, alert@1, badge@1) and has been proven on **libraries
 > the recipe path was never taught** — Chakra UI, shadcn, Altitude, Fluent and
 > Carbon — including six Chakra controls captured for the first time the same
 > day (a person wrote the config entry, the command did the rest; the Switch's
@@ -37,7 +37,7 @@ npm run recipe:point -- --archetype checkbox --library chakra \
 
 | flag | what |
 |---|---|
-| `--archetype` | one of checkbox, switch, avatar, tooltip, chip, link, tabs, radio, textarea, alert |
+| `--archetype` | one of checkbox, switch, avatar, tooltip, chip, link, tabs, radio, textarea, alert, badge |
 | `--library <slug>` | the capture directory: `extract/computed/out/<slug>/…` |
 | `--capture <dir>` | the captured component's directory when the library names the archetype differently (AntD's and Carbon's `tag` as chip@1; Chakra's `textareafield` as textarea@1) |
 | `--slug <name>` | the fixture's own name when one library contributes two captures of an archetype (`chakra-field`); the ledger stays under `--library` |
@@ -108,6 +108,12 @@ which the legacy contract path quarantines on `text-underline-offset` — is
 scored against the real render anyway (the quarantine path now keeps the
 `--keep-originals` screenshots: the pixels are a measurement, not the
 contract's to refuse) and is a named one-row rasterisation difference.
+
+On badge@1, the pip's offset is read as its transform minus the anchor
+inset (MUI's circular overlap, 4.406 — the number the hand table had
+reviewed) and AntD's white ring from its outset box-shadow as a border with
+the stroke outside; MUI's default cell scores 3.11%, AntD its hand row's
+1.98% (`recipe/evidence/fidelity-v1/f1-badge-proposed/`).
 
 On alert@1, the four status glyphs are the capture's own path data and the
 package's viewBox is the one reviewed leaf; MUI's and AntD's proposals score
@@ -205,10 +211,13 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** Ten of the thirteen boilerplate archetypes have
-  proposers today (checkbox, switch, avatar, tooltip, chip, link, tabs,
-  radio, textarea, alert); the other three — badge, dialog, menu — still
-  have hand tables only.
+- **Other archetypes.** Eleven of the thirteen boilerplate archetypes have
+  proposers today; dialog and menu still have hand tables only, and no
+  scorable reference (their only real screenshots are full-viewport
+  overlays with a backdrop).
+- **A held-out for badge@1.** Every foreign badge in the corpus is an
+  inline label, which badge@1 refuses by name; the proposer is proven
+  against the two hand tables, not against a library it was never taught.
 - **An svg's viewBox.** The capture records computed style, and a viewBox
   is an attribute; the asset file the capture writes carries the rendered
   size there. alert@1 reads the glyph paths from the capture and takes the
@@ -276,6 +285,7 @@ files), what stays as archive, and the three decisions that are the owner's.
 | `recipe/fixture-reader/schema-radio.ts`, `propose-radio.ts` | radio@1: hit, ring, dot (part or pseudo-element, transform × `scale`), label, row; list leaves are spellings |
 | `recipe/fixture-reader/schema-textarea.ts`, `propose-textarea.ts` | textarea@1: box, outline, inner, label (or the bare cell), legend; the label plane from the label's transform |
 | `recipe/fixture-reader/schema-alert.ts`, `propose-alert.ts` | alert@1: box, icon svg + its one path (glyph d, fill-rule, fill), title; the viewBox reviewed |
+| `recipe/fixture-reader/schema-badge.ts`, `propose-badge.ts` | badge@1: host, pip (offset = transform − inset; a shadow ring as a border), count |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

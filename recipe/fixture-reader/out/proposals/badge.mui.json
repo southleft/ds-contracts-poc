@@ -1,0 +1,131 @@
+{
+  "archetype": "badge",
+  "library": "mui",
+  "ledger": "extract/computed/out/mui/badge/captured-truth.json",
+  "provenance": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "indicator": "idx:1",
+    "host": "idx:0"
+  },
+  "combo": "error.standard",
+  "leaves": {
+    "host.size": {
+      "value": 40,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:0.height"
+    },
+    "host.radius": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:0.border-top-left-radius | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:0.height",
+      "formula": "border-top-left-radius; a percentage is of the host's size (50% of 40 = 20)"
+    },
+    "host.fill": {
+      "value": "#bdbdbdff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:0.background-color"
+    },
+    "indicator.height": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.height"
+    },
+    "indicator.minWidth": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.min-width"
+    },
+    "indicator.paddingX": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.padding-left"
+    },
+    "indicator.radius": {
+      "value": 10,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.border-top-left-radius | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.height",
+      "formula": "border-top-left-radius; a percentage is of the pip's height; clamped to half the height as CSS clamps it"
+    },
+    "indicator.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.border-top-width | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.box-shadow",
+      "formula": "the pip's border-top-width, or the spread of a zero-offset zero-blur outset box-shadow ring when there is no border (AntD's white ring)"
+    },
+    "indicator.translateX": {
+      "value": 4.406,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.transform | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.right",
+      "formula": "the pip's transform tx minus its `right` inset — the offset from the docked top-right corner (MUI's circular overlap anchors 14% inside the host; an inset of 0 leaves the transform alone)"
+    },
+    "indicator.translateY": {
+      "value": -4.406,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.transform | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.top",
+      "formula": "the pip's transform ty plus its `top` inset — the offset from the docked top-right corner"
+    },
+    "indicator.fill": {
+      "value": "#d32f2fff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.background-color"
+    },
+    "indicator.border": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.border-top-width | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.border-top-color | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.box-shadow",
+      "formula": "the border colour when the pip has a border; the ring colour when it draws a zero-offset outset shadow ring; transparent when neither (the recipe's spelling of no ring)"
+    },
+    "indicator.opacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.opacity"
+    },
+    "labelFontSize": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.font-size"
+    },
+    "labelLineHeight": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.line-height"
+    },
+    "label": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.border-top-width | extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.box-shadow",
+      "formula": "outside when the ring is a box-shadow (it paints outside the pip's box); inside otherwise — recipe anatomy"
+    },
+    "typography.label.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.font-family",
+      "formula": "first family of the count's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default idx:1.font-weight",
+      "formula": "count font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "count": "4"
+  },
+  "typography": {
+    "family": "Roboto",
+    "style": "Medium",
+    "stack": "Roboto, Helvetica, Arial, sans-serif"
+  }
+}

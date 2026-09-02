@@ -1,0 +1,59 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "badge-live-pivot-v11-prepare",
+  "teaching": "MUI Badge proof is color=error from the docs Color demo; do not paint a fake pill on color=default",
+  "runIdentity": "17da6833-76d59843-1fb57821-5ecb1cc3-badge-v11",
+  "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-1fb57821-5ecb1cc3-badge-v11",
+  "namespace": "ds.contracts.badge.recipe.v1",
+  "recipeHashes": {
+    "MUI": "17da68334ab3f716e4eeceb61565f94ab998b3f30d1c9b4cd56f7ba71d62ce3f",
+    "Ant Design": "76d59843686f044cb0a0322d6301b269d893d7dd061a997ef82f5ff1aacab40c",
+    "MUI (proposed)": "1fb5782112a7d87700325a590824ba56c91d12a02f01f23970a662aa2688b7a7",
+    "Ant Design (proposed)": "5ecb1cc3ba7e0eb675e47a7487844e1e31780eae2136544d51974e5c59cca04b"
+  },
+  "writerSha256": "2ca7cc90e6b3d275eb65333079604f47ac79c79ea821c9e1434cbfce7eed80a2",
+  "pageId": "219:93811",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-93811",
+  "live": {
+    "recordedFrom": "badge-v11-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-1fb57821-5ecb1cc3-badge-v11",
+    "sources": [
+      {
+        "adapterIdentity": "mui-badge-reviewed-v1",
+        "sectionId": "219:93812",
+        "setId": "219:93827",
+        "collectionId": "VariableCollectionId:219:93813",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      },
+      {
+        "adapterIdentity": "antd-badge-reviewed-v1",
+        "sectionId": "219:93832",
+        "setId": "219:93847",
+        "collectionId": "VariableCollectionId:219:93833",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      },
+      {
+        "adapterIdentity": "mui-badge-proposed-v1",
+        "sectionId": "219:93852",
+        "setId": "219:93867",
+        "collectionId": "VariableCollectionId:219:93853",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      },
+      {
+        "adapterIdentity": "antd-badge-proposed-v1",
+        "sectionId": "219:93872",
+        "setId": "219:93887",
+        "collectionId": "VariableCollectionId:219:93873",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      }
+    ]
+  }
+}

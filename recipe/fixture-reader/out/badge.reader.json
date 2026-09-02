@@ -580,5 +580,455 @@
       "receipt": 5,
       "unread": 0
     }
+  },
+  {
+    "archetype": "badge",
+    "library": "mui-proposed",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Badge"
+    },
+    "ledgerFile": "extract/computed/out/mui/badge/captured-truth.json",
+    "rows": [
+      {
+        "path": "host.size",
+        "fixtureValue": 40,
+        "verdict": "match",
+        "capturedValue": 40,
+        "proposedValue": 40,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:0.height"
+        ]
+      },
+      {
+        "path": "host.radius",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:0.border-top-left-radius",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:0.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the host's size (50% of 40 = 20)"
+      },
+      {
+        "path": "host.fill",
+        "fixtureValue": "#bdbdbdff",
+        "verdict": "match",
+        "capturedValue": "#bdbdbdff",
+        "proposedValue": "#bdbdbdff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "indicator.height",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.height"
+        ]
+      },
+      {
+        "path": "indicator.minWidth",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.min-width"
+        ]
+      },
+      {
+        "path": "indicator.paddingX",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.padding-left"
+        ]
+      },
+      {
+        "path": "indicator.radius",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.border-top-left-radius",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the pip's height; clamped to half the height as CSS clamps it"
+      },
+      {
+        "path": "indicator.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.border-top-width",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.box-shadow"
+        ],
+        "formula": "the pip's border-top-width, or the spread of a zero-offset zero-blur outset box-shadow ring when there is no border (AntD's white ring)"
+      },
+      {
+        "path": "indicator.translateX",
+        "fixtureValue": 4.406,
+        "verdict": "match",
+        "capturedValue": 4.406,
+        "proposedValue": 4.406,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.transform",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.right"
+        ],
+        "formula": "the pip's transform tx minus its `right` inset — the offset from the docked top-right corner (MUI's circular overlap anchors 14% inside the host; an inset of 0 leaves the transform alone)"
+      },
+      {
+        "path": "indicator.translateY",
+        "fixtureValue": -4.406,
+        "verdict": "match",
+        "capturedValue": -4.406,
+        "proposedValue": -4.406,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.transform",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.top"
+        ],
+        "formula": "the pip's transform ty plus its `top` inset — the offset from the docked top-right corner"
+      },
+      {
+        "path": "indicator.fill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.background-color"
+        ]
+      },
+      {
+        "path": "indicator.border",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.border-top-width",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.border-top-color",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.box-shadow"
+        ],
+        "formula": "the border colour when the pip has a border; the ring colour when it draws a zero-offset outset shadow ring; transparent when neither (the recipe's spelling of no ring)"
+      },
+      {
+        "path": "indicator.opacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.opacity"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.line-height"
+        ]
+      },
+      {
+        "path": "label",
+        "fixtureValue": "#000000ff",
+        "verdict": "match",
+        "capturedValue": "#000000ff",
+        "proposedValue": "#000000ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "match",
+        "capturedValue": "inside",
+        "proposedValue": "inside",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.border-top-width",
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.box-shadow"
+        ],
+        "formula": "outside when the ring is a box-shadow (it paints outside the pip's box); inside otherwise — recipe anatomy"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.font-family"
+        ],
+        "formula": "first family of the count's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.font-weight"
+        ],
+        "formula": "count font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 19,
+      "drift": 0,
+      "receipt": 0,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "badge",
+    "library": "antd-proposed",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Badge"
+    },
+    "ledgerFile": "extract/computed/out/antd/badge/captured-truth.json",
+    "rows": [
+      {
+        "path": "host.size",
+        "fixtureValue": 32,
+        "verdict": "match",
+        "capturedValue": 32,
+        "proposedValue": 32,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:0.height"
+        ]
+      },
+      {
+        "path": "host.radius",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:0.border-top-left-radius",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:0.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the host's size (50% of 40 = 20)"
+      },
+      {
+        "path": "host.fill",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "indicator.height",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.height"
+        ]
+      },
+      {
+        "path": "indicator.minWidth",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.min-width"
+        ]
+      },
+      {
+        "path": "indicator.paddingX",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.padding-left"
+        ]
+      },
+      {
+        "path": "indicator.radius",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.border-top-left-radius",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the pip's height; clamped to half the height as CSS clamps it"
+      },
+      {
+        "path": "indicator.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.border-top-width",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.box-shadow"
+        ],
+        "formula": "the pip's border-top-width, or the spread of a zero-offset zero-blur outset box-shadow ring when there is no border (AntD's white ring)"
+      },
+      {
+        "path": "indicator.translateX",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.transform",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.right"
+        ],
+        "formula": "the pip's transform tx minus its `right` inset — the offset from the docked top-right corner (MUI's circular overlap anchors 14% inside the host; an inset of 0 leaves the transform alone)"
+      },
+      {
+        "path": "indicator.translateY",
+        "fixtureValue": -10,
+        "verdict": "match",
+        "capturedValue": -10,
+        "proposedValue": -10,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.transform",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.top"
+        ],
+        "formula": "the pip's transform ty plus its `top` inset — the offset from the docked top-right corner"
+      },
+      {
+        "path": "indicator.fill",
+        "fixtureValue": "#ff4d4fff",
+        "verdict": "match",
+        "capturedValue": "#ff4d4fff",
+        "proposedValue": "#ff4d4fff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.background-color"
+        ]
+      },
+      {
+        "path": "indicator.border",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.border-top-width",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.border-top-color",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.box-shadow"
+        ],
+        "formula": "the border colour when the pip has a border; the ring colour when it draws a zero-offset outset shadow ring; transparent when neither (the recipe's spelling of no ring)"
+      },
+      {
+        "path": "indicator.opacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.opacity"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.0.0.0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.0.0.0.line-height"
+        ]
+      },
+      {
+        "path": "label",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.0.0.0.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "outside",
+        "verdict": "match",
+        "capturedValue": "outside",
+        "proposedValue": "outside",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.border-top-width",
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.box-shadow"
+        ],
+        "formula": "outside when the ring is a box-shadow (it paints outside the pip's box); inside otherwise — recipe anatomy"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.0.0.0.font-family"
+        ],
+        "formula": "first family of the count's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default idx:1.0.0.0.font-weight"
+        ],
+        "formula": "count font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 19,
+      "drift": 0,
+      "receipt": 0,
+      "unread": 0
+    }
   }
 ]
