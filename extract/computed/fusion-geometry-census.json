@@ -1,7 +1,7 @@
 {
   "_marker": "THE FUSION-SURFACE FRESHNESS RECORD. Re-derived offline from every committed captured-truth.json by extract/computed/fusion-geometry-census.ts. A row that moves means that component has been re-fused by a changed door and its committed enriched.*/LEDGER.md/contract are stale — see the header of that file for the per-library remedy.",
   "generatedBy": "extract/computed/fusion-geometry-census.ts --write",
-  "components": 104,
+  "components": 122,
   "__extensionFresh": "Per row: whether that component's COMMITTED enriched.extension.json geometry receipts still match the engine. A `false` here is a component whose shipped drop ledger is stale — mostly captures that predate a door nobody re-ran, measured as 83 of 104 on the previous engine as well. It is pinned so that a CHANGE in either direction is red and has to be re-recorded deliberately.",
   "extensionsStale": 80,
   "rows": {
@@ -357,6 +357,20 @@
       "receiptCount": 4,
       "extensionFresh": false
     },
+    "antd/Textarea": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "7941bef8eb2bd295",
+      "receiptCount": 3,
+      "extensionFresh": true
+    },
     "antd/Tooltip": {
       "carried": {
         "root": [
@@ -383,6 +397,276 @@
       "receipts": "bed2e23a25140ca6",
       "receiptCount": 9,
       "extensionFresh": true
+    },
+    "astryx-core/Badge": {
+      "carried": {},
+      "receipts": "2464b8bb838a806f",
+      "receiptCount": 1,
+      "extensionFresh": true
+    },
+    "astryx-core/Banner": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "297f7c2389b7aae5",
+      "receiptCount": 10,
+      "extensionFresh": true
+    },
+    "astryx-core/Button": {
+      "carried": {
+        "part-0": [
+          "height",
+          "width"
+        ],
+        "part-1": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "3a6a3acbb6803b97",
+      "receiptCount": 8,
+      "extensionFresh": true
+    },
+    "astryx-core/Card": {
+      "carried": {},
+      "receipts": "a21ad19f3141331f",
+      "receiptCount": 1,
+      "extensionFresh": true
+    },
+    "astryx-core/CheckboxInput": {
+      "carried": {
+        "checkbox": [
+          "height",
+          "width"
+        ],
+        "icon": [
+          "height",
+          "width"
+        ],
+        "part-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-1-1": [
+          "height",
+          "width"
+        ],
+        "part-0-1": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "3113f832e755746d",
+      "receiptCount": 20,
+      "extensionFresh": false
+    },
+    "astryx-core/ProgressBar": {
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "be2219b958448cb6",
+      "receiptCount": 7,
+      "extensionFresh": true
+    },
+    "astryx-core/Slider": {
+      "carried": {
+        "part-1-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-1": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-2": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "height",
+          "width"
+        ],
+        "slider": [
+          "height",
+          "width"
+        ],
+        "slider-thumb": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "slider-thumb-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "slider-track": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "tooltip": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "db49f2c672618dad",
+      "receiptCount": 25,
+      "extensionFresh": true
+    },
+    "astryx-core/Switch": {
+      "carried": {
+        "part-0": [
+          "width"
+        ],
+        "part-0-0": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-1": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-1-0": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "width"
+        ],
+        "switch": [
+          "width"
+        ],
+        "switch-2": [
+          "width"
+        ],
+        "switch-thumb": [
+          "height",
+          "width"
+        ],
+        "switch-thumb-2": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "43f297980972722a",
+      "receiptCount": 24,
+      "extensionFresh": false
+    },
+    "astryx-core/TextArea": {
+      "carried": {
+        "root": [
+          "width"
+        ],
+        "textarea": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "b57d206cfe37919c",
+      "receiptCount": 7,
+      "extensionFresh": true
+    },
+    "astryx-core/TextInput": {
+      "carried": {
+        "root": [
+          "width"
+        ],
+        "text-input": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "c4ef63265f6efbbd",
+      "receiptCount": 7,
+      "extensionFresh": true
+    },
+    "astryx-core/Token": {
+      "carried": {},
+      "receipts": "eca0235c342bb064",
+      "receiptCount": 2,
+      "extensionFresh": false
     },
     "astryx/Badge": {
       "carried": {},
@@ -615,6 +899,22 @@
       "receipts": "967752dc4ff11007",
       "receiptCount": 24,
       "extensionFresh": false
+    },
+    "astryx/TextArea": {
+      "carried": {
+        "root": [
+          "width"
+        ],
+        "textarea": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ]
+      },
+      "receipts": "b57d206cfe37919c",
+      "receiptCount": 7,
+      "extensionFresh": true
     },
     "astryx/TextInput": {
       "carried": {
@@ -1117,6 +1417,785 @@
       "receiptCount": 15,
       "extensionFresh": false
     },
+    "chakra/Checkbox": {
+      "carried": {
+        "checkbox__control": [
+          "height",
+          "width"
+        ],
+        "icon": [
+          "height",
+          "width"
+        ],
+        "part-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-1-0-0-2": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "dd0a5a4657487aa0",
+      "receiptCount": 18,
+      "extensionFresh": true
+    },
+    "chakra/Switch": {
+      "carried": {
+        "part-0": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "switch__control": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "switch__thumb": [
+          "height",
+          "width"
+        ]
+      },
+      "receipts": "9890bbc8f05816d8",
+      "receiptCount": 10,
+      "extensionFresh": true
+    },
+    "chakra/Textarea": {
+      "carried": {
+        "root": [
+          "bottom",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "e8d1bdeb721330e3",
+      "receiptCount": 3,
+      "extensionFresh": true
+    },
+    "day-picker/Calendar": {
+      "carried": {
+        "button_next": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "button_previous": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "day": [
+          "height",
+          "width"
+        ],
+        "day-10": [
+          "height",
+          "width"
+        ],
+        "day-11": [
+          "height",
+          "width"
+        ],
+        "day-12": [
+          "height",
+          "width"
+        ],
+        "day-13": [
+          "height",
+          "width"
+        ],
+        "day-14": [
+          "height",
+          "width"
+        ],
+        "day-15": [
+          "height",
+          "width"
+        ],
+        "day-16": [
+          "height",
+          "width"
+        ],
+        "day-17": [
+          "height",
+          "width"
+        ],
+        "day-18": [
+          "height",
+          "width"
+        ],
+        "day-19": [
+          "height",
+          "width"
+        ],
+        "day-2": [
+          "height",
+          "width"
+        ],
+        "day-20": [
+          "height",
+          "width"
+        ],
+        "day-21": [
+          "height",
+          "width"
+        ],
+        "day-22": [
+          "height",
+          "width"
+        ],
+        "day-23": [
+          "height",
+          "width"
+        ],
+        "day-24": [
+          "height",
+          "width"
+        ],
+        "day-25": [
+          "height",
+          "width"
+        ],
+        "day-26": [
+          "height",
+          "width"
+        ],
+        "day-27": [
+          "height",
+          "width"
+        ],
+        "day-28": [
+          "height",
+          "width"
+        ],
+        "day-29": [
+          "height",
+          "width"
+        ],
+        "day-3": [
+          "height",
+          "width"
+        ],
+        "day-30": [
+          "height",
+          "width"
+        ],
+        "day-31": [
+          "height",
+          "width"
+        ],
+        "day-32": [
+          "height",
+          "width"
+        ],
+        "day-33": [
+          "height",
+          "width"
+        ],
+        "day-34": [
+          "height",
+          "width"
+        ],
+        "day-35": [
+          "height",
+          "width"
+        ],
+        "day-36": [
+          "height",
+          "width"
+        ],
+        "day-37": [
+          "height",
+          "width"
+        ],
+        "day-38": [
+          "height",
+          "width"
+        ],
+        "day-39": [
+          "height",
+          "width"
+        ],
+        "day-4": [
+          "height",
+          "width"
+        ],
+        "day-40": [
+          "height",
+          "width"
+        ],
+        "day-41": [
+          "height",
+          "width"
+        ],
+        "day-42": [
+          "height",
+          "width"
+        ],
+        "day-43": [
+          "height",
+          "width"
+        ],
+        "day-44": [
+          "height",
+          "width"
+        ],
+        "day-45": [
+          "height",
+          "width"
+        ],
+        "day-46": [
+          "height",
+          "width"
+        ],
+        "day-47": [
+          "height",
+          "width"
+        ],
+        "day-48": [
+          "height",
+          "width"
+        ],
+        "day-49": [
+          "height",
+          "width"
+        ],
+        "day-5": [
+          "height",
+          "width"
+        ],
+        "day-50": [
+          "height",
+          "width"
+        ],
+        "day-51": [
+          "height",
+          "width"
+        ],
+        "day-52": [
+          "height",
+          "width"
+        ],
+        "day-53": [
+          "height",
+          "width"
+        ],
+        "day-54": [
+          "height",
+          "width"
+        ],
+        "day-55": [
+          "height",
+          "width"
+        ],
+        "day-56": [
+          "height",
+          "width"
+        ],
+        "day-57": [
+          "height",
+          "width"
+        ],
+        "day-58": [
+          "height",
+          "width"
+        ],
+        "day-59": [
+          "height",
+          "width"
+        ],
+        "day-6": [
+          "height",
+          "width"
+        ],
+        "day-60": [
+          "height",
+          "width"
+        ],
+        "day-61": [
+          "height",
+          "width"
+        ],
+        "day-62": [
+          "height",
+          "width"
+        ],
+        "day-63": [
+          "height",
+          "width"
+        ],
+        "day-64": [
+          "height",
+          "width"
+        ],
+        "day-7": [
+          "height",
+          "width"
+        ],
+        "day-8": [
+          "height",
+          "width"
+        ],
+        "day-9": [
+          "height",
+          "width"
+        ],
+        "dropdown": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown_root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown_root-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown_root-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown_root-4": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown-4": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown-5": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdown-6": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdowns": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "dropdowns-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "icon": [
+          "height",
+          "width"
+        ],
+        "icon-2": [
+          "height",
+          "width"
+        ],
+        "icon-3": [
+          "width"
+        ],
+        "icon-4": [
+          "width"
+        ],
+        "icon-5": [
+          "width"
+        ],
+        "icon-6": [
+          "width"
+        ],
+        "label": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-10": [
+          "height",
+          "width"
+        ],
+        "label-11": [
+          "height",
+          "width"
+        ],
+        "label-12": [
+          "height",
+          "width"
+        ],
+        "label-13": [
+          "height",
+          "width"
+        ],
+        "label-14": [
+          "height",
+          "width"
+        ],
+        "label-15": [
+          "height",
+          "width"
+        ],
+        "label-153": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-16": [
+          "height",
+          "width"
+        ],
+        "label-17": [
+          "height",
+          "width"
+        ],
+        "label-18": [
+          "height",
+          "width"
+        ],
+        "label-19": [
+          "height",
+          "width"
+        ],
+        "label-2": [
+          "height",
+          "width"
+        ],
+        "label-20": [
+          "height",
+          "width"
+        ],
+        "label-21": [
+          "height",
+          "width"
+        ],
+        "label-22": [
+          "height",
+          "width"
+        ],
+        "label-23": [
+          "height",
+          "width"
+        ],
+        "label-24": [
+          "height",
+          "width"
+        ],
+        "label-25": [
+          "height",
+          "width"
+        ],
+        "label-256": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-257": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label-26": [
+          "height",
+          "width"
+        ],
+        "label-27": [
+          "height",
+          "width"
+        ],
+        "label-28": [
+          "height",
+          "width"
+        ],
+        "label-29": [
+          "height",
+          "width"
+        ],
+        "label-3": [
+          "height",
+          "width"
+        ],
+        "label-30": [
+          "height",
+          "width"
+        ],
+        "label-31": [
+          "height",
+          "width"
+        ],
+        "label-32": [
+          "height",
+          "width"
+        ],
+        "label-33": [
+          "height",
+          "width"
+        ],
+        "label-34": [
+          "height",
+          "width"
+        ],
+        "label-35": [
+          "height",
+          "width"
+        ],
+        "label-36": [
+          "height",
+          "width"
+        ],
+        "label-37": [
+          "height",
+          "width"
+        ],
+        "label-372": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-38": [
+          "height",
+          "width"
+        ],
+        "label-39": [
+          "height",
+          "width"
+        ],
+        "label-4": [
+          "height",
+          "width"
+        ],
+        "label-475": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-476": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label-477": [
+          "bottom",
+          "left",
+          "right",
+          "top"
+        ],
+        "label-478": [
+          "height",
+          "width"
+        ],
+        "label-479": [
+          "height",
+          "width"
+        ],
+        "label-480": [
+          "height",
+          "width"
+        ],
+        "label-481": [
+          "height",
+          "width"
+        ],
+        "label-482": [
+          "height",
+          "width"
+        ],
+        "label-483": [
+          "height",
+          "width"
+        ],
+        "label-484": [
+          "height",
+          "width"
+        ],
+        "label-5": [
+          "height",
+          "width"
+        ],
+        "label-6": [
+          "height",
+          "width"
+        ],
+        "label-7": [
+          "height",
+          "width"
+        ],
+        "label-8": [
+          "height",
+          "width"
+        ],
+        "label-9": [
+          "height",
+          "width"
+        ],
+        "month": [
+          "height",
+          "width"
+        ],
+        "month_caption": [
+          "height",
+          "width"
+        ],
+        "month_caption-2": [
+          "height",
+          "width"
+        ],
+        "month-2": [
+          "height",
+          "width"
+        ],
+        "months": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "nav": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-0-0-0-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-0-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-1-0-0-0-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-1-0-0-1-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-2-0-0-0-1-0-0": [
+          "height",
+          "width"
+        ],
+        "part-0-2-0-0-1-1-0-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "1515ae90e894471c",
+      "receiptCount": 1306,
+      "extensionFresh": true
+    },
     "fluent/Avatar": {
       "carried": {
         "label": [
@@ -1138,7 +2217,7 @@
       },
       "receipts": "311d2682da448c5a",
       "receiptCount": 4,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "fluent/Badge": {
       "carried": {
@@ -2277,12 +3356,6 @@
           "right",
           "top"
         ],
-        "label-3": [
-          "bottom",
-          "left",
-          "right",
-          "top"
-        ],
         "root": [
           "height",
           "width"
@@ -2308,9 +3381,9 @@
           "width"
         ]
       },
-      "receipts": "914012eb5155fa07",
-      "receiptCount": 14,
-      "extensionFresh": false
+      "receipts": "d6ec4f6b734f632d",
+      "receiptCount": 12,
+      "extensionFresh": true
     },
     "mui/TextField": {
       "carried": {
@@ -2366,6 +3439,69 @@
       "receipts": "84ac0712386aaac6",
       "receiptCount": 24,
       "extensionFresh": false
+    },
+    "mui/Textarea": {
+      "carried": {
+        "inputbase-formcontrol": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "inputbase-input": [
+          "height",
+          "width"
+        ],
+        "inputbase-input-2": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "label-3": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "outlinedinput-notchedoutline": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ],
+        "part-1-2-0": [
+          "height",
+          "width"
+        ],
+        "root": [
+          "bottom",
+          "height",
+          "left",
+          "right",
+          "top",
+          "width"
+        ]
+      },
+      "receipts": "2fe4872e9a4af2a3",
+      "receiptCount": 18,
+      "extensionFresh": true
     },
     "mui/Tooltip": {
       "carried": {
@@ -2480,7 +3616,7 @@
       },
       "receipts": "beeb502bf154fa7d",
       "receiptCount": 10,
-      "extensionFresh": true
+      "extensionFresh": false
     },
     "shadcn/Input": {
       "carried": {
@@ -2524,7 +3660,7 @@
       },
       "receipts": "ac2499ffb42ecf24",
       "receiptCount": 6,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "shadcn/Tabs": {
       "carried": {
@@ -2590,7 +3726,7 @@
       },
       "receipts": "88e2162cfbf8a9f5",
       "receiptCount": 12,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "tailwind/Alert": {
       "carried": {},
