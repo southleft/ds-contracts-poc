@@ -68,6 +68,7 @@ export function menuSchemaMappings(roles: MenuRoles, opts: MenuSchemaOptions): F
     })),
     R("panel.itemSpacing", () => one("panel.itemSpacing", "px", { combo, part: list, channel: "row-gap" }, { formula: "the list's row-gap (keywords read 0)", combine: (raw) => pxOr0(raw.v) })),
     R("panel.fill", () => one("panel.fill", "color", { combo, part: roles.panel, channel: "background-color" })),
+    R("panel.minWidth", () => one("panel.minWidth", "px", { combo, part: roles.panel, channel: "min-width" }, { formula: "the panel's min-width as a length; `auto`/0 means the panel hugs its widest item", combine: (raw) => pxOr0(raw.v) })),
     R("item.paddingX", () => one("item.paddingX", "px", { combo, part: roles.item, channel: "padding-left" })),
     R("item.paddingY", () => one("item.paddingY", "px", { combo, part: roles.item, channel: "padding-top" })),
     R("item.minHeight", () => one("item.minHeight", "px", { combo, part: roles.item, channel: "min-height" }, { formula: "the item's min-height as a length; `auto`/0 means the item hugs its label and padding", combine: (raw) => pxOr0(raw.v) })),

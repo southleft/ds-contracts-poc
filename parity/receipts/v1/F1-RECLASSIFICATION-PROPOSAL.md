@@ -48,7 +48,7 @@ measured cause.
 | link | yes | Altitude, Chakra | both named | supported, named rows |
 | tabs | yes | Carbon | named content mismatch | supported, named row |
 | badge | yes | none exists (every foreign badge is an inline label) | own captures only | supported, no held-out |
-| menu | yes | Chakra | 5.64% named (no panel min-width leaf) | supported, named row |
+| menu | yes | Chakra | 5.64% named (font rasterisation; geometry matches after the panel min-width leaf) | supported, named row |
 | dialog | yes | Chakra | 2.57% | supported |
 
 Fidelity gate 48 pass · 0 fringe · 17 named (updated the same evening: menu and dialog gained proposers and Chakra held-outs). The plugin's paste verb was

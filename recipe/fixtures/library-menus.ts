@@ -94,6 +94,7 @@ const astryxTokens = cloneTokens("astryx.menu", (path, fallback) => {
   if (path === "panel.padding") return 4;
   if (path === "panel.radius") return 12;
   if (path === "panel.itemSpacing") return 2;
+  if (path === "panel.minWidth") return 0; // DropdownMenu.tsx:77 minWidth: 'anchor-size(width)' — the trigger's width, not a panel constant; receipted below, the panel hugs
   if (path === "panel.fill") return "#ffffffff";
   if (path === "item.paddingX") return 8;
   if (path === "item.paddingY") return 6;
@@ -111,6 +112,7 @@ const muiTokens = cloneTokens("mui.menu", (path, fallback) => {
   if (path === "panel.padding") return 0;
   if (path === "panel.radius") return 4;
   if (path === "panel.itemSpacing") return 0;
+  if (path === "panel.minWidth") return 16; // Popover.js:85 PopoverPaper minWidth: 16 (Menu's paper is a PopoverPaper); the capture reads 16px
   if (path === "panel.fill") return "#ffffffff";
   if (path === "item.paddingX") return 16;
   if (path === "item.paddingY") return 6;
@@ -128,6 +130,7 @@ const antdTokens = cloneTokens("antd.menu", (path, fallback) => {
   if (path === "panel.padding") return 4;
   if (path === "panel.radius") return 8;
   if (path === "panel.itemSpacing") return 0;
+  if (path === "panel.minWidth") return 0; // antd/es/dropdown/style/index.js: no min-width on the menu panel (only -item-icon carries one); the panel hugs
   if (path === "panel.fill") return "#ffffffff";
   if (path === "item.paddingX") return 12;
   if (path === "item.paddingY") return 5;
@@ -284,6 +287,12 @@ export const makeRefusals = (
   }));
 
 const astryxRefusals = makeRefusals("astryx", [
+  {
+    id: "refusal-panel-minWidth",
+    evidence: "DropdownMenu.tsx:77 minWidth: 'anchor-size(width)' — the panel's minimum is the trigger's width, a runtime anchor, not a length",
+    target: "Astryx DropdownMenu panel min-width",
+    reason: "refused-by-recipe",
+  },
   {
     id: "refusal-polar",
     evidence: "placement below + popover anchor — Polar attachment is not invented",

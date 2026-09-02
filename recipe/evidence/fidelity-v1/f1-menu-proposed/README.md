@@ -33,10 +33,27 @@ unregistered channels); the screenshot and the rect sidecar survive it.
   0 when `auto` (the item then hugs label + padding, 24 + 6 × 2 = 36, which is
   what MUI renders).
 - **The content** is the first two text-carrying siblings' texts.
+- **The panel's minimum width** (added the same evening, menu v8) is its
+  `min-width` when it is a length and 0 when `auto`: Chakra reads 128 (8rem),
+  MUI's paper 16 (Popover paper), and the hand tables cite their sources
+  (AntD none; Astryx `anchor-size(width)` is receipted as not a length).
 
 ## What menu@1 does not carry
 
-- **A panel minimum width.** Chakra's content panel is `min-width: 8rem`;
-  the canvas hugs its two labels at 76px against 128 rendered. A
-  `panel.minWidth` leaf would close it; named, not spelled.
 - **The panel's shadow.** Refused by name on both modules (`shadowRefusal`).
+
+## menu v8 (229:94381) — the panel min-width leaf, and what the residual is
+
+After the leaf, Chakra's canvas panel is 128×76 like the reference, and the
+glyph ink sits at the same pixels ((15,16)-(91,61) real, (15,16)-(90,61)
+canvas). The score did not move (5.64%) because the scorer trims to ink and
+a white panel over white has none: the reference's ink box is the panel (its
+refused `0 0 1px` shadow ring is ink), the canvas's is the text. With that
+ring simulated as a 1px stroke the boxes align and the difference is
+glyph-shaped everywhere at 6.67% — canvas ink 10.5% against 6.8% real:
+Figma rasterises Inter 14px heavier than Chromium. The row is reclassified
+**font-substrate**, the class tooltip/chakra and link/chakra already carry;
+the geometry defect is closed and the shadow stays a named refusal.
+
+    menu/mui-proposed 4.73% · menu/chakra 5.64% (font-substrate) · menu/mui 6.79% (content mismatch)
+

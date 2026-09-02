@@ -25,7 +25,9 @@ import {
 
 export const MENU_FIGMA_NAMESPACE = "ds.contracts.menu.recipe.v1";
 export const MENU_FIGMA_WRITER_VERSION = 1;
-export const MENU_FIGMA_RUN_SUFFIX = "menu-v7";
+export const MENU_FIGMA_RUN_SUFFIX = "menu-v8";
+/** v7 stay (panel.minWidth leaf: the Chakra held-out read 128px and the MUI paper 16px; menu v7 minted before the leaf existed) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V7_PAGE_ID = "228:93939";
 /** v6 stay (menu@1 proposer: MUI from its own two-item capture and Chakra's Menu held out (Portal composition, captured today)) is preserved as evidence and never written again. */
 export const FORBIDDEN_MENU_V6_PAGE_ID = "218:90653";
 /** v5 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
@@ -266,6 +268,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "228:93939", "marker": "MENU-V7-PAGE" },
     { "id": "218:90653", "marker": "MENU-V6-PAGE" },
     { "id": "218:88063", "marker": "MENU-V5-PAGE" },
     { "id": "218:86570", "marker": "MENU-V4-PAGE" },

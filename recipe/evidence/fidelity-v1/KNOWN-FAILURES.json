@@ -1,14 +1,14 @@
 {
-  "_marker": "KNOWN FAILURES — a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
+  "_marker": "KNOWN FAILURES \u2014 a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
   "recorded": "2026-09-02 (revised after the Chakra held-outs: chip/chakra named font-substrate; avatar/chakra passes at 0.38%)",
   "failures": {
     "alert/astryx": {
       "class": "font-substrate",
-      "cause": "7.57% width-normalised (was 64.6%). After alert v3 the glyph, the Semibold title, the fill and the radius all match and heights agree at 44; the residual is the bold title's glyph rasterisation — SF Pro Semibold drawn by Figma vs -apple-system Semibold drawn by Chromium — across a 281px-wide title line, which the edge windows cannot avoid. Geometry the recipe decided is exhausted here."
+      "cause": "7.57% width-normalised (was 64.6%). After alert v3 the glyph, the Semibold title, the fill and the radius all match and heights agree at 44; the residual is the bold title's glyph rasterisation \u2014 SF Pro Semibold drawn by Figma vs -apple-system Semibold drawn by Chromium \u2014 across a 281px-wide title line, which the edge windows cannot avoid. Geometry the recipe decided is exhausted here."
     },
     "chip/astryx": {
       "class": "font-substrate",
-      "cause": "5.07% — 0.07 over the bar. Same label 'Tag', ink 36x24 vs 37x24; the 1px is glyph advance width under Figma's font fallback vs Chromium's."
+      "cause": "5.07% \u2014 0.07 over the bar. Same label 'Tag', ink 36x24 vs 37x24; the 1px is glyph advance width under Figma's font fallback vs Chromium's."
     },
     "link/mui": {
       "class": "font-substrate",
@@ -16,59 +16,59 @@
     },
     "tabs/mui": {
       "class": "font-substrate",
-      "cause": "7.73% (tabs v6; was 14.73% → 18.07% → 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge — no geometry the recipe decided."
+      "cause": "7.73% (tabs v6; was 14.73% \u2192 18.07% \u2192 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge \u2014 no geometry the recipe decided."
     },
     "textarea/mui": {
       "class": "real-defect",
-      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height — InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
+      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height \u2014 InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     },
     "textarea/antd": {
       "class": "real-defect",
-      "cause": "7.42% width-normalised (heights 75 vs 54). The mint stacks a 'Notes' label above the box; antd TextArea renders NO label — the recipe grammar requires one (labelPlacement stacked). Structure the package does not render, plus the absent resize grip."
+      "cause": "7.42% width-normalised (heights 75 vs 54). The mint stacks a 'Notes' label above the box; antd TextArea renders NO label \u2014 the recipe grammar requires one (labelPlacement stacked). Structure the package does not render, plus the absent resize grip."
     },
     "chip/carbon": {
       "class": "font-substrate",
-      "cause": "8.56% at 35x24 vs 36x24 — HELD-OUT proposal (Carbon Tag, 13 leaves read, 0 invented). The diff hugs the three glyphs of 'Tag' (IBM Plex Sans Regular 12px) and nothing else: Figma rasterises the face one column narrower than Chromium. Geometry, fill and radius agree."
+      "cause": "8.56% at 35x24 vs 36x24 \u2014 HELD-OUT proposal (Carbon Tag, 13 leaves read, 0 invented). The diff hugs the three glyphs of 'Tag' (IBM Plex Sans Regular 12px) and nothing else: Figma rasterises the face one column narrower than Chromium. Geometry, fill and radius agree."
     },
     "link/altitude": {
       "class": "font-substrate",
-      "cause": "5.56% at 30x15 both sides — HELD-OUT proposal (Altitude link, 14 leaves read, 0 invented; underline read from text-decoration-line). The diff is the glyph edges of 'Link' (IBM Plex Sans Regular 16px) and the underline's row: Figma draws the underline one row from where Chromium does."
+      "cause": "5.56% at 30x15 both sides \u2014 HELD-OUT proposal (Altitude link, 14 leaves read, 0 invented; underline read from text-decoration-line). The diff is the glyph edges of 'Link' (IBM Plex Sans Regular 16px) and the underline's row: Figma draws the underline one row from where Chromium does."
     },
     "link/mui-proposed": {
       "class": "font-substrate",
-      "cause": "20.22% at 31x15 vs 31x14 — proposed from MUI's own capture (14 read, 0 invented). The capture's computed face is 'Times' (Link mounted without a Typography provider); the proposal carries it as a reviewed fallback to Figma's 'Times New Roman', which is why it scores 20% where the hand row's Roboto pin scores 49%. What remains is the two serifs' rasterisation and the underline row."
+      "cause": "20.22% at 31x15 vs 31x14 \u2014 proposed from MUI's own capture (14 read, 0 invented). The capture's computed face is 'Times' (Link mounted without a Typography provider); the proposal carries it as a reviewed fallback to Figma's 'Times New Roman', which is why it scores 20% where the hand row's Roboto pin scores 49%. What remains is the two serifs' rasterisation and the underline row."
     },
     "tabs/mui-proposed": {
       "class": "font-substrate",
-      "cause": "7.73% at 184x30 vs 183x31 — proposed from MUI's own capture (25 leaves read, 0 invented) and identical to the hand row tabs/mui to the hundredth: the same two uppercase Roboto Medium labels rasterised by Figma versus Chromium, the indicator and geometry agreeing."
+      "cause": "7.73% at 184x30 vs 183x31 \u2014 proposed from MUI's own capture (25 leaves read, 0 invented) and identical to the hand row tabs/mui to the hundredth: the same two uppercase Roboto Medium labels rasterised by Figma versus Chromium, the indicator and geometry agreeing."
     },
     "tabs/carbon": {
       "class": "content-mismatch",
-      "cause": "9.57% at 159x37 vs 261x60 — HELD-OUT proposal (Carbon tabs, 21 read, 4 spellings, 0 invented; the selected tab's 2px bottom border read as the indicator, the rest tabs' grey border refused by name, the fixed 40px height read as the minimum height). Not like-for-like: the capture mounts THREE tabs and the selected panel's text beneath them; tabs@1 draws two tabs and no panel. What the two tabs share — 40px tabs, 16px padding, IBM Plex Sans 14/18 SemiBold and Regular, the blue 2px indicator — is in both images."
+      "cause": "9.57% at 159x37 vs 261x60 \u2014 HELD-OUT proposal (Carbon tabs, 21 read, 4 spellings, 0 invented; the selected tab's 2px bottom border read as the indicator, the rest tabs' grey border refused by name, the fixed 40px height read as the minimum height). Not like-for-like: the capture mounts THREE tabs and the selected panel's text beneath them; tabs@1 draws two tabs and no panel. What the two tabs share \u2014 40px tabs, 16px padding, IBM Plex Sans 14/18 SemiBold and Regular, the blue 2px indicator \u2014 is in both images."
     },
     "chip/chakra": {
       "class": "font-substrate",
-      "cause": "8.09% at 33x20 vs 34x20 — HELD-OUT proposal (Chakra Tag captured 2026-09-02 from a config entry a person wrote; 13 leaves read, 0 invented). The tag's 1px ring is a zero-offset zero-blur INSET box-shadow, now lowered as an inside border whose spread comes out of the padding (the ring paints; geometry agrees to the half-pixel: 33.5 real). What remains is the three glyphs of 'Tag' in Inter Regular 12px rasterised by Figma versus Chromium — the same residual as chip/carbon and chip/astryx."
+      "cause": "8.09% at 33x20 vs 34x20 \u2014 HELD-OUT proposal (Chakra Tag captured 2026-09-02 from a config entry a person wrote; 13 leaves read, 0 invented). The tag's 1px ring is a zero-offset zero-blur INSET box-shadow, now lowered as an inside border whose spread comes out of the padding (the ring paints; geometry agrees to the half-pixel: 33.5 real). What remains is the three glyphs of 'Tag' in Inter Regular 12px rasterised by Figma versus Chromium \u2014 the same residual as chip/carbon and chip/astryx."
     },
     "tooltip/chakra": {
       "class": "font-substrate",
-      "cause": "8.83% at 216x24 vs 218x24 — HELD-OUT proposal (Chakra Tooltip, captured 2026-09-02 through the portal path from a config entry a person wrote; 14 leaves read, 0 invented; placement, arrow and open delay refused from the capture). Inter Medium 12px resolved EXACT in Figma, yet Chromium hugs the label at 217.016px and Figma at 216: the face's advance widths differ by one column across the sentence, so the box is 2px narrower and every glyph shifts. Padding (10/4), fill, radius and height agree."
+      "cause": "8.83% at 216x24 vs 218x24 \u2014 HELD-OUT proposal (Chakra Tooltip, captured 2026-09-02 through the portal path from a config entry a person wrote; 14 leaves read, 0 invented; placement, arrow and open delay refused from the capture). Inter Medium 12px resolved EXACT in Figma, yet Chromium hugs the label at 217.016px and Figma at 216: the face's advance widths differ by one column across the sentence, so the box is 2px narrower and every glyph shifts. Padding (10/4), fill, radius and height agree."
     },
     "link/chakra": {
       "class": "font-substrate",
-      "cause": "10.26% at 30x12 vs 30x13 — HELD-OUT proposal (Chakra Link, captured 2026-09-02 from a config entry a person wrote; 14 leaves read, 0 invented). The legacy contract path quarantines this capture on `text-underline-offset`; the real render exists only because the quarantine path now keeps `--keep-originals` screenshots. Inter Regular 16px resolved EXACT in Figma; the glyph masks agree in width (30) and differ by one row in height: Chromium rasterises 'Link' 13 rows tall, Figma 12 — the face's hinting at this size, the same class as MUI's proposed link (31x15 vs 31x14). Colour, line-height (24px) and no-underline agree."
+      "cause": "10.26% at 30x12 vs 30x13 \u2014 HELD-OUT proposal (Chakra Link, captured 2026-09-02 from a config entry a person wrote; 14 leaves read, 0 invented). The legacy contract path quarantines this capture on `text-underline-offset`; the real render exists only because the quarantine path now keeps `--keep-originals` screenshots. Inter Regular 16px resolved EXACT in Figma; the glyph masks agree in width (30) and differ by one row in height: Chromium rasterises 'Link' 13 rows tall, Figma 12 \u2014 the face's hinting at this size, the same class as MUI's proposed link (31x15 vs 31x14). Colour, line-height (24px) and no-underline agree."
     },
     "textarea/mui-proposed": {
       "class": "real-defect",
-      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height — InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
+      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height \u2014 InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     },
     "menu/mui": {
       "class": "content-mismatch",
-      "cause": "6.79% at 65x61 vs 117x88 — the hand row against the two-item capture (the person's config step of 2026-09-02; the first score, 5.46%, was against three items). Content mismatch: the hand table carries 'Item One' / 'Item Two' where the capture renders 'Profile' / 'My account', and its panel.padding is 0 where the list carries 8. The proposed row beside it reads both from the capture and passes."
+      "cause": "6.79% at 65x61 vs 117x88 \u2014 the hand row against the two-item capture (the person's config step of 2026-09-02; the first score, 5.46%, was against three items). Content mismatch: the hand table carries 'Item One' / 'Item Two' where the capture renders 'Profile' / 'My account', and its panel.padding is 0 where the list carries 8. The proposed row beside it reads both from the capture and passes."
     },
     "menu/chakra": {
-      "class": "real-defect",
-      "cause": "5.64% at 76x46 vs 128x76 — HELD OUT (Chakra Menu, captured 2026-09-02 through a Portal composition; 14 read, 0 invented; the legacy contract path quarantines the capture, the screenshot and rects were kept). The reference is cropped to chakra-menu__content, whose min-width is 8rem (128px) while the canvas panel hugs its two labels (76px): menu@1 carries no panel.minWidth leaf, and the panel's drop shadow is refused by name. Both are the archetype's, not the reader's; padding, radius, fill, item inset and label typography agree."
+      "class": "font-substrate",
+      "cause": "5.64% at 76x46 vs 128x76 \u2014 HELD OUT (Chakra Menu, captured 2026-09-02 through a Portal composition; 15 read, 0 invented). The geometry now matches the real render to the pixel: menu@1 gained a panel.minWidth leaf (Chakra reads 128px) and the v8 mint (229:94381) exports 128x76 like the reference; the glyph ink sits at (15,16)-(91,61) in the reference and (15,16)-(90,61) on canvas. The residual is Figma-vs-Chromium rasterisation of Inter 14px (the canvas glyphs are heavier: ink 10.5% vs 6.8% with the panel's refused 0 0 1px shadow ring simulated as a stroke, boxes aligned, diff still glyph-shaped at 6.67%) \u2014 the same class as tooltip/chakra and link/chakra. The '76x46' is the scorer's ink trim of a white panel over white; the panel's drop shadow stays refused by name."
     }
   }
 }

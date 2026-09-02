@@ -80,6 +80,8 @@ export interface MenuRecipeInstance {
       padding: MenuNumberParameter;
       radius: MenuNumberParameter;
       itemSpacing: MenuNumberParameter;
+      /** The panel's min-width as a length; 0 means the panel hugs its widest item. */
+      minWidth: MenuNumberParameter;
       fill: MenuColorParameter;
     };
     item: {
@@ -157,6 +159,7 @@ export const MenuRecipeInstanceSchema = z.strictObject({
       padding: NumberParameterSchema,
       radius: NumberParameterSchema,
       itemSpacing: NumberParameterSchema,
+      minWidth: NumberParameterSchema,
       fill: ColorParameterSchema,
     }),
     item: z.strictObject({
@@ -317,6 +320,9 @@ export function compileMenuIr(instance: MenuRecipeInstance): ComponentNode {
       },
       width: hug,
       height: hug,
+      ...(instance.tokens.panel.minWidth.fallback > 0
+        ? { minWidth: instance.tokens.panel.minWidth.fallback }
+        : {}),
     },
     fills: [solid(instance.tokens.panel.fill.fallback)],
     cornerRadius: corners(instance.tokens.panel.radius.fallback),
@@ -331,6 +337,9 @@ export function compileMenuIr(instance: MenuRecipeInstance): ComponentNode {
       bind("cornerRadius.topRight", instance.tokens.panel.radius),
       bind("cornerRadius.bottomRight", instance.tokens.panel.radius),
       bind("cornerRadius.bottomLeft", instance.tokens.panel.radius),
+      ...(instance.tokens.panel.minWidth.fallback > 0
+        ? [bind("layout.minWidth", instance.tokens.panel.minWidth)]
+        : []),
     ],
     children: [
       itemNode(instance, instance.content.first),
@@ -549,6 +558,12 @@ export function collapseMenuRecipe(
           "layout.itemSpacing",
           variant.layout.itemSpacing,
         ),
+        minWidth: {
+          variable:
+            optionalBinding(variant, "layout.minWidth") ??
+            `${envelope.id}.panel-minWidth`,
+          fallback: variant.layout.minWidth ?? 0,
+        },
         fill: colorFrom(
           variant,
           "fills.0.color",

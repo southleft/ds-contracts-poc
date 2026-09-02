@@ -38,6 +38,7 @@ export const canonicalMenuRecipeInstance = {
       padding: number("ds.menu.panel-padding", 4),
       radius: number("ds.menu.panel-radius", 4),
       itemSpacing: number("ds.menu.panel-itemSpacing", 0),
+      minWidth: number("ds.menu.panel-minWidth", 0),
       fill: color("ds.menu.panel-fill", "#ffffffff"),
     },
     item: {

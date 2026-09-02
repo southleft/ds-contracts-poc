@@ -20,6 +20,7 @@ const VALUES: Record<string, number | string> = {
   "panel.radius": 4, // ledger extract/computed/out/mui/menu/captured-truth.json#__default root.border-top-left-radius | extract/computed/out/mui/menu/captured-truth.json#__default root.height — border-top-left-radius; a percentage is of the panel's height; clamped to half the height as CSS clamps it
   "panel.itemSpacing": 0, // ledger extract/computed/out/mui/menu/captured-truth.json#__default idx:0.row-gap — the list's row-gap (keywords read 0)
   "panel.fill": "#ffffffff", // ledger extract/computed/out/mui/menu/captured-truth.json#__default root.background-color
+  "panel.minWidth": 16, // ledger extract/computed/out/mui/menu/captured-truth.json#__default root.min-width — the panel's min-width as a length; `auto`/0 means the panel hugs its widest item
   "item.paddingX": 16, // ledger extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-left
   "item.paddingY": 6, // ledger extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-top
   "item.minHeight": 0, // ledger extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.min-height — the item's min-height as a length; `auto`/0 means the item hugs its label and padding

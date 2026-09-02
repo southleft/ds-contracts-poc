@@ -37,6 +37,12 @@
       "from": "ledger",
       "key": "extract/computed/out/mui/menu/captured-truth.json#__default root.background-color"
     },
+    "panel.minWidth": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default root.min-width",
+      "formula": "the panel's min-width as a length; `auto`/0 means the panel hugs its widest item"
+    },
     "item.paddingX": {
       "value": 16,
       "from": "ledger",

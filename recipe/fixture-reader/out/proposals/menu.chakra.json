@@ -36,6 +36,12 @@
       "from": "ledger",
       "key": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.background-color"
     },
+    "panel.minWidth": {
+      "value": 128,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.min-width",
+      "formula": "the panel's min-width as a length; `auto`/0 means the panel hugs its widest item"
+    },
     "item.paddingX": {
       "value": 8,
       "from": "ledger",

@@ -540,6 +540,16 @@ v7 with five sources. See `f1-menu-proposed/`.
 
     menu/mui-proposed 4.73% · menu/chakra 5.64% (named) · menu/mui 6.79% (named)
 
+### 2026-09-02 (later) — menu@1 reads the panel's minimum width; the Chakra residual is named as font
+
+menu@1 gained a `panel.minWidth` leaf (Chakra reads 128px, MUI's Popover
+paper 16px; AntD cites none; Astryx's `anchor-size(width)` is receipted).
+Minted as menu v8 (229:94381): the Chakra panel exports 128×76 like the
+render and the glyph ink sits at the same pixels. The score stays 5.64%
+because the residual is Inter rasterisation (measured with the refused
+shadow ring simulated, boxes aligned, diff glyph-shaped at 6.67%); the row
+is reclassified font-substrate. Tally unchanged: 48 pass · 0 fringe · 17 known.
+
     45 pass · 0 fringe · 18 known
 
 ### 2026-09-02 — dialog@1 gets a proposer: every archetype has one

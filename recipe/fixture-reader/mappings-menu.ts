@@ -13,6 +13,7 @@ const LEAVES = [
   "panel.radius",
   "panel.itemSpacing",
   "panel.fill",
+  "panel.minWidth",
   "item.paddingX",
   "item.paddingY",
   "item.minHeight",
@@ -58,6 +59,10 @@ export const muiMenuMappings: FactMapping[] = [
     "reviewed 0",
   ),
   one("panel.fill", "color", { combo: mCombo, part: mPaper, channel: "background-color" }),
+  one("panel.minWidth", "px", { combo: mCombo, part: mPaper, channel: "min-width" }, {
+    formula: "the paper's min-width as a length (Popover paper minWidth 16); `auto`/0 means the paper hugs",
+    combine: (raw) => (raw.v && /^-?\d/.test(raw.v) ? parseFloat(raw.v) : 0),
+  }),
   one("item.paddingX", "px", { combo: mCombo, part: mItem, channel: "padding-left" }),
   one("item.paddingY", "px", { combo: mCombo, part: mItem, channel: "padding-top" }),
   receipt(

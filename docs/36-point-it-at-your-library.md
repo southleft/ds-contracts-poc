@@ -231,8 +231,10 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
   the paper. A mount that puts two portaled roots in one Portal (Chakra's
   backdrop beside its positioner) refuses by name; the backdrop is left out
   of the capture entry.
-- **A panel minimum width.** menu@1 hugs its items; Chakra's content panel
-  is 8rem wide. Named on the held-out row, not spelled.
+- **A panel's shadow.** menu@1 reads the panel's minimum width (Chakra's
+  content is 8rem wide, and the v8 mint is 128px like the render) but refuses
+  its box-shadow by name; the held-out row's residual is Inter rasterisation,
+  named with its measurements.
 - **A held-out for badge@1.** Every foreign badge in the corpus is an
   inline label, which badge@1 refuses by name; the proposer is proven
   against the two hand tables, not against a library it was never taught.
