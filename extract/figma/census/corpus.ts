@@ -40,6 +40,13 @@
  * by name, never by guessing the slug rule.
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+
+/** True when git ignores the path (exit 0 from `git check-ignore -q`); false when tracked, untracked-but-not-ignored, or git is unavailable. */
+const isGitIgnored = (rel: string): boolean => {
+  const r = spawnSync("git", ["check-ignore", "-q", "--", rel], { cwd: REPO, stdio: "ignore" });
+  return r.status === 0;
+};
 import path from "node:path";
 import {
   ContractSchema,
@@ -138,6 +145,13 @@ export function enumerateLibraries(): {
   }).sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))) {
     const lib = entry.name;
     const dir = path.join(REPO, "examples", lib);
+    // A GIT-IGNORED directory is not part of the committed corpus: CI never
+    // has it, so naming it here made the manifest differ between a developer
+    // machine and the lane (examples/flowbite-react, a local sandbox,
+    // 2026-09-02 — "the committed manifest is stale" on every CI run while the
+    // local run was green). The corpus is what git carries; an ignored
+    // directory is outside it by definition, not a silent exclusion.
+    if (isGitIgnored(path.join("examples", lib))) continue;
     // examples/ is a directory of libraries. A plain file here (.DS_Store is
     // the one that actually happened) is not one, and readdirSync on it threw
     // ENOTDIR two lines down — a corpus gate that crashes on desktop lint is

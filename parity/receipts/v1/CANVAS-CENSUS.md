@@ -131,7 +131,6 @@ Named exclusions (not in the denominator, and why):
 - `examples/depth-composite` — no examples/depth-composite/contracts/ directory — composite-modal.contract.json is a receipt-bound demo contract outside the library layout, not a library corpus
 - `examples/depth-modal` — no examples/depth-modal/contracts/ directory — modal-composite.contract.json is a receipt-bound demo contract outside the library layout, not a library corpus
 - `examples/eventz-vars` — examples/eventz-vars/contracts/ exists but the library carries no examples/eventz-vars/figma/*.figma.js and no eventz-vars.bundle.json — contract → canvas was never emitted for it
-- `examples/flowbite-react` — no examples/flowbite-react/contracts/ directory — not a contract library
 - `examples/radix-themes` — no examples/radix-themes/contracts/ directory — not a contract library
 - `examples/untitled-ui` — no examples/untitled-ui/contracts/ directory — not a contract library
 - `contracts/inline.contract.json` — bindings.figma.representation is "native" — scripts/generate-figma.ts emits no set for it (maps to a native canvas capability)

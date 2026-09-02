@@ -4869,10 +4869,6 @@
       "reason": "examples/eventz-vars/contracts/ exists but the library carries no examples/eventz-vars/figma/*.figma.js and no eventz-vars.bundle.json — contract → canvas was never emitted for it"
     },
     {
-      "what": "examples/flowbite-react",
-      "reason": "no examples/flowbite-react/contracts/ directory — not a contract library"
-    },
-    {
       "what": "examples/radix-themes",
       "reason": "no examples/radix-themes/contracts/ directory — not a contract library"
     },
