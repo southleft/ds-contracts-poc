@@ -3,8 +3,8 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **six archetypes**
-> (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1) and has been proven on **three libraries
+> plugin can run in any file. It works today for **seven archetypes**
+> (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1) and has been proven on **three libraries
 > the recipe path was never taught** — Chakra UI and shadcn — including one control
 > captured for the first time the same day (Chakra's Switch: a person wrote
 > the config entry, the command did the rest, four states pixel-identical).
@@ -81,6 +81,12 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 ## What it proved
 
+On tabs@1, the indicator is read as a part (MUI) or as the selected tab's
+bottom border (Carbon): MUI from its own capture scores the hand row's
+number; Carbon, held out, is a named content mismatch (three tabs and a
+panel in the capture); shadcn refuses by name
+(`recipe/evidence/fidelity-v1/f1-tabs-proposed/`).
+
 On chip@1 and link@1, six captures: Altitude's chip, never hand-tabled,
 scores 0.07%; the MUI and AntD proposals score exactly their hand rows;
 three rows fail on text rasterisation alone and are named
@@ -139,10 +145,13 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** Six of the thirteen boilerplate archetypes have
-  proposers today (checkbox, switch, avatar, tooltip, chip, link); the other
-  seven — radio, badge, alert, tabs, textarea, dialog, menu — still have hand
+- **Other archetypes.** Seven of the thirteen boilerplate archetypes have
+  proposers today (checkbox, switch, avatar, tooltip, chip, link, tabs); the
+  other six — radio, badge, alert, textarea, dialog, menu — still have hand
   tables only.
+- **A selected-tab fill.** tabs@1 draws an indicator under the selected tab;
+  shadcn paints the selected tab as a pill and has no indicator, so the
+  drafter refuses it by name rather than inventing one.
 - **Text rasterisation.** A label the reader read exactly can still score
   over the bar when Figma and Chromium rasterise the face differently
   (Carbon's "Tag", Altitude's underlined "Link"). Those rows are named in
@@ -188,6 +197,7 @@ files), what stays as archive, and the three decisions that are the owner's.
 | `recipe/fixture-reader/schema-tooltip.ts`, `propose-tooltip.ts` | tooltip@1: the tip role; placement, arrow and shadow refused from the capture |
 | `recipe/fixture-reader/schema-chip.ts`, `propose-chip.ts` | chip@1: box + label; a label part's padding is part of the inset |
 | `recipe/fixture-reader/schema-link.ts`, `propose-link.ts` | link@1: the anchor; underline and line-height unit read |
+| `recipe/fixture-reader/schema-tabs.ts`, `propose-tabs.ts` | tabs@1: list, selected/rest tabs, an indicator part or the selected tab's bottom border |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

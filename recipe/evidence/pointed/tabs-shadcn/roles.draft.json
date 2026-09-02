@@ -1,0 +1,28 @@
+{
+  "roles": {
+    "list": "idx:0",
+    "selectedTab": "idx:0.0",
+    "restTab": "idx:0.1"
+  },
+  "combo": "",
+  "evidence": {
+    "selectedTab": {
+      "selector": "idx:0.0",
+      "why": "button \"Overview\" — the one tab whose text colour (oklch(0.145 0 0)) differs from the others'",
+      "confidence": "high"
+    },
+    "restTab": {
+      "selector": "idx:0.1",
+      "why": "button \"Activity\" colour oklab(0.145 0 0 / 0.6)",
+      "confidence": "high"
+    },
+    "list": {
+      "selector": "idx:0",
+      "why": "parent of the tabs: div, display flex",
+      "confidence": "high"
+    }
+  },
+  "unresolved": [
+    "indicator: no absolute painted bar and no distinct bottom border on the selected tab (selected bg oklch(1 0 0), rest bg rgba(0, 0, 0, 0)) — tabs@1 draws an indicator, not a selected-tab fill"
+  ]
+}

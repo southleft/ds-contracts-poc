@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 42,
+  "subjects": 44,
   "passed": 32,
-  "failed": 10,
+  "failed": 12,
   "fringeExcused": 0,
-  "knownFailures": 10,
+  "knownFailures": 12,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -295,6 +295,22 @@
       "pctAAMasked": 7.73,
       "canvasPx": "184x30",
       "realPx": "183x31",
+      "convergesAt": null
+    },
+    {
+      "label": "tabs/mui-proposed",
+      "status": "fail",
+      "pctAAMasked": 7.73,
+      "canvasPx": "184x30",
+      "realPx": "183x31",
+      "convergesAt": null
+    },
+    {
+      "label": "tabs/carbon",
+      "status": "fail",
+      "pctAAMasked": 9.57,
+      "canvasPx": "159x37",
+      "realPx": "261x60",
       "convergesAt": null
     },
     {

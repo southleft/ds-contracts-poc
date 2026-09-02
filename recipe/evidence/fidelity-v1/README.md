@@ -367,3 +367,17 @@ are **named** in the ratchet as font-substrate — Carbon's "Tag" glyphs
     chip/carbon 8.56% (named) · link/altitude 5.56% (named) · link/mui-proposed 20.22% (named)
 
     32 pass · 0 fringe · 10 known
+
+## 2026-09-02 (later) — a seventh archetype: tabs
+
+`propose-tabs.ts` + `point.ts --archetype tabs`. The indicator is read as a
+part (MUI) or as the selected tab's bottom border (Carbon); a fixed tab
+height is read as its minimum height. MUI from its own capture scores the
+hand row's 7.73% to the hundredth (named font-substrate). Carbon, held out,
+scores 9.57% and is named as a content mismatch: three tabs and a panel in
+the capture, two tabs in the archetype. shadcn refuses by name — a filled
+selected tab is not an indicator. See `f1-tabs-proposed/README.md`.
+
+    tabs/mui-proposed 7.73% (named) · tabs/carbon 9.57% (named)
+
+    32 pass · 0 fringe · 12 known

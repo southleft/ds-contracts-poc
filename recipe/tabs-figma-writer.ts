@@ -25,7 +25,11 @@ import {
 
 export const TABS_FIGMA_NAMESPACE = "ds.contracts.tabs.recipe.v1";
 export const TABS_FIGMA_WRITER_VERSION = 1;
-export const TABS_FIGMA_RUN_SUFFIX = "tabs-v11";
+export const TABS_FIGMA_RUN_SUFFIX = "tabs-v13";
+/** v12 stay (Carbon tab height read as its minimum height) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V12_PAGE_ID = "218:91238";
+/** v11 stay (proposed MUI (own capture) and Carbon (held out, border indicator) tabs) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V11_PAGE_ID = "218:90322";
 /** v10 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TABS_V10_PAGE_ID = "218:87732";
 /** v9 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
@@ -274,6 +278,8 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:91238", "marker": "TABS-V12-PAGE" },
+    { "id": "218:90322", "marker": "TABS-V11-PAGE" },
     { "id": "218:87732", "marker": "TABS-V10-PAGE" },
     { "id": "218:86239", "marker": "TABS-V9-PAGE" },
     { "id": "218:84757", "marker": "TABS-V8-PAGE" },

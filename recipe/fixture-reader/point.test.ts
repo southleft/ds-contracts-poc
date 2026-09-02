@@ -255,3 +255,26 @@ test("link@1 proposes Altitude's link (underline read) and MUI's at the always-u
     assert.equal(r.proposal.leaves["box.height"]?.from, "spelling", `${lib}: the link hugs`);
   }
 });
+
+import { draftTabsRoles } from "./draft-roles.js";
+import { proposeTabsFixture } from "./propose-tabs.js";
+import type { TabsRoles } from "./schema-tabs.js";
+
+test("tabs@1 drafts MUI's indicator bar, Carbon's bottom-border indicator, and refuses shadcn's filled tab by name", () => {
+  const mui = draftTabsRoles(new Ledger(REPO, "extract/computed/out/mui/tabs/captured-truth.json"));
+  assert.deepEqual(mui.unresolved, []); assert.ok(mui.roles.indicator, "MUI has an indicator part");
+  const carbon = draftTabsRoles(new Ledger(REPO, "extract/computed/out/carbon/tabs/captured-truth.json"));
+  assert.deepEqual(carbon.unresolved, []); assert.equal(carbon.roles.indicatorIsBorder, true, "Carbon's indicator is the selected tab's bottom border, not its 1px hidden buttons");
+  assert.equal(carbon.combo, "", "a capture with no axes has the empty combo");
+  const shadcn = draftTabsRoles(new Ledger(REPO, "extract/computed/out/shadcn/tabs/captured-truth.json"));
+  assert.equal(shadcn.unresolved.length, 1); assert.match(shadcn.unresolved[0]!, /indicator: no absolute painted bar/);
+  for (const [lib, draft, expect] of [["mui", mui, { height: 2, fill: "#1976d2ff", textCase: "upper", selected: "Overview" }], ["carbon", carbon, { height: 2, fill: "#0f62feff", textCase: "original", selected: "Overview" }]] as const) {
+    const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+    const r = proposeTabsFixture({ library: lib, ledger: `extract/computed/out/${lib}/tabs/captured-truth.json`, roles: draft.roles as TabsRoles, combo: draft.combo!, sets: {}, out: path.relative(REPO, path.join(dir, `tabs.${lib}.ts`)), unsupported: ["hover"] });
+    assert.deepEqual(r.refused, [], lib);
+    assert.equal(r.proposal.leaves["indicator.height"]?.value, expect.height, lib);
+    assert.equal(r.proposal.leaves["indicator.fill"]?.value, expect.fill, lib);
+    assert.equal(r.proposal.leaves["textCase"]?.value, expect.textCase, lib);
+    assert.equal(r.proposal.content.selected, expect.selected, lib);
+  }
+});

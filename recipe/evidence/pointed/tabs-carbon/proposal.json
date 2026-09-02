@@ -1,0 +1,174 @@
+{
+  "archetype": "tabs",
+  "library": "carbon",
+  "ledger": "extract/computed/out/carbon/tabs/captured-truth.json",
+  "provenance": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "list": "idx:1",
+    "selectedTab": "idx:1.0",
+    "restTab": "idx:1.2",
+    "selectedLabel": "idx:1.0.0.0",
+    "restLabel": "idx:1.2.0.0",
+    "indicatorIsBorder": true
+  },
+  "combo": "",
+  "leaves": {
+    "list.itemSpacing": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.column-gap",
+      "formula": "the list's column-gap; normal → 0"
+    },
+    "tab.paddingX": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.padding-left"
+    },
+    "tab.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.padding-top"
+    },
+    "tab.radius": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-top-left-radius"
+    },
+    "tab.minWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-width",
+      "formula": "min-width; auto → 0"
+    },
+    "tab.minHeight": {
+      "value": 40,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-height | extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.height",
+      "formula": "max(min-height, a fixed height); auto → 0"
+    },
+    "tab.fill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.background-color"
+    },
+    "tab.contentAlign": {
+      "value": "start",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.justify-content",
+      "formula": "justify-content center → center, else start"
+    },
+    "indicator.height": {
+      "value": 2,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-bottom-width",
+      "formula": "the indicator is the selected tab's bottom border: its width is the indicator height"
+    },
+    "indicator.radius": {
+      "value": 0,
+      "from": "spelling",
+      "why": "a border has no radius of its own — 0"
+    },
+    "indicator.opacity": {
+      "value": 1,
+      "from": "spelling",
+      "why": "a border paints at the tab's opacity — 1"
+    },
+    "indicator.fill": {
+      "value": "#0f62feff",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-bottom-color",
+      "formula": "the selected tab's bottom border colour is the indicator fill"
+    },
+    "indicator.insetX": {
+      "value": 0,
+      "from": "spelling",
+      "why": "a border spans the tab — inset 0"
+    },
+    "indicator.offsetY": {
+      "value": 0,
+      "from": "spelling",
+      "why": "a border sits on the tab's bottom edge — offset 0"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 18,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.line-height",
+      "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+    },
+    "lineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.line-height",
+      "formula": "CSS normal → auto; a length → px"
+    },
+    "labelLetterSpacing": {
+      "value": 0.16,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.letter-spacing",
+      "formula": "letter-spacing; normal → 0"
+    },
+    "textCase": {
+      "value": "original",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.text-transform",
+      "formula": "text-transform uppercase → upper, else original"
+    },
+    "rest.label": {
+      "value": "#525252ff",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.color"
+    },
+    "selected.label": {
+      "value": "#161616ff",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.color"
+    },
+    "typography.rest.family": {
+      "value": "IBM Plex Sans",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.font-family"
+    },
+    "typography.rest.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.font-weight"
+    },
+    "typography.selected.family": {
+      "value": "IBM Plex Sans",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-family"
+    },
+    "typography.selected.style": {
+      "value": "Semibold",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-weight"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "selected": "Overview",
+    "rest": "Activity"
+  },
+  "typography": {
+    "rest": {
+      "family": "IBM Plex Sans",
+      "style": "Regular",
+      "stack": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+    },
+    "selected": {
+      "family": "IBM Plex Sans",
+      "style": "Semibold",
+      "stack": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+    }
+  }
+}

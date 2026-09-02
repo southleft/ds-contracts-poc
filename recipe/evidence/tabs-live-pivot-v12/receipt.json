@@ -1,0 +1,68 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "tabs-live-pivot-v12-prepare",
+  "teaching": "One named default Tabs rail; selected-child indicator; no invented overlay ink-bar offsets",
+  "runIdentity": "d89bb28f-8b13b805-37ba5bd4-1dcf1c6d-05d2c28e-tabs-v12",
+  "pageName": "Recipe Pivot / Tabs / d89bb28f-8b13b805-37ba5bd4-1dcf1c6d-05d2c28e-tabs-v12",
+  "namespace": "ds.contracts.tabs.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "d89bb28f25573142b1d3ee055443a82b779ba667684c87f7b589aecf27db3bb7",
+    "MUI": "8b13b8053837900eeec4ae63fa27cb66f5b29d0295e15be4a9436e19e954fa58",
+    "Ant Design": "37ba5bd447659cf15d1d596f9763dae74480f42e444cd11e48e9deafb00180cb",
+    "mui (proposed)": "1dcf1c6d591e3d01df52c7398943013ed09317bdfef918963da54ddcdbf4f166",
+    "carbon (proposed)": "05d2c28e14ac8c3bdf969485cc9c890856c70df96d5b48f93856501011f2c736"
+  },
+  "writerSha256": "e23823a4ea868f3a1e2de87f5c4dda6e57a648551ceac306feed2c9e5a4a75aa",
+  "pageId": "218:91238",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=218-91238",
+  "live": {
+    "recordedFrom": "tabs-v12-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Tabs / d89bb28f-8b13b805-37ba5bd4-1dcf1c6d-05d2c28e-tabs-v12",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-tabs-reviewed-v1",
+        "sectionId": "218:91239",
+        "setId": "218:91254",
+        "collectionId": "VariableCollectionId:218:91240",
+        "variantCount": 1,
+        "comparedIrFacts": 39
+      },
+      {
+        "adapterIdentity": "mui-tabs-reviewed-v1",
+        "sectionId": "218:91261",
+        "setId": "218:91278",
+        "collectionId": "VariableCollectionId:218:91262",
+        "variantCount": 1,
+        "comparedIrFacts": 43
+      },
+      {
+        "adapterIdentity": "antd-tabs-reviewed-v1",
+        "sectionId": "218:91285",
+        "setId": "218:91300",
+        "collectionId": "VariableCollectionId:218:91286",
+        "variantCount": 1,
+        "comparedIrFacts": 39
+      },
+      {
+        "adapterIdentity": "mui-tabs-proposed-v1",
+        "sectionId": "218:91307",
+        "setId": "218:91324",
+        "collectionId": "VariableCollectionId:218:91308",
+        "variantCount": 1,
+        "comparedIrFacts": 43
+      },
+      {
+        "adapterIdentity": "carbon-tabs-proposed-v1",
+        "sectionId": "218:91331",
+        "setId": "218:91346",
+        "collectionId": "VariableCollectionId:218:91332",
+        "variantCount": 1,
+        "comparedIrFacts": 39
+      }
+    ]
+  }
+}

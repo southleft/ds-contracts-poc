@@ -25,6 +25,7 @@ import type { AvatarRoles } from "./schema-avatar.js";
 import type { TooltipRoles } from "./schema-tooltip.js";
 import type { ChipRoles } from "./schema-chip.js";
 import type { LinkRoles } from "./schema-link.js";
+import type { TabsRoles } from "./schema-tabs.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -293,7 +294,7 @@ export function draftAvatarRoles(ledger: Ledger): AvatarRoleDraft {
   const unresolved: string[] = [];
   const keys = ledger.keys().filter((k) => k.endsWith("__default"));
   const pick = keys.find((k) => /(^|\.)(default|circular|circle|unset)(\.|__)/.test(k)) ?? keys[0];
-  if (!pick) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture in the ledger"] };
+  if (pick === undefined) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture in the ledger"] };
   const combo = pick.slice(0, -"__default".length);
   const c = ledger.capture(pick);
   const transparent = (v: string | undefined): boolean => !v || /^rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0\)$/.test(v) || v === "transparent";
@@ -328,7 +329,7 @@ export function draftTooltipRoles(ledger: Ledger): TooltipRoleDraft {
   const evidence: TooltipRoleDraft["evidence"] = {};
   const keys = ledger.keys().filter((k) => k.endsWith("__default"));
   const pick = keys.find((k) => /(^|\.)(on|open|normal\.on)(__)/.test(k)) ?? keys[0];
-  if (!pick) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture in the ledger"] };
+  if (pick === undefined) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture in the ledger"] };
   const combo = pick.slice(0, -"__default".length);
   const c = ledger.capture(pick);
   const transparent = (v: string | undefined): boolean => !v || /^rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0\)$/.test(v) || v === "transparent";
@@ -356,7 +357,8 @@ export interface SimpleRoleDraft<R> {
 const pickCombo = (ledger: Ledger, prefer: RegExp): string | null => {
   const keys = ledger.keys().filter((k) => k.endsWith("__default"));
   const pick = keys.find((k) => prefer.test(k)) ?? keys[0];
-  return pick ? pick.slice(0, -"__default".length) : null;
+  // A capture with no axes is keyed "__default": its combo is the EMPTY string, which is a combo.
+  return pick === undefined ? null : pick.slice(0, -"__default".length);
 };
 const hasTextPart = (p: LedgerPart): boolean => !!p.text && p.text.some((t) => t.trim().length > 0);
 const isTransparent = (v: string | undefined): boolean => !v || /^rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0\)$/.test(v) || v === "transparent";
@@ -365,7 +367,7 @@ const isTransparent = (v: string | undefined): boolean => !v || /^rgba\(\s*\d+,\
 export function draftChipRoles(ledger: Ledger): SimpleRoleDraft<ChipRoles> {
   const evidence: SimpleRoleDraft<ChipRoles>["evidence"] = {};
   const combo = pickCombo(ledger, /(^|\.)(unset|default|filled\.default|md)(\.|__)/);
-  if (!combo) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture"] };
+  if (combo === null) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture"] };
   const c = ledger.capture(`${combo}__default`);
   const painted = c.parts.filter((p) => (!isTransparent(p.style["background-color"]) || num(p.style["border-top-width"]) > 0) && num(p.style.width) > 0);
   const box = painted[0];
@@ -387,7 +389,7 @@ export function draftChipRoles(ledger: Ledger): SimpleRoleDraft<ChipRoles> {
 export function draftLinkRoles(ledger: Ledger): SimpleRoleDraft<LinkRoles> {
   const evidence: SimpleRoleDraft<LinkRoles>["evidence"] = {};
   const combo = pickCombo(ledger, /(^|\.)(always|unset|default)(\.|__)/);
-  if (!combo) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture"] };
+  if (combo === null) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture"] };
   const c = ledger.capture(`${combo}__default`);
   const box = c.parts.find((p) => p.tag === "a") ?? c.parts.find(hasTextPart);
   const roles: Partial<LinkRoles> = {};
@@ -398,5 +400,56 @@ export function draftLinkRoles(ledger: Ledger): SimpleRoleDraft<LinkRoles> {
     evidence.box = { selector: roles.box, why: `${box.tag}${box.classes[0] ? "." + box.classes[0] : ""} is the anchor: text ${JSON.stringify((box.text ?? []).find((t) => t.trim()))}, ${box.style.color}, decoration ${box.style["text-decoration-line"]}`, confidence: box.tag === "a" ? "high" : "medium" };
     if (!hasTextPart(box)) { const t = c.parts.find((q) => q.idxPath.startsWith(box.idxPath === "" ? "" : box.idxPath + ".") && hasTextPart(q)); if (t) { roles.label = sel(t); evidence.label = { selector: roles.label, why: `${t.tag} carries the text`, confidence: "high" }; } else unresolved.push("label: no text"); }
   }
+  return { roles, combo, evidence, unresolved };
+}
+
+/**
+ * tabs@1 roles. TABS are the text-carrying parts (or their nearest ancestor
+ * with role/class "tab" or a button) that are siblings under one LIST. The
+ * SELECTED tab is the one whose text colour differs from the others'. The
+ * INDICATOR is a painted absolute part no taller than 4px (MUI), else the
+ * selected tab's bottom border when it has one whose colour differs from a
+ * rest tab's (Carbon); a library with neither refuses by name.
+ */
+export function draftTabsRoles(ledger: Ledger): SimpleRoleDraft<TabsRoles> {
+  const evidence: SimpleRoleDraft<TabsRoles>["evidence"] = {};
+  const unresolved: string[] = [];
+  const combo = pickCombo(ledger, /(^|\.)(primary\.primary|default|unset)(\.|__)/);
+  if (combo === null) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture"] };
+  const c = ledger.capture(`${combo}__default`);
+  const byPath = new Map(c.parts.map((p) => [p.idxPath, p]));
+  const visible = (p: LedgerPart): boolean => p.style.display !== "none" && num(p.style.width) > 0;
+  // a tab: the nearest ancestor of a text part that is a button / role=tab / class containing "tab" (not the list)
+  const tabOf = (t: LedgerPart): LedgerPart | null => {
+    let cur: LedgerPart | null = t;
+    while (cur) {
+      if (cur.tag === "button" || cur.classes.some((k) => /(^|__|-)tab(s__nav-item|$|-root|-trigger)?$/i.test(k) && !/tabs$|list/i.test(k)) || (cur as { role?: string }).role === "tab") return cur;
+      const parent = parentPath(cur.idxPath); cur = parent === null ? null : (byPath.get(parent) ?? null);
+    }
+    return null;
+  };
+  const texts = c.parts.filter((p) => visible(p) && hasTextPart(p));
+  const tabs: LedgerPart[] = []; const labels = new Map<string, LedgerPart>();
+  for (const t of texts) { const tab = tabOf(t); if (tab && visible(tab) && !tabs.some((x) => x.idxPath === tab.idxPath)) { tabs.push(tab); labels.set(tab.idxPath, t); } }
+  if (tabs.length < 2) return { roles: {}, combo, evidence, unresolved: [`tabs: found ${tabs.length} tab part(s) carrying text; tabs@1 needs a selected and a rest tab`] };
+  const colourOf = (tab: LedgerPart): string => (labels.get(tab.idxPath) ?? tab).style.color ?? "";
+  const counts = new Map<string, number>(); for (const t of tabs) counts.set(colourOf(t), (counts.get(colourOf(t)) ?? 0) + 1);
+  const selected = tabs.find((t) => counts.get(colourOf(t)) === 1 && tabs.length > 1 && counts.size > 1) ?? tabs[0]!;
+  const rest = tabs.find((t) => t.idxPath !== selected.idxPath)!;
+  const listPath = parentPath(selected.idxPath) ?? ""; const list = byPath.get(listPath) ?? c.parts[0]!;
+  const roles: Partial<TabsRoles> = { list: sel(list), selectedTab: sel(selected), restTab: sel(rest) };
+  const sl = labels.get(selected.idxPath)!, rl = labels.get(rest.idxPath)!;
+  if (sl.idxPath !== selected.idxPath) roles.selectedLabel = sel(sl);
+  if (rl.idxPath !== rest.idxPath) roles.restLabel = sel(rl);
+  evidence.selectedTab = { selector: roles.selectedTab, why: `${selected.tag}${selected.classes[0] ? "." + selected.classes[0] : ""} "${sl.text!.find((t) => t.trim())}" — the one tab whose text colour (${colourOf(selected)}) differs from the others'`, confidence: counts.size > 1 ? "high" : "low" };
+  evidence.restTab = { selector: roles.restTab, why: `${rest.tag} "${rl.text!.find((t) => t.trim())}" colour ${colourOf(rest)}`, confidence: "high" };
+  evidence.list = { selector: roles.list, why: `parent of the tabs: ${list.tag}${list.classes[0] ? "." + list.classes[0] : ""}, display ${list.style.display}`, confidence: "high" };
+  // An indicator is a painted absolute bar no taller than 4px and at least
+  // as wide as a tab — never a 1×1 visually-hidden control (Carbon's hidden
+  // close buttons are absolute, painted and 1px).
+  const indicator = c.parts.find((p) => p.style.position === "absolute" && visible(p) && num(p.style.height) > 0 && num(p.style.height) <= 4 && num(p.style.width) >= Math.min(num(selected.style.width), num(rest.style.width)) * 0.5 && !isTransparent(p.style["background-color"]) && p.tag !== "button");
+  if (indicator) { roles.indicator = sel(indicator); evidence.indicator = { selector: roles.indicator, why: `${indicator.tag}${indicator.classes[0] ? "." + indicator.classes[0] : ""} is an absolute painted bar ${indicator.style.width}×${indicator.style.height}, bg ${indicator.style["background-color"]}`, confidence: "high" }; }
+  else if (num(selected.style["border-bottom-width"]) > 0 && selected.style["border-bottom-color"] !== rest.style["border-bottom-color"]) { roles.indicatorIsBorder = true; evidence.indicator = { selector: roles.selectedTab, why: `no indicator part; the selected tab's bottom border (${selected.style["border-bottom-width"]} ${selected.style["border-bottom-color"]}) differs from a rest tab's (${rest.style["border-bottom-color"]}) — the indicator is that border`, confidence: "medium" }; }
+  else unresolved.push(`indicator: no absolute painted bar and no distinct bottom border on the selected tab (selected bg ${selected.style["background-color"]}, rest bg ${rest.style["background-color"]}) — tabs@1 draws an indicator, not a selected-tab fill`);
   return { roles, combo, evidence, unresolved };
 }

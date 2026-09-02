@@ -23,6 +23,8 @@ import {
 import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
+import { MUI_TABS_LEDGER as MUI_TABS_LEDGER_PROPOSED, muiTabsAdapterConfig as muiTabsProposedConfig, muiTabsMappings as muiTabsProposedMappings } from "../fixtures/generated/tabs.mui.js";
+import { CARBON_TABS_LEDGER as CARBON_TABS_LEDGER_PROPOSED, carbonTabsAdapterConfig as carbonTabsProposedConfig, carbonTabsMappings as carbonTabsProposedMappings } from "../fixtures/generated/tabs.carbon.js";
 import { ALTITUDE_CHIP_LEDGER as ALTITUDE_CHIP_LEDGER_PROPOSED, altitudeChipAdapterConfig as altitudeChipProposedConfig, altitudeChipMappings as altitudeChipProposedMappings } from "../fixtures/generated/chip.altitude.js";
 import { MUI_CHIP_LEDGER as MUI_CHIP_LEDGER_PROPOSED, muiChipAdapterConfig as muiChipProposedConfig, muiChipMappings as muiChipProposedMappings } from "../fixtures/generated/chip.mui.js";
 import { ANTD_CHIP_LEDGER as ANTD_CHIP_LEDGER_PROPOSED, antdChipAdapterConfig as antdChipProposedConfig, antdChipMappings as antdChipProposedMappings } from "../fixtures/generated/chip.antd.js";
@@ -802,6 +804,26 @@ const SUBJECTS: Subject[] = [
     tokens: astryxTabsAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: astryxTabsMappings,
     extras: extrasFor(astryxTabsAdapterConfig.tokens as unknown as Record<string, unknown>, astryxTabsMappings),
+  },
+  {
+    // PROPOSED by propose-tabs.ts (the same capture as the hand table).
+    archetype: "tabs",
+    library: "mui-proposed",
+    source: src(muiTabsProposedConfig),
+    ledgerFile: MUI_TABS_LEDGER_PROPOSED,
+    tokens: muiTabsProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiTabsProposedMappings,
+    extras: extrasFor(muiTabsProposedConfig.tokens as unknown as Record<string, unknown>, muiTabsProposedMappings),
+  },
+  {
+    // PROPOSED by propose-tabs.ts (held out; the indicator is the selected tab's bottom border).
+    archetype: "tabs",
+    library: "carbon",
+    source: src(carbonTabsProposedConfig),
+    ledgerFile: CARBON_TABS_LEDGER_PROPOSED,
+    tokens: carbonTabsProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: carbonTabsProposedMappings,
+    extras: extrasFor(carbonTabsProposedConfig.tokens as unknown as Record<string, unknown>, carbonTabsProposedMappings),
   },
   {
     archetype: "tabs",

@@ -7,7 +7,7 @@ import type {
 import { canonicalTabsRecipeInstance } from "./tabs.js";
 import type { TabsRecipeInstance } from "../recipes/tabs.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): TabsRecipeInstance["tokens"] => {
@@ -330,7 +330,7 @@ const tokenFacts = (
   return facts;
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -394,7 +394,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedTabsSource,
   tokens: TabsRecipeInstance["tokens"],
@@ -402,6 +402,7 @@ const buildConfig = (
   refusals: ReviewedTabsSourceFact[],
   extraIr: ReviewedTabsSourceFact[],
   unsupported: string[],
+  content: { selected: string; rest: string } = slug === "mui" ? { selected: "Overview", rest: "Activity" } : { selected: "Item One", rest: "Item Two" },
 ): ReviewedTabsAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -434,7 +435,7 @@ const buildConfig = (
     // mui: labels from the capture mount (configs/mui.json Tabs childrenSpec
     // Overview / Activity — re-captured two-item on 2026-09-01 to match the
     // recipe's declared two-item cell). Astryx keeps the seed labels.
-    content: slug === "mui" ? { selected: "Overview", rest: "Activity" } : { selected: "Item One", rest: "Item Two" },
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -457,7 +458,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedTabsSource,
 ): ReviewedTabsSourceFact[] => [

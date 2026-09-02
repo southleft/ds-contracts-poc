@@ -1,0 +1,34 @@
+{
+  "roles": {
+    "list": "idx:1",
+    "selectedTab": "idx:1.0",
+    "restTab": "idx:1.2",
+    "selectedLabel": "idx:1.0.0.0",
+    "restLabel": "idx:1.2.0.0",
+    "indicatorIsBorder": true
+  },
+  "combo": "",
+  "evidence": {
+    "selectedTab": {
+      "selector": "idx:1.0",
+      "why": "button.cds--tabs__nav-item \"Overview\" — the one tab whose text colour (rgba(22, 22, 22, 1)) differs from the others'",
+      "confidence": "high"
+    },
+    "restTab": {
+      "selector": "idx:1.2",
+      "why": "button \"Activity\" colour rgba(82, 82, 82, 1)",
+      "confidence": "high"
+    },
+    "list": {
+      "selector": "idx:1",
+      "why": "parent of the tabs: div, display flex",
+      "confidence": "high"
+    },
+    "indicator": {
+      "selector": "idx:1.0",
+      "why": "no indicator part; the selected tab's bottom border (2px rgba(15, 98, 254, 1)) differs from a rest tab's (rgba(224, 224, 224, 1)) — the indicator is that border",
+      "confidence": "medium"
+    }
+  },
+  "unresolved": []
+}

@@ -1,0 +1,170 @@
+{
+  "archetype": "tabs",
+  "library": "mui",
+  "ledger": "extract/computed/out/mui/tabs/captured-truth.json",
+  "provenance": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "list": "idx:0.0",
+    "selectedTab": "idx:0.0.0",
+    "restTab": "idx:0.0.1",
+    "indicator": "idx:0.1"
+  },
+  "combo": "primary.primary",
+  "leaves": {
+    "list.itemSpacing": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.column-gap",
+      "formula": "the list's column-gap; normal → 0"
+    },
+    "tab.paddingX": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.padding-left"
+    },
+    "tab.paddingY": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.padding-top"
+    },
+    "tab.radius": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.border-top-left-radius"
+    },
+    "tab.minWidth": {
+      "value": 90,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-width",
+      "formula": "min-width; auto → 0"
+    },
+    "tab.minHeight": {
+      "value": 48,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-height | extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.height",
+      "formula": "max(min-height, a fixed height); auto → 0"
+    },
+    "tab.fill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.background-color"
+    },
+    "tab.contentAlign": {
+      "value": "center",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.justify-content",
+      "formula": "justify-content center → center, else start"
+    },
+    "indicator.height": {
+      "value": 2,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.height"
+    },
+    "indicator.radius": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.border-top-left-radius"
+    },
+    "indicator.opacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.opacity"
+    },
+    "indicator.fill": {
+      "value": "#1976d2ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.background-color"
+    },
+    "indicator.insetX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.left"
+    },
+    "indicator.offsetY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.bottom"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 17.5,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.line-height",
+      "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+    },
+    "lineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.line-height",
+      "formula": "CSS normal → auto; a length → px"
+    },
+    "labelLetterSpacing": {
+      "value": 0.4,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.letter-spacing",
+      "formula": "letter-spacing; normal → 0"
+    },
+    "textCase": {
+      "value": "upper",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.text-transform",
+      "formula": "text-transform uppercase → upper, else original"
+    },
+    "rest.label": {
+      "value": "#00000099",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.color"
+    },
+    "selected.label": {
+      "value": "#1976d2ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.color"
+    },
+    "typography.rest.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.font-family"
+    },
+    "typography.rest.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.font-weight"
+    },
+    "typography.selected.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-family"
+    },
+    "typography.selected.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-weight"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "selected": "Overview",
+    "rest": "Activity"
+  },
+  "typography": {
+    "rest": {
+      "family": "Roboto",
+      "style": "Medium",
+      "stack": "Roboto, Helvetica, Arial, sans-serif"
+    },
+    "selected": {
+      "family": "Roboto",
+      "style": "Medium",
+      "stack": "Roboto, Helvetica, Arial, sans-serif"
+    }
+  }
+}

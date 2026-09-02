@@ -163,6 +163,378 @@
     }
   },
   {
+    "library": "mui-proposed",
+    "archetype": "tabs",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Tabs"
+    },
+    "ledger": "extract/computed/out/mui/tabs/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.itemSpacing": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.column-gap — the list's column-gap; normal → 0"
+      },
+      "tab.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.padding-left"
+      },
+      "tab.paddingY": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.padding-top"
+      },
+      "tab.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.border-top-left-radius"
+      },
+      "tab.minWidth": {
+        "fixture": 90,
+        "proposed": 90,
+        "verdict": "match",
+        "captured": 90,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-width — min-width; auto → 0"
+      },
+      "tab.minHeight": {
+        "fixture": 48,
+        "proposed": 48,
+        "verdict": "match",
+        "captured": 48,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-height ; extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.height — max(min-height, a fixed height); auto → 0"
+      },
+      "tab.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.background-color"
+      },
+      "tab.contentAlign": {
+        "fixture": "center",
+        "proposed": "center",
+        "verdict": "match",
+        "captured": "center",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.justify-content — justify-content center → center, else start"
+      },
+      "indicator.height": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.height"
+      },
+      "indicator.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.border-top-left-radius"
+      },
+      "indicator.opacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.opacity"
+      },
+      "indicator.fill": {
+        "fixture": "#1976d2ff",
+        "proposed": "#1976d2ff",
+        "verdict": "match",
+        "captured": "#1976d2ff",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.background-color"
+      },
+      "indicator.insetX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.left"
+      },
+      "indicator.offsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.bottom"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 17.5,
+        "proposed": 17.5,
+        "verdict": "match",
+        "captured": 17.5,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.line-height — CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.line-height — CSS normal → auto; a length → px"
+      },
+      "labelLetterSpacing": {
+        "fixture": 0.4,
+        "proposed": 0.4,
+        "verdict": "match",
+        "captured": 0.4,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.letter-spacing — letter-spacing; normal → 0"
+      },
+      "textCase": {
+        "fixture": "upper",
+        "proposed": "upper",
+        "verdict": "match",
+        "captured": "upper",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.text-transform — text-transform uppercase → upper, else original"
+      },
+      "rest.label": {
+        "fixture": "#00000099",
+        "proposed": "#00000099",
+        "verdict": "match",
+        "captured": "#00000099",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.color"
+      },
+      "selected.label": {
+        "fixture": "#1976d2ff",
+        "proposed": "#1976d2ff",
+        "verdict": "match",
+        "captured": "#1976d2ff",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.color"
+      },
+      "typography.rest.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.font-family"
+      },
+      "typography.rest.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.font-weight"
+      },
+      "typography.selected.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-family"
+      },
+      "typography.selected.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-weight"
+      }
+    }
+  },
+  {
+    "library": "carbon",
+    "archetype": "tabs",
+    "source": {
+      "packageName": "@carbon/react",
+      "version": "1.112.0",
+      "exportName": "Tabs"
+    },
+    "ledger": "extract/computed/out/carbon/tabs/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.itemSpacing": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.column-gap — the list's column-gap; normal → 0"
+      },
+      "tab.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.padding-left"
+      },
+      "tab.paddingY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.padding-top"
+      },
+      "tab.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-top-left-radius"
+      },
+      "tab.minWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-width — min-width; auto → 0"
+      },
+      "tab.minHeight": {
+        "fixture": 40,
+        "proposed": 40,
+        "verdict": "match",
+        "captured": 40,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-height ; extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.height — max(min-height, a fixed height); auto → 0"
+      },
+      "tab.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.background-color"
+      },
+      "tab.contentAlign": {
+        "fixture": "start",
+        "proposed": "start",
+        "verdict": "match",
+        "captured": "start",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.justify-content — justify-content center → center, else start"
+      },
+      "indicator.height": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-bottom-width — the indicator is the selected tab's bottom border: its width is the indicator height"
+      },
+      "indicator.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a border has no radius of its own — 0 [reviewed 0]"
+      },
+      "indicator.opacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a border paints at the tab's opacity — 1 [reviewed 1]"
+      },
+      "indicator.fill": {
+        "fixture": "#0f62feff",
+        "proposed": "#0f62feff",
+        "verdict": "match",
+        "captured": "#0f62feff",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-bottom-color — the selected tab's bottom border colour is the indicator fill"
+      },
+      "indicator.insetX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a border spans the tab — inset 0 [reviewed 0]"
+      },
+      "indicator.offsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a border sits on the tab's bottom edge — offset 0 [reviewed 0]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 18,
+        "proposed": 18,
+        "verdict": "match",
+        "captured": 18,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.line-height — CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.line-height — CSS normal → auto; a length → px"
+      },
+      "labelLetterSpacing": {
+        "fixture": 0.16,
+        "proposed": 0.16,
+        "verdict": "match",
+        "captured": 0.16,
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.letter-spacing — letter-spacing; normal → 0"
+      },
+      "textCase": {
+        "fixture": "original",
+        "proposed": "original",
+        "verdict": "match",
+        "captured": "original",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.text-transform — text-transform uppercase → upper, else original"
+      },
+      "rest.label": {
+        "fixture": "#525252ff",
+        "proposed": "#525252ff",
+        "verdict": "match",
+        "captured": "#525252ff",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.color"
+      },
+      "selected.label": {
+        "fixture": "#161616ff",
+        "proposed": "#161616ff",
+        "verdict": "match",
+        "captured": "#161616ff",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.color"
+      },
+      "typography.rest.family": {
+        "fixture": "IBM Plex Sans",
+        "proposed": "IBM Plex Sans",
+        "verdict": "match",
+        "captured": "IBM Plex Sans",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.font-family"
+      },
+      "typography.rest.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.font-weight"
+      },
+      "typography.selected.family": {
+        "fixture": "IBM Plex Sans",
+        "proposed": "IBM Plex Sans",
+        "verdict": "match",
+        "captured": "IBM Plex Sans",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-family"
+      },
+      "typography.selected.style": {
+        "fixture": "Semibold",
+        "proposed": "Semibold",
+        "verdict": "match",
+        "captured": "Semibold",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-weight"
+      }
+    }
+  },
+  {
     "library": "mui",
     "archetype": "tabs",
     "source": {

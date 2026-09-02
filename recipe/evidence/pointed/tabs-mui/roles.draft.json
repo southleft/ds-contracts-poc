@@ -1,0 +1,32 @@
+{
+  "roles": {
+    "list": "idx:0.0",
+    "selectedTab": "idx:0.0.0",
+    "restTab": "idx:0.0.1",
+    "indicator": "idx:0.1"
+  },
+  "combo": "primary.primary",
+  "evidence": {
+    "selectedTab": {
+      "selector": "idx:0.0.0",
+      "why": "button.MuiButtonBase-root \"Overview\" — the one tab whose text colour (rgba(25, 118, 210, 1)) differs from the others'",
+      "confidence": "high"
+    },
+    "restTab": {
+      "selector": "idx:0.0.1",
+      "why": "button \"Activity\" colour rgba(0, 0, 0, 0.6)",
+      "confidence": "high"
+    },
+    "list": {
+      "selector": "idx:0.0",
+      "why": "parent of the tabs: div.MuiTabs-list, display flex",
+      "confidence": "high"
+    },
+    "indicator": {
+      "selector": "idx:0.1",
+      "why": "span.MuiTabs-indicator is an absolute painted bar 103.562px×2px, bg rgba(25, 118, 210, 1)",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

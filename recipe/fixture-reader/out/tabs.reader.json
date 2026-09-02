@@ -219,6 +219,554 @@
   },
   {
     "archetype": "tabs",
+    "library": "mui-proposed",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Tabs"
+    },
+    "ledgerFile": "extract/computed/out/mui/tabs/captured-truth.json",
+    "rows": [
+      {
+        "path": "list.itemSpacing",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.column-gap"
+        ],
+        "formula": "the list's column-gap; normal → 0"
+      },
+      {
+        "path": "tab.paddingX",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.padding-left"
+        ]
+      },
+      {
+        "path": "tab.paddingY",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.padding-top"
+        ]
+      },
+      {
+        "path": "tab.radius",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "tab.minWidth",
+        "fixtureValue": 90,
+        "verdict": "match",
+        "capturedValue": 90,
+        "proposedValue": 90,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-width"
+        ],
+        "formula": "min-width; auto → 0"
+      },
+      {
+        "path": "tab.minHeight",
+        "fixtureValue": 48,
+        "verdict": "match",
+        "capturedValue": 48,
+        "proposedValue": 48,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-height",
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.height"
+        ],
+        "formula": "max(min-height, a fixed height); auto → 0"
+      },
+      {
+        "path": "tab.fill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.background-color"
+        ]
+      },
+      {
+        "path": "tab.contentAlign",
+        "fixtureValue": "center",
+        "verdict": "match",
+        "capturedValue": "center",
+        "proposedValue": "center",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.justify-content"
+        ],
+        "formula": "justify-content center → center, else start"
+      },
+      {
+        "path": "indicator.height",
+        "fixtureValue": 2,
+        "verdict": "match",
+        "capturedValue": 2,
+        "proposedValue": 2,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.height"
+        ]
+      },
+      {
+        "path": "indicator.radius",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "indicator.opacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.opacity"
+        ]
+      },
+      {
+        "path": "indicator.fill",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "indicator.insetX",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.left"
+        ]
+      },
+      {
+        "path": "indicator.offsetY",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.bottom"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 17.5,
+        "verdict": "match",
+        "capturedValue": 17.5,
+        "proposedValue": 17.5,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.line-height"
+        ],
+        "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.line-height"
+        ],
+        "formula": "CSS normal → auto; a length → px"
+      },
+      {
+        "path": "labelLetterSpacing",
+        "fixtureValue": 0.4,
+        "verdict": "match",
+        "capturedValue": 0.4,
+        "proposedValue": 0.4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.letter-spacing"
+        ],
+        "formula": "letter-spacing; normal → 0"
+      },
+      {
+        "path": "textCase",
+        "fixtureValue": "upper",
+        "verdict": "match",
+        "capturedValue": "upper",
+        "proposedValue": "upper",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.text-transform"
+        ],
+        "formula": "text-transform uppercase → upper, else original"
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#00000099",
+        "verdict": "match",
+        "capturedValue": "#00000099",
+        "proposedValue": "#00000099",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.color"
+        ]
+      },
+      {
+        "path": "selected.label",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.color"
+        ]
+      },
+      {
+        "path": "typography.rest.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.font-family"
+        ]
+      },
+      {
+        "path": "typography.rest.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.1.font-weight"
+        ]
+      },
+      {
+        "path": "typography.selected.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-family"
+        ]
+      },
+      {
+        "path": "typography.selected.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 25,
+      "drift": 0,
+      "receipt": 0,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "tabs",
+    "library": "carbon",
+    "source": {
+      "packageName": "@carbon/react",
+      "version": "1.112.0",
+      "exportName": "Tabs"
+    },
+    "ledgerFile": "extract/computed/out/carbon/tabs/captured-truth.json",
+    "rows": [
+      {
+        "path": "list.itemSpacing",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.column-gap"
+        ],
+        "formula": "the list's column-gap; normal → 0"
+      },
+      {
+        "path": "tab.paddingX",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.padding-left"
+        ]
+      },
+      {
+        "path": "tab.paddingY",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.padding-top"
+        ]
+      },
+      {
+        "path": "tab.radius",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "tab.minWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-width"
+        ],
+        "formula": "min-width; auto → 0"
+      },
+      {
+        "path": "tab.minHeight",
+        "fixtureValue": 40,
+        "verdict": "match",
+        "capturedValue": 40,
+        "proposedValue": 40,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-height",
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.height"
+        ],
+        "formula": "max(min-height, a fixed height); auto → 0"
+      },
+      {
+        "path": "tab.fill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.background-color"
+        ]
+      },
+      {
+        "path": "tab.contentAlign",
+        "fixtureValue": "start",
+        "verdict": "match",
+        "capturedValue": "start",
+        "proposedValue": "start",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.justify-content"
+        ],
+        "formula": "justify-content center → center, else start"
+      },
+      {
+        "path": "indicator.height",
+        "fixtureValue": 2,
+        "verdict": "match",
+        "capturedValue": 2,
+        "proposedValue": 2,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-bottom-width"
+        ],
+        "formula": "the indicator is the selected tab's bottom border: its width is the indicator height"
+      },
+      {
+        "path": "indicator.radius",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "a border has no radius of its own — 0",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "indicator.opacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "a border paints at the tab's opacity — 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "indicator.fill",
+        "fixtureValue": "#0f62feff",
+        "verdict": "match",
+        "capturedValue": "#0f62feff",
+        "proposedValue": "#0f62feff",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-bottom-color"
+        ],
+        "formula": "the selected tab's bottom border colour is the indicator fill"
+      },
+      {
+        "path": "indicator.insetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "a border spans the tab — inset 0",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "indicator.offsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "a border sits on the tab's bottom edge — offset 0",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 18,
+        "verdict": "match",
+        "capturedValue": 18,
+        "proposedValue": 18,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.line-height"
+        ],
+        "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.line-height"
+        ],
+        "formula": "CSS normal → auto; a length → px"
+      },
+      {
+        "path": "labelLetterSpacing",
+        "fixtureValue": 0.16,
+        "verdict": "match",
+        "capturedValue": 0.16,
+        "proposedValue": 0.16,
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.letter-spacing"
+        ],
+        "formula": "letter-spacing; normal → 0"
+      },
+      {
+        "path": "textCase",
+        "fixtureValue": "original",
+        "verdict": "match",
+        "capturedValue": "original",
+        "proposedValue": "original",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.text-transform"
+        ],
+        "formula": "text-transform uppercase → upper, else original"
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#525252ff",
+        "verdict": "match",
+        "capturedValue": "#525252ff",
+        "proposedValue": "#525252ff",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.color"
+        ]
+      },
+      {
+        "path": "selected.label",
+        "fixtureValue": "#161616ff",
+        "verdict": "match",
+        "capturedValue": "#161616ff",
+        "proposedValue": "#161616ff",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.color"
+        ]
+      },
+      {
+        "path": "typography.rest.family",
+        "fixtureValue": "IBM Plex Sans",
+        "verdict": "match",
+        "capturedValue": "IBM Plex Sans",
+        "proposedValue": "IBM Plex Sans",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.font-family"
+        ]
+      },
+      {
+        "path": "typography.rest.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.0.0.font-weight"
+        ]
+      },
+      {
+        "path": "typography.selected.family",
+        "fixtureValue": "IBM Plex Sans",
+        "verdict": "match",
+        "capturedValue": "IBM Plex Sans",
+        "proposedValue": "IBM Plex Sans",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-family"
+        ]
+      },
+      {
+        "path": "typography.selected.style",
+        "fixtureValue": "Semibold",
+        "verdict": "match",
+        "capturedValue": "Semibold",
+        "proposedValue": "Semibold",
+        "ledgerKeys": [
+          "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.0.0.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 21,
+      "drift": 0,
+      "receipt": 4,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "tabs",
     "library": "mui",
     "source": {
       "packageName": "@mui/material",

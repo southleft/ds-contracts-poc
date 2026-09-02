@@ -330,6 +330,18 @@ ledger _(none — receipt-only)_ · 25 facts: **0 match**, **0 drift**, 25 named
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### mui-proposed — @mui/material@9.2.0#Tabs
+
+ledger `extract/computed/out/mui/tabs/captured-truth.json` · 25 facts: **25 match**, **0 drift**, 0 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### carbon — @carbon/react@1.112.0#Tabs
+
+ledger `extract/computed/out/carbon/tabs/captured-truth.json` · 25 facts: **21 match**, **0 drift**, 4 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ### mui — @mui/material@9.2.0#Tabs
 
 ledger `extract/computed/out/mui/tabs/captured-truth.json` · 25 facts: **21 match**, **0 drift**, 4 named receipts, 0 unread
@@ -813,6 +825,10 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **tabs/astryx** `typography.rest.style` = `Regular` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
 - **tabs/astryx** `typography.selected.family` = `-apple-system` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
 - **tabs/astryx** `typography.selected.style` = `Semibold` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
+- **tabs/carbon** `indicator.radius` = `0` — a border has no radius of its own — 0 _[reviewed 0]_
+- **tabs/carbon** `indicator.opacity` = `1` — a border paints at the tab's opacity — 1 _[reviewed 1]_
+- **tabs/carbon** `indicator.insetX` = `0` — a border spans the tab — inset 0 _[reviewed 0]_
+- **tabs/carbon** `indicator.offsetY` = `0` — a border sits on the tab's bottom edge — offset 0 _[reviewed 0]_
 - **tabs/mui** `list.itemSpacing` = `0` — MUI Tabs flex list has no gap channel — 0 is the recipe spelling _[Tabs.js flex no gap — reviewed 0]_
 - **tabs/mui** `lineHeightUnit` = `percent` — recipe spelling of percent line-height from button typography _[reviewed percent]_
 - **tabs/mui** `textCase` = `upper` — Tab label text-transform uppercase — recipe spelling _[reviewed upper]_
