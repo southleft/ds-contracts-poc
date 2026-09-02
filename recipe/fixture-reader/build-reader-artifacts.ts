@@ -23,6 +23,9 @@ import {
 import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
+import { ANTD_TOOLTIP_LEDGER as ANTD_TOOLTIP_LEDGER_PROPOSED, antdTooltipAdapterConfig as antdTooltipProposedConfig, antdTooltipMappings as antdTooltipProposedMappings } from "../fixtures/generated/tooltip.antd.js";
+import { MUI_TOOLTIP_LEDGER as MUI_TOOLTIP_LEDGER_PROPOSED, muiTooltipAdapterConfig as muiTooltipProposedConfig, muiTooltipMappings as muiTooltipProposedMappings } from "../fixtures/generated/tooltip.mui.js";
+import { SHADCN_TOOLTIP_LEDGER as SHADCN_TOOLTIP_LEDGER_PROPOSED, shadcnTooltipAdapterConfig as shadcnTooltipProposedConfig, shadcnTooltipMappings as shadcnTooltipProposedMappings } from "../fixtures/generated/tooltip.shadcn.js";
 import { MUI_AVATAR_LEDGER as MUI_AVATAR_LEDGER_PROPOSED, muiAvatarAdapterConfig as muiAvatarProposedConfig, muiAvatarMappings as muiAvatarProposedMappings } from "../fixtures/generated/avatar.mui.js";
 import { ANTD_AVATAR_LEDGER as ANTD_AVATAR_LEDGER_PROPOSED, antdAvatarAdapterConfig as antdAvatarProposedConfig, antdAvatarMappings as antdAvatarProposedMappings } from "../fixtures/generated/avatar.antd.js";
 import { ALTITUDE_AVATAR_LEDGER as ALTITUDE_AVATAR_LEDGER_PROPOSED, altitudeAvatarAdapterConfig as altitudeAvatarProposedConfig, altitudeAvatarMappings as altitudeAvatarProposedMappings } from "../fixtures/generated/avatar.altitude.js";
@@ -685,6 +688,36 @@ const SUBJECTS: Subject[] = [
     tokens: muiTooltipAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: muiTooltipMappings,
     extras: extrasFor(muiTooltipAdapterConfig.tokens as unknown as Record<string, unknown>, muiTooltipMappings),
+  },
+  {
+    // PROPOSED by propose-tooltip.ts (the hand table above is the same capture read by a person).
+    archetype: "tooltip",
+    library: "antd-proposed",
+    source: src(antdTooltipProposedConfig),
+    ledgerFile: ANTD_TOOLTIP_LEDGER_PROPOSED,
+    tokens: antdTooltipProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: antdTooltipProposedMappings,
+    extras: extrasFor(antdTooltipProposedConfig.tokens as unknown as Record<string, unknown>, antdTooltipProposedMappings),
+  },
+  {
+    // PROPOSED by propose-tooltip.ts (the same capture as the hand table).
+    archetype: "tooltip",
+    library: "mui-proposed",
+    source: src(muiTooltipProposedConfig),
+    ledgerFile: MUI_TOOLTIP_LEDGER_PROPOSED,
+    tokens: muiTooltipProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiTooltipProposedMappings,
+    extras: extrasFor(muiTooltipProposedConfig.tokens as unknown as Record<string, unknown>, muiTooltipProposedMappings),
+  },
+  {
+    // PROPOSED by propose-tooltip.ts (held out).
+    archetype: "tooltip",
+    library: "shadcn",
+    source: src(shadcnTooltipProposedConfig),
+    ledgerFile: SHADCN_TOOLTIP_LEDGER_PROPOSED,
+    tokens: shadcnTooltipProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: shadcnTooltipProposedMappings,
+    extras: extrasFor(shadcnTooltipProposedConfig.tokens as unknown as Record<string, unknown>, shadcnTooltipProposedMappings),
   },
   {
     archetype: "tooltip",

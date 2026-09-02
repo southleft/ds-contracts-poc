@@ -3,8 +3,8 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **three archetypes**
-> (checkbox@1, switch@1, avatar@1) and has been proven on **three libraries
+> plugin can run in any file. It works today for **four archetypes**
+> (checkbox@1, switch@1, avatar@1, tooltip@1) and has been proven on **three libraries
 > the recipe path was never taught** — Chakra UI and shadcn — including one control
 > captured for the first time the same day (Chakra's Switch: a person wrote
 > the config entry, the command did the rest, four states pixel-identical).
@@ -81,6 +81,11 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 ## What it proved
 
+On tooltip@1, a floating component: the proposal names the placement
+wrapper, the arrow and the shadow as refusals read from the capture; AntD
+from its own capture scores the hand row's 3.01%, shadcn 4.73%
+(`recipe/evidence/fidelity-v1/f1-tooltip-proposed/`).
+
 On avatar@1, five captures at once: MUI and AntD from their own captures
 score 0.00% beside the hand-written rows (which pin initials the capture does
 not render), Altitude — never hand-tabled — scores 0.38%, and shadcn and
@@ -127,9 +132,9 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** checkbox@1, switch@1 and avatar@1 have proposers
-  today (`propose-fixture.ts`, `propose-switch.ts`, `propose-avatar.ts`);
-  the other ten boilerplate archetypes still have hand tables only.
+- **Other archetypes.** checkbox@1, switch@1, avatar@1 and tooltip@1 have
+  proposers today; the other nine boilerplate archetypes still have hand
+  tables only.
 - **A font this machine lacks.** The proposer cannot know Figma's font list.
   When the requested face is missing, the writer refuses by name and the
   person gives `--set typography.label.resolved="Family/Style" --why …`; the
@@ -162,6 +167,7 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 | `recipe/fixture-reader/propose-fixture.ts` | evaluates a schema against a ledger and writes the checkbox fixture module |
 | `recipe/fixture-reader/propose-switch.ts` | the switch fixture module, same contract |
 | `recipe/fixture-reader/schema-avatar.ts`, `propose-avatar.ts` | avatar@1: box and label roles; the same contract |
+| `recipe/fixture-reader/schema-tooltip.ts`, `propose-tooltip.ts` | tooltip@1: the tip role; placement, arrow and shadow refused from the capture |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

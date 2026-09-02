@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "",
+  "evidence": {
+    "box": {
+      "selector": "idx:0",
+      "why": "div is the painted part that carries (or contains) the text: bg oklch(0.145 0 0), padding 6px 12px, radius 8px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "the box carries the text itself",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

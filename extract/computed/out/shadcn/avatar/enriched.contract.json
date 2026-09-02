@@ -4,7 +4,7 @@
   "name": "Avatar",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Fallback-only capture by name (AvatarImage refused in a network-free harness — RECON §4.2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Fallback-only capture by name (AvatarImage refused in a network-free harness — RECON §4.2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -53,17 +53,28 @@
           },
           "declared": {
             "aspect-ratio": "1 / 1",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
             "font-family": "\"Inter Variable\", sans-serif",
             "user-select": "none"
           },
           "tokens": {
             "background-color": "{imported.avatar.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-e5e5e5}",
             "border-bottom-left-radius": "{imported.shared.size-9999}",
             "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-left-color": "{imported.shared.color-e5e5e5}",
+            "border-right-color": "{imported.shared.color-e5e5e5}",
+            "border-top-color": "{imported.shared.color-e5e5e5}",
             "border-top-left-radius": "{imported.shared.size-9999}",
             "border-top-right-radius": "{imported.shared.size-9999}",
             "color": "{imported.avatar.label.color}",
-            "font-weight": "{imported.avatar.label.font-weight}"
+            "font-weight": "{imported.avatar.label.font-weight}",
+            "outline-color": "{imported.avatar.label.outline-color}",
+            "tab-size": "{imported.avatar.label.tab-size}"
           },
           "tokensByProp": [
             {
@@ -93,19 +104,32 @@
         }
       },
       "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "\"Inter Variable\", sans-serif",
         "position": "relative",
         "user-select": "none"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-e5e5e5}",
         "border-bottom-left-radius": "{imported.shared.size-9999}",
         "border-bottom-right-radius": "{imported.shared.size-9999}",
+        "border-left-color": "{imported.shared.color-e5e5e5}",
+        "border-right-color": "{imported.shared.color-e5e5e5}",
+        "border-top-color": "{imported.shared.color-e5e5e5}",
         "border-top-left-radius": "{imported.shared.size-9999}",
         "border-top-right-radius": "{imported.shared.size-9999}",
         "bottom": "{imported.shared.size-0}",
         "color": "{imported.avatar.root.color}",
         "flex-shrink": "{imported.avatar.root.flex-shrink}",
         "left": "{imported.shared.size-0}",
+        "line-height": "{imported.avatar.root.line-height}",
+        "outline-color": "{imported.avatar.root.outline-color}",
         "right": "{imported.shared.size-0}",
+        "tab-size": "{imported.avatar.root.tab-size}",
         "top": "{imported.shared.size-0}"
       },
       "tokensByProp": [

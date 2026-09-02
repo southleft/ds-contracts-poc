@@ -4,7 +4,7 @@
   "name": "Tooltip",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Portal (RECON H3): degraded by design — no state planes, no source names (portalSweep takes no varPrefix). Provider rides the global mount wrapper. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Portal (RECON H3): degraded by design — no state planes, no source names (portalSweep takes no varPrefix). Provider rides the global mount wrapper. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -14,6 +14,12 @@
     "root": {
       "declared": {
         "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "\"Inter Variable\", sans-serif",
         "transform": "matrix(1, 0, 0, 1, 0, 50)"
       },
       "parts": {
@@ -30,7 +36,13 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
-                "position": "absolute"
+                "position": "absolute",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "font-family": "\"Inter Variable\", sans-serif"
               },
               "parts": {
                 "icon": {
@@ -38,6 +50,12 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "font-family": "\"Inter Variable\", sans-serif",
                     "overflow-x": "hidden",
                     "overflow-y": "hidden"
                   },
@@ -46,22 +64,38 @@
                       "element": "polygon",
                       "description": "Promoted from the computed floor (round 4): rendered anatomy polygon| — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
-                        "display": "inline"
+                        "display": "inline",
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "box-sizing": "border-box",
+                        "font-family": "\"Inter Variable\", sans-serif"
                       },
                       "tokens": {
+                        "border-bottom-color": "{imported.shared.color-e5e5e5}",
+                        "border-left-color": "{imported.shared.color-e5e5e5}",
+                        "border-right-color": "{imported.shared.color-e5e5e5}",
+                        "border-top-color": "{imported.shared.color-e5e5e5}",
                         "color": "{imported.shared.color-ffffff}",
                         "fill": "{imported.shared.color-0a0a0a}",
                         "font-size": "{imported.shared.size-12}",
                         "line-height": "{imported.shared.size-16}",
                         "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
+                        "min-width": "{imported.shared.size-0}",
+                        "outline-color": "{imported.shared.color-a1a1a180}",
+                        "tab-size": "{imported.shared.num-4}"
                       }
                     }
                   },
                   "tokens": {
                     "background-color": "{imported.shared.color-0a0a0a}",
+                    "border-bottom-color": "{imported.shared.color-e5e5e5}",
                     "border-bottom-left-radius": "{imported.shared.size-2}",
                     "border-bottom-right-radius": "{imported.shared.size-2}",
+                    "border-left-color": "{imported.shared.color-e5e5e5}",
+                    "border-right-color": "{imported.shared.color-e5e5e5}",
+                    "border-top-color": "{imported.shared.color-e5e5e5}",
                     "border-top-left-radius": "{imported.shared.size-2}",
                     "border-top-right-radius": "{imported.shared.size-2}",
                     "color": "{imported.shared.color-ffffff}",
@@ -71,12 +105,18 @@
                     "line-height": "{imported.shared.size-16}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
+                    "outline-color": "{imported.shared.color-a1a1a180}",
+                    "tab-size": "{imported.shared.num-4}",
                     "width": "{imported.shared.size-10}",
                     "z-index": "{imported.shared.num-50}"
                   }
                 }
               },
               "tokens": {
+                "border-bottom-color": "{imported.shared.color-e5e5e5}",
+                "border-left-color": "{imported.shared.color-e5e5e5}",
+                "border-right-color": "{imported.shared.color-e5e5e5}",
+                "border-top-color": "{imported.shared.color-e5e5e5}",
                 "bottom": "{imported.tooltip.part-0-0.bottom}",
                 "color": "{imported.shared.color-ffffff}",
                 "font-size": "{imported.shared.size-12}",
@@ -85,16 +125,30 @@
                 "line-height": "{imported.shared.size-16}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
+                "outline-color": "{imported.shared.color-a1a1a180}",
                 "right": "{imported.tooltip.part-0-0.right}",
+                "tab-size": "{imported.shared.num-4}",
                 "top": "{imported.shared.size-0}",
                 "width": "{imported.shared.size-10}"
               }
             }
           },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "\"Inter Variable\", sans-serif"
+          },
           "tokens": {
             "background-color": "{imported.shared.color-0a0a0a}",
+            "border-bottom-color": "{imported.shared.color-e5e5e5}",
             "border-bottom-left-radius": "{imported.shared.size-8}",
             "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-left-color": "{imported.shared.color-e5e5e5}",
+            "border-right-color": "{imported.shared.color-e5e5e5}",
+            "border-top-color": "{imported.shared.color-e5e5e5}",
             "border-top-left-radius": "{imported.shared.size-8}",
             "border-top-right-radius": "{imported.shared.size-8}",
             "color": "{imported.shared.color-ffffff}",
@@ -105,19 +159,29 @@
             "max-width": "{imported.tooltip.label.max-width}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
+            "outline-color": "{imported.shared.color-a1a1a180}",
             "padding-bottom": "{imported.shared.size-6}",
             "padding-left": "{imported.shared.size-12}",
             "padding-right": "{imported.shared.size-12}",
             "padding-top": "{imported.shared.size-6}",
             "row-gap": "{imported.shared.size-6}",
+            "tab-size": "{imported.shared.num-4}",
             "z-index": "{imported.shared.num-50}"
           },
           "hugsBelowMaxWidth": true
         }
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-e5e5e5}",
+        "border-left-color": "{imported.shared.color-e5e5e5}",
+        "border-right-color": "{imported.shared.color-e5e5e5}",
+        "border-top-color": "{imported.shared.color-e5e5e5}",
+        "color": "{imported.shared.color-0a0a0a}",
         "height": "{imported.tooltip.root.height}",
+        "line-height": "{imported.tooltip.root.line-height}",
         "min-height": "{imported.shared.size-0}",
+        "outline-color": "{imported.shared.color-a1a1a180}",
+        "tab-size": "{imported.shared.num-4}",
         "translate-x": "{imported.shared.size-0}",
         "translate-y": "{imported.tooltip.root.translate-y}",
         "width": "{imported.tooltip.root.width}",

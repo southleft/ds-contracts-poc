@@ -25,7 +25,9 @@ import {
 
 export const TOOLTIP_FIGMA_NAMESPACE = "ds.contracts.tooltip.recipe.v1";
 export const TOOLTIP_FIGMA_WRITER_VERSION = 1;
-export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v7";
+export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v8";
+/** v7 stay (proposed AntD, MUI and shadcn tooltips as fourth to sixth sources) is preserved as evidence and never written again. */
+export const FORBIDDEN_TOOLTIP_V7_PAGE_ID = "218:90391";
 /** v6 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TOOLTIP_V6_PAGE_ID = "218:87801";
 /** v5 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
@@ -264,6 +266,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:90391", "marker": "TOOLTIP-V7-PAGE" },
     { "id": "218:87801", "marker": "TOOLTIP-V6-PAGE" },
     { "id": "218:86308", "marker": "TOOLTIP-V5-PAGE" },
     { "id": "218:84826", "marker": "TOOLTIP-V4-PAGE" },

@@ -22,6 +22,7 @@ import { Ledger, type LedgerPart } from "./ledger.js";
 import type { CheckboxRoles } from "./schema-checkbox.js";
 import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 import type { AvatarRoles } from "./schema-avatar.js";
+import type { TooltipRoles } from "./schema-tooltip.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -306,5 +307,39 @@ export function draftAvatarRoles(ledger: Ledger): AvatarRoleDraft {
     if (textPart.idxPath !== box.idxPath) roles.label = sel(textPart);
     evidence.label = { selector: roles.label ?? roles.box!, why: `${textPart.tag}${textPart.classes.length ? "." + textPart.classes[0] : ""} carries the initials ${JSON.stringify(textPart.text.find((t) => t.trim().length > 0))}${textPart.idxPath === box.idxPath ? " (the box itself)" : ""}`, confidence: "high" };
   } else unresolved.push("label: no part carries text — avatar@1 needs initials");
+  return { roles, combo, evidence, unresolved };
+}
+
+export interface TooltipRoleDraft {
+  roles: Partial<TooltipRoles>;
+  combo: string | null;
+  evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
+  unresolved: string[];
+}
+
+/**
+ * tooltip@1 roles: the BOX is the painted part that carries the text (or
+ * whose descendant does) — popper wrappers and arrows are transparent. The
+ * COMBO prefers an "on"/open capture, else the first `__default`.
+ */
+export function draftTooltipRoles(ledger: Ledger): TooltipRoleDraft {
+  const evidence: TooltipRoleDraft["evidence"] = {};
+  const keys = ledger.keys().filter((k) => k.endsWith("__default"));
+  const pick = keys.find((k) => /(^|\.)(on|open|normal\.on)(__)/.test(k)) ?? keys[0];
+  if (!pick) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture in the ledger"] };
+  const combo = pick.slice(0, -"__default".length);
+  const c = ledger.capture(pick);
+  const transparent = (v: string | undefined): boolean => !v || /^rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0\)$/.test(v) || v === "transparent";
+  const hasText = (p: LedgerPart): boolean => !!p.text && p.text.some((t) => t.trim().length > 0);
+  const box = c.parts.find((p) => !transparent(p.style["background-color"]) && num(p.style.width) > 0 && (hasText(p) || c.parts.some((q) => q.idxPath.startsWith(p.idxPath === "" ? "" : p.idxPath + ".") && q.idxPath !== p.idxPath && hasText(q))));
+  const roles: Partial<TooltipRoles> = {};
+  const unresolved: string[] = [];
+  if (box) {
+    roles.box = sel(box);
+    evidence.box = { selector: roles.box, why: `${box.tag}${box.classes.length ? "." + box.classes[0] : ""} is the painted part that carries (or contains) the text: bg ${box.style["background-color"]}, padding ${box.style["padding-top"]} ${box.style["padding-left"]}, radius ${box.style["border-top-left-radius"]}`, confidence: "high" };
+    const textPart = hasText(box) ? box : c.parts.find((q) => q.idxPath.startsWith(box.idxPath === "" ? "" : box.idxPath + ".") && hasText(q));
+    if (textPart && textPart.idxPath !== box.idxPath) { roles.label = sel(textPart); evidence.label = { selector: roles.label, why: `${textPart.tag} carries the text ${JSON.stringify(textPart.text!.find((t) => t.trim().length > 0))}`, confidence: "high" }; }
+    else evidence.label = { selector: roles.box, why: "the box carries the text itself", confidence: "high" };
+  } else unresolved.push("box: no painted part carries text");
   return { roles, combo, evidence, unresolved };
 }

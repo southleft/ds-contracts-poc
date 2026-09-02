@@ -1,0 +1,111 @@
+{
+  "archetype": "tooltip",
+  "library": "antd",
+  "ledger": "extract/computed/out/antd/tooltip/captured-truth.json",
+  "provenance": {
+    "package": "antd",
+    "version": "5.29.3",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "idx:1.0"
+  },
+  "combo": "",
+  "leaves": {
+    "box.height": {
+      "value": 0,
+      "from": "spelling",
+      "why": "the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug)"
+    },
+    "box.paddingX": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.padding-left"
+    },
+    "box.paddingY": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.padding-top"
+    },
+    "box.radius": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 22,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.line-height",
+      "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+    },
+    "lineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.line-height",
+      "formula": "CSS normal → auto; a length → px"
+    },
+    "decoration": {
+      "value": "none",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.text-decoration-line",
+      "formula": "text-decoration-line underline → underline, else none"
+    },
+    "rest.boxFill": {
+      "value": "#000000d9",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.opacity"
+    },
+    "rest.label": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": "Tooltip text"
+  },
+  "typography": {
+    "family": "Roboto",
+    "style": "Regular",
+    "stack": "Roboto, Helvetica, Arial, sans-serif"
+  }
+}

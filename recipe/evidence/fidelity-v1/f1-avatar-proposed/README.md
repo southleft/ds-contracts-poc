@@ -2,15 +2,15 @@
 
 `recipe/fixture-reader/schema-avatar.ts`, `draftAvatarRoles` and
 `propose-avatar.ts`; `npm run recipe:point -- --archetype avatar --library <lib>`.
-Five captures were pointed at, every one **13 leaves read, 0 invented**:
+Five captures were pointed at, every one **13 leaves read, 0 invented**, and every one now scores against a real render:
 
 | library | kind | reviewed | manifest row | score (v6, page `218:90709`) |
 |---|---|---|---|---|
 | mui | its own capture, beside the hand table | none | `avatar/mui-proposed` | **0.00%** (hand row: 4%) |
 | antd | its own capture, beside the hand table | none | `avatar/antd-proposed` | **0.00%** (hand row: 2.73%) |
 | altitude | **held out** — never hand-tabled | none | `avatar/altitude` | **0.38%** |
-| shadcn | held out | font fallback (Inter Variable → Inter, named) | none: captured before `--keep-originals`, no real render to score | — |
-| fluent | held out | font fallback (Segoe UI → Arial Bold, named degradation) | none: same | — |
+| shadcn | **held out** | font fallback (Inter Variable → Inter, named) | `avatar/shadcn` (re-captured with `--keep-originals`) | **0.29%** |
+| fluent | **held out** | font fallback (Segoe UI → Arial Bold, named degradation) | `avatar/fluent` (re-captured) | **0.00%** — with a caveat: the reference was rendered on this same machine, where Segoe UI is also missing, so both sides show a fallback face; the score proves the fixture matches the capture, not Fluent on Windows |
 
 The proposed MUI and AntD rows beat the hand rows for a reason worth
 recording: the hand tables pin the initials `JD` and (AntD) an SF Pro font

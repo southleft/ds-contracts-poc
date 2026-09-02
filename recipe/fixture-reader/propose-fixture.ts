@@ -184,6 +184,35 @@ export function interactionRefusals(ledger: Ledger, archetype: string): Array<{ 
   }));
 }
 
+/**
+ * A box-shadow the archetype has no leaf for is a refusal the capture can
+ * name: the shadow is read, recorded verbatim as evidence, and refused.
+ */
+export function shadowRefusal(ledger: Ledger, combo: string, part: string, archetype: string): Array<{ id: string; evidence: string; target: string; reason: "refused-by-recipe" }> {
+  let v = "none";
+  try { v = ledger.raw(`${combo}__default`, part, "box-shadow"); } catch { return []; }
+  if (!v || v === "none") return [];
+  return [{ id: "refusal-box-shadow", evidence: `${ledger.file}#${combo}__default ${part}.box-shadow = ${v}; ${archetype}@1 has no shadow leaf, so the shadow is not minted`, target: "box-shadow", reason: "refused-by-recipe" as const }];
+}
+
+/**
+ * What a floating archetype (tooltip, menu, dialog) always leaves out, named
+ * from the capture: the PLACEMENT — a transparent positioned wrapper around
+ * the box (a popper/portal) — and an ARROW part (a class containing "arrow",
+ * or an svg inside the box that carries no text).
+ */
+export function floatingRefusals(ledger: Ledger, combo: string, boxSel: string, archetype: string): Array<{ id: string; evidence: string; target: string; reason: "refused-by-recipe" }> {
+  const key = `${combo}__default`;
+  const c = ledger.capture(key);
+  const boxIdx = boxSel === "root" ? "" : boxSel.startsWith("idx:") ? boxSel.slice(4) : null;
+  const out: Array<{ id: string; evidence: string; target: string; reason: "refused-by-recipe" }> = [];
+  const positioned = c.parts.find((p) => (p.style.position === "absolute" || p.style.position === "fixed") && (boxIdx === null || boxIdx.startsWith(p.idxPath) ) && p.idxPath !== boxIdx);
+  if (positioned) out.push({ id: "refusal-placement", evidence: `${ledger.file}#${key} ${positioned.idxPath === "" ? "root" : "idx:" + positioned.idxPath} (${positioned.tag}${positioned.classes[0] ? "." + positioned.classes[0] : ""}) is position:${positioned.style.position} — the ${archetype}'s placement relative to its anchor is a runtime fact ${archetype}@1 does not carry`, target: "placement", reason: "refused-by-recipe" });
+  const arrow = c.parts.find((p) => p.classes.some((k) => /arrow/i.test(k)) || (p.tag === "svg" && boxIdx !== null && p.idxPath.startsWith(boxIdx ? boxIdx + "." : "") && !(p.text ?? []).some((t) => t.trim())));
+  if (arrow) out.push({ id: "refusal-arrow", evidence: `${ledger.file}#${key} ${arrow.idxPath === "" ? "root" : "idx:" + arrow.idxPath} (${arrow.tag}${arrow.classes[0] ? "." + arrow.classes[0] : ""}) ${arrow.style.width}×${arrow.style.height} is the arrow — ${archetype}@1 has no arrow part`, target: "arrow", reason: "refused-by-recipe" });
+  return out;
+}
+
 const q = (s: unknown): string => JSON.stringify(s);
 
 function renderModule(p: Proposal, opts: { slug: string; displayName: string; exportName: string; sourceRoot: string; unsupported: string[] }): string {

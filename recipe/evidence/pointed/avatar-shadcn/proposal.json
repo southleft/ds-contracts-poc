@@ -5,7 +5,7 @@
   "provenance": {
     "package": "@shadcn-sandbox/ui",
     "version": "0.0.1",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
   },
   "roles": {
     "box": "idx:0"

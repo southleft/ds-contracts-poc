@@ -4,7 +4,7 @@
   "name": "Avatar",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: shape=circular, active=unset, activeAppearance=ring (pinned, not an axis), size=32. THE DRAFTER PINNED active=active (first enum value) — the documented default is unset; this is the second of the two measured wrong-base-combo cases of RECON §3a. The `image` slot is refused by name (needs a remote src in a network-free harness); initials are deterministic from name=\"Fluent Two\". COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: shape=circular, active=unset, activeAppearance=ring (pinned, not an axis), size=32. THE DRAFTER PINNED active=active (first enum value) — the documented default is unset; this is the second of the two measured wrong-base-combo cases of RECON §3a. The `image` slot is refused by name (needs a remote src in a network-free harness); initials are deterministic from name=\"Fluent Two\". COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -89,7 +89,9 @@
     "root": {
       "declared": {
         "display": "block",
-        "position": "relative"
+        "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+        "position": "relative",
+        "text-align": "left"
       },
       "parts": {
         "label": {
@@ -103,6 +105,7 @@
             "border-right-style": "solid",
             "border-top-style": "solid",
             "box-sizing": "border-box",
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
             "text-align": "center",
             "user-select": "none"
           },
@@ -188,11 +191,13 @@
       },
       "tokens": {
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.avatar.root.color}",
         "flex-shrink": "{imported.avatar.root.flex-shrink}",
         "font-size": "{imported.avatar.root.font-size.unset}",
         "font-weight": "{imported.avatar.root.font-weight}",
         "height": "{imported.avatar.root.height.unset}",
         "left": "{imported.shared.size-0}",
+        "line-height": "{imported.avatar.root.line-height}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}",
         "width": "{imported.avatar.root.width.unset}"

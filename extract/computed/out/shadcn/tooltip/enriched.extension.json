@@ -2,13 +2,71 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@shadcn-sandbox/ui@0.0.1",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "mintedTokens": {
     "imported": {
+      "shared": {
+        "color-e5e5e5": {
+          "$value": "#e5e5e5",
+          "$type": "color"
+        },
+        "color-0a0a0a": {
+          "$value": "#0a0a0a",
+          "$type": "color"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-a1a1a180": {
+          "$value": "#a1a1a180",
+          "$type": "color"
+        },
+        "num-4": {
+          "$value": "4",
+          "$type": "number"
+        },
+        "num-50": {
+          "$value": "50",
+          "$type": "number"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "color-ffffff": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "size-6": {
+          "$value": "6px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-10": {
+          "$value": "10px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        }
+      },
       "tooltip": {
         "root": {
           "height": {
             "$value": "28px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "24px",
             "$type": "dimension"
           },
           "translate-y": {
@@ -44,52 +102,40 @@
             "$type": "dimension"
           }
         }
-      },
-      "shared": {
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        },
-        "num-50": {
-          "$value": "50",
-          "$type": "number"
-        },
-        "color-0a0a0a": {
-          "$value": "#0a0a0a",
-          "$type": "color"
-        },
-        "size-8": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
-        "color-ffffff": {
-          "$value": "#ffffff",
-          "$type": "color"
-        },
-        "size-6": {
-          "$value": "6px",
-          "$type": "dimension"
-        },
-        "size-12": {
-          "$value": "12px",
-          "$type": "dimension"
-        },
-        "size-16": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "size-10": {
-          "$value": "10px",
-          "$type": "dimension"
-        },
-        "size-2": {
-          "$value": "2px",
-          "$type": "dimension"
-        }
       }
     }
   },
   "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
     {
       "part": "label",
       "channel": "caret-color",
@@ -229,8 +275,128 @@
     "base": [
       {
         "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
+        "part": "root",
         "channel": "transform",
         "value": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
+        "part": "icon",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "icon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "icon",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
       },
       {
         "part": "icon",
@@ -241,6 +407,36 @@
         "part": "icon",
         "channel": "overflow-y",
         "value": "hidden"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0-0-0-0",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
       }
     ],
     "state": []
@@ -261,10 +457,31 @@
       "distinctValues": 1
     },
     {
+      "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "label",
       "channel": "--tw-enter-translate-y",
       "reason": "CSS custom property, not a styled channel — `--tw-enter-translate-y` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `calc(2*0.25rem*-1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "sample": "calc(2*0.25rem*-1)",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -297,6 +514,13 @@
     },
     {
       "part": "icon",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
       "channel": "translate",
       "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "0px calc(-50% - 2px)",
@@ -314,6 +538,13 @@
       "channel": "height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <polygon>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <polygon> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0-0-0",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <polygon>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <polygon> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -340,27 +571,46 @@
     "portal-anchor-receipt:  — 1 in-stage root(s) (the mount's anchor child) NOT carried; the portaled overlay is the captured root"
   ],
   "styledChannelReceipts": [
-    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "viewport-derived-geometry-refused: root (position:fixed) — bottom, left, right, top NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 219.031px + right 680.969px = 900px = browser.viewport.width (900px); top 0px + box 28px + bottom 972px = 1000px = browser.viewport.height (1000px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
     "viewport-anchored-translate-carried: root — translate-x/0px translate-y/50px is a POSITIONING offset written by the library's own positioner (floating-ui/popper) against where the anchor happened to sit in the capture stage. It is harness-coupled by the same argument as the refused insets, but no arithmetic in one capture proves it, so it is CARRIED and named here rather than refused on a hunch.",
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion) — EXCEPT bottom, left, right, top, which this part's box took from the capture WINDOW (see viewport-derived-geometry-refused: root)",
     "absolute-geometry-admitted: part-0-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-0-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-equal-drop: root — 452 of 479 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 20 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=oklch(0.145 0 0) (in-page control also read oklch(0.145 0 0); UA control reads rgba(0, 0, 0, 1)); color=oklch(0.145 0 0) (in-page control also read oklch(0.145 0 0); UA control reads rgba(0, 0, 0, 1)); column-rule-color=oklch(0.145 0 0) (in-page control also read oklch(0.145 0 0); UA control reads rgba(0, 0, 0, 1)); font-family=\"Inter Variable\", sans-serif (in-page control also read \"Inter Variable\", sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=oklab(0.708 0 0 / 0.5) (in-page control also read oklab(0.708 0 0 / 0.5); UA control reads rgba(0, 0, 0, 1)); row-rule-color=oklch(0.145 0 0) (in-page control also read oklch(0.145 0 0); UA control reads rgba(0, 0, 0, 1)); tab-size=4 (in-page control also read 4; UA control reads 8); text-decoration-color=oklch(0.145 0 0) (in-page control also read oklch(0.145 0 0); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=oklch(0.145 0 0) (in-page control also read oklch(0.145 0 0); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
     "translate-door-generalized: root — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
-    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-equal-drop: root — 363 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 442 of 481 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 13 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=\"Inter Variable\", sans-serif (in-page control also read \"Inter Variable\", sans-serif; UA control reads Times); outline-color=oklab(0.708 0 0 / 0.5) (in-page control also read oklab(0.708 0 0 / 0.5); UA control reads rgba(0, 0, 0, 1)); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 353 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0-0 — 452 of 483 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0 — 13 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=\"Inter Variable\", sans-serif (in-page control also read \"Inter Variable\", sans-serif; UA control reads Times); outline-color=oklab(0.708 0 0 / 0.5) (in-page control also read oklab(0.708 0 0 / 0.5); UA control reads rgba(0, 0, 0, 1)); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
     "translate-door-refused: part-0-0 — non-translate transform (matrix(-1, 0, 0, -1, 0, 0)); the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) — named refusal, pseudo-decor v2 round",
+    "control-equal-drop: part-0-0 — 363 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon)",
+    "control-equal-drop: icon — 444 of 483 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon — 13 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=\"Inter Variable\", sans-serif (in-page control also read \"Inter Variable\", sans-serif; UA control reads Times); outline-color=oklab(0.708 0 0 / 0.5) (in-page control also read oklab(0.708 0 0 / 0.5); UA control reads rgba(0, 0, 0, 1)); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
     "translate-door-refused: icon — translate outside the bounded grammar (0px calc(-50% - 2px)); the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) — named refusal, pseudo-decor v2 round",
+    "control-equal-drop: icon — 356 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <polygon> — span control used (part part-0-0-0-0)",
-    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (icon, label, part-0-0, part-0-0-0-0); -webkit-text-stroke-color (icon, label, part-0-0, part-0-0-0-0)",
+    "ua-control-fallback: no UA baseline for <polygon> — span UA control used (part part-0-0-0-0)",
+    "control-equal-drop: part-0-0-0-0 — 456 of 483 admitted channels compared EQUAL to the <polygon> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0-0-0 — 13 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-color=oklch(0.922 0 0) (in-page control also read oklch(0.922 0 0); UA control reads rgba(0, 0, 0, 1)); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=\"Inter Variable\", sans-serif (in-page control also read \"Inter Variable\", sans-serif; UA control reads Times); outline-color=oklab(0.708 0 0 / 0.5) (in-page control also read oklab(0.708 0 0 / 0.5); UA control reads rgba(0, 0, 0, 1)); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0-0-0 — 367 channel(s) EQUAL to the <polygon> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: icon — block-size 10px, inline-size 10px, perspective-origin 5px 5px, transform-origin 5px 5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 28px, height 28px, inline-size 219.031px, perspective-origin 109.516px 14px, transform-origin 38.5861px -10px, width 219.031px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0 — block-size 10px, inline-size 10px, perspective-origin 5px 5px, transform-origin 5px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 28px, inline-size 219.031px, perspective-origin 109.516px 14px, transform-origin 109.516px 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-tap-highlight-color (icon, label, part-0-0, part-0-0-0-0, root); -webkit-text-fill-color (icon, label, part-0-0, part-0-0-0-0, root); -webkit-text-stroke-color (icon, label, part-0-0, part-0-0-0-0, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: icon.fill — values track ancestor \"part-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-only: icon.caret-color equals ancestor \"part-0-0\" on all 1 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: icon.color equals ancestor \"part-0-0\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: icon.font-size equals ancestor \"part-0-0\" on all 1 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
@@ -426,9 +676,39 @@
   },
   "enrichmentNotes": [
     "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = \"Inter Variable\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.transform = matrix(1, 0, 0, 1, 0, 50) (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = \"Inter Variable\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0.font-family = \"Inter Variable\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.font-family = \"Inter Variable\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-0-0.font-family = \"Inter Variable\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "sizing evidence carried: label.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)"
   ]
 }

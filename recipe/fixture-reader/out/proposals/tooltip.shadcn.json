@@ -1,0 +1,123 @@
+{
+  "archetype": "tooltip",
+  "library": "shadcn",
+  "ledger": "extract/computed/out/shadcn/tooltip/captured-truth.json",
+  "provenance": {
+    "package": "@shadcn-sandbox/ui",
+    "version": "0.0.1",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "",
+  "leaves": {
+    "box.height": {
+      "value": 0,
+      "from": "spelling",
+      "why": "the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug)"
+    },
+    "box.paddingX": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.padding-left"
+    },
+    "box.paddingY": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.padding-top"
+    },
+    "box.radius": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.line-height",
+      "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+    },
+    "lineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.line-height",
+      "formula": "CSS normal → auto; a length → px"
+    },
+    "decoration": {
+      "value": "none",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.text-decoration-line",
+      "formula": "text-decoration-line underline → underline, else none"
+    },
+    "rest.boxFill": {
+      "value": "#0a0a0aff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#e5e5e5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.opacity"
+    },
+    "rest.label": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Inter Variable",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "typography.label.resolved": {
+      "value": "Inter/Regular",
+      "from": "set",
+      "why": "\"Inter Variable\" is @fontsource-variable/inter's family name for Inter (the sandbox's index.css imports it); Figma names the same face Inter — reviewed fallback to Inter Regular"
+    }
+  },
+  "receipts": [
+    {
+      "path": "typography.label.resolved",
+      "why": "the requested face is not on the minting machine",
+      "evidence": "\"Inter Variable\" is @fontsource-variable/inter's family name for Inter (the sandbox's index.css imports it); Figma names the same face Inter — reviewed fallback to Inter Regular",
+      "value": "Inter/Regular"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": "Tooltip copy for the shadcn round."
+  },
+  "typography": {
+    "family": "Inter Variable",
+    "style": "Regular",
+    "stack": "\"Inter Variable\", sans-serif"
+  }
+}

@@ -228,9 +228,9 @@ their component-property overrides.
   package rendering in the same pinned Chromium — an exact string match over
   the browser's full longhand set, no tolerance, no whitelist, so a channel the
   pipeline never opened still counts against it. 116 components across nine
-  libraries and six styling architectures: 85.8% cell-weighted over 740,298
+  libraries and six styling architectures: 85.8% cell-weighted over 742,206
   cells, 58 of 121 at ≥90%, 94 of 121 at ≥80%. Every one of the 116 is listed
-  worst-first in [24 §3.1](24-what-works.md) — the worst is 50.0%.
+  worst-first in [24 §3.1](24-what-works.md) — the worst is 47.6%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
   configuration per library (below), and breadth — see the coverage bullet.
 - **The STOP is the design, not friction.** The drafted capture config

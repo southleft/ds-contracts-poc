@@ -322,13 +322,31 @@ margin, shadow lengths × scale — and every state of switch v12 (page
 at, each 13 leaves read and 0 invented. MUI and AntD from their own captures
 score **0.00%** beside hand rows of 4% and 2.73% — the hand tables pin
 initials and a font the capture does not render. Altitude, never hand-tabled,
-scores **0.38%**. shadcn and Fluent propose (with a reviewed, named font
-fallback each) but have no real render to score: captured before
-`--keep-originals`. The writer's font-provenance check now compares style
+scores **0.38%**. shadcn and Fluent, re-captured with `--keep-originals`
+and proposed with a reviewed, named font fallback each, score **0.29%** and
+**0.00%** (Fluent's reference was rendered on this same Segoe-UI-less
+machine, so both sides show a fallback face). The writer's font-provenance check now compares style
 names without case ("SemiBold" ≡ "Semibold"), a runtime rule all thirteen
 archetypes were reminted through with scores unchanged. See
 `f1-avatar-proposed/README.md`.
 
     avatar/mui-proposed 0.00% · avatar/antd-proposed 0.00% · avatar/altitude 0.38%
+    avatar/shadcn 0.29% · avatar/fluent 0.00%
 
-    25 pass · 0 fringe · 7 known
+    27 pass · 0 fringe · 7 known
+
+## 2026-09-02 (later) — a fourth archetype: tooltip
+
+`propose-tooltip.ts` + `point.ts --archetype tooltip`. A proposal now names
+what a floating component's capture always holds and the archetype does not
+carry — the placement wrapper, the arrow, a box-shadow — as refusals read
+from the ledger. AntD from its own capture scores **3.01%**, the hand row's
+number. shadcn's tooltip, re-captured with real screenshots after the
+portal re-capture's second sweep was fixed (`window.__ALL_PROPS` lost on
+reload), scores **4.73%**. MUI's tooltip proposes but cannot be re-captured:
+its closed popper's transform is unstable across the determinism sweeps,
+which the harness correctly refuses. See `f1-tooltip-proposed/README.md`.
+
+    tooltip/antd-proposed 3.01% · tooltip/shadcn 4.73%
+
+    29 pass · 0 fringe · 7 known

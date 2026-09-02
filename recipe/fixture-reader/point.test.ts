@@ -197,3 +197,26 @@ test("avatar@1 proposes a held-out library (Altitude) and MUI's own capture with
     assert.deepEqual(counts, { ledger: 13, set: 0, spelling: 1 }, lib);
   }
 });
+
+import { draftTooltipRoles } from "./draft-roles.js";
+import { proposeTooltipFixture } from "./propose-tooltip.js";
+import type { TooltipRoles } from "./schema-tooltip.js";
+
+test("tooltip@1 proposes AntD's tip (shadow, placement and arrow named as refusals from the capture) and MUI's (line-height normal → auto)", () => {
+  for (const [lib, expect] of [["antd", { paddingX: 8, radius: 6, unit: "px", text: "Tooltip text", refusals: ["refusal-box-shadow", "refusal-placement", "refusal-arrow"] }], ["mui", { paddingX: 8, radius: 4, unit: "auto", text: "Tooltip text", refusals: ["refusal-placement"] }]] as const) {
+    const ledgerRel = `extract/computed/out/${lib}/tooltip/captured-truth.json`;
+    const draft = draftTooltipRoles(new Ledger(REPO, ledgerRel));
+    assert.deepEqual(draft.unresolved, [], lib);
+    const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+    const out = path.relative(REPO, path.join(dir, `tooltip.${lib}.ts`));
+    const r = proposeTooltipFixture({ library: lib, ledger: ledgerRel, roles: draft.roles as TooltipRoles, combo: draft.combo!, sets: {}, out, unsupported: ["placement"] });
+    assert.deepEqual(r.refused, [], lib);
+    assert.equal(r.proposal.leaves["box.paddingX"]?.value, expect.paddingX, lib);
+    assert.equal(r.proposal.leaves["box.radius"]?.value, expect.radius, lib);
+    assert.equal(r.proposal.leaves["lineHeightUnit"]?.value, expect.unit, lib);
+    assert.equal(r.proposal.leaves["box.height"]?.from, "spelling", `${lib}: the tip hugs`);
+    assert.equal(r.proposal.content.label, expect.text, lib);
+    const module = readFileSync(r.modulePath, "utf8");
+    for (const id of expect.refusals) assert.ok(module.includes(id), `${lib}: ${id} named from the capture`);
+  }
+});

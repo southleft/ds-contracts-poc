@@ -229,6 +229,375 @@
     }
   },
   {
+    "library": "antd-proposed",
+    "archetype": "tooltip",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Tooltip"
+    },
+    "ledger": "extract/computed/out/antd/tooltip/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug) [reviewed 0]"
+      },
+      "box.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.padding-top"
+      },
+      "box.radius": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.line-height — CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.line-height — CSS normal → auto; a length → px"
+      },
+      "decoration": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "match",
+        "captured": "none",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.text-decoration-line — text-decoration-line underline → underline, else none"
+      },
+      "rest.boxFill": {
+        "fixture": "#000000d9",
+        "proposed": "#000000d9",
+        "verdict": "match",
+        "captured": "#000000d9",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-color"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.opacity"
+      },
+      "rest.label": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a CSS border lies inside the box — recipe spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-weight — label font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "mui-proposed",
+    "archetype": "tooltip",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Tooltip"
+    },
+    "ledger": "extract/computed/out/mui/tooltip/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug) [reviewed 0]"
+      },
+      "box.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 11,
+        "proposed": 11,
+        "verdict": "match",
+        "captured": 11,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.line-height — CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      "lineHeightUnit": {
+        "fixture": "auto",
+        "proposed": "auto",
+        "verdict": "match",
+        "captured": "auto",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.line-height — CSS normal → auto; a length → px"
+      },
+      "decoration": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "match",
+        "captured": "none",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.text-decoration-line — text-decoration-line underline → underline, else none"
+      },
+      "rest.boxFill": {
+        "fixture": "#616161eb",
+        "proposed": "#616161eb",
+        "verdict": "match",
+        "captured": "#616161eb",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.border-top-color"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.opacity"
+      },
+      "rest.label": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a CSS border lies inside the box — recipe spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.font-weight — label font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "shadcn",
+    "archetype": "tooltip",
+    "source": {
+      "packageName": "@shadcn-sandbox/ui",
+      "version": "0.0.1",
+      "exportName": "Tooltip"
+    },
+    "ledger": "extract/computed/out/shadcn/tooltip/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug) [reviewed 0]"
+      },
+      "box.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.padding-top"
+      },
+      "box.radius": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.line-height — CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.line-height — CSS normal → auto; a length → px"
+      },
+      "decoration": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "match",
+        "captured": "none",
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.text-decoration-line — text-decoration-line underline → underline, else none"
+      },
+      "rest.boxFill": {
+        "fixture": "#0a0a0aff",
+        "proposed": "#0a0a0aff",
+        "verdict": "match",
+        "captured": "#0a0a0aff",
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#e5e5e5ff",
+        "proposed": "#e5e5e5ff",
+        "verdict": "match",
+        "captured": "#e5e5e5ff",
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-color"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.opacity"
+      },
+      "rest.label": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a CSS border lies inside the box — recipe spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "Inter Variable",
+        "proposed": "Inter Variable",
+        "verdict": "match",
+        "captured": "Inter Variable",
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-weight — label font-weight → style word"
+      }
+    }
+  },
+  {
     "library": "antd",
     "archetype": "tooltip",
     "source": {

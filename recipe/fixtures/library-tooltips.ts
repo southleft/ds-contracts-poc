@@ -7,7 +7,7 @@ import type {
 import { canonicalTooltipRecipeInstance } from "./tooltip.js";
 import type { TooltipRecipeInstance } from "../recipes/tooltip.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): TooltipRecipeInstance["tokens"] => {
@@ -280,7 +280,7 @@ const tokenFacts = (
   return facts;
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -361,7 +361,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedTooltipSource,
   tokens: TooltipRecipeInstance["tokens"],
@@ -369,6 +369,7 @@ const buildConfig = (
   refusals: ReviewedTooltipSourceFact[],
   extraIr: ReviewedTooltipSourceFact[],
   unsupported: string[],
+  content: { label: string } = { label: slug === "antd" ? "Tooltip text" : "Tooltip" },
 ): ReviewedTooltipAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -400,7 +401,7 @@ const buildConfig = (
     identity,
     // antd: the capture mounts title "Tooltip text" (configs/antd.json Tooltip);
     // the other two captures have no tooltip reference yet and keep "Tooltip".
-    content: { label: slug === "antd" ? "Tooltip text" : "Tooltip" },
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -423,7 +424,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedTooltipSource,
 ): ReviewedTooltipSourceFact[] => [

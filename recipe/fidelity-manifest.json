@@ -247,6 +247,22 @@
       "_proposedWhy": "HELD OUT: Altitude's avatar was never hand-tabled; proposed from its capture (13 read, 0 invented) \u2014 IBM Plex Sans SemiBold, the style name matched by the runtime without case."
     },
     {
+      "label": "avatar/shadcn",
+      "page": "218:90709",
+      "component": "avatar/variant/default :: shadcn (proposed) Avatar",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-shadcn-default-v6.png",
+      "reference": "extract/computed/out/shadcn/avatar/orig-shots/default__default.png",
+      "_proposedWhy": "HELD OUT: shadcn's Avatar (the fallback initials span), proposed from its capture (13 read, 0 invented); the requested face 'Inter Variable' is the npm name of Inter \u2014 a reviewed, named fallback to Inter Regular. Re-captured with --keep-originals to have a real render to score."
+    },
+    {
+      "label": "avatar/fluent",
+      "page": "218:90709",
+      "component": "avatar/variant/default :: Fluent (proposed) Avatar",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-fluent-default-v6.png",
+      "reference": "extract/computed/out/fluent/avatar/orig-shots/circular.none.unset__default.png",
+      "_proposedWhy": "HELD OUT: Fluent's Avatar initials, proposed from its capture (13 read, 0 invented); Segoe UI is not installed here, so the fixture carries a named degradation to Arial Bold \u2014 a font-substrate row by construction, scored honestly."
+    },
+    {
       "label": "badge/mui",
       "page": "218:90239",
       "component": "badge/variant/default :: MUI Badge",
@@ -281,10 +297,26 @@
     },
     {
       "label": "tooltip/antd",
-      "page": "218:90391",
+      "page": "218:90912",
       "component": "tooltip/variant/default :: Ant Design Tooltip",
-      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-default-shared-v7.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-default-shared-v8.png",
       "reference": "extract/computed/out/antd/tooltip/orig-shots/__default.png"
+    },
+    {
+      "label": "tooltip/antd-proposed",
+      "page": "218:90912",
+      "component": "tooltip/variant/default :: antd (proposed) Tooltip",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-proposed-default-v8.png",
+      "reference": "extract/computed/out/antd/tooltip/orig-shots/__default.png",
+      "_proposedWhy": "PROPOSED by propose-tooltip.ts from AntD's own capture (14 read, 0 invented; the box-shadow, the placement wrapper and the arrow named as refusals from the capture) \u2014 beside the hand row that transcribes the same capture. MUI's and shadcn's tooltips are proposed too but their captures predate --keep-originals and the portal re-capture currently crashes (window.__ALL_PROPS), so they have no real render to score yet."
+    },
+    {
+      "label": "tooltip/shadcn",
+      "page": "218:90912",
+      "component": "tooltip/variant/default :: shadcn (proposed) Tooltip",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-shadcn-default-v8.png",
+      "reference": "extract/computed/out/shadcn/tooltip/orig-shots/__default.png",
+      "_proposedWhy": "HELD OUT: shadcn's tooltip content, proposed from its capture (14 read, 0 invented; placement and arrow named as refusals); re-captured with --keep-originals after the portal re-capture's second sweep was fixed (window.__ALL_PROPS lost on reload). Inter Variable \u2192 Inter Regular is a reviewed, named font fallback. MUI's tooltip cannot be re-captured: its closed-state popper transform is unstable across the determinism double-sweep, so it stays a proposal without a real render."
     },
     {
       "label": "textarea/astryx",

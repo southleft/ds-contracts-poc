@@ -316,6 +316,543 @@
   },
   {
     "archetype": "tooltip",
+    "library": "antd-proposed",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Tooltip"
+    },
+    "ledgerFile": "extract/computed/out/antd/tooltip/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug)",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-width"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 22,
+        "verdict": "match",
+        "capturedValue": 22,
+        "proposedValue": 22,
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.line-height"
+        ],
+        "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.line-height"
+        ],
+        "formula": "CSS normal → auto; a length → px"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.text-decoration-line"
+        ],
+        "formula": "text-decoration-line underline → underline, else none"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#000000d9",
+        "verdict": "match",
+        "capturedValue": "#000000d9",
+        "proposedValue": "#000000d9",
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.background-color"
+        ]
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.border-top-color"
+        ]
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.opacity"
+        ]
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "a CSS border lies inside the box — recipe spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/antd/tooltip/captured-truth.json#__default idx:1.0.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 2,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "tooltip",
+    "library": "mui-proposed",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Tooltip"
+    },
+    "ledgerFile": "extract/computed/out/mui/tooltip/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug)",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.border-top-width"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 11,
+        "verdict": "match",
+        "capturedValue": 11,
+        "proposedValue": 11,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.line-height"
+        ],
+        "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "auto",
+        "verdict": "match",
+        "capturedValue": "auto",
+        "proposedValue": "auto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.line-height"
+        ],
+        "formula": "CSS normal → auto; a length → px"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.text-decoration-line"
+        ],
+        "formula": "text-decoration-line underline → underline, else none"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#616161eb",
+        "verdict": "match",
+        "capturedValue": "#616161eb",
+        "proposedValue": "#616161eb",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.border-top-color"
+        ]
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.opacity"
+        ]
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "a CSS border lies inside the box — recipe spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/mui/tooltip/captured-truth.json#on__default idx:0.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 2,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "tooltip",
+    "library": "shadcn",
+    "source": {
+      "packageName": "@shadcn-sandbox/ui",
+      "version": "0.0.1",
+      "exportName": "Tooltip"
+    },
+    "ledgerFile": "extract/computed/out/shadcn/tooltip/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug)",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-width"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.line-height"
+        ],
+        "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.line-height"
+        ],
+        "formula": "CSS normal → auto; a length → px"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.text-decoration-line"
+        ],
+        "formula": "text-decoration-line underline → underline, else none"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#0a0a0aff",
+        "verdict": "match",
+        "capturedValue": "#0a0a0aff",
+        "proposedValue": "#0a0a0aff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#e5e5e5ff",
+        "verdict": "match",
+        "capturedValue": "#e5e5e5ff",
+        "proposedValue": "#e5e5e5ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.border-top-color"
+        ]
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.opacity"
+        ]
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "a CSS border lies inside the box — recipe spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Inter Variable",
+        "verdict": "match",
+        "capturedValue": "Inter Variable",
+        "proposedValue": "Inter Variable",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/tooltip/captured-truth.json#__default idx:0.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 2,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "tooltip",
     "library": "antd",
     "source": {
       "packageName": "antd",

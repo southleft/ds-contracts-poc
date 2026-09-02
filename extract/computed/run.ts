@@ -201,6 +201,16 @@ async function main() {
     }
     const p1 = await portalSweep(pPage, m.comp, m.space, { screenshots: scratchShots, classAllow: cfg.library.classAllow, classPrefix: cfg.library.classPrefix });
     await reloadHarnessPage(pPage, portalHtml, { settleMs: 300, ready: '#root' });
+    // The reload drops every window global, including the longhand list the
+    // in-page portal reader iterates (window.__ALL_PROPS) — the second sweep
+    // used to crash with "props is not iterable" on every portal re-capture.
+    // Set it again, and hold it to the same set as the first page.
+    const pProps2 = (await pPage.evaluate(
+      `(() => { window.__ALL_PROPS = [...getComputedStyle(document.documentElement)].sort(); return window.__ALL_PROPS; })()`,
+    )) as string[];
+    if (JSON.stringify(pProps2) !== JSON.stringify(pProps)) {
+      throw new Error(`${m.comp.name}: the portal page enumerates a different longhand set after reload (${pProps2.length} vs ${pProps.length}) — refusing`);
+    }
     const p2 = await portalSweep(pPage, m.comp, m.space, { classAllow: cfg.library.classAllow, classPrefix: cfg.library.classPrefix });
     run1.captures.push(...p1.captures);
     run2.captures.push(...p2.captures);
