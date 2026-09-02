@@ -1,0 +1,14 @@
+{
+  "roles": {
+    "box": "root"
+  },
+  "combo": "primary.always",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "a.MuiTypography-root is the anchor: text \"Link\", rgba(25, 118, 210, 1), decoration underline",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

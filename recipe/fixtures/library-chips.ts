@@ -7,7 +7,7 @@ import type {
 import { canonicalChipRecipeInstance } from "./chip.js";
 import type { ChipRecipeInstance } from "../recipes/chip.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): ChipRecipeInstance["tokens"] => {
@@ -274,7 +274,7 @@ const tokenFacts = (
   return facts;
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -397,7 +397,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedChipSource,
   tokens: ChipRecipeInstance["tokens"],
@@ -405,6 +405,7 @@ const buildConfig = (
   refusals: ReviewedChipSourceFact[],
   extraIr: ReviewedChipSourceFact[],
   unsupported: string[],
+  content: { label: string } = { label: slug === "mui" ? "Chip" : "Tag" },
 ): ReviewedChipAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -437,7 +438,7 @@ const buildConfig = (
     // Label text from each capture's own sample so the fidelity pair is
     // like-for-like: mui Chip fixedProps.label "Chip"; antd Tag sampleText
     // "Tag"; astryx Token fixedProps.label "Tag" (extract/computed/configs).
-    content: { label: slug === "mui" ? "Chip" : "Tag" },
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -460,7 +461,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedChipSource,
 ): ReviewedChipSourceFact[] => [

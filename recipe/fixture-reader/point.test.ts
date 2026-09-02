@@ -220,3 +220,38 @@ test("tooltip@1 proposes AntD's tip (shadow, placement and arrow named as refusa
     for (const id of expect.refusals) assert.ok(module.includes(id), `${lib}: ${id} named from the capture`);
   }
 });
+
+import { draftChipRoles, draftLinkRoles } from "./draft-roles.js";
+import { proposeChipFixture } from "./propose-chip.js";
+import { proposeLinkFixture } from "./propose-link.js";
+import type { ChipRoles } from "./schema-chip.js";
+import type { LinkRoles } from "./schema-link.js";
+
+test("chip@1 proposes MUI's chip (the label span's padding is part of the inset) and Carbon's Tag (--capture tag)", () => {
+  for (const [lib, capture, expect] of [["mui", "chip", { paddingX: 12, height: 32, label: "idx:0" }], ["carbon", "tag", { paddingX: 8, height: 24, label: "idx:0" }]] as const) {
+    const ledgerRel = `extract/computed/out/${lib}/${capture}/captured-truth.json`;
+    const draft = draftChipRoles(new Ledger(REPO, ledgerRel));
+    assert.deepEqual(draft.unresolved, [], lib);
+    assert.equal(draft.roles.label, expect.label, `${lib}: the text part is a child of the box`);
+    const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+    const r = proposeChipFixture({ library: lib, ledger: ledgerRel, roles: draft.roles as ChipRoles, combo: draft.combo!, sets: {}, out: path.relative(REPO, path.join(dir, `chip.${lib}.ts`)), unsupported: ["hover"] });
+    assert.deepEqual(r.refused, [], lib);
+    assert.equal(r.proposal.leaves["box.paddingX"]?.value, expect.paddingX, `${lib}: box padding + label padding`);
+    assert.equal(r.proposal.leaves["box.height"]?.value, expect.height, lib);
+  }
+});
+
+test("link@1 proposes Altitude's link (underline read) and MUI's at the always-underlined combo", () => {
+  for (const [lib, expect] of [["altitude", { decoration: "underline", unit: "px", combo: "unset" }], ["mui", { decoration: "underline", unit: "auto", combo: "primary.always" }]] as const) {
+    const ledgerRel = `extract/computed/out/${lib}/link/captured-truth.json`;
+    const draft = draftLinkRoles(new Ledger(REPO, ledgerRel));
+    assert.deepEqual(draft.unresolved, [], lib);
+    assert.equal(draft.combo, expect.combo, lib);
+    const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+    const r = proposeLinkFixture({ library: lib, ledger: ledgerRel, roles: draft.roles as LinkRoles, combo: draft.combo!, sets: {}, out: path.relative(REPO, path.join(dir, `link.${lib}.ts`)), unsupported: ["hover"] });
+    assert.deepEqual(r.refused, [], lib);
+    assert.equal(r.proposal.leaves["decoration"]?.value, expect.decoration, lib);
+    assert.equal(r.proposal.leaves["lineHeightUnit"]?.value, expect.unit, lib);
+    assert.equal(r.proposal.leaves["box.height"]?.from, "spelling", `${lib}: the link hugs`);
+  }
+});

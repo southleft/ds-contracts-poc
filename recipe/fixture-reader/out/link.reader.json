@@ -147,6 +147,364 @@
   },
   {
     "archetype": "link",
+    "library": "altitude",
+    "source": {
+      "packageName": "altitude-web-components",
+      "version": "1.0.2",
+      "exportName": "Link"
+    },
+    "ledgerFile": "extract/computed/out/altitude/link/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the link hugs its text — recipe spelling 0 (hug)",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.border-top-width"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.line-height"
+        ],
+        "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.line-height"
+        ],
+        "formula": "CSS normal → auto; a length → px"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "underline",
+        "verdict": "match",
+        "capturedValue": "underline",
+        "proposedValue": "underline",
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.text-decoration-line"
+        ],
+        "formula": "text-decoration-line underline → underline, else none"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.background-color"
+        ]
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#4375ffff",
+        "verdict": "match",
+        "capturedValue": "#4375ffff",
+        "proposedValue": "#4375ffff",
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.opacity"
+        ]
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#4375ffff",
+        "verdict": "match",
+        "capturedValue": "#4375ffff",
+        "proposedValue": "#4375ffff",
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "a CSS border lies inside the box — recipe spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "IBM Plex Sans",
+        "verdict": "match",
+        "capturedValue": "IBM Plex Sans",
+        "proposedValue": "IBM Plex Sans",
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/altitude/link/captured-truth.json#unset__default root.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 2,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "link",
+    "library": "mui-proposed",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Link"
+    },
+    "ledgerFile": "extract/computed/out/mui/link/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the link hugs its text — recipe spelling 0 (hug)",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.border-top-width"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height"
+        ],
+        "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "auto",
+        "verdict": "match",
+        "capturedValue": "auto",
+        "proposedValue": "auto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height"
+        ],
+        "formula": "CSS normal → auto; a length → px"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "underline",
+        "verdict": "match",
+        "capturedValue": "underline",
+        "proposedValue": "underline",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.text-decoration-line"
+        ],
+        "formula": "text-decoration-line underline → underline, else none"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.background-color"
+        ]
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.opacity"
+        ]
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "a CSS border lies inside the box — recipe spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Times",
+        "verdict": "match",
+        "capturedValue": "Times",
+        "proposedValue": "Times",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 2,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "link",
     "library": "mui",
     "source": {
       "packageName": "@mui/material",

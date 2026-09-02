@@ -1,0 +1,101 @@
+{
+  "archetype": "chip",
+  "library": "carbon",
+  "ledger": "extract/computed/out/carbon/tag/captured-truth.json",
+  "provenance": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "unset.unset",
+  "leaves": {
+    "box.height": {
+      "value": 24,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.height"
+    },
+    "box.paddingX": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-left | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-left",
+      "formula": "box padding-left + label padding-left (the label's own padding is part of the inset)"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-top | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-top",
+      "formula": "box padding-top + label padding-top"
+    },
+    "box.radius": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#e0e0e0ff",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#161616ff",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.opacity"
+    },
+    "rest.label": {
+      "value": "#161616ff",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "IBM Plex Sans",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": "Tag"
+  },
+  "typography": {
+    "family": "IBM Plex Sans",
+    "style": "Regular",
+    "stack": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+  }
+}

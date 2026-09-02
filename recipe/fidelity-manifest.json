@@ -189,24 +189,56 @@
     },
     {
       "label": "chip/astryx",
-      "page": "218:90193",
+      "page": "218:90995",
       "component": "chip/variant/default :: Astryx Token",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-astryx-default-shared-v7.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-astryx-default-shared-v8.png",
       "reference": "extract/computed/out/astryx-core/token/orig-shots/md.default__default.png"
     },
     {
       "label": "chip/mui",
-      "page": "218:90193",
+      "page": "218:90995",
       "component": "chip/variant/default :: MUI Chip",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-default-shared-v7.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-default-shared-v8.png",
       "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png"
     },
     {
       "label": "chip/antd",
-      "page": "218:90193",
+      "page": "218:90995",
       "component": "chip/variant/default :: Ant Design Tag",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-default-shared-v7.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-default-shared-v8.png",
       "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png"
+    },
+    {
+      "label": "chip/altitude",
+      "page": "218:90995",
+      "component": "chip/variant/default :: altitude (proposed) Chip",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-altitude-default-v8.png",
+      "reference": "extract/computed/out/altitude/chip/orig-shots/unset.unset__default.png",
+      "_proposedWhy": "HELD OUT: Altitude's chip, never hand-tabled, proposed from its capture (13 read, 0 invented)."
+    },
+    {
+      "label": "chip/mui-proposed",
+      "page": "218:90995",
+      "component": "chip/variant/default :: mui (proposed) Chip",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-proposed-default-v8.png",
+      "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png",
+      "_proposedWhy": "PROPOSED from MUI's own capture (13 read, 0 invented): the label span's padding is read as part of the inset (box padding + label padding), beside the hand row."
+    },
+    {
+      "label": "chip/antd-proposed",
+      "page": "218:90995",
+      "component": "chip/variant/default :: antd (proposed) Chip",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-proposed-default-v8.png",
+      "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png",
+      "_proposedWhy": "PROPOSED from AntD's own Tag capture (--capture tag; 13 read, 0 invented), beside the hand row."
+    },
+    {
+      "label": "chip/carbon",
+      "page": "218:90995",
+      "component": "chip/variant/default :: carbon (proposed) Chip",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-carbon-default-v8.png",
+      "reference": "extract/computed/out/carbon/tag/orig-shots/unset.unset__default.png",
+      "_proposedWhy": "HELD OUT: Carbon's Tag, never hand-tabled, proposed from its capture (--capture tag; 13 read, 0 invented)."
     },
     {
       "label": "avatar/mui",
@@ -283,10 +315,26 @@
     },
     {
       "label": "link/mui",
-      "page": "218:90280",
+      "page": "218:91169",
       "component": "link/variant/default :: MUI Link",
-      "shot": "recipe/evidence/fidelity-v1/shots/link-mui-default-shared-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/link-mui-default-shared-v7.png",
       "reference": "extract/computed/out/mui/link/orig-shots/primary.always__default.png"
+    },
+    {
+      "label": "link/altitude",
+      "page": "218:91169",
+      "component": "link/variant/default :: altitude (proposed) Link",
+      "shot": "recipe/evidence/fidelity-v1/shots/link-altitude-default-v7.png",
+      "reference": "extract/computed/out/altitude/link/orig-shots/unset__default.png",
+      "_proposedWhy": "HELD OUT: Altitude's link, never hand-tabled, proposed from its capture (14 read, 0 invented; underline read from text-decoration-line)."
+    },
+    {
+      "label": "link/mui-proposed",
+      "page": "218:91169",
+      "component": "link/variant/default :: mui (proposed) Link",
+      "shot": "recipe/evidence/fidelity-v1/shots/link-mui-proposed-default-v7.png",
+      "reference": "extract/computed/out/mui/link/orig-shots/primary.always__default.png",
+      "_proposedWhy": "PROPOSED from MUI's own capture at the primary.always combo (14 read, 0 invented): the capture's computed face is 'Times' (the sandbox mounts Link without a Typography provider), carried as a reviewed, named fallback to Times New Roman \u2014 the capture's own face, where the hand row pins Roboto and scores 49%."
     },
     {
       "label": "tabs/mui",

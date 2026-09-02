@@ -1,0 +1,14 @@
+{
+  "roles": {
+    "box": "root"
+  },
+  "combo": "unset",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "a.al-c-link is the anchor: text \"Link\", rgba(67, 117, 255, 1), decoration underline",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

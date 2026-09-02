@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "unset.unset",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "div.cds--tag is the outermost painted part: 35.7344px×24px, bg rgba(224, 224, 224, 1), radius 16px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span.cds--tag__label carries the text \"Tag\"; its padding 0px is part of the inset",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

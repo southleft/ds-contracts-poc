@@ -1,14 +1,14 @@
 {
-  "_marker": "KNOWN FAILURES — a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
-  "recorded": "2026-09-01 (revised after the chip/tooltip/badge/tabs remints)",
+  "_marker": "KNOWN FAILURES \u2014 a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
+  "recorded": "2026-09-02 (revised after the proposed chip/link rows: three new font-substrate subjects named, none excused)",
   "failures": {
     "alert/astryx": {
       "class": "font-substrate",
-      "cause": "7.57% width-normalised (was 64.6%). After alert v3 the glyph, the Semibold title, the fill and the radius all match and heights agree at 44; the residual is the bold title's glyph rasterisation — SF Pro Semibold drawn by Figma vs -apple-system Semibold drawn by Chromium — across a 281px-wide title line, which the edge windows cannot avoid. Geometry the recipe decided is exhausted here."
+      "cause": "7.57% width-normalised (was 64.6%). After alert v3 the glyph, the Semibold title, the fill and the radius all match and heights agree at 44; the residual is the bold title's glyph rasterisation \u2014 SF Pro Semibold drawn by Figma vs -apple-system Semibold drawn by Chromium \u2014 across a 281px-wide title line, which the edge windows cannot avoid. Geometry the recipe decided is exhausted here."
     },
     "chip/astryx": {
       "class": "font-substrate",
-      "cause": "5.07% — 0.07 over the bar. Same label 'Tag', ink 36x24 vs 37x24; the 1px is glyph advance width under Figma's font fallback vs Chromium's."
+      "cause": "5.07% \u2014 0.07 over the bar. Same label 'Tag', ink 36x24 vs 37x24; the 1px is glyph advance width under Figma's font fallback vs Chromium's."
     },
     "link/mui": {
       "class": "font-substrate",
@@ -16,7 +16,7 @@
     },
     "tabs/mui": {
       "class": "font-substrate",
-      "cause": "7.73% (tabs v6; was 14.73% → 18.07% → 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge — no geometry the recipe decided."
+      "cause": "7.73% (tabs v6; was 14.73% \u2192 18.07% \u2192 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge \u2014 no geometry the recipe decided."
     },
     "textarea/astryx": {
       "class": "real-defect",
@@ -28,7 +28,19 @@
     },
     "textarea/antd": {
       "class": "real-defect",
-      "cause": "7.42% width-normalised (heights 75 vs 54). The mint stacks a 'Notes' label above the box; antd TextArea renders NO label — the recipe grammar requires one (labelPlacement stacked). Structure the package does not render, plus the absent resize grip."
+      "cause": "7.42% width-normalised (heights 75 vs 54). The mint stacks a 'Notes' label above the box; antd TextArea renders NO label \u2014 the recipe grammar requires one (labelPlacement stacked). Structure the package does not render, plus the absent resize grip."
+    },
+    "chip/carbon": {
+      "class": "font-substrate",
+      "cause": "8.56% at 35x24 vs 36x24 \u2014 HELD-OUT proposal (Carbon Tag, 13 leaves read, 0 invented). The diff hugs the three glyphs of 'Tag' (IBM Plex Sans Regular 12px) and nothing else: Figma rasterises the face one column narrower than Chromium. Geometry, fill and radius agree."
+    },
+    "link/altitude": {
+      "class": "font-substrate",
+      "cause": "5.56% at 30x15 both sides \u2014 HELD-OUT proposal (Altitude link, 14 leaves read, 0 invented; underline read from text-decoration-line). The diff is the glyph edges of 'Link' (IBM Plex Sans Regular 16px) and the underline's row: Figma draws the underline one row from where Chromium does."
+    },
+    "link/mui-proposed": {
+      "class": "font-substrate",
+      "cause": "20.22% at 31x15 vs 31x14 \u2014 proposed from MUI's own capture (14 read, 0 invented). The capture's computed face is 'Times' (Link mounted without a Typography provider); the proposal carries it as a reviewed fallback to Figma's 'Times New Roman', which is why it scores 20% where the hand row's Roboto pin scores 49%. What remains is the two serifs' rasterisation and the underline row."
     }
   }
 }

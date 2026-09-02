@@ -1,0 +1,123 @@
+{
+  "archetype": "link",
+  "library": "mui",
+  "ledger": "extract/computed/out/mui/link/captured-truth.json",
+  "provenance": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "root"
+  },
+  "combo": "primary.always",
+  "leaves": {
+    "box.height": {
+      "value": 0,
+      "from": "spelling",
+      "why": "the link hugs its text — recipe spelling 0 (hug)"
+    },
+    "box.paddingX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-size"
+    },
+    "labelLineHeight": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height",
+      "formula": "CSS normal → 0 with lineHeightUnit auto; a length → px"
+    },
+    "lineHeightUnit": {
+      "value": "auto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height",
+      "formula": "CSS normal → auto; a length → px"
+    },
+    "decoration": {
+      "value": "underline",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.text-decoration-line",
+      "formula": "text-decoration-line underline → underline, else none"
+    },
+    "rest.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#1976d2ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.opacity"
+    },
+    "rest.label": {
+      "value": "#1976d2ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Times",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "typography.label.resolved": {
+      "value": "Times New Roman/Regular",
+      "from": "set",
+      "why": "the capture's computed font-family is 'Times' — the sandbox mounts MUI Link without a Typography provider, so the page's default serif renders; Figma names that face 'Times New Roman' — reviewed fallback, the capture's own face"
+    }
+  },
+  "receipts": [
+    {
+      "path": "typography.label.resolved",
+      "why": "the requested face is not on the minting machine",
+      "evidence": "the capture's computed font-family is 'Times' — the sandbox mounts MUI Link without a Typography provider, so the page's default serif renders; Figma names that face 'Times New Roman' — reviewed fallback, the capture's own face",
+      "value": "Times New Roman/Regular"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": "Link"
+  },
+  "typography": {
+    "family": "Times",
+    "style": "Regular",
+    "stack": "Times"
+  }
+}

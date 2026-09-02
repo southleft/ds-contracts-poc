@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 36,
-  "passed": 29,
-  "failed": 7,
+  "subjects": 42,
+  "passed": 32,
+  "failed": 10,
   "fringeExcused": 0,
-  "knownFailures": 7,
+  "knownFailures": 10,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -162,6 +162,38 @@
       "convergesAt": 250
     },
     {
+      "label": "chip/altitude",
+      "status": "pass",
+      "pctAAMasked": 0.07,
+      "canvasPx": "53x28",
+      "realPx": "52x28",
+      "convergesAt": 230
+    },
+    {
+      "label": "chip/mui-proposed",
+      "status": "pass",
+      "pctAAMasked": 0.61,
+      "canvasPx": "51x32",
+      "realPx": "50x32",
+      "convergesAt": 230
+    },
+    {
+      "label": "chip/antd-proposed",
+      "status": "pass",
+      "pctAAMasked": 1.89,
+      "canvasPx": "36x22",
+      "realPx": "36x22",
+      "convergesAt": 250
+    },
+    {
+      "label": "chip/carbon",
+      "status": "fail",
+      "pctAAMasked": 8.56,
+      "canvasPx": "35x24",
+      "realPx": "36x24",
+      "convergesAt": null
+    },
+    {
       "label": "avatar/mui",
       "status": "pass",
       "pctAAMasked": 4,
@@ -240,6 +272,22 @@
       "canvasPx": "26x13",
       "realPx": "31x14",
       "convergesAt": null
+    },
+    {
+      "label": "link/altitude",
+      "status": "fail",
+      "pctAAMasked": 5.56,
+      "canvasPx": "30x15",
+      "realPx": "30x15",
+      "convergesAt": 250
+    },
+    {
+      "label": "link/mui-proposed",
+      "status": "fail",
+      "pctAAMasked": 20.22,
+      "canvasPx": "31x15",
+      "realPx": "31x14",
+      "convergesAt": 240
     },
     {
       "label": "tabs/mui",

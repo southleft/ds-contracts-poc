@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "filled.default.medium",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "div.MuiChip-root is the outermost painted part: 49.3438px×32px, bg rgba(0, 0, 0, 0.08), radius 16px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span.MuiChip-label carries the text \"Chip\"; its padding 12px is part of the inset",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

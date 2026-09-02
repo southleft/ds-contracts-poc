@@ -152,6 +152,30 @@ ledger `extract/computed/out/mui/chip/captured-truth.json` · 14 facts: **12 mat
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### altitude — altitude-web-components@1.0.2#Chip
+
+ledger `extract/computed/out/altitude/chip/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### mui-proposed — @mui/material@9.2.0#Chip
+
+ledger `extract/computed/out/mui/chip/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### antd-proposed — antd@5.29.3#Tag
+
+ledger `extract/computed/out/antd/tag/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### carbon — @carbon/react@1.112.0#Tag
+
+ledger `extract/computed/out/carbon/tag/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ### antd — antd@5.29.3#Tag
 
 ledger `extract/computed/out/antd/tag/captured-truth.json` · 14 facts: **12 match**, **0 drift**, 2 named receipts, 0 unread
@@ -233,6 +257,18 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 ### astryx — @astryxdesign/core@0.1.6#Link
 
 ledger _(none — receipt-only)_ · 16 facts: **0 match**, **0 drift**, 16 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### altitude — altitude-web-components@1.0.2#Link
+
+ledger `extract/computed/out/altitude/link/captured-truth.json` · 16 facts: **14 match**, **0 drift**, 2 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### mui-proposed — @mui/material@9.2.0#Link
+
+ledger `extract/computed/out/mui/link/captured-truth.json` · 16 facts: **14 match**, **0 drift**, 2 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -618,6 +654,10 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **chip/astryx** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
 - **chip/mui** `rest.boxBorder` = `#00000000` — filled Chip draws no visible border — transparent is the recipe's spelling (ledger border-top-color is the ink color, not a painted stroke) _[Chip.js filled border none — reviewed #00000000]_
 - **chip/mui** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
+- **chip/altitude** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **chip/mui-proposed** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **chip/antd-proposed** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **chip/carbon** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
 - **chip/antd** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
 - **chip/antd** `typography.label.family` = `-apple-system` — the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites _[theme.getDesignToken().fontFamily starts -apple-system]_
 - **badge/astryx** `host.size` = `40` — Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal. _[recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal]_
@@ -686,6 +726,10 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **link/astryx** `decoration` = `none` — the capture floor has no Link subject — configs/astryx.json does not mount Link _[docs/34 Astryx Link — no extract/computed capture subject]_
 - **link/astryx** `typography.label.family` = `-apple-system` — the capture floor has no Link subject — configs/astryx.json does not mount Link _[docs/34 Astryx Link — no extract/computed capture subject]_
 - **link/astryx** `typography.label.style` = `Regular` — the capture floor has no Link subject — configs/astryx.json does not mount Link _[docs/34 Astryx Link — no extract/computed capture subject]_
+- **link/altitude** `box.height` = `0` — the link hugs its text — recipe spelling 0 (hug) _[reviewed 0]_
+- **link/altitude** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **link/mui-proposed** `box.height` = `0` — the link hugs its text — recipe spelling 0 (hug) _[reviewed 0]_
+- **link/mui-proposed** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
 - **link/mui** `box.height` = `0` — Link is inline text — the recipe spells height 0 (no box plane); the capture's content-box height is not the recipe anatomy _[reviewed 0]_
 - **link/mui** `labelFontSize` = `14` — the capture mounts Typography variant=inherit (font-size 16 / Times on the unstyled host) — the recipe cites body2 14 from the reviewed Link docs pairing, not the inherit plane _[Link.js + Typography body2 14 — reviewed 14]_
 - **link/mui** `labelLineHeight` = `0` — recipe spells 0 (auto unit / CSS normal) — the inherit plane's line-height is not the recipe's spelling _[reviewed 0 with lineHeightUnit auto]_

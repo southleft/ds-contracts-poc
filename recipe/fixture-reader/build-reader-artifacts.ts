@@ -23,6 +23,12 @@ import {
 import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
+import { ALTITUDE_CHIP_LEDGER as ALTITUDE_CHIP_LEDGER_PROPOSED, altitudeChipAdapterConfig as altitudeChipProposedConfig, altitudeChipMappings as altitudeChipProposedMappings } from "../fixtures/generated/chip.altitude.js";
+import { MUI_CHIP_LEDGER as MUI_CHIP_LEDGER_PROPOSED, muiChipAdapterConfig as muiChipProposedConfig, muiChipMappings as muiChipProposedMappings } from "../fixtures/generated/chip.mui.js";
+import { ANTD_CHIP_LEDGER as ANTD_CHIP_LEDGER_PROPOSED, antdChipAdapterConfig as antdChipProposedConfig, antdChipMappings as antdChipProposedMappings } from "../fixtures/generated/chip.antd.js";
+import { CARBON_CHIP_LEDGER as CARBON_CHIP_LEDGER_PROPOSED, carbonChipAdapterConfig as carbonChipProposedConfig, carbonChipMappings as carbonChipProposedMappings } from "../fixtures/generated/chip.carbon.js";
+import { ALTITUDE_LINK_LEDGER as ALTITUDE_LINK_LEDGER_PROPOSED, altitudeLinkAdapterConfig as altitudeLinkProposedConfig, altitudeLinkMappings as altitudeLinkProposedMappings } from "../fixtures/generated/link.altitude.js";
+import { MUI_LINK_LEDGER as MUI_LINK_LEDGER_PROPOSED, muiLinkAdapterConfig as muiLinkProposedConfig, muiLinkMappings as muiLinkProposedMappings } from "../fixtures/generated/link.mui.js";
 import { ANTD_TOOLTIP_LEDGER as ANTD_TOOLTIP_LEDGER_PROPOSED, antdTooltipAdapterConfig as antdTooltipProposedConfig, antdTooltipMappings as antdTooltipProposedMappings } from "../fixtures/generated/tooltip.antd.js";
 import { MUI_TOOLTIP_LEDGER as MUI_TOOLTIP_LEDGER_PROPOSED, muiTooltipAdapterConfig as muiTooltipProposedConfig, muiTooltipMappings as muiTooltipProposedMappings } from "../fixtures/generated/tooltip.mui.js";
 import { SHADCN_TOOLTIP_LEDGER as SHADCN_TOOLTIP_LEDGER_PROPOSED, shadcnTooltipAdapterConfig as shadcnTooltipProposedConfig, shadcnTooltipMappings as shadcnTooltipProposedMappings } from "../fixtures/generated/tooltip.shadcn.js";
@@ -528,6 +534,46 @@ const SUBJECTS: Subject[] = [
     extras: extrasFor(muiChipAdapterConfig.tokens as unknown as Record<string, unknown>, muiChipMappings),
   },
   {
+    // PROPOSED by propose-chip.ts (held out).
+    archetype: "chip",
+    library: "altitude",
+    source: src(altitudeChipProposedConfig),
+    ledgerFile: ALTITUDE_CHIP_LEDGER_PROPOSED,
+    tokens: altitudeChipProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: altitudeChipProposedMappings,
+    extras: extrasFor(altitudeChipProposedConfig.tokens as unknown as Record<string, unknown>, altitudeChipProposedMappings),
+  },
+  {
+    // PROPOSED by propose-chip.ts (the same capture as the hand table).
+    archetype: "chip",
+    library: "mui-proposed",
+    source: src(muiChipProposedConfig),
+    ledgerFile: MUI_CHIP_LEDGER_PROPOSED,
+    tokens: muiChipProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiChipProposedMappings,
+    extras: extrasFor(muiChipProposedConfig.tokens as unknown as Record<string, unknown>, muiChipProposedMappings),
+  },
+  {
+    // PROPOSED by propose-chip.ts (the same Tag capture as the hand table).
+    archetype: "chip",
+    library: "antd-proposed",
+    source: src(antdChipProposedConfig),
+    ledgerFile: ANTD_CHIP_LEDGER_PROPOSED,
+    tokens: antdChipProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: antdChipProposedMappings,
+    extras: extrasFor(antdChipProposedConfig.tokens as unknown as Record<string, unknown>, antdChipProposedMappings),
+  },
+  {
+    // PROPOSED by propose-chip.ts (held out — Carbon Tag).
+    archetype: "chip",
+    library: "carbon",
+    source: src(carbonChipProposedConfig),
+    ledgerFile: CARBON_CHIP_LEDGER_PROPOSED,
+    tokens: carbonChipProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: carbonChipProposedMappings,
+    extras: extrasFor(carbonChipProposedConfig.tokens as unknown as Record<string, unknown>, carbonChipProposedMappings),
+  },
+  {
     archetype: "chip",
     library: "antd",
     source: src(antdChipAdapterConfig),
@@ -652,6 +698,26 @@ const SUBJECTS: Subject[] = [
     tokens: astryxLinkAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: astryxLinkMappings,
     extras: extrasFor(astryxLinkAdapterConfig.tokens as unknown as Record<string, unknown>, astryxLinkMappings),
+  },
+  {
+    // PROPOSED by propose-link.ts (held out).
+    archetype: "link",
+    library: "altitude",
+    source: src(altitudeLinkProposedConfig),
+    ledgerFile: ALTITUDE_LINK_LEDGER_PROPOSED,
+    tokens: altitudeLinkProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: altitudeLinkProposedMappings,
+    extras: extrasFor(altitudeLinkProposedConfig.tokens as unknown as Record<string, unknown>, altitudeLinkProposedMappings),
+  },
+  {
+    // PROPOSED by propose-link.ts (the same capture as the hand table).
+    archetype: "link",
+    library: "mui-proposed",
+    source: src(muiLinkProposedConfig),
+    ledgerFile: MUI_LINK_LEDGER_PROPOSED,
+    tokens: muiLinkProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiLinkProposedMappings,
+    extras: extrasFor(muiLinkProposedConfig.tokens as unknown as Record<string, unknown>, muiLinkProposedMappings),
   },
   {
     archetype: "link",

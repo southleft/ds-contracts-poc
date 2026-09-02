@@ -23,6 +23,8 @@ import type { CheckboxRoles } from "./schema-checkbox.js";
 import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 import type { AvatarRoles } from "./schema-avatar.js";
 import type { TooltipRoles } from "./schema-tooltip.js";
+import type { ChipRoles } from "./schema-chip.js";
+import type { LinkRoles } from "./schema-link.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -341,5 +343,60 @@ export function draftTooltipRoles(ledger: Ledger): TooltipRoleDraft {
     if (textPart && textPart.idxPath !== box.idxPath) { roles.label = sel(textPart); evidence.label = { selector: roles.label, why: `${textPart.tag} carries the text ${JSON.stringify(textPart.text!.find((t) => t.trim().length > 0))}`, confidence: "high" }; }
     else evidence.label = { selector: roles.box, why: "the box carries the text itself", confidence: "high" };
   } else unresolved.push("box: no painted part carries text");
+  return { roles, combo, evidence, unresolved };
+}
+
+export interface SimpleRoleDraft<R> {
+  roles: Partial<R>;
+  combo: string | null;
+  evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
+  unresolved: string[];
+}
+
+const pickCombo = (ledger: Ledger, prefer: RegExp): string | null => {
+  const keys = ledger.keys().filter((k) => k.endsWith("__default"));
+  const pick = keys.find((k) => prefer.test(k)) ?? keys[0];
+  return pick ? pick.slice(0, -"__default".length) : null;
+};
+const hasTextPart = (p: LedgerPart): boolean => !!p.text && p.text.some((t) => t.trim().length > 0);
+const isTransparent = (v: string | undefined): boolean => !v || /^rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0\)$/.test(v) || v === "transparent";
+
+/** chip@1: the BOX is the outermost painted part (or bordered part) containing the text; the LABEL is the text part when it is a child. */
+export function draftChipRoles(ledger: Ledger): SimpleRoleDraft<ChipRoles> {
+  const evidence: SimpleRoleDraft<ChipRoles>["evidence"] = {};
+  const combo = pickCombo(ledger, /(^|\.)(unset|default|filled\.default|md)(\.|__)/);
+  if (!combo) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture"] };
+  const c = ledger.capture(`${combo}__default`);
+  const painted = c.parts.filter((p) => (!isTransparent(p.style["background-color"]) || num(p.style["border-top-width"]) > 0) && num(p.style.width) > 0);
+  const box = painted[0];
+  const roles: Partial<ChipRoles> = {};
+  const unresolved: string[] = [];
+  if (!box) unresolved.push("box: no painted or bordered part");
+  else {
+    roles.box = sel(box);
+    evidence.box = { selector: roles.box, why: `${box.tag}${box.classes[0] ? "." + box.classes[0] : ""} is the outermost painted part: ${box.style.width}×${box.style.height}, bg ${box.style["background-color"]}, radius ${box.style["border-top-left-radius"]}`, confidence: "high" };
+    const textPart = hasTextPart(box) ? box : c.parts.find((q) => q.idxPath.startsWith(box.idxPath === "" ? "" : box.idxPath + ".") && q.idxPath !== box.idxPath && hasTextPart(q));
+    if (!textPart) unresolved.push("label: no part carries text");
+    else if (textPart.idxPath !== box.idxPath) { roles.label = sel(textPart); evidence.label = { selector: roles.label, why: `${textPart.tag}${textPart.classes[0] ? "." + textPart.classes[0] : ""} carries the text ${JSON.stringify(textPart.text!.find((t) => t.trim()))}; its padding ${textPart.style["padding-left"]} is part of the inset`, confidence: "high" }; }
+    else evidence.label = { selector: roles.box, why: "the box carries the text itself", confidence: "high" };
+  }
+  return { roles, combo, evidence, unresolved };
+}
+
+/** link@1: the BOX is the anchor — the outermost part carrying the text (usually transparent). */
+export function draftLinkRoles(ledger: Ledger): SimpleRoleDraft<LinkRoles> {
+  const evidence: SimpleRoleDraft<LinkRoles>["evidence"] = {};
+  const combo = pickCombo(ledger, /(^|\.)(always|unset|default)(\.|__)/);
+  if (!combo) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture"] };
+  const c = ledger.capture(`${combo}__default`);
+  const box = c.parts.find((p) => p.tag === "a") ?? c.parts.find(hasTextPart);
+  const roles: Partial<LinkRoles> = {};
+  const unresolved: string[] = [];
+  if (!box) unresolved.push("box: no anchor or text part");
+  else {
+    roles.box = sel(box);
+    evidence.box = { selector: roles.box, why: `${box.tag}${box.classes[0] ? "." + box.classes[0] : ""} is the anchor: text ${JSON.stringify((box.text ?? []).find((t) => t.trim()))}, ${box.style.color}, decoration ${box.style["text-decoration-line"]}`, confidence: box.tag === "a" ? "high" : "medium" };
+    if (!hasTextPart(box)) { const t = c.parts.find((q) => q.idxPath.startsWith(box.idxPath === "" ? "" : box.idxPath + ".") && hasTextPart(q)); if (t) { roles.label = sel(t); evidence.label = { selector: roles.label, why: `${t.tag} carries the text`, confidence: "high" }; } else unresolved.push("label: no text"); }
+  }
   return { roles, combo, evidence, unresolved };
 }

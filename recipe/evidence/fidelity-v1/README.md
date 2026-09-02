@@ -350,3 +350,20 @@ which the harness correctly refuses. See `f1-tooltip-proposed/README.md`.
     tooltip/antd-proposed 3.01% · tooltip/shadcn 4.73%
 
     29 pass · 0 fringe · 7 known
+
+## 2026-09-02 (later) — fifth and sixth archetypes: chip and link
+
+`propose-chip.ts` and `propose-link.ts`, shape-twins of avatar and tooltip.
+Six captures pointed at (Altitude chip and link held out; Carbon's Tag held
+out via `--capture tag`; MUI's and AntD's own captures beside their hand
+rows). Altitude's chip scores **0.07%**; the MUI and AntD proposals score
+exactly their hand rows. Three rows fail on text rasterisation alone and
+are **named** in the ratchet as font-substrate — Carbon's "Tag" glyphs
+(8.56%), Altitude's underlined "Link" (5.56%), and MUI's serif link
+(20.22%, where the hand row's Roboto pin scores 49%). See
+`f1-chip-link-proposed/README.md`.
+
+    chip/altitude 0.07% · chip/mui-proposed 0.61% · chip/antd-proposed 1.89%
+    chip/carbon 8.56% (named) · link/altitude 5.56% (named) · link/mui-proposed 20.22% (named)
+
+    32 pass · 0 fringe · 10 known

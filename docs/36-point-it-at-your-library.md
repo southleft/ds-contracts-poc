@@ -3,8 +3,8 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **four archetypes**
-> (checkbox@1, switch@1, avatar@1, tooltip@1) and has been proven on **three libraries
+> plugin can run in any file. It works today for **six archetypes**
+> (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1) and has been proven on **three libraries
 > the recipe path was never taught** — Chakra UI and shadcn — including one control
 > captured for the first time the same day (Chakra's Switch: a person wrote
 > the config entry, the command did the rest, four states pixel-identical).
@@ -81,6 +81,13 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 ## What it proved
 
+On chip@1 and link@1, six captures: Altitude's chip, never hand-tabled,
+scores 0.07%; the MUI and AntD proposals score exactly their hand rows;
+three rows fail on text rasterisation alone and are named
+(`recipe/evidence/fidelity-v1/f1-chip-link-proposed/`). A library that
+captures the archetype under another name is read with `--capture <dir>`
+(AntD's and Carbon's Tag as chip@1).
+
 On tooltip@1, a floating component: the proposal names the placement
 wrapper, the arrow and the shadow as refusals read from the capture; AntD
 from its own capture scores the hand row's 3.01%, shadcn 4.73%
@@ -132,9 +139,14 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** checkbox@1, switch@1, avatar@1 and tooltip@1 have
-  proposers today; the other nine boilerplate archetypes still have hand
+- **Other archetypes.** Six of the thirteen boilerplate archetypes have
+  proposers today (checkbox, switch, avatar, tooltip, chip, link); the other
+  seven — radio, badge, alert, tabs, textarea, dialog, menu — still have hand
   tables only.
+- **Text rasterisation.** A label the reader read exactly can still score
+  over the bar when Figma and Chromium rasterise the face differently
+  (Carbon's "Tag", Altitude's underlined "Link"). Those rows are named in
+  the ratchet, not excused.
 - **A font this machine lacks.** The proposer cannot know Figma's font list.
   When the requested face is missing, the writer refuses by name and the
   person gives `--set typography.label.resolved="Family/Style" --why …`; the
@@ -168,6 +180,8 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 | `recipe/fixture-reader/propose-switch.ts` | the switch fixture module, same contract |
 | `recipe/fixture-reader/schema-avatar.ts`, `propose-avatar.ts` | avatar@1: box and label roles; the same contract |
 | `recipe/fixture-reader/schema-tooltip.ts`, `propose-tooltip.ts` | tooltip@1: the tip role; placement, arrow and shadow refused from the capture |
+| `recipe/fixture-reader/schema-chip.ts`, `propose-chip.ts` | chip@1: box + label; a label part's padding is part of the inset |
+| `recipe/fixture-reader/schema-link.ts`, `propose-link.ts` | link@1: the anchor; underline and line-height unit read |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

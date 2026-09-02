@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "root"
+  },
+  "combo": "unset.unset",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "button.al-c-chip is the outermost painted part: 52.7969px×28px, bg rgba(242, 241, 238, 1), radius 32px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "root",
+      "why": "the box carries the text itself",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}
