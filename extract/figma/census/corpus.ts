@@ -44,7 +44,10 @@ import { spawnSync } from "node:child_process";
 
 /** True when git ignores the path (exit 0 from `git check-ignore -q`); false when tracked, untracked-but-not-ignored, or git is unavailable. */
 const isGitIgnored = (rel: string): boolean => {
-  const r = spawnSync("git", ["check-ignore", "-q", "--", rel], { cwd: REPO, stdio: "ignore" });
+  const r = spawnSync("git", ["check-ignore", "-q", "--", rel], {
+    cwd: REPO,
+    stdio: "ignore",
+  });
   return r.status === 0;
 };
 import path from "node:path";
