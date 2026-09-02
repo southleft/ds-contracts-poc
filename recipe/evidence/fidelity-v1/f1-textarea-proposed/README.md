@@ -14,6 +14,7 @@ real render of the empty state, exactly as the hand rows are.
 | mui (own capture) | floating, notched | `notchFill` (the paper behind the legend gap) and the disabled placeholder ink (hidden at rest AND focus) — both cited to createPalette.js | `textarea/mui-proposed` | 9.52% = the hand row (named real-defect: heights 58 vs 56, resize grip) |
 | antd (own capture) | BARE | none (26 read, 17 spellings, 0 invented) | `textarea/antd-proposed` | **1.25%** — the hand row is a named 7.42% content mismatch (it mints a label AntD does not render) |
 | chakra (HELD OUT, re-captured today) | BARE | none (26 read, 0 invented) | `textarea/chakra` | **1.64%** |
+| chakra-field (HELD OUT, captured today with the value on the child) | STACKED | none (41 read, 0 invented) | `textarea/chakra-field` | **2.02%** |
 
 ## What the schema reads that the hand tables reviewed
 
@@ -39,6 +40,21 @@ real render of the empty state, exactly as the hand rows are.
   person's own entry — read and cited by file and entry.
 - **The value ink.** `-webkit-text-fill-color` when it paints (MUI's
   disabled ink), else `color`.
+
+## The label's line-height, and the labelled held-out
+
+The labelled Chakra field first scored 5.9%, two rows short at the label:
+textarea@1's label text had no line-height leaf, so Figma hugged Inter's
+face where Chromium drew a 20px line box. The recipe now carries
+`labelLineHeightUnit` / `labelLineHeight` (a shrunk floating label scales it
+by the font ratio, as the CSS transform does), read from every capture:
+Astryx 20, MUI 23, Chakra 20. That closed Astryx's named row (6.16% →
+3.20%), scored the labelled field at 2.02%, and took MUI from 9.52% to
+8.28%. The capture itself needed the `$childProps` axis-value form: the
+content value lives on the Textarea child, disabled on the Field root, and
+the placeholder is read from the child's config props, cited. The disabled
+label dims by opacity in Chakra; textarea@1 carries label colour only, so
+the dimming is a named refusal on the module.
 
 ## The bare cell
 

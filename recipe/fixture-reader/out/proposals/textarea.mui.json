@@ -71,6 +71,18 @@
       "from": "ledger",
       "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-size"
     },
+    "labelLineHeight": {
+      "value": 23,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.line-height",
+      "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+    },
+    "labelLineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.line-height",
+      "formula": "`normal` → auto (hug the face); a length → px"
+    },
     "valueFontSize": {
       "value": 16,
       "from": "ledger",

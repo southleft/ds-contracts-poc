@@ -124,6 +124,8 @@ const astryxTokens = cloneTokens("astryx.textarea", (path, fallback) => {
   if (path === "box.lineHeight") return 20;
   if (path === "labelGap") return 4;
   if (path === "labelFontSize") return 14;
+  // FieldLabel.tsx line-height 20 (--line-height-body-sm); the v10 remint carries it (the mint was 2px short of the render before)
+  if (path === "labelLineHeight") return 20;
   if (path === "valueFontSize") return 14;
   if (path === "labelInsetX") return 0;
   if (path === "labelInactiveOffsetY") return 0;
@@ -155,6 +157,7 @@ const astryxTokens = cloneTokens("astryx.textarea", (path, fallback) => {
 astryxTokens.strokeAlign = "inside";
 astryxTokens.boxClips = true;
 astryxTokens.labelPlacement = "stacked";
+astryxTokens.labelLineHeightUnit = "px";
 astryxTokens.outlineTreatment = "plain";
 astryxTokens.typography = { label: astryxLabelFont(), value: astryxValueFont() };
 
@@ -174,6 +177,8 @@ const muiTokens = cloneTokens("mui.textarea", (path, fallback) => {
   if (path === "box.lineHeight") return 23;
   if (path === "labelGap") return 0;
   if (path === "labelFontSize") return 16;
+  // InputLabel lineHeight 1.4375em = 23px at 16 (createTypography body1); the floating offsets were reviewed against this line box
+  if (path === "labelLineHeight") return 23;
   if (path === "valueFontSize") return 16;
   if (path === "labelInsetX") return 14;
   if (path === "labelInactiveOffsetY") return 16;
@@ -205,6 +210,7 @@ const muiTokens = cloneTokens("mui.textarea", (path, fallback) => {
 muiTokens.strokeAlign = "outside";
 muiTokens.boxClips = true;
 muiTokens.labelPlacement = "floating";
+muiTokens.labelLineHeightUnit = "px";
 muiTokens.outlineTreatment = "notched";
 muiTokens.typography = { label: muiFont(), value: muiFont() };
 
@@ -253,6 +259,7 @@ const antdTokens = cloneTokens("antd.textarea", (path, fallback) => {
   return fallback;
 });
 antdTokens.strokeAlign = "inside";
+antdTokens.labelLineHeightUnit = "auto";
 antdTokens.boxClips = true;
 antdTokens.labelPlacement = "stacked";
 antdTokens.outlineTreatment = "plain";
@@ -378,7 +385,8 @@ const tokenFacts = (
       path === "tokens.strokeAlign" ||
       path === "tokens.boxClips" ||
       path === "tokens.labelPlacement" ||
-      path === "tokens.outlineTreatment"
+      path === "tokens.outlineTreatment" ||
+      path === "tokens.labelLineHeightUnit"
     ) {
       facts.push({
         occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
@@ -386,7 +394,8 @@ const tokenFacts = (
           path === "tokens.strokeAlign" ||
           path === "tokens.boxClips" ||
           path === "tokens.labelPlacement" ||
-          path === "tokens.outlineTreatment"
+          path === "tokens.outlineTreatment" ||
+          path === "tokens.labelLineHeightUnit"
             ? "anatomy"
             : "typography",
         source: {

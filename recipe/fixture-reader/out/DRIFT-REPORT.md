@@ -44,37 +44,43 @@ ledger `extract/computed/out/antd/checkbox/captured-truth.json` · 56 facts: **4
 
 ### astryx — @astryxdesign/core@0.1.6#TextArea
 
-ledger `extract/computed/out/astryx-core/textarea/captured-truth.json` · 39 facts: **34 match**, **0 drift**, 5 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/textarea/captured-truth.json` · 41 facts: **36 match**, **0 drift**, 5 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#TextField
 
-ledger `extract/computed/out/mui/textarea/captured-truth.json` · 39 facts: **36 match**, **0 drift**, 3 named receipts, 0 unread
+ledger `extract/computed/out/mui/textarea/captured-truth.json` · 41 facts: **38 match**, **0 drift**, 3 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### antd — antd@5.29.3#Input.TextArea
 
-ledger `extract/computed/out/antd/textarea/captured-truth.json` · 39 facts: **25 match**, **0 drift**, 14 named receipts, 0 unread
+ledger `extract/computed/out/antd/textarea/captured-truth.json` · 41 facts: **25 match**, **0 drift**, 16 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui-proposed — @mui/material@9.2.0#TextField
 
-ledger `extract/computed/out/mui/textarea/captured-truth.json` · 43 facts: **38 match**, **0 drift**, 5 named receipts, 0 unread
+ledger `extract/computed/out/mui/textarea/captured-truth.json` · 45 facts: **40 match**, **0 drift**, 5 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### antd-proposed — antd@5.29.3#Input.TextArea
 
-ledger `extract/computed/out/antd/textarea/captured-truth.json` · 43 facts: **26 match**, **0 drift**, 17 named receipts, 0 unread
+ledger `extract/computed/out/antd/textarea/captured-truth.json` · 45 facts: **26 match**, **0 drift**, 19 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### chakra — @chakra-ui/react@3.37.0#Textarea
 
-ledger `extract/computed/out/chakra/textarea/captured-truth.json` · 43 facts: **26 match**, **0 drift**, 17 named receipts, 0 unread
+ledger `extract/computed/out/chakra/textarea/captured-truth.json` · 45 facts: **26 match**, **0 drift**, 19 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### chakra-field — @chakra-ui/react@3.37.0#Field + Textarea
+
+ledger `extract/computed/out/chakra/textareafield/captured-truth.json` · 45 facts: **41 match**, **0 drift**, 4 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -573,6 +579,8 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/mui** `states.empty.disabled.value` = `#00000061` — a disabled field cannot take focus and MUI's rest-empty rule hides the placeholder (::placeholder opacity 0 at default) — the disabled placeholder ink is unobservable in the ledger _[palette.text.disabled #00000061 — the fixture's citation]_
 - **textarea/antd** `labelGap` = `8` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part _[--padding-xs 8px — the fixture's citation]_
 - **textarea/antd** `labelFontSize` = `14` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part _[--font-size 14px — the fixture's citation]_
+- **textarea/antd** `labelLineHeight` = `0` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part _[auto — reviewed 0]_
+- **textarea/antd** `labelLineHeightUnit` = `auto` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part _[reviewed auto]_
 - **textarea/antd** `labelInsetX` = `0` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane _[reviewed 0]_
 - **textarea/antd** `labelInactiveOffsetY` = `0` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane _[reviewed 0]_
 - **textarea/antd** `labelFloatingOffsetY` = `0` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane _[reviewed 0]_
@@ -592,6 +600,8 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/mui-proposed** `states.empty.disabled.value` = `#00000061` — ledger value unusable: the placeholder is hidden (opacity 0) at rest and at focus — its ink is unobservable in this capture _[a disabled field cannot take focus and MUI hides the rest placeholder under the label (::placeholder opacity 0) — palette.text.disabled rgba(0,0,0,0.38) (createPalette.js light.text.disabled)]_
 - **textarea/antd-proposed** `labelGap` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/antd-proposed** `labelFontSize` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
+- **textarea/antd-proposed** `labelLineHeight` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
+- **textarea/antd-proposed** `labelLineHeightUnit` = `auto` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/antd-proposed** `labelPlacement` = `stacked` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/antd-proposed** `labelInsetX` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/antd-proposed** `labelInactiveOffsetY` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
@@ -609,6 +619,8 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/antd-proposed** `typography.label.style` = `Regular` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `labelGap` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `labelFontSize` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
+- **textarea/chakra** `labelLineHeight` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
+- **textarea/chakra** `labelLineHeightUnit` = `auto` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `labelPlacement` = `stacked` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `labelInsetX` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `labelInactiveOffsetY` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
@@ -624,6 +636,10 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/chakra** `states.value.disabled.label` = `#00000000` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `typography.label.family` = `Arial` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `typography.label.style` = `Regular` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
+- **textarea/chakra-field** `notchFill` = `#00000000` — plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout _[reviewed #00000000]_
+- **textarea/chakra-field** `outlineTreatment` = `plain` — follows from the anatomy: a legend inside a distinct outline is the notched treatment _[reviewed plain]_
+- **textarea/chakra-field** `strokeAlign` = `inside` — follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside _[reviewed inside]_
+- **textarea/chakra-field** `boxClips` = `true` — the box clips its text — recipe geometry _[reviewed true]_
 - **radio/astryx** `list.gap` = `8` — the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile _[docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]_
 - **radio/astryx** `item.gap` = `8` — the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile _[docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]_
 - **radio/astryx** `labelLineHeight` = `0` — the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile _[docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]_

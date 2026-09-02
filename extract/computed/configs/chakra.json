@@ -130,6 +130,62 @@
       }
     },
     {
+      "__note": "Authored 2026-09-02 as the person's step of docs/36 for textarea@1's LABELLED plane. Composition from the package's flat exports: FieldRoot ⊃ (FieldLabel 'Notes', Textarea). The content axis's value lives on the Textarea child: the $childProps axis form (COMPOSITION round) mounts it there; disabled goes to the Field root and reaches the Textarea through the field context. Placeholder pinned on the child; id pinned for determinism; blockStage so the field takes the stage width.",
+      "name": "TextareaField",
+      "importName": "FieldRoot",
+      "contract": "examples/chakra/contracts-seed/textarea-field.contract.json",
+      "sampleText": "",
+      "axes": [
+        "content"
+      ],
+      "axisValueMap": {
+        "content": {
+          "empty": {
+            "$childProps": {
+              "Textarea": {
+                "value": ""
+              }
+            }
+          },
+          "value": {
+            "$childProps": {
+              "Textarea": {
+                "value": "Meeting notes for Tuesday."
+              }
+            }
+          }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "id": "chakra-textarea-field"
+      },
+      "childrenSpec": [
+        {
+          "importName": "FieldLabel",
+          "text": "Notes"
+        },
+        {
+          "importName": "Textarea",
+          "props": {
+            "placeholder": "Add a note",
+            "id": "chakra-textarea-field-input"
+          }
+        }
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 360,
+        "height": 140,
+        "padding": 16
+      }
+    },
+    {
       "__note": "Authored 2026-09-02 as the person's step of docs/36 (the capture config makes the capture, so it cannot be drafted from one). Composition from the package's flat exports: SwitchRoot ⊃ (SwitchHiddenInput, SwitchControl ⊃ SwitchThumb, SwitchLabel). Label text pinned 'Enable' so typography identity is scorable; id pinned for determinism. checked is a plain boolean axis.",
       "name": "Switch",
       "importName": "SwitchRoot",

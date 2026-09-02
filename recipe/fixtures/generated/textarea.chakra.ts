@@ -32,6 +32,7 @@ const VALUES: Record<string, number | string> = {
   "box.lineHeight": 20, // ledger extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.line-height
   "labelGap": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
   "labelFontSize": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
+  "labelLineHeight": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
   "valueFontSize": 14, // ledger extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.font-size
   "labelInsetX": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
   "labelInactiveOffsetY": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
@@ -65,6 +66,7 @@ const chakraTokens = cloneTokens("chakra.textarea", (path) => {
   return VALUES[path]!;
 });
 chakraTokens.labelPlacement = "stacked" as "stacked" | "floating";
+chakraTokens.labelLineHeightUnit = "auto" as "auto" | "px";
 chakraTokens.outlineTreatment = "plain" as "plain" | "notched";
 chakraTokens.strokeAlign = "inside" as "inside" | "outside";
 chakraTokens.boxClips = true;

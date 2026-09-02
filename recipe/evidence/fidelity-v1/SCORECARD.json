@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 56,
-  "passed": 40,
-  "failed": 16,
+  "subjects": 57,
+  "passed": 42,
+  "failed": 15,
   "fringeExcused": 0,
-  "knownFailures": 16,
+  "knownFailures": 15,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -411,16 +411,16 @@
     },
     {
       "label": "textarea/astryx",
-      "status": "fail",
-      "pctAAMasked": 6.16,
-      "canvasPx": "86x87",
+      "status": "pass",
+      "pctAAMasked": 3.2,
+      "canvasPx": "86x89",
       "realPx": "320x89",
       "convergesAt": null
     },
     {
       "label": "textarea/mui",
       "status": "fail",
-      "pctAAMasked": 9.52,
+      "pctAAMasked": 8.28,
       "canvasPx": "102x58",
       "realPx": "188x56",
       "convergesAt": null
@@ -436,7 +436,7 @@
     {
       "label": "textarea/mui-proposed",
       "status": "fail",
-      "pctAAMasked": 9.52,
+      "pctAAMasked": 8.28,
       "canvasPx": "102x58",
       "realPx": "188x56",
       "convergesAt": null
@@ -455,6 +455,14 @@
       "pctAAMasked": 1.64,
       "canvasPx": "99x58",
       "realPx": "328x58",
+      "convergesAt": null
+    },
+    {
+      "label": "textarea/chakra-field",
+      "status": "pass",
+      "pctAAMasked": 2.02,
+      "canvasPx": "99x80",
+      "realPx": "328x80",
       "convergesAt": null
     }
   ]

@@ -59,7 +59,7 @@ What it has done, measured against the real package's own render
 | link | Altitude 5.56% (named: glyph + underline row); Chakra held out, 10.26% named (one glyph row) | MUI 20% (the hand row: 49%) | a serif the sandbox rendered by accident, carried as its fallback |
 | tabs | Carbon 9.57% (named: the capture mounts three tabs and a panel; the archetype draws two) | MUI = its hand row | shadcn's filled selected tab has no indicator; refused by name |
 | radio | Chakra **0.00%** (captured the same day through ItemIndicator) | AntD **0.00%** = its hand row | MUI's bare Radio has no label; radio@1 has no bare cell, refused by name |
-| textarea | Chakra 1.64% (the bare cell, re-captured the same day) | AntD 1.25% (bare; the hand row is a named content mismatch), MUI = its hand row (named) | the notch knockout colour and a placeholder hidden at rest and focus are reviewed, with citations |
+| textarea | Chakra 1.64% (the bare cell) and Chakra Field 2.02% (labelled; captured with the value on the child) | AntD 1.25% (bare; the hand row is a named content mismatch), MUI = its hand row (named) | the notch knockout colour and a placeholder hidden at rest and focus are reviewed, with citations |
 | alert | Chakra 3.03% (captured the same day; its own status icons read from the capture) | MUI 3.99%, AntD 3.35% = their hand rows | the icons' viewBox is reviewed with a citation — no computed channel carries it |
 
 Every proposal reads its values from the capture (13–43 leaves each), records

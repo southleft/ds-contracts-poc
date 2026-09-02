@@ -18,13 +18,9 @@
       "class": "font-substrate",
       "cause": "7.73% (tabs v6; was 14.73% → 18.07% → 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge — no geometry the recipe decided."
     },
-    "textarea/astryx": {
-      "class": "real-defect",
-      "cause": "6.16% width-normalised (heights 87 vs 89). The native resize grip is a named refusal (library-textareas.ts refusal-resize) and is absent from the mint; placeholder text differs slightly in weight."
-    },
     "textarea/mui": {
       "class": "real-defect",
-      "cause": "9.52% width-normalised (heights 58 vs 56). Resize grip absent (named refusal); the floating label offset differs by ~2px."
+      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height — InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     },
     "textarea/antd": {
       "class": "real-defect",
@@ -64,7 +60,7 @@
     },
     "textarea/mui-proposed": {
       "class": "real-defect",
-      "cause": "9.52% width-normalised (heights 58 vs 56). Resize grip absent (named refusal); the floating label offset differs by ~2px."
+      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height — InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     }
   }
 }

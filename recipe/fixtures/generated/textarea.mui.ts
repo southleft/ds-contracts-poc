@@ -36,6 +36,7 @@ const VALUES: Record<string, number | string> = {
   "box.lineHeight": 23, // ledger extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.line-height
   "labelGap": 0, // ledger extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default root.row-gap | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.margin-bottom | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.margin-top — the space between the label and the box: container row-gap + label margin-bottom + box margin-top (keywords read 0; a floating label overlays the box and reads 0)
   "labelFontSize": 16, // ledger extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-size
+  "labelLineHeight": 23, // ledger extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.line-height — the label's line-height as a px length; `normal` is 0 with unit auto
   "valueFontSize": 16, // ledger extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.font-size
   "labelInsetX": 14, // ledger extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform — rest label transform matrix tx (none → 0)
   "labelInactiveOffsetY": 16, // ledger extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform — rest label transform matrix ty (none → 0)
@@ -69,6 +70,7 @@ const muiTokens = cloneTokens("mui.textarea", (path) => {
   return VALUES[path]!;
 });
 muiTokens.labelPlacement = "floating" as "stacked" | "floating";
+muiTokens.labelLineHeightUnit = "px" as "auto" | "px";
 muiTokens.outlineTreatment = "notched" as "plain" | "notched";
 muiTokens.strokeAlign = "outside" as "inside" | "outside";
 muiTokens.boxClips = true;

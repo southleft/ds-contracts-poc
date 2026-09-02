@@ -127,6 +127,14 @@ export interface TextareaRecipeInstance {
     };
     labelGap: TextareaNumberParameter;
     labelFontSize: TextareaNumberParameter;
+    /**
+     * The label's line-height: `auto` hugs the face (the hand tables' MUI
+     * and AntD spelling); `px` is the library's own line box (Astryx 20,
+     * Chakra's Field label 20). A shrunk floating label scales it by
+     * floatingLabelFontSize / labelFontSize, as the CSS transform does.
+     */
+    labelLineHeightUnit: "auto" | "px";
+    labelLineHeight: TextareaNumberParameter;
     valueFontSize: TextareaNumberParameter;
     /**
      * Astryx/AntD Field label is stacked. Official MUI outlined
@@ -237,6 +245,8 @@ export const TextareaRecipeInstanceSchema = z.strictObject({
     }),
     labelGap: NumberParameterSchema,
     labelFontSize: NumberParameterSchema,
+    labelLineHeightUnit: z.enum(["auto", "px"]),
+    labelLineHeight: NumberParameterSchema,
     valueFontSize: NumberParameterSchema,
     labelPlacement: z.enum(["stacked", "floating"]),
     outlineTreatment: z.enum(["plain", "notched"]),
@@ -359,10 +369,13 @@ const hasLabel = (variant: ComponentNode): boolean =>
       (c.role === "textarea/label-row" && c.kind === "frame"),
   );
 
+const round4 = (n: number): number => Math.round(n * 1e4) / 1e4;
+
 const labelText = (
   instance: TextareaRecipeInstance,
   cell: StateCell,
   fontSize: TextareaNumberParameter,
+  shrunk = false,
 ): TextNode => ({
   kind: "text",
   role: "textarea/label",
@@ -374,7 +387,19 @@ const labelText = (
     fontStyle: instance.tokens.typography.label.resolvedStyle,
     fontProvenance: instance.tokens.typography.label,
     fontSize: fontSize.fallback,
-    lineHeight: { unit: "auto" },
+    lineHeight:
+      instance.tokens.labelLineHeightUnit === "px"
+        ? {
+            unit: "px" as const,
+            // a shrunk floating label's line box scales with its font, as the CSS transform scales it
+            value: shrunk
+              ? round4(
+                  (instance.tokens.labelLineHeight.fallback * instance.tokens.floatingLabelFontSize.fallback) /
+                    instance.tokens.labelFontSize.fallback,
+                )
+              : instance.tokens.labelLineHeight.fallback,
+          }
+        : { unit: "auto" as const },
   },
   align: "left",
   verticalAlign: "center",
@@ -383,6 +408,9 @@ const labelText = (
   height: hug,
   bindings: [
     bind("type.fontSize", fontSize),
+    ...(instance.tokens.labelLineHeightUnit === "px" && !shrunk
+      ? [bind("type.lineHeight.value", instance.tokens.labelLineHeight)]
+      : []),
     bind("fills.0.color", cell.label),
   ],
 });
@@ -492,7 +520,7 @@ const variantComponent = (
   const labelFont = shrunk
     ? instance.tokens.floatingLabelFontSize
     : instance.tokens.labelFontSize;
-  const label = bare ? null : labelText(instance, cell, labelFont);
+  const label = bare ? null : labelText(instance, cell, labelFont, shrunk);
   const box = boxNode(instance, content, cell);
   const labelRow: FrameNode = {
     kind: "frame",
@@ -918,6 +946,11 @@ export function collapseTextareaRecipe(
       labelFontSize: label
         ? numberFrom(label, "type.fontSize", label.type.fontSize)
         : { variable: `${envelope.id}.labelFontSize`, fallback: BARE_LABEL_FONT_SIZE },
+      labelLineHeightUnit: label && label.type.lineHeight.unit === "px" ? "px" : "auto",
+      labelLineHeight:
+        label && label.type.lineHeight.unit === "px"
+          ? numberFrom(label, "type.lineHeight.value", label.type.lineHeight.value)
+          : { variable: `${envelope.id}.labelLineHeight`, fallback: 0 },
       valueFontSize: numberFrom(value, "type.fontSize", value.type.fontSize),
       labelPlacement: floating ? "floating" : "stacked",
       outlineTreatment: notched ? "notched" : "plain",

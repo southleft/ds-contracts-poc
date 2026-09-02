@@ -82,6 +82,8 @@ export const canonicalTextareaRecipeInstance = {
     },
     labelGap: number("ds.textarea.labelGap", 4),
     labelFontSize: number("ds.textarea.labelFontSize", 14),
+    labelLineHeightUnit: "auto",
+    labelLineHeight: number("ds.textarea.labelLineHeight", 0),
     valueFontSize: number("ds.textarea.valueFontSize", 14),
     labelPlacement: "stacked",
     outlineTreatment: "plain",

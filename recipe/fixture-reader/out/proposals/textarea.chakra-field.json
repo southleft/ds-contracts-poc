@@ -1,0 +1,288 @@
+{
+  "archetype": "textarea",
+  "library": "chakra-field",
+  "ledger": "extract/computed/out/chakra/textareafield/captured-truth.json",
+  "provenance": {
+    "package": "@chakra-ui/react",
+    "version": "3.37.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "inner": "idx:1",
+    "box": "idx:1",
+    "label": "idx:0",
+    "container": "root",
+    "opacityOn": "idx:1"
+  },
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  },
+  "leaves": {
+    "box.height": {
+      "value": 58,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.height"
+    },
+    "box.paddingX": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-left"
+    },
+    "box.paddingY": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-top"
+    },
+    "box.radius": {
+      "value": 4,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-width",
+      "formula": "the box's own border"
+    },
+    "box.rows": {
+      "value": 2,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.height | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.line-height | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.box-sizing | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-top | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-bottom | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-width | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-bottom-width",
+      "formula": "rendered rows = the inner textarea's content height / its line-height (a border-box height minus its padding and border; a content-box height as is)"
+    },
+    "box.lineHeight": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.line-height"
+    },
+    "labelGap": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default root.row-gap | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.margin-bottom | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.margin-top",
+      "formula": "the space between the label and the box: container row-gap + label margin-bottom + box margin-top (keywords read 0; a floating label overlays the box and reads 0)"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.line-height",
+      "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+    },
+    "labelLineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.line-height",
+      "formula": "`normal` → auto (hug the face); a length → px"
+    },
+    "valueFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.font-size"
+    },
+    "labelPlacement": {
+      "value": "stacked",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.position | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.transform | extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.transform",
+      "formula": "floating when the label is absolutely positioned or its transform changes between the empty and value combos; otherwise stacked"
+    },
+    "labelInsetX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.transform",
+      "formula": "rest label transform matrix tx (none → 0)"
+    },
+    "labelInactiveOffsetY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.transform",
+      "formula": "rest label transform matrix ty (none → 0)"
+    },
+    "labelFloatingOffsetY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.transform",
+      "formula": "the value combo's label transform matrix ty (a stacked label: 0)"
+    },
+    "floatingLabelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.font-size | extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.transform",
+      "formula": "the value combo's label font-size × its transform scale a (a stacked label: the label size)"
+    },
+    "notchFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout"
+    },
+    "outlineTreatment": {
+      "value": "plain",
+      "from": "spelling",
+      "why": "follows from the anatomy: a legend inside a distinct outline is the notched treatment"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside"
+    },
+    "boxClips": {
+      "value": "true",
+      "from": "spelling",
+      "why": "the box clips its text — recipe geometry"
+    },
+    "states.empty.enabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.background-color"
+    },
+    "states.empty.enabled.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-color"
+    },
+    "states.empty.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.opacity"
+    },
+    "states.empty.enabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.color"
+    },
+    "states.empty.enabled.value": {
+      "value": "#52525bcc",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1::placeholder.color | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1::placeholder.opacity | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__focus-visible idx:1::placeholder.color | extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__focus-visible idx:1::placeholder.opacity",
+      "formula": "placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+    },
+    "states.empty.disabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1.background-color"
+    },
+    "states.empty.disabled.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1.border-top-color"
+    },
+    "states.empty.disabled.boxOpacity": {
+      "value": 0.5,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1.opacity"
+    },
+    "states.empty.disabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:0.color"
+    },
+    "states.empty.disabled.value": {
+      "value": "#52525bcc",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1::placeholder.color | extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1::placeholder.opacity | extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__focus-visible idx:1::placeholder.color | extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__focus-visible idx:1::placeholder.opacity",
+      "formula": "placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+    },
+    "states.value.enabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.background-color"
+    },
+    "states.value.enabled.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.border-top-color"
+    },
+    "states.value.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.opacity"
+    },
+    "states.value.enabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.color"
+    },
+    "states.value.enabled.value": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.color | extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.-webkit-text-fill-color",
+      "formula": "the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+    },
+    "states.value.disabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.background-color"
+    },
+    "states.value.disabled.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.border-top-color"
+    },
+    "states.value.disabled.boxOpacity": {
+      "value": 0.5,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.opacity"
+    },
+    "states.value.disabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:0.color"
+    },
+    "states.value.disabled.value": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.color | extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.-webkit-text-fill-color",
+      "formula": "the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+    },
+    "typography.label.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "typography.value.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.font-family",
+      "formula": "first family of the field text's computed stack"
+    },
+    "typography.value.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.font-weight",
+      "formula": "field font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": "Notes",
+    "placeholder": "Add a note",
+    "value": "Meeting notes for Tuesday.",
+    "placeholderSource": "extract/computed/configs/chakra.json#TextareaField childrenSpec[Textarea].props.placeholder"
+  },
+  "typography": {
+    "label": {
+      "family": "Inter",
+      "style": "Medium",
+      "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+    },
+    "value": {
+      "family": "Inter",
+      "style": "Regular",
+      "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+    }
+  }
+}

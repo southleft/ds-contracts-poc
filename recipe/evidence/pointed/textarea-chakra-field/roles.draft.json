@@ -1,0 +1,48 @@
+{
+  "roles": {
+    "inner": "idx:1",
+    "box": "idx:1",
+    "label": "idx:0",
+    "container": "root",
+    "opacityOn": "idx:1"
+  },
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "empty.enabled ← empty.enabled (from the declared base empty.enabled); empty.disabled ← empty.disabled (from the declared base empty.enabled); value.enabled ← value.enabled (from the declared base empty.enabled); value.disabled ← value.disabled (from the declared base empty.enabled)",
+      "confidence": "high"
+    },
+    "inner": {
+      "selector": "idx:1",
+      "why": "textarea 328px×58px carrying \"Meeting notes for Tuesday.\" in the value combo",
+      "confidence": "high"
+    },
+    "box": {
+      "selector": "idx:1",
+      "why": "textarea.chakra-textarea 328px×58px border 1px bg rgba(0, 0, 0, 0) padding 8px/12px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "label.chakra-field__label carries text \"Notes\" — position static, transform none → none in the value combo",
+      "confidence": "high"
+    },
+    "container": {
+      "selector": "root",
+      "why": "nearest common ancestor of label and box: div display flex, row-gap 6px",
+      "confidence": "high"
+    },
+    "opacityOn": {
+      "selector": "idx:1",
+      "why": "textarea opacity 1 → 0.5 when disabled",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

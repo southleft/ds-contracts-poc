@@ -85,6 +85,8 @@ export const textareaSpellingsFor = (roles: Pick<TextareaRoles, "label" | "outli
       labelPlacement: "stacked",
       labelGap: 0,
       labelFontSize: BARE_LABEL_FONT_SIZE,
+      labelLineHeightUnit: "auto",
+      labelLineHeight: 0,
       labelInsetX: 0,
       labelInactiveOffsetY: 0,
       labelFloatingOffsetY: 0,
@@ -145,6 +147,8 @@ export function textareaSchemaMappings(roles: TextareaRoles, opts: TextareaSchem
       combine: (raw) => pxOr0(raw.rg) + pxOr0(raw.mb) + pxOr0(raw.mt),
     })),
     L("labelFontSize", () => one("labelFontSize", "px", { combo: base, part: label, channel: "font-size" })),
+    L("labelLineHeight", () => one("labelLineHeight", "px", { combo: base, part: label, channel: "line-height" }, { formula: "the label's line-height as a px length; `normal` is 0 with unit auto", combine: (raw) => pxOr0(raw.v) })),
+    L("labelLineHeightUnit", () => one("labelLineHeightUnit", "string", { combo: base, part: label, channel: "line-height" }, { formula: "`normal` → auto (hug the face); a length → px", combine: (raw) => (/^-?\d/.test(raw.v!) ? "px" : "auto") })),
     R("valueFontSize", () => one("valueFontSize", "px", { combo: base, part: roles.inner, channel: "font-size" })),
     L("labelPlacement", () => ({
       path: "labelPlacement",

@@ -493,6 +493,7 @@ describe how ONE axis value reaches the library, so they are only legal there:
 | Marker | Mounts | Use it for |
 |---|---|---|
 | `{"$props": {…}}` | several library props for one axis value | tri-state spelled as two booleans (`checked` + `indeterminate`) |
+| `{"$childProps": {"<importName>": {…}}}` | library props on a **named `childrenSpec` child**, at any depth, over its static props | a composition whose value lives on a child: Chakra's `FieldRoot ⊃ (FieldLabel, Textarea)` with `content` mounting `value` on the `Textarea`. May sit beside `$props` in one value. Two axes assigning the same child prop collide by name, as root props do. |
 | `{"$classTokens": […]}` | class tokens **appended** to `className` in declared axis order | class-based libraries where a component IS a class string (`class="btn btn-primary btn-lg"`). `[]` is the honest spelling of a value that adds no class |
 
 > **Why `$classTokens` exists rather than a second `$props`.** `comboProps`

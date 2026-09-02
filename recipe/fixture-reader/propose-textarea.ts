@@ -54,10 +54,22 @@ const selectorMatches = (part: { idxPath: string; tag: string; classes: string[]
 function placeholderFromConfig(truth: { _provenance: { config?: string; component?: string } }): { value: string; source: string } | null {
   const cfg = truth._provenance.config, name = truth._provenance.component;
   if (!cfg || !name || !existsSync(path.join(REPO, cfg))) return null;
-  const json = JSON.parse(readFileSync(path.join(REPO, cfg), "utf8")) as { components?: Array<{ name: string; fixedProps?: Record<string, unknown> }> };
+  type Child = { importName: string; props?: Record<string, unknown>; children?: Child[] };
+  const json = JSON.parse(readFileSync(path.join(REPO, cfg), "utf8")) as { components?: Array<{ name: string; fixedProps?: Record<string, unknown>; childrenSpec?: Child[] }> };
   const entry = (json.components ?? []).find((c) => c.name === name);
   const ph = entry?.fixedProps?.placeholder;
-  return typeof ph === "string" && ph.length > 0 ? { value: ph, source: `${cfg}#${name} fixedProps.placeholder` } : null;
+  if (typeof ph === "string" && ph.length > 0) return { value: ph, source: `${cfg}#${name} fixedProps.placeholder` };
+  // A composition pins the placeholder on the textarea CHILD (Field + Label + Textarea).
+  const walk = (list: Child[] | undefined): { value: string; source: string } | null => {
+    for (const c of list ?? []) {
+      const v = c.props?.placeholder;
+      if (typeof v === "string" && v.length > 0) return { value: v, source: `${cfg}#${name} childrenSpec[${c.importName}].props.placeholder` };
+      const inner = walk(c.children);
+      if (inner) return inner;
+    }
+    return null;
+  };
+  return walk(entry?.childrenSpec);
 }
 
 export function proposeTextareaFixture(input: ProposeTextareaInput): { proposal: TextareaProposal; modulePath: string; proposalPath: string; refused: string[] } {
@@ -143,7 +155,7 @@ function fontBlock(p: TextareaProposal, which: "label" | "value"): string {
   }`;
 }
 
-const STRING_LEAVES = new Set(["labelPlacement", "outlineTreatment", "strokeAlign", "boxClips", "typography.label.resolved", "typography.value.resolved"]);
+const STRING_LEAVES = new Set(["labelPlacement", "labelLineHeightUnit", "outlineTreatment", "strokeAlign", "boxClips", "typography.label.resolved", "typography.value.resolved"]);
 
 export function renderTextareaModule(p: TextareaProposal, opts: { slug: string; displayName: string; exportName: string; sourceRoot: string; unsupported: string[] }): string {
   const tokenLines = Object.entries(p.leaves)
@@ -158,6 +170,15 @@ export function renderTextareaModule(p: TextareaProposal, opts: { slug: string; 
     const resize = ledger.raw(`${base}__default`, p.roles.inner, "resize");
     if (resize && resize !== "none") extra.push(`  { id: "refusal-resize", evidence: ${q(`the inner textarea is resizable (resize: ${resize}, ${p.ledger}#${base}__default ${p.roles.inner}); the archetype draws no resize grip`)}, target: ${q(`${opts.displayName} resize grip`)}, reason: "no-figma-primitive" },`);
   } catch { /* channel not enumerated: nothing to refuse */ }
+  if (p.roles.label) {
+    // A label that DIMS by opacity when disabled: textarea@1 carries the label's colour per state and no label opacity, so the dimming is named, not folded into the colour.
+    for (const fix of ["empty.disabled", "value.disabled"] as const) {
+      try {
+        const op = ledger.raw(`${p.combos[fix]}__default`, p.roles.label, "opacity");
+        if (Number(op) < 1) { extra.push(`  { id: ${q(`refusal-label-opacity-${fix.replace(".", "-")}`)}, evidence: ${q(`the label dims by opacity ${op} in the ${fix} state (${p.ledger}#${p.combos[fix]}__default ${p.roles.label}.opacity); textarea@1 carries the label's colour per state and no label opacity — the disabled cell keeps the read colour, undimmed`)}, target: ${q(`${opts.displayName} ${fix} label opacity`)}, reason: "refused-by-recipe" },`); }
+      } catch { /* opacity not enumerated */ }
+    }
+  }
   if (p.content.label === null) extra.push(`  { id: "refusal-bare-label", evidence: ${q(`the mount has no label part (${p.ledger}); textarea@1 compiles the bare cell — no label node`)}, target: ${q(`${opts.displayName} label`)}, reason: "refused-by-recipe" },`);
   const receiptRows = [
     ...p.receipts.map((r) => `  { id: ${q(`receipt-${r.path.replace(/\./g, "-")}`)}, evidence: ${q(`${r.why} — ${r.evidence}`)}, target: ${q(`${opts.displayName} ${r.path}`)}, reason: "refused-by-recipe" },`),
@@ -192,6 +213,7 @@ const ${slug}Tokens = cloneTokens(${q(`${opts.slug}.textarea`)}, (path) => {
   return VALUES[path]!;
 });
 ${slug}Tokens.labelPlacement = ${s("labelPlacement")} as "stacked" | "floating";
+${slug}Tokens.labelLineHeightUnit = ${s("labelLineHeightUnit")} as "auto" | "px";
 ${slug}Tokens.outlineTreatment = ${s("outlineTreatment")} as "plain" | "notched";
 ${slug}Tokens.strokeAlign = ${s("strokeAlign")} as "inside" | "outside";
 ${slug}Tokens.boxClips = ${String(p.leaves["boxClips"]!.value) === "true"};

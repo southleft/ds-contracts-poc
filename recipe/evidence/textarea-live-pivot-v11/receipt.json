@@ -1,0 +1,86 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "textarea-live-pivot-v11-prepare",
+  "teaching": "MUI rest empty hides placeholder; Content=focus shrinks the label and shows placeholder. Stacked Astryx/AntD empty and focus look the same. No invented focus ring.",
+  "runIdentity": "e275888a-cadac652-04364963-5b048377-f7368def-36b9a479-8460784d-textarea-v11",
+  "pageName": "Recipe Pivot / Textarea / e275888a-cadac652-04364963-5b048377-f7368def-36b9a479-8460784d-textarea-v11",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "e275888ab379093184ed6cebf7eb59729a8a165332f77bf23a976a03d66b9432",
+    "MUI": "cadac652f6f9d41651604305230eae4c7e2914e731036133f14dfcdb79767cbc",
+    "Ant Design": "04364963cc1c374a33fd33ada38342d475e98dd493b0e0290cdea8e0e6431f2b",
+    "MUI (proposed)": "5b048377287c49ac310538aba40e1df9c796b859bb025e7117a46dc2b1ad3733",
+    "Ant Design (proposed)": "f7368deffc96e8ee3d94a584d13d92b91705b9c6bd49ee87d88ab93605dca3d3",
+    "Chakra (proposed)": "36b9a47967dda61bf76e11c585e47529fd0da8be07b555de254f0fc45ce7a462",
+    "Chakra Field (proposed)": "8460784d3bd7cb7b7a1a86e4da14d039db30f7dfda3c978b93d8f92bfb75f414"
+  },
+  "writerSha256": "9031dd7f338826ad34666c820862a9c08bf7dd5e74d8b791d5004dfab65d4e6a",
+  "pageId": "219:93448",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-93448",
+  "live": {
+    "recordedFrom": "textarea-v11-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Textarea / e275888a-cadac652-04364963-5b048377-f7368def-36b9a479-8460784d-textarea-v11",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-textarea-reviewed-v1",
+        "sectionId": "219:93449",
+        "setId": "219:93501",
+        "collectionId": "VariableCollectionId:219:93450",
+        "variantCount": 6,
+        "comparedIrFacts": 139
+      },
+      {
+        "adapterIdentity": "mui-textarea-reviewed-v1",
+        "sectionId": "219:93502",
+        "setId": "219:93562",
+        "collectionId": "VariableCollectionId:219:93503",
+        "variantCount": 6,
+        "comparedIrFacts": 145
+      },
+      {
+        "adapterIdentity": "antd-textarea-reviewed-v1",
+        "sectionId": "219:93563",
+        "setId": "219:93614",
+        "collectionId": "VariableCollectionId:219:93564",
+        "variantCount": 6,
+        "comparedIrFacts": 133
+      },
+      {
+        "adapterIdentity": "mui-textarea-proposed-v1",
+        "sectionId": "219:93615",
+        "setId": "219:93675",
+        "collectionId": "VariableCollectionId:219:93616",
+        "variantCount": 6,
+        "comparedIrFacts": 145
+      },
+      {
+        "adapterIdentity": "antd-textarea-proposed-v1",
+        "sectionId": "219:93676",
+        "setId": "219:93716",
+        "collectionId": "VariableCollectionId:219:93677",
+        "variantCount": 6,
+        "comparedIrFacts": 115
+      },
+      {
+        "adapterIdentity": "chakra-textarea-proposed-v1",
+        "sectionId": "219:93717",
+        "setId": "219:93757",
+        "collectionId": "VariableCollectionId:219:93718",
+        "variantCount": 6,
+        "comparedIrFacts": 115
+      },
+      {
+        "adapterIdentity": "chakra-field-textarea-proposed-v1",
+        "sectionId": "219:93758",
+        "setId": "219:93810",
+        "collectionId": "VariableCollectionId:219:93759",
+        "variantCount": 6,
+        "comparedIrFacts": 139
+      }
+    ]
+  }
+}

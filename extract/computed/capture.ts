@@ -180,6 +180,9 @@ export function validateImportName(compName: string, importName: string, customE
  *  Mixing the two forms on one prop is REFUSED at load (see
  *  `checkAxisPropCollisions`): an appending axis and an assigning axis on the
  *  same `className` is precisely the ambiguity that produced the silent loss. */
+/** COMPOSITION round: the axis-value marker that targets a childrenSpec child, and the root-prop key the bag rides under to the harness page. */
+export const CHILD_PROPS_MARKER = '$childProps';
+export const CHILD_PROPS_KEY = '__dscChildProps';
 export const CLASS_TOKEN_PROP = 'className';
 
 /** The marker's payload, validated. Returns undefined when `v` is not one. */
@@ -569,8 +572,11 @@ function checkAxisPropCollisions(comp: ComponentConfig): void {
         mapped = true;
         continue;
       }
-      if (mv && typeof mv === 'object' && !Array.isArray(mv) && '$props' in (mv as Record<string, unknown>)) {
-        for (const lp of Object.keys((mv as { $props: Record<string, unknown> }).$props ?? {})) note(lp, axis);
+      if (mv && typeof mv === 'object' && !Array.isArray(mv) && ('$props' in (mv as Record<string, unknown>) || CHILD_PROPS_MARKER in (mv as Record<string, unknown>))) {
+        const rec = mv as { $props?: Record<string, unknown>; $childProps?: Record<string, Record<string, unknown>> };
+        for (const lp of Object.keys(rec.$props ?? {})) note(lp, axis);
+        // a child prop assigns "<importName>.<prop>" — two axes assigning the same child prop collide the same way
+        for (const [name, kp] of Object.entries(rec.$childProps ?? {})) for (const lp of Object.keys(kp ?? {})) note(`${name}.${lp}`, axis);
         mapped = true;
         continue;
       }
@@ -810,12 +816,34 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
     }
     // ORGANISM round: {"$props": {…}} mounts SEVERAL library props for one
     // contract axis value (MUI Checkbox's tri-state = checked+indeterminate).
-    if (mv && typeof mv === 'object' && !Array.isArray(mv) && '$props' in (mv as Record<string, unknown>)) {
-      const expand = (mv as { $props: Record<string, unknown> }).$props;
-      if (expand === null || typeof expand !== 'object') {
-        throw new Error(`${comp.name}: axisValueMap ${a.prop}="${v}" $props must be an object of library props`);
+    if (mv && typeof mv === 'object' && !Array.isArray(mv) && ('$props' in (mv as Record<string, unknown>) || CHILD_PROPS_MARKER in (mv as Record<string, unknown>))) {
+      const rec = mv as { $props?: Record<string, unknown>; $childProps?: Record<string, Record<string, unknown>> };
+      if ('$props' in rec) {
+        const expand = rec.$props;
+        if (expand === null || typeof expand !== 'object') {
+          throw new Error(`${comp.name}: axisValueMap ${a.prop}="${v}" $props must be an object of library props`);
+        }
+        for (const [lp, lv] of Object.entries(expand)) props[lp] = lv;
       }
-      for (const [lp, lv] of Object.entries(expand)) props[lp] = lv;
+      // COMPOSITION round: {"$childProps": {"<importName>": {libProp: value}}}
+      // mounts props on a NAMED childrenSpec child instead of the root — a
+      // Field + Label + Textarea whose value lives on the Textarea. The bag
+      // rides the root props under CHILD_PROPS_KEY and the harness page
+      // merges it into the matching child at mount (renderKidList), never
+      // onto the root.
+      if (CHILD_PROPS_MARKER in rec) {
+        const kids = rec.$childProps;
+        if (kids === null || typeof kids !== 'object' || Array.isArray(kids)) {
+          throw new Error(`${comp.name}: axisValueMap ${a.prop}="${v}" $childProps must be an object of {<childrenSpec importName>: {libProp: value}}`);
+        }
+        const known = new Set(walkChildSpecs(comp.childrenSpec).map((cs) => cs.importName));
+        for (const name of Object.keys(kids)) {
+          if (!known.has(name)) throw new Error(`${comp.name}: axisValueMap ${a.prop}="${v}" $childProps names "${name}", which is not a childrenSpec importName (${[...known].join(', ') || 'none'})`);
+        }
+        const bag = (props[CHILD_PROPS_KEY] ?? {}) as Record<string, Record<string, unknown>>;
+        for (const [name, kp] of Object.entries(kids)) bag[name] = { ...(bag[name] ?? {}), ...(kp as Record<string, unknown>) };
+        props[CHILD_PROPS_KEY] = bag;
+      }
       continue;
     }
     props[a.prop] = mv !== undefined ? mv : v;
@@ -1192,15 +1220,18 @@ function resolveMarkers(v) {
 // childrenSpec (N imported children), or bare sampleText.
 // ORGANISM round: childrenSpec RECURSES — a node with .children mounts its
 // own child list instead of text (mutually exclusive, refused at load).
-function renderKidList(list) {
+// COMPOSITION round: per-combo child props ({"$childProps"} on an axis value)
+// ride the root props under CHILD_PROPS_KEY and are merged here onto the
+// childrenSpec child of that importName, at any depth, over its static props.
+function renderKidList(list, kid) {
   return list.map((cs, i) => React.createElement(
     COMPONENTS[cs.importName],
-    { key: i, ...ceProps(resolveMarkers({ ...(cs.props || {}) })) },
-    cs.children ? renderKidList(cs.children) : cs.text,
+    { key: i, ...ceProps(resolveMarkers({ ...(cs.props || {}), ...((kid && kid[cs.importName]) || {}) })) },
+    cs.children ? renderKidList(cs.children, kid) : cs.text,
   ));
 }
-function renderKids(s) {
-  if (s.childrenSpec) return renderKidList(s.childrenSpec);
+function renderKids(s, kid) {
+  if (s.childrenSpec) return renderKidList(s.childrenSpec, kid);
   if (s.childWrap) { const W = COMPONENTS[s.childWrap]; return <W>{s.text}</W>; }
   // CARBON ROUND: sampleText "" means the component takes NO sample text, and
   // React does not treat that the same as an empty string — '' is a REAL child.
@@ -1220,13 +1251,15 @@ function App({ gen, comboGen }) {
     ${cfg.mount.wrapperOpen}
       {SPECS.map((s) => {
         const C = COMPONENTS[s.component];
+        const kid = s.props['__dscChildProps'];
         const props0 = resolveMarkers({ ...s.props });
+        delete props0['__dscChildProps'];
         for (const cb of s.callbacks) props0[cb] = () => {};
         const props = ceProps(props0);
         return (
           <React.Fragment key={s.key + ':' + gen + ':' + (comboGen[s.key] || 0)}>
             <button data-sentinel={s.key} style={{ width: 8, height: 8, padding: 0, border: 0, margin: 2, background: '#eee' }} aria-label="sentinel" />
-            <div data-combo={s.key} style={stageStyle(s.stage, s.blockStage)}><C {...props}>{renderKids(s)}</C></div>
+            <div data-combo={s.key} style={stageStyle(s.stage, s.blockStage)}><C {...props}>{renderKids(s, kid)}</C></div>
           </React.Fragment>
         );
       })}
@@ -2534,15 +2567,18 @@ function resolveMarkers(v) {
   return v;
 }
 // ORGANISM round: childrenSpec RECURSES (see buildHarnessPage).
-function renderKidList(list) {
+// COMPOSITION round: per-combo child props ride the root props under
+// __dscChildProps and are merged onto the child of that importName (as the
+// census page does — kept in lockstep).
+function renderKidList(list, kid) {
   return list.map((cs, i) => React.createElement(
     COMPONENTS[cs.importName],
-    { key: i, ...ceProps(resolveMarkers({ ...(cs.props || {}) })) },
-    cs.children ? renderKidList(cs.children) : cs.text,
+    { key: i, ...ceProps(resolveMarkers({ ...(cs.props || {}), ...((kid && kid[cs.importName]) || {}) })) },
+    cs.children ? renderKidList(cs.children, kid) : cs.text,
   ));
 }
-function renderKids() {
-  if (CHILDREN_SPEC) return renderKidList(CHILDREN_SPEC);
+function renderKids(kid) {
+  if (CHILDREN_SPEC) return renderKidList(CHILDREN_SPEC, kid);
   if (CHILD_WRAP) { const W = COMPONENTS[CHILD_WRAP]; return <W>{TEXT}</W>; }
   // CARBON ROUND: "" = no children, not an empty-string child (see the census
   // page's renderKids above — Carbon's Checkbox forwards children onto a void
@@ -2555,10 +2591,12 @@ let root = null;
 function render() {
   let content = null;
   if (specIdx !== null) {
+    const kid = SPECS[specIdx].props['__dscChildProps'];
     const props0 = resolveMarkers({ ...SPECS[specIdx].props });
+    delete props0['__dscChildProps'];
     for (const cb of CALLBACKS) props0[cb] = () => {};
     const props = ceProps(props0);
-    content = <C {...props}>{renderKids()}</C>;
+    content = <C {...props}>{renderKids(kid)}</C>;
   }
   root.render(
     ${cfg.mount.wrapperOpen}

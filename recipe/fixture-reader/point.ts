@@ -90,8 +90,13 @@ if (!ARCHETYPES.includes(archetype as (typeof ARCHETYPES)[number]) || !library) 
 // --capture <name>: the captured component directory when the library names
 // the archetype differently (AntD and Carbon capture a Tag; chip@1 reads it).
 const captureName = arg("capture") ?? archetype;
+// --slug <name>: the fixture's own name when one library contributes two
+// captures of an archetype (Chakra's bare Textarea and its Field + Label +
+// Textarea composition): the ledger stays under --library, everything the
+// proposal writes is named by the slug.
+const slugName = arg("slug") ?? library;
 const ledgerRel = `extract/computed/out/${library}/${captureName}/captured-truth.json`;
-const outDir = path.join(REPO, "recipe/evidence/pointed", `${archetype}-${library}`);
+const outDir = path.join(REPO, "recipe/evidence/pointed", `${archetype}-${slugName}`);
 mkdirSync(outDir, { recursive: true });
 const log: string[] = [];
 const say = (line: string): void => { console.log(line); log.push(line); };
@@ -127,8 +132,8 @@ writeFileSync(path.join(outDir, "roles.json"), `${JSON.stringify(roles, null, 2)
 const sets: Record<string, { value: string; why: string }> = {};
 const whys = new Map(args("why").map((w) => { const i = w.indexOf("="); return [w.slice(0, i), w.slice(i + 1)] as const; }));
 for (const s of args("set")) { const i = s.indexOf("="); const p = s.slice(0, i); const why = whys.get(p); if (!why) throw new Error(`--set ${p} needs --why '${p}=<evidence>'`); sets[p] = { value: s.slice(i + 1), why }; }
-const modulePath = `recipe/fixtures/generated/${archetype}.${library}.ts`;
-const common = { library, ledger: ledgerRel, sets, displayName: arg("display-name"), exportName: arg("export-name"), sourceRoot: arg("source-root"), unsupported: (arg("unsupported") ?? "").split(",").filter(Boolean), out: modulePath };
+const modulePath = `recipe/fixtures/generated/${archetype}.${slugName}.ts`;
+const common = { library: slugName, ledger: ledgerRel, sets, displayName: arg("display-name"), exportName: arg("export-name"), sourceRoot: arg("source-root"), unsupported: (arg("unsupported") ?? "").split(",").filter(Boolean), out: modulePath };
 let glyph: GlyphSpec | null = null;
 let proposed: { refused: string[]; proposal: { leaves: Record<string, { from: "ledger" | "set" | "spelling" }> } };
 if (archetype === "checkbox") {
@@ -177,7 +182,7 @@ say(`3. propose   ${counts.ledger} leaves read from the ledger · ${counts.set} 
 // 4. compile + fixed point
 const mod = (await import(pathToFileURL(path.join(REPO, modulePath)).href)) as Record<string, unknown>;
 const Arch = archetype[0]!.toUpperCase() + archetype.slice(1);
-const slug = library.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+const slug = slugName.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
 const source = mod[`${slug}${Arch}Source`];
 const config = mod[`${slug}${Arch}AdapterConfig`];
 const adapt = (archetype === "checkbox" ? adaptReviewedCheckbox : archetype === "switch" ? adaptReviewedSwitch : archetype === "avatar" ? adaptReviewedAvatar : archetype === "tooltip" ? adaptReviewedTooltip : archetype === "chip" ? adaptReviewedChip : archetype === "link" ? adaptReviewedLink : archetype === "radio" ? adaptReviewedRadio : archetype === "textarea" ? adaptReviewedTextarea : archetype === "alert" ? adaptReviewedAlert : adaptReviewedTabs) as (s: unknown, c: unknown) => unknown;
@@ -191,7 +196,7 @@ const recipeHash = (hashRecipeInstance as (r: unknown, i: unknown) => string)(ar
 say(`4. compile   fixed point ✔ · ${(envelope.ir as { children: unknown[] }).children.length} variants · ${envelope.accounting.carried.length} carried · ${envelope.receipts.length} receipts · recipe ${recipeHash.slice(0, 8)}`);
 
 // 5. emit
-const src = { adapterIdentity: `${library}-${archetype}-proposed-v1`, displayName: arg("display-name") ?? library, recipeHash, envelope };
+const src = { adapterIdentity: `${slugName}-${archetype}-proposed-v1`, displayName: arg("display-name") ?? slugName, recipeHash, envelope };
 const emit = (archetype === "checkbox" ? emitCheckboxFigmaWriter : archetype === "switch" ? emitSwitchFigmaWriter : archetype === "avatar" ? emitAvatarFigmaWriter : archetype === "tooltip" ? emitTooltipFigmaWriter : archetype === "chip" ? emitChipFigmaWriter : archetype === "link" ? emitLinkFigmaWriter : archetype === "radio" ? emitRadioFigmaWriter : archetype === "textarea" ? emitTextareaFigmaWriter : archetype === "alert" ? emitAlertFigmaWriter : emitTabsFigmaWriter) as (inputs: Array<typeof src>, o: { target: "plugin" | "scratch" }) => { code: string; pageName: string };
 const plugin = emit([src], { target: "plugin" });
 const scratch = emit([src], { target: "scratch" });
@@ -199,7 +204,7 @@ writeFileSync(path.join(outDir, "writer.plugin.js"), plugin.code);
 writeFileSync(path.join(outDir, "writer.scratch.js"), scratch.code);
 say(`5. emit      writer.plugin.js (${(plugin.code.length / 1024).toFixed(0)} KB, page "${plugin.pageName}") and writer.scratch.js`);
 
-writeFileSync(path.join(outDir, "README.md"), `# ${archetype}@1 pointed at ${library}
+writeFileSync(path.join(outDir, "README.md"), `# ${archetype}@1 pointed at ${slugName}
 
 ${log.map((l) => `- ${l}`).join("\n")}
 

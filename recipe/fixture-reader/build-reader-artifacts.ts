@@ -29,6 +29,7 @@ import { CHAKRA_RADIO_LEDGER, chakraRadioAdapterConfig, chakraRadioMappings } fr
 import { MUI_TEXTAREA_LEDGER as MUI_TEXTAREA_LEDGER_PROPOSED, muiTextareaAdapterConfig as muiTextareaProposedConfig, muiTextareaMappings as muiTextareaProposedMappings } from "../fixtures/generated/textarea.mui.js";
 import { ANTD_TEXTAREA_LEDGER as ANTD_TEXTAREA_LEDGER_PROPOSED, antdTextareaAdapterConfig as antdTextareaProposedConfig, antdTextareaMappings as antdTextareaProposedMappings } from "../fixtures/generated/textarea.antd.js";
 import { CHAKRA_TEXTAREA_LEDGER, chakraTextareaAdapterConfig, chakraTextareaMappings } from "../fixtures/generated/textarea.chakra.js";
+import { CHAKRAFIELD_TEXTAREA_LEDGER as CHAKRA_FIELD_TEXTAREA_LEDGER, chakraFieldTextareaAdapterConfig, chakraFieldTextareaMappings } from "../fixtures/generated/textarea.chakra-field.js";
 import { MUI_ALERT_LEDGER as MUI_ALERT_LEDGER_PROPOSED, muiAlertAdapterConfig as muiAlertProposedConfig, muiAlertMappings as muiAlertProposedMappings } from "../fixtures/generated/alert.mui.js";
 import { CHAKRA_ALERT_LEDGER, chakraAlertAdapterConfig, chakraAlertMappings } from "../fixtures/generated/alert.chakra.js";
 import { ANTD_ALERT_LEDGER as ANTD_ALERT_LEDGER_PROPOSED, antdAlertAdapterConfig as antdAlertProposedConfig, antdAlertMappings as antdAlertProposedMappings } from "../fixtures/generated/alert.antd.js";
@@ -398,7 +399,7 @@ const SUBJECTS: Subject[] = [
     ledgerFile: ASTRYX_TEXTAREA_LEDGER,
     tokens: astryxTextareaAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: astryxTextareaMappings,
-    extras: textareaExtras(astryxTextareaAdapterConfig.tokens as unknown as Record<string, unknown>),
+    extras: extrasFor(astryxTextareaAdapterConfig.tokens as unknown as Record<string, unknown>, astryxTextareaMappings),
   },
   {
     archetype: "textarea",
@@ -407,7 +408,7 @@ const SUBJECTS: Subject[] = [
     ledgerFile: MUI_TEXTAREA_LEDGER,
     tokens: muiTextareaAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: muiTextareaMappings,
-    extras: textareaExtras(muiTextareaAdapterConfig.tokens as unknown as Record<string, unknown>),
+    extras: extrasFor(muiTextareaAdapterConfig.tokens as unknown as Record<string, unknown>, muiTextareaMappings),
   },
   {
     archetype: "textarea",
@@ -416,7 +417,7 @@ const SUBJECTS: Subject[] = [
     ledgerFile: ANTD_TEXTAREA_LEDGER,
     tokens: antdTextareaAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: antdTextareaMappings,
-    extras: textareaExtras(antdTextareaAdapterConfig.tokens as unknown as Record<string, unknown>),
+    extras: extrasFor(antdTextareaAdapterConfig.tokens as unknown as Record<string, unknown>, antdTextareaMappings),
   },
   {
     // PROPOSED from MUI's own capture by the textarea@1 role schema (2026-09-02): floating notched label read from the label's transform; notchFill + the hidden disabled placeholder reviewed.
@@ -447,6 +448,16 @@ const SUBJECTS: Subject[] = [
     tokens: chakraTextareaAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: chakraTextareaMappings,
     extras: extrasFor(chakraTextareaAdapterConfig.tokens as unknown as Record<string, unknown>, chakraTextareaMappings),
+  },
+  {
+    // HELD OUT (2026-09-02): Chakra's Field + Label + Textarea, captured through the $childProps axis form (the value on the child); the STACKED plane read from the field's row-gap; 39 read, 0 invented.
+    archetype: "textarea",
+    library: "chakra-field",
+    source: src(chakraFieldTextareaAdapterConfig),
+    ledgerFile: CHAKRA_FIELD_TEXTAREA_LEDGER,
+    tokens: chakraFieldTextareaAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraFieldTextareaMappings,
+    extras: extrasFor(chakraFieldTextareaAdapterConfig.tokens as unknown as Record<string, unknown>, chakraFieldTextareaMappings),
   },
   // —— Phase 2 ——
   {

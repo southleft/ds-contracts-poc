@@ -111,7 +111,8 @@ const expectedCategory = (target: string): TextareaFactCategory => {
     target.endsWith("strokeAlign") ||
     target.endsWith("boxClips") ||
     target.endsWith("labelPlacement") ||
-    target.endsWith("outlineTreatment")
+    target.endsWith("outlineTreatment") ||
+    target.endsWith("labelLineHeightUnit")
   )
     return "anatomy";
   if (target.includes("notchFill")) return "fill";

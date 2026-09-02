@@ -73,6 +73,20 @@
         "captured": 14,
         "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-size"
       },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.line-height — sub-pixel leading rounded (20.0004 → 20)"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.line-height — a px length → px; normal → auto"
+      },
       "valueFontSize": {
         "fixture": 14,
         "proposed": 14,
@@ -352,6 +366,20 @@
         "verdict": "match",
         "captured": 16,
         "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 23,
+        "proposed": 23,
+        "verdict": "match",
+        "captured": 23,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.line-height"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.line-height — a px length → px; normal → auto"
       },
       "valueFontSize": {
         "fixture": 16,
@@ -635,6 +663,18 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [--font-size 14px — the fixture's citation]"
       },
+      "labelLineHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [auto — reviewed 0]"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "auto",
+        "proposed": "auto",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [reviewed auto]"
+      },
       "valueFontSize": {
         "fixture": 14,
         "proposed": 14,
@@ -908,6 +948,20 @@
         "verdict": "match",
         "captured": 16,
         "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 23,
+        "proposed": 23,
+        "verdict": "match",
+        "captured": 23,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.line-height — the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.line-height — `normal` → auto (hug the face); a length → px"
       },
       "valueFontSize": {
         "fixture": 16,
@@ -1216,6 +1270,18 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
       },
+      "labelLineHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "auto",
+        "proposed": "auto",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
       "valueFontSize": {
         "fixture": 14,
         "proposed": 14,
@@ -1513,6 +1579,18 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
       },
+      "labelLineHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "auto",
+        "proposed": "auto",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
       "valueFontSize": {
         "fixture": 14,
         "proposed": 14,
@@ -1735,6 +1813,330 @@
         "verdict": "match",
         "captured": "Regular",
         "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.font-weight — field font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "chakra-field",
+    "archetype": "textarea",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Field + Textarea"
+    },
+    "ledger": "extract/computed/out/chakra/textareafield/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 58,
+        "proposed": 58,
+        "verdict": "match",
+        "captured": 58,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.height"
+      },
+      "box.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-width — the box's own border"
+      },
+      "box.rows": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.height ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.line-height ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.box-sizing ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-top ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.padding-bottom ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-width ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-bottom-width — rendered rows = the inner textarea's content height / its line-height (a border-box height minus its padding and border; a content-box height as is)"
+      },
+      "box.lineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.line-height"
+      },
+      "labelGap": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default root.row-gap ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.margin-bottom ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.margin-top — the space between the label and the box: container row-gap + label margin-bottom + box margin-top (keywords read 0; a floating label overlays the box and reads 0)"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.line-height — the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.line-height — `normal` → auto (hug the face); a length → px"
+      },
+      "valueFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.font-size"
+      },
+      "labelPlacement": {
+        "fixture": "stacked",
+        "proposed": "stacked",
+        "verdict": "match",
+        "captured": "stacked",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.position ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.transform ; extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.transform — floating when the label is absolutely positioned or its transform changes between the empty and value combos; otherwise stacked"
+      },
+      "labelInsetX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.transform — rest label transform matrix tx (none → 0)"
+      },
+      "labelInactiveOffsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.transform — rest label transform matrix ty (none → 0)"
+      },
+      "labelFloatingOffsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.transform — the value combo's label transform matrix ty (a stacked label: 0)"
+      },
+      "floatingLabelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.font-size ; extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.transform — the value combo's label font-size × its transform scale a (a stacked label: the label size)"
+      },
+      "notchFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout [reviewed #00000000]"
+      },
+      "outlineTreatment": {
+        "fixture": "plain",
+        "proposed": "plain",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a legend inside a distinct outline is the notched treatment [reviewed plain]"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed inside]"
+      },
+      "boxClips": {
+        "fixture": "true",
+        "proposed": "true",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the box clips its text — recipe geometry [reviewed true]"
+      },
+      "states.empty.enabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.background-color"
+      },
+      "states.empty.enabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.border-top-color"
+      },
+      "states.empty.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.opacity"
+      },
+      "states.empty.enabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.color"
+      },
+      "states.empty.enabled.value": {
+        "fixture": "#52525bcc",
+        "proposed": "#52525bcc",
+        "verdict": "match",
+        "captured": "#52525bcc",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1::placeholder.color ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1::placeholder.opacity ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__focus-visible idx:1::placeholder.color ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__focus-visible idx:1::placeholder.opacity — placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+      },
+      "states.empty.disabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1.background-color"
+      },
+      "states.empty.disabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1.border-top-color"
+      },
+      "states.empty.disabled.boxOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1.opacity"
+      },
+      "states.empty.disabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:0.color"
+      },
+      "states.empty.disabled.value": {
+        "fixture": "#52525bcc",
+        "proposed": "#52525bcc",
+        "verdict": "match",
+        "captured": "#52525bcc",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1::placeholder.color ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__default idx:1::placeholder.opacity ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__focus-visible idx:1::placeholder.color ; extract/computed/out/chakra/textareafield/captured-truth.json#empty.disabled__focus-visible idx:1::placeholder.opacity — placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+      },
+      "states.value.enabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.background-color"
+      },
+      "states.value.enabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.border-top-color"
+      },
+      "states.value.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.opacity"
+      },
+      "states.value.enabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:0.color"
+      },
+      "states.value.enabled.value": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.color ; extract/computed/out/chakra/textareafield/captured-truth.json#value.enabled__default idx:1.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "states.value.disabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.background-color"
+      },
+      "states.value.disabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.border-top-color"
+      },
+      "states.value.disabled.boxOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.opacity"
+      },
+      "states.value.disabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:0.color"
+      },
+      "states.value.disabled.value": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.color ; extract/computed/out/chakra/textareafield/captured-truth.json#value.disabled__default idx:1.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "typography.label.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:0.font-weight — label font-weight → style word"
+      },
+      "typography.value.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.font-family — first family of the field text's computed stack"
+      },
+      "typography.value.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/chakra/textareafield/captured-truth.json#empty.enabled__default idx:1.font-weight — field font-weight → style word"
       }
     }
   }

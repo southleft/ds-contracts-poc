@@ -66,6 +66,16 @@
       "from": "spelling",
       "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
     },
+    "labelLineHeight": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "labelLineHeightUnit": {
+      "value": "auto",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
     "valueFontSize": {
       "value": 14,
       "from": "ledger",

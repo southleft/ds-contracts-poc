@@ -25,7 +25,11 @@ import {
 
 export const TEXTAREA_FIGMA_NAMESPACE = "ds.contracts.textarea.recipe.v1";
 export const TEXTAREA_FIGMA_WRITER_VERSION = 3;
-export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v9";
+export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v11";
+/** v10 stay (textarea@1 gains a label line-height leaf (Astryx 20, MUI 23, Chakra Field 20 read from their captures); every source reminted) is preserved as evidence and never written again. */
+export const FORBIDDEN_TEXTAREA_V10_PAGE_ID = "219:93089";
+/** v9 stay (Chakra's Field + Label + Textarea, captured today through the $childProps axis form — the stacked plane held out) is preserved as evidence and never written again. */
+export const FORBIDDEN_TEXTAREA_V9_PAGE_ID = "219:92517";
 /** v8 stay (textarea@1 proposer: MUI and AntD from their own captures, Chakra held out (the bare cell)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TEXTAREA_V8_PAGE_ID = "218:90433";
 /** v7 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
@@ -263,6 +267,8 @@ const WRITER_RUNTIME_SPEC = {
     "field": "textareaSet"
   },
   "forbiddenPages": [
+    { "id": "219:93089", "marker": "TEXTAREA-V10-PAGE" },
+    { "id": "219:92517", "marker": "TEXTAREA-V9-PAGE" },
     { "id": "218:90433", "marker": "TEXTAREA-V8-PAGE" },
     { "id": "218:87843", "marker": "TEXTAREA-V7-PAGE" },
     { "id": "218:86350", "marker": "TEXTAREA-V6-PAGE" },

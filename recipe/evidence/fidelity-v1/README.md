@@ -479,3 +479,19 @@ out at 3.03%. Minted as alert v9 with six sources. See `f1-alert-proposed/`.
     alert/mui-proposed 3.99% · alert/antd-proposed 3.35% · alert/chakra 3.03%
 
     40 pass · 0 fringe · 16 known
+
+### 2026-09-02 — a label line-height leaf, and a labelled held-out through the child
+
+Chakra's Field + Label + Textarea was captured with a new axis-value form,
+`$childProps`, that mounts the content value on the Textarea child (the
+capture harness had reached the root only). Its first score, 5.9%, was two
+rows short at the label: textarea@1's label text had no line-height leaf.
+It has one now (`labelLineHeightUnit` / `labelLineHeight`, scaled with a
+shrunk floating label), read from the captures (Astryx 20, MUI 23, Chakra
+20) — and it closed Astryx's named row (6.16% → 3.20%), scored the labelled
+Chakra field at 2.02%, and brought MUI from 9.52% to 8.28% (still named:
+the resize grip and a 2px offset). textarea v11, seven sources.
+
+    textarea/astryx 3.20% (closed) · textarea/chakra-field 2.02% · textarea/mui 8.28% (named)
+
+    42 pass · 0 fringe · 15 known

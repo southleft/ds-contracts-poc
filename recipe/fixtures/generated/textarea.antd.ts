@@ -32,6 +32,7 @@ const VALUES: Record<string, number | string> = {
   "box.lineHeight": 22, // ledger extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height
   "labelGap": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
   "labelFontSize": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
+  "labelLineHeight": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
   "valueFontSize": 14, // ledger extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-size
   "labelInsetX": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
   "labelInactiveOffsetY": 0, // archetype spelling: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling
@@ -65,6 +66,7 @@ const antdTokens = cloneTokens("antd.textarea", (path) => {
   return VALUES[path]!;
 });
 antdTokens.labelPlacement = "stacked" as "stacked" | "floating";
+antdTokens.labelLineHeightUnit = "auto" as "auto" | "px";
 antdTokens.outlineTreatment = "plain" as "plain" | "notched";
 antdTokens.strokeAlign = "inside" as "inside" | "outside";
 antdTokens.boxClips = true;

@@ -104,8 +104,11 @@ changes floats), the outline by whether a bordered absolute child with a
 legend exists, and rows from the inner textarea's content height. MUI's
 proposal scores exactly its hand row with two reviewed, cited leaves; AntD's
 and Chakra's are the new bare cell — no label part, no label node — and
-score 1.25% and 1.64% where AntD's hand row was a named content mismatch
-(`recipe/evidence/fidelity-v1/f1-textarea-proposed/`).
+score 1.25% and 1.64% where AntD's hand row was a named content mismatch.
+Chakra's Field + Label + Textarea, captured with the value on the child,
+reads the stacked plane from the field's row gap and scores 2.02% held out
+once textarea@1 carried the label's line-height — the leaf that also
+closed Astryx's named row (`recipe/evidence/fidelity-v1/f1-textarea-proposed/`).
 
 On radio@1, the dot is read wherever the library draws it — AntD's ring
 `::after` scaled by a transform, Chakra's `.dot` span scaled by the CSS
@@ -192,10 +195,11 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
   is an attribute; the asset file the capture writes carries the rendered
   size there. alert@1 reads the glyph paths from the capture and takes the
   viewBox as one reviewed leaf with a package citation.
-- **A labelled composition the capture cannot mount.** The capture config's
-  axis props go to the root component, so a Field + Label + Textarea
-  composition whose value lives on the child cannot be captured yet; the
-  bare textarea is captured instead, and textarea@1's bare cell scores it.
+- **A labelled composition.** A Field + Label + Textarea whose value lives
+  on the child is captured with the `{"$childProps": {"Textarea": {…}}}`
+  axis-value form ([docs/21](21-bring-your-own-design-system.md)); the
+  bare textarea is captured as itself and textarea@1's bare cell scores it.
+  One library can contribute both under `--slug`.
 - **A bare radio.** radio@1 has no label-less cell (checkbox@1 and switch@1
   do), so MUI's bare `<Radio/>` is refused by name at the role draft.
 - **A ring that is a shadow.** A zero-offset, zero-blur inset box-shadow

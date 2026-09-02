@@ -1,0 +1,72 @@
+{
+  "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-30047def-67c97cdd-d45d9202-36847c16-textarea-v10",
+  "runIdentity": "71033c6d-82f958a9-142f3598-30047def-67c97cdd-d45d9202-36847c16-textarea-v10",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "textarea@1 Content=focus is the named focused-empty column (InputLabel.js:197-199). Floating rest empty hides placeholder (InputBase.js:179-188). Do not remint Input 115:295378. Old stays 183:75495 and 198:77048 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-textarea-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "71033c6dbe8ec74e4bf355c9df41fae62e5b36e16af2a5ade1f6a6b0103bb5c9",
+      "envelopeHash": "ed9d4b169100fe040f95f63891ddf6fb52c203a8f73fedb92b5fd8eeb8229029",
+      "variantCount": 6,
+      "variableCount": 25,
+      "comparedIrFacts": 133
+    },
+    {
+      "adapterIdentity": "mui-textarea-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "82f958a9f67ded1b65b50c986493d42ef754ce0e048ca9366b14a6aa1cccd645",
+      "envelopeHash": "039b61d933524d33432e03f780cc0392a868888f8b738405e88e3fb08dcf2c3a",
+      "variantCount": 6,
+      "variableCount": 27,
+      "comparedIrFacts": 143
+    },
+    {
+      "adapterIdentity": "antd-textarea-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "142f359858ed37f4601d2c9269a014caf5beae42f4220cdaf94f4cce786cc19b",
+      "envelopeHash": "ce2562fd881e4eeeef3a69aa5f9baddd81a5bad54026f8537d2fa57fdd6ce2e5",
+      "variantCount": 6,
+      "variableCount": 25,
+      "comparedIrFacts": 133
+    },
+    {
+      "adapterIdentity": "mui-textarea-proposed-v1",
+      "displayName": "MUI (proposed)",
+      "recipeHash": "30047def6bd8f190bf49b6b29a4673434357f2184862bfcde4a759b9d22f063a",
+      "envelopeHash": "81cae9abb74a7fa8705b4d72db78c9c526cecf915e7a80eaf0acc99dd6c94124",
+      "variantCount": 6,
+      "variableCount": 27,
+      "comparedIrFacts": 143
+    },
+    {
+      "adapterIdentity": "antd-textarea-proposed-v1",
+      "displayName": "Ant Design (proposed)",
+      "recipeHash": "67c97cdd85bb73fe9439ca5d932fdb7e1836a9e9d7614bf6faaaa1d273016f79",
+      "envelopeHash": "07529fc198c4c38ee7d57c8fc778beda134b44b4a467b30422f0e8760fb0f72c",
+      "variantCount": 6,
+      "variableCount": 20,
+      "comparedIrFacts": 115
+    },
+    {
+      "adapterIdentity": "chakra-textarea-proposed-v1",
+      "displayName": "Chakra (proposed)",
+      "recipeHash": "d45d9202300b69f80a60e853c25580d78c62d8ba518bade01857831ccea37d97",
+      "envelopeHash": "cbae396c290581f93a6f7c7bf17f4f36357777ddc1be5e7f8cc7ffffb40ad83f",
+      "variantCount": 6,
+      "variableCount": 20,
+      "comparedIrFacts": 115
+    },
+    {
+      "adapterIdentity": "chakra-field-textarea-proposed-v1",
+      "displayName": "Chakra Field (proposed)",
+      "recipeHash": "36847c16531770fa190f097ac747e1a0ea1782a7c2ff588bb4d6b907cf82e196",
+      "envelopeHash": "927d14c2be20cfc4ad51011646741eef901848dc7482a57bd75a1a049466f857",
+      "variantCount": 6,
+      "variableCount": 25,
+      "comparedIrFacts": 133
+    }
+  ]
+}
