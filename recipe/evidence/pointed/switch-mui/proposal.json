@@ -1,0 +1,212 @@
+{
+  "archetype": "switch",
+  "library": "mui",
+  "ledger": "extract/computed/out/mui/switch/captured-truth.json",
+  "provenance": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "track": "idx:1",
+    "thumb": "idx:0.1",
+    "thumbInsideTrack": false,
+    "travelOn": "idx:0",
+    "hit": "root"
+  },
+  "combos": {
+    "false.enabled": "primary.medium.unchecked.enabled",
+    "false.disabled": "primary.medium.unchecked.disabled",
+    "true.enabled": "primary.medium.checked.enabled",
+    "true.disabled": "primary.medium.checked.disabled"
+  },
+  "leaves": {
+    "wrapper.width": {
+      "value": 58,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.width"
+    },
+    "wrapper.height": {
+      "value": 38,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.height"
+    },
+    "wrapper.padding": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.padding-left"
+    },
+    "track.width": {
+      "value": 34,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.width"
+    },
+    "track.height": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.height"
+    },
+    "track.radius": {
+      "value": 7,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-top-left-radius"
+    },
+    "track.padding": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left"
+    },
+    "thumb.offSize": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width"
+    },
+    "thumb.onSize": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width"
+    },
+    "thumb.travel": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.transform | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.transform | extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.width",
+      "formula": "transform x of the moving element on minus off (a calc() percentage is of the moving element's own width)"
+    },
+    "row.gap": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.false.enabled.trackFill": {
+      "value": "#00000061",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.background-color | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.opacity",
+      "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+    },
+    "states.false.enabled.trackOpacity": {
+      "value": 1,
+      "from": "spelling",
+      "why": "baked into trackFill because the thumb is a sibling — spelled 1"
+    },
+    "states.false.enabled.thumbFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.background-color"
+    },
+    "states.false.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.false.disabled.trackFill": {
+      "value": "#0000001f",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default idx:1.background-color | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default idx:1.opacity",
+      "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+    },
+    "states.false.disabled.trackOpacity": {
+      "value": 1,
+      "from": "spelling",
+      "why": "baked into trackFill because the thumb is a sibling — spelled 1"
+    },
+    "states.false.disabled.thumbFill": {
+      "value": "#f5f5f5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default idx:0.1.background-color"
+    },
+    "states.false.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.true.enabled.trackFill": {
+      "value": "#1976d280",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:1.background-color | extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:1.opacity",
+      "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+    },
+    "states.true.enabled.trackOpacity": {
+      "value": 1,
+      "from": "spelling",
+      "why": "baked into trackFill because the thumb is a sibling — spelled 1"
+    },
+    "states.true.enabled.thumbFill": {
+      "value": "#1976d2ff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.background-color"
+    },
+    "states.true.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.true.disabled.trackFill": {
+      "value": "#1976d21f",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default idx:1.background-color | extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default idx:1.opacity",
+      "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+    },
+    "states.true.disabled.trackOpacity": {
+      "value": 1,
+      "from": "spelling",
+      "why": "baked into trackFill because the thumb is a sibling — spelled 1"
+    },
+    "states.true.disabled.thumbFill": {
+      "value": "#a7caedff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default idx:0.1.background-color"
+    },
+    "states.true.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "labelFontSize": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "rowAlign": {
+      "value": "center",
+      "from": "spelling",
+      "why": "flex align-items:center on the row — recipe spelling"
+    },
+    "thumbShadow": {
+      "value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow"
+    },
+    "hitClips": {
+      "value": "true",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.overflow-x",
+      "formula": "overflow hidden on the hit → clips"
+    },
+    "trackClips": {
+      "value": "false",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.overflow-x",
+      "formula": "overflow hidden on the track → clips"
+    },
+    "typography.label.family": {
+      "value": "Arial",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": null
+  },
+  "typography": {
+    "family": "Arial",
+    "style": "Regular",
+    "stack": "(bare cell — no label part)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "track": "root",
+  "thumb": "idx:0",
+  "thumbInsideTrack": true,
+  "travelOn": "idx:0",
+  "travelChannel": "translate",
+  "hit": "root",
+  "combos": {
+    "false.enabled": "default.unchecked.enabled",
+    "false.disabled": "default.unchecked.disabled",
+    "true.enabled": "default.checked.enabled",
+    "true.disabled": "default.checked.disabled"
+  }
+}

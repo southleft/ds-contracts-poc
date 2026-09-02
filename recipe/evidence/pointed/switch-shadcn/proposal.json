@@ -1,0 +1,214 @@
+{
+  "archetype": "switch",
+  "library": "shadcn",
+  "ledger": "extract/computed/out/shadcn/switch/captured-truth.json",
+  "provenance": {
+    "package": "@shadcn-sandbox/ui",
+    "version": "0.0.1",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "track": "root",
+    "thumb": "idx:0",
+    "thumbInsideTrack": true,
+    "travelOn": "idx:0",
+    "travelChannel": "translate",
+    "hit": "root"
+  },
+  "combos": {
+    "false.enabled": "default.unchecked.enabled",
+    "false.disabled": "default.unchecked.disabled",
+    "true.enabled": "default.checked.enabled",
+    "true.disabled": "default.checked.disabled"
+  },
+  "leaves": {
+    "wrapper.width": {
+      "value": 32,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.width"
+    },
+    "wrapper.height": {
+      "value": 18.391,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.height"
+    },
+    "wrapper.padding": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.padding-left"
+    },
+    "track.width": {
+      "value": 32,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.width"
+    },
+    "track.height": {
+      "value": 18.391,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.height"
+    },
+    "track.radius": {
+      "value": 33554400,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-top-left-radius"
+    },
+    "track.padding": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.padding-left | extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-left-width",
+      "formula": "track padding-left + border-left-width (the content box starts after the border)"
+    },
+    "thumb.offSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width"
+    },
+    "thumb.onSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width"
+    },
+    "thumb.travel": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.translate | extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.translate | extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width",
+      "formula": "translate x of the moving element on minus off (a calc() percentage is of the moving element's own width)"
+    },
+    "row.gap": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.false.enabled.trackFill": {
+      "value": "#e5e5e5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.background-color"
+    },
+    "states.false.enabled.trackOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.opacity",
+      "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+    },
+    "states.false.enabled.thumbFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.background-color"
+    },
+    "states.false.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.false.disabled.trackFill": {
+      "value": "#e5e5e5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.disabled__default root.background-color"
+    },
+    "states.false.disabled.trackOpacity": {
+      "value": 0.5,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.disabled__default root.opacity",
+      "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+    },
+    "states.false.disabled.thumbFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.disabled__default idx:0.background-color"
+    },
+    "states.false.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.true.enabled.trackFill": {
+      "value": "#171717ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default root.background-color"
+    },
+    "states.true.enabled.trackOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default root.opacity",
+      "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+    },
+    "states.true.enabled.thumbFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.background-color"
+    },
+    "states.true.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "states.true.disabled.trackFill": {
+      "value": "#171717ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.disabled__default root.background-color"
+    },
+    "states.true.disabled.trackOpacity": {
+      "value": 0.5,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.disabled__default root.opacity",
+      "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+    },
+    "states.true.disabled.thumbFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.disabled__default idx:0.background-color"
+    },
+    "states.true.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "labelFontSize": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "rowAlign": {
+      "value": "center",
+      "from": "spelling",
+      "why": "flex align-items:center on the row — recipe spelling"
+    },
+    "thumbShadow": {
+      "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.box-shadow"
+    },
+    "hitClips": {
+      "value": "false",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.overflow-x",
+      "formula": "overflow hidden on the hit → clips"
+    },
+    "trackClips": {
+      "value": "false",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.overflow-x",
+      "formula": "overflow hidden on the track → clips"
+    },
+    "typography.label.family": {
+      "value": "Arial",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "spelling",
+      "why": "no label part in the mount"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": null
+  },
+  "typography": {
+    "family": "Arial",
+    "style": "Regular",
+    "stack": "(bare cell — no label part)"
+  }
+}

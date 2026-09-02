@@ -26,12 +26,17 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { Ledger } from "./ledger.js";
-import { draftCheckboxRoles } from "./draft-roles.js";
+import { draftCheckboxRoles, draftSwitchRoles } from "./draft-roles.js";
 import { proposeCheckboxFixture, type GlyphSpec } from "./propose-fixture.js";
+import { proposeSwitchFixture } from "./propose-switch.js";
 import type { CheckboxRoles } from "./schema-checkbox.js";
+import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 import { adaptReviewedCheckbox } from "../adapters/checkbox.js";
+import { adaptReviewedSwitch } from "../adapters/switch.js";
 import { checkboxRecipe, collapseCheckboxRecipe, compileCheckboxRecipe } from "../recipes/checkbox.js";
+import { collapseSwitchRecipe, compileSwitchRecipe, switchRecipe } from "../recipes/switch.js";
 import { emitCheckboxFigmaWriter } from "../checkbox-figma-writer.js";
+import { emitSwitchFigmaWriter } from "../switch-figma-writer.js";
 import { hashRecipeInstance } from "../recipe.js";
 
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
@@ -40,7 +45,7 @@ const args = (name: string): string[] => { const out: string[] = []; for (let i 
 
 const archetype = arg("archetype");
 const library = arg("library");
-if (archetype !== "checkbox" || !library) throw new Error("usage: --archetype checkbox --library <slug> --glyph-file <json> [--roles-file <json>] [--set path=v --why 'path=evidence']…");
+if ((archetype !== "checkbox" && archetype !== "switch") || !library) throw new Error("usage: --archetype checkbox|switch --library <slug> [--glyph-file <json> (checkbox)] [--roles-file <json>] [--set path=v --why 'path=evidence']…");
 const ledgerRel = `extract/computed/out/${library}/${archetype}/captured-truth.json`;
 const outDir = path.join(REPO, "recipe/evidence/pointed", `${archetype}-${library}`);
 mkdirSync(outDir, { recursive: true });
@@ -56,36 +61,41 @@ const ledger = new Ledger(REPO, ledgerRel);
 say(`1. capture   ${ledgerRel} (${ledger.keys().length} captures)`);
 
 // 2. roles
-let roles: CheckboxRoles;
+type Roles = CheckboxRoles | (SwitchRoles & { combos: SwitchComboMap });
+let roles: Roles;
 const rolesFile = arg("roles-file");
 if (rolesFile) {
-  roles = JSON.parse(readFileSync(path.resolve(rolesFile), "utf8")) as CheckboxRoles;
+  roles = JSON.parse(readFileSync(path.resolve(rolesFile), "utf8")) as Roles;
   say(`2. roles     from ${rolesFile} (reviewed)`);
 } else {
-  const draft = draftCheckboxRoles(ledger);
+  const draft = archetype === "checkbox" ? draftCheckboxRoles(ledger) : draftSwitchRoles(ledger);
   writeFileSync(path.join(outDir, "roles.draft.json"), `${JSON.stringify(draft, null, 2)}\n`);
   if (draft.unresolved.length > 0) {
     console.error(`✖ the role map cannot be drafted from the ledger alone:\n  - ${draft.unresolved.join("\n  - ")}\n  Review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))}, write roles.json, and pass --roles-file.`);
     process.exit(2);
   }
-  roles = draft.roles as CheckboxRoles;
-  say(`2. roles     DRAFTED from the ledger — ${Object.entries(draft.evidence).map(([k, v]) => `${k}:${v.confidence}`).join(" ")} (review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))})`);
+  roles = (archetype === "checkbox" ? draft.roles : { ...(draft as { roles: SwitchRoles }).roles, combos: (draft as { combos: SwitchComboMap }).combos }) as Roles;
+  say(`2. roles     DRAFTED from the ledger — ${Object.entries(draft.evidence).map(([k, v]) => `${k}:${(v as { confidence: string }).confidence}`).join(" ")} (review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))})`);
 }
 writeFileSync(path.join(outDir, "roles.json"), `${JSON.stringify(roles, null, 2)}\n`);
 
 // 3. propose
-const glyphFile = arg("glyph-file");
-if (!glyphFile) throw new Error("--glyph-file <json> is required: the glyph's geometry is cited from the package source ({path, viewBox, paint, strokeWidth, cap, join, source})");
-const glyph = JSON.parse(readFileSync(path.resolve(glyphFile), "utf8")) as GlyphSpec;
 const sets: Record<string, { value: string; why: string }> = {};
 const whys = new Map(args("why").map((w) => { const i = w.indexOf("="); return [w.slice(0, i), w.slice(i + 1)] as const; }));
 for (const s of args("set")) { const i = s.indexOf("="); const p = s.slice(0, i); const why = whys.get(p); if (!why) throw new Error(`--set ${p} needs --why '${p}=<evidence>'`); sets[p] = { value: s.slice(i + 1), why }; }
 const modulePath = `recipe/fixtures/generated/${archetype}.${library}.ts`;
-const proposed = proposeCheckboxFixture({
-  library, ledger: ledgerRel, roles, glyph, sets,
-  displayName: arg("display-name"), exportName: arg("export-name"), sourceRoot: arg("source-root"),
-  unsupported: (arg("unsupported") ?? "").split(",").filter(Boolean), out: modulePath,
-});
+const common = { library, ledger: ledgerRel, sets, displayName: arg("display-name"), exportName: arg("export-name"), sourceRoot: arg("source-root"), unsupported: (arg("unsupported") ?? "").split(",").filter(Boolean), out: modulePath };
+let glyph: GlyphSpec | null = null;
+let proposed: { refused: string[]; proposal: { leaves: Record<string, { from: "ledger" | "set" | "spelling" }> } };
+if (archetype === "checkbox") {
+  const glyphFile = arg("glyph-file");
+  if (!glyphFile) throw new Error("--glyph-file <json> is required for checkbox: the glyph's geometry is cited from the package source ({path, viewBox, paint, strokeWidth, cap, join, source})");
+  glyph = JSON.parse(readFileSync(path.resolve(glyphFile), "utf8")) as GlyphSpec;
+  proposed = proposeCheckboxFixture({ ...common, roles: roles as CheckboxRoles, glyph });
+} else {
+  const { combos, ...switchRoles } = roles as SwitchRoles & { combos: SwitchComboMap };
+  proposed = proposeSwitchFixture({ ...common, roles: switchRoles, combos });
+}
 if (proposed.refused.length > 0) {
   console.error(`✖ ${proposed.refused.length} leaf/leaves cannot be proposed — give each with evidence:\n  - ${proposed.refused.join("\n  - ")}`);
   process.exit(3);
@@ -98,19 +108,27 @@ say(`3. propose   ${counts.ledger} leaves read from the ledger · ${counts.set} 
 
 // 4. compile + fixed point
 const mod = (await import(pathToFileURL(path.join(REPO, modulePath)).href)) as Record<string, unknown>;
-const source = mod[`${library}CheckboxSource`] as Parameters<typeof adaptReviewedCheckbox>[0];
-const config = mod[`${library}CheckboxAdapterConfig`] as Parameters<typeof adaptReviewedCheckbox>[1];
-const instance = adaptReviewedCheckbox(source, config);
-const envelope = compileCheckboxRecipe(instance);
-const again = compileCheckboxRecipe(collapseCheckboxRecipe(envelope, instance.provenance.selection));
+const Arch = archetype[0]!.toUpperCase() + archetype.slice(1);
+const source = mod[`${library}${Arch}Source`];
+const config = mod[`${library}${Arch}AdapterConfig`];
+const instance = archetype === "checkbox"
+  ? adaptReviewedCheckbox(source as Parameters<typeof adaptReviewedCheckbox>[0], config as Parameters<typeof adaptReviewedCheckbox>[1])
+  : adaptReviewedSwitch(source as Parameters<typeof adaptReviewedSwitch>[0], config as Parameters<typeof adaptReviewedSwitch>[1]);
+const compile = (archetype === "checkbox" ? compileCheckboxRecipe : compileSwitchRecipe) as (i: unknown) => ReturnType<typeof compileCheckboxRecipe>;
+const collapse = (archetype === "checkbox" ? collapseCheckboxRecipe : collapseSwitchRecipe) as (e: ReturnType<typeof compileCheckboxRecipe>, s: unknown) => unknown;
+const envelope = compile(instance);
+const again = compile(collapse(envelope, (instance as { provenance: { selection: unknown } }).provenance.selection));
 if (envelope.integrity.canonicalHash !== again.integrity.canonicalHash) throw new Error("compile → collapse → compile is not a fixed point for the proposed fixture");
-const recipeHash = hashRecipeInstance(checkboxRecipe, instance);
+const recipeHash = archetype === "checkbox"
+  ? hashRecipeInstance(checkboxRecipe, instance as Parameters<typeof adaptReviewedCheckbox> extends never ? never : ReturnType<typeof adaptReviewedCheckbox>)
+  : hashRecipeInstance(switchRecipe, instance as ReturnType<typeof adaptReviewedSwitch>);
 say(`4. compile   fixed point ✔ · ${(envelope.ir as { children: unknown[] }).children.length} variants · ${envelope.accounting.carried.length} carried · ${envelope.receipts.length} receipts · recipe ${recipeHash.slice(0, 8)}`);
 
 // 5. emit
 const src = { adapterIdentity: `${library}-${archetype}-proposed-v1`, displayName: arg("display-name") ?? library, recipeHash, envelope };
-const plugin = emitCheckboxFigmaWriter([src], { target: "plugin" });
-const scratch = emitCheckboxFigmaWriter([src], { target: "scratch" });
+const emit = (archetype === "checkbox" ? emitCheckboxFigmaWriter : emitSwitchFigmaWriter) as (inputs: Array<typeof src>, o: { target: "plugin" | "scratch" }) => { code: string; pageName: string };
+const plugin = emit([src], { target: "plugin" });
+const scratch = emit([src], { target: "scratch" });
 writeFileSync(path.join(outDir, "writer.plugin.js"), plugin.code);
 writeFileSync(path.join(outDir, "writer.scratch.js"), scratch.code);
 say(`5. emit      writer.plugin.js (${(plugin.code.length / 1024).toFixed(0)} KB, page "${plugin.pageName}") and writer.scratch.js`);
@@ -121,12 +139,12 @@ ${log.map((l) => `- ${l}`).join("\n")}
 
 ## What a person did
 - reviewed the role map (${rolesFile ? "supplied" : "drafted with evidence, see roles.draft.json"})
-- cited the glyph geometry from the package (glyph-file): ${glyph.source}
+${glyph ? `- cited the glyph geometry from the package (glyph-file): ${glyph.source}` : "- (switch@1 has no glyph)"}
 ${Object.entries(sets).map(([k, v]) => `- reviewed ${k} = ${v.value}: ${v.why}`).join("\n")}
 
 ## What to do next
 1. In Figma desktop, open the file the set should live in, open the development plugin, choose **Paste a script**, paste \`writer.plugin.js\`, run. It creates its own page named "${plugin.pageName}" and never touches an existing page.
-2. To score it: export the unchecked variant's control and run \`npx tsx recipe/fidelity-score.ts --canvas <png> --reference extract/computed/out/${library}/${archetype}/orig-shots/unchecked.enabled__default.png --label ${archetype}/${library} --out <json> --reference-control-only\`.
+2. To score it: export the unchecked variant's control and run \`npx tsx recipe/fidelity-score.ts --canvas <png> --reference extract/computed/out/${library}/${archetype}/orig-shots/<off-state>__default.png --label ${archetype}/${library} --out <json> --reference-control-only\`.
 3. To keep it: add the generated module to the ${archetype} live proof's sources and to the reader's subjects (see checkbox v6 for the pattern).
 `);
 say(`✔ ${path.relative(REPO, outDir)}/ — paste writer.plugin.js into the plugin; see README.md`);

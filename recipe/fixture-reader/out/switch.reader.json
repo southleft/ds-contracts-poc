@@ -666,6 +666,704 @@
   },
   {
     "archetype": "switch",
+    "library": "mui-proposed",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Switch"
+    },
+    "ledgerFile": "extract/computed/out/mui/switch/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.width",
+        "fixtureValue": 58,
+        "verdict": "match",
+        "capturedValue": 58,
+        "proposedValue": 58,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.width"
+        ]
+      },
+      {
+        "path": "wrapper.height",
+        "fixtureValue": 38,
+        "verdict": "match",
+        "capturedValue": 38,
+        "proposedValue": 38,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.height"
+        ]
+      },
+      {
+        "path": "wrapper.padding",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.padding-left"
+        ]
+      },
+      {
+        "path": "track.width",
+        "fixtureValue": 34,
+        "verdict": "match",
+        "capturedValue": 34,
+        "proposedValue": 34,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.width"
+        ]
+      },
+      {
+        "path": "track.height",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.height"
+        ]
+      },
+      {
+        "path": "track.radius",
+        "fixtureValue": 7,
+        "verdict": "match",
+        "capturedValue": 7,
+        "proposedValue": 7,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "track.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-left-width"
+        ],
+        "formula": "track padding-left + border-left-width (the content box starts after the border)"
+      },
+      {
+        "path": "thumb.offSize",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width"
+        ]
+      },
+      {
+        "path": "thumb.onSize",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width"
+        ]
+      },
+      {
+        "path": "thumb.travel",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.transform",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.transform",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.width"
+        ],
+        "formula": "transform x of the moving element on minus off (a calc() percentage is of the moving element's own width)"
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "states.false.enabled.trackFill",
+        "fixtureValue": "#00000061",
+        "verdict": "match",
+        "capturedValue": "#00000061",
+        "proposedValue": "#00000061",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+      },
+      {
+        "path": "states.false.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "baked into trackFill because the thumb is a sibling — spelled 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.false.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "states.false.disabled.trackFill",
+        "fixtureValue": "#0000001f",
+        "verdict": "match",
+        "capturedValue": "#0000001f",
+        "proposedValue": "#0000001f",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default idx:1.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+      },
+      {
+        "path": "states.false.disabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "baked into trackFill because the thumb is a sibling — spelled 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.false.disabled.thumbFill",
+        "fixtureValue": "#f5f5f5ff",
+        "verdict": "match",
+        "capturedValue": "#f5f5f5ff",
+        "proposedValue": "#f5f5f5ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "states.true.enabled.trackFill",
+        "fixtureValue": "#1976d280",
+        "verdict": "match",
+        "capturedValue": "#1976d280",
+        "proposedValue": "#1976d280",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:1.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+      },
+      {
+        "path": "states.true.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "baked into trackFill because the thumb is a sibling — spelled 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.true.enabled.thumbFill",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "states.true.disabled.trackFill",
+        "fixtureValue": "#1976d21f",
+        "verdict": "match",
+        "capturedValue": "#1976d21f",
+        "proposedValue": "#1976d21f",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default idx:1.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)"
+      },
+      {
+        "path": "states.true.disabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "baked into trackFill because the thumb is a sibling — spelled 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.true.disabled.thumbFill",
+        "fixtureValue": "#a7caedff",
+        "verdict": "match",
+        "capturedValue": "#a7caedff",
+        "proposedValue": "#a7caedff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default idx:0.1.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "flex align-items:center on the row — recipe spelling",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "thumbShadow",
+        "fixtureValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "verdict": "match",
+        "capturedValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "proposedValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow"
+        ]
+      },
+      {
+        "path": "hitClips",
+        "fixtureValue": "true",
+        "verdict": "match",
+        "capturedValue": "true",
+        "proposedValue": "true",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default root.overflow-x"
+        ],
+        "formula": "overflow hidden on the hit → clips"
+      },
+      {
+        "path": "trackClips",
+        "fixtureValue": "false",
+        "verdict": "match",
+        "capturedValue": "false",
+        "proposedValue": "false",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.overflow-x"
+        ],
+        "formula": "overflow hidden on the track → clips"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Arial",
+        "verdict": "receipt",
+        "proposedValue": "Arial",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      }
+    ],
+    "counts": {
+      "match": 21,
+      "drift": 0,
+      "receipt": 13,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "switch",
+    "library": "shadcn",
+    "source": {
+      "packageName": "@shadcn-sandbox/ui",
+      "version": "0.0.1",
+      "exportName": "Switch"
+    },
+    "ledgerFile": "extract/computed/out/shadcn/switch/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.width",
+        "fixtureValue": 32,
+        "verdict": "match",
+        "capturedValue": 32,
+        "proposedValue": 32,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.width"
+        ]
+      },
+      {
+        "path": "wrapper.height",
+        "fixtureValue": 18.391,
+        "verdict": "match",
+        "capturedValue": 18.391,
+        "proposedValue": 18.391,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.height"
+        ]
+      },
+      {
+        "path": "wrapper.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.padding-left"
+        ]
+      },
+      {
+        "path": "track.width",
+        "fixtureValue": 32,
+        "verdict": "match",
+        "capturedValue": 32,
+        "proposedValue": 32,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.width"
+        ]
+      },
+      {
+        "path": "track.height",
+        "fixtureValue": 18.391,
+        "verdict": "match",
+        "capturedValue": 18.391,
+        "proposedValue": 18.391,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.height"
+        ]
+      },
+      {
+        "path": "track.radius",
+        "fixtureValue": 33554400,
+        "verdict": "match",
+        "capturedValue": 33554400,
+        "proposedValue": 33554400,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "track.padding",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.padding-left",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-left-width"
+        ],
+        "formula": "track padding-left + border-left-width (the content box starts after the border)"
+      },
+      {
+        "path": "thumb.offSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width"
+        ]
+      },
+      {
+        "path": "thumb.onSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width"
+        ]
+      },
+      {
+        "path": "thumb.travel",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.translate",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.translate",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width"
+        ],
+        "formula": "translate x of the moving element on minus off (a calc() percentage is of the moving element's own width)"
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "states.false.enabled.trackFill",
+        "fixtureValue": "#e5e5e5ff",
+        "verdict": "match",
+        "capturedValue": "#e5e5e5ff",
+        "proposedValue": "#e5e5e5ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.false.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "states.false.disabled.trackFill",
+        "fixtureValue": "#e5e5e5ff",
+        "verdict": "match",
+        "capturedValue": "#e5e5e5ff",
+        "proposedValue": "#e5e5e5ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.disabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.trackOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.disabled__default root.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.false.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.disabled__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "states.true.enabled.trackFill",
+        "fixtureValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default root.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.true.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "states.true.disabled.trackFill",
+        "fixtureValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.disabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.trackOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.disabled__default root.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.true.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.disabled__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "flex align-items:center on the row — recipe spelling",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "thumbShadow",
+        "fixtureValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "verdict": "match",
+        "capturedValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "proposedValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.box-shadow"
+        ]
+      },
+      {
+        "path": "hitClips",
+        "fixtureValue": "false",
+        "verdict": "match",
+        "capturedValue": "false",
+        "proposedValue": "false",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.overflow-x"
+        ],
+        "formula": "overflow hidden on the hit → clips"
+      },
+      {
+        "path": "trackClips",
+        "fixtureValue": "false",
+        "verdict": "match",
+        "capturedValue": "false",
+        "proposedValue": "false",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.overflow-x"
+        ],
+        "formula": "overflow hidden on the track → clips"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Arial",
+        "verdict": "receipt",
+        "proposedValue": "Arial",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "no label part in the mount",
+        "evidence": "reviewed"
+      }
+    ],
+    "counts": {
+      "match": 25,
+      "drift": 0,
+      "receipt": 9,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "switch",
     "library": "antd",
     "source": {
       "packageName": "antd",

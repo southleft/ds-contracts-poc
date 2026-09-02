@@ -7,7 +7,7 @@ import type {
 import { canonicalSwitchRecipeInstance } from "./switch.js";
 import type { SwitchRecipeInstance } from "../recipes/switch.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): SwitchRecipeInstance["tokens"] => {
@@ -395,7 +395,7 @@ const tokenFacts = (
 
 const sharedContent = { label: "Enable notifications" } as const;
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -529,7 +529,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedSwitchSource,
   tokens: SwitchRecipeInstance["tokens"],
@@ -537,6 +537,7 @@ const buildConfig = (
   refusals: ReviewedSwitchSourceFact[],
   extraIr: ReviewedSwitchSourceFact[],
   unsupported: string[],
+  content: { label: string | null } = sharedContent,
 ): ReviewedSwitchAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -566,7 +567,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: structuredClone(sharedContent),
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -589,7 +590,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedSwitchSource,
 ): ReviewedSwitchSourceFact[] => [

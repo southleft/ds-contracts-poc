@@ -1,0 +1,13 @@
+{
+  "track": "idx:1",
+  "thumb": "idx:0.1",
+  "thumbInsideTrack": false,
+  "travelOn": "idx:0",
+  "hit": "root",
+  "combos": {
+    "false.enabled": "primary.medium.unchecked.enabled",
+    "false.disabled": "primary.medium.unchecked.disabled",
+    "true.enabled": "primary.medium.checked.enabled",
+    "true.disabled": "primary.medium.checked.disabled"
+  }
+}

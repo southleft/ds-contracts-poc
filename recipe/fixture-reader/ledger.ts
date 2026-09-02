@@ -161,7 +161,9 @@ function selectPart(parts: LedgerPart[], selector: string): LedgerPart | null {
 
 /** `"42px"` → 42; `"16.5px"` → 16.5. Anything else refuses by name. */
 export function px(v: string): number {
-  const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v);
+  // Chromium reports a clamped huge length in exponent notation (Tailwind's
+  // rounded-full → "3.35544e+07px"); that is still a px length.
+  const m = /^(-?\d+(?:\.\d+)?(?:e[+-]?\d+)?)px$/i.exec(v);
   if (!m) throw new LedgerReadError(`not a px length: "${v}"`);
   return Number(m[1]);
 }

@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 26,
-  "passed": 19,
+  "subjects": 28,
+  "passed": 21,
   "failed": 7,
   "fringeExcused": 0,
   "knownFailures": 7,
@@ -71,6 +71,22 @@
       "pctAAMasked": 0,
       "canvasPx": "44x24",
       "realPx": "44x24",
+      "convergesAt": 250
+    },
+    {
+      "label": "switch/mui-proposed",
+      "status": "pass",
+      "pctAAMasked": 4.57,
+      "canvasPx": "35x19",
+      "realPx": "38x19",
+      "convergesAt": null
+    },
+    {
+      "label": "switch/shadcn",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "32x19",
+      "realPx": "32x19",
       "convergesAt": 250
     },
     {

@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "switch/shadcn/checked.disabled",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 24.342105263157894,
+    "pctAAUnmasked": 2.9605263157894735,
+    "pctAAMasked": 2.9605263157894735,
+    "canvasPx": "32x19",
+    "realPx": "32x18",
+    "inkCanvasPct": 61.51315789473685,
+    "inkRealPct": 57.23684210526315
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/f1-shadcn-switch/canvas-checked.disabled.png",
+    "sha256": "3d1d20382b6f29f62545bc2c643079d3b2bba8595dd91c1f61b858b6ae3806fd"
+  },
+  "reference": {
+    "path": "extract/computed/out/shadcn/switch/orig-shots/default.checked.disabled__default.png",
+    "sha256": "ff6b7cd16535a398d7cf8a6e24ee525971e433ffb05abbfdc81d4c49bf545b24"
+  },
+  "diff": "recipe/evidence/fidelity-v1/f1-shadcn-switch/score-checked.disabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "32x19",
+      "reference": "32x18",
+      "agree": false
+    },
+    {
+      "threshold": 245,
+      "canvas": "32x19",
+      "reference": "32x18",
+      "agree": false
+    },
+    {
+      "threshold": 240,
+      "canvas": "32x19",
+      "reference": "32x18",
+      "agree": false
+    },
+    {
+      "threshold": 230,
+      "canvas": "32x19",
+      "reference": "32x18",
+      "agree": false
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

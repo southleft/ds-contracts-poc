@@ -78,8 +78,27 @@ for (const fix of ["false.enabled", "false.disabled", "true.enabled", "true.disa
 export const switchSpellingsFor = (roles: Pick<SwitchRoles, "label">): Record<string, Spelling> =>
   roles.label ? SWITCH_SPELLINGS : { ...SWITCH_SPELLINGS, ...BARE_SWITCH_SPELLINGS };
 
-/** x translation of a computed transform ("matrix(…)") or translate ("12px 0px") value; none → 0. */
-const txOf = (v: string): number => (v === "none" || !v ? 0 : v.startsWith("matrix") ? matrix(v).tx : px(v.trim().split(/\s+/)[0]!));
+/**
+ * x translation of a computed transform ("matrix(…)") or translate ("12px 0px",
+ * or Tailwind's "calc(100% - 2px) 0px" — a percentage of the moving element's
+ * OWN width, so `ref` is that width) value; none → 0.
+ */
+const txOf = (v: string, ref = 0): number => {
+  if (v === "none" || !v) return 0;
+  if (v.startsWith("matrix")) return matrix(v).tx;
+  const t = v.trim();
+  if (t.startsWith("calc(")) {
+    const inner = t.slice(5, t.indexOf(")"));
+    let sum = 0;
+    for (const m of inner.matchAll(/([+-]?)\s*(-?\d+(?:\.\d+)?)(%|px)/g)) {
+      const sign = m[1] === "-" ? -1 : 1;
+      const n = Number(m[2]);
+      sum += sign * (m[3] === "%" ? (n / 100) * ref : n);
+    }
+    return sum;
+  }
+  return px(t.split(/\s+/)[0]!);
+};
 
 const one = (
   path: string,
@@ -109,7 +128,17 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
     R("track.padding", () =>
       roles.thumbInsideTrack && roles.travelInset
         ? one("track.padding", "px", { combo: off, part: roles.thumb, channel: roles.travelInset }, { formula: "the thumb's inset from the track edge in the off state (positioned by inset, not padding)" })
-        : one("track.padding", "px", { combo: off, part: roles.track, channel: "padding-left" }),
+        : {
+            // The thumb's inset from the track's OUTER edge: CSS lays the
+            // content box out after the border, so a transparent border
+            // (shadcn's `border border-transparent`) insets the thumb exactly
+            // like padding does. padding-left + border-left-width.
+            path: "track.padding",
+            kind: "px",
+            reads: { p: { combo: off, part: roles.track, channel: "padding-left" }, b: { combo: off, part: roles.track, channel: "border-left-width" } },
+            formula: "track padding-left + border-left-width (the content box starts after the border)",
+            combine: (raw) => px(raw.p) + px(raw.b),
+          },
     ),
     R("thumb.offSize", () => one("thumb.offSize", "px", { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" })),
     R("thumb.onSize", () => one("thumb.onSize", "px", { combo: on, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" })),
@@ -118,9 +147,9 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
         ? {
             path: "thumb.travel",
             kind: "px",
-            reads: { on: { combo: on, part: roles.travelOn, channel: roles.travelChannel ?? "transform" }, off: { combo: off, part: roles.travelOn, channel: roles.travelChannel ?? "transform" } },
-            formula: `${roles.travelChannel ?? "transform"} x of the moving element on minus off`,
-            combine: (raw) => txOf(raw.on) - txOf(raw.off),
+            reads: { on: { combo: on, part: roles.travelOn, channel: roles.travelChannel ?? "transform" }, off: { combo: off, part: roles.travelOn, channel: roles.travelChannel ?? "transform" }, w: { combo: on, part: roles.travelOn, channel: "width" } },
+            formula: `${roles.travelChannel ?? "transform"} x of the moving element on minus off (a calc() percentage is of the moving element's own width)`,
+            combine: (raw) => txOf(raw.on, px(raw.w)) - txOf(raw.off, px(raw.w)),
           }
         : {
             path: "thumb.travel",

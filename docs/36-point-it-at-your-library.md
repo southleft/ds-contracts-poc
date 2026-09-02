@@ -3,10 +3,10 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **one archetype**
-> (checkbox@1) and has been proven on **two libraries the recipe path was
-> never taught**: Chakra UI, and shadcn — a bare control with no label, colours
-> declared in oklch. Everything it cannot do refuses by name.
+> plugin can run in any file. It works today for **two archetypes**
+> (checkbox@1 and switch@1) and has been proven on **two libraries the recipe
+> path was never taught**: Chakra UI, and shadcn — bare controls with no
+> label, colours declared in oklch. Everything it cannot do refuses by name.
 
 ## The sentence this serves
 
@@ -23,6 +23,7 @@ plugin's **Paste a script** verb ([19 — plugin IA](19-plugin-ia.md)).
 ## The command
 
 ```bash
+npm run recipe:point -- --archetype switch --library shadcn
 npm run recipe:point -- --archetype checkbox --library chakra \
   --glyph-file glyph.json \
   --set dash.width=9.9167 --why 'dash.width=…the arithmetic…' \
@@ -78,6 +79,13 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 ## What it proved
 
+On shadcn's Switch — `--archetype switch --library shadcn` with no `--set`
+at all — the proposal read 25 leaves and invented none, and all four states
+score under the bar against the real render, two pixel-identical
+(`recipe/evidence/fidelity-v1/f1-shadcn-switch/`). Pointed at MUI's own
+capture, the same command proposed the bare-mount fixture that scores
+exactly what the hand-written one does.
+
 On shadcn's Checkbox — a bare `<button role=checkbox>` with no label part and
 every colour in `oklch()` — the drafter reported the missing label as evidence,
 the proposer wrote the label-less cell (28 leaves read, 6 reviewed, 0
@@ -103,9 +111,9 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** Only checkbox@1 has a proposer today. The switch
-  schema and drafter exist (`schema-switch.ts`, `draft-roles.ts`) and
-  re-derive the hand tables; the switch *module renderer* is next.
+- **Other archetypes.** checkbox@1 and switch@1 have proposers today
+  (`propose-fixture.ts`, `propose-switch.ts`); the other eleven boilerplate
+  archetypes still have hand tables only.
 - **Strokes thinner than 2px.** shadcn's check is a 1.17px stroke; Chromium
   rasterises it softer than Figma does, and the checked state scores 5.15%
   against a 5% bar with the diff hugging the whole stroke. Not a missing
@@ -131,7 +139,8 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 | `recipe/fixture-reader/schema-checkbox.ts` | checkbox@1 leaves as ledger reads over roles; archetype spellings |
 | `recipe/fixture-reader/schema-switch.ts` | switch@1 the same; the opacity rule is structural (thumb inside the track → carry; sibling → bake) |
 | `recipe/fixture-reader/draft-roles.ts` | role and combo drafting from the ledger, with evidence |
-| `recipe/fixture-reader/propose-fixture.ts` | evaluates a schema against a ledger and writes the fixture module |
+| `recipe/fixture-reader/propose-fixture.ts` | evaluates a schema against a ledger and writes the checkbox fixture module |
+| `recipe/fixture-reader/propose-switch.ts` | the switch fixture module, same contract |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

@@ -138,3 +138,40 @@ test("a BARE control (shadcn: no label part, oklch colours) proposes the label-l
   assert.ok(module.includes("bareLabelFont()"), "the generated module carries the inert label font");
   assert.ok(module.includes('{"label":null}'), "content.label null");
 });
+
+import { draftSwitchRoles } from "./draft-roles.js";
+import { proposeSwitchFixture } from "./propose-switch.js";
+import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
+
+test("switch@1 proposes MUI's bare mount: the label-less cell, the handle shadow, 0 invented", () => {
+  const ledgerRel = "extract/computed/out/mui/switch/captured-truth.json";
+  const draft = draftSwitchRoles(new Ledger(REPO, ledgerRel));
+  assert.deepEqual(draft.unresolved, []);
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const out = path.relative(REPO, path.join(dir, "switch.mui.ts"));
+  const r = proposeSwitchFixture({ library: "mui", ledger: ledgerRel, roles: draft.roles as SwitchRoles, combos: draft.combos as SwitchComboMap, sets: {}, out, unsupported: ["hover"] });
+  assert.deepEqual(r.refused, []);
+  assert.equal(r.proposal.content.label, null);
+  assert.equal(r.proposal.leaves["thumb.travel"]?.value, 20);
+  assert.match(String(r.proposal.leaves["thumbShadow"]?.value), /^rgba\(0, 0, 0, 0\.2\) 0px 2px 1px -1px/);
+  assert.equal(r.proposal.leaves["hitClips"]?.value, "true", "Switch-root overflow hidden, read");
+  const counts = { ledger: 0, set: 0, spelling: 0 }; for (const l of Object.values(r.proposal.leaves)) counts[l.from] += 1;
+  assert.deepEqual(counts, { ledger: 21, set: 0, spelling: 13 });
+  const module = readFileSync(r.modulePath, "utf8");
+  assert.ok(module.includes("bareLabelFont()") && module.includes("refusal-interaction-hover"), "bare font + refusals named from the capture");
+});
+
+test("switch@1 proposes shadcn: a pill radius in exponent notation and a calc(100% - 2px) travel of the thumb's own width", () => {
+  const ledgerRel = "extract/computed/out/shadcn/switch/captured-truth.json";
+  const draft = draftSwitchRoles(new Ledger(REPO, ledgerRel));
+  assert.deepEqual(draft.unresolved, []);
+  assert.equal(draft.roles.travelChannel, "translate");
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const out = path.relative(REPO, path.join(dir, "switch.shadcn.ts"));
+  const r = proposeSwitchFixture({ library: "shadcn", ledger: ledgerRel, roles: draft.roles as SwitchRoles, combos: draft.combos as SwitchComboMap, sets: {}, out, unsupported: ["hover"] });
+  assert.deepEqual(r.refused, []);
+  assert.equal(r.proposal.leaves["thumb.travel"]?.value, 14, "calc(100% - 2px) of a 16px thumb");
+  assert.equal(r.proposal.leaves["track.radius"]?.value, 33554400, "3.35544e+07px, Chromium's clamp of rounded-full");
+  assert.equal(r.proposal.leaves["states.true.enabled.trackFill"]?.value, "#171717ff");
+  assert.equal(r.proposal.content.label, null);
+});

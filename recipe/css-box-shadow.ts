@@ -24,6 +24,8 @@
  * we cannot name is not a shadow we can put on a canvas.
  */
 
+import { hex8 } from "./fixture-reader/ledger.js";
+
 export class CssBoxShadowError extends Error {}
 
 export interface ShadowEffectSpec {
@@ -41,6 +43,9 @@ const hex2 = (n: number): string =>
 
 /** rgb()/rgba()/#rgb/#rrggbb/#rrggbbaa → #rrggbbaa. */
 export const cssColorToHex8 = (raw: string): string => {
+  // Tailwind v4 declares shadow/ring colours in oklch(); the ledger's reader
+  // converts by CSS Color 4 (pinned to the render's pixels).
+  if (/^oklch\(/i.test(raw.trim())) return hex8(raw.trim());
   const v = raw.trim();
   const rgb = /^rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,/\s]+([\d.]+%?))?\s*\)$/i.exec(v);
   if (rgb) {
@@ -106,7 +111,7 @@ export function parseCssBoxShadow(value: string): ShadowEffectSpec[] {
     }
 
     // Pull the colour out wherever it sits, then the lengths are what remain.
-    const colourMatch = /rgba?\([^)]*\)|#[0-9a-f]{3,8}\b/i.exec(rest);
+    const colourMatch = /rgba?\([^)]*\)|oklch\([^)]*\)|#[0-9a-f]{3,8}\b/i.exec(rest);
     if (!colourMatch) {
       throw new CssBoxShadowError(`no colour in shadow layer "${layer}" — refusing to assume black`);
     }

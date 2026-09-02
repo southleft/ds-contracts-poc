@@ -279,3 +279,23 @@ thirteen archetypes were reminted through them (checkbox v11 `218:86637`)
 with every score unchanged.
 
     19 pass · 0 fringe · 7 known
+
+## 2026-09-02 — the one command covers a second archetype: switch
+
+`recipe/fixture-reader/propose-switch.ts` + `point.ts --archetype switch`.
+Pointed at shadcn's bare Switch it proposed a fixture with **no `--set` at
+all** (25 read, 0 invented) after the reader learned three general CSS
+facts — a pill radius Chromium reports as `3.35544e+07px`, a
+`calc(100% - 2px)` translate of the thumb's own width, and a transparent
+border as a 1px thumb inset (v9 missed the inset: checked 6.74%; v10 reads
+it: every state under the bar). Pointed at MUI's own capture it proposed the
+bare-mount fixture that scores exactly what the hand table scores. Both are
+minted as the fourth and fifth sources of switch v10 (page `218:88332`) and
+verified by the drift reader (mui-proposed 21 match, shadcn 25 match, 0
+drift). A proposal now also names its refusals from the capture itself —
+every interaction the harness captured that the archetype has no plane for.
+
+    switch/shadcn        0.00%   (checked 4.44 · unchecked.disabled 0.00 · checked.disabled 2.96)
+    switch/mui-proposed  4.57%   = switch/mui, the same capture read by a person
+
+    21 pass · 0 fringe · 7 known

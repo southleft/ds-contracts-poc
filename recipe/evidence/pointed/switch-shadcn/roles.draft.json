@@ -1,0 +1,44 @@
+{
+  "roles": {
+    "track": "root",
+    "thumb": "idx:0",
+    "thumbInsideTrack": true,
+    "travelOn": "idx:0",
+    "travelChannel": "translate",
+    "hit": "root"
+  },
+  "combos": {
+    "false.enabled": "default.unchecked.enabled",
+    "false.disabled": "default.unchecked.disabled",
+    "true.enabled": "default.checked.enabled",
+    "true.disabled": "default.checked.disabled"
+  },
+  "evidence": {
+    "track": {
+      "selector": "root",
+      "why": "pill 32px×18.3906px r=3.35544e+07px button paint oklch(0.922 0 0) → oklch(0.205 0 0)",
+      "confidence": "high"
+    },
+    "thumb": {
+      "selector": "idx:0",
+      "why": "round 16px span bg oklch(1 0 0) — INSIDE the track (opacity carried on the track)",
+      "confidence": "high"
+    },
+    "travelOn": {
+      "selector": "idx:0",
+      "why": "span translate 0px → calc(100% - 2px)",
+      "confidence": "high"
+    },
+    "hit": {
+      "selector": "root",
+      "why": "the track is its own hit area",
+      "confidence": "medium"
+    },
+    "label": {
+      "selector": null,
+      "why": "no part carries text — a bare control; label leaves become receipts",
+      "confidence": "medium"
+    }
+  },
+  "unresolved": []
+}

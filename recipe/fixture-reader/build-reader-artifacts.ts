@@ -20,6 +20,8 @@ import {
   shadcnCheckboxAdapterConfig,
   shadcnCheckboxMappings,
 } from "../fixtures/generated/checkbox.shadcn.js";
+import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
+import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Ledger } from "./ledger.js";
@@ -428,6 +430,28 @@ const SUBJECTS: Subject[] = [
     tokens: muiSwitchAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: muiSwitchMappings,
     extras: extrasFor(muiSwitchAdapterConfig.tokens as unknown as Record<string, unknown>, muiSwitchMappings),
+  },
+  {
+    // PROPOSED from MUI's bare Switch mount (no label part): the label-less
+    // cell; the hand table above is the same capture transcribed by a person.
+    archetype: "switch",
+    library: "mui-proposed",
+    source: src(muiSwitchProposedConfig),
+    ledgerFile: MUI_SWITCH_LEDGER_PROPOSED,
+    tokens: muiSwitchProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiSwitchProposedMappings,
+    extras: extrasFor(muiSwitchProposedConfig.tokens as unknown as Record<string, unknown>, muiSwitchProposedMappings),
+  },
+  {
+    // PROPOSED from shadcn's bare Switch: oklch colours, a pill radius in
+    // exponent notation, a calc(100% - 2px) travel of the thumb's own width.
+    archetype: "switch",
+    library: "shadcn",
+    source: src(shadcnSwitchAdapterConfig),
+    ledgerFile: SHADCN_SWITCH_LEDGER,
+    tokens: shadcnSwitchAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: shadcnSwitchMappings,
+    extras: extrasFor(shadcnSwitchAdapterConfig.tokens as unknown as Record<string, unknown>, shadcnSwitchMappings),
   },
   {
     archetype: "switch",

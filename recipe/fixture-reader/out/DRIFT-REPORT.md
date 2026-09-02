@@ -94,6 +94,18 @@ ledger `extract/computed/out/mui/switch/captured-truth.json` · 34 facts: **18 m
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### mui-proposed — @mui/material@9.2.0#Switch
+
+ledger `extract/computed/out/mui/switch/captured-truth.json` · 34 facts: **21 match**, **0 drift**, 13 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### shadcn — @shadcn-sandbox/ui@0.0.1#Switch
+
+ledger `extract/computed/out/shadcn/switch/captured-truth.json` · 34 facts: **25 match**, **0 drift**, 9 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ### antd — antd@5.29.3#Switch
 
 ledger `extract/computed/out/antd/switch/captured-truth.json` · 34 facts: **21 match**, **0 drift**, 13 named receipts, 0 unread
@@ -494,6 +506,28 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **switch/mui** `trackClips` = `false` — track does not clip the thumb _[reviewed false]_
 - **switch/mui** `typography.label.family` = `Roboto` — the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger _[createTypography.js fontFamily Roboto — reviewed Roboto]_
 - **switch/mui** `typography.label.style` = `Regular` — the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger _[createTypography.js fontWeightRegular 400 — reviewed Regular]_
+- **switch/mui-proposed** `row.gap` = `0` — no label part in the mount _[reviewed 0]_
+- **switch/mui-proposed** `states.false.enabled.trackOpacity` = `1` — baked into trackFill because the thumb is a sibling — spelled 1 _[reviewed 1]_
+- **switch/mui-proposed** `states.false.enabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/mui-proposed** `states.false.disabled.trackOpacity` = `1` — baked into trackFill because the thumb is a sibling — spelled 1 _[reviewed 1]_
+- **switch/mui-proposed** `states.false.disabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/mui-proposed** `states.true.enabled.trackOpacity` = `1` — baked into trackFill because the thumb is a sibling — spelled 1 _[reviewed 1]_
+- **switch/mui-proposed** `states.true.enabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/mui-proposed** `states.true.disabled.trackOpacity` = `1` — baked into trackFill because the thumb is a sibling — spelled 1 _[reviewed 1]_
+- **switch/mui-proposed** `states.true.disabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/mui-proposed** `labelFontSize` = `0` — no label part in the mount _[reviewed]_
+- **switch/mui-proposed** `rowAlign` = `center` — flex align-items:center on the row — recipe spelling _[reviewed center]_
+- **switch/mui-proposed** `typography.label.family` = `Arial` — no label part in the mount _[reviewed]_
+- **switch/mui-proposed** `typography.label.style` = `Regular` — no label part in the mount _[reviewed]_
+- **switch/shadcn** `row.gap` = `0` — no label part in the mount _[reviewed 0]_
+- **switch/shadcn** `states.false.enabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/shadcn** `states.false.disabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/shadcn** `states.true.enabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/shadcn** `states.true.disabled.label` = `#00000000` — no label part in the mount _[reviewed]_
+- **switch/shadcn** `labelFontSize` = `0` — no label part in the mount _[reviewed]_
+- **switch/shadcn** `rowAlign` = `center` — flex align-items:center on the row — recipe spelling _[reviewed center]_
+- **switch/shadcn** `typography.label.family` = `Arial` — no label part in the mount _[reviewed]_
+- **switch/shadcn** `typography.label.style` = `Regular` — no label part in the mount _[reviewed]_
 - **switch/antd** `wrapper.padding` = `0` — the 44×22 root has no extra padding — 0 is the recipe's spelling _[prepareComponentToken padding 2 is INSIDE the track — reviewed 0 on the wrapper]_
 - **switch/antd** `track.padding` = `2` — handle inset is 2px (padding token) — not a CSS padding on the root _[prepareComponentToken padding 2 — reviewed 2]_
 - **switch/antd** `thumb.travel` = `22` — travel = trackMinWidth − handleSize − 2×padding = 44 − 18 − 4 = 22; the handle inset is not a single computed channel _[v2 stay accuracyLoop travel 22 = 44-18-2*2 — reviewed 22]_

@@ -1,0 +1,43 @@
+{
+  "roles": {
+    "track": "idx:1",
+    "thumb": "idx:0.1",
+    "thumbInsideTrack": false,
+    "travelOn": "idx:0",
+    "hit": "root"
+  },
+  "combos": {
+    "false.enabled": "primary.medium.unchecked.enabled",
+    "false.disabled": "primary.medium.unchecked.disabled",
+    "true.enabled": "primary.medium.checked.enabled",
+    "true.disabled": "primary.medium.checked.disabled"
+  },
+  "evidence": {
+    "track": {
+      "selector": "idx:1",
+      "why": "pill 34px×14px r=7px span.MuiSwitch-track paint rgba(0, 0, 0, 1) → rgba(25, 118, 210, 1)",
+      "confidence": "high"
+    },
+    "thumb": {
+      "selector": "idx:0.1",
+      "why": "round 20px span.MuiSwitch-thumb bg rgba(255, 255, 255, 1) — a SIBLING of the track (track opacity baked into its fill)",
+      "confidence": "high"
+    },
+    "travelOn": {
+      "selector": "idx:0",
+      "why": "span.MuiButtonBase-root transform none → matrix(1, 0, 0, 1, 20, 0)",
+      "confidence": "high"
+    },
+    "hit": {
+      "selector": "root",
+      "why": "the track's parent span 58px×38px is the hit area",
+      "confidence": "medium"
+    },
+    "label": {
+      "selector": null,
+      "why": "no part carries text — a bare control; label leaves become receipts",
+      "confidence": "medium"
+    }
+  },
+  "unresolved": []
+}

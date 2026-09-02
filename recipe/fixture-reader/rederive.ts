@@ -15,7 +15,7 @@ import { Ledger } from "./ledger.js";
 import { tokenLeaves } from "./reader.js";
 import { draftSwitchRoles } from "./draft-roles.js";
 import { evaluate } from "./propose-fixture.js";
-import { SWITCH_SPELLINGS, switchSchemaMappings, type SwitchComboMap, type SwitchRoles } from "./schema-switch.js";
+import { SWITCH_SPELLINGS, switchSchemaMappings, type SwitchComboMap, type SwitchRoles, switchSpellingsFor } from "./schema-switch.js";
 
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const arg = (n: string): string | undefined => { const i = process.argv.indexOf(`--${n}`); return i > -1 ? process.argv[i + 1] : undefined; };
@@ -42,7 +42,7 @@ if (draft.unresolved.length && !draft.combos["false.enabled"]) { console.log("ca
 const combos = draft.combos as SwitchComboMap;
 const roles = draft.roles as SwitchRoles;
 const mappings = switchSchemaMappings(roles, { combos });
-const evaluated = evaluate(ledger, mappings, new Map(), SWITCH_SPELLINGS);
+const evaluated = evaluate(ledger, mappings, new Map(), switchSpellingsFor(roles));
 let agree = 0, differ = 0, receipts = 0, refused = evaluated.refused.length;
 const rows: string[] = [];
 for (const m of mappings) {
