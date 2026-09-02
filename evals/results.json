@@ -1,9 +1,9 @@
 {
-  "passed": 227,
+  "passed": 225,
   "total": 230,
-  "commit": "9553a6a5648b46a0b475cb60e53cec7f318b2532",
+  "commit": "82f1ec2ea6a192585a4aa0e373c897f0d511cd37",
   "dirty": false,
-  "recordedAt": "2026-09-01",
+  "recordedAt": "2026-09-02",
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -143,7 +143,8 @@
     {
       "id": "shoelace-diagnose-prefix-match",
       "claim": "C5-extraction",
-      "pass": true
+      "pass": false,
+      "error": "Error: Code surface must be clean — proposals are extracted from this same manifest"
     },
     {
       "id": "diagnose-stale-design-snapshot",
@@ -788,7 +789,8 @@
     {
       "id": "promote-generalization",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: mui: contracts/tabs.anchors.json — the shared promote module did NOT reproduce the committed bytes (/Users/tjpitre/Sites/ds-contracts-poc/contracts/tabs.anchors.json)"
     },
     {
       "id": "paste-door-open",
