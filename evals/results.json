@@ -1,7 +1,7 @@
 {
   "passed": 225,
   "total": 230,
-  "commit": "faa08d32de0395f1736081bcb76d2b6cfaedd4c1",
+  "commit": "a897620ec62875ca52738c9848c32dab454e194a",
   "dirty": false,
   "recordedAt": "2026-09-02",
   "results": [
@@ -790,7 +790,7 @@
       "id": "promote-generalization",
       "claim": "C1-determinism",
       "pass": false,
-      "error": "Error: mui: contracts/tabs.anchors.json — the shared promote module did NOT reproduce the committed bytes (/Users/tjpitre/Sites/ds-contracts-poc/contracts/tabs.anchors.json)"
+      "error": "Error: mui: contracts/dialog.contract.json — the shared promote module did NOT reproduce the committed bytes (/Users/tjpitre/Sites/ds-contracts-poc/contracts/dialog.contract.json)"
     },
     {
       "id": "paste-door-open",
