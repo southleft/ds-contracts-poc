@@ -1,18 +1,18 @@
 {
   "component": "Checkbox",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 24,
   "combos": 6,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 564,
+  "channelsEnumerated": 561,
   "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 40,
-    "part-0": 17,
-    "icon": 20,
-    "part-0-0-0": 20
+    "root": 51,
+    "part-0": 31,
+    "icon": 34,
+    "part-0-0-0": 34
   },
   "folds": {
     "count": 20,
@@ -138,8 +138,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 44,
-    "mintedLeavesFolded": 30
+    "mintedLeavesUnfolded": 68,
+    "mintedLeavesFolded": 39
   },
   "bound": {
     "cellsChecked": 0,
@@ -148,24 +148,24 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 30,
-    "baseBindings": 27,
+    "leaves": 39,
+    "baseBindings": 42,
     "stateBindings": 7,
     "byShape": {
-      "uniform": 27,
-      "perAxis": 6,
+      "uniform": 42,
+      "perAxis": 7,
       "perPair": 0,
-      "refused": 1
+      "refused": 0
     }
   },
   "declared": {
-    "base": 12,
+    "base": 19,
     "state": 1
   },
   "codeOnly": {
-    "base": 5,
+    "base": 8,
     "state": 2,
-    "overflowBindings": 1
+    "overflowBindings": 0
   },
   "pseudoElementFindings": 6,
   "anatomyPromotion": {
@@ -176,8 +176,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 40464,
-    "cellsMatched": 40464,
+    "cellsCompared": 40248,
+    "cellsMatched": 40248,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -196,9 +196,9 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.07527669270833334,
-      "max": 0.13671875,
-      "perfect": 0
+      "mean": 0.06306966145833336,
+      "max": 0.1171875,
+      "perfect": 8
     },
     "aa": {
       "mean": 0.017361111111111115,
@@ -208,31 +208,16 @@
     "worst": [
       {
         "key": "checked.enabled__default",
-        "pctExact": 0.13671875,
+        "pctExact": 0.1171875,
         "pctAA": 0.026041666666666668
       },
       {
         "key": "checked.enabled__hover",
-        "pctExact": 0.13671875,
+        "pctExact": 0.1171875,
         "pctAA": 0.026041666666666668
       },
       {
         "key": "checked.enabled__active",
-        "pctExact": 0.13671875,
-        "pctAA": 0.026041666666666668
-      },
-      {
-        "key": "indeterminate.enabled__default",
-        "pctExact": 0.1171875,
-        "pctAA": 0.026041666666666668
-      },
-      {
-        "key": "indeterminate.enabled__hover",
-        "pctExact": 0.1171875,
-        "pctAA": 0.026041666666666668
-      },
-      {
-        "key": "indeterminate.enabled__active",
         "pctExact": 0.1171875,
         "pctAA": 0.026041666666666668
       },
@@ -245,15 +230,30 @@
         "key": "checked.disabled__hover",
         "pctExact": 0.09765625,
         "pctAA": 0.026041666666666668
+      },
+      {
+        "key": "checked.disabled__focus-visible",
+        "pctExact": 0.09765625,
+        "pctAA": 0.026041666666666668
+      },
+      {
+        "key": "checked.disabled__active",
+        "pctExact": 0.09765625,
+        "pctAA": 0.026041666666666668
+      },
+      {
+        "key": "checked.enabled__focus-visible",
+        "pctExact": 0.09440104166666667,
+        "pctAA": 0.026041666666666668
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 67.54385964912281,
+    "computedPctEqual": 68.70748299319727,
     "rowsFullyEqual": 0,
     "rows": 24,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 7,
+    "pixelPerfectExact": 7,
+    "pixelPerfectAA": 8,
     "pairs": 24
   },
   "focusVisibleDriverMatched": 3,

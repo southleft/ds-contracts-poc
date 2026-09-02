@@ -26,7 +26,7 @@ import path from "node:path";
 
 import { Ledger, hex8, num, px } from "./ledger.js";
 import { isReceipt, type FactMapping, type LedgerMapping } from "./reader.js";
-import { CHECKBOX_SPELLINGS, checkboxSchemaMappings, type CheckboxRoles, type CheckboxSchemaOptions } from "./schema-checkbox.js";
+import { CHECKBOX_SPELLINGS, checkboxSchemaMappings, type CheckboxRoles, type CheckboxSchemaOptions, type Spelling } from "./schema-checkbox.js";
 import { toFigmaVectorPath, transformVectorPath, vectorPathHullBounds } from "../figma-vector-path.js";
 
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
@@ -72,7 +72,7 @@ export interface Proposal {
 const normalize = (kind: LedgerMapping["kind"], raw: string): number | string =>
   kind === "px" ? px(raw) : kind === "number" ? num(raw) : kind === "color" ? hex8(raw) : raw;
 
-function evaluate(ledger: Ledger, mappings: FactMapping[], sets: Map<string, { value: string; why: string }>): Pick<Proposal, "leaves" | "receipts" | "refused"> {
+export function evaluate(ledger: Ledger, mappings: FactMapping[], sets: Map<string, { value: string; why: string }>, spellings: Record<string, Spelling> = CHECKBOX_SPELLINGS): Pick<Proposal, "leaves" | "receipts" | "refused"> {
   const leaves: Proposal["leaves"] = {};
   const receipts: Proposal["receipts"] = [];
   const refused: string[] = [];
@@ -80,7 +80,7 @@ function evaluate(ledger: Ledger, mappings: FactMapping[], sets: Map<string, { v
   for (const m of mappings) {
     const set = sets.get(m.path);
     if (isReceipt(m)) {
-      const spelling = CHECKBOX_SPELLINGS[m.path];
+      const spelling = spellings[m.path];
       if (!set && spelling !== undefined) {
         if (typeof spelling === "function") { deferred.push({ m, spelling }); continue; }
         leaves[m.path] = { value: spelling, from: "spelling", why: m.receipt };

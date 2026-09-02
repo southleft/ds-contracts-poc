@@ -232,3 +232,16 @@ The human inputs were a seven-line role map and the glyph's points cited
 from `checkmark.js`. Per-state canvas shots and scorecards are in
 `f1-chakra-checkbox/`. This is F1 for one archetype, measured; docs/26's F1
 clause still needs the owner's grade and every archetype.
+
+## 2026-09-01 (late) — the switch schema found a shadow the hand table missed
+
+`recipe/fixture-reader/schema-switch.ts` + `rederive.ts` re-derive each
+hand-written switch fixture from its own ledger through drafted roles. MUI:
+21 agree · 0 differ (the 8 refusals are the label a bare mount has none of).
+AntD: 24 agree · 1 differ — the schema read the knob's `::before` box-shadow,
+`0 2px 4px 0 rgba(0,35,11,.2)` (antd `handleShadow`), where the fixture
+said `none`. That shadow is exactly the 44×24-vs-44×22 band the manifest
+had excused as anti-aliasing fringe. The excuse is retired, the shadow is
+carried, and switch v5 (page `214:82669`) scores **0.00% at 44×24**.
+
+    18 pass · 0 fringe · 7 known

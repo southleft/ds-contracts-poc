@@ -45,6 +45,8 @@ export interface LedgerCapture {
 /** One loaded captured-truth ledger, addressable by combo×interaction. */
 export class Ledger {
   readonly file: string;
+  /** The capture's declared base combo key (the library's default cell), e.g. "primary.medium.unchecked.enabled__default". */
+  readonly baseKey: string | null;
   private byKey = new Map<string, LedgerCapture>();
 
   constructor(repoRoot: string, relFile: string) {
@@ -52,6 +54,7 @@ export class Ledger {
     const truth = JSON.parse(
       readFileSync(path.join(repoRoot, relFile), "utf8"),
     ) as CapturedTruthFile;
+    this.baseKey = typeof (truth as { base?: { key?: string } }).base?.key === "string" ? (truth as { base: { key: string } }).base.key : null;
     for (const cap of reconstructCaptures(truth)) {
       const key = `${cap.combo}__${cap.interaction}`;
       this.byKey.set(key, { key, parts: flattenParts(cap.root) });

@@ -677,11 +677,11 @@
         "provenance": "RECEIPT: recipe spelling of the reviewed label pairing [reviewed center]"
       },
       "thumbShadow": {
-        "fixture": "none",
-        "proposed": "none",
+        "fixture": "rgba(0, 35, 11, 0.2) 0px 2px 4px 0px",
+        "proposed": "rgba(0, 35, 11, 0.2) 0px 2px 4px 0px",
         "verdict": "match",
-        "captured": "none",
-        "provenance": "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch-handle.box-shadow"
+        "captured": "rgba(0, 35, 11, 0.2) 0px 2px 4px 0px",
+        "provenance": "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch-handle::before.box-shadow — the knob is the handle's ::before; its box-shadow is the handleShadow token"
       },
       "hitClips": {
         "fixture": "false",

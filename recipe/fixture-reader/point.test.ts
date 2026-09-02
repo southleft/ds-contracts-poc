@@ -66,3 +66,50 @@ test("a leaf the ledger cannot carry REFUSES the proposal by name until given wi
   assert.ok(result.refused.every((r) => /^dash\.(width|height):/.test(r)), result.refused.join("\n"));
   assert.ok(result.refused[0]!.includes("--set dash.width"), "the refusal says how to satisfy it");
 });
+
+import { draftSwitchRoles } from "./draft-roles.js";
+import { SWITCH_SPELLINGS, switchSchemaMappings, type SwitchComboMap, type SwitchRoles } from "./schema-switch.js";
+import { evaluate } from "./propose-fixture.js";
+import { tokenLeaves } from "./reader.js";
+
+test("switch@1: drafted roles + combos re-derive MUI's hand-written fixture with zero disagreement on every readable leaf", async () => {
+  const ledger = new Ledger(REPO, "extract/computed/out/mui/switch/captured-truth.json");
+  const draft = draftSwitchRoles(ledger);
+  assert.deepEqual(draft.unresolved, []);
+  assert.equal(draft.combos["false.enabled"], "primary.medium.unchecked.enabled", "combos come from the declared base, not a name guess");
+  assert.equal(draft.roles.thumbInsideTrack, false, "MUI's thumb is a sibling of the track → opacity baked into the fill");
+  assert.equal(draft.roles.travelOn, "idx:0", "the SwitchBase carries the travel transform");
+  const fixtures = (await import("../fixtures/library-switches.js")) as Record<string, unknown>;
+  const config = fixtures.muiSwitchAdapterConfig as { tokens: Record<string, unknown> };
+  const hand = tokenLeaves(config.tokens);
+  const evaluated = evaluate(ledger, switchSchemaMappings(draft.roles as SwitchRoles, { combos: draft.combos as SwitchComboMap }), new Map(), SWITCH_SPELLINGS);
+  let agree = 0, differ: string[] = [];
+  for (const [path, leaf] of Object.entries(evaluated.leaves)) {
+    if (leaf.from !== "ledger" || !hand.has(path)) continue;
+    const h = hand.get(path)!;
+    const eq = typeof h === "number" && typeof leaf.value === "number" ? Math.abs(h - leaf.value) <= 0.01 : String(h).toLowerCase() === String(leaf.value).toLowerCase();
+    if (eq) agree += 1; else differ.push(`${path}: schema ${leaf.value} vs hand ${h}`);
+  }
+  assert.deepEqual(differ, []);
+  // 18 parameter leaves are readable on a bare MUI mount (the rest are the
+  // label the mount has none of); rederive.ts also compares the string
+  // extras (rowAlign, thumbShadow, clips) and reports 21.
+  assert.ok(agree >= 18, `only ${agree} leaves agreed`);
+});
+
+test("switch@1: AntD's knob is a pseudo-element with a real shadow, and the travel is an inset difference", () => {
+  const ledger = new Ledger(REPO, "extract/computed/out/antd/switch/captured-truth.json");
+  const draft = draftSwitchRoles(ledger);
+  assert.equal(draft.roles.thumbPseudo, "::before");
+  assert.equal(draft.roles.travelInset, "left");
+  const evaluated = evaluate(ledger, switchSchemaMappings(draft.roles as SwitchRoles, { combos: draft.combos as SwitchComboMap }), new Map(), SWITCH_SPELLINGS);
+  assert.equal(evaluated.leaves["thumb.travel"]?.value, 22);
+  assert.equal(evaluated.leaves["track.padding"]?.value, 2, "the handle's inset is the track padding");
+  assert.match(String(evaluated.leaves["thumbShadow"]?.value), /rgba\(0, 35, 11, 0\.2\) 0px 2px 4px/, "the handleShadow the hand table missed");
+});
+
+test("switch@1: a capture with no checked axis is refused, not guessed (Astryx)", () => {
+  const draft = draftSwitchRoles(new Ledger(REPO, "extract/computed/out/astryx-core/switch/captured-truth.json"));
+  assert.ok(draft.unresolved.length >= 2, draft.unresolved.join("\n"));
+  assert.ok(draft.unresolved.some((u) => /true\.enabled/.test(u)));
+});

@@ -220,7 +220,12 @@ const antdTokens = cloneTokens("antd.switch", (path, fallback) => {
 antdTokens.rowAlign = "center";
 antdTokens.hitClips = false;
 // AntD paints no thumb elevation in the captured default theme.
-antdTokens.thumbShadow = "none";
+// The handle knob (ant-switch-handle::before) carries handleShadow
+// `0 2px 4px 0 rgba(0, 35, 11, 0.2)` (antd/es/switch/style/index.js
+// prepareComponentToken). The hand table said "none" and the fidelity gate
+// excused the resulting 44x22-vs-44x24 as AA fringe; the role schema read the
+// ledger's ::before box-shadow on 2026-09-01 and found the shadow.
+antdTokens.thumbShadow = "rgba(0, 35, 11, 0.2) 0px 2px 4px 0px";
 antdTokens.trackClips = false;
 antdTokens.typography = { label: antdFont() };
 

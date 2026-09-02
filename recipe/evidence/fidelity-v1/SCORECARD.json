@@ -4,9 +4,9 @@
     "pctAAMaskedMax": 5
   },
   "subjects": 25,
-  "passed": 17,
+  "passed": 18,
   "failed": 7,
-  "fringeExcused": 1,
+  "fringeExcused": 0,
   "knownFailures": 7,
   "rows": [
     {
@@ -59,11 +59,11 @@
     },
     {
       "label": "switch/antd",
-      "status": "fringe",
-      "pctAAMasked": 6.82,
-      "canvasPx": "44x22",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "44x24",
       "realPx": "44x24",
-      "convergesAt": 240
+      "convergesAt": 250
     },
     {
       "label": "radio/mui",

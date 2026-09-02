@@ -233,7 +233,9 @@ export const antdSwitchMappings: FactMapping[] = [
   receipt("states.true.disabled.label", NO_ANTD_LBL, "--color-text-disabled — the fixture's citation"),
   one("labelFontSize", "px", { combo: sOff, part: sRoot, channel: "font-size" }),
   receipt("rowAlign", "recipe spelling of the reviewed label pairing", "reviewed center"),
-  one("thumbShadow", "string", { combo: sOff, part: sHandle, channel: "box-shadow" }),
+  one("thumbShadow", "string", { combo: sOff, part: sHandle, pseudo: "::before", channel: "box-shadow" }, {
+    formula: "the knob is the handle's ::before; its box-shadow is the handleShadow token",
+  }),
   receipt("hitClips", "antd switch does not clip the handle", "reviewed false"),
   receipt("trackClips", "antd switch does not clip the handle", "reviewed false"),
   receipt("typography.label.family", FONT_PIN + "; additionally no label part is mounted", "theme.getDesignToken().fontFamily starts -apple-system"),

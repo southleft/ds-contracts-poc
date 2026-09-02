@@ -22,8 +22,8 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 120 components came out with a measured floor:
-**86.6% mean computed-style equality** against the original npm package rendering in the same pinned
-Chromium, exact string comparison with no tolerance, over 735,938 compared style cells
+**86.5% mean computed-style equality** against the original npm package rendering in the same pinned
+Chromium, exact string comparison with no tolerance, over 737,386 compared style cells
 (58 of 120 components at ≥90%, 93 of 120 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
@@ -111,18 +111,18 @@ pipeline never opened still counts against it.
 | Carbon | 10 | **87.5** | 86.7 | 4/10 | 8/10 | 54,297 | 82.8 | `extract/computed/out/carbon/<comp>/scorecard.json` |
 | MUI | 32 | **89.3** | 90.7 | 18/32 | 27/32 | 121,214 | 85.5 | `extract/computed/out/mui/<comp>/scorecard.json` |
 | Polaris | 12 | **89.4** | 91.5 | 7/12 | 11/12 | 200,405 | 90.5 | `extract/computed/out/<comp>/scorecard.json` |
-| shadcn/ui | 11 | **70.7** | 70.4 | 1/11 | 3/11 | 22,516 | 73.6 | `extract/computed/out/shadcn/<comp>/scorecard.json` |
+| shadcn/ui | 11 | **69.9** | 70.4 | 1/11 | 3/11 | 23,964 | 72.1 | `extract/computed/out/shadcn/<comp>/scorecard.json` |
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
 | Fluent 2 | 11 | **82.5** | 82.4 | 4/11 | 7/11 | 132,426 | 80.8 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 13 | **89.0** | 91.4 | 8/13 | 11/13 | 134,916 | 85.4 | `extract/computed/out/antd/<comp>/scorecard.json` |
 | Chakra UI | 1 | **88.5** | 88.5 | 0/1 | 1/1 | 2,328 | 88.5 | `extract/computed/out/chakra/<comp>/scorecard.json` |
-| **all libraries** | **120** | **86.6** | 89.3 | **58/120** | **93/120** | **735,938** | **85.9** |  |
+| **all libraries** | **120** | **86.5** | 89.3 | **58/120** | **93/120** | **737,386** | **85.8** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 120 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 10 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
-unweighted mean (86.6%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
-the cell-weighted figure (85.9%) is what fraction of every style cell in the corpus
+unweighted mean (86.5%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
+the cell-weighted figure (85.8%) is what fraction of every style cell in the corpus
 actually matched. Neither is quoted alone. Whole-row exactness is the harshest
 cut of the same data: **2,984 of 11,680** rendered rows
 (25.5%) match the original on *every* channel at once.
@@ -135,13 +135,13 @@ No component is omitted. The worst row in the corpus is at the top.
 |---|---|---|---|---|---|
 | `Avatar` | shadcn/ui | 50.0 | 3 × 4 | 360 | `extract/computed/out/shadcn/avatar/scorecard.json` |
 | `ProgressBar` | Astryx | 51.9 | 5 × 4 | 1,080 | `extract/computed/out/astryx/progressbar/scorecard.json` |
+| `Switch` | shadcn/ui | 55.5 | 8 × 4 | 2,624 | `extract/computed/out/shadcn/switch/scorecard.json` |
 | `Tooltip` | shadcn/ui | 57.1 | 1 × 4 | 84 | `extract/computed/out/shadcn/tooltip/scorecard.json` |
 | `Alert` | shadcn/ui | 61.4 | 2 × 4 | 456 | `extract/computed/out/shadcn/alert/scorecard.json` |
 | `Banner` | Astryx | 62.3 | 8 × 4 | 3,648 | `extract/computed/out/astryx/banner/scorecard.json` |
 | `TabList` | Fluent 2 | 65.0 | 48 × 4 | 27,840 | `extract/computed/out/fluent/tablist/scorecard.json` |
-| `Switch` | shadcn/ui | 65.6 | 8 × 4 | 1,440 | `extract/computed/out/shadcn/switch/scorecard.json` |
 | `Checkbox` | Fluent 2 | 67.2 | 24 × 4 | 12,864 | `extract/computed/out/fluent/checkbox/scorecard.json` |
-| `Checkbox` | shadcn/ui | 67.5 | 6 × 4 | 912 | `extract/computed/out/shadcn/checkbox/scorecard.json` |
+| `Checkbox` | shadcn/ui | 68.7 | 6 × 4 | 1,176 | `extract/computed/out/shadcn/checkbox/scorecard.json` |
 | `Avatar` | Polaris | 69.8 | 10 × 4 | 1,920 | `extract/computed/out/avatar/scorecard.json` |
 | `Card` | shadcn/ui | 70.4 | 2 × 4 | 432 | `extract/computed/out/shadcn/card/scorecard.json` |
 | `Card` | Flowbite / Tailwind | 72.4 | 1 × 4 | 116 | `extract/computed/out/tailwind/card/scorecard.json` |
@@ -269,7 +269,7 @@ no scorecard escaped classification.
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
 | synthetic CSS/DOM constructs | 124 | 98.3 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
-| real third-party components | 120 | 86.6 | yes | `extract/computed/out/**/scorecard.json` |
+| real third-party components | 120 | 86.5 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
 
@@ -565,8 +565,8 @@ npm run capability:fresh
 | `evals/golden.json` | `259ec554f9a0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `6b5e4a808523` | 1,761,286 | capture counts + determinism receipts — 256 files |
-| `extract/computed/out/**/scorecard.json` | `6db418ec8af7` | 21,371,975 | computed-equality per component — 255 files |
+| `extract/computed/out/**/numbers.json` | `73a86c22bea8` | 1,762,664 | capture counts + determinism receipts — 256 files |
+| `extract/computed/out/**/scorecard.json` | `81f214513cdc` | 21,494,949 | computed-equality per component — 255 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `4708222bebfc` | 6,968 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

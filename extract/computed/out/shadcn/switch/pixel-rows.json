@@ -1,162 +1,162 @@
 [
   {
     "key": "sm.unchecked.enabled__default",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked.enabled__hover",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked.enabled__focus-visible",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked.enabled__active",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked.disabled__default",
-    "pctExact": 0.009765625,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked.disabled__hover",
-    "pctExact": 0.009765625,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked.disabled__focus-visible",
-    "pctExact": 0.009765625,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked.disabled__active",
-    "pctExact": 0.009765625,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.enabled__default",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.enabled__hover",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.enabled__focus-visible",
-    "pctExact": 0.016276041666666668,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.enabled__active",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.disabled__default",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.disabled__hover",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.disabled__focus-visible",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "sm.checked.disabled__active",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.enabled__default",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.enabled__hover",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.enabled__focus-visible",
-    "pctExact": 0.009765625,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.enabled__active",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.disabled__default",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.disabled__hover",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.disabled__focus-visible",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.unchecked.disabled__active",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.checked.enabled__default",
-    "pctExact": 0.032552083333333336,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "default.checked.enabled__hover",
-    "pctExact": 0.032552083333333336,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "default.checked.enabled__focus-visible",
-    "pctExact": 0.009765625,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.checked.enabled__active",
-    "pctExact": 0.032552083333333336,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "default.checked.disabled__default",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.checked.disabled__hover",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.checked.disabled__focus-visible",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "default.checked.disabled__active",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0,
     "pctAA": 0
   }
 ]

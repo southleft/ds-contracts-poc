@@ -26,7 +26,9 @@ import {
 
 export const SWITCH_FIGMA_NAMESPACE = "ds.contracts.switch.recipe.v1";
 export const SWITCH_FIGMA_WRITER_VERSION = 2;
-export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v4";
+export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v5";
+/** v4 stay (AntD handle shadow carried (was recorded none)) is preserved as evidence and never written again. */
+export const FORBIDDEN_SWITCH_V4_PAGE_ID = "211:80480";
 /** v3 stay (shared-runtime proof) is preserved as evidence and never written again. */
 export const FORBIDDEN_SWITCH_V3_PAGE_ID = "199:78941";
 export const FORBIDDEN_SWITCH_V1_PAGE_ID = "183:75302";
@@ -253,6 +255,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "switchSet"
   },
   "forbiddenPages": [
+    { "id": "211:80480", "marker": "SWITCH-V4-PAGE" },
     { "id": "199:78941", "marker": "SWITCH-V3-PAGE" },
     {
       "id": "115:295378",

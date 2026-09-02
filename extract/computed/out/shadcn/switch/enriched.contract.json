@@ -4,7 +4,7 @@
   "name": "Switch",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). checked is a VARIANT AXIS (prop-selected Radix data-state rendering — RECON H4); the real-DOM thumb's translate question is H6. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). checked is a VARIANT AXIS (prop-selected Radix data-state rendering — RECON H4); the real-DOM thumb's translate question is H6. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "button"
   },
@@ -73,7 +73,13 @@
           "declared": {
             "display": "block",
             "aspect-ratio": "1 / 1",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
             "cursor": "default",
+            "font-family": "\"Inter Variable\", sans-serif",
             "pointer-events": "none",
             "text-align": "center",
             "transition-duration": "0.15s",
@@ -87,11 +93,19 @@
           },
           "tokens": {
             "background-color": "{imported.switch.part-0.background-color}",
+            "border-bottom-color": "{imported.shared.color-e5e5e5}",
             "border-bottom-left-radius": "{imported.shared.size-9999}",
             "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-left-color": "{imported.shared.color-e5e5e5}",
+            "border-right-color": "{imported.shared.color-e5e5e5}",
+            "border-top-color": "{imported.shared.color-e5e5e5}",
             "border-top-left-radius": "{imported.shared.size-9999}",
             "border-top-right-radius": "{imported.shared.size-9999}",
-            "box-shadow": "{imported.switch.part-0.box-shadow}"
+            "box-shadow": "{imported.switch.part-0.box-shadow}",
+            "color": "{imported.switch.part-0.color}",
+            "line-height": "{imported.switch.part-0.line-height}",
+            "outline-color": "{imported.switch.part-0.outline-color}",
+            "tab-size": "{imported.switch.part-0.tab-size}"
           },
           "tokensByProp": [
             {
@@ -115,6 +129,7 @@
         "border-left-style": "solid",
         "border-right-style": "solid",
         "border-top-style": "solid",
+        "font-family": "\"Inter Variable\", sans-serif",
         "position": "relative",
         "transition-duration": "0.15s",
         "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
@@ -139,9 +154,18 @@
         "border-top-width": "{imported.shared.size-1}",
         "bottom": "{imported.shared.size-0}",
         "box-shadow": "{imported.switch.root.box-shadow}",
+        "color": "{imported.switch.root.color}",
         "flex-shrink": "{imported.switch.root.flex-shrink}",
+        "font-size": "{imported.switch.root.font-size}",
         "left": "{imported.shared.size-0}",
+        "line-height": "{imported.switch.root.line-height}",
+        "outline-color": "{imported.switch.root.outline-color}",
+        "padding-bottom": "{imported.shared.size-0}",
+        "padding-left": "{imported.shared.size-0}",
+        "padding-right": "{imported.shared.size-0}",
+        "padding-top": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",
+        "tab-size": "{imported.switch.root.tab-size}",
         "top": "{imported.shared.size-0}"
       },
       "states": {
@@ -181,6 +205,14 @@
               "width": "{imported.switch.root.width.sm}"
             }
           }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "focus-visible",
+          "channel": "--tw-ring-shadow",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
         }
       ]
     }

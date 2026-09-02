@@ -50,20 +50,20 @@
     },
     {
       "label": "switch/astryx",
-      "page": "211:80480",
+      "page": "214:82669",
       "set": "switch/set :: Astryx Switch",
       "variant": "Checked=false, Disabled=false",
       "child": "switch/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-astryx-hit-shared-v4.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-astryx-hit-v5.png",
       "reference": "extract/computed/out/astryx-core/switch/orig-shots/end.no-isDisabled__default.png",
       "referenceControlOnly": true
     },
     {
       "label": "switch/mui",
-      "page": "211:80480",
+      "page": "214:82669",
       "set": "switch/set :: MUI Switch",
       "variant": "Checked=false, Disabled=false",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-variant-shared-v4.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-variant-v5.png",
       "canvasBox": [
         0,
         0,
@@ -76,15 +76,14 @@
     },
     {
       "label": "switch/antd",
-      "page": "211:80480",
+      "page": "214:82669",
       "set": "switch/set :: Ant Design Switch",
       "variant": "Checked=false, Disabled=false",
       "child": "switch/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-antd-hit-shared-v4.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-antd-hit-v5.png",
       "reference": "extract/computed/out/antd/switch/orig-shots/default.unchecked.enabled__default.png",
       "referenceControlOnly": true,
-      "expectFringe": true,
-      "_expectFringeWhy": "Chromium renders two rows of AA fringe at 241-248 that Figma does not; at the scorer's 250 cutoff the reference trims 44x24 against an identical 44x22 canvas. The threshold sweep confirms both are 44x22 at 240 or stricter. Scored as a known instrument artifact, not a design difference — and if the sweep ever stops converging, this subject fails."
+      "_fringeRetired": "2026-09-01: the 44x24-vs-44x22 band was NOT anti-aliasing — it was the handle's real drop shadow (handleShadow 0 2px 4px rgba(0,35,11,.2)) that the hand fixture recorded as none; found by the role schema re-derivation. The row must pass on its own now."
     },
     {
       "label": "radio/mui",
