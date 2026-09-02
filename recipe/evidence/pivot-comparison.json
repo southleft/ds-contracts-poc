@@ -11,10 +11,12 @@
   },
   "legacyCi": {
     "status": "failed",
-    "passed": 227,
+    "passed": 225,
     "total": 230,
-    "evalCommit": "053f2a0e50447479775dc330e123bb07da1a7714",
+    "evalCommit": "82f1ec2ea6a192585a4aa0e373c897f0d511cd37",
     "failing": [
+      "shoelace-diagnose-prefix-match",
+      "promote-generalization",
       "astryx-reanchor-minted",
       "minted-leaves-bind-to-something",
       "console-loop-canvas-drift-probe"
@@ -125,7 +127,10 @@
     }
   },
   "buttonMatchedSlice": {
-    "subjects": ["altitude.button", "fluent.button"],
+    "subjects": [
+      "altitude.button",
+      "fluent.button"
+    ],
     "legacyContext": {
       "sets": 2,
       "recognisableSets": 1,
@@ -190,7 +195,7 @@
         "recipeReact": "0/2"
       },
       "cellWeighted": {
-        "definition": "each exact source-library×variant×state cell has equal weight",
+        "definition": "each exact source-library\u00d7variant\u00d7state cell has equal weight",
         "legacy": "9/12",
         "recipeReact": "0/12"
       },
@@ -289,7 +294,13 @@
       "@shopify/polaris@13.9.5 TextField"
     ],
     "matrix": {
-      "axes": ["Size", "State", "Content", "Required", "Adornments"],
+      "axes": [
+        "Size",
+        "State",
+        "Content",
+        "Required",
+        "Adornments"
+      ],
       "recipeVariantsPerSource": 128,
       "pairedCellsPerSource": 64,
       "totalSourceCells": 128,
