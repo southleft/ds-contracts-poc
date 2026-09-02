@@ -216,6 +216,41 @@
         "id": "chakra-link",
         "href": "#"
       }
+    },
+    {
+      "__note": "Authored 2026-09-02 (person's step of docs/36). Portal: openDriver {open:true} on TooltipRoot; TooltipTrigger 'Hover' + Portal \u2283 TooltipPositioner \u2283 TooltipContent \u2014 Chakra's documented composition; without the Portal the positioner renders in-stage and the harness's single-root fusion refuses (MULTI-ROOT-CAPTURE, named).",
+      "name": "Tooltip",
+      "importName": "TooltipRoot",
+      "contract": "examples/chakra/contracts-seed/tooltip.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true
+      },
+      "callbackProps": [
+        "onOpenChange"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "TooltipTrigger",
+          "text": "Hover"
+        },
+        {
+          "importName": "Portal",
+          "children": [
+            {
+              "importName": "TooltipPositioner",
+              "children": [
+                {
+                  "importName": "TooltipContent",
+                  "text": "Tooltip copy for the Chakra round."
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,104 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Tooltip capture — portal component; anatomy promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition from the package's flat exports: TooltipRoot ⊃ (TooltipTrigger, TooltipPositioner ⊃ TooltipContent). Authored 2026-09-02 as the person's step of docs/36. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "isolation": "isolate",
+        "position": "absolute",
+        "text-rendering": "optimizelegibility",
+        "transform": "matrix(1, 0, 0, 1, 8, 48)"
+      },
+      "parts": {
+        "label": {
+          "text": "Tooltip copy for the Chakra round.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip__content — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "pointer-events": "none",
+            "text-rendering": "optimizelegibility"
+          },
+          "tokens": {
+            "background-color": "{imported.tooltip.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "box-shadow": "{imported.tooltip.label.box-shadow}",
+            "color": "{imported.tooltip.label.color}",
+            "font-size": "{imported.tooltip.label.font-size}",
+            "font-weight": "{imported.tooltip.label.font-weight}",
+            "line-height": "{imported.tooltip.label.line-height}",
+            "max-width": "{imported.tooltip.label.max-width}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.shared.size-4}",
+            "padding-left": "{imported.tooltip.label.padding-left}",
+            "padding-right": "{imported.tooltip.label.padding-right}",
+            "padding-top": "{imported.shared.size-4}",
+            "tab-size": "{imported.tooltip.label.tab-size}",
+            "z-index": "{imported.tooltip.label.z-index}"
+          },
+          "hugsBelowMaxWidth": true
+        }
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "color": "{imported.tooltip.root.color}",
+        "height": "{imported.tooltip.root.height}",
+        "line-height": "{imported.tooltip.root.line-height}",
+        "min-height": "{imported.shared.size-0}",
+        "tab-size": "{imported.tooltip.root.tab-size}",
+        "translate-x": "{imported.tooltip.root.translate-x}",
+        "translate-y": "{imported.tooltip.root.translate-y}",
+        "width": "{imported.tooltip.root.width}",
+        "z-index": "{imported.tooltip.root.z-index}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "TooltipRoot"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "",
+  "evidence": {
+    "box": {
+      "selector": "idx:0",
+      "why": "div.chakra-tooltip__content is the painted part that carries (or contains) the text: bg rgba(9, 9, 11, 1), padding 4px 10px, radius 4px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "the box carries the text itself",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

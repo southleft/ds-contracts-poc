@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 46,
+  "subjects": 47,
   "passed": 33,
-  "failed": 13,
+  "failed": 14,
   "fringeExcused": 0,
-  "knownFailures": 13,
+  "knownFailures": 14,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -352,6 +352,14 @@
       "canvasPx": "219x28",
       "realPx": "219x28",
       "convergesAt": 250
+    },
+    {
+      "label": "tooltip/chakra",
+      "status": "fail",
+      "pctAAMasked": 8.83,
+      "canvasPx": "216x24",
+      "realPx": "218x24",
+      "convergesAt": null
     },
     {
       "label": "textarea/astryx",

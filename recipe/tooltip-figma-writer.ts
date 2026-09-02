@@ -25,7 +25,9 @@ import {
 
 export const TOOLTIP_FIGMA_NAMESPACE = "ds.contracts.tooltip.recipe.v1";
 export const TOOLTIP_FIGMA_WRITER_VERSION = 1;
-export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v8";
+export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v9";
+/** v8 stay (Chakra Tooltip, captured today through the portal path from a config entry a person wrote) is preserved as evidence and never written again. */
+export const FORBIDDEN_TOOLTIP_V8_PAGE_ID = "218:90912";
 /** v7 stay (proposed AntD, MUI and shadcn tooltips as fourth to sixth sources) is preserved as evidence and never written again. */
 export const FORBIDDEN_TOOLTIP_V7_PAGE_ID = "218:90391";
 /** v6 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
@@ -266,6 +268,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:90912", "marker": "TOOLTIP-V8-PAGE" },
     { "id": "218:90391", "marker": "TOOLTIP-V7-PAGE" },
     { "id": "218:87801", "marker": "TOOLTIP-V6-PAGE" },
     { "id": "218:86308", "marker": "TOOLTIP-V5-PAGE" },

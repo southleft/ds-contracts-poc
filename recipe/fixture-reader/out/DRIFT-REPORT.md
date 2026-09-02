@@ -334,6 +334,12 @@ ledger `extract/computed/out/shadcn/tooltip/captured-truth.json` · 16 facts: **
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### chakra — @chakra-ui/react@3.37.0#Tooltip
+
+ledger `extract/computed/out/chakra/tooltip/captured-truth.json` · 16 facts: **14 match**, **0 drift**, 2 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ### antd — antd@5.29.3#Tooltip
 
 ledger `extract/computed/out/antd/tooltip/captured-truth.json` · 16 facts: **10 match**, **0 drift**, 6 named receipts, 0 unread
@@ -816,6 +822,8 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **tooltip/mui-proposed** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
 - **tooltip/shadcn** `box.height` = `0` — the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug) _[reviewed 0]_
 - **tooltip/shadcn** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **tooltip/chakra** `box.height` = `0` — the tip hugs its text; its captured height is the sample's, not a recipe fact — recipe spelling 0 (hug) _[reviewed 0]_
+- **tooltip/chakra** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
 - **tooltip/antd** `box.height` = `0` — Tooltip hug-contents height is content-dependent — the recipe spells 0 _[reviewed 0]_
 - **tooltip/antd** `rest.boxBorder` = `#00000000` — Tooltip inner draws no painted border — transparent is the recipe spelling _[reviewed #00000000]_
 - **tooltip/antd** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_

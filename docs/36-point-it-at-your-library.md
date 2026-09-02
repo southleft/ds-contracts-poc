@@ -4,10 +4,11 @@
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
 > plugin can run in any file. It works today for **seven archetypes**
-> (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1) and has been proven on **three libraries
-> the recipe path was never taught** — Chakra UI and shadcn — including one control
-> captured for the first time the same day (Chakra's Switch: a person wrote
-> the config entry, the command did the rest, four states pixel-identical).
+> (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1) and has been proven on **libraries
+> the recipe path was never taught** — Chakra UI, shadcn, Altitude, Fluent and
+> Carbon — including six Chakra controls captured for the first time the same
+> day (a person wrote the config entry, the command did the rest; the Switch's
+> four states are pixel-identical).
 > Everything it cannot do refuses by name.
 
 ## The sentence this serves
@@ -102,7 +103,10 @@ captures the archetype under another name is read with `--capture <dir>`
 
 On tooltip@1, a floating component: the proposal names the placement
 wrapper, the arrow and the shadow as refusals read from the capture; AntD
-from its own capture scores the hand row's 3.01%, shadcn 4.73%
+from its own capture scores the hand row's 3.01%, shadcn 4.73%, and Chakra —
+held out, captured through the portal path the same day — is a named
+font-substrate row: Inter resolved exactly and still hugs two columns
+narrower in Figma than in Chromium
 (`recipe/evidence/fidelity-v1/f1-tooltip-proposed/`).
 
 On avatar@1, five captures at once: MUI and AntD from their own captures

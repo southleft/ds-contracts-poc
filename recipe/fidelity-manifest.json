@@ -377,26 +377,34 @@
     },
     {
       "label": "tooltip/antd",
-      "page": "218:90912",
+      "page": "219:92051",
       "component": "tooltip/variant/default :: Ant Design Tooltip",
-      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-default-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-default-shared-v9.png",
       "reference": "extract/computed/out/antd/tooltip/orig-shots/__default.png"
     },
     {
       "label": "tooltip/antd-proposed",
-      "page": "218:90912",
+      "page": "219:92051",
       "component": "tooltip/variant/default :: antd (proposed) Tooltip",
-      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-proposed-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-proposed-default-v9.png",
       "reference": "extract/computed/out/antd/tooltip/orig-shots/__default.png",
       "_proposedWhy": "PROPOSED by propose-tooltip.ts from AntD's own capture (14 read, 0 invented; the box-shadow, the placement wrapper and the arrow named as refusals from the capture) \u2014 beside the hand row that transcribes the same capture. MUI's and shadcn's tooltips are proposed too but their captures predate --keep-originals and the portal re-capture currently crashes (window.__ALL_PROPS), so they have no real render to score yet."
     },
     {
       "label": "tooltip/shadcn",
-      "page": "218:90912",
+      "page": "219:92051",
       "component": "tooltip/variant/default :: shadcn (proposed) Tooltip",
-      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-shadcn-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-shadcn-default-v9.png",
       "reference": "extract/computed/out/shadcn/tooltip/orig-shots/__default.png",
       "_proposedWhy": "HELD OUT: shadcn's tooltip content, proposed from its capture (14 read, 0 invented; placement and arrow named as refusals); re-captured with --keep-originals after the portal re-capture's second sweep was fixed (window.__ALL_PROPS lost on reload). Inter Variable \u2192 Inter Regular is a reviewed, named font fallback. MUI's tooltip cannot be re-captured: its closed-state popper transform is unstable across the determinism double-sweep, so it stays a proposal without a real render."
+    },
+    {
+      "label": "tooltip/chakra",
+      "page": "219:92051",
+      "component": "tooltip/variant/default :: Chakra (proposed) Tooltip",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-chakra-default-v9.png",
+      "reference": "extract/computed/out/chakra/tooltip/orig-shots/__default.png",
+      "_proposedWhy": "HELD OUT, captured today through the portal path (Positioner in a Portal \u2014 the in-stage form was refused by name as multi-root): Chakra's Tooltip, 14 leaves read, 0 invented; placement and arrow refused from the capture."
     },
     {
       "label": "textarea/astryx",

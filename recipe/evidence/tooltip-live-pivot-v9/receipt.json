@@ -1,0 +1,86 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "tooltip-live-pivot-v9-prepare",
+  "teaching": "One named default Tooltip bubble; no shared placement or arrow axis; attachment is receipted",
+  "runIdentity": "3a63b6dc-7f1ebbdc-9f8598fa-f66661d3-825a9a3b-332e14d0-5e0f0a44-tooltip-v9",
+  "pageName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-9f8598fa-f66661d3-825a9a3b-332e14d0-5e0f0a44-tooltip-v9",
+  "namespace": "ds.contracts.tooltip.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "3a63b6dc7436c4c074cf66ad055216512d393e53eb0629553d19158c0cefdb1b",
+    "MUI": "7f1ebbdc3c09befc332e12a761c36d5baaf68d93f72e4a81b28b4ab3b8ba4b0d",
+    "Ant Design": "9f8598fa344d17c79d167ccd2b3231cc8d2094b6b79b182942795998479fb8f2",
+    "antd (proposed)": "f66661d34563c85ec69d0fa8de04083fc8ab8dd2a81c47aecbd65467b37f785c",
+    "mui (proposed)": "825a9a3be0b609b7f4266cc6975d003bae16bfb61eca433d38114490c82f165a",
+    "shadcn (proposed)": "332e14d05e7fc46d6b1f3f24c9b84b140ce5debc44b1370e7c60c38c64a93db2",
+    "Chakra (proposed)": "5e0f0a4455ee8c285ce157bd97d41dff1435879baf9f33fdb89c0e51f6dd43d4"
+  },
+  "writerSha256": "4fd1cdd711cad52eb74e899f31fca6e997059c04c80eb31a1277f0ec7f1cdcc4",
+  "pageId": "219:92051",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-92051",
+  "live": {
+    "recordedFrom": "tooltip-v9-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-9f8598fa-f66661d3-825a9a3b-332e14d0-5e0f0a44-tooltip-v9",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-tooltip-reviewed-v1",
+        "sectionId": "219:92052",
+        "setId": "219:92063",
+        "collectionId": "VariableCollectionId:219:92053",
+        "variantCount": 1,
+        "comparedIrFacts": 16
+      },
+      {
+        "adapterIdentity": "mui-tooltip-reviewed-v1",
+        "sectionId": "219:92066",
+        "setId": "219:92076",
+        "collectionId": "VariableCollectionId:219:92067",
+        "variantCount": 1,
+        "comparedIrFacts": 15
+      },
+      {
+        "adapterIdentity": "antd-tooltip-reviewed-v1",
+        "sectionId": "219:92079",
+        "setId": "219:92090",
+        "collectionId": "VariableCollectionId:219:92080",
+        "variantCount": 1,
+        "comparedIrFacts": 16
+      },
+      {
+        "adapterIdentity": "antd-tooltip-proposed-v1",
+        "sectionId": "219:92093",
+        "setId": "219:92104",
+        "collectionId": "VariableCollectionId:219:92094",
+        "variantCount": 1,
+        "comparedIrFacts": 16
+      },
+      {
+        "adapterIdentity": "mui-tooltip-proposed-v1",
+        "sectionId": "219:92107",
+        "setId": "219:92117",
+        "collectionId": "VariableCollectionId:219:92108",
+        "variantCount": 1,
+        "comparedIrFacts": 15
+      },
+      {
+        "adapterIdentity": "shadcn-tooltip-proposed-v1",
+        "sectionId": "219:92120",
+        "setId": "219:92131",
+        "collectionId": "VariableCollectionId:219:92121",
+        "variantCount": 1,
+        "comparedIrFacts": 16
+      },
+      {
+        "adapterIdentity": "chakra-tooltip-proposed-v1",
+        "sectionId": "219:92134",
+        "setId": "219:92145",
+        "collectionId": "VariableCollectionId:219:92135",
+        "variantCount": 1,
+        "comparedIrFacts": 16
+      }
+    ]
+  }
+}

@@ -23,6 +23,7 @@ import {
 import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
+import { CHAKRA_TOOLTIP_LEDGER, chakraTooltipAdapterConfig, chakraTooltipMappings } from "../fixtures/generated/tooltip.chakra.js";
 import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
 import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
 import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
@@ -819,6 +820,16 @@ const SUBJECTS: Subject[] = [
     tokens: shadcnTooltipProposedConfig.tokens as unknown as Record<string, unknown>,
     mappings: shadcnTooltipProposedMappings,
     extras: extrasFor(shadcnTooltipProposedConfig.tokens as unknown as Record<string, unknown>, shadcnTooltipProposedMappings),
+  },
+  {
+    // PROPOSED from a capture made 2026-09-02 through the portal path (held out).
+    archetype: "tooltip",
+    library: "chakra",
+    source: src(chakraTooltipAdapterConfig),
+    ledgerFile: CHAKRA_TOOLTIP_LEDGER,
+    tokens: chakraTooltipAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraTooltipMappings,
+    extras: extrasFor(chakraTooltipAdapterConfig.tokens as unknown as Record<string, unknown>, chakraTooltipMappings),
   },
   {
     archetype: "tooltip",

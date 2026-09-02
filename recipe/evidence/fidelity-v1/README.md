@@ -401,3 +401,19 @@ screenshots were kept, so it is a proposal without a score, said so.
     avatar/chakra 0.38% · chip/chakra 8.09% (named) · link/chakra proposed, unscored
 
     33 pass · 0 fringe · 13 known
+
+### 2026-09-02 — the fourth Chakra held-out: a tooltip through the portal
+
+Chakra's Tooltip, captured the same day from a config entry a person wrote.
+The in-stage form refused by name as multi-root (the Positioner has to sit
+in a `Portal`); the portal capture kept one real screenshot and the command
+proposed 14 leaves, invented none, and refused placement, arrow and open
+delay from the capture. Minted as tooltip v9's seventh source. Inter Medium
+12px resolved *exact* in Figma and the box is still two columns narrower
+than Chromium's (216 vs 218) — advance widths, not a misread; padding,
+fill, radius and height agree. Named `font-substrate`, the ratchet's 14th
+row. See `f1-tooltip-proposed/`.
+
+    tooltip/chakra 8.83% (named)
+
+    33 pass · 0 fringe · 14 known

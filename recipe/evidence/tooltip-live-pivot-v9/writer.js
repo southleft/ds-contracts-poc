@@ -1,0 +1,399 @@
+const PLAN={"pageName":"Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-9f8598fa-f66661d3-825a9a3b-332e14d0-5e0f0a44-tooltip-v9","runIdentity":"3a63b6dc-7f1ebbdc-9f8598fa-f66661d3-825a9a3b-332e14d0-5e0f0a44-tooltip-v9","sources":[{"adapterIdentity":"astryx-tooltip-reviewed-v1","displayName":"Astryx","sourceName":"Astryx Tooltip","recipeHash":"3a63b6dc7436c4c074cf66ad055216512d393e53eb0629553d19158c0cefdb1b","envelopeHash":"7d141adb91e11238a59ca9119566f63b108bbf6ed67f7a3f01c4ceb47afd24a4","variables":[{"identity":"astryx.tooltip.rest-boxBorder","name":"token/color/id-6173747279782e746f6f6c7469702e726573742d626f78426f72646572","type":"COLOR","value":"#00000000"},{"identity":"astryx.tooltip.rest-boxFill","name":"token/color/id-6173747279782e746f6f6c7469702e726573742d626f7846696c6c","type":"COLOR","value":"#0a1317ff"},{"identity":"astryx.tooltip.rest-label","name":"token/color/id-6173747279782e746f6f6c7469702e726573742d6c6162656c","type":"COLOR","value":"#ffffffff"},{"identity":"astryx.tooltip.box-borderWidth","name":"token/float/id-6173747279782e746f6f6c7469702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"astryx.tooltip.box-paddingX","name":"token/float/id-6173747279782e746f6f6c7469702e626f782d70616464696e6758","type":"FLOAT","value":8},{"identity":"astryx.tooltip.box-paddingY","name":"token/float/id-6173747279782e746f6f6c7469702e626f782d70616464696e6759","type":"FLOAT","value":4},{"identity":"astryx.tooltip.box-radius","name":"token/float/id-6173747279782e746f6f6c7469702e626f782d726164697573","type":"FLOAT","value":12},{"identity":"astryx.tooltip.labelFontSize","name":"token/float/id-6173747279782e746f6f6c7469702e6c6162656c466f6e7453697a65","type":"FLOAT","value":14},{"identity":"astryx.tooltip.labelLineHeight","name":"token/float/id-6173747279782e746f6f6c7469702e6c6162656c4c696e65486569676874","type":"FLOAT","value":20}],"comparedIrFacts":16,"chip":{"label":"Astryx Tooltip","role":"tooltip/variant/default","bindings":[{"field":"layout.padding.top","type":"FLOAT","variable":"astryx.tooltip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"astryx.tooltip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"astryx.tooltip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"astryx.tooltip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"astryx.tooltip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"astryx.tooltip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"astryx.tooltip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"astryx.tooltip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"astryx.tooltip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"astryx.tooltip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"astryx.tooltip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":4,"right":8,"bottom":4,"left":8},"width":{"mode":"hug"},"height":{"mode":"hug"}},"fills":[{"kind":"solid","color":"#0a1317ff"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#00000000"}}],"cornerRadius":{"topLeft":12,"topRight":12,"bottomRight":12,"bottomLeft":12},"variantProperties":{"Default":"true"},"children":[{"label":"tooltip/label","role":"tooltip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"astryx.tooltip.labelFontSize"},{"field":"type.lineHeight.value","type":"FLOAT","variable":"astryx.tooltip.labelLineHeight"},{"field":"fills.0.color","type":"COLOR","variable":"astryx.tooltip.rest-label"}],"kind":"text","characters":"Tooltip","type":{"fontFamily":"SF Pro","fontStyle":"Regular","fontProvenance":{"requestedFamily":"-apple-system","requestedStyle":"Regular","requestSource":"@astryxdesign/core/src/Tooltip/useTooltip.tsx styles.container --text-body-size 14 / --text-body-leading 1.4286 → 20","fallbackChain":[{"family":"-apple-system","style":"Regular"},{"family":"SF Pro","style":"Regular"},{"family":"Segoe UI","style":"Regular"},{"family":"Roboto","style":"Regular"},{"family":"Helvetica","style":"Regular"},{"family":"Arial","style":"Regular"}],"resolvedFamily":"SF Pro","resolvedStyle":"Regular","resolution":"fallback","degradation":"source -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif Regular; Figma cannot load a CSS stack; first named host font is SF Pro Regular"},"fontSize":14,"lineHeight":{"unit":"px","value":20},"textDecoration":"none"},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#ffffffff"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}},{"adapterIdentity":"mui-tooltip-reviewed-v1","displayName":"MUI","sourceName":"MUI Tooltip","recipeHash":"7f1ebbdc3c09befc332e12a761c36d5baaf68d93f72e4a81b28b4ab3b8ba4b0d","envelopeHash":"5a1e83c6896fcf1b12544c3f95a11ded422cbe26b8dbcdc1d4079775c1783862","variables":[{"identity":"mui.tooltip.rest-boxBorder","name":"token/color/id-6d75692e746f6f6c7469702e726573742d626f78426f72646572","type":"COLOR","value":"#00000000"},{"identity":"mui.tooltip.rest-boxFill","name":"token/color/id-6d75692e746f6f6c7469702e726573742d626f7846696c6c","type":"COLOR","value":"#616161eb"},{"identity":"mui.tooltip.rest-label","name":"token/color/id-6d75692e746f6f6c7469702e726573742d6c6162656c","type":"COLOR","value":"#ffffffff"},{"identity":"mui.tooltip.box-borderWidth","name":"token/float/id-6d75692e746f6f6c7469702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"mui.tooltip.box-paddingX","name":"token/float/id-6d75692e746f6f6c7469702e626f782d70616464696e6758","type":"FLOAT","value":8},{"identity":"mui.tooltip.box-paddingY","name":"token/float/id-6d75692e746f6f6c7469702e626f782d70616464696e6759","type":"FLOAT","value":4},{"identity":"mui.tooltip.box-radius","name":"token/float/id-6d75692e746f6f6c7469702e626f782d726164697573","type":"FLOAT","value":4},{"identity":"mui.tooltip.labelFontSize","name":"token/float/id-6d75692e746f6f6c7469702e6c6162656c466f6e7453697a65","type":"FLOAT","value":11}],"comparedIrFacts":15,"chip":{"label":"MUI Tooltip","role":"tooltip/variant/default","bindings":[{"field":"layout.padding.top","type":"FLOAT","variable":"mui.tooltip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"mui.tooltip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"mui.tooltip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"mui.tooltip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"mui.tooltip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"mui.tooltip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"mui.tooltip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"mui.tooltip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"mui.tooltip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"mui.tooltip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"mui.tooltip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":4,"right":8,"bottom":4,"left":8},"width":{"mode":"hug"},"height":{"mode":"hug"}},"fills":[{"kind":"solid","color":"#616161eb"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#00000000"}}],"cornerRadius":{"topLeft":4,"topRight":4,"bottomRight":4,"bottomLeft":4},"variantProperties":{"Default":"true"},"children":[{"label":"tooltip/label","role":"tooltip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"mui.tooltip.labelFontSize"},{"field":"fills.0.color","type":"COLOR","variable":"mui.tooltip.rest-label"}],"kind":"text","characters":"Tooltip","type":{"fontFamily":"Roboto","fontStyle":"Medium","fontProvenance":{"requestedFamily":"Roboto","requestedStyle":"Medium","requestSource":"recipe/sandboxes/input-field-mui/node_modules/@mui/material/Tooltip/Tooltip.js fontSize pxToRem(11), fontWeightMedium 500","fallbackChain":[{"family":"Roboto","style":"Medium"},{"family":"Helvetica","style":"Bold"},{"family":"Arial","style":"Bold"}],"resolvedFamily":"Roboto","resolvedStyle":"Medium","resolution":"requested"},"fontSize":11,"lineHeight":{"unit":"auto"},"textDecoration":"none"},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#ffffffff"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}},{"adapterIdentity":"antd-tooltip-reviewed-v1","displayName":"Ant Design","sourceName":"Ant Design Tooltip","recipeHash":"9f8598fa344d17c79d167ccd2b3231cc8d2094b6b79b182942795998479fb8f2","envelopeHash":"ac75b5c12ca4c08a8289f9a6a18f53394198b3a786790174a78e3853b4590159","variables":[{"identity":"antd.tooltip.rest-boxBorder","name":"token/color/id-616e74642e746f6f6c7469702e726573742d626f78426f72646572","type":"COLOR","value":"#00000000"},{"identity":"antd.tooltip.rest-boxFill","name":"token/color/id-616e74642e746f6f6c7469702e726573742d626f7846696c6c","type":"COLOR","value":"#000000d9"},{"identity":"antd.tooltip.rest-label","name":"token/color/id-616e74642e746f6f6c7469702e726573742d6c6162656c","type":"COLOR","value":"#ffffffff"},{"identity":"antd.tooltip.box-borderWidth","name":"token/float/id-616e74642e746f6f6c7469702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"antd.tooltip.box-paddingX","name":"token/float/id-616e74642e746f6f6c7469702e626f782d70616464696e6758","type":"FLOAT","value":8},{"identity":"antd.tooltip.box-paddingY","name":"token/float/id-616e74642e746f6f6c7469702e626f782d70616464696e6759","type":"FLOAT","value":6},{"identity":"antd.tooltip.box-radius","name":"token/float/id-616e74642e746f6f6c7469702e626f782d726164697573","type":"FLOAT","value":6},{"identity":"antd.tooltip.labelFontSize","name":"token/float/id-616e74642e746f6f6c7469702e6c6162656c466f6e7453697a65","type":"FLOAT","value":14},{"identity":"antd.tooltip.labelLineHeight","name":"token/float/id-616e74642e746f6f6c7469702e6c6162656c4c696e65486569676874","type":"FLOAT","value":22}],"comparedIrFacts":16,"chip":{"label":"Ant Design Tooltip","role":"tooltip/variant/default","bindings":[{"field":"layout.padding.top","type":"FLOAT","variable":"antd.tooltip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"antd.tooltip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"antd.tooltip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"antd.tooltip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"antd.tooltip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"antd.tooltip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"antd.tooltip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"antd.tooltip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"antd.tooltip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"antd.tooltip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"antd.tooltip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":6,"right":8,"bottom":6,"left":8},"width":{"mode":"hug"},"height":{"mode":"hug"}},"fills":[{"kind":"solid","color":"#000000d9"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#00000000"}}],"cornerRadius":{"topLeft":6,"topRight":6,"bottomRight":6,"bottomLeft":6},"variantProperties":{"Default":"true"},"children":[{"label":"tooltip/label","role":"tooltip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"antd.tooltip.labelFontSize"},{"field":"type.lineHeight.value","type":"FLOAT","variable":"antd.tooltip.labelLineHeight"},{"field":"fills.0.color","type":"COLOR","variable":"antd.tooltip.rest-label"}],"kind":"text","characters":"Tooltip text","type":{"fontFamily":"SF Pro","fontStyle":"Regular","fontProvenance":{"requestedFamily":"-apple-system","requestedStyle":"Regular","requestSource":"antd/es/tooltip/style/index.js resetComponent; seed fontSize 14; lineHeight 1.5714 → 22","fallbackChain":[{"family":"-apple-system","style":"Regular"},{"family":"SF Pro","style":"Regular"},{"family":"Segoe UI","style":"Regular"},{"family":"Roboto","style":"Regular"},{"family":"Helvetica Neue","style":"Regular"},{"family":"Arial","style":"Regular"}],"resolvedFamily":"SF Pro","resolvedStyle":"Regular","resolution":"fallback","degradation":"antd --font-family is a CSS stack; Figma cannot load it; first named host font is SF Pro Regular"},"fontSize":14,"lineHeight":{"unit":"px","value":22},"textDecoration":"none"},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#ffffffff"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}},{"adapterIdentity":"antd-tooltip-proposed-v1","displayName":"antd (proposed)","sourceName":"antd (proposed) Tooltip","recipeHash":"f66661d34563c85ec69d0fa8de04083fc8ab8dd2a81c47aecbd65467b37f785c","envelopeHash":"243b4c00c2acb9f3e4e3677cd8cca44cdf1b5abc841988ad2e09d734ce615607","variables":[{"identity":"antd.tooltip.rest-boxBorder","name":"token/color/id-616e74642e746f6f6c7469702e726573742d626f78426f72646572","type":"COLOR","value":"#ffffffff"},{"identity":"antd.tooltip.rest-boxFill","name":"token/color/id-616e74642e746f6f6c7469702e726573742d626f7846696c6c","type":"COLOR","value":"#000000d9"},{"identity":"antd.tooltip.rest-label","name":"token/color/id-616e74642e746f6f6c7469702e726573742d6c6162656c","type":"COLOR","value":"#ffffffff"},{"identity":"antd.tooltip.box-borderWidth","name":"token/float/id-616e74642e746f6f6c7469702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"antd.tooltip.box-paddingX","name":"token/float/id-616e74642e746f6f6c7469702e626f782d70616464696e6758","type":"FLOAT","value":8},{"identity":"antd.tooltip.box-paddingY","name":"token/float/id-616e74642e746f6f6c7469702e626f782d70616464696e6759","type":"FLOAT","value":6},{"identity":"antd.tooltip.box-radius","name":"token/float/id-616e74642e746f6f6c7469702e626f782d726164697573","type":"FLOAT","value":6},{"identity":"antd.tooltip.labelFontSize","name":"token/float/id-616e74642e746f6f6c7469702e6c6162656c466f6e7453697a65","type":"FLOAT","value":14},{"identity":"antd.tooltip.labelLineHeight","name":"token/float/id-616e74642e746f6f6c7469702e6c6162656c4c696e65486569676874","type":"FLOAT","value":22}],"comparedIrFacts":16,"chip":{"label":"antd (proposed) Tooltip","role":"tooltip/variant/default","bindings":[{"field":"layout.padding.top","type":"FLOAT","variable":"antd.tooltip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"antd.tooltip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"antd.tooltip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"antd.tooltip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"antd.tooltip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"antd.tooltip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"antd.tooltip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"antd.tooltip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"antd.tooltip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"antd.tooltip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"antd.tooltip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":6,"right":8,"bottom":6,"left":8},"width":{"mode":"hug"},"height":{"mode":"hug"}},"fills":[{"kind":"solid","color":"#000000d9"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#ffffffff"}}],"cornerRadius":{"topLeft":6,"topRight":6,"bottomRight":6,"bottomLeft":6},"variantProperties":{"Default":"true"},"children":[{"label":"tooltip/label","role":"tooltip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"antd.tooltip.labelFontSize"},{"field":"type.lineHeight.value","type":"FLOAT","variable":"antd.tooltip.labelLineHeight"},{"field":"fills.0.color","type":"COLOR","variable":"antd.tooltip.rest-label"}],"kind":"text","characters":"Tooltip text","type":{"fontFamily":"Roboto","fontStyle":"Regular","fontProvenance":{"requestedFamily":"Roboto","requestedStyle":"Regular","requestSource":"extract/computed/out/antd/tooltip/captured-truth.json label font-family/font-weight: Roboto, Helvetica, Arial, sans-serif / Regular","fallbackChain":[{"family":"Roboto","style":"Regular"},{"family":"Roboto","style":"Regular"}],"resolvedFamily":"Roboto","resolvedStyle":"Regular","resolution":"requested"},"fontSize":14,"lineHeight":{"unit":"px","value":22},"textDecoration":"none"},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#ffffffff"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}},{"adapterIdentity":"mui-tooltip-proposed-v1","displayName":"mui (proposed)","sourceName":"mui (proposed) Tooltip","recipeHash":"825a9a3be0b609b7f4266cc6975d003bae16bfb61eca433d38114490c82f165a","envelopeHash":"f0d41f650ebf922bd33b25bad2ccc4518a4e8d12932c83b9976fb173ec747cd9","variables":[{"identity":"mui.tooltip.rest-boxBorder","name":"token/color/id-6d75692e746f6f6c7469702e726573742d626f78426f72646572","type":"COLOR","value":"#ffffffff"},{"identity":"mui.tooltip.rest-boxFill","name":"token/color/id-6d75692e746f6f6c7469702e726573742d626f7846696c6c","type":"COLOR","value":"#616161eb"},{"identity":"mui.tooltip.rest-label","name":"token/color/id-6d75692e746f6f6c7469702e726573742d6c6162656c","type":"COLOR","value":"#ffffffff"},{"identity":"mui.tooltip.box-borderWidth","name":"token/float/id-6d75692e746f6f6c7469702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"mui.tooltip.box-paddingX","name":"token/float/id-6d75692e746f6f6c7469702e626f782d70616464696e6758","type":"FLOAT","value":8},{"identity":"mui.tooltip.box-paddingY","name":"token/float/id-6d75692e746f6f6c7469702e626f782d70616464696e6759","type":"FLOAT","value":4},{"identity":"mui.tooltip.box-radius","name":"token/float/id-6d75692e746f6f6c7469702e626f782d726164697573","type":"FLOAT","value":4},{"identity":"mui.tooltip.labelFontSize","name":"token/float/id-6d75692e746f6f6c7469702e6c6162656c466f6e7453697a65","type":"FLOAT","value":11}],"comparedIrFacts":15,"chip":{"label":"mui (proposed) Tooltip","role":"tooltip/variant/default","bindings":[{"field":"layout.padding.top","type":"FLOAT","variable":"mui.tooltip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"mui.tooltip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"mui.tooltip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"mui.tooltip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"mui.tooltip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"mui.tooltip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"mui.tooltip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"mui.tooltip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"mui.tooltip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"mui.tooltip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"mui.tooltip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":4,"right":8,"bottom":4,"left":8},"width":{"mode":"hug"},"height":{"mode":"hug"}},"fills":[{"kind":"solid","color":"#616161eb"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#ffffffff"}}],"cornerRadius":{"topLeft":4,"topRight":4,"bottomRight":4,"bottomLeft":4},"variantProperties":{"Default":"true"},"children":[{"label":"tooltip/label","role":"tooltip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"mui.tooltip.labelFontSize"},{"field":"fills.0.color","type":"COLOR","variable":"mui.tooltip.rest-label"}],"kind":"text","characters":"Tooltip text","type":{"fontFamily":"Roboto","fontStyle":"Medium","fontProvenance":{"requestedFamily":"Roboto","requestedStyle":"Medium","requestSource":"extract/computed/out/mui/tooltip/captured-truth.json label font-family/font-weight: Roboto, Helvetica, Arial, sans-serif / Medium","fallbackChain":[{"family":"Roboto","style":"Medium"},{"family":"Roboto","style":"Medium"}],"resolvedFamily":"Roboto","resolvedStyle":"Medium","resolution":"requested"},"fontSize":11,"lineHeight":{"unit":"auto"},"textDecoration":"none"},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#ffffffff"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}},{"adapterIdentity":"shadcn-tooltip-proposed-v1","displayName":"shadcn (proposed)","sourceName":"shadcn (proposed) Tooltip","recipeHash":"332e14d05e7fc46d6b1f3f24c9b84b140ce5debc44b1370e7c60c38c64a93db2","envelopeHash":"187849129ebac31edf6a37b124a2b73682d555d539581ce12bd37fa046a72c17","variables":[{"identity":"shadcn.tooltip.rest-boxBorder","name":"token/color/id-73686164636e2e746f6f6c7469702e726573742d626f78426f72646572","type":"COLOR","value":"#e5e5e5ff"},{"identity":"shadcn.tooltip.rest-boxFill","name":"token/color/id-73686164636e2e746f6f6c7469702e726573742d626f7846696c6c","type":"COLOR","value":"#0a0a0aff"},{"identity":"shadcn.tooltip.rest-label","name":"token/color/id-73686164636e2e746f6f6c7469702e726573742d6c6162656c","type":"COLOR","value":"#ffffffff"},{"identity":"shadcn.tooltip.box-borderWidth","name":"token/float/id-73686164636e2e746f6f6c7469702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"shadcn.tooltip.box-paddingX","name":"token/float/id-73686164636e2e746f6f6c7469702e626f782d70616464696e6758","type":"FLOAT","value":12},{"identity":"shadcn.tooltip.box-paddingY","name":"token/float/id-73686164636e2e746f6f6c7469702e626f782d70616464696e6759","type":"FLOAT","value":6},{"identity":"shadcn.tooltip.box-radius","name":"token/float/id-73686164636e2e746f6f6c7469702e626f782d726164697573","type":"FLOAT","value":8},{"identity":"shadcn.tooltip.labelFontSize","name":"token/float/id-73686164636e2e746f6f6c7469702e6c6162656c466f6e7453697a65","type":"FLOAT","value":12},{"identity":"shadcn.tooltip.labelLineHeight","name":"token/float/id-73686164636e2e746f6f6c7469702e6c6162656c4c696e65486569676874","type":"FLOAT","value":16}],"comparedIrFacts":16,"chip":{"label":"shadcn (proposed) Tooltip","role":"tooltip/variant/default","bindings":[{"field":"layout.padding.top","type":"FLOAT","variable":"shadcn.tooltip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"shadcn.tooltip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"shadcn.tooltip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"shadcn.tooltip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"shadcn.tooltip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"shadcn.tooltip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"shadcn.tooltip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"shadcn.tooltip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"shadcn.tooltip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"shadcn.tooltip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"shadcn.tooltip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":6,"right":12,"bottom":6,"left":12},"width":{"mode":"hug"},"height":{"mode":"hug"}},"fills":[{"kind":"solid","color":"#0a0a0aff"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#e5e5e5ff"}}],"cornerRadius":{"topLeft":8,"topRight":8,"bottomRight":8,"bottomLeft":8},"variantProperties":{"Default":"true"},"children":[{"label":"tooltip/label","role":"tooltip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"shadcn.tooltip.labelFontSize"},{"field":"type.lineHeight.value","type":"FLOAT","variable":"shadcn.tooltip.labelLineHeight"},{"field":"fills.0.color","type":"COLOR","variable":"shadcn.tooltip.rest-label"}],"kind":"text","characters":"Tooltip copy for the shadcn round.","type":{"fontFamily":"Inter","fontStyle":"Regular","fontProvenance":{"requestedFamily":"Inter Variable","requestedStyle":"Regular","requestSource":"extract/computed/out/shadcn/tooltip/captured-truth.json label font-family/font-weight: \"Inter Variable\", sans-serif / Regular; reviewed fallback: \"Inter Variable\" is @fontsource-variable/inter's family name for Inter (the sandbox's index.css imports it); Figma names the same face Inter — reviewed fallback to Inter Regular","fallbackChain":[{"family":"Inter Variable","style":"Regular"},{"family":"Inter","style":"Regular"}],"resolvedFamily":"Inter","resolvedStyle":"Regular","resolution":"fallback","degradation":"the requested face Inter Variable Regular is not on the minting machine; minted with Inter Regular — \"Inter Variable\" is @fontsource-variable/inter's family name for Inter (the sandbox's index.css imports it); Figma names the same face Inter — reviewed fallback to Inter Regular"},"fontSize":12,"lineHeight":{"unit":"px","value":16},"textDecoration":"none"},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#ffffffff"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}},{"adapterIdentity":"chakra-tooltip-proposed-v1","displayName":"Chakra (proposed)","sourceName":"Chakra (proposed) Tooltip","recipeHash":"5e0f0a4455ee8c285ce157bd97d41dff1435879baf9f33fdb89c0e51f6dd43d4","envelopeHash":"9892d8288ecb1e592a964f4112e9207c877b56259d1c2433bff726f3e060cbd3","variables":[{"identity":"chakra.tooltip.rest-boxBorder","name":"token/color/id-6368616b72612e746f6f6c7469702e726573742d626f78426f72646572","type":"COLOR","value":"#e4e4e7ff"},{"identity":"chakra.tooltip.rest-boxFill","name":"token/color/id-6368616b72612e746f6f6c7469702e726573742d626f7846696c6c","type":"COLOR","value":"#09090bff"},{"identity":"chakra.tooltip.rest-label","name":"token/color/id-6368616b72612e746f6f6c7469702e726573742d6c6162656c","type":"COLOR","value":"#fafafaff"},{"identity":"chakra.tooltip.box-borderWidth","name":"token/float/id-6368616b72612e746f6f6c7469702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"chakra.tooltip.box-paddingX","name":"token/float/id-6368616b72612e746f6f6c7469702e626f782d70616464696e6758","type":"FLOAT","value":10},{"identity":"chakra.tooltip.box-paddingY","name":"token/float/id-6368616b72612e746f6f6c7469702e626f782d70616464696e6759","type":"FLOAT","value":4},{"identity":"chakra.tooltip.box-radius","name":"token/float/id-6368616b72612e746f6f6c7469702e626f782d726164697573","type":"FLOAT","value":4},{"identity":"chakra.tooltip.labelFontSize","name":"token/float/id-6368616b72612e746f6f6c7469702e6c6162656c466f6e7453697a65","type":"FLOAT","value":12},{"identity":"chakra.tooltip.labelLineHeight","name":"token/float/id-6368616b72612e746f6f6c7469702e6c6162656c4c696e65486569676874","type":"FLOAT","value":16}],"comparedIrFacts":16,"chip":{"label":"Chakra (proposed) Tooltip","role":"tooltip/variant/default","bindings":[{"field":"layout.padding.top","type":"FLOAT","variable":"chakra.tooltip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"chakra.tooltip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"chakra.tooltip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"chakra.tooltip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"chakra.tooltip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"chakra.tooltip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"chakra.tooltip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"chakra.tooltip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"chakra.tooltip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"chakra.tooltip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"chakra.tooltip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":4,"right":10,"bottom":4,"left":10},"width":{"mode":"hug"},"height":{"mode":"hug"}},"fills":[{"kind":"solid","color":"#09090bff"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#e4e4e7ff"}}],"cornerRadius":{"topLeft":4,"topRight":4,"bottomRight":4,"bottomLeft":4},"variantProperties":{"Default":"true"},"children":[{"label":"tooltip/label","role":"tooltip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"chakra.tooltip.labelFontSize"},{"field":"type.lineHeight.value","type":"FLOAT","variable":"chakra.tooltip.labelLineHeight"},{"field":"fills.0.color","type":"COLOR","variable":"chakra.tooltip.rest-label"}],"kind":"text","characters":"Tooltip copy for the Chakra round.","type":{"fontFamily":"Inter","fontStyle":"Medium","fontProvenance":{"requestedFamily":"Inter","requestedStyle":"Medium","requestSource":"extract/computed/out/chakra/tooltip/captured-truth.json label font-family/font-weight: Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Ap / Medium","fallbackChain":[{"family":"Inter","style":"Medium"},{"family":"Inter","style":"Medium"}],"resolvedFamily":"Inter","resolvedStyle":"Medium","resolution":"requested"},"fontSize":12,"lineHeight":{"unit":"px","value":16},"textDecoration":"none"},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#fafafaff"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}}]};
+const NS="ds.contracts.tooltip.recipe.v1";
+const WRITER_VERSION="1";
+const PAGE_OWNER="recipe/tooltip/"+PLAN.runIdentity;
+void "TOOLTIP-WRITER-SHARED-RUNTIME";
+if(NS==="ds.contracts.input.recipe.v5"||PLAN.runIdentity==="4a074b24-e8503dd5-input-v5")throw new Error("TOOLTIP-INPUT-IDENTITY-REUSE");
+if(NS==="ds.contracts.combobox.recipe.v1"||PLAN.runIdentity==="70c24cbd-d27f2e85-combobox-v1")throw new Error("TOOLTIP-COMBOBOX-IDENTITY-REUSE");
+if(NS==="ds.contracts.table.recipe.v1")throw new Error("TOOLTIP-TABLE-IDENTITY-REUSE");
+if(NS==="ds.contracts.calendar.recipe.v1")throw new Error("TOOLTIP-CALENDAR-IDENTITY-REUSE");
+if(NS==="ds.contracts.checkbox.recipe.v1")throw new Error("TOOLTIP-CHECKBOX-IDENTITY-REUSE");
+if(NS==="ds.contracts.radio.recipe.v1")throw new Error("TOOLTIP-RADIO-IDENTITY-REUSE");
+if(NS==="ds.contracts.switch.recipe.v1")throw new Error("TOOLTIP-SWITCH-IDENTITY-REUSE");
+if(NS==="ds.contracts.textarea.recipe.v1")throw new Error("TOOLTIP-TEXTAREA-IDENTITY-REUSE");
+if(NS==="ds.contracts.alert.recipe.v1")throw new Error("TOOLTIP-ALERT-IDENTITY-REUSE");
+if(NS==="ds.contracts.chip.recipe.v1")throw new Error("TOOLTIP-CHIP-IDENTITY-REUSE");
+if(NS==="ds.contracts.badge.recipe.v1")throw new Error("TOOLTIP-BADGE-IDENTITY-REUSE");
+if(NS==="ds.contracts.avatar.recipe.v1")throw new Error("TOOLTIP-AVATAR-IDENTITY-REUSE");
+if(NS==="ds.contracts.link.recipe.v1")throw new Error("TOOLTIP-LINK-IDENTITY-REUSE");
+const EXPECTED_FILE_KEY="byMp6lt0Ij9b2QbkDGFwBh",EXPECTED_FILE_NAME="Scratch Project";
+if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
+if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
+if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V8-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V7-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V6-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V5-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V4-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V3-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V2-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-INPUT-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V1-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-COMBOBOX-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-COMBOBOX-V42-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-BUTTON-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-PRESERVED-BUTTON-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TABLE-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-CALENDAR-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-CHECKBOX-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-RADIO-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-SWITCH-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-TEXTAREA-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-ALERT-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-CHIP-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-BADGE-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-AVATAR-PAGE";
+void "TOOLTIP-MUST-NOT-WRITE-LINK-PAGE";
+if(figma.currentPage&&figma.currentPage.id==="218:90912")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V8-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="218:90391")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V7-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="218:87801")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V6-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="218:86308")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V5-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="218:84826")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V4-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="212:81271")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V3-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="209:79907")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V2-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("TOOLTIP-MUST-NOT-WRITE-INPUT-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:76151")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V1-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("TOOLTIP-MUST-NOT-WRITE-COMBOBOX-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("TOOLTIP-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:69150")throw new Error("TOOLTIP-MUST-NOT-WRITE-BUTTON-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="85:6781")throw new Error("TOOLTIP-MUST-NOT-WRITE-PRESERVED-BUTTON-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="173:48924")throw new Error("TOOLTIP-MUST-NOT-WRITE-TABLE-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="181:64873")throw new Error("TOOLTIP-MUST-NOT-WRITE-CALENDAR-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:74742")throw new Error("TOOLTIP-MUST-NOT-WRITE-CHECKBOX-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75031")throw new Error("TOOLTIP-MUST-NOT-WRITE-RADIO-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75302")throw new Error("TOOLTIP-MUST-NOT-WRITE-SWITCH-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75495")throw new Error("TOOLTIP-MUST-NOT-WRITE-TEXTAREA-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75801")throw new Error("TOOLTIP-MUST-NOT-WRITE-ALERT-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75976")throw new Error("TOOLTIP-MUST-NOT-WRITE-CHIP-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:76022")throw new Error("TOOLTIP-MUST-NOT-WRITE-BADGE-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:76063")throw new Error("TOOLTIP-MUST-NOT-WRITE-AVATAR-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:76109")throw new Error("TOOLTIP-MUST-NOT-WRITE-LINK-PAGE");
+await figma.loadAllPagesAsync();
+const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
+const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
+let page=figma.root.children.find(candidate=>candidate.name===PLAN.pageName);
+const createdNodeIds=[],mutatedNodeIds=[];
+if(page){
+  if(getSharedData(page,"pageOwner")!==PAGE_OWNER)throw new Error("TOOLTIP-PAGE-OWNERSHIP-COLLISION:"+page.id);
+  if(getSharedData(page,"runIdentity")!==PLAN.runIdentity)throw new Error("TOOLTIP-PAGE-IDENTITY-MISMATCH:"+page.id);
+}else{
+  page=figma.createPage();page.name=PLAN.pageName;createdNodeIds.push(page.id);
+}
+if(page.id==="218:90912")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V8-PAGE");
+if(page.id==="218:90391")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V7-PAGE");
+if(page.id==="218:87801")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V6-PAGE");
+if(page.id==="218:86308")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V5-PAGE");
+if(page.id==="218:84826")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V4-PAGE");
+if(page.id==="212:81271")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V3-PAGE");
+if(page.id==="209:79907")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V2-PAGE");
+if(page.id==="115:295378")throw new Error("TOOLTIP-MUST-NOT-WRITE-INPUT-PAGE");
+if(page.id==="183:76151")throw new Error("TOOLTIP-MUST-NOT-WRITE-TOOLTIP-V1-PAGE");
+if(page.id==="163:35981")throw new Error("TOOLTIP-MUST-NOT-WRITE-COMBOBOX-PAGE");
+if(page.id==="183:70641")throw new Error("TOOLTIP-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
+if(page.id==="183:69150")throw new Error("TOOLTIP-MUST-NOT-WRITE-BUTTON-PAGE");
+if(page.id==="85:6781")throw new Error("TOOLTIP-MUST-NOT-WRITE-PRESERVED-BUTTON-PAGE");
+if(page.id==="173:48924")throw new Error("TOOLTIP-MUST-NOT-WRITE-TABLE-PAGE");
+if(page.id==="181:64873")throw new Error("TOOLTIP-MUST-NOT-WRITE-CALENDAR-PAGE");
+if(page.id==="183:74742")throw new Error("TOOLTIP-MUST-NOT-WRITE-CHECKBOX-PAGE");
+if(page.id==="183:75031")throw new Error("TOOLTIP-MUST-NOT-WRITE-RADIO-PAGE");
+if(page.id==="183:75302")throw new Error("TOOLTIP-MUST-NOT-WRITE-SWITCH-PAGE");
+if(page.id==="183:75495")throw new Error("TOOLTIP-MUST-NOT-WRITE-TEXTAREA-PAGE");
+if(page.id==="183:75801")throw new Error("TOOLTIP-MUST-NOT-WRITE-ALERT-PAGE");
+if(page.id==="183:75976")throw new Error("TOOLTIP-MUST-NOT-WRITE-CHIP-PAGE");
+if(page.id==="183:76022")throw new Error("TOOLTIP-MUST-NOT-WRITE-BADGE-PAGE");
+if(page.id==="183:76063")throw new Error("TOOLTIP-MUST-NOT-WRITE-AVATAR-PAGE");
+if(page.id==="183:76109")throw new Error("TOOLTIP-MUST-NOT-WRITE-LINK-PAGE");
+await figma.setCurrentPageAsync(page);
+setSharedData(page,"pageOwner",PAGE_OWNER);
+setSharedData(page,"runIdentity",PLAN.runIdentity);
+setSharedData(page,"writerVersion",WRITER_VERSION);
+mutatedNodeIds.push(page.id);
+const rgba=hex=>({r:parseInt(hex.slice(1,3),16)/255,g:parseInt(hex.slice(3,5),16)/255,b:parseInt(hex.slice(5,7),16)/255,a:parseInt(hex.slice(7,9),16)/255});
+const paint=hex=>{const value=rgba(hex);return{type:"SOLID",color:{r:value.r,g:value.g,b:value.b},opacity:value.a};};
+const allFonts=await figma.listAvailableFontsAsync();
+// A font STYLE name is compared without case or spacing: foundries spell the
+// same face "SemiBold", "Semibold" and "Semi Bold", and a fixture read from a
+// CSS font-weight cannot know which spelling this machine's file uses.
+const sameStyle=(a,b)=>String(a).toLowerCase().replace(/[s_-]/g,"")===String(b).toLowerCase().replace(/[s_-]/g,"");
+const resolveFont=spec=>{
+  const found=spec.fallbackChain.map(candidate=>allFonts.find(font=>font.fontName.family===candidate.family&&sameStyle(font.fontName.style,candidate.style))).find(Boolean);
+  if(!found)throw new Error("TOOLTIP-FONT-UNAVAILABLE:"+spec.requestedFamily+":"+spec.requestedStyle);
+  const resolution=found.fontName.family===spec.requestedFamily&&sameStyle(found.fontName.style,spec.requestedStyle)?"requested":"fallback";
+  if(found.fontName.family!==spec.resolvedFamily||!sameStyle(found.fontName.style,spec.resolvedStyle)||resolution!==spec.resolution)throw new Error("TOOLTIP-FONT-PROVENANCE-TAMPER:"+found.fontName.family+":"+found.fontName.style);
+  if(resolution==="fallback"&&!spec.degradation)throw new Error("TOOLTIP-FONT-FALLBACK-WITHOUT-DEGRADATION");
+  return found.fontName;
+};
+const summaries=[];
+let nextSectionX=0;
+for(const child of page.children){
+  if(child.type==="SECTION")nextSectionX=Math.max(nextSectionX,child.x+child.width+240);
+}
+for(const source of PLAN.sources){
+  const existingSection=page.children.find(node=>node.type==="SECTION"&&getSharedData(node,"adapterIdentity")===source.adapterIdentity&&getSharedData(node,"recipeHash")===source.recipeHash);
+  if(existingSection)throw new Error("TOOLTIP-SECTION-EXISTS:"+source.adapterIdentity+":"+existingSection.id);
+  const section=figma.createSection();
+  section.name="Recipe Pivot / "+source.displayName+" / "+source.recipeHash.slice(0,8);
+  section.x=nextSectionX;section.y=0;page.appendChild(section);
+  setSharedData(section,"adapterIdentity",source.adapterIdentity);
+  setSharedData(section,"recipeHash",source.recipeHash);
+  createdNodeIds.push(section.id);
+  const collectionName="Recipe Tooltip / "+PLAN.runIdentity+" / "+source.adapterIdentity;
+  const localCollections=figma.variables.getLocalVariableCollectionsAsync?await figma.variables.getLocalVariableCollectionsAsync():[];
+  if(localCollections.some(candidate=>candidate.name===collectionName))throw new Error("TOOLTIP-VARIABLE-COLLECTION-COLLISION:"+collectionName);
+  const collection=figma.variables.createVariableCollection(collectionName);
+  setSharedData(collection,"collectionOwner",PAGE_OWNER+"/variable-collection");
+  setSharedData(collection,"runIdentity",PLAN.runIdentity);
+  setSharedData(collection,"adapterIdentity",source.adapterIdentity);
+  collection.renameMode(collection.modes[0].modeId,"Default");
+  collection.hiddenFromPublishing=true;
+  setSharedData(section,"variableCollectionId",collection.id);
+  const modeId=collection.modes[0].modeId,variables=new Map();
+  for(const planned of source.variables){
+    const variable=figma.variables.createVariable(planned.name,collection,planned.type);
+    variable.scopes=["ALL_SCOPES"];
+    variable.setValueForMode(modeId,planned.type==="COLOR"?rgba(planned.value):planned.value);
+    variable.setVariableCodeSyntax("WEB","var(--"+planned.identity.replace(/[^a-zA-Z0-9_-]+/g,"-").toLowerCase()+")");
+    variables.set(planned.type+":"+planned.identity,variable);
+  }
+  const boundPaint=(hex,binding)=>{
+    const base=paint(hex);
+    if(!binding)return base;
+    const variable=variables.get("COLOR:"+binding.variable);
+    if(!variable)throw new Error("MISSING-COLOR-VARIABLE:"+binding.variable);
+    return figma.variables.setBoundVariableForPaint(base,"color",variable);
+  };
+  const bindFloat=(node,field,binding)=>{
+    if(!binding)return;
+    const variable=variables.get("FLOAT:"+binding.variable);
+    if(!variable)throw new Error("MISSING-FLOAT-VARIABLE:"+binding.variable);
+    node.setBoundVariable(field,variable);
+  };
+  const bindingFor=(ir,field)=>(ir.bindings||[]).find(binding=>binding.field===field);
+  const tag=(node,ir,ownershipKey)=>{
+    setSharedData(node,"runIdentity",PLAN.runIdentity);
+    setSharedData(node,"adapterIdentity",source.adapterIdentity);
+    setSharedData(node,"recipeHash",source.recipeHash);
+    setSharedData(node,"envelopeHash",source.envelopeHash);
+    setSharedData(node,"ownershipKey",ownershipKey);
+  };
+  const applyPaints=(node,ir)=>{
+    if(ir.fills)node.fills=ir.fills.map((entry,index)=>boundPaint(entry.color,bindingFor(ir,"fills."+index+".color")));
+    if(ir.strokes){
+      node.strokes=ir.strokes.map((entry,index)=>boundPaint(entry.paint.color,bindingFor(ir,"strokes."+index+".paint.color")));
+      if(ir.strokes[0]){
+        node.strokeWeight=ir.strokes[0].weight;node.strokeAlign=ir.strokes[0].align.toUpperCase();
+        if(ir.strokes[0].dashPattern)node.dashPattern=ir.strokes[0].dashPattern;
+        bindFloat(node,"strokeWeight",bindingFor(ir,"strokes.0.weight"));
+      }
+    }else if(ir.kind==="vector"){node.strokes=[];}
+    if(ir.cornerRadius){
+      for(const [irKey,figmaKey] of [["topLeft","topLeftRadius"],["topRight","topRightRadius"],["bottomRight","bottomRightRadius"],["bottomLeft","bottomLeftRadius"]]){
+        node[figmaKey]=ir.cornerRadius[irKey];bindFloat(node,figmaKey,bindingFor(ir,"cornerRadius."+irKey));
+      }
+    }
+    void "TOOLTIP-WRITER-EFFECTS";
+    if(ir.effects){
+      // A CSS box-shadow never paints under its own box. Figma's
+      // showShadowBehindNode=true paints it there — visible through a
+      // translucent fill (shadcn's unchecked checkbox) — but Figma renders a
+      // knocked-out shadow (false) markedly DARKER than Chromium outside the
+      // node (MUI switch thumb tail, measured: 73/76/84/88 vs real 27/37/44/54;
+      // behind=true gave 45/51/71/80). So: behind the node only when the node
+      // is fully opaque, where the two agree; knocked out only where it would
+      // otherwise bleed through.
+      const opaque=Array.isArray(ir.fills)&&ir.fills.length>0&&ir.fills.every(f=>rgba(f.color).a===1)&&(ir.opacity===undefined||ir.opacity===1);
+      node.effects=ir.effects.map((effect,index)=>{
+        const base=effect.kind==="drop-shadow"||effect.kind==="inner-shadow"?{type:effect.kind==="drop-shadow"?"DROP_SHADOW":"INNER_SHADOW",color:rgba(effect.color),offset:{x:effect.offsetX,y:effect.offsetY},radius:effect.blur,spread:effect.spread,showShadowBehindNode:opaque,visible:true,blendMode:"NORMAL"}:{type:effect.kind==="layer-blur"?"LAYER_BLUR":"BACKGROUND_BLUR",radius:effect.blur,visible:true};
+        const binding=bindingFor(ir,"effects."+index+".color");
+        if(!binding||!("color" in base))return base;
+        const variable=variables.get("COLOR:"+binding.variable);
+        if(!variable)throw new Error("MISSING-COLOR-VARIABLE:"+binding.variable);
+        return figma.variables.setBoundVariableForEffect(base,"color",variable);
+      });
+    }
+  };
+  const align={min:"MIN",center:"CENTER",max:"MAX","space-between":"SPACE_BETWEEN",baseline:"BASELINE"};
+  const constraintValue=value=>({left:"MIN",right:"MAX",top:"MIN",bottom:"MAX",center:"CENTER",scale:"SCALE",stretch:"STRETCH"})[value];
+  const applyLayout=(node,ir)=>{
+    const layout=ir.layout;
+    node.layoutMode=layout.mode.toUpperCase();
+    node.primaryAxisAlignItems=align[layout.primaryAxisAlign];
+    node.counterAxisAlignItems=align[layout.counterAxisAlign];
+    node.itemSpacing=layout.itemSpacing;
+    node.paddingTop=Math.max(0,layout.padding.top);node.paddingRight=Math.max(0,layout.padding.right);node.paddingBottom=Math.max(0,layout.padding.bottom);node.paddingLeft=Math.max(0,layout.padding.left);
+    void "TOOLTIP-WRITER-CLIPS-ONLY-WHEN-SAID";
+    // Figma's frame default is clipsContent=true; CSS's overflow default is
+    // visible. A frame clips only when the IR says so — otherwise a box's own
+    // shadow is cut off at a hit area the same size as the box (shadcn) —
+    // EXCEPT that Figma renders a frame's own drop shadow like Chromium only
+    // when that frame clips (MUI switch thumb tail, measured against the real
+    // render 27/37/44/54: clipping 45/51/71/80, not clipping 73/76/84/88 and a
+    // row longer). So a shadowed frame clips unless the IR says otherwise.
+    const shadowed=Array.isArray(ir.effects)&&ir.effects.some(e=>e.kind==="drop-shadow");
+    node.clipsContent=ir.clipsContent===undefined?shadowed:ir.clipsContent;
+    void "TOOLTIP-WRITER-LAYOUT-MIN-WIDTH";
+    if(layout.minWidth!==undefined){node.minWidth=layout.minWidth;bindFloat(node,"minWidth",bindingFor(ir,"layout.minWidth"));}
+    if(layout.minHeight!==undefined){node.minHeight=layout.minHeight;bindFloat(node,"minHeight",bindingFor(ir,"layout.minHeight"));}
+    if(layout.positioning==="absolute"){
+      if(!layout.offset||!layout.constraints)throw new Error("TOOLTIP-OVERLAY-DECLARATION-INCOMPLETE:"+ir.role);
+      node.layoutPositioning="ABSOLUTE";
+      node.constraints={horizontal:constraintValue(layout.constraints.horizontal),vertical:constraintValue(layout.constraints.vertical)};
+    }
+    bindFloat(node,"itemSpacing",bindingFor(ir,"layout.itemSpacing"));
+    for(const [key,field] of [["paddingTop","top"],["paddingRight","right"],["paddingBottom","bottom"],["paddingLeft","left"]])bindFloat(node,key,bindingFor(ir,"layout.padding."+field));
+  };
+  const isAbsolute=ir=>!!(ir.layout&&ir.layout.positioning==="absolute");
+  const applySizing=(node,ir)=>{
+    const width=ir.layout?ir.layout.width:ir.width,height=ir.layout?ir.layout.height:ir.height;
+    const fixedWidth=width.mode==="fixed"?width.value:Math.max(node.width,1),fixedHeight=height.mode==="fixed"?height.value:Math.max(node.height,1);
+    if(width.mode==="fixed"||height.mode==="fixed")node.resizeWithoutConstraints(fixedWidth,fixedHeight);
+    void "TOOLTIP-WRITER-ABSOLUTE-CHILD-IS-FIXED-SIZED";
+    if(isAbsolute(ir)){node.layoutSizingHorizontal="FIXED";node.layoutSizingVertical="FIXED";}
+    else{
+      if(width.mode==="fill")node.layoutSizingHorizontal="FILL";
+      else if(width.mode==="hug")node.layoutSizingHorizontal="HUG";
+      else node.layoutSizingHorizontal="FIXED";
+      if(height.mode==="fill")node.layoutSizingVertical="FILL";
+      else if(height.mode==="hug")node.layoutSizingVertical="HUG";
+      else node.layoutSizingVertical="FIXED";
+    }
+    if(ir.layout){
+      node.primaryAxisSizingMode=(ir.layout.mode==="horizontal"?width:height).mode==="hug"?"AUTO":"FIXED";
+      node.counterAxisSizingMode=(ir.layout.mode==="horizontal"?height:width).mode==="hug"?"AUTO":"FIXED";
+    }
+    bindFloat(node,"width",bindingFor(ir,"width.value")||bindingFor(ir,"layout.width.value"));
+    bindFloat(node,"height",bindingFor(ir,"height.value")||bindingFor(ir,"layout.height.value"));
+  };
+  const applySetLayout=(set,ir)=>{applyLayout(set,ir);applyPaints(set,ir);applySizing(set,ir);};
+  const firstSegment=name=>name.split(" :: ",1)[0];
+  void "TOOLTIP-WRITER-FIRST-SEGMENT-BIND";
+  void "TOOLTIP-WRITER-PLACE-ABSOLUTE-AFTER-PARENT-SIZES";
+  const placeAbsolute=(parentNode,parentIr)=>{
+    for(const childIr of parentIr.children||[]){
+      if(!isAbsolute(childIr))continue;
+      const child=parentNode.children.find(c=>firstSegment(c.name)===childIr.role);
+      if(!child)throw new Error("TOOLTIP-ABSOLUTE-CHILD-MISSING:"+childIr.role);
+      const off=childIr.layout.offset,c=childIr.layout.constraints;
+      if(c.horizontal==="stretch"){child.x=off.x;child.resizeWithoutConstraints(Math.max(1,parentNode.width-2*off.x),child.height);}
+      else if(c.horizontal==="right")child.x=parentNode.width-child.width+off.x;
+      else if(c.horizontal==="center")child.x=(parentNode.width-child.width)/2+off.x;
+      else child.x=off.x;
+      if(c.vertical==="stretch"){child.y=off.y;child.resizeWithoutConstraints(child.width,Math.max(1,parentNode.height-2*off.y));}
+      else if(c.vertical==="bottom")child.y=parentNode.height-child.height-off.y;
+      else if(c.vertical==="center")child.y=(parentNode.height-child.height)/2+off.y;
+      else child.y=off.y;
+    }
+  };
+  void "TOOLTIP-WRITER-DEFER-FILL-UNTIL-AUTOLAYOUT-PARENT";
+  const renderChildren=async(node,ir,ownershipKey)=>{
+    const hugKids=[],fillKids=[];
+    for(const [childIndex,child] of ir.children.entries()){
+      const width=child.layout?child.layout.width:child.width;
+      ((width&&width.mode==="fill"&&!isAbsolute(child))?fillKids:hugKids).push([childIndex,child]);
+    }
+    for(const [childIndex,child] of hugKids)await render(child,node,ownershipKey+"/children/"+childIndex);
+    if(fillKids.length>0)applySizing(node,ir);
+    for(const [childIndex,child] of fillKids)await render(child,node,ownershipKey+"/children/"+childIndex);
+  };
+  const render=async(ir,parent,ownershipKey)=>{
+    let node;
+    if(ir.kind==="frame")node=figma.createFrame();
+    else if(ir.kind==="text"){
+      if(!ir.type.fontProvenance)throw new Error("TOOLTIP-FONT-PROVENANCE-ABSENT:"+ir.role);
+      const label=figma.createText();const font=resolveFont(ir.type.fontProvenance);await figma.loadFontAsync(font);
+      label.fontName=font;label.characters=ir.characters;label.fontSize=ir.type.fontSize;
+      label.lineHeight=ir.type.lineHeight.unit==="px"?{unit:"PIXELS",value:ir.type.lineHeight.value}:ir.type.lineHeight.unit==="percent"?{unit:"PERCENT",value:ir.type.lineHeight.value}:{unit:"AUTO"};
+      void "TOOLTIP-WRITER-LETTER-SPACING";
+      if(ir.type.letterSpacing)label.letterSpacing=ir.type.letterSpacing.unit==="px"?{unit:"PIXELS",value:ir.type.letterSpacing.value}:{unit:"PERCENT",value:ir.type.letterSpacing.value};
+      if(ir.type.textCase==="upper")label.textCase="UPPER";else if(ir.type.textCase==="lower")label.textCase="LOWER";else if(ir.type.textCase==="title")label.textCase="TITLE";
+      if(ir.type.textDecoration==="underline")label.textDecoration="UNDERLINE";else if(ir.type.textDecoration==="strikethrough")label.textDecoration="STRIKETHROUGH";
+      label.textAlignHorizontal=ir.align.toUpperCase();label.textAlignVertical=ir.verticalAlign.toUpperCase();
+      label.textAutoResize="WIDTH_AND_HEIGHT";label.blendMode="NORMAL";
+      void "TOOLTIP-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC";
+      void "TOOLTIP-WRITER-NAMED-FALLBACK-AFTER-ZERO-GLYPH";
+      if(label.characters.trim().length>0&&(label.width<=0||label.absoluteRenderBounds===null)){
+        const chain=ir.type.fontProvenance.fallbackChain||[];
+        const resolvedFamily=ir.type.fontProvenance.resolvedFamily;
+        const resolvedStyle=ir.type.fontProvenance.resolvedStyle;
+        let painted=false;
+        for(const candidate of chain){
+          if(candidate.family===resolvedFamily&&candidate.style===resolvedStyle)continue;
+          const found=allFonts.find(entry=>entry.fontName.family===candidate.family&&entry.fontName.style===candidate.style);
+          if(!found)continue;
+          await figma.loadFontAsync(found.fontName);
+          label.fontName=found.fontName;
+          label.characters=ir.characters;
+          if(label.width>0&&label.absoluteRenderBounds){painted=true;break;}
+        }
+        if(!painted&&(label.width<=0||label.absoluteRenderBounds===null))throw new Error("TOOLTIP-FONT-ZERO-INTRINSIC:"+ir.role);
+      }
+      node=label;
+    }else if(ir.kind==="vector"){
+      void "TOOLTIP-WRITER-VECTOR-PATH";
+      const vector=figma.createVector();
+      vector.vectorPaths=[{windingRule:ir.windingRule==="evenodd"?"EVENODD":"NONZERO",data:ir.assetRef}];
+      vector.effects=[];
+      if(ir.strokeCap&&ir.strokeCap!=="none")vector.strokeCap=ir.strokeCap.toUpperCase();
+      if(ir.strokeJoin)vector.strokeJoin=ir.strokeJoin.toUpperCase();
+      if(ir.rotation)vector.rotation=ir.rotation;
+      void "TOOLTIP-WRITER-GLYPH-BOUNDS-GUARD";
+      const wantW=ir.width.mode==="fixed"?ir.width.value:vector.width,wantH=ir.height.mode==="fixed"?ir.height.value:vector.height;
+      if(Math.abs(vector.width-wantW)>0.05||Math.abs(vector.height-wantH)>0.05)throw new Error("TOOLTIP-GLYPH-BOUNDS-MISMATCH:"+ir.role+":"+vector.width.toFixed(3)+"x"+vector.height.toFixed(3)+" vs "+wantW+"x"+wantH);
+      node=vector;
+    }else throw new Error("UNSUPPORTED-CHILD-KIND:"+ir.kind);
+    node.visible=ir.visible!==false;node.opacity=ir.opacity===undefined?1:ir.opacity;
+    node.name=ir.role&&ir.label&&ir.role!==ir.label?ir.role+" :: "+ir.label:(ir.label||ir.role||ir.kind);
+    if(ir.kind==="text"&&ir.type.fontProvenance)node.name+=" :: font-provenance="+encodeURIComponent(JSON.stringify(ir.type.fontProvenance));
+    let hugTextIntrinsic=null;
+    if(ir.kind==="text"){
+      void "TOOLTIP-WRITER-HUG-TEXT-INTRINSIC-BEFORE-PARENT-COLLAPSE";
+      void "TOOLTIP-WRITER-HUG-FROM-POST-CHARACTER-INTRINSIC";
+      if(node.width<=0||node.height<=0)throw new Error("TOOLTIP-TEXT-GEOMETRY:"+ir.role);
+      hugTextIntrinsic={width:node.width,height:node.height};
+    }
+    tag(node,ir,ownershipKey);if(ir.kind!=="instance")applyPaints(node,ir);parent.appendChild(node);
+    if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
+    if(ir.kind==="frame"){applyLayout(node,ir);await renderChildren(node,ir,ownershipKey);applySizing(node,ir);placeAbsolute(node,ir);}
+    else applySizing(node,ir);
+    if(ir.kind==="text"){
+      bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));
+      void "TOOLTIP-WRITER-PERCENT-LINE-HEIGHT-STAYS-LITERAL";
+      if(ir.type.lineHeight.unit!=="percent")bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
+      bindFloat(node,"letterSpacing",bindingFor(ir,"type.letterSpacing.value"));
+      if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
+      if(node.characters.trim().length===0||node.width<=0||node.height<=0)throw new Error("TOOLTIP-TEXT-GEOMETRY:"+ir.role);
+    }
+    createdNodeIds.push(node.id);return node;
+  };
+  const mintComponent=async(ir)=>{
+    const component=figma.createComponent();component.clipsContent=false;
+    void "TOOLTIP-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL";
+    component.name=ir.role+" :: "+(ir.label||source.sourceName);
+    component.description="Experimental tooltip@1 primitive-IR mint. Recipe "+source.recipeHash+"; source adapter "+source.adapterIdentity+".";
+    if(ir.opacity!==undefined)component.opacity=ir.opacity;
+    tag(component,ir,"tooltip");applyLayout(component,ir);applyPaints(component,ir);
+    section.appendChild(component);
+    await renderChildren(component,ir,"tooltip/children");
+    applySizing(component,ir);placeAbsolute(component,ir);
+    if(component.layoutMode!=="HORIZONTAL"&&component.layoutMode!=="VERTICAL")throw new Error("TOOLTIP-FAKE-LAYOUT:"+component.name);
+    createdNodeIds.push(component.id);
+    const container=figma.createFrame();
+    container.name="Component Container";
+    container.layoutMode="NONE";
+    container.fills=[];
+    container.x=80;container.y=96;
+    section.appendChild(container);
+    container.appendChild(component);
+    void "TOOLTIP-WRITER-CONTAINER-HUGS-COMPONENT";
+    container.clipsContent=false;
+    container.resizeWithoutConstraints(Math.max(1,component.width),Math.max(1,component.height));
+    createdNodeIds.push(container.id);
+    setSharedData(container,"runIdentity",PLAN.runIdentity);setSharedData(container,"adapterIdentity",source.adapterIdentity);setSharedData(container,"recipeHash",source.recipeHash);setSharedData(container,"ownershipKey","tooltip/container");
+    return {component,container};
+  };
+  const minted=await mintComponent(source.chip);
+  section.resizeWithoutConstraints(minted.container.width+160,minted.container.y+minted.container.height+80);
+  nextSectionX+=section.width+240;
+  summaries.push({adapterIdentity:source.adapterIdentity,sectionId:section.id,componentId:minted.component.id,containerId:minted.container.id,collectionId:collection.id,variableCount:variables.size,variantCount:1,recipeHash:source.recipeHash,envelopeHash:source.envelopeHash,comparedIrFacts:source.comparedIrFacts});
+}
+return{writerVersion:Number(WRITER_VERSION),fileKey:figma.fileKey,fileName:figma.root.name,pageId:page.id,pageName:page.name,runIdentity:PLAN.runIdentity,namespace:NS,createdNodeIds:[...new Set(createdNodeIds)],mutatedNodeIds:[...new Set(mutatedNodeIds)],sources:summaries};
