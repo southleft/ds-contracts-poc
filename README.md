@@ -5,27 +5,73 @@
 
 # Design System Contracts
 
-> **Current state (2026-08-31).** Active plan:
-> **[docs/35 — two-journey v1](docs/35-two-journey-v1-plan.md)**; the product
-> spine that grew out of the 2026-09-01 audit is
-> **[docs/36 — point it at your library](docs/36-point-it-at-your-library.md)**. Product
-> **v1 is incomplete**; `overallSuccess` stays false (Table keeps its
-> existing v32 `true`). This is **not** a ship claim. Both journeys are
-> **partially proven**, neither held-out exam is a release gate yet:
-> **code→canvas** — reader covers 13×3 boilerplate subjects
-> ([review package](recipe/evidence/boilerplate-review-package-v1/));
-> **F1 is capture-only** (react-day-picker double-run is green —
-> [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/),
-> `f1Status: capture-only`; mechanical calendar@1 compile
-> attempted and refused), not passed.
-> **canvas→code** — Button apply-step + held-out AntD Card exam ran with
-> silent=0
-> ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));
-> the docs/26 F-C2C amendment is
-> **[adopted 2026-08-31](docs/26-amendment-canvas-to-code.md)**.
-> Five signed stays still stand: Button, Input, Combobox, Table, Calendar.
-> Version/npm remain owner decisions. Universal-contract Journeys A–C are
-> still not the v1 proof. Release bar: [docs/26](docs/26-v1-definition.md).
+> **Current state (2026-09-02).** The product is the one command below
+> ([docs/36 — point it at your library](docs/36-point-it-at-your-library.md)),
+> grown out of the [2026-09-01 audit](parity/receipts/v1/HONEST-SCORECARD.md).
+> It is proven for **six of thirteen archetypes** and on **libraries it was
+> never taught**, and every number below is from a gate run on `main`.
+> Product **v1 is not complete**: seven archetypes still rest on hand-written
+> tables, the plugin's paste verb has not yet been exercised by a person, and
+> the capture step needs a config entry a person writes. The older
+> universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
+> ships and is described further down this page; it is not the v1 proof.
+
+## The one command
+
+> A design-system engineer runs one command against their React library,
+> reviews one file, runs one more command, imports the plugin, pastes one
+> JSON, and gets a Figma component set that scores within 5% of their own
+> library's Chromium render for every supported archetype, plus a named
+> report of what could not be expressed.
+
+That sentence is the v1 criterion. Today it reads like this:
+
+```bash
+# 1. Capture: a real Chromium mounts every prop combination of your real
+#    component and reads the browser's computed styles, twice, and refuses
+#    if the two sweeps disagree. The config entry is the one input a person
+#    writes (it makes the capture, so it cannot be read from one).
+npm run extract:computed -- --harness <your sandbox> \
+  --config extract/computed/configs/<lib>.json --component Switch \
+  --out extract/computed/out/<lib> --keep-originals
+
+# 2. Point: draft the role map from what the parts DO, propose a fixture in
+#    which every value is read from the capture, reviewed with evidence, or
+#    an archetype spelling (nothing is invented), compile it to a fixed point,
+#    and emit the program the plugin runs.
+npm run recipe:point -- --archetype switch --library <lib>
+
+# 3. In Figma desktop: open the development plugin, Paste a script,
+#    paste recipe/evidence/pointed/switch-<lib>/writer.plugin.js, run.
+#    It creates its own page and never touches an existing one.
+```
+
+What it has done, measured against the real package's own render
+(`npm run recipe:fidelity:check`, bar 5% anti-aliasing-masked):
+
+| archetype | libraries the path was never taught | proposed from a library's own capture | named gaps |
+|---|---|---|---|
+| checkbox | Chakra **0.00%**, shadcn **0.00%** (bare control, oklch colours) | — | shadcn's indeterminate glyph; a 1.17px stroke rasterised softer by Chromium |
+| switch | Chakra **0.00%** ×4 states (captured the same day), shadcn **0.00%** | MUI = its hand row | — |
+| avatar | Altitude 0.38%, shadcn 0.29%, Fluent 0.00% | MUI **0.00%**, AntD **0.00%** (the hand rows: 4%, 2.73%) | Fluent's Segoe UI is a named fallback |
+| tooltip | shadcn 4.73% | AntD = its hand row | MUI's closed popper is unstable to capture |
+| chip | Altitude **0.07%**, Carbon 8.56% (named: glyph rasterisation) | MUI, AntD = their hand rows | — |
+| link | Altitude 5.56% (named: glyph + underline row) | MUI 20% (the hand row: 49%) | a serif the sandbox rendered by accident, carried as its fallback |
+
+Every proposal reads its values from the capture (13–43 leaves each), records
+its ledger key on the line, and names what it refused — an interaction the
+archetype has no plane for, a placement wrapper, an arrow, a shadow. A fixture
+the reader cannot fill refuses by name and says which `--set … --why` would
+satisfy it. The runtime that mints the program is one shared file for all
+thirteen archetypes; the same program runs against the Scratch file in
+development and in the plugin in any file.
+
+What it does not do yet is written in one place:
+[docs/36 §What it does not do yet](docs/36-point-it-at-your-library.md#what-it-does-not-do-yet).
+The measured evidence, per state and per library, is under
+[`recipe/evidence/fidelity-v1/`](recipe/evidence/fidelity-v1/README.md).
+
+---
 
 **A design system's source of truth should be neither the design file nor the code — but a machine-readable *contract* that sits between them and generates both.**
 

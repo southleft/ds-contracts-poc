@@ -169,6 +169,12 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
   [21 — bring your own design system](21-bring-your-own-design-system.md)
   path, and its onboarding has its own known limits.
 
+## Where this goes next
+
+The product repository this page describes is manifested in
+[37 — product repo manifest](37-product-repo-manifest.md): what moves (≈480
+files), what stays as archive, and the three decisions that are the owner's.
+
 ## The parts
 
 | file | what |
