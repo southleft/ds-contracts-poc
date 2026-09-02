@@ -8,9 +8,9 @@
 > **Current state (2026-09-02).** The product is the one command below
 > ([docs/36 — point it at your library](docs/36-point-it-at-your-library.md)),
 > grown out of the [2026-09-01 audit](parity/receipts/v1/HONEST-SCORECARD.md).
-> It is proven for **eight of thirteen archetypes** and on **libraries it was
+> It is proven for **nine of thirteen archetypes** and on **libraries it was
 > never taught**, and every number below is from a gate run on `main`.
-> Product **v1 is not complete**: five archetypes still rest on hand-written
+> Product **v1 is not complete**: four archetypes still rest on hand-written
 > tables, the plugin's paste verb has not yet been exercised by a person, and
 > the capture step needs a config entry a person writes. The older
 > universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
@@ -59,6 +59,7 @@ What it has done, measured against the real package's own render
 | link | Altitude 5.56% (named: glyph + underline row); Chakra held out, 10.26% named (one glyph row) | MUI 20% (the hand row: 49%) | a serif the sandbox rendered by accident, carried as its fallback |
 | tabs | Carbon 9.57% (named: the capture mounts three tabs and a panel; the archetype draws two) | MUI = its hand row | shadcn's filled selected tab has no indicator; refused by name |
 | radio | Chakra **0.00%** (captured the same day through ItemIndicator) | AntD **0.00%** = its hand row | MUI's bare Radio has no label; radio@1 has no bare cell, refused by name |
+| textarea | Chakra 1.64% (the bare cell, re-captured the same day) | AntD 1.25% (bare; the hand row is a named content mismatch), MUI = its hand row (named) | the notch knockout colour and a placeholder hidden at rest and focus are reviewed, with citations |
 
 Every proposal reads its values from the capture (13–43 leaves each), records
 its ledger key on the line, and names what it refused — an interaction the

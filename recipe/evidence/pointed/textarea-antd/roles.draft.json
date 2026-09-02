@@ -1,0 +1,41 @@
+{
+  "roles": {
+    "inner": "root",
+    "box": "root",
+    "opacityOn": "root"
+  },
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "empty.enabled ← empty.enabled (from the declared base empty.enabled); empty.disabled ← empty.disabled (from the declared base empty.enabled); value.enabled ← value.enabled (from the declared base empty.enabled); value.disabled ← value.disabled (from the declared base empty.enabled)",
+      "confidence": "high"
+    },
+    "inner": {
+      "selector": "root",
+      "why": "textarea 288px×54px carrying \"Meeting notes for Tuesday.\" in the value combo",
+      "confidence": "high"
+    },
+    "box": {
+      "selector": "root",
+      "why": "textarea.ant-input 288px×54px border 1px bg rgba(255, 255, 255, 1) padding 4px/11px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": null,
+      "why": "no label part — the bare cell; the recipe compiles no label node and every label leaf is the bare-cell spelling",
+      "confidence": "high"
+    },
+    "opacityOn": {
+      "selector": "root",
+      "why": "nothing dims when disabled; the box carries opacity 1",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

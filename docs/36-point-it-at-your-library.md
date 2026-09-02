@@ -3,8 +3,9 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **eight archetypes**
-> (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1, radio@1) and has been proven on **libraries
+> plugin can run in any file. It works today for **nine archetypes**
+> (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1, radio@1,
+> textarea@1) and has been proven on **libraries
 > the recipe path was never taught** — Chakra UI, shadcn, Altitude, Fluent and
 > Carbon — including six Chakra controls captured for the first time the same
 > day (a person wrote the config entry, the command did the rest; the Switch's
@@ -90,6 +91,15 @@ scored against the real render anyway (the quarantine path now keeps the
 `--keep-originals` screenshots: the pixels are a measurement, not the
 contract's to refuse) and is a named one-row rasterisation difference.
 
+On textarea@1, the label plane is decided by what the label does between
+the empty and value combos (an absolutely positioned label whose transform
+changes floats), the outline by whether a bordered absolute child with a
+legend exists, and rows from the inner textarea's content height. MUI's
+proposal scores exactly its hand row with two reviewed, cited leaves; AntD's
+and Chakra's are the new bare cell — no label part, no label node — and
+score 1.25% and 1.64% where AntD's hand row was a named content mismatch
+(`recipe/evidence/fidelity-v1/f1-textarea-proposed/`).
+
 On radio@1, the dot is read wherever the library draws it — AntD's ring
 `::after` scaled by a transform, Chakra's `.dot` span scaled by the CSS
 `scale` property — and its radius is clamped to half the painted size as
@@ -167,10 +177,14 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** Eight of the thirteen boilerplate archetypes have
+- **Other archetypes.** Nine of the thirteen boilerplate archetypes have
   proposers today (checkbox, switch, avatar, tooltip, chip, link, tabs,
-  radio); the other five — badge, alert, textarea, dialog, menu — still have
+  radio, textarea); the other four — badge, alert, dialog, menu — still have
   hand tables only.
+- **A labelled composition the capture cannot mount.** The capture config's
+  axis props go to the root component, so a Field + Label + Textarea
+  composition whose value lives on the child cannot be captured yet; the
+  bare textarea is captured instead, and textarea@1's bare cell scores it.
 - **A bare radio.** radio@1 has no label-less cell (checkbox@1 and switch@1
   do), so MUI's bare `<Radio/>` is refused by name at the role draft.
 - **A ring that is a shadow.** A zero-offset, zero-blur inset box-shadow
@@ -227,6 +241,7 @@ files), what stays as archive, and the three decisions that are the owner's.
 | `recipe/fixture-reader/schema-link.ts`, `propose-link.ts` | link@1: the anchor; underline and line-height unit read |
 | `recipe/fixture-reader/schema-tabs.ts`, `propose-tabs.ts` | tabs@1: list, selected/rest tabs, an indicator part or the selected tab's bottom border |
 | `recipe/fixture-reader/schema-radio.ts`, `propose-radio.ts` | radio@1: hit, ring, dot (part or pseudo-element, transform × `scale`), label, row; list leaves are spellings |
+| `recipe/fixture-reader/schema-textarea.ts`, `propose-textarea.ts` | textarea@1: box, outline, inner, label (or the bare cell), legend; the label plane from the label's transform |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

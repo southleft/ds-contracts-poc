@@ -303,3 +303,30 @@ test("radio@1 proposes AntD's radio from its own capture (the ::after disc scale
   const mui = draftRadioRoles(new Ledger(REPO, "extract/computed/out/mui/radio/captured-truth.json"));
   assert.ok(mui.unresolved.some((u) => u.startsWith("label:")), `MUI's bare Radio has no label part; radio@1 has no bare cell: ${mui.unresolved.join(" | ")}`);
 });
+
+import { draftTextareaRoles } from "./draft-roles.js";
+import { proposeTextareaFixture } from "./propose-textarea.js";
+import type { TextareaComboMap, TextareaRoles } from "./schema-textarea.js";
+
+test("textarea@1 reads MUI's floating notched label from the label's transform and AntD's bare Input.TextArea as the bare cell (rows from the border-box height)", () => {
+  const mui = draftTextareaRoles(new Ledger(REPO, "extract/computed/out/mui/textarea/captured-truth.json"));
+  assert.deepEqual(mui.unresolved, []);
+  assert.ok(mui.roles.legend && mui.roles.outline && mui.roles.label, JSON.stringify(mui.roles));
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const m = proposeTextareaFixture({ library: "mui", ledger: "extract/computed/out/mui/textarea/captured-truth.json", roles: mui.roles as TextareaRoles, combos: mui.combos as TextareaComboMap, out: path.relative(REPO, path.join(dir, "textarea.mui.ts")), unsupported: ["hover"], sets: { notchFill: { value: "#ffffffff", why: "palette.background.paper" }, "states.empty.disabled.value": { value: "#00000061", why: "palette.text.disabled" } } });
+  assert.deepEqual(m.refused, []);
+  for (const [k, v] of [["labelPlacement", "floating"], ["outlineTreatment", "notched"], ["strokeAlign", "outside"], ["labelInsetX", 14], ["labelInactiveOffsetY", 16], ["labelFloatingOffsetY", -9], ["floatingLabelFontSize", 12], ["box.rows", 1], ["box.height", 56]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
+  assert.equal(m.proposal.content.label, "Notes");
+  assert.equal(m.proposal.content.placeholder, "Add a note");
+  assert.match(m.proposal.content.placeholderSource, /configs\/mui\.json#Textarea fixedProps\.placeholder/);
+
+  const antd = draftTextareaRoles(new Ledger(REPO, "extract/computed/out/antd/textarea/captured-truth.json"));
+  assert.deepEqual(antd.unresolved, []);
+  assert.equal(antd.roles.label, undefined, "AntD's Input.TextArea has no label part — the bare cell, not unresolved");
+  const a = proposeTextareaFixture({ library: "antd", ledger: "extract/computed/out/antd/textarea/captured-truth.json", roles: antd.roles as TextareaRoles, combos: antd.combos as TextareaComboMap, out: path.relative(REPO, path.join(dir, "textarea.antd.ts")), unsupported: ["hover"] });
+  assert.deepEqual(a.refused, []);
+  assert.equal(a.proposal.content.label, null);
+  for (const [k, v] of [["box.rows", 2], ["box.height", 54], ["labelPlacement", "stacked"], ["labelFontSize", 0], ["states.empty.enabled.value", "#00000040"], ["states.value.disabled.value", "#00000040"]] as const) assert.equal(a.proposal.leaves[k]?.value, v, k);
+  assert.equal(Object.values(a.proposal.leaves).filter((l) => l.from === "set").length, 0, "nothing reviewed, nothing invented");
+  assert.match(readFileSync(path.join(REPO, a.modulePath.startsWith("/") ? path.relative(REPO, a.modulePath) : a.modulePath), "utf8"), /refusal-bare-label/);
+});

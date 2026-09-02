@@ -25,7 +25,9 @@ import {
 
 export const TEXTAREA_FIGMA_NAMESPACE = "ds.contracts.textarea.recipe.v1";
 export const TEXTAREA_FIGMA_WRITER_VERSION = 3;
-export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v8";
+export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v9";
+/** v8 stay (textarea@1 proposer: MUI and AntD from their own captures, Chakra held out (the bare cell)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TEXTAREA_V8_PAGE_ID = "218:90433";
 /** v7 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TEXTAREA_V7_PAGE_ID = "218:87843";
 /** v6 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
@@ -261,6 +263,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "textareaSet"
   },
   "forbiddenPages": [
+    { "id": "218:90433", "marker": "TEXTAREA-V8-PAGE" },
     { "id": "218:87843", "marker": "TEXTAREA-V7-PAGE" },
     { "id": "218:86350", "marker": "TEXTAREA-V6-PAGE" },
     { "id": "218:84868", "marker": "TEXTAREA-V5-PAGE" },

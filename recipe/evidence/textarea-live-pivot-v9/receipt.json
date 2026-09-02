@@ -1,0 +1,77 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "textarea-live-pivot-v9-prepare",
+  "teaching": "MUI rest empty hides placeholder; Content=focus shrinks the label and shows placeholder. Stacked Astryx/AntD empty and focus look the same. No invented focus ring.",
+  "runIdentity": "71033c6d-82f958a9-142f3598-30047def-67c97cdd-d45d9202-textarea-v9",
+  "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-30047def-67c97cdd-d45d9202-textarea-v9",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "71033c6dbe8ec74e4bf355c9df41fae62e5b36e16af2a5ade1f6a6b0103bb5c9",
+    "MUI": "82f958a9f67ded1b65b50c986493d42ef754ce0e048ca9366b14a6aa1cccd645",
+    "Ant Design": "142f359858ed37f4601d2c9269a014caf5beae42f4220cdaf94f4cce786cc19b",
+    "MUI (proposed)": "30047def6bd8f190bf49b6b29a4673434357f2184862bfcde4a759b9d22f063a",
+    "Ant Design (proposed)": "67c97cdd85bb73fe9439ca5d932fdb7e1836a9e9d7614bf6faaaa1d273016f79",
+    "Chakra (proposed)": "d45d9202300b69f80a60e853c25580d78c62d8ba518bade01857831ccea37d97"
+  },
+  "writerSha256": "1af8b261aa82f9bee50c82837105f500b2993c05040e3ebd422fc6adc714ec89",
+  "pageId": "219:92517",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-92517",
+  "live": {
+    "recordedFrom": "textarea-v9-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-30047def-67c97cdd-d45d9202-textarea-v9",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-textarea-reviewed-v1",
+        "sectionId": "219:92518",
+        "setId": "219:92569",
+        "collectionId": "VariableCollectionId:219:92519",
+        "variantCount": 6,
+        "comparedIrFacts": 133
+      },
+      {
+        "adapterIdentity": "mui-textarea-reviewed-v1",
+        "sectionId": "219:92570",
+        "setId": "219:92629",
+        "collectionId": "VariableCollectionId:219:92571",
+        "variantCount": 6,
+        "comparedIrFacts": 143
+      },
+      {
+        "adapterIdentity": "antd-textarea-reviewed-v1",
+        "sectionId": "219:92630",
+        "setId": "219:92681",
+        "collectionId": "VariableCollectionId:219:92631",
+        "variantCount": 6,
+        "comparedIrFacts": 133
+      },
+      {
+        "adapterIdentity": "mui-textarea-proposed-v1",
+        "sectionId": "219:92682",
+        "setId": "219:92741",
+        "collectionId": "VariableCollectionId:219:92683",
+        "variantCount": 6,
+        "comparedIrFacts": 143
+      },
+      {
+        "adapterIdentity": "antd-textarea-proposed-v1",
+        "sectionId": "219:92742",
+        "setId": "219:92782",
+        "collectionId": "VariableCollectionId:219:92743",
+        "variantCount": 6,
+        "comparedIrFacts": 115
+      },
+      {
+        "adapterIdentity": "chakra-textarea-proposed-v1",
+        "sectionId": "219:92783",
+        "setId": "219:92823",
+        "collectionId": "VariableCollectionId:219:92784",
+        "variantCount": 6,
+        "comparedIrFacts": 115
+      }
+    ]
+  }
+}

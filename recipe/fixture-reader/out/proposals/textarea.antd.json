@@ -1,0 +1,266 @@
+{
+  "archetype": "textarea",
+  "library": "antd",
+  "ledger": "extract/computed/out/antd/textarea/captured-truth.json",
+  "provenance": {
+    "package": "antd",
+    "version": "5.29.3",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "inner": "root",
+    "box": "root",
+    "opacityOn": "root"
+  },
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  },
+  "leaves": {
+    "box.height": {
+      "value": 54,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.height"
+    },
+    "box.paddingX": {
+      "value": 11,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 4,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-width",
+      "formula": "the box's own border"
+    },
+    "box.rows": {
+      "value": 2,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.height | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.box-sizing | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-top | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-bottom | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-width | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-bottom-width",
+      "formula": "rendered rows = the inner textarea's content height / its line-height (a border-box height minus its padding and border; a content-box height as is)"
+    },
+    "box.lineHeight": {
+      "value": 22,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height"
+    },
+    "labelGap": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "labelFontSize": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "valueFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-size"
+    },
+    "labelPlacement": {
+      "value": "stacked",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "labelInsetX": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "labelInactiveOffsetY": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "labelFloatingOffsetY": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "floatingLabelFontSize": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "notchFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout"
+    },
+    "outlineTreatment": {
+      "value": "plain",
+      "from": "spelling",
+      "why": "follows from the anatomy: a legend inside a distinct outline is the notched treatment"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside"
+    },
+    "boxClips": {
+      "value": "true",
+      "from": "spelling",
+      "why": "the box clips its text — recipe geometry"
+    },
+    "states.empty.enabled.boxFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.background-color"
+    },
+    "states.empty.enabled.boxBorder": {
+      "value": "#d9d9d9ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-color"
+    },
+    "states.empty.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.opacity"
+    },
+    "states.empty.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.empty.enabled.value": {
+      "value": "#00000040",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root::placeholder.color | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root::placeholder.opacity | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__focus-visible root::placeholder.color | extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__focus-visible root::placeholder.opacity",
+      "formula": "placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+    },
+    "states.empty.disabled.boxFill": {
+      "value": "#0000000a",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.background-color"
+    },
+    "states.empty.disabled.boxBorder": {
+      "value": "#d9d9d9ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.border-top-color"
+    },
+    "states.empty.disabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.opacity"
+    },
+    "states.empty.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.empty.disabled.value": {
+      "value": "#00000040",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root::placeholder.color | extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root::placeholder.opacity | extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__focus-visible root::placeholder.color | extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__focus-visible root::placeholder.opacity",
+      "formula": "placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+    },
+    "states.value.enabled.boxFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.background-color"
+    },
+    "states.value.enabled.boxBorder": {
+      "value": "#d9d9d9ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.border-top-color"
+    },
+    "states.value.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.opacity"
+    },
+    "states.value.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.value.enabled.value": {
+      "value": "#000000e0",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.color | extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.-webkit-text-fill-color",
+      "formula": "the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+    },
+    "states.value.disabled.boxFill": {
+      "value": "#0000000a",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.background-color"
+    },
+    "states.value.disabled.boxBorder": {
+      "value": "#d9d9d9ff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.border-top-color"
+    },
+    "states.value.disabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.opacity"
+    },
+    "states.value.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.value.disabled.value": {
+      "value": "#00000040",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.color | extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.-webkit-text-fill-color",
+      "formula": "the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+    },
+    "typography.label.family": {
+      "value": "Arial",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "typography.value.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-family",
+      "formula": "first family of the field text's computed stack"
+    },
+    "typography.value.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-weight",
+      "formula": "field font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": null,
+    "placeholder": "Add a note",
+    "value": "Meeting notes for Tuesday.",
+    "placeholderSource": "extract/computed/configs/antd.json#Textarea fixedProps.placeholder"
+  },
+  "typography": {
+    "label": {
+      "family": "Arial",
+      "style": "Regular",
+      "stack": "(bare cell — inert)"
+    },
+    "value": {
+      "family": "Roboto",
+      "style": "Regular",
+      "stack": "Roboto, Helvetica, Arial, sans-serif"
+    }
+  }
+}

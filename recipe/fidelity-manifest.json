@@ -438,30 +438,60 @@
     },
     {
       "label": "textarea/astryx",
-      "page": "218:90433",
+      "page": "219:92517",
       "set": "textarea/set :: Astryx TextArea",
       "variant": "Disabled=false, Content=empty",
       "widthNormalised": true,
-      "shot": "recipe/evidence/fidelity-v1/shots/textarea-astryx-empty-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-astryx-empty-shared-v9.png",
       "reference": "extract/computed/out/astryx-core/textarea/orig-shots/empty.no-isDisabled__default.png"
     },
     {
       "label": "textarea/mui",
-      "page": "218:90433",
+      "page": "219:92517",
       "set": "textarea/set :: MUI TextField multiline",
       "variant": "Disabled=false, Content=empty",
       "widthNormalised": true,
-      "shot": "recipe/evidence/fidelity-v1/shots/textarea-mui-empty-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-mui-empty-shared-v9.png",
       "reference": "extract/computed/out/mui/textarea/orig-shots/empty.enabled__default.png"
     },
     {
       "label": "textarea/antd",
-      "page": "218:90433",
+      "page": "219:92517",
       "set": "textarea/set :: Ant Design TextArea",
       "variant": "Disabled=false, Content=empty",
       "widthNormalised": true,
-      "shot": "recipe/evidence/fidelity-v1/shots/textarea-antd-empty-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-antd-empty-shared-v9.png",
       "reference": "extract/computed/out/antd/textarea/orig-shots/empty.enabled__default.png"
+    },
+    {
+      "label": "textarea/mui-proposed",
+      "page": "219:92517",
+      "set": "textarea/set :: MUI (proposed) Textarea",
+      "variant": "Disabled=false, Content=empty",
+      "widthNormalised": true,
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-mui-proposed-empty-v9.png",
+      "reference": "extract/computed/out/mui/textarea/orig-shots/empty.enabled__default.png",
+      "_proposedWhy": "PROPOSED from MUI's own capture by the textarea@1 role schema: the floating notched label read from the label's transform (inset 14, rest 16, shrunk -9 at 12px); notchFill and the hidden disabled placeholder ink reviewed with citations; 38 read, 0 invented. Scored beside the hand row."
+    },
+    {
+      "label": "textarea/antd-proposed",
+      "page": "219:92517",
+      "set": "textarea/set :: Ant Design (proposed) Textarea",
+      "variant": "Disabled=false, Content=empty",
+      "widthNormalised": true,
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-antd-proposed-empty-v9.png",
+      "reference": "extract/computed/out/antd/textarea/orig-shots/empty.enabled__default.png",
+      "_proposedWhy": "PROPOSED from AntD's own capture: the BARE cell \u2014 Input.TextArea has no label part and textarea@1 now compiles none (26 read, 17 spellings, 0 invented). The hand row is a named content mismatch (it mints a label the package does not render); this row is the fair comparison."
+    },
+    {
+      "label": "textarea/chakra",
+      "page": "219:92517",
+      "set": "textarea/set :: Chakra (proposed) Textarea",
+      "variant": "Disabled=false, Content=empty",
+      "widthNormalised": true,
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-chakra-empty-v9.png",
+      "reference": "extract/computed/out/chakra/textarea/orig-shots/empty.enabled__default.png",
+      "_proposedWhy": "HELD OUT: Chakra's Textarea, re-captured 2026-09-02 with real screenshots (the legacy contract path quarantines it on scroll-padding-block-end; the quarantine path keeps --keep-originals). The bare cell: 26 read, 0 invented; placeholder from the config entry a person wrote."
     }
   ],
   "_excluded": {

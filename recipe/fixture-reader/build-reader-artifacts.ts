@@ -26,6 +26,9 @@ import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings }
 import { CHAKRA_TOOLTIP_LEDGER, chakraTooltipAdapterConfig, chakraTooltipMappings } from "../fixtures/generated/tooltip.chakra.js";
 import { ANTD_RADIO_LEDGER as ANTD_RADIO_LEDGER_PROPOSED, antdRadioAdapterConfig as antdRadioProposedConfig, antdRadioMappings as antdRadioProposedMappings } from "../fixtures/generated/radio.antd.js";
 import { CHAKRA_RADIO_LEDGER, chakraRadioAdapterConfig, chakraRadioMappings } from "../fixtures/generated/radio.chakra.js";
+import { MUI_TEXTAREA_LEDGER as MUI_TEXTAREA_LEDGER_PROPOSED, muiTextareaAdapterConfig as muiTextareaProposedConfig, muiTextareaMappings as muiTextareaProposedMappings } from "../fixtures/generated/textarea.mui.js";
+import { ANTD_TEXTAREA_LEDGER as ANTD_TEXTAREA_LEDGER_PROPOSED, antdTextareaAdapterConfig as antdTextareaProposedConfig, antdTextareaMappings as antdTextareaProposedMappings } from "../fixtures/generated/textarea.antd.js";
+import { CHAKRA_TEXTAREA_LEDGER, chakraTextareaAdapterConfig, chakraTextareaMappings } from "../fixtures/generated/textarea.chakra.js";
 import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
 import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
 import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
@@ -265,6 +268,8 @@ const EXTRA_KEYS = [
   // Nested string leaf (tabs@1): the tab's content alignment. EXTRA_KEYS are
   // resolved as dotted paths below, so a nested spelling is allowed.
   "tab.contentAlign",
+  // textarea@1 / radio@1 proposals map these string leaves (the hand tables do not)
+  "labelPlacement", "outlineTreatment", "boxClips",
 ] as const;
 
 const atPath = (tokens: Record<string, unknown>, dotted: string): unknown =>
@@ -407,6 +412,36 @@ const SUBJECTS: Subject[] = [
     tokens: antdTextareaAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: antdTextareaMappings,
     extras: textareaExtras(antdTextareaAdapterConfig.tokens as unknown as Record<string, unknown>),
+  },
+  {
+    // PROPOSED from MUI's own capture by the textarea@1 role schema (2026-09-02): floating notched label read from the label's transform; notchFill + the hidden disabled placeholder reviewed.
+    archetype: "textarea",
+    library: "mui-proposed",
+    source: src(muiTextareaProposedConfig),
+    ledgerFile: MUI_TEXTAREA_LEDGER_PROPOSED,
+    tokens: muiTextareaProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiTextareaProposedMappings,
+    extras: extrasFor(muiTextareaProposedConfig.tokens as unknown as Record<string, unknown>, muiTextareaProposedMappings),
+  },
+  {
+    // PROPOSED from AntD's own capture: the BARE cell (no label part) — 26 read, 17 spellings, 0 invented.
+    archetype: "textarea",
+    library: "antd-proposed",
+    source: src(antdTextareaProposedConfig),
+    ledgerFile: ANTD_TEXTAREA_LEDGER_PROPOSED,
+    tokens: antdTextareaProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: antdTextareaProposedMappings,
+    extras: extrasFor(antdTextareaProposedConfig.tokens as unknown as Record<string, unknown>, antdTextareaProposedMappings),
+  },
+  {
+    // HELD OUT (2026-09-02): Chakra's Textarea, re-captured the same day with real screenshots (the legacy contract path quarantines it on scroll-padding-block-end); the bare cell, 26 read, 0 invented.
+    archetype: "textarea",
+    library: "chakra",
+    source: src(chakraTextareaAdapterConfig),
+    ledgerFile: CHAKRA_TEXTAREA_LEDGER,
+    tokens: chakraTextareaAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraTextareaMappings,
+    extras: extrasFor(chakraTextareaAdapterConfig.tokens as unknown as Record<string, unknown>, chakraTextareaMappings),
   },
   // —— Phase 2 ——
   {

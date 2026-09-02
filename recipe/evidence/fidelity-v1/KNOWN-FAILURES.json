@@ -61,6 +61,10 @@
     "link/chakra": {
       "class": "font-substrate",
       "cause": "10.26% at 30x12 vs 30x13 — HELD-OUT proposal (Chakra Link, captured 2026-09-02 from a config entry a person wrote; 14 leaves read, 0 invented). The legacy contract path quarantines this capture on `text-underline-offset`; the real render exists only because the quarantine path now keeps `--keep-originals` screenshots. Inter Regular 16px resolved EXACT in Figma; the glyph masks agree in width (30) and differ by one row in height: Chromium rasterises 'Link' 13 rows tall, Figma 12 — the face's hinting at this size, the same class as MUI's proposed link (31x15 vs 31x14). Colour, line-height (24px) and no-underline agree."
+    },
+    "textarea/mui-proposed": {
+      "class": "real-defect",
+      "cause": "9.52% width-normalised (heights 58 vs 56). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     }
   }
 }

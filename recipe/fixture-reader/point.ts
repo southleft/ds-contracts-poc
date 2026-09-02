@@ -26,7 +26,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { Ledger } from "./ledger.js";
-import { draftAvatarRoles, draftCheckboxRoles, draftChipRoles, draftLinkRoles, draftSwitchRoles, draftTabsRoles, draftTooltipRoles, draftRadioRoles } from "./draft-roles.js";
+import { draftAvatarRoles, draftCheckboxRoles, draftChipRoles, draftLinkRoles, draftSwitchRoles, draftTabsRoles, draftTooltipRoles, draftRadioRoles, draftTextareaRoles } from "./draft-roles.js";
 import { proposeCheckboxFixture, type GlyphSpec } from "./propose-fixture.js";
 import { proposeSwitchFixture } from "./propose-switch.js";
 import { proposeAvatarFixture } from "./propose-avatar.js";
@@ -55,6 +55,11 @@ import type { RadioComboMap, RadioRoles } from "./schema-radio.js";
 import { adaptReviewedRadio } from "../adapters/radio.js";
 import { collapseRadioRecipe, compileRadioRecipe, radioRecipe } from "../recipes/radio.js";
 import { emitRadioFigmaWriter } from "../radio-figma-writer.js";
+import { proposeTextareaFixture } from "./propose-textarea.js";
+import type { TextareaComboMap, TextareaRoles } from "./schema-textarea.js";
+import { adaptReviewedTextarea } from "../adapters/textarea.js";
+import { collapseTextareaRecipe, compileTextareaRecipe, textareaRecipe } from "../recipes/textarea.js";
+import { emitTextareaFigmaWriter } from "../textarea-figma-writer.js";
 import type { AvatarRoles } from "./schema-avatar.js";
 import { adaptReviewedAvatar } from "../adapters/avatar.js";
 import { avatarRecipe, collapseAvatarRecipe, compileAvatarRecipe } from "../recipes/avatar.js";
@@ -75,8 +80,8 @@ const args = (name: string): string[] => { const out: string[] = []; for (let i 
 
 const archetype = arg("archetype");
 const library = arg("library");
-const ARCHETYPES = ["checkbox", "switch", "avatar", "tooltip", "chip", "link", "tabs", "radio"] as const;
-if (!ARCHETYPES.includes(archetype as (typeof ARCHETYPES)[number]) || !library) throw new Error("usage: --archetype checkbox|switch|avatar|tooltip|chip|link|tabs|radio --library <slug> [--glyph-file <json> (checkbox)] [--roles-file <json>] [--set path=v --why 'path=evidence']…");
+const ARCHETYPES = ["checkbox", "switch", "avatar", "tooltip", "chip", "link", "tabs", "radio", "textarea"] as const;
+if (!ARCHETYPES.includes(archetype as (typeof ARCHETYPES)[number]) || !library) throw new Error("usage: --archetype checkbox|switch|avatar|tooltip|chip|link|tabs|radio|textarea --library <slug> [--glyph-file <json> (checkbox)] [--roles-file <json>] [--set path=v --why 'path=evidence']…");
 // --capture <name>: the captured component directory when the library names
 // the archetype differently (AntD and Carbon capture a Tag; chip@1 reads it).
 const captureName = arg("capture") ?? archetype;
@@ -95,20 +100,20 @@ const ledger = new Ledger(REPO, ledgerRel);
 say(`1. capture   ${ledgerRel} (${ledger.keys().length} captures)`);
 
 // 2. roles
-type Roles = CheckboxRoles | (SwitchRoles & { combos: SwitchComboMap }) | (AvatarRoles & { combo: string }) | (TooltipRoles & { combo: string }) | (ChipRoles & { combo: string }) | (LinkRoles & { combo: string }) | (TabsRoles & { combo: string }) | (RadioRoles & { combos: RadioComboMap });
+type Roles = CheckboxRoles | (SwitchRoles & { combos: SwitchComboMap }) | (AvatarRoles & { combo: string }) | (TooltipRoles & { combo: string }) | (ChipRoles & { combo: string }) | (LinkRoles & { combo: string }) | (TabsRoles & { combo: string }) | (RadioRoles & { combos: RadioComboMap }) | (TextareaRoles & { combos: TextareaComboMap });
 let roles: Roles;
 const rolesFile = arg("roles-file");
 if (rolesFile) {
   roles = JSON.parse(readFileSync(path.resolve(rolesFile), "utf8")) as Roles;
   say(`2. roles     from ${rolesFile} (reviewed)`);
 } else {
-  const draft = archetype === "checkbox" ? draftCheckboxRoles(ledger) : archetype === "switch" ? draftSwitchRoles(ledger) : archetype === "avatar" ? draftAvatarRoles(ledger) : archetype === "tooltip" ? draftTooltipRoles(ledger) : archetype === "chip" ? draftChipRoles(ledger) : archetype === "link" ? draftLinkRoles(ledger) : archetype === "radio" ? draftRadioRoles(ledger) : draftTabsRoles(ledger);
+  const draft = archetype === "checkbox" ? draftCheckboxRoles(ledger) : archetype === "switch" ? draftSwitchRoles(ledger) : archetype === "avatar" ? draftAvatarRoles(ledger) : archetype === "tooltip" ? draftTooltipRoles(ledger) : archetype === "chip" ? draftChipRoles(ledger) : archetype === "link" ? draftLinkRoles(ledger) : archetype === "radio" ? draftRadioRoles(ledger) : archetype === "textarea" ? draftTextareaRoles(ledger) : draftTabsRoles(ledger);
   writeFileSync(path.join(outDir, "roles.draft.json"), `${JSON.stringify(draft, null, 2)}\n`);
   if (draft.unresolved.length > 0) {
     console.error(`✖ the role map cannot be drafted from the ledger alone:\n  - ${draft.unresolved.join("\n  - ")}\n  Review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))}, write roles.json, and pass --roles-file.`);
     process.exit(2);
   }
-  roles = (archetype === "checkbox" ? draft.roles : archetype === "switch" || archetype === "radio" ? { ...(draft as { roles: SwitchRoles }).roles, combos: (draft as { combos: SwitchComboMap }).combos } : { ...(draft as { roles: AvatarRoles | TooltipRoles | ChipRoles | LinkRoles | TabsRoles }).roles, combo: (draft as { combo: string }).combo }) as Roles;
+  roles = (archetype === "checkbox" ? draft.roles : archetype === "switch" || archetype === "radio" || archetype === "textarea" ? { ...(draft as { roles: SwitchRoles }).roles, combos: (draft as { combos: SwitchComboMap }).combos } : { ...(draft as { roles: AvatarRoles | TooltipRoles | ChipRoles | LinkRoles | TabsRoles }).roles, combo: (draft as { combo: string }).combo }) as Roles;
   say(`2. roles     DRAFTED from the ledger — ${Object.entries(draft.evidence).map(([k, v]) => `${k}:${(v as { confidence: string }).confidence}`).join(" ")} (review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))})`);
 }
 writeFileSync(path.join(outDir, "roles.json"), `${JSON.stringify(roles, null, 2)}\n`);
@@ -144,6 +149,9 @@ if (archetype === "checkbox") {
 } else if (archetype === "radio") {
   const { combos, ...radioRoles } = roles as RadioRoles & { combos: RadioComboMap };
   proposed = proposeRadioFixture({ ...common, roles: radioRoles, combos });
+} else if (archetype === "textarea") {
+  const { combos, ...textareaRoles } = roles as TextareaRoles & { combos: TextareaComboMap };
+  proposed = proposeTextareaFixture({ ...common, roles: textareaRoles, combos });
 } else {
   const { combo, ...tabsRoles } = roles as TabsRoles & { combo: string };
   proposed = proposeTabsFixture({ ...common, roles: tabsRoles, combo });
@@ -164,19 +172,19 @@ const Arch = archetype[0]!.toUpperCase() + archetype.slice(1);
 const slug = library.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
 const source = mod[`${slug}${Arch}Source`];
 const config = mod[`${slug}${Arch}AdapterConfig`];
-const adapt = (archetype === "checkbox" ? adaptReviewedCheckbox : archetype === "switch" ? adaptReviewedSwitch : archetype === "avatar" ? adaptReviewedAvatar : archetype === "tooltip" ? adaptReviewedTooltip : archetype === "chip" ? adaptReviewedChip : archetype === "link" ? adaptReviewedLink : archetype === "radio" ? adaptReviewedRadio : adaptReviewedTabs) as (s: unknown, c: unknown) => unknown;
+const adapt = (archetype === "checkbox" ? adaptReviewedCheckbox : archetype === "switch" ? adaptReviewedSwitch : archetype === "avatar" ? adaptReviewedAvatar : archetype === "tooltip" ? adaptReviewedTooltip : archetype === "chip" ? adaptReviewedChip : archetype === "link" ? adaptReviewedLink : archetype === "radio" ? adaptReviewedRadio : archetype === "textarea" ? adaptReviewedTextarea : adaptReviewedTabs) as (s: unknown, c: unknown) => unknown;
 const instance = adapt(source, config);
-const compile = (archetype === "checkbox" ? compileCheckboxRecipe : archetype === "switch" ? compileSwitchRecipe : archetype === "avatar" ? compileAvatarRecipe : archetype === "tooltip" ? compileTooltipRecipe : archetype === "chip" ? compileChipRecipe : archetype === "link" ? compileLinkRecipe : archetype === "radio" ? compileRadioRecipe : compileTabsRecipe) as (i: unknown) => ReturnType<typeof compileCheckboxRecipe>;
-const collapse = (archetype === "checkbox" ? collapseCheckboxRecipe : archetype === "switch" ? collapseSwitchRecipe : archetype === "avatar" ? collapseAvatarRecipe : archetype === "tooltip" ? collapseTooltipRecipe : archetype === "chip" ? collapseChipRecipe : archetype === "link" ? collapseLinkRecipe : archetype === "radio" ? collapseRadioRecipe : collapseTabsRecipe) as (e: ReturnType<typeof compileCheckboxRecipe>, s: unknown) => unknown;
+const compile = (archetype === "checkbox" ? compileCheckboxRecipe : archetype === "switch" ? compileSwitchRecipe : archetype === "avatar" ? compileAvatarRecipe : archetype === "tooltip" ? compileTooltipRecipe : archetype === "chip" ? compileChipRecipe : archetype === "link" ? compileLinkRecipe : archetype === "radio" ? compileRadioRecipe : archetype === "textarea" ? compileTextareaRecipe : compileTabsRecipe) as (i: unknown) => ReturnType<typeof compileCheckboxRecipe>;
+const collapse = (archetype === "checkbox" ? collapseCheckboxRecipe : archetype === "switch" ? collapseSwitchRecipe : archetype === "avatar" ? collapseAvatarRecipe : archetype === "tooltip" ? collapseTooltipRecipe : archetype === "chip" ? collapseChipRecipe : archetype === "link" ? collapseLinkRecipe : archetype === "radio" ? collapseRadioRecipe : archetype === "textarea" ? collapseTextareaRecipe : collapseTabsRecipe) as (e: ReturnType<typeof compileCheckboxRecipe>, s: unknown) => unknown;
 const envelope = compile(instance);
 const again = compile(collapse(envelope, (instance as { provenance: { selection: unknown } }).provenance.selection));
 if (envelope.integrity.canonicalHash !== again.integrity.canonicalHash) throw new Error("compile → collapse → compile is not a fixed point for the proposed fixture");
-const recipeHash = (hashRecipeInstance as (r: unknown, i: unknown) => string)(archetype === "checkbox" ? checkboxRecipe : archetype === "switch" ? switchRecipe : archetype === "avatar" ? avatarRecipe : archetype === "tooltip" ? tooltipRecipe : archetype === "chip" ? chipRecipe : archetype === "link" ? linkRecipe : archetype === "radio" ? radioRecipe : tabsRecipe, instance);
+const recipeHash = (hashRecipeInstance as (r: unknown, i: unknown) => string)(archetype === "checkbox" ? checkboxRecipe : archetype === "switch" ? switchRecipe : archetype === "avatar" ? avatarRecipe : archetype === "tooltip" ? tooltipRecipe : archetype === "chip" ? chipRecipe : archetype === "link" ? linkRecipe : archetype === "radio" ? radioRecipe : archetype === "textarea" ? textareaRecipe : tabsRecipe, instance);
 say(`4. compile   fixed point ✔ · ${(envelope.ir as { children: unknown[] }).children.length} variants · ${envelope.accounting.carried.length} carried · ${envelope.receipts.length} receipts · recipe ${recipeHash.slice(0, 8)}`);
 
 // 5. emit
 const src = { adapterIdentity: `${library}-${archetype}-proposed-v1`, displayName: arg("display-name") ?? library, recipeHash, envelope };
-const emit = (archetype === "checkbox" ? emitCheckboxFigmaWriter : archetype === "switch" ? emitSwitchFigmaWriter : archetype === "avatar" ? emitAvatarFigmaWriter : archetype === "tooltip" ? emitTooltipFigmaWriter : archetype === "chip" ? emitChipFigmaWriter : archetype === "link" ? emitLinkFigmaWriter : archetype === "radio" ? emitRadioFigmaWriter : emitTabsFigmaWriter) as (inputs: Array<typeof src>, o: { target: "plugin" | "scratch" }) => { code: string; pageName: string };
+const emit = (archetype === "checkbox" ? emitCheckboxFigmaWriter : archetype === "switch" ? emitSwitchFigmaWriter : archetype === "avatar" ? emitAvatarFigmaWriter : archetype === "tooltip" ? emitTooltipFigmaWriter : archetype === "chip" ? emitChipFigmaWriter : archetype === "link" ? emitLinkFigmaWriter : archetype === "radio" ? emitRadioFigmaWriter : archetype === "textarea" ? emitTextareaFigmaWriter : emitTabsFigmaWriter) as (inputs: Array<typeof src>, o: { target: "plugin" | "scratch" }) => { code: string; pageName: string };
 const plugin = emit([src], { target: "plugin" });
 const scratch = emit([src], { target: "scratch" });
 writeFileSync(path.join(outDir, "writer.plugin.js"), plugin.code);

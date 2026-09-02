@@ -1,0 +1,290 @@
+{
+  "archetype": "textarea",
+  "library": "mui",
+  "ledger": "extract/computed/out/mui/textarea/captured-truth.json",
+  "provenance": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "inner": "idx:1.0",
+    "box": "idx:1",
+    "outline": "idx:1.2",
+    "legend": "idx:1.2.0",
+    "label": "idx:0",
+    "container": "root",
+    "opacityOn": "idx:1"
+  },
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  },
+  "leaves": {
+    "box.height": {
+      "value": 56,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.height"
+    },
+    "box.paddingX": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.padding-left"
+    },
+    "box.paddingY": {
+      "value": 16.5,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.padding-top"
+    },
+    "box.radius": {
+      "value": 4,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-top-width",
+      "formula": "the distinct outline part's border"
+    },
+    "box.rows": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.height | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.line-height | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.box-sizing | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.padding-top | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.padding-bottom | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.border-top-width | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.border-bottom-width",
+      "formula": "rendered rows = the inner textarea's content height / its line-height (a border-box height minus its padding and border; a content-box height as is)"
+    },
+    "box.lineHeight": {
+      "value": 23,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.line-height"
+    },
+    "labelGap": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default root.row-gap | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.margin-bottom | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.margin-top",
+      "formula": "the space between the label and the box: container row-gap + label margin-bottom + box margin-top (keywords read 0; a floating label overlays the box and reads 0)"
+    },
+    "labelFontSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-size"
+    },
+    "valueFontSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.font-size"
+    },
+    "labelPlacement": {
+      "value": "floating",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.position | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform | extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.transform",
+      "formula": "floating when the label is absolutely positioned or its transform changes between the empty and value combos; otherwise stacked"
+    },
+    "labelInsetX": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform",
+      "formula": "rest label transform matrix tx (none → 0)"
+    },
+    "labelInactiveOffsetY": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform",
+      "formula": "rest label transform matrix ty (none → 0)"
+    },
+    "labelFloatingOffsetY": {
+      "value": -9,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.transform",
+      "formula": "the value combo's label transform matrix ty (a stacked label: 0)"
+    },
+    "floatingLabelFontSize": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.font-size | extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.transform",
+      "formula": "the value combo's label font-size × its transform scale a (a stacked label: the label size)"
+    },
+    "notchFill": {
+      "value": "#ffffffff",
+      "from": "set",
+      "why": "palette.background.paper"
+    },
+    "outlineTreatment": {
+      "value": "notched",
+      "from": "spelling",
+      "why": "follows from the anatomy: a legend inside a distinct outline is the notched treatment"
+    },
+    "strokeAlign": {
+      "value": "outside",
+      "from": "spelling",
+      "why": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside"
+    },
+    "boxClips": {
+      "value": "true",
+      "from": "spelling",
+      "why": "the box clips its text — recipe geometry"
+    },
+    "states.empty.enabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.background-color"
+    },
+    "states.empty.enabled.boxBorder": {
+      "value": "#0000003b",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-top-color"
+    },
+    "states.empty.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.opacity"
+    },
+    "states.empty.enabled.label": {
+      "value": "#00000099",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.color"
+    },
+    "states.empty.enabled.value": {
+      "value": "#0000005d",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0::placeholder.color | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0::placeholder.opacity | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__focus-visible idx:1.0::placeholder.color | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__focus-visible idx:1.0::placeholder.opacity",
+      "formula": "placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+    },
+    "states.empty.disabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:1.background-color"
+    },
+    "states.empty.disabled.boxBorder": {
+      "value": "#00000042",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:1.2.border-top-color"
+    },
+    "states.empty.disabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:1.opacity"
+    },
+    "states.empty.disabled.label": {
+      "value": "#00000061",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:0.color"
+    },
+    "states.empty.disabled.value": {
+      "value": "#00000061",
+      "from": "set",
+      "why": "palette.text.disabled"
+    },
+    "states.value.enabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.background-color"
+    },
+    "states.value.enabled.boxBorder": {
+      "value": "#0000003b",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.2.border-top-color"
+    },
+    "states.value.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.opacity"
+    },
+    "states.value.enabled.label": {
+      "value": "#00000099",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.color"
+    },
+    "states.value.enabled.value": {
+      "value": "#000000de",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.0.color | extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.0.-webkit-text-fill-color",
+      "formula": "the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+    },
+    "states.value.disabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.background-color"
+    },
+    "states.value.disabled.boxBorder": {
+      "value": "#00000042",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.2.border-top-color"
+    },
+    "states.value.disabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.opacity"
+    },
+    "states.value.disabled.label": {
+      "value": "#00000061",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:0.color"
+    },
+    "states.value.disabled.value": {
+      "value": "#00000061",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.0.color | extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.0.-webkit-text-fill-color",
+      "formula": "the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+    },
+    "typography.label.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "typography.value.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.font-family",
+      "formula": "first family of the field text's computed stack"
+    },
+    "typography.value.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.font-weight",
+      "formula": "field font-weight → style word"
+    }
+  },
+  "receipts": [
+    {
+      "path": "notchFill",
+      "why": "the notch knockout is the surface showing through the legend gap — no computed channel carries it (the legend's background is transparent)",
+      "evidence": "palette.background.paper",
+      "value": "#ffffffff"
+    },
+    {
+      "path": "states.empty.disabled.value",
+      "why": "ledger value unusable: the placeholder is hidden (opacity 0) at rest and at focus — its ink is unobservable in this capture",
+      "evidence": "palette.text.disabled",
+      "value": "#00000061"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": "Notes",
+    "placeholder": "Add a note",
+    "value": "Meeting notes for Tuesday.",
+    "placeholderSource": "extract/computed/configs/mui.json#Textarea fixedProps.placeholder"
+  },
+  "typography": {
+    "label": {
+      "family": "Roboto",
+      "style": "Regular",
+      "stack": "Roboto, Helvetica, Arial, sans-serif"
+    },
+    "value": {
+      "family": "Roboto",
+      "style": "Regular",
+      "stack": "Roboto, Helvetica, Arial, sans-serif"
+    }
+  }
+}

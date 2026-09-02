@@ -1,0 +1,15 @@
+{
+  "inner": "idx:1.0",
+  "box": "idx:1",
+  "outline": "idx:1.2",
+  "legend": "idx:1.2.0",
+  "label": "idx:0",
+  "container": "root",
+  "opacityOn": "idx:1",
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  }
+}

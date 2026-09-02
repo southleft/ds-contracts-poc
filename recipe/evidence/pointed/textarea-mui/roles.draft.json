@@ -1,0 +1,60 @@
+{
+  "roles": {
+    "inner": "idx:1.0",
+    "box": "idx:1",
+    "outline": "idx:1.2",
+    "legend": "idx:1.2.0",
+    "label": "idx:0",
+    "container": "root",
+    "opacityOn": "idx:1"
+  },
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "empty.enabled ← empty.enabled (from the declared base empty.enabled); empty.disabled ← empty.disabled (from the declared base empty.enabled); value.enabled ← value.enabled (from the declared base empty.enabled); value.disabled ← value.disabled (from the declared base empty.enabled)",
+      "confidence": "high"
+    },
+    "inner": {
+      "selector": "idx:1.0",
+      "why": "textarea 160px×46px carrying \"Meeting notes for Tuesday.\" in the value combo",
+      "confidence": "high"
+    },
+    "box": {
+      "selector": "idx:1",
+      "why": "div.MuiInputBase-root 188px×56px border 0px bg rgba(0, 0, 0, 0) padding 16.5px/14px hosting an absolute outline fieldset",
+      "confidence": "high"
+    },
+    "outline": {
+      "selector": "idx:1.2",
+      "why": "absolute fieldset child with border 1px rgba(0, 0, 0, 0.23) — the outline is a distinct part",
+      "confidence": "high"
+    },
+    "legend": {
+      "selector": "idx:1.2.0",
+      "why": "legend inside the outline (0px×11px) — the notched treatment",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "label.MuiFormLabel-root carries text \"Notes\" — position absolute, transform matrix(1, 0, 0, 1, 14, 16) → matrix(0.75, 0, 0, 0.75, 14, -9) in the value combo",
+      "confidence": "high"
+    },
+    "container": {
+      "selector": "root",
+      "why": "nearest common ancestor of label and box: div display inline-flex, row-gap normal",
+      "confidence": "high"
+    },
+    "opacityOn": {
+      "selector": "idx:1",
+      "why": "nothing dims when disabled; the box carries opacity 1",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

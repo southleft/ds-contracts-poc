@@ -104,8 +104,12 @@ export interface TextareaRecipeInstance {
     };
   };
   content: {
-    /** Astryx TextArea.tsx example label. */
-    label: string;
+    /**
+     * Astryx TextArea.tsx example label. `null` is the BARE CELL: the mount
+     * has no label part (AntD's Input.TextArea, Chakra's Textarea), the
+     * recipe compiles no label node, and every label leaf is inert.
+     */
+    label: string | null;
     /** Shared fixture copy for the empty cell — not a library default string. */
     placeholder: string;
     /** Shared fixture copy for the filled cell. */
@@ -217,7 +221,7 @@ export const TextareaRecipeInstanceSchema = z.strictObject({
     }),
   }),
   content: z.strictObject({
-    label: z.string().min(1),
+    label: z.string().min(1).nullable(),
     placeholder: z.string().min(1),
     value: z.string().min(1),
   }),
@@ -332,6 +336,29 @@ const cellOf = (
     disabled === "true" ? "disabled" : "enabled"
   ];
 
+/**
+ * THE BARE CELL — a textarea with no label part. The label leaves are inert
+ * and carry the recipe's own constants, never a library fact: size 0,
+ * transparent, and a font declared inert (the same spelling as checkbox@1).
+ */
+export const BARE_LABEL_FONT_SIZE = 0;
+export const BARE_LABEL_COLOR = "#00000000";
+export const bareLabelFont = (): TextareaFontSpec => ({
+  requestedFamily: "Arial",
+  requestedStyle: "Regular",
+  requestSource: "bare cell — no label is compiled; this spec is inert",
+  fallbackChain: [{ family: "Arial", style: "Regular" }],
+  resolvedFamily: "Arial",
+  resolvedStyle: "Regular",
+  resolution: "requested",
+});
+const hasLabel = (variant: ComponentNode): boolean =>
+  (variant.children ?? []).some(
+    (c) =>
+      (c.role === "textarea/label" && c.kind === "text") ||
+      (c.role === "textarea/label-row" && c.kind === "frame"),
+  );
+
 const labelText = (
   instance: TextareaRecipeInstance,
   cell: StateCell,
@@ -340,7 +367,8 @@ const labelText = (
   kind: "text",
   role: "textarea/label",
   label: "textarea/label",
-  characters: instance.content.label,
+  // only called for a labelled instance (variantComponent skips the bare cell)
+  characters: instance.content.label ?? "",
   type: {
     fontFamily: instance.tokens.typography.label.resolvedFamily,
     fontStyle: instance.tokens.typography.label.resolvedStyle,
@@ -454,12 +482,17 @@ const variantComponent = (
   content: TextareaContent,
 ): ComponentNode => {
   const cell = cellOf(instance, content, disabled);
+  const bare = instance.content.label === null;
   const floating = instance.tokens.labelPlacement === "floating";
+  if (bare && floating)
+    throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
+      "a bare textarea (content.label null) has no label to float — labelPlacement must be stacked",
+    ]);
   const shrunk = floating && content !== "empty";
   const labelFont = shrunk
     ? instance.tokens.floatingLabelFontSize
     : instance.tokens.labelFontSize;
-  const label = labelText(instance, cell, labelFont);
+  const label = bare ? null : labelText(instance, cell, labelFont);
   const box = boxNode(instance, content, cell);
   const labelRow: FrameNode = {
     kind: "frame",
@@ -490,7 +523,7 @@ const variantComponent = (
       shrunk && instance.tokens.outlineTreatment === "notched"
         ? [bind("fills.0.color", instance.tokens.notchFill)]
         : [],
-    children: [label],
+    children: label ? [label] : [],
   };
   return {
     kind: "component",
@@ -512,7 +545,7 @@ const variantComponent = (
     fills: [],
     ...(floating ? { clipsContent: false } : {}),
     bindings: [bind("layout.itemSpacing", instance.tokens.labelGap)],
-    children: floating ? [box, labelRow] : [label, box],
+    children: label === null ? [box] : floating ? [box, labelRow] : [label, box],
   };
 };
 
@@ -656,6 +689,7 @@ export function validateTextareaStructure(root: IRNode): void {
     ]);
   const aligns = new Set<string>();
   const clips = new Set<string>();
+  const labelled = new Set<boolean>();
   for (const disabled of TEXTAREA_DISABLED) {
     for (const content of TEXTAREA_CONTENT) {
       const variant = componentFor(set, {
@@ -690,9 +724,10 @@ export function validateTextareaStructure(root: IRNode): void {
             `${variant.role}: floating label-row must be absolute`,
           ]);
         direct(labelRow, "textarea/label", "text");
-      } else {
+      } else if (hasLabel(variant)) {
         direct(variant, "textarea/label", "text");
       }
+      labelled.add(hasLabel(variant));
       const value = direct(box, "textarea/value", "text");
       if (labelRow && content === "empty" && value.visible !== false)
         throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
@@ -704,6 +739,10 @@ export function validateTextareaStructure(root: IRNode): void {
         ]);
     }
   }
+  if (labelled.size !== 1)
+    throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
+      "every variant carries a label, or none does (the bare cell) — not a mix",
+    ]);
   if (aligns.size !== 1)
     throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
       "strokeAlign must be one value for the whole instance",
@@ -752,13 +791,13 @@ const firstDifference = (
   return undefined;
 };
 
-const labelFromVariant = (variant: ComponentNode): TextNode => {
+const labelFromVariant = (variant: ComponentNode): TextNode | null => {
   const labelRow = (variant.children ?? []).find(
     (child) => child.role === "textarea/label-row" && child.kind === "frame",
   );
   if (labelRow && labelRow.kind === "frame")
     return direct(labelRow, "textarea/label", "text");
-  return direct(variant, "textarea/label", "text");
+  return hasLabel(variant) ? direct(variant, "textarea/label", "text") : null;
 };
 
 const cellFromVariant = (variant: ComponentNode): StateCell => {
@@ -780,11 +819,9 @@ const cellFromVariant = (variant: ComponentNode): StateCell => {
       variable: "textarea.boxOpacity",
       fallback: box.opacity ?? 1,
     },
-    label: colorFrom(
-      label,
-      "fills.0.color",
-      solidColor(label.fills[0], label.role!),
-    ),
+    label: label
+      ? colorFrom(label, "fills.0.color", solidColor(label.fills[0], label.role!))
+      : { variable: `${variant.role}-label`, fallback: BARE_LABEL_COLOR },
     value: colorFrom(
       value,
       "fills.0.color",
@@ -847,7 +884,7 @@ export function collapseTextareaRecipe(
       },
     },
     content: {
-      label: label.characters,
+      label: label ? label.characters : null,
       placeholder: value.characters,
       value: direct(direct(filled, "textarea/box", "frame"), "textarea/value", "text")
         .characters,
@@ -878,7 +915,9 @@ export function collapseTextareaRecipe(
         "layout.itemSpacing",
         empty.layout.itemSpacing,
       ),
-      labelFontSize: numberFrom(label, "type.fontSize", label.type.fontSize),
+      labelFontSize: label
+        ? numberFrom(label, "type.fontSize", label.type.fontSize)
+        : { variable: `${envelope.id}.labelFontSize`, fallback: BARE_LABEL_FONT_SIZE },
       valueFontSize: numberFrom(value, "type.fontSize", value.type.fontSize),
       labelPlacement: floating ? "floating" : "stacked",
       outlineTreatment: notched ? "notched" : "plain",
@@ -912,11 +951,9 @@ export function collapseTextareaRecipe(
               variable: `${envelope.id}.labelFloatingOffsetY`,
               fallback: 0,
             },
-      floatingLabelFontSize: numberFrom(
-        filledLabel,
-        "type.fontSize",
-        filledLabel.type.fontSize,
-      ),
+      floatingLabelFontSize: filledLabel
+        ? numberFrom(filledLabel, "type.fontSize", filledLabel.type.fontSize)
+        : { variable: `${envelope.id}.floatingLabelFontSize`, fallback: BARE_LABEL_FONT_SIZE },
       notchFill:
         filledRow && filledRow.kind === "frame" && filledRow.fills[0]
           ? colorFrom(
@@ -945,7 +982,7 @@ export function collapseTextareaRecipe(
         },
       },
       typography: {
-        label: fontFrom(label),
+        label: label ? fontFrom(label) : bareLabelFont(),
         value: fontFrom(value),
       },
     },

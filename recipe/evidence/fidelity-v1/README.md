@@ -448,3 +448,19 @@ five sources. See `f1-radio-proposed/`.
     radio/antd-proposed 0.00% · radio/chakra 0.00%
 
     35 pass · 0 fringe · 15 known
+
+### 2026-09-02 — textarea@1 gets a proposer and a bare cell
+
+The ninth archetype with a proposer, and the first whose honesty needed a
+recipe change: textarea@1 now has a bare (label-less) cell for the lone
+`<textarea>` most libraries ship. MUI's proposal reads the floating notched
+label from the label's transform and scores exactly its hand row (9.52%,
+the named real-defect). AntD's proposal is the bare cell and scores 1.25%
+where the hand row is a named 7.42% content mismatch. Chakra's Textarea,
+re-captured today with real screenshots (the legacy contract path
+quarantines it; the quarantine path keeps the originals), is held out at
+1.64%. Minted as textarea v9 with six sources. See `f1-textarea-proposed/`.
+
+    textarea/mui-proposed 9.52% (named, = hand) · textarea/antd-proposed 1.25% · textarea/chakra 1.64%
+
+    37 pass · 0 fringe · 16 known

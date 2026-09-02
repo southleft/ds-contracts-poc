@@ -1,0 +1,11 @@
+{
+  "inner": "root",
+  "box": "root",
+  "opacityOn": "root",
+  "combos": {
+    "empty.enabled": "empty.enabled",
+    "empty.disabled": "empty.disabled",
+    "value.enabled": "value.enabled",
+    "value.disabled": "value.disabled"
+  }
+}

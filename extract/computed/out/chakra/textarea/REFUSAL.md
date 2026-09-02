@@ -5,6 +5,7 @@ QUARANTINE — this component produced NO CONTRACT. The refusal below is scoped 
 - library: `@chakra-ui/react@3.37.0`
 - reason: **Textarea: enriched contract failed generator validation (2 error(s))**
 - captured-truth.json written: **true** (the measurement survives the refusal)
+- real-library screenshots kept: **16** → `orig-shots/` (`--keep-originals`; the measurement survives the refusal)
 
 ## What was refused
 

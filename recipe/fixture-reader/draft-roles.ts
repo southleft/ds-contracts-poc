@@ -27,6 +27,7 @@ import type { ChipRoles } from "./schema-chip.js";
 import type { LinkRoles } from "./schema-link.js";
 import type { TabsRoles } from "./schema-tabs.js";
 import type { RadioComboMap, RadioRoles } from "./schema-radio.js";
+import type { TextareaComboMap, TextareaRoles } from "./schema-textarea.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -594,6 +595,137 @@ export function draftRadioRoles(ledger: Ledger): RadioRoleDraft {
     const dimmed = cands.find((p) => num(disBy.get(p.idxPath)?.style.opacity ?? "1") < num(p.style.opacity ?? "1"));
     roles.opacityOn = dimmed ? sel(dimmed) : roles.circle;
     evidence.opacityOn = { selector: roles.opacityOn!, why: dimmed ? `${dimmed.tag} opacity ${dimmed.style.opacity} → ${disBy.get(dimmed.idxPath)!.style.opacity} when disabled` : "nothing dims when disabled; the circle carries opacity 1", confidence: "high" };
+  }
+
+  return { roles, combos, evidence, unresolved };
+}
+
+
+export interface TextareaRoleDraft {
+  roles: Partial<TextareaRoles>;
+  combos: Partial<TextareaComboMap>;
+  evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
+  unresolved: string[];
+}
+
+/** textarea@1 combos: the CONTENT plane (empty/value) × the disabled plane, from the declared base cell. */
+export function draftTextareaCombos(ledger: Ledger): { combos: Partial<TextareaComboMap>; evidence: string[]; unresolved: string[] } {
+  const keys = ledger.keys().filter((k) => k.endsWith("__default")).map((k) => k.slice(0, -"__default".length));
+  const EMPTY = /(^|\.)(empty)(\.|$)/, VALUE = /(^|\.)(value|filled)(\.|$)/;
+  const DIS = /(^|\.)(disabled|isDisabled)(\.|$)/, EN = /(^|\.)(enabled|no-isDisabled)(\.|$)/;
+  const combos: Partial<TextareaComboMap> = {};
+  const evidence: string[] = [], unresolved: string[] = [];
+  const base = ledger.baseKey?.replace(/__default$/, "");
+  const swap = (k: string, from: RegExp, to: string): string => k.replace(from, (_m, pre: string, _v: string, post: string) => `${pre}${to}${post}`);
+  const pick = (a: RegExp, b: RegExp): string | undefined => keys.filter((k) => a.test(k) && b.test(k)).sort((x, y) => x.length - y.length)[0];
+  const cand: Record<keyof TextareaComboMap, string | undefined> =
+    base && EMPTY.test(base) && EN.test(base)
+      ? (() => {
+          const enTok = base.match(EN)![2]!, disTok = { enabled: "disabled", "no-isDisabled": "isDisabled" }[enTok]!;
+          const valueKey = keys.find((k) => k === swap(base, EMPTY, "value")) ?? keys.find((k) => k === swap(base, EMPTY, "filled"));
+          const valueTok = valueKey ? valueKey.match(VALUE)![2]! : "value";
+          return { "empty.enabled": base, "empty.disabled": swap(base, EN, disTok), "value.enabled": swap(base, EMPTY, valueTok), "value.disabled": swap(swap(base, EMPTY, valueTok), EN, disTok) };
+        })()
+      : { "empty.enabled": pick(EMPTY, EN), "empty.disabled": pick(EMPTY, DIS), "value.enabled": pick(VALUE, EN), "value.disabled": pick(VALUE, DIS) };
+  for (const [fix, k] of Object.entries(cand) as Array<[keyof TextareaComboMap, string | undefined]>) {
+    if (k && keys.includes(k)) { combos[fix] = k; evidence.push(`${fix} ← ${k}${base ? ` (from the declared base ${base})` : ""}`); }
+    else unresolved.push(`${fix}: ${k ?? "no match"} was not captured (captured: ${keys.slice(0, 8).join(" ")}${keys.length > 8 ? " …" : ""})`);
+  }
+  return { combos, evidence, unresolved };
+}
+
+/**
+ * Draft the textarea@1 role map by what the parts DO: the inner is the
+ * <textarea> that carries the value; the box is the nearest ancestor-or-self
+ * that paints (border, fill or padding) or hosts a distinct absolutely
+ * positioned outline; the outline is that bordered absolute child and the
+ * legend the <legend> inside it; the label is the <label> (or the text part
+ * outside the box); the container their nearest common ancestor; opacity is
+ * read from whichever of box/container/inner dims when disabled. No label
+ * part is NOT unresolved: textarea@1 has a bare cell.
+ */
+export function draftTextareaRoles(ledger: Ledger): TextareaRoleDraft {
+  const { combos, evidence: comboEvidence, unresolved: comboUnresolved } = draftTextareaCombos(ledger);
+  const evidence: TextareaRoleDraft["evidence"] = {};
+  const unresolved: string[] = [...comboUnresolved];
+  const roles: TextareaRoleDraft["roles"] = {};
+  evidence.combos = { selector: null, why: comboEvidence.join("; ") || "no combo resolved", confidence: comboUnresolved.length ? "low" : "high" };
+  if (!combos["empty.enabled"] || !combos["value.enabled"]) return { roles, combos, evidence, unresolved };
+  const base = ledger.capture(`${combos["empty.enabled"]}__default`);
+  const filled = ledger.capture(`${combos["value.enabled"]}__default`);
+  const disabled = combos["empty.disabled"] ? ledger.capture(`${combos["empty.disabled"]}__default`) : null;
+  const byPath = (cap: { parts: LedgerPart[] }) => new Map(cap.parts.map((p) => [p.idxPath, p] as const));
+  const baseBy = byPath(base), filledBy = byPath(filled);
+  const paints = (p: LedgerPart): boolean => num(p.style["border-top-width"]) > 0 || !isTransparent(p.style["background-color"]) || num(p.style["padding-top"]) > 0 || num(p.style["padding-left"]) > 0;
+  const childrenOf = (idx: string): LedgerPart[] => base.parts.filter((p) => parentPath(p.idxPath) === idx);
+  const outlineChild = (idx: string): LedgerPart | undefined => childrenOf(idx).find((p) => p.tag !== "textarea" && p.style.position === "absolute" && num(p.style["border-top-width"]) > 0);
+
+  // INNER: the <textarea> with a rendered height, preferring the one that carries the value.
+  const textareas = filled.parts.filter((p) => p.tag === "textarea" && num(p.style.height) > 0);
+  const inner = textareas.find(hasTextPart) ?? textareas[0] ?? null;
+  if (inner) {
+    roles.inner = sel(inner);
+    evidence.inner = { selector: roles.inner, why: `textarea ${inner.style.width}×${inner.style.height}${hasTextPart(inner) ? ` carrying ${JSON.stringify(inner.text[0])} in the value combo` : ""}`, confidence: hasTextPart(inner) ? "high" : "medium" };
+  } else {
+    unresolved.push("inner: no <textarea> part with a rendered height");
+    evidence.inner = { selector: null, why: "no candidate", confidence: "low" };
+  }
+
+  // BOX: nearest ancestor-or-self of the inner that paints or hosts an outline.
+  let box: LedgerPart | null = null;
+  if (inner) {
+    let idx: string | null = inner.idxPath;
+    while (idx !== null) {
+      const p = baseBy.get(idx);
+      if (p && (paints(p) || outlineChild(idx))) { box = p; break; }
+      idx = parentPath(idx);
+    }
+    if (box) {
+      roles.box = sel(box);
+      const outline = outlineChild(box.idxPath);
+      evidence.box = { selector: roles.box, why: `${box.tag}${box.classes.length ? "." + box.classes[0] : ""} ${box.style.width}×${box.style.height} border ${box.style["border-top-width"]} bg ${box.style["background-color"]} padding ${box.style["padding-top"]}/${box.style["padding-left"]}${outline ? ` hosting an absolute outline ${outline.tag}` : ""}`, confidence: "high" };
+      if (outline) {
+        roles.outline = sel(outline);
+        evidence.outline = { selector: roles.outline, why: `absolute ${outline.tag} child with border ${outline.style["border-top-width"]} ${outline.style["border-top-color"]} — the outline is a distinct part`, confidence: "high" };
+        const legend = base.parts.find((p) => p.tag === "legend" && p.idxPath.startsWith(outline.idxPath + "."));
+        if (legend) { roles.legend = sel(legend); evidence.legend = { selector: roles.legend, why: `legend inside the outline (${legend.style.width}×${legend.style.height}) — the notched treatment`, confidence: "high" }; }
+      }
+    } else {
+      unresolved.push("box: no ancestor-or-self of the inner textarea paints a border, fill or padding");
+      evidence.box = { selector: null, why: "no candidate", confidence: "low" };
+    }
+  }
+
+  // LABEL: a <label>, else a text part outside the box (never the inner). Absent = the bare cell.
+  const insideBox = (idx: string): boolean => !!box && (box.idxPath === "" ? true : idx === box.idxPath || idx.startsWith(box.idxPath + "."));
+  const label = base.parts.find((p) => p.tag === "label" && hasTextPart(p)) ?? base.parts.find((p) => hasTextPart(p) && p.tag !== "textarea" && p.tag !== "input" && !insideBox(p.idxPath));
+  if (label) {
+    roles.label = sel(label);
+    evidence.label = { selector: roles.label, why: `${label.tag}${label.classes.length ? "." + label.classes[0] : ""} carries text ${JSON.stringify(label.text.find((t) => t.trim()))} — position ${label.style.position}, transform ${label.style.transform} → ${filledBy.get(label.idxPath)?.style.transform} in the value combo`, confidence: "high" };
+  } else {
+    evidence.label = { selector: null, why: "no label part — the bare cell; the recipe compiles no label node and every label leaf is the bare-cell spelling", confidence: "high" };
+  }
+
+  // CONTAINER: nearest common ancestor of label and box.
+  if (box && label) {
+    let a: string | null = box.idxPath; const ancestors = new Set<string>();
+    while (a !== null) { ancestors.add(a); a = parentPath(a); }
+    let b: string | null = parentPath(label.idxPath), common: string | null = null;
+    while (b !== null) { if (ancestors.has(b) && b !== box.idxPath) { common = b; break; } b = parentPath(b); }
+    const container = common !== null ? baseBy.get(common) : undefined;
+    if (container) {
+      roles.container = sel(container);
+      evidence.container = { selector: roles.container, why: `nearest common ancestor of label and box: ${container.tag} display ${container.style.display}, row-gap ${container.style["row-gap"]}`, confidence: "high" };
+    }
+  }
+
+  // OPACITY: whichever of box / container / inner dims when disabled.
+  if (disabled && box) {
+    const disBy = byPath(disabled);
+    const cands = [box, roles.container ? baseBy.get(roles.container.replace(/^idx:/, "").replace(/^root$/, "")) : undefined, inner].filter((p): p is LedgerPart => !!p);
+    const dimmed = cands.find((p) => num(disBy.get(p.idxPath)?.style.opacity ?? "1") < num(p.style.opacity ?? "1"));
+    roles.opacityOn = dimmed ? sel(dimmed) : roles.box;
+    evidence.opacityOn = { selector: roles.opacityOn!, why: dimmed ? `${dimmed.tag} opacity ${dimmed.style.opacity} → ${disBy.get(dimmed.idxPath)!.style.opacity} when disabled` : "nothing dims when disabled; the box carries opacity 1", confidence: "high" };
   }
 
   return { roles, combos, evidence, unresolved };

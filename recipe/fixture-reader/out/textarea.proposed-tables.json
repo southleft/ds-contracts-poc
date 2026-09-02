@@ -834,5 +834,908 @@
         "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-weight"
       }
     }
+  },
+  {
+    "library": "mui-proposed",
+    "archetype": "textarea",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "TextField"
+    },
+    "ledger": "extract/computed/out/mui/textarea/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 56,
+        "proposed": 56,
+        "verdict": "match",
+        "captured": 56,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.height"
+      },
+      "box.paddingX": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 16.5,
+        "proposed": 16.5,
+        "verdict": "match",
+        "captured": 16.5,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-top-width — the distinct outline part's border"
+      },
+      "box.rows": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.height ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.line-height ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.box-sizing ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.padding-top ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.padding-bottom ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.border-top-width ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.border-bottom-width — rendered rows = the inner textarea's content height / its line-height (a border-box height minus its padding and border; a content-box height as is)"
+      },
+      "box.lineHeight": {
+        "fixture": 23,
+        "proposed": 23,
+        "verdict": "match",
+        "captured": 23,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.line-height"
+      },
+      "labelGap": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default root.row-gap ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.margin-bottom ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.margin-top — the space between the label and the box: container row-gap + label margin-bottom + box margin-top (keywords read 0; a floating label overlays the box and reads 0)"
+      },
+      "labelFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-size"
+      },
+      "valueFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.font-size"
+      },
+      "labelPlacement": {
+        "fixture": "floating",
+        "proposed": "floating",
+        "verdict": "match",
+        "captured": "floating",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.position ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform ; extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.transform — floating when the label is absolutely positioned or its transform changes between the empty and value combos; otherwise stacked"
+      },
+      "labelInsetX": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform — rest label transform matrix tx (none → 0)"
+      },
+      "labelInactiveOffsetY": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.transform — rest label transform matrix ty (none → 0)"
+      },
+      "labelFloatingOffsetY": {
+        "fixture": -9,
+        "proposed": -9,
+        "verdict": "match",
+        "captured": -9,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.transform — the value combo's label transform matrix ty (a stacked label: 0)"
+      },
+      "floatingLabelFontSize": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.font-size ; extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.transform — the value combo's label font-size × its transform scale a (a stacked label: the label size)"
+      },
+      "notchFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the notch knockout is the surface showing through the legend gap — no computed channel carries it (the legend's background is transparent) [the paper surface showing through the legend gap: palette.background.paper #ffffff (recipe/sandboxes/input-field-mui/node_modules/@mui/material/styles/createPalette.js light.background.paper)]"
+      },
+      "outlineTreatment": {
+        "fixture": "notched",
+        "proposed": "notched",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a legend inside a distinct outline is the notched treatment [reviewed notched]"
+      },
+      "strokeAlign": {
+        "fixture": "outside",
+        "proposed": "outside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed outside]"
+      },
+      "boxClips": {
+        "fixture": "true",
+        "proposed": "true",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the box clips its text — recipe geometry [reviewed true]"
+      },
+      "states.empty.enabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.background-color"
+      },
+      "states.empty.enabled.boxBorder": {
+        "fixture": "#0000003b",
+        "proposed": "#0000003b",
+        "verdict": "match",
+        "captured": "#0000003b",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-top-color"
+      },
+      "states.empty.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.opacity"
+      },
+      "states.empty.enabled.label": {
+        "fixture": "#00000099",
+        "proposed": "#00000099",
+        "verdict": "match",
+        "captured": "#00000099",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.color"
+      },
+      "states.empty.enabled.value": {
+        "fixture": "#0000005d",
+        "proposed": "#0000005d",
+        "verdict": "match",
+        "captured": "#0000005d",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0::placeholder.color ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0::placeholder.opacity ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__focus-visible idx:1.0::placeholder.color ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__focus-visible idx:1.0::placeholder.opacity — placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+      },
+      "states.empty.disabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:1.background-color"
+      },
+      "states.empty.disabled.boxBorder": {
+        "fixture": "#00000042",
+        "proposed": "#00000042",
+        "verdict": "match",
+        "captured": "#00000042",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:1.2.border-top-color"
+      },
+      "states.empty.disabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:1.opacity"
+      },
+      "states.empty.disabled.label": {
+        "fixture": "#00000061",
+        "proposed": "#00000061",
+        "verdict": "match",
+        "captured": "#00000061",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default idx:0.color"
+      },
+      "states.empty.disabled.value": {
+        "fixture": "#00000061",
+        "proposed": "#00000061",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: ledger value unusable: the placeholder is hidden (opacity 0) at rest and at focus — its ink is unobservable in this capture [a disabled field cannot take focus and MUI hides the rest placeholder under the label (::placeholder opacity 0) — palette.text.disabled rgba(0,0,0,0.38) (createPalette.js light.text.disabled)]"
+      },
+      "states.value.enabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.background-color"
+      },
+      "states.value.enabled.boxBorder": {
+        "fixture": "#0000003b",
+        "proposed": "#0000003b",
+        "verdict": "match",
+        "captured": "#0000003b",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.2.border-top-color"
+      },
+      "states.value.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.opacity"
+      },
+      "states.value.enabled.label": {
+        "fixture": "#00000099",
+        "proposed": "#00000099",
+        "verdict": "match",
+        "captured": "#00000099",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:0.color"
+      },
+      "states.value.enabled.value": {
+        "fixture": "#000000de",
+        "proposed": "#000000de",
+        "verdict": "match",
+        "captured": "#000000de",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.0.color ; extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default idx:1.0.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "states.value.disabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.background-color"
+      },
+      "states.value.disabled.boxBorder": {
+        "fixture": "#00000042",
+        "proposed": "#00000042",
+        "verdict": "match",
+        "captured": "#00000042",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.2.border-top-color"
+      },
+      "states.value.disabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.opacity"
+      },
+      "states.value.disabled.label": {
+        "fixture": "#00000061",
+        "proposed": "#00000061",
+        "verdict": "match",
+        "captured": "#00000061",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:0.color"
+      },
+      "states.value.disabled.value": {
+        "fixture": "#00000061",
+        "proposed": "#00000061",
+        "verdict": "match",
+        "captured": "#00000061",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.0.color ; extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default idx:1.0.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:0.font-weight — label font-weight → style word"
+      },
+      "typography.value.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.font-family — first family of the field text's computed stack"
+      },
+      "typography.value.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.0.font-weight — field font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "antd-proposed",
+    "archetype": "textarea",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Input.TextArea"
+    },
+    "ledger": "extract/computed/out/antd/textarea/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 54,
+        "proposed": 54,
+        "verdict": "match",
+        "captured": 54,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.height"
+      },
+      "box.paddingX": {
+        "fixture": 11,
+        "proposed": 11,
+        "verdict": "match",
+        "captured": 11,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-width — the box's own border"
+      },
+      "box.rows": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.height ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.box-sizing ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-top ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-bottom ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-width ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-bottom-width — rendered rows = the inner textarea's content height / its line-height (a border-box height minus its padding and border; a content-box height as is)"
+      },
+      "box.lineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height"
+      },
+      "labelGap": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelFontSize": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "valueFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-size"
+      },
+      "labelPlacement": {
+        "fixture": "stacked",
+        "proposed": "stacked",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelInsetX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelInactiveOffsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelFloatingOffsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "floatingLabelFontSize": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "notchFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout [reviewed #00000000]"
+      },
+      "outlineTreatment": {
+        "fixture": "plain",
+        "proposed": "plain",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a legend inside a distinct outline is the notched treatment [reviewed plain]"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed inside]"
+      },
+      "boxClips": {
+        "fixture": "true",
+        "proposed": "true",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the box clips its text — recipe geometry [reviewed true]"
+      },
+      "states.empty.enabled.boxFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.background-color"
+      },
+      "states.empty.enabled.boxBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-color"
+      },
+      "states.empty.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.opacity"
+      },
+      "states.empty.enabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.empty.enabled.value": {
+        "fixture": "#00000040",
+        "proposed": "#00000040",
+        "verdict": "match",
+        "captured": "#00000040",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root::placeholder.color ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root::placeholder.opacity ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__focus-visible root::placeholder.color ; extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__focus-visible root::placeholder.opacity — placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+      },
+      "states.empty.disabled.boxFill": {
+        "fixture": "#0000000a",
+        "proposed": "#0000000a",
+        "verdict": "match",
+        "captured": "#0000000a",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.background-color"
+      },
+      "states.empty.disabled.boxBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.border-top-color"
+      },
+      "states.empty.disabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.opacity"
+      },
+      "states.empty.disabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.empty.disabled.value": {
+        "fixture": "#00000040",
+        "proposed": "#00000040",
+        "verdict": "match",
+        "captured": "#00000040",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root::placeholder.color ; extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root::placeholder.opacity ; extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__focus-visible root::placeholder.color ; extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__focus-visible root::placeholder.opacity — placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+      },
+      "states.value.enabled.boxFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.background-color"
+      },
+      "states.value.enabled.boxBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.border-top-color"
+      },
+      "states.value.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.opacity"
+      },
+      "states.value.enabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.value.enabled.value": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.color ; extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "states.value.disabled.boxFill": {
+        "fixture": "#0000000a",
+        "proposed": "#0000000a",
+        "verdict": "match",
+        "captured": "#0000000a",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.background-color"
+      },
+      "states.value.disabled.boxBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.border-top-color"
+      },
+      "states.value.disabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.opacity"
+      },
+      "states.value.disabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.value.disabled.value": {
+        "fixture": "#00000040",
+        "proposed": "#00000040",
+        "verdict": "match",
+        "captured": "#00000040",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.color ; extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "typography.label.family": {
+        "fixture": "Arial",
+        "proposed": "Arial",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "typography.value.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-family — first family of the field text's computed stack"
+      },
+      "typography.value.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-weight — field font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "chakra",
+    "archetype": "textarea",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Textarea"
+    },
+    "ledger": "extract/computed/out/chakra/textarea/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 58,
+        "proposed": 58,
+        "verdict": "match",
+        "captured": 58,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.height"
+      },
+      "box.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.border-top-width — the box's own border"
+      },
+      "box.rows": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.height ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.line-height ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.box-sizing ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.padding-top ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.padding-bottom ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.border-top-width ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.border-bottom-width — rendered rows = the inner textarea's content height / its line-height (a border-box height minus its padding and border; a content-box height as is)"
+      },
+      "box.lineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.line-height"
+      },
+      "labelGap": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelFontSize": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "valueFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.font-size"
+      },
+      "labelPlacement": {
+        "fixture": "stacked",
+        "proposed": "stacked",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelInsetX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelInactiveOffsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "labelFloatingOffsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "floatingLabelFontSize": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "notchFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout [reviewed #00000000]"
+      },
+      "outlineTreatment": {
+        "fixture": "plain",
+        "proposed": "plain",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a legend inside a distinct outline is the notched treatment [reviewed plain]"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed inside]"
+      },
+      "boxClips": {
+        "fixture": "true",
+        "proposed": "true",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the box clips its text — recipe geometry [reviewed true]"
+      },
+      "states.empty.enabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.background-color"
+      },
+      "states.empty.enabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.border-top-color"
+      },
+      "states.empty.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.opacity"
+      },
+      "states.empty.enabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.empty.enabled.value": {
+        "fixture": "#52525bcc",
+        "proposed": "#52525bcc",
+        "verdict": "match",
+        "captured": "#52525bcc",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root::placeholder.color ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root::placeholder.opacity ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__focus-visible root::placeholder.color ; extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__focus-visible root::placeholder.opacity — placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+      },
+      "states.empty.disabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.disabled__default root.background-color"
+      },
+      "states.empty.disabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.disabled__default root.border-top-color"
+      },
+      "states.empty.disabled.boxOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.disabled__default root.opacity"
+      },
+      "states.empty.disabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.empty.disabled.value": {
+        "fixture": "#52525bcc",
+        "proposed": "#52525bcc",
+        "verdict": "match",
+        "captured": "#52525bcc",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.disabled__default root::placeholder.color ; extract/computed/out/chakra/textarea/captured-truth.json#empty.disabled__default root::placeholder.opacity ; extract/computed/out/chakra/textarea/captured-truth.json#empty.disabled__focus-visible root::placeholder.color ; extract/computed/out/chakra/textarea/captured-truth.json#empty.disabled__focus-visible root::placeholder.opacity — placeholder ink = ::placeholder colour alpha × opacity at rest; when rest hides it (opacity 0 under an overlaying label) the focus-visible interaction's; hidden in both refuses"
+      },
+      "states.value.enabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.enabled__default root.background-color"
+      },
+      "states.value.enabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.enabled__default root.border-top-color"
+      },
+      "states.value.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.enabled__default root.opacity"
+      },
+      "states.value.enabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.value.enabled.value": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.enabled__default root.color ; extract/computed/out/chakra/textarea/captured-truth.json#value.enabled__default root.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "states.value.disabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.disabled__default root.background-color"
+      },
+      "states.value.disabled.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.disabled__default root.border-top-color"
+      },
+      "states.value.disabled.boxOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.disabled__default root.opacity"
+      },
+      "states.value.disabled.label": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "states.value.disabled.value": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#value.disabled__default root.color ; extract/computed/out/chakra/textarea/captured-truth.json#value.disabled__default root.-webkit-text-fill-color — the field text's ink: -webkit-text-fill-color when it paints (MUI's disabled ink), else color"
+      },
+      "typography.label.family": {
+        "fixture": "Arial",
+        "proposed": "Arial",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling [reviewed (bare-cell spelling)]"
+      },
+      "typography.value.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.font-family — first family of the field text's computed stack"
+      },
+      "typography.value.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.font-weight — field font-weight → style word"
+      }
+    }
   }
 ]

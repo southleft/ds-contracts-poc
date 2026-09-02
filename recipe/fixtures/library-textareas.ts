@@ -7,7 +7,7 @@ import type {
 import { canonicalTextareaRecipeInstance } from "./textarea.js";
 import type { TextareaRecipeInstance } from "../recipes/textarea.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): TextareaRecipeInstance["tokens"] => {
@@ -427,7 +427,7 @@ const sharedContent = {
   value: "Meeting notes for Tuesday.",
 } as const;
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -574,7 +574,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedTextareaSource,
   tokens: TextareaRecipeInstance["tokens"],
@@ -582,6 +582,9 @@ const buildConfig = (
   refusals: ReviewedTextareaSourceFact[],
   extraIr: ReviewedTextareaSourceFact[],
   unsupported: string[],
+  // A proposed fixture passes the captured label/value and the config's
+  // placeholder; the hand tables keep the shared Notes/Add a note pairing.
+  content: TextareaRecipeInstance["content"] = sharedContent,
 ): ReviewedTextareaAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -611,7 +614,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: structuredClone(sharedContent),
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -634,7 +637,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedTextareaSource,
 ): ReviewedTextareaSourceFact[] => [
