@@ -3193,6 +3193,40 @@ export async function portalSweep(
       try {
         const shot = await page.locator(`[data-portal-root="${pickIdx}"]`).screenshot({ timeout: 10_000 });
         writeFileSync(path.join(opts.screenshots!, `${comp.name}--${combo.key}__default.png`), shot);
+        // OVERLAY REFERENCES (dialog/menu round, 2026-09-02): the screenshot of
+        // a portaled root is the whole overlay — backdrop and all — so an ink
+        // trim cannot isolate the surface the recipe mints. Record every
+        // descendant's RENDERED RECT relative to the shot's own origin (the
+        // root's rect), keyed by the same structural index path the ledger
+        // uses, so the fidelity gate can crop the reference to a named part
+        // (`referenceCrop: "cls:MuiDialog-paper"`) instead of guessing a box.
+        // Measured at the moment of the shot; a sidecar beside the PNG, never
+        // a change to captured-truth.json.
+        // A STRING, not a function: tsx/esbuild wraps named inner functions in
+        // a `__name` helper that does not exist inside the page (measured:
+        // `page.evaluate: ReferenceError: __name is not defined` on every
+        // Dialog combo the first time this ran).
+        const rects = (await page.evaluate(
+          `(() => {
+            var root = document.querySelector('[data-portal-root="${pickIdx}"]');
+            if (!root) return [];
+            var origin = root.getBoundingClientRect();
+            var out = [];
+            var walk = function (el, idxPath) {
+              var r = el.getBoundingClientRect();
+              out.push({ idxPath: idxPath, tag: el.tagName.toLowerCase(), classes: Array.prototype.slice.call(el.classList), x: r.left - origin.left, y: r.top - origin.top, w: r.width, h: r.height });
+              var i = 0;
+              for (var k = 0; k < el.childNodes.length; k++) {
+                var child = el.childNodes[k];
+                if (child.nodeType === 3 && (child.textContent || '').length > 0) { i++; continue; }
+                if (child.nodeType === 1) { walk(child, idxPath ? idxPath + '.' + i : String(i)); i++; }
+              }
+            };
+            walk(root, '');
+            return out;
+          })()`,
+        )) as Array<{ idxPath: string; tag: string; classes: string[]; x: number; y: number; w: number; h: number }>;
+        writeFileSync(path.join(opts.screenshots!, `${comp.name}--${combo.key}__default.rects.json`), JSON.stringify({ origin: 'the portal root screenshot (top-left = 0,0)', parts: rects }, null, 2) + '\n');
       } catch (e) {
         const msg = (e instanceof Error ? e.message : String(e)).split('\n')[0];
         const r = raw.roots[pickIdx];

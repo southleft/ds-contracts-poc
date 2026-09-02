@@ -274,7 +274,7 @@ export function scoreFidelity(
   cropReferenceControl = false,
   cropCanvasControl = false,
   canvasBox: [number, number, number, number] | null = null,
-  opts: { widthNormalised?: boolean } = {},
+  opts: { widthNormalised?: boolean; referenceBox?: [number, number, number, number] } = {},
 ): FidelityScorecard {
   if (/gate-shots/.test(referencePath)) {
     throw new Error(
@@ -283,7 +283,8 @@ export function scoreFidelity(
   }
   const canvasBuf = readFileSync(canvasPath);
   const refBuf = readFileSync(referencePath);
-  const refPng = readPngBuffer(refBuf);
+  // an overlay reference is cropped to the named part's rendered rect (see fidelity-check.ts referenceCrop)
+  const refPng = opts.referenceBox ? cropBox(readPngBuffer(refBuf), ...opts.referenceBox) : readPngBuffer(refBuf);
   const canvasRaw = readPngBuffer(canvasBuf);
   const canvasPng = canvasBox ? cropBox(canvasRaw, ...canvasBox) : canvasRaw;
   const aligned = alignPair(

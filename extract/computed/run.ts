@@ -187,6 +187,9 @@ async function main() {
         if (!existsSync(from)) continue;
         writeFileSync(path.join(origDir, `${key}.png`), readFileSync(from));
         kept++;
+        // an overlay capture's rect sidecar rides along with its PNG (see capture.ts, the portal screenshot)
+        const rects = path.join(scratchShots, `${compName}--${key}.rects.json`);
+        if (existsSync(rects)) writeFileSync(path.join(origDir, `${key}.rects.json`), readFileSync(rects));
       }
     }
     return kept;

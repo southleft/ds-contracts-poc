@@ -1,0 +1,92 @@
+{
+  "origin": "the portal root screenshot (top-left = 0,0)",
+  "parts": [
+    {
+      "idxPath": "",
+      "tag": "div",
+      "classes": [
+        "MuiDialog-root",
+        "MuiModal-root",
+        "css-1ptug20-MuiModal-root-MuiDialog-root"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "0",
+      "tag": "div",
+      "classes": [
+        "MuiBackdrop-root",
+        "MuiModal-backdrop",
+        "MuiDialog-backdrop",
+        "css-1cennmq-MuiBackdrop-root-MuiDialog-backdrop"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "1",
+      "tag": "div",
+      "classes": [],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 0
+    },
+    {
+      "idxPath": "2",
+      "tag": "div",
+      "classes": [
+        "MuiDialog-container",
+        "MuiDialog-scrollPaper",
+        "css-19do60a-MuiDialog-container"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "2.0",
+      "tag": "div",
+      "classes": [
+        "MuiPaper-root",
+        "MuiPaper-elevation",
+        "MuiPaper-rounded",
+        "MuiPaper-elevation24",
+        "MuiDialog-paper",
+        "MuiDialog-paperWidthMd",
+        "css-27nnfp-MuiPaper-root-MuiDialog-paper"
+      ],
+      "x": 291.578125,
+      "y": 471,
+      "w": 316.828125,
+      "h": 58
+    },
+    {
+      "idxPath": "2.0.0",
+      "tag": "div",
+      "classes": [
+        "MuiDialogContent-root",
+        "css-kw13he-MuiDialogContent-root"
+      ],
+      "x": 291.578125,
+      "y": 471,
+      "w": 316.828125,
+      "h": 58
+    },
+    {
+      "idxPath": "3",
+      "tag": "div",
+      "classes": [],
+      "x": 0,
+      "y": 1000,
+      "w": 900,
+      "h": 0
+    }
+  ]
+}

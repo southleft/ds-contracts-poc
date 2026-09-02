@@ -263,7 +263,12 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     Re-pinned to what the committed tree measures; the cause of the
   //     -334 is not established here and is named as such.
   fluent: { components: 11, drops: 20886, authored: 13, fallback: 19 },
-  mui: { components: 32, drops: 72991, authored: 0, fallback: 99 },
+  //   · mui 72,991 -> 73,001 (+10), later on 2026-09-02: Dialog and Menu were
+  //     re-captured with --keep-originals so the portal screenshots carry the
+  //     overlay rect sidecars the fidelity gate crops to (Chromium 149 in the
+  //     sandbox); ten control-equal drops on those two components moved with
+  //     the re-capture. Named, re-pinned to what the committed tree measures.
+  mui: { components: 32, drops: 73001, authored: 0, fallback: 99 },
   polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
   shadcn: { components: 11, drops: 12205, authored: 1, fallback: 7 },
   tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },

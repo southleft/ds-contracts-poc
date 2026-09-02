@@ -162,16 +162,12 @@
         "border-bottom-right-radius": "{imported.shared.size-4}",
         "border-top-left-radius": "{imported.shared.size-4}",
         "border-top-right-radius": "{imported.shared.size-4}",
-        "bottom": "{imported.menu.root.bottom}",
         "box-shadow": "{imported.menu.root.box-shadow}",
         "color": "{imported.shared.color-000000de}",
         "height": "{imported.menu.root.height}",
-        "left": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-16}",
         "min-width": "{imported.shared.size-16}",
         "outline-width": "{imported.shared.size-0}",
-        "right": "{imported.menu.root.right}",
-        "top": "{imported.shared.size-24}",
         "width": "{imported.menu.root.width}"
       }
     }

@@ -74,12 +74,8 @@
           },
           "tokens": {
             "background-color": "{imported.dialog.backdrop-root.background-color}",
-            "bottom": "{imported.shared.size-0}",
-            "left": "{imported.shared.size-0}",
             "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}",
-            "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
+            "min-width": "{imported.shared.size-0}"
           }
         },
         "dialog-container": {
@@ -104,6 +100,7 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
+                    "font-family": "Times",
                     "overflow-x": "auto",
                     "overflow-y": "auto"
                   },
@@ -181,13 +178,8 @@
         }
       },
       "tokens": {
-        "bottom": "{imported.shared.size-0}",
-        "left": "{imported.shared.size-0}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
-        "right": "{imported.shared.size-0}",
-        "top": "{imported.shared.size-0}",
-        "width": "{imported.dialog.root.width}",
         "z-index": "{imported.dialog.root.z-index}"
       }
     }

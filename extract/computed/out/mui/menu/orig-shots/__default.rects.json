@@ -1,0 +1,124 @@
+{
+  "origin": "the portal root screenshot (top-left = 0,0)",
+  "parts": [
+    {
+      "idxPath": "",
+      "tag": "div",
+      "classes": [
+        "MuiPopover-root",
+        "MuiMenu-root",
+        "MuiModal-root",
+        "css-1k1um9w-MuiModal-root-MuiPopover-root-MuiMenu-root"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "0",
+      "tag": "div",
+      "classes": [
+        "MuiBackdrop-root",
+        "MuiBackdrop-invisible",
+        "MuiModal-backdrop",
+        "css-vl6bb4-MuiBackdrop-root-MuiModal-backdrop"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "1",
+      "tag": "div",
+      "classes": [],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 0
+    },
+    {
+      "idxPath": "2",
+      "tag": "div",
+      "classes": [
+        "MuiPaper-root",
+        "MuiPaper-elevation",
+        "MuiPaper-rounded",
+        "MuiPaper-elevation8",
+        "MuiPopover-paper",
+        "MuiMenu-paper",
+        "css-tu5j92-MuiPaper-root-MuiPopover-paper-MuiMenu-paper"
+      ],
+      "x": 24,
+      "y": 24,
+      "w": 116.484375,
+      "h": 124
+    },
+    {
+      "idxPath": "2.0",
+      "tag": "ul",
+      "classes": [
+        "MuiList-root",
+        "MuiList-padding",
+        "MuiMenu-list",
+        "css-1toxriw-MuiList-root-MuiMenu-list"
+      ],
+      "x": 24,
+      "y": 24,
+      "w": 116.484375,
+      "h": 124
+    },
+    {
+      "idxPath": "2.0.0",
+      "tag": "li",
+      "classes": [
+        "MuiButtonBase-root",
+        "MuiMenuItem-root",
+        "MuiMenuItem-gutters",
+        "css-123r88s-MuiButtonBase-root-MuiMenuItem-root"
+      ],
+      "x": 24,
+      "y": 32,
+      "w": 116.484375,
+      "h": 36
+    },
+    {
+      "idxPath": "2.0.1",
+      "tag": "li",
+      "classes": [
+        "MuiButtonBase-root",
+        "MuiMenuItem-root",
+        "MuiMenuItem-gutters",
+        "css-123r88s-MuiButtonBase-root-MuiMenuItem-root"
+      ],
+      "x": 24,
+      "y": 68,
+      "w": 116.484375,
+      "h": 36
+    },
+    {
+      "idxPath": "2.0.2",
+      "tag": "li",
+      "classes": [
+        "MuiButtonBase-root",
+        "MuiMenuItem-root",
+        "MuiMenuItem-gutters",
+        "css-123r88s-MuiButtonBase-root-MuiMenuItem-root"
+      ],
+      "x": 24,
+      "y": 104,
+      "w": 116.484375,
+      "h": 36
+    },
+    {
+      "idxPath": "3",
+      "tag": "div",
+      "classes": [],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 0
+    }
+  ]
+}

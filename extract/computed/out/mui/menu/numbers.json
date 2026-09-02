@@ -9,7 +9,7 @@
   "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 36,
+    "root": 32,
     "list-padding": 25,
     "label": 38,
     "label-2": 38,
@@ -319,8 +319,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 18,
-    "mintedLeavesFolded": 18
+    "mintedLeavesUnfolded": 16,
+    "mintedLeavesFolded": 16
   },
   "bound": {
     "cellsChecked": 0,
@@ -329,11 +329,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 18,
-    "baseBindings": 76,
+    "leaves": 16,
+    "baseBindings": 72,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 76,
+      "uniform": 72,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -358,15 +358,24 @@
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 3365,
-    "cellsMatched": 3365,
-    "pct": 100,
+    "cellsMatched": 3355,
+    "pct": 99.70282317979198,
     "namedExclusions": [
       "app-region",
       "text-decoration",
       "translate-x",
       "translate-y"
     ],
-    "topMismatchedChannels": []
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        5
+      ],
+      [
+        "width",
+        5
+      ]
+    ]
   },
   "pixel": {
     "pairs": 1,
@@ -397,7 +406,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 94.15204678362574,
+    "computedPctEqual": 94.0119760479042,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

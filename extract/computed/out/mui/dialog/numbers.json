@@ -9,11 +9,11 @@
   "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 9,
-    "backdrop-root": 14,
+    "root": 4,
+    "backdrop-root": 10,
     "dialog-container": 8,
     "dialog-paper": 36,
-    "label": 21
+    "label": 22
   },
   "folds": {
     "count": 20,
@@ -139,8 +139,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 21,
-    "mintedLeavesFolded": 22
+    "mintedLeavesUnfolded": 20,
+    "mintedLeavesFolded": 21
   },
   "bound": {
     "cellsChecked": 0,
@@ -149,18 +149,18 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 22,
-    "baseBindings": 43,
+    "leaves": 21,
+    "baseBindings": 34,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 42,
+      "uniform": 33,
       "perAxis": 1,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 12,
+    "base": 13,
     "state": 0
   },
   "codeOnly": {
@@ -258,7 +258,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 95.40229885057471,
+    "computedPctEqual": 95,
     "rowsFullyEqual": 0,
     "rows": 20,
     "pixelPerfectExact": 0,

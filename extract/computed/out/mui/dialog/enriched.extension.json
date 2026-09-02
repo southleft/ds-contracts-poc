@@ -21,10 +21,6 @@
       },
       "dialog": {
         "root": {
-          "width": {
-            "$value": "900px",
-            "$type": "dimension"
-          },
           "z-index": {
             "$value": "1300",
             "$type": "number"
@@ -319,6 +315,11 @@
       },
       {
         "part": "label",
+        "channel": "font-family",
+        "value": "Times"
+      },
+      {
+        "part": "label",
         "channel": "overflow-x",
         "value": "auto"
       },
@@ -377,6 +378,8 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [
     "portal-inert-children-dropped: xs — 2 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
     "portal-autofocus-neutralized: xs — focus was on \"div|MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperWidthXs.css-b42rmb-MuiPaper-root-MuiDialog-paper\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
@@ -390,8 +393,25 @@
     "portal-autofocus-neutralized: xl — focus was on \"div|MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperWidthXl.css-n1xz2r-MuiPaper-root-MuiDialog-paper\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane"
   ],
   "styledChannelReceipts": [
-    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "viewport-derived-geometry-refused: root (position:fixed) — bottom, height, left, right, top, width NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 900px + right 0px = 900px = browser.viewport.width (900px); top 0px + box 1000px + bottom 0px = 1000px = browser.viewport.height (1000px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
+    "viewport-derived-geometry-refused: backdrop-root (position:fixed) — bottom, height, left, right, top, width NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 900px + right 0px = 900px = browser.viewport.width (900px); top 0px + box 1000px + bottom 0px = 1000px = browser.viewport.height (1000px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
+    "block-root-width-refused: root — display:block root, width 900px = browser.viewport.width (900px), NOT the stage content box (stage 320px − 2×16px = 288px). The root is position:fixed pinned to the initial containing block, so the window STRETCHED it; it is not \"filling its container\" in any sense the library chose. A width that is a function of the capture window is a fact about the harness, not about the library: it is REFUSED here rather than minted with a warning, because the emitters read the token and not the receipt — a 900px token draws a 900px frame on canvas whatever the receipt says. The component's own drawn box is a DIFFERENT element (the dialog paper); choosing it is capture's root decision (demoteFullBleedScrim), not fusion's to fabricate.",
+    "control-equal-drop: root — 587 of 591 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: root — 384 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: backdrop-root — 581 of 591 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: backdrop-root — 378 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: dialog-container — 587 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: dialog-container — 384 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: dialog-paper — 559 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: dialog-paper — 356 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 577 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "text-part-typography-carried: label — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: backdrop-root — block-size 1000px, height 1000px, inline-size 900px, perspective-origin 450px 500px, transform-origin 450px 500px, width 900px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialog-container — block-size 1000px, height 1000px, inline-size 900px, perspective-origin 450px 500px, transform-origin 450px 500px, width 900px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialog-paper — block-size 58px, height 58px, inline-size 316.828px, perspective-origin 158.406px 29px, transform-origin 158.414px 29px, width 316.828px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — inline-size 268.828px, perspective-origin 158.406px 29px, transform-origin 158.414px 29px, width 268.828px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 1000px, height 1000px, inline-size 900px, perspective-origin 450px 500px, transform-origin 450px 500px, width 900px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 5 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (backdrop-root, dialog-container); -webkit-box-pack (backdrop-root, dialog-container); -webkit-tap-highlight-color (backdrop-root); -webkit-text-fill-color (dialog-paper, label); -webkit-text-stroke-color (dialog-paper, label)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: dialog-paper.caret-color — values track ancestor \"dialog-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -460,13 +480,14 @@
     "declared fact carried: backdrop-root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialog-container.transition-property = opacity (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialog-container.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: dialog-paper.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: dialog-paper.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialog-paper.overflow-x = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: dialog-paper.overflow-y = auto (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: dialog-paper.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialog-paper.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialog-paper.transition-property = box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialog-paper.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: label.font-family = Times (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-x = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-y = auto (v15 declared vocabulary — canvas-drawable)"
   ]
 }

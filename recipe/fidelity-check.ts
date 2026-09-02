@@ -54,6 +54,26 @@ interface Subject {
   expectFringe?: boolean;
   /** Fill-width control: score the two edge windows, not the interior width. */
   widthNormalised?: boolean;
+  /**
+   * OVERLAY REFERENCE (dialog/menu): the real screenshot is the whole portal
+   * root — backdrop and all — so the reference is cropped to this part's
+   * RENDERED RECT, read from the `<key>.rects.json` sidecar the capture wrote
+   * beside the PNG (selector grammar: cls:<class> | idx:<path> | tag:<tag>).
+   * Measured at capture time, never a guessed box.
+   */
+  referenceCrop?: string;
+}
+
+function referenceCropBox(referencePath: string, selector: string, label: string): [number, number, number, number] {
+  const sidecar = referencePath.replace(/\.png$/, ".rects.json");
+  if (!existsSync(sidecar)) throw new Error(`${label}: referenceCrop needs ${path.relative(REPO, sidecar)} — re-capture the component with --keep-originals (the portal capture writes it beside the PNG)`);
+  const { parts } = JSON.parse(readFileSync(sidecar, "utf8")) as { parts: Array<{ idxPath: string; tag: string; classes: string[]; x: number; y: number; w: number; h: number }> };
+  const m = /^(cls|idx|tag):(.+)$/.exec(selector);
+  if (!m) throw new Error(`${label}: bad referenceCrop selector ${selector}`);
+  const hit = parts.find((p) => (m[1] === "cls" ? p.classes.includes(m[2]!) : m[1] === "idx" ? p.idxPath === m[2] : p.tag === m[2]));
+  if (!hit) throw new Error(`${label}: referenceCrop ${selector} matches no part in ${path.relative(REPO, sidecar)}`);
+  const x = Math.max(0, Math.floor(hit.x)), y = Math.max(0, Math.floor(hit.y));
+  return [x, y, Math.ceil(hit.x + hit.w) - x, Math.ceil(hit.y + hit.h) - y];
 }
 
 export interface FidelityRun {
@@ -94,7 +114,7 @@ export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; k
       s.referenceControlOnly === true,
       s.canvasControlOnly === true,
       s.canvasBox ?? null,
-      { widthNormalised: s.widthNormalised === true },
+      { widthNormalised: s.widthNormalised === true, ...(s.referenceCrop ? { referenceBox: referenceCropBox(path.join(REPO, s.reference), s.referenceCrop, s.label) } : {}) },
     );
     cards.push(card);
 

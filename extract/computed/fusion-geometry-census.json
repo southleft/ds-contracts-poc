@@ -3,7 +3,7 @@
   "generatedBy": "extract/computed/fusion-geometry-census.ts --write",
   "components": 129,
   "__extensionFresh": "Per row: whether that component's COMMITTED enriched.extension.json geometry receipts still match the engine. A `false` here is a component whose shipped drop ledger is stale — mostly captures that predate a door nobody re-ran, measured as 83 of 104 on the previous engine as well. It is pinned so that a CHANGE in either direction is red and has to be re-recorded deliberately.",
-  "extensionsStale": 82,
+  "extensionsStale": 80,
   "rows": {
     "altitude/Avatar": {
       "carried": {
@@ -2874,7 +2874,7 @@
       },
       "receipts": "b84346d0d88952b2",
       "receiptCount": 8,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Divider": {
       "carried": {
@@ -3001,9 +3001,9 @@
           "width"
         ]
       },
-      "receipts": "50d6189b77f3a817",
+      "receipts": "f47d4c601fb62396",
       "receiptCount": 11,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Pagination": {
       "carried": {
