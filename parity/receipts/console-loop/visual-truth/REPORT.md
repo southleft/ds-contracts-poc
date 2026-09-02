@@ -2,7 +2,7 @@
 
 Source: `rest-images-api` (Figma REST renders at scale 1 — like-for-like with the bridge lane's scale-1 cell exports; no desktop app, no plugin bridge), scored under the one bar (`pctAAMasked <= 5` AND `compositionOk`) with the developed-score normalization policy. Written by `scripts/visual-truth-report.mjs`; regenerate with `npm run visual-truth:report`.
 
-generatedFrom: sha256:9c40a44f5077c6683541a3ab54860db4d2165e2c24cd5953448eb4c2ba2289f9 (133 scorecards)
+generatedFrom: sha256:4c45dd40c83aa15e80509a959081a37be66991987d34cb587a60c30e665c167d (133 scorecards)
 
 ## Summary
 
@@ -29,9 +29,9 @@ generatedFrom: sha256:9c40a44f5077c6683541a3ab54860db4d2165e2c24cd5953448eb4c2ba
 | lane | stem | pctAAMasked | compositionOk | status |
 |---|---|---:|---|---|
 | first-party | progress-bar | 99.69% | false | fail |
-| mui | dialog | 94.61% | false | fail |
+| mui | dialog | 95.97% | false | fail |
 | astryx | button | 90.69% | false | fail |
-| mui | menu | 78.93% | false | fail |
+| mui | menu | 79.23% | false | fail |
 | mui | snackbar | 72.85% | false | fail |
 | mui | badge | 63.25% | false | fail |
 | mui | avatar | 59.13% | false | fail |

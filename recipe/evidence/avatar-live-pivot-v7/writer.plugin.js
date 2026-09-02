@@ -31,7 +31,12 @@ const allFonts=await figma.listAvailableFontsAsync();
 // A font STYLE name is compared without case or spacing: foundries spell the
 // same face "SemiBold", "Semibold" and "Semi Bold", and a fixture read from a
 // CSS font-weight cannot know which spelling this machine's file uses.
-const sameStyle=(a,b)=>String(a).toLowerCase().replace(/[s_-]/g,"")===String(b).toLowerCase().replace(/[s_-]/g,"");
+// NOTE the doubled backslash: this line lives inside the emitted program's
+// template literal, and a single s reached the plugin as /[s_-]/ — a regex
+// that strips the LETTER s, so a two-word "Semi Bold" never matched a
+// CSS-weight "Semibold" (measured 2026-09-02 on the Chakra dialog title:
+// FONT-UNAVAILABLE while the same lookup succeeded run directly in the file).
+const sameStyle=(a,b)=>String(a).toLowerCase().replace(/[\s_-]/g,"")===String(b).toLowerCase().replace(/[\s_-]/g,"");
 const resolveFont=spec=>{
   const found=spec.fallbackChain.map(candidate=>allFonts.find(font=>font.fontName.family===candidate.family&&sameStyle(font.fontName.style,candidate.style))).find(Boolean);
   if(!found)throw new Error("AVATAR-FONT-UNAVAILABLE:"+spec.requestedFamily+":"+spec.requestedStyle);
@@ -235,7 +240,8 @@ for(const source of PLAN.sources){
         let painted=false;
         for(const candidate of chain){
           if(candidate.family===resolvedFamily&&candidate.style===resolvedStyle)continue;
-          const found=allFonts.find(entry=>entry.fontName.family===candidate.family&&entry.fontName.style===candidate.style);
+          // the same spacing-and-case-blind style match as resolveFont (a two-word "Semi Bold" vs a CSS-weight "Semibold")
+          const found=allFonts.find(entry=>entry.fontName.family===candidate.family&&sameStyle(entry.fontName.style,candidate.style));
           if(!found)continue;
           await figma.loadFontAsync(found.fontName);
           label.fontName=found.fontName;

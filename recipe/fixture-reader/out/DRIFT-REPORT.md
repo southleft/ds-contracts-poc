@@ -448,31 +448,31 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### astryx — @astryxdesign/core@0.1.6#DropdownMenu
 
-ledger _(none — receipt-only)_ · 14 facts: **0 match**, **0 drift**, 14 named receipts, 0 unread
+ledger _(none — receipt-only)_ · 15 facts: **0 match**, **0 drift**, 15 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Menu
 
-ledger `extract/computed/out/mui/menu/captured-truth.json` · 14 facts: **10 match**, **0 drift**, 4 named receipts, 0 unread
+ledger `extract/computed/out/mui/menu/captured-truth.json` · 15 facts: **11 match**, **0 drift**, 4 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### antd — antd@5.29.3#Dropdown
 
-ledger _(none — receipt-only)_ · 14 facts: **0 match**, **0 drift**, 14 named receipts, 0 unread
+ledger _(none — receipt-only)_ · 15 facts: **0 match**, **0 drift**, 15 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui-proposed — @mui/material@9.2.0#Menu
 
-ledger `extract/computed/out/mui/menu/captured-truth.json` · 14 facts: **14 match**, **0 drift**, 0 named receipts, 0 unread
+ledger `extract/computed/out/mui/menu/captured-truth.json` · 15 facts: **15 match**, **0 drift**, 0 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### chakra — @chakra-ui/react@3.37.0#Menu
 
-ledger `extract/computed/out/chakra/menu/captured-truth.json` · 14 facts: **14 match**, **0 drift**, 0 named receipts, 0 unread
+ledger `extract/computed/out/chakra/menu/captured-truth.json` · 15 facts: **15 match**, **0 drift**, 0 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -1042,6 +1042,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **menu/astryx** `panel.radius` = `12` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
 - **menu/astryx** `panel.itemSpacing` = `2` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
 - **menu/astryx** `panel.fill` = `#ffffffff` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
+- **menu/astryx** `panel.minWidth` = `0` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
 - **menu/astryx** `item.paddingX` = `8` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
 - **menu/astryx** `item.paddingY` = `6` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
 - **menu/astryx** `item.minHeight` = `0` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
@@ -1060,6 +1061,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **menu/antd** `panel.radius` = `8` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_
 - **menu/antd** `panel.itemSpacing` = `0` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_
 - **menu/antd** `panel.fill` = `#ffffffff` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_
+- **menu/antd** `panel.minWidth` = `0` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_
 - **menu/antd** `item.paddingX` = `12` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_
 - **menu/antd** `item.paddingY` = `5` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_
 - **menu/antd** `item.minHeight` = `0` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_

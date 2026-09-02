@@ -34,6 +34,12 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
       },
+      "panel.minWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
       "item.paddingX": {
         "fixture": 8,
         "proposed": 8,
@@ -132,6 +138,13 @@
         "verdict": "match",
         "captured": "#ffffffff",
         "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-paper.background-color"
+      },
+      "panel.minWidth": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-paper.min-width — the paper's min-width as a length (Popover paper minWidth 16); `auto`/0 means the paper hugs"
       },
       "item.paddingX": {
         "fixture": 16,
@@ -238,6 +251,12 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
       },
+      "panel.minWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
       "item.paddingX": {
         "fixture": 12,
         "proposed": 12,
@@ -338,6 +357,13 @@
         "verdict": "match",
         "captured": "#ffffffff",
         "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default root.background-color"
+      },
+      "panel.minWidth": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default root.min-width — the panel's min-width as a length; `auto`/0 means the panel hugs its widest item"
       },
       "item.paddingX": {
         "fixture": 16,
@@ -449,6 +475,13 @@
         "verdict": "match",
         "captured": "#ffffffff",
         "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.background-color"
+      },
+      "panel.minWidth": {
+        "fixture": 128,
+        "proposed": 128,
+        "verdict": "match",
+        "captured": 128,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.min-width — the panel's min-width as a length; `auto`/0 means the panel hugs its widest item"
       },
       "item.paddingX": {
         "fixture": 8,
