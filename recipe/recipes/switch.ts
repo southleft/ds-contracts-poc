@@ -918,7 +918,7 @@ export function collapseSwitchRecipe(
   for (const checked of SWITCH_CHECKED) {
     for (const arm of ["enabled", "disabled"] as const)
       instance.tokens.states[checked][arm].trackOpacity = {
-        variable: `${instance.id}.states-${checked}-${arm}-trackOpacity`,
+        variable: `${instance.identity.id}.states-${checked}-${arm}-trackOpacity`,
         fallback: instance.tokens.states[checked][arm].trackOpacity.fallback,
       };
   }

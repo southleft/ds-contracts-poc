@@ -942,7 +942,7 @@ export function collapseRadioRecipe(
   for (const arm of ["selected", "unselected"] as const) {
     for (const state of ["enabled", "disabled"] as const)
       instance.tokens.states[arm][state].circleOpacity = {
-        variable: `${instance.id}.states-${arm}-${state}-circleOpacity`,
+        variable: `${instance.identity.id}.states-${arm}-${state}-circleOpacity`,
         fallback: instance.tokens.states[arm][state].circleOpacity.fallback,
       };
   }

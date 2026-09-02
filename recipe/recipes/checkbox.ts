@@ -1144,7 +1144,7 @@ export function collapseCheckboxRecipe(
   for (const checked of CHECKBOX_CHECKED) {
     for (const arm of ["enabled", "disabled"] as const)
       instance.tokens.states[checked][arm].boxOpacity = {
-        variable: `${instance.id}.states-${checked}-${arm}-boxOpacity`,
+        variable: `${instance.identity.id}.states-${checked}-${arm}-boxOpacity`,
         fallback: instance.tokens.states[checked][arm].boxOpacity.fallback,
       };
   }
