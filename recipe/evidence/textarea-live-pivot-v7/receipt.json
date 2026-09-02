@@ -1,0 +1,50 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "textarea-live-pivot-v7-prepare",
+  "teaching": "MUI rest empty hides placeholder; Content=focus shrinks the label and shows placeholder. Stacked Astryx/AntD empty and focus look the same. No invented focus ring.",
+  "runIdentity": "71033c6d-82f958a9-142f3598-textarea-v7",
+  "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v7",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "71033c6dbe8ec74e4bf355c9df41fae62e5b36e16af2a5ade1f6a6b0103bb5c9",
+    "MUI": "82f958a9f67ded1b65b50c986493d42ef754ce0e048ca9366b14a6aa1cccd645",
+    "Ant Design": "142f359858ed37f4601d2c9269a014caf5beae42f4220cdaf94f4cce786cc19b"
+  },
+  "writerSha256": "fa9cc60cc82900d378cb21366a8e2d18330e03e96c5fb1a6a7f43579b06c1060",
+  "pageId": "218:87843",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=218-87843",
+  "live": {
+    "recordedFrom": "textarea-v7-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v7",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-textarea-reviewed-v1",
+        "sectionId": "218:87844",
+        "setId": "218:87895",
+        "collectionId": "VariableCollectionId:218:87845",
+        "variantCount": 6,
+        "comparedIrFacts": 133
+      },
+      {
+        "adapterIdentity": "mui-textarea-reviewed-v1",
+        "sectionId": "218:87896",
+        "setId": "218:87955",
+        "collectionId": "VariableCollectionId:218:87897",
+        "variantCount": 6,
+        "comparedIrFacts": 143
+      },
+      {
+        "adapterIdentity": "antd-textarea-reviewed-v1",
+        "sectionId": "218:87956",
+        "setId": "218:88007",
+        "collectionId": "VariableCollectionId:218:87957",
+        "variantCount": 6,
+        "comparedIrFacts": 133
+      }
+    ]
+  }
+}

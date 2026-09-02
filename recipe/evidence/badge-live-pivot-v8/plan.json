@@ -1,0 +1,27 @@
+{
+  "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-badge-v8",
+  "runIdentity": "17da6833-76d59843-badge-v8",
+  "namespace": "ds.contracts.badge.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "badge@1 MUI proof cell is the documented Color demo color=error (palette.error.main #d32f2f / contrast #fff). color=default has no palette fill and is receipted. Astryx overlay remains refused. Old stay 183:76022 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "mui-badge-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "17da68334ab3f716e4eeceb61565f94ab998b3f30d1c9b4cd56f7ba71d62ce3f",
+      "envelopeHash": "23d22dad9ede02b270b5a019e792d749300f114c6342c18ebf040f8358f2ac1e",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 25
+    },
+    {
+      "adapterIdentity": "antd-badge-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "76d59843686f044cb0a0322d6301b269d893d7dd061a997ef82f5ff1aacab40c",
+      "envelopeHash": "6b7d7cec9d4a6e3f686c81657fa1db68a7d65aa33e9c88978e1fb3e838fe5617",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 25
+    }
+  ]
+}

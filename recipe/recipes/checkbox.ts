@@ -1,5 +1,7 @@
 import * as z from "zod";
 
+import { cssBoxShadowFromEffects, parseCssBoxShadow } from "../css-box-shadow.js";
+
 import {
   CodeOnlyExtensionSchema,
   ENVELOPE_VERSION,
@@ -160,6 +162,12 @@ export interface CheckboxRecipeInstance {
     };
     states: Record<CheckboxChecked, Record<"enabled" | "disabled", StateCell>>;
     labelFontSize: CheckboxNumberParameter;
+    /**
+     * The box's own `box-shadow` declaration, verbatim from the capture ("none"
+     * for most libraries; shadcn's shadow-xs). Lowered to Figma effects at
+     * compile by recipe/css-box-shadow.ts and recovered on collapse.
+     */
+    boxShadow: string;
     typography: { label: CheckboxFontSpec };
   };
   inputFacts: FactRef[];
@@ -276,6 +284,7 @@ export const CheckboxRecipeInstanceSchema = z.strictObject({
       }),
     }),
     labelFontSize: NumberParameterSchema,
+    boxShadow: z.string().min(1),
     typography: z.strictObject({ label: FontSpecSchema }),
   }),
   inputFacts: z.array(FactRefSchema),
@@ -560,6 +569,8 @@ const boxNode = (
     ],
     clipsContent: instance.tokens.check.placement !== "absolute",
     cornerRadius: corners(instance.tokens.box.radius.fallback),
+    // The library's own box-shadow, lowered; "none" yields no effects.
+    effects: parseCssBoxShadow(instance.tokens.boxShadow),
     bindings: [
       bind("layout.width.value", instance.tokens.box.size),
       bind("layout.height.value", instance.tokens.box.size),
@@ -1111,6 +1122,9 @@ export function collapseCheckboxRecipe(
         ? numberFrom(label, "type.fontSize", label.type.fontSize)
         : { variable: `${envelope.id}.labelFontSize`, fallback: BARE_LABEL_FONT_SIZE },
       typography: { label: label ? fontFrom(label) : bareLabelFont() },
+      boxShadow: cssBoxShadowFromEffects(
+        (box.effects ?? []) as Parameters<typeof cssBoxShadowFromEffects>[0],
+      ),
     },
     inputFacts: [
       ...envelope.accounting.carried,

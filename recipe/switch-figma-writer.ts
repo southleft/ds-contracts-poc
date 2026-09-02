@@ -26,7 +26,13 @@ import {
 
 export const SWITCH_FIGMA_NAMESPACE = "ds.contracts.switch.recipe.v1";
 export const SWITCH_FIGMA_WRITER_VERSION = 2;
-export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v5";
+export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v8";
+/** v7 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_SWITCH_V7_PAGE_ID = "218:85571";
+/** v6 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_SWITCH_V6_PAGE_ID = "218:84089";
+/** v5 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_SWITCH_V5_PAGE_ID = "214:82669";
 /** v4 stay (AntD handle shadow carried (was recorded none)) is preserved as evidence and never written again. */
 export const FORBIDDEN_SWITCH_V4_PAGE_ID = "211:80480";
 /** v3 stay (shared-runtime proof) is preserved as evidence and never written again. */
@@ -255,6 +261,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "switchSet"
   },
   "forbiddenPages": [
+    { "id": "218:85571", "marker": "SWITCH-V7-PAGE" },
+    { "id": "218:84089", "marker": "SWITCH-V6-PAGE" },
+    { "id": "214:82669", "marker": "SWITCH-V5-PAGE" },
     { "id": "211:80480", "marker": "SWITCH-V4-PAGE" },
     { "id": "199:78941", "marker": "SWITCH-V3-PAGE" },
     {

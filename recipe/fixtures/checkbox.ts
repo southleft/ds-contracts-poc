@@ -172,6 +172,7 @@ export const canonicalCheckboxRecipeInstance = {
       },
     },
     labelFontSize: number("ds.checkbox.labelFontSize", 14),
+    boxShadow: "none",
     typography: { label: font("Arial", "Regular") },
   },
   inputFacts: [],

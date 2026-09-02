@@ -259,14 +259,23 @@ converts by CSS Color 4 and the conversion is pinned to the render's pixels
 source of checkbox v7 (page `217:82808`):
 
     unchecked      0.00%   unchecked.disabled 0.00%   checked.disabled 3.13%
-    checked        5.15% FAIL (by 0.15: shadcn's shadow-xs, which checkbox@1 has no leaf for)
+    checked        5.15% FAIL (by 0.15: the glyph's 1.17px stroke rasterised
+                   softer by Chromium than by Figma — not a missing fact)
     indeterminate  NOT EXPRESSIBLE — shadcn draws the check glyph there; the
                    dash is a zero-size reviewed receipt. The scorer says 2.94%
                    and 3.13%; those are the AA mask excusing a whole 1.17px
                    stroke (ink 22 vs 39), and are not reported as passes.
 
 Per-state shots, scorecards and the instrument note are in
-`f1-shadcn-checkbox/`. The next grammar increment is a box-shadow leaf, not
-a fixture value.
+`f1-shadcn-checkbox/`. checkbox@1 then gained a `boxShadow` leaf (shadcn's
+`shadow-xs`; every other capture reads `none`), which exposed two Figma
+defaults the runtime had been inheriting — effects showing behind their
+node and frames clipping by default — neither of which CSS has. Both are
+runtime rules now — a shadow shows behind its node only when the node is
+opaque; a frame clips when the IR says so or when it carries a drop shadow,
+since Figma renders a frame's own shadow like Chromium only when it clips
+(measured on the MUI thumb, see `f1-shadcn-checkbox/README.md`) — and all
+thirteen archetypes were reminted through them (checkbox v11 `218:86637`)
+with every score unchanged.
 
     19 pass · 0 fringe · 7 known

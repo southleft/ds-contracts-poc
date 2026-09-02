@@ -106,8 +106,10 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 - **Other archetypes.** Only checkbox@1 has a proposer today. The switch
   schema and drafter exist (`schema-switch.ts`, `draft-roles.ts`) and
   re-derive the hand tables; the switch *module renderer* is next.
-- **A box shadow.** checkbox@1 has no shadow leaf; shadcn's `shadow-xs` is
-  the difference between 5.15% and the bar on its checked state.
+- **Strokes thinner than 2px.** shadcn's check is a 1.17px stroke; Chromium
+  rasterises it softer than Figma does, and the checked state scores 5.15%
+  against a 5% bar with the diff hugging the whole stroke. Not a missing
+  fact — the same path at 1.75px (Chakra) is pixel-identical.
 - **A glyph as the indeterminate mark.** checkbox@1's indeterminate cell is a
   dash. shadcn draws the check glyph there; those two cells are a named gap
   (`recipe/evidence/fidelity-v1/f1-shadcn-checkbox/`).

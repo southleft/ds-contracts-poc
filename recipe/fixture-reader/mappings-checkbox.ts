@@ -135,6 +135,7 @@ export const muiCheckboxMappings: FactMapping[] = [
     "same as check.offsetX",
     "SwitchBase root display flex align center — reviewed 0",
   ),
+  one("boxShadow", "string", { combo: "unchecked.enabled", part: "tag:path", channel: "box-shadow" }, { formula: "the painted box is the SvgIcon path; its box-shadow is none" }),
   receipt("labelFontSize", NO_LABEL_MUI, "createTypography.js body1 16 — reviewed 16"),
   // states — the icon is the ONLY painted element; the recipe splits it into
   // box + glyph parts, so per-state facts map where a 1:1 channel exists and
@@ -341,6 +342,7 @@ const antdStates = muiStates; // same combo spelling
 export const antdCheckboxMappings: FactMapping[] = [
   one("wrapper.size", "px", { combo: "unchecked.enabled", part: "cls:ant-checkbox", channel: "width" }),
   one("box.size", "px", { combo: "unchecked.enabled", part: inner, channel: "width" }),
+  one("boxShadow", "string", { combo: "unchecked.enabled", part: inner, channel: "box-shadow" }),
   one("box.radius", "px", { combo: "unchecked.enabled", part: inner, channel: "border-top-left-radius" }),
   one("box.borderWidth", "px", { combo: "unchecked.enabled", part: inner, channel: "border-top-width" }),
   one("box.padding", "px", { combo: "unchecked.enabled", part: inner, channel: "padding-top" }),
@@ -470,6 +472,7 @@ export const astryxCheckboxMappings: FactMapping[] = [
     formula: "the 24×24 wrapper div around input+box",
   }),
   one("box.size", "px", { combo: A_BASE, part: abox, channel: "width" }),
+  one("boxShadow", "string", { combo: A_BASE, part: abox, channel: "box-shadow" }),
   one("box.radius", "px", { combo: A_BASE, part: abox, channel: "border-top-left-radius" }),
   one("box.borderWidth", "px", { combo: A_BASE, part: abox, channel: "border-top-width" }),
   one("box.padding", "px", { combo: A_BASE, part: abox, channel: "padding-top" }),

@@ -58,7 +58,7 @@ test("the writer plans three textarea sources without touching Figma", () => {
   assert.notEqual(writer.namespace, "ds.contracts.radio.recipe.v1");
   assert.notEqual(writer.namespace, "ds.contracts.switch.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Textarea \//);
-  assert.match(writer.runIdentity, /-textarea-v4$/);
+  assert.match(writer.runIdentity, /-textarea-v7$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(

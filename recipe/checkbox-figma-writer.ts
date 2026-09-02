@@ -27,7 +27,15 @@ import {
 
 export const CHECKBOX_FIGMA_NAMESPACE = "ds.contracts.checkbox.recipe.v1";
 export const CHECKBOX_FIGMA_WRITER_VERSION = 3;
-export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v7";
+export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v11";
+/** v10 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHECKBOX_V10_PAGE_ID = "218:85144";
+/** v9 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHECKBOX_V9_PAGE_ID = "218:83662";
+/** v8 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHECKBOX_V8_PAGE_ID = "217:83235";
+/** v7 stay (boxShadow leaf: shadcn's shadow-xs carried; every other capture reads none) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHECKBOX_V7_PAGE_ID = "217:82808";
 /** v6 stay (shadcn bare cell (label-less) as the fifth source, proposed from the capture) is preserved as evidence and never written again. */
 export const FORBIDDEN_CHECKBOX_V6_PAGE_ID = "212:82228";
 /** v5 stay (proposed Chakra fixture joins the set) is preserved as evidence and never written again. */
@@ -255,6 +263,10 @@ const WRITER_RUNTIME_SPEC = {
     "field": "checkboxSet"
   },
   "forbiddenPages": [
+    { "id": "218:85144", "marker": "CHECKBOX-V10-PAGE" },
+    { "id": "218:83662", "marker": "CHECKBOX-V9-PAGE" },
+    { "id": "217:83235", "marker": "CHECKBOX-V8-PAGE" },
+    { "id": "217:82808", "marker": "CHECKBOX-V7-PAGE" },
     { "id": "212:82228", "marker": "CHECKBOX-V6-PAGE" },
     { "id": "212:81535", "marker": "CHECKBOX-V5-PAGE" },
     { "id": "199:78556", "marker": "CHECKBOX-V4-PAGE" },

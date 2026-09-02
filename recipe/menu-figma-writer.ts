@@ -25,7 +25,13 @@ import {
 
 export const MENU_FIGMA_NAMESPACE = "ds.contracts.menu.recipe.v1";
 export const MENU_FIGMA_WRITER_VERSION = 1;
-export const MENU_FIGMA_RUN_SUFFIX = "menu-v2";
+export const MENU_FIGMA_RUN_SUFFIX = "menu-v5";
+/** v4 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V4_PAGE_ID = "218:86570";
+/** v3 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V3_PAGE_ID = "218:85088";
+/** v2 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V2_PAGE_ID = "212:81479";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -256,6 +262,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:86570", "marker": "MENU-V4-PAGE" },
+    { "id": "218:85088", "marker": "MENU-V3-PAGE" },
+    { "id": "212:81479", "marker": "MENU-V2-PAGE" },
     {
       "id": "115:295378",
       "marker": "INPUT-PAGE"

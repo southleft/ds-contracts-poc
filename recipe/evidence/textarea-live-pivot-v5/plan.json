@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v5",
+  "runIdentity": "71033c6d-82f958a9-142f3598-textarea-v5",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "textarea@1 Content=focus is the named focused-empty column (InputLabel.js:197-199). Floating rest empty hides placeholder (InputBase.js:179-188). Do not remint Input 115:295378. Old stays 183:75495 and 198:77048 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-textarea-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "71033c6dbe8ec74e4bf355c9df41fae62e5b36e16af2a5ade1f6a6b0103bb5c9",
+      "envelopeHash": "ed9d4b169100fe040f95f63891ddf6fb52c203a8f73fedb92b5fd8eeb8229029",
+      "variantCount": 6,
+      "variableCount": 25,
+      "comparedIrFacts": 133
+    },
+    {
+      "adapterIdentity": "mui-textarea-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "82f958a9f67ded1b65b50c986493d42ef754ce0e048ca9366b14a6aa1cccd645",
+      "envelopeHash": "039b61d933524d33432e03f780cc0392a868888f8b738405e88e3fb08dcf2c3a",
+      "variantCount": 6,
+      "variableCount": 27,
+      "comparedIrFacts": 143
+    },
+    {
+      "adapterIdentity": "antd-textarea-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "142f359858ed37f4601d2c9269a014caf5beae42f4220cdaf94f4cce786cc19b",
+      "envelopeHash": "ce2562fd881e4eeeef3a69aa5f9baddd81a5bad54026f8537d2fa57fdd6ce2e5",
+      "variantCount": 6,
+      "variableCount": 25,
+      "comparedIrFacts": 133
+    }
+  ]
+}

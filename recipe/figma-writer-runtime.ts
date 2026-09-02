@@ -280,8 +280,17 @@ for(const source of PLAN.sources){
     }
     void "${P}-WRITER-EFFECTS";
     if(ir.effects){
+      // A CSS box-shadow never paints under its own box. Figma's
+      // showShadowBehindNode=true paints it there — visible through a
+      // translucent fill (shadcn's unchecked checkbox) — but Figma renders a
+      // knocked-out shadow (false) markedly DARKER than Chromium outside the
+      // node (MUI switch thumb tail, measured: 73/76/84/88 vs real 27/37/44/54;
+      // behind=true gave 45/51/71/80). So: behind the node only when the node
+      // is fully opaque, where the two agree; knocked out only where it would
+      // otherwise bleed through.
+      const opaque=Array.isArray(ir.fills)&&ir.fills.length>0&&ir.fills.every(f=>rgba(f.color).a===1)&&(ir.opacity===undefined||ir.opacity===1);
       node.effects=ir.effects.map((effect,index)=>{
-        const base=effect.kind==="drop-shadow"||effect.kind==="inner-shadow"?{type:effect.kind==="drop-shadow"?"DROP_SHADOW":"INNER_SHADOW",color:rgba(effect.color),offset:{x:effect.offsetX,y:effect.offsetY},radius:effect.blur,spread:effect.spread,visible:true,blendMode:"NORMAL"}:{type:effect.kind==="layer-blur"?"LAYER_BLUR":"BACKGROUND_BLUR",radius:effect.blur,visible:true};
+        const base=effect.kind==="drop-shadow"||effect.kind==="inner-shadow"?{type:effect.kind==="drop-shadow"?"DROP_SHADOW":"INNER_SHADOW",color:rgba(effect.color),offset:{x:effect.offsetX,y:effect.offsetY},radius:effect.blur,spread:effect.spread,showShadowBehindNode:opaque,visible:true,blendMode:"NORMAL"}:{type:effect.kind==="layer-blur"?"LAYER_BLUR":"BACKGROUND_BLUR",radius:effect.blur,visible:true};
         const binding=bindingFor(ir,"effects."+index+".color");
         if(!binding||!("color" in base))return base;
         const variable=variables.get("COLOR:"+binding.variable);
@@ -299,7 +308,16 @@ for(const source of PLAN.sources){
     node.counterAxisAlignItems=align[layout.counterAxisAlign];
     node.itemSpacing=layout.itemSpacing;
     node.paddingTop=Math.max(0,layout.padding.top);node.paddingRight=Math.max(0,layout.padding.right);node.paddingBottom=Math.max(0,layout.padding.bottom);node.paddingLeft=Math.max(0,layout.padding.left);
-    if(ir.clipsContent!==undefined)node.clipsContent=ir.clipsContent;
+    void "${P}-WRITER-CLIPS-ONLY-WHEN-SAID";
+    // Figma's frame default is clipsContent=true; CSS's overflow default is
+    // visible. A frame clips only when the IR says so — otherwise a box's own
+    // shadow is cut off at a hit area the same size as the box (shadcn) —
+    // EXCEPT that Figma renders a frame's own drop shadow like Chromium only
+    // when that frame clips (MUI switch thumb tail, measured against the real
+    // render 27/37/44/54: clipping 45/51/71/80, not clipping 73/76/84/88 and a
+    // row longer). So a shadowed frame clips unless the IR says otherwise.
+    const shadowed=Array.isArray(ir.effects)&&ir.effects.some(e=>e.kind==="drop-shadow");
+    node.clipsContent=ir.clipsContent===undefined?shadowed:ir.clipsContent;
     void "${P}-WRITER-LAYOUT-MIN-WIDTH";
     if(layout.minWidth!==undefined){node.minWidth=layout.minWidth;bindFloat(node,"minWidth",bindingFor(ir,"layout.minWidth"));}
     if(layout.minHeight!==undefined){node.minHeight=layout.minHeight;bindFloat(node,"minHeight",bindingFor(ir,"layout.minHeight"));}

@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-dialog-v4",
+  "runIdentity": "e482eb49-b275da16-d479cda5-dialog-v4",
+  "namespace": "ds.contracts.dialog.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "dialog@1 open paper plus title and body from Astryx Dialog, MUI Dialog, and AntD Modal; full-bleed scrim size is a refusal",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-dialog-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "e482eb490976c22f9c7527fbe8d3fb545ef450d75e7a03c75c1b392cb9371a8f",
+      "envelopeHash": "283d1e67fc48321a82eb4834bc30d0ce09fdd167fed47c5a221139767aae68e6",
+      "variantCount": 1,
+      "variableCount": 12,
+      "comparedIrFacts": 20
+    },
+    {
+      "adapterIdentity": "mui-dialog-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "b275da1672c18ab147c939c61bdc8192e415acf3bc412ea9758c6a91e6780ac7",
+      "envelopeHash": "f544a21b36616c339406b8a055782462b9886dac674bb0a9bfbe14a877969b55",
+      "variantCount": 1,
+      "variableCount": 12,
+      "comparedIrFacts": 20
+    },
+    {
+      "adapterIdentity": "antd-dialog-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "d479cda5dd84ed7a52f65ea671e23e51695c9ce4181be9a8b8807c11fc27ea6d",
+      "envelopeHash": "30905d72b7c48bac63d8cab6c603ab3dc70d695a28a658655dd08f9e9313b485",
+      "variantCount": 1,
+      "variableCount": 12,
+      "comparedIrFacts": 20
+    }
+  ]
+}

@@ -43,7 +43,7 @@ test("a proposal reads every leaf from the ledger or a named review — and inve
   assert.deepEqual(result.refused, []);
   const counts = { ledger: 0, set: 0, spelling: 0 };
   for (const l of Object.values(result.proposal.leaves)) counts[l.from] += 1;
-  assert.deepEqual(counts, { ledger: 42, set: 3, spelling: 10 });
+  assert.deepEqual(counts, { ledger: 43, set: 3, spelling: 10 });
   assert.equal(result.proposal.content.label, "Accept");
   assert.equal(result.proposal.typography.family, "Inter");
   assert.equal(result.proposal.glyph.scaled.strokeWidth, 1.75, "stroke scaled from viewBox units onto the 14px box");
@@ -112,4 +112,29 @@ test("switch@1: a capture with no checked axis is refused, not guessed (Astryx)"
   const draft = draftSwitchRoles(new Ledger(REPO, "extract/computed/out/astryx-core/switch/captured-truth.json"));
   assert.ok(draft.unresolved.length >= 2, draft.unresolved.join("\n"));
   assert.ok(draft.unresolved.some((u) => /true\.enabled/.test(u)));
+});
+
+test("a BARE control (shadcn: no label part, oklch colours) proposes the label-less cell and invents nothing", () => {
+  const ledgerRel = "extract/computed/out/shadcn/checkbox/captured-truth.json";
+  const draft = draftCheckboxRoles(new Ledger(REPO, ledgerRel));
+  assert.deepEqual(draft.unresolved, [], "a missing label is evidence, not a refusal");
+  assert.equal(draft.roles.label, undefined);
+  const gap = "shadcn's indeterminate state renders the check glyph — a named gap";
+  const sets = {
+    "dash.width": { value: "0", why: gap }, "dash.height": { value: "0", why: gap }, "dash.radius": { value: "0", why: gap },
+    "states.indeterminate.enabled.dashFill": { value: "#00000000", why: gap }, "states.indeterminate.disabled.dashFill": { value: "#00000000", why: gap },
+  };
+  const glyph = { path: "M20 6 L9 17 L4 12", viewBox: 24, paint: "stroke" as const, strokeWidth: 2, cap: "round" as const, join: "round" as const, source: "lucide-react@1.30.0 dist/esm/icons/check.mjs" };
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const out = path.relative(REPO, path.join(dir, "checkbox.shadcn.ts"));
+  const result = proposeCheckboxFixture({ library: "shadcn", ledger: ledgerRel, roles: draft.roles as CheckboxRoles, glyph, sets, out });
+  assert.deepEqual(result.refused, []);
+  assert.equal(result.proposal.content.label, null, "the bare cell");
+  assert.equal(result.proposal.leaves["states.checked.enabled.boxFill"]?.value, "#171717ff", "oklch(0.205 0 0) by CSS Color 4, pinned to the render's (23,23,23)");
+  assert.equal(result.proposal.leaves["states.unchecked.enabled.boxBorder"]?.value, "#e5e5e5ff", "oklch(0.922 0 0) → 229");
+  assert.equal(result.proposal.leaves["labelFontSize"]?.from, "spelling");
+  assert.match(String(result.proposal.leaves["boxShadow"]?.value), /rgba\(0, 0, 0, 0\.05\) 0px 1px 2px 0px$/, "shadow-xs read from the box");
+  const module = readFileSync(result.modulePath, "utf8");
+  assert.ok(module.includes("bareLabelFont()"), "the generated module carries the inert label font");
+  assert.ok(module.includes('{"label":null}'), "content.label null");
 });

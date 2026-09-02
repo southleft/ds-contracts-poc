@@ -148,6 +148,19 @@ if (!connected) {
 
 // figma_execute defaults to a 5 s execution budget (max 300 s). A three-library
 // set with six variants each needs more; the alert's twelve fit by luck.
+// --from-page <name>: switch the connected file to a named page first. The
+// writers refuse when figma.currentPage is a forbidden stay page — which is
+// exactly where the previous run left the editor — so a remint loop starts
+// each run from a neutral page instead of a person clicking.
+const fromPage = argument("from-page");
+if (fromPage) {
+  const hop = await call("figma_execute", {
+    code: `await figma.loadAllPagesAsync(); const p = figma.root.children.find((p) => p.name === ${JSON.stringify(fromPage)}); if (!p) throw new Error("no page named " + ${JSON.stringify(fromPage)}); await figma.setCurrentPageAsync(p); return { page: figma.currentPage.name };`,
+    fileKey: TARGET.fileKey,
+    timeout: 20_000,
+  }, 30_000);
+  if (!hop?.success) throw new Error(`--from-page: could not switch to ${fromPage}: ${JSON.stringify(hop).slice(0, 200)}`);
+}
 const result = await call("figma_execute", { code, fileKey: TARGET.fileKey, timeout: Math.min(waitMs, 300_000) }, waitMs);
 writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`);
 await client.close();

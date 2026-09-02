@@ -25,7 +25,13 @@ import {
 
 export const TOOLTIP_FIGMA_NAMESPACE = "ds.contracts.tooltip.recipe.v1";
 export const TOOLTIP_FIGMA_WRITER_VERSION = 1;
-export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v3";
+export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v6";
+/** v5 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TOOLTIP_V5_PAGE_ID = "218:86308";
+/** v4 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_TOOLTIP_V4_PAGE_ID = "218:84826";
+/** v3 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_TOOLTIP_V3_PAGE_ID = "212:81271";
 /** v2 stay (shared-runtime proof) is preserved as evidence and never written again. */
 export const FORBIDDEN_TOOLTIP_V2_PAGE_ID = "209:79907";
 /** The v1 stay is preserved as evidence (superseded by the 2026-09-01 capture-content remint) and never written again. */
@@ -256,6 +262,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:86308", "marker": "TOOLTIP-V5-PAGE" },
+    { "id": "218:84826", "marker": "TOOLTIP-V4-PAGE" },
+    { "id": "212:81271", "marker": "TOOLTIP-V3-PAGE" },
     { "id": "209:79907", "marker": "TOOLTIP-V2-PAGE" },
     {
       "id": "115:295378",

@@ -40,6 +40,12 @@
       "from": "ledger",
       "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.padding-top"
     },
+    "boxShadow": {
+      "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.box-shadow",
+      "formula": "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)"
+    },
     "row.gap": {
       "value": 0,
       "from": "spelling",
@@ -48,17 +54,17 @@
     "dash.width": {
       "value": 0,
       "from": "set",
-      "why": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      "why": "shadcn's indeterminate state renders the check glyph — a named gap"
     },
     "dash.height": {
       "value": 0,
       "from": "set",
-      "why": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      "why": "shadcn's indeterminate state renders the check glyph — a named gap"
     },
     "dash.radius": {
       "value": 0,
       "from": "set",
-      "why": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      "why": "shadcn's indeterminate state renders the check glyph — a named gap"
     },
     "check.width": {
       "value": 14,
@@ -71,7 +77,7 @@
       "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.height"
     },
     "check.strokeWidth": {
-      "value": 1.1666666666666667,
+      "value": 1.167,
       "from": "ledger",
       "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:path.stroke-width | extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.width",
       "formula": "path stroke-width × (rendered svg width / viewBox 24) — an SVG stroke is a user-space length"
@@ -226,7 +232,7 @@
     "states.indeterminate.enabled.dashFill": {
       "value": "#00000000",
       "from": "set",
-      "why": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      "why": "shadcn's indeterminate state renders the check glyph — a named gap"
     },
     "states.indeterminate.disabled.boxFill": {
       "value": "#00000000",
@@ -251,7 +257,7 @@
     "states.indeterminate.disabled.dashFill": {
       "value": "#00000000",
       "from": "set",
-      "why": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      "why": "shadcn's indeterminate state renders the check glyph — a named gap"
     },
     "rowAlign": {
       "value": "center",
@@ -271,7 +277,7 @@
     "check.path": {
       "value": "(see glyph)",
       "from": "set",
-      "why": "lucide-react@1.30.0 dist/esm/icons/check.mjs: [[\"path\", { d: \"M20 6 9 17l-5-5\" }]] with defaultAttributes.mjs viewBox \"0 0 24 24\" fill none stroke currentColor strokeWidth 2 strokeLinecap round strokeLinejoin round; mounted by examples/shadcn/.shadcn-sandbox/src/components/ui/checkbox.tsx <CheckIcon /> inside Indicator [&>svg]:size-3.5 (14px)"
+      "why": "lucide-react@1.30.0 dist/esm/icons/check.mjs"
     },
     "states.unchecked.enabled.checkFill": {
       "value": "#fafafaff",
@@ -298,37 +304,37 @@
     {
       "path": "dash.width",
       "why": "no distinct indeterminate mark part in this library's DOM",
-      "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored",
+      "evidence": "shadcn's indeterminate state renders the check glyph — a named gap",
       "value": 0
     },
     {
       "path": "dash.height",
       "why": "no distinct indeterminate mark part",
-      "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored",
+      "evidence": "shadcn's indeterminate state renders the check glyph — a named gap",
       "value": 0
     },
     {
       "path": "dash.radius",
       "why": "no distinct indeterminate mark part",
-      "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored",
+      "evidence": "shadcn's indeterminate state renders the check glyph — a named gap",
       "value": 0
     },
     {
       "path": "states.indeterminate.enabled.dashFill",
       "why": "no distinct indeterminate mark part",
-      "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored",
+      "evidence": "shadcn's indeterminate state renders the check glyph — a named gap",
       "value": "#00000000"
     },
     {
       "path": "states.indeterminate.disabled.dashFill",
       "why": "no distinct indeterminate mark part",
-      "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored",
+      "evidence": "shadcn's indeterminate state renders the check glyph — a named gap",
       "value": "#00000000"
     },
     {
       "path": "check.path",
       "why": "glyph geometry is cited from the package source (--glyph), not a computed channel",
-      "evidence": "lucide-react@1.30.0 dist/esm/icons/check.mjs: [[\"path\", { d: \"M20 6 9 17l-5-5\" }]] with defaultAttributes.mjs viewBox \"0 0 24 24\" fill none stroke currentColor strokeWidth 2 strokeLinecap round strokeLinejoin round; mounted by examples/shadcn/.shadcn-sandbox/src/components/ui/checkbox.tsx <CheckIcon /> inside Indicator [&>svg]:size-3.5 (14px)",
+      "evidence": "lucide-react@1.30.0 dist/esm/icons/check.mjs",
       "value": "(see glyph)"
     }
   ],
@@ -349,7 +355,7 @@
       "strokeWidth": 2,
       "cap": "round",
       "join": "round",
-      "source": "lucide-react@1.30.0 dist/esm/icons/check.mjs: [[\"path\", { d: \"M20 6 9 17l-5-5\" }]] with defaultAttributes.mjs viewBox \"0 0 24 24\" fill none stroke currentColor strokeWidth 2 strokeLinecap round strokeLinejoin round; mounted by examples/shadcn/.shadcn-sandbox/src/components/ui/checkbox.tsx <CheckIcon /> inside Indicator [&>svg]:size-3.5 (14px)"
+      "source": "lucide-react@1.30.0 dist/esm/icons/check.mjs"
     },
     "scaled": {
       "path": "M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7",

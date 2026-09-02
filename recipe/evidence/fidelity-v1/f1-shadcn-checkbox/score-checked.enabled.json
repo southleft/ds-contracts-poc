@@ -6,17 +6,17 @@
     "pctAAMaskedMax": 5
   },
   "metrics": {
-    "pctExactUnmasked": 31.25,
+    "pctExactUnmasked": 29.411764705882355,
     "pctAAUnmasked": 5.147058823529411,
     "pctAAMasked": 5.147058823529411,
-    "canvasPx": "16x16",
+    "canvasPx": "16x17",
     "realPx": "16x17",
-    "inkCanvasPct": 91.54411764705883,
+    "inkCanvasPct": 95.95588235294117,
     "inkRealPct": 94.85294117647058
   },
   "canvas": {
     "path": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/canvas-checked.enabled.png",
-    "sha256": "7d59d14fc217c83b715a23295e83adcd6861a094e5d46de7070dd329e046d768"
+    "sha256": "a0cec7c45b7538417f418dfca36b4a2b198f262515b1746a43696288102c3463"
   },
   "reference": {
     "path": "extract/computed/out/shadcn/checkbox/orig-shots/checked.enabled__default.png",
@@ -28,9 +28,9 @@
   "thresholdSweep": [
     {
       "threshold": 250,
-      "canvas": "16x16",
+      "canvas": "16x17",
       "reference": "16x17",
-      "agree": false
+      "agree": true
     },
     {
       "threshold": 245,

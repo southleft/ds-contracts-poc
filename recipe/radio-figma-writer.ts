@@ -26,7 +26,13 @@ import {
 
 export const RADIO_FIGMA_NAMESPACE = "ds.contracts.radio.recipe.v1";
 export const RADIO_FIGMA_WRITER_VERSION = 2;
-export const RADIO_FIGMA_RUN_SUFFIX = "radio-v4";
+export const RADIO_FIGMA_RUN_SUFFIX = "radio-v7";
+/** v6 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_RADIO_V6_PAGE_ID = "218:85710";
+/** v5 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_RADIO_V5_PAGE_ID = "218:84228";
+/** v4 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_RADIO_V4_PAGE_ID = "212:80619";
 /** v3 stay (shared-runtime proof) is preserved as evidence and never written again. */
 export const FORBIDDEN_RADIO_V3_PAGE_ID = "200:79301";
 export const FORBIDDEN_RADIO_V1_PAGE_ID = "183:75031";
@@ -251,6 +257,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "radioSet"
   },
   "forbiddenPages": [
+    { "id": "218:85710", "marker": "RADIO-V6-PAGE" },
+    { "id": "218:84228", "marker": "RADIO-V5-PAGE" },
+    { "id": "212:80619", "marker": "RADIO-V4-PAGE" },
     { "id": "200:79301", "marker": "RADIO-V3-PAGE" },
     {
       "id": "115:295378",

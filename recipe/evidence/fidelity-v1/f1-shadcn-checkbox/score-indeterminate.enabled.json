@@ -9,14 +9,14 @@
     "pctExactUnmasked": 30.14705882352941,
     "pctAAUnmasked": 2.941176470588235,
     "pctAAMasked": 2.941176470588235,
-    "canvasPx": "16x16",
+    "canvasPx": "16x17",
     "realPx": "16x17",
-    "inkCanvasPct": 22.058823529411764,
+    "inkCanvasPct": 24.264705882352942,
     "inkRealPct": 38.970588235294116
   },
   "canvas": {
     "path": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/canvas-indeterminate.enabled.png",
-    "sha256": "abb6d6ff6202eaf3bd56fe29e1c4073b8c368dd756c95bcd17bf00abb3867afd"
+    "sha256": "540a615f31b9d59b4110d92f72d5af0e29418a81054ceaa100e992edcd6a106c"
   },
   "reference": {
     "path": "extract/computed/out/shadcn/checkbox/orig-shots/indeterminate.enabled__default.png",
@@ -28,9 +28,9 @@
   "thresholdSweep": [
     {
       "threshold": 250,
-      "canvas": "16x16",
+      "canvas": "16x17",
       "reference": "16x17",
-      "agree": false
+      "agree": true
     },
     {
       "threshold": 245,

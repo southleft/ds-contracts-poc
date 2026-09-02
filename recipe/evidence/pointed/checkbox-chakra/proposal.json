@@ -45,6 +45,12 @@
       "from": "ledger",
       "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.padding-top"
     },
+    "boxShadow": {
+      "value": "none",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.box-shadow",
+      "formula": "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)"
+    },
     "row.gap": {
       "value": 10,
       "from": "ledger",

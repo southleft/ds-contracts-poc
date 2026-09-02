@@ -1,0 +1,54 @@
+{
+  "pageName": "Recipe Pivot / Checkbox / b079e449-8b8523c2-e3f9373b-11419528-45f207ad-checkbox-v10",
+  "runIdentity": "b079e449-8b8523c2-e3f9373b-11419528-45f207ad-checkbox-v10",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "checkbox@1 MUI CheckBox.js even-odd icon (no white overlay, no leftover stroke). AntD ::after L baked to a check path (rotation 0). AntD indeterminate is fontSizeLG/2 × lineWidthBold dash. Old stays 183:74742 and 196:76370 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-checkbox-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "b079e449f0d4d6249d2e7c5e2ae440ae8c984dd139c2ec57b8fe2bce6854232a",
+      "envelopeHash": "fc87466ca14e24a62d4efda9ce01dfa329600710f43873cbc52e9b83468145a6",
+      "variantCount": 6,
+      "variableCount": 43,
+      "comparedIrFacts": 217
+    },
+    {
+      "adapterIdentity": "mui-checkbox-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "8b8523c2944161f2a78748dd137e957833616cb99d14047328af82b71043a354",
+      "envelopeHash": "532100f58783d4a177262baed72da3a40bfd37e0f578d477f7c8e74829c6addb",
+      "variantCount": 6,
+      "variableCount": 42,
+      "comparedIrFacts": 211
+    },
+    {
+      "adapterIdentity": "antd-checkbox-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "e3f9373bafed3b2e64d991e4c971700e072b526f4211b56be6587d280e74b4b1",
+      "envelopeHash": "eaa8a9823da3b5cefa5afa3613bba3b1d354813b8a334e10c663aa1b771a0ce4",
+      "variantCount": 6,
+      "variableCount": 43,
+      "comparedIrFacts": 217
+    },
+    {
+      "adapterIdentity": "chakra-checkbox-proposed-v1",
+      "displayName": "Chakra",
+      "recipeHash": "114195289b605a9e2eba826c56792bbc334897a775cba795f8bfa2e34bbbae28",
+      "envelopeHash": "3662309ac4ae9cc560898bc85dac4611dafd53b507e1f1d454d72ce956d7f650",
+      "variantCount": 6,
+      "variableCount": 43,
+      "comparedIrFacts": 217
+    },
+    {
+      "adapterIdentity": "shadcn-checkbox-proposed-v1",
+      "displayName": "shadcn",
+      "recipeHash": "45f207ad9a9a05a436fdc31e6114d5bd2d27cd8b277f140ccd006fb0e18776fd",
+      "envelopeHash": "f9393ae3d493ea6ab7639ad9a338f65664f5198f7b3b6323d431ca7a14ba37c2",
+      "variantCount": 6,
+      "variableCount": 36,
+      "comparedIrFacts": 199
+    }
+  ]
+}

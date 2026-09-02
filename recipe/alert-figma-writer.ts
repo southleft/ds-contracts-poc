@@ -25,7 +25,13 @@ import {
 
 export const ALERT_FIGMA_NAMESPACE = "ds.contracts.alert.recipe.v1";
 export const ALERT_FIGMA_WRITER_VERSION = 1;
-export const ALERT_FIGMA_RUN_SUFFIX = "alert-v4";
+export const ALERT_FIGMA_RUN_SUFFIX = "alert-v7";
+/** v6 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_ALERT_V6_PAGE_ID = "218:85931";
+/** v5 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_ALERT_V5_PAGE_ID = "218:84449";
+/** v4 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_ALERT_V4_PAGE_ID = "212:80840";
 /** v3 stay (shared-runtime proof) is preserved as evidence and never written again. */
 export const FORBIDDEN_ALERT_V3_PAGE_ID = "209:79728";
 /** The v2 stay (glyphs carried, ring lost to an open subpath, AntD 38 tall) is preserved as evidence and never written again. */
@@ -253,6 +259,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "alertSet"
   },
   "forbiddenPages": [
+    { "id": "218:85931", "marker": "ALERT-V6-PAGE" },
+    { "id": "218:84449", "marker": "ALERT-V5-PAGE" },
+    { "id": "212:80840", "marker": "ALERT-V4-PAGE" },
     { "id": "209:79728", "marker": "ALERT-V3-PAGE" },
     {
       "id": "115:295378",

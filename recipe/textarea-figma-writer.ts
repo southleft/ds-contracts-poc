@@ -25,7 +25,13 @@ import {
 
 export const TEXTAREA_FIGMA_NAMESPACE = "ds.contracts.textarea.recipe.v1";
 export const TEXTAREA_FIGMA_WRITER_VERSION = 3;
-export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v4";
+export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v7";
+/** v6 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TEXTAREA_V6_PAGE_ID = "218:86350";
+/** v5 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_TEXTAREA_V5_PAGE_ID = "218:84868";
+/** v4 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_TEXTAREA_V4_PAGE_ID = "212:81799";
 export const FORBIDDEN_TEXTAREA_V1_PAGE_ID = "183:75495";
 export const FORBIDDEN_TEXTAREA_V2_PAGE_ID = "198:77048";
 
@@ -253,6 +259,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "textareaSet"
   },
   "forbiddenPages": [
+    { "id": "218:86350", "marker": "TEXTAREA-V6-PAGE" },
+    { "id": "218:84868", "marker": "TEXTAREA-V5-PAGE" },
+    { "id": "212:81799", "marker": "TEXTAREA-V4-PAGE" },
     {
       "id": "115:295378",
       "marker": "INPUT-PAGE"

@@ -26,7 +26,13 @@ import {
 
 export const BADGE_FIGMA_NAMESPACE = "ds.contracts.badge.recipe.v1";
 export const BADGE_FIGMA_WRITER_VERSION = 2;
-export const BADGE_FIGMA_RUN_SUFFIX = "badge-v6";
+export const BADGE_FIGMA_RUN_SUFFIX = "badge-v9";
+/** v8 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_BADGE_V8_PAGE_ID = "218:86156";
+/** v7 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_BADGE_V7_PAGE_ID = "218:84674";
+/** v6 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_BADGE_V6_PAGE_ID = "212:81065";
 /** v5 stay (shared-runtime proof) is preserved as evidence and never written again. */
 export const FORBIDDEN_BADGE_V5_PAGE_ID = "211:80168";
 /** v4 (2026-09-01) stays as evidence of the clipping container; never written again. */
@@ -256,6 +262,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "badge"
   },
   "forbiddenPages": [
+    { "id": "218:86156", "marker": "BADGE-V8-PAGE" },
+    { "id": "218:84674", "marker": "BADGE-V7-PAGE" },
+    { "id": "212:81065", "marker": "BADGE-V6-PAGE" },
     { "id": "211:80168", "marker": "BADGE-V5-PAGE" },
     {
       "id": "115:295378",

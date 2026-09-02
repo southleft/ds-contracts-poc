@@ -52,7 +52,7 @@ test("the writer plans three tooltip sources without touching Figma", () => {
   const writer = emitTooltipFigmaWriter(sources);
   assert.equal(writer.namespace, TOOLTIP_FIGMA_NAMESPACE);
   assert.match(writer.pageName, /^Recipe Pivot \/ Tooltip \//);
-  assert.match(writer.runIdentity, /-tooltip-v3$/);
+  assert.match(writer.runIdentity, /-tooltip-v6$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.chip.kind, "component");

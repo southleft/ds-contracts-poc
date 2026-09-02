@@ -454,6 +454,7 @@ const tokenFacts = (
     if (
       path.startsWith("tokens.typography") ||
       path === "tokens.rowAlign" ||
+      path === "tokens.boxShadow" ||
       path.startsWith("tokens.check.")
     ) {
       facts.push({
@@ -461,7 +462,12 @@ const tokenFacts = (
         category:
           path === "tokens.rowAlign" || path.startsWith("tokens.check.")
             ? "anatomy"
-            : "typography",
+            : // adapters/checkbox.ts expectedCategory falls through to
+              // "geometry" for a tokens.* it does not name; the box's shadow
+              // is one of those (same rule as switch@1's thumbShadow).
+              path === "tokens.boxShadow"
+              ? "geometry"
+              : "typography",
         source: {
           kind: "review",
           evidence: `${evidence}; reviewed ${path}=${String(value)}`,

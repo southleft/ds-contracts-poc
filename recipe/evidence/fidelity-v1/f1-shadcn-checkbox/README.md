@@ -26,20 +26,41 @@ Three things the recipe path had never done before, all measured here:
   cell, so the dash is a zero-size reviewed receipt and the two indeterminate
   cells mint as an empty box.
 
-## Scores (bar 5% AA-masked)
+## Scores (bar 5% AA-masked) — checkbox v11, page `218:86637`
 
 | state | AA masked | exact unmasked | ink canvas / real | verdict |
 |---|---|---|---|---|
-| unchecked.enabled | **0.00%** | 20.6% | 22.1 / 29.4 | pass (the real crop is 16×17: `shadow-xs` adds a row the recipe does not carry) |
+| unchecked.enabled | **0.00%** | — | 24.3 / 29.4 | pass, **16×17 both sides**: shadcn's `shadow-xs` is now a carried leaf (`boxShadow`), lowered to a Figma drop shadow that never shows behind its node, on a hit frame that no longer clips it |
 | unchecked.disabled | **0.00%** | — | 23.0 / 20.3 | pass |
-| checked.disabled | 3.13% | 25.4% | 97.3 / 96.1 | pass |
-| checked.enabled | **5.15%** | 31.3% | 91.5 / 94.9 | **FAIL by 0.15** — the uncarried `shadow-xs` (`0 1px 2px rgb(0 0 0 / .05)`) and the 1.17px glyph stroke's rasterisation |
-| indeterminate.enabled | 2.94% | 30.1% | 22.1 / **39.0** | **NOT A PASS** — the glyph is absent (named gap). The number is the instrument: the AA mask excuses a 1.17px stroke entirely. Read the ink columns. |
-| indeterminate.disabled | 3.13% | 24.6% | 23.0 / 30.5 | **NOT A PASS** — same gap at 50% opacity |
+| checked.disabled | 3.13% | — | 97.3 / 96.1 | pass |
+| checked.enabled | **5.15%** | — | 96.0 / 94.9 | **FAIL by 0.15** — the glyph's 1.17px stroke: the diff hugs the whole stroke; Chromium spreads it softly over two rows, Figma renders it crisper and ~1px higher. Thin-stroke rasterisation, not a missing fact (the same path at 1.75px on Chakra is 0.00%). |
+| indeterminate.enabled | 2.94% | — | 24.3 / **39.0** | **NOT A PASS** — the glyph is absent (named gap). The number is the instrument: the AA mask excuses a 1.17px stroke entirely. Read the ink columns. |
+| indeterminate.disabled | 3.13% | — | 23.0 / 30.5 | **NOT A PASS** — same gap at 50% opacity |
 
-Two of six cells are named as not expressible; one fails by 0.15 on a shadow
-the archetype has no leaf for. **checkbox@1 does not carry a box shadow** —
-that is the next grammar increment, not a fixture value.
+Two of six cells are named as not expressible; one fails by 0.15 on the
+rasterisation of a stroke thinner than 2px. Earlier rounds of this table (v7,
+v8) had the checked state failing on the uncarried shadow; carrying it moved
+the unchecked crop to 16×17 and left the checked score unchanged, which is how
+the residual was attributed to the glyph and not the shadow.
+
+### What the shadow taught the runtime (v8 → v11)
+
+v8 carried the shadow but scored the same: the minted box had
+`showShadowBehindNode: true` (Figma's default when a plugin creates an
+effect), so the shadow bled through the transparent unchecked fill, and the
+hit frame had Figma's default `clipsContent: true`, so the shadow below a box
+that fills its hit area was cut off. CSS has neither behaviour. The first
+correction (v9: never behind the node; clip only when the IR says so) moved
+one other subject — switch/mui 4.57% → 5.92% — and a probe on a throwaway
+clone measured why: Figma renders a frame's **own** drop shadow like Chromium
+only when that frame clips its content (thumb tail rows against the real
+27/37/44/54: clipping 45/51/71/80, not clipping 73/76/84/88 and a row
+longer), while the behind-node flag is byte-identical for an opaque node.
+The rules that stand (`recipe/figma-writer-runtime.ts`, v11): a lowered
+shadow shows behind its node only when the node is fully opaque; a frame
+clips when the IR says so, or when it carries a drop shadow, and otherwise
+does not. All thirteen archetypes were reminted through them with every
+score unchanged.
 
 ## Instrument note
 

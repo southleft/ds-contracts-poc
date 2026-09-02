@@ -128,6 +128,10 @@ export function evaluate(ledger: Ledger, mappings: FactMapping[], sets: Map<stri
       } else refused.push(`${m.path}: ${msg} — give --set ${m.path}=… --why`);
       continue;
     }
+    // The reader compares captured numbers at 3 decimals (reader.ts); a
+    // proposal must write the same precision or its own drift gate reads it
+    // back as drift (shadcn's 2 × 14/24 stroke).
+    if (typeof value === "number") value = Number(value.toFixed(3));
     leaves[m.path] = { value, from: "ledger", key: keys.join(" | "), formula: m.formula };
   }
   for (const { m, spelling } of deferred) {
@@ -191,6 +195,7 @@ const ${opts.slug}Tokens = cloneTokens(${q(`${opts.slug}.checkbox`)}, (path) => 
   return VALUES[path]!;
 });
 ${opts.slug}Tokens.rowAlign = ${q(String(p.leaves["rowAlign"]?.value ?? "center"))} as "center" | "start";
+${opts.slug}Tokens.boxShadow = ${q(String(p.leaves["boxShadow"]!.value))};
 ${opts.slug}Tokens.check = {
   ...${opts.slug}Tokens.check,
   // ${p.glyph.asIs.source}; package-space path scaled onto the rendered ${p.leaves["check.width"]?.value}px svg box

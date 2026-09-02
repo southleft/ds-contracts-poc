@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Chip / 932f13fe-eb96b2ab-908fd120-chip-v6",
+  "runIdentity": "932f13fe-eb96b2ab-908fd120-chip-v6",
+  "namespace": "ds.contracts.chip.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "chip@1 named default cell from Astryx Token, MUI Chip filled/default/medium, and AntD Tag bordered; color/size/closable are not axes; do not invent an Astryx Chip",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-chip-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "932f13fefdd27eb4dd2b5fb64e01bcb803ee1f4f6418109114faf414894738b6",
+      "envelopeHash": "84e48b7a837f3e910f24cc528cdab62308d7b05ecec478fb2c97511ce5830cb9",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "mui-chip-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "eb96b2abd592a1ce8c6f61ab00593071726fa933c23e5c200d2bedb23343d3c2",
+      "envelopeHash": "c151b986e44e5803bbe287fd904ee52711702b057399ecab2a36778e9b069049",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "antd-chip-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "908fd120d4b84efeb619230a15e1001d009d3f980d44dc13efcc275631855038",
+      "envelopeHash": "95ea739ea51bf46f1d3b545c58746677b490fca7911110ce69c2b0d46737bc37",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    }
+  ]
+}

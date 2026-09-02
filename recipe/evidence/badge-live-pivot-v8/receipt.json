@@ -1,0 +1,41 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "badge-live-pivot-v8-prepare",
+  "teaching": "MUI Badge proof is color=error from the docs Color demo; do not paint a fake pill on color=default",
+  "runIdentity": "17da6833-76d59843-badge-v8",
+  "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-badge-v8",
+  "namespace": "ds.contracts.badge.recipe.v1",
+  "recipeHashes": {
+    "MUI": "17da68334ab3f716e4eeceb61565f94ab998b3f30d1c9b4cd56f7ba71d62ce3f",
+    "Ant Design": "76d59843686f044cb0a0322d6301b269d893d7dd061a997ef82f5ff1aacab40c"
+  },
+  "writerSha256": "12da5a0449a0cf5bb33600e97b58017091da06702994c61750ea8df19450816c",
+  "pageId": "218:86156",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=218-86156",
+  "live": {
+    "recordedFrom": "badge-v8-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-badge-v8",
+    "sources": [
+      {
+        "adapterIdentity": "mui-badge-reviewed-v1",
+        "sectionId": "218:86157",
+        "setId": "218:86172",
+        "collectionId": "VariableCollectionId:218:86158",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      },
+      {
+        "adapterIdentity": "antd-badge-reviewed-v1",
+        "sectionId": "218:86177",
+        "setId": "218:86192",
+        "collectionId": "VariableCollectionId:218:86178",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      }
+    ]
+  }
+}

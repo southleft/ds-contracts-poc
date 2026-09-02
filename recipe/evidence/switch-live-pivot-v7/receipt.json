@@ -1,0 +1,50 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "switch-live-pivot-v7-prepare",
+  "teaching": "AntD Switch ON inset matches OFF: compile travel 22 from named handle travel calc(100% - handleSize - trackPadding)",
+  "runIdentity": "3ba64ebc-4b939b9e-6211639b-switch-v7",
+  "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-6211639b-switch-v7",
+  "namespace": "ds.contracts.switch.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "3ba64ebca7ac7eaff7dfe84dbc120a4d6b060812be7faffc9ccd66aa9f0bcb73",
+    "MUI": "4b939b9e867ec77b6c74712c55fef72f707b463eb4c95c09d9992075184da3ff",
+    "Ant Design": "6211639b98921062c6325fe77ff66f980e6daa7c431cc91d5734c2ab66c8015c"
+  },
+  "writerSha256": "9c7f5a9bf953dbb7a46976a8b7ce046a2ddfc41a7ec4d292cd27d176c3ab9b30",
+  "pageId": "218:85571",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=218-85571",
+  "live": {
+    "recordedFrom": "switch-v7-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-6211639b-switch-v7",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-switch-reviewed-v1",
+        "sectionId": "218:85572",
+        "setId": "218:85617",
+        "collectionId": "VariableCollectionId:218:85573",
+        "variantCount": 4,
+        "comparedIrFacts": 99
+      },
+      {
+        "adapterIdentity": "mui-switch-reviewed-v1",
+        "sectionId": "218:85618",
+        "setId": "218:85663",
+        "collectionId": "VariableCollectionId:218:85619",
+        "variantCount": 4,
+        "comparedIrFacts": 99
+      },
+      {
+        "adapterIdentity": "antd-switch-reviewed-v1",
+        "sectionId": "218:85664",
+        "setId": "218:85709",
+        "collectionId": "VariableCollectionId:218:85665",
+        "variantCount": 4,
+        "comparedIrFacts": 99
+      }
+    ]
+  }
+}

@@ -52,7 +52,7 @@ test("the writer plans three dialog sources without touching Figma", () => {
   const writer = emitDialogFigmaWriter(sources);
   assert.equal(writer.namespace, DIALOG_FIGMA_NAMESPACE);
   assert.match(writer.pageName, /^Recipe Pivot \/ Dialog \//);
-  assert.match(writer.runIdentity, /-dialog-v2$/);
+  assert.match(writer.runIdentity, /-dialog-v5$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.chip.kind, "component");

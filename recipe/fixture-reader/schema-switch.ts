@@ -18,6 +18,7 @@
 import type { FactMapping } from "./reader.js";
 import { matrix, num, px } from "./ledger.js";
 import { firstFam, inkTimesOpacity, styleForWeight } from "./mappings-util.js";
+import { BARE_LABEL_COLOR, BARE_LABEL_FONT_SIZE, bareLabelFont } from "../recipes/switch.js";
 
 export interface SwitchRoles {
   /** The wrapper / hit area (wrapper.*). */
@@ -59,6 +60,23 @@ export const SWITCH_SPELLINGS: Record<string, Spelling> = {
   "states.true.enabled.trackOpacity": 1,
   "states.true.disabled.trackOpacity": 1,
 };
+
+/**
+ * BARE-CELL SPELLINGS — merged over SWITCH_SPELLINGS only when the role map has
+ * no label (MUI's Switch, shadcn's): switch@1's label-less cell compiles no
+ * label node, so every label leaf is the recipe's inert spelling. Kept apart
+ * so a labelled library whose label read fails still refuses.
+ */
+const BARE_FONT = bareLabelFont();
+export const BARE_SWITCH_SPELLINGS: Record<string, Spelling> = {
+  labelFontSize: BARE_LABEL_FONT_SIZE,
+  "row.gap": 0,
+  "typography.label.family": BARE_FONT.requestedFamily,
+  "typography.label.style": BARE_FONT.requestedStyle,
+};
+for (const fix of ["false.enabled", "false.disabled", "true.enabled", "true.disabled"]) BARE_SWITCH_SPELLINGS[`states.${fix}.label`] = BARE_LABEL_COLOR;
+export const switchSpellingsFor = (roles: Pick<SwitchRoles, "label">): Record<string, Spelling> =>
+  roles.label ? SWITCH_SPELLINGS : { ...SWITCH_SPELLINGS, ...BARE_SWITCH_SPELLINGS };
 
 /** x translation of a computed transform ("matrix(…)") or translate ("12px 0px") value; none → 0. */
 const txOf = (v: string): number => (v === "none" || !v ? 0 : v.startsWith("matrix") ? matrix(v).tx : px(v.trim().split(/\s+/)[0]!));

@@ -37,9 +37,9 @@
       "label": "checkbox/shadcn",
       "status": "pass",
       "pctAAMasked": 0,
-      "canvasPx": "16x16",
+      "canvasPx": "16x17",
       "realPx": "16x17",
-      "convergesAt": 245
+      "convergesAt": 250
     },
     {
       "label": "checkbox/antd",

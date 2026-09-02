@@ -40,6 +40,12 @@
       "from": "ledger",
       "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.padding-top"
     },
+    "boxShadow": {
+      "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.box-shadow",
+      "formula": "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)"
+    },
     "row.gap": {
       "value": 0,
       "from": "spelling",
@@ -71,7 +77,7 @@
       "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.height"
     },
     "check.strokeWidth": {
-      "value": 1.1666666666666667,
+      "value": 1.167,
       "from": "ledger",
       "key": "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:path.stroke-width | extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.width",
       "formula": "path stroke-width × (rendered svg width / viewBox 24) — an SVG stroke is a user-space length"

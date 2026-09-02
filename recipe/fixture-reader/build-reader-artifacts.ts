@@ -15,6 +15,11 @@ import {
   chakraCheckboxAdapterConfig,
   chakraCheckboxMappings,
 } from "../fixtures/generated/checkbox.chakra.js";
+import {
+  SHADCN_CHECKBOX_LEDGER,
+  shadcnCheckboxAdapterConfig,
+  shadcnCheckboxMappings,
+} from "../fixtures/generated/checkbox.shadcn.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Ledger } from "./ledger.js";
@@ -224,6 +229,8 @@ const EXTRA_KEYS = [
   // and lowered to Figma effects at compile. A plain string like rowAlign, so
   // it reaches the reader as an extra rather than a {variable, fallback} leaf.
   "thumbShadow",
+  // checkbox@1's box shadow — the same shape (shadcn's shadow-xs; none elsewhere).
+  "boxShadow",
   "hitClips",
   "trackClips",
   "strokeAlign",
@@ -263,9 +270,10 @@ function extrasFor(tokens: Record<string, unknown>, mappings: FactMapping[]): Ma
 }
 
 function checkboxExtras(tokens: Record<string, unknown>): Map<string, number | string> {
-  const t = tokens as { rowAlign: string; check: { path: string }; typography: { label: Typo } };
+  const t = tokens as { rowAlign: string; boxShadow: string; check: { path: string }; typography: { label: Typo } };
   return new Map<string, number | string>([
     ["rowAlign", t.rowAlign],
+    ["boxShadow", t.boxShadow],
     ["check.path", t.check.path],
     ["typography.label.family", t.typography.label.requestedFamily],
     ["typography.label.style", t.typography.label.requestedStyle],
@@ -327,6 +335,17 @@ const SUBJECTS: Subject[] = [
     tokens: chakraCheckboxAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: chakraCheckboxMappings,
     extras: checkboxExtras(chakraCheckboxAdapterConfig.tokens as unknown as Record<string, unknown>),
+  },
+  {
+    // PROPOSED from a BARE control: no label part (the recipe's label-less
+    // cell), colours declared in oklch, the indeterminate glyph a named gap.
+    archetype: "checkbox",
+    library: "shadcn",
+    source: src(shadcnCheckboxAdapterConfig),
+    ledgerFile: SHADCN_CHECKBOX_LEDGER,
+    tokens: shadcnCheckboxAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: shadcnCheckboxMappings,
+    extras: checkboxExtras(shadcnCheckboxAdapterConfig.tokens as unknown as Record<string, unknown>),
   },
   {
     archetype: "checkbox",

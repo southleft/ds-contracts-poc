@@ -148,6 +148,7 @@ export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchem
     R("box.radius", () => one("box.radius", "px", { combo: base, part: roles.box, channel: "border-top-left-radius" })),
     R("box.borderWidth", () => one("box.borderWidth", "px", { combo: base, part: roles.box, channel: "border-top-width" })),
     R("box.padding", () => one("box.padding", "px", { combo: base, part: roles.box, channel: "padding-top" })),
+    R("boxShadow", () => one("boxShadow", "string", { combo: base, part: roles.box, channel: "box-shadow" }, { formula: "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)" })),
     R("row.gap", () => (roles.row ? one("row.gap", "px", { combo: base, part: roles.row, channel: "column-gap" }) : receipt("row.gap", BARE, "reviewed 0"))),
     R("dash.width", () =>
       roles.dash

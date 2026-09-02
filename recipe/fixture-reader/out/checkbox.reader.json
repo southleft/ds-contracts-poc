@@ -31,6 +31,16 @@
         ]
       },
       {
+        "path": "boxShadow",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.box-shadow"
+        ]
+      },
+      {
         "path": "box.radius",
         "fixtureValue": 4,
         "verdict": "match",
@@ -550,7 +560,7 @@
       }
     ],
     "counts": {
-      "match": 45,
+      "match": 46,
       "drift": 0,
       "receipt": 10,
       "unread": 0
@@ -686,6 +696,17 @@
         "proposedValue": 0,
         "receipt": "same as check.offsetX",
         "evidence": "SwitchBase root display flex align center — reviewed 0"
+      },
+      {
+        "path": "boxShadow",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default tag:path.box-shadow"
+        ],
+        "formula": "the painted box is the SvgIcon path; its box-shadow is none"
       },
       {
         "path": "labelFontSize",
@@ -1063,7 +1084,7 @@
       }
     ],
     "counts": {
-      "match": 22,
+      "match": 23,
       "drift": 0,
       "receipt": 33,
       "unread": 0
@@ -1128,6 +1149,17 @@
         "ledgerKeys": [
           "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.padding-top"
         ]
+      },
+      {
+        "path": "boxShadow",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.box-shadow"
+        ],
+        "formula": "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)"
       },
       {
         "path": "row.gap",
@@ -1613,9 +1645,538 @@
       }
     ],
     "counts": {
-      "match": 42,
+      "match": 43,
       "drift": 0,
       "receipt": 13,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "checkbox",
+    "library": "shadcn",
+    "source": {
+      "packageName": "@shadcn-sandbox/ui",
+      "version": "0.0.1",
+      "exportName": "Checkbox"
+    },
+    "ledgerFile": "extract/computed/out/shadcn/checkbox/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.size",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.width"
+        ]
+      },
+      {
+        "path": "box.size",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.width"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.border-top-width"
+        ]
+      },
+      {
+        "path": "box.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.padding-top"
+        ]
+      },
+      {
+        "path": "boxShadow",
+        "fixtureValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+        "verdict": "match",
+        "capturedValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+        "proposedValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.box-shadow"
+        ],
+        "formula": "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)"
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "dash.width",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no distinct indeterminate mark part in this library's DOM",
+        "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      },
+      {
+        "path": "dash.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no distinct indeterminate mark part",
+        "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      },
+      {
+        "path": "dash.radius",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no distinct indeterminate mark part",
+        "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      },
+      {
+        "path": "check.width",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.width"
+        ]
+      },
+      {
+        "path": "check.height",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.height"
+        ]
+      },
+      {
+        "path": "check.strokeWidth",
+        "fixtureValue": 1.167,
+        "verdict": "match",
+        "capturedValue": 1.167,
+        "proposedValue": 1.167,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:path.stroke-width",
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.width"
+        ],
+        "formula": "path stroke-width × (rendered svg width / viewBox 24) — an SVG stroke is a user-space length"
+      },
+      {
+        "path": "check.offsetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "check.offsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "same as check.offsetX",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "states.unchecked.enabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxBorder",
+        "fixtureValue": "#e5e5e5ff",
+        "verdict": "match",
+        "capturedValue": "#e5e5e5ff",
+        "proposedValue": "#e5e5e5ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo unchecked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.enabled.checkFill",
+        "fixtureValue": "#fafafaff",
+        "verdict": "receipt",
+        "proposedValue": "#fafafaff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo unchecked.enabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.unchecked.disabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.disabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.boxBorder",
+        "fixtureValue": "#e5e5e5ff",
+        "verdict": "match",
+        "capturedValue": "#e5e5e5ff",
+        "proposedValue": "#e5e5e5ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.disabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo unchecked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.disabled.checkFill",
+        "fixtureValue": "#fafafaff",
+        "verdict": "receipt",
+        "proposedValue": "#fafafaff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo unchecked.disabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.checked.enabled.boxFill",
+        "fixtureValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.boxBorder",
+        "fixtureValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.checked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo checked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.enabled.checkFill",
+        "fixtureValue": "#fafafaff",
+        "verdict": "match",
+        "capturedValue": "#fafafaff",
+        "proposedValue": "#fafafaff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:path.stroke"
+        ],
+        "formula": "the glyph strokes in this colour"
+      },
+      {
+        "path": "states.checked.disabled.boxFill",
+        "fixtureValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.disabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.boxBorder",
+        "fixtureValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.disabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.checked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo checked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.disabled.checkFill",
+        "fixtureValue": "#fafafaff",
+        "verdict": "match",
+        "capturedValue": "#fafafaff",
+        "proposedValue": "#fafafaff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.disabled__default tag:path.stroke"
+        ],
+        "formula": "the glyph strokes in this colour"
+      },
+      {
+        "path": "states.indeterminate.enabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#indeterminate.enabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.boxBorder",
+        "fixtureValue": "#e5e5e5ff",
+        "verdict": "match",
+        "capturedValue": "#e5e5e5ff",
+        "proposedValue": "#e5e5e5ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#indeterminate.enabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#indeterminate.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.indeterminate.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no distinct indeterminate mark part",
+        "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      },
+      {
+        "path": "states.indeterminate.enabled.checkFill",
+        "fixtureValue": "#fafafaff",
+        "verdict": "receipt",
+        "proposedValue": "#fafafaff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo indeterminate.enabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.indeterminate.disabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#indeterminate.disabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.boxBorder",
+        "fixtureValue": "#e5e5e5ff",
+        "verdict": "match",
+        "capturedValue": "#e5e5e5ff",
+        "proposedValue": "#e5e5e5ff",
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#indeterminate.disabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/shadcn/checkbox/captured-truth.json#indeterminate.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.label",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.indeterminate.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "no distinct indeterminate mark part",
+        "evidence": "shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored"
+      },
+      {
+        "path": "states.indeterminate.disabled.checkFill",
+        "fixtureValue": "#fafafaff",
+        "verdict": "receipt",
+        "proposedValue": "#fafafaff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo indeterminate.disabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Arial",
+        "verdict": "receipt",
+        "proposedValue": "Arial",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed Arial (inert)"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling",
+        "evidence": "reviewed Regular (inert)"
+      },
+      {
+        "path": "check.path",
+        "fixtureValue": "M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7",
+        "verdict": "receipt",
+        "proposedValue": "M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7",
+        "receipt": "glyph geometry is cited from the package source (--glyph), not a computed channel",
+        "evidence": "lucide-react@1.30.0 dist/esm/icons/check.mjs: [[\"path\", { d: \"M20 6 9 17l-5-5\" }]] with defaultAttributes.mjs viewBox \"0 0 24 24\" fill none stroke currentColor strokeWidth 2 strokeLinecap round strokeLinejoin round; mounted by examples/shadcn/.shadcn-sandbox/src/components/ui/checkbox.tsx <CheckIcon /> inside Indicator [&>svg]:size-3.5 (14px)"
+      }
+    ],
+    "counts": {
+      "match": 29,
+      "drift": 0,
+      "receipt": 27,
       "unread": 0
     }
   },
@@ -1647,6 +2208,16 @@
         "proposedValue": 16,
         "ledgerKeys": [
           "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.width"
+        ]
+      },
+      {
+        "path": "boxShadow",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.box-shadow"
         ]
       },
       {
@@ -2169,7 +2740,7 @@
       }
     ],
     "counts": {
-      "match": 42,
+      "match": 43,
       "drift": 1,
       "receipt": 12,
       "unread": 0

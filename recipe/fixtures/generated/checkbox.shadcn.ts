@@ -23,13 +23,14 @@ const VALUES: Record<string, number | string> = {
   "box.radius": 4, // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.border-top-left-radius
   "box.borderWidth": 1, // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.border-top-width
   "box.padding": 0, // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.padding-top
+  "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px", // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.box-shadow
   "row.gap": 0, // archetype spelling: no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling
   "dash.width": 0, // reviewed: shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored
   "dash.height": 0, // reviewed: shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored
   "dash.radius": 0, // reviewed: shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored
   "check.width": 14, // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.width
   "check.height": 14, // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.height
-  "check.strokeWidth": 1.1666666666666667, // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:path.stroke-width | extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.width
+  "check.strokeWidth": 1.167, // ledger extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:path.stroke-width | extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default tag:svg.width
   "check.offsetX": 0, // archetype spelling: glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel
   "check.offsetY": 0, // archetype spelling: same as check.offsetX
   "labelFontSize": 0, // archetype spelling: no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling
@@ -76,6 +77,7 @@ const shadcnTokens = cloneTokens("shadcn.checkbox", (path) => {
   return VALUES[path]!;
 });
 shadcnTokens.rowAlign = "center" as "center" | "start";
+shadcnTokens.boxShadow = "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px";
 shadcnTokens.check = {
   ...shadcnTokens.check,
   // lucide-react@1.30.0 dist/esm/icons/check.mjs: [["path", { d: "M20 6 9 17l-5-5" }]] with defaultAttributes.mjs viewBox "0 0 24 24" fill none stroke currentColor strokeWidth 2 strokeLinecap round strokeLinejoin round; mounted by examples/shadcn/.shadcn-sandbox/src/components/ui/checkbox.tsx <CheckIcon /> inside Indicator [&>svg]:size-3.5 (14px); package-space path scaled onto the rendered 14px svg box

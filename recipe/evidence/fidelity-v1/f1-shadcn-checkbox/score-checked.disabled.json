@@ -6,7 +6,7 @@
     "pctAAMaskedMax": 5
   },
   "metrics": {
-    "pctExactUnmasked": 25.390625,
+    "pctExactUnmasked": 25,
     "pctAAUnmasked": 3.125,
     "pctAAMasked": 3.125,
     "canvasPx": "16x16",
@@ -16,7 +16,7 @@
   },
   "canvas": {
     "path": "recipe/evidence/fidelity-v1/f1-shadcn-checkbox/canvas-checked.disabled.png",
-    "sha256": "ce45c1a15588facd9c9710fa3256b4b366da06004888f1262d183b001bc261f6"
+    "sha256": "8b2f269a93f1020819255ca467c43df99f3b0f9014c59683e6823eee507277d7"
   },
   "reference": {
     "path": "extract/computed/out/shadcn/checkbox/orig-shots/checked.disabled__default.png",

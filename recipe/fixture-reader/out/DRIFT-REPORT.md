@@ -10,25 +10,31 @@
 
 ### astryx — @astryxdesign/core@0.1.6#CheckboxInput
 
-ledger `extract/computed/out/astryx-core/checkboxinput/captured-truth.json` · 55 facts: **45 match**, **0 drift**, 10 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/checkboxinput/captured-truth.json` · 56 facts: **46 match**, **0 drift**, 10 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Checkbox
 
-ledger `extract/computed/out/mui/checkbox/captured-truth.json` · 55 facts: **22 match**, **0 drift**, 33 named receipts, 0 unread
+ledger `extract/computed/out/mui/checkbox/captured-truth.json` · 56 facts: **23 match**, **0 drift**, 33 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### chakra — @chakra-ui/react@3.37.0#Checkbox
 
-ledger `extract/computed/out/chakra/checkbox/captured-truth.json` · 55 facts: **42 match**, **0 drift**, 13 named receipts, 0 unread
+ledger `extract/computed/out/chakra/checkbox/captured-truth.json` · 56 facts: **43 match**, **0 drift**, 13 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### shadcn — @shadcn-sandbox/ui@0.0.1#Checkbox
+
+ledger `extract/computed/out/shadcn/checkbox/captured-truth.json` · 56 facts: **29 match**, **0 drift**, 27 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### antd — antd@5.29.3#Checkbox
 
-ledger `extract/computed/out/antd/checkbox/captured-truth.json` · 55 facts: **42 match**, **1 drift**, 12 named receipts, 0 unread
+ledger `extract/computed/out/antd/checkbox/captured-truth.json` · 56 facts: **43 match**, **1 drift**, 12 named receipts, 0 unread
 
 | fact | fixture | captured | ledger key |
 |---|---|---|---|
@@ -332,6 +338,33 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **checkbox/chakra** `states.indeterminate.enabled.checkFill` = `#ffffffff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.enabled — reviewed (fixture value carried)]_
 - **checkbox/chakra** `states.indeterminate.disabled.checkFill` = `#ffffffff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.disabled — reviewed (fixture value carried)]_
 - **checkbox/chakra** `check.path` = `M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7` — glyph geometry is cited from the package source (--glyph), not a computed channel _[@chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3px" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>]_
+- **checkbox/shadcn** `row.gap` = `0` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed 0]_
+- **checkbox/shadcn** `dash.width` = `0` — no distinct indeterminate mark part in this library's DOM _[shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored]_
+- **checkbox/shadcn** `dash.height` = `0` — no distinct indeterminate mark part _[shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored]_
+- **checkbox/shadcn** `dash.radius` = `0` — no distinct indeterminate mark part _[shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored]_
+- **checkbox/shadcn** `check.offsetX` = `0` — glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel _[reviewed 0]_
+- **checkbox/shadcn** `check.offsetY` = `0` — same as check.offsetX _[reviewed 0]_
+- **checkbox/shadcn** `labelFontSize` = `0` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed 0]_
+- **checkbox/shadcn** `states.unchecked.enabled.label` = `#00000000` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed #00000000]_
+- **checkbox/shadcn** `states.unchecked.enabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo unchecked.enabled — reviewed #00000000]_
+- **checkbox/shadcn** `states.unchecked.enabled.checkFill` = `#fafafaff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo unchecked.enabled — reviewed (fixture value carried)]_
+- **checkbox/shadcn** `states.unchecked.disabled.label` = `#00000000` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed #00000000]_
+- **checkbox/shadcn** `states.unchecked.disabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo unchecked.disabled — reviewed #00000000]_
+- **checkbox/shadcn** `states.unchecked.disabled.checkFill` = `#fafafaff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo unchecked.disabled — reviewed (fixture value carried)]_
+- **checkbox/shadcn** `states.checked.enabled.label` = `#00000000` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed #00000000]_
+- **checkbox/shadcn** `states.checked.enabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo checked.enabled — reviewed #00000000]_
+- **checkbox/shadcn** `states.checked.disabled.label` = `#00000000` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed #00000000]_
+- **checkbox/shadcn** `states.checked.disabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo checked.disabled — reviewed #00000000]_
+- **checkbox/shadcn** `states.indeterminate.enabled.label` = `#00000000` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed #00000000]_
+- **checkbox/shadcn** `states.indeterminate.enabled.dashFill` = `#00000000` — no distinct indeterminate mark part _[shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored]_
+- **checkbox/shadcn** `states.indeterminate.enabled.checkFill` = `#fafafaff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.enabled — reviewed (fixture value carried)]_
+- **checkbox/shadcn** `states.indeterminate.disabled.label` = `#00000000` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed #00000000]_
+- **checkbox/shadcn** `states.indeterminate.disabled.dashFill` = `#00000000` — no distinct indeterminate mark part _[shadcn's indeterminate state renders the CheckIcon itself (captured indeterminate.enabled__default: svg 14px, path d=M 20 6 L 9 17 L 4 12, stroke oklch(0.145 0 0) 2px on a transparent box) — checkbox@1 has no glyph-as-indeterminate cell, so the dash is zero-size and the two indeterminate cells are a NAMED GAP: not expressible, not scored]_
+- **checkbox/shadcn** `states.indeterminate.disabled.checkFill` = `#fafafaff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.disabled — reviewed (fixture value carried)]_
+- **checkbox/shadcn** `rowAlign` = `center` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed center]_
+- **checkbox/shadcn** `typography.label.family` = `Arial` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed Arial (inert)]_
+- **checkbox/shadcn** `typography.label.style` = `Regular` — no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed Regular (inert)]_
+- **checkbox/shadcn** `check.path` = `M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7` — glyph geometry is cited from the package source (--glyph), not a computed channel _[lucide-react@1.30.0 dist/esm/icons/check.mjs: [["path", { d: "M20 6 9 17l-5-5" }]] with defaultAttributes.mjs viewBox "0 0 24 24" fill none stroke currentColor strokeWidth 2 strokeLinecap round strokeLinejoin round; mounted by examples/shadcn/.shadcn-sandbox/src/components/ui/checkbox.tsx <CheckIcon /> inside Indicator [&>svg]:size-3.5 (14px)]_
 - **checkbox/antd** `check.offsetX` = `0` — glyph placement is the recipe's spelling (placement: center); the ::after centers by translate(-50%,-50%), which the baked path already absorbs _[genCheckboxStyle inner::after translate(-50%,-50%) — reviewed 0]_
 - **checkbox/antd** `check.offsetY` = `0` — same as check.offsetX _[reviewed 0]_
 - **checkbox/antd** `states.unchecked.enabled.dashFill` = `#00000000` — the indeterminate bar does not render in this state (::after transform scale(0) / no background); transparent is the recipe's spelling of absent _[inner::after hidden at combo unchecked.enabled — reviewed #00000000]_

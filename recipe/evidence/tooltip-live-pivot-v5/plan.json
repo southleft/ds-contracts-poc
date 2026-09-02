@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-9f8598fa-tooltip-v5",
+  "runIdentity": "3a63b6dc-7f1ebbdc-9f8598fa-tooltip-v5",
+  "namespace": "ds.contracts.tooltip.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "tooltip@1 open bubble chrome from Astryx inverted body, MUI grey[700] 0.92, and AntD colorBgSpotlight; placement and arrow attachment are refusals",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-tooltip-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "3a63b6dc7436c4c074cf66ad055216512d393e53eb0629553d19158c0cefdb1b",
+      "envelopeHash": "7d141adb91e11238a59ca9119566f63b108bbf6ed67f7a3f01c4ceb47afd24a4",
+      "variantCount": 1,
+      "variableCount": 9,
+      "comparedIrFacts": 16
+    },
+    {
+      "adapterIdentity": "mui-tooltip-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "7f1ebbdc3c09befc332e12a761c36d5baaf68d93f72e4a81b28b4ab3b8ba4b0d",
+      "envelopeHash": "5a1e83c6896fcf1b12544c3f95a11ded422cbe26b8dbcdc1d4079775c1783862",
+      "variantCount": 1,
+      "variableCount": 8,
+      "comparedIrFacts": 15
+    },
+    {
+      "adapterIdentity": "antd-tooltip-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "9f8598fa344d17c79d167ccd2b3231cc8d2094b6b79b182942795998479fb8f2",
+      "envelopeHash": "ac75b5c12ca4c08a8289f9a6a18f53394198b3a786790174a78e3853b4590159",
+      "variantCount": 1,
+      "variableCount": 9,
+      "comparedIrFacts": 16
+    }
+  ]
+}

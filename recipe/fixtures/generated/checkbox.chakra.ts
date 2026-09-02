@@ -4,6 +4,7 @@
 // names its ledger key or its reviewed evidence. Re-run the proposer to regenerate.
 import type { ReviewedCheckboxSource } from "../../adapters/checkbox.js";
 import { anatomyFacts, buildConfig, cloneTokens, makeRefusals } from "../library-checkboxes.js";
+
 import { checkboxSchemaMappings, type CheckboxRoles } from "../../fixture-reader/schema-checkbox.js";
 
 export const CHAKRA_CHECKBOX_LEDGER = "extract/computed/out/chakra/checkbox/captured-truth.json";
@@ -27,6 +28,7 @@ const VALUES: Record<string, number | string> = {
   "box.radius": 2, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-left-radius
   "box.borderWidth": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-width
   "box.padding": 2, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.padding-top
+  "boxShadow": "none", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.box-shadow
   "row.gap": 10, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default root.column-gap
   "dash.width": 9.9167, // reviewed: checkmark.js indeterminate <path d="M5 12h14"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)
   "dash.height": 1.75, // reviewed: stroke-width 3 × 14/24 = 1.75
@@ -80,6 +82,7 @@ const chakraTokens = cloneTokens("chakra.checkbox", (path) => {
   return VALUES[path]!;
 });
 chakraTokens.rowAlign = "center" as "center" | "start";
+chakraTokens.boxShadow = "none";
 chakraTokens.check = {
   ...chakraTokens.check,
   // @chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3px" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>; package-space path scaled onto the rendered 14px svg box
@@ -111,7 +114,7 @@ export const chakraCheckboxSource: ReviewedCheckboxSource = {
   version: "3.37.0",
   exportName: "Checkbox",
   framework: "react",
-  sourceRoot: "examples/chakra/.chakra-sandbox/node_modules/@chakra-ui/react",
+  sourceRoot: "extract/computed/out/chakra",
   anatomy: {
     root: "ledger part idx:1 (hit) / root (row)",
     control: "ledger part idx:1: 20px, border 1, radius 2",

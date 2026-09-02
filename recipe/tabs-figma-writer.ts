@@ -25,7 +25,13 @@ import {
 
 export const TABS_FIGMA_NAMESPACE = "ds.contracts.tabs.recipe.v1";
 export const TABS_FIGMA_WRITER_VERSION = 1;
-export const TABS_FIGMA_RUN_SUFFIX = "tabs-v7";
+export const TABS_FIGMA_RUN_SUFFIX = "tabs-v10";
+/** v9 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V9_PAGE_ID = "218:86239";
+/** v8 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V8_PAGE_ID = "218:84757";
+/** v7 stay (runtime: CSS shadows never show behind their node; frames clip only when the IR says so) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V7_PAGE_ID = "212:81313";
 /** v6 stay (shared-runtime proof) is preserved as evidence and never written again. */
 export const FORBIDDEN_TABS_V6_PAGE_ID = "211:80360";
 /** v5 (2026-09-01) stays as evidence: absolute indicator landed, label still top-aligned; never written again. */
@@ -266,6 +272,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:86239", "marker": "TABS-V9-PAGE" },
+    { "id": "218:84757", "marker": "TABS-V8-PAGE" },
+    { "id": "212:81313", "marker": "TABS-V7-PAGE" },
     { "id": "211:80360", "marker": "TABS-V6-PAGE" },
     {
       "id": "115:295378",

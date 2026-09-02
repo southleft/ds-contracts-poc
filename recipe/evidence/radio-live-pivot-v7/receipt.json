@@ -1,0 +1,50 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "radio-live-pivot-v7-prepare",
+  "teaching": "AntD Radio labels center to the 16px control via named alignSelf center + lineHeight 22; Figma BASELINE on the circle frame is not the CSS pairing",
+  "runIdentity": "0b0ee218-44f74e33-6c11de88-radio-v7",
+  "pageName": "Recipe Pivot / Radio / 0b0ee218-44f74e33-6c11de88-radio-v7",
+  "namespace": "ds.contracts.radio.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "0b0ee218bd3d92519e1beaa053bcb757c67c1e51309cee95e52da8580a2926e8",
+    "MUI": "44f74e3351670c33a94222ee2dafc967c9b36f4674fe39acc20c3d58e0af5712",
+    "Ant Design": "6c11de888eae8927c92059454b61e14d08dd44dfcab0c472d467476266d0eb52"
+  },
+  "writerSha256": "db02c2eeebf93e46d7561a7cec69e1af0e9ed7c989537cfce859d37b02581e9f",
+  "pageId": "218:87203",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=218-87203",
+  "live": {
+    "recordedFrom": "radio-v7-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Radio / 0b0ee218-44f74e33-6c11de88-radio-v7",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-radio-reviewed-v1",
+        "sectionId": "218:87204",
+        "setId": "218:87276",
+        "collectionId": "VariableCollectionId:218:87205",
+        "variantCount": 4,
+        "comparedIrFacts": 249
+      },
+      {
+        "adapterIdentity": "mui-radio-reviewed-v1",
+        "sectionId": "218:87277",
+        "setId": "218:87349",
+        "collectionId": "VariableCollectionId:218:87278",
+        "variantCount": 4,
+        "comparedIrFacts": 249
+      },
+      {
+        "adapterIdentity": "antd-radio-reviewed-v1",
+        "sectionId": "218:87350",
+        "setId": "218:87423",
+        "collectionId": "VariableCollectionId:218:87351",
+        "variantCount": 4,
+        "comparedIrFacts": 257
+      }
+    ]
+  }
+}
