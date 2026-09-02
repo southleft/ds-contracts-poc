@@ -1,0 +1,100 @@
+{
+  "archetype": "avatar",
+  "library": "antd",
+  "ledger": "extract/computed/out/antd/avatar/captured-truth.json",
+  "provenance": {
+    "package": "antd",
+    "version": "5.29.3",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "default.circle",
+  "leaves": {
+    "box.height": {
+      "value": 32,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.height"
+    },
+    "box.paddingX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.border-top-left-radius | extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.height",
+      "formula": "50% → half the box height; a length (including Chromium's clamped exponent form) as read"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 22,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default idx:0.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#00000040",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default root.opacity"
+    },
+    "rest.label": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/antd/avatar/captured-truth.json#default.circle__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": "A"
+  },
+  "typography": {
+    "family": "Roboto",
+    "style": "Regular",
+    "stack": "Roboto, Helvetica, Arial, sans-serif"
+  }
+}

@@ -25,7 +25,9 @@ import {
 
 export const MENU_FIGMA_NAMESPACE = "ds.contracts.menu.recipe.v1";
 export const MENU_FIGMA_WRITER_VERSION = 1;
-export const MENU_FIGMA_RUN_SUFFIX = "menu-v5";
+export const MENU_FIGMA_RUN_SUFFIX = "menu-v6";
+/** v5 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V5_PAGE_ID = "218:88063";
 /** v4 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_MENU_V4_PAGE_ID = "218:86570";
 /** v3 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -262,6 +264,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:88063", "marker": "MENU-V5-PAGE" },
     { "id": "218:86570", "marker": "MENU-V4-PAGE" },
     { "id": "218:85088", "marker": "MENU-V3-PAGE" },
     { "id": "212:81479", "marker": "MENU-V2-PAGE" },

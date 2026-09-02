@@ -1,0 +1,111 @@
+{
+  "archetype": "avatar",
+  "library": "fluent",
+  "ledger": "extract/computed/out/fluent/avatar/captured-truth.json",
+  "provenance": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "circular.none.unset",
+  "leaves": {
+    "box.height": {
+      "value": 32,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.height"
+    },
+    "box.paddingX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.padding-top"
+    },
+    "box.radius": {
+      "value": 10000,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.border-top-left-radius | extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.height",
+      "formula": "50% → half the box height; a length (including Chromium's clamped exponent form) as read"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#e6e6e6ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.opacity"
+    },
+    "rest.label": {
+      "value": "#616161ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Segoe UI",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Semibold",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/avatar/captured-truth.json#circular.none.unset__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "typography.label.resolved": {
+      "value": "Arial/Bold",
+      "from": "set",
+      "why": "Segoe UI is a Windows face and is not installed on this machine (figma.listAvailableFontsAsync has no Segoe UI); Arial Bold is the nearest installed weight — a FONT-SUBSTRATE fallback, named"
+    }
+  },
+  "receipts": [
+    {
+      "path": "typography.label.resolved",
+      "why": "the requested face is not on the minting machine",
+      "evidence": "Segoe UI is a Windows face and is not installed on this machine (figma.listAvailableFontsAsync has no Segoe UI); Arial Bold is the nearest installed weight — a FONT-SUBSTRATE fallback, named",
+      "value": "Arial/Bold"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": "FT"
+  },
+  "typography": {
+    "family": "Segoe UI",
+    "style": "Semibold",
+    "stack": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+  }
+}

@@ -25,7 +25,9 @@ import {
 
 export const CHIP_FIGMA_NAMESPACE = "ds.contracts.chip.recipe.v1";
 export const CHIP_FIGMA_WRITER_VERSION = 1;
-export const CHIP_FIGMA_RUN_SUFFIX = "chip-v6";
+export const CHIP_FIGMA_RUN_SUFFIX = "chip-v7";
+/** v6 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHIP_V6_PAGE_ID = "218:87557";
 /** v5 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_CHIP_V5_PAGE_ID = "218:86064";
 /** v4 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -254,6 +256,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:87557", "marker": "CHIP-V6-PAGE" },
     { "id": "218:86064", "marker": "CHIP-V5-PAGE" },
     { "id": "218:84582", "marker": "CHIP-V4-PAGE" },
     { "id": "212:80973", "marker": "CHIP-V3-PAGE" },

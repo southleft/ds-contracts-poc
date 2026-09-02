@@ -93,8 +93,8 @@ test("every fixture fact equals the ledger or carries a named receipt (fail clos
   assert.deepEqual(verdict.stale, [], `STALE reviewed-drift rows:\n${verdict.stale.join("\n")}`);
 });
 
-test("the thirteen archetypes cover astryx/mui/antd (39 reviewed subjects) plus the proposed chakra and shadcn checkboxes and the proposed MUI, shadcn and Chakra switches (44) with a non-zero denominator", () => {
-  assert.equal(results.length, 44);
+test("the thirteen archetypes cover astryx/mui/antd (39 reviewed subjects) plus the proposed chakra and shadcn checkboxes and the proposed MUI, shadcn and Chakra switches and the five proposed avatars (49) with a non-zero denominator", () => {
+  assert.equal(results.length, 49);
   const proposed = results.filter((r) => r.library === "chakra");
   assert.equal(proposed.length, 2, "two Chakra subjects, both proposed (checkbox/chakra, switch/chakra)");
   assert.equal(proposed[0]!.rows.filter((x) => x.verdict === "drift").length, 0, "a proposal reads back with zero drift by construction");

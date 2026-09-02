@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "root"
+  },
+  "combo": "circular",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "div.MuiAvatar-root is the outermost painted part: 40px×40px, bg rgba(189, 189, 189, 1), radius 50%",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "root",
+      "why": "div.MuiAvatar-root carries the initials \"A\" (the box itself)",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

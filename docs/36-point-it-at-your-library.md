@@ -3,9 +3,9 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **two archetypes**
-> (checkbox@1 and switch@1) and has been proven on **two libraries the recipe
-> path was never taught** — Chakra UI and shadcn — including one control
+> plugin can run in any file. It works today for **three archetypes**
+> (checkbox@1, switch@1, avatar@1) and has been proven on **three libraries
+> the recipe path was never taught** — Chakra UI and shadcn — including one control
 > captured for the first time the same day (Chakra's Switch: a person wrote
 > the config entry, the command did the rest, four states pixel-identical).
 > Everything it cannot do refuses by name.
@@ -81,6 +81,12 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 ## What it proved
 
+On avatar@1, five captures at once: MUI and AntD from their own captures
+score 0.00% beside the hand-written rows (which pin initials the capture does
+not render), Altitude — never hand-tabled — scores 0.38%, and shadcn and
+Fluent propose with a reviewed font fallback each
+(`recipe/evidence/fidelity-v1/f1-avatar-proposed/`).
+
 On Chakra's Switch — never captured before — the person's step was the seed
 contract and the config entry; the capture ran, the command proposed the
 fixture with no `--set` (33 read, 0 invented; a labelled control), and after
@@ -121,9 +127,13 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** checkbox@1 and switch@1 have proposers today
-  (`propose-fixture.ts`, `propose-switch.ts`); the other eleven boilerplate
-  archetypes still have hand tables only.
+- **Other archetypes.** checkbox@1, switch@1 and avatar@1 have proposers
+  today (`propose-fixture.ts`, `propose-switch.ts`, `propose-avatar.ts`);
+  the other ten boilerplate archetypes still have hand tables only.
+- **A font this machine lacks.** The proposer cannot know Figma's font list.
+  When the requested face is missing, the writer refuses by name and the
+  person gives `--set typography.label.resolved="Family/Style" --why …`; the
+  fixture then carries a named degradation (Fluent's Segoe UI → Arial Bold).
 - **Strokes thinner than 2px.** shadcn's check is a 1.17px stroke; Chromium
   rasterises it softer than Figma does, and the checked state scores 5.15%
   against a 5% bar with the diff hugging the whole stroke. Not a missing
@@ -151,6 +161,7 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 | `recipe/fixture-reader/draft-roles.ts` | role and combo drafting from the ledger, with evidence |
 | `recipe/fixture-reader/propose-fixture.ts` | evaluates a schema against a ledger and writes the checkbox fixture module |
 | `recipe/fixture-reader/propose-switch.ts` | the switch fixture module, same contract |
+| `recipe/fixture-reader/schema-avatar.ts`, `propose-avatar.ts` | avatar@1: box and label roles; the same contract |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

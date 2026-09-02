@@ -192,6 +192,36 @@ ledger `extract/computed/out/mui/avatar/captured-truth.json` · 14 facts: **12 m
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### mui-proposed — @mui/material@9.2.0#Avatar
+
+ledger `extract/computed/out/mui/avatar/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### antd-proposed — antd@5.29.3#Avatar
+
+ledger `extract/computed/out/antd/avatar/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### altitude — altitude-web-components@1.0.2#Avatar
+
+ledger `extract/computed/out/altitude/avatar/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### shadcn — @shadcn-sandbox/ui@0.0.1#Avatar
+
+ledger `extract/computed/out/shadcn/avatar/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### fluent — @fluentui/react-components@9.74.5#Avatar
+
+ledger `extract/computed/out/fluent/avatar/captured-truth.json` · 14 facts: **13 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ### antd — antd@5.29.3#Avatar
 
 ledger `extract/computed/out/antd/avatar/captured-truth.json` · 14 facts: **11 match**, **0 drift**, 3 named receipts, 0 unread
@@ -614,6 +644,11 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **avatar/astryx** `typography.label.style` = `Medium` — the capture floor has no Avatar subject — configs/astryx.json does not mount Avatar; the recipe table cites core Avatar.tsx without a Chromium ledger _[docs/34 Astryx Avatar — no extract/computed capture subject]_
 - **avatar/mui** `rest.boxBorder` = `#00000000` — circular Avatar draws no painted border — transparent is the recipe spelling _[Avatar.js border none — reviewed #00000000]_
 - **avatar/mui** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
+- **avatar/mui-proposed** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **avatar/antd-proposed** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **avatar/altitude** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **avatar/shadcn** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
+- **avatar/fluent** `strokeAlign` = `inside` — a CSS border lies inside the box — recipe spelling _[reviewed inside]_
 - **avatar/antd** `rest.boxBorder` = `#00000000` — circle Avatar's border color is transparent — the recipe spells #00000000 _[avatar border-color transparent — reviewed #00000000]_
 - **avatar/antd** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
 - **avatar/antd** `typography.label.family` = `-apple-system` — the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites _[theme.getDesignToken().fontFamily starts -apple-system]_

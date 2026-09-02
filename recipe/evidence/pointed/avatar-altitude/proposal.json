@@ -1,0 +1,99 @@
+{
+  "archetype": "avatar",
+  "library": "altitude",
+  "ledger": "extract/computed/out/altitude/avatar/captured-truth.json",
+  "provenance": {
+    "package": "altitude-web-components",
+    "version": "1.0.2",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "root"
+  },
+  "combo": "unset.off",
+  "leaves": {
+    "box.height": {
+      "value": 40,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.height"
+    },
+    "box.paddingX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.border-top-left-radius | extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.height",
+      "formula": "50% → half the box height; a length (including Chromium's clamped exponent form) as read"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.font-size"
+    },
+    "labelLineHeight": {
+      "value": 40,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#f4f3f1ff",
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#101010ff",
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.opacity"
+    },
+    "rest.label": {
+      "value": "#101010ff",
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "IBM Plex Sans",
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Semibold",
+      "from": "ledger",
+      "key": "extract/computed/out/altitude/avatar/captured-truth.json#unset.off__default root.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": "AB"
+  },
+  "typography": {
+    "family": "IBM Plex Sans",
+    "style": "Semibold",
+    "stack": "\"IBM Plex Sans\", sans-serif"
+  }
+}

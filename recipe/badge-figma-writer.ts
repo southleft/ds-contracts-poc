@@ -26,7 +26,9 @@ import {
 
 export const BADGE_FIGMA_NAMESPACE = "ds.contracts.badge.recipe.v1";
 export const BADGE_FIGMA_WRITER_VERSION = 2;
-export const BADGE_FIGMA_RUN_SUFFIX = "badge-v9";
+export const BADGE_FIGMA_RUN_SUFFIX = "badge-v10";
+/** v9 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_BADGE_V9_PAGE_ID = "218:87649";
 /** v8 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_BADGE_V8_PAGE_ID = "218:86156";
 /** v7 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -262,6 +264,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "badge"
   },
   "forbiddenPages": [
+    { "id": "218:87649", "marker": "BADGE-V9-PAGE" },
     { "id": "218:86156", "marker": "BADGE-V8-PAGE" },
     { "id": "218:84674", "marker": "BADGE-V7-PAGE" },
     { "id": "212:81065", "marker": "BADGE-V6-PAGE" },

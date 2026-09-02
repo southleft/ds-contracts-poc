@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "root"
+  },
+  "combo": "unset.off",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "div.al-c-avatar is the outermost painted part: 40px×40px, bg rgba(244, 243, 241, 1), radius 50%",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "root",
+      "why": "div.al-c-avatar carries the initials \"AB\" (the box itself)",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

@@ -23,6 +23,11 @@ import {
 import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
+import { MUI_AVATAR_LEDGER as MUI_AVATAR_LEDGER_PROPOSED, muiAvatarAdapterConfig as muiAvatarProposedConfig, muiAvatarMappings as muiAvatarProposedMappings } from "../fixtures/generated/avatar.mui.js";
+import { ANTD_AVATAR_LEDGER as ANTD_AVATAR_LEDGER_PROPOSED, antdAvatarAdapterConfig as antdAvatarProposedConfig, antdAvatarMappings as antdAvatarProposedMappings } from "../fixtures/generated/avatar.antd.js";
+import { ALTITUDE_AVATAR_LEDGER as ALTITUDE_AVATAR_LEDGER_PROPOSED, altitudeAvatarAdapterConfig as altitudeAvatarProposedConfig, altitudeAvatarMappings as altitudeAvatarProposedMappings } from "../fixtures/generated/avatar.altitude.js";
+import { SHADCN_AVATAR_LEDGER as SHADCN_AVATAR_LEDGER_PROPOSED, shadcnAvatarAdapterConfig as shadcnAvatarProposedConfig, shadcnAvatarMappings as shadcnAvatarProposedMappings } from "../fixtures/generated/avatar.shadcn.js";
+import { FLUENT_AVATAR_LEDGER as FLUENT_AVATAR_LEDGER_PROPOSED, fluentAvatarAdapterConfig as fluentAvatarProposedConfig, fluentAvatarMappings as fluentAvatarProposedMappings } from "../fixtures/generated/avatar.fluent.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Ledger } from "./ledger.js";
@@ -576,6 +581,56 @@ const SUBJECTS: Subject[] = [
     tokens: muiAvatarAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: muiAvatarMappings,
     extras: extrasFor(muiAvatarAdapterConfig.tokens as unknown as Record<string, unknown>, muiAvatarMappings),
+  },
+  {
+    // PROPOSED by propose-avatar.ts (the hand table above is the same capture read by a person).
+    archetype: "avatar",
+    library: "mui-proposed",
+    source: src(muiAvatarProposedConfig),
+    ledgerFile: MUI_AVATAR_LEDGER_PROPOSED,
+    tokens: muiAvatarProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiAvatarProposedMappings,
+    extras: extrasFor(muiAvatarProposedConfig.tokens as unknown as Record<string, unknown>, muiAvatarProposedMappings),
+  },
+  {
+    // PROPOSED by propose-avatar.ts (the hand table above is the same capture read by a person).
+    archetype: "avatar",
+    library: "antd-proposed",
+    source: src(antdAvatarProposedConfig),
+    ledgerFile: ANTD_AVATAR_LEDGER_PROPOSED,
+    tokens: antdAvatarProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: antdAvatarProposedMappings,
+    extras: extrasFor(antdAvatarProposedConfig.tokens as unknown as Record<string, unknown>, antdAvatarProposedMappings),
+  },
+  {
+    // PROPOSED by propose-avatar.ts (held out).
+    archetype: "avatar",
+    library: "altitude",
+    source: src(altitudeAvatarProposedConfig),
+    ledgerFile: ALTITUDE_AVATAR_LEDGER_PROPOSED,
+    tokens: altitudeAvatarProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: altitudeAvatarProposedMappings,
+    extras: extrasFor(altitudeAvatarProposedConfig.tokens as unknown as Record<string, unknown>, altitudeAvatarProposedMappings),
+  },
+  {
+    // PROPOSED by propose-avatar.ts (held out).
+    archetype: "avatar",
+    library: "shadcn",
+    source: src(shadcnAvatarProposedConfig),
+    ledgerFile: SHADCN_AVATAR_LEDGER_PROPOSED,
+    tokens: shadcnAvatarProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: shadcnAvatarProposedMappings,
+    extras: extrasFor(shadcnAvatarProposedConfig.tokens as unknown as Record<string, unknown>, shadcnAvatarProposedMappings),
+  },
+  {
+    // PROPOSED by propose-avatar.ts (held out).
+    archetype: "avatar",
+    library: "fluent",
+    source: src(fluentAvatarProposedConfig),
+    ledgerFile: FLUENT_AVATAR_LEDGER_PROPOSED,
+    tokens: fluentAvatarProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: fluentAvatarProposedMappings,
+    extras: extrasFor(fluentAvatarProposedConfig.tokens as unknown as Record<string, unknown>, fluentAvatarProposedMappings),
   },
   {
     archetype: "avatar",

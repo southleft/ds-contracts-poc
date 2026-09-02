@@ -25,7 +25,9 @@ import {
 
 export const TEXTAREA_FIGMA_NAMESPACE = "ds.contracts.textarea.recipe.v1";
 export const TEXTAREA_FIGMA_WRITER_VERSION = 3;
-export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v7";
+export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v8";
+/** v7 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TEXTAREA_V7_PAGE_ID = "218:87843";
 /** v6 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TEXTAREA_V6_PAGE_ID = "218:86350";
 /** v5 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -259,6 +261,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "textareaSet"
   },
   "forbiddenPages": [
+    { "id": "218:87843", "marker": "TEXTAREA-V7-PAGE" },
     { "id": "218:86350", "marker": "TEXTAREA-V6-PAGE" },
     { "id": "218:84868", "marker": "TEXTAREA-V5-PAGE" },
     { "id": "212:81799", "marker": "TEXTAREA-V4-PAGE" },

@@ -202,11 +202,15 @@ mutatedNodeIds.push(page.id);
 const rgba=hex=>({r:parseInt(hex.slice(1,3),16)/255,g:parseInt(hex.slice(3,5),16)/255,b:parseInt(hex.slice(5,7),16)/255,a:parseInt(hex.slice(7,9),16)/255});
 const paint=hex=>{const value=rgba(hex);return{type:"SOLID",color:{r:value.r,g:value.g,b:value.b},opacity:value.a};};
 const allFonts=await figma.listAvailableFontsAsync();
+// A font STYLE name is compared without case or spacing: foundries spell the
+// same face "SemiBold", "Semibold" and "Semi Bold", and a fixture read from a
+// CSS font-weight cannot know which spelling this machine's file uses.
+const sameStyle=(a,b)=>String(a).toLowerCase().replace(/[\s_-]/g,"")===String(b).toLowerCase().replace(/[\s_-]/g,"");
 const resolveFont=spec=>{
-  const found=spec.fallbackChain.map(candidate=>allFonts.find(font=>font.fontName.family===candidate.family&&font.fontName.style===candidate.style)).find(Boolean);
+  const found=spec.fallbackChain.map(candidate=>allFonts.find(font=>font.fontName.family===candidate.family&&sameStyle(font.fontName.style,candidate.style))).find(Boolean);
   if(!found)throw new Error("${P}-FONT-UNAVAILABLE:"+spec.requestedFamily+":"+spec.requestedStyle);
-  const resolution=found.fontName.family===spec.requestedFamily&&found.fontName.style===spec.requestedStyle?"requested":"fallback";
-  if(found.fontName.family!==spec.resolvedFamily||found.fontName.style!==spec.resolvedStyle||resolution!==spec.resolution)throw new Error("${P}-FONT-PROVENANCE-TAMPER:"+found.fontName.family+":"+found.fontName.style);
+  const resolution=found.fontName.family===spec.requestedFamily&&sameStyle(found.fontName.style,spec.requestedStyle)?"requested":"fallback";
+  if(found.fontName.family!==spec.resolvedFamily||!sameStyle(found.fontName.style,spec.resolvedStyle)||resolution!==spec.resolution)throw new Error("${P}-FONT-PROVENANCE-TAMPER:"+found.fontName.family+":"+found.fontName.style);
   if(resolution==="fallback"&&!spec.degradation)throw new Error("${P}-FONT-FALLBACK-WITHOUT-DEGRADATION");
   return found.fontName;
 };

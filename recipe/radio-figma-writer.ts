@@ -26,7 +26,9 @@ import {
 
 export const RADIO_FIGMA_NAMESPACE = "ds.contracts.radio.recipe.v1";
 export const RADIO_FIGMA_WRITER_VERSION = 2;
-export const RADIO_FIGMA_RUN_SUFFIX = "radio-v7";
+export const RADIO_FIGMA_RUN_SUFFIX = "radio-v8";
+/** v7 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_RADIO_V7_PAGE_ID = "218:87203";
 /** v6 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_RADIO_V6_PAGE_ID = "218:85710";
 /** v5 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -257,6 +259,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "radioSet"
   },
   "forbiddenPages": [
+    { "id": "218:87203", "marker": "RADIO-V7-PAGE" },
     { "id": "218:85710", "marker": "RADIO-V6-PAGE" },
     { "id": "218:84228", "marker": "RADIO-V5-PAGE" },
     { "id": "212:80619", "marker": "RADIO-V4-PAGE" },

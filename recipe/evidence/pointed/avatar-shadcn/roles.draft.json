@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "default",
+  "evidence": {
+    "box": {
+      "selector": "idx:0",
+      "why": "span is the outermost painted part: 32px×32px, bg oklch(0.97 0 0), radius 3.35544e+07px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span carries the initials \"CN\" (the box itself)",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

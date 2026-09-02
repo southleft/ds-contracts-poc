@@ -25,7 +25,9 @@ import {
 
 export const TABS_FIGMA_NAMESPACE = "ds.contracts.tabs.recipe.v1";
 export const TABS_FIGMA_WRITER_VERSION = 1;
-export const TABS_FIGMA_RUN_SUFFIX = "tabs-v10";
+export const TABS_FIGMA_RUN_SUFFIX = "tabs-v11";
+/** v10 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V10_PAGE_ID = "218:87732";
 /** v9 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TABS_V9_PAGE_ID = "218:86239";
 /** v8 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -272,6 +274,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:87732", "marker": "TABS-V10-PAGE" },
     { "id": "218:86239", "marker": "TABS-V9-PAGE" },
     { "id": "218:84757", "marker": "TABS-V8-PAGE" },
     { "id": "212:81313", "marker": "TABS-V7-PAGE" },

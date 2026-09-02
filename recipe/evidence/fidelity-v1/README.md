@@ -315,3 +315,20 @@ margin, shadow lengths × scale — and every state of switch v12 (page
     switch/chakra  0.00%   (checked 0.00 · unchecked.disabled 0.00 · checked.disabled 0.00)
 
     22 pass · 0 fringe · 7 known
+
+## 2026-09-02 (later) — a third archetype: avatar, five captures, one held out at 0.38%
+
+`propose-avatar.ts` + `point.ts --archetype avatar`. Five captures pointed
+at, each 13 leaves read and 0 invented. MUI and AntD from their own captures
+score **0.00%** beside hand rows of 4% and 2.73% — the hand tables pin
+initials and a font the capture does not render. Altitude, never hand-tabled,
+scores **0.38%**. shadcn and Fluent propose (with a reviewed, named font
+fallback each) but have no real render to score: captured before
+`--keep-originals`. The writer's font-provenance check now compares style
+names without case ("SemiBold" ≡ "Semibold"), a runtime rule all thirteen
+archetypes were reminted through with scores unchanged. See
+`f1-avatar-proposed/README.md`.
+
+    avatar/mui-proposed 0.00% · avatar/antd-proposed 0.00% · avatar/altitude 0.38%
+
+    25 pass · 0 fringe · 7 known

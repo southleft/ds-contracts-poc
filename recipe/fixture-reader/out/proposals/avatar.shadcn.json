@@ -1,0 +1,111 @@
+{
+  "archetype": "avatar",
+  "library": "shadcn",
+  "ledger": "extract/computed/out/shadcn/avatar/captured-truth.json",
+  "provenance": {
+    "package": "@shadcn-sandbox/ui",
+    "version": "0.0.1",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "default",
+  "leaves": {
+    "box.height": {
+      "value": 32,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.height"
+    },
+    "box.paddingX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.padding-top"
+    },
+    "box.radius": {
+      "value": 33554400,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.border-top-left-radius | extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.height",
+      "formula": "50% → half the box height; a length (including Chromium's clamped exponent form) as read"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#f5f5f5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#e5e5e5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.opacity"
+    },
+    "rest.label": {
+      "value": "#737373ff",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Inter Variable",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/shadcn/avatar/captured-truth.json#default__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "typography.label.resolved": {
+      "value": "Inter/Regular",
+      "from": "set",
+      "why": "\"Inter Variable\" is @fontsource-variable/inter's family name for Inter (the sandbox's index.css imports it); Figma names the same face Inter — reviewed fallback to Inter Regular"
+    }
+  },
+  "receipts": [
+    {
+      "path": "typography.label.resolved",
+      "why": "the requested face is not on the minting machine",
+      "evidence": "\"Inter Variable\" is @fontsource-variable/inter's family name for Inter (the sandbox's index.css imports it); Figma names the same face Inter — reviewed fallback to Inter Regular",
+      "value": "Inter/Regular"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": "CN"
+  },
+  "typography": {
+    "family": "Inter Variable",
+    "style": "Regular",
+    "stack": "\"Inter Variable\", sans-serif"
+  }
+}

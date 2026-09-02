@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "default.circle",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "span.ant-avatar is the outermost painted part: 32px×32px, bg rgba(0, 0, 0, 0.25), radius 50%",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span.ant-avatar-string carries the initials \"A\"",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

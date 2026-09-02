@@ -175,3 +175,25 @@ test("switch@1 proposes shadcn: a pill radius in exponent notation and a calc(10
   assert.equal(r.proposal.leaves["states.true.enabled.trackFill"]?.value, "#171717ff");
   assert.equal(r.proposal.content.label, null);
 });
+
+import { draftAvatarRoles } from "./draft-roles.js";
+import { proposeAvatarFixture } from "./propose-avatar.js";
+import type { AvatarRoles } from "./schema-avatar.js";
+
+test("avatar@1 proposes a held-out library (Altitude) and MUI's own capture with nothing invented", () => {
+  for (const [lib, expect] of [["altitude", { height: 40, radius: 20, initials: "AB", fill: "#f4f3f1ff" }], ["mui", { height: 40, radius: 20, initials: "A", fill: "#bdbdbdff" }]] as const) {
+    const ledgerRel = `extract/computed/out/${lib}/avatar/captured-truth.json`;
+    const draft = draftAvatarRoles(new Ledger(REPO, ledgerRel));
+    assert.deepEqual(draft.unresolved, [], lib);
+    const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+    const out = path.relative(REPO, path.join(dir, `avatar.${lib}.ts`));
+    const r = proposeAvatarFixture({ library: lib, ledger: ledgerRel, roles: draft.roles as AvatarRoles, combo: draft.combo!, sets: {}, out, unsupported: ["hover"] });
+    assert.deepEqual(r.refused, [], lib);
+    assert.equal(r.proposal.leaves["box.height"]?.value, expect.height, lib);
+    assert.equal(r.proposal.leaves["box.radius"]?.value, expect.radius, `${lib}: a 50% radius is half the box`);
+    assert.equal(r.proposal.leaves["rest.boxFill"]?.value, expect.fill, lib);
+    assert.equal(r.proposal.content.label, expect.initials, lib);
+    const counts = { ledger: 0, set: 0, spelling: 0 }; for (const l of Object.values(r.proposal.leaves)) counts[l.from] += 1;
+    assert.deepEqual(counts, { ledger: 13, set: 0, spelling: 1 }, lib);
+  }
+});

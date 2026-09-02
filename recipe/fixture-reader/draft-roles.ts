@@ -21,6 +21,7 @@ import path from "node:path";
 import { Ledger, type LedgerPart } from "./ledger.js";
 import type { CheckboxRoles } from "./schema-checkbox.js";
 import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
+import type { AvatarRoles } from "./schema-avatar.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -267,4 +268,43 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
   const draft = archetype === "switch" ? draftSwitchRoles(new Ledger(repo, rel)) : draftCheckboxRoles(new Ledger(repo, rel));
   console.log(JSON.stringify(draft, null, 2));
   if (draft.unresolved.length > 0) process.exitCode = 2;
+}
+export interface AvatarRoleDraft {
+  roles: Partial<AvatarRoles>;
+  combo: string | null;
+  evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
+  unresolved: string[];
+}
+
+/**
+ * avatar@1 roles from a ledger. The BOX is the painted part: the outermost
+ * part whose background is not transparent (MUI's root, AntD's root, shadcn's
+ * fallback span, Fluent's initials span, Altitude's root). The LABEL is the
+ * part carrying the initials text (the box itself when it carries text).
+ * The COMBO is the capture that reads as the rest cell: a `__default`
+ * interaction whose key names a default/circular/circle variant, else the
+ * first `__default` key.
+ */
+export function draftAvatarRoles(ledger: Ledger): AvatarRoleDraft {
+  const evidence: AvatarRoleDraft["evidence"] = {};
+  const unresolved: string[] = [];
+  const keys = ledger.keys().filter((k) => k.endsWith("__default"));
+  const pick = keys.find((k) => /(^|\.)(default|circular|circle|unset)(\.|__)/.test(k)) ?? keys[0];
+  if (!pick) return { roles: {}, combo: null, evidence, unresolved: ["combo: no __default capture in the ledger"] };
+  const combo = pick.slice(0, -"__default".length);
+  const c = ledger.capture(pick);
+  const transparent = (v: string | undefined): boolean => !v || /^rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0\)$/.test(v) || v === "transparent";
+  const roles: Partial<AvatarRoles> = {};
+  const painted = c.parts.filter((p) => !transparent(p.style["background-color"]) && num(p.style.width) > 0);
+  const box = painted[0];
+  if (box) {
+    roles.box = sel(box);
+    evidence.box = { selector: roles.box, why: `${box.tag}${box.classes.length ? "." + box.classes[0] : ""} is the outermost painted part: ${box.style.width}×${box.style.height}, bg ${box.style["background-color"]}, radius ${box.style["border-top-left-radius"]}`, confidence: painted.length === 1 ? "high" : "medium" };
+  } else unresolved.push("box: no part paints a background");
+  const textPart = c.parts.find((p) => p.text && p.text.some((t) => t.trim().length > 0));
+  if (textPart && box) {
+    if (textPart.idxPath !== box.idxPath) roles.label = sel(textPart);
+    evidence.label = { selector: roles.label ?? roles.box!, why: `${textPart.tag}${textPart.classes.length ? "." + textPart.classes[0] : ""} carries the initials ${JSON.stringify(textPart.text.find((t) => t.trim().length > 0))}${textPart.idxPath === box.idxPath ? " (the box itself)" : ""}`, confidence: "high" };
+  } else unresolved.push("label: no part carries text — avatar@1 needs initials");
+  return { roles, combo, evidence, unresolved };
 }

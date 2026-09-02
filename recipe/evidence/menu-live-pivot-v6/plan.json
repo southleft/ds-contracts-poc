@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v6",
+  "runIdentity": "49334e8e-9f1933de-af4cca86-menu-v6",
+  "namespace": "ds.contracts.menu.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "menu@1 open panel plus two items from Astryx DropdownMenu, MUI Menu, and AntD Dropdown; placement is a refusal",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-menu-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "49334e8eea7e74038a7e34b9b18c4a55dba1181784a613725d66088c18463316",
+      "envelopeHash": "b2d8d48710c4a0e70546d81e584e69c07418841f7eac71979d99418e2ded9e89",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 31
+    },
+    {
+      "adapterIdentity": "mui-menu-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "9f1933de429f55ce16a333c2a31974995ceeac34e62a475511969932c9af24db",
+      "envelopeHash": "c2b8a833124b43041821515654dd99c3cb50ef2b5c60e18cf5ddb0bb856481ac",
+      "variantCount": 1,
+      "variableCount": 11,
+      "comparedIrFacts": 33
+    },
+    {
+      "adapterIdentity": "antd-menu-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "af4cca860add835b7d038e263ffba07bae0c4995c9bbd4fb98bcdedc3db2663d",
+      "envelopeHash": "d5d8926d5721131f1a072e349c27ddcb922df8b188693b8acfd37f8f183df0ea",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 31
+    }
+  ]
+}

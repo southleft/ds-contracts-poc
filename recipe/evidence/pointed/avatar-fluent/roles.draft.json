@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "circular.none.unset",
+  "evidence": {
+    "box": {
+      "selector": "idx:0",
+      "why": "span.fui-Avatar__initials is the outermost painted part: 32px×32px, bg rgba(230, 230, 230, 1), radius 10000px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span.fui-Avatar__initials carries the initials \"FT\" (the box itself)",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

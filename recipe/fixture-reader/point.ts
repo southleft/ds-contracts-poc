@@ -26,9 +26,14 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { Ledger } from "./ledger.js";
-import { draftCheckboxRoles, draftSwitchRoles } from "./draft-roles.js";
+import { draftAvatarRoles, draftCheckboxRoles, draftSwitchRoles } from "./draft-roles.js";
 import { proposeCheckboxFixture, type GlyphSpec } from "./propose-fixture.js";
 import { proposeSwitchFixture } from "./propose-switch.js";
+import { proposeAvatarFixture } from "./propose-avatar.js";
+import type { AvatarRoles } from "./schema-avatar.js";
+import { adaptReviewedAvatar } from "../adapters/avatar.js";
+import { avatarRecipe, collapseAvatarRecipe, compileAvatarRecipe } from "../recipes/avatar.js";
+import { emitAvatarFigmaWriter } from "../avatar-figma-writer.js";
 import type { CheckboxRoles } from "./schema-checkbox.js";
 import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 import { adaptReviewedCheckbox } from "../adapters/checkbox.js";
@@ -45,7 +50,8 @@ const args = (name: string): string[] => { const out: string[] = []; for (let i 
 
 const archetype = arg("archetype");
 const library = arg("library");
-if ((archetype !== "checkbox" && archetype !== "switch") || !library) throw new Error("usage: --archetype checkbox|switch --library <slug> [--glyph-file <json> (checkbox)] [--roles-file <json>] [--set path=v --why 'path=evidence']…");
+const ARCHETYPES = ["checkbox", "switch", "avatar"] as const;
+if (!ARCHETYPES.includes(archetype as (typeof ARCHETYPES)[number]) || !library) throw new Error("usage: --archetype checkbox|switch|avatar --library <slug> [--glyph-file <json> (checkbox)] [--roles-file <json>] [--set path=v --why 'path=evidence']…");
 const ledgerRel = `extract/computed/out/${library}/${archetype}/captured-truth.json`;
 const outDir = path.join(REPO, "recipe/evidence/pointed", `${archetype}-${library}`);
 mkdirSync(outDir, { recursive: true });
@@ -61,20 +67,20 @@ const ledger = new Ledger(REPO, ledgerRel);
 say(`1. capture   ${ledgerRel} (${ledger.keys().length} captures)`);
 
 // 2. roles
-type Roles = CheckboxRoles | (SwitchRoles & { combos: SwitchComboMap });
+type Roles = CheckboxRoles | (SwitchRoles & { combos: SwitchComboMap }) | (AvatarRoles & { combo: string });
 let roles: Roles;
 const rolesFile = arg("roles-file");
 if (rolesFile) {
   roles = JSON.parse(readFileSync(path.resolve(rolesFile), "utf8")) as Roles;
   say(`2. roles     from ${rolesFile} (reviewed)`);
 } else {
-  const draft = archetype === "checkbox" ? draftCheckboxRoles(ledger) : draftSwitchRoles(ledger);
+  const draft = archetype === "checkbox" ? draftCheckboxRoles(ledger) : archetype === "switch" ? draftSwitchRoles(ledger) : draftAvatarRoles(ledger);
   writeFileSync(path.join(outDir, "roles.draft.json"), `${JSON.stringify(draft, null, 2)}\n`);
   if (draft.unresolved.length > 0) {
     console.error(`✖ the role map cannot be drafted from the ledger alone:\n  - ${draft.unresolved.join("\n  - ")}\n  Review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))}, write roles.json, and pass --roles-file.`);
     process.exit(2);
   }
-  roles = (archetype === "checkbox" ? draft.roles : { ...(draft as { roles: SwitchRoles }).roles, combos: (draft as { combos: SwitchComboMap }).combos }) as Roles;
+  roles = (archetype === "checkbox" ? draft.roles : archetype === "switch" ? { ...(draft as { roles: SwitchRoles }).roles, combos: (draft as { combos: SwitchComboMap }).combos } : { ...(draft as { roles: AvatarRoles }).roles, combo: (draft as { combo: string }).combo }) as Roles;
   say(`2. roles     DRAFTED from the ledger — ${Object.entries(draft.evidence).map(([k, v]) => `${k}:${(v as { confidence: string }).confidence}`).join(" ")} (review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))})`);
 }
 writeFileSync(path.join(outDir, "roles.json"), `${JSON.stringify(roles, null, 2)}\n`);
@@ -92,9 +98,12 @@ if (archetype === "checkbox") {
   if (!glyphFile) throw new Error("--glyph-file <json> is required for checkbox: the glyph's geometry is cited from the package source ({path, viewBox, paint, strokeWidth, cap, join, source})");
   glyph = JSON.parse(readFileSync(path.resolve(glyphFile), "utf8")) as GlyphSpec;
   proposed = proposeCheckboxFixture({ ...common, roles: roles as CheckboxRoles, glyph });
-} else {
+} else if (archetype === "switch") {
   const { combos, ...switchRoles } = roles as SwitchRoles & { combos: SwitchComboMap };
   proposed = proposeSwitchFixture({ ...common, roles: switchRoles, combos });
+} else {
+  const { combo, ...avatarRoles } = roles as AvatarRoles & { combo: string };
+  proposed = proposeAvatarFixture({ ...common, roles: avatarRoles, combo });
 }
 if (proposed.refused.length > 0) {
   console.error(`✖ ${proposed.refused.length} leaf/leaves cannot be proposed — give each with evidence:\n  - ${proposed.refused.join("\n  - ")}`);
@@ -109,24 +118,22 @@ say(`3. propose   ${counts.ledger} leaves read from the ledger · ${counts.set} 
 // 4. compile + fixed point
 const mod = (await import(pathToFileURL(path.join(REPO, modulePath)).href)) as Record<string, unknown>;
 const Arch = archetype[0]!.toUpperCase() + archetype.slice(1);
-const source = mod[`${library}${Arch}Source`];
-const config = mod[`${library}${Arch}AdapterConfig`];
-const instance = archetype === "checkbox"
-  ? adaptReviewedCheckbox(source as Parameters<typeof adaptReviewedCheckbox>[0], config as Parameters<typeof adaptReviewedCheckbox>[1])
-  : adaptReviewedSwitch(source as Parameters<typeof adaptReviewedSwitch>[0], config as Parameters<typeof adaptReviewedSwitch>[1]);
-const compile = (archetype === "checkbox" ? compileCheckboxRecipe : compileSwitchRecipe) as (i: unknown) => ReturnType<typeof compileCheckboxRecipe>;
-const collapse = (archetype === "checkbox" ? collapseCheckboxRecipe : collapseSwitchRecipe) as (e: ReturnType<typeof compileCheckboxRecipe>, s: unknown) => unknown;
+const slug = library.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+const source = mod[`${slug}${Arch}Source`];
+const config = mod[`${slug}${Arch}AdapterConfig`];
+const adapt = (archetype === "checkbox" ? adaptReviewedCheckbox : archetype === "switch" ? adaptReviewedSwitch : adaptReviewedAvatar) as (s: unknown, c: unknown) => unknown;
+const instance = adapt(source, config);
+const compile = (archetype === "checkbox" ? compileCheckboxRecipe : archetype === "switch" ? compileSwitchRecipe : compileAvatarRecipe) as (i: unknown) => ReturnType<typeof compileCheckboxRecipe>;
+const collapse = (archetype === "checkbox" ? collapseCheckboxRecipe : archetype === "switch" ? collapseSwitchRecipe : collapseAvatarRecipe) as (e: ReturnType<typeof compileCheckboxRecipe>, s: unknown) => unknown;
 const envelope = compile(instance);
 const again = compile(collapse(envelope, (instance as { provenance: { selection: unknown } }).provenance.selection));
 if (envelope.integrity.canonicalHash !== again.integrity.canonicalHash) throw new Error("compile → collapse → compile is not a fixed point for the proposed fixture");
-const recipeHash = archetype === "checkbox"
-  ? hashRecipeInstance(checkboxRecipe, instance as Parameters<typeof adaptReviewedCheckbox> extends never ? never : ReturnType<typeof adaptReviewedCheckbox>)
-  : hashRecipeInstance(switchRecipe, instance as ReturnType<typeof adaptReviewedSwitch>);
+const recipeHash = (hashRecipeInstance as (r: unknown, i: unknown) => string)(archetype === "checkbox" ? checkboxRecipe : archetype === "switch" ? switchRecipe : avatarRecipe, instance);
 say(`4. compile   fixed point ✔ · ${(envelope.ir as { children: unknown[] }).children.length} variants · ${envelope.accounting.carried.length} carried · ${envelope.receipts.length} receipts · recipe ${recipeHash.slice(0, 8)}`);
 
 // 5. emit
 const src = { adapterIdentity: `${library}-${archetype}-proposed-v1`, displayName: arg("display-name") ?? library, recipeHash, envelope };
-const emit = (archetype === "checkbox" ? emitCheckboxFigmaWriter : emitSwitchFigmaWriter) as (inputs: Array<typeof src>, o: { target: "plugin" | "scratch" }) => { code: string; pageName: string };
+const emit = (archetype === "checkbox" ? emitCheckboxFigmaWriter : archetype === "switch" ? emitSwitchFigmaWriter : emitAvatarFigmaWriter) as (inputs: Array<typeof src>, o: { target: "plugin" | "scratch" }) => { code: string; pageName: string };
 const plugin = emit([src], { target: "plugin" });
 const scratch = emit([src], { target: "scratch" });
 writeFileSync(path.join(outDir, "writer.plugin.js"), plugin.code);

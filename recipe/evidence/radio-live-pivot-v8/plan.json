@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Radio / 0b0ee218-44f74e33-6c11de88-radio-v8",
+  "runIdentity": "0b0ee218-44f74e33-6c11de88-radio-v8",
+  "namespace": "ds.contracts.radio.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "radio@1 AntD itemAlign compiles the painted control pairing (alignSelf center). Wrapper baseline + \\a0 strut receipted. Label lineHeight 14 × 1.5714285714 = 22. Old stay 183:75031 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-radio-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "0b0ee218bd3d92519e1beaa053bcb757c67c1e51309cee95e52da8580a2926e8",
+      "envelopeHash": "166b28a2b663f1852508a8157a114224c8f668021dc62ffb0ebd7cf8ad5cf065",
+      "variantCount": 4,
+      "variableCount": 26,
+      "comparedIrFacts": 249
+    },
+    {
+      "adapterIdentity": "mui-radio-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "44f74e3351670c33a94222ee2dafc967c9b36f4674fe39acc20c3d58e0af5712",
+      "envelopeHash": "8aac0a7fa45e4a5c3ec63627145395a10f838e049b7603cbc35323dc2a82af0a",
+      "variantCount": 4,
+      "variableCount": 26,
+      "comparedIrFacts": 249
+    },
+    {
+      "adapterIdentity": "antd-radio-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "6c11de888eae8927c92059454b61e14d08dd44dfcab0c472d467476266d0eb52",
+      "envelopeHash": "ac24d5521d9b95ed44aff139edfb8e66b36687c547b7d6e4052d93e92af2bb92",
+      "variantCount": 4,
+      "variableCount": 27,
+      "comparedIrFacts": 257
+    }
+  ]
+}

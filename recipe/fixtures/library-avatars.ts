@@ -7,7 +7,7 @@ import type {
 import { canonicalAvatarRecipeInstance } from "./avatar.js";
 import type { AvatarRecipeInstance } from "../recipes/avatar.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): AvatarRecipeInstance["tokens"] => {
@@ -271,7 +271,7 @@ const tokenFacts = (
   return facts;
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -382,7 +382,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedAvatarSource,
   tokens: AvatarRecipeInstance["tokens"],
@@ -390,6 +390,7 @@ const buildConfig = (
   refusals: ReviewedAvatarSourceFact[],
   extraIr: ReviewedAvatarSourceFact[],
   unsupported: string[],
+  content: { label: string } = { label: "JD" },
 ): ReviewedAvatarAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -419,7 +420,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: { label: "JD" },
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -442,7 +443,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedAvatarSource,
 ): ReviewedAvatarSourceFact[] => [

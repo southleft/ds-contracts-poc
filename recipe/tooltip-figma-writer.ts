@@ -25,7 +25,9 @@ import {
 
 export const TOOLTIP_FIGMA_NAMESPACE = "ds.contracts.tooltip.recipe.v1";
 export const TOOLTIP_FIGMA_WRITER_VERSION = 1;
-export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v6";
+export const TOOLTIP_FIGMA_RUN_SUFFIX = "tooltip-v7";
+/** v6 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TOOLTIP_V6_PAGE_ID = "218:87801";
 /** v5 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TOOLTIP_V5_PAGE_ID = "218:86308";
 /** v4 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -262,6 +264,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:87801", "marker": "TOOLTIP-V6-PAGE" },
     { "id": "218:86308", "marker": "TOOLTIP-V5-PAGE" },
     { "id": "218:84826", "marker": "TOOLTIP-V4-PAGE" },
     { "id": "212:81271", "marker": "TOOLTIP-V3-PAGE" },

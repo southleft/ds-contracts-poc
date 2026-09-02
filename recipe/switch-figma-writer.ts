@@ -26,7 +26,9 @@ import {
 
 export const SWITCH_FIGMA_NAMESPACE = "ds.contracts.switch.recipe.v1";
 export const SWITCH_FIGMA_WRITER_VERSION = 2;
-export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v12";
+export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v13";
+/** v12 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_SWITCH_V12_PAGE_ID = "218:88804";
 /** v11 stay (Chakra thumb: CSS scale 0.8 lowered (size, inset, shadow)) is preserved as evidence and never written again. */
 export const FORBIDDEN_SWITCH_V11_PAGE_ID = "218:88545";
 /** v10 stay (Chakra Switch, captured today from a config entry authored as the person's step, proposed with no --set as the sixth source) is preserved as evidence and never written again. */
@@ -269,6 +271,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "switchSet"
   },
   "forbiddenPages": [
+    { "id": "218:88804", "marker": "SWITCH-V12-PAGE" },
     { "id": "218:88545", "marker": "SWITCH-V11-PAGE" },
     { "id": "218:88332", "marker": "SWITCH-V10-PAGE" },
     { "id": "218:88119", "marker": "SWITCH-V9-PAGE" },

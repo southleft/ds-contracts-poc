@@ -27,7 +27,9 @@ import {
 
 export const CHECKBOX_FIGMA_NAMESPACE = "ds.contracts.checkbox.recipe.v1";
 export const CHECKBOX_FIGMA_WRITER_VERSION = 3;
-export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v11";
+export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v12";
+/** v11 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHECKBOX_V11_PAGE_ID = "218:86637";
 /** v10 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
 export const FORBIDDEN_CHECKBOX_V10_PAGE_ID = "218:85144";
 /** v9 stay (runtime: a lowered shadow shows behind its node only when the node is opaque) is preserved as evidence and never written again. */
@@ -263,6 +265,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "checkboxSet"
   },
   "forbiddenPages": [
+    { "id": "218:86637", "marker": "CHECKBOX-V11-PAGE" },
     { "id": "218:85144", "marker": "CHECKBOX-V10-PAGE" },
     { "id": "218:83662", "marker": "CHECKBOX-V9-PAGE" },
     { "id": "217:83235", "marker": "CHECKBOX-V8-PAGE" },

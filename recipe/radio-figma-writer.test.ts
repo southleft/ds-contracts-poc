@@ -56,7 +56,7 @@ test("the writer plans three list-shaped radio sources without touching Figma", 
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.notEqual(writer.namespace, "ds.contracts.checkbox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Radio \//);
-  assert.match(writer.runIdentity, /-radio-v7$/);
+  assert.match(writer.runIdentity, /-radio-v8$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.radioSet.children.length, RADIO_FIGMA_VARIANTS_PER_SOURCE);
