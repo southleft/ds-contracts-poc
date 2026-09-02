@@ -243,7 +243,7 @@ jobs:
       # pivot dies without: the IR vocabulary is CLOSED (no CSS passthrough
       # survives a node schema) and the envelope's account of every input fact
       # is TOTAL in both directions (no silent loss, no fabricated disclosure).
-      # The four Input/Field adjudication tests re-derive committed receipts
+      # Nine Input/Field adjudication, calibration and multi-rater tests re-derive committed receipts
       # against the MUI SOURCE in the git-ignored recipe/sandboxes/input-field-mui
       # sandbox; CI never has it, so they sat in this step and kept the lane
       # red from 2026-09-01 06:41 (ENOENT scandir), hiding every other verdict.
