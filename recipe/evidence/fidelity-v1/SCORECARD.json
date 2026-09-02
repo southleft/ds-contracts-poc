@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 59,
+  "subjects": 61,
   "passed": 44,
-  "failed": 15,
+  "failed": 17,
   "fringeExcused": 0,
-  "knownFailures": 15,
+  "knownFailures": 17,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -479,6 +479,22 @@
       "pctAAMasked": 2.02,
       "canvasPx": "99x80",
       "realPx": "328x80",
+      "convergesAt": null
+    },
+    {
+      "label": "dialog/mui",
+      "status": "fail",
+      "pctAAMasked": 6.73,
+      "canvasPx": "95x45",
+      "realPx": "318x58",
+      "convergesAt": null
+    },
+    {
+      "label": "menu/mui",
+      "status": "fail",
+      "pctAAMasked": 5.46,
+      "canvasPx": "65x61",
+      "realPx": "117x124",
       "convergesAt": null
     }
   ]

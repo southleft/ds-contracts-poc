@@ -556,11 +556,28 @@
       "shot": "recipe/evidence/fidelity-v1/shots/textarea-chakra-field-empty-v11.png",
       "reference": "extract/computed/out/chakra/textareafield/orig-shots/empty.enabled__default.png",
       "_proposedWhy": "HELD OUT: Chakra's Field + Label + Textarea, captured 2026-09-02 through the new $childProps axis form (the content value on the Textarea child, disabled on the Field root). The STACKED label plane read from the field's row-gap (6), the label's font, size and colour; 39 read, 0 invented; the disabled label's opacity dimming named as a refusal."
+    },
+    {
+      "label": "dialog/mui",
+      "page": "218:90598",
+      "component": "dialog/variant/default :: MUI Dialog",
+      "shot": "recipe/evidence/fidelity-v1/shots/dialog-mui-default-shared-v6.png",
+      "reference": "extract/computed/out/mui/dialog/orig-shots/md__default.png",
+      "referenceCrop": "cls:MuiDialog-paper",
+      "_why": "OVERLAY REFERENCE (2026-09-02): the real screenshot is the whole modal root (900x1000 with the backdrop); the reference is cropped to the paper's rendered rect recorded beside the PNG at capture time (md__default.rects.json). First scorable dialog row."
+    },
+    {
+      "label": "menu/mui",
+      "page": "218:90653",
+      "component": "menu/variant/default :: MUI Menu",
+      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-default-shared-v6.png",
+      "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
+      "referenceCrop": "cls:MuiMenu-paper",
+      "_why": "OVERLAY REFERENCE (2026-09-02): the real screenshot is the popover root; the reference is cropped to the paper's rendered rect recorded beside the PNG (__default.rects.json). First scorable menu row."
     }
   ],
   "_excluded": {
     "radio/astryx": "Astryx ships RadioList, and extract/computed/configs/astryx.json declares no Radio component \u2014 there is no real-package render to score against. Not a defect in the mint; a gap in the capture corpus. EYEBALL NOTE, unverified: on the v3 page the Astryx UNSELECTED radio reads as a solid white circle with no visible border, where a radio normally carries one. That may be correct for Astryx or may be a missing stroke \u2014 it cannot be decided here, which is the whole point of the exclusion. Capturing Astryx Radio would settle it.",
-    "dialog/*, menu/*": "the only references (mui/dialog, mui/menu) are 900x1000 full-viewport overlay captures with a backdrop, so an ink trim cannot isolate the surface; a surface-only reference capture is needed before these can be scored.",
     "button/altitude, input/mui, combobox/mui, table/mui": "the signed pages carry two component sets with IDENTICAL names (one per library leg); the name resolver cannot pick a leg deterministically. Needs a per-leg set rename or a section-scoped resolver. References exist (altitude/button, mui/textfield, mui/autocomplete, mui/table)."
   },
   "_widthNormalisedNote": "widthNormalised subjects (fill-width controls) are scored as two equal edge windows after an ink trim: corners, border, radius, label offset and every vertical metric are compared; the interior run of the wider side is not. See recipe/fidelity-score.ts scoreEdgeWindows."

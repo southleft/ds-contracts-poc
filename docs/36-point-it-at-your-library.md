@@ -212,9 +212,11 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 ## What it does not do yet
 
 - **Other archetypes.** Eleven of the thirteen boilerplate archetypes have
-  proposers today; dialog and menu still have hand tables only, and no
-  scorable reference (their only real screenshots are full-viewport
-  overlays with a backdrop).
+  proposers today; dialog and menu still have hand tables only. They are
+  scored now — the capture records each overlay part's rendered rect beside
+  its screenshot and the gate crops the reference to the paper — and both
+  first scores are named content mismatches (the hand tables' title and
+  items are not what the capture renders), which a proposer would remove.
 - **A held-out for badge@1.** Every foreign badge in the corpus is an
   inline label, which badge@1 refuses by name; the proposer is proven
   against the two hand tables, not against a library it was never taught.

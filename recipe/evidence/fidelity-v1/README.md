@@ -510,3 +510,19 @@ See `f1-badge-proposed/`.
     badge/mui-proposed 3.11% · badge/antd-proposed 1.98%
 
     44 pass · 0 fringe · 15 known
+
+### 2026-09-02 — dialog and menu are scored for the first time
+
+Their only references are full-viewport overlay screenshots with a
+backdrop. The portal capture now records every part's rendered rect beside
+its screenshot (`orig-shots/<key>.rects.json`) and the manifest crops the
+reference to the paper (`referenceCrop: "cls:MuiDialog-paper"`), a box the
+capture measured. Both first scores are named content mismatches, not
+geometry: the hand tables carry a title line and two menu items where the
+capture renders one body line and three items. Neither archetype has a
+proposer yet; one would read the content from the capture as the other
+eleven do. The rows stay in the gate so the miss is measured, not excused.
+
+    dialog/mui 6.73% (named) · menu/mui 5.46% (named)
+
+    44 pass · 0 fringe · 17 known
