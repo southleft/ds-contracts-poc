@@ -53,7 +53,7 @@
       "x": 24,
       "y": 24,
       "w": 116.484375,
-      "h": 124
+      "h": 88
     },
     {
       "idxPath": "2.0",
@@ -67,7 +67,7 @@
       "x": 24,
       "y": 24,
       "w": 116.484375,
-      "h": 124
+      "h": 88
     },
     {
       "idxPath": "2.0.0",
@@ -94,20 +94,6 @@
       ],
       "x": 24,
       "y": 68,
-      "w": 116.484375,
-      "h": 36
-    },
-    {
-      "idxPath": "2.0.2",
-      "tag": "li",
-      "classes": [
-        "MuiButtonBase-root",
-        "MuiMenuItem-root",
-        "MuiMenuItem-gutters",
-        "css-123r88s-MuiButtonBase-root-MuiMenuItem-root"
-      ],
-      "x": 24,
-      "y": 104,
       "w": 116.484375,
       "h": 36
     },

@@ -1,0 +1,26 @@
+{
+  "roles": {
+    "item": "idx:0.0",
+    "panel": "root",
+    "list": "idx:0"
+  },
+  "combo": "",
+  "evidence": {
+    "item": {
+      "selector": "idx:0.0",
+      "why": "2 text-carrying siblings under 0: \"Profile\", \"My account\"; the first is the item read",
+      "confidence": "high"
+    },
+    "panel": {
+      "selector": "root",
+      "why": "div.MuiPaper-root bg rgba(255, 255, 255, 1) radius 4px shadow rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgb — the painted ancestor of the items",
+      "confidence": "high"
+    },
+    "list": {
+      "selector": "idx:0",
+      "why": "the items' parent ul (padding-top 8px, row-gap normal)",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

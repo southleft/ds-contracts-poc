@@ -394,6 +394,57 @@
           ]
         }
       ]
+    },
+    {
+      "__note": "Authored 2026-09-02 as the person's step of docs/36 for menu@1. Portal: openDriver {open:true} on MenuRoot; MenuTrigger 'Open' + Portal ⊃ MenuPositioner ⊃ MenuContent ⊃ two MenuItems (the archetype's shape) — Chakra's documented composition; the Portal keeps the positioner out of the stage as the Tooltip entry does.",
+      "name": "Menu",
+      "importName": "MenuRoot",
+      "contract": "examples/chakra/contracts-seed/menu.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true
+      },
+      "callbackProps": [
+        "onOpenChange",
+        "onSelect"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "MenuTrigger",
+          "text": "Open"
+        },
+        {
+          "importName": "Portal",
+          "children": [
+            {
+              "importName": "MenuPositioner",
+              "children": [
+                {
+                  "importName": "MenuContent",
+                  "children": [
+                    {
+                      "importName": "MenuItem",
+                      "props": {
+                        "value": "a"
+                      },
+                      "text": "Profile"
+                    },
+                    {
+                      "importName": "MenuItem",
+                      "props": {
+                        "value": "b"
+                      },
+                      "text": "My account"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

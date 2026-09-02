@@ -268,7 +268,12 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     overlay rect sidecars the fidelity gate crops to (Chromium 149 in the
   //     sandbox); ten control-equal drops on those two components moved with
   //     the re-capture. Named, re-pinned to what the committed tree measures.
-  mui: { components: 32, drops: 73001, authored: 0, fallback: 99 },
+  //   · mui 73,001 -> 72,647 drops, span-fallback 99 -> 98, later again on
+  //     2026-09-02: the Menu capture record was re-taken with TWO items (the
+  //     person's step for menu@1 — the archetype draws two), one item fewer
+  //     than before, so its control-equal drops and one span-fallback part
+  //     went with it. Named, re-pinned to what the committed tree measures.
+  mui: { components: 32, drops: 72647, authored: 0, fallback: 98 },
   polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
   shadcn: { components: 11, drops: 12205, authored: 1, fallback: 7 },
   tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },

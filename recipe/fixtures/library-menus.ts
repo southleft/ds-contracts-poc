@@ -7,7 +7,7 @@ import type {
 import { canonicalMenuRecipeInstance } from "./menu.js";
 import type { MenuRecipeInstance } from "../recipes/menu.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): MenuRecipeInstance["tokens"] => {
@@ -265,7 +265,7 @@ const tokenFacts = (
   return facts;
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -346,7 +346,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedMenuSource,
   tokens: MenuRecipeInstance["tokens"],
@@ -354,6 +354,8 @@ const buildConfig = (
   refusals: ReviewedMenuSourceFact[],
   extraIr: ReviewedMenuSourceFact[],
   unsupported: string[],
+  // A proposed fixture passes the two captured item texts; the hand tables keep Item One / Item Two.
+  content: MenuRecipeInstance["content"] = { first: "Item One", second: "Item Two" },
 ): ReviewedMenuAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -383,7 +385,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: { first: "Item One", second: "Item Two" },
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -406,7 +408,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedMenuSource,
 ): ReviewedMenuSourceFact[] => [

@@ -30,6 +30,7 @@ import type { RadioComboMap, RadioRoles } from "./schema-radio.js";
 import type { TextareaComboMap, TextareaRoles } from "./schema-textarea.js";
 import { ALERT_STATUSES, type AlertComboMap, type AlertRoles } from "./schema-alert.js";
 import type { BadgeRoles } from "./schema-badge.js";
+import type { MenuRoles } from "./schema-menu.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -878,5 +879,57 @@ export function draftBadgeRoles(ledger: Ledger): SimpleRoleDraft<BadgeRoles> {
   if (host) { roles.host = sel(host); evidence.host = { selector: roles.host, why: `square ${host.style.width} ${host.tag}${host.classes.length ? "." + host.classes[0] : ""} bg ${host.style["background-color"]} — the anchored host`, confidence: "high" }; }
   else unresolved.push("host: no painted square part besides the pip");
   void byPath;
+  return { roles, combo, evidence, unresolved };
+}
+
+
+/**
+ * Draft the menu@1 role map by what the parts DO: the items are the parts
+ * that carry text and share a parent (the list); the panel is the nearest
+ * ancestor-or-self of the list that paints (fill, border or shadow); the
+ * label is the innermost text descendant when the item itself carries none.
+ * Fewer than two items is unresolved — menu@1 draws two.
+ */
+export function draftMenuRoles(ledger: Ledger): SimpleRoleDraft<MenuRoles> {
+  const evidence: SimpleRoleDraft<MenuRoles>["evidence"] = {};
+  const unresolved: string[] = [];
+  const roles: Partial<MenuRoles> = {};
+  const combo = pickCombo(ledger, /(^|\.)(default|open|unset)(\.|$)|^$/);
+  if (combo === null) { unresolved.push("combo: no captured cell"); return { roles, combo: null, evidence, unresolved }; }
+  const cap = ledger.capture(`${combo}__default`);
+  const byPath = new Map(cap.parts.map((p) => [p.idxPath, p] as const));
+  const carriesText = (p: LedgerPart): boolean => hasTextPart(p) || cap.parts.some((c) => c.idxPath.startsWith(p.idxPath + ".") && hasTextPart(c));
+  // ITEMS: text-carrying parts grouped by parent; the largest group of ≥2 siblings.
+  const groups = new Map<string, LedgerPart[]>();
+  for (const p of cap.parts) {
+    if (p.tag === "input" || !carriesText(p)) continue;
+    const parent = parentPath(p.idxPath);
+    if (parent === null) continue;
+    // only the outermost text carrier under a parent (skip a text child of an item)
+    if (cap.parts.some((q) => q !== p && p.idxPath.startsWith(q.idxPath + ".") && parentPath(q.idxPath) === parent)) continue;
+    (groups.get(parent) ?? groups.set(parent, []).get(parent)!).push(p);
+  }
+  const [listPath, items] = [...groups.entries()].filter(([, v]) => v.length >= 2).sort((a, b) => b[1].length - a[1].length)[0] ?? [null, []];
+  if (!listPath || items.length < 2) {
+    unresolved.push(`items: menu@1 draws two items; the capture has ${items.length} text-carrying sibling(s) under one parent`);
+    return { roles, combo, evidence, unresolved };
+  }
+  const first = items[0]!;
+  roles.item = sel(first);
+  evidence.item = { selector: roles.item, why: `${items.length} text-carrying siblings under ${listPath || "root"}: ${items.map((i) => JSON.stringify((i.text.find((t) => t.trim()) ?? cap.parts.find((c) => c.idxPath.startsWith(i.idxPath + ".") && hasTextPart(c))?.text[0] ?? "").trim())).join(", ")}; the first is the item read`, confidence: items.length === 2 ? "high" : "medium" };
+  if (!hasTextPart(first)) {
+    const inner = cap.parts.filter((p) => p.idxPath.startsWith(first.idxPath + ".") && hasTextPart(p)).sort((a, b) => b.idxPath.length - a.idxPath.length)[0];
+    if (inner) { roles.label = sel(inner); evidence.label = { selector: roles.label, why: `${inner.tag} inside the item carries the text`, confidence: "high" }; }
+  }
+  const list = byPath.get(listPath);
+  const paints = (p: LedgerPart): boolean => !isTransparent(p.style["background-color"]) || num(p.style["border-top-width"]) > 0 || (p.style["box-shadow"] ?? "none") !== "none";
+  let idx: string | null = listPath, panel: LedgerPart | undefined;
+  while (idx !== null) { const p = byPath.get(idx); if (p && paints(p)) { panel = p; break; } idx = parentPath(idx); }
+  panel = panel ?? byPath.get("");
+  if (panel) {
+    roles.panel = sel(panel);
+    evidence.panel = { selector: roles.panel, why: `${panel.tag}${panel.classes.length ? "." + panel.classes[0] : ""} bg ${panel.style["background-color"]} radius ${panel.style["border-top-left-radius"]} shadow ${(panel.style["box-shadow"] ?? "none").slice(0, 40)} — the painted ancestor of the items`, confidence: "high" };
+    if (list && list.idxPath !== panel.idxPath) { roles.list = sel(list); evidence.list = { selector: roles.list, why: `the items' parent ${list.tag} (padding-top ${list.style["padding-top"]}, row-gap ${list.style["row-gap"]})`, confidence: "high" }; }
+  }
   return { roles, combo, evidence, unresolved };
 }

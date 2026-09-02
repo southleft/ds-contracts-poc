@@ -25,7 +25,9 @@ import {
 
 export const MENU_FIGMA_NAMESPACE = "ds.contracts.menu.recipe.v1";
 export const MENU_FIGMA_WRITER_VERSION = 1;
-export const MENU_FIGMA_RUN_SUFFIX = "menu-v6";
+export const MENU_FIGMA_RUN_SUFFIX = "menu-v7";
+/** v6 stay (menu@1 proposer: MUI from its own two-item capture and Chakra's Menu held out (Portal composition, captured today)) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V6_PAGE_ID = "218:90653";
 /** v5 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
 export const FORBIDDEN_MENU_V5_PAGE_ID = "218:88063";
 /** v4 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
@@ -264,6 +266,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:90653", "marker": "MENU-V6-PAGE" },
     { "id": "218:88063", "marker": "MENU-V5-PAGE" },
     { "id": "218:86570", "marker": "MENU-V4-PAGE" },
     { "id": "218:85088", "marker": "MENU-V3-PAGE" },

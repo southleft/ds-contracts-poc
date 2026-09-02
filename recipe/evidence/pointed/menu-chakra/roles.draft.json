@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "item": "idx:0.0",
+    "panel": "idx:0"
+  },
+  "combo": "",
+  "evidence": {
+    "item": {
+      "selector": "idx:0.0",
+      "why": "2 text-carrying siblings under 0: \"Profile\", \"My account\"; the first is the item read",
+      "confidence": "high"
+    },
+    "panel": {
+      "selector": "idx:0",
+      "why": "div.chakra-menu__content bg rgba(255, 255, 255, 1) radius 4px shadow color(srgb 0.0941176 0.0941176 0.105882  — the painted ancestor of the items",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

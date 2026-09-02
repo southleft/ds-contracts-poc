@@ -1,0 +1,68 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "menu-live-pivot-v7-prepare",
+  "teaching": "One named default Menu panel; two items; placement is receipted",
+  "runIdentity": "49334e8e-9f1933de-af4cca86-5656e901-285ddaed-menu-v7",
+  "pageName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-5656e901-285ddaed-menu-v7",
+  "namespace": "ds.contracts.menu.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "49334e8eea7e74038a7e34b9b18c4a55dba1181784a613725d66088c18463316",
+    "MUI": "9f1933de429f55ce16a333c2a31974995ceeac34e62a475511969932c9af24db",
+    "Ant Design": "af4cca860add835b7d038e263ffba07bae0c4995c9bbd4fb98bcdedc3db2663d",
+    "MUI (proposed)": "5656e9011576257de77e3e533cf4c8b7de529a9ed87c2bfa3cf75c3273bed7d7",
+    "Chakra (proposed)": "285ddaede0d598cc1a8527ac457b564fb2659af66b19f5a17585e4aa967317b7"
+  },
+  "writerSha256": "017f7ae2fc35622a5627379e508c2fa1dd7b2baed48d16ba4c12826181f5a9b3",
+  "pageId": "228:93939",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=228-93939",
+  "live": {
+    "recordedFrom": "menu-v7-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-5656e901-285ddaed-menu-v7",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-menu-reviewed-v1",
+        "sectionId": "228:93940",
+        "setId": "228:93952",
+        "collectionId": "VariableCollectionId:228:93941",
+        "variantCount": 1,
+        "comparedIrFacts": 31
+      },
+      {
+        "adapterIdentity": "mui-menu-reviewed-v1",
+        "sectionId": "228:93958",
+        "setId": "228:93971",
+        "collectionId": "VariableCollectionId:228:93959",
+        "variantCount": 1,
+        "comparedIrFacts": 33
+      },
+      {
+        "adapterIdentity": "antd-menu-reviewed-v1",
+        "sectionId": "228:93977",
+        "setId": "228:93989",
+        "collectionId": "VariableCollectionId:228:93978",
+        "variantCount": 1,
+        "comparedIrFacts": 31
+      },
+      {
+        "adapterIdentity": "mui-menu-proposed-v1",
+        "sectionId": "228:93995",
+        "setId": "228:94007",
+        "collectionId": "VariableCollectionId:228:93996",
+        "variantCount": 1,
+        "comparedIrFacts": 31
+      },
+      {
+        "adapterIdentity": "chakra-menu-proposed-v1",
+        "sectionId": "228:94013",
+        "setId": "228:94025",
+        "collectionId": "VariableCollectionId:228:94014",
+        "variantCount": 1,
+        "comparedIrFacts": 31
+      }
+    ]
+  }
+}

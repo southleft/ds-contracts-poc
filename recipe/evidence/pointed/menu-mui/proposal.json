@@ -1,0 +1,107 @@
+{
+  "archetype": "menu",
+  "library": "mui",
+  "ledger": "extract/computed/out/mui/menu/captured-truth.json",
+  "provenance": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "item": "idx:0.0",
+    "panel": "root",
+    "list": "idx:0"
+  },
+  "combo": "",
+  "leaves": {
+    "panel.padding": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default root.padding-top | extract/computed/out/mui/menu/captured-truth.json#__default idx:0.padding-top",
+      "formula": "the panel's padding-top plus the list's (MUI: 0 on the paper, 8 on the list)"
+    },
+    "panel.radius": {
+      "value": 4,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default root.border-top-left-radius | extract/computed/out/mui/menu/captured-truth.json#__default root.height",
+      "formula": "border-top-left-radius; a percentage is of the panel's height; clamped to half the height as CSS clamps it"
+    },
+    "panel.itemSpacing": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.row-gap",
+      "formula": "the list's row-gap (keywords read 0)"
+    },
+    "panel.fill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default root.background-color"
+    },
+    "item.paddingX": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-left"
+    },
+    "item.paddingY": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-top"
+    },
+    "item.minHeight": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.min-height",
+      "formula": "the item's min-height as a length; `auto`/0 means the item hugs its label and padding"
+    },
+    "item.fill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.background-color"
+    },
+    "labelFontSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 24,
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.line-height",
+      "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+    },
+    "lineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.line-height",
+      "formula": "`normal` → auto; a length → px"
+    },
+    "label": {
+      "value": "#000000de",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.color"
+    },
+    "typography.label.family": {
+      "value": "Roboto",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "first": "Profile",
+    "second": "My account"
+  },
+  "typography": {
+    "family": "Roboto",
+    "style": "Regular",
+    "stack": "Roboto, Helvetica, Arial, sans-serif"
+  }
+}

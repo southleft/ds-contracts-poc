@@ -35,6 +35,8 @@ import { CHAKRA_ALERT_LEDGER, chakraAlertAdapterConfig, chakraAlertMappings } fr
 import { ANTD_ALERT_LEDGER as ANTD_ALERT_LEDGER_PROPOSED, antdAlertAdapterConfig as antdAlertProposedConfig, antdAlertMappings as antdAlertProposedMappings } from "../fixtures/generated/alert.antd.js";
 import { MUI_BADGE_LEDGER as MUI_BADGE_LEDGER_PROPOSED, muiBadgeAdapterConfig as muiBadgeProposedConfig, muiBadgeMappings as muiBadgeProposedMappings } from "../fixtures/generated/badge.mui.js";
 import { ANTD_BADGE_LEDGER as ANTD_BADGE_LEDGER_PROPOSED, antdBadgeAdapterConfig as antdBadgeProposedConfig, antdBadgeMappings as antdBadgeProposedMappings } from "../fixtures/generated/badge.antd.js";
+import { MUI_MENU_LEDGER as MUI_MENU_LEDGER_PROPOSED, muiMenuAdapterConfig as muiMenuProposedConfig, muiMenuMappings as muiMenuProposedMappings } from "../fixtures/generated/menu.mui.js";
+import { CHAKRA_MENU_LEDGER, chakraMenuAdapterConfig, chakraMenuMappings } from "../fixtures/generated/menu.chakra.js";
 import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
 import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
 import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
@@ -1040,6 +1042,26 @@ const SUBJECTS: Subject[] = [
     tokens: antdMenuAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: antdMenuMappings,
     extras: extrasFor(antdMenuAdapterConfig.tokens as unknown as Record<string, unknown>, antdMenuMappings),
+  },
+  {
+    // PROPOSED from MUI's own two-item capture by the menu@1 role schema (2026-09-02): the panel inset as paper + list padding; 14 read, 0 invented.
+    archetype: "menu",
+    library: "mui-proposed",
+    source: src(muiMenuProposedConfig),
+    ledgerFile: MUI_MENU_LEDGER_PROPOSED,
+    tokens: muiMenuProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiMenuProposedMappings,
+    extras: extrasFor(muiMenuProposedConfig.tokens as unknown as Record<string, unknown>, muiMenuProposedMappings),
+  },
+  {
+    // HELD OUT (2026-09-02): Chakra's Menu through a Portal composition; 14 read, 0 invented.
+    archetype: "menu",
+    library: "chakra",
+    source: src(chakraMenuAdapterConfig),
+    ledgerFile: CHAKRA_MENU_LEDGER,
+    tokens: chakraMenuAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraMenuMappings,
+    extras: extrasFor(chakraMenuAdapterConfig.tokens as unknown as Record<string, unknown>, chakraMenuMappings),
   },
   {
     archetype: "dialog",

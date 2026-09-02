@@ -1,0 +1,30 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.menu",
+  "name": "Menu",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Menu capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition from the package's flat exports: MenuRoot(open) ⊃ (MenuTrigger 'Open', Portal ⊃ MenuPositioner ⊃ MenuContent ⊃ MenuItem ×2). Authored 2026-09-02 as the person's step of docs/36 for menu@1: two items, the archetype's shape; the open plane is the Root's `open` prop via openDriver.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "TooltipRoot"
+      }
+    }
+  }
+}

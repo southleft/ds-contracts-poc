@@ -568,12 +568,30 @@
     },
     {
       "label": "menu/mui",
-      "page": "218:90653",
+      "page": "228:93939",
       "component": "menu/variant/default :: MUI Menu",
-      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-default-shared-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-default-shared-v7.png",
       "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
       "referenceCrop": "cls:MuiMenu-paper",
       "_why": "OVERLAY REFERENCE (2026-09-02): the real screenshot is the popover root; the reference is cropped to the paper's rendered rect recorded beside the PNG (__default.rects.json). First scorable menu row."
+    },
+    {
+      "label": "menu/mui-proposed",
+      "page": "228:93939",
+      "component": "menu/variant/default :: MUI (proposed) Menu",
+      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-proposed-default-v7.png",
+      "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
+      "referenceCrop": "cls:MuiMenu-paper",
+      "_why": "PROPOSED from MUI's own capture by the menu@1 role schema (14 read, 0 invented) \u2014 the capture now mounts two items, the archetype's shape (the person's config step); the panel inset is the paper's padding plus the list's (0 + 8). Reference cropped to MuiMenu-paper."
+    },
+    {
+      "label": "menu/chakra",
+      "page": "228:93939",
+      "component": "menu/variant/default :: Chakra (proposed) Menu",
+      "shot": "recipe/evidence/fidelity-v1/shots/menu-chakra-default-v7.png",
+      "reference": "extract/computed/out/chakra/menu/orig-shots/__default.png",
+      "referenceCrop": "cls:chakra-menu__content",
+      "_why": "HELD OUT: Chakra's Menu, captured 2026-09-02 from a config entry a person wrote (MenuRoot open \u2283 MenuTrigger + Portal \u2283 MenuPositioner \u2283 MenuContent \u2283 two MenuItems); the legacy contract path quarantines it, the real screenshot and rects were kept. 14 read, 0 invented. Reference cropped to the content panel."
     }
   ],
   "_excluded": {

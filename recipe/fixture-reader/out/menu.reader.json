@@ -408,5 +408,341 @@
       "receipt": 14,
       "unread": 0
     }
+  },
+  {
+    "archetype": "menu",
+    "library": "mui-proposed",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Menu"
+    },
+    "ledgerFile": "extract/computed/out/mui/menu/captured-truth.json",
+    "rows": [
+      {
+        "path": "panel.padding",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default root.padding-top",
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.padding-top"
+        ],
+        "formula": "the panel's padding-top plus the list's (MUI: 0 on the paper, 8 on the list)"
+      },
+      {
+        "path": "panel.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default root.border-top-left-radius",
+          "extract/computed/out/mui/menu/captured-truth.json#__default root.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the panel's height; clamped to half the height as CSS clamps it"
+      },
+      {
+        "path": "panel.itemSpacing",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.row-gap"
+        ],
+        "formula": "the list's row-gap (keywords read 0)"
+      },
+      {
+        "path": "panel.fill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default root.background-color"
+        ]
+      },
+      {
+        "path": "item.paddingX",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-left"
+        ]
+      },
+      {
+        "path": "item.paddingY",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-top"
+        ]
+      },
+      {
+        "path": "item.minHeight",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.min-height"
+        ],
+        "formula": "the item's min-height as a length; `auto`/0 means the item hugs its label and padding"
+      },
+      {
+        "path": "item.fill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.background-color"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.line-height"
+        ],
+        "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.line-height"
+        ],
+        "formula": "`normal` → auto; a length → px"
+      },
+      {
+        "path": "label",
+        "fixtureValue": "#000000de",
+        "verdict": "match",
+        "capturedValue": "#000000de",
+        "proposedValue": "#000000de",
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.color"
+        ]
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 0,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "menu",
+    "library": "chakra",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Menu"
+    },
+    "ledgerFile": "extract/computed/out/chakra/menu/captured-truth.json",
+    "rows": [
+      {
+        "path": "panel.padding",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.padding-top",
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.padding-top"
+        ],
+        "formula": "the panel's padding-top"
+      },
+      {
+        "path": "panel.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.border-top-left-radius",
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the panel's height; clamped to half the height as CSS clamps it"
+      },
+      {
+        "path": "panel.itemSpacing",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.row-gap"
+        ],
+        "formula": "the list's row-gap (keywords read 0)"
+      },
+      {
+        "path": "panel.fill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "item.paddingX",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.padding-left"
+        ]
+      },
+      {
+        "path": "item.paddingY",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.padding-top"
+        ]
+      },
+      {
+        "path": "item.minHeight",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.min-height"
+        ],
+        "formula": "the item's min-height as a length; `auto`/0 means the item hugs its label and padding"
+      },
+      {
+        "path": "item.fill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.background-color"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.line-height"
+        ],
+        "formula": "the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.line-height"
+        ],
+        "formula": "`normal` → auto; a length → px"
+      },
+      {
+        "path": "label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.color"
+        ]
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Inter",
+        "verdict": "match",
+        "capturedValue": "Inter",
+        "proposedValue": "Inter",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 0,
+      "unread": 0
+    }
   }
 ]

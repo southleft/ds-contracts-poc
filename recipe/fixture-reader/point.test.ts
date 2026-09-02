@@ -381,3 +381,19 @@ test("badge@1 reads the pip's offset as transform minus the anchor inset (MUI 4.
   assert.match(readFileSync(path.join(REPO, path.relative(REPO, a.modulePath)), "utf8"), /refusal-ring-shadow/);
   assert.equal(Object.values(a.proposal.leaves).filter((l) => l.from !== "ledger").length, 0, "every leaf read");
 });
+
+import { draftMenuRoles } from "./draft-roles.js";
+import { proposeMenuFixture } from "./propose-menu.js";
+import type { MenuRoles } from "./schema-menu.js";
+
+test("menu@1 reads MUI's two-item menu from its own capture — the panel inset as paper plus list padding, the items' texts as content — with nothing invented", () => {
+  const mui = draftMenuRoles(new Ledger(REPO, "extract/computed/out/mui/menu/captured-truth.json"));
+  assert.deepEqual(mui.unresolved, []);
+  assert.ok(mui.roles.list, "MUI's items sit in a list inside the paper");
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const m = proposeMenuFixture({ library: "mui", ledger: "extract/computed/out/mui/menu/captured-truth.json", roles: mui.roles as MenuRoles, combo: mui.combo!, out: path.relative(REPO, path.join(dir, "menu.mui.ts")), unsupported: ["hover"] });
+  assert.deepEqual(m.refused, []);
+  assert.deepEqual(m.proposal.content, { first: "Profile", second: "My account" });
+  for (const [k, v] of [["panel.padding", 8], ["panel.radius", 4], ["item.paddingX", 16], ["item.paddingY", 6], ["lineHeightUnit", "px"]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
+  assert.equal(Object.values(m.proposal.leaves).filter((l) => l.from !== "ledger").length, 0, "every leaf read");
+});

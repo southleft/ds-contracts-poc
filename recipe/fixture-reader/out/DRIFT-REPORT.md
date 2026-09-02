@@ -464,6 +464,18 @@ ledger _(none — receipt-only)_ · 14 facts: **0 match**, **0 drift**, 14 named
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### mui-proposed — @mui/material@9.2.0#Menu
+
+ledger `extract/computed/out/mui/menu/captured-truth.json` · 14 facts: **14 match**, **0 drift**, 0 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
+### chakra — @chakra-ui/react@3.37.0#Menu
+
+ledger `extract/computed/out/chakra/menu/captured-truth.json` · 14 facts: **14 match**, **0 drift**, 0 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ## Dialog
 
 ### astryx — @astryxdesign/core@0.1.6#Dialog

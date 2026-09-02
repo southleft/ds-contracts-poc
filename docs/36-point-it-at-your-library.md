@@ -3,9 +3,9 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **eleven archetypes**
+> plugin can run in any file. It works today for **twelve archetypes**
 > (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1, radio@1,
-> textarea@1, alert@1, badge@1) and has been proven on **libraries
+> textarea@1, alert@1, badge@1, menu@1) and has been proven on **libraries
 > the recipe path was never taught** — Chakra UI, shadcn, Altitude, Fluent and
 > Carbon — including six Chakra controls captured for the first time the same
 > day (a person wrote the config entry, the command did the rest; the Switch's
@@ -37,7 +37,7 @@ npm run recipe:point -- --archetype checkbox --library chakra \
 
 | flag | what |
 |---|---|
-| `--archetype` | one of checkbox, switch, avatar, tooltip, chip, link, tabs, radio, textarea, alert, badge |
+| `--archetype` | one of checkbox, switch, avatar, tooltip, chip, link, tabs, radio, textarea, alert, badge, menu |
 | `--library <slug>` | the capture directory: `extract/computed/out/<slug>/…` |
 | `--capture <dir>` | the captured component's directory when the library names the archetype differently (AntD's and Carbon's `tag` as chip@1; Chakra's `textareafield` as textarea@1) |
 | `--slug <name>` | the fixture's own name when one library contributes two captures of an archetype (`chakra-field`); the ledger stays under `--library` |
@@ -108,6 +108,13 @@ which the legacy contract path quarantines on `text-underline-offset` — is
 scored against the real render anyway (the quarantine path now keeps the
 `--keep-originals` screenshots: the pixels are a measurement, not the
 contract's to refuse) and is a named one-row rasterisation difference.
+
+On menu@1, the panel inset is read as the paper's padding plus the list's
+(MUI keeps 8 on the list, which the hand table had spelled 0) and the two
+items' texts are the content; MUI's proposal passes at 4.73% beside its
+named hand row, and Chakra's Menu, captured the same day through a Portal
+composition, is held out at 5.64% with the miss named — no panel
+minimum-width leaf (`recipe/evidence/fidelity-v1/f1-menu-proposed/`).
 
 On badge@1, the pip's offset is read as its transform minus the anchor
 inset (MUI's circular overlap, 4.406 — the number the hand table had
@@ -211,12 +218,14 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** Eleven of the thirteen boilerplate archetypes have
-  proposers today; dialog and menu still have hand tables only. They are
-  scored now — the capture records each overlay part's rendered rect beside
-  its screenshot and the gate crops the reference to the paper — and both
-  first scores are named content mismatches (the hand tables' title and
-  items are not what the capture renders), which a proposer would remove.
+- **Other archetypes.** Twelve of the thirteen boilerplate archetypes have
+  proposers today; dialog still has a hand table only. It is scored now —
+  the capture records each overlay part's rendered rect beside its
+  screenshot and the gate crops the reference to the paper — and its first
+  score is a named content mismatch (the hand table's title line is not what
+  the capture renders), which a proposer would remove.
+- **A panel minimum width.** menu@1 hugs its items; Chakra's content panel
+  is 8rem wide. Named on the held-out row, not spelled.
 - **A held-out for badge@1.** Every foreign badge in the corpus is an
   inline label, which badge@1 refuses by name; the proposer is proven
   against the two hand tables, not against a library it was never taught.
@@ -292,6 +301,7 @@ files), what stays as archive, and the three decisions that are the owner's.
 | `recipe/fixture-reader/schema-textarea.ts`, `propose-textarea.ts` | textarea@1: box, outline, inner, label (or the bare cell), legend; the label plane from the label's transform |
 | `recipe/fixture-reader/schema-alert.ts`, `propose-alert.ts` | alert@1: box, icon svg + its one path (glyph d, fill-rule, fill), title; the viewBox reviewed |
 | `recipe/fixture-reader/schema-badge.ts`, `propose-badge.ts` | badge@1: host, pip (offset = transform − inset; a shadow ring as a border), count |
+| `recipe/fixture-reader/schema-menu.ts`, `propose-menu.ts` | menu@1: panel (paper + list inset), item, label; the first two text-carrying siblings are the content |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

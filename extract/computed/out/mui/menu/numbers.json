@@ -6,17 +6,16 @@
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 675,
-  "elementsPerCapture": 5,
+  "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 32,
     "list-padding": 25,
     "label": 38,
-    "label-2": 38,
-    "label-3": 38
+    "label-2": 38
   },
   "folds": {
-    "count": 50,
+    "count": 40,
     "receipts": [
       {
         "part": "root",
@@ -257,70 +256,10 @@
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-bottom-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-left-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-right-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-top-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "caret-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "column-rule-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "outline-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "row-rule-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "text-decoration-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "text-emphasis-color",
-        "foldedInto": "color",
-        "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 16,
-    "mintedLeavesFolded": 16
+    "mintedLeavesUnfolded": 19,
+    "mintedLeavesFolded": 19
   },
   "bound": {
     "cellsChecked": 0,
@@ -329,36 +268,36 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 16,
-    "baseBindings": 72,
+    "leaves": 19,
+    "baseBindings": 56,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 72,
+      "uniform": 56,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 26,
+    "base": 20,
     "state": 0
   },
   "codeOnly": {
-    "base": 14,
+    "base": 11,
     "state": 0,
     "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
-    "partsCarried": 5,
+    "partsCarried": 4,
     "svgAssets": 0,
     "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 3365,
-    "cellsMatched": 3355,
+    "cellsCompared": 2692,
+    "cellsMatched": 2684,
     "pct": 99.70282317979198,
     "namedExclusions": [
       "app-region",
@@ -369,11 +308,11 @@
     "topMismatchedChannels": [
       [
         "inline-size",
-        5
+        4
       ],
       [
         "width",
-        5
+        4
       ]
     ]
   },
@@ -406,7 +345,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 94.0119760479042,
+    "computedPctEqual": 93.7984496124031,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 61,
-  "passed": 44,
-  "failed": 17,
+  "subjects": 63,
+  "passed": 45,
+  "failed": 18,
   "fringeExcused": 0,
-  "knownFailures": 17,
+  "knownFailures": 18,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -492,9 +492,25 @@
     {
       "label": "menu/mui",
       "status": "fail",
-      "pctAAMasked": 5.46,
+      "pctAAMasked": 6.79,
       "canvasPx": "65x61",
-      "realPx": "117x124",
+      "realPx": "117x88",
+      "convergesAt": null
+    },
+    {
+      "label": "menu/mui-proposed",
+      "status": "pass",
+      "pctAAMasked": 4.73,
+      "canvasPx": "82x53",
+      "realPx": "117x88",
+      "convergesAt": null
+    },
+    {
+      "label": "menu/chakra",
+      "status": "fail",
+      "pctAAMasked": 5.64,
+      "canvasPx": "76x46",
+      "realPx": "128x76",
       "convergesAt": null
     }
   ]

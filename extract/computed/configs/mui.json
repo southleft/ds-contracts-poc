@@ -321,15 +321,9 @@
             "disableRipple": true
           },
           "text": "My account"
-        },
-        {
-          "importName": "MenuItem",
-          "props": {
-            "disableRipple": true
-          },
-          "text": "Log out"
         }
-      ]
+      ],
+      "__note": "2026-09-02 (person's step for menu@1): the mount carries TWO items, the archetype's shape (menu@1 draws first/second), so a proposal read from this capture is scored against a reference of the same shape; the earlier three-item mount is what the hand row was named against."
     },
     {
       "name": "Dialog",

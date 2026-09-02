@@ -526,3 +526,18 @@ eleven do. The rows stay in the gate so the miss is measured, not excused.
     dialog/mui 6.73% (named) · menu/mui 5.46% (named)
 
     44 pass · 0 fringe · 17 known
+
+### 2026-09-02 — menu@1 gets a proposer
+
+The twelfth archetype with a proposer. MUI's config now mounts two items,
+the archetype's shape; the proposal reads the panel inset as paper plus
+list padding (8, where the hand table spelled 0) and scores 4.73%, passing
+where the hand row is a named 6.79% content mismatch. Chakra's Menu,
+captured the same day through a Portal composition, is held out at 5.64%:
+a named real defect — menu@1 has no panel minimum-width leaf (Chakra's
+content is 8rem wide) and refuses the panel shadow by name. Minted as menu
+v7 with five sources. See `f1-menu-proposed/`.
+
+    menu/mui-proposed 4.73% · menu/chakra 5.64% (named) · menu/mui 6.79% (named)
+
+    45 pass · 0 fringe · 18 known

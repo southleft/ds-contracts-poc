@@ -68,7 +68,11 @@
     },
     "menu/mui": {
       "class": "content-mismatch",
-      "cause": "5.46% at 65x61 vs 117x124 — the FIRST scored menu row (2026-09-02), the reference cropped to MuiMenu-paper's rendered rect. The hand fixture carries two items ('Item One', 'Item Two'); the capture mounts three ('Profile', 'My account', 'Log out' — configs/mui.json childrenSpec), so the paper is a third shorter and the item text differs. The archetype has no proposer yet; a proposer would read the items from the capture as the other eleven do."
+      "cause": "6.79% at 65x61 vs 117x88 — the hand row against the two-item capture (the person's config step of 2026-09-02; the first score, 5.46%, was against three items). Content mismatch: the hand table carries 'Item One' / 'Item Two' where the capture renders 'Profile' / 'My account', and its panel.padding is 0 where the list carries 8. The proposed row beside it reads both from the capture and passes."
+    },
+    "menu/chakra": {
+      "class": "real-defect",
+      "cause": "5.64% at 76x46 vs 128x76 — HELD OUT (Chakra Menu, captured 2026-09-02 through a Portal composition; 14 read, 0 invented; the legacy contract path quarantines the capture, the screenshot and rects were kept). The reference is cropped to chakra-menu__content, whose min-width is 8rem (128px) while the canvas panel hugs its two labels (76px): menu@1 carries no panel.minWidth leaf, and the panel's drop shadow is refused by name. Both are the archetype's, not the reader's; padding, radius, fill, item inset and label typography agree."
     }
   }
 }

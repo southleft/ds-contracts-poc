@@ -299,5 +299,227 @@
         "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
       }
     }
+  },
+  {
+    "library": "mui-proposed",
+    "archetype": "menu",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Menu"
+    },
+    "ledger": "extract/computed/out/mui/menu/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "panel.padding": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default root.padding-top ; extract/computed/out/mui/menu/captured-truth.json#__default idx:0.padding-top — the panel's padding-top plus the list's (MUI: 0 on the paper, 8 on the list)"
+      },
+      "panel.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default root.border-top-left-radius ; extract/computed/out/mui/menu/captured-truth.json#__default root.height — border-top-left-radius; a percentage is of the panel's height; clamped to half the height as CSS clamps it"
+      },
+      "panel.itemSpacing": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.row-gap — the list's row-gap (keywords read 0)"
+      },
+      "panel.fill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default root.background-color"
+      },
+      "item.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-left"
+      },
+      "item.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.padding-top"
+      },
+      "item.minHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.min-height — the item's min-height as a length; `auto`/0 means the item hugs its label and padding"
+      },
+      "item.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.background-color"
+      },
+      "labelFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.line-height — the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.line-height — `normal` → auto; a length → px"
+      },
+      "label": {
+        "fixture": "#000000de",
+        "proposed": "#000000de",
+        "verdict": "match",
+        "captured": "#000000de",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.color"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default idx:0.0.font-weight — label font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "chakra",
+    "archetype": "menu",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Menu"
+    },
+    "ledger": "extract/computed/out/chakra/menu/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "panel.padding": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.padding-top ; extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.padding-top — the panel's padding-top"
+      },
+      "panel.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.border-top-left-radius ; extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.height — border-top-left-radius; a percentage is of the panel's height; clamped to half the height as CSS clamps it"
+      },
+      "panel.itemSpacing": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.row-gap — the list's row-gap (keywords read 0)"
+      },
+      "panel.fill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.background-color"
+      },
+      "item.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.padding-left"
+      },
+      "item.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.padding-top"
+      },
+      "item.minHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.min-height — the item's min-height as a length; `auto`/0 means the item hugs its label and padding"
+      },
+      "item.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.background-color"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.line-height — the label's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.line-height — `normal` → auto; a length → px"
+      },
+      "label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.color"
+      },
+      "typography.label.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/chakra/menu/captured-truth.json#__default idx:0.0.font-weight — label font-weight → style word"
+      }
+    }
   }
 ]
