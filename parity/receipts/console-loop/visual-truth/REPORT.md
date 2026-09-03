@@ -2,7 +2,7 @@
 
 Source: `rest-images-api` (Figma REST renders at scale 1 — like-for-like with the bridge lane's scale-1 cell exports; no desktop app, no plugin bridge), scored under the one bar (`pctAAMasked <= 5` AND `compositionOk`) with the developed-score normalization policy. Written by `scripts/visual-truth-report.mjs`; regenerate with `npm run visual-truth:report`.
 
-generatedFrom: sha256:4c45dd40c83aa15e80509a959081a37be66991987d34cb587a60c30e665c167d (133 scorecards)
+generatedFrom: sha256:e823ee3b8d6b1e817a4134a6b252ffccb3e2bc98d8b51e49b179007ac0d308e7 (133 scorecards)
 
 ## Summary
 
@@ -58,6 +58,7 @@ generatedFrom: sha256:4c45dd40c83aa15e80509a959081a37be66991987d34cb587a60c30e66
 | altitude | link | 16.83% | true | fail |
 | altitude | badge | 16.70% | true | fail |
 | polaris | progress-bar | 14.97% | true | fail |
+| carbon | tabs | 14.77% | true | fail |
 | mui | breadcrumbs | 14.73% | true | fail |
 | carbon | modal | 14.63% | true | fail |
 | first-party | token | 14.62% | true | fail |
@@ -65,7 +66,6 @@ generatedFrom: sha256:4c45dd40c83aa15e80509a959081a37be66991987d34cb587a60c30e66
 | astryx | checkbox-input | 14.07% | true | fail |
 | mui | select | 11.74% | true | fail |
 | astryx | text-input | 11.43% | true | fail |
-| carbon | tabs | 11.05% | false | fail |
 | polaris | avatar | 10.71% | true | fail |
 | mui | tabs | 10.48% | false | fail |
 | astryx | banner | 10.43% | true | fail |
