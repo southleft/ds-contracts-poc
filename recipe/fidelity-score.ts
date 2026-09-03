@@ -78,6 +78,8 @@ export interface FidelityScorecard {
    * headline pctAAMasked is the mean of the two windows.
    */
   edgeWindows?: { k: number; left: number; right: number; canvasHeight: number; realHeight: number };
+  /** The second pass with the canvas's text boxes masked on both sides: geometry with the font's rasterisation removed. Evidence for a font-substrate naming, never the bar. */
+  glyphMasked?: { pctAAMasked: number | null; maskCoveragePct: number; textBoxes: number };
   /** Why a reader should not over-read this number. */
   caveats: string[];
 }
@@ -274,7 +276,7 @@ export function scoreFidelity(
   cropReferenceControl = false,
   cropCanvasControl = false,
   canvasBox: [number, number, number, number] | null = null,
-  opts: { widthNormalised?: boolean; referenceBox?: [number, number, number, number] } = {},
+  opts: { widthNormalised?: boolean; referenceBox?: [number, number, number, number]; glyphRects?: Array<{ x: number; y: number; width: number; height: number }> } = {},
 ): FidelityScorecard {
   if (/gate-shots/.test(referencePath)) {
     throw new Error(
@@ -292,6 +294,24 @@ export function scoreFidelity(
     cropReferenceControl ? cropLeadingControl(refPng) : refPng,
   );
   let score = scoreCell(aligned, [], []);
+  // GLYPH-MASKED pass: the canvas's text boxes (recorded by the exporter, in
+  // the shot's own coordinates) are masked on BOTH aligned sides — the same
+  // region, inflated — so the number that remains is the geometry the recipe
+  // is answerable for, with the font's rasterisation removed. It is evidence
+  // for a "font-substrate" naming, never the bar: the bar stays unmasked.
+  let glyphMasked: FidelityScorecard["glyphMasked"];
+  // Width-normalised rows are scored as two edge windows; the full-pair glyph
+  // pass would count the interior width the page owns, so it is not measured
+  // there (reported as unmeasured, never as a contradiction).
+  if (opts.glyphRects && !cropCanvasControl && !opts.widthNormalised) {
+    const rects = opts.glyphRects.map((r) => ({ x: r.x - (canvasBox ? canvasBox[0] : 0), y: r.y - (canvasBox ? canvasBox[1] : 0), width: r.width, height: r.height }));
+    const g = scoreCell(aligned, rects, []);
+    glyphMasked = {
+      pctAAMasked: g.pctAAMasked === null ? null : Math.round(g.pctAAMasked * 100) / 100,
+      maskCoveragePct: Math.round(g.maskCoveragePct * 100) / 100,
+      textBoxes: rects.length,
+    };
+  }
   let edgeWindows: FidelityScorecard["edgeWindows"];
   if (opts.widthNormalised) {
     const ew = scoreEdgeWindows(
@@ -350,6 +370,7 @@ export function scoreFidelity(
     canvasCroppedToControl: cropCanvasControl,
     thresholdSweep,
     ...(edgeWindows ? { edgeWindows } : {}),
+    ...(glyphMasked ? { glyphMasked } : {}),
     caveats: [
       ...(edgeWindows
         ? [

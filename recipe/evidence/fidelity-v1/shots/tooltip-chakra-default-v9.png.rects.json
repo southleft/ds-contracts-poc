@@ -1,0 +1,12 @@
+{
+  "origin": "the exported node's box (top-left = 0,0); render bounds when the export used absolute bounds",
+  "rects": [
+    {
+      "x": 10.5283203125,
+      "y": 6.8636322021484375,
+      "width": 194.32470703125,
+      "height": 11.590911865234375,
+      "characters": "Tooltip copy for the Chakra round."
+    }
+  ]
+}

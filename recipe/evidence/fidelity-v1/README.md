@@ -625,6 +625,34 @@ class: Figma-vs-Chromium glyph rasterisation of the library's face. No
 named row is a geometry the recipe gets wrong, a content the tables get
 wrong, or a paint the recipe refuses.
 
+### 2026-09-03 — the font claim is measured: a glyph-masked second pass
+
+A row named "font-substrate" is a claim: the residual is the library's
+face rasterised differently by Figma and Chromium, and nothing else. It is
+now measured. `recipe:fidelity:capture` records every TEXT node's box
+beside each shot (`<shot>.rects.json`, export-origin coordinates; all 65
+shots re-exported byte-identical), and `fidelity-score.ts` scores a
+SECOND pass with those boxes masked on both aligned sides — the cell
+scorer already carried that mask; the gate had passed none to hold the
+strict bar, and still does: the bar is unmasked. The check then refuses a
+font-substrate row that still fails with every glyph masked.
+
+What it found on the twelve named rows:
+
+    chip/carbon 8.56 → 0.93 · tooltip/chakra 8.83 → 2.27 · menu/chakra 5.64 → 0.67 · chip/astryx 5.07 → 0.00  (rasterisation, confirmed)
+    link/mui, link/altitude, link/mui-proposed, link/chakra — text-only cells: the boxes cover the cell; the font is the whole residual
+    alert/astryx — width-normalised; the pass is not measured in that mode (named as such)
+    chip/chakra 9.46 · tabs/mui 6.21 · tabs/mui-proposed 6.21 — NOT rasterisation
+
+The last three are renamed **font-metrics** with the measurement in the
+row: the Chakra chip hugs a label whose canvas text box is 19.42px against
+the ledger's 21.52px (advance width, propagated through the hug); the MUI
+tabs' labels are 1.3 / 0.5px narrower and their glyphs sit one pixel
+differently inside the 24px line box against the 2px indicator. A
+font-metrics row must carry a `measured` field or the gate refuses it.
+Tally unchanged, 53 · 0 · 12; what changed is that the twelve are measured
+rather than labelled.
+
 ### 2026-09-02 (late) — the paste verb, proven per row
 
 `recipe/plugin-target-proof.ts` emits every proposed row's plugin-target

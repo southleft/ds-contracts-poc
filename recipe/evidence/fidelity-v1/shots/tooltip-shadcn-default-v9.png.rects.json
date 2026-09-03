@@ -1,0 +1,12 @@
+{
+  "origin": "the exported node's box (top-left = 0,0); render bounds when the export used absolute bounds",
+  "rects": [
+    {
+      "x": 12.57958984375,
+      "y": 8.863632202148438,
+      "width": 193.1962890625,
+      "height": 11.590911865234375,
+      "characters": "Tooltip copy for the shadcn round."
+    }
+  ]
+}

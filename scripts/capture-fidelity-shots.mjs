@@ -123,7 +123,14 @@ if (!node) throw new Error("no child ${s.child}");` : ""}
 // (an anchored badge indicator sits partly above/right of its host). Off by
 // default so every other subject keeps the node-box export it was scored on.
 const bytes = await node.exportAsync({ format: "PNG", constraint: { type: "SCALE", value: 1 }${s.exportAbsoluteBounds ? ", useAbsoluteBounds: true" : ""} });
-return { id: node.id, w: Math.round(node.width), h: Math.round(node.height), bytes: Array.from(bytes) };
+// Every TEXT node's box, relative to the export's origin (the node's box, or
+// its render bounds when the export uses absolute bounds). The scorer's
+// glyph-masked pass whites these out on both sides: what remains is the
+// geometry the recipe is answerable for, with the font's rasterisation removed.
+const origin = ${s.exportAbsoluteBounds ? "node.absoluteRenderBounds" : "node.absoluteBoundingBox"} || node.absoluteBoundingBox;
+const texts = node.type === "TEXT" ? [node] : (typeof node.findAll === "function" ? node.findAll((n) => n.type === "TEXT" && n.visible !== false) : []);
+const rects = texts.map((t) => { const b = t.absoluteRenderBounds || t.absoluteBoundingBox; return { x: b.x - origin.x, y: b.y - origin.y, width: b.width, height: b.height, characters: t.characters }; });
+return { id: node.id, w: Math.round(node.width), h: Math.round(node.height), bytes: Array.from(bytes), rects };
 `;
   const res = await call("figma_execute", { code, fileKey: TARGET.fileKey, timeout: 60_000 });
   if (!res?.success || !res?.result?.bytes) {
@@ -134,7 +141,8 @@ return { id: node.id, w: Math.round(node.width), h: Math.round(node.height), byt
   const out = path.join(REPO, s.shot);
   mkdirSync(path.dirname(out), { recursive: true });
   writeFileSync(out, Buffer.from(res.result.bytes));
-  console.log(`✔ ${s.label.padEnd(20)} ${res.result.w}x${res.result.h}  → ${s.shot}`);
+  writeFileSync(`${out}.rects.json`, `${JSON.stringify({ origin: "the exported node's box (top-left = 0,0); render bounds when the export used absolute bounds", rects: res.result.rects ?? [] }, null, 2)}\n`);
+  console.log(`✔ ${s.label.padEnd(20)} ${res.result.w}x${res.result.h}  → ${s.shot} (${(res.result.rects ?? []).length} text box(es))`);
 }
 await client.close();
 if (failures > 0) process.exit(1);

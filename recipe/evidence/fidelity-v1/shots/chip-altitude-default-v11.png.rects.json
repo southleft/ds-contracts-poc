@@ -1,0 +1,12 @@
+{
+  "origin": "the exported node's box (top-left = 0,0); render bounds when the export used absolute bounds",
+  "rects": [
+    {
+      "x": 12.81201171875,
+      "y": 8.639999389648438,
+      "width": 26.7603759765625,
+      "height": 13.160003662109375,
+      "characters": "Chip"
+    }
+  ]
+}

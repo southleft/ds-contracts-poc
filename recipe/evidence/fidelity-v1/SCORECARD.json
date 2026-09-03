@@ -15,7 +15,9 @@
       "pctAAMasked": 0,
       "canvasPx": "22x22",
       "realPx": "22x22",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "checkbox/mui",
@@ -23,7 +25,9 @@
       "pctAAMasked": 0,
       "canvasPx": "18x18",
       "realPx": "18x18",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "checkbox/chakra",
@@ -31,7 +35,9 @@
       "pctAAMasked": 0,
       "canvasPx": "20x20",
       "realPx": "20x20",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "checkbox/shadcn",
@@ -39,7 +45,9 @@
       "pctAAMasked": 0,
       "canvasPx": "16x17",
       "realPx": "16x17",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "checkbox/antd",
@@ -47,7 +55,9 @@
       "pctAAMasked": 0,
       "canvasPx": "16x16",
       "realPx": "16x16",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "switch/astryx",
@@ -55,7 +65,9 @@
       "pctAAMasked": 0,
       "canvasPx": "40x24",
       "realPx": "40x24",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "switch/mui",
@@ -63,7 +75,9 @@
       "pctAAMasked": 4.57,
       "canvasPx": "35x19",
       "realPx": "38x19",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 4.57,
+      "glyphBoxes": 1
     },
     {
       "label": "switch/antd",
@@ -71,7 +85,9 @@
       "pctAAMasked": 0,
       "canvasPx": "44x24",
       "realPx": "44x24",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "switch/mui-proposed",
@@ -79,7 +95,9 @@
       "pctAAMasked": 4.57,
       "canvasPx": "35x19",
       "realPx": "38x19",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 4.57,
+      "glyphBoxes": 0
     },
     {
       "label": "switch/shadcn",
@@ -87,7 +105,9 @@
       "pctAAMasked": 0,
       "canvasPx": "32x19",
       "realPx": "32x19",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "switch/chakra",
@@ -95,7 +115,9 @@
       "pctAAMasked": 0,
       "canvasPx": "40x21",
       "realPx": "40x20",
-      "convergesAt": 245
+      "convergesAt": 245,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "radio/mui",
@@ -103,7 +125,9 @@
       "pctAAMasked": 3.75,
       "canvasPx": "20x20",
       "realPx": "20x20",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 3.75,
+      "glyphBoxes": 0
     },
     {
       "label": "radio/antd",
@@ -111,7 +135,9 @@
       "pctAAMasked": 0,
       "canvasPx": "16x16",
       "realPx": "16x16",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "radio/antd-proposed",
@@ -119,7 +145,9 @@
       "pctAAMasked": 0,
       "canvasPx": "16x16",
       "realPx": "16x16",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "radio/chakra",
@@ -127,7 +155,9 @@
       "pctAAMasked": 0,
       "canvasPx": "20x20",
       "realPx": "20x20",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
     },
     {
       "label": "alert/astryx",
@@ -183,7 +213,9 @@
       "pctAAMasked": 5.07,
       "canvasPx": "36x24",
       "realPx": "37x24",
-      "convergesAt": 230
+      "convergesAt": 230,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "chip/mui",
@@ -191,7 +223,9 @@
       "pctAAMasked": 0.61,
       "canvasPx": "51x32",
       "realPx": "50x32",
-      "convergesAt": 230
+      "convergesAt": 230,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "chip/antd",
@@ -199,7 +233,9 @@
       "pctAAMasked": 1.89,
       "canvasPx": "36x22",
       "realPx": "36x22",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "chip/altitude",
@@ -207,7 +243,9 @@
       "pctAAMasked": 0.07,
       "canvasPx": "53x28",
       "realPx": "52x28",
-      "convergesAt": 230
+      "convergesAt": 230,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "chip/mui-proposed",
@@ -215,7 +253,9 @@
       "pctAAMasked": 0.61,
       "canvasPx": "51x32",
       "realPx": "50x32",
-      "convergesAt": 230
+      "convergesAt": 230,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "chip/antd-proposed",
@@ -223,7 +263,9 @@
       "pctAAMasked": 1.89,
       "canvasPx": "36x22",
       "realPx": "36x22",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "chip/carbon",
@@ -231,7 +273,9 @@
       "pctAAMasked": 8.56,
       "canvasPx": "35x24",
       "realPx": "36x24",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 0.93,
+      "glyphBoxes": 1
     },
     {
       "label": "chip/chakra",
@@ -239,7 +283,9 @@
       "pctAAMasked": 8.09,
       "canvasPx": "33x20",
       "realPx": "34x20",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 9.46,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/mui",
@@ -247,7 +293,9 @@
       "pctAAMasked": 4,
       "canvasPx": "40x40",
       "realPx": "40x40",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/antd",
@@ -255,7 +303,9 @@
       "pctAAMasked": 2.73,
       "canvasPx": "32x32",
       "realPx": "32x32",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/mui-proposed",
@@ -263,7 +313,9 @@
       "pctAAMasked": 0,
       "canvasPx": "40x40",
       "realPx": "40x40",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/antd-proposed",
@@ -271,7 +323,9 @@
       "pctAAMasked": 0,
       "canvasPx": "32x32",
       "realPx": "32x32",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/altitude",
@@ -279,7 +333,9 @@
       "pctAAMasked": 0.38,
       "canvasPx": "40x40",
       "realPx": "40x40",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/shadcn",
@@ -287,7 +343,9 @@
       "pctAAMasked": 0.29,
       "canvasPx": "32x32",
       "realPx": "32x32",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/fluent",
@@ -295,7 +353,9 @@
       "pctAAMasked": 0,
       "canvasPx": "32x32",
       "realPx": "32x32",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "avatar/chakra",
@@ -303,7 +363,9 @@
       "pctAAMasked": 0.38,
       "canvasPx": "40x40",
       "realPx": "40x40",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "badge/mui",
@@ -311,7 +373,9 @@
       "pctAAMasked": 2.52,
       "canvasPx": "45x45",
       "realPx": "44x44",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 2.75,
+      "glyphBoxes": 1
     },
     {
       "label": "badge/antd",
@@ -319,7 +383,9 @@
       "pctAAMasked": 1.98,
       "canvasPx": "42x42",
       "realPx": "42x42",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 1.51,
+      "glyphBoxes": 1
     },
     {
       "label": "badge/mui-proposed",
@@ -327,7 +393,9 @@
       "pctAAMasked": 3.11,
       "canvasPx": "40x41",
       "realPx": "40x40",
-      "convergesAt": 230
+      "convergesAt": 230,
+      "glyphMasked": 2.98,
+      "glyphBoxes": 1
     },
     {
       "label": "badge/antd-proposed",
@@ -335,7 +403,9 @@
       "pctAAMasked": 1.98,
       "canvasPx": "42x42",
       "realPx": "42x42",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 1.51,
+      "glyphBoxes": 1
     },
     {
       "label": "link/mui",
@@ -343,7 +413,9 @@
       "pctAAMasked": 49.08,
       "canvasPx": "26x13",
       "realPx": "31x14",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": null,
+      "glyphBoxes": 1
     },
     {
       "label": "link/altitude",
@@ -351,7 +423,9 @@
       "pctAAMasked": 5.56,
       "canvasPx": "30x15",
       "realPx": "30x15",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": null,
+      "glyphBoxes": 1
     },
     {
       "label": "link/mui-proposed",
@@ -359,7 +433,9 @@
       "pctAAMasked": 20.22,
       "canvasPx": "31x15",
       "realPx": "31x14",
-      "convergesAt": 240
+      "convergesAt": 240,
+      "glyphMasked": null,
+      "glyphBoxes": 1
     },
     {
       "label": "link/chakra",
@@ -367,7 +443,9 @@
       "pctAAMasked": 10.26,
       "canvasPx": "30x12",
       "realPx": "30x13",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": null,
+      "glyphBoxes": 1
     },
     {
       "label": "tabs/mui",
@@ -375,7 +453,9 @@
       "pctAAMasked": 7.73,
       "canvasPx": "184x30",
       "realPx": "183x31",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 6.21,
+      "glyphBoxes": 2
     },
     {
       "label": "tabs/mui-proposed",
@@ -383,7 +463,9 @@
       "pctAAMasked": 7.73,
       "canvasPx": "184x30",
       "realPx": "183x31",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 6.21,
+      "glyphBoxes": 2
     },
     {
       "label": "tabs/carbon",
@@ -391,7 +473,9 @@
       "pctAAMasked": 3.87,
       "canvasPx": "175x26",
       "realPx": "175x26",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0.08,
+      "glyphBoxes": 2
     },
     {
       "label": "tooltip/antd",
@@ -399,7 +483,9 @@
       "pctAAMasked": 3.01,
       "canvasPx": "86x34",
       "realPx": "86x34",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "tooltip/antd-proposed",
@@ -407,7 +493,9 @@
       "pctAAMasked": 3.01,
       "canvasPx": "86x34",
       "realPx": "86x34",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "tooltip/shadcn",
@@ -415,7 +503,9 @@
       "pctAAMasked": 4.73,
       "canvasPx": "219x28",
       "realPx": "219x28",
-      "convergesAt": 250
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 1
     },
     {
       "label": "tooltip/chakra",
@@ -423,7 +513,9 @@
       "pctAAMasked": 8.83,
       "canvasPx": "216x24",
       "realPx": "218x24",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 2.27,
+      "glyphBoxes": 1
     },
     {
       "label": "textarea/astryx",
@@ -487,7 +579,9 @@
       "pctAAMasked": 4.81,
       "canvasPx": "95x45",
       "realPx": "346x108",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 3.37,
+      "glyphBoxes": 2
     },
     {
       "label": "dialog/mui-proposed",
@@ -495,7 +589,9 @@
       "pctAAMasked": 4.92,
       "canvasPx": "289x61",
       "realPx": "346x108",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 0.7,
+      "glyphBoxes": 2
     },
     {
       "label": "dialog/chakra",
@@ -503,7 +599,9 @@
       "pctAAMasked": 2.57,
       "canvasPx": "271x63",
       "realPx": "512x120",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 0.85,
+      "glyphBoxes": 2
     },
     {
       "label": "menu/mui",
@@ -511,7 +609,9 @@
       "pctAAMasked": 4.73,
       "canvasPx": "82x53",
       "realPx": "117x88",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 0.99,
+      "glyphBoxes": 2
     },
     {
       "label": "menu/mui-proposed",
@@ -519,7 +619,9 @@
       "pctAAMasked": 4.73,
       "canvasPx": "82x53",
       "realPx": "117x88",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 0.99,
+      "glyphBoxes": 2
     },
     {
       "label": "menu/chakra",
@@ -527,7 +629,9 @@
       "pctAAMasked": 5.64,
       "canvasPx": "76x46",
       "realPx": "128x76",
-      "convergesAt": null
+      "convergesAt": null,
+      "glyphMasked": 0.67,
+      "glyphBoxes": 2
     }
   ]
 }

@@ -51,7 +51,7 @@ measured cause.
 | menu | yes | Chakra | 5.64% named (font rasterisation; geometry matches after the panel min-width leaf) | supported, named row |
 | dialog | yes | Chakra | 2.57% | supported |
 
-Fidelity gate 53 pass · 0 fringe · 12 named (updated 2026-09-03: every remaining named row is Figma-vs-Chromium glyph rasterisation; the textarea, menu and tabs rows all closed). The plugin's paste verb was
+Fidelity gate 53 pass · 0 fringe · 12 named (updated 2026-09-03: every remaining named row is the font substrate, measured with a glyph-masked second pass — nine rasterisation, three advance-width/line-box metrics; the textarea, menu and tabs rows all closed). The plugin's paste verb was
 exercised by the owner on 2026-09-02 (`recipe/evidence/pointed/switch-chakra/paste-verb-exercised.json`).
 The same evening every proposed row's plugin-target program was run the way the
 plugin runs it and scored against the same reference as its gate row: 39 rows,

@@ -92,10 +92,15 @@ export interface FidelityRun {
     canvasPx: string;
     realPx: string;
     convergesAt: number | null;
+    /** The glyph-masked pass (present when the shot carries its text boxes): geometry with the font's rasterisation removed. */
+    glyphMasked?: number | null;
+    glyphBoxes?: number;
   }>;
 }
 
-export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; known: Record<string, { cause: string; class: string }> } {
+const manifestSubject = (label: string): Subject | undefined => (JSON.parse(readFileSync(MANIFEST, "utf8")) as { subjects: Subject[] }).subjects.find((s) => s.label === label);
+
+export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; known: Record<string, { cause: string; class: string; measured?: string }> } {
   const manifest = JSON.parse(readFileSync(MANIFEST, "utf8")) as { subjects: Subject[] };
   const cards: FidelityScorecard[] = [];
   const rows: FidelityRun["rows"] = [];
@@ -106,6 +111,10 @@ export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; k
         throw new Error(`${s.label}: missing ${p} — run npm run recipe:fidelity:capture`);
       }
     }
+    const rectsPath = path.join(REPO, `${s.shot}.rects.json`);
+    const glyphRects = existsSync(rectsPath)
+      ? (JSON.parse(readFileSync(rectsPath, "utf8")) as { rects: Array<{ x: number; y: number; width: number; height: number }> }).rects
+      : undefined;
     const card = scoreFidelity(
       path.join(REPO, s.shot),
       path.join(REPO, s.reference),
@@ -114,7 +123,7 @@ export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; k
       s.referenceControlOnly === true,
       s.canvasControlOnly === true,
       s.canvasBox ?? null,
-      { widthNormalised: s.widthNormalised === true, ...(s.referenceCrop ? { referenceBox: referenceCropBox(path.join(REPO, s.reference), s.referenceCrop, s.label) } : {}) },
+      { widthNormalised: s.widthNormalised === true, ...(s.referenceCrop ? { referenceBox: referenceCropBox(path.join(REPO, s.reference), s.referenceCrop, s.label) } : {}), ...(glyphRects ? { glyphRects } : {}) },
     );
     cards.push(card);
 
@@ -132,6 +141,7 @@ export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; k
       canvasPx: card.metrics.canvasPx,
       realPx: card.metrics.realPx,
       convergesAt: converged ? converged.threshold : null,
+      ...(card.glyphMasked ? { glyphMasked: card.glyphMasked.pctAAMasked, glyphBoxes: card.glyphMasked.textBoxes } : {}),
     });
   }
 
@@ -146,7 +156,7 @@ export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; k
     rows,
   };
   const known = existsSync(KNOWN)
-    ? (JSON.parse(readFileSync(KNOWN, "utf8")) as { failures: Record<string, { cause: string; class: string }> }).failures
+    ? (JSON.parse(readFileSync(KNOWN, "utf8")) as { failures: Record<string, { cause: string; class: string; measured?: string }> }).failures
     : {};
   run.knownFailures = rows.filter((r) => r.status === "fail" && known[r.label] !== undefined).length;
   return { run, cards, known };
@@ -160,8 +170,9 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
       r.status === "fringe"
         ? ` — AA fringe only, ink boxes agree at threshold ${r.convergesAt}`
         : "";
+    const glyph = r.glyphMasked !== undefined && r.glyphMasked !== null ? `  glyph-masked ${String(r.glyphMasked).padStart(5)}% (${r.glyphBoxes} text box${r.glyphBoxes === 1 ? "" : "es"})` : "";
     console.log(
-      `${r.status.toUpperCase().padEnd(6)} ${r.label.padEnd(20)} ${String(r.pctAAMasked).padStart(6)}%  canvas ${r.canvasPx.padEnd(8)} real ${r.realPx}${tail}`,
+      `${r.status.toUpperCase().padEnd(6)} ${r.label.padEnd(20)} ${String(r.pctAAMasked).padStart(6)}%  canvas ${r.canvasPx.padEnd(8)} real ${r.realPx}${tail}${glyph}`,
     );
   }
   console.log(
@@ -175,6 +186,32 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
   });
   for (const r of failing.filter((r) => known[r.label] !== undefined)) {
     console.log(`  known  ${r.label.padEnd(20)} [${known[r.label]!.class}] ${known[r.label]!.cause}`);
+  }
+  // A "font-substrate" naming is a CLAIM that the residual is the font's
+  // rasterisation and nothing else. With the canvas's text boxes masked on
+  // both sides, such a row must pass the bar; one that does not is
+  // misclassified, and the gate says so rather than carrying the label.
+  const fontRows = failing.filter((r) => known[r.label]?.class === "font-substrate");
+  const contradicted = fontRows.filter((r) => r.glyphMasked !== undefined && r.glyphMasked !== null && r.glyphMasked > FIDELITY_BAR.pctAAMaskedMax);
+  for (const r of fontRows) {
+    if (r.glyphMasked === null && (r.glyphBoxes ?? 0) > 0) console.log(`  · ${r.label}: the text boxes cover the whole cell — a text-only row; the font is the whole residual`);
+    else if (r.glyphMasked === undefined) {
+      const subject = manifestSubject(r.label);
+      if (subject?.widthNormalised) console.log(`  · ${r.label}: width-normalised — the glyph-masked pass is not measured in that mode`);
+      else console.log(`  ⚠ ${r.label}: named font-substrate but its shot carries no text boxes — the claim is unmeasured (re-export with recipe:fidelity:capture)`);
+    }
+  }
+  // "font-metrics" names a residual the text mask cannot isolate — a hug
+  // width that follows the font's advance, a glyph's placement inside its
+  // line box against a neighbour — and must carry the measurement in the row.
+  for (const r of failing.filter((r) => known[r.label]?.class === "font-metrics")) {
+    if (!known[r.label]!.measured) { console.error(`\n✖ recipe:fidelity:check — ${r.label} is named font-metrics without a \`measured\` field`); process.exit(1); }
+    console.log(`  · ${r.label}: font-metrics, measured: ${known[r.label]!.measured}`);
+  }
+  if (contradicted.length > 0) {
+    console.error(`\n✖ recipe:fidelity:check — ${contradicted.length} row(s) named font-substrate still fail with every glyph masked: ${contradicted.map((r) => `${r.label} ${r.glyphMasked}%`).join(", ")}`);
+    console.error("  The residual is not the font. Re-measure the cause and rename the row.");
+    process.exit(1);
   }
   if (unnamed.length > 0) {
     console.error(`\n✖ recipe:fidelity:check — ${unnamed.length} subject(s) fail and are NOT named in KNOWN-FAILURES.json: ${unnamed.map((r) => r.label).join(", ")}`);

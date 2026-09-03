@@ -1,0 +1,19 @@
+{
+  "origin": "the exported node's box (top-left = 0,0); render bounds when the export used absolute bounds",
+  "rects": [
+    {
+      "x": 25.291259765625,
+      "y": 31.276275634765625,
+      "width": 91.315185546875,
+      "height": 17.610092163085938,
+      "characters": "Dialog title"
+    },
+    {
+      "x": 25.23291015625,
+      "y": 80.34091186523438,
+      "width": 270.188720703125,
+      "height": 13.681808471679688,
+      "characters": "Dialog body copy for the molecule round."
+    }
+  ]
+}

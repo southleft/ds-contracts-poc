@@ -1,5 +1,5 @@
 {
-  "_marker": "KNOWN FAILURES \u2014 a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
+  "_marker": "KNOWN FAILURES \u2014 a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry. font-metrics = a residual the text mask cannot isolate (a hug width that follows the font's advance, a glyph's placement inside its line box against a neighbour); such a row MUST carry a `measured` field with the recorded text boxes against the ledger's widths. Since 2026-09-03 every shot carries `<shot>.rects.json` (its text boxes) and the check scores a second, glyph-masked pass: a font-substrate row must pass it (or be a text-only cell), and one that does not is refused, not carried.",
   "recorded": "2026-09-02 (revised after the Chakra held-outs: chip/chakra named font-substrate; avatar/chakra passes at 0.38%)",
   "failures": {
     "alert/astryx": {
@@ -15,8 +15,9 @@
       "cause": "49.08%. Both sides render 'Link' in a serif fallback (MUI Link variant=inherit inherits the unstyled stage); 26x13 vs 31x14 is fallback-font metrics on both renderers, not geometry the recipe decided."
     },
     "tabs/mui": {
-      "class": "font-substrate",
-      "cause": "7.73% (tabs v6; was 14.73% \u2192 18.07% \u2192 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge \u2014 no geometry the recipe decided."
+      "class": "font-metrics",
+      "cause": "7.73% (tabs v6; was 14.73% \u2192 18.07% \u2192 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge \u2014 no geometry the recipe decided.",
+      "measured": "glyph-masked 6.21% at 184x30 vs 183x31 \u2014 canvas label boxes 70.3 / 63.3px (export rects) against ledger tab widths 103.56 / 95.83 minus 32px padding = 71.56 / 63.83 (advance width, 1.3px + 0.5px); the 1px of ink height is the glyphs' placement inside the 24px line box against the 2px indicator, which the text mask cannot isolate."
     },
     "chip/carbon": {
       "class": "font-substrate",
@@ -31,12 +32,14 @@
       "cause": "20.22% at 31x15 vs 31x14 \u2014 proposed from MUI's own capture (14 read, 0 invented). The capture's computed face is 'Times' (Link mounted without a Typography provider); the proposal carries it as a reviewed fallback to Figma's 'Times New Roman', which is why it scores 20% where the hand row's Roboto pin scores 49%. What remains is the two serifs' rasterisation and the underline row."
     },
     "tabs/mui-proposed": {
-      "class": "font-substrate",
-      "cause": "7.73% at 184x30 vs 183x31 \u2014 proposed from MUI's own capture (25 leaves read, 0 invented) and identical to the hand row tabs/mui to the hundredth: the same two uppercase Roboto Medium labels rasterised by Figma versus Chromium, the indicator and geometry agreeing."
+      "class": "font-metrics",
+      "cause": "7.73% at 184x30 vs 183x31 \u2014 proposed from MUI's own capture (25 leaves read, 0 invented) and identical to the hand row tabs/mui to the hundredth: the same two uppercase Roboto Medium labels rasterised by Figma versus Chromium, the indicator and geometry agreeing.",
+      "measured": "glyph-masked 6.21% at 184x30 vs 183x31 \u2014 canvas label boxes 70.3 / 63.3px (export rects) against ledger tab widths 103.56 / 95.83 minus 32px padding = 71.56 / 63.83 (advance width, 1.3px + 0.5px); the 1px of ink height is the glyphs' placement inside the 24px line box against the 2px indicator, which the text mask cannot isolate."
     },
     "chip/chakra": {
-      "class": "font-substrate",
-      "cause": "8.09% at 33x20 vs 34x20 \u2014 HELD-OUT proposal (Chakra Tag captured 2026-09-02 from a config entry a person wrote; 13 leaves read, 0 invented). The tag's 1px ring is a zero-offset zero-blur INSET box-shadow, now lowered as an inside border whose spread comes out of the padding (the ring paints; geometry agrees to the half-pixel: 33.5 real). What remains is the three glyphs of 'Tag' in Inter Regular 12px rasterised by Figma versus Chromium \u2014 the same residual as chip/carbon and chip/astryx."
+      "class": "font-metrics",
+      "cause": "8.09% at 33x20 vs 34x20 \u2014 HELD-OUT proposal (Chakra Tag captured 2026-09-02 from a config entry a person wrote; 13 leaves read, 0 invented). The tag's 1px ring is a zero-offset zero-blur INSET box-shadow, now lowered as an inside border whose spread comes out of the padding (the ring paints; geometry agrees to the half-pixel: 33.5 real). What remains is the three glyphs of 'Tag' in Inter Regular 12px rasterised by Figma versus Chromium \u2014 the same residual as chip/carbon and chip/astryx.",
+      "measured": "glyph-masked 9.46% at 33x20 vs 34x20 \u2014 the text mask (inflated 4px) leaves only the chip's edges, and the canvas chip hugs a narrower label: canvas 'Tag' text box 19.42px wide (export rects) against the ledger label part 21.52px (root 33.52px); the 1px of ink width is the font's advance width propagated through the hug."
     },
     "tooltip/chakra": {
       "class": "font-substrate",
