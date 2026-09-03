@@ -25,7 +25,9 @@ import {
 
 export const TABS_FIGMA_NAMESPACE = "ds.contracts.tabs.recipe.v1";
 export const TABS_FIGMA_WRITER_VERSION = 1;
-export const TABS_FIGMA_RUN_SUFFIX = "tabs-v16";
+export const TABS_FIGMA_RUN_SUFFIX = "tabs-v17";
+/** v16 stay (tabs@1 gains indicator.restFill: the rest tab's underline read from its bottom border (Carbon 2px #e0e0e0); transparent compiles no node) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V16_PAGE_ID = "235:97391";
 /** v15 stay (the tab frame's layout is vertical: verticalAlign now drives its primary axis and contentAlign the counter axis (v15 had them crossed)) is preserved as evidence and never written again. */
 export const FORBIDDEN_TABS_V15_PAGE_ID = "235:97275";
 /** v14 stay (tabs@1 gains tab.verticalAlign (align-items center, or a <button> whose content the UA centres): Carbon's label sits centred in its 40px tab; v14 placed it at the top) is preserved as evidence and never written again. */
@@ -284,6 +286,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "235:97391", "marker": "TABS-V16-PAGE" },
     { "id": "235:97275", "marker": "TABS-V15-PAGE" },
     { "id": "235:97110", "marker": "TABS-V14-PAGE" },
     { "id": "218:91353", "marker": "TABS-V13-PAGE" },

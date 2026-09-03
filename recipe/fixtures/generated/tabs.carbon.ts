@@ -26,6 +26,7 @@ const VALUES: Record<string, number | string> = {
   "tab.minWidth": 0, // ledger extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-width
   "tab.minHeight": 40, // ledger extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.min-height | extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.height
   "tab.fill": "#00000000", // ledger extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.background-color
+  "indicator.restFill": "#e0e0e0ff", // ledger extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.border-bottom-width | extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.border-bottom-color
   "indicator.height": 2, // ledger extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.border-bottom-width
   "indicator.radius": 0, // archetype spelling: a border has no radius of its own — 0
   "indicator.opacity": 1, // archetype spelling: a border paints at the tab's opacity — 1

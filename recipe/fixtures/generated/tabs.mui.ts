@@ -24,6 +24,7 @@ const VALUES: Record<string, number | string> = {
   "tab.minWidth": 90, // ledger extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-width
   "tab.minHeight": 48, // ledger extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.min-height | extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.height
   "tab.fill": "#00000000", // ledger extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.background-color
+  "indicator.restFill": "#00000000", // archetype spelling: a distinct indicator part belongs to the selected tab; the rest tab paints no underline of its own
   "indicator.height": 2, // ledger extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.height
   "indicator.radius": 0, // ledger extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.border-top-left-radius
   "indicator.opacity": 1, // ledger extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.1.opacity

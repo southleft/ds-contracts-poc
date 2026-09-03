@@ -121,6 +121,7 @@ const astryxTokens = cloneTokens("astryx.tabs", (path, fallback) => {
   if (path === "indicator.radius") return 9999;
   if (path === "indicator.opacity") return 1;
   if (path === "indicator.fill") return "#0064e0ff";
+  if (path === "indicator.restFill") return "#00000000"; // no capture lane; Astryx rest tabs paint no underline in the reviewed source — transparent compiles no node
   // Tab.tsx styles.indicator: position absolute; bottom -1px; left/right --spacing-3 12
   if (path === "indicator.insetX") return 12;
   if (path === "indicator.offsetY") return -1;
@@ -151,6 +152,7 @@ const muiTokens = cloneTokens("mui.tabs", (path, fallback) => {
   if (path === "indicator.radius") return 0;
   if (path === "indicator.opacity") return 1;
   if (path === "indicator.fill") return "#1976d2ff";
+  if (path === "indicator.restFill") return "#00000000"; // MuiTab-root has no border; the ink bar belongs to the selected tab only — transparent compiles no node
   // ledger MuiTabs-indicator: position absolute, left 0px, bottom 0px, width = tab width
   if (path === "indicator.insetX") return 0;
   if (path === "indicator.offsetY") return 0;
@@ -179,6 +181,7 @@ const antdTokens = cloneTokens("antd.tabs", (path, fallback) => {
   if (path === "indicator.radius") return 0;
   if (path === "indicator.opacity") return 1;
   if (path === "indicator.fill") return "#1677ffff";
+  if (path === "indicator.restFill") return "#00000000"; // .ant-tabs-tab has no border; the nav's ::before track line is not a per-tab underline and is not carried — transparent compiles no node
   // antd/es/tabs/style ink-bar: position absolute; bottom 0; left/width follow the active tab
   if (path === "indicator.insetX") return 0;
   if (path === "indicator.offsetY") return 0;

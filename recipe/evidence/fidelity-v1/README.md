@@ -608,6 +608,23 @@ cause; a rest-tab underline leaf would close it. Tally 52 pass · 0 fringe
 drops 37,271 → 34,729; span-fallback 32 → 30) and the corpus ledger names
 the five tabs promotions it no longer re-derives.
 
+### 2026-09-03 — the rest tab's underline; Carbon's tabs pass; every named row is now glyph rasterisation
+
+tabs@1 gains `indicator.restFill`: the rest tab's underline, drawn like the
+indicator when the library paints one and compiling no node when it does
+not. A border indicator reads it from the rest tab's bottom border (Carbon:
+2px `#e0e0e0`); a distinct indicator part spells it transparent (MUI, AntD:
+the rest tab has no border of its own). Collapse reads it back from the
+rest item's second child when present. tabs v17 (235:97556):
+
+    tabs/carbon 3.87% at 175x26 vs 175x26 — PASS (held out; was 13.12%, and 9.57% against the wrong reference)
+    tabs/mui 7.73% · tabs/mui-proposed 7.73% (font, unchanged)
+
+**53 pass · 0 fringe · 12 known**, and all twelve named rows are the same
+class: Figma-vs-Chromium glyph rasterisation of the library's face. No
+named row is a geometry the recipe gets wrong, a content the tables get
+wrong, or a paint the recipe refuses.
+
 ### 2026-09-02 (late) — the paste verb, proven per row
 
 `recipe/plugin-target-proof.ts` emits every proposed row's plugin-target
@@ -645,4 +662,4 @@ Minted as dialog v7 with five sources. See `f1-dialog-proposed/`.
 
     dialog/mui-proposed 4.92% · dialog/chakra 2.57% · dialog/mui 4.81% (closed)
 
-    52 pass · 0 fringe · 13 known
+    53 pass · 0 fringe · 12 known

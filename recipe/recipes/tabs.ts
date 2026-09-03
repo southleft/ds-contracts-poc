@@ -94,6 +94,8 @@ export interface TabsRecipeInstance {
       radius: TabsNumberParameter;
       opacity: TabsNumberParameter;
       fill: TabsColorParameter;
+      /** The REST tab's underline, drawn like the indicator; transparent when the library paints none (MUI, AntD), Carbon's 2px #e0e0e0 border-block-end otherwise. */
+      restFill: TabsColorParameter;
       /** Horizontal inset from each edge of the selected tab (MUI 0: width 100%; Astryx 12: left/right --spacing-3). */
       insetX: TabsNumberParameter;
       /** Distance of the indicator's bottom edge from the tab's bottom edge; negative hangs below (Astryx bottom -1). */
@@ -184,6 +186,7 @@ export const TabsRecipeInstanceSchema = z.strictObject({
       radius: NumberParameterSchema,
       opacity: NumberParameterSchema,
       fill: ColorParameterSchema,
+      restFill: ColorParameterSchema,
       insetX: NumberParameterSchema,
       offsetY: NumberParameterSchema,
     }),
@@ -311,7 +314,9 @@ const labelNode = (
   };
 };
 
-const indicatorNode = (instance: TabsRecipeInstance): FrameNode => ({
+const paintsInk = (hex8: string): boolean => !/00$/i.test(hex8);
+
+const indicatorNode = (instance: TabsRecipeInstance, which: "selected" | "rest" = "selected"): FrameNode => ({
   kind: "frame",
   role: "tabs/indicator",
   label: "tabs/indicator",
@@ -343,11 +348,11 @@ const indicatorNode = (instance: TabsRecipeInstance): FrameNode => ({
       y: instance.tokens.indicator.offsetY.fallback,
     },
   },
-  fills: [solid(instance.tokens.indicator.fill.fallback)],
+  fills: [solid((which === "selected" ? instance.tokens.indicator.fill : instance.tokens.indicator.restFill).fallback)],
   cornerRadius: corners(instance.tokens.indicator.radius.fallback),
   bindings: [
     bind("layout.height.value", instance.tokens.indicator.height),
-    bind("fills.0.color", instance.tokens.indicator.fill),
+    bind("fills.0.color", which === "selected" ? instance.tokens.indicator.fill : instance.tokens.indicator.restFill),
     bind("cornerRadius.topLeft", instance.tokens.indicator.radius),
     bind("cornerRadius.topRight", instance.tokens.indicator.radius),
     bind("cornerRadius.bottomRight", instance.tokens.indicator.radius),
@@ -418,7 +423,12 @@ const itemNode = (
             labelNode(instance, "selected", instance.content.selected),
             indicatorNode(instance),
           ]
-        : [labelNode(instance, "rest", instance.content.rest)],
+        : [
+            labelNode(instance, "rest", instance.content.rest),
+            // The rest tab's underline only when the library paints one
+            // (a transparent restFill compiles no node — MUI, AntD, Astryx).
+            ...(paintsInk(instance.tokens.indicator.restFill.fallback) ? [indicatorNode(instance, "rest")] : []),
+          ],
   };
 };
 
@@ -565,9 +575,9 @@ export function validateTabsStructure(root: IRNode): void {
     throw new RecipeRefusal(TABS_RECIPE_REF, [
       "selected item binds the indicator as its last child — overlay ink-bar offsets are not invented",
     ]);
-  if (rest.children.length !== 1)
+  if (rest.children.length !== 1 && rest.children.length !== 2)
     throw new RecipeRefusal(TABS_RECIPE_REF, [
-      "rest item is label-only; the indicator stays on the selected child",
+      "rest item is the label, plus its underline only when the library paints one",
     ]);
   const indicator = direct(selected, "tabs/indicator", "frame");
   if (indicator.layout.width.mode !== "fill")
@@ -641,6 +651,7 @@ export function collapseTabsRecipe(
   const variant = defaultCell(envelope.ir);
   const selected = direct(variant, "tabs/item/selected", "frame");
   const rest = direct(variant, "tabs/item/rest", "frame");
+  const restIndicator = rest.children.length === 2 ? direct(rest, "tabs/indicator", "frame") : null;
   const selectedLabel = direct(selected, "tabs/label", "text");
   const restLabel = direct(rest, "tabs/label", "text");
   const indicator = direct(selected, "tabs/indicator", "frame");
@@ -730,6 +741,9 @@ export function collapseTabsRecipe(
           "fills.0.color",
           solidColor(indicator.fills[0], indicator.role!),
         ),
+        restFill: restIndicator
+          ? colorFrom(restIndicator, "fills.0.color", solidColor(restIndicator.fills[0], restIndicator.role!))
+          : { variable: `${envelope.id}.indicator-restFill`, fallback: "#00000000" },
         // Literal facts (no variable binding on an offset — see indicatorNode).
         insetX: {
           variable: `${envelope.id}.indicator-insetX`,

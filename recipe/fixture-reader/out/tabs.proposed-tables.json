@@ -136,6 +136,12 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
       },
+      "indicator.restFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
       "labelLetterSpacing": {
         "fixture": 0,
         "proposed": 0,
@@ -241,6 +247,12 @@
         "verdict": "match",
         "captured": "center",
         "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.align-items ; extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default idx:0.0.0.@tag — align-items center → center; a <button> tab → center (the UA centres a button's content on the cross axis, with no stylesheet channel saying so — Carbon); else start"
+      },
+      "indicator.restFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a distinct indicator part belongs to the selected tab; the rest tab paints no underline of its own [reviewed #00000000]"
       },
       "indicator.height": {
         "fixture": 2,
@@ -436,6 +448,13 @@
         "verdict": "match",
         "captured": "center",
         "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.align-items ; extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.@tag — align-items center → center; a <button> tab → center (the UA centres a button's content on the cross axis, with no stylesheet channel saying so — Carbon); else start"
+      },
+      "indicator.restFill": {
+        "fixture": "#e0e0e0ff",
+        "proposed": "#e0e0e0ff",
+        "verdict": "match",
+        "captured": "#e0e0e0ff",
+        "provenance": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.border-bottom-width ; extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.border-bottom-color — the rest tab's bottom border when it has width (Carbon: 2px #e0e0e0), else transparent (no underline)"
       },
       "indicator.height": {
         "fixture": 2,
@@ -707,6 +726,12 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: MuiTab-root align-items center — recipe spelling of the flex centring on the cross axis [reviewed center]"
       },
+      "indicator.restFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: MuiTab-root has no border; the ink bar is the selected tab's — transparent, no node [reviewed #00000000]"
+      },
       "labelLetterSpacing": {
         "fixture": 0.4,
         "proposed": 0.4,
@@ -880,6 +905,12 @@
       "tab.verticalAlign": {
         "fixture": "center",
         "proposed": "center",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "indicator.restFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
         "verdict": "receipt",
         "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
       },

@@ -31,6 +31,7 @@ const LEAVES = [
   "textCase",
   "tab.contentAlign",
   "tab.verticalAlign",
+  "indicator.restFill",
   "labelLetterSpacing",
   "typography.rest.family",
   "typography.rest.style",
@@ -96,6 +97,7 @@ export const muiTabsMappings: FactMapping[] = [
   receipt("textCase", "Tab label text-transform uppercase — recipe spelling", "reviewed upper"),
   receipt("tab.contentAlign", "MuiTab-root justify-content center / align-items center — recipe spelling of the flex centring", "reviewed center"),
   receipt("tab.verticalAlign", "MuiTab-root align-items center — recipe spelling of the flex centring on the cross axis", "reviewed center"),
+  receipt("indicator.restFill", "MuiTab-root has no border; the ink bar is the selected tab's — transparent, no node", "reviewed #00000000"),
   {
     path: "labelLetterSpacing",
     kind: "px",

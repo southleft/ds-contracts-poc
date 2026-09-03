@@ -5,7 +5,7 @@
  * bottom border (Carbon). A library with neither refuses by name.
  */
 import type { FactMapping } from "./reader.js";
-import { num, px } from "./ledger.js";
+import { hex8, num, px } from "./ledger.js";
 import { firstFam, styleForWeight } from "./mappings-util.js";
 
 export interface TabsRoles {
@@ -34,6 +34,10 @@ export const TABS_SPELLINGS: Record<string, Spelling> = {
   "indicator.opacity": 1,
   "indicator.insetX": 0,
   "indicator.offsetY": 0,
+  // With a distinct indicator part the rest tab paints no underline of its own:
+  // transparent compiles no node (the mapping is a receipt then; a border
+  // indicator READS the rest tab's bottom border instead).
+  "indicator.restFill": "#00000000",
 };
 
 const one = (
@@ -80,6 +84,17 @@ export function tabsSchemaMappings(roles: TabsRoles, opts: TabsSchemaOptions): F
       formula: "align-items center → center; a <button> tab → center (the UA centres a button's content on the cross axis, with no stylesheet channel saying so — Carbon); else start",
       combine: (raw) => (raw.ai === "center" || raw.tag === "button" ? "center" : "start"),
     })),
+    R("indicator.restFill", () =>
+      roles.indicatorIsBorder
+        ? {
+            path: "indicator.restFill",
+            kind: "color",
+            reads: { w: { combo, part: rest, channel: "border-bottom-width" }, c: { combo, part: rest, channel: "border-bottom-color" } },
+            formula: "the rest tab's bottom border when it has width (Carbon: 2px #e0e0e0), else transparent (no underline)",
+            combine: (raw) => (px(raw.w!) > 0 ? hex8(raw.c!) : "#00000000"),
+          }
+        : receipt("indicator.restFill", "a distinct indicator part belongs to the selected tab; the rest tab paints no underline of its own", "reviewed #00000000"),
+    ),
     ind("indicator.height", "px", "height", "border-bottom-width", "the indicator is the selected tab's bottom border: its width is the indicator height"),
     ind("indicator.radius", "px", "border-top-left-radius", 0, "a border has no radius of its own — 0"),
     ind("indicator.opacity", "number", "opacity", 1, "a border paints at the tab's opacity — 1"),

@@ -438,24 +438,24 @@
     },
     {
       "label": "tabs/mui",
-      "page": "235:97391",
+      "page": "235:97556",
       "component": "tabs/variant/default :: MUI Tabs",
-      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-default-shared-v16.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-default-shared-v17.png",
       "reference": "extract/computed/out/mui/tabs/orig-shots/primary.primary__default.png"
     },
     {
       "label": "tabs/mui-proposed",
-      "page": "235:97391",
+      "page": "235:97556",
       "component": "tabs/variant/default :: mui (proposed) Tabs",
-      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-proposed-default-v16.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-proposed-default-v17.png",
       "reference": "extract/computed/out/mui/tabs/orig-shots/primary.primary__default.png",
       "_proposedWhy": "PROPOSED from MUI's own capture (25 read, 0 invented): two tab buttons and the absolute indicator bar, beside the hand row."
     },
     {
       "label": "tabs/carbon",
-      "page": "235:97391",
+      "page": "235:97556",
       "component": "tabs/variant/default :: carbon (proposed) Tabs",
-      "shot": "recipe/evidence/fidelity-v1/shots/tabs-carbon-default-v16.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tabs-carbon-default-v17.png",
       "reference": "extract/computed/out/carbon/tabs/orig-shots/__default.png",
       "_proposedWhy": "HELD OUT: Carbon's tabs, never hand-tabled (21 read, 4 spellings, 0 invented). Carbon has no indicator part \u2014 the selected tab's 2px bottom border IS the indicator and is read as one; the rest tabs' grey bottom border is refused by name (tabs@1 draws none).",
       "_why": " Re-captured 2026-09-02 at the archetype's shape (two tabs, no panel) and re-minted as tabs v14."

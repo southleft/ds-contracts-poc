@@ -67,6 +67,12 @@
       "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.align-items | extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.@tag",
       "formula": "align-items center → center; a <button> tab → center (the UA centres a button's content on the cross axis, with no stylesheet channel saying so — Carbon); else start"
     },
+    "indicator.restFill": {
+      "value": "#e0e0e0ff",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.border-bottom-width | extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.2.border-bottom-color",
+      "formula": "the rest tab's bottom border when it has width (Carbon: 2px #e0e0e0), else transparent (no underline)"
+    },
     "indicator.height": {
       "value": 2,
       "from": "ledger",

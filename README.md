@@ -56,7 +56,7 @@ What it has done, measured against the real package's own render
 | tooltip | shadcn 4.73% | AntD = its hand row · Chakra held out, 8.83% named (Inter advance widths) | MUI's closed popper is unstable to capture |
 | chip | Altitude **0.07%**, Carbon 8.56% and Chakra 8.09% (named: glyph rasterisation; Chakra's inset-shadow ring is lowered to a border) | MUI, AntD = their hand rows | — |
 | link | Altitude 5.56% (named: glyph + underline row); Chakra held out, 10.26% named (one glyph row) | MUI 20% (the hand row: 49%) | a serif the sandbox rendered by accident, carried as its fallback |
-| tabs | Carbon 9.57% (named: the capture mounts three tabs and a panel; the archetype draws two) | MUI = its hand row | shadcn's filled selected tab has no indicator; refused by name |
+| tabs | Carbon 3.87% (captured at the archetype's shape; its label centred as a button's is, its rest underline read from the border) | MUI = its hand row | shadcn's filled selected tab has no indicator; refused by name |
 | radio | Chakra **0.00%** (captured the same day through ItemIndicator) | AntD **0.00%** = its hand row | MUI's bare Radio has no label; radio@1 has no bare cell, refused by name |
 | textarea | Chakra 1.64% (the bare cell) and Chakra Field 2.02% (labelled; captured with the value on the child) | AntD 1.25% (bare; its hand row is the same bare cell), MUI 0.63% (its outline stroke drawn inside the box) | the notch knockout colour and a placeholder hidden at rest and focus are reviewed, with citations |
 | alert | Chakra 3.03% (captured the same day; its own status icons read from the capture) | MUI 3.99%, AntD 3.35% = their hand rows | the icons' viewBox is reviewed with a citation — no computed channel carries it |

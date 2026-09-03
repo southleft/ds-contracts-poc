@@ -4,10 +4,10 @@
     "pctAAMaskedMax": 5
   },
   "subjects": 65,
-  "passed": 52,
-  "failed": 13,
+  "passed": 53,
+  "failed": 12,
   "fringeExcused": 0,
-  "knownFailures": 13,
+  "knownFailures": 12,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -387,11 +387,11 @@
     },
     {
       "label": "tabs/carbon",
-      "status": "fail",
-      "pctAAMasked": 13.12,
-      "canvasPx": "159x26",
+      "status": "pass",
+      "pctAAMasked": 3.87,
+      "canvasPx": "175x26",
       "realPx": "175x26",
-      "convergesAt": null
+      "convergesAt": 250
     },
     {
       "label": "tooltip/antd",

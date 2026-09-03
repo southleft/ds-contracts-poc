@@ -50,6 +50,7 @@ export const canonicalTabsRecipeInstance = {
       radius: number("ds.tabs.indicator-radius", 0),
       opacity: number("ds.tabs.indicator-opacity", 1),
       fill: color("ds.tabs.indicator-fill", "#1976d2ff"),
+      restFill: color("ds.tabs.indicator-restFill", "#00000000"),
       insetX: number("ds.tabs.indicator-inset-x", 0),
       offsetY: number("ds.tabs.indicator-offset-y", 0),
     },

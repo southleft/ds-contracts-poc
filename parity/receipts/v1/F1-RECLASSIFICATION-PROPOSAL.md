@@ -46,12 +46,12 @@ measured cause.
 | tooltip | yes | Chakra | 8.83% named | supported, one named row |
 | chip | yes | Altitude, Chakra, Carbon | 0.07% best; two named | supported, named rows |
 | link | yes | Altitude, Chakra | both named | supported, named rows |
-| tabs | yes | Carbon | named content mismatch | supported, named row |
+| tabs | yes | Carbon | 3.87% (re-captured at the archetype's shape) | supported |
 | badge | yes | none exists (every foreign badge is an inline label) | own captures only | supported, no held-out |
 | menu | yes | Chakra | 5.64% named (font rasterisation; geometry matches after the panel min-width leaf) | supported, named row |
 | dialog | yes | Chakra | 2.57% | supported |
 
-Fidelity gate 52 pass · 0 fringe · 13 named (updated the same night: menu and dialog gained proposers and Chakra held-outs; the three textarea real-defect rows and the MUI menu hand row closed; every remaining named row is glyph rasterisation, plus Carbon's tabs capture that is not the archetype's shape). The plugin's paste verb was
+Fidelity gate 53 pass · 0 fringe · 12 named (updated 2026-09-03: every remaining named row is Figma-vs-Chromium glyph rasterisation; the textarea, menu and tabs rows all closed). The plugin's paste verb was
 exercised by the owner on 2026-09-02 (`recipe/evidence/pointed/switch-chakra/paste-verb-exercised.json`).
 The same evening every proposed row's plugin-target program was run the way the
 plugin runs it and scored against the same reference as its gate row: 39 rows,

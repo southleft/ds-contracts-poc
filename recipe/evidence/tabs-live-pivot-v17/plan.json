@@ -1,0 +1,54 @@
+{
+  "pageName": "Recipe Pivot / Tabs / be4dbcc3-3ba3a5d8-506880be-042f2a5f-0cbe5625-tabs-v17",
+  "runIdentity": "be4dbcc3-3ba3a5d8-506880be-042f2a5f-0cbe5625-tabs-v17",
+  "namespace": "ds.contracts.tabs.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "tabs@1 two-item rail from Astryx TabList, MUI Tabs, and AntD Tabs; indicator is a child of the selected tab; overlay ink-bar offsets are refusals",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-tabs-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "be4dbcc36dabc14047d8c4fbefbd024bc24ada8cae49e783c92af9bcce616b53",
+      "envelopeHash": "01a31e16d64350276037260db2d724b47e0d09ee317d52fa3191c9934c8ff486",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 39
+    },
+    {
+      "adapterIdentity": "mui-tabs-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "3ba3a5d8afa7b700e48eec67add1bac59393a9cb0f0fb43b7a4788c6f149e070",
+      "envelopeHash": "70c7b4922ff19d53e138a58ea0bfa595ffd2c77907b3769bda65e44a9909997b",
+      "variantCount": 1,
+      "variableCount": 15,
+      "comparedIrFacts": 43
+    },
+    {
+      "adapterIdentity": "antd-tabs-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "506880be459deb7f1e9614d19e91bd2c66ee7944d2749e26625165dd336887a1",
+      "envelopeHash": "9db0cba8be0d0387b14fb94c027c752d5de54d6bb4ccfdf3b73aed8a29898d40",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 39
+    },
+    {
+      "adapterIdentity": "mui-tabs-proposed-v1",
+      "displayName": "mui (proposed)",
+      "recipeHash": "042f2a5f32ae97608f47bc162ab96b5dd57413b7d3670cbce76236fd9230f0d7",
+      "envelopeHash": "cda3ab3f681eb2a2fbe864268c212ef49e0b8b08c7ef7a0bd7d2f0184443523f",
+      "variantCount": 1,
+      "variableCount": 15,
+      "comparedIrFacts": 43
+    },
+    {
+      "adapterIdentity": "carbon-tabs-proposed-v1",
+      "displayName": "carbon (proposed)",
+      "recipeHash": "0cbe56254c78aae03c3e1028eb532db73a182ad07b2014088682debce2979e66",
+      "envelopeHash": "fa38e659ef03f8cfcaf1fc4c8d8c2c25289b8079f245a8ed11b3456e53374de4",
+      "variantCount": 1,
+      "variableCount": 15,
+      "comparedIrFacts": 48
+    }
+  ]
+}
