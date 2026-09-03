@@ -86,6 +86,8 @@ export interface TabsRecipeInstance {
       fill: TabsColorParameter;
       /** How the label sits in the tab box: MUI/AntD centre it (flex, justify/align center); a "start" tab stacks from the top padding. */
       contentAlign: "start" | "center";
+      /** How the label sits on the tab's cross axis: `center` when the library centres it (flex align-items, or a <button> whose content the UA centres). */
+      verticalAlign: "start" | "center";
     };
     indicator: {
       height: TabsNumberParameter;
@@ -175,6 +177,7 @@ export const TabsRecipeInstanceSchema = z.strictObject({
       minHeight: NumberParameterSchema,
       fill: ColorParameterSchema,
       contentAlign: z.enum(["start", "center"]),
+      verticalAlign: z.enum(["start", "center"]),
     }),
     indicator: z.strictObject({
       height: NumberParameterSchema,
@@ -374,7 +377,10 @@ const itemNode = (
       // MUI Tab: display flex column, justify-content center, align-items
       // center (ledger); AntD .ant-tabs-tab align-items center. The label
       // sits centred inside the minHeight box, not at the top padding.
-      primaryAxisAlign: instance.tokens.tab.contentAlign === "center" ? "center" : "min",
+      // The layout is VERTICAL, so its primary axis is the cross axis of the
+      // label: verticalAlign drives it; contentAlign (justify-content) drives
+      // the counter axis, the label's own axis.
+      primaryAxisAlign: instance.tokens.tab.verticalAlign === "center" ? "center" : "min",
       counterAxisAlign: instance.tokens.tab.contentAlign === "center" ? "center" : "min",
       itemSpacing: 0,
       padding: {
@@ -699,7 +705,8 @@ export function collapseTabsRecipe(
           "fills.0.color",
           solidColor(selected.fills[0], selected.role!),
         ),
-        contentAlign: selected.layout.primaryAxisAlign === "center" ? "center" : "start",
+        contentAlign: selected.layout.counterAxisAlign === "center" ? "center" : "start",
+        verticalAlign: selected.layout.primaryAxisAlign === "center" ? "center" : "start",
       },
       indicator: {
         height: numberFrom(

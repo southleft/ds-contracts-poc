@@ -2,13 +2,14 @@
   "component": "Tabs",
   "generatedBy": "extract/computed/gate.ts",
   "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 1240,
-    "cellsEqual": 1156,
-    "pctEqual": 93.2258064516129,
+    "cellsCompared": 1196,
+    "cellsEqual": 1136,
+    "pctEqual": 94.98327759197325,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -22,46 +23,46 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 3.3935185185185186,
-    "meanAA": 1.695216049382716,
-    "maxAA": 2.044753086419753
+    "meanExact": 1.6689814814814814,
+    "meanAA": 0.9776234567901235,
+    "maxAA": 1.3287037037037037
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
     "mintedLeaves": 41,
-    "mintedLeavesUnfolded": 38,
-    "baseBindings": 204,
-    "stateBindings": 10,
-    "codeOnlyChannels": 17,
-    "overflowBindings": 4,
-    "folds": 164
+    "mintedLeavesUnfolded": 35,
+    "baseBindings": 158,
+    "stateBindings": 12,
+    "codeOnlyChannels": 14,
+    "overflowBindings": 6,
+    "folds": 96
   },
   "worstRows": [
     {
       "key": "__active",
-      "pctAA": 2.044753086419753,
-      "pctExact": 3.743827160493827,
-      "channelsMismatched": 22
+      "pctAA": 1.3287037037037037,
+      "pctExact": 2.015432098765432,
+      "channelsMismatched": 16
     },
     {
       "key": "__focus-visible",
-      "pctAA": 1.8364197530864197,
-      "pctExact": 3.5339506172839505,
-      "channelsMismatched": 21
+      "pctAA": 1.117283950617284,
+      "pctExact": 1.8132716049382716,
+      "channelsMismatched": 15
     },
     {
       "key": "__hover",
-      "pctAA": 1.5756172839506173,
-      "pctExact": 3.2746913580246915,
-      "channelsMismatched": 21
+      "pctAA": 0.8595679012345679,
+      "pctExact": 1.5462962962962963,
+      "channelsMismatched": 15
     },
     {
       "key": "__default",
-      "pctAA": 1.3240740740740742,
-      "pctExact": 3.021604938271605,
-      "channelsMismatched": 20
+      "pctAA": 0.6049382716049383,
+      "pctExact": 1.3009259259259258,
+      "channelsMismatched": 14
     }
   ],
   "topMismatchedChannels": [
@@ -122,17 +123,18 @@
       4
     ],
     [
-      "tabs__nav-item-3.border-left-color",
-      4
+      "tabs__nav-item-2.border-bottom-color",
+      2
     ]
   ],
   "namedLosses": [
     "promotion: orphan-asset-dropped: icon asset \"tabs-visually-hidden\" was reconstructed from the svg subtree of part \"visually-hidden\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
     "promotion: orphan-asset-dropped: icon asset \"tabs-visually-hidden-2\" was reconstructed from the svg subtree of part \"visually-hidden-2\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
-    "promotion: orphan-asset-dropped: icon asset \"tabs-visually-hidden-3\" was reconstructed from the svg subtree of part \"visually-hidden-3\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
     "overflow: tabs__nav-item-2.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: tabs__nav-item-2.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: tabs__nav-item-2.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: tabs__nav-item.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: tabs__nav-item.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: tabs__nav-item-2.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "code-only: part-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -145,9 +147,6 @@
     "code-only: tabs__nav-item-2.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-1-3.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tabs__nav-item-3.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-5.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-2.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-2.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-2.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
@@ -158,7 +157,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1047,
+    "leavesAdded": 851,
     "divergent": [
       {
         "token": "imported.tabs.part-0.background-color",
@@ -167,15 +166,15 @@
         "resolvedEqual": true
       },
       {
+        "token": "imported.tabs.part-1.width",
+        "fresh": "176.312px",
+        "shipped": "261.781px",
+        "resolvedEqual": false
+      },
+      {
         "token": "imported.tabs.part-2.background-color",
         "fresh": "#ffffff",
         "shipped": "{background}",
-        "resolvedEqual": true
-      },
-      {
-        "token": "imported.tabs.tabs-nav-item.color",
-        "fresh": "#161616",
-        "shipped": "{text-primary}",
         "resolvedEqual": true
       }
     ]
@@ -183,10 +182,10 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 310,
-      "channelsEqual": 290,
-      "pctExact": 3.021604938271605,
-      "pctAA": 1.3240740740740742,
+      "channelsCompared": 299,
+      "channelsEqual": 285,
+      "pctExact": 1.3009259259259258,
+      "pctAA": 0.6049382716049383,
       "mismatches": [
         {
           "part": "part-1",
@@ -268,42 +267,6 @@
         },
         {
           "part": "part-1-3",
-          "channel": "clip",
-          "ours": "auto",
-          "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-left-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-right-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-top-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "transition-behavior",
-          "ours": "normal",
-          "theirs": "normal, normal"
-        },
-        {
-          "part": "label-3",
-          "channel": "unicode-bidi",
-          "ours": "normal",
-          "theirs": "isolate"
-        },
-        {
-          "part": "part-1-5",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
@@ -312,10 +275,10 @@
     },
     {
       "key": "__hover",
-      "channelsCompared": 310,
-      "channelsEqual": 289,
-      "pctExact": 3.2746913580246915,
-      "pctAA": 1.5756172839506173,
+      "channelsCompared": 299,
+      "channelsEqual": 284,
+      "pctExact": 1.5462962962962963,
+      "pctAA": 0.8595679012345679,
       "mismatches": [
         {
           "part": "part-1",
@@ -403,42 +366,6 @@
         },
         {
           "part": "part-1-3",
-          "channel": "clip",
-          "ours": "auto",
-          "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-left-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-right-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-top-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "transition-behavior",
-          "ours": "normal",
-          "theirs": "normal, normal"
-        },
-        {
-          "part": "label-3",
-          "channel": "unicode-bidi",
-          "ours": "normal",
-          "theirs": "isolate"
-        },
-        {
-          "part": "part-1-5",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
@@ -447,10 +374,10 @@
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 310,
-      "channelsEqual": 289,
-      "pctExact": 3.5339506172839505,
-      "pctAA": 1.8364197530864197,
+      "channelsCompared": 299,
+      "channelsEqual": 284,
+      "pctExact": 1.8132716049382716,
+      "pctAA": 1.117283950617284,
       "mismatches": [
         {
           "part": "part-1",
@@ -541,51 +468,15 @@
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-left-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-right-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-top-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "transition-behavior",
-          "ours": "normal",
-          "theirs": "normal, normal"
-        },
-        {
-          "part": "label-3",
-          "channel": "unicode-bidi",
-          "ours": "normal",
-          "theirs": "isolate"
-        },
-        {
-          "part": "part-1-5",
-          "channel": "clip",
-          "ours": "auto",
-          "theirs": "rect(0px, 0px, 0px, 0px)"
         }
       ]
     },
     {
       "key": "__active",
-      "channelsCompared": 310,
-      "channelsEqual": 288,
-      "pctExact": 3.743827160493827,
-      "pctAA": 2.044753086419753,
+      "channelsCompared": 299,
+      "channelsEqual": 283,
+      "pctExact": 2.015432098765432,
+      "pctAA": 1.3287037037037037,
       "mismatches": [
         {
           "part": "part-1",
@@ -679,42 +570,6 @@
         },
         {
           "part": "part-1-3",
-          "channel": "clip",
-          "ours": "auto",
-          "theirs": "rect(0px, 0px, 0px, 0px)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-left-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-right-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "border-top-color",
-          "ours": "rgba(0, 0, 0, 1)",
-          "theirs": "rgba(82, 82, 82, 1)"
-        },
-        {
-          "part": "tabs__nav-item-3",
-          "channel": "transition-behavior",
-          "ours": "normal",
-          "theirs": "normal, normal"
-        },
-        {
-          "part": "label-3",
-          "channel": "unicode-bidi",
-          "ours": "normal",
-          "theirs": "isolate"
-        },
-        {
-          "part": "part-1-5",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"

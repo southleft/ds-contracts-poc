@@ -30,6 +30,7 @@
             "border-right-style": "none",
             "border-top-style": "none",
             "cursor": "pointer",
+            "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
             "position": "relative",
             "text-align": "start"
           },
@@ -76,11 +77,13 @@
                 "border-right-style": "none",
                 "border-top-style": "none",
                 "cursor": "pointer",
+                "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
                 "outline-style": "solid",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
                 "position": "relative",
                 "text-align": "start",
+                "text-overflow": "ellipsis",
                 "text-wrap-mode": "nowrap",
                 "transition-duration": "0.07s",
                 "transition-property": "color",
@@ -98,11 +101,17 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
+                        "box-sizing": "border-box",
                         "cursor": "pointer",
-                        "text-rendering": "auto",
+                        "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+                        "font-feature-settings": "\"liga\"",
                         "text-wrap-mode": "nowrap"
                       },
+                      "layout": {
+                        "grow": true
+                      },
                       "tokens": {
+                        "color": "{imported.shared.color-161616}",
                         "font-size": "{imported.shared.size-14}",
                         "font-weight": "{imported.shared.num-600}",
                         "letter-spacing": "{imported.shared.size-0-16}",
@@ -111,35 +120,40 @@
                     }
                   },
                   "declared": {
+                    "box-sizing": "border-box",
                     "cursor": "pointer",
+                    "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+                    "font-feature-settings": "\"liga\"",
                     "position": "relative",
-                    "text-rendering": "auto",
                     "text-wrap-mode": "nowrap"
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-neg-1}",
+                    "color": "{imported.shared.color-161616}",
                     "font-size": "{imported.shared.size-14}",
                     "font-weight": "{imported.shared.num-600}",
-                    "height": "{imported.shared.size-18}",
                     "left": "{imported.shared.size-0}",
                     "letter-spacing": "{imported.shared.size-0-16}",
                     "line-height": "{imported.shared.size-18-0001}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-1}"
+                    "top": "{imported.shared.size-1}",
+                    "width": "{imported.tabs.tabs-nav-item-label-wrapper.width}"
                   }
                 }
+              },
+              "layout": {
+                "grow": true
               },
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
                 "border-bottom-color": "{imported.tabs.tabs-nav-item.border-bottom-color}",
-                "border-bottom-width": "{imported.shared.size-2}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
                 "bottom": "{imported.shared.size-0}",
-                "color": "{imported.tabs.tabs-nav-item.color}",
+                "color": "{imported.shared.color-161616}",
                 "flex-grow": "{imported.shared.num-1}",
                 "flex-shrink": "{imported.shared.num-0}",
                 "font-size": "{imported.shared.size-14}",
@@ -149,25 +163,45 @@
                 "letter-spacing": "{imported.shared.size-0-16}",
                 "line-height": "{imported.shared.size-18-0001}",
                 "outline-color": "{imported.shared.color-00000000}",
-                "outline-offset": "{imported.shared.size-neg-2}",
-                "outline-width": "{imported.shared.size-2}",
+                "outline-offset": "{imported.tabs.tabs-nav-item.outline-offset}",
+                "outline-width": "{imported.tabs.tabs-nav-item.outline-width}",
                 "padding-bottom": "{imported.shared.size-0}",
                 "padding-left": "{imported.shared.size-16}",
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}"
-              }
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.tabs-nav-item.width}"
+              },
+              "codeOnly": [
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#0f62fe",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             },
             "part-1-1": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
+                "box-sizing": "border-box",
+                "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+                "font-feature-settings": "\"liga\"",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
+                "text-rendering": "optimizelegibility",
                 "text-wrap-mode": "nowrap"
               },
               "tokens": {
+                "color": "{imported.shared.color-161616}",
                 "font-size": "{imported.shared.size-14}",
                 "height": "{imported.shared.size-1}",
                 "letter-spacing": "{imported.shared.size-0-16}",
@@ -176,7 +210,7 @@
                 "margin-left": "{imported.shared.size-neg-1}",
                 "margin-right": "{imported.shared.size-neg-1}",
                 "margin-top": "{imported.shared.size-neg-1}",
-                "width": "{imported.shared.size-3}"
+                "width": "{imported.tabs.part-1-1.width}"
               }
             },
             "tabs__nav-item-2": {
@@ -190,11 +224,13 @@
                 "border-right-style": "none",
                 "border-top-style": "none",
                 "cursor": "pointer",
+                "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
                 "outline-style": "solid",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
                 "position": "relative",
                 "text-align": "start",
+                "text-overflow": "ellipsis",
                 "text-wrap-mode": "nowrap",
                 "transition-delay": "0s, 0s",
                 "transition-duration": "0.07s, 0.07s",
@@ -213,9 +249,14 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
+                        "box-sizing": "border-box",
                         "cursor": "pointer",
-                        "text-rendering": "auto",
+                        "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+                        "font-feature-settings": "\"liga\"",
                         "text-wrap-mode": "nowrap"
+                      },
+                      "layout": {
+                        "grow": true
                       },
                       "tokens": {
                         "color": "{imported.shared.color-525252}",
@@ -235,23 +276,25 @@
                     }
                   },
                   "declared": {
+                    "box-sizing": "border-box",
                     "cursor": "pointer",
+                    "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+                    "font-feature-settings": "\"liga\"",
                     "position": "relative",
-                    "text-rendering": "auto",
                     "text-wrap-mode": "nowrap"
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-neg-1}",
                     "color": "{imported.shared.color-525252}",
                     "font-size": "{imported.shared.size-14}",
-                    "height": "{imported.shared.size-18}",
                     "left": "{imported.shared.size-0}",
                     "letter-spacing": "{imported.shared.size-0-16}",
                     "line-height": "{imported.shared.size-18-0001}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-1}"
+                    "top": "{imported.shared.size-1}",
+                    "width": "{imported.tabs.tabs-nav-item-label-wrapper-2.width}"
                   },
                   "states": {
                     "active": {
@@ -263,10 +306,12 @@
                   }
                 }
               },
+              "layout": {
+                "grow": true
+              },
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
                 "border-bottom-color": "{imported.tabs.tabs-nav-item-2.border-bottom-color}",
-                "border-bottom-width": "{imported.shared.size-1}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
@@ -280,14 +325,15 @@
                 "letter-spacing": "{imported.shared.size-0-16}",
                 "line-height": "{imported.shared.size-18-0001}",
                 "outline-color": "{imported.shared.color-00000000}",
-                "outline-offset": "{imported.shared.size-neg-2}",
-                "outline-width": "{imported.shared.size-2}",
+                "outline-offset": "{imported.tabs.tabs-nav-item-2.outline-offset}",
+                "outline-width": "{imported.tabs.tabs-nav-item-2.outline-width}",
                 "padding-bottom": "{imported.shared.size-0}",
                 "padding-left": "{imported.shared.size-16}",
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}"
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.tabs-nav-item-2.width}"
               },
               "states": {
                 "active": {
@@ -296,17 +342,48 @@
                 "hover": {
                   "color": "{imported.shared.color-161616}"
                 }
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "border-bottom-color",
+                  "value": "#8d8d8d",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "outline-color",
+                  "value": "#0f62fe",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "outline-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-bottom-color",
+                  "value": "#8d8d8d",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             },
             "part-1-3": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
+                "box-sizing": "border-box",
+                "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+                "font-feature-settings": "\"liga\"",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
+                "text-rendering": "optimizelegibility",
                 "text-wrap-mode": "nowrap"
               },
               "tokens": {
+                "color": "{imported.shared.color-161616}",
                 "font-size": "{imported.shared.size-14}",
                 "height": "{imported.shared.size-1}",
                 "letter-spacing": "{imported.shared.size-0-16}",
@@ -315,130 +392,20 @@
                 "margin-left": "{imported.shared.size-neg-1}",
                 "margin-right": "{imported.shared.size-neg-1}",
                 "margin-top": "{imported.shared.size-neg-1}",
-                "width": "{imported.shared.size-3}"
-              }
-            },
-            "tabs__nav-item-3": {
-              "element": "button",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy button|tabs__nav-item.tabs__nav-link — this element exists in the real component's DOM; the static layer had no part for it.",
-              "declared": {
-                "display": "block",
-                "appearance": "none",
-                "border-bottom-style": "solid",
-                "border-left-style": "none",
-                "border-right-style": "none",
-                "border-top-style": "none",
-                "cursor": "pointer",
-                "outline-style": "solid",
-                "overflow-x": "hidden",
-                "overflow-y": "hidden",
-                "position": "relative",
-                "text-align": "start",
-                "text-wrap-mode": "nowrap",
-                "transition-delay": "0s, 0s",
-                "transition-duration": "0.07s, 0.07s",
-                "transition-property": "border, outline",
-                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
-              },
-              "parts": {
-                "tabs__nav-item-label-wrapper-3": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|tabs__nav-item-label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "layout": {
-                    "display": "flex"
-                  },
-                  "parts": {
-                    "label-3": {
-                      "text": "Settings",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "block",
-                        "cursor": "pointer",
-                        "text-rendering": "auto",
-                        "text-wrap-mode": "nowrap"
-                      },
-                      "tokens": {
-                        "color": "{imported.shared.color-525252}",
-                        "font-size": "{imported.shared.size-14}",
-                        "font-weight": "{imported.tabs.label-3.font-weight}",
-                        "letter-spacing": "{imported.shared.size-0-16}",
-                        "line-height": "{imported.shared.size-18-0001}"
-                      }
-                    }
-                  },
-                  "declared": {
-                    "cursor": "pointer",
-                    "position": "relative",
-                    "text-rendering": "auto",
-                    "text-wrap-mode": "nowrap"
-                  },
-                  "tokens": {
-                    "bottom": "{imported.shared.size-neg-1}",
-                    "color": "{imported.shared.color-525252}",
-                    "font-size": "{imported.shared.size-14}",
-                    "height": "{imported.shared.size-18}",
-                    "left": "{imported.shared.size-0}",
-                    "letter-spacing": "{imported.shared.size-0-16}",
-                    "line-height": "{imported.shared.size-18-0001}",
-                    "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}",
-                    "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-1}"
-                  }
-                }
-              },
-              "tokens": {
-                "background-color": "{imported.shared.color-00000000}",
-                "border-bottom-color": "{imported.tabs.tabs-nav-item-3.border-bottom-color}",
-                "border-bottom-width": "{imported.shared.size-1}",
-                "border-left-width": "{imported.shared.size-0}",
-                "border-right-width": "{imported.shared.size-0}",
-                "border-top-width": "{imported.shared.size-0}",
-                "bottom": "{imported.shared.size-0}",
-                "color": "{imported.shared.color-525252}",
-                "flex-grow": "{imported.shared.num-1}",
-                "flex-shrink": "{imported.shared.num-0}",
-                "font-size": "{imported.shared.size-14}",
-                "height": "{imported.shared.size-40}",
-                "left": "{imported.shared.size-0}",
-                "letter-spacing": "{imported.shared.size-0-16}",
-                "line-height": "{imported.shared.size-18-0001}",
-                "outline-color": "{imported.shared.color-00000000}",
-                "outline-offset": "{imported.shared.size-neg-2}",
-                "outline-width": "{imported.shared.size-2}",
-                "padding-bottom": "{imported.shared.size-0}",
-                "padding-left": "{imported.shared.size-16}",
-                "padding-right": "{imported.shared.size-16}",
-                "padding-top": "{imported.shared.size-0}",
-                "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}"
-              }
-            },
-            "part-1-5": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
-              "declared": {
-                "display": "none",
-                "overflow-x": "hidden",
-                "overflow-y": "hidden",
-                "text-wrap-mode": "nowrap"
-              },
-              "tokens": {
-                "font-size": "{imported.shared.size-14}",
-                "height": "{imported.shared.size-1}",
-                "letter-spacing": "{imported.shared.size-0-16}",
-                "line-height": "{imported.shared.size-18-0001}",
-                "margin-bottom": "{imported.shared.size-neg-1}",
-                "margin-left": "{imported.shared.size-neg-1}",
-                "margin-right": "{imported.shared.size-neg-1}",
-                "margin-top": "{imported.shared.size-neg-1}",
-                "width": "{imported.shared.size-3}"
+                "width": "{imported.tabs.part-1-3.width}"
               }
             }
           },
           "declared": {
+            "box-sizing": "border-box",
+            "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+            "font-feature-settings": "\"liga\"",
             "overflow-x": "auto",
-            "overflow-y": "auto"
+            "overflow-y": "auto",
+            "text-rendering": "optimizelegibility"
           },
           "tokens": {
+            "color": "{imported.shared.color-161616}",
             "font-size": "{imported.shared.size-14}",
             "height": "{imported.shared.size-40}",
             "letter-spacing": "{imported.shared.size-0-16}",
@@ -457,6 +424,7 @@
             "border-right-style": "none",
             "border-top-style": "none",
             "cursor": "pointer",
+            "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
             "position": "relative",
             "text-align": "start"
           },
@@ -487,12 +455,17 @@
         }
       },
       "declared": {
+        "box-sizing": "border-box",
+        "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif",
+        "font-feature-settings": "\"liga\"",
         "overflow-x": "hidden",
         "overflow-y": "auto",
-        "position": "relative"
+        "position": "relative",
+        "text-rendering": "optimizelegibility"
       },
       "tokens": {
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-161616}",
         "font-size": "{imported.shared.size-14}",
         "height": "{imported.shared.size-40}",
         "left": "{imported.shared.size-0}",

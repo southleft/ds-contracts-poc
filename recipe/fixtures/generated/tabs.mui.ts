@@ -44,6 +44,7 @@ const muiTokens = cloneTokens("mui.tabs", (path) => {
 muiTokens.lineHeightUnit = "px" as "px" | "auto" | "percent";
 muiTokens.textCase = "upper" as "original" | "upper";
 muiTokens.tab.contentAlign = "center" as "start" | "center";
+muiTokens.tab.verticalAlign = "center" as "start" | "center";
 muiTokens.typography = { rest: {
     requestedFamily: "Roboto",
     requestedStyle: "Medium",

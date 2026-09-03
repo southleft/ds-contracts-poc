@@ -73,6 +73,13 @@ export function tabsSchemaMappings(roles: TabsRoles, opts: TabsSchemaOptions): F
     R("tab.minHeight", () => ({ path: "tab.minHeight", kind: "px", reads: { m: { combo, part: sel, channel: "min-height" }, h: { combo, part: sel, channel: "height" } }, formula: "max(min-height, a fixed height); auto → 0", combine: (raw) => Math.max(pxOrZero(raw.m), pxOrZero(raw.h)) })),
     R("tab.fill", () => one("tab.fill", "color", { combo, part: sel, channel: "background-color" })),
     R("tab.contentAlign", () => one("tab.contentAlign", "string", { combo, part: sel, channel: "justify-content" }, { formula: "justify-content center → center, else start", combine: (raw) => (raw.v === "center" ? "center" : "start") })),
+    R("tab.verticalAlign", () => ({
+      path: "tab.verticalAlign",
+      kind: "string",
+      reads: { ai: { combo, part: sel, channel: "align-items" }, tag: { combo, part: sel, channel: "@tag" } },
+      formula: "align-items center → center; a <button> tab → center (the UA centres a button's content on the cross axis, with no stylesheet channel saying so — Carbon); else start",
+      combine: (raw) => (raw.ai === "center" || raw.tag === "button" ? "center" : "start"),
+    })),
     ind("indicator.height", "px", "height", "border-bottom-width", "the indicator is the selected tab's bottom border: its width is the indicator height"),
     ind("indicator.radius", "px", "border-top-left-radius", 0, "a border has no radius of its own — 0"),
     ind("indicator.opacity", "number", "opacity", 1, "a border paints at the tab's opacity — 1"),

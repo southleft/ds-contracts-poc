@@ -35,8 +35,8 @@
       "cause": "7.73% at 184x30 vs 183x31 \u2014 proposed from MUI's own capture (25 leaves read, 0 invented) and identical to the hand row tabs/mui to the hundredth: the same two uppercase Roboto Medium labels rasterised by Figma versus Chromium, the indicator and geometry agreeing."
     },
     "tabs/carbon": {
-      "class": "content-mismatch",
-      "cause": "9.57% at 159x37 vs 261x60 \u2014 HELD-OUT proposal (Carbon tabs, 21 read, 4 spellings, 0 invented; the selected tab's 2px bottom border read as the indicator, the rest tabs' grey border refused by name, the fixed 40px height read as the minimum height). Not like-for-like: the capture mounts THREE tabs and the selected panel's text beneath them; tabs@1 draws two tabs and no panel. What the two tabs share \u2014 40px tabs, 16px padding, IBM Plex Sans 14/18 SemiBold and Regular, the blue 2px indicator \u2014 is in both images."
+      "class": "real-defect",
+      "cause": "13.12% at 159x26 vs 175x26 \u2014 HELD-OUT proposal (Carbon tabs, 22 read, 4 spellings, 0 invented), re-captured 2026-09-02 at the archetype's shape (two tabs, no panel; the three-tab-plus-panel mount had scored 9.57% as a content mismatch). tabs@1 gained tab.verticalAlign the same night (a <button> centres its content; Carbon's label sits centred in its 40px tab) and the heights now agree at 26. The 16px of width is the rest tab's 2px #e0e0e0 bottom border (border-block-end on cds--tabs__nav-item), which the recipe refuses by name \u2014 tabs@1 draws the selected tab's indicator only, so the canvas's ink ends at the rest label while the render's extends through the rest tab's padding. A rest-tab underline leaf would close it."
     },
     "chip/chakra": {
       "class": "font-substrate",

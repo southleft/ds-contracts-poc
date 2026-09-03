@@ -30,6 +30,7 @@ const LEAVES = [
   "lineHeightUnit",
   "textCase",
   "tab.contentAlign",
+  "tab.verticalAlign",
   "labelLetterSpacing",
   "typography.rest.family",
   "typography.rest.style",
@@ -94,6 +95,7 @@ export const muiTabsMappings: FactMapping[] = [
   receipt("lineHeightUnit", "recipe spelling of percent line-height from button typography", "reviewed percent"),
   receipt("textCase", "Tab label text-transform uppercase — recipe spelling", "reviewed upper"),
   receipt("tab.contentAlign", "MuiTab-root justify-content center / align-items center — recipe spelling of the flex centring", "reviewed center"),
+  receipt("tab.verticalAlign", "MuiTab-root align-items center — recipe spelling of the flex centring on the cross axis", "reviewed center"),
   {
     path: "labelLetterSpacing",
     kind: "px",

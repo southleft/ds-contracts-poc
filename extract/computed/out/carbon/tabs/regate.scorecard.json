@@ -472,186 +472,6 @@
         "value": "nowrap"
       },
       {
-        "part": "tabs__nav-item-3",
-        "channel": "appearance",
-        "value": "none"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "border-bottom-style",
-        "value": "solid"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "border-left-style",
-        "value": "none"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "border-right-style",
-        "value": "none"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "border-top-style",
-        "value": "none"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "font-family",
-        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "outline-style",
-        "value": "solid"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "text-align",
-        "value": "start"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "text-overflow",
-        "value": "ellipsis"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "transition-delay",
-        "value": "0s, 0s"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "transition-duration",
-        "value": "0.07s, 0.07s"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "transition-property",
-        "value": "border, outline"
-      },
-      {
-        "part": "tabs__nav-item-3",
-        "channel": "transition-timing-function",
-        "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-3",
-        "channel": "box-sizing",
-        "value": "border-box"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-3",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-3",
-        "channel": "font-family",
-        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-3",
-        "channel": "font-feature-settings",
-        "value": "\"liga\""
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-3",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-3",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "label-3",
-        "channel": "box-sizing",
-        "value": "border-box"
-      },
-      {
-        "part": "label-3",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "label-3",
-        "channel": "font-family",
-        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
-      },
-      {
-        "part": "label-3",
-        "channel": "font-feature-settings",
-        "value": "\"liga\""
-      },
-      {
-        "part": "label-3",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
-        "part": "part-1-5",
-        "channel": "box-sizing",
-        "value": "border-box"
-      },
-      {
-        "part": "part-1-5",
-        "channel": "font-family",
-        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
-      },
-      {
-        "part": "part-1-5",
-        "channel": "font-feature-settings",
-        "value": "\"liga\""
-      },
-      {
-        "part": "part-1-5",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "part-1-5",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "part-1-5",
-        "channel": "text-rendering",
-        "value": "optimizelegibility"
-      },
-      {
-        "part": "part-1-5",
-        "channel": "text-wrap-mode",
-        "value": "nowrap"
-      },
-      {
         "part": "part-2",
         "channel": "appearance",
         "value": "none"
@@ -709,9 +529,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1744,
-      "cellsEqual": 1660,
-      "pctEqual": 95.18348623853211,
+      "cellsCompared": 1196,
+      "cellsEqual": 1136,
+      "pctEqual": 94.98327759197325,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -733,41 +553,41 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 42,
-      "mintedLeavesUnfolded": 37,
-      "baseBindings": 208,
+      "mintedLeaves": 41,
+      "mintedLeavesUnfolded": 35,
+      "baseBindings": 158,
       "stateBindings": 12,
-      "codeOnlyChannels": 33,
+      "codeOnlyChannels": 14,
       "overflowBindings": 6,
-      "folds": 134
+      "folds": 96
     },
     "worstRows": [
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       }
     ],
@@ -829,53 +649,33 @@
         4
       ],
       [
-        "tabs__nav-item-3.border-left-color",
-        4
+        "tabs__nav-item-2.border-bottom-color",
+        2
       ]
     ],
     "namedLosses": [
       "promotion: orphan-asset-dropped: icon asset \"tabs-visually-hidden\" was reconstructed from the svg subtree of part \"visually-hidden\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
       "promotion: orphan-asset-dropped: icon asset \"tabs-visually-hidden-2\" was reconstructed from the svg subtree of part \"visually-hidden-2\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
-      "promotion: orphan-asset-dropped: icon asset \"tabs-visually-hidden-3\" was reconstructed from the svg subtree of part \"visually-hidden-3\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
       "overflow: tabs__nav-item-2.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item-2.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item-2.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item-2.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-1.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1.scroll-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1.scrollbar-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1.will-change — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tabs__nav-item.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tabs__nav-item-label-wrapper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1-1.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-1-1.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tabs__nav-item-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: tabs__nav-item-2.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tabs__nav-item-label-wrapper-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1-3.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-1-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tabs__nav-item-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tabs__nav-item-3.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tabs__nav-item-label-wrapper-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-1-5.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-1-5.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-2.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-2.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-2.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: part-2.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -883,13 +683,19 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 846,
+      "leavesAdded": 851,
       "divergent": [
         {
           "token": "imported.tabs.part-0.background-color",
           "fresh": "#ffffff",
           "shipped": "{background}",
           "resolvedEqual": true
+        },
+        {
+          "token": "imported.tabs.part-1.width",
+          "fresh": "176.312px",
+          "shipped": "261.781px",
+          "resolvedEqual": false
         },
         {
           "token": "imported.tabs.part-2.background-color",
@@ -902,8 +708,8 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 436,
-        "channelsEqual": 416,
+        "channelsCompared": 299,
+        "channelsEqual": 285,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -988,42 +794,6 @@
           },
           {
             "part": "part-1-3",
-            "channel": "clip",
-            "ours": "auto",
-            "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "normal, normal"
-          },
-          {
-            "part": "label-3",
-            "channel": "unicode-bidi",
-            "ours": "normal",
-            "theirs": "isolate"
-          },
-          {
-            "part": "part-1-5",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
@@ -1033,8 +803,8 @@
       },
       {
         "key": "__hover",
-        "channelsCompared": 436,
-        "channelsEqual": 415,
+        "channelsCompared": 299,
+        "channelsEqual": 284,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1125,42 +895,6 @@
           },
           {
             "part": "part-1-3",
-            "channel": "clip",
-            "ours": "auto",
-            "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "normal, normal"
-          },
-          {
-            "part": "label-3",
-            "channel": "unicode-bidi",
-            "ours": "normal",
-            "theirs": "isolate"
-          },
-          {
-            "part": "part-1-5",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
@@ -1170,8 +904,8 @@
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 436,
-        "channelsEqual": 415,
+        "channelsCompared": 299,
+        "channelsEqual": 284,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1265,50 +999,14 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "normal, normal"
-          },
-          {
-            "part": "label-3",
-            "channel": "unicode-bidi",
-            "ours": "normal",
-            "theirs": "isolate"
-          },
-          {
-            "part": "part-1-5",
-            "channel": "clip",
-            "ours": "auto",
-            "theirs": "rect(0px, 0px, 0px, 0px)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__active",
-        "channelsCompared": 436,
-        "channelsEqual": 414,
+        "channelsCompared": 299,
+        "channelsEqual": 283,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1405,42 +1103,6 @@
           },
           {
             "part": "part-1-3",
-            "channel": "clip",
-            "ours": "auto",
-            "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(82, 82, 82, 1)"
-          },
-          {
-            "part": "tabs__nav-item-3",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "normal, normal"
-          },
-          {
-            "part": "label-3",
-            "channel": "unicode-bidi",
-            "ours": "normal",
-            "theirs": "isolate"
-          },
-          {
-            "part": "part-1-5",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"

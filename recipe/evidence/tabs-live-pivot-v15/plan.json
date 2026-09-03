@@ -1,0 +1,54 @@
+{
+  "pageName": "Recipe Pivot / Tabs / 50c6f0c9-8c008fbc-ce98338e-1b2453fa-3f7f6c5a-tabs-v15",
+  "runIdentity": "50c6f0c9-8c008fbc-ce98338e-1b2453fa-3f7f6c5a-tabs-v15",
+  "namespace": "ds.contracts.tabs.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "tabs@1 two-item rail from Astryx TabList, MUI Tabs, and AntD Tabs; indicator is a child of the selected tab; overlay ink-bar offsets are refusals",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-tabs-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "50c6f0c9aeb0e559eabe9b060ca62a88eb5b75a0052545f8df8d4e943b453ef3",
+      "envelopeHash": "83f9b86cd3a47f8dec0c7bafe91ba67d17f040016545021c452ed20f7bb3ee58",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 39
+    },
+    {
+      "adapterIdentity": "mui-tabs-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "8c008fbc6e93b370f18750d03b35a9c3f79da901ea41e90a61eddc6f5f66d1cd",
+      "envelopeHash": "e72a885c848539325d9645179a5709524332364b19d4f5da1993ac5a07714d33",
+      "variantCount": 1,
+      "variableCount": 15,
+      "comparedIrFacts": 43
+    },
+    {
+      "adapterIdentity": "antd-tabs-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "ce98338e3829d927aa58003edaa27f1776e083579ff17609a77294cd45a7c97b",
+      "envelopeHash": "44460cce44c9bc1554f21383e7d8abfa5cda27dd49aa3602da6ea395fcc4cd79",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 39
+    },
+    {
+      "adapterIdentity": "mui-tabs-proposed-v1",
+      "displayName": "mui (proposed)",
+      "recipeHash": "1b2453faa83e96c0a8fa65baae3ef895d45d1e86a6e0183766b87a0fefdd607c",
+      "envelopeHash": "5ce941336427a19d575ea53735107c81158d43c20ac00b81c5c9334c5ffa8b77",
+      "variantCount": 1,
+      "variableCount": 15,
+      "comparedIrFacts": 43
+    },
+    {
+      "adapterIdentity": "carbon-tabs-proposed-v1",
+      "displayName": "carbon (proposed)",
+      "recipeHash": "3f7f6c5a998ffdfb59846f0e5e5835f45dac0c59cc097d13cb3dd87de0887f13",
+      "envelopeHash": "0262d9f4214b30bd47d1d1c916daf6df327c5fb332373b1abebc987e718332d3",
+      "variantCount": 1,
+      "variableCount": 14,
+      "comparedIrFacts": 41
+    }
+  ]
+}

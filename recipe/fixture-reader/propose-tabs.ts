@@ -130,7 +130,7 @@ function restBorderRefusal(ledger: Ledger, combo: string, roles: TabsRoles): Arr
   return [{ id: "refusal-rest-tab-border", evidence: `${ledger.file}#${combo}__default ${roles.restTab}.border-bottom = ${w} ${c}; tabs@1 draws one indicator under the selected tab and no border under a rest tab`, target: "rest tab bottom border", reason: "refused-by-recipe" as const }];
 }
 
-const STRING_LEAVES = new Set(["lineHeightUnit", "textCase", "tab.contentAlign", "typography.label.resolved"]);
+const STRING_LEAVES = new Set(["lineHeightUnit", "textCase", "tab.contentAlign", "tab.verticalAlign", "typography.label.resolved"]);
 
 export function renderTabsModule(p: TabsProposal, opts: { slug: string; displayName: string; exportName: string; sourceRoot: string; unsupported: string[] }): string {
   const tokenLines = Object.entries(p.leaves)
@@ -168,6 +168,7 @@ const ${slug}Tokens = cloneTokens(${q(`${opts.slug}.tabs`)}, (path) => {
 ${slug}Tokens.lineHeightUnit = ${q(String(p.leaves["lineHeightUnit"]!.value))} as "px" | "auto" | "percent";
 ${slug}Tokens.textCase = ${q(String(p.leaves["textCase"]!.value))} as "original" | "upper";
 ${slug}Tokens.tab.contentAlign = ${q(String(p.leaves["tab.contentAlign"]!.value))} as "start" | "center";
+${slug}Tokens.tab.verticalAlign = ${q(String(p.leaves["tab.verticalAlign"]!.value))} as "start" | "center";
 ${slug}Tokens.typography = { rest: ${fontBlock(p, "rest")}, selected: ${fontBlock(p, "selected")} };
 
 export const ${slug}TabsSource: ReviewedTabsSource = {

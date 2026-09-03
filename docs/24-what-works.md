@@ -23,7 +23,7 @@ the complete inventory of what this does not do, and it is longer than this one.
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 127 components came out with a measured floor:
 **86.4% mean computed-style equality** against the original npm package rendering in the same pinned
-Chromium, exact string comparison with no tolerance, over 749,437 compared style cells
+Chromium, exact string comparison with no tolerance, over 749,393 compared style cells
 (60 of 127 components at ≥90%, 99 of 127 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
@@ -108,7 +108,7 @@ pipeline never opened still counts against it.
 |---|---|---|---|---|---|---|---|---|
 | Altitude | 8 | **91.7** | 94.0 | 5/8 | 8/8 | 6,224 | 90.2 | `extract/computed/out/altitude/<comp>/scorecard.json` |
 | Astryx | 11 | **85.2** | 90.1 | 6/11 | 8/11 | 47,808 | 89.3 | `extract/computed/out/astryx/<comp>/scorecard.json` |
-| Carbon | 10 | **87.5** | 86.7 | 4/10 | 8/10 | 54,297 | 82.8 | `extract/computed/out/carbon/<comp>/scorecard.json` |
+| Carbon | 10 | **87.7** | 86.7 | 4/10 | 8/10 | 54,253 | 82.9 | `extract/computed/out/carbon/<comp>/scorecard.json` |
 | MUI | 32 | **89.4** | 90.7 | 18/32 | 27/32 | 121,317 | 85.5 | `extract/computed/out/mui/<comp>/scorecard.json` |
 | Polaris | 12 | **89.4** | 91.5 | 7/12 | 11/12 | 200,405 | 90.5 | `extract/computed/out/<comp>/scorecard.json` |
 | shadcn/ui | 11 | **69.4** | 70.4 | 1/11 | 3/11 | 24,432 | 71.6 | `extract/computed/out/shadcn/<comp>/scorecard.json` |
@@ -116,7 +116,7 @@ pipeline never opened still counts against it.
 | Fluent 2 | 11 | **82.7** | 82.4 | 4/11 | 7/11 | 133,866 | 81.0 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 13 | **89.0** | 91.4 | 8/13 | 11/13 | 134,916 | 85.4 | `extract/computed/out/antd/<comp>/scorecard.json` |
 | Chakra UI | 8 | **85.2** | 89.0 | 2/8 | 7/8 | 12,368 | 80.3 | `extract/computed/out/chakra/<comp>/scorecard.json` |
-| **all libraries** | **127** | **86.4** | 89.1 | **60/127** | **99/127** | **749,437** | **85.7** |  |
+| **all libraries** | **127** | **86.4** | 89.1 | **60/127** | **99/127** | **749,393** | **85.7** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 127 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 10 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
@@ -218,7 +218,6 @@ No component is omitted. The worst row in the corpus is at the top.
 | `TextInput` | Flowbite / Tailwind | 92.4 | 15 × 4 | 2,520 | `extract/computed/out/tailwind/textinput/scorecard.json` |
 | `Input` | shadcn/ui | 93.1 | 2 × 4 | 232 | `extract/computed/out/shadcn/input/scorecard.json` |
 | `Progress` | Ant Design | 93.1 | 4 × 4 | 2,216 | `extract/computed/out/antd/progress/scorecard.json` |
-| `Tabs` | Carbon | 93.2 | 1 × 4 | 1,240 | `extract/computed/out/carbon/tabs/scorecard.json` |
 | `Badge` | Ant Design | 93.4 | 8 × 4 | 4,976 | `extract/computed/out/antd/badge/scorecard.json` |
 | `TextInput` | Astryx | 93.4 | 9 × 4 | 2,736 | `extract/computed/out/astryx/textinput/scorecard.json` |
 | `Badge` | Altitude | 93.8 | 10 × 4 | 1,280 | `extract/computed/out/altitude/badge/scorecard.json` |
@@ -231,6 +230,7 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Switch` | Ant Design | 94.3 | 8 × 4 | 5,216 | `extract/computed/out/antd/switch/scorecard.json` |
 | `Breadcrumbs` | MUI | 94.8 | 1 × 4 | 788 | `extract/computed/out/mui/breadcrumbs/scorecard.json` |
 | `Snackbar` | MUI | 94.9 | 1 × 4 | 59 | `extract/computed/out/mui/snackbar/scorecard.json` |
+| `Tabs` | Carbon | 95.0 | 1 × 4 | 1,196 | `extract/computed/out/carbon/tabs/scorecard.json` |
 | `Tooltip` | Ant Design | 95.0 | 1 × 4 | 100 | `extract/computed/out/antd/tooltip/scorecard.json` |
 | `Autocomplete` | MUI | 95.1 | 2 × 4 | 2,536 | `extract/computed/out/mui/autocomplete/scorecard.json` |
 | `Badge` | Astryx | 95.8 | 14 × 4 | 1,512 | `extract/computed/out/astryx/badge/scorecard.json` |
@@ -572,8 +572,8 @@ npm run capability:fresh
 | `evals/golden.json` | `259ec554f9a0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `c84121662526` | 1,812,737 | capture counts + determinism receipts — 263 files |
-| `extract/computed/out/**/scorecard.json` | `a6686a86ca4a` | 21,997,752 | computed-equality per component — 262 files |
+| `extract/computed/out/**/numbers.json` | `83b43ad5d052` | 1,802,262 | capture counts + determinism receipts — 263 files |
+| `extract/computed/out/**/scorecard.json` | `1ec8065d6fdf` | 21,992,980 | computed-equality per component — 262 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `4708222bebfc` | 6,968 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

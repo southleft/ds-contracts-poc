@@ -584,6 +584,30 @@ menu/mui 4.73% — identical to menu/mui-proposed. **52 pass · 0 fringe · 13
 known.** The drift mappings now READ the paper + list inset and the item's
 min-height instead of receipting a citation the capture contradicted.
 
+### 2026-09-02 (night) — Carbon's tabs captured at the archetype's shape; tabs@1 learns where a label sits
+
+tabs/carbon had been a named content mismatch: the capture mounted three
+tabs and the selected panel's text, tabs@1 draws two tabs and no panel.
+The config entry now mounts two tabs and no TabPanels (a person's step,
+named in the config), and the proposal was re-read from that capture. The
+first re-mint scored worse (16.22%): Carbon's label sits centred in its
+40px tab while tabs@1 put it at the top. No stylesheet channel says so —
+the tab is a `<button>`, and the UA centres a button's content. tabs@1
+gained `tab.verticalAlign`, read as align-items center OR a `<button>` tab
+(the ledger exposes the element name as the `@tag` channel), driving the
+tab frame's primary (vertical) axis; contentAlign keeps the counter axis.
+MUI reads center on both, as before. tabs v16 (235:97391):
+
+    tabs/carbon 13.12% at 159x26 vs 175x26 (heights agree; was 9.57% against the wrong reference, then 16.22%)
+
+What remains is measured: the rest tab's 2px `#e0e0e0` bottom border,
+which tabs@1 refuses by name (it draws the selected indicator only), is
+16px of the render's ink width. Reclassified **real-defect** with that
+cause; a rest-tab underline leaf would close it. Tally 52 pass · 0 fringe
+· 13 known. The Carbon re-capture moved the census pins (control-equal
+drops 37,271 → 34,729; span-fallback 32 → 30) and the corpus ledger names
+the five tabs promotions it no longer re-derives.
+
 ### 2026-09-02 (late) — the paste verb, proven per row
 
 `recipe/plugin-target-proof.ts` emits every proposed row's plugin-target

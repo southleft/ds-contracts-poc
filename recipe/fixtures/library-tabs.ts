@@ -132,6 +132,7 @@ const astryxTokens = cloneTokens("astryx.tabs", (path, fallback) => {
 });
 astryxTokens.lineHeightUnit = "px";
 astryxTokens.tab.contentAlign = "start"; // no alignment fact read for TabList (no capture lane); keeps the stacked start
+astryxTokens.tab.verticalAlign = "start"; // no alignment fact read (no capture lane); keeps the stacked start
 astryxTokens.textCase = "original";
 astryxTokens.typography = {
   rest: astryxRestFont(),
@@ -162,6 +163,7 @@ const muiTokens = cloneTokens("mui.tabs", (path, fallback) => {
 });
 muiTokens.lineHeightUnit = "percent";
 muiTokens.tab.contentAlign = "center"; // ledger MuiTab-root display flex, flex-direction column, justify-content center, align-items center
+muiTokens.tab.verticalAlign = "center"; // the same flex centring: MuiTab-root align-items center
 muiTokens.textCase = "upper";
 muiTokens.typography = { rest: muiLabelFont(), selected: muiLabelFont() };
 
@@ -188,6 +190,7 @@ const antdTokens = cloneTokens("antd.tabs", (path, fallback) => {
 });
 antdTokens.lineHeightUnit = "px";
 antdTokens.tab.contentAlign = "center"; // antd/es/tabs/style/index.js .ant-tabs-tab alignItems center
+antdTokens.tab.verticalAlign = "center"; // antd/es/tabs/style/index.js .ant-tabs-tab alignItems center
 antdTokens.textCase = "original";
 antdTokens.typography = { rest: antdLabelFont(), selected: antdLabelFont() };
 
@@ -293,11 +296,12 @@ const tokenFacts = (
       path.startsWith("tokens.typography") ||
       path === "tokens.textCase" ||
       path === "tokens.lineHeightUnit" ||
-      path === "tokens.tab.contentAlign"
+      path === "tokens.tab.contentAlign" ||
+      path === "tokens.tab.verticalAlign"
     ) {
       facts.push({
         occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
-        category: path === "tokens.tab.contentAlign" ? "geometry" : "typography",
+        category: path === "tokens.tab.contentAlign" || path === "tokens.tab.verticalAlign" ? "geometry" : "typography",
         source: {
           kind: "review",
           evidence: `${evidence}; reviewed ${path}=${String(value)}`,

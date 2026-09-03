@@ -61,6 +61,12 @@
       "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.justify-content",
       "formula": "justify-content center → center, else start"
     },
+    "tab.verticalAlign": {
+      "value": "center",
+      "from": "ledger",
+      "key": "extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.align-items | extract/computed/out/carbon/tabs/captured-truth.json#__default idx:1.0.@tag",
+      "formula": "align-items center → center; a <button> tab → center (the UA centres a button's content on the cross axis, with no stylesheet channel saying so — Carbon); else start"
+    },
     "indicator.height": {
       "value": 2,
       "from": "ledger",

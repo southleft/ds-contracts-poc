@@ -25,7 +25,13 @@ import {
 
 export const TABS_FIGMA_NAMESPACE = "ds.contracts.tabs.recipe.v1";
 export const TABS_FIGMA_WRITER_VERSION = 1;
-export const TABS_FIGMA_RUN_SUFFIX = "tabs-v13";
+export const TABS_FIGMA_RUN_SUFFIX = "tabs-v16";
+/** v15 stay (the tab frame's layout is vertical: verticalAlign now drives its primary axis and contentAlign the counter axis (v15 had them crossed)) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V15_PAGE_ID = "235:97275";
+/** v14 stay (tabs@1 gains tab.verticalAlign (align-items center, or a <button> whose content the UA centres): Carbon's label sits centred in its 40px tab; v14 placed it at the top) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V14_PAGE_ID = "235:97110";
+/** v13 stay (Carbon's tabs re-captured at the archetype's shape (two tabs, no panel); the proposal re-read from that capture) is preserved as evidence and never written again. */
+export const FORBIDDEN_TABS_V13_PAGE_ID = "218:91353";
 /** v12 stay (Carbon tab height read as its minimum height) is preserved as evidence and never written again. */
 export const FORBIDDEN_TABS_V12_PAGE_ID = "218:91238";
 /** v11 stay (proposed MUI (own capture) and Carbon (held out, border indicator) tabs) is preserved as evidence and never written again. */
@@ -278,6 +284,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "235:97275", "marker": "TABS-V15-PAGE" },
+    { "id": "235:97110", "marker": "TABS-V14-PAGE" },
+    { "id": "218:91353", "marker": "TABS-V13-PAGE" },
     { "id": "218:91238", "marker": "TABS-V12-PAGE" },
     { "id": "218:90322", "marker": "TABS-V11-PAGE" },
     { "id": "218:87732", "marker": "TABS-V10-PAGE" },

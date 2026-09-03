@@ -388,9 +388,9 @@
     {
       "label": "tabs/carbon",
       "status": "fail",
-      "pctAAMasked": 9.57,
-      "canvasPx": "159x37",
-      "realPx": "261x60",
+      "pctAAMasked": 13.12,
+      "canvasPx": "159x26",
+      "realPx": "175x26",
       "convergesAt": null
     },
     {

@@ -416,31 +416,31 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### astryx — @astryxdesign/core@0.1.6#TabList
 
-ledger _(none — receipt-only)_ · 25 facts: **0 match**, **0 drift**, 25 named receipts, 0 unread
+ledger _(none — receipt-only)_ · 26 facts: **0 match**, **0 drift**, 26 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui-proposed — @mui/material@9.2.0#Tabs
 
-ledger `extract/computed/out/mui/tabs/captured-truth.json` · 25 facts: **25 match**, **0 drift**, 0 named receipts, 0 unread
+ledger `extract/computed/out/mui/tabs/captured-truth.json` · 26 facts: **26 match**, **0 drift**, 0 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### carbon — @carbon/react@1.112.0#Tabs
 
-ledger `extract/computed/out/carbon/tabs/captured-truth.json` · 25 facts: **21 match**, **0 drift**, 4 named receipts, 0 unread
+ledger `extract/computed/out/carbon/tabs/captured-truth.json` · 26 facts: **22 match**, **0 drift**, 4 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Tabs
 
-ledger `extract/computed/out/mui/tabs/captured-truth.json` · 25 facts: **21 match**, **0 drift**, 4 named receipts, 0 unread
+ledger `extract/computed/out/mui/tabs/captured-truth.json` · 26 facts: **21 match**, **0 drift**, 5 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### antd — antd@5.29.3#Tabs
 
-ledger _(none — receipt-only)_ · 25 facts: **0 match**, **0 drift**, 25 named receipts, 0 unread
+ledger _(none — receipt-only)_ · 26 facts: **0 match**, **0 drift**, 26 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -999,6 +999,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **tabs/astryx** `lineHeightUnit` = `px` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
 - **tabs/astryx** `textCase` = `original` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
 - **tabs/astryx** `tab.contentAlign` = `start` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
+- **tabs/astryx** `tab.verticalAlign` = `start` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
 - **tabs/astryx** `labelLetterSpacing` = `0` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
 - **tabs/astryx** `typography.rest.family` = `-apple-system` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
 - **tabs/astryx** `typography.rest.style` = `Regular` — the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs _[docs/34 Astryx Tabs — no extract/computed capture subject]_
@@ -1012,6 +1013,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **tabs/mui** `lineHeightUnit` = `percent` — recipe spelling of percent line-height from button typography _[reviewed percent]_
 - **tabs/mui** `textCase` = `upper` — Tab label text-transform uppercase — recipe spelling _[reviewed upper]_
 - **tabs/mui** `tab.contentAlign` = `center` — MuiTab-root justify-content center / align-items center — recipe spelling of the flex centring _[reviewed center]_
+- **tabs/mui** `tab.verticalAlign` = `center` — MuiTab-root align-items center — recipe spelling of the flex centring on the cross axis _[reviewed center]_
 - **tabs/antd** `list.itemSpacing` = `32` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
 - **tabs/antd** `tab.paddingX` = `0` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
 - **tabs/antd** `tab.paddingY` = `12` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
@@ -1032,6 +1034,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **tabs/antd** `lineHeightUnit` = `px` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
 - **tabs/antd** `textCase` = `original` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
 - **tabs/antd** `tab.contentAlign` = `center` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
+- **tabs/antd** `tab.verticalAlign` = `center` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
 - **tabs/antd** `labelLetterSpacing` = `0` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
 - **tabs/antd** `typography.rest.family` = `-apple-system` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_
 - **tabs/antd** `typography.rest.style` = `Regular` — configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention _[extract/computed/configs/antd.json components list has no Tabs]_

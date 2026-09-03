@@ -46,6 +46,7 @@ const carbonTokens = cloneTokens("carbon.tabs", (path) => {
 carbonTokens.lineHeightUnit = "px" as "px" | "auto" | "percent";
 carbonTokens.textCase = "original" as "original" | "upper";
 carbonTokens.tab.contentAlign = "start" as "start" | "center";
+carbonTokens.tab.verticalAlign = "center" as "start" | "center";
 carbonTokens.typography = { rest: {
     requestedFamily: "IBM Plex Sans",
     requestedStyle: "Regular",

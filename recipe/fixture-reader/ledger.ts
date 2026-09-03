@@ -99,6 +99,10 @@ export class Ledger {
   /** Read one raw channel string (optionally from a pseudo element). */
   raw(comboKey: string, selector: string, channel: string, pseudo?: string): string {
     const part = this.part(comboKey, selector);
+    // "@tag" is the part's element name, not a computed channel: a read a
+    // schema needs when the UA, not a stylesheet, decides a layout fact
+    // (a <button> centres its content vertically).
+    if (channel === "@tag" && !pseudo) return part.tag;
     const map = pseudo ? part.pseudo[pseudo] : part.style;
     if (!map) {
       throw new LedgerReadError(

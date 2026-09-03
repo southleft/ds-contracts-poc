@@ -248,7 +248,7 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   altitude: { components: 8, drops: 4734, authored: 6, fallback: 5 },
   antd: { components: 13, drops: 25388, authored: 31, fallback: 21 },
   astryx: { components: 11, drops: 25096, authored: 0, fallback: 18 },
-  carbon: { components: 10, drops: 37271, authored: 12, fallback: 32 },
+  carbon: { components: 10, drops: 34729, authored: 12, fallback: 30 }, // 2026-09-02: Tabs re-captured at the archetype's shape (two tabs, no panel): 2,542 fewer control-equal drops, 2 fewer span-fallback parts,
   // 2026-09-02 — three rows re-pinned by hand, each move named (a moved count is
   // a human's decision, in either direction):
   //   · fluent 20,892 -> 20,886 (-6): the Avatar capture record was re-taken

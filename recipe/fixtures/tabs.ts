@@ -43,6 +43,7 @@ export const canonicalTabsRecipeInstance = {
       minHeight: number("ds.tabs.tab-minHeight", 0),
       fill: color("ds.tabs.tab-fill", "#00000000"),
       contentAlign: "start",
+      verticalAlign: "start",
     },
     indicator: {
       height: number("ds.tabs.indicator-height", 2),

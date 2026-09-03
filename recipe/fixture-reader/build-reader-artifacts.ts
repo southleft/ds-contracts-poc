@@ -278,6 +278,7 @@ const EXTRA_KEYS = [
   // Nested string leaf (tabs@1): the tab's content alignment. EXTRA_KEYS are
   // resolved as dotted paths below, so a nested spelling is allowed.
   "tab.contentAlign",
+  "tab.verticalAlign",
   // textarea@1 / radio@1 proposals map these string leaves (the hand tables do not)
   "labelPlacement", "outlineTreatment", "boxClips",
   // alert@1 proposals read the four glyphs from the capture
