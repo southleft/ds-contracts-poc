@@ -70,3 +70,13 @@ reason; its proposal is the fair comparison and scores 1.25%.
 MUI's `resize` grip (`resize: vertical` read from the inner), the fieldset
 legend lowering, the hover/focus-visible/active interactions the capture
 made — each a refusal row on the generated module.
+
+## 2026-09-02 (night) — strokeAlign is read, not spelled
+
+The proposal had spelled MUI's outline stroke "outside" because a distinct
+outline part exists. Measured, the fieldset overlays the root exactly (188 =
+188; its top border runs through the legend's centre at the root's top edge),
+so the stroke draws INSIDE the 56px box; drawn outside, Figma rendered 58 and
+the row sat at 8.28%. The schema now reads the outline's border-box width
+against the box's and decides; MUI reads inside. textarea v13: 0.63%.
+

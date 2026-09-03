@@ -129,9 +129,10 @@
       "why": "follows from the anatomy: a legend inside a distinct outline is the notched treatment"
     },
     "strokeAlign": {
-      "value": "outside",
-      "from": "spelling",
-      "why": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside"
+      "value": "inside",
+      "from": "ledger",
+      "key": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.width | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.padding-left | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.padding-right | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-left-width | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-right-width | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.box-sizing | extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.width",
+      "formula": "the outline part's border-box width against the box's: equal → the outline overlays the box and its stroke draws inside; wider → outside"
     },
     "boxClips": {
       "value": "true",

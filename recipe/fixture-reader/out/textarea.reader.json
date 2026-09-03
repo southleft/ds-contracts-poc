@@ -1481,11 +1481,20 @@
       },
       {
         "path": "strokeAlign",
-        "fixtureValue": "outside",
-        "verdict": "receipt",
-        "proposedValue": "outside",
-        "receipt": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside",
-        "evidence": "reviewed outside"
+        "fixtureValue": "inside",
+        "verdict": "match",
+        "capturedValue": "inside",
+        "proposedValue": "inside",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.width",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.padding-left",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.padding-right",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-left-width",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-right-width",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.box-sizing",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.width"
+        ],
+        "formula": "the outline part's border-box width against the box's: equal → the outline overlays the box and its stroke draws inside; wider → outside"
       },
       {
         "path": "boxClips",
@@ -1747,9 +1756,9 @@
       }
     ],
     "counts": {
-      "match": 40,
+      "match": 41,
       "drift": 0,
-      "receipt": 5,
+      "receipt": 4,
       "unread": 0
     }
   },
@@ -1944,7 +1953,7 @@
         "fixtureValue": "inside",
         "verdict": "receipt",
         "proposedValue": "inside",
-        "receipt": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside",
+        "receipt": "the box draws its own border, inside its border-box — recipe spelling",
         "evidence": "reviewed inside"
       },
       {
@@ -2396,7 +2405,7 @@
         "fixtureValue": "inside",
         "verdict": "receipt",
         "proposedValue": "inside",
-        "receipt": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside",
+        "receipt": "the box draws its own border, inside its border-box — recipe spelling",
         "evidence": "reviewed inside"
       },
       {
@@ -2879,7 +2888,7 @@
         "fixtureValue": "inside",
         "verdict": "receipt",
         "proposedValue": "inside",
-        "receipt": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside",
+        "receipt": "the box draws its own border, inside its border-box — recipe spelling",
         "evidence": "reviewed inside"
       },
       {

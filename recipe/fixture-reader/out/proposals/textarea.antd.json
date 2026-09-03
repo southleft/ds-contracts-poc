@@ -119,7 +119,7 @@
     "strokeAlign": {
       "value": "inside",
       "from": "spelling",
-      "why": "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside"
+      "why": "the box draws its own border, inside its border-box — recipe spelling"
     },
     "boxClips": {
       "value": "true",

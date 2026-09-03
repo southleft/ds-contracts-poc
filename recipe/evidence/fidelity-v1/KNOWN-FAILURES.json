@@ -18,10 +18,6 @@
       "class": "font-substrate",
       "cause": "7.73% (tabs v6; was 14.73% \u2192 18.07% \u2192 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge \u2014 no geometry the recipe decided."
     },
-    "textarea/mui": {
-      "class": "real-defect",
-      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height \u2014 InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
-    },
     "chip/carbon": {
       "class": "font-substrate",
       "cause": "8.56% at 35x24 vs 36x24 \u2014 HELD-OUT proposal (Carbon Tag, 13 leaves read, 0 invented). The diff hugs the three glyphs of 'Tag' (IBM Plex Sans Regular 12px) and nothing else: Figma rasterises the face one column narrower than Chromium. Geometry, fill and radius agree."
@@ -53,10 +49,6 @@
     "link/chakra": {
       "class": "font-substrate",
       "cause": "10.26% at 30x12 vs 30x13 \u2014 HELD-OUT proposal (Chakra Link, captured 2026-09-02 from a config entry a person wrote; 14 leaves read, 0 invented). The legacy contract path quarantines this capture on `text-underline-offset`; the real render exists only because the quarantine path now keeps `--keep-originals` screenshots. Inter Regular 16px resolved EXACT in Figma; the glyph masks agree in width (30) and differ by one row in height: Chromium rasterises 'Link' 13 rows tall, Figma 12 \u2014 the face's hinting at this size, the same class as MUI's proposed link (31x15 vs 31x14). Colour, line-height (24px) and no-underline agree."
-    },
-    "textarea/mui-proposed": {
-      "class": "real-defect",
-      "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height \u2014 InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     },
     "menu/mui": {
       "class": "content-mismatch",

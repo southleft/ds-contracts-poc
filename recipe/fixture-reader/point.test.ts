@@ -313,7 +313,7 @@ test("textarea@1 reads MUI's floating notched label from the label's transform a
   const dir = mkdtempSync(path.join(tmpdir(), "point-"));
   const m = proposeTextareaFixture({ library: "mui", ledger: "extract/computed/out/mui/textarea/captured-truth.json", roles: mui.roles as TextareaRoles, combos: mui.combos as TextareaComboMap, out: path.relative(REPO, path.join(dir, "textarea.mui.ts")), unsupported: ["hover"], sets: { notchFill: { value: "#ffffffff", why: "palette.background.paper" }, "states.empty.disabled.value": { value: "#00000061", why: "palette.text.disabled" } } });
   assert.deepEqual(m.refused, []);
-  for (const [k, v] of [["labelPlacement", "floating"], ["outlineTreatment", "notched"], ["strokeAlign", "outside"], ["labelInsetX", 14], ["labelInactiveOffsetY", 16], ["labelFloatingOffsetY", -9], ["floatingLabelFontSize", 12], ["box.rows", 1], ["box.height", 56]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
+  for (const [k, v] of [["labelPlacement", "floating"], ["outlineTreatment", "notched"], ["strokeAlign", "inside"], ["labelInsetX", 14], ["labelInactiveOffsetY", 16], ["labelFloatingOffsetY", -9], ["floatingLabelFontSize", 12], ["box.rows", 1], ["box.height", 56]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
   assert.equal(m.proposal.content.label, "Notes");
   assert.equal(m.proposal.content.placeholder, "Add a note");
   assert.match(m.proposal.content.placeholderSource, /configs\/mui\.json#Textarea fixedProps\.placeholder/);

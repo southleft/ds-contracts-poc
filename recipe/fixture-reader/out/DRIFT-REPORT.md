@@ -62,7 +62,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui-proposed — @mui/material@9.2.0#TextField
 
-ledger `extract/computed/out/mui/textarea/captured-truth.json` · 45 facts: **40 match**, **0 drift**, 5 named receipts, 0 unread
+ledger `extract/computed/out/mui/textarea/captured-truth.json` · 45 facts: **41 match**, **0 drift**, 4 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -631,7 +631,6 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/antd** `typography.value.family` = `-apple-system` — the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure, extract/computed/configs/antd.json fonts.__note) — the ledger's font-family is the mount pin, not the library declaration _[theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily]_
 - **textarea/mui-proposed** `notchFill` = `#ffffffff` — the notch knockout is the surface showing through the legend gap — no computed channel carries it (the legend's background is transparent) _[the paper surface showing through the legend gap: palette.background.paper #ffffff (recipe/sandboxes/input-field-mui/node_modules/@mui/material/styles/createPalette.js light.background.paper)]_
 - **textarea/mui-proposed** `outlineTreatment` = `notched` — follows from the anatomy: a legend inside a distinct outline is the notched treatment _[reviewed notched]_
-- **textarea/mui-proposed** `strokeAlign` = `outside` — follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside _[reviewed outside]_
 - **textarea/mui-proposed** `boxClips` = `true` — the box clips its text — recipe geometry _[reviewed true]_
 - **textarea/mui-proposed** `states.empty.disabled.value` = `#00000061` — ledger value unusable: the placeholder is hidden (opacity 0) at rest and at focus — its ink is unobservable in this capture _[a disabled field cannot take focus and MUI hides the rest placeholder under the label (::placeholder opacity 0) — palette.text.disabled rgba(0,0,0,0.38) (createPalette.js light.text.disabled)]_
 - **textarea/antd-proposed** `labelGap` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
@@ -645,7 +644,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/antd-proposed** `floatingLabelFontSize` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/antd-proposed** `notchFill` = `#00000000` — plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout _[reviewed #00000000]_
 - **textarea/antd-proposed** `outlineTreatment` = `plain` — follows from the anatomy: a legend inside a distinct outline is the notched treatment _[reviewed plain]_
-- **textarea/antd-proposed** `strokeAlign` = `inside` — follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside _[reviewed inside]_
+- **textarea/antd-proposed** `strokeAlign` = `inside` — the box draws its own border, inside its border-box — recipe spelling _[reviewed inside]_
 - **textarea/antd-proposed** `boxClips` = `true` — the box clips its text — recipe geometry _[reviewed true]_
 - **textarea/antd-proposed** `states.empty.enabled.label` = `#00000000` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/antd-proposed** `states.empty.disabled.label` = `#00000000` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
@@ -664,7 +663,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/chakra** `floatingLabelFontSize` = `0` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `notchFill` = `#00000000` — plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout _[reviewed #00000000]_
 - **textarea/chakra** `outlineTreatment` = `plain` — follows from the anatomy: a legend inside a distinct outline is the notched treatment _[reviewed plain]_
-- **textarea/chakra** `strokeAlign` = `inside` — follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside _[reviewed inside]_
+- **textarea/chakra** `strokeAlign` = `inside` — the box draws its own border, inside its border-box — recipe spelling _[reviewed inside]_
 - **textarea/chakra** `boxClips` = `true` — the box clips its text — recipe geometry _[reviewed true]_
 - **textarea/chakra** `states.empty.enabled.label` = `#00000000` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra** `states.empty.disabled.label` = `#00000000` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
@@ -674,7 +673,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **textarea/chakra** `typography.label.style` = `Regular` — no label part in the mount — a bare cell; the recipe compiles no label node and this leaf is the bare-cell spelling _[reviewed (bare-cell spelling)]_
 - **textarea/chakra-field** `notchFill` = `#00000000` — plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout _[reviewed #00000000]_
 - **textarea/chakra-field** `outlineTreatment` = `plain` — follows from the anatomy: a legend inside a distinct outline is the notched treatment _[reviewed plain]_
-- **textarea/chakra-field** `strokeAlign` = `inside` — follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside _[reviewed inside]_
+- **textarea/chakra-field** `strokeAlign` = `inside` — the box draws its own border, inside its border-box — recipe spelling _[reviewed inside]_
 - **textarea/chakra-field** `boxClips` = `true` — the box clips its text — recipe geometry _[reviewed true]_
 - **radio/astryx** `list.gap` = `8` — the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile _[docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]_
 - **radio/astryx** `item.gap` = `8` — the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile _[docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]_

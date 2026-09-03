@@ -552,6 +552,26 @@ Minted as textarea v12 (235:95777): textarea/antd 1.25% — identical to the
 proposed row — and the ratchet shrinks. **49 pass · 0 fringe · 16 known.**
 The two MUI textarea rows remain (resize grip, a 2px floating-label offset).
 
+### 2026-09-02 (night) — MUI's outline stroke is drawn inside the box; the last real-defect rows close
+
+textarea/mui and textarea/mui-proposed had carried 8.28% as a named real
+defect ("resize grip; a 2px floating-label offset"). Measured tonight: the
+resize grip is not there (`resize: none`), and the 2px is geometry. MUI's
+notched-outline fieldset overlays the input root exactly — its border-box
+width equals the root's (188) and a fieldset draws its top border through
+the legend's centre, at the root's top edge — so the visible outline lies
+INSIDE the 56px box. The recipe spelled "a distinct outline part draws
+outside", and Figma rendered 58. strokeAlign is now a READ (the outline's
+border-box width against the box's) for proposals, and the hand table cites
+the same fact. Minted as textarea v13 (235:96329):
+
+    textarea/mui 0.63% · textarea/mui-proposed 0.63% (were 8.28%) · the other five unchanged
+
+**51 pass · 0 fringe · 14 known** — every remaining named row is either
+Figma-vs-Chromium glyph rasterisation (12) or a hand table's content
+mismatch beside a passing proposed row (menu/mui, tabs/carbon). No row is
+named for a geometry the recipe gets wrong.
+
 ### 2026-09-02 (late) — the paste verb, proven per row
 
 `recipe/plugin-target-proof.ts` emits every proposed row's plugin-target
@@ -589,4 +609,4 @@ Minted as dialog v7 with five sources. See `f1-dialog-proposed/`.
 
     dialog/mui-proposed 4.92% · dialog/chakra 2.57% · dialog/mui 4.81% (closed)
 
-    49 pass · 0 fringe · 16 known
+    51 pass · 0 fringe · 14 known

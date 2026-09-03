@@ -207,7 +207,11 @@ const muiTokens = cloneTokens("mui.textarea", (path, fallback) => {
   if (path === "states.value.disabled.value") return "#00000061";
   return fallback;
 });
-muiTokens.strokeAlign = "outside";
+// INSIDE (corrected 2026-09-02): the notched-outline fieldset overlays the
+// input root exactly — its border-box width equals the root's (188) and its
+// top border runs through the legend's centre, at the root's top edge — so the
+// visible outline lies inside the 56px box. Drawn outside, Figma rendered 58.
+muiTokens.strokeAlign = "inside";
 muiTokens.boxClips = true;
 muiTokens.labelPlacement = "floating";
 muiTokens.labelLineHeightUnit = "px";

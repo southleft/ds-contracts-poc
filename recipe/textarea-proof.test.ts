@@ -54,7 +54,8 @@ test("textarea@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   assert.equal(mui.tokens.box.paddingX.fallback, 14);
   assert.equal(mui.tokens.box.radius.fallback, 4, "shape.borderRadius");
   assert.equal(mui.tokens.box.lineHeight.fallback, 23, "1.4375em");
-  assert.equal(mui.tokens.strokeAlign, "outside");
+  // INSIDE since 2026-09-02: the notched-outline fieldset overlays the root exactly (measured 188 = 188; drawn outside, Figma rendered 58 against 56).
+  assert.equal(mui.tokens.strokeAlign, "inside");
   assert.equal(mui.tokens.labelPlacement, "floating");
   assert.equal(mui.tokens.outlineTreatment, "notched");
   assert.equal(mui.tokens.labelInsetX.fallback, 14);

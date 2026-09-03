@@ -76,9 +76,15 @@ const BARE_FONT = bareLabelFont();
 export const textareaSpellingsFor = (roles: Pick<TextareaRoles, "label" | "outline" | "legend">): Record<string, Spelling> => {
   const s: Record<string, Spelling> = {
     outlineTreatment: roles.legend ? "notched" : "plain",
-    strokeAlign: roles.outline ? "outside" : "inside",
     boxClips: "true",
   };
+  // A box that draws its OWN border draws it inside its border-box: a
+  // spelling. A distinct outline part is READ (below): its border rect is
+  // compared with the box's, because MUI's fieldset overlays the box exactly
+  // (its top border runs through the legend's centre, at the box's top edge)
+  // and a stroke drawn outside that box renders two pixels taller than the
+  // package (measured 2026-09-02: 58 against 56).
+  if (!roles.outline) s.strokeAlign = "inside";
   if (!roles.legend) s.notchFill = "#00000000";
   if (!roles.label) {
     Object.assign(s, {
@@ -177,7 +183,26 @@ export function textareaSchemaMappings(roles: TextareaRoles, opts: TextareaSchem
         : receipt("notchFill", "plain outline — no notched anatomy; transparent is the recipe's spelling of no knockout", "reviewed #00000000"),
     ),
     receipt("outlineTreatment", "follows from the anatomy: a legend inside a distinct outline is the notched treatment", roles.legend ? "reviewed notched" : "reviewed plain"),
-    receipt("strokeAlign", "follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside", roles.outline ? "reviewed outside" : "reviewed inside"),
+    roles.outline
+      ? {
+          path: "strokeAlign",
+          kind: "string",
+          reads: {
+            ow: { combo: base, part: roles.outline, channel: "width" },
+            opl: { combo: base, part: roles.outline, channel: "padding-left" },
+            opr: { combo: base, part: roles.outline, channel: "padding-right" },
+            obl: { combo: base, part: roles.outline, channel: "border-left-width" },
+            obr: { combo: base, part: roles.outline, channel: "border-right-width" },
+            obs: { combo: base, part: roles.outline, channel: "box-sizing" },
+            bw: { combo: base, part: roles.box, channel: "width" },
+          },
+          formula: "the outline part's border-box width against the box's: equal → the outline overlays the box and its stroke draws inside; wider → outside",
+          combine: (raw) => {
+            const outer = raw.obs === "border-box" ? px(raw.ow!) : px(raw.ow!) + px(raw.opl!) + px(raw.opr!) + px(raw.obl!) + px(raw.obr!);
+            return Math.abs(outer - px(raw.bw!)) <= 0.5 ? "inside" : "outside";
+          },
+        }
+      : receipt("strokeAlign", "the box draws its own border, inside its border-box — recipe spelling", "reviewed inside"),
     receipt("boxClips", "the box clips its text — recipe geometry", "reviewed true"),
   ];
   for (const fix of Object.keys(c) as Array<keyof TextareaComboMap>) {

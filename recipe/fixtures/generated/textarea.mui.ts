@@ -72,7 +72,7 @@ const muiTokens = cloneTokens("mui.textarea", (path) => {
 muiTokens.labelPlacement = "floating" as "stacked" | "floating";
 muiTokens.labelLineHeightUnit = "px" as "auto" | "px";
 muiTokens.outlineTreatment = "notched" as "plain" | "notched";
-muiTokens.strokeAlign = "outside" as "inside" | "outside";
+muiTokens.strokeAlign = "inside" as "inside" | "outside";
 muiTokens.boxClips = true;
 muiTokens.typography = {
   label: {

@@ -1018,10 +1018,11 @@
         "provenance": "RECEIPT: follows from the anatomy: a legend inside a distinct outline is the notched treatment [reviewed notched]"
       },
       "strokeAlign": {
-        "fixture": "outside",
-        "proposed": "outside",
-        "verdict": "receipt",
-        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed outside]"
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "match",
+        "captured": "inside",
+        "provenance": "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.width ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.padding-left ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.padding-right ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-left-width ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.border-right-width ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.2.box-sizing ; extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default idx:1.width — the outline part's border-box width against the box's: equal → the outline overlays the box and its stroke draws inside; wider → outside"
       },
       "boxClips": {
         "fixture": "true",
@@ -1335,7 +1336,7 @@
         "fixture": "inside",
         "proposed": "inside",
         "verdict": "receipt",
-        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed inside]"
+        "provenance": "RECEIPT: the box draws its own border, inside its border-box — recipe spelling [reviewed inside]"
       },
       "boxClips": {
         "fixture": "true",
@@ -1644,7 +1645,7 @@
         "fixture": "inside",
         "proposed": "inside",
         "verdict": "receipt",
-        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed inside]"
+        "provenance": "RECEIPT: the box draws its own border, inside its border-box — recipe spelling [reviewed inside]"
       },
       "boxClips": {
         "fixture": "true",
@@ -1962,7 +1963,7 @@
         "fixture": "inside",
         "proposed": "inside",
         "verdict": "receipt",
-        "provenance": "RECEIPT: follows from the anatomy: a distinct outline part draws outside the box; the box's own border draws inside [reviewed inside]"
+        "provenance": "RECEIPT: the box draws its own border, inside its border-box — recipe spelling [reviewed inside]"
       },
       "boxClips": {
         "fixture": "true",
