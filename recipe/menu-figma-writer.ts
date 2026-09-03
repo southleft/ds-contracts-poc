@@ -25,7 +25,11 @@ import {
 
 export const MENU_FIGMA_NAMESPACE = "ds.contracts.menu.recipe.v1";
 export const MENU_FIGMA_WRITER_VERSION = 1;
-export const MENU_FIGMA_RUN_SUFFIX = "menu-v8";
+export const MENU_FIGMA_RUN_SUFFIX = "menu-v10";
+/** v9 stay (the hand MUI table's item min-height is the above-sm value (auto → 0), as the capture reads; v9 carried the mobile 48) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V9_PAGE_ID = "235:96881";
+/** v8 stay (the hand MUI table takes the capture's facts: panel inset 8 (paper 0 + list 8) and the captured item texts; the row was a named content mismatch) is preserved as evidence and never written again. */
+export const FORBIDDEN_MENU_V8_PAGE_ID = "229:94381";
 /** v7 stay (panel.minWidth leaf: the Chakra held-out read 128px and the MUI paper 16px; menu v7 minted before the leaf existed) is preserved as evidence and never written again. */
 export const FORBIDDEN_MENU_V7_PAGE_ID = "228:93939";
 /** v6 stay (menu@1 proposer: MUI from its own two-item capture and Chakra's Menu held out (Portal composition, captured today)) is preserved as evidence and never written again. */
@@ -268,6 +272,8 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "235:96881", "marker": "MENU-V9-PAGE" },
+    { "id": "229:94381", "marker": "MENU-V8-PAGE" },
     { "id": "228:93939", "marker": "MENU-V7-PAGE" },
     { "id": "218:90653", "marker": "MENU-V6-PAGE" },
     { "id": "218:88063", "marker": "MENU-V5-PAGE" },

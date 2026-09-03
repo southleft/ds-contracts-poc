@@ -4,10 +4,10 @@
     "pctAAMaskedMax": 5
   },
   "subjects": 65,
-  "passed": 51,
-  "failed": 14,
+  "passed": 52,
+  "failed": 13,
   "fringeExcused": 0,
-  "knownFailures": 14,
+  "knownFailures": 13,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -507,9 +507,9 @@
     },
     {
       "label": "menu/mui",
-      "status": "fail",
-      "pctAAMasked": 6.79,
-      "canvasPx": "65x61",
+      "status": "pass",
+      "pctAAMasked": 4.73,
+      "canvasPx": "82x53",
       "realPx": "117x88",
       "convergesAt": null
     },
