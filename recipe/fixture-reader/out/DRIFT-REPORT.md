@@ -454,7 +454,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Menu
 
-ledger `extract/computed/out/mui/menu/captured-truth.json` · 15 facts: **11 match**, **0 drift**, 4 named receipts, 0 unread
+ledger `extract/computed/out/mui/menu/captured-truth.json` · 15 facts: **13 match**, **0 drift**, 2 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -1052,9 +1052,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **menu/astryx** `lineHeightUnit` = `px` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
 - **menu/astryx** `typography.label.family` = `-apple-system` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
 - **menu/astryx** `typography.label.style` = `Regular` — the capture floor has no Menu subject — configs/astryx.json does not mount Menu _[docs/34 Astryx Menu — no extract/computed capture subject]_
-- **menu/mui** `panel.padding` = `0` — Menu-paper padding is 0; the 8px vertical padding lives on Menu-list — the recipe spells panel.padding 0 and does not expose list padding as a separate leaf _[Menu.js paper padding 0 — reviewed 0]_
 - **menu/mui** `panel.itemSpacing` = `0` — Menu list has no gap — 0 is the recipe spelling _[reviewed 0]_
-- **menu/mui** `item.minHeight` = `48` — MenuItem dense/default computed height is 36 under the capture mount; the recipe cites MenuItem minHeight 48 from the source token — that 48 is the reviewed source citation, not the dense capture plane _[MenuItem.js minHeight 48 — reviewed 48]_
 - **menu/mui** `lineHeightUnit` = `px` — recipe spelling of the MenuItem line-height unit axis (px length) _[reviewed px]_
 - **menu/antd** `panel.padding` = `4` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_
 - **menu/antd** `panel.radius` = `8` — configs/antd.json does not mount Menu — no capture-floor ledger _[extract/computed/configs/antd.json components list has no Menu]_

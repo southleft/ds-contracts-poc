@@ -109,14 +109,22 @@ astryxTokens.lineHeightUnit = "px";
 astryxTokens.typography = { label: astryxFont() };
 
 const muiTokens = cloneTokens("mui.menu", (path, fallback) => {
-  if (path === "panel.padding") return 0;
+  // 8 (corrected 2026-09-02): Menu's paper pads 0 but its MenuList pads 8px 0
+  // (List.js padding: `paddingTop: 8, paddingBottom: 8` unless disablePadding);
+  // the recipe carries ONE panel inset, paper + list, which the capture reads as 8.
+  // The hand table had spelled 0 and the row was a named content mismatch.
+  if (path === "panel.padding") return 8;
   if (path === "panel.radius") return 4;
   if (path === "panel.itemSpacing") return 0;
   if (path === "panel.minWidth") return 16; // Popover.js:85 PopoverPaper minWidth: 16 (Menu's paper is a PopoverPaper); the capture reads 16px
   if (path === "panel.fill") return "#ffffffff";
   if (path === "item.paddingX") return 16;
   if (path === "item.paddingY") return 6;
-  if (path === "item.minHeight") return 48;
+  // 0 (corrected 2026-09-02): MenuItem.js sets minHeight 48 and, at
+  // theme.breakpoints.up("sm"), minHeight "auto" (MenuItem.js:71, :141-142);
+  // the capture's 900px viewport is above sm (600), so the item hugs — the
+  // hand table had carried the below-sm value and the row was 12px too tall.
+  if (path === "item.minHeight") return 0;
   if (path === "item.fill") return "#00000000";
   if (path === "labelFontSize") return 16;
   if (path === "labelLineHeight") return 24;
@@ -462,6 +470,10 @@ export const muiMenuAdapterConfig = buildConfig(
   muiRefusals,
   anatomyFacts("mui", muiMenuSource),
   ["Polar-placement", "elevation", "selected"],
+  // The capture's two item texts (extract/computed/configs/mui.json Menu:
+  // Profile / My account), so the hand row and the proposed row draw the
+  // same words; the other hand tables keep Item One / Item Two.
+  { first: "Profile", second: "My account" },
 );
 
 export const antdMenuAdapterConfig = buildConfig(

@@ -114,10 +114,11 @@
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
     "values": {
       "panel.padding": {
-        "fixture": 0,
-        "proposed": 0,
-        "verdict": "receipt",
-        "provenance": "RECEIPT: Menu-paper padding is 0; the 8px vertical padding lives on Menu-list — the recipe spells panel.padding 0 and does not expose list padding as a separate leaf [Menu.js paper padding 0 — reviewed 0]"
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-paper.padding-top ; extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-list.padding-top — the paper's padding-top plus the list's (MUI: 0 + 8) — the recipe's one panel inset"
       },
       "panel.radius": {
         "fixture": 4,
@@ -161,10 +162,11 @@
         "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.padding-top"
       },
       "item.minHeight": {
-        "fixture": 48,
-        "proposed": 48,
-        "verdict": "receipt",
-        "provenance": "RECEIPT: MenuItem dense/default computed height is 36 under the capture mount; the recipe cites MenuItem minHeight 48 from the source token — that 48 is the reviewed source citation, not the dense capture plane [MenuItem.js minHeight 48 — reviewed 48]"
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.min-height — the item's min-height as a length; `auto`/0 means the item hugs (MenuItem.js: 48 below sm, auto above — the capture is above)"
       },
       "item.fill": {
         "fixture": "#00000000",

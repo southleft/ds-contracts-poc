@@ -51,7 +51,7 @@ measured cause.
 | menu | yes | Chakra | 5.64% named (font rasterisation; geometry matches after the panel min-width leaf) | supported, named row |
 | dialog | yes | Chakra | 2.57% | supported |
 
-Fidelity gate 51 pass · 0 fringe · 14 named (updated the same night: menu and dialog gained proposers and Chakra held-outs; the three textarea real-defect rows closed — a bare AntD cell and MUI's outline stroke drawn inside; every remaining named row is glyph rasterisation or a hand table's content mismatch). The plugin's paste verb was
+Fidelity gate 52 pass · 0 fringe · 13 named (updated the same night: menu and dialog gained proposers and Chakra held-outs; the three textarea real-defect rows and the MUI menu hand row closed; every remaining named row is glyph rasterisation, plus Carbon's tabs capture that is not the archetype's shape). The plugin's paste verb was
 exercised by the owner on 2026-09-02 (`recipe/evidence/pointed/switch-chakra/paste-verb-exercised.json`).
 The same evening every proposed row's plugin-target program was run the way the
 plugin runs it and scored against the same reference as its gate row: 39 rows,

@@ -47,11 +47,13 @@ const mList = "cls:MuiMenu-list";
 const mItem = "cls:MuiMenuItem-root";
 
 export const muiMenuMappings: FactMapping[] = [
-  receipt(
-    "panel.padding",
-    "Menu-paper padding is 0; the 8px vertical padding lives on Menu-list — the recipe spells panel.padding 0 and does not expose list padding as a separate leaf",
-    "Menu.js paper padding 0 — reviewed 0",
-  ),
+  {
+    path: "panel.padding",
+    kind: "px",
+    reads: { pp: { combo: mCombo, part: mPaper, channel: "padding-top" }, lp: { combo: mCombo, part: mList, channel: "padding-top" } },
+    formula: "the paper's padding-top plus the list's (MUI: 0 + 8) — the recipe's one panel inset",
+    combine: (raw) => parseFloat(raw.pp!) + parseFloat(raw.lp!),
+  },
   one("panel.radius", "px", { combo: mCombo, part: mPaper, channel: "border-top-left-radius" }),
   receipt(
     "panel.itemSpacing",
@@ -65,11 +67,10 @@ export const muiMenuMappings: FactMapping[] = [
   }),
   one("item.paddingX", "px", { combo: mCombo, part: mItem, channel: "padding-left" }),
   one("item.paddingY", "px", { combo: mCombo, part: mItem, channel: "padding-top" }),
-  receipt(
-    "item.minHeight",
-    "MenuItem dense/default computed height is 36 under the capture mount; the recipe cites MenuItem minHeight 48 from the source token — that 48 is the reviewed source citation, not the dense capture plane",
-    "MenuItem.js minHeight 48 — reviewed 48",
-  ),
+  one("item.minHeight", "px", { combo: mCombo, part: mItem, channel: "min-height" }, {
+    formula: "the item's min-height as a length; `auto`/0 means the item hugs (MenuItem.js: 48 below sm, auto above — the capture is above)",
+    combine: (raw) => (raw.v && /^-?\d/.test(raw.v) ? parseFloat(raw.v) : 0),
+  }),
   one("item.fill", "color", { combo: mCombo, part: mItem, channel: "background-color" }),
   one("labelFontSize", "px", { combo: mCombo, part: mItem, channel: "font-size" }),
   one("labelLineHeight", "px", { combo: mCombo, part: mItem, channel: "line-height" }),

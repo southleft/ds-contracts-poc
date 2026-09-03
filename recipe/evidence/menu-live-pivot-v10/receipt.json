@@ -1,0 +1,68 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "menu-live-pivot-v10-prepare",
+  "teaching": "One named default Menu panel; two items; placement is receipted",
+  "runIdentity": "bdaff194-0b0a5238-4706c1dc-25b7db99-b786ac54-menu-v10",
+  "pageName": "Recipe Pivot / Menu / bdaff194-0b0a5238-4706c1dc-25b7db99-b786ac54-menu-v10",
+  "namespace": "ds.contracts.menu.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "bdaff194867957363853bf50dd8071129596fa0737a79de92064053c596c4058",
+    "MUI": "0b0a52387e9f26f9ca26da01c18df3e4b009043fbfe80dd5dc7059ccfaf0aefc",
+    "Ant Design": "4706c1dcd76a25d712b027518e5fc7771a33f27eacadf1fc63bd71406d3ba7e8",
+    "MUI (proposed)": "25b7db99dfe6efbbad1176a670968bddaccf4e983e0a2c351251546a7ffb615a",
+    "Chakra (proposed)": "b786ac546377655b174c88090d266ada94582c5b6b8a10bd96ae5e104786d746"
+  },
+  "writerSha256": "3ff009eb7bdb5b1cc0c9e1a0bf95701babbae93c4c6c60fbcbc2a4cb19aa95c9",
+  "pageId": "235:96976",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=235-96976",
+  "live": {
+    "recordedFrom": "menu-v10-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Menu / bdaff194-0b0a5238-4706c1dc-25b7db99-b786ac54-menu-v10",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-menu-reviewed-v1",
+        "sectionId": "235:96977",
+        "setId": "235:96989",
+        "collectionId": "VariableCollectionId:235:96978",
+        "variantCount": 1,
+        "comparedIrFacts": 31
+      },
+      {
+        "adapterIdentity": "mui-menu-reviewed-v1",
+        "sectionId": "235:96995",
+        "setId": "235:97008",
+        "collectionId": "VariableCollectionId:235:96996",
+        "variantCount": 1,
+        "comparedIrFacts": 32
+      },
+      {
+        "adapterIdentity": "antd-menu-reviewed-v1",
+        "sectionId": "235:97014",
+        "setId": "235:97026",
+        "collectionId": "VariableCollectionId:235:97015",
+        "variantCount": 1,
+        "comparedIrFacts": 31
+      },
+      {
+        "adapterIdentity": "mui-menu-proposed-v1",
+        "sectionId": "235:97032",
+        "setId": "235:97045",
+        "collectionId": "VariableCollectionId:235:97033",
+        "variantCount": 1,
+        "comparedIrFacts": 32
+      },
+      {
+        "adapterIdentity": "chakra-menu-proposed-v1",
+        "sectionId": "235:97051",
+        "setId": "235:97064",
+        "collectionId": "VariableCollectionId:235:97052",
+        "variantCount": 1,
+        "comparedIrFacts": 32
+      }
+    ]
+  }
+}

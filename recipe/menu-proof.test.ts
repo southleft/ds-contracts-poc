@@ -33,7 +33,8 @@ test("menu@1 adapts Astryx DropdownMenu, MUI Menu, and AntD Dropdown from named 
   assert.equal(astryx.tokens.panel.itemSpacing.fallback, 2);
   assert.equal(astryx.tokens.panel.radius.fallback, 12);
   assert.equal(astryx.tokens.item.paddingY.fallback, 6);
-  assert.equal(mui.tokens.item.minHeight.fallback, 48);
+  // 0 since 2026-09-02: MenuItem.js minHeight 48 applies below theme.breakpoints.up("sm"); the capture (900px) is above, where it is auto.
+  assert.equal(mui.tokens.item.minHeight.fallback, 0);
   assert.equal(mui.tokens.labelFontSize.fallback, 16);
   assert.equal(antd.tokens.panel.radius.fallback, 8);
   assert.equal(antd.tokens.item.paddingY.fallback, 5);

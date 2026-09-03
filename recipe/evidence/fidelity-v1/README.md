@@ -572,6 +572,18 @@ Figma-vs-Chromium glyph rasterisation (12) or a hand table's content
 mismatch beside a passing proposed row (menu/mui, tabs/carbon). No row is
 named for a geometry the recipe gets wrong.
 
+### 2026-09-02 (night) — the hand MUI menu takes the capture's facts; its row closes
+
+menu/mui had been a named content mismatch beside a passing proposed row.
+Three hand-table facts were wrong, each now cited: the panel inset is 8
+(Menu's paper pads 0, its MenuList pads 8px 0 — the recipe's one inset is
+paper + list), the item min-height is 0 above `theme.breakpoints.up("sm")`
+(MenuItem.js sets 48 below and `auto` above; the capture's 900px viewport is
+above), and the item texts are the capture's. Minted as menu v10 (235:96976):
+menu/mui 4.73% — identical to menu/mui-proposed. **52 pass · 0 fringe · 13
+known.** The drift mappings now READ the paper + list inset and the item's
+min-height instead of receipting a citation the capture contradicted.
+
 ### 2026-09-02 (late) — the paste verb, proven per row
 
 `recipe/plugin-target-proof.ts` emits every proposed row's plugin-target
@@ -609,4 +621,4 @@ Minted as dialog v7 with five sources. See `f1-dialog-proposed/`.
 
     dialog/mui-proposed 4.92% · dialog/chakra 2.57% · dialog/mui 4.81% (closed)
 
-    51 pass · 0 fringe · 14 known
+    52 pass · 0 fringe · 13 known

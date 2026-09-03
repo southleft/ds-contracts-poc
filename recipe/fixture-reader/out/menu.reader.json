@@ -149,11 +149,15 @@
     "rows": [
       {
         "path": "panel.padding",
-        "fixtureValue": 0,
-        "verdict": "receipt",
-        "proposedValue": 0,
-        "receipt": "Menu-paper padding is 0; the 8px vertical padding lives on Menu-list — the recipe spells panel.padding 0 and does not expose list padding as a separate leaf",
-        "evidence": "Menu.js paper padding 0 — reviewed 0"
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-paper.padding-top",
+          "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-list.padding-top"
+        ],
+        "formula": "the paper's padding-top plus the list's (MUI: 0 + 8) — the recipe's one panel inset"
       },
       {
         "path": "panel.radius",
@@ -216,11 +220,14 @@
       },
       {
         "path": "item.minHeight",
-        "fixtureValue": 48,
-        "verdict": "receipt",
-        "proposedValue": 48,
-        "receipt": "MenuItem dense/default computed height is 36 under the capture mount; the recipe cites MenuItem minHeight 48 from the source token — that 48 is the reviewed source citation, not the dense capture plane",
-        "evidence": "MenuItem.js minHeight 48 — reviewed 48"
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.min-height"
+        ],
+        "formula": "the item's min-height as a length; `auto`/0 means the item hugs (MenuItem.js: 48 below sm, auto above — the capture is above)"
       },
       {
         "path": "item.fill",
@@ -292,9 +299,9 @@
       }
     ],
     "counts": {
-      "match": 11,
+      "match": 13,
       "drift": 0,
-      "receipt": 4,
+      "receipt": 2,
       "unread": 0
     }
   },

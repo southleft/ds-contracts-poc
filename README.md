@@ -61,7 +61,7 @@ What it has done, measured against the real package's own render
 | textarea | Chakra 1.64% (the bare cell) and Chakra Field 2.02% (labelled; captured with the value on the child) | AntD 1.25% (bare; its hand row is the same bare cell), MUI 0.63% (its outline stroke drawn inside the box) | the notch knockout colour and a placeholder hidden at rest and focus are reviewed, with citations |
 | alert | Chakra 3.03% (captured the same day; its own status icons read from the capture) | MUI 3.99%, AntD 3.35% = their hand rows | the icons' viewBox is reviewed with a citation — no computed channel carries it |
 | badge | — (no foreign anchored badge in the corpus; the others are inline labels, refused by name) | MUI 3.11% (its default cell), AntD 1.98% = its hand row | the offset read as transform minus the anchor inset; a box-shadow ring lowered to a border |
-| menu | Chakra 5.64% (named: Inter rasterisation; geometry matches to the pixel after the panel min-width leaf) | MUI 4.73% (its hand row is a named content mismatch) | the panel inset read as paper plus list padding; references cropped to the paper's recorded rect |
+| menu | Chakra 5.64% (named: Inter rasterisation; geometry matches to the pixel after the panel min-width leaf) | MUI 4.73% (= its hand row, once the table took the capture's inset, min-height and texts) | the panel inset read as paper plus list padding; references cropped to the paper's recorded rect |
 | dialog | Chakra 2.57% (captured the same day through a Portal composition) | MUI 4.92%; the hand row passes too against the title + body reference | the paper's asymmetric inset read as sums along the edges the recipe draws |
 
 Every proposal reads its values from the capture (13–43 leaves each), records

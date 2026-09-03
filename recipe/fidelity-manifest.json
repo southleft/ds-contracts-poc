@@ -589,27 +589,27 @@
     },
     {
       "label": "menu/mui",
-      "page": "229:94381",
+      "page": "235:96976",
       "component": "menu/variant/default :: MUI Menu",
-      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-default-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-default-shared-v10.png",
       "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
       "referenceCrop": "cls:MuiMenu-paper",
-      "_why": "OVERLAY REFERENCE (2026-09-02): the real screenshot is the popover root; the reference is cropped to the paper's rendered rect recorded beside the PNG (__default.rects.json). First scorable menu row. Re-minted as menu v8 (229:94381) after menu@1 gained a panel.minWidth leaf (Chakra reads 128px, MUI paper 16px)."
+      "_why": "OVERLAY REFERENCE (2026-09-02): the real screenshot is the popover root; the reference is cropped to the paper's rendered rect recorded beside the PNG (__default.rects.json). First scorable menu row. Re-minted as menu v8 (229:94381) after menu@1 gained a panel.minWidth leaf (Chakra reads 128px, MUI paper 16px). Re-minted as menu v9 after the hand table took the capture's facts (panel inset 8, the captured item texts)."
     },
     {
       "label": "menu/mui-proposed",
-      "page": "229:94381",
+      "page": "235:96976",
       "component": "menu/variant/default :: MUI (proposed) Menu",
-      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-proposed-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/menu-mui-proposed-default-v10.png",
       "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
       "referenceCrop": "cls:MuiMenu-paper",
       "_why": "PROPOSED from MUI's own capture by the menu@1 role schema (14 read, 0 invented) \u2014 the capture now mounts two items, the archetype's shape (the person's config step); the panel inset is the paper's padding plus the list's (0 + 8). Reference cropped to MuiMenu-paper. Re-minted as menu v8 (229:94381) after menu@1 gained a panel.minWidth leaf (Chakra reads 128px, MUI paper 16px)."
     },
     {
       "label": "menu/chakra",
-      "page": "229:94381",
+      "page": "235:96976",
       "component": "menu/variant/default :: Chakra (proposed) Menu",
-      "shot": "recipe/evidence/fidelity-v1/shots/menu-chakra-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/menu-chakra-default-v10.png",
       "reference": "extract/computed/out/chakra/menu/orig-shots/__default.png",
       "referenceCrop": "cls:chakra-menu__content",
       "_why": "HELD OUT: Chakra's Menu, captured 2026-09-02 from a config entry a person wrote (MenuRoot open \u2283 MenuTrigger + Portal \u2283 MenuPositioner \u2283 MenuContent \u2283 two MenuItems); the legacy contract path quarantines it, the real screenshot and rects were kept. 14 read, 0 invented. Reference cropped to the content panel. Re-minted as menu v8 (229:94381) after menu@1 gained a panel.minWidth leaf (Chakra reads 128px, MUI paper 16px)."

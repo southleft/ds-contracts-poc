@@ -50,10 +50,6 @@
       "class": "font-substrate",
       "cause": "10.26% at 30x12 vs 30x13 \u2014 HELD-OUT proposal (Chakra Link, captured 2026-09-02 from a config entry a person wrote; 14 leaves read, 0 invented). The legacy contract path quarantines this capture on `text-underline-offset`; the real render exists only because the quarantine path now keeps `--keep-originals` screenshots. Inter Regular 16px resolved EXACT in Figma; the glyph masks agree in width (30) and differ by one row in height: Chromium rasterises 'Link' 13 rows tall, Figma 12 \u2014 the face's hinting at this size, the same class as MUI's proposed link (31x15 vs 31x14). Colour, line-height (24px) and no-underline agree."
     },
-    "menu/mui": {
-      "class": "content-mismatch",
-      "cause": "6.79% at 65x61 vs 117x88 \u2014 the hand row against the two-item capture (the person's config step of 2026-09-02; the first score, 5.46%, was against three items). Content mismatch: the hand table carries 'Item One' / 'Item Two' where the capture renders 'Profile' / 'My account', and its panel.padding is 0 where the list carries 8. The proposed row beside it reads both from the capture and passes."
-    },
     "menu/chakra": {
       "class": "font-substrate",
       "cause": "5.64% at 76x46 vs 128x76 \u2014 HELD OUT (Chakra Menu, captured 2026-09-02 through a Portal composition; 15 read, 0 invented). The geometry now matches the real render to the pixel: menu@1 gained a panel.minWidth leaf (Chakra reads 128px) and the v8 mint (229:94381) exports 128x76 like the reference; the glyph ink sits at (15,16)-(91,61) in the reference and (15,16)-(90,61) on canvas. The residual is Figma-vs-Chromium rasterisation of Inter 14px (the canvas glyphs are heavier: ink 10.5% vs 6.8% with the panel's refused 0 0 1px shadow ring simulated as a stroke, boxes aligned, diff still glyph-shaped at 6.67%) \u2014 the same class as tooltip/chakra and link/chakra. The '76x46' is the scorer's ink trim of a white panel over white; the panel's drop shadow stays refused by name."
