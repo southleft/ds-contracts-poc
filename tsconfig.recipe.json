@@ -1,0 +1,28 @@
+{
+  // The CURRENT recipe surface, statically typechecked (docs/32 named this as
+  // post-merge work). Per-version lineage files are byte-frozen receipts and
+  // stay out; pivot-status.ts's ~11k-operand boolean chains crash the binder.
+  "extends": "./tsconfig.json",
+  "include": [
+    "recipe/*.ts",
+    "recipe/recipes",
+    "recipe/adapters",
+    "recipe/fixtures",
+    "recipe/fixture-reader",
+    "recipe/output"
+  ],
+  "exclude": [
+    "recipe/**/*-v?.ts",
+    "recipe/**/*-v??.ts",
+    "recipe/**/*-v?.test.ts",
+    "recipe/**/*-v??.test.ts",
+    "recipe/**/*-v?-*.ts",
+    "recipe/**/*-v??-*.ts",
+    "recipe/**/*-v???.ts",
+    "recipe/**/*-live-*",
+    "recipe/pivot-status.ts",
+    "recipe/pivot-status.test.ts",
+    "recipe/evidence",
+    "recipe/sandboxes"
+  ]
+}

@@ -250,14 +250,14 @@ export function draftSwitchRoles(ledger: Ledger): SwitchRoleDraft {
     const moved = (p: LedgerPart, ch: "transform" | "translate"): boolean => (p.style[ch] ?? "none") !== (onBy.get(p.idxPath)?.style[ch] ?? "none");
     const mover = off.parts.find((p) => moved(p, "transform")) ?? off.parts.find((p) => moved(p, "translate"));
     if (mover) { const ch = moved(mover, "transform") ? "transform" : "translate"; roles.travelOn = sel(mover); if (ch === "translate") roles.travelChannel = "translate"; evidence.travelOn = { selector: roles.travelOn, why: `${mover.tag}${mover.classes.length ? "." + mover.classes[0] : ""} ${ch} ${mover.style[ch]} → ${onBy.get(mover.idxPath)?.style[ch]}`, confidence: "high" }; }
-    else if (thumb && ["left", "inset-inline-start"].some((ch) => (thumb!.style[ch] ?? "") !== (onBy.get(thumb!.idxPath)?.style[ch] ?? ""))) { const ch = ["left", "inset-inline-start"].find((c) => (thumb!.style[c] ?? "") !== (onBy.get(thumb!.idxPath)?.style[c] ?? ""))!; roles.travelInset = ch; evidence.travelOn = { selector: null, why: `no transform moves; the thumb's ${ch} changes ${thumb.style[ch]} → ${onBy.get(thumb.idxPath)?.style[ch]} (read as inset)`, confidence: "medium" }; }
+    else if (thumb && ["left", "inset-inline-start"].some((ch) => (thumb!.style[ch] ?? "") !== (onBy.get(thumb!.idxPath)?.style[ch] ?? ""))) { const ch = ["left", "inset-inline-start"].find((c) => (thumb!.style[c] ?? "") !== (onBy.get(thumb!.idxPath)?.style[c] ?? ""))!; roles.travelInset = ch as "left" | "inset-inline-start"; evidence.travelOn = { selector: null, why: `no transform moves; the thumb's ${ch} changes ${thumb.style[ch]} → ${onBy.get(thumb.idxPath)?.style[ch]} (read as inset)`, confidence: "medium" }; }
     else unresolved.push("travelOn: nothing moves between off and on by transform or left — give thumb.travel with --set");
   } else evidence.travelOn = { selector: null, why: "no ON plane captured; thumb.travel and every true.* leaf need --set with evidence", confidence: "low" };
   // HIT: track's parent when larger; else the track.
   if (track) {
     const pp = parentPath(track.idxPath); const parent = pp !== null ? off.parts.find((p) => p.idxPath === pp) : undefined;
     if (parent && parent.tag !== "label" && num(parent.style.width) >= num(track.style.width) && num(parent.style.height) >= num(track.style.height) && !parent.text?.length && num(parent.style.width) < num(track.style.width) * 2) { roles.hit = sel(parent); evidence.hit = { selector: roles.hit, why: `the track's parent ${parent.tag} ${parent.style.width}×${parent.style.height} is the hit area`, confidence: "medium" }; }
-    else { roles.hit = roles.track; evidence.hit = { selector: roles.hit, why: "the track is its own hit area", confidence: "medium" }; }
+    else { roles.hit = roles.track; evidence.hit = { selector: roles.hit ?? null, why: "the track is its own hit area", confidence: "medium" }; }
   }
   // LABEL + ROW
   const label = off.parts.find((p) => p.text && p.text.some((t) => t.trim().length > 0) && p.tag !== "input");
@@ -447,15 +447,15 @@ export function draftTabsRoles(ledger: Ledger): SimpleRoleDraft<TabsRoles> {
   const sl = labels.get(selected.idxPath)!, rl = labels.get(rest.idxPath)!;
   if (sl.idxPath !== selected.idxPath) roles.selectedLabel = sel(sl);
   if (rl.idxPath !== rest.idxPath) roles.restLabel = sel(rl);
-  evidence.selectedTab = { selector: roles.selectedTab, why: `${selected.tag}${selected.classes[0] ? "." + selected.classes[0] : ""} "${sl.text!.find((t) => t.trim())}" — the one tab whose text colour (${colourOf(selected)}) differs from the others'`, confidence: counts.size > 1 ? "high" : "low" };
-  evidence.restTab = { selector: roles.restTab, why: `${rest.tag} "${rl.text!.find((t) => t.trim())}" colour ${colourOf(rest)}`, confidence: "high" };
-  evidence.list = { selector: roles.list, why: `parent of the tabs: ${list.tag}${list.classes[0] ? "." + list.classes[0] : ""}, display ${list.style.display}`, confidence: "high" };
+  evidence.selectedTab = { selector: roles.selectedTab ?? null, why: `${selected.tag}${selected.classes[0] ? "." + selected.classes[0] : ""} "${sl.text!.find((t) => t.trim())}" — the one tab whose text colour (${colourOf(selected)}) differs from the others'`, confidence: counts.size > 1 ? "high" : "low" };
+  evidence.restTab = { selector: roles.restTab ?? null, why: `${rest.tag} "${rl.text!.find((t) => t.trim())}" colour ${colourOf(rest)}`, confidence: "high" };
+  evidence.list = { selector: roles.list ?? null, why: `parent of the tabs: ${list.tag}${list.classes[0] ? "." + list.classes[0] : ""}, display ${list.style.display}`, confidence: "high" };
   // An indicator is a painted absolute bar no taller than 4px and at least
   // as wide as a tab — never a 1×1 visually-hidden control (Carbon's hidden
   // close buttons are absolute, painted and 1px).
   const indicator = c.parts.find((p) => p.style.position === "absolute" && visible(p) && num(p.style.height) > 0 && num(p.style.height) <= 4 && num(p.style.width) >= Math.min(num(selected.style.width), num(rest.style.width)) * 0.5 && !isTransparent(p.style["background-color"]) && p.tag !== "button");
   if (indicator) { roles.indicator = sel(indicator); evidence.indicator = { selector: roles.indicator, why: `${indicator.tag}${indicator.classes[0] ? "." + indicator.classes[0] : ""} is an absolute painted bar ${indicator.style.width}×${indicator.style.height}, bg ${indicator.style["background-color"]}`, confidence: "high" }; }
-  else if (num(selected.style["border-bottom-width"]) > 0 && selected.style["border-bottom-color"] !== rest.style["border-bottom-color"]) { roles.indicatorIsBorder = true; evidence.indicator = { selector: roles.selectedTab, why: `no indicator part; the selected tab's bottom border (${selected.style["border-bottom-width"]} ${selected.style["border-bottom-color"]}) differs from a rest tab's (${rest.style["border-bottom-color"]}) — the indicator is that border`, confidence: "medium" }; }
+  else if (num(selected.style["border-bottom-width"]) > 0 && selected.style["border-bottom-color"] !== rest.style["border-bottom-color"]) { roles.indicatorIsBorder = true; evidence.indicator = { selector: roles.selectedTab ?? null, why: `no indicator part; the selected tab's bottom border (${selected.style["border-bottom-width"]} ${selected.style["border-bottom-color"]}) differs from a rest tab's (${rest.style["border-bottom-color"]}) — the indicator is that border`, confidence: "medium" }; }
   else unresolved.push(`indicator: no absolute painted bar and no distinct bottom border on the selected tab (selected bg ${selected.style["background-color"]}, rest bg ${rest.style["background-color"]}) — tabs@1 draws an indicator, not a selected-tab fill`);
   return { roles, combo, evidence, unresolved };
 }

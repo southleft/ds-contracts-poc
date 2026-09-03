@@ -81,7 +81,7 @@ const chakraTokens = cloneTokens("chakra.checkbox", (path) => {
   if (!(path in VALUES)) throw new Error("chakra checkbox fixture: no proposed value for " + path);
   return VALUES[path]!;
 });
-chakraTokens.rowAlign = "center" as "center" | "start";
+chakraTokens.rowAlign = "center" as "center" | "baseline";
 chakraTokens.boxShadow = "none";
 chakraTokens.check = {
   ...chakraTokens.check,

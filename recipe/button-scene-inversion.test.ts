@@ -165,12 +165,12 @@ const sceneFromIr = (node: IRNode, key: string): SceneNodeSnapshot => {
             { values: [...axis.values] },
           ]),
         ),
-      };
+      } as SceneNodeSnapshot;
     }
     if (node.kind === "component") {
-      return { ...base, variantProperties: node.variantProperties };
+      return { ...base, variantProperties: node.variantProperties } as SceneNodeSnapshot;
     }
-    return base;
+    return base as SceneNodeSnapshot;
   }
   if (node.kind === "text") {
     return {
@@ -207,7 +207,7 @@ const sceneFromIr = (node: IRNode, key: string): SceneNodeSnapshot => {
           ? { type: "SOLID", color: fill.color }
           : { type: "SOLID", color: "#000000ff" },
       ),
-    };
+    } as SceneNodeSnapshot;
   }
   return {
     ...common,
@@ -217,7 +217,7 @@ const sceneFromIr = (node: IRNode, key: string): SceneNodeSnapshot => {
     componentRef: node.kind === "instance" ? node.componentRef : "",
     componentProperties:
       node.kind === "instance" ? node.properties : {},
-  };
+  } as SceneNodeSnapshot;
 };
 
 test("silent is derived from expected-plan vs observe, not assigned", () => {

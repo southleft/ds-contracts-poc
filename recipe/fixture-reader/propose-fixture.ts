@@ -246,7 +246,7 @@ const ${opts.slug}Tokens = cloneTokens(${q(`${opts.slug}.checkbox`)}, (path) => 
   if (!(path in VALUES)) throw new Error(${q(`${opts.slug} checkbox fixture: no proposed value for `)} + path);
   return VALUES[path]!;
 });
-${opts.slug}Tokens.rowAlign = ${q(String(p.leaves["rowAlign"]?.value ?? "center"))} as "center" | "start";
+${opts.slug}Tokens.rowAlign = ${q(String(p.leaves["rowAlign"]?.value ?? "center"))} as "center" | "baseline";
 ${opts.slug}Tokens.boxShadow = ${q(String(p.leaves["boxShadow"]!.value))};
 ${opts.slug}Tokens.check = {
   ...${opts.slug}Tokens.check,
@@ -359,6 +359,14 @@ export function proposeCheckboxFixture(input: ProposeInput): ProposeResult {
   const mappings = checkboxSchemaMappings(roles, { glyphPaint: glyph.paint, glyphViewBox: glyph.viewBox, receipts: receiptsForSchema });
   sets.set("check.path", { value: "(see glyph)", why: glyph.source });
   const evaluated = evaluate(ledger, mappings, sets, spellingsFor(roles));
+  // checkbox@1 draws the row at one of two alignments; a capture whose row
+  // aligns any other way (flex-start, normal, stretch) is refused by name
+  // rather than emitted as a value the recipe would reject at adapt time.
+  {
+    const rowAlign = evaluated.leaves["rowAlign"];
+    if (rowAlign && rowAlign.value !== "center" && rowAlign.value !== "baseline")
+      evaluated.refused.push(`rowAlign: the row's align-items is ${JSON.stringify(rowAlign.value)}, not a checkbox@1 row alignment (center | baseline) — give it with --set rowAlign=center --why '<evidence>'`);
+  }
   const proposalPath = path.join(REPO, "recipe/fixture-reader/out/proposals", `checkbox.${library}.json`);
   if (evaluated.refused.length > 0) {
     return { proposal: null as unknown as Proposal, modulePath: path.join(REPO, out), proposalPath, refused: evaluated.refused };

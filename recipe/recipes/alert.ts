@@ -19,6 +19,7 @@ import {
   type ComponentNode,
   type ComponentSetNode,
   type FrameNode,
+  type VectorNode,
   type IRNode,
   type TextNode,
   type VariableBinding,
@@ -516,7 +517,7 @@ export function compileAlertRecipe(input: unknown): RecipeEnvelope {
       ...instance.extensions.filter(
         (extension) => !extension.id.startsWith("alert/status-default/"),
       ),
-      {
+      <CodeOnlyExtension>{
         id: `alert/status-default/${instance.axes.status.default}`,
         kind: "data",
         stated:
@@ -530,7 +531,7 @@ export function compileAlertRecipe(input: unknown): RecipeEnvelope {
   } as const;
   return RecipeEnvelopeSchema.parse({
     ...unsigned,
-    integrity: deriveRecipeIntegrity(unsigned),
+    integrity: deriveRecipeIntegrity(unsigned as unknown as Parameters<typeof deriveRecipeIntegrity>[0]),
   });
 }
 

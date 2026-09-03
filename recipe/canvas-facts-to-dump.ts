@@ -802,7 +802,7 @@ export function bridgeCanvasFactsToDump(
         : Object.keys(fixed).length > 0
           ? { fixedSize: fixed }
           : {}),
-      ...(node.hidden === false || node.visible === false
+      ...((node as { hidden?: boolean }).hidden === false || node.visible === false
         ? { hidden: true }
         : {}),
       ...(node.opacity !== 1 ? { opacity: node.opacity } : {}),

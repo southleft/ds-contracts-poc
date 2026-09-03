@@ -61,7 +61,7 @@ const chakraTokens = cloneTokens("chakra.switch", (path) => {
   if (!(path in VALUES)) throw new Error("chakra switch fixture: no proposed value for " + path);
   return VALUES[path]!;
 });
-chakraTokens.rowAlign = "center" as "center" | "start";
+chakraTokens.rowAlign = "center" as "center" | "baseline";
 chakraTokens.thumbShadow = "color(srgb 0.0941176 0.0941176 0.105882 / 0.1) 0px 1.6px 3.2px 0px, color(srgb 0.0941176 0.0941176 0.105882 / 0.3) 0px 0px 0.8px 0px";
 chakraTokens.hitClips = false;
 chakraTokens.trackClips = false;

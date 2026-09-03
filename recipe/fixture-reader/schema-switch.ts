@@ -138,7 +138,7 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
     R("track.padding", () =>
       roles.thumbInsideTrack && roles.travelInset
         ? one("track.padding", "px", { combo: off, part: roles.thumb, channel: roles.travelInset }, { formula: "the thumb's inset from the track edge in the off state (positioned by inset, not padding)" })
-        : {
+        : ({
             // The thumb's inset from the track's OUTER edge: CSS lays the
             // content box out after the border, so a transparent border
             // (shadcn's `border border-transparent`) insets the thumb exactly
@@ -148,20 +148,20 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
             reads: { p: { combo: off, part: roles.track, channel: "padding-left" }, b: { combo: off, part: roles.track, channel: "border-left-width" }, w: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } },
             formula: "track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2",
             combine: (raw) => px(raw.p) + px(raw.b) + (px(raw.w) * (1 - scaleOf(raw.s))) / 2,
-          },
+          } as FactMapping),
     ),
     // A thumb drawn at `scale` (Chakra: 20px × 0.8) paints at width × scale.
     R("thumb.offSize", () => ({ path: "thumb.offSize", kind: "px", reads: { v: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } }, formula: "thumb width × its CSS scale (none → 1)", combine: (raw) => px(raw.v) * scaleOf(raw.s) })),
     R("thumb.onSize", () => ({ path: "thumb.onSize", kind: "px", reads: { v: { combo: on, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: on, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } }, formula: "thumb width × its CSS scale (none → 1)", combine: (raw) => px(raw.v) * scaleOf(raw.s) })),
     R("thumb.travel", () =>
       roles.travelOn
-        ? {
+        ? ({
             path: "thumb.travel",
             kind: "px",
             reads: { on: { combo: on, part: roles.travelOn, channel: roles.travelChannel ?? "transform" }, off: { combo: off, part: roles.travelOn, channel: roles.travelChannel ?? "transform" }, w: { combo: on, part: roles.travelOn, channel: "width" } },
             formula: `${roles.travelChannel ?? "transform"} x of the moving element on minus off (a calc() percentage is of the moving element's own width)`,
             combine: (raw) => txOf(raw.on, px(raw.w)) - txOf(raw.off, px(raw.w)),
-          }
+          } as FactMapping)
         : {
             path: "thumb.travel",
             kind: "px",

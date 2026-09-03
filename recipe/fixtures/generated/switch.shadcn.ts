@@ -59,7 +59,7 @@ const shadcnTokens = cloneTokens("shadcn.switch", (path) => {
   if (!(path in VALUES)) throw new Error("shadcn switch fixture: no proposed value for " + path);
   return VALUES[path]!;
 });
-shadcnTokens.rowAlign = "center" as "center" | "start";
+shadcnTokens.rowAlign = "center" as "center" | "baseline";
 shadcnTokens.thumbShadow = "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px";
 shadcnTokens.hitClips = false;
 shadcnTokens.trackClips = false;

@@ -64,13 +64,13 @@ test("textarea@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   assert.equal(mui.tokens.notchFill.fallback, "#ffffffff");
   assert.equal(mui.tokens.typography.label.resolvedFamily, "Roboto");
   const muiEnvelope = compileTextareaRecipe(mui);
-  const muiEmpty = muiEnvelope.ir.children.find(
+  const muiEmpty = (muiEnvelope.ir as { children: Array<{ kind: string; variantProperties?: Record<string, string>; role?: string; visible?: boolean; children?: unknown[] }> }).children.find(
     (child) =>
       child.kind === "component" &&
       child.variantProperties?.Disabled === "false" &&
       child.variantProperties?.Content === "empty",
   );
-  const muiFocus = muiEnvelope.ir.children.find(
+  const muiFocus = (muiEnvelope.ir as { children: Array<{ kind: string; variantProperties?: Record<string, string>; role?: string; visible?: boolean; children?: unknown[] }> }).children.find(
     (child) =>
       child.kind === "component" &&
       child.variantProperties?.Disabled === "false" &&

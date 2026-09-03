@@ -27,6 +27,8 @@ export interface ReviewedAlertSource {
   anatomy: {
     root: string;
     control: string;
+    /** The proposer names the glyph part; hand tables may omit it. */
+    icon?: string;
     title: string;
   };
   api: Record<string, unknown>;

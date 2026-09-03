@@ -639,7 +639,7 @@ export function emitComboboxFigmaWriter(
     sourcePlans.map((source) => source.recipeHash.slice(0, 8)).join("-") +
     `-${COMBOBOX_FIGMA_RUN_SUFFIX}`;
   if (
-    COMBOBOX_FIGMA_NAMESPACE === FORBIDDEN_INPUT_NAMESPACE ||
+    (COMBOBOX_FIGMA_NAMESPACE as string) === FORBIDDEN_INPUT_NAMESPACE ||
     runIdentity === FORBIDDEN_INPUT_RUN_IDENTITY
   ) {
     throw new TypeError("combobox writer must not reuse Input identity");

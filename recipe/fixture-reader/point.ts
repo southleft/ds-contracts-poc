@@ -60,13 +60,13 @@ const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../.
 const arg = (name: string): string | undefined => { const i = process.argv.indexOf(`--${name}`); return i > -1 ? process.argv[i + 1] : undefined; };
 const args = (name: string): string[] => { const out: string[] = []; for (let i = 0; i < process.argv.length; i++) if (process.argv[i] === `--${name}` && process.argv[i + 1]) out.push(process.argv[i + 1]!); return out; };
 
-const archetype = arg("archetype");
+const archetype = arg("archetype") as string;
 const library = arg("library");
 const ARCHETYPES = ["checkbox", "switch", "avatar", "tooltip", "chip", "link", "tabs", "radio", "textarea", "alert", "badge", "menu", "dialog"] as const;
 if (!ARCHETYPES.includes(archetype as (typeof ARCHETYPES)[number]) || !library) throw new Error("usage: --archetype checkbox|switch|avatar|tooltip|chip|link|tabs|radio|textarea|alert|badge|menu|dialog --library <slug> [--glyph-file <json> (checkbox)] [--roles-file <json>] [--set path=v --why 'path=evidence']…");
 // --capture <name>: the captured component directory when the library names
 // the archetype differently (AntD and Carbon capture a Tag; chip@1 reads it).
-const captureName = arg("capture") ?? archetype;
+const captureName = arg("capture") ?? archetype as string;
 // --slug <name>: the fixture's own name when one library contributes two
 // captures of an archetype (Chakra's bare Textarea and its Field + Label +
 // Textarea composition): the ledger stays under --library, everything the

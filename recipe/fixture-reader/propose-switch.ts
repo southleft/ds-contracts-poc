@@ -142,7 +142,7 @@ const ${opts.slug}Tokens = cloneTokens(${q(`${opts.slug}.switch`)}, (path) => {
   if (!(path in VALUES)) throw new Error(${q(`${opts.slug} switch fixture: no proposed value for `)} + path);
   return VALUES[path]!;
 });
-${opts.slug}Tokens.rowAlign = ${q(str("rowAlign"))} as "center" | "start";
+${opts.slug}Tokens.rowAlign = ${q(str("rowAlign"))} as "center" | "baseline";
 ${opts.slug}Tokens.thumbShadow = ${q(str("thumbShadow"))};
 ${opts.slug}Tokens.hitClips = ${str("hitClips") === "true"};
 ${opts.slug}Tokens.trackClips = ${str("trackClips") === "true"};

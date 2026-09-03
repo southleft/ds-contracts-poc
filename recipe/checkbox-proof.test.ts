@@ -165,7 +165,7 @@ test("checkbox@1 compile is two-cycle fixed-point on every library", () => {
       CHECKBOX_CHECKED.length * CHECKBOX_DISABLED.length,
       name,
     );
-    const checked = envelope.ir.children.find(
+    const checked = (envelope.ir.children as Array<{ kind: string; variantProperties?: Record<string, string> }>).find(
       (child) =>
         child.kind === "component" &&
         child.variantProperties?.Checked === "checked" &&

@@ -248,7 +248,7 @@ interface Typo {
 
 interface Subject {
   archetype: Archetype;
-  library: "astryx" | "mui" | "antd";
+  library: string;
   source: { packageName: string; version: string; exportName: string };
   /** null = receipt-only subject (no capture ledger). */
   ledgerFile: string | null;

@@ -857,8 +857,8 @@ export function emitTableFigmaWriter(
     sourcePlans.map((source) => source.recipeHash.slice(0, 8)).join("-") +
     `-${TABLE_FIGMA_RUN_SUFFIX}`;
   if (
-    TABLE_FIGMA_NAMESPACE === FORBIDDEN_INPUT_NAMESPACE ||
-    TABLE_FIGMA_NAMESPACE === FORBIDDEN_COMBOBOX_NAMESPACE ||
+    (TABLE_FIGMA_NAMESPACE as string) === FORBIDDEN_INPUT_NAMESPACE ||
+    (TABLE_FIGMA_NAMESPACE as string) === FORBIDDEN_COMBOBOX_NAMESPACE ||
     runIdentity === FORBIDDEN_INPUT_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_COMBOBOX_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V1_RUN_IDENTITY ||

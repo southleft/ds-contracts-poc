@@ -139,9 +139,7 @@ test("a BARE control (shadcn: no label part, oklch colours) proposes the label-l
   assert.ok(module.includes('{"label":null}'), "content.label null");
 });
 
-import { draftSwitchRoles } from "./draft-roles.js";
 import { proposeSwitchFixture } from "./propose-switch.js";
-import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 
 test("switch@1 proposes MUI's bare mount: the label-less cell, the handle shadow, 0 invented", () => {
   const ledgerRel = "extract/computed/out/mui/switch/captured-truth.json";

@@ -153,8 +153,9 @@ export interface TextareaRecipeInstance {
      */
     strokeAlign: "inside" | "outside";
     boxClips: boolean;
+    /** `focus` is a content column of the axis, not a state cell: the schema below carries empty and value only. */
     states: Record<
-      TextareaContent,
+      Exclude<TextareaContent, "focus">,
       Record<"enabled" | "disabled", StateCell>
     >;
     typography: {

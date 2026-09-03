@@ -310,7 +310,7 @@ function convert(d: string, opts: ToFigmaVectorPathOptions, lowerings: VectorPat
       }
       case "T": {
         for (let i = 0; i + 1 < args.length; i += 2) {
-          const c = lastQ ? { x: 2 * cur.x - lastQ.x, y: 2 * cur.y - lastQ.y } : { ...cur };
+          const c: { x: number; y: number } = lastQ ? { x: 2 * cur.x - lastQ.x, y: 2 * cur.y - lastQ.y } : { ...cur };
           const ex = rel ? cur.x + args[i]! : args[i]!;
           const ey = rel ? cur.y + args[i + 1]! : args[i + 1]!;
           emit("Q", c.x, c.y, ex, ey);

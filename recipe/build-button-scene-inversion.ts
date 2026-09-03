@@ -187,7 +187,7 @@ export function writeButtonInversionEvidence(): void {
             readFileSync(`${BUTTON_SCENE_INVERSION_ROOT}/census.json`, "utf8"),
           )
         : null,
-      roots: serialized.roots.map((root) => ({
+      roots: (serialized as { roots: Array<Record<string, unknown>> }).roots.map((root) => ({
         source: root.source,
         setId: root.setId,
         expectedFacts: root.expectedFacts,

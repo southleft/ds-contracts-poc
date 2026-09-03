@@ -36,6 +36,7 @@ import {
   astryxCalendarAdapterConfig,
   astryxCalendarSource,
 } from "./fixtures/library-calendars.js";
+import type { IRNode } from "./figma-ir.js";
 import { hashRecipeEnvelope } from "./hash.js";
 import {
   collapseCalendarRecipe,
@@ -51,6 +52,7 @@ import {
   contentTextOwnershipKeysWithoutCompileOpacity,
   sceneToNormalizedIr,
   type SceneComparison,
+  type SceneFact,
   type SceneNodeSnapshot,
 } from "./scene-readback-calendar-v1.js";
 import {
@@ -166,7 +168,9 @@ const flattenAccounting = (
 ): ReplayCensusAccountingEntry[] => {
   const entries: ReplayCensusAccountingEntry[] = [];
   for (const group of ["missing", "extra", "mismatched"] as const) {
-    for (const entry of comparison[group] ?? []) {
+    for (const raw of comparison[group] ?? []) {
+      // A missing/extra row is a fact; a mismatched row is an expected/observed pair.
+      const entry = raw as Partial<SceneFact> & Partial<{ expected: SceneFact; observed: SceneFact }>;
       entries.push({
         class: group,
         ownershipKey:
@@ -323,13 +327,13 @@ export function buildCalendarReplayCensus(
   const tableIr = sceneToNormalizedIr(calendarScene);
   const weekIr = sceneToNormalizedIr(weekScene);
 
-  const compiledCalendarSet = envelope.ir.children.find(
+  const compiledCalendarSet = (envelope.ir as { children: IRNode[] }).children.find(
     (child) => child.role === "calendar/set",
   );
-  const compiledWeekSet = envelope.ir.children.find(
+  const compiledWeekSet = (envelope.ir as { children: IRNode[] }).children.find(
     (child) => child.role === "calendar/week-set",
   );
-  const compiledDaySet = envelope.ir.children.find(
+  const compiledDaySet = (envelope.ir as { children: IRNode[] }).children.find(
     (child) => child.role === "calendar/day-set",
   );
   if (!compiledCalendarSet || !compiledWeekSet || !compiledDaySet) {
@@ -383,7 +387,7 @@ export function buildCalendarReplayCensus(
   ];
 
   const observed = structuredClone(envelope);
-  observed.ir = { ...observed.ir, children: [tableIr, weekIr, dayIr] };
+  observed.ir = { ...observed.ir, children: [tableIr, weekIr, dayIr] } as typeof observed.ir;
   observed.integrity.canonicalHash = hashRecipeEnvelope(observed);
 
   const sink: TableIrDifference[] = [];
@@ -489,7 +493,7 @@ const readButtonObserve = (
     gunzipSync(readFileSync(path)).toString("utf8"),
   ) as SceneNodeSnapshot;
   return normalizeButtonObserveScene(
-    assignButtonSceneOwnership(raw, plan.compileRoot),
+    assignButtonSceneOwnership(raw as unknown as Parameters<typeof assignButtonSceneOwnership>[0], plan.compileRoot),
     compileButtonTokenIdentityMap(plan.compileRoot),
     compileButtonComponentRefMap(plan.compileRoot),
     buttonFontByOwnershipKey(plan.expectedScenePlan),

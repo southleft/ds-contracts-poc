@@ -461,7 +461,7 @@ export function validateButtonPerturbationExam(
     failures.push("signed page id drifted");
   if (report.cases.length !== 6) failures.push("expected six scripted edits");
   for (const row of report.cases) {
-    if (row.proposal?.applied === true)
+    if ((row.proposal?.applied as boolean | undefined) === true)
       failures.push(`${row.id} applied a proposal`);
     if (row.proposal && row.proposal.reviewBeforeWrite !== true)
       failures.push(`${row.id} proposal is not review-before-write`);

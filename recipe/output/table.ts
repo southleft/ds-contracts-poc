@@ -90,7 +90,7 @@ const stylesheet = (instance: TableRecipeInstance): string => {
   for (const densityName of TABLE_DENSITIES) {
     const density = instance.tokens.densities[densityName];
     lines.push(
-      `.recipe-table[data-density="${densityName}"] .recipe-table__cell { padding:${token(density.paddingY)} ${token(density.paddingX)}; font-size:${token(density.fontSize)}; min-width:${token(density.minWidth)}; }`,
+      `.recipe-table[data-density="${densityName}"] .recipe-table__cell { padding:${token(density.paddingY)} ${token(density.paddingX)}; font-size:${token(density.fontSize)}; min-width:${token(density.minWidth!)}; }`,
     );
   }
   for (const state of TABLE_ROW_STATES)
