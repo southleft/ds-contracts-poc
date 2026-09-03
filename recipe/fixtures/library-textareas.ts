@@ -5,7 +5,7 @@ import type {
   TextareaFactCategory,
 } from "../adapters/textarea.js";
 import { canonicalTextareaRecipeInstance } from "./textarea.js";
-import type { TextareaRecipeInstance } from "../recipes/textarea.js";
+import { bareLabelFont, type TextareaRecipeInstance } from "../recipes/textarea.js";
 
 export const cloneTokens = (
   prefix: string,
@@ -228,33 +228,36 @@ const antdTokens = cloneTokens("antd.textarea", (path, fallback) => {
   if (path === "box.borderWidth") return 1;
   if (path === "box.rows") return 2;
   if (path === "box.lineHeight") return 22;
-  if (path === "labelGap") return 8;
-  if (path === "labelFontSize") return 14;
+  // BARE CELL (2026-09-02): antd TextArea renders NO label (the hand table had
+  // cited one, and the fidelity gate named the row for it) — every label leaf
+  // is the recipe's bare spelling, as the proposed module from the capture reads.
+  if (path === "labelGap") return 0;
+  if (path === "labelFontSize") return 0;
   if (path === "valueFontSize") return 14;
   if (path === "labelInsetX") return 0;
   if (path === "labelInactiveOffsetY") return 0;
   if (path === "labelFloatingOffsetY") return 0;
-  if (path === "floatingLabelFontSize") return 14;
+  if (path === "floatingLabelFontSize") return 0;
   if (path === "notchFill") return "#00000000";
   if (path === "states.empty.enabled.boxFill") return "#ffffffff";
   if (path === "states.empty.enabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.empty.enabled.boxOpacity") return 1;
-  if (path === "states.empty.enabled.label") return "#000000e0";
+  if (path === "states.empty.enabled.label") return "#00000000";
   if (path === "states.empty.enabled.value") return "#00000040";
   if (path === "states.empty.disabled.boxFill") return "#0000000a";
   if (path === "states.empty.disabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.empty.disabled.boxOpacity") return 1;
-  if (path === "states.empty.disabled.label") return "#00000040";
+  if (path === "states.empty.disabled.label") return "#00000000";
   if (path === "states.empty.disabled.value") return "#00000040";
   if (path === "states.value.enabled.boxFill") return "#ffffffff";
   if (path === "states.value.enabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.value.enabled.boxOpacity") return 1;
-  if (path === "states.value.enabled.label") return "#000000e0";
+  if (path === "states.value.enabled.label") return "#00000000";
   if (path === "states.value.enabled.value") return "#000000e0";
   if (path === "states.value.disabled.boxFill") return "#0000000a";
   if (path === "states.value.disabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.value.disabled.boxOpacity") return 1;
-  if (path === "states.value.disabled.label") return "#00000040";
+  if (path === "states.value.disabled.label") return "#00000000";
   if (path === "states.value.disabled.value") return "#00000040";
   return fallback;
 });
@@ -263,7 +266,7 @@ antdTokens.labelLineHeightUnit = "auto";
 antdTokens.boxClips = true;
 antdTokens.labelPlacement = "stacked";
 antdTokens.outlineTreatment = "plain";
-antdTokens.typography = { label: antdFont(), value: antdFont() };
+antdTokens.typography = { label: bareLabelFont(), value: antdFont() };
 
 export const astryxTextareaSource: ReviewedTextareaSource = {
   packageName: "@astryxdesign/core",
@@ -697,6 +700,7 @@ export const antdTextareaAdapterConfig = buildConfig(
   antdRefusals,
   anatomyFacts("antd", antdTextareaSource),
   ["showCount", "allowClear", "autoSize", "status", "resize", "size-sm-lg"],
+  { ...sharedContent, label: null },
 );
 
 export const TEXTAREA_THREE_LIBRARY_PROOF_PROTOCOL = {

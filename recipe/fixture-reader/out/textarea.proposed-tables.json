@@ -652,28 +652,28 @@
         "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height"
       },
       "labelGap": {
-        "fixture": 8,
-        "proposed": 8,
+        "fixture": 0,
+        "proposed": 0,
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [--padding-xs 8px — the fixture's citation]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [bare cell — 0]"
       },
       "labelFontSize": {
-        "fixture": 14,
-        "proposed": 14,
+        "fixture": 0,
+        "proposed": 0,
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [--font-size 14px — the fixture's citation]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [bare cell — 0]"
       },
       "labelLineHeight": {
         "fixture": 0,
         "proposed": 0,
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [auto — reviewed 0]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [bare cell — 0]"
       },
       "labelLineHeightUnit": {
         "fixture": "auto",
         "proposed": "auto",
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [reviewed auto]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [reviewed auto]"
       },
       "valueFontSize": {
         "fixture": 14,
@@ -686,25 +686,25 @@
         "fixture": 0,
         "proposed": 0,
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane [reviewed 0]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; the stacked label has no floating plane [reviewed 0]"
       },
       "labelInactiveOffsetY": {
         "fixture": 0,
         "proposed": 0,
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane [reviewed 0]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; the stacked label has no floating plane [reviewed 0]"
       },
       "labelFloatingOffsetY": {
         "fixture": 0,
         "proposed": 0,
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane [reviewed 0]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; the stacked label has no floating plane [reviewed 0]"
       },
       "floatingLabelFontSize": {
-        "fixture": 14,
-        "proposed": 14,
+        "fixture": 0,
+        "proposed": 0,
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; no shrink plane — the stacked size is the label size [reviewed 14]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; no shrink plane — the stacked size is the label size [bare cell — 0]"
       },
       "notchFill": {
         "fixture": "#00000000",
@@ -734,10 +734,10 @@
         "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.opacity"
       },
       "states.empty.enabled.label": {
-        "fixture": "#000000e0",
-        "proposed": "#000000e0",
+        "fixture": "#00000000",
+        "proposed": "#00000000",
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [--color-text / --color-text-disabled — the fixture's citation]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [bare cell — transparent]"
       },
       "states.empty.enabled.value": {
         "fixture": "#00000040",
@@ -768,10 +768,10 @@
         "provenance": "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.opacity"
       },
       "states.empty.disabled.label": {
-        "fixture": "#00000040",
-        "proposed": "#00000040",
+        "fixture": "#00000000",
+        "proposed": "#00000000",
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [--color-text / --color-text-disabled — the fixture's citation]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [bare cell — transparent]"
       },
       "states.empty.disabled.value": {
         "fixture": "#00000040",
@@ -802,10 +802,10 @@
         "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.opacity"
       },
       "states.value.enabled.label": {
-        "fixture": "#000000e0",
-        "proposed": "#000000e0",
+        "fixture": "#00000000",
+        "proposed": "#00000000",
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [--color-text / --color-text-disabled — the fixture's citation]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [bare cell — transparent]"
       },
       "states.value.enabled.value": {
         "fixture": "#000000e0",
@@ -836,10 +836,10 @@
         "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.opacity"
       },
       "states.value.disabled.label": {
-        "fixture": "#00000040",
-        "proposed": "#00000040",
+        "fixture": "#00000000",
+        "proposed": "#00000000",
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [--color-text / --color-text-disabled — the fixture's citation]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [bare cell — transparent]"
       },
       "states.value.disabled.value": {
         "fixture": "#00000040",
@@ -849,16 +849,16 @@
         "provenance": "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.color"
       },
       "typography.label.family": {
-        "fixture": "-apple-system",
-        "proposed": "-apple-system",
+        "fixture": "Arial",
+        "proposed": "Arial",
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; additionally the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure), so even the control's own family channel is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites [theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; additionally the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure), so even the control's own family channel is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites [theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily]"
       },
       "typography.label.style": {
         "fixture": "Regular",
         "proposed": "Regular",
         "verdict": "receipt",
-        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part [reviewed Regular]"
+        "provenance": "RECEIPT: Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part [reviewed Regular]"
       },
       "typography.value.family": {
         "fixture": "-apple-system",

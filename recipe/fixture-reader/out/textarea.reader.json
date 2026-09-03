@@ -946,34 +946,34 @@
       },
       {
         "path": "labelGap",
-        "fixtureValue": 8,
+        "fixtureValue": 0,
         "verdict": "receipt",
-        "proposedValue": 8,
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
-        "evidence": "--padding-xs 8px — the fixture's citation"
+        "proposedValue": 0,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
+        "evidence": "bare cell — 0"
       },
       {
         "path": "labelFontSize",
-        "fixtureValue": 14,
+        "fixtureValue": 0,
         "verdict": "receipt",
-        "proposedValue": 14,
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
-        "evidence": "--font-size 14px — the fixture's citation"
+        "proposedValue": 0,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
+        "evidence": "bare cell — 0"
       },
       {
         "path": "labelLineHeight",
         "fixtureValue": 0,
         "verdict": "receipt",
         "proposedValue": 0,
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
-        "evidence": "auto — reviewed 0"
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
+        "evidence": "bare cell — 0"
       },
       {
         "path": "labelLineHeightUnit",
         "fixtureValue": "auto",
         "verdict": "receipt",
         "proposedValue": "auto",
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
         "evidence": "reviewed auto"
       },
       {
@@ -991,7 +991,7 @@
         "fixtureValue": 0,
         "verdict": "receipt",
         "proposedValue": 0,
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; the stacked label has no floating plane",
         "evidence": "reviewed 0"
       },
       {
@@ -999,7 +999,7 @@
         "fixtureValue": 0,
         "verdict": "receipt",
         "proposedValue": 0,
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; the stacked label has no floating plane",
         "evidence": "reviewed 0"
       },
       {
@@ -1007,16 +1007,16 @@
         "fixtureValue": 0,
         "verdict": "receipt",
         "proposedValue": 0,
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; the stacked label has no floating plane",
         "evidence": "reviewed 0"
       },
       {
         "path": "floatingLabelFontSize",
-        "fixtureValue": 14,
+        "fixtureValue": 0,
         "verdict": "receipt",
-        "proposedValue": 14,
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; no shrink plane — the stacked size is the label size",
-        "evidence": "reviewed 14"
+        "proposedValue": 0,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; no shrink plane — the stacked size is the label size",
+        "evidence": "bare cell — 0"
       },
       {
         "path": "notchFill",
@@ -1058,11 +1058,11 @@
       },
       {
         "path": "states.empty.enabled.label",
-        "fixtureValue": "#000000e0",
+        "fixtureValue": "#00000000",
         "verdict": "receipt",
-        "proposedValue": "#000000e0",
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
-        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+        "proposedValue": "#00000000",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
+        "evidence": "bare cell — transparent"
       },
       {
         "path": "states.empty.enabled.value",
@@ -1107,11 +1107,11 @@
       },
       {
         "path": "states.empty.disabled.label",
-        "fixtureValue": "#00000040",
+        "fixtureValue": "#00000000",
         "verdict": "receipt",
-        "proposedValue": "#00000040",
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
-        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+        "proposedValue": "#00000000",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
+        "evidence": "bare cell — transparent"
       },
       {
         "path": "states.empty.disabled.value",
@@ -1156,11 +1156,11 @@
       },
       {
         "path": "states.value.enabled.label",
-        "fixtureValue": "#000000e0",
+        "fixtureValue": "#00000000",
         "verdict": "receipt",
-        "proposedValue": "#000000e0",
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
-        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+        "proposedValue": "#00000000",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
+        "evidence": "bare cell — transparent"
       },
       {
         "path": "states.value.enabled.value",
@@ -1204,11 +1204,11 @@
       },
       {
         "path": "states.value.disabled.label",
-        "fixtureValue": "#00000040",
+        "fixtureValue": "#00000000",
         "verdict": "receipt",
-        "proposedValue": "#00000040",
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
-        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+        "proposedValue": "#00000000",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
+        "evidence": "bare cell — transparent"
       },
       {
         "path": "states.value.disabled.value",
@@ -1222,10 +1222,10 @@
       },
       {
         "path": "typography.label.family",
-        "fixtureValue": "-apple-system",
+        "fixtureValue": "Arial",
         "verdict": "receipt",
-        "proposedValue": "-apple-system",
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; additionally the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure), so even the control's own family channel is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites",
+        "proposedValue": "Arial",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part; additionally the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure), so even the control's own family channel is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites",
         "evidence": "theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily"
       },
       {
@@ -1233,7 +1233,7 @@
         "fixtureValue": "Regular",
         "verdict": "receipt",
         "proposedValue": "Regular",
-        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part",
         "evidence": "reviewed Regular"
       },
       {

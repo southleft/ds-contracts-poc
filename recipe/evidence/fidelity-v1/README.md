@@ -540,6 +540,18 @@ v7 with five sources. See `f1-menu-proposed/`.
 
     menu/mui-proposed 4.73% · menu/chakra 5.64% (named) · menu/mui 6.79% (named)
 
+### 2026-09-02 (late) — the hand AntD textarea becomes the bare cell; its row closes
+
+textarea/antd had been named since the gate first saw it: the hand table
+paired a "Notes" label with a package (`Input.TextArea`) that renders no
+label, and the mint stacked one above the box (75px against 54). textarea@1
+gained a bare cell for the proposed AntD and Chakra rows earlier today, so
+the hand table now spells the same cell (every label leaf the bare
+spelling, `bareLabelFont`, `content.label` null) and cites the correction.
+Minted as textarea v12 (235:95777): textarea/antd 1.25% — identical to the
+proposed row — and the ratchet shrinks. **49 pass · 0 fringe · 16 known.**
+The two MUI textarea rows remain (resize grip, a 2px floating-label offset).
+
 ### 2026-09-02 (late) — the paste verb, proven per row
 
 `recipe/plugin-target-proof.ts` emits every proposed row's plugin-target
@@ -558,7 +570,7 @@ Minted as menu v8 (229:94381): the Chakra panel exports 128×76 like the
 render and the glyph ink sits at the same pixels. The score stays 5.64%
 because the residual is Inter rasterisation (measured with the refused
 shadow ring simulated, boxes aligned, diff glyph-shaped at 6.67%); the row
-is reclassified font-substrate. Tally unchanged: 48 pass · 0 fringe · 17 known.
+is reclassified font-substrate. Tally unchanged: 49 pass · 0 fringe · 16 known.
 
     45 pass · 0 fringe · 18 known
 
@@ -577,4 +589,4 @@ Minted as dialog v7 with five sources. See `f1-dialog-proposed/`.
 
     dialog/mui-proposed 4.92% · dialog/chakra 2.57% · dialog/mui 4.81% (closed)
 
-    48 pass · 0 fringe · 17 known
+    49 pass · 0 fringe · 16 known

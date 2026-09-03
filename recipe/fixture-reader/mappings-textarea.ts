@@ -190,7 +190,7 @@ export const muiTextareaMappings: FactMapping[] = [
 export const ANTD_TEXTAREA_LEDGER = "extract/computed/out/antd/textarea/captured-truth.json";
 
 const NO_LABEL_ANTD =
-  "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part";
+  "Input.TextArea renders ONE bare <textarea> — the fixture is textarea@1's BARE cell (no label node; every label leaf is the bare spelling, 2026-09-02), never a captured part";
 
 const aBase = "empty.enabled";
 const aStates = mStates;
@@ -214,22 +214,22 @@ export const antdTextareaMappings: FactMapping[] = [
     combine: (raw) => (px(raw.h) - 2 * px(raw.py) - 2 * px(raw.bw)) / px(raw.lh),
   },
   one("box.lineHeight", "px", { combo: aBase, part: "root", channel: "line-height" }),
-  receipt("labelGap", NO_LABEL_ANTD, "--padding-xs 8px — the fixture's citation"),
-  receipt("labelFontSize", NO_LABEL_ANTD, "--font-size 14px — the fixture's citation"),
-  receipt("labelLineHeight", NO_LABEL_ANTD, "auto — reviewed 0"),
+  receipt("labelGap", NO_LABEL_ANTD, "bare cell — 0"),
+  receipt("labelFontSize", NO_LABEL_ANTD, "bare cell — 0"),
+  receipt("labelLineHeight", NO_LABEL_ANTD, "bare cell — 0"),
   receipt("labelLineHeightUnit", NO_LABEL_ANTD, "reviewed auto"),
   one("valueFontSize", "px", { combo: aBase, part: "root", channel: "font-size" }),
   receipt("labelInsetX", NO_LABEL_ANTD + "; the stacked label has no floating plane", "reviewed 0"),
   receipt("labelInactiveOffsetY", NO_LABEL_ANTD + "; the stacked label has no floating plane", "reviewed 0"),
   receipt("labelFloatingOffsetY", NO_LABEL_ANTD + "; the stacked label has no floating plane", "reviewed 0"),
-  receipt("floatingLabelFontSize", NO_LABEL_ANTD + "; no shrink plane — the stacked size is the label size", "reviewed 14"),
+  receipt("floatingLabelFontSize", NO_LABEL_ANTD + "; no shrink plane — the stacked size is the label size", "bare cell — 0"),
   receipt("notchFill", "plain outline — antd has no notched-outline anatomy; transparent is the recipe's spelling of no knockout", "reviewed #00000000"),
   ...aStates.flatMap(([fix, combo]): FactMapping[] => {
     const rows: FactMapping[] = [
       one(`states.${fix}.boxFill`, "color", { combo, part: "root", channel: "background-color" }),
       one(`states.${fix}.boxBorder`, "color", { combo, part: "root", channel: "border-top-color" }),
       one(`states.${fix}.boxOpacity`, "number", { combo, part: "root", channel: "opacity" }),
-      receipt(`states.${fix}.label`, NO_LABEL_ANTD, "--color-text / --color-text-disabled — the fixture's citation"),
+      receipt(`states.${fix}.label`, NO_LABEL_ANTD, "bare cell — transparent"),
     ];
     if (fix.startsWith("empty")) {
       rows.push(

@@ -22,10 +22,6 @@
       "class": "real-defect",
       "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height \u2014 InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     },
-    "textarea/antd": {
-      "class": "real-defect",
-      "cause": "7.42% width-normalised (heights 75 vs 54). The mint stacks a 'Notes' label above the box; antd TextArea renders NO label \u2014 the recipe grammar requires one (labelPlacement stacked). Structure the package does not render, plus the absent resize grip."
-    },
     "chip/carbon": {
       "class": "font-substrate",
       "cause": "8.56% at 35x24 vs 36x24 \u2014 HELD-OUT proposal (Carbon Tag, 13 leaves read, 0 invented). The diff hugs the three glyphs of 'Tag' (IBM Plex Sans Regular 12px) and nothing else: Figma rasterises the face one column narrower than Chromium. Geometry, fill and radius agree."
