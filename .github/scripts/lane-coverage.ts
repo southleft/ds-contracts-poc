@@ -111,6 +111,8 @@ const EXCLUDED: Record<string, string> = {
   // can only pass in a dirty tree. Named at that lane in fast.yml.
   //
   // v6's bytes are still held by recipe:pivot-status:check, as they always were.
+  "root:recipe:fidelity:plugin:proof":
+    "LIVE: mints every proposed row's plugin-target program in Scratch through the Figma bridge and exports the cells — needs the desktop plugin. Its offline half, recipe:fidelity:plugin:check, re-scores the committed -plugin shots and IS laned (fast).",
   "root:sync:spine":
     "The live drift spine: needs the FIGMA_TOKEN secret + network (Figma REST) and, with --open-pr, an " +
     "authenticated gh — none of which belong in a PR gate, and its red means 'a drifted row has no " +
