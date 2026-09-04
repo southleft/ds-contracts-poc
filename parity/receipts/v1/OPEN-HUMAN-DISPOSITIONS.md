@@ -243,13 +243,29 @@ Two separate mechanisms, and only one is a defect:
   `extract:computed:geometry:census` and `v1:readiness`. The census half is
   closed in this commit. The readiness half is red while any docs/26 row is red.
 
-**One thing worth an owner's eye.** In the last full run that actually executed,
-the eval suite ran twice: once as its own step (03:18:21→03:38:03) and again
-inside `v1:readiness` (04:40:39→04:59:51, a suite-length step). `--trust-lanes`
-exists to cite lane steps rather than re-run them, and `eval:carried:check` was
-only wired into the lane map in the preceding commit — so this may already be
-better, and it has not been measured on a completed run yet. Twenty minutes of a
-hundred-minute lane is worth confirming.
+**A CORRECTION, and it is mine.** An earlier version of this section said that
+in the last full run that actually executed, the eval suite ran twice — once as
+its own step and again inside `v1:readiness`. That was inferred from the
+readiness step's duration (19 minutes, about the length of the suite) and it is
+**false**. The run log says the opposite: `--trust-lanes` worked exactly as
+designed, and V1-COMPAT-03 ran only `eval:record:check`,
+`generation:atomic:check`, `provenance:check` and `verify:catalog` locally,
+citing the lane for `eval` and `figma:fresh`, and went GREEN in 1 second.
+
+Where the 19 minutes actually goes, measured from the same log: **`V1-CI-01`
+re-runs the whole fast lane locally, `npm run ci:lane fast`, for 795 seconds** —
+and that is by design, because that row's acceptance command in docs/26 IS the
+lane. It is also the row that failed: `7/186 gate(s) failed in lane "fast"`, and
+readiness ended `1 of 24 rows not green: V1-CI-01 RED`.
+
+That last line is worth reading twice. On that commit the tally was **23 of 24**,
+with a single red row, and that row was red because the fast lane had seven
+failing gates. Several of those were closed tonight — the fusion-geometry census
+(`✖ FUSION-SURFACE DRIFT — 7` appears in the same log), `capability:fresh`,
+`format:check` and `extract:computed:drift` — and the fast lane is now green on
+two consecutive commits. Whether that makes V1-CI-01 green is NOT claimed here:
+the full lane running on `a59635b4a` will measure it, and no number should be
+quoted until it does.
 
 **What this means for every "the gates are green" claim in this repository:**
 it should be read as *the fast lane is green*. Fast, security and catalog-visual
