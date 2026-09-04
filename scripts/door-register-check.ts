@@ -262,7 +262,7 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     was not re-pinned then; no mui capture was re-recorded on 2026-09-02.
   //     Re-pinned to what the committed tree measures; the cause of the
   //     -334 is not established here and is named as such.
-  fluent: { components: 11, drops: 20886, authored: 13, fallback: 19 },
+  fluent: { components: 12, drops: 23096, authored: 15, fallback: 21 },
   //   · mui 72,991 -> 73,001 (+10), later on 2026-09-02: Dialog and Menu were
   //     re-captured with --keep-originals so the portal screenshots carry the
   //     overlay rect sidecars the fidelity gate crops to (Chromium 149 in the
@@ -278,6 +278,17 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     DialogContent (the person's step for dialog@1 — a title over a body)
   //     in place of DialogContent alone, two parts more per cell. Named,
   //     re-pinned to what the committed tree measures.
+  //   · fluent 11 -> 12 components, 20,886 -> 23,096 drops, LIBRARY-AUTHORED
+  //     13 -> 15, span-fallback 19 -> 21, on 2026-09-04: a TWELFTH fluent
+  //     component was captured. MessageBar is the first capture whose config
+  //     entry was DRAFTED from the contract seed rather than written by hand
+  //     (extract/computed/draft-config.ts --write derived name, import,
+  //     contract path and both axes; a person added the composition and the
+  //     glyph viewBox). The counts move because a component was ADDED, not
+  //     because a door changed its mind: the eleven prior fluent components
+  //     are unchanged, and the +2,210 drops, +2 authored and +2 span-fallback
+  //     parts are MessageBar's own. Named, re-pinned to what the committed
+  //     tree measures.
   mui: { components: 32, drops: 73395, authored: 0, fallback: 100 },
   polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
   shadcn: { components: 11, drops: 12205, authored: 1, fallback: 7 },

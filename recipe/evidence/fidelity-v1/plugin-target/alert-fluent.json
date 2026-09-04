@@ -1,0 +1,15 @@
+{
+  "label": "alert/fluent",
+  "archetype": "alert",
+  "slug": "fluent",
+  "page": "251:101562",
+  "pageName": "Recipe Pivot / Alert / b7744674-alert-v10",
+  "pluginShot": "recipe/evidence/fidelity-v1/shots/alert-fluent-v10-plugin.png",
+  "manifestShot": "recipe/evidence/fidelity-v1/shots/alert-fluent-v10.png",
+  "reference": "extract/computed/out/fluent/messagebar/orig-shots/info.rounded__default.png",
+  "pluginPct": 12.37,
+  "manifestPct": 12.37,
+  "pluginStatus": "fail",
+  "manifestStatus": "fail",
+  "parity": "same"
+}

@@ -1,0 +1,12 @@
+{
+  "origin": "the exported node's box (top-left = 0,0); render bounds when the export used absolute bounds",
+  "rects": [
+    {
+      "x": 35.1982421875,
+      "y": 14.5,
+      "width": 89.455078125,
+      "height": 13.4189453125,
+      "characters": "Alert message"
+    }
+  ]
+}

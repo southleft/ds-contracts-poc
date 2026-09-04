@@ -55,7 +55,7 @@ test("the writer plans three alert sources without touching Figma", () => {
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.textarea.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Alert \//);
-  assert.match(writer.runIdentity, /-alert-v9$/);
+  assert.match(writer.runIdentity, /-alert-v10$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.alertSet.children.length, ALERT_FIGMA_VARIANTS_PER_SOURCE);

@@ -2,7 +2,7 @@
   "artifactVersion": "plugin-target-proof-v1",
   "bar": 5,
   "parityTolerance": 0.5,
-  "rows": 39,
-  "same": 39,
+  "rows": 40,
+  "same": 40,
   "drift": []
 }

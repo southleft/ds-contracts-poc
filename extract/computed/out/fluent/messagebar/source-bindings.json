@@ -1,0 +1,1697 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "MessageBar",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-size",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "font-weight",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "line-height",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "body",
+      "channel": "padding-right",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".rtatq2b"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "color-status-success-foreground1",
+      "varName": "--colorStatusSuccessForeground1",
+      "anchor": {
+        "selector": ".f36rra6"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "color-status-success-foreground1",
+      "varName": "--colorStatusSuccessForeground1",
+      "anchor": {
+        "selector": ".f36rra6"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "color-status-warning-foreground3",
+      "varName": "--colorStatusWarningForeground3",
+      "anchor": {
+        "selector": ".f14a4cve"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "color-status-warning-foreground3",
+      "varName": "--colorStatusWarningForeground3",
+      "anchor": {
+        "selector": ".f14a4cve"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "color-status-danger-foreground1",
+      "varName": "--colorStatusDangerForeground1",
+      "anchor": {
+        "selector": ".f1ca9wz"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "color-status-danger-foreground1",
+      "varName": "--colorStatusDangerForeground1",
+      "anchor": {
+        "selector": ".f1ca9wz"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "font-size",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "margin-right",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-s",
+      "varName": "--spacingHorizontalS",
+      "anchor": {
+        "selector": ".r1df1z33"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".r168xkm9"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "color-neutral-background3",
+      "varName": "--colorNeutralBackground3",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "color-neutral-background3",
+      "varName": "--colorNeutralBackground3",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "color-status-success-background1",
+      "varName": "--colorStatusSuccessBackground1",
+      "anchor": {
+        "selector": ".f64thcm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "color-status-success-background1",
+      "varName": "--colorStatusSuccessBackground1",
+      "anchor": {
+        "selector": ".f64thcm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "color-status-warning-background1",
+      "varName": "--colorStatusWarningBackground1",
+      "anchor": {
+        "selector": ".f13ftzij"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "color-status-warning-background1",
+      "varName": "--colorStatusWarningBackground1",
+      "anchor": {
+        "selector": ".f13ftzij"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "color-status-danger-background1",
+      "varName": "--colorStatusDangerBackground1",
+      "anchor": {
+        "selector": ".f1eon7jj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "color-status-danger-background1",
+      "varName": "--colorStatusDangerBackground1",
+      "anchor": {
+        "selector": ".f1eon7jj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".fk173vo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".fk173vo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".fqyqtrt"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".fqyqtrt"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".fo25q1j"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".fo25q1j"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".f70v3om"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".f70v3om"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".f18qd5xz"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".f18qd5xz"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".f1nxacbt"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".f1nxacbt"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".f1nyd2b1"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".f1nyd2b1"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".f1gyjrma"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".f1gyjrma"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".f1g1ijmo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".f1g1ijmo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".f1b4u7v"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "color-status-success-border1",
+      "varName": "--colorStatusSuccessBorder1",
+      "anchor": {
+        "selector": ".f1b4u7v"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".frd1ypx"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "color-status-warning-border1",
+      "varName": "--colorStatusWarningBorder1",
+      "anchor": {
+        "selector": ".frd1ypx"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".f1f8dvr7"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "color-status-danger-border1",
+      "varName": "--colorStatusDangerBorder1",
+      "anchor": {
+        "selector": ".f1f8dvr7"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "info.square",
+      "axisValues": {
+        "intent": "info",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "info.rounded",
+      "axisValues": {
+        "intent": "info",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "success.square",
+      "axisValues": {
+        "intent": "success",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "success.rounded",
+      "axisValues": {
+        "intent": "success",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "warning.square",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "warning.rounded",
+      "axisValues": {
+        "intent": "warning",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "error.square",
+      "axisValues": {
+        "intent": "error",
+        "shape": "square"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "combo": "error.rounded",
+      "axisValues": {
+        "intent": "error",
+        "shape": "rounded"
+      },
+      "token": "spacing-horizontal-m",
+      "varName": "--spacingHorizontalM",
+      "anchor": {
+        "selector": ".r2oyxsj"
+      }
+    }
+  ],
+  "skips": [
+    "body.font-family: candidate --fontFamilyBase → \"font-family-base\" = 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.font-family: candidate --fontFamilyBase → \"font-family-base\" = 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

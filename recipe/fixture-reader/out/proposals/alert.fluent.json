@@ -1,0 +1,285 @@
+{
+  "archetype": "alert",
+  "library": "fluent",
+  "ledger": "extract/computed/out/fluent/messagebar/captured-truth.json",
+  "provenance": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "title": "idx:1.0",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info.rounded",
+    "success": "success.rounded",
+    "warning": "warning.rounded",
+    "error": "error.rounded"
+  },
+  "leaves": {
+    "box.height": {
+      "value": 36,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.height | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.box-sizing | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.padding-top | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.padding-bottom | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.border-top-width | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.border-bottom-width",
+      "formula": "the box's border-box height as captured with the one-line title (a content-box height plus its padding and border)"
+    },
+    "box.paddingX": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 4,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.border-top-width"
+    },
+    "box.gap": {
+      "value": 8,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.column-gap | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:0.margin-right | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:1.0.margin-left",
+      "formula": "the space between the icon and the title: box column-gap + icon (wrapper) margin-right + title margin-left (keywords read 0)"
+    },
+    "icon.size": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:0.0.width"
+    },
+    "icon.viewBox": {
+      "value": "0 0 20 20",
+      "from": "set",
+      "why": "every MessageBar status glyph the capture wrote carries viewBox 0 0 20 20 (extract/computed/out/fluent/messagebar/assets/message-bar-icon-{info,success,warning,error}.svg), the 20px size @fluentui/react-icons draws at"
+    },
+    "titleFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:1.0.font-size"
+    },
+    "titleLineHeight": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:1.0.line-height"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "recipe anatomy spelling — the box's border draws inside"
+    },
+    "states.info.boxFill": {
+      "value": "#f5f5f5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.background-color"
+    },
+    "states.info.boxBorder": {
+      "value": "#d1d1d1ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default root.border-top-color"
+    },
+    "states.info.title": {
+      "value": "#242424ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:1.0.color"
+    },
+    "states.info.iconFill": {
+      "value": "#616161ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.info.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:0.0.opacity | extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.info.path": {
+      "value": "M 18 10 A 8 8 0 1 0 2 10 A 8 8 0 0 0 18 10 M 9.5 8.91 A 0.5 0.5 0 0 1 10.5 8.91 V 13.6 A 0.5 0.5 0 0 1 9.5 13.6 V 8.9 M 9.25 6.74 A 0.75 0.75 0 1 1 10.75 6.74 A 0.75 0.75 0 0 1 9.25 6.74",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.info.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.success.boxFill": {
+      "value": "#f1faf1ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default root.background-color"
+    },
+    "states.success.boxBorder": {
+      "value": "#9fd89fff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default root.border-top-color"
+    },
+    "states.success.title": {
+      "value": "#242424ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default idx:1.0.color"
+    },
+    "states.success.iconFill": {
+      "value": "#0e700eff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.success.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default idx:0.0.opacity | extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.success.path": {
+      "value": "M 10 2 A 8 8 0 1 1 10 18 A 8 8 0 0 1 10 2 M 13.36 7.65 A 0.5 0.5 0 0 0 12.72 7.59 L 12.65 7.65 L 9 11.3 L 7.35 9.65 L 7.28 9.59 A 0.5 0.5 0 0 0 6.58 10.29 L 6.65 10.36 L 8.65 12.36 L 8.72 12.42 C 8.89 12.53 9.12 12.53 9.28 12.42 L 9.35 12.36 L 13.35 8.36 L 13.42 8.28 A 0.5 0.5 0 0 0 13.36 7.65",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.success.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#success.rounded__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.warning.boxFill": {
+      "value": "#fff9f5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default root.background-color"
+    },
+    "states.warning.boxBorder": {
+      "value": "#fdcfb4ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default root.border-top-color"
+    },
+    "states.warning.title": {
+      "value": "#242424ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default idx:1.0.color"
+    },
+    "states.warning.iconFill": {
+      "value": "#bc4b09ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.warning.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default idx:0.0.opacity | extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.warning.path": {
+      "value": "M 7.37 3.56 A 3 3 0 0 1 12.63 3.56 L 18.13 13.56 A 3 3 0 0 1 15.5 18 H 4.5 A 3 3 0 0 1 1.87 13.56 Z M 10 12.75 A 0.75 0.75 0 1 0 10 14.25 A 0.75 0.75 0 0 0 10 12.75 M 10 6.5 A 0.5 0.5 0 0 0 9.5 7 V 11 A 0.5 0.5 0 0 0 10.5 11 V 7 A 0.5 0.5 0 0 0 10 6.5",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.warning.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#warning.rounded__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "states.error.boxFill": {
+      "value": "#fdf3f4ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default root.background-color"
+    },
+    "states.error.boxBorder": {
+      "value": "#eeacb2ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default root.border-top-color"
+    },
+    "states.error.title": {
+      "value": "#242424ff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default idx:1.0.color"
+    },
+    "states.error.iconFill": {
+      "value": "#b10e1cff",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default idx:0.0.0.fill",
+      "formula": "the glyph path's fill (a stroked-only glyph has no fill and refuses: alert@1 carries filled glyphs)"
+    },
+    "states.error.iconOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default idx:0.0.opacity | extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default idx:0.opacity",
+      "formula": "the svg's opacity × its wrapper's opacity (MUI dims the wrapper)"
+    },
+    "icon.glyphs.error.path": {
+      "value": "M 7.88 1.88 A 3 3 0 0 1 12.12 1.88 L 18.12 7.88 A 3 3 0 0 1 18.12 12.12 L 12.12 18.12 A 3 3 0 0 1 7.88 18.12 L 1.88 12.12 A 3 3 0 0 1 1.88 7.88 Z M 13.1 6.9 A 0.5 0.5 0 0 0 12.4 6.9 L 10 9.3 L 7.6 6.9 A 0.5 0.5 0 0 0 6.9 7.6 L 9.3 10 L 6.9 12.4 A 0.5 0.5 0 0 0 7.6 13.1 L 10 10.7 L 12.4 13.1 A 0.5 0.5 0 0 0 13.1 12.4 L 10.7 10 L 13.1 7.6 A 0.5 0.5 0 0 0 13.1 6.9",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default idx:0.0.0.d",
+      "formula": "the glyph path's computed d, in the package's coordinate units"
+    },
+    "icon.glyphs.error.winding": {
+      "value": "nonzero",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#error.rounded__default idx:0.0.0.fill-rule",
+      "formula": "the path's fill-rule"
+    },
+    "typography.title.family": {
+      "value": "Segoe UI",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:1.0.font-family",
+      "formula": "first family of the title's computed stack"
+    },
+    "typography.title.style": {
+      "value": "Semibold",
+      "from": "ledger",
+      "key": "extract/computed/out/fluent/messagebar/captured-truth.json#info.rounded__default idx:1.0.font-weight",
+      "formula": "title font-weight → style word"
+    },
+    "typography.title.resolved": {
+      "value": "Roboto/SemiBold",
+      "from": "set",
+      "why": "the capture's stack is \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif. Segoe UI is not on the minting machine, and SF Pro — the fallback the Astryx and AntD fixtures cite — paints ZERO-WIDTH glyphs in this Figma at every style (measured 2026-09-04: SF Pro/Semibold and SF Pro/Regular render width 0 for the same string where Inter, Roboto and Helvetica render 98-108). Roboto is the next face the capture's own stack names, it is present, it paints, and it carries a SemiBold matching the captured weight 600"
+    }
+  },
+  "receipts": [
+    {
+      "path": "icon.viewBox",
+      "why": "the package's viewBox is not a computed channel (the capture asset carries the RENDERED size there); give --set icon.viewBox=<size | x y w h> --why with the package citation",
+      "evidence": "every MessageBar status glyph the capture wrote carries viewBox 0 0 20 20 (extract/computed/out/fluent/messagebar/assets/message-bar-icon-{info,success,warning,error}.svg), the 20px size @fluentui/react-icons draws at",
+      "value": "0 0 20 20"
+    },
+    {
+      "path": "typography.title.resolved",
+      "why": "the requested face is not on the minting machine",
+      "evidence": "the capture's stack is \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif. Segoe UI is not on the minting machine, and SF Pro — the fallback the Astryx and AntD fixtures cite — paints ZERO-WIDTH glyphs in this Figma at every style (measured 2026-09-04: SF Pro/Semibold and SF Pro/Regular render width 0 for the same string where Inter, Roboto and Helvetica render 98-108). Roboto is the next face the capture's own stack names, it is present, it paints, and it carries a SemiBold matching the captured weight 600",
+      "value": "Roboto/SemiBold"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "title": "Descriptive title"
+  },
+  "viewBox": {
+    "x": 0,
+    "y": 0,
+    "width": 20,
+    "height": 20,
+    "citation": "every MessageBar status glyph the capture wrote carries viewBox 0 0 20 20 (extract/computed/out/fluent/messagebar/assets/message-bar-icon-{info,success,warning,error}.svg), the 20px size @fluentui/react-icons draws at"
+  },
+  "typography": {
+    "family": "Segoe UI",
+    "style": "Semibold",
+    "stack": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+  }
+}

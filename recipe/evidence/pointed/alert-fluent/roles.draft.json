@@ -1,0 +1,48 @@
+{
+  "roles": {
+    "title": "idx:1.0",
+    "icon": "idx:0.0",
+    "iconPath": "idx:0.0.0",
+    "iconWrap": "idx:0",
+    "box": "root"
+  },
+  "combos": {
+    "info": "info.rounded",
+    "success": "success.rounded",
+    "warning": "warning.rounded",
+    "error": "error.rounded"
+  },
+  "evidence": {
+    "combos": {
+      "selector": null,
+      "why": "info ← info.rounded (the declared base cell info.rounded); success ← success.rounded (the declared base cell info.rounded); warning ← warning.rounded (the declared base cell info.rounded); error ← error.rounded (the declared base cell info.rounded)",
+      "confidence": "high"
+    },
+    "title": {
+      "selector": "idx:1.0",
+      "why": "span.fui-MessageBarTitle carries text \"Descriptive title\"",
+      "confidence": "high"
+    },
+    "icon": {
+      "selector": "idx:0.0",
+      "why": "svg 20px×20px fill rgba(97, 97, 97, 1) — its paint changes across statuses",
+      "confidence": "high"
+    },
+    "iconPath": {
+      "selector": "idx:0.0.0",
+      "why": "the svg's one path, fill rgba(97, 97, 97, 1), fill-rule nonzero, d=path(\"M 18 10 A 8 8 0 1 0 2 10 A 8 8 0 0…",
+      "confidence": "high"
+    },
+    "iconWrap": {
+      "selector": "idx:0",
+      "why": "the svg's parent div (opacity 1, margin-right 8px)",
+      "confidence": "high"
+    },
+    "box": {
+      "selector": "root",
+      "why": "div.fui-MessageBar bg rgba(245, 245, 245, 1) border 1px padding 0px/12px gap normal — the painted ancestor of icon and title",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

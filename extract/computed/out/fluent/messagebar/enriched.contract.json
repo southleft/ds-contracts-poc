@@ -1,0 +1,314 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.message-bar",
+  "name": "MessageBar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: intent=info, shape=rounded. `politeness` carries NO @default tag in the rollup (Fluent derives it from intent at runtime); it is pinned to \"polite\" — an aria-live attribute with no visual channel, so the pin cannot move a pixel. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "intent",
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Intent",
+          "values": {
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "intent"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "square",
+          "rounded"
+        ]
+      },
+      "default": "rounded",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "square": "Square",
+            "rounded": "Rounded"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "icon": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|MessageBar__icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "icon-info": {
+              "icon": {
+                "asset": "message-bar-icon-info",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "intent",
+                "equals": "info"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when intent=info."
+            },
+            "icon-success": {
+              "icon": {
+                "asset": "message-bar-icon-success",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "intent",
+                "equals": "success"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when intent=success."
+            },
+            "icon-warning": {
+              "icon": {
+                "asset": "message-bar-icon-warning",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "intent",
+                "equals": "warning"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when intent=warning."
+            },
+            "icon-error": {
+              "icon": {
+                "asset": "message-bar-icon-error",
+                "size": 20
+              },
+              "visibleWhen": {
+                "prop": "intent",
+                "equals": "error"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when intent=error."
+            }
+          },
+          "declared": {
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+            "text-align": "left",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-20}",
+            "line-height": "{imported.shared.size-20}",
+            "margin-right": "{imported.message-bar.icon.margin-right}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "intent",
+              "map": {
+                "error": {
+                  "color": "{imported.message-bar.icon.color.error}"
+                },
+                "info": {
+                  "color": "{imported.message-bar.icon.color.info}"
+                },
+                "success": {
+                  "color": "{imported.message-bar.icon.color.success}"
+                },
+                "warning": {
+                  "color": "{imported.message-bar.icon.color.warning}"
+                }
+              }
+            }
+          ]
+        },
+        "body": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|MessageBarBody — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+            "text-align": "left",
+            "text-wrap-mode": "nowrap"
+          },
+          "parts": {
+            "label": {
+              "text": "Descriptive title",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|MessageBarTitle — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "inline",
+                "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+                "text-align": "left",
+                "text-wrap-mode": "nowrap"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-242424}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.message-bar.label.font-weight}",
+                "line-height": "{imported.shared.size-20}",
+                "min-height": "{imported.message-bar.label.min-height}",
+                "min-width": "{imported.message-bar.label.min-width}"
+              }
+            }
+          },
+          "tokens": {
+            "color": "{imported.shared.color-242424}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-20}",
+            "padding-right": "{imported.message-bar.body.padding-right}"
+          }
+        }
+      },
+      "layout": {
+        "display": "grid",
+        "rows": [
+          {
+            "fr": 1
+          }
+        ],
+        "columns": [
+          {
+            "fit": true
+          },
+          {
+            "fr": 1
+          },
+          {
+            "fit": true
+          },
+          {
+            "fit": true
+          }
+        ],
+        "areas": {
+          "icon": {
+            "row": 0,
+            "column": 0
+          },
+          "body": {
+            "row": 0,
+            "column": 1
+          },
+          "secondaryActions": {
+            "row": 0,
+            "column": 2
+          },
+          "actions": {
+            "row": 0,
+            "column": 3
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+        "text-align": "left",
+        "text-wrap-mode": "nowrap"
+      },
+      "tokens": {
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-width": "{imported.shared.size-1}",
+        "color": "{imported.shared.color-242424}",
+        "font-size": "{imported.shared.size-14}",
+        "line-height": "{imported.shared.size-20}",
+        "min-height": "{imported.message-bar.root.min-height}",
+        "padding-left": "{imported.message-bar.root.padding-left}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "intent",
+          "map": {
+            "error": {
+              "background-color": "{imported.message-bar.root.background-color.error}",
+              "border-bottom-color": "{imported.message-bar.root.border-bottom-color.error}",
+              "border-left-color": "{imported.message-bar.root.border-left-color.error}",
+              "border-right-color": "{imported.message-bar.root.border-right-color.error}",
+              "border-top-color": "{imported.message-bar.root.border-top-color.error}"
+            },
+            "info": {
+              "background-color": "{imported.message-bar.root.background-color.info}",
+              "border-bottom-color": "{imported.message-bar.root.border-bottom-color.info}",
+              "border-left-color": "{imported.message-bar.root.border-left-color.info}",
+              "border-right-color": "{imported.message-bar.root.border-right-color.info}",
+              "border-top-color": "{imported.message-bar.root.border-top-color.info}"
+            },
+            "success": {
+              "background-color": "{imported.message-bar.root.background-color.success}",
+              "border-bottom-color": "{imported.message-bar.root.border-bottom-color.success}",
+              "border-left-color": "{imported.message-bar.root.border-left-color.success}",
+              "border-right-color": "{imported.message-bar.root.border-right-color.success}",
+              "border-top-color": "{imported.message-bar.root.border-top-color.success}"
+            },
+            "warning": {
+              "background-color": "{imported.message-bar.root.background-color.warning}",
+              "border-bottom-color": "{imported.message-bar.root.border-bottom-color.warning}",
+              "border-left-color": "{imported.message-bar.root.border-left-color.warning}",
+              "border-right-color": "{imported.message-bar.root.border-right-color.warning}",
+              "border-top-color": "{imported.message-bar.root.border-top-color.warning}"
+            }
+          }
+        },
+        {
+          "prop": "shape",
+          "map": {
+            "rounded": {
+              "border-bottom-left-radius": "{imported.message-bar.root.border-bottom-left-radius.rounded}",
+              "border-bottom-right-radius": "{imported.message-bar.root.border-bottom-right-radius.rounded}",
+              "border-top-left-radius": "{imported.message-bar.root.border-top-left-radius.rounded}",
+              "border-top-right-radius": "{imported.message-bar.root.border-top-right-radius.rounded}"
+            },
+            "square": {
+              "border-bottom-left-radius": "{imported.message-bar.root.border-bottom-left-radius.square}",
+              "border-bottom-right-radius": "{imported.message-bar.root.border-bottom-right-radius.square}",
+              "border-top-left-radius": "{imported.message-bar.root.border-top-left-radius.square}",
+              "border-top-right-radius": "{imported.message-bar.root.border-top-right-radius.square}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@fluentui/react-components",
+        "export": "MessageBar"
+      }
+    }
+  }
+}

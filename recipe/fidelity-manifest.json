@@ -181,40 +181,40 @@
     },
     {
       "label": "alert/astryx",
-      "page": "219:92824",
+      "page": "251:101253",
       "set": "alert/set :: Astryx Banner",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-astryx-info-shared-v9.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-astryx-info-shared-v10.png",
       "reference": "extract/computed/out/astryx-core/banner/orig-shots/info.card__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "alert/mui",
-      "page": "219:92824",
+      "page": "251:101253",
       "set": "alert/set :: MUI Alert",
       "variant": "Status=success",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-success-shared-v9.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-success-shared-v10.png",
       "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "alert/antd",
-      "page": "219:92824",
+      "page": "251:101253",
       "set": "alert/set :: Ant Design Alert",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-info-shared-v9.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-info-shared-v10.png",
       "reference": "extract/computed/out/antd/alert/orig-shots/info.icon.off.off__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "alert/mui-proposed",
-      "page": "219:92824",
+      "page": "251:101253",
       "set": "alert/set :: MUI (proposed) Alert",
       "variant": "Status=success",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-proposed-v9.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-proposed-v10.png",
       "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised",
@@ -222,10 +222,10 @@
     },
     {
       "label": "alert/antd-proposed",
-      "page": "219:92824",
+      "page": "251:101253",
       "set": "alert/set :: Ant Design (proposed) Alert",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-proposed-v9.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-proposed-v10.png",
       "reference": "extract/computed/out/antd/alert/orig-shots/info.icon.off.off__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised",
@@ -233,10 +233,10 @@
     },
     {
       "label": "alert/chakra",
-      "page": "219:92824",
+      "page": "251:101253",
       "set": "alert/set :: Chakra (proposed) Alert",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-chakra-v9.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-chakra-v10.png",
       "reference": "extract/computed/out/chakra/alert/orig-shots/info__default.png",
       "widthNormalised": true,
       "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised",
@@ -614,6 +614,16 @@
       "reference": "extract/computed/out/chakra/menu/orig-shots/__default.png",
       "referenceCrop": "cls:chakra-menu__content",
       "_why": "HELD OUT: Chakra's Menu, captured 2026-09-02 from a config entry a person wrote (MenuRoot open \u2283 MenuTrigger + Portal \u2283 MenuPositioner \u2283 MenuContent \u2283 two MenuItems); the legacy contract path quarantines it, the real screenshot and rects were kept. 14 read, 0 invented. Reference cropped to the content panel. Re-minted as menu v8 (229:94381) after menu@1 gained a panel.minWidth leaf (Chakra reads 128px, MUI paper 16px)."
+    },
+    {
+      "label": "alert/fluent",
+      "page": "251:101253",
+      "set": "alert/set :: Fluent (proposed) Alert",
+      "variant": "Status=info",
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-fluent-v10.png",
+      "reference": "extract/computed/out/fluent/messagebar/orig-shots/info.rounded__default.png",
+      "_widthNormalisedWhy": "NOT width-normalised: captured at the archetype's shape, the reference is 161px wide against the canvas's 153, so the pair is scored whole and the glyph-masked pass can test the font claim.",
+      "_proposedWhy": "HELD OUT, and the first row whose CAPTURE CONFIG ENTRY was drafted rather than written: extract/computed/draft-config.ts derived Fluent MessageBar's name, import, contract path and both axes from the contract seed; a person added the composition (MessageBarBody with a MessageBarTitle) and the glyph viewBox. 39 leaves read from the ledger, 2 reviewed with citations, 0 invented."
     }
   ],
   "_excluded": {

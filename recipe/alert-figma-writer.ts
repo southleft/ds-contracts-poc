@@ -25,7 +25,9 @@ import {
 
 export const ALERT_FIGMA_NAMESPACE = "ds.contracts.alert.recipe.v1";
 export const ALERT_FIGMA_WRITER_VERSION = 1;
-export const ALERT_FIGMA_RUN_SUFFIX = "alert-v9";
+export const ALERT_FIGMA_RUN_SUFFIX = "alert-v10";
+/** v9 stay (Fluent MessageBar joins alert@1: a library the path was never pointed at, from a config entry the drafter wrote) is preserved as evidence and never written again. */
+export const FORBIDDEN_ALERT_V9_PAGE_ID = "219:92824";
 /** v8 stay (alert@1 proposer: MUI and AntD from their own captures, Chakra held out (AlertIndicator's own icons)) is preserved as evidence and never written again. */
 export const FORBIDDEN_ALERT_V8_PAGE_ID = "218:90060";
 /** v7 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
@@ -263,6 +265,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "alertSet"
   },
   "forbiddenPages": [
+    { "id": "219:92824", "marker": "ALERT-V9-PAGE" },
     { "id": "218:90060", "marker": "ALERT-V8-PAGE" },
     { "id": "218:87424", "marker": "ALERT-V7-PAGE" },
     { "id": "218:85931", "marker": "ALERT-V6-PAGE" },

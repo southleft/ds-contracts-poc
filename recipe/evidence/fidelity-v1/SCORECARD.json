@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 65,
+  "subjects": 66,
   "passed": 53,
-  "failed": 12,
+  "failed": 13,
   "fringeExcused": 0,
-  "knownFailures": 12,
+  "knownFailures": 13,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -632,6 +632,16 @@
       "convergesAt": null,
       "glyphMasked": 0.67,
       "glyphBoxes": 2
+    },
+    {
+      "label": "alert/fluent",
+      "status": "fail",
+      "pctAAMasked": 12.37,
+      "canvasPx": "153x36",
+      "realPx": "161x36",
+      "convergesAt": null,
+      "glyphMasked": 7.45,
+      "glyphBoxes": 1
     }
   ]
 }

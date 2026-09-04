@@ -52,6 +52,11 @@
     "menu/chakra": {
       "class": "font-substrate",
       "cause": "5.64% at 76x46 vs 128x76 \u2014 HELD OUT (Chakra Menu, captured 2026-09-02 through a Portal composition; 15 read, 0 invented). The geometry now matches the real render to the pixel: menu@1 gained a panel.minWidth leaf (Chakra reads 128px) and the v8 mint (229:94381) exports 128x76 like the reference; the glyph ink sits at (15,16)-(91,61) in the reference and (15,16)-(90,61) on canvas. The residual is Figma-vs-Chromium rasterisation of Inter 14px (the canvas glyphs are heavier: ink 10.5% vs 6.8% with the panel's refused 0 0 1px shadow ring simulated as a stroke, boxes aligned, diff still glyph-shaped at 6.67%) \u2014 the same class as tooltip/chakra and link/chakra. The '76x46' is the scorer's ink trim of a white panel over white; the panel's drop shadow stays refused by name."
+    },
+    "alert/fluent": {
+      "class": "font-metrics",
+      "cause": "12.37% at 153x36 vs 161x36 \u2014 HELD OUT, and the first row whose CAPTURE CONFIG ENTRY was drafted rather than written (extract/computed/draft-config.ts derived the name, import, contract path and both axes from the contract seed; a person added the composition and the glyph viewBox). 39 leaves read, 2 reviewed with citations, 0 invented. Captured at the archetype's shape (a title alone), which took it from 12.53% against a two-line reference to this.",
+      "measured": "glyph-masked 7.45% \u2014 a third of the residual is not the glyphs, and the rest is the same substitution propagating through the hug. Segoe UI is not on the minting machine, and SF Pro (the fallback the Astryx and AntD fixtures cite) paints ZERO-WIDTH glyphs in this Figma at every style: measured 2026-09-04, SF Pro/Semibold and SF Pro/Regular both render width 0 for 'Descriptive title' where Inter renders 108, Helvetica 105 and Roboto 98. Roboto SemiBold \u2014 the next face the capture's own stack names \u2014 is the reviewed fallback. Its advance is narrower than Segoe UI's: the canvas title box is 96.9px (export rects) against the reference root's 160.6px less the 42px lead, and the whole 7.6px of width sits inside the title run."
     }
   }
 }

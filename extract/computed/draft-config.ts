@@ -37,7 +37,7 @@
  *   npx tsx extract/computed/draft-config.ts --contract examples/chakra/contracts-seed/tag.contract.json
  *   npx tsx extract/computed/draft-config.ts --exam        # re-derive all 165 committed entries
  */
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -254,8 +254,26 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
     process.exit(summary["axes:differs"]! > 0 || summary["stateProps:differs"]! > 0 || summary["sampleText:differs"]! > 0 ? 1 : 0);
   }
   const contract = arg("contract");
-  if (!contract) throw new Error("usage: --contract <path to a *.contract.json>   |   --exam");
+  if (!contract) throw new Error("usage: --contract <path to a *.contract.json> [--write]   |   --exam");
   const draft = draftConfigEntry(contract);
+  if (process.argv.includes("--write")) {
+    // The draft goes where the capture reads it, so a stranger runs one
+    // command rather than copying JSON. It REFUSES to touch an entry that
+    // already exists — a config entry a person has edited is theirs.
+    const library = contract.split("/")[1];
+    if (!library) throw new Error(`cannot tell which library ${contract} belongs to`);
+    const configPath = path.join(CONFIG_DIR, `${library}.json`);
+    if (!existsSync(configPath)) throw new Error(`no capture config at ${path.relative(ROOT, configPath)} — a library's first entry needs its library pin (package, version, class and variable prefixes), which is yours to write`);
+    const config = JSON.parse(readFileSync(configPath, "utf8")) as { components?: Array<Record<string, unknown>> };
+    const components = config.components ?? [];
+    if (components.some((c) => c.name === draft.entry.name))
+      throw new Error(`${library}.json already has an entry named ${draft.entry.name} — the drafter never overwrites one`);
+    components.push({ ...draft.entry, __note: `DRAFTED from ${path.relative(ROOT, path.isAbsolute(contract) ? contract : path.join(ROOT, contract))} by extract/computed/draft-config.ts. Every value above is a contract fact; the fields the drafter refuses are listed below and are yours to add before this captures anything real.${draft.refused.map((r) => `\n  - ${r.field}: ${r.why}`).join("")}` });
+    config.components = components;
+    writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);
+    console.log(`wrote ${draft.entry.name} into ${path.relative(ROOT, configPath)} — ${draft.derived.length} field(s) derived, ${draft.refused.length} named for you`);
+    process.exit(0);
+  }
   console.log(JSON.stringify(draft.entry, null, 2));
   console.log("\nDERIVED — every value above, with the contract fact behind it:");
   for (const d of draft.derived) console.log(`  · ${d.field}: ${d.from}`);
