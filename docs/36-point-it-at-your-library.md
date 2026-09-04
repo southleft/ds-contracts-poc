@@ -236,6 +236,26 @@ named failures alike. `recipe:fidelity:plugin:check` re-scores the committed
 shots offline in the fast lane. See
 `recipe/evidence/fidelity-v1/plugin-target/`.
 
+### The config entry, drafted from the contract
+
+The one file a person still writes before a capture is the entry in
+`extract/computed/configs/<library>.json`. `npm run extract:computed:draft --
+--contract <seed>` now proposes it from the component's contract seed and
+refuses the rest by name. Measured against every entry the repository has
+(`npm run extract:computed:draft:exam`, a fast-lane step):
+
+    165 committed entries · axes exact 161, superset 4, differs 0
+                           · state planes exact 30, refused 26, superset 9, differs 0
+
+Not one derivation the corpus contradicts. The draft proposes MORE than an
+author kept — every enum prop as an axis, a state plane wherever the contract
+has a disabled boolean — which is the point: it names the candidates and the
+person narrows them. What it never guesses is the composition (`childrenSpec`),
+how an overlay opens (`portalCapture` / `openDriver`), the harness frame
+(`stage`), a value rename (`axisValueMap`), or a prop the contract does not
+describe (`id`, `value`, `placeholder`, `href` and the like — how the harness
+mounts the component, not what the component is).
+
 ## What it does not do yet
 
 - **Overlay archetypes are scored through a crop.** Dialog and menu's real

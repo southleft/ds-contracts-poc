@@ -349,6 +349,8 @@
     "extract:draft-config": "tsx extract/draft-capture-config.ts",
     "extract:accept": "tsx extract/accept-candidates.ts",
     "extract:computed": "tsx extract/computed/run.ts",
+    "extract:computed:draft": "tsx extract/computed/draft-config.ts",
+    "extract:computed:draft:exam": "tsx extract/computed/draft-config.ts --exam",
     "extract:computed:regate": "tsx extract/computed/regate.ts",
     "extract:computed:drift": "tsx extract/computed/drift-check.ts",
     "extract:computed:drift:remeasure": "tsx extract/computed/drift-check.ts --remeasure",

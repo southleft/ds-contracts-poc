@@ -325,6 +325,9 @@ jobs:
       - name: deploy:pin:check (AUD-U22 disposition — the hosted zip carries the engine docs/00 pins)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run deploy:pin:check
+      - name: extract:computed:draft:exam (the config drafter re-derives all 165 committed entries; a derivation the corpus contradicts fails)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:draft:exam
       # The thirteen boilerplate archetypes plus the button scene inversion. Each
       # was gate-shaped and unlaned: ci:lanes reported 33 scripts no workflow ran
       # and 39 test files no CI-invoked script named. They were never expensive —
