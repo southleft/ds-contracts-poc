@@ -347,6 +347,17 @@ Gate: **GREEN** at phase `full`.
 
 <!-- PRESERVED LOG — hand-authored below this line; carried across regenerations of this receipt. -->
 
+## The same components on the recipe path — 2026-09-04
+
+Nineteen of the NOT-recognisable verdicts below name an archetype the recipe
+path now ships, and for ten of them the recipe path scores the same library's
+same component against the same real render: eight PASS the 5% bar, three are
+pixel-identical, and the two that do not pass are named rows whose measured
+cause is the font substrate. See
+[CENSUS-VS-RECIPE.md](CENSUS-VS-RECIPE.md). That receipt does not close any
+row here; it exists so a reader who sees "53 not recognisable" does not
+conclude the current product path renders those ten that way.
+
 ## Burn-down — 2026-08-25
 
 Eight root-cause classes were opened against the census's rejected sets. This is
