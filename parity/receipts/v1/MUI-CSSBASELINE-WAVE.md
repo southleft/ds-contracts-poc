@@ -172,6 +172,60 @@ Both remedies are the owner's:
 So the wave sits on a branch. `main` is untouched and green rather than red or
 quietly re-floored to fit a change of mine.
 
+## The decision, prepared both ways
+
+Neither is applied here. Both are one action.
+
+### Option A — sign off the floor at 5
+
+The count is lower **and more truthful**: those two stems passed only because
+canvas and reference shared the same defect. Applying this records that.
+
+```bash
+python3 - <<'EOF'
+import json
+p='parity/receipts/console-loop/RATCHET.json'
+d=json.load(open(p))
+d['lanes']['mui'] = 5
+d.setdefault('decisions', []).append({
+  "lane": "mui", "from": 7, "to": 5, "date": "2026-09-04",
+  "by": "<your name>",
+  "cause": "The CssBaseline mount correction. input-adornment (pctAAMasked 20.83) "
+           "and slider (7.96) lose their passes with compositionOk still true, so it is "
+           "purely the pixel/font difference. Their canvases on 59mLQlOMiD5w5za6SUcoO5 "
+           "were built from Times-derived contracts and passed only because the reference "
+           "carried the same defect. The corrected reference exposes them: the count fell "
+           "and the honesty rose. Floor lowered deliberately, not to make a wave pass.",
+  "reopensWhen": "either canvas is re-minted from a CssBaseline-derived contract and "
+                 "console-loop:developed-score puts it back under the bar — then raise it again."
+})
+json.dump(d, open(p,'w'), indent=2); open(p,'a').write('\n')
+EOF
+npm run visual-truth:check      # expect green
+git commit -am "OWNER: mui visual-truth floor 7 -> 5, cause recorded"
+```
+
+*(Check `d['lanes']` against the file's actual key name before running — the
+shape is pinned there, not here.)*
+
+### Option B — keep the floor at 7 and re-mint the two canvases
+
+Re-mint `input-adornment` and `slider` on `59mLQlOMiD5w5za6SUcoO5` from
+contracts derived from the CssBaseline captures, then:
+
+```bash
+npm run console-loop:developed-score -- --lib mui --stem input-adornment
+npm run console-loop:developed-score -- --lib mui --stem slider
+npm run visual-truth:run -- --lib mui && npm run visual-truth:report
+npm run visual-truth:check      # expect green, floor untouched at 7
+```
+
+Option B is the better end state — it fixes the canvases rather than accepting
+them — and it is the slower one. Option A is honest and reversible: the
+`reopensWhen` says exactly what raises the floor back.
+
+Either way the branch merges with no further work from me.
+
 ## How to re-derive this page
 
 ```
