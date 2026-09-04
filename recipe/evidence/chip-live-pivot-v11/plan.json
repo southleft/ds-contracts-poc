@@ -1,6 +1,6 @@
 {
-  "pageName": "Recipe Pivot / Chip / 932f13fe-eb96b2ab-908fd120-c9e6d710-d900b3b5-5b25bd6a-fa41578a-b3441869-chip-v11",
-  "runIdentity": "932f13fe-eb96b2ab-908fd120-c9e6d710-d900b3b5-5b25bd6a-fa41578a-b3441869-chip-v11",
+  "pageName": "Recipe Pivot / Chip / 932f13fe-eb96b2ab-908fd120-c9e6d710-a2edcac5-5b25bd6a-fa41578a-b3441869-chip-v11",
+  "runIdentity": "932f13fe-eb96b2ab-908fd120-c9e6d710-a2edcac5-5b25bd6a-fa41578a-b3441869-chip-v11",
   "namespace": "ds.contracts.chip.recipe.v1",
   "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
   "teaching": "chip@1 named default cell from Astryx Token, MUI Chip filled/default/medium, and AntD Tag bordered; color/size/closable are not axes; do not invent an Astryx Chip",
@@ -44,8 +44,8 @@
     {
       "adapterIdentity": "mui-chip-proposed-v1",
       "displayName": "mui (proposed)",
-      "recipeHash": "d900b3b56a5c41f7b6d524107ff23f8199b0156380f77d6d32ec90d453660454",
-      "envelopeHash": "3c35bcc8d7d0e2619b38554ae7efe209f48db3e34e0f2925201f172d18ffbbb7",
+      "recipeHash": "a2edcac51202cd4c96c97d0f3c4e69387363994f7fcf8e226dcade0e97bc51e9",
+      "envelopeHash": "6958ed3a35ca9ec30b5badd1b87700f97024c24eb3ade2b079e9a1ec15ec20e9",
       "variantCount": 1,
       "variableCount": 10,
       "comparedIrFacts": 17

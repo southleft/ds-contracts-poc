@@ -5,17 +5,17 @@
   "productV1": "INCOMPLETE",
   "artifactVersion": "tabs-live-pivot-v17-prepare",
   "teaching": "One named default Tabs rail; selected-child indicator; no invented overlay ink-bar offsets",
-  "runIdentity": "be4dbcc3-3ba3a5d8-506880be-042f2a5f-0cbe5625-tabs-v17",
-  "pageName": "Recipe Pivot / Tabs / be4dbcc3-3ba3a5d8-506880be-042f2a5f-0cbe5625-tabs-v17",
+  "runIdentity": "be4dbcc3-3ba3a5d8-506880be-fb303c8a-0cbe5625-tabs-v17",
+  "pageName": "Recipe Pivot / Tabs / be4dbcc3-3ba3a5d8-506880be-fb303c8a-0cbe5625-tabs-v17",
   "namespace": "ds.contracts.tabs.recipe.v1",
   "recipeHashes": {
     "Astryx": "be4dbcc36dabc14047d8c4fbefbd024bc24ada8cae49e783c92af9bcce616b53",
     "MUI": "3ba3a5d8afa7b700e48eec67add1bac59393a9cb0f0fb43b7a4788c6f149e070",
     "Ant Design": "506880be459deb7f1e9614d19e91bd2c66ee7944d2749e26625165dd336887a1",
-    "mui (proposed)": "042f2a5f32ae97608f47bc162ab96b5dd57413b7d3670cbce76236fd9230f0d7",
+    "mui (proposed)": "fb303c8a9b81f47ea71f722dbedb6d6c43bc5d1db0f063cdd163453566329bd6",
     "carbon (proposed)": "0cbe56254c78aae03c3e1028eb532db73a182ad07b2014088682debce2979e66"
   },
-  "writerSha256": "6a6ac88304e91d2bc838629597b7f5ee845d04108ae947f8390475c92ea44f96",
+  "writerSha256": "5edb779d617706ce7d711a168c64e48970b03218e81f3fb1fca31a73eaa669ba",
   "pageId": "235:97556",
   "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=235-97556",
   "live": {

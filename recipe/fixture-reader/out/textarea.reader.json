@@ -1268,7 +1268,7 @@
     "source": {
       "packageName": "@mui/material",
       "version": "9.2.0",
-      "exportName": "TextField"
+      "exportName": "Textarea"
     },
     "ledgerFile": "extract/computed/out/mui/textarea/captured-truth.json",
     "rows": [

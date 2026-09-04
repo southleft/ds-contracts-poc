@@ -284,17 +284,17 @@
         "provenance": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-size"
       },
       "labelLineHeight": {
-        "fixture": 0,
-        "proposed": 0,
+        "fixture": 24,
+        "proposed": 24,
         "verdict": "match",
-        "captured": 0,
+        "captured": 24,
         "provenance": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height — CSS normal → 0 with lineHeightUnit auto; a length → px"
       },
       "lineHeightUnit": {
-        "fixture": "auto",
-        "proposed": "auto",
+        "fixture": "px",
+        "proposed": "px",
         "verdict": "match",
-        "captured": "auto",
+        "captured": "px",
         "provenance": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height — CSS normal → auto; a length → px"
       },
       "decoration": {
@@ -339,10 +339,10 @@
         "provenance": "RECEIPT: a CSS border lies inside the box — recipe spelling [reviewed inside]"
       },
       "typography.label.family": {
-        "fixture": "Times",
-        "proposed": "Times",
+        "fixture": "Roboto",
+        "proposed": "Roboto",
         "verdict": "match",
-        "captured": "Times",
+        "captured": "Roboto",
         "provenance": "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-family — first family of the label's computed stack"
       },
       "typography.label.style": {

@@ -1,6 +1,6 @@
 {
-  "pageName": "Recipe Pivot / Link / be7109bb-d810f4f2-7a6db373-46536054-51646118-3c37b1a8-link-v8",
-  "runIdentity": "be7109bb-d810f4f2-7a6db373-46536054-51646118-3c37b1a8-link-v8",
+  "pageName": "Recipe Pivot / Link / be7109bb-d810f4f2-7a6db373-46536054-ab17c464-3c37b1a8-link-v8",
+  "runIdentity": "be7109bb-d810f4f2-7a6db373-46536054-ab17c464-3c37b1a8-link-v8",
   "namespace": "ds.contracts.link.recipe.v1",
   "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
   "teaching": "link@1 inline text decoration from Astryx Link (none), MUI Link (underline always), and AntD Typography.Link (none); underline-at-rest is not an axis",
@@ -44,11 +44,11 @@
     {
       "adapterIdentity": "mui-link-proposed-v1",
       "displayName": "mui (proposed)",
-      "recipeHash": "51646118c0b680f42e53ea627fe41a4987313725bf86c4e6c5990078e7d2aa06",
-      "envelopeHash": "fd1f312f9367b88b1233af3ae8c2bc9464e71ccfa427588468381af500a25d5b",
+      "recipeHash": "ab17c464eb1366340acc8b18bc87d2da2584867d349c92e47f68e8f11faba40f",
+      "envelopeHash": "66d05bfe7ff6e4d07501c1989610e3ffc9efd1f363201b78ba81561be90f239a",
       "variantCount": 1,
-      "variableCount": 8,
-      "comparedIrFacts": 15
+      "variableCount": 9,
+      "comparedIrFacts": 16
     },
     {
       "adapterIdentity": "chakra-link-proposed-v1",

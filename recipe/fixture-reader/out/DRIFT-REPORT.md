@@ -60,7 +60,7 @@ ledger `extract/computed/out/antd/textarea/captured-truth.json` · 41 facts: **2
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
-### mui-proposed — @mui/material@9.2.0#TextField
+### mui-proposed — @mui/material@9.2.0#Textarea
 
 ledger `extract/computed/out/mui/textarea/captured-truth.json` · 45 facts: **41 match**, **0 drift**, 4 named receipts, 0 unread
 

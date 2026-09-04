@@ -5,19 +5,19 @@
   "productV1": "INCOMPLETE",
   "artifactVersion": "alert-live-pivot-v10-prepare",
   "teaching": "Status info|success|warning|error compiled from named Banner/Alert facts; do not invent a shared default status; SVG glyphs receipted as colour+size boxes",
-  "runIdentity": "4c13ca24-9b4bd337-b8dd06ed-eb151709-83c23591-3cc66b45-b7744674-alert-v10",
-  "pageName": "Recipe Pivot / Alert / 4c13ca24-9b4bd337-b8dd06ed-eb151709-83c23591-3cc66b45-b7744674-alert-v10",
+  "runIdentity": "4c13ca24-9b4bd337-b8dd06ed-07758707-83c23591-3cc66b45-b7744674-alert-v10",
+  "pageName": "Recipe Pivot / Alert / 4c13ca24-9b4bd337-b8dd06ed-07758707-83c23591-3cc66b45-b7744674-alert-v10",
   "namespace": "ds.contracts.alert.recipe.v1",
   "recipeHashes": {
     "Astryx": "4c13ca24d271870e9e6c9b50f754ad42f0be0e390c4feb1fb10aabfa0e0b8145",
     "MUI": "9b4bd3375d4bd4c846972da58119ee67e6897853a3e6db88d8dc776a1cfb672a",
     "Ant Design": "b8dd06ed1dd6201afda491e78ff2551e2b1275badcb0961cff7a25e5053f2fc7",
-    "MUI (proposed)": "eb151709b5102ab147731a741dfbf1777810cb4fd124c558448b3f8ff799403f",
+    "MUI (proposed)": "07758707fec4ded4ea9a9825f9ce6401501521c53ac4bad5580f849faa3b9a46",
     "Ant Design (proposed)": "83c235917b89e1b9ca0f2ae6ff552a31698ac5d31ee6024da23cc03d0eecc7c2",
     "Chakra (proposed)": "3cc66b45a14a5f8d25812b55e8005017a446f54fbc7ca18af23cac54a3e6a92f",
     "Fluent (proposed)": "b77446740369abe2f8aefffae61ac37e7cce9f7bf3e7de4b51d17bee57f6b974"
   },
-  "writerSha256": "48820318a588b79112c2310f609692d7f3529495ea3259875a24e9f12de570cd",
+  "writerSha256": "faa77061bcf6bd6fde228008b058d953eca307437a5c4c38528b29327014a0c6",
   "pageId": "251:101253",
   "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=251-101253",
   "live": {

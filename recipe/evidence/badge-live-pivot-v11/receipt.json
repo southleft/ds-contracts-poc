@@ -5,16 +5,16 @@
   "productV1": "INCOMPLETE",
   "artifactVersion": "badge-live-pivot-v11-prepare",
   "teaching": "MUI Badge proof is color=error from the docs Color demo; do not paint a fake pill on color=default",
-  "runIdentity": "17da6833-76d59843-1fb57821-5ecb1cc3-badge-v11",
-  "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-1fb57821-5ecb1cc3-badge-v11",
+  "runIdentity": "17da6833-76d59843-d3d1418d-5ecb1cc3-badge-v11",
+  "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-d3d1418d-5ecb1cc3-badge-v11",
   "namespace": "ds.contracts.badge.recipe.v1",
   "recipeHashes": {
     "MUI": "17da68334ab3f716e4eeceb61565f94ab998b3f30d1c9b4cd56f7ba71d62ce3f",
     "Ant Design": "76d59843686f044cb0a0322d6301b269d893d7dd061a997ef82f5ff1aacab40c",
-    "MUI (proposed)": "1fb5782112a7d87700325a590824ba56c91d12a02f01f23970a662aa2688b7a7",
+    "MUI (proposed)": "d3d1418d63f3c0806969c596eafc3fc0d7f4b21fcc1348eee2ed6a1f9bf7b3c7",
     "Ant Design (proposed)": "5ecb1cc3ba7e0eb675e47a7487844e1e31780eae2136544d51974e5c59cca04b"
   },
-  "writerSha256": "9ad2867e5d5872e1f3a6372b9f13167dcdf72300940fb4a84f13160844efee47",
+  "writerSha256": "600ea7bc32e8033bb8c4ed120e47fe2fc15575e13a8187b79d26007c598b2485",
   "pageId": "219:93811",
   "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-93811",
   "live": {

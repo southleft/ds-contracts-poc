@@ -5,18 +5,18 @@
   "productV1": "INCOMPLETE",
   "artifactVersion": "switch-live-pivot-v13-prepare",
   "teaching": "AntD Switch ON inset matches OFF: compile travel 22 from named handle travel calc(100% - handleSize - trackPadding)",
-  "runIdentity": "3ba64ebc-4b939b9e-6211639b-81fc98c9-a68d9a8f-8fef9171-switch-v13",
-  "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-6211639b-81fc98c9-a68d9a8f-8fef9171-switch-v13",
+  "runIdentity": "3ba64ebc-4b939b9e-6211639b-346479b9-a68d9a8f-8fef9171-switch-v13",
+  "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-6211639b-346479b9-a68d9a8f-8fef9171-switch-v13",
   "namespace": "ds.contracts.switch.recipe.v1",
   "recipeHashes": {
     "Astryx": "3ba64ebca7ac7eaff7dfe84dbc120a4d6b060812be7faffc9ccd66aa9f0bcb73",
     "MUI": "4b939b9e867ec77b6c74712c55fef72f707b463eb4c95c09d9992075184da3ff",
     "Ant Design": "6211639b98921062c6325fe77ff66f980e6daa7c431cc91d5734c2ab66c8015c",
-    "MUI (proposed)": "81fc98c9f2aa187c3d5ea67f4120f061d25c60238ee5e7dd17f41065507ed186",
+    "MUI (proposed)": "346479b9c31cba5ab6d6afaf7c3dc5cca05325f68eb157bf1b2b779132a04a6f",
     "shadcn": "a68d9a8f4b975fcf701313ee8aced71958095146bcfa85c371988415b3e32af0",
     "Chakra": "8fef91713ad00ff9fedb15e213c2919fcf0dd68124ca5e7dd2af45da85f0afe0"
   },
-  "writerSha256": "3b143c54d27ab637f3cf4118425ae6088022d73063bc6d35c817b56e486c2ad2",
+  "writerSha256": "d6d6880e267b67ccad9f27ffd0ce955d3ec557d1b4f281c554c3053eb9efed89",
   "pageId": "218:89580",
   "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=218-89580",
   "live": {

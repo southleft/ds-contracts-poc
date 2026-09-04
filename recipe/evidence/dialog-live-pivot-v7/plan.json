@@ -1,6 +1,6 @@
 {
-  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-346a147b-22e17299-dialog-v7",
-  "runIdentity": "e482eb49-b275da16-d479cda5-346a147b-22e17299-dialog-v7",
+  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-63342ead-22e17299-dialog-v7",
+  "runIdentity": "e482eb49-b275da16-d479cda5-63342ead-22e17299-dialog-v7",
   "namespace": "ds.contracts.dialog.recipe.v1",
   "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
   "teaching": "dialog@1 open paper plus title and body from Astryx Dialog, MUI Dialog, and AntD Modal; full-bleed scrim size is a refusal",
@@ -35,8 +35,8 @@
     {
       "adapterIdentity": "mui-dialog-proposed-v1",
       "displayName": "MUI (proposed)",
-      "recipeHash": "346a147b24aaac4dcb7e4d19b0c6bc01f7e60585427c61819e44074528786bb9",
-      "envelopeHash": "b92c29415bcf0859f0474846a8782e84ce4c46eafdc29881365447f67c4bd566",
+      "recipeHash": "63342eadb2ecebd71e88a1b8a651eea2a0fa1f9f18e0c85e8698d0e5141982f2",
+      "envelopeHash": "0204c640e6b19ea0bd0a42d340e6686d2d9a76bf3548ebdd0ab93af3319c9158",
       "variantCount": 1,
       "variableCount": 11,
       "comparedIrFacts": 19

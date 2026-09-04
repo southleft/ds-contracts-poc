@@ -394,10 +394,10 @@
       },
       {
         "path": "labelLineHeight",
-        "fixtureValue": 0,
+        "fixtureValue": 24,
         "verdict": "match",
-        "capturedValue": 0,
-        "proposedValue": 0,
+        "capturedValue": 24,
+        "proposedValue": 24,
         "ledgerKeys": [
           "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height"
         ],
@@ -405,10 +405,10 @@
       },
       {
         "path": "lineHeightUnit",
-        "fixtureValue": "auto",
+        "fixtureValue": "px",
         "verdict": "match",
-        "capturedValue": "auto",
-        "proposedValue": "auto",
+        "capturedValue": "px",
+        "proposedValue": "px",
         "ledgerKeys": [
           "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.line-height"
         ],
@@ -475,10 +475,10 @@
       },
       {
         "path": "typography.label.family",
-        "fixtureValue": "Times",
+        "fixtureValue": "Roboto",
         "verdict": "match",
-        "capturedValue": "Times",
-        "proposedValue": "Times",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
         "ledgerKeys": [
           "extract/computed/out/mui/link/captured-truth.json#primary.always__default root.font-family"
         ],

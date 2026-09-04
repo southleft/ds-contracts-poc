@@ -1,0 +1,1700 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Select",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "overflow-y",
+        "value": "clip"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "select-nativeinput",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "icon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "icon",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "icon",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-property",
+        "value": "fill"
+      },
+      {
+        "part": "icon",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "icon",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "transition-duration",
+        "value": "0.15s"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "transition-property",
+        "value": "width"
+      },
+      {
+        "part": "part-3-0",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-align",
+        "value": "left"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Select",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 2,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 1536,
+      "cellsEqual": 1352,
+      "pctEqual": 88.02083333333333,
+      "rowsFullyEqual": 0,
+      "rows": 8
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 8,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 49,
+      "mintedLeavesUnfolded": 44,
+      "baseBindings": 105,
+      "stateBindings": 22,
+      "codeOnlyChannels": 16,
+      "overflowBindings": 22,
+      "folds": 66
+    },
+    "worstRows": [
+      {
+        "key": "small__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "small__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "medium__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "medium__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "small__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "medium__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "small__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 18,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "medium__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 18,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.display",
+        8
+      ],
+      [
+        "root.text-size-adjust",
+        8
+      ],
+      [
+        "label.animation-duration",
+        8
+      ],
+      [
+        "label.animation-name",
+        8
+      ],
+      [
+        "label.text-size-adjust",
+        8
+      ],
+      [
+        "select-nativeinput.border-bottom-style",
+        8
+      ],
+      [
+        "select-nativeinput.border-bottom-width",
+        8
+      ],
+      [
+        "select-nativeinput.border-left-style",
+        8
+      ],
+      [
+        "select-nativeinput.border-left-width",
+        8
+      ],
+      [
+        "select-nativeinput.border-right-style",
+        8
+      ],
+      [
+        "select-nativeinput.border-right-width",
+        8
+      ],
+      [
+        "select-nativeinput.border-top-style",
+        8
+      ],
+      [
+        "select-nativeinput.border-top-width",
+        8
+      ],
+      [
+        "select-nativeinput.text-size-adjust",
+        8
+      ],
+      [
+        "outlinedinput-notchedoutline.min-width",
+        8
+      ]
+    ],
+    "namedLosses": [
+      "overflow: label.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-bottom-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-left-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-right-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-right-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-top-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-top-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: label.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-bottom-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-bottom-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-left-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-left-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-right-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-right-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-top-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-top-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: outlinedinput-notchedoutline.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: select-nativeinput.border-bottom-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.border-left-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.border-right-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.border-top-style — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: select-nativeinput.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: outlinedinput-notchedoutline.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: outlinedinput-notchedoutline.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: part-3-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <legend>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <legend> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: part-3-0.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <legend>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <legend> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1947,
+      "divergent": [
+        {
+          "token": "imported.select.icon.left",
+          "fresh": "43.7812px",
+          "shipped": "42.9375px",
+          "resolvedEqual": false
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "small__default",
+        "channelsCompared": 192,
+        "channelsEqual": 174,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small__hover",
+        "channelsCompared": 192,
+        "channelsEqual": 170,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small__focus-visible",
+        "channelsCompared": 192,
+        "channelsEqual": 166,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small__active",
+        "channelsCompared": 192,
+        "channelsEqual": 166,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium__default",
+        "channelsCompared": 192,
+        "channelsEqual": 174,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium__hover",
+        "channelsCompared": 192,
+        "channelsEqual": 170,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(0, 0, 0, 0.87)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium__focus-visible",
+        "channelsCompared": 192,
+        "channelsEqual": 166,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "medium__active",
+        "channelsCompared": 192,
+        "channelsEqual": 166,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "inline-flex"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.01s"
+          },
+          {
+            "part": "label",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "inset"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "2px"
+          },
+          {
+            "part": "select-nativeinput",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-bottom-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-left-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-right-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.23)",
+            "theirs": "rgba(25, 118, 210, 1)"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "border-top-width",
+            "ours": "1px",
+            "theirs": "2px"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "min-width",
+            "ours": "0px",
+            "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-3-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

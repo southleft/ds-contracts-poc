@@ -1,0 +1,484 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Drawer",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "backdrop-root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "backdrop-root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "backdrop-root",
+        "channel": "transition-property",
+        "value": "opacity"
+      },
+      {
+        "part": "backdrop-root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "permanent"
+        }
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "label",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "label",
+        "channel": "transition-property",
+        "value": "box-shadow"
+      },
+      {
+        "part": "label",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Drawer",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 2,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 148,
+      "cellsEqual": 127,
+      "pctEqual": 85.8108108108108,
+      "rowsFullyEqual": 0,
+      "rows": 8
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 8,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 19,
+      "mintedLeavesUnfolded": 19,
+      "baseBindings": 25,
+      "stateBindings": 0,
+      "codeOnlyChannels": 14,
+      "overflowBindings": 0,
+      "folds": 29
+    },
+    "worstRows": [
+      {
+        "key": "temporary__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "permanent__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "temporary__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "temporary__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "temporary__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "permanent__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "permanent__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "permanent__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        2
+      ],
+      [
+        "label.display",
+        2
+      ],
+      [
+        "label.flex-direction",
+        2
+      ],
+      [
+        "label.position",
+        2
+      ],
+      [
+        "label.text-size-adjust",
+        2
+      ],
+      [
+        "root.bottom",
+        1
+      ],
+      [
+        "root.left",
+        1
+      ],
+      [
+        "root.min-height",
+        1
+      ],
+      [
+        "root.min-width",
+        1
+      ],
+      [
+        "root.position",
+        1
+      ],
+      [
+        "root.right",
+        1
+      ],
+      [
+        "root.top",
+        1
+      ],
+      [
+        "root.z-index",
+        1
+      ],
+      [
+        "backdrop-root.position",
+        1
+      ],
+      [
+        "backdrop-root.text-size-adjust",
+        1
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.min-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: backdrop-root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: backdrop-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: backdrop-root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1974,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "temporary__default",
+        "channelsCompared": 87,
+        "channelsEqual": 71,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "root",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "root",
+            "channel": "min-height",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "root",
+            "channel": "min-width",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "root",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "root",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "root",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "root",
+            "channel": "z-index",
+            "ours": "auto",
+            "theirs": "1200"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "z-index",
+            "ours": "auto",
+            "theirs": "-1"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "inline",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
+          },
+          {
+            "part": "label",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "temporary__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "temporary__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "temporary__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "permanent__default",
+        "channelsCompared": 61,
+        "channelsEqual": 56,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "inline",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
+          },
+          {
+            "part": "label",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "permanent__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "permanent__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "permanent__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      }
+    ]
+  }
+}

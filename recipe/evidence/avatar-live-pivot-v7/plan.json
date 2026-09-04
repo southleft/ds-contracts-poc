@@ -1,6 +1,6 @@
 {
-  "pageName": "Recipe Pivot / Avatar / 8b6f943a-0b73c85a-8714d3a8-a76bc632-0f8d4b37-712d7ffe-ea8faf59-af315e26-72628709-avatar-v7",
-  "runIdentity": "8b6f943a-0b73c85a-8714d3a8-a76bc632-0f8d4b37-712d7ffe-ea8faf59-af315e26-72628709-avatar-v7",
+  "pageName": "Recipe Pivot / Avatar / 8b6f943a-0b73c85a-8714d3a8-4ae3dd12-0f8d4b37-712d7ffe-ea8faf59-af315e26-72628709-avatar-v7",
+  "runIdentity": "8b6f943a-0b73c85a-8714d3a8-4ae3dd12-0f8d4b37-712d7ffe-ea8faf59-af315e26-72628709-avatar-v7",
   "namespace": "ds.contracts.avatar.recipe.v1",
   "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
   "teaching": "avatar@1 circle-clipped JD initials from Astryx Avatar small 36, MUI Avatar 40, and AntD Avatar 32; size/shape are not axes; do not remint the Badge host",
@@ -35,8 +35,8 @@
     {
       "adapterIdentity": "mui-avatar-proposed-v1",
       "displayName": "mui (proposed)",
-      "recipeHash": "a76bc632c43d51c0b4b23434b9ef8049214c58db7381e4e05b533c3fa1144961",
-      "envelopeHash": "5620a41ceeb05578ed227f9ff26ed649db469fc8e9d922509f29da15b3f6ff6a",
+      "recipeHash": "4ae3dd12d2aecbd14a41605ce7f095cb8b3e1940e815e412e5a12f1e90890ca8",
+      "envelopeHash": "e0733f5532ed22ef40a3fb10c498da2530b864f65747484117f4795cb37260e8",
       "variantCount": 1,
       "variableCount": 10,
       "comparedIrFacts": 18

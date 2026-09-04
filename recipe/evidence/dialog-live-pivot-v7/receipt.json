@@ -5,17 +5,17 @@
   "productV1": "INCOMPLETE",
   "artifactVersion": "dialog-live-pivot-v7-prepare",
   "teaching": "One named default Dialog paper; title and body; full-bleed scrim size is receipted",
-  "runIdentity": "e482eb49-b275da16-d479cda5-346a147b-22e17299-dialog-v7",
-  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-346a147b-22e17299-dialog-v7",
+  "runIdentity": "e482eb49-b275da16-d479cda5-63342ead-22e17299-dialog-v7",
+  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-63342ead-22e17299-dialog-v7",
   "namespace": "ds.contracts.dialog.recipe.v1",
   "recipeHashes": {
     "Astryx": "e482eb490976c22f9c7527fbe8d3fb545ef450d75e7a03c75c1b392cb9371a8f",
     "MUI": "b275da1672c18ab147c939c61bdc8192e415acf3bc412ea9758c6a91e6780ac7",
     "Ant Design": "d479cda5dd84ed7a52f65ea671e23e51695c9ce4181be9a8b8807c11fc27ea6d",
-    "MUI (proposed)": "346a147b24aaac4dcb7e4d19b0c6bc01f7e60585427c61819e44074528786bb9",
+    "MUI (proposed)": "63342eadb2ecebd71e88a1b8a651eea2a0fa1f9f18e0c85e8698d0e5141982f2",
     "Chakra (proposed)": "22e172990e70bd067801d567e7d92c989f09554472a6826bc2961675f81a5d51"
   },
-  "writerSha256": "5d441188ed7f086114bcb43ac49180715212706c58c5953a35bfe12d4a1a0fd7",
+  "writerSha256": "7ff939688c430fcd92cfde0cb060adb96216d1b636a1cc3e9c1b2aa0e9e49e5d",
   "pageId": "229:94292",
   "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=229-94292",
   "live": {

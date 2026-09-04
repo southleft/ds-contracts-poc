@@ -1,6 +1,6 @@
 {
-  "pageName": "Recipe Pivot / Textarea / e275888a-47ace6d9-28aba712-59d7530a-f7368def-36b9a479-8460784d-textarea-v13",
-  "runIdentity": "e275888a-47ace6d9-28aba712-59d7530a-f7368def-36b9a479-8460784d-textarea-v13",
+  "pageName": "Recipe Pivot / Textarea / e275888a-47ace6d9-28aba712-80b5db76-f7368def-36b9a479-8460784d-textarea-v13",
+  "runIdentity": "e275888a-47ace6d9-28aba712-80b5db76-f7368def-36b9a479-8460784d-textarea-v13",
   "namespace": "ds.contracts.textarea.recipe.v1",
   "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
   "teaching": "textarea@1 Content=focus is the named focused-empty column (InputLabel.js:197-199). Floating rest empty hides placeholder (InputBase.js:179-188). Do not remint Input 115:295378. Old stays 183:75495 and 198:77048 refused.",
@@ -35,8 +35,8 @@
     {
       "adapterIdentity": "mui-textarea-proposed-v1",
       "displayName": "MUI (proposed)",
-      "recipeHash": "59d7530abfcbd56d28f30df3986024bbf63466e7e29fd6bab2f2d562893be6c5",
-      "envelopeHash": "fe2a71a4bce32b9b2b434faafad9c1db08710868b424c5ed79383392708f264d",
+      "recipeHash": "80b5db76deed2b7140e230df1f8a7818987a30066fc4f5086e49b2af8253072a",
+      "envelopeHash": "40a098758e793ff668503910337d6209eb60682ec64b60e30b24b9d54472050d",
       "variantCount": 6,
       "variableCount": 28,
       "comparedIrFacts": 145

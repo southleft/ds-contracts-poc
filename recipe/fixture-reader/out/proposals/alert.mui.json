@@ -61,7 +61,7 @@
     "icon.viewBox": {
       "value": 24,
       "from": "set",
-      "why": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)"
+      "why": "SvgIcon.js viewBox 0 0 24 24"
     },
     "titleFontSize": {
       "value": 14,
@@ -251,7 +251,7 @@
     {
       "path": "icon.viewBox",
       "why": "the package's viewBox is not a computed channel (the capture asset carries the RENDERED size there); give --set icon.viewBox=<size | x y w h> --why with the package citation",
-      "evidence": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)",
+      "evidence": "SvgIcon.js viewBox 0 0 24 24",
       "value": 24
     }
   ],
@@ -264,7 +264,7 @@
     "y": 0,
     "width": 24,
     "height": 24,
-    "citation": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)"
+    "citation": "SvgIcon.js viewBox 0 0 24 24"
   },
   "typography": {
     "family": "Roboto",

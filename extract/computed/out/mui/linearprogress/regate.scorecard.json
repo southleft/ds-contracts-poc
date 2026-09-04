@@ -1,0 +1,777 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "LinearProgress",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "transition-timing-function",
+        "value": "linear"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "transition-timing-function",
+        "value": "linear"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "LinearProgress",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 2,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 600,
+      "cellsEqual": 532,
+      "pctEqual": 88.66666666666667,
+      "rowsFullyEqual": 0,
+      "rows": 8
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 8,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 19,
+      "mintedLeavesUnfolded": 19,
+      "baseBindings": 39,
+      "stateBindings": 0,
+      "codeOnlyChannels": 14,
+      "overflowBindings": 0,
+      "folds": 30
+    },
+    "worstRows": [
+      {
+        "key": "indeterminate__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "indeterminate__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "indeterminate__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "indeterminate__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        8
+      ],
+      [
+        "linearprogress-bar.text-size-adjust",
+        8
+      ],
+      [
+        "linearprogress-bar.transition-duration",
+        8
+      ],
+      [
+        "linearprogress-bar.transform",
+        4
+      ],
+      [
+        "linearprogress-bar.animation-duration",
+        4
+      ],
+      [
+        "linearprogress-bar.animation-iteration-count",
+        4
+      ],
+      [
+        "linearprogress-bar.animation-name",
+        4
+      ],
+      [
+        "linearprogress-bar.animation-timing-function",
+        4
+      ],
+      [
+        "linearprogress-bar-2.animation-delay",
+        4
+      ],
+      [
+        "linearprogress-bar-2.animation-duration",
+        4
+      ],
+      [
+        "linearprogress-bar-2.animation-iteration-count",
+        4
+      ],
+      [
+        "linearprogress-bar-2.animation-name",
+        4
+      ],
+      [
+        "linearprogress-bar-2.animation-timing-function",
+        4
+      ],
+      [
+        "linearprogress-bar-2.text-size-adjust",
+        4
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: linearprogress-bar.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: linearprogress-bar-2.animation-delay — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar-2.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar-2.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar-2.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar-2.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1974,
+      "divergent": [
+        {
+          "token": "imported.linear-progress.linearprogress-bar-2.background-color",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.linear-progress.linearprogress-bar.background-color",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "determinate__default",
+        "channelsCompared": 59,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -172.8, 0)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.4s"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "determinate__hover",
+        "channelsCompared": 59,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -172.8, 0)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.4s"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "determinate__focus-visible",
+        "channelsCompared": 59,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -172.8, 0)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.4s"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "determinate__active",
+        "channelsCompared": 59,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -172.8, 0)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.4s"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__default",
+        "channelsCompared": 91,
+        "channelsEqual": 78,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-ozg7p2"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.2s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-delay",
+            "ours": "0s",
+            "theirs": "1.15s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-19gglwu"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__hover",
+        "channelsCompared": 91,
+        "channelsEqual": 78,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-ozg7p2"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.2s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-delay",
+            "ours": "0s",
+            "theirs": "1.15s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-19gglwu"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__focus-visible",
+        "channelsCompared": 91,
+        "channelsEqual": 78,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-ozg7p2"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.2s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-delay",
+            "ours": "0s",
+            "theirs": "1.15s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-19gglwu"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__active",
+        "channelsCompared": 91,
+        "channelsEqual": 78,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-ozg7p2"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.2s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-delay",
+            "ours": "0s",
+            "theirs": "1.15s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "2.1s"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-19gglwu"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}
