@@ -223,6 +223,17 @@ export interface SceneNodeSnapshot {
   fills?: ScenePaint[];
   strokes?: ScenePaint[];
   strokeWeight?: number;
+  /**
+   * Per-side stroke weights, when the canvas carries them. A cell that draws
+   * ONE edge (MUI's table cell is border-bottom 1px and 0 elsewhere) reads
+   * back with these four and NO uniform strokeWeight — Figma deletes the
+   * uniform property's binding the moment the sides differ. Absent on every
+   * scene that draws its edges alike, so nothing that came before changes.
+   */
+  strokeTopWeight?: number;
+  strokeRightWeight?: number;
+  strokeBottomWeight?: number;
+  strokeLeftWeight?: number;
   strokeAlign?: "INSIDE" | "OUTSIDE" | "CENTER";
   dashPattern?: number[];
   effects?: SceneEffect[];
@@ -340,6 +351,14 @@ const CELL_COMPILE_BINDING_FIELDS = [
   "layout.minWidth",
   "strokes.0.paint.color",
   "strokes.0.weight",
+  // A cell that draws ONE edge binds the four sides and no uniform weight —
+  // Figma deletes the uniform property's binding once the sides differ. The
+  // compile emits one shape or the other, never both, so listing all five
+  // here keeps the order stable and drops whichever the scene lacks.
+  "strokes.0.weight.top",
+  "strokes.0.weight.right",
+  "strokes.0.weight.bottom",
+  "strokes.0.weight.left",
 ] as const;
 const CELL_INSTANCE_COMPILE_BINDING_FIELDS = [] as const;
 const CELL_LABEL_COMPILE_BINDING_FIELDS = [
@@ -1239,7 +1258,25 @@ export function sceneToNormalizedIr(
     scene.strokes === undefined
       ? undefined
       : scene.strokes.map((paint) => ({
-          weight: scene.strokeWeight ?? 0,
+          weight:
+            scene.strokeWeight ??
+            // With per-side weights Figma reports no uniform one; the recipe's
+            // uniform weight is then a side the node actually draws.
+            [scene.strokeBottomWeight, scene.strokeTopWeight, scene.strokeRightWeight, scene.strokeLeftWeight].find((side) => (side ?? 0) > 0) ??
+            0,
+          ...(scene.strokeTopWeight === undefined &&
+          scene.strokeRightWeight === undefined &&
+          scene.strokeBottomWeight === undefined &&
+          scene.strokeLeftWeight === undefined
+            ? {}
+            : {
+                sideWeights: {
+                  top: scene.strokeTopWeight ?? 0,
+                  right: scene.strokeRightWeight ?? 0,
+                  bottom: scene.strokeBottomWeight ?? 0,
+                  left: scene.strokeLeftWeight ?? 0,
+                },
+              }),
           align: (scene.strokeAlign ?? "INSIDE").toLowerCase() as
             "inside" | "outside" | "center",
           paint: scenePaintToIr(paint),

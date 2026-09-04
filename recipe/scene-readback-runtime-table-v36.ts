@@ -153,7 +153,7 @@ const readSceneDerivedTree=async(node,expectedPlan,expectedOwner)=>{
     };
     const TABLE_EXTRACT_MEASURE_HIDDEN_CONTENT_FILL="TABLE-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL";
     const contentFillRoles=new Set(["table/cell/label"]);
-    for(const field of ["layoutMode","layoutSizingHorizontal","layoutSizingVertical","primaryAxisAlignItems","counterAxisAlignItems","itemSpacing","paddingTop","paddingRight","paddingBottom","paddingLeft","minWidth","minHeight","layoutPositioning","x","y","constraints","clipsContent","strokeWeight","strokeAlign","dashPattern","characters","fontName","fontSize","lineHeight","letterSpacing","textCase","textDecoration","textAlignHorizontal","textAlignVertical"]){
+    for(const field of ["layoutMode","layoutSizingHorizontal","layoutSizingVertical","primaryAxisAlignItems","counterAxisAlignItems","itemSpacing","paddingTop","paddingRight","paddingBottom","paddingLeft","minWidth","minHeight","layoutPositioning","x","y","constraints","clipsContent","strokeWeight","strokeTopWeight","strokeRightWeight","strokeBottomWeight","strokeLeftWeight","strokeAlign","dashPattern","characters","fontName","fontSize","lineHeight","letterSpacing","textCase","textDecoration","textAlignHorizontal","textAlignVertical"]){
       if(field==="layoutSizingHorizontal"&&current.type==="TEXT"&&contentFillRoles.has(snapshot.semanticRole)&&current.visible===false){
         void TABLE_EXTRACT_MEASURE_HIDDEN_CONTENT_FILL;
         current.visible=true;

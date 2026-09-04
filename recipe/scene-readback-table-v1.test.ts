@@ -169,6 +169,44 @@ const uniformFigmaPerSideStrokeBindings = (
     resolvedType: "FLOAT" as const,
   }));
 
+test("a cell that draws ONE edge reads back as one edge, with no uniform weight to fold", () => {
+  // MUI's table cell is border-bottom 1px and 0 on the other three sides, and
+  // Figma deletes the uniform strokeWeight property the moment the sides
+  // differ — the canvas returns four per-side weights and no uniform one.
+  // The read-back must carry those values (sideWeights) and take the recipe's
+  // uniform weight from a side the cell actually draws, or the collapse
+  // refuses a binding the writer never wrote.
+  const scene = {
+    ...tableVariantScene(
+      (["strokeTopWeight", "strokeRightWeight", "strokeBottomWeight", "strokeLeftWeight"] as const).map((field) => ({
+        field,
+        variableName: field === "strokeBottomWeight" ? "mui.table.cellRuleWidth" : `mui.table.cellRuleSides-${field.replace("stroke", "").replace("Weight", "").toLowerCase()}`,
+        resolvedType: "FLOAT" as const,
+      })),
+      "table/cell/comfortable/body",
+    ),
+    strokes: [{ type: "SOLID" as const, color: "#e0e0e0ff" }],
+    strokeAlign: "INSIDE" as const,
+    strokeTopWeight: 0,
+    strokeRightWeight: 0,
+    strokeBottomWeight: 1,
+    strokeLeftWeight: 0,
+  } as unknown as Parameters<typeof sceneToNormalizedIr>[0];
+  const ir = sceneToNormalizedIr(scene);
+  const stroke = (ir as { strokes?: Array<{ weight: number; sideWeights?: Record<string, number> }> }).strokes?.[0];
+  assert.equal(stroke?.sideWeights?.bottom, 1);
+  assert.equal(stroke?.sideWeights?.top, 0);
+  assert.equal(stroke?.sideWeights?.right, 0);
+  assert.equal(stroke?.sideWeights?.left, 0);
+  // the uniform weight is the drawn side, not zero
+  assert.equal(stroke?.weight, 1);
+  // the four per-side bindings survive: their variables differ, so there is
+  // nothing to fold, and no uniform binding is invented.
+  const perSide = (ir.bindings ?? []).filter((binding) => binding.field.startsWith("strokes.0.weight."));
+  assert.equal(perSide.length, 4);
+  assert.equal((ir.bindings ?? []).filter((binding) => binding.field === "strokes.0.weight").length, 0);
+});
+
 test("host folds uniform per-side stroke weight binds into strokes.0.weight", () => {
   const ir = sceneToNormalizedIr(
     tableVariantScene(
