@@ -222,6 +222,22 @@ const prior: BaselineRow[] = existsSync(BASELINE)
   : [];
 const priorBy = new Map<string, BaselineRow>(prior.map((r) => [`${r.library}/${r.component}`, r]));
 const selected = LIBRARIES.filter((lib) => !ONLY_CONFIG || path.resolve(REPO, ONLY_CONFIG) === path.resolve(REPO, lib.config));
+// `--config` takes a PATH to the config file, not a library name, and a value
+// that matches nothing used to select zero libraries and then CARRY ON: with
+// ONLY_CONFIG set, `kept` keeps every prior row, so `--write` rewrote the
+// baseline with the date bumped and nothing measured, printing
+// "RE-RECORD — 0 libraries ()" and a green tick. Measured 2026-09-04:
+// `--write --config fluent` did exactly that, while the failure it was run to
+// close ("no committed offline scorecard for fluent/MessageBar — re-record with
+// --write") was still there afterwards. A filter that selects nothing is a typo,
+// not an instruction to re-record nothing.
+if (ONLY_CONFIG && selected.length === 0) {
+  console.error(
+    `✖ --config ${ONLY_CONFIG} matched no library. It takes the PATH to a config file, not a library name.\n` +
+      `  Try one of:\n${LIBRARIES.map((l) => `    --config ${l.config}`).join('\n')}`,
+  );
+  process.exit(1);
+}
 const fmt = (n: number | null) => (n === null ? 'UNMEASURED' : n.toFixed(3));
 /** The gap between two pctEquals, or NULL when either side was never measured. */
 const gapOf = (a: number | null, b: number | null): number | null => (a === null || b === null ? null : Math.abs(a - b));

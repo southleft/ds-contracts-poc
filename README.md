@@ -38,7 +38,7 @@ npm run extract:computed -- --harness <your sandbox> \
 #    which every value is read from the capture, reviewed with evidence, or
 #    an archetype spelling (nothing is invented), compile it to a fixed point,
 #    and emit the program the plugin runs.
-npm run recipe:point -- --archetype switch --library <lib>
+npm run recipe:point -- --archetype switch --library <lib> --unsupported hover,focus-visible,active
 
 # 3. In Figma desktop: open the development plugin, Paste a script,
 #    paste recipe/evidence/pointed/switch-<lib>/writer.plugin.js, run.

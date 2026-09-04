@@ -214,9 +214,21 @@ npm run storybook    # the generated component library — blocks
 Then prove the loop to yourself in about two minutes:
 
 1. `npm run parity` — code and tokens check **clean** against the contracts. (On a fresh clone the canvas half likely reports `snapshot-stale` instead of green — the committed Figma snapshots age out past 14 days **by design**, and the output says so when that is the only finding class. See [README §Working in this repository](../README.md).)
-2. Open a contract in `contracts/` and change something small — add an enum value, tweak a token binding.
-3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming exactly what's missing and how to fix it. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
+2. Open a contract in `contracts/` and change something small. A verified one: in
+   `badge.contract.json`, change the `children` prop's default from `Badge` to `Status`.
+   (Adding an **enum value** is the interesting other case — a variant-keyed prop demands
+   variant-keyed tokens, so a new `neutral` on `badge.variant` makes the build **refuse the
+   contract by name** and refuse the seven contracts that depend on it, five directly and two through those. That refusal is the
+   product working, but it exits non-zero, so `build && parity` below stops before the differ.)
+3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming
+   exactly what's missing and how to fix it. Measured on a clean clone, the default change
+   above prints ``[figma MISMATCH] Badge.Label (default) — Default differs — contract:
+   "Status", figma: "Badge"`` and the fix, beside the same `snapshot-stale` finding a fresh
+   clone always carries. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
-5. `npm run eval` — 230 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
+5. `npm run eval:carried:check` — 230 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds. Expect **225 of 230**: five are red, and this gate passes only because every
+   one of them is named in `parity/receipts/v1/eval-reds.json` with a measured cause and a
+   stated closing condition. An unnamed red fails it. `npm run eval` runs the same suite and
+   exits non-zero on any red at all.
 
 From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [How It Flows](./29-how-it-flows.md) for the mechanics of every hop, [Contract Specification](./02-contract-spec.md) when you're ready to write one. Testing the tool against your own library and planning to report what you find? [The Beta Tester Runbook](./28-beta-runbook.md) is the packaged version of that: three tracks, exact commands, the named limitations each will hit, and the issue forms.

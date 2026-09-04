@@ -72,6 +72,37 @@ const captureName = arg("capture") ?? archetype as string;
 // Textarea composition): the ledger stays under --library, everything the
 // proposal writes is named by the slug.
 const slugName = arg("slug") ?? library;
+// --unsupported is REQUIRED, and it is checked HERE — before the run writes a
+// single byte. Every archetype adapter refuses a fixture that names no
+// unsupported cell ("unsupported source cells must be named"), but it refuses
+// at step 4, AFTER step 3 has already overwritten
+// recipe/fixtures/generated/<archetype>.<slug>.ts. Run without the flag against
+// a library this repo already ships and the committed fixture is replaced by
+// one with an empty refusal list, the run dies on an uncaught TypeError with a
+// stack trace, and the tree is left holding a fixture that no longer compiles.
+// Measured 2026-09-04 on a clean clone of origin/main, on all six pairs tried
+// (avatar/shadcn, tabs/mui, link/mui, badge/mui, radio/antd, tooltip/antd) and
+// on docs/36's own headline example, `--archetype switch --library shadcn`,
+// which omits the flag. A page whose promise is "everything it cannot do
+// refuses by name" may not hand a stranger a stack trace and a damaged tree.
+const unsupportedCells = (arg("unsupported") ?? "")
+  .split(",")
+  .map((c) => c.trim())
+  .filter(Boolean);
+if (unsupportedCells.length === 0) {
+  const existing = path.join(REPO, `recipe/fixtures/generated/${archetype}.${slugName}.ts`);
+  let hint = "";
+  if (existsSync(existing)) {
+    const m = /buildConfig\([\s\S]*?\n\s*(\[[^\]]*\]),\n/.exec(readFileSync(existing, "utf8"));
+    if (m) hint = `\n  ${path.relative(REPO, existing)} already names ${m[1]} — pass those to keep it, or different ones to change it.`;
+  }
+  console.error(
+    `\u2716 --unsupported is required: every adapter refuses a fixture that names no unsupported cell.\n` +
+      `  Name the cells this capture cannot express, comma-separated, e.g. --unsupported hover,focus-visible,active.${hint}\n` +
+      `  Nothing was written.`,
+  );
+  process.exit(2);
+}
 const ledgerRel = `extract/computed/out/${library}/${captureName}/captured-truth.json`;
 const outDir = path.join(REPO, "recipe/evidence/pointed", `${archetype}-${slugName}`);
 mkdirSync(outDir, { recursive: true });
@@ -110,7 +141,7 @@ const sets: Record<string, { value: string; why: string }> = {};
 const whys = new Map(args("why").map((w) => { const i = w.indexOf("="); return [w.slice(0, i), w.slice(i + 1)] as const; }));
 for (const s of args("set")) { const i = s.indexOf("="); const p = s.slice(0, i); const why = whys.get(p); if (!why) throw new Error(`--set ${p} needs --why '${p}=<evidence>'`); sets[p] = { value: s.slice(i + 1), why }; }
 const modulePath = `recipe/fixtures/generated/${archetype}.${slugName}.ts`;
-const common = { library: slugName, ledger: ledgerRel, sets, displayName: arg("display-name"), exportName: arg("export-name"), sourceRoot: arg("source-root"), unsupported: (arg("unsupported") ?? "").split(",").filter(Boolean), out: modulePath };
+const common = { library: slugName, ledger: ledgerRel, sets, displayName: arg("display-name"), exportName: arg("export-name"), sourceRoot: arg("source-root"), unsupported: unsupportedCells, out: modulePath };
 let glyph: GlyphSpec | null = null;
 let proposed: { refused: string[]; proposal: { leaves: Record<string, { from: "ledger" | "set" | "spelling" }> } };
 if (archetype === "checkbox") {

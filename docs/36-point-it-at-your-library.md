@@ -27,8 +27,10 @@ plugin's **Paste a script** verb ([19 — plugin IA](19-plugin-ia.md)).
 ## The command
 
 ```bash
-npm run recipe:point -- --archetype switch --library shadcn
+npm run recipe:point -- --archetype switch --library shadcn \
+  --unsupported hover,focus-visible,active
 npm run recipe:point -- --archetype checkbox --library chakra \
+  --unsupported size-sm,size-lg,variant-outline,variant-subtle,colorPalette \
   --glyph-file glyph.json \
   --set dash.width=9.9167 --why 'dash.width=…the arithmetic…' \
   --set dash.height=1.75  --why 'dash.height=…' \
@@ -42,7 +44,7 @@ npm run recipe:point -- --archetype checkbox --library chakra \
 | `--capture <dir>` | the captured component's directory when the library names the archetype differently (AntD's and Carbon's `tag` as chip@1; Chakra's `textareafield` as textarea@1) |
 | `--slug <name>` | the fixture's own name when one library contributes two captures of an archetype (`chakra-field`); the ledger stays under `--library` |
 | `--display-name`, `--export-name`, `--source-root` | what the fixture says about itself; the display name must be distinct from the hand rows' on the same page |
-| `--unsupported a,b,c` | the cells the fixture refuses by name (the adapter requires at least one) |
+| `--unsupported a,b,c` | **required** — the cells the fixture refuses by name. Every adapter refuses a fixture that names none, so the command checks this before it writes anything and exits 2 with the cells the shipped fixture already names |
 | `--set path=value --why 'path=evidence'` | a reviewed leaf the ledger cannot carry, recorded as a receipt with its evidence |
 | `--glyph-file <json>` | checkbox@1 only: the check glyph's geometry cited from the package source |
 | `--roles-file <json>` | a reviewed role map instead of the drafted one |

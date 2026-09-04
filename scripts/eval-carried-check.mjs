@@ -29,7 +29,7 @@
  * caught there, not here.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { evalRedFailures } from './eval-red-ledger.mjs';
@@ -55,6 +55,12 @@ if (fromIdx > -1 && process.argv[fromIdx + 1]) {
       ? path.resolve(process.argv[recIdx + 1])
       : path.join(ROOT, 'evals', '.carried', 'results.json');
   mkdirSync(path.dirname(where), { recursive: true });
+  // Delete any record left by an earlier run FIRST. Without this, a suite that
+  // dies before writing leaves the previous run's file in place, and this gate
+  // would read a stale record and report on a measurement that did not happen —
+  // the exact failure this project has been bitten by before (an exit code and a
+  // results file that disagreed).
+  rmSync(where, { force: true });
   console.log('eval:carried:check — running the full suite (this is a measurement, not a read)…');
   const run = spawnSync('npx', ['tsx', 'evals/run.ts', '--record', where], {
     cwd: ROOT,
@@ -75,6 +81,22 @@ const results = JSON.parse(readFileSync(where, 'utf8'));
 if (!Array.isArray(results.results) || typeof results.passed !== 'number' || typeof results.total !== 'number') {
   console.error(`✖ eval:carried:check — ${path.relative(ROOT, where)} is not a suite record (passed/total/results missing)`);
   process.exit(1);
+}
+
+// A run that stopped early still writes a record, and a SHORT record can read as
+// green: `passed === total` is true of the cases it reached. The committed
+// record is the floor for how many cases the suite has — fewer than that and
+// this run did not cover the suite, whatever its ratio says.
+const COMMITTED = path.join(ROOT, 'evals', 'results.json');
+if (existsSync(COMMITTED) && path.resolve(where) !== COMMITTED) {
+  const committedTotal = JSON.parse(readFileSync(COMMITTED, 'utf8')).total;
+  if (typeof committedTotal === 'number' && results.total < committedTotal) {
+    console.error(
+      `✖ eval:carried:check — this run recorded ${results.total} case(s); the committed record has ${committedTotal}. ` +
+        `The suite did not finish, so its ratio measures nothing. Re-run it.`,
+    );
+    process.exit(1);
+  }
 }
 
 const ledger = existsSync(LEDGER) ? JSON.parse(readFileSync(LEDGER, 'utf8')) : null;

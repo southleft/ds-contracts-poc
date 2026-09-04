@@ -5,6 +5,7 @@
  * until a person gives it with evidence.
  */
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -410,4 +411,29 @@ test("dialog@1 reads MUI's title + body capture — the paper inset as paper plu
   assert.equal(m.proposal.content.title, "Dialog title");
   for (const [k, v] of [["paper.paddingX", 24], ["paper.paddingY", 16], ["paper.radius", 4], ["paper.itemSpacing", 16], ["titleFontSize", 20], ["titleLineHeight", 32], ["bodyFontSize", 16], ["lineHeightUnit", "px"], ["typography.title.style", "Medium"]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
   assert.equal(Object.values(m.proposal.leaves).filter((l) => l.from !== "ledger").length, 0, "every leaf read");
+});
+
+test("the command REFUSES without --unsupported, before it writes anything", () => {
+  // Measured 2026-09-04 on a clean clone of origin/main: `npm run recipe:point
+  // -- --archetype switch --library shadcn`, the headline example on docs/36,
+  // died on an uncaught TypeError from the adapter ("unsupported source cells
+  // must be named") at step 4 — AFTER step 3 had already overwritten the
+  // committed recipe/fixtures/generated/switch.shadcn.ts with a copy whose
+  // refusal list was empty. Six other pairs behaved identically. A stranger
+  // following that page got a stack trace and a damaged working tree from the
+  // page's own example. The refusal now happens before the first write.
+  const fixture = path.join(REPO, "recipe/fixtures/generated/switch.shadcn.ts");
+  const before = readFileSync(fixture, "utf8");
+  const run = spawnSync(
+    "npx",
+    ["tsx", "recipe/fixture-reader/point.ts", "--archetype", "switch", "--library", "shadcn"],
+    { cwd: REPO, encoding: "utf8" },
+  );
+  assert.equal(run.status, 2, `expected the named refusal's exit code 2, got ${run.status}`);
+  assert.match(run.stderr, /--unsupported is required/);
+  assert.match(run.stderr, /Nothing was written/);
+  assert.doesNotMatch(run.stderr, /TypeError/);
+  // the hint reads the cells the committed fixture already names
+  assert.match(run.stderr, /already names \["hover","focus-visible","active"\]/);
+  assert.equal(readFileSync(fixture, "utf8"), before, "the refused run must not touch the generated fixture");
 });

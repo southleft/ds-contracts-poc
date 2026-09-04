@@ -80,7 +80,22 @@ export function recordFreshnessFailures(rec = readRecord(RECORD)) {
       }
     })();
     if (!isAncestor) {
-      failures.push(`evals/results.json was measured at ${rec.commit.slice(0, 8)}, which is not an ancestor of HEAD ${head.slice(0, 8)} — a record from another branch or a rewritten history.`);
+      // A SHALLOW clone cannot answer this question, and the answer it gives is
+      // wrong in the accusing direction. Measured 2026-09-04: on a
+      // `git clone --depth 1` of origin/main — the clone a stranger makes when
+      // they do not want 537 MB of history — `git merge-base --is-ancestor`
+      // fails because the record's commit is simply not in the shallow history,
+      // and this check told them their committed record came "from another
+      // branch or a rewritten history". Naming the depth is the honest answer;
+      // pretending to have verified ancestry would be worse.
+      const shallow = git(['rev-parse', '--is-shallow-repository']) === 'true';
+      if (shallow) {
+        failures.push(
+          `evals/results.json was measured at ${rec.commit.slice(0, 8)}, which is not in this SHALLOW clone's history — ancestry cannot be checked here at all. Run \`git fetch --unshallow\` (or clone without --depth) and re-run; this is the clone's depth, not a foreign record.`,
+        );
+      } else {
+        failures.push(`evals/results.json was measured at ${rec.commit.slice(0, 8)}, which is not an ancestor of HEAD ${head.slice(0, 8)} — a record from another branch or a rewritten history.`);
+      }
     } else {
       const behind = git(['rev-list', '--count', `${rec.commit}..${head}`]);
       const touched = git(['diff', '--stat', '--name-only', rec.commit, head]);

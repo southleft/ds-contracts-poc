@@ -1,6 +1,6 @@
 {
   "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved. Every row is also the committed out/<lib>/<comp>/regate.scorecard.json — `npm run extract:computed:drift` (VERIFY, fast lane) holds the two together without a browser; `extract:computed:drift:remeasure` (full lane) re-fuses and compares.",
-  "recordedAt": "2026-09-03",
+  "recordedAt": "2026-09-04",
   "rows": [
     {
       "library": "altitude",
@@ -613,6 +613,15 @@
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 75.25510204081633,
       "gapCause": "STACK ENGINE MOVEMENT vs origin/main — re-recorded DELIBERATELY, and the arithmetic is re-measured, not carried. The prose this row used to hold was written on 2026-08-23 (d5b5b0b1) and claimed a `VOCABULARY LIFT/NARROWED SINCE CAPTURE` with a cellsCompared this row does not carry; it was FALSE on the merged tree and is replaced rather than patched. Measured against origin/main's committed offline scorecard for this component: cellsCompared moved 9360 -> 9504 (+144), and cellsEqual moved 7038 -> 7830 (+792). What moved, by channel: root.border-{left,right,top}-{style,width} leave (x120 each) — RC8's observed-`solid`-carries; input.border-*-color and input.color enter (x72). The committed HARNESS scorecard is the capture-time engine and is NOT re-captured, which is the gap this field exists to name."
+    },
+    {
+      "library": "fluent",
+      "component": "MessageBar",
+      "rerunPctEqual": 99.00990099009901,
+      "cellsCompared": 3232,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 99.00990099009901,
+      "gapCause": ""
     },
     {
       "library": "fluent",

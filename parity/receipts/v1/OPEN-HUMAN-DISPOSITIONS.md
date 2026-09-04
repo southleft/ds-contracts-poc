@@ -170,7 +170,16 @@ automatable:
 - **Gate 2, the per-column width model.** MUI declares no cell min-width, so its
   columns are ragged by 32px, and at v32 that is visible on the canvas rather
   than only in a measurement. Choosing a column model is authoring.
-- **Calendar** has an offline proof and a named refusal, not a live mint.
+- **Calendar's human signoff.** The sentence here used to read "Calendar has an
+  offline proof and a named refusal, not a live mint." That was written
+  2026-08-29 and the live mint landed 2026-08-30, one day later:
+  `recipe/evidence/calendar-v50-mint-stays-caption-visible.json` records
+  **THE MINT STAYS** on Scratch page `181:64873` — all 8 capture cells and 20
+  capture responses accepted, broker `main-complete`, extract green, and every
+  screenshot verdict true (six-row month, chevrons, circular selected, the
+  caption "April 2026" visible between the chevrons, both day and week sets
+  painting on and off). What is actually open is the same thing Table's row is
+  open on: `humanSignoff` is `pending`, and a live mint is not a grade.
 
 These two rows are simply the part of the blocker list that has nothing to do
 with the pivot, and they are now the only part still holding the gate.
