@@ -415,9 +415,16 @@
       "severity": "P1",
       "title": "v1.0.0-rc.1 tag exists on origin (34d92c08, unsigned) while the checklist's 'Signed RC tag approved' row is empty",
       "source": "audit.json unverified #17",
-      "status": "open-human",
+      "status": "closed",
       "checklistRow": "Signed RC tag approved",
-      "note": "Tag operations are a recorded human approval (V1-REL-02). The owner either signs/retags on the release commit or deletes the premature tag and records the disposition; no automation row can close it."
+      "note": "Tag operations are a recorded human approval (V1-REL-02). The owner either signs/retags on the release commit or deletes the premature tag and records the disposition; no automation row can close it. DISPOSITION 2026-09-03: the owner authorised the deletion in writing; the tag was deleted on origin and locally; the checklist row records it; release-tag:check guards it.",
+      "closing": {
+        "commits": [
+          "5f2916af0"
+        ],
+        "section": "parity/receipts/v1/OPEN-HUMAN-DISPOSITIONS.md#aud-u17--the-premature-v100-rc1-tag"
+      },
+      "acceptance": "npm run release-tag:check"
     },
     {
       "id": "AUD-U18",
@@ -483,9 +490,16 @@
       "severity": "P1",
       "title": "Hosted no-clone plugin zip carries a third engine (3de67ce4 · 716832B) matching neither HEAD's receipt nor the working tree",
       "source": "audit.json unverified #22",
-      "status": "open-human",
+      "status": "closed",
       "checklistRow": "Cloudflare deployment approved",
-      "note": "The hosted zip is a deployment; a deployment is a recorded human approval (V1-REL-02) and `npm run deploy:check` is red by construction until it happens. docs/00 offers the hosted zip as the no-clone path without saying which engine it carries — the deploy (or a pinned engine stamp on that page) is the close."
+      "note": "The hosted zip is a deployment; a deployment is a recorded human approval (V1-REL-02) and `npm run deploy:check` is red by construction until it happens. docs/00 offers the hosted zip as the no-clone path without saying which engine it carries — the deploy (or a pinned engine stamp on that page) is the close. DISPOSITION 2026-09-03: option 2 — the engine the hosted zip carries is pinned on docs/00 and deploy:pin:check guards the pin; the deploy waits for a release commit.",
+      "closing": {
+        "commits": [
+          "5f2916af0"
+        ],
+        "section": "parity/receipts/v1/OPEN-HUMAN-DISPOSITIONS.md#aud-u22--the-hosted-plugin-zips-engine"
+      },
+      "acceptance": "npm run deploy:pin:check"
     },
     {
       "id": "AUD-U23",
