@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "type": "module",
-  "description": "Proof of concept: machine-readable design-system contracts. The v1 proof surface is recipe-IR (archetype recipes + Figma-capability IR + receipts); product v1 is incomplete (F1). The universal JSON contract still powers the CLI, playground, and Journeys A–C.",
+  "description": "Proof of concept: machine-readable design-system contracts. The v1 proof surface is recipe-IR (archetype recipes + Figma-capability IR + receipts); product v1 is incomplete (F1). The universal JSON contract still powers the CLI, playground, and Journeys A\u2013C.",
   "scripts": {
     "ci:lanes": "tsx .github/scripts/lane-coverage.ts",
     "ci:lane": "tsx .github/scripts/run-lane.ts",
@@ -301,8 +301,8 @@
     "verify:package": "node scripts/verify-package.mjs",
     "verify:published": "node scripts/verify-published-packages.mjs",
     "publish:check": "node scripts/publish-check.mjs",
-    "audit:dependencies": "npm audit --audit-level=high",
-    "audit:production": "npm audit --omit=dev --audit-level=high",
+    "audit:dependencies": "node scripts/audit-dependencies.mjs",
+    "audit:production": "node scripts/audit-dependencies.mjs --production",
     "v1:definition:check": "node scripts/v1-definition-check.mjs",
     "v1:readiness": "tsx scripts/v1-readiness.ts",
     "exam:screenshots:check": "tsx scripts/exam-screenshots-check.ts",
@@ -530,7 +530,8 @@
     "host-placement:check": "tsx core/host-placement-check.ts",
     "eval-reds:self-test": "node scripts/eval-red-ledger-self-test.mjs",
     "curated-facts:self-test": "node scripts/curated-fact-guard-self-test.mjs",
-    "recipe:table:tail-census:format": "prettier --write recipe/evidence/table-tail-census-v1.json"
+    "recipe:table:tail-census:format": "prettier --write recipe/evidence/table-tail-census-v1.json",
+    "test:audit-classify": "node --test scripts/audit-classify.test.mjs"
   },
   "engines": {
     "node": ">=20"

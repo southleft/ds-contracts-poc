@@ -113,6 +113,16 @@ writes it into Figma has improved. A reader comparing their output to the
 committed receipt should expect the version token and the runtime block to
 differ and the recipe hash not to.
 
+### The plugin a stranger builds
+
+`npm run plugin:zip` on the clean clone exits 0 and writes
+`figma-sync/plugin-dist/` — `manifest.json` (969 B), `code.js` (47,718 B) and a
+`ui.html` of **1,058,659 B**, which is an engine actually injected rather than
+the stub the prerequisites warn about. (The string "engine: NOT INJECTED"
+appears once in that file and is the else-branch of the header stamp, not the
+state of this build.) The path docs/00-choose-your-path gives for people who do
+not want the hosted zip works as written.
+
 ## The CLI a stranger installs
 
 `npm i -g @ds-contracts/cli` is real: `@ds-contracts/cli@0.4.0` resolves and

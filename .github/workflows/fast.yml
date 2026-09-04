@@ -613,6 +613,9 @@ jobs:
       - name: test accuracy contract gate falsifications
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:accuracy-contract
+      - name: test:audit-classify (an npm-audit endpoint error is not a vulnerability finding)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:audit-classify
 
       - name: accuracy:check (declared grammar and R1–R6 ratchets)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
