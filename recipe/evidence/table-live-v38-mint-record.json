@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "table-live-v38-mint-record-v1",
+  "recordedAt": "2026-09-04",
+  "note": "The v38 live mint of table@1 on the Scratch file, recorded from the signed transaction's own artifacts. It carries NO human grade: the owner holds Table's grade for this mint (2026-09-03, 'no margin of error'), and the v32 signoff in recipe/evidence/table-live-v32-human-signoff.json stands for v32 and is not restamped here.",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "251:99309"
+  },
+  "teaching": "a cell may draw ONE edge: MUI's table cell is border-bottom 1px #e0e0e0 with 0 on the other three, as extract/computed/out/mui/table reads it. Carried by the IR (strokes[].sideWeights), bound at the repository's established address strokes.N.weight.<side>, applied by the table writer, reported by the v38 extract runtime, carried by the shared read-back only when the sides differ, and read back into cellRuleWidth from a side the cell draws.",
+  "roundTrip": {
+    "mainComplete": true,
+    "captures": 20,
+    "roots": [
+      {
+        "source": "first-party",
+        "adapterIdentity": "first-party-table-reviewed-v1",
+        "accounting": {
+          "ok": true,
+          "denominator": 615,
+          "matched": 615,
+          "silent": 0,
+          "codeOnly": 0,
+          "refused": 0
+        }
+      },
+      {
+        "source": "mui",
+        "adapterIdentity": "material-table-reviewed-v1",
+        "accounting": {
+          "ok": true,
+          "denominator": 619,
+          "matched": 619,
+          "silent": 0,
+          "codeOnly": 0,
+          "refused": 0
+        }
+      }
+    ]
+  },
+  "humanSignoff": "pending \u2014 the owner holds it",
+  "supersedes": {
+    "note": "v33 through v37 were each superseded before minting by their own authorization guard, because artifacts changed after signing; each refusal is recorded in the git history."
+  }
+}

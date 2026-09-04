@@ -17,6 +17,7 @@ grades:
 | Input / Field | `115:295378` | `npm run recipe:input-field:check` | passed | **false** (F1 unmet) |
 | Combobox | `163:35981` | `npm run recipe:combobox:check` | passed | **false** (F1 unmet) |
 | Table | `173:48924` | `npm run recipe:table:check` | passed | true (v32 record; do not restamp) |
+| Table (v38, the per-side cell rule) | `251:99309` | `npm run recipe:table:live:v38:check` | **grade held by the owner** | round trip clean: 615/615 and 619/619 facts matched, 0 silent, 0 refused (`recipe/evidence/table-live-v38-mint-record.json`) |
 | Calendar | `181:64873` | `npm run recipe:calendar:check` | passed | **false** (F1 unmet) |
 
 Product **v1 is incomplete**. F1 (whole-corpus / unseen-library on the
