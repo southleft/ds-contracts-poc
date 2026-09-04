@@ -131,6 +131,31 @@ runs. It is the **pre-pivot** path — the universal-contract envelope the
 the version. The recipe path this page measures still has no published vehicle;
 that gap is the audit's, and it is not closed here.
 
+## The third journey: the beta runbook's published CLI
+
+docs/28 is the packaged version of "test this against your own library", and its
+commands run through the PUBLISHED CLI rather than the clone. Checked
+2026-09-04 against `@ds-contracts/cli@0.4.0` in an empty directory — the state a
+beta tester starts from:
+
+| command | exit | what happened |
+| --- | --- | --- |
+| `ds-contracts init` | 0 | wrote `ds-contracts.config.json` and named the two fields to edit and the next command |
+| `ds-contracts extract` | 1 | `✘ react-tsx adapter: root directory not found: src/components` |
+| `ds-contracts figma bundle` | 2 | `✘ figma bundle needs contract files/directories` |
+| `ds-contracts onboard` | 2 | `✘ onboard needs a package or path: …` |
+
+Every one of the three failures is a **named refusal with the missing input
+spelled out**, and not one printed a stack trace. That is the bar the in-repo
+`recipe:point` did not meet before this round, and it is worth recording that
+the published CLI already met it: the defect found on docs/36 was that page's
+example and that command's argument validation, not a habit running through the
+project.
+
+What this does NOT check is the rest of the runbook, which needs a real
+third-party library to point at. The refusal behaviour is the part that can be
+verified from nothing, and it is verified.
+
 ## How to re-derive this page
 
 ```
