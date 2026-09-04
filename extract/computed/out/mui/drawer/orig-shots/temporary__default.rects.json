@@ -1,0 +1,66 @@
+{
+  "origin": "the portal root screenshot (top-left = 0,0)",
+  "parts": [
+    {
+      "idxPath": "",
+      "tag": "div",
+      "classes": [
+        "MuiDrawer-root",
+        "MuiDrawer-anchorLeft",
+        "MuiDrawer-modal",
+        "MuiModal-root",
+        "css-1hbxaor-MuiModal-root-MuiDrawer-root"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "0",
+      "tag": "div",
+      "classes": [
+        "MuiBackdrop-root",
+        "MuiModal-backdrop",
+        "css-4nmryk-MuiBackdrop-root-MuiModal-backdrop"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "1",
+      "tag": "div",
+      "classes": [],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 0
+    },
+    {
+      "idxPath": "2",
+      "tag": "div",
+      "classes": [
+        "MuiPaper-root",
+        "MuiPaper-elevation",
+        "MuiPaper-elevation16",
+        "MuiDrawer-paper",
+        "css-6670od-MuiPaper-root-MuiDrawer-paper"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 110.4375,
+      "h": 1000
+    },
+    {
+      "idxPath": "3",
+      "tag": "div",
+      "classes": [],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 0
+    }
+  ]
+}

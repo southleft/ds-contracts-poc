@@ -9,15 +9,75 @@
   "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 18,
-    "buttonbase-root": 45,
-    "switch-input": 17,
-    "switch-thumb": 30,
-    "switch-track": 14
+    "root": 33,
+    "buttonbase-root": 49,
+    "switch-input": 18,
+    "switch-thumb": 34,
+    "switch-track": 30
   },
   "folds": {
-    "count": 16,
+    "count": 36,
     "receipts": [
+      {
+        "part": "root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
       {
         "part": "buttonbase-root",
         "channel": "border-bottom-color",
@@ -113,10 +173,70 @@
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-track",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 651,
-    "mintedLeavesFolded": 204
+    "mintedLeavesUnfolded": 654,
+    "mintedLeavesFolded": 208
   },
   "bound": {
     "cellsChecked": 0,
@@ -125,22 +245,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 204,
-    "baseBindings": 69,
+    "leaves": 208,
+    "baseBindings": 79,
     "stateBindings": 20,
     "byShape": {
-      "uniform": 49,
+      "uniform": 59,
       "perAxis": 30,
       "perPair": 10,
       "refused": 0
     }
   },
   "declared": {
-    "base": 28,
+    "base": 33,
     "state": 7
   },
   "codeOnly": {
-    "base": 6,
+    "base": 11,
     "state": 0,
     "overflowBindings": 20
   },
@@ -190,9 +310,9 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.0013369605654761905,
+      "mean": 0.0017147972470238095,
       "max": 0.016276041666666668,
-      "perfect": 197
+      "perfect": 188
     },
     "aa": {
       "mean": 0,
@@ -201,49 +321,49 @@
     },
     "worst": [
       {
-        "key": "primary.medium.unchecked.enabled__hover",
+        "key": "success.medium.unchecked.enabled__hover",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "primary.medium.unchecked.enabled__active",
+        "key": "success.medium.unchecked.enabled__active",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "secondary.medium.unchecked.enabled__hover",
+        "key": "default.medium.unchecked.enabled__hover",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "secondary.medium.unchecked.enabled__active",
+        "key": "default.medium.unchecked.enabled__active",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "error.medium.unchecked.enabled__hover",
-        "pctExact": 0.016276041666666668,
-        "pctAA": 0
-      },
-      {
-        "key": "error.medium.unchecked.enabled__active",
-        "pctExact": 0.016276041666666668,
-        "pctAA": 0
-      },
-      {
-        "key": "primary.medium.unchecked.disabled__default",
+        "key": "error.medium.unchecked.disabled__hover",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       },
       {
-        "key": "primary.medium.unchecked.disabled__hover",
+        "key": "error.medium.unchecked.disabled__focus-visible",
+        "pctExact": 0.013020833333333334,
+        "pctAA": 0
+      },
+      {
+        "key": "error.medium.unchecked.disabled__active",
+        "pctExact": 0.013020833333333334,
+        "pctAA": 0
+      },
+      {
+        "key": "warning.medium.unchecked.disabled__hover",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 77.67857142857143,
+    "computedPctEqual": 80.26315789473684,
     "rowsFullyEqual": 0,
     "rows": 224,
     "pixelPerfectExact": 28,

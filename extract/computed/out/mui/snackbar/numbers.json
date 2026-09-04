@@ -1,21 +1,81 @@
 {
   "component": "Snackbar",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 1,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 3,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 7,
-    "paper-root": 34,
-    "label": 18
+    "root": 24,
+    "paper-root": 36,
+    "label": 20
   },
   "folds": {
-    "count": 20,
+    "count": 30,
     "receipts": [
+      {
+        "part": "root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
       {
         "part": "paper-root",
         "channel": "border-bottom-color",
@@ -137,8 +197,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 21,
-    "mintedLeavesFolded": 22
+    "mintedLeavesUnfolded": 25,
+    "mintedLeavesFolded": 26
   },
   "bound": {
     "cellsChecked": 0,
@@ -147,22 +207,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 22,
-    "baseBindings": 25,
+    "leaves": 26,
+    "baseBindings": 29,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 25,
+      "uniform": 29,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 6,
+    "base": 10,
     "state": 0
   },
   "codeOnly": {
-    "base": 3,
+    "base": 5,
     "state": 0,
     "overflowBindings": 0
   },
@@ -175,9 +235,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 2028,
-    "cellsMatched": 2020,
-    "pct": 99.60552268244577,
+    "cellsCompared": 2019,
+    "cellsMatched": 2011,
+    "pct": 99.60376423972264,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -227,12 +287,12 @@
         "pctExact": null,
         "pctAA": null,
         "unscorable": "size-mismatch",
-        "note": "size mismatch ours 320x96 vs orig 320x49 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
+        "note": "size mismatch ours 320x96 vs orig 288x49 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 94.91525423728814,
+    "computedPctEqual": 93.67088607594937,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

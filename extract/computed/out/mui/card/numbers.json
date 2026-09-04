@@ -9,8 +9,8 @@
   "elementsPerCapture": 2,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 25,
-    "label": 20
+    "root": 30,
+    "label": 24
   },
   "folds": {
     "count": 20,
@@ -136,8 +136,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 12,
-    "mintedLeavesFolded": 13
+    "mintedLeavesUnfolded": 14,
+    "mintedLeavesFolded": 15
   },
   "bound": {
     "cellsChecked": 0,
@@ -146,22 +146,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 13,
-    "baseBindings": 19,
+    "leaves": 15,
+    "baseBindings": 23,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 18,
+      "uniform": 22,
       "perAxis": 1,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 5,
+    "base": 9,
     "state": 0
   },
   "codeOnly": {
-    "base": 1,
+    "base": 2,
     "state": 0,
     "overflowBindings": 0
   },
@@ -194,64 +194,64 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 16
+      "mean": 2.265625,
+      "max": 2.265625,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 16
+      "mean": 1.025390625,
+      "max": 1.025390625,
+      "perfect": 0
     },
     "worst": [
       {
         "key": "0__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       },
       {
         "key": "0__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       },
       {
         "key": "0__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       },
       {
         "key": "0__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       },
       {
         "key": "1__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       },
       {
         "key": "1__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       },
       {
         "key": "1__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       },
       {
         "key": "1__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.265625,
+        "pctAA": 1.025390625
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 100,
-    "rowsFullyEqual": 16,
+    "computedPctEqual": 96.22641509433963,
+    "rowsFullyEqual": 0,
     "rows": 16,
-    "pixelPerfectExact": 16,
-    "pixelPerfectAA": 16,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
     "pairs": 16
   },
   "focusVisibleDriverMatched": 0,

@@ -4,7 +4,7 @@
   "name": "Radio",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — color×checked axes (Switch/Checkbox STATE-PLANE PROJECTION precedent); size held fixed; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — color×checked axes (Switch/Checkbox STATE-PLANE PROJECTION precedent); size held fixed; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -116,7 +116,87 @@
             "disabled": {
               "color": "{imported.shared.color-545454}"
             }
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "caret-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "column-rule-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "row-rule-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-decoration-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-emphasis-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         },
         "part-1": {
           "element": "span",
@@ -130,7 +210,9 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
+                "box-sizing": "border-box",
                 "cursor": "pointer",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
                 "transform": "matrix(1, 0, 0, 1, 0, 0)",
@@ -156,6 +238,8 @@
                 "flex-shrink": "{imported.shared.num-0}",
                 "font-size": "{imported.shared.size-24}",
                 "height": "{imported.shared.size-24}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.radio.icon.line-height}",
                 "width": "{imported.shared.size-24}"
               },
               "states": {
@@ -177,6 +261,14 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "fill",
+                  "value": "#00000042",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             },
             "icon-2": {
@@ -184,7 +276,9 @@
               "declared": {
                 "display": "block",
                 "position": "absolute",
+                "box-sizing": "border-box",
                 "cursor": "pointer",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
                 "transition-duration": "0.15s",
@@ -210,6 +304,8 @@
                 "font-size": "{imported.shared.size-24}",
                 "height": "{imported.shared.size-24}",
                 "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.radio.icon-2.line-height}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
@@ -235,11 +331,21 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "fill",
+                  "value": "#00000042",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             }
           },
           "declared": {
+            "box-sizing": "border-box",
             "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "position": "relative",
             "user-select": "none"
           },
@@ -253,6 +359,8 @@
             "bottom": "{imported.shared.size-0}",
             "height": "{imported.shared.size-24}",
             "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
             "width": "{imported.shared.size-24}"
@@ -280,6 +388,7 @@
       "declared": {
         "box-sizing": "border-box",
         "cursor": "pointer",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "position": "relative",
         "user-select": "none"
       },
@@ -298,6 +407,8 @@
         "color": "{imported.radio.root.color.{color}.{checked}}",
         "height": "{imported.shared.size-42}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "outline-width": "{imported.shared.size-0}",
         "padding-bottom": "{imported.shared.size-9}",
         "padding-left": "{imported.shared.size-9}",

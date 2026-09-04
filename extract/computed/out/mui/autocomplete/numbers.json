@@ -9,32 +9,152 @@
   "elementsPerCapture": 22,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 4,
-    "formcontrol-fullwidth": 12,
-    "autocomplete-inputroot": 34,
-    "autocomplete-tag": 46,
-    "label": 24,
-    "icon": 30,
-    "part-0-0-0-1-0": 25,
-    "autocomplete-tag-2": 46,
-    "label-2": 24,
-    "icon-2": 30,
-    "part-0-0-1-1-0": 25,
-    "autocomplete-input": 29,
-    "autocomplete-endadornment": 27,
-    "autocomplete-clearindicator": 52,
-    "icon-3": 27,
-    "part-0-0-3-0-0-0": 24,
-    "autocomplete-popupindicator": 51,
-    "icon-4": 26,
-    "part-0-0-3-1-0-0": 23,
-    "outlinedinput-notchedoutline": 42,
-    "part-0-0-4-0": 27,
-    "label-3": 22
+    "root": 20,
+    "formcontrol-fullwidth": 28,
+    "autocomplete-inputroot": 35,
+    "autocomplete-tag": 47,
+    "label": 26,
+    "icon": 32,
+    "part-0-0-0-1-0": 27,
+    "autocomplete-tag-2": 47,
+    "label-2": 26,
+    "icon-2": 32,
+    "part-0-0-1-1-0": 27,
+    "autocomplete-input": 30,
+    "autocomplete-endadornment": 29,
+    "autocomplete-clearindicator": 53,
+    "icon-3": 29,
+    "part-0-0-3-0-0-0": 26,
+    "autocomplete-popupindicator": 52,
+    "icon-4": 28,
+    "part-0-0-3-1-0-0": 25,
+    "outlinedinput-notchedoutline": 44,
+    "part-0-0-4-0": 29,
+    "label-3": 24
   },
   "folds": {
-    "count": 204,
+    "count": 224,
     "receipts": [
+      {
+        "part": "root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
       {
         "part": "autocomplete-inputroot",
         "channel": "border-bottom-color",
@@ -1279,21 +1399,21 @@
   },
   "minted": {
     "leaves": 136,
-    "baseBindings": 185,
+    "baseBindings": 191,
     "stateBindings": 26,
     "byShape": {
-      "uniform": 162,
+      "uniform": 168,
       "perAxis": 49,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 100,
+    "base": 112,
     "state": 0
   },
   "codeOnly": {
-    "base": 15,
+    "base": 29,
     "state": 1,
     "overflowBindings": 26
   },
@@ -1331,60 +1451,60 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 7.193080357142857,
-      "max": 49.60267857142857,
+      "mean": 8.099330357142858,
+      "max": 50.515625,
       "perfect": 0
     },
     "aa": {
-      "mean": 0.7924107142857144,
-      "max": 0.9910714285714286,
+      "mean": 1.1969866071428572,
+      "max": 1.3973214285714286,
       "perfect": 0
     },
     "worst": [
       {
+        "key": "small__active",
+        "pctExact": 50.515625,
+        "pctAA": 1.3973214285714286
+      },
+      {
         "key": "medium__focus-visible",
-        "pctExact": 1.4419642857142858,
-        "pctAA": 0.9910714285714286
+        "pctExact": 2.345982142857143,
+        "pctAA": 1.375
       },
       {
         "key": "medium__hover",
-        "pctExact": 1.3883928571428572,
-        "pctAA": 0.9910714285714286
+        "pctExact": 2.283482142857143,
+        "pctAA": 1.375
       },
       {
         "key": "medium__active",
-        "pctExact": 1.3883928571428572,
-        "pctAA": 0.9910714285714286
+        "pctExact": 2.283482142857143,
+        "pctAA": 1.375
       },
       {
         "key": "medium__default",
-        "pctExact": 1.2366071428571428,
-        "pctAA": 0.8839285714285714
-      },
-      {
-        "key": "small__active",
-        "pctExact": 49.60267857142857,
-        "pctAA": 0.8482142857142857
+        "pctExact": 2.140625,
+        "pctAA": 1.2678571428571428
       },
       {
         "key": "small__focus-visible",
-        "pctExact": 0.9151785714285714,
-        "pctAA": 0.5803571428571429
+        "pctExact": 1.828125,
+        "pctAA": 0.9642857142857143
       },
       {
         "key": "small__hover",
-        "pctExact": 0.8616071428571429,
-        "pctAA": 0.5803571428571429
+        "pctExact": 1.7745535714285714,
+        "pctAA": 0.9642857142857143
       },
       {
         "key": "small__default",
-        "pctExact": 0.7098214285714286,
-        "pctAA": 0.4732142857142857
+        "pctExact": 1.6227678571428572,
+        "pctAA": 0.8571428571428571
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 95.11041009463722,
+    "computedPctEqual": 92.73972602739725,
     "rowsFullyEqual": 0,
     "rows": 8,
     "pixelPerfectExact": 0,

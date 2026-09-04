@@ -4,7 +4,7 @@
   "name": "Link",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "a"
   },
@@ -90,7 +90,9 @@
   "anatomy": {
     "root": {
       "declared": {
-        "display": "block"
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif"
       },
       "content": {
         "prop": "children"
@@ -103,8 +105,9 @@
       "tokens": {
         "font-size": "{imported.link.root.font-size}",
         "font-weight": "{imported.link.root.font-weight}",
-        "text-decoration-color": "{imported.link.root.text-decoration-color.{color}.{underline}}",
-        "width": "{imported.link.root.width}"
+        "letter-spacing": "{imported.link.root.letter-spacing}",
+        "line-height": "{imported.link.root.line-height}",
+        "text-decoration-color": "{imported.link.root.text-decoration-color.{color}.{underline}}"
       },
       "states": {
         "active": {
@@ -152,6 +155,32 @@
               "outline-color": "{imported.link.root.outline-color.warning}"
             }
           }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "text-decoration-line",
+          "value": "underline",
+          "reason": "declared-channel state delta on 7/21 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "active",
+          "channel": "text-decoration",
+          "value": "underline",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        },
+        {
+          "state": "hover",
+          "channel": "text-decoration-line",
+          "value": "underline",
+          "reason": "declared-channel state delta on 7/21 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "hover",
+          "channel": "text-decoration",
+          "value": "underline",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
         }
       ]
     }

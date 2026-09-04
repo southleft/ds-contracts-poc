@@ -108,7 +108,7 @@
                 "$type": "dimension"
               },
               "expanded": {
-                "$value": "124px",
+                "$value": "136px",
                 "$type": "dimension"
               }
             },
@@ -118,7 +118,7 @@
                 "$type": "dimension"
               },
               "expanded": {
-                "$value": "126px",
+                "$value": "138px",
                 "$type": "dimension"
               }
             }
@@ -217,7 +217,7 @@
               "$type": "dimension"
             },
             "expanded": {
-              "$value": "60px",
+              "$value": "72px",
               "$type": "dimension"
             }
           },
@@ -292,12 +292,20 @@
           "$value": "#000000de",
           "$type": "color"
         },
+        "size-0-15008": {
+          "$value": "0.15008px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
         "size-16": {
           "$value": "16px",
           "$type": "dimension"
         },
-        "size-60": {
-          "$value": "60px",
+        "size-72": {
+          "$value": "72px",
           "$type": "dimension"
         }
       }
@@ -844,6 +852,52 @@
     "base": [
       {
         "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "outlined"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "outlined"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "outlined"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "outlined"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
         "channel": "position",
         "value": "relative"
       },
@@ -861,6 +915,11 @@
         "part": "root",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "accordion-heading",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "accordionsummary-gutters",
@@ -924,6 +983,11 @@
       },
       {
         "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
         "channel": "cursor",
         "value": "pointer"
       },
@@ -954,6 +1018,16 @@
       },
       {
         "part": "collapse-root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "collapse-root",
         "channel": "transition-duration",
         "value": "0.3s"
       },
@@ -966,6 +1040,46 @@
         "part": "collapse-root",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "collapse-vertical",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "collapse-vertical",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "collapse-vertical-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "collapse-vertical-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "accordion-region",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "accordion-region",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       }
     ],
     "state": [
@@ -998,58 +1112,51 @@
   "codeOnlyChannels": [
     {
       "part": "root",
-      "channel": "border-bottom-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-left-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-right-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-top-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "none",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
       "channel": "overflow-anchor",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "none",
       "distinctValues": 1
     },
     {
+      "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "accordion-heading",
       "channel": "height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "auto",
       "distinctValues": 1
     },
     {
       "part": "accordion-heading",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "accordion-heading",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
       "distinctValues": 1
     },
     {
       "part": "accordion-heading",
       "channel": "width",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "accordionsummary-gutters",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -1074,6 +1181,13 @@
       "distinctValues": 1
     },
     {
+      "part": "label",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "collapse-root",
       "channel": "overflow-x",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
@@ -1089,10 +1203,24 @@
     },
     {
       "part": "collapse-root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "collapse-root",
       "channel": "visibility",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "hidden",
       "distinctValues": 2
+    },
+    {
+      "part": "collapse-vertical",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
     },
     {
       "part": "collapse-vertical",
@@ -1103,10 +1231,24 @@
     },
     {
       "part": "collapse-vertical-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "collapse-vertical-2",
       "channel": "visibility",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "hidden",
       "distinctValues": 2
+    },
+    {
+      "part": "accordion-region",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
     },
     {
       "part": "accordion-region",
@@ -1117,9 +1259,9 @@
     },
     {
       "part": "label-2",
-      "channel": "line-height",
+      "channel": "text-size-adjust",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "normal",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -1221,10 +1363,14 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "text-fill-pinned-geometry-refused: label.width — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: a box on its ancestor chain is a measurement of the harness, not of the library — accordionsummary-gutters.width = 288px = the capture stage's content box (stage 320px − 2×16px) in combo elevation.collapsed.enabled; admitting the fill would mint that same number one generation down",
     "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "text-fill-pinned-geometry-refused: label-2.width — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: a box on its ancestor chain is a measurement of the harness, not of the library — label-2.width = 288px = the capture stage's content box (stage 320px − 2×16px) in combo elevation.collapsed.enabled; admitting the fill would mint that same number one generation down",
     "absolute-geometry-admitted: root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: accordion-heading — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: accordionsummary-gutters — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
@@ -1232,31 +1378,83 @@
     "absolute-geometry-admitted: collapse-vertical — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: collapse-vertical-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: accordion-region — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-equal-drop: root — 562 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 351 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <h3> — span control used (part accordion-heading)",
-    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "text-part-typography-carried: label-2 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "webkit-prefixed-channels-refused: 6 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (accordionsummary-gutters); -webkit-box-flex (label); -webkit-box-pack (accordionsummary-gutters); -webkit-tap-highlight-color (accordionsummary-gutters, label); -webkit-text-fill-color (accordion-heading, accordion-region, accordionsummary-gutters, collapse-root, collapse-vertical, collapse-vertical-2, label, label-2, root); -webkit-text-stroke-color (accordion-heading, accordion-region, accordionsummary-gutters, collapse-root, collapse-vertical, collapse-vertical-2, label, label-2, root)",
+    "ua-control-fallback: no UA baseline for <h3> — span UA control used (part accordion-heading)",
+    "control-equal-drop: accordion-heading — 576 of 597 admitted channels compared EQUAL to the <h3> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: accordion-heading — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: accordion-heading — 373 channel(s) EQUAL to the <h3> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: accordionsummary-gutters — 550 of 597 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: accordionsummary-gutters — 1 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: accordionsummary-gutters — 347 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 571 of 595 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 13 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 366 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: collapse-root — 571 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: collapse-root — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: collapse-root — 368 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: collapse-vertical — 575 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: collapse-vertical — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: collapse-vertical — 372 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: collapse-vertical-2 — 578 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: collapse-vertical-2 — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: collapse-vertical-2 — 375 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: accordion-region — 576 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: accordion-region — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: accordion-region — 373 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-2 — 572 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-2 — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-2 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-2 — 367 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: accordion-heading — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: accordion-region — block-size 72px, inline-size 288px, perspective-origin 144px 36px, transform-origin 144px 36px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: accordionsummary-gutters — block-size 48px, inline-size 288px, perspective-origin 144px 24px, transform-origin 144px 24px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: collapse-root — block-size 0px, inline-size 288px, perspective-origin 144px 0px, transform-origin 144px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: collapse-vertical — block-size 72px, inline-size 288px, perspective-origin 144px 36px, transform-origin 144px 36px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: collapse-vertical-2 — block-size 72px, inline-size 288px, perspective-origin 144px 36px, transform-origin 144px 36px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 15px, height 15px, inline-size 256px, perspective-origin 128px 7.5px, transform-origin 128px 7.5px, width 256px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 72px, height 72px, inline-size 288px, perspective-origin 144px 36px, transform-origin 144px 36px, width 288px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 48px, inline-size 288px, perspective-origin 144px 24px, transform-origin 144px 24px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 7 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (accordionsummary-gutters); -webkit-box-flex (label); -webkit-box-pack (accordionsummary-gutters); -webkit-font-smoothing (accordion-heading, accordion-region, accordionsummary-gutters, collapse-root, collapse-vertical, collapse-vertical-2, label, label-2, root); -webkit-tap-highlight-color (accordionsummary-gutters, label); -webkit-text-fill-color (accordion-heading, accordion-region, accordionsummary-gutters, collapse-root, collapse-vertical, collapse-vertical-2, label, label-2, root); -webkit-text-stroke-color (accordion-heading, accordion-region, accordionsummary-gutters, collapse-root, collapse-vertical, collapse-vertical-2, label, label-2, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "border-style-by-axis-carried: root.border-bottom-style varies by \"variant\" (elevation=none, outlined=solid) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-left-style varies by \"variant\" (elevation=none, outlined=solid) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-right-style varies by \"variant\" (elevation=none, outlined=solid) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-top-style varies by \"variant\" (elevation=none, outlined=solid) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)",
     "inheritance-check-rejected: label-2.font-size — values track ancestor \"accordion-region\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.font-weight — values track ancestor \"accordion-region\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.line-height — values track ancestor \"accordion-region\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"accordionsummary-gutters\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"accordionsummary-gutters\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"accordionsummary-gutters\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-only: accordion-heading.caret-color equals ancestor \"root\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: accordion-heading.color equals ancestor \"root\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: accordion-heading.letter-spacing equals ancestor \"root\" on all 32 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: accordion-heading.line-height equals ancestor \"root\" on all 32 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: accordion-region.caret-color equals ancestor \"collapse-vertical-2\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: accordion-region.color equals ancestor \"collapse-vertical-2\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: accordion-region.letter-spacing equals ancestor \"collapse-vertical-2\" on all 32 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: accordion-region.line-height equals ancestor \"collapse-vertical-2\" on all 32 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: accordionsummary-gutters.caret-color equals ancestor \"accordion-heading\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: accordionsummary-gutters.color equals ancestor \"accordion-heading\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: collapse-root.caret-color equals ancestor \"root\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: collapse-root.color equals ancestor \"root\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: collapse-root.letter-spacing equals ancestor \"root\" on all 32 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: collapse-root.line-height equals ancestor \"root\" on all 32 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: collapse-vertical-2.caret-color equals ancestor \"collapse-vertical\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: collapse-vertical-2.color equals ancestor \"collapse-vertical\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: collapse-vertical-2.letter-spacing equals ancestor \"collapse-vertical\" on all 32 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: collapse-vertical-2.line-height equals ancestor \"collapse-vertical\" on all 32 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: collapse-vertical.caret-color equals ancestor \"collapse-root\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: collapse-vertical.color equals ancestor \"collapse-root\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: collapse-vertical.letter-spacing equals ancestor \"collapse-root\" on all 32 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: collapse-vertical.line-height equals ancestor \"collapse-root\" on all 32 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: label-2.caret-color equals ancestor \"accordion-region\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label-2.color equals ancestor \"accordion-region\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.letter-spacing equals ancestor \"accordion-region\" on all 32 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"accordion-region\" on all 32 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: label.caret-color equals ancestor \"accordionsummary-gutters\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label.color equals ancestor \"accordionsummary-gutters\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
   ],
@@ -1335,10 +1533,17 @@
   "enrichmentNotes": [
     "layout enriched: accordionsummary-gutters.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: accordionsummary-gutters.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried per axis value: root.border-bottom-style = solid when variant=outlined (stylesWhen)",
+    "declared fact carried per axis value: root.border-left-style = solid when variant=outlined (stylesWhen)",
+    "declared fact carried per axis value: root.border-right-style = solid when variant=outlined (stylesWhen)",
+    "declared fact carried per axis value: root.border-top-style = solid when variant=outlined (stylesWhen)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transition-property = margin (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: accordion-heading.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: accordionsummary-gutters.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: accordionsummary-gutters.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: accordionsummary-gutters.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1351,15 +1556,26 @@
     "declared fact carried: accordionsummary-gutters.transition-property = min-height, background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: accordionsummary-gutters.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: accordionsummary-gutters.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.transition-property = margin (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: collapse-root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: collapse-root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: collapse-root.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: collapse-root.transition-property = height (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: collapse-root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: collapse-vertical.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: collapse-vertical.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: collapse-vertical-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: collapse-vertical-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: accordion-region.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: accordion-region.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared state fact carried: [disabled] accordionsummary-gutters.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] accordionsummary-gutters.pointer-events = none (v15 declared vocabulary)",
     "declared state fact carried: [disabled] label.cursor = default (v15 declared vocabulary)",

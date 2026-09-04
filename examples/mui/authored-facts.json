@@ -1,5 +1,5 @@
 {
-  "_marker": "AUTHORED FACTS — reviewed hand-authored design facts the computed capture cannot carry, applied by packages/cli/src/promote.ts (the authored-facts door) AFTER the computed contract is read and BEFORE the resolution guard. Sidecar INPUT to promotion, never contract vocabulary: the committed contracts and minted tree stay re-derivable from extract/computed/out/mui + this file. Every row names its cause; a row the capture has since learned to carry REFUSES the promotion by name and must be deleted. Authored keys append after the capture's keys. Origin: commit 16889547 (2026-08-17) edited the promoted artifacts directly — see parity/receipts/console-loop/mui/VISUAL-REVIEW-2026-08-17.md and examples/mui/PROVENANCE.md (AUTHORED FACTS).",
+  "_marker": "AUTHORED FACTS \u2014 reviewed hand-authored design facts the computed capture cannot carry, applied by packages/cli/src/promote.ts (the authored-facts door) AFTER the computed contract is read and BEFORE the resolution guard. Sidecar INPUT to promotion, never contract vocabulary: the committed contracts and minted tree stay re-derivable from extract/computed/out/mui + this file. Every row names its cause; a row the capture has since learned to carry REFUSES the promotion by name and must be deleted. Authored keys append after the capture's keys. Origin: commit 16889547 (2026-08-17) edited the promoted artifacts directly \u2014 see parity/receipts/console-loop/mui/VISUAL-REVIEW-2026-08-17.md and examples/mui/PROVENANCE.md (AUTHORED FACTS).",
   "rows": [
     {
       "component": "accordion",
@@ -10,7 +10,7 @@
           "overflow-y": "hidden"
         }
       },
-      "cause": "Collapsed cells leaked the body copy past the card on canvas: the 0-height collapse-root did not clip (VISUAL-REVIEW-2026-08-17, fail-closed FC-ABS-SIZE). MUI's Collapse is overflow:hidden while collapsed and overflow:visible once entered, so the computed truth varies across the expanded axis and the capture carries no declared fact (LEDGER.md: 'declared-channel value varies across combos — declared facts carry uniform values only (v15)'). The clip is authored for both planes: the collapsed cell needs it and the expanded body fits its own frame."
+      "cause": "Collapsed cells leaked the body copy past the card on canvas: the 0-height collapse-root did not clip (VISUAL-REVIEW-2026-08-17, fail-closed FC-ABS-SIZE). MUI's Collapse is overflow:hidden while collapsed and overflow:visible once entered, so the computed truth varies across the expanded axis and the capture carries no declared fact (LEDGER.md: 'declared-channel value varies across combos \u2014 declared facts carry uniform values only (v15)'). The clip is authored for both planes: the collapsed cell needs it and the expanded body fits its own frame."
     },
     {
       "component": "avatar",
@@ -22,10 +22,16 @@
         }
       },
       "mint": {
-        "imported.avatar.root.width": { "$value": "40px", "$type": "dimension" },
-        "imported.avatar.root.height": { "$value": "40px", "$type": "dimension" }
+        "imported.avatar.root.width": {
+          "$value": "40px",
+          "$type": "dimension"
+        },
+        "imported.avatar.root.height": {
+          "$value": "40px",
+          "$type": "dimension"
+        }
       },
-      "cause": "The canvas hugged the initial glyph (14×20) where MUI draws a 40×40 avatar (VISUAL-REVIEW-2026-08-17, fail-closed FC-GEOMETRY-EXCLUDED). The captured root box IS 40×40 (captured-truth.json base root: width 40px, height 40px, display flex) but the fusion geometry door admits width/height only for absolute clusters, table cells and block roots — this is a flex root, so nothing minted. Authored from the captured box; FC-GEOMETRY-EXCLUDED stays closed (Path B authoring, not a fuse relaxation)."
+      "cause": "The canvas hugged the initial glyph (14\u00d720) where MUI draws a 40\u00d740 avatar (VISUAL-REVIEW-2026-08-17, fail-closed FC-GEOMETRY-EXCLUDED). The captured root box IS 40\u00d740 (captured-truth.json base root: width 40px, height 40px, display flex) but the fusion geometry door admits width/height only for absolute clusters, table cells and block roots \u2014 this is a flex root, so nothing minted. Authored from the captured box; FC-GEOMETRY-EXCLUDED stays closed (Path B authoring, not a fuse relaxation)."
     },
     {
       "component": "fab",
@@ -33,30 +39,48 @@
       "set": {
         "tokensByProp": {
           "size": {
-            "large": { "width": "{imported.fab.root.width.large}", "height": "{imported.fab.root.height.large}" },
-            "medium": { "width": "{imported.fab.root.width.medium}", "height": "{imported.fab.root.height.medium}" },
-            "small": { "width": "{imported.fab.root.width.small}", "height": "{imported.fab.root.height.small}" }
+            "large": {
+              "width": "{imported.fab.root.width.large}",
+              "height": "{imported.fab.root.height.large}"
+            },
+            "medium": {
+              "width": "{imported.fab.root.width.medium}",
+              "height": "{imported.fab.root.height.medium}"
+            },
+            "small": {
+              "width": "{imported.fab.root.width.small}",
+              "height": "{imported.fab.root.height.small}"
+            }
           }
         }
       },
       "mint": {
-        "imported.fab.root.width.small": { "$value": "40px", "$type": "dimension" },
-        "imported.fab.root.width.medium": { "$value": "48px", "$type": "dimension" },
-        "imported.fab.root.width.large": { "$value": "56px", "$type": "dimension" },
-        "imported.fab.root.height.small": { "$value": "40px", "$type": "dimension" },
-        "imported.fab.root.height.medium": { "$value": "48px", "$type": "dimension" },
-        "imported.fab.root.height.large": { "$value": "56px", "$type": "dimension" }
+        "imported.fab.root.width.small": {
+          "$value": "40px",
+          "$type": "dimension"
+        },
+        "imported.fab.root.width.medium": {
+          "$value": "48px",
+          "$type": "dimension"
+        },
+        "imported.fab.root.width.large": {
+          "$value": "56px",
+          "$type": "dimension"
+        },
+        "imported.fab.root.height.small": {
+          "$value": "40px",
+          "$type": "dimension"
+        },
+        "imported.fab.root.height.medium": {
+          "$value": "48px",
+          "$type": "dimension"
+        },
+        "imported.fab.root.height.large": {
+          "$value": "56px",
+          "$type": "dimension"
+        }
       },
-      "cause": "The canvas drew 8×36 capsules hugging the '+' glyph where MUI draws 56/48/40 circles per size (VISUAL-REVIEW-2026-08-17, fail-closed FC-GEOMETRY-EXCLUDED). The captured root box is 56×56 at large (captured-truth.json base root, display flex) and MUI's sizeSmall/sizeMedium are 40/48; the fusion geometry door refuses a flex root's width/height, so nothing minted. Authored per size from the captured boxes; FC-GEOMETRY-EXCLUDED stays closed."
-    },
-    {
-      "component": "link",
-      "part": "root",
-      "unset": {
-        "tokens": ["width"]
-      },
-      "prune": ["imported.link.root.width"],
-      "cause": "The minted 30.2188px root width is the capture font's measure of the sample text 'Link' (Roboto 16px, admitted through the block-root-width door as a shrink-to-fit block) — a harness fact, not the library's. Bound, it wrapped the Inter-rendered label 'Lin/k' in every cell (VISUAL-REVIEW-2026-08-17, fail-closed FC-TEXT-WRAP). Unbound so the label hugs; the leaf is pruned so no Figma variable ships that nothing binds (task #42 cause B)."
+      "cause": "The canvas drew 8\u00d736 capsules hugging the '+' glyph where MUI draws 56/48/40 circles per size (VISUAL-REVIEW-2026-08-17, fail-closed FC-GEOMETRY-EXCLUDED). The captured root box is 56\u00d756 at large (captured-truth.json base root, display flex) and MUI's sizeSmall/sizeMedium are 40/48; the fusion geometry door refuses a flex root's width/height, so nothing minted. Authored per size from the captured boxes; FC-GEOMETRY-EXCLUDED stays closed."
     }
   ]
 }

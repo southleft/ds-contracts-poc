@@ -1,0 +1,46 @@
+{
+  "origin": "the portal root screenshot (top-left = 0,0)",
+  "parts": [
+    {
+      "idxPath": "",
+      "tag": "div",
+      "classes": [
+        "MuiSnackbar-root",
+        "MuiSnackbar-anchorOriginBottomLeft",
+        "css-1w76183-MuiSnackbar-root"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 288,
+      "h": 48.015625
+    },
+    {
+      "idxPath": "0",
+      "tag": "div",
+      "classes": [
+        "MuiPaper-root",
+        "MuiPaper-elevation",
+        "MuiPaper-rounded",
+        "MuiPaper-elevation6",
+        "MuiSnackbarContent-root",
+        "css-9csnc4-MuiPaper-root-MuiSnackbarContent-root"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 288,
+      "h": 48.015625
+    },
+    {
+      "idxPath": "0.0",
+      "tag": "div",
+      "classes": [
+        "MuiSnackbarContent-message",
+        "css-ozrxnr-MuiSnackbarContent-message"
+      ],
+      "x": 16,
+      "y": 6,
+      "w": 121.234375,
+      "h": 36.015625
+    }
+  ]
+}

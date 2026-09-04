@@ -83,6 +83,7 @@
           "declared": {
             "display": "block",
             "position": "absolute",
+            "box-sizing": "border-box",
             "cursor": "default",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
@@ -156,6 +157,7 @@
           "declared": {
             "display": "block",
             "position": "absolute",
+            "box-sizing": "border-box",
             "cursor": "default",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
@@ -290,6 +292,7 @@
                 "border-left-style": "solid",
                 "border-right-style": "solid",
                 "border-top-style": "solid",
+                "box-sizing": "border-box",
                 "cursor": "text",
                 "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "overflow-x": "hidden",
@@ -543,11 +546,16 @@
         }
       },
       "declared": {
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "position": "relative"
       },
       "tokens": {
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000de}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.textarea.root.line-height}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",

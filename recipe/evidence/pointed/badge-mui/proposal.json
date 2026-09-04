@@ -5,7 +5,7 @@
   "provenance": {
     "package": "@mui/material",
     "version": "9.2.0",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
   },
   "roles": {
     "indicator": "idx:1",
@@ -95,7 +95,7 @@
       "key": "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.line-height"
     },
     "label": {
-      "value": "#000000ff",
+      "value": "#000000de",
       "from": "ledger",
       "key": "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.color"
     },

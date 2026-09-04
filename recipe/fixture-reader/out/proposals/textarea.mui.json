@@ -121,7 +121,7 @@
     "notchFill": {
       "value": "#ffffffff",
       "from": "set",
-      "why": "palette.background.paper"
+      "why": "the paper surface showing through the legend gap: palette.background.paper #ffffff (recipe/sandboxes/input-field-mui/node_modules/@mui/material/styles/createPalette.js light.background.paper)"
     },
     "outlineTreatment": {
       "value": "notched",
@@ -188,7 +188,7 @@
     "states.empty.disabled.value": {
       "value": "#00000061",
       "from": "set",
-      "why": "palette.text.disabled"
+      "why": "a disabled field cannot take focus and MUI hides the rest placeholder under the label (::placeholder opacity 0) — palette.text.disabled rgba(0,0,0,0.38) (createPalette.js light.text.disabled)"
     },
     "states.value.enabled.boxFill": {
       "value": "#00000000",
@@ -271,13 +271,13 @@
     {
       "path": "notchFill",
       "why": "the notch knockout is the surface showing through the legend gap — no computed channel carries it (the legend's background is transparent)",
-      "evidence": "palette.background.paper",
+      "evidence": "the paper surface showing through the legend gap: palette.background.paper #ffffff (recipe/sandboxes/input-field-mui/node_modules/@mui/material/styles/createPalette.js light.background.paper)",
       "value": "#ffffffff"
     },
     {
       "path": "states.empty.disabled.value",
       "why": "ledger value unusable: the placeholder is hidden (opacity 0) at rest and at focus — its ink is unobservable in this capture",
-      "evidence": "palette.text.disabled",
+      "evidence": "a disabled field cannot take focus and MUI hides the rest placeholder under the label (::placeholder opacity 0) — palette.text.disabled rgba(0,0,0,0.38) (createPalette.js light.text.disabled)",
       "value": "#00000061"
     }
   ],

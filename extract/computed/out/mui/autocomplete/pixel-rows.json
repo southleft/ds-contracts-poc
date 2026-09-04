@@ -1,42 +1,42 @@
 [
   {
     "key": "small__default",
-    "pctExact": 0.7098214285714286,
-    "pctAA": 0.4732142857142857
+    "pctExact": 1.6227678571428572,
+    "pctAA": 0.8571428571428571
   },
   {
     "key": "small__hover",
-    "pctExact": 0.8616071428571429,
-    "pctAA": 0.5803571428571429
+    "pctExact": 1.7745535714285714,
+    "pctAA": 0.9642857142857143
   },
   {
     "key": "small__focus-visible",
-    "pctExact": 0.9151785714285714,
-    "pctAA": 0.5803571428571429
+    "pctExact": 1.828125,
+    "pctAA": 0.9642857142857143
   },
   {
     "key": "small__active",
-    "pctExact": 49.60267857142857,
-    "pctAA": 0.8482142857142857
+    "pctExact": 50.515625,
+    "pctAA": 1.3973214285714286
   },
   {
     "key": "medium__default",
-    "pctExact": 1.2366071428571428,
-    "pctAA": 0.8839285714285714
+    "pctExact": 2.140625,
+    "pctAA": 1.2678571428571428
   },
   {
     "key": "medium__hover",
-    "pctExact": 1.3883928571428572,
-    "pctAA": 0.9910714285714286
+    "pctExact": 2.283482142857143,
+    "pctAA": 1.375
   },
   {
     "key": "medium__focus-visible",
-    "pctExact": 1.4419642857142858,
-    "pctAA": 0.9910714285714286
+    "pctExact": 2.345982142857143,
+    "pctAA": 1.375
   },
   {
     "key": "medium__active",
-    "pctExact": 1.3883928571428572,
-    "pctAA": 0.9910714285714286
+    "pctExact": 2.283482142857143,
+    "pctAA": 1.375
   }
 ]

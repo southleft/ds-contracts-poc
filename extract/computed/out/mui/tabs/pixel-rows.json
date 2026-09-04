@@ -1,122 +1,122 @@
 [
   {
     "key": "primary.primary__default",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "primary.primary__hover",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "primary.primary__focus-visible",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "primary.primary__active",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "primary.secondary__default",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "primary.secondary__hover",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "primary.secondary__focus-visible",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "primary.secondary__active",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.337890625
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.025390625
   },
   {
     "key": "secondary.primary__default",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "secondary.primary__hover",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "secondary.primary__focus-visible",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "secondary.primary__active",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "secondary.secondary__default",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "secondary.secondary__hover",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "secondary.secondary__focus-visible",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "secondary.secondary__active",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3151041666666667
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0319010416666667
   },
   {
     "key": "inherit.primary__default",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   },
   {
     "key": "inherit.primary__hover",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   },
   {
     "key": "inherit.primary__focus-visible",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   },
   {
     "key": "inherit.primary__active",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   },
   {
     "key": "inherit.secondary__default",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   },
   {
     "key": "inherit.secondary__hover",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   },
   {
     "key": "inherit.secondary__focus-visible",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   },
   {
     "key": "inherit.secondary__active",
-    "pctExact": 3.3040364583333335,
-    "pctAA": 1.3509114583333333
+    "pctExact": 2.9231770833333335,
+    "pctAA": 1.0774739583333333
   }
 ]

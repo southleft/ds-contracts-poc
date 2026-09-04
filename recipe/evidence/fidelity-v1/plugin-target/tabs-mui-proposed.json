@@ -7,8 +7,8 @@
   "pluginShot": "recipe/evidence/fidelity-v1/shots/tabs-mui-proposed-default-v17-plugin.png",
   "manifestShot": "recipe/evidence/fidelity-v1/shots/tabs-mui-proposed-default-v17.png",
   "reference": "extract/computed/out/mui/tabs/orig-shots/primary.primary__default.png",
-  "pluginPct": 7.73,
-  "manifestPct": 7.73,
+  "pluginPct": 7.07,
+  "manifestPct": 7.07,
   "pluginStatus": "fail",
   "manifestStatus": "fail",
   "parity": "same"

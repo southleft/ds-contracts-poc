@@ -57,5 +57,7 @@
   "shorthandCeiling": 0,
   "shorthandSkips": [],
   "calcDeclarations": 4,
-  "calcCeiling": 4
+  "calcCeiling": 4,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
 }

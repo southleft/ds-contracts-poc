@@ -41,43 +41,43 @@
   },
   {
     "key": "elevation.expanded.enabled__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "elevation.expanded.enabled__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "elevation.expanded.enabled__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "elevation.expanded.enabled__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "elevation.expanded.disabled__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   },
   {
     "key": "elevation.expanded.disabled__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   },
   {
     "key": "elevation.expanded.disabled__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   },
   {
     "key": "elevation.expanded.disabled__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   },
   {
     "key": "outlined.collapsed.enabled__default",
@@ -121,42 +121,42 @@
   },
   {
     "key": "outlined.expanded.enabled__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "outlined.expanded.enabled__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "outlined.expanded.enabled__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "outlined.expanded.enabled__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.242897727272727,
+    "pctAA": 1.4247159090909092
   },
   {
     "key": "outlined.expanded.disabled__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   },
   {
     "key": "outlined.expanded.disabled__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   },
   {
     "key": "outlined.expanded.disabled__focus-visible",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   },
   {
     "key": "outlined.expanded.disabled__active",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 3.241477272727273,
+    "pctAA": 1.4105113636363635
   }
 ]

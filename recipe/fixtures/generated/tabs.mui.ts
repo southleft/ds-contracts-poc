@@ -87,16 +87,16 @@ export const muiTabsSource: ReviewedTabsSource = {
 };
 
 const muiRefusals = makeRefusals("mui", [
-  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/tabs/captured-truth.json: 6 capture(s) with the __active interaction; tabs@1 carries no interaction plane, so the captured active paint is not minted", target: "mui (proposed) active interaction", reason: "refused-by-recipe" as const },
-  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/tabs/captured-truth.json: 6 capture(s) with the __focus-visible interaction; tabs@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "mui (proposed) focus-visible interaction", reason: "refused-by-recipe" as const },
-  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/tabs/captured-truth.json: 6 capture(s) with the __hover interaction; tabs@1 carries no interaction plane, so the captured hover paint is not minted", target: "mui (proposed) hover interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/tabs/captured-truth.json: 6 capture(s) with the __active interaction; tabs@1 carries no interaction plane, so the captured active paint is not minted", target: "mui active interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/tabs/captured-truth.json: 6 capture(s) with the __focus-visible interaction; tabs@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "mui focus-visible interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/tabs/captured-truth.json: 6 capture(s) with the __hover interaction; tabs@1 carries no interaction plane, so the captured hover paint is not minted", target: "mui hover interaction", reason: "refused-by-recipe" as const },
 ]);
 
 export const muiTabsAdapterConfig = buildConfig(
   "mui",
   muiTabsSource,
   muiTokens,
-  { id: "mui.tabs", name: "mui (proposed) Tabs" },
+  { id: "mui.tabs", name: "mui Tabs" },
   muiRefusals,
   anatomyFacts("mui", muiTabsSource),
   ["hover","focus-visible","active","size","orientation","scrollable","color"],

@@ -1,8 +1,8 @@
 {
-  "_marker": "NON-SCHEMA EXTENSION BLOCK \u2014 computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN \u00a75.4).",
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@mui/material@9.2.0",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "mintedTokens": {
     "imported": {
       "shared": {
@@ -10,8 +10,20 @@
           "$value": "0px",
           "$type": "dimension"
         },
-        "size-252-969": {
-          "$value": "252.969px",
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
+        "size-0-15008": {
+          "$value": "0.15008px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "size-250-984": {
+          "$value": "250.984px",
           "$type": "dimension"
         },
         "color-d32f2f": {
@@ -30,24 +42,12 @@
           "$value": "23px",
           "$type": "dimension"
         },
-        "size-0-15008": {
-          "$value": "0.15008px",
-          "$type": "dimension"
-        },
         "size-4": {
           "$value": "4px",
           "$type": "dimension"
         },
-        "color-000000de": {
-          "$value": "#000000de",
-          "$type": "color"
-        },
         "size-14": {
           "$value": "14px",
-          "$type": "dimension"
-        },
-        "size-24": {
-          "$value": "24px",
           "$type": "dimension"
         },
         "size-8": {
@@ -76,28 +76,16 @@
             "$type": "dimension"
           },
           "right": {
-            "$value": "196.781px",
+            "$value": "193.594px",
             "$type": "dimension"
           },
           "width": {
-            "$value": "56.1875px",
+            "$value": "57.3906px",
             "$type": "dimension"
           },
           "z-index": {
             "$value": "1",
             "$type": "number"
-          },
-          "font-size": {
-            "$value": "16px",
-            "$type": "dimension",
-            "$extensions": {
-              "dsContracts": {
-                "textStyle": {
-                  "name": "MUI/Input Label/Regular",
-                  "weight": 400
-                }
-              }
-            }
           }
         },
         "inputbase-adornedend": {
@@ -116,7 +104,7 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "8.92188px",
+            "$value": "9.15625px",
             "$type": "dimension"
           }
         },
@@ -140,7 +128,7 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "169px",
+            "$value": "167px",
             "$type": "dimension"
           },
           "outline-width-state-active": {
@@ -162,7 +150,7 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "31.0469px",
+            "$value": "30.8281px",
             "$type": "dimension"
           }
         },
@@ -185,15 +173,7 @@
         "label-5": {
           "font-size": {
             "$value": "12px",
-            "$type": "dimension",
-            "$extensions": {
-              "dsContracts": {
-                "textStyle": {
-                  "name": "MUI/Helper and Error/Regular",
-                  "weight": 400
-                }
-              }
-            }
+            "$type": "dimension"
           },
           "letter-spacing": {
             "$value": "0.39996px",
@@ -212,6 +192,66 @@
     }
   },
   "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
     {
       "part": "label",
       "channel": "border-bottom-color",
@@ -878,12 +918,27 @@
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
-    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates \u2014 first-class contract vocabulary, listed here as the enrichment receipt",
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
     "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
       {
         "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label",
@@ -962,6 +1017,11 @@
       },
       {
         "part": "inputadornment-positionstart",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "inputadornment-positionstart",
         "channel": "cursor",
         "value": "text"
       },
@@ -974,6 +1034,11 @@
         "part": "inputadornment-positionstart",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-2",
@@ -1017,6 +1082,11 @@
       },
       {
         "part": "inputadornment-positionend",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "inputadornment-positionend",
         "channel": "cursor",
         "value": "text"
       },
@@ -1029,6 +1099,11 @@
         "part": "inputadornment-positionend",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-3",
@@ -1067,6 +1142,11 @@
       },
       {
         "part": "outlinedinput-notchedoutline",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
         "channel": "cursor",
         "value": "text"
       },
@@ -1097,6 +1177,11 @@
       },
       {
         "part": "label-5",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-5",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
       },
@@ -1111,71 +1196,141 @@
   "codeOnlyChannels": [
     {
       "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
       "channel": "vertical-align",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "top",
       "distinctValues": 1
     },
     {
       "part": "label",
       "channel": "max-width",
-      "reason": "declared-channel value outside the bounded grammar \u2014 named residue (v15)",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "calc(133% - 32px)",
       "distinctValues": 1
     },
     {
       "part": "label",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
       "channel": "transform",
-      "reason": "declared-channel value outside the bounded grammar \u2014 named residue (v15)",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "matrix(0.75, 0, 0, 0.75, 14, -9)",
       "distinctValues": 1
     },
     {
       "part": "label",
       "channel": "transition-behavior",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today. NOTE \u2014 UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored \u2014 this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "normal, normal, normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "inputbase-adornedend",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "inputadornment-positionstart",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
       "part": "label-2",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today. NOTE \u2014 UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored \u2014 this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
       "distinctValues": 1
     },
     {
       "part": "inputbase-input",
       "channel": "animation-duration",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today. NOTE \u2014 UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored \u2014 this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "0.01s",
       "distinctValues": 1
     },
     {
       "part": "inputbase-input",
       "channel": "animation-name",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today. NOTE \u2014 UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored \u2014 this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "mui-auto-fill-cancel",
+      "distinctValues": 1
+    },
+    {
+      "part": "inputbase-input",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "inputadornment-positionend",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
       "part": "label-3",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today. NOTE \u2014 UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored \u2014 this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
       "distinctValues": 1
     },
     {
       "part": "outlinedinput-notchedoutline",
       "channel": "min-width",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today. NOTE \u2014 UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored \u2014 this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "0%",
+      "distinctValues": 1
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
       "part": "label-5",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry \u2014 no schema channel today. NOTE \u2014 UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored \u2014 this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
       "distinctValues": 1
     }
@@ -1255,7 +1410,7 @@
   ],
   "pairwiseRefusals": [],
   "pseudoParts": {
-    "_reason": "S5 (DESIGN \u00a75.4): pseudo-element decor has no anatomy spelling \u2014 captured, receipted, not carried",
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [],
     "totalFindings": 0
   },
@@ -1265,75 +1420,122 @@
   "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
-    "absolute-geometry-excluded: label-2 \u2014 text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
-    "absolute-geometry-excluded: label-3 \u2014 text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
-    "absolute-geometry-excluded: label-4 \u2014 text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
-    "absolute-geometry-excluded: label-5 \u2014 text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
-    "absolute-geometry-admitted: root \u2014 overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: label \u2014 uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: inputbase-adornedend \u2014 overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: inputadornment-positionstart \u2014 overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: inputbase-input \u2014 overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: inputadornment-positionend \u2014 overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: outlinedinput-notchedoutline \u2014 uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-3-0 \u2014 overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "control-fallback: no control for <label> \u2014 span control used (part label)",
-    "translate-door-refused: label \u2014 non-translate transform (matrix(0.75, 0, 0, 0.75, 14, -9)); the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) \u2014 named refusal, pseudo-decor v2 round",
-    "text-part-typography-carried: label \u2014 font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults \u2014 round 5c)",
-    "control-fallback: no control for <p> \u2014 span control used (part label-2)",
-    "text-part-typography-carried: label-2 \u2014 font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults \u2014 round 5c)",
-    "control-fallback: no control for <input> \u2014 span control used (part inputbase-input)",
-    "control-fallback: no control for <p> \u2014 span control used (part label-3)",
-    "text-part-typography-carried: label-3 \u2014 font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults \u2014 round 5c)",
-    "control-fallback: no control for <fieldset> \u2014 span control used (part outlinedinput-notchedoutline)",
-    "control-fallback: no control for <legend> \u2014 span control used (part part-1-3-0)",
-    "text-part-typography-carried: label-4 \u2014 font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults \u2014 round 5c)",
-    "control-fallback: no control for <p> \u2014 span control used (part label-5)",
-    "text-part-typography-carried: label-5 \u2014 font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults \u2014 round 5c)",
-    "webkit-prefixed-channels-refused: 4 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) \u2014 named here because the exclusion used to be silent: -webkit-box-align (inputadornment-positionend, inputadornment-positionstart, inputbase-adornedend); -webkit-tap-highlight-color (inputbase-input); -webkit-text-fill-color (inputadornment-positionend, inputadornment-positionstart, inputbase-adornedend, inputbase-input, label, label-2, label-3, label-4, label-5, outlinedinput-notchedoutline, part-1-3-0); -webkit-text-stroke-color (inputadornment-positionend, inputadornment-positionstart, inputbase-adornedend, inputbase-input, label, label-2, label-3, label-4, label-5, outlinedinput-notchedoutline, part-1-3-0)",
-    "webkit-refusal-argued: -webkit-text-fill-color \u2014 NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
-    "orphan-mint-refused: label-4 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 26 styled channel(s) do not mint \u2014 before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
-    "orphan-mint-refused: part-1-3-0 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 32 styled channel(s) do not mint \u2014 before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
-    "inheritance-check-rejected: inputbase-adornedend.caret-color \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: inputbase-adornedend.color \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: inputbase-adornedend.letter-spacing \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: inputbase-adornedend.line-height \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.font-size \u2014 values track ancestor \"inputadornment-positionstart\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.font-weight \u2014 values track ancestor \"inputadornment-positionstart\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-size \u2014 values track ancestor \"inputadornment-positionend\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-weight \u2014 values track ancestor \"inputadornment-positionend\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.caret-color \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.color \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.font-size \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.font-weight \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.letter-spacing \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.line-height \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.caret-color \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.color \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.font-size \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.font-weight \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.letter-spacing \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height \u2014 values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: inputadornment-positionend.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: inputadornment-positionend.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: inputadornment-positionstart.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: inputadornment-positionstart.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: inputbase-input.caret-color equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: inputbase-input.color equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: inputbase-input.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: inputbase-input.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.letter-spacing equals ancestor \"inputadornment-positionstart\" on all 4 captured planes \u2014 the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.letter-spacing equals ancestor \"inputadornment-positionend\" on all 4 captured planes \u2014 the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: outlinedinput-notchedoutline.caret-color equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: outlinedinput-notchedoutline.color equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: outlinedinput-notchedoutline.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: outlinedinput-notchedoutline.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes \u2014 the part carries no independent line-height fact (CSS inheritance, observed)"
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-4 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-5 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: inputbase-adornedend — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: inputadornment-positionstart — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: inputbase-input — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: inputadornment-positionend — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: outlinedinput-notchedoutline — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-3-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-equal-drop: root — 569 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 366 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <label> — span control used (part label)",
+    "ua-control-fallback: no UA baseline for <label> — span UA control used (part label)",
+    "control-equal-drop: label — 558 of 597 admitted channels compared EQUAL to the <label> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 4 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "translate-door-refused: label — non-translate transform (matrix(0.75, 0, 0, 0.75, 14, -9)); the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) — named refusal, pseudo-decor v2 round",
+    "text-part-typography-carried: label — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 353 channel(s) EQUAL to the <label> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: inputbase-adornedend — 565 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: inputbase-adornedend — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: inputbase-adornedend — 362 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: inputadornment-positionstart — 573 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: inputadornment-positionstart — 5 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: inputadornment-positionstart — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <p> — span control used (part label-2)",
+    "ua-control-fallback: no UA baseline for <p> — span UA control used (part label-2)",
+    "control-equal-drop: label-2 — 576 of 595 admitted channels compared EQUAL to the <p> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-2 — 5 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-2 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-2 — 371 channel(s) EQUAL to the <p> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <input> — span control used (part inputbase-input)",
+    "ua-control-fallback: no UA baseline for <input> — span UA control used (part inputbase-input)",
+    "control-equal-drop: inputbase-input — 571 of 597 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: inputbase-input — 14 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: inputbase-input — 368 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: inputadornment-positionend — 573 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: inputadornment-positionend — 5 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: inputadornment-positionend — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <p> — span control used (part label-3)",
+    "ua-control-fallback: no UA baseline for <p> — span UA control used (part label-3)",
+    "control-equal-drop: label-3 — 576 of 595 admitted channels compared EQUAL to the <p> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-3 — 5 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-3 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-3 — 371 channel(s) EQUAL to the <p> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <fieldset> — span control used (part outlinedinput-notchedoutline)",
+    "ua-control-fallback: no UA baseline for <fieldset> — span UA control used (part outlinedinput-notchedoutline)",
+    "control-equal-drop: outlinedinput-notchedoutline — 553 of 597 admitted channels compared EQUAL to the <fieldset> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: outlinedinput-notchedoutline — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: outlinedinput-notchedoutline — 350 channel(s) EQUAL to the <fieldset> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <legend> — span control used (part part-1-3-0)",
+    "ua-control-fallback: no UA baseline for <legend> — span UA control used (part part-1-3-0)",
+    "control-equal-drop: part-1-3-0 — 563 of 597 admitted channels compared EQUAL to the <legend> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-1-3-0 — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-1-3-0 — 360 channel(s) EQUAL to the <legend> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-4 — 568 of 595 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-4 — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-4 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-4 — 364 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <p> — span control used (part label-5)",
+    "ua-control-fallback: no UA baseline for <p> — span UA control used (part label-5)",
+    "control-equal-drop: label-5 — 573 of 595 admitted channels compared EQUAL to the <p> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-5 — 3 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-5 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-5 — 369 channel(s) EQUAL to the <p> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: inputadornment-positionend — block-size 24px, inline-size 30.8281px, perspective-origin 15.4062px 12px, transform-origin 15.4141px 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: inputadornment-positionstart — block-size 24px, inline-size 9.15625px, perspective-origin 4.57812px 12px, transform-origin 4.57812px 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: inputbase-adornedend — block-size 56px, inline-size 250.984px, perspective-origin 125.484px 28px, transform-origin 125.492px 28px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: inputbase-input — block-size 23px, inline-size 167px, perspective-origin 83.5px 28px, transform-origin 83.5px 28px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 23px, inline-size 57.3906px, perspective-origin 28.6875px 11.5px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 24px, height 24px, inline-size 9.15625px, perspective-origin 4.57812px 12px, transform-origin 4.57812px 12px, width 9.15625px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-3 — block-size 24px, height 24px, inline-size 30.8281px, perspective-origin 15.4062px 12px, transform-origin 15.4141px 12px, width 30.8281px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-4 — block-size 23px, height 23px, inline-size 53.2656px, perspective-origin 26.625px 11.5px, transform-origin 26.6328px 11.5px, width 53.2656px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-5 — block-size 19.9062px, height 19.9062px, inline-size 222.984px, perspective-origin 111.484px 9.95312px, transform-origin 111.492px 9.95312px, width 222.984px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: outlinedinput-notchedoutline — block-size 61px, inline-size 250.984px, perspective-origin 125.484px 30.5px, transform-origin 125.492px 30.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-3-0 — block-size 11px, inline-size 53.2656px, perspective-origin 26.625px 5.5px, transform-origin 26.6328px 5.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 78.9062px, inline-size 250.984px, perspective-origin 125.484px 39.4531px, transform-origin 125.492px 39.4531px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 5 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (inputadornment-positionend, inputadornment-positionstart, inputbase-adornedend); -webkit-font-smoothing (inputadornment-positionend, inputadornment-positionstart, inputbase-adornedend, inputbase-input, label, label-2, label-3, label-4, label-5, outlinedinput-notchedoutline, part-1-3-0, root); -webkit-tap-highlight-color (inputbase-input); -webkit-text-fill-color (inputadornment-positionend, inputadornment-positionstart, inputbase-adornedend, inputbase-input, label, label-2, label-3, label-4, label-5, outlinedinput-notchedoutline, part-1-3-0, root); -webkit-text-stroke-color (inputadornment-positionend, inputadornment-positionstart, inputbase-adornedend, inputbase-input, label, label-2, label-3, label-4, label-5, outlinedinput-notchedoutline, part-1-3-0, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "orphan-mint-refused: label-4 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 28 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "orphan-mint-refused: part-1-3-0 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 34 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"inputadornment-positionstart\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"inputadornment-positionstart\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"inputadornment-positionend\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"inputadornment-positionend\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: inputadornment-positionend.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: inputadornment-positionend.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: inputadornment-positionstart.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: inputadornment-positionstart.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: inputbase-adornedend.caret-color equals ancestor \"root\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: inputbase-adornedend.color equals ancestor \"root\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: inputbase-adornedend.letter-spacing equals ancestor \"root\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: inputbase-input.caret-color equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: inputbase-input.color equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: inputbase-input.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: inputbase-input.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.letter-spacing equals ancestor \"inputadornment-positionstart\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.letter-spacing equals ancestor \"inputadornment-positionend\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label.letter-spacing equals ancestor \"root\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: outlinedinput-notchedoutline.caret-color equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: outlinedinput-notchedoutline.color equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: outlinedinput-notchedoutline.letter-spacing equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: outlinedinput-notchedoutline.line-height equals ancestor \"inputbase-adornedend\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
-    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third \u2014 a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
-    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder \u2014 measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage \u2014 named, never silently dropped.",
-    "pseudo-element-not-read: ::selection \u2014 REFUSED BY NAME, not measured: transient user state \u2014 it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
-    "pseudo-element-not-read: ::backdrop \u2014 REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls \u2014 measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
     "pseudo-elements-refused: 2 (::selection, ::backdrop)"
   ],
   "anatomyJoin": {
@@ -1409,69 +1611,78 @@
     "svgAssets": [],
     "receipts": [
       "root-display-carried: inline-flex",
-      "literal-text-carried: label-2 = \"$\" (no text prop sample matches \u2014 the mounted value is carried verbatim)",
-      "full-width-carried: label-2 spans its row parent's content width in every enabled combo \u2192 layout.grow (geometry evidence)",
-      "literal-text-carried: label-3 = \"USD\" (no text prop sample matches \u2014 the mounted value is carried verbatim)",
-      "full-width-carried: label-3 spans its row parent's content width in every enabled combo \u2192 layout.grow (geometry evidence)",
-      "sr-only-carried-as-hidden: label-4 is visually hidden in the real component (clip-path/1px box) \u2014 promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics \u2014 NAMED downgrade)"
+      "literal-text-carried: label-2 = \"$\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label-2 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "literal-text-carried: label-3 = \"USD\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label-3 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "sr-only-carried-as-hidden: label-4 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
     ],
     "refusals": [
-      "inert-overlay-wrapper: part-1-3-0 draws no box in any captured combo, carries no text/icon/shape of its own, and every one of its 1 child part(s) is declared display:none \u2014 a carried part that draws NOTHING; refused by name (Carbon's tooltip `popover` wrapper; census sibling of the portal round's stripInertPortalChildren)",
-      "static-part-unrendered: reviewed static part \"start-adornment\" has no rendered counterpart in ANY captured combo \u2014 dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
-      "static-part-unrendered: reviewed static part \"end-adornment\" has no rendered counterpart in ANY captured combo \u2014 dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
+      "inert-overlay-wrapper: part-1-3-0 draws no box in any captured combo, carries no text/icon/shape of its own, and every one of its 1 child part(s) is declared display:none — a carried part that draws NOTHING; refused by name (Carbon's tooltip `popover` wrapper; census sibling of the portal round's stripInertPortalChildren)",
+      "static-part-unrendered: reviewed static part \"start-adornment\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+      "static-part-unrendered: reviewed static part \"end-adornment\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
     ]
   },
   "enrichmentNotes": [
-    "layout enriched: root.layout.direction = column (uniform computed keyword \u2014 the schema's own vocabulary)",
-    "layout enriched: inputbase-adornedend.layout.align = center (uniform computed keyword \u2014 the schema's own vocabulary)",
-    "layout enriched: inputadornment-positionstart.layout.align = center (uniform computed keyword \u2014 the schema's own vocabulary)",
-    "layout enriched: inputadornment-positionend.layout.align = center (uniform computed keyword \u2014 the schema's own vocabulary)",
-    "declared fact carried: root.position = relative (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.cursor = default (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.transition-delay = 0s, 0s, 0s (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.transition-duration = 0.2s, 0.2s, 0.2s (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.transition-property = color, transform, max-width (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.transition-timing-function = cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1) (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label.user-select = none (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputbase-adornedend.box-sizing = border-box (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: inputbase-adornedend.cursor = text (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputbase-adornedend.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: inputbase-adornedend.position = relative (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputadornment-positionstart.cursor = text (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputadornment-positionstart.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: inputadornment-positionstart.text-wrap-mode = nowrap (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label-2.cursor = text (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputbase-input.appearance = auto (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputbase-input.cursor = text (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputbase-input.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: inputbase-input.overflow-x = clip (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputbase-input.overflow-y = clip (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputadornment-positionend.cursor = text (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: inputadornment-positionend.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: inputadornment-positionend.text-wrap-mode = nowrap (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label-3.cursor = text (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.border-bottom-style = solid (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.border-left-style = solid (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.border-right-style = solid (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.border-top-style = solid (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.cursor = text (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: outlinedinput-notchedoutline.overflow-x = hidden (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.overflow-y = hidden (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.pointer-events = none (v15 declared vocabulary \u2014 declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.text-align = left (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: label-5.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary \u2014 canvas-drawable)",
-    "declared fact carried: label-5.text-align = left (v15 declared vocabulary \u2014 canvas-drawable)",
-    "hug-evidence-unmeasurable: label.max-width = calc(133% - 32px) \u2014 not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
-    "hug-evidence-unmeasurable: part-1-3-0.max-width = 100% \u2014 not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged."
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inputbase-adornedend.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inputadornment-positionstart.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inputadornment-positionend.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.transition-delay = 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.transition-duration = 0.2s, 0.2s, 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.transition-property = color, transform, max-width (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.transition-timing-function = cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputbase-adornedend.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputbase-adornedend.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputbase-adornedend.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputbase-adornedend.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputadornment-positionstart.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputadornment-positionstart.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputadornment-positionstart.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputadornment-positionstart.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputbase-input.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputbase-input.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputbase-input.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputbase-input.overflow-x = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputbase-input.overflow-y = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputadornment-positionend.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputadornment-positionend.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inputadornment-positionend.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: inputadornment-positionend.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: outlinedinput-notchedoutline.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: outlinedinput-notchedoutline.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: outlinedinput-notchedoutline.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: outlinedinput-notchedoutline.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "hug-evidence-unmeasurable: label.max-width = calc(133% - 32px) — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-unmeasurable: part-1-3-0.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged."
   ]
 }

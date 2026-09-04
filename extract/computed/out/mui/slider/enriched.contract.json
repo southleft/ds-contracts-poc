@@ -86,6 +86,7 @@
       "declared": {
         "display": "block",
         "cursor": "pointer",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "position": "relative",
         "touch-action": "none"
       },
@@ -96,7 +97,8 @@
           "declared": {
             "display": "block",
             "position": "absolute",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
           },
           "tokens": {
             "border-bottom-left-radius": "{imported.shared.size-12}",
@@ -104,6 +106,8 @@
             "border-top-left-radius": "{imported.shared.size-12}",
             "border-top-right-radius": "{imported.shared.size-12}",
             "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "opacity": "{imported.slider.slider-rail.opacity}",
@@ -167,17 +171,32 @@
             "display": "block",
             "position": "absolute",
             "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-delay": "0s, 0s, 0s, 0s",
             "transition-duration": "0.15s, 0.15s, 0.15s, 0.15s",
             "transition-property": "left, width, bottom, height",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
           },
+          "stylesWhen": [
+            {
+              "prop": "size",
+              "equals": "medium",
+              "styles": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid"
+              }
+            }
+          ],
           "tokens": {
             "border-bottom-left-radius": "{imported.shared.size-12}",
             "border-bottom-right-radius": "{imported.shared.size-12}",
             "border-top-left-radius": "{imported.shared.size-12}",
             "border-top-right-radius": "{imported.shared.size-12}",
             "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "translate-x": "{imported.shared.size-0}"
@@ -251,6 +270,7 @@
             "aspect-ratio": "1 / 1",
             "box-sizing": "border-box",
             "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-delay": "0s, 0s, 0s",
             "transition-duration": "0.15s, 0.15s, 0.15s",
             "transition-property": "box-shadow, left, bottom",
@@ -284,6 +304,7 @@
               "declared": {
                 "display": "none",
                 "appearance": "auto",
+                "box-sizing": "border-box",
                 "cursor": "default",
                 "font-family": "Arial",
                 "overflow-x": "hidden",
@@ -326,11 +347,27 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             }
           },
           "tokens": {
             "left": "{imported.slider.slider-thumb.left}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-width": "{imported.shared.size-0}"
@@ -396,6 +433,26 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "box-shadow",
+              "value": "{imported.slider.slider-thumb.box-shadow-state-active.{color}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "z-index",
+              "value": "1",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "box-shadow",
+              "value": "{imported.slider.slider-thumb.box-shadow-state-focus-visible.{color}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         }
       },
@@ -406,6 +463,8 @@
         "border-top-right-radius": "{imported.shared.size-12}",
         "bottom": "{imported.shared.size-0}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "padding-bottom": "{imported.slider.root.padding-bottom}",
         "padding-top": "{imported.slider.root.padding-top}",
         "right": "{imported.shared.size-0}",

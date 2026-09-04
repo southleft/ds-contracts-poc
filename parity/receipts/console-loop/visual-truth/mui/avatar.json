@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 73,
-    "pctAAUnmasked": 59.12500000000001,
-    "pctAAMasked": 59.12500000000001,
+    "pctExactUnmasked": 73.25,
+    "pctAAUnmasked": 59,
+    "pctAAMasked": 59,
     "maskCoveragePct": 0,
     "canvasPx": "14x20",
     "realPx": "40x40",
     "inkCanvasPct": 13.625000000000002,
-    "inkRealPct": 78.3125
+    "inkRealPct": 79.375
   },
   "reference": "extract/computed/out/mui/avatar/orig-shots/circular__default.png",
-  "referenceSha256": "ed11fe7eaf22b9438f142dc7d7cf1f278df18e7252123220a140a88004745192",
+  "referenceSha256": "34d83c9bf00714b576eb563abf12b2001d38525f5f3a02aec10808de61a834f5",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/avatar.png",
   "canvasShotSha256": "d46061c9313b2a80410e9da0a969bb31358de289045a02e3a3142e6bb9c2ac26",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/avatar.diff.png",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 2.857142857142857,
-  "inkDelta": 64.6875,
+  "inkDelta": 65.75,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.86, inkDelta=64.7)"
+  "note": "composition mismatch (scaleRatio=2.86, inkDelta=65.8)"
 }

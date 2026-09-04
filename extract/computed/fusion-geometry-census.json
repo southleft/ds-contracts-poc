@@ -3,7 +3,7 @@
   "generatedBy": "extract/computed/fusion-geometry-census.ts --write",
   "components": 132,
   "__extensionFresh": "Per row: whether that component's COMMITTED enriched.extension.json geometry receipts still match the engine. A `false` here is a component whose shipped drop ledger is stale — mostly captures that predate a door nobody re-ran, measured as 83 of 104 on the previous engine as well. It is pinned so that a CHANGE in either direction is red and has to be re-recorded deliberately.",
-  "extensionsStale": 81,
+  "extensionsStale": 66,
   "rows": {
     "altitude/Avatar": {
       "carried": {
@@ -2623,15 +2623,19 @@
           "width"
         ]
       },
-      "receipts": "19ce7f459724e112",
-      "receiptCount": 19,
-      "extensionFresh": false
+      "receipts": "4dc78ef0e666bc87",
+      "receiptCount": 20,
+      "extensionFresh": true
     },
     "mui/Alert": {
-      "carried": {},
-      "receipts": "bf538dfe205214d7",
-      "receiptCount": 5,
-      "extensionFresh": false
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "38edd6411802327b",
+      "receiptCount": 7,
+      "extensionFresh": true
     },
     "mui/Autocomplete": {
       "carried": {
@@ -2708,7 +2712,6 @@
           "width"
         ],
         "icon-4": [
-          "height",
           "width"
         ],
         "outlinedinput-notchedoutline": [
@@ -2744,7 +2747,7 @@
           "width"
         ]
       },
-      "receipts": "5dd00a7b7c9dae17",
+      "receipts": "7661994250b1db79",
       "receiptCount": 44,
       "extensionFresh": false
     },
@@ -2759,7 +2762,7 @@
       },
       "receipts": "4400173b403e4a68",
       "receiptCount": 1,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Badge": {
       "carried": {
@@ -2796,7 +2799,7 @@
       },
       "receipts": "5bc47b826a1e3805",
       "receiptCount": 8,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Breadcrumbs": {
       "carried": {
@@ -2804,7 +2807,7 @@
           "width"
         ]
       },
-      "receipts": "4abbf3a90cdbfa63",
+      "receipts": "46696f6fb745d0f8",
       "receiptCount": 11,
       "extensionFresh": false
     },
@@ -2817,9 +2820,9 @@
           "top"
         ]
       },
-      "receipts": "e33e2faef359530f",
+      "receipts": "8f57d73694229740",
       "receiptCount": 1,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Card": {
       "carried": {
@@ -2827,14 +2830,13 @@
           "width"
         ]
       },
-      "receipts": "d15054f46b86e341",
+      "receipts": "3dd23178c881ff82",
       "receiptCount": 3,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Checkbox": {
       "carried": {
         "icon": [
-          "height",
           "width"
         ],
         "part-0": [
@@ -2858,21 +2860,21 @@
           "width"
         ]
       },
-      "receipts": "0cb8cd5764c6d3fa",
+      "receipts": "0060736661f410bb",
       "receiptCount": 8,
       "extensionFresh": false
     },
     "mui/Chip": {
       "carried": {},
-      "receipts": "7d159cc9f4d92d5b",
+      "receipts": "94d380ec3d9d087d",
       "receiptCount": 2,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/CircularProgress": {
       "carried": {},
       "receipts": "a6b3bbc8390c0977",
       "receiptCount": 3,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Dialog": {
       "carried": {
@@ -2883,9 +2885,9 @@
           "top"
         ]
       },
-      "receipts": "d5afb15cb71bb8ef",
+      "receipts": "ebfc1a05bbe7ed58",
       "receiptCount": 10,
-      "extensionFresh": true
+      "extensionFresh": false
     },
     "mui/Divider": {
       "carried": {
@@ -2893,9 +2895,9 @@
           "width"
         ]
       },
-      "receipts": "892fa2c84f2a95e0",
+      "receipts": "a1e1d270c4b0571d",
       "receiptCount": 2,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Drawer": {
       "carried": {
@@ -2906,9 +2908,9 @@
           "top"
         ]
       },
-      "receipts": "9d7ba56d4e972313",
+      "receipts": "3effb5957f39f9d4",
       "receiptCount": 6,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Fab": {
       "carried": {
@@ -2921,7 +2923,7 @@
       },
       "receipts": "5cd4b8d042386a22",
       "receiptCount": 1,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/IconButton": {
       "carried": {
@@ -2934,11 +2936,11 @@
       },
       "receipts": "86c1dfc5e52d8946",
       "receiptCount": 1,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/InputAdornment": {
       "carried": {},
-      "receipts": "0e5140fed4cb9739",
+      "receipts": "79747cc797c8a32a",
       "receiptCount": 2,
       "extensionFresh": false
     },
@@ -2971,11 +2973,11 @@
       },
       "receipts": "39530737af7bf5b1",
       "receiptCount": 6,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Link": {
       "carried": {},
-      "receipts": "b88d1c14522c27fe",
+      "receipts": "af9e594aaef27b2d",
       "receiptCount": 1,
       "extensionFresh": false
     },
@@ -3006,7 +3008,7 @@
           "width"
         ]
       },
-      "receipts": "b2e873d99def9878",
+      "receipts": "cccd897b21ab8834",
       "receiptCount": 9,
       "extensionFresh": true
     },
@@ -3030,18 +3032,15 @@
         ],
         "icon": [
           "bottom",
-          "height",
           "left",
           "right",
           "top",
           "width"
         ],
         "icon-2": [
-          "height",
           "width"
         ],
         "icon-3": [
-          "height",
           "width"
         ],
         "inputbase-root": [
@@ -3093,7 +3092,7 @@
           "width"
         ]
       },
-      "receipts": "0f134c909456b67a",
+      "receipts": "707b61602fbb3838",
       "receiptCount": 34,
       "extensionFresh": false
     },
@@ -3103,19 +3102,17 @@
           "width"
         ]
       },
-      "receipts": "d29e67b60d283993",
+      "receipts": "5649f626548dab98",
       "receiptCount": 2,
       "extensionFresh": false
     },
     "mui/Radio": {
       "carried": {
         "icon": [
-          "height",
           "width"
         ],
         "icon-2": [
           "bottom",
-          "height",
           "left",
           "right",
           "top",
@@ -3131,7 +3128,6 @@
         ],
         "part-1": [
           "bottom",
-          "height",
           "left",
           "right",
           "top",
@@ -3154,7 +3150,7 @@
           "width"
         ]
       },
-      "receipts": "3338323c21dd2afb",
+      "receipts": "824058a98c15b233",
       "receiptCount": 14,
       "extensionFresh": false
     },
@@ -3162,7 +3158,6 @@
       "carried": {
         "icon": [
           "bottom",
-          "height",
           "left",
           "right",
           "top",
@@ -3201,7 +3196,7 @@
           "width"
         ]
       },
-      "receipts": "e77db08853283761",
+      "receipts": "0d1274f72442ef0a",
       "receiptCount": 16,
       "extensionFresh": false
     },
@@ -3250,13 +3245,17 @@
       },
       "receipts": "160ff815d403659d",
       "receiptCount": 10,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Snackbar": {
-      "carried": {},
-      "receipts": "a6e19c3573ee339d",
-      "receiptCount": 4,
-      "extensionFresh": false
+      "carried": {
+        "root": [
+          "width"
+        ]
+      },
+      "receipts": "ef98f00f8e487ef7",
+      "receiptCount": 6,
+      "extensionFresh": true
     },
     "mui/Switch": {
       "carried": {
@@ -3295,7 +3294,7 @@
       },
       "receipts": "bc302623af4cde5a",
       "receiptCount": 10,
-      "extensionFresh": false
+      "extensionFresh": true
     },
     "mui/Table": {
       "carried": {
@@ -3324,18 +3323,16 @@
           "width"
         ],
         "icon": [
-          "height",
           "width"
         ],
         "icon-2": [
+          "height",
           "width"
         ],
         "icon-3": [
-          "height",
           "width"
         ],
         "icon-4": [
-          "height",
           "width"
         ],
         "label": [
@@ -3457,7 +3454,7 @@
           "width"
         ]
       },
-      "receipts": "0f41b969761665f1",
+      "receipts": "082c5276cd516593",
       "receiptCount": 67,
       "extensionFresh": false
     },
@@ -3507,11 +3504,9 @@
     "mui/TextField": {
       "carried": {
         "inputadornment-positionend": [
-          "height",
           "width"
         ],
         "inputadornment-positionstart": [
-          "height",
           "width"
         ],
         "inputbase-adornedend": [
@@ -3555,7 +3550,7 @@
           "width"
         ]
       },
-      "receipts": "84ac0712386aaac6",
+      "receipts": "df007bb255bd55d5",
       "receiptCount": 24,
       "extensionFresh": false
     },
@@ -3618,7 +3613,7 @@
           "width"
         ]
       },
-      "receipts": "2fe4872e9a4af2a3",
+      "receipts": "51502bebdbd2cac9",
       "receiptCount": 18,
       "extensionFresh": true
     },

@@ -101,13 +101,95 @@
             "disabled": {
               "color": "{imported.shared.color-545454}"
             }
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "caret-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "column-rule-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "row-rule-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-decoration-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-emphasis-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         },
         "icon": {
           "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
             "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
             "overflow-y": "hidden",
             "transition-duration": "0.3s",
@@ -163,6 +245,8 @@
             "flex-shrink": "{imported.checkbox.icon.flex-shrink}",
             "font-size": "{imported.shared.size-24}",
             "height": "{imported.shared.size-24}",
+            "letter-spacing": "{imported.checkbox.icon.letter-spacing}",
+            "line-height": "{imported.checkbox.icon.line-height}",
             "width": "{imported.shared.size-24}"
           },
           "states": {
@@ -188,12 +272,21 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "fill",
+              "value": "#00000042",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         }
       },
       "declared": {
         "box-sizing": "border-box",
         "cursor": "pointer",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "position": "relative",
         "user-select": "none"
       },
@@ -211,6 +304,8 @@
         "bottom": "{imported.shared.size-0}",
         "height": "{imported.shared.size-42}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.checkbox.root.letter-spacing}",
+        "line-height": "{imported.shared.size-24}",
         "outline-width": "{imported.shared.size-0}",
         "padding-bottom": "{imported.shared.size-9}",
         "padding-left": "{imported.shared.size-9}",

@@ -9,11 +9,11 @@
   "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 26,
-    "slider-rail": 30,
-    "slider-track": 42,
-    "slider-thumb": 39,
-    "part-2-0": 33
+    "root": 30,
+    "slider-rail": 34,
+    "slider-track": 46,
+    "slider-thumb": 43,
+    "part-2-0": 35
   },
   "folds": {
     "count": 49,
@@ -313,8 +313,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 365,
-    "mintedLeavesFolded": 127
+    "mintedLeavesUnfolded": 367,
+    "mintedLeavesFolded": 129
   },
   "bound": {
     "cellsChecked": 0,
@@ -323,22 +323,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 127,
-    "baseBindings": 83,
+    "leaves": 129,
+    "baseBindings": 91,
     "stateBindings": 5,
     "byShape": {
-      "uniform": 51,
+      "uniform": 59,
       "perAxis": 37,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 22,
+    "base": 31,
     "state": 1
   },
   "codeOnly": {
-    "base": 10,
+    "base": 11,
     "state": 0,
     "overflowBindings": 5
   },
@@ -388,8 +388,8 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.00033908420138888893,
-      "max": 0.009765625,
+      "mean": 0.00020345052083333334,
+      "max": 0.006510416666666667,
       "perfect": 46
     },
     "aa": {
@@ -399,13 +399,13 @@
     },
     "worst": [
       {
-        "key": "secondary.small__active",
-        "pctExact": 0.009765625,
+        "key": "secondary.small__focus-visible",
+        "pctExact": 0.006510416666666667,
         "pctAA": 0
       },
       {
-        "key": "secondary.small__focus-visible",
-        "pctExact": 0.006510416666666667,
+        "key": "secondary.small__active",
+        "pctExact": 0.0032552083333333335,
         "pctAA": 0
       },
       {
@@ -441,7 +441,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 89.44805194805195,
+    "computedPctEqual": 89.97093023255815,
     "rowsFullyEqual": 0,
     "rows": 48,
     "pixelPerfectExact": 0,

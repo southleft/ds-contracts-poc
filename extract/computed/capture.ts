@@ -1146,9 +1146,20 @@ export function buildHarnessPage(
   // resolved at mount — collect their imports here too (the portal page
   // already did this; the census page did not — a latent one-level gap).
   for (const m of mounts) for (const cs of walkChildSpecs(m.comp.childrenSpec)) collectImports(cs.props ?? {});
+  // A `$import` marker naming a symbol the MAIN import line already brings in
+  // from the same package emits it twice, and esbuild refuses the entry with
+  // "The symbol X has already been declared". Measured 2026-09-04 on MUI: the
+  // whole-library capture (`--config mui.json` with no `--component`) died on
+  // FOUR such collisions — InputAdornment among them, which is both a captured
+  // component and a `$import` inside TextField's props — so `extract:computed`
+  // could not capture that library at all, with or without any mount change.
+  // Per-component runs never hit it because the main line then holds one name.
+  // The name stays in EXTRA either way: it is in scope from the main import.
   const extraImportLines = [...extraImports.entries()]
     .sort()
-    .map(([pkg, names]) => `import { ${[...names].sort().join(', ')} } from '${pkg}';`);
+    .map(([pkg, names]) => [pkg, [...names].filter((n) => pkg !== cfg.library.package || !importRoots.includes(n)).sort()] as const)
+    .filter(([, names]) => names.length > 0)
+    .map(([pkg, names]) => `import { ${names.join(', ')} } from '${pkg}';`);
   const extraNames = [...extraImports.values()].flatMap((s) => [...s]).sort();
   // display:flex + align-items:flex-start: the component is a flex item, so
   // its position never depends on the stage's own line-box strut (inherited
@@ -2504,9 +2515,6 @@ export function buildPortalHarnessPage(
   };
   for (const s of specs) collectImports(s.props);
   for (const cs of walkChildSpecs(comp.childrenSpec)) collectImports(cs.props ?? {});
-  const extraImportLines = [...extraImports.entries()]
-    .sort()
-    .map(([pkg, names]) => `import { ${[...names].sort().join(', ')} } from '${pkg}';`);
   const extraNames = [...extraImports.values()].flatMap((s) => [...s]).sort();
   const kidImports = [...new Set([
     comp.importName,
@@ -2516,6 +2524,20 @@ export function buildPortalHarnessPage(
   // COMPOUND EXPORT NAMES — kept in LOCKSTEP with buildHarnessPage: import the
   // distinct ROOT bindings, key COMPONENTS by the full dotted name.
   const kidImportRoots = [...new Set(kidImports.map(importRoot))].sort();
+  // A `$import` marker naming a symbol the MAIN import line already brings in
+  // from the same package emits it twice, and esbuild refuses the entry with
+  // "The symbol X has already been declared". Measured 2026-09-04 on MUI: the
+  // whole-library capture (`--config mui.json` with no `--component`) died on
+  // FOUR such collisions — InputAdornment among them, which is both a captured
+  // component and a `$import` inside TextField's props — so `extract:computed`
+  // could not capture that library at all, with or without any mount change.
+  // Per-component runs never hit it because the main line then holds one name.
+  // The name stays in EXTRA either way: it is in scope from the main import.
+  const extraImportLines = [...extraImports.entries()]
+    .sort()
+    .map(([pkg, names]) => [pkg, [...names].filter((n) => pkg !== cfg.library.package || !kidImportRoots.includes(n)).sort()] as const)
+    .filter(([, names]) => names.length > 0)
+    .map(([pkg, names]) => `import { ${names.join(', ')} } from '${pkg}';`);
 
   const stageJs = `{ display:'flex', alignItems:'flex-start', width:${st.width}, height:${st.height}, padding:${st.padding}, boxSizing:'border-box', background:'#fff', overflow:'hidden' }`;
   // Kept in LOCKSTEP with buildHarnessPage (the Carbon renderKids lesson: a

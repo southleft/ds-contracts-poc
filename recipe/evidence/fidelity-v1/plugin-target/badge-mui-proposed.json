@@ -7,8 +7,8 @@
   "pluginShot": "recipe/evidence/fidelity-v1/shots/badge-mui-proposed-default-v11-plugin.png",
   "manifestShot": "recipe/evidence/fidelity-v1/shots/badge-mui-proposed-default-v11.png",
   "reference": "extract/computed/out/mui/badge/orig-shots/default.standard__default.png",
-  "pluginPct": 3.11,
-  "manifestPct": 3.11,
+  "pluginPct": 2.38,
+  "manifestPct": 2.38,
   "pluginStatus": "pass",
   "manifestStatus": "pass",
   "parity": "same"

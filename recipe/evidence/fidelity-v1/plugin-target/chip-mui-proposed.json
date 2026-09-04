@@ -7,8 +7,8 @@
   "pluginShot": "recipe/evidence/fidelity-v1/shots/chip-mui-proposed-default-v11-plugin.png",
   "manifestShot": "recipe/evidence/fidelity-v1/shots/chip-mui-proposed-default-v11.png",
   "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png",
-  "pluginPct": 0.61,
-  "manifestPct": 0.61,
+  "pluginPct": 1.59,
+  "manifestPct": 1.59,
   "pluginStatus": "pass",
   "manifestStatus": "pass",
   "parity": "same"

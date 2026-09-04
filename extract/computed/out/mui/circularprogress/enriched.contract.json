@@ -4,7 +4,7 @@
   "name": "CircularProgress",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/size/value pinned via fixedProps. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/size/value pinned via fixedProps. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -37,7 +37,9 @@
   "anatomy": {
     "root": {
       "declared": {
-        "display": "block"
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif"
       },
       "parts": {
         "root-determinate": {
@@ -65,7 +67,8 @@
       },
       "tokens": {
         "color": "{imported.circular-progress.root.color}",
-        "width": "{imported.circular-progress.root.width}"
+        "letter-spacing": "{imported.circular-progress.root.letter-spacing}",
+        "line-height": "{imported.circular-progress.root.line-height}"
       }
     }
   },

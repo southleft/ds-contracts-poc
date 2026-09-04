@@ -7,7 +7,7 @@
   "evidence": {
     "box": {
       "selector": "root",
-      "why": "div.MuiChip-root is the outermost painted part: 49.3438px×32px, bg rgba(0, 0, 0, 0.08), radius 16px",
+      "why": "div.MuiChip-root is the outermost painted part: 50.6875px×32px, bg rgba(0, 0, 0, 0.08), radius 16px",
       "confidence": "high"
     },
     "label": {

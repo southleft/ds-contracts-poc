@@ -4,7 +4,7 @@
   "name": "Select",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Bounded capture: value + MenuItem children pinned; menu held CONTROLLED-CLOSED (open=false — TablePagination select precedent). Small axis: size only. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Bounded capture: value + MenuItem children pinned; menu held CONTROLLED-CLOSED (open=false — TablePagination select precedent). Small axis: size only. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -83,6 +83,20 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "outline-width",
+              "value": "0px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "0px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         },
         "select-nativeinput": {
@@ -121,7 +135,7 @@
             "padding-right": "{imported.shared.size-2}",
             "padding-top": "{imported.shared.size-1}",
             "right": "{imported.shared.size-0}",
-            "width": "{imported.select.select-nativeinput.width}"
+            "width": "{imported.shared.size-74-7812}"
           },
           "tokensByProp": [
             {
@@ -142,6 +156,7 @@
           "declared": {
             "display": "block",
             "position": "absolute",
+            "box-sizing": "border-box",
             "cursor": "text",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
@@ -196,6 +211,7 @@
             "border-left-style": "solid",
             "border-right-style": "solid",
             "border-top-style": "solid",
+            "box-sizing": "border-box",
             "cursor": "text",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
@@ -203,12 +219,16 @@
             "pointer-events": "none",
             "text-align": "left"
           },
+          "layout": {
+            "grow": true
+          },
           "parts": {
             "part-3-0": {
               "element": "legend",
               "description": "Promoted from the computed floor (round 4): rendered anatomy legend| — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
+                "box-sizing": "border-box",
                 "cursor": "text",
                 "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "overflow-x": "hidden",
@@ -225,6 +245,7 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "inline",
+                    "box-sizing": "border-box",
                     "cursor": "text",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "pointer-events": "none",
@@ -275,7 +296,7 @@
             "padding-right": "{imported.select.outlinedinput-notchedoutline.padding-right}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.select.outlinedinput-notchedoutline.top}",
-            "width": "{imported.select.outlinedinput-notchedoutline.width}"
+            "width": "{imported.shared.size-74-7812}"
           },
           "tokensByProp": [
             {
@@ -288,6 +309,128 @@
                   "height": "{imported.select.outlinedinput-notchedoutline.height.small}"
                 }
               }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "border-bottom-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-bottom-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-left-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-left-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-right-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-right-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-top-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-top-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-bottom-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-bottom-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-left-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-left-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-right-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-right-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-top-color",
+              "value": "#1976d2",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "border-top-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-bottom-color",
+              "value": "#000000de",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-left-color",
+              "value": "#000000de",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-right-color",
+              "value": "#000000de",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-top-color",
+              "value": "#000000de",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
             }
           ]
         }
@@ -312,7 +455,7 @@
         "min-width": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}",
-        "width": "{imported.select.root.width}"
+        "width": "{imported.shared.size-74-7812}"
       },
       "tokensByProp": [
         {

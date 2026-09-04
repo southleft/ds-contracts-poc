@@ -73,6 +73,8 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Tabs-fixed.Tabs-scroller — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
             "overflow-y": "hidden",
             "position": "relative",
@@ -225,10 +227,15 @@
                 }
               },
               "declared": {
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "text-wrap-mode": "nowrap"
               },
               "tokens": {
+                "color": "{imported.shared.color-000000de}",
                 "height": "{imported.shared.size-48}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "width": "{imported.shared.size-199-391}"
@@ -240,14 +247,19 @@
               "declared": {
                 "display": "block",
                 "position": "absolute",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "text-wrap-mode": "nowrap",
                 "transition-duration": "0.3s",
                 "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-000000de}",
                 "height": "{imported.tabs.tabs-indicator.height}",
                 "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.tabs.tabs-indicator.right}",
@@ -271,9 +283,12 @@
           },
           "tokens": {
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000de}",
             "flex-grow": "{imported.tabs.tabs-fixed.flex-grow}",
             "height": "{imported.shared.size-48}",
             "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
             "width": "{imported.shared.size-199-391}"
@@ -281,11 +296,16 @@
         }
       },
       "declared": {
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "hidden",
         "overflow-y": "hidden"
       },
       "tokens": {
+        "color": "{imported.shared.color-000000de}",
         "height": "{imported.shared.size-48}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-48}",
         "width": "{imported.shared.size-199-391}"
       }

@@ -4,7 +4,7 @@
   "name": "Drawer",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — variant temporary|permanent; open pinned via fixedProps; portalCapture. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — variant temporary|permanent; open pinned via fixedProps; portalCapture. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -52,7 +52,9 @@
   "anatomy": {
     "root": {
       "declared": {
-        "display": "block"
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif"
       },
       "parts": {
         "backdrop-root": {
@@ -72,11 +74,16 @@
             }
           ],
           "declared": {
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-property": "opacity",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
           },
           "tokens": {
             "background-color": "{imported.drawer.backdrop-root.background-color}",
+            "color": "{imported.shared.color-000000de}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }
@@ -90,7 +97,18 @@
             "display": "flex",
             "direction": "column"
           },
+          "stylesWhen": [
+            {
+              "prop": "variant",
+              "equals": "permanent",
+              "styles": {
+                "border-right-style": "solid"
+              }
+            }
+          ],
           "declared": {
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "auto",
             "overflow-y": "auto",
             "transition-duration": "0.3s",
@@ -99,11 +117,13 @@
           },
           "tokens": {
             "background-color": "{imported.drawer.label.background-color}",
-            "color": "{imported.drawer.label.color}",
+            "color": "{imported.shared.color-000000de}",
             "flex-grow": "{imported.drawer.label.flex-grow}",
             "flex-shrink": "{imported.drawer.label.flex-shrink}",
             "font-size": "{imported.drawer.label.font-size}",
             "font-weight": "{imported.drawer.label.font-weight}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-width": "{imported.shared.size-0}",
@@ -127,6 +147,11 @@
             }
           ]
         }
+      },
+      "tokens": {
+        "color": "{imported.shared.color-000000de}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}"
       },
       "tokensByProp": [
         {

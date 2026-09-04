@@ -1,14 +1,15 @@
 {
   "component": "Badge",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 14,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 4424,
-    "cellsEqual": 4032,
-    "pctEqual": 91.13924050632912,
+    "cellsCompared": 5600,
+    "cellsEqual": 5096,
+    "pctEqual": 91,
     "rowsFullyEqual": 0,
     "rows": 56
   },
@@ -22,73 +23,77 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 1.1725725446428574,
-    "meanAA": 0.8205450148809522,
+    "meanExact": 1.4841424851190481,
+    "meanAA": 0.8238002232142857,
     "maxAA": 0.9635416666666666
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 54,
-    "mintedLeavesUnfolded": 194,
-    "baseBindings": 59,
+    "mintedLeaves": 57,
+    "mintedLeavesUnfolded": 197,
+    "baseBindings": 65,
     "stateBindings": 0,
-    "codeOnlyChannels": 9,
+    "codeOnlyChannels": 11,
     "overflowBindings": 0,
-    "folds": 30
+    "folds": 40
   },
   "worstRows": [
     {
       "key": "default.dot__default",
       "pctAA": 0.9635416666666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctExact": 1.5885416666666667,
+      "channelsMismatched": 9
     },
     {
       "key": "default.dot__hover",
       "pctAA": 0.9635416666666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctExact": 1.5885416666666667,
+      "channelsMismatched": 9
     },
     {
       "key": "default.dot__focus-visible",
       "pctAA": 0.9635416666666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctExact": 1.5885416666666667,
+      "channelsMismatched": 9
     },
     {
       "key": "default.dot__active",
       "pctAA": 0.9635416666666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctExact": 1.5885416666666667,
+      "channelsMismatched": 9
     },
     {
       "key": "default.standard__default",
-      "pctAA": 0.9342447916666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctAA": 0.9016927083333334,
+      "pctExact": 1.62109375,
+      "channelsMismatched": 9
     },
     {
       "key": "default.standard__hover",
-      "pctAA": 0.9342447916666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctAA": 0.9016927083333334,
+      "pctExact": 1.62109375,
+      "channelsMismatched": 9
     },
     {
       "key": "default.standard__focus-visible",
-      "pctAA": 0.9342447916666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctAA": 0.9016927083333334,
+      "pctExact": 1.62109375,
+      "channelsMismatched": 9
     },
     {
       "key": "default.standard__active",
-      "pctAA": 0.9342447916666666,
-      "pctExact": 1.328125,
-      "channelsMismatched": 7
+      "pctAA": 0.9016927083333334,
+      "pctExact": 1.62109375,
+      "channelsMismatched": 9
     }
   ],
   "topMismatchedChannels": [
+    [
+      "root.text-size-adjust",
+      56
+    ],
     [
       "root.vertical-align",
       56
@@ -110,11 +115,15 @@
       56
     ],
     [
+      "label.text-size-adjust",
+      56
+    ],
+    [
       "label-2.align-content",
       28
     ],
     [
-      "label-2.flex-wrap",
+      "label-2.text-size-adjust",
       28
     ],
     [
@@ -122,20 +131,22 @@
       28
     ],
     [
-      "badge-anchororigintopright.flex-wrap",
+      "badge-anchororigintopright.text-size-adjust",
       28
     ]
   ],
   "namedLosses": [
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.border-bottom-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.border-bottom-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.border-top-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.border-top-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: badge-anchororigintopright.align-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: badge-anchororigintopright.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: badge-anchororigintopright.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.align-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-2.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
     "count": 0,
@@ -143,17 +154,186 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1428,
-    "divergent": []
+    "leavesAdded": 1938,
+    "divergent": [
+      {
+        "token": "imported.badge.badge-anchororigintopright.background-color.error",
+        "fresh": "#d32f2f",
+        "shipped": "{palette-error-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.background-color.info",
+        "fresh": "#0288d1",
+        "shipped": "{palette-info-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.background-color.primary",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.background-color.secondary",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.background-color.success",
+        "fresh": "#2e7d32",
+        "shipped": "{palette-success-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.background-color.warning",
+        "fresh": "#ed6c02",
+        "shipped": "{palette-warning-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.color.default",
+        "fresh": "#000000de",
+        "shipped": "#000000",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.color.error",
+        "fresh": "#ffffff",
+        "shipped": "{palette-error-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.color.info",
+        "fresh": "#ffffff",
+        "shipped": "{palette-info-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{palette-primary-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.color.secondary",
+        "fresh": "#ffffff",
+        "shipped": "{palette-secondary-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.color.success",
+        "fresh": "#ffffff",
+        "shipped": "{palette-success-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.badge-anchororigintopright.color.warning",
+        "fresh": "#ffffff",
+        "shipped": "{palette-warning-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.background-color.error",
+        "fresh": "#d32f2f",
+        "shipped": "{palette-error-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.background-color.info",
+        "fresh": "#0288d1",
+        "shipped": "{palette-info-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.background-color.primary",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.background-color.secondary",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.background-color.success",
+        "fresh": "#2e7d32",
+        "shipped": "{palette-success-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.background-color.warning",
+        "fresh": "#ed6c02",
+        "shipped": "{palette-warning-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.color.default",
+        "fresh": "#000000de",
+        "shipped": "#000000",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.label-2.color.error",
+        "fresh": "#ffffff",
+        "shipped": "{palette-error-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.color.info",
+        "fresh": "#ffffff",
+        "shipped": "{palette-info-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{palette-primary-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.color.secondary",
+        "fresh": "#ffffff",
+        "shipped": "{palette-secondary-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.color.success",
+        "fresh": "#ffffff",
+        "shipped": "{palette-success-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label-2.color.warning",
+        "fresh": "#ffffff",
+        "shipped": "{palette-warning-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.label.color",
+        "fresh": "#ffffff",
+        "shipped": "{palette-background-default}",
+        "resolvedEqual": true
+      }
+    ]
   },
   "rows": [
     {
       "key": "default.standard__default",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.328125,
-      "pctAA": 0.9342447916666666,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.62109375,
+      "pctAA": 0.9016927083333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -185,6 +365,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -192,19 +378,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "default.standard__hover",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.328125,
-      "pctAA": 0.9342447916666666,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.62109375,
+      "pctAA": 0.9016927083333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -236,6 +428,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -243,19 +441,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "default.standard__focus-visible",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.328125,
-      "pctAA": 0.9342447916666666,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.62109375,
+      "pctAA": 0.9016927083333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -287,6 +491,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -294,19 +504,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "default.standard__active",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.328125,
-      "pctAA": 0.9342447916666666,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.62109375,
+      "pctAA": 0.9016927083333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -338,6 +554,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -345,19 +567,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "default.dot__default",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.328125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5885416666666667,
       "pctAA": 0.9635416666666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -389,6 +617,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -396,19 +630,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "default.dot__hover",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.328125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5885416666666667,
       "pctAA": 0.9635416666666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -440,6 +680,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -447,19 +693,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "default.dot__focus-visible",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.328125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5885416666666667,
       "pctAA": 0.9635416666666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -491,6 +743,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -498,19 +756,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "default.dot__active",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.328125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5885416666666667,
       "pctAA": 0.9635416666666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -542,6 +806,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -549,19 +819,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.standard__default",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -593,6 +869,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -600,19 +882,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.standard__hover",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -644,6 +932,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -651,19 +945,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.standard__focus-visible",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -695,6 +995,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -702,19 +1008,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.standard__active",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -746,6 +1058,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -753,19 +1071,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.dot__default",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -797,6 +1121,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -804,19 +1134,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.dot__hover",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -848,6 +1184,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -855,19 +1197,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.dot__focus-visible",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -899,6 +1247,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -906,19 +1260,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "primary.dot__active",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -950,6 +1310,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -957,19 +1323,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.standard__default",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1001,6 +1373,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1008,19 +1386,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.standard__hover",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1052,6 +1436,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1059,19 +1449,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.standard__focus-visible",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1103,6 +1499,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1110,19 +1512,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.standard__active",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1154,6 +1562,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1161,19 +1575,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.dot__default",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2630208333333333,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5234375,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1205,6 +1625,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1212,19 +1638,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.dot__hover",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2630208333333333,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5234375,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1256,6 +1688,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1263,19 +1701,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.dot__focus-visible",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2630208333333333,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5234375,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1307,6 +1751,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1314,19 +1764,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "secondary.dot__active",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2630208333333333,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5234375,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1358,6 +1814,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1365,19 +1827,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.standard__default",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1409,6 +1877,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1416,19 +1890,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.standard__hover",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1460,6 +1940,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1467,19 +1953,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.standard__focus-visible",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1511,6 +2003,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1518,19 +2016,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.standard__active",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1562,6 +2066,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1569,19 +2079,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.dot__default",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2467447916666667,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5071614583333333,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1613,6 +2129,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1620,19 +2142,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.dot__hover",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2467447916666667,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5071614583333333,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1664,6 +2192,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1671,19 +2205,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.dot__focus-visible",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2467447916666667,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5071614583333333,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1715,6 +2255,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1722,19 +2268,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "error.dot__active",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.2467447916666667,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5071614583333333,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1766,6 +2318,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -1773,19 +2331,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.standard__default",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1817,6 +2381,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1824,19 +2394,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.standard__hover",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1868,6 +2444,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1875,19 +2457,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.standard__focus-visible",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1919,6 +2507,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1926,19 +2520,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.standard__active",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -1970,6 +2570,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -1977,19 +2583,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.dot__default",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2021,6 +2633,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2028,19 +2646,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.dot__hover",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2072,6 +2696,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2079,19 +2709,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.dot__focus-visible",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2123,6 +2759,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2130,19 +2772,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "info.dot__active",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2174,6 +2822,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2181,19 +2835,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.standard__default",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2225,6 +2885,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2232,19 +2898,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.standard__hover",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2276,6 +2948,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2283,19 +2961,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.standard__focus-visible",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2327,6 +3011,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2334,19 +3024,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.standard__active",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2378,6 +3074,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2385,19 +3087,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.dot__default",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2429,6 +3137,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2436,19 +3150,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.dot__hover",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2480,6 +3200,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2487,19 +3213,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.dot__focus-visible",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2531,6 +3263,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2538,19 +3276,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "success.dot__active",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2582,6 +3326,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2589,19 +3339,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.standard__default",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2633,6 +3389,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2640,19 +3402,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.standard__hover",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2684,6 +3452,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2691,19 +3465,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.standard__focus-visible",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2735,6 +3515,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2742,19 +3528,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.standard__active",
-      "channelsCompared": 80,
-      "channelsEqual": 73,
-      "pctExact": 1.0286458333333333,
-      "pctAA": 0.72265625,
+      "channelsCompared": 101,
+      "channelsEqual": 92,
+      "pctExact": 1.4029947916666667,
+      "pctAA": 0.7356770833333334,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2786,6 +3578,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-2",
           "channel": "align-content",
           "ours": "normal",
@@ -2793,19 +3591,25 @@
         },
         {
           "part": "label-2",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.dot__default",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2837,6 +3641,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2844,19 +3654,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.dot__hover",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2888,6 +3704,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2895,19 +3717,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.dot__focus-visible",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2939,6 +3767,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2946,19 +3780,25 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "warning.dot__active",
-      "channelsCompared": 78,
-      "channelsEqual": 71,
-      "pctExact": 1.26953125,
+      "channelsCompared": 99,
+      "channelsEqual": 90,
+      "pctExact": 1.5299479166666667,
       "pctAA": 0.8756510416666666,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "vertical-align",
@@ -2990,6 +3830,12 @@
           "theirs": "50%"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "badge-anchororigintopright",
           "channel": "align-content",
           "ours": "normal",
@@ -2997,9 +3843,9 @@
         },
         {
           "part": "badge-anchororigintopright",
-          "channel": "flex-wrap",
-          "ours": "nowrap",
-          "theirs": "wrap"
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     }

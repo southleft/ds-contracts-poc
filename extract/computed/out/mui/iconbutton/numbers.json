@@ -1,15 +1,15 @@
 {
   "component": "IconButton",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 72,
   "combos": 18,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 48
+    "root": 50
   },
   "folds": {
     "count": 10,
@@ -96,11 +96,11 @@
     }
   },
   "declared": {
-    "base": 11,
+    "base": 12,
     "state": 2
   },
   "codeOnly": {
-    "base": 2,
+    "base": 3,
     "state": 0,
     "overflowBindings": 0
   },
@@ -113,8 +113,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 48672,
-    "cellsMatched": 48672,
+    "cellsCompared": 48456,
+    "cellsMatched": 48456,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -125,89 +125,73 @@
     "topMismatchedChannels": []
   },
   "pixel": {
-    "pairs": 28,
-    "measured": 28,
+    "pairs": 72,
+    "measured": 72,
     "unscored": {
       "sizeMismatch": 0,
-      "noOriginal": 44,
+      "noOriginal": 0,
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
       "mean": 0,
       "max": 0,
-      "perfect": 28
+      "perfect": 72
     },
     "aa": {
       "mean": 0,
       "max": 0,
-      "perfect": 28
+      "perfect": 72
     },
     "worst": [
       {
-        "key": "medium.default.disabled__default",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.enabled__default",
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
-        "key": "medium.default.disabled__hover",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.enabled__hover",
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
-        "key": "medium.default.disabled__focus-visible",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.enabled__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
-        "key": "medium.default.disabled__active",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.enabled__active",
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
-        "key": "medium.primary.enabled__default",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.disabled__default",
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
-        "key": "medium.primary.enabled__hover",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.disabled__hover",
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
-        "key": "medium.primary.enabled__focus-visible",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.disabled__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
-        "key": "medium.primary.enabled__active",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "key": "small.default.disabled__active",
+        "pctExact": 0,
+        "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 89.32291666666667,
+    "computedPctEqual": 87.75,
     "rowsFullyEqual": 0,
     "rows": 72,
     "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
-    "pairs": 0
+    "pixelPerfectAA": 72,
+    "pairs": 72
   },
   "focusVisibleDriverMatched": 9,
   "focusVisibleDriverTotal": 18

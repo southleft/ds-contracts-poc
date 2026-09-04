@@ -1,82 +1,82 @@
 [
   {
     "key": "empty.enabled__default",
-    "pctExact": 0.6944444444444444,
-    "pctAA": 0.2857142857142857
+    "pctExact": 0.6527777777777778,
+    "pctAA": 0.251984126984127
   },
   {
     "key": "empty.enabled__hover",
-    "pctExact": 0.6944444444444444,
-    "pctAA": 0.2857142857142857
+    "pctExact": 0.6527777777777778,
+    "pctAA": 0.251984126984127
   },
   {
     "key": "empty.enabled__focus-visible",
-    "pctExact": 1.4861111111111112,
-    "pctAA": 0.5853174603174603
+    "pctExact": 1.4107142857142858,
+    "pctAA": 0.4742063492063492
   },
   {
     "key": "empty.enabled__active",
-    "pctExact": 1.4861111111111112,
-    "pctAA": 0.5853174603174603
+    "pctExact": 1.4107142857142858,
+    "pctAA": 0.4742063492063492
   },
   {
     "key": "empty.disabled__default",
-    "pctExact": 0.6845238095238095,
-    "pctAA": 0.2619047619047619
+    "pctExact": 0.6408730158730159,
+    "pctAA": 0.21825396825396826
   },
   {
     "key": "empty.disabled__hover",
-    "pctExact": 0.6845238095238095,
-    "pctAA": 0.2619047619047619
+    "pctExact": 0.6408730158730159,
+    "pctAA": 0.21825396825396826
   },
   {
     "key": "empty.disabled__focus-visible",
-    "pctExact": 0.6845238095238095,
-    "pctAA": 0.2619047619047619
+    "pctExact": 0.6408730158730159,
+    "pctAA": 0.21825396825396826
   },
   {
     "key": "empty.disabled__active",
-    "pctExact": 0.6845238095238095,
-    "pctAA": 0.2619047619047619
+    "pctExact": 0.6408730158730159,
+    "pctAA": 0.21825396825396826
   },
   {
     "key": "value.enabled__default",
-    "pctExact": 3.5972222222222223,
-    "pctAA": 1.7857142857142858
+    "pctExact": 3.4186507936507935,
+    "pctAA": 1.6646825396825398
   },
   {
     "key": "value.enabled__hover",
-    "pctExact": 3.5972222222222223,
-    "pctAA": 1.7857142857142858
+    "pctExact": 3.4186507936507935,
+    "pctAA": 1.6646825396825398
   },
   {
     "key": "value.enabled__focus-visible",
-    "pctExact": 3.6626984126984126,
-    "pctAA": 1.8075396825396826
+    "pctExact": 3.482142857142857,
+    "pctAA": 1.6666666666666667
   },
   {
     "key": "value.enabled__active",
-    "pctExact": 3.6626984126984126,
-    "pctAA": 1.8075396825396826
+    "pctExact": 3.482142857142857,
+    "pctAA": 1.6666666666666667
   },
   {
     "key": "value.disabled__default",
-    "pctExact": 3.5634920634920637,
-    "pctAA": 1.498015873015873
+    "pctExact": 3.357142857142857,
+    "pctAA": 1.3432539682539681
   },
   {
     "key": "value.disabled__hover",
-    "pctExact": 3.5634920634920637,
-    "pctAA": 1.498015873015873
+    "pctExact": 3.357142857142857,
+    "pctAA": 1.3432539682539681
   },
   {
     "key": "value.disabled__focus-visible",
-    "pctExact": 3.5634920634920637,
-    "pctAA": 1.498015873015873
+    "pctExact": 3.357142857142857,
+    "pctAA": 1.3432539682539681
   },
   {
     "key": "value.disabled__active",
-    "pctExact": 3.5634920634920637,
-    "pctAA": 1.498015873015873
+    "pctExact": 3.357142857142857,
+    "pctAA": 1.3432539682539681
   }
 ]

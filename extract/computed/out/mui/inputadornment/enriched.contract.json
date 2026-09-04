@@ -4,7 +4,7 @@
   "name": "InputAdornment",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI nested-instance round. The position axis provides stable start/end identity for TextField adornment instances. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI nested-instance round. The position axis provides stable start/end identity for TextField adornment instances. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -63,6 +63,7 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy p|Typography-body1.Typography-root — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "text-wrap-mode": "nowrap"
           },
@@ -79,10 +80,14 @@
         }
       },
       "declared": {
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "text-wrap-mode": "nowrap"
       },
       "tokens": {
         "color": "{imported.input-adornment.root.color}",
+        "letter-spacing": "{imported.input-adornment.root.letter-spacing}",
+        "line-height": "{imported.input-adornment.root.line-height}",
         "max-height": "{imported.input-adornment.root.max-height}"
       },
       "tokensByProp": [

@@ -14,6 +14,8 @@
     "root": {
       "declared": {
         "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "hidden",
         "overflow-y": "auto",
         "position": "absolute",
@@ -28,6 +30,8 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy ul|List-padding.List-root.Menu-list — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "position": "relative"
           },
           "parts": {
@@ -54,8 +58,8 @@
                 "font-size": "{imported.shared.size-16}",
                 "font-weight": "{imported.menu.label.font-weight}",
                 "left": "{imported.shared.size-0}",
-                "letter-spacing": "{imported.menu.label.letter-spacing}",
-                "line-height": "{imported.menu.label.line-height}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "outline-width": "{imported.shared.size-0}",
@@ -90,8 +94,8 @@
                 "font-size": "{imported.shared.size-16}",
                 "font-weight": "{imported.menu.label-2.font-weight}",
                 "left": "{imported.shared.size-0}",
-                "letter-spacing": "{imported.menu.label-2.letter-spacing}",
-                "line-height": "{imported.menu.label-2.line-height}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "outline-width": "{imported.shared.size-0}",
@@ -109,6 +113,8 @@
             "color": "{imported.shared.color-000000de}",
             "height": "{imported.menu.list-padding.height}",
             "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-width": "{imported.shared.size-0}",
@@ -129,6 +135,8 @@
         "box-shadow": "{imported.menu.root.box-shadow}",
         "color": "{imported.shared.color-000000de}",
         "height": "{imported.menu.root.height}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-16}",
         "min-width": "{imported.shared.size-16}",
         "outline-width": "{imported.shared.size-0}",

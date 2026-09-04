@@ -43,7 +43,9 @@
   "anatomy": {
     "root": {
       "declared": {
-        "display": "block"
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif"
       },
       "parts": {
         "backdrop-root": {
@@ -54,11 +56,16 @@
             "justify": "center"
           },
           "declared": {
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-property": "opacity",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
           },
           "tokens": {
             "background-color": "{imported.dialog.backdrop-root.background-color}",
+            "color": "{imported.shared.color-000000de}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }
@@ -84,6 +91,7 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle-root.Typography-h6.Typography-root — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif"
                   },
                   "tokens": {
@@ -103,6 +111,8 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
+                    "box-sizing": "border-box",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "overflow-x": "auto",
                     "overflow-y": "auto"
                   },
@@ -113,13 +123,14 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy p|DialogContentText-root.Typography-body1.Typography-root — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
+                        "box-sizing": "border-box",
                         "font-family": "Roboto, Helvetica, Arial, sans-serif"
                       },
                       "tokens": {
                         "color": "{imported.dialog.label-2.color}",
                         "font-size": "{imported.shared.size-16}",
                         "font-weight": "{imported.dialog.label-2.font-weight}",
-                        "letter-spacing": "{imported.dialog.label-2.letter-spacing}",
+                        "letter-spacing": "{imported.shared.size-0-15008}",
                         "line-height": "{imported.shared.size-24}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}"
@@ -129,6 +140,8 @@
                   "tokens": {
                     "color": "{imported.shared.color-000000de}",
                     "flex-grow": "{imported.dialog.dialogcontent-root.flex-grow}",
+                    "letter-spacing": "{imported.shared.size-0-15008}",
+                    "line-height": "{imported.shared.size-24}",
                     "padding-bottom": "{imported.dialog.dialogcontent-root.padding-bottom}",
                     "padding-left": "{imported.shared.size-24}",
                     "padding-right": "{imported.shared.size-24}"
@@ -136,6 +149,8 @@
                 }
               },
               "declared": {
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "overflow-x": "auto",
                 "overflow-y": "auto",
                 "position": "relative",
@@ -153,6 +168,8 @@
                 "box-shadow": "{imported.dialog.dialog-paper.box-shadow}",
                 "color": "{imported.shared.color-000000de}",
                 "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "margin-bottom": "{imported.shared.size-32}",
                 "margin-left": "{imported.shared.size-32}",
                 "margin-right": "{imported.shared.size-32}",
@@ -186,10 +203,15 @@
             }
           },
           "declared": {
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-property": "opacity",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
           },
           "tokens": {
+            "color": "{imported.shared.color-000000de}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-width": "{imported.shared.size-0}"
@@ -197,6 +219,9 @@
         }
       },
       "tokens": {
+        "color": "{imported.shared.color-000000de}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
         "z-index": "{imported.dialog.root.z-index}"

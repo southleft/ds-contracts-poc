@@ -4,7 +4,7 @@
   "name": "Paper",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -80,6 +80,8 @@
     "root": {
       "declared": {
         "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "transition-duration": "0.3s",
         "transition-property": "box-shadow",
         "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
@@ -87,6 +89,18 @@
       "content": {
         "prop": "children"
       },
+      "stylesWhen": [
+        {
+          "prop": "variant",
+          "equals": "outlined",
+          "styles": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        }
+      ],
       "tokens": {
         "background-color": "{imported.paper.root.background-color}",
         "border-bottom-left-radius": "{imported.shared.size-4}",
@@ -97,6 +111,8 @@
         "color": "{imported.paper.root.color}",
         "font-size": "{imported.paper.root.font-size}",
         "font-weight": "{imported.paper.root.font-weight}",
+        "letter-spacing": "{imported.paper.root.letter-spacing}",
+        "line-height": "{imported.paper.root.line-height}",
         "min-height": "{imported.paper.root.min-height}",
         "min-width": "{imported.paper.root.min-width}",
         "width": "{imported.paper.root.width}"

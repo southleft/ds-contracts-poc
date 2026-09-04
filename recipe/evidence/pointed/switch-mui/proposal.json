@@ -54,17 +54,20 @@
     "track.padding": {
       "value": 0,
       "from": "ledger",
-      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left"
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-left-width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale",
+      "formula": "track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2"
     },
     "thumb.offSize": {
       "value": 20,
       "from": "ledger",
-      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width"
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale",
+      "formula": "thumb width × its CSS scale (none → 1)"
     },
     "thumb.onSize": {
       "value": 20,
       "from": "ledger",
-      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width"
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.scale",
+      "formula": "thumb width × its CSS scale (none → 1)"
     },
     "thumb.travel": {
       "value": 20,
@@ -174,7 +177,8 @@
     "thumbShadow": {
       "value": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
       "from": "ledger",
-      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow"
+      "key": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale",
+      "formula": "the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)"
     },
     "hitClips": {
       "value": "true",

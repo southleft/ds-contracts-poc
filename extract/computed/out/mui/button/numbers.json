@@ -9,7 +9,7 @@
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 54
+    "root": 55
   },
   "folds": {
     "count": 8,
@@ -86,11 +86,11 @@
     }
   },
   "declared": {
-    "base": 10,
+    "base": 14,
     "state": 2
   },
   "codeOnly": {
-    "base": 6,
+    "base": 3,
     "state": 0,
     "overflowBindings": 10
   },
@@ -104,8 +104,8 @@
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 339192,
-    "cellsMatched": 338520,
-    "pct": 99.80188211986132,
+    "cellsMatched": 338464,
+    "pct": 99.78537229651643,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -114,16 +114,16 @@
     ],
     "topMismatchedChannels": [
       [
-        "perspective-origin",
-        448
-      ],
-      [
         "inline-size",
-        112
+        280
       ],
       [
         "width",
-        112
+        280
+      ],
+      [
+        "perspective-origin",
+        168
       ]
     ]
   },
@@ -136,60 +136,60 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.04239521329365076,
-      "max": 3.0078125,
-      "perfect": 455
+      "mean": 1.2434443721064803,
+      "max": 5.677083333333333,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 504
+      "mean": 0.4035037409060847,
+      "max": 0.5305989583333334,
+      "perfect": 0
     },
     "worst": [
       {
-        "key": "contained.primary.medium.enabled__focus-visible",
-        "pctExact": 3.0078125,
-        "pctAA": 0
+        "key": "contained.inherit.small.enabled__hover",
+        "pctExact": 1.4192708333333333,
+        "pctAA": 0.5305989583333334
       },
       {
-        "key": "contained.success.large.enabled__active",
-        "pctExact": 3.0078125,
-        "pctAA": 0
+        "key": "contained.inherit.small.enabled__active",
+        "pctExact": 1.2337239583333333,
+        "pctAA": 0.5305989583333334
       },
       {
-        "key": "contained.success.large.enabled__focus-visible",
-        "pctExact": 1.8684895833333333,
-        "pctAA": 0
+        "key": "outlined.inherit.small.enabled__default",
+        "pctExact": 1.2337239583333333,
+        "pctAA": 0.5305989583333334
       },
       {
-        "key": "contained.error.large.enabled__focus-visible",
-        "pctExact": 1.85546875,
-        "pctAA": 0
+        "key": "outlined.inherit.small.enabled__hover",
+        "pctExact": 1.2337239583333333,
+        "pctAA": 0.5305989583333334
       },
       {
-        "key": "contained.primary.large.enabled__active",
-        "pctExact": 1.5657552083333333,
-        "pctAA": 0
+        "key": "outlined.inherit.small.enabled__focus-visible",
+        "pctExact": 1.2337239583333333,
+        "pctAA": 0.5305989583333334
       },
       {
-        "key": "contained.secondary.medium.enabled__focus-visible",
-        "pctExact": 1.5234375,
-        "pctAA": 0
+        "key": "outlined.inherit.small.enabled__active",
+        "pctExact": 1.2337239583333333,
+        "pctAA": 0.5305989583333334
       },
       {
-        "key": "contained.primary.large.enabled__focus-visible",
-        "pctExact": 1.3313802083333333,
-        "pctAA": 0
+        "key": "contained.secondary.small.enabled__active",
+        "pctExact": 2.216796875,
+        "pctAA": 0.5240885416666666
       },
       {
-        "key": "contained.error.medium.enabled__focus-visible",
-        "pctExact": 1.2369791666666667,
-        "pctAA": 0
+        "key": "contained.error.small.enabled__focus-visible",
+        "pctExact": 1.5462239583333333,
+        "pctAA": 0.5240885416666666
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 86.35361552028219,
+    "computedPctEqual": 89.63203463203463,
     "rowsFullyEqual": 0,
     "rows": 504,
     "pixelPerfectExact": 0,

@@ -5,7 +5,7 @@
   "provenance": {
     "package": "@mui/material",
     "version": "9.2.0",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
   },
   "roles": {
     "title": "idx:1",
@@ -61,7 +61,7 @@
     "icon.viewBox": {
       "value": 24,
       "from": "set",
-      "why": "SvgIcon.js viewBox 0 0 24 24"
+      "why": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)"
     },
     "titleFontSize": {
       "value": 14,
@@ -251,7 +251,7 @@
     {
       "path": "icon.viewBox",
       "why": "the package's viewBox is not a computed channel (the capture asset carries the RENDERED size there); give --set icon.viewBox=<size | x y w h> --why with the package citation",
-      "evidence": "SvgIcon.js viewBox 0 0 24 24",
+      "evidence": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)",
       "value": 24
     }
   ],
@@ -264,7 +264,7 @@
     "y": 0,
     "width": 24,
     "height": 24,
-    "citation": "SvgIcon.js viewBox 0 0 24 24"
+    "citation": "MuiSvgIcon viewBox 0 0 24 24 (recipe/sandboxes/input-field-mui/node_modules/@mui/material/SvgIcon/SvgIcon.js default viewBox)"
   },
   "typography": {
     "family": "Roboto",

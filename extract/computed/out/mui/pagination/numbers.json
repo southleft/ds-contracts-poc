@@ -9,23 +9,23 @@
   "elementsPerCapture": 17,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 18,
-    "tablepagination-toolbar": 25,
-    "tablepagination-spacer": 16,
-    "label": 20,
-    "inputbase-root": 29,
-    "label-2": 32,
-    "select-nativeinput": 35,
-    "icon": 35,
-    "part-0-2-2-0": 25,
-    "label-3": 20,
-    "tablepagination-actions": 16,
-    "buttonbase-root": 50,
-    "icon-2": 27,
-    "part-0-4-0-0-0": 24,
-    "buttonbase-root-2": 50,
-    "icon-3": 27,
-    "part-0-4-1-0-0": 24
+    "root": 23,
+    "tablepagination-toolbar": 30,
+    "tablepagination-spacer": 21,
+    "label": 22,
+    "inputbase-root": 30,
+    "label-2": 33,
+    "select-nativeinput": 36,
+    "icon": 37,
+    "part-0-2-2-0": 27,
+    "label-3": 22,
+    "tablepagination-actions": 21,
+    "buttonbase-root": 51,
+    "icon-2": 29,
+    "part-0-4-0-0-0": 26,
+    "buttonbase-root-2": 51,
+    "icon-3": 29,
+    "part-0-4-1-0-0": 26
   },
   "folds": {
     "count": 160,
@@ -991,8 +991,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 42,
-    "mintedLeavesFolded": 46
+    "mintedLeavesUnfolded": 43,
+    "mintedLeavesFolded": 47
   },
   "bound": {
     "cellsChecked": 0,
@@ -1001,22 +1001,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 46,
-    "baseBindings": 156,
+    "leaves": 47,
+    "baseBindings": 164,
     "stateBindings": 2,
     "byShape": {
-      "uniform": 158,
+      "uniform": 166,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 56,
+    "base": 67,
     "state": 0
   },
   "codeOnly": {
-    "base": 13,
+    "base": 25,
     "state": 0,
     "overflowBindings": 2
   },
@@ -1030,8 +1030,8 @@
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 45764,
-    "cellsMatched": 45720,
-    "pct": 99.90385455816799,
+    "cellsMatched": 45744,
+    "pct": 99.95629752644,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -1040,24 +1040,16 @@
     ],
     "topMismatchedChannels": [
       [
-        "perspective-origin",
-        12
-      ],
-      [
-        "inline-size",
-        8
-      ],
-      [
-        "width",
-        8
-      ],
-      [
         "block-size",
         8
       ],
       [
         "height",
         8
+      ],
+      [
+        "perspective-origin",
+        4
       ]
     ]
   },
@@ -1070,40 +1062,40 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.2717391304347826,
-      "max": 0.2717391304347826,
+      "mean": 1.951086956521739,
+      "max": 1.951086956521739,
       "perfect": 0
     },
     "aa": {
-      "mean": 0.11956521739130435,
-      "max": 0.11956521739130435,
+      "mean": 0.6992753623188406,
+      "max": 0.6992753623188406,
       "perfect": 0
     },
     "worst": [
       {
         "key": "__default",
-        "pctExact": 0.2717391304347826,
-        "pctAA": 0.11956521739130435
+        "pctExact": 1.951086956521739,
+        "pctAA": 0.6992753623188406
       },
       {
         "key": "__hover",
-        "pctExact": 0.2717391304347826,
-        "pctAA": 0.11956521739130435
+        "pctExact": 1.951086956521739,
+        "pctAA": 0.6992753623188406
       },
       {
         "key": "__focus-visible",
-        "pctExact": 0.2717391304347826,
-        "pctAA": 0.11956521739130435
+        "pctExact": 1.951086956521739,
+        "pctAA": 0.6992753623188406
       },
       {
         "key": "__active",
-        "pctExact": 0.2717391304347826,
-        "pctAA": 0.11956521739130435
+        "pctExact": 1.951086956521739,
+        "pctAA": 0.6992753623188406
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 93.96984924623115,
+    "computedPctEqual": 90.70796460176992,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

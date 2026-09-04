@@ -1,242 +1,242 @@
 [
   {
     "key": "error.standard__default",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.9498697916666667
   },
   {
     "key": "error.standard__hover",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.9498697916666667
   },
   {
     "key": "error.standard__focus-visible",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.9498697916666667
   },
   {
     "key": "error.standard__active",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.9498697916666667
   },
   {
     "key": "error.filled__default",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.420572916666667,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "error.filled__hover",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.420572916666667,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "error.filled__focus-visible",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.420572916666667,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "error.filled__active",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.420572916666667,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "error.outlined__default",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.962890625
   },
   {
     "key": "error.outlined__hover",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.962890625
   },
   {
     "key": "error.outlined__focus-visible",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.962890625
   },
   {
     "key": "error.outlined__active",
-    "pctExact": 0.4752604166666667,
-    "pctAA": 0.22135416666666666
+    "pctExact": 4.267578125,
+    "pctAA": 1.962890625
   },
   {
     "key": "warning.standard__default",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "warning.standard__hover",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "warning.standard__focus-visible",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "warning.standard__active",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "warning.filled__default",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.0833333333333335
   },
   {
     "key": "warning.filled__hover",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.0833333333333335
   },
   {
     "key": "warning.filled__focus-visible",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.0833333333333335
   },
   {
     "key": "warning.filled__active",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.0833333333333335
   },
   {
     "key": "warning.outlined__default",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "warning.outlined__hover",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "warning.outlined__focus-visible",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "warning.outlined__active",
-    "pctExact": 0.4915364583333333,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.283854166666667,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "info.standard__default",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "info.standard__hover",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "info.standard__focus-visible",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "info.standard__active",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9759114583333333
   },
   {
     "key": "info.filled__default",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "info.filled__hover",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "info.filled__focus-visible",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "info.filled__active",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.436848958333333,
+    "pctAA": 2.1223958333333335
   },
   {
     "key": "info.outlined__default",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9889322916666667
   },
   {
     "key": "info.outlined__hover",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9889322916666667
   },
   {
     "key": "info.outlined__focus-visible",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9889322916666667
   },
   {
     "key": "info.outlined__active",
-    "pctExact": 0.48828125,
-    "pctAA": 0.24739583333333334
+    "pctExact": 4.280598958333333,
+    "pctAA": 1.9889322916666667
   },
   {
     "key": "success.standard__default",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.97265625
   },
   {
     "key": "success.standard__hover",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.97265625
   },
   {
     "key": "success.standard__focus-visible",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.97265625
   },
   {
     "key": "success.standard__active",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.97265625
   },
   {
     "key": "success.filled__default",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.440104166666667,
+    "pctAA": 2.1126302083333335
   },
   {
     "key": "success.filled__hover",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.440104166666667,
+    "pctAA": 2.1126302083333335
   },
   {
     "key": "success.filled__focus-visible",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.440104166666667,
+    "pctAA": 2.1126302083333335
   },
   {
     "key": "success.filled__active",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.440104166666667,
+    "pctAA": 2.1126302083333335
   },
   {
     "key": "success.outlined__default",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.982421875
   },
   {
     "key": "success.outlined__hover",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.982421875
   },
   {
     "key": "success.outlined__focus-visible",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.982421875
   },
   {
     "key": "success.outlined__active",
-    "pctExact": 0.498046875,
-    "pctAA": 0.244140625
+    "pctExact": 4.290364583333333,
+    "pctAA": 1.982421875
   }
 ]
