@@ -103,8 +103,8 @@
       "sha256": "f32a546ef77611a1f56f423756b6895d0fe506878f9af0c2cbc334c8bab1b4fb"
     },
     "recipe/combobox-figma-writer.ts": {
-      "bytes": 34340,
-      "sha256": "b01044be79dc8d06e9a71a13dc264d294a02eaef5013fa7e9b72cfee52a35fe1"
+      "bytes": 34352,
+      "sha256": "1e0bf72c76209e8635ade569e51673a7af40dd010283f5a6eddff7d61ae27925"
     },
     "recipe/figma-property-normalizer-v8.ts": {
       "bytes": 11009,
@@ -119,7 +119,7 @@
       "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
     }
   },
-  "hashSetSha256": "e1a782378482edc3a72adf0da55644d14ee81763d2acb69ebd16f4b10f578e7c",
+  "hashSetSha256": "955fa712eeba5de8df11eb4b413739482e85c852dc28202d82a19f8e6c20726b",
   "counts": {
     "sources": 2,
     "variants": 144,

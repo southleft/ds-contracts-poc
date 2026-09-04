@@ -431,12 +431,31 @@ jobs:
       - name: recipe:combobox:live:v42:check (the CURRENT combobox lineage — library-named overlay chrome remint; generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:combobox:live:v42:check
+      # THE ANTECEDENT HALF, RUN UNCONDITIONALLY. The composite above is gated on
+      # a git-ignored private input, so CI shows it SKIPPED and only a machine
+      # holding the attestations ever runs it. On 2026-09-04 that turned out to
+      # mean `recipe:combobox:live:v42:check` had been RED since 2026-09-02 and
+      # no lane could see it: the typecheck round (9fdfcb9b2) added a 12-byte
+      # `as string` cast to recipe/combobox-figma-writer.ts, and the antecedent
+      # index that pins that file's bytes was never re-recorded. The
+      # `generated:check` half needs NO private input — measured, all four pass
+      # with private/ moved aside — so it runs here for everyone, and a pinned
+      # artifact drifting can no longer hide behind a skipped step.
+      - name: recipe:combobox:live:v42:generated:check (the antecedent's pinned artifacts, no private input needed)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:combobox:live:v42:generated:check
       - name: recipe:table:live:v38:check (the CURRENT table lineage — the cell rule draws one edge; v33 and v34 were superseded before minting because their artifacts changed after authorization, which their own guards refused; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:table:live:v38:check
+      - name: recipe:table:live:v38:generated:check (the antecedent's pinned artifacts, no private input needed)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:table:live:v38:generated:check
       - name: recipe:calendar:live:v50:check (the CURRENT calendar lineage — the one Calendar V50 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:calendar:live:v50:check
+      - name: recipe:calendar:live:v50:generated:check (the antecedent's pinned artifacts, no private input needed)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:calendar:live:v50:generated:check
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check
@@ -446,6 +465,9 @@ jobs:
       - name: recipe:input-field:live:v85:check (cleanup-on-failure-only; hashed v84 scene-readback and v19 writer frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:input-field:live:v85:check
+      - name: recipe:input-field:live:v85:generated:check (the antecedent's pinned artifacts, no private input needed)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v85:generated:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:check
