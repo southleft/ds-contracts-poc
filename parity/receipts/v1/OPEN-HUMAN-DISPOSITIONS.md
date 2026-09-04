@@ -154,6 +154,109 @@ deploy itself (option 1, `V1-REL-02`) waits for a release commit. **Closed.**
 
 ---
 
+---
+
+## AUD-U?? — the sync spine has been red for 111 consecutive runs
+
+**Not in the v1 definition.** `docs/26-v1-definition.md` names no sync-spine row,
+so this does not move the readiness tally. It is here because a lane that is red
+on every commit stops being read, and this one has been red on every commit for
+ten days.
+
+**Measured 2026-09-04**, from the lane's own output on `a59635b4a` and from
+`sync/ledger.json` on this commit:
+
+| fact | value |
+| --- | --- |
+| last green run | **2026-08-25T02:43:59Z** |
+| consecutive failing runs since | **111** |
+| rows the spine reports undecided | **117** |
+| ledger records | 128 |
+| of those, carrying a recorded decision | 59 (53 adopt, 3 pending-reapply, 2 pending-reconcile, 1 pending-restamp) |
+| `sync/ledger.json` last changed | **2026-08-23** (`c8c1838db`) |
+
+The 117 split cleanly, and the split is the whole story:
+
+- **61 rows have never had a decision** — 34 conflict, 14 code-ahead, 13
+  canvas-ahead.
+- **56 rows had one, and the facts moved out from under it.** Against 59
+  recorded decisions in the ledger, that is very nearly all of them: the ledger
+  has not been touched since 2026-08-23, while captures and contracts have moved
+  through the recipe-IR pivot and the re-capture rounds since.
+
+By library: ds 42, mui 31, astryx 13, carbon 10, altitude 8, polaris 8,
+flowbite 5.
+
+**The lane is not broken; it is reporting correctly.** Its contract is exactly
+this — exit 1 means "a row needs a human decision that is not yet recorded, or
+its recorded decision has gone stale". It is doing that 117 times.
+
+**Only you can close these, and not only because they are judgements.** Each
+`adopt` / `--decide` is a per-component choice about which side is ahead, and
+the pending kinds resolve by **writing to connected Figma files** —
+`flowbite.alert` names file `GnQnjSNBXtgtd2Ht0Hs1C8`, not the Scratch file. I am
+constrained to the Scratch file `byMp6lt0Ij9b2QbkDGFwBh` and have written
+nothing here.
+
+**My recommendation, and it is not "decide 117 things".** Two of these are
+different problems wearing one hat:
+
+1. **The 56 stale ones may be mechanical, and that is a HYPOTHESIS, not a
+   measurement.** The shape fits — the ledger froze on 2026-08-23 and the
+   captures under it moved afterwards — so a decision could be stale because its
+   evidence hash changed rather than because anyone changed their mind. I have
+   NOT verified that, because verifying it means re-observing against the
+   connected Figma files and refreshing a ledger of your decisions, and I will
+   not rewrite that unprompted. If the hypothesis holds, most of the 56 are
+   ledger maintenance rather than 56 judgements; if it does not, they are 56
+   real re-decisions. Nobody knows which until it is run.
+2. **The 61 undecided ones are the real backlog**, and 42 of them are `ds.*` —
+   this repository's own contracts, not a third-party library.
+
+What I would do, if you want it done without inventing a judgement: refresh the
+ledger and re-observe, so the count that reaches you is the number of decisions
+you actually still owe rather than 117. Say the word and I will do the refresh
+and report the residue; I will not record a decision.
+
+---
+
+## The full lane has produced no green verdict in its last 100 runs
+
+**Measured 2026-09-04** over `gh run list --workflow full.yml --limit 100`,
+spanning 2026-09-01T05:08Z to 2026-09-04T06:41Z:
+
+| conclusion | runs |
+| --- | ---: |
+| success | **0** |
+| cancelled (superseded while still pending — no job ever assigned) | 73 |
+| failure (ran, and failed) | 25 |
+| still running | 2 |
+
+Two separate mechanisms, and only one is a defect:
+
+- **The 73 are a consequence of push cadence, not a bug.** `cancel-in-progress`
+  is `false` on main by design, so a full run holds the concurrency group;
+  GitHub keeps at most one *pending* run per group, so every push during a long
+  run supersedes the one waiting. On a branch pushed every ten minutes against a
+  lane that takes about **1h40m**, almost nothing gets a slot.
+- **The 25 are real.** The most recent named two failing steps:
+  `extract:computed:geometry:census` and `v1:readiness`. The census half is
+  closed in this commit. The readiness half is red while any docs/26 row is red.
+
+**One thing worth an owner's eye.** In the last full run that actually executed,
+the eval suite ran twice: once as its own step (03:18:21→03:38:03) and again
+inside `v1:readiness` (04:40:39→04:59:51, a suite-length step). `--trust-lanes`
+exists to cite lane steps rather than re-run them, and `eval:carried:check` was
+only wired into the lane map in the preceding commit — so this may already be
+better, and it has not been measured on a completed run yet. Twenty minutes of a
+hundred-minute lane is worth confirming.
+
+**What this means for every "the gates are green" claim in this repository:**
+it should be read as *the fast lane is green*. Fast, security and catalog-visual
+produce verdicts; full has not produced one in three days.
+
+---
+
 ## What this unblocks, and what it does not
 
 Closing both rows **does** now turn `V1-REL-01` green, and it is the last row
