@@ -130,7 +130,20 @@ jobs:
     # 537022b0 and a merge went through on a cancelled lane — the watcher
     # counted failures, not non-successes. Both are fixed: the budget here,
     # the watcher in the session that merges.
-    timeout-minutes: 120
+    #
+    # 2026-09-04: 120 → 180, the SAME defect one size up, and this time with the
+    # arithmetic written down. The remeasure has grown with the corpus: the
+    # ~37 min above is now 58 (run 33831960996, 03:41:18→04:39:03, 139
+    # components). That run finished in 113.9 minutes — 03:06:03→04:59:54 —
+    # against a 120 budget, i.e. it fit with six minutes to spare, on a fast
+    # runner. Run 33845428922 reached the same step 48 minutes in rather than
+    # 35, which puts 48 + 58 + ~19 for readiness at about 125 and over the
+    # cliff. The last 100 runs of this lane contain ZERO successes; a lane that
+    # only completes when the runner is quick cannot produce a verdict, and a
+    # lane that produces no verdict is not a gate. 180 leaves real headroom
+    # instead of a coin flip, and the step timings above are the thing to
+    # re-measure before trimming it again.
+    timeout-minutes: 180
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
