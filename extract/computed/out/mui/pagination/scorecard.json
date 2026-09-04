@@ -2,13 +2,14 @@
   "component": "Pagination",
   "generatedBy": "extract/computed/gate.ts",
   "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 796,
-    "cellsEqual": 748,
-    "pctEqual": 93.96984924623115,
+    "cellsCompared": 904,
+    "cellsEqual": 820,
+    "pctEqual": 90.70796460176992,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -22,51 +23,71 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 0.39311594202898553,
-    "meanAA": 0.1068840579710145,
-    "maxAA": 0.286231884057971
+    "meanExact": 1.8532608695652173,
+    "meanAA": 0.18478260869565216,
+    "maxAA": 0.3641304347826087
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 46,
-    "mintedLeavesUnfolded": 42,
-    "baseBindings": 156,
+    "mintedLeaves": 47,
+    "mintedLeavesUnfolded": 43,
+    "baseBindings": 164,
     "stateBindings": 2,
-    "codeOnlyChannels": 13,
+    "codeOnlyChannels": 25,
     "overflowBindings": 2,
     "folds": 160
   },
   "worstRows": [
     {
       "key": "__focus-visible",
-      "pctAA": 0.286231884057971,
-      "pctExact": 0.8822463768115942,
-      "channelsMismatched": 12
+      "pctAA": 0.3641304347826087,
+      "pctExact": 2.342391304347826,
+      "channelsMismatched": 21
     },
     {
       "key": "__default",
-      "pctAA": 0.04710144927536232,
-      "pctExact": 0.23007246376811594,
-      "channelsMismatched": 12
+      "pctAA": 0.125,
+      "pctExact": 1.690217391304348,
+      "channelsMismatched": 21
     },
     {
       "key": "__hover",
-      "pctAA": 0.04710144927536232,
-      "pctExact": 0.23007246376811594,
-      "channelsMismatched": 12
+      "pctAA": 0.125,
+      "pctExact": 1.690217391304348,
+      "channelsMismatched": 21
     },
     {
       "key": "__active",
-      "pctAA": 0.04710144927536232,
-      "pctExact": 0.23007246376811594,
-      "channelsMismatched": 12
+      "pctAA": 0.125,
+      "pctExact": 1.690217391304348,
+      "channelsMismatched": 21
     }
   ],
   "topMismatchedChannels": [
     [
+      "root.text-size-adjust",
+      4
+    ],
+    [
+      "tablepagination-toolbar.text-size-adjust",
+      4
+    ],
+    [
       "tablepagination-spacer.flex-basis",
+      4
+    ],
+    [
+      "tablepagination-spacer.text-size-adjust",
+      4
+    ],
+    [
+      "label.text-size-adjust",
+      4
+    ],
+    [
+      "inputbase-root.text-size-adjust",
       4
     ],
     [
@@ -79,6 +100,10 @@
     ],
     [
       "label-2.text-align-last",
+      4
+    ],
+    [
+      "label-2.text-size-adjust",
       4
     ],
     [
@@ -100,35 +125,35 @@
     [
       "select-nativeinput.border-right-style",
       4
-    ],
-    [
-      "select-nativeinput.border-right-width",
-      4
-    ],
-    [
-      "select-nativeinput.border-top-style",
-      4
-    ],
-    [
-      "select-nativeinput.border-top-width",
-      4
     ]
   ],
   "namedLosses": [
     "overflow: label-2.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label-2.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablepagination-toolbar.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: tablepagination-spacer.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablepagination-spacer.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.text-align-last — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: select-nativeinput.border-bottom-style — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: select-nativeinput.border-left-style — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: select-nativeinput.border-right-style — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: select-nativeinput.border-top-style — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: select-nativeinput.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablepagination-actions.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: buttonbase-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: buttonbase-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: buttonbase-root-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: buttonbase-root-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
@@ -137,20 +162,57 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1492,
-    "divergent": []
+    "leavesAdded": 1946,
+    "divergent": [
+      {
+        "token": "imported.pagination.tablepagination-spacer.width",
+        "fresh": "62.6094px",
+        "shipped": "67.0312px",
+        "resolvedEqual": false
+      }
+    ]
   },
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 199,
-      "channelsEqual": 187,
-      "pctExact": 0.23007246376811594,
-      "pctAA": 0.04710144927536232,
+      "channelsCompared": 226,
+      "channelsEqual": 205,
+      "pctExact": 1.690217391304348,
+      "pctAA": 0.125,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-toolbar",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "tablepagination-spacer",
           "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-spacer",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputbase-root",
+          "channel": "text-size-adjust",
           "ours": "auto",
           "theirs": "100%"
         },
@@ -171,6 +233,12 @@
           "channel": "text-align-last",
           "ours": "auto",
           "theirs": "right"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "select-nativeinput",
@@ -219,19 +287,67 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "2px"
+        },
+        {
+          "part": "select-nativeinput",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-actions",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "__hover",
-      "channelsCompared": 199,
-      "channelsEqual": 187,
-      "pctExact": 0.23007246376811594,
-      "pctAA": 0.04710144927536232,
+      "channelsCompared": 226,
+      "channelsEqual": 205,
+      "pctExact": 1.690217391304348,
+      "pctAA": 0.125,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-toolbar",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "tablepagination-spacer",
           "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-spacer",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputbase-root",
+          "channel": "text-size-adjust",
           "ours": "auto",
           "theirs": "100%"
         },
@@ -252,6 +368,12 @@
           "channel": "text-align-last",
           "ours": "auto",
           "theirs": "right"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "select-nativeinput",
@@ -300,19 +422,67 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "2px"
+        },
+        {
+          "part": "select-nativeinput",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-actions",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 199,
-      "channelsEqual": 187,
-      "pctExact": 0.8822463768115942,
-      "pctAA": 0.286231884057971,
+      "channelsCompared": 226,
+      "channelsEqual": 205,
+      "pctExact": 2.342391304347826,
+      "pctAA": 0.3641304347826087,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-toolbar",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "tablepagination-spacer",
           "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-spacer",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputbase-root",
+          "channel": "text-size-adjust",
           "ours": "auto",
           "theirs": "100%"
         },
@@ -333,6 +503,12 @@
           "channel": "text-align-last",
           "ours": "auto",
           "theirs": "right"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "select-nativeinput",
@@ -381,19 +557,67 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "2px"
+        },
+        {
+          "part": "select-nativeinput",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-actions",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "__active",
-      "channelsCompared": 199,
-      "channelsEqual": 187,
-      "pctExact": 0.23007246376811594,
-      "pctAA": 0.04710144927536232,
+      "channelsCompared": 226,
+      "channelsEqual": 205,
+      "pctExact": 1.690217391304348,
+      "pctAA": 0.125,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-toolbar",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "tablepagination-spacer",
           "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-spacer",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputbase-root",
+          "channel": "text-size-adjust",
           "ours": "auto",
           "theirs": "100%"
         },
@@ -414,6 +638,12 @@
           "channel": "text-align-last",
           "ours": "auto",
           "theirs": "right"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "select-nativeinput",
@@ -462,6 +692,24 @@
           "channel": "border-top-width",
           "ours": "0px",
           "theirs": "2px"
+        },
+        {
+          "part": "select-nativeinput",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablepagination-actions",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     }

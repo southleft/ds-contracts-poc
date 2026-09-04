@@ -10,10 +10,12 @@
   "mount": {
     "imports": [
       "import { ThemeProvider, createTheme } from '@mui/material/styles';",
-      "const __cssVarsTheme = createTheme({ cssVariables: true, colorSchemes: { light: true } });"
+      "const __cssVarsTheme = createTheme({ cssVariables: true, colorSchemes: { light: true } });",
+      "import CssBaseline from '@mui/material/CssBaseline';"
     ],
-    "wrapperOpen": "<ThemeProvider theme={__cssVarsTheme}>",
-    "wrapperClose": "</ThemeProvider>"
+    "wrapperOpen": "<ThemeProvider theme={__cssVarsTheme}><CssBaseline />",
+    "wrapperClose": "</ThemeProvider>",
+    "__cssBaselineNote": "2026-09-04: CssBaseline added. ThemeProvider alone puts the theme on the React context but NOT on the document, so any MUI component that inherits its face from body \u2014 Link renders Typography with variant=\"inherit\" \u2014 fell to the UA default and captured in Times. Measured before this change: 13 of 32 mui captures carried no Roboto stack in any font-family read, and mui was the ONLY library in the corpus with any component whose font-family reads were entirely UA defaults. Every real MUI application mounts CssBaseline; the capture now mounts what the library is used with."
   },
   "tokens": {
     "dtcg": [
@@ -23,7 +25,7 @@
     "minted": "examples/mui/tokens/mui-minted.dtcg.json"
   },
   "fonts": {
-    "__note": "FC-FONT-SUBSTRATE closure (the altitude precedent). NOT A GUESS: MUI's own typography declaration — @mui/material createTypography defaults fontFamily '\"Roboto\", \"Helvetica\", \"Arial\", sans-serif' with fontWeightRegular 400 / fontWeightMedium 500 / fontWeightBold 700 (examples/mui/.mui-sandbox/node_modules/@mui/material/styles/createTypography.js:23-30), and every committed captured truth spells the stack 'Roboto, Helvetica, Arial, sans-serif'. fontWeightLight 300 exists but only h1/h2 render it and no captured component mounts either. Files committed under extract/computed/fonts/roboto/ from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox/package.json). Inlined as data: URIs — no network at render or check time; same files + same pinned Chromium => same rasters on the recording platform.",
+    "__note": "FC-FONT-SUBSTRATE closure (the altitude precedent). NOT A GUESS: MUI's own typography declaration \u2014 @mui/material createTypography defaults fontFamily '\"Roboto\", \"Helvetica\", \"Arial\", sans-serif' with fontWeightRegular 400 / fontWeightMedium 500 / fontWeightBold 700 (examples/mui/.mui-sandbox/node_modules/@mui/material/styles/createTypography.js:23-30), and every committed captured truth spells the stack 'Roboto, Helvetica, Arial, sans-serif'. fontWeightLight 300 exists but only h1/h2 render it and no captured component mounts either. Files committed under extract/computed/fonts/roboto/ from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox/package.json). Inlined as data: URIs \u2014 no network at render or check time; same files + same pinned Chromium => same rasters on the recording platform.",
     "faces": [
       {
         "family": "Roboto",
@@ -119,7 +121,7 @@
       "blockStage": true
     },
     {
-      "__note": "STATE-PLANE PROJECTION ROUND — `checked` RECLASSIFIED from a stateProp to a VARIANT AXIS (the Checkbox/Accordion precedent). `checked` is not a pseudo-class plane: it is a rendering a PROP selects, and it was outside the closed state vocabulary, so its captured deltas minted `<channel>-state-checked` names that re-parsed as nothing and that no emitter rendered. As an axis the same deltas become BASE-PLANE per-axis facts, the Figma variant grid picks the axis up, and the checked thumb's translate rides the overlay-cluster synthetic translate-x/y door.",
+      "__note": "STATE-PLANE PROJECTION ROUND \u2014 `checked` RECLASSIFIED from a stateProp to a VARIANT AXIS (the Checkbox/Accordion precedent). `checked` is not a pseudo-class plane: it is a rendering a PROP selects, and it was outside the closed state vocabulary, so its captured deltas minted `<channel>-state-checked` names that re-parsed as nothing and that no emitter rendered. As an axis the same deltas become BASE-PLANE per-axis facts, the Figma variant grid picks the axis up, and the checked thumb's translate rides the overlay-cluster synthetic translate-x/y door.",
       "name": "Switch",
       "importName": "Switch",
       "contract": "examples/mui/contracts-seed/switch.contract.json",
@@ -343,7 +345,7 @@
       "callbackProps": [
         "onClose"
       ],
-      "__note": "2026-09-02 (person's step for dialog@1): the mount composes DialogTitle 'Dialog title' + DialogContent ⊃ DialogContentText 'Dialog body copy for the molecule round.' — the archetype's shape (a title over a body) — so a proposal read from this capture is scored against a reference of the same shape; the earlier DialogContent-only mount is what the hand row was named against.",
+      "__note": "2026-09-02 (person's step for dialog@1): the mount composes DialogTitle 'Dialog title' + DialogContent \u2283 DialogContentText 'Dialog body copy for the molecule round.' \u2014 the archetype's shape (a title over a body) \u2014 so a proposal read from this capture is scored against a reference of the same shape; the earlier DialogContent-only mount is what the hand row was named against.",
       "childrenSpec": [
         {
           "importName": "DialogTitle",
@@ -361,7 +363,7 @@
       ]
     },
     {
-      "__note": "ORGANISM ROUND — Checkbox. Tri-state on ONE axis: MUI spells the tri-state as TWO independent booleans (checked + indeterminate), but the svg-content promotion carries per-value glyph assets only when the markup is a function of exactly ONE axis (svg-content-multi-axis refusal otherwise) — so the axis value expands into several library props through the $props grammar. All THREE glyphs (unchecked box, checked box, indeterminate dash) become distinct assets. disableRipple pinned (the Button/Switch precedent — the ripple never settles).",
+      "__note": "ORGANISM ROUND \u2014 Checkbox. Tri-state on ONE axis: MUI spells the tri-state as TWO independent booleans (checked + indeterminate), but the svg-content promotion carries per-value glyph assets only when the markup is a function of exactly ONE axis (svg-content-multi-axis refusal otherwise) \u2014 so the axis value expands into several library props through the $props grammar. All THREE glyphs (unchecked box, checked box, indeterminate dash) become distinct assets. disableRipple pinned (the Button/Switch precedent \u2014 the ripple never settles).",
       "name": "Checkbox",
       "importName": "Checkbox",
       "contract": "examples/mui/contracts-seed/checkbox.contract.json",
@@ -400,7 +402,7 @@
       }
     },
     {
-      "__note": "ORGANISM ROUND — TablePagination (component='div', the composition every real table ships). count/rowsPerPage/page pinned so the rendered text is deterministic ('1–3 of 3'). The rows-per-page Select is pinned CONTROLLED-CLOSED (slotProps.select.open=false): the census active-driver's mouse.down lands on it, opens the MUI menu, and the select icon's 180° open rotation PERSISTED into the next sweep — a witnessed double-run byte-identity refusal (same determinism-pin class as Menu/Dialog transitionDuration:0). NAMED RESIDUE: at count=3 / rowsPerPage=10 / page=0 BOTH arrow IconButtons are forced Mui-disabled by the component itself — the ENABLED arrow colors are unobservable at this combo and are NOT in the captured truth (a paging axis would need a second fixed combo; deliberately out of v1).",
+      "__note": "ORGANISM ROUND \u2014 TablePagination (component='div', the composition every real table ships). count/rowsPerPage/page pinned so the rendered text is deterministic ('1\u20133 of 3'). The rows-per-page Select is pinned CONTROLLED-CLOSED (slotProps.select.open=false): the census active-driver's mouse.down lands on it, opens the MUI menu, and the select icon's 180\u00b0 open rotation PERSISTED into the next sweep \u2014 a witnessed double-run byte-identity refusal (same determinism-pin class as Menu/Dialog transitionDuration:0). NAMED RESIDUE: at count=3 / rowsPerPage=10 / page=0 BOTH arrow IconButtons are forced Mui-disabled by the component itself \u2014 the ENABLED arrow colors are unobservable at this combo and are NOT in the captured truth (a paging axis would need a second fixed combo; deliberately out of v1).",
       "name": "Pagination",
       "importName": "TablePagination",
       "contract": "examples/mui/contracts-seed/pagination.contract.json",
@@ -429,7 +431,7 @@
       }
     },
     {
-      "__note": "ORGANISM ROUND — the composed DataTable, the first ORGANISM through the pipeline. NAMED EXCLUSIONS (v1): (1) stickyHeader is NOT captured — position:sticky has no carried spelling (contract-schema position = relative|static|absolute) and the sticky header also flips border-collapse to separate and paints its own background; (2) the row overflow MENU is captured CLOSED — an open Menu portals a root to document.body and the single-portaled-root policy would DROP the in-stage table; (3) TableSortLabel carries direction='asc' only — the direction axis is excluded by name (the -directionAsc/-directionDesc classes are also excluded from classAllow so a stray axis can never branch the union); (4) TableContainer/Paper is NOT the captured root — enumerated axes ride the ROOT mount and `size` is a Table prop, so the organism IS the Table (Paper elevation is already a captured component this round); (5) rows are INLINED, not component refs — promotion emits no component/repeat/slot refs, and MUI's size='small' descendant rule restyles the nested Checkbox's own padding (42x42 -> 24x24) with UNCHANGED child classes, so composing the standalone Checkbox contract would be WRONG in small tables; (6) TWO body rows, not three — repeated siblings are separate parts under a GLOBAL naming counter (label, label-2, ...), so the sample is the minimum that proves both the plain and the selected/checked row; (7) the row-action control carries a TEXT glyph, not an icon asset — the childrenSpec grammar mounts imported COMPONENTS and @mui/icons-material is not in the pinned sandbox; raw SVG markup in config is deliberately NOT invented this round.",
+      "__note": "ORGANISM ROUND \u2014 the composed DataTable, the first ORGANISM through the pipeline. NAMED EXCLUSIONS (v1): (1) stickyHeader is NOT captured \u2014 position:sticky has no carried spelling (contract-schema position = relative|static|absolute) and the sticky header also flips border-collapse to separate and paints its own background; (2) the row overflow MENU is captured CLOSED \u2014 an open Menu portals a root to document.body and the single-portaled-root policy would DROP the in-stage table; (3) TableSortLabel carries direction='asc' only \u2014 the direction axis is excluded by name (the -directionAsc/-directionDesc classes are also excluded from classAllow so a stray axis can never branch the union); (4) TableContainer/Paper is NOT the captured root \u2014 enumerated axes ride the ROOT mount and `size` is a Table prop, so the organism IS the Table (Paper elevation is already a captured component this round); (5) rows are INLINED, not component refs \u2014 promotion emits no component/repeat/slot refs, and MUI's size='small' descendant rule restyles the nested Checkbox's own padding (42x42 -> 24x24) with UNCHANGED child classes, so composing the standalone Checkbox contract would be WRONG in small tables; (6) TWO body rows, not three \u2014 repeated siblings are separate parts under a GLOBAL naming counter (label, label-2, ...), so the sample is the minimum that proves both the plain and the selected/checked row; (7) the row-action control carries a TEXT glyph, not an icon asset \u2014 the childrenSpec grammar mounts imported COMPONENTS and @mui/icons-material is not in the pinned sandbox; raw SVG markup in config is deliberately NOT invented this round.",
       "name": "Table",
       "importName": "Table",
       "contract": "examples/mui/contracts-seed/table.contract.json",
@@ -546,7 +548,7 @@
                         "disableRipple": true,
                         "aria-label": "row actions"
                       },
-                      "text": "⋮"
+                      "text": "\u22ee"
                     }
                   ]
                 }
@@ -598,7 +600,7 @@
                         "disableRipple": true,
                         "aria-label": "row actions"
                       },
-                      "text": "⋮"
+                      "text": "\u22ee"
                     }
                   ]
                 }
@@ -609,7 +611,7 @@
       ]
     },
     {
-      "__note": "NESTED-INSTANCE ROUND — standalone dependency captured first so TextField can carry two instance refs with stable contract/anchor identity.",
+      "__note": "NESTED-INSTANCE ROUND \u2014 standalone dependency captured first so TextField can carry two instance refs with stable contract/anchor identity.",
       "name": "InputAdornment",
       "importName": "InputAdornment",
       "contract": "examples/mui/contracts-seed/input-adornment.contract.json",
@@ -619,7 +621,7 @@
       ]
     },
     {
-      "__note": "NESTED-INSTANCE ROUND — real InputAdornment elements are mounted through the bounded $element marker. Label + error helper text are present in every capture so typography identity can be scored without a canvas dump.",
+      "__note": "NESTED-INSTANCE ROUND \u2014 real InputAdornment elements are mounted through the bounded $element marker. Label + error helper text are present in every capture so typography identity can be scored without a canvas dump.",
       "name": "TextField",
       "importName": "TextField",
       "contract": "examples/mui/contracts-seed/text-field.contract.json",
@@ -657,7 +659,7 @@
       }
     },
     {
-      "__note": "PHASE-1 READER ROUND (docs/35 §3) — the Textarea archetype's MUI leg. MUI ships NO standalone Textarea export (recipe/fixtures/library-textareas.ts names that refusal); the subject is TextField with `multiline` PINNED true — TextField.js → OutlinedInput (multiline padding 16.5px 14px) → InputBase → TextareaAutosize (minRows default 1, NOT invented as 3). The `content` axis expands through $props into the controlled `value` string (empty '' vs the shared recipe sample 'Meeting notes for Tuesday.'), so BOTH label planes are captured: rest-empty (InputLabel translate(14px,16px) scale(1), placeholder hidden by MUI's own rest-empty rule) and value (shrink translate(14px,-9px) scale(0.75)). Focus rides the standard focus-visible interaction. Label 'Notes' + placeholder 'Add a note' are the recipe's shared content, pinned so typography identity is scorable. Distinct subject from the adorned `TextField` capture above — that one is the signed-Input oracle and stays byte-frozen.",
+      "__note": "PHASE-1 READER ROUND (docs/35 \u00a73) \u2014 the Textarea archetype's MUI leg. MUI ships NO standalone Textarea export (recipe/fixtures/library-textareas.ts names that refusal); the subject is TextField with `multiline` PINNED true \u2014 TextField.js \u2192 OutlinedInput (multiline padding 16.5px 14px) \u2192 InputBase \u2192 TextareaAutosize (minRows default 1, NOT invented as 3). The `content` axis expands through $props into the controlled `value` string (empty '' vs the shared recipe sample 'Meeting notes for Tuesday.'), so BOTH label planes are captured: rest-empty (InputLabel translate(14px,16px) scale(1), placeholder hidden by MUI's own rest-empty rule) and value (shrink translate(14px,-9px) scale(0.75)). Focus rides the standard focus-visible interaction. Label 'Notes' + placeholder 'Add a note' are the recipe's shared content, pinned so typography identity is scorable. Distinct subject from the adorned `TextField` capture above \u2014 that one is the signed-Input oracle and stays byte-frozen.",
       "name": "Textarea",
       "importName": "TextField",
       "contract": "examples/mui/contracts-seed/textarea.contract.json",
@@ -702,7 +704,7 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — Avatar. Variant axis only (circular|rounded|square); initials via sampleText. Size is sx-driven in MUI and deliberately out of v1.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 Avatar. Variant axis only (circular|rounded|square); initials via sampleText. Size is sx-driven in MUI and deliberately out of v1.",
       "name": "Avatar",
       "importName": "Avatar",
       "contract": "examples/mui/contracts-seed/avatar.contract.json",
@@ -712,7 +714,7 @@
       ]
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — Fab ONLY (NOT SpeedDial). Bounded size×color (3×3=9); variant pinned circular; disableRipple pinned (Button/Switch precedent).",
+      "__note": "WAVE 5 DENOMINATOR \u2014 Fab ONLY (NOT SpeedDial). Bounded size\u00d7color (3\u00d73=9); variant pinned circular; disableRipple pinned (Button/Switch precedent).",
       "name": "Fab",
       "importName": "Fab",
       "contract": "examples/mui/contracts-seed/fab.contract.json",
@@ -733,11 +735,11 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — IconButton. Bounded size×color (3×3=9); disableRipple pinned.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 IconButton. Bounded size\u00d7color (3\u00d73=9); disableRipple pinned.",
       "name": "IconButton",
       "importName": "IconButton",
       "contract": "examples/mui/contracts-seed/icon-button.contract.json",
-      "sampleText": "★",
+      "sampleText": "\u2605",
       "axes": [
         "size",
         "color"
@@ -754,7 +756,7 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — CircularProgress. Variant axis only; color/size/value pinned. Infinite spin animations are pinned at currentTime 0 by the capture runner.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 CircularProgress. Variant axis only; color/size/value pinned. Infinite spin animations are pinned at currentTime 0 by the capture runner.",
       "name": "CircularProgress",
       "importName": "CircularProgress",
       "contract": "examples/mui/contracts-seed/circular-progress.contract.json",
@@ -769,7 +771,7 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — LinearProgress. Variant axis only (determinate|indeterminate); buffer/query excluded; color/value pinned. blockStage required for bar width.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 LinearProgress. Variant axis only (determinate|indeterminate); buffer/query excluded; color/value pinned. blockStage required for bar width.",
       "name": "LinearProgress",
       "importName": "LinearProgress",
       "contract": "examples/mui/contracts-seed/linear-progress.contract.json",
@@ -789,11 +791,11 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — severity×variant is cheap (4×3=12). Children sample text mounts the message slot.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 severity\u00d7variant is cheap (4\u00d73=12). Children sample text mounts the message slot.",
       "name": "Alert",
       "importName": "Alert",
       "contract": "examples/mui/contracts-seed/alert.contract.json",
-      "sampleText": "This is an alert — check it out!",
+      "sampleText": "This is an alert \u2014 check it out!",
       "axes": [
         "severity",
         "variant"
@@ -801,7 +803,7 @@
       "blockStage": true
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — color×variant (7×2=14). badgeContent fixed; Avatar child via childrenSpec (Button childWrap caused double-run anatomy identity thrash).",
+      "__note": "WAVE 5 DENOMINATOR \u2014 color\u00d7variant (7\u00d72=14). badgeContent fixed; Avatar child via childrenSpec (Button childWrap caused double-run anatomy identity thrash).",
       "name": "Badge",
       "importName": "Badge",
       "contract": "examples/mui/contracts-seed/badge.contract.json",
@@ -825,7 +827,7 @@
       ]
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — variant only (fullWidth/inset/middle). Horizontal + blockStage (Altitude Divider precedent: an <hr> in a flex stage shrinks to 0×1).",
+      "__note": "WAVE 5 DENOMINATOR \u2014 variant only (fullWidth/inset/middle). Horizontal + blockStage (Altitude Divider precedent: an <hr> in a flex stage shrinks to 0\u00d71).",
       "name": "Divider",
       "importName": "Divider",
       "contract": "examples/mui/contracts-seed/divider.contract.json",
@@ -836,7 +838,7 @@
       "blockStage": true
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — color×underline (7×3=21). href pinned so the <a> is a real link.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 color\u00d7underline (7\u00d73=21). href pinned so the <a> is a real link.",
       "name": "Link",
       "importName": "Link",
       "contract": "examples/mui/contracts-seed/link.contract.json",
@@ -850,7 +852,7 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — elevation bounded like Card (0/1/3/8) × variant (elevation/outlined) = 8. Sample text + blockStage.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 elevation bounded like Card (0/1/3/8) \u00d7 variant (elevation/outlined) = 8. Sample text + blockStage.",
       "name": "Paper",
       "importName": "Paper",
       "contract": "examples/mui/contracts-seed/paper.contract.json",
@@ -870,7 +872,7 @@
       "blockStage": true
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — Breadcrumbs. Standalone (no variant axes); Link crumbs + current Typography via childrenSpec.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 Breadcrumbs. Standalone (no variant axes); Link crumbs + current Typography via childrenSpec.",
       "name": "Breadcrumbs",
       "importName": "Breadcrumbs",
       "contract": "examples/mui/contracts-seed/breadcrumbs.contract.json",
@@ -906,7 +908,7 @@
       "blockStage": true
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — Drawer. Tiny axis: variant temporary|permanent only; open pinned true; portalCapture (temporary portals; permanent stays in-stage — portalSweep allows either). transitionDuration:0 (Dialog/Menu precedent).",
+      "__note": "WAVE 5 DENOMINATOR \u2014 Drawer. Tiny axis: variant temporary|permanent only; open pinned true; portalCapture (temporary portals; permanent stays in-stage \u2014 portalSweep allows either). transitionDuration:0 (Dialog/Menu precedent).",
       "name": "Drawer",
       "importName": "Drawer",
       "contract": "examples/mui/contracts-seed/drawer.contract.json",
@@ -930,7 +932,7 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — Radio. color×checked (7×2=14) — Switch/Checkbox STATE-PLANE PROJECTION precedent; size held fixed. MUI Radio@9.2.0 destructures disableRipple for hover CSS but does NOT forward it to SwitchBase (Checkbox does) — so TouchRipple still mounts and focus-visible pulsate fails determinism. Pin via slotProps.root (and top-level for ownerState hover).",
+      "__note": "WAVE 5 DENOMINATOR \u2014 Radio. color\u00d7checked (7\u00d72=14) \u2014 Switch/Checkbox STATE-PLANE PROJECTION precedent; size held fixed. MUI Radio@9.2.0 destructures disableRipple for hover CSS but does NOT forward it to SwitchBase (Checkbox does) \u2014 so TouchRipple still mounts and focus-visible pulsate fails determinism. Pin via slotProps.root (and top-level for ownerState hover).",
       "name": "Radio",
       "importName": "Radio",
       "contract": "examples/mui/contracts-seed/radio.contract.json",
@@ -962,7 +964,7 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — Select. Bounded: size axis only; value + MenuItem children pinned; menu CONTROLLED-CLOSED (open=false — TablePagination select precedent).",
+      "__note": "WAVE 5 DENOMINATOR \u2014 Select. Bounded: size axis only; value + MenuItem children pinned; menu CONTROLLED-CLOSED (open=false \u2014 TablePagination select precedent).",
       "name": "Select",
       "importName": "Select",
       "contract": "examples/mui/contracts-seed/select.contract.json",
@@ -1014,7 +1016,7 @@
       }
     },
     {
-      "__note": "WAVE 5 DENOMINATOR — Snackbar. Standalone; open=true + simple message pinned (no Alert child dependency); portalCapture; transitionDuration:0; autoHideDuration null so the overlay stays for the sweep.",
+      "__note": "WAVE 5 DENOMINATOR \u2014 Snackbar. Standalone; open=true + simple message pinned (no Alert child dependency); portalCapture; transitionDuration:0; autoHideDuration null so the overlay stays for the sweep.",
       "name": "Snackbar",
       "importName": "Snackbar",
       "contract": "examples/mui/contracts-seed/snackbar.contract.json",

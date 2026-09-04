@@ -8,6 +8,16 @@
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -40,6 +50,16 @@
         "part": "root",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "list-padding",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "list-padding",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "list-padding",
@@ -119,9 +139,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 129,
-      "cellsEqual": 121,
-      "pctEqual": 93.7984496124031,
+      "cellsCompared": 141,
+      "cellsEqual": 129,
+      "pctEqual": 91.48936170212765,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -143,11 +163,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 19,
-      "mintedLeavesUnfolded": 19,
-      "baseBindings": 56,
+      "mintedLeaves": 17,
+      "mintedLeavesUnfolded": 17,
+      "baseBindings": 60,
       "stateBindings": 0,
-      "codeOnlyChannels": 11,
+      "codeOnlyChannels": 15,
       "overflowBindings": 0,
       "folds": 40
     },
@@ -156,7 +176,7 @@
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       },
       {
@@ -191,6 +211,10 @@
         1
       ],
       [
+        "root.text-size-adjust",
+        1
+      ],
+      [
         "root.transition-behavior",
         1
       ],
@@ -199,7 +223,15 @@
         1
       ],
       [
+        "list-padding.text-size-adjust",
+        1
+      ],
+      [
         "label.list-style-type",
+        1
+      ],
+      [
+        "label.text-size-adjust",
         1
       ],
       [
@@ -211,6 +243,10 @@
         1
       ],
       [
+        "label-2.text-size-adjust",
+        1
+      ],
+      [
         "label-2.vertical-align",
         1
       ]
@@ -218,13 +254,17 @@
     "namedLosses": [
       "code-only: root.max-height — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: root.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: list-padding.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ul>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ul> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: list-padding.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ul>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ul> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: list-padding.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ul>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ul> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-2.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
@@ -234,7 +274,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1980,
+      "leavesAdded": 1978,
       "divergent": [
         {
           "token": "imported.menu.list-padding.height",
@@ -265,8 +305,8 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 129,
-        "channelsEqual": 121,
+        "channelsCompared": 141,
+        "channelsEqual": 129,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -285,6 +325,12 @@
           },
           {
             "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "root",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
@@ -296,10 +342,22 @@
             "theirs": "none"
           },
           {
+            "part": "list-padding",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label",
@@ -312,6 +370,12 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",

@@ -30,9 +30,9 @@ const VALUES: Record<string, number | string> = {
   "track.width": 34, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.width
   "track.height": 14, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.height
   "track.radius": 7, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-top-left-radius
-  "track.padding": 0, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left
-  "thumb.offSize": 20, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width
-  "thumb.onSize": 20, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width
+  "track.padding": 0, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-left-width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale
+  "thumb.offSize": 20, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale
+  "thumb.onSize": 20, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width | extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.scale
   "thumb.travel": 20, // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.transform | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.transform | extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.width
   "row.gap": 0, // archetype spelling: no label part in the mount
   "states.false.enabled.trackFill": "#00000061", // ledger extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.background-color | extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.opacity
@@ -82,16 +82,16 @@ export const muiSwitchSource: ReviewedSwitchSource = {
 };
 
 const muiRefusals = makeRefusals("mui", [
-  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/switch/captured-truth.json: 56 capture(s) with the __active interaction; switch@1 carries no interaction plane, so the captured active paint is not minted", target: "MUI (proposed) active interaction", reason: "refused-by-recipe" as const },
-  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/switch/captured-truth.json: 56 capture(s) with the __focus-visible interaction; switch@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "MUI (proposed) focus-visible interaction", reason: "refused-by-recipe" as const },
-  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/switch/captured-truth.json: 56 capture(s) with the __hover interaction; switch@1 carries no interaction plane, so the captured hover paint is not minted", target: "MUI (proposed) hover interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/switch/captured-truth.json: 56 capture(s) with the __active interaction; switch@1 carries no interaction plane, so the captured active paint is not minted", target: "mui active interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/switch/captured-truth.json: 56 capture(s) with the __focus-visible interaction; switch@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "mui focus-visible interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/switch/captured-truth.json: 56 capture(s) with the __hover interaction; switch@1 carries no interaction plane, so the captured hover paint is not minted", target: "mui hover interaction", reason: "refused-by-recipe" as const },
 ]);
 
 export const muiSwitchAdapterConfig = buildConfig(
   "mui",
   muiSwitchSource,
   muiTokens,
-  { id: "mui.switch", name: "MUI (proposed) Switch" },
+  { id: "mui.switch", name: "mui Switch" },
   muiRefusals,
   anatomyFacts("mui", muiSwitchSource),
   ["hover","focus-visible","active","color","size"],

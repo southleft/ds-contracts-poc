@@ -4,7 +4,7 @@
   "name": "Avatar",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI Wave 5 denominator round — props/axes only; anatomy is promoted from captured DOM truth. Variant axis only (circular|rounded|square); initials children pinned via sampleText. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI Wave 5 denominator round — props/axes only; anatomy is promoted from captured DOM truth. Variant axis only (circular|rounded|square); initials children pinned via sampleText. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -61,6 +61,7 @@
         "prop": "children"
       },
       "declared": {
+        "box-sizing": "border-box",
         "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "hidden",
         "overflow-y": "hidden",
@@ -75,6 +76,7 @@
         "font-size": "{imported.avatar.root.font-size}",
         "font-weight": "{imported.avatar.root.font-weight}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.avatar.root.letter-spacing}",
         "line-height": "{imported.avatar.root.line-height}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}"

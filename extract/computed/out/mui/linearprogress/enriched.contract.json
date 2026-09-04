@@ -4,7 +4,7 @@
   "name": "LinearProgress",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/value pinned via fixedProps; buffer/query excluded. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/value pinned via fixedProps; buffer/query excluded. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -38,6 +38,8 @@
     "root": {
       "declared": {
         "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "hidden",
         "overflow-y": "hidden",
         "position": "relative"
@@ -49,13 +51,18 @@
           "declared": {
             "display": "block",
             "position": "absolute",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-property": "transform",
             "transition-timing-function": "linear"
           },
           "tokens": {
             "background-color": "{imported.linear-progress.linearprogress-bar.background-color}",
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000de}",
             "height": "{imported.shared.size-4}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
@@ -87,6 +94,8 @@
           "declared": {
             "display": "block",
             "position": "absolute",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-duration": "0.2s",
             "transition-property": "transform",
             "transition-timing-function": "linear"
@@ -103,8 +112,11 @@
           "tokens": {
             "background-color": "{imported.linear-progress.linearprogress-bar-2.background-color}",
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000de}",
             "height": "{imported.shared.size-4}",
             "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.linear-progress.linearprogress-bar-2.right}",
@@ -116,8 +128,11 @@
       "tokens": {
         "background-color": "{imported.linear-progress.root.background-color}",
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000de}",
         "height": "{imported.shared.size-4}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",

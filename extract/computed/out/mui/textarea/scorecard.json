@@ -7,9 +7,9 @@
   "combos": 4,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 2256,
-    "cellsEqual": 1672,
-    "pctEqual": 74.11347517730496,
+    "cellsCompared": 2608,
+    "cellsEqual": 1944,
+    "pctEqual": 74.5398773006135,
     "rowsFullyEqual": 0,
     "rows": 16
   },
@@ -23,70 +23,70 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 4.1892361111111125,
-    "meanAA": 2.3454861111111116,
-    "maxAA": 4.029761904761905
+    "meanExact": 4.131200396825397,
+    "meanAA": 2.24156746031746,
+    "maxAA": 3.8134920634920637
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 43,
-    "mintedLeavesUnfolded": 39,
-    "baseBindings": 85,
+    "mintedLeaves": 44,
+    "mintedLeavesUnfolded": 40,
+    "baseBindings": 88,
     "stateBindings": 29,
-    "codeOnlyChannels": 15,
+    "codeOnlyChannels": 21,
     "overflowBindings": 26,
-    "folds": 76
+    "folds": 86
   },
   "worstRows": [
     {
       "key": "value.enabled__focus-visible",
-      "pctAA": 4.029761904761905,
-      "pctExact": 6.301587301587301,
-      "channelsMismatched": 27
+      "pctAA": 3.8134920634920637,
+      "pctExact": 6.136904761904762,
+      "channelsMismatched": 32
     },
     {
       "key": "value.enabled__active",
-      "pctAA": 4.029761904761905,
-      "pctExact": 6.301587301587301,
-      "channelsMismatched": 27
+      "pctAA": 3.8134920634920637,
+      "pctExact": 6.136904761904762,
+      "channelsMismatched": 32
     },
     {
       "key": "value.enabled__hover",
-      "pctAA": 3.109126984126984,
-      "pctExact": 5.388888888888889,
-      "channelsMismatched": 12
+      "pctAA": 2.9027777777777777,
+      "pctExact": 5.226190476190476,
+      "channelsMismatched": 17
     },
     {
       "key": "empty.enabled__focus-visible",
-      "pctAA": 2.8392857142857144,
-      "pctExact": 3.882936507936508,
-      "channelsMismatched": 28
+      "pctAA": 2.8234126984126986,
+      "pctExact": 3.863095238095238,
+      "channelsMismatched": 33
     },
     {
       "key": "empty.enabled__active",
-      "pctAA": 2.8392857142857144,
-      "pctExact": 3.882936507936508,
-      "channelsMismatched": 28
+      "pctAA": 2.8234126984126986,
+      "pctExact": 3.863095238095238,
+      "channelsMismatched": 33
     },
     {
       "key": "value.enabled__default",
-      "pctAA": 2.498015873015873,
-      "pctExact": 4.7023809523809526,
-      "channelsMismatched": 8
+      "pctAA": 2.2916666666666665,
+      "pctExact": 4.5396825396825395,
+      "channelsMismatched": 13
     },
     {
       "key": "value.disabled__default",
-      "pctAA": 2.4007936507936507,
-      "pctExact": 5.365079365079365,
-      "channelsMismatched": 55
+      "pctAA": 2.1785714285714284,
+      "pctExact": 5.176587301587301,
+      "channelsMismatched": 60
     },
     {
       "key": "value.disabled__hover",
-      "pctAA": 2.4007936507936507,
-      "pctExact": 5.365079365079365,
-      "channelsMismatched": 55
+      "pctAA": 2.1785714285714284,
+      "pctExact": 5.176587301587301,
+      "channelsMismatched": 60
     }
   ],
   "topMismatchedChannels": [
@@ -95,7 +95,15 @@
       16
     ],
     [
+      "root.text-size-adjust",
+      16
+    ],
+    [
       "root.vertical-align",
+      16
+    ],
+    [
+      "inputbase-formcontrol.text-size-adjust",
       16
     ],
     [
@@ -107,7 +115,15 @@
       16
     ],
     [
+      "inputbase-input.text-size-adjust",
+      16
+    ],
+    [
       "outlinedinput-notchedoutline.min-width",
+      16
+    ],
+    [
+      "outlinedinput-notchedoutline.text-size-adjust",
       16
     ],
     [
@@ -131,24 +147,8 @@
       10
     ],
     [
-      "label-3.transform",
+      "label-3.text-size-adjust",
       10
-    ],
-    [
-      "label-3.transition-behavior",
-      10
-    ],
-    [
-      "label-3.border-bottom-color",
-      8
-    ],
-    [
-      "label-3.border-left-color",
-      8
-    ],
-    [
-      "label-3.border-right-color",
-      8
     ]
   ],
   "namedLosses": [
@@ -180,17 +180,23 @@
     "overflow: outlinedinput-notchedoutline.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: outlinedinput-notchedoutline.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: outlinedinput-notchedoutline.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-3.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-3.transform — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: label-3.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-formcontrol.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: inputbase-input.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: inputbase-input.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: inputbase-input.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: inputbase-input.white-space-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: outlinedinput-notchedoutline.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: outlinedinput-notchedoutline.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only[active]: label-3.color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: label-3.color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: label.color — default-state values not kind-compatible for padding — cannot correlate",
@@ -208,16 +214,22 @@
   "rows": [
     {
       "key": "empty.enabled__default",
-      "channelsCompared": 141,
-      "channelsEqual": 134,
-      "pctExact": 1.8273809523809523,
-      "pctAA": 1.2380952380952381,
+      "channelsCompared": 163,
+      "channelsEqual": 151,
+      "pctExact": 2.0833333333333335,
+      "pctAA": 1.2658730158730158,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -233,9 +245,21 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -250,25 +274,43 @@
           "theirs": "mui-auto-fill-cancel"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "empty.enabled__hover",
-      "channelsCompared": 141,
-      "channelsEqual": 130,
-      "pctExact": 2.4226190476190474,
-      "pctAA": 1.7857142857142858,
+      "channelsCompared": 163,
+      "channelsEqual": 147,
+      "pctExact": 2.6785714285714284,
+      "pctAA": 1.8134920634920635,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -284,9 +326,21 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -299,6 +353,12 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -329,21 +389,33 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "empty.enabled__focus-visible",
-      "channelsCompared": 141,
-      "channelsEqual": 113,
-      "pctExact": 3.882936507936508,
-      "pctAA": 2.8392857142857144,
+      "channelsCompared": 163,
+      "channelsEqual": 130,
+      "pctExact": 3.863095238095238,
+      "pctAA": 2.8234126984126986,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -431,6 +503,12 @@
         },
         {
           "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -440,6 +518,12 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -452,6 +536,12 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -506,21 +596,33 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "empty.enabled__active",
-      "channelsCompared": 141,
-      "channelsEqual": 113,
-      "pctExact": 3.882936507936508,
-      "pctAA": 2.8392857142857144,
+      "channelsCompared": 163,
+      "channelsEqual": 130,
+      "pctExact": 3.863095238095238,
+      "pctAA": 2.8234126984126986,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -608,6 +710,12 @@
         },
         {
           "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -617,6 +725,12 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -629,6 +743,12 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -683,21 +803,33 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "empty.disabled__default",
-      "channelsCompared": 141,
-      "channelsEqual": 87,
-      "pctExact": 2.7142857142857144,
-      "pctAA": 1.3888888888888888,
+      "channelsCompared": 163,
+      "channelsEqual": 104,
+      "pctExact": 2.7162698412698414,
+      "pctAA": 1.4007936507936507,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -779,6 +911,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -854,6 +992,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -940,6 +1084,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -1016,21 +1166,33 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "empty.disabled__hover",
-      "channelsCompared": 141,
-      "channelsEqual": 87,
-      "pctExact": 2.7142857142857144,
-      "pctAA": 1.3888888888888888,
+      "channelsCompared": 163,
+      "channelsEqual": 104,
+      "pctExact": 2.7162698412698414,
+      "pctAA": 1.4007936507936507,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -1112,6 +1274,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1187,6 +1355,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -1273,6 +1447,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -1349,21 +1529,33 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "empty.disabled__focus-visible",
-      "channelsCompared": 141,
-      "channelsEqual": 87,
-      "pctExact": 2.7142857142857144,
-      "pctAA": 1.3888888888888888,
+      "channelsCompared": 163,
+      "channelsEqual": 104,
+      "pctExact": 2.7162698412698414,
+      "pctAA": 1.4007936507936507,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -1445,6 +1637,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1520,6 +1718,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -1606,6 +1810,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -1682,21 +1892,33 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "empty.disabled__active",
-      "channelsCompared": 141,
-      "channelsEqual": 87,
-      "pctExact": 2.7142857142857144,
-      "pctAA": 1.3888888888888888,
+      "channelsCompared": 163,
+      "channelsEqual": 104,
+      "pctExact": 2.7162698412698414,
+      "pctAA": 1.4007936507936507,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -1778,6 +2000,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1853,6 +2081,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -1939,6 +2173,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -2015,21 +2255,33 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.enabled__default",
-      "channelsCompared": 141,
-      "channelsEqual": 133,
-      "pctExact": 4.7023809523809526,
-      "pctAA": 2.498015873015873,
+      "channelsCompared": 163,
+      "channelsEqual": 150,
+      "pctExact": 4.5396825396825395,
+      "pctAA": 2.2916666666666665,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -2045,6 +2297,12 @@
         },
         {
           "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -2054,6 +2312,12 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -2068,25 +2332,43 @@
           "theirs": "mui-auto-fill-cancel"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.enabled__hover",
-      "channelsCompared": 141,
-      "channelsEqual": 129,
-      "pctExact": 5.388888888888889,
-      "pctAA": 3.109126984126984,
+      "channelsCompared": 163,
+      "channelsEqual": 146,
+      "pctExact": 5.226190476190476,
+      "pctAA": 2.9027777777777777,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -2102,6 +2384,12 @@
         },
         {
           "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -2111,6 +2399,12 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -2123,6 +2417,12 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -2153,21 +2453,33 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.enabled__focus-visible",
-      "channelsCompared": 141,
-      "channelsEqual": 114,
-      "pctExact": 6.301587301587301,
-      "pctAA": 4.029761904761905,
+      "channelsCompared": 163,
+      "channelsEqual": 131,
+      "pctExact": 6.136904761904762,
+      "pctAA": 3.8134920634920637,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -2249,6 +2561,12 @@
         },
         {
           "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -2258,6 +2576,12 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -2270,6 +2594,12 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -2324,21 +2654,33 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.enabled__active",
-      "channelsCompared": 141,
-      "channelsEqual": 114,
-      "pctExact": 6.301587301587301,
-      "pctAA": 4.029761904761905,
+      "channelsCompared": 163,
+      "channelsEqual": 131,
+      "pctExact": 6.136904761904762,
+      "pctAA": 3.8134920634920637,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -2420,6 +2762,12 @@
         },
         {
           "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -2429,6 +2777,12 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -2441,6 +2795,12 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -2495,21 +2855,33 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.disabled__default",
-      "channelsCompared": 141,
-      "channelsEqual": 86,
-      "pctExact": 5.365079365079365,
-      "pctAA": 2.4007936507936507,
+      "channelsCompared": 163,
+      "channelsEqual": 103,
+      "pctExact": 5.176587301587301,
+      "pctAA": 2.1785714285714284,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -2588,6 +2960,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.6)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -2674,6 +3052,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "inputbase-input",
           "channel": "animation-duration",
           "ours": "0s",
@@ -2758,6 +3142,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -2834,21 +3224,33 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.disabled__hover",
-      "channelsCompared": 141,
-      "channelsEqual": 86,
-      "pctExact": 5.365079365079365,
-      "pctAA": 2.4007936507936507,
+      "channelsCompared": 163,
+      "channelsEqual": 103,
+      "pctExact": 5.176587301587301,
+      "pctAA": 2.1785714285714284,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -2927,6 +3329,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.6)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -3013,6 +3421,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "inputbase-input",
           "channel": "animation-duration",
           "ours": "0s",
@@ -3097,6 +3511,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -3173,21 +3593,33 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.disabled__focus-visible",
-      "channelsCompared": 141,
-      "channelsEqual": 86,
-      "pctExact": 5.365079365079365,
-      "pctAA": 2.4007936507936507,
+      "channelsCompared": 163,
+      "channelsEqual": 103,
+      "pctExact": 5.176587301587301,
+      "pctAA": 2.1785714285714284,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -3266,6 +3698,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.6)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -3352,6 +3790,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "inputbase-input",
           "channel": "animation-duration",
           "ours": "0s",
@@ -3436,6 +3880,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -3512,21 +3962,33 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "value.disabled__active",
-      "channelsCompared": 141,
-      "channelsEqual": 86,
-      "pctExact": 5.365079365079365,
-      "pctAA": 2.4007936507936507,
+      "channelsCompared": 163,
+      "channelsEqual": 103,
+      "pctExact": 5.176587301587301,
+      "pctAA": 2.1785714285714284,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -3605,6 +4067,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.6)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -3691,6 +4159,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-formcontrol",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "inputbase-input",
           "channel": "animation-duration",
           "ours": "0s",
@@ -3775,6 +4249,12 @@
           "theirs": "rgba(0, 0, 0, 0.38)"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 0.23)",
@@ -3851,6 +4331,12 @@
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 0.87)",
           "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     }

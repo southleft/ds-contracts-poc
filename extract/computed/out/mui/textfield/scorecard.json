@@ -1,14 +1,15 @@
 {
   "component": "TextField",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 952,
-    "cellsEqual": 912,
-    "pctEqual": 95.7983193277311,
+    "cellsCompared": 1080,
+    "cellsEqual": 1000,
+    "pctEqual": 92.5925925925926,
     "rowsFullyEqual": 0,
     "rows": 4
   },
@@ -22,9 +23,9 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 2.367063492063492,
-    "meanAA": 1.6686507936507937,
-    "maxAA": 2.2063492063492065
+    "meanExact": 4.259920634920634,
+    "meanAA": 1.8908730158730158,
+    "maxAA": 2.4206349206349205
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -32,41 +33,45 @@
     "contradictions": 0,
     "mintedLeaves": 40,
     "mintedLeavesUnfolded": 36,
-    "baseBindings": 101,
+    "baseBindings": 104,
     "stateBindings": 10,
-    "codeOnlyChannels": 10,
+    "codeOnlyChannels": 20,
     "overflowBindings": 10,
-    "folds": 106
+    "folds": 116
   },
   "worstRows": [
     {
       "key": "__focus-visible",
-      "pctAA": 2.2063492063492065,
-      "pctExact": 2.9107142857142856,
-      "channelsMismatched": 12
+      "pctAA": 2.4206349206349205,
+      "pctExact": 4.7976190476190474,
+      "channelsMismatched": 22
     },
     {
       "key": "__active",
-      "pctAA": 2.2063492063492065,
-      "pctExact": 2.9107142857142856,
-      "channelsMismatched": 12
+      "pctAA": 2.4206349206349205,
+      "pctExact": 4.7976190476190474,
+      "channelsMismatched": 22
     },
     {
       "key": "__default",
-      "pctAA": 1.130952380952381,
-      "pctExact": 1.8234126984126984,
-      "channelsMismatched": 8
+      "pctAA": 1.3611111111111112,
+      "pctExact": 3.7222222222222223,
+      "channelsMismatched": 18
     },
     {
       "key": "__hover",
-      "pctAA": 1.130952380952381,
-      "pctExact": 1.8234126984126984,
-      "channelsMismatched": 8
+      "pctAA": 1.3611111111111112,
+      "pctExact": 3.7222222222222223,
+      "channelsMismatched": 18
     }
   ],
   "topMismatchedChannels": [
     [
       "root.display",
+      4
+    ],
+    [
+      "root.text-size-adjust",
       4
     ],
     [
@@ -78,11 +83,27 @@
       4
     ],
     [
+      "label.text-size-adjust",
+      4
+    ],
+    [
       "label.transform",
       4
     ],
     [
       "label.transition-behavior",
+      4
+    ],
+    [
+      "inputbase-adornedend.text-size-adjust",
+      4
+    ],
+    [
+      "inputadornment-positionstart.text-size-adjust",
+      4
+    ],
+    [
+      "label-2.text-size-adjust",
       4
     ],
     [
@@ -94,24 +115,16 @@
       4
     ],
     [
-      "outlinedinput-notchedoutline.min-width",
+      "inputbase-input.text-size-adjust",
       4
     ],
     [
-      "outlinedinput-notchedoutline.border-bottom-width",
-      2
+      "inputadornment-positionend.text-size-adjust",
+      4
     ],
     [
-      "outlinedinput-notchedoutline.border-left-width",
-      2
-    ],
-    [
-      "outlinedinput-notchedoutline.border-right-width",
-      2
-    ],
-    [
-      "outlinedinput-notchedoutline.border-top-width",
-      2
+      "label-3.text-size-adjust",
+      4
     ]
   ],
   "namedLosses": [
@@ -128,15 +141,25 @@
     "overflow: outlinedinput-notchedoutline.border-left-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: outlinedinput-notchedoutline.border-right-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: outlinedinput-notchedoutline.border-top-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label.transform — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-adornedend.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: inputadornment-positionstart.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: inputbase-input.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: inputbase-input.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputadornment-positionend.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: outlinedinput-notchedoutline.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: outlinedinput-notchedoutline.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-5.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-5.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
   ],
   "unresolvedTokenRefs": {
@@ -145,22 +168,71 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1381,
-    "divergent": []
+    "leavesAdded": 1954,
+    "divergent": [
+      {
+        "token": "imported.text-field.inputadornment-positionend.width",
+        "fresh": "30.8281px",
+        "shipped": "31.0469px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-field.inputadornment-positionstart.width",
+        "fresh": "9.15625px",
+        "shipped": "8.92188px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-field.inputbase-input.width",
+        "fresh": "167px",
+        "shipped": "169px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-field.label-2.color",
+        "fresh": "#00000099",
+        "shipped": "{palette-text-secondary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.text-field.label-3.color",
+        "fresh": "#00000099",
+        "shipped": "{palette-text-secondary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.text-field.label.right",
+        "fresh": "193.594px",
+        "shipped": "196.781px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-field.label.width",
+        "fresh": "57.3906px",
+        "shipped": "56.1875px",
+        "resolvedEqual": false
+      }
+    ]
   },
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 238,
-      "channelsEqual": 230,
-      "pctExact": 1.8234126984126984,
-      "pctAA": 1.130952380952381,
+      "channelsCompared": 270,
+      "channelsEqual": 252,
+      "pctExact": 3.7222222222222223,
+      "pctAA": 1.3611111111111112,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -176,6 +248,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -185,6 +263,24 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-adornedend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionstart",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -199,25 +295,61 @@
           "theirs": "mui-auto-fill-cancel"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "__hover",
-      "channelsCompared": 238,
-      "channelsEqual": 230,
-      "pctExact": 1.8234126984126984,
-      "pctAA": 1.130952380952381,
+      "channelsCompared": 270,
+      "channelsEqual": 252,
+      "pctExact": 3.7222222222222223,
+      "pctAA": 1.3611111111111112,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -233,6 +365,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -242,6 +380,24 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-adornedend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionstart",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -256,25 +412,61 @@
           "theirs": "mui-auto-fill-cancel"
         },
         {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "outlinedinput-notchedoutline",
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 238,
-      "channelsEqual": 226,
-      "pctExact": 2.9107142857142856,
-      "pctAA": 2.2063492063492065,
+      "channelsCompared": 270,
+      "channelsEqual": 248,
+      "pctExact": 4.7976190476190474,
+      "pctAA": 2.4206349206349205,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -290,6 +482,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -299,6 +497,24 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-adornedend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionstart",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -311,6 +527,24 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -341,21 +575,39 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "__active",
-      "channelsCompared": 238,
-      "channelsEqual": 226,
-      "pctExact": 2.9107142857142856,
-      "pctAA": 2.2063492063492065,
+      "channelsCompared": 270,
+      "channelsEqual": 248,
+      "pctExact": 4.7976190476190474,
+      "pctAA": 2.4206349206349205,
       "mismatches": [
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -371,6 +623,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "transform",
           "ours": "none",
           "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
@@ -380,6 +638,24 @@
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-adornedend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionstart",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "inputbase-input",
@@ -392,6 +668,24 @@
           "channel": "animation-name",
           "ours": "none",
           "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "inputadornment-positionend",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "outlinedinput-notchedoutline",
@@ -422,6 +716,18 @@
           "channel": "min-width",
           "ours": "min-content",
           "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     }

@@ -2,13 +2,14 @@
   "component": "Table",
   "generatedBy": "extract/computed/gate.ts",
   "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 2,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 6176,
-    "cellsEqual": 5262,
-    "pctEqual": 85.20077720207254,
+    "cellsCompared": 7264,
+    "cellsEqual": 6110,
+    "pctEqual": 84.11343612334802,
     "rowsFullyEqual": 0,
     "rows": 8
   },
@@ -22,70 +23,70 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 0.3842592592592593,
-    "meanAA": 0.16512345679012347,
-    "maxAA": 0.21257716049382716
+    "meanExact": 1.5181327160493827,
+    "meanAA": 0.27469135802469136,
+    "maxAA": 0.3314043209876543
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 197,
-    "mintedLeavesUnfolded": 195,
-    "baseBindings": 415,
+    "mintedLeaves": 223,
+    "mintedLeavesUnfolded": 221,
+    "baseBindings": 433,
     "stateBindings": 3,
-    "codeOnlyChannels": 121,
+    "codeOnlyChannels": 155,
     "overflowBindings": 3,
-    "folds": 275
+    "folds": 335
   },
   "worstRows": [
     {
       "key": "small__focus-visible",
-      "pctAA": 0.21257716049382716,
-      "pctExact": 0.44328703703703703,
-      "channelsMismatched": 115
+      "pctAA": 0.3314043209876543,
+      "pctExact": 1.5821759259259258,
+      "channelsMismatched": 145
     },
     {
       "key": "medium__focus-visible",
-      "pctAA": 0.21257716049382716,
-      "pctExact": 0.44328703703703703,
-      "channelsMismatched": 115
+      "pctAA": 0.3128858024691358,
+      "pctExact": 1.572145061728395,
+      "channelsMismatched": 145
     },
     {
       "key": "small__default",
-      "pctAA": 0.14930555555555555,
-      "pctExact": 0.3645833333333333,
-      "channelsMismatched": 114
+      "pctAA": 0.2681327160493827,
+      "pctExact": 1.5034722222222223,
+      "channelsMismatched": 144
     },
     {
       "key": "small__hover",
-      "pctAA": 0.14930555555555555,
-      "pctExact": 0.3645833333333333,
-      "channelsMismatched": 114
+      "pctAA": 0.2681327160493827,
+      "pctExact": 1.5034722222222223,
+      "channelsMismatched": 144
     },
     {
       "key": "small__active",
-      "pctAA": 0.14930555555555555,
-      "pctExact": 0.3645833333333333,
-      "channelsMismatched": 114
+      "pctAA": 0.2681327160493827,
+      "pctExact": 1.5034722222222223,
+      "channelsMismatched": 144
     },
     {
       "key": "medium__default",
-      "pctAA": 0.14930555555555555,
-      "pctExact": 0.3645833333333333,
-      "channelsMismatched": 114
+      "pctAA": 0.2496141975308642,
+      "pctExact": 1.4934413580246915,
+      "channelsMismatched": 144
     },
     {
       "key": "medium__hover",
-      "pctAA": 0.14930555555555555,
-      "pctExact": 0.3645833333333333,
-      "channelsMismatched": 114
+      "pctAA": 0.2496141975308642,
+      "pctExact": 1.4934413580246915,
+      "channelsMismatched": 144
     },
     {
       "key": "medium__active",
-      "pctAA": 0.14930555555555555,
-      "pctExact": 0.3645833333333333,
-      "channelsMismatched": 114
+      "pctAA": 0.2496141975308642,
+      "pctExact": 1.4934413580246915,
+      "channelsMismatched": 144
     }
   ],
   "topMismatchedChannels": [
@@ -98,11 +99,19 @@
       8
     ],
     [
+      "root.text-size-adjust",
+      8
+    ],
+    [
       "tablehead-root.border-collapse",
       8
     ],
     [
       "tablehead-root.display",
+      8
+    ],
+    [
+      "tablehead-root.text-size-adjust",
       8
     ],
     [
@@ -118,6 +127,10 @@
       8
     ],
     [
+      "tablerow-head.text-size-adjust",
+      8
+    ],
+    [
       "tablerow-head.vertical-align",
       8
     ],
@@ -130,23 +143,11 @@
       8
     ],
     [
+      "tablecell-head.text-size-adjust",
+      8
+    ],
+    [
       "tablecell-head.vertical-align",
-      8
-    ],
-    [
-      "buttonbase-root.border-bottom-left-radius",
-      8
-    ],
-    [
-      "buttonbase-root.border-bottom-right-radius",
-      8
-    ],
-    [
-      "buttonbase-root.border-collapse",
-      8
-    ],
-    [
-      "buttonbase-root.border-top-left-radius",
       8
     ]
   ],
@@ -154,126 +155,160 @@
     "overflow: part-0-0-0-0-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: part-0-0-0-0-0.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: part-0-0-0-0-0.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "code-only: root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <table>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <table> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: root.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablehead-root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <table>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <table> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <table>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <table> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablehead-root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <thead>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <thead> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablehead-root.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablehead-root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablehead-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablerow-head.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablehead-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <thead>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <thead> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablehead-root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <thead>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <thead> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablehead-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <thead>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <thead> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-head.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablerow-head.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablerow-head.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablerow-head.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-head.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablerow-head.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-head.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-head.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-head.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablecell-head.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablecell-head.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-head.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablecell-head.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-head.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-head.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: buttonbase-root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: buttonbase-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: buttonbase-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0-0-0-0-0.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-head-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0-0-0-0-0.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-0-0-0-0-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-head-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablecell-head-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablecell-head-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-head-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablecell-head-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-head-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-head-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: icon-2.transform — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: icon-2.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: icon-2.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-3.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-3.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-3.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-4.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-4.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-4.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-4.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-4.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-4.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablebody-root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-4.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-4.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-4.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-4.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <th>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <th> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablebody-root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tbody>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tbody> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablebody-root.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablebody-root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablebody-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablerow-root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablebody-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tbody>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tbody> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablebody-root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tbody>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tbody> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablebody-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tbody>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tbody> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-root.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablerow-root.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablerow-root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablerow-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-body.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablerow-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-body.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablecell-body.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablecell-body.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-body.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablecell-body.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-body.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-body.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: buttonbase-root-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: buttonbase-root-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: buttonbase-root-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-0-0-0-0.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-3.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-3.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-5.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-0-0-0-0.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-1-0-0-0-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-3.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-3.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-5.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-5.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-5.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-5.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-6.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-5.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-5.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-6.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-6.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-6.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-7.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-6.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-6.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-7.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-7.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-7.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-7.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-alignright.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-7.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-7.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-7.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablecell-alignright.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablecell-alignright.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-alignright.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-alignright.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablecell-alignright.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-8.border-bottom-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-8.border-bottom-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-8.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-8.border-top-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-8.border-top-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-8.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-8.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-8.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablerow-root-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablerow-root-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablerow-root-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablerow-root-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablerow-root-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-body-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablerow-root-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-root-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablerow-root-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <tr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <tr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-body-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablecell-body-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablecell-body-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-body-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablecell-body-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-body-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-body-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: buttonbase-root-3.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: buttonbase-root-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: buttonbase-root-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-1-0-0-0.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-4.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: icon-4.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-9.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-1-0-0-0.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-1-1-0-0-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-4.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-4.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon-4.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-9.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-9.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-9.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-9.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-10.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-9.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-9.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-9.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-10.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-10.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-10.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-10.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-11.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-10.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-10.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-10.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-11.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-11.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label-11.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-11.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-alignright-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-11.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-11.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-11.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright-2.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: tablecell-alignright-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: tablecell-alignright-2.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-alignright-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: tablecell-alignright-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tablecell-alignright-2.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: tablecell-alignright-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <td>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <td> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
     "code-only: label-12.border-bottom-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-12.border-bottom-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-12.border-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-12.border-top-left-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-12.border-top-right-radius — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-12.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-12.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-12.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
@@ -282,16 +317,77 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1339,
-    "divergent": []
+    "leavesAdded": 1800,
+    "divergent": [
+      {
+        "token": "imported.table.label-2.height.medium",
+        "fresh": "57.7969px",
+        "shipped": "57.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.label-2.height.small",
+        "fresh": "37.7969px",
+        "shipped": "37.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.label-3.height.medium",
+        "fresh": "57.7969px",
+        "shipped": "57.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.label-3.height.small",
+        "fresh": "37.7969px",
+        "shipped": "37.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.label-4.height.medium",
+        "fresh": "57.7969px",
+        "shipped": "57.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.label-4.height.small",
+        "fresh": "37.7969px",
+        "shipped": "37.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.tablecell-head-2.height.medium",
+        "fresh": "57.7969px",
+        "shipped": "57.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.tablecell-head-2.height.small",
+        "fresh": "37.7969px",
+        "shipped": "37.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.tablecell-head.height.medium",
+        "fresh": "57.7969px",
+        "shipped": "57.797px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.table.tablecell-head.height.small",
+        "fresh": "37.7969px",
+        "shipped": "37.797px",
+        "resolvedEqual": false
+      }
+    ]
   },
   "rows": [
     {
       "key": "small__default",
-      "channelsCompared": 772,
-      "channelsEqual": 658,
-      "pctExact": 0.3645833333333333,
-      "pctAA": 0.14930555555555555,
+      "channelsCompared": 908,
+      "channelsEqual": 764,
+      "pctExact": 1.5034722222222223,
+      "pctAA": 0.2681327160493827,
       "mismatches": [
         {
           "part": "root",
@@ -306,6 +402,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -316,6 +418,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -337,6 +445,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -352,6 +466,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -397,6 +517,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -406,6 +532,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -418,6 +550,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -439,6 +577,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -457,6 +601,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -472,6 +622,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -496,6 +652,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -517,6 +679,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -535,6 +703,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -550,6 +724,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -592,6 +772,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "buttonbase-root-2",
@@ -606,6 +792,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -616,6 +808,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -637,6 +835,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -652,6 +856,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -676,6 +886,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -742,6 +958,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-8",
@@ -763,6 +985,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -778,6 +1006,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -823,6 +1057,12 @@
         },
         {
           "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-3",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -834,6 +1074,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -844,6 +1090,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -865,6 +1117,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -880,6 +1138,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -904,6 +1168,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -970,6 +1240,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-12",
@@ -981,10 +1257,10 @@
     },
     {
       "key": "small__hover",
-      "channelsCompared": 772,
-      "channelsEqual": 658,
-      "pctExact": 0.3645833333333333,
-      "pctAA": 0.14930555555555555,
+      "channelsCompared": 908,
+      "channelsEqual": 764,
+      "pctExact": 1.5034722222222223,
+      "pctAA": 0.2681327160493827,
       "mismatches": [
         {
           "part": "root",
@@ -999,6 +1275,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -1009,6 +1291,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -1030,6 +1318,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1045,6 +1339,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -1090,6 +1390,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1099,6 +1405,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -1111,6 +1423,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -1132,6 +1450,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1150,6 +1474,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1165,6 +1495,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -1189,6 +1525,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -1210,6 +1552,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1228,6 +1576,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1243,6 +1597,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -1285,6 +1645,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "buttonbase-root-2",
@@ -1299,6 +1665,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -1309,6 +1681,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -1330,6 +1708,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1345,6 +1729,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -1369,6 +1759,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -1435,6 +1831,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-8",
@@ -1456,6 +1858,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1471,6 +1879,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -1516,6 +1930,12 @@
         },
         {
           "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-3",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1527,6 +1947,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -1537,6 +1963,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -1558,6 +1990,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1573,6 +2011,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -1597,6 +2041,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -1663,6 +2113,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-12",
@@ -1674,10 +2130,10 @@
     },
     {
       "key": "small__focus-visible",
-      "channelsCompared": 772,
-      "channelsEqual": 657,
-      "pctExact": 0.44328703703703703,
-      "pctAA": 0.21257716049382716,
+      "channelsCompared": 908,
+      "channelsEqual": 763,
+      "pctExact": 1.5821759259259258,
+      "pctAA": 0.3314043209876543,
       "mismatches": [
         {
           "part": "root",
@@ -1692,6 +2148,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -1702,6 +2164,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -1723,6 +2191,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1738,6 +2212,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -1783,6 +2263,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1792,6 +2278,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -1804,6 +2296,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -1825,6 +2323,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1843,6 +2347,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1858,6 +2368,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -1882,6 +2398,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -1903,6 +2425,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1921,6 +2449,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1936,6 +2470,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -1981,6 +2521,12 @@
         },
         {
           "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -1992,6 +2538,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -2002,6 +2554,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -2023,6 +2581,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2038,6 +2602,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -2062,6 +2632,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -2137,6 +2713,12 @@
         },
         {
           "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-8",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2155,6 +2737,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2170,6 +2758,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -2215,6 +2809,12 @@
         },
         {
           "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-3",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2226,6 +2826,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -2236,6 +2842,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -2257,6 +2869,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2272,6 +2890,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -2296,6 +2920,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -2362,6 +2992,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-12",
@@ -2373,10 +3009,10 @@
     },
     {
       "key": "small__active",
-      "channelsCompared": 772,
-      "channelsEqual": 658,
-      "pctExact": 0.3645833333333333,
-      "pctAA": 0.14930555555555555,
+      "channelsCompared": 908,
+      "channelsEqual": 764,
+      "pctExact": 1.5034722222222223,
+      "pctAA": 0.2681327160493827,
       "mismatches": [
         {
           "part": "root",
@@ -2391,6 +3027,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -2401,6 +3043,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -2422,6 +3070,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2437,6 +3091,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -2482,6 +3142,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2491,6 +3157,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -2503,6 +3175,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -2524,6 +3202,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2542,6 +3226,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2557,6 +3247,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -2581,6 +3277,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -2602,6 +3304,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2620,6 +3328,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2635,6 +3349,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -2677,6 +3397,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "buttonbase-root-2",
@@ -2691,6 +3417,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -2701,6 +3433,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -2722,6 +3460,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2737,6 +3481,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -2761,6 +3511,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -2827,6 +3583,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-8",
@@ -2848,6 +3610,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2863,6 +3631,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -2908,6 +3682,12 @@
         },
         {
           "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-3",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2919,6 +3699,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -2929,6 +3715,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -2950,6 +3742,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -2965,6 +3763,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -2989,6 +3793,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -3055,6 +3865,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-12",
@@ -3066,10 +3882,10 @@
     },
     {
       "key": "medium__default",
-      "channelsCompared": 772,
-      "channelsEqual": 658,
-      "pctExact": 0.3645833333333333,
-      "pctAA": 0.14930555555555555,
+      "channelsCompared": 908,
+      "channelsEqual": 764,
+      "pctExact": 1.4934413580246915,
+      "pctAA": 0.2496141975308642,
       "mismatches": [
         {
           "part": "root",
@@ -3084,6 +3900,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -3094,6 +3916,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -3115,6 +3943,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3130,6 +3964,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -3175,6 +4015,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3184,6 +4030,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -3196,6 +4048,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -3217,6 +4075,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3235,6 +4099,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3250,6 +4120,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -3274,6 +4150,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -3295,6 +4177,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3313,6 +4201,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3328,6 +4222,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -3370,6 +4270,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "buttonbase-root-2",
@@ -3384,6 +4290,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -3394,6 +4306,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -3415,6 +4333,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3430,6 +4354,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -3454,6 +4384,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -3520,6 +4456,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-8",
@@ -3541,6 +4483,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3556,6 +4504,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -3601,6 +4555,12 @@
         },
         {
           "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-3",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3612,6 +4572,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -3622,6 +4588,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -3643,6 +4615,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3658,6 +4636,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -3682,6 +4666,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -3748,6 +4738,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-12",
@@ -3759,10 +4755,10 @@
     },
     {
       "key": "medium__hover",
-      "channelsCompared": 772,
-      "channelsEqual": 658,
-      "pctExact": 0.3645833333333333,
-      "pctAA": 0.14930555555555555,
+      "channelsCompared": 908,
+      "channelsEqual": 764,
+      "pctExact": 1.4934413580246915,
+      "pctAA": 0.2496141975308642,
       "mismatches": [
         {
           "part": "root",
@@ -3777,6 +4773,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -3787,6 +4789,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -3808,6 +4816,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3823,6 +4837,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -3868,6 +4888,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3877,6 +4903,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -3889,6 +4921,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -3910,6 +4948,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3928,6 +4972,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -3943,6 +4993,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -3967,6 +5023,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -3988,6 +5050,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4006,6 +5074,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4021,6 +5095,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -4066,6 +5146,12 @@
         },
         {
           "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4077,6 +5163,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -4087,6 +5179,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -4108,6 +5206,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4123,6 +5227,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -4147,6 +5257,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -4216,6 +5332,12 @@
         },
         {
           "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-8",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4234,6 +5356,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4249,6 +5377,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -4291,6 +5425,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "buttonbase-root-3",
@@ -4305,6 +5445,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -4315,6 +5461,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -4336,6 +5488,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4351,6 +5509,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -4375,6 +5539,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -4444,6 +5614,12 @@
         },
         {
           "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-12",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4452,10 +5628,10 @@
     },
     {
       "key": "medium__focus-visible",
-      "channelsCompared": 772,
-      "channelsEqual": 657,
-      "pctExact": 0.44328703703703703,
-      "pctAA": 0.21257716049382716,
+      "channelsCompared": 908,
+      "channelsEqual": 763,
+      "pctExact": 1.572145061728395,
+      "pctAA": 0.3128858024691358,
       "mismatches": [
         {
           "part": "root",
@@ -4470,6 +5646,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -4480,6 +5662,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -4501,6 +5689,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4516,6 +5710,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -4561,6 +5761,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4570,6 +5776,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -4582,6 +5794,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -4603,6 +5821,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4621,6 +5845,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4636,6 +5866,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -4660,6 +5896,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -4681,6 +5923,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4699,6 +5947,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4714,6 +5968,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -4759,6 +6019,12 @@
         },
         {
           "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4770,6 +6036,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -4780,6 +6052,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -4801,6 +6079,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4816,6 +6100,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -4840,6 +6130,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -4915,6 +6211,12 @@
         },
         {
           "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-8",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4933,6 +6235,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -4948,6 +6256,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -4993,6 +6307,12 @@
         },
         {
           "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-3",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5004,6 +6324,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -5014,6 +6340,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -5035,6 +6367,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5050,6 +6388,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -5074,6 +6418,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -5143,6 +6493,12 @@
         },
         {
           "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-12",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5151,10 +6507,10 @@
     },
     {
       "key": "medium__active",
-      "channelsCompared": 772,
-      "channelsEqual": 658,
-      "pctExact": 0.3645833333333333,
-      "pctAA": 0.14930555555555555,
+      "channelsCompared": 908,
+      "channelsEqual": 764,
+      "pctExact": 1.4934413580246915,
+      "pctAA": 0.2496141975308642,
       "mismatches": [
         {
           "part": "root",
@@ -5169,6 +6525,12 @@
           "theirs": "table"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "tablehead-root",
           "channel": "border-collapse",
           "ours": "separate",
@@ -5179,6 +6541,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-header-group"
+        },
+        {
+          "part": "tablehead-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablehead-root",
@@ -5200,6 +6568,12 @@
         },
         {
           "part": "tablerow-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-head",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5215,6 +6589,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head",
@@ -5260,6 +6640,12 @@
         },
         {
           "part": "buttonbase-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5269,6 +6655,12 @@
           "channel": "border-collapse",
           "ours": "separate",
           "theirs": "collapse"
+        },
+        {
+          "part": "part-0-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -5281,6 +6673,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-head-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-head-2",
@@ -5302,6 +6700,12 @@
         },
         {
           "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5320,6 +6724,12 @@
         },
         {
           "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5335,6 +6745,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-3",
@@ -5359,6 +6775,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "label-4",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-4",
@@ -5380,6 +6802,12 @@
         },
         {
           "part": "tablebody-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablebody-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5398,6 +6826,12 @@
         },
         {
           "part": "tablerow-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5413,6 +6847,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body",
@@ -5455,6 +6895,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "buttonbase-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "buttonbase-root-2",
@@ -5469,6 +6915,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-0-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-5",
           "channel": "border-collapse",
           "ours": "separate",
@@ -5479,6 +6931,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-5",
@@ -5500,6 +6958,12 @@
         },
         {
           "part": "label-6",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-6",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5515,6 +6979,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-7",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-7",
@@ -5539,6 +7009,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright",
@@ -5605,6 +7081,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-8",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-8",
@@ -5626,6 +7108,12 @@
         },
         {
           "part": "tablerow-root-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "tablerow-root-2",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5641,6 +7129,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "tablecell-body-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-body-2",
@@ -5686,6 +7180,12 @@
         },
         {
           "part": "buttonbase-root-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "buttonbase-root-3",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5697,6 +7197,12 @@
           "theirs": "collapse"
         },
         {
+          "part": "part-1-1-0-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "label-9",
           "channel": "border-collapse",
           "ours": "separate",
@@ -5707,6 +7213,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-9",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-9",
@@ -5728,6 +7240,12 @@
         },
         {
           "part": "label-10",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-10",
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
@@ -5743,6 +7261,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "table-cell"
+        },
+        {
+          "part": "label-11",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-11",
@@ -5767,6 +7291,12 @@
           "channel": "flex-direction",
           "ours": "row",
           "theirs": "row-reverse"
+        },
+        {
+          "part": "tablecell-alignright-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "tablecell-alignright-2",
@@ -5833,6 +7363,12 @@
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
+        },
+        {
+          "part": "label-12",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-12",

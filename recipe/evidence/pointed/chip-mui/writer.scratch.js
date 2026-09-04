@@ -1,4 +1,4 @@
-const PLAN={"pageName":"Recipe Pivot / Chip / d900b3b5-chip-v7","runIdentity":"d900b3b5-chip-v7","sources":[{"adapterIdentity":"mui-chip-proposed-v1","displayName":"mui (proposed)","sourceName":"mui (proposed) Chip","recipeHash":"d900b3b56a5c41f7b6d524107ff23f8199b0156380f77d6d32ec90d453660454","envelopeHash":"3c35bcc8d7d0e2619b38554ae7efe209f48db3e34e0f2925201f172d18ffbbb7","variables":[{"identity":"mui.chip.rest-boxBorder","name":"token/color/id-6d75692e636869702e726573742d626f78426f72646572","type":"COLOR","value":"#000000de"},{"identity":"mui.chip.rest-boxFill","name":"token/color/id-6d75692e636869702e726573742d626f7846696c6c","type":"COLOR","value":"#00000014"},{"identity":"mui.chip.rest-label","name":"token/color/id-6d75692e636869702e726573742d6c6162656c","type":"COLOR","value":"#000000de"},{"identity":"mui.chip.box-borderWidth","name":"token/float/id-6d75692e636869702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"mui.chip.box-height","name":"token/float/id-6d75692e636869702e626f782d686569676874","type":"FLOAT","value":32},{"identity":"mui.chip.box-paddingX","name":"token/float/id-6d75692e636869702e626f782d70616464696e6758","type":"FLOAT","value":12},{"identity":"mui.chip.box-paddingY","name":"token/float/id-6d75692e636869702e626f782d70616464696e6759","type":"FLOAT","value":0},{"identity":"mui.chip.box-radius","name":"token/float/id-6d75692e636869702e626f782d726164697573","type":"FLOAT","value":16},{"identity":"mui.chip.labelFontSize","name":"token/float/id-6d75692e636869702e6c6162656c466f6e7453697a65","type":"FLOAT","value":13},{"identity":"mui.chip.labelLineHeight","name":"token/float/id-6d75692e636869702e6c6162656c4c696e65486569676874","type":"FLOAT","value":19.5}],"comparedIrFacts":17,"chip":{"label":"mui (proposed) Chip","role":"chip/variant/default","bindings":[{"field":"layout.height.value","type":"FLOAT","variable":"mui.chip.box-height"},{"field":"layout.padding.top","type":"FLOAT","variable":"mui.chip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"mui.chip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"mui.chip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"mui.chip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"mui.chip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"mui.chip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"mui.chip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"mui.chip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"mui.chip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"mui.chip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"mui.chip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":0,"right":12,"bottom":0,"left":12},"width":{"mode":"hug"},"height":{"mode":"fixed","value":32}},"fills":[{"kind":"solid","color":"#00000014"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#000000de"}}],"cornerRadius":{"topLeft":16,"topRight":16,"bottomRight":16,"bottomLeft":16},"variantProperties":{"Default":"true"},"children":[{"label":"chip/label","role":"chip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"mui.chip.labelFontSize"},{"field":"type.lineHeight.value","type":"FLOAT","variable":"mui.chip.labelLineHeight"},{"field":"fills.0.color","type":"COLOR","variable":"mui.chip.rest-label"}],"kind":"text","characters":"Chip","type":{"fontFamily":"Roboto","fontStyle":"Regular","fontProvenance":{"requestedFamily":"Roboto","requestedStyle":"Regular","requestSource":"extract/computed/out/mui/chip/captured-truth.json label font-family/font-weight: Roboto, Helvetica, Arial, sans-serif / Regular","fallbackChain":[{"family":"Roboto","style":"Regular"},{"family":"Roboto","style":"Regular"}],"resolvedFamily":"Roboto","resolvedStyle":"Regular","resolution":"requested"},"fontSize":13,"lineHeight":{"unit":"px","value":19.5}},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#000000de"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}}]};
+const PLAN={"pageName":"Recipe Pivot / Chip / a2edcac5-chip-v11","runIdentity":"a2edcac5-chip-v11","sources":[{"adapterIdentity":"mui-chip-proposed-v1","displayName":"mui","sourceName":"mui Chip","recipeHash":"a2edcac51202cd4c96c97d0f3c4e69387363994f7fcf8e226dcade0e97bc51e9","envelopeHash":"6958ed3a35ca9ec30b5badd1b87700f97024c24eb3ade2b079e9a1ec15ec20e9","variables":[{"identity":"mui.chip.rest-boxBorder","name":"token/color/id-6d75692e636869702e726573742d626f78426f72646572","type":"COLOR","value":"#000000de"},{"identity":"mui.chip.rest-boxFill","name":"token/color/id-6d75692e636869702e726573742d626f7846696c6c","type":"COLOR","value":"#00000014"},{"identity":"mui.chip.rest-label","name":"token/color/id-6d75692e636869702e726573742d6c6162656c","type":"COLOR","value":"#000000de"},{"identity":"mui.chip.box-borderWidth","name":"token/float/id-6d75692e636869702e626f782d626f726465725769647468","type":"FLOAT","value":0},{"identity":"mui.chip.box-height","name":"token/float/id-6d75692e636869702e626f782d686569676874","type":"FLOAT","value":32},{"identity":"mui.chip.box-paddingX","name":"token/float/id-6d75692e636869702e626f782d70616464696e6758","type":"FLOAT","value":12},{"identity":"mui.chip.box-paddingY","name":"token/float/id-6d75692e636869702e626f782d70616464696e6759","type":"FLOAT","value":0},{"identity":"mui.chip.box-radius","name":"token/float/id-6d75692e636869702e626f782d726164697573","type":"FLOAT","value":16},{"identity":"mui.chip.labelFontSize","name":"token/float/id-6d75692e636869702e6c6162656c466f6e7453697a65","type":"FLOAT","value":13},{"identity":"mui.chip.labelLineHeight","name":"token/float/id-6d75692e636869702e6c6162656c4c696e65486569676874","type":"FLOAT","value":19.5}],"comparedIrFacts":17,"chip":{"label":"mui Chip","role":"chip/variant/default","bindings":[{"field":"layout.height.value","type":"FLOAT","variable":"mui.chip.box-height"},{"field":"layout.padding.top","type":"FLOAT","variable":"mui.chip.box-paddingY"},{"field":"layout.padding.right","type":"FLOAT","variable":"mui.chip.box-paddingX"},{"field":"layout.padding.bottom","type":"FLOAT","variable":"mui.chip.box-paddingY"},{"field":"layout.padding.left","type":"FLOAT","variable":"mui.chip.box-paddingX"},{"field":"fills.0.color","type":"COLOR","variable":"mui.chip.rest-boxFill"},{"field":"strokes.0.weight","type":"FLOAT","variable":"mui.chip.box-borderWidth"},{"field":"strokes.0.paint.color","type":"COLOR","variable":"mui.chip.rest-boxBorder"},{"field":"cornerRadius.topLeft","type":"FLOAT","variable":"mui.chip.box-radius"},{"field":"cornerRadius.topRight","type":"FLOAT","variable":"mui.chip.box-radius"},{"field":"cornerRadius.bottomRight","type":"FLOAT","variable":"mui.chip.box-radius"},{"field":"cornerRadius.bottomLeft","type":"FLOAT","variable":"mui.chip.box-radius"}],"opacity":1,"kind":"component","layout":{"mode":"horizontal","primaryAxisAlign":"min","counterAxisAlign":"center","itemSpacing":0,"padding":{"top":0,"right":12,"bottom":0,"left":12},"width":{"mode":"hug"},"height":{"mode":"fixed","value":32}},"fills":[{"kind":"solid","color":"#00000014"}],"strokes":[{"weight":0,"align":"inside","paint":{"kind":"solid","color":"#000000de"}}],"cornerRadius":{"topLeft":16,"topRight":16,"bottomRight":16,"bottomLeft":16},"variantProperties":{"Default":"true"},"children":[{"label":"chip/label","role":"chip/label","bindings":[{"field":"type.fontSize","type":"FLOAT","variable":"mui.chip.labelFontSize"},{"field":"type.lineHeight.value","type":"FLOAT","variable":"mui.chip.labelLineHeight"},{"field":"fills.0.color","type":"COLOR","variable":"mui.chip.rest-label"}],"kind":"text","characters":"Chip","type":{"fontFamily":"Roboto","fontStyle":"Regular","fontProvenance":{"requestedFamily":"Roboto","requestedStyle":"Regular","requestSource":"extract/computed/out/mui/chip/captured-truth.json label font-family/font-weight: Roboto, Helvetica, Arial, sans-serif / Regular","fallbackChain":[{"family":"Roboto","style":"Regular"},{"family":"Roboto","style":"Regular"}],"resolvedFamily":"Roboto","resolvedStyle":"Regular","resolution":"requested"},"fontSize":13,"lineHeight":{"unit":"px","value":19.5}},"align":"left","verticalAlign":"center","fills":[{"kind":"solid","color":"#000000de"}],"width":{"mode":"hug"},"height":{"mode":"hug"}}]}}]};
 const NS="ds.contracts.chip.recipe.v1";
 const WRITER_VERSION="1";
 const PAGE_OWNER="recipe/chip/"+PLAN.runIdentity;
@@ -16,6 +16,10 @@ const EXPECTED_FILE_KEY="byMp6lt0Ij9b2QbkDGFwBh",EXPECTED_FILE_NAME="Scratch Pro
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
+void "CHIP-MUST-NOT-WRITE-CHIP-V10-PAGE";
+void "CHIP-MUST-NOT-WRITE-CHIP-V9-PAGE";
+void "CHIP-MUST-NOT-WRITE-CHIP-V8-PAGE";
+void "CHIP-MUST-NOT-WRITE-CHIP-V7-PAGE";
 void "CHIP-MUST-NOT-WRITE-CHIP-V6-PAGE";
 void "CHIP-MUST-NOT-WRITE-CHIP-V5-PAGE";
 void "CHIP-MUST-NOT-WRITE-CHIP-V4-PAGE";
@@ -34,6 +38,10 @@ void "CHIP-MUST-NOT-WRITE-RADIO-PAGE";
 void "CHIP-MUST-NOT-WRITE-SWITCH-PAGE";
 void "CHIP-MUST-NOT-WRITE-TEXTAREA-PAGE";
 void "CHIP-MUST-NOT-WRITE-ALERT-PAGE";
+if(figma.currentPage&&figma.currentPage.id==="219:91809")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V10-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="219:91605")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V9-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="218:90995")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V8-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="218:90193")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V7-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="218:87557")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V6-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="218:86064")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V5-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="218:84582")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V4-PAGE");
@@ -63,6 +71,10 @@ if(page){
 }else{
   page=figma.createPage();page.name=PLAN.pageName;createdNodeIds.push(page.id);
 }
+if(page.id==="219:91809")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V10-PAGE");
+if(page.id==="219:91605")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V9-PAGE");
+if(page.id==="218:90995")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V8-PAGE");
+if(page.id==="218:90193")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V7-PAGE");
 if(page.id==="218:87557")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V6-PAGE");
 if(page.id==="218:86064")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V5-PAGE");
 if(page.id==="218:84582")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V4-PAGE");
@@ -92,7 +104,12 @@ const allFonts=await figma.listAvailableFontsAsync();
 // A font STYLE name is compared without case or spacing: foundries spell the
 // same face "SemiBold", "Semibold" and "Semi Bold", and a fixture read from a
 // CSS font-weight cannot know which spelling this machine's file uses.
-const sameStyle=(a,b)=>String(a).toLowerCase().replace(/[s_-]/g,"")===String(b).toLowerCase().replace(/[s_-]/g,"");
+// NOTE the doubled backslash: this line lives inside the emitted program's
+// template literal, and a single s reached the plugin as /[s_-]/ — a regex
+// that strips the LETTER s, so a two-word "Semi Bold" never matched a
+// CSS-weight "Semibold" (measured 2026-09-02 on the Chakra dialog title:
+// FONT-UNAVAILABLE while the same lookup succeeded run directly in the file).
+const sameStyle=(a,b)=>String(a).toLowerCase().replace(/[\s_-]/g,"")===String(b).toLowerCase().replace(/[\s_-]/g,"");
 const resolveFont=spec=>{
   const found=spec.fallbackChain.map(candidate=>allFonts.find(font=>font.fontName.family===candidate.family&&sameStyle(font.fontName.style,candidate.style))).find(Boolean);
   if(!found)throw new Error("CHIP-FONT-UNAVAILABLE:"+spec.requestedFamily+":"+spec.requestedStyle);
@@ -160,6 +177,10 @@ for(const source of PLAN.sources){
       node.strokes=ir.strokes.map((entry,index)=>boundPaint(entry.paint.color,bindingFor(ir,"strokes."+index+".paint.color")));
       if(ir.strokes[0]){
         node.strokeWeight=ir.strokes[0].weight;node.strokeAlign=ir.strokes[0].align.toUpperCase();
+        // Per-side weights when the IR carries them (a source that draws one
+        // edge — MUI's table cell bottom rule). Figma requires the uniform
+        // strokeWeight first; these then override per side.
+        if(ir.strokes[0].sideWeights){const sw=ir.strokes[0].sideWeights;for(const [side,prop] of [["top","strokeTopWeight"],["right","strokeRightWeight"],["bottom","strokeBottomWeight"],["left","strokeLeftWeight"]]){node[prop]=sw[side];bindFloat(node,prop,bindingFor(ir,"strokes.0.weight."+side));}}
         if(ir.strokes[0].dashPattern)node.dashPattern=ir.strokes[0].dashPattern;
         bindFloat(node,"strokeWeight",bindingFor(ir,"strokes.0.weight"));
       }
@@ -296,7 +317,8 @@ for(const source of PLAN.sources){
         let painted=false;
         for(const candidate of chain){
           if(candidate.family===resolvedFamily&&candidate.style===resolvedStyle)continue;
-          const found=allFonts.find(entry=>entry.fontName.family===candidate.family&&entry.fontName.style===candidate.style);
+          // the same spacing-and-case-blind style match as resolveFont (a two-word "Semi Bold" vs a CSS-weight "Semibold")
+          const found=allFonts.find(entry=>entry.fontName.family===candidate.family&&sameStyle(entry.fontName.style,candidate.style));
           if(!found)continue;
           await figma.loadFontAsync(found.fontName);
           label.fontName=found.fontName;

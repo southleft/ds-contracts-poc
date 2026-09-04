@@ -17,7 +17,7 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 92.21096096096096,
+    "pctExactUnmasked": 92.15465465465465,
     "pctAAUnmasked": 34.75975975975976,
     "pctAAMasked": 34.75975975975976,
     "maskCoveragePct": 0,
@@ -27,7 +27,7 @@
     "inkRealPct": 78.11561561561562
   },
   "reference": "extract/computed/out/mui/fab/orig-shots/large.default.enabled__default.png",
-  "referenceSha256": "46ba2950117b07b7d69aa41a892e7471c0010d8fe5c560c1e3f3592ac9e7d110",
+  "referenceSha256": "8b643cd1c1237363ccbae13a9460aef6ac584a554a20697ea6a9f9301fdfcdfa",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/fab.png",
   "canvasShotSha256": "1a936b6c6911ce63cd566ae5b4b5b9edf40018f7bb924a6e3be463400d5c0114",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/fab.diff.png",

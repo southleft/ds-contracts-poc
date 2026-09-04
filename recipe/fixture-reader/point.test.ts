@@ -240,8 +240,16 @@ test("chip@1 proposes MUI's chip (the label span's padding is part of the inset)
   }
 });
 
+// MUI's unit was "auto" until 2026-09-04 and that was the MOUNT DEFECT, not the
+// library: extract/computed/configs/mui.json wrapped captures in <ThemeProvider>
+// without <CssBaseline />, so nothing put the theme's typography on the
+// document and Link's root computed `line-height: normal` (-> auto) in the UA
+// serif. With CssBaseline mounted the same cell reads `line-height: 24px` and
+// `Roboto, Helvetica, Arial, sans-serif` — body's 1.5 x 16px, which is what a
+// real MUI application renders. The expectation now pins the library's own
+// value instead of the unstyled stage's.
 test("link@1 proposes Altitude's link (underline read) and MUI's at the always-underlined combo", () => {
-  for (const [lib, expect] of [["altitude", { decoration: "underline", unit: "px", combo: "unset" }], ["mui", { decoration: "underline", unit: "auto", combo: "primary.always" }]] as const) {
+  for (const [lib, expect] of [["altitude", { decoration: "underline", unit: "px", combo: "unset" }], ["mui", { decoration: "underline", unit: "px", combo: "primary.always" }]] as const) {
     const ledgerRel = `extract/computed/out/${lib}/link/captured-truth.json`;
     const draft = draftLinkRoles(new Ledger(REPO, ledgerRel));
     assert.deepEqual(draft.unresolved, [], lib);

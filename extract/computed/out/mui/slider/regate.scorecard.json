@@ -13,6 +13,11 @@
       },
       {
         "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
         "channel": "position",
         "value": "relative"
       },
@@ -25,6 +30,11 @@
         "part": "slider-rail",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "slider-rail",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "slider-track",
@@ -69,6 +79,11 @@
       },
       {
         "part": "slider-track",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "slider-track",
         "channel": "transition-delay",
         "value": "0s, 0s, 0s, 0s"
       },
@@ -99,6 +114,11 @@
       },
       {
         "part": "slider-thumb",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "slider-thumb",
         "channel": "transition-delay",
         "value": "0s, 0s, 0s"
       },
@@ -121,6 +141,11 @@
         "part": "part-2-0",
         "channel": "appearance",
         "value": "auto"
+      },
+      {
+        "part": "part-2-0",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "part-2-0",
@@ -172,9 +197,9 @@
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 7632,
-      "cellsEqual": 7044,
-      "pctEqual": 92.29559748427673,
+      "cellsCompared": 8256,
+      "cellsEqual": 7428,
+      "pctEqual": 89.97093023255815,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -196,9 +221,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 127,
-      "mintedLeavesUnfolded": 365,
-      "baseBindings": 83,
+      "mintedLeaves": 129,
+      "mintedLeavesUnfolded": 367,
+      "baseBindings": 91,
       "stateBindings": 5,
       "codeOnlyChannels": 11,
       "overflowBindings": 5,
@@ -209,62 +234,74 @@
         "key": "primary.small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "primary.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "secondary.small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "secondary.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "error.small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "error.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "warning.small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "warning.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
+        "root.text-size-adjust",
+        48
+      ],
+      [
+        "slider-rail.text-size-adjust",
+        48
+      ],
+      [
         "slider-rail.transform",
+        48
+      ],
+      [
+        "slider-track.text-size-adjust",
         48
       ],
       [
@@ -292,6 +329,10 @@
         48
       ],
       [
+        "slider-thumb.text-size-adjust",
+        48
+      ],
+      [
         "slider-thumb.transform",
         48
       ],
@@ -306,14 +347,6 @@
       [
         "part-2-0.overflow-x",
         48
-      ],
-      [
-        "part-2-0.overflow-y",
-        48
-      ],
-      [
-        "part-2-0.outline-color",
-        12
       ]
     ],
     "namedLosses": [
@@ -324,17 +357,17 @@
       "overflow: part-2-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: part-2-0.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: slider-thumb.box-shadow [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: slider-rail.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-rail.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: slider-rail.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: slider-track.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-track.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: slider-track.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: slider-track.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: slider-thumb.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-thumb.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: slider-thumb.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: slider-thumb.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-2-0.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: part-2-0.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
+      "code-only: part-2-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -342,7 +375,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1866,
+      "leavesAdded": 1864,
       "divergent": [
         {
           "token": "imported.slider.root.color.error",
@@ -385,17 +418,35 @@
     "rows": [
       {
         "key": "primary.small__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -435,6 +486,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -462,23 +519,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.small__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -518,6 +599,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -545,23 +632,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.small__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -601,6 +712,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -634,23 +751,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.small__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -690,6 +831,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -717,23 +864,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.medium__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -773,6 +944,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -800,23 +977,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.medium__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -856,6 +1057,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -883,23 +1090,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.medium__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -939,6 +1170,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -972,23 +1209,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.medium__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1028,6 +1289,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1055,23 +1322,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.small__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1111,6 +1402,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1138,23 +1435,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.small__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1194,6 +1515,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1221,23 +1548,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.small__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1277,6 +1628,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1310,23 +1667,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.small__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1366,6 +1747,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1393,23 +1780,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.medium__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1449,6 +1860,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1476,23 +1893,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.medium__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1532,6 +1973,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1559,23 +2006,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.medium__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1615,6 +2086,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1648,23 +2125,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.medium__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1704,6 +2205,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1731,23 +2238,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.small__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1787,6 +2318,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1814,23 +2351,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.small__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1870,6 +2431,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1897,23 +2464,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.small__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -1953,6 +2544,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1986,23 +2583,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.small__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2042,6 +2663,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2069,23 +2696,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.medium__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2125,6 +2776,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2152,23 +2809,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.medium__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2208,6 +2889,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2235,23 +2922,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.medium__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2291,6 +3002,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2324,23 +3041,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.medium__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2380,6 +3121,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2407,23 +3154,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.small__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2463,6 +3234,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2490,23 +3267,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.small__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2546,6 +3347,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2573,23 +3380,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.small__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2629,6 +3460,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2662,23 +3499,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.small__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2718,6 +3579,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2745,23 +3612,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.medium__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2801,6 +3692,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2828,23 +3725,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.medium__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2884,6 +3805,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2911,23 +3838,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.medium__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -2967,6 +3918,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3000,23 +3957,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.medium__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3056,6 +4037,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3083,23 +4070,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.small__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3139,6 +4150,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3166,23 +4183,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.small__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3222,6 +4263,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3249,23 +4296,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.small__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3305,6 +4376,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3338,23 +4415,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.small__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3394,6 +4495,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3421,23 +4528,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.medium__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3477,6 +4608,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3504,23 +4641,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.medium__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3560,6 +4721,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3587,23 +4754,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.medium__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3643,6 +4834,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3676,23 +4873,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.medium__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3732,6 +4953,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3759,23 +4986,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.small__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3815,6 +5066,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3842,23 +5099,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.small__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3898,6 +5179,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3925,23 +5212,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.small__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -3981,6 +5292,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -4014,23 +5331,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.small__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -4067,6 +5408,12 @@
             "channel": "border-top-right-radius",
             "ours": "6px",
             "theirs": "50%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-thumb",
@@ -4097,23 +5444,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.medium__default",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -4153,6 +5524,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -4180,23 +5557,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.medium__hover",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -4233,6 +5634,12 @@
             "channel": "border-top-right-radius",
             "ours": "10px",
             "theirs": "50%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-thumb",
@@ -4263,23 +5670,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.medium__focus-visible",
-        "channelsCompared": 159,
-        "channelsEqual": 146,
+        "channelsCompared": 172,
+        "channelsEqual": 154,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -4316,6 +5747,12 @@
             "channel": "border-top-right-radius",
             "ours": "10px",
             "theirs": "50%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-thumb",
@@ -4352,23 +5789,47 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.medium__active",
-        "channelsCompared": 159,
-        "channelsEqual": 147,
+        "channelsCompared": 172,
+        "channelsEqual": 155,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-rail",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "slider-track",
@@ -4408,6 +5869,12 @@
           },
           {
             "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -4435,6 +5902,12 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
+          },
+          {
+            "part": "part-2-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

@@ -2,7 +2,7 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@mui/material@9.2.0",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "mintedTokens": {
     "imported": {
       "linear-progress": {
@@ -82,14 +82,207 @@
           "$value": "0px",
           "$type": "dimension"
         },
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
         "size-4": {
           "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-0-15008": {
+          "$value": "0.15008px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
           "$type": "dimension"
         }
       }
     }
   },
-  "folds": [],
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
   "foldedStateSkips": [],
   "layout": {
     "enriched": [],
@@ -100,6 +293,16 @@
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
     "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
       {
         "part": "root",
         "channel": "overflow-x",
@@ -117,6 +320,16 @@
       },
       {
         "part": "linearprogress-bar",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "linearprogress-bar",
         "channel": "transition-property",
         "value": "transform"
       },
@@ -124,6 +337,16 @@
         "part": "linearprogress-bar",
         "channel": "transition-timing-function",
         "value": "linear"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "linearprogress-bar-2",
@@ -144,6 +367,13 @@
     "state": []
   },
   "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
     {
       "part": "linearprogress-bar",
       "channel": "animation-duration",
@@ -171,6 +401,13 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "ease",
       "distinctValues": 2
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
     },
     {
       "part": "linearprogress-bar",
@@ -220,6 +457,13 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "cubic-bezier(0.165, 0.84, 0.44, 1)",
       "distinctValues": 1
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
     }
   ],
   "stateOverflow": [],
@@ -256,7 +500,29 @@
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: linearprogress-bar — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: linearprogress-bar-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "translate-door-generalized: linearprogress-bar — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round"
+    "control-equal-drop: root — 568 of 597 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 365 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: linearprogress-bar — 564 of 597 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: linearprogress-bar — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "translate-door-generalized: linearprogress-bar — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-equal-drop: linearprogress-bar — 360 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: linearprogress-bar-2 — 563 of 597 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: linearprogress-bar-2 — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: linearprogress-bar-2 — 360 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: linearprogress-bar — block-size 4px, inline-size 100.797px, perspective-origin 50.3906px 2px, transform-origin 0px 2px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: linearprogress-bar-2 — block-size 4px, inline-size 0px, perspective-origin 0px 2px, transform-origin 0px 2px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 4px, inline-size 288px, perspective-origin 144px 2px, transform-origin 144px 2px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-font-smoothing (linearprogress-bar, linearprogress-bar-2, root); -webkit-text-fill-color (linearprogress-bar, linearprogress-bar-2, root); -webkit-text-stroke-color (linearprogress-bar, linearprogress-bar-2, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-only: linearprogress-bar-2.caret-color equals ancestor \"root\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: linearprogress-bar-2.color equals ancestor \"root\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: linearprogress-bar-2.letter-spacing equals ancestor \"root\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: linearprogress-bar-2.line-height equals ancestor \"root\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: linearprogress-bar.caret-color equals ancestor \"root\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: linearprogress-bar.color equals ancestor \"root\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: linearprogress-bar.letter-spacing equals ancestor \"root\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: linearprogress-bar.line-height equals ancestor \"root\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -296,11 +562,17 @@
     "refusals": []
   },
   "enrichmentNotes": [
-    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: linearprogress-bar.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: linearprogress-bar.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: linearprogress-bar.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: linearprogress-bar.transition-timing-function = linear (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: linearprogress-bar-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: linearprogress-bar-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: linearprogress-bar-2.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: linearprogress-bar-2.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: linearprogress-bar-2.transition-timing-function = linear (v15 declared vocabulary — declared-not-drawn on canvas)"

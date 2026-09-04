@@ -2,95 +2,104 @@
   "component": "Accordion",
   "generatedBy": "extract/computed/gate.ts",
   "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 8,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 6400,
-    "cellsEqual": 5876,
-    "pctEqual": 91.8125,
+    "cellsCompared": 7552,
+    "cellsEqual": 6868,
+    "pctEqual": 90.9427966101695,
     "rowsFullyEqual": 0,
     "rows": 32
   },
   "pixel": {
     "pairs": 32,
-    "perfectExact": 3,
-    "perfectAA": 3,
+    "perfectExact": 0,
+    "perfectAA": 0,
     "measured": 32,
     "unscored": {
       "sizeMismatch": 0,
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 22.94025213068182,
-    "meanAA": 20.90558416193182,
-    "maxAA": 49.91477272727273
+    "meanExact": 24.330877130681813,
+    "meanAA": 21.511940696022727,
+    "maxAA": 53.27556818181818
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 58,
-    "mintedLeavesUnfolded": 58,
-    "baseBindings": 78,
+    "mintedLeaves": 60,
+    "mintedLeavesUnfolded": 60,
+    "baseBindings": 92,
     "stateBindings": 3,
-    "codeOnlyChannels": 19,
+    "codeOnlyChannels": 23,
     "overflowBindings": 1,
     "folds": 86
   },
   "worstRows": [
     {
-      "key": "outlined.expanded.disabled__focus-visible",
-      "pctAA": 49.91477272727273,
-      "pctExact": 52.02698863636363,
+      "key": "outlined.expanded.disabled__default",
+      "pctAA": 53.27556818181818,
+      "pctExact": 56.40198863636363,
       "channelsMismatched": 19
     },
     {
-      "key": "outlined.expanded.disabled__default",
-      "pctAA": 49.46164772727273,
-      "pctExact": 51.52840909090909,
-      "channelsMismatched": 18
-    },
-    {
       "key": "outlined.expanded.disabled__hover",
-      "pctAA": 49.46164772727273,
-      "pctExact": 51.52840909090909,
-      "channelsMismatched": 18
+      "pctAA": 53.27556818181818,
+      "pctExact": 56.40198863636363,
+      "channelsMismatched": 19
     },
     {
       "key": "outlined.expanded.disabled__active",
-      "pctAA": 49.46164772727273,
-      "pctExact": 51.52840909090909,
-      "channelsMismatched": 18
+      "pctAA": 53.27556818181818,
+      "pctExact": 56.40198863636363,
+      "channelsMismatched": 19
+    },
+    {
+      "key": "outlined.expanded.disabled__focus-visible",
+      "pctAA": 53.23721590909091,
+      "pctExact": 56.40198863636363,
+      "channelsMismatched": 20
     },
     {
       "key": "elevation.expanded.disabled__default",
-      "pctAA": 47.97017045454545,
-      "pctExact": 50.71590909090909,
-      "channelsMismatched": 10
+      "pctAA": 52.46590909090909,
+      "pctExact": 55.58380681818182,
+      "channelsMismatched": 19
     },
     {
       "key": "elevation.expanded.disabled__hover",
-      "pctAA": 47.97017045454545,
-      "pctExact": 50.71590909090909,
-      "channelsMismatched": 10
+      "pctAA": 52.46590909090909,
+      "pctExact": 55.58380681818182,
+      "channelsMismatched": 19
     },
     {
       "key": "elevation.expanded.disabled__active",
-      "pctAA": 47.97017045454545,
-      "pctExact": 50.71590909090909,
-      "channelsMismatched": 10
+      "pctAA": 52.46590909090909,
+      "pctExact": 55.58380681818182,
+      "channelsMismatched": 19
     },
     {
       "key": "elevation.expanded.disabled__focus-visible",
-      "pctAA": 47.96306818181818,
-      "pctExact": 51.90340909090909,
-      "channelsMismatched": 11
+      "pctAA": 52.45880681818182,
+      "pctExact": 56.77130681818182,
+      "channelsMismatched": 20
     }
   ],
   "topMismatchedChannels": [
     [
       "root.overflow-anchor",
+      32
+    ],
+    [
+      "root.text-size-adjust",
+      32
+    ],
+    [
+      "accordion-heading.text-size-adjust",
       32
     ],
     [
@@ -110,6 +119,10 @@
       32
     ],
     [
+      "accordionsummary-gutters.text-size-adjust",
+      32
+    ],
+    [
       "accordionsummary-gutters.transition-behavior",
       32
     ],
@@ -118,59 +131,51 @@
       32
     ],
     [
-      "collapse-root.overflow-x",
-      16
+      "label.text-size-adjust",
+      32
     ],
     [
-      "collapse-root.overflow-y",
-      16
+      "collapse-root.text-size-adjust",
+      32
     ],
     [
-      "collapse-root.visibility",
-      16
+      "collapse-vertical.text-size-adjust",
+      32
     ],
     [
-      "collapse-vertical.visibility",
-      16
+      "collapse-vertical-2.text-size-adjust",
+      32
     ],
     [
-      "collapse-vertical-2.visibility",
-      16
-    ],
-    [
-      "accordion-region.visibility",
-      16
-    ],
-    [
-      "label-2.visibility",
-      16
-    ],
-    [
-      "root.background-color",
-      16
+      "accordion-region.text-size-adjust",
+      32
     ]
   ],
   "namedLosses": [
     "promotion: pseudo-decor-hidden-in-combo: root::before is not drawn in every combo (opacity 0, box nullx1) — the component's own hidden state, NOT a grammar limit",
     "overflow: accordionsummary-gutters.opacity [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-    "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: root.overflow-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: accordion-heading.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: accordion-heading.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: accordion-heading.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: accordion-heading.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: accordion-heading.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: accordion-heading.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: accordion-heading.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h3>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h3> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: accordionsummary-gutters.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: accordionsummary-gutters.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: accordionsummary-gutters.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: collapse-root.overflow-x — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: collapse-root.overflow-y — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: collapse-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: collapse-root.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: collapse-vertical.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: collapse-vertical.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: collapse-vertical-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: collapse-vertical-2.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: accordion-region.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: accordion-region.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
@@ -179,29 +184,59 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1476,
+    "leavesAdded": 1934,
     "divergent": [
+      {
+        "token": "imported.accordion.collapse-root.height.expanded",
+        "fresh": "72px",
+        "shipped": "60px",
+        "resolvedEqual": false
+      },
       {
         "token": "imported.accordion.root.background-color",
         "fresh": "#ffffff",
         "shipped": "{palette-background-paper}",
         "resolvedEqual": true
+      },
+      {
+        "token": "imported.accordion.root.height.elevation.expanded",
+        "fresh": "136px",
+        "shipped": "124px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.accordion.root.height.outlined.expanded",
+        "fresh": "138px",
+        "shipped": "126px",
+        "resolvedEqual": false
       }
     ]
   },
   "rows": [
     {
       "key": "elevation.collapsed.enabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 186,
-      "pctExact": 2.3707386363636362,
-      "pctAA": 0.8366477272727273,
+      "channelsCompared": 236,
+      "channelsEqual": 213,
+      "pctExact": 3.434659090909091,
+      "pctAA": 1.0823863636363635,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -229,6 +264,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -238,6 +279,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -253,9 +300,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -265,15 +324,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -285,16 +362,28 @@
     },
     {
       "key": "elevation.collapsed.enabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 186,
-      "pctExact": 2.3707386363636362,
-      "pctAA": 0.8366477272727273,
+      "channelsCompared": 236,
+      "channelsEqual": 213,
+      "pctExact": 3.434659090909091,
+      "pctAA": 1.0823863636363635,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -322,6 +411,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -331,6 +426,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -346,9 +447,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -358,15 +471,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -378,16 +509,28 @@
     },
     {
       "key": "elevation.collapsed.enabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 184,
-      "pctExact": 23.913352272727273,
-      "pctAA": 20.15625,
+      "channelsCompared": 236,
+      "channelsEqual": 211,
+      "pctExact": 24.228693181818183,
+      "pctAA": 20.349431818181817,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -427,6 +570,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -436,6 +585,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -451,9 +606,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -463,15 +630,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -483,16 +668,28 @@
     },
     {
       "key": "elevation.collapsed.enabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 186,
-      "pctExact": 2.3707386363636362,
-      "pctAA": 0.8366477272727273,
+      "channelsCompared": 236,
+      "channelsEqual": 213,
+      "pctExact": 3.434659090909091,
+      "pctAA": 1.0823863636363635,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -520,6 +717,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -529,6 +732,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -544,9 +753,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -556,15 +777,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -576,10 +815,10 @@
     },
     {
       "key": "elevation.collapsed.disabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 183,
-      "pctExact": 21.995738636363637,
-      "pctAA": 19.95596590909091,
+      "channelsCompared": 236,
+      "channelsEqual": 210,
+      "pctExact": 22.335227272727273,
+      "pctAA": 20.154829545454547,
       "mismatches": [
         {
           "part": "root",
@@ -592,6 +831,18 @@
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -625,6 +876,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -642,6 +899,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -655,9 +918,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -667,15 +942,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -687,10 +980,10 @@
     },
     {
       "key": "elevation.collapsed.disabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 183,
-      "pctExact": 21.995738636363637,
-      "pctAA": 19.95596590909091,
+      "channelsCompared": 236,
+      "channelsEqual": 210,
+      "pctExact": 22.335227272727273,
+      "pctAA": 20.154829545454547,
       "mismatches": [
         {
           "part": "root",
@@ -703,6 +996,18 @@
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -736,6 +1041,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -753,6 +1064,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -766,9 +1083,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -778,15 +1107,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -798,10 +1145,10 @@
     },
     {
       "key": "elevation.collapsed.disabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 182,
-      "pctExact": 23.907670454545453,
-      "pctAA": 20.396306818181817,
+      "channelsCompared": 236,
+      "channelsEqual": 209,
+      "pctExact": 24.24715909090909,
+      "pctAA": 20.595170454545453,
       "mismatches": [
         {
           "part": "root",
@@ -814,6 +1161,18 @@
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -853,6 +1212,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -870,6 +1235,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -883,9 +1254,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -895,15 +1278,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -915,10 +1316,10 @@
     },
     {
       "key": "elevation.collapsed.disabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 183,
-      "pctExact": 21.995738636363637,
-      "pctAA": 19.95596590909091,
+      "channelsCompared": 236,
+      "channelsEqual": 210,
+      "pctExact": 22.335227272727273,
+      "pctAA": 20.154829545454547,
       "mismatches": [
         {
           "part": "root",
@@ -931,6 +1332,18 @@
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -964,6 +1377,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -981,6 +1400,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -994,9 +1419,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -1006,15 +1443,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -1026,16 +1481,28 @@
     },
     {
       "key": "elevation.expanded.enabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 193,
-      "pctExact": 0,
-      "pctAA": 0,
+      "channelsCompared": 236,
+      "channelsEqual": 220,
+      "pctExact": 3.0426136363636362,
+      "pctAA": 0.13352272727272727,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1063,6 +1530,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1072,21 +1545,69 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "elevation.expanded.enabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 193,
-      "pctExact": 0,
-      "pctAA": 0,
+      "channelsCompared": 236,
+      "channelsEqual": 220,
+      "pctExact": 3.0426136363636362,
+      "pctAA": 0.13352272727272727,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1114,6 +1635,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1123,21 +1650,69 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "elevation.expanded.enabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 191,
-      "pctExact": 27.775568181818183,
-      "pctAA": 25.849431818181817,
+      "channelsCompared": 236,
+      "channelsEqual": 218,
+      "pctExact": 30.069602272727273,
+      "pctAA": 25.930397727272727,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1177,6 +1752,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1186,21 +1767,69 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "elevation.expanded.enabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 193,
-      "pctExact": 0,
-      "pctAA": 0,
+      "channelsCompared": 236,
+      "channelsEqual": 220,
+      "pctExact": 3.0426136363636362,
+      "pctAA": 0.13352272727272727,
       "mismatches": [
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1228,6 +1857,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1237,15 +1872,51 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "elevation.expanded.disabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 190,
-      "pctExact": 50.71590909090909,
-      "pctAA": 47.97017045454545,
+      "channelsCompared": 236,
+      "channelsEqual": 217,
+      "pctExact": 55.58380681818182,
+      "pctAA": 52.46590909090909,
       "mismatches": [
         {
           "part": "root",
@@ -1258,6 +1929,18 @@
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1291,6 +1974,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1306,15 +1995,51 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "elevation.expanded.disabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 190,
-      "pctExact": 50.71590909090909,
-      "pctAA": 47.97017045454545,
+      "channelsCompared": 236,
+      "channelsEqual": 217,
+      "pctExact": 55.58380681818182,
+      "pctAA": 52.46590909090909,
       "mismatches": [
         {
           "part": "root",
@@ -1327,6 +2052,18 @@
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1360,6 +2097,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1375,15 +2118,51 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "elevation.expanded.disabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 189,
-      "pctExact": 51.90340909090909,
-      "pctAA": 47.96306818181818,
+      "channelsCompared": 236,
+      "channelsEqual": 216,
+      "pctExact": 56.77130681818182,
+      "pctAA": 52.45880681818182,
       "mismatches": [
         {
           "part": "root",
@@ -1396,6 +2175,18 @@
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1435,6 +2226,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1450,15 +2247,51 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "elevation.expanded.disabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 190,
-      "pctExact": 50.71590909090909,
-      "pctAA": 47.97017045454545,
+      "channelsCompared": 236,
+      "channelsEqual": 217,
+      "pctExact": 55.58380681818182,
+      "pctAA": 52.46590909090909,
       "mismatches": [
         {
           "part": "root",
@@ -1473,6 +2306,18 @@
           "theirs": "none"
         },
         {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "accordionsummary-gutters",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
@@ -1501,6 +2346,12 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1519,69 +2370,69 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.collapsed.enabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 178,
-      "pctExact": 4.308238636363637,
-      "pctAA": 2.2769886363636362,
+      "channelsCompared": 236,
+      "channelsEqual": 213,
+      "pctExact": 3.434659090909091,
+      "pctAA": 1.0823863636363635,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1609,6 +2460,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1618,6 +2475,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -1633,9 +2496,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -1645,15 +2520,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -1665,64 +2558,28 @@
     },
     {
       "key": "outlined.collapsed.enabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 178,
-      "pctExact": 4.308238636363637,
-      "pctAA": 2.2769886363636362,
+      "channelsCompared": 236,
+      "channelsEqual": 213,
+      "pctExact": 3.434659090909091,
+      "pctAA": 1.0823863636363635,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1750,6 +2607,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1759,6 +2622,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -1774,9 +2643,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -1786,15 +2667,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -1806,64 +2705,28 @@
     },
     {
       "key": "outlined.collapsed.enabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 176,
-      "pctExact": 23.291193181818183,
-      "pctAA": 21.230113636363637,
+      "channelsCompared": 236,
+      "channelsEqual": 211,
+      "pctExact": 23.134943181818183,
+      "pctAA": 20.696022727272727,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -1903,6 +2766,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -1912,6 +2781,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -1927,9 +2802,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -1939,15 +2826,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -1959,64 +2864,28 @@
     },
     {
       "key": "outlined.collapsed.enabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 178,
-      "pctExact": 4.308238636363637,
-      "pctAA": 2.2769886363636362,
+      "channelsCompared": 236,
+      "channelsEqual": 213,
+      "pctExact": 3.434659090909091,
+      "pctAA": 1.0823863636363635,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2044,6 +2913,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -2053,6 +2928,12 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-root",
@@ -2068,9 +2949,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -2080,15 +2973,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -2100,10 +3011,10 @@
     },
     {
       "key": "outlined.collapsed.disabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 175,
-      "pctExact": 22.813920454545453,
-      "pctAA": 20.79971590909091,
+      "channelsCompared": 236,
+      "channelsEqual": 210,
+      "pctExact": 23.15340909090909,
+      "pctAA": 20.964488636363637,
       "mismatches": [
         {
           "part": "root",
@@ -2113,57 +3024,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2197,6 +3072,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -2214,6 +3095,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -2227,9 +3114,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -2239,15 +3138,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -2259,10 +3176,10 @@
     },
     {
       "key": "outlined.collapsed.disabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 175,
-      "pctExact": 22.813920454545453,
-      "pctAA": 20.79971590909091,
+      "channelsCompared": 236,
+      "channelsEqual": 210,
+      "pctExact": 23.15340909090909,
+      "pctAA": 20.964488636363637,
       "mismatches": [
         {
           "part": "root",
@@ -2272,57 +3189,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2356,6 +3237,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -2373,6 +3260,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -2386,9 +3279,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -2398,15 +3303,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -2418,10 +3341,10 @@
     },
     {
       "key": "outlined.collapsed.disabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 174,
-      "pctExact": 23.289772727272727,
-      "pctAA": 21.234375,
+      "channelsCompared": 236,
+      "channelsEqual": 209,
+      "pctExact": 23.15340909090909,
+      "pctAA": 20.941761363636363,
       "mismatches": [
         {
           "part": "root",
@@ -2431,57 +3354,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2521,6 +3408,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -2538,6 +3431,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -2551,9 +3450,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -2563,15 +3474,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -2583,10 +3512,10 @@
     },
     {
       "key": "outlined.collapsed.disabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 175,
-      "pctExact": 22.813920454545453,
-      "pctAA": 20.79971590909091,
+      "channelsCompared": 236,
+      "channelsEqual": 210,
+      "pctExact": 23.15340909090909,
+      "pctAA": 20.964488636363637,
       "mismatches": [
         {
           "part": "root",
@@ -2596,57 +3525,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2677,6 +3570,12 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2697,6 +3596,12 @@
           "theirs": "default"
         },
         {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
           "part": "collapse-root",
           "channel": "overflow-x",
           "ours": "visible",
@@ -2710,9 +3615,21 @@
         },
         {
           "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "collapse-vertical",
@@ -2722,15 +3639,33 @@
         },
         {
           "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
         },
         {
           "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
           "channel": "visibility",
           "ours": "visible",
           "theirs": "hidden"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "label-2",
@@ -2742,64 +3677,28 @@
     },
     {
       "key": "outlined.expanded.enabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 185,
-      "pctExact": 5.316761363636363,
-      "pctAA": 3.2144886363636362,
+      "channelsCompared": 236,
+      "channelsEqual": 220,
+      "pctExact": 3.0426136363636362,
+      "pctAA": 0.13352272727272727,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2827,6 +3726,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -2836,69 +3741,69 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.expanded.enabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 185,
-      "pctExact": 5.316761363636363,
-      "pctAA": 3.2144886363636362,
+      "channelsCompared": 236,
+      "channelsEqual": 220,
+      "pctExact": 3.0426136363636362,
+      "pctAA": 0.13352272727272727,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -2926,6 +3831,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -2935,69 +3846,69 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.expanded.enabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 183,
-      "pctExact": 30.83096590909091,
-      "pctAA": 28.6875,
+      "channelsCompared": 236,
+      "channelsEqual": 218,
+      "pctExact": 29.29403409090909,
+      "pctAA": 26.295454545454547,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -3037,6 +3948,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -3046,69 +3963,69 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.expanded.enabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 185,
-      "pctExact": 5.316761363636363,
-      "pctAA": 3.2144886363636362,
+      "channelsCompared": 236,
+      "channelsEqual": 220,
+      "pctExact": 3.0426136363636362,
+      "pctAA": 0.13352272727272727,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
         {
           "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -3136,6 +4053,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -3145,15 +4068,51 @@
           "channel": "vertical-align",
           "ours": "baseline",
           "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.expanded.disabled__default",
-      "channelsCompared": 200,
-      "channelsEqual": 182,
-      "pctExact": 51.52840909090909,
-      "pctAA": 49.46164772727273,
+      "channelsCompared": 236,
+      "channelsEqual": 217,
+      "pctExact": 56.40198863636363,
+      "pctAA": 53.27556818181818,
       "mismatches": [
         {
           "part": "root",
@@ -3163,57 +4122,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -3247,6 +4170,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -3262,15 +4191,51 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.expanded.disabled__hover",
-      "channelsCompared": 200,
-      "channelsEqual": 182,
-      "pctExact": 51.52840909090909,
-      "pctAA": 49.46164772727273,
+      "channelsCompared": 236,
+      "channelsEqual": 217,
+      "pctExact": 56.40198863636363,
+      "pctAA": 53.27556818181818,
       "mismatches": [
         {
           "part": "root",
@@ -3280,57 +4245,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -3364,6 +4293,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -3379,15 +4314,51 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.expanded.disabled__focus-visible",
-      "channelsCompared": 200,
-      "channelsEqual": 181,
-      "pctExact": 52.02698863636363,
-      "pctAA": 49.91477272727273,
+      "channelsCompared": 236,
+      "channelsEqual": 216,
+      "pctExact": 56.40198863636363,
+      "pctAA": 53.23721590909091,
       "mismatches": [
         {
           "part": "root",
@@ -3397,57 +4368,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -3487,6 +4422,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -3502,15 +4443,51 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     },
     {
       "key": "outlined.expanded.disabled__active",
-      "channelsCompared": 200,
-      "channelsEqual": 182,
-      "pctExact": 51.52840909090909,
-      "pctAA": 49.46164772727273,
+      "channelsCompared": 236,
+      "channelsEqual": 217,
+      "pctExact": 56.40198863636363,
+      "pctAA": 53.27556818181818,
       "mismatches": [
         {
           "part": "root",
@@ -3520,57 +4497,21 @@
         },
         {
           "part": "root",
-          "channel": "border-bottom-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-bottom-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-style",
-          "ours": "none",
-          "theirs": "solid"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-width",
-          "ours": "0px",
-          "theirs": "1px"
-        },
-        {
-          "part": "root",
           "channel": "overflow-anchor",
           "ours": "auto",
           "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-heading",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "accordionsummary-gutters",
@@ -3604,6 +4545,12 @@
         },
         {
           "part": "accordionsummary-gutters",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordionsummary-gutters",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal"
@@ -3619,6 +4566,42 @@
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "default"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "collapse-vertical-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "accordion-region",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         }
       ]
     }

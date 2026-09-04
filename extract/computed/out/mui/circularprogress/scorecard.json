@@ -1,40 +1,41 @@
 {
   "component": "CircularProgress",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 2,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 152,
-    "cellsEqual": 116,
-    "pctEqual": 76.3157894736842,
+    "cellsCompared": 192,
+    "cellsEqual": 148,
+    "pctEqual": 77.08333333333333,
     "rowsFullyEqual": 0,
     "rows": 8
   },
   "pixel": {
     "pairs": 8,
-    "perfectExact": 0,
-    "perfectAA": 0,
+    "perfectExact": 4,
+    "perfectAA": 4,
     "measured": 8,
     "unscored": {
       "sizeMismatch": 0,
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 1.1555989583333335,
-    "meanAA": 0.6412760416666667,
+    "meanExact": 0.7845052083333334,
+    "meanAA": 0.4134114583333333,
     "maxAA": 0.8268229166666666
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 2,
-    "mintedLeavesUnfolded": 2,
-    "baseBindings": 2,
+    "mintedLeaves": 3,
+    "mintedLeavesUnfolded": 3,
+    "baseBindings": 3,
     "stateBindings": 0,
-    "codeOnlyChannels": 8,
+    "codeOnlyChannels": 9,
     "overflowBindings": 0,
     "folds": 30
   },
@@ -43,52 +44,56 @@
       "key": "indeterminate__default",
       "pctAA": 0.8268229166666666,
       "pctExact": 1.5690104166666667,
-      "channelsMismatched": 5
+      "channelsMismatched": 6
     },
     {
       "key": "indeterminate__hover",
       "pctAA": 0.8268229166666666,
       "pctExact": 1.5690104166666667,
-      "channelsMismatched": 5
+      "channelsMismatched": 6
     },
     {
       "key": "indeterminate__focus-visible",
       "pctAA": 0.8268229166666666,
       "pctExact": 1.5690104166666667,
-      "channelsMismatched": 5
+      "channelsMismatched": 6
     },
     {
       "key": "indeterminate__active",
       "pctAA": 0.8268229166666666,
       "pctExact": 1.5690104166666667,
-      "channelsMismatched": 5
+      "channelsMismatched": 6
     },
     {
       "key": "determinate__default",
-      "pctAA": 0.4557291666666667,
-      "pctExact": 0.7421875,
-      "channelsMismatched": 4
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 5
     },
     {
       "key": "determinate__hover",
-      "pctAA": 0.4557291666666667,
-      "pctExact": 0.7421875,
-      "channelsMismatched": 4
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 5
     },
     {
       "key": "determinate__focus-visible",
-      "pctAA": 0.4557291666666667,
-      "pctExact": 0.7421875,
-      "channelsMismatched": 4
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 5
     },
     {
       "key": "determinate__active",
-      "pctAA": 0.4557291666666667,
-      "pctExact": 0.7421875,
-      "channelsMismatched": 4
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 5
     }
   ],
   "topMismatchedChannels": [
+    [
+      "root.text-size-adjust",
+      8
+    ],
     [
       "root.transform",
       8
@@ -127,6 +132,7 @@
     "code-only: root.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: root.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: root.transition-property — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
@@ -138,17 +144,30 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1433,
-    "divergent": []
+    "leavesAdded": 1992,
+    "divergent": [
+      {
+        "token": "imported.circular-progress.root.color",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      }
+    ]
   },
   "rows": [
     {
       "key": "determinate__default",
-      "channelsCompared": 19,
-      "channelsEqual": 15,
-      "pctExact": 0.7421875,
-      "pctAA": 0.4557291666666667,
+      "channelsCompared": 24,
+      "channelsEqual": 19,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "transform",
@@ -177,11 +196,17 @@
     },
     {
       "key": "determinate__hover",
-      "channelsCompared": 19,
-      "channelsEqual": 15,
-      "pctExact": 0.7421875,
-      "pctAA": 0.4557291666666667,
+      "channelsCompared": 24,
+      "channelsEqual": 19,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "transform",
@@ -210,11 +235,17 @@
     },
     {
       "key": "determinate__focus-visible",
-      "channelsCompared": 19,
-      "channelsEqual": 15,
-      "pctExact": 0.7421875,
-      "pctAA": 0.4557291666666667,
+      "channelsCompared": 24,
+      "channelsEqual": 19,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "transform",
@@ -243,11 +274,17 @@
     },
     {
       "key": "determinate__active",
-      "channelsCompared": 19,
-      "channelsEqual": 15,
-      "pctExact": 0.7421875,
-      "pctAA": 0.4557291666666667,
+      "channelsCompared": 24,
+      "channelsEqual": 19,
+      "pctExact": 0,
+      "pctAA": 0,
       "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
         {
           "part": "root",
           "channel": "transform",
@@ -276,8 +313,8 @@
     },
     {
       "key": "indeterminate__default",
-      "channelsCompared": 19,
-      "channelsEqual": 14,
+      "channelsCompared": 24,
+      "channelsEqual": 18,
       "pctExact": 1.5690104166666667,
       "pctAA": 0.8268229166666666,
       "mismatches": [
@@ -304,6 +341,12 @@
           "channel": "animation-timing-function",
           "ours": "ease",
           "theirs": "linear"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -315,8 +358,8 @@
     },
     {
       "key": "indeterminate__hover",
-      "channelsCompared": 19,
-      "channelsEqual": 14,
+      "channelsCompared": 24,
+      "channelsEqual": 18,
       "pctExact": 1.5690104166666667,
       "pctAA": 0.8268229166666666,
       "mismatches": [
@@ -343,6 +386,12 @@
           "channel": "animation-timing-function",
           "ours": "ease",
           "theirs": "linear"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -354,8 +403,8 @@
     },
     {
       "key": "indeterminate__focus-visible",
-      "channelsCompared": 19,
-      "channelsEqual": 14,
+      "channelsCompared": 24,
+      "channelsEqual": 18,
       "pctExact": 1.5690104166666667,
       "pctAA": 0.8268229166666666,
       "mismatches": [
@@ -382,6 +431,12 @@
           "channel": "animation-timing-function",
           "ours": "ease",
           "theirs": "linear"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",
@@ -393,8 +448,8 @@
     },
     {
       "key": "indeterminate__active",
-      "channelsCompared": 19,
-      "channelsEqual": 14,
+      "channelsCompared": 24,
+      "channelsEqual": 18,
       "pctExact": 1.5690104166666667,
       "pctAA": 0.8268229166666666,
       "mismatches": [
@@ -421,6 +476,12 @@
           "channel": "animation-timing-function",
           "ours": "ease",
           "theirs": "linear"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
         },
         {
           "part": "root",

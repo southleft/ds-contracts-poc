@@ -4,7 +4,7 @@
   "name": "Alert",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -136,6 +136,7 @@
             }
           },
           "declared": {
+            "box-sizing": "border-box",
             "font-family": "Roboto, Helvetica, Arial, sans-serif"
           },
           "tokens": {
@@ -174,6 +175,7 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Alert-message — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "auto",
             "overflow-y": "auto"
@@ -207,7 +209,20 @@
           ]
         }
       },
+      "stylesWhen": [
+        {
+          "prop": "variant",
+          "equals": "outlined",
+          "styles": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        }
+      ],
       "declared": {
+        "box-sizing": "border-box",
         "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "transition-duration": "0.3s",
         "transition-property": "box-shadow",
@@ -232,7 +247,8 @@
         "padding-bottom": "{imported.alert.root.padding-bottom}",
         "padding-left": "{imported.alert.root.padding-left}",
         "padding-right": "{imported.alert.root.padding-right}",
-        "padding-top": "{imported.alert.root.padding-top}"
+        "padding-top": "{imported.alert.root.padding-top}",
+        "width": "{imported.alert.root.width}"
       },
       "tokensByProp": [
         {

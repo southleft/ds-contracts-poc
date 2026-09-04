@@ -4,7 +4,7 @@
   "name": "IconButton",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI Wave 5 denominator round — bounded size × color cartesian (3×3); disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI Wave 5 denominator round — bounded size × color cartesian (3×3); disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "button"
   },
@@ -111,6 +111,7 @@
         "border-right-style": "none",
         "border-top-style": "none",
         "cursor": "pointer",
+        "font-family": "Arial",
         "position": "relative",
         "transition-duration": "0.15s",
         "transition-property": "background-color",

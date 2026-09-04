@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "pass",
-  "matchDeveloped": false,
-  "recommendMatchDeveloped": true,
+  "status": "fail",
+  "matchDeveloped": true,
+  "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 49.30555555555556,
-    "pctAAUnmasked": 0.6944444444444444,
-    "pctAAMasked": 0.6944444444444444,
+    "pctExactUnmasked": 65.27777777777779,
+    "pctAAUnmasked": 20.833333333333336,
+    "pctAAMasked": 20.833333333333336,
     "maskCoveragePct": 0,
     "canvasPx": "9x16",
-    "realPx": "9x16",
+    "realPx": "8x16",
     "inkCanvasPct": 52.77777777777778,
-    "inkRealPct": 54.861111111111114
+    "inkRealPct": 50
   },
   "reference": "extract/computed/out/mui/inputadornment/orig-shots/end__default.png",
-  "referenceSha256": "379b684fabf2e8169a64f70dfe3b90968345434cd907dcf85b08853a8c8b5ec2",
+  "referenceSha256": "93a868d8be532d23510b678e2dad81d1b998b2edf4b13da74207f3a1aa5b8156",
   "canvasShot": "parity/receipts/console-loop/mui/shots/input-adornment-cell.png",
   "canvasShotSha256": "54a2fce95391d856b337c8344ece455c7c860f245770e6392e904869f5a1d2eb",
   "diff": "parity/receipts/console-loop/mui/scores/input-adornment.diff.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/mui/components/input-adornment.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": true,
+  "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 2.0833333333333357,
+  "scaleRatio": 1.125,
+  "inkDelta": 2.7777777777777786,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-11T14:26:09.817Z"
+  "note": "pixel bar missed (pctAAMasked=20.83 > 5)",
+  "recordedAt": "2026-09-04T19:07:36.838Z"
 }

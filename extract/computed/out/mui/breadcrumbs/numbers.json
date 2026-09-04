@@ -1,24 +1,24 @@
 {
   "component": "Breadcrumbs",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 10,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 18,
-    "breadcrumbs-ol": 21,
-    "breadcrumbs-li": 17,
-    "label": 22,
-    "label-2": 22,
-    "breadcrumbs-li-2": 17,
-    "label-3": 22,
-    "label-4": 22,
-    "breadcrumbs-li-3": 17,
-    "label-5": 20
+    "root": 20,
+    "breadcrumbs-ol": 23,
+    "breadcrumbs-li": 19,
+    "label": 24,
+    "label-2": 24,
+    "breadcrumbs-li-2": 19,
+    "label-3": 24,
+    "label-4": 24,
+    "breadcrumbs-li-3": 19,
+    "label-5": 22
   },
   "folds": {
     "count": 99,
@@ -639,11 +639,11 @@
     }
   },
   "declared": {
-    "base": 14,
+    "base": 24,
     "state": 1
   },
   "codeOnly": {
-    "base": 20,
+    "base": 29,
     "state": 0,
     "overflowBindings": 3
   },
@@ -656,9 +656,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 27040,
-    "cellsMatched": 27020,
-    "pct": 99.92603550295858,
+    "cellsCompared": 26920,
+    "cellsMatched": 26892,
+    "pct": 99.89598811292718,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -668,11 +668,11 @@
     "topMismatchedChannels": [
       [
         "inline-size",
-        8
+        12
       ],
       [
         "width",
-        8
+        12
       ],
       [
         "perspective-origin",
@@ -689,40 +689,40 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.5631510416666666,
-      "max": 0.5631510416666666,
+      "mean": 5.496419270833333,
+      "max": 6.097005208333333,
       "perfect": 0
     },
     "aa": {
-      "mean": 0.06510416666666667,
-      "max": 0.06510416666666667,
+      "mean": 2.29248046875,
+      "max": 2.79296875,
       "perfect": 0
     },
     "worst": [
       {
+        "key": "__focus-visible",
+        "pctExact": 6.097005208333333,
+        "pctAA": 2.79296875
+      },
+      {
         "key": "__default",
-        "pctExact": 0.5631510416666666,
-        "pctAA": 0.06510416666666667
+        "pctExact": 5.296223958333333,
+        "pctAA": 2.1256510416666665
       },
       {
         "key": "__hover",
-        "pctExact": 0.5631510416666666,
-        "pctAA": 0.06510416666666667
-      },
-      {
-        "key": "__focus-visible",
-        "pctExact": 0.5631510416666666,
-        "pctAA": 0.06510416666666667
+        "pctExact": 5.296223958333333,
+        "pctAA": 2.1256510416666665
       },
       {
         "key": "__active",
-        "pctExact": 0.5631510416666666,
-        "pctAA": 0.06510416666666667
+        "pctExact": 5.296223958333333,
+        "pctAA": 2.1256510416666665
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 94.79695431472081,
+    "computedPctEqual": 91.12903225806451,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

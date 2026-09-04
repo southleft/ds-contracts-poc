@@ -2,14 +2,24 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "Breadcrumbs",
   "config": "extract/computed/configs/mui.json",
-  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "breadcrumbs-ol",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "breadcrumbs-ol",
@@ -18,8 +28,18 @@
       },
       {
         "part": "breadcrumbs-li",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "breadcrumbs-li",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label",
@@ -30,6 +50,11 @@
         "part": "label",
         "channel": "text-decoration-line",
         "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-2",
@@ -43,8 +68,18 @@
       },
       {
         "part": "breadcrumbs-li-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "breadcrumbs-li-2",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-3",
@@ -58,6 +93,11 @@
       },
       {
         "part": "label-4",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-4",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
       },
@@ -68,8 +108,18 @@
       },
       {
         "part": "breadcrumbs-li-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "breadcrumbs-li-3",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-5",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-5",
@@ -90,16 +140,15 @@
   "scorecard": {
     "component": "Breadcrumbs",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
     "renderedBy": "149.0.7827.55",
-    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 788,
-      "cellsEqual": 751,
-      "pctEqual": 95.30456852791878,
+      "cellsCompared": 868,
+      "cellsEqual": 791,
+      "pctEqual": 91.12903225806451,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -125,7 +174,7 @@
       "mintedLeavesUnfolded": 11,
       "baseBindings": 56,
       "stateBindings": 3,
-      "codeOnlyChannels": 19,
+      "codeOnlyChannels": 29,
       "overflowBindings": 3,
       "folds": 99
     },
@@ -134,34 +183,42 @@
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 20,
         "unscorable": "no-original"
       },
       {
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
+        "root.text-size-adjust",
+        4
+      ],
+      [
         "breadcrumbs-ol.list-style-type",
+        4
+      ],
+      [
+        "breadcrumbs-ol.text-size-adjust",
         4
       ],
       [
@@ -169,7 +226,15 @@
         4
       ],
       [
+        "breadcrumbs-li.text-size-adjust",
+        4
+      ],
+      [
         "label.list-style-type",
+        4
+      ],
+      [
+        "label.text-size-adjust",
         4
       ],
       [
@@ -177,7 +242,15 @@
         4
       ],
       [
+        "label-2.text-size-adjust",
+        4
+      ],
+      [
         "breadcrumbs-li-2.list-style-type",
+        4
+      ],
+      [
+        "breadcrumbs-li-2.text-size-adjust",
         4
       ],
       [
@@ -185,44 +258,50 @@
         4
       ],
       [
+        "label-3.text-size-adjust",
+        4
+      ],
+      [
         "label-4.list-style-type",
         4
       ],
       [
-        "breadcrumbs-li-3.list-style-type",
+        "label-4.text-size-adjust",
         4
-      ],
-      [
-        "label-5.list-style-type",
-        4
-      ],
-      [
-        "label.outline-color",
-        1
       ]
     ],
     "namedLosses": [
       "overflow: label.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: label.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: label.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <nav>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <nav> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <nav>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <nav> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-ol.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ol>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ol> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: breadcrumbs-ol.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ol>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ol> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-ol.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ol>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ol> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-li.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: breadcrumbs-li.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-li.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-li-2.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: breadcrumbs-li-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-li-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-3.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-3.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-4.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-4.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-4.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-li-3.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: breadcrumbs-li-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-li-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-5.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-5.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-5.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
@@ -237,17 +316,29 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 197,
-        "channelsEqual": 188,
+        "channelsCompared": 217,
+        "channelsEqual": 198,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "breadcrumbs-ol",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "breadcrumbs-li",
@@ -256,10 +347,22 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -268,10 +371,22 @@
             "theirs": "none"
           },
           {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-li-2",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "breadcrumbs-li-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-3",
@@ -280,10 +395,22 @@
             "theirs": "none"
           },
           {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-4",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-4",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "breadcrumbs-li-3",
@@ -292,22 +419,40 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-5",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-5",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__hover",
-        "channelsCompared": 197,
-        "channelsEqual": 188,
+        "channelsCompared": 217,
+        "channelsEqual": 198,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",
@@ -315,10 +460,22 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-ol",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-li",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "breadcrumbs-li",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label",
@@ -327,10 +484,22 @@
             "theirs": "none"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "breadcrumbs-li-2",
@@ -339,10 +508,22 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-3",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-4",
@@ -351,28 +532,52 @@
             "theirs": "none"
           },
           {
+            "part": "label-4",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-li-3",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-5",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-5",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 197,
-        "channelsEqual": 187,
+        "channelsCompared": 217,
+        "channelsEqual": 197,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",
@@ -380,10 +585,22 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-ol",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-li",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "breadcrumbs-li",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label",
@@ -398,10 +615,22 @@
             "theirs": "rgba(0, 95, 204, 1)"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "breadcrumbs-li-2",
@@ -410,10 +639,22 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-3",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-4",
@@ -422,33 +663,63 @@
             "theirs": "none"
           },
           {
+            "part": "label-4",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-li-3",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-5",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-5",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__active",
-        "channelsCompared": 197,
-        "channelsEqual": 188,
+        "channelsCompared": 217,
+        "channelsEqual": 198,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "breadcrumbs-ol",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "breadcrumbs-li",
@@ -457,10 +728,22 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-2",
@@ -469,10 +752,22 @@
             "theirs": "none"
           },
           {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "breadcrumbs-li-2",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "breadcrumbs-li-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "label-3",
@@ -481,10 +776,22 @@
             "theirs": "none"
           },
           {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-4",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-4",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "breadcrumbs-li-3",
@@ -493,10 +800,22 @@
             "theirs": "none"
           },
           {
+            "part": "breadcrumbs-li-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "label-5",
             "channel": "list-style-type",
             "ours": "decimal",
             "theirs": "none"
+          },
+          {
+            "part": "label-5",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

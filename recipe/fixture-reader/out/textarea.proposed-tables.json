@@ -881,7 +881,7 @@
     "source": {
       "packageName": "@mui/material",
       "version": "9.2.0",
-      "exportName": "TextField"
+      "exportName": "Textarea"
     },
     "ledger": "extract/computed/out/mui/textarea/captured-truth.json",
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",

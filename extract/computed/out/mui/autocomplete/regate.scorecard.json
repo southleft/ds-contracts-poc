@@ -7,6 +7,26 @@
   "declared": {
     "base": [
       {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
         "part": "formcontrol-fullwidth",
         "channel": "position",
         "value": "relative"
@@ -83,6 +103,11 @@
       },
       {
         "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
         "channel": "cursor",
         "value": "text"
       },
@@ -115,6 +140,11 @@
         "part": "label",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "icon",
@@ -213,6 +243,11 @@
       },
       {
         "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
         "channel": "cursor",
         "value": "text"
       },
@@ -245,6 +280,11 @@
         "part": "label-2",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "icon-2",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "icon-2",
@@ -320,6 +360,11 @@
         "part": "autocomplete-input",
         "channel": "text-overflow",
         "value": "ellipsis"
+      },
+      {
+        "part": "autocomplete-endadornment",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "autocomplete-endadornment",
@@ -413,6 +458,11 @@
       },
       {
         "part": "outlinedinput-notchedoutline",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
         "channel": "cursor",
         "value": "text"
       },
@@ -440,6 +490,11 @@
         "part": "outlinedinput-notchedoutline",
         "channel": "text-align",
         "value": "left"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "part-0-0-4-0",
@@ -488,6 +543,11 @@
       },
       {
         "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-3",
         "channel": "cursor",
         "value": "text"
       },
@@ -519,9 +579,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 2632,
-      "cellsEqual": 2516,
-      "pctEqual": 95.59270516717325,
+      "cellsCompared": 2920,
+      "cellsEqual": 2708,
+      "pctEqual": 92.73972602739725,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -545,77 +605,93 @@
       "contradictions": 0,
       "mintedLeaves": 136,
       "mintedLeavesUnfolded": 185,
-      "baseBindings": 185,
+      "baseBindings": 191,
       "stateBindings": 26,
       "codeOnlyChannels": 30,
       "overflowBindings": 26,
-      "folds": 204
+      "folds": 224
     },
     "worstRows": [
       {
         "key": "small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 18,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "small__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 18,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 18,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "small__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 26,
         "unscorable": "no-original"
       },
       {
         "key": "medium__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 26,
         "unscorable": "no-original"
       },
       {
         "key": "medium__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 26,
         "unscorable": "no-original"
       },
       {
         "key": "small__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 22,
         "unscorable": "no-original"
       },
       {
         "key": "medium__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 22,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
+        "root.text-size-adjust",
+        8
+      ],
+      [
+        "formcontrol-fullwidth.text-size-adjust",
+        8
+      ],
+      [
         "formcontrol-fullwidth.vertical-align",
         8
       ],
       [
+        "autocomplete-inputroot.text-size-adjust",
+        8
+      ],
+      [
         "autocomplete-tag.max-width",
+        8
+      ],
+      [
+        "autocomplete-tag.text-size-adjust",
         8
       ],
       [
@@ -627,7 +703,15 @@
         8
       ],
       [
+        "label.text-size-adjust",
+        8
+      ],
+      [
         "autocomplete-tag-2.max-width",
+        8
+      ],
+      [
+        "autocomplete-tag-2.text-size-adjust",
         8
       ],
       [
@@ -639,36 +723,12 @@
         8
       ],
       [
+        "label-2.text-size-adjust",
+        8
+      ],
+      [
         "autocomplete-input.animation-duration",
         8
-      ],
-      [
-        "autocomplete-input.animation-name",
-        8
-      ],
-      [
-        "outlinedinput-notchedoutline.min-width",
-        8
-      ],
-      [
-        "outlinedinput-notchedoutline.border-bottom-color",
-        6
-      ],
-      [
-        "outlinedinput-notchedoutline.border-left-color",
-        6
-      ],
-      [
-        "outlinedinput-notchedoutline.border-right-color",
-        6
-      ],
-      [
-        "outlinedinput-notchedoutline.border-top-color",
-        6
-      ],
-      [
-        "outlinedinput-notchedoutline.border-bottom-width",
-        3
       ]
     ],
     "namedLosses": [
@@ -700,35 +760,35 @@
       "overflow: outlinedinput-notchedoutline.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: outlinedinput-notchedoutline.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: outlinedinput-notchedoutline.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: formcontrol-fullwidth.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: formcontrol-fullwidth.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: formcontrol-fullwidth.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: autocomplete-inputroot.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: autocomplete-inputroot.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-tag.max-width — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: autocomplete-tag.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: autocomplete-tag.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-tag.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-tag.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: icon.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: autocomplete-tag-2.max-width — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: autocomplete-tag-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: autocomplete-tag-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-tag-2.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-tag-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: icon-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: autocomplete-input.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: autocomplete-input.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: autocomplete-input.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: autocomplete-endadornment.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: autocomplete-popupindicator.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: autocomplete-input.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: autocomplete-endadornment.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: autocomplete-popupindicator.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-popupindicator.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: outlinedinput-notchedoutline.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: outlinedinput-notchedoutline.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: part-0-0-4-0.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <legend>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <legend> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: outlinedinput-notchedoutline.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: part-0-0-4-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <legend>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <legend> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: part-0-0-4-0.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <legend>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <legend> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: label-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only[active]: autocomplete-popupindicator.transform — value shape outside mintable kinds and outside the declared vocabulary"
     ],
     "unresolvedTokenRefs": {
@@ -738,17 +798,66 @@
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
       "leavesAdded": 1859,
-      "divergent": []
+      "divergent": [
+        {
+          "token": "imported.autocomplete.autocomplete-input.width.medium",
+          "fresh": "51.141px",
+          "shipped": "53.734px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.autocomplete.autocomplete-input.width.small",
+          "fresh": "84.141px",
+          "shipped": "86.734px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.autocomplete.autocomplete-tag-2.width.medium",
+          "fresh": "71.9219px",
+          "shipped": "70.9688px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.autocomplete.autocomplete-tag-2.width.small",
+          "fresh": "58.9219px",
+          "shipped": "57.9688px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.autocomplete.autocomplete-tag.width.medium",
+          "fresh": "78.9375px",
+          "shipped": "77.2969px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.autocomplete.autocomplete-tag.width.small",
+          "fresh": "65.9375px",
+          "shipped": "64.2969px",
+          "resolvedEqual": false
+        }
+      ]
     },
     "rows": [
       {
         "key": "small__default",
-        "channelsCompared": 329,
-        "channelsEqual": 319,
+        "channelsCompared": 365,
+        "channelsEqual": 343,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -756,10 +865,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -774,10 +895,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -790,6 +923,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -804,22 +943,64 @@
             "theirs": "mui-auto-fill-cancel"
           },
           {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "outlinedinput-notchedoutline",
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__hover",
-        "channelsCompared": 329,
-        "channelsEqual": 315,
+        "channelsCompared": 365,
+        "channelsEqual": 339,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -827,10 +1008,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -845,10 +1038,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -861,6 +1066,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -873,6 +1084,18 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -903,18 +1126,48 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__focus-visible",
-        "channelsCompared": 329,
-        "channelsEqual": 311,
+        "channelsCompared": 365,
+        "channelsEqual": 335,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -922,10 +1175,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -940,10 +1205,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -956,6 +1233,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -968,6 +1251,18 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1022,18 +1317,48 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small__active",
-        "channelsCompared": 329,
-        "channelsEqual": 311,
+        "channelsCompared": 365,
+        "channelsEqual": 335,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1041,10 +1366,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -1059,10 +1396,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1075,6 +1424,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -1087,6 +1442,18 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1141,18 +1508,48 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__default",
-        "channelsCompared": 329,
-        "channelsEqual": 319,
+        "channelsCompared": 365,
+        "channelsEqual": 343,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1160,10 +1557,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -1178,10 +1587,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1194,6 +1615,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -1206,24 +1633,66 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "outlinedinput-notchedoutline",
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__hover",
-        "channelsCompared": 329,
-        "channelsEqual": 315,
+        "channelsCompared": 365,
+        "channelsEqual": 339,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1231,10 +1700,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -1249,10 +1730,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1265,6 +1758,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -1277,6 +1776,18 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1307,18 +1818,48 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__focus-visible",
-        "channelsCompared": 329,
-        "channelsEqual": 311,
+        "channelsCompared": 365,
+        "channelsEqual": 335,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1326,10 +1867,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -1344,10 +1897,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1360,6 +1925,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -1372,6 +1943,18 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1426,18 +2009,48 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium__active",
-        "channelsCompared": 329,
-        "channelsEqual": 315,
+        "channelsCompared": 365,
+        "channelsEqual": 339,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "formcontrol-fullwidth",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1445,10 +2058,22 @@
             "theirs": "top"
           },
           {
+            "part": "autocomplete-inputroot",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag",
@@ -1463,10 +2088,22 @@
             "theirs": "middle"
           },
           {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
+          },
+          {
+            "part": "autocomplete-tag-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1479,6 +2116,12 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "autocomplete-input",
@@ -1491,6 +2134,18 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
+          },
+          {
+            "part": "autocomplete-input",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "autocomplete-endadornment",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1521,6 +2176,24 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
+          },
+          {
+            "part": "outlinedinput-notchedoutline",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-0-0-4-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

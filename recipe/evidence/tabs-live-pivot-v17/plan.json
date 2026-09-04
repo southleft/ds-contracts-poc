@@ -1,6 +1,6 @@
 {
-  "pageName": "Recipe Pivot / Tabs / be4dbcc3-3ba3a5d8-506880be-042f2a5f-0cbe5625-tabs-v17",
-  "runIdentity": "be4dbcc3-3ba3a5d8-506880be-042f2a5f-0cbe5625-tabs-v17",
+  "pageName": "Recipe Pivot / Tabs / be4dbcc3-3ba3a5d8-506880be-fb303c8a-0cbe5625-tabs-v17",
+  "runIdentity": "be4dbcc3-3ba3a5d8-506880be-fb303c8a-0cbe5625-tabs-v17",
   "namespace": "ds.contracts.tabs.recipe.v1",
   "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
   "teaching": "tabs@1 two-item rail from Astryx TabList, MUI Tabs, and AntD Tabs; indicator is a child of the selected tab; overlay ink-bar offsets are refusals",
@@ -35,8 +35,8 @@
     {
       "adapterIdentity": "mui-tabs-proposed-v1",
       "displayName": "mui (proposed)",
-      "recipeHash": "042f2a5f32ae97608f47bc162ab96b5dd57413b7d3670cbce76236fd9230f0d7",
-      "envelopeHash": "cda3ab3f681eb2a2fbe864268c212ef49e0b8b08c7ef7a0bd7d2f0184443523f",
+      "recipeHash": "fb303c8a9b81f47ea71f722dbedb6d6c43bc5d1db0f063cdd163453566329bd6",
+      "envelopeHash": "8c507736d9ca91d3953b83912287ad872b773ea58e044e16dd1142167de7cb2c",
       "variantCount": 1,
       "variableCount": 15,
       "comparedIrFacts": 43

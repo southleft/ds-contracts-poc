@@ -119,6 +119,7 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy span|Chip-label — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
             "overflow-y": "hidden",
@@ -128,6 +129,7 @@
           "tokens": {
             "font-size": "{imported.chip.label.font-size}",
             "font-weight": "{imported.chip.label.font-weight}",
+            "letter-spacing": "{imported.chip.label.letter-spacing}",
             "line-height": "{imported.chip.label.line-height}"
           },
           "tokensByProp": [
@@ -173,6 +175,18 @@
           ]
         }
       },
+      "stylesWhen": [
+        {
+          "prop": "variant",
+          "equals": "outlined",
+          "styles": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        }
+      ],
       "declared": {
         "box-sizing": "border-box",
         "font-family": "Roboto, Helvetica, Arial, sans-serif",
@@ -195,6 +209,7 @@
         "border-top-right-radius": "{imported.shared.size-16}",
         "color": "{imported.chip.root.color.{variant}.{color}}",
         "font-size": "{imported.chip.root.font-size}",
+        "letter-spacing": "{imported.chip.root.letter-spacing}",
         "line-height": "{imported.chip.root.line-height}",
         "outline-width": "{imported.chip.root.outline-width}"
       },

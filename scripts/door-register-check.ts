@@ -289,7 +289,20 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     are unchanged, and the +2,210 drops, +2 authored and +2 span-fallback
   //     parts are MessageBar's own. Named, re-pinned to what the committed
   //     tree measures.
-  mui: { components: 32, drops: 73395, authored: 0, fallback: 100 },
+  //   · mui 73,395 -> 72,481 control-equal drops on 2026-09-04, the CssBaseline
+  //     mount correction. extract/computed/configs/mui.json wrapped every
+  //     capture in <ThemeProvider> and never mounted <CssBaseline />, so any
+  //     component inheriting its face from body captured in the UA serif: 13 of
+  //     32 mui captures carried NO Roboto stack in any font-family read, and mui
+  //     was the ONLY library in the corpus with captures whose reads were
+  //     entirely UA defaults. All 31 re-captured components now carry one. FEWER
+  //     control-equal drops is what a correct mount should produce — the
+  //     captured element now differs from the bare UA control in ways the door
+  //     no longer has to subtract — but it is still a moved count, so it is
+  //     re-pinned by hand with this reason rather than re-derived. Tooltip is
+  //     NOT re-captured (pre-existing determinism failure, verified independent
+  //     of the mount), so its contribution is unchanged.
+  mui: { components: 32, drops: 72481, authored: 0, fallback: 100 },
   polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
   shadcn: { components: 11, drops: 12205, authored: 1, fallback: 7 },
   tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },

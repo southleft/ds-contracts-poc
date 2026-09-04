@@ -105,7 +105,7 @@ void bareTextareaLabelFont;
 export const muiTextareaSource: ReviewedTextareaSource = {
   packageName: "@mui/material",
   version: "9.2.0",
-  exportName: "TextField",
+  exportName: "Textarea",
   framework: "react",
   sourceRoot: "extract/computed/out/mui",
   anatomy: {
@@ -120,19 +120,19 @@ export const muiTextareaSource: ReviewedTextareaSource = {
 };
 
 const muiRefusals = makeRefusals("mui", [
-  { id: "receipt-notchFill", evidence: "the notch knockout is the surface showing through the legend gap — no computed channel carries it (the legend's background is transparent) — the paper surface showing through the legend gap: palette.background.paper #ffffff (recipe/sandboxes/input-field-mui/node_modules/@mui/material/styles/createPalette.js light.background.paper)", target: "MUI (proposed) notchFill", reason: "refused-by-recipe" },
-  { id: "receipt-states-empty-disabled-value", evidence: "ledger value unusable: the placeholder is hidden (opacity 0) at rest and at focus — its ink is unobservable in this capture — a disabled field cannot take focus and MUI hides the rest placeholder under the label (::placeholder opacity 0) — palette.text.disabled rgba(0,0,0,0.38) (createPalette.js light.text.disabled)", target: "MUI (proposed) states.empty.disabled.value", reason: "refused-by-recipe" },
-  { id: "refusal-legend", evidence: "the outline is a fieldset whose legend (idx:1.2.0) cuts the notch; no IR fieldset/legend primitive — lowered to a label row filled with the notch colour", target: "MUI (proposed) fieldset legend", reason: "lowered" },
-  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/textarea/captured-truth.json: 4 capture(s) with the __active interaction; textarea@1 carries no interaction plane, so the captured active paint is not minted", target: "MUI (proposed) active interaction", reason: "refused-by-recipe" },
-  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/textarea/captured-truth.json: 4 capture(s) with the __focus-visible interaction; textarea@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "MUI (proposed) focus-visible interaction", reason: "refused-by-recipe" },
-  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/textarea/captured-truth.json: 4 capture(s) with the __hover interaction; textarea@1 carries no interaction plane, so the captured hover paint is not minted", target: "MUI (proposed) hover interaction", reason: "refused-by-recipe" },
+  { id: "receipt-notchFill", evidence: "the notch knockout is the surface showing through the legend gap — no computed channel carries it (the legend's background is transparent) — the paper surface showing through the legend gap: palette.background.paper #ffffff (recipe/sandboxes/input-field-mui/node_modules/@mui/material/styles/createPalette.js light.background.paper)", target: "mui notchFill", reason: "refused-by-recipe" },
+  { id: "receipt-states-empty-disabled-value", evidence: "ledger value unusable: the placeholder is hidden (opacity 0) at rest and at focus — its ink is unobservable in this capture — a disabled field cannot take focus and MUI hides the rest placeholder under the label (::placeholder opacity 0) — palette.text.disabled rgba(0,0,0,0.38) (createPalette.js light.text.disabled)", target: "mui states.empty.disabled.value", reason: "refused-by-recipe" },
+  { id: "refusal-legend", evidence: "the outline is a fieldset whose legend (idx:1.2.0) cuts the notch; no IR fieldset/legend primitive — lowered to a label row filled with the notch colour", target: "mui fieldset legend", reason: "lowered" },
+  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/textarea/captured-truth.json: 4 capture(s) with the __active interaction; textarea@1 carries no interaction plane, so the captured active paint is not minted", target: "mui active interaction", reason: "refused-by-recipe" },
+  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/textarea/captured-truth.json: 4 capture(s) with the __focus-visible interaction; textarea@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "mui focus-visible interaction", reason: "refused-by-recipe" },
+  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/textarea/captured-truth.json: 4 capture(s) with the __hover interaction; textarea@1 carries no interaction plane, so the captured hover paint is not minted", target: "mui hover interaction", reason: "refused-by-recipe" },
 ]);
 
 export const muiTextareaAdapterConfig = buildConfig(
   "mui",
   muiTextareaSource,
   muiTokens,
-  { id: "mui.textarea", name: "MUI (proposed) Textarea" },
+  { id: "mui.textarea", name: "mui Textarea" },
   muiRefusals,
   anatomyFacts("mui", muiTextareaSource),
   ["hover","focus-visible","active","helperText","adornments","size-small","variant-filled","variant-standard"],

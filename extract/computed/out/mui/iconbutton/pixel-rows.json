@@ -141,310 +141,222 @@
   },
   {
     "key": "medium.default.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.default.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.default.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.default.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.primary.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "medium.secondary.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.default.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.primary.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   },
   {
     "key": "large.secondary.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0,
+    "pctAA": 0
   }
 ]

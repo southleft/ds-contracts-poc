@@ -57,6 +57,8 @@
     "root": {
       "declared": {
         "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "hidden",
         "overflow-y": "hidden",
         "transition-duration": "0.3s",
@@ -70,15 +72,19 @@
           },
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|CardContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
-            "display": "block"
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
           },
           "tokens": {
             "color": "{imported.card.label.color}",
             "font-size": "{imported.shared.size-16}",
             "font-weight": "{imported.card.label.font-weight}",
+            "letter-spacing": "{imported.card.label.letter-spacing}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
-            "padding-bottom": "{imported.card.label.padding-bottom}",
+            "padding-bottom": "{imported.shared.size-24}",
             "padding-left": "{imported.shared.size-16}",
             "padding-right": "{imported.shared.size-16}",
             "padding-top": "{imported.shared.size-16}"
@@ -92,6 +98,8 @@
         "border-top-left-radius": "{imported.shared.size-4}",
         "border-top-right-radius": "{imported.shared.size-4}",
         "color": "{imported.card.root.color}",
+        "letter-spacing": "{imported.card.root.letter-spacing}",
+        "line-height": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
         "width": "{imported.card.root.width}"

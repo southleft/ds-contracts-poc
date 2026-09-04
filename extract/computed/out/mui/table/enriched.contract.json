@@ -51,7 +51,8 @@
           "layout": {
             "display": "flex",
             "direction": "column",
-            "align": "stretch"
+            "align": "stretch",
+            "grow": true
           },
           "attrs": {
             "role": "rowgroup"
@@ -142,12 +143,33 @@
                                 }
                               }
                             }
+                          ],
+                          "codeOnly": [
+                            {
+                              "state": "focus-visible",
+                              "channel": "outline-color",
+                              "value": "#005fcc",
+                              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                            },
+                            {
+                              "state": "focus-visible",
+                              "channel": "outline-offset",
+                              "value": "2px",
+                              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                            },
+                            {
+                              "state": "focus-visible",
+                              "channel": "outline-width",
+                              "value": "1px",
+                              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                            }
                           ]
                         },
                         "icon": {
                           "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
+                            "box-sizing": "border-box",
                             "cursor": "pointer",
                             "font-family": "Roboto, Helvetica, Arial, sans-serif",
                             "overflow-x": "hidden",
@@ -227,6 +249,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -239,8 +262,7 @@
                     "letter-spacing": "{imported.shared.size-0-14994}",
                     "line-height": "{imported.shared.size-24}",
                     "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}",
-                    "width": "{imported.shared.size-52}"
+                    "min-width": "{imported.shared.size-0}"
                   },
                   "tokensByProp": [
                     {
@@ -249,12 +271,14 @@
                         "medium": {
                           "height": "{imported.table.tablecell-head.height.medium}",
                           "padding-left": "{imported.table.tablecell-head.padding-left.medium}",
-                          "padding-right": "{imported.table.tablecell-head.padding-right.medium}"
+                          "padding-right": "{imported.table.tablecell-head.padding-right.medium}",
+                          "width": "{imported.table.tablecell-head.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.tablecell-head.height.small}",
                           "padding-left": "{imported.table.tablecell-head.padding-left.small}",
-                          "padding-right": "{imported.table.tablecell-head.padding-right.small}"
+                          "padding-right": "{imported.table.tablecell-head.padding-right.small}",
+                          "width": "{imported.table.tablecell-head.width.small}"
                         }
                       }
                     }
@@ -286,6 +310,7 @@
                           "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root.TableSortLabel-icon — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
+                            "box-sizing": "border-box",
                             "cursor": "pointer",
                             "font-family": "Roboto, Helvetica, Arial, sans-serif",
                             "overflow-x": "hidden",
@@ -341,6 +366,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -355,8 +381,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-240-125}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -365,12 +390,14 @@
                         "medium": {
                           "height": "{imported.table.tablecell-head-2.height.medium}",
                           "padding-bottom": "{imported.table.tablecell-head-2.padding-bottom.medium}",
-                          "padding-top": "{imported.table.tablecell-head-2.padding-top.medium}"
+                          "padding-top": "{imported.table.tablecell-head-2.padding-top.medium}",
+                          "width": "{imported.table.tablecell-head-2.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.tablecell-head-2.height.small}",
                           "padding-bottom": "{imported.table.tablecell-head-2.padding-bottom.small}",
-                          "padding-top": "{imported.table.tablecell-head-2.padding-top.small}"
+                          "padding-top": "{imported.table.tablecell-head-2.padding-top.small}",
+                          "width": "{imported.table.tablecell-head-2.width.small}"
                         }
                       }
                     }
@@ -391,6 +418,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -405,8 +433,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-132-969}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -415,12 +442,14 @@
                         "medium": {
                           "height": "{imported.table.label-2.height.medium}",
                           "padding-bottom": "{imported.table.label-2.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-2.padding-top.medium}"
+                          "padding-top": "{imported.table.label-2.padding-top.medium}",
+                          "width": "{imported.table.label-2.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-2.height.small}",
                           "padding-bottom": "{imported.table.label-2.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-2.padding-top.small}"
+                          "padding-top": "{imported.table.label-2.padding-top.small}",
+                          "width": "{imported.table.label-2.width.small}"
                         }
                       }
                     }
@@ -441,6 +470,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -455,8 +485,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-142-484}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -465,12 +494,14 @@
                         "medium": {
                           "height": "{imported.table.label-3.height.medium}",
                           "padding-bottom": "{imported.table.label-3.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-3.padding-top.medium}"
+                          "padding-top": "{imported.table.label-3.padding-top.medium}",
+                          "width": "{imported.table.label-3.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-3.height.small}",
                           "padding-bottom": "{imported.table.label-3.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-3.padding-top.small}"
+                          "padding-top": "{imported.table.label-3.padding-top.small}",
+                          "width": "{imported.table.label-3.width.small}"
                         }
                       }
                     }
@@ -491,6 +522,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "right"
                   },
@@ -505,8 +537,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-120-422}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -515,26 +546,42 @@
                         "medium": {
                           "height": "{imported.table.label-4.height.medium}",
                           "padding-bottom": "{imported.table.label-4.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-4.padding-top.medium}"
+                          "padding-top": "{imported.table.label-4.padding-top.medium}",
+                          "width": "{imported.table.label-4.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-4.height.small}",
                           "padding-bottom": "{imported.table.label-4.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-4.padding-top.small}"
+                          "padding-top": "{imported.table.label-4.padding-top.small}",
+                          "width": "{imported.table.label-4.width.small}"
                         }
                       }
                     }
                   ]
                 }
               },
+              "declared": {
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
               "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "outline-width": "{imported.shared.size-0}"
               }
             }
           },
+          "declared": {
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
+          },
           "tokens": {
+            "color": "{imported.shared.color-000000de}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }
@@ -545,7 +592,8 @@
           "layout": {
             "display": "flex",
             "direction": "column",
-            "align": "stretch"
+            "align": "stretch",
+            "grow": true
           },
           "attrs": {
             "role": "rowgroup"
@@ -637,6 +685,7 @@
                           "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
+                            "box-sizing": "border-box",
                             "cursor": "pointer",
                             "font-family": "Roboto, Helvetica, Arial, sans-serif",
                             "overflow-x": "hidden",
@@ -714,6 +763,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -725,8 +775,7 @@
                     "letter-spacing": "{imported.shared.size-0-14994}",
                     "line-height": "{imported.shared.size-20-02}",
                     "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}",
-                    "width": "{imported.shared.size-52}"
+                    "min-width": "{imported.shared.size-0}"
                   },
                   "tokensByProp": [
                     {
@@ -735,12 +784,14 @@
                         "medium": {
                           "height": "{imported.table.tablecell-body.height.medium}",
                           "padding-left": "{imported.table.tablecell-body.padding-left.medium}",
-                          "padding-right": "{imported.table.tablecell-body.padding-right.medium}"
+                          "padding-right": "{imported.table.tablecell-body.padding-right.medium}",
+                          "width": "{imported.table.tablecell-body.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.tablecell-body.height.small}",
                           "padding-left": "{imported.table.tablecell-body.padding-left.small}",
-                          "padding-right": "{imported.table.tablecell-body.padding-right.small}"
+                          "padding-right": "{imported.table.tablecell-body.padding-right.small}",
+                          "width": "{imported.table.tablecell-body.width.small}"
                         }
                       }
                     }
@@ -761,6 +812,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -775,8 +827,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-240-125}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -785,12 +836,14 @@
                         "medium": {
                           "height": "{imported.table.label-5.height.medium}",
                           "padding-bottom": "{imported.table.label-5.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-5.padding-top.medium}"
+                          "padding-top": "{imported.table.label-5.padding-top.medium}",
+                          "width": "{imported.table.label-5.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-5.height.small}",
                           "padding-bottom": "{imported.table.label-5.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-5.padding-top.small}"
+                          "padding-top": "{imported.table.label-5.padding-top.small}",
+                          "width": "{imported.table.label-5.width.small}"
                         }
                       }
                     }
@@ -811,6 +864,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -825,8 +879,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-132-969}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -835,12 +888,14 @@
                         "medium": {
                           "height": "{imported.table.label-6.height.medium}",
                           "padding-bottom": "{imported.table.label-6.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-6.padding-top.medium}"
+                          "padding-top": "{imported.table.label-6.padding-top.medium}",
+                          "width": "{imported.table.label-6.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-6.height.small}",
                           "padding-bottom": "{imported.table.label-6.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-6.padding-top.small}"
+                          "padding-top": "{imported.table.label-6.padding-top.small}",
+                          "width": "{imported.table.label-6.width.small}"
                         }
                       }
                     }
@@ -861,6 +916,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -875,8 +931,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-142-484}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -885,12 +940,14 @@
                         "medium": {
                           "height": "{imported.table.label-7.height.medium}",
                           "padding-bottom": "{imported.table.label-7.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-7.padding-top.medium}"
+                          "padding-top": "{imported.table.label-7.padding-top.medium}",
+                          "width": "{imported.table.label-7.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-7.height.small}",
                           "padding-bottom": "{imported.table.label-7.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-7.padding-top.small}"
+                          "padding-top": "{imported.table.label-7.padding-top.small}",
+                          "width": "{imported.table.label-7.width.small}"
                         }
                       }
                     }
@@ -925,6 +982,7 @@
                         "border-right-style": "none",
                         "border-top-style": "none",
                         "cursor": "pointer",
+                        "font-family": "Arial",
                         "position": "relative",
                         "transition-duration": "0.15s",
                         "transition-property": "background-color",
@@ -957,6 +1015,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "right"
                   },
@@ -970,8 +1029,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-120-422}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -980,19 +1038,28 @@
                         "medium": {
                           "height": "{imported.table.tablecell-alignright.height.medium}",
                           "padding-bottom": "{imported.table.tablecell-alignright.padding-bottom.medium}",
-                          "padding-top": "{imported.table.tablecell-alignright.padding-top.medium}"
+                          "padding-top": "{imported.table.tablecell-alignright.padding-top.medium}",
+                          "width": "{imported.table.tablecell-alignright.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.tablecell-alignright.height.small}",
                           "padding-bottom": "{imported.table.tablecell-alignright.padding-bottom.small}",
-                          "padding-top": "{imported.table.tablecell-alignright.padding-top.small}"
+                          "padding-top": "{imported.table.tablecell-alignright.padding-top.small}",
+                          "width": "{imported.table.tablecell-alignright.width.small}"
                         }
                       }
                     }
                   ]
                 }
               },
+              "declared": {
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
               "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "outline-width": "{imported.shared.size-0}"
@@ -1084,6 +1151,7 @@
                           "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
+                            "box-sizing": "border-box",
                             "cursor": "pointer",
                             "font-family": "Roboto, Helvetica, Arial, sans-serif",
                             "overflow-x": "hidden",
@@ -1161,6 +1229,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -1172,8 +1241,7 @@
                     "letter-spacing": "{imported.shared.size-0-14994}",
                     "line-height": "{imported.shared.size-20-02}",
                     "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}",
-                    "width": "{imported.shared.size-52}"
+                    "min-width": "{imported.shared.size-0}"
                   },
                   "tokensByProp": [
                     {
@@ -1182,12 +1250,14 @@
                         "medium": {
                           "height": "{imported.table.tablecell-body-2.height.medium}",
                           "padding-left": "{imported.table.tablecell-body-2.padding-left.medium}",
-                          "padding-right": "{imported.table.tablecell-body-2.padding-right.medium}"
+                          "padding-right": "{imported.table.tablecell-body-2.padding-right.medium}",
+                          "width": "{imported.table.tablecell-body-2.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.tablecell-body-2.height.small}",
                           "padding-left": "{imported.table.tablecell-body-2.padding-left.small}",
-                          "padding-right": "{imported.table.tablecell-body-2.padding-right.small}"
+                          "padding-right": "{imported.table.tablecell-body-2.padding-right.small}",
+                          "width": "{imported.table.tablecell-body-2.width.small}"
                         }
                       }
                     }
@@ -1208,6 +1278,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -1222,8 +1293,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-240-125}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -1232,12 +1302,14 @@
                         "medium": {
                           "height": "{imported.table.label-9.height.medium}",
                           "padding-bottom": "{imported.table.label-9.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-9.padding-top.medium}"
+                          "padding-top": "{imported.table.label-9.padding-top.medium}",
+                          "width": "{imported.table.label-9.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-9.height.small}",
                           "padding-bottom": "{imported.table.label-9.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-9.padding-top.small}"
+                          "padding-top": "{imported.table.label-9.padding-top.small}",
+                          "width": "{imported.table.label-9.width.small}"
                         }
                       }
                     }
@@ -1258,6 +1330,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -1272,8 +1345,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-132-969}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -1282,12 +1354,14 @@
                         "medium": {
                           "height": "{imported.table.label-10.height.medium}",
                           "padding-bottom": "{imported.table.label-10.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-10.padding-top.medium}"
+                          "padding-top": "{imported.table.label-10.padding-top.medium}",
+                          "width": "{imported.table.label-10.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-10.height.small}",
                           "padding-bottom": "{imported.table.label-10.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-10.padding-top.small}"
+                          "padding-top": "{imported.table.label-10.padding-top.small}",
+                          "width": "{imported.table.label-10.width.small}"
                         }
                       }
                     }
@@ -1308,6 +1382,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "left"
                   },
@@ -1322,8 +1397,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-142-484}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -1332,12 +1406,14 @@
                         "medium": {
                           "height": "{imported.table.label-11.height.medium}",
                           "padding-bottom": "{imported.table.label-11.padding-bottom.medium}",
-                          "padding-top": "{imported.table.label-11.padding-top.medium}"
+                          "padding-top": "{imported.table.label-11.padding-top.medium}",
+                          "width": "{imported.table.label-11.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.label-11.height.small}",
                           "padding-bottom": "{imported.table.label-11.padding-bottom.small}",
-                          "padding-top": "{imported.table.label-11.padding-top.small}"
+                          "padding-top": "{imported.table.label-11.padding-top.small}",
+                          "width": "{imported.table.label-11.width.small}"
                         }
                       }
                     }
@@ -1372,6 +1448,7 @@
                         "border-right-style": "none",
                         "border-top-style": "none",
                         "cursor": "pointer",
+                        "font-family": "Arial",
                         "position": "relative",
                         "transition-duration": "0.15s",
                         "transition-property": "background-color",
@@ -1404,6 +1481,7 @@
                   },
                   "declared": {
                     "border-bottom-style": "solid",
+                    "box-sizing": "border-box",
                     "font-family": "Roboto, Helvetica, Arial, sans-serif",
                     "text-align": "right"
                   },
@@ -1417,8 +1495,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "width": "{imported.shared.size-120-422}"
+                    "padding-right": "{imported.shared.size-16}"
                   },
                   "tokensByProp": [
                     {
@@ -1427,36 +1504,56 @@
                         "medium": {
                           "height": "{imported.table.tablecell-alignright-2.height.medium}",
                           "padding-bottom": "{imported.table.tablecell-alignright-2.padding-bottom.medium}",
-                          "padding-top": "{imported.table.tablecell-alignright-2.padding-top.medium}"
+                          "padding-top": "{imported.table.tablecell-alignright-2.padding-top.medium}",
+                          "width": "{imported.table.tablecell-alignright-2.width.medium}"
                         },
                         "small": {
                           "height": "{imported.table.tablecell-alignright-2.height.small}",
                           "padding-bottom": "{imported.table.tablecell-alignright-2.padding-bottom.small}",
-                          "padding-top": "{imported.table.tablecell-alignright-2.padding-top.small}"
+                          "padding-top": "{imported.table.tablecell-alignright-2.padding-top.small}",
+                          "width": "{imported.table.tablecell-alignright-2.width.small}"
                         }
                       }
                     }
                   ]
                 }
               },
+              "declared": {
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
               "tokens": {
                 "background-color": "{imported.table.tablerow-root-2.background-color}",
+                "color": "{imported.shared.color-000000de}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "outline-width": "{imported.shared.size-0}"
               }
             }
           },
+          "declared": {
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
+          },
           "tokens": {
+            "color": "{imported.shared.color-000000de}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }
         }
       },
       "declared": {
-        "box-sizing": "border-box"
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif"
       },
       "tokens": {
+        "color": "{imported.shared.color-000000de}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}"
       }

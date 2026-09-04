@@ -1,14 +1,14 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
-import { Link } from '@mui/material';
+import {  } from '@mui/material';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const __cssVarsTheme = createTheme({ cssVariables: true, colorSchemes: { light: true } });
 import CssBaseline from '@mui/material/CssBaseline';
 
 const CE = false;
-const COMPONENTS = { Link };
+const COMPONENTS = {  };
 const EXTRA = {  };
 // CUSTOM-ELEMENT PROP SEMANTICS (React 18 sets unknown props as ATTRIBUTES):
 //   · `false` must be OMITTED — Lit's `type: Boolean` converter reads
@@ -28,7 +28,7 @@ const ceProps = (p) => {
   }
   return o;
 };
-const SPECS = [{"key":"Link:primary.none","component":"Link","props":{"href":"#mui-link","color":"primary","underline":"none"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:primary.hover","component":"Link","props":{"href":"#mui-link","color":"primary","underline":"hover"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:primary.always","component":"Link","props":{"href":"#mui-link","color":"primary","underline":"always"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:secondary.none","component":"Link","props":{"href":"#mui-link","color":"secondary","underline":"none"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:secondary.hover","component":"Link","props":{"href":"#mui-link","color":"secondary","underline":"hover"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:secondary.always","component":"Link","props":{"href":"#mui-link","color":"secondary","underline":"always"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:error.none","component":"Link","props":{"href":"#mui-link","color":"error","underline":"none"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:error.hover","component":"Link","props":{"href":"#mui-link","color":"error","underline":"hover"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:error.always","component":"Link","props":{"href":"#mui-link","color":"error","underline":"always"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:info.none","component":"Link","props":{"href":"#mui-link","color":"info","underline":"none"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:info.hover","component":"Link","props":{"href":"#mui-link","color":"info","underline":"hover"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:info.always","component":"Link","props":{"href":"#mui-link","color":"info","underline":"always"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:success.none","component":"Link","props":{"href":"#mui-link","color":"success","underline":"none"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:success.hover","component":"Link","props":{"href":"#mui-link","color":"success","underline":"hover"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:success.always","component":"Link","props":{"href":"#mui-link","color":"success","underline":"always"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:warning.none","component":"Link","props":{"href":"#mui-link","color":"warning","underline":"none"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:warning.hover","component":"Link","props":{"href":"#mui-link","color":"warning","underline":"hover"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:warning.always","component":"Link","props":{"href":"#mui-link","color":"warning","underline":"always"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:inherit.none","component":"Link","props":{"href":"#mui-link","color":"inherit","underline":"none"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:inherit.hover","component":"Link","props":{"href":"#mui-link","color":"inherit","underline":"hover"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}},{"key":"Link:inherit.always","component":"Link","props":{"href":"#mui-link","color":"inherit","underline":"always"},"callbacks":[],"text":"Link","stage":{"width":320,"height":96,"padding":16}}];
+const SPECS = [];
 const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(block ? {} : { alignItems: 'flex-start' }), width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });
 const stage = stageStyle({ width: 320, height: 96, padding: 16 });
 

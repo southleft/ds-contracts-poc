@@ -2,10 +2,20 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "LinearProgress",
   "config": "extract/computed/configs/mui.json",
-  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
       {
         "part": "root",
         "channel": "overflow-x",
@@ -23,6 +33,16 @@
       },
       {
         "part": "linearprogress-bar",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "linearprogress-bar",
         "channel": "transition-property",
         "value": "transform"
       },
@@ -30,6 +50,16 @@
         "part": "linearprogress-bar",
         "channel": "transition-timing-function",
         "value": "linear"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "linearprogress-bar-2",
@@ -53,16 +83,15 @@
   "scorecard": {
     "component": "LinearProgress",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
     "renderedBy": "149.0.7827.55",
-    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 280,
-      "cellsEqual": 232,
-      "pctEqual": 82.85714285714286,
+      "cellsCompared": 600,
+      "cellsEqual": 532,
+      "pctEqual": 88.66666666666667,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -84,73 +113,81 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 16,
-      "mintedLeavesUnfolded": 16,
-      "baseBindings": 30,
+      "mintedLeaves": 19,
+      "mintedLeavesUnfolded": 19,
+      "baseBindings": 39,
       "stateBindings": 0,
-      "codeOnlyChannels": 11,
+      "codeOnlyChannels": 14,
       "overflowBindings": 0,
-      "folds": 0
+      "folds": 30
     },
     "worstRows": [
       {
         "key": "indeterminate__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "indeterminate__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "indeterminate__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "indeterminate__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "determinate__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "determinate__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "determinate__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "determinate__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        8
+      ],
+      [
+        "linearprogress-bar.text-size-adjust",
+        8
+      ],
       [
         "linearprogress-bar.transition-duration",
         8
@@ -194,20 +231,27 @@
       [
         "linearprogress-bar-2.animation-timing-function",
         4
+      ],
+      [
+        "linearprogress-bar-2.text-size-adjust",
+        4
       ]
     ],
     "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: linearprogress-bar.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: linearprogress-bar-2.animation-delay — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar-2.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar-2.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: linearprogress-bar-2.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: linearprogress-bar-2.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: linearprogress-bar-2.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: linearprogress-bar-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -215,7 +259,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1977,
+      "leavesAdded": 1974,
       "divergent": [
         {
           "token": "imported.linear-progress.linearprogress-bar-2.background-color",
@@ -234,12 +278,24 @@
     "rows": [
       {
         "key": "determinate__default",
-        "channelsCompared": 27,
-        "channelsEqual": 25,
+        "channelsCompared": 59,
+        "channelsEqual": 55,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "transform",
@@ -257,12 +313,24 @@
       },
       {
         "key": "determinate__hover",
-        "channelsCompared": 27,
-        "channelsEqual": 25,
+        "channelsCompared": 59,
+        "channelsEqual": 55,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "transform",
@@ -280,12 +348,24 @@
       },
       {
         "key": "determinate__focus-visible",
-        "channelsCompared": 27,
-        "channelsEqual": 25,
+        "channelsCompared": 59,
+        "channelsEqual": 55,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "transform",
@@ -303,12 +383,24 @@
       },
       {
         "key": "determinate__active",
-        "channelsCompared": 27,
-        "channelsEqual": 25,
+        "channelsCompared": 59,
+        "channelsEqual": 55,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "transform",
@@ -326,12 +418,18 @@
       },
       {
         "key": "indeterminate__default",
-        "channelsCompared": 43,
-        "channelsEqual": 33,
+        "channelsCompared": 91,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "animation-duration",
@@ -355,6 +453,12 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "linearprogress-bar",
@@ -391,18 +495,30 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "indeterminate__hover",
-        "channelsCompared": 43,
-        "channelsEqual": 33,
+        "channelsCompared": 91,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "animation-duration",
@@ -426,6 +542,12 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "linearprogress-bar",
@@ -462,18 +584,30 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "indeterminate__focus-visible",
-        "channelsCompared": 43,
-        "channelsEqual": 33,
+        "channelsCompared": 91,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "animation-duration",
@@ -497,6 +631,12 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "linearprogress-bar",
@@ -533,18 +673,30 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "indeterminate__active",
-        "channelsCompared": 43,
-        "channelsEqual": 33,
+        "channelsCompared": 91,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "linearprogress-bar",
             "channel": "animation-duration",
@@ -568,6 +720,12 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.65, 0.815, 0.735, 0.395)"
+          },
+          {
+            "part": "linearprogress-bar",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "linearprogress-bar",
@@ -604,6 +762,12 @@
             "channel": "animation-timing-function",
             "ours": "ease",
             "theirs": "cubic-bezier(0.165, 0.84, 0.44, 1)"
+          },
+          {
+            "part": "linearprogress-bar-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

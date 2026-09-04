@@ -80,6 +80,8 @@
     "root": {
       "declared": {
         "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "position": "relative",
         "transition-duration": "0.15s",
         "transition-property": "margin",
@@ -90,7 +92,8 @@
           "element": "h3",
           "description": "Promoted from the computed floor (round 4): rendered anatomy h3|Accordion-heading — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
-            "display": "inline"
+            "display": "inline",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
           },
           "parts": {
             "accordionsummary-gutters": {
@@ -110,6 +113,7 @@
                     "grow": true
                   },
                   "declared": {
+                    "box-sizing": "border-box",
                     "cursor": "pointer",
                     "font-family": "Arial",
                     "transition-duration": "0.15s",
@@ -214,11 +218,21 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "opacity",
+                  "value": "0.38",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             }
           },
           "tokens": {
             "color": "{imported.shared.color-000000de}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }
@@ -227,6 +241,8 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-root.Collapse-vertical — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-duration": "0.3s",
             "transition-property": "height",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
@@ -241,7 +257,9 @@
                 "collapse-vertical-2": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-vertical.Collapse-wrapperInner — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
-                    "display": "block"
+                    "display": "block",
+                    "box-sizing": "border-box",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif"
                   },
                   "layout": {
                     "grow": true
@@ -250,19 +268,25 @@
                     "accordion-region": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy div|Accordion-region — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
-                        "display": "block"
+                        "display": "block",
+                        "box-sizing": "border-box",
+                        "font-family": "Roboto, Helvetica, Arial, sans-serif"
                       },
                       "parts": {
                         "label-2": {
                           "text": "Details body copy for the molecule round.",
                           "description": "Promoted from the computed floor (round 4): rendered anatomy div|AccordionDetails-root — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
-                            "display": "block"
+                            "display": "block",
+                            "box-sizing": "border-box",
+                            "font-family": "Roboto, Helvetica, Arial, sans-serif"
                           },
                           "tokens": {
                             "color": "{imported.shared.color-000000de}",
                             "font-size": "{imported.shared.size-16}",
                             "font-weight": "{imported.accordion.label-2.font-weight}",
+                            "letter-spacing": "{imported.shared.size-0-15008}",
+                            "line-height": "{imported.shared.size-24}",
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}",
                             "padding-bottom": "{imported.shared.size-16}",
@@ -274,7 +298,9 @@
                       },
                       "tokens": {
                         "color": "{imported.shared.color-000000de}",
-                        "height": "{imported.shared.size-60}",
+                        "height": "{imported.shared.size-72}",
+                        "letter-spacing": "{imported.shared.size-0-15008}",
+                        "line-height": "{imported.shared.size-24}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}"
                       },
@@ -295,7 +321,9 @@
                   },
                   "tokens": {
                     "color": "{imported.shared.color-000000de}",
-                    "height": "{imported.shared.size-60}"
+                    "height": "{imported.shared.size-72}",
+                    "letter-spacing": "{imported.shared.size-0-15008}",
+                    "line-height": "{imported.shared.size-24}"
                   },
                   "tokensByProp": [
                     {
@@ -312,9 +340,15 @@
                   ]
                 }
               },
+              "declared": {
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
               "tokens": {
                 "color": "{imported.shared.color-000000de}",
-                "height": "{imported.shared.size-60}",
+                "height": "{imported.shared.size-72}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               },
@@ -335,6 +369,8 @@
           },
           "tokens": {
             "color": "{imported.shared.color-000000de}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           },
@@ -364,6 +400,18 @@
           ]
         }
       },
+      "stylesWhen": [
+        {
+          "prop": "variant",
+          "equals": "outlined",
+          "styles": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        }
+      ],
       "tokens": {
         "background-color": "{imported.accordion.root.background-color}",
         "border-bottom-left-radius": "{imported.shared.size-4}",
@@ -374,6 +422,8 @@
         "color": "{imported.shared.color-000000de}",
         "height": "{imported.accordion.root.height.{variant}.{expanded}}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",

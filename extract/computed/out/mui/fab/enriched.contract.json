@@ -4,7 +4,7 @@
   "name": "Fab",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI Wave 5 denominator round — Fab ONLY (not SpeedDial). Bounded size × color cartesian (3×3); variant pinned circular; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI Wave 5 denominator round — Fab ONLY (not SpeedDial). Bounded size × color cartesian (3×3); variant pinned circular; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "button"
   },

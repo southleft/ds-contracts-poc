@@ -2,14 +2,19 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "Link",
   "config": "extract/computed/configs/mui.json",
-  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
         "channel": "font-family",
-        "value": "Times"
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       }
     ],
     "state": [
@@ -25,16 +30,15 @@
   "scorecard": {
     "component": "Link",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
     "renderedBy": "149.0.7827.55",
-    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 21,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1428,
-      "cellsEqual": 1281,
-      "pctEqual": 89.70588235294117,
+      "cellsCompared": 1680,
+      "cellsEqual": 1449,
+      "pctEqual": 86.25,
       "rowsFullyEqual": 0,
       "rows": 84
     },
@@ -56,9 +60,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 54,
-      "mintedLeavesUnfolded": 110,
-      "baseBindings": 5,
+      "mintedLeaves": 56,
+      "mintedLeavesUnfolded": 112,
+      "baseBindings": 7,
       "stateBindings": 5,
       "codeOnlyChannels": 7,
       "overflowBindings": 0,
@@ -69,62 +73,66 @@
         "key": "primary.always__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "secondary.always__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "error.always__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "info.always__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "success.always__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "warning.always__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "inherit.always__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "primary.none__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 2,
+        "channelsMismatched": 3,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
         "root.text-decoration",
+        84
+      ],
+      [
+        "root.text-size-adjust",
         84
       ],
       [
@@ -137,9 +145,9 @@
       ]
     ],
     "namedLosses": [
-      "code-only: root.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.text-decoration-line — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only[active]: root.text-decoration — value shape outside mintable kinds and outside the declared vocabulary",
       "code-only[active]: root.text-decoration-line — declared-channel state delta on 7/21 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[hover]: root.text-decoration — value shape outside mintable kinds and outside the declared vocabulary",
@@ -166,6 +174,12 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.link.root.color.inherit",
+          "fresh": "#000000de",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
           "token": "imported.link.root.color.primary",
           "fresh": "#1976d2",
           "shipped": "{palette-primary-main}",
@@ -188,14 +202,50 @@
           "fresh": "#ed6c02",
           "shipped": "{palette-warning-main}",
           "resolvedEqual": true
+        },
+        {
+          "token": "imported.link.root.outline-color.inherit",
+          "fresh": "#000000de",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.link.root.text-decoration-color-state-active.inherit",
+          "fresh": "#000000de",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.link.root.text-decoration-color-state-hover.inherit",
+          "fresh": "#000000de",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.link.root.text-decoration-color.inherit.always",
+          "fresh": "#000000de",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.link.root.text-decoration-color.inherit.hover",
+          "fresh": "#000000de",
+          "shipped": "#000000",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.link.root.text-decoration-color.inherit.none",
+          "fresh": "#000000de",
+          "shipped": "#000000",
+          "resolvedEqual": false
         }
       ]
     },
     "rows": [
       {
         "key": "primary.none__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -205,14 +255,20 @@
             "channel": "text-decoration",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.none__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -222,14 +278,20 @@
             "channel": "text-decoration",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.none__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -245,14 +307,20 @@
             "channel": "text-decoration",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.none__active",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -262,14 +330,20 @@
             "channel": "text-decoration",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.hover__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -279,14 +353,20 @@
             "channel": "text-decoration",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.hover__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -302,14 +382,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.hover__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -325,14 +411,20 @@
             "channel": "text-decoration",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.hover__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -348,14 +440,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.always__default",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -371,14 +469,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.always__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -394,14 +498,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.always__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 14,
+        "channelsCompared": 20,
+        "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -423,14 +533,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "primary.always__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -446,14 +562,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.none__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -463,14 +585,20 @@
             "channel": "text-decoration",
             "ours": "rgba(156, 39, 176, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.none__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -480,14 +608,20 @@
             "channel": "text-decoration",
             "ours": "rgba(156, 39, 176, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.none__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -503,14 +637,20 @@
             "channel": "text-decoration",
             "ours": "rgba(156, 39, 176, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.none__active",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -520,14 +660,20 @@
             "channel": "text-decoration",
             "ours": "rgba(156, 39, 176, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.hover__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -537,14 +683,20 @@
             "channel": "text-decoration",
             "ours": "rgba(156, 39, 176, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.hover__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -560,14 +712,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.hover__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -583,14 +741,20 @@
             "channel": "text-decoration",
             "ours": "rgba(156, 39, 176, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.hover__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -606,14 +770,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.always__default",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -629,14 +799,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.always__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -652,14 +828,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.always__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 14,
+        "channelsCompared": 20,
+        "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -681,14 +863,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "secondary.always__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -704,14 +892,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.none__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -721,14 +915,20 @@
             "channel": "text-decoration",
             "ours": "rgba(211, 47, 47, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.none__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -738,14 +938,20 @@
             "channel": "text-decoration",
             "ours": "rgba(211, 47, 47, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.none__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -761,14 +967,20 @@
             "channel": "text-decoration",
             "ours": "rgba(211, 47, 47, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.none__active",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -778,14 +990,20 @@
             "channel": "text-decoration",
             "ours": "rgba(211, 47, 47, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.hover__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -795,14 +1013,20 @@
             "channel": "text-decoration",
             "ours": "rgba(211, 47, 47, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.hover__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -818,14 +1042,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.hover__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -841,14 +1071,20 @@
             "channel": "text-decoration",
             "ours": "rgba(211, 47, 47, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.hover__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -864,14 +1100,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.always__default",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -887,14 +1129,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.always__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -910,14 +1158,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.always__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 14,
+        "channelsCompared": 20,
+        "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -939,14 +1193,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "error.always__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -962,14 +1222,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.none__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -979,14 +1245,20 @@
             "channel": "text-decoration",
             "ours": "rgba(2, 136, 209, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.none__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -996,14 +1268,20 @@
             "channel": "text-decoration",
             "ours": "rgba(2, 136, 209, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.none__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1019,14 +1297,20 @@
             "channel": "text-decoration",
             "ours": "rgba(2, 136, 209, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.none__active",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1036,14 +1320,20 @@
             "channel": "text-decoration",
             "ours": "rgba(2, 136, 209, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.hover__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1053,14 +1343,20 @@
             "channel": "text-decoration",
             "ours": "rgba(2, 136, 209, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.hover__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1076,14 +1372,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.hover__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1099,14 +1401,20 @@
             "channel": "text-decoration",
             "ours": "rgba(2, 136, 209, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.hover__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1122,14 +1430,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.always__default",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1145,14 +1459,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.always__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1168,14 +1488,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.always__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 14,
+        "channelsCompared": 20,
+        "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1197,14 +1523,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "info.always__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1220,14 +1552,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.none__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1237,14 +1575,20 @@
             "channel": "text-decoration",
             "ours": "rgba(46, 125, 50, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.none__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1254,14 +1598,20 @@
             "channel": "text-decoration",
             "ours": "rgba(46, 125, 50, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.none__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1277,14 +1627,20 @@
             "channel": "text-decoration",
             "ours": "rgba(46, 125, 50, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.none__active",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1294,14 +1650,20 @@
             "channel": "text-decoration",
             "ours": "rgba(46, 125, 50, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.hover__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1311,14 +1673,20 @@
             "channel": "text-decoration",
             "ours": "rgba(46, 125, 50, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.hover__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1334,14 +1702,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.hover__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1357,14 +1731,20 @@
             "channel": "text-decoration",
             "ours": "rgba(46, 125, 50, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.hover__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1380,14 +1760,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.always__default",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1403,14 +1789,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.always__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1426,14 +1818,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.always__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 14,
+        "channelsCompared": 20,
+        "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1455,14 +1853,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "success.always__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1478,14 +1882,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.none__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1495,14 +1905,20 @@
             "channel": "text-decoration",
             "ours": "rgba(237, 108, 2, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.none__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1512,14 +1928,20 @@
             "channel": "text-decoration",
             "ours": "rgba(237, 108, 2, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.none__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1535,14 +1957,20 @@
             "channel": "text-decoration",
             "ours": "rgba(237, 108, 2, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.none__active",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1552,14 +1980,20 @@
             "channel": "text-decoration",
             "ours": "rgba(237, 108, 2, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.hover__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1569,14 +2003,20 @@
             "channel": "text-decoration",
             "ours": "rgba(237, 108, 2, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.hover__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1592,14 +2032,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.hover__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1615,14 +2061,20 @@
             "channel": "text-decoration",
             "ours": "rgba(237, 108, 2, 1)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.hover__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1638,14 +2090,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.always__default",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1661,14 +2119,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.always__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1684,14 +2148,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.always__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 14,
+        "channelsCompared": 20,
+        "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1713,14 +2183,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "warning.always__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1736,14 +2212,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "inherit.none__default",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1751,16 +2233,22 @@
           {
             "part": "root",
             "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "inherit.none__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1768,16 +2256,22 @@
           {
             "part": "root",
             "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "inherit.none__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1785,22 +2279,28 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "rgba(0, 95, 204, 1)"
           },
           {
             "part": "root",
             "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "inherit.none__active",
-        "channelsCompared": 17,
-        "channelsEqual": 16,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1808,15 +2308,189 @@
           {
             "part": "root",
             "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "inherit.hover__default",
-        "channelsCompared": 17,
+        "channelsCompared": 20,
+        "channelsEqual": 18,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 0.87)",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.hover__hover",
+        "channelsCompared": 20,
+        "channelsEqual": 17,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 0.87)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.hover__focus-visible",
+        "channelsCompared": 20,
+        "channelsEqual": 17,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.87)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 0.87)",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.hover__active",
+        "channelsCompared": 20,
+        "channelsEqual": 17,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 0.87)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.always__default",
+        "channelsCompared": 20,
+        "channelsEqual": 17,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 0.87)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.always__hover",
+        "channelsCompared": 20,
+        "channelsEqual": 17,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 0.87)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.always__focus-visible",
+        "channelsCompared": 20,
         "channelsEqual": 16,
         "pctExact": null,
         "pctAA": null,
@@ -1824,71 +2498,14 @@
         "mismatches": [
           {
             "part": "root",
-            "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "none"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "inherit.hover__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "underline"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-line",
-            "ours": "none",
-            "theirs": "underline"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "inherit.hover__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "rgba(0, 95, 204, 1)"
           },
           {
             "part": "root",
             "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "none"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "inherit.hover__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "underline"
           },
           {
@@ -1896,89 +2513,20 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "inherit.always__default",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "underline"
           },
           {
             "part": "root",
-            "channel": "text-decoration-line",
-            "ours": "none",
-            "theirs": "underline"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "inherit.always__hover",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "underline"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-line",
-            "ours": "none",
-            "theirs": "underline"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "inherit.always__focus-visible",
-        "channelsCompared": 17,
-        "channelsEqual": 14,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(0, 95, 204, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "underline"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-line",
-            "ours": "none",
-            "theirs": "underline"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "inherit.always__active",
-        "channelsCompared": 17,
-        "channelsEqual": 15,
+        "channelsCompared": 20,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1986,7 +2534,7 @@
           {
             "part": "root",
             "channel": "text-decoration",
-            "ours": "rgba(0, 0, 0, 1)",
+            "ours": "rgba(0, 0, 0, 0.87)",
             "theirs": "underline"
           },
           {
@@ -1994,6 +2542,12 @@
             "channel": "text-decoration-line",
             "ours": "none",
             "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

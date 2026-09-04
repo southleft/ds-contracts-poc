@@ -149,6 +149,18 @@
         "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)",
         "user-select": "none"
       },
+      "stylesWhen": [
+        {
+          "prop": "variant",
+          "equals": "outlined",
+          "styles": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        }
+      ],
       "declaredStates": {
         "disabled": {
           "cursor": "default",
@@ -238,6 +250,68 @@
               "box-shadow": "{imported.button.root.box-shadow.text}"
             }
           }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-active.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-bottom-color",
+          "value": "{imported.button.root.border-bottom-color-state-active.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-left-color",
+          "value": "{imported.button.root.border-left-color-state-active.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-right-color",
+          "value": "{imported.button.root.border-right-color-state-active.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-top-color",
+          "value": "{imported.button.root.border-top-color-state-active.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-hover.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-bottom-color",
+          "value": "{imported.button.root.border-bottom-color-state-hover.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-left-color",
+          "value": "{imported.button.root.border-left-color-state-hover.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-right-color",
+          "value": "{imported.button.root.border-right-color-state-hover.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-top-color",
+          "value": "{imported.button.root.border-top-color-state-hover.{variant}.{color}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
         }
       ]
     }

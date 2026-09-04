@@ -81,14 +81,14 @@ export const muiDialogSource: ReviewedDialogSource = {
 };
 
 const muiRefusals = makeRefusals("mui", [
-  { id: "refusal-box-shadow", evidence: "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.box-shadow = rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px; dialog@1 has no shadow leaf, so the shadow is not minted", target: "MUI (proposed) box-shadow", reason: "refused-by-recipe" },
+  { id: "refusal-box-shadow", evidence: "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.box-shadow = rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px; dialog@1 has no shadow leaf, so the shadow is not minted", target: "mui box-shadow", reason: "refused-by-recipe" },
 ]);
 
 export const muiDialogAdapterConfig = buildConfig(
   "mui",
   muiDialogSource,
   muiTokens,
-  { id: "mui.dialog", name: "MUI (proposed) Dialog" },
+  { id: "mui.dialog", name: "mui Dialog" },
   muiRefusals,
   anatomyFacts("mui", muiDialogSource),
   ["hover","focus-visible","active","maxWidth","fullScreen","scroll","actions","onClose"],

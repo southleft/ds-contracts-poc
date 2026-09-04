@@ -1,22 +1,82 @@
 {
   "component": "Badge",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 56,
   "combos": 14,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 10,
-    "label": 32,
-    "badge-anchororigintopright": 42,
-    "label-2": 44
+    "root": 26,
+    "label": 35,
+    "badge-anchororigintopright": 44,
+    "label-2": 46
   },
   "folds": {
-    "count": 30,
+    "count": 40,
     "receipts": [
+      {
+        "part": "root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
       {
         "part": "label",
         "channel": "border-bottom-color",
@@ -198,8 +258,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 194,
-    "mintedLeavesFolded": 54
+    "mintedLeavesUnfolded": 197,
+    "mintedLeavesFolded": 57
   },
   "bound": {
     "cellsChecked": 0,
@@ -208,22 +268,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 54,
-    "baseBindings": 59,
+    "leaves": 57,
+    "baseBindings": 65,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 55,
+      "uniform": 61,
       "perAxis": 4,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 18,
+    "base": 21,
     "state": 0
   },
   "codeOnly": {
-    "base": 9,
+    "base": 11,
     "state": 0,
     "overflowBindings": 0
   },
@@ -236,8 +296,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 113568,
-    "cellsMatched": 113568,
+    "cellsCompared": 113064,
+    "cellsMatched": 113064,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -256,60 +316,60 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.007091703869047616,
-      "max": 0.013020833333333334,
-      "perfect": 21
+      "mean": 0.396089099702381,
+      "max": 0.46875,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 56
+      "mean": 0.10625930059523803,
+      "max": 0.13671875,
+      "perfect": 0
     },
     "worst": [
       {
-        "key": "secondary.dot__focus-visible",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "default.standard__default",
+        "pctExact": 0.458984375,
+        "pctAA": 0.13671875
       },
       {
-        "key": "secondary.dot__active",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "default.standard__hover",
+        "pctExact": 0.458984375,
+        "pctAA": 0.13671875
       },
       {
-        "key": "error.dot__default",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "default.standard__focus-visible",
+        "pctExact": 0.458984375,
+        "pctAA": 0.13671875
       },
       {
-        "key": "error.dot__hover",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "default.standard__active",
+        "pctExact": 0.458984375,
+        "pctAA": 0.13671875
       },
       {
-        "key": "error.dot__focus-visible",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "error.standard__default",
+        "pctExact": 0.46875,
+        "pctAA": 0.13020833333333334
       },
       {
-        "key": "error.dot__active",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "error.standard__hover",
+        "pctExact": 0.46875,
+        "pctAA": 0.13020833333333334
       },
       {
-        "key": "info.dot__default",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "error.standard__focus-visible",
+        "pctExact": 0.46875,
+        "pctAA": 0.13020833333333334
       },
       {
-        "key": "info.dot__hover",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "error.standard__active",
+        "pctExact": 0.46875,
+        "pctAA": 0.13020833333333334
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 91.13924050632912,
+    "computedPctEqual": 91,
     "rowsFullyEqual": 0,
     "rows": 56,
     "pixelPerfectExact": 0,

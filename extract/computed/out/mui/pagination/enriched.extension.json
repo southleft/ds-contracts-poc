@@ -18,6 +18,14 @@
           "$value": "52px",
           "$type": "dimension"
         },
+        "size-0-15008": {
+          "$value": "0.15008px",
+          "$type": "dimension"
+        },
+        "size-21": {
+          "$value": "21px",
+          "$type": "dimension"
+        },
         "size-0": {
           "$value": "0px",
           "$type": "dimension"
@@ -82,7 +90,7 @@
             "$type": "number"
           },
           "width": {
-            "$value": "67.0312px",
+            "$value": "62.6094px",
             "$type": "dimension"
           }
         },
@@ -139,10 +147,6 @@
           },
           "font-size": {
             "$value": "13.3333px",
-            "$type": "dimension"
-          },
-          "height": {
-            "$value": "21px",
             "$type": "dimension"
           },
           "padding-bottom": {
@@ -1213,15 +1217,32 @@
         "part": "buttonbase-root-2",
         "field": "justify",
         "value": "center"
+      },
+      {
+        "part": "tablepagination-spacer",
+        "field": "grow",
+        "value": true
       }
     ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "layout-grow-carried: tablepagination-spacer — flex-grow 1 in a flex row parent (tablepagination-toolbar); carried as layout.grow (the canvas FILL / layoutGrow twin)"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
     "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
       {
         "part": "root",
         "channel": "overflow-x",
@@ -1234,8 +1255,33 @@
       },
       {
         "part": "tablepagination-toolbar",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tablepagination-toolbar",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablepagination-toolbar",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "tablepagination-spacer",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tablepagination-spacer",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label",
@@ -1344,6 +1390,11 @@
       },
       {
         "part": "icon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "icon",
         "channel": "cursor",
         "value": "text"
       },
@@ -1389,6 +1440,21 @@
       },
       {
         "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tablepagination-actions",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tablepagination-actions",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
       },
@@ -1507,6 +1573,20 @@
   },
   "codeOnlyChannels": [
     {
+      "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablepagination-toolbar",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "tablepagination-spacer",
       "channel": "flex-basis",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -1514,10 +1594,31 @@
       "distinctValues": 1
     },
     {
+      "part": "tablepagination-spacer",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "label",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "inputbase-root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -1539,6 +1640,13 @@
       "channel": "text-align-last",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "right",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -1570,17 +1678,52 @@
       "distinctValues": 1
     },
     {
+      "part": "select-nativeinput",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "icon",
       "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
       "part": "label-3",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "tablepagination-actions",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -1588,6 +1731,13 @@
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "buttonbase-root-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -1623,6 +1773,8 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
@@ -1642,30 +1794,101 @@
     "absolute-geometry-admitted: buttonbase-root-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: icon-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-0-4-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-equal-drop: root — 574 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 371 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: tablepagination-toolbar — 567 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: tablepagination-toolbar — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: tablepagination-toolbar — 364 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: tablepagination-spacer — 576 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: tablepagination-spacer — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: tablepagination-spacer — 373 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <p> — span control used (part label)",
-    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "ua-control-fallback: no UA baseline for <p> — span UA control used (part label)",
+    "control-equal-drop: label — 574 of 595 admitted channels compared EQUAL to the <p> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 14 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 370 channel(s) EQUAL to the <p> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: inputbase-root — 567 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: inputbase-root — 14 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: inputbase-root — 364 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-2 — 563 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-2 — 13 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-2 — 359 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <input> — span control used (part select-nativeinput)",
+    "ua-control-fallback: no UA baseline for <input> — span UA control used (part select-nativeinput)",
+    "control-equal-drop: select-nativeinput — 561 of 597 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: select-nativeinput — 2 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: select-nativeinput — 358 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon)",
+    "control-equal-drop: icon — 560 of 597 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon — 4 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: icon — 357 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <path> — span control used (part part-0-2-2-0)",
+    "ua-control-fallback: no UA baseline for <path> — span UA control used (part part-0-2-2-0)",
+    "control-equal-drop: part-0-2-2-0 — 570 of 597 admitted channels compared EQUAL to the <path> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-2-2-0 — 3 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-2-2-0 — 367 channel(s) EQUAL to the <path> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <p> — span control used (part label-3)",
-    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "ua-control-fallback: no UA baseline for <p> — span UA control used (part label-3)",
+    "control-equal-drop: label-3 — 574 of 595 admitted channels compared EQUAL to the <p> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-3 — 14 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-3 — 370 channel(s) EQUAL to the <p> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: tablepagination-actions — 576 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: tablepagination-actions — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: tablepagination-actions — 373 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: buttonbase-root — 546 of 597 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: buttonbase-root — 1 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: buttonbase-root — 343 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon-2)",
+    "control-equal-drop: icon-2 — 568 of 597 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon-2 — 3 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: icon-2 — 365 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <path> — span control used (part part-0-4-0-0-0)",
+    "ua-control-fallback: no UA baseline for <path> — span UA control used (part part-0-4-0-0-0)",
+    "control-equal-drop: part-0-4-0-0-0 — 571 of 597 admitted channels compared EQUAL to the <path> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-4-0-0-0 — 2 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-4-0-0-0 — 368 channel(s) EQUAL to the <path> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: buttonbase-root-2 — 546 of 597 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: buttonbase-root-2 — 1 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: buttonbase-root-2 — 343 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon-3)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon-3)",
+    "control-equal-drop: icon-3 — 568 of 597 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon-3 — 3 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: icon-3 — 365 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <path> — span control used (part part-0-4-1-0-0)",
-    "webkit-prefixed-channels-refused: 5 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (buttonbase-root, buttonbase-root-2, inputbase-root, tablepagination-toolbar); -webkit-box-pack (buttonbase-root, buttonbase-root-2); -webkit-tap-highlight-color (buttonbase-root, buttonbase-root-2, icon-2, icon-3, label-2, part-0-4-0-0-0, part-0-4-1-0-0); -webkit-text-fill-color (buttonbase-root, buttonbase-root-2, icon, icon-2, icon-3, inputbase-root, label, label-2, label-3, part-0-2-2-0, part-0-4-0-0-0, part-0-4-1-0-0, root, tablepagination-actions, tablepagination-spacer, tablepagination-toolbar); -webkit-text-stroke-color (buttonbase-root, buttonbase-root-2, icon, icon-2, icon-3, inputbase-root, label, label-2, label-3, part-0-2-2-0, part-0-4-0-0-0, part-0-4-1-0-0, root, tablepagination-actions, tablepagination-spacer, tablepagination-toolbar)",
+    "ua-control-fallback: no UA baseline for <path> — span UA control used (part part-0-4-1-0-0)",
+    "control-equal-drop: part-0-4-1-0-0 — 571 of 597 admitted channels compared EQUAL to the <path> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-4-1-0-0 — 2 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-4-1-0-0 — 368 channel(s) EQUAL to the <path> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: buttonbase-root — block-size 40px, inline-size 40px, perspective-origin 20px 20px, transform-origin 20px 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: buttonbase-root-2 — block-size 40px, inline-size 40px, perspective-origin 20px 20px, transform-origin 20px 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon — block-size 24px, inline-size 24px, perspective-origin 12px 12px, transform-origin 12px 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-2 — block-size 24px, inline-size 24px, perspective-origin 12px 12px, transform-origin 12px 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-3 — block-size 24px, inline-size 24px, perspective-origin 12px 12px, transform-origin 12px 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: inputbase-root — block-size 29.125px, inline-size 48px, perspective-origin 24px 14.5625px, transform-origin 24px 14.5625px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 20.0156px, height 20.0156px, inline-size 97.5938px, perspective-origin 48.7969px 10px, transform-origin 48.7969px 10.0078px, width 97.5938px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 20.125px, height 20.125px, inline-size 16px, perspective-origin 24px 14.5625px, transform-origin 24px 14.5625px, width 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-3 — block-size 20.0156px, height 20.0156px, inline-size 53.7969px, perspective-origin 26.8906px 10px, transform-origin 26.8984px 10.0078px, width 53.7969px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-2-2-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-4-0-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-4-1-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 52px, inline-size 428px, perspective-origin 214px 26px, transform-origin 214px 26px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: select-nativeinput — block-size 21px, inline-size 48px, perspective-origin 24px 10.5px, transform-origin 24px 10.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: tablepagination-actions — block-size 40px, inline-size 80px, perspective-origin 40px 20px, transform-origin 40px 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: tablepagination-spacer — block-size 0px, inline-size 62.6094px, perspective-origin 31.2969px 0px, transform-origin 31.3047px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: tablepagination-toolbar — block-size 52px, inline-size 428px, perspective-origin 214px 26px, transform-origin 214px 26px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 6 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (buttonbase-root, buttonbase-root-2, inputbase-root, tablepagination-toolbar); -webkit-box-pack (buttonbase-root, buttonbase-root-2); -webkit-font-smoothing (buttonbase-root, buttonbase-root-2, icon, icon-2, icon-3, inputbase-root, label, label-2, label-3, part-0-2-2-0, part-0-4-0-0-0, part-0-4-1-0-0, root, select-nativeinput, tablepagination-actions, tablepagination-spacer, tablepagination-toolbar); -webkit-tap-highlight-color (buttonbase-root, buttonbase-root-2, icon-2, icon-3, label-2, part-0-4-0-0-0, part-0-4-1-0-0); -webkit-text-fill-color (buttonbase-root, buttonbase-root-2, icon, icon-2, icon-3, inputbase-root, label, label-2, label-3, part-0-2-2-0, part-0-4-0-0-0, part-0-4-1-0-0, root, tablepagination-actions, tablepagination-spacer, tablepagination-toolbar); -webkit-text-stroke-color (buttonbase-root, buttonbase-root-2, icon, icon-2, icon-3, inputbase-root, label, label-2, label-3, part-0-2-2-0, part-0-4-0-0-0, part-0-4-1-0-0, root, tablepagination-actions, tablepagination-spacer, tablepagination-toolbar)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: icon.fill — values track ancestor \"inputbase-root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: inputbase-root.letter-spacing — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: inputbase-root.line-height — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.font-weight — values track ancestor \"inputbase-root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-3.font-weight — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.letter-spacing — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.line-height — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.letter-spacing — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height — values track ancestor \"tablepagination-toolbar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-only: icon.letter-spacing equals ancestor \"inputbase-root\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: icon.line-height equals ancestor \"inputbase-root\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: inputbase-root.caret-color equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
@@ -1685,23 +1908,21 @@
     "inheritance-only: tablepagination-actions.caret-color equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: tablepagination-actions.color equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: tablepagination-actions.font-size equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tablepagination-actions.letter-spacing equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tablepagination-actions.line-height equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: tablepagination-spacer.caret-color equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: tablepagination-spacer.color equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: tablepagination-spacer.font-size equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tablepagination-spacer.letter-spacing equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tablepagination-spacer.line-height equals ancestor \"tablepagination-toolbar\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: tablepagination-toolbar.caret-color equals ancestor \"root\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: tablepagination-toolbar.color equals ancestor \"root\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: tablepagination-toolbar.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
+    "inheritance-only: tablepagination-toolbar.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tablepagination-toolbar.letter-spacing equals ancestor \"root\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tablepagination-toolbar.line-height equals ancestor \"root\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
-    "closed-shadow-root-suspected: Pagination:__active>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__active>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__default>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__default>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__focus-visible>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__focus-visible>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__hover>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__hover>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-limit: 8 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
     "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
     "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
     "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
@@ -1802,8 +2023,11 @@
       "table-pagination-icon"
     ],
     "receipts": [
+      "svg-currentcolor-folded: Pagination.icon@ — the glyph's authored fill rgba(0, 0, 0, 0.54) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.54)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Pagination.icon@ — 0 0 24 24 from computed size 24×24 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-currentcolor-folded: Pagination.buttonbase-root@ — the glyph's authored fill rgba(0, 0, 0, 0.26) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.26)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Pagination.buttonbase-root@ — 0 0 24 24 from computed size 24×24 (path extent 17.5; viewBox is not a computed style — named reconstruction)",
+      "svg-currentcolor-folded: Pagination.buttonbase-root-2@ — the glyph's authored fill rgba(0, 0, 0, 0.26) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.26)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Pagination.buttonbase-root-2@ — 0 0 24 24 from computed size 24×24 (path extent 17.8; viewBox is not a computed style — named reconstruction)",
       "literal-text-carried: label = \"Rows per page:\" (no text prop sample matches — the mounted value is carried verbatim)",
       "literal-text-carried: label-2 = \"10\" (no text prop sample matches — the mounted value is carried verbatim)",
@@ -1819,9 +2043,17 @@
     "layout enriched: buttonbase-root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: buttonbase-root-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: buttonbase-root-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
-    "declared fact carried: root.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "layout enriched: tablepagination-spacer.layout.grow = true (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-x = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-y = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablepagination-toolbar.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablepagination-toolbar.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: tablepagination-toolbar.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tablepagination-spacer.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablepagination-spacer.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: inputbase-root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: inputbase-root.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1829,8 +2061,8 @@
     "declared fact carried: inputbase-root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.text-align = right (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1839,20 +2071,24 @@
     "declared fact carried: select-nativeinput.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: select-nativeinput.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: select-nativeinput.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: select-nativeinput.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: select-nativeinput.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: select-nativeinput.overflow-x = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: select-nativeinput.overflow-y = clip (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: select-nativeinput.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: select-nativeinput.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablepagination-actions.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tablepagination-actions.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: buttonbase-root.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: buttonbase-root.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: buttonbase-root.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",

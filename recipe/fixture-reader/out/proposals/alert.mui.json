@@ -5,7 +5,7 @@
   "provenance": {
     "package": "@mui/material",
     "version": "9.2.0",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)"
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
   },
   "roles": {
     "title": "idx:1",

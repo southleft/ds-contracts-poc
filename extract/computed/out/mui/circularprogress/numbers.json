@@ -1,17 +1,17 @@
 {
   "component": "CircularProgress",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 8,
   "combos": 2,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 3,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 20,
-    "icon": 16,
-    "circularprogress-circle": 29
+    "root": 24,
+    "icon": 21,
+    "circularprogress-circle": 34
   },
   "folds": {
     "count": 30,
@@ -197,8 +197,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 2,
-    "mintedLeavesFolded": 2
+    "mintedLeavesUnfolded": 3,
+    "mintedLeavesFolded": 3
   },
   "bound": {
     "cellsChecked": 0,
@@ -207,22 +207,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 2,
-    "baseBindings": 2,
+    "leaves": 3,
+    "baseBindings": 3,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 2,
+      "uniform": 3,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 0,
+    "base": 2,
     "state": 0
   },
   "codeOnly": {
-    "base": 8,
+    "base": 9,
     "state": 0,
     "overflowBindings": 0
   },
@@ -235,8 +235,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 16224,
-    "cellsMatched": 16224,
+    "cellsCompared": 16152,
+    "cellsMatched": 16152,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -308,11 +308,11 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 76.3157894736842,
+    "computedPctEqual": 77.08333333333333,
     "rowsFullyEqual": 0,
     "rows": 8,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectExact": 4,
+    "pixelPerfectAA": 4,
     "pairs": 8
   },
   "focusVisibleDriverMatched": 0,

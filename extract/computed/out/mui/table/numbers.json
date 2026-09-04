@@ -9,49 +9,229 @@
   "elementsPerCapture": 38,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 6,
-    "tablehead-root": 6,
-    "tablerow-head": 7,
-    "tablecell-head": 29,
-    "buttonbase-root": 43,
-    "part-0-0-0-0-0": 18,
-    "icon": 30,
-    "part-0-0-0-0-1-0": 27,
-    "tablecell-head-2": 31,
-    "label": 33,
-    "icon-2": 34,
-    "part-0-0-1-0-0-0": 27,
-    "label-2": 31,
-    "label-3": 31,
-    "label-4": 32,
-    "tablebody-root": 6,
-    "tablerow-root": 7,
-    "tablecell-body": 28,
-    "buttonbase-root-2": 42,
-    "part-1-0-0-0-0": 18,
-    "icon-3": 29,
-    "part-1-0-0-0-1-0": 26,
-    "label-5": 31,
-    "label-6": 31,
-    "label-7": 31,
-    "tablecell-alignright": 31,
-    "label-8": 51,
-    "tablerow-root-2": 8,
-    "tablecell-body-2": 28,
-    "buttonbase-root-3": 42,
-    "part-1-1-0-0-0": 18,
-    "icon-4": 29,
-    "part-1-1-0-0-1-0": 26,
-    "label-9": 31,
-    "label-10": 31,
-    "label-11": 31,
-    "tablecell-alignright-2": 31,
-    "label-12": 51
+    "root": 21,
+    "tablehead-root": 22,
+    "tablerow-head": 23,
+    "tablecell-head": 31,
+    "buttonbase-root": 44,
+    "part-0-0-0-0-0": 19,
+    "icon": 32,
+    "part-0-0-0-0-1-0": 29,
+    "tablecell-head-2": 33,
+    "label": 34,
+    "icon-2": 36,
+    "part-0-0-1-0-0-0": 29,
+    "label-2": 33,
+    "label-3": 33,
+    "label-4": 34,
+    "tablebody-root": 22,
+    "tablerow-root": 23,
+    "tablecell-body": 30,
+    "buttonbase-root-2": 43,
+    "part-1-0-0-0-0": 19,
+    "icon-3": 31,
+    "part-1-0-0-0-1-0": 28,
+    "label-5": 33,
+    "label-6": 33,
+    "label-7": 33,
+    "tablecell-alignright": 33,
+    "label-8": 53,
+    "tablerow-root-2": 24,
+    "tablecell-body-2": 30,
+    "buttonbase-root-3": 43,
+    "part-1-1-0-0-0": 19,
+    "icon-4": 31,
+    "part-1-1-0-0-1-0": 28,
+    "label-9": 33,
+    "label-10": 33,
+    "label-11": 33,
+    "tablecell-alignright-2": 33,
+    "label-12": 53
   },
   "folds": {
-    "count": 275,
+    "count": 335,
     "receipts": [
       {
+        "part": "root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablehead-root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-head",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
         "part": "tablecell-head",
         "channel": "border-left-color",
         "foldedInto": "color",
@@ -682,6 +862,126 @@
         "class": "currentColor"
       },
       {
+        "part": "tablebody-root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablebody-root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
         "part": "tablecell-body",
         "channel": "border-left-color",
         "foldedInto": "color",
@@ -1187,6 +1487,66 @@
       },
       {
         "part": "label-8",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "tablerow-root-2",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -1702,8 +2062,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 195,
-    "mintedLeavesFolded": 197
+    "mintedLeavesUnfolded": 221,
+    "mintedLeavesFolded": 223
   },
   "bound": {
     "cellsChecked": 0,
@@ -1712,22 +2072,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 197,
-    "baseBindings": 415,
+    "leaves": 223,
+    "baseBindings": 433,
     "stateBindings": 3,
     "byShape": {
-      "uniform": 337,
-      "perAxis": 81,
+      "uniform": 340,
+      "perAxis": 96,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 147,
+    "base": 179,
     "state": 1
   },
   "codeOnly": {
-    "base": 121,
+    "base": 155,
     "state": 0,
     "overflowBindings": 3
   },
@@ -1741,8 +2101,8 @@
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 204592,
-    "cellsMatched": 204240,
-    "pct": 99.82795026198482,
+    "cellsMatched": 204216,
+    "pct": 99.81621959802925,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -1756,11 +2116,11 @@
       ],
       [
         "inline-size",
-        72
+        84
       ],
       [
         "width",
-        72
+        84
       ],
       [
         "overflow-block",
@@ -1789,60 +2149,60 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.30246913580246915,
-      "max": 0.30246913580246915,
+      "mean": 1.8508873456790125,
+      "max": 1.8576388888888888,
       "perfect": 0
     },
     "aa": {
-      "mean": 0.27507716049382713,
-      "max": 0.27507716049382713,
+      "mean": 0.953125,
+      "max": 0.9610339506172839,
       "perfect": 0
     },
     "worst": [
       {
-        "key": "small__default",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
-      },
-      {
-        "key": "small__hover",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
-      },
-      {
-        "key": "small__focus-visible",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
-      },
-      {
-        "key": "small__active",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
-      },
-      {
         "key": "medium__default",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
+        "pctExact": 1.8576388888888888,
+        "pctAA": 0.9610339506172839
       },
       {
         "key": "medium__hover",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
+        "pctExact": 1.8576388888888888,
+        "pctAA": 0.9610339506172839
       },
       {
         "key": "medium__focus-visible",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
+        "pctExact": 1.8576388888888888,
+        "pctAA": 0.9610339506172839
       },
       {
         "key": "medium__active",
-        "pctExact": 0.30246913580246915,
-        "pctAA": 0.27507716049382713
+        "pctExact": 1.8576388888888888,
+        "pctAA": 0.9610339506172839
+      },
+      {
+        "key": "small__default",
+        "pctExact": 1.8441358024691359,
+        "pctAA": 0.9452160493827161
+      },
+      {
+        "key": "small__hover",
+        "pctExact": 1.8441358024691359,
+        "pctAA": 0.9452160493827161
+      },
+      {
+        "key": "small__focus-visible",
+        "pctExact": 1.8441358024691359,
+        "pctAA": 0.9452160493827161
+      },
+      {
+        "key": "small__active",
+        "pctExact": 1.8441358024691359,
+        "pctAA": 0.9452160493827161
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 85.20077720207254,
+    "computedPctEqual": 84.11343612334802,
     "rowsFullyEqual": 0,
     "rows": 8,
     "pixelPerfectExact": 0,

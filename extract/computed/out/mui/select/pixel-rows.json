@@ -1,58 +1,42 @@
 [
   {
     "key": "small__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8482142857142857,
+    "pctAA": 0.3236607142857143
   },
   {
     "key": "small__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8779761904761905,
+    "pctAA": 0.3236607142857143
   },
   {
     "key": "small__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8779761904761905,
+    "pctAA": 0.3236607142857143
   },
   {
     "key": "small__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8779761904761905,
+    "pctAA": 0.3236607142857143
   },
   {
     "key": "medium__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8482142857142857,
+    "pctAA": 0.3236607142857143
   },
   {
     "key": "medium__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8779761904761905,
+    "pctAA": 0.3236607142857143
   },
   {
     "key": "medium__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8779761904761905,
+    "pctAA": 0.3236607142857143
   },
   {
     "key": "medium__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.8779761904761905,
+    "pctAA": 0.3236607142857143
   }
 ]

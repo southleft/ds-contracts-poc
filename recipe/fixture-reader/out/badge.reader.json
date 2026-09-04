@@ -756,10 +756,10 @@
       },
       {
         "path": "label",
-        "fixtureValue": "#000000ff",
+        "fixtureValue": "#000000de",
         "verdict": "match",
-        "capturedValue": "#000000ff",
-        "proposedValue": "#000000ff",
+        "capturedValue": "#000000de",
+        "proposedValue": "#000000de",
         "ledgerKeys": [
           "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.color"
         ]

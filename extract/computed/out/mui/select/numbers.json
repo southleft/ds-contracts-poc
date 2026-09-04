@@ -1,22 +1,22 @@
 {
   "component": "Select",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 8,
   "combos": 2,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 8,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 31,
-    "label": 34,
-    "select-nativeinput": 35,
-    "icon": 35,
-    "part-2-0": 25,
-    "outlinedinput-notchedoutline": 42,
-    "part-3-0": 27,
-    "label-2": 22
+    "root": 32,
+    "label": 35,
+    "select-nativeinput": 36,
+    "icon": 37,
+    "part-2-0": 27,
+    "outlinedinput-notchedoutline": 44,
+    "part-3-0": 29,
+    "label-2": 24
   },
   "folds": {
     "count": 66,
@@ -418,8 +418,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 46,
-    "mintedLeavesFolded": 51
+    "mintedLeavesUnfolded": 44,
+    "mintedLeavesFolded": 49
   },
   "bound": {
     "cellsChecked": 0,
@@ -428,7 +428,7 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 51,
+    "leaves": 49,
     "baseBindings": 105,
     "stateBindings": 22,
     "byShape": {
@@ -439,11 +439,11 @@
     }
   },
   "declared": {
-    "base": 51,
+    "base": 55,
     "state": 0
   },
   "codeOnly": {
-    "base": 9,
+    "base": 16,
     "state": 0,
     "overflowBindings": 22
   },
@@ -456,9 +456,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 43264,
-    "cellsMatched": 43256,
-    "pct": 99.98150887573965,
+    "cellsCompared": 43072,
+    "cellsMatched": 42968,
+    "pct": 99.75854383358099,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -467,95 +467,91 @@
     ],
     "topMismatchedChannels": [
       [
+        "inline-size",
+        32
+      ],
+      [
+        "perspective-origin",
+        32
+      ],
+      [
+        "width",
+        32
+      ],
+      [
         "display",
         8
       ]
     ]
   },
   "pixel": {
-    "pairs": 0,
-    "measured": 0,
+    "pairs": 8,
+    "measured": 8,
     "unscored": {
       "sizeMismatch": 0,
-      "noOriginal": 8,
+      "noOriginal": 0,
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": null,
-      "max": null,
+      "mean": 0.8705357142857144,
+      "max": 0.8779761904761905,
       "perfect": 0
     },
     "aa": {
-      "mean": null,
-      "max": null,
+      "mean": 0.32366071428571436,
+      "max": 0.3236607142857143,
       "perfect": 0
     },
     "worst": [
       {
-        "key": "small__default",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
         "key": "small__hover",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "pctExact": 0.8779761904761905,
+        "pctAA": 0.3236607142857143
       },
       {
         "key": "small__focus-visible",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "pctExact": 0.8779761904761905,
+        "pctAA": 0.3236607142857143
       },
       {
         "key": "small__active",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "medium__default",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "pctExact": 0.8779761904761905,
+        "pctAA": 0.3236607142857143
       },
       {
         "key": "medium__hover",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "pctExact": 0.8779761904761905,
+        "pctAA": 0.3236607142857143
       },
       {
         "key": "medium__focus-visible",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "pctExact": 0.8779761904761905,
+        "pctAA": 0.3236607142857143
       },
       {
         "key": "medium__active",
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "note": "original screenshot unavailable — pixel not scored"
+        "pctExact": 0.8779761904761905,
+        "pctAA": 0.3236607142857143
+      },
+      {
+        "key": "small__default",
+        "pctExact": 0.8482142857142857,
+        "pctAA": 0.3236607142857143
+      },
+      {
+        "key": "medium__default",
+        "pctExact": 0.8482142857142857,
+        "pctAA": 0.3236607142857143
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 90.7103825136612,
+    "computedPctEqual": 88.02083333333333,
     "rowsFullyEqual": 0,
     "rows": 8,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 0
+    "pairs": 8
   },
   "focusVisibleDriverMatched": 0,
   "focusVisibleDriverTotal": 2

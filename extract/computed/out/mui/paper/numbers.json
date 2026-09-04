@@ -1,15 +1,15 @@
 {
   "component": "Paper",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 32,
   "combos": 8,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 34
+    "root": 38
   },
   "folds": {
     "count": 6,
@@ -51,8 +51,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 32,
-    "mintedLeavesFolded": 32
+    "mintedLeavesUnfolded": 34,
+    "mintedLeavesFolded": 34
   },
   "bound": {
     "cellsChecked": 0,
@@ -61,22 +61,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 32,
-    "baseBindings": 20,
+    "leaves": 34,
+    "baseBindings": 22,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 11,
+      "uniform": 13,
       "perAxis": 8,
       "perPair": 1,
       "refused": 0
     }
   },
   "declared": {
-    "base": 3,
+    "base": 9,
     "state": 0
   },
   "codeOnly": {
-    "base": 5,
+    "base": 1,
     "state": 0,
     "overflowBindings": 0
   },
@@ -89,8 +89,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 21632,
-    "cellsMatched": 21632,
+    "cellsCompared": 21536,
+    "cellsMatched": 21536,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -109,64 +109,64 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.14017740885416666,
-      "max": 4.485677083333333,
-      "perfect": 31
+      "mean": 3.1793212890625004,
+      "max": 10.865885416666666,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 32
+      "mean": 1.3305664062499998,
+      "max": 1.3346354166666667,
+      "perfect": 0
     },
     "worst": [
       {
         "key": "8.elevation__focus-visible",
-        "pctExact": 4.485677083333333,
-        "pctAA": 0
+        "pctExact": 10.865885416666666,
+        "pctAA": 1.3346354166666667
       },
       {
-        "key": "0.elevation__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "8.elevation__default",
+        "pctExact": 6.2890625,
+        "pctAA": 1.3346354166666667
       },
       {
-        "key": "0.elevation__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "8.elevation__hover",
+        "pctExact": 6.2890625,
+        "pctAA": 1.3346354166666667
       },
       {
-        "key": "0.elevation__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
-        "key": "0.elevation__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "8.elevation__active",
+        "pctExact": 6.2890625,
+        "pctAA": 1.3346354166666667
       },
       {
         "key": "0.outlined__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.5716145833333335,
+        "pctAA": 1.3346354166666667
       },
       {
         "key": "0.outlined__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.5716145833333335,
+        "pctAA": 1.3346354166666667
       },
       {
         "key": "0.outlined__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 2.5716145833333335,
+        "pctAA": 1.3346354166666667
+      },
+      {
+        "key": "0.outlined__active",
+        "pctExact": 2.5716145833333335,
+        "pctAA": 1.3346354166666667
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 87.87878787878788,
-    "rowsFullyEqual": 16,
+    "computedPctEqual": 97.29729729729729,
+    "rowsFullyEqual": 0,
     "rows": 32,
-    "pixelPerfectExact": 16,
-    "pixelPerfectAA": 16,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
     "pairs": 32
   },
   "focusVisibleDriverMatched": 0,

@@ -4,37 +4,11 @@
   "name": "Snackbar",
   "version": "0.2.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — open=true fixed; position axis expands to nested anchorOrigin via capture axisValueMap $props. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — standalone open=true capture via openDriver; no variant axes. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
-  "props": [
-    {
-      "name": "position",
-      "type": {
-        "enum": [
-          "bottom-left",
-          "bottom-center",
-          "top-right"
-        ]
-      },
-      "default": "bottom-left",
-      "bindings": {
-        "figma": {
-          "kind": "VARIANT",
-          "property": "Position",
-          "values": {
-            "bottom-left": "BottomLeft",
-            "bottom-center": "BottomCenter",
-            "top-right": "TopRight"
-          }
-        },
-        "code": {
-          "prop": "anchorOrigin"
-        }
-      }
-    }
-  ],
+  "props": [],
   "states": [],
   "anatomy": {
     "root": {
@@ -48,6 +22,7 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Paper-root.SnackbarContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
+            "grow": true,
             "align": "center",
             "wrap": true
           },
@@ -57,6 +32,7 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|SnackbarContent-message — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
+                "box-sizing": "border-box",
                 "font-family": "Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
@@ -71,6 +47,7 @@
             }
           },
           "declared": {
+            "box-sizing": "border-box",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-delay": "0s, 0s",
             "transition-duration": "0s, 0s",
@@ -96,9 +73,17 @@
           }
         }
       },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif"
+      },
       "tokens": {
+        "color": "{imported.snackbar.root.color}",
+        "letter-spacing": "{imported.snackbar.root.letter-spacing}",
+        "line-height": "{imported.snackbar.root.line-height}",
         "min-height": "{imported.snackbar.root.min-height}",
         "min-width": "{imported.snackbar.root.min-width}",
+        "width": "{imported.snackbar.root.width}",
         "z-index": "{imported.snackbar.root.z-index}"
       }
     }

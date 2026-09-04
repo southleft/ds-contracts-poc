@@ -1,19 +1,19 @@
 {
   "component": "Alert",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
   "captures": 48,
   "combos": 12,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 678,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 39,
-    "alert-icon": 21,
-    "icon": 25,
-    "part-0-0-0": 22,
-    "label": 21
+    "root": 42,
+    "alert-icon": 23,
+    "icon": 27,
+    "part-0-0-0": 24,
+    "label": 23
   },
   "folds": {
     "count": 46,
@@ -295,8 +295,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 448,
-    "mintedLeavesFolded": 136
+    "mintedLeavesUnfolded": 449,
+    "mintedLeavesFolded": 137
   },
   "bound": {
     "cellsChecked": 0,
@@ -305,22 +305,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 136,
-    "baseBindings": 41,
+    "leaves": 137,
+    "baseBindings": 42,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 26,
+      "uniform": 27,
       "perAxis": 7,
       "perPair": 8,
       "refused": 0
     }
   },
   "declared": {
-    "base": 8,
+    "base": 15,
     "state": 0
   },
   "codeOnly": {
-    "base": 4,
+    "base": 3,
     "state": 0,
     "overflowBindings": 0
   },
@@ -333,9 +333,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 162240,
-    "cellsMatched": 161856,
-    "pct": 99.76331360946746,
+    "cellsCompared": 161520,
+    "cellsMatched": 161200,
+    "pct": 99.80188211986132,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -353,11 +353,11 @@
       ],
       [
         "inline-size",
-        48
+        16
       ],
       [
         "width",
-        48
+        16
       ]
     ]
   },
@@ -370,61 +370,61 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.48828125000000006,
-      "max": 0.498046875,
+      "mean": 4.331597222222224,
+      "max": 4.440104166666667,
       "perfect": 0
     },
     "aa": {
-      "mean": 0.2400716145833333,
-      "max": 0.24739583333333334,
+      "mean": 2.0187717013888897,
+      "max": 2.1223958333333335,
       "perfect": 0
     },
     "worst": [
       {
-        "key": "warning.standard__default",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "info.filled__default",
+        "pctExact": 4.436848958333333,
+        "pctAA": 2.1223958333333335
       },
       {
-        "key": "warning.standard__hover",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "info.filled__hover",
+        "pctExact": 4.436848958333333,
+        "pctAA": 2.1223958333333335
       },
       {
-        "key": "warning.standard__focus-visible",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "info.filled__focus-visible",
+        "pctExact": 4.436848958333333,
+        "pctAA": 2.1223958333333335
       },
       {
-        "key": "warning.standard__active",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "info.filled__active",
+        "pctExact": 4.436848958333333,
+        "pctAA": 2.1223958333333335
       },
       {
-        "key": "warning.filled__default",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "error.filled__default",
+        "pctExact": 4.420572916666667,
+        "pctAA": 2.1223958333333335
       },
       {
-        "key": "warning.filled__hover",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "error.filled__hover",
+        "pctExact": 4.420572916666667,
+        "pctAA": 2.1223958333333335
       },
       {
-        "key": "warning.filled__focus-visible",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "error.filled__focus-visible",
+        "pctExact": 4.420572916666667,
+        "pctAA": 2.1223958333333335
       },
       {
-        "key": "warning.filled__active",
-        "pctExact": 0.4915364583333333,
-        "pctAA": 0.24739583333333334
+        "key": "error.filled__active",
+        "pctExact": 4.420572916666667,
+        "pctAA": 2.1223958333333335
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 96.70781893004116,
-    "rowsFullyEqual": 32,
+    "computedPctEqual": 96.55172413793103,
+    "rowsFullyEqual": 0,
     "rows": 48,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,

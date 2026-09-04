@@ -5,19 +5,19 @@
   "productV1": "INCOMPLETE",
   "artifactVersion": "textarea-live-pivot-v13-prepare",
   "teaching": "MUI rest empty hides placeholder; Content=focus shrinks the label and shows placeholder. Stacked Astryx/AntD empty and focus look the same. No invented focus ring.",
-  "runIdentity": "e275888a-47ace6d9-28aba712-59d7530a-f7368def-36b9a479-8460784d-textarea-v13",
-  "pageName": "Recipe Pivot / Textarea / e275888a-47ace6d9-28aba712-59d7530a-f7368def-36b9a479-8460784d-textarea-v13",
+  "runIdentity": "e275888a-47ace6d9-28aba712-80b5db76-f7368def-36b9a479-8460784d-textarea-v13",
+  "pageName": "Recipe Pivot / Textarea / e275888a-47ace6d9-28aba712-80b5db76-f7368def-36b9a479-8460784d-textarea-v13",
   "namespace": "ds.contracts.textarea.recipe.v1",
   "recipeHashes": {
     "Astryx": "e275888ab379093184ed6cebf7eb59729a8a165332f77bf23a976a03d66b9432",
     "MUI": "47ace6d94658ecb922ec4edf5d4758897242e1bac2361f00ef50fda9e630112a",
     "Ant Design": "28aba71278de0dd14f026c63ca56f1be589e7c162ff44e7aeaf7e7ff38c64cd7",
-    "MUI (proposed)": "59d7530abfcbd56d28f30df3986024bbf63466e7e29fd6bab2f2d562893be6c5",
+    "MUI (proposed)": "80b5db76deed2b7140e230df1f8a7818987a30066fc4f5086e49b2af8253072a",
     "Ant Design (proposed)": "f7368deffc96e8ee3d94a584d13d92b91705b9c6bd49ee87d88ab93605dca3d3",
     "Chakra (proposed)": "36b9a47967dda61bf76e11c585e47529fd0da8be07b555de254f0fc45ce7a462",
     "Chakra Field (proposed)": "8460784d3bd7cb7b7a1a86e4da14d039db30f7dfda3c978b93d8f92bfb75f414"
   },
-  "writerSha256": "312f19cf5dcdcd7aae743fdb9f0778b2e6a7b8805053219b2d0a3ac34c89dd47",
+  "writerSha256": "d021819a2fce819f8088925ded87323828416d239ab9c305b969b2858795d97a",
   "pageId": "235:96329",
   "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=235-96329",
   "live": {

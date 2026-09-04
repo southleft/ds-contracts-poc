@@ -7,8 +7,8 @@
   "pluginShot": "recipe/evidence/fidelity-v1/shots/menu-mui-proposed-default-v10-plugin.png",
   "manifestShot": "recipe/evidence/fidelity-v1/shots/menu-mui-proposed-default-v10.png",
   "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
-  "pluginPct": 4.73,
-  "manifestPct": 4.73,
+  "pluginPct": 4.51,
+  "manifestPct": 4.51,
   "pluginStatus": "pass",
   "manifestStatus": "pass",
   "parity": "same"

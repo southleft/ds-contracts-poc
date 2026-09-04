@@ -123,6 +123,7 @@
             "aspect-ratio": "1 / 1",
             "box-sizing": "border-box",
             "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-delay": "0s, 0s",
             "transition-duration": "0.15s, 0.15s",
             "transition-property": "left, transform",
@@ -188,6 +189,86 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-offset",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             },
             "switch-thumb": {
@@ -202,6 +283,7 @@
                 "border-top-style": "solid",
                 "box-sizing": "border-box",
                 "cursor": "pointer",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
                 "user-select": "none"
               },
               "layout": {
@@ -222,7 +304,9 @@
                 "border-right-width": "{imported.shared.size-1}",
                 "border-top-color": "{imported.shared.color-00000000}",
                 "border-top-width": "{imported.shared.size-1}",
-                "box-shadow": "{imported.switch.switch-thumb.box-shadow}"
+                "box-shadow": "{imported.switch.switch-thumb.box-shadow}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-24}"
               },
               "tokensByProp": [
                 {
@@ -257,6 +341,20 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "background-color",
+                  "value": "{imported.switch.switch-thumb.background-color-state-disabled.{color}.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "color",
+                  "value": "{imported.switch.switch-thumb.color-state-disabled.{color}.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             }
           },
@@ -269,6 +367,8 @@
           "tokens": {
             "bottom": "{imported.shared.size-0}",
             "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-width": "{imported.shared.size-0}",
@@ -321,6 +421,26 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "background-color",
+              "value": "{imported.switch.buttonbase-root.background-color-state-active.{color}.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "{imported.switch.buttonbase-root.color-state-disabled.{color}.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "background-color",
+              "value": "{imported.switch.buttonbase-root.background-color-state-hover.{color}.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         },
         "switch-track": {
@@ -328,6 +448,8 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy span|Switch-track — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "transition-delay": "0s, 0s",
             "transition-duration": "0.15s, 0.15s",
             "transition-property": "opacity, background-color",
@@ -340,7 +462,10 @@
             "border-bottom-left-radius": "{imported.shared.size-7}",
             "border-bottom-right-radius": "{imported.shared.size-7}",
             "border-top-left-radius": "{imported.shared.size-7}",
-            "border-top-right-radius": "{imported.shared.size-7}"
+            "border-top-right-radius": "{imported.shared.size-7}",
+            "color": "{imported.switch.switch-track.color}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-24}"
           },
           "tokensByProp": [
             {
@@ -369,19 +494,31 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "opacity",
+              "value": "0.12",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         }
       },
       "declared": {
         "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "hidden",
         "overflow-y": "hidden",
         "position": "relative"
       },
       "tokens": {
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.switch.root.color}",
         "flex-shrink": "{imported.shared.num-0}",
         "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-24}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}",
         "z-index": "{imported.shared.num-0}"

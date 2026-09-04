@@ -7,8 +7,8 @@
   "pluginShot": "recipe/evidence/fidelity-v1/shots/alert-mui-proposed-v10-plugin.png",
   "manifestShot": "recipe/evidence/fidelity-v1/shots/alert-mui-proposed-v10.png",
   "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png",
-  "pluginPct": 3.99,
-  "manifestPct": 3.99,
+  "pluginPct": 3.98,
+  "manifestPct": 3.98,
   "pluginStatus": "pass",
   "manifestStatus": "pass",
   "parity": "same"

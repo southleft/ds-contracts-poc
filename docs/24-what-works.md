@@ -22,9 +22,9 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 128 components came out with a measured floor:
-**86.5% mean computed-style equality** against the original npm package rendering in the same pinned
-Chromium, exact string comparison with no tolerance, over 752,625 compared style cells
-(61 of 128 components at ≥90%, 100 of 128 at ≥80%).
+**86.4% mean computed-style equality** against the original npm package rendering in the same pinned
+Chromium, exact string comparison with no tolerance, over 773,019 compared style cells
+(61 of 128 components at ≥90%, 101 of 128 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
@@ -109,23 +109,23 @@ pipeline never opened still counts against it.
 | Altitude | 8 | **91.7** | 94.0 | 5/8 | 8/8 | 6,224 | 90.2 | `extract/computed/out/altitude/<comp>/scorecard.json` |
 | Astryx | 11 | **85.2** | 90.1 | 6/11 | 8/11 | 47,808 | 89.3 | `extract/computed/out/astryx/<comp>/scorecard.json` |
 | Carbon | 10 | **87.7** | 86.7 | 4/10 | 8/10 | 54,253 | 82.9 | `extract/computed/out/carbon/<comp>/scorecard.json` |
-| MUI | 32 | **89.4** | 90.7 | 18/32 | 27/32 | 121,317 | 85.5 | `extract/computed/out/mui/<comp>/scorecard.json` |
+| MUI | 32 | **88.9** | 90.8 | 18/32 | 28/32 | 141,711 | 86.3 | `extract/computed/out/mui/<comp>/scorecard.json` |
 | Polaris | 12 | **89.4** | 91.5 | 7/12 | 11/12 | 200,405 | 90.5 | `extract/computed/out/<comp>/scorecard.json` |
 | shadcn/ui | 11 | **69.4** | 70.4 | 1/11 | 3/11 | 24,432 | 71.6 | `extract/computed/out/shadcn/<comp>/scorecard.json` |
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
 | Fluent 2 | 12 | **84.0** | 82.8 | 5/12 | 8/12 | 137,098 | 81.4 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 13 | **89.0** | 91.4 | 8/13 | 11/13 | 134,916 | 85.4 | `extract/computed/out/antd/<comp>/scorecard.json` |
 | Chakra UI | 8 | **85.2** | 89.0 | 2/8 | 7/8 | 12,368 | 80.3 | `extract/computed/out/chakra/<comp>/scorecard.json` |
-| **all libraries** | **128** | **86.5** | 89.2 | **61/128** | **100/128** | **752,625** | **85.8** |  |
+| **all libraries** | **128** | **86.4** | 89.2 | **61/128** | **101/128** | **773,019** | **85.9** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 128 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 10 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
-unweighted mean (86.5%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
-the cell-weighted figure (85.8%) is what fraction of every style cell in the corpus
+unweighted mean (86.4%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
+the cell-weighted figure (85.9%) is what fraction of every style cell in the corpus
 actually matched. Neither is quoted alone. Whole-row exactness is the harshest
-cut of the same data: **2,984 of 11,776** rendered rows
-(25.3%) match the original on *every* channel at once.
+cut of the same data: **2,892 of 11,776** rendered rows
+(24.6%) match the original on *every* channel at once.
 
 ### 3.1 Every measured component, worst first
 
@@ -145,22 +145,21 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Checkbox` | shadcn/ui | 68.7 | 6 × 4 | 1,176 | `extract/computed/out/shadcn/checkbox/scorecard.json` |
 | `Avatar` | Polaris | 69.8 | 10 × 4 | 1,920 | `extract/computed/out/avatar/scorecard.json` |
 | `Card` | shadcn/ui | 70.4 | 2 × 4 | 432 | `extract/computed/out/shadcn/card/scorecard.json` |
+| `Checkbox` | MUI | 72.2 | 6 × 4 | 1,896 | `extract/computed/out/mui/checkbox/scorecard.json` |
 | `Card` | Flowbite / Tailwind | 72.4 | 1 × 4 | 116 | `extract/computed/out/tailwind/card/scorecard.json` |
-| `Checkbox` | MUI | 72.5 | 6 × 4 | 1,656 | `extract/computed/out/mui/checkbox/scorecard.json` |
-| `Radio` | MUI | 73.5 | 28 × 4 | 7,392 | `extract/computed/out/mui/radio/scorecard.json` |
+| `Radio` | MUI | 73.0 | 28 × 4 | 8,512 | `extract/computed/out/mui/radio/scorecard.json` |
 | `Select` | shadcn/ui | 73.9 | 2 × 4 | 448 | `extract/computed/out/shadcn/select/scorecard.json` |
-| `Textarea` | MUI | 74.1 | 4 × 4 | 2,256 | `extract/computed/out/mui/textarea/scorecard.json` |
 | `Button` | shadcn/ui | 74.5 | 96 × 4 | 16,512 | `extract/computed/out/shadcn/button/scorecard.json` |
+| `Textarea` | MUI | 74.5 | 4 × 4 | 2,608 | `extract/computed/out/mui/textarea/scorecard.json` |
 | `Radio` | Ant Design | 74.8 | 4 × 4 | 1,952 | `extract/computed/out/antd/radio/scorecard.json` |
 | `Card` | Fluent 2 | 74.8 | 48 × 4 | 18,240 | `extract/computed/out/fluent/card/scorecard.json` |
 | `Input` | Fluent 2 | 75.3 | 36 × 4 | 7,056 | `extract/computed/out/fluent/input/scorecard.json` |
 | `Switch` | Astryx | 75.5 | 4 × 4 | 1,552 | `extract/computed/out/astryx/switch/scorecard.json` |
-| `CircularProgress` | MUI | 76.3 | 2 × 4 | 152 | `extract/computed/out/mui/circularprogress/scorecard.json` |
+| `CircularProgress` | MUI | 77.1 | 2 × 4 | 192 | `extract/computed/out/mui/circularprogress/scorecard.json` |
 | `Accordion` | Carbon | 77.6 | 16 × 4 | 5,472 | `extract/computed/out/carbon/accordion/scorecard.json` |
-| `Switch` | MUI | 77.7 | 56 × 4 | 25,088 | `extract/computed/out/mui/switch/scorecard.json` |
 | `Button` | Carbon | 79.0 | 112 × 4 | 20,608 | `extract/computed/out/carbon/button/scorecard.json` |
 | `Input` | Ant Design | 79.9 | 72 × 4 | 13,536 | `extract/computed/out/antd/input/scorecard.json` |
-| `Drawer` | MUI | 80.4 | 2 × 4 | 92 | `extract/computed/out/mui/drawer/scorecard.json` |
+| `Switch` | MUI | 80.3 | 56 × 4 | 34,048 | `extract/computed/out/mui/switch/scorecard.json` |
 | `Tag` | Carbon | 80.5 | 52 × 4 | 12,896 | `extract/computed/out/carbon/tag/scorecard.json` |
 | `Checkbox` | Polaris | 81.0 | 6 × 4 | 2,464 | `extract/computed/out/checkbox/scorecard.json` |
 | `Tag` | Polaris | 81.0 | 32 × 4 | 7,401 | `extract/computed/out/tag/scorecard.json` |
@@ -173,74 +172,78 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Badge` | shadcn/ui | 82.3 | 6 × 4 | 1,008 | `extract/computed/out/shadcn/badge/scorecard.json` |
 | `Dialog` | Fluent 2 | 82.4 | 3 × 4 | 442 | `extract/computed/out/fluent/dialog/scorecard.json` |
 | `Link` | Altitude | 82.4 | 4 × 4 | 432 | `extract/computed/out/altitude/link/scorecard.json` |
-| `LinearProgress` | MUI | 82.9 | 2 × 4 | 280 | `extract/computed/out/mui/linearprogress/scorecard.json` |
 | `Spinner` | Fluent 2 | 83.3 | 64 × 4 | 19,200 | `extract/computed/out/fluent/spinner/scorecard.json` |
 | `Button` | Ant Design | 83.9 | 240 × 4 | 79,680 | `extract/computed/out/antd/button/scorecard.json` |
+| `Table` | MUI | 84.1 | 2 × 4 | 7,264 | `extract/computed/out/mui/table/scorecard.json` |
 | `Checkbox` | Carbon | 84.3 | 6 × 4 | 1,776 | `extract/computed/out/carbon/checkbox/scorecard.json` |
 | `Toggle` | Carbon | 84.3 | 4 × 4 | 1,376 | `extract/computed/out/carbon/toggle/scorecard.json` |
 | `Alert` | Flowbite / Tailwind | 84.5 | 4 × 4 | 880 | `extract/computed/out/tailwind/alert/scorecard.json` |
 | `Checkbox` | Ant Design | 85.0 | 6 × 4 | 2,808 | `extract/computed/out/antd/checkbox/scorecard.json` |
-| `Table` | MUI | 85.2 | 2 × 4 | 6,176 | `extract/computed/out/mui/table/scorecard.json` |
 | `CheckboxInput` | Astryx | 85.3 | 12 × 4 | 12,192 | `extract/computed/out/astryx/checkboxinput/scorecard.json` |
 | `TextArea` | Astryx | 85.6 | 4 × 4 | 2,496 | `extract/computed/out/astryx/textarea/scorecard.json` |
+| `Drawer` | MUI | 85.8 | 2 × 4 | 148 | `extract/computed/out/mui/drawer/scorecard.json` |
+| `Link` | MUI | 86.3 | 21 × 4 | 1,680 | `extract/computed/out/mui/link/scorecard.json` |
 | `Label` | Flowbite / Tailwind | 86.3 | 5 × 4 | 320 | `extract/computed/out/tailwind/label/scorecard.json` |
-| `Button` | MUI | 86.4 | 126 × 4 | 27,216 | `extract/computed/out/mui/button/scorecard.json` |
 | `Alert` | Ant Design | 86.6 | 32 × 4 | 14,848 | `extract/computed/out/antd/alert/scorecard.json` |
 | `HelperText` | Flowbite / Tailwind | 87.1 | 5 × 4 | 340 | `extract/computed/out/tailwind/helpertext/scorecard.json` |
-| `Paper` | MUI | 87.9 | 8 × 4 | 1,056 | `extract/computed/out/mui/paper/scorecard.json` |
+| `Fab` | MUI | 87.5 | 18 × 4 | 4,104 | `extract/computed/out/mui/fab/scorecard.json` |
+| `IconButton` | MUI | 87.8 | 18 × 4 | 3,600 | `extract/computed/out/mui/iconbutton/scorecard.json` |
+| `Select` | MUI | 88.0 | 2 × 4 | 1,536 | `extract/computed/out/mui/select/scorecard.json` |
 | `Checkbox` | Chakra UI | 88.5 | 6 × 4 | 2,328 | `extract/computed/out/chakra/checkbox/scorecard.json` |
 | `Switch` | Chakra UI | 88.6 | 4 × 4 | 2,912 | `extract/computed/out/chakra/switch/scorecard.json` |
+| `LinearProgress` | MUI | 88.7 | 2 × 4 | 600 | `extract/computed/out/mui/linearprogress/scorecard.json` |
 | `Tooltip` | Chakra UI | 88.9 | 1 × 4 | 72 | `extract/computed/out/chakra/tooltip/scorecard.json` |
 | `ToggleSwitch` | Flowbite / Tailwind | 88.9 | 6 × 4 | 864 | `extract/computed/out/tailwind/toggleswitch/scorecard.json` |
 | `TextInput` | Carbon | 89.0 | 10 × 4 | 3,560 | `extract/computed/out/carbon/textinput/scorecard.json` |
-| `Fab` | MUI | 89.1 | 18 × 4 | 4,032 | `extract/computed/out/mui/fab/scorecard.json` |
-| `Link` | MUI | 89.1 | 21 × 4 | 1,344 | `extract/computed/out/mui/link/scorecard.json` |
 | `Radio` | Chakra UI | 89.1 | 4 × 4 | 3,000 | `extract/computed/out/chakra/radio/scorecard.json` |
 | `Avatar` | Chakra UI | 89.2 | 1 × 4 | 296 | `extract/computed/out/chakra/avatar/scorecard.json` |
-| `IconButton` | MUI | 89.3 | 18 × 4 | 3,456 | `extract/computed/out/mui/iconbutton/scorecard.json` |
-| `Slider` | MUI | 89.4 | 12 × 4 | 7,392 | `extract/computed/out/mui/slider/scorecard.json` |
+| `Button` | MUI | 89.6 | 126 × 4 | 27,720 | `extract/computed/out/mui/button/scorecard.json` |
+| `Slider` | MUI | 90.0 | 12 × 4 | 8,256 | `extract/computed/out/mui/slider/scorecard.json` |
 | `Tag` | Chakra UI | 90.0 | 1 × 4 | 280 | `extract/computed/out/chakra/tag/scorecard.json` |
 | `Modal` | Carbon | 90.0 | 5 × 4 | 1,305 | `extract/computed/out/carbon/modal/scorecard.json` |
 | `Slider` | Astryx | 90.1 | 6 × 4 | 2,856 | `extract/computed/out/astryx/slider/scorecard.json` |
 | `Textarea` | Ant Design | 90.1 | 4 × 4 | 848 | `extract/computed/out/antd/textarea/scorecard.json` |
-| `Chip` | MUI | 90.2 | 28 × 4 | 6,832 | `extract/computed/out/mui/chip/scorecard.json` |
 | `Dialog` | Chakra UI | 90.5 | 1 × 4 | 168 | `extract/computed/out/chakra/dialog/scorecard.json` |
 | `Badge` | Flowbite / Tailwind | 90.7 | 12 × 4 | 1,968 | `extract/computed/out/tailwind/badge/scorecard.json` |
 | `Tooltip` | MUI | 90.7 | 2 × 4 | 129 | `extract/computed/out/mui/tooltip/scorecard.json` |
-| `Select` | MUI | 90.7 | 2 × 4 | 1,464 | `extract/computed/out/mui/select/scorecard.json` |
+| `Pagination` | MUI | 90.7 | 1 × 4 | 904 | `extract/computed/out/mui/pagination/scorecard.json` |
 | `Button` | Polaris | 90.8 | 240 × 4 | 83,520 | `extract/computed/out/button/scorecard.json` |
-| `Badge` | MUI | 91.1 | 14 × 4 | 4,424 | `extract/computed/out/mui/badge/scorecard.json` |
+| `Accordion` | MUI | 90.9 | 8 × 4 | 7,552 | `extract/computed/out/mui/accordion/scorecard.json` |
+| `Badge` | MUI | 91.0 | 14 × 4 | 5,600 | `extract/computed/out/mui/badge/scorecard.json` |
+| `Breadcrumbs` | MUI | 91.1 | 1 × 4 | 868 | `extract/computed/out/mui/breadcrumbs/scorecard.json` |
 | `Card` | Ant Design | 91.4 | 4 × 4 | 2,128 | `extract/computed/out/antd/card/scorecard.json` |
-| `Accordion` | MUI | 91.8 | 8 × 4 | 6,400 | `extract/computed/out/mui/accordion/scorecard.json` |
+| `Menu` | MUI | 91.5 | 1 × 4 | 141 | `extract/computed/out/mui/menu/scorecard.json` |
+| `Tabs` | MUI | 91.7 | 6 × 4 | 4,680 | `extract/computed/out/mui/tabs/scorecard.json` |
 | `Avatar` | Ant Design | 91.9 | 6 × 4 | 1,488 | `extract/computed/out/antd/avatar/scorecard.json` |
 | `Tooltip` | Fluent 2 | 92.0 | 4 × 4 | 224 | `extract/computed/out/fluent/tooltip/scorecard.json` |
 | `ProgressBar` | Polaris | 92.1 | 12 × 4 | 1,824 | `extract/computed/out/progressbar/scorecard.json` |
 | `TextInput` | Flowbite / Tailwind | 92.4 | 15 × 4 | 2,520 | `extract/computed/out/tailwind/textinput/scorecard.json` |
+| `TextField` | MUI | 92.6 | 1 × 4 | 1,080 | `extract/computed/out/mui/textfield/scorecard.json` |
+| `Autocomplete` | MUI | 92.7 | 2 × 4 | 2,920 | `extract/computed/out/mui/autocomplete/scorecard.json` |
 | `Input` | shadcn/ui | 93.1 | 2 × 4 | 232 | `extract/computed/out/shadcn/input/scorecard.json` |
 | `Progress` | Ant Design | 93.1 | 4 × 4 | 2,216 | `extract/computed/out/antd/progress/scorecard.json` |
+| `Avatar` | MUI | 93.3 | 3 × 4 | 420 | `extract/computed/out/mui/avatar/scorecard.json` |
 | `Badge` | Ant Design | 93.4 | 8 × 4 | 4,976 | `extract/computed/out/antd/badge/scorecard.json` |
 | `TextInput` | Astryx | 93.4 | 9 × 4 | 2,736 | `extract/computed/out/astryx/textinput/scorecard.json` |
+| `Snackbar` | MUI | 93.7 | 1 × 4 | 79 | `extract/computed/out/mui/snackbar/scorecard.json` |
 | `Badge` | Altitude | 93.8 | 10 × 4 | 1,280 | `extract/computed/out/altitude/badge/scorecard.json` |
-| `Menu` | MUI | 93.8 | 1 × 4 | 129 | `extract/computed/out/mui/menu/scorecard.json` |
+| `Dialog` | MUI | 93.8 | 5 × 4 | 890 | `extract/computed/out/mui/dialog/scorecard.json` |
+| `Chip` | MUI | 93.9 | 28 × 4 | 7,392 | `extract/computed/out/mui/chip/scorecard.json` |
 | `Avatar` | Fluent 2 | 93.9 | 24 × 4 | 7,008 | `extract/computed/out/fluent/avatar/scorecard.json` |
-| `Pagination` | MUI | 94.0 | 1 × 4 | 796 | `extract/computed/out/mui/pagination/scorecard.json` |
 | `Blockquote` | Flowbite / Tailwind | 94.1 | 1 × 4 | 68 | `extract/computed/out/tailwind/blockquote/scorecard.json` |
-| `Tabs` | MUI | 94.1 | 6 × 4 | 3,096 | `extract/computed/out/mui/tabs/scorecard.json` |
 | `Chip` | Altitude | 94.3 | 12 × 4 | 1,968 | `extract/computed/out/altitude/chip/scorecard.json` |
 | `Switch` | Ant Design | 94.3 | 8 × 4 | 5,216 | `extract/computed/out/antd/switch/scorecard.json` |
-| `Breadcrumbs` | MUI | 94.8 | 1 × 4 | 788 | `extract/computed/out/mui/breadcrumbs/scorecard.json` |
-| `Snackbar` | MUI | 94.9 | 1 × 4 | 59 | `extract/computed/out/mui/snackbar/scorecard.json` |
 | `Tabs` | Carbon | 95.0 | 1 × 4 | 1,196 | `extract/computed/out/carbon/tabs/scorecard.json` |
 | `Tooltip` | Ant Design | 95.0 | 1 × 4 | 100 | `extract/computed/out/antd/tooltip/scorecard.json` |
-| `Autocomplete` | MUI | 95.1 | 2 × 4 | 2,536 | `extract/computed/out/mui/autocomplete/scorecard.json` |
+| `InputAdornment` | MUI | 95.2 | 2 × 4 | 336 | `extract/computed/out/mui/inputadornment/scorecard.json` |
 | `Badge` | Astryx | 95.8 | 14 × 4 | 1,512 | `extract/computed/out/astryx/badge/scorecard.json` |
-| `TextField` | MUI | 95.8 | 1 × 4 | 952 | `extract/computed/out/mui/textfield/scorecard.json` |
-| `Avatar` | MUI | 95.8 | 3 × 4 | 384 | `extract/computed/out/mui/avatar/scorecard.json` |
+| `Card` | MUI | 96.2 | 4 × 4 | 848 | `extract/computed/out/mui/card/scorecard.json` |
 | `Button` | Fluent 2 | 96.3 | 90 × 4 | 15,120 | `extract/computed/out/fluent/button/scorecard.json` |
-| `Dialog` | MUI | 96.6 | 5 × 4 | 580 | `extract/computed/out/mui/dialog/scorecard.json` |
-| `Alert` | MUI | 96.7 | 12 × 4 | 3,888 | `extract/computed/out/mui/alert/scorecard.json` |
+| `Alert` | MUI | 96.6 | 12 × 4 | 4,176 | `extract/computed/out/mui/alert/scorecard.json` |
+| `Divider` | MUI | 96.6 | 3 × 4 | 348 | `extract/computed/out/mui/divider/scorecard.json` |
 | `Banner` | Polaris | 97.0 | 16 × 4 | 12,192 | `extract/computed/out/banner/scorecard.json` |
 | `InlineNotification` | Carbon | 97.1 | 12 × 4 | 4,944 | `extract/computed/out/carbon/inlinenotification/scorecard.json` |
+| `Paper` | MUI | 97.3 | 8 × 4 | 1,184 | `extract/computed/out/mui/paper/scorecard.json` |
 | `Badge` | Polaris | 97.5 | 60 × 4 | 23,396 | `extract/computed/out/badge/scorecard.json` |
 | `Tag` | Ant Design | 97.5 | 32 × 4 | 5,120 | `extract/computed/out/antd/tag/scorecard.json` |
 | `Button` | Flowbite / Tailwind | 97.6 | 50 × 4 | 6,600 | `extract/computed/out/tailwind/button/scorecard.json` |
@@ -253,9 +256,6 @@ No component is omitted. The worst row in the corpus is at the top.
 | `IconClose` | Altitude | 100.0 | 8 × 4 | 160 | `extract/computed/out/altitude/iconclose/scorecard.json` |
 | `Token` | Astryx | 100.0 | 33 × 4 | 6,864 | `extract/computed/out/astryx/token/scorecard.json` |
 | `IconButton` | Carbon | 100.0 | 40 × 4 | 1,120 | `extract/computed/out/carbon/iconbutton/scorecard.json` |
-| `Card` | MUI | 100.0 | 4 × 4 | 704 | `extract/computed/out/mui/card/scorecard.json` |
-| `Divider` | MUI | 100.0 | 3 × 4 | 288 | `extract/computed/out/mui/divider/scorecard.json` |
-| `InputAdornment` | MUI | 100.0 | 2 × 4 | 280 | `extract/computed/out/mui/inputadornment/scorecard.json` |
 | `Spinner` | Polaris | 100.0 | 2 × 4 | 8 | `extract/computed/out/spinner/scorecard.json` |
 | `Kbd` | Flowbite / Tailwind | 100.0 | 1 × 4 | 128 | `extract/computed/out/tailwind/kbd/scorecard.json` |
 | `Spinner` | Flowbite / Tailwind | 100.0 | 40 × 4 | 0 | `extract/computed/out/tailwind/spinner/scorecard.json` |
@@ -277,7 +277,7 @@ no scorecard escaped classification.
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
 | synthetic CSS/DOM constructs | 124 | 98.3 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
-| real third-party components | 128 | 86.5 | yes | `extract/computed/out/**/scorecard.json` |
+| real third-party components | 128 | 86.4 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
 
@@ -573,8 +573,8 @@ npm run capability:fresh
 | `evals/golden.json` | `259ec554f9a0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `4f956669d8af` | 1,813,755 | capture counts + determinism receipts — 264 files |
-| `extract/computed/out/**/scorecard.json` | `00a12a49122e` | 22,009,360 | computed-equality per component — 263 files |
+| `extract/computed/out/**/numbers.json` | `01817be265d9` | 1,851,889 | capture counts + determinism receipts — 264 files |
+| `extract/computed/out/**/scorecard.json` | `fd271dbe835b` | 22,389,584 | computed-equality per component — 263 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `4708222bebfc` | 6,968 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

@@ -16,14 +16,14 @@ export const muiChipRoles: ChipRoles = {
 
 const VALUES: Record<string, number | string> = {
   "box.height": 32, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.height
-  "box.paddingX": 12, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.padding-left | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.padding-left
-  "box.paddingY": 0, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.padding-top | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.padding-top
+  "box.paddingX": 12, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.padding-left | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.padding-left
+  "box.paddingY": 0, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.padding-top | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.padding-top
   "box.radius": 16, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-left-radius
-  "box.borderWidth": 0, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width
+  "box.borderWidth": 0, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow
   "labelFontSize": 13, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.font-size
   "labelLineHeight": 19.5, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.line-height
   "rest.boxFill": "#00000014", // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.background-color
-  "rest.boxBorder": "#000000de", // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-color
+  "rest.boxBorder": "#000000de", // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-color | extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow
   "rest.boxOpacity": 1, // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.opacity
   "rest.label": "#000000de", // ledger extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.color
 };
@@ -65,16 +65,16 @@ export const muiChipSource: ReviewedChipSource = {
 };
 
 const muiRefusals = makeRefusals("mui", [
-  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/chip/captured-truth.json: 28 capture(s) with the __active interaction; chip@1 carries no interaction plane, so the captured active paint is not minted", target: "mui (proposed) active interaction", reason: "refused-by-recipe" as const },
-  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/chip/captured-truth.json: 28 capture(s) with the __focus-visible interaction; chip@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "mui (proposed) focus-visible interaction", reason: "refused-by-recipe" as const },
-  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/chip/captured-truth.json: 28 capture(s) with the __hover interaction; chip@1 carries no interaction plane, so the captured hover paint is not minted", target: "mui (proposed) hover interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-active", evidence: "extract/computed/out/mui/chip/captured-truth.json: 28 capture(s) with the __active interaction; chip@1 carries no interaction plane, so the captured active paint is not minted", target: "mui active interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-focus-visible", evidence: "extract/computed/out/mui/chip/captured-truth.json: 28 capture(s) with the __focus-visible interaction; chip@1 carries no interaction plane, so the captured focus-visible paint is not minted", target: "mui focus-visible interaction", reason: "refused-by-recipe" as const },
+  { id: "refusal-interaction-hover", evidence: "extract/computed/out/mui/chip/captured-truth.json: 28 capture(s) with the __hover interaction; chip@1 carries no interaction plane, so the captured hover paint is not minted", target: "mui hover interaction", reason: "refused-by-recipe" as const },
 ]);
 
 export const muiChipAdapterConfig = buildConfig(
   "mui",
   muiChipSource,
   muiTokens,
-  { id: "mui.chip", name: "mui (proposed) Chip" },
+  { id: "mui.chip", name: "mui Chip" },
   muiRefusals,
   anatomyFacts("mui", muiChipSource),
   ["hover","focus-visible","active","size","color","variant"],

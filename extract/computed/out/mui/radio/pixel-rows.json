@@ -1,786 +1,562 @@
 [
   {
     "key": "primary.unchecked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.unchecked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.unchecked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.unchecked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.unchecked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.unchecked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.unchecked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.unchecked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "primary.checked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "primary.checked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "primary.checked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "primary.checked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "primary.checked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "primary.checked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "primary.checked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "primary.checked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.unchecked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.unchecked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.unchecked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.unchecked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.unchecked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.unchecked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.unchecked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.unchecked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "secondary.checked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.checked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.checked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.checked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.checked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.checked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.checked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "secondary.checked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.unchecked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.unchecked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.unchecked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.unchecked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.unchecked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.unchecked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.unchecked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.unchecked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "error.checked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.checked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.checked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.checked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.checked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.checked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.checked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "error.checked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.unchecked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.unchecked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.unchecked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.unchecked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.unchecked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.unchecked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.unchecked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.unchecked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "info.checked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.checked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.checked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.checked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.checked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.checked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.checked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "info.checked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.unchecked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.unchecked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.unchecked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.unchecked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.unchecked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.unchecked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.unchecked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.unchecked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "success.checked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.checked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.checked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.checked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.checked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.checked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.checked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "success.checked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.unchecked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.unchecked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.unchecked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.unchecked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.unchecked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.unchecked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.unchecked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.unchecked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "warning.checked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.checked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.checked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.checked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.checked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.checked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.checked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "warning.checked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.unchecked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.unchecked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.unchecked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.unchecked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.unchecked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.unchecked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.unchecked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.unchecked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.5078125,
+    "pctAA": 0.22135416666666666
   },
   {
     "key": "default.checked.enabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.checked.enabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.checked.enabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.checked.enabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.checked.disabled__default",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.checked.disabled__hover",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.checked.disabled__focus-visible",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   },
   {
     "key": "default.checked.disabled__active",
-    "pctExact": null,
-    "pctAA": null,
-    "unscorable": "no-original",
-    "note": "original screenshot unavailable — pixel not scored"
+    "pctExact": 0.7942708333333334,
+    "pctAA": 0.4296875
   }
 ]

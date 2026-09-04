@@ -1334,7 +1334,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React27 = require_react(), Internals = {
+        var React23 = require_react(), Internals = {
           d: {
             f: noop3,
             r: function() {
@@ -1352,7 +1352,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React27.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React23.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -2887,7 +2887,7 @@
           "number" === type && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React27.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React23.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18519,14 +18519,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React27 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React23 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React27.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React23.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21314,7 +21314,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React27.version;
+          var isomorphicReactPackageVersion = React23.version;
           if ("19.2.8" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.8\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21522,10 +21522,10 @@
           var ContextConsumer = REACT_CONTEXT_TYPE;
           var ContextProvider = REACT_PROVIDER_TYPE;
           var Element = REACT_ELEMENT_TYPE;
-          var ForwardRef2 = REACT_FORWARD_REF_TYPE;
-          var Fragment7 = REACT_FRAGMENT_TYPE;
+          var ForwardRef = REACT_FORWARD_REF_TYPE;
+          var Fragment6 = REACT_FRAGMENT_TYPE;
           var Lazy = REACT_LAZY_TYPE;
-          var Memo2 = REACT_MEMO_TYPE;
+          var Memo = REACT_MEMO_TYPE;
           var Portal = REACT_PORTAL_TYPE;
           var Profiler = REACT_PROFILER_TYPE;
           var StrictMode = REACT_STRICT_MODE_TYPE;
@@ -21581,10 +21581,10 @@
           exports.ContextConsumer = ContextConsumer;
           exports.ContextProvider = ContextProvider;
           exports.Element = Element;
-          exports.ForwardRef = ForwardRef2;
-          exports.Fragment = Fragment7;
+          exports.ForwardRef = ForwardRef;
+          exports.Fragment = Fragment6;
           exports.Lazy = Lazy;
-          exports.Memo = Memo2;
+          exports.Memo = Memo;
           exports.Portal = Portal;
           exports.Profiler = Profiler;
           exports.StrictMode = StrictMode;
@@ -21777,10 +21777,10 @@
           var ContextConsumer = REACT_CONTEXT_TYPE;
           var ContextProvider = REACT_PROVIDER_TYPE;
           var Element = REACT_ELEMENT_TYPE;
-          var ForwardRef2 = REACT_FORWARD_REF_TYPE;
-          var Fragment7 = REACT_FRAGMENT_TYPE;
+          var ForwardRef = REACT_FORWARD_REF_TYPE;
+          var Fragment6 = REACT_FRAGMENT_TYPE;
           var Lazy = REACT_LAZY_TYPE;
-          var Memo2 = REACT_MEMO_TYPE;
+          var Memo = REACT_MEMO_TYPE;
           var Portal = REACT_PORTAL_TYPE;
           var Profiler = REACT_PROFILER_TYPE;
           var StrictMode = REACT_STRICT_MODE_TYPE;
@@ -21836,10 +21836,10 @@
           exports.ContextConsumer = ContextConsumer;
           exports.ContextProvider = ContextProvider;
           exports.Element = Element;
-          exports.ForwardRef = ForwardRef2;
-          exports.Fragment = Fragment7;
+          exports.ForwardRef = ForwardRef;
+          exports.Fragment = Fragment6;
           exports.Lazy = Lazy;
-          exports.Memo = Memo2;
+          exports.Memo = Memo;
           exports.Portal = Portal;
           exports.Profiler = Profiler;
           exports.StrictMode = StrictMode;
@@ -22700,18 +22700,18 @@
         function isValidElement2(object) {
           return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
         }
-        var React27 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React27.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+        var React23 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React23.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
           return null;
         };
-        React27 = {
+        React23 = {
           react_stack_bottom_frame: function(callStackForError) {
             return callStackForError();
           }
         };
         var specialPropKeyWarningShown;
         var didWarnAboutElementRef = {};
-        var unknownOwnerDebugStack = React27.react_stack_bottom_frame.bind(
-          React27,
+        var unknownOwnerDebugStack = React23.react_stack_bottom_frame.bind(
+          React23,
           UnknownOwner
         )();
         var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
@@ -23487,9 +23487,9 @@
   // node_modules/@emotion/memoize/dist/emotion-memoize.esm.js
   function memoize(fn) {
     var cache = /* @__PURE__ */ Object.create(null);
-    return function(arg2) {
-      if (cache[arg2] === void 0) cache[arg2] = fn(arg2);
-      return cache[arg2];
+    return function(arg) {
+      if (cache[arg] === void 0) cache[arg] = fn(arg);
+      return cache[arg];
     };
   }
 
@@ -23843,7 +23843,7 @@
     });
     return rawClassName;
   }
-  var registerStyles = function registerStyles2(cache, serialized, isStringTag2) {
+  var registerStyles = function registerStyles2(cache, serialized, isStringTag) {
     var className = cache.key + "-" + serialized.name;
     if (
       // we only need to add the styles to the registered cache if the
@@ -23851,7 +23851,7 @@
       // the tree but if it's a string tag, we know it won't
       // so we don't have to add it to registered cache.
       // this improves memory usage since we can avoid storing the whole style string
-      (isStringTag2 === false || // we need to always store it if we're in compat mode and
+      (isStringTag === false || // we need to always store it if we're in compat mode and
       // in node since emotion-server relies on whether a style is in
       // the registered cache to know whether a style is global or not
       // also, note that this check will be dead code eliminated in the browser
@@ -23860,8 +23860,8 @@
       cache.registered[className] = serialized.styles;
     }
   };
-  var insertStyles = function insertStyles2(cache, serialized, isStringTag2) {
-    registerStyles(cache, serialized, isStringTag2);
+  var insertStyles = function insertStyles2(cache, serialized, isStringTag) {
+    registerStyles(cache, serialized, isStringTag);
     var className = cache.key + "-" + serialized.name;
     if (cache.inserted[serialized.name] === void 0) {
       var current = serialized;
@@ -24171,10 +24171,10 @@
     return newProps;
   };
   var Insertion = function Insertion2(_ref) {
-    var cache = _ref.cache, serialized = _ref.serialized, isStringTag2 = _ref.isStringTag;
-    registerStyles(cache, serialized, isStringTag2);
+    var cache = _ref.cache, serialized = _ref.serialized, isStringTag = _ref.isStringTag;
+    registerStyles(cache, serialized, isStringTag);
     useInsertionEffectAlwaysWithSyncFallback(function() {
-      return insertStyles(cache, serialized, isStringTag2);
+      return insertStyles(cache, serialized, isStringTag);
     });
     return null;
   };
@@ -24228,10 +24228,10 @@
     }
     return React3.createElement.apply(null, createElementArgArray);
   };
-  (function(_jsx20) {
+  (function(_jsx18) {
     var JSX;
     /* @__PURE__ */ (function(_JSX) {
-    })(JSX || (JSX = _jsx20.JSX || (_jsx20.JSX = {})));
+    })(JSX || (JSX = _jsx18.JSX || (_jsx18.JSX = {})));
   })(jsx || (jsx = {}));
   var Global = /* @__PURE__ */ withEmotionCache(function(props, cache) {
     var styles2 = props.styles;
@@ -24305,23 +24305,23 @@
     tag.charCodeAt(0) > 96 ? testOmitPropsOnStringTag : testOmitPropsOnComponent;
   };
   var composeShouldForwardProps = function composeShouldForwardProps2(tag, options, isReal) {
-    var shouldForwardProp2;
+    var shouldForwardProp;
     if (options) {
       var optionsShouldForwardProp = options.shouldForwardProp;
-      shouldForwardProp2 = tag.__emotion_forwardProp && optionsShouldForwardProp ? function(propName) {
+      shouldForwardProp = tag.__emotion_forwardProp && optionsShouldForwardProp ? function(propName) {
         return tag.__emotion_forwardProp(propName) && optionsShouldForwardProp(propName);
       } : optionsShouldForwardProp;
     }
-    if (typeof shouldForwardProp2 !== "function" && isReal) {
-      shouldForwardProp2 = tag.__emotion_forwardProp;
+    if (typeof shouldForwardProp !== "function" && isReal) {
+      shouldForwardProp = tag.__emotion_forwardProp;
     }
-    return shouldForwardProp2;
+    return shouldForwardProp;
   };
   var Insertion3 = function Insertion4(_ref) {
-    var cache = _ref.cache, serialized = _ref.serialized, isStringTag2 = _ref.isStringTag;
-    registerStyles(cache, serialized, isStringTag2);
+    var cache = _ref.cache, serialized = _ref.serialized, isStringTag = _ref.isStringTag;
+    registerStyles(cache, serialized, isStringTag);
     useInsertionEffectAlwaysWithSyncFallback(function() {
-      return insertStyles(cache, serialized, isStringTag2);
+      return insertStyles(cache, serialized, isStringTag);
     });
     return null;
   };
@@ -24334,8 +24334,8 @@
       identifierName = options.label;
       targetClassName = options.target;
     }
-    var shouldForwardProp2 = composeShouldForwardProps(tag, options, isReal);
-    var defaultShouldForwardProp = shouldForwardProp2 || getDefaultShouldForwardProp(baseTag);
+    var shouldForwardProp = composeShouldForwardProps(tag, options, isReal);
+    var defaultShouldForwardProp = shouldForwardProp || getDefaultShouldForwardProp(baseTag);
     var shouldUseAs = !defaultShouldForwardProp("as");
     return function() {
       var args = arguments;
@@ -24376,7 +24376,7 @@
         if (targetClassName !== void 0) {
           className += " " + targetClassName;
         }
-        var finalShouldForwardProp = shouldUseAs && shouldForwardProp2 === void 0 ? getDefaultShouldForwardProp(FinalTag) : defaultShouldForwardProp;
+        var finalShouldForwardProp = shouldUseAs && shouldForwardProp === void 0 ? getDefaultShouldForwardProp(FinalTag) : defaultShouldForwardProp;
         var newProps = {};
         for (var _key in props) {
           if (shouldUseAs && _key === "as") continue;
@@ -24399,7 +24399,7 @@
       Styled.__emotion_real = Styled;
       Styled.__emotion_base = baseTag;
       Styled.__emotion_styles = styles2;
-      Styled.__emotion_forwardProp = shouldForwardProp2;
+      Styled.__emotion_forwardProp = shouldForwardProp;
       Object.defineProperty(Styled, "toString", {
         value: function value() {
           if (targetClassName === void 0 && isDevelopment4) {
@@ -24584,27 +24584,6 @@
   } : void 0;
 
   // node_modules/@mui/styled-engine/index.mjs
-  function styled2(tag, options) {
-    const stylesFactory = styled(tag, options);
-    if (true) {
-      return (...styles2) => {
-        const component = typeof tag === "string" ? `"${tag}"` : "component";
-        if (styles2.length === 0) {
-          console.error([`MUI: Seems like you called \`styled(${component})()\` without a \`style\` argument.`, 'You must provide a `styles` argument: `styled("div")(styleYouForgotToPass)`.'].join("\n"));
-        } else if (styles2.some((style3) => style3 === void 0)) {
-          console.error(`MUI: the styled(${component})(...args) API requires all its args to be defined.`);
-        }
-        return stylesFactory(...styles2);
-      };
-    }
-    return stylesFactory;
-  }
-  var styled_engine_default = styled2;
-  function internal_mutateStyles(tag, processor) {
-    if (Array.isArray(tag.__emotion_styles)) {
-      tag.__emotion_styles = processor(tag.__emotion_styles);
-    }
-  }
   var wrapper = [];
   function internal_serializeStyles(styles2) {
     wrapper[0] = styles2;
@@ -25906,8 +25885,8 @@ For example, \`@sm\` or \`@600\` or \`@40rem/sidebar\`.`)
       }
     });
   }
-  function callIfFn(maybeFn, arg2) {
-    return typeof maybeFn === "function" ? maybeFn(arg2) : maybeFn;
+  function callIfFn(maybeFn, arg) {
+    return typeof maybeFn === "function" ? maybeFn(arg) : maybeFn;
   }
 
   // node_modules/@mui/system/createTheme/applyStyles.mjs
@@ -26105,297 +26084,6 @@ For example, \`@sm\` or \`@600\` or \`@40rem/sidebar\`.`)
   function generateUtilityClass(componentName, slot, globalStatePrefix = "Mui") {
     const globalStateClass = globalStateClasses[slot];
     return globalStateClass ? `${globalStatePrefix}-${globalStateClass}` : `${ClassNameGenerator_default.generate(componentName)}-${slot}`;
-  }
-
-  // node_modules/@mui/utils/generateUtilityClasses/generateUtilityClasses.mjs
-  function generateUtilityClasses(componentName, slots, globalStatePrefix = "Mui") {
-    const result = {};
-    slots.forEach((slot) => {
-      result[slot] = generateUtilityClass(componentName, slot, globalStatePrefix);
-    });
-    return result;
-  }
-
-  // node_modules/@mui/utils/getDisplayName/getDisplayName.mjs
-  var import_react_is2 = __toESM(require_react_is3(), 1);
-  function getFunctionComponentName(Component, fallback = "") {
-    return Component.displayName || Component.name || fallback;
-  }
-  function getWrappedName(outerType, innerType, wrapperName) {
-    const functionName = getFunctionComponentName(innerType);
-    return outerType.displayName || (functionName !== "" ? `${wrapperName}(${functionName})` : wrapperName);
-  }
-  function getDisplayName(Component) {
-    if (Component == null) {
-      return void 0;
-    }
-    if (typeof Component === "string") {
-      return Component;
-    }
-    if (typeof Component === "function") {
-      return getFunctionComponentName(Component, "Component");
-    }
-    if (typeof Component === "object") {
-      switch (Component.$$typeof) {
-        case import_react_is2.ForwardRef:
-          return getWrappedName(Component, Component.render, "ForwardRef");
-        case import_react_is2.Memo:
-          return getWrappedName(Component, Component.type, "memo");
-        default:
-          return void 0;
-      }
-    }
-    return void 0;
-  }
-
-  // node_modules/@mui/system/preprocessStyles.mjs
-  function preprocessStyles(input) {
-    const {
-      variants,
-      ...style3
-    } = input;
-    const result = {
-      variants,
-      style: internal_serializeStyles(style3),
-      isProcessed: true
-    };
-    if (result.style === style3) {
-      return result;
-    }
-    if (variants) {
-      variants.forEach((variant) => {
-        if (typeof variant.style !== "function") {
-          variant.style = internal_serializeStyles(variant.style);
-        }
-      });
-    }
-    return result;
-  }
-
-  // node_modules/@mui/system/createStyled/createStyled.mjs
-  var systemDefaultTheme2 = createTheme_default();
-  function shouldForwardProp(prop) {
-    return prop !== "ownerState" && prop !== "theme" && prop !== "sx" && prop !== "as";
-  }
-  function shallowLayer(serialized, layerName) {
-    if (layerName && serialized && typeof serialized === "object" && serialized.styles && !serialized.styles.startsWith("@layer")) {
-      serialized.styles = `@layer ${layerName}{${String(serialized.styles)}}`;
-    }
-    return serialized;
-  }
-  function defaultOverridesResolver(slot) {
-    if (!slot) {
-      return null;
-    }
-    return (_props, styles2) => styles2[slot];
-  }
-  function attachTheme(props, themeId, defaultTheme2) {
-    props.theme = isObjectEmpty(props.theme) ? defaultTheme2 : props.theme[themeId] || props.theme;
-  }
-  function processStyle(props, style3, layerName) {
-    const resolvedStyle = typeof style3 === "function" ? style3(props) : style3;
-    if (Array.isArray(resolvedStyle)) {
-      return resolvedStyle.flatMap((subStyle) => processStyle(props, subStyle, layerName));
-    }
-    if (Array.isArray(resolvedStyle?.variants)) {
-      let rootStyle;
-      if (resolvedStyle.isProcessed) {
-        rootStyle = layerName ? shallowLayer(resolvedStyle.style, layerName) : resolvedStyle.style;
-      } else {
-        const {
-          variants,
-          ...otherStyles
-        } = resolvedStyle;
-        rootStyle = layerName ? shallowLayer(internal_serializeStyles(otherStyles), layerName) : otherStyles;
-      }
-      return processStyleVariants(props, resolvedStyle.variants, [rootStyle], layerName);
-    }
-    if (resolvedStyle?.isProcessed) {
-      return layerName ? shallowLayer(internal_serializeStyles(resolvedStyle.style), layerName) : resolvedStyle.style;
-    }
-    return layerName ? shallowLayer(internal_serializeStyles(resolvedStyle), layerName) : resolvedStyle;
-  }
-  function processStyleVariants(props, variants, results = [], layerName = void 0) {
-    let mergedState;
-    variantLoop: for (let i = 0; i < variants.length; i += 1) {
-      const variant = variants[i];
-      if (typeof variant.props === "function") {
-        mergedState ??= {
-          ...props,
-          ...props.ownerState,
-          ownerState: props.ownerState
-        };
-        if (!variant.props(mergedState)) {
-          continue;
-        }
-      } else {
-        for (const key in variant.props) {
-          if (props[key] !== variant.props[key] && props.ownerState?.[key] !== variant.props[key]) {
-            continue variantLoop;
-          }
-        }
-      }
-      if (typeof variant.style === "function") {
-        mergedState ??= {
-          ...props,
-          ...props.ownerState,
-          ownerState: props.ownerState
-        };
-        results.push(layerName ? shallowLayer(internal_serializeStyles(variant.style(mergedState)), layerName) : variant.style(mergedState));
-      } else {
-        results.push(layerName ? shallowLayer(internal_serializeStyles(variant.style), layerName) : variant.style);
-      }
-    }
-    return results;
-  }
-  function createStyled3(input = {}) {
-    const {
-      themeId,
-      defaultTheme: defaultTheme2 = systemDefaultTheme2,
-      rootShouldForwardProp: rootShouldForwardProp2 = shouldForwardProp,
-      slotShouldForwardProp: slotShouldForwardProp2 = shouldForwardProp
-    } = input;
-    function styleAttachTheme(props) {
-      attachTheme(props, themeId, defaultTheme2);
-    }
-    const styled4 = (tag, inputOptions = {}) => {
-      internal_mutateStyles(tag, (styles2) => styles2.filter((style3) => style3 !== styleFunctionSx_default));
-      const {
-        name: componentName,
-        slot: componentSlot,
-        skipVariantsResolver: inputSkipVariantsResolver,
-        skipSx: inputSkipSx,
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot)),
-        ...options
-      } = inputOptions;
-      const layerName = componentName && componentName.startsWith("Mui") || !!componentSlot ? "components" : "custom";
-      const skipVariantsResolver = inputSkipVariantsResolver !== void 0 ? inputSkipVariantsResolver : (
-        // TODO v6: remove `Root` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        componentSlot && componentSlot !== "Root" && componentSlot !== "root" || false
-      );
-      const skipSx = inputSkipSx || false;
-      let shouldForwardPropOption = shouldForwardProp;
-      if (componentSlot === "Root" || componentSlot === "root") {
-        shouldForwardPropOption = rootShouldForwardProp2;
-      } else if (componentSlot) {
-        shouldForwardPropOption = slotShouldForwardProp2;
-      } else if (isStringTag(tag)) {
-        shouldForwardPropOption = void 0;
-      }
-      const defaultStyledResolver = styled_engine_default(tag, {
-        shouldForwardProp: shouldForwardPropOption,
-        label: generateStyledLabel(componentName, componentSlot),
-        ...options
-      });
-      const transformStyle = (style3) => {
-        if (style3.__emotion_real === style3) {
-          return style3;
-        }
-        if (typeof style3 === "function") {
-          return function styleFunctionProcessor(props) {
-            return processStyle(props, style3, props.theme.modularCssLayers ? layerName : void 0);
-          };
-        }
-        if (isPlainObject(style3)) {
-          const serialized = preprocessStyles(style3);
-          return function styleObjectProcessor(props) {
-            if (!serialized.variants) {
-              return props.theme.modularCssLayers ? shallowLayer(serialized.style, layerName) : serialized.style;
-            }
-            return processStyle(props, serialized, props.theme.modularCssLayers ? layerName : void 0);
-          };
-        }
-        return style3;
-      };
-      const muiStyledResolver = (...expressionsInput) => {
-        const expressionsHead = [];
-        const expressionsBody = expressionsInput.map(transformStyle);
-        const expressionsTail = [];
-        expressionsHead.push(styleAttachTheme);
-        if (componentName && overridesResolver) {
-          expressionsTail.push(function styleThemeOverrides(props) {
-            const theme = props.theme;
-            const styleOverrides = theme.components?.[componentName]?.styleOverrides;
-            if (!styleOverrides) {
-              return null;
-            }
-            const resolvedStyleOverrides = {};
-            for (const slotKey in styleOverrides) {
-              resolvedStyleOverrides[slotKey] = processStyle(props, styleOverrides[slotKey], props.theme.modularCssLayers ? "theme" : void 0);
-            }
-            return overridesResolver(props, resolvedStyleOverrides);
-          });
-        }
-        if (componentName && !skipVariantsResolver) {
-          expressionsTail.push(function styleThemeVariants(props) {
-            const theme = props.theme;
-            const themeVariants = theme?.components?.[componentName]?.variants;
-            if (!themeVariants) {
-              return null;
-            }
-            return processStyleVariants(props, themeVariants, [], props.theme.modularCssLayers ? "theme" : void 0);
-          });
-        }
-        if (!skipSx) {
-          expressionsTail.push(styleFunctionSx_default);
-        }
-        if (Array.isArray(expressionsBody[0])) {
-          const inputStrings = expressionsBody.shift();
-          const placeholdersHead = new Array(expressionsHead.length).fill("");
-          const placeholdersTail = new Array(expressionsTail.length).fill("");
-          let outputStrings;
-          {
-            outputStrings = [...placeholdersHead, ...inputStrings, ...placeholdersTail];
-            outputStrings.raw = [...placeholdersHead, ...inputStrings.raw, ...placeholdersTail];
-          }
-          expressionsHead.unshift(outputStrings);
-        }
-        const expressions = [...expressionsHead, ...expressionsBody, ...expressionsTail];
-        const Component = defaultStyledResolver(...expressions);
-        if (tag.muiName) {
-          Component.muiName = tag.muiName;
-        }
-        if (true) {
-          Component.displayName = generateDisplayName(componentName, componentSlot, tag);
-        }
-        return Component;
-      };
-      if (defaultStyledResolver.withConfig) {
-        muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
-      }
-      return muiStyledResolver;
-    };
-    return styled4;
-  }
-  function generateDisplayName(componentName, componentSlot, tag) {
-    if (componentName) {
-      return `${componentName}${capitalize(componentSlot || "")}`;
-    }
-    return `Styled(${getDisplayName(tag)})`;
-  }
-  function generateStyledLabel(componentName, componentSlot) {
-    let label;
-    if (true) {
-      if (componentName) {
-        label = `${componentName}-${lowercaseFirstLetter(componentSlot || "Root")}`;
-      }
-    }
-    return label;
-  }
-  function isStringTag(tag) {
-    return typeof tag === "string" && // 96 is one less than the char code
-    // for "a" so this is checking that
-    // it's a lowercase character
-    tag.charCodeAt(0) > 96;
-  }
-  function lowercaseFirstLetter(string) {
-    if (!string) {
-      return string;
-    }
-    return string.charAt(0).toLowerCase() + string.slice(1);
   }
 
   // node_modules/@mui/utils/resolveProps/resolveProps.mjs
@@ -27006,25 +26694,6 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
   }
   var ThemeProvider_default2 = ThemeProvider3;
 
-  // node_modules/@mui/system/memoTheme.mjs
-  var arg = {
-    theme: void 0
-  };
-  function unstable_memoTheme(styleFn) {
-    let lastValue;
-    let lastTheme;
-    return function styleMemoized(props) {
-      let value = lastValue;
-      if (value === void 0 || props.theme !== lastTheme) {
-        arg.theme = props.theme;
-        value = preprocessStyles(styleFn(arg));
-        lastValue = value;
-        lastTheme = props.theme;
-      }
-      return value;
-    };
-  }
-
   // node_modules/@mui/system/cssVars/createCssVarsProvider.mjs
   var React17 = __toESM(require_react(), 1);
   var import_prop_types8 = __toESM(require_prop_types(), 1);
@@ -27504,7 +27173,7 @@ try {
       if (restThemeProp.vars && !forceThemeRerender) {
         calculatedColorScheme = restThemeProp.defaultColorScheme;
       }
-      const memoTheme2 = React17.useMemo(() => {
+      const memoTheme = React17.useMemo(() => {
         const themeVars = restThemeProp.generateThemeVars?.() || restThemeProp.vars;
         const theme = {
           ...restThemeProp,
@@ -27595,13 +27264,13 @@ try {
         mode,
         setColorScheme,
         setMode: false ? setMode : (newMode) => {
-          if (memoTheme2.colorSchemeSelector === "media") {
+          if (memoTheme.colorSchemeSelector === "media") {
             console.error(["MUI: The `setMode` function has no effect if `colorSchemeSelector` is `media` (`media` is the default value).", "To toggle the mode manually, please configure `colorSchemeSelector` to use a class or data attribute.", "To learn more, visit https://mui.com/material-ui/customization/css-theme-variables/configuration/#toggling-dark-mode-manually"].join("\n"));
           }
           setMode(newMode);
         },
         systemMode
-      }), [allColorSchemes, colorScheme, darkColorScheme, lightColorScheme, mode, setColorScheme, setMode, systemMode, memoTheme2.colorSchemeSelector]);
+      }), [allColorSchemes, colorScheme, darkColorScheme, lightColorScheme, mode, setColorScheme, setMode, systemMode, memoTheme.colorSchemeSelector]);
       let shouldGenerateStyleSheet = true;
       if (disableStyleSheetGeneration || restThemeProp.cssVariables === false || nested && upperTheme?.cssVarPrefix === cssVarPrefix) {
         shouldGenerateStyleSheet = false;
@@ -27609,10 +27278,10 @@ try {
       const element = /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(React17.Fragment, {
         children: [/* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ThemeProvider_default2, {
           themeId: scopedTheme ? themeId : void 0,
-          theme: memoTheme2,
+          theme: memoTheme,
           children
         }), shouldGenerateStyleSheet && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(GlobalStyles, {
-          styles: memoTheme2.generateStyleSheets?.() || []
+          styles: memoTheme.generateStyleSheets?.() || []
         })]
       });
       if (nested) {
@@ -27992,28 +27661,6 @@ try {
       }
       return "&";
     };
-  }
-
-  // node_modules/@mui/utils/composeClasses/composeClasses.mjs
-  function composeClasses(slots, getUtilityClass, classes = void 0) {
-    const output = {};
-    for (const slotName in slots) {
-      const slot = slots[slotName];
-      let buffer = "";
-      let start = true;
-      for (let i = 0; i < slot.length; i += 1) {
-        const value = slot[i];
-        if (value) {
-          buffer += (start === true ? "" : " ") + getUtilityClass(value);
-          start = false;
-          if (classes && classes[value]) {
-            buffer += " " + classes[value];
-          }
-        }
-      }
-      output[slotName] = buffer;
-    }
-    return output;
   }
 
   // node_modules/@mui/material/styles/createPalette.mjs
@@ -29335,69 +28982,12 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     }, ...args);
   }
 
-  // node_modules/@mui/utils/elementTypeAcceptingRef/elementTypeAcceptingRef.mjs
-  var import_prop_types9 = __toESM(require_prop_types(), 1);
-  var React18 = __toESM(require_react(), 1);
-
-  // node_modules/@mui/utils/chainPropTypes/chainPropTypes.mjs
-  function chainPropTypes(propType1, propType2) {
-    if (false) {
-      return () => null;
-    }
-    return function validate(...args) {
-      return propType1(...args) || propType2(...args);
-    };
-  }
-
-  // node_modules/@mui/utils/elementTypeAcceptingRef/elementTypeAcceptingRef.mjs
-  function isClassComponent(elementType) {
-    const {
-      prototype = {}
-    } = elementType;
-    return Boolean(prototype.isReactComponent);
-  }
-  function elementTypeAcceptingRef(props, propName, componentName, location, propFullName) {
-    const propValue = props[propName];
-    const safePropName = propFullName || propName;
-    if (propValue == null || // When server-side rendering React doesn't warn either.
-    // This is not an accurate check for SSR.
-    // This is only in place for emotion compat.
-    // TODO: Revisit once https://github.com/react/react/issues/20047 is resolved.
-    typeof window === "undefined") {
-      return null;
-    }
-    let warningHint;
-    if (typeof propValue === "function" && !isClassComponent(propValue)) {
-      warningHint = "Did you accidentally provide a plain function component instead?";
-    }
-    if (propValue === React18.Fragment) {
-      warningHint = "Did you accidentally provide a React.Fragment instead?";
-    }
-    if (warningHint !== void 0) {
-      return new Error(`Invalid ${location} \`${safePropName}\` supplied to \`${componentName}\`. Expected an element type that can hold a ref. ${warningHint} For more information see https://mui.com/r/caveat-with-refs-guide`);
-    }
-    return null;
-  }
-  var elementTypeAcceptingRef_default = chainPropTypes(import_prop_types9.default.elementType, elementTypeAcceptingRef);
-
-  // node_modules/@mui/material/styles/useTheme.mjs
-  var React19 = __toESM(require_react(), 1);
-
   // node_modules/@mui/material/styles/defaultTheme.mjs
   var defaultTheme = createTheme2();
   var defaultTheme_default = defaultTheme;
 
-  // node_modules/@mui/material/styles/useTheme.mjs
-  function useTheme4() {
-    const theme = useTheme_default(defaultTheme_default);
-    if (true) {
-      React19.useDebugValue(theme);
-    }
-    return theme[identifier_default] || theme;
-  }
-
   // node_modules/@mui/material/GlobalStyles/GlobalStyles.mjs
-  var import_prop_types10 = __toESM(require_prop_types(), 1);
+  var import_prop_types9 = __toESM(require_prop_types(), 1);
   var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
   function GlobalStyles3(props) {
     return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(GlobalStyles_default, {
@@ -29414,32 +29004,12 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     /**
      * The styles you want to apply globally.
      */
-    styles: import_prop_types10.default.oneOfType([import_prop_types10.default.array, import_prop_types10.default.func, import_prop_types10.default.number, import_prop_types10.default.object, import_prop_types10.default.string, import_prop_types10.default.bool])
+    styles: import_prop_types9.default.oneOfType([import_prop_types9.default.array, import_prop_types9.default.func, import_prop_types9.default.number, import_prop_types9.default.object, import_prop_types9.default.string, import_prop_types9.default.bool])
   } : void 0;
   var GlobalStyles_default2 = GlobalStyles3;
 
   // node_modules/@mui/material/zero-styled/index.mjs
   var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
-
-  // node_modules/@mui/material/styles/slotShouldForwardProp.mjs
-  function slotShouldForwardProp(prop) {
-    return prop !== "ownerState" && prop !== "theme" && prop !== "sx" && prop !== "as";
-  }
-  var slotShouldForwardProp_default = slotShouldForwardProp;
-
-  // node_modules/@mui/material/styles/rootShouldForwardProp.mjs
-  var rootShouldForwardProp = (prop) => slotShouldForwardProp_default(prop) && prop !== "classes";
-  var rootShouldForwardProp_default = rootShouldForwardProp;
-
-  // node_modules/@mui/material/styles/styled.mjs
-  var styled3 = createStyled3({
-    themeId: identifier_default,
-    defaultTheme: defaultTheme_default,
-    rootShouldForwardProp: rootShouldForwardProp_default
-  });
-  var styled_default = styled3;
-
-  // node_modules/@mui/material/zero-styled/index.mjs
   function globalCss(styles2) {
     return function GlobalStylesWrapper(props) {
       return (
@@ -29454,13 +29024,9 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     };
   }
 
-  // node_modules/@mui/material/utils/memoTheme.mjs
-  var memoTheme = unstable_memoTheme;
-  var memoTheme_default = memoTheme;
-
   // node_modules/@mui/material/DefaultPropsProvider/DefaultPropsProvider.mjs
-  var React20 = __toESM(require_react(), 1);
-  var import_prop_types11 = __toESM(require_prop_types(), 1);
+  var React18 = __toESM(require_react(), 1);
+  var import_prop_types10 = __toESM(require_prop_types(), 1);
   var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
   function DefaultPropsProvider2(props) {
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DefaultPropsProvider_default, {
@@ -29475,24 +29041,21 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     /**
      * @ignore
      */
-    children: import_prop_types11.default.node,
+    children: import_prop_types10.default.node,
     /**
      * @ignore
      */
-    value: import_prop_types11.default.object.isRequired
+    value: import_prop_types10.default.object.isRequired
   } : void 0;
   function useDefaultProps2(params) {
     return useDefaultProps(params);
   }
 
-  // node_modules/@mui/material/utils/capitalize.mjs
-  var capitalize_default = capitalize;
-
   // node_modules/@mui/material/styles/ThemeProvider.mjs
-  var React22 = __toESM(require_react(), 1);
+  var React20 = __toESM(require_react(), 1);
 
   // node_modules/@mui/material/styles/ThemeProviderNoVars.mjs
-  var React21 = __toESM(require_react(), 1);
+  var React19 = __toESM(require_react(), 1);
   var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
   function ThemeProviderNoVars({
     theme: themeInput,
@@ -29507,7 +29070,7 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
   }
 
   // node_modules/@mui/material/InitColorSchemeScript/InitColorSchemeScript.mjs
-  var import_prop_types12 = __toESM(require_prop_types(), 1);
+  var import_prop_types11 = __toESM(require_prop_types(), 1);
   var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
   var defaultConfig = {
     attribute: "data-mui-color-scheme",
@@ -29549,41 +29112,41 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
      * @example '.mode-%s' // for class based color scheme
      * @example '[data-mode-%s]' // for data-attribute without '='
      */
-    attribute: import_prop_types12.default.string,
+    attribute: import_prop_types11.default.string,
     /**
      * The node (provided as string) used to attach the color-scheme attribute.
      * @default 'document.documentElement'
      */
-    colorSchemeNode: import_prop_types12.default.string,
+    colorSchemeNode: import_prop_types11.default.string,
     /**
      * localStorage key used to store `colorScheme`.
      * @default 'mui-color-scheme'
      */
-    colorSchemeStorageKey: import_prop_types12.default.string,
+    colorSchemeStorageKey: import_prop_types11.default.string,
     /**
      * The default color scheme to be used in dark mode.
      * @default 'dark'
      */
-    defaultDarkColorScheme: import_prop_types12.default.string,
+    defaultDarkColorScheme: import_prop_types11.default.string,
     /**
      * The default color scheme to be used in light mode.
      * @default 'light'
      */
-    defaultLightColorScheme: import_prop_types12.default.string,
+    defaultLightColorScheme: import_prop_types11.default.string,
     /**
      * The default mode when the storage is empty (user's first visit).
      * @default 'system'
      */
-    defaultMode: import_prop_types12.default.oneOf(["dark", "light", "system"]),
+    defaultMode: import_prop_types11.default.oneOf(["dark", "light", "system"]),
     /**
      * localStorage key used to store `mode`.
      * @default 'mui-mode'
      */
-    modeStorageKey: import_prop_types12.default.string,
+    modeStorageKey: import_prop_types11.default.string,
     /**
      * Nonce string to pass to the inline script for CSP headers.
      */
-    nonce: import_prop_types12.default.string
+    nonce: import_prop_types11.default.string
   } : void 0;
 
   // node_modules/@mui/material/styles/ThemeProviderWithVars.mjs
@@ -29626,7 +29189,7 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     theme,
     ...props
   }) {
-    const noVarsTheme = React22.useMemo(() => {
+    const noVarsTheme = React20.useMemo(() => {
       if (typeof theme === "function") {
         return theme;
       }
@@ -29654,271 +29217,10 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     });
   }
 
-  // node_modules/@mui/utils/isFocusVisible/isFocusVisible.mjs
-  function isFocusVisible(element) {
-    try {
-      return element.matches(":focus-visible");
-    } catch (error) {
-      if (!window.navigator.userAgent.includes("jsdom")) {
-        console.warn(["MUI: The `:focus-visible` pseudo class is not supported in this browser.", "Some components rely on this feature to work properly."].join("\n"));
-      }
-    }
-    return false;
-  }
-
-  // node_modules/@mui/material/utils/createSimplePaletteValueFilter.mjs
-  function hasCorrectMainProperty(obj) {
-    return typeof obj.main === "string";
-  }
-  function checkSimplePaletteColorValues(obj, additionalPropertiesToCheck = []) {
-    if (!hasCorrectMainProperty(obj)) {
-      return false;
-    }
-    for (const value of additionalPropertiesToCheck) {
-      if (!obj.hasOwnProperty(value) || typeof obj[value] !== "string") {
-        return false;
-      }
-    }
-    return true;
-  }
-  function createSimplePaletteValueFilter(additionalPropertiesToCheck = []) {
-    return ([, value]) => value && checkSimplePaletteColorValues(value, additionalPropertiesToCheck);
-  }
-
-  // node_modules/@mui/material/Typography/Typography.mjs
-  var React23 = __toESM(require_react(), 1);
-  var import_prop_types13 = __toESM(require_prop_types(), 1);
-
-  // node_modules/@mui/material/Typography/typographyClasses.mjs
-  function getTypographyUtilityClass(slot) {
-    return generateUtilityClass("MuiTypography", slot);
-  }
-  var typographyClasses = generateUtilityClasses("MuiTypography", ["root", "h1", "h2", "h3", "h4", "h5", "h6", "subtitle1", "subtitle2", "body1", "body2", "inherit", "button", "caption", "overline", "alignLeft", "alignRight", "alignCenter", "alignJustify", "noWrap", "gutterBottom"]);
-
-  // node_modules/@mui/material/Typography/Typography.mjs
-  var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
-  var useUtilityClasses = (ownerState) => {
-    const {
-      align,
-      gutterBottom,
-      noWrap,
-      variant,
-      classes
-    } = ownerState;
-    const slots = {
-      root: ["root", variant, ownerState.align !== "inherit" && `align${capitalize_default(align)}`, gutterBottom && "gutterBottom", noWrap && "noWrap"]
-    };
-    return composeClasses(slots, getTypographyUtilityClass, classes);
-  };
-  var TypographyRoot = styled_default("span", {
-    name: "MuiTypography",
-    slot: "Root",
-    overridesResolver: (props, styles2) => {
-      const {
-        ownerState
-      } = props;
-      return [styles2.root, ownerState.variant && styles2[ownerState.variant], ownerState.align !== "inherit" && styles2[`align${capitalize_default(ownerState.align)}`], ownerState.noWrap && styles2.noWrap, ownerState.gutterBottom && styles2.gutterBottom];
-    }
-  })(memoTheme_default(({
-    theme
-  }) => ({
-    margin: 0,
-    variants: [{
-      props: {
-        variant: "inherit"
-      },
-      style: {
-        // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
-        font: "inherit",
-        lineHeight: "inherit",
-        letterSpacing: "inherit"
-      }
-    }, ...Object.entries(theme.typography).filter(([variant, value]) => variant !== "inherit" && value && typeof value === "object").map(([variant, value]) => ({
-      props: {
-        variant
-      },
-      style: value
-    })), ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color2]) => ({
-      props: {
-        color: color2
-      },
-      style: {
-        color: (theme.vars || theme).palette[color2].main
-      }
-    })), ...Object.entries(theme.palette?.text || {}).filter(([, value]) => typeof value === "string").map(([color2]) => ({
-      props: {
-        color: `text${capitalize_default(color2)}`
-      },
-      style: {
-        color: (theme.vars || theme).palette.text[color2]
-      }
-    })), {
-      props: ({
-        ownerState
-      }) => ownerState.align !== "inherit",
-      style: {
-        textAlign: "var(--Typography-textAlign)"
-      }
-    }, {
-      props: ({
-        ownerState
-      }) => ownerState.noWrap,
-      style: {
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap"
-      }
-    }, {
-      props: ({
-        ownerState
-      }) => ownerState.gutterBottom,
-      style: {
-        marginBottom: "0.35em"
-      }
-    }]
-  })));
-  var defaultVariantMapping = {
-    h1: "h1",
-    h2: "h2",
-    h3: "h3",
-    h4: "h4",
-    h5: "h5",
-    h6: "h6",
-    subtitle1: "h6",
-    subtitle2: "h6",
-    body1: "p",
-    body2: "p",
-    inherit: "p"
-  };
-  var Typography = /* @__PURE__ */ React23.forwardRef(function Typography2(inProps, ref) {
-    const props = useDefaultProps2({
-      props: inProps,
-      name: "MuiTypography"
-    });
-    const {
-      color: color2,
-      align = "inherit",
-      className,
-      component,
-      gutterBottom = false,
-      noWrap = false,
-      variant = "body1",
-      variantMapping = defaultVariantMapping,
-      ...other
-    } = props;
-    const ownerState = {
-      ...props,
-      align,
-      color: color2,
-      className,
-      component,
-      gutterBottom,
-      noWrap,
-      variant,
-      variantMapping
-    };
-    const Component = component || variantMapping[variant] || defaultVariantMapping[variant] || "span";
-    const classes = useUtilityClasses(ownerState);
-    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(TypographyRoot, {
-      as: Component,
-      ref,
-      className: clsx_default(classes.root, className),
-      ...other,
-      ownerState,
-      style: {
-        ...align !== "inherit" && {
-          "--Typography-textAlign": align
-        },
-        ...other.style
-      }
-    });
-  });
-  true ? Typography.propTypes = {
-    // ┌────────────────────────────── Warning ──────────────────────────────┐
-    // │ These PropTypes are generated from the TypeScript type definitions. │
-    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-    // └─────────────────────────────────────────────────────────────────────┘
-    /**
-     * Set the text-align on the component.
-     * @default 'inherit'
-     */
-    align: import_prop_types13.default.oneOf(["center", "inherit", "justify", "left", "right"]),
-    /**
-     * The content of the component.
-     */
-    children: import_prop_types13.default.node,
-    /**
-     * Override or extend the styles applied to the component.
-     */
-    classes: import_prop_types13.default.object,
-    /**
-     * @ignore
-     */
-    className: import_prop_types13.default.string,
-    /**
-     * The color of the component.
-     * It supports both default and custom theme colors, which can be added as shown in the
-     * [palette customization guide](https://mui.com/material-ui/customization/palette/#custom-colors).
-     */
-    color: import_prop_types13.default.oneOfType([import_prop_types13.default.oneOf(["primary", "secondary", "success", "error", "info", "warning", "textPrimary", "textSecondary", "textDisabled"]), import_prop_types13.default.string]),
-    /**
-     * The component used for the root node.
-     * Either a string to use a HTML element or a component.
-     */
-    component: import_prop_types13.default.elementType,
-    /**
-     * If `true`, the text will have a bottom margin.
-     * @default false
-     */
-    gutterBottom: import_prop_types13.default.bool,
-    /**
-     * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
-     *
-     * Note that text overflow can only happen with block or inline-block level elements
-     * (the element needs to have a width in order to overflow).
-     * @default false
-     */
-    noWrap: import_prop_types13.default.bool,
-    /**
-     * @ignore
-     */
-    style: import_prop_types13.default.object,
-    /**
-     * The system prop that allows defining system overrides as well as additional CSS styles.
-     */
-    sx: import_prop_types13.default.oneOfType([import_prop_types13.default.arrayOf(import_prop_types13.default.oneOfType([import_prop_types13.default.func, import_prop_types13.default.object, import_prop_types13.default.bool])), import_prop_types13.default.func, import_prop_types13.default.object]),
-    /**
-     * Applies the theme typography styles.
-     * @default 'body1'
-     */
-    variant: import_prop_types13.default.oneOfType([import_prop_types13.default.oneOf(["body1", "body2", "button", "caption", "h1", "h2", "h3", "h4", "h5", "h6", "inherit", "overline", "subtitle1", "subtitle2"]), import_prop_types13.default.string]),
-    /**
-     * The component maps the variant prop to a range of different HTML element types.
-     * For instance, subtitle1 to `<h6>`.
-     * If you wish to change that mapping, you can provide your own.
-     * Alternatively, you can use the `component` prop.
-     * @default {
-     *   h1: 'h1',
-     *   h2: 'h2',
-     *   h3: 'h3',
-     *   h4: 'h4',
-     *   h5: 'h5',
-     *   h6: 'h6',
-     *   subtitle1: 'h6',
-     *   subtitle2: 'h6',
-     *   body1: 'p',
-     *   body2: 'p',
-     *   inherit: 'p',
-     * }
-     */
-    variantMapping: import_prop_types13.default.object
-  } : void 0;
-  var Typography_default = Typography;
-
   // node_modules/@mui/material/CssBaseline/CssBaseline.mjs
-  var React24 = __toESM(require_react(), 1);
-  var import_prop_types14 = __toESM(require_prop_types(), 1);
-  var import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
+  var React21 = __toESM(require_react(), 1);
+  var import_prop_types12 = __toESM(require_prop_types(), 1);
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
   var isDynamicSupport = typeof globalCss({}) === "function";
   var html = (theme, enableColorScheme) => ({
     WebkitFontSmoothing: "antialiased",
@@ -30032,10 +29334,10 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
       children,
       enableColorScheme = false
     } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(React24.Fragment, {
-      children: [isDynamicSupport && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GlobalStyles4, {
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(React21.Fragment, {
+      children: [isDynamicSupport && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(GlobalStyles4, {
         enableColorScheme
-      }), !isDynamicSupport && !enableColorScheme && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", {
+      }), !isDynamicSupport && !enableColorScheme && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", {
         className: SELECTOR,
         style: {
           display: "none"
@@ -30051,329 +29353,22 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     /**
      * You can wrap a node.
      */
-    children: import_prop_types14.default.node,
+    children: import_prop_types12.default.node,
     /**
      * Enable `color-scheme` CSS property to use `theme.palette.mode`.
      * For more details, check out https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color-scheme
      * For browser support, check out https://caniuse.com/?search=color-scheme
      * @default false
      */
-    enableColorScheme: import_prop_types14.default.bool
+    enableColorScheme: import_prop_types12.default.bool
   } : void 0;
   var CssBaseline_default = CssBaseline;
 
-  // node_modules/@mui/material/Link/Link.mjs
-  var React25 = __toESM(require_react(), 1);
-  var import_prop_types15 = __toESM(require_prop_types(), 1);
-
-  // node_modules/@mui/material/Link/linkClasses.mjs
-  function getLinkUtilityClass(slot) {
-    return generateUtilityClass("MuiLink", slot);
-  }
-  var linkClasses = generateUtilityClasses("MuiLink", ["root", "underlineNone", "underlineHover", "underlineAlways", "button", "focusVisible"]);
-  var linkClasses_default = linkClasses;
-
-  // node_modules/@mui/material/Link/getTextDecoration.mjs
-  var getTextDecoration = ({
-    theme,
-    ownerState
-  }) => {
-    const transformedColor = ownerState.color;
-    if ("colorSpace" in theme && theme.colorSpace) {
-      const color3 = getPath(theme, `palette.${transformedColor}.main`) || getPath(theme, `palette.${transformedColor}`) || ownerState.color;
-      return theme.alpha(color3, 0.4);
-    }
-    const color2 = getPath(theme, `palette.${transformedColor}.main`, false) || getPath(theme, `palette.${transformedColor}`, false) || ownerState.color;
-    const channelColor = getPath(theme, `palette.${transformedColor}.mainChannel`) || getPath(theme, `palette.${transformedColor}Channel`);
-    if ("vars" in theme && channelColor) {
-      return `rgba(${channelColor} / 0.4)`;
-    }
-    return alpha(color2, 0.4);
-  };
-  var getTextDecoration_default = getTextDecoration;
-
-  // node_modules/@mui/material/Link/Link.mjs
-  var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
-  var v6Colors = {
-    primary: true,
-    secondary: true,
-    error: true,
-    info: true,
-    success: true,
-    warning: true,
-    textPrimary: true,
-    textSecondary: true,
-    textDisabled: true
-  };
-  var useUtilityClasses2 = (ownerState) => {
-    const {
-      classes,
-      component,
-      focusVisible,
-      underline
-    } = ownerState;
-    const slots = {
-      root: ["root", `underline${capitalize_default(underline)}`, component === "button" && "button", focusVisible && "focusVisible"]
-    };
-    return composeClasses(slots, getLinkUtilityClass, classes);
-  };
-  var LinkRoot = styled_default(Typography_default, {
-    name: "MuiLink",
-    slot: "Root",
-    overridesResolver: (props, styles2) => {
-      const {
-        ownerState
-      } = props;
-      return [styles2.root, styles2[`underline${capitalize_default(ownerState.underline)}`], ownerState.component === "button" && styles2.button];
-    }
-  })(memoTheme_default(({
-    theme
-  }) => {
-    return {
-      variants: [{
-        props: {
-          underline: "none"
-        },
-        style: {
-          textDecoration: "none"
-        }
-      }, {
-        props: {
-          underline: "hover"
-        },
-        style: {
-          textDecoration: "none",
-          "&:hover": {
-            textDecoration: "underline"
-          }
-        }
-      }, {
-        props: {
-          underline: "always"
-        },
-        style: {
-          textDecoration: "underline",
-          "&:hover": {
-            textDecorationColor: "inherit"
-          }
-        }
-      }, {
-        props: ({
-          underline,
-          ownerState
-        }) => underline === "always" && ownerState.color !== "inherit",
-        style: {
-          textDecorationColor: "var(--Link-underlineColor)"
-        }
-      }, {
-        props: ({
-          underline,
-          ownerState
-        }) => underline === "always" && ownerState.color === "inherit",
-        style: theme.colorSpace ? {
-          textDecorationColor: theme.alpha("currentColor", 0.4)
-        } : null
-      }, ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color2]) => ({
-        props: {
-          underline: "always",
-          color: color2
-        },
-        style: {
-          "--Link-underlineColor": theme.alpha((theme.vars || theme).palette[color2].main, 0.4)
-        }
-      })), {
-        props: {
-          underline: "always",
-          color: "textPrimary"
-        },
-        style: {
-          "--Link-underlineColor": theme.alpha((theme.vars || theme).palette.text.primary, 0.4)
-        }
-      }, {
-        props: {
-          underline: "always",
-          color: "textSecondary"
-        },
-        style: {
-          "--Link-underlineColor": theme.alpha((theme.vars || theme).palette.text.secondary, 0.4)
-        }
-      }, {
-        props: {
-          underline: "always",
-          color: "textDisabled"
-        },
-        style: {
-          "--Link-underlineColor": (theme.vars || theme).palette.text.disabled
-        }
-      }, {
-        props: {
-          component: "button"
-        },
-        style: {
-          position: "relative",
-          WebkitTapHighlightColor: "transparent",
-          backgroundColor: "transparent",
-          // Reset default value
-          // We disable the focus ring for mouse, touch and keyboard users.
-          outline: 0,
-          border: 0,
-          margin: 0,
-          // Remove the margin in Safari
-          borderRadius: 0,
-          padding: 0,
-          // Remove the padding in Firefox
-          cursor: "pointer",
-          userSelect: "none",
-          verticalAlign: "middle",
-          MozAppearance: "none",
-          // Reset
-          WebkitAppearance: "none",
-          // Reset
-          "&::-moz-focus-inner": {
-            borderStyle: "none"
-            // Remove Firefox dotted outline.
-          },
-          [`&.${linkClasses_default.focusVisible}`]: {
-            outline: "auto"
-          }
-        }
-      }]
-    };
-  }));
-  var Link = /* @__PURE__ */ React25.forwardRef(function Link2(inProps, ref) {
-    const props = useDefaultProps2({
-      props: inProps,
-      name: "MuiLink"
-    });
-    const theme = useTheme4();
-    const {
-      className,
-      color: color2 = "primary",
-      component = "a",
-      onBlur,
-      onFocus,
-      TypographyClasses,
-      underline = "always",
-      variant = "inherit",
-      sx,
-      ...other
-    } = props;
-    const [focusVisible, setFocusVisible] = React25.useState(false);
-    const handleBlur = (event) => {
-      if (!isFocusVisible(event.target)) {
-        setFocusVisible(false);
-      }
-      if (onBlur) {
-        onBlur(event);
-      }
-    };
-    const handleFocus = (event) => {
-      if (isFocusVisible(event.target)) {
-        setFocusVisible(true);
-      }
-      if (onFocus) {
-        onFocus(event);
-      }
-    };
-    const ownerState = {
-      ...props,
-      color: color2,
-      component,
-      focusVisible,
-      underline,
-      variant
-    };
-    const classes = useUtilityClasses2(ownerState);
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(LinkRoot, {
-      color: color2,
-      className: clsx_default(classes.root, className),
-      classes: TypographyClasses,
-      component,
-      onBlur: handleBlur,
-      onFocus: handleFocus,
-      ref,
-      ownerState,
-      variant,
-      ...other,
-      sx: [...v6Colors[color2] === void 0 ? [{
-        color: color2
-      }] : [], ...Array.isArray(sx) ? sx : [sx]],
-      style: {
-        ...other.style,
-        ...underline === "always" && color2 !== "inherit" && !v6Colors[color2] && {
-          "--Link-underlineColor": getTextDecoration_default({
-            theme,
-            ownerState
-          })
-        }
-      }
-    });
-  });
-  true ? Link.propTypes = {
-    // ┌────────────────────────────── Warning ──────────────────────────────┐
-    // │ These PropTypes are generated from the TypeScript type definitions. │
-    // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-    // └─────────────────────────────────────────────────────────────────────┘
-    /**
-     * The content of the component.
-     */
-    children: import_prop_types15.default.node,
-    /**
-     * Override or extend the styles applied to the component.
-     */
-    classes: import_prop_types15.default.object,
-    /**
-     * @ignore
-     */
-    className: import_prop_types15.default.string,
-    /**
-     * The color of the link.
-     * @default 'primary'
-     */
-    color: import_prop_types15.default.oneOfType([import_prop_types15.default.oneOf(["primary", "secondary", "success", "error", "info", "warning", "textPrimary", "textSecondary", "textDisabled"]), import_prop_types15.default.string]),
-    /**
-     * The component used for the root node.
-     * Either a string to use a HTML element or a component.
-     */
-    component: elementTypeAcceptingRef_default,
-    /**
-     * @ignore
-     */
-    onBlur: import_prop_types15.default.func,
-    /**
-     * @ignore
-     */
-    onFocus: import_prop_types15.default.func,
-    /**
-     * @ignore
-     */
-    style: import_prop_types15.default.object,
-    /**
-     * The system prop that allows defining system overrides as well as additional CSS styles.
-     */
-    sx: import_prop_types15.default.oneOfType([import_prop_types15.default.arrayOf(import_prop_types15.default.oneOfType([import_prop_types15.default.func, import_prop_types15.default.object, import_prop_types15.default.bool])), import_prop_types15.default.func, import_prop_types15.default.object]),
-    /**
-     * `classes` prop applied to the [`Typography`](https://mui.com/material-ui/api/typography/) element.
-     */
-    TypographyClasses: import_prop_types15.default.object,
-    /**
-     * Controls when the link should have an underline.
-     * @default 'always'
-     */
-    underline: import_prop_types15.default.oneOf(["always", "hover", "none"]),
-    /**
-     * Applies the theme typography styles.
-     * @default 'inherit'
-     */
-    variant: import_prop_types15.default.oneOfType([import_prop_types15.default.oneOf(["body1", "body2", "button", "caption", "h1", "h2", "h3", "h4", "h5", "h6", "inherit", "overline", "subtitle1", "subtitle2"]), import_prop_types15.default.string])
-  } : void 0;
-  var Link_default = Link;
-
   // computed-capture-page/entry.jsx
-  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
   var __cssVarsTheme = createTheme2({ cssVariables: true, colorSchemes: { light: true } });
   var CE = false;
-  var COMPONENTS = { Link: Link_default };
+  var COMPONENTS = {};
   var EXTRA = {};
   var ceProps = (p) => {
     if (!CE) return p;
@@ -30385,7 +29380,7 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     }
     return o;
   };
-  var SPECS = [{ "key": "Link:primary.none", "component": "Link", "props": { "href": "#mui-link", "color": "primary", "underline": "none" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:primary.hover", "component": "Link", "props": { "href": "#mui-link", "color": "primary", "underline": "hover" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:primary.always", "component": "Link", "props": { "href": "#mui-link", "color": "primary", "underline": "always" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:secondary.none", "component": "Link", "props": { "href": "#mui-link", "color": "secondary", "underline": "none" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:secondary.hover", "component": "Link", "props": { "href": "#mui-link", "color": "secondary", "underline": "hover" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:secondary.always", "component": "Link", "props": { "href": "#mui-link", "color": "secondary", "underline": "always" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:error.none", "component": "Link", "props": { "href": "#mui-link", "color": "error", "underline": "none" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:error.hover", "component": "Link", "props": { "href": "#mui-link", "color": "error", "underline": "hover" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:error.always", "component": "Link", "props": { "href": "#mui-link", "color": "error", "underline": "always" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:info.none", "component": "Link", "props": { "href": "#mui-link", "color": "info", "underline": "none" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:info.hover", "component": "Link", "props": { "href": "#mui-link", "color": "info", "underline": "hover" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:info.always", "component": "Link", "props": { "href": "#mui-link", "color": "info", "underline": "always" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:success.none", "component": "Link", "props": { "href": "#mui-link", "color": "success", "underline": "none" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:success.hover", "component": "Link", "props": { "href": "#mui-link", "color": "success", "underline": "hover" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:success.always", "component": "Link", "props": { "href": "#mui-link", "color": "success", "underline": "always" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:warning.none", "component": "Link", "props": { "href": "#mui-link", "color": "warning", "underline": "none" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:warning.hover", "component": "Link", "props": { "href": "#mui-link", "color": "warning", "underline": "hover" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:warning.always", "component": "Link", "props": { "href": "#mui-link", "color": "warning", "underline": "always" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:inherit.none", "component": "Link", "props": { "href": "#mui-link", "color": "inherit", "underline": "none" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:inherit.hover", "component": "Link", "props": { "href": "#mui-link", "color": "inherit", "underline": "hover" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }, { "key": "Link:inherit.always", "component": "Link", "props": { "href": "#mui-link", "color": "inherit", "underline": "always" }, "callbacks": [], "text": "Link", "stage": { "width": 320, "height": 96, "padding": 16 } }];
+  var SPECS = [];
   var stageStyle = (st, block) => ({ display: block ? "block" : "flex", ...block ? {} : { alignItems: "flex-start" }, width: st.width, height: st.height, padding: st.padding, boxSizing: "border-box", background: "#fff", overflow: "hidden" });
   var stage = stageStyle({ width: 320, height: 96, padding: 16 });
   function resolveMarkers(v) {
@@ -30420,13 +29415,13 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
     if (s.childrenSpec) return renderKidList(s.childrenSpec, kid);
     if (s.childWrap) {
       const W = COMPONENTS[s.childWrap];
-      return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(W, { children: s.text });
+      return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(W, { children: s.text });
     }
     return s.text === "" ? void 0 : s.text;
   }
   function App({ gen, comboGen: comboGen2 }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(ThemeProvider4, { theme: __cssVarsTheme, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(CssBaseline_default, {}),
+    return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(ThemeProvider4, { theme: __cssVarsTheme, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(CssBaseline_default, {}),
       SPECS.map((s) => {
         const C = COMPONENTS[s.component];
         const kid = s.props["__dscChildProps"];
@@ -30435,22 +29430,22 @@ To suppress this warning, you need to explicitly provide the \`palette.${key}Cha
         for (const cb of s.callbacks) props0[cb] = () => {
         };
         const props = ceProps(props0);
-        return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(import_react6.default.Fragment, { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("button", { "data-sentinel": s.key, style: { width: 8, height: 8, padding: 0, border: 0, margin: 2, background: "#eee" }, "aria-label": "sentinel" }),
-          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { "data-combo": s.key, style: stageStyle(s.stage, s.blockStage), children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(C, { ...props, children: renderKids(s, kid) }) })
+        return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_react6.default.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("button", { "data-sentinel": s.key, style: { width: 8, height: 8, padding: 0, border: 0, margin: 2, background: "#eee" }, "aria-label": "sentinel" }),
+          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { "data-combo": s.key, style: stageStyle(s.stage, s.blockStage), children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(C, { ...props, children: renderKids(s, kid) }) })
         ] }, s.key + ":" + gen + ":" + (comboGen2[s.key] || 0));
       }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { "data-combo": "__control-button", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("button", { children: "SAMPLE" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { "data-combo": "__control-span", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { children: "SAMPLE" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { "data-combo": "__control-a", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("a", { href: "#c", children: "SAMPLE" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { "data-combo": "__control-div", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { children: "SAMPLE" }) })
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { "data-combo": "__control-button", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("button", { children: "SAMPLE" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { "data-combo": "__control-span", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { children: "SAMPLE" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { "data-combo": "__control-a", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("a", { href: "#c", children: "SAMPLE" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { "data-combo": "__control-div", style: stage, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { children: "SAMPLE" }) })
     ] });
   }
   var root = (0, import_client.createRoot)(document.getElementById("root"));
   var mountGen = 0;
   var comboGen = {};
   function paint() {
-    root.render(/* @__PURE__ */ (0, import_jsx_runtime20.jsx)(App, { gen: mountGen, comboGen: { ...comboGen } }));
+    root.render(/* @__PURE__ */ (0, import_jsx_runtime18.jsx)(App, { gen: mountGen, comboGen: { ...comboGen } }));
   }
   window.__DSC_REMOUNT = (key) => {
     if (typeof key === "string" && key) comboGen[key] = (comboGen[key] || 0) + 1;
@@ -30566,15 +29561,6 @@ react-is/cjs/react-is.development.js:
 @mui/system/index.mjs:
   (**
    * @mui/system v9.3.0
-   *
-   * @license MIT
-   * This source code is licensed under the MIT license found in the
-   * LICENSE file in the root directory of this source tree.
-   *)
-
-@mui/material/index.mjs:
-  (**
-   * @mui/material v9.2.0
    *
    * @license MIT
    * This source code is licensed under the MIT license found in the

@@ -1,30 +1,31 @@
 {
   "component": "Fab",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "151.0.7922.34",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 18,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 4032,
+    "cellsCompared": 4104,
     "cellsEqual": 3591,
-    "pctEqual": 89.0625,
+    "pctEqual": 87.5,
     "rowsFullyEqual": 0,
     "rows": 72
   },
   "pixel": {
-    "pairs": 0,
+    "pairs": 72,
     "perfectExact": 0,
     "perfectAA": 0,
-    "measured": 0,
+    "measured": 72,
     "unscored": {
       "sizeMismatch": 0,
-      "noOriginal": 72,
+      "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": null,
-    "meanAA": null,
-    "maxAA": null
+    "meanExact": 12.112539785879639,
+    "meanAA": 5.2566189236111125,
+    "maxAA": 8.948567708333334
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -34,66 +35,58 @@
     "mintedLeavesUnfolded": 66,
     "baseBindings": 27,
     "stateBindings": 6,
-    "codeOnlyChannels": 2,
+    "codeOnlyChannels": 3,
     "overflowBindings": 0,
     "folds": 10
   },
   "worstRows": [
     {
-      "key": "small.default.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
+      "key": "large.primary.enabled__active",
+      "pctAA": 8.948567708333334,
+      "pctExact": 26.240234375,
+      "channelsMismatched": 7
     },
     {
-      "key": "small.primary.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
+      "key": "large.secondary.enabled__active",
+      "pctAA": 8.948567708333334,
+      "pctExact": 26.240234375,
+      "channelsMismatched": 7
     },
     {
-      "key": "small.secondary.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
+      "key": "large.primary.enabled__hover",
+      "pctAA": 8.046875,
+      "pctExact": 20.52734375,
+      "channelsMismatched": 7
     },
     {
-      "key": "medium.default.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
-    },
-    {
-      "key": "medium.primary.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
-    },
-    {
-      "key": "medium.secondary.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
-    },
-    {
-      "key": "large.default.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
+      "key": "large.secondary.enabled__hover",
+      "pctAA": 8.046875,
+      "pctExact": 20.52734375,
+      "channelsMismatched": 7
     },
     {
       "key": "large.primary.enabled__focus-visible",
-      "pctAA": null,
-      "pctExact": null,
-      "channelsMismatched": 7,
-      "unscorable": "no-original"
+      "pctAA": 8.043619791666666,
+      "pctExact": 20.52734375,
+      "channelsMismatched": 8
+    },
+    {
+      "key": "large.secondary.enabled__focus-visible",
+      "pctAA": 8.043619791666666,
+      "pctExact": 20.52734375,
+      "channelsMismatched": 8
+    },
+    {
+      "key": "large.primary.enabled__default",
+      "pctAA": 8.043619791666666,
+      "pctExact": 20.52734375,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "large.secondary.enabled__default",
+      "pctAA": 8.043619791666666,
+      "pctExact": 20.52734375,
+      "channelsMismatched": 7
     }
   ],
   "topMismatchedChannels": [
@@ -114,6 +107,10 @@
       72
     ],
     [
+      "root.text-size-adjust",
+      72
+    ],
+    [
       "root.transition-behavior",
       72
     ],
@@ -127,6 +124,7 @@
     ]
   ],
   "namedLosses": [
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
@@ -136,17 +134,53 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1432,
-    "divergent": []
+    "leavesAdded": 1957,
+    "divergent": [
+      {
+        "token": "imported.fab.root.background-color.default",
+        "fresh": "#e0e0e0",
+        "shipped": "{palette-grey-300}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.fab.root.background-color.primary",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.fab.root.background-color.secondary",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.fab.root.color.default",
+        "fresh": "#212121",
+        "shipped": "{palette-grey-900}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.fab.root.color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{palette-primary-contrast-text}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.fab.root.color.secondary",
+        "fresh": "#ffffff",
+        "shipped": "{palette-secondary-contrast-text}",
+        "resolvedEqual": true
+      }
+    ]
   },
   "rows": [
     {
       "key": "small.default.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.251953125,
+      "pctAA": 2.861328125,
       "mismatches": [
         {
           "part": "root",
@@ -174,6 +208,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -184,16 +224,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.default.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.196614583333334,
+      "pctAA": 0.6510416666666666,
       "mismatches": [
         {
           "part": "root",
@@ -221,6 +259,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -231,16 +275,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.default.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.251953125,
+      "pctAA": 2.861328125,
       "mismatches": [
         {
           "part": "root",
@@ -274,6 +316,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -284,16 +332,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.default.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 18.424479166666668,
+      "pctAA": 1.3997395833333333,
       "mismatches": [
         {
           "part": "root",
@@ -321,6 +367,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -331,16 +383,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.default.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -368,6 +418,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -378,16 +434,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.default.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -415,6 +469,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -425,16 +485,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.default.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -462,6 +520,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -472,16 +536,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.default.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -509,6 +571,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -519,16 +587,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.26171875,
+      "pctAA": 3.75,
       "mismatches": [
         {
           "part": "root",
@@ -556,6 +622,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -566,16 +638,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.26171875,
+      "pctAA": 3.75,
       "mismatches": [
         {
           "part": "root",
@@ -603,6 +673,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -613,16 +689,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.26171875,
+      "pctAA": 3.75,
       "mismatches": [
         {
           "part": "root",
@@ -656,6 +730,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -666,16 +746,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 18.525390625,
+      "pctAA": 4.264322916666667,
       "mismatches": [
         {
           "part": "root",
@@ -703,6 +781,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -713,16 +797,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -750,6 +832,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -760,16 +848,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -797,6 +883,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -807,16 +899,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -844,6 +934,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -854,16 +950,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.primary.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -891,6 +985,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -901,16 +1001,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.274739583333334,
+      "pctAA": 3.75,
       "mismatches": [
         {
           "part": "root",
@@ -938,6 +1036,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -948,16 +1052,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.274739583333334,
+      "pctAA": 3.75,
       "mismatches": [
         {
           "part": "root",
@@ -985,6 +1087,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -995,16 +1103,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 13.274739583333334,
+      "pctAA": 3.75,
       "mismatches": [
         {
           "part": "root",
@@ -1038,6 +1144,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1048,16 +1160,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 18.515625,
+      "pctAA": 4.267578125,
       "mismatches": [
         {
           "part": "root",
@@ -1085,6 +1195,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1095,16 +1211,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -1132,6 +1246,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1142,16 +1262,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -1179,6 +1297,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1189,16 +1313,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -1226,6 +1348,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1236,16 +1364,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "small.secondary.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 4.143880208333333,
+      "pctAA": 3.5872395833333335,
       "mismatches": [
         {
           "part": "root",
@@ -1273,6 +1399,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1283,16 +1415,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.357421875,
+      "pctAA": 4.694010416666667,
       "mismatches": [
         {
           "part": "root",
@@ -1320,6 +1450,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1330,16 +1466,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.292317708333332,
+      "pctAA": 0.8463541666666666,
       "mismatches": [
         {
           "part": "root",
@@ -1367,6 +1501,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1377,16 +1517,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.357421875,
+      "pctAA": 4.694010416666667,
       "mismatches": [
         {
           "part": "root",
@@ -1420,6 +1558,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1430,16 +1574,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 22.265625,
+      "pctAA": 1.8522135416666667,
       "mismatches": [
         {
           "part": "root",
@@ -1467,6 +1609,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1477,16 +1625,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -1514,6 +1660,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1524,16 +1676,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -1561,6 +1711,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1571,16 +1727,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -1608,6 +1762,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1618,16 +1778,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.default.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -1655,6 +1813,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1665,16 +1829,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.3671875,
+      "pctAA": 5.680338541666667,
       "mismatches": [
         {
           "part": "root",
@@ -1702,6 +1864,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1712,16 +1880,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.3671875,
+      "pctAA": 5.680338541666667,
       "mismatches": [
         {
           "part": "root",
@@ -1749,6 +1915,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1759,16 +1931,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.3671875,
+      "pctAA": 5.680338541666667,
       "mismatches": [
         {
           "part": "root",
@@ -1802,6 +1972,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1812,16 +1988,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 22.428385416666668,
+      "pctAA": 6.38671875,
       "mismatches": [
         {
           "part": "root",
@@ -1849,6 +2023,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1859,16 +2039,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -1896,6 +2074,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1906,16 +2090,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -1943,6 +2125,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -1953,16 +2141,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -1990,6 +2176,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2000,16 +2192,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.primary.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -2037,6 +2227,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2047,16 +2243,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.3671875,
+      "pctAA": 5.680338541666667,
       "mismatches": [
         {
           "part": "root",
@@ -2084,6 +2278,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2094,16 +2294,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.3671875,
+      "pctAA": 5.680338541666667,
       "mismatches": [
         {
           "part": "root",
@@ -2131,6 +2329,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2141,16 +2345,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 16.3671875,
+      "pctAA": 5.680338541666667,
       "mismatches": [
         {
           "part": "root",
@@ -2184,6 +2386,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2194,16 +2402,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 22.428385416666668,
+      "pctAA": 6.38671875,
       "mismatches": [
         {
           "part": "root",
@@ -2231,6 +2437,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2241,16 +2453,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -2278,6 +2488,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2288,16 +2504,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -2325,6 +2539,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2335,16 +2555,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -2372,6 +2590,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2382,16 +2606,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "medium.secondary.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 5.966796875,
+      "pctAA": 5.364583333333333,
       "mismatches": [
         {
           "part": "root",
@@ -2419,6 +2641,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2429,16 +2657,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.514322916666668,
+      "pctAA": 7.005208333333333,
       "mismatches": [
         {
           "part": "root",
@@ -2466,6 +2692,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2476,16 +2708,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.458984375,
+      "pctAA": 1.0774739583333333,
       "mismatches": [
         {
           "part": "root",
@@ -2513,6 +2743,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2523,16 +2759,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.514322916666668,
+      "pctAA": 7.005208333333333,
       "mismatches": [
         {
           "part": "root",
@@ -2566,6 +2800,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2576,16 +2816,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 26.057942708333332,
+      "pctAA": 2.4055989583333335,
       "mismatches": [
         {
           "part": "root",
@@ -2613,6 +2851,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2623,16 +2867,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -2660,6 +2902,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2670,16 +2918,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -2707,6 +2953,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2717,16 +2969,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -2754,6 +3004,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2764,16 +3020,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.default.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -2801,6 +3055,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2811,16 +3071,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.52734375,
+      "pctAA": 8.043619791666666,
       "mismatches": [
         {
           "part": "root",
@@ -2848,6 +3106,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2858,16 +3122,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.52734375,
+      "pctAA": 8.046875,
       "mismatches": [
         {
           "part": "root",
@@ -2895,6 +3157,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2905,16 +3173,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.52734375,
+      "pctAA": 8.043619791666666,
       "mismatches": [
         {
           "part": "root",
@@ -2948,6 +3214,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -2958,16 +3230,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 26.240234375,
+      "pctAA": 8.948567708333334,
       "mismatches": [
         {
           "part": "root",
@@ -2995,6 +3265,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3005,16 +3281,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3042,6 +3316,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3052,16 +3332,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3089,6 +3367,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3099,16 +3383,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3136,6 +3418,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3146,16 +3434,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.primary.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3183,6 +3469,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3193,16 +3485,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.enabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.52734375,
+      "pctAA": 8.043619791666666,
       "mismatches": [
         {
           "part": "root",
@@ -3230,6 +3520,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3240,16 +3536,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.enabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.52734375,
+      "pctAA": 8.046875,
       "mismatches": [
         {
           "part": "root",
@@ -3277,6 +3571,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3287,16 +3587,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.enabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 49,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 20.52734375,
+      "pctAA": 8.043619791666666,
       "mismatches": [
         {
           "part": "root",
@@ -3330,6 +3628,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3340,16 +3644,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.enabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 26.240234375,
+      "pctAA": 8.948567708333334,
       "mismatches": [
         {
           "part": "root",
@@ -3377,6 +3679,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3387,16 +3695,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.disabled__default",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3424,6 +3730,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3434,16 +3746,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.disabled__hover",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3471,6 +3781,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3481,16 +3797,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.disabled__focus-visible",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3518,6 +3832,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3528,16 +3848,14 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     },
     {
       "key": "large.secondary.disabled__active",
-      "channelsCompared": 56,
+      "channelsCompared": 57,
       "channelsEqual": 50,
-      "pctExact": null,
-      "pctAA": null,
-      "unscorable": "no-original",
+      "pctExact": 8.206380208333334,
+      "pctAA": 7.470703125,
       "mismatches": [
         {
           "part": "root",
@@ -3565,6 +3883,12 @@
         },
         {
           "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
           "channel": "transition-behavior",
           "ours": "normal",
           "theirs": "normal, normal, normal"
@@ -3575,8 +3899,7 @@
           "ours": "baseline",
           "theirs": "middle"
         }
-      ],
-      "note": "original screenshot unavailable — pixel not scored"
+      ]
     }
   ]
 }

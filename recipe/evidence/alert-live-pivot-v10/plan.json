@@ -1,6 +1,6 @@
 {
-  "pageName": "Recipe Pivot / Alert / 4c13ca24-9b4bd337-b8dd06ed-eb151709-83c23591-3cc66b45-b7744674-alert-v10",
-  "runIdentity": "4c13ca24-9b4bd337-b8dd06ed-eb151709-83c23591-3cc66b45-b7744674-alert-v10",
+  "pageName": "Recipe Pivot / Alert / 4c13ca24-9b4bd337-b8dd06ed-07758707-83c23591-3cc66b45-b7744674-alert-v10",
+  "runIdentity": "4c13ca24-9b4bd337-b8dd06ed-07758707-83c23591-3cc66b45-b7744674-alert-v10",
   "namespace": "ds.contracts.alert.recipe.v1",
   "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
   "teaching": "alert@1 in-page banner from named Astryx Banner, MUI Alert standard, and AntD Alert; Status is the only shared axis; defaults stay per-library (Astryx info / MUI success / AntD info); AlertDialog waits",
@@ -35,8 +35,8 @@
     {
       "adapterIdentity": "mui-alert-proposed-v1",
       "displayName": "MUI (proposed)",
-      "recipeHash": "eb151709b5102ab147731a741dfbf1777810cb4fd124c558448b3f8ff799403f",
-      "envelopeHash": "10eae83c8ce3f93a26bc8cccf00f4e70c71cbe8188a0a7e1514b03f232fdda40",
+      "recipeHash": "07758707fec4ded4ea9a9825f9ce6401501521c53ac4bad5580f849faa3b9a46",
+      "envelopeHash": "b2a980bd78fe42027237837fb4a317a35cba28046d70c25836cde21b5e72f8ea",
       "variantCount": 4,
       "variableCount": 25,
       "comparedIrFacts": 93

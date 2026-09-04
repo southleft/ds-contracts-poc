@@ -2,10 +2,30 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "Drawer",
   "config": "extract/computed/configs/mui.json",
-  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "backdrop-root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "backdrop-root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
       {
         "part": "backdrop-root",
         "channel": "transition-property",
@@ -27,8 +47,13 @@
       },
       {
         "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
         "channel": "font-family",
-        "value": "Times"
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "label",
@@ -62,16 +87,15 @@
   "scorecard": {
     "component": "Drawer",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
     "renderedBy": "149.0.7827.55",
-    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 94,
-      "cellsEqual": 78,
-      "pctEqual": 82.97872340425532,
+      "cellsCompared": 148,
+      "cellsEqual": 127,
+      "pctEqual": 85.8108108108108,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -93,27 +117,27 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 17,
-      "mintedLeavesUnfolded": 17,
-      "baseBindings": 17,
+      "mintedLeaves": 19,
+      "mintedLeavesUnfolded": 19,
+      "baseBindings": 25,
       "stateBindings": 0,
-      "codeOnlyChannels": 12,
+      "codeOnlyChannels": 14,
       "overflowBindings": 0,
-      "folds": 9
+      "folds": 29
     },
     "worstRows": [
       {
         "key": "temporary__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 13,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "permanent__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 5,
         "unscorable": "no-original"
       },
       {
@@ -161,6 +185,10 @@
     ],
     "topMismatchedChannels": [
       [
+        "root.text-size-adjust",
+        2
+      ],
+      [
         "label.display",
         2
       ],
@@ -170,6 +198,10 @@
       ],
       [
         "label.position",
+        2
+      ],
+      [
+        "label.text-size-adjust",
         2
       ],
       [
@@ -209,7 +241,7 @@
         1
       ],
       [
-        "backdrop-root.z-index",
+        "backdrop-root.text-size-adjust",
         1
       ]
     ],
@@ -220,12 +252,14 @@
       "code-only: root.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: backdrop-root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: backdrop-root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: backdrop-root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)"
+      "code-only: label.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -233,14 +267,14 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1976,
+      "leavesAdded": 1974,
       "divergent": []
     },
     "rows": [
       {
         "key": "temporary__default",
-        "channelsCompared": 52,
-        "channelsEqual": 39,
+        "channelsCompared": 87,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -283,6 +317,12 @@
           },
           {
             "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "root",
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
@@ -298,6 +338,12 @@
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "backdrop-root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "backdrop-root",
@@ -322,6 +368,12 @@
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -358,12 +410,18 @@
       },
       {
         "key": "permanent__default",
-        "channelsCompared": 42,
-        "channelsEqual": 39,
+        "channelsCompared": 61,
+        "channelsEqual": 56,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
           {
             "part": "label",
             "channel": "display",
@@ -381,6 +439,12 @@
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

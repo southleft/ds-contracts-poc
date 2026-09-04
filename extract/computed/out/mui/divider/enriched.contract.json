@@ -4,7 +4,7 @@
   "name": "Divider",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Orientation held fixed at horizontal (block stage): a vertical divider needs a flex parent with height, which conflicts with the block stage an <hr> needs for full-bleed width. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Orientation held fixed at horizontal (block stage): a vertical divider needs a flex parent with height, which conflicts with the block stage an <hr> needs for full-bleed width. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "hr"
   },
@@ -44,6 +44,8 @@
         "border-left-style": "solid",
         "border-right-style": "solid",
         "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "hidden",
         "overflow-y": "hidden"
       },
@@ -55,6 +57,8 @@
         "border-top-color": "{imported.shared.color-0000001f}",
         "color": "{imported.divider.root.color}",
         "flex-shrink": "{imported.divider.root.flex-shrink}",
+        "letter-spacing": "{imported.divider.root.letter-spacing}",
+        "line-height": "{imported.divider.root.line-height}",
         "min-height": "{imported.divider.root.min-height}",
         "min-width": "{imported.divider.root.min-width}"
       },

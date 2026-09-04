@@ -67,14 +67,14 @@ export const muiMenuSource: ReviewedMenuSource = {
 };
 
 const muiRefusals = makeRefusals("mui", [
-  { id: "refusal-box-shadow", evidence: "extract/computed/out/mui/menu/captured-truth.json#__default root.box-shadow = rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px; menu@1 has no shadow leaf, so the shadow is not minted", target: "MUI (proposed) box-shadow", reason: "refused-by-recipe" },
+  { id: "refusal-box-shadow", evidence: "extract/computed/out/mui/menu/captured-truth.json#__default root.box-shadow = rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px; menu@1 has no shadow leaf, so the shadow is not minted", target: "mui box-shadow", reason: "refused-by-recipe" },
 ]);
 
 export const muiMenuAdapterConfig = buildConfig(
   "mui",
   muiMenuSource,
   muiTokens,
-  { id: "mui.menu", name: "MUI (proposed) Menu" },
+  { id: "mui.menu", name: "mui Menu" },
   muiRefusals,
   anatomyFacts("mui", muiMenuSource),
   ["hover","focus-visible","active","dense","disableRipple","anchorOrigin"],

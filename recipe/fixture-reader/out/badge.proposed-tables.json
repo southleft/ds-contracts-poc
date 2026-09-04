@@ -532,10 +532,10 @@
         "provenance": "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.line-height"
       },
       "label": {
-        "fixture": "#000000ff",
-        "proposed": "#000000ff",
+        "fixture": "#000000de",
+        "proposed": "#000000de",
         "verdict": "match",
-        "captured": "#000000ff",
+        "captured": "#000000de",
         "provenance": "extract/computed/out/mui/badge/captured-truth.json#default.standard__default idx:1.color"
       },
       "strokeAlign": {

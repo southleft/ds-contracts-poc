@@ -5,6 +5,88 @@
   "browser": "149.0.7827.55",
   "mintedTokens": {
     "imported": {
+      "shared": {
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
+        "size-0-15008": {
+          "$value": "0.15008px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-288": {
+          "$value": "288px",
+          "$type": "dimension"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-23": {
+          "$value": "23px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-13": {
+          "$value": "13px",
+          "$type": "dimension"
+        },
+        "size-19-5": {
+          "$value": "19.5px",
+          "$type": "dimension"
+        },
+        "num-400": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "color-00000042": {
+          "$value": "#00000042",
+          "$type": "color"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "size-28": {
+          "$value": "28px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-0000003b": {
+          "$value": "#0000003b",
+          "$type": "color"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-11": {
+          "$value": "11px",
+          "$type": "dimension"
+        },
+        "color-1976d2": {
+          "$value": "#1976d2",
+          "$type": "color"
+        }
+      },
       "autocomplete": {
         "root": {
           "height": {
@@ -133,11 +215,11 @@
           },
           "width": {
             "small": {
-              "$value": "64.2969px",
+              "$value": "65.9375px",
               "$type": "dimension"
             },
             "medium": {
-              "$value": "77.2969px",
+              "$value": "78.9375px",
               "$type": "dimension"
             }
           }
@@ -253,11 +335,11 @@
           },
           "width": {
             "small": {
-              "$value": "57.9688px",
+              "$value": "58.9219px",
               "$type": "dimension"
             },
             "medium": {
-              "$value": "70.9688px",
+              "$value": "71.9219px",
               "$type": "dimension"
             }
           }
@@ -407,11 +489,11 @@
           },
           "width": {
             "small": {
-              "$value": "86.734px",
+              "$value": "84.141px",
               "$type": "dimension"
             },
             "medium": {
-              "$value": "53.734px",
+              "$value": "51.141px",
               "$type": "dimension"
             }
           },
@@ -476,10 +558,6 @@
           "color": {
             "$value": "#0000008a",
             "$type": "color"
-          },
-          "font-size": {
-            "$value": "24px",
-            "$type": "dimension"
           },
           "margin-right": {
             "$value": "-2px",
@@ -590,88 +668,130 @@
             }
           }
         }
-      },
-      "shared": {
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        },
-        "size-288": {
-          "$value": "288px",
-          "$type": "dimension"
-        },
-        "size-4": {
-          "$value": "4px",
-          "$type": "dimension"
-        },
-        "color-000000de": {
-          "$value": "#000000de",
-          "$type": "color"
-        },
-        "size-0-15008": {
-          "$value": "0.15008px",
-          "$type": "dimension"
-        },
-        "size-23": {
-          "$value": "23px",
-          "$type": "dimension"
-        },
-        "size-16": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "size-13": {
-          "$value": "13px",
-          "$type": "dimension"
-        },
-        "size-19-5": {
-          "$value": "19.5px",
-          "$type": "dimension"
-        },
-        "num-400": {
-          "$value": "400",
-          "$type": "number"
-        },
-        "color-00000042": {
-          "$value": "#00000042",
-          "$type": "color"
-        },
-        "num-0": {
-          "$value": "0",
-          "$type": "number"
-        },
-        "size-28": {
-          "$value": "28px",
-          "$type": "dimension"
-        },
-        "size-14": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "size-2": {
-          "$value": "2px",
-          "$type": "dimension"
-        },
-        "color-0000003b": {
-          "$value": "#0000003b",
-          "$type": "color"
-        },
-        "size-1": {
-          "$value": "1px",
-          "$type": "dimension"
-        },
-        "size-11": {
-          "$value": "11px",
-          "$type": "dimension"
-        },
-        "color-1976d2": {
-          "$value": "#1976d2",
-          "$type": "color"
-        }
       }
     }
   },
   "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
     {
       "part": "autocomplete-inputroot",
       "channel": "border-bottom-color",
@@ -1940,48 +2060,75 @@
         "value": "center"
       },
       {
-        "part": "autocomplete-tag",
-        "field": "align",
-        "value": "center"
-      },
-      {
-        "part": "autocomplete-tag",
-        "field": "justify",
-        "value": "center"
-      },
-      {
-        "part": "autocomplete-tag-2",
-        "field": "align",
-        "value": "center"
-      },
-      {
-        "part": "autocomplete-tag-2",
-        "field": "justify",
-        "value": "center"
-      },
-      {
-        "part": "autocomplete-popupindicator",
-        "field": "align",
-        "value": "center"
-      },
-      {
-        "part": "autocomplete-popupindicator",
-        "field": "justify",
-        "value": "center"
-      },
-      {
         "part": "autocomplete-inputroot",
         "field": "wrap",
+        "value": true
+      },
+      {
+        "part": "autocomplete-tag",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-tag",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-tag-2",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-popupindicator",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "autocomplete-input",
+        "field": "grow",
         "value": true
       }
     ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "layout-grow-carried: autocomplete-input — flex-grow 1 in a flex row parent (autocomplete-inputroot); carried as layout.grow (the canvas FILL / layoutGrow twin)"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
     "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "formcontrol-fullwidth",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
       {
         "part": "formcontrol-fullwidth",
         "channel": "position",
@@ -2059,6 +2206,11 @@
       },
       {
         "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
         "channel": "cursor",
         "value": "text"
       },
@@ -2091,6 +2243,11 @@
         "part": "label",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "icon",
@@ -2189,6 +2346,11 @@
       },
       {
         "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
         "channel": "cursor",
         "value": "text"
       },
@@ -2221,6 +2383,11 @@
         "part": "label-2",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "icon-2",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "icon-2",
@@ -2296,6 +2463,11 @@
         "part": "autocomplete-input",
         "channel": "text-overflow",
         "value": "ellipsis"
+      },
+      {
+        "part": "autocomplete-endadornment",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "autocomplete-endadornment",
@@ -2389,6 +2561,11 @@
       },
       {
         "part": "outlinedinput-notchedoutline",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
         "channel": "cursor",
         "value": "text"
       },
@@ -2416,6 +2593,11 @@
         "part": "outlinedinput-notchedoutline",
         "channel": "text-align",
         "value": "left"
+      },
+      {
+        "part": "part-0-0-4-0",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "part-0-0-4-0",
@@ -2464,6 +2646,11 @@
       },
       {
         "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-3",
         "channel": "cursor",
         "value": "text"
       },
@@ -2487,6 +2674,20 @@
   },
   "codeOnlyChannels": [
     {
+      "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "formcontrol-fullwidth",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "formcontrol-fullwidth",
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -2495,9 +2696,9 @@
     },
     {
       "part": "autocomplete-inputroot",
-      "channel": "flex-wrap",
+      "channel": "text-size-adjust",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "wrap",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -2506,6 +2707,13 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "calc(100% - 4px)",
       "distinctValues": 2
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
     },
     {
       "part": "autocomplete-tag",
@@ -2519,13 +2727,27 @@
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
       "part": "icon",
       "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -2534,6 +2756,13 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "calc(100% - 4px)",
       "distinctValues": 2
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
     },
     {
       "part": "autocomplete-tag-2",
@@ -2550,24 +2779,59 @@
       "distinctValues": 1
     },
     {
+      "part": "label-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
       "part": "icon-2",
       "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "content-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
       "part": "autocomplete-input",
       "channel": "animation-duration",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "0.01s",
       "distinctValues": 1
     },
     {
       "part": "autocomplete-input",
       "channel": "animation-name",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "mui-auto-fill-cancel",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-input",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-endadornment",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-popupindicator",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
@@ -2580,15 +2844,36 @@
     {
       "part": "outlinedinput-notchedoutline",
       "channel": "min-width",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "0%",
+      "distinctValues": 1
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-0-4-0",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <legend>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <legend> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
       "distinctValues": 1
     },
     {
       "part": "part-0-0-4-0",
       "channel": "unicode-bidi",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <legend>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <legend> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
       "distinctValues": 1
     }
   ],
@@ -2793,6 +3078,8 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
@@ -2817,28 +3104,123 @@
     "absolute-geometry-admitted: part-0-0-3-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: outlinedinput-notchedoutline — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-0-0-4-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-equal-drop: root — 577 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 374 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: formcontrol-fullwidth — 569 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: formcontrol-fullwidth — 16 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); line-height=24px (in-page control also read 24px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: formcontrol-fullwidth — 366 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: autocomplete-inputroot — 562 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: autocomplete-inputroot — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: autocomplete-inputroot — 359 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: autocomplete-tag — 550 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: autocomplete-tag — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: autocomplete-tag — 347 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 570 of 595 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 366 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon)",
+    "control-equal-drop: icon — 565 of 597 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon — 4 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: icon — 362 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <path> — span control used (part part-0-0-0-1-0)",
-    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "ua-control-fallback: no UA baseline for <path> — span UA control used (part part-0-0-0-1-0)",
+    "control-equal-drop: part-0-0-0-1-0 — 570 of 597 admitted channels compared EQUAL to the <path> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0-0-1-0 — 4 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0-0-1-0 — 367 channel(s) EQUAL to the <path> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: autocomplete-tag-2 — 550 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: autocomplete-tag-2 — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: autocomplete-tag-2 — 347 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-2 — 570 of 595 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-2 — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-2 — 366 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon-2)",
+    "control-equal-drop: icon-2 — 565 of 597 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon-2 — 4 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: icon-2 — 362 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <path> — span control used (part part-0-0-1-1-0)",
+    "ua-control-fallback: no UA baseline for <path> — span UA control used (part part-0-0-1-1-0)",
+    "control-equal-drop: part-0-0-1-1-0 — 570 of 597 admitted channels compared EQUAL to the <path> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0-1-1-0 — 4 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0-1-1-0 — 367 channel(s) EQUAL to the <path> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <input> — span control used (part autocomplete-input)",
+    "ua-control-fallback: no UA baseline for <input> — span UA control used (part autocomplete-input)",
+    "control-equal-drop: autocomplete-input — 567 of 597 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: autocomplete-input — 14 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: autocomplete-input — 364 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: autocomplete-endadornment — 570 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: autocomplete-endadornment — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
     "translate-door-generalized: autocomplete-endadornment — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-equal-drop: autocomplete-endadornment — 367 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: autocomplete-clearindicator — 544 of 597 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: autocomplete-clearindicator — 1 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: autocomplete-clearindicator — 341 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon-3)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon-3)",
+    "control-equal-drop: icon-3 — 568 of 597 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon-3 — 2 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: icon-3 — 365 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <path> — span control used (part part-0-0-3-0-0-0)",
+    "ua-control-fallback: no UA baseline for <path> — span UA control used (part part-0-0-3-0-0-0)",
+    "control-equal-drop: part-0-0-3-0-0-0 — 571 of 597 admitted channels compared EQUAL to the <path> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0-3-0-0-0 — 2 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0-3-0-0-0 — 368 channel(s) EQUAL to the <path> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: autocomplete-popupindicator — 545 of 597 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: autocomplete-popupindicator — 1 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: autocomplete-popupindicator — 342 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <svg> — span control used (part icon-4)",
+    "ua-control-fallback: no UA baseline for <svg> — span UA control used (part icon-4)",
+    "control-equal-drop: icon-4 — 569 of 597 admitted channels compared EQUAL to the <svg> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: icon-4 — 3 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: icon-4 — 366 channel(s) EQUAL to the <svg> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <path> — span control used (part part-0-0-3-1-0-0)",
+    "ua-control-fallback: no UA baseline for <path> — span UA control used (part part-0-0-3-1-0-0)",
+    "control-equal-drop: part-0-0-3-1-0-0 — 572 of 597 admitted channels compared EQUAL to the <path> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0-3-1-0-0 — 2 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0-3-1-0-0 — 369 channel(s) EQUAL to the <path> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <fieldset> — span control used (part outlinedinput-notchedoutline)",
+    "ua-control-fallback: no UA baseline for <fieldset> — span UA control used (part outlinedinput-notchedoutline)",
+    "control-equal-drop: outlinedinput-notchedoutline — 553 of 597 admitted channels compared EQUAL to the <fieldset> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: outlinedinput-notchedoutline — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: outlinedinput-notchedoutline — 350 channel(s) EQUAL to the <fieldset> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <legend> — span control used (part part-0-0-4-0)",
-    "text-part-typography-carried: label-3 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "webkit-prefixed-channels-refused: 6 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (autocomplete-clearindicator, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2); -webkit-box-flex (autocomplete-input); -webkit-box-pack (autocomplete-clearindicator, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2); -webkit-tap-highlight-color (autocomplete-clearindicator, autocomplete-input, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, icon, icon-2, icon-3, icon-4, label, label-2, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0); -webkit-text-fill-color (autocomplete-clearindicator, autocomplete-endadornment, autocomplete-input, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, icon, icon-2, icon-3, icon-4, label, label-2, label-3, outlinedinput-notchedoutline, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0, part-0-0-4-0); -webkit-text-stroke-color (autocomplete-clearindicator, autocomplete-endadornment, autocomplete-input, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, icon, icon-2, icon-3, icon-4, label, label-2, label-3, outlinedinput-notchedoutline, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0, part-0-0-4-0)",
+    "ua-control-fallback: no UA baseline for <legend> — span UA control used (part part-0-0-4-0)",
+    "control-equal-drop: part-0-0-4-0 — 568 of 597 admitted channels compared EQUAL to the <legend> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0-4-0 — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0-4-0 — 365 channel(s) EQUAL to the <legend> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-3 — 573 of 595 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-3 — 15 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); caret-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); font-family=Roboto, Helvetica, Arial, sans-serif (in-page control also read Roboto, Helvetica, Arial, sans-serif; UA control reads Times); letter-spacing=0.15008px (in-page control also read 0.15008px; UA control reads normal); outline-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(0, 0, 0, 0.87) (in-page control also read rgba(0, 0, 0, 0.87); UA control reads rgba(0, 0, 0, 1)); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-3 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-3 — 368 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: autocomplete-clearindicator — block-size 28px, inline-size 28px, perspective-origin 14px 14px, transform-origin 14px 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: autocomplete-endadornment — block-size 28px, inline-size 52px, perspective-origin 26px 14px, transform-origin 26px 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: autocomplete-input — block-size 23px, inline-size 42.1406px, perspective-origin 25.5625px 19px, transform-origin 25.5703px 19px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: autocomplete-inputroot — block-size 56px, inline-size 288px, perspective-origin 144px 28px, transform-origin 144px 28px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: autocomplete-popupindicator — block-size 28px, inline-size 28px, perspective-origin 14px 14px, transform-origin 14px 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: autocomplete-tag — block-size 32px, inline-size 78.9375px, perspective-origin 39.4688px 16px, transform-origin 39.4688px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: autocomplete-tag-2 — block-size 32px, inline-size 71.9219px, perspective-origin 35.9531px 16px, transform-origin 35.9609px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: formcontrol-fullwidth — block-size 56px, inline-size 288px, perspective-origin 144px 28px, transform-origin 144px 28px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon — block-size 22px, inline-size 22px, perspective-origin 11px 11px, transform-origin 11px 11px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-2 — block-size 22px, inline-size 22px, perspective-origin 11px 11px, transform-origin 11px 11px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-3 — block-size 20px, inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-4 — block-size 24px, inline-size 24px, perspective-origin 12px 12px, transform-origin 12px 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 19.5px, height 19.5px, inline-size 57.9375px, perspective-origin 28.9688px 9.75px, transform-origin 28.9688px 9.75px, width 57.9375px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 19.5px, height 19.5px, inline-size 50.9219px, perspective-origin 25.4531px 9.75px, transform-origin 25.4609px 9.75px, width 50.9219px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-3 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: outlinedinput-notchedoutline — block-size 61px, inline-size 288px, perspective-origin 144px 30.5px, transform-origin 144px 30.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-0-1-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-1-1-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-3-0-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-3-1-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-4-0 — block-size 11px, inline-size 0px, perspective-origin 0px 5.5px, transform-origin 0px 5.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 56px, inline-size 288px, perspective-origin 144px 28px, transform-origin 144px 28px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 7 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (autocomplete-clearindicator, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2); -webkit-box-flex (autocomplete-input); -webkit-box-pack (autocomplete-clearindicator, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2); -webkit-font-smoothing (autocomplete-clearindicator, autocomplete-endadornment, autocomplete-input, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, formcontrol-fullwidth, icon, icon-2, icon-3, icon-4, label, label-2, label-3, outlinedinput-notchedoutline, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0, part-0-0-4-0, root); -webkit-tap-highlight-color (autocomplete-clearindicator, autocomplete-input, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, icon, icon-2, icon-3, icon-4, label, label-2, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0); -webkit-text-fill-color (autocomplete-clearindicator, autocomplete-endadornment, autocomplete-input, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, formcontrol-fullwidth, icon, icon-2, icon-3, icon-4, label, label-2, label-3, outlinedinput-notchedoutline, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0, part-0-0-4-0, root); -webkit-text-stroke-color (autocomplete-clearindicator, autocomplete-endadornment, autocomplete-input, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, formcontrol-fullwidth, icon, icon-2, icon-3, icon-4, label, label-2, label-3, outlinedinput-notchedoutline, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0, part-0-0-4-0, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
-    "orphan-mint-refused: autocomplete-clearindicator was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 52 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
-    "inheritance-check-rejected: autocomplete-inputroot.caret-color — values track ancestor \"formcontrol-fullwidth\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: autocomplete-inputroot.color — values track ancestor \"formcontrol-fullwidth\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: autocomplete-inputroot.letter-spacing — values track ancestor \"formcontrol-fullwidth\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: autocomplete-inputroot.line-height — values track ancestor \"formcontrol-fullwidth\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "orphan-mint-refused: autocomplete-clearindicator was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 53 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
     "inheritance-check-rejected: autocomplete-popupindicator.font-size — values track ancestor \"autocomplete-endadornment\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: autocomplete-tag-2.font-size — values track ancestor \"autocomplete-inputroot\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: autocomplete-tag.font-size — values track ancestor \"autocomplete-inputroot\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -2856,12 +3238,19 @@
     "inheritance-only: autocomplete-input.color equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-input.letter-spacing equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-input.line-height equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: autocomplete-inputroot.caret-color equals ancestor \"formcontrol-fullwidth\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: autocomplete-inputroot.color equals ancestor \"formcontrol-fullwidth\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: autocomplete-inputroot.letter-spacing equals ancestor \"formcontrol-fullwidth\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-tag-2.caret-color equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-tag-2.color equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-tag-2.letter-spacing equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-tag.caret-color equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-tag.color equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: autocomplete-tag.letter-spacing equals ancestor \"autocomplete-inputroot\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: formcontrol-fullwidth.caret-color equals ancestor \"root\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: formcontrol-fullwidth.color equals ancestor \"root\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: formcontrol-fullwidth.letter-spacing equals ancestor \"root\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: formcontrol-fullwidth.line-height equals ancestor \"root\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: icon-2.letter-spacing equals ancestor \"autocomplete-tag-2\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: icon.letter-spacing equals ancestor \"autocomplete-tag\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: label-2.caret-color equals ancestor \"autocomplete-tag-2\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
@@ -2887,31 +3276,7 @@
     "inheritance-only: part-0-0-4-0.letter-spacing equals ancestor \"outlinedinput-notchedoutline\" on all 8 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
-    "closed-shadow-root-suspected: Autocomplete:medium__active>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__active>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__active>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__default>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__default>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__default>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__focus-visible>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__focus-visible>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__focus-visible>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__hover>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__hover>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:medium__hover>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__active>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__active>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__active>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 13x13 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__default>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__default>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__default>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 13x13 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__focus-visible>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__focus-visible>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__focus-visible>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 13x13 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__hover>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__hover>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Autocomplete:small__hover>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 13x13 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-limit: 24 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
     "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
     "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
     "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
@@ -3035,13 +3400,21 @@
       "autocomplete-icon-2"
     ],
     "receipts": [
+      "svg-currentcolor-folded: Autocomplete.icon@small — the glyph's authored fill rgba(0, 0, 0, 0.26) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.26)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-bumped: Autocomplete.icon@small — computed size 16 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-currentcolor-folded: Autocomplete.icon@medium — the glyph's authored fill rgba(0, 0, 0, 0.26) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.26)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Autocomplete.icon@medium — 0 0 22 22 from computed size 22×22 (path extent 22.0; viewBox is not a computed style — named reconstruction)",
+      "svg-currentcolor-folded: Autocomplete.icon-2@small — the glyph's authored fill rgba(0, 0, 0, 0.26) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.26)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-bumped: Autocomplete.icon-2@small — computed size 16 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-currentcolor-folded: Autocomplete.icon-2@medium — the glyph's authored fill rgba(0, 0, 0, 0.26) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.26)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Autocomplete.icon-2@medium — 0 0 22 22 from computed size 22×22 (path extent 22.0; viewBox is not a computed style — named reconstruction)",
+      "svg-currentcolor-folded: Autocomplete.autocomplete-clearindicator@small — the glyph's authored fill rgba(0, 0, 0, 0.54) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.54)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Autocomplete.autocomplete-clearindicator@small — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-currentcolor-folded: Autocomplete.autocomplete-clearindicator@medium — the glyph's authored fill rgba(0, 0, 0, 0.54) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.54)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Autocomplete.autocomplete-clearindicator@medium — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-currentcolor-folded: Autocomplete.autocomplete-popupindicator@small — the glyph's authored fill rgba(0, 0, 0, 0.54) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.54)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Autocomplete.autocomplete-popupindicator@small — 0 0 24 24 from computed size 24×24 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
+      "svg-currentcolor-folded: Autocomplete.autocomplete-popupindicator@medium — the glyph's authored fill rgba(0, 0, 0, 0.54) EQUALS the svg's inherited `color` (rgba(0, 0, 0, 0.54)) and is rewritten to currentColor, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting `color` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.",
       "svg-viewbox-reconstructed: Autocomplete.autocomplete-popupindicator@medium — 0 0 24 24 from computed size 24×24 (path extent 17.0; viewBox is not a computed style — named reconstruction)",
       "literal-text-carried: label = \"Alpha\" (no text prop sample matches — the mounted value is carried verbatim)",
       "aspect-carried: icon computed width == height in every enabled combo (16/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
@@ -3055,15 +3428,20 @@
     ]
   },
   "enrichmentNotes": [
-    "layout enriched: autocomplete-inputroot.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: formcontrol-fullwidth.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-inputroot.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-inputroot.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-tag.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-tag.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-tag-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-tag-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-popupindicator.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-popupindicator.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: autocomplete-input.layout.grow = true (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: formcontrol-fullwidth.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: formcontrol-fullwidth.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: formcontrol-fullwidth.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-inputroot.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: autocomplete-inputroot.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -3079,17 +3457,19 @@
     "declared fact carried: autocomplete-tag.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-tag.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-tag.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -3105,17 +3485,19 @@
     "declared fact carried: autocomplete-tag-2.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-tag-2.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-tag-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: icon-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-2.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-2.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-2.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-2.transition-property = fill (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -3124,9 +3506,10 @@
     "declared fact carried: autocomplete-input.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-input.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-input.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: autocomplete-input.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: autocomplete-input.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: autocomplete-input.overflow-x = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-input.overflow-y = clip (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: autocomplete-input.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: autocomplete-endadornment.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: autocomplete-endadornment.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: autocomplete-endadornment.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: autocomplete-endadornment.transform = matrix(1, 0, 0, 1, 0, -14) (v15 declared vocabulary — canvas-drawable)",
@@ -3145,21 +3528,24 @@
     "declared fact carried: outlinedinput-notchedoutline.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: outlinedinput-notchedoutline.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: outlinedinput-notchedoutline.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: outlinedinput-notchedoutline.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: outlinedinput-notchedoutline.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: outlinedinput-notchedoutline.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: outlinedinput-notchedoutline.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: outlinedinput-notchedoutline.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: outlinedinput-notchedoutline.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: outlinedinput-notchedoutline.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: outlinedinput-notchedoutline.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-4-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0-4-0.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-4-0.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-0-0-4-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0-0-4-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-4-0.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0-4-0.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0-4-0.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-4-0.text-align = left (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0-4-0.transition-duration = 0.15s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-4-0.transition-property = width (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-4-0.transition-timing-function = cubic-bezier(0, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-3.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
