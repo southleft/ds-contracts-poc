@@ -11,7 +11,16 @@
 > It is proven for **all thirteen archetypes** and on **libraries it was
 > never taught**, and every number below is from a gate run on `main`.
 > Product **v1 is not complete**: the plugin's paste verb has been exercised by a person exactly once (the Chakra switch, 2 September) — though every proposed row's paste-verb program now scores identically to its gate row when run the way the plugin runs it (39 of 39) — and
-> the capture step needs a config entry a person writes. The older
+> the capture step needs a config entry, and as of 2026-09-04 that entry can be
+> DRAFTED rather than written: `extract/computed/draft-config.ts --write` derives
+> the name, import, contract path and both axes from the contract seed and names
+> the rest for a person, refusing composition, portals and host plumbing by name.
+> Scored against all 166 committed entries it never CONTRADICTS the author: axes
+> exact on 162 and a superset on 4 (it proposes every enum prop; the author kept
+> fewer), sample text exact or agreed-empty on 111 and never differing. `differs`
+> is 0 on both — which is not the same as identical, and the exam prints the four. Fluent's MessageBar is the first entry
+> it wrote: two fields derived, seven named, a person added the composition and the
+> glyph viewBox. The older
 > universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
 > ships and is described further down this page; it is not the v1 proof.
 
@@ -28,8 +37,9 @@ That sentence is the v1 criterion. Today it reads like this:
 ```bash
 # 1. Capture: a real Chromium mounts every prop combination of your real
 #    component and reads the browser's computed styles, twice, and refuses
-#    if the two sweeps disagree. The config entry is the one input a person
-#    writes (it makes the capture, so it cannot be read from one).
+#    if the two sweeps disagree. The config entry still cannot be read from a
+#    capture — it MAKES the capture — but it can be drafted from the contract
+#    seed (draft-config.ts --write) and reviewed, rather than written blank.
 npm run extract:computed -- --harness <your sandbox> \
   --config extract/computed/configs/<lib>.json --component Switch \
   --out extract/computed/out/<lib> --keep-originals
