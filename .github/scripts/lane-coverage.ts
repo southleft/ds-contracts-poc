@@ -113,6 +113,8 @@ const EXCLUDED: Record<string, string> = {
   // v6's bytes are still held by recipe:pivot-status:check, as they always were.
   "root:recipe:fidelity:plugin:proof":
     "LIVE: mints every proposed row's plugin-target program in Scratch through the Figma bridge and exports the cells — needs the desktop plugin. Its offline half, recipe:fidelity:plugin:check, re-scores the committed -plugin shots and IS laned (fast).",
+  "root:broker:request":
+    "LIVE OPERATOR HAND: performs exactly one signed broker request (table/combobox/calendar/input-field live protocols) through the pinned Figma tool. It writes nothing to the repository and cannot run in CI, which has no Figma bridge; the protocols' own generated:check and authorization gates are laned.",
   "root:sync:spine":
     "The live drift spine: needs the FIGMA_TOKEN secret + network (Figma REST) and, with --open-pr, an " +
     "authenticated gh — none of which belong in a PR gate, and its red means 'a drifted row has no " +
