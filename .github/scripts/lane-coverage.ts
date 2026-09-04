@@ -212,8 +212,8 @@ const RETIRED_LIVE_LINEAGES: Array<{
     archetype: "table",
     scriptPrefix: "recipe:table:live:v",
     testPrefixes: [/^recipe\/table-live-v(\d+)-[a-z-]+\.test\.ts$/],
-    retired: (v) => v <= 36,
-    current: "recipe:table:live:v37:check",
+    retired: (v) => v <= 37,
+    current: "recipe:table:live:v38:check",
   },
   {
     archetype: "combobox",
