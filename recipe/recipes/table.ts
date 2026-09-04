@@ -509,7 +509,11 @@ const cellComponent = (
     bind("strokes.0.paint.color", instance.tokens.cellRule),
     bind("strokes.0.weight", instance.tokens.cellRuleWidth),
     ...(ruleSides
-      ? (["top", "right", "bottom", "left"] as const).map((side) => bind(`strokes.0.sideWeights.${side}`, ruleSides[side]))
+      // The established per-side binding path: recipe/scene-readback-table-v1.ts
+      // has mapped Figma's strokeTopWeight… to strokes.0.weight.<side> since v25,
+      // and figma-ir.ts's FLOAT path already admitted it. The IR FIELD stays
+      // `sideWeights` because `weight` holds a number and cannot carry keys.
+      ? (["top", "right", "bottom", "left"] as const).map((side) => bind(`strokes.0.weight.${side}`, ruleSides[side]))
       : []),
   ];
   return {
@@ -1346,7 +1350,7 @@ export function collapseTableRecipe(
             cellRuleSides: Object.fromEntries(
               (["top", "right", "bottom", "left"] as const).map((side) => [
                 side,
-                numberFrom(comfortableCell, `strokes.0.sideWeights.${side}`, comfortableCell.strokes![0]!.sideWeights![side]),
+                numberFrom(comfortableCell, `strokes.0.weight.${side}`, comfortableCell.strokes![0]!.sideWeights![side]),
               ]),
             ) as TableRecipeInstance["tokens"]["cellRuleSides"],
           }

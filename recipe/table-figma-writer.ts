@@ -119,8 +119,18 @@ const walk = (node: IRNode, visit: (candidate: IRNode) => void): void => {
   }
 };
 
+/**
+ * `strokes.N.weight.<side>` is the repository's binding ADDRESS for a per-side
+ * stroke weight — scene-readback-table-v1.ts maps Figma's strokeTopWeight… to
+ * it, and figma-ir.ts admits it as FLOAT. The IR holds the value under
+ * `strokes.N.sideWeights.<side>`, because `weight` is a number and cannot
+ * carry keys. This rewrites the address to the field so a binding resolves.
+ */
+const resolvePath = (field: string): string =>
+  field.replace(/^(strokes\.\d+)\.weight\.(top|right|bottom|left)$/, "$1.sideWeights.$2");
+
 const atPath = (value: unknown, field: string): unknown =>
-  field.split(".").reduce<unknown>((current, part) => {
+  resolvePath(field).split(".").reduce<unknown>((current, part) => {
     if (current === null || typeof current !== "object") return undefined;
     const key = /^\d+$/.test(part) ? Number(part) : part;
     return (current as Record<string | number, unknown>)[key];
@@ -592,7 +602,7 @@ for(const source of PLAN.sources){
       if(ir.strokes[0]){
         node.strokeWeight=ir.strokes[0].weight;node.strokeAlign=ir.strokes[0].align.toUpperCase();
         bindFloat(node,"strokeWeight",bindingFor(ir,"strokes.0.weight"));
-        if(ir.strokes[0].sideWeights){const sw=ir.strokes[0].sideWeights;for(const [side,prop] of [["top","strokeTopWeight"],["right","strokeRightWeight"],["bottom","strokeBottomWeight"],["left","strokeLeftWeight"]]){node[prop]=sw[side];bindFloat(node,prop,bindingFor(ir,"strokes.0.sideWeights."+side));}}
+        if(ir.strokes[0].sideWeights){const sw=ir.strokes[0].sideWeights;for(const [side,prop] of [["top","strokeTopWeight"],["right","strokeRightWeight"],["bottom","strokeBottomWeight"],["left","strokeLeftWeight"]]){node[prop]=sw[side];bindFloat(node,prop,bindingFor(ir,"strokes.0.weight."+side));}}
       }
     }
     if(ir.cornerRadius){

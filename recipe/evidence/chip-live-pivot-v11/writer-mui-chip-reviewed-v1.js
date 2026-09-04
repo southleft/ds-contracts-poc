@@ -180,7 +180,7 @@ for(const source of PLAN.sources){
         // Per-side weights when the IR carries them (a source that draws one
         // edge — MUI's table cell bottom rule). Figma requires the uniform
         // strokeWeight first; these then override per side.
-        if(ir.strokes[0].sideWeights){const sw=ir.strokes[0].sideWeights;for(const [side,prop] of [["top","strokeTopWeight"],["right","strokeRightWeight"],["bottom","strokeBottomWeight"],["left","strokeLeftWeight"]]){node[prop]=sw[side];bindFloat(node,prop,bindingFor(ir,"strokes.0.sideWeights."+side));}}
+        if(ir.strokes[0].sideWeights){const sw=ir.strokes[0].sideWeights;for(const [side,prop] of [["top","strokeTopWeight"],["right","strokeRightWeight"],["bottom","strokeBottomWeight"],["left","strokeLeftWeight"]]){node[prop]=sw[side];bindFloat(node,prop,bindingFor(ir,"strokes.0.weight."+side));}}
         if(ir.strokes[0].dashPattern)node.dashPattern=ir.strokes[0].dashPattern;
         bindFloat(node,"strokeWeight",bindingFor(ir,"strokes.0.weight"));
       }

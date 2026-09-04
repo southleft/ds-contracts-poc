@@ -337,7 +337,7 @@ export type TypeFacts = z.infer<typeof TypeFactsSchema>;
 const COLOR_BINDING_PATH =
   /^(?:fills\.\d+\.color|strokes\.\d+\.paint\.color|effects\.\d+\.color)$/;
 const FLOAT_BINDING_PATH =
-  /^(?:width\.value|height\.value|layout\.(?:itemSpacing|minWidth|minHeight|width\.value|height\.value|padding\.(?:top|right|bottom|left))|cornerRadius\.(?:topLeft|topRight|bottomRight|bottomLeft)|strokes\.\d+\.(?:weight(?:\.(?:top|right|bottom|left))?|sideWeights\.(?:top|right|bottom|left))|type\.(?:fontSize|lineHeight\.value|letterSpacing\.value))$/;
+  /^(?:width\.value|height\.value|layout\.(?:itemSpacing|minWidth|minHeight|width\.value|height\.value|padding\.(?:top|right|bottom|left))|cornerRadius\.(?:topLeft|topRight|bottomRight|bottomLeft)|strokes\.\d+\.weight(?:\.(?:top|right|bottom|left))?|type\.(?:fontSize|lineHeight\.value|letterSpacing\.value))$/;
 const STRING_BINDING_PATH = /^(?:characters|type\.(?:fontFamily|fontStyle))$/;
 const BOOLEAN_BINDING_PATH = /^(?:clipsContent|visible)$/;
 
