@@ -102,3 +102,4 @@ evals/.ci/
 extract/computed/.drift-remeasure/
 # diagnose report: carries an absolute path + a clock-measured age; rewritten on every run
 extract/out/diagnose-report.json
+evals/.carried/

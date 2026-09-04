@@ -22,9 +22,9 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 127 components came out with a measured floor:
-**86.4% mean computed-style equality** against the original npm package rendering in the same pinned
-Chromium, exact string comparison with no tolerance, over 749,393 compared style cells
-(60 of 127 components at ≥90%, 99 of 127 at ≥80%).
+**86.5% mean computed-style equality** against the original npm package rendering in the same pinned
+Chromium, exact string comparison with no tolerance, over 752,625 compared style cells
+(61 of 128 components at ≥90%, 100 of 128 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every

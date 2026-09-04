@@ -255,11 +255,14 @@ jobs:
       # The suite MEASURES into a scratch record (evals/.ci/ is gitignored) and
       # the next step compares it row-by-row against the committed
       # evals/results.json — CI's number and the committed number must be the
-      # same number, named per case when they are not. `npm run eval` keeps its
-      # exit-code semantics: any red case is still a red step on its own.
-      - name: eval (the full deterministic suite, recorded to a scratch path)
+      # same number, named per case when they are not. The step runs the suite
+      # through eval:carried:check, so a red case fails it UNLESS
+      # parity/receipts/v1/eval-reds.json already names that case with a
+      # measured cause and a stated closing condition — and an unnamed red, or
+      # a named row whose case has gone green, still fails the step.
+      - name: eval (the full deterministic suite, recorded to a scratch path, reds carried by name)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: mkdir -p evals/.ci && npm run eval -- --record evals/.ci/results.json
+        run: mkdir -p evals/.ci && npm run eval:carried:check -- --record evals/.ci/results.json
       - name: eval record compare (CI's measurement vs the committed evals/results.json, row by row)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: node scripts/eval-record-check.mjs evals/.ci/results.json

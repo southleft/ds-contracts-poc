@@ -338,6 +338,7 @@
     "maintain:visual": "npm run extract:figma:visual:catalog",
     "maintain:all": "npm run maintain && npm run maintain:visual",
     "eval:record:check": "node scripts/eval-record-check.mjs",
+    "eval:carried:check": "node scripts/eval-carried-check.mjs",
     "schema:fresh": "tsx scripts/schema-fresh-check.ts",
     "contracts:migrate": "tsx packages/cli/src/cli.ts migrate . --quiet",
     "contracts:migrate:check": "tsx packages/cli/src/cli.ts migrate . --check --quiet",

@@ -82,6 +82,13 @@ const parseComposite = (body: string): string[] | null => {
  * deliberate act; the checks in this file make sure the entry stays true.
  */
 const EXCLUDED: Record<string, string> = {
+  // The suite itself is no longer wired into a lane BY THIS NAME. The full lane
+  // runs `eval:carried:check`, which runs every case (no --only, no skips) into
+  // the same scratch record and then applies the named-red rule to what THAT run
+  // measured. Wiring `eval` in beside it would run the 15-minute suite twice for
+  // one measurement. The gate that reads the record row-by-row against the
+  // committed one, `eval:record:check`, is wired into the fast lane unchanged.
+  "root:eval": "run by the full lane through eval:carried:check, which records to the same path; wiring it separately would run the suite twice",
   // These three `--check` scripts are NOT checks. Every build-*-live-proof-vN.ts
   // writes its evidence unconditionally at module level and then, under
   // --check, appends assertions; there is no read-only mode. For ten archetypes
