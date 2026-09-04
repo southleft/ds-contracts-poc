@@ -142,6 +142,26 @@ belongs at the release commit, which does not exist yet.
 **Only you can do this.** Both branches are a deployment or a published-artifact
 decision.
 
+**The lane, measured 2026-09-04.** `deploy-check` is the one CI lane in this
+repository that has never been green: **31 of its last 31 runs are failures**,
+and that is BY CONSTRUCTION, not neglect. On HEAD it names three stale surfaces:
+
+  · plugin zip — live 942,148 B (`af19cc985469…`) vs local build 1,117,430 B
+  · playground — the live index references different hashed asset bundles
+  · spec site — `/get-started/` live 40,276 B vs local 41,936 B
+
+Its remedy line is `npm run deploy`, which publishes both Cloudflare Pages
+projects. That is an outward-facing publication and a recorded human approval
+(`V1-REL-02`); I have not run it and will not. The readiness tally reaches 24/24
+because `--pre-release` defers the post-publish rows, which is exactly what that
+flag is for — the number is honest about deferring this, not silent about it.
+
+What IS green is the honesty guard this disposition chose instead:
+`npm run deploy:pin:check` passes on HEAD — the hosted zip still carries the
+pinned engine, 716,887 B, `e2eea33783b9…`, exactly as docs/00 states beside the
+download. So the page does not lie about what a reader gets; the artifact is
+simply older than the tree, and says so.
+
 **Disposition — 2026-09-03: option 2, the engine pinned on the page.** The
 owner endorsed the recommendation. Fetched that day, the hosted zip is
 942,148 bytes (sha256 af19cc985469…) and its `ui.html` carries a plugin
