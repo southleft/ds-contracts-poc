@@ -103,6 +103,18 @@ export function draftConfigEntry(contractRel: string): ConfigDraft {
   }
   if (axes.length === 0) refused.push({ field: "axes", why: "the contract names no enum prop — an axis here would be invented" });
 
+  // The words the component shows. Measured over the 165 committed entries:
+  // 36 contracts offer a children/label/text default; 21 authors used it
+  // verbatim, 15 left sampleText empty, and NONE chose different words. So
+  // proposing it never contradicts the corpus — it is taken or deliberately
+  // dropped, which is the person's call to make on a draft.
+  const textProp = ["children", "label", "text"]
+    .map((name) => props.find((p) => p.name === name))
+    .find((p) => p !== undefined && typeof p.default === "string" && p.default.trim().length > 0);
+  const sampleText = textProp ? String(textProp.default) : "";
+  if (textProp) derived.push({ field: "sampleText", value: sampleText, from: `contract prop "${textProp.name}" defaults to ${JSON.stringify(sampleText)}` });
+  else refused.push({ field: "sampleText", why: "the contract offers no children/label/text default; if this component shows words, they are yours to choose" });
+
   const disabled = props.find((p) => isBoolean(p) && /^(is)?disabled$/i.test(p.name));
   const stateProps = disabled ? [{ prop: disabled.name, state: "disabled" }] : undefined;
   if (disabled) derived.push({ field: "stateProps", value: `${disabled.name} → disabled`, from: `contract prop "${disabled.name}" is boolean` });
@@ -126,7 +138,7 @@ export function draftConfigEntry(contractRel: string): ConfigDraft {
       name,
       importName: name,
       contract: path.relative(ROOT, abs),
-      sampleText: "",
+      sampleText,
       axes,
       ...(stateProps ? { stateProps } : {}),
       ...(Object.keys(fixedProps).length > 0 ? { fixedProps } : {}),
@@ -144,6 +156,7 @@ interface ExamRow {
   axesCommitted: string[];
   /** `draft-refused` = the committed entry names a prop the contract does not describe, so the draft refused it by name rather than guessing. That is the drafter working, not disagreeing. */
   stateProps: "exact" | "draft-refused" | "draft-superset" | "differs" | "both-absent";
+  sampleText: "exact" | "draft-superset" | "draft-refused" | "differs" | "both-empty";
 }
 
 /** Re-derive every committed entry and report agreement field by field. */
@@ -189,6 +202,14 @@ export function examConfigDrafter(): { rows: ExamRow[]; summary: Record<string, 
         axes: axesVerdict,
         axesDraft: draftAxes,
         axesCommitted: committedAxes,
+        sampleText: (() => {
+          const committedText = typeof committed.sampleText === "string" ? committed.sampleText : "";
+          const draftText = draft.entry.sampleText;
+          if (committedText === draftText) return committedText === "" ? ("both-empty" as const) : ("exact" as const);
+          if (draftText !== "" && committedText === "") return "draft-superset" as const;
+          if (draftText === "" && committedText !== "") return "draft-refused" as const;
+          return "differs" as const;
+        })(),
         stateProps:
           committedState === null && draftState === null
             ? "both-absent"
@@ -205,6 +226,7 @@ export function examConfigDrafter(): { rows: ExamRow[]; summary: Record<string, 
   const summary: Record<string, number> = { entries: rows.length };
   for (const key of ["exact", "subset", "differs"] as const) summary[`axes:${key}`] = rows.filter((r) => r.axes === key).length;
   for (const key of ["exact", "draft-refused", "draft-superset", "differs", "both-absent"] as const) summary[`stateProps:${key}`] = rows.filter((r) => r.stateProps === key).length;
+  for (const key of ["exact", "draft-superset", "draft-refused", "differs", "both-empty"] as const) summary[`sampleText:${key}`] = rows.filter((r) => r.sampleText === key).length;
   return { rows, summary };
 }
 
@@ -221,11 +243,15 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
     for (const r of rows.filter((row) => row.stateProps === "differs")) {
       console.log(`  state   differs ${r.library}/${r.name}`);
     }
+    for (const r of rows.filter((row) => row.sampleText === "differs")) {
+      console.log(`  text    differs ${r.library}/${r.name}`);
+    }
     console.log(`\nconfig drafter exam — ${summary.entries} committed entries`);
     console.log(`  axes        exact ${summary["axes:exact"]} · superset of the committed choice ${summary["axes:subset"]} · differs ${summary["axes:differs"]}`);
     console.log(`  stateProps  exact ${summary["stateProps:exact"]} · both absent ${summary["stateProps:both-absent"]} · refused by the draft, the prop is not in the contract ${summary["stateProps:draft-refused"]} · proposed where the author captured no state plane ${summary["stateProps:draft-superset"]} · differs ${summary["stateProps:differs"]}`);
+    console.log(`  sampleText  exact ${summary["sampleText:exact"]} · both empty ${summary["sampleText:both-empty"]} · proposed where the author left it empty ${summary["sampleText:draft-superset"]} · refused, the contract states no words ${summary["sampleText:draft-refused"]} · differs ${summary["sampleText:differs"]}`);
     console.log("  A `superset` row is the draft proposing MORE than the author kept — every enum prop as an axis, a state plane wherever the contract has a disabled boolean. That is the draft's job: it names the candidate and the person narrows it. `differs` would be a derivation the corpus contradicts, and there are none.");
-    process.exit(summary["axes:differs"]! > 0 || summary["stateProps:differs"]! > 0 ? 1 : 0);
+    process.exit(summary["axes:differs"]! > 0 || summary["stateProps:differs"]! > 0 || summary["sampleText:differs"]! > 0 ? 1 : 0);
   }
   const contract = arg("contract");
   if (!contract) throw new Error("usage: --contract <path to a *.contract.json>   |   --exam");

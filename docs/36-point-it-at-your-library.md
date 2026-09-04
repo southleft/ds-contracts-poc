@@ -246,8 +246,13 @@ refuses the rest by name. Measured against every entry the repository has
 
     165 committed entries · axes exact 161, superset 4, differs 0
                            · state planes exact 30, refused 26, superset 9, differs 0
+                           · sample text exact 21, refused 40, superset 15, differs 0
 
-Not one derivation the corpus contradicts. The draft proposes MORE than an
+Not one derivation the corpus contradicts. The words a component shows are
+part of that: 36 contracts state a `children`/`label`/`text` default, 21
+authors used it verbatim and 15 deliberately left the field empty, and **none
+chose different words** — so the draft proposes what the contract states and
+names it, rather than inventing a phrase. The draft proposes MORE than an
 author kept — every enum prop as an axis, a state plane wherever the contract
 has a disabled boolean — which is the point: it names the candidates and the
 person narrows them. What it never guesses is the composition (`childrenSpec`),
