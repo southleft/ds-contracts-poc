@@ -110,7 +110,7 @@ See also
 ## Human approvals
 
 - [ ] Exact release commit approved — owner/date:
-- [ ] Signed RC tag approved — owner/date:
+- [x] Signed RC tag approved — owner/date: **disposition, TJ Pitre, 2026-09-03** — the premature `v1.0.0-rc.1` tag (34d92c08, unsigned, 1,054 commits behind, before the recipe pivot) was DELETED on origin and locally under the owner's authorisation; no RC tag exists until there is a release commit to sign. Guard: `npm run release-tag:check`.
 - [ ] GitHub prerelease approved — owner/date:
 - [ ] npm schema publication approved — owner/date:
 - [ ] npm emitter publication approved — owner/date:

@@ -298,6 +298,8 @@
     "playground:flow-check": "tsx playground/scripts/flow-check.ts",
     "deploy": "node scripts/deploy.mjs",
     "deploy:check": "node scripts/deploy-check.mjs",
+    "deploy:pin:check": "node scripts/deploy-pin-check.mjs",
+    "release-tag:check": "node scripts/release-tag-check.mjs",
     "verify:catalog": "node scripts/verify-catalog-shards.mjs",
     "adherence:aggregate": "tsx evals/adherence/aggregate.ts",
     "extract:code": "tsx extract/run.ts code",

@@ -289,6 +289,8 @@ interface Case {
   id: string;
   claim: 'C1-determinism' | 'C2-refusal' | 'C3-detection' | 'C4-convergence' | 'C5-extraction' | 'C6-theming' | 'C7-cli' | 'C8-journey';
   run: () => void; // throws on failure
+  /** 'archive': a case of the older universal-contract path (capture-path propose/promote, the canvas-drift probe). It still runs and is recorded, but it gates the ARCHIVE path only — v1 does not ship that path (audit decision 4, endorsed 2026-09-01; owner decision 2026-09-03). Absent = the v1 path. */
+  path?: 'archive';
 }
 
 const BTN_TSX = 'src/components/Button/Button.tsx';
@@ -910,6 +912,7 @@ const cases: Case[] = [
     // rules the referee was missing: prefix match, orphan sweep, and the
     // report recording what design input it read.
     id: 'shoelace-diagnose-prefix-match',
+    path: 'archive',
     claim: 'C5-extraction',
     run: () => {
       const CFG = 'extract/pilots/shoelace/extract.config.json';
@@ -6117,6 +6120,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // and it refuses at HEAD on a stale ledger row, task #43). Both keep their
     // own scripts, and that is a stated limit rather than a silent one.
     id: 'promote-generalization',
+    path: 'archive',
     claim: 'C1-determinism',
     run: () => {
       const tmp = path.join(SCRATCH, '.promote-generalization');
@@ -7543,6 +7547,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // but the id asserted here has to be the live one or this pin tests a row
     // that cannot exist.
     id: 'astryx-reanchor-minted',
+    path: 'archive',
     claim: 'C1-determinism',
     run: () => {
       cpSync(path.join(ROOT, 'examples', 'astryx'), path.join(SCRATCH, 'examples', 'astryx'), {
@@ -10038,6 +10043,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     //      reference set in the other direction. Not done in this round; the
     //      count is RATCHETED here instead of going unrecorded.
     id: 'minted-leaves-bind-to-something',
+    path: 'archive',
     claim: 'C2-refusal',
     run: () => {
       const isLeaf = (v: unknown): v is { $value: unknown } => !!v && typeof v === 'object' && '$value' in (v as object);
@@ -10452,6 +10458,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // are the measured outcome, so a canvas that silently re-syncs (or a fresh
     // one that rots) fails BY NAME rather than sliding under one lane's shape.
     id: 'console-loop-canvas-drift-probe',
+    path: 'archive',
     claim: 'C3-detection',
     run: () => {
       const CL = path.join(ROOT, 'parity/receipts/console-loop');
@@ -12816,21 +12823,28 @@ if (process.argv.includes('--list-ids')) {
   process.exit(0);
 }
 
-const results: Array<{ id: string; claim: string; pass: boolean; error?: string }> = [];
+const results: Array<{ id: string; claim: string; pass: boolean; path?: 'archive'; error?: string }> = [];
 for (const c of ONLY ? cases.filter((x) => ONLY.some((o) => x.id.includes(o))) : cases) {
   resetScratch();
   try {
     c.run();
-    results.push({ id: c.id, claim: c.claim, pass: true });
+    results.push({ id: c.id, claim: c.claim, pass: true, ...(c.path ? { path: c.path } : {}) });
     console.log(`  ✔ ${c.claim}  ${c.id}`);
   } catch (err) {
-    results.push({ id: c.id, claim: c.claim, pass: false, error: String(err) });
+    results.push({ id: c.id, claim: c.claim, pass: false, ...(c.path ? { path: c.path } : {}), error: String(err) });
     console.log(`  ✖ ${c.claim}  ${c.id}\n      ${String(err)}`);
   }
 }
 rmSync(SCRATCH, { recursive: true, force: true });
 
 const passed = results.filter((r) => r.pass).length;
+// The v1 path is what `npm run eval` gates: every case not marked
+// path:'archive'. Archive-path cases are measured and recorded beside it and
+// named in parity/receipts/v1/eval-reds.json when red; they do not fail v1.
+const v1Rows = results.filter((r) => r.path !== 'archive');
+const archiveRows = results.filter((r) => r.path === 'archive');
+const v1 = { passed: v1Rows.filter((r) => r.pass).length, total: v1Rows.length };
+const archive = { passed: archiveRows.filter((r) => r.pass).length, total: archiveRows.length };
 if (ONLY) {
   console.log(`\n${passed}/${results.length} evals passed — SUBSET run (--only ${ONLY.join(',')}); evals/results.json NOT written`);
 } else {
@@ -12838,11 +12852,12 @@ if (ONLY) {
   mkdirSync(path.dirname(RECORD_PATH), { recursive: true });
   writeFileSync(
     RECORD_PATH,
-    JSON.stringify({ passed, total: results.length, ...provenance, results }, null, 2) + '\n',
+    JSON.stringify({ passed, total: results.length, v1, archive, ...provenance, results }, null, 2) + '\n',
   );
   console.log(
-    `\n${passed}/${results.length} evals passed — ${path.relative(ROOT, RECORD_PATH)} ` +
+    `\n${passed}/${results.length} evals passed (v1 path ${v1.passed}/${v1.total}; archive path ${archive.passed}/${archive.total}) — ${path.relative(ROOT, RECORD_PATH)} ` +
       `(commit ${provenance.commit.slice(0, 8)}${provenance.dirty ? ', DIRTY tree — this record cannot be committed as the suite result' : ''})`,
   );
 }
-process.exit(passed === results.length ? 0 : 1);
+// Green when the v1 path is green; an archive-path red is recorded and named, not a v1 failure.
+process.exit(v1.passed === v1.total ? 0 : 1);

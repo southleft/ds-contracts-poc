@@ -68,6 +68,12 @@ Nothing here is discovered mid-run; check it before you start.
      Figma desktop: **Plugins → Development → Import plugin from manifest…**
      and pick the `manifest.json` inside the unzipped
      `ds-contracts-sync-runner/` folder.
+     **What that download carries (pinned 2026-09-03):** engine block
+     716,887 bytes, sha256 `e2eea33783b9…`, in a zip of 942,148 bytes
+     (`af19cc985469…`). It is **not** HEAD's engine (fresh bundle 864,984
+     bytes, input hash `e69f31e37278…`); it predates the recipe-IR archetypes
+     and will be re-deployed at the release commit. `npm run deploy:pin:check`
+     refuses if the hosted engine changes without this note changing.
   2. **From a clone:** `npm run plugin:zip`, then import
      `figma-sync/plugin-dist/manifest.json`. **Never import
      `figma-sync/plugin/manifest.json`** — that copy is a stub with no

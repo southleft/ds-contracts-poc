@@ -319,6 +319,12 @@ jobs:
       - name: typecheck:recipe (the current recipe surface typechecks; frozen lineage files named, not edited)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run typecheck:recipe
+      - name: release-tag:check (AUD-U17 disposition — no premature RC tag locally or on origin until a release commit is named)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run release-tag:check
+      - name: deploy:pin:check (AUD-U22 disposition — the hosted zip carries the engine docs/00 pins)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run deploy:pin:check
       # The thirteen boilerplate archetypes plus the button scene inversion. Each
       # was gate-shaped and unlaned: ci:lanes reported 33 scripts no workflow ran
       # and 39 test files no CI-invoked script named. They were never expensive —

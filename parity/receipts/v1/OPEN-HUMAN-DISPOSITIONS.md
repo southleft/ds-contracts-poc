@@ -101,6 +101,15 @@ documented.
 **Only you can do this.** It rewrites a published ref, which is outward-facing
 and irreversible for anyone who already fetched it. I have not touched the tag.
 
+**Disposition — 2026-09-03.** The owner authorised the deletion in writing
+("when it comes to any Git-related things, you have access to the GitHub CLI
+so you can push, tag, delete") and endorsed the recommendation. The tag was
+deleted on origin (`git push --delete origin v1.0.0-rc.1` → `[deleted]`) and
+locally (`git tag -d`, was `e3bd2f520`); `git ls-remote --tags origin
+v1.0.0-rc.1` returns nothing. The checklist row "Signed RC tag approved"
+records the disposition. `npm run release-tag:check` refuses if a premature
+RC tag reappears before a release commit is named. **Closed.**
+
 ---
 
 ## AUD-U22 — the hosted plugin zip's engine
@@ -132,6 +141,16 @@ belongs at the release commit, which does not exist yet.
 
 **Only you can do this.** Both branches are a deployment or a published-artifact
 decision.
+
+**Disposition — 2026-09-03: option 2, the engine pinned on the page.** The
+owner endorsed the recommendation. Fetched that day, the hosted zip is
+942,148 bytes (sha256 af19cc985469…) and its `ui.html` carries a plugin
+engine block of 716,887 bytes (sha256 e2eea33783b9…); HEAD's engine receipt
+records a fresh bundle of 864,984 bytes (input hash e69f31e37278…). They
+differ, and docs/00 now says so beside the download. `npm run
+deploy:pin:check` re-fetches the hosted zip and refuses if the engine it
+carries no longer matches the pin, so the page cannot drift silently. The
+deploy itself (option 1, `V1-REL-02`) waits for a release commit. **Closed.**
 
 ---
 

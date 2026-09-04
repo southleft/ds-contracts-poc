@@ -1,17 +1,20 @@
 # 26 · Definition of v1
 
-> **Current state (2026-08-30).** Recipe-IR landed. The capture-path class
-> rows in the table below are not rewritten. The additive recipe-path row
-> is the one that names a live mint plus an owner grade: five archetypes
-> satisfy offline gate, stayed mint, and owner human grade;
-> `overallSuccess: true` holds today only for table/data-grid. Product
-> **v1 is incomplete** because F1 (whole-corpus / unseen-library on the
-> recipe path) is unmet. F-C2C (canvas→code held-out) is an adopted
-> co-equal gate (owner-signed 2026-08-31); its exam
-> gate is green on a never-stay AntD Card and does **not** complete v1.
-> Do not flip `overallSuccess`. Do not restamp
-> hashed RECORDs. See [docs/32 §E4 applied](32-recipe-ir-pivot.md#e4-applied-2026-08-30)
-> and the [merge execution record](32-recipe-ir-pivot.md#merge-execution-2026-08-30).
+> **Current state (2026-09-03, owner-signed).** The v1 criterion is the
+> stranger sentence (docs/36, *Point it at your library*):
+> one command, one reviewed file, one more command, one paste, a component
+> set within the fidelity gate's bar of the library's own render for every
+> supported archetype,
+> plus a named report. An archetype is supported by measurement — a proposer,
+> a held-out library scored against its own render, every miss named. All
+> thirteen archetypes meet that today (fidelity gate 53 pass · 0 fringe ·
+> 12 named, every named row a measured font-substrate residual). The
+> capture-path class rows below are not rewritten. `overallSuccess` is not
+> flipped and hashed RECORDs are not restamped by this change. F-C2C
+> (canvas→code held-out) remains an adopted co-equal gate (owner-signed
+> 2026-08-31). Signed: adopt the stranger sentence as the v1 criterion,
+> 2026-09-03, TJ Pitre. Wording from
+> `parity/receipts/v1/F1-RECLASSIFICATION-PROPOSAL.md`.
 
 This document is the release contract for v1. It turns the release audit into
 binary requirements: v1 is ready only when every requirement below has the
@@ -140,7 +143,8 @@ at the point of the related claim:
 Entry 2 is the **capture-path** register and stays pinned. On the recipe
 path, Combobox, Table, and Calendar have stayed live mints and owner-signed
 grades ([docs/32](32-recipe-ir-pivot.md)) but are **not** product-v1: F1 is
-unmet and `overallSuccess` is not flipped except Table's existing v32 pin.
+restated as the per-archetype held-out exam of the stranger sentence and is met
+for all thirteen archetypes above (owner-signed 2026-09-03); `overallSuccess` is not flipped except Table's existing v32 pin.
 
 An item leaves this register only when its new capability has an adversarial
 check or committed receipt, the relevant docs are updated, and the release
