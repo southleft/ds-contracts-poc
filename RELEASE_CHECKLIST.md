@@ -18,6 +18,52 @@ transcripts: [`.agents/runs/v1-release-prep/FREEZE-EVIDENCE.md`](.agents/runs/v1
 See also
 [`.agents/runs/post-exact-conversion-next-waves/HUMAN-HANDOFF.md`](.agents/runs/post-exact-conversion-next-waves/HUMAN-HANDOFF.md).
 
+> ## RE-FROZEN 2026-09-04 on `e428f0c1f`
+>
+> Every automatable row below was re-run on that commit, clean tree, and the
+> results are recorded beside each box. The 2026-08-23 note that follows still
+> describes the OLD ticks (`5adfc8bc` / `9e6eb062`); it is kept because the
+> history is the point, but it is no longer the current state.
+>
+> **Measured on the freeze SHA — all green:**
+>
+> | box | result |
+> | --- | --- |
+> | manifest versions | root `1.0.0-rc.1` · cli `0.5.0-rc.2` · schema `17.0.0-rc.1` · core `0.1.0-rc.1` · emitter `0.4.0-rc.2` |
+> | `publish:check` (collision check, four packages) | exit 0 |
+> | `eval:record:check` | the committed record is clean-tree, on this history |
+> | `schema:fresh` + `contracts:migrate:check` | both projections match the Zod document; 8,311 JSON files, no v16 spelling |
+> | `maintain` (fifteen token-free steps) | exit 0 |
+> | `maintain:visual` | all rows within ±0.1pp and ±4 device px of `baseline.darwin.json` |
+> | `verify:published` | four tarballs into a temp project, exit 0 |
+> | `human-gates:inventory` | 7 human/release rows still open, named |
+> | core build + `package:smoke` | exit 0 |
+> | `v1:readiness` (`--trust-lanes --pre-release`) | **24/24 rows green**, full-lane run 33874265960 |
+>
+> **Tarball SHA-256 on the freeze SHA:**
+>
+> | package | bytes | sha256 |
+> | --- | ---: | --- |
+> | `@ds-contracts/schema@17.0.0-rc.1` | 79,286 | `47f8c1f24b70c6aad93a0693…` |
+> | `@ds-contracts/core@0.1.0-rc.1` | 101,703 | `360c9e96fa9f2b9a3590d5c8…` |
+> | `@ds-contracts/cli@0.5.0-rc.2` | 4,712,817 | `da6581ad5586ccecf754e2ca…` |
+> | `@ds-contracts/emitter-web-components@0.4.0-rc.2` | 96,977 | `e3635497cf94d69c4ee3911a…` |
+>
+> **THE ONE THING THAT IS NOT GREEN, AND WHY IT CANNOT BE YET.** `V1-REL-02`
+> run for real (no `--pre-release`) is RED at 750s, and the failure is entirely
+> `deploy:check`: the plugin zip, the playground and the spec site each serve an
+> older build than this tree. Its publish-side half — the CLI build,
+> `publish:check`, `verify:published` — all passed. `--pre-release` exists to
+> defer exactly this chain, which is why the 24/24 above is honest rather than
+> flattering.
+>
+> So the remaining distance to a green readiness is **one deployment**, and the
+> row's own text says why it is not mine: *"Tagging, publication, GitHub release
+> creation, dist-tag changes, and deployment each require a recorded human
+> approval."* Nothing below the "Human approvals" heading has been ticked by an
+> agent, and none of the boxes in "Post-publication verification" can be
+> answered before that deployment happens.
+
 > **STALE EVIDENCE (noted 2026-08-23, not re-frozen).** Every ticked
 > automation row below still pins `5adfc8bc` / `9e6eb062` (2026-08-08). Since
 > then `main` has taken schema 17 (a MAJOR; every committed contract was
