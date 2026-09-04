@@ -273,57 +273,57 @@ produce verdicts; full has not produced one in three days.
 
 ---
 
-## The drift instrument is not environment-reproducible for one component
+## CLOSED — the drift pin recorded on the wrong operating system
 
 **The full lane produced a verdict on 2026-09-04 — its first in over 100 runs —
 and immediately found a real defect in my own work.** That is the argument for
-unblocking it, so it is written here rather than buried in a commit.
+unblocking it, so it stays written here even though the row is now closed.
 
-`extract:computed:drift:remeasure` replays the committed captured truth through
-the current fusion **in a real headless Chromium** (its own header says so; only
-the VERIFY half is browser-free). It therefore depends on the machine it runs
-on. For 138 of 139 components that does not matter. For one it does:
+`extract:computed:drift:remeasure` replays committed captured truth through the
+current fusion **in a real headless Chromium** (its own header says so; only the
+VERIFY half is browser-free). It therefore depends on the machine it runs on.
+For 138 of 139 components that does not matter. For one it does:
 
-| where | fluent/MessageBar offline pctEqual | cells |
+| where | fluent/MessageBar offline pctEqual | equal cells |
 | --- | ---: | ---: |
-| this macOS machine (reproduced exactly, twice) | **99.010** | 3,232 |
-| ubuntu-latest, CI run 33845428922 | **98.020** | 3,232 |
+| macOS developer machine (reproduced exactly, twice) | 99.010 | 3,200 / 3,232 |
+| ubuntu-latest (full-lane run 33845428922) | 98.020 | 3,168 / 3,232 |
 
-Same cell count, so 32 of 3,232 cell VALUES differ between the two machines. I
-recorded the pin from the macOS side, which is why the full lane says the
-tracked scorecard "is not what the current engine produces".
+Same cell count, so exactly **32 cell values** differ — not the structure. I had
+recorded the pin from the macOS side.
 
-**Why the instrument's own escape hatch is the wrong remedy here.** `BaselineRow`
-carries an optional `tolerance`, documented for rows "measurably not reproducible
-to the global 0.001", and no row uses it today. It would close half of this — but
-only half, because the tracked-scorecard comparison is at 1e-9 and takes no
-tolerance. And the arithmetic refuses it anyway: that field's comment justifies
-itself by noting that every engine-change-sized move this baseline has recorded
-(+1.042, +2.459, +20.155, −3.296) is an order of magnitude above the tolerance.
-The measured cross-machine noise here is **0.990**, which is not an order of
-magnitude below **1.042** — it is the same size. A tolerance wide enough to
-absorb it would swallow the smallest real regression the instrument has ever
-caught. So I did not widen it.
+**What I did not do.** Stamp CI's percentage into the tracked scorecard. That
+file also carries the declared facts and reapplied decisions the recording
+machine produced, so an edited percentage would have made it a number no machine
+produced sitting in a file claiming to be one machine's output. Nor did I widen
+the row's `tolerance`: the field's own comment justifies itself by noting every
+engine-sized move this baseline has recorded (+1.042, +2.459, +20.155, −3.296)
+sits an order of magnitude above the tolerance, and the measured noise here is
+0.990 against a smallest-real-move of 1.042 — the same size. A tolerance wide
+enough to absorb it would swallow the smallest regression the instrument has
+ever caught.
 
-**What I did NOT establish.** The cause. Fluent's stack leads with two Microsoft
-faces absent from both platforms — `"Segoe UI", "Segoe UI Web (West European)",
--apple-system, "system-ui", Roboto, …` — which makes a font-fallback difference
-the obvious guess. It is only a guess: `astryx-core` and `tailwind` both lead
-with `-apple-system` and reproduce identically across the two machines, so
-leading with an OS keyword is not sufficient, and I could not see CI's per-cell
-output to isolate which 32 moved.
+**What closed it.** The pin was RE-RECORDED on the operating system the gate
+re-measures on, by running the fluent re-measure on ubuntu-latest and taking its
+artifact (workflow `pin-fluent`, run 33855345966, since deleted). That run
+re-recorded all twelve fluent components and **changed exactly two files** — the
+baseline row and `out/fluent/messagebar/regate.scorecard.json`. The other eleven
+came back byte-identical on Linux, just as they had on macOS, which is the
+cleanest possible confirmation that this is one component's divergence and not a
+platform-wide one.
 
-**The tree is internally consistent; only the two machines disagree.** The fast
-lane's VERIFY compares three committed artifacts to each other and passes. It is
-the full lane's re-render that dissents. Nothing in the repository asserts a
-number the repository itself contradicts.
+`rerunPctEqual` is now the Linux number. The committed harness scorecard stays at
+99.010, because that is what the macOS capture run measured and receipts are not
+restamped; the difference between the two is named in the row's `gapCause` with
+both runs cited. `extract:computed:drift` is green at 139 components.
 
-**The remedy, and it is small.** Record that one scorecard where the gate
-re-measures it — a Linux environment — rather than from a developer machine, and
-commit that. A container would do it; this machine has the Docker CLI but no
-running daemon, and starting one unattended on the owner's machine is not mine to
-do. Until then the full lane carries this one named red, and it is the honest
-state: a pin recorded on the wrong operating system.
+**Still open, and named rather than guessed: the cause of the 32 cells.**
+Fluent's stack leads with two Microsoft faces absent from both platforms, which
+makes font fallback the obvious suspect — but `astryx-core` and `tailwind` also
+lead with `-apple-system` and reproduce identically across both machines, so that
+explanation does not hold on its own, and CI prints no per-cell output to
+isolate which 32 moved. The gate is green because the pin is now recorded where
+it is checked, not because the divergence is understood.
 
 ---
 
