@@ -89,6 +89,9 @@ export const muiTableSource: ReviewedTableSource = {
 const categoryForToken = (path: string): TableFactCategory => {
   if (path.includes("typography")) return "typography";
   if (path.includes("rowStates")) return "state";
+  // cellRuleSides.* are WIDTHS, not colours — the fill test below matches
+  // "cellRule" as a prefix, so the sides are classified first.
+  if (path.includes("cellRuleSides")) return "geometry";
   if (
     path.includes("background") ||
     path.includes("surface") ||
@@ -218,6 +221,15 @@ const muiTokens = cloneTokens("mui.table", (path, fallback) => {
   if (path === "frameBorderWidth") return 0;
   if (path === "cellRule") return "#e0e0e0ff";
   if (path === "cellRuleWidth") return 1;
+  // MuiTableCell draws ONE edge: the capture reads border-bottom 1px
+  // rgba(224,224,224,1) and 0 on top/right/left, with border-collapse:
+  // collapse on the table (extract/computed/out/mui/table, base tree,
+  // MuiTableCell-root). Before 2026-09-03 the mint stroked all four sides and
+  // read as a grid where MUI renders rows.
+  if (path === "cellRuleSides.top") return 0;
+  if (path === "cellRuleSides.right") return 0;
+  if (path === "cellRuleSides.bottom") return 1;
+  if (path === "cellRuleSides.left") return 0;
   if (path === "radius") return 0;
   return fallback;
 });

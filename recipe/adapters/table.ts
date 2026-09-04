@@ -111,6 +111,9 @@ const atLanding = (value: unknown, landing: string): unknown =>
 const expectedCategory = (target: string): TableFactCategory => {
   if (target.startsWith("tokens.typography")) return "typography";
   if (target.startsWith("tokens.rowStates")) return "state";
+  // cellRuleSides.* are WIDTHS: the fill test below matches "cellRule" as a
+  // prefix, so classify the sides first (they pair with cellRuleWidth).
+  if (target.includes("cellRuleSides")) return "geometry";
   if (
     target.includes("background") ||
     target.includes("surface") ||

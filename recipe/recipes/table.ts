@@ -169,6 +169,13 @@ export interface TableRecipeInstance {
     frameBorderWidth: TableNumberParameter;
     cellRule: TableColorParameter;
     cellRuleWidth: TableNumberParameter;
+    /**
+     * Which EDGES the cell rule draws. MUI's cell is `border-bottom: 1px` and
+     * 0 on the other three (measured 2026-09-03 in the capture); one weight on
+     * all four sides renders a grid where the package renders rows. Each side
+     * is the rule's width or 0. Absent = all four (the older uniform spelling).
+     */
+    cellRuleSides?: { top: TableNumberParameter; right: TableNumberParameter; bottom: TableNumberParameter; left: TableNumberParameter };
     radius: TableNumberParameter;
     typography: {
       header: TableFontSpec;
@@ -293,6 +300,17 @@ export const TableRecipeInstanceSchema = z
       !numberParameter(instance.tokens?.radius, true)
     )
       fail("border or radius token is invalid");
+    const sides = instance.tokens?.cellRuleSides;
+    if (sides !== undefined) {
+      if ((["top", "right", "bottom", "left"] as const).some((side) => !numberParameter(sides[side], true)))
+        fail("cell rule side width is invalid");
+      // The uniform width must be a width the cell actually draws, so a reader
+      // (and the collapse, which reads strokes.0.weight) never sees a rule the
+      // canvas does not paint on any edge.
+      const drawn = (["top", "right", "bottom", "left"] as const).map((side) => sides[side]!.fallback).filter((w) => w > 0);
+      if (drawn.length > 0 && !drawn.includes(instance.tokens!.cellRuleWidth.fallback))
+        fail("cellRuleWidth must equal a side the cell draws");
+    }
     if (
       !instance.tokens?.typography?.header ||
       !instance.tokens.typography.body
@@ -460,11 +478,24 @@ const cellComponent = (
   // the row set, which carries `Cell 0/1/2` per row occurrence. Typography still
   // differs per kind through `font` above.
   const label = instance.content.columns[0]!.label;
+  const ruleSides = instance.tokens.cellRuleSides;
   const strokes = [
     {
       weight: instance.tokens.cellRuleWidth.fallback,
       align: "inside" as const,
       paint: solid(instance.tokens.cellRule.fallback),
+      // Only the edges the source draws (MUI: the bottom rule). Omitted when
+      // the fixture carries no per-side widths — the uniform spelling.
+      ...(ruleSides
+        ? {
+            sideWeights: {
+              top: ruleSides.top.fallback,
+              right: ruleSides.right.fallback,
+              bottom: ruleSides.bottom.fallback,
+              left: ruleSides.left.fallback,
+            },
+          }
+        : {}),
     },
   ];
   const bindings: VariableBinding[] = [
@@ -477,6 +508,9 @@ const cellComponent = (
       : [bind("layout.minWidth", density.minWidth)]),
     bind("strokes.0.paint.color", instance.tokens.cellRule),
     bind("strokes.0.weight", instance.tokens.cellRuleWidth),
+    ...(ruleSides
+      ? (["top", "right", "bottom", "left"] as const).map((side) => bind(`strokes.0.sideWeights.${side}`, ruleSides[side]))
+      : []),
   ];
   return {
     kind: "component",
@@ -1307,6 +1341,16 @@ export function collapseTableRecipe(
         "strokes.0.weight",
         comfortableCell.strokes?.[0]?.weight ?? 0,
       ),
+      ...(comfortableCell.strokes?.[0]?.sideWeights
+        ? {
+            cellRuleSides: Object.fromEntries(
+              (["top", "right", "bottom", "left"] as const).map((side) => [
+                side,
+                numberFrom(comfortableCell, `strokes.0.sideWeights.${side}`, comfortableCell.strokes![0]!.sideWeights![side]),
+              ]),
+            ) as TableRecipeInstance["tokens"]["cellRuleSides"],
+          }
+        : {}),
       radius: numberFrom(
         baseline,
         "cornerRadius.topLeft",

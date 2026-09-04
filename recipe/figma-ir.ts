@@ -128,6 +128,18 @@ export type Paint = z.infer<typeof PaintSchema>;
 
 export const StrokeSchema = z.strictObject({
   weight: DimensionSchema,
+  /**
+   * PER-SIDE weights, when the source draws only some edges — MUI's table
+   * cell is `border-bottom: 1px` and 0 on the other three, and one weight on
+   * all four sides makes a grid where the package renders rows (measured
+   * 2026-09-03 against extract/computed/out/mui/table). Figma takes
+   * strokeTopWeight/RightWeight/BottomWeight/LeftWeight; `weight` above stays
+   * the uniform spelling and remains what a reader and the collapse see when
+   * the four are equal. Omitted = uniform.
+   */
+  sideWeights: z
+    .strictObject({ top: DimensionSchema, right: DimensionSchema, bottom: DimensionSchema, left: DimensionSchema })
+    .optional(),
   /** Figma's three; CSS has no equivalent choice and always means `inside`. */
   align: z.enum(["inside", "outside", "center"]),
   paint: PaintSchema,
@@ -325,7 +337,7 @@ export type TypeFacts = z.infer<typeof TypeFactsSchema>;
 const COLOR_BINDING_PATH =
   /^(?:fills\.\d+\.color|strokes\.\d+\.paint\.color|effects\.\d+\.color)$/;
 const FLOAT_BINDING_PATH =
-  /^(?:width\.value|height\.value|layout\.(?:itemSpacing|minWidth|minHeight|width\.value|height\.value|padding\.(?:top|right|bottom|left))|cornerRadius\.(?:topLeft|topRight|bottomRight|bottomLeft)|strokes\.\d+\.weight(?:\.(?:top|right|bottom|left))?|type\.(?:fontSize|lineHeight\.value|letterSpacing\.value))$/;
+  /^(?:width\.value|height\.value|layout\.(?:itemSpacing|minWidth|minHeight|width\.value|height\.value|padding\.(?:top|right|bottom|left))|cornerRadius\.(?:topLeft|topRight|bottomRight|bottomLeft)|strokes\.\d+\.(?:weight(?:\.(?:top|right|bottom|left))?|sideWeights\.(?:top|right|bottom|left))|type\.(?:fontSize|lineHeight\.value|letterSpacing\.value))$/;
 const STRING_BINDING_PATH = /^(?:characters|type\.(?:fontFamily|fontStyle))$/;
 const BOOLEAN_BINDING_PATH = /^(?:clipsContent|visible)$/;
 

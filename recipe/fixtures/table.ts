@@ -146,6 +146,12 @@ export const canonicalTableRecipeInstance = {
     frameBorderWidth: number("table.frame-border-width", 1),
     cellRule: color("table.cell-rule", "#00000000"),
     cellRuleWidth: number("table.cell-rule-width", 0),
+    cellRuleSides: {
+      top: number("table.cell-rule-top", 0),
+      right: number("table.cell-rule-right", 0),
+      bottom: number("table.cell-rule-bottom", 0),
+      left: number("table.cell-rule-left", 0),
+    },
     radius: number("table.radius", 8),
     typography: {
       header: font("header", "Inter", "Semi Bold"),
