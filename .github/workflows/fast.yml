@@ -428,9 +428,9 @@ jobs:
       - name: recipe:combobox:live:v42:check (the CURRENT combobox lineage — library-named overlay chrome remint; generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:combobox:live:v42:check
-      - name: recipe:table:live:v32:check (the CURRENT table lineage — the one Table V32 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
+      - name: recipe:table:live:v33:check (the CURRENT table lineage — v33 teaches the cell rule to draw one edge, awaiting its live mint and grade; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
-        run: npm run recipe:table:live:v32:check
+        run: npm run recipe:table:live:v33:check
       - name: recipe:calendar:live:v50:check (the CURRENT calendar lineage — the one Calendar V50 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:calendar:live:v50:check
