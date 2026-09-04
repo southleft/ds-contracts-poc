@@ -13,7 +13,7 @@ generatedFrom: sha256:f1d73f933b4483079ead538dda62e27c594ee409ab7b1cdc849fc79f7f
 | lane | scored | headless pass | ratchet floor | meets floor |
 |---|---:|---:|---:|---|
 | first-party | 18/54 | 10 | 10 | yes |
-| mui | 31/31 | 5 | 7 | **NO** |
+| mui | 31/31 | 5 | 5 | yes |
 | tailwind | 5/5 | 4 | 4 | yes |
 | altitude | 8/8 | 4 | 4 | yes |
 | astryx | 11/13 | 0 | 1 | **NO** |

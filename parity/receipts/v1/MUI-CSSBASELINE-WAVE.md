@@ -147,7 +147,7 @@ npm run ci:lane fast   →   190 / 191 gates green
 
 The one failure is `visual-truth:check`, below.
 
-## The one gate this wave cannot leave green, and why it is not mine
+## CLOSED — the one gate this wave could not leave green, and the owner's sign-off that closed it
 
 `visual-truth`'s mui lane drops **7 headless passes → 5**:
 
@@ -171,6 +171,23 @@ Both remedies are the owner's:
 
 So the wave sits on a branch. `main` is untouched and green rather than red or
 quietly re-floored to fit a change of mine.
+
+**RESOLVED 2026-09-04: the owner chose option A.** Asked directly, with the
+measurement and both remedies in front of them, they answered "A" — lower the
+floor. `parity/receipts/console-loop/RATCHET.json` now carries `floors.mui: 5`
+and a `decided[]` entry attributed to the owner, dated, holding the full cause
+and a `reopensWhen`: re-minting either canvas from a CssBaseline-derived
+contract raises the floor back, per this file's own rule that a floor rises when
+a stem genuinely passes. Option B is deferred, not foreclosed.
+
+The rendered report moved one line, which is the whole story:
+
+```
+- | mui | 31/31 | 5 | 7 | **NO** |
++ | mui | 31/31 | 5 | 5 | yes  |
+```
+
+**`npm run ci:lane fast` — 191/191 gates green.**
 
 ## The decision, prepared both ways
 
