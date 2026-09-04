@@ -1264,10 +1264,20 @@ export function sceneToNormalizedIr(
             // uniform weight is then a side the node actually draws.
             [scene.strokeBottomWeight, scene.strokeTopWeight, scene.strokeRightWeight, scene.strokeLeftWeight].find((side) => (side ?? 0) > 0) ??
             0,
-          ...(scene.strokeTopWeight === undefined &&
-          scene.strokeRightWeight === undefined &&
-          scene.strokeBottomWeight === undefined &&
-          scene.strokeLeftWeight === undefined
+          // ONLY when the sides actually differ. Figma reports per-side
+          // weights on every node, and a node that draws its edges alike
+          // keeps its uniform strokeWeight and its uniform binding — carrying
+          // sideWeights there would make the collapse demand per-side
+          // bindings the writer never wrote (measured on the v37 extract:
+          // the first-party cell reports four equal sides and binds only
+          // strokes.0.weight).
+          ...(scene.strokeTopWeight === undefined ||
+          scene.strokeRightWeight === undefined ||
+          scene.strokeBottomWeight === undefined ||
+          scene.strokeLeftWeight === undefined ||
+          (scene.strokeTopWeight === scene.strokeRightWeight &&
+            scene.strokeRightWeight === scene.strokeBottomWeight &&
+            scene.strokeBottomWeight === scene.strokeLeftWeight)
             ? {}
             : {
                 sideWeights: {

@@ -169,6 +169,30 @@ const uniformFigmaPerSideStrokeBindings = (
     resolvedType: "FLOAT" as const,
   }));
 
+test("a cell that draws its edges ALIKE keeps the uniform weight, sides and all", () => {
+  // Figma reports per-side weights on every node. A cell whose four sides are
+  // equal still binds only strokes.0.weight, so the read-back must NOT attach
+  // sideWeights there — doing so made the collapse demand per-side bindings
+  // the writer never wrote (measured on the v37 extract, first-party cell).
+  const scene = {
+    ...tableVariantScene(
+      [{ field: "strokeWeight", variableName: "ds.table.cellRuleWidth", resolvedType: "FLOAT" as const }],
+      "table/cell/comfortable/body",
+    ),
+    strokes: [{ type: "SOLID" as const, color: "#00000000" }],
+    strokeAlign: "INSIDE" as const,
+    strokeWeight: 0,
+    strokeTopWeight: 0,
+    strokeRightWeight: 0,
+    strokeBottomWeight: 0,
+    strokeLeftWeight: 0,
+  } as unknown as Parameters<typeof sceneToNormalizedIr>[0];
+  const ir = sceneToNormalizedIr(scene) as { bindings?: Array<{ field: string }>; strokes?: Array<Record<string, unknown>> };
+  assert.equal(ir.strokes?.[0]?.sideWeights, undefined);
+  assert.equal((ir.bindings ?? []).filter((b) => b.field === "strokes.0.weight").length, 1);
+  assert.equal((ir.bindings ?? []).filter((b) => b.field.startsWith("strokes.0.weight.")).length, 0);
+});
+
 test("a cell that draws ONE edge reads back as one edge, with no uniform weight to fold", () => {
   // MUI's table cell is border-bottom 1px and 0 on the other three sides, and
   // Figma deletes the uniform strokeWeight property the moment the sides
