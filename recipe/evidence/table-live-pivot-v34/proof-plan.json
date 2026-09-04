@@ -1,0 +1,100 @@
+{
+  "artifactVersion": "table-live-v34-proof-plan-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "namespace": "ds.contracts.table.recipe.v1",
+  "writer": {
+    "programPath": "recipe/evidence/table-live-pivot-v34/programs/writer.txt",
+    "programBytes": 79624,
+    "programSha256": "43a51fec4d04b0501c485d42632d1151ea1d737eefe2f07ef39feea70e6c43d6",
+    "runIdentity": "352f751a-fe6da53c-table-v32",
+    "pageName": "Recipe Pivot / Table / 352f751a-fe6da53c-table-v32"
+  },
+  "sources": [
+    {
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "recipeHash": "352f751a490556e1d7bbde7f06ac00f869b10641b89406b61768f4ec5f4a7348",
+      "envelopeHash": "d6c916b638d95aefbd7a588c22eff39cdc9ed58be4c6faca55f88d5ad712985a",
+      "tableExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v34/expected-scene-plan-first-party-table.json.gz",
+        "bytes": 3846,
+        "sha256": "4ef7d8cf0c7d6807b210d7e0ca7c4ce52fe8713a9e30337c2926d94ac36b8190",
+        "uncompressedBytes": 60288,
+        "uncompressedSha256": "e3552c99201a0aecae5ad4c9dd1427dac01004ba9f92b67b90c6b17889699e8d",
+        "facts": 231
+      },
+      "rowExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v34/expected-scene-plan-first-party-row.json.gz",
+        "bytes": 3342,
+        "sha256": "7ad7d715aecebc59463605a384ee9a35a150d8c4107970faebe9722e53b1bfbd",
+        "uncompressedBytes": 48115,
+        "uncompressedSha256": "5e5d52edf7fe55d4f02e711cb3f421fa277c7395005eb3f4ecbc188cccc8fe79",
+        "facts": 208
+      },
+      "cellExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v34/expected-scene-plan-first-party-cell.json.gz",
+        "bytes": 3843,
+        "sha256": "5732de23ebc37c67b4c121c6ea31f28d3341c937edf7e5e003d5bc6c628368d9",
+        "uncompressedBytes": 51313,
+        "uncompressedSha256": "fcd48693aa1d7bff53c7ceba799965600e635d8346067c5872b007aa3a482fc0",
+        "facts": 192
+      }
+    },
+    {
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "recipeHash": "fe6da53c365453224386a42cfa9b2ce0aed114044fa26ac2a18c073dc291de8b",
+      "envelopeHash": "0df05d7c5c83fa0cbdc06e241ba70c78bf58215b35cf77b2031b9887305718df",
+      "tableExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v34/expected-scene-plan-mui-table.json.gz",
+        "bytes": 3841,
+        "sha256": "e2172d900621a815186328efbb9f48cd42900c28e80e1cdd59af076e3e27803f",
+        "uncompressedBytes": 60324,
+        "uncompressedSha256": "bd600cd4a3723b6208c59d53bee7608db05707036cbd8b3f3772cce94caf7911",
+        "facts": 231
+      },
+      "rowExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v34/expected-scene-plan-mui-row.json.gz",
+        "bytes": 3367,
+        "sha256": "9eb1c44127a39e5ae8572c3001859745ebd22cc5b346541beca1bcf6ecbb8e08",
+        "uncompressedBytes": 48151,
+        "uncompressedSha256": "1d447d58f47d75b71e69f9006c62ad359e699b071e22cc8807323010a7cd66cb",
+        "facts": 208
+      },
+      "cellExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v34/expected-scene-plan-mui-cell.json.gz",
+        "bytes": 3836,
+        "sha256": "033e329c707374d0d1cc59075091f2c99c824a9bffcc986057c4b20eee48cdc3",
+        "uncompressedBytes": 50163,
+        "uncompressedSha256": "14cb88970fdb772a0f6c6d8f1b1630e6d8759bf96a313a704a5652e0f9df3525",
+        "facts": 184
+      }
+    }
+  ],
+  "captureManifest": {
+    "path": "recipe/evidence/table-live-pivot-v34/capture-manifest.json",
+    "cells": 20,
+    "requests": 20,
+    "cellsPerRequest": 1,
+    "sha256": "b09a67137e18b069925fdada167782b6cbf67c898962050afb68f84805804eb1"
+  },
+  "requests": {
+    "remote": 25,
+    "mainLane": 24,
+    "recoveryCleanup": 1,
+    "hostPhases": 3
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3,
+    "cleanPublishedDescendantsOnly": true
+  },
+  "humanSignoff": "pending",
+  "overallTableSuccess": false
+}
