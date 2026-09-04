@@ -273,7 +273,7 @@ produce verdicts; full has not produced one in three days.
 
 ---
 
-## CLOSED — the drift pin recorded on the wrong operating system
+## CLOSED — the drift pin recorded on the wrong operating system, and the cause isolated
 
 **The full lane produced a verdict on 2026-09-04 — its first in over 100 runs —
 and immediately found a real defect in my own work.** That is the argument for
@@ -317,13 +317,31 @@ platform-wide one.
 restamped; the difference between the two is named in the row's `gapCause` with
 both runs cited. `extract:computed:drift` is green at 139 components.
 
-**Still open, and named rather than guessed: the cause of the 32 cells.**
-Fluent's stack leads with two Microsoft faces absent from both platforms, which
-makes font fallback the obvious suspect — but `astryx-core` and `tailwind` also
-lead with `-apple-system` and reproduce identically across both machines, so that
-explanation does not hold on its own, and CI prints no per-cell output to
-isolate which 32 moved. The gate is green because the pin is now recorded where
-it is checked, not because the divergence is understood.
+**The cause, isolated — and I had it wrong first.** I wrote above that the cause
+was not established and that font fallback "does not hold on its own", because
+`astryx-core` and `tailwind` lead their stacks the same way and reproduce fine.
+The two scorecards were diffable all along: the macOS one is in git history, the
+Linux one is committed. Every one of the 32 cells is **the same channel with the
+same value pair**:
+
+| | `root.grid-template-columns` |
+| --- | --- |
+| re-fused on ubuntu-latest | `28px 138.938px 0px 0px` |
+| captured on macOS | `28px 118.641px 0px 0px` |
+
+The second track is **content-sized**, so it carries the title text's intrinsic
+width as a computed value, and the 20.297px between them is the two platforms'
+resolved faces differing. Fluent's stack leads with two Microsoft faces absent
+from both, so macOS takes `-apple-system` (San Francisco) and Linux falls
+further down. So it WAS font metrics — surfacing as a layout channel, which is
+why looking at the font stacks alone did not find it, and why the two libraries
+I cited as counter-examples are not counter-examples at all: they have no
+content-sized grid track to expose a text width.
+
+Four captures in the corpus record a fractional-px grid track — carbon/Toggle,
+fluent/Card, fluent/MessageBar, fluent/TabList — and only this one diverged. The
+Linux recording run re-recorded all twelve fluent components and changed exactly
+two files.
 
 ---
 
