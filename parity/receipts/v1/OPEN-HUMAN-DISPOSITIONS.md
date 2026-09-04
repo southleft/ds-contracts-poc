@@ -273,6 +273,60 @@ produce verdicts; full has not produced one in three days.
 
 ---
 
+## The drift instrument is not environment-reproducible for one component
+
+**The full lane produced a verdict on 2026-09-04 — its first in over 100 runs —
+and immediately found a real defect in my own work.** That is the argument for
+unblocking it, so it is written here rather than buried in a commit.
+
+`extract:computed:drift:remeasure` replays the committed captured truth through
+the current fusion **in a real headless Chromium** (its own header says so; only
+the VERIFY half is browser-free). It therefore depends on the machine it runs
+on. For 138 of 139 components that does not matter. For one it does:
+
+| where | fluent/MessageBar offline pctEqual | cells |
+| --- | ---: | ---: |
+| this macOS machine (reproduced exactly, twice) | **99.010** | 3,232 |
+| ubuntu-latest, CI run 33845428922 | **98.020** | 3,232 |
+
+Same cell count, so 32 of 3,232 cell VALUES differ between the two machines. I
+recorded the pin from the macOS side, which is why the full lane says the
+tracked scorecard "is not what the current engine produces".
+
+**Why the instrument's own escape hatch is the wrong remedy here.** `BaselineRow`
+carries an optional `tolerance`, documented for rows "measurably not reproducible
+to the global 0.001", and no row uses it today. It would close half of this — but
+only half, because the tracked-scorecard comparison is at 1e-9 and takes no
+tolerance. And the arithmetic refuses it anyway: that field's comment justifies
+itself by noting that every engine-change-sized move this baseline has recorded
+(+1.042, +2.459, +20.155, −3.296) is an order of magnitude above the tolerance.
+The measured cross-machine noise here is **0.990**, which is not an order of
+magnitude below **1.042** — it is the same size. A tolerance wide enough to
+absorb it would swallow the smallest real regression the instrument has ever
+caught. So I did not widen it.
+
+**What I did NOT establish.** The cause. Fluent's stack leads with two Microsoft
+faces absent from both platforms — `"Segoe UI", "Segoe UI Web (West European)",
+-apple-system, "system-ui", Roboto, …` — which makes a font-fallback difference
+the obvious guess. It is only a guess: `astryx-core` and `tailwind` both lead
+with `-apple-system` and reproduce identically across the two machines, so
+leading with an OS keyword is not sufficient, and I could not see CI's per-cell
+output to isolate which 32 moved.
+
+**The tree is internally consistent; only the two machines disagree.** The fast
+lane's VERIFY compares three committed artifacts to each other and passes. It is
+the full lane's re-render that dissents. Nothing in the repository asserts a
+number the repository itself contradicts.
+
+**The remedy, and it is small.** Record that one scorecard where the gate
+re-measures it — a Linux environment — rather than from a developer machine, and
+commit that. A container would do it; this machine has the Docker CLI but no
+running daemon, and starting one unattended on the owner's machine is not mine to
+do. Until then the full lane carries this one named red, and it is the honest
+state: a pin recorded on the wrong operating system.
+
+---
+
 ## What this unblocks, and what it does not
 
 Closing both rows **does** now turn `V1-REL-01` green, and it is the last row
