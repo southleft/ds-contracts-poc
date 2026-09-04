@@ -1,0 +1,54 @@
+# ONE-OFF: record the mui offline drift pins WHERE THE GATE RE-MEASURES THEM.
+#
+# The CssBaseline wave re-captured 31 of 32 mui components, and the rsync that
+# placed them removed each component's regate.scorecard.json (a drift artifact,
+# not a capture one). Those pins must be re-recorded — and on LINUX, because
+# extract:computed:drift:remeasure replays committed capture through a real
+# headless Chromium, so its numbers depend on the machine. Measured 2026-09-04
+# on fluent/MessageBar: 99.010 on macOS vs 98.020 on ubuntu-latest, all 32
+# differing cells being one content-sized grid track carrying a text width.
+#
+# Deleted once its artifact is consumed.
+name: pin-mui
+on:
+  push:
+    branches: [wave/mui-cssbaseline]
+
+permissions:
+  contents: read
+
+jobs:
+  pin:
+    name: record the mui offline pins on linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20.19.4"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: npm ci
+        run: npm ci
+      - name: cache playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+      - name: install chromium (playwright-core ships no browser)
+        run: npx playwright-core install --with-deps chromium
+      - name: re-record the mui pins on this machine
+        run: npm run extract:computed:drift -- --write --config extract/computed/configs/mui.json
+      - name: what moved
+        run: git --no-pager diff --stat && git --no-pager status --porcelain
+      - name: upload the linux-recorded pins
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mui-linux-pins
+          path: |
+            extract/computed/regate-baseline.json
+            extract/computed/out/mui/**/regate.scorecard.json
+          if-no-files-found: error
