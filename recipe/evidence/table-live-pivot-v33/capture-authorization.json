@@ -1,19 +1,19 @@
 {
-  "artifactVersion": "table-live-v33-authorization-template-v1",
+  "artifactVersion": "table-live-v33-capture-authorization-v1",
   "authorizationId": "table-live-v33",
-  "status": "template only; no authorization",
-  "authorizationIntent": false,
+  "status": "authorization declared; runtime security prerequisites still mandatory",
+  "authorizationIntent": true,
   "antecedent": {
-    "commit": null,
+    "commit": "a0d0c80d248354867aa0b6687b48485e4195f46f",
     "indexPath": "recipe/evidence/table-live-pivot-v33/antecedent-index.json",
-    "indexSha256": null,
-    "hashSetSha256": "ee199367146b2bfdbef2b3f3ab7ce4257f7e36ae3e55106e4737ff3387bfcfc1"
+    "indexSha256": "7daa247a44aa38ff1ece04b43e712a6b468b28098ae8029042c5d5f2d890cff3",
+    "hashSetSha256": "93c02a6dd98783bea27ac09e4fbe54aead61b39b066cf2eeeb8decec2e565218"
   },
   "signingPublicKey": {
     "algorithm": "Ed25519",
     "encoding": "SPKI-PEM",
-    "publicKeyPem": null,
-    "spkiSha256": null,
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAg5pA7xLZaYUNXSvUgWHNa2jqUikvO5GGqpetcNL9M3g=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "ccd113481731815d356bca47c2b158466f633976dc7dbcb1011baca9777a580e",
     "privateKeyStoredInRepository": false
   },
   "operatorBoundary": {

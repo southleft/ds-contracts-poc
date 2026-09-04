@@ -592,6 +592,7 @@ for(const source of PLAN.sources){
       if(ir.strokes[0]){
         node.strokeWeight=ir.strokes[0].weight;node.strokeAlign=ir.strokes[0].align.toUpperCase();
         bindFloat(node,"strokeWeight",bindingFor(ir,"strokes.0.weight"));
+        if(ir.strokes[0].sideWeights){const sw=ir.strokes[0].sideWeights;for(const [side,prop] of [["top","strokeTopWeight"],["right","strokeRightWeight"],["bottom","strokeBottomWeight"],["left","strokeLeftWeight"]]){node[prop]=sw[side];bindFloat(node,prop,bindingFor(ir,"strokes.0.sideWeights."+side));}}
       }
     }
     if(ir.cornerRadius){
