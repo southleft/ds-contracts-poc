@@ -507,7 +507,13 @@ const cellComponent = (
       ? []
       : [bind("layout.minWidth", density.minWidth)]),
     bind("strokes.0.paint.color", instance.tokens.cellRule),
-    bind("strokes.0.weight", instance.tokens.cellRuleWidth),
+    // The UNIFORM weight binding only when the cell draws every edge the same.
+    // Figma drops a bound `strokeWeight` the moment per-side weights differ —
+    // the property reads as mixed — so binding it beside the sides would ask
+    // the canvas to carry a variable it deletes, and the read-back would then
+    // refuse a binding the writer believed it had written (measured on the v35
+    // extract: the cell returned four side bindings and no strokeWeight).
+    ...(ruleSides ? [] : [bind("strokes.0.weight", instance.tokens.cellRuleWidth)]),
     ...(ruleSides
       // The established per-side binding path: recipe/scene-readback-table-v1.ts
       // has mapped Figma's strokeTopWeight… to strokes.0.weight.<side> since v25,
@@ -1340,11 +1346,20 @@ export function collapseTableRecipe(
           ? comfortableCell.strokes[0].paint.color
           : "#00000000",
       ),
-      cellRuleWidth: numberFrom(
-        comfortableCell,
-        "strokes.0.weight",
-        comfortableCell.strokes?.[0]?.weight ?? 0,
-      ),
+      // With per-side weights the canvas carries no uniform binding (see the
+      // compile above), so the cell rule's width is the width of a side the
+      // cell actually draws, and its variable is that side's.
+      cellRuleWidth: comfortableCell.strokes?.[0]?.sideWeights
+        ? (() => {
+            const sides = ["bottom", "top", "right", "left"] as const;
+            const drawn = sides.find((side) => (comfortableCell.strokes![0]!.sideWeights![side] ?? 0) > 0) ?? "bottom";
+            return numberFrom(comfortableCell, `strokes.0.weight.${drawn}`, comfortableCell.strokes![0]!.sideWeights![drawn]);
+          })()
+        : numberFrom(
+            comfortableCell,
+            "strokes.0.weight",
+            comfortableCell.strokes?.[0]?.weight ?? 0,
+          ),
       ...(comfortableCell.strokes?.[0]?.sideWeights
         ? {
             cellRuleSides: Object.fromEntries(

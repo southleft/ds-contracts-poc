@@ -6,12 +6,12 @@ if(expectedPageId==="163:35981")throw new Error("TABLE-MUST-NOT-WRITE-COMBOBOX-P
 if(figma.fileKey!=="byMp6lt0Ij9b2QbkDGFwBh"||figma.root.name!=="Scratch Project"||figma.editorType!=="figma")throw new Error("TABLE-V2-CLEANUP-WRONG-TARGET");
 await figma.loadAllPagesAsync();
 const CLEANUP_NS="ds.contracts.table.recipe.v1";
-const CLEANUP_PAGE_NAME="Recipe Pivot / Table / 352f751a-fe6da53c-table-v32";
-const CLEANUP_RUN_IDENTITY="352f751a-fe6da53c-table-v32";
-const CLEANUP_PAGE_OWNER="recipe/table/352f751a-fe6da53c-table-v32";
-const CLEANUP_COLLECTION_OWNER="recipe/table/352f751a-fe6da53c-table-v32/variable-collection";
+const CLEANUP_PAGE_NAME="Recipe Pivot / Table / 2f9b764f-83736472-table-v32";
+const CLEANUP_RUN_IDENTITY="2f9b764f-83736472-table-v32";
+const CLEANUP_PAGE_OWNER="recipe/table/2f9b764f-83736472-table-v32";
+const CLEANUP_COLLECTION_OWNER="recipe/table/2f9b764f-83736472-table-v32/variable-collection";
 const CLEANUP_ADAPTERS=new Set(["first-party-table-reviewed-v1","material-table-reviewed-v1"]);
-const CLEANUP_COLLECTION_NAMES=new Set(["Recipe Table / 352f751a-fe6da53c-table-v32 / first-party-table-reviewed-v1","Recipe Table / 352f751a-fe6da53c-table-v32 / material-table-reviewed-v1"]);
+const CLEANUP_COLLECTION_NAMES=new Set(["Recipe Table / 2f9b764f-83736472-table-v32 / first-party-table-reviewed-v1","Recipe Table / 2f9b764f-83736472-table-v32 / material-table-reviewed-v1"]);
 const FORBIDDEN_INPUT_PAGE="115:295378";
 const FORBIDDEN_COMBOBOX_PAGE="163:35981";
 const cleanupGet=(target,key)=>{try{return target.getSharedPluginData(CLEANUP_NS,key);}catch{return"";}};

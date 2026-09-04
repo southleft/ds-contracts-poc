@@ -12,7 +12,7 @@ const page=await figma.getNodeByIdAsync(PAGE_ID);
 if(!page||page.type!=="PAGE")throw new Error("TABLE-V2-RESTORE-PAGE");
 if(page.id==="115:295378")throw new Error("TABLE-MUST-NOT-WRITE-INPUT-PAGE");
 if(page.id==="163:35981")throw new Error("TABLE-MUST-NOT-WRITE-COMBOBOX-PAGE");
-if(page.getSharedPluginData(NS,"pageOwner")!=="recipe/table/"+"352f751a-fe6da53c-table-v32")throw new Error("TABLE-V2-RESTORE-OWNER");
+if(page.getSharedPluginData(NS,"pageOwner")!=="recipe/table/"+"2f9b764f-83736472-table-v32")throw new Error("TABLE-V2-RESTORE-OWNER");
 const sets=page.findAllWithCriteria({types:["COMPONENT_SET"]}).filter(node=>SET_IDS.includes(node.id));
 if(sets.length!==6)throw new Error("TABLE-V2-RESTORE-ROOTS:"+sets.length);
 const texts=[];

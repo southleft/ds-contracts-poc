@@ -221,15 +221,7 @@ const muiTokens = cloneTokens("mui.table", (path, fallback) => {
   if (path === "frameBorderWidth") return 0;
   if (path === "cellRule") return "#e0e0e0ff";
   if (path === "cellRuleWidth") return 1;
-  // MuiTableCell draws ONE edge: the capture reads border-bottom 1px
-  // rgba(224,224,224,1) and 0 on top/right/left, with border-collapse:
-  // collapse on the table (extract/computed/out/mui/table, base tree,
-  // MuiTableCell-root). Before 2026-09-03 the mint stroked all four sides and
-  // read as a grid where MUI renders rows.
-  if (path === "cellRuleSides.top") return 0;
-  if (path === "cellRuleSides.right") return 0;
-  if (path === "cellRuleSides.bottom") return 1;
-  if (path === "cellRuleSides.left") return 0;
+
   if (path === "radius") return 0;
   return fallback;
 });
@@ -241,6 +233,18 @@ const muiTokens = cloneTokens("mui.table", (path, fallback) => {
 delete (muiTokens.densities.compact as { minWidth?: unknown }).minWidth;
 delete (muiTokens.densities.comfortable as { minWidth?: unknown }).minWidth;
 
+// MuiTableCell draws ONE edge: the capture reads border-bottom 1px
+// rgba(224,224,224,1) with 0 on top, right and left, and border-collapse:
+// collapse on the table (extract/computed/out/mui/table, base tree,
+// MuiTableCell-root). The BOTTOM side is not a second fact beside the cell
+// rule's width — it IS that width, so it carries the same parameter: one
+// variable, one binding, one thing measured. The other three are zero.
+muiTokens.cellRuleSides = {
+  top: { variable: "mui.table.cellRuleSides-top", fallback: 0 },
+  right: { variable: "mui.table.cellRuleSides-right", fallback: 0 },
+  bottom: muiTokens.cellRuleWidth,
+  left: { variable: "mui.table.cellRuleSides-left", fallback: 0 },
+};
 muiTokens.typography = {
   header: {
     requestedFamily: "Roboto",

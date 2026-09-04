@@ -149,7 +149,7 @@
     "captureCells": 20,
     "remoteRequests": 25,
     "hostPhases": 3,
-    "expectedSceneFacts": 1254,
+    "expectedSceneFacts": 1234,
     "restoreHugTexts": 8
   },
   "execution": {

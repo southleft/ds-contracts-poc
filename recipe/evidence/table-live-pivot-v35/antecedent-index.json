@@ -11,8 +11,8 @@
       "sha256": "7ad7d715aecebc59463605a384ee9a35a150d8c4107970faebe9722e53b1bfbd"
     },
     "recipe/evidence/table-live-pivot-v35/expected-scene-plan-first-party-cell.json.gz": {
-      "bytes": 3839,
-      "sha256": "4d09f4c4f36cb4499e60a7c1b8df40d971ea9da02042c93bef055958fc4a4a17"
+      "bytes": 3576,
+      "sha256": "db351399511e4e83b318411b7a7868cff01469da31b5a17fe5b7d8f79bac4a1a"
     },
     "recipe/evidence/table-live-pivot-v35/expected-scene-plan-mui-table.json.gz": {
       "bytes": 3841,
@@ -23,24 +23,24 @@
       "sha256": "9eb1c44127a39e5ae8572c3001859745ebd22cc5b346541beca1bcf6ecbb8e08"
     },
     "recipe/evidence/table-live-pivot-v35/expected-scene-plan-mui-cell.json.gz": {
-      "bytes": 3832,
-      "sha256": "7437c5d27b96ee526fed01af01a02d882efffbef05ff8348954798a31cf2c6ca"
+      "bytes": 3771,
+      "sha256": "d56c85bd471d6a47c1abbf7b4590d0b86ad5bbcec0851b998860840410e312cc"
     },
     "recipe/evidence/table-live-pivot-v35/protocol.json": {
       "bytes": 7539,
-      "sha256": "682056eb8442e3ced2f9b27fce1498661715b798087ad2635aaceed2de68e66a"
+      "sha256": "09e96cf284bc69943474989345e7791ff1f5318cd410c9a20ae95c4811c1d3b5"
     },
     "recipe/evidence/table-live-pivot-v35/programs/writer.txt": {
-      "bytes": 79459,
-      "sha256": "cadd6f1e43b8c979934b42cd3c07f02bcf07b36b1084a18ea20452a844f8c495"
+      "bytes": 76685,
+      "sha256": "8a9312fafcc2761f10bd436b7690bb535625fc933bd26aa0b6d5677a5de76f28"
     },
     "recipe/evidence/table-live-pivot-v35/programs/restore-blueprint.js": {
       "bytes": 2914,
-      "sha256": "875bf74b3eb5c8546f49eb2e18981d52ba3dbbcff9f225fff08831f87cd675d3"
+      "sha256": "0e37ac18fd75f4a62550fd0ea09d36643e0a4e72bbe5393062dc0e2359315614"
     },
     "recipe/evidence/table-live-pivot-v35/programs/extract-blueprint.js": {
-      "bytes": 349300,
-      "sha256": "595c2684608a2d7db03c70e501d7b9bffeda89791cd88eb0440e805070414db5"
+      "bytes": 342832,
+      "sha256": "90e09c76e1e1017bd768ac1bc71e1e13340d2e1405785a2291639150818ea7ac"
     },
     "recipe/evidence/table-live-pivot-v35/programs/probe-blueprint.js": {
       "bytes": 8948,
@@ -52,7 +52,7 @@
     },
     "recipe/evidence/table-live-pivot-v35/programs/cleanup-blueprint.js": {
       "bytes": 5609,
-      "sha256": "bdbeeef20e2d956267b364f7ae7f2f082808596961b22ee2e0c6c211b83660dd"
+      "sha256": "44890882dff947ca330f7d62cb720921f25f1c75e04dc5bc5b8d4bfa4a3b7073"
     },
     "recipe/evidence/table-live-pivot-v35/capture-manifest.json": {
       "bytes": 9306,
@@ -60,7 +60,7 @@
     },
     "recipe/evidence/table-live-pivot-v35/proof-plan.json": {
       "bytes": 4158,
-      "sha256": "3be37ea5e0c1497fad2ffab9f1c79a947d305a602f873455bc5f3260d4f5f561"
+      "sha256": "7fed98239bbef99b7ab1a185b6ad2c1b3c2bb55ea41d195870020fa69a7fc47a"
     },
     "recipe/evidence/table-live-pivot-v35/request-manifest.json": {
       "bytes": 4219,
@@ -127,11 +127,11 @@
       "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
     }
   },
-  "hashSetSha256": "ca931546dc3e272564e3fcbb03ec79d3c0f8265ae22281dd3b1eed8b15f20ee3",
+  "hashSetSha256": "8a07a641305c7dddbf639c90d0282330eabd1f03d9c6bb30df19408d9673c813",
   "counts": {
     "sources": 2,
     "variants": 20,
-    "expectedSceneFacts": 1254,
+    "expectedSceneFacts": 1234,
     "captureCells": 20,
     "remoteRequests": 25,
     "hostPhases": 3
