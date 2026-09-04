@@ -1,9 +1,17 @@
 {
   "passed": 225,
   "total": 230,
-  "commit": "03620aeb20ca27c9ad9c30173703603678b88d4b",
+  "v1": {
+    "passed": 225,
+    "total": 225
+  },
+  "archive": {
+    "passed": 0,
+    "total": 5
+  },
+  "commit": "c0d29a8bb017eafa305151b8b8bb12438f7c3067",
   "dirty": false,
-  "recordedAt": "2026-09-03",
+  "recordedAt": "2026-09-04",
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -144,6 +152,7 @@
       "id": "shoelace-diagnose-prefix-match",
       "claim": "C5-extraction",
       "pass": false,
+      "path": "archive",
       "error": "Error: Code surface must be clean — proposals are extracted from this same manifest"
     },
     {
@@ -790,6 +799,7 @@
       "id": "promote-generalization",
       "claim": "C1-determinism",
       "pass": false,
+      "path": "archive",
       "error": "Error: carbon: contracts/tabs.anchors.json — the shared promote module did NOT reproduce the committed bytes (/Users/tjpitre/Sites/ds-contracts-poc/contracts/tabs.anchors.json)"
     },
     {
@@ -921,6 +931,7 @@
       "id": "astryx-reanchor-minted",
       "claim": "C1-determinism",
       "pass": false,
+      "path": "archive",
       "error": "Error: --propose failed:\nREFUSED: STALE LITERAL RECEIPT — RA-nomatch-0536591a: leaf imported.badge.root.background-color.neutral is #e5e5e5, but the refusal was acked against #0536591a. Re-run --propose and re-review.\n"
     },
     {
@@ -1037,6 +1048,7 @@
       "id": "minted-leaves-bind-to-something",
       "claim": "C2-refusal",
       "pass": false,
+      "path": "archive",
       "error": "Error: the shipped token sets grew variables nothing binds (task #42):\n  astryx: 8 → 21 unreferenced minted leaves (GREW)\n  carbon: 92 → 94 unreferenced minted leaves (GREW)"
     },
     {
@@ -1083,6 +1095,7 @@
       "id": "console-loop-canvas-drift-probe",
       "claim": "C3-detection",
       "pass": false,
+      "path": "archive",
       "error": "Error: astryx: expected 12 in-sync / 0 cell-pending, got 3 / 0"
     },
     {
