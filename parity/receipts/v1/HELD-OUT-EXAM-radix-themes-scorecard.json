@@ -1,0 +1,195 @@
+{
+  "library": "radix-themes",
+  "rows": [
+    {
+      "name": "avatar",
+      "measured": true,
+      "floorPct": 86.7063492063492,
+      "cellsCompared": 4032,
+      "cellsEqual": 3496,
+      "combos": 18,
+      "pixelPerfect": "24/72",
+      "sourceFacts": 27,
+      "namedRefusals": 7,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 7,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "badge",
+      "measured": true,
+      "floorPct": 92.38095238095238,
+      "cellsCompared": 1680,
+      "cellsEqual": 1552,
+      "combos": 12,
+      "pixelPerfect": "4/48",
+      "sourceFacts": 18,
+      "namedRefusals": 3,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 3,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "button",
+      "measured": true,
+      "floorPct": 87.3046875,
+      "cellsCompared": 12288,
+      "cellsEqual": 10728,
+      "combos": 48,
+      "pixelPerfect": "0/192",
+      "sourceFacts": 104,
+      "namedRefusals": 33,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 18,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 15,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "callout",
+      "measured": true,
+      "floorPct": 85.18518518518519,
+      "cellsCompared": 1944,
+      "cellsEqual": 1656,
+      "combos": 9,
+      "pixelPerfect": "0/36",
+      "sourceFacts": 0,
+      "namedRefusals": 9,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 9,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "card",
+      "measured": true,
+      "floorPct": 90.7103825136612,
+      "cellsCompared": 3660,
+      "cellsEqual": 3320,
+      "combos": 15,
+      "pixelPerfect": "0/60",
+      "sourceFacts": 0,
+      "namedRefusals": 7,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 7,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "checkbox",
+      "measured": true,
+      "floorPct": 77.56550218340611,
+      "cellsCompared": 16488,
+      "cellsEqual": 12789,
+      "combos": 54,
+      "pixelPerfect": "12/216",
+      "sourceFacts": 54,
+      "namedRefusals": 20,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 14,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 6,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "progress",
+      "measured": true,
+      "floorPct": 90.9090909090909,
+      "cellsCompared": 1980,
+      "cellsEqual": 1800,
+      "combos": 9,
+      "pixelPerfect": "0/36",
+      "sourceFacts": 9,
+      "namedRefusals": 5,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "switch",
+      "measured": true,
+      "floorPct": 91.06359649122807,
+      "cellsCompared": 10944,
+      "cellsEqual": 9966,
+      "combos": 36,
+      "pixelPerfect": "12/144",
+      "sourceFacts": 72,
+      "namedRefusals": 11,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 8,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 3,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "tabs",
+      "measured": true,
+      "floorPct": 88.98601398601399,
+      "cellsCompared": 1144,
+      "cellsEqual": 1018,
+      "combos": 1,
+      "pixelPerfect": "0/4",
+      "sourceFacts": 8,
+      "namedRefusals": 18,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 17,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "textfield",
+      "measured": true,
+      "floorPct": 76.20967741935483,
+      "cellsCompared": 4464,
+      "cellsEqual": 3402,
+      "combos": 18,
+      "pixelPerfect": "6/72",
+      "sourceFacts": 57,
+      "namedRefusals": 8,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 8,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    }
+  ],
+  "unmeasured": [],
+  "quarantined": [],
+  "totals": {
+    "measured": 10,
+    "weightedFloorPct": 84.82362172489083,
+    "cellsCompared": 58624,
+    "namedRefusals": 121,
+    "openQueue": 0,
+    "quarantined": 0
+  }
+}
