@@ -94,6 +94,22 @@ README that repeats what was read, what you reviewed, and what to do next.
   shadcn it reports, as evidence, that the mount has no label (the bare cell);
   on AntD it reports that the glyph is drawn by a pseudo-element it does not
   read.
+- **Name what the fixture refuses.** `--unsupported` is required, and it cannot
+  be drafted for you. Measured 2026-09-04 across all 41 committed generated
+  fixtures: the first three entries are `hover, focus-visible, active` in 40 of
+  them — a computed capture records no interaction states, so that much is
+  mechanical — but the rest is not. The committed tails name cells like
+  `variant-outlined`, `status-neutral`, `showIcon-off`, `image` and
+  `description`: prop *values* and library features, not props. Deriving them
+  from the contract's props minus the capture's axes reproduces **0 of 41**.
+  They are authored from knowledge of the library, which is why the command
+  refuses rather than guessing: a fixture that under-declares what it cannot
+  express is a claim nobody measured. (One inconsistency the same measurement
+  found and this page is not hiding: `checkbox.chakra` omits the three
+  interaction states that `checkbox.shadcn` names, though neither capture
+  records them. `unsupportedCells` feeds the benchmark accounting only — it
+  never reaches the IR or the emitted program — so this is an under-declaration
+  in a report, not a wrong canvas.)
 - **Cite the glyph.** An SVG polyline's points are not a computed style
   channel, so the check glyph's geometry comes from the package source, in a
   small JSON with the file it was read from (`glyph.json`). A `<path d>` the
