@@ -363,3 +363,48 @@ test("the emitted program is deterministic", () => {
     emitCalendarFigmaWriter([input()]).code,
   );
 });
+
+/**
+ * A calendar whose WeekNumbers dimension does not vary compiles to a lone
+ * component (figma-ir.ts refuses a one-valued variant axis), and this writer
+ * cannot mint that shape yet. It must say so BY NAME — the previous code read
+ * `found[0].kind` and produced a bare "required calendar/set set", which told a
+ * reader nothing about why a perfectly valid envelope was rejected.
+ */
+test("a calendar that does not vary on WeekNumbers is refused by name, not by crash", () => {
+  const varying = compileCalendarRecipe(astryxCalendarInstance);
+  const lone = structuredClone(varying) as unknown as {
+    ir: { children: Array<{ role?: string; kind: string; children?: unknown[] }> };
+  };
+  // Collapse calendar/set to the lone-component shape the recipe emits for a
+  // single-valued axis: the first variant, promoted, carrying the set's role.
+  const index = lone.ir.children.findIndex((c) => c.role === "calendar/set");
+  assert.ok(index >= 0, "the compiled scene carries a calendar/set");
+  const set = lone.ir.children[index] as unknown as {
+    children: Array<Record<string, unknown>>;
+    label?: string;
+  };
+  lone.ir.children[index] = {
+    ...(set.children[0] as Record<string, unknown>),
+    role: "calendar/set",
+    label: set.label,
+  } as unknown as (typeof lone.ir.children)[number];
+
+  assert.throws(
+    () =>
+      emitCalendarFigmaWriter([
+        {
+          adapterIdentity: "lone-variant-probe",
+          displayName: "lone variant probe",
+          recipeHash: "0".repeat(64),
+          envelope: lone as never,
+        },
+      ]),
+    (error: Error) => {
+      assert.match(error.message, /lone component, not a set/);
+      assert.match(error.message, /does not vary on its axis/);
+      assert.match(error.message, /Close:/, "a named red states its close");
+      return true;
+    },
+  );
+});

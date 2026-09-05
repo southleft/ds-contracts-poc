@@ -99,8 +99,8 @@
       "sha256": "a963b00f50a96cb73b27162acf14ee38ac2d82956ce9e256eb0babc20fb68522"
     },
     "recipe/calendar-figma-writer.ts": {
-      "bytes": 61815,
-      "sha256": "27ee65814fcea836f1b4775237aa570828f275b1e350c8853c9e49ae829fa56c"
+      "bytes": 63645,
+      "sha256": "425979b6186e99982be0a8102cf6c00bf74577278cbfcf70389f7a9200323238"
     },
     "recipe/figma-property-normalizer-v8.ts": {
       "bytes": 11009,
@@ -115,7 +115,7 @@
       "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
     }
   },
-  "hashSetSha256": "694678bda649d3e8c0b94742afe6aa86ac8f36448996a042076a8e69950ac81c",
+  "hashSetSha256": "3d965b026a8df82a4cade1449dd43f4fe973eb3acb51ce76d076e9859940bf2c",
   "counts": {
     "sources": 1,
     "variants": 8,

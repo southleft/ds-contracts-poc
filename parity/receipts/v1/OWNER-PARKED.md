@@ -99,6 +99,26 @@ the way, and two of them are the project's own design working as intended:
    shipped surface, and minting it needs a new lineage version built and
    owner-authorized — not a paste.
 
+**The writer now refuses this by name instead of crashing (2026-09-05).**
+`recipe/calendar-figma-writer.ts` used to read `found[0].kind` and emit a bare
+`required calendar/set set`, which told a reader nothing about why a perfectly
+valid compiled envelope was rejected. It now names the cause and the close:
+
+> `calendar/set is a lone component, not a set — this calendar does not vary on
+> its axis, which compiles (figma-ir.ts refuses a one-valued axis) but this
+> writer cannot yet mint: the emitted program combines variants and has no
+> single-component path. Close: add that path and exercise it on a live Scratch
+> run.`
+
+**Why the path was not simply written.** The emitted program's `mintSet` builds
+variant children and calls `figma.combineAsVariants`; a lone-component path is a
+change to the program that MINTS INTO A REAL FILE, and this repo has no Figma
+emulator to exercise it — only `compileExpectedScenePlan`, an offline model.
+Writing it now would ship a mint path that has never run and cannot run until
+Scratch is open. That is the "revert over ship-unexercised" rule, and a named
+red is carried where an unnamed one is a silent failure. A test pins the
+refusal so it cannot regress back into a crash.
+
 **One concrete finding, so the decision is cheaper to make.** If you do want F1
 minted through a new lineage, the v50 machinery is built around component
 SETS — `build-calendar-live-proof-v50.ts` calls

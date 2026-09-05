@@ -262,11 +262,44 @@ const variableType = (
   );
 };
 
+/**
+ * THE LONE-COMPONENT SHAPE IS COMPILED BUT NOT YET WRITABLE, AND THIS SAYS SO.
+ *
+ * `recipe/recipes/calendar.ts` emits a group as a component SET only where the
+ * dimension actually varies, and as a lone COMPONENT where it does not --
+ * `figma-ir.ts` refuses a one-valued variant axis, and Figma models a component
+ * that does not vary as a plain component. A subject that pins
+ * `showWeekNumber` (react-day-picker does) therefore compiles a lone
+ * `calendar/set` and `calendar/week-set`.
+ *
+ * This writer cannot yet mint that shape: `mintSet` in the emitted program
+ * iterates variant children and calls `figma.combineAsVariants`, which needs at
+ * least one variant to combine. Teaching it the lone-component path is a real
+ * change to the program that MINTS INTO A REAL FILE, and there is no Figma
+ * emulator in this repo to exercise it -- only `compileExpectedScenePlan`, an
+ * offline model. Writing that path now would ship a mint path that has never
+ * run and cannot be run until someone opens Scratch.
+ *
+ * So it refuses BY NAME instead, with the cause and the close. A named red is
+ * carried; an unnamed one is a silent failure, and a crash reading
+ * `found[0].kind` was the silent version of this.
+ */
 const requireSet = (root: IRNode, role: string): ComponentSetNode => {
   if (root.kind !== "frame")
     throw new TypeError("calendar live writer requires calendar/library frame");
   const found = root.children.filter((child) => child.role === role);
-  if (found.length !== 1 || found[0]!.kind !== "component-set")
+  if (found.length !== 1)
+    throw new TypeError(
+      `calendar live writer: required ${role} set (found ${found.length})`,
+    );
+  if (found[0]!.kind === "component")
+    throw new TypeError(
+      `calendar live writer: ${role} is a lone component, not a set — this calendar does not vary on its axis, ` +
+        `which compiles (figma-ir.ts refuses a one-valued axis) but this writer cannot yet mint: the emitted ` +
+        `program combines variants and has no single-component path. Close: add that path and exercise it on a ` +
+        `live Scratch run. See parity/receipts/v1/OWNER-PARKED.md P2.`,
+    );
+  if (found[0]!.kind !== "component-set")
     throw new TypeError(`calendar live writer: required ${role} set`);
   return found[0];
 };
