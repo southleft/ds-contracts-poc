@@ -74,26 +74,87 @@ export const CALENDAR_DAY_STATES = [
 
 /**
  * Declared template counts, the same device `table@1` uses for its column and
- * body-row counts. Seven days is what a week IS. The week count is the source
- * default grid: `@astryxdesign/core` `hasVariableRowCount` defaults false, so
- * `useCalendarDays` always emits 6 rows × 7 = 42 cells, filling unused slots
- * with adjacent-month outside days. Variable-row months are a different prop
- * and are not this template.
+ * body-row counts. Seven days is what a week IS — that one is arithmetic.
+ *
+ * THE WEEK COUNT WAS NOT. It read 6, and the paragraph that stood here defended
+ * it as "the source default grid: `@astryxdesign/core` `hasVariableRowCount`
+ * defaults false, so `useCalendarDays` always emits 6 rows × 7 = 42 cells …
+ * Variable-row months are a different prop and are not this template."
+ *
+ * That is ONE LIBRARY'S DEFAULT written down as a property of calendars. It is
+ * true of Astryx and false of the world: react-day-picker renders January 2026
+ * as FIVE `<tr class="rdp-week">`, and the F1 held-out exam refused to compile
+ * against it — `week-count-not-six`, the first of eleven named gaps in
+ * `recipe/evidence/f1-held-out-v1/compile-gaps.json`. The recipe could not
+ * describe a real calendar it had not been tuned for, and the honest refusal
+ * was the evidence.
+ *
+ * A month grid carries between four and six week rows. Four is February in a
+ * common year beginning on the first weekday; six is any month whose days
+ * overflow five rows. The count is a fact of the INSTANCE, read from the
+ * ledger, and every enforcement below now compares against the instance's own
+ * `content.weeks.length` rather than a constant. Six remains valid, so every
+ * committed six-week fixture validates unchanged.
  */
 export const CALENDAR_DAY_COUNT = 7;
+/** @deprecated The Astryx default. Kept because the writer's per-source
+ *  instance arithmetic and the frozen v1 proof tests still pin it; new code
+ *  reads the instance's own week count. */
 export const CALENDAR_WEEK_COUNT = 6;
+export const CALENDAR_WEEK_MIN = 4;
+export const CALENDAR_WEEK_MAX = 6;
 
 export type CalendarWeekNumbers = (typeof CALENDAR_WEEK_NUMBERS)[number];
 export type CalendarDayState = (typeof CALENDAR_DAY_STATES)[number];
 
 export interface CalendarNumberParameter {
-  variable: string;
+  /** null = no verified source binding; see NumberParameterSchema. */
+  variable: string | null;
   fallback: number;
 }
 export interface CalendarColorParameter {
-  variable: string;
+  /** null = no verified source binding; see ColorParameterSchema. */
+  variable: string | null;
   fallback: string;
 }
+/** A radius spelled as a percentage of its box; see PercentParameterSchema. */
+export interface CalendarPercentParameter {
+  variable: string | null;
+  percent: number;
+}
+export type CalendarRadiusParameter =
+  | CalendarNumberParameter
+  | CalendarPercentParameter;
+/** Narrowing helper: the percent spelling carries `percent`, the px spelling `fallback`. */
+export const isPercentParameter = (
+  value: CalendarRadiusParameter,
+): value is CalendarPercentParameter =>
+  (value as CalendarPercentParameter).percent !== undefined;
+/**
+ * The single declared lowering for a percent radius: resolve it against the
+ * box it applies to. Every consumer of `dayButton.radius` goes through here,
+ * so there is exactly one place where a percentage becomes a length.
+ */
+export const resolveRadius = (
+  radius: CalendarRadiusParameter,
+  boxSize: number,
+): number => {
+  if (!isPercentParameter(radius)) return radius.fallback;
+  /**
+   * CSS scales overlapping corner radii down (CSS Backgrounds 3 s5.5): if the
+   * radii along a side sum to more than the side's length, every radius is
+   * multiplied by f = min(side / sum). For a uniform p% on a square, each side
+   * carries two radii of p*S/100, so f = 50/p whenever p > 50 -- which lands
+   * the effective radius at exactly S/2, a circle.
+   *
+   * So `border-radius: 100%` and `border-radius: 50%` draw the SAME circle,
+   * and a naive p*S/100 returns S for the first: a radius twice the real one.
+   * The round trip caught it -- the scene came back with 42 where the source
+   * draws 21 -- which is the whole point of raising the scene and comparing.
+   */
+  const effective = Math.min(radius.percent, 50);
+  return (boxSize * effective) / 100;
+};
 export interface CalendarFontSpec {
   requestedFamily: string;
   requestedStyle: string;
@@ -110,7 +171,7 @@ export interface CalendarDay {
 }
 export interface CalendarWeek {
   id: string;
-  weekNumber: string;
+  weekNumber?: string;
   days: CalendarDay[];
 }
 
@@ -185,8 +246,9 @@ export interface CalendarRecipeInstance {
      */
     dayButton: {
       size: CalendarNumberParameter;
-      radius: CalendarNumberParameter;
+      radius: CalendarRadiusParameter;
     };
+    weekdayFontSize?: CalendarNumberParameter;
     gridGap: CalendarNumberParameter;
     /**
      * Vertical stack gap between caption and the weekday/grid body.
@@ -218,7 +280,7 @@ export interface CalendarRecipeInstance {
     surface: CalendarColorParameter;
     captionText: CalendarColorParameter;
     weekdayText: CalendarColorParameter;
-    weekNumberText: CalendarColorParameter;
+    weekNumberText?: CalendarColorParameter;
     dayStates: Record<CalendarDayState, DayStateTokens>;
     typography: {
       caption: CalendarFontSpec;
@@ -243,14 +305,52 @@ const FactRefSchema = z.strictObject({
   path: z.string().min(1),
   channel: z.string().min(1),
 });
+/**
+ * `variable: null` means THE LEDGER CARRIES NO VERIFIED BINDING for this
+ * channel -- not "we have not looked yet" and not "bind it to something
+ * plausible". A subject whose DTCG file the extractor could not join (or which
+ * ships no token file at all) has zero verified bindings, and the honest
+ * spelling of that is the absence itself. The alternative -- minting a name
+ * like `rdp.calendar.day.size` -- would claim an invert that nothing
+ * downstream can resolve, so the writer would paint a dangling reference and
+ * the round trip would raise a name no source ever defined.
+ *
+ * An unbound token still carries its `fallback`, so the canvas is painted from
+ * a measured literal. What is lost is only the LINK to a source token, and
+ * that loss is visible in the instance rather than papered over.
+ */
 const NumberParameterSchema = z.strictObject({
-  variable: z.string().min(1),
+  variable: z.string().min(1).nullable(),
   fallback: z.number().finite(),
 });
 const ColorParameterSchema = z.strictObject({
-  variable: z.string().min(1),
+  variable: z.string().min(1).nullable(),
   fallback: z.string().min(1),
 });
+/**
+ * A corner radius the source spells as a PERCENTAGE of its box instead of a
+ * length. `border-radius: 100%` on a square is a circle at every size, and
+ * folding it to px at authoring time would freeze one box's answer into the
+ * token -- the same species of mistake as writing one library's row count into
+ * the archetype (see CALENDAR_WEEK_COUNT).
+ *
+ * The lowering is total and declared: px = size * percent / 100, taken against
+ * the SAME `dayButton.size` the instance already carries, so no second
+ * measurement and no invented length enter. The raise is deliberately NOT
+ * symmetric: reading a scene back always yields the px spelling, because a
+ * 21px radius on a 42px square is indistinguishable from 100% once drawn.
+ * Scene -> instance -> scene is therefore a fixed point; instance -> scene ->
+ * instance normalises percent to px, which is a narrowing we accept and name
+ * rather than a loss we hide.
+ */
+const PercentParameterSchema = z.strictObject({
+  variable: z.string().min(1).nullable(),
+  percent: z.number().finite().positive(),
+});
+const RadiusParameterSchema = z.union([
+  NumberParameterSchema,
+  PercentParameterSchema,
+]);
 const FontSpecSchema = z.strictObject({
   requestedFamily: z.string().min(1),
   requestedStyle: z.string().min(1),
@@ -302,18 +402,43 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
       .array(
         z.strictObject({
           id: z.string().min(1),
-          weekNumber: z.string().min(1),
+          /**
+           * Absent when the source renders no week-number column. Required
+           * whenever the WeekNumbers axis offers "on" -- enforced below,
+           * because a week-number label that has to be invented to satisfy a
+           * schema is exactly the content this recipe must never mint.
+           */
+          weekNumber: z.string().min(1).optional(),
           days: z
             .array(
-              z.strictObject({
-                label: z.string().min(1),
-                state: z.enum(CALENDAR_DAY_STATES),
-              }),
+              z
+                .strictObject({
+                  /**
+                   * Empty ONLY for an `outside` cell. A source that renders
+                   * the leading/trailing days of adjacent months as blank
+                   * but still measured (a hidden cell holding the grid's
+                   * shape) carries no text, and the honest spelling of that
+                   * is "". Requiring min(1) here forced a compiler to invent
+                   * the neighbouring month's dates, which is content no
+                   * capture ever saw.
+                   */
+                  label: z.string(),
+                  state: z.enum(CALENDAR_DAY_STATES),
+                })
+                .superRefine((day, ctx) => {
+                  if (day.state !== "outside" && day.label.length === 0)
+                    ctx.addIssue({
+                      code: "custom",
+                      path: ["label"],
+                      message: `a ${day.state} day must carry a visible label; only an outside cell may be blank`,
+                    });
+                }),
             )
             .length(CALENDAR_DAY_COUNT),
         }),
       )
-      .length(CALENDAR_WEEK_COUNT),
+      .min(CALENDAR_WEEK_MIN)
+      .max(CALENDAR_WEEK_MAX),
     selectedDayLabel: z.string().min(1),
     todayDayLabel: z.string().min(1),
   }),
@@ -326,8 +451,15 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
     }),
     dayButton: z.strictObject({
       size: NumberParameterSchema,
-      radius: NumberParameterSchema,
+      radius: RadiusParameterSchema,
     }),
+    /**
+     * Weekday-header font size, when the source sizes the weekday row
+     * differently from the day numbers. Absent means "same as
+     * dayCell.fontSize", which is what a source that sizes them alike
+     * carries; it is not a default standing in for an unmeasured value.
+     */
+    weekdayFontSize: NumberParameterSchema.optional(),
     gridGap: NumberParameterSchema,
     captionGap: NumberParameterSchema,
     rootPadding: NumberParameterSchema,
@@ -336,7 +468,7 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
     surface: ColorParameterSchema,
     captionText: ColorParameterSchema,
     weekdayText: ColorParameterSchema,
-    weekNumberText: ColorParameterSchema,
+    weekNumberText: ColorParameterSchema.optional(),
     dayStates: z.strictObject({
       default: DayStateTokensSchema,
       today: DayStateTokensSchema,
@@ -362,7 +494,52 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
     generatedAt: z.string().min(1),
     selection: RecipeSelectionSchema,
   }),
+}).superRefine((instance, ctx) => {
+  /**
+   * The week-number column is all-or-nothing. Making `weekNumberText` and
+   * `content.weeks[].weekNumber` optional lets a source that renders no such
+   * column say so; it must not let a source that DOES render one omit the
+   * paint or the labels and have the writer fill in a colour of its own
+   * choosing. So: offer "on" and you owe both.
+   */
+  const offersOn = instance.axes.weekNumbers.values.includes("on");
+  if (!offersOn) return;
+  if (instance.tokens.weekNumberText === undefined)
+    ctx.addIssue({
+      code: "custom",
+      path: ["tokens", "weekNumberText"],
+      message:
+        'the WeekNumbers axis offers "on", so a week-number text colour is required',
+    });
+  instance.content.weeks.forEach((week, index) => {
+    if (week.weekNumber === undefined)
+      ctx.addIssue({
+        code: "custom",
+        path: ["content", "weeks", index, "weekNumber"],
+        message:
+          'the WeekNumbers axis offers "on", so every week requires a week-number label',
+      });
+  });
 });
+
+/**
+ * Reads the week-number label and paint for a week, on the "on" branch only.
+ * `normalizeCalendarRecipeInstance` already guarantees both are present when
+ * the axis offers "on"; reaching here without them means an instance was built
+ * without going through normalize, so refuse by name rather than assert.
+ */
+const weekNumberParts = (
+  instance: CalendarRecipeInstance,
+  week: CalendarRecipeInstance["content"]["weeks"][number],
+): { label: string; color: CalendarColorParameter } => {
+  const label = week.weekNumber;
+  const color = instance.tokens.weekNumberText;
+  if (label === undefined || color === undefined)
+    throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+      'the WeekNumbers axis is "on" but the instance carries no week-number label or colour',
+    ]);
+  return { label, color };
+};
 
 const compareText = (left: string, right: string): number =>
   left < right ? -1 : left > right ? 1 : 0;
@@ -396,14 +573,34 @@ const hug = { mode: "hug" } as const;
 const fill = { mode: "fill" } as const;
 const fixed = (value: number) => ({ mode: "fixed" as const, value });
 const solid = (color: string) => ({ kind: "solid" as const, color });
+/**
+ * Lowering half of the unbound-token pair. A parameter whose `variable` is
+ * null emits NO binding at all -- the field is painted from its fallback and
+ * the scene simply carries no reference for it. `binds` drops the nulls so an
+ * assembly site can list every channel it knows about without first asking
+ * which ones happen to be bound.
+ *
+ * The raising half is `binding` below, and the two have to agree: bind emits
+ * nothing for an unbound token, so binding must READ nothing back as null
+ * rather than refusing. If either half treated absence as an error the fixed
+ * point would not close on any subject with an unjoined token file.
+ */
 const bind = (
   field: string,
-  parameter: CalendarNumberParameter | CalendarColorParameter,
-): VariableBinding => ({
-  field,
-  type: field.endsWith(".color") ? "COLOR" : "FLOAT",
-  variable: parameter.variable,
-});
+  parameter:
+    | CalendarNumberParameter
+    | CalendarColorParameter
+    | CalendarPercentParameter,
+): VariableBinding | null =>
+  parameter.variable === null
+    ? null
+    : {
+        field,
+        type: field.endsWith(".color") ? "COLOR" : "FLOAT",
+        variable: parameter.variable,
+      };
+const binds = (entries: (VariableBinding | null)[]): VariableBinding[] =>
+  entries.filter((entry): entry is VariableBinding => entry !== null);
 const corners = (value: number) => ({
   topLeft: value,
   topRight: value,
@@ -445,11 +642,11 @@ const text = (
   fills: [solid(color.fallback)],
   width: columnWidth === undefined ? hug : fixed(columnWidth.fallback),
   height: hug,
-  bindings: [
+  bindings: binds([
     bind("type.fontSize", size),
     bind("fills.0.color", color),
     ...(columnWidth === undefined ? [] : [bind("width.value", columnWidth)]),
-  ],
+  ]),
 });
 
 /**
@@ -488,8 +685,8 @@ const dayComponent = (
             },
           ],
         }),
-    cornerRadius: corners(button.radius.fallback),
-    bindings: [
+    cornerRadius: corners(resolveRadius(button.radius, button.size.fallback)),
+    bindings: binds([
       bind("layout.width.value", button.size),
       bind("layout.height.value", button.size),
       bind("cornerRadius.topLeft", button.radius),
@@ -500,7 +697,7 @@ const dayComponent = (
             bind("strokes.0.paint.color", stateTokens.ring),
             bind("strokes.0.weight", stateTokens.ringWidth),
           ]),
-    ],
+    ]),
     children: [
       text(
         "calendar/day/label",
@@ -532,7 +729,7 @@ const dayComponent = (
     },
     fills: [],
     cornerRadius: corners(cell.radius.fallback),
-    bindings: [
+    bindings: binds([
       bind("layout.width.value", cell.size),
       bind("layout.height.value", cell.size),
       bind("layout.padding.left", cell.padding),
@@ -540,7 +737,7 @@ const dayComponent = (
       bind("layout.padding.top", cell.padding),
       bind("layout.padding.bottom", cell.padding),
       bind("cornerRadius.topLeft", cell.radius),
-    ],
+    ]),
     children: [dayButton],
   };
 };
@@ -580,10 +777,10 @@ const weekComponent = (
     children.push(
       text(
         "calendar/week/number",
-        week.weekNumber,
+        weekNumberParts(instance, week).label,
         instance.tokens.typography.weekday,
-        instance.tokens.dayCell.fontSize,
-        instance.tokens.weekNumberText,
+        instance.tokens.weekdayFontSize ?? instance.tokens.dayCell.fontSize,
+        weekNumberParts(instance, week).color,
         instance.tokens.dayCell.size,
       ),
     );
@@ -610,7 +807,7 @@ const weekComponent = (
       height: hug,
     },
     fills: [],
-    bindings: [bind("layout.itemSpacing", instance.tokens.gridGap)],
+    bindings: binds([bind("layout.itemSpacing", instance.tokens.gridGap)]),
     children,
   };
 };
@@ -642,10 +839,10 @@ const weekFrame = (
     children.push(
       text(
         `calendar/week/${index}/number`,
-        week.weekNumber,
+        weekNumberParts(instance, week).label,
         instance.tokens.typography.weekday,
-        instance.tokens.dayCell.fontSize,
-        instance.tokens.weekNumberText,
+        instance.tokens.weekdayFontSize ?? instance.tokens.dayCell.fontSize,
+        weekNumberParts(instance, week).color,
         instance.tokens.dayCell.size,
       ),
     );
@@ -671,7 +868,7 @@ const weekFrame = (
       height: hug,
     },
     fills: [],
-    bindings: [bind("layout.itemSpacing", instance.tokens.gridGap)],
+    bindings: binds([bind("layout.itemSpacing", instance.tokens.gridGap)]),
     children,
   };
 };
@@ -685,10 +882,10 @@ const weekdayRow = (
     children.push(
       text(
         "calendar/weekday/spacer",
-        instance.content.weeks[0]!.weekNumber,
+        weekNumberParts(instance, instance.content.weeks[0]!).label,
         instance.tokens.typography.weekday,
-        instance.tokens.dayCell.fontSize,
-        instance.tokens.weekNumberText,
+        instance.tokens.weekdayFontSize ?? instance.tokens.dayCell.fontSize,
+        weekNumberParts(instance, instance.content.weeks[0]!).color,
         instance.tokens.dayCell.size,
       ),
     );
@@ -698,7 +895,7 @@ const weekdayRow = (
         `calendar/weekday/${index}`,
         weekday,
         instance.tokens.typography.weekday,
-        instance.tokens.dayCell.fontSize,
+        instance.tokens.weekdayFontSize ?? instance.tokens.dayCell.fontSize,
         instance.tokens.weekdayText,
         instance.tokens.dayCell.size,
       ),
@@ -717,7 +914,7 @@ const weekdayRow = (
       height: hug,
     },
     fills: [],
-    bindings: [bind("layout.itemSpacing", instance.tokens.gridGap)],
+    bindings: binds([bind("layout.itemSpacing", instance.tokens.gridGap)]),
     children,
   };
 };
@@ -747,10 +944,10 @@ const navButton = (
     height: fixed(instance.tokens.dayCell.size.fallback),
   },
   fills: [],
-  bindings: [
+  bindings: binds([
     bind("layout.width.value", instance.tokens.dayCell.size),
     bind("layout.height.value", instance.tokens.dayCell.size),
-  ],
+  ]),
   children: [
     text(
       `${role}/icon`,
@@ -776,10 +973,10 @@ const captionInHeader = (instance: CalendarRecipeInstance): TextNode => ({
   fills: [solid(instance.tokens.captionText.fallback)],
   width: fill,
   height: hug,
-  bindings: [
+  bindings: binds([
     bind("type.fontSize", instance.tokens.dayCell.fontSize),
     bind("fills.0.color", instance.tokens.captionText),
-  ],
+  ]),
 });
 
 const headerRow = (instance: CalendarRecipeInstance): FrameNode => {
@@ -798,7 +995,7 @@ const headerRow = (instance: CalendarRecipeInstance): FrameNode => {
       height: hug,
     },
     fills: [],
-    bindings: [bind("layout.itemSpacing", headerGap)],
+    bindings: binds([bind("layout.itemSpacing", headerGap)]),
     children: [
       navButton(instance, "calendar/nav/previous", "Previous month", "‹"),
       captionInHeader(instance),
@@ -835,7 +1032,7 @@ const calendarComponent = (
       height: hug,
     },
     fills: [],
-    bindings: [bind("layout.itemSpacing", gap)],
+    bindings: binds([bind("layout.itemSpacing", gap)]),
     children: instance.content.weeks.map((week, index) =>
       weekFrame(instance, week, index, weekNumbers),
     ),
@@ -861,7 +1058,7 @@ const calendarComponent = (
       minWidth: instance.tokens.rootMinWidth.fallback,
     },
     fills: [solid(instance.tokens.surface.fallback)],
-    bindings: [
+    bindings: binds([
       bind("layout.itemSpacing", stackGap),
       bind("layout.padding.left", rootPad),
       bind("layout.padding.right", rootPad),
@@ -869,7 +1066,7 @@ const calendarComponent = (
       bind("layout.padding.bottom", rootPad),
       bind("layout.minWidth", instance.tokens.rootMinWidth),
       bind("fills.0.color", instance.tokens.surface),
-    ],
+    ]),
     children: [headerRow(instance), weekdayRow(instance, weekNumbers), grid],
   };
 };
@@ -894,32 +1091,45 @@ const setNode = (
     height: hug,
   },
   fills: [],
-  bindings: [],
+  bindings: binds([]),
   children,
 });
 
 export function compileCalendarIr(instance: CalendarRecipeInstance): FrameNode {
-  const daySet = setNode(
+  /**
+   * Enumerate the axes THE INSTANCE DECLARES, not the module-level lists of
+   * every value the archetype knows about. Those constants describe what a
+   * calendar may vary; `instance.axes` describes what THIS subject varies. A
+   * source that pins showWeekNumber false offers only "off", and building an
+   * "on" variant for it fabricates a week-number column -- the compiler was
+   * doing exactly that, which is the same mistake as CALENDAR_WEEK_COUNT:
+   * one possible shape hardcoded as the only shape.
+   */
+  const weekNumberValues = instance.axes.weekNumbers.values;
+  const calendarValues = instance.axes.weekNumbers.values;
+  const dayStateValues = instance.axes.dayState.values;
+  const daySet = variantGroup(
     "calendar/day-set",
     "Calendar day",
-    CALENDAR_DAY_STATES.map((state) => dayComponent(instance, state)),
-    { State: [...CALENDAR_DAY_STATES] },
+    dayStateValues.map((state) => dayComponent(instance, state)),
+    "State",
+    dayStateValues,
   );
-  const weekSet = setNode(
+  const weekSet = variantGroup(
     "calendar/week-set",
     "Calendar week",
-    CALENDAR_WEEK_NUMBERS.map((weekNumbers) =>
-      weekComponent(instance, weekNumbers),
-    ),
-    { WeekNumbers: [...CALENDAR_WEEK_NUMBERS] },
+    weekNumberValues.map((weekNumbers) => weekComponent(instance, weekNumbers)),
+    "WeekNumbers",
+    weekNumberValues,
   );
-  const calendarSet = setNode(
+  const calendarSet = variantGroup(
     "calendar/set",
     instance.identity.name,
-    CALENDAR_WEEK_NUMBERS.map((weekNumbers) =>
+    calendarValues.map((weekNumbers) =>
       calendarComponent(instance, weekNumbers),
     ),
-    { WeekNumbers: [...CALENDAR_WEEK_NUMBERS] },
+    "WeekNumbers",
+    calendarValues,
   );
   return {
     kind: "frame",
@@ -935,7 +1145,7 @@ export function compileCalendarIr(instance: CalendarRecipeInstance): FrameNode {
       height: hug,
     },
     fills: [],
-    bindings: [],
+    bindings: binds([]),
     children: [calendarSet, weekSet, daySet],
   };
 }
@@ -976,6 +1186,62 @@ const setByRole = (root: FrameNode, role: string): ComponentSetNode => {
     ]);
   return found as ComponentSetNode;
 };
+/**
+ * A dimension with ONE declared value is not a variant axis, and figma-ir.ts
+ * is right to refuse one: a component set requires an axis of at least two
+ * values. Figma models a component that does not vary as a plain component,
+ * and so do we.
+ *
+ * This is what lets a subject that pins `showWeekNumber` compile at all. The
+ * alternatives were both wrong: emit a 1-valued axis (an IR the schema
+ * rejects) or synthesise a second variant (week-number labels and a paint the
+ * capture never measured -- invented content).
+ */
+const variantGroup = (
+  role: string,
+  label: string,
+  children: ComponentNode[],
+  axisName: string,
+  values: readonly string[],
+): ComponentSetNode | ComponentNode =>
+  values.length >= 2
+    ? setNode(role, label, children, { [axisName]: [...values] })
+    : { ...children[0]!, role, label };
+
+/** Reads a group back whether it was emitted as a set or a lone component. */
+const groupByRole = (
+  root: FrameNode,
+  role: string,
+): { node: ComponentSetNode | ComponentNode; variants: ComponentNode[] } => {
+  const found = root.children.find(
+    (child) =>
+      (child.kind === "component-set" || child.kind === "component") &&
+      child.role === role,
+  );
+  if (!found)
+    throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+      `missing required set ${role}`,
+    ]);
+  const group = found as ComponentSetNode | ComponentNode;
+  return group.kind === "component-set"
+    ? { node: group, variants: group.children }
+    : { node: group, variants: [group] };
+};
+
+/**
+ * Selects one variant by axis value. When the group is a lone component the
+ * dimension does not vary, so the only variant IS the answer whatever value
+ * is asked for -- asking for "on" against a subject that only has "off" is
+ * caught earlier, at the schema, not here.
+ */
+const variantFor = (
+  group: { node: ComponentSetNode | ComponentNode; variants: ComponentNode[] },
+  properties: Record<string, string>,
+): ComponentNode => {
+  if (group.node.kind === "component") return group.variants[0]!;
+  return componentFor(group.node, properties);
+};
+
 const componentFor = (
   set: ComponentSetNode,
   properties: Record<string, string>,
@@ -993,6 +1259,23 @@ const componentFor = (
     ]);
   return found[0] as ComponentNode;
 };
+/** As `direct`, but absence is a value rather than a refusal. */
+const directOptional = <Kind extends IRNode["kind"]>(
+  parent: { children?: IRNode[] },
+  role: string,
+  kind: Kind,
+): Extract<IRNode, { kind: Kind }> | null => {
+  const found = (parent.children ?? []).filter(
+    (child) => child.role === role && child.kind === kind,
+  );
+  if (found.length > 1)
+    throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+      `expected at most one ${role} of kind ${kind}`,
+    ]);
+  return found.length === 0
+    ? null
+    : (found[0] as Extract<IRNode, { kind: Kind }>);
+};
 const direct = <Kind extends IRNode["kind"]>(
   parent: { children?: IRNode[] },
   role: string,
@@ -1007,16 +1290,22 @@ const direct = <Kind extends IRNode["kind"]>(
     ]);
   return found[0] as Extract<IRNode, { kind: Kind }>;
 };
+/**
+ * Raising half of the unbound-token pair (see `bind`). ZERO bindings for a
+ * field is the readback of an unbound token and returns null; TWO OR MORE is
+ * still a refusal, because that is an ambiguous scene rather than an absent
+ * fact. Only the ambiguity is an error -- absence is a value.
+ */
 const binding = (
   node: { role?: string; bindings?: VariableBinding[] },
   field: string,
-): string => {
+): string | null => {
   const found = (node.bindings ?? []).filter((entry) => entry.field === field);
-  if (found.length !== 1)
+  if (found.length > 1)
     throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-      `${node.role ?? "node"}: required binding ${field} must appear exactly once`,
+      `${node.role ?? "node"}: binding ${field} appears ${found.length} times; it must appear at most once`,
     ]);
-  return found[0]!.variable;
+  return found.length === 0 ? null : found[0]!.variable;
 };
 const numberFrom = (
   node: { role?: string; bindings?: VariableBinding[] },
@@ -1046,24 +1335,45 @@ const fontFrom = (node: TextNode): CalendarFontSpec => {
 };
 
 export function validateCalendarStructure(root: FrameNode): void {
+  /** Every variant of one instance draws the same month shape; the first
+   *  variant sets it and the rest must agree. */
+  let gridWeeks: number | null = null;
   if (root.role !== "calendar/library")
     throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
       "missing calendar library frame",
     ]);
-  const calendarSet = setByRole(root, "calendar/set");
-  const weekSet = setByRole(root, "calendar/week-set");
-  const daySet = setByRole(root, "calendar/day-set");
-  if (calendarSet.children.length !== CALENDAR_WEEK_NUMBERS.length)
+  const calendarGroup = groupByRole(root, "calendar/set");
+  const weekGroup = groupByRole(root, "calendar/week-set");
+  const dayGroup = groupByRole(root, "calendar/day-set");
+  const calendarSet = { children: calendarGroup.variants };
+  const weekSet = { children: weekGroup.variants };
+  const daySet = { children: dayGroup.variants };
+  /**
+   * This validator sees only the drawn scene, so it cannot know which axis
+   * values the instance declared. What it CAN prove is that the count is
+   * legal and that the two WeekNumbers-keyed sets agree with each other -- a
+   * scene offering two calendar variants but one week variant is incoherent
+   * however it was produced. Pinning both to CALENDAR_WEEK_NUMBERS.length
+   * instead refused every subject that legitimately varies on fewer.
+   */
+  const weekNumberVariants = calendarSet.children.length;
+  if (
+    weekNumberVariants < 1 ||
+    weekNumberVariants > CALENDAR_WEEK_NUMBERS.length
+  )
     throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-      "calendar/set must carry every WeekNumbers variant",
+      `calendar/set carries ${weekNumberVariants} WeekNumbers variant(s); a calendar declares 1-${CALENDAR_WEEK_NUMBERS.length}`,
     ]);
-  if (weekSet.children.length !== CALENDAR_WEEK_NUMBERS.length)
+  if (weekSet.children.length !== weekNumberVariants)
     throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-      "calendar/week-set must carry every WeekNumbers variant",
+      `calendar/week-set carries ${weekSet.children.length} WeekNumbers variant(s) but calendar/set carries ${weekNumberVariants}`,
     ]);
-  if (daySet.children.length !== CALENDAR_DAY_STATES.length)
+  if (
+    daySet.children.length < 1 ||
+    daySet.children.length > CALENDAR_DAY_STATES.length
+  )
     throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-      "calendar/day-set must carry every day State",
+      `calendar/day-set carries ${daySet.children.length} State variant(s); a calendar declares 1-${CALENDAR_DAY_STATES.length}`,
     ]);
   for (const day of daySet.children) {
     if (day.kind !== "component")
@@ -1101,7 +1411,9 @@ export function validateCalendarStructure(root: FrameNode): void {
   // nothing, and a designer can still click it -- which is worse than not
   // offering it. `OutsideDays` was exactly that before it was dropped:
   // `show` and `hide` produced byte-identical content.
-  for (const set of [calendarSet, weekSet, daySet])
+  for (const group of [calendarGroup, weekGroup, dayGroup]) {
+    const set = group.node;
+    if (set.kind !== "component-set") continue;
     for (const axis of set.variantAxes) {
       const rendered = new Set(
         set.children.map((child) => {
@@ -1120,6 +1432,7 @@ export function validateCalendarStructure(root: FrameNode): void {
           `${set.role}: axis ${axis.name} is dead — two or more variants compile to identical content`,
         ]);
     }
+  }
 
   for (const variant of calendarSet.children) {
     if (variant.kind !== "component" || variant.layout.mode !== "vertical")
@@ -1139,9 +1452,21 @@ export function validateCalendarStructure(root: FrameNode): void {
         `${variant.role}: the weekday row names all ${CALENDAR_DAY_COUNT} days`,
       ]);
     const grid = direct(variant, "calendar/grid", "frame");
-    if ((grid.children ?? []).length !== CALENDAR_WEEK_COUNT)
+    // THE GRID IS A MONTH GRID, NOT A SIX-WEEK GRID. This compared against a
+    // constant 6 — Astryx's default — and that is what refused react-day-picker
+    // in the F1 held-out exam. This validator only sees the drawn scene, so it
+    // checks the two things the scene can actually prove: the count is a legal
+    // month-grid height, and every variant agrees on it. The exact number is
+    // the instance's declaration and the schema enforces that separately.
+    const weeksHere = (grid.children ?? []).length;
+    if (weeksHere < CALENDAR_WEEK_MIN || weeksHere > CALENDAR_WEEK_MAX)
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-        `${variant.role}: the grid carries exactly ${CALENDAR_WEEK_COUNT} weeks`,
+        `${variant.role}: the grid carries ${weeksHere} week(s); a month grid is ${CALENDAR_WEEK_MIN}–${CALENDAR_WEEK_MAX} rows`,
+      ]);
+    if (gridWeeks === null) gridWeeks = weeksHere;
+    else if (gridWeeks !== weeksHere)
+      throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+        `${variant.role}: the grid carries ${weeksHere} week(s) where an earlier variant carried ${gridWeeks} — one instance draws one month shape`,
       ]);
 
     // Every cell that sits in a column must be measured to the column.
@@ -1227,19 +1552,56 @@ export function collapseCalendarRecipe(
   const root = envelope.ir;
   validateCalendarStructure(root);
 
-  const calendarSet = setByRole(root, "calendar/set");
-  const weekSet = setByRole(root, "calendar/week-set");
-  const daySet = setByRole(root, "calendar/day-set");
-  const baseline = componentFor(calendarSet, { WeekNumbers: "on" });
+  const calendarGroup = groupByRole(root, "calendar/set");
+  const weekGroup = groupByRole(root, "calendar/week-set");
+  const dayGroup = groupByRole(root, "calendar/day-set");
+  const baseline = variantFor(calendarGroup, { WeekNumbers: "on" });
   const header = direct(baseline, "calendar/header", "frame");
   const captionText = direct(header, "calendar/caption", "text");
   const weekdayRowFrame = direct(baseline, "calendar/weekday-row", "frame");
   const gridFrame = direct(baseline, "calendar/grid", "frame");
-  const weekOn = componentFor(weekSet, { WeekNumbers: "on" });
-  const dayDefault = componentFor(daySet, { State: "default" });
+  const weekOn = variantFor(weekGroup, { WeekNumbers: "on" });
+  const dayDefault = variantFor(dayGroup, { State: "default" });
   const dayButton = direct(dayDefault, "calendar/day/button", "frame");
   const dayLabel = direct(dayButton, "calendar/day/label", "text");
-  const weekNumberText = direct(weekOn, "calendar/week/number", "text");
+  /**
+   * Absent whenever the WeekNumbers axis does not offer "on" -- the scene then
+   * has no week-number column to read. `directOptional` returns null instead
+   * of refusing, and the token below is simply not emitted.
+   */
+  const weekNumberText = directOptional(weekOn, "calendar/week/number", "text");
+  /**
+   * Weekday typography comes from a WEEKDAY node. It used to be read off the
+   * week-number node, which happened to carry the same font in the one library
+   * calendar@1 was written against -- and which does not exist at all in a
+   * calendar without week numbers.
+   */
+  const weekdayTextNode = direct(weekdayRowFrame, "calendar/weekday/0", "text");
+
+  /**
+   * The axis values actually present in the scene. A group emitted as a lone
+   * component (see `variantGroup`) declares exactly one value, and a set
+   * declares whatever its variantAxes say.
+   */
+  const axisValuesOf = <T extends string>(
+    group: { node: ComponentSetNode | ComponentNode },
+    axisName: string,
+    fallback: T,
+  ): T[] => {
+    if (group.node.kind !== "component-set") return [fallback];
+    const axis = group.node.variantAxes.find((a) => a.name === axisName);
+    return (axis?.values ?? [fallback]) as T[];
+  };
+  const weekNumberAxisValues = axisValuesOf<CalendarWeekNumbers>(
+    calendarGroup,
+    "WeekNumbers",
+    weekNumberText === null ? "off" : "on",
+  );
+  const dayStateAxisValues = axisValuesOf<CalendarDayState>(
+    dayGroup,
+    "State",
+    "default",
+  );
 
   const weekdays = (weekdayRowFrame.children ?? [])
     .filter((child) => String(child.role ?? "").startsWith("calendar/weekday/"))
@@ -1251,12 +1613,18 @@ export function collapseCalendarRecipe(
     });
 
   const dayStateFor = (state: CalendarDayState): DayStateTokens => {
-    const component = componentFor(daySet, { State: state });
+    const component = variantFor(dayGroup, { State: state });
     const button = direct(component, "calendar/day/button", "frame");
     const label = direct(button, "calendar/day/label", "text");
-    const hasRing = (button.bindings ?? []).some(
-      (entry) => entry.field === "strokes.0.paint.color",
-    );
+    /**
+     * Detected from the PAINT, not from a binding. An unbound token (one with
+     * no verified DTCG variable) emits no binding at all, so keying off
+     * `strokes.0.paint.color` silently dropped the ring for every subject
+     * without a token file -- the stroke was drawn on the canvas and then lost
+     * on the way back, which is precisely the silent loss this recipe exists
+     * to prevent. The stroke's presence in the scene is the fact.
+     */
+    const hasRing = (button.strokes ?? []).length > 0;
     return {
       background: colorFrom(
         button,
@@ -1290,12 +1658,19 @@ export function collapseCalendarRecipe(
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
         `week ${index} must be a frame of day instances, not an instance`,
       ]);
+    /**
+     * Present only when the calendar renders a week-number column. A scene
+     * without one is not malformed -- it is a calendar whose WeekNumbers axis
+     * never offered "on" -- so absence raises as an absent field, matching the
+     * optional `weekNumber` in the schema. A node that exists but is not text
+     * is still a refusal.
+     */
     const numberText = (child.children ?? []).find(
       (node) => node.role === `calendar/week/${index}/number`,
     );
-    if (!numberText || numberText.kind !== "text")
+    if (numberText && numberText.kind !== "text")
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-        `week ${index} carries no week number`,
+        `week ${index}: the week number is not a text node`,
       ]);
     const days = (child.children ?? [])
       .filter((day) =>
@@ -1323,7 +1698,7 @@ export function collapseCalendarRecipe(
       ]);
     return {
       id: typeof child.label === "string" ? child.label : `week-${index}`,
-      weekNumber: numberText.characters,
+      ...(numberText ? { weekNumber: numberText.characters } : {}),
       days,
     };
   });
@@ -1347,15 +1722,25 @@ export function collapseCalendarRecipe(
       dayAxis: "declared",
     },
     axes: {
+      /**
+       * Recover the axes the SCENE declares, not the module-level lists. A
+       * calendar compiled from a subject that pins showWeekNumber carries one
+       * WeekNumbers value, and reconstructing ["on","off"] here re-asserted a
+       * variant the scene does not contain -- which the schema then correctly
+       * refused for missing week-number content. The compile and the raise
+       * have to agree about what varies, or the round trip cannot close.
+       */
       weekNumbers: {
         name: "WeekNumbers",
-        values: [...CALENDAR_WEEK_NUMBERS],
-        default: "on",
+        values: weekNumberAxisValues,
+        default: weekNumberAxisValues[0]!,
       },
       dayState: {
         name: "State",
-        values: [...CALENDAR_DAY_STATES],
-        default: "default",
+        values: dayStateAxisValues,
+        default: dayStateAxisValues.includes("default")
+          ? "default"
+          : dayStateAxisValues[0]!,
       },
     },
     content: {
@@ -1454,11 +1839,30 @@ export function collapseCalendarRecipe(
           solidColor(first.fills[0], first.role!),
         );
       })(),
-      weekNumberText: colorFrom(
-        weekNumberText,
-        "fills.0.color",
-        solidColor(weekNumberText.fills[0], weekNumberText.role!),
-      ),
+      ...(weekNumberText === null
+        ? {}
+        : {
+            weekNumberText: colorFrom(
+              weekNumberText,
+              "fills.0.color",
+              solidColor(weekNumberText.fills[0], weekNumberText.role!),
+            ),
+          }),
+      /**
+       * Recovered from the weekday node itself. Emitted only when it differs
+       * from the day size -- the token's absence means "same as
+       * dayCell.fontSize", so writing it when they agree would raise a
+       * different instance than the one that was compiled.
+       */
+      ...(weekdayTextNode.type.fontSize === dayLabel.type.fontSize
+        ? {}
+        : {
+            weekdayFontSize: numberFrom(
+              weekdayTextNode,
+              "type.fontSize",
+              weekdayTextNode.type.fontSize,
+            ),
+          }),
       dayStates: {
         default: dayStateFor("default"),
         today: dayStateFor("today"),
@@ -1467,7 +1871,7 @@ export function collapseCalendarRecipe(
       },
       typography: {
         caption: fontFrom(captionText),
-        weekday: fontFrom(weekNumberText),
+        weekday: fontFrom(weekdayTextNode),
         day: fontFrom(dayLabel),
       },
     },

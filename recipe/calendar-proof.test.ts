@@ -20,6 +20,7 @@ import {
   collapseCalendarRecipe,
   compileCalendarRecipe,
   validateCalendarStructure,
+  resolveRadius,
 } from "./recipes/calendar.js";
 import { RecipeRefusal } from "./recipe.js";
 
@@ -65,7 +66,10 @@ test("calendar@1 adapts the one reviewed source and refuses a second-library inv
   assert.equal(instance.tokens.dayCell.radius.fallback, 0, "slot is not --radius-inner");
   assert.equal(instance.tokens.dayButton.size.fallback, 28, "day button --size-element-sm");
   assert.equal(
-    instance.tokens.dayButton.radius.fallback,
+    resolveRadius(
+      instance.tokens.dayButton.radius,
+      instance.tokens.dayButton.size.fallback,
+    ),
     14,
     "day button borderRadius 50% of 28",
   );

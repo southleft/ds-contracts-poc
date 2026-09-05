@@ -182,6 +182,30 @@
       "formula": "ledger font-weight mapped to CSS weight name"
     },
     {
+      "path": "typography.weekday.family",
+      "value": "Times",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-family",
+      "formula": "ledger weekday font-family, first family"
+    },
+    {
+      "path": "typography.weekday.style",
+      "value": "Medium",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-weight",
+      "formula": "ledger weekday font-weight mapped to CSS weight name"
+    },
+    {
+      "path": "gridGap",
+      "value": "normal",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weeks.row-gap",
+      "formula": "ledger week-row gap"
+    },
+    {
+      "path": "rootMinWidth",
+      "value": "auto",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default root.min-width",
+      "formula": "ledger root min-width"
+    },
+    {
       "path": "typography.weekday.fontSize",
       "value": "13.3333px",
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-size",

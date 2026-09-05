@@ -6,7 +6,38 @@
 > governs everything from here to v1. Nothing in this document mints a
 > grade or flips `overallSuccess`. Product **v1 remains INCOMPLETE**.
 >
-> **Where we are (2026-08-31 — honesty, not completion):**
+> **Update 2026-09-05 — F1 compiles; neither exam has passed.**
+> The mechanical `calendar@1` compile for react-day-picker now **succeeds**
+> (`f1Status: compiled`). All eleven named schema gaps in `compile-gaps.json`
+> are closed by making the recipe able to express what the capture already
+> measured — a five-week month, blank outside cells, a percent radius,
+> selected-as-border, a weekday size distinct from the day size, and tokens
+> with **no** source binding. Nothing was supplied that the capture did not
+> measure, and a twelfth gap (`capture-axes-outside-calendar-grammar`) is
+> **named and left open** rather than filled. The compile → collapse →
+> compile fixed point closes byte-identically. Full numbers:
+> [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
+>
+> Two corrections belong in the record:
+>
+> - **The earlier "compile attempted and refused" was a strawman.** It parsed
+>   a literal `{ note: "deliberately incomplete" }` stub, not the proposed
+>   instance, and `instanceParse.success` was hardcoded `false`. A comment in
+>   `f1-held-out.ts` asserting the real instance was parsed was untrue. Both
+>   are fixed; the result is now whatever the parse returns. The gaps it named
+>   were real — the evidence for them was not.
+> - **The canvas→code exam's substrate was our own mint.** The held-out Card
+>   (page `33:2`, Card `33:5093`) was minted by THIS repository's code→canvas
+>   engine eight days before it was used as an exam subject, so that exam is a
+>   round trip on our own output. A canvas→code measurement on artwork drawn
+>   by someone who never used this tool is **still owed** (parked as **P1**).
+>
+> **Neither exam has passed.** F1 additionally owes a live mint and a render
+> scored against react-day-picker; the Scratch file is not open in Figma
+> Desktop, so that half is parked as **P2**. `overallSuccess` stays `false`
+> and product v1 stays **INCOMPLETE**.
+>
+> **Where we were (2026-08-31 — honesty, not completion):**
 > Phases **1–3f / 4 prep** are done with **named blockers**, not a green
 > release bar. Phase **5** labeling + soft-archive of superseded Scratch
 > stays are done. Reader covers 13×3 boilerplate subjects
@@ -15,11 +46,12 @@
 > dash height stays named-refused. Canvas→code Button apply-step + held-out
 > AntD Card exam ran with silent=0; the
 > [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **adopted
-> 2026-08-31** (owner). F1 is **capture-only** (react-day-picker
-> double-run is green — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/),
-> `f1Status: capture-only`). Mechanical calendar@1 compile was
-> **attempted and refused** (5 week rows, blank outside labels, selected
-> is a border not a fill — see `compile-gaps.json`). Not passed.
+> 2026-08-31** (owner). F1 was **capture-only** (react-day-picker
+> double-run is green — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/)).
+> The mechanical calendar@1 compile was recorded as **attempted and refused**
+> (5 week rows, blank outside labels, selected is a border not a fill — see
+> `compile-gaps.json`). Superseded by the 2026-09-05 update above: those gaps
+> were real, but the refusal reporting them was evidenced by a stub.
 > **Release is blocked** on F1.
 > npm stays deferred.
 > No semver bump. No npm publish. No `overallSuccess` flip.
@@ -152,14 +184,26 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
 - **F1 (code→canvas):** reader + recipes pointed at react-day-picker or a
   held-out library, zero hand-authored fixtures, zero-silent extract,
   owner grade.
-  **2026-08-31:** capture is deterministic; mechanical calendar@1
-  compile from those ledger reads was **attempted and refused**
-  (`recipe/evidence/f1-held-out-v1/compile-gaps.json`,
-  `npm run recipe:f1-held-out:check`). The grammar cannot express a
-  5-week month, blank hidden-outside cells, or a selected *border*
-  without Polar. Live mint is not justified. `f1Status` stays
-  `capture-only`.
-- **Canvas→code exam (3f)** runs in the same window.
+  **2026-09-05:** capture is deterministic and the mechanical calendar@1
+  compile **succeeds** (`f1Status: compiled`,
+  `npm run recipe:f1-held-out:check`). The grammar now expresses a 5-week
+  month, blank hidden-outside cells, a percent radius, a selected *border*,
+  a weekday size distinct from the day size, and tokens with no source
+  binding — all from measured values, none supplied. The compile → collapse
+  → compile fixed point closes byte-identically, and raising the scene
+  caught two real defects (a percent radius lowering to twice its true size;
+  the selected ring silently dropped on readback whenever a token was
+  unbound). See
+  [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
+  **Still owed:** the live mint and a render scored against react-day-picker.
+  The Scratch file is not open in Figma Desktop — parked as **P2** in
+  [`OWNER-PARKED.md`](../parity/receipts/v1/OWNER-PARKED.md). F1 has **not**
+  passed.
+- **Canvas→code exam (3f)** runs in the same window. **Its substrate was our
+  own mint** — the held-out Card (page `33:2`, Card `33:5093`) came from this
+  repository's code→canvas engine 8 days earlier, so it measures a round trip
+  on our own output, not a stranger's artwork. An exam on a file drawn by
+  someone who never used this tool is still owed (**P1**).
 - `overallSuccess` flips only when **both** exams pass and the owner has
   signed the docs/26 amendment. One journey alone does not make v1.
 

@@ -1,6 +1,6 @@
 # F1 held-out v1 — PREPARE (docs/35 Phase 4)
 
-**f1Status:** `capture-only` · **overallSuccess:** false · **product v1:** INCOMPLETE
+**f1Status:** `compiled` · **overallSuccess:** false · **product v1:** INCOMPLETE
 
 Subject: `react-day-picker@10.0.1#DayPicker`.
 

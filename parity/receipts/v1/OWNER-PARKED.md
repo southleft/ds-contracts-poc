@@ -33,3 +33,40 @@ so. Either turns this from an untested claim into a measured one.
 **Why it matters for handing this to colleagues:** the direction they are most
 likely to try first — "I have a Figma library, give me code" — has never been
 measured on artwork this project did not itself draw.
+
+---
+
+## P2 — the Scratch file is not open in Figma Desktop, so F1 cannot be minted live
+
+**Parked 2026-09-05. Blocks: the live half of the F1 code→canvas exam.**
+
+F1 now **compiles**. `recipe/fixture-reader/propose-calendar-instance.ts`
+assembles a real `calendar@1` instance out of the react-day-picker ledger and
+`compileCalendarRecipe` accepts it — no hand-authored fixture, no Astryx
+content, every token unbound because the subject has no verified DTCG
+bindings. The compile → collapse → compile fixed point closes with a
+byte-identical IR.
+
+What is still owed is the **live mint and the scored render**: minting the
+compiled envelope onto Scratch and comparing that canvas against
+react-day-picker's own Chromium render.
+
+**Why I stopped.** The Desktop Bridge is connected, but only to two files:
+
+| file | key | may I write it? |
+| --- | --- | --- |
+| CBDS UI Kit Demo | `WofZT8xaxXuc2Q6Je9S4XE` | **no** — not Scratch |
+| Altitude Design System | `y83n4o9LOGs74oAoguFcGS` | **no** — a source library |
+
+The only file I am permitted to write is Scratch `byMp6lt0Ij9b2QbkDGFwBh`, and
+it is not among them. Minting into either connected file would write a
+component set into artwork that is not mine to modify, so I did not.
+
+**What unblocks it:** open Scratch `byMp6lt0Ij9b2QbkDGFwBh` in Figma Desktop
+with the Desktop Bridge plugin running, and say so. The mint and the scoring
+are then mechanical and need nothing else from you.
+
+**What this does NOT block:** everything measurable offline is done and
+recorded — the schema closures, the compile, the fixed point, and the gates.
+The exam is not passed, and `overallSuccess` stays `false` until the live half
+lands.

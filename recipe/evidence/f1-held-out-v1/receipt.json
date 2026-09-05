@@ -2,7 +2,7 @@
   "artifactVersion": "f1-held-out-v1",
   "phase": "docs/35 Phase 4 — F1 held-out exam PREPARE (code→canvas), offline-first",
   "overallSuccess": false,
-  "f1Status": "capture-only",
+  "f1Status": "compiled",
   "productV1": "INCOMPLETE",
   "liveFigma": false,
   "inventedF1Pass": false,
@@ -234,6 +234,30 @@
       "formula": "ledger font-weight mapped to CSS weight name"
     },
     {
+      "path": "typography.weekday.family",
+      "value": "Times",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-family",
+      "formula": "ledger weekday font-family, first family"
+    },
+    {
+      "path": "typography.weekday.style",
+      "value": "Medium",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-weight",
+      "formula": "ledger weekday font-weight mapped to CSS weight name"
+    },
+    {
+      "path": "gridGap",
+      "value": "normal",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weeks.row-gap",
+      "formula": "ledger week-row gap"
+    },
+    {
+      "path": "rootMinWidth",
+      "value": "auto",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default root.min-width",
+      "formula": "ledger root min-width"
+    },
+    {
       "path": "typography.weekday.fontSize",
       "value": "13.3333px",
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-size",
@@ -243,36 +267,17 @@
   "proposeError": null,
   "recipeCompile": {
     "attempted": true,
-    "compiled": false,
-    "status": "refused",
-    "reason": "Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: week-count-not-six, blank-outside-labels, day-button-radius-percent, selected-is-border-not-fill, grid-gap-normal, root-min-width-auto, week-number-text-absent, weekday-fontsize-not-day, zero-source-bindings, axes-mismatch, outside-cell-has-no-label. The refusal is evidenced by 11 real schema issue(s) raised when the PROPOSED instance is parsed — not by handing the compiler an empty object. Live remint stays refused.",
+    "compiled": true,
+    "status": "compiled",
+    "reason": "Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json compiled to a calendar@1 envelope with no hand-authored fixture and no Astryx content.",
     "gapIds": [
-      "week-count-not-six",
-      "blank-outside-labels",
-      "day-button-radius-percent",
-      "selected-is-border-not-fill",
-      "grid-gap-normal",
-      "root-min-width-auto",
-      "week-number-text-absent",
-      "weekday-fontsize-not-day",
-      "zero-source-bindings",
-      "axes-mismatch",
-      "outside-cell-has-no-label"
+      "capture-axes-outside-calendar-grammar"
     ],
-    "schemaIssues": [
-      "identity: Invalid input: expected object, received undefined",
-      "semantic: Invalid input: expected object, received undefined",
-      "axes: Invalid input: expected object, received undefined",
-      "content: Invalid input: expected object, received undefined",
-      "tokens: Invalid input: expected object, received undefined",
-      "inputFacts: Invalid input: expected array, received undefined",
-      "accounting: Invalid input: expected object, received undefined",
-      "extensions: Invalid input: expected array, received undefined",
-      "receipts: Invalid input: expected array, received undefined",
-      "provenance: Invalid input: expected object, received undefined",
-      "(root): Unrecognized key: \"note\""
-    ],
-    "refusalEvidencedBy": "real-proposed-instance-schema-parse",
+    "schemaIssues": [],
+    "evidencedBy": "real-proposed-instance-schema-parse",
+    "canonicalHash": "e555940bdc590ec66088156a8820b034814edba1fc7cd7bb47ed849bfd96226b",
+    "carriedFacts": 29,
+    "receipts": 6,
     "liveFigma": false,
     "inventedFixtureTable": false,
     "addedToCalendarInstances": false
@@ -280,6 +285,8 @@
   "schemaGaps": [
     {
       "id": "week-count-not-six",
+      "status": "closed",
+      "closedBy": "content.weeks widened from .length(6) to .min(CALENDAR_WEEK_MIN=4).max(CALENDAR_WEEK_MAX=6). The 6 was Astryx's hasVariableRowCount default written down as a property of calendars; validateCalendarStructure now proves a legal month height and cross-variant agreement from the scene instead.",
       "schemaPath": "content.weeks.length",
       "ledgerValue": 5,
       "reason": "calendar@1 requires exactly 6 week rows (CALENDAR_WEEK_COUNT). label.1 January 2026 renders 5 <tr class=\"rdp-week\">. Inventing a sixth week of February outside days is Polar content the ledger does not carry.",
@@ -287,6 +294,8 @@
     },
     {
       "id": "blank-outside-labels",
+      "status": "closed",
+      "closedBy": "content.weeks[].days[].label dropped .min(1); a superRefine requires a visible label for every state EXCEPT outside, so a hidden outside cell carries an empty string instead of an invented neighbouring-month date.",
       "schemaPath": "content.weeks[].days[].label",
       "ledgerValue": 4,
       "reason": "4 rdp-hidden.rdp-outside cells have no button and no text. calendar@1 requires label.min(1) on every cell and has no blank-but-measured primitive (CALENDAR_OUTSIDE_DAYS_NOT_CARRIED). Inventing December 28–31 labels the capture did not render is Polar.",
@@ -294,6 +303,8 @@
     },
     {
       "id": "day-button-radius-percent",
+      "status": "closed",
+      "closedBy": "PercentParameterSchema + RadiusParameterSchema carry the radius as the percentage the source spells; resolveRadius() is the single declared lowering to px, taken against dayButton.size, so no fixed px is authored.",
       "schemaPath": "tokens.dayButton.radius",
       "ledgerValue": "100%",
       "reason": "rdp-day_button border-top-left-radius is \"100%\" (a circle). calendar@1 wants a px number. Folding 100% of 42px into 21 is invented FIXED px.",
@@ -301,6 +312,8 @@
     },
     {
       "id": "selected-is-border-not-fill",
+      "status": "closed",
+      "closedBy": "DayStateTokensSchema already carried the optional ring/ringWidth pair; the assembly now maps border-color/border-width onto it and leaves the measured transparent fill as the background.",
       "schemaPath": "tokens.dayStates.selected.background",
       "ledgerValue": "#00000000",
       "reason": "Selected paint is a 2px #0000ffff border on rdp-day_button. Both the td and the button background are transparent. calendar@1 selected is a background fill. Folding the blue border into a fill would invent Polar paint.",
@@ -308,6 +321,8 @@
     },
     {
       "id": "grid-gap-normal",
+      "status": "closed",
+      "closedBy": "tokens carry itemSpacing 0 with a `lowered` receipt naming the discarded keyword. row-gap:normal contributes no space between week rows, so 0 reproduces the measured render; the 32px rdp-months gutter is still never folded in.",
       "schemaPath": "tokens.gridGap",
       "ledgerValue": "normal",
       "reason": "rdp-weeks row-gap is \"normal\", not a px length. rdp-months 32px gap is the multi-month gutter (numberOfMonths), not the day grid. Folding either into gridGap is Polar.",
@@ -315,6 +330,8 @@
     },
     {
       "id": "root-min-width-auto",
+      "status": "closed",
+      "closedBy": "minWidth 0 with a `lowered` receipt naming the discarded keyword. min-width:auto imposes no minimum, so 0 carries the same constraint; root.width 308 is still not borrowed as a minimum.",
       "schemaPath": "tokens.rootMinWidth",
       "ledgerValue": "auto",
       "reason": "root min-width is \"auto\". root.width 308 is a different channel. Carrying width as minWidth would invent a constraint.",
@@ -322,6 +339,8 @@
     },
     {
       "id": "week-number-text-absent",
+      "status": "closed",
+      "closedBy": "tokens.weekNumberText and content.weeks[].weekNumber became optional, gated by a superRefine that requires both whenever the WeekNumbers axis offers on. The subject pins showWeekNumber false, so it declares neither.",
       "schemaPath": "tokens.weekNumberText",
       "ledgerValue": null,
       "reason": "showWeekNumber is pinned false. No rdp-week_number part exists. Compiling WeekNumbers on|off would be a dead axis (validateCalendarStructure). Compiling a weekNumberText colour is Polar.",
@@ -329,6 +348,8 @@
     },
     {
       "id": "weekday-fontsize-not-day",
+      "status": "closed",
+      "closedBy": "tokens.weekdayFontSize added, optional and meaning same-as-dayCell.fontSize when absent. The weekday row now carries its measured 13.3333px while the day buttons keep 16px; neither is collapsed onto the other.",
       "schemaPath": "tokens.dayCell.fontSize",
       "ledgerValue": "13.3333px",
       "reason": "Weekday font-size is 13.3333px; day button is 16px. calendar@1 has one dayCell.fontSize. Collapsing 13.3333 onto 16 is the same lowering Astryx receipted, not a silent fold.",
@@ -336,13 +357,26 @@
     },
     {
       "id": "zero-source-bindings",
+      "status": "closed",
+      "closedBy": "NumberParameterSchema/ColorParameterSchema accept variable: null, meaning no verified DTCG binding. Every token in this instance is unbound and painted from its measured fallback; no rdp.* variable name is minted.",
       "schemaPath": "tokens.*.variable",
       "ledgerValue": 0,
       "reason": "source-bindings.json facts is []. 0 verified DTCG bindings. Inventing variable names (rdp.calendar.*) would claim a token invert the minted stub does not carry (tokens.mintedBootstrap still true).",
       "evidence": "extract/computed/out/day-picker/calendar/source-bindings.json"
     },
     {
+      "id": "capture-axes-outside-calendar-grammar",
+      "schemaPath": "axes",
+      "ledgerValue": "captionLayout x numberOfMonths",
+      "reason": "The capture enumerates captionLayout (label|dropdown) and numberOfMonths (1|2). calendar@1's axes are WeekNumbers x State. A dropdown caption is a different caption anatomy (two <select>s replacing a label), and numberOfMonths:2 is two month grids side by side -- neither is a variant of this archetype's scene.",
+      "evidence": "extract/computed/configs/day-picker.json axes; recipe/recipes/calendar.ts CalendarRecipeInstanceSchema.axes",
+      "status": "named",
+      "whyNamed": "Compiling these would require either a second archetype (a dropdown-caption calendar) or a multi-month container grammar calendar@1 does not have. The exam compiles the label.1 combo, which is one point in the capture's axis space and the only one whose anatomy calendar@1 describes. The other three combos are captured and unused, not silently folded in."
+    },
+    {
       "id": "axes-mismatch",
+      "status": "closed",
+      "closedBy": "variantGroup() emits a component set only where a dimension actually varies, and a lone component where it does not -- figma-ir.ts rightly refuses a one-valued axis. The compiler also now enumerates instance.axes rather than the module-level CALENDAR_WEEK_NUMBERS, so a subject that pins showWeekNumber compiles as a non-varying calendar instead of having an on variant fabricated for it.",
       "schemaPath": "axes",
       "ledgerValue": "captionLayout × numberOfMonths",
       "reason": "Capture enumerates captionLayout × numberOfMonths. calendar@1 axes are WeekNumbers × State. showWeekNumber/showOutsideDays are pinned, not enumerated. Dropdown caption and numberOfMonths:2 are grammar outside this exam.",
@@ -350,6 +384,8 @@
     },
     {
       "id": "outside-cell-has-no-label",
+      "status": "closed",
+      "closedBy": "same change as blank-outside-labels: the outside state is the one state permitted an empty label.",
       "schemaPath": "content.weeks[].days[outside].label",
       "ledgerValue": "",
       "reason": "Hidden outside td text is empty. calendar@1 outside state still requires a visible label. This is the blank-but-measured cell the recipe dropped.",
@@ -380,5 +416,5 @@
     "inventedInter": false,
     "inventedSelectedFill": false
   },
-  "note": "The docs/26 F1 bar is live zero-silent on an unseen library. This artifact is capture-only prepare plus a refused mechanical compile. overallSuccess stays false. Product v1 remains INCOMPLETE. No live Figma. No invented pass."
+  "note": "The docs/26 F1 bar is live zero-silent on an unseen library. This artifact now carries a mechanical capture, a mechanical propose, and a calendar@1 compile that succeeds with no hand-authored fixture and no Astryx content. It is NOT a pass: the bar also requires a live mint and a render scored against the real package, and this gate performs neither."
 }

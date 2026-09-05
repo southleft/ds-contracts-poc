@@ -8,6 +8,7 @@
  * capture-only | blocked | unproven — never passed.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { compileCalendarRecipe } from "../recipes/calendar.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -24,18 +25,35 @@ const PACKAGE = "react-day-picker";
 const VERSION = "10.0.1";
 const EXPORT = "DayPicker";
 
-export type F1Status = "unproven" | "capture-only" | "blocked";
+/**
+ * "compiled" was added when the mechanical propose stopped refusing. It means
+ * the ledger became a calendar@1 envelope with nothing hand-authored -- NOT
+ * that the exam passed. The docs/26 F1 bar is live zero-silent on an unseen
+ * library, which additionally requires a live mint and a scored render.
+ */
+export type F1Status =
+  | "unproven"
+  | "capture-only"
+  | "compiled"
+  | "blocked";
 
 export interface F1RecipeCompile {
   attempted: true;
-  compiled: false;
-  status: "refused";
+  /** Whatever actually happened. Never pinned. */
+  compiled: boolean;
+  status: "compiled" | "refused";
   reason: string;
+  /** Gaps still open after the compile; empty when it compiled. */
   gapIds: string[];
   /** The real zod issues from parsing the mechanically proposed instance. */
   schemaIssues: string[];
-  refusalEvidencedBy: "real-proposed-instance-schema-parse";
-  liveFigma: false;
+  evidencedBy: "real-proposed-instance-schema-parse";
+  /** Set when the compile succeeded: the envelope's own content hash. */
+  canonicalHash: string | null;
+  /** Carried facts / loss receipts on the compiled envelope. */
+  carriedFacts: number | null;
+  receipts: number | null;
+  liveFigma: boolean;
   inventedFixtureTable: false;
   addedToCalendarInstances: false;
 }
@@ -58,21 +76,61 @@ function compileAttempt(propose: MechanicalCalendarPropose): F1RecipeCompile {
   // against the REAL schema and keeps every issue. Those issues are the
   // refusal. They are reported here verbatim.
   const parseIssues = propose.instanceParse.issues;
-  if (propose.instanceParse.success !== false || parseIssues.length === 0) {
-    throw new Error(
-      "F1 refusal must be evidenced by real schema issues from the proposed instance",
-    );
+
+  // The instance now assembles from the ledger and parses. Compile it for
+  // real; report whichever way it goes rather than pinning either.
+  if (propose.instanceParse.success) {
+    try {
+      const envelope = compileCalendarRecipe(propose.instance);
+      return {
+        attempted: true,
+        compiled: true,
+        status: "compiled" as const,
+        reason: `Mechanical propose from ${LEDGER} compiled to a calendar@1 envelope with no hand-authored fixture and no Astryx content.`,
+        gapIds: propose.schemaGaps
+          .filter((g) => g.status !== "closed")
+          .map((g) => g.id),
+        schemaIssues: [],
+        evidencedBy: "real-proposed-instance-schema-parse" as const,
+        canonicalHash: envelope.integrity.canonicalHash,
+        carriedFacts: envelope.accounting.carried.length,
+        receipts: envelope.receipts.length,
+        liveFigma: false,
+        inventedFixtureTable: false,
+        addedToCalendarInstances: false,
+      };
+    } catch (error) {
+      return {
+        attempted: true,
+        compiled: false,
+        status: "refused" as const,
+        reason: `calendar@1 refused the mechanically proposed instance: ${(error as Error).message}`,
+        gapIds: propose.schemaGaps.map((g) => g.id),
+        schemaIssues: [(error as Error).message],
+        evidencedBy: "real-proposed-instance-schema-parse" as const,
+        canonicalHash: null,
+        carriedFacts: null,
+        receipts: null,
+        liveFigma: false,
+        inventedFixtureTable: false,
+        addedToCalendarInstances: false,
+      };
+    }
   }
+
   return {
     attempted: true,
     compiled: false,
-    status: "refused",
+    status: "refused" as const,
+    canonicalHash: null,
+    carriedFacts: null,
+    receipts: null,
     reason:
       `Mechanical propose from ${LEDGER} cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: ${propose.schemaGaps.map((g) => g.id).join(", ")}. The refusal is evidenced by ${parseIssues.length} real schema issue(s) raised when the PROPOSED instance is parsed — not by handing the compiler an empty object. Live remint stays refused.`,
     gapIds: propose.schemaGaps.map((g) => g.id),
     /** The actual zod issues from parsing the mechanically proposed instance. */
     schemaIssues: parseIssues,
-    refusalEvidencedBy: "real-proposed-instance-schema-parse" as const,
+    evidencedBy: "real-proposed-instance-schema-parse" as const,
     liveFigma: false,
     inventedFixtureTable: false,
     addedToCalendarInstances: false,
@@ -110,7 +168,7 @@ export function buildF1HeldOutEvidence(): {
       propose = proposeCalendarInstanceFromLedger(REPO, LEDGER);
       assertNoPolarPropose(propose);
       recipeCompile = compileAttempt(propose);
-      f1Status = "capture-only";
+      f1Status = recipeCompile.compiled ? "compiled" : "capture-only";
       capture = {
         status: "captured",
         ...captureShared,
@@ -210,7 +268,7 @@ export function buildF1HeldOutEvidence(): {
       : null,
     polar: propose?.polar ?? null,
     note:
-      "The docs/26 F1 bar is live zero-silent on an unseen library. This artifact is capture-only prepare plus a refused mechanical compile. overallSuccess stays false. Product v1 remains INCOMPLETE. No live Figma. No invented pass.",
+      "The docs/26 F1 bar is live zero-silent on an unseen library. This artifact now carries a mechanical capture, a mechanical propose, and a calendar@1 compile that succeeds with no hand-authored fixture and no Astryx content. It is NOT a pass: the bar also requires a live mint and a render scored against the real package, and this gate performs neither.",
   };
 
   return { overallSuccess: false, f1Status, productV1: "INCOMPLETE", receipt };
