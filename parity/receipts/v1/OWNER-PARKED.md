@@ -99,6 +99,18 @@ the way, and two of them are the project's own design working as intended:
    shipped surface, and minting it needs a new lineage version built and
    owner-authorized — not a paste.
 
+**One concrete finding, so the decision is cheaper to make.** If you do want F1
+minted through a new lineage, the v50 machinery is built around component
+SETS — `build-calendar-live-proof-v50.ts` calls
+`requireSet(envelope.ir, "calendar/set")` and the same for `calendar/week-set`.
+A day-picker calendar declares one WeekNumbers value, so those two emit as lone
+COMPONENTS (a set needs an axis of at least two values; `figma-ir.ts` refuses a
+one-valued axis). `requireSet` would refuse it. Astryx varies on WeekNumbers,
+so v50 itself is unaffected and its `generated:check` still exits 0 — this is a
+note about the NEW lineage, not a break in the old one. The `groupByRole` /
+`variantFor` pair already added to `recipe/recipes/calendar.ts` is the shape
+that handles both.
+
 **What this means for F1.** The offline half is complete and measured. The live
 half is owner-operated by design and cannot be delivered by me at any level of
 effort. Deciding whether F1 should be scored through a new
