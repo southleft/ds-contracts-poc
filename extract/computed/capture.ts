@@ -1731,7 +1731,7 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
       const cands = [];
       const push = (name, sel, hop) => {
         const raw = cs.getPropertyValue(name).trim();
-        if (raw && !cands.some((c) => c[0] === name)) cands.push(hop ? [name, raw, sel, 1] : [name, raw, sel]);
+        if (raw && !cands.some((c) => c[0] === name)) cands.push(hop ? [name, raw, sel, hop] : [name, raw, sel]);
       };
       // FLUENT 2 (H3) — THE BARE \`--\` PREFIX MADE THE ONE-HOP BRANCH DEAD CODE.
       // This was \`if (startsWith(vp)) push(direct); ELSE follow defs\`. With
@@ -1755,9 +1755,39 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
       // and channels that bound nothing can now recover one. Verification
       // against the captured computed value still decides, so an extra
       // candidate can never mint a wrong binding.
+      // ALIAS CHAINS (2026-09-05) — the hop above followed exactly ONE link.
+      // Measured across the committed corpus, that left 329 channels where the
+      // VALUE verified and only the NAME was unrecoverable: a semantic token
+      // defined as var(<primitive>) whose primitive is itself a var(). Bootstrap
+      // (--bs-alert-bg -> var(--bs-primary-bg-subtle)), Chakra (30) and
+      // react-day-picker (283) are all shaped that way. Following the whole
+      // chain — breadth-first, so a nearer name always ranks ahead of a further
+      // one — recovers those names.
+      //
+      // BOUNDED AND CYCLE-GUARDED: the 'seen' set stops --a: var(--b) paired
+      // with --b: var(--a) dead, and MAX_HOPS stops a pathological chain from
+      // turning one channel into a walk of the whole custom-property graph.
+      // The DIRECT name is still pushed under exactly its old condition and
+      // still ranks first, so this stays a strict superset: a channel that
+      // bound a name before binds the SAME name, and only channels that bound
+      // nothing can gain one.
+      const MAX_HOPS = 8;
       for (const { name, sel } of chans[prop]) {
         if (name.startsWith(vp)) push(name, sel, 0);
-        for (const mui of (defs[name] || [])) push(mui, sel, 1);
+        const seen = new Set([name]);
+        let frontier = [name];
+        for (let dist = 1; dist <= MAX_HOPS && frontier.length; dist++) {
+          const next = [];
+          for (const from of frontier) {
+            for (const mui of (defs[from] || [])) {
+              if (seen.has(mui)) continue;
+              seen.add(mui);
+              push(mui, sel, dist);
+              next.push(mui);
+            }
+          }
+          frontier = next;
+        }
       }
       if (cands.length) out[prop] = cands;
     }

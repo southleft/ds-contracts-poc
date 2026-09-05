@@ -747,6 +747,8 @@ async function main() {
        *  declaration carrying a var(); emitted only for the channels no
        *  candidate verified (an identity calc that DID verify is a recovered
        *  token name, not a loss). */
+      /** channels refused because the chain walk found two names at the same distance and no reason to prefer one. */
+      const ambiguousSkips = new Map<string, string>();
       const calcSkips = new Map<string, string>(); // `${part}|${channel}` -> message
       const perPart = new Map<string, Map<string, Map<string, Fact | null>>>(); // part -> channel -> comboKey -> fact
       for (let pi = 0; pi < aligned.baseFlat.length; pi++) {
@@ -789,10 +791,36 @@ async function main() {
             // named directly to the primitive sitting behind it. Committed
             // captures carry no 4th element, so this key is 0 for all of them
             // and the existing alphabetical order is untouched.
+            // ALIAS CHAINS (2026-09-05): `hop` is now the true DISTANCE along
+            // the chain, not a 0/1 flag. Nearer still wins, so a name the
+            // library declared directly is never demoted to the primitive
+            // behind it.
+            //
+            // AND AN AMBIGUOUS RECOVERED NAME IS REFUSED, NOT PICKED. At hop 0
+            // a tie is broken alphabetically and that behaviour is untouched —
+            // those bindings are committed and value-identical by construction.
+            // But a name recovered by WALKING the chain is a different claim:
+            // if two distinct DTCG leaves sit at the same distance and both
+            // verify, the reader has no evidence for choosing between them, and
+            // picking the alphabetically-first would mint a token name nobody
+            // measured. That is exactly the "wrong NAME, right VALUE" defect
+            // this reader exists to avoid, so the channel is skipped with the
+            // tie named instead.
             const verified = cands
-              .map(([varName, raw, selector, hop]) => ({ token: tokenName(varName), varName, raw, selector: selector ?? '', hop: hop ? 1 : 0 }))
+              .map(([varName, raw, selector, hop]) => ({ token: tokenName(varName), varName, raw, selector: selector ?? '', hop: typeof hop === 'number' ? hop : hop ? 1 : 0 }))
               .filter((c) => dtcgNames.has(c.token) && valueEq(c.raw, el.node.style[ch]))
               .sort((a, b) => a.hop - b.hop || a.token.localeCompare(b.token));
+            if (verified.length > 1 && verified[0]!.hop > 0) {
+              const tier = verified.filter((c) => c.hop === verified[0]!.hop);
+              const distinct = [...new Set(tier.map((c) => c.token))].sort();
+              if (distinct.length > 1) {
+                ambiguousSkips.set(
+                  `${partName}|${ch}`,
+                  `${partName}.${ch}: AMBIGUOUS recovered name — ${distinct.length} distinct DTCG leaves tie at chain distance ${verified[0]!.hop} and all verify against the computed value (${distinct.map((t) => `"${t}"`).join(', ')}). The VALUE is certain and the NAME is not, so no binding is minted: choosing one would be a guess with a token name on it.`,
+                );
+                continue;
+              }
+            }
             chans.get(ch)!.set(combo.key, verified.length > 0 ? { token: verified[0].token, varName: verified[0].varName, selector: verified[0].selector } : null);
           }
         }
@@ -832,6 +860,42 @@ async function main() {
               srcSkips.push(`${partName}.${ch}: the matching rules reference no var() the reader could resolve — no candidate to verify`);
             } else if (inDtcg.length === 0) {
               const valueRight = named.filter(([, c]) => c.matches);
+              // R6, SECOND HALF (2026-09-05). The branch below asserted ONE
+              // cause — "the shape of a semantic-over-primitive INDIRECTION" —
+              // for every channel whose value verified and whose name was not a
+              // DTCG leaf. Measured across the committed corpus, that label was
+              // wrong 328 times out of 329:
+              //
+              //   283  the leaf EXISTS, under the name WITH the varPrefix kept
+              //        (day-picker declares `rdp-nav_button-height`; the join
+              //        rule strips `--rdp-` and looks up `nav_button-height`)
+              //    45  the token is simply ABSENT from the library's DTCG file
+              //        (chakra 30, mui 9, carbon 2, fluent 2, altitude 1,
+              //        shadcn 1 — chakra's file has 200 leaves and not one
+              //        font-weight among them)
+              //     1  other
+              //     0  a genuine chain a deeper walk could recover
+              //
+              // The comment above this block says the collapse of causes "is
+              // exactly the condition that hid Carbon's hollow checkbox" and
+              // that the cause is now named. It was named one level up and
+              // guessed one level down. These two branches measure instead: a
+              // remedy that edits the DTCG file is a different act from one
+              // that renames a leaf, and a reader that cannot tell them apart
+              // sends its reader to the wrong file.
+              const prefixKept = named.filter(([v]) => dtcgNames.has(v.slice(2)));
+              if (prefixKept.length > 0) {
+                srcSkips.push(
+                  `${partName}.${ch}: NAME CONVENTION — ${prefixKept.map(([v]) => `${v} → the DTCG file declares "${v.slice(2)}"`).join('; ')}, but the join rule strips the varPrefix and looked up ${prefixKept.map(([v]) => `"${tokenName(v)}"`).join(', ')}. The VALUE verifies and the leaf EXISTS; only the two spellings disagree. Remedy: rename the leaf to the stripped form, or unset library.varPrefix so the reader stops stripping.`,
+                );
+                continue;
+              }
+              if (dtcgNames.size > 0) {
+                srcSkips.push(
+                  `${partName}.${ch}: ABSENT FROM THE DTCG FILE — ${named.map(([v, c]) => `${v} → "${tokenName(v)}" = ${c.raw}${c.matches ? ' (value MATCHES)' : ''}`).join('; ')}, and this library's DTCG file (${dtcgNames.size} leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.`,
+                );
+                continue;
+              }
               srcSkips.push(
                 `${partName}.${ch}: candidate${named.length > 1 ? 's' : ''} ${named.map(([v, c]) => `${v} → "${tokenName(v)}" = ${c.raw}${c.matches ? ' (value MATCHES the computed value)' : ' (value differs)'}`).join('; ')} — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.` +
                 (valueRight.length > 0
