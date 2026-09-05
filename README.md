@@ -24,6 +24,18 @@
 > universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
 > ships and is described further down this page; it is not the v1 proof.
 
+## Start here: what you can actually do with this today
+
+**[What you can do today](parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md)** — the
+two directions, what each requires, what each produces, what each cannot do, and
+where each stops. Every claim on it cites a command you can re-run.
+
+Read it before the command below. The two directions are **not at the same
+maturity**, and the page says which is which: code→canvas is measured against
+your own library's render inside a boundary of thirteen archetypes; canvas→code
+is a **reviewable starting point rather than a conversion** — it bakes your
+drawn text in as literal content and silently ignores `children`.
+
 ## The one command
 
 > A design-system engineer runs one command against their React library,

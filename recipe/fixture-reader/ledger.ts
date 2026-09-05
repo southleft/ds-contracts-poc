@@ -149,7 +149,22 @@ function flattenParts(root: CapturedNode): LedgerPart[] {
 function selectPart(parts: LedgerPart[], selector: string): LedgerPart | null {
   if (selector === "root") return parts[0] ?? null;
   const m = /^(cls|idx|tag):([^#]+)(?:#(\d+))?$/.exec(selector);
-  if (!m) throw new LedgerReadError(`bad part selector "${selector}"`);
+  if (!m) {
+    // A ROLE THAT WAS NEVER SET reaches here as the string "undefined", and the
+    // old message printed exactly that — once per leaf. Measured 2026-09-05 on
+    // radix-themes/switch: one missing required role (`hit`) produced NINE
+    // "bad part selector \"undefined\"" lines naming nine leaves, and the key
+    // the reader actually had to add was named in none of them. A reader
+    // following docs/36 has to reverse-engineer the schema from the wreckage.
+    if (selector === "undefined" || selector === "null" || selector === "")
+      throw new LedgerReadError(
+        `a required role is not set in the role map (the selector arrived as "${selector}"). ` +
+          `Every leaf below that role fails the same way; add the missing key to your --roles-file ` +
+          `and re-run. The drafted map at recipe/evidence/pointed/<archetype>-<library>/roles.draft.json ` +
+          `lists the keys this archetype resolves, and the schema in recipe/fixture-reader/schema-<archetype>.ts names the required ones.`,
+      );
+    throw new LedgerReadError(`bad part selector "${selector}"`);
+  }
   const [, kind, value, nth] = m;
   const n = nth ? Number(nth) : 0;
   if (kind === "idx") return parts.find((p) => p.idxPath === value) ?? null;

@@ -90,7 +90,11 @@ no channel key.
    ```
 
 **What success looks like:** a typed TSX component, a CSS Module, and CSF3
-stories in your repo, plus the contract that produced them. Generation is
+stories in your repo, plus the contract that produced them. **Read
+[What you can do today](../parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md) first** —
+this direction is a *reviewable starting point rather than a conversion* (the
+v1 definition's own words), and that page lists exactly what it bakes in and
+what it drops. Generation is
 deterministic — run it twice, get identical bytes. The measured bar for this
 direction on a real community kit is **92.7% mean over 537 scored variants**
 ([docs/24 §4](24-what-works.md)): a faithful *specification*, an *approximate*
@@ -104,6 +108,8 @@ drawing.
 | text widths slightly off; long labels clip or overflow | webfonts load only where the library's capture config declares a `fonts` field (unconfigured libraries render fallback-font widths), and text wrapping is not implemented | [§C.5](23-known-limitations.md) · [§B.3](23-known-limitations.md) |
 | no `useEffect`, keyboard handlers, or business logic in the output | a canvas cannot carry them — the contract holds canvas-expressible facts only | [§A.3](23-known-limitations.md), [docs/16](16-sync-boundary.md) |
 | the round trip is not lossless | correct — it *closes* (every fact lands in a named bucket); the accounting is public | [docs/24 §6.3](24-what-works.md) |
+| the component renders the design's placeholder text and never changes | measured 2026-09-05: the proposed contract carries the drawn text as literal content and declares **zero slots**, so the text is baked in. Edit it — this is a starting point, not a component to ship | [WHAT-YOU-CAN-DO-TODAY](../parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md) |
+| passing `children` does nothing, with no error | measured 2026-09-05: `children` is destructured in the generated component and never rendered (`grep -c '{children}'` returns 0). Not a bug in your usage | [WHAT-YOU-CAN-DO-TODAY](../parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md) |
 
 **Time budget:** minutes per set for the read and generate. The real cost is
 the code review — treat the output as new code entering your repo, because it
@@ -116,8 +122,18 @@ is.
 **Prerequisites:** Node ≥ 20; Chromium via `playwright-core`; Figma desktop +
 the plugin on the receiving side.
 
-**The commands** — the supported fast path (React + CSS Modules, or any CEM
-library), from *your* repo, no clone needed:
+**WHICH PATH THIS IS.** The commands below are the **published CLI**
+(`@ds-contracts/cli@0.4.0`) — the universal-contract path. It runs from your own
+repo with no clone, and it is *not* the path the fidelity numbers in
+[What you can do today](../parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md) come
+from. Those come from the **recipe path** (docs/36), which scores 53 of 66 rows
+within 5% of a library's own Chromium render across thirteen archetypes — and
+which **does** need a clone, a capture sandbox and a reviewed role map. Measured
+2026-09-05 on a library it had never seen, that walk took four refusals before
+it completed. Pick this track for breadth over your whole library; pick the
+recipe path when you want the measured fidelity on an archetype it models.
+
+**The commands** — from *your* repo, no clone needed:
 
 ```bash
 npx @ds-contracts/cli init      # writes ds-contracts.config.json — point it at your src

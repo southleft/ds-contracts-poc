@@ -63,7 +63,30 @@ const args = (name: string): string[] => { const out: string[] = []; for (let i 
 const archetype = arg("archetype") as string;
 const library = arg("library");
 const ARCHETYPES = ["checkbox", "switch", "avatar", "tooltip", "chip", "link", "tabs", "radio", "textarea", "alert", "badge", "menu", "dialog"] as const;
-if (!ARCHETYPES.includes(archetype as (typeof ARCHETYPES)[number]) || !library) throw new Error("usage: --archetype checkbox|switch|avatar|tooltip|chip|link|tabs|radio|textarea|alert|badge|menu|dialog --library <slug> [--glyph-file <json> (checkbox)] [--roles-file <json>] [--set path=v --why 'path=evidence']…");
+// THE ARCHETYPE CEILING, SAID OUT LOUD. This was a bare `throw`, so a reader
+// who pointed at a component the recipe path does not model — a Card, a
+// Progress, an Accordion — got a Node stack trace with a source line and the
+// usage string buried in it. Measured 2026-09-05: the CONTENT was right (it
+// lists all thirteen) and the PRESENTATION made it read like a crash in the
+// tool rather than an answer about scope. The ceiling is a real product
+// boundary and a reader meets it on their first unlucky guess, so it refuses
+// like a refusal: exit 2, no stack, and it says what the thirteen are.
+if (!library) {
+  console.error(`\u2716 --library <slug> is required.\n  It names the capture directory: extract/computed/out/<slug>/<archetype>/captured-truth.json`);
+  process.exit(2);
+}
+if (!ARCHETYPES.includes(archetype as (typeof ARCHETYPES)[number])) {
+  console.error(
+    `\u2716 "${archetype ?? "(none)"}" is not an archetype the recipe path models.\n` +
+      `  It models thirteen: ${ARCHETYPES.join(", ")}.\n` +
+      `  A component outside that set — a card, an accordion, a data table, a date picker — has no recipe,\n` +
+      `  so there is nothing to compile or paste. This is a SCOPE limit, not a failure of your library:\n` +
+      `  the capture step still works on it (extract:computed), and its captured truth is still readable;\n` +
+      `  what does not exist is an archetype recipe to turn that capture into a Figma component set.\n` +
+      `  See docs/36-point-it-at-your-library.md for what each of the thirteen covers.`,
+  );
+  process.exit(2);
+}
 // --capture <name>: the captured component directory when the library names
 // the archetype differently (AntD and Carbon capture a Tag; chip@1 reads it).
 const captureName = arg("capture") ?? archetype as string;
