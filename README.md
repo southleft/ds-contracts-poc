@@ -5,24 +5,43 @@
 
 # Design System Contracts
 
-> **Current state (2026-09-02).** The product is the one command below
-> ([docs/36 — point it at your library](docs/36-point-it-at-your-library.md)),
-> grown out of the [2026-09-01 audit](parity/receipts/v1/HONEST-SCORECARD.md).
-> It is proven for **all thirteen archetypes** and on **libraries it was
-> never taught**, and every number below is from a gate run on `main`.
-> Product **v1 is not complete**: the plugin's paste verb has been exercised by a person exactly once (the Chakra switch, 2 September) — though every proposed row's paste-verb program now scores identically to its gate row when run the way the plugin runs it (39 of 39) — and
-> the capture step needs a config entry, and as of 2026-09-04 that entry can be
-> DRAFTED rather than written: `extract/computed/draft-config.ts --write` derives
-> the name, import, contract path and both axes from the contract seed and names
-> the rest for a person, refusing composition, portals and host plumbing by name.
-> Scored against all 166 committed entries it never CONTRADICTS the author: axes
-> exact on 162 and a superset on 4 (it proposes every enum prop; the author kept
-> fewer), sample text exact or agreed-empty on 111 and never differing. `differs`
-> is 0 on both — which is not the same as identical, and the exam prints the four. Fluent's MessageBar is the first entry
-> it wrote: two fields derived, seven named, a person added the composition and the
-> glyph viewBox. The older
-> universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
-> ships and is described further down this page; it is not the v1 proof.
+**A design system's source of truth is a contract, not a picture and not a
+component file.** This repo turns a real component into a machine-checked
+contract by *measuring* it — a real Chromium mounts every prop combination and
+reads the computed styles — and then compiles that contract to a Figma
+component set, or reads a Figma set back to code. Nothing is inferred from a
+screenshot, and nothing is invented: a fact is carried, lowered with a declared
+inverse, or refused **by name**.
+
+Two directions, one contract in the middle:
+
+| direction | you have | you get |
+| --- | --- | --- |
+| **code → canvas** | a component library in code | a Figma component set built from measured facts |
+| **canvas → code** | a Figma component set | contracts and code generated from it |
+
+---
+
+> **Status — 2026-09-05.** Honest, dated, and gate-derived.
+>
+> - The product is the one command below
+>   ([docs/36](docs/36-point-it-at-your-library.md)), proven for **all thirteen
+>   archetypes** and on libraries it was never taught.
+> - **Product v1 is NOT complete.** The plugin's paste verb has been exercised
+>   by a person exactly once (the Chakra switch). The canvas→code exam still
+>   runs on artwork this repo drew itself, which is a round trip, not an exam —
+>   see [OWNER-PARKED P1](parity/receipts/v1/OWNER-PARKED.md).
+> - **The held-out code→canvas exam (F1) is measured, not graded.**
+>   react-day-picker — a library the recipe path had never been pointed at —
+>   was captured, compiled, minted onto Figma and scored against the real
+>   package's own Chromium render at **3.735%** against a 5% bar. Read it with
+>   its caveat, which is stated in the receipt:
+>   [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
+> - `overallSuccess` remains **false**. It flips only when both exams pass and
+>   the owner signs the [docs/26 amendment](docs/26-amendment-canvas-to-code.md).
+>
+> Numbers on this page come from gates run on `main`;
+> `npm run docs:check` fails the build if one drifts.
 
 ## Start here: what you can actually do with this today
 
@@ -143,7 +162,14 @@ it is **not** a claim that a recipe-IR RC is in flight. Sign-off record:
 
 **Evaluating the still-shipping universal-contract path? Two documents, and neither is honest alone.**
 
-- **What it does — [docs/24 — What Works](docs/24-what-works.md).** Generated from committed artifacts, every number carrying the file it was read from. The headline: **86.4% mean computed-style equality** for 128 third-party components measured against the original npm package rendering in the same pinned Chromium — exact string match, no tolerance, over 773019 style cells; **92.70% visual fidelity** in the other direction, over the 537 statically scorable variants of a 599-variant Figma kit; and generation that is **deterministic** — the same contract produces byte-identical output on any machine, with 291 generated files hashed against a golden manifest and no model anywhere in the path.
+- **What it does — [docs/24 — What Works](docs/24-what-works.md).** Generated
+  from committed artifacts, every number carrying the file it was read from.
+
+  | measure | number | over what |
+  | --- | --- | --- |
+  | mean computed-style equality | **86.4%** | 128 third-party components vs the original npm package in the same pinned Chromium — exact string match, no tolerance, 773019 style cells |
+  | visual fidelity (other direction) | **92.70%** | the 537 statically scorable variants of a 599-variant Figma kit |
+  | determinism | byte-identical | 291 generated files hashed against a golden manifest, no model anywhere in the path |
 - **What it costs — [docs/23 — Known Limitations](docs/23-known-limitations.md).** The complete inventory of what this tool does *not* do: measured coverage per library, the component classes captured nowhere, what a captured component fails to reproduce, which examples are frozen, and what each gate does and does not measure. It is the longer of the two, deliberately the least flattering document here, and it is the one worth your time before you invest any.
 
 The number that reconciles them is the denominator, which docs/24 prints **before** any mean: 101 of those measured components also carry a committed contract, and those 113 components are **11.1% of the 1015** in the seven libraries with a measured size. (The other three are captured with full receipts and deliberately held, so they count as measured but never as covered — a scorecard is not a shipped stem.) They were picked because they were the tractable ones. Read every percentage above as *"on the easy 11.1%."*
@@ -577,7 +603,9 @@ npm run build && npm run parity
 npm run eval     # ④ 230 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 npm run recipe:pivot-status:check
-#    ⑥ recipe-IR status pin (F1 still unmet; do not flip overallSuccess)
+#    ⑥ recipe-IR status pin (F1 is measured — minted and scored at 3.735%
+#       against a 5% bar — but overallSuccess still does NOT flip: the
+#       canvas→code exam is still owed, and the owner signs the amendment)
 #    plus, when you touch an archetype:
 #    npm run recipe:button:check
 #    npm run recipe:input-field:check
@@ -665,7 +693,22 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-**Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** The active climb is [docs/35](docs/35-two-journey-v1-plan.md). Five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live Scratch mints and owner-signed grades; F1 (whole-corpus / unseen-library on the recipe path) is the named blocker. `overallSuccess` is not flipped except Table's existing v32 pin. npm publish of a recipe surface is deferred. The playground and the published CLI still run the pre-pivot universal-contract path.
+**Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** The
+active climb is [docs/35](docs/35-two-journey-v1-plan.md).
+
+- **F1 (held-out library, code→canvas) is measured.** As of 2026-09-05
+  react-day-picker — never previously pointed at by the recipe path — was
+  captured, compiled with no hand-authored fixture, minted onto Scratch and
+  scored against the real package's Chromium render at **3.735%** (bar 5%).
+  It is a measurement, not a grade, and it carries a named caveat:
+  [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
+- **The canvas→code exam is still owed.** Its substrate was this repo's own
+  mint, which makes it a round trip rather than an exam
+  ([OWNER-PARKED P1](parity/receipts/v1/OWNER-PARKED.md)).
+- **`overallSuccess` is not flipped** (except Table's existing v32 pin), and
+  npm publish of a recipe surface is deferred.
+- The playground and the published CLI still run the pre-pivot
+  universal-contract path.
 
 The older model is still validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 230/230 evals — the two long-standing named reds (`mui-figma-genesis`, `child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16, stable schema and CLI releases on the public npm registry, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same `core/` engine — with a companion Figma plugin (Build / Changes / Send) that applies contract bundles to the canvas. Live relay from the plugin into the playground is off; use a figma.com URL or paste a dump. GitHub releases `v1.0.0-rc.1` and earlier **predate the pivot**. npm publish of a recipe surface is deferred. [docs/27](docs/27-release-process.md) remains the universal-contract release runbook, not a claim that a recipe-IR RC is in flight. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 

@@ -653,6 +653,16 @@ const text = (
  * One day cell: the measured `--size-element-md` slot `calendar/day-cell-box`
  * requires, wrapping the painted `--size-element-sm` 50% day button.
  */
+/**
+ * The first day label with glyphs, for use as a component-property default.
+ * See its call site in dayComponent for why the first cell will not do.
+ */
+const representativeDayLabel = (instance: CalendarRecipeInstance): string => {
+  for (const week of instance.content.weeks)
+    for (const day of week.days) if (day.label.length > 0) return day.label;
+  return instance.content.selectedDayLabel;
+};
+
 const dayComponent = (
   instance: CalendarRecipeInstance,
   state: CalendarDayState,
@@ -701,7 +711,21 @@ const dayComponent = (
     children: [
       text(
         "calendar/day/label",
-        instance.content.weeks[0]!.days[0]!.label,
+        /**
+         * The TEMPLATE label for the day component, not any particular day:
+         * every instance overrides it through the Label component property.
+         * It used to be `weeks[0].days[0].label` — blindly the first cell —
+         * which is a BLANK OUTSIDE CELL in any month that does not begin on
+         * the first weekday. January 2026 begins on a Thursday, so all four
+         * day-state variants were minted with an empty label, their button
+         * collapsed to zero width, and the whole grid rendered as nothing.
+         *
+         * Take the first day that actually carries glyphs instead. That is a
+         * representative drawn from the measured content, not an invented
+         * value, and `selectedDayLabel` (schema-guaranteed non-empty) is the
+         * fallback for the degenerate case where no cell has a label at all.
+         */
+        representativeDayLabel(instance),
         instance.tokens.typography.day,
         cell.fontSize,
         stateTokens.text,

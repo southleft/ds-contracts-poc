@@ -19,8 +19,8 @@
       "sha256": "bcd106a6fee5b14041272637ae89070fd4f1cec73b0ab666803b436df99d2370"
     },
     "recipe/evidence/calendar-live-pivot-v50/programs/writer.txt": {
-      "bytes": 116152,
-      "sha256": "193b0622c7a72c8b3404b199ca5ee1023a45889eebc7d6521d01ffde773ed427"
+      "bytes": 120414,
+      "sha256": "5ab5272f2716c164444b2e4d74b1b1e008c1b925530d80a4f03a2e10b38f9ef0"
     },
     "recipe/evidence/calendar-live-pivot-v50/programs/restore-blueprint.js": {
       "bytes": 3216,
@@ -48,7 +48,7 @@
     },
     "recipe/evidence/calendar-live-pivot-v50/proof-plan.json": {
       "bytes": 2694,
-      "sha256": "5f3189855bfaf210eb6b4b7e7d8e363648469e81428aec386bd58ce9ea1a1280"
+      "sha256": "120436e6a4cbbc2814110a416ebdd8ed608f10dd9917d9d88c54897d82e83829"
     },
     "recipe/evidence/calendar-live-pivot-v50/request-manifest.json": {
       "bytes": 2117,
@@ -99,8 +99,8 @@
       "sha256": "a963b00f50a96cb73b27162acf14ee38ac2d82956ce9e256eb0babc20fb68522"
     },
     "recipe/calendar-figma-writer.ts": {
-      "bytes": 63645,
-      "sha256": "425979b6186e99982be0a8102cf6c00bf74577278cbfcf70389f7a9200323238"
+      "bytes": 71936,
+      "sha256": "04bbd20aa34878560608c493ab3146562a3e75f706f271978635aaeeb0d135aa"
     },
     "recipe/figma-property-normalizer-v8.ts": {
       "bytes": 11009,
@@ -115,7 +115,7 @@
       "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
     }
   },
-  "hashSetSha256": "3d965b026a8df82a4cade1449dd43f4fe973eb3acb51ce76d076e9859940bf2c",
+  "hashSetSha256": "c8d877e987ceb363ff845f38eaf0e3167cab6aabbae058fcec913af3e807f11b",
   "counts": {
     "sources": 1,
     "variants": 8,

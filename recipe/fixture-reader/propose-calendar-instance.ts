@@ -753,17 +753,66 @@ export function proposeCalendarInstanceFromLedger(
    * verified DTCG bindings for this subject, and inventing names would claim
    * an invert nothing can resolve.
    */
+  /**
+   * FONT AVAILABILITY ON THE TARGET, MEASURED — not assumed.
+   *
+   * Read from Figma's own `listAvailableFontsAsync` in the Scratch file on
+   * 2026-09-05: 2,122 families, and **no family named "Times"**.
+   * react-day-picker sets no `font-family` at all, so the capture reports the
+   * browser's default serif, which on this machine computes to `Times`. The
+   * metric-compatible face Figma does carry is "Times New Roman", and only in
+   * Regular / Bold / Italic / Bold Italic — there is no Medium, so the weekday
+   * row's 500 weight degrades to Regular as well as changing family.
+   *
+   * Both substitutions are DECLARED, never silent. The writer walks
+   * `fallbackChain`, refuses if the first available entry disagrees with the
+   * declared `resolvedFamily`/`resolvedStyle`/`resolution`, and refuses any
+   * fallback that carries no `degradation` string
+   * (`CALENDAR-FONT-FALLBACK-WITHOUT-DEGRADATION`). So a wrong claim here
+   * fails the mint rather than quietly painting a different face.
+   */
+  const FIGMA_FACES: Record<string, readonly string[]> = {
+    "Times New Roman": ["Regular", "Bold", "Italic", "Bold Italic"],
+  };
+  const FIGMA_FAMILY_FALLBACK: Record<string, string> = {
+    Times: "Times New Roman",
+  };
+  const availableInFigma = (family: string, style: string): boolean =>
+    (FIGMA_FACES[family] ?? []).includes(style);
+
   const fontSpec = (family: string, weight: string, part: string) => {
     const fam = firstFamily(family);
     const style = weightStyle(weight);
+    const requestSource = `${F1_CALENDAR_LEDGER}#${F1_CALENDAR_COMBO} ${part}.font-family`;
+    const substitute = FIGMA_FAMILY_FALLBACK[fam];
+    // Requested first, then the substitute in the same style, then the
+    // substitute in Regular. The first entry the target actually carries wins,
+    // and that decision is computed here so the instance can declare it.
+    const chain = [
+      { family: fam, style },
+      ...(substitute ? [{ family: substitute, style }] : []),
+      ...(substitute && style !== "Regular"
+        ? [{ family: substitute, style: "Regular" }]
+        : []),
+    ];
+    const resolved =
+      chain.find((c) => availableInFigma(c.family, c.style)) ?? chain[0]!;
+    const isFallback =
+      resolved.family !== fam || resolved.style !== style;
+    const degradation = isFallback
+      ? `Figma carries no ${fam} ${style}; substituted ${resolved.family} ${resolved.style} (measured against listAvailableFontsAsync, 2026-09-05)`
+      : undefined;
     return {
       requestedFamily: fam,
       requestedStyle: style,
-      requestSource: `${F1_CALENDAR_LEDGER}#${F1_CALENDAR_COMBO} ${part}.font-family`,
-      fallbackChain: [{ family: fam, style }],
-      resolvedFamily: fam,
-      resolvedStyle: style,
-      resolution: "requested" as const,
+      requestSource,
+      fallbackChain: chain,
+      resolvedFamily: resolved.family,
+      resolvedStyle: resolved.style,
+      resolution: (isFallback ? "fallback" : "requested") as
+        | "requested"
+        | "fallback",
+      ...(degradation ? { degradation } : {}),
     };
   };
   const numTok = (fallback: number) => ({ variable: null, fallback });

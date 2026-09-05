@@ -9,8 +9,8 @@
   "namespace": "ds.contracts.calendar.recipe.v1",
   "writer": {
     "programPath": "recipe/evidence/calendar-live-pivot-v50/programs/writer.txt",
-    "programBytes": 116152,
-    "programSha256": "193b0622c7a72c8b3404b199ca5ee1023a45889eebc7d6521d01ffde773ed427",
+    "programBytes": 120414,
+    "programSha256": "5ab5272f2716c164444b2e4d74b1b1e008c1b925530d80a4f03a2e10b38f9ef0",
     "runIdentity": "4604bbfe-calendar-v50",
     "pageName": "Recipe Pivot / Calendar / 4604bbfe-calendar-v50"
   },

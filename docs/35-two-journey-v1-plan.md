@@ -32,15 +32,25 @@
 >   round trip on our own output. A canvas→code measurement on artwork drawn
 >   by someone who never used this tool is **still owed** (parked as **P1**).
 >
-> **Neither exam has passed.** F1 additionally owes a live mint and a render
-> scored against react-day-picker, and that half is **owner-operated by
-> design**: the calendar live lineage sets `externalOperatorOnly: true` and
-> `humanSignoff.mandatory: true`, and the shipped paste-a-script surface has
-> no calendar archetype at all — `recipe:point` names a date picker among the
-> components it does not model. F1 therefore exercises an archetype outside
-> the shipped thirteen, and scoring it needs a new live-proof lineage the
-> owner authorizes. Parked as **P2**. `overallSuccess` stays `false` and
-> product v1 stays **INCOMPLETE**.
+> **F1 IS NOW MINTED AND SCORED (2026-09-05).** The owner opened Scratch, and
+> the compiled envelope was minted onto `byMp6lt0Ij9b2QbkDGFwBh` and scored
+> against react-day-picker's own Chromium render:
+> **pctAAMasked 3.735% against a 5% bar — pass.** Read it with its caveat: the
+> ink boxes differ (280x247 canvas vs 296x265 reference), so the alignment is
+> doing real work and the threshold sweep agrees at no threshold. That 16px is
+> named and is the next thing to chase. Numbers and the four defects the live
+> mint exposed:
+> [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
+>
+> **This is a measured result, not a grade, and it is not v1.** The canvas→code
+> exam is still owed on artwork this project did not draw (**P1**), and
+> `overallSuccess` flips only when both exams pass AND the owner signs the
+> docs/26 amendment. `overallSuccess` stays `false`; product v1 stays
+> **INCOMPLETE**. Calendar also remains outside the shipped thirteen
+> archetypes — `recipe:point` names a date picker among the components it does
+> not model — so F1 measures an archetype a stranger cannot reach through the
+> product's paste verb. Whether that is the right exam is still an open
+> question for the owner.
 >
 > **Where we were (2026-08-31 — honesty, not completion):**
 > Phases **1–3f / 4 prep** are done with **named blockers**, not a green
@@ -200,10 +210,14 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   the selected ring silently dropped on readback whenever a token was
   unbound). See
   [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
-  **Still owed:** the live mint and a render scored against react-day-picker.
-  The Scratch file is not open in Figma Desktop — parked as **P2** in
-  [`OWNER-PARKED.md`](../parity/receipts/v1/OWNER-PARKED.md). F1 has **not**
-  passed.
+  **2026-09-05 (later):** minted live on Scratch and scored against
+  react-day-picker's own Chromium render — **pctAAMasked 3.735%, bar 5%,
+  pass**, with the ink-box difference named. The live mint exposed four
+  defects no offline gate could: an auto-layout primary axis that silently
+  refuses a resize while it is AUTO (every day button minted 8px wide), a day
+  template whose label was a blank outside cell, a ~726ms-per-await font load
+  that blew the host's 300s ceiling, and a font Figma does not carry. F1 is
+  measured; it is not graded, and it is not v1.
 - **Canvas→code exam (3f)** runs in the same window. **Its substrate was our
   own mint** — the held-out Card (page `33:2`, Card `33:5093`) came from this
   repository's code→canvas engine 8 days earlier, so it measures a round trip

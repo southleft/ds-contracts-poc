@@ -196,6 +196,20 @@ export function buildF1HeldOutEvidence(): {
         determinismReMeasuredOutOfBand: "2026-09-05 byte-identical",
         referenceRenderCommitted:
           "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
+        /**
+         * MINTED LIVE AND SCORED, 2026-09-05. Scratch only
+         * (byMp6lt0Ij9b2QbkDGFwBh), page
+         * "Recipe Pivot / Calendar / 2b63ad27-calendar-v50", calendar/set
+         * 261:1175. Scored against the committed orig-shot above:
+         * pctAAMasked 3.735% against a 5% bar -> pass. The ink boxes differ
+         * (280x247 canvas vs 296x265 reference), so the alignment is doing
+         * real work and thresholdSweep agrees at no threshold; that 16px is
+         * named, not hidden. Scorecard:
+         * recipe/evidence/f1-held-out-v1/score/scorecard.json
+         * This gate does not re-mint or re-score, so it cannot confirm any of
+         * it -- see parity/receipts/v1/F1-COMPILE-ROUND.md.
+         */
+        liveMintScoredOutOfBand: "2026-09-05 pctAAMasked 3.735% (bar 5%)",
         unverifiedByThisGate: {
           determinism: "byte-identical across two full sweeps in one session",
           captures: 32,

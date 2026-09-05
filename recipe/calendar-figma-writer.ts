@@ -79,7 +79,12 @@
  * No live write happens here. This module builds a program string; executing it
  * requires a separate PREPARE / AUTHORIZE / attempt lineage.
  */
-import type { ComponentSetNode, IRNode, VariableBinding } from "./figma-ir.js";
+import type {
+  ComponentNode,
+  ComponentSetNode,
+  IRNode,
+  VariableBinding,
+} from "./figma-ir.js";
 import type { RecipeEnvelope } from "./envelope.js";
 import { canonicalJson } from "./normalize.js";
 import {
@@ -181,6 +186,21 @@ export const CALENDAR_FIGMA_INSTANCES_PER_SOURCE =
   CALENDAR_WEEK_NUMBERS.length * CALENDAR_DAY_COUNT +
   CALENDAR_WEEK_NUMBERS.length * CALENDAR_WEEK_COUNT * CALENDAR_DAY_COUNT;
 
+/**
+ * The same arithmetic, but for THIS source rather than for the widest calendar
+ * the archetype can describe. The constant above assumes two WeekNumbers
+ * variants and a six-week grid — Astryx's shape. A subject that pins
+ * `showWeekNumber` and renders a five-week January has one variant and five
+ * rows, and the constant refused it with "requires 98 day instances; found 42"
+ * — a true statement about Astryx offered as a fact about calendars.
+ */
+export const calendarInstancesPerSource = (
+  weekNumberVariants: number,
+  weekRows: number,
+): number =>
+  weekNumberVariants * CALENDAR_DAY_COUNT +
+  weekNumberVariants * weekRows * CALENDAR_DAY_COUNT;
+
 export interface CalendarVariablePlan {
   identity: string;
   name: string;
@@ -205,9 +225,9 @@ export interface CalendarFigmaSourcePlan {
   calendarAxes: Record<string, string[]>;
   weekAxes: Record<string, string[]>;
   dayAxes: Record<string, string[]>;
-  calendarSet: ComponentSetNode;
-  weekSet: ComponentSetNode;
-  daySet: ComponentSetNode;
+  calendarSet: CalendarGroupNode;
+  weekSet: CalendarGroupNode;
+  daySet: CalendarGroupNode;
   variables: CalendarVariablePlan[];
   dayDefaults: { Label: string };
   instanceCount: number;
@@ -263,28 +283,18 @@ const variableType = (
 };
 
 /**
- * THE LONE-COMPONENT SHAPE IS COMPILED BUT NOT YET WRITABLE, AND THIS SAYS SO.
- *
- * `recipe/recipes/calendar.ts` emits a group as a component SET only where the
- * dimension actually varies, and as a lone COMPONENT where it does not --
- * `figma-ir.ts` refuses a one-valued variant axis, and Figma models a component
- * that does not vary as a plain component. A subject that pins
- * `showWeekNumber` (react-day-picker does) therefore compiles a lone
- * `calendar/set` and `calendar/week-set`.
- *
- * This writer cannot yet mint that shape: `mintSet` in the emitted program
- * iterates variant children and calls `figma.combineAsVariants`, which needs at
- * least one variant to combine. Teaching it the lone-component path is a real
- * change to the program that MINTS INTO A REAL FILE, and there is no Figma
- * emulator in this repo to exercise it -- only `compileExpectedScenePlan`, an
- * offline model. Writing that path now would ship a mint path that has never
- * run and cannot be run until someone opens Scratch.
- *
- * So it refuses BY NAME instead, with the cause and the close. A named red is
- * carried; an unnamed one is a silent failure, and a crash reading
- * `found[0].kind` was the silent version of this.
+ * A calendar group is a component SET where its dimension varies and a lone
+ * COMPONENT where it does not -- `recipe/recipes/calendar.ts` emits it that way
+ * because `figma-ir.ts` refuses a one-valued variant axis, and Figma models a
+ * non-varying component as a plain component. A subject that pins
+ * `showWeekNumber` (react-day-picker does) compiles a lone `calendar/set` and
+ * `calendar/week-set` while its `calendar/day-set` stays a real four-variant
+ * set. Both shapes are minted; `mintSet` in the emitted program branches on
+ * `setIr.kind`.
  */
-const requireSet = (root: IRNode, role: string): ComponentSetNode => {
+type CalendarGroupNode = ComponentSetNode | ComponentNode;
+
+const requireGroup = (root: IRNode, role: string): CalendarGroupNode => {
   if (root.kind !== "frame")
     throw new TypeError("calendar live writer requires calendar/library frame");
   const found = root.children.filter((child) => child.role === role);
@@ -292,22 +302,45 @@ const requireSet = (root: IRNode, role: string): ComponentSetNode => {
     throw new TypeError(
       `calendar live writer: required ${role} set (found ${found.length})`,
     );
-  if (found[0]!.kind === "component")
-    throw new TypeError(
-      `calendar live writer: ${role} is a lone component, not a set — this calendar does not vary on its axis, ` +
-        `which compiles (figma-ir.ts refuses a one-valued axis) but this writer cannot yet mint: the emitted ` +
-        `program combines variants and has no single-component path. Close: add that path and exercise it on a ` +
-        `live Scratch run. See parity/receipts/v1/OWNER-PARKED.md P2.`,
-    );
-  if (found[0]!.kind !== "component-set")
+  const node = found[0]!;
+  if (node.kind !== "component-set" && node.kind !== "component")
     throw new TypeError(`calendar live writer: required ${role} set`);
-  return found[0];
+  return node;
 };
 
-const axisValues = (set: ComponentSetNode, name: string): string[] => {
-  const axis = set.variantAxes.find((candidate) => candidate.name === name);
+const axisValues = (group: CalendarGroupNode, name: string): string[] => {
+  if (group.kind === "component") {
+    // A lone component declares exactly one value, carried on the variant
+    // properties it kept when the recipe promoted it out of a would-be set.
+    const value = group.variantProperties?.[name];
+    if (typeof value !== "string")
+      throw new TypeError(`calendar live writer: missing ${name} axis`);
+    return [value];
+  }
+  const axis = group.variantAxes.find((candidate) => candidate.name === name);
   if (!axis) throw new TypeError(`calendar live writer: missing ${name} axis`);
   return [...axis.values];
+};
+
+/** Variants a group mints: a set's children, or the lone component itself. */
+const groupVariants = (group: CalendarGroupNode): readonly IRNode[] =>
+  group.kind === "component" ? [group] : group.children;
+
+/**
+ * Week rows drawn by one calendar variant, read from the scene rather than
+ * assumed. A month grid is 4-6 rows depending on the month and its first
+ * weekday; see CALENDAR_WEEK_MIN/MAX in recipe/recipes/calendar.ts.
+ */
+const countWeekRows = (calendar: CalendarGroupNode): number => {
+  const variant = groupVariants(calendar)[0];
+  if (!variant || !("children" in variant))
+    throw new TypeError("calendar live writer: calendar variant has no children");
+  const grid = (variant.children ?? []).find(
+    (child) => child.role === "calendar/grid",
+  );
+  if (!grid || !("children" in grid))
+    throw new TypeError("calendar live writer: calendar variant has no grid");
+  return (grid.children ?? []).length;
 };
 
 const countComparedFacts = (node: IRNode): number => {
@@ -330,30 +363,45 @@ const planSource = (
   if (input.envelope.archetype !== "calendar / date-picker")
     throw new TypeError("calendar live writer requires the calendar archetype");
 
-  const calendarSet = requireSet(input.envelope.ir, "calendar/set");
-  const weekSet = requireSet(input.envelope.ir, "calendar/week-set");
-  const daySet = requireSet(input.envelope.ir, "calendar/day-set");
+  const calendarSet = requireGroup(input.envelope.ir, "calendar/set");
+  const weekSet = requireGroup(input.envelope.ir, "calendar/week-set");
+  const daySet = requireGroup(input.envelope.ir, "calendar/day-set");
 
   const calendarAxes = { WeekNumbers: axisValues(calendarSet, "WeekNumbers") };
   const weekAxes = { WeekNumbers: axisValues(weekSet, "WeekNumbers") };
   const dayAxes = { State: axisValues(daySet, "State") };
 
+  /**
+   * The two WeekNumbers-keyed groups must AGREE WITH EACH OTHER, and every
+   * value must be a real WeekNumbers value. They are no longer required to
+   * equal the module-level list: pinning them to CALENDAR_WEEK_NUMBERS made a
+   * library's ability to vary a property into a requirement that it vary,
+   * which refused every subject that legitimately does not.
+   */
+  const weekNumbersLegal = (values: string[]): boolean =>
+    values.length >= 1 &&
+    values.length <= CALENDAR_WEEK_NUMBERS.length &&
+    values.every((value) =>
+      (CALENDAR_WEEK_NUMBERS as readonly string[]).includes(value),
+    );
+  if (!weekNumbersLegal(calendarAxes.WeekNumbers))
+    throw new TypeError("calendar live writer: incomplete calendar axes");
+  if (!weekNumbersLegal(weekAxes.WeekNumbers))
+    throw new TypeError("calendar live writer: incomplete week axis");
   if (
     canonicalJson(calendarAxes.WeekNumbers) !==
-    canonicalJson(CALENDAR_WEEK_NUMBERS)
+    canonicalJson(weekAxes.WeekNumbers)
   )
-    throw new TypeError("calendar live writer: incomplete calendar axes");
-  if (
-    canonicalJson(weekAxes.WeekNumbers) !== canonicalJson(CALENDAR_WEEK_NUMBERS)
-  )
-    throw new TypeError("calendar live writer: incomplete week axis");
+    throw new TypeError(
+      "calendar live writer: calendar and week WeekNumbers axes disagree",
+    );
   if (canonicalJson(dayAxes.State) !== canonicalJson(CALENDAR_DAY_STATES))
     throw new TypeError("calendar live writer: incomplete day State axis");
 
   if (
-    calendarSet.children.length !== CALENDAR_WEEK_NUMBERS.length ||
-    weekSet.children.length !== CALENDAR_WEEK_NUMBERS.length ||
-    daySet.children.length !== CALENDAR_DAY_STATES.length
+    groupVariants(calendarSet).length !== calendarAxes.WeekNumbers.length ||
+    groupVariants(weekSet).length !== weekAxes.WeekNumbers.length ||
+    groupVariants(daySet).length !== CALENDAR_DAY_STATES.length
   )
     throw new TypeError("calendar live writer: incomplete variant matrix");
 
@@ -405,11 +453,24 @@ const planSource = (
       type,
     })),
   );
-  if (registry.size === 0)
-    throw new TypeError("calendar live writer: zero planned variables");
-  if (instanceCount !== CALENDAR_FIGMA_INSTANCES_PER_SOURCE)
+  /**
+   * ZERO VARIABLES IS A LEGAL PLAN, not an empty one. Every token carries
+   * `variable: null` when the subject has no verified DTCG binding — a
+   * measured fact, not a gap — and such a calendar is painted entirely from
+   * literals. Requiring at least one variable made "this library ships a token
+   * file the extractor could join" a precondition for minting it at all.
+   * A registry that is empty BECAUSE bindings exist but were dropped is a
+   * different bug, and `bind()` in the recipe cannot produce that: it emits a
+   * binding for exactly the tokens that carry a name.
+   */
+  const weekRows = countWeekRows(calendarSet);
+  const expectedInstances = calendarInstancesPerSource(
+    calendarAxes.WeekNumbers.length,
+    weekRows,
+  );
+  if (instanceCount !== expectedInstances)
     throw new TypeError(
-      `calendar live writer requires ${CALENDAR_FIGMA_INSTANCES_PER_SOURCE} day instances; found ${instanceCount}`,
+      `calendar live writer requires ${expectedInstances} day instances (${calendarAxes.WeekNumbers.length} WeekNumbers variant(s) x ${weekRows} week row(s)); found ${instanceCount}`,
     );
   if (dayOccurrences.length === 0)
     throw new TypeError(
@@ -435,7 +496,21 @@ const planSource = (
         "en",
       ),
     ),
-    dayDefaults: dayOccurrences[0]!,
+    /**
+     * The DEFAULT for the day set's Label component property. Binding a text
+     * node to a component property makes Figma adopt that property's default,
+     * so an empty default blanks the label on EVERY variant of the template —
+     * and a blanked label collapses the day button, which is what turned the
+     * first mint of this subject into an empty grid.
+     *
+     * `dayOccurrences[0]` is the first cell in the month, which is a blank
+     * outside cell in any month not starting on the first weekday. Take the
+     * first occurrence that carries glyphs instead; it is a representative of
+     * measured content, and every instance overrides it anyway.
+     */
+    dayDefaults:
+      dayOccurrences.find((occurrence) => occurrence.Label.length > 0) ??
+      dayOccurrences[0]!,
     instanceCount,
     comparedIrFacts: countComparedFacts(input.envelope.ir),
   };
@@ -450,8 +525,14 @@ export function validateCalendarFigmaSourcePlans(
   if (identities.size !== plans.length)
     failures.push("calendar live writer: duplicate adapter identity");
   for (const plan of plans) {
-    if (plan.variables.length === 0)
-      failures.push(`${plan.adapterIdentity}: variables denominator is zero`);
+    /**
+     * `variables.length === 0` is NOT a failure. It is the correct plan for a
+     * subject with no verified DTCG bindings — every token painted from its
+     * measured literal. What must never be zero is the COMPARED-FACTS
+     * denominator: that is the number a fidelity claim is divided by, and a
+     * zero there would make any percentage meaningless. Those two were
+     * conflated as "denominator is zero"; only the second one is.
+     */
     if (plan.comparedIrFacts <= 0)
       failures.push(
         `${plan.adapterIdentity}: compared facts denominator is zero`,
@@ -460,14 +541,22 @@ export function validateCalendarFigmaSourcePlans(
       failures.push(
         `${plan.adapterIdentity}: day defaults missing source Label`,
       );
-    if (
-      plan.calendarSet.children.length +
-        plan.weekSet.children.length +
-        plan.daySet.children.length !==
-      CALENDAR_FIGMA_VARIANTS_PER_SOURCE
-    )
+    /**
+     * Variants expected of THIS source: its own WeekNumbers axis twice (the
+     * calendar and the week template are both keyed on it) plus every day
+     * State. The old fixed total assumed two WeekNumbers variants, so it
+     * refused any subject that does not vary on it.
+     */
+    const weekNumberVariants = groupVariants(plan.calendarSet).length;
+    const expectedVariants =
+      weekNumberVariants * 2 + CALENDAR_DAY_STATES.length;
+    const actualVariants =
+      groupVariants(plan.calendarSet).length +
+      groupVariants(plan.weekSet).length +
+      groupVariants(plan.daySet).length;
+    if (actualVariants !== expectedVariants)
       failures.push(
-        `${plan.adapterIdentity}: expected ${CALENDAR_FIGMA_VARIANTS_PER_SOURCE} variants`,
+        `${plan.adapterIdentity}: expected ${expectedVariants} variants, found ${actualVariants}`,
       );
   }
   return failures;
@@ -565,6 +654,27 @@ mutatedNodeIds.push(page.id);
 const rgba=hex=>({r:parseInt(hex.slice(1,3),16)/255,g:parseInt(hex.slice(3,5),16)/255,b:parseInt(hex.slice(5,7),16)/255,a:parseInt(hex.slice(7,9),16)/255});
 const paint=hex=>{const value=rgba(hex);return{type:"SOLID",color:{r:value.r,g:value.g,b:value.b},opacity:value.a};};
 const allFonts=await figma.listAvailableFontsAsync();
+/**
+ * MEMOISED FONT LOADING. figma.loadFontAsync is documented as idempotent,
+ * but across this plugin bridge every call is a round trip: measured at ~726ms
+ * per await in a text-creation loop, against 122ms for a HUNDRED frames with
+ * paints and auto-layout. The writer awaited it once per text node and again
+ * per instance label, so a calendar with ~55 texts and 42 instances spent
+ * minutes doing nothing but re-loading two faces — and the mint died on the
+ * host's hard 300s execution ceiling with calendar/set still empty.
+ *
+ * Each distinct family+style is now fetched once and the promise reused. The
+ * fonts loaded are exactly the same ones; only the number of round trips
+ * changes.
+ */
+const fontLoads=new Map();
+const loadFontOnce=font=>{
+  if(!font||font===figma.mixed)return Promise.resolve();
+  const key=font.family+"\u0000"+font.style;
+  let pending=fontLoads.get(key);
+  if(!pending){pending=figma.loadFontAsync(font);fontLoads.set(key,pending);}
+  return pending;
+};
 const resolveFont=spec=>{
   const found=spec.fallbackChain.map(candidate=>allFonts.find(font=>font.fontName.family===candidate.family&&font.fontName.style===candidate.style)).find(Boolean);
   if(!found)throw new Error("CALENDAR-FONT-UNAVAILABLE:"+spec.requestedFamily+":"+spec.requestedStyle);
@@ -672,6 +782,21 @@ for(const source of PLAN.sources){
     if(ir.layout){
       node.primaryAxisSizingMode=(ir.layout.mode==="horizontal"?width:height).mode==="hug"?"AUTO":"FIXED";
       node.counterAxisSizingMode=(ir.layout.mode==="horizontal"?height:width).mode==="hug"?"AUTO":"FIXED";
+      /**
+       * RESIZE AGAIN, AFTER THE SIZING MODES ARE SET. An auto-layout frame is
+       * created with primaryAxisSizingMode AUTO, and while that holds a resize
+       * of the PRIMARY axis does not stick — Figma re-hugs it to content the
+       * moment the child is measured. Measured directly: a HORIZONTAL frame
+       * holding the text "1", resized to 42x42 and only then set FIXED, comes
+       * back 8x42 — the counter axis kept 42, the primary axis collapsed to
+       * the glyph. Setting the modes first, or resizing a second time after
+       * them, both yield 42x42.
+       *
+       * This is why every day button minted 8px wide: the selected ring drew
+       * as an oval instead of a circle and the last column fell off the right
+       * edge of the calendar.
+       */
+      if(width.mode==="fixed"||height.mode==="fixed")node.resizeWithoutConstraints(fixedWidth,fixedHeight);
     }
     bindFloat(node,"width",bindingFor(ir,"width.value")||bindingFor(ir,"layout.width.value"));
     bindFloat(node,"height",bindingFor(ir,"height.value")||bindingFor(ir,"layout.height.value"));
@@ -689,7 +814,7 @@ for(const source of PLAN.sources){
     if(ir.kind==="frame")node=figma.createFrame();
     else if(ir.kind==="text"){
       if(!ir.type.fontProvenance)throw new Error("CALENDAR-FONT-PROVENANCE-ABSENT:"+ir.role);
-      const label=figma.createText();const font=resolveFont(ir.type.fontProvenance);await figma.loadFontAsync(font);
+      const label=figma.createText();const font=resolveFont(ir.type.fontProvenance);await loadFontOnce(font);
       label.fontName=font;label.characters=ir.characters;label.fontSize=ir.type.fontSize;
       label.lineHeight=ir.type.lineHeight.unit==="px"?{unit:"PIXELS",value:ir.type.lineHeight.value}:{unit:"AUTO"};
       label.textAlignHorizontal=ir.align.toUpperCase();label.textAlignVertical=ir.verticalAlign.toUpperCase();
@@ -710,7 +835,7 @@ for(const source of PLAN.sources){
             if(candidate.family===resolvedFamily&&candidate.style===resolvedStyle)continue;
             const found=allFonts.find(entry=>entry.fontName.family===candidate.family&&entry.fontName.style===candidate.style);
             if(!found)continue;
-            await figma.loadFontAsync(found.fontName);
+            await loadFontOnce(found.fontName);
             label.fontName=found.fontName;
             label.characters=ir.characters;
             if(label.width>0&&label.absoluteRenderBounds){painted=true;break;}
@@ -732,14 +857,16 @@ for(const source of PLAN.sources){
       void "CALENDAR-WRITER-LOAD-INSTANCE-FONT-BEFORE-SET-PROPERTIES";
       for(const text of node.findAllWithCriteria({types:["TEXT"]})){
         if(sceneRole(text.name)!=="calendar/day/label")continue;
-        if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
+        if(text.fontName!==figma.mixed)await loadFontOnce(text.fontName);
       }
     }else throw new Error("UNSUPPORTED-CHILD-KIND:"+ir.kind);
     node.visible=ir.visible!==false;node.opacity=ir.opacity===undefined?1:ir.opacity;
     node.name=ir.role&&ir.label&&ir.role!==ir.label?ir.role+" :: "+ir.label:(ir.label||ir.role||ir.kind);
     if(ir.kind==="text"&&ir.type.fontProvenance)node.name+=" :: font-provenance="+encodeURIComponent(JSON.stringify(ir.type.fontProvenance));
     let hugTextIntrinsic=null;
-    if(ir.kind==="text"&&ir.width.mode!=="fill"){
+    void "CALENDAR-WRITER-BLANK-LABEL-IS-A-MEASURED-CELL";
+    const irIsBlankText=ir.kind==="text"&&String(ir.characters||"").trim().length===0;
+    if(ir.kind==="text"&&ir.width.mode!=="fill"&&!irIsBlankText){
       void "CALENDAR-WRITER-HUG-TEXT-INTRINSIC-BEFORE-PARENT-COLLAPSE";
       void "CALENDAR-WRITER-HUG-FROM-POST-CHARACTER-INTRINSIC";
       if(node.width<=0||node.height<=0)throw new Error("CALENDAR-TEXT-GEOMETRY:"+ir.role);
@@ -764,7 +891,7 @@ for(const source of PLAN.sources){
       void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-CHARACTERS";
       for(const text of node.findAllWithCriteria({types:["TEXT"]})){
         if(sceneRole(text.name)!=="calendar/day/label")continue;
-        if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
+        if(text.fontName!==figma.mixed)await loadFontOnce(text.fontName);
         if(text.characters!==ir.properties.Label)text.characters=ir.properties.Label;
         if(text.characters!==ir.properties.Label)throw new Error("CALENDAR-DAY-LABEL-MISMATCH:"+ir.role);
       }
@@ -774,11 +901,44 @@ for(const source of PLAN.sources){
     if(ir.kind==="text"){
       bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
       if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
-      if(ir.width.mode!=="fill"&&(node.characters.trim().length===0||node.width<=0||node.height<=0))throw new Error("CALENDAR-TEXT-GEOMETRY:"+ir.role);
+      /**
+       * A BLANK LABEL IS A MEASURED CELL, NOT MISSING TEXT. A source that
+       * renders the leading days of an adjacent month as hidden-but-present
+       * cells (rdp-outside.rdp-hidden) carries no glyphs there, and calendar@1
+       * spells that as an empty label for the OUTSIDE state only — every other
+       * state still requires a visible label, enforced at the schema. A
+       * zero-glyph text node has no intrinsic size, so it is given its declared
+       * box instead of being measured from glyphs.
+       *
+       * The structure is kept rather than dropped: every variant of the day
+       * component must carry calendar/day/label for the set's TEXT property to
+       * bind across variants. An empty label is the honest content; a missing
+       * node would break the property.
+       */
+      if(ir.width.mode!=="fill"&&node.characters.trim().length===0){
+        const blankWidth=ir.width.mode==="fixed"?ir.width.value:0;
+        const blankHeight=ir.height&&ir.height.mode==="fixed"?ir.height.value:0;
+        if(blankWidth>0&&blankHeight>0)node.resizeWithoutConstraints(blankWidth,blankHeight);
+      }else if(ir.width.mode!=="fill"&&(node.width<=0||node.height<=0))throw new Error("CALENDAR-TEXT-GEOMETRY:"+ir.role);
     }
     createdNodeIds.push(node.id);return node;
   };
   const mintSet=async(setIr,kind)=>{
+    if(setIr.kind==="component"){
+      void "CALENDAR-WRITER-LONE-COMPONENT-NO-VARIANTS";
+      const only=figma.createComponent();only.clipsContent=false;
+      only.name=setIr.role+" :: "+(setIr.label||source.sourceName);
+      only.description="Experimental calendar@1 primitive-IR mint (non-varying axis: minted as a component, not a set). Recipe "+source.recipeHash+"; source adapter "+source.adapterIdentity;
+      tag(only,setIr,kind);applyLayout(only,setIr);applyPaints(only,setIr);
+      section.appendChild(only);
+      for(const [childIndex,child] of setIr.children.entries())await render(child,only,kind+"/children/"+childIndex);
+      applySizing(only,setIr);
+      if(kind==="calendar"&&only.layoutMode!=="VERTICAL")throw new Error("CALENDAR-FAKE-LAYOUT:"+only.name);
+      if(kind==="week"&&only.layoutMode!=="HORIZONTAL")throw new Error("CALENDAR-FAKE-LAYOUT:"+only.name);
+      createdNodeIds.push(only.id);
+      setSharedData(only,"runIdentity",PLAN.runIdentity);setSharedData(only,"adapterIdentity",source.adapterIdentity);setSharedData(only,"recipeHash",source.recipeHash);
+      return only;
+    }
     const components=[];
     for(const [componentIndex,ir] of setIr.children.entries()){
       const component=figma.createComponent();component.clipsContent=false;
@@ -828,7 +988,7 @@ for(const source of PLAN.sources){
   for(const entry of instanceLabelWrites){
     for(const text of entry.node.findAllWithCriteria({types:["TEXT"]})){
       if(sceneRole(text.name)!=="calendar/day/label")continue;
-      if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
+      if(text.fontName!==figma.mixed)await loadFontOnce(text.fontName);
     }
     entry.node.setProperties({[dayLabelProperty]:entry.label});
     void "CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE";

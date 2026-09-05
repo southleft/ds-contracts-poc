@@ -1,0 +1,60 @@
+{
+ "artifactVersion": "recipe-fidelity-v1",
+ "label": "calendar/day-picker",
+ "status": "pass",
+ "bar": {
+  "pctAAMaskedMax": 5
+ },
+ "metrics": {
+  "pctExactUnmasked": 10.195053544110149,
+  "pctAAUnmasked": 3.7353391126976034,
+  "pctAAMasked": 3.7353391126976034,
+  "canvasPx": "280x247",
+  "realPx": "296x265",
+  "inkCanvasPct": 4.708057113717492,
+  "inkRealPct": 5.688424273329934
+ },
+ "canvas": {
+  "path": "private/f1-canvas.png",
+  "sha256": "3f807e70726fe2f90a8bb5abe273d1c0ccf646495262b3863808e6a21cb9c840"
+ },
+ "reference": {
+  "path": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
+  "sha256": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2"
+ },
+ "diff": "recipe/evidence/f1-held-out-v1/score/diff.png",
+ "referenceCroppedToControl": false,
+ "canvasCroppedToControl": false,
+ "thresholdSweep": [
+  {
+   "threshold": 250,
+   "canvas": "280x247",
+   "reference": "296x265",
+   "agree": false
+  },
+  {
+   "threshold": 245,
+   "canvas": "280x247",
+   "reference": "296x265",
+   "agree": false
+  },
+  {
+   "threshold": 240,
+   "canvas": "280x247",
+   "reference": "296x265",
+   "agree": false
+  },
+  {
+   "threshold": 230,
+   "canvas": "280x247",
+   "reference": "296x265",
+   "agree": false
+  }
+ ],
+ "caveats": [
+  "One state of one component. A pass here is not a pass for the archetype.",
+  "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+  "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+  "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+ ]
+}

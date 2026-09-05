@@ -161,7 +161,15 @@ if (fromPage) {
   }, 30_000);
   if (!hop?.success) throw new Error(`--from-page: could not switch to ${fromPage}: ${JSON.stringify(hop).slice(0, 200)}`);
 }
-const result = await call("figma_execute", { code, fileKey: TARGET.fileKey, timeout: Math.min(waitMs, 300_000) }, waitMs);
+// The plugin-side execution budget follows --wait-ms rather than a fixed 5
+// minutes. A calendar mints 42 day instances and loads a font per instance
+// label; it passed the day set and week template and was still filling
+// calendar/set at 300s, so the old ceiling truncated a run that was making
+// steady progress and left a half-built page behind. The caller already
+// states how long it is prepared to wait — honour it, and keep a floor so a
+// short --wait-ms cannot make the plugin give up before the client does.
+const executeTimeout = Math.max(waitMs, 60_000);
+const result = await call("figma_execute", { code, fileKey: TARGET.fileKey, timeout: executeTimeout }, waitMs);
 writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`);
 await client.close();
 

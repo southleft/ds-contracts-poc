@@ -144,6 +144,66 @@ Every gap closed above is visible in it:
 This is corroboration, **not a score.** Scoring compares a Figma export against
 this reference, and no mint has happened.
 
+## MINTED LIVE, AND SCORED
+
+**2026-09-05.** F1 was minted onto Scratch `byMp6lt0Ij9b2QbkDGFwBh` (the only
+file this project may write) and the minted component exported and scored
+against react-day-picker's own Chromium render.
+
+    page              Recipe Pivot / Calendar / 2b63ad27-calendar-v50
+    calendar/set      261:1175        308 x 279
+    variants          14 (State x4; WeekNumbers does not vary)
+    day instances     42
+    figma variables   0   -- the subject has no verified DTCG bindings
+    reference         extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png
+
+    pctAAMasked       3.735 %     bar <= 5 %      status PASS
+    pctAAUnmasked     3.735 %
+    pctExactUnmasked 10.195 %
+    canvas ink        280 x 247
+    reference ink     296 x 265
+
+**Read the pass with its caveat.** The two ink boxes are not the same size —
+the mint is 16px smaller in BOTH axes — so the scorer's alignment is doing real
+work, and `thresholdSweep` reports `agree: false` at every threshold. The
+overlay (`score/diff.png`) shows every glyph twice with an offset that grows
+toward the bottom-right, which is what a uniform size difference looks like.
+3.735% is the honest number the gate computes; it is not a claim that the two
+images are the same size. The 16px is named, not hidden, and is the first thing
+to chase next.
+
+## Four defects the live mint found that no offline gate could
+
+Every one of these passed `typecheck`, `test:recipe` and the fixed point, and
+only rendering into Figma exposed them.
+
+1. **Every day button minted 8px wide, so the grid was empty.** An auto-layout
+   frame is created with `primaryAxisSizingMode: AUTO`; while that holds, a
+   resize of the PRIMARY axis does not stick. Measured directly: a HORIZONTAL
+   frame holding "1", resized to 42x42 and only then set FIXED, comes back
+   **8x42**. Setting the modes first — or resizing again after them — yields
+   42x42. The selected ring drew as an oval and the last column fell off the
+   edge.
+2. **The day template's label was the first cell**, which is a BLANK OUTSIDE
+   CELL in any month not starting on the first weekday. January 2026 begins on
+   a Thursday, so all four state variants minted with an empty label. Same bug
+   in the component-property default (`dayOccurrences[0]`), which Figma then
+   adopts onto every variant. Both now take the first day that carries glyphs.
+3. **The mint could not finish inside the host's 300s ceiling.**
+   `figma.loadFontAsync` is documented as idempotent but costs **~726ms per
+   await** across this bridge — against 122ms for a HUNDRED frames with paints
+   and auto-layout. The writer awaited it per text node and again per instance
+   label. Memoised, the same mint completes comfortably.
+4. **Figma carries no font named "Times".** react-day-picker sets no
+   `font-family`, so the capture reports the browser default serif. The writer
+   refused rather than substituting silently
+   (`CALENDAR-FONT-UNAVAILABLE:Times:Regular`), which is correct. Measured
+   against `listAvailableFontsAsync`: 2,122 families, no Times, but Times New
+   Roman in Regular/Bold/Italic/Bold Italic — and no Medium, so the weekday
+   row's 500 weight degrades too. Both substitutions are declared in the
+   FontSpec with a `degradation` string; the writer refuses a fallback without
+   one.
+
 ## Gates
 
     typecheck:recipe          0 errors in current files (10 named, 4 frozen lineage)

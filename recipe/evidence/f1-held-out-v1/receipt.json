@@ -33,6 +33,7 @@
     "determinismVerifiedByThisGate": false,
     "determinismReMeasuredOutOfBand": "2026-09-05 byte-identical",
     "referenceRenderCommitted": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
+    "liveMintScoredOutOfBand": "2026-09-05 pctAAMasked 3.735% (bar 5%)",
     "unverifiedByThisGate": {
       "determinism": "byte-identical across two full sweeps in one session",
       "captures": 32,
@@ -277,7 +278,7 @@
     ],
     "schemaIssues": [],
     "evidencedBy": "real-proposed-instance-schema-parse",
-    "canonicalHash": "e555940bdc590ec66088156a8820b034814edba1fc7cd7bb47ed849bfd96226b",
+    "canonicalHash": "3d66d7a7373d20e35c438b3afa29cb8e3f2f9aab8a515e4d65b46823ef06c678",
     "carriedFacts": 29,
     "receipts": 6,
     "liveFigma": false,

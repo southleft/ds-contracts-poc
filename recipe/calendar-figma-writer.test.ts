@@ -252,10 +252,14 @@ test("the writer does not refuse FILL text for pre-parent intrinsic — the Cale
   const geometry = writer.code.slice(
     writer.code.lastIndexOf("CALENDAR-WRITER-HUG-FROM-POST-CHARACTER-INTRINSIC"),
   );
-  assert.match(
-    geometry,
-    /if\(ir\.width\.mode!=="fill"&&\(node\.characters\.trim\(\)\.length===0/,
-  );
+  // The zero-geometry refusal must stay gated on non-FILL text (the v31
+  // class). It is now two branches — a blank label is sized from its declared
+  // box, anything else still refuses — and BOTH must carry the FILL guard, or
+  // a fill-width text could reach either one.
+  const blankBranch = /if\(ir\.width\.mode!=="fill"&&node\.characters\.trim\(\)\.length===0\)/;
+  const refuseBranch = /else if\(ir\.width\.mode!=="fill"&&\(node\.width<=0\|\|node\.height<=0\)\)throw new Error\("CALENDAR-TEXT-GEOMETRY:"/;
+  assert.match(geometry, blankBranch, "blank-label branch is FILL-guarded");
+  assert.match(geometry, refuseBranch, "zero-geometry refusal is FILL-guarded");
 });
 
 test("the writer binds compile-carried layout.minWidth — the Calendar live v32 class", () => {
@@ -365,46 +369,77 @@ test("the emitted program is deterministic", () => {
 });
 
 /**
- * A calendar whose WeekNumbers dimension does not vary compiles to a lone
- * component (figma-ir.ts refuses a one-valued variant axis), and this writer
- * cannot mint that shape yet. It must say so BY NAME — the previous code read
- * `found[0].kind` and produced a bare "required calendar/set set", which told a
- * reader nothing about why a perfectly valid envelope was rejected.
+ * A calendar whose WeekNumbers dimension does not vary compiles to a LONE
+ * COMPONENT (figma-ir.ts refuses a one-valued variant axis), and the writer
+ * mints that shape rather than refusing it. Three assumptions used to make
+ * this impossible, each of them one library's shape written down as the
+ * archetype's: a two-valued WeekNumbers axis, a 6-week grid, and at least one
+ * bound variable.
  */
-test("a calendar that does not vary on WeekNumbers is refused by name, not by crash", () => {
+test("a calendar that does not vary on WeekNumbers plans and mints as a lone component", () => {
   const varying = compileCalendarRecipe(astryxCalendarInstance);
   const lone = structuredClone(varying) as unknown as {
-    ir: { children: Array<{ role?: string; kind: string; children?: unknown[] }> };
+    ir: { children: Array<Record<string, unknown>> };
   };
-  // Collapse calendar/set to the lone-component shape the recipe emits for a
-  // single-valued axis: the first variant, promoted, carrying the set's role.
   const index = lone.ir.children.findIndex((c) => c.role === "calendar/set");
-  assert.ok(index >= 0, "the compiled scene carries a calendar/set");
-  const set = lone.ir.children[index] as unknown as {
-    children: Array<Record<string, unknown>>;
-    label?: string;
-  };
-  lone.ir.children[index] = {
-    ...(set.children[0] as Record<string, unknown>),
-    role: "calendar/set",
-    label: set.label,
-  } as unknown as (typeof lone.ir.children)[number];
-
-  assert.throws(
-    () =>
-      emitCalendarFigmaWriter([
-        {
-          adapterIdentity: "lone-variant-probe",
-          displayName: "lone variant probe",
-          recipeHash: "0".repeat(64),
-          envelope: lone as never,
-        },
-      ]),
-    (error: Error) => {
-      assert.match(error.message, /lone component, not a set/);
-      assert.match(error.message, /does not vary on its axis/);
-      assert.match(error.message, /Close:/, "a named red states its close");
-      return true;
-    },
+  const weekIndex = lone.ir.children.findIndex(
+    (c) => c.role === "calendar/week-set",
   );
+  assert.ok(index >= 0 && weekIndex >= 0);
+  const promote = (at: number, role: string) => {
+    const set = lone.ir.children[at] as unknown as {
+      children: Array<Record<string, unknown>>;
+      label?: string;
+    };
+    lone.ir.children[at] = {
+      ...(set.children[0] as Record<string, unknown>),
+      role,
+      label: set.label,
+    };
+  };
+  promote(index, "calendar/set");
+  promote(weekIndex, "calendar/week-set");
+
+  const writer = emitCalendarFigmaWriter([
+    {
+      adapterIdentity: "lone-variant-probe",
+      displayName: "lone variant probe",
+      recipeHash: "0".repeat(64),
+      envelope: lone as never,
+    },
+  ]);
+  const plan = writer.sourcePlans[0]!;
+  assert.equal(plan.calendarSet.kind, "component", "calendar mints as component");
+  assert.equal(plan.weekSet.kind, "component", "week mints as component");
+  assert.equal(plan.daySet.kind, "component-set", "State still varies");
+  // The emitted program must carry the single-component branch, or a lone
+  // plan would reach figma.combineAsVariants with nothing to combine.
+  assert.match(writer.code, /CALENDAR-WRITER-LONE-COMPONENT-NO-VARIANTS/);
+});
+
+/**
+ * Zero variables is a legal plan: a subject with no verified DTCG bindings
+ * paints every token from its measured literal. Requiring one made "ships a
+ * joinable token file" a precondition for minting at all.
+ */
+test("a calendar with no bound tokens still plans", () => {
+  const envelope = structuredClone(
+    compileCalendarRecipe(astryxCalendarInstance),
+  ) as unknown as { ir: unknown };
+  const strip = (node: Record<string, unknown>): void => {
+    if (Array.isArray(node.bindings)) node.bindings = [];
+    for (const child of (node.children as Record<string, unknown>[]) ?? [])
+      strip(child);
+  };
+  strip(envelope.ir as Record<string, unknown>);
+  const writer = emitCalendarFigmaWriter([
+    {
+      adapterIdentity: "unbound-probe",
+      displayName: "unbound probe",
+      recipeHash: "1".repeat(64),
+      envelope: envelope as never,
+    },
+  ]);
+  assert.equal(writer.sourcePlans[0]!.variables.length, 0);
+  assert.ok(writer.code.length > 1000, "a program is still emitted");
 });
