@@ -105,3 +105,45 @@ times out past 10 minutes.
 
 So there is currently **no working typecheck of any scope**, and the only fix
 that reaches it is removing the duplication.
+
+---
+
+## 2026-09-05 — four `*:live:vN:generated:check` steps are red in CI and green locally
+
+Named while landing the F1 compile round, **not caused by it, and not fixed here.**
+
+`.github/workflows/fast.yml` runs these as individual steps. On `f46e749d2` four
+of them failed:
+
+    recipe:combobox:live:v42:generated:check
+    recipe:table:live:v38:generated:check
+    recipe:calendar:live:v50:generated:check
+    recipe:input-field:live:v85:generated:check
+
+Every one of them **also failed on the previous commit `06e1e4244`**, which
+failed **23** such steps — so the set shrank rather than grew, and three of the
+four name components (combobox, table, input-field) that the F1 commit never
+touches.
+
+**What is odd, and still unexplained.** Each of these compares gzipped bytes:
+
+```ts
+!existsSync(outputPath) || !readFileSync(outputPath).equals(expected)
+```
+
+Locally every one exits 0 with no drift and writes nothing. The pinned `.gz`
+files are tracked (17 in `calendar-live-pivot-v50/`), and CI pins the same Node
+(20.19.4), so neither a missing input nor a zlib-version difference explains it.
+Something environment-dependent feeds the generation, and it is shared across
+four unrelated lineages.
+
+**Why it is recorded rather than chased.** `npm run ci:lane fast` — the gate list
+this project treats as the fast lane — is **192/192 green** on this commit, and
+the local `--check` for each of the four passes. The divergence is between
+`fast.yml`'s step list and `ci:lane fast`, which is the same class of gap this
+document already names. It needs its own round: a byte-diff of one artifact
+generated on `ubuntu-latest` against the committed one, the way
+[`drift pins are OS-specific`] was settled.
+
+**Do not read the green local lane as "CI is green."** It is not, and it has not
+been since at least 2026-09-04.
