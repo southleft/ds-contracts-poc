@@ -206,6 +206,23 @@ async function main() {
   await reloadHarnessPage(page, pageHtml);
   const run2 = await sweep(page, standardMounts, { fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix, uaBaseline });
 
+  // THE SWEEP'S QUARANTINE, CARRIED INTO THE PER-COMPONENT STAGES. The sweep
+  // can now refuse a component whose every child has a zero-area box (see
+  // `quarantineVerdict`), and it discards that component's partial captures. If
+  // nothing translated that, the next stage would read the absence rather than
+  // the refusal: `alignSweep` throws "base capture missing", which is a raw
+  // engine fault, and the run dies with the components AFTER it never
+  // attempted — the exact failure this boundary exists to remove (measured on
+  // Bootstrap: Spinner quarantined, then NavTabs and Modal never reached).
+  // Re-raising it as the QuarantineError the loop below already understands
+  // writes the same quarantine.json every other refusal writes, so `promote`
+  // sees a refusal instead of a missing artifact and the rest of the library
+  // still runs.
+  const sweptQuarantines = new Map<string, string>();
+  for (const q of [...run1.quarantined, ...run2.quarantined]) {
+    if (!sweptQuarantines.has(q.component)) sweptQuarantines.set(q.component, `${q.reason} (combo ${q.combo})`);
+  }
+
   // ---- portal sweeps (MOLECULE round): one two-phase page per component,
   // every combo mounted/reset in isolation, double-swept for determinism,
   // captures appended so fusion/gate treat them as ordinary sweeps. ----
@@ -417,6 +434,14 @@ async function main() {
       rmSync(path.join(outDir, f), { recursive: true, force: true });
     }
     mkdirSync(outDir, { recursive: true });
+
+    const sweptReason = sweptQuarantines.get(comp.name);
+    if (sweptReason !== undefined)
+      throw new QuarantineError('the capture sweep could not drive this component', [
+        sweptReason,
+        'Its partial captures were discarded: a component swept half way has a partial ledger, and downstream a partial ledger reads as a complete one.',
+        'This is the component\'s result, not the run\'s — every other component in the library was still swept.',
+      ]);
 
     const aligned = alignSweep(run1, comp, space, cfg.library.classPrefix);
     console.log(`  anatomy: ${aligned.baseFlat.map((e, i) => `${aligned.partNames[i]}(${e.sig})`).join(' → ')}`);

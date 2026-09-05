@@ -1996,6 +1996,46 @@ const pinInfiniteAnimationsJs = `(() => {
   return names.sort();
 })()`;
 
+/** THE QUARANTINE PREDICATE — pure, so the branch that matters can be tested
+ *  with planted shapes instead of by waiting for a library to misbehave.
+ *
+ *  `run.ts` states the rule this must not break: "quarantine is for a contract
+ *  the generator registry refuses, never a way to swallow a bug." A blanket
+ *  catch in the sweep would turn every engine fault into a per-component shrug.
+ *  So a component is quarantined ONLY where all three hold:
+ *
+ *    1. the driver TIMED OUT (a hang, not a thrown assertion),
+ *    2. the stage element was FOUND and has children (so the selector is right
+ *       and the mount happened — neither is an engine fault),
+ *    3. EVERY child has a zero-area box.
+ *
+ *  Together those say: the component mounted, and nothing it rendered can ever
+ *  be pointed at. That is the library's DOM, not our code. Bootstrap's
+ *  `.spinner-grow` starts its infinite keyframe at `transform: scale(0)`, which
+ *  is exactly this shape; measured by the held-out exam 2026-09-04.
+ *
+ *  Anything else — a non-timeout throw, a missing stage, or one child with real
+ *  area — is an engine fault and must reach the caller unchanged. */
+export function quarantineVerdict(
+  err: { name?: string; message?: string } | null,
+  boxes: Array<{ tag: string; w: number; h: number }> | null,
+): { quarantine: boolean; why: string } {
+  const timedOut = err?.name === 'TimeoutError' || /Timeout .*exceeded/.test(String(err?.message ?? ''));
+  if (!timedOut) return { quarantine: false, why: 'not a timeout — a thrown error is an engine fault, not a component result' };
+  if (boxes === null) return { quarantine: false, why: 'the stage element was not found — that is an engine fault (bad selector or failed mount)' };
+  if (boxes.length === 0) return { quarantine: false, why: 'the stage has no children — nothing mounted, which is an engine fault' };
+  const alive = boxes.filter((b) => b.w > 0 && b.h > 0);
+  if (alive.length > 0)
+    return {
+      quarantine: false,
+      why: `a child has real area (${alive.map((b) => `${b.tag} ${b.w}x${b.h}`).join(', ')}) — the driver should have reached it, so the timeout is an engine fault`,
+    };
+  return {
+    quarantine: true,
+    why: `no visible steady state: the driver timed out reaching the interaction root and every child of the stage has a zero-area box (${boxes.map((b) => `${b.tag} ${b.w}x${b.h}`).join(', ')})`,
+  };
+}
+
 export interface SweepResult {
   /** keyed `${component}:${combo}` per capture. */
   captures: Capture[];
@@ -2035,6 +2075,18 @@ export interface SweepResult {
    *  the captured anatomy's root is `button.al-c-button`, and this records that
    *  it was reached through `al-button`. */
   shadowHostTrails: Record<string, string>;
+  /** COMPONENTS THE SWEEP COULD NOT CAPTURE, by name, with the combo and the
+   *  driver error that stopped them. Before 2026-09-04 there was no such list:
+   *  ONE component that never becomes visible threw out of the whole sweep and
+   *  the run died with nothing written, so the other components were never
+   *  attempted and could be reported neither as passes nor as failures. Found
+   *  by the held-out exam on Bootstrap 5, whose `.spinner-grow` starts its
+   *  infinite keyframe at `transform: scale(0)` — a zero-size box, so
+   *  `${stage} > *` filtered to visible resolves EMPTY and `hover()` times out.
+   *  A component here is a RESULT, not silence: its partial captures are
+   *  discarded (a half-swept component is a partial ledger, which is worse than
+   *  none) and every other component still runs. */
+  quarantined: Array<{ component: string; combo: string; reason: string }>;
   /** CONFORMANCE FRONTIER (R1/R8) — READ-BOUNDARY RECEIPTS.
    *
    *  Two facts the reader knows and the persisted capture deliberately does
@@ -2229,10 +2281,20 @@ export async function sweep(
   // facts into every other component's ledger.
   const textFillFolds = new Map<string, Set<string>>();
   const closedShadowSuspects = new Map<string, Set<string>>();
+  const quarantined: SweepResult['quarantined'] = [];
   for (const { comp, space } of mounts) {
     const compFolds = textFillFolds.get(comp.name) ?? textFillFolds.set(comp.name, new Set()).get(comp.name)!;
     const compSuspects = closedShadowSuspects.get(comp.name) ?? closedShadowSuspects.set(comp.name, new Set()).get(comp.name)!;
+    // THE QUARANTINE BOUNDARY. Everything this component does is inside it, so
+    // a driver error takes down the component and NOT the run. `capturesAtStart`
+    // is the rollback point: a component that threw half way has a partial
+    // ledger, and a partial ledger reads as a complete one downstream, so it is
+    // discarded rather than kept.
+    const capturesAtStart = captures.length;
+    let currentCombo = '(before the first combo)';
+    try {
     for (const combo of space.enumeration.combos) {
+      currentCombo = combo.key;
       const key = `${comp.name}:${combo.key}`;
       const stageSel = `[data-combo="${key}"]`;
       // SHADOW-DOM ROUND (W3/W4) — THE INTERACTION ROOT.
@@ -2352,6 +2414,49 @@ export async function sweep(
         );
       }
     }
+    } catch (e) {
+      // QUARANTINE IS NOT A CATCH-ALL. run.ts states the rule this must not
+      // break: "quarantine is for a contract the generator registry refuses,
+      // never a way to swallow a bug." A blanket catch here would turn every
+      // engine fault into a per-component shrug, which is the opposite of what
+      // this file is for. So the boundary QUARANTINES ONLY WHAT IT CAN PROVE
+      // is the library's own DOM, and re-throws everything else unchanged.
+      //
+      // The provable case, and the one the held-out exam found: the driver
+      // timed out reaching the interaction root, AND the stage is present with
+      // children, AND every one of those children has a zero-area box. That is
+      // a component with no visible steady state — Bootstrap's `.spinner-grow`
+      // starts its infinite keyframe at `transform: scale(0)` — and no amount
+      // of engine correctness makes it drivable. The evidence is measured here
+      // and carried in the reason, so the quarantine is a finding, not a guess.
+      const err = e as Error & { name?: string };
+      const timedOut = err?.name === 'TimeoutError' || /Timeout .*exceeded/.test(String(err?.message ?? ''));
+      let boxes: Array<{ tag: string; w: number; h: number }> | null = null;
+      if (timedOut) {
+        try {
+          boxes = (await page.evaluate(
+            `(() => { const st = document.querySelector('[data-combo=${JSON.stringify(`${comp.name}:${currentCombo}`)}]');
+               if (!st) return null;
+               return [...st.children].map((c) => { const r = c.getBoundingClientRect();
+                 return { tag: c.tagName.toLowerCase(), w: Math.round(r.width * 100) / 100, h: Math.round(r.height * 100) / 100 }; });
+             })()`,
+          )) as Array<{ tag: string; w: number; h: number }> | null;
+        } catch {
+          boxes = null;
+        }
+      }
+      const verdict = quarantineVerdict(err, boxes);
+      if (!verdict.quarantine) throw e;
+
+      // Proven: roll the ledger back. A component that threw part-way has a
+      // partial ledger, and downstream a partial ledger reads as a complete one.
+      captures.length = capturesAtStart;
+      const reason = verdict.why;
+      quarantined.push({ component: comp.name, combo: currentCombo, reason });
+      console.log(`  \u2716 QUARANTINED ${comp.name} at combo ${currentCombo}`);
+      console.log(`    ${reason}`);
+      console.log(`    partial captures discarded; the sweep continues with the remaining component(s)`);
+    }
   }
 
   const controls: Record<string, CapturedNode> = {};
@@ -2388,6 +2493,7 @@ export async function sweep(
     stylesheetSkips: [...new Set(stylesheetSkips)].sort(),
     browserVersion: page.context().browser()!.version(),
     fontChecks,
+    quarantined,
     pinnedAnimations: [...pinnedAnimations].sort(),
     shadowHostTrails: Object.fromEntries([...shadowHostTrails].sort()),
     textFillFolds: Object.fromEntries([...textFillFolds].sort().map(([c, s]) => [c, [...s].sort()])),

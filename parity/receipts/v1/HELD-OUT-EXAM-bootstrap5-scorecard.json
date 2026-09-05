@@ -1,0 +1,165 @@
+{
+  "library": "bootstrap5",
+  "rows": [
+    {
+      "name": "alert",
+      "measured": true,
+      "floorPct": 97.5,
+      "cellsCompared": 1280,
+      "cellsEqual": 1248,
+      "combos": 8,
+      "pixelPerfect": "32/32",
+      "sourceFacts": 0,
+      "namedRefusals": 1,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 1,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "badge",
+      "measured": true,
+      "floorPct": 96.42857142857143,
+      "cellsCompared": 896,
+      "cellsEqual": 864,
+      "combos": 8,
+      "pixelPerfect": "32/32",
+      "sourceFacts": 0,
+      "namedRefusals": 1,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 1,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "card",
+      "measured": true,
+      "floorPct": 91.2251655629139,
+      "cellsCompared": 604,
+      "cellsEqual": 551,
+      "combos": 1,
+      "pixelPerfect": "3/4",
+      "sourceFacts": 0,
+      "namedRefusals": 15,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 15,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "formcheck",
+      "measured": true,
+      "floorPct": 88.31168831168831,
+      "cellsCompared": 924,
+      "cellsEqual": 816,
+      "combos": 3,
+      "pixelPerfect": "0/12",
+      "sourceFacts": 0,
+      "namedRefusals": 12,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 11,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "formcontrol",
+      "measured": true,
+      "floorPct": 91.09848484848484,
+      "cellsCompared": 1056,
+      "cellsEqual": 962,
+      "combos": 6,
+      "pixelPerfect": "0/24",
+      "sourceFacts": 0,
+      "namedRefusals": 3,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 3,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "navtabs",
+      "measured": true,
+      "floorPct": 91.74454828660436,
+      "cellsCompared": 2568,
+      "cellsEqual": 2356,
+      "combos": 3,
+      "pixelPerfect": "0/12",
+      "sourceFacts": 0,
+      "namedRefusals": 27,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 26,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "progress",
+      "measured": true,
+      "floorPct": 96.15384615384616,
+      "cellsCompared": 208,
+      "cellsEqual": 200,
+      "combos": 1,
+      "pixelPerfect": "0/4",
+      "sourceFacts": 0,
+      "namedRefusals": 2,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 2,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    }
+  ],
+  "unmeasured": [],
+  "quarantined": [
+    {
+      "name": "Button",
+      "reason": "Button: enriched contract failed generator validation (1 error(s))",
+      "detail": [
+        "bootstrap5.button: duplicate code binding \"className\" — two props/slots/events share one code name (check for a bad merge)"
+      ]
+    },
+    {
+      "name": "Modal",
+      "reason": "Modal: enriched contract failed generator validation (1 error(s))",
+      "detail": [
+        "bootstrap5.modal: part \"btn-close\" tokens sets \"background-size\" which is not a token channel (TOKEN_CHANNELS registry — no emitter renders it; register the channel with its canvas verdict and its CSS spelling, or move the fact to declared/literals)"
+      ]
+    },
+    {
+      "name": "Spinner",
+      "reason": "the capture sweep could not drive this component",
+      "detail": [
+        "no visible steady state: the driver timed out reaching the interaction root and every child of the stage has a zero-area box (div 0x0) (combo grow)",
+        "Its partial captures were discarded: a component swept half way has a partial ledger, and downstream a partial ledger reads as a complete one.",
+        "This is the component's result, not the run's — every other component in the library was still swept."
+      ]
+    }
+  ],
+  "totals": {
+    "measured": 7,
+    "weightedFloorPct": 92.84766454352442,
+    "cellsCompared": 7536,
+    "namedRefusals": 61,
+    "openQueue": 0,
+    "quarantined": 3
+  }
+}

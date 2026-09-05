@@ -226,6 +226,10 @@ async function main() {
     const captures = reconstructCaptures(truth).map((c) => ({ ...c, combo: `${comp.name}:${c.combo}` }));
     const sweep: SweepResult = {
       captures,
+      // An OFFLINE replay of a committed capture quarantines nothing: the
+      // component is in the ledger, so it was captured. The list exists for the
+      // live sweep, where a driver error is a per-component result.
+      quarantined: [],
       controls: truth.controls,
       uaControls: truth.uaControls ?? {},
       uaBaselineBrowser: String(truth._provenance.uaBaselineBrowser ?? truth._provenance.browser ?? 'committed'),

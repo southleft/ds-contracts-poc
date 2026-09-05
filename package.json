@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "type": "module",
-  "description": "Proof of concept: machine-readable design-system contracts. The v1 proof surface is recipe-IR (archetype recipes + Figma-capability IR + receipts); product v1 is incomplete (F1). The universal JSON contract still powers the CLI, playground, and Journeys A\u2013C.",
+  "description": "Proof of concept: machine-readable design-system contracts. The v1 proof surface is recipe-IR (archetype recipes + Figma-capability IR + receipts); product v1 is incomplete (F1). The universal JSON contract still powers the CLI, playground, and Journeys A–C.",
   "scripts": {
     "ci:lanes": "tsx .github/scripts/lane-coverage.ts",
     "ci:lane": "tsx .github/scripts/run-lane.ts",
@@ -433,6 +433,7 @@
     "stretch:check": "tsx core/stretch-default-check.ts",
     "extract:computed:portal:check": "tsx extract/computed/portal-wrapper-check.ts",
     "extract:computed:remount:check": "tsx extract/computed/react-state-remount-check.ts",
+    "extract:computed:quarantine:check": "tsx extract/computed/quarantine-boundary-check.ts",
     "extract:computed:viewport:check": "tsx extract/computed/viewport-geometry-check.ts",
     "extract:computed:geometry:census": "tsx extract/computed/fusion-geometry-census.ts",
     "extract:computed:pseudo-decor-size:check": "tsx extract/computed/pseudo-decor-size-check.ts",

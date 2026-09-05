@@ -782,6 +782,9 @@ jobs:
       - name: extract:computed:color:check (oklab/oklch vs a second implementation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:color:check
+      - name: extract:computed:quarantine:check (the sweep's per-component boundary never becomes a catch-all)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:quarantine:check
 
       # Pure functions over synthetic contracts + a census of the committed
       # corpus, no browser, ~0.3s. It pins the three rules border-style
