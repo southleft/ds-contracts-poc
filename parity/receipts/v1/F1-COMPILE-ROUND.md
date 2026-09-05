@@ -104,6 +104,46 @@ Two real defects surfaced only because the scene was raised and compared:
   stroke drawn on the canvas was silently dropped on readback for every subject
   without a token file. It now reads the paint.
 
+## The determinism claim, now measured rather than transcribed
+
+`receipt.json` carried the capture's determinism under `unverifiedByThisGate`:
+the double-run was asserted from a 2026-08-31 session whose log went to `/tmp`
+and was never committed, and `recipe:f1-held-out:check` re-runs no capture, so
+nothing could confirm it.
+
+**Re-measured 2026-09-05.** A fresh capture in a clean npm sandbox outside the
+repo (react-day-picker 10.0.1 + react 18 + react-dom 18 + esbuild), written to a
+scratch `--out` so the committed ledger was never touched:
+
+    committed captured-truth.json   b4855334ae938375d41ddedf419e3c31
+    fresh capture, same config      b4855334ae938375d41ddedf419e3c31
+
+Byte-identical, 76s, working tree clean throughout. The determinism claim is now
+a measurement.
+
+## The reference render exists, and it corroborates every closure
+
+The same run was given `--keep-originals`, which writes the REAL package as
+Chromium renders it. `extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png`
+(704x400) is now committed — the manifest's `_referenceRule` requires an
+`orig-shots/` reference and refuses a gate-shot outright, and day-picker had
+none, so **F1 could not have been scored even with Scratch open.**
+
+Every gap closed above is visible in it:
+
+| what the render shows | which closure it corroborates |
+| --- | --- |
+| caption "January 2026", **five** week rows | `week-count-not-six` |
+| Su/Mo/Tu/We of week 1 are **empty** | `blank-outside-labels`, `outside-cell-has-no-label` |
+| **20** is a blue **outline**, transparent inside | `selected-is-border-not-fill` |
+| that outline is a true **circle** | `day-button-radius-percent` — 100% resolves to 21px on a 42px button, not 42 |
+| **15** is blue **text**, no fill | the `today` state |
+| Su..Sa are visibly **smaller** than the day numbers | `weekday-fontsize-not-day` (13.3333 vs 16) |
+| **no** week-number column | `week-number-text-absent`, `axes-mismatch` |
+
+This is corroboration, **not a score.** Scoring compares a Figma export against
+this reference, and no mint has happened.
+
 ## Gates
 
     typecheck:recipe          0 errors in current files (10 named, 4 frozen lineage)

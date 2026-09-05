@@ -31,6 +31,8 @@
     "previousBlocker": "2026-08-31 double-run refused: td|rdp-day vs td|rdp-day.rdp-selected moved between structural indices (Calendar:label.1__default). Cause was an interaction leak — active mouse.up mutated React selected; formStateReset only resets <input> checked/value. Floor remount (capture.react-state-remount) closed that leak. classAllow was not retuned.",
     "blocker": null,
     "determinismVerifiedByThisGate": false,
+    "determinismReMeasuredOutOfBand": "2026-09-05 byte-identical",
+    "referenceRenderCommitted": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
     "unverifiedByThisGate": {
       "determinism": "byte-identical across two full sweeps in one session",
       "captures": 32,

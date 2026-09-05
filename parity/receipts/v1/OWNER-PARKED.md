@@ -63,8 +63,20 @@ it is not among them. Minting into either connected file would write a
 component set into artwork that is not mine to modify, so I did not.
 
 **What unblocks it:** open Scratch `byMp6lt0Ij9b2QbkDGFwBh` in Figma Desktop
-with the Desktop Bridge plugin running, and say so. The mint and the scoring
-are then mechanical and need nothing else from you.
+with the Desktop Bridge plugin running, and say so. That is the **only** thing
+still needed from you. `figma_navigate` cannot do it from here — the bridge
+switches among files that already have the plugin open and, in its own words,
+"does NOT launch a browser or open files".
+
+**Second blocker, now removed (2026-09-05).** F1 also had no reference to score
+against: the manifest's `_referenceRule` demands an `orig-shots/` render of the
+real package and refuses a gate-shot outright, and day-picker had no
+`orig-shots/` at all — so scoring would have failed even with Scratch open. A
+fresh capture in a sandbox outside the repo produced it, and
+`extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png` is
+now committed. The same run reproduced the committed ledger byte-for-byte,
+which also turns the capture's determinism claim from transcribed into
+measured.
 
 **What this does NOT block:** everything measurable offline is done and
 recorded — the schema closures, the compile, the fixed point, and the gates.

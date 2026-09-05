@@ -183,6 +183,19 @@ export function buildF1HeldOutEvidence(): {
         // `unverifiedByThisGate` as a claim awaiting re-measurement, not as
         // evidence. Closing this means folding the capture into the gate.
         determinismVerifiedByThisGate: false,
+        /**
+         * Re-measured 2026-09-05, OUT OF BAND from this gate. A fresh capture
+         * in a clean npm sandbox outside the repo, written to a scratch --out
+         * so the committed ledger was untouched, reproduced
+         * captured-truth.json byte-for-byte
+         * (md5 b4855334ae938375d41ddedf419e3c31, both sides). This gate still
+         * re-runs no capture, so the flag above stays false -- but the claim
+         * it guards is no longer only transcribed.
+         * See parity/receipts/v1/F1-COMPILE-ROUND.md.
+         */
+        determinismReMeasuredOutOfBand: "2026-09-05 byte-identical",
+        referenceRenderCommitted:
+          "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
         unverifiedByThisGate: {
           determinism: "byte-identical across two full sweeps in one session",
           captures: 32,
