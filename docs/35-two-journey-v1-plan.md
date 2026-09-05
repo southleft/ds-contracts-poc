@@ -33,9 +33,14 @@
 >   by someone who never used this tool is **still owed** (parked as **P1**).
 >
 > **Neither exam has passed.** F1 additionally owes a live mint and a render
-> scored against react-day-picker; the Scratch file is not open in Figma
-> Desktop, so that half is parked as **P2**. `overallSuccess` stays `false`
-> and product v1 stays **INCOMPLETE**.
+> scored against react-day-picker, and that half is **owner-operated by
+> design**: the calendar live lineage sets `externalOperatorOnly: true` and
+> `humanSignoff.mandatory: true`, and the shipped paste-a-script surface has
+> no calendar archetype at all — `recipe:point` names a date picker among the
+> components it does not model. F1 therefore exercises an archetype outside
+> the shipped thirteen, and scoring it needs a new live-proof lineage the
+> owner authorizes. Parked as **P2**. `overallSuccess` stays `false` and
+> product v1 stays **INCOMPLETE**.
 >
 > **Where we were (2026-08-31 — honesty, not completion):**
 > Phases **1–3f / 4 prep** are done with **named blockers**, not a green

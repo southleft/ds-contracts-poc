@@ -62,11 +62,49 @@ The only file I am permitted to write is Scratch `byMp6lt0Ij9b2QbkDGFwBh`, and
 it is not among them. Minting into either connected file would write a
 component set into artwork that is not mine to modify, so I did not.
 
-**What unblocks it:** open Scratch `byMp6lt0Ij9b2QbkDGFwBh` in Figma Desktop
-with the Desktop Bridge plugin running, and say so. That is the **only** thing
-still needed from you. `figma_navigate` cannot do it from here — the bridge
-switches among files that already have the plugin open and, in its own words,
-"does NOT launch a browser or open files".
+**Correction (2026-09-05, later the same day).** An earlier version of this
+entry said opening Scratch was "the only thing still needed from you." **That
+was wrong**, and I am recording it rather than quietly editing it away. Opening
+Scratch is necessary but nowhere near sufficient. Three further things stand in
+the way, and two of them are the project's own design working as intended:
+
+1. **The bridge cannot be pointed at Scratch from here.** `figma_navigate`
+   switches among files that ALREADY have the plugin open and, in its own
+   words, "does NOT launch a browser or open files". Verified by calling it.
+
+2. **A live calendar mint is external-operator-only, by design.**
+   `recipe/evidence/calendar-live-pivot-v50/authorization-template.json` sets
+
+       operatorBoundary.externalOperatorOnly        true
+       humanSignoff.mandatory                       true
+       securityPrerequisite.figmaPatRevokedOrReplacedRequired   true
+       securityPrerequisite.mcpRestartAfterRotationRequired     true
+       securityPrerequisite.ownerOnlyEnvironmentFileMode0600Required  true
+       securityPrerequisite.repositorySecretScanZeroRequired    true
+       securityPrerequisite.exactScratchReadOnlyProbeRequired   true
+
+   `externalOperatorOnly: true` means the agent is structurally not the party
+   permitted to run it. This is not an obstacle to route around; it is the
+   boundary that keeps an agent from minting into a real file on its own say-so.
+
+3. **The shipped paste-a-script surface has no calendar at all.** The
+   plugin-target toolkit registry holds thirteen archetypes — checkbox, switch,
+   avatar, tooltip, chip, link, tabs, radio, textarea, alert, badge, menu,
+   dialog — and calendar is not among them. `npm run recipe:point -- --archetype
+   calendar` says so in its own words: *"a card, an accordion, a data table, a
+   date picker — has no recipe, so there is nothing to compile or paste."*
+   `calendar@1` is an INTERNAL recipe driven by the bespoke versioned
+   live-proof lineage (`build-calendar-live-proof-vN.ts`), not by the product
+   verb a stranger uses. So F1 exercises an archetype deliberately outside the
+   shipped surface, and minting it needs a new lineage version built and
+   owner-authorized — not a paste.
+
+**What this means for F1.** The offline half is complete and measured. The live
+half is owner-operated by design and cannot be delivered by me at any level of
+effort. Deciding whether F1 should be scored through a new
+`build-calendar-live-proof-v51` lineage — or whether a held-out exam on an
+archetype outside the shipped thirteen is the right exam at all — is a call for
+you, not a task I should start unasked.
 
 **Second blocker, now removed (2026-09-05).** F1 also had no reference to score
 against: the manifest's `_referenceRule` demands an `orig-shots/` render of the
