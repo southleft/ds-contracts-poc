@@ -131,6 +131,38 @@ note about the NEW lineage, not a break in the old one. The `groupByRole` /
 `variantFor` pair already added to `recipe/recipes/calendar.ts` is the shape
 that handles both.
 
+**The alternative, costed — and it is much cheaper than a v51 lineage.**
+`radix-themes` and `bootstrap5` are already captured AND are genuinely held out
+from the recipe path: neither appears in `recipe/fidelity-manifest.json` (which
+carries altitude, antd, astryx, carbon, chakra, fluent, mui, shadcn) and neither
+has a single generated fixture. Their scorecards already measure shipped
+archetypes:
+
+| held-out library | rows | rows that are SHIPPED archetypes |
+| --- | --- | --- |
+| radix-themes | 10 | **5** — avatar, badge, checkbox, switch, tabs |
+| bootstrap5 | 7 | 2 — alert, badge |
+
+Re-pointing F1 at `radix-themes` would be a true held-out code→canvas exam on
+five archetypes the product actually ships, and it needs **no new lineage and
+no owner-signed protocol at all**. `scripts/run-figma-writer.mjs` says so in its
+own header: *"The signed archetypes (input-field, combobox, table, calendar)
+each carry a per-version signed operator… The boilerplate archetypes have no
+signed protocol — their `build-*-live-proof-vN.ts` just emits `writer.js`."*
+The thirteen mint through the generic plugin-target path the fast lane already
+proves offline at 40 rows.
+
+So the two options are not comparable in cost:
+
+- **v51 calendar lineage** — ~2,400 lines of new bespoke machinery, an
+  unexercised lone-component mint path, AND an external-operator signed
+  authorization round. Measures an archetype `recipe:point` refuses to model.
+- **F1 on radix-themes** — no new lineage, no signed protocol, five shipped
+  archetypes, the same verb a stranger uses. Needs only Scratch open.
+
+I have not started either: which exam F1 should be is a scope decision, and the
+second one changes what docs/26 F1 means.
+
 **What this means for F1.** The offline half is complete and measured. The live
 half is owner-operated by design and cannot be delivered by me at any level of
 effort. Deciding whether F1 should be scored through a new
