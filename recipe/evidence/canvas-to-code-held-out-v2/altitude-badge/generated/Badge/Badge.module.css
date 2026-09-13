@@ -1,0 +1,60 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (ds.badge v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--theme-color-background-danger-weak);
+  gap: var(--theme-space-xxs);
+}
+
+.variant-neutral {
+  background-color: var(--theme-color-background-neutral-bold);
+}
+
+.variant-info {
+  background-color: var(--theme-color-background-info-weak);
+}
+
+.variant-success {
+  background-color: var(--theme-color-background-success-weak);
+}
+
+.variant-warning {
+  background-color: var(--theme-color-background-warning-weak);
+}
+
+.Badge {
+  color: var(--theme-color-content-danger-default);
+  font-size: var(--typography-font-size-12);
+  line-height: var(--typography-line-height-20);
+  font-weight: var(--imported-badge-badge-font-weight);
+  font-family: Public Sans;
+}
+
+.variant-neutral .Badge {
+  color: var(--theme-color-content-neutral-default);
+}
+
+.variant-info .Badge {
+  color: var(--theme-color-content-info-default);
+}
+
+.variant-success .Badge {
+  color: var(--theme-color-content-success-default);
+}
+
+.variant-warning .Badge {
+  color: var(--theme-color-content-warning-default);
+}

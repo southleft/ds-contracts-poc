@@ -1,0 +1,56 @@
+{
+  "imported": {
+    "toggle": {
+      "toggle-label": {
+        "font-size": {
+          "large": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "14px",
+            "$type": "dimension"
+          }
+        },
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "line-height": {
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "20px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
+    "stub-switch-on-false-size-large-state-default": {
+      "root": {
+        "width": {
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "large": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "small": {
+            "$value": "16px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  }
+}

@@ -19,10 +19,12 @@ Add one row beside the existing F1–F6 walk in
 | --- | --- |
 | **F-C2C** canvas→code held-out exam (docs/35 §5 3f) | **ADOPTED gate (2026-08-31).** A component set the recipe path never minted as a first-class stay goes committed-observe → canvas facts → bridge → emit → Chromium computed-style diff with **zero silent losses**. Evidence: `recipe/evidence/canvas-to-code-held-out-v1/`; gate: `npm run recipe:canvas-to-code:held-out:check`. Passing the gate proves accounting honesty on a held-out substrate — it does **not** alone flip product v1 or any archetype `overallSuccess`. |
 
-## Exact acceptance command (proposed)
+| **F-C2C v2** canvas→code held-out exam on a designer's file | **RAN 2026-09-13.** Twenty-four component sets from two files this repo never wrote — the Altitude Design System (`y83n4o9LOGs74oAoguFcGS`) and the CBDS UI Kit (`WofZT8xaxXuc2Q6Je9S4XE`), observed read-only with each file's REST version pinned — go through the same pipeline; each is **accounting-clean** (zero silent, zero unexplained, every variant mounted) or **refused by name** with its stage and message. Result: 5 clean, 19 refused, nothing silent. Evidence: `recipe/evidence/canvas-to-code-held-out-v2/`; gate: `npm run recipe:canvas-to-code:held-out:v2:check`; receipt: [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](../parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md). Same caveat as v1: it proves accounting honesty, not product v1. |
+
+## Exact acceptance command
 
 ```bash
-npm run recipe:canvas-to-code:held-out:check
+npm run recipe:canvas-to-code:held-out:check && npm run recipe:canvas-to-code:held-out:v2:check
 ```
 
 ## Substrate measured on this proposal (2026-08-31)
@@ -49,7 +51,9 @@ Done 2026-08-31 (TJ in session):
 
 1. F-C2C row is in the docs/32 merge-execution F-checklist and docs/26
    Journey A recipe canvas→code requirement, dated and attributable.
-2. Held-out substrate remains the Scratch AntD exam Card (`33:5093`).
+2. Held-out substrate remains the Scratch AntD exam Card (`33:5093`) for v1;
+   v2 (2026-09-13) adds designer-drawn substrates in files this repo never
+   wrote, starting with Altitude.
 3. Product v1 stays **incomplete** until F1 (code→canvas held-out) also
    passes under the same release commit. npm stays deferred.
 4. This sibling stays as the sign-off record; it is not silently absorbed.

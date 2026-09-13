@@ -1,0 +1,33 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tabs.contract.json (ds.tabs v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+}
+
+.alCTabsHeader {
+  display: flex;
+  flex-direction: row;
+  border-color: var(--theme-color-border-neutral-default);
+}
+
+.alCTabsList {
+  display: flex;
+  flex-direction: row;
+}
+
+.alCTabsBody {
+  display: flex;
+  flex-direction: column;
+}
