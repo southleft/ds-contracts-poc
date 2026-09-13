@@ -66,8 +66,17 @@ test("index covers every manifest subject; each receipt is accounting-clean or r
   for (const subject of HELD_OUT_V2_SUBJECTS) {
     const dir = `${HELD_OUT_V2_ROOT}/${subject.slug}`;
     const receipt = json<HeldOutV2Receipt>(`${dir}/receipt.json`);
-    const meta = json<HeldOutV2ObserveMeta>(`${dir}/observe-meta.json`);
     assert.equal(receipt.subject.fileKey, subject.fileKey);
+    if (receipt.outcome === "refused-by-name" && receipt.refusal?.stage === "observe") {
+      // Refused before any observe existed (set not on canvas, or two observes
+      // disagreed): the receipt names why; there is no meta to pin.
+      assert.ok(receipt.refusal.message.length > 0);
+      assert.ok(!existsSync(path.resolve(REPO, dir, "observe.json.gz")) || existsSync(path.resolve(REPO, dir, "observe-refusal.json")));
+      assert.ok(!existsSync(path.resolve(REPO, dir, "generated")));
+      assert.equal(receipt.overallSuccess, false);
+      continue;
+    }
+    const meta = json<HeldOutV2ObserveMeta>(`${dir}/observe-meta.json`);
     assert.equal(receipt.subject.setNodeId, subject.setNodeId);
     assert.equal(receipt.subject.liveReads, 0);
     assert.equal(receipt.subject.figmaWrites, 0);

@@ -276,6 +276,10 @@ export async function runHeldOutV2Subject(
   write: boolean,
 ): Promise<HeldOutV2Receipt> {
   const dir = subjectDir(subject);
+  if (subject.absentOnCanvas) return refuseAbsent(subject, write);
+  const observeRefusalPath = path.join(dir, "observe-refusal.json");
+  if (existsSync(observeRefusalPath) && !existsSync(path.join(dir, "observe.json.gz")))
+    return refuseAtObserve(subject, write, JSON.parse(readFileSync(observeRefusalPath, "utf8")) as { code: string; message: string; fileVersion: string });
   const { scene, observeSha256, meta, observePath } = loadObserve(subject);
   const workRoot = write ? dir : mkdtempSync(path.join(os.tmpdir(), `held-out-v2-${subject.slug}-`));
   const base = {
@@ -423,6 +427,111 @@ export async function runHeldOutV2Subject(
     }
     return receipt;
   }
+}
+
+/** A published set that no longer exists on canvas: a refusal at observe, with
+ *  the measurement that says so. Nothing is observed; nothing is invented. */
+function refuseAbsent(subject: HeldOutSubject, write: boolean): HeldOutV2Receipt {
+  const dir = subjectDir(subject);
+  const absent = subject.absentOnCanvas!;
+  const receipt: HeldOutV2Receipt = {
+    artifactVersion: HELD_OUT_V2_VERSION,
+    method:
+      "committed-observe → canvas-facts → bridge → proposeFromDump → react emitter → chromium computed-style diff",
+    subject: {
+      ...subject,
+      observePath: "",
+      observeSha256: "",
+      fileVersion: absent.fileVersion,
+      fileLastModified: "",
+      variants: 0,
+      liveReads: 0,
+      figmaWrites: 0,
+    },
+    outcome: "refused-by-name",
+    refusal: { stage: "observe", message: `set-not-on-canvas: ${absent.reason} (measured ${absent.measuredAt}, file version ${absent.fileVersion})` },
+    namedBlockers: [
+      {
+        id: "set-not-on-canvas",
+        stage: "observe",
+        severity: "named-residual",
+        detail: `${subject.setName} is published (${subject.publishedSetNodeId}) but has no component set on canvas: ${absent.reason}`,
+      },
+      {
+        id: "product-v1-incomplete",
+        stage: "product",
+        severity: "product-incomplete",
+        detail: "Passing this gate proves accounting honesty on a designer-drawn substrate. It does not flip overallSuccess; the owner grades and signs.",
+      },
+      { id: "no-human-grade", stage: "product", severity: "product-incomplete", detail: "humanGrade stays pending; this exam invents no grade." },
+    ],
+    humanGrade: "pending",
+    gradeInvented: false,
+    overallSuccess: false,
+    productV1: "incomplete",
+  };
+  if (write) {
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(path.join(dir, "refusal.json"), `${canonicalJson(receipt.refusal)}\n`);
+    writeFileSync(path.join(dir, "named-blockers.json"), `${canonicalJson(receipt.namedBlockers)}\n`);
+    writeFileSync(path.join(dir, "receipt.json"), `${canonicalJson(receipt)}\n`);
+  } else {
+    const committed = JSON.parse(readFileSync(path.join(dir, "receipt.json"), "utf8")) as HeldOutV2Receipt;
+    if (canonicalJson(committed) !== canonicalJson(receipt))
+      throw new Error(`held-out v2: ${subject.slug} committed absent-set receipt does not match the manifest — re-run --write`);
+  }
+  return receipt;
+}
+
+/** The observe itself refused (e.g. two read-only runs disagreed). Recorded from
+ *  the receiver's observe-refusal.json; nothing downstream runs. */
+function refuseAtObserve(
+  subject: HeldOutSubject,
+  write: boolean,
+  refusal: { code: string; message: string; fileVersion: string },
+): HeldOutV2Receipt {
+  const dir = subjectDir(subject);
+  const receipt: HeldOutV2Receipt = {
+    artifactVersion: HELD_OUT_V2_VERSION,
+    method:
+      "committed-observe → canvas-facts → bridge → proposeFromDump → react emitter → chromium computed-style diff",
+    subject: {
+      ...subject,
+      observePath: "",
+      observeSha256: "",
+      fileVersion: refusal.fileVersion,
+      fileLastModified: "",
+      variants: 0,
+      liveReads: 0,
+      figmaWrites: 0,
+    },
+    outcome: "refused-by-name",
+    refusal: { stage: "observe", message: `${refusal.code}: ${refusal.message}` },
+    namedBlockers: [
+      { id: "subject-refused-by-name", stage: "observe", severity: "named-residual", detail: `refused at observe: ${refusal.code}: ${refusal.message}` },
+      {
+        id: "product-v1-incomplete",
+        stage: "product",
+        severity: "product-incomplete",
+        detail: "Passing this gate proves accounting honesty on a designer-drawn substrate. It does not flip overallSuccess; the owner grades and signs.",
+      },
+      { id: "no-human-grade", stage: "product", severity: "product-incomplete", detail: "humanGrade stays pending; this exam invents no grade." },
+    ],
+    humanGrade: "pending",
+    gradeInvented: false,
+    overallSuccess: false,
+    productV1: "incomplete",
+  };
+  if (write) {
+    writeFileSync(path.join(dir, "refusal.json"), `${canonicalJson(receipt.refusal)}\n`);
+    writeFileSync(path.join(dir, "named-blockers.json"), `${canonicalJson(receipt.namedBlockers)}\n`);
+    writeFileSync(path.join(dir, "receipt.json"), `${canonicalJson(receipt)}\n`);
+  } else {
+    const committed = JSON.parse(readFileSync(path.join(dir, "receipt.json"), "utf8")) as HeldOutV2Receipt;
+    if (canonicalJson(committed) !== canonicalJson(receipt))
+      throw new Error(`held-out v2: ${subject.slug} committed observe-refusal receipt does not match — re-run --write`);
+  }
+  return receipt;
 }
 
 export async function runHeldOutV2(

@@ -645,10 +645,18 @@ export function bridgeCanvasFactsToDump(
 
     // Layout block (frame/component nodes always project layout facts).
     const mode = node.layoutMode;
-    if (mode !== "HORIZONTAL" && mode !== "VERTICAL")
+    if (mode !== "HORIZONTAL" && mode !== "VERTICAL") {
+      // Name WHICH container: a variant root (root/children/N) or a frame nested
+      // inside one. Both are outside the dump vocabulary (v1 has no free-form
+      // placement), but a designer reads "variant root" for a nested frame as a
+      // lie about their file.
+      const what = /^root\/children\/\d+$/.test(key)
+        ? "a variant root"
+        : `a frame nested inside variant ${key.split("/").slice(0, 3).join("/")}`;
       throw new TypeError(
-        `bridge: ${key} has layoutMode ${mode ?? "NONE"} — a variant root without auto-layout is outside this bridge's vocabulary`,
+        `bridge: ${key} ("${node.name}") has layoutMode ${mode ?? "NONE"} — ${what} without auto-layout (free-form placement) is outside this bridge's vocabulary`,
       );
+    }
     ledger.land(key, "layout.mode", 0, "named", "layout.mode");
     ledger.land(key, "layout.primaryAxisAlign", 0, "named", "layout.primary");
     ledger.land(key, "layout.counterAxisAlign", 0, "named", "layout.counter");

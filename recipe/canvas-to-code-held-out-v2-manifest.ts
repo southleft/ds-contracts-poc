@@ -46,6 +46,12 @@ export interface HeldOutSubject {
     component: string;
     origShots: string;
   };
+  /**
+   * The set is published but no longer exists on canvas (the page it lived on
+   * is gone). Recorded as a refusal at the observe stage; setNodeId/pageId are
+   * then the published ids for provenance only and are never observed.
+   */
+  absentOnCanvas?: { reason: string; measuredAt: string; fileVersion: string };
 }
 
 export const HELD_OUT_V2_FILES: readonly HeldOutFile[] = [
@@ -81,6 +87,141 @@ export const HELD_OUT_V2_SUBJECTS: readonly HeldOutSubject[] = [
       config: "extract/computed/configs/altitude.json",
       component: "Badge",
       origShots: "extract/computed/out/altitude/badge/orig-shots",
+    },
+  },
+  {
+    slug: "altitude-chip",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "3435:965",
+    pageName: "🛠 Chip",
+    setNodeId: "3540:43526",
+    setName: "Chip",
+    archetype: "chip",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "3435:1086",
+  },
+  {
+    slug: "altitude-link",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "3435:927",
+    pageName: "🛠 Link",
+    setNodeId: "3543:47075",
+    setName: "Link",
+    archetype: "link",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "3435:964",
+  },
+  {
+    slug: "altitude-checkbox",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "3435:1219",
+    pageName: "🛠 Checkbox",
+    setNodeId: "3539:42167",
+    setName: "Checkbox",
+    archetype: "checkbox",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "3435:1422",
+  },
+  {
+    slug: "altitude-radio",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "3436:1482",
+    pageName: "🛠 Radio",
+    setNodeId: "3543:47540",
+    setName: "Radio",
+    archetype: "radio",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "3436:1613",
+  },
+  {
+    slug: "altitude-textarea",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "3442:25596",
+    pageName: "🛠 Textarea",
+    setNodeId: "3544:49378",
+    setName: "Textarea",
+    archetype: "textarea",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "3442:25715",
+  },
+  {
+    slug: "altitude-menu",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "3442:25360",
+    pageName: "🛠 Menu",
+    setNodeId: "3558:61424",
+    setName: "Menu",
+    archetype: "menu",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "3442:25397",
+  },
+  {
+    slug: "altitude-tabs",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "3442:25398",
+    pageName: "🛠 Tabs",
+    setNodeId: "3558:61955",
+    setName: "Tabs",
+    archetype: "tabs",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "3442:25425",
+  },
+  {
+    slug: "altitude-toggle",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "2873:2",
+    pageName: "🛠 Toggle",
+    setNodeId: "3543:48094",
+    setName: "Toggle",
+    archetype: "switch",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "2874:20",
+  },
+  // Published but no longer on canvas: the "🛝 Playground" page that held them
+  // is gone (54 pages, none named Avatar/Alert/Playground; the published ids
+  // resolve to COMPONENT_SET stubs with zero children). A refusal at observe.
+  {
+    slug: "altitude-avatar",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "0:0",
+    pageName: "(absent)",
+    setNodeId: "1292:2",
+    setName: "Avatar",
+    archetype: "avatar",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "1292:2",
+    absentOnCanvas: {
+      reason:
+        "published component set 1292:2 resolves to a stub with zero children; no page named Avatar/Alert/Playground exists among the file's 54 pages",
+      measuredAt: "2026-09-13",
+      fileVersion: "2397989613251461242",
+    },
+  },
+  {
+    slug: "altitude-alert",
+    fileKey: "y83n4o9LOGs74oAoguFcGS",
+    fileName: "Altitude Design System",
+    pageId: "0:0",
+    pageName: "(absent)",
+    setNodeId: "2093:14099",
+    setName: "Alert",
+    archetype: "alert",
+    provenance: "designer-drawn, never minted by this repo",
+    publishedSetNodeId: "2093:14099",
+    absentOnCanvas: {
+      reason:
+        "published component set 2093:14099 resolves to a stub with zero children; no page named Avatar/Alert/Playground exists among the file's 54 pages",
+      measuredAt: "2026-09-13",
+      fileVersion: "2397989613251461242",
     },
   },
 ];

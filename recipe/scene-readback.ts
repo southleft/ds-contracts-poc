@@ -987,7 +987,10 @@ export function sceneToNormalizedIr(scene: SceneNodeSnapshot): IRNode {
     result = {
       kind: "vector",
       ...common,
-      assetRef: scene.instancePayload?.assets[0] ?? "",
+      // A designer's own VECTOR (a check glyph, a chevron) carries no asset
+      // reference in the observe: name the gap instead of handing the schema an
+      // empty string. The bridge refuses vector nodes by name downstream.
+      assetRef: scene.instancePayload?.assets[0] ?? "unresolved-vector",
       fills,
       width: irSizing(scene.layoutSizingHorizontal, scene.width),
       height: irSizing(scene.layoutSizingVertical, scene.height),

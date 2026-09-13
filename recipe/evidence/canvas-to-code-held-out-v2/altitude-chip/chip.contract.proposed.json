@@ -1,0 +1,173 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.chip",
+  "name": "Chip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "bare",
+          "primary",
+          "tertiary",
+          "secondary",
+          "neutral"
+        ]
+      },
+      "default": "bare",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "bare": "Bare",
+            "primary": "Primary",
+            "tertiary": "Tertiary",
+            "secondary": "Secondary",
+            "neutral": "Neutral"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "dismissible",
+      "type": {
+        "enum": [
+          "no",
+          "yes"
+        ]
+      },
+      "default": "no",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Dismissible",
+          "values": {
+            "no": "No",
+            "yes": "Yes"
+          }
+        },
+        "code": {
+          "prop": "dismissible"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "default",
+          "squared"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "default": "Default",
+            "squared": "Squared"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Label": {
+          "tokensByProp": {
+            "prop": "variant",
+            "map": {
+              "primary": {
+                "color": "{theme.color.content.primary-weak}"
+              },
+              "secondary": {
+                "color": "{theme.color.content.secondary-weak}"
+              }
+            }
+          },
+          "declared": {
+            "font-family": "Public Sans"
+          },
+          "text": "Chip",
+          "tokens": {
+            "color": "{theme.color.content.neutral-default}",
+            "font-size": "{typography.font-size.12}",
+            "line-height": "{typography.line-height.20}"
+          }
+        },
+        "alIcon": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "icon": "3610:1645"
+            }
+          },
+          "visibleWhen": {
+            "prop": "dismissible",
+            "equals": "yes"
+          }
+        }
+      },
+      "tokensByProp": {
+        "prop": "variant",
+        "map": {
+          "primary": {
+            "background-color": "{theme.color.background.primary-default}"
+          },
+          "secondary": {
+            "background-color": "{theme.color.background.secondary-default}"
+          },
+          "neutral": {
+            "background-color": "{theme.color.background.neutral-strong}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{theme.color.background.transparent-default}",
+        "padding-inline": "{theme.space.sm}",
+        "gap": "{theme.space.xs}",
+        "min-height": "{theme.size.control-sm}",
+        "border-color": "{imported.chip.root.border-color.{variant}}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{theme.color.focus-ring}",
+          "outline-width": "{theme.border.width.md}"
+        }
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Chip",
+        "export": "Chip"
+      }
+    }
+  }
+}
