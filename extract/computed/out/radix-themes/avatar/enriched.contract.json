@@ -1,0 +1,291 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "radix-themes.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the HELD-OUT FIRST-PASS EXAM — props/axes only; anatomy is promoted from captured DOM truth. Subject: @radix-themes-sandbox/ui@0.0.1 (flattened mount barrel over @radix-ui/themes@3.3.0). BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @radix-themes-sandbox/ui@0.0.1 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "solid",
+          "soft"
+        ]
+      },
+      "default": "soft",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "solid": "Solid",
+            "soft": "Soft"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      },
+      "default": "3",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "label": {
+          "text": "TP",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|AvatarFallback — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "grow": true,
+            "align": "center",
+            "justify": "center"
+          },
+          "declared": {
+            "aspect-ratio": "1 / 1",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+            "text-transform": "uppercase",
+            "user-select": "none"
+          },
+          "tokens": {
+            "font-weight": "{imported.avatar.label.font-weight}",
+            "z-index": "{imported.avatar.label.z-index}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "1": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.1}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.1}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.1}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.1}",
+                  "font-size": "{imported.avatar.label.font-size.1}"
+                },
+                "2": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.2}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.2}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.2}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.2}",
+                  "font-size": "{imported.avatar.label.font-size.2}"
+                },
+                "3": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.3}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.3}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.3}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.3}",
+                  "font-size": "{imported.avatar.label.font-size.3}"
+                },
+                "4": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.4}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.4}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.4}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.4}",
+                  "font-size": "{imported.avatar.label.font-size.4}"
+                },
+                "5": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.5}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.5}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.5}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.5}",
+                  "font-size": "{imported.avatar.label.font-size.5}"
+                },
+                "6": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.6}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.6}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.6}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.6}",
+                  "font-size": "{imported.avatar.label.font-size.6}"
+                },
+                "7": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.7}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.7}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.7}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.7}",
+                  "font-size": "{imported.avatar.label.font-size.7}"
+                },
+                "8": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.8}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.8}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.8}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.8}",
+                  "font-size": "{imported.avatar.label.font-size.8}"
+                },
+                "9": {
+                  "border-bottom-left-radius": "{imported.avatar.label.border-bottom-left-radius.9}",
+                  "border-bottom-right-radius": "{imported.avatar.label.border-bottom-right-radius.9}",
+                  "border-top-left-radius": "{imported.avatar.label.border-top-left-radius.9}",
+                  "border-top-right-radius": "{imported.avatar.label.border-top-right-radius.9}",
+                  "font-size": "{imported.avatar.label.font-size.9}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "soft": {
+                  "background-color": "{imported.avatar.label.background-color.soft}",
+                  "color": "{imported.avatar.label.color.soft}"
+                },
+                "solid": {
+                  "background-color": "{imported.avatar.label.background-color.solid}",
+                  "color": "{imported.avatar.label.color.solid}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+        "user-select": "none"
+      },
+      "tokens": {
+        "color": "{imported.avatar.root.color}",
+        "flex-shrink": "{imported.avatar.root.flex-shrink}",
+        "line-height": "{imported.avatar.root.line-height}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "1": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.1}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.1}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.1}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.1}",
+              "height": "{imported.avatar.root.height.1}",
+              "width": "{imported.avatar.root.width.1}"
+            },
+            "2": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.2}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.2}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.2}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.2}",
+              "height": "{imported.avatar.root.height.2}",
+              "width": "{imported.avatar.root.width.2}"
+            },
+            "3": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.3}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.3}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.3}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.3}",
+              "height": "{imported.avatar.root.height.3}",
+              "width": "{imported.avatar.root.width.3}"
+            },
+            "4": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.4}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.4}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.4}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.4}",
+              "height": "{imported.avatar.root.height.4}",
+              "width": "{imported.avatar.root.width.4}"
+            },
+            "5": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.5}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.5}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.5}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.5}",
+              "height": "{imported.avatar.root.height.5}",
+              "width": "{imported.avatar.root.width.5}"
+            },
+            "6": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.6}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.6}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.6}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.6}",
+              "height": "{imported.avatar.root.height.6}",
+              "width": "{imported.avatar.root.width.6}"
+            },
+            "7": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.7}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.7}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.7}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.7}",
+              "height": "{imported.avatar.root.height.7}",
+              "width": "{imported.avatar.root.width.7}"
+            },
+            "8": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.8}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.8}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.8}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.8}",
+              "height": "{imported.avatar.root.height.8}",
+              "width": "{imported.avatar.root.width.8}"
+            },
+            "9": {
+              "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.9}",
+              "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.9}",
+              "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.9}",
+              "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.9}",
+              "height": "{imported.avatar.root.height.9}",
+              "width": "{imported.avatar.root.width.9}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@radix-themes-sandbox/ui",
+        "export": "Avatar"
+      }
+    }
+  }
+}

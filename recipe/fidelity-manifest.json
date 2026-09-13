@@ -624,6 +624,15 @@
       "reference": "extract/computed/out/fluent/messagebar/orig-shots/info.rounded__default.png",
       "_widthNormalisedWhy": "NOT width-normalised: captured at the archetype's shape, the reference is 161px wide against the canvas's 153, so the pair is scored whole and the glyph-masked pass can test the font claim.",
       "_proposedWhy": "HELD OUT, and the first row whose CAPTURE CONFIG ENTRY was drafted rather than written: extract/computed/draft-config.ts derived Fluent MessageBar's name, import, contract path and both axes from the contract seed; a person added the composition (MessageBarBody with a MessageBarTitle) and the glyph viewBox. 39 leaves read from the ledger, 2 reviewed with citations, 0 invented."
+    },
+    {
+      "label": "avatar/radix-themes",
+      "page": "267:2366",
+      "component": "avatar/variant/default :: Radix Themes Avatar",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-radix-themes-default-v7.png",
+      "reference": "extract/computed/out/radix-themes/avatar/orig-shots/soft.3__default.png",
+      "heldOut": "radix-themes",
+      "_heldOutWhy": "F1 second row (owner decision 2026-09-13): Radix Themes is a held-out library the recipe path had never been pointed at; captured blind (config/seeds from the library's docs only), pointed with 13 leaves read, 1 reviewed (typography.label.resolved=Roboto/Medium: SF Pro paints zero-width on this Figma, Roboto is the next installed face in the package's own --default-font-family stack), 0 invented; minted through the plugin-target writer. Not tuned against the capture."
     }
   ],
   "_excluded": {

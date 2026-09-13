@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 66,
-  "passed": 53,
+  "subjects": 67,
+  "passed": 54,
   "failed": 13,
   "fringeExcused": 0,
   "knownFailures": 13,
@@ -641,6 +641,16 @@
       "realPx": "161x36",
       "convergesAt": null,
       "glyphMasked": 7.45,
+      "glyphBoxes": 1
+    },
+    {
+      "label": "avatar/radix-themes",
+      "status": "pass",
+      "pctAAMasked": 1.88,
+      "canvasPx": "40x40",
+      "realPx": "40x40",
+      "convergesAt": 250,
+      "glyphMasked": 0,
       "glyphBoxes": 1
     }
   ]

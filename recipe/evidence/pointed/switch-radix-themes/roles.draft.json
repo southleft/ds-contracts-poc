@@ -1,0 +1,33 @@
+{
+  "roles": {
+    "thumb": "idx:0",
+    "thumbInsideTrack": false,
+    "travelOn": "idx:0"
+  },
+  "combos": {
+    "false.enabled": "surface.2.unchecked.enabled",
+    "false.disabled": "surface.2.unchecked.disabled",
+    "true.enabled": "surface.2.checked.enabled",
+    "true.disabled": "surface.2.checked.disabled"
+  },
+  "evidence": {
+    "thumb": {
+      "selector": "idx:0",
+      "why": "round 18px span.rt-SwitchThumb bg rgba(255, 255, 255, 1) — a SIBLING of the track (track opacity baked into its fill)",
+      "confidence": "high"
+    },
+    "travelOn": {
+      "selector": "idx:0",
+      "why": "span.rt-SwitchThumb transform none → matrix(1, 0, 0, 1, 15, 0)",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": null,
+      "why": "no part carries text — a bare control; label leaves become receipts",
+      "confidence": "medium"
+    }
+  },
+  "unresolved": [
+    "track: no pill-shaped part"
+  ]
+}

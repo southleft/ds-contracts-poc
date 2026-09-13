@@ -1,0 +1,273 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "radix-themes.switch",
+  "name": "Switch",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the HELD-OUT FIRST-PASS EXAM — props/axes only; anatomy is promoted from captured DOM truth. Subject: @radix-themes-sandbox/ui@0.0.1 (flattened mount barrel over @radix-ui/themes@3.3.0). BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @radix-themes-sandbox/ui@0.0.1 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "classic",
+          "surface",
+          "soft"
+        ]
+      },
+      "default": "surface",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "classic": "Classic",
+            "surface": "Surface",
+            "soft": "Soft"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "default": "2",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "1": "1",
+            "2": "2",
+            "3": "3"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "switchthumb": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|SwitchThumb — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "cursor": "default",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+            "transition-delay": "0s, 0s",
+            "transition-duration": "0.14s, 0.14s",
+            "transition-property": "transform, box-shadow",
+            "transition-timing-function": "cubic-bezier(0.45, 0.05, 0.55, 0.95), ease-in-out"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed",
+              "transition-delay": "0s",
+              "transition-duration": "0s",
+              "transition-property": "none",
+              "transition-timing-function": "ease"
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.switch.switchthumb.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-9998}",
+            "border-bottom-right-radius": "{imported.shared.size-9998}",
+            "border-top-left-radius": "{imported.shared.size-9998}",
+            "border-top-right-radius": "{imported.shared.size-9998}",
+            "bottom": "{imported.shared.size-1}",
+            "color": "{imported.switch.switchthumb.color}",
+            "left": "{imported.shared.size-1}",
+            "line-height": "{imported.switch.switchthumb.line-height}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-1}",
+            "translate-y": "{imported.shared.size-0}"
+          },
+          "states": {
+            "disabled": {
+              "background-color": "{imported.switch.switchthumb.background-color-state-disabled}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "box-shadow": "{imported.switch.switchthumb.box-shadow.{variant}.checked}",
+                  "translate-x": "{imported.switch.switchthumb.translate-x.{size}.checked}"
+                },
+                "unchecked": {
+                  "box-shadow": "{imported.switch.switchthumb.box-shadow.{variant}.unchecked}",
+                  "translate-x": "{imported.switch.switchthumb.translate-x.{size}.unchecked}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "1": {
+                  "height": "{imported.switch.switchthumb.height.1}",
+                  "right": "{imported.switch.switchthumb.right.1}",
+                  "width": "{imported.switch.switchthumb.width.1}"
+                },
+                "2": {
+                  "height": "{imported.switch.switchthumb.height.2}",
+                  "right": "{imported.switch.switchthumb.right.2}",
+                  "width": "{imported.switch.switchthumb.width.2}"
+                },
+                "3": {
+                  "height": "{imported.switch.switchthumb.height.3}",
+                  "right": "{imported.switch.switchthumb.right.3}",
+                  "width": "{imported.switch.switchthumb.width.3}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "box-shadow",
+              "value": "rgba(0, 0, 85, 0.024) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 3px 0px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "filter",
+              "value": "none",
+              "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+            },
+            {
+              "state": "disabled",
+              "channel": "transition-behavior",
+              "value": "normal",
+              "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+            }
+          ]
+        }
+      },
+      "declared": {
+        "appearance": "none",
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+        "position": "relative",
+        "text-align": "start"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.switch.root.background-color}",
+        "border-bottom-width": "{imported.shared.size-0}",
+        "border-left-width": "{imported.shared.size-0}",
+        "border-right-width": "{imported.shared.size-0}",
+        "border-top-width": "{imported.shared.size-0}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.switch.root.color}",
+        "flex-shrink": "{imported.switch.root.flex-shrink}",
+        "font-size": "{imported.switch.root.font-size}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.switch.root.line-height}",
+        "padding-bottom": "{imported.shared.size-0}",
+        "padding-left": "{imported.shared.size-0}",
+        "padding-right": "{imported.shared.size-0}",
+        "padding-top": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "1": {
+              "height": "{imported.switch.root.height.1}",
+              "width": "{imported.switch.root.width.1}"
+            },
+            "2": {
+              "height": "{imported.switch.root.height.2}",
+              "width": "{imported.switch.root.width.2}"
+            },
+            "3": {
+              "height": "{imported.switch.root.height.3}",
+              "width": "{imported.switch.root.width.3}"
+            }
+          }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "disabled",
+          "channel": "mix-blend-mode",
+          "value": "multiply",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@radix-themes-sandbox/ui",
+        "export": "Switch"
+      }
+    }
+  }
+}

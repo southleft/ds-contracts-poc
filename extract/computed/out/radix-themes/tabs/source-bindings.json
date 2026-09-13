@@ -1,0 +1,131 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Tabs",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "basetablisttrigger",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "gray-12",
+      "varName": "--gray-12",
+      "anchor": {
+        "selector": ".rt-BaseTabListTrigger:where([data-state=\"active\"], [data-active])"
+      }
+    },
+    {
+      "part": "basetablisttrigger",
+      "channel": "cursor",
+      "combo": "",
+      "axisValues": {},
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "basetablisttrigger-2",
+      "channel": "cursor",
+      "combo": "",
+      "axisValues": {},
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "basetablisttrigger-3",
+      "channel": "cursor",
+      "combo": "",
+      "axisValues": {},
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "",
+      "axisValues": {},
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ":where(.rt-BaseTabListTrigger[data-state=\"active\"], .rt-TabNavLink[data-active]) .rt-BaseTabListTriggerInner"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "",
+      "axisValues": {},
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-BaseTabListTriggerInnerHidden"
+      }
+    },
+    {
+      "part": "label-4",
+      "channel": "font-weight",
+      "combo": "",
+      "axisValues": {},
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-BaseTabListTriggerInnerHidden"
+      }
+    },
+    {
+      "part": "label-6",
+      "channel": "font-weight",
+      "combo": "",
+      "axisValues": {},
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-BaseTabListTriggerInnerHidden"
+      }
+    }
+  ],
+  "skips": [
+    "basetablist.box-shadow: candidate --gray-a5 → \"gray-a5\" = #0009321f names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "basetablist.font-family: candidate --default-font-family → \"default-font-family\" = -apple-system,\n    BlinkMacSystemFont,\n    \"Segoe UI (Custom)\",\n    Roboto,\n    \"Helvetica Neue\",\n    \"Open Sans (Custom)\",\n    system-ui,\n    sans-serif,\n    \"Apple Color Emoji\",\n    \"Segoe UI Emoji\" names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "basetablist.font-size: candidate --font-size-2 → \"font-size-2\" = calc(14px * 1) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "basetablist.letter-spacing: candidate --letter-spacing-2 → \"letter-spacing-2\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "basetablist.line-height: candidate --line-height-2 → \"line-height-2\" = calc(20px * 1) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "basetablisttrigger.height: ABSENT FROM THE DTCG FILE — --tab-height → \"tab-height\" = calc(40px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger.padding-left: ABSENT FROM THE DTCG FILE — --tab-padding-x → \"tab-padding-x\" = calc(8px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger.padding-right: ABSENT FROM THE DTCG FILE — --tab-padding-x → \"tab-padding-x\" = calc(8px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger-2.color: candidate --gray-a11 → \"gray-a11\" = #0007149f names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "basetablisttrigger-2.height: ABSENT FROM THE DTCG FILE — --tab-height → \"tab-height\" = calc(40px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger-2.padding-left: ABSENT FROM THE DTCG FILE — --tab-padding-x → \"tab-padding-x\" = calc(8px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger-2.padding-right: ABSENT FROM THE DTCG FILE — --tab-padding-x → \"tab-padding-x\" = calc(8px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger-3.color: candidate --gray-a11 → \"gray-a11\" = #0007149f names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "basetablisttrigger-3.height: ABSENT FROM THE DTCG FILE — --tab-height → \"tab-height\" = calc(40px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger-3.padding-left: ABSENT FROM THE DTCG FILE — --tab-padding-x → \"tab-padding-x\" = calc(8px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "basetablisttrigger-3.padding-right: ABSENT FROM THE DTCG FILE — --tab-padding-x → \"tab-padding-x\" = calc(8px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "label.letter-spacing: candidate --tab-active-letter-spacing → \"tab-active-letter-spacing\" = -0.01em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.word-spacing: candidate --tab-active-word-spacing → \"tab-active-word-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-2.letter-spacing: candidate --tab-active-letter-spacing → \"tab-active-letter-spacing\" = -0.01em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-2.word-spacing: candidate --tab-active-word-spacing → \"tab-active-word-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-3.letter-spacing: candidate --tab-inactive-letter-spacing → \"tab-inactive-letter-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-3.word-spacing: candidate --tab-inactive-word-spacing → \"tab-inactive-word-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-4.letter-spacing: candidate --tab-active-letter-spacing → \"tab-active-letter-spacing\" = -0.01em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-4.word-spacing: candidate --tab-active-word-spacing → \"tab-active-word-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-5.letter-spacing: candidate --tab-inactive-letter-spacing → \"tab-inactive-letter-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-5.word-spacing: candidate --tab-inactive-word-spacing → \"tab-inactive-word-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-6.letter-spacing: candidate --tab-active-letter-spacing → \"tab-active-letter-spacing\" = -0.01em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-6.word-spacing: candidate --tab-active-word-spacing → \"tab-active-word-spacing\" = 0em names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

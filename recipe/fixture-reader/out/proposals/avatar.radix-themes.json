@@ -1,0 +1,111 @@
+{
+  "archetype": "avatar",
+  "library": "radix-themes",
+  "ledger": "extract/computed/out/radix-themes/avatar/captured-truth.json",
+  "provenance": {
+    "package": "@radix-themes-sandbox/ui",
+    "version": "0.0.1",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "soft.3",
+  "leaves": {
+    "box.height": {
+      "value": 40,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.height"
+    },
+    "box.paddingX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.padding-top"
+    },
+    "box.radius": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.border-top-left-radius | extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.height",
+      "formula": "50% → half the box height; a length (including Chromium's clamped exponent form) as read"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#0047f112",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#002bb7c5",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.opacity"
+    },
+    "rest.label": {
+      "value": "#002bb7c5",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "-apple-system",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/avatar/captured-truth.json#soft.3__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "typography.label.resolved": {
+      "value": "Roboto/Medium",
+      "from": "set",
+      "why": "@radix-ui/themes@3.3.0 styles.css --default-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, … ; the reference render (macOS Chromium 149) resolves -apple-system to SF Pro, but the shared writer refuses SF Pro on this Figma (AVATAR-FONT-ZERO-INTRINSIC: it paints zero-width, measured 2026-09-13); BlinkMacSystemFont is not a face and 'Segoe UI (Custom)' is not installed (figma.listAvailableFontsAsync); Roboto is the next face in the package's stack and is installed with style Medium (styles.css --font-weight-medium: 500) — a FONT-SUBSTRATE fallback, named"
+    }
+  },
+  "receipts": [
+    {
+      "path": "typography.label.resolved",
+      "why": "the requested face is not on the minting machine",
+      "evidence": "@radix-ui/themes@3.3.0 styles.css --default-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, … ; the reference render (macOS Chromium 149) resolves -apple-system to SF Pro, but the shared writer refuses SF Pro on this Figma (AVATAR-FONT-ZERO-INTRINSIC: it paints zero-width, measured 2026-09-13); BlinkMacSystemFont is not a face and 'Segoe UI (Custom)' is not installed (figma.listAvailableFontsAsync); Roboto is the next face in the package's stack and is installed with style Medium (styles.css --font-weight-medium: 500) — a FONT-SUBSTRATE fallback, named",
+      "value": "Roboto/Medium"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": "TP"
+  },
+  "typography": {
+    "family": "-apple-system",
+    "style": "Medium",
+    "stack": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
+  }
+}

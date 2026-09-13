@@ -1,0 +1,832 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Checkbox",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.1.unchecked.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "1",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.1.unchecked.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "1",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.1.checked.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "1",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.1.checked.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "1",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.1.indeterminate.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "1",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.1.indeterminate.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "1",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.2.unchecked.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "2",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.2.unchecked.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "2",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.2.checked.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "2",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.2.checked.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "2",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.2.indeterminate.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "2",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.2.indeterminate.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "2",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.3.unchecked.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "3",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.3.unchecked.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "3",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.3.checked.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "3",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.3.checked.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "3",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.3.indeterminate.enabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "3",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "classic.3.indeterminate.disabled",
+      "axisValues": {
+        "variant": "classic",
+        "size": "3",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.1.unchecked.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.1.unchecked.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.1.checked.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.1.checked.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.1.indeterminate.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.1.indeterminate.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.2.unchecked.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.2.unchecked.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.2.checked.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.2.checked.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.2.indeterminate.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.2.indeterminate.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.3.unchecked.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.3.unchecked.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.3.checked.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.3.checked.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.3.indeterminate.enabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "surface.3.indeterminate.disabled",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.1.unchecked.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.1.unchecked.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.1.checked.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.1.checked.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.1.indeterminate.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.1.indeterminate.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.2.unchecked.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.2.unchecked.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.2.checked.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.2.checked.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.2.indeterminate.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.2.indeterminate.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.3.unchecked.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3",
+        "checked": "unchecked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.3.unchecked.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3",
+        "checked": "unchecked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.3.checked.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3",
+        "checked": "checked"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.3.checked.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3",
+        "checked": "checked"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.3.indeterminate.enabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-button",
+      "varName": "--cursor-button",
+      "anchor": {
+        "selector": ".rt-reset:where(button)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "cursor",
+      "combo": "soft.3.indeterminate.disabled",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3",
+        "checked": "indeterminate"
+      },
+      "token": "cursor-disabled",
+      "varName": "--cursor-disabled",
+      "anchor": {
+        "selector": ".rt-reset:where(:disabled, [data-disabled])"
+      }
+    }
+  ],
+  "skips": [
+    "icon.color: candidates --accent-a11 → \"accent-a11\" = #002bb7c5; --accent-contrast → \"accent-contrast\" = white; --gray-a8 → \"gray-a8\" = #00083046 name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "icon.height: ABSENT FROM THE DTCG FILE — --checkbox-indicator-size → \"checkbox-indicator-size\" = calc(9px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "icon.width: ABSENT FROM THE DTCG FILE — --checkbox-indicator-size → \"checkbox-indicator-size\" = calc(9px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "root.height: candidate --space-4 → \"space-4\" = calc(16px * 1) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.--checkbox-border-radius: source declares `calc(var(--radius-1) * 1.25)` — a calc() over var(--radius-1). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.--checkbox-indicator-size: source declares `calc(12px * var(--scaling))` — a calc() over var(--scaling). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.--checkbox-size: source declares `calc(var(--space-4) * 1.25)` — a calc() over var(--space-4). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 3,
+  "calcCeiling": 3,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}
