@@ -176,6 +176,8 @@ const LIBRARIES = [
   // scorecard committed; contracts-seed only — no examples/chakra/contracts/
   // yet, so coverage stays held (FC-COVERAGE-COUNTS-CAPTURES).
   { dir: 'chakra', label: 'Chakra UI', pkg: '@chakra-ui/react@3.37.0', contracts: 'examples/chakra/contracts' },
+  // Held-out F1 subject (2026-09-13): captured blind through the product path; no contracts/ dir.
+  { dir: 'radix-themes', label: 'Radix Themes', pkg: '@radix-ui/themes@3.3.0', contracts: 'examples/radix-themes/contracts' },
 ];
 
 /* ==================================================================== READ */
