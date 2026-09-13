@@ -5,7 +5,22 @@ rather than stopping on it.
 
 ---
 
-## P1 · A canvas→code exam on artwork nobody here drew
+## P1 — CLOSED 2026-09-13: the canvas→code exam ran on a designer's file
+
+**Closed.** The owner opened the Altitude Design System file
+(`y83n4o9LOGs74oAoguFcGS`) in Figma Desktop with the Desktop Bridge; eleven of
+its published component sets were observed read-only (zero writes, REST version
+pinned before and after, two identical observes per set) and put through the
+canvas→code path. **3 accounting-clean (Badge, Menu, Tabs), 8 refused by name,
+nothing silent.** Receipt: [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](CANVAS-TO-CODE-DESIGNER-EXAM.md);
+gate `npm run recipe:canvas-to-code:held-out:v2:check`.
+
+One thing I recorded below was **wrong**, left visible: "point me at such a
+file" — the owner already had two (Altitude, CBDS) and their keys were in this
+repo's own sync ledger and memory. The blocker was never access; it was that
+nobody had asked.
+
+What was originally parked:
 
 **Parked 2026-09-05, during queue item 1.**
 

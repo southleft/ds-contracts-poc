@@ -22,15 +22,19 @@ Two directions, one contract in the middle:
 
 ---
 
-> **Status — 2026-09-05.** Honest, dated, and gate-derived.
+> **Status — 2026-09-13.** Honest, dated, and gate-derived.
 >
 > - The product is the one command below
 >   ([docs/36](docs/36-point-it-at-your-library.md)), proven for **all thirteen
 >   archetypes** and on libraries it was never taught.
 > - **Product v1 is NOT complete.** The plugin's paste verb has been exercised
->   by a person exactly once (the Chakra switch). The canvas→code exam still
->   runs on artwork this repo drew itself, which is a round trip, not an exam —
->   see [OWNER-PARKED P1](parity/receipts/v1/OWNER-PARKED.md).
+>   by a person exactly once (the Chakra switch).
+> - **The canvas→code exam now runs on a designer's file.** Eleven component
+>   sets from the Altitude Design System — drawn by its design team, never
+>   written by this repo, observed read-only — went through the canvas→code
+>   path: **3 accounting-clean, 8 refused by name, nothing silent.** The
+>   census and every refusal, verbatim:
+>   [CANVAS-TO-CODE-DESIGNER-EXAM.md](parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
 > - **The held-out code→canvas exam (F1) is measured, not graded.**
 >   react-day-picker — a library the recipe path had never been pointed at —
 >   was captured, compiled, minted onto Figma and scored against the real
@@ -140,16 +144,17 @@ is invented here.
 
 **What would ship vs what is proven (owner decision note):** *Proven in
 this tree* — reader + 13×3 review package; canvas→code Button apply-step;
-held-out Card exam silent=0; Phase 4 shadcn/Chakra proposed tables; five
-signed stays. *Not proven / not shippable as v1* — F1 **capture-only**
-(compile refused); F-C2C
+held-out Card exam silent=0 and the designer-file exam (Altitude, 3 of 11
+accounting-clean, 8 refused by name); Phase 4 shadcn/Chakra proposed tables; five
+signed stays. *Not proven / not shippable as v1* — F1 is **measured, not graded**
+(react-day-picker 3.735% with a named 16px caveat); F-C2C
 adopted but does not complete v1; `overallSuccess` false; no recipe npm surface.
 Publishing today would ship the pre-pivot `@ds-contracts/*` envelope (or
 source-ahead unpublished RCs), not a completed two-journey v1.
 
 | Surface | What it is | What it is not |
 |---|---|---|
-| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five signed stays — Button, Input, Combobox, Table, Calendar. Both journeys **partially** proven (reader 13×3; canvas→code held-out silent=0). Gates: `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`, plus docs/35 reader / canvas→code checks. Chronology: [docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md). | Product v1. `overallSuccess` stays false except Table's v32 pin. F1 is **capture-only** (compile refused). F-C2C is adopted and does not complete v1. |
+| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five signed stays — Button, Input, Combobox, Table, Calendar. Both journeys **partially** proven (reader 13×3; canvas→code held-out silent=0 on our own Card and on a designer's Altitude file, 3 of 11 sets accounting-clean). Gates: `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`, plus docs/35 reader / canvas→code checks. Chronology: [docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md). | Product v1. `overallSuccess` stays false except Table's v32 pin. F1 is measured (3.735%), not graded. F-C2C is adopted and does not complete v1. |
 | **Published npm (`@ds-contracts/*`)** | The **universal-contract** envelope (extract / generate / bundle / onboard). `latest` is the stable line (CLI `0.4.0`, schema `16.0.0`, emitter `0.3.0`). npm `next` still carries older package RCs (CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`). Use an exact version; do not assume `latest` or `next` is this tree. | Recipe-IR. A v1 proof. A complete product. |
 | **This source tree** | Root `package.json` still reads `1.0.0-rc.1`. CLI source is `0.5.0-rc.2`, schema `17.0.0-rc.1` (the `bindings` hoist), emitter `0.4.0-rc.2`, and `@ds-contracts/core` `0.1.0-rc.1` — source-ahead and unpublished. npm publish of a recipe surface is **deferred**. | A published recipe-IR RC. |
 | **GitHub releases** | Tags such as `v1.0.0-rc.1` exist. | The recipe-IR pivot. They **predate** merge `4caebfc5b` and still describe the universal-contract RC. |
@@ -702,9 +707,12 @@ active climb is [docs/35](docs/35-two-journey-v1-plan.md).
   scored against the real package's Chromium render at **3.735%** (bar 5%).
   It is a measurement, not a grade, and it carries a named caveat:
   [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
-- **The canvas→code exam is still owed.** Its substrate was this repo's own
-  mint, which makes it a round trip rather than an exam
-  ([OWNER-PARKED P1](parity/receipts/v1/OWNER-PARKED.md)).
+- **The canvas→code exam has run on a designer's file.** As of 2026-09-13
+  eleven Altitude Design System sets, drawn by people who never used this tool,
+  were observed read-only and put through the path: 3 accounting-clean (Badge,
+  Menu, Tabs), 8 refused by name, nothing silent
+  ([CANVAS-TO-CODE-DESIGNER-EXAM.md](parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md)).
+  The eight refusals are the map of what the direction cannot yet say.
 - **`overallSuccess` is not flipped** (except Table's existing v32 pin), and
   npm publish of a recipe surface is deferred.
 - The playground and the published CLI still run the pre-pivot
