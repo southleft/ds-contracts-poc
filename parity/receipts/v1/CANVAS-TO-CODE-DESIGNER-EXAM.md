@@ -15,9 +15,9 @@ Gate: `npm run recipe:canvas-to-code:held-out:v2:check` (fast lane, beside the
 v1 exam, which is untouched). Evidence: `recipe/evidence/canvas-to-code-held-out-v2/`.
 Manifest: `recipe/canvas-to-code-held-out-v2-manifest.ts`.
 
-## The census
+## The census — Altitude (eleven published sets)
 
-Eleven published component sets. Each is one of two outcomes — **accounting
+Each subject is one of two outcomes — **accounting
 clean** (zero silent losses at the bridge, zero silent and zero unexplained
 deltas at the Chromium render, every variant mounted) or **refused by name**
 (the stage and the exact message). There is no third outcome; a crash is a
