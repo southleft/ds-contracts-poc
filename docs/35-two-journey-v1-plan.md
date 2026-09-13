@@ -225,7 +225,11 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   shadow defect (fix on `fix/writer-inner-shadow`), badge and tabs refuse at the
   role step as predicted. Five engine gaps a held-out library forced are
   language, not answers. Receipt:
-  [`F1-RADIX-ROUND.md`](../parity/receipts/v1/F1-RADIX-ROUND.md).
+  [`F1-RADIX-ROUND.md`](../parity/receipts/v1/F1-RADIX-ROUND.md). Both rows
+  are held by one fast-lane gate, `npm run recipe:f1:check`
+  (`recipe/evidence/f1-v1/receipt.json`): the calendar canvas re-scored from
+  committed bytes, every Radix archetype scored, refused at roles, or
+  mint-refused by name.
 - **Canvas→code exam (3f)** runs in the same window. **Its substrate was our
   own mint** — the held-out Card (page `33:2`, Card `33:5093`) came from this
   repository's code→canvas engine 8 days earlier, so it measures a round trip

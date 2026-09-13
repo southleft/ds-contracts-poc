@@ -74,6 +74,11 @@ keeps these rows honest: a regression on any of them is red.
 - This is not a first-pass measurement (the library was captured before, on the
   legacy chain); it is the product path's first contact with it.
 - The calendar row's named 16px ink-box caveat is untouched by this round.
-- A single gate that re-scores both F1 rows together (`recipe:f1:check`, designed
-  in the plan of record) is not yet written; today the Radix rows are held by
-  the fidelity gate's ratchet and the calendar row by `recipe:f1-held-out:check`.
+- One gate now holds both rows: `npm run recipe:f1:check` (`recipe/f1-check.ts`,
+  fast lane) re-scores the committed calendar canvas against the real render
+  and pins its hashes, re-scores every `heldOut: "radix-themes"` manifest row,
+  reproduces the badge and tabs role-step refusals from the committed ledgers,
+  and carries the checkbox mint refusal as a quoted claim
+  (`recipe/evidence/pointed/checkbox-radix-themes/mint-refusal.json`) until the
+  archetype mints. Receipt: `recipe/evidence/f1-v1/receipt.json`. It measures;
+  it never grades — `overallSuccess` stays false in it by construction.

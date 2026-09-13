@@ -40,6 +40,8 @@ Two directions, one contract in the middle:
 >   0.27%** across its four states; checkbox points and compiles but its mint is
 >   refused by name on a shared-runtime defect; badge and tabs refuse at the role
 >   step as predicted ([F1-RADIX-ROUND.md](parity/receipts/v1/F1-RADIX-ROUND.md)).
+>   One gate, `npm run recipe:f1:check`, re-derives both rows from committed
+>   bytes on every push ([receipt](recipe/evidence/f1-v1/README.md)).
 > - `overallSuccess` remains **false**. It flips only when both exams pass and
 >   the owner signs the [docs/26 amendment](docs/26-amendment-canvas-to-code.md).
 >

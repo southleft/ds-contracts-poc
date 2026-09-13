@@ -1,0 +1,9 @@
+{
+  "_marker": "The one F1 outcome recipe:f1:check cannot reproduce offline: a Figma mint refusal. Recorded verbatim; removed the moment the archetype mints (then the fidelity manifest carries its rows).",
+  "recordedAt": "2026-09-13",
+  "command": "node scripts/run-figma-writer.mjs --writer recipe/evidence/pointed/checkbox-radix-themes/writer.plugin.js --plugin-target --output private/f1-radix-checkbox.raw.json --from-page \"Page 1\" --wait-ms 240000",
+  "message": "in set_effects: Property \"effects\" failed validation: Unrecognized key(s)",
+  "cause": "recipe/figma-writer-runtime.ts sets showShadowBehindNode on every shadow; Figma accepts that key on DROP_SHADOW only and refuses the paste on the box's INNER_SHADOW ring (.rt-BaseCheckboxRoot::before, styles.css). The fixture compiled at a fixed point (30 read, 5 reviewed, 0 invented); nothing on the canvas was written.",
+  "fix": "fix/writer-inner-shadow (PR #82): one conditional in the shared runtime — and because every boilerplate writer embeds that runtime, a thirteen-writer remint round before it can merge.",
+  "figmaWrites": 0
+}

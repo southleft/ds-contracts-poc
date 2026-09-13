@@ -1,0 +1,123 @@
+{
+  "artifactVersion": "f1-v1",
+  "overallSuccess": false,
+  "humanGrade": "not-run — the owner grades both rows together; this gate measures, it never grades (docs/26 amendment)",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "rows": {
+    "calendar": {
+      "library": "day-picker",
+      "subject": "react-day-picker@10.0.1 DayPicker (calendar@1)",
+      "mintedOn": "Scratch (byMp6lt0Ij9b2QbkDGFwBh), 2026-09-05",
+      "canvas": {
+        "path": "recipe/evidence/f1-held-out-v1/score/canvas.png",
+        "sha256": "3f807e70726fe2f90a8bb5abe273d1c0ccf646495262b3863808e6a21cb9c840"
+      },
+      "reference": {
+        "path": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
+        "sha256": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2"
+      },
+      "status": "pass",
+      "pctAAMasked": 3.735,
+      "canvasPx": "280x247",
+      "realPx": "296x265",
+      "thresholdSweepAgrees": false,
+      "receipt": "parity/receipts/v1/F1-COMPILE-ROUND.md"
+    },
+    "radix": {
+      "library": "radix-themes",
+      "package": "@radix-ui/themes@3.3.0",
+      "receipt": "parity/receipts/v1/F1-RADIX-ROUND.md",
+      "archetypes": [
+        {
+          "archetype": "avatar",
+          "outcome": "scored",
+          "rows": [
+            {
+              "label": "avatar/radix-themes",
+              "status": "pass",
+              "pctAAMasked": 1.88,
+              "glyphMasked": 0
+            }
+          ]
+        },
+        {
+          "archetype": "switch",
+          "outcome": "scored",
+          "rows": [
+            {
+              "label": "switch/radix-themes",
+              "status": "pass",
+              "pctAAMasked": 3.04,
+              "glyphMasked": 3.04
+            },
+            {
+              "label": "switch/radix-themes-unchecked-disabled",
+              "status": "pass",
+              "pctAAMasked": 0,
+              "glyphMasked": 0
+            },
+            {
+              "label": "switch/radix-themes-checked",
+              "status": "pass",
+              "pctAAMasked": 2.59,
+              "glyphMasked": 2.59
+            },
+            {
+              "label": "switch/radix-themes-checked-disabled",
+              "status": "pass",
+              "pctAAMasked": 0.27,
+              "glyphMasked": 0.27
+            }
+          ]
+        },
+        {
+          "archetype": "checkbox",
+          "outcome": "mint-refused",
+          "pointed": "recipe/evidence/pointed/checkbox-radix-themes",
+          "mintRefusal": {
+            "recordedAt": "2026-09-13",
+            "message": "in set_effects: Property \"effects\" failed validation: Unrecognized key(s)",
+            "cause": "recipe/figma-writer-runtime.ts sets showShadowBehindNode on every shadow; Figma accepts that key on DROP_SHADOW only and refuses the paste on the box's INNER_SHADOW ring (.rt-BaseCheckboxRoot::before, styles.css). The fixture compiled at a fixed point (30 read, 5 reviewed, 0 invented); nothing on the canvas was written.",
+            "fix": "fix/writer-inner-shadow (PR #82): one conditional in the shared runtime — and because every boilerplate writer embeds that runtime, a thirteen-writer remint round before it can merge.",
+            "figmaWrites": 0
+          }
+        },
+        {
+          "archetype": "badge",
+          "outcome": "refused-at-roles",
+          "combo": "soft.1",
+          "unresolved": [
+            "indicator: no absolutely positioned, translated part carries the count",
+            "host: no painted square part besides the pip"
+          ]
+        },
+        {
+          "archetype": "tabs",
+          "outcome": "refused-at-roles",
+          "combo": "",
+          "unresolved": [
+            "indicator: no absolute painted bar and no distinct bottom border on the selected tab (selected bg rgba(0, 0, 0, 0), rest bg rgba(0, 0, 0, 0)) — tabs@1 draws an indicator, not a selected-tab fill"
+          ]
+        }
+      ]
+    }
+  },
+  "summary": {
+    "calendar": "pass 3.735% (bar 5%); ink boxes 280x247 vs 296x265; threshold sweep agrees: false",
+    "radix": {
+      "scored": 2,
+      "scoredRows": 5,
+      "refusedAtRoles": 2,
+      "mintRefused": 1
+    }
+  },
+  "notClaimed": [
+    "No grade. overallSuccess is false until the owner signs; a green gate is a measurement, not a pass.",
+    "The calendar row's threshold sweep never agrees (16px ink-box gap on both axes) — recorded above, required by nothing here yet; that is the named next climb.",
+    "The calendar lineage is outside the thirteen archetypes recipe:point ships; a stranger reaches the Radix rows, not this one.",
+    "Radix Themes was captured once before (2026-09-04, legacy chain): not a first-pass measurement.",
+    "A mint-refused row is a quoted Figma message this gate cannot re-run; it is removed, not excused, when the archetype mints."
+  ]
+}
