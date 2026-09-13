@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { gunzipSync, gzipSync } from "node:zlib";
+import { gunzipSync } from "node:zlib";
+import { portableGzipEnvelope, portableGzipSync } from "./portable-gzip.js";
 
 import {
   buildInputLiveV85CaptureProgram,
@@ -355,10 +356,12 @@ const sourcePlans = (): GeneratedSource[] => {
       );
     const rewrittenCompressed =
       sourceId === "polaris"
-        ? readFileSync(
-            "recipe/evidence/input-field-live-pivot-v83/expected-scene-plan-polaris.json.gz",
+        ? portableGzipEnvelope(
+            readFileSync(
+              "recipe/evidence/input-field-live-pivot-v83/expected-scene-plan-polaris.json.gz",
+            ),
           )
-        : gzipSync(rewritten);
+        : portableGzipSync(rewritten);
     if (sourceId === "polaris") {
       const priorUncompressed = gunzipSync(rewrittenCompressed);
       if (!priorUncompressed.equals(rewritten))

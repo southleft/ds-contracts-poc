@@ -52,7 +52,7 @@
     "recipe:fidelity:check": "tsx recipe/fidelity-check.ts",
     "recipe:fidelity:plugin:proof": "tsx recipe/plugin-target-proof.ts",
     "recipe:fidelity:plugin:check": "tsx recipe/plugin-target-proof.ts --check",
-    "recipe:lowering:check": "node --import tsx --test recipe/figma-vector-path.test.ts recipe/css-box-shadow.test.ts",
+    "recipe:lowering:check": "node --import tsx --test recipe/figma-vector-path.test.ts recipe/css-box-shadow.test.ts recipe/portable-gzip.test.ts",
     "recipe:boilerplate:generated:check": "npm run recipe:alert:live:v10:generated:check && npm run recipe:avatar:live:v7:generated:check && npm run recipe:badge:live:v11:generated:check && npm run recipe:chip:live:v11:generated:check && npm run recipe:checkbox:live:v12:generated:check && npm run recipe:dialog:live:v7:generated:check && npm run recipe:link:live:v8:generated:check && npm run recipe:menu:live:v10:generated:check && npm run recipe:radio:live:v9:generated:check && npm run recipe:switch:live:v13:generated:check && npm run recipe:tabs:live:v17:generated:check && npm run recipe:textarea:live:v13:generated:check && npm run recipe:tooltip:live:v9:generated:check",
     "recipe:fidelity:capture": "node scripts/capture-fidelity-shots.mjs",
     "recipe:textarea:live:v13:prepare": "tsx recipe/build-textarea-live-proof-v13.ts",

@@ -23,7 +23,7 @@
       "calendarExpectedScenePlan": {
         "path": "recipe/evidence/calendar-live-pivot-v50/expected-scene-plan-astryx-calendar.json.gz",
         "bytes": 32846,
-        "sha256": "7a7ce45004a384f2545d7dab9d7074c9505fbb632a6194f38e1432ee758ecb18",
+        "sha256": "38fdc18f0909d9fb80b62ab819c992df683a39040d415618b310462316b9a964",
         "uncompressedBytes": 633796,
         "uncompressedSha256": "f807605a8cbf281bee551f849a1712bfd098a4d7ee7782d22178178c4fcc6316",
         "facts": 1884
@@ -31,7 +31,7 @@
       "weekExpectedScenePlan": {
         "path": "recipe/evidence/calendar-live-pivot-v50/expected-scene-plan-astryx-week.json.gz",
         "bytes": 4380,
-        "sha256": "e42bcff6bbc66594ca1ab9a09278caae516944675d0c51edb51c7701c9076fca",
+        "sha256": "9cfdf1cf4b6cbbeca4a6cc642b5d0596ddda895c3383ce2d7fc4ce78bf45f011",
         "uncompressedBytes": 56730,
         "uncompressedSha256": "516b2edc9e3482ded04668a25f0c3b8e4bcfac20eebba88c3b394498b4c0bbe9",
         "facts": 234
@@ -39,7 +39,7 @@
       "dayExpectedScenePlan": {
         "path": "recipe/evidence/calendar-live-pivot-v50/expected-scene-plan-astryx-day.json.gz",
         "bytes": 5435,
-        "sha256": "967989cb9f6d53f7722807844f9cd33c1e1a6aade6bc609b0a25a3a67701e93a",
+        "sha256": "92db782b709046e73624c4b6557200cfdeb6f68618bc4ed60f74e01d22f12081",
         "uncompressedBytes": 77643,
         "uncompressedSha256": "f9e340b16a41071c6f29b3c7af389edb2abf93ab57dd77c9095bb57600cb03c9",
         "facts": 274

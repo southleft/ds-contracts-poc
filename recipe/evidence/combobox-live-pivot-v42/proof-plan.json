@@ -23,7 +23,7 @@
       "comboboxExpectedScenePlan": {
         "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-mui-combobox.json.gz",
         "bytes": 234399,
-        "sha256": "e980f45b30c94d97ecfb92f66eed39e0a62978cd888e58c48fb6ceb9d770d2d4",
+        "sha256": "5394c01fe8caa2ba62b0a31e2fcfcce398e1b7175914457935a672117f2770bf",
         "uncompressedBytes": 4112009,
         "uncompressedSha256": "d6dc001077b2fc726322a5aa8dbdf4f93251e4d5ea267a8ab0da72fcfc98b6c4",
         "facts": 12915
@@ -31,7 +31,7 @@
       "optionExpectedScenePlan": {
         "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-mui-option.json.gz",
         "bytes": 6827,
-        "sha256": "c45110d64bb607702a1a7921df469d0a84eff904e8c4489f52f1e76e497b8e1b",
+        "sha256": "321cfa093d49dee9887d83de7ce84b68399265eb5ca5de59ea086cb1d43c4768",
         "uncompressedBytes": 107444,
         "uncompressedSha256": "d4d4390720c57e3dbb290884b9eed815f2e3e69aaec82d4a1e6fe803d8cba156",
         "facts": 392
@@ -45,7 +45,7 @@
       "comboboxExpectedScenePlan": {
         "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-antd-combobox.json.gz",
         "bytes": 233509,
-        "sha256": "2621a7c97ae884739560a3137dcaa4d486c7a1aebd630899175fc6940727497d",
+        "sha256": "f89bc3a5f5a3b2ff5d43499f04e83180d3c9fa7219007556442836a685592690",
         "uncompressedBytes": 4076936,
         "uncompressedSha256": "0ce69353efff357197b17d77fd5d94e38095df90e809a14c7f004e837fd766e8",
         "facts": 12915
@@ -53,7 +53,7 @@
       "optionExpectedScenePlan": {
         "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-antd-option.json.gz",
         "bytes": 6746,
-        "sha256": "32d507d711f94aefc4ef88066e0e9d29921ed418dee538c93d00e8376f4baf81",
+        "sha256": "225f48f3f5487ef6cdf77031514e2c828cd69f5709321a5f0dd8af0a5e64c30b",
         "uncompressedBytes": 106204,
         "uncompressedSha256": "100fdfd67d547fc1b5d3ce0ca0af59651612bce064166fb98f3fe8f2e43bda19",
         "facts": 392

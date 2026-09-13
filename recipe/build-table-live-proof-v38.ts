@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { gzipSync } from "node:zlib";
+import { portableGzipSync } from "./portable-gzip.js";
 
 import { adaptReviewedTable } from "./adapters/table.js";
 import {
@@ -609,9 +609,9 @@ export async function buildTableLiveV38Proof(
     const tableBytes = Buffer.from(`${JSON.stringify(source.tablePlan)}\n`);
     const rowBytes = Buffer.from(`${JSON.stringify(source.rowPlan)}\n`);
     const cellBytes = Buffer.from(`${JSON.stringify(source.cellPlan)}\n`);
-    const tableCompressed = gzipSync(tableBytes);
-    const rowCompressed = gzipSync(rowBytes);
-    const cellCompressed = gzipSync(cellBytes);
+    const tableCompressed = portableGzipSync(tableBytes);
+    const rowCompressed = portableGzipSync(rowBytes);
+    const cellCompressed = portableGzipSync(cellBytes);
     const tablePath = `${TABLE_LIVE_V38_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-table.json.gz`;
     const rowPath = `${TABLE_LIVE_V38_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-row.json.gz`;
     const cellPath = `${TABLE_LIVE_V38_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-cell.json.gz`;
