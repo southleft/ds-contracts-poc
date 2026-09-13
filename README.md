@@ -31,12 +31,15 @@ Two directions, one contract in the middle:
 >   by a person exactly once (the Chakra switch). The canvas→code exam still
 >   runs on artwork this repo drew itself, which is a round trip, not an exam —
 >   see [OWNER-PARKED P1](parity/receipts/v1/OWNER-PARKED.md).
-> - **The held-out code→canvas exam (F1) is measured, not graded.**
->   react-day-picker — a library the recipe path had never been pointed at —
->   was captured, compiled, minted onto Figma and scored against the real
->   package's own Chromium render at **3.735%** against a 5% bar. Read it with
->   its caveat, which is stated in the receipt:
->   [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
+> - **The held-out code→canvas exam (F1) has two rows, both measured, neither
+>   graded.** react-day-picker's calendar was captured, compiled, minted onto
+>   Figma and scored at **3.735%** against a 5% bar, with a named 16px caveat
+>   ([F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md)). And on
+>   2026-09-13 **Radix Themes** — a held-out library — went through the product's
+>   own `recipe:point` command: avatar **1.88%**, switch **3.04 / 0 / 2.59 /
+>   0.27%** across its four states; checkbox points and compiles but its mint is
+>   refused by name on a shared-runtime defect; badge and tabs refuse at the role
+>   step as predicted ([F1-RADIX-ROUND.md](parity/receipts/v1/F1-RADIX-ROUND.md)).
 > - `overallSuccess` remains **false**. It flips only when both exams pass and
 >   the owner signs the [docs/26 amendment](docs/26-amendment-canvas-to-code.md).
 >

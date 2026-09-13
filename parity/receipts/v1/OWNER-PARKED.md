@@ -62,4 +62,11 @@ What was genuinely required was fixing four real defects the live mint exposed
 (auto-layout primary-axis resize, blank template label, font-load cost, absent
 font family) — engineering, not permission.
 
+**Addendum 2026-09-13.** The scope question this park raised — is a calendar
+the right F1 exam when a stranger cannot reach it — was answered by the owner:
+keep the calendar row **and** add Radix Themes through `recipe:point`. That
+second row now exists: avatar 1.88%, switch's four states pass, checkbox
+compiles and its mint is refused by name on a shared-runtime defect. See
+[`F1-RADIX-ROUND.md`](F1-RADIX-ROUND.md).
+
 **Still open below:** the original P1 (canvas→code substrate).
