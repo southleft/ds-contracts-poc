@@ -1,6 +1,6 @@
 # AGENTS.md
 
-## Cursor Cloud specific instructions
+## Repository instructions
 
 This is `ds-contracts-poc` ("Design System Contracts"), an npm-workspaces monorepo.
 Node `>=20` is required (see `engines` in `package.json`). Standard commands live in
@@ -38,4 +38,7 @@ non-obvious things.
 - **`npm run parity` is deliberately excluded from the gates and will exit 1 on a
   healthy tree** with `snapshot-stale` findings — the committed Figma snapshots
   expire by design and can only be refreshed from Figma desktop. A `snapshot-stale`
-  finding is not a regression; any *other* parity finding is. See `CONTRIBUTING.md`.
+  finding is not a code regression, but stale live-file evidence can still make a
+  reconciliation gate red. Refresh the snapshots from Figma desktop before
+  claiming a fully green lane. Any *other* parity finding is a product defect.
+  See `CONTRIBUTING.md`.
