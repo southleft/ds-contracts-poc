@@ -707,7 +707,10 @@ const sceneEffectToIr = (effect: SceneEffect): Effect => {
   };
 };
 
-const irFieldForSceneBinding = (field: string): string =>
+/** Map a Figma-API binding spelling to the IR field it addresses. Unknown
+ *  fields pass through verbatim; `canvas-facts` receipts those the IR cannot
+ *  spell rather than letting the schema throw on a designer's binding. */
+export const irFieldForSceneBinding = (field: string): string =>
   ({
     paddingTop: "layout.padding.top",
     paddingRight: "layout.padding.right",
@@ -727,6 +730,12 @@ const irFieldForSceneBinding = (field: string): string =>
     "lineHeight.0": "type.lineHeight.value",
     letterSpacing: "type.letterSpacing.value",
     "letterSpacing.0": "type.letterSpacing.value",
+    // Text-style bindings the API reports as `fontStyle`/`fontFamily` (with the
+    // `.0` range suffix on a single-segment text): the IR spells both as STRING.
+    fontStyle: "type.fontStyle",
+    "fontStyle.0": "type.fontStyle",
+    fontFamily: "type.fontFamily",
+    "fontFamily.0": "type.fontFamily",
     width: "width.value",
     height: "height.value",
   })[field] ??

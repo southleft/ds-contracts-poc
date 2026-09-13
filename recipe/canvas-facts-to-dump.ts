@@ -745,6 +745,19 @@ export function bridgeCanvasFactsToDump(
         ? "ABSOLUTE positioning not bridged in v1 — receipt"
         : "in-flow (AUTO) is the dump default — absence IS in-flow",
     );
+    // The projection emits layout.offset + layout.constraints exactly when the
+    // node is ABSOLUTE (scene-readback compileExpectedScenePlan). Neither has a
+    // dump spelling. For the ROOT that is where the designer parked the set on
+    // its page or prop sheet — not a component fact at all; for a child it is
+    // the same v1 gap as layout.positioning. Both RECEIPTED, never silent.
+    if (node.layoutPositioning === "ABSOLUTE") {
+      const landing =
+        key === "root"
+          ? "the set's placement inside its page/prop-sheet frame is not a component fact — RECEIPT"
+          : "ABSOLUTE positioning not bridged in v1 — receipt";
+      ledger.land(key, "layout.offset", 0, "receipted", landing);
+      ledger.land(key, "layout.constraints", 0, "receipted", landing);
+    }
     if (node.type === "COMPONENT") {
       ledger.land(
         key,
@@ -1008,6 +1021,14 @@ export function bridgeCanvasFactsToDump(
     setChrome(channel);
   if (scene.layoutSizingHorizontal === "FIXED") setChrome("width.value");
   if (scene.layoutSizingVertical === "FIXED") setChrome("height.value");
+  // A designer parks the set inside a page or prop-sheet frame: the projection
+  // then emits layout.offset + layout.constraints for the ROOT (exactly when it
+  // is ABSOLUTE). Where the sheet put the set is sheet chrome, not a fact of
+  // the component — receipt, never silent.
+  if (scene.layoutPositioning === "ABSOLUTE") {
+    setChrome("layout.offset");
+    setChrome("layout.constraints");
+  }
   (scene.fills ?? []).forEach((_, index) => setChrome("fill", index));
   (scene.strokes ?? []).forEach((_, index) => setChrome("stroke", index));
   if (scene.cornerRadius !== undefined) setChrome("cornerRadius");

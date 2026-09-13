@@ -29,6 +29,8 @@ import {
   type SceneNodeSnapshot,
   type SceneNodeType,
 } from "./scene-readback.js";
+import { VariableBindingSchema } from "./figma-ir.js";
+import { irFieldForSceneBinding } from "./scene-readback.js";
 
 export const CANVAS_FACTS_VERSION = "canvas-facts-v1";
 
@@ -98,7 +100,8 @@ export interface CanvasBindingNormalization {
     | "paint-alias-duplicate-dropped"
     | "uniform-stroke-side-weights-collapsed"
     | "nonuniform-stroke-side-weights-receipted"
-    | "partial-stroke-side-weights-receipted";
+    | "partial-stroke-side-weights-receipted"
+    | "binding-field-unspelled-receipted";
   detail: string;
 }
 
@@ -236,6 +239,28 @@ export function normalizeSceneBindings(scene: SceneNodeSnapshot): {
         detail: `partial stroke side weight(s) ${leftoverSides
           .map((binding) => `${binding.field}=${binding.variableName}`)
           .join(", ")} — no IR spelling; RECEIPT, nothing invented`,
+      });
+    }
+    // (4) A binding whose field the IR vocabulary cannot spell (a designer's
+    // file binds things this reader never met) is RECEIPTED by name and
+    // dropped from the projection. It must never reach the schema as a throw:
+    // a stack trace is a silent loss with extra steps.
+    const unspelled = bindings.filter(
+      (binding) =>
+        !VariableBindingSchema.safeParse({
+          field: irFieldForSceneBinding(binding.field),
+          type: binding.resolvedType,
+          variable: binding.variableName,
+        }).success,
+    );
+    if (unspelled.length > 0) {
+      bindings = bindings.filter((binding) => !unspelled.includes(binding));
+      normalizations.push({
+        ownershipKey: node.ownershipKey,
+        kind: "binding-field-unspelled-receipted",
+        detail: `binding(s) the IR cannot spell: ${unspelled
+          .map((binding) => `${binding.field}=${binding.variableName} (${binding.resolvedType})`)
+          .join(", ")} — RECEIPT, nothing invented`,
       });
     }
     node.boundVariables = bindings;
