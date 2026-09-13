@@ -27,7 +27,7 @@ import { fileURLToPath } from "node:url";
 import { emitCalendarFigmaWriter } from "../calendar-figma-writer.js";
 import { scoreFidelity } from "../fidelity-score.js";
 import { hashRecipeInstance } from "../recipe.js";
-import { calendarRecipe, compileCalendarRecipe } from "../recipes/calendar.js";
+import { calendarRecipe, compileCalendarRecipe, type CalendarRecipeInstance } from "../recipes/calendar.js";
 import { assertNoPolarPropose, proposeCalendarInstanceFromLedger } from "./propose-calendar-instance.js";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -45,7 +45,7 @@ function emit(): void {
   const propose = proposeCalendarInstanceFromLedger(REPO, LEDGER);
   assertNoPolarPropose(propose);
   if (!propose.instanceParse.success) throw new Error(`F1 instance does not parse: ${propose.instanceParse.issues.join("; ")}`);
-  const instance = propose.instance;
+  const instance = propose.instance as CalendarRecipeInstance;
   const envelope = compileCalendarRecipe(instance);
   const recipeHash = hashRecipeInstance(calendarRecipe, instance);
   const writer = emitCalendarFigmaWriter([{ ...ADAPTER, recipeHash, envelope }]);
@@ -82,7 +82,7 @@ function score(canvasPath: string, recordedAt: string): void {
   };
   writeFileSync(path.join(scoreDir, "scorecard.json"), `${JSON.stringify(out, null, 1)}\n`);
   const agree = card.thresholdSweep.some((r) => r.agree);
-  console.log(`${card.status.toUpperCase()} ${card.metrics.pctAAMasked.toFixed(3)}%  canvas ink ${card.metrics.canvasPx}  real ink ${card.metrics.realPx}  threshold sweep agrees: ${String(agree)}  → ${path.relative(REPO, scoreDir)}/`);
+  console.log(`${card.status.toUpperCase()} ${(card.metrics.pctAAMasked ?? card.metrics.pctAAUnmasked).toFixed(3)}%  canvas ink ${card.metrics.canvasPx}  real ink ${card.metrics.realPx}  threshold sweep agrees: ${String(agree)}  → ${path.relative(REPO, scoreDir)}/`);
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
