@@ -1,0 +1,140 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "danger",
+          "neutral",
+          "info",
+          "success",
+          "warning"
+        ]
+      },
+      "default": "danger",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "danger": "Danger",
+            "neutral": "Neutral",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "label",
+          "dot"
+        ]
+      },
+      "default": "label",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "label": "Label",
+            "dot": "Dot"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Badge": {
+          "tokensByProp": {
+            "prop": "variant",
+            "map": {
+              "neutral": {
+                "color": "{theme.color.content.neutral-default}"
+              },
+              "info": {
+                "color": "{theme.color.content.info-default}"
+              },
+              "success": {
+                "color": "{theme.color.content.success-default}"
+              },
+              "warning": {
+                "color": "{theme.color.content.warning-default}"
+              }
+            }
+          },
+          "declared": {
+            "font-family": "Public Sans"
+          },
+          "text": "Badge",
+          "tokens": {
+            "color": "{theme.color.content.danger-default}",
+            "font-size": "{typography.font-size.12}",
+            "line-height": "{typography.line-height.20}",
+            "font-weight": "{imported.badge.badge.font-weight}"
+          },
+          "visibleWhen": {
+            "prop": "shape",
+            "equals": "label"
+          }
+        }
+      },
+      "tokensByProp": {
+        "prop": "variant",
+        "map": {
+          "neutral": {
+            "background-color": "{theme.color.background.neutral-bold}"
+          },
+          "info": {
+            "background-color": "{theme.color.background.info-weak}"
+          },
+          "success": {
+            "background-color": "{theme.color.background.success-weak}"
+          },
+          "warning": {
+            "background-color": "{theme.color.background.warning-weak}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{theme.color.background.danger-weak}",
+        "gap": "{theme.space.xxs}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Badge",
+        "export": "Badge"
+      }
+    }
+  }
+}

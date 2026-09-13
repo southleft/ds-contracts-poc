@@ -277,6 +277,9 @@ jobs:
       - name: recipe:canvas-to-code:held-out:check (Scratch AntD exam Card — never a recipe stay — facts → bridge → emit → Chromium; zero silent)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:canvas-to-code:held-out:check
+      - name: recipe:canvas-to-code:held-out:v2:check (designer-drawn substrates — Altitude Badge; committed observe, zero silent, every refusal named; closes OWNER-PARKED P1)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:canvas-to-code:held-out:v2:check
       - name: recipe:f1-held-out:check (day-picker capture-only; mechanical calendar@1 compile refused; no Polar)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:f1-held-out:check

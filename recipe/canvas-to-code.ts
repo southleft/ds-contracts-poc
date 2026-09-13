@@ -162,6 +162,15 @@ export async function buildCanvasToCodeFromFacts(
     writeFileSync(stubPath, `${JSON.stringify(stub, null, 2)}\n`);
     stubPaths.push(stubPath);
   }
+  // Every child stub is a NAMED omission: the bridge stops at instance
+  // boundaries (internals belong to the child), so the emitted component does
+  // not render the instance. Say so in a note, so the render diff's
+  // "child element presence" delta is explained rather than unexplained.
+  const stubNotes = (proposal.childStubs ?? []).map((stub) => {
+    const stubId = String((stub as { id?: unknown }).id ?? "");
+    const stubName = String((stub as { name?: unknown }).name ?? stubId);
+    return `DEGRADATION part omitted: INSTANCE child "${stubName}" (${stubId}) is a child STUB — instance internals are not bridged (instance-internals-not-bridged); the emitted component does not render it, nothing invented`;
+  });
   const capturedPath = path.join(outRoot, "captured.dtcg.json");
   writeFileSync(
     capturedPath,
@@ -209,7 +218,7 @@ export async function buildCanvasToCodeFromFacts(
     doc,
     bridge,
     proposal,
-    proposalNotes: [...batch.notes, ...proposal.notes],
+    proposalNotes: [...batch.notes, ...proposal.notes, ...stubNotes],
     contract,
     componentName,
     outRoot,
@@ -414,10 +423,30 @@ createRoot(document.getElementById('root')).render(<App />);
         locale: "en-US",
         timezoneId: "UTC",
       });
+      // Everything the page says is evidence: a generated component that throws
+      // at mount must reach the caller as the thrown message, not as a bare
+      // selector timeout.
+      const pageLog: string[] = [];
+      page.on("console", (msg) => {
+        if (msg.type() === "error" || msg.type() === "warning") pageLog.push(`${msg.type()}: ${msg.text()}`);
+      });
+      page.on("pageerror", (error) => pageLog.push(`pageerror: ${error.message}`));
       await page.goto(`file://${path.join(harness, "index.html")}`, {
         waitUntil: "load",
       });
-      await page.waitForSelector("[data-cell]");
+      // "attached", not the default "visible": a component that renders to a
+      // zero-size box (a designer's Textarea or Menu whose root hugs nothing the
+      // emitter could draw) must reach the accounting as named deltas, not time
+      // the harness out. Visibility is a fact the diff reads, not a precondition.
+      try {
+        await page.waitForSelector("[data-cell]", { state: "attached", timeout: 30_000 });
+      } catch (error) {
+        throw new Error(
+          `canvas-to-code: the generated ${build.componentName} never mounted a cell — ${
+            pageLog.length > 0 ? `the page reported:\n${pageLog.slice(0, 8).join("\n")}` : "the page reported no console error"
+          }\n(${error instanceof Error ? error.message.split("\n")[0] : String(error)})`,
+        );
+      }
       const rendered = (await page.evaluate(
         `(() => {
   const ROOT_PROPS = ${JSON.stringify(READ_ROOT_PROPS)};

@@ -29,6 +29,7 @@ import {
   type SceneNodeSnapshot,
   type SceneNodeType,
 } from "./scene-readback.js";
+import { VariableBindingSchema } from "./figma-ir.js";
 
 export const CANVAS_FACTS_VERSION = "canvas-facts-v1";
 
@@ -98,7 +99,10 @@ export interface CanvasBindingNormalization {
     | "paint-alias-duplicate-dropped"
     | "uniform-stroke-side-weights-collapsed"
     | "nonuniform-stroke-side-weights-receipted"
-    | "partial-stroke-side-weights-receipted";
+    | "partial-stroke-side-weights-receipted"
+    | "binding-field-unspelled-receipted"
+    | "text-style-binding-spelled"
+    | "vector-asset-unresolved-named";
   detail: string;
 }
 
@@ -124,6 +128,53 @@ export function assignStructuralOwnershipKeys(
   return clone;
 }
 
+/** The reader's own map from Figma-API binding spellings to IR fields. It lives
+ *  here as a COPY because `scene-readback.ts` is byte-frozen (the v7/v8 signed
+ *  input-field lineages pin its hash), and the reader passes unknown fields
+ *  through verbatim — so a spelling added HERE reaches the IR intact. The two
+ *  text-style spellings the reader never learned (`fontStyle`, `fontFamily`)
+ *  are the first designer-file additions. */
+const IR_FIELD_FOR_SCENE_BINDING: Record<string, string> = {
+  paddingTop: "layout.padding.top",
+  paddingRight: "layout.padding.right",
+  paddingBottom: "layout.padding.bottom",
+  paddingLeft: "layout.padding.left",
+  itemSpacing: "layout.itemSpacing",
+  minWidth: "layout.minWidth",
+  minHeight: "layout.minHeight",
+  topLeftRadius: "cornerRadius.topLeft",
+  topRightRadius: "cornerRadius.topRight",
+  bottomRightRadius: "cornerRadius.bottomRight",
+  bottomLeftRadius: "cornerRadius.bottomLeft",
+  strokeWeight: "strokes.0.weight",
+  fontSize: "type.fontSize",
+  "fontSize.0": "type.fontSize",
+  lineHeight: "type.lineHeight.value",
+  "lineHeight.0": "type.lineHeight.value",
+  letterSpacing: "type.letterSpacing.value",
+  "letterSpacing.0": "type.letterSpacing.value",
+  width: "width.value",
+  height: "height.value",
+};
+/** Spellings the frozen reader does not map: rewritten here BEFORE projection so
+ *  the reader's verbatim pass-through delivers the IR field. */
+const TEXT_STYLE_BINDING_SPELLINGS: Record<string, string> = {
+  fontStyle: "type.fontStyle",
+  "fontStyle.0": "type.fontStyle",
+  fontFamily: "type.fontFamily",
+  "fontFamily.0": "type.fontFamily",
+};
+const irFieldForSceneBinding = (field: string): string =>
+  IR_FIELD_FOR_SCENE_BINDING[field] ??
+  TEXT_STYLE_BINDING_SPELLINGS[field] ??
+  (field.match(/^fills\.(\d+)$/)
+    ? `fills.${field.split(".")[1]}.color`
+    : field.match(/^strokes\.(\d+)$/)
+      ? `strokes.${field.split(".")[1]}.paint.color`
+      : field.match(/^effects\.(\d+)$/)
+        ? `effects.${field.split(".")[1]}.color`
+        : field);
+
 const STROKE_SIDE_FIELDS = [
   "strokeTopWeight",
   "strokeRightWeight",
@@ -146,6 +197,38 @@ export function normalizeSceneBindings(scene: SceneNodeSnapshot): {
   const normalizations: CanvasBindingNormalization[] = [];
   const visit = (node: SceneNodeSnapshot): void => {
     let bindings = node.boundVariables ?? [];
+    // (0) Text-style spellings the frozen reader never mapped: rewrite the field
+    // to its IR name here, so the reader's pass-through lands it. Named.
+    const respelled = bindings.filter((binding) => binding.field in TEXT_STYLE_BINDING_SPELLINGS);
+    if (respelled.length > 0) {
+      bindings = bindings.map((binding) =>
+        binding.field in TEXT_STYLE_BINDING_SPELLINGS
+          ? { ...binding, field: TEXT_STYLE_BINDING_SPELLINGS[binding.field]! }
+          : binding,
+      );
+      normalizations.push({
+        ownershipKey: node.ownershipKey,
+        kind: "text-style-binding-spelled",
+        detail: `${respelled
+          .map((b) => `${b.field}→${TEXT_STYLE_BINDING_SPELLINGS[b.field]} (${b.variableName})`)
+          .join(", ")} — the reader passes the IR spelling through`,
+      });
+    }
+    // (0b) A designer's own VECTOR carries no asset reference; the frozen reader
+    // would hand the schema an empty string. Name it instead — the bridge refuses
+    // vector nodes by name downstream, and nothing is invented.
+    if (node.type === "VECTOR" && !node.instancePayload?.assets?.length) {
+      node.instancePayload = {
+        ...(node.instancePayload ?? {}),
+        text: node.instancePayload?.text ?? [],
+        assets: ["unresolved-vector"],
+      };
+      normalizations.push({
+        ownershipKey: node.ownershipKey,
+        kind: "vector-asset-unresolved-named",
+        detail: `VECTOR "${node.name}" has no asset reference in the observe — named unresolved-vector; refused by name at the bridge`,
+      });
+    }
     const withoutAliases = bindings.filter((binding) => {
       const alias = binding.field.match(/^fills\.(\d+)$/)
         ? `fills.${binding.field.split(".")[1]}.color`
@@ -236,6 +319,28 @@ export function normalizeSceneBindings(scene: SceneNodeSnapshot): {
         detail: `partial stroke side weight(s) ${leftoverSides
           .map((binding) => `${binding.field}=${binding.variableName}`)
           .join(", ")} — no IR spelling; RECEIPT, nothing invented`,
+      });
+    }
+    // (4) A binding whose field the IR vocabulary cannot spell (a designer's
+    // file binds things this reader never met) is RECEIPTED by name and
+    // dropped from the projection. It must never reach the schema as a throw:
+    // a stack trace is a silent loss with extra steps.
+    const unspelled = bindings.filter(
+      (binding) =>
+        !VariableBindingSchema.safeParse({
+          field: irFieldForSceneBinding(binding.field),
+          type: binding.resolvedType,
+          variable: binding.variableName,
+        }).success,
+    );
+    if (unspelled.length > 0) {
+      bindings = bindings.filter((binding) => !unspelled.includes(binding));
+      normalizations.push({
+        ownershipKey: node.ownershipKey,
+        kind: "binding-field-unspelled-receipted",
+        detail: `binding(s) the IR cannot spell: ${unspelled
+          .map((binding) => `${binding.field}=${binding.variableName} (${binding.resolvedType})`)
+          .join(", ")} — RECEIPT, nothing invented`,
       });
     }
     node.boundVariables = bindings;

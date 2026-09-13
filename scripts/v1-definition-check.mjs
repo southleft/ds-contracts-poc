@@ -421,6 +421,7 @@ export function loadRepositoryContext(root) {
     'docs/24-what-works.md',
     'docs/32-recipe-ir-pivot.md',
     'parity/receipts/live-figma-variant-drift.md',
+    'parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md',
     'CONTRIBUTING.md',
   ]) {
     const absolute = path.join(root, relative);

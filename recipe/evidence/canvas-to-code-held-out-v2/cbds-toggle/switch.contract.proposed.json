@@ -1,0 +1,137 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.toggle",
+  "name": "Toggle",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "alignment",
+      "type": {
+        "enum": [
+          "left",
+          "right"
+        ]
+      },
+      "default": "left",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "alignment",
+          "values": {
+            "left": "left",
+            "right": "right"
+          }
+        },
+        "code": {
+          "prop": "alignment"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "layoutByProp": {
+        "prop": "alignment",
+        "map": {
+          "right": {
+            "direction": "row-reverse"
+          }
+        }
+      },
+      "parts": {
+        "toggleIcon": {
+          "component": {
+            "id": "ds.switch-on-false-size-large-state-default",
+            "props": {
+              "size": "{size}",
+              "state": "default",
+              "switchOn": "false"
+            }
+          }
+        },
+        "toggleLabel": {
+          "text": "Toggle label",
+          "tokens": {
+            "color": "{text.primary}",
+            "font-size": "{imported.toggle.toggle-label.font-size.{size}}",
+            "font-weight": "{imported.toggle.toggle-label.font-weight}",
+            "line-height": "{imported.toggle.toggle-label.line-height.{size}}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{text.disabled}"
+            }
+          }
+        }
+      },
+      "tokens": {
+        "gap": "{spacing.100}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Toggle",
+        "export": "Toggle"
+      }
+    }
+  }
+}

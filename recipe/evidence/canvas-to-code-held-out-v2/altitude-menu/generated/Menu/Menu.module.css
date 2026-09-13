@@ -1,0 +1,27 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/menu.contract.json (ds.menu v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  background-color: var(--theme-color-background-neutral-default);
+}
+
+.variant-simple {
+  background-color: var(--theme-color-background-transparent-default);
+}
+
+.alCMenuList {
+  display: flex;
+  flex-direction: column;
+}

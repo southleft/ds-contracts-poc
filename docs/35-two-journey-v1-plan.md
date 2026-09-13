@@ -29,8 +29,10 @@
 > - **The canvas→code exam's substrate was our own mint.** The held-out Card
 >   (page `33:2`, Card `33:5093`) was minted by THIS repository's code→canvas
 >   engine eight days before it was used as an exam subject, so that exam is a
->   round trip on our own output. A canvas→code measurement on artwork drawn
->   by someone who never used this tool is **still owed** (parked as **P1**).
+>   round trip on our own output. **Closed 2026-09-13:** the exam ran on the
+>   Altitude Design System and CBDS UI Kit files (designer-drawn, never written
+>   by this repo), 24 sets, 5 accounting-clean, 19 refused by name — see
+>   [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](../parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
 >
 > **F1 IS NOW MINTED AND SCORED (2026-09-05).** The owner opened Scratch, and
 > the compiled envelope was minted onto `byMp6lt0Ij9b2QbkDGFwBh` and scored
@@ -221,8 +223,15 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
 - **Canvas→code exam (3f)** runs in the same window. **Its substrate was our
   own mint** — the held-out Card (page `33:2`, Card `33:5093`) came from this
   repository's code→canvas engine 8 days earlier, so it measures a round trip
-  on our own output, not a stranger's artwork. An exam on a file drawn by
-  someone who never used this tool is still owed (**P1**).
+  on our own output, not a stranger's artwork. **2026-09-13:** the exam on a
+  stranger's artwork ran — Altitude Design System and CBDS UI Kit, 24
+  designer-drawn sets, observed read-only through the Desktop Bridge:
+  **5 accounting-clean (Altitude Badge, Menu, Tabs; CBDS Checkbox, Badge),
+  19 refused by name, nothing silent**. Gate
+  `recipe:canvas-to-code:held-out:v2:check`; receipt
+  [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](../parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
+  P1 is closed. The eight refusals (State axes, free-form frames, `<textarea>`
+  children, vector glyphs, sets no longer on canvas) are the next climbs.
 - `overallSuccess` flips only when **both** exams pass and the owner has
   signed the docs/26 amendment. One journey alone does not make v1.
 
