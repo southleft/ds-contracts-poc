@@ -30,8 +30,8 @@
 >   (page `33:2`, Card `33:5093`) was minted by THIS repository's code→canvas
 >   engine eight days before it was used as an exam subject, so that exam is a
 >   round trip on our own output. **Closed 2026-09-13:** the exam ran on the
->   Altitude Design System file (designer-drawn, never written by this repo),
->   11 sets, 3 accounting-clean, 8 refused by name — see
+>   Altitude Design System and CBDS UI Kit files (designer-drawn, never written
+>   by this repo), 24 sets, 5 accounting-clean, 19 refused by name — see
 >   [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](../parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
 >
 > **F1 IS NOW MINTED AND SCORED (2026-09-05).** The owner opened Scratch, and
@@ -224,9 +224,10 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   own mint** — the held-out Card (page `33:2`, Card `33:5093`) came from this
   repository's code→canvas engine 8 days earlier, so it measures a round trip
   on our own output, not a stranger's artwork. **2026-09-13:** the exam on a
-  stranger's artwork ran — Altitude Design System, 11 designer-drawn sets,
-  observed read-only through the Desktop Bridge: **3 accounting-clean (Badge,
-  Menu, Tabs), 8 refused by name, nothing silent**. Gate
+  stranger's artwork ran — Altitude Design System and CBDS UI Kit, 24
+  designer-drawn sets, observed read-only through the Desktop Bridge:
+  **5 accounting-clean (Altitude Badge, Menu, Tabs; CBDS Checkbox, Badge),
+  19 refused by name, nothing silent**. Gate
   `recipe:canvas-to-code:held-out:v2:check`; receipt
   [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](../parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
   P1 is closed. The eight refusals (State axes, free-form frames, `<textarea>`

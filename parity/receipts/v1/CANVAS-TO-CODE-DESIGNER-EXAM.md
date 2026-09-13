@@ -1,4 +1,4 @@
-# The canvas→code exam on a designer's file — Altitude, 2026-09-13
+# The canvas→code exam on a designer's file — Altitude and CBDS, 2026-09-13
 
 **What this closes.** OWNER-PARKED **P1**: "a canvas→code exam on artwork nobody
 here drew." Until today the only canvas→code held-out exam ran on a Card that
@@ -81,6 +81,41 @@ by 73 bytes; the receiver now records such a subject as a per-subject observe
 refusal with both scenes kept, instead of failing the batch. Tabs settled on
 re-observe at the next file version.
 
+## The second file: CBDS UI Kit Demo (all thirteen archetypes, hand-drawn)
+
+`WofZT8xaxXuc2Q6Je9S4XE`, TJ Pitre's workshop kit; no reference to it exists
+anywhere in this repository. Observed the same way, file version
+`2398771318774433853`. (Figma re-stamped the file's `version` during the
+session while `lastModified` moved from `2026-09-10T14:45:03Z` to `:04Z` — a
+date three days before the observe. The receiver now records that as a
+re-stamp and keeps the evidence; a `lastModified` inside the observe window
+would still refuse.)
+
+| set | variants | outcome | where it stopped, verbatim |
+| --- | ---: | --- | --- |
+| Checkbox | 20 | **accounting clean** | zero silent, zero unexplained, 20 cells |
+| Badge | 72 | **accounting clean** | zero silent, zero unexplained, 72 cells |
+| Toggle | 16 | refused · render | `variant axis state has no contract prop — cannot mount alignment=left, size=large, state=default` |
+| Radio button | 20 | refused · render | `20 UNEXPLAINED render delta(s): … text-align (label) expected left got center — NO proposal note explains this delta` |
+| Link | 72 | refused · bridge | `node type RECTANGLE at root/children/2/children/3 is outside this bridge's vocabulary — refuse rather than approximate` |
+| Text Area | 14 | refused · bridge | same class: bare RECTANGLE |
+| Chip | 80 | refused · bridge | same class: bare RECTANGLE |
+| Dialog | 4 | refused · bridge | same class: bare RECTANGLE |
+| Menu | 3 | refused · bridge | same class: bare RECTANGLE |
+| Tab-Line | 6 | refused · emit | `generate refused: ds.tab-line: prop "TabItemVerticalRight4Items" code binding "TabItemVerticalRight4Items" is not a legal camelCase identifier` |
+| Alert | 30 | refused · propose | `Set "Alert" could not be proposed: Source matrix has 30 rows; Cartesian definitions require 40` |
+| Avatar | 36 | refused · bridge | `root/children/0 ("round=true, size=xsmall(24x24), type=image") has layoutMode NONE — a variant root without auto-layout` |
+| Tooltip | — | refused · observe | `UNSUPPORTED-SCENE-NODE-TYPE:POLYGON@695:310` — the pointer is a polygon; refused inside the sandbox on both runs |
+
+Two of thirteen are accounting clean. Across both files: **5 of 24 designer-drawn
+sets are accounting clean, 19 refused by name, 0 silent.** Four refusal classes
+appear only here: a bare RECTANGLE drawn directly in a variant (five sets), a
+variant matrix that is not Cartesian (Alert: 30 of 40 cells drawn), a designer's
+variant name the emitter cannot turn into an identifier (`TabItemVerticalRight4Items`),
+and a label alignment the render diff cannot explain (Radio: the generated
+label centres where the canvas left-aligns — an **unexplained** delta, which is
+the one outcome this exam treats as its own defect to close, not the file's).
+
 ## What is still owed, in order of what it would unlock
 
 - **State axes.** Every Altitude set carries `State=Default|Hover|Focus|Disabled`.
@@ -97,6 +132,17 @@ re-observe at the next file version.
   turn the checkbox's check into a fact.
 - **Non-VARIANT component properties** (Badge's `Text` TEXT prop) are named
   from the observe meta, not carried.
+- **Bare shapes.** A RECTANGLE drawn directly inside a variant (CBDS Link,
+  Text Area, Chip, Dialog, Menu) refuses at the bridge. Lowering a rectangle to
+  a frame with a fill and a stroke would unlock five CBDS sets at once.
+- **Non-Cartesian variant matrices** (CBDS Alert: 30 of 40 cells) refuse at
+  propose; a sparse-matrix proposal with the absent cells named would unlock it.
+- **Designer variant names as identifiers** (`TabItemVerticalRight4Items`): the
+  emitter's identifier rule refuses digits in a segment; a lossless rename with
+  the original kept as metadata would unlock Tab-Line.
+- **Label alignment** (CBDS Radio): the emitted label centres where the canvas
+  left-aligns and no note explains it — an unexplained delta, this exam's own
+  defect class.
 
 ## What this does not claim
 
@@ -104,6 +150,5 @@ re-observe at the next file version.
 - It is not a fidelity score: the v2 gate measures accounting, not pixels. The
   optional two-sided comparison against Altitude's real `al-badge` render
   (already captured in this repo) is designed and not yet wired.
-- The CBDS UI Kit Demo (`WofZT8xaxXuc2Q6Je9S4XE`, all thirteen archetypes,
-  vanilla) is the second file in the manifest's scope and has not been observed
-  yet; its rows come next.
+- The two files were observed at different file versions each (Altitude
+  `…461242`/`…206865`, CBDS `…433853`); every receipt pins its own.

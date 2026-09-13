@@ -1,0 +1,119 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-v2.ts --write --subject cbds-badge
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --bg-accent-default: #292d96;
+  --bg-accent-weak: #e0e1ff;
+  --bg-brand-default: #0e61ba;
+  --bg-brand-weak: #d6f1ff;
+  --bg-danger-default: #b51833;
+  --bg-danger-weak: #ffdae3;
+  --bg-neutral-default: #3a475b;
+  --bg-neutral-weak: #dfe3eb;
+  --bg-positive-default: #038142;
+  --bg-positive-weak: #c4fde1;
+  --bg-surface-primary: #fcfeff;
+  --bg-warning-default: #b67300;
+  --bg-warning-weak: #fff6cc;
+  --border-accent-default: #292d96;
+  --border-brand-default: #0e61ba;
+  --border-danger-default: #b51833;
+  --border-neutral-default: #a2aebf;
+  --border-positive-default: #038142;
+  --border-warning-default: #b67300;
+  --component-size-small: 24px;
+  --component-size-xsmall: 16px;
+  --corner-radius-050: 4px;
+  --corner-radius-1200: 96px;
+  --imported-badge-label-color-accent-fill: #fcfeff;
+  --imported-badge-label-color-accent-outline: #292d96;
+  --imported-badge-label-color-accent-tonal: #050a0f;
+  --imported-badge-label-color-brand-fill: #fcfeff;
+  --imported-badge-label-color-brand-outline: #0e61ba;
+  --imported-badge-label-color-brand-tonal: #050a0f;
+  --imported-badge-label-color-danger-fill: #fcfeff;
+  --imported-badge-label-color-danger-outline: #b51833;
+  --imported-badge-label-color-danger-tonal: #050a0f;
+  --imported-badge-label-color-neutral-fill: #fcfeff;
+  --imported-badge-label-color-neutral-outline: #3a475b;
+  --imported-badge-label-color-neutral-tonal: #050a0f;
+  --imported-badge-label-color-success-fill: #fcfeff;
+  --imported-badge-label-color-success-outline: #038142;
+  --imported-badge-label-color-success-tonal: #050a0f;
+  --imported-badge-label-color-warning-fill: #fcfeff;
+  --imported-badge-label-color-warning-outline: #b67300;
+  --imported-badge-label-color-warning-tonal: #050a0f;
+  --imported-badge-label-font-size-large: 14px;
+  --imported-badge-label-font-size-small: 12px;
+  --imported-badge-label-font-weight: 600;
+  --imported-badge-label-line-height: 16px;
+  --imported-badge-root-background-color-accent-fill: #292d96;
+  --imported-badge-root-background-color-accent-outline: #fcfeff;
+  --imported-badge-root-background-color-accent-tonal: #e0e1ff;
+  --imported-badge-root-background-color-brand-fill: #0e61ba;
+  --imported-badge-root-background-color-brand-outline: #fcfeff;
+  --imported-badge-root-background-color-brand-tonal: #d6f1ff;
+  --imported-badge-root-background-color-danger-fill: #b51833;
+  --imported-badge-root-background-color-danger-outline: #fcfeff;
+  --imported-badge-root-background-color-danger-tonal: #ffdae3;
+  --imported-badge-root-background-color-neutral-fill: #3a475b;
+  --imported-badge-root-background-color-neutral-outline: #fcfeff;
+  --imported-badge-root-background-color-neutral-tonal: #dfe3eb;
+  --imported-badge-root-background-color-success-fill: #038142;
+  --imported-badge-root-background-color-success-outline: #fcfeff;
+  --imported-badge-root-background-color-success-tonal: #c4fde1;
+  --imported-badge-root-background-color-warning-fill: #b67300;
+  --imported-badge-root-background-color-warning-outline: #fcfeff;
+  --imported-badge-root-background-color-warning-tonal: #fff6cc;
+  --imported-badge-root-border-color-accent-fill: #00000000;
+  --imported-badge-root-border-color-accent-outline: #292d96;
+  --imported-badge-root-border-color-accent-tonal: #00000000;
+  --imported-badge-root-border-color-brand-fill: #00000000;
+  --imported-badge-root-border-color-brand-outline: #0e61ba;
+  --imported-badge-root-border-color-brand-tonal: #00000000;
+  --imported-badge-root-border-color-danger-fill: #00000000;
+  --imported-badge-root-border-color-danger-outline: #b51833;
+  --imported-badge-root-border-color-danger-tonal: #00000000;
+  --imported-badge-root-border-color-neutral-fill: #00000000;
+  --imported-badge-root-border-color-neutral-outline: #a2aebf;
+  --imported-badge-root-border-color-neutral-tonal: #00000000;
+  --imported-badge-root-border-color-success-fill: #00000000;
+  --imported-badge-root-border-color-success-outline: #038142;
+  --imported-badge-root-border-color-success-tonal: #00000000;
+  --imported-badge-root-border-color-warning-fill: #00000000;
+  --imported-badge-root-border-color-warning-outline: #b67300;
+  --imported-badge-root-border-color-warning-tonal: #00000000;
+  --imported-stub-size-small-root-height-small: 16px;
+  --imported-stub-size-small-root-height-xsmall: 12px;
+  --imported-stub-size-small-root-width-small: 16px;
+  --imported-stub-size-small-root-width-xsmall: 12px;
+  --label-font-medium: 14px;
+  --label-font-small: 12px;
+  --label-line-height-medium: 16px;
+  --label-line-height-small: 16px;
+  --spacing-025: 2px;
+  --spacing-100: 8px;
+  --spacing-150: 12px;
+  --text-accent-default: #292d96;
+  --text-brand-default: #0e61ba;
+  --text-danger-default: #b51833;
+  --text-inverse-primary: #fcfeff;
+  --text-neutral-default: #3a475b;
+  --text-positive-default: #038142;
+  --text-primary: #050a0f;
+  --text-warning-default: #b67300;
+}

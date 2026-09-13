@@ -122,17 +122,16 @@ it plainly:
 > by a designer who never used this tool is still owed**, and nothing here should
 > be read as having passed one."
 
-**That exam has now run (2026-09-13)** on the Altitude Design System file —
-eleven sets drawn by its design team, never written by this repo, observed
-read-only: **3 accounting-clean (Badge, Menu, Tabs), 8 refused by name, nothing
-silent.** The refusals are verbatim in
+**That exam has now run (2026-09-13)** on two files this repo never wrote — the
+Altitude Design System and the CBDS UI Kit, twenty-four sets, observed
+read-only: **5 accounting-clean, 19 refused by name, nothing silent.** The refusals are verbatim in
 [`CANVAS-TO-CODE-DESIGNER-EXAM.md`](CANVAS-TO-CODE-DESIGNER-EXAM.md): a State
 axis the mount step cannot drive (Chip, Link), frames without auto-layout
 (Checkbox, Radio, Toggle), children inside `<textarea>` (Textarea), and two sets
 no longer on canvas (Avatar, Alert). Gate:
 
 ```bash
-npm run recipe:canvas-to-code:held-out:v2:check   # 11 subjects, 7 tests
+npm run recipe:canvas-to-code:held-out:v2:check   # 24 subjects, 7 tests
 ```
 
 ---

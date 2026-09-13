@@ -104,12 +104,13 @@ export function buildBootstrap(subject: HeldOutSubject, port: number, run: numbe
   const code = `const __u=${JSON.stringify(`${base}/program?subject=${subject.slug}`)};
 const __src=await (await fetch(__u)).text();
 if(__src.length!==${program.length})throw new Error("PROGRAM-LENGTH:"+__src.length);
-const __result=await (new Function("figma","return (async()=>{"+__src+"\\n})()"))(figma);
-const __body=JSON.stringify({slug:${JSON.stringify(subject.slug)},run:${run},result:__result});
+let __result=null,__error=null;
+try{__result=await (new Function("figma","return (async()=>{"+__src+"\\n})()"))(figma);}catch(e){__error=String(e&&e.message?e.message:e);}
+const __body=JSON.stringify({slug:${JSON.stringify(subject.slug)},run:${run},result:__result,error:__error});
 const __res=await fetch(${JSON.stringify(`${base}/observe`)},{method:"POST",headers:{"content-type":"text/plain"},body:__body});
 const __ack=await __res.json();
 if(!__res.ok)throw new Error("RECEIVER:"+JSON.stringify(__ack));
-return {posted:true,slug:${JSON.stringify(subject.slug)},run:${run},writes:__result.writes,variants:__result.variants,bytes:__body.length,sceneSha256:__ack.sceneSha256};`;
+return {posted:true,slug:${JSON.stringify(subject.slug)},run:${run},error:__error,writes:__result?__result.writes:null,variants:__result?__result.variants:null,bytes:__body.length,sceneSha256:__ack.sceneSha256||null};`;
   assertReadOnlyProgram(code);
   return code;
 }
@@ -160,12 +161,14 @@ async function main(): Promise<void> {
 
   const programs = new Map(subjects.map((s) => [s.slug, buildHeldOutObserveProgram(s)]));
   const runs = new Map<string, ObserveRun[]>(subjects.map((s) => [s.slug, []]));
+  const errors = new Map<string, Array<{ run: number; receivedAt: string; message: string }>>(subjects.map((s) => [s.slug, []]));
   const cors = {
     "access-control-allow-origin": "*",
     "access-control-allow-methods": "GET, POST, OPTIONS",
     "access-control-allow-headers": "content-type",
   };
-  const done = () => [...runs.values()].every((list) => list.length >= runsWanted);
+  const done = () =>
+    subjects.every((s) => runs.get(s.slug)!.length + errors.get(s.slug)!.length >= runsWanted);
 
   const server = createServer((req, res) => {
     const url = new URL(req.url ?? "/", `http://localhost:${port}`);
@@ -195,10 +198,21 @@ async function main(): Promise<void> {
         const payload = JSON.parse(Buffer.concat(chunks).toString("utf8")) as {
           slug: string;
           run: number;
-          result: ObserveResult;
+          result: ObserveResult | null;
+          error?: string | null;
         };
         const subject = subjects.find((s) => s.slug === payload.slug);
         if (!subject) throw new Error("UNKNOWN-SUBJECT:" + payload.slug);
+        if (payload.error || !payload.result) {
+          // The program refused inside the sandbox (an unsupported node type, a
+          // missing set): that is an observe-stage RESULT. Record it and move on.
+          errors.get(subject.slug)!.push({ run: payload.run, receivedAt: new Date().toISOString(), message: payload.error ?? "no result" });
+          process.stderr.write(`${subject.slug} run ${payload.run}: program refused — ${payload.error}\n`);
+          res.writeHead(200, { ...cors, "content-type": "application/json" });
+          res.end(JSON.stringify({ ok: true, refused: true }));
+          if (done()) server.close();
+          return;
+        }
         if (payload.result.writes !== 0) throw new Error("OBSERVE-REPORTED-WRITES");
         if (payload.result.fileKey !== subject.fileKey) throw new Error("WRONG-FILE");
         if (payload.result.setId !== subject.setNodeId) throw new Error("WRONG-SET");
@@ -239,20 +253,52 @@ async function main(): Promise<void> {
   await new Promise<void>((resolve) => server.on("close", resolve));
 
   const pinsB = new Map<string, RestPin>();
+  const restamped = new Map<string, boolean>();
   for (const fileKey of fileKeys) pinsB.set(fileKey, await restPin(fileKey));
   for (const fileKey of fileKeys) {
     const a = pinsA.get(fileKey)!;
     const b = pinsB.get(fileKey)!;
-    if (a.version !== b.version || a.lastModified !== b.lastModified)
+    if (a.version === b.version && a.lastModified === b.lastModified) continue;
+    // Figma re-stamps a file's `version` while it is open in Desktop even when
+    // nobody edits it: measured 2026-09-13 on CBDS, version moved while
+    // lastModified moved from 2026-09-10T14:45:03Z to :04Z — a date three days
+    // earlier than the observe. That is provenance noise, not a designer's
+    // edit. A REAL edit puts lastModified inside the observe window. The two
+    // identical observes remain the determinism proof either way.
+    const modifiedAt = Date.parse(b.lastModified);
+    const windowStart = Date.parse(a.fetchedAt) - 60_000;
+    if (modifiedAt >= windowStart)
       throw new Error(
-        `FILE-MOVED-DURING-OBSERVE ${fileKey}: ${a.version}/${a.lastModified} -> ${b.version}/${b.lastModified}; nothing written`,
+        `FILE-MOVED-DURING-OBSERVE ${fileKey}: ${a.version}/${a.lastModified} -> ${b.version}/${b.lastModified} (edited during the observe); nothing written`,
       );
+    restamped.set(fileKey, true);
+    process.stderr.write(
+      `note ${fileKey}: version re-stamped ${a.version} -> ${b.version} (lastModified ${a.lastModified} -> ${b.lastModified}, before the observe window) — recorded, evidence kept\n`,
+    );
   }
   let refusals = 0;
   for (const subject of subjects) {
     const list = runs.get(subject.slug)!;
-    const hashes = new Set(list.map((r) => r.sceneSha256));
+    const errored = errors.get(subject.slug)!;
     const dir = path.resolve(REPO, HELD_OUT_V2_ROOT, subject.slug);
+    if (errored.length > 0) {
+      const messages = new Set(errored.map((e) => e.message));
+      const code = /^([A-Z][A-Z0-9-]+):/.exec(errored[0]!.message)?.[1] ?? "OBSERVE-PROGRAM-REFUSED";
+      const refusal = {
+        stage: "observe",
+        code,
+        message: `the read-only observe program refused inside the sandbox on ${errored.length} of ${runsWanted} run(s): ${[...messages].join(" | ")}`,
+        runs: errored,
+        fileVersion: pinsA.get(subject.fileKey)!.version,
+      };
+      writeFileSync(path.join(dir, "observe-refusal.json"), `${canonicalJson(refusal)}\n`);
+      for (const stale of ["observe.json.gz", "observe-meta.json"])
+        if (existsSync(path.join(dir, stale))) rmSync(path.join(dir, stale));
+      process.stderr.write(`${subject.slug}: ${code} — recorded as an observe refusal\n`);
+      refusals += 1;
+      continue;
+    }
+    const hashes = new Set(list.map((r) => r.sceneSha256));
     if (hashes.size !== 1) {
       // A subject whose two observes disagree is a RESULT, not a batch failure:
       // keep both scenes for the diff, write no observe, and let the exam record
@@ -292,7 +338,11 @@ async function main(): Promise<void> {
       propertyDefinitions: first.result.propertyDefinitions,
       provenance: subject.provenance,
       publishedSetNodeId: subject.publishedSetNodeId ?? null,
-      rest: { before: pinA, after: pinsB.get(subject.fileKey)! },
+      rest: {
+        before: pinA,
+        after: pinsB.get(subject.fileKey)!,
+        versionRestampedDuringObserve: restamped.get(subject.fileKey) === true,
+      },
       fileVersion: pinA.version,
       fileLastModified: pinA.lastModified,
       observeSha256: sha256(gz),
@@ -311,7 +361,7 @@ async function main(): Promise<void> {
       `wrote ${path.relative(REPO, dir)}/observe.json.gz (${gz.byteLength} bytes, sha ${meta.observeSha256.slice(0, 16)}…) + observe-meta.json\n`,
     );
   }
-  process.stderr.write(`done: ${subjects.length - refusals} observed, ${refusals} refused (nondeterministic)\n`);
+  process.stderr.write(`done: ${subjects.length - refusals} observed, ${refusals} refused at observe (program refusal or nondeterminism)\n`);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
