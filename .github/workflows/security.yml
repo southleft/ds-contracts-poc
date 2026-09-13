@@ -56,5 +56,5 @@ jobs:
       - name: scan changed commit history for secrets
         uses: trufflesecurity/trufflehog@363923b901c911a9164f50b6c423f47c15372b1c # v3.97.4
         with:
-          version: "3.96.0"
+          version: "3.97.4"
           extra_args: --results=verified,unknown
