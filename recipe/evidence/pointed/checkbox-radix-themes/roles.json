@@ -1,0 +1,19 @@
+{
+  "boxPseudo": "::before",
+  "box": "root",
+  "glyph": "tag:svg",
+  "glyphPath": "tag:path",
+  "hit": "root",
+  "dash": {
+    "part": "tag:path"
+  },
+  "opacityOn": "root",
+  "combos": {
+    "unchecked.enabled": "surface.2.unchecked.enabled",
+    "unchecked.disabled": "surface.2.unchecked.disabled",
+    "checked.enabled": "surface.2.checked.enabled",
+    "checked.disabled": "surface.2.checked.disabled",
+    "indeterminate.enabled": "surface.2.indeterminate.enabled",
+    "indeterminate.disabled": "surface.2.indeterminate.disabled"
+  }
+}

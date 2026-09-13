@@ -20,6 +20,7 @@ import path from "node:path";
 
 import { Ledger, type LedgerPart } from "./ledger.js";
 import type { CheckboxRoles } from "./schema-checkbox.js";
+import { IDENTITY_COMBOS, type CheckboxComboMap } from "./schema-checkbox.js";
 import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 import type { AvatarRoles } from "./schema-avatar.js";
 import type { TooltipRoles } from "./schema-tooltip.js";
@@ -35,8 +36,33 @@ import type { DialogRoles } from "./schema-dialog.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
+  /** Combo key per state plane, derived from the ledger's declared base cell. */
+  combos: CheckboxComboMap;
   evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
   unresolved: string[];
+}
+
+/**
+ * The checkbox@1 combo map from the ledger's declared base cell: swap only the
+ * value token (unchecked → checked / indeterminate) and the enabled token
+ * (enabled → disabled), so a library with more axes (Radix: variant × size ×
+ * checked) resolves to ITS default cell instead of a key that does not exist.
+ * A missing plane (no indeterminate cell) maps to the identity key and the
+ * proposer's existing "no capture" handling names it.
+ */
+export function draftCheckboxCombos(ledger: Ledger): CheckboxComboMap {
+  const base = ledger.baseKey?.replace(/__default$/, "");
+  const keys = new Set(ledger.keys().filter((k) => k.endsWith("__default")).map((k) => k.slice(0, -"__default".length)));
+  const VAL = /(^|\.)(unchecked|false|off)(\.|$)/, EN = /(^|\.)(enabled|no-isDisabled)(\.|$)/;
+  const out = { ...IDENTITY_COMBOS } as CheckboxComboMap;
+  if (!base || !VAL.test(base) || !EN.test(base)) return out;
+  const swap = (k: string, from: RegExp, to: string): string => k.replace(from, (_m, pre: string, _v: string, post: string) => `${pre}${to}${post}`);
+  for (const value of ["unchecked", "checked", "indeterminate"] as const)
+    for (const en of ["enabled", "disabled"] as const) {
+      const candidate = swap(swap(base, VAL, value), EN, en);
+      if (keys.has(candidate)) out[`${value}.${en}` as keyof CheckboxComboMap] = candidate;
+    }
+  return out;
 }
 
 const sel = (p: LedgerPart): string => (p.idxPath === "" ? "root" : `idx:${p.idxPath}`);
@@ -48,10 +74,11 @@ const isSquare = (p: LedgerPart): boolean => {
 const parentPath = (idx: string): string | null => (idx === "" ? null : idx.includes(".") ? idx.slice(0, idx.lastIndexOf(".")) : "");
 
 export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
-  const base = ledger.capture("unchecked.enabled__default");
-  const checked = ledger.capture("checked.enabled__default");
-  const indeterminate = (() => { try { return ledger.capture("indeterminate.enabled__default"); } catch { return null; } })();
-  const disabled = (() => { try { return ledger.capture("unchecked.disabled__default"); } catch { return null; } })();
+  const combos = draftCheckboxCombos(ledger);
+  const base = ledger.capture(`${combos["unchecked.enabled"]}__default`);
+  const checked = ledger.capture(`${combos["checked.enabled"]}__default`);
+  const indeterminate = (() => { try { return ledger.capture(`${combos["indeterminate.enabled"]}__default`); } catch { return null; } })();
+  const disabled = (() => { try { return ledger.capture(`${combos["unchecked.disabled"]}__default`); } catch { return null; } })();
   const byPath = (cap: { parts: LedgerPart[] }) => new Map(cap.parts.map((p) => [p.idxPath, p] as const));
   const baseBy = byPath(base), checkedBy = byPath(checked);
   const evidence: RoleDraft["evidence"] = {};
@@ -65,10 +92,31 @@ export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
     if (!c || !isSquare(p) || p.tag === "svg" || p.tag === "path" || p.tag === "input") return false;
     return p.style["background-color"] !== c.style["background-color"] || p.style["border-top-color"] !== c.style["border-top-color"];
   });
-  const box = boxCandidates.sort((a, b) => num(a.style.width) - num(b.style.width))[0] ?? null;
+  let box = boxCandidates.sort((a, b) => num(a.style.width) - num(b.style.width))[0] ?? null;
+  let boxPseudo: string | undefined;
+  // A square painted by a pseudo-element (Radix: .rt-BaseCheckboxRoot::before
+  // carries the fill and the inset ring; the host button is transparent). Same
+  // test on the pseudo's computed style, including a ring drawn as box-shadow.
+  if (!box) {
+    for (const p of base.parts) {
+      if (p.tag === "svg" || p.tag === "path" || p.tag === "input") continue;
+      for (const ps of ["::before", "::after"]) {
+        const st = p.pseudo?.[ps], cst = checkedBy.get(p.idxPath)?.pseudo?.[ps];
+        if (!st || !cst) continue;
+        const w = num(st.width), h = num(st.height);
+        const square = w > 0 && Math.abs(w - h) <= 1;
+        const paints = st["background-color"] !== cst["background-color"] || st["border-top-color"] !== cst["border-top-color"] || (st["box-shadow"] ?? "none") !== (cst["box-shadow"] ?? "none");
+        if (square && paints) { box = p; boxPseudo = ps; break; }
+      }
+      if (box) break;
+    }
+  }
+  if (box && boxPseudo) roles.boxPseudo = boxPseudo;
   if (box) {
     roles.box = sel(box);
-    evidence.box = { selector: roles.box, why: `square ${box.style.width} ${box.tag}${box.classes.length ? "." + box.classes[0] : ""} whose paint changes unchecked → checked (bg ${base.parts.find((p) => p.idxPath === box.idxPath)!.style["background-color"]} → ${checkedBy.get(box.idxPath)!.style["background-color"]})`, confidence: boxCandidates.length === 1 ? "high" : "medium" };
+    const bst = boxPseudo ? box.pseudo[boxPseudo]! : box.style;
+    const cbst = boxPseudo ? checkedBy.get(box.idxPath)?.pseudo?.[boxPseudo] ?? bst : checkedBy.get(box.idxPath)!.style;
+    evidence.box = { selector: roles.box + (boxPseudo ?? ""), why: `square ${bst.width} ${box.tag}${box.classes.length ? "." + box.classes[0] : ""}${boxPseudo ?? ""} whose paint changes unchecked → checked (bg ${bst["background-color"]} → ${checkedBy.get(box.idxPath)!.style["background-color"]})`, confidence: boxCandidates.length === 1 ? "high" : "medium" };
   } else {
     unresolved.push("box: no square part changes paint between unchecked and checked");
     evidence.box = { selector: null, why: "no candidate", confidence: "low" };
@@ -149,7 +197,7 @@ export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
     evidence.opacityOn = { selector: roles.opacityOn!, why: dimmed ? `${dimmed.tag} opacity ${baseBy.get(dimmed.idxPath)!.style.opacity} → ${disBy.get(dimmed.idxPath)!.style.opacity} when disabled` : "nothing dims by opacity when disabled; the box carries opacity 1 (colours change instead)", confidence: dimmed ? "high" : "medium" };
   }
 
-  return { roles, evidence, unresolved };
+  return { roles, combos, evidence, unresolved };
 }
 
 

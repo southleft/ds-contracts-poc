@@ -1,0 +1,363 @@
+{
+  "archetype": "checkbox",
+  "library": "radix-themes",
+  "ledger": "extract/computed/out/radix-themes/checkbox/captured-truth.json",
+  "provenance": {
+    "package": "@radix-themes-sandbox/ui",
+    "version": "0.0.1",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "boxPseudo": "::before",
+    "box": "root",
+    "glyph": "tag:svg",
+    "glyphPath": "tag:path",
+    "hit": "root",
+    "dash": {
+      "part": "tag:path"
+    },
+    "opacityOn": "root"
+  },
+  "leaves": {
+    "wrapper.size": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root.width"
+    },
+    "box.size": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root::before.width"
+    },
+    "box.radius": {
+      "value": 3,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root::before.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root::before.border-top-width"
+    },
+    "box.padding": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root::before.padding-top"
+    },
+    "boxShadow": {
+      "value": "rgba(0, 6, 46, 0.196) 0px 0px 0px 1px inset",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root::before.box-shadow",
+      "formula": "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)"
+    },
+    "row.gap": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "dash.width": {
+      "value": 8.333,
+      "from": "set",
+      "why": "@radix-ui/themes@3.3.0 dist/esm/components/icons.js ThickDividerHorizontalIcon: viewBox 0 0 9 9, the bar path runs x 0.75→8.25 (7.5 units); the indicator svg renders 10×10 (captured-truth surface.2.indeterminate.enabled idx:0 width 10px), so the bar is 7.5/9×10 = 8.333px — the drafted dash part is the <path>, whose CSS width is 'auto' by construction"
+    },
+    "dash.height": {
+      "value": 1.667,
+      "from": "set",
+      "why": "@radix-ui/themes@3.3.0 dist/esm/components/icons.js ThickDividerHorizontalIcon: the bar path runs y 3.75→5.25 (1.5 units of a 9-unit viewBox) in a 10×10 rendered svg → 1.5/9×10 = 1.667px"
+    },
+    "dash.radius": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.indeterminate.enabled__default tag:path.border-top-left-radius"
+    },
+    "check.width": {
+      "value": 10,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.enabled__default tag:svg.width"
+    },
+    "check.height": {
+      "value": 10,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.enabled__default tag:svg.height"
+    },
+    "check.strokeWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.enabled__default tag:path.stroke",
+      "formula": "0 when the glyph paints by fill (captured stroke: none)"
+    },
+    "check.offsetX": {
+      "value": 0,
+      "from": "spelling",
+      "why": "glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel"
+    },
+    "check.offsetY": {
+      "value": 0,
+      "from": "spelling",
+      "why": "same as check.offsetX"
+    },
+    "labelFontSize": {
+      "value": 0,
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.unchecked.enabled.boxFill": {
+      "value": "#ffffffd9",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root::before.background-color"
+    },
+    "states.unchecked.enabled.boxBorder": {
+      "value": "#1c2024ff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root::before.border-top-color"
+    },
+    "states.unchecked.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.enabled__default root.opacity"
+    },
+    "states.unchecked.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.unchecked.enabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.unchecked.disabled.boxFill": {
+      "value": "#0000330f",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.disabled__default root::before.background-color"
+    },
+    "states.unchecked.disabled.boxBorder": {
+      "value": "#1c2024ff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.disabled__default root::before.border-top-color"
+    },
+    "states.unchecked.disabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.unchecked.disabled__default root.opacity"
+    },
+    "states.unchecked.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.unchecked.disabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.checked.enabled.boxFill": {
+      "value": "#3e63ddff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.enabled__default root::before.background-color"
+    },
+    "states.checked.enabled.boxBorder": {
+      "value": "#1c2024ff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.enabled__default root::before.border-top-color"
+    },
+    "states.checked.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.enabled__default root.opacity"
+    },
+    "states.checked.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.checked.enabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.checked.enabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.enabled__default tag:path.fill",
+      "formula": "the glyph fills in this colour"
+    },
+    "states.checked.disabled.boxFill": {
+      "value": "#0000330f",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.disabled__default root::before.background-color"
+    },
+    "states.checked.disabled.boxBorder": {
+      "value": "#1c2024ff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.disabled__default root::before.border-top-color"
+    },
+    "states.checked.disabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.disabled__default root.opacity"
+    },
+    "states.checked.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.checked.disabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.checked.disabled.checkFill": {
+      "value": "#00083046",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.checked.disabled__default tag:path.fill",
+      "formula": "the glyph fills in this colour"
+    },
+    "states.indeterminate.enabled.boxFill": {
+      "value": "#3e63ddff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.indeterminate.enabled__default root::before.background-color"
+    },
+    "states.indeterminate.enabled.boxBorder": {
+      "value": "#1c2024ff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.indeterminate.enabled__default root::before.border-top-color"
+    },
+    "states.indeterminate.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.indeterminate.enabled__default root.opacity"
+    },
+    "states.indeterminate.enabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.indeterminate.enabled.dashFill": {
+      "value": "#ffffffff",
+      "from": "set",
+      "why": "the icon paints fill='currentcolor' (icons.js) and the indicator's computed color is rgba(255, 255, 255, 1) on surface.2.indeterminate.enabled (captured-truth idx:0 color; the <path>'s fill channel agrees) — a <path> has no background-color, which is why the read refused"
+    },
+    "states.indeterminate.disabled.boxFill": {
+      "value": "#0000330f",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.indeterminate.disabled__default root::before.background-color"
+    },
+    "states.indeterminate.disabled.boxBorder": {
+      "value": "#1c2024ff",
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.indeterminate.disabled__default root::before.border-top-color"
+    },
+    "states.indeterminate.disabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/radix-themes/checkbox/captured-truth.json#surface.2.indeterminate.disabled__default root.opacity"
+    },
+    "states.indeterminate.disabled.label": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "states.indeterminate.disabled.dashFill": {
+      "value": "#00083046",
+      "from": "set",
+      "why": "the icon paints fill='currentcolor' (icons.js) and the indicator's computed color is rgba(0, 8, 48, 0.275) on surface.2.indeterminate.disabled (captured-truth idx:0 color; the <path>'s fill channel agrees) = #00083046"
+    },
+    "rowAlign": {
+      "value": "center",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "typography.label.family": {
+      "value": "Arial",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "spelling",
+      "why": "no label part in the mount — a bare control; the recipe compiles no label node and this leaf is the bare-cell spelling"
+    },
+    "check.path": {
+      "value": "(see glyph)",
+      "from": "set",
+      "why": "@radix-ui/themes@3.3.0 dist/esm/components/icons.js: ThickCheckIcon — <svg width=\"9\" height=\"9\" viewBox=\"0 0 9 9\" fill=\"currentcolor\"><path fillRule=\"evenodd\" clipRule=\"evenodd\" d=\"…\"/></svg>; read from the package file, not from our capture"
+    },
+    "states.unchecked.enabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    },
+    "states.unchecked.disabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    },
+    "states.indeterminate.enabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    },
+    "states.indeterminate.disabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    }
+  },
+  "receipts": [
+    {
+      "path": "dash.width",
+      "why": "ledger value unusable: not a px length: \"auto\"",
+      "evidence": "@radix-ui/themes@3.3.0 dist/esm/components/icons.js ThickDividerHorizontalIcon: viewBox 0 0 9 9, the bar path runs x 0.75→8.25 (7.5 units); the indicator svg renders 10×10 (captured-truth surface.2.indeterminate.enabled idx:0 width 10px), so the bar is 7.5/9×10 = 8.333px — the drafted dash part is the <path>, whose CSS width is 'auto' by construction",
+      "value": 8.333
+    },
+    {
+      "path": "dash.height",
+      "why": "ledger value unusable: not a px length: \"auto\"",
+      "evidence": "@radix-ui/themes@3.3.0 dist/esm/components/icons.js ThickDividerHorizontalIcon: the bar path runs y 3.75→5.25 (1.5 units of a 9-unit viewBox) in a 10×10 rendered svg → 1.5/9×10 = 1.667px",
+      "value": 1.667
+    },
+    {
+      "path": "states.indeterminate.enabled.dashFill",
+      "why": "ledger value unusable: not an rgb()/rgba()/oklch()/color(srgb) color: \"none\"",
+      "evidence": "the icon paints fill='currentcolor' (icons.js) and the indicator's computed color is rgba(255, 255, 255, 1) on surface.2.indeterminate.enabled (captured-truth idx:0 color; the <path>'s fill channel agrees) — a <path> has no background-color, which is why the read refused",
+      "value": "#ffffffff"
+    },
+    {
+      "path": "states.indeterminate.disabled.dashFill",
+      "why": "ledger value unusable: not an rgb()/rgba()/oklch()/color(srgb) color: \"none\"",
+      "evidence": "the icon paints fill='currentcolor' (icons.js) and the indicator's computed color is rgba(0, 8, 48, 0.275) on surface.2.indeterminate.disabled (captured-truth idx:0 color; the <path>'s fill channel agrees) = #00083046",
+      "value": "#00083046"
+    },
+    {
+      "path": "check.path",
+      "why": "glyph geometry is cited from the package source (--glyph), not a computed channel",
+      "evidence": "@radix-ui/themes@3.3.0 dist/esm/components/icons.js: ThickCheckIcon — <svg width=\"9\" height=\"9\" viewBox=\"0 0 9 9\" fill=\"currentcolor\"><path fillRule=\"evenodd\" clipRule=\"evenodd\" d=\"…\"/></svg>; read from the package file, not from our capture",
+      "value": "(see glyph)"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": null
+  },
+  "typography": {
+    "family": "Arial",
+    "style": "Regular",
+    "stack": "(bare cell — no label part)"
+  },
+  "glyph": {
+    "asIs": {
+      "path": "M8.53547 0.62293C8.88226 0.849446 8.97976 1.3142 8.75325 1.66099L4.5083 8.1599C4.38833 8.34356 4.19397 8.4655 3.9764 8.49358C3.75883 8.52167 3.53987 8.45309 3.3772 8.30591L0.616113 5.80777C0.308959 5.52987 0.285246 5.05559 0.563148 4.74844C0.84105 4.44128 1.31533 4.41757 1.62249 4.69547L3.73256 6.60459L7.49741 0.840706C7.72393 0.493916 8.18868 0.396414 8.53547 0.62293Z",
+      "viewBox": 9,
+      "paint": "fill",
+      "winding": "evenodd",
+      "source": "@radix-ui/themes@3.3.0 dist/esm/components/icons.js: ThickCheckIcon — <svg width=\"9\" height=\"9\" viewBox=\"0 0 9 9\" fill=\"currentcolor\"><path fillRule=\"evenodd\" clipRule=\"evenodd\" d=\"…\"/></svg>; read from the package file, not from our capture"
+    },
+    "scaled": {
+      "path": "M 9.4839 0.6921 C 9.8692 0.9438 9.9776 1.4602 9.7259 1.8456 L 5.0092 9.0666 C 4.8759 9.2707 4.66 9.4061 4.4182 9.4373 C 4.1764 9.4686 3.9332 9.3923 3.7524 9.2288 L 0.6846 6.4531 C 0.3433 6.1443 0.3169 5.6173 0.6257 5.276 C 0.9346 4.9348 1.4614 4.9084 1.8028 5.2172 L 4.1473 7.3384 L 8.3304 0.9341 C 8.5821 0.5488 9.0986 0.4404 9.4839 0.6921 Z",
+      "width": 9.6607,
+      "height": 9.0282,
+      "strokeWidth": 0
+    }
+  }
+}
