@@ -50,17 +50,21 @@ it can *say*.
 
 1. **A `fontStyle` binding crashed canvas-facts with a schema error.** The IR
    already spelled `type.fontStyle` as a STRING binding; the scene reader's map
-   from Figma's API spelling did not. Added `fontStyle`/`fontFamily` (with the
-   `.0` range suffix). And a general rule: any binding the IR cannot spell is
-   now **receipted by name** (`binding-field-unspelled-receipted`) and dropped
-   from the projection, never thrown.
+   from Figma's API spelling did not — and the reader (`scene-readback.ts`) is
+   byte-frozen by the v7/v8 signed lineages, so it cannot learn. `canvas-facts`
+   now respells `fontStyle`/`fontFamily` (with the `.0` range suffix) to the IR
+   field before projection (`text-style-binding-spelled`); the reader passes it
+   through verbatim. And a general rule: any binding the IR cannot spell is
+   **receipted by name** (`binding-field-unspelled-receipted`) and dropped from
+   the projection, never thrown.
 2. **The set's own placement refused the bridge.** A designer parks the set
    inside a prop-sheet frame, so the root is ABSOLUTE and the projection emits
    `layout.offset` + `layout.constraints` for it. Neither has a dump spelling;
    both are now receipted as sheet chrome on the root, and as the existing v1
    gap on an absolute child.
 3. **A designer's VECTOR (the check glyph) crashed the reader** with an empty
-   asset reference. It is now named `unresolved-vector`; the bridge refuses
+   asset reference. `canvas-facts` now names it `unresolved-vector` before the
+   frozen reader sees it (`vector-asset-unresolved-named`); the bridge refuses
    vector nodes by name downstream.
 4. **Nested instances were unexplained deltas.** The bridge stops at instance
    boundaries and the proposer emits child stubs, but nothing said so where the

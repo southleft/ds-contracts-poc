@@ -707,10 +707,7 @@ const sceneEffectToIr = (effect: SceneEffect): Effect => {
   };
 };
 
-/** Map a Figma-API binding spelling to the IR field it addresses. Unknown
- *  fields pass through verbatim; `canvas-facts` receipts those the IR cannot
- *  spell rather than letting the schema throw on a designer's binding. */
-export const irFieldForSceneBinding = (field: string): string =>
+const irFieldForSceneBinding = (field: string): string =>
   ({
     paddingTop: "layout.padding.top",
     paddingRight: "layout.padding.right",
@@ -730,12 +727,6 @@ export const irFieldForSceneBinding = (field: string): string =>
     "lineHeight.0": "type.lineHeight.value",
     letterSpacing: "type.letterSpacing.value",
     "letterSpacing.0": "type.letterSpacing.value",
-    // Text-style bindings the API reports as `fontStyle`/`fontFamily` (with the
-    // `.0` range suffix on a single-segment text): the IR spells both as STRING.
-    fontStyle: "type.fontStyle",
-    "fontStyle.0": "type.fontStyle",
-    fontFamily: "type.fontFamily",
-    "fontFamily.0": "type.fontFamily",
     width: "width.value",
     height: "height.value",
   })[field] ??
@@ -987,10 +978,7 @@ export function sceneToNormalizedIr(scene: SceneNodeSnapshot): IRNode {
     result = {
       kind: "vector",
       ...common,
-      // A designer's own VECTOR (a check glyph, a chevron) carries no asset
-      // reference in the observe: name the gap instead of handing the schema an
-      // empty string. The bridge refuses vector nodes by name downstream.
-      assetRef: scene.instancePayload?.assets[0] ?? "unresolved-vector",
+      assetRef: scene.instancePayload?.assets[0] ?? "",
       fills,
       width: irSizing(scene.layoutSizingHorizontal, scene.width),
       height: irSizing(scene.layoutSizingVertical, scene.height),
