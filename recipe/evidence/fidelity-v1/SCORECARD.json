@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 67,
-  "passed": 54,
+  "subjects": 71,
+  "passed": 58,
   "failed": 13,
   "fringeExcused": 0,
   "knownFailures": 13,
@@ -652,6 +652,46 @@
       "convergesAt": 250,
       "glyphMasked": 0,
       "glyphBoxes": 1
+    },
+    {
+      "label": "switch/radix-themes",
+      "status": "pass",
+      "pctAAMasked": 3.04,
+      "canvasPx": "36x21",
+      "realPx": "35x20",
+      "convergesAt": null,
+      "glyphMasked": 3.04,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "switch/radix-themes-unchecked-disabled",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "36x21",
+      "realPx": "35x20",
+      "convergesAt": null,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "switch/radix-themes-checked",
+      "status": "pass",
+      "pctAAMasked": 2.59,
+      "canvasPx": "35x21",
+      "realPx": "35x21",
+      "convergesAt": 250,
+      "glyphMasked": 2.59,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "switch/radix-themes-checked-disabled",
+      "status": "pass",
+      "pctAAMasked": 0.27,
+      "canvasPx": "35x21",
+      "realPx": "35x20",
+      "convergesAt": null,
+      "glyphMasked": 0.27,
+      "glyphBoxes": 0
     }
   ]
 }

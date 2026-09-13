@@ -25,6 +25,13 @@ export interface SwitchRoles {
   hit: string;
   /** The pill (track.*, trackFill). */
   track: string;
+  /** When the pill is painted by a pseudo-element of `track` (Radix's SwitchRoot::before). */
+  trackPseudo?: string;
+  /** Planes ("true.enabled", …) whose track is painted by a background-image
+   *  (Radix: a two-stop gradient whose position shifts), so background-color is
+   *  NOT the painted fill there: those trackFill leaves become receipts that need
+   *  a reviewed --set cited from the package. */
+  trackImagePlanes?: string[];
   /** The knob (thumb sizes, thumbFill, thumbShadow). */
   thumb: string;
   /** When the knob is painted by a pseudo-element of `thumb` (AntD's handle::before). */
@@ -130,9 +137,9 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
     R("wrapper.width", () => one("wrapper.width", "px", { combo: off, part: roles.hit, channel: "width" })),
     R("wrapper.height", () => one("wrapper.height", "px", { combo: off, part: roles.hit, channel: "height" })),
     R("wrapper.padding", () => one("wrapper.padding", "px", { combo: off, part: roles.hit, channel: "padding-left" })),
-    R("track.width", () => one("track.width", "px", { combo: off, part: roles.track, channel: "width" })),
-    R("track.height", () => one("track.height", "px", { combo: off, part: roles.track, channel: "height" })),
-    R("track.radius", () => one("track.radius", "px", { combo: off, part: roles.track, channel: "border-top-left-radius" })),
+    R("track.width", () => one("track.width", "px", { combo: off, part: roles.track, pseudo: roles.trackPseudo, channel: "width" })),
+    R("track.height", () => one("track.height", "px", { combo: off, part: roles.track, pseudo: roles.trackPseudo, channel: "height" })),
+    R("track.radius", () => one("track.radius", "px", { combo: off, part: roles.track, pseudo: roles.trackPseudo, channel: "border-top-left-radius" })),
     // The thumb's inset from the track edge. A track that positions its thumb
     // by inset (AntD: handle left 2px) carries it there, not as CSS padding.
     R("track.padding", () =>
@@ -145,7 +152,7 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
             // like padding does. padding-left + border-left-width.
             path: "track.padding",
             kind: "px",
-            reads: { p: { combo: off, part: roles.track, channel: "padding-left" }, b: { combo: off, part: roles.track, channel: "border-left-width" }, w: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } },
+            reads: { p: { combo: off, part: roles.track, pseudo: roles.trackPseudo, channel: "padding-left" }, b: { combo: off, part: roles.track, pseudo: roles.trackPseudo, channel: "border-left-width" }, w: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } },
             formula: "track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2",
             combine: (raw) => px(raw.p) + px(raw.b) + (px(raw.w) * (1 - scaleOf(raw.s))) / 2,
           } as FactMapping),
@@ -176,15 +183,18 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
     const combo = c[fix];
     if (roles.thumbInsideTrack) {
       rows.push(
-        R(`states.${fix}.trackFill`, () => one(`states.${fix}.trackFill`, "color", { combo, part: roles.track, channel: "background-color" })),
-        R(`states.${fix}.trackOpacity`, () => one(`states.${fix}.trackOpacity`, "number", { combo, part: roles.track, channel: "opacity" }, { formula: "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is" })),
+        R(`states.${fix}.trackFill`, () =>
+          roles.trackImagePlanes?.includes(fix)
+            ? receipt(`states.${fix}.trackFill`, `the ${fix} track is painted by a background-image gradient, not background-color`, "the ledger's background-color on this plane is the base tint; the painted fill is the gradient's revealed stop — cite it from the package's stylesheet with --set")
+            : one(`states.${fix}.trackFill`, "color", { combo, part: roles.track, pseudo: roles.trackPseudo, channel: "background-color" })),
+        R(`states.${fix}.trackOpacity`, () => one(`states.${fix}.trackOpacity`, "number", { combo, part: roles.track, pseudo: roles.trackPseudo, channel: "opacity" }, { formula: "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is" })),
       );
     } else {
       rows.push(
         R(`states.${fix}.trackFill`, () => ({
           path: `states.${fix}.trackFill`,
           kind: "color",
-          reads: { c: { combo, part: roles.track, channel: "background-color" }, o: { combo, part: roles.track, channel: "opacity" } },
+          reads: { c: { combo, part: roles.track, pseudo: roles.trackPseudo, channel: "background-color" }, o: { combo, part: roles.track, pseudo: roles.trackPseudo, channel: "opacity" } },
           formula: "the thumb is a sibling of the track, so the track's CSS opacity is baked into its fill (the thumb stays opaque)",
           combine: inkTimesOpacity,
         })),
@@ -201,7 +211,7 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
     receipt("rowAlign", "flex align-items:center on the row — recipe spelling", "reviewed center"),
     R("thumbShadow", () => ({ path: "thumbShadow", kind: "string", reads: { v: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "box-shadow" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } }, formula: "the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)", combine: (raw) => scaleShadow(raw.v, scaleOf(raw.s)) })),
     R("hitClips", () => one("hitClips", "string", { combo: off, part: roles.hit, channel: "overflow-x" }, { formula: "overflow hidden on the hit → clips", combine: (raw) => String(raw.v === "hidden" || raw.v === "clip") })),
-    R("trackClips", () => one("trackClips", "string", { combo: off, part: roles.track, channel: "overflow-x" }, { formula: "overflow hidden on the track → clips", combine: (raw) => String(raw.v === "hidden" || raw.v === "clip") })),
+    R("trackClips", () => one("trackClips", "string", { combo: off, part: roles.track, pseudo: roles.trackPseudo, channel: "overflow-x" }, { formula: "overflow hidden on the track → clips", combine: (raw) => String(raw.v === "hidden" || raw.v === "clip") })),
     R("typography.label.family", () => (roles.label ? one("typography.label.family", "string", { combo: off, part: roles.label, channel: "font-family" }, { combine: firstFam }) : receipt("typography.label.family", NO_LABEL, "reviewed"))),
     R("typography.label.style", () => (roles.label ? one("typography.label.style", "string", { combo: off, part: roles.label, channel: "font-weight" }, { combine: (raw) => styleForWeight(num(raw.v)) }) : receipt("typography.label.style", NO_LABEL, "reviewed"))),
   );

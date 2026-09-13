@@ -1,8 +1,15 @@
 {
   "roles": {
+    "track": "root",
+    "trackPseudo": "::before",
+    "trackImagePlanes": [
+      "false.enabled",
+      "true.enabled"
+    ],
     "thumb": "idx:0",
-    "thumbInsideTrack": false,
-    "travelOn": "idx:0"
+    "thumbInsideTrack": true,
+    "travelOn": "idx:0",
+    "hit": "root"
   },
   "combos": {
     "false.enabled": "surface.2.unchecked.enabled",
@@ -11,9 +18,19 @@
     "true.disabled": "surface.2.checked.disabled"
   },
   "evidence": {
+    "track": {
+      "selector": "root::before",
+      "why": "pill 35px×20px r=9999px button.rt-SwitchRoot::before paint rgba(0, 0, 51, 0.06) → rgba(0, 0, 51, 0.06)",
+      "confidence": "high"
+    },
+    "trackImagePlanes": {
+      "selector": null,
+      "why": "track painted by background-image on false.enabled, true.enabled (linear-gradient(to right, rgba(62, 99, 221, 1) 40%, rgba(0, 0, 0, 0) 6…) — those trackFill leaves become receipts; give --set with the package's own value as evidence",
+      "confidence": "high"
+    },
     "thumb": {
       "selector": "idx:0",
-      "why": "round 18px span.rt-SwitchThumb bg rgba(255, 255, 255, 1) — a SIBLING of the track (track opacity baked into its fill)",
+      "why": "round 18px span.rt-SwitchThumb bg rgba(255, 255, 255, 1) — INSIDE the track (opacity carried on the track)",
       "confidence": "high"
     },
     "travelOn": {
@@ -21,13 +38,16 @@
       "why": "span.rt-SwitchThumb transform none → matrix(1, 0, 0, 1, 15, 0)",
       "confidence": "high"
     },
+    "hit": {
+      "selector": "root",
+      "why": "the track is its own hit area",
+      "confidence": "medium"
+    },
     "label": {
       "selector": null,
       "why": "no part carries text — a bare control; label leaves become receipts",
       "confidence": "medium"
     }
   },
-  "unresolved": [
-    "track: no pill-shaped part"
-  ]
+  "unresolved": []
 }
