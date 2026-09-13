@@ -1872,7 +1872,7 @@
       "contractId": "ds.typeahead-item"
     }
   ],
-  "extractedAt": 1787471572663,
+  "extractedAt": 1789324147283,
   "extractedBy": "parity/snapshot-rest.ts — Figma REST (read-only). Set identity, property definitions, nested instances and the contractId stamp are carried; variant fingerprints, slot content and variable collections are plugin-only and NOT carried (the differ reports them NOT EXTRACTED).",
   "fileLastModified": "2026-08-20T15:19:13Z",
   "fileVersion": "2389829256994904711"
