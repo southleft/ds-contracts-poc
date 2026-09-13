@@ -1,0 +1,122 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.menu",
+  "name": "Menu",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "simple"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "simple": "Simple"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "items",
+      "type": {
+        "arrayOf": {
+          "text": "text"
+        }
+      },
+      "bindings": {
+        "figma": {
+          "kind": "NONE"
+        },
+        "code": {
+          "prop": "items"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "alCMenuList": {
+          "layout": {
+            "direction": "column"
+          },
+          "parts": {
+            "alMenuItem": {
+              "component": {
+                "id": "ds.state-default-selected-no-role-item",
+                "props": {
+                  "role": "item",
+                  "selected": "no",
+                  "state": "default"
+                }
+              },
+              "repeat": {
+                "itemsProp": "items",
+                "sample": [
+                  {
+                    "text": "Menu item"
+                  },
+                  {
+                    "text": "Menu item"
+                  },
+                  {
+                    "text": "Menu item"
+                  },
+                  {
+                    "text": "Menu item"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "tokensByProp": {
+        "prop": "variant",
+        "map": {
+          "simple": {
+            "background-color": "{theme.color.background.transparent-default}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{theme.color.background.neutral-default}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Menu",
+        "export": "Menu"
+      }
+    }
+  }
+}

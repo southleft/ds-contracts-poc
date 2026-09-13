@@ -1,0 +1,80 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  gap: var(--spacing-100);
+}
+
+.state-error {
+  gap: var(--spacing-025);
+}
+
+.state-error {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contentTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-100);
+}
+
+.alignment-right .contentTop {
+  flex-direction: row-reverse;
+}
+
+.checkboxLabel {
+  color: var(--text-primary);
+  font-weight: var(--imported-checkbox-content-top-checkbox-label-font-weight);
+}
+
+.size-large .checkboxLabel {
+  font-size: var(--imported-checkbox-content-top-checkbox-label-font-size-large);
+}
+
+.size-small .checkboxLabel {
+  font-size: var(--imported-checkbox-content-top-checkbox-label-font-size-small);
+}
+
+.size-large .checkboxLabel {
+  line-height: var(--imported-checkbox-content-top-checkbox-label-line-height-large);
+}
+
+.size-small .checkboxLabel {
+  line-height: var(--imported-checkbox-content-top-checkbox-label-line-height-small);
+}
+
+.state-disabled .checkboxLabel {
+  color: var(--text-disabled);
+}
+
+.errorText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--spacing-050);
+}
+
+.errorText2 {
+  color: var(--text-danger-default);
+  font-size: var(--body-font-small);
+  line-height: var(--body-line-height-small);
+  font-weight: var(--imported-checkbox-error-text-error-text-font-weight);
+}

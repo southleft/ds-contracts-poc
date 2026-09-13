@@ -1,0 +1,32 @@
+{
+  "imported": {
+    "stub-state-default-active-yes": {
+      "root": {
+        "height": {
+          "$value": "38px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-state-default-active-no": {
+      "root": {
+        "height": {
+          "$value": "38px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-state-default": {
+      "root": {
+        "width": {
+          "$value": "439px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "136px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

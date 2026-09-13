@@ -1,0 +1,169 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.textarea",
+  "name": "Textarea",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "textarea"
+  },
+  "props": [
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "hover",
+          "focus",
+          "active",
+          "error",
+          "disabled"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "hover": "Hover",
+            "focus": "Focus",
+            "active": "Active",
+            "error": "Error",
+            "disabled": "Disabled"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "alCTextareaLabel": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "gap": "{theme.space.xxs}"
+          },
+          "parts": {
+            "Label": {
+              "declared": {
+                "font-family": "Public Sans"
+              },
+              "text": "Label",
+              "tokens": {
+                "color": "{theme.color.content.neutral-default}",
+                "font-size": "{typography.font-size.16}",
+                "line-height": "{typography.line-height.24}",
+                "font-weight": "{imported.textarea.al-c-textarea-label-label.font-weight}"
+              }
+            }
+          }
+        },
+        "alCTextareaContainer": {
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          },
+          "parts": {
+            "alCTextareaInput": {
+              "tokensByProp": {
+                "prop": "state",
+                "map": {
+                  "hover": {
+                    "border-color": "{theme.color.border.neutral-strong}"
+                  },
+                  "focus": {
+                    "border-color": "{theme.color.border.primary-default}"
+                  },
+                  "active": {
+                    "border-color": "{theme.color.border.primary-default}"
+                  },
+                  "error": {
+                    "border-color": "{theme.color.border.danger-default}"
+                  },
+                  "disabled": {
+                    "border-color": "{theme.color.content.neutral-default}"
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{theme.color.background.neutral-default}",
+                "border-color": "{theme.color.border.neutral-default}",
+                "opacity": "{imported.textarea.al-c-textarea-container-al-c-textarea-input.opacity.{state}}"
+              }
+            }
+          }
+        },
+        "alCTextareaFooter": {
+          "layout": {
+            "direction": "row"
+          },
+          "parts": {
+            "alCTextareaFieldNotes": {
+              "layout": {
+                "direction": "column"
+              },
+              "tokens": {
+                "gap": "{theme.space.xxs}"
+              },
+              "parts": {
+                "fieldNote": {
+                  "component": {
+                    "id": "ds.state-default",
+                    "props": {
+                      "state": {
+                        "prop": "state",
+                        "map": {
+                          "default": "default",
+                          "hover": "default",
+                          "focus": "default",
+                          "active": "default",
+                          "error": "error",
+                          "disabled": "disabled"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "tokens": {
+        "padding-inline": "{theme.space.xxs}",
+        "padding-block": "{theme.space.xxs}",
+        "gap": "{theme.space.xxs}",
+        "width": "{imported.textarea.root.width.{state}}",
+        "height": "{imported.textarea.root.height.{state}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/Textarea",
+        "export": "Textarea"
+      }
+    }
+  }
+}

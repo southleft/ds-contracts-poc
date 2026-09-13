@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "color": {
+      "background": {
+        "neutral-default": {
+          "$value": "#1d1d1a",
+          "$type": "color"
+        }
+      },
+      "border": {
+        "danger-default": {
+          "$value": "#ff6d76",
+          "$type": "color"
+        },
+        "neutral-default": {
+          "$value": "#3c3c35",
+          "$type": "color"
+        },
+        "neutral-strong": {
+          "$value": "#7c7a70",
+          "$type": "color"
+        },
+        "primary-default": {
+          "$value": "#8ea6ff",
+          "$type": "color"
+        }
+      },
+      "content": {
+        "neutral-default": {
+          "$value": "#f1f0ea",
+          "$type": "color"
+        }
+      }
+    },
+    "space": {
+      "xxs": {
+        "$value": "4px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "typography": {
+    "font-size": {
+      "16": {
+        "$value": "16px",
+        "$type": "dimension"
+      }
+    },
+    "line-height": {
+      "24": {
+        "$value": "24px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 9,
+      "skipped": [
+        {
+          "name": "theme/border/radius/@",
+          "reason": "name contains characters outside the token-ref grammar ([a-z0-9.-]) — not registrable; rename the variable or map it manually"
+        },
+        {
+          "name": "theme/border/width/@",
+          "reason": "name contains characters outside the token-ref grammar ([a-z0-9.-]) — not registrable; rename the variable or map it manually"
+        },
+        {
+          "name": "theme/space/@",
+          "reason": "name contains characters outside the token-ref grammar ([a-z0-9.-]) — not registrable; rename the variable or map it manually"
+        }
+      ]
+    }
+  }
+}

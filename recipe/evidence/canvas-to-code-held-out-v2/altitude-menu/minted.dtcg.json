@@ -1,0 +1,16 @@
+{
+  "imported": {
+    "stub-state-default-selected-no-role-item": {
+      "root": {
+        "width": {
+          "$value": "101px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "36px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

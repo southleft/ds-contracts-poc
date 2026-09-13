@@ -1,0 +1,211 @@
+{
+  "bg": {
+    "accent": {
+      "default": {
+        "$value": "#292d96",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#e0e1ff",
+        "$type": "color"
+      }
+    },
+    "brand": {
+      "default": {
+        "$value": "#0e61ba",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#d6f1ff",
+        "$type": "color"
+      }
+    },
+    "danger": {
+      "default": {
+        "$value": "#b51833",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#ffdae3",
+        "$type": "color"
+      }
+    },
+    "neutral": {
+      "default": {
+        "$value": "#3a475b",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#dfe3eb",
+        "$type": "color"
+      }
+    },
+    "positive": {
+      "default": {
+        "$value": "#038142",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#c4fde1",
+        "$type": "color"
+      }
+    },
+    "surface-primary": {
+      "$value": "#fcfeff",
+      "$type": "color"
+    },
+    "warning": {
+      "default": {
+        "$value": "#b67300",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#fff6cc",
+        "$type": "color"
+      }
+    }
+  },
+  "border": {
+    "accent": {
+      "default": {
+        "$value": "#292d96",
+        "$type": "color"
+      }
+    },
+    "brand": {
+      "default": {
+        "$value": "#0e61ba",
+        "$type": "color"
+      }
+    },
+    "danger": {
+      "default": {
+        "$value": "#b51833",
+        "$type": "color"
+      }
+    },
+    "neutral": {
+      "default": {
+        "$value": "#a2aebf",
+        "$type": "color"
+      }
+    },
+    "positive": {
+      "default": {
+        "$value": "#038142",
+        "$type": "color"
+      }
+    },
+    "warning": {
+      "default": {
+        "$value": "#b67300",
+        "$type": "color"
+      }
+    }
+  },
+  "component-size": {
+    "small": {
+      "$value": "24px",
+      "$type": "dimension"
+    },
+    "xsmall": {
+      "$value": "16px",
+      "$type": "dimension"
+    }
+  },
+  "corner-radius": {
+    "1200": {
+      "$value": "96px",
+      "$type": "dimension"
+    },
+    "050": {
+      "$value": "4px",
+      "$type": "dimension"
+    }
+  },
+  "label": {
+    "font-medium": {
+      "$value": "14px",
+      "$type": "dimension"
+    },
+    "font-small": {
+      "$value": "12px",
+      "$type": "dimension"
+    },
+    "line-height-medium": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "line-height-small": {
+      "$value": "16px",
+      "$type": "dimension"
+    }
+  },
+  "spacing": {
+    "100": {
+      "$value": "8px",
+      "$type": "dimension"
+    },
+    "150": {
+      "$value": "12px",
+      "$type": "dimension"
+    },
+    "025": {
+      "$value": "2px",
+      "$type": "dimension"
+    }
+  },
+  "text": {
+    "accent": {
+      "default": {
+        "$value": "#292d96",
+        "$type": "color"
+      }
+    },
+    "brand": {
+      "default": {
+        "$value": "#0e61ba",
+        "$type": "color"
+      }
+    },
+    "danger": {
+      "default": {
+        "$value": "#b51833",
+        "$type": "color"
+      }
+    },
+    "inverse-primary": {
+      "$value": "#fcfeff",
+      "$type": "color"
+    },
+    "neutral": {
+      "default": {
+        "$value": "#3a475b",
+        "$type": "color"
+      }
+    },
+    "positive": {
+      "default": {
+        "$value": "#038142",
+        "$type": "color"
+      }
+    },
+    "primary": {
+      "$value": "#050a0f",
+      "$type": "color"
+    },
+    "warning": {
+      "default": {
+        "$value": "#b67300",
+        "$type": "color"
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 38,
+      "skipped": []
+    }
+  }
+}

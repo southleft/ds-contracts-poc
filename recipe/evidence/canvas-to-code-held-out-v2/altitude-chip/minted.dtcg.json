@@ -1,0 +1,42 @@
+{
+  "imported": {
+    "chip": {
+      "root": {
+        "border-color": {
+          "bare": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "primary": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "tertiary": {
+            "$value": "#3c3c35",
+            "$type": "color"
+          },
+          "secondary": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "neutral": {
+            "$value": "#00000000",
+            "$type": "color"
+          }
+        }
+      }
+    },
+    "stub-icon": {
+      "root": {
+        "width": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}
