@@ -283,6 +283,17 @@ export function proposeCalendarInstanceFromLedger(
 
   const gridRowGap = tryRaw(ledger, "cls:rdp-weeks", "row-gap");
   const captionMargin = tryPx(ledger, "cls:rdp-month_grid", "margin-top");
+  const captionFs = tryRaw(ledger, "cls:rdp-caption_label", "font-size");
+  // The weekday header row's own vertical padding (th padding: 0.5rem 0).
+  const weekdayPadTop = tryPx(ledger, "cls:rdp-weekday", "padding-top");
+  const weekdayPadBottom = tryPx(ledger, "cls:rdp-weekday", "padding-bottom");
+  const weekdayPad = weekdayPadTop !== null && weekdayPadTop === weekdayPadBottom ? weekdayPadTop : null;
+  // Header structure: .rdp-nav is absolutely positioned at the trailing edge
+  // and the caption label reads from the leading edge.
+  const navPosition = tryRaw(ledger, "cls:rdp-nav", "position");
+  const navRight = tryRaw(ledger, "cls:rdp-nav", "right");
+  const captionAlign = tryRaw(ledger, "cls:rdp-caption_label", "text-align");
+  const navTrailing = navPosition === "absolute" && navRight === "0px" && captionAlign === "start";
 
   const weekRows = cap.parts.filter((p) => p.tag === "tr" && p.classes.includes("rdp-week"));
   const dayTds = cap.parts.filter((p) => p.tag === "td" && p.classes.includes("rdp-day"));
@@ -313,6 +324,40 @@ export function proposeCalendarInstanceFromLedger(
   const hiddenOutsideCount = weeks
     .flatMap((w) => w.days)
     .filter((d) => d.hidden && d.state === "outside").length;
+
+  gaps.push({
+    id: "weekday-row-padding",
+    status: "closed" as const,
+    closedBy:
+      "tokens.weekdayPadding added, optional and meaning no-padding when absent. The weekday row now carries the th's measured 8px top/bottom, so the header row is 31px tall as rendered instead of hugging its 13.33px glyphs — the whole vertical half of the F1 16px ink-box gap.",
+    schemaPath: "tokens.weekdayPadding",
+    ledgerValue: weekdayPadTop,
+    reason:
+      "rdp-weekday th pads 8px top and bottom; calendar@1 had no leaf for a weekday-row padding and compiled the row hugging its glyphs, 16px short of the render.",
+    evidence: `${F1_CALENDAR_LEDGER}#${F1_CALENDAR_COMBO} cls:rdp-weekday.padding-top`,
+  });
+  gaps.push({
+    id: "caption-fontsize-not-day",
+    status: "closed" as const,
+    closedBy:
+      "tokens.captionFontSize added, optional and meaning same-as-dayCell.fontSize when absent (the weekdayFontSize pattern). The caption now carries its measured 18px while the day buttons keep 16px.",
+    schemaPath: "tokens.captionFontSize",
+    ledgerValue: captionFs,
+    reason:
+      "rdp-caption_label is font-size: large (18px); calendar@1 set the caption at dayCell.fontSize (16px), so the caption ink was 3px shorter and 12px narrower than the render — the last 2px of the F1 ink-box gap on both axes.",
+    evidence: `${F1_CALENDAR_LEDGER}#${F1_CALENDAR_COMBO} cls:rdp-caption_label.font-size`,
+  });
+  gaps.push({
+    id: "nav-placement-trailing",
+    status: "closed" as const,
+    closedBy:
+      "header.navPlacement added, optional, values split (grammar default) | trailing. Read as trailing when .rdp-nav is position:absolute right:0px and the caption label is text-align:start; the header then compiles caption-first with both nav buttons at the trailing edge, and the caption aligns to the leading edge — the horizontal half of the F1 ink-box gap.",
+    schemaPath: "header.navPlacement",
+    ledgerValue: navPosition === null ? null : `${navPosition} right:${navRight ?? "?"} caption ${captionAlign ?? "?"}`,
+    reason:
+      "react-day-picker draws the caption at the leading edge and both nav buttons at the trailing edge; calendar@1 only knew previous ‹ caption › next with a centred caption, so the caption ink started 14px in and the next chevron sat 7px short of the render's.",
+    evidence: `${F1_CALENDAR_LEDGER}#${F1_CALENDAR_COMBO} cls:rdp-nav.position, cls:rdp-nav.right, cls:rdp-caption_label.text-align`,
+  });
 
   push("root.width", rootW, "root", "width", "ledger root.width @ label.1__default");
   push("root.height", rootH, "root", "height", "ledger root.height @ label.1__default");
@@ -490,6 +535,22 @@ export function proposeCalendarInstanceFromLedger(
       "ledger cls:rdp-month_grid.margin-top",
     );
   }
+  push(
+    "weekdayPadding",
+    weekdayPad,
+    "cls:rdp-weekday",
+    "padding-top",
+    "ledger cls:rdp-weekday.padding-top (equals padding-bottom; the th pads the header row)",
+  );
+  if (navTrailing) {
+    push(
+      "header.navPlacement",
+      "trailing",
+      "cls:rdp-nav",
+      "position",
+      "ledger cls:rdp-nav.position=absolute + right=0px, cls:rdp-caption_label.text-align=start — both nav buttons at the trailing edge, caption at the leading edge",
+    );
+  }
 
   const captionFf = tryRaw(ledger, "cls:rdp-caption_label", "font-family");
   const captionFw = tryRaw(ledger, "cls:rdp-caption_label", "font-weight");
@@ -576,6 +637,17 @@ export function proposeCalendarInstanceFromLedger(
         "cls:rdp-weekday",
         "font-size",
         "ledger weekday font-size — calendar@1 has one dayCell.fontSize",
+      ),
+    );
+  }
+  if (captionFs) {
+    proposed.push(
+      leaf(
+        "typography.caption.fontSize",
+        captionFs,
+        "cls:rdp-caption_label",
+        "font-size",
+        "ledger caption font-size (font-size: large) — carried as tokens.captionFontSize",
       ),
     );
   }
@@ -851,6 +923,7 @@ export function proposeCalendarInstanceFromLedger(
       selectedDayLabel: selectedBtn?.text[0] ?? "",
       todayDayLabel: todayBtn?.text[0] ?? "",
     },
+    ...(navTrailing ? { header: { navPlacement: "trailing" as const } } : {}),
     tokens: {
       dayCell: {
         size: numTok(cellW ?? 0),
@@ -866,6 +939,8 @@ export function proposeCalendarInstanceFromLedger(
             : numTok(px(btnRRaw ?? "0px")),
       },
       weekdayFontSize: weekdayFs ? numTok(px(weekdayFs)) : undefined,
+      captionFontSize: captionFs ? numTok(px(captionFs)) : undefined,
+      weekdayPadding: weekdayPad !== null ? numTok(weekdayPad) : undefined,
       gridGap: numTok(gridRowGap === "normal" ? 0 : px(gridRowGap ?? "0px")),
       captionGap: numTok(captionMargin ?? 0),
       rootPadding: numTok(rootPad ?? 0),

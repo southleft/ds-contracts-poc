@@ -42,7 +42,9 @@ measured on artwork this project did not itself draw.
 Desktop Bridge plugin, and the rest was mechanical. F1 was minted onto
 `byMp6lt0Ij9b2QbkDGFwBh` and scored against react-day-picker's own Chromium
 render: **pctAAMasked 3.735% against a 5% bar — pass**, with the ink-box
-difference (280x247 vs 296x265) named rather than hidden. See
+difference (280x247 vs 296x265) named rather than hidden; re-minted
+2026-09-13 at **3.048%** (294x263 vs 296x265) once the 16px was measured to
+three missing leaves and closed to 2px. See
 [`F1-COMPILE-ROUND.md`](F1-COMPILE-ROUND.md).
 
 Two things I recorded here while it was blocked were **wrong**, and I am

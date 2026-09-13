@@ -158,6 +158,18 @@
       "formula": "ledger cls:rdp-month_grid.margin-top"
     },
     {
+      "path": "weekdayPadding",
+      "value": 8,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.padding-top",
+      "formula": "ledger cls:rdp-weekday.padding-top (equals padding-bottom; the th pads the header row)"
+    },
+    {
+      "path": "header.navPlacement",
+      "value": "trailing",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-nav.position",
+      "formula": "ledger cls:rdp-nav.position=absolute + right=0px, cls:rdp-caption_label.text-align=start — both nav buttons at the trailing edge, caption at the leading edge"
+    },
+    {
       "path": "typography.caption.family",
       "value": "Times",
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-caption_label.font-family",
@@ -210,6 +222,12 @@
       "value": "13.3333px",
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-size",
       "formula": "ledger weekday font-size — calendar@1 has one dayCell.fontSize"
+    },
+    {
+      "path": "typography.caption.fontSize",
+      "value": "18px",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-caption_label.font-size",
+      "formula": "ledger caption font-size (font-size: large) — carried as tokens.captionFontSize"
     }
   ],
   "proposeError": null

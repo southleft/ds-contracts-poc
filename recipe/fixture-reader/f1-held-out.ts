@@ -137,6 +137,20 @@ function compileAttempt(propose: MechanicalCalendarPropose): F1RecipeCompile {
   };
 }
 
+/** The committed live score, read (not transcribed) from score/scorecard.json. */
+function liveScoreFromScorecard(): string {
+  const file = path.join(EVIDENCE, "score", "scorecard.json");
+  if (!existsSync(file)) return "not-scored — no score/scorecard.json";
+  const card = JSON.parse(readFileSync(file, "utf8")) as {
+    recordedAt?: string;
+    status: string;
+    metrics: { pctAAMasked: number; canvasPx: string; realPx: string };
+    thresholdSweep: Array<{ agree: boolean }>;
+  };
+  const pct = Math.round(card.metrics.pctAAMasked * 1000) / 1000;
+  return `${card.recordedAt ?? "2026-09-05"} pctAAMasked ${pct}% (bar 5%) ${card.status}; ink ${card.metrics.canvasPx} vs ${card.metrics.realPx}; threshold sweep agrees: ${String(card.thresholdSweep.some((r) => r.agree))}`;
+}
+
 export function buildF1HeldOutEvidence(): {
   overallSuccess: false;
   f1Status: F1Status;
@@ -197,19 +211,16 @@ export function buildF1HeldOutEvidence(): {
         referenceRenderCommitted:
           "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
         /**
-         * MINTED LIVE AND SCORED, 2026-09-05. Scratch only
-         * (byMp6lt0Ij9b2QbkDGFwBh), page
-         * "Recipe Pivot / Calendar / 2b63ad27-calendar-v50", calendar/set
-         * 261:1175. Scored against the committed orig-shot above:
-         * pctAAMasked 3.735% against a 5% bar -> pass. The ink boxes differ
-         * (280x247 canvas vs 296x265 reference), so the alignment is doing
-         * real work and thresholdSweep agrees at no threshold; that 16px is
-         * named, not hidden. Scorecard:
-         * recipe/evidence/f1-held-out-v1/score/scorecard.json
-         * This gate does not re-mint or re-score, so it cannot confirm any of
-         * it -- see parity/receipts/v1/F1-COMPILE-ROUND.md.
+         * MINTED LIVE AND SCORED on Scratch only (byMp6lt0Ij9b2QbkDGFwBh),
+         * first on 2026-09-05 (page "Recipe Pivot / Calendar /
+         * 2b63ad27-calendar-v50", 3.735%, ink boxes 16px apart on both axes).
+         * The line below is READ from the committed scorecard
+         * (recipe/evidence/f1-held-out-v1/score/scorecard.json, written by
+         * `tsx recipe/fixture-reader/f1-mint.ts --score`), never transcribed;
+         * `npm run recipe:f1:check` re-scores the same committed PNGs and
+         * refuses if the number moves. See parity/receipts/v1/F1-COMPILE-ROUND.md.
          */
-        liveMintScoredOutOfBand: "2026-09-05 pctAAMasked 3.735% (bar 5%)",
+        liveMintScoredOutOfBand: liveScoreFromScorecard(),
         unverifiedByThisGate: {
           determinism: "byte-identical across two full sweeps in one session",
           captures: 32,

@@ -33,8 +33,9 @@ Two directions, one contract in the middle:
 >   see [OWNER-PARKED P1](parity/receipts/v1/OWNER-PARKED.md).
 > - **The held-out code→canvas exam (F1) has two rows, both measured, neither
 >   graded.** react-day-picker's calendar was captured, compiled, minted onto
->   Figma and scored at **3.735%** against a 5% bar, with a named 16px caveat
->   ([F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md)). And on
+>   Figma and scored at **3.048%** against a 5% bar (re-minted 2026-09-13 after
+>   the named 16px ink-box gap was measured to three missing leaves and closed to
+>   2px, [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md)). And on
 >   2026-09-13 **Radix Themes** — a held-out library — went through the product's
 >   own `recipe:point` command: avatar **1.88%**, switch **3.04 / 0 / 2.59 /
 >   0.27%** across its four states; checkbox points and compiles but its mint is
@@ -608,7 +609,7 @@ npm run build && npm run parity
 npm run eval     # ④ 230 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 npm run recipe:pivot-status:check
-#    ⑥ recipe-IR status pin (F1 is measured — minted and scored at 3.735%
+#    ⑥ recipe-IR status pin (F1 is measured — minted and scored at 3.048%
 #       against a 5% bar — but overallSuccess still does NOT flip: the
 #       canvas→code exam is still owed, and the owner signs the amendment)
 #    plus, when you touch an archetype:
@@ -704,8 +705,10 @@ active climb is [docs/35](docs/35-two-journey-v1-plan.md).
 - **F1 (held-out library, code→canvas) is measured.** As of 2026-09-05
   react-day-picker — never previously pointed at by the recipe path — was
   captured, compiled with no hand-authored fixture, minted onto Scratch and
-  scored against the real package's Chromium render at **3.735%** (bar 5%).
-  It is a measurement, not a grade, and it carries a named caveat:
+  scored against the real package's Chromium render at **3.048%** (bar 5%;
+  3.735% on 2026-09-05, re-minted 2026-09-13 once the 16px ink-box gap was
+  measured to three missing leaves). It is a measurement, not a grade, and
+  the 2px residual is named:
   [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
 - **The canvas→code exam is still owed.** Its substrate was this repo's own
   mint, which makes it a round trip rather than an exam

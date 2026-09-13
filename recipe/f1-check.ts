@@ -14,8 +14,9 @@
  *   render (`extract/computed/out/day-picker/calendar/orig-shots/…`) with the
  *   same scorer the fidelity gate uses. Red if the hash of either PNG differs
  *   from the pins in scorecard.json, if the number moves, or if the bar is
- *   missed. The 16px ink-box caveat (thresholdSweep never agrees) is RECORDED,
- *   not required — it is the named Phase-4 climb, and naming is not fixing.
+ *   missed. The ink-box caveat (thresholdSweep never agrees; 16px on the first
+ *   mint, 2px after the 2026-09-13 re-mint) is RECORDED, not required — the
+ *   residual is named in F1-COMPILE-ROUND.md, and naming is not fixing.
  *
  * Row 2 — Radix Themes (@radix-ui/themes@3.3.0) through `recipe:point`, the
  *   five shipped archetypes the library has. Each is in exactly one state:
@@ -64,7 +65,7 @@ const CALENDAR = {
   scorecard: "recipe/evidence/f1-held-out-v1/score/scorecard.json",
   canvas: "recipe/evidence/f1-held-out-v1/score/canvas.png",
   reference: "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
-  mintedOn: "Scratch (byMp6lt0Ij9b2QbkDGFwBh), 2026-09-05",
+  mintedOn: "Scratch (byMp6lt0Ij9b2QbkDGFwBh): 2026-09-05, re-minted 2026-09-13 (page Recipe Pivot / Calendar / 8d74efd3-calendar-v50, calendar/set 270:2663)",
   receipt: "parity/receipts/v1/F1-COMPILE-ROUND.md",
 } as const;
 
@@ -99,7 +100,7 @@ export interface CalendarRow {
   pctAAMasked: number;
   canvasPx: string;
   realPx: string;
-  /** false today: the named 16px ink-box gap (F1-COMPILE-ROUND.md). Recorded, not required. */
+  /** false today: the named ink-box gap (16px → 2px on 2026-09-13; F1-COMPILE-ROUND.md). Recorded, not required. */
   thresholdSweepAgrees: boolean;
   receipt: string;
 }
@@ -235,7 +236,7 @@ export function buildF1Receipt(): F1Receipt {
     },
     notClaimed: [
       "No grade. overallSuccess is false until the owner signs; a green gate is a measurement, not a pass.",
-      "The calendar row's threshold sweep never agrees (16px ink-box gap on both axes) — recorded above, required by nothing here yet; that is the named next climb.",
+      "The calendar row's threshold sweep never agrees — 2px on both axes after the 2026-09-13 re-mint (16px before): the caption glyph's placement in its line box, and a text-glyph chevron where the source draws an SVG path. Recorded above, required by nothing here; named in F1-COMPILE-ROUND.md.",
       "The calendar lineage is outside the thirteen archetypes recipe:point ships; a stranger reaches the Radix rows, not this one.",
       "Radix Themes was captured once before (2026-09-04, legacy chain): not a first-pass measurement.",
       "A mint-refused row is a quoted Figma message this gate cannot re-run; it is removed, not excused, when the archetype mints.",

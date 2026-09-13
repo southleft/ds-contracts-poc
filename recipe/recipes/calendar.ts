@@ -230,6 +230,15 @@ export interface CalendarRecipeInstance {
     selectedDayLabel: string;
     todayDayLabel: string;
   };
+  /**
+   * Header structure the source measures, when it is not the grammar's
+   * default. `split` (default, Astryx): previous ‹ caption › next, caption
+   * centred. `trailing` (react-day-picker: `.rdp-nav` is `position: absolute;
+   * right: 0` and the caption label is `text-align: start`): caption at the
+   * leading edge, both nav buttons at the trailing edge. A structure, not a
+   * token — it changes child order and alignment, never a number.
+   */
+  header?: { navPlacement: "split" | "trailing" };
   tokens: {
     dayCell: {
       size: CalendarNumberParameter;
@@ -249,6 +258,23 @@ export interface CalendarRecipeInstance {
       radius: CalendarRadiusParameter;
     };
     weekdayFontSize?: CalendarNumberParameter;
+    /**
+     * Caption font size, when the source sizes the month caption differently
+     * from the day numbers (react-day-picker: `.rdp-month_caption`
+     * `font-size: large` = 18px against 16px days). Absent means "same as
+     * dayCell.fontSize", as with weekdayFontSize — not a default standing in
+     * for an unmeasured value.
+     */
+    captionFontSize?: CalendarNumberParameter;
+    /**
+     * Vertical padding of the weekday header row (react-day-picker:
+     * `.rdp-weekday { padding: 0.5rem 0 }`, 8px each side, so the row is 31px
+     * tall around a 13.33px label). Absent means the source pads no weekday
+     * row (Astryx spaces it with `captionGap`), not an unmeasured default.
+     * Before this token the row hugged its glyphs and the whole grid sat 16px
+     * high — the F1 calendar's named ink-box gap.
+     */
+    weekdayPadding?: CalendarNumberParameter;
     gridGap: CalendarNumberParameter;
     /**
      * Vertical stack gap between caption and the weekday/grid body.
@@ -442,6 +468,7 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
     selectedDayLabel: z.string().min(1),
     todayDayLabel: z.string().min(1),
   }),
+  header: z.strictObject({ navPlacement: z.enum(["split", "trailing"]) }).optional(),
   tokens: z.strictObject({
     dayCell: z.strictObject({
       size: NumberParameterSchema,
@@ -460,6 +487,8 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
      * carries; it is not a default standing in for an unmeasured value.
      */
     weekdayFontSize: NumberParameterSchema.optional(),
+    captionFontSize: NumberParameterSchema.optional(),
+    weekdayPadding: NumberParameterSchema.optional(),
     gridGap: NumberParameterSchema,
     captionGap: NumberParameterSchema,
     rootPadding: NumberParameterSchema,
@@ -924,6 +953,7 @@ const weekdayRow = (
         instance.tokens.dayCell.size,
       ),
     );
+  const pad = instance.tokens.weekdayPadding;
   return {
     kind: "frame",
     role: "calendar/weekday-row",
@@ -933,12 +963,15 @@ const weekdayRow = (
       primaryAxisAlign: "min",
       counterAxisAlign: "center",
       itemSpacing: instance.tokens.gridGap.fallback,
-      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      padding: { top: pad?.fallback ?? 0, right: 0, bottom: pad?.fallback ?? 0, left: 0 },
       width: hug,
       height: hug,
     },
     fills: [],
-    bindings: binds([bind("layout.itemSpacing", instance.tokens.gridGap)]),
+    bindings: binds([
+      bind("layout.itemSpacing", instance.tokens.gridGap),
+      ...(pad === undefined ? [] : [bind("layout.padding.top", pad), bind("layout.padding.bottom", pad)]),
+    ]),
     children,
   };
 };
@@ -990,15 +1023,16 @@ const captionInHeader = (instance: CalendarRecipeInstance): TextNode => ({
   characters: instance.content.caption,
   type: fontFacts(
     instance.tokens.typography.caption,
-    instance.tokens.dayCell.fontSize,
+    instance.tokens.captionFontSize ?? instance.tokens.dayCell.fontSize,
   ),
-  align: "center",
+  // trailing nav: the caption reads from the leading edge (text-align: start)
+  align: instance.header?.navPlacement === "trailing" ? "left" : "center",
   verticalAlign: "center",
   fills: [solid(instance.tokens.captionText.fallback)],
   width: fill,
   height: hug,
   bindings: binds([
-    bind("type.fontSize", instance.tokens.dayCell.fontSize),
+    bind("type.fontSize", instance.tokens.captionFontSize ?? instance.tokens.dayCell.fontSize),
     bind("fills.0.color", instance.tokens.captionText),
   ]),
 });
@@ -1020,11 +1054,18 @@ const headerRow = (instance: CalendarRecipeInstance): FrameNode => {
     },
     fills: [],
     bindings: binds([bind("layout.itemSpacing", headerGap)]),
-    children: [
-      navButton(instance, "calendar/nav/previous", "Previous month", "‹"),
-      captionInHeader(instance),
-      navButton(instance, "calendar/nav/next", "Next month", "›"),
-    ],
+    children:
+      instance.header?.navPlacement === "trailing"
+        ? [
+            captionInHeader(instance),
+            navButton(instance, "calendar/nav/previous", "Previous month", "‹"),
+            navButton(instance, "calendar/nav/next", "Next month", "›"),
+          ]
+        : [
+            navButton(instance, "calendar/nav/previous", "Previous month", "‹"),
+            captionInHeader(instance),
+            navButton(instance, "calendar/nav/next", "Next month", "›"),
+          ],
   };
 };
 

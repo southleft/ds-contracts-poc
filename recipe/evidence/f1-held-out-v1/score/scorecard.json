@@ -6,17 +6,17 @@
   "pctAAMaskedMax": 5
  },
  "metrics": {
-  "pctExactUnmasked": 10.195053544110149,
-  "pctAAUnmasked": 3.7353391126976034,
-  "pctAAMasked": 3.7353391126976034,
-  "canvasPx": "280x247",
+  "pctExactUnmasked": 7.276899541050484,
+  "pctAAUnmasked": 3.0481896991330952,
+  "pctAAMasked": 3.0481896991330952,
+  "canvasPx": "294x263",
   "realPx": "296x265",
-  "inkCanvasPct": 4.708057113717492,
+  "inkCanvasPct": 4.844467108618052,
   "inkRealPct": 5.688424273329934
  },
  "canvas": {
-  "path": "private/f1-canvas.png",
-  "sha256": "3f807e70726fe2f90a8bb5abe273d1c0ccf646495262b3863808e6a21cb9c840"
+  "path": "recipe/evidence/f1-held-out-v1/score/canvas.png",
+  "sha256": "0cb6567d743e7aa450c363f84b2f5d15b09c7c258f2ec745a50d62bed65fe636"
  },
  "reference": {
   "path": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
@@ -28,25 +28,25 @@
  "thresholdSweep": [
   {
    "threshold": 250,
-   "canvas": "280x247",
+   "canvas": "294x263",
    "reference": "296x265",
    "agree": false
   },
   {
    "threshold": 245,
-   "canvas": "280x247",
+   "canvas": "294x263",
    "reference": "296x265",
    "agree": false
   },
   {
    "threshold": 240,
-   "canvas": "280x247",
+   "canvas": "294x263",
    "reference": "296x265",
    "agree": false
   },
   {
    "threshold": 230,
-   "canvas": "280x247",
+   "canvas": "294x263",
    "reference": "296x265",
    "agree": false
   }
@@ -56,5 +56,6 @@
   "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
   "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
   "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
- ]
+ ],
+ "recordedAt": "2026-09-13"
 }

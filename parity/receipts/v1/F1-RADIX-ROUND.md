@@ -1,7 +1,7 @@
 # F1, second row — Radix Themes through the product's own command (2026-09-13)
 
 **Why a second row.** The first F1 subject, react-day-picker's calendar, is
-minted and scored (3.735% against a 5% bar) but calendar is not one of the
+minted and scored (3.048% against a 5% bar) but calendar is not one of the
 thirteen archetypes `recipe:point` ships, so it measures a lineage a stranger
 cannot reach. The owner decided on 2026-09-13 to keep that row **and** add a
 held-out library through the product path itself. Radix Themes
@@ -73,7 +73,8 @@ keeps these rows honest: a regression on any of them is red.
   and the calendar row together.
 - This is not a first-pass measurement (the library was captured before, on the
   legacy chain); it is the product path's first contact with it.
-- The calendar row's named 16px ink-box caveat is untouched by this round.
+- The calendar row's ink-box caveat was closed from 16px to 2px in a separate
+  round the same day (F1-COMPILE-ROUND.md § 2026-09-13), not by this one.
 - One gate now holds both rows: `npm run recipe:f1:check` (`recipe/f1-check.ts`,
   fast lane) re-scores the committed calendar canvas against the real render
   and pins its hashes, re-scores every `heldOut: "radix-themes"` manifest row,

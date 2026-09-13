@@ -5,7 +5,7 @@ overallSuccess: **false** · humanGrade: not-run — the owner grades both rows 
 
 ## Row 1 — calendar (react-day-picker)
 
-pass 3.735% (bar 5%); ink boxes 280x247 vs 296x265; threshold sweep agrees: false. Canvas `recipe/evidence/f1-held-out-v1/score/canvas.png` (sha 3f807e70726f…) re-scored against `extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png`. Receipt: parity/receipts/v1/F1-COMPILE-ROUND.md.
+pass 3.048% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: false. Canvas `recipe/evidence/f1-held-out-v1/score/canvas.png` (sha 0cb6567d743e…) re-scored against `extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png`. Receipt: parity/receipts/v1/F1-COMPILE-ROUND.md.
 
 ## Row 2 — @radix-ui/themes@3.3.0 through recipe:point
 
@@ -22,7 +22,7 @@ Scored 2 archetype(s) / 5 row(s) · refused at roles 2 · mint refused 1. Receip
 ## Not claimed
 
 - No grade. overallSuccess is false until the owner signs; a green gate is a measurement, not a pass.
-- The calendar row's threshold sweep never agrees (16px ink-box gap on both axes) — recorded above, required by nothing here yet; that is the named next climb.
+- The calendar row's threshold sweep never agrees — 2px on both axes after the 2026-09-13 re-mint (16px before): the caption glyph's placement in its line box, and a text-glyph chevron where the source draws an SVG path. Recorded above, required by nothing here; named in F1-COMPILE-ROUND.md.
 - The calendar lineage is outside the thirteen archetypes recipe:point ships; a stranger reaches the Radix rows, not this one.
 - Radix Themes was captured once before (2026-09-04, legacy chain): not a first-pass measurement.
 - A mint-refused row is a quoted Figma message this gate cannot re-run; it is removed, not excused, when the archetype mints.

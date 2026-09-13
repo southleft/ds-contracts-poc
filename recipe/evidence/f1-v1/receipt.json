@@ -9,18 +9,18 @@
     "calendar": {
       "library": "day-picker",
       "subject": "react-day-picker@10.0.1 DayPicker (calendar@1)",
-      "mintedOn": "Scratch (byMp6lt0Ij9b2QbkDGFwBh), 2026-09-05",
+      "mintedOn": "Scratch (byMp6lt0Ij9b2QbkDGFwBh): 2026-09-05, re-minted 2026-09-13 (page Recipe Pivot / Calendar / 8d74efd3-calendar-v50, calendar/set 270:2663)",
       "canvas": {
         "path": "recipe/evidence/f1-held-out-v1/score/canvas.png",
-        "sha256": "3f807e70726fe2f90a8bb5abe273d1c0ccf646495262b3863808e6a21cb9c840"
+        "sha256": "0cb6567d743e7aa450c363f84b2f5d15b09c7c258f2ec745a50d62bed65fe636"
       },
       "reference": {
         "path": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
         "sha256": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2"
       },
       "status": "pass",
-      "pctAAMasked": 3.735,
-      "canvasPx": "280x247",
+      "pctAAMasked": 3.048,
+      "canvasPx": "294x263",
       "realPx": "296x265",
       "thresholdSweepAgrees": false,
       "receipt": "parity/receipts/v1/F1-COMPILE-ROUND.md"
@@ -105,7 +105,7 @@
     }
   },
   "summary": {
-    "calendar": "pass 3.735% (bar 5%); ink boxes 280x247 vs 296x265; threshold sweep agrees: false",
+    "calendar": "pass 3.048% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: false",
     "radix": {
       "scored": 2,
       "scoredRows": 5,
@@ -115,7 +115,7 @@
   },
   "notClaimed": [
     "No grade. overallSuccess is false until the owner signs; a green gate is a measurement, not a pass.",
-    "The calendar row's threshold sweep never agrees (16px ink-box gap on both axes) — recorded above, required by nothing here yet; that is the named next climb.",
+    "The calendar row's threshold sweep never agrees — 2px on both axes after the 2026-09-13 re-mint (16px before): the caption glyph's placement in its line box, and a text-glyph chevron where the source draws an SVG path. Recorded above, required by nothing here; named in F1-COMPILE-ROUND.md.",
     "The calendar lineage is outside the thirteen archetypes recipe:point ships; a stranger reaches the Radix rows, not this one.",
     "Radix Themes was captured once before (2026-09-04, legacy chain): not a first-pass measurement.",
     "A mint-refused row is a quoted Figma message this gate cannot re-run; it is removed, not excused, when the archetype mints."

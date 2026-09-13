@@ -172,6 +172,55 @@ toward the bottom-right, which is what a uniform size difference looks like.
 images are the same size. The 16px is named, not hidden, and is the first thing
 to chase next.
 
+## 2026-09-13 — the 16px, measured, and closed to 2px
+
+The caveat above said "the first thing to chase next". Chased by measurement
+before naming a cause (ink row/column bands of both PNGs, then the ledger's
+own geometry per part), it was not one defect but three leaves calendar@1 had
+no word for. The day-cell pitch was already identical (44px) on both sides.
+
+| axis | measured | cause in the ledger | closed by |
+| --- | --- | --- | --- |
+| vertical 16px | caption→weekday 10px short, weekday→week 1 7px short | `rdp-weekday` th `padding: 8px 0` (row 31px tall); the grammar hugged the glyphs | `tokens.weekdayPadding` (optional; absent = no padding) |
+| vertical, rest | caption ink 15px tall vs 18px | `rdp-caption_label` `font-size: large` = 18px; the grammar set the caption at `dayCell.fontSize` 16px | `tokens.captionFontSize` (optional; absent = same as days, the `weekdayFontSize` pattern) |
+| horizontal 16px | caption ink started 14px in; next chevron 7px short | `rdp-nav` `position: absolute; right: 0`, caption `text-align: start` — label leading, both nav buttons trailing; the grammar only knew ‹ caption › centred | `header.navPlacement: "split" \| "trailing"` (structure, not a token; default split = Astryx) |
+
+Every leaf is read by `proposeCalendarInstanceFromLedger` from the committed
+ledger and cited in `proposed-table.json`; the three closures are recorded as
+closed gaps in `compile-gaps.json`. Every existing calendar fixture compiles
+byte-identically (the tokens are optional and absent): `recipe:calendar:check`
+40/40 and the signed v50 lineage's `generated:check` unchanged.
+
+The mint is now reproducible from the repo: `tsx recipe/fixture-reader/f1-mint.ts
+--emit` writes `recipe/evidence/f1-held-out-v1/writer.js` from the ledger
+(the 2026-09-05 writer came from an uncommitted scratch script), `--score`
+writes the scorecard; `npm run recipe:f1:check` re-derives the number from
+the committed PNGs on every push.
+
+    page              Recipe Pivot / Calendar / 8d74efd3-calendar-v50
+    calendar/set      270:2663        308 x 295   (the reference root is 308 x 295)
+    pctAAMasked       3.048 %     bar <= 5 %      status PASS   (was 3.735 %)
+    canvas ink        294 x 263   (was 280 x 247)
+    reference ink     296 x 265
+
+**What remains, named.** The threshold sweep still agrees at no threshold,
+because 2px remain on each axis, and both are substrate, not leaves:
+
+- **Vertical 2px** — the caption's glyphs sit 2px higher in their 44px row on
+  the canvas than in Chromium: Times New Roman for Times, and Figma's line box
+  for an 18px face against Chromium's. The grid below it is offset-identical
+  (weekday row to last week: 224px on both sides). Class: font-metrics.
+- **Horizontal 2px** — the source's next chevron is a 24px SVG path inside a
+  36px button (ink 10px wide, ending 13px from the root's edge); calendar@1
+  draws a text glyph `›` in a 44px button (`dayCell.size`; ink 6px wide,
+  ending 20px in). The ink box's right edge on the canvas is therefore the
+  "Sa" column, on the reference the chevron. Closing it means a vector
+  chevron in the calendar grammar, which the frozen calendar writer does not
+  yet write — the next climb, if the owner wants the sweep to agree.
+
+Two superseded pages (2b63ad27, 251a6eee) were removed from Scratch; the
+scored page above is the live artefact, and `score/canvas.png` is its export.
+
 ## Four defects the live mint found that no offline gate could
 
 Every one of these passed `typecheck`, `test:recipe` and the fixed point, and
