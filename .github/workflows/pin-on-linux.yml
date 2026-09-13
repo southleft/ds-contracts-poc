@@ -1,0 +1,63 @@
+# RECORD AN OFFLINE DRIFT PIN WHERE THE GATE RE-MEASURES IT.
+#
+# extract:computed:drift:remeasure replays committed captured truth through a
+# real headless Chromium, so its numbers depend on the machine. Measured
+# 2026-09-04 (the fluent/MessageBar case): 99.010 on a macOS developer machine,
+# 98.020 on ubuntu-latest — same 3,232 cells, 32 differing in value. The gate
+# runs on ubuntu-latest, so a pin recorded on macOS is a pin recorded on the
+# wrong instrument, and hand-stamping another machine's percentage into the
+# tracked regate.scorecard.json makes the artifact internally inconsistent.
+#
+# The only honest fix is to RECORD the pin on the OS the gate uses. This
+# workflow does that for one capture config and uploads the result as an
+# artifact; a person downloads it and commits it with the config change.
+# It never commits or pushes by itself.
+#
+# Manual only: Actions → "pin on linux" → Run workflow → config path.
+name: pin on linux
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        description: capture config whose drift pin to re-record (e.g. extract/computed/configs/fluent.json)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  pin:
+    name: record the offline pin on linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20.19.4"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: npm ci
+        run: npm ci
+      - name: cache playwright browsers
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+      - name: install chromium (playwright-core ships no browser)
+        run: npx playwright-core install --with-deps chromium
+      - name: re-record the pin on this machine
+        run: npm run extract:computed:drift -- --write --config "${{ inputs.config }}"
+      - name: what moved
+        run: git --no-pager diff --stat && git --no-pager status --porcelain
+      - name: upload the linux-recorded pin
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: linux-pin
+          path: |
+            extract/computed/regate-baseline.json
+            extract/computed/out/**/regate.scorecard.json
+          if-no-files-found: error
