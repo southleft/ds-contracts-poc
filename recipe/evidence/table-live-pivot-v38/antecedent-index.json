@@ -4,27 +4,27 @@
   "artifacts": {
     "recipe/evidence/table-live-pivot-v38/expected-scene-plan-first-party-table.json.gz": {
       "bytes": 3846,
-      "sha256": "df382e420923daa29418fb294ff06d5e2e974df815ed93c91c9867c97c820403"
+      "sha256": "4ef7d8cf0c7d6807b210d7e0ca7c4ce52fe8713a9e30337c2926d94ac36b8190"
     },
     "recipe/evidence/table-live-pivot-v38/expected-scene-plan-first-party-row.json.gz": {
       "bytes": 3342,
-      "sha256": "71089faa5dd69e4ac648337d7a6513eaebf2cb417b9adc5ce5ff35b509bd40f1"
+      "sha256": "7ad7d715aecebc59463605a384ee9a35a150d8c4107970faebe9722e53b1bfbd"
     },
     "recipe/evidence/table-live-pivot-v38/expected-scene-plan-first-party-cell.json.gz": {
       "bytes": 3576,
-      "sha256": "f8bd29965805a72ca1b680d14cfe0de6c416b2433078b1faf61faa82e249b58f"
+      "sha256": "db351399511e4e83b318411b7a7868cff01469da31b5a17fe5b7d8f79bac4a1a"
     },
     "recipe/evidence/table-live-pivot-v38/expected-scene-plan-mui-table.json.gz": {
       "bytes": 3841,
-      "sha256": "7c1297aa55d03b2b6e5d88e9910d4595089281f5b36309e7bd0b611d8bb6a7ec"
+      "sha256": "e2172d900621a815186328efbb9f48cd42900c28e80e1cdd59af076e3e27803f"
     },
     "recipe/evidence/table-live-pivot-v38/expected-scene-plan-mui-row.json.gz": {
       "bytes": 3367,
-      "sha256": "e77a516f057f811d97c62bb3029a1cafc35bddb008608243bb97cc84c20cec2e"
+      "sha256": "9eb1c44127a39e5ae8572c3001859745ebd22cc5b346541beca1bcf6ecbb8e08"
     },
     "recipe/evidence/table-live-pivot-v38/expected-scene-plan-mui-cell.json.gz": {
       "bytes": 3771,
-      "sha256": "d22cc64a65d1e979b0bf187a554e8ef1b3d54fa6d8edce045f593d0de33d574a"
+      "sha256": "d56c85bd471d6a47c1abbf7b4590d0b86ad5bbcec0851b998860840410e312cc"
     },
     "recipe/evidence/table-live-pivot-v38/protocol.json": {
       "bytes": 7539,
@@ -60,7 +60,7 @@
     },
     "recipe/evidence/table-live-pivot-v38/proof-plan.json": {
       "bytes": 4158,
-      "sha256": "b5914918b2c0b3644554240158f32794783eec809003c083ecce0426ed26135c"
+      "sha256": "c06c1f327b5c1265deb6612dddf4ec9b48a76f5e91e89bc8bf8a36df51b50f5b"
     },
     "recipe/evidence/table-live-pivot-v38/request-manifest.json": {
       "bytes": 4219,
@@ -95,8 +95,8 @@
       "sha256": "aff663f50bbef0c5127eb16a6550e7de1e2069886e3739d16b118f86f237eb16"
     },
     "recipe/build-table-live-proof-v38.ts": {
-      "bytes": 40208,
-      "sha256": "954d75e7e8d5238dc9327ffa48a61a72f321a94fc6025efc24be180d64916bf4"
+      "bytes": 40167,
+      "sha256": "8ae9269d64b61af393615095074770cfedd1693f300a2814f92f238d224c16cf"
     },
     "recipe/table-live-v38-lifecycle-simulation.ts": {
       "bytes": 8107,
@@ -127,7 +127,7 @@
       "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
     }
   },
-  "hashSetSha256": "84f045af02a7c608f9da333afa8a0fd1acbe49d51b058d8727508a6f6bac7cff",
+  "hashSetSha256": "794bec308c1cd9eaad4fb6eab995eb802998a0a65c30a270734e34c457e170fa",
   "counts": {
     "sources": 2,
     "variants": 20,

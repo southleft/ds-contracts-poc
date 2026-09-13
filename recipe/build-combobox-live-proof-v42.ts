@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { portableGzipSync } from "./portable-gzip.js";
+import { gzipSync } from "node:zlib";
 
 import { adaptReviewedCombobox } from "./adapters/combobox.js";
 import {
@@ -525,8 +525,8 @@ export async function buildComboboxLiveV42Proof(
   const sourceMetadata = sources.map((source) => {
     const comboboxBytes = Buffer.from(`${JSON.stringify(source.comboboxPlan)}\n`);
     const optionBytes = Buffer.from(`${JSON.stringify(source.optionPlan)}\n`);
-    const comboboxCompressed = portableGzipSync(comboboxBytes);
-    const optionCompressed = portableGzipSync(optionBytes);
+    const comboboxCompressed = gzipSync(comboboxBytes);
+    const optionCompressed = gzipSync(optionBytes);
     const comboboxPath = `${COMBOBOX_LIVE_V42_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-combobox.json.gz`;
     const optionPath = `${COMBOBOX_LIVE_V42_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-option.json.gz`;
     antecedentOutputs.set(comboboxPath, comboboxCompressed);

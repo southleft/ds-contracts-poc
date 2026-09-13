@@ -443,19 +443,28 @@ jobs:
       # artifact drifting can no longer hide behind a skipped step.
       - name: recipe:combobox:live:v42:generated:check (the antecedent's pinned artifacts, no private input needed)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:combobox:live:v42:generated:check
+        # Byte-frozen signed lineage: re-derive its gzip envelopes as the macOS host that
+        # recorded them (header OS byte 19), otherwise Linux stamps 3 and the byte-compare is
+        # red for a reason that is not drift. See parity/receipts/v1/CI-LANE-COVERAGE-GAP.md.
+        run: NODE_OPTIONS="--import ./scripts/gzip-os-byte-shim.mjs" GZIP_OS_BYTE=19 npm run recipe:combobox:live:v42:generated:check
       - name: recipe:table:live:v38:check (the CURRENT table lineage — the cell rule draws one edge; v33 and v34 were superseded before minting because their artifacts changed after authorization, which their own guards refused; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:table:live:v38:check
       - name: recipe:table:live:v38:generated:check (the antecedent's pinned artifacts, no private input needed)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:table:live:v38:generated:check
+        # Byte-frozen signed lineage: re-derive its gzip envelopes as the macOS host that
+        # recorded them (header OS byte 19), otherwise Linux stamps 3 and the byte-compare is
+        # red for a reason that is not drift. See parity/receipts/v1/CI-LANE-COVERAGE-GAP.md.
+        run: NODE_OPTIONS="--import ./scripts/gzip-os-byte-shim.mjs" GZIP_OS_BYTE=19 npm run recipe:table:live:v38:generated:check
       - name: recipe:calendar:live:v50:check (the CURRENT calendar lineage — the one Calendar V50 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:calendar:live:v50:check
       - name: recipe:calendar:live:v50:generated:check (the antecedent's pinned artifacts, no private input needed)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:calendar:live:v50:generated:check
+        # Byte-frozen signed lineage: re-derive its gzip envelopes as the macOS host that
+        # recorded them (header OS byte 19), otherwise Linux stamps 3 and the byte-compare is
+        # red for a reason that is not drift. See parity/receipts/v1/CI-LANE-COVERAGE-GAP.md.
+        run: NODE_OPTIONS="--import ./scripts/gzip-os-byte-shim.mjs" GZIP_OS_BYTE=19 npm run recipe:calendar:live:v50:generated:check
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check
@@ -467,7 +476,10 @@ jobs:
         run: npm run recipe:input-field:live:v85:check
       - name: recipe:input-field:live:v85:generated:check (the antecedent's pinned artifacts, no private input needed)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v85:generated:check
+        # Byte-frozen signed lineage: re-derive its gzip envelopes as the macOS host that
+        # recorded them (header OS byte 19), otherwise Linux stamps 3 and the byte-compare is
+        # red for a reason that is not drift. See parity/receipts/v1/CI-LANE-COVERAGE-GAP.md.
+        run: NODE_OPTIONS="--import ./scripts/gzip-os-byte-shim.mjs" GZIP_OS_BYTE=19 npm run recipe:input-field:live:v85:generated:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:check

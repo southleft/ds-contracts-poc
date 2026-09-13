@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { portableGzipSync } from "./portable-gzip.js";
+import { gzipSync } from "node:zlib";
 
 import { adaptReviewedCalendar } from "./adapters/calendar.js";
 import {
@@ -608,9 +608,9 @@ export async function buildCalendarLiveV50Proof(
     const tableBytes = Buffer.from(`${JSON.stringify(source.calendarPlan)}\n`);
     const rowBytes = Buffer.from(`${JSON.stringify(source.weekPlan)}\n`);
     const cellBytes = Buffer.from(`${JSON.stringify(source.dayPlan)}\n`);
-    const tableCompressed = portableGzipSync(tableBytes);
-    const rowCompressed = portableGzipSync(rowBytes);
-    const cellCompressed = portableGzipSync(cellBytes);
+    const tableCompressed = gzipSync(tableBytes);
+    const rowCompressed = gzipSync(rowBytes);
+    const cellCompressed = gzipSync(cellBytes);
     const tablePath = `${CALENDAR_LIVE_V50_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-calendar.json.gz`;
     const rowPath = `${CALENDAR_LIVE_V50_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-week.json.gz`;
     const cellPath = `${CALENDAR_LIVE_V50_EVIDENCE_ROOT}/expected-scene-plan-${source.source}-day.json.gz`;

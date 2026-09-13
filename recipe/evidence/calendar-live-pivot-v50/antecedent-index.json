@@ -4,15 +4,15 @@
   "artifacts": {
     "recipe/evidence/calendar-live-pivot-v50/expected-scene-plan-astryx-calendar.json.gz": {
       "bytes": 32846,
-      "sha256": "38fdc18f0909d9fb80b62ab819c992df683a39040d415618b310462316b9a964"
+      "sha256": "7a7ce45004a384f2545d7dab9d7074c9505fbb632a6194f38e1432ee758ecb18"
     },
     "recipe/evidence/calendar-live-pivot-v50/expected-scene-plan-astryx-week.json.gz": {
       "bytes": 4380,
-      "sha256": "9cfdf1cf4b6cbbeca4a6cc642b5d0596ddda895c3383ce2d7fc4ce78bf45f011"
+      "sha256": "e42bcff6bbc66594ca1ab9a09278caae516944675d0c51edb51c7701c9076fca"
     },
     "recipe/evidence/calendar-live-pivot-v50/expected-scene-plan-astryx-day.json.gz": {
       "bytes": 5435,
-      "sha256": "92db782b709046e73624c4b6557200cfdeb6f68618bc4ed60f74e01d22f12081"
+      "sha256": "967989cb9f6d53f7722807844f9cd33c1e1a6aade6bc609b0a25a3a67701e93a"
     },
     "recipe/evidence/calendar-live-pivot-v50/protocol.json": {
       "bytes": 6845,
@@ -48,7 +48,7 @@
     },
     "recipe/evidence/calendar-live-pivot-v50/proof-plan.json": {
       "bytes": 2694,
-      "sha256": "2afc5ffd03094ac81c5717be660c90d15cd694bb6bc72452949fb280db79837c"
+      "sha256": "120436e6a4cbbc2814110a416ebdd8ed608f10dd9917d9d88c54897d82e83829"
     },
     "recipe/evidence/calendar-live-pivot-v50/request-manifest.json": {
       "bytes": 2117,
@@ -83,8 +83,8 @@
       "sha256": "7c60556852a500836bcea33f7af09f042a7b42064d9661217cd2ce5a20fb5d03"
     },
     "recipe/build-calendar-live-proof-v50.ts": {
-      "bytes": 51008,
-      "sha256": "0ce6561644e0e29392f82964e96615be50640738feef6c3cecfd4affdb2a0cb8"
+      "bytes": 50967,
+      "sha256": "c1ebd9e305ccaa12fbed8dc8e856ad0b9b00075e1ede6c757e1f6703f84d93b1"
     },
     "recipe/calendar-live-v50-lifecycle-simulation.ts": {
       "bytes": 8227,
@@ -115,7 +115,7 @@
       "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
     }
   },
-  "hashSetSha256": "c27fd9d6c5973517da62951f99997af6b15cbc2cd15d8dd344ecef3c1bb72c53",
+  "hashSetSha256": "c8d877e987ceb363ff845f38eaf0e3167cab6aabbae058fcec913af3e807f11b",
   "counts": {
     "sources": 1,
     "variants": 8,

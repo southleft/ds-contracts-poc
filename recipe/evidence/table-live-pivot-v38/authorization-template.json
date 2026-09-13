@@ -7,7 +7,7 @@
     "commit": null,
     "indexPath": "recipe/evidence/table-live-pivot-v38/antecedent-index.json",
     "indexSha256": null,
-    "hashSetSha256": "84f045af02a7c608f9da333afa8a0fd1acbe49d51b058d8727508a6f6bac7cff"
+    "hashSetSha256": "794bec308c1cd9eaad4fb6eab995eb802998a0a65c30a270734e34c457e170fa"
   },
   "signingPublicKey": {
     "algorithm": "Ed25519",

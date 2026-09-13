@@ -147,3 +147,38 @@ generated on `ubuntu-latest` against the committed one, the way
 
 **Do not read the green local lane as "CI is green."** It is not, and it has not
 been since at least 2026-09-04.
+
+## 2026-09-13 — the four reds explained and closed without touching a frozen byte
+
+**Cause (found by Codex in PR #78, verified here).** Node's zlib writes the HOST
+operating-system code into byte 9 of every gzip header: `19` on macOS, `3` on
+Linux. The four `*:live:vN:generated:check` steps rebuild their
+`expected-scene-plan-*.json.gz` envelopes and byte-compare them to the committed
+files, which were recorded on macOS. Every payload is byte-identical uncompressed
+(15 of 15 envelopes across the four lineages, verified with `gunzip | sha256`);
+only header byte 9 differs. The gate was measuring the runner's OS.
+
+**Why the obvious fix is forbidden.** #78 normalised the byte to RFC 1952's `255`
+and regenerated the committed envelopes. That moved every hash downstream — plan,
+antecedent index, hash set — and the v85 input-field lineage's
+`capture-authorization.json` is an **owner-signed** record pinning
+`antecedent.hashSetSha256`; `recipe:pivot-status:check` refused it
+("v85 authorization/status mismatch"), and `input-field-live-v85-restore.test.ts`
+refused the moved Polaris envelope. Worse, the antecedent index hashes the
+**builder's own source file** (`artifacts["recipe/build-combobox-live-proof-v42.ts"]`),
+so any edit to those four builders — even one that leaves every envelope
+byte-identical — invalidates the signed hash set. The lineages are frozen down to
+the program that checks them, by design.
+
+**What was done instead.** The checking machine now stamps the byte the recording
+machine stamped, and nothing else: `scripts/gzip-os-byte-shim.mjs` is a Node
+preload that wraps `zlib.gzipSync`, rewrites header byte 9 to `GZIP_OS_BYTE`, and
+calls `syncBuiltinESMExports()` so the builders' named imports see it. It refuses
+to load without an explicit `GZIP_OS_BYTE`. The four `fast.yml` steps run under
+`GZIP_OS_BYTE=19`. Measured on this macOS host before wiring: with byte `3` every
+one of the four checks reproduces the Linux red; with byte `19` every one passes;
+the v85 test and `recipe:pivot-status:check` pass on the untouched bytes.
+
+**For new lineages** `recipe/portable-gzip.ts` (from #78) writes portable
+envelopes from birth, so no future lineage needs the shim. The four signed ones
+keep it until they are superseded by their own protocol.
