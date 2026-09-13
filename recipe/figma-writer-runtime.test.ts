@@ -56,3 +56,11 @@ test("the runtime handles every field the writers used to lose, and names them",
   assert.ok(component.includes("container.clipsContent=false"));
   assert.ok(component.includes("CHECKBOX-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL"));
 });
+
+test("an inner shadow never carries showShadowBehindNode — Figma accepts that key on DROP_SHADOW only", () => {
+  // Measured 2026-09-13 on Radix Themes' checkbox (an inset 1px ring):
+  // `in set_effects: Property "effects" failed validation: Unrecognized key(s)`.
+  const code = figmaWriterRuntime({ ...base, target: "plugin" });
+  assert.equal(code.includes("spread:effect.spread,showShadowBehindNode:"), false, "the key must not be unconditional on every shadow");
+  assert.equal(code.includes('effect.kind==="drop-shadow"?{showShadowBehindNode:'), true, "the key is spread in for drop shadows only");
+});
