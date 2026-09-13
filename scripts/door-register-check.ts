@@ -245,10 +245,14 @@ const insideTemplate = (spans: Array<[number, number]>, line: number) => spans.s
  *  TextField mounts six unnamed parts). No engine change — the same doors
  *  over a larger corpus. */
 export const PINNED_CENSUS: Record<string, { components: number; drops: number; authored: number; fallback: number }> = {
-  altitude: { components: 8, drops: 4734, authored: 6, fallback: 5 },
-  antd: { components: 13, drops: 25388, authored: 31, fallback: 21 },
-  astryx: { components: 11, drops: 25096, authored: 0, fallback: 18 },
-  carbon: { components: 10, drops: 34729, authored: 12, fallback: 30 }, // 2026-09-02: Tabs re-captured at the archetype's shape (two tabs, no panel): 2,542 fewer control-equal drops, 2 fewer span-fallback parts,
+  // 2026-09-13 — the flow-order refusal moved one deliberately excluded
+  // numeric channel out of the control-equal denominator. Every reduction
+  // below is the freshly measured consequence of refusing CSS `order` before
+  // minting; component, authored, and fallback counts are unchanged.
+  altitude: { components: 8, drops: 4721, authored: 6, fallback: 5 },
+  antd: { components: 13, drops: 25319, authored: 31, fallback: 21 },
+  astryx: { components: 11, drops: 25027, authored: 0, fallback: 18 },
+  carbon: { components: 10, drops: 34634, authored: 12, fallback: 30 }, // 2026-09-02: Tabs re-captured at the archetype's shape (two tabs, no panel): 2,542 fewer control-equal drops, 2 fewer span-fallback parts,
   // 2026-09-02 — three rows re-pinned by hand, each move named (a moved count is
   // a human's decision, in either direction):
   //   · fluent 20,892 -> 20,886 (-6): the Avatar capture record was re-taken
@@ -262,7 +266,7 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     was not re-pinned then; no mui capture was re-recorded on 2026-09-02.
   //     Re-pinned to what the committed tree measures; the cause of the
   //     -334 is not established here and is named as such.
-  fluent: { components: 12, drops: 23096, authored: 15, fallback: 21 },
+  fluent: { components: 12, drops: 23033, authored: 15, fallback: 21 },
   //   · mui 72,991 -> 73,001 (+10), later on 2026-09-02: Dialog and Menu were
   //     re-captured with --keep-originals so the portal screenshots carry the
   //     overlay rect sidecars the fidelity gate crops to (Chromium 149 in the
@@ -302,10 +306,10 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     re-pinned by hand with this reason rather than re-derived. Tooltip is
   //     NOT re-captured (pre-existing determinism failure, verified independent
   //     of the mount), so its contribution is unchanged.
-  mui: { components: 32, drops: 72481, authored: 0, fallback: 100 },
-  polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
-  shadcn: { components: 11, drops: 12205, authored: 1, fallback: 7 },
-  tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },
+  mui: { components: 32, drops: 72281, authored: 0, fallback: 100 },
+  polaris: { components: 12, drops: 44537, authored: 69, fallback: 43 },
+  shadcn: { components: 11, drops: 12171, authored: 1, fallback: 7 },
+  tailwind: { components: 11, drops: 8065, authored: 9, fallback: 7 },
 };
 
 export interface Finding {

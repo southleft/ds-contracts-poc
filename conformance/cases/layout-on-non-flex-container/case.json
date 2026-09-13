@@ -1,0 +1,19 @@
+{
+  "id": "layout-on-non-flex-container",
+  "feature": "layout",
+  "construct": "align-items / justify-content authored on a non-flex container (display: table)",
+  "why": "enrichLayout owns flex-axis enrichment. A non-flex decline is correct, but it must be named so the code-only fact cannot disappear silently.",
+  "expect": "REFUSED",
+  "expectName": "layout-container-not-flex",
+  "expectWhere": "enriched.extension.json layout.receipts",
+  "observable": {
+    "part": "root",
+    "channel": "align-items",
+    "capturedValue": "center"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "auto-layout has no table formatting context; the axis remains code-only and named"
+  },
+  "blockStage": true
+}

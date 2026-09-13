@@ -418,6 +418,7 @@ export const LayoutSchema = z
      *  layoutWrap: 'WRAP'). Chip rows and tag groups wrap in every target
      *  system; the counter-axis gap rides the same `gap` token (Figma
      *  counterAxisSpacing follows itemSpacing unless a row-gap fact lands). */
+    // @lower schema.wrap-declared-and-detected
     wrap: z.boolean().optional(),
     /** G1 — the declared track lists ARE the contract fact; counts are
      *  derived (rows.length), never stored (the API's count-before-sizes
@@ -700,6 +701,8 @@ export const LITERAL_CHANNELS = new Set([
   "padding-block",
   "padding-inline",
   "gap",
+  "row-gap",
+  "column-gap",
   "border-radius",
   "border-width",
   "font-size",

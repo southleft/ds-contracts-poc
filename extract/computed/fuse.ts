@@ -41,6 +41,7 @@ import { PRESENCE_OFF } from './capture.js';
 import type { ComponentConfig, PropSpace, SweepResult, Interaction } from './capture.js';
 import {
   CHANNEL_TO_COMPUTED,
+  FLOW_ORDER_CHANNELS,
   GEOMETRY_CHANNELS,
   DECOR_PSEUDOS,
   flatten,
@@ -995,6 +996,7 @@ export function styledChannels(
    *  so the next vendor-prefixed construct announces itself instead of
    *  evaporating. */
   const webkitStyled = new Map<string, Set<string>>(); // channel -> parts
+  const orderStyled = new Map<string, Set<string>>(); // channel -> parts
   // ANTD EXAM (2026-08-23) — THE GEOMETRY EXCLUSION STOPS BEING SILENT PER
   // PART. Option B (docs/BETA.md) keeps width/height out of fusion as
   // environment-dependent and carries the obligation to LEDGER each drop.
@@ -1095,6 +1097,11 @@ export function styledChannels(
       // uses (differs from the control), on the channels the door refuses.
       if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== baseline(p)) {
         (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
+      }
+      // @door fuse.flow-order-refusal
+      // @lower fuse.order-refused-before-mint
+      if (FLOW_ORDER_CHANNELS.has(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
+        (orderStyled.get(p) ?? orderStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
       }
       // @door fuse.geometry-exclusion
       if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== baseline(p)) {
@@ -1435,6 +1442,11 @@ export function styledChannels(
     const listed = [...chans].sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).map(([c, v]) => `${c} ${v}`).join(', ');
     receipts.push(
       `geometry-excluded: ${part} — ${listed} — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.`,
+    );
+  }
+  for (const [channel, parts] of [...orderStyled].sort(([x], [y]) => x.localeCompare(y))) {
+    receipts.push(
+      `flow-order-refused: ${channel} is styled on ${[...parts].sort().join(', ')} and is refused before minting. CSS ${channel} reorders visual flow without changing DOM order; Figma child order changes structure, so no faithful lowering exists.`,
     );
   }
   const wk = [...webkitStyled].sort(([x], [y]) => x.localeCompare(y));
@@ -1943,11 +1955,40 @@ export function enrichLayout(
     const channels = styled.get(partName);
     // @door fuse.static-part-required-for-enrichment
     if (!target || !channels) continue;
-    // only flex containers speak the layout vocabulary
+    // Read display on every enabled combo. A base-only read can silently skip
+    // a part that becomes flex in another variant.
     // @door fuse.flex-container-only-speaks-layout
-    const baseDisplay = a.baseFlat[pi].node.style['display'];
+    const displays = new Set<string>();
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (el) displays.add(el.node.style['display']);
+    }
+    if (displays.size === 0) displays.add(a.baseFlat[pi].node.style['display']);
+    const isFlexDisplay = (display: string): boolean => display === 'flex' || display === 'inline-flex';
+    const isGridDisplay = (display: string): boolean => display === 'grid' || display === 'inline-grid';
     // @lower fuse.axis-flex-only-enrichment
-    if (baseDisplay !== 'flex' && baseDisplay !== 'inline-flex') continue;
+    if (![...displays].every(isFlexDisplay)) {
+      if ([...displays].some(isFlexDisplay)) {
+        out.receipts.push(
+          `layout-container-display-not-uniform: ${partName} is flex in some combos and ${[...displays].filter((display) => !isFlexDisplay(display)).join('/')} in others — no layout fact carried`,
+        );
+        continue;
+      }
+      // Grid layout is lowered or refused upstream by anatomy.ts. This stage
+      // must not contradict that decision by inventing a flex axis.
+      if ([...displays].every(isGridDisplay)) {
+        if (target.layout?.display === undefined) {
+          out.receipts.push(
+            `layout-grid-axis-decided-upstream: ${partName} is display:${[...displays].join('/')} and carries no layout — grid lowering in anatomy.ts owns this decision`,
+          );
+        }
+        continue;
+      }
+      out.receipts.push(
+        `layout-container-not-flex: ${partName} is display:${[...displays].join('/')} — flex layout vocabulary does not apply, so axis, alignment, and wrap remain code-only`,
+      );
+      continue;
+    }
     for (const [channel, spec] of Object.entries(LAYOUT_CHANNEL_TO_FIELD)) {
       if (!channels.has(channel)) continue;
       const values = new Set<string>();
@@ -2536,7 +2577,9 @@ export interface MintPrep {
  *  SET-PLANE literal carriage shares it. */
 export const BASE_FALLBACK_CHANNELS = new Set([
   'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
-  'padding-block', 'padding-inline', 'gap',
+  'padding-block', 'padding-inline',
+  // @lower fuse.gap-literal-fallback-misspelled
+  'gap', 'row-gap', 'column-gap',
   'height', 'width', 'min-width', 'min-height',
   'border-radius', 'border-width',
   'border-top-left-radius', 'border-top-right-radius',

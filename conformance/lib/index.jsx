@@ -77,6 +77,7 @@ export { default as CaseGridTrackZeroValue } from '../cases/grid-track-zero-valu
 export { default as CaseGridTracksMixedFractional } from '../cases/grid-tracks-mixed-fractional/Case.tsx';
 export { default as CaseGridTwoColumn } from '../cases/grid-two-column/Case.tsx';
 export { default as CaseGridZeroTrackCollapse } from '../cases/grid-zero-track-collapse/Case.tsx';
+export { default as CaseLayoutOnNonFlexContainer } from '../cases/layout-on-non-flex-container/Case.tsx';
 export { default as CaseMarginTopInFlow } from '../cases/margin-top-in-flow/Case.tsx';
 export { default as CaseMaskImage } from '../cases/mask-image/Case.tsx';
 export { default as CaseMediaNonMatching } from '../cases/media-non-matching/Case.tsx';

@@ -486,8 +486,16 @@ export const LOGICAL_ALIASES = new Set([
   'contain-intrinsic-block-size', 'contain-intrinsic-inline-size',
 ]);
 
+/** CSS flow ordering has no faithful canvas twin. Figma child order changes
+ *  structure; CSS `order` changes only visual flow. Refuse it before minting
+ *  so it cannot become an unregistered numeric token. */
+export const FLOW_ORDER_CHANNELS = new Set(['order']);
+
 export const isFusable = (prop: string): boolean =>
-  !prop.startsWith('-webkit-') && !GEOMETRY_CHANNELS.has(prop) && !LOGICAL_ALIASES.has(prop);
+  !prop.startsWith('-webkit-') &&
+  !GEOMETRY_CHANNELS.has(prop) &&
+  !LOGICAL_ALIASES.has(prop) &&
+  !FLOW_ORDER_CHANNELS.has(prop);
 
 /** Channels the production replay cannot apply/serialize faithfully via
  * inline styles — named and excluded from BOTH application and re-read

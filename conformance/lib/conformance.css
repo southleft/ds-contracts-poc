@@ -78,6 +78,7 @@
 @import '../cases/grid-tracks-mixed-fractional/case.css';
 @import '../cases/grid-two-column/case.css';
 @import '../cases/grid-zero-track-collapse/case.css';
+@import '../cases/layout-on-non-flex-container/case.css';
 @import '../cases/margin-top-in-flow/case.css';
 @import '../cases/mask-image/case.css';
 @import '../cases/media-non-matching/case.css';

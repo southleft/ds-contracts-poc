@@ -79,6 +79,9 @@ export interface LayoutSpec {
    *  a VERTICAL frame. `layoutSpec` never produces it under mode VERTICAL. */
   counter: 'MIN' | 'CENTER' | 'MAX' | 'BASELINE';
   stretchChildren?: boolean;
+  /** Distinguishes CSS block flow from a flex column so vertical sibling
+   *  margins can use CSS collapse semantics. */
+  blockFlow?: true;
   /** v15 (S4/matrix a.8): flex-wrap: wrap → layoutWrap 'WRAP' (native). */
   wrap?: boolean;
   /** A2 grid (G1/G5/G6): the declared tracks, both gaps (compile-resolved to
@@ -1705,6 +1708,9 @@ const GRID_ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
   end: 'MAX',
 };
 
+/** CSS block containers whose in-flow block children stack vertically. */
+const BLOCK_FLOW_CONTAINER = new Set(['block', 'list-item', 'flow-root', 'inline', 'inline-block']);
+
 function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> = {}): LayoutSpec {
   // v7 layoutByProp: each canvas variant is compiled with every enum axis's
   // value (subst), so the per-variant layout override resolves right here.
@@ -1754,24 +1760,22 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // block-flow VERTICAL rule below, so label sat BESIDE the input (row).
   // CSS block roots still stack; align without direction must not force a row.
   // @lower emit.axis-block-declared-vertical
-  if (l && !l.direction && part.declared?.['display'] === 'block') {
+  if (l && !l.direction && BLOCK_FLOW_CONTAINER.has(part.declared?.['display'] ?? '')) {
     const counter = l.align ? ALIGN_FIGMA[l.align] : 'MIN';
     return {
       mode: 'VERTICAL',
       primary: l.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
       counter: counter === 'BASELINE' ? 'MIN' : counter,
       stretchChildren: true,
+      blockFlow: true,
     };
   }
-  if (!l && isRoot) {
-    // BLOCK-FLOW ROOT (Card live-paste-4 finding): a declared display:block
+  if (!l && isRoot && BLOCK_FLOW_CONTAINER.has(part.declared?.['display'] ?? '')) {
+    // BLOCK-FLOW ROOT (Card live-paste-4 finding): a declared block container
     // root is CSS block flow — children stack vertically from the top-left
     // and block children span the width. The centered default is for
     // control-like roots (Button); centering a Card's content is wrong.
-    if (part.declared?.['display'] === 'block') {
-      return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
-    }
-    return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
+    return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true, blockFlow: true };
   }
   // BLOCK-FLOW PART (round 6, Menu live finding): the block-flow rule above
   // was ROOT-ONLY, so a display:block container DEEPER in the tree fell
@@ -1802,8 +1806,11 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // children are ADJACENT — a run of ≥2 inline siblings shares one anonymous
   // block (one LINE), which a flat VERTICAL frame cannot express, so that
   // shape keeps the row default and is named residue rather than guessed at.
-  const BLOCK_FLOW_CONTAINER = new Set(['block', 'list-item', 'flow-root', 'inline']);
-  if (!l && !isRoot && BLOCK_FLOW_CONTAINER.has(part.declared?.['display'] ?? '')) {
+  const declaredDisplay = part.declared?.['display'];
+  const blockFlowDeclared = BLOCK_FLOW_CONTAINER.has(declaredDisplay ?? '');
+  // A layout-less root is still a box. When display is absent, blockify only
+  // the conservative case where every in-flow child is block-level.
+  if (!l && (blockFlowDeclared || declaredDisplay === undefined)) {
     const outOfFlow = (k: Part): boolean =>
       k.declared?.['position'] === 'absolute' ||
       k.declared?.['position'] === 'fixed' ||
@@ -1821,10 +1828,15 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
     };
     const adjacentInlines = kids.some((k, i) => i > 0 && !blockLevel(k) && !blockLevel(kids[i - 1]));
     // @lower emit.axis-blockification
-    if (kids.length >= 2 && (kids.every(blockLevel) || (kids.some(blockLevel) && !adjacentInlines))) {
-      return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
+    if (kids.length >= 2 && (kids.every(blockLevel) || (blockFlowDeclared && kids.some(blockLevel) && !adjacentInlines))) {
+      return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true, blockFlow: true };
     }
   }
+  // Only a layout-less root that did not blockify keeps the control-like
+  // centered-row behavior.
+  // @lower emit.axis-layoutless-root-centered-row
+  if (!l && isRoot) return { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' };
+  // @lower emit.axis-default-horizontal
   const mode: 'HORIZONTAL' | 'VERTICAL' = l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL';
   const counter = l?.align ? ALIGN_FIGMA[l.align] : 'MIN';
   return {
@@ -2685,12 +2697,17 @@ function applyLiterals(
       // Round 5: gap longhands (see the token side) — main-axis only.
       case 'column-gap': {
         const n = litPx(spec, cssProp, value);
-        if (n !== undefined && (spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') li().itemSpacing = n;
+        if (n === undefined) break;
+        // @lower emit.gap-literal-cross-axis-silent
+        if ((spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') li().itemSpacing = n;
+        else literalMiss(spec, cssProp, value, 'a column gap is the CROSS axis of a VERTICAL stack and auto-layout exposes only one itemSpacing value');
         break;
       }
       case 'row-gap': {
         const n = litPx(spec, cssProp, value);
-        if (n !== undefined && spec.layout?.mode === 'VERTICAL') li().itemSpacing = n;
+        if (n === undefined) break;
+        if (spec.layout?.mode === 'VERTICAL') li().itemSpacing = n;
+        else if (spec.layout?.mode === 'HORIZONTAL') literalMiss(spec, cssProp, value, 'a row gap is the CROSS axis of a HORIZONTAL stack and auto-layout exposes only one itemSpacing value');
         break;
       }
       // Round 5: literal margin channels — same lowering as the token side.
@@ -5620,12 +5637,13 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     delete spec.scrimBounded;
     (spec.children ?? []).forEach((child) => stripMisses(child, variant));
   };
-  for (const v of variants) stripMisses(v.spec, v.name, 'root');
-  for (const v of stateVariants) stripMisses(v.spec, v.name, 'root');
   // Round 5d: sibling-margin → itemSpacing lowering (then marginVars strip —
-  // compile-side only, never serialized).
+  // compile-side only, never serialized). Lower before collecting misses so
+  // receipts created by the lowering are not stranded on the serialized spec.
   for (const v of variants) lowerMarginGaps(v.spec);
   for (const v of stateVariants) lowerMarginGaps(v.spec);
+  for (const v of variants) stripMisses(v.spec, v.name, 'root');
+  for (const v of stateVariants) stripMisses(v.spec, v.name, 'root');
   const stripMarginVars = (s: NodeSpec) => {
     delete s.marginVars;
     (s.children ?? []).forEach(stripMarginVars);
@@ -6015,6 +6033,11 @@ function lowerMarginGaps(spec: NodeSpec): void {
   const kids = (spec.children ?? []).filter(
     (c) => !c.overlay && !c.insetOverlay && !c.absolute,
   );
+  // @lower emit.margin-lone-child-to-padding
+  if (kids.length === 1) {
+    lowerLoneChildMarginToPadding(spec, kids[0]);
+    return;
+  }
   if (kids.length < 2) return;
   const horiz = (spec.layout.mode ?? 'HORIZONTAL') === 'HORIZONTAL';
   const lead = horiz ? ('left' as const) : ('top' as const);
@@ -6026,7 +6049,18 @@ function lowerMarginGaps(spec: NodeSpec): void {
     const vars: Array<string | null> = [];
     if (t !== 0) vars.push(kids[i].marginVars?.[trail] ?? null);
     if (l !== 0) vars.push(kids[i + 1].marginVars?.[lead] ?? null);
-    gaps.push({ px: t + l, vars });
+    // Vertical margins collapse only in block flow. Flex-column margins add.
+    // @lower emit.margin-collapse-summed-not-maxed
+    const collapses = !horiz && spec.layout.blockFlow === true;
+    if (collapses && t > 0 && l > 0) {
+      miss(
+        spec,
+        'margin',
+        `adjoining vertical margins between block-flow siblings COLLAPSE: ${t}px and ${l}px render as ${Math.max(t, l)}px, carried as parent itemSpacing`,
+        `${t}px + ${l}px`,
+      );
+    }
+    gaps.push({ px: collapses ? Math.max(t, l) : t + l, vars });
   }
   const px = gaps[0].px;
   // @lower emit.margin-uniform-sibling-to-gap
@@ -6037,6 +6071,21 @@ function lowerMarginGaps(spec: NodeSpec): void {
   } else {
     // @lower emit.margin-gap-token-identity
     (spec.lits ??= {}).itemSpacing = px;
+  }
+  const sides = kids.flatMap((child, index) => {
+    const candidates = [
+      index < kids.length - 1 ? trail : null,
+      index > 0 ? lead : null,
+    ].filter((side): side is typeof lead => side !== null && child.margins?.[side] !== undefined);
+    return candidates.map((side) => `${child.name}.margin-${side}`);
+  });
+  if (sides.length > 0) {
+    miss(
+      spec,
+      'margin',
+      `lowered to the parent's itemSpacing (${px}px): ${sides.join(', ')}; CSS stores sibling space on children while auto-layout stores it on the parent`,
+      `${px}px`,
+    );
   }
   for (let i = 0; i < kids.length; i++) {
     const m = kids[i].margins;
@@ -6051,6 +6100,32 @@ function lowerMarginGaps(spec: NodeSpec): void {
     }
     if (Object.values(m).every((v) => v === undefined)) delete kids[i].margins;
   }
+}
+
+/** A lone in-flow child's positive edge margin is visually equivalent to
+ *  parent padding when the parent has no competing padding on that side.
+ *  Lowering avoids a synthetic margin wrapper that the inverse cannot name. */
+function lowerLoneChildMarginToPadding(spec: NodeSpec, child: NodeSpec): void {
+  const margins = child.margins;
+  if (!margins || child.fillW || child.grow) return;
+  const fieldBySide = {
+    top: 'paddingTop',
+    right: 'paddingRight',
+    bottom: 'paddingBottom',
+    left: 'paddingLeft',
+  } as const;
+  for (const side of ['top', 'right', 'bottom', 'left'] as const) {
+    const value = margins[side];
+    if (value === undefined || value <= 0) continue;
+    const field = fieldBySide[side];
+    if (spec.lits?.[field] !== undefined || spec.bindings?.[field] !== undefined) continue;
+    const variable = child.marginVars?.[side] ?? null;
+    if (variable) spec.bindings = { ...spec.bindings, [field]: variable };
+    else (spec.lits ??= {})[field] = value;
+    delete margins[side];
+    if (child.marginVars) delete child.marginVars[side];
+  }
+  if (Object.values(margins).every((value) => value === undefined)) delete child.margins;
 }
 
 const specSome = (s: NodeSpec, pred: (x: NodeSpec) => boolean): boolean =>
@@ -8365,7 +8440,7 @@ async function amendComponent(comp, C) {
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-    }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
+    }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
   }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
   for (const t of registry.texts) {
     let k = defKey(t.prop);
