@@ -1,0 +1,35 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out-v2.ts --write --subject altitude-badge
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --imported-badge-badge-font-weight: 600;
+  --theme-border-radius-pill: 999px;
+  --theme-color-background-danger-weak: #38191c;
+  --theme-color-background-info-weak: #2b3a63;
+  --theme-color-background-neutral-bold: #797469;
+  --theme-color-background-success-weak: #14301f;
+  --theme-color-background-warning-weak: #2f2610;
+  --theme-color-content-danger-default: #ff6d76;
+  --theme-color-content-info-default: #a3b5ff;
+  --theme-color-content-neutral-default: #f1f0ea;
+  --theme-color-content-success-default: #4cd98a;
+  --theme-color-content-warning-default: #f5b942;
+  --theme-space-xs: 8px;
+  --theme-space-xxs: 4px;
+  --typography-font-size-12: 12px;
+  --typography-line-height-20: 20px;
+}
