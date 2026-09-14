@@ -6,6 +6,12 @@
 > governs everything from here to v1. Nothing in this document mints a
 > grade or flips `overallSuccess`. Product **v1 remains INCOMPLETE**.
 >
+> **Current status — 2026-09-13.** Both held-out exams are measured; owner
+> grading and the completion signature remain pending. F1 includes the
+> calendar and Radix Themes (`npm run recipe:f1:check`). The designer-file
+> exam has closed P1 (`npm run recipe:canvas-to-code:held-out:v2:check`).
+> The historical updates below explain how these measurements were reached.
+>
 > **Update 2026-09-05 — F1 compiles; neither exam has passed.**
 > The mechanical `calendar@1` compile for react-day-picker now **succeeds**
 > (`f1Status: compiled`). All eleven named schema gaps in `compile-gaps.json`
@@ -48,14 +54,14 @@
 > [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
 >
 > **This is a measured result, not a grade, and it is not v1.** The canvas→code
-> exam is still owed on artwork this project did not draw (**P1**), and
+> exam on independent artwork closed **P1** on 2026-09-13, and
 > `overallSuccess` flips only when both exams pass AND the owner signs the
 > docs/26 amendment. `overallSuccess` stays `false`; product v1 stays
 > **INCOMPLETE**. Calendar also remains outside the shipped thirteen
 > archetypes — `recipe:point` names a date picker among the components it does
 > not model — so F1 measures an archetype a stranger cannot reach through the
-> product's paste verb. Whether that is the right exam is still an open
-> question for the owner.
+> product's paste verb. The owner retained it and added Radix Themes through
+> `recipe:point`; that second row is now measured too.
 >
 > **Where we were (2026-08-31 — honesty, not completion):**
 > Phases **1–3f / 4 prep** are done with **named blockers**, not a green

@@ -86,4 +86,6 @@ second row now exists: avatar 1.88%, switch's four states pass, checkbox
 compiles and its mint is refused by name on a shared-runtime defect. See
 [`F1-RADIX-ROUND.md`](F1-RADIX-ROUND.md).
 
-**Still open below:** the original P1 (canvas→code substrate).
+**P1 and P2 are closed as measurements.** The owner still grades both F1 rows
+and the designer-file exam and signs the amendment. Neither closure supplies
+that grade or signature.

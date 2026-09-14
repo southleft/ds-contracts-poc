@@ -1,14 +1,14 @@
 # 26 · Definition of v1
 
-> **Current state (2026-09-03, owner-signed).** The v1 criterion is the
+> **Current measurement (2026-09-13; criterion owner-signed 2026-09-03).** The v1 criterion is the
 > stranger sentence (docs/36, *Point it at your library*):
 > one command, one reviewed file, one more command, one paste, a component
 > set within the fidelity gate's bar of the library's own render for every
 > supported archetype,
 > plus a named report. An archetype is supported by measurement — a proposer,
 > a held-out library scored against its own render, every miss named. All
-> thirteen archetypes meet that today (fidelity gate 53 pass · 0 fringe ·
-> 12 named, every named row a measured font-substrate residual). The
+> thirteen archetypes are represented today (fidelity gate 58 pass · 0 fringe ·
+> 13 named; named rows retain their measured causes and any pending remedies). The
 > capture-path class rows below are not rewritten. `overallSuccess` is not
 > flipped and hashed RECORDs are not restamped by this change. F-C2C
 > (canvas→code held-out) remains an adopted co-equal gate (owner-signed

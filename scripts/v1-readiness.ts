@@ -35,9 +35,9 @@
  *   parity/receipts/v1/READINESS.md     the table — row · state · command · seconds · evidence
  *   parity/receipts/v1/READINESS.json   the same plus each command's captured tail
  *   parity/receipts/v1/AUDIT-LEDGER.md  generated from parity/receipts/v1/audit-ledger.json
- * No wall-clock stamps: the receipt carries the commit SHA, the dirty flag, the
- * definition's sha256 and the flags the run was given. Seconds are measured,
- * so they move run to run; nothing else should.
+ * The receipt carries recordedAt (UTC run start), the commit SHA, the dirty
+ * flag, the definition's sha256 and the flags the run was given. Timestamps
+ * and durations describe the measurement; conversion remains deterministic.
  *
  * STATES. GREEN · GREEN-BY-LANE (every command cited a lane run) · RED ·
  * EVIDENCE-MISSING · UNRUN (dry run, or behind a failed `&&`) · SKIPPED ·
@@ -399,6 +399,13 @@ export interface CommandResult {
 
 const treeState = (): string => git(['status', '--porcelain', '--untracked-files=no']) ?? '';
 
+export function readinessRecordMetadata(commit: string, dirty: boolean, flags: string, recordedAt: string) {
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(recordedAt) || !Number.isFinite(Date.parse(recordedAt))) {
+    throw new Error('readiness recordedAt must be an ISO UTC timestamp');
+  }
+  return { commit, dirty, flags, recordedAt };
+}
+
 function changedBetween(before: string, after: string): string[] {
   if (before === after) return [];
   const a = new Set(before.split('\n').filter(Boolean));
@@ -745,7 +752,7 @@ function renderReceipt(results: RowResult[], meta: Record<string, string>, oracl
   const L: string[] = [];
   L.push('# V1 readiness — every row of docs/26, run on this commit');
   L.push('');
-  L.push('Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their commands and their evidence references are parsed from docs/26-v1-definition.md — nothing here is listed by hand. Seconds are measured and move run to run; nothing else in this file should.');
+  L.push('Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their commands and their evidence references are parsed from docs/26-v1-definition.md — nothing here is listed by hand. recordedAt is the UTC run start; durations and timestamps describe this measurement.');
   L.push('');
   for (const [k, v] of Object.entries(meta)) L.push(`- **${k}:** ${v}`);
   L.push('');
@@ -809,6 +816,13 @@ const marker = (s: CommandResult['state']) =>
 
 // ---------------------------------------------------------------- self-test
 async function selfTest(): Promise<void> {
+  const stamp = '2026-09-14T00:00:00.000Z';
+  if (readinessRecordMetadata('test', false, '--pre-release', stamp).recordedAt !== stamp) throw new Error('readiness timestamp lost');
+  for (const invalid of ['', '2026-09-14', 'not-a-date']) {
+    let rejected = false;
+    try { readinessRecordMetadata('test', false, '', invalid); } catch { rejected = true; }
+    if (!rejected) throw new Error(`readiness accepted invalid timestamp: ${invalid}`);
+  }
   const files = repoFileReader(ROOT);
   const real = parseDefinition(files(DOCUMENT_PATH)!, files);
   if (real.length < 20) throw new Error(`parsed only ${real.length} rows from ${DOCUMENT_PATH}`);
@@ -921,6 +935,7 @@ async function main(): Promise<number> {
   const commit = git(['rev-parse', 'HEAD']) ?? 'unknown';
   const dirty = treeState() !== '';
   const flags = process.argv.slice(2).filter((a) => a.startsWith('--')).join(' ') || '(none)';
+  const recordMeta = readinessRecordMetadata(commit, dirty, flags, new Date().toISOString());
 
   console.log(`V1 READINESS — ${rows.length} rows from ${DOCUMENT_PATH} at ${commit.slice(0, 8)}${dirty ? ' (DIRTY tree)' : ''}; flags: ${flags}`);
   if (opts.dryRun) {
@@ -964,6 +979,7 @@ async function main(): Promise<number> {
 
   const meta: Record<string, string> = {
     commit: `\`${commit}\``,
+    recordedAt: recordMeta.recordedAt,
     'tree dirty at start': dirty ? 'YES' : 'no',
     definition: `${DOCUMENT_PATH} sha256 \`${createHash('sha256').update(definition).digest('hex').slice(0, 16)}\``,
     flags,
@@ -980,7 +996,7 @@ async function main(): Promise<number> {
   if (complete) {
     mkdirSync(RECEIPT_DIR, { recursive: true });
     writeFileSync(path.join(RECEIPT_DIR, 'READINESS.md'), receipt);
-    writeFileSync(path.join(RECEIPT_DIR, 'READINESS.json'), `${JSON.stringify({ meta: { commit, dirty, flags }, prep, rows: results, laneNotes: oracle.notes }, null, 2)}\n`);
+    writeFileSync(path.join(RECEIPT_DIR, 'READINESS.json'), `${JSON.stringify({ meta: recordMeta, prep, rows: results, laneNotes: oracle.notes }, null, 2)}\n`);
     if (rel01?.ledger) writeFileSync(path.join(RECEIPT_DIR, 'AUDIT-LEDGER.md'), renderLedger(rel01.ledger, ledgerSource, commit, false));
     console.log(`\nwrote parity/receipts/v1/READINESS.md, READINESS.json${rel01?.ledger ? ', AUDIT-LEDGER.md' : ''}`);
   } else if (rel01?.ledger && !opts.dryRun) {

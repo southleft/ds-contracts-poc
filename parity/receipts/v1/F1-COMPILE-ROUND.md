@@ -1,5 +1,11 @@
 # F1 held-out: from capture-only to a compiled calendar
 
+> **Superseded below (2026-09-13).** The initial compile-only account and P2
+> parking below are historical. The calendar was minted and scored, then
+> re-minted; the later dated sections record the measurement and named 2px
+> residual. The current score is re-derived by `npm run recipe:f1:check`.
+> Owner grading remains pending.
+
 **Measured 2026-09-05 on `main`.** react-day-picker 10.0.1 `DayPicker`, the
 held-out subject. Every number below re-derives from
 `npm run recipe:f1-held-out:check` plus the commands at the foot of this page.

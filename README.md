@@ -24,7 +24,7 @@ Two directions, one contract in the middle:
 
 > **Status — 2026-09-13.** Honest, dated, and gate-derived.
 >
-> - The product is the one command below
+> - The product is the capture → review → point → paste workflow below
 >   ([docs/36](docs/36-point-it-at-your-library.md)), proven for **all thirteen
 >   archetypes** and on libraries it was never taught.
 > - **Product v1 is NOT complete.** The plugin's paste verb has been exercised
@@ -65,7 +65,7 @@ your own library's render inside a boundary of thirteen archetypes; canvas→cod
 is a **reviewable starting point rather than a conversion** — it bakes your
 drawn text in as literal content and silently ignores `children`.
 
-## The one command
+## The workflow: capture, review, point, paste
 
 > A design-system engineer runs one command against their React library,
 > reviews one file, runs one more command, imports the plugin, pastes one
@@ -106,7 +106,7 @@ What it has done, measured against the real package's own render
 | avatar | Altitude 0.38%, shadcn 0.29%, Fluent 0.00%, Chakra 0.38% (captured the same morning) | MUI **0.00%**, AntD **0.00%** (the hand rows: 4%, 2.73%) | Fluent's Segoe UI is a named fallback |
 | tooltip | shadcn 4.73% | AntD = its hand row · Chakra held out, 8.83% named (Inter advance widths) | MUI's closed popper is unstable to capture |
 | chip | Altitude **0.07%**, Carbon 8.56% and Chakra 8.09% (named: glyph rasterisation; Chakra's inset-shadow ring is lowered to a border) | MUI, AntD = their hand rows | — |
-| link | Altitude 5.56% (named: glyph + underline row); Chakra held out, 10.26% named (one glyph row) | MUI 20% (the hand row: 49%) | a serif the sandbox rendered by accident, carried as its fallback |
+| link | Altitude 5.56% (named: glyph + underline row); Chakra held out, 10.26% named (one glyph row) | MUI hand/proposed rows await the recorded baseline-mount remedy and remeasurement | a serif the sandbox rendered by accident, carried as its fallback |
 | tabs | Carbon 3.87% (captured at the archetype's shape; its label centred as a button's is, its rest underline read from the border) | MUI = its hand row | shadcn's filled selected tab has no indicator; refused by name |
 | radio | Chakra **0.00%** (captured the same day through ItemIndicator) | AntD **0.00%** = its hand row | MUI's bare Radio has no label; radio@1 has no bare cell, refused by name |
 | textarea | Chakra 1.64% (the bare cell) and Chakra Field 2.02% (labelled; captured with the value on the child) | AntD 1.25% (bare; its hand row is the same bare cell), MUI 0.63% (its outline stroke drawn inside the box) | the notch knockout colour and a placeholder hidden at rest and focus are reviewed, with citations |
@@ -150,20 +150,20 @@ is invented here.
 
 **What would ship vs what is proven (owner decision note):** *Proven in
 this tree* — reader + 13×3 review package; canvas→code Button apply-step;
-held-out Card exam silent=0 and the designer-file exam (Altitude + CBDS, 5 of 24
+held-out Card exam silent=0 and the designer-file exam (Altitude + CBDS, 5
 accounting-clean, 19 refused by name); Phase 4 shadcn/Chakra proposed tables; five
 signed stays. *Not proven / not shippable as v1* — F1 is **measured, not graded**
-(react-day-picker 3.735% with a named 16px caveat); F-C2C
+(calendar and Radix rows re-derived by `recipe:f1:check`); F-C2C
 adopted but does not complete v1; `overallSuccess` false; no recipe npm surface.
 Publishing today would ship the pre-pivot `@ds-contracts/*` envelope (or
 source-ahead unpublished RCs), not a completed two-journey v1.
 
 | Surface | What it is | What it is not |
 |---|---|---|
-| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five signed stays — Button, Input, Combobox, Table, Calendar. Both journeys **partially** proven (reader 13×3; canvas→code held-out silent=0 on our own Card and on two designers' files, 5 of 24 sets accounting-clean). Gates: `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`, plus docs/35 reader / canvas→code checks. Chronology: [docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md). | Product v1. `overallSuccess` stays false except Table's v32 pin. F1 is measured (3.735%), not graded. F-C2C is adopted and does not complete v1. |
+| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five signed stays — Button, Input, Combobox, Table, Calendar. Both journeys **partially** proven (reader 13×3; canvas→code held-out silent=0 on our own Card and on two designers' files, 5 of 24 sets accounting-clean). Gates: `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`, plus docs/35 reader / canvas→code checks. Chronology: [docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md). | Product v1. `overallSuccess` stays false except Table's v32 pin. F1 has two measured rows, neither graded. F-C2C is adopted and does not complete v1. |
 | **Published npm (`@ds-contracts/*`)** | The **universal-contract** envelope (extract / generate / bundle / onboard). `latest` is the stable line (CLI `0.4.0`, schema `16.0.0`, emitter `0.3.0`). npm `next` still carries older package RCs (CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`). Use an exact version; do not assume `latest` or `next` is this tree. | Recipe-IR. A v1 proof. A complete product. |
 | **This source tree** | Root `package.json` still reads `1.0.0-rc.1`. CLI source is `0.5.0-rc.2`, schema `17.0.0-rc.1` (the `bindings` hoist), emitter `0.4.0-rc.2`, and `@ds-contracts/core` `0.1.0-rc.1` — source-ahead and unpublished. npm publish of a recipe surface is **deferred**. | A published recipe-IR RC. |
-| **GitHub releases** | Tags such as `v1.0.0-rc.1` exist. | The recipe-IR pivot. They **predate** merge `4caebfc5b` and still describe the universal-contract RC. |
+| **GitHub releases** | The release history describes the universal-contract envelope; the premature `v1.0.0-rc.1` tag was removed by owner disposition (`release-tag:check`). | A published recipe-IR RC or owner approval of this tree. |
 | **Playground** | The pre-pivot `core/` propose/emit loop, in the browser. | The v1 proof. A recipe-IR demo. |
 
 Publication, tagging, and deploy remain explicit human approvals. The
@@ -178,12 +178,12 @@ it is **not** a claim that a recipe-IR RC is in flight. Sign-off record:
 
   | measure | number | over what |
   | --- | --- | --- |
-  | mean computed-style equality | **86.4%** | 128 third-party components vs the original npm package in the same pinned Chromium — exact string match, no tolerance, 773019 style cells |
+  | mean computed-style equality | **86.4%** | 133 third-party components vs the original npm package in the same pinned Chromium — exact string match, no tolerance, 807307 style cells |
   | visual fidelity (other direction) | **92.70%** | the 537 statically scorable variants of a 599-variant Figma kit |
   | determinism | byte-identical | 291 generated files hashed against a golden manifest, no model anywhere in the path |
 - **What it costs — [docs/23 — Known Limitations](docs/23-known-limitations.md).** The complete inventory of what this tool does *not* do: measured coverage per library, the component classes captured nowhere, what a captured component fails to reproduce, which examples are frozen, and what each gate does and does not measure. It is the longer of the two, deliberately the least flattering document here, and it is the one worth your time before you invest any.
 
-The number that reconciles them is the denominator, which docs/24 prints **before** any mean: 101 of those measured components also carry a committed contract, and those 113 components are **11.1% of the 1015** in the seven libraries with a measured size. (The other three are captured with full receipts and deliberately held, so they count as measured but never as covered — a scorecard is not a shipped stem.) They were picked because they were the tractable ones. Read every percentage above as *"on the easy 11.1%."*
+The number that reconciles them is the denominator, which docs/24 prints **before** any mean: 113 of those measured components also carry a committed contract, and those 113 components are **11.1% of the 1015** in the libraries with a measured size. Held captures count as measured but never as covered — a scorecard is not a shipped stem. They were picked because they were the tractable ones. Read every percentage above as *"on the easy 11.1%."*
 
 ---
 
@@ -614,9 +614,9 @@ npm run build && npm run parity
 npm run eval     # ④ 230 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 npm run recipe:pivot-status:check
-#    ⑥ recipe-IR status pin (F1 is measured — minted and scored at 3.048%
-#       against a 5% bar — but overallSuccess still does NOT flip: the
-#       canvas→code exam is still owed, and the owner signs the amendment)
+#    ⑥ recipe-IR status pin (F1 is measured — current scores: recipe:f1:check;
+#       overallSuccess still does NOT flip: both exams await the owner's
+#       grade and the completion signature on the amendment)
 #    plus, when you touch an archetype:
 #    npm run recipe:button:check
 #    npm run recipe:input-field:check
@@ -707,7 +707,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 **Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** The
 active climb is [docs/35](docs/35-two-journey-v1-plan.md).
 
-- **F1 (held-out library, code→canvas) is measured.** As of 2026-09-05
+- **F1 (held-out library, code→canvas) has two measured rows.** react-day-picker and Radix Themes are re-derived together by `npm run recipe:f1:check`. On 2026-09-13,
   react-day-picker — never previously pointed at by the recipe path — was
   captured, compiled with no hand-authored fixture, minted onto Scratch and
   scored against the real package's Chromium render at **3.048%** (bar 5%;
@@ -726,7 +726,7 @@ active climb is [docs/35](docs/35-two-journey-v1-plan.md).
 - The playground and the published CLI still run the pre-pivot
   universal-contract path.
 
-The older model is still validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 230/230 evals — the two long-standing named reds (`mui-figma-genesis`, `child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16, stable schema and CLI releases on the public npm registry, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same `core/` engine — with a companion Figma plugin (Build / Changes / Send) that applies contract bundles to the canvas. Live relay from the plugin into the playground is off; use a figma.com URL or paste a dump. GitHub releases `v1.0.0-rc.1` and earlier **predate the pivot**. npm publish of a recipe surface is deferred. [docs/27](docs/27-release-process.md) remains the universal-contract release runbook, not a claim that a recipe-IR RC is in flight. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+The older universal-contract model remains the published surface. Its measured eval record: 225 passed, 5 named failures, 230 total. `eval:carried:check` permits only the failures recorded in [the measured red ledger](parity/receipts/v1/eval-reds.json); a green CI lane is not a claim of an all-passing suite. Dated earlier results and library rounds belong in [MILESTONES.md](MILESTONES.md). Live relay from the plugin into the playground is off; use a figma.com URL or paste a dump. npm publish of a recipe surface is deferred. [docs/27](docs/27-release-process.md) remains the universal-contract release runbook. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 - **What has been proven, dated, with receipts:** [MILESTONES.md](MILESTONES.md)
 - **What it DOES do, measured — read with the next line, never instead of it:** [docs/24 — What Works](docs/24-what-works.md)

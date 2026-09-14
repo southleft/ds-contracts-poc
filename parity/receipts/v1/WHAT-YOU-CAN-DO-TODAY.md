@@ -1,6 +1,6 @@
 # What you can do with this today
 
-**Measured 2026-09-05.** Every claim below cites a command you can re-run. Where
+**Current measurements updated 2026-09-13.** Every claim below cites a command you can re-run. Where
 a direction stops, it says so in the same words the evidence uses.
 
 The two directions are **not at the same maturity**. Read both before choosing.
@@ -23,15 +23,15 @@ a component set scored against your library's own render.
 | a **reviewed role map** | for a library the path has not seen, expect to write one. Measured below |
 | **Figma desktop + the plugin** | the last step is a human pasting one program |
 
-**What it produces, measured.** 53 of 66 fidelity rows score within **5%** of the
-library's own Chromium render; 13 are named font-substrate residuals, each with
-its measurement.
+**What it produces, measured.** 58 of 71 fidelity rows score within **5%** of the
+library's own Chromium render; 13 have named causes. The MUI Link rows retain
+a pending baseline-mount remedy; their old scores are not final measurements.
 
 ```bash
-npm run recipe:fidelity:check     # 53 pass · 0 fringe · 13 named
+npm run recipe:fidelity:check     # 58 pass · 0 fringe · 13 named
 ```
 
-On libraries the path had **never seen**, first pass:
+Historical legacy capture-path exams (2026-09-04/05, not the recipe F1 exam):
 
 | library | captured | contracts shipped | computed floor |
 | --- | --- | --- | --- |
@@ -113,10 +113,10 @@ So the component renders *your design's placeholder text, permanently*, and
 ignores what you pass it. It is a starting point you edit, not a component you
 ship.
 
-**Where it stops.** The gate above proves **accounting honesty** — zero silent
+**Where it stops.** The original gate above proves **accounting honesty** — zero silent
 losses — not usability, and says so itself. And the substrate it was measured on
-was minted by *this repository's own code→canvas engine*. The evidence file says
-it plainly:
+was minted by *this repository's own code→canvas engine*. Its historical
+blocker, superseded by the designer-file exam below, says:
 
 > "this is a round trip on our own output … **a canvas→code exam on a file drawn
 > by a designer who never used this tool is still owed**, and nothing here should
