@@ -57,7 +57,9 @@ measured on artwork this project did not itself draw.
 Desktop Bridge plugin, and the rest was mechanical. F1 was minted onto
 `byMp6lt0Ij9b2QbkDGFwBh` and scored against react-day-picker's own Chromium
 render: **pctAAMasked 3.735% against a 5% bar — pass**, with the ink-box
-difference (280x247 vs 296x265) named rather than hidden. See
+difference (280x247 vs 296x265) named rather than hidden; re-minted
+2026-09-13 at **3.048%** (294x263 vs 296x265) once the 16px was measured to
+three missing leaves and closed to 2px. See
 [`F1-COMPILE-ROUND.md`](F1-COMPILE-ROUND.md).
 
 Two things I recorded here while it was blocked were **wrong**, and I am
@@ -76,5 +78,12 @@ leaving the correction visible rather than deleting the claims:
 What was genuinely required was fixing four real defects the live mint exposed
 (auto-layout primary-axis resize, blank template label, font-load cost, absent
 font family) — engineering, not permission.
+
+**Addendum 2026-09-13.** The scope question this park raised — is a calendar
+the right F1 exam when a stranger cannot reach it — was answered by the owner:
+keep the calendar row **and** add Radix Themes through `recipe:point`. That
+second row now exists: avatar 1.88%, switch's four states pass, checkbox
+compiles and its mint is refused by name on a shared-runtime defect. See
+[`F1-RADIX-ROUND.md`](F1-RADIX-ROUND.md).
 
 **Still open below:** the original P1 (canvas→code substrate).

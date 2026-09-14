@@ -18,6 +18,9 @@ quarantine, a refusal and a stop are all results; silence is not.
 | **Bootstrap 5** | 10 | **0 / 10** | — | **stopped at *capture*** — engine fault, nine components never attempted |
 | react-day-picker | 1 | (already captured before this exam) | — | not re-run; not a first-pass subject today |
 
+*(2026-09-13: Radix Themes is now also the second F1 row through the product
+path — [`F1-RADIX-ROUND.md`](F1-RADIX-ROUND.md).)*
+
 **Radix Themes is the headline: 10 of 10 captured on a first pass, 0
 quarantined, weighted computed-equality floor 84.8% over 58,624 style cells,
 121 named refusals, 0 open review queue.** Every configured component produced

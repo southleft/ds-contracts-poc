@@ -37,11 +37,14 @@
 > **F1 IS NOW MINTED AND SCORED (2026-09-05).** The owner opened Scratch, and
 > the compiled envelope was minted onto `byMp6lt0Ij9b2QbkDGFwBh` and scored
 > against react-day-picker's own Chromium render:
-> **pctAAMasked 3.735% against a 5% bar — pass.** Read it with its caveat: the
-> ink boxes differ (280x247 canvas vs 296x265 reference), so the alignment is
-> doing real work and the threshold sweep agrees at no threshold. That 16px is
-> named and is the next thing to chase. Numbers and the four defects the live
-> mint exposed:
+> **pctAAMasked 3.048% against a 5% bar — pass** (2026-09-13 re-mint; 3.735%
+> on 2026-09-05). The 16px ink-box gap of the first mint was measured to three
+> leaves calendar@1 had no word for — the weekday row's 8px padding, the
+> caption at 18px, and the nav placed at the trailing edge — and closed to 2px
+> (294x263 canvas vs 296x265 reference). The threshold sweep still agrees at no
+> threshold: the 2px that remain are the caption glyph's placement in its line
+> box and a text-glyph chevron where the source draws an SVG path — named, not
+> hidden. Numbers and the four defects the live mint exposed:
 > [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
 >
 > **This is a measured result, not a grade, and it is not v1.** The canvas→code
@@ -214,12 +217,26 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
   **2026-09-05 (later):** minted live on Scratch and scored against
   react-day-picker's own Chromium render — **pctAAMasked 3.735%, bar 5%,
-  pass**, with the ink-box difference named. The live mint exposed four
+  pass**, with the ink-box difference named; **re-minted 2026-09-13 at
+  3.048%** once that 16px was measured to three missing leaves (weekday-row
+  padding, caption font size, trailing nav) and closed to 2px. The live mint exposed four
   defects no offline gate could: an auto-layout primary axis that silently
   refuses a resize while it is AUTO (every day button minted 8px wide), a day
   template whose label was a blank outside cell, a ~726ms-per-await font load
   that blew the host's 300s ceiling, and a font Figma does not carry. F1 is
   measured; it is not graded, and it is not v1.
+  **2026-09-13, second F1 row (owner decision: keep the calendar AND add a
+  library the paste verb can reach):** Radix Themes through `recipe:point` —
+  avatar 1.88%, switch 3.04 / 0 / 2.59 / 0.27% (four states), checkbox compiles
+  at a fixed point and its mint is refused by name on a shared-runtime inner-
+  shadow defect (fix on `fix/writer-inner-shadow`), badge and tabs refuse at the
+  role step as predicted. Five engine gaps a held-out library forced are
+  language, not answers. Receipt:
+  [`F1-RADIX-ROUND.md`](../parity/receipts/v1/F1-RADIX-ROUND.md). Both rows
+  are held by one fast-lane gate, `npm run recipe:f1:check`
+  (`recipe/evidence/f1-v1/receipt.json`): the calendar canvas re-scored from
+  committed bytes, every Radix archetype scored, refused at roles, or
+  mint-refused by name.
 - **Canvas→code exam (3f)** runs in the same window. **Its substrate was our
   own mint** — the held-out Card (page `33:2`, Card `33:5093`) came from this
   repository's code→canvas engine 8 days earlier, so it measures a round trip

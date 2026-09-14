@@ -143,6 +143,15 @@ export function parseCssBoxShadow(value: string): ShadowEffectSpec[] {
  * Emits the same normalised form the capture reports —
  * `rgba(r, g, b, a) Xpx Ypx Bpx Spx` — so a parse/serialise cycle is stable.
  */
+/** byte → the shortest decimal (1..4 places) whose ×255 rounds back to that byte. */
+export const shortestAlpha = (byte: number): number => {
+  for (let places = 1; places <= 4; places += 1) {
+    const candidate = Number((byte / 255).toFixed(places));
+    if (Math.round(candidate * 255) === byte) return candidate;
+  }
+  return byte / 255;
+};
+
 export function cssBoxShadowFromEffects(
   effects: readonly ShadowEffectSpec[] | readonly { kind: string }[],
 ): string {
@@ -155,7 +164,12 @@ export function cssBoxShadowFromEffects(
       const m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(e.color);
       if (!m) throw new CssBoxShadowError(`effect colour is not #rrggbbaa: ${e.color}`);
       const [r, g, b, a] = [1, 2, 3, 4].map((i) => parseInt(m[i]!, 16));
-      const alpha = Math.round((a! / 255) * 100) / 100;
+      // The shortest decimal that re-lowers to the SAME alpha byte. Two places
+      // happen to round-trip 0x0d (0.05 → 13) but not 0x32 (0.2 → 51): a
+      // collapse that prints 0.2 for byte 50 breaks the compile → collapse →
+      // compile fixed point on any shadow alpha the two-decimal rounding misses
+      // (measured 2026-09-13 on Radix's inset ring, rgba(0, 6, 46, 0.196)).
+      const alpha = shortestAlpha(a!);
       const inset = e.kind === "inner-shadow" ? "inset " : "";
       return `${inset}rgba(${r}, ${g}, ${b}, ${alpha}) ${e.offsetX}px ${e.offsetY}px ${e.blur}px ${e.spread}px`;
     })

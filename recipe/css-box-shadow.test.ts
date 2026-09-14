@@ -55,3 +55,15 @@ test("what cannot be resolved is refused by name, not guessed", () => {
   assert.throws(() => parseCssBoxShadow("0rem 1rem #000"), CssBoxShadowError);     // non-px
   assert.throws(() => cssColorToHex8("hsl(200 50% 50%)"), CssBoxShadowError);
 });
+
+test("the inverse prints the shortest alpha that re-lowers to the same byte (fixed point for every byte)", async () => {
+  const { parseCssBoxShadow, cssBoxShadowFromEffects, shortestAlpha } = await import("./css-box-shadow.js");
+  for (let byte = 0; byte <= 255; byte += 1) assert.equal(Math.round(shortestAlpha(byte) * 255), byte, `byte ${byte}`);
+  assert.equal(shortestAlpha(13), 0.05);
+  assert.equal(shortestAlpha(50), 0.196);
+  const ring = "rgba(0, 6, 46, 0.196) 0px 0px 0px 1px inset";
+  const once = parseCssBoxShadow(ring);
+  const twice = parseCssBoxShadow(cssBoxShadowFromEffects(once));
+  assert.deepEqual(twice, once);
+  assert.equal(cssBoxShadowFromEffects(parseCssBoxShadow("rgba(0, 0, 0, 0.05) 0px 1px 2px 0px")), "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px");
+});

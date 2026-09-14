@@ -20,6 +20,7 @@ import path from "node:path";
 
 import { Ledger, type LedgerPart } from "./ledger.js";
 import type { CheckboxRoles } from "./schema-checkbox.js";
+import { IDENTITY_COMBOS, type CheckboxComboMap } from "./schema-checkbox.js";
 import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 import type { AvatarRoles } from "./schema-avatar.js";
 import type { TooltipRoles } from "./schema-tooltip.js";
@@ -35,8 +36,33 @@ import type { DialogRoles } from "./schema-dialog.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
+  /** Combo key per state plane, derived from the ledger's declared base cell. */
+  combos: CheckboxComboMap;
   evidence: Record<string, { selector: string | null; why: string; confidence: "high" | "medium" | "low" }>;
   unresolved: string[];
+}
+
+/**
+ * The checkbox@1 combo map from the ledger's declared base cell: swap only the
+ * value token (unchecked → checked / indeterminate) and the enabled token
+ * (enabled → disabled), so a library with more axes (Radix: variant × size ×
+ * checked) resolves to ITS default cell instead of a key that does not exist.
+ * A missing plane (no indeterminate cell) maps to the identity key and the
+ * proposer's existing "no capture" handling names it.
+ */
+export function draftCheckboxCombos(ledger: Ledger): CheckboxComboMap {
+  const base = ledger.baseKey?.replace(/__default$/, "");
+  const keys = new Set(ledger.keys().filter((k) => k.endsWith("__default")).map((k) => k.slice(0, -"__default".length)));
+  const VAL = /(^|\.)(unchecked|false|off)(\.|$)/, EN = /(^|\.)(enabled|no-isDisabled)(\.|$)/;
+  const out = { ...IDENTITY_COMBOS } as CheckboxComboMap;
+  if (!base || !VAL.test(base) || !EN.test(base)) return out;
+  const swap = (k: string, from: RegExp, to: string): string => k.replace(from, (_m, pre: string, _v: string, post: string) => `${pre}${to}${post}`);
+  for (const value of ["unchecked", "checked", "indeterminate"] as const)
+    for (const en of ["enabled", "disabled"] as const) {
+      const candidate = swap(swap(base, VAL, value), EN, en);
+      if (keys.has(candidate)) out[`${value}.${en}` as keyof CheckboxComboMap] = candidate;
+    }
+  return out;
 }
 
 const sel = (p: LedgerPart): string => (p.idxPath === "" ? "root" : `idx:${p.idxPath}`);
@@ -48,10 +74,11 @@ const isSquare = (p: LedgerPart): boolean => {
 const parentPath = (idx: string): string | null => (idx === "" ? null : idx.includes(".") ? idx.slice(0, idx.lastIndexOf(".")) : "");
 
 export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
-  const base = ledger.capture("unchecked.enabled__default");
-  const checked = ledger.capture("checked.enabled__default");
-  const indeterminate = (() => { try { return ledger.capture("indeterminate.enabled__default"); } catch { return null; } })();
-  const disabled = (() => { try { return ledger.capture("unchecked.disabled__default"); } catch { return null; } })();
+  const combos = draftCheckboxCombos(ledger);
+  const base = ledger.capture(`${combos["unchecked.enabled"]}__default`);
+  const checked = ledger.capture(`${combos["checked.enabled"]}__default`);
+  const indeterminate = (() => { try { return ledger.capture(`${combos["indeterminate.enabled"]}__default`); } catch { return null; } })();
+  const disabled = (() => { try { return ledger.capture(`${combos["unchecked.disabled"]}__default`); } catch { return null; } })();
   const byPath = (cap: { parts: LedgerPart[] }) => new Map(cap.parts.map((p) => [p.idxPath, p] as const));
   const baseBy = byPath(base), checkedBy = byPath(checked);
   const evidence: RoleDraft["evidence"] = {};
@@ -65,10 +92,31 @@ export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
     if (!c || !isSquare(p) || p.tag === "svg" || p.tag === "path" || p.tag === "input") return false;
     return p.style["background-color"] !== c.style["background-color"] || p.style["border-top-color"] !== c.style["border-top-color"];
   });
-  const box = boxCandidates.sort((a, b) => num(a.style.width) - num(b.style.width))[0] ?? null;
+  let box = boxCandidates.sort((a, b) => num(a.style.width) - num(b.style.width))[0] ?? null;
+  let boxPseudo: string | undefined;
+  // A square painted by a pseudo-element (Radix: .rt-BaseCheckboxRoot::before
+  // carries the fill and the inset ring; the host button is transparent). Same
+  // test on the pseudo's computed style, including a ring drawn as box-shadow.
+  if (!box) {
+    for (const p of base.parts) {
+      if (p.tag === "svg" || p.tag === "path" || p.tag === "input") continue;
+      for (const ps of ["::before", "::after"]) {
+        const st = p.pseudo?.[ps], cst = checkedBy.get(p.idxPath)?.pseudo?.[ps];
+        if (!st || !cst) continue;
+        const w = num(st.width), h = num(st.height);
+        const square = w > 0 && Math.abs(w - h) <= 1;
+        const paints = st["background-color"] !== cst["background-color"] || st["border-top-color"] !== cst["border-top-color"] || (st["box-shadow"] ?? "none") !== (cst["box-shadow"] ?? "none");
+        if (square && paints) { box = p; boxPseudo = ps; break; }
+      }
+      if (box) break;
+    }
+  }
+  if (box && boxPseudo) roles.boxPseudo = boxPseudo;
   if (box) {
     roles.box = sel(box);
-    evidence.box = { selector: roles.box, why: `square ${box.style.width} ${box.tag}${box.classes.length ? "." + box.classes[0] : ""} whose paint changes unchecked → checked (bg ${base.parts.find((p) => p.idxPath === box.idxPath)!.style["background-color"]} → ${checkedBy.get(box.idxPath)!.style["background-color"]})`, confidence: boxCandidates.length === 1 ? "high" : "medium" };
+    const bst = boxPseudo ? box.pseudo[boxPseudo]! : box.style;
+    const cbst = boxPseudo ? checkedBy.get(box.idxPath)?.pseudo?.[boxPseudo] ?? bst : checkedBy.get(box.idxPath)!.style;
+    evidence.box = { selector: roles.box + (boxPseudo ?? ""), why: `square ${bst.width} ${box.tag}${box.classes.length ? "." + box.classes[0] : ""}${boxPseudo ?? ""} whose paint changes unchecked → checked (bg ${bst["background-color"]} → ${checkedBy.get(box.idxPath)!.style["background-color"]})`, confidence: boxCandidates.length === 1 ? "high" : "medium" };
   } else {
     unresolved.push("box: no square part changes paint between unchecked and checked");
     evidence.box = { selector: null, why: "no candidate", confidence: "low" };
@@ -149,7 +197,7 @@ export function draftCheckboxRoles(ledger: Ledger): RoleDraft {
     evidence.opacityOn = { selector: roles.opacityOn!, why: dimmed ? `${dimmed.tag} opacity ${baseBy.get(dimmed.idxPath)!.style.opacity} → ${disBy.get(dimmed.idxPath)!.style.opacity} when disabled` : "nothing dims by opacity when disabled; the box carries opacity 1 (colours change instead)", confidence: dimmed ? "high" : "medium" };
   }
 
-  return { roles, evidence, unresolved };
+  return { roles, combos, evidence, unresolved };
 }
 
 
@@ -220,15 +268,55 @@ export function draftSwitchRoles(ledger: Ledger): SwitchRoleDraft {
   const isRound = (p: LedgerPart): boolean => { const w = num(p.style.width), h = num(p.style.height), r = p.style["border-top-left-radius"] ?? ""; return w > 0 && Math.abs(w - h) <= 1 && (num(r) >= w / 2 - 0.5 || /%/.test(r)); };
   // TRACK: a pill whose paint changes off → on (or, with no ON plane, the pill with a visible fill).
   const pills = off.parts.filter((p) => isPill(p) && p.tag !== "input");
-  const track = pills.find((p) => onBy ? (onBy.get(p.idxPath)?.style["background-color"] !== p.style["background-color"]) : (p.style["background-color"] ?? "rgba(0, 0, 0, 0)") !== "rgba(0, 0, 0, 0)") ?? pills[0] ?? null;
-  if (track) { roles.track = sel(track); evidence.track = { selector: roles.track, why: `pill ${track.style.width}×${track.style.height} r=${track.style["border-top-left-radius"]} ${track.tag}${track.classes.length ? "." + track.classes[0] : ""}${onBy ? ` paint ${track.style["background-color"]} → ${onBy.get(track.idxPath)?.style["background-color"]}` : ""}`, confidence: onBy ? "high" : "medium" }; }
-  else unresolved.push("track: no pill-shaped part");
+  let track = pills.find((p) => onBy ? (onBy.get(p.idxPath)?.style["background-color"] !== p.style["background-color"]) : (p.style["background-color"] ?? "rgba(0, 0, 0, 0)") !== "rgba(0, 0, 0, 0)") ?? pills[0] ?? null;
+  let trackPseudo: string | undefined;
+  // A pill drawn by a pseudo-element (Radix: .rt-SwitchRoot::before carries the
+  // whole track; the host button is transparent). Same test, on the pseudo's
+  // computed style; the host part becomes `track` and the pseudo is named.
+  if (!track) {
+    const isPillStyle = (st: Record<string, string>): boolean => { const w = num(st.width), h = num(st.height), r = num(st["border-top-left-radius"]); return w > h * 1.3 && h > 0 && (r >= h / 2 - 0.5 || /%/.test(st["border-top-left-radius"] ?? "")); };
+    for (const p of off.parts) {
+      if (p.tag === "input") continue;
+      for (const ps of ["::before", "::after"]) {
+        const st = p.pseudo?.[ps];
+        if (st && isPillStyle(st)) { track = p; trackPseudo = ps; break; }
+      }
+      if (track) break;
+    }
+  }
+  if (track) {
+    roles.track = sel(track);
+    if (trackPseudo) roles.trackPseudo = trackPseudo;
+    const tst = trackPseudo ? track.pseudo[trackPseudo]! : track.style;
+    const onSt = onBy ? (trackPseudo ? onBy.get(track.idxPath)?.pseudo?.[trackPseudo] : onBy.get(track.idxPath)?.style) : undefined;
+    evidence.track = { selector: roles.track + (trackPseudo ?? ""), why: `pill ${tst.width}×${tst.height} r=${tst["border-top-left-radius"]} ${track.tag}${track.classes.length ? "." + track.classes[0] : ""}${trackPseudo ?? ""}${onBy ? ` paint ${tst["background-color"]} → ${onSt?.["background-color"]}` : ""}`, confidence: onBy ? "high" : "medium" };
+    // A track whose ON paint is a background-image (Radix: a two-stop gradient
+    // whose position shifts) is not a background-color fact. Say so here so the
+    // proposal refuses trackFill for that plane by name instead of reading the
+    // unchanged base colour as if it were the painted one.
+    // Per plane: a track whose paint on that plane is a background-image (Radix
+    // checked.enabled: a gradient whose position shifts; its checked.disabled
+    // drops the image again) is not a background-color fact there.
+    const imagePlanes: string[] = [];
+    for (const fix of ["false.enabled", "false.disabled", "true.enabled", "true.disabled"] as const) {
+      const key = cd.combos[fix]; if (!key) continue;
+      const part = ledger.capture(`${key}__default`).parts.find((q) => q.idxPath === track!.idxPath);
+      const st = part ? (trackPseudo ? part.pseudo?.[trackPseudo] : part.style) : undefined;
+      if (st && (st["background-image"] ?? "none") !== "none") imagePlanes.push(fix);
+    }
+    if (imagePlanes.length > 0) {
+      roles.trackImagePlanes = imagePlanes;
+      evidence.trackImagePlanes = { selector: null, why: `track painted by background-image on ${imagePlanes.join(", ")} (${String((trackPseudo ? track.pseudo[trackPseudo]! : track.style)["background-image"]).slice(0, 70)}…) — those trackFill leaves become receipts; give --set with the package's own value as evidence`, confidence: "high" };
+    }
+  }
+  else unresolved.push("track: no pill-shaped part (nor a pill-shaped ::before/::after)");
   // THUMB: a round part smaller than the track's height... (a knob), preferring one inside or beside the track.
   // The knob: a round filled part no wider than the track (MUI's 20px thumb
   // overhangs its 14px track, so the bound is the track's WIDTH), or a square
   // part whose ::before / ::after paints the round knob (AntD's handle).
   const filled = (st: Record<string, string> | undefined) => (st?.["background-color"] ?? "rgba(0, 0, 0, 0)") !== "rgba(0, 0, 0, 0)";
-  const knobs = off.parts.filter((p) => p !== track && p.tag !== "input" && (!track || num(p.style.width) <= num(track.style.width)) && isRound(p) && filled(p.style));
+  const trackWidth = track ? num((trackPseudo ? track.pseudo[trackPseudo]! : track.style).width) : 0;
+  const knobs = off.parts.filter((p) => p !== track && p.tag !== "input" && (!track || num(p.style.width) <= trackWidth) && isRound(p) && filled(p.style));
   let thumb = knobs.sort((a, b) => num(b.style.width) - num(a.style.width))[0] ?? null;
   let thumbPseudo: string | undefined;
   if (!thumb) {
@@ -243,7 +331,7 @@ export function draftSwitchRoles(ledger: Ledger): SwitchRoleDraft {
       if (thumb) break;
     }
   }
-  if (thumb) { roles.thumb = sel(thumb); if (thumbPseudo) roles.thumbPseudo = thumbPseudo; roles.thumbInsideTrack = !!track && thumb.idxPath.startsWith(track.idxPath === "" ? "" : track.idxPath + "."); const st = thumbPseudo ? thumb.pseudo[thumbPseudo]! : thumb.style; evidence.thumb = { selector: roles.thumb + (thumbPseudo ?? ""), why: `round ${st.width} ${thumb.tag}${thumb.classes.length ? "." + thumb.classes[0] : ""}${thumbPseudo ?? ""} bg ${st["background-color"]} — ${roles.thumbInsideTrack ? "INSIDE the track (opacity carried on the track)" : "a SIBLING of the track (track opacity baked into its fill)"}`, confidence: "high" }; }
+  if (thumb) { roles.thumb = sel(thumb); if (thumbPseudo) roles.thumbPseudo = thumbPseudo; roles.thumbInsideTrack = !!track && thumb !== track && thumb.idxPath.startsWith(track.idxPath === "" ? "" : track.idxPath + "."); const st = thumbPseudo ? thumb.pseudo[thumbPseudo]! : thumb.style; evidence.thumb = { selector: roles.thumb + (thumbPseudo ?? ""), why: `round ${st.width} ${thumb.tag}${thumb.classes.length ? "." + thumb.classes[0] : ""}${thumbPseudo ?? ""} bg ${st["background-color"]} — ${roles.thumbInsideTrack ? "INSIDE the track (opacity carried on the track)" : "a SIBLING of the track (track opacity baked into its fill)"}`, confidence: "high" }; }
   else unresolved.push("thumb: no round filled part (or pseudo-element) no wider than the track");
   // TRAVEL: the part whose transform changes off → on.
   if (onBy) {
@@ -255,8 +343,9 @@ export function draftSwitchRoles(ledger: Ledger): SwitchRoleDraft {
   } else evidence.travelOn = { selector: null, why: "no ON plane captured; thumb.travel and every true.* leaf need --set with evidence", confidence: "low" };
   // HIT: track's parent when larger; else the track.
   if (track) {
+    const tw = num((trackPseudo ? track.pseudo[trackPseudo]! : track.style).width), th = num((trackPseudo ? track.pseudo[trackPseudo]! : track.style).height);
     const pp = parentPath(track.idxPath); const parent = pp !== null ? off.parts.find((p) => p.idxPath === pp) : undefined;
-    if (parent && parent.tag !== "label" && num(parent.style.width) >= num(track.style.width) && num(parent.style.height) >= num(track.style.height) && !parent.text?.length && num(parent.style.width) < num(track.style.width) * 2) { roles.hit = sel(parent); evidence.hit = { selector: roles.hit, why: `the track's parent ${parent.tag} ${parent.style.width}×${parent.style.height} is the hit area`, confidence: "medium" }; }
+    if (parent && parent.tag !== "label" && num(parent.style.width) >= tw && num(parent.style.height) >= th && !parent.text?.length && num(parent.style.width) < tw * 2) { roles.hit = sel(parent); evidence.hit = { selector: roles.hit, why: `the track's parent ${parent.tag} ${parent.style.width}×${parent.style.height} is the hit area`, confidence: "medium" }; }
     else { roles.hit = roles.track; evidence.hit = { selector: roles.hit ?? null, why: "the track is its own hit area", confidence: "medium" }; }
   }
   // LABEL + ROW

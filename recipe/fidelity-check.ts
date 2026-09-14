@@ -62,6 +62,9 @@ export interface Subject {
    * Measured at capture time, never a guessed box.
    */
   referenceCrop?: string;
+  /** The row is an F1 held-out-library row (never a `_proposedWhy` stay): the
+   *  plugin-target proof never sweeps its page, and recipe:f1:check scores it. */
+  heldOut?: string;
 }
 
 export function referenceCropBox(referencePath: string, selector: string, label: string): [number, number, number, number] {
@@ -100,12 +103,14 @@ export interface FidelityRun {
 
 const manifestSubject = (label: string): Subject | undefined => (JSON.parse(readFileSync(MANIFEST, "utf8")) as { subjects: Subject[] }).subjects.find((s) => s.label === label);
 
-export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; known: Record<string, { cause: string; class: string; measured?: string }> } {
+/** `filter` narrows the manifest to a subset (the F1 gate scores only the
+ *  held-out rows); the scoring path per row is byte-for-byte the same. */
+export function runFidelity(filter: (s: Subject) => boolean = () => true): { run: FidelityRun; cards: FidelityScorecard[]; known: Record<string, { cause: string; class: string; measured?: string }> } {
   const manifest = JSON.parse(readFileSync(MANIFEST, "utf8")) as { subjects: Subject[] };
   const cards: FidelityScorecard[] = [];
   const rows: FidelityRun["rows"] = [];
 
-  for (const s of manifest.subjects) {
+  for (const s of manifest.subjects.filter(filter)) {
     for (const p of [s.shot, s.reference]) {
       if (!existsSync(path.join(REPO, p))) {
         throw new Error(`${s.label}: missing ${p} — run npm run recipe:fidelity:capture`);

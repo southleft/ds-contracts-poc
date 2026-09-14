@@ -1,0 +1,399 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Avatar",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.1",
+      "axisValues": {
+        "variant": "solid",
+        "size": "1"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.2",
+      "axisValues": {
+        "variant": "solid",
+        "size": "2"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.3",
+      "axisValues": {
+        "variant": "solid",
+        "size": "3"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.4",
+      "axisValues": {
+        "variant": "solid",
+        "size": "4"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.5",
+      "axisValues": {
+        "variant": "solid",
+        "size": "5"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.6",
+      "axisValues": {
+        "variant": "solid",
+        "size": "6"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.7",
+      "axisValues": {
+        "variant": "solid",
+        "size": "7"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.8",
+      "axisValues": {
+        "variant": "solid",
+        "size": "8"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "solid.9",
+      "axisValues": {
+        "variant": "solid",
+        "size": "9"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-AvatarRoot:where(.rt-variant-solid) :where(.rt-AvatarFallback)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.1",
+      "axisValues": {
+        "variant": "solid",
+        "size": "1"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.2",
+      "axisValues": {
+        "variant": "solid",
+        "size": "2"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.3",
+      "axisValues": {
+        "variant": "solid",
+        "size": "3"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.4",
+      "axisValues": {
+        "variant": "solid",
+        "size": "4"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.5",
+      "axisValues": {
+        "variant": "solid",
+        "size": "5"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.6",
+      "axisValues": {
+        "variant": "solid",
+        "size": "6"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.7",
+      "axisValues": {
+        "variant": "solid",
+        "size": "7"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.8",
+      "axisValues": {
+        "variant": "solid",
+        "size": "8"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "solid.9",
+      "axisValues": {
+        "variant": "solid",
+        "size": "9"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.1",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.2",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.3",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.4",
+      "axisValues": {
+        "variant": "soft",
+        "size": "4"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.5",
+      "axisValues": {
+        "variant": "soft",
+        "size": "5"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.6",
+      "axisValues": {
+        "variant": "soft",
+        "size": "6"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.7",
+      "axisValues": {
+        "variant": "soft",
+        "size": "7"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.8",
+      "axisValues": {
+        "variant": "soft",
+        "size": "8"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "soft.9",
+      "axisValues": {
+        "variant": "soft",
+        "size": "9"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-AvatarFallback"
+      }
+    }
+  ],
+  "skips": [
+    "label.color: candidates --accent-a11 → \"accent-a11\" = #002bb7c5; --accent-contrast → \"accent-contrast\" = white name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.font-family: candidate --default-font-family → \"default-font-family\" = -apple-system,\n    BlinkMacSystemFont,\n    \"Segoe UI (Custom)\",\n    Roboto,\n    \"Helvetica Neue\",\n    \"Open Sans (Custom)\",\n    system-ui,\n    sans-serif,\n    \"Apple Color Emoji\",\n    \"Segoe UI Emoji\" names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.font-size: ABSENT FROM THE DTCG FILE — --avatar-fallback-one-letter-font-size → \"avatar-fallback-one-letter-font-size\" = calc(14px * 1); --avatar-fallback-two-letters-font-size → \"avatar-fallback-two-letters-font-size\" = calc(12px * 1), and this library's DTCG file (1091 leaves) declares no leaf under any of those names, with or without the varPrefix. The VALUE is right; there is no token to bind it to. Remedy: add the leaf, or accept the anonymous literal knowingly.",
+    "root.height: candidates --space-5 → \"space-5\" = calc(24px * 1); --space-6 → \"space-6\" = calc(32px * 1); --space-7 → \"space-7\" = calc(40px * 1); --space-8 → \"space-8\" = calc(48px * 1); --space-9 → \"space-9\" = calc(64px * 1) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.letter-spacing: candidates --letter-spacing-1 → \"letter-spacing-1\" = 0.0025em; --letter-spacing-2 → \"letter-spacing-2\" = 0em; --letter-spacing-3 → \"letter-spacing-3\" = 0em; --letter-spacing-4 → \"letter-spacing-4\" = -0.0025em; --letter-spacing-6 → \"letter-spacing-6\" = -0.00625em; --letter-spacing-7 → \"letter-spacing-7\" = -0.0075em; --letter-spacing-8 → \"letter-spacing-8\" = -0.01em; --letter-spacing-9 → \"letter-spacing-9\" = -0.025em name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.width: candidates --space-5 → \"space-5\" = calc(24px * 1); --space-6 → \"space-6\" = calc(32px * 1); --space-7 → \"space-7\" = calc(40px * 1); --space-8 → \"space-8\" = calc(48px * 1); --space-9 → \"space-9\" = calc(64px * 1) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

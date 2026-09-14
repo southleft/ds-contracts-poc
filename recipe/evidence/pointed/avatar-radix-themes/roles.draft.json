@@ -1,0 +1,19 @@
+{
+  "roles": {
+    "box": "idx:0"
+  },
+  "combo": "soft.3",
+  "evidence": {
+    "box": {
+      "selector": "idx:0",
+      "why": "span.rt-AvatarFallback is the outermost painted part: 40px×40px, bg rgba(0, 71, 241, 0.07), radius 6px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span.rt-AvatarFallback carries the initials \"TP\" (the box itself)",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

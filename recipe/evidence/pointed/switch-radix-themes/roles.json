@@ -1,0 +1,18 @@
+{
+  "track": "root",
+  "trackPseudo": "::before",
+  "trackImagePlanes": [
+    "false.enabled",
+    "true.enabled"
+  ],
+  "thumb": "idx:0",
+  "thumbInsideTrack": true,
+  "travelOn": "idx:0",
+  "hit": "root",
+  "combos": {
+    "false.enabled": "surface.2.unchecked.enabled",
+    "false.disabled": "surface.2.unchecked.disabled",
+    "true.enabled": "surface.2.checked.enabled",
+    "true.disabled": "surface.2.checked.disabled"
+  }
+}

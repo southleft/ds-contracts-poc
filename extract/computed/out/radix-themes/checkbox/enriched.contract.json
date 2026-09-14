@@ -1,0 +1,314 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "radix-themes.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the HELD-OUT FIRST-PASS EXAM — props/axes only; anatomy is promoted from captured DOM truth. Subject: @radix-themes-sandbox/ui@0.0.1 (flattened mount barrel over @radix-ui/themes@3.3.0). BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @radix-themes-sandbox/ui@0.0.1 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "classic",
+          "surface",
+          "soft"
+        ]
+      },
+      "default": "surface",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "classic": "Classic",
+            "surface": "Surface",
+            "soft": "Soft"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "default": "2",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "1": "1",
+            "2": "2",
+            "3": "3"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "description": "Radix primitive tri-state; a PROP-SELECTED rendering, so a variant axis (docs/21 §4.3), not a state plane.",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "icon": {
+          "element": "svg",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy svg|BaseCheckboxIndicator.CheckboxIndicator — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "cursor": "default",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none"
+          },
+          "stylesWhen": [
+            {
+              "prop": "checked",
+              "equals": "unchecked",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "part-0-0": {
+              "element": "path",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "inline",
+                "cursor": "default",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+                "pointer-events": "none"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "checked",
+                  "equals": "unchecked",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "tokens": {
+                "line-height": "{imported.shared.size-24}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "color",
+                  "value": "rgba(0, 8, 48, 0.275)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "cursor",
+                  "value": "not-allowed",
+                  "reason": "declared-channel state delta on 18/27 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "fill",
+                  "value": "rgba(0, 8, 48, 0.275)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.checkbox.icon.bottom}",
+            "line-height": "{imported.shared.size-24}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.checkbox.icon.right}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "1": {
+                  "height": "{imported.checkbox.icon.height.1}",
+                  "left": "{imported.checkbox.icon.left.1}",
+                  "top": "{imported.checkbox.icon.top.1}",
+                  "translate-x": "{imported.checkbox.icon.translate-x.1}",
+                  "translate-y": "{imported.checkbox.icon.translate-y.1}",
+                  "width": "{imported.checkbox.icon.width.1}"
+                },
+                "2": {
+                  "height": "{imported.checkbox.icon.height.2}",
+                  "left": "{imported.checkbox.icon.left.2}",
+                  "top": "{imported.checkbox.icon.top.2}",
+                  "translate-x": "{imported.checkbox.icon.translate-x.2}",
+                  "translate-y": "{imported.checkbox.icon.translate-y.2}",
+                  "width": "{imported.checkbox.icon.width.2}"
+                },
+                "3": {
+                  "height": "{imported.checkbox.icon.height.3}",
+                  "left": "{imported.checkbox.icon.left.3}",
+                  "top": "{imported.checkbox.icon.top.3}",
+                  "translate-x": "{imported.checkbox.icon.translate-x.3}",
+                  "translate-y": "{imported.checkbox.icon.translate-y.3}",
+                  "width": "{imported.checkbox.icon.width.3}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "classic": {
+                  "color": "{imported.checkbox.icon.color.classic}",
+                  "fill": "{imported.checkbox.icon.fill.classic}"
+                },
+                "soft": {
+                  "color": "{imported.checkbox.icon.color.soft}",
+                  "fill": "{imported.checkbox.icon.fill.soft}"
+                },
+                "surface": {
+                  "color": "{imported.checkbox.icon.color.surface}",
+                  "fill": "{imported.checkbox.icon.fill.surface}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "rgba(0, 8, 48, 0.275)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "disabled",
+              "channel": "cursor",
+              "value": "not-allowed",
+              "reason": "declared-channel state delta on 18/27 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "disabled",
+              "channel": "fill",
+              "value": "rgba(0, 8, 48, 0.275)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            }
+          ]
+        }
+      },
+      "declared": {
+        "appearance": "none",
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+        "position": "relative",
+        "text-align": "start"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.checkbox.root.background-color}",
+        "border-bottom-width": "{imported.shared.size-0}",
+        "border-left-width": "{imported.shared.size-0}",
+        "border-right-width": "{imported.shared.size-0}",
+        "border-top-width": "{imported.shared.size-0}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.checkbox.root.color}",
+        "flex-shrink": "{imported.checkbox.root.flex-shrink}",
+        "font-size": "{imported.checkbox.root.font-size}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-24}",
+        "padding-bottom": "{imported.shared.size-0}",
+        "padding-left": "{imported.shared.size-0}",
+        "padding-right": "{imported.shared.size-0}",
+        "padding-top": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "1": {
+              "height": "{imported.checkbox.root.height.1}",
+              "width": "{imported.checkbox.root.width.1}"
+            },
+            "2": {
+              "height": "{imported.checkbox.root.height.2}",
+              "width": "{imported.checkbox.root.width.2}"
+            },
+            "3": {
+              "height": "{imported.checkbox.root.height.3}",
+              "width": "{imported.checkbox.root.width.3}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@radix-themes-sandbox/ui",
+        "export": "Checkbox"
+      }
+    }
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Badge",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "solid.1",
+      "axisValues": {
+        "variant": "solid",
+        "size": "1"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-Badge:where(.rt-variant-solid)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "solid.2",
+      "axisValues": {
+        "variant": "solid",
+        "size": "2"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-Badge:where(.rt-variant-solid)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "solid.3",
+      "axisValues": {
+        "variant": "solid",
+        "size": "3"
+      },
+      "token": "accent-9",
+      "varName": "--accent-9",
+      "anchor": {
+        "selector": ".rt-Badge:where(.rt-variant-solid)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "surface.1",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1"
+      },
+      "token": "accent-surface",
+      "varName": "--accent-surface",
+      "anchor": {
+        "selector": ".rt-Badge:where(.rt-variant-surface)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "surface.2",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2"
+      },
+      "token": "accent-surface",
+      "varName": "--accent-surface",
+      "anchor": {
+        "selector": ".rt-Badge:where(.rt-variant-surface)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "surface.3",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3"
+      },
+      "token": "accent-surface",
+      "varName": "--accent-surface",
+      "anchor": {
+        "selector": ".rt-Badge:where(.rt-variant-surface)"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "solid.1",
+      "axisValues": {
+        "variant": "solid",
+        "size": "1"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "solid.2",
+      "axisValues": {
+        "variant": "solid",
+        "size": "2"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "solid.3",
+      "axisValues": {
+        "variant": "solid",
+        "size": "3"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "soft.1",
+      "axisValues": {
+        "variant": "soft",
+        "size": "1"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "soft.2",
+      "axisValues": {
+        "variant": "soft",
+        "size": "2"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "soft.3",
+      "axisValues": {
+        "variant": "soft",
+        "size": "3"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "surface.1",
+      "axisValues": {
+        "variant": "surface",
+        "size": "1"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "surface.2",
+      "axisValues": {
+        "variant": "surface",
+        "size": "2"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "surface.3",
+      "axisValues": {
+        "variant": "surface",
+        "size": "3"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "outline.1",
+      "axisValues": {
+        "variant": "outline",
+        "size": "1"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "outline.2",
+      "axisValues": {
+        "variant": "outline",
+        "size": "2"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "outline.3",
+      "axisValues": {
+        "variant": "outline",
+        "size": "3"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".rt-Badge"
+      }
+    }
+  ],
+  "skips": [
+    "root.box-shadow: candidates --accent-a6 → \"accent-a6\" = #003eff3e; --accent-a8 → \"accent-a8\" = #0034dc72 name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.color: candidates --accent-a11 → \"accent-a11\" = #002bb7c5; --accent-contrast → \"accent-contrast\" = white name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.font-family: candidate --default-font-family → \"default-font-family\" = -apple-system,\n    BlinkMacSystemFont,\n    \"Segoe UI (Custom)\",\n    Roboto,\n    \"Helvetica Neue\",\n    \"Open Sans (Custom)\",\n    system-ui,\n    sans-serif,\n    \"Apple Color Emoji\",\n    \"Segoe UI Emoji\" names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.font-size: candidates --font-size-1 → \"font-size-1\" = calc(12px * 1); --font-size-2 → \"font-size-2\" = calc(14px * 1) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.letter-spacing: candidates --letter-spacing-1 → \"letter-spacing-1\" = 0.0025em; --letter-spacing-2 → \"letter-spacing-2\" = 0em name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidates --line-height-1 → \"line-height-1\" = calc(16px * 1); --line-height-2 → \"line-height-2\" = calc(20px * 1) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

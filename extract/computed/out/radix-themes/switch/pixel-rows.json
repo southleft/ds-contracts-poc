@@ -1,0 +1,722 @@
+[
+  {
+    "key": "classic.1.unchecked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.unchecked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.unchecked.enabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.unchecked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.unchecked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.unchecked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.unchecked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.unchecked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.enabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.1.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.enabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.unchecked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.enabled__focus-visible",
+    "pctExact": 0.013888888888888888,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.2.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.enabled__default",
+    "pctExact": 0.001736111111111111,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.enabled__hover",
+    "pctExact": 0.001736111111111111,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.enabled__focus-visible",
+    "pctExact": 0.001736111111111111,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.unchecked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.enabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "classic.3.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.enabled__focus-visible",
+    "pctExact": 0.008680555555555556,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.unchecked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.enabled__focus-visible",
+    "pctExact": 0.008680555555555556,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.1.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.enabled__focus-visible",
+    "pctExact": 0.013888888888888888,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.disabled__default",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.disabled__hover",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.disabled__focus-visible",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.unchecked.disabled__active",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.enabled__default",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.enabled__hover",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.enabled__focus-visible",
+    "pctExact": 0.020833333333333332,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.enabled__active",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.disabled__default",
+    "pctExact": 0.003472222222222222,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.disabled__hover",
+    "pctExact": 0.003472222222222222,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.disabled__focus-visible",
+    "pctExact": 0.003472222222222222,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.2.checked.disabled__active",
+    "pctExact": 0.003472222222222222,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.enabled__default",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.enabled__hover",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.enabled__focus-visible",
+    "pctExact": 0.034722222222222224,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.enabled__active",
+    "pctExact": 0.006944444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.disabled__default",
+    "pctExact": 0.024305555555555556,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.disabled__hover",
+    "pctExact": 0.024305555555555556,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.disabled__focus-visible",
+    "pctExact": 0.024305555555555556,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.unchecked.disabled__active",
+    "pctExact": 0.024305555555555556,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.enabled__focus-visible",
+    "pctExact": 0.027777777777777776,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "surface.3.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.enabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.unchecked.disabled__active",
+    "pctExact": 0.017361111111111112,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.enabled__default",
+    "pctExact": 0.06076388888888889,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.enabled__hover",
+    "pctExact": 0.06076388888888889,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.enabled__focus-visible",
+    "pctExact": 0.06076388888888889,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.enabled__active",
+    "pctExact": 0.125,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.1.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.enabled__default",
+    "pctExact": 0.022569444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.enabled__hover",
+    "pctExact": 0.022569444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.enabled__focus-visible",
+    "pctExact": 0.022569444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.enabled__active",
+    "pctExact": 0.022569444444444444,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.disabled__default",
+    "pctExact": 0.010416666666666666,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.disabled__hover",
+    "pctExact": 0.010416666666666666,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.disabled__focus-visible",
+    "pctExact": 0.010416666666666666,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.unchecked.disabled__active",
+    "pctExact": 0.010416666666666666,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.enabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.2.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.enabled__default",
+    "pctExact": 0.020833333333333332,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.enabled__hover",
+    "pctExact": 0.020833333333333332,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.enabled__focus-visible",
+    "pctExact": 0.06944444444444445,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.enabled__active",
+    "pctExact": 0.020833333333333332,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.disabled__default",
+    "pctExact": 0.026041666666666668,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.disabled__hover",
+    "pctExact": 0.026041666666666668,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.disabled__focus-visible",
+    "pctExact": 0.026041666666666668,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.unchecked.disabled__active",
+    "pctExact": 0.026041666666666668,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.enabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.enabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.enabled__focus-visible",
+    "pctExact": 0.171875,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.enabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.disabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.disabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.disabled__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "soft.3.checked.disabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

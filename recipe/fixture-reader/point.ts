@@ -51,7 +51,8 @@ import type { MenuRoles } from "./schema-menu.js";
 import { proposeDialogFixture } from "./propose-dialog.js";
 import type { DialogRoles } from "./schema-dialog.js";
 import type { AvatarRoles } from "./schema-avatar.js";
-import type { CheckboxRoles } from "./schema-checkbox.js";
+import type { CheckboxRoles, CheckboxComboMap } from "./schema-checkbox.js";
+import type { RoleDraft } from "./draft-roles.js";
 import type { SwitchComboMap, SwitchRoles } from "./schema-switch.js";
 import { hashRecipeInstance } from "../recipe.js";
 import { archetypeToolkit } from "./toolkit.js";
@@ -154,7 +155,7 @@ if (rolesFile) {
     console.error(`✖ the role map cannot be drafted from the ledger alone:\n  - ${draft.unresolved.join("\n  - ")}\n  Review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))}, write roles.json, and pass --roles-file.`);
     process.exit(2);
   }
-  roles = (archetype === "checkbox" ? draft.roles : archetype === "switch" || archetype === "radio" || archetype === "textarea" || archetype === "alert" ? { ...(draft as { roles: SwitchRoles }).roles, combos: (draft as { combos: SwitchComboMap }).combos } : { ...(draft as { roles: AvatarRoles | TooltipRoles | ChipRoles | LinkRoles | TabsRoles }).roles, combo: (draft as { combo: string }).combo }) as Roles;
+  roles = (archetype === "checkbox" ? { ...(draft as RoleDraft).roles, combos: (draft as RoleDraft).combos } : archetype === "switch" || archetype === "radio" || archetype === "textarea" || archetype === "alert" ? { ...(draft as { roles: SwitchRoles }).roles, combos: (draft as { combos: SwitchComboMap }).combos } : { ...(draft as { roles: AvatarRoles | TooltipRoles | ChipRoles | LinkRoles | TabsRoles }).roles, combo: (draft as { combo: string }).combo }) as Roles;
   say(`2. roles     DRAFTED from the ledger — ${Object.entries(draft.evidence).map(([k, v]) => `${k}:${(v as { confidence: string }).confidence}`).join(" ")} (review ${path.relative(REPO, path.join(outDir, "roles.draft.json"))})`);
 }
 writeFileSync(path.join(outDir, "roles.json"), `${JSON.stringify(roles, null, 2)}\n`);
@@ -171,7 +172,8 @@ if (archetype === "checkbox") {
   const glyphFile = arg("glyph-file");
   if (!glyphFile) throw new Error("--glyph-file <json> is required for checkbox: the glyph's geometry is cited from the package source ({path, viewBox, paint, strokeWidth, cap, join, source})");
   glyph = JSON.parse(readFileSync(path.resolve(glyphFile), "utf8")) as GlyphSpec;
-  proposed = proposeCheckboxFixture({ ...common, roles: roles as CheckboxRoles, glyph });
+  const { combos: checkboxCombos, ...checkboxRoles } = roles as CheckboxRoles & { combos?: CheckboxComboMap };
+  proposed = proposeCheckboxFixture({ ...common, roles: checkboxRoles as CheckboxRoles, glyph, combos: checkboxCombos });
 } else if (archetype === "switch") {
   const { combos, ...switchRoles } = roles as SwitchRoles & { combos: SwitchComboMap };
   proposed = proposeSwitchFixture({ ...common, roles: switchRoles, combos });

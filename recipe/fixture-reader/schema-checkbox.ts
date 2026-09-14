@@ -24,6 +24,8 @@ export interface CheckboxRoles {
   hit: string;
   /** The painted square: border, fill, radius, padding. */
   box: string;
+  /** When the square is painted by a pseudo-element of `box` (Radix: .rt-BaseCheckboxRoot::before; the host button is transparent). */
+  boxPseudo?: string;
   /** The check glyph's SVG element (check.width/height). */
   glyph: string;
   /** The glyph's drawn element (path/polyline): stroke, stroke-width. */
@@ -144,11 +146,11 @@ export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchem
   };
   const rows: FactMapping[] = [
     R("wrapper.size", () => one("wrapper.size", "px", { combo: base, part: roles.hit, channel: "width" })),
-    R("box.size", () => one("box.size", "px", { combo: base, part: roles.box, channel: "width" })),
-    R("box.radius", () => one("box.radius", "px", { combo: base, part: roles.box, channel: "border-top-left-radius" })),
-    R("box.borderWidth", () => one("box.borderWidth", "px", { combo: base, part: roles.box, channel: "border-top-width" })),
-    R("box.padding", () => one("box.padding", "px", { combo: base, part: roles.box, channel: "padding-top" })),
-    R("boxShadow", () => one("boxShadow", "string", { combo: base, part: roles.box, channel: "box-shadow" }, { formula: "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)" })),
+    R("box.size", () => one("box.size", "px", { combo: base, part: roles.box, pseudo: roles.boxPseudo, channel: "width" })),
+    R("box.radius", () => one("box.radius", "px", { combo: base, part: roles.box, pseudo: roles.boxPseudo, channel: "border-top-left-radius" })),
+    R("box.borderWidth", () => one("box.borderWidth", "px", { combo: base, part: roles.box, pseudo: roles.boxPseudo, channel: "border-top-width" })),
+    R("box.padding", () => one("box.padding", "px", { combo: base, part: roles.box, pseudo: roles.boxPseudo, channel: "padding-top" })),
+    R("boxShadow", () => one("boxShadow", "string", { combo: base, part: roles.box, pseudo: roles.boxPseudo, channel: "box-shadow" }, { formula: "the box's own box-shadow declaration, verbatim (\"none\" is a fact too)" })),
     R("row.gap", () => (roles.row ? one("row.gap", "px", { combo: base, part: roles.row, channel: "column-gap" }) : receipt("row.gap", BARE, "reviewed 0"))),
     R("dash.width", () =>
       roles.dash
@@ -194,8 +196,8 @@ export function checkboxSchemaMappings(roles: CheckboxRoles, opts: CheckboxSchem
     const combo = combos[fix];
     const opacityPart = roles.opacityOn ?? roles.box;
     rows.push(
-      R(`states.${fix}.boxFill`, () => one(`states.${fix}.boxFill`, "color", { combo, part: roles.box, channel: "background-color" })),
-      R(`states.${fix}.boxBorder`, () => one(`states.${fix}.boxBorder`, "color", { combo, part: roles.box, channel: "border-top-color" })),
+      R(`states.${fix}.boxFill`, () => one(`states.${fix}.boxFill`, "color", { combo, part: roles.box, pseudo: roles.boxPseudo, channel: "background-color" })),
+      R(`states.${fix}.boxBorder`, () => one(`states.${fix}.boxBorder`, "color", { combo, part: roles.box, pseudo: roles.boxPseudo, channel: "border-top-color" })),
       R(`states.${fix}.boxOpacity`, () => one(`states.${fix}.boxOpacity`, "number", { combo, part: opacityPart, channel: "opacity" })),
       R(`states.${fix}.label`, () => (roles.label ? one(`states.${fix}.label`, "color", { combo, part: roles.label, channel: "color" }) : receipt(`states.${fix}.label`, BARE, `reviewed ${BARE_LABEL_COLOR}`))),
     );

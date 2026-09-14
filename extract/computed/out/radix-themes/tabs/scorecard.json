@@ -1,0 +1,969 @@
+{
+  "component": "Tabs",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 1144,
+    "cellsEqual": 1018,
+    "pctEqual": 88.98601398601399,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 2.295138888888889,
+    "meanAA": 0.4552951388888889,
+    "maxAA": 0.953125
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 45,
+    "mintedLeavesUnfolded": 40,
+    "baseBindings": 133,
+    "stateBindings": 19,
+    "codeOnlyChannels": 18,
+    "overflowBindings": 11,
+    "folds": 109
+  },
+  "worstRows": [
+    {
+      "key": "__focus-visible",
+      "pctAA": 0.953125,
+      "pctExact": 2.8940972222222223,
+      "channelsMismatched": 31
+    },
+    {
+      "key": "__active",
+      "pctAA": 0.8038194444444444,
+      "pctExact": 2.5572916666666665,
+      "channelsMismatched": 37
+    },
+    {
+      "key": "__hover",
+      "pctAA": 0.041666666666666664,
+      "pctExact": 1.8645833333333333,
+      "channelsMismatched": 29
+    },
+    {
+      "key": "__default",
+      "pctAA": 0.022569444444444444,
+      "pctExact": 1.8645833333333333,
+      "channelsMismatched": 29
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.overflow-wrap",
+      4
+    ],
+    [
+      "root.text-size-adjust",
+      4
+    ],
+    [
+      "basetablist.overflow-wrap",
+      4
+    ],
+    [
+      "basetablist.scrollbar-width",
+      4
+    ],
+    [
+      "basetablist.text-size-adjust",
+      4
+    ],
+    [
+      "basetablisttrigger.border-bottom-color",
+      4
+    ],
+    [
+      "basetablisttrigger.border-left-color",
+      4
+    ],
+    [
+      "basetablisttrigger.border-right-color",
+      4
+    ],
+    [
+      "basetablisttrigger.border-top-color",
+      4
+    ],
+    [
+      "basetablisttrigger.overflow-wrap",
+      4
+    ],
+    [
+      "basetablisttrigger.text-size-adjust",
+      4
+    ],
+    [
+      "label.overflow-wrap",
+      4
+    ],
+    [
+      "label.text-size-adjust",
+      4
+    ],
+    [
+      "basetablisttrigger-2.border-bottom-color",
+      4
+    ],
+    [
+      "basetablisttrigger-2.border-left-color",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "promotion: non-painting-part: label-2 <span> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints, yet it carries the text \"Account\" — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame with visible text on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+    "promotion: non-painting-part: label-4 <span> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints, yet it carries the text \"Documents\" — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame with visible text on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+    "promotion: non-painting-part: label-6 <span> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints, yet it carries the text \"Settings\" — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame with visible text on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+    "overflow: label-3.font-weight [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label-3.left [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label-3.letter-spacing [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label-3.right [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.font-weight [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.left [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.right [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablist.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablist.scrollbar-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablist.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablisttrigger.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablisttrigger.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablisttrigger-2.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablisttrigger-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablisttrigger-3.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: basetablisttrigger-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-5.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only[active]: label.letter-spacing — value shape outside mintable kinds and outside the declared vocabulary"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/radix-themes/tokens/radix-themes-minted.dtcg.json",
+    "leavesAdded": 0,
+    "bootstrap": true,
+    "note": "measured without a shipped minted tree — this library has never promoted one (tokens.mintedBootstrap). The gate inventory is base + this run's FRESH mint only; re-run the harness after the first promotion to measure against the shipped tree.",
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 286,
+      "channelsEqual": 257,
+      "pctExact": 1.8645833333333333,
+      "pctAA": 0.022569444444444444,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablist",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablist",
+          "channel": "scrollbar-width",
+          "ours": "auto",
+          "theirs": "none"
+        },
+        {
+          "part": "basetablist",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 286,
+      "channelsEqual": 257,
+      "pctExact": 1.8645833333333333,
+      "pctAA": 0.041666666666666664,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablist",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablist",
+          "channel": "scrollbar-width",
+          "ours": "auto",
+          "theirs": "none"
+        },
+        {
+          "part": "basetablist",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 286,
+      "channelsEqual": 255,
+      "pctExact": 2.8940972222222223,
+      "pctAA": 0.953125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablist",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablist",
+          "channel": "scrollbar-width",
+          "ours": "auto",
+          "theirs": "none"
+        },
+        {
+          "part": "basetablist",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(28, 32, 36, 1)",
+          "theirs": "rgba(141, 164, 239, 1)"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 286,
+      "channelsEqual": 249,
+      "pctExact": 2.5572916666666665,
+      "pctAA": 0.8038194444444444,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablist",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablist",
+          "channel": "scrollbar-width",
+          "ours": "auto",
+          "theirs": "none"
+        },
+        {
+          "part": "basetablist",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "font-weight",
+          "ours": "500",
+          "theirs": "400"
+        },
+        {
+          "part": "label",
+          "channel": "left",
+          "ours": "7.98438px",
+          "theirs": "8.15625px"
+        },
+        {
+          "part": "label",
+          "channel": "letter-spacing",
+          "ours": "-0.14px",
+          "theirs": "normal"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(28, 32, 36, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "right",
+          "ours": "8px",
+          "theirs": "8.17188px"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(28, 32, 36, 1)"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-3",
+          "channel": "font-weight",
+          "ours": "400",
+          "theirs": "500"
+        },
+        {
+          "part": "label-3",
+          "channel": "left",
+          "ours": "8.1875px",
+          "theirs": "7.98438px"
+        },
+        {
+          "part": "label-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-3",
+          "channel": "right",
+          "ours": "8.20312px",
+          "theirs": "8px"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(0, 7, 20, 0.624)"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "basetablisttrigger-3",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-5",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-5",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    }
+  ]
+}

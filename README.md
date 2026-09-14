@@ -35,12 +35,18 @@ Two directions, one contract in the middle:
 >   canvas→code path: **5 accounting-clean, 19 refused by name, nothing
 >   silent.** The census and every refusal, verbatim:
 >   [CANVAS-TO-CODE-DESIGNER-EXAM.md](parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
-> - **The held-out code→canvas exam (F1) is measured, not graded.**
->   react-day-picker — a library the recipe path had never been pointed at —
->   was captured, compiled, minted onto Figma and scored against the real
->   package's own Chromium render at **3.735%** against a 5% bar. Read it with
->   its caveat, which is stated in the receipt:
->   [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
+> - **The held-out code→canvas exam (F1) has two rows, both measured, neither
+>   graded.** react-day-picker's calendar was captured, compiled, minted onto
+>   Figma and scored at **3.048%** against a 5% bar (re-minted 2026-09-13 after
+>   the named 16px ink-box gap was measured to three missing leaves and closed to
+>   2px, [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md)). And on
+>   2026-09-13 **Radix Themes** — a held-out library — went through the product's
+>   own `recipe:point` command: avatar **1.88%**, switch **3.04 / 0 / 2.59 /
+>   0.27%** across its four states; checkbox points and compiles but its mint is
+>   refused by name on a shared-runtime defect; badge and tabs refuse at the role
+>   step as predicted ([F1-RADIX-ROUND.md](parity/receipts/v1/F1-RADIX-ROUND.md)).
+>   One gate, `npm run recipe:f1:check`, re-derives both rows from committed
+>   bytes on every push ([receipt](recipe/evidence/f1-v1/README.md)).
 > - `overallSuccess` remains **false**. It flips only when both exams pass and
 >   the owner signs the [docs/26 amendment](docs/26-amendment-canvas-to-code.md).
 >
@@ -471,7 +477,7 @@ Brownfield: a mature Figma library your team drew by hand, and a mature codebase
 
 The two numbers that matter pull in opposite directions, and both are true. Both are measured in [docs/24 — What Works](docs/24-what-works.md), and both are priced in [docs/23 — Known Limitations](docs/23-known-limitations.md):
 
-**Fidelity per captured component is high — 86.4% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 116 components across nine libraries (the measured capture corpus of [docs/24 §2](docs/24-what-works.md) — shadcn/ui, Fluent 2 and Ant Design are in it, this repo's own library is not) score **86.4% mean computed-style equality** (85.9% cell-weighted over 773,019 cells; 61 of 128 at ≥90%, 101 of 128 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 128 worst-first, with nothing omitted — the worst is 47.6% (shadcn Avatar, pixel-AA-perfect 12/12; the divergence is channel-string spelling). The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
+**Fidelity per captured component is high — 86.4% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 116 components across nine libraries (the measured capture corpus of [docs/24 §2](docs/24-what-works.md) — shadcn/ui, Fluent 2 and Ant Design are in it, this repo's own library is not) score **86.4% mean computed-style equality** (85.8% cell-weighted over 807,307 cells; 63 of 133 at ≥90%, 105 of 133 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 133 worst-first, with nothing omitted — the worst is 47.6% (shadcn Avatar, pixel-AA-perfect 12/12; the divergence is channel-string spelling). The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
 **Coverage per library is partial, and a first pass will not be your whole library.** Each foreign-library round in this repo committed between 5 and 31 components out of a library of 46 to 243 — the measured per-library coverage runs from about 2% to about 23%, and those 113 components are **11.1% of the 1015** in the seven libraries with a measured size. The per-library table with its denominators is [docs/24 §2](docs/24-what-works.md), printed there *before* any fidelity average for exactly this reason; the source of those denominators is [docs/22 §8.3](docs/22-generality.md). Budget hours per library for the recon and the config, then machine time for the capture.
 
 Beyond that, four properties you can rely on:
@@ -608,7 +614,7 @@ npm run build && npm run parity
 npm run eval     # ④ 230 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 npm run recipe:pivot-status:check
-#    ⑥ recipe-IR status pin (F1 is measured — minted and scored at 3.735%
+#    ⑥ recipe-IR status pin (F1 is measured — minted and scored at 3.048%
 #       against a 5% bar — but overallSuccess still does NOT flip: the
 #       canvas→code exam is still owed, and the owner signs the amendment)
 #    plus, when you touch an archetype:
@@ -676,7 +682,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 21. [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) · the nine-step recipe eight library rounds actually followed, the full capture-config reference, the decision guide for the parts that are still craft, and a troubleshooting table built from real failures
 22. [Generality — general engine, or just these libraries?](docs/22-generality.md) · the evidence behind the recipe: the styling-architecture matrix, the cross-library fix record (a defect found via one library repairing another's bytes in the same commit), the adversarial engine audit, and the honest ledger of where the claim leaks
 23. [**Known Limitations**](docs/23-known-limitations.md) · half of the adoption-decision pair — what it costs: measured coverage per library, the component classes captured nowhere, what a captured component does not reproduce, which examples are frozen and why, the journey verbs that do not exist, and what every gate leaves out of its denominator
-24. [**What Works**](docs/24-what-works.md) · the other half — what it does: the denominator first, then computed-style equality per library and per component (all 128, worst first), canvas→code fidelity, the round-trip fact accounting, and the pins that make each number re-derivable. Generated by `npm run capability:report`; `npm run capability:fresh` refuses if it has gone stale, and one of the 230 evals runs that refusal
+24. [**What Works**](docs/24-what-works.md) · the other half — what it does: the denominator first, then computed-style equality per library and per component (all 133, worst first), canvas→code fidelity, the round-trip fact accounting, and the pins that make each number re-derivable. Generated by `npm run capability:report`; `npm run capability:fresh` refuses if it has gone stale, and one of the 230 evals runs that refusal
 25. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 26. [Definition of v1](docs/26-v1-definition.md) · the pinned release contract and its exact evidence
 27. [Release Process](docs/27-release-process.md) · pre-pivot envelope runbook (coordinated RC build, pack, verify); recipe-IR never shipped as an npm RC
@@ -704,8 +710,10 @@ active climb is [docs/35](docs/35-two-journey-v1-plan.md).
 - **F1 (held-out library, code→canvas) is measured.** As of 2026-09-05
   react-day-picker — never previously pointed at by the recipe path — was
   captured, compiled with no hand-authored fixture, minted onto Scratch and
-  scored against the real package's Chromium render at **3.735%** (bar 5%).
-  It is a measurement, not a grade, and it carries a named caveat:
+  scored against the real package's Chromium render at **3.048%** (bar 5%;
+  3.735% on 2026-09-05, re-minted 2026-09-13 once the 16px ink-box gap was
+  measured to three missing leaves). It is a measurement, not a grade, and
+  the 2px residual is named:
   [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
 - **The canvas→code exam has run on a designer's file.** As of 2026-09-13
   twenty-four sets from two files drawn by people who never used this tool

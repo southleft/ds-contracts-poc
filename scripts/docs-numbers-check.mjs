@@ -157,7 +157,7 @@ const FID_CARRIAGE = FID_UNSCORED - FID_INTERACTION;
 // module was invisible to both. What makes the duplicate safe is the stray
 // refusal below: a corpus this list has never heard of is a failure by name,
 // so the next library cannot be silently left out the way Fluent was.
-const LIB_DIRS = new Set(['altitude', 'antd', 'astryx', 'carbon', 'chakra', 'fluent', 'mui', 'polaris', 'shadcn', 'tailwind']);
+const LIB_DIRS = new Set(['altitude', 'antd', 'astryx', 'carbon', 'chakra', 'fluent', 'mui', 'polaris', 'radix-themes', 'shadcn', 'tailwind']);
 
 /**
  * Capture directories that are a SECOND MOUNT of a library already in LIB_DIRS —

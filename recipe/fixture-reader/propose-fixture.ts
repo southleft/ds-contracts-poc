@@ -26,7 +26,7 @@ import path from "node:path";
 
 import { Ledger, hex8, num, px } from "./ledger.js";
 import { isReceipt, type FactMapping, type LedgerMapping } from "./reader.js";
-import { CHECKBOX_SPELLINGS, checkboxSchemaMappings, type CheckboxRoles, type CheckboxSchemaOptions, type Spelling, spellingsFor } from "./schema-checkbox.js";
+import { CHECKBOX_SPELLINGS, checkboxSchemaMappings, type CheckboxRoles, type CheckboxSchemaOptions, type Spelling, spellingsFor, IDENTITY_COMBOS, type CheckboxComboMap } from "./schema-checkbox.js";
 import { toFigmaVectorPath, transformVectorPath, vectorPathHullBounds } from "../figma-vector-path.js";
 
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
@@ -339,6 +339,8 @@ export interface ProposeInput {
   ledger: string;
   roles: CheckboxRoles;
   glyph: GlyphSpec;
+  /** Combo keys per state plane (drafted from the ledger's base cell). Identity when absent. */
+  combos?: CheckboxComboMap;
   /** path → { value, why } reviewed values for leaves the ledger cannot carry. */
   sets?: Record<string, { value: string; why: string }>;
   displayName?: string;
@@ -367,7 +369,8 @@ export function proposeCheckboxFixture(input: ProposeInput): ProposeResult {
   const [pkg, version] = truth._provenance.library.split(/@(?=[^@]+$)/);
   const receiptsForSchema: NonNullable<CheckboxSchemaOptions["receipts"]> = {};
   receiptsForSchema["check.path"] = { why: "glyph geometry is cited from the package source (--glyph), not a computed channel", evidence: glyph.source };
-  const mappings = checkboxSchemaMappings(roles, { glyphPaint: glyph.paint, glyphViewBox: glyph.viewBox, receipts: receiptsForSchema });
+  const combos = input.combos ?? IDENTITY_COMBOS;
+  const mappings = checkboxSchemaMappings(roles, { glyphPaint: glyph.paint, glyphViewBox: glyph.viewBox, receipts: receiptsForSchema, combos });
   sets.set("check.path", { value: "(see glyph)", why: glyph.source });
   const evaluated = evaluate(ledger, mappings, sets, spellingsFor(roles));
   // checkbox@1 draws the row at one of two alignments; a capture whose row
@@ -382,11 +385,11 @@ export function proposeCheckboxFixture(input: ProposeInput): ProposeResult {
   if (evaluated.refused.length > 0) {
     return { proposal: null as unknown as Proposal, modulePath: path.join(REPO, out), proposalPath, refused: evaluated.refused };
   }
-  const labelPart = roles.label ? ledger.capture("unchecked.enabled__default").parts.find((p) => selectorMatches(p, roles.label!)) : undefined;
+  const labelPart = roles.label ? ledger.capture(`${combos["unchecked.enabled"]}__default`).parts.find((p) => selectorMatches(p, roles.label!)) : undefined;
   const labelText: string | null = roles.label ? ((labelPart?.text ?? [])[0] ?? "") : null;
   const family = String(evaluated.leaves["typography.label.family"]?.value ?? "");
   const style = String(evaluated.leaves["typography.label.style"]?.value ?? "");
-  const stack = roles.label ? ledger.raw("unchecked.enabled__default", roles.label, "font-family") : "(bare cell — no label part)";
+  const stack = roles.label ? ledger.raw(`${combos["unchecked.enabled"]}__default`, roles.label, "font-family") : "(bare cell — no label part)";
   const renderedWidth = Number(evaluated.leaves["check.width"]?.value);
   const scaled = scaleGlyph(glyph, renderedWidth);
   const proposal: Proposal = {

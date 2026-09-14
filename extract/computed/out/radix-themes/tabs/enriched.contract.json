@@ -1,0 +1,457 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "radix-themes.tabs",
+  "name": "Tabs",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the HELD-OUT FIRST-PASS EXAM — props/axes only; anatomy is promoted from captured DOM truth. Subject: @radix-themes-sandbox/ui@0.0.1 (flattened mount barrel over @radix-ui/themes@3.3.0). BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @radix-themes-sandbox/ui@0.0.1 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\""
+      },
+      "parts": {
+        "basetablist": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|BaseTabList.TabsList — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "justify": "start"
+          },
+          "parts": {
+            "basetablisttrigger": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|BaseTabListTrigger.TabsTrigger — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "parts": {
+                "label": {
+                  "text": "Account",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|BaseTabListTriggerInner.TabsTriggerInner — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "position": "absolute",
+                    "box-sizing": "border-box",
+                    "cursor": "default",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+                    "text-wrap-mode": "nowrap",
+                    "user-select": "none"
+                  },
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declaredStates": {
+                    "focus-visible": {
+                      "outline-style": "solid"
+                    }
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-4}",
+                    "border-bottom-right-radius": "{imported.shared.size-4}",
+                    "border-top-left-radius": "{imported.shared.size-4}",
+                    "border-top-right-radius": "{imported.shared.size-4}",
+                    "bottom": "{imported.shared.size-6}",
+                    "color": "{imported.shared.color-1c2024}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.tabs.label.font-weight}",
+                    "height": "{imported.shared.size-28}",
+                    "left": "{imported.tabs.label.left}",
+                    "letter-spacing": "{imported.tabs.label.letter-spacing}",
+                    "line-height": "{imported.shared.size-20}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "outline-color": "{imported.shared.color-1c2024}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "right": "{imported.shared.size-8}",
+                    "top": "{imported.shared.size-6}",
+                    "width": "{imported.tabs.label.width}"
+                  },
+                  "states": {
+                    "active": {
+                      "color": "{imported.shared.color-0007149f}"
+                    }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "font-weight",
+                      "value": "400",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "left",
+                      "value": "8.15625px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "letter-spacing",
+                      "value": "normal",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "outline-color",
+                      "value": "#0007149f",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "right",
+                      "value": "8.17188px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#8da4ef",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "-2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
+                },
+                "basetablisttrigger-before": {
+                  "shape": {
+                    "kind": "rect",
+                    "width": 85.672,
+                    "height": 2
+                  },
+                  "declared": {
+                    "position": "absolute"
+                  },
+                  "literals": {
+                    "background-color": "rgba(62, 99, 221, 1)",
+                    "border-top-width": "0px",
+                    "border-right-width": "0px",
+                    "border-bottom-width": "0px",
+                    "border-left-width": "0px",
+                    "top": "38px",
+                    "left": "-0.00005000000000165983px"
+                  },
+                  "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round + Wave B.2): an UNCONDITIONAL 85.672×2 rect at -0.00005000000000165983,38 inside basetablisttrigger — position:absolute with literal offsets; rotation 0; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+                }
+              },
+              "declared": {
+                "appearance": "none",
+                "border-bottom-style": "none",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+                "position": "relative",
+                "text-align": "start",
+                "text-wrap-mode": "nowrap",
+                "user-select": "none"
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-00000000}",
+                "border-bottom-width": "{imported.shared.size-0}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-1c2024}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-40}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-20}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-8}",
+                "padding-right": "{imported.shared.size-8}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.basetablisttrigger.width}"
+              },
+              "states": {
+                "active": {
+                  "color": "{imported.shared.color-0007149f}"
+                }
+              }
+            },
+            "basetablisttrigger-2": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|BaseTabListTrigger.TabsTrigger — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "parts": {
+                "label-3": {
+                  "text": "Documents",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|BaseTabListTriggerInner.TabsTriggerInner — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "position": "absolute",
+                    "box-sizing": "border-box",
+                    "cursor": "default",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+                    "text-wrap-mode": "nowrap",
+                    "user-select": "none"
+                  },
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-4}",
+                    "border-bottom-right-radius": "{imported.shared.size-4}",
+                    "border-top-left-radius": "{imported.shared.size-4}",
+                    "border-top-right-radius": "{imported.shared.size-4}",
+                    "bottom": "{imported.shared.size-6}",
+                    "color": "{imported.shared.color-0007149f}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.tabs.label-3.font-weight}",
+                    "height": "{imported.shared.size-28}",
+                    "left": "{imported.tabs.label-3.left}",
+                    "line-height": "{imported.shared.size-20}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "right": "{imported.tabs.label-3.right}",
+                    "top": "{imported.shared.size-6}",
+                    "width": "{imported.tabs.label-3.width}"
+                  },
+                  "states": {
+                    "active": {
+                      "background-color": "{imported.tabs.label-3.background-color-state-active}",
+                      "color": "{imported.shared.color-1c2024}"
+                    },
+                    "hover": {
+                      "background-color": "{imported.tabs.label-3.background-color-state-hover}",
+                      "color": "{imported.shared.color-1c2024}"
+                    }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "font-weight",
+                      "value": "500",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "left",
+                      "value": "7.98438px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "letter-spacing",
+                      "value": "-0.14px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "right",
+                      "value": "8px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "appearance": "none",
+                "border-bottom-style": "none",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+                "position": "relative",
+                "text-align": "start",
+                "text-wrap-mode": "nowrap",
+                "user-select": "none"
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-00000000}",
+                "border-bottom-width": "{imported.shared.size-0}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-0007149f}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-40}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-20}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-8}",
+                "padding-right": "{imported.shared.size-8}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.basetablisttrigger-2.width}"
+              },
+              "states": {
+                "active": {
+                  "color": "{imported.shared.color-1c2024}"
+                },
+                "hover": {
+                  "color": "{imported.shared.color-1c2024}"
+                }
+              }
+            },
+            "basetablisttrigger-3": {
+              "element": "button",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|BaseTabListTrigger.TabsTrigger — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "parts": {
+                "label-5": {
+                  "text": "Settings",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|BaseTabListTriggerInner.TabsTriggerInner — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "position": "absolute",
+                    "box-sizing": "border-box",
+                    "cursor": "default",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+                    "text-wrap-mode": "nowrap",
+                    "user-select": "none"
+                  },
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-4}",
+                    "border-bottom-right-radius": "{imported.shared.size-4}",
+                    "border-top-left-radius": "{imported.shared.size-4}",
+                    "border-top-right-radius": "{imported.shared.size-4}",
+                    "bottom": "{imported.shared.size-6}",
+                    "color": "{imported.shared.color-0007149f}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.tabs.label-5.font-weight}",
+                    "height": "{imported.shared.size-28}",
+                    "left": "{imported.tabs.label-5.left}",
+                    "line-height": "{imported.shared.size-20}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "right": "{imported.tabs.label-5.right}",
+                    "top": "{imported.shared.size-6}",
+                    "width": "{imported.tabs.label-5.width}"
+                  }
+                }
+              },
+              "declared": {
+                "appearance": "none",
+                "border-bottom-style": "none",
+                "border-left-style": "none",
+                "border-right-style": "none",
+                "border-top-style": "none",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+                "position": "relative",
+                "text-align": "start",
+                "text-wrap-mode": "nowrap",
+                "user-select": "none"
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-00000000}",
+                "border-bottom-width": "{imported.shared.size-0}",
+                "border-left-width": "{imported.shared.size-0}",
+                "border-right-width": "{imported.shared.size-0}",
+                "border-top-width": "{imported.shared.size-0}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-0007149f}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-40}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-20}",
+                "padding-bottom": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-8}",
+                "padding-right": "{imported.shared.size-8}",
+                "padding-top": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.tabs.basetablisttrigger-3.width}"
+              }
+            }
+          },
+          "declared": {
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI (Custom)\", Roboto, \"Helvetica Neue\", \"Open Sans (Custom)\", system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+            "overflow-x": "auto",
+            "overflow-y": "auto",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "box-shadow": "{imported.tabs.basetablist.box-shadow}",
+            "color": "{imported.shared.color-1c2024}",
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.shared.size-40}",
+            "line-height": "{imported.shared.size-20}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "width": "{imported.tabs.basetablist.width}"
+          }
+        }
+      },
+      "tokens": {
+        "color": "{imported.shared.color-1c2024}",
+        "height": "{imported.shared.size-40}",
+        "line-height": "{imported.tabs.root.line-height}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "width": "{imported.tabs.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@radix-themes-sandbox/ui",
+        "export": "TabsRoot"
+      }
+    }
+  }
+}
