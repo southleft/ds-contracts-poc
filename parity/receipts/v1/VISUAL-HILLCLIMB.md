@@ -60,6 +60,19 @@ the broad local fast run exposed these stale references rather than hiding them.
 
 ## Next bounded steps
 
+### Integration guard caught a stale plugin receipt (2026-09-14)
+
+Candidate `4ba75cece` failed the full lane's plugin packaging guard: the core
+fixes changed the bundled engine from 864984 to 866257 bytes, while the recorded
+input hash still described the previous core. `npm run plugin:zip` reproduced
+the named STALE refusal locally. The existing receipt generator re-derived
+`figma-sync/plugin/engine.receipt.json`; no source, signed lineage, or screenshot
+baseline was changed. Fresh `plugin:zip`, `plugin:check`, and `plugin:ui-check`
+all passed locally (including all browser UI assertions, no console/page errors).
+The full eval suite is remeasured separately, not presumed green
+from the receipt update. Pending job status alone is not evidence that completed
+steps passed; monitoring must include failed step conclusions.
+
 1. Fresh held-out code→Figma screenshots are now portable committed evidence in
    `recipe/evidence/live-fidelity-2026-09-14/`; `npm run recipe:fidelity:check`
    re-derives every score and checks hashes, repeated renders, and coverage.
