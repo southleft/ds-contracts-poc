@@ -131,6 +131,8 @@
         "background-color": "{theme.color.background.danger-weak}",
         "border-radius": "{theme.border.radius.pill}",
         "gap": "{theme.space.xxs}",
+        "padding-left": "{imported.badge.root.padding-left.{shape}}",
+        "padding-right": "{imported.badge.root.padding-right.{shape}}",
         "width": "{imported.badge.root.width.{shape}}",
         "height": "{imported.badge.root.height.{shape}}"
       }

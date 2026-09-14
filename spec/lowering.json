@@ -1644,8 +1644,8 @@
       "stage": "propose",
       "status": "implemented",
       "file": "core/propose-figma.ts",
-      "line": 5750,
-      "ruleLine": 5751,
+      "line": 5769,
+      "ruleLine": 5770,
       "ruleText": "if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {",
       "css": {
         "construct": "a canvas root drawn at exactly row / center / center",

@@ -74,6 +74,22 @@
   gap: var(--spacing-050);
 }
 
+.alignment-left.size-large .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-left-large);
+}
+
+.alignment-left.size-small .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-left-small);
+}
+
+.alignment-right.size-large .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-right-large);
+}
+
+.alignment-right.size-small .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-right-small);
+}
+
 .errorText2 {
   color: var(--text-danger-default);
   font-size: var(--body-font-small);

@@ -16,6 +16,14 @@
  */
 
 :root {
+  --imported-menu-root-padding-bottom-default: 4px;
+  --imported-menu-root-padding-bottom-simple: 0px;
+  --imported-menu-root-padding-left-default: 4px;
+  --imported-menu-root-padding-left-simple: 0px;
+  --imported-menu-root-padding-right-default: 4px;
+  --imported-menu-root-padding-right-simple: 0px;
+  --imported-menu-root-padding-top-default: 4px;
+  --imported-menu-root-padding-top-simple: 0px;
   --imported-stub-state-default-selected-no-role-item-root-height: 36px;
   --imported-stub-state-default-selected-no-role-item-root-width: 101px;
   --theme-color-background-neutral-default: #1d1d1a;

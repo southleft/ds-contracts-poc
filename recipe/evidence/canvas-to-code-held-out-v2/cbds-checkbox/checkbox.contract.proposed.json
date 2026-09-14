@@ -175,7 +175,8 @@
             "grow": true
           },
           "tokens": {
-            "gap": "{spacing.050}"
+            "gap": "{spacing.050}",
+            "padding-left": "{imported.checkbox.error-text.padding-left.{alignment}.{size}}"
           },
           "parts": {
             "Icon": {

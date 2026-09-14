@@ -28,6 +28,10 @@
   --imported-checkbox-content-top-checkbox-label-line-height-large: 24px;
   --imported-checkbox-content-top-checkbox-label-line-height-small: 20px;
   --imported-checkbox-error-text-error-text-font-weight: 400;
+  --imported-checkbox-error-text-padding-left-left-large: 4px;
+  --imported-checkbox-error-text-padding-left-left-small: 2px;
+  --imported-checkbox-error-text-padding-left-right-large: 0px;
+  --imported-checkbox-error-text-padding-left-right-small: 0px;
   --imported-stub-selection-unchecked-size-large-state-default-error-false-root-height-large: 24px;
   --imported-stub-selection-unchecked-size-large-state-default-error-false-root-height-small: 16px;
   --imported-stub-selection-unchecked-size-large-state-default-error-false-root-width-large: 24px;

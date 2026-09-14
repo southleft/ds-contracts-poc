@@ -2315,6 +2315,20 @@ function invertNodeTokens(
     }
     if (!sides.some(([, field]) => fields.has(field))) continue;
     sides.forEach(([cssProp], i) => carry(cssProp, refs[i]));
+    // A partially bound side has no unified ref, but its resolved layout
+    // measurement is still present in every plane. Route only those missing
+    // sides through the existing mint classifier; never replace a carried
+    // ref or infer padding when the layout witness is absent.
+    sides.forEach(([cssProp, field], i) => {
+      if (!ctx.mint || refs[i] !== undefined || !m.occ.every((o) => o.node.layout !== undefined)) return;
+      const bound = m.occ.filter((o) => o.node.bound?.[field] !== undefined);
+      if (bound.length === 0 || bound.length === m.occ.length) return;
+      const index = { paddingTop: 0, paddingRight: 1, paddingBottom: 2, paddingLeft: 3 }[field];
+      mintObservation(ctx, tokens, where, cssProp, 'px', numOccurrences(m, (n) => n.layout!.padding[index]), `${where}|${field}`);
+      ctx.notes.push(
+        `${where} ${field}: bound in ${bound.length}/${m.occ.length} variants — captured padding values routed to provisional mint; binding identity (${[...new Set(bound.map((o) => o.node.bound![field]))].join(', ')}) is not preserved by this fallback, review`,
+      );
+    });
     ctx.notes.push(
       `${where}: ${label} padding bindings differ — ${shorthand} is not representable; carried as separate ${sides.map(([p]) => p).join('/')} channels`,
     );

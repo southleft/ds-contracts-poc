@@ -1,5 +1,49 @@
 {
   "imported": {
+    "menu": {
+      "root": {
+        "padding-left": {
+          "default": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "simple": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "default": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "simple": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "padding-top": {
+          "default": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "simple": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "padding-bottom": {
+          "default": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "simple": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
     "stub-state-default-selected-no-role-item": {
       "root": {
         "width": {

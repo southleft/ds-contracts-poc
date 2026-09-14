@@ -105,7 +105,11 @@
         }
       },
       "tokens": {
-        "background-color": "{theme.color.background.neutral-default}"
+        "background-color": "{theme.color.background.neutral-default}",
+        "padding-left": "{imported.menu.root.padding-left.{variant}}",
+        "padding-right": "{imported.menu.root.padding-right.{variant}}",
+        "padding-top": "{imported.menu.root.padding-top.{variant}}",
+        "padding-bottom": "{imported.menu.root.padding-bottom.{variant}}"
       }
     }
   },

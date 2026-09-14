@@ -21,11 +21,15 @@
 }
 
 .shape-label {
+  padding-left: var(--imported-badge-root-padding-left-label);
+  padding-right: var(--imported-badge-root-padding-right-label);
   width: var(--imported-badge-root-width-label);
   height: var(--imported-badge-root-height-label);
 }
 
 .shape-dot {
+  padding-left: var(--imported-badge-root-padding-left-dot);
+  padding-right: var(--imported-badge-root-padding-right-dot);
   width: var(--imported-badge-root-width-dot);
   height: var(--imported-badge-root-height-dot);
   border-radius: var(--theme-space-xs);

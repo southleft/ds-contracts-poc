@@ -129,3 +129,53 @@ test("single-axis proposals keep the backwards-compatible object spelling", () =
     ["tone"],
   );
 });
+
+test("partial padding bindings retain measured sides without replacing a carried binding", () => {
+  const dump = specimen();
+  for (const variant of dump.variants) {
+    const label = variant.variantProperties!.Shape === "Label";
+    variant.layout!.padding = [4, label ? 8 : 0, 4, label ? 8 : 0];
+    variant.bound = {
+      ...variant.bound,
+      paddingTop: "radii/a",
+      paddingBottom: "radii/a",
+      ...(label ? { paddingLeft: "radii/b", paddingRight: "radii/b" } : {}),
+    };
+  }
+  const options = {
+    corpus,
+    contractIdByName: new Map<string, string>(),
+    fileKey: null,
+    projectionMode: "reviewable-inversion" as const,
+  };
+  const result = proposeFromDump(dump, { ...options, mintUnbound: true });
+  const part = (result.contract.anatomy as { root: Part }).root;
+  const tokens = resolveTokens(part, { tone: "danger", shape: "label" });
+  assert.equal(
+    tokens["padding-block"],
+    "{radii.a}",
+    "carried variable identity wins",
+  );
+  assert.ok(tokens["padding-left"], "partially bound side must not vanish");
+  assert.ok(tokens["padding-right"]);
+  const tree = result.mintedTokens!.tree as any;
+  assert.equal(tree.imported.specimen.root["padding-left"].label.$value, "8px");
+  assert.equal(tree.imported.specimen.root["padding-left"].dot.$value, "0px");
+  assert.ok(
+    result.notes.some(
+      (note) =>
+        note.includes("captured padding values") &&
+        note.includes("binding identity"),
+    ),
+  );
+  const withoutMint = proposeFromDump(dump, options);
+  const unminted = resolveTokens(
+    (withoutMint.contract.anatomy as { root: Part }).root,
+    { tone: "danger", shape: "label" },
+  );
+  assert.equal(
+    unminted["padding-left"],
+    undefined,
+    "mint-off still refuses partial bindings",
+  );
+});

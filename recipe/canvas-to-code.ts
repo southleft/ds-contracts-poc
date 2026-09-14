@@ -315,6 +315,8 @@ export function mountCells(
 }
 
 const READ_ROOT_PROPS = [
+  "width",
+  "height",
   "display",
   "flex-direction",
   "justify-content",
