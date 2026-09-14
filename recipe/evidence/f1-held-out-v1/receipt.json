@@ -225,6 +225,24 @@
       "formula": "ledger cls:rdp-nav.position=absolute + right=0px, cls:rdp-caption_label.text-align=start — both nav buttons at the trailing edge, caption at the leading edge"
     },
     {
+      "path": "dayStates.selected.typography.fontSize",
+      "value": 18,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default idx:0.1.1.1.3.2.0.font-size",
+      "formula": "selected button's own computed font size; never inherited from the first ordinary day"
+    },
+    {
+      "path": "dayStates.selected.typography.font.family",
+      "value": "Times",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default idx:0.1.1.1.3.2.0.font-family",
+      "formula": "selected button's own computed family; target availability is declared separately"
+    },
+    {
+      "path": "dayStates.selected.typography.font.style",
+      "value": "Bold",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default idx:0.1.1.1.3.2.0.font-weight",
+      "formula": "selected button's own computed weight mapped to its requested face"
+    },
+    {
       "path": "typography.caption.family",
       "value": "Times",
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-caption_label.font-family",
@@ -296,8 +314,8 @@
     ],
     "schemaIssues": [],
     "evidencedBy": "real-proposed-instance-schema-parse",
-    "canonicalHash": "36977234033ec3994d5df2fa0cbe451a2acc0e56445bf4e67a7b429a59737b76",
-    "carriedFacts": 32,
+    "canonicalHash": "0e662d82e62fee70eadd1467dfb3515dd2ceea121de6c98117a64c2dc209a181",
+    "carriedFacts": 35,
     "receipts": 6,
     "liveFigma": false,
     "inventedFixtureTable": false,
@@ -330,6 +348,15 @@
       "ledgerValue": "absolute right:0px caption start",
       "reason": "react-day-picker draws the caption at the leading edge and both nav buttons at the trailing edge; calendar@1 only knew previous ‹ caption › next with a centred caption, so the caption ink started 14px in and the next chevron sat 7px short of the render's.",
       "evidence": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-nav.position, cls:rdp-nav.right, cls:rdp-caption_label.text-align"
+    },
+    {
+      "id": "selected-day-typography",
+      "status": "closed",
+      "closedBy": "Optional non-default day-state typography carries the state's own font and size; absent keeps the existing common day type byte-identical.",
+      "schemaPath": "tokens.dayStates.selected.typography",
+      "ledgerValue": "18px / 700",
+      "reason": "The selected day has distinct typography; using the first ordinary day silently loses its size and weight. This is a carried leaf, not renderer noise.",
+      "evidence": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default idx:0.1.1.1.3.2.0.font-size/font-weight/font-family"
     },
     {
       "id": "week-count-not-six",

@@ -10,8 +10,8 @@ Determinism **IDENTICAL** (undefined captures, undefined combos × undefined int
 
 ## Mechanical compile
 
-Attempted against calendar@1 from ledger reads only. **Refused.** Named gaps live in `compile-gaps.json`: 5 week rows vs 6 required, blank hidden-outside labels, `100%` day-button radius, selected marker is a border not a fill, `row-gap: normal`, `min-width: auto`, no week-number part, 0 source bindings, axes mismatch.
+Attempted against calendar@1 from ledger reads only. **Compiled.** Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json compiled to a calendar@1 envelope with no hand-authored fixture and no Astryx content. Named gaps and their closure evidence live in `compile-gaps.json`.
 
 ## Stop line
 
-Proposed table + named compile refusal. No live Figma. No invented pass. No Polar. `f1Status` is never `passed`. Live mint stays owner-authorized and waits on an honest compile — which this grammar cannot do without a named calendar@1 change.
+This offline prepare gate does not perform a live mint or source capture. Separately recorded screenshots and scores do not change that boundary. No invented pass. No Polar. `f1Status` is never `passed`; owner grading and signoff remain separate.

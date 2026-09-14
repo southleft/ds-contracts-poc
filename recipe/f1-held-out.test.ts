@@ -11,7 +11,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 
-import { buildF1HeldOutEvidence } from "./fixture-reader/f1-held-out.js";
+import { buildF1HeldOutEvidence, renderF1HeldOutArtifacts } from "./fixture-reader/f1-held-out.js";
 import {
   assertNoPolarPropose,
   proposeCalendarInstanceFromLedger,
@@ -76,6 +76,20 @@ test("F1 compiles mechanically, and compiling is not passing", () => {
   // Still no hand-authored fixture, still not added to the curated table.
   assert.equal(compile.inventedFixtureTable, false);
   assert.equal(compile.addedToCalendarInstances, false);
+});
+
+test("generated F1 prose reports the actual compile outcome without claiming live verification", () => {
+  const { receipt } = buildF1HeldOutEvidence();
+  const compiled = renderF1HeldOutArtifacts(receipt)["README.md"];
+  assert.match(compiled, /\*\*Compiled\.\*\*/);
+  assert.doesNotMatch(compiled, /\*\*Refused\.\*\*|which this grammar cannot do/);
+  assert.match(compiled, /does not perform a live mint or source capture/);
+  const refused = renderF1HeldOutArtifacts({ ...receipt, recipeCompile: {
+    compiled: false, reason: "Planted schema refusal", canonicalHash: null,
+  } })["README.md"];
+  assert.match(refused, /\*\*Refused\.\*\*/);
+  assert.match(refused, /Planted schema refusal/);
+  assert.doesNotMatch(refused, /\*\*Compiled\.\*\*/);
 });
 
 test("mechanical propose is January 2026, five weeks, no Polar", () => {

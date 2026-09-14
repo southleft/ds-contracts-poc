@@ -556,6 +556,31 @@ export function proposeCalendarInstanceFromLedger(
   const captionFw = tryRaw(ledger, "cls:rdp-caption_label", "font-weight");
   const dayFf = tryRaw(ledger, "cls:rdp-day_button", "font-family");
   const dayFw = tryRaw(ledger, "cls:rdp-day_button", "font-weight");
+  const selectedFs = selectedBtn?.style["font-size"] ?? null;
+  const selectedFf = selectedBtn?.style["font-family"] ?? null;
+  const selectedFw = selectedBtn?.style["font-weight"] ?? null;
+  const selectedTypeDiffers = selectedFs !== null && selectedFf !== null && selectedFw !== null
+    && (px(selectedFs) !== btnFs || selectedFf !== dayFf || selectedFw !== dayFw);
+  if (selectedTypeDiffers && selectedBtn) {
+    const selector = `idx:${selectedBtn.idxPath}`;
+    proposed.push(
+      leaf("dayStates.selected.typography.fontSize", px(selectedFs), selector, "font-size",
+        "selected button's own computed font size; never inherited from the first ordinary day"),
+      leaf("dayStates.selected.typography.font.family", firstFamily(selectedFf), selector, "font-family",
+        "selected button's own computed family; target availability is declared separately"),
+      leaf("dayStates.selected.typography.font.style", weightStyle(selectedFw), selector, "font-weight",
+        "selected button's own computed weight mapped to its requested face"),
+    );
+    gaps.push({
+      id: "selected-day-typography",
+      status: "closed" as const,
+      closedBy: "Optional non-default day-state typography carries the state's own font and size; absent keeps the existing common day type byte-identical.",
+      schemaPath: "tokens.dayStates.selected.typography",
+      ledgerValue: `${selectedFs} / ${selectedFw}`,
+      reason: "The selected day has distinct typography; using the first ordinary day silently loses its size and weight. This is a carried leaf, not renderer noise.",
+      evidence: `${F1_CALENDAR_LEDGER}#${F1_CALENDAR_COMBO} ${selector}.font-size/font-weight/font-family`,
+    });
+  }
   const weekdayFs = tryRaw(ledger, "cls:rdp-weekday", "font-size");
   const weekdayFf = tryRaw(ledger, "cls:rdp-weekday", "font-family");
   const weekdayFwLeaf = tryRaw(ledger, "cls:rdp-weekday", "font-weight");
@@ -959,6 +984,12 @@ export function proposeCalendarInstanceFromLedger(
         selected: {
           background: colTok(selectedBtnBg ?? defaultBg),
           text: colTok(selectedBtnText ?? defaultText),
+          ...(selectedTypeDiffers && selectedBtn ? {
+            typography: {
+              font: fontSpec(selectedFf!, selectedFw!, `idx:${selectedBtn.idxPath}`),
+              fontSize: numTok(px(selectedFs!)),
+            },
+          } : {}),
           // Selected is painted as a BORDER, not a fill. The ring pair is the
           // recipe's existing spelling for exactly that; the fill stays the
           // transparent value the capture measured.

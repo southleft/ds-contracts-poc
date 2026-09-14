@@ -170,6 +170,24 @@
       "formula": "ledger cls:rdp-nav.position=absolute + right=0px, cls:rdp-caption_label.text-align=start — both nav buttons at the trailing edge, caption at the leading edge"
     },
     {
+      "path": "dayStates.selected.typography.fontSize",
+      "value": 18,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default idx:0.1.1.1.3.2.0.font-size",
+      "formula": "selected button's own computed font size; never inherited from the first ordinary day"
+    },
+    {
+      "path": "dayStates.selected.typography.font.family",
+      "value": "Times",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default idx:0.1.1.1.3.2.0.font-family",
+      "formula": "selected button's own computed family; target availability is declared separately"
+    },
+    {
+      "path": "dayStates.selected.typography.font.style",
+      "value": "Bold",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default idx:0.1.1.1.3.2.0.font-weight",
+      "formula": "selected button's own computed weight mapped to its requested face"
+    },
+    {
       "path": "typography.caption.family",
       "value": "Times",
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-caption_label.font-family",

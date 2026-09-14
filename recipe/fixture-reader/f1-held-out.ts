@@ -3,9 +3,8 @@
  * + mechanical calendar@1 compile attempt.
  *
  * Offline-first. Never invents a Calendar remint. Never flips overallSuccess.
- * Compile is attempted against a ledger-only propose; it refuses because
- * calendar@1 cannot express the captured month without Polar. f1Status stays
- * capture-only | blocked | unproven — never passed.
+ * Compile is attempted against a ledger-only propose; its actual outcome is
+ * reported. f1Status may be compiled, but never passed by this offline gate.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { compileCalendarRecipe } from "../recipes/calendar.js";
@@ -318,6 +317,7 @@ export function renderF1HeldOutArtifacts(receipt: Record<string, unknown>): {
   "compile-gaps.json": string;
   "README.md": string;
 } {
+  const compile = receipt.recipeCompile as F1RecipeCompile | null;
   return {
     "receipt.json": JSON.stringify(receipt, null, 2) + "\n",
     "proposed-table.json":
@@ -357,11 +357,11 @@ export function renderF1HeldOutArtifacts(receipt: Record<string, unknown>): {
       "",
       "## Mechanical compile",
       "",
-      "Attempted against calendar@1 from ledger reads only. **Refused.** Named gaps live in `compile-gaps.json`: 5 week rows vs 6 required, blank hidden-outside labels, `100%` day-button radius, selected marker is a border not a fill, `row-gap: normal`, `min-width: auto`, no week-number part, 0 source bindings, axes mismatch.",
+      `Attempted against calendar@1 from ledger reads only. **${compile?.compiled ? "Compiled" : "Refused"}.** ${compile?.reason ?? String(receipt.proposeError ?? "No compile outcome available.")} Named gaps and their closure evidence live in \`compile-gaps.json\`.`,
       "",
       "## Stop line",
       "",
-      "Proposed table + named compile refusal. No live Figma. No invented pass. No Polar. `f1Status` is never `passed`. Live mint stays owner-authorized and waits on an honest compile — which this grammar cannot do without a named calendar@1 change.",
+      "This offline prepare gate does not perform a live mint or source capture. Separately recorded screenshots and scores do not change that boundary. No invented pass. No Polar. `f1Status` is never `passed`; owner grading and signoff remain separate.",
       "",
     ].join("\n"),
   };
