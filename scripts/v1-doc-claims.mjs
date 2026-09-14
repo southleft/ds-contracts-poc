@@ -1,5 +1,24 @@
 // Current v1 status prose, independently checked against measured artifacts.
 // Dated historical receipts are deliberately not scanned.
+export function radixReadmeClaimFailures(readme, f1) {
+  const text = readme.replace(/\*\*/g, '').replace(/^> ?/gm, '');
+  const failures = [];
+  for (const item of f1.rows.radix.archetypes.filter((a) => a.outcome === 'scored')) {
+    const match = new RegExp(`${item.archetype} scored\\s*([\\d.\\s/]+)%`).exec(text);
+    const scores = match?.[1].split('/').map(Number);
+    if (!scores || scores.length !== item.rows.length || scores.some((n, i) => n !== item.rows[i].pctAAMasked)) {
+      failures.push(`README.md: current Radix ${item.archetype} scores disagree with the F1 measurement or are missing`);
+    }
+    if (new RegExp(`${item.archetype} points and compiles but its mint is\\s*refused`).test(text)) {
+      failures.push(`README.md: current Radix ${item.archetype} mint refusal contradicts its scored measurement`);
+    }
+  }
+  const refusal = /(\d+) archetypes refuse at the role step/.exec(text);
+  const refused = f1.rows.radix.archetypes.filter((a) => a.outcome === 'refused-at-roles').length;
+  if (!refusal || +refusal[1] !== refused) failures.push('README.md: current Radix role refusal count disagrees with F1 or is missing');
+  return failures;
+}
+
 export function fidelityCounts(scorecard, known) {
   if (!Array.isArray(scorecard.rows) || !known.failures) throw new Error('v1 fidelity sources missing rows/failures');
   const labels = scorecard.rows.map((r) => r.label);

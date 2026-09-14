@@ -41,10 +41,11 @@ Two directions, one contract in the middle:
 >   the named 16px ink-box gap was measured to three missing leaves and closed to
 >   2px, [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md)). And on
 >   2026-09-13 **Radix Themes** — a held-out library — went through the product's
->   own `recipe:point` command: avatar **1.88%**, switch **3.04 / 0 / 2.59 /
->   0.27%** across its four states; checkbox points and compiles but its mint is
->   refused by name on a shared-runtime defect; badge and tabs refuse at the role
->   step as predicted ([F1-RADIX-ROUND.md](parity/receipts/v1/F1-RADIX-ROUND.md)).
+>   own `recipe:point` command: avatar scored **1.88%**; switch scored **3.04 /
+>   0 / 2.59 / 0.27%** across its four states; checkbox scored **0 / 0 / 0 /
+>   0 / 0.39 / 0%** across its six states after the shared-runtime and inactive
+>   glyph-host fixes. **2 archetypes refuse at the role step** (badge and tabs),
+>   as predicted ([F1-RADIX-ROUND.md](parity/receipts/v1/F1-RADIX-ROUND.md)).
 >   One gate, `npm run recipe:f1:check`, re-derives both rows from committed
 >   bytes on every push ([receipt](recipe/evidence/f1-v1/README.md)).
 > - `overallSuccess` remains **false**. It flips only when both exams pass and
@@ -720,7 +721,7 @@ active climb is [docs/35](docs/35-two-journey-v1-plan.md).
   (Altitude Design System, CBDS UI Kit) were observed read-only and put through
   the path: 5 accounting-clean, 19 refused by name, nothing silent
   ([CANVAS-TO-CODE-DESIGNER-EXAM.md](parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md)).
-  The eight refusals are the map of what the direction cannot yet say.
+  The named refusals are the map of what the direction cannot yet say.
 - **`overallSuccess` is not flipped** (except Table's existing v32 pin), and
   npm publish of a recipe surface is deferred.
 - The playground and the published CLI still run the pre-pivot

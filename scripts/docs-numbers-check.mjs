@@ -43,7 +43,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { recordFreshnessFailures } from './eval-record-check.mjs';
 import { evalRedFailures } from './eval-red-ledger.mjs';
-import { fidelityCounts, v1DocClaimFailures, v1ExamClaimFailures } from './v1-doc-claims.mjs';
+import { fidelityCounts, v1DocClaimFailures, v1ExamClaimFailures, radixReadmeClaimFailures } from './v1-doc-claims.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IGNORE = '<!-- docs-check:ignore -->';
@@ -152,6 +152,10 @@ for (const message of v1ExamClaimFailures(
   JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/f1-v1/receipt.json'), 'utf8')),
   JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/canvas-to-code-held-out-v2/index.json'), 'utf8')),
 )) fail('current v1 exams', message);
+for (const message of radixReadmeClaimFailures(
+  readFileSync(path.join(ROOT, 'README.md'), 'utf8'),
+  JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/f1-v1/receipt.json'), 'utf8')),
+)) fail('current Radix exam', message);
 
 // ---- capture denominators (the SAME sources docs/24 is generated from) -----
 // Derived from extract/computed/out/**/scorecard.json + the docs/22 §8.3

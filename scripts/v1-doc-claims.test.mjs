@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { fidelityCounts, v1DocClaimFailures, v1ExamClaimFailures } from './v1-doc-claims.mjs';
+import { readFileSync } from 'node:fs';
+import { fidelityCounts, v1DocClaimFailures, v1ExamClaimFailures, radixReadmeClaimFailures } from './v1-doc-claims.mjs';
 
 const scorecard = { subjects: 3, passed: 2, fringeExcused: 0, failed: 1, knownFailures: 1, rows: [
   { label: 'a', status: 'pass' }, { label: 'b', status: 'pass' }, { label: 'c', status: 'fail' },
@@ -40,4 +41,15 @@ test('exam prose rejects stale calendar scores and designer counts without gradi
   assert.match(v1ExamClaimFailures({ 'README.md': readme.replace('3.048', '3.735') }, f1, designer).join('\n'), /current calendar score/);
   assert.match(v1ExamClaimFailures({ 'README.md': readme.replace('1 accounting-clean', '2 accounting-clean') }, f1, designer).join('\n'), /designer exam counts/);
   assert.throws(() => v1ExamClaimFailures({}, f1, { subjects: [{ outcome: 'accounting-zero-silent', silent: 1, unexplained: 0 }] }), /unaccounted/);
+});
+
+test('README current Radix status cannot keep a mint refusal after successful measurement', () => {
+  const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+  const f1 = JSON.parse(readFileSync(new URL('../recipe/evidence/f1-v1/receipt.json', import.meta.url), 'utf8'));
+  assert.equal(f1.rows.radix.archetypes.find((a) => a.archetype === 'checkbox').outcome, 'scored');
+  assert.deepEqual(radixReadmeClaimFailures(readme, f1), []);
+  const normalized = readme.replace(/\*\*/g, '');
+  assert.ok(radixReadmeClaimFailures(normalized.replace('0.39', '8.39'), f1).some((p) => p.includes('checkbox scores')));
+  assert.ok(radixReadmeClaimFailures(normalized.replace('2 archetypes refuse', '3 archetypes refuse'), f1).some((p) => p.includes('role refusal count')));
+  assert.ok(radixReadmeClaimFailures('', f1).length > 0);
 });
