@@ -507,13 +507,15 @@ const checkChild = (
   const vector = checkVector(instance, cell, visible);
   const check = instance.tokens.check;
   // The host is the glyph's viewport: check.width/height sized, centring the
-  // ink-sized vector. It is always present so the viewport facts are carried
-  // and collapse can read them back; only AntD positions it absolutely.
+  // ink-sized vector. Keep the node for inversion, but hide the whole host
+  // when inactive: hiding only its vector leaves an empty viewport in the
+  // box's auto-layout and pushes the indeterminate dash off-centre.
   const absolute = check.placement === "absolute";
   return {
     kind: "frame",
     role: "checkbox/glyph/check-host",
     label: "checkbox/glyph/check-host",
+    visible,
     layout: {
       mode: "horizontal",
       primaryAxisAlign: "center",

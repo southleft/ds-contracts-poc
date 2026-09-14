@@ -23,12 +23,12 @@ a component set scored against your library's own render.
 | a **reviewed role map** | for a library the path has not seen, expect to write one. Measured below |
 | **Figma desktop + the plugin** | the last step is a human pasting one program |
 
-**What it produces, measured.** 58 of 71 fidelity rows score within **5%** of the
+**What it produces, measured.** 64 of 77 fidelity rows score within **5%** of the
 library's own Chromium render; 13 have named causes. The MUI Link rows retain
 a pending baseline-mount remedy; their old scores are not final measurements.
 
 ```bash
-npm run recipe:fidelity:check     # 58 pass · 0 fringe · 13 named
+npm run recipe:fidelity:check     # 64 pass · 0 fringe · 13 named
 ```
 
 Historical legacy capture-path exams (2026-09-04/05, not the recipe F1 exam):

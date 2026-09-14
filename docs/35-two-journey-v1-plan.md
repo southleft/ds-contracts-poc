@@ -233,10 +233,10 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   measured; it is not graded, and it is not v1.
   **2026-09-13, second F1 row (owner decision: keep the calendar AND add a
   library the paste verb can reach):** Radix Themes through `recipe:point` —
-  avatar 1.88%, switch 3.04 / 0 / 2.59 / 0.27% (four states), checkbox compiles
-  at a fixed point and its mint is refused by name on a shared-runtime inner-
-  shadow defect (fix on `fix/writer-inner-shadow`), badge and tabs refuse at the
-  role step as predicted. Five engine gaps a held-out library forced are
+  avatar and switch score within the bar; the checkbox now also mints and all
+  six states pass after the shared-runtime inner-shadow and inactive glyph-host
+  fixes. Badge and tabs refuse at the role step as predicted. The engine gaps
+  this held-out library forced are
   language, not answers. Receipt:
   [`F1-RADIX-ROUND.md`](../parity/receipts/v1/F1-RADIX-ROUND.md). Both rows
   are held by one fast-lane gate, `npm run recipe:f1:check`

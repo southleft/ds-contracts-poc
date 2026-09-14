@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 71,
-  "passed": 58,
+  "subjects": 77,
+  "passed": 64,
   "failed": 13,
   "fringeExcused": 0,
   "knownFailures": 13,
@@ -691,6 +691,66 @@
       "realPx": "35x20",
       "convergesAt": null,
       "glyphMasked": 0.27,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "checkbox/radix-themes-unchecked-enabled",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "checkbox/radix-themes-unchecked-disabled",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "checkbox/radix-themes-checked-enabled",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "checkbox/radix-themes-checked-disabled",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250,
+      "glyphMasked": 0,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "checkbox/radix-themes-indeterminate-enabled",
+      "status": "pass",
+      "pctAAMasked": 0.39,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250,
+      "glyphMasked": 0.39,
+      "glyphBoxes": 0
+    },
+    {
+      "label": "checkbox/radix-themes-indeterminate-disabled",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250,
+      "glyphMasked": 0,
       "glyphBoxes": 0
     }
   ]

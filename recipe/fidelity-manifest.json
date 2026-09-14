@@ -681,6 +681,78 @@
       "referenceControlOnly": true,
       "heldOut": "radix-themes",
       "_heldOutWhy": "F1 second row (owner decision 2026-09-13): Radix Themes held-out; captured blind; pointed with 23 leaves read, 2 reviewed, 0 invented. The track is .rt-SwitchRoot::before (a pseudo-element pill: new SwitchRoles.trackPseudo) and its checked paint is a position-shifted gradient, so states.true.enabled.trackFill / states.false.enabled.trackFill are receipts reviewed from styles.css (--accent-track = indigo-9 #3e63dd; --slate-a3). Not tuned against the capture."
+    },
+    {
+      "label": "checkbox/radix-themes-unchecked-enabled",
+      "page": "273:3800",
+      "set": "checkbox/set :: Radix Themes Checkbox",
+      "variant": "Checked=unchecked, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-unchecked-enabled-v12-glyph-host.png",
+      "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.unchecked.enabled__default.png",
+      "referenceControlOnly": true,
+      "heldOut": "radix-themes",
+      "_heldOutWhy": "F1 product-path held-out exam: existing reviewed fixture (30 ledger leaves, 5 reviewed, 0 invented), unchanged recipe 2e537376; shared inner-shadow runtime corrected. Six surface/size-2 states measured, never a proposed stay."
+    },
+    {
+      "label": "checkbox/radix-themes-unchecked-disabled",
+      "page": "273:3800",
+      "set": "checkbox/set :: Radix Themes Checkbox",
+      "variant": "Checked=unchecked, Disabled=true",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-unchecked-disabled-v12-glyph-host.png",
+      "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.unchecked.disabled__default.png",
+      "referenceControlOnly": true,
+      "heldOut": "radix-themes",
+      "_heldOutWhy": "F1 product-path held-out exam: existing reviewed fixture (30 ledger leaves, 5 reviewed, 0 invented), unchanged recipe 2e537376; shared inner-shadow runtime corrected. Six surface/size-2 states measured, never a proposed stay."
+    },
+    {
+      "label": "checkbox/radix-themes-checked-enabled",
+      "page": "273:3800",
+      "set": "checkbox/set :: Radix Themes Checkbox",
+      "variant": "Checked=checked, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-checked-enabled-v12-glyph-host.png",
+      "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.checked.enabled__default.png",
+      "referenceControlOnly": true,
+      "heldOut": "radix-themes",
+      "_heldOutWhy": "F1 product-path held-out exam: existing reviewed fixture (30 ledger leaves, 5 reviewed, 0 invented), unchanged recipe 2e537376; shared inner-shadow runtime corrected. Six surface/size-2 states measured, never a proposed stay."
+    },
+    {
+      "label": "checkbox/radix-themes-checked-disabled",
+      "page": "273:3800",
+      "set": "checkbox/set :: Radix Themes Checkbox",
+      "variant": "Checked=checked, Disabled=true",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-checked-disabled-v12-glyph-host.png",
+      "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.checked.disabled__default.png",
+      "referenceControlOnly": true,
+      "heldOut": "radix-themes",
+      "_heldOutWhy": "F1 product-path held-out exam: existing reviewed fixture (30 ledger leaves, 5 reviewed, 0 invented), unchanged recipe 2e537376; shared inner-shadow runtime corrected. Six surface/size-2 states measured, never a proposed stay."
+    },
+    {
+      "label": "checkbox/radix-themes-indeterminate-enabled",
+      "page": "273:3800",
+      "set": "checkbox/set :: Radix Themes Checkbox",
+      "variant": "Checked=indeterminate, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-indeterminate-enabled-v12-glyph-host.png",
+      "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.indeterminate.enabled__default.png",
+      "referenceControlOnly": true,
+      "heldOut": "radix-themes",
+      "_heldOutWhy": "F1 product-path held-out exam: existing reviewed fixture (30 ledger leaves, 5 reviewed, 0 invented), unchanged recipe 2e537376; shared inner-shadow runtime corrected. Six surface/size-2 states measured, never a proposed stay."
+    },
+    {
+      "label": "checkbox/radix-themes-indeterminate-disabled",
+      "page": "273:3800",
+      "set": "checkbox/set :: Radix Themes Checkbox",
+      "variant": "Checked=indeterminate, Disabled=true",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-indeterminate-disabled-v12-glyph-host.png",
+      "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.indeterminate.disabled__default.png",
+      "referenceControlOnly": true,
+      "heldOut": "radix-themes",
+      "_heldOutWhy": "F1 product-path held-out exam: existing reviewed fixture (30 ledger leaves, 5 reviewed, 0 invented), unchanged recipe 2e537376; shared inner-shadow runtime corrected. Six surface/size-2 states measured, never a proposed stay."
     }
   ],
   "_excluded": {

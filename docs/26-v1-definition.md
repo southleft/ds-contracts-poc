@@ -7,7 +7,7 @@
 > supported archetype,
 > plus a named report. An archetype is supported by measurement — a proposer,
 > a held-out library scored against its own render, every miss named. All
-> thirteen archetypes are represented today (fidelity gate 58 pass · 0 fringe ·
+> thirteen archetypes are represented today (fidelity gate 64 pass · 0 fringe ·
 > 13 named; named rows retain their measured causes and any pending remedies). The
 > capture-path class rows below are not rewritten. `overallSuccess` is not
 > flipped and hashed RECORDs are not restamped by this change. F-C2C

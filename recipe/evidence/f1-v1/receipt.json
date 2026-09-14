@@ -74,15 +74,45 @@
         },
         {
           "archetype": "checkbox",
-          "outcome": "mint-refused",
-          "pointed": "recipe/evidence/pointed/checkbox-radix-themes",
-          "mintRefusal": {
-            "recordedAt": "2026-09-13",
-            "message": "in set_effects: Property \"effects\" failed validation: Unrecognized key(s)",
-            "cause": "recipe/figma-writer-runtime.ts sets showShadowBehindNode on every shadow; Figma accepts that key on DROP_SHADOW only and refuses the paste on the box's INNER_SHADOW ring (.rt-BaseCheckboxRoot::before, styles.css). The fixture compiled at a fixed point (30 read, 5 reviewed, 0 invented); nothing on the canvas was written.",
-            "fix": "fix/writer-inner-shadow (PR #82): one conditional in the shared runtime — and because every boilerplate writer embeds that runtime, a thirteen-writer remint round before it can merge.",
-            "figmaWrites": 0
-          }
+          "outcome": "scored",
+          "rows": [
+            {
+              "label": "checkbox/radix-themes-unchecked-enabled",
+              "status": "pass",
+              "pctAAMasked": 0,
+              "glyphMasked": 0
+            },
+            {
+              "label": "checkbox/radix-themes-unchecked-disabled",
+              "status": "pass",
+              "pctAAMasked": 0,
+              "glyphMasked": 0
+            },
+            {
+              "label": "checkbox/radix-themes-checked-enabled",
+              "status": "pass",
+              "pctAAMasked": 0,
+              "glyphMasked": 0
+            },
+            {
+              "label": "checkbox/radix-themes-checked-disabled",
+              "status": "pass",
+              "pctAAMasked": 0,
+              "glyphMasked": 0
+            },
+            {
+              "label": "checkbox/radix-themes-indeterminate-enabled",
+              "status": "pass",
+              "pctAAMasked": 0.39,
+              "glyphMasked": 0.39
+            },
+            {
+              "label": "checkbox/radix-themes-indeterminate-disabled",
+              "status": "pass",
+              "pctAAMasked": 0,
+              "glyphMasked": 0
+            }
+          ]
         },
         {
           "archetype": "badge",
@@ -107,10 +137,10 @@
   "summary": {
     "calendar": "pass 3.048% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: false",
     "radix": {
-      "scored": 2,
-      "scoredRows": 5,
+      "scored": 3,
+      "scoredRows": 11,
       "refusedAtRoles": 2,
-      "mintRefused": 1
+      "mintRefused": 0
     }
   },
   "notClaimed": [

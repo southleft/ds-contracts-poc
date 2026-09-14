@@ -6,6 +6,8 @@ import { isFigmaVectorPath, toFigmaVectorPath } from "./figma-vector-path.js";
 import { readFileSync } from "node:fs";
 
 import { adaptReviewedCheckbox } from "./adapters/checkbox.js";
+import type { IRNode } from "./figma-ir.js";
+import { radixThemesCheckboxAdapterConfig, radixThemesCheckboxSource } from "./fixtures/generated/checkbox.radix-themes.js";
 import {
   CHECKBOX_THREE_LIBRARY_PROOF_PROTOCOL,
   antdCheckboxAdapterConfig,
@@ -185,6 +187,28 @@ test("checkbox@1 compile is two-cycle fixed-point on every library", () => {
     const check = nodes.find((node) => node.role === "checkbox/glyph/check");
     assert.equal(check?.kind, "vector", `${name} check is a vector`);
     assert.notEqual(check?.visible, false, `${name} checked glyph is visible`);
+  }
+});
+
+test("checkbox@1 hides the whole check viewport when its glyph is inactive", () => {
+  for (const [name, source, config] of [...PAIRS, ["radix-themes", radixThemesCheckboxSource, radixThemesCheckboxAdapterConfig] as const]) {
+    const instance = adaptReviewedCheckbox(source, config);
+    const envelope = compileCheckboxRecipe(instance);
+    assert.equal(envelope.ir.kind, "component-set");
+    if (envelope.ir.kind !== "component-set") throw new Error("expected set");
+    const flatten = (node: IRNode): IRNode[] => [node, ...("children" in node ? node.children.flatMap(flatten) : [])];
+    for (const variant of envelope.ir.children) {
+      assert.equal(variant.kind, "component");
+      if (variant.kind !== "component") throw new Error("expected variant");
+      const state = variant.variantProperties?.Checked;
+      const nodes = flatten(variant);
+      const host = nodes.find(n => n.role === "checkbox/glyph/check-host");
+      const dash = nodes.find(n => n.role === "checkbox/glyph/dash");
+      assert.ok(host && dash, `${name}: both glyph structures remain invertible`);
+      assert.equal(host.visible !== false, state === "checked", `${name} ${state}: an empty visible host must not displace the dash in auto-layout`);
+      assert.equal(dash.visible !== false, state === "indeterminate", `${name} ${state}: dash visibility`);
+    }
+    assert.equal(compileCheckboxRecipe(collapseCheckboxRecipe(envelope, instance.provenance.selection)).integrity.canonicalHash, envelope.integrity.canonicalHash, `${name}: hidden host preserves fixed point`);
   }
 });
 
