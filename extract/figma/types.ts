@@ -173,6 +173,10 @@ export interface DumpText {
    *  channel (DECLARED_CHANNELS, canvas: draw) and NAMES a mixed axis.
    *  Absence in older dumps means not captured, never "Inter". */
   fontFamily?: string;
+  /** Additive canvas-facts bridge channel: resolved letter spacing in pixels.
+   * Percent observations are resolved against the observed font size. Absence
+   * in older dumps means not captured, never zero. No token identity implied. */
+  letterSpacing?: number;
   /** Horizontal text alignment (dump v1.31, additive) — textAlignHorizontal
    *  verbatim. LEFT is the CSS default and may be omitted by producers;
    *  CENTER/RIGHT/JUSTIFIED carry as the declared `text-align` channel

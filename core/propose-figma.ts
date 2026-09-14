@@ -4462,6 +4462,23 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
  *  per-variant declared vocabulary). Phase 2 exam: 44 Manrope nodes rendered
  *  Inter with no receipt (rest-text-font-family). */
 const DEFAULT_FONT_FAMILY = 'Inter';
+/** The bridge resolves spacing to pixels, without inventing a token identity.
+ * Uniform spacing uses the existing literal channel. Mixed or partially
+ * captured spacing cannot use a uniform literal. */
+function carryLetterSpacing(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const values = m.occ.filter((o) => o.node.text !== undefined).map((o) => o.node.text!.letterSpacing);
+  if (!values.some((value) => value !== undefined)) return;
+  const value = values[0];
+  if (value === undefined || !Number.isFinite(value) || values.some((other) => other !== value)) {
+    ctx.notes.push(`${where}: letter-spacing is mixed, partial, or invalid across variants — no uniform literal proposed; NAMED for review`);
+    return;
+  }
+  if (value === 0) return; // CSS normal has zero additional tracking.
+  const literals = (holder.literals as Record<string, string> | undefined) ?? {};
+  if (literals['letter-spacing'] === undefined) literals['letter-spacing'] = `${value}px`;
+  holder.literals = literals;
+  ctx.notes.push(`${where}: letter-spacing ${value}px observed in every variant — carried as a pixel literal, not a token identity`);
+}
 function carryFontFamily(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
   const textOcc = m.occ.filter((o) => o.node.text !== undefined);
   if (textOcc.length === 0) return;
@@ -7393,6 +7410,7 @@ function buildPart(
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
+    carryLetterSpacing(m, part, ctx, where);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
@@ -10549,6 +10567,7 @@ export function proposeFromDump(
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
     carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
+    carryLetterSpacing(only, root, ctx, `${where}/label`);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
 
     // The label's tokens hoisted — retarget its captured mint observations

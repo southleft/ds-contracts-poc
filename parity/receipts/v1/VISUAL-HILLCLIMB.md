@@ -2,6 +2,25 @@
 
 This is a work log, not a grade or release approval. No Figma nodes were changed.
 
+## Letter-spacing continuation
+
+The additive dump typography field now carries observed tracking in pixels;
+percentage values resolve against the observed font size, never a guessed size.
+Uniform signed values use the existing literal vocabulary. Mixed or partial
+observations remain explicitly named. Both ordinary text parts and hoisted root
+text use the same conversion. Existing dumps without the field remain unchanged.
+
+The browser regression first failed with `normal` instead of the source `1px`,
+then passed after the fix. A planted missing tracking value now changes the
+computed-style comparison as well. Tests cover signed values, percentages,
+missing font size, mixed/partial observations, and the root-text path.
+
+Playwright CLI measured the updated Label at 57.265625×20 against Figma's 57×20.
+Chromium's platform-font inspection confirms `PublicSans-SemiBold` rendered all
+five glyphs (not a fallback). No width compensation was added. The remaining
+fractional width and raster differences are still measurements, not an exact
+pixel-parity claim. Existing source observations and owner-only fields are unchanged.
+
 ## Badge regression
 
 Read-only export of Altitude Badge (`3538:35772`, page `6587:47476`) was compared
@@ -37,8 +56,8 @@ the broad local fast run exposed these stale references rather than hiding them.
 1. Fresh held-out code→Figma screenshots are now portable committed evidence in
    `recipe/evidence/live-fidelity-2026-09-14/`; `npm run recipe:fidelity:check`
    re-derives every score and checks hashes, repeated renders, and coverage.
-2. Partial padding is now measured; preserve the remaining identity-loss note.
-3. Carry the named letter-spacing gap and verify font fidelity separately from accounting; validate each affected
+2. Partial padding and tracking are now measured; preserve the padding identity-loss note.
+3. Score the remaining raster differences separately from accounting; validate each affected
    component against its actual source screenshot before claiming visual parity.
 4. Run readiness on a merged commit with successful lanes for that exact SHA.
 

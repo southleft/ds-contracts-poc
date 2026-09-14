@@ -5,12 +5,39 @@ import os from "node:os";
 import path from "node:path";
 import { gunzipSync } from "node:zlib";
 import { bridgeCanvasFactsToDump } from "./canvas-facts-to-dump.js";
-import type { CanvasFactsDocument } from "./canvas-facts.js";
+import { deriveCanvasFacts, type CanvasFactsDocument } from "./canvas-facts.js";
+import type { DumpSet } from "../extract/figma/types.js";
 import {
   buildCanvasToCodeFromFacts,
   mountCells,
   renderCells,
+  diffRenderedAgainstFacts,
 } from "./canvas-to-code.js";
+
+test("percent tracking resolves against captured font size without inventing a missing size", () => {
+  const doc = JSON.parse(
+    gunzipSync(
+      readFileSync(
+        new URL(
+          "./evidence/canvas-to-code-held-out-v2/altitude-badge/canvas-facts.json.gz",
+          import.meta.url,
+        ),
+      ),
+    ).toString(),
+  ) as CanvasFactsDocument;
+  for (const fontSize of [12, undefined]) {
+    const scene = structuredClone(doc.scene);
+    const label = scene.children[0].children[0];
+    label.letterSpacing = { unit: "PERCENT", value: -5 };
+    label.fontSize = fontSize;
+    const result = bridgeCanvasFactsToDump(
+      deriveCanvasFacts(scene, doc.source),
+    );
+    const text = (result.dump.Badge as DumpSet).variants[0].children![0].text!;
+    assert.equal(text.letterSpacing, fontSize === undefined ? undefined : -0.6);
+    assert.equal(result.counts.silent, 0);
+  }
+});
 
 test("mixed HUG/FIXED component roots retain the complete observed bbox census", () => {
   const doc = JSON.parse(
@@ -65,6 +92,18 @@ test("generated mixed-size Badge renders every dot and preserves Label-only padd
     const built = await buildCanvasToCodeFromFacts(doc, temp);
     const cells = mountCells(doc, built.contract);
     const rendered = await renderCells(built, cells);
+    assert.equal(
+      diffRenderedAgainstFacts(doc, built, cells, rendered).counts.namedDeltas,
+      0,
+    );
+    const planted = structuredClone(rendered);
+    planted.find((r) => r.label !== null)!.label!["letter-spacing"] = "normal";
+    const drift = diffRenderedAgainstFacts(doc, built, cells, planted);
+    assert.equal(
+      drift.counts.namedDeltas,
+      1,
+      "a missing tracking value must change the measured result",
+    );
     assert.equal(rendered.length, cells.length);
     for (const cell of cells) {
       const actual = rendered.find((r) => r.key === cell.key)!.root;
@@ -74,7 +113,14 @@ test("generated mixed-size Badge renders every dot and preserves Label-only padd
       if (dot) {
         assert.equal(actual.width, "8px");
         assert.equal(actual.height, "8px");
-      } else assert.equal(actual["border-top-left-radius"], "999px");
+      } else {
+        assert.equal(actual["border-top-left-radius"], "999px");
+        assert.equal(
+          rendered.find((r) => r.key === cell.key)!.label!["letter-spacing"],
+          "1px",
+          "captured letter spacing must render",
+        );
+      }
     }
   } finally {
     rmSync(temp, { recursive: true, force: true });

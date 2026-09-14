@@ -24,6 +24,48 @@ const corpus = tokenCorpusFromJson({
   light: {},
   brandDefault: {},
 });
+
+test("letter spacing carries signed pixels and names mixed or partial evidence", () => {
+  for (const [values, expected] of [
+    [[1, 1], "1px"],
+    [[-0.5, -0.5], "-0.5px"],
+    [[0, 0], undefined],
+    [[undefined, undefined], undefined],
+    [[1, 2], undefined],
+    [[1, undefined], undefined],
+  ] as Array<[Array<number | undefined>, string | undefined]>) {
+    const dump = specimen(false);
+    dump.variants.forEach((variant, i) => {
+      variant.children = [
+        {
+          name: "label",
+          type: "TEXT",
+          text: {
+            characters: "Label",
+            fontSize: 12,
+            fontStyle: "Regular",
+            lineHeight: 20,
+            letterSpacing: values[i],
+          },
+        },
+      ];
+    });
+    const result = proposeFromDump(dump, {
+      corpus,
+      contractIdByName: new Map(),
+      fileKey: null,
+      projectionMode: "reviewable-inversion",
+    });
+    const part = (result.contract.anatomy as { root: Part }).root;
+    assert.equal(part.literals?.["letter-spacing"], expected);
+    if (values[0] !== values[1])
+      assert.ok(
+        result.notes.some((n) =>
+          n.includes("letter-spacing is mixed, partial"),
+        ),
+      );
+  }
+});
 function specimen(twoAxes = true): DumpSet {
   const tones = ["Danger", "Neutral"];
   const shapes = twoAxes ? ["Label", "Dot"] : ["Label"];

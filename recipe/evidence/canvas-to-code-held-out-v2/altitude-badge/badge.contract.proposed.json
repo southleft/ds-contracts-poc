@@ -87,6 +87,9 @@
           "declared": {
             "font-family": "Public Sans"
           },
+          "literals": {
+            "letter-spacing": "1px"
+          },
           "text": "Badge",
           "tokens": {
             "color": "{theme.color.content.danger-default}",

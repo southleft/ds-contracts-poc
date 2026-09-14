@@ -344,6 +344,7 @@ const READ_ROOT_PROPS = [
 ] as const;
 
 const READ_LABEL_PROPS = [
+  "letter-spacing",
   "font-size",
   "font-weight",
   "font-family",
@@ -1003,17 +1004,22 @@ export function diffRenderedAgainstFacts(
           fontStyle: string;
           fontSize: number;
           lineHeight: { unit: string; value?: number };
+          letterSpacing?: { unit: string; value: number };
         };
         const weight =
           FONT_WEIGHT_BY_STYLE[type.fontStyle.replace(/\s+/g, "").toLowerCase()];
         const expectedLine =
           type.lineHeight.unit === "px" ? `${type.lineHeight.value}px` : type.lineHeight.unit;
-        const expected = `${type.fontSize}px/${expectedLine} w${weight ?? `?(${type.fontStyle})`} ${type.fontFamily}`;
+        const spacing = type.letterSpacing === undefined ? undefined
+          : type.letterSpacing.unit === "px" ? type.letterSpacing.value
+          : type.letterSpacing.value * type.fontSize / 100;
+        const expected = `${type.fontSize}px/${expectedLine} w${weight ?? `?(${type.fontStyle})`} ${type.fontFamily}${spacing === undefined ? "" : ` tracking ${spacing}px`}`;
+        const actualSpacing = label?.["letter-spacing"] === "normal" ? "0px" : label?.["letter-spacing"];
         const actual =
           label === null
             ? undefined
-            : `${label["font-size"]}/${label["line-height"]} w${label["font-weight"]} ${label["font-family"]?.replaceAll('"', "")}`;
-        compare(fact, "font-size/line-height/font-weight/font-family", expected, actual, ["font", "text style"]);
+            : `${label["font-size"]}/${label["line-height"]} w${label["font-weight"]} ${label["font-family"]?.replaceAll('"', "")}${spacing === undefined ? "" : ` tracking ${actualSpacing}`}`;
+        compare(fact, "font-size/line-height/font-weight/font-family/letter-spacing", expected, actual, ["font", "text style", "letter-spacing"]);
         break;
       }
       case "align": {

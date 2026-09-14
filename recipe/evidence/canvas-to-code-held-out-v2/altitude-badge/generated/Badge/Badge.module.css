@@ -56,6 +56,7 @@
   font-size: var(--typography-font-size-12);
   line-height: var(--typography-line-height-20);
   font-weight: var(--imported-badge-badge-font-weight);
+  letter-spacing: 1px;
   font-family: Public Sans;
 }
 
