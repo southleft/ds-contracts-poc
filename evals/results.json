@@ -9,9 +9,9 @@
     "passed": 0,
     "total": 5
   },
-  "commit": "c0d29a8bb017eafa305151b8b8bb12438f7c3067",
+  "commit": "774c4073699efb52abd4861f48fdd50bce3b809f",
   "dirty": false,
-  "recordedAt": "2026-09-04",
+  "recordedAt": "2026-09-14",
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -800,7 +800,7 @@
       "claim": "C1-determinism",
       "pass": false,
       "path": "archive",
-      "error": "Error: carbon: contracts/tabs.anchors.json — the shared promote module did NOT reproduce the committed bytes (/Users/tjpitre/Sites/ds-contracts-poc/contracts/tabs.anchors.json)"
+      "error": "Error: carbon: contracts/tabs.anchors.json — the shared promote module did NOT reproduce the committed bytes (/Users/tjpitre/Sites/ds-contracts-poc-v1/contracts/tabs.anchors.json)"
     },
     {
       "id": "paste-door-open",
