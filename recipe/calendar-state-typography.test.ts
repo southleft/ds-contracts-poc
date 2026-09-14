@@ -7,6 +7,7 @@ import { proposeCalendarInstanceFromLedger } from "./fixture-reader/propose-cale
 import { compileCalendarRecipe, collapseCalendarRecipe, type CalendarRecipeInstance } from "./recipes/calendar.js";
 
 const dayLabel = (envelope: ReturnType<typeof compileCalendarRecipe>, state: string) => {
+  assert.ok(envelope.ir.kind === "frame");
   const group = envelope.ir.children.find((node: any) => node.role === "calendar/day-set") as any;
   const day = group.children.find((node: any) => node.variantProperties.State === state);
   return day.children.find((node: any) => node.role === "calendar/day/button")

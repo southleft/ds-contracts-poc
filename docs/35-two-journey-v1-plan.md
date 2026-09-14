@@ -43,14 +43,15 @@
 > **F1 IS NOW MINTED AND SCORED (2026-09-05).** The owner opened Scratch, and
 > the compiled envelope was minted onto `byMp6lt0Ij9b2QbkDGFwBh` and scored
 > against react-day-picker's own Chromium render:
-> **pctAAMasked 3.048% against a 5% bar — pass** (2026-09-13 re-mint; 3.735%
-> on 2026-09-05). The 16px ink-box gap of the first mint was measured to three
+> **pctAAMasked 3.019% against a 5% bar — pass** (2026-09-14 re-mint carrying
+> the source's selected-day 18px Bold typography). The 16px ink-box gap of the first mint was measured to three
 > leaves calendar@1 had no word for — the weekday row's 8px padding, the
 > caption at 18px, and the nav placed at the trailing edge — and closed to 2px
 > (294x263 canvas vs 296x265 reference). The threshold sweep still agrees at no
 > threshold: the 2px that remain are the caption glyph's placement in its line
 > box and a text-glyph chevron where the source draws an SVG path — named, not
-> hidden. Numbers and the four defects the live mint exposed:
+> hidden. The later typography fix closed a separate missing leaf, not a
+> substrate difference. Numbers and the defects the live mints exposed:
 > [`F1-COMPILE-ROUND.md`](../parity/receipts/v1/F1-COMPILE-ROUND.md).
 >
 > **This is a measured result, not a grade, and it is not v1.** The canvas→code
