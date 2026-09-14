@@ -21,6 +21,8 @@
   border-radius: var(--imported-shared-size-4);
   border-width: var(--imported-button-root-border-top-width-unset);
   gap: var(--imported-shared-size-8);
+  width: fit-content;
+  height: fit-content;
 }
 
 .variant-secondary {

@@ -114,6 +114,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "gap": "{spacing.100}"
       }

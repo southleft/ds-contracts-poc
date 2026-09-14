@@ -1,0 +1,131 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { proposeFromDump } from "./propose-figma.js";
+import { tokenCorpusFromJson } from "./token-corpus.js";
+import {
+  tokensByPropEntries,
+  resolveTokens,
+  type Part,
+} from "../scripts/contract-schema.js";
+import type { DumpSet } from "../extract/figma/types.js";
+
+const corpus = tokenCorpusFromJson({
+  primitives: {
+    paint: {
+      a: { $type: "color", $value: "#ffffff" },
+      b: { $type: "color", $value: "#000000" },
+    },
+    radii: {
+      a: { $type: "dimension", $value: "4px" },
+      b: { $type: "dimension", $value: "8px" },
+    },
+  },
+  semantic: {},
+  light: {},
+  brandDefault: {},
+});
+function specimen(twoAxes = true): DumpSet {
+  const tones = ["Danger", "Neutral"];
+  const shapes = twoAxes ? ["Label", "Dot"] : ["Label"];
+  return {
+    setName: "Specimen",
+    type: "COMPONENT_SET",
+    propertyDefinitions: {
+      Tone: { type: "VARIANT", defaultValue: "Danger", variantOptions: tones },
+      Shape: { type: "VARIANT", defaultValue: "Label", variantOptions: shapes },
+    },
+    variants: tones.flatMap((tone) =>
+      shapes.map((shape) => ({
+        name: `Tone=${tone}, Shape=${shape}`,
+        type: "COMPONENT" as const,
+        variantProperties: { Tone: tone, Shape: shape },
+        layout: {
+          mode: "HORIZONTAL" as const,
+          primary: "CENTER" as const,
+          counter: "CENTER" as const,
+          padding: [0, 0, 0, 0] as [number, number, number, number],
+          primarySizing: "AUTO" as const,
+          counterSizing: "AUTO" as const,
+        },
+        fill: { var: tone === "Danger" ? "paint/a" : "paint/b" },
+        bound: Object.fromEntries(
+          [
+            "topLeftRadius",
+            "topRightRadius",
+            "bottomLeftRadius",
+            "bottomRightRadius",
+          ].map((k) => [k, shape === "Label" ? "radii/a" : "radii/b"]),
+        ),
+      })),
+    ),
+  };
+}
+test("independent paint and radius axes both survive the canvas proposer", () => {
+  const proposal = proposeFromDump(specimen(), {
+    corpus,
+    contractIdByName: new Map(),
+    fileKey: null,
+    projectionMode: "reviewable-inversion",
+  });
+  const root = (proposal.contract.anatomy as { root: Part }).root;
+  assert.deepEqual(
+    tokensByPropEntries(root).map((e) => e.prop),
+    ["tone", "shape"],
+  );
+  for (const tone of ["danger", "neutral"])
+    for (const shape of ["label", "dot"]) {
+      const tokens = resolveTokens(root, { tone, shape });
+      assert.equal(
+        tokens["background-color"],
+        tone === "danger" ? "{paint.a}" : "{paint.b}",
+      );
+      assert.equal(
+        tokens["border-radius"],
+        shape === "label" ? "{radii.a}" : "{radii.b}",
+      );
+    }
+});
+
+test("partially bound FIXED dimensions do not suppress the mixed HUG/FIXED size carrier", () => {
+  const dump = specimen();
+  for (const variant of dump.variants) {
+    const dot = variant.variantProperties?.Shape === "Dot";
+    variant.bbox = { width: dot ? 8 : 57, height: dot ? 8 : 20 };
+    if (dot) {
+      variant.layout!.primarySizing = "FIXED";
+      variant.layout!.counterSizing = "FIXED";
+      variant.bound = { ...variant.bound, width: "radii/b", height: "radii/b" };
+    }
+  }
+  const proposal = proposeFromDump(dump, {
+    corpus,
+    contractIdByName: new Map(),
+    fileKey: null,
+    projectionMode: "reviewable-inversion",
+    mintUnbound: true,
+  });
+  const root = (proposal.contract.anatomy as { root: Part }).root;
+  for (const tone of ["danger", "neutral"]) {
+    const dot = resolveTokens(root, { tone, shape: "dot" });
+    assert.ok(dot.width, "a bound FIXED dot must not collapse to CSS auto");
+    assert.ok(dot.height);
+    assert.match(dot.width, /\{shape\}/, "mixed size must remain conditional");
+  }
+  const minted = proposal.mintedTokens!.tree as any;
+  assert.equal(minted.imported.specimen.root.width.dot.$value, "8px");
+  assert.equal(minted.imported.specimen.root.width.label.$value, "fit-content");
+});
+test("single-axis proposals keep the backwards-compatible object spelling", () => {
+  const proposal = proposeFromDump(specimen(false), {
+    corpus,
+    contractIdByName: new Map(),
+    fileKey: null,
+    projectionMode: "reviewable-inversion",
+  });
+  const root = (proposal.contract.anatomy as { root: Part }).root;
+  assert.equal(Array.isArray(root.tokensByProp), false);
+  assert.deepEqual(
+    tokensByPropEntries(root).map((e) => e.prop),
+    ["tone"],
+  );
+});

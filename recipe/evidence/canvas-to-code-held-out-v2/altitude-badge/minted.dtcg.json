@@ -6,6 +6,26 @@
           "$value": "600",
           "$type": "number"
         }
+      },
+      "root": {
+        "width": {
+          "label": {
+            "$value": "fit-content"
+          },
+          "dot": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "label": {
+            "$value": "fit-content"
+          },
+          "dot": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        }
       }
     }
   }

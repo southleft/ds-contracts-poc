@@ -818,7 +818,12 @@ export function bridgeCanvasFactsToDump(
           }
         : {}),
       ...fillAxes,
-      ...(fixed.width !== undefined && node.type === "COMPONENT"
+      // Component roots need a COMPLETE bbox census, including the observed
+      // HUG planes. The proposer uses the sizing modes to keep HUG fluid;
+      // omitting their boxes made a mixed HUG/FIXED set look partially
+      // observed and dropped the FIXED variants' dimensions as well.
+      // Child fixed geometry remains under the existing fixedSize policy.
+      ...(node.type === "COMPONENT"
         ? { bbox: { width: node.width, height: node.height } }
         : Object.keys(fixed).length > 0
           ? { fixedSize: fixed }

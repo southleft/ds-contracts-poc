@@ -1774,12 +1774,12 @@ function unifyField(m: Merged, field: string, ctx: Ctx, where: string): UnifiedR
   return undefined;
 }
 
-/** Per-part collector for value-level correlations: every per-value carry on
- *  one part must ride the SAME enum axis (tokensByProp holds one `prop`);
- *  a second axis is a NAMED refusal, never a silent merge. */
+/** Per-part value correlations. Schema v14 supports an ordered entry per
+ *  enum axis; keep the legacy single-entry spelling when only one is used. */
 interface ByPropCollector {
   prop?: string;
   map: Record<string, Record<string, string>>;
+  additional?: ByPropCollector[];
 }
 
 /** Carry one unified ref into a part's tokens record: plain refs land as
@@ -1800,9 +1800,13 @@ function carryRef(
     return;
   }
   if (byProp.prop !== undefined && byProp.prop !== u.propName) {
-    ctx.notes.push(
-      `${where} ${cssProp}: bindings are a function of enum axis "${u.propName}" by value, but this part's per-value overrides already ride "${byProp.prop}" — tokensByProp carries ONE axis per part; NAMED, not proposed (review)`,
-    );
+    const entries = (byProp.additional ??= []);
+    let entry = entries.find((candidate) => candidate.prop === u.propName);
+    if (!entry) {
+      entry = { prop: u.propName, map: {} };
+      entries.push(entry);
+    }
+    carryRef(tokens, entry, cssProp, u, ctx, where);
     return;
   }
   byProp.prop = u.propName;
@@ -1821,9 +1825,10 @@ function carryRef(
 
 /** Attach a collected tokensByProp to its part — after every carry ran. */
 function attachByProp(holder: Record<string, unknown>, byProp: ByPropCollector): void {
-  if (byProp.prop !== undefined && Object.keys(byProp.map).length > 0) {
-    holder.tokensByProp = { prop: byProp.prop, map: byProp.map };
-  }
+  const entries = [byProp, ...(byProp.additional ?? [])]
+    .filter((entry) => entry.prop !== undefined && Object.keys(entry.map).length > 0)
+    .map((entry) => ({ prop: entry.prop!, map: entry.map }));
+  if (entries.length > 0) holder.tokensByProp = entries.length === 1 ? entries[0] : entries;
 }
 
 /** Canvas paint → CSS color literal: '#rrggbb', or 8-digit '#rrggbbaa' when
@@ -9027,7 +9032,10 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
   // Dialog width minted 272 for a drawn 320 box.)
   for (const dim of ['width', 'height'] as const) {
     const fixedIn = withBox.filter((o) => fixedAxis(o, dim));
-    if (rootTokens[dim] !== undefined || merged.occ.some((o) => o.node.bound?.[dim])) continue;
+    // A partial binding is refused by unifyField, so it is not a carried
+    // dimension. Keep uniformly bound dimensions authoritative, but let the
+    // existing measured mixed-size path carry FIXED planes beside HUG ones.
+    if (rootTokens[dim] !== undefined || merged.occ.every((o) => o.node.bound?.[dim])) continue;
     // A FILL root (layoutSizingHorizontal/Vertical FILL — dump fillWidth /
     // fillHeight) is spelled FIXED by Figma's sizing MODE, but the drawn box
     // is the container's width, not a design value: minting it would pin a

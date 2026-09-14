@@ -57,6 +57,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "border-radius": "{theme.border.radius.xs}",
         "gap": "{theme.space.xs}"

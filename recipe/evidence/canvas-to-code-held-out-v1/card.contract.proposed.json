@@ -133,7 +133,8 @@
         "background-color": "{imported.card.root.background-color}",
         "border-color": "{imported.card.root.border-top-color.{variant}}",
         "border-radius": "{imported.shared.size-8}",
-        "border-width": "{imported.card.root.border-width.{variant}}"
+        "border-width": "{imported.card.root.border-width.{variant}}",
+        "width": "{imported.card.root.width}"
       }
     }
   },

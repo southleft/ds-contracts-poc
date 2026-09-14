@@ -100,26 +100,39 @@
           }
         }
       },
-      "tokensByProp": {
-        "prop": "variant",
-        "map": {
-          "neutral": {
-            "background-color": "{theme.color.background.neutral-bold}"
-          },
-          "info": {
-            "background-color": "{theme.color.background.info-weak}"
-          },
-          "success": {
-            "background-color": "{theme.color.background.success-weak}"
-          },
-          "warning": {
-            "background-color": "{theme.color.background.warning-weak}"
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "neutral": {
+              "background-color": "{theme.color.background.neutral-bold}"
+            },
+            "info": {
+              "background-color": "{theme.color.background.info-weak}"
+            },
+            "success": {
+              "background-color": "{theme.color.background.success-weak}"
+            },
+            "warning": {
+              "background-color": "{theme.color.background.warning-weak}"
+            }
+          }
+        },
+        {
+          "prop": "shape",
+          "map": {
+            "dot": {
+              "border-radius": "{theme.space.xs}"
+            }
           }
         }
-      },
+      ],
       "tokens": {
         "background-color": "{theme.color.background.danger-weak}",
-        "gap": "{theme.space.xxs}"
+        "border-radius": "{theme.border.radius.pill}",
+        "gap": "{theme.space.xxs}",
+        "width": "{imported.badge.root.width.{shape}}",
+        "height": "{imported.badge.root.height.{shape}}"
       }
     }
   },

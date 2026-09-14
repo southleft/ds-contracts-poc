@@ -17,6 +17,7 @@
   border-style: solid;
   background-color: var(--imported-card-root-background-color);
   border-radius: var(--imported-shared-size-8);
+  width: var(--imported-card-root-width);
   height: fit-content;
 }
 

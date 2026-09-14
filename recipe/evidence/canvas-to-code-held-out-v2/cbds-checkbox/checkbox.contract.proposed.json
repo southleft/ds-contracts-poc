@@ -211,6 +211,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokensByProp": {
         "prop": "state",
         "map": {
