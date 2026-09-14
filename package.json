@@ -33,7 +33,7 @@
     "recipe:button:perturbation:check": "tsx recipe/button-perturbation-exam.ts --write && node --import tsx --test recipe/button-perturbation-exam.test.ts",
     "recipe:button:perturbation:apply:check": "tsx recipe/button-perturbation-apply.ts --check && node --import tsx --test recipe/button-perturbation-apply.test.ts",
     "recipe:checkbox:perturbation:check": "tsx recipe/checkbox-perturbation-exam.ts --write && node --import tsx --test recipe/checkbox-perturbation-exam.test.ts",
-    "recipe:canvas-to-code:check": "tsx recipe/emit-canvas-facts.ts --check && tsx recipe/canvas-to-code.ts --check && node --import tsx --test recipe/canvas-to-code.test.ts recipe/canvas-to-code-mixed-size.test.ts",
+    "recipe:canvas-to-code:check": "tsx recipe/emit-canvas-facts.ts --check && tsx recipe/canvas-to-code.ts --check && node --import tsx --test recipe/canvas-to-code.test.ts recipe/canvas-to-code-mixed-size.test.ts recipe/canvas-to-code-visual.test.ts",
     "recipe:canvas-to-code:held-out:check": "tsx recipe/canvas-to-code-held-out.ts --check && node --import tsx --test recipe/canvas-to-code-held-out.test.ts",
     "recipe:canvas-to-code:held-out:v2:check": "tsx recipe/canvas-to-code-held-out-v2.ts --check && node --import tsx --test recipe/canvas-to-code-held-out-v2.test.ts",
     "recipe:canvas-to-code:held-out:v2:observe": "tsx recipe/run-held-out-observe.ts",

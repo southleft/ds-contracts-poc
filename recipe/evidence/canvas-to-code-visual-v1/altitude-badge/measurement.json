@@ -1,0 +1,283 @@
+{
+  "method": "Generated React screenshots versus original Figma export cropped by the unchanged observed variant bounds; unmasked existing pixel scorer, no threshold change",
+  "measuredAt": "2026-09-14T15:10:43.193Z",
+  "rows": [
+    {
+      "variant": "Variant=Danger, Shape=Label",
+      "sourceBox": [
+        24,
+        92,
+        57,
+        20
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 24.64912280701754,
+        "pctAAUnmasked": 3.421052631578948,
+        "pctAAMasked": 3.421052631578948,
+        "canvasPx": "57x20",
+        "realPx": "57x20",
+        "inkCanvasPct": 94.03508771929825,
+        "inkRealPct": 94.38596491228071
+      },
+      "generatedSha": "948cdf3baf3307567e9baec72931a91fba42e24f39794a309672636256117746",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "0.png",
+      "repeatImage": "0.repeat.png"
+    },
+    {
+      "variant": "Variant=Neutral, Shape=Label",
+      "sourceBox": [
+        24,
+        24,
+        57,
+        20
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 24.561403508771928,
+        "pctAAUnmasked": 4.385964912280701,
+        "pctAAMasked": 4.385964912280701,
+        "canvasPx": "57x20",
+        "realPx": "57x20",
+        "inkCanvasPct": 94.03508771929825,
+        "inkRealPct": 94.38596491228071
+      },
+      "generatedSha": "61d98d2b72c6129de74dd5c9fb4cb244424e8eb8d65559e76675700cdafdcf9e",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "1.png",
+      "repeatImage": "1.repeat.png"
+    },
+    {
+      "variant": "Variant=Info, Shape=Label",
+      "sourceBox": [
+        24,
+        160,
+        57,
+        20
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 24.385964912280702,
+        "pctAAUnmasked": 4.12280701754386,
+        "pctAAMasked": 4.12280701754386,
+        "canvasPx": "57x20",
+        "realPx": "57x20",
+        "inkCanvasPct": 94.03508771929825,
+        "inkRealPct": 94.38596491228071
+      },
+      "generatedSha": "45257cf1d9e27c49d576a0978f7fcc3bf3b4eda7ea6092efd772f4ae2622d474",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "2.png",
+      "repeatImage": "2.repeat.png"
+    },
+    {
+      "variant": "Variant=Success, Shape=Label",
+      "sourceBox": [
+        24,
+        228,
+        57,
+        20
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 24.035087719298247,
+        "pctAAUnmasked": 4.385964912280701,
+        "pctAAMasked": 4.385964912280701,
+        "canvasPx": "57x20",
+        "realPx": "57x20",
+        "inkCanvasPct": 94.03508771929825,
+        "inkRealPct": 94.38596491228071
+      },
+      "generatedSha": "616bdc9a489d52f2b6a58efc196c1b60990431a397549c12593eeaab86cb11a8",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "3.png",
+      "repeatImage": "3.repeat.png"
+    },
+    {
+      "variant": "Variant=Warning, Shape=Label",
+      "sourceBox": [
+        24,
+        296,
+        57,
+        20
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 24.64912280701754,
+        "pctAAUnmasked": 4.912280701754386,
+        "pctAAMasked": 4.912280701754386,
+        "canvasPx": "57x20",
+        "realPx": "57x20",
+        "inkCanvasPct": 94.03508771929825,
+        "inkRealPct": 94.38596491228071
+      },
+      "generatedSha": "89dfa5779c2df63b013ec07c3e3e3860fe341e98198ba4d848785252a4a756fc",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "4.png",
+      "repeatImage": "4.repeat.png"
+    },
+    {
+      "variant": "Variant=Danger, Shape=Dot",
+      "sourceBox": [
+        129,
+        98,
+        8,
+        8
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 43.75,
+        "pctAAUnmasked": 0,
+        "pctAAMasked": 0,
+        "canvasPx": "8x8",
+        "realPx": "8x8",
+        "inkCanvasPct": 93.75,
+        "inkRealPct": 93.75
+      },
+      "generatedSha": "ab1f234239feb71a02d7c9a9bcd9a3ff03e964ff0875b4815924f8a9e3f43fff",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "5.png",
+      "repeatImage": "5.repeat.png"
+    },
+    {
+      "variant": "Variant=Neutral, Shape=Dot",
+      "sourceBox": [
+        129,
+        30,
+        8,
+        8
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 43.75,
+        "pctAAUnmasked": 0,
+        "pctAAMasked": 0,
+        "canvasPx": "8x8",
+        "realPx": "8x8",
+        "inkCanvasPct": 93.75,
+        "inkRealPct": 93.75
+      },
+      "generatedSha": "7a652a3904a77213201b3b807f19d88a2812a1ea0624f36eaef230837ac1b2cb",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "6.png",
+      "repeatImage": "6.repeat.png"
+    },
+    {
+      "variant": "Variant=Info, Shape=Dot",
+      "sourceBox": [
+        129,
+        166,
+        8,
+        8
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 43.75,
+        "pctAAUnmasked": 0,
+        "pctAAMasked": 0,
+        "canvasPx": "8x8",
+        "realPx": "8x8",
+        "inkCanvasPct": 93.75,
+        "inkRealPct": 93.75
+      },
+      "generatedSha": "c04622bfcf337084ea5c127eb9eede7ef60bb9c16c92dd67dddb3e14574c8ce7",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "7.png",
+      "repeatImage": "7.repeat.png"
+    },
+    {
+      "variant": "Variant=Success, Shape=Dot",
+      "sourceBox": [
+        129,
+        234,
+        8,
+        8
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 43.75,
+        "pctAAUnmasked": 0,
+        "pctAAMasked": 0,
+        "canvasPx": "8x8",
+        "realPx": "8x8",
+        "inkCanvasPct": 93.75,
+        "inkRealPct": 93.75
+      },
+      "generatedSha": "1e03c163de7b8d24ff178147c67621a198a606f2979ee0ad0faa4946446a6e4f",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "8.png",
+      "repeatImage": "8.repeat.png"
+    },
+    {
+      "variant": "Variant=Warning, Shape=Dot",
+      "sourceBox": [
+        129,
+        302,
+        8,
+        8
+      ],
+      "status": "pass",
+      "metrics": {
+        "pctExactUnmasked": 43.75,
+        "pctAAUnmasked": 0,
+        "pctAAMasked": 0,
+        "canvasPx": "8x8",
+        "realPx": "8x8",
+        "inkCanvasPct": 93.75,
+        "inkRealPct": 93.75
+      },
+      "generatedSha": "9b77a008272eae13db2c42ca539c6caf84aafef93a132d808110346e53a12d23",
+      "figmaSetSha": "1969eecd5d2e29d9180c1e2f143e92ae5dd963ebb0af25cea9e581edfa374cb3",
+      "generatedImage": "9.png",
+      "repeatImage": "9.repeat.png"
+    }
+  ],
+  "engineCommit": "8e1da0151",
+  "chromium": "149.0.7827.55",
+  "platform": "darwin-arm64",
+  "fontWitness": {
+    "method": "Chromium CSS.getPlatformFontsForNode",
+    "postScriptName": "PublicSans-SemiBold",
+    "isCustomFont": false,
+    "glyphCount": 5
+  },
+  "figma": {
+    "fileKey": "y83n4o9LOGs74oAoguFcGS",
+    "nodeId": "3538:35772",
+    "image": "figma-set.png",
+    "readOnly": true
+  },
+  "sourceFacts": {
+    "path": "recipe/evidence/canvas-to-code-held-out-v2/altitude-badge/canvas-facts.json.gz",
+    "sha256": "5c787890d1a5f9aeefddc63ae5a3dfccf12be2a8a35aa86fe7e9bae4164cf8f2"
+  },
+  "emitted": [
+    {
+      "path": "generated/Badge/Badge.module.css",
+      "sha256": "7fff0a62f9aed8b60ae7db14aa8ad3a027cb54e0b52c17ac9994bb6cea5573b8"
+    },
+    {
+      "path": "generated/Badge/Badge.tsx",
+      "sha256": "5c6005619cfae77386e035d641013e6461cdb504135033e14c47eaa108b42410"
+    },
+    {
+      "path": "generated/Badge/index.ts",
+      "sha256": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec"
+    },
+    {
+      "path": "generated/index.ts",
+      "sha256": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9"
+    },
+    {
+      "path": "generated/tokens.css",
+      "sha256": "ec285732a2c80d23264862f78d04905510492d9b27a8ff08e4688b155d945233"
+    }
+  ],
+  "limitations": [
+    "One component set, not the whole canvas-to-code exam.",
+    "Dated snapshot comparison, not a live freshness assertion.",
+    "Pixel threshold is not exact pixel identity; raw mismatch percentages are retained.",
+    "No owner grade, signoff, or overall success is assigned."
+  ]
+}

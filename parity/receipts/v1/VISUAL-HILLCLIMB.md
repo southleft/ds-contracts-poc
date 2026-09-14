@@ -21,6 +21,13 @@ five glyphs (not a fallback). No width compensation was added. The remaining
 fractional width and raster differences are still measurements, not an exact
 pixel-parity claim. Existing source observations and owner-only fields are unchanged.
 
+The remaining pixels are now scored too: all Badge variants pass the existing
+antialias-aware threshold. Raw mismatch percentages remain in the record.
+Portable evidence lives under `recipe/evidence/canvas-to-code-visual-v1/altitude-badge/`;
+`recipe:canvas-to-code:check` re-derives it and refuses changed crops, missing
+states, altered metrics, image tampering, or changed emitted code. This is one
+set's visual result, not a claim that every designer-exam subject visually passes.
+
 ## Badge regression
 
 Read-only export of Altitude Badge (`3538:35772`, page `6587:47476`) was compared
