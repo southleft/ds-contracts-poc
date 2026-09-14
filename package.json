@@ -52,7 +52,7 @@
     "recipe:draft-roles": "tsx recipe/fixture-reader/draft-roles.ts",
     "recipe:propose-fixture": "tsx recipe/fixture-reader/propose-fixture.ts",
     "recipe:fixture-drift:check": "tsx recipe/fixture-reader/build-reader-artifacts.ts --check && node --import tsx --test recipe/fixture-reader/fixture-drift.test.ts",
-    "recipe:fidelity:check": "tsx recipe/fidelity-check.ts",
+    "recipe:fidelity:check": "tsx recipe/fidelity-check.ts && node --import tsx --test recipe/live-fidelity-check.test.ts",
     "recipe:fidelity:plugin:proof": "tsx recipe/plugin-target-proof.ts",
     "recipe:fidelity:plugin:check": "tsx recipe/plugin-target-proof.ts --check",
     "recipe:lowering:check": "node --import tsx --test recipe/figma-vector-path.test.ts recipe/css-box-shadow.test.ts recipe/portable-gzip.test.ts",

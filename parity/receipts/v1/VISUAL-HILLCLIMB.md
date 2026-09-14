@@ -26,12 +26,14 @@ owner-only fields were not modified.
 
 ## Next bounded steps
 
-1. Preserve and re-check the fresh held-out code→Figma screenshots as portable
-   committed evidence (currently in the local private capture directory).
+1. Fresh held-out code→Figma screenshots are now portable committed evidence in
+   `recipe/evidence/live-fidelity-2026-09-14/`; `npm run recipe:fidelity:check`
+   re-derives every score and checks hashes, repeated renders, and coverage.
 2. Recover partially bound padding without overwriting carried token identities.
 3. Resolve font/mode fidelity separately from accounting; validate each affected
    component against its actual source screenshot before claiming visual parity.
 4. Run readiness on a merged commit with successful lanes for that exact SHA.
 
 Local capture directory:
-`private/f1-live-2026-09-14/` (ignored; not portable release evidence yet).
+`private/f1-live-2026-09-14/` (ignored working files; the held-out screenshots and
+measurement manifest are also preserved in the portable evidence above).
