@@ -39,9 +39,11 @@ human clicking Apply.
 [24 — What Works](24-what-works.md) is what the path *delivers*, measured, with
 every number carrying the artifact it was read from.
 [23 — Known Limitations](23-known-limitations.md) is what it *costs*. They
-share one denominator — the 113 covered components are **11.1%** of the 1015 in
-the seven libraries with a measured size ([24 §2](24-what-works.md)) — so read
-every percentage on either page as *"on the easy 11.1%."*
+separate fidelity from breadth — the 102 covered components are **10.0%** of the 1015 in
+the eight libraries with a measured size ([24 §2](24-what-works.md)). The other
+11 measured-and-committed components have no library-size denominator and are
+excluded from both sides of that ratio. These heterogeneous size units make it
+a coverage proxy, not a whole-library or harmonized component-family claim.
 
 ---
 
@@ -145,7 +147,7 @@ in the same change.
   a 599-variant community kit (best set 98.0%, worst 81.2%); the
   canvas→code→canvas round trip **closes on 15 of 15** components with every
   one of 36,287 facts classified rather than dropped in silence; and the
-  generate step is **byte-identical on any machine** — 291 generated files
+  generate step is **byte-identical on any machine** — 292 generated files
   hashed against a golden manifest, no model in the path.
 - **What it costs** ([23](23-known-limitations.md)): only the sets you import
   exist — the kit's un-imported sets do not appear as low scores, they do not
@@ -233,9 +235,9 @@ their component-property overrides.
   computed-style equality** for a captured component, against the original npm
   package rendering in the same pinned Chromium — an exact string match over
   the browser's full longhand set, no tolerance, no whitelist, so a channel the
-  pipeline never opened still counts against it. 116 components across nine
-  libraries and six styling architectures: 85.8% cell-weighted over 807,307
-  cells, 63 of 133 at ≥90%, 105 of 133 at ≥80%. Every one of the 116 is listed
+  pipeline never opened still counts against it. 133 components across 11
+  libraries with different styling architectures: 85.8% cell-weighted over 807,307
+  cells, 63 of 133 at ≥90%, 105 of 133 at ≥80%. Every one of the 133 is listed
   worst-first in [24 §3.1](24-what-works.md) — the worst is 47.6%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
   configuration per library (below), and breadth — see the coverage bullet.
@@ -260,7 +262,8 @@ their component-property overrides.
   any fidelity average, for exactly this reason). Data grid, tree, virtualized
   list, date picker, rich text and charts appear in **zero** committed
   contracts. Fidelity per *captured* component is high; breadth is the honest
-  limit, and the 86.4% above describes only the tractable 11.1%.
+  limit, and the 86.4% above describes only the hand-picked measured slice,
+  not the unmeasured remainder of those libraries.
 - **What will look broken but is a named limit:** text wrapping is not
   implemented (a hugging text node inside a narrower fixed ancestor clips);
   webfonts load only where the library's capture config declares them

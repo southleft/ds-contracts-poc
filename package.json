@@ -469,7 +469,7 @@
     "core:browser-check": "node scripts/core-browser-check.mjs",
     "site:build": "tsx site/build.ts",
     "plugin:ui-check": "node scripts/plugin-ui-check.mjs",
-    "docs:check": "node --test scripts/v1-doc-claims.test.mjs && node scripts/docs-numbers-check.mjs",
+    "docs:check": "node --test scripts/v1-doc-claims.test.mjs scripts/coverage-cohort.test.mjs && node scripts/docs-numbers-check.mjs",
     "conformance:build": "tsx conformance/build.ts",
     "conformance:capture": "tsx conformance/capture.ts",
     "conformance": "tsx conformance/run.ts",
