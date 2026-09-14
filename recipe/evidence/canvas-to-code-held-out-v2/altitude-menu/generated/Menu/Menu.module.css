@@ -15,9 +15,22 @@
   flex-direction: column;
   border: 0;
   background-color: var(--theme-color-background-neutral-default);
+  width: fit-content;
+  height: fit-content;
+}
+
+.variant-default {
+  padding-left: var(--imported-menu-root-padding-left-default);
+  padding-right: var(--imported-menu-root-padding-right-default);
+  padding-top: var(--imported-menu-root-padding-top-default);
+  padding-bottom: var(--imported-menu-root-padding-bottom-default);
 }
 
 .variant-simple {
+  padding-left: var(--imported-menu-root-padding-left-simple);
+  padding-right: var(--imported-menu-root-padding-right-simple);
+  padding-top: var(--imported-menu-root-padding-top-simple);
+  padding-bottom: var(--imported-menu-root-padding-bottom-simple);
   background-color: var(--theme-color-background-transparent-default);
 }
 

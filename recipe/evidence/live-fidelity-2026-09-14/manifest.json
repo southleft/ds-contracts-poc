@@ -1,0 +1,1324 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-09-14T14:20:58.463Z",
+  "sourceRevision": "dd0c66b66a9e014d3ccffd6fde2c5caca5ac67b8",
+  "chromium": "149.0.7827.55",
+  "platform": "darwin-arm64",
+  "method": "read-only live Figma exportAsync versus two independent Playwright CLI screenshots of pinned source packages",
+  "limitations": [
+    "Snapshot evidence, not a live-file freshness check.",
+    "A threshold pass is not pixel identity or an archetype-wide pass.",
+    "Unchecked-disabled Checkbox differs from its earlier source capture at eight antialias corner pixels; both fresh renders agree.",
+    "No owner grade, signoff, or overall success is assigned."
+  ],
+  "rows": [
+    {
+      "label": "avatar/radix-themes",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "267:2366",
+        "nodeId": "267:2379",
+        "exportedAt": "2026-09-14T14:19:18.575Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/avatar-radix-themes.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/avatar-radix-themes.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/avatar-radix-themes.png"
+      },
+      "hashes": {
+        "canvas": "ec6dd91204c6c7cd32bd53db2100b13e75ac806005f6fd79ca7d3e4cc08ee1bf",
+        "reference": "26431e82988e2c41ac7a5edf1ed980332957fde2a0a9e2c2c62b79bd2b24c8eb",
+        "repeat": "26431e82988e2c41ac7a5edf1ed980332957fde2a0a9e2c2c62b79bd2b24c8eb"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/avatar-radix-themes-default-v7.png",
+        "reference": "extract/computed/out/radix-themes/avatar/orig-shots/soft.3__default.png"
+      },
+      "glyphRects": [
+        {
+          "x": 10.3671875,
+          "y": 13.625,
+          "width": 19.015625,
+          "height": 11.375,
+          "characters": "TP"
+        }
+      ],
+      "referenceControlOnly": false,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 10.5,
+          "pctAAUnmasked": 1.875,
+          "pctAAMasked": 1.875,
+          "canvasPx": "40x40",
+          "realPx": "40x40",
+          "inkCanvasPct": 98.5,
+          "inkRealPct": 98.5
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "40x40",
+            "reference": "40x40",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "40x40",
+            "reference": "40x40",
+            "agree": true
+          },
+          {
+            "threshold": 240,
+            "canvas": "40x40",
+            "reference": "40x40",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "20x12",
+            "reference": "20x12",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0,
+          "maskCoveragePct": 35,
+          "textBoxes": 1
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "switch/radix-themes",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "267:2382",
+        "nodeId": "267:2404",
+        "exportedAt": "2026-09-14T14:19:18.898Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/switch-radix-themes.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/switch-radix-themes.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/switch-radix-themes.png"
+      },
+      "hashes": {
+        "canvas": "9b3892594f7ec6c7f5ea19d08aa289dc62882dcc489504356e9dd303bfd0ced8",
+        "reference": "56ed6e848877b3876b743e37c559bcc2ab35e16a4508a58ecc733df8b9b8797f",
+        "repeat": "56ed6e848877b3876b743e37c559bcc2ab35e16a4508a58ecc733df8b9b8797f"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/switch-radix-themes-unchecked-v13.png",
+        "reference": "extract/computed/out/radix-themes/switch/orig-shots/surface.2.unchecked.enabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 32.407407407407405,
+          "pctAAUnmasked": 3.0423280423280423,
+          "pctAAMasked": 3.0423280423280423,
+          "canvasPx": "36x21",
+          "realPx": "35x20",
+          "inkCanvasPct": 55.55555555555556,
+          "inkRealPct": 52.51322751322751
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "36x21",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 245,
+            "canvas": "36x20",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 240,
+            "canvas": "21x20",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 230,
+            "canvas": "19x20",
+            "reference": "35x20",
+            "agree": false
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 3.04,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "switch/radix-themes-unchecked-disabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "267:2382",
+        "nodeId": "267:2408",
+        "exportedAt": "2026-09-14T14:19:18.898Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/switch-radix-themes-unchecked-disabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/switch-radix-themes-unchecked-disabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/switch-radix-themes-unchecked-disabled.png"
+      },
+      "hashes": {
+        "canvas": "6bb40cb7c5d3d8639d4ec377fc39aba27fb0120f1a1957efab0fe8d57e4459ee",
+        "reference": "0a89753fcaefa7af83db84ec471f30989cff66f094c8e0de57b1c754ab1dfa7a",
+        "repeat": "0a89753fcaefa7af83db84ec471f30989cff66f094c8e0de57b1c754ab1dfa7a"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/switch-radix-themes-unchecked-disabled-v13.png",
+        "reference": "extract/computed/out/radix-themes/switch/orig-shots/surface.2.unchecked.disabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 32.67195767195767,
+          "pctAAUnmasked": 0,
+          "pctAAMasked": 0,
+          "canvasPx": "36x21",
+          "realPx": "35x20",
+          "inkCanvasPct": 86.77248677248677,
+          "inkRealPct": 83.5978835978836
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "36x21",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 245,
+            "canvas": "36x20",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 240,
+            "canvas": "21x20",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 230,
+            "canvas": "19x20",
+            "reference": "35x20",
+            "agree": false
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "switch/radix-themes-checked",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "267:2382",
+        "nodeId": "267:2412",
+        "exportedAt": "2026-09-14T14:19:18.898Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/switch-radix-themes-checked.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/switch-radix-themes-checked.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/switch-radix-themes-checked.png"
+      },
+      "hashes": {
+        "canvas": "bd3fe43732d9c096cdaf1424d6b3d9b067ef291e391772bc5e3c72908c5970bf",
+        "reference": "e09744deb7b18300c0b4e5f79f560f25af48bf94aea14684c227ce1036d89d04",
+        "repeat": "e09744deb7b18300c0b4e5f79f560f25af48bf94aea14684c227ce1036d89d04"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/switch-radix-themes-checked-v13.png",
+        "reference": "extract/computed/out/radix-themes/switch/orig-shots/surface.2.checked.enabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 37.68707482993197,
+          "pctAAUnmasked": 2.585034013605442,
+          "pctAAMasked": 2.585034013605442,
+          "canvasPx": "35x21",
+          "realPx": "35x21",
+          "inkCanvasPct": 56.59863945578232,
+          "inkRealPct": 55.646258503401356
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "35x21",
+            "reference": "35x21",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "35x21",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 240,
+            "canvas": "35x20",
+            "reference": "35x20",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "35x20",
+            "reference": "35x20",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 2.59,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "switch/radix-themes-checked-disabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "267:2382",
+        "nodeId": "267:2416",
+        "exportedAt": "2026-09-14T14:19:18.898Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/switch-radix-themes-checked-disabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/switch-radix-themes-checked-disabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/switch-radix-themes-checked-disabled.png"
+      },
+      "hashes": {
+        "canvas": "c640ac636910d539492d46b7d7c1077e80d373064c55db30caa1d848ad25e2cd",
+        "reference": "20686839047185b0a9a390c6b797b87166b8ae9757b6631cdad52decdec226ae",
+        "repeat": "20686839047185b0a9a390c6b797b87166b8ae9757b6631cdad52decdec226ae"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/switch-radix-themes-checked-disabled-v13.png",
+        "reference": "extract/computed/out/radix-themes/switch/orig-shots/surface.2.checked.disabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 35.51020408163265,
+          "pctAAUnmasked": 0.27210884353741494,
+          "pctAAMasked": 0.27210884353741494,
+          "canvasPx": "35x21",
+          "realPx": "35x20",
+          "inkCanvasPct": 86.12244897959184,
+          "inkRealPct": 85.98639455782313
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "35x21",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 245,
+            "canvas": "35x21",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 240,
+            "canvas": "23x20",
+            "reference": "35x20",
+            "agree": false
+          },
+          {
+            "threshold": 230,
+            "canvas": "20x20",
+            "reference": "35x20",
+            "agree": false
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0.27,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "checkbox/radix-themes-unchecked-enabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "273:3800",
+        "nodeId": "273:3839",
+        "exportedAt": "2026-09-14T14:19:19.142Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/checkbox-radix-themes-unchecked-enabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/checkbox-radix-themes-unchecked-enabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/checkbox-radix-themes-unchecked-enabled.png"
+      },
+      "hashes": {
+        "canvas": "a24bbb2fe0369fbdc650ed99ce537f3934922dd026aa4954fc4cee771a4e0eae",
+        "reference": "3c2029cb983e6a07b9d01ef2ca9f8d66253c1e20b3ac47c56b75265a89459c60",
+        "repeat": "3c2029cb983e6a07b9d01ef2ca9f8d66253c1e20b3ac47c56b75265a89459c60"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-unchecked-enabled-v12-glyph-host.png",
+        "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.unchecked.enabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 25.390625,
+          "pctAAUnmasked": 0,
+          "pctAAMasked": 0,
+          "canvasPx": "16x16",
+          "realPx": "16x16",
+          "inkCanvasPct": 25,
+          "inkRealPct": 23.4375
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 240,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "checkbox/radix-themes-unchecked-disabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "273:3800",
+        "nodeId": "273:3845",
+        "exportedAt": "2026-09-14T14:19:19.142Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/checkbox-radix-themes-unchecked-disabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/checkbox-radix-themes-unchecked-disabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/checkbox-radix-themes-unchecked-disabled.png"
+      },
+      "hashes": {
+        "canvas": "570722b210f79cf70e59afacc8f2ade873e806e40f14de2c243ba4462d246e2b",
+        "reference": "fb1b842115500cee4b1077512bb71d8832de6d0cd51ed19ee9c349b7ab8c9fe4",
+        "repeat": "fb1b842115500cee4b1077512bb71d8832de6d0cd51ed19ee9c349b7ab8c9fe4"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-unchecked-disabled-v12-glyph-host.png",
+        "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.unchecked.disabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 25,
+          "pctAAUnmasked": 0,
+          "pctAAMasked": 0,
+          "canvasPx": "16x16",
+          "realPx": "16x16",
+          "inkCanvasPct": 98.4375,
+          "inkRealPct": 98.4375
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 240,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": false
+      }
+    },
+    {
+      "label": "checkbox/radix-themes-checked-enabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "273:3800",
+        "nodeId": "273:3851",
+        "exportedAt": "2026-09-14T14:19:19.142Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/checkbox-radix-themes-checked-enabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/checkbox-radix-themes-checked-enabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/checkbox-radix-themes-checked-enabled.png"
+      },
+      "hashes": {
+        "canvas": "d2d535472f9e0b1aa6776d757248dfce3a9ee43766db1506761bc5bbc1141fa3",
+        "reference": "73eac2e57814468e8e1e332154b7f3a5064f1e2c8ea7e2825ca0d636f5dac1aa",
+        "repeat": "73eac2e57814468e8e1e332154b7f3a5064f1e2c8ea7e2825ca0d636f5dac1aa"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-checked-enabled-v12-glyph-host.png",
+        "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.checked.enabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 37.109375,
+          "pctAAUnmasked": 0,
+          "pctAAMasked": 0,
+          "canvasPx": "16x16",
+          "realPx": "16x16",
+          "inkCanvasPct": 94.921875,
+          "inkRealPct": 92.1875
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 240,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "checkbox/radix-themes-checked-disabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "273:3800",
+        "nodeId": "273:3857",
+        "exportedAt": "2026-09-14T14:19:19.142Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/checkbox-radix-themes-checked-disabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/checkbox-radix-themes-checked-disabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/checkbox-radix-themes-checked-disabled.png"
+      },
+      "hashes": {
+        "canvas": "c4f965422d28d53adb9a678910879bbe7eaf8ed53af94457d4b5820f68c2ec22",
+        "reference": "108ed14b9ba5b1ec60161f9ee9f00c343027e458e1be754824d9e47e4ab110ca",
+        "repeat": "108ed14b9ba5b1ec60161f9ee9f00c343027e458e1be754824d9e47e4ab110ca"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-checked-disabled-v12-glyph-host.png",
+        "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.checked.disabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 34.765625,
+          "pctAAUnmasked": 0,
+          "pctAAMasked": 0,
+          "canvasPx": "16x16",
+          "realPx": "16x16",
+          "inkCanvasPct": 98.4375,
+          "inkRealPct": 98.4375
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 240,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "checkbox/radix-themes-indeterminate-enabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "273:3800",
+        "nodeId": "273:3863",
+        "exportedAt": "2026-09-14T14:19:19.142Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/checkbox-radix-themes-indeterminate-enabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/checkbox-radix-themes-indeterminate-enabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/checkbox-radix-themes-indeterminate-enabled.png"
+      },
+      "hashes": {
+        "canvas": "68e5ec97c2d4d7cada455ee0980476474fd3f42df1d2720cc0024fe7d4620297",
+        "reference": "c6c9f961065ed62fc5328217fc8219b81cb2ff47d83e4fd75010dd23b8edf8c8",
+        "repeat": "c6c9f961065ed62fc5328217fc8219b81cb2ff47d83e4fd75010dd23b8edf8c8"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-indeterminate-enabled-v12-glyph-host.png",
+        "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.indeterminate.enabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 34.375,
+          "pctAAUnmasked": 0.390625,
+          "pctAAMasked": 0.390625,
+          "canvasPx": "16x16",
+          "realPx": "16x16",
+          "inkCanvasPct": 98.4375,
+          "inkRealPct": 98.4375
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 240,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0.39,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "checkbox/radix-themes-indeterminate-disabled",
+      "library": {
+        "package": "@radix-ui/themes",
+        "version": "3.3.0"
+      },
+      "browser": {
+        "viewport": {
+          "width": 1000,
+          "height": 1200
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "273:3800",
+        "nodeId": "273:3869",
+        "exportedAt": "2026-09-14T14:19:19.142Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/checkbox-radix-themes-indeterminate-disabled.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/checkbox-radix-themes-indeterminate-disabled.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/checkbox-radix-themes-indeterminate-disabled.png"
+      },
+      "hashes": {
+        "canvas": "c077d25bd15c2bfe1850eb057cc6eae2bdfdab6af6939615a5a284c2c52953d6",
+        "reference": "2540e569d25d680eead2cca7a357b360dc8f906c8497e06d09f4e625fd93faf2",
+        "repeat": "2540e569d25d680eead2cca7a357b360dc8f906c8497e06d09f4e625fd93faf2"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/fidelity-v1/shots/checkbox-radix-themes-indeterminate-disabled-v12-glyph-host.png",
+        "reference": "extract/computed/out/radix-themes/checkbox/orig-shots/surface.2.indeterminate.disabled__default.png"
+      },
+      "glyphRects": [],
+      "referenceControlOnly": true,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 32.8125,
+          "pctAAUnmasked": 0,
+          "pctAAMasked": 0,
+          "canvasPx": "16x16",
+          "realPx": "16x16",
+          "inkCanvasPct": 98.4375,
+          "inkRealPct": 98.4375
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 245,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 240,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          },
+          {
+            "threshold": 230,
+            "canvas": "16x16",
+            "reference": "16x16",
+            "agree": true
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0,
+          "maskCoveragePct": 0,
+          "textBoxes": 0
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    },
+    {
+      "label": "calendar/day-picker",
+      "library": {
+        "package": "react-day-picker",
+        "version": "10.0.1"
+      },
+      "browser": {
+        "viewport": {
+          "width": 900,
+          "height": 900
+        },
+        "deviceScaleFactor": 1,
+        "colorScheme": "light"
+      },
+      "figma": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "pageId": "270:2625",
+        "nodeId": "270:2663",
+        "exportedAt": "2026-09-14T14:19:19.450Z"
+      },
+      "images": {
+        "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/calendar-day-picker.png",
+        "reference": "recipe/evidence/live-fidelity-2026-09-14/orig-shots/calendar-day-picker.png",
+        "repeat": "recipe/evidence/live-fidelity-2026-09-14/repeat-orig-shots/calendar-day-picker.png"
+      },
+      "hashes": {
+        "canvas": "0cb6567d743e7aa450c363f84b2f5d15b09c7c258f2ec745a50d62bed65fe636",
+        "reference": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2",
+        "repeat": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2"
+      },
+      "committed": {
+        "canvas": "recipe/evidence/f1-held-out-v1/score/canvas.png",
+        "reference": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png"
+      },
+      "glyphRects": [
+        {
+          "x": 0.193359375,
+          "y": 16.3359375,
+          "width": 103.798828125,
+          "height": 16.048828125,
+          "characters": "January 2026"
+        },
+        {
+          "x": 239.09375,
+          "y": 19.1484375,
+          "width": 5.80078125,
+          "height": 10.76953125,
+          "characters": "‹"
+        },
+        {
+          "x": 283.1171875,
+          "y": 19.1484375,
+          "width": 5.80078125,
+          "height": 10.76953125,
+          "characters": "›"
+        },
+        {
+          "x": 15.789077758789062,
+          "y": 54.9700927734375,
+          "width": 13.235641479492188,
+          "height": 9.23175048828125,
+          "characters": "Su"
+        },
+        {
+          "x": 56.957061767578125,
+          "y": 55.171875,
+          "width": 17.845001220703125,
+          "height": 9.01043701171875,
+          "characters": "Mo"
+        },
+        {
+          "x": 103.22918701171875,
+          "y": 55.171875,
+          "width": 13.925735473632812,
+          "height": 9.01043701171875,
+          "characters": "Tu"
+        },
+        {
+          "x": 145.45184326171875,
+          "y": 55.171875,
+          "width": 16.887985229492188,
+          "height": 9.02996826171875,
+          "characters": "We"
+        },
+        {
+          "x": 190.99481201171875,
+          "y": 54.7421875,
+          "width": 14.329376220703125,
+          "height": 9.2578125,
+          "characters": "Th"
+        },
+        {
+          "x": 236.28387451171875,
+          "y": 55.171875,
+          "width": 11.731719970703125,
+          "height": 8.828125,
+          "characters": "Fr"
+        },
+        {
+          "x": 280.16015625,
+          "y": 54.9700927734375,
+          "width": 12.480438232421875,
+          "height": 9.23175048828125,
+          "characters": "Sa"
+        },
+        {
+          "x": 22,
+          "y": 88,
+          "width": 0,
+          "height": 18,
+          "characters": ""
+        },
+        {
+          "x": 66,
+          "y": 88,
+          "width": 0,
+          "height": 18,
+          "characters": ""
+        },
+        {
+          "x": 110,
+          "y": 88,
+          "width": 0,
+          "height": 18,
+          "characters": ""
+        },
+        {
+          "x": 154,
+          "y": 88,
+          "width": 0,
+          "height": 18,
+          "characters": ""
+        },
+        {
+          "x": 195.875,
+          "y": 91.1875,
+          "width": 4.171875,
+          "height": 10.8125,
+          "characters": "1"
+        },
+        {
+          "x": 238.34375,
+          "y": 91.1875,
+          "width": 6.9921875,
+          "height": 10.8125,
+          "characters": "2"
+        },
+        {
+          "x": 282.6484375,
+          "y": 91.1875,
+          "width": 6.0234375,
+          "height": 11,
+          "characters": "3"
+        },
+        {
+          "x": 18.25,
+          "y": 135.1875,
+          "width": 7.1953125,
+          "height": 10.8125,
+          "characters": "4"
+        },
+        {
+          "x": 62.765625,
+          "y": 135.40625,
+          "width": 6.1796875,
+          "height": 10.78125,
+          "characters": "5"
+        },
+        {
+          "x": 106.6875,
+          "y": 135.1875,
+          "width": 6.6953125,
+          "height": 11,
+          "characters": "6"
+        },
+        {
+          "x": 150.59375,
+          "y": 135.40625,
+          "width": 6.6953125,
+          "height": 10.8125,
+          "characters": "7"
+        },
+        {
+          "x": 194.96875,
+          "y": 135.1875,
+          "width": 6.109375,
+          "height": 11,
+          "characters": "8"
+        },
+        {
+          "x": 238.6328125,
+          "y": 135.1875,
+          "width": 6.6796875,
+          "height": 11.03125,
+          "characters": "9"
+        },
+        {
+          "x": 279.875,
+          "y": 135.1875,
+          "width": 13.5546875,
+          "height": 11,
+          "characters": "10"
+        },
+        {
+          "x": 16.171875,
+          "y": 179.1875,
+          "width": 11.578125,
+          "height": 10.8125,
+          "characters": "11"
+        },
+        {
+          "x": 59.875,
+          "y": 179.1875,
+          "width": 13.4609375,
+          "height": 10.8125,
+          "characters": "12"
+        },
+        {
+          "x": 103.875,
+          "y": 179.1875,
+          "width": 12.796875,
+          "height": 11,
+          "characters": "13"
+        },
+        {
+          "x": 147.875,
+          "y": 179.1875,
+          "width": 13.5703125,
+          "height": 10.8125,
+          "characters": "14"
+        },
+        {
+          "x": 191.875,
+          "y": 179.1875,
+          "width": 13.0703125,
+          "height": 11,
+          "characters": "15"
+        },
+        {
+          "x": 235.875,
+          "y": 179.1875,
+          "width": 13.5078125,
+          "height": 11,
+          "characters": "16"
+        },
+        {
+          "x": 279.875,
+          "y": 179.1875,
+          "width": 13.4140625,
+          "height": 11.03125,
+          "characters": "17"
+        },
+        {
+          "x": 15.875,
+          "y": 223.1875,
+          "width": 13.203125,
+          "height": 11,
+          "characters": "18"
+        },
+        {
+          "x": 59.875,
+          "y": 223.1875,
+          "width": 13.4375,
+          "height": 11.03125,
+          "characters": "19"
+        },
+        {
+          "x": 102.34375,
+          "y": 223.1875,
+          "width": 15.0859375,
+          "height": 11,
+          "characters": "20"
+        },
+        {
+          "x": 146.34375,
+          "y": 223.1875,
+          "width": 13.703125,
+          "height": 10.8125,
+          "characters": "21"
+        },
+        {
+          "x": 190.34375,
+          "y": 223.1875,
+          "width": 14.9921875,
+          "height": 10.8125,
+          "characters": "22"
+        },
+        {
+          "x": 234.34375,
+          "y": 223.1875,
+          "width": 14.328125,
+          "height": 11,
+          "characters": "23"
+        },
+        {
+          "x": 278.34375,
+          "y": 223.1875,
+          "width": 15.1015625,
+          "height": 10.8125,
+          "characters": "24"
+        },
+        {
+          "x": 14.34375,
+          "y": 267.1875,
+          "width": 14.6015625,
+          "height": 11,
+          "characters": "25"
+        },
+        {
+          "x": 58.34375,
+          "y": 267.1875,
+          "width": 15.0390625,
+          "height": 11,
+          "characters": "26"
+        },
+        {
+          "x": 102.34375,
+          "y": 267.1875,
+          "width": 14.9453125,
+          "height": 11.03125,
+          "characters": "27"
+        },
+        {
+          "x": 146.34375,
+          "y": 267.1875,
+          "width": 14.734375,
+          "height": 11,
+          "characters": "28"
+        },
+        {
+          "x": 190.34375,
+          "y": 267.1875,
+          "width": 14.96875,
+          "height": 11.03125,
+          "characters": "29"
+        },
+        {
+          "x": 234.6484375,
+          "y": 267.1875,
+          "width": 14.78125,
+          "height": 11,
+          "characters": "30"
+        },
+        {
+          "x": 278.6484375,
+          "y": 267.1875,
+          "width": 13.3984375,
+          "height": 11,
+          "characters": "31"
+        }
+      ],
+      "referenceControlOnly": false,
+      "expected": {
+        "status": "pass",
+        "metrics": {
+          "pctExactUnmasked": 7.276899541050484,
+          "pctAAUnmasked": 3.0481896991330952,
+          "pctAAMasked": 3.0481896991330952,
+          "canvasPx": "294x263",
+          "realPx": "296x265",
+          "inkCanvasPct": 4.844467108618052,
+          "inkRealPct": 5.688424273329934
+        },
+        "thresholdSweep": [
+          {
+            "threshold": 250,
+            "canvas": "294x263",
+            "reference": "296x265",
+            "agree": false
+          },
+          {
+            "threshold": 245,
+            "canvas": "294x263",
+            "reference": "296x265",
+            "agree": false
+          },
+          {
+            "threshold": 240,
+            "canvas": "294x263",
+            "reference": "296x265",
+            "agree": false
+          },
+          {
+            "threshold": 230,
+            "canvas": "294x263",
+            "reference": "296x265",
+            "agree": false
+          }
+        ],
+        "glyphMasked": {
+          "pctAAMasked": 0.32,
+          "maskCoveragePct": 23.97,
+          "textBoxes": 45
+        },
+        "canvasMatchesCommitted": true,
+        "sourceMatchesCommitted": true
+      }
+    }
+  ]
+}

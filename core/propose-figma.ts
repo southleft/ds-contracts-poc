@@ -1774,12 +1774,12 @@ function unifyField(m: Merged, field: string, ctx: Ctx, where: string): UnifiedR
   return undefined;
 }
 
-/** Per-part collector for value-level correlations: every per-value carry on
- *  one part must ride the SAME enum axis (tokensByProp holds one `prop`);
- *  a second axis is a NAMED refusal, never a silent merge. */
+/** Per-part value correlations. Schema v14 supports an ordered entry per
+ *  enum axis; keep the legacy single-entry spelling when only one is used. */
 interface ByPropCollector {
   prop?: string;
   map: Record<string, Record<string, string>>;
+  additional?: ByPropCollector[];
 }
 
 /** Carry one unified ref into a part's tokens record: plain refs land as
@@ -1800,9 +1800,13 @@ function carryRef(
     return;
   }
   if (byProp.prop !== undefined && byProp.prop !== u.propName) {
-    ctx.notes.push(
-      `${where} ${cssProp}: bindings are a function of enum axis "${u.propName}" by value, but this part's per-value overrides already ride "${byProp.prop}" — tokensByProp carries ONE axis per part; NAMED, not proposed (review)`,
-    );
+    const entries = (byProp.additional ??= []);
+    let entry = entries.find((candidate) => candidate.prop === u.propName);
+    if (!entry) {
+      entry = { prop: u.propName, map: {} };
+      entries.push(entry);
+    }
+    carryRef(tokens, entry, cssProp, u, ctx, where);
     return;
   }
   byProp.prop = u.propName;
@@ -1821,9 +1825,10 @@ function carryRef(
 
 /** Attach a collected tokensByProp to its part — after every carry ran. */
 function attachByProp(holder: Record<string, unknown>, byProp: ByPropCollector): void {
-  if (byProp.prop !== undefined && Object.keys(byProp.map).length > 0) {
-    holder.tokensByProp = { prop: byProp.prop, map: byProp.map };
-  }
+  const entries = [byProp, ...(byProp.additional ?? [])]
+    .filter((entry) => entry.prop !== undefined && Object.keys(entry.map).length > 0)
+    .map((entry) => ({ prop: entry.prop!, map: entry.map }));
+  if (entries.length > 0) holder.tokensByProp = entries.length === 1 ? entries[0] : entries;
 }
 
 /** Canvas paint → CSS color literal: '#rrggbb', or 8-digit '#rrggbbaa' when
@@ -2310,6 +2315,20 @@ function invertNodeTokens(
     }
     if (!sides.some(([, field]) => fields.has(field))) continue;
     sides.forEach(([cssProp], i) => carry(cssProp, refs[i]));
+    // A partially bound side has no unified ref, but its resolved layout
+    // measurement is still present in every plane. Route only those missing
+    // sides through the existing mint classifier; never replace a carried
+    // ref or infer padding when the layout witness is absent.
+    sides.forEach(([cssProp, field], i) => {
+      if (!ctx.mint || refs[i] !== undefined || !m.occ.every((o) => o.node.layout !== undefined)) return;
+      const bound = m.occ.filter((o) => o.node.bound?.[field] !== undefined);
+      if (bound.length === 0 || bound.length === m.occ.length) return;
+      const index = { paddingTop: 0, paddingRight: 1, paddingBottom: 2, paddingLeft: 3 }[field];
+      mintObservation(ctx, tokens, where, cssProp, 'px', numOccurrences(m, (n) => n.layout!.padding[index]), `${where}|${field}`);
+      ctx.notes.push(
+        `${where} ${field}: bound in ${bound.length}/${m.occ.length} variants — captured padding values routed to provisional mint; binding identity (${[...new Set(bound.map((o) => o.node.bound![field]))].join(', ')}) is not preserved by this fallback, review`,
+      );
+    });
     ctx.notes.push(
       `${where}: ${label} padding bindings differ — ${shorthand} is not representable; carried as separate ${sides.map(([p]) => p).join('/')} channels`,
     );
@@ -4443,6 +4462,23 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
  *  per-variant declared vocabulary). Phase 2 exam: 44 Manrope nodes rendered
  *  Inter with no receipt (rest-text-font-family). */
 const DEFAULT_FONT_FAMILY = 'Inter';
+/** The bridge resolves spacing to pixels, without inventing a token identity.
+ * Uniform spacing uses the existing literal channel. Mixed or partially
+ * captured spacing cannot use a uniform literal. */
+function carryLetterSpacing(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const values = m.occ.filter((o) => o.node.text !== undefined).map((o) => o.node.text!.letterSpacing);
+  if (!values.some((value) => value !== undefined)) return;
+  const value = values[0];
+  if (value === undefined || !Number.isFinite(value) || values.some((other) => other !== value)) {
+    ctx.notes.push(`${where}: letter-spacing is mixed, partial, or invalid across variants — no uniform literal proposed; NAMED for review`);
+    return;
+  }
+  if (value === 0) return; // CSS normal has zero additional tracking.
+  const literals = (holder.literals as Record<string, string> | undefined) ?? {};
+  if (literals['letter-spacing'] === undefined) literals['letter-spacing'] = `${value}px`;
+  holder.literals = literals;
+  ctx.notes.push(`${where}: letter-spacing ${value}px observed in every variant — carried as a pixel literal, not a token identity`);
+}
 function carryFontFamily(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
   const textOcc = m.occ.filter((o) => o.node.text !== undefined);
   if (textOcc.length === 0) return;
@@ -7374,6 +7410,7 @@ function buildPart(
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
     carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
+    carryLetterSpacing(m, part, ctx, where);
     carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
@@ -9027,7 +9064,10 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
   // Dialog width minted 272 for a drawn 320 box.)
   for (const dim of ['width', 'height'] as const) {
     const fixedIn = withBox.filter((o) => fixedAxis(o, dim));
-    if (rootTokens[dim] !== undefined || merged.occ.some((o) => o.node.bound?.[dim])) continue;
+    // A partial binding is refused by unifyField, so it is not a carried
+    // dimension. Keep uniformly bound dimensions authoritative, but let the
+    // existing measured mixed-size path carry FIXED planes beside HUG ones.
+    if (rootTokens[dim] !== undefined || merged.occ.every((o) => o.node.bound?.[dim])) continue;
     // A FILL root (layoutSizingHorizontal/Vertical FILL — dump fillWidth /
     // fillHeight) is spelled FIXED by Figma's sizing MODE, but the drawn box
     // is the container's width, not a design value: minting it would pin a
@@ -10527,6 +10567,7 @@ export function proposeFromDump(
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
     carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
     carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
+    carryLetterSpacing(only, root, ctx, `${where}/label`);
     carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
 
     // The label's tokens hoisted — retarget its captured mint observations

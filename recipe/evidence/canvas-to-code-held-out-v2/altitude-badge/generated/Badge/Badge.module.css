@@ -16,7 +16,23 @@
   justify-content: center;
   border: 0;
   background-color: var(--theme-color-background-danger-weak);
+  border-radius: var(--theme-border-radius-pill);
   gap: var(--theme-space-xxs);
+}
+
+.shape-label {
+  padding-left: var(--imported-badge-root-padding-left-label);
+  padding-right: var(--imported-badge-root-padding-right-label);
+  width: var(--imported-badge-root-width-label);
+  height: var(--imported-badge-root-height-label);
+}
+
+.shape-dot {
+  padding-left: var(--imported-badge-root-padding-left-dot);
+  padding-right: var(--imported-badge-root-padding-right-dot);
+  width: var(--imported-badge-root-width-dot);
+  height: var(--imported-badge-root-height-dot);
+  border-radius: var(--theme-space-xs);
 }
 
 .variant-neutral {
@@ -40,6 +56,7 @@
   font-size: var(--typography-font-size-12);
   line-height: var(--typography-line-height-20);
   font-weight: var(--imported-badge-badge-font-weight);
+  letter-spacing: 1px;
   font-family: Public Sans;
 }
 

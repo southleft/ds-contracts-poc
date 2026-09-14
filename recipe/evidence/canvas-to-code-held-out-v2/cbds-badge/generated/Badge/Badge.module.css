@@ -19,6 +19,7 @@
   padding-block: var(--spacing-100);
   gap: var(--spacing-100);
   height: var(--component-size-small);
+  width: fit-content;
 }
 
 .type-brand {

@@ -17,6 +17,14 @@
 
 :root {
   --imported-badge-badge-font-weight: 600;
+  --imported-badge-root-height-dot: 8px;
+  --imported-badge-root-height-label: fit-content;
+  --imported-badge-root-padding-left-dot: 0px;
+  --imported-badge-root-padding-left-label: 8px;
+  --imported-badge-root-padding-right-dot: 0px;
+  --imported-badge-root-padding-right-label: 8px;
+  --imported-badge-root-width-dot: 8px;
+  --imported-badge-root-width-label: fit-content;
   --theme-border-radius-pill: 999px;
   --theme-color-background-danger-weak: #38191c;
   --theme-color-background-info-weak: #2b3a63;

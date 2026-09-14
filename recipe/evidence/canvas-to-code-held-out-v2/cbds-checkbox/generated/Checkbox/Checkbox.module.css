@@ -16,6 +16,8 @@
   align-items: center;
   border: 0;
   gap: var(--spacing-100);
+  width: fit-content;
+  height: fit-content;
 }
 
 .state-error {
@@ -70,6 +72,22 @@
   flex: 1 1 auto;
   min-width: 0;
   gap: var(--spacing-050);
+}
+
+.alignment-left.size-large .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-left-large);
+}
+
+.alignment-left.size-small .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-left-small);
+}
+
+.alignment-right.size-large .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-right-large);
+}
+
+.alignment-right.size-small .errorText {
+  padding-left: var(--imported-checkbox-error-text-padding-left-right-small);
 }
 
 .errorText2 {

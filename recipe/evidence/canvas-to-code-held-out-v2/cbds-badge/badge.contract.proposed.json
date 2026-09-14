@@ -151,6 +151,9 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content"
+      },
       "tokensByProp": {
         "prop": "size",
         "map": {

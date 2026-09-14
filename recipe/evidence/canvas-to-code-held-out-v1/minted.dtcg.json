@@ -11,6 +11,10 @@
             "$value": "0px",
             "$type": "dimension"
           }
+        },
+        "width": {
+          "$value": "288px",
+          "$type": "dimension"
         }
       },
       "card-head-card-head-wrapper-label": {

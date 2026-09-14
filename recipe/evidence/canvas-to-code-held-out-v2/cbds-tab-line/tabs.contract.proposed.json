@@ -317,6 +317,9 @@
           }
         }
       },
+      "literals": {
+        "height": "fit-content"
+      },
       "tokensByProp": {
         "prop": "type",
         "map": {
@@ -329,7 +332,8 @@
         }
       },
       "tokens": {
-        "gap": "{spacing.100}"
+        "gap": "{spacing.100}",
+        "width": "{imported.tab-line.root.width.{type}}"
       }
     }
   },

@@ -155,6 +155,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "padding-inline": "{imported.shared.size-16}",
         "padding-block": "{imported.shared.size-8}",

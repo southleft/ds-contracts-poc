@@ -1,5 +1,22 @@
 {
   "imported": {
+    "tab-line": {
+      "root": {
+        "width": {
+          "horizontal": {
+            "$value": "fit-content"
+          },
+          "verticalRight": {
+            "$value": "160px",
+            "$type": "dimension"
+          },
+          "verticalLeft": {
+            "$value": "160px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
     "stub-selected-false-state-default-size-small": {
       "root": {
         "height": {

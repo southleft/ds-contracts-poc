@@ -27,6 +27,30 @@
           }
         }
       },
+      "error-text": {
+        "padding-left": {
+          "left": {
+            "large": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "large": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        }
+      },
       "error-text-error-text": {
         "font-weight": {
           "$value": "400",

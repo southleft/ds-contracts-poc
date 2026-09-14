@@ -186,7 +186,8 @@
             "align": "center"
           },
           "tokens": {
-            "gap": "{spacing.050}"
+            "gap": "{spacing.050}",
+            "padding-left": "{imported.radio-button.error-text.padding-left.{alignment}.{size}}"
           },
           "parts": {
             "Icon": {
@@ -221,6 +222,10 @@
             "equals": "error"
           }
         }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
       },
       "tokensByProp": {
         "prop": "state",

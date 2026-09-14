@@ -126,6 +126,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokensByProp": {
         "prop": "variant",
         "map": {

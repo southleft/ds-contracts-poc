@@ -40,6 +40,9 @@
           "declared": {
             "font-family": "Public Sans"
           },
+          "literals": {
+            "letter-spacing": "1px"
+          },
           "text": "Link text",
           "tokens": {
             "color": "{theme.color.content.primary-default}",
@@ -56,6 +59,10 @@
             }
           }
         }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
       },
       "tokens": {
         "border-radius": "{theme.border.radius.xs}",

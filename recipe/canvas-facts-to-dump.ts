@@ -818,7 +818,12 @@ export function bridgeCanvasFactsToDump(
           }
         : {}),
       ...fillAxes,
-      ...(fixed.width !== undefined && node.type === "COMPONENT"
+      // Component roots need a COMPLETE bbox census, including the observed
+      // HUG planes. The proposer uses the sizing modes to keep HUG fluid;
+      // omitting their boxes made a mixed HUG/FIXED set look partially
+      // observed and dropped the FIXED variants' dimensions as well.
+      // Child fixed geometry remains under the existing fixedSize policy.
+      ...(node.type === "COMPONENT"
         ? { bbox: { width: node.width, height: node.height } }
         : Object.keys(fixed).length > 0
           ? { fixedSize: fixed }
@@ -840,12 +845,16 @@ export function bridgeCanvasFactsToDump(
     // The `type` fact is the WHOLE typography object; land it named only when
     // every present subfield has a dump spelling, else receipt the residue.
     const residues: string[] = [];
+    const spacing = node.letterSpacing;
+    const letterSpacing = spacing === undefined ? undefined
+      : spacing.unit === "PIXELS" ? spacing.value
+      : node.fontSize === undefined ? undefined : spacing.value * node.fontSize / 100;
+    if (spacing !== undefined && (letterSpacing === undefined || !Number.isFinite(letterSpacing)))
+      residues.push("letterSpacing cannot resolve to finite pixels (missing fontSize or invalid value)");
     if (node.lineHeight !== undefined && node.lineHeight.unit !== "PIXELS")
       residues.push(
         `lineHeight unit ${node.lineHeight.unit} (dump carries PIXELS only)`,
       );
-    if (node.letterSpacing !== undefined && node.letterSpacing.value !== 0)
-      residues.push("letterSpacing (no dump v1 channel)");
     if (node.textDecoration !== undefined && node.textDecoration !== "NONE")
       residues.push("textDecoration (no dump v1 projection)");
     ledger.land(
@@ -854,7 +863,7 @@ export function bridgeCanvasFactsToDump(
       0,
       residues.length === 0 ? "named" : "receipted",
       residues.length === 0
-        ? "text.fontSize/fontStyle/fontFamily/lineHeight (+ fontSizeVar/lineHeightVar/fillVar)"
+        ? "text.fontSize/fontStyle/fontFamily/lineHeight/letterSpacing (+ fontSizeVar/lineHeightVar/fillVar)"
         : `typography carried EXCEPT: ${residues.join("; ")} — receipt`,
     );
     ledger.land(key, "align", 0, "named", "text.textAlign");
@@ -894,6 +903,7 @@ export function bridgeCanvasFactsToDump(
         characters: node.characters ?? "",
         fontSize: node.fontSize ?? 0,
         fontStyle: node.fontName?.style ?? "",
+        ...(letterSpacing === undefined || !Number.isFinite(letterSpacing) ? {} : { letterSpacing }),
         ...(node.lineHeight?.unit === "PIXELS" &&
         node.lineHeight.value !== undefined
           ? { lineHeight: node.lineHeight.value }
