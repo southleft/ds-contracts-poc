@@ -1,5 +1,11 @@
 # Open-human audit rows — what each one needs from the owner
 
+> **AUD-U17 and AUD-U22 CLOSED (2026-09-03).** Their dispositions below
+> record the owner's decisions: remove the premature tag and label the hosted
+> plugin's older engine. `release-tag:check` and `deploy:pin:check` verify those
+> closures. Earlier open-row tallies are historical. Release approval and
+> deployment remain owner-only; the sync-spine discussion below stays open.
+
 Prepared 2026-08-29.
 
 > **Third update — 2026-09-01, and this one is measured rather than argued.**

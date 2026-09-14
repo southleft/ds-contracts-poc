@@ -280,7 +280,7 @@ jobs:
       - name: recipe:canvas-to-code:held-out:v2:check (designer-drawn substrates — Altitude Badge; committed observe, zero silent, every refusal named; closes OWNER-PARKED P1)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:canvas-to-code:held-out:v2:check
-      - name: recipe:f1-held-out:check (day-picker capture-only; mechanical calendar@1 compile refused; no Polar)
+      - name: recipe:f1-held-out:check (day-picker capture and mechanical calendar compile; score checked separately by recipe:f1:check)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:f1-held-out:check
       - name: recipe:f1:check (both F1 rows, one gate — calendar re-scored from committed bytes; every Radix archetype scored, refused at roles, or mint-refused by name; never graded)

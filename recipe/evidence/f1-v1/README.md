@@ -13,11 +13,11 @@ pass 3.048% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: fals
 | --- | --- | --- |
 | avatar | scored | radix-themes **pass** 1.88% |
 | switch | scored | radix-themes **pass** 3.04% · radix-themes-unchecked-disabled **pass** 0% · radix-themes-checked **pass** 2.59% · radix-themes-checked-disabled **pass** 0.27% |
-| checkbox | compiled; mint refused by name | `in set_effects: Property "effects" failed validation: Unrecognized key(s)` — fix/writer-inner-shadow (PR #82): one conditional in the shared runtime — and because every boilerplate writer embeds that runtime, a thirteen-writer remint round before it can merge. |
+| checkbox | scored | radix-themes-unchecked-enabled **pass** 0% · radix-themes-unchecked-disabled **pass** 0% · radix-themes-checked-enabled **pass** 0% · radix-themes-checked-disabled **pass** 0% · radix-themes-indeterminate-enabled **pass** 0.39% · radix-themes-indeterminate-disabled **pass** 0% |
 | badge | refused at the role step | `indicator: no absolutely positioned, translated part carries the count`; `host: no painted square part besides the pip` |
 | tabs | refused at the role step | `indicator: no absolute painted bar and no distinct bottom border on the selected tab (selected bg rgba(0, 0, 0, 0), rest bg rgba(0, 0, 0, 0)) — tabs@1 draws an indicator, not a selected-tab fill` |
 
-Scored 2 archetype(s) / 5 row(s) · refused at roles 2 · mint refused 1. Receipt: parity/receipts/v1/F1-RADIX-ROUND.md.
+Scored 3 archetype(s) / 11 row(s) · refused at roles 2 · mint refused 0. Receipt: parity/receipts/v1/F1-RADIX-ROUND.md.
 
 ## Not claimed
 

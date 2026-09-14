@@ -9,7 +9,8 @@
 ## What the product is, in files
 
 The one command ([docs/36](36-point-it-at-your-library.md)) needs these and
-nothing else. Counts are `git ls-files` on `main` today.
+nothing else. File-count estimates below describe the 2026-09-02 draft, not
+the current tree; re-inventory them before the owner-approved extraction.
 
 | moves | files | what |
 |---|---|---|
@@ -41,7 +42,7 @@ nothing else. Counts are `git ls-files` on `main` today.
   and they have no reader schema. v1 ships without them.
 - **`pivot-status.ts`** (20k lines) hash-pins the versioned builds at
   runtime; it does not move, and the product repo needs no equivalent.
-- **The eight `KNOWN-FAILURES` rows** move with the manifest: the ratchet is
+- **The 13 `KNOWN-FAILURES` rows** move with the manifest: the ratchet is
   part of the gate.
 - **History** does not move (decision H in [docs/33](33-post-v1-plan.md) stays
   the owner's).

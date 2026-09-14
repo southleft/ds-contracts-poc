@@ -1,0 +1,4 @@
+{
+  "origin": "the exported node's box (top-left = 0,0); render bounds when the export used absolute bounds",
+  "rects": []
+}

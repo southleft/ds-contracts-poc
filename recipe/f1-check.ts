@@ -19,7 +19,7 @@
  *   residual is named in F1-COMPILE-ROUND.md, and naming is not fixing.
  *
  * Row 2 — Radix Themes (@radix-ui/themes@3.3.0) through `recipe:point`, the
- *   five shipped archetypes the library has. Each is in exactly one state:
+ *   five selected archetypes from the library. Each is in exactly one state:
  *     scored             manifest rows carry heldOut:"radix-themes"; re-scored
  *                        by the fidelity scorer; must PASS, or be a KNOWN row of
  *                        a font class whose glyph-masked pass is green.
@@ -45,6 +45,7 @@ import { fileURLToPath } from "node:url";
 
 import { runFidelity, type Subject } from "./fidelity-check.js";
 import { FIDELITY_BAR, scoreFidelity } from "./fidelity-score.js";
+import { assertF1Score } from "./f1-row-policy.js";
 import {
   draftAvatarRoles,
   draftBadgeRoles,
@@ -69,12 +70,12 @@ const CALENDAR = {
   receipt: "parity/receipts/v1/F1-COMPILE-ROUND.md",
 } as const;
 
-/** Row 2: the held-out library and the shipped archetypes it has. */
+/** Row 2: the held-out library and the selected exam archetypes. */
 const RADIX = {
   library: "radix-themes",
   package: "@radix-ui/themes@3.3.0",
   receipt: "parity/receipts/v1/F1-RADIX-ROUND.md",
-  /** The five of the thirteen `recipe:point` archetypes Radix Themes ships. */
+  /** Five selected `recipe:point` archetypes, not the library's full inventory. */
   archetypes: ["avatar", "switch", "checkbox", "badge", "tabs"] as const,
 } as const;
 type RadixArchetype = (typeof RADIX.archetypes)[number];
@@ -180,13 +181,7 @@ function accountRadix(): RadixOutcome[] {
     if (!existsSync(path.join(REPO, ledgerRel))) throw new Error(`F1 radix: ${archetype} has no committed capture ledger at ${ledgerRel}`);
     const rows = run.rows.filter((r) => r.label === `${archetype}/${RADIX.library}` || r.label.startsWith(`${archetype}/${RADIX.library}-`));
     if (rows.length > 0) {
-      for (const r of rows) {
-        if (r.status === "pass") continue;
-        const k = known[r.label];
-        if (!k) throw new Error(`F1 radix: ${r.label} ${r.status.toUpperCase()} ${r.pctAAMasked}% and not named in KNOWN-FAILURES.json`);
-        if (k.class !== "font-substrate" && k.class !== "font-metrics") throw new Error(`F1 radix: ${r.label} fails with a non-font cause (${k.class}) — an F1 row may only carry a font-substrate residual`);
-        if (k.class === "font-substrate" && !(typeof r.glyphMasked === "number" && r.glyphMasked <= FIDELITY_BAR.pctAAMaskedMax)) throw new Error(`F1 radix: ${r.label} is named font-substrate but its glyph-masked pass is not green (${String(r.glyphMasked)})`);
-      }
+      for (const r of rows) assertF1Score(r, known[r.label]);
       outcomes.push({
         archetype,
         outcome: "scored",

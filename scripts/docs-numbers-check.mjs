@@ -43,6 +43,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { recordFreshnessFailures } from './eval-record-check.mjs';
 import { evalRedFailures } from './eval-red-ledger.mjs';
+import { fidelityCounts, v1DocClaimFailures, v1ExamClaimFailures, radixReadmeClaimFailures } from './v1-doc-claims.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IGNORE = '<!-- docs-check:ignore -->';
@@ -136,6 +137,25 @@ const FID_MEAN = fidScored.reduce((a, r) => a + r.score, 0) / (FID_SCORED || 1);
 const FID_UNSCORED = FID_TOTAL - FID_SCORED;
 const FID_INTERACTION = fid.filter((r) => typeof r.score !== 'number' && /interaction-state/.test(r.note ?? '')).length;
 const FID_CARRIAGE = FID_UNSCORED - FID_INTERACTION;
+
+const RECIPE_FIDELITY = fidelityCounts(
+  JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/fidelity-v1/SCORECARD.json'), 'utf8')),
+  JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/fidelity-v1/KNOWN-FAILURES.json'), 'utf8')),
+);
+const V1_CURRENT_DOCS = ['docs/26-v1-definition.md', 'docs/37-product-repo-manifest.md', 'parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md'];
+for (const message of v1DocClaimFailures(Object.fromEntries(V1_CURRENT_DOCS.map((p) => [p, readFileSync(path.join(ROOT, p), 'utf8')])), RECIPE_FIDELITY)) {
+  fail('current v1 status', message);
+}
+const V1_EXAM_DOCS = ['README.md', 'docs/35-two-journey-v1-plan.md', 'parity/receipts/v1/OWNER-PARKED.md', 'parity/receipts/v1/WHAT-YOU-CAN-DO-TODAY.md'];
+for (const message of v1ExamClaimFailures(
+  Object.fromEntries(V1_EXAM_DOCS.map((p) => [p, readFileSync(path.join(ROOT, p), 'utf8')])),
+  JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/f1-v1/receipt.json'), 'utf8')),
+  JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/canvas-to-code-held-out-v2/index.json'), 'utf8')),
+)) fail('current v1 exams', message);
+for (const message of radixReadmeClaimFailures(
+  readFileSync(path.join(ROOT, 'README.md'), 'utf8'),
+  JSON.parse(readFileSync(path.join(ROOT, 'recipe/evidence/f1-v1/receipt.json'), 'utf8')),
+)) fail('current Radix exam', message);
 
 // ---- capture denominators (the SAME sources docs/24 is generated from) -----
 // Derived from extract/computed/out/**/scorecard.json + the docs/22 §8.3
@@ -413,6 +433,10 @@ const DERIVED_CLAIMS = [
   ['fidelity unscored split', /\(([\d,]+) interaction-state,\s+([\d,]+) a carriage gap\)/g, () => [FID_INTERACTION, FID_CARRIAGE]],
   // 3. capture denominators — scorecards + the docs/22 §8.3 size total
   ['capture component count', /for ([\d,]+) third-party components measured/g, () => [REAL_N]],
+  ['capture component count', /([\d,]+) third-party components vs the original npm package/g, () => [REAL_N]],
+  ['capture cell count', /no tolerance, ([\d,]+) style cells/g, () => [REAL_CELLS]],
+  ['capture coverage numerator', /([\d,]+) of those measured components also carry a committed contract/g, () => [COVERED_N]],
+  ['eval measured tally', /measured eval record: ([\d,]+) passed, ([\d,]+) named failures, ([\d,]+) total/g, () => [results.passed, results.total - results.passed, results.total]],
   ['capture component count', /\b([\d,]+) components across six\s+libraries\b/g, () => [REAL_N]],
   ['capture component count', /lists all ([\d,]+) worst-first/g, () => [REAL_N]],
   ['capture component count', /\(all ([\d,]+), worst first\)/g, () => [REAL_N]],
@@ -578,6 +602,7 @@ const derived = [
   `capture configs  ${CAPTURE_CONFIGS} (extract/computed/configs/*.json)`,
   `round trip       ${RT.matched}/${RT.diverged}/${RT.loss}/${RT.invented} m/d/l/i of ${RT_FACTS}, orig ${RT.originalFacts}, matched ${((100 * RT.matched) / RT_FACTS).toFixed(1)}% (extract/figma/roundtrip-uui/report.json)`,
   `fidelity         ${FID_SCORED}/${FID_TOTAL} scored, mean ${FID_MEAN.toFixed(2)}% (examples/untitled-ui/renders/fidelity.json)`,
+  `recipe fidelity  ${RECIPE_FIDELITY.passed} pass / ${RECIPE_FIDELITY.fringe} fringe / ${RECIPE_FIDELITY.named} named of ${RECIPE_FIDELITY.total} (SCORECARD rows + KNOWN-FAILURES)`,
   `capture floor    ${REAL_N} measured, ${REAL_CELLS.toLocaleString('en-US')} cells, mean ${REAL_MEAN.toFixed(1)}% (extract/computed/out/**, ${LIB_DIRS.size} libraries)`,
   `capture coverage ${COVERED_N} measured AND committed = ${COV_PCT === null ? 'UNAVAILABLE' : `${COV_PCT.toFixed(1)}% of ${LIB_SIZE}`}${HELD_CARDS.length ? `; ${HELD_CARDS.length} held, uncounted: ${HELD_CARDS.join(', ')}` : ''} (+ docs/22 §8.3)`,
   `registry truth   ${Object.entries(REGISTRY).map(([k, v]) => `${k.replace('@ds-contracts/', '')} ${v.latest}/${v.next}`).join(' · ')} (scripts/registry-truth.json, no network)`,

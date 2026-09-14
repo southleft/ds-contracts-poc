@@ -1,0 +1,81 @@
+{
+  "_mcp": "figma-console-mcp",
+  "success": true,
+  "result": {
+    "writerVersion": 3,
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "273:3800",
+    "pageName": "Recipe Pivot / Checkbox / 2e537376-checkbox-v12-glyph-host",
+    "runIdentity": "2e537376-checkbox-v12-glyph-host",
+    "namespace": "ds.contracts.checkbox.recipe.v1",
+    "createdNodeIds": [
+      "273:3800",
+      "273:3801",
+      "273:3841",
+      "273:3843",
+      "273:3842",
+      "273:3840",
+      "273:3839",
+      "273:3838",
+      "273:3847",
+      "273:3849",
+      "273:3848",
+      "273:3846",
+      "273:3845",
+      "273:3844",
+      "273:3853",
+      "273:3855",
+      "273:3854",
+      "273:3852",
+      "273:3851",
+      "273:3850",
+      "273:3859",
+      "273:3861",
+      "273:3860",
+      "273:3858",
+      "273:3857",
+      "273:3856",
+      "273:3865",
+      "273:3867",
+      "273:3866",
+      "273:3864",
+      "273:3863",
+      "273:3862",
+      "273:3871",
+      "273:3873",
+      "273:3872",
+      "273:3870",
+      "273:3869",
+      "273:3868"
+    ],
+    "mutatedNodeIds": [
+      "273:3800"
+    ],
+    "sources": [
+      {
+        "adapterIdentity": "radix-themes-checkbox-proposed-v1",
+        "sectionId": "273:3801",
+        "setId": "273:3874",
+        "collectionId": "VariableCollectionId:273:3802",
+        "variableCount": 35,
+        "variantCount": 6,
+        "recipeHash": "2e537376136a320e8c39f279198bb7eee73a217f78defec21fc797b5e784fe2d",
+        "envelopeHash": "0fbcde3351dfad8143170a5e49747b500a23edb255d656a26f08511a63bf6c36",
+        "comparedIrFacts": 193
+      }
+    ]
+  },
+  "resultAnalysis": {
+    "type": "object",
+    "isNull": false,
+    "isUndefined": false,
+    "isEmpty": false,
+    "warning": null
+  },
+  "fileContext": {
+    "fileName": "Scratch Project",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh"
+  },
+  "timestamp": 1789347423130
+}

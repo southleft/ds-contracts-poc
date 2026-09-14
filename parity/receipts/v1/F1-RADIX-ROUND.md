@@ -1,13 +1,59 @@
 # F1, second row — Radix Themes through the product's own command (2026-09-13)
 
+## Current measurement — checkbox follow-up
+
+The checkbox now mints and all six states pass. Current numbers are generated
+and re-scored by `npm run recipe:f1:check` in
+[`recipe/evidence/f1-v1/README.md`](../../../recipe/evidence/f1-v1/README.md).
+The corrected set stays on Scratch page `273:3800`; its raw successful mint is
+`recipe/evidence/pointed/checkbox-radix-themes/mint.json`. The obsolete
+`mint-refusal.json` was removed after successful minting (its history remains
+in git). No owner grade or signoff changed.
+
+The first successful mint, page `272:3725`, exposed a separate generic defect:
+the check vector was hidden in indeterminate states, but its empty viewport
+still participated in auto-layout and displaced the dash. Both that page and
+its exported pixels are preserved. `recipe/checkbox-proof.test.ts` reproduces
+the structural defect across existing libraries and Radix; the fix hides the
+whole inactive host while retaining its invertible facts. The committed
+before/after exports are tested by `recipe/f1-checkbox-regression.test.ts`:
+both old indeterminate rows fail, all corrected rows pass, and the four other
+states are byte-identical. No fixture value, capture configuration, or seed
+changed. The current pointed writers re-derive through
+`npx tsx recipe/build-f1-radix-checkbox.ts --check`.
+
+Source-provenance audit: the original dash reviews below mixed source and
+computed-channel citations. Their values were independently checked against
+`@radix-ui/themes@3.3.0` package files, without changing them:
+
+- `dist/esm/components/icons.js:1`: `ThickDividerHorizontalIcon` uses a 9-unit
+  viewBox and a 7.5-by-1.5 path; `styles.css:7795-7798` specifies the size-2
+  10px indicator, and `:4551-4552` defines 100% scaling as 1. Thus the recorded
+  8.333-by-1.667 dash dimensions come from package geometry, not the score.
+- `styles.css:7897-7898`, `:3810`, `:3257`: the enabled surface indicator uses
+  accent contrast → indigo contrast → white (`#ffffffff`).
+- `styles.css:7910-7911`, `:4405`, `:69`: disabled indicator uses gray-a8 →
+  slate-a8 → `#00083046`.
+- `dist/esm/components/icons.js:1`: the existing check path is the package's
+  `ThickCheckIcon`; both icons use `currentcolor`.
+
+The boilerplate checkbox writer was re-prepared after the structural fix;
+its existing live fields remain historical, not a claim of a new boilerplate
+mint. The F1 font-residual policy also now requires green glyph-masked geometry
+for **both** font classes; negative tests reject an unmeasured font-metrics
+excuse. None of the current Radix rows needs an exception.
+
+## Original round — historical, before the follow-up above
+
 **Why a second row.** The first F1 subject, react-day-picker's calendar, is
 minted and scored (3.048% against a 5% bar) but calendar is not one of the
 thirteen archetypes `recipe:point` ships, so it measures a lineage a stranger
 cannot reach. The owner decided on 2026-09-13 to keep that row **and** add a
 held-out library through the product path itself. Radix Themes
 (`@radix-ui/themes@3.3.0`) had been captured once on 2026-09-04 through the
-legacy `onboard` chain and never pointed at by the recipe path; five of its
-components are shipped archetypes: avatar, switch, checkbox, badge, tabs.
+legacy `onboard` chain and never pointed at by the recipe path; five components
+were selected for this exam: avatar, switch, checkbox, badge, tabs. This is
+not an exhaustive inventory of Radix Themes.
 
 **Blindness held.** The capture config, seeds and sandbox were authored from the
 library's documentation before this round (`HELD-OUT-MANIFEST.md`) and were not
