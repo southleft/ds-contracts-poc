@@ -557,3 +557,20 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: npm run v1:readiness -- --trust-lanes --pre-release
+
+      # Preserve the actual measurements, including red receipts. Consumers
+      # must verify their commit, dirty flag, and verdict; an archive is not a pass.
+      # Exact paths only: hidden-file inclusion is for evals/.ci, never .env files.
+      - name: archive exact-commit V1 evidence
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: v1-evidence-${{ github.sha }}
+          path: |
+            evals/.ci/results.json
+            parity/receipts/v1/READINESS.json
+            parity/receipts/v1/READINESS.md
+            parity/receipts/v1/AUDIT-LEDGER.md
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
