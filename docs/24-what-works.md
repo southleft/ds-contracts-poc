@@ -20,19 +20,20 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 ## 1. The one-paragraph version
 
-Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, Radix Themes, shadcn/ui — across five styling
+11 third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, Radix Themes, shadcn/ui — across different styling
 architectures were run through one pipeline. 133 components came out with a measured floor:
 **86.4% mean computed-style equality** against the original npm package rendering in the same pinned
 Chromium, exact string comparison with no tolerance, over 807,307 compared style cells
 (63 of 133 components at ≥90%, 105 of 133 at ≥80%).
+The mean uses 132 nonempty comparisons; 1 zero-cell scorecard(s) are counted as attempted, not as perfect matches: tailwind/Spinner.
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
 one of 36,287 facts classified as matched, diverged, lost or invented rather than dropped in silence.
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
 The whole thing is pinned by 230 executable claim gates and a 292-file byte-identical
-generation manifest. **What that does not say:** those 133 components are
-11.1% of the 11 libraries they came from, and they were picked because they were the tractable ones.
+generation manifest. **What that does not say:** whole-library coverage. Only 8 of the 11 libraries have a measured size;
+their measured-and-committed cohort is 102/1,015 (10.0%). The remaining library sizes are unknown, and the components were hand-picked.
 
 ---
 
@@ -52,22 +53,23 @@ averages.
 | Polaris (`@shopify/polaris@13.9.5`) | 12 | 12 | 180 | **6.7%** | `docs/22-generality.md` §8.3 |
 | shadcn/ui (`@shadcn-sandbox/ui@0.0.1`) | 11 | 11 | 50 | **22.0%** | `docs/22-generality.md` §8.3 |
 | Flowbite / Tailwind (`flowbite-react@0.12.17`) | 8 | 8 | 46 | **17.4%** | `docs/22-generality.md` §8.3 |
-| Fluent 2 (`@fluentui/react-components@9.74.5`) | 11 | 11 | **source cannot answer** | — | no row in §8.3 matched this package id |
+| Fluent 2 (`@fluentui/react-components@9.74.5`) | 11 | 11 | **source cannot answer** | — | §8.3 row present; library size deliberately unmeasured |
 | Ant Design (`antd@5.29.3`) | 12 | 12 | 72 | **16.7%** | `docs/22-generality.md` §8.3 |
 | Chakra UI (`@chakra-ui/react@3.37.0`) | 0 | 0 | **source cannot answer** | — | §8.3 row present; library size deliberately unmeasured |
 | Radix Themes (`@radix-ui/themes@3.3.0`) | 0 | 0 | **source cannot answer** | — | §8.3 row present; library size deliberately unmeasured |
-| **total** | **116** | **113** | **1,015** | **11.1%** |  |
+| **total** | **116** | **113** | **unknown** | — | some library sizes are unmeasured |
+| **known-size cohort** | **105** | **102** | **1,015** | **10.0%** | 8 libraries; same population in numerator and denominator |
 
-**Read every percentage on this page as "on the easy 11.1%."** The 133 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 11 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+**Read fidelity as a result on a hand-picked slice, not whole-library coverage.** The 133 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. The known-size cohort covers 102 of 1,015 components (10.0%) across 8 libraries; 11 other measured-and-committed components have no library-size denominator and are excluded from BOTH sides of that fraction. These denominators use heterogeneous units (docs/22 §8.3a), so this is a coverage proxy, not a harmonized component-family fraction. Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
-**This table's coverage column is stricter than the one in docs/22 and docs/23, on purpose.**
-Those two print 116/1,015 = **11.4%** — *contracts committed* over library size.
-This page prints 113/1,015 = **11.1%** — components that are *both* measured
+**Coverage uses the same known-size population on both sides.**
+Within those 8 libraries, 105 contracts are committed; 102 are also measured.
+This page prints 102/1,015 = **10.0%** — components that are *both* measured
 *and* backed by a committed contract, over library size, because this is the
 document quoting the fidelity numbers and a component only counts as covered
 when it was measured AND kept. A contract existing is not the same as a contract
 being measured, and a scorecard existing is not the same as a stem shipping;
-where these differ this page uses the smallest number.
+where these differ this page uses the measured-and-committed population. Unknown-size libraries stay in the inventory but cannot inflate this fraction.
 
 **20 measured component(s) are deliberately excluded here**
 because they carry a scorecard but no committed contract — captured with full
@@ -76,15 +78,15 @@ Counting them would report refused stems as shipped ones
 (`FC-COVERAGE-COUNTS-CAPTURES`); their fidelity numbers still appear in §3,
 which averages over everything measured.
 
-**The size denominators lean against us on purpose** and are the one set of
+**The size denominators are heterogeneous, not a harmonized population.** They are the one set of
 numbers here that is not machine-derived: they were produced by one-off
 extractor runs and recorded in prose in
 [docs/22 §8.3](22-generality.md#83-the-coverage-fraction--how-much-of-each-library-is-actually-captured),
 which this build parses rather than retypes. MUI's counts every capitalised
 directory including utilities; Carbon's, Polaris's and Astryx's are whatever
 this repo's own extractor could see, helpers included. The true denominators
-are smaller and the true percentages a little higher. The order of magnitude
-is the finding.
+cannot be inferred by treating every helper/export as a component family. The ratio is a proxy over those recorded units,
+not a lower bound on an unknown true percentage; docs/22 §8.3a preserves the unit audit.
 
 Beyond the 11 foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:
 
@@ -120,7 +122,7 @@ pipeline never opened still counts against it.
 | Radix Themes | 5 | **87.3** | 89.0 | 2/5 | 4/5 | 34,288 | 84.1 | `extract/computed/out/radix-themes/<comp>/scorecard.json` |
 | **all libraries** | **133** | **86.4** | 89.1 | **63/133** | **105/133** | **807,307** | **85.8** |  |
 
-**Read every percentage on this page as "on the easy 11.1%."** The 133 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 11 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+**Read fidelity as a result on a hand-picked slice, not whole-library coverage.** The 133 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. The known-size cohort covers 102 of 1,015 components (10.0%) across 8 libraries; 11 other measured-and-committed components have no library-size denominator and are excluded from BOTH sides of that fraction. These denominators use heterogeneous units (docs/22 §8.3a), so this is a coverage proxy, not a harmonized component-family fraction. Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
 unweighted mean (86.4%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
@@ -551,6 +553,8 @@ earlier for a different purpose.
 | shadcn/ui — components measured AND committed = the coverage table's pinned column | 11 — `extract/computed/out/shadcn/<comp>/scorecard.json` | 11 — `docs/22-generality.md §8.3` | ✔ |
 | Flowbite / Tailwind — contracts on disk = the coverage table's committed column | 8 — `examples/tailwind/contracts/*.contract.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
 | Flowbite / Tailwind — components measured AND committed = the coverage table's pinned column | 8 — `extract/computed/out/tailwind/<comp>/scorecard.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
+| Fluent 2 — contracts on disk = the coverage table's committed column | 11 — `examples/fluent/contracts/*.contract.json` | 11 — `docs/22-generality.md §8.3` | ✔ |
+| Fluent 2 — components measured AND committed = the coverage table's pinned column | 11 — `extract/computed/out/fluent/<comp>/scorecard.json` | 11 — `docs/22-generality.md §8.3` | ✔ |
 | Ant Design — contracts on disk = the coverage table's committed column | 12 — `examples/antd/contracts/*.contract.json` | 12 — `docs/22-generality.md §8.3` | ✔ |
 | Ant Design — components measured AND committed = the coverage table's pinned column | 12 — `extract/computed/out/antd/<comp>/scorecard.json` | 12 — `docs/22-generality.md §8.3` | ✔ |
 | Chakra UI — contracts on disk = the coverage table's committed column | 0 — `examples/chakra/contracts/*.contract.json` | 0 — `docs/22-generality.md §8.3` | ✔ |
@@ -558,7 +562,7 @@ earlier for a different purpose.
 | Radix Themes — contracts on disk = the coverage table's committed column | 0 — `examples/radix-themes/contracts/*.contract.json` | 0 — `docs/22-generality.md §8.3` | ✔ |
 | Radix Themes — components measured AND committed = the coverage table's pinned column | 0 — `extract/computed/out/radix-themes/ (no files matched)` | 0 — `docs/22-generality.md §8.3` | ✔ |
 
-All 26 agree.
+All 28 agree.
 
 ---
 
@@ -578,7 +582,7 @@ npm run capability:fresh
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `1bd005488b35` | 147,316 | CSS/DOM frontier vocabulary |
-| `docs/22-generality.md` | `0b3f84bb769b` | 74,372 | coverage denominators (docs/22 §8.3 table) |
+| `docs/22-generality.md` | `0c11a57c6fed` | 74,519 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `259ec554f9a0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |

@@ -60,6 +60,33 @@ the broad local fast run exposed these stale references rather than hiding them.
 
 ## Next bounded steps
 
+### Final honesty audit: coverage populations (2026-09-14)
+
+Reading the full README exposed stale counts the old wording-specific checker
+missed (116 components/nine libraries; six in the generated report; 291 golden
+files). The current corpus has 133 scorecards across 11 libraries and 292 golden
+files. Its mean uses 132 nonempty comparisons; the zero-cell scorecard remains
+explicitly excluded, never treated as a perfect match.
+
+More importantly, the published 113/1015 coverage fraction mixed populations:
+Fluent's 11 covered components enlarged the numerator without a measured Fluent
+library size in the denominator. A new regression failed on **113 != 102** before
+the fix. Known-size coverage is now **102/1015 (10.0%) over eight libraries**;
+11 covered components with unknown library size remain separately counted.
+Overall coverage is unknown. The recorded size units are heterogeneous, so even
+the matched-cohort fraction is explicitly a proxy, not harmonized family coverage.
+No scorecard, capture, source component, owner field, or Figma node changed.
+
+Generator and checker derive the cohort independently. Four regression tests
+cover unknown-size exclusion, invalid inputs, stale worded/numeric claims, and
+tampered total/subtotal tables; all pass. `docs:check` now runs those tests.
+The existing capability eval was first observed red on its old caveat wording,
+then updated to require the new cohort/exclusion caveat twice, without weakening
+the denominator, missing-source, cross-check or freshness guards. The targeted
+eval passes (subset only, no full-suite record written). Docs, capability
+freshness, 25 definition tests, definition check, package formatting, and scoped
+lint pass. Exact-commit full CI and final readiness remain required.
+
 ### Integration guard caught a stale plugin receipt (2026-09-14)
 
 Candidate `4ba75cece` failed the full lane's plugin packaging guard: the core

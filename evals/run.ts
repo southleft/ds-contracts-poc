@@ -3597,7 +3597,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // from a measurement into marketing.
       const doc = readFileSync(path.join(ROOT, 'docs/24-what-works.md'), 'utf8');
       for (const required of [
-        'Read every percentage on this page as "on the easy', // the denominator caveat, inline
+        'Read fidelity as a result on a hand-picked slice', 'known-size cohort', 'excluded from BOTH sides of that fraction', // cohort caveat, inline
         '## 2. The denominator, first',                        // and printed BEFORE the means
         '## 7. What the sources cannot answer',                // sources that cannot answer say so
         '## 8. Cross-checks',                                  // derived twice, disagreements printed
@@ -3609,7 +3609,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // THE CAVEAT MUST APPEAR MORE THAN ONCE — under §2 and again under the
       // fidelity table in §3. A single mention at the top is the shape a reader
       // scrolls past.
-      const caveats = doc.split('Read every percentage on this page as "on the easy').length - 1;
+      const caveats = doc.split('Read fidelity as a result on a hand-picked slice').length - 1;
       if (caveats < 2) throw new Error(`the coverage caveat appears ${caveats}×; it must be printed inline under EVERY table that averages over captured components`);
       if (doc.includes('**✘ DISAGREE**')) throw new Error('docs/24-what-works.md reports a cross-check DISAGREEMENT — two artifacts that must agree do not. Reconcile the artifacts.');
 

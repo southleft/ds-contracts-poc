@@ -44,6 +44,7 @@ import { fileURLToPath } from 'node:url';
 import { recordFreshnessFailures } from './eval-record-check.mjs';
 import { evalRedFailures } from './eval-red-ledger.mjs';
 import { fidelityCounts, v1DocClaimFailures, v1ExamClaimFailures, radixReadmeClaimFailures } from './v1-doc-claims.mjs';
+import { coverageCohort, captureProseFailures, coverageTableFailures } from './coverage-cohort.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IGNORE = '<!-- docs-check:ignore -->';
@@ -177,7 +178,12 @@ for (const message of radixReadmeClaimFailures(
 // module was invisible to both. What makes the duplicate safe is the stray
 // refusal below: a corpus this list has never heard of is a failure by name,
 // so the next library cannot be silently left out the way Fluent was.
-const LIB_DIRS = new Set(['altitude', 'antd', 'astryx', 'carbon', 'chakra', 'fluent', 'mui', 'polaris', 'radix-themes', 'shadcn', 'tailwind']);
+const LIB_PACKAGES = {
+  altitude: 'altitude-web-components', antd: 'antd', astryx: '@astryxdesign/core', carbon: '@carbon/react',
+  chakra: '@chakra-ui/react', fluent: '@fluentui/react-components', mui: '@mui/material', polaris: '@shopify/polaris',
+  'radix-themes': '@radix-ui/themes', shadcn: '@shadcn-sandbox/ui', tailwind: 'flowbite-react',
+};
+const LIB_DIRS = new Set(Object.keys(LIB_PACKAGES));
 
 /**
  * Capture directories that are a SECOND MOUNT of a library already in LIB_DIRS —
@@ -309,36 +315,62 @@ const HELD_CARDS = realCards
   .map((s) => `${s.corpus}/${s.v?.component}`)
   .sort();
 
-// The library-size denominator (893) exists only in the docs/22 §8.3 table —
-// the same prose table capability:report parses. Parse its TOTAL row. On
-// parse failure the coverage claims below fail BY NAME instead of being
-// silently skipped: a check that quietly stops checking is worse than none.
-const LIB_SIZE = (() => {
+// Re-derive the known-size cohort from individual rows, NEVER a prose total.
+// Unknown-size libraries must be excluded from both sides of the fraction.
+const COHORT = (() => {
   const md = readFileSync(path.join(ROOT, 'docs/22-generality.md'), 'utf8').split('\n');
   const head = md.findIndex((l) => /^\|\s*library\s*\|\s*contracts committed\s*\|/i.test(l) && /library size/i.test(l));
   if (head < 0) return null;
+  const rows = [];
+  let total;
+  let declaredKnown;
+  const num = (s) => /^\d[\d,]*$/.test(s.replace(/\*/g, '').trim()) ? Number(s.replace(/[*,\s]/g, '')) : null;
   for (let i = head + 2; i < md.length && md[i].startsWith('|'); i += 1) {
-    if (!/^\|\s*\*\*total\*\*\s*\|/i.test(md[i])) continue;
     const cells = md[i].split('|').slice(1, -1).map((c) => c.trim());
-    const num = (s) => { const m = /(\d[\d,]*)/.exec(s.replace(/\*/g, '')); return m ? Number(m[1].replace(/,/g, '')) : null; };
-    const pinned = num(cells[2] ?? '');
-    const size = num(cells[3] ?? '');
-    // §8.3's second column is "of those, pinned by the drift instrument" —
-    // measured AND committed, the same population as COVERED_N. It is NOT the
-    // scorecard count: comparing it against that counted the HELD Flowbite
-    // stems as pinned and reported a table that was right as wrong.
-    if (pinned !== null && pinned !== COVERED_N) {
-      fail('docs/22-generality.md', `§8.3 total row pins ${pinned} components but ${COVERED_N} are measured AND backed by a committed contract${HELD_CARDS.length ? ` (${REAL_N} scorecards exist; ${HELD_CARDS.length} are held with no committed contract: ${HELD_CARDS.join(', ')})` : ''} — reconcile before trusting any coverage claim`);
+    if (cells[0] === '**total**') { total = cells; continue; }
+    if (cells[0] === '**known-size cohort**') { declaredKnown = cells; continue; }
+    const pkg = /`([^`]+)`/.exec(cells[0])?.[1]?.replace(/@[^/@]+$/, '');
+    const dir = Object.keys(LIB_PACKAGES).find((key) => LIB_PACKAGES[key] === pkg);
+    if (!dir) { fail('docs/22-generality.md', `unrecognized coverage library: ${cells[0]}`); continue; }
+    const contracts = committed[dir].ids.size;
+    const pinned = coveredCards.filter((s) => s.corpus === dir).length;
+    if (num(cells[1]) !== contracts || num(cells[2]) !== pinned) {
+      fail('docs/22-generality.md', `${dir} committed/pinned columns disagree with disk (${contracts}/${pinned})`);
     }
-    return size;
+    const size = num(cells[3]);
+    if (size === null && !/unmeasured/i.test(cells[3])) fail('docs/22-generality.md', `${dir} has a malformed size, not an explicit unmeasured size`);
+    rows.push({ key: dir, contracts, pinned, size });
   }
-  return null;
+  try {
+    if (rows.length !== LIB_DIRS.size) throw new Error('coverage table must name every library exactly once');
+    const cohort = coverageCohort(rows);
+    if (!total || num(total[1]) !== cohort.allContracts || num(total[2]) !== cohort.allPinned) throw new Error('all-library totals disagree with disk');
+    if (!declaredKnown || num(declaredKnown[1]) !== cohort.contracts || num(declaredKnown[2]) !== cohort.pinned || num(declaredKnown[3]) !== cohort.size) {
+      throw new Error(`known-size cohort must be ${cohort.contracts} committed / ${cohort.pinned} measured / ${cohort.size} library size`);
+    }
+    if (Number(/([\d.]+)%/.exec(declaredKnown[4])?.[1]) !== Number(cohort.pct?.toFixed(1))) throw new Error('known-size coverage percentage disagrees');
+    return cohort;
+  } catch (error) {
+    fail('docs/22-generality.md', error.message);
+    return null;
+  }
 })();
-if (LIB_SIZE === null) {
-  fail('docs/22-generality.md', '§8.3 coverage table did not parse — the 893-component denominator is unavailable, so every doc coverage claim below is unverifiable. Fix the table (or this parser); this check refuses rather than skipping.');
+if (COHORT === null) {
+  fail('docs/22-generality.md', '§8.3 known-size coverage population is unverifiable; no fraction may be claimed');
 }
-// COVERED_N, not REAL_N: coverage counts stems that shipped, not captures.
-const COV_PCT = LIB_SIZE ? (100 * COVERED_N) / LIB_SIZE : null;
+const LIB_SIZE = COHORT?.size ?? null;
+const KNOWN_COVERED_N = COHORT?.pinned ?? null;
+const COV_PCT = COHORT?.pct ?? null;
+const GOLDEN_FILES = Object.keys(JSON.parse(readFileSync(path.join(ROOT, 'evals/golden.json'), 'utf8'))).length;
+if (COHORT) for (const doc of ['docs/22-generality.md', 'docs/24-what-works.md']) {
+  for (const message of coverageTableFailures(readFileSync(path.join(ROOT, doc), 'utf8'), COHORT)) fail(doc, message);
+}
+for (const doc of ['README.md', 'ROADMAP.md', 'docs/00-choose-your-path.md', 'docs/24-what-works.md']) {
+  for (const message of captureProseFailures(readFileSync(path.join(ROOT, doc), 'utf8'), {
+    measured: REAL_N, libraries: LIB_DIRS.size, knownLibraries: COHORT?.libraries, goldenFiles: GOLDEN_FILES,
+    nonempty: REAL_MEASURED, empty: unmeasuredCards.length,
+  })) fail(doc, message);
+}
 
 // ---- registry truth (scripts/registry-truth.json — NEVER the network) ------
 const REGISTRY = JSON.parse(readFileSync(path.join(ROOT, 'scripts/registry-truth.json'), 'utf8')).packages;
@@ -445,11 +477,11 @@ const DERIVED_CLAIMS = [
   // and quoting the larger one over a library size is precisely the
   // refused-stem-as-shipped-stem claim FC-COVERAGE-COUNTS-CAPTURES forbids.
   ['capture coverage', /those ([\d,]+) components are \*\*([\d.]+)% of the ([\d,]+)\*\*/g,
-    () => [COVERED_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
+    () => [KNOWN_COVERED_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
   ['capture coverage', /the ([\d,]+) covered components are \*\*([\d.]+)%\*\* of the ([\d,]+) in/g,
-    () => [COVERED_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
+    () => [KNOWN_COVERED_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
   ['capture coverage', /they are ([\d,]+) of ([\d,]+) components \(([\d.]+)%\)/g,
-    () => [COVERED_N, LIB_SIZE, COV_PCT === null ? null : { pct: COV_PCT }]],
+    () => [KNOWN_COVERED_N, LIB_SIZE, COV_PCT === null ? null : { pct: COV_PCT }]],
   ['capture coverage', /the easy ([\d.]+)%/g, () => [COV_PCT === null ? null : { pct: COV_PCT }]],
   ['capture coverage', /the tractable ([\d.]+)%/g, () => [COV_PCT === null ? null : { pct: COV_PCT }]],
   ['capture cell count', /([\d.]+)% cell-weighted over ([\d,]+)/g, () => [{ pct: REAL_WEIGHTED }, REAL_CELLS]],
@@ -604,7 +636,7 @@ const derived = [
   `fidelity         ${FID_SCORED}/${FID_TOTAL} scored, mean ${FID_MEAN.toFixed(2)}% (examples/untitled-ui/renders/fidelity.json)`,
   `recipe fidelity  ${RECIPE_FIDELITY.passed} pass / ${RECIPE_FIDELITY.fringe} fringe / ${RECIPE_FIDELITY.named} named of ${RECIPE_FIDELITY.total} (SCORECARD rows + KNOWN-FAILURES)`,
   `capture floor    ${REAL_N} measured, ${REAL_CELLS.toLocaleString('en-US')} cells, mean ${REAL_MEAN.toFixed(1)}% (extract/computed/out/**, ${LIB_DIRS.size} libraries)`,
-  `capture coverage ${COVERED_N} measured AND committed = ${COV_PCT === null ? 'UNAVAILABLE' : `${COV_PCT.toFixed(1)}% of ${LIB_SIZE}`}${HELD_CARDS.length ? `; ${HELD_CARDS.length} held, uncounted: ${HELD_CARDS.join(', ')}` : ''} (+ docs/22 §8.3)`,
+  `known-size coverage ${KNOWN_COVERED_N} measured AND committed = ${COV_PCT === null ? 'UNAVAILABLE' : `${COV_PCT.toFixed(1)}% of ${LIB_SIZE}`}; ${COHORT?.unknownPinned ?? '?'} covered without a library size${HELD_CARDS.length ? `; ${HELD_CARDS.length} held, uncounted: ${HELD_CARDS.join(', ')}` : ''} (+ docs/22 §8.3)`,
   `registry truth   ${Object.entries(REGISTRY).map(([k, v]) => `${k.replace('@ds-contracts/', '')} ${v.latest}/${v.next}`).join(' · ')} (scripts/registry-truth.json, no network)`,
 ];
 console.log(`docs:check — derived values\n  ${derived.join('\n  ')}\n  documents gated  ${DOCS.length}`);

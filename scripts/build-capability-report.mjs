@@ -370,12 +370,21 @@ let COV_TOTAL = null;
 if (covRows) {
   for (const r of covRows) {
     if (/^\*\*total\*\*$/i.test(r.raw) || /^total$/i.test(r.raw)) { COV_TOTAL = r; continue; }
-    const lib = LIBRARIES.find((l) => r.pkg === l.pkg);
+    const lib = LIBRARIES.find((l) => r.pkg === l.pkg || r.pkg === l.pkg.replace(/@[^/@]+$/, ''));
     if (lib) coverage.set(lib.dir, r);
   }
 } else {
   cannotAnswer('the per-library coverage fraction', 'the §8.3 table in `docs/22-generality.md` did not parse — its header changed. No fraction is printed rather than a guessed one.');
 }
+
+// Unknown-size libraries stay in the inventory, not only the numerator.
+// Deliberately independent of the checker-side coverage-cohort module.
+const knownSizeLibraries = LIBRARIES.filter((l) => Number.isSafeInteger(coverage.get(l.dir)?.size) && coverage.get(l.dir).size > 0);
+const knownSizeDirs = new Set(knownSizeLibraries.map((l) => l.dir));
+const KNOWN_COVERED = coveredCards.filter((s) => knownSizeDirs.has(s.corpus)).length;
+const KNOWN_CONTRACTS = knownSizeLibraries.reduce((sum, l) => sum + libContracts[l.dir], 0);
+const KNOWN_SIZE = knownSizeLibraries.reduce((sum, l) => sum + coverage.get(l.dir).size, 0);
+const KNOWN_PCT = KNOWN_SIZE ? f1(pct(KNOWN_COVERED, KNOWN_SIZE)) : '?';
 
 /* ---- Untitled UI canvas→code visual fidelity ---------------------------- */
 const FID_PATH = path.join(ROOT, 'examples', 'untitled-ui', 'renders', 'fidelity.json');
@@ -537,11 +546,13 @@ const CHECKS_FAILED = checks.filter((c) => !c.agree);
 /* ================================================================== RENDER */
 
 const COVERAGE_CAVEAT =
-  `**Read every percentage on this page as "on the easy ${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}%."** ` +
+  `**Read fidelity as a result on a hand-picked slice, not whole-library coverage.** ` +
   `The ${fmt(REAL_N)} components measured here were chosen because they were **tractable**, not at random — ` +
   `they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. ` +
-  `Across the ${LIBRARIES.length} libraries they are ${fmt(COV_TOTAL?.pinned ?? REAL_N)} of ${fmt(COV_TOTAL?.size ?? 0)} components ` +
-  `(${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}%). Data grid, tree, virtualized list, date picker, rich text and charts ` +
+  `The known-size cohort covers ${fmt(KNOWN_COVERED)} of ${fmt(KNOWN_SIZE)} components (${KNOWN_PCT}%) across ${knownSizeLibraries.length} libraries; ` +
+  `${fmt(COVERED_N - KNOWN_COVERED)} other measured-and-committed components have no library-size denominator and are excluded from BOTH sides of that fraction. ` +
+  `These denominators use heterogeneous units (docs/22 §8.3a), so this is a coverage proxy, not a harmonized component-family fraction. ` +
+  `Data grid, tree, virtualized list, date picker, rich text and charts ` +
   `appear in **zero** committed contracts. A mean over this slice is a statement about this slice.`;
 
 P('# 24 — What Works');
@@ -570,19 +581,20 @@ P('---');
 /* ---- 1. the summary ----------------------------------------------------- */
 P('## 1. The one-paragraph version');
 P(
-  `Six third-party component libraries — ${LIBRARIES.map((l) => l.label).sort().join(', ')} — across five styling`,
+  `${LIBRARIES.length} third-party component libraries — ${LIBRARIES.map((l) => l.label).sort().join(', ')} — across different styling`,
   `architectures were run through one pipeline. ${fmt(REAL_N)} components came out with a measured floor:`,
   `**${f1(REAL_MEAN)}% mean computed-style equality** against the original npm package rendering in the same pinned`,
   `Chromium, exact string comparison with no tolerance, over ${fmt(REAL_CELLS)} compared style cells`,
   `(${fmt(REAL_GE90)} of ${fmt(REAL_N)} components at ≥90%, ${fmt(REAL_GE80)} of ${fmt(REAL_N)} at ≥80%).`,
+  `The mean uses ${REAL_MEASURED} nonempty comparisons; ${REAL_N - REAL_MEASURED} zero-cell scorecard(s) are counted as attempted, not as perfect matches: ${realCards.filter((s) => s.v.computed.cellsCompared === 0).map((s) => `${s.corpus}/${s.v.component}`).join(', ') || 'none'}.`,
   `In the other direction, a ${fmt(fid.length)}-variant Figma kit converted to code scores`,
   `**${f2(FID_MEAN)}% visual fidelity** over the ${fmt(fidScored.length)} statically scorable variants, and the`,
   `canvas→code→canvas executes through the fact diff on **${fmt(RT.roundTripClosed)} of ${fmt(RT.components)}** components with every`,
   `one of ${fmt(RT_FACTS)} facts classified as matched, diverged, lost or invented rather than dropped in silence.`,
   `Exact structured projection is separately evidenced: **${fmt(RT.exactVerified ?? 0)} verified exact, ${fmt(RT.exactLegacyUnverified ?? 0)} legacy unverified, ${fmt(RT.exactRefused ?? 0)} refused**.`,
   `The whole thing is pinned by ${fmt(evals.total)} executable claim gates and a ${fmt(GOLDEN_FILES)}-file byte-identical`,
-  `generation manifest. **What that does not say:** those ${fmt(REAL_N)} components are`,
-  `${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}% of the ${LIBRARIES.length} libraries they came from, and they were picked because they were the tractable ones.`,
+  `generation manifest. **What that does not say:** whole-library coverage. Only ${knownSizeLibraries.length} of the ${LIBRARIES.length} libraries have a measured size;`,
+  `their measured-and-committed cohort is ${fmt(KNOWN_COVERED)}/${fmt(KNOWN_SIZE)} (${KNOWN_PCT}%). The remaining library sizes are unknown, and the components were hand-picked.`,
 );
 P('---');
 
@@ -609,21 +621,21 @@ if (covRows && COV_TOTAL) {
         sizeKnown ? `**${f1(pct(measured, cov.size))}%**` : '—',
         sizeKnown ? '`docs/22-generality.md` §8.3' : (cov ? '§8.3 row present; library size deliberately unmeasured' : 'no row in §8.3 matched this package id'),
       ];
-    }).concat([[
-      '**total**', `**${fmt(FOREIGN_CONTRACTS)}**`, `**${fmt(COVERED_N)}**`, `**${fmt(COV_TOTAL.size)}**`,
-      `**${f1(pct(COVERED_N, COV_TOTAL.size))}%**`, '',
-    ]]),
+    }).concat([
+      ['**total**', `**${fmt(FOREIGN_CONTRACTS)}**`, `**${fmt(COVERED_N)}**`, '**unknown**', '—', 'some library sizes are unmeasured'],
+      ['**known-size cohort**', `**${fmt(KNOWN_CONTRACTS)}**`, `**${fmt(KNOWN_COVERED)}**`, `**${fmt(KNOWN_SIZE)}**`, `**${KNOWN_PCT}%**`, `${knownSizeLibraries.length} libraries; same population in numerator and denominator`],
+    ]),
   ));
   P(COVERAGE_CAVEAT);
   P(
-    `**This table's coverage column is stricter than the one in docs/22 and docs/23, on purpose.**`,
-    `Those two print ${fmt(COV_TOTAL.contracts)}/${fmt(COV_TOTAL.size)} = **${f1(pct(COV_TOTAL.contracts, COV_TOTAL.size))}%** — *contracts committed* over library size.`,
-    `This page prints ${fmt(COVERED_N)}/${fmt(COV_TOTAL.size)} = **${f1(pct(COVERED_N, COV_TOTAL.size))}%** — components that are *both* measured`,
+    `**Coverage uses the same known-size population on both sides.**`,
+    `Within those ${knownSizeLibraries.length} libraries, ${fmt(KNOWN_CONTRACTS)} contracts are committed; ${fmt(KNOWN_COVERED)} are also measured.`,
+    `This page prints ${fmt(KNOWN_COVERED)}/${fmt(KNOWN_SIZE)} = **${KNOWN_PCT}%** — components that are *both* measured`,
     `*and* backed by a committed contract, over library size, because this is the`,
     `document quoting the fidelity numbers and a component only counts as covered`,
     `when it was measured AND kept. A contract existing is not the same as a contract`,
     `being measured, and a scorecard existing is not the same as a stem shipping;`,
-    `where these differ this page uses the smallest number.`,
+    `where these differ this page uses the measured-and-committed population. Unknown-size libraries stay in the inventory but cannot inflate this fraction.`,
     ...(HELD_CARDS.length
       ? [
         ``,
@@ -637,15 +649,15 @@ if (covRows && COV_TOTAL) {
       : []),
   );
   P(
-    '**The size denominators lean against us on purpose** and are the one set of',
+    '**The size denominators are heterogeneous, not a harmonized population.** They are the one set of',
     'numbers here that is not machine-derived: they were produced by one-off',
     'extractor runs and recorded in prose in',
     '[docs/22 §8.3](22-generality.md#83-the-coverage-fraction--how-much-of-each-library-is-actually-captured),',
     'which this build parses rather than retypes. MUI\'s counts every capitalised',
     'directory including utilities; Carbon\'s, Polaris\'s and Astryx\'s are whatever',
     'this repo\'s own extractor could see, helpers included. The true denominators',
-    'are smaller and the true percentages a little higher. The order of magnitude',
-    'is the finding.',
+    'cannot be inferred by treating every helper/export as a component family. The ratio is a proxy over those recorded units,',
+    'not a lower bound on an unknown true percentage; docs/22 §8.3a preserves the unit audit.',
   );
 } else {
   P('**The coverage table in `docs/22-generality.md` §8.3 did not parse.** No coverage fraction is printed. Every mean below is therefore an average over an *unstated* slice, which is exactly the failure this section exists to prevent — fix the parse before trusting anything under §3.');
@@ -1016,7 +1028,7 @@ if (process.argv.includes('--check')) {
 writeFileSync(OUT, rendered, 'utf8');
 console.log(
   `${OUT_NAME} — ${fmt(REAL_N)} measured components over ${fmt(LIBRARIES.length)} libraries ` +
-    `(mean ${f1(REAL_MEAN)}%, cell-weighted ${f1(REAL_WEIGHTED)}%, coverage ${COV_TOTAL ? f1(pct(COVERED_N, COV_TOTAL.size)) : '?'}%), ` +
+    `(mean ${f1(REAL_MEAN)}%, cell-weighted ${f1(REAL_WEIGHTED)}%, known-size coverage proxy ${KNOWN_PCT}%), ` +
     `${fmt(fidScored.length)} scored canvas variants (${f2(FID_MEAN)}%), ` +
     `${fmt(evals.total)} evals (whether the committed run is green is docs:check's fact, not this file's), ${fmt(DAGGER_TOTAL)} dropped-fact receipts, ` +
     `${fmt(checks.length)} cross-checks (${CHECKS_FAILED.length} disagreeing), ` +

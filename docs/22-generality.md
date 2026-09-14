@@ -666,7 +666,8 @@ denominator. Here it is.
 | Ant Design (`antd@5.29.3`) | 12 | 12 | 72 | **16.7%** | component directories under the pinned sandbox's `antd/lib/` (78 entries minus `_util`, `style`, `locale`, `theme`, `version`, `config-provider` — measured 2026-08-23). The twelve are the P2 code→canvas EXAM slice (`parity/receipts/phase-2/ANTD-EXAM.md`), chosen to stress the engine's named walls, not for tractability |
 | Chakra UI (`@chakra-ui/react@3.37.0`) | 0 | 0 | *unmeasured* | *unmeasured* | **docs/35 Phase 4 reader subject** — Checkbox scorecard under `extract/computed/out/chakra/`; Textarea capture named-refused (scroll-padding quarantine). Seeds live under `examples/chakra/contracts-seed/`; no committed `examples/chakra/contracts/` yet, so nothing here is coverage (`FC-COVERAGE-COUNTS-CAPTURES`). Library size deliberately unmeasured until a committed slice exists |
 | Radix Themes (`@radix-ui/themes@3.3.0`) | 0 | 0 | *unmeasured* | *unmeasured* | **F1 held-out subject (2026-09-13)** — captured blind through the product path (avatar, badge, checkbox, switch, tabs under `extract/computed/out/radix-themes/`); no `examples/radix-themes/contracts/`, so coverage stays held; avatar minted and scored 1.88% (see `recipe/fidelity-manifest.json` `heldOut: radix-themes`) |
-| **total** | **116** | **113** | **1015 (8 libraries)** | **11.1%** | the size total covers the EIGHT libraries with a measured denominator; Fluent's 11 contracts and 11 pinned components are counted in the first two columns. Chakra adds a measured scorecard with **zero** committed contracts — held, not covered. The coverage fraction is 113/1015 = 11.1% — the same headline [docs/24](24-what-works.md) prints. Fluent and Chakra have no measured library size, so they cannot grow the denominator |
+| **total** | **116** | **113** | *unknown* | — | all 11 libraries; an aggregate percentage is unavailable because Fluent, Chakra and Radix Themes have no measured size |
+| **known-size cohort** | **105** | **102** | **1015** | **10.0%** | the eight libraries with a measured size, on BOTH sides of the fraction. Fluent's 11 committed/pinned components remain in the inventory above but cannot enlarge only the numerator. This is a proxy over heterogeneous recorded units, not harmonized component-family coverage (§8.3a) |
 
 **How to read it — both halves are true, and the second is the one usually
 left out:**
@@ -675,10 +676,9 @@ left out:**
   architectures, one pipeline, engine-change cost trending to zero (§1, §5).
   That claim is about the *engine*, it is supported by the evidence above, and
   the coverage fraction does not dent it.
-- **It does not prove a LIBRARY can be captured.** No library in this repo is
-  captured past **11.9%**. Nobody has run a component set large enough to hit
-  the long tail — the two-dozenth component of a real system, the one with the
-  virtualized list, the date grid, the rich-text surface. An adopter reading §1
+- **It does not prove whole-library capture.** The measured slices above do
+  not establish coverage of the long tail — virtualized lists, complex grids,
+  and rich-text surfaces. An adopter reading §1
   as "point it at your library" is reading a claim this repo has never tested.
   The honest scope is: *a hand-picked slice of your library, configured by an
   expert, one round per novel styling method.*
@@ -687,7 +687,8 @@ left out:**
   Chip, Card, Checkbox, Tag, Avatar, Divider. The hardest thing in the corpus is
   MUI's `Table`, and the hardest classes (data grid, tree, virtualized list,
   date picker, rich text, charts) are captured **nowhere**. Read every floor
-  percentage as "on the easy 11.1%".
+  percentage as a result on a hand-picked slice, with the incomplete and
+  heterogeneous library-size denominator kept separate from fidelity.
 - **The denominators do not lean against us. They are INCOHERENT** — which is
   a different thing, and this document said the wrong one until 2026-08-03.
   MUI's 135 counts every capitalised directory including utilities (`NoSsr`,
@@ -696,10 +697,12 @@ left out:**
   included. That much was true. What was **not** true is the conclusion drawn
   from it — that the numbers are merely conservative. §8.3a below shows the
   column mixes three units against two different artifacts, and re-measures it.
-- **The gap between 79 and 71** is Astryx: 13 committed contracts, only 5 of
+- **Historically, the gap between 79 and 71** was Astryx: 13 committed contracts, only 5 of
   which went through the computed-capture pipeline and are pinned by
   `regate-baseline.json`. The other 8 came from the static Phase-A path and
-  carry no captured floor. A contract existing is not the same as a contract
+  carried no captured floor. The current table above instead reports 116
+  committed / 113 measured-and-committed overall (Astryx: 13 / 10).
+  A contract existing is not the same as a contract
   being measured, and the two columns are separated here for that reason.
 
 The next honest step is not a seventh library. It is **one library taken to
