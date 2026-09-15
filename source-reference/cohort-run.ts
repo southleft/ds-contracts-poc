@@ -7,6 +7,8 @@ import { altitudeCohort, altitudeRevision } from './altitude-cohort.js';
 import { watchSourceFailures } from './observe.js';
 import { captureReference, replayReference, archiveInventory } from './replay.js';
 import { captureValidatedTree } from './capture.js';
+import { readCemDeclarations } from '../extract/adapters/cem.js';
+import { captureStableSemantics, assessSemantics, semanticHash } from './semantics.js';
 
 const [origin,checkout,output] = process.argv.slice(2);
 if (!origin || !checkout || !output) throw new Error('Usage: cohort-run.ts <loopback-origin> <altitude-checkout> <new-private-output>');
@@ -20,6 +22,8 @@ const sha = (b:Buffer|string) => createHash('sha256').update(b).digest('hex');
 const sourceFiles = [...new Set([...git('ls-files','libs/al-web-components','pnpm-lock.yaml').split('\n'),
   'libs/al-web-components/styles/dist/tokens.json','libs/al-web-components/styles/dist/scss/theme/tokens-dark.scss'])];
 const hashes = Object.fromEntries(sourceFiles.map(f => [f,sha(readFileSync(path.join(checkout,f)))]));
+const manifestPath = 'libs/al-web-components/custom-elements.json';
+const manifest = readCemDeclarations(JSON.parse(readFileSync(path.join(checkout,manifestPath),'utf8')));
 mkdirSync(output,{recursive:false});
 const browser = await chromium.launch({headless:true});
 const rows:Record<string,unknown>[] = [];
@@ -39,10 +43,21 @@ try {
       row.source = {status:live.status,problems:live.problems,observation:live.after,sha256:live.secondSha256};
       const sourceTree = live.status === 'valid' ? await captureValidatedTree(page,profile,failures,'#storybook-root','--al-') : {status:'refused' as const,problems:['source-reference-invalid']};
       writeFileSync(path.join(dir,'source-tree.json'),JSON.stringify(sourceTree,null,2)+'\n');
+      const declarations = manifest.declarations.filter(decl => decl.tagName === profile.path[0]);
+      const declaration = declarations.length === 1 ? declarations[0] : undefined;
+      const sourceSemantics = declaration ? assessSemantics(declaration,await captureStableSemantics(page,[profile.path[0]],declaration,live.secondSha256),{
+        valid:live.status === 'valid',sourcePngSha256:live.secondSha256,
+        ...(sourceTree.status === 'captured' ? {sourceTreeSha256:sourceTree.treeSha256} : {}),
+      },manifest.problems.map(problem=>`${problem.code}:${problem.path}`)) : {status:'refused' as const,problems:['component-declaration-not-unique']};
+      writeFileSync(path.join(dir,'source-semantics.json'),JSON.stringify(sourceSemantics,null,2)+'\n');
       failures.dispose(); await context.close(); context = undefined;
-      const replay = await replayReference(browser,har,url,profile,undefined,(replayPage,replayFailures)=>captureValidatedTree(replayPage,profile,replayFailures,'#storybook-root','--al-'));
-      const replayTree = replay.inspection ?? {status:'refused' as const,problems:['replay-reference-invalid']};
+      const replay = await replayReference(browser,har,url,profile,undefined,async (replayPage,replayFailures)=>{
+        const tree = await captureValidatedTree(replayPage,profile,replayFailures,'#storybook-root','--al-');
+        return {tree,semantics:declaration ? await captureStableSemantics(replayPage,[profile.path[0]],declaration,tree.status === 'captured' ? tree.sourcePngSha256 : live.secondSha256) : null};
+      });
+      const replayTree = replay.inspection?.tree ?? {status:'refused' as const,problems:['replay-reference-invalid']};
       writeFileSync(path.join(dir,'replay-tree.json'),JSON.stringify(replayTree,null,2)+'\n');
+      writeFileSync(path.join(dir,'replay-semantics.json'),JSON.stringify(replay.inspection?.semantics ?? null,null,2)+'\n');
       writeFileSync(path.join(dir,'replay.png'),replay.screenshot);
       row.replay = {status:replay.status,problems:replay.problems,observation:replay.after,sha256:replay.secondSha256,matchesSource:replay.secondSha256 === live.secondSha256};
       row.archive = archiveInventory(har);
@@ -52,6 +67,19 @@ try {
         problems:treesMatch ? [] : [...sourceTree.problems,...(replayTree?.problems ?? []),'source-replay-tree-not-verified'],
         ...(sourceTree.status === 'captured' ? {census:sourceTree.census,boundary:sourceTree.boundary,treeSha256:sourceTree.treeSha256} : {}),
         scope:'Raw compiler input only. Token references are candidates; unreadable stylesheet boundaries are not hidden. No Figma conversion claim.'};
+      const semanticMatch = 'observationSha256' in sourceSemantics && replay.inspection?.semantics && sourceSemantics.observationSha256 === semanticHash(replay.inspection.semantics);
+      row.semanticIntake = {
+        status:!row.qualified ? 'source-invalid' : sourceSemantics.status === 'observed' && semanticMatch && treesMatch ? 'observed' : 'refused',
+        problems:[...sourceSemantics.problems,...(!semanticMatch ? ['semantic-replay-mismatch'] : []),...(!treesMatch ? ['source-tree-not-verified'] : [])],
+        manifestSha256:hashes[manifestPath],
+        ...('declaration' in sourceSemantics ? {
+          tagName:sourceSemantics.declaration.tagName, coverage:sourceSemantics.coverage,
+          declaration:sourceSemantics.declaration, observation:sourceSemantics.observation,
+          observationSha256:sourceSemantics.observationSha256, declarationSha256:sourceSemantics.declarationSha256,
+          limitations:sourceSemantics.limitations,
+        } : {limitations:[]}),
+        scope:'Declared API and live semantic observations, not accepted contract semantics, behavioral approval or Figma output.',
+      };
     } catch {
       // Never drop failed stories. Raw browser errors can contain credential URLs.
       row.error = 'capture-or-replay-failed';

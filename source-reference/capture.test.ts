@@ -30,6 +30,9 @@ test("production reader captures the validated shadow source, refuses missing st
       `<style>@font-face{font-family:'IBM Plex Sans';src:url(data:font/woff2;base64,${font})}:root{--theme-accent:#2850a0}</style><div id="original"><div class="story-decorator"><source-button>Original label</source-button></div></div><div id="different"><button>Wrong button</button></div>`,
     );
     await page.evaluate(() => {
+      const untouchedControl = document.createElement("input");
+      untouchedControl.id = "untouched-control";
+      document.body.appendChild(untouchedControl);
       document
         .querySelector("source-button")!
         .attachShadow({ mode: "open" }).innerHTML =
@@ -43,6 +46,11 @@ test("production reader captures the validated shadow source, refuses missing st
       "--theme-",
     );
     assert.equal(captured.status, "captured", JSON.stringify(captured));
+    assert.equal(
+      await page.locator("#untouched-control").getAttribute("style"),
+      null,
+      "screenshots must not add caret-hiding inline styles to the original controls",
+    );
     if (captured.status !== "captured") throw new Error("capture required");
     assert.equal(captured.tree.tag, "button");
     assert.equal(

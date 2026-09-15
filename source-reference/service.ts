@@ -1,17 +1,26 @@
 import { execFile, type ChildProcess } from "node:child_process";
-import { randomUUID } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync } from "node:fs";
+import { createHash, randomUUID } from "node:crypto";
+import {
+  existsSync,
+  lstatSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+} from "node:fs";
 import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { altitudeCohort, altitudeRevision } from "./altitude-cohort.js";
 
 const stories = new Set(altitudeCohort.map((e) => e.story));
+const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 type RunState = "running" | "complete" | "failed" | "interrupted";
 export interface ReferenceJob {
   id: string;
-  origin: string;
+  origin?: string;
   state: RunState;
-  startedAt: string;
+  startedAt?: string;
+  recovered?: true;
+  completedAt?: string;
   problem?: string;
 }
 type Launch = (
@@ -62,11 +71,158 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       return null;
     }
   };
+  // Recovery and image reads never follow symlinks out of the fixed evidence
+  // root. Request values cannot supply an arbitrary path or a filename.
+  const evidenceFile = (...parts: string[]): string | null => {
+    try {
+      let current = evidenceRoot;
+      if (!lstatSync(current).isDirectory()) return null;
+      for (const part of parts.slice(0, -1)) {
+        current = path.join(current, part);
+        if (!lstatSync(current).isDirectory()) return null;
+      }
+      const file = path.join(current, parts.at(-1)!);
+      return lstatSync(file).isFile() ? file : null;
+    } catch {
+      return null;
+    }
+  };
+  const object = (value: unknown): value is Record<string, unknown> =>
+    value !== null && typeof value === "object" && !Array.isArray(value);
+  const strings = (value: unknown) =>
+    Array.isArray(value) && value.every((item) => typeof item === "string");
+  const validRow = (row: unknown): row is Record<string, unknown> => {
+    if (
+      !object(row) ||
+      !stories.has(String(row.story)) ||
+      typeof row.qualified !== "boolean"
+    )
+      return false;
+    if (row.error !== undefined && typeof row.error !== "string") return false;
+    for (const field of [
+      "source",
+      "replay",
+      "compilerInput",
+      "semanticIntake",
+    ]) {
+      if (row[field] === undefined) continue;
+      const value = row[field];
+      if (!object(value) || !strings(value.problems)) return false;
+      if (value.status !== undefined && typeof value.status !== "string")
+        return false;
+      if (value.limitations !== undefined && !strings(value.limitations))
+        return false;
+    }
+    if (row.qualified) {
+      const source = row.source;
+      const replay = row.replay;
+      if (
+        row.error !== undefined ||
+        !object(source) ||
+        !object(replay) ||
+        source.status !== "valid" ||
+        replay.status !== "valid" ||
+        typeof source.sha256 !== "string" ||
+        !/^[a-f0-9]{64}$/.test(source.sha256) ||
+        source.sha256 !== replay.sha256 ||
+        (source.problems as string[]).length ||
+        (replay.problems as string[]).length
+      )
+        return false;
+    } else if (
+      !(typeof row.error === "string" && row.error.length > 0) &&
+      (!object(row.source) ||
+        typeof row.source.status !== "string" ||
+        !object(row.replay) ||
+        typeof row.replay.status !== "string")
+    )
+      return false;
+    return true;
+  };
+  // Completed cohorts can be reopened without launching a process or changing
+  // evidence. A full final record AND matching per-story records are required;
+  // an abandoned directory or a ten-item but duplicated list is not completion.
+  const recovered: ReferenceJob[] = [];
+  try {
+    if (lstatSync(evidenceRoot).isDirectory()) {
+      for (const entry of readdirSync(evidenceRoot, { withFileTypes: true })) {
+        if (!entry.isDirectory() || !UUID.test(entry.name)) continue;
+        const file = evidenceFile(entry.name, "measurement.json");
+        const final = file ? read(file) : null;
+        if (
+          !object(final) ||
+          final.sourceRevision !== altitudeRevision ||
+          typeof final.sourceStable !== "boolean" ||
+          final.denominator !== altitudeCohort.length ||
+          typeof final.recordedAt !== "string" ||
+          !Number.isFinite(Date.parse(final.recordedAt)) ||
+          new Date(final.recordedAt).toISOString() !== final.recordedAt ||
+          !Array.isArray(final.rows) ||
+          final.rows.length !== altitudeCohort.length ||
+          !final.rows.every(validRow) ||
+          new Set(final.rows.map((row) => row.story)).size !== stories.size
+        )
+          continue;
+        const qualified = final.sourceStable
+          ? final.rows.filter((row) => row.qualified).length
+          : 0;
+        if (
+          final.qualified !== qualified ||
+          !final.rows.every((row) => {
+            const rowFile = evidenceFile(
+              entry.name,
+              String(row.story),
+              "measurement.json",
+            );
+            const stored = rowFile ? read(rowFile) : null;
+            if (
+              !validRow(stored) ||
+              JSON.stringify(stored) !== JSON.stringify(row)
+            )
+              return false;
+            if (!row.qualified) return true;
+            // Matching metadata is not matching evidence: re-read the saved
+            // image bytes before restoring any qualified row. This verifies
+            // existing artifacts only; it does not render or refresh a source.
+            return ["source.png", "replay.png"].every((asset) => {
+              const image = evidenceFile(entry.name, String(row.story), asset);
+              if (!image) return false;
+              try {
+                return (
+                  createHash("sha256")
+                    .update(readFileSync(image))
+                    .digest("hex") ===
+                  (row.source as Record<string, unknown>).sha256
+                );
+              } catch {
+                return false;
+              }
+            });
+          })
+        )
+          continue;
+        recovered.push({
+          id: entry.name,
+          state: "complete",
+          recovered: true,
+          completedAt: final.recordedAt,
+        });
+      }
+    }
+  } catch {
+    /* Missing/unreadable evidence is not fabricated as a completed run. */
+  }
+  recovered.sort(
+    (a, b) =>
+      a.completedAt!.localeCompare(b.completedAt!) || a.id.localeCompare(b.id),
+  );
+  for (const job of recovered) jobs.set(job.id, job);
   function snapshot(job: ReferenceJob) {
-    const dir = path.join(evidenceRoot, job.id);
-    const final = read(path.join(dir, "measurement.json"));
+    const finalFile = evidenceFile(job.id, "measurement.json");
+    const final = finalFile ? read(finalFile) : null;
     const rows = altitudeCohort.map(({ story, limitations }) => {
-      const data = read(path.join(dir, story, "measurement.json"));
+      const rowFile = evidenceFile(job.id, story, "measurement.json");
+      const data = rowFile ? read(rowFile) : null;
       const problems = [
         ...new Set<string>([
           ...(data?.source?.problems ?? []),
@@ -89,20 +245,36 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
               ? "invalid"
               : "awaiting-source-integrity",
         problems,
+        semanticIntake: data?.semanticIntake
+          ? {
+              ...data.semanticIntake,
+              status:
+                final?.sourceStable === false
+                  ? "source-invalid"
+                  : final?.sourceStable === true
+                    ? data.qualified
+                      ? data.semanticIntake.status
+                      : "source-invalid"
+                    : "awaiting-source-integrity",
+            }
+          : null,
         compilerInput: data?.compilerInput
           ? {
               ...data.compilerInput,
-              status: final?.sourceStable
-                ? data.qualified
-                  ? data.compilerInput.status
-                  : "source-invalid"
-                : "awaiting-source-integrity",
+              status:
+                final?.sourceStable === false
+                  ? "source-invalid"
+                  : final?.sourceStable === true
+                    ? data.qualified
+                      ? data.compilerInput.status
+                      : "source-invalid"
+                    : "awaiting-source-integrity",
             }
           : null,
-        sourceImage: existsSync(path.join(dir, story, "source.png"))
+        sourceImage: evidenceFile(job.id, story, "source.png")
           ? `/api/source-reference/${job.id}/${story}/source.png`
           : null,
-        replayImage: existsSync(path.join(dir, story, "replay.png"))
+        replayImage: evidenceFile(job.id, story, "replay.png")
           ? `/api/source-reference/${job.id}/${story}/replay.png`
           : null,
       };
@@ -249,7 +421,7 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       if (!job) {
         json(res, 404, {
           error:
-            "Unknown validation session. Reconnect after a server restart; existing private evidence is preserved.",
+            "Unknown or incomplete validation session. Completed compatible cohorts are recovered after restart; private evidence is preserved.",
         });
         return;
       }
@@ -262,8 +434,8 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
         stories.has(story) &&
         ["source.png", "replay.png"].includes(asset)
       ) {
-        const file = path.join(evidenceRoot, id, story, asset);
-        if (existsSync(file)) {
+        const file = evidenceFile(id, story, asset);
+        if (file) {
           res.setHeader("Content-Type", "image/png");
           res.setHeader("Cache-Control", "no-store");
           res.end(readFileSync(file));

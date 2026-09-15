@@ -1,8 +1,9 @@
 # Source validity before conversion fidelity
 
 Outcome-first checkpoint 1. This module is connected to the local Playground's
-**Source validation** screen (`/sources`), not yet to capture/mint. Its current pass means source-witness validity only,
-never Figma fidelity, reusable output, or owner approval.
+**Source validation** screen (`/sources`), including measured trees and API/content
+intake, not yet to mint. Source validity and semantic inventory are separate
+statuses; neither establishes Figma fidelity, reusable output, or owner approval.
 
 The initial cohort is **Altitude Button, Checkbox, Card**, from the actual
 local Storybook at source revision `0639eccd15bfedc4fa9713d9545a64cef2c0f0a5`.
@@ -89,9 +90,13 @@ checkout, script or output path. It serves only the two PNGs for known session
 and story IDs, never HARs, raw logs or arbitrary files. Double submission shares
 the active job. Failures can be retried into a new evidence directory. Source
 rows remain provisional until final source integrity is known. Evidence stays
-under `private/source-reference-app/`; session lookup survives browser reloads
-but not a dev-server restart. Stopping the server interrupts its owned capture;
-restart does not silently resume, overwrite or approve that run.
+under `private/source-reference-app/`. Completed compatible cohorts survive
+browser reloads and dev-server restarts. Recovery validates the fixed cohort,
+source revision, original/replay identities and matching final/per-story records;
+malformed, incomplete and symlinked records are not reopened as complete. The UI
+labels recovery as recorded evidence, never a fresh check. Missing original start
+times and origins are not invented. Stopping the server interrupts its owned
+capture; restart does not silently resume, overwrite or approve that run.
 
 The existing pre-pivot conversion screen is unchanged. This is a real source
 connection step, not yet the complete autonomous code-to-Figma product journey.
@@ -114,3 +119,29 @@ These are raw input facts, not Figma output, verified variable bindings, recipe
 selection or behavior qualification. The reviewed recipe adapters still impose
 manual mappings; removing that product limitation is unfinished work, not a
 reason to fabricate review provenance or restamp signed fixtures.
+
+## API and content evidence
+
+The additive `readCemDeclarations()` reader preserves the exact declared public
+properties, defaults as unevaluated source expressions, slots and event names.
+It does not use the legacy CEM adapter's inferred callback names or defaults.
+`semantics.ts` observes actual host values, assigned and fallback slot content,
+nested native controls and reference attributes before the visual reader's
+flattening can erase them. Each source/replay observation is retained separately.
+
+Original pixels, repeated semantic observations and a continuous DOM mutation
+watch bracket the reads. Screenshots retain initial caret styling rather than
+temporarily restyling inputs. Wrong types, unreadable controls, getter side
+effects, invalid provenance and replay differences refuse intake. This is a
+bounded observation window, not a purity sandbox or proof of future behavior.
+Closed nested shadow roots and event execution remain outside this inventory.
+
+Random generated IDs remain exact in the evidence; they are not discarded to
+make replay pass. Comparing their identity/reference graph requires a separately
+specified and tested equivalence rule. Likewise, a declared conditional slot not
+rendered in one state remains unresolved, not absent from the component.
+
+These facts are inputs to the existing universal contract authority, not another
+contract schema or generator. The next boundary must prove source-to-part joins,
+typed bindings, legal omitted variants, editable content and event behavior
+through the existing emitters before any generated cohort can be qualified.

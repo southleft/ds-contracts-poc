@@ -18,9 +18,11 @@ export async function captureReference(page: Page, profile: SourceProfile,
     await page.waitForFunction(() => document.fonts.status === 'loaded', undefined, {timeout:10000});
   } catch { readinessError = true; }
   const before = await observeSource(page, profile, failures);
-  const first = await page.screenshot({fullPage:true});
+  // Playwright's default hides carets by changing input inline styles. Source
+  // witnesses must not restyle the original; an unstable caret is a refusal.
+  const first = await page.screenshot({fullPage:true,caret:'initial'});
   await page.waitForTimeout(quietMs);
-  const second = await page.screenshot({fullPage:true});
+  const second = await page.screenshot({fullPage:true,caret:'initial'});
   const after = await observeSource(page, profile, failures);
   const verdict = checkSource(profile, after);
   const problems = [...new Set([...checkSource(profile,before).problems, ...verdict.problems])];

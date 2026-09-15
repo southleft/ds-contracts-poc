@@ -1,4 +1,6 @@
 .source-workspace {
+  width: 100%;
+  min-width: 0;
   max-width: 1400px;
   margin: auto;
   padding: 40px 28px;
@@ -52,7 +54,7 @@
 }
 .source-status {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 20px;
   margin: 32px 0;
   padding: 20px 0;
@@ -80,6 +82,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+.source-evidence > section {
+  min-width: 0;
 }
 .source-evidence nav button {
   font: inherit;
@@ -140,12 +145,17 @@
 .source-workspace code {
   overflow-wrap: anywhere;
 }
+.source-workspace pre {
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: 0.8rem;
+}
 @media (max-width: 850px) {
   .source-status {
     grid-template-columns: 1fr 1fr;
   }
   .source-evidence {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .source-evidence nav {
     display: grid;
