@@ -91,6 +91,8 @@ The existing merge and ledger functions are foundations for this behavior. They 
 
 The next integration milestone is a **shared contract-boundary conformance slice**, not another isolated component mint. It belongs inside the code-led journey below: take a validated original through a contract, existing emitters, actual Figma readback and independent comparison; inject a broken source and a semantic mismatch to prove rejection. Keep the orchestration interface reusable by the other journeys.
 
+The existing React emitters now have mounted-browser conformance checks for omitted scalar values, native boolean attributes and optional boolean styling (`npm run react:conformance:check`). An omitted enum is distinct from a declared option literally named `"undefined"`; absent values must not invent defaults or select that option. These are engine checks, not proof of Altitude conversion or Figma fidelity. Canvas omission readback, source slot/event semantics and the application journey remain unfinished. HTML/Web Component targets are not qualified by the React-only checks.
+
 | Order | User-visible outcome | Required evidence before moving on |
 | --- | --- | --- |
 | 1 · Valid originals | A user selects a real library and sees exactly which styled source/state/theme is being used. | Pinned source and dependencies; loaded fonts/assets/styles; stable original renders; deliberately broken CSS/font/source cases rejected. |

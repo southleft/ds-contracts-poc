@@ -60,6 +60,7 @@ import {
   holderDeclaresPosition,
 } from './emit-react.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
+import { reactPartAttrList } from './react-attributes.js';
 
 export interface EmitReactInlineCtx {
   /** Parsed DTCG trees — literals resolve through primitives + default brand
@@ -155,6 +156,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const events = contract.events ?? [];
   const codePropOf = (propName: string) =>
     contract.props.find((p) => p.name === propName)?.bindings.code.prop ?? propName;
+  const whenProvided = (propName: string, expression: string, absent = 'undefined') =>
+    contract.props.find((p) => p.name === propName)?.default === undefined
+      ? `${codePropOf(propName)} === undefined ? ${absent} : ${expression}`
+      : expression;
 
   // -------------------------------------------------------------------------
   // Style compilation: base per part + per-enum-value overrides per part.
@@ -540,12 +545,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     destructured.push(
       toggledCodeProps.has(p.bindings.code.prop)
         ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
-        : `${p.bindings.code.prop} = '${p.default}'`,
+        : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = '${p.default}'`,
     );
   }
-  for (const p of bools) destructured.push(`${p.bindings.code.prop} = ${p.default === true}`);
+  for (const p of bools) destructured.push(p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${p.default === true}`);
   for (const p of numberProps(contract)) {
-    destructured.push(`${p.bindings.code.prop} = ${typeof p.default === 'number' ? p.default : 0}`);
+    destructured.push(p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${p.default}`);
   }
   for (const p of texts) {
     destructured.push(
@@ -567,7 +572,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     const code = prop.bindings.code.prop;
     const union = (prop.type as { enum: string[] }).enum.map((v) => `'${v}'`).join(' | ');
     prelude.push(
-      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}>('${prop.default}');`,
+      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined ? ' | undefined' : ''}>(${prop.default === undefined ? 'undefined' : `'${prop.default}'`});`,
       `  const ${code} = ${code}Prop ?? ${code}Uncontrolled;`,
     );
   }
@@ -635,12 +640,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       : `S[${JSON.stringify(partName)}]`;
     const pieces = [`...${sRef}`];
     for (const propName of variantPropsFor(partName)) {
-      pieces.push(`...(V[\`${propName}-\${${codePropOf(propName)}}:${partName}\`] ?? {})`);
+      pieces.push(`...(${whenProvided(propName, `V[\`${propName}-\${${codePropOf(propName)}}:${partName}\`] ?? {}`, '{}')})`);
     }
     for (const pair of partVariantPairProps.get(partName) ?? []) {
       const props = pair.split('+');
       const key = props.map((p) => `${p}-\${${codePropOf(p)}}`).join('+');
-      pieces.push(`...(V[\`${key}:${partName}\`] ?? {})`);
+      const expression = props.reduceRight((expr, prop) => whenProvided(prop, expr, '{}'), `V[\`${key}:${partName}\`] ?? {}`);
+      pieces.push(`...(${expression})`);
     }
     pieces.push(...extra);
     if (isRoot && Object.keys(disabledStyle).length > 0) {
@@ -677,22 +683,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     return `{${cond} ? (${jsx}) : null}`;
   };
 
-  // `attrs` on a part (root included) — the same rule as emit-react: a text
-  // prop binds bare (`href={href}`), any other prop is coerced, literals land
-  // as literals (numeric DOM props as numbers).
-  const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
+  // Root and nested attrs share typed native/ARIA projection with the CSS-module emitter.
   const partAttrList = (part: Part): string[] =>
-    Object.entries(part.attrs ?? {}).map(([attr, value]) => {
-      const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-      if (ref) {
-        const bound = contract.props.find((p) => p.name === ref[1]);
-        return bound?.type === 'text'
-          ? `${attr}={${codePropOf(ref[1])}}`
-          : `${attr}={String(${codePropOf(ref[1])})}`;
-      }
-      if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return `${attr}={${value}}`;
-      return `${attr}=${JSON.stringify(value)}`;
-    });
+    reactPartAttrList(contract, part, codePropOf);
   const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
 
   // Icon assets (fixed names + enum expansions), same table as the CSS-Module emitter.
@@ -766,7 +759,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (part.icon) {
       const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
       const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);
-      const glyph = `dangerouslySetInnerHTML={{ __html: ICONS[${keyExpr}] }}`;
+      const glyph = `dangerouslySetInnerHTML={{ __html: ${ref ? whenProvided(ref[1], `ICONS[${keyExpr}]`, "''") : `ICONS[${keyExpr}]`} }}`;
       const node = part.element
         ? `<${part.element} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, part.element)}><span aria-hidden="true" style={{ display: 'inline-flex' }} ${glyph} /></${part.element}>`
         : `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" ${glyph} />`;
@@ -897,13 +890,16 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {
     prelude.push(
-      `  const Tag = ELEMENT_MAP[${codePropOf(elementByProp.prop)}] ?? '${contract.semantics.element}';`,
+      `  const Tag = ${whenProvided(elementByProp.prop, `ELEMENT_MAP[${codePropOf(elementByProp.prop)}] ?? '${contract.semantics.element}'`, `'${contract.semantics.element}'`)};`,
     );
   }
 
+  const rootAttrs = root?.attrs ?? {};
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
   const elementAttrs: string[] = ['ref={ref}', `style=${styleExpr('root', true, root ? stylesWhenExprs(root) : [])}`];
-  if (nativeDisabled) elementAttrs.push('disabled={disabled}');
+  if (nativeDisabled && !Object.keys(rootAttrs).some((attr) => attr.toLowerCase() === 'disabled')) {
+    elementAttrs.push(`disabled={${codePropOf('disabled')}}`);
+  }
   for (const p of bools) {
     if (p.name === 'disabled' && nativeDisabled) continue;
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
@@ -912,13 +908,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // anatomy.root.attrs ride the root element like every part's attrs;
   // attrs.role wins over the semantics default (a differing pair is refused
   // by name in validateContract).
-  const rootAttrs = root?.attrs ?? {};
   if (root) elementAttrs.push(...partAttrList(root));
   const roleByProp = contract.semantics.roleByProp;
   let roleMapConst = '';
   if (roleByProp) {
     roleMapConst = `const ROLE_MAP: Record<string, string> = ${JSON.stringify(roleByProp.map)};\n\n`;
-    elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
+    elementAttrs.push(`role={${whenProvided(roleByProp.prop, `ROLE_MAP[${codePropOf(roleByProp.prop)}]`, JSON.stringify(contract.semantics.role) ?? 'undefined')}}`);
   } else if (
     rootAttrs.role === undefined &&
     contract.semantics.role &&

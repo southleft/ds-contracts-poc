@@ -310,6 +310,10 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run emitters:check
 
+      - name: react:conformance:check (actual native controls and omitted-value semantics)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run react:conformance:check
+
       - name: core:browser-check (the core barrel stays browser-safe)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run core:browser-check

@@ -398,11 +398,17 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // BOOLEAN prop; each side renders as a data-attribute selector on the
   // root element the TSX already emits for every boolean
   // (`[data-x]` / `:not([data-x])`; native disabled uses `:disabled`).
+  // A defaultless bool has THREE runtime states, however: omission must not
+  // select false. Its explicit values use modifier classes, leaving truthy
+  // data/native attributes unchanged for stylesWhen and native behavior.
   // Nested parts and `states` refs take the same expansion (expandRef below).
-  const boolNames = new Set(boolProps(contract).map((p) => p.name));
+  const bools = boolProps(contract);
+  const boolNames = new Set(bools.map((p) => p.name));
+  const optionalBoolNames = new Set(bools.filter((p) => p.default === undefined).map((p) => p.name));
   const substValues = (p: string): string[] | undefined =>
     enums.get(p) ?? (boolNames.has(p) ? ['true', 'false'] : undefined);
   const boolFrag = (p: string, v: string): string => {
+    if (optionalBoolNames.has(p)) return `.${p}-${v}`;
     const nativeDisabled = p === 'disabled' && ELEMENT_META[contract.semantics.element]?.supportsDisabled;
     const sel = nativeDisabled ? ':disabled' : `[data-${p.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
     return v === 'true' ? sel : `:not(${sel})`;
@@ -1274,4 +1280,3 @@ export function stripCanvasOnlyChannels(css: string): string {
   ].join('\n');
   return `${note}\n${out.join('\n').replace(/\n{3,}/g, '\n\n')}`;
 }
-
