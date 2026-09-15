@@ -1,0 +1,72 @@
+import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import path from 'node:path';
+import { chromium } from 'playwright-core';
+import { altitudeCohort, altitudeRevision } from './altitude-cohort.js';
+import { watchSourceFailures } from './observe.js';
+import { captureReference, replayReference, archiveInventory } from './replay.js';
+import { captureValidatedTree } from './capture.js';
+
+const [origin,checkout,output] = process.argv.slice(2);
+if (!origin || !checkout || !output) throw new Error('Usage: cohort-run.ts <loopback-origin> <altitude-checkout> <new-private-output>');
+const parsed = new URL(origin);
+if (parsed.protocol !== 'http:' || !['127.0.0.1','localhost','[::1]'].includes(parsed.hostname) || parsed.username || parsed.password || parsed.pathname !== '/' || parsed.search || parsed.hash) throw new Error('Expected unauthenticated loopback origin');
+const git = (...args:string[]) => execFileSync('git',['-C',checkout,...args],{encoding:'utf8'}).trim();
+if (git('rev-parse','HEAD') !== altitudeRevision || git('diff','HEAD','--name-only')) throw new Error('Source revision or tracked files changed; requalify explicitly');
+const sha = (b:Buffer|string) => createHash('sha256').update(b).digest('hex');
+// Include all tracked Web Component source plus the generated theme actually
+// loaded. HAR separately records runtime transforms, imports and assets.
+const sourceFiles = [...new Set([...git('ls-files','libs/al-web-components','pnpm-lock.yaml').split('\n'),
+  'libs/al-web-components/styles/dist/tokens.json','libs/al-web-components/styles/dist/scss/theme/tokens-dark.scss'])];
+const hashes = Object.fromEntries(sourceFiles.map(f => [f,sha(readFileSync(path.join(checkout,f)))]));
+mkdirSync(output,{recursive:false});
+const browser = await chromium.launch({headless:true});
+const rows:Record<string,unknown>[] = [];
+try {
+  for (const {story,profile,limitations} of altitudeCohort) {
+    const dir = path.join(output,story); mkdirSync(dir);
+    const har = path.join(dir,'source.har');
+    const url = `${parsed.origin}/iframe.html?id=${story}&viewMode=story`;
+    let context:Awaited<ReturnType<typeof browser.newContext>> | undefined;
+    const row:Record<string,unknown> = {story,profile,limitations,qualified:false};
+    try {
+      context = await browser.newContext({viewport:{width:900,height:600},deviceScaleFactor:1,colorScheme:'dark',serviceWorkers:'block',recordHar:{path:har,content:'embed',mode:'full'}});
+      const page = await context.newPage(); const failures = watchSourceFailures(page);
+      await page.goto(url,{waitUntil:'load',timeout:30000});
+      const live = await captureReference(page,profile,failures);
+      writeFileSync(path.join(dir,'source.png'),live.screenshot);
+      row.source = {status:live.status,problems:live.problems,observation:live.after,sha256:live.secondSha256};
+      const sourceTree = live.status === 'valid' ? await captureValidatedTree(page,profile,failures,'#storybook-root','--al-') : {status:'refused' as const,problems:['source-reference-invalid']};
+      writeFileSync(path.join(dir,'source-tree.json'),JSON.stringify(sourceTree,null,2)+'\n');
+      failures.dispose(); await context.close(); context = undefined;
+      const replay = await replayReference(browser,har,url,profile,undefined,(replayPage,replayFailures)=>captureValidatedTree(replayPage,profile,replayFailures,'#storybook-root','--al-'));
+      const replayTree = replay.inspection ?? {status:'refused' as const,problems:['replay-reference-invalid']};
+      writeFileSync(path.join(dir,'replay-tree.json'),JSON.stringify(replayTree,null,2)+'\n');
+      writeFileSync(path.join(dir,'replay.png'),replay.screenshot);
+      row.replay = {status:replay.status,problems:replay.problems,observation:replay.after,sha256:replay.secondSha256,matchesSource:replay.secondSha256 === live.secondSha256};
+      row.archive = archiveInventory(har);
+      row.qualified = live.status === 'valid' && replay.status === 'valid' && replay.secondSha256 === live.secondSha256;
+      const treesMatch = sourceTree.status === 'captured' && replayTree?.status === 'captured' && sourceTree.treeSha256 === replayTree.treeSha256 && sourceTree.sourcePngSha256 === live.secondSha256 && replayTree.sourcePngSha256 === replay.secondSha256;
+      row.compilerInput = {status:!row.qualified ? 'source-invalid' : treesMatch ? 'verified-capture' : 'capture-refused',
+        problems:treesMatch ? [] : [...sourceTree.problems,...(replayTree?.problems ?? []),'source-replay-tree-not-verified'],
+        ...(sourceTree.status === 'captured' ? {census:sourceTree.census,boundary:sourceTree.boundary,treeSha256:sourceTree.treeSha256} : {}),
+        scope:'Raw compiler input only. Token references are candidates; unreadable stylesheet boundaries are not hidden. No Figma conversion claim.'};
+    } catch {
+      // Never drop failed stories. Raw browser errors can contain credential URLs.
+      row.error = 'capture-or-replay-failed';
+    } finally {
+      await context?.close(); rows.push(row);
+      writeFileSync(path.join(dir,'measurement.json'),JSON.stringify(row,null,2)+'\n');
+      console.log(JSON.stringify({story,qualified:row.qualified,source:row.source && (row.source as {problems:unknown}).problems,replay:row.replay && (row.replay as {problems:unknown}).problems,error:row.error}));
+    }
+  }
+} finally { await browser.close(); }
+const sourceStable = git('rev-parse','HEAD') === altitudeRevision && !git('diff','HEAD','--name-only') && sourceFiles.every(f=>sha(readFileSync(path.join(checkout,f))) === hashes[f]);
+const record = {recordedAt:new Date().toISOString(),sourceRevision:altitudeRevision,sourceHashes:hashes,sourceStable,
+  engineRevision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),engineDirty:!!execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trim(),
+  browser:browser.version(),denominator:altitudeCohort.length,qualified:sourceStable ? rows.filter(r=>r.qualified).length : 0,rows,
+  scope:'Source witness and recorded-byte replay only. Not independently rebuilt dependencies, Figma parity, behavior approval, automatic onboarding or completed product journey.'};
+writeFileSync(path.join(output,'measurement.json'),JSON.stringify(record,null,2)+'\n');
+console.log(JSON.stringify({qualified:record.qualified,denominator:record.denominator,sourceStable}));
+if (record.qualified !== record.denominator) process.exitCode = 1;

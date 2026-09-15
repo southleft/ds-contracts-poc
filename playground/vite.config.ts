@@ -1,18 +1,33 @@
-import { defineConfig, type PluginOption } from 'vite';
-import react from '@vitejs/plugin-react';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { buildPluginZip } from '../scripts/build-plugin-zip.mjs';
+import { defineConfig, type PluginOption } from "vite";
+import react from "@vitejs/plugin-react";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { buildPluginZip } from "../scripts/build-plugin-zip.mjs";
+import { createReferenceService } from "../source-reference/service";
 
 const playgroundRoot = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(playgroundRoot, '..');
+const repoRoot = resolve(playgroundRoot, "..");
+const sourceReferences: PluginOption = {
+  name: "ds-source-references",
+  configureServer(server) {
+    const service = createReferenceService(repoRoot);
+    server.middlewares.use((req, res, next) => {
+      if (!req.url?.startsWith("/api/source-reference")) return next();
+      void service.handle(req, res).catch(() => {
+        res.statusCode = 500;
+        res.end('{"error":"Source validation service failed."}');
+      });
+    });
+    server.httpServer?.once("close", () => service.close());
+  },
+};
 
 /** Package the Sync Runner dev plugin into public/ so the Figma tab can
  *  serve it as a download. Runs for dev AND build; refuses (fails the
  *  build) when the dump script embedded in the plugin UI has drifted from
  *  extract/figma/dump.plugin.js — see scripts/build-plugin-zip.mjs. */
 const pluginZip: PluginOption = {
-  name: 'ds-contracts-plugin-zip',
+  name: "ds-contracts-plugin-zip",
   async buildStart() {
     await buildPluginZip();
   },
@@ -20,15 +35,27 @@ const pluginZip: PluginOption = {
 
 export default defineConfig({
   root: playgroundRoot,
-  plugins: [react(), pluginZip],
+  plugins: [react(), pluginZip, sourceReferences],
   resolve: {
     // Vite does not read tsconfig `paths`: pin the published-package
     // specifiers to their in-repo SOURCE so the engine graph (core/index.ts →
     // packages/core/src → @ds-contracts/schema) carries one schema module,
     // never packages/*/dist.
     alias: {
-      '@ds-contracts/core': resolve(repoRoot, 'packages', 'core', 'src', 'index.ts'),
-      '@ds-contracts/schema': resolve(repoRoot, 'packages', 'schema', 'src', 'index.ts'),
+      "@ds-contracts/core": resolve(
+        repoRoot,
+        "packages",
+        "core",
+        "src",
+        "index.ts",
+      ),
+      "@ds-contracts/schema": resolve(
+        repoRoot,
+        "packages",
+        "schema",
+        "src",
+        "index.ts",
+      ),
     },
   },
   server: {
@@ -41,7 +68,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: "dist",
     // The lazy code-import chunk carries the TypeScript compiler (~5 MB, by
     // design — see playground/PLAN.md "Risks"). Don't warn about what is
     // deliberate and lazy-loaded.
