@@ -47,6 +47,8 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-09-15: the public emitter context imports the pure runtime
+    // binding types and unsupported-target guard. No source artifact is packed.
     // Reviewed 2026-08-23 for slice 3 (the cheap pure siblings: figma-names,
     // canvas-code-plan, emit-tokens-css, grid-css joined the package).
     // Reviewed 2026-08-25 for schema 19 (REQUIRED FACTS): dist/required-facts.*
@@ -88,6 +90,8 @@ const PACKAGES = [
       "dist/prop-collision.table.js",
       "dist/required-facts.d.ts",
       "dist/required-facts.js",
+      "dist/runtime-emission.d.ts",
+      "dist/runtime-emission.js",
       "dist/tokens.d.ts",
       "dist/tokens.js",
       "dist/validate.d.ts",
