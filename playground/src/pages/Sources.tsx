@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { SourceContractPlan } from "../../../source-reference/contract-plan";
 import type { SourceBindingInventory } from "../../../source-reference/source-bindings";
 import type { BindingJobSnapshot } from "../../../source-reference/binding-jobs";
+import type { CandidateJobSnapshot } from "../../../source-reference/candidate-jobs";
 import "./sources.css";
 
 interface Row {
@@ -70,6 +71,7 @@ interface Job {
   sourceStable?: boolean;
   supplements?: Job[];
   bindingTraces?: BindingJobSnapshot[];
+  candidatePreparations?: CandidateJobSnapshot[];
   contractAdmission?: {
     status: "blocked";
     acceptedContract: null;
@@ -335,7 +337,10 @@ export function Sources() {
   const capturing =
     job?.state === "running" ||
     !!job?.supplements?.some((supplement) => supplement.state === "running") ||
-    !!job?.bindingTraces?.some((trace) => trace.state === "running");
+    !!job?.bindingTraces?.some((trace) => trace.state === "running") ||
+    !!job?.candidatePreparations?.some(
+      (candidate) => candidate.state === "running",
+    );
   useEffect(() => {
     let alive = true;
     fetch("/api/source-reference")
@@ -468,8 +473,37 @@ export function Sources() {
       setBusy(false);
     }
   }
+  async function prepareSourceCandidate() {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-candidate`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(
+            job.candidatePreparations?.length ? { retry: true } : {},
+          ),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setJob(data);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Source candidate preparation could not start.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
   const supplement = job?.supplements?.at(-1);
   const bindingTrace = job?.bindingTraces?.at(-1);
+  const candidate = job?.candidatePreparations?.at(-1);
   const allRows = [...(job?.rows ?? []), ...(supplement?.rows ?? [])];
   const row = allRows.find((r) => r.story === selected);
   return (
@@ -847,6 +881,96 @@ export function Sources() {
                       <code>{attempt.id}</code>: {attempt.matched} /{" "}
                       {attempt.denominator} structurally matched ·{" "}
                       {attempt.state}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+          </section>
+          <section
+            className="source-admission"
+            aria-label="Source candidate preparation"
+          >
+            <h2>Source candidate preparation</h2>
+            <p>
+              Prepare the pinned original runtime and source semantics from the
+              latest verified binding trace and its exact baseline and
+              supplement. Previous captures and preparation attempts are
+              preserved.
+            </p>
+            <p className="source-note">
+              Preparation does not accept a Contract or produce native Figma
+              output. The visual contract, native comparison and complete
+              conversion journey remain pending. No source or Figma file is
+              changed.
+            </p>
+            <div className="source-connect">
+              <button
+                type="button"
+                disabled={
+                  busy ||
+                  capturing ||
+                  job.state !== "complete" ||
+                  job.sourceStable !== true ||
+                  bindingTrace?.state !== "complete" ||
+                  (!!supplement && supplement.state !== "complete")
+                }
+                onClick={() => void prepareSourceCandidate()}
+              >
+                {candidate?.state === "running"
+                  ? "Preparing source candidate…"
+                  : candidate
+                    ? "Retry source candidate preparation"
+                    : "Prepare source candidate"}
+              </button>
+            </div>
+            <p role="status">
+              {!candidate
+                ? "No source candidate preparation recorded yet."
+                : candidate.phase === "prepared"
+                  ? "Source/runtime prepared; visual contract and native verification still pending."
+                  : candidate.state === "running"
+                    ? "Preparing the original source/runtime. No result is assumed successful."
+                    : candidate.state === "interrupted"
+                      ? "Preparation was interrupted. Retry creates a new attempt; no success is assumed."
+                      : "Source candidate preparation failed or its recorded evidence no longer validates."}
+            </p>
+            {candidate?.problems.map((problem, index) => (
+              <p role="alert" key={index}>
+                <code>{problem}</code>
+              </p>
+            ))}
+            {candidate?.phase === "prepared" && (
+              <div
+                className="source-status"
+                aria-label="Prepared source inventory, not conversion results"
+              >
+                {(
+                  [
+                    ["plannedCases", "Source cases planned"],
+                    ["structurallyMatchedCases", "Structurally matched"],
+                    ["refusedCases", "Refused cases"],
+                    ["variantStates", "Style variants observed"],
+                    ["slots", "Source slots retained"],
+                    ["writableProperties", "Writable source properties"],
+                  ] as const
+                ).map(([key, label]) =>
+                  candidate.counters[key] === undefined ? null : (
+                    <div key={key}>
+                      <strong>{candidate.counters[key]}</strong>
+                      <small>{label}</small>
+                    </div>
+                  ),
+                )}
+              </div>
+            )}
+            {(job.candidatePreparations?.length ?? 0) > 1 && (
+              <details>
+                <summary>Preserved candidate preparation attempts</summary>
+                <ul>
+                  {job.candidatePreparations!.map((attempt) => (
+                    <li key={attempt.id}>
+                      <code>{attempt.id}</code>: {attempt.phase}
                     </li>
                   ))}
                 </ul>

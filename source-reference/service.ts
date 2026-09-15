@@ -9,6 +9,11 @@ import {
 } from "node:fs";
 import path from "node:path";
 import { createBindingJobs } from "./binding-jobs.js";
+import {
+  createCandidateJobs,
+  type CandidateJobsOptions,
+} from "./candidate-jobs.js";
+import { validateCandidatePreparationReport } from "./candidate-report.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
@@ -77,11 +82,23 @@ export function createReferenceService(
   repoRoot: string,
   launch?: Launch,
   bindingLaunch?: Launch,
+  candidateOptions: Partial<
+    Pick<CandidateJobsOptions, "run" | "validateReport">
+  > = {},
 ) {
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
   const bindingJobs = createBindingJobs(repoRoot, bindingLaunch);
+  // Trusted in-process callbacks only. HTTP requests never choose builders,
+  // validators, original source paths, revisions or artifact locations.
+  const candidateJobs = createCandidateJobs(repoRoot, {
+    selectLatestVerified: (request) =>
+      bindingJobs.selectLatestVerified(request),
+    validateReport:
+      candidateOptions.validateReport ?? validateCandidatePreparationReport,
+    ...(candidateOptions.run ? { run: candidateOptions.run } : {}),
+  });
   let active:
     { job: ReferenceJob; child: Pick<ChildProcess, "kill"> } | undefined;
   const execute: Launch =
@@ -568,6 +585,7 @@ export function createReferenceService(
       .map(snapshot),
     contractAdmission: contractAdmission(job),
     bindingTraces: bindingJobs.list(job.id),
+    candidatePreparations: candidateJobs.list(job.id),
   });
   function start(
     origin: string,
@@ -662,7 +680,9 @@ export function createReferenceService(
     }
     const supplementalMatch = /^([a-f0-9-]+)\/button-variants$/i.exec(route);
     const bindingMatch = /^([a-f0-9-]+)\/button-bindings$/i.exec(route);
-    if (req.method === "POST" && bindingMatch) {
+    const candidateMatch = /^([a-f0-9-]+)\/button-candidate$/i.exec(route);
+    if (req.method === "POST" && (bindingMatch || candidateMatch)) {
+      const preparingCandidate = !!candidateMatch;
       if (!req.headers["content-type"]?.startsWith("application/json")) {
         json(res, 415, { error: "JSON required." });
         return;
@@ -675,19 +695,31 @@ export function createReferenceService(
           if (size > 2048) throw Error("Request too large.");
           chunks.push(Buffer.from(chunk));
         }
-        const request = JSON.parse(Buffer.concat(chunks).toString());
+        let request: unknown;
+        try {
+          request = JSON.parse(Buffer.concat(chunks).toString());
+        } catch {
+          json(res, 400, { error: "A JSON object is required." });
+          return;
+        }
         if (
           !object(request) ||
           Object.keys(request).some((key) => key !== "retry") ||
-          (request.retry !== undefined && typeof request.retry !== "boolean")
+          (request.retry !== undefined &&
+            (preparingCandidate
+              ? request.retry !== true
+              : typeof request.retry !== "boolean"))
         ) {
           json(res, 400, {
-            error:
-              "Only an optional Boolean retry is accepted; source, scripts and replay targets are fixed.",
+            error: preparingCandidate
+              ? "Only an empty object or retry: true is accepted; source evidence and preparation are fixed."
+              : "Only an optional Boolean retry is accepted; source, scripts and replay targets are fixed.",
           });
           return;
         }
-        const baseline = jobs.get(bindingMatch[1]);
+        // Both actions use the same host-selected baseline and latest
+        // supplement. Caller-supplied IDs/hashes cannot override this request.
+        const baseline = jobs.get((candidateMatch ?? bindingMatch)![1]);
         const file = baseline
           ? evidenceFile(baseline.id, "measurement.json")
           : null;
@@ -702,15 +734,19 @@ export function createReferenceService(
           !parentMatches(parent)
         ) {
           json(res, 409, {
-            error:
-              "A complete unchanged original baseline is required for binding replay.",
+            error: preparingCandidate
+              ? "A complete unchanged original baseline is required for source candidate preparation."
+              : "A complete unchanged original baseline is required for binding replay.",
           });
           return;
         }
-        if (active) {
+        if (
+          active ||
+          (preparingCandidate ? bindingJobs.running : candidateJobs.running)
+        ) {
           json(res, 409, {
             error:
-              "An original-source capture is running. Wait for it to finish before replaying bindings.",
+              "Another source capture, binding replay or candidate preparation is running. Wait for it to finish.",
           });
           return;
         }
@@ -740,12 +776,15 @@ export function createReferenceService(
             sha256: fileHash(childFile),
           };
         }
-        bindingJobs.start(evidence, request.retry === true);
+        if (preparingCandidate)
+          candidateJobs.start(evidence, request.retry === true);
+        else bindingJobs.start(evidence, request.retry === true);
         json(res, 202, snapshotWithSupplement(baseline));
       } catch {
         json(res, 409, {
-          error:
-            "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
+          error: preparingCandidate
+            ? "Source candidate preparation could not start. Complete a current binding trace for the fixed original evidence; unavailable, changed or active evidence cannot be prepared."
+            : "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
         });
       }
       return;
@@ -773,10 +812,10 @@ export function createReferenceService(
       return;
     }
     if (req.method === "POST" && (!route || supplementalMatch)) {
-      if (bindingJobs.running) {
+      if (bindingJobs.running || candidateJobs.running) {
         json(res, 409, {
           error:
-            "A recorded-source binding replay is running. Wait before starting another capture.",
+            "A source binding replay or candidate preparation is running. Wait before starting another capture.",
         });
         return;
       }
@@ -860,6 +899,15 @@ export function createReferenceService(
           });
           return;
         }
+        // Storybook preflight awaited network I/O. Re-check immediately before
+        // launching: another request may have started a replay/preparation.
+        if (bindingJobs.running || candidateJobs.running) {
+          json(res, 409, {
+            error:
+              "A source binding replay or candidate preparation started during preflight. No capture was launched.",
+          });
+          return;
+        }
         const job = start(origin, selection, parent);
         json(res, 202, snapshotWithSupplement(baseline ?? job));
       } catch {
@@ -903,6 +951,7 @@ export function createReferenceService(
   return {
     handle,
     close() {
+      candidateJobs.close();
       bindingJobs.close();
       if (active) {
         active.job.state = "interrupted";

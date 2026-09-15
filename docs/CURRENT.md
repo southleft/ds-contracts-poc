@@ -24,6 +24,7 @@ The arrows describe the target integration. Existing readers, emitters and diff 
 | --- | --- | --- |
 | Source validation | The local app's `/sources` flow captures styled Altitude stories and checks source provenance, font/style readiness and negative controls. | General library onboarding; complete state/theme coverage; automatic qualification of arbitrary libraries. |
 | API and content intake | Exact CEM declarations, runtime property values, slot assignments/fallbacks and native control states accompany the original/replay evidence in `/sources`. Source mutations and semantic replay differences cause named refusals. | An accepted semantic contract, prop-to-part bindings, event behavior, and equivalence of generated IDs across independent renders. An observed inventory is not approval to generate. |
+| Source candidate preparation | The `/sources` action privately prepares the verified original runtime and derives a semantic inventory from the latest verified source-binding evidence. Completed attempts reopen after validation; failures and interruptions require explicit retry. | A visual Contract, generated native Figma components, or acceptance of a conversion. Structural correspondence does not prove dynamic binding behavior. |
 | Contract playground | The checked-out `core/` engine proposes universal contracts and emits React, HTML and Figma scripts. | Its HTML canvas preview is **not** a live Figma export. Its example tours are not the autonomous product workflow. |
 | Retained source runtime | The existing React emitter can reference a host-verified original custom element, preserving its implementation and typed interface. | Automatic admission of a source-bound Contract, qualified editable canvas channels, distributable host packaging and native-canvas round-trip verification. |
 | Code → canvas | Recipe compilation and the shared Figma writer have live-mint evidence. A new bounded rendered-tree compiler produces explicitly unqualified drafts. | Automatic contract onboarding, semantic properties/token bindings, and verified useful component cohorts through the app without hand-authored role maps or pasted scripts. |
@@ -71,6 +72,8 @@ Round-trip equivalence means preservation of the **declared supported semantics*
 | Contract-to-Figma programs | `core/emit-figma-script.ts` |
 | Canonical recipe canvas IR and writer | `recipe/figma-ir.ts`, `recipe/figma-writer-runtime.ts` |
 | Styled-source evidence and unqualified drafts | `source-reference/`, especially `source-reference/compile.ts` |
+| Application-owned source candidate jobs | `source-reference/service.ts`, `source-reference/candidate-jobs.ts`, `source-reference/candidate-run.ts` |
+| Verified evidence selection and candidate inventory | `source-reference/binding-jobs.ts`, `source-reference/candidate-report.ts`, `source-reference/button-candidate-semantics.ts` |
 | Verified original runtime preparation and React lowering | `source-reference/runtime-artifact.ts`, `core/runtime-emission.ts`, `core/emit-react.ts` |
 | Runtime identity preservation and adoption refusal | `core/runtime-reference.ts`, `packages/core/src/contract-provenance.ts` |
 | Actual plugin host | `figma-sync/plugin/engine/entry.ts`, `figma-sync/plugin/code.js` |
@@ -139,6 +142,19 @@ rechecks the latest attempt and refuses stale or failed evidence instead of
 falling back to an older success. These are inputs to candidate assembly, not
 an accepted or emitted source component.
 
+**Prepare source candidate** now runs inside `/sources`, using that verified
+binding trace and its exact baseline and supplement. A fixed local worker
+prepares the pinned original runtime privately and derives the source semantic
+inventory. Reopening an attempt revalidates its source, dependencies, artifact,
+report and derived counts; it does not rebuild or recapture evidence. Failed,
+interrupted or changed evidence cannot silently reuse an older success. An
+explicit retry creates a new attempt and preserves the previous history.
+Public job snapshots omit private source and module paths, and preparation
+changes neither the source library nor Figma. The result is **source/runtime
+prepared**, not a visual Contract, native canvas output or conversion acceptance.
+Matched source spans remain structural evidence, not proof of every dynamic
+binding or behavior.
+
 A native Scratch probe also confirmed that empty Figma slots do not reproduce
 Altitude's absent conditional wrappers: even zero-sized slots retain layout
 gaps. That behavior must be represented and verified explicitly. Empty main
@@ -148,9 +164,10 @@ sample text into a main component would hide this gap, not solve it.
 `npm run runtime:check` checks the strict reference schema, verified artifact
 inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
 identity claims: preservation requires a matching canonical base and trusted
-journal, and does not prove that the canvas matches either. The source app still
-produces an admission work order, not an accepted Contract. Its next boundary is
-to assemble a source-bound Contract and qualified visual projection, then verify
+journal, and does not prove that the canvas matches either. The source app now
+produces a verified runtime and derived inventory alongside its admission work
+order, not an accepted Contract. Its next boundary is to assemble a source-bound
+Contract and qualified visual projection, then verify
 the actual native canvas. Editable-channel qualification remains separate from
 retaining the original runtime; neither a matching hash nor an available MCP
 connection completes that application journey.
