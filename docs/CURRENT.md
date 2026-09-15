@@ -95,6 +95,10 @@ The existing React emitters now have mounted-browser conformance checks for omit
 
 These are engine checks, not proof of Altitude conversion or Figma fidelity. Mock execution is not native Figma evidence. Source slot/event semantics, automatic contract intake and the application journey remain unfinished. HTML/Web Component targets are not qualified by the React-only checks.
 
+The local **Source validation** screen now derives a component-admission work order from recorded originals, replay images, trees and exact declarations. It names missing enum states (including omission), unproven content/attribute bindings and unsupported behavior. Matching visible text and an accessible-label prop does not prove they are the same API channel. No contract is accepted by this planner.
+
+After the original Altitude cohort finishes, **Capture missing Button states** observes its original tertiary, bare and danger stories in a separate source-bound run. The baseline and its failures are preserved, not remeasured or replaced. Completed evidence can be reopened after restart; changed parent records, image bytes or source-file hashes invalidate supplemental use. A failed supplemental attempt can be explicitly retried into a new directory. This is targeted evidence acquisition, not a Figma mint or completion of the code-led journey. `npm run source:reference:check` covers the admission and supplemental-service boundaries with real recorded inputs and negative controls.
+
 | Order | User-visible outcome | Required evidence before moving on |
 | --- | --- | --- |
 | 1 · Valid originals | A user selects a real library and sees exactly which styled source/state/theme is being used. | Pinned source and dependencies; loaded fonts/assets/styles; stable original renders; deliberately broken CSS/font/source cases rejected. |

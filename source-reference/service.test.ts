@@ -92,19 +92,29 @@ test("source API: all states retained, no premature success, isolated assets and
     assert.equal(args[4], path.resolve(dir, "..", "altitude"));
     const out = args[5];
     mkdirSync(out, { recursive: true });
+    const capturedRows: Record<string, unknown>[] = [];
+    const pngSha256 = createHash("sha256").update("png").digest("hex");
     for (const [i, { story }] of altitudeCohort.entries()) {
       mkdirSync(path.join(out, story));
+      const row = {
+        story,
+        qualified: i !== 2,
+        compilerInput: { status: "verified-capture", problems: [] },
+        semanticIntake: { status: "observed", problems: [], limitations: [] },
+        source: {
+          status: i === 2 ? "invalid" : "valid",
+          sha256: pngSha256,
+          problems: i === 2 ? ["native-disabled-missing"] : [],
+        },
+        replay: { status: "valid", sha256: pngSha256, problems: [] },
+      };
+      capturedRows.push(row);
       writeFileSync(
         path.join(out, story, "measurement.json"),
-        JSON.stringify({
-          qualified: i !== 2,
-          compilerInput: { status: "verified-capture", problems: [] },
-          semanticIntake: { status: "observed", problems: [], limitations: [] },
-          source: { problems: i === 2 ? ["native-disabled-missing"] : [] },
-          replay: { problems: [] },
-        }),
+        JSON.stringify(row),
       );
       writeFileSync(path.join(out, story, "source.png"), "png");
+      writeFileSync(path.join(out, story, "replay.png"), "png");
       writeFileSync(path.join(out, story, "source.har"), "DO NOT EXPOSE");
     }
     const provisional = await (await fetch(`${base}/${job.id}`)).json();
@@ -119,7 +129,7 @@ test("source API: all states retained, no premature success, isolated assets and
     );
     writeFileSync(
       path.join(out, "measurement.json"),
-      JSON.stringify({ rows: altitudeCohort }),
+      JSON.stringify({ rows: capturedRows }),
     );
     const missingIntegrity = await (await fetch(`${base}/${job.id}`)).json();
     assert.equal(missingIntegrity.qualified, 0);
@@ -134,7 +144,7 @@ test("source API: all states retained, no premature success, isolated assets and
     }
     writeFileSync(
       path.join(out, "measurement.json"),
-      JSON.stringify({ sourceStable: true, rows: altitudeCohort }),
+      JSON.stringify({ sourceStable: true, rows: capturedRows }),
     );
     done(new Error("Exit 1: expected refusals"));
     const final = await (await fetch(`${base}/${job.id}`)).json();
@@ -172,7 +182,7 @@ test("source API: all states retained, no premature success, isolated assets and
     );
     writeFileSync(
       path.join(out, "measurement.json"),
-      JSON.stringify({ sourceStable: false, rows: altitudeCohort }),
+      JSON.stringify({ sourceStable: false, rows: capturedRows }),
     );
     const changed = await (await fetch(`${base}/${job.id}`)).json();
     assert.equal(changed.state, "complete");

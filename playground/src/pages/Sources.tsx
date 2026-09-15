@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { SourceContractPlan } from "../../../source-reference/contract-plan";
 import "./sources.css";
 
 interface Row {
@@ -64,6 +65,14 @@ interface Job {
   denominator: number;
   rows: Row[];
   problem?: string;
+  sourceStable?: boolean;
+  supplements?: Job[];
+  contractAdmission?: {
+    status: "blocked";
+    acceptedContract: null;
+    plans: SourceContractPlan[];
+    problems: string[];
+  };
 }
 function problemText(problem: string) {
   if (problem === "probe-state-mismatch:input:disabled")
@@ -89,6 +98,9 @@ export function Sources() {
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState("atoms-button--default");
+  const capturing =
+    job?.state === "running" ||
+    !!job?.supplements?.some((supplement) => supplement.state === "running");
   useEffect(() => {
     let alive = true;
     fetch("/api/source-reference")
@@ -121,7 +133,7 @@ export function Sources() {
     };
   }, []);
   useEffect(() => {
-    if (job?.state !== "running") return;
+    if (!capturing || !job) return;
     let alive = true;
     const timer = setInterval(
       () =>
@@ -148,7 +160,7 @@ export function Sources() {
       alive = false;
       clearInterval(timer);
     };
-  }, [job?.id, job?.state]);
+  }, [job?.id, capturing]);
   async function validate() {
     setBusy(true);
     setError("");
@@ -167,7 +179,35 @@ export function Sources() {
       setBusy(false);
     }
   }
-  const row = job?.rows.find((r) => r.story === selected);
+  async function captureMissingVariants() {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-variants`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ origin, retry: true }),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setJob(data);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Supplemental capture could not start.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  const supplement = job?.supplements?.at(-1);
+  const allRows = [...(job?.rows ?? []), ...(supplement?.rows ?? [])];
+  const row = allRows.find((r) => r.story === selected);
   return (
     <div className="source-workspace">
       <p className="source-eyebrow">Code → design · source connection</p>
@@ -193,7 +233,7 @@ export function Sources() {
             required
           />
         </label>
-        <button disabled={!ready || busy || job?.state === "running"}>
+        <button disabled={!ready || busy || capturing}>
           {busy
             ? "Connecting…"
             : job?.state === "running"
@@ -266,9 +306,140 @@ export function Sources() {
             </p>
           )}
           {job.problem && <p role="alert">{job.problem}</p>}
+          <section
+            className="source-admission"
+            aria-label="Component contract admission"
+          >
+            <h2>What still prevents an editable component?</h2>
+            <p>
+              Source validity is not component completeness. This work order
+              rechecks the recorded images, trees and declared API together. No
+              contract is accepted while bindings and behavior are unproven.
+            </p>
+            {job.contractAdmission?.problems.map((problem) => (
+              <p key={problem}>
+                <code>{problem}</code>
+              </p>
+            ))}
+            {job.contractAdmission?.plans.map((plan) => (
+              <article key={plan.component.tagName}>
+                <h3>
+                  <code>{plan.component.tagName}</code> · contract blocked
+                </h3>
+                <p>
+                  {plan.evidence.observedStories.length} recorded states
+                  contribute semantic evidence;{" "}
+                  {plan.evidence.rejectedStories.length} refused. No Figma
+                  result is implied.
+                </p>
+                <ul>
+                  {plan.enumDomains.map((domain) => (
+                    <li key={domain.property}>
+                      <strong>
+                        {domain.property}: {domain.observed} / {domain.total}{" "}
+                        states observed
+                      </strong>
+                      {domain.omission &&
+                        " (including omission; no public default invented)"}
+                      .
+                      {domain.missing.length > 0 &&
+                        ` Missing: ${domain.missing.map((state) => (state.kind === "omitted" ? "(omitted)" : state.value)).join(", ")}.`}
+                    </li>
+                  ))}
+                </ul>
+                <details>
+                  <summary>
+                    Unresolved bindings, behavior and coverage (
+                    {plan.findings.length})
+                  </summary>
+                  <ul>
+                    {plan.findings.map((finding, index) => (
+                      <li key={index}>
+                        <code>
+                          {finding.code}
+                          {finding.property
+                            ? `: ${finding.property}`
+                            : finding.slot !== undefined
+                              ? `: ${finding.slot || "(default slot)"}`
+                              : ""}
+                        </code>{" "}
+                        {finding.message}
+                        {finding.story && ` (${finding.story})`}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </article>
+            ))}
+          </section>
+          <section
+            className="source-admission"
+            aria-label="Additional Button appearance evidence"
+          >
+            <h2>Complete the Button appearance evidence</h2>
+            <p>
+              The original cohort covers the omitted and secondary appearances.
+              Its declared API also includes tertiary, bare and danger. Capture
+              those three original stories without rerunning or replacing the
+              ten-state baseline above.
+            </p>
+            <div className="source-connect">
+              <button
+                type="button"
+                disabled={
+                  busy ||
+                  capturing ||
+                  job.state !== "complete" ||
+                  job.sourceStable !== true ||
+                  (supplement?.state === "complete" &&
+                    supplement.qualified === supplement.denominator)
+                }
+                onClick={() => void captureMissingVariants()}
+              >
+                {supplement?.state === "running"
+                  ? "Capturing missing Button states…"
+                  : supplement?.state === "complete" &&
+                      supplement.qualified === supplement.denominator
+                    ? "Supplemental capture complete"
+                    : supplement
+                      ? "Retry missing Button states"
+                      : "Capture missing Button states"}
+              </button>
+            </div>
+            {supplement && (
+              <p>
+                Additional source references:{" "}
+                <strong>
+                  {supplement.qualified} / {supplement.denominator} valid
+                </strong>{" "}
+                · {supplement.state}. The baseline denominator and rejected
+                states are unchanged.
+              </p>
+            )}
+            {supplement?.problem && <p role="alert">{supplement.problem}</p>}
+            {(job.supplements?.length ?? 0) > 1 && (
+              <details>
+                <summary>Preserved supplemental attempts</summary>
+                <ul>
+                  {job.supplements!.map((attempt) => (
+                    <li key={attempt.id}>
+                      <code>{attempt.id}</code>: {attempt.qualified}/
+                      {attempt.denominator} source references valid ·{" "}
+                      {attempt.state}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+            <p className="source-note">
+              Same pinned source bytes required. This does not prove
+              prop-to-part bindings, token bindings, interaction behavior or a
+              generatable contract. No source or Figma files are changed.
+            </p>
+          </section>
           <div className="source-evidence">
             <nav aria-label="All selected source states">
-              {job.rows.map((r) => (
+              {allRows.map((r) => (
                 <button
                   key={r.story}
                   aria-pressed={selected === r.story}

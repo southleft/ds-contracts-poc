@@ -9,9 +9,25 @@ import {
 } from "node:fs";
 import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { altitudeCohort, altitudeRevision } from "./altitude-cohort.js";
+import {
+  altitudeCohort,
+  altitudeButtonVariants,
+  altitudeRevision,
+} from "./altitude-cohort.js";
+import { readCemDeclarations } from "../extract/adapters/cem.js";
+import {
+  planSourceContract,
+  type HashBoundJson,
+  type ContractPlanInput,
+  type SourceContractPlan,
+} from "./contract-plan.js";
 
-const stories = new Set(altitudeCohort.map((e) => e.story));
+type CohortId = "baseline" | "button-variants";
+const cohort = (id: CohortId = "baseline") =>
+  id === "baseline" ? altitudeCohort : altitudeButtonVariants;
+const stories = new Set(
+  [...altitudeCohort, ...altitudeButtonVariants].map((e) => e.story),
+);
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 type RunState = "running" | "complete" | "failed" | "interrupted";
 export interface ReferenceJob {
@@ -22,6 +38,8 @@ export interface ReferenceJob {
   recovered?: true;
   completedAt?: string;
   problem?: string;
+  cohortId?: CohortId;
+  parent?: { id: string; measurementSha256: string };
 }
 type Launch = (
   args: string[],
@@ -91,6 +109,41 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
     value !== null && typeof value === "object" && !Array.isArray(value);
   const strings = (value: unknown) =>
     Array.isArray(value) && value.every((item) => typeof item === "string");
+  const fileHash = (file: string) =>
+    createHash("sha256").update(readFileSync(file)).digest("hex");
+  const parentMatches = (
+    parent: unknown,
+    sourceHashes?: unknown,
+  ): parent is NonNullable<ReferenceJob["parent"]> => {
+    if (
+      !object(parent) ||
+      typeof parent.id !== "string" ||
+      !UUID.test(parent.id) ||
+      typeof parent.measurementSha256 !== "string" ||
+      !/^[a-f0-9]{64}$/.test(parent.measurementSha256)
+    )
+      return false;
+    const file = evidenceFile(parent.id, "measurement.json");
+    const record = file ? read(file) : null;
+    return (
+      !!file &&
+      fileHash(file) === parent.measurementSha256 &&
+      record?.sourceStable === true &&
+      record.sourceRevision === altitudeRevision &&
+      (record.cohortId ?? "baseline") === "baseline" &&
+      object(record.sourceHashes) &&
+      Object.keys(record.sourceHashes).length > 0 &&
+      (sourceHashes === undefined ||
+        JSON.stringify(record.sourceHashes) === JSON.stringify(sourceHashes))
+    );
+  };
+  const supplementMatches = (
+    parent: unknown,
+    sourceHashes: unknown,
+  ): parent is NonNullable<ReferenceJob["parent"]> =>
+    object(sourceHashes) &&
+    Object.keys(sourceHashes).length > 0 &&
+    parentMatches(parent, sourceHashes);
   const validRow = (row: unknown): row is Record<string, unknown> => {
     if (
       !object(row) ||
@@ -139,6 +192,21 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       return false;
     return true;
   };
+  const rowEvidenceMatches = (id: string, row: unknown) => {
+    if (!validRow(row)) return false;
+    const rowFile = evidenceFile(id, String(row.story), "measurement.json");
+    const stored = rowFile ? read(rowFile) : null;
+    if (!validRow(stored) || JSON.stringify(stored) !== JSON.stringify(row))
+      return false;
+    if (!row.qualified) return true;
+    return ["source.png", "replay.png"].every((asset) => {
+      const file = evidenceFile(id, String(row.story), asset);
+      return (
+        !!file &&
+        fileHash(file) === (row.source as Record<string, unknown>).sha256
+      );
+    });
+  };
   // Completed cohorts can be reopened without launching a process or changing
   // evidence. A full final record AND matching per-story records are required;
   // an abandoned directory or a ten-item but duplicated list is not completion.
@@ -149,18 +217,27 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
         if (!entry.isDirectory() || !UUID.test(entry.name)) continue;
         const file = evidenceFile(entry.name, "measurement.json");
         const final = file ? read(file) : null;
+        const selection = final?.cohortId ?? "baseline";
+        if (!["baseline", "button-variants"].includes(selection)) continue;
+        const selected = cohort(selection);
+        const selectedStories = new Set(selected.map(({ story }) => story));
         if (
           !object(final) ||
           final.sourceRevision !== altitudeRevision ||
           typeof final.sourceStable !== "boolean" ||
-          final.denominator !== altitudeCohort.length ||
+          final.denominator !== selected.length ||
           typeof final.recordedAt !== "string" ||
           !Number.isFinite(Date.parse(final.recordedAt)) ||
           new Date(final.recordedAt).toISOString() !== final.recordedAt ||
           !Array.isArray(final.rows) ||
-          final.rows.length !== altitudeCohort.length ||
+          final.rows.length !== selected.length ||
           !final.rows.every(validRow) ||
-          new Set(final.rows.map((row) => row.story)).size !== stories.size
+          !final.rows.every((row) => selectedStories.has(String(row.story))) ||
+          new Set(final.rows.map((row) => row.story)).size !==
+            selected.length ||
+          (selection === "baseline"
+            ? final.parent !== undefined
+            : !supplementMatches(final.parent, final.sourceHashes))
         )
           continue;
         const qualified = final.sourceStable
@@ -206,6 +283,11 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
           state: "complete",
           recovered: true,
           completedAt: final.recordedAt,
+          cohortId: selection,
+          ...(selection === "button-variants" &&
+          supplementMatches(final.parent, final.sourceHashes)
+            ? { parent: final.parent }
+            : {}),
         });
       }
     }
@@ -216,13 +298,22 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
     (a, b) =>
       a.completedAt!.localeCompare(b.completedAt!) || a.id.localeCompare(b.id),
   );
-  for (const job of recovered) jobs.set(job.id, job);
+  for (const job of recovered.filter((job) => !job.parent))
+    jobs.set(job.id, job);
+  for (const job of recovered.filter((job) => job.parent))
+    if (jobs.has(job.parent!.id)) jobs.set(job.id, job);
   function snapshot(job: ReferenceJob) {
     const finalFile = evidenceFile(job.id, "measurement.json");
     const final = finalFile ? read(finalFile) : null;
-    const rows = altitudeCohort.map(({ story, limitations }) => {
+    const parentValid =
+      !job.parent ||
+      (final
+        ? supplementMatches(job.parent, final.sourceHashes)
+        : parentMatches(job.parent));
+    const rows = cohort(job.cohortId).map(({ story, limitations }) => {
       const rowFile = evidenceFile(job.id, story, "measurement.json");
-      const data = rowFile ? read(rowFile) : null;
+      const rawData = rowFile ? read(rowFile) : null;
+      const data = validRow(rawData) ? (rawData as Record<string, any>) : null;
       const problems = [
         ...new Set<string>([
           ...(data?.source?.problems ?? []),
@@ -232,24 +323,35 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       ];
       if (final?.sourceStable === false)
         problems.push("source-changed-during-capture");
+      if (!parentValid) problems.push("supplement-parent-changed");
+      // Recovery is not a permanent integrity grant. Recheck the bytes shown
+      // now, including final/per-story agreement, before exposing a valid row.
+      const recordedRow = (Array.isArray(final?.rows) ? final.rows : []).find(
+        (row: { story?: string }) => row?.story === story,
+      );
+      const evidenceValid = !final || rowEvidenceMatches(job.id, recordedRow);
+      if (!evidenceValid) problems.push("source-evidence-changed");
       return {
         story,
         limitations,
-        status: !data
-          ? job.state === "running"
-            ? "pending"
-            : "not-captured"
-          : data.qualified && final?.sourceStable
-            ? "valid"
-            : final?.sourceStable === false || !data.qualified
-              ? "invalid"
-              : "awaiting-source-integrity",
+        status:
+          !parentValid || !evidenceValid
+            ? "invalid"
+            : !data
+              ? job.state === "running"
+                ? "pending"
+                : "not-captured"
+              : data.qualified && final?.sourceStable
+                ? "valid"
+                : final?.sourceStable === false || !data.qualified
+                  ? "invalid"
+                  : "awaiting-source-integrity",
         problems,
         semanticIntake: data?.semanticIntake
           ? {
               ...data.semanticIntake,
               status:
-                final?.sourceStable === false
+                !parentValid || !evidenceValid || final?.sourceStable === false
                   ? "source-invalid"
                   : final?.sourceStable === true
                     ? data.qualified
@@ -262,7 +364,7 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
           ? {
               ...data.compilerInput,
               status:
-                final?.sourceStable === false
+                !parentValid || !evidenceValid || final?.sourceStable === false
                   ? "source-invalid"
                   : final?.sourceStable === true
                     ? data.qualified
@@ -283,16 +385,169 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       ...job,
       sourceRevision: altitudeRevision,
       theme: "Altitude dark · IBM Plex Sans",
-      denominator: altitudeCohort.length,
+      denominator: cohort(job.cohortId).length,
       qualified: rows.filter((r) => r.status === "valid").length,
-      sourceStable: final?.sourceStable ?? null,
+      sourceStable: parentValid ? (final?.sourceStable ?? null) : false,
       rows,
       fidelity: "not measured",
       usability: "not qualified",
       workflow: "source validation only",
     };
   }
-  function start(origin: string) {
+  function contractAdmission(job: ReferenceJob) {
+    const plans: SourceContractPlan[] = [];
+    const problems: string[] = [];
+    try {
+      const file = evidenceFile(job.id, "measurement.json");
+      const final = file ? read(file) : null;
+      if (job.state !== "complete" || !final?.sourceStable || job.parent)
+        throw new Error("baseline-not-complete");
+      const manifestPath = "libs/al-web-components/custom-elements.json";
+      const manifestBytes = readFileSync(path.join(checkout, manifestPath));
+      const manifestSha256 = createHash("sha256")
+        .update(manifestBytes)
+        .digest("hex");
+      if (
+        final.sourceRevision !== altitudeRevision ||
+        final.sourceHashes?.[manifestPath] !== manifestSha256
+      )
+        throw new Error("recorded-manifest-unavailable-or-changed");
+      const manifest = readCemDeclarations(
+        JSON.parse(manifestBytes.toString()),
+      );
+      const readBlob = (
+        id: string,
+        story: string,
+        asset: string,
+      ): HashBoundJson => {
+        const file = evidenceFile(id, story, asset);
+        if (!file) return { utf8: "", sha256: "" };
+        const utf8 = readFileSync(file, "utf8");
+        return {
+          utf8,
+          sha256: createHash("sha256").update(utf8).digest("hex"),
+        };
+      };
+      // Select only the latest explicit supplement, never union different
+      // attempts to hide refusals. All attempts remain separately inspectable.
+      const latestSupplement = [...jobs.values()]
+        .filter((child) => child.parent?.id === job.id)
+        .at(-1);
+      const inputs = [job];
+      if (latestSupplement?.state === "complete") {
+        const childFile = evidenceFile(latestSupplement.id, "measurement.json");
+        const childFinal = childFile ? read(childFile) : null;
+        if (
+          childFinal?.sourceStable === true &&
+          supplementMatches(latestSupplement.parent, childFinal.sourceHashes)
+        )
+          inputs.push(latestSupplement);
+        else problems.push("supplement-source-identity-invalid");
+      }
+      for (const tagName of new Set(
+        altitudeCohort.map(({ profile }) => profile.path[0]),
+      )) {
+        const declarations = manifest.declarations.filter(
+          (declaration) => declaration.tagName === tagName,
+        );
+        if (declarations.length !== 1) {
+          problems.push(`declaration-not-unique:${tagName}`);
+          continue;
+        }
+        const declaration = declarations[0];
+        const observations: ContractPlanInput["observations"] = [];
+        for (const input of inputs) {
+          const recordFile = evidenceFile(input.id, "measurement.json");
+          const record = recordFile ? read(recordFile) : null;
+          for (const { story, profile } of cohort(input.cohortId).filter(
+            (entry) => entry.profile.path[0] === tagName,
+          )) {
+            const measurement = readBlob(input.id, story, "measurement.json");
+            let stored: Record<string, unknown> | null = null;
+            try {
+              stored = JSON.parse(measurement.utf8);
+            } catch {
+              /* retain malformed row as rejected evidence below */
+            }
+            const recorded = record?.rows?.find(
+              (row: { story?: string }) => row.story === story,
+            );
+            // The pinned adapter's authored witnesses must not be replaced by
+            // expectations learned from the output or changed receipt prose.
+            if (
+              !stored ||
+              !rowEvidenceMatches(input.id, recorded) ||
+              JSON.stringify(stored) !== JSON.stringify(recorded) ||
+              JSON.stringify(stored.profile) !== JSON.stringify(profile)
+            ) {
+              problems.push(`recorded-state-identity-invalid:${story}`);
+              measurement.sha256 = ""; // the planner keeps and rejects this row
+            }
+            const image = (asset: string) => {
+              const file = evidenceFile(input.id, story, asset);
+              return file ? readFileSync(file) : new Uint8Array();
+            };
+            observations.push({
+              story,
+              measurement,
+              sourceSemantics: readBlob(
+                input.id,
+                story,
+                "source-semantics.json",
+              ),
+              replaySemantics: readBlob(
+                input.id,
+                story,
+                "replay-semantics.json",
+              ),
+              sourceTree: readBlob(input.id, story, "source-tree.json"),
+              replayTree: readBlob(input.id, story, "replay-tree.json"),
+              sourcePng: image("source.png"),
+              replayPng: image("replay.png"),
+            });
+          }
+        }
+        plans.push(
+          planSourceContract({
+            component: {
+              tagName,
+              modulePath: declaration.modulePath,
+              className: declaration.className,
+            },
+            source: {
+              revision: final.sourceRevision,
+              manifestPath,
+              manifestSha256,
+            },
+            declaration,
+            declarationProblems: manifest.problems,
+            observations,
+          }),
+        );
+      }
+    } catch {
+      // No raw parser/filesystem error or source contents returned to the UI.
+      problems.push("recorded-contract-evidence-unavailable");
+    }
+    return {
+      status: "blocked" as const,
+      acceptedContract: null,
+      plans,
+      problems,
+    };
+  }
+  const snapshotWithSupplement = (job: ReferenceJob) => ({
+    ...snapshot(job),
+    supplements: [...jobs.values()]
+      .filter((child) => child.parent?.id === job.id)
+      .map(snapshot),
+    contractAdmission: contractAdmission(job),
+  });
+  function start(
+    origin: string,
+    cohortId: CohortId = "baseline",
+    parent?: ReferenceJob["parent"],
+  ) {
     if (active) return active.job;
     mkdirSync(evidenceRoot, { recursive: true });
     const job: ReferenceJob = {
@@ -300,6 +555,8 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       origin,
       state: "running",
       startedAt: new Date().toISOString(),
+      cohortId,
+      ...(parent ? { parent } : {}),
     };
     jobs.set(job.id, job);
     const output = path.join(evidenceRoot, job.id);
@@ -311,13 +568,15 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
         origin,
         checkout,
         output,
+        cohortId,
+        ...(parent ? [parent.id, parent.measurementSha256] : []),
       ],
       (error) => {
         if (job.state !== "interrupted") {
           const final = read(path.join(output, "measurement.json"));
           // Exit 1 with a complete measurement is an honest refusal, not lost work.
           job.state =
-            final?.rows?.length === altitudeCohort.length
+            final?.rows?.length === cohort(cohortId).length
               ? "complete"
               : "failed";
           if (job.state === "failed")
@@ -367,13 +626,16 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
         checkoutAvailable: existsSync(
           path.join(checkout, "libs/al-web-components/.storybook/preview.ts"),
         ),
-        latest: [...jobs.values()].at(-1)
-          ? snapshot([...jobs.values()].at(-1)!)
+        latest: [...jobs.values()].filter((job) => !job.parent).at(-1)
+          ? snapshotWithSupplement(
+              [...jobs.values()].filter((job) => !job.parent).at(-1)!,
+            )
           : null,
       });
       return;
     }
-    if (req.method === "POST" && !route) {
+    const supplementalMatch = /^([a-f0-9-]+)\/button-variants$/i.exec(route);
+    if (req.method === "POST" && (!route || supplementalMatch)) {
       if (!req.headers["content-type"]?.startsWith("application/json")) {
         json(res, 415, { error: "JSON required." });
         return;
@@ -386,9 +648,57 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
           if (size > 2048) throw new Error("Request too large.");
           chunks.push(Buffer.from(chunk));
         }
-        const origin = loopbackOrigin(
-          JSON.parse(Buffer.concat(chunks).toString()).origin,
-        );
+        const request = JSON.parse(Buffer.concat(chunks).toString());
+        const origin = loopbackOrigin(request.origin);
+        const baseline = supplementalMatch
+          ? jobs.get(supplementalMatch[1])
+          : undefined;
+        let parent: ReferenceJob["parent"];
+        if (supplementalMatch) {
+          const file = baseline
+            ? evidenceFile(baseline.id, "measurement.json")
+            : null;
+          parent = file
+            ? { id: baseline!.id, measurementSha256: fileHash(file) }
+            : undefined;
+          if (
+            !baseline ||
+            baseline.parent ||
+            baseline.state !== "complete" ||
+            !parentMatches(parent)
+          ) {
+            json(res, 409, {
+              error:
+                "A complete unchanged baseline source record is required before supplementing states.",
+            });
+            return;
+          }
+          const existing = [...jobs.values()]
+            .filter((job) => job.parent?.id === baseline.id)
+            .at(-1);
+          if (
+            existing &&
+            (existing.state === "running" ||
+              (existing.state === "complete" &&
+                (request.retry !== true ||
+                  snapshot(existing).qualified ===
+                    altitudeButtonVariants.length)))
+          ) {
+            json(res, 200, snapshotWithSupplement(baseline));
+            return;
+          }
+        }
+        if (
+          active &&
+          (active.job.parent?.id ?? null) !== (baseline?.id ?? null)
+        ) {
+          json(res, 409, {
+            error:
+              "Another source capture is already running. Its evidence is preserved; wait for that run to finish.",
+          });
+          return;
+        }
+        const selection: CohortId = baseline ? "button-variants" : "baseline";
         // Fail promptly when no source is connected instead of ten navigation timeouts.
         const response = await fetch(`${origin}/index.json`, {
           signal: AbortSignal.timeout(3000),
@@ -399,14 +709,15 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
         };
         if (
           !response.ok ||
-          !altitudeCohort.every((e) => index.entries?.[e.story])
+          !cohort(selection).every((e) => index.entries?.[e.story])
         ) {
           json(res, 422, {
             error: "This Storybook does not expose the fixed Altitude cohort.",
           });
           return;
         }
-        json(res, 202, snapshot(start(origin)));
+        const job = start(origin, selection, parent);
+        json(res, 202, snapshotWithSupplement(baseline ?? job));
       } catch {
         json(res, 400, {
           error:
@@ -426,12 +737,12 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
         return;
       }
       if (!story) {
-        json(res, 200, snapshot(job));
+        json(res, 200, snapshotWithSupplement(job));
         return;
       }
       if (
         !extra.length &&
-        stories.has(story) &&
+        cohort(job.cohortId).some((entry) => entry.story === story) &&
         ["source.png", "replay.png"].includes(asset)
       ) {
         const file = evidenceFile(id, story, asset);
