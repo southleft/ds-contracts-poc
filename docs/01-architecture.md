@@ -1,5 +1,9 @@
 # 1 · Architecture & the Contract Model
 
+> **Historical architecture reference.** The active integration architecture,
+> transport roles and outcome-first work order are in [CURRENT.md](CURRENT.md).
+> The dated state and phase descriptions below are not current release criteria.
+
 > **Current state (2026-08-30).** This page describes the **universal
 > contract** architecture (one JSON file → both surfaces, three-way differ).
 > That architecture still exists. The **v1 proof surface** is recipe-IR:

@@ -10,6 +10,13 @@ const repoRoot = resolve(playgroundRoot, "..");
 const sourceReferences: PluginOption = {
   name: "ds-source-references",
   configureServer(server) {
+    // These shared inputs live outside Vite's playground root. Watch them
+    // explicitly so a live architecture page cannot retain an old diagram.
+    server.watcher.add([
+      resolve(repoRoot, "docs/CURRENT.md"),
+      resolve(repoRoot, "docs/assets/product-loop.svg"),
+      resolve(repoRoot, "product"),
+    ]);
     const service = createReferenceService(repoRoot);
     server.middlewares.use((req, res, next) => {
       if (!req.url?.startsWith("/api/source-reference")) return next();

@@ -6,7 +6,7 @@ export function Landing() {
   return (
     <div className="landing">
       <p className="landing__kicker">
-        Design-system contracts — pre-pivot playground
+        Design-system contracts — engine explorer
       </p>
       <h1>The contract loop, in your browser.</h1>
       <p className="landing__pitch">
@@ -14,17 +14,19 @@ export function Landing() {
         design and engineering have to agree on — the props and their legal
         values, the parts the component is made of, which design token paints
         each part, and its states. Both a React component and a real Figma
-        component set are <i>generated</i> from that one file, and then
-        continuously checked against it.
+        component set can be <i>generated</i> from supported contracts. The
+        autonomous apply-and-reobserve product loop is not connected yet.
       </p>
       <p className="landing__pitch">
-        This page runs the real <b>pre-pivot</b> <code>core/</code> engine —
+        This page runs the current checked-out <code>core/</code> engine's
+        universal-contract workflow —
         the same code behind a {contractsById.size}-component library — right
         in your browser. Load a contract, change it, and watch what happens:
         the React, the HTML, the Figma sync script and the canvas preview all
         move together, and anything the engine can&rsquo;t do it says out loud
-        instead of guessing. <b>Nothing you paste leaves your browser</b>, and
-        there are no accounts.
+        instead of guessing. The canvas preview is HTML, not a native Figma
+        export. Editing a pasted contract is local; connected import and source
+        validation are separate operations.
       </p>
       <p className="landing__pitch">
         <b>Start here:</b> open an example, then break its contract on purpose —
@@ -33,37 +35,12 @@ export function Landing() {
         the whole idea.
       </p>
       <p className="landing__pitch landing__pitch--aside">
-        <b>Not the v1 proof.</b> After the recipe-IR pivot, v1 proof is five
-        live-minted, owner-signed archetypes (Button, Input, Combobox, Table,
-        Calendar) under <code>recipe/</code> — and product v1 is still
-        incomplete (F1). This page still proposes and emits the pre-pivot{" "}
-        <code>*.contract.json</code> envelope. A playground mint or refusal is
-        not recipe-IR evidence.{" "}
-        <a
-          href={`${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          docs/32
-        </a>
-        . Active v1 plan:{" "}
-        <a
-          href={`${REPO_URL}/blob/main/docs/35-two-journey-v1-plan.md`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          docs/35
-        </a>{" "}
-        (not a ship claim). This playground is for <i>understanding</i> that older loop. Building
-        a library into Figma on this path is the CLI plus the companion plugin —{" "}
-        <a
-          href="https://ds-contracts-spec.pages.dev/get-started/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          the three get-started paths
-        </a>{" "}
-        walk that end to end.
+        <b>What to use next:</b>{" "}
+        <Link to="/sources">Source validation</Link> checks a real styled
+        original before conversion. <Link to="/system">The whole loop</Link>{" "}
+        explains the current architecture, transport adapters and remaining
+        code-led, design-led and brownfield work. This engine explorer teaches
+        contract mechanics; it does not prove those complete journeys.
       </p>
 
       {/* The one-line thesis: it may wrap BETWEEN steps at narrow widths but

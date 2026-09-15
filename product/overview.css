@@ -1,0 +1,76 @@
+.product-overview {
+  width: 100%;
+  min-width: 0;
+  max-width: 76rem;
+  box-sizing: border-box;
+  padding: 1.5rem 1.25rem;
+  margin: 0 auto;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.product-overview h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  margin: 1rem 0 1.5rem;
+}
+.product-overview h2 {
+  margin: 2.75rem 0 1rem;
+  font-size: 1.6rem;
+  line-height: 1.25;
+}
+.product-overview h3 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.2rem;
+}
+.product-overview p,
+.product-overview ul,
+.product-overview ol {
+  margin: 1rem 0;
+}
+.product-overview ul,
+.product-overview ol {
+  padding-left: 1.5rem;
+}
+.product-overview li {
+  margin: 0.65rem 0;
+}
+.product-overview table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.94rem;
+}
+.product-overview th,
+.product-overview td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.85rem;
+  border: 1px solid #7d8b9b66;
+  min-width: 10rem;
+}
+.product-overview th {
+  font-weight: 700;
+}
+.product-overview code {
+  font-size: 0.9em;
+}
+.product-overview__diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+}
+.product-overview__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 640px) {
+  .product-overview th,
+  .product-overview td {
+    padding: 0.65rem;
+  }
+}

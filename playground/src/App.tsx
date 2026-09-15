@@ -8,6 +8,7 @@ import { Examples } from "./pages/Examples";
 import { Flow } from "./pages/Flow";
 import { Playground } from "./pages/Playground";
 import { Sources } from "./pages/Sources";
+import { System } from "./pages/System";
 
 export const REPO_URL = "https://github.com/southleft/ds-contracts-poc";
 
@@ -41,6 +42,9 @@ function TopBar() {
         <span className="topbar__brand-name">Contract Playground</span>
       </Link>
       <nav className="topbar__nav">
+        <Link to="/system" className={navClass("/system")}>
+          The whole loop
+        </Link>
         <Link to="/sources" className={navClass("/sources")}>
           Source validation
         </Link>
@@ -84,6 +88,7 @@ function TopBar() {
 
 function Routes() {
   const { pathname } = useRoute();
+  if (pathname === "/system") return <System />;
   if (pathname === "/sources") return <Sources />;
   if (pathname === "/playground") return <Playground />;
   if (pathname === "/examples") return <Examples />;
@@ -93,8 +98,7 @@ function Routes() {
 
 /** One calm strip for the one recoverable infrastructure failure: a lazy
  *  chunk 404ing because the site was redeployed under this tab. */
-/** Persistent: this app still drives the pre-pivot universal-contract
- *  engine. A reader must not take a playground mint as recipe-IR / v1 proof. */
+/** Keep current capabilities distinct from the unfinished product loop. */
 function PivotBanner() {
   const { pathname } = useRoute();
   if (pathname === "/sources")
@@ -102,30 +106,15 @@ function PivotBanner() {
       <div className="pivot-banner" role="note">
         Live source validation is the first step of the new workflow. Figma
         generation and round-trip comparison are not connected here yet.
+        {" "}<Link to="/system">See the whole loop and remaining work.</Link>
       </div>
     );
   return (
     <div className="pivot-banner" role="note">
       <span>
-        This playground runs the <b>pre-pivot universal-contract</b> engine (
-        <code>core/</code>
-        ). It is <b>not</b> the v1 proof surface. Recipe-IR proved five
-        live-minted, owner-signed archetypes; product v1 is incomplete (F1).{" "}
-        <a
-          href={`${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          docs/32
-        </a>
-        {" · "}
-        <a
-          href={`${REPO_URL}/blob/main/recipe/README.md`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          recipe/
-        </a>
+        Current engine, incomplete product integration. The contract demo's canvas
+        preview is HTML, not a live Figma export. Autonomous v1 is not complete.{" "}
+        <Link to="/system">The whole loop and remaining work</Link>
       </span>
     </div>
   );

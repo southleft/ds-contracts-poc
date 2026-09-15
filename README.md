@@ -5,6 +5,25 @@
 
 # Design System Contracts
 
+## Current direction: the complete contract-mediated loop
+
+**Autonomous v1 is not complete.** The active architecture and outcome-first
+work order are [docs/CURRENT.md](docs/CURRENT.md). Start there for what works,
+what is missing, Figma REST/plugin/MCP roles, drift policy and the next milestone.
+That same page is rendered in the playground at `/system` and the documentation
+site at `/system/`; older plans below are historical evidence, not competing goals.
+
+![Contract-mediated conversion and independently verified repair](docs/assets/product-loop.svg)
+
+The target is deterministic **code → contract → editable canvas**,
+**canvas → contract → reusable code**, and policy-authorized repair when both
+already exist. The next work is to connect the existing engines through one
+tested contract boundary and a durable apply-and-reobserve loop—not accumulate
+isolated component mints. The local source-validation route already uses sibling
+Altitude; historical npm captures do not establish parity with its latest code.
+
+## Existing engine and historical measurements
+
 **A design system's source of truth is a contract, not a picture and not a
 component file.** This repo turns a real component into a machine-checked
 contract by *measuring* it — a real Chromium mounts every prop combination and
@@ -22,9 +41,12 @@ Two directions, one contract in the middle:
 
 ---
 
-> **Status — 2026-09-13.** Honest, dated, and gate-derived.
+> **Historical measurement record — 2026-09-13, with subsequent measurement updates.**
+> These scores do not qualify the original source styling or establish autonomous
+> product readiness. In particular, the calendar reference was challenged by
+> the owner; reproducing it is not proof of a useful styled design-system component.
 >
-> - The product is the capture → review → point → paste workflow below
+> - The earlier operator workflow is capture → review → point → paste below
 >   ([docs/36](docs/36-point-it-at-your-library.md)), proven for **all thirteen
 >   archetypes** and on libraries it was never taught.
 > - **Product v1 is NOT complete.** The plugin's paste verb has been exercised
@@ -74,7 +96,8 @@ drawn text in as literal content and silently ignores `children`.
 > library's Chromium render for every supported archetype, plus a named
 > report of what could not be expressed.
 
-That sentence is the v1 criterion. Today it reads like this:
+That sentence was the earlier operator-path criterion, not the current autonomous
+v1 criterion. The preserved workflow reads like this:
 
 ```bash
 # 1. Capture: a real Chromium mounts every prop combination of your real

@@ -51,6 +51,7 @@ export interface NavItem {
 }
 
 const NAV: NavItem[] = [
+  { label: 'The whole loop', href: '/system/', match: '/system' },
   { label: 'Spec', href: '/spec/', match: '/spec' },
   { label: 'How it works', href: '/how-it-works/', match: '/how-it-works' },
   { label: 'What works', href: '/what-works/', match: '/what-works' },
@@ -123,6 +124,7 @@ export function layout(opts: PageOpts, body: string): string {
 <title>${esc(opts.title)}</title>
 <link rel="icon" href="${FAVICON}">
 <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/product-overview.css">
 <script>${THEME_SCRIPT}</script>
 </head>
 <body>
@@ -139,7 +141,7 @@ export function layout(opts: PageOpts, body: string): string {
 </header>
 <div class="layout${opts.sidebar ? ' layout--sidebar' : ''}">
   ${sidebar}
-  <main id="main" class="${opts.mainClass ?? ''}">${body}</main>
+  <main id="main" class="${opts.mainClass ?? ''}">${opts.path === '/system/' ? '' : '<aside class="callout"><strong>Current product direction:</strong> <a href="/system/">the whole loop and outcome-first work order</a>. Existing engine references and historical measurements below are not proof of a complete autonomous v1.</aside>'}${body}</main>
 </div>
 <footer class="footer">
   <div class="footer__inner">

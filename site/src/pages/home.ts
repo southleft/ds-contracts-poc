@@ -45,21 +45,22 @@ export function homePage(
 <div class="hero">
   <p class="eyebrow">An open specification for component contracts</p>
   <h1>The source of truth is neither the design file nor the code.</h1>
-  <p class="lede">A design system's truth should live in a machine-readable <strong>contract</strong> that sits between the surfaces and generates both. This is the working spec for that contract — vendor-neutral, deterministic, and open — with a reference implementation that proves every claim it makes.</p>
+  <p class="lede">A design system's truth should live in a machine-readable <strong>contract</strong> that sits between the surfaces and generates both. The deterministic engine exists; the complete autonomous code-led, design-led and drift-repair workflows are still being built.</p>
   <div class="doors">
-    <a class="door door--primary" href="/get-started/">Get started <span class="door__arrow">→</span></a>
+    <a class="door door--primary" href="/system/">The whole loop <span class="door__arrow">→</span></a>
+    <a class="door" href="/get-started/">Existing CLI workflows</a>
     <a class="door" href="${PLAYGROUND_URL}">Try the Playground <span class="door__arrow">→</span></a>
     <a class="door" href="/spec/">Read the Spec <span class="door__arrow">→</span></a>
   </div>
   <p class="section-note">New here and not sure what this <em>does</em>? <a href="/get-started/">Get started</a> is organised by what you want: a component on the canvas that you want as code (<a href="/get-started/#a">A</a>), components in code that you want in Figma (<a href="/get-started/#b">B</a>), or a mature library on both sides that you want reconciled (<a href="/get-started/#c">C</a>).</p>
-  <p class="section-note"><strong>Current state (2026-08-31).</strong> This site documents the <em>universal-contract</em> spec and Journeys A–C. The <strong>v1 proof surface is recipe-IR</strong> — five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live Scratch mints and owner-signed grades. Product <strong>v1 is incomplete</strong> (F1: whole-corpus / unseen-library). The <a href="${PLAYGROUND_URL}">playground</a> still runs the pre-pivot engine and is not that proof. Active v1 plan: <a href="${REPO_URL}/blob/main/docs/35-two-journey-v1-plan.md">docs/35</a> (not a ship claim). Read <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a> and <a href="${REPO_URL}/blob/main/docs/26-v1-definition.md">docs/26</a> before treating anything on this page as v1-complete.</p>
+  <p class="section-note"><strong>Historical scope (2026-08-31).</strong> This site documents the <em>universal-contract</em> spec and Journeys A–C. The <strong>v1 proof surface is recipe-IR</strong> — five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live Scratch mints and owner-signed grades. Product <strong>v1 is incomplete</strong> (F1: whole-corpus / unseen-library). The <a href="${PLAYGROUND_URL}">playground</a> still runs the pre-pivot engine and is not that proof. Current product plan: <a href="/system/">the whole loop</a> (not a ship claim). Read <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a> and <a href="${REPO_URL}/blob/main/docs/26-v1-definition.md">docs/26</a> before treating anything on this page as v1-complete.</p>
 </div>
 
 <section id="positions">
   <h2>Four positions, held together</h2>
   <p>A growing category of tools speaks this vocabulary; this project holds four positions that, together, none of them do.</p>
   <div class="positions">
-    <div class="position"><h3>Bidirectional</h3><p>The contract generates <em>both</em> the code and the design canvas, and imports from both — round-trips are proven, not promised.</p></div>
+    <div class="position"><h3>Bidirectional</h3><p>Contract readers and emitters exist for both surfaces. Bounded round-trip measurements are not yet proof of complete autonomous library conversion.</p></div>
     <div class="position"><h3>Deterministic</h3><p>Every artifact is computed from file data and byte-pinned; no LLM guesses in the pipeline (AI is available as an assistant, never as an authority).</p></div>
     <div class="position"><h3>Receipted</h3><p>Anything the pipeline cannot carry is named on screen — a gap is reported, never papered over with a plausible value.</p></div>
     <div class="position"><h3>Open</h3><p>The schema, the engine, and every instrument that verifies them are in one repository under one permissive license, with no gated tier — because a spec the community can't fully use isn't a spec.</p></div>

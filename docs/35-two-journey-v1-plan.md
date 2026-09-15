@@ -1,9 +1,9 @@
 # 35 · The two-journey v1 plan — mechanical truth in both directions
 
-> **Status: ACTIVE — adopted 2026-08-31 (owner-approved in session).**
+> **Status: historical plan — adopted 2026-08-31; sequencing superseded 2026-09-15 by [CURRENT.md](CURRENT.md).**
 > This supersedes the *sequencing* of [docs/34](34-boilerplate-v1-plan.md)
 > (the boilerplate corpus itself is minted and under owner review) and
-> governs everything from here to v1. Nothing in this document mints a
+> records the earlier route to v1. Nothing in this document mints a
 > grade or flips `overallSuccess`. Product **v1 remains INCOMPLETE**.
 >
 > **Current status — 2026-09-13.** Both held-out exams are measured; owner
