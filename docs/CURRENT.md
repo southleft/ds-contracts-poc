@@ -1,67 +1,79 @@
 # Code ↔ contracts ↔ canvas
 
-**Active product direction · adopted 2026-09-15 · v1 is not complete.**
+**Public project status · updated 2026-09-15 · v1 is not complete.**
 
-Design System Contracts is being built to couple an organization's design and code through a versioned, machine-readable agreement. Code-led teams should get editable design components; design-led teams should get usable coded components; teams with both should detect and repair drift under an explicit ownership policy. No model decides what a component means or which conflicting change wins.
+The goal is to connect a team's code and design libraries through a shared contract: code becomes editable design components, design becomes reusable code, and supported changes can be repaired in either direction. This includes composed component sets such as data tables, forms and dialogs, with nested components, slots, instance swaps and other properties.
 
-This is the current architecture and outcome-first work order. It supersedes earlier plans for product sequencing and release criteria, not their historical measurements. It is rendered from this same file in the playground and documentation site. It is a plan plus an implementation inventory—not a claim that the entire loop already works.
+This page is the current status and outcome-based work order. It is also rendered in the playground and documentation site at `/system`. Earlier plans and dated measurements do not override it.
 
 ## The whole loop
 
-![Target architecture: code and Figma observations become a validated contract proposal; policy accepts it; deterministic emitters update code and canvas; independent observations verify both before advancing the shared baseline.](assets/product-loop.svg)
+![Intended workflows: code to contract to editable Figma; Figma to contract to reusable code; and changes through comparison, authorized repair and independent verification.](assets/product-loop.svg)
 
-The arrows describe the target integration. Existing readers, emitters and diff functions implement pieces of it. The durable apply-and-reobserve coordinator is unfinished.
+1. **Observe the original.** Record the actual source revision or Figma identity, states, themes, fonts and assets. Confirm that the reference is correctly styled.
+2. **Derive a contract.** Carry supported APIs, anatomy, tokens, variants and composition into a shared representation. Name missing or ambiguous facts.
+3. **Generate the target.** Compile the contract into native editable Figma elements or reusable code through the existing emitters.
+4. **Verify the result independently.** Compare the actual native canvas or running code with the original, including structure, token bindings, content, editability and declared behavior.
+5. **Maintain the agreement.** When either side changes, compare both with the last verified baseline, apply authorized repairs, and verify again. A repeat run must make no changes.
 
-1. **Observe real inputs.** Identify the repository revision or Figma file version, component identity, states, themes, fonts, assets and dependency versions. Validate the original styled render before using it as an answer key. An unloaded stylesheet is invalid evidence, even if its screenshot is reproducible.
-2. **Propose a contract.** Deterministic, versioned adapters extract supported component APIs, slots, anatomy, token bindings, variants and behavioral declarations. Preserve source identity and provenance. Missing or ambiguous semantics are named blockers, not guessed defaults.
-3. **Validate and authorize.** Compare the proposal with the last mutually verified baseline and both fresh observations. A recorded organization policy decides which channels may change autonomously. Conflicting edits, unknown ownership and stale inputs stop affected writes. A policy decision is not an AI judgment or a release grade.
-4. **Compile and apply.** One accepted contract feeds code emitters and a canonical canvas representation. The Figma writer lowers that representation to native editable nodes, properties and variables. Transport merely executes a precomputed, scoped operation with revision preconditions.
-5. **Reobserve and verify.** Independently render the emitted code with Playwright, export the actual Figma nodes, and read both structures back. Check appearance, semantics, editability and supported behavior separately. Only successful verification advances the baseline. A repeat run must make no changes.
+These steps describe the intended product workflow. The full application integration remains unfinished.
 
-## What works today—and what does not
+## Where we are
 
-| Surface | Present implementation | Not yet demonstrated as a complete product outcome |
+**Current milestone: complete the first code-led journey through the application.** Source inspection and bounded candidate preparation are available; native execution, independent verification and admission still need to become one usable flow.
+
+| Area | Demonstrated today | Remaining product gap |
 | --- | --- | --- |
-| Source validation | The local app's `/sources` flow captures styled Altitude stories and checks source provenance, font/style readiness and negative controls. | General library onboarding; complete state/theme coverage; automatic qualification of arbitrary libraries. |
-| API and content intake | Exact CEM declarations, runtime property values, slot assignments/fallbacks and native control states accompany the original/replay evidence in `/sources`. Source mutations and semantic replay differences cause named refusals. | An accepted semantic contract, prop-to-part bindings, event behavior, and equivalence of generated IDs across independent renders. An observed inventory is not approval to generate. |
-| Source candidate preparation | The `/sources` workflow prepares the verified original runtime, then derives a measured visual candidate with recorded source-token references and conditional-wrapper snapshot checks. Versioned attempts preserve previous reports and reopen after validation; failures and interruptions require explicit retry. | An accepted Contract, generated native source components, or verified conversion. Measured values and finite wrapper snapshots do not prove arbitrary dynamic behavior. |
-| Contract playground | The checked-out `core/` engine proposes universal contracts and emits React, HTML and Figma scripts. | Its HTML canvas preview is **not** a live Figma export. Its example tours are not the autonomous product workflow. |
-| Retained source runtime | The existing React emitter can reference a host-verified original custom element, preserving its implementation and typed interface. | Automatic admission of a source-bound Contract, qualified editable canvas channels, distributable host packaging and native-canvas round-trip verification. |
-| Code → canvas | Recipe compilation and the shared Figma writer have live-mint evidence. A new bounded rendered-tree compiler produces explicitly unqualified drafts. | Automatic contract onboarding, semantic properties/token bindings, and verified useful component cohorts through the app without hand-authored role maps or pasted scripts. |
-| Canvas → code | REST/plugin observations can propose contracts; deterministic emitters produce code. Designer-file exams record accounting and named refusals. | An installable, reusable library with usable content slots, variants, accessibility and behavior. Accounting-clean output is not proof of these properties. |
-| Drift and repair | Typed channel diffs, three-way merge rules, observations, a ledger and a proposal planner exist. | Durable policy-authorized apply → reobserve → verify → baseline advancement, including interruption recovery and conflict-safe retry. The sync spine currently plans; it does not apply. |
+| Original source inspection | The local `/sources` workflow records styled originals and checks source identity, font/style readiness, bounded API/content facts and negative controls on a configured library. | General onboarding and qualification across a complete state/theme/component cohort. |
+| Code → editable Figma | Existing compilers and writers have native component evidence. The current source-bound candidate has verified preparation, scoped token planning, component/comparison writing, durable creation journaling and independent structural readback exercised in an API mock. | Connect readback to the journal and application transport, then verify actual native output; source fidelity, editability and a no-change repeat on simple, stateful and composed components. The source candidate is not accepted. |
+| Figma → reusable code | Readers propose contracts; deterministic emitters generate code. Existing designer-file checks account for supported facts and refusals. | Install and use the output as a reusable React library from design-only input, including content, variants, accessibility and declared behavior. |
+| Changes and repair | Channel diffs, three-way merge rules, observations, a ledger and proposal planning exist. | The sync spine currently plans; it does not apply. Durable two-way apply, fresh verification, conflict handling, recovery and rollback need end-to-end proof. |
+| Release readiness | Engine checks and scoped component evidence are available. | The complete journeys and an independent cohort have not qualified v1. |
 
-### Altitude: current source versus historical fixtures
+**No complete journey cohort has yet met the current v1 criteria.** Existing evidence reduces implementation uncertainty, but it is not a percentage of product completion. We do not have an evidence-backed completion date. The milestone exits below show what remains and prevent individual demos from being mistaken for the finish line.
 
-The local source-validation adapter uses sibling `../altitude`, not the older captured npm corpus. On 2026-09-15, local `feature/v2` and fetched `origin/feature/v2` both resolved to `0639eccd15bfedc4fa9713d9545a64cef2c0f0a5`. This is an observation, not a permanent “latest” guarantee. Each new run must record and recheck the actual source identity, including relevant working-tree changes, build outputs and dependencies. Do not overwrite owner changes to update the source.
+### Why integration is taking time
 
-Historical Altitude captures remain valid only for their recorded versions. A new source revision invalidates a claim of current-source parity; it does not silently refresh those old receipts.
+The repository has accumulated readers, emitters and component-specific proofs with different boundaries. Completing the product requires them to share component identity, token meaning, content APIs and reliable execution state. Visual similarity alone cannot establish those properties.
 
-## Which Figma connection does what?
+The current source also carries behavior that cannot be inferred from its appearance. A faithful conversion must retain a verified runtime or use an explicitly supported behavioral adapter. That makes integration and verification substantial work even when an isolated component already renders correctly.
 
-| Connection | Role in this repository | Product boundary |
-| --- | --- | --- |
-| Figma REST API | File/node observations, imports and drift inputs. | Not the repository's arbitrary canvas-node renderer. A failed or stale read means unknown state, not “in sync.” |
-| Companion Figma plugin | A real execution host for the bundled contract engine and native Plugin API operations; also supports observations. | Keep a thin adapter. Its manual paste workflow is a legacy operator path, not the desired user journey. |
-| Figma Console MCP / Desktop Bridge | Engineering automation for running writer scripts in the connected file and obtaining native screenshots/readback. | Live engineering access does not mean the application has this connection. It must execute the same deterministic plan, never synthesize a separate design. |
-| Figma native MCP | Figma's official MCP includes a write-to-canvas tool. It is available as another possible execution adapter. | It is not currently the application's integrated conversion engine. Switching MCP servers does not close semantic or orchestration gaps. |
-| Repository CLI | Runs capture, proposal, compilation, checks and sync planning. | An invocation surface over engine functions—not a second source of truth. |
+The next progress report should show an improvement in the user journey, its evidence and its remaining blockers. More internal checks alone do not close a milestone.
 
-Figma's [Plugin API](https://developers.figma.com/docs/plugins/) provides native editor operations. Its [REST file endpoints](https://developers.figma.com/docs/rest-api/file-endpoints/) expose file observations. The official MCP's [write-to-canvas capability](https://developers.figma.com/docs/figma-mcp-server/write-to-canvas/) can also operate on the canvas. These capabilities do not themselves define our conversion semantics.
+## Plan and measures of success
 
-There are also **two different bridges** in the code/history: the playground's worker-based pairing/dump relay and Console MCP's Desktop Bridge. They are not interchangeable connections, and the old pairing relay must not be presented as a working application write channel without a live test.
+| Order | Milestone | Exit evidence | Status |
+| --- | --- | --- | --- |
+| 1 | Trust the original inputs | Pinned source/dependencies, correctly loaded styles/fonts/assets, stable originals and deliberately broken input rejected. | Bounded source flow demonstrated; cohort coverage remains open. |
+| 2 | Complete code → Figma through the app | Simple, stateful and composed components; editable native output; original/native screenshots and structural/token/property checks; no manual role maps or pasted scripts; repeat makes no changes. | **Active integration milestone.** |
+| 3 | Complete Figma → reusable React | Design-only input; clean consumer installs the generated library; content APIs, variants, tokens, accessibility and declared behavior work; independent browser comparison. | Engines exist; full journey unqualified. |
+| 4 | Repair an existing pair safely | Real edits on either side; authorized changes applied; conflicting/stale edits handled; interruption/retry/rollback demonstrated; fresh verification; repeat makes no changes. | Foundations exist; full repair loop unqualified. |
+| 5 | Qualify release readiness | Repeat the same journeys on an independently selected supported cohort, without component-specific operator intervention; reproducible evidence and explicit unsupported cases. | Not yet reached. |
 
-For current engineering work, Scratch is the only writable Figma file. Altitude and CBDS are reference-only. Preserve Scratch history and signed lineages. Production permissions must likewise be explicit, per file and operation.
+For every milestone, report:
 
-## One contract authority, not competing conversion paths
+- **Outcome:** what a user can now complete, through which interface.
+- **Coverage:** selected components, states, themes and composition features, including failures and refusals.
+- **Fidelity and usability:** original and target renders plus independent semantic, structural and editability checks.
+- **Manual intervention:** setup, mappings, scripts or repairs still required.
+- **Reliability:** changed inputs, missing prerequisites, conflicts, interruption and repeat behavior.
 
-The universal contract envelope, recipe instances and canonical Figma IR are distinct artifacts today. The rendered-tree draft is a diagnostic bridge, not a substitute contract. Their integration is an open architectural deliverable.
+Do not tune source styling or comparison thresholds to make a candidate pass. Native Figma evidence must come from actual native nodes, not an HTML imitation. Preserve existing signed evidence and leave release approval to the owners.
 
-The target is one versioned semantic contract boundary with explicit lowering into target capabilities. Do not force every concern into a pixel tree, or create another independent component generator. Reuse and reconcile the existing engine and recipe writer through tested adapters. A rendering IR is a projection of the accepted contract, not an independent authority.
+## Architecture and boundaries
 
-Contracts must account for identity, token references and modes, editable content/slots, legal states and variants, layout constraints, code API and declared behavior. The exact schema extension must be proved with real fixtures before wiring it into the app. Preserve original source provenance separately from normalized meaning.
+The contract records supported semantics: identity, properties, anatomy, token references and modes, layout, content/slots, component references and declared behavior. Rendering representations are projections of that contract. They do not become competing sources of truth.
 
-Round-trip equivalence means preservation of the **declared supported semantics**, not byte-for-byte recreation of arbitrary JSX or reconstruction of business logic from a picture. Unknown interactions or missing component semantics must be supplied by explicit source metadata or a versioned, tested adapter—or refused. Lowering a token binding into an unexplained literal is not successful semantic preservation, even when pixels match.
+Code-led contracts may retain an immutable reference to a host-verified original runtime. Only qualified editable channels may alter that runtime; preservation does not make every design edit effective. Design-only observations cannot supply undeclared business logic or authorize executable dependencies.
+
+| Connection | Responsibility |
+| --- | --- |
+| Figma REST | Read file/node observations for imports and drift checks. |
+| Companion Figma plugin | Execute the shared engine's native operations and return observations. Application write transport is still being integrated. |
+| Figma MCP / Desktop Bridge | Engineering access for native execution and screenshots. A successful engineering probe does not prove the application journey. |
+| CLI and local application service | Invoke the same deterministic readers, compilers and verification logic; retain operation state. |
+
+The local source workflow currently uses a configured sibling library. Each run must check the actual source and dependency identities; old captures do not establish current-source parity. Engineering writes are limited to Scratch. Altitude and CBDS remain read-only references.
 
 ### Implementation map
 
@@ -83,219 +95,25 @@ Round-trip equivalence means preservation of the **declared supported semantics*
 
 ## How drift must be detected and repaired
 
-Drift is a difference between a fresh code observation, a fresh canvas observation and the last mutually verified contract baseline. It is not just a screenshot difference, a node timestamp or an installed fingerprint stamp.
+Compare fresh code and canvas observations with the last mutually verified baseline.
 
-- **Neither side changed:** verify freshness and report no-op; do not rewrite either surface.
-- **One side changed:** propose its supported changes; apply only if the recorded policy grants authority for those channels.
-- **Both changed independently:** deterministically compose only compatible changes. Same-channel collisions need an explicit existing policy or a named unresolved conflict, never a model-selected winner.
-- **Input changed during the run:** reject stale preconditions, reobserve and replan. Do not overwrite a newer edit.
-- **Apply failed or was interrupted:** retain an operation journal and original target identity. Resume idempotently or roll back only owned changes under checked preconditions. Do not advance the baseline on partial success.
-- **Source, font, asset or bridge unavailable:** report the missing prerequisite. Do not compare against a fallback render or classify unavailable evidence as clean.
+- **Neither changed:** report a verified no-op.
+- **One changed:** propose its supported changes and apply only under recorded authority.
+- **Both changed:** combine compatible edits; report unresolved same-channel conflicts.
+- **Inputs became stale:** reobserve and replan before writing.
+- **Execution failed or was interrupted:** preserve operation and target identities; recover or roll back owned changes under checked preconditions. Do not advance the baseline on partial success.
+- **Evidence is unavailable:** report the missing source, font, asset or connection. Unknown state is not synchronized state.
 
-The existing merge and ledger functions are foundations for this behavior. They do not yet prove the full repair loop.
+These are required product behaviors. The full loop remains unqualified.
 
-## Outcome-first work order
+## Keeping the public status current
 
-The next integration milestone is a **shared contract-boundary conformance slice**, not another isolated component mint. It belongs inside the code-led journey below: take a validated original through a contract, existing emitters, actual Figma readback and independent comparison; inject a broken source and a semantic mismatch to prove rejection. Keep the orchestration interface reusable by the other journeys.
+Every pull request should state the user-visible outcome, validation, remaining limits and next milestone step. Update this page when usability, coverage or milestone status changes; say explicitly when a change improves internal machinery only. A merge does not imply deployment or a published package.
 
-The existing React emitters now have mounted-browser conformance checks for omitted scalar values, native boolean attributes and optional boolean styling (`npm run react:conformance:check`). An omitted enum is distinct from a declared option literally named `"undefined"`; absent values must not invent defaults or select that option. The Figma emitter and reader have a separate bounded conformance suite (`npm run figma:unset:check`): an explicit `bindings.figma.unsetValue` draws the omitted base without adding a public code option or default. Readback must corroborate its metadata against actual properties and rows; unsafe API aliases and unsupported projections refuse. Removing that plane in place also refuses, preserving retained canvas history.
+Keep the README focused on the product and present usability. Keep detailed experiment logs, handoffs and superseded working narratives in the gitignored `private/` archive. Reproducible fixtures, CI inputs, public technical references and signed evidence remain with their checks; housekeeping must not break reproducibility or rewrite grades.
 
-These are engine checks, not proof of Altitude conversion or Figma fidelity. Mock execution is not native Figma evidence. Source slot/event semantics, automatic contract intake and the application journey remain unfinished. HTML/Web Component targets are not qualified by the React-only checks.
-
-The local **Source validation** screen now derives a component-admission work order from recorded originals, replay images, trees and exact declarations. It names missing enum states (including omission), unproven content/attribute bindings and unsupported behavior. Matching visible text and an accessible-label prop does not prove they are the same API channel. No contract is accepted by this planner.
-
-**Trace the actual source** adds hash-checked local source and Lit-template syntax to that work order. It shows authored root branches, slots, attribute/property/event channels, and class members in the local import graph. It does not execute source code or claim that imported directive names authenticate their runtime implementations. Changed source files refuse the new inventory without deleting historical measurements. Local stylesheet dependencies, inherited behavior, source-to-render identity and target preservation remain explicit boundaries.
-
-**Trace rendered bindings** is now a separate action in that same screen. It joins exact source syntax to fresh, network-isolated replays of the recorded Button DOM, slots and captured geometry. The four baseline states and any three-state supplement remain in the denominator, including invalid originals. Three finite experiments on the default Button change its accessible label, visible slot text, and ARIA-disabled property independently. The app shows actual before/after browser images and separately reports structural matches and observed dependencies. Saved counts are re-derived from source, topology, semantic records and image bytes; interrupted or altered evidence cannot become a completed pass. These are source-binding checks, not Figma fidelity, full behavior qualification or permission to accept a contract. Opaque helper behavior remains unproven.
-
-This distinction matters for the actual Altitude Button: its accessible label and visible slot are separate channels; its `isDisabled` sets ARIA state, not native disabling; its link and button branches attach different attributes and listeners. The current schema cannot carry all of its conditional rendering, lifecycle and form-controller behavior. A faithful code-led implementation must preserve a verified runtime dependency or add tested declarative carriers shared by the existing emitters. It cannot substitute a similar-looking button and call it equivalent. Design-only input likewise cannot reveal undeclared event or form behavior. The Figma compiler now explicitly refuses nonboolean truthy visibility conditions instead of silently drawing those parts unconditionally; the existing boolean and enum-equality projections remain supported.
-
-The first retained-runtime lowering now extends the **existing React emitter**,
-not a second component generator. A Contract may carry three immutable runtime,
-interface and projection identities. A trusted local preparer builds the pinned
-Altitude source with its recorded dependencies; canvas data supplies no executable
-paths. The React adapter keeps original typed properties, lifecycle, shadow DOM,
-slots and refs. Targeted tests cover original-property timing and value removal,
-and require actual token values as well as Contract hashes. Native reconstruction
-targets refuse this reference until qualified; arbitrary design changes cannot
-silently leave code unchanged. Source stories, host packaging, editable canvas
-lowering and the application-to-Figma journey are still unfinished. This is a
-bounded engine step, not a converted cohort or a release-readiness claim.
-
-A version-2 **projection binding** now qualifies one bounded editable channel:
-the root's `padding-block` and `padding-inline` pair can reach the original
-runtime's authenticated CSS custom property through the existing React emitter.
-The host pins the source-input cases, observed numeric pairs, mode and brand;
-all other Contract fields and the entire token tree remain checked. Missing
-pairs, unmeasured values, conflicting caller overrides and unrelated edits
-refuse. Reset is an explicit pair, not deletion. Literal values and selection
-of existing dimension tokens share this lowering. This does not qualify
-arbitrary source props, caller styles, slot content, or native Figma output;
-the application still has no accepted source-bound Contract. The current
-Altitude evidence is dark-themed, not a light-mode default.
-
-The Figma compiler now accepts an explicit host-selected mode and brand for
-compile-time token values, including numeric typography. This does not yet
-select or verify native variable modes. Source-candidate derivation keeps the
-actual defaultless variant, original typed API and source-identified slots;
-accessible labels do not become visible sample text. Its evidence selector
-rechecks the latest attempt and refuses stale or failed evidence instead of
-falling back to an older success. These are inputs to candidate assembly, not
-an accepted or emitted source component.
-
-**Prepare source candidate** now runs inside `/sources`, using that verified
-binding trace and its exact baseline and supplement. A fixed local worker
-prepares the pinned original runtime privately and derives the source semantic
-inventory. Reopening an attempt revalidates its source, dependencies, artifact,
-report and derived counts; it does not rebuild or recapture evidence. Failed,
-interrupted or changed evidence cannot silently reuse an older success. An
-explicit retry creates a new attempt and preserves the previous history.
-Public job snapshots omit private source and module paths, and preparation
-changes neither the source library nor Figma. The result is **source/runtime
-prepared**, not a visual Contract, native canvas output or conversion acceptance.
-Matched source spans remain structural evidence, not proof of every dynamic
-binding or behavior.
-
-An internal assembly stage now derives a **measured visual candidate** from
-those original observations. Exact source identities preserve wrappers and
-terminal slots; assigned content stays in separate comparison-sample records.
-The existing layout and token fusion carries observed styling without guessing
-public props or sample defaults. Every appearance must be observed before a
-styled candidate is returned. The next version projects exact recorded source
-token names into specific root token references, preserving different names even
-when their current values match. Other references remain provisional. In
-`/sources`, choose **Derive measured
-visual candidate** after preparing the source. This separate attempt reuses the
-saved runtime and original observations without rebuilding or recapturing them.
-The application shows the case coverage, excluded style channels and exact
-recorded source-token correspondences alongside named limitations. A bounded
-source AST reducer derives conditional-wrapper predicates without executing the
-source. It checks light-DOM descendants separately from slot assignment, joins
-the selected branch, and compares each predicate result with observed wrapper
-presence. Those finite snapshots retain original-dispatch and stable-query
-assumptions; they do not qualify arbitrary composition or lifecycle behavior.
-It retains the preparation and older visual reports unchanged and validates
-the complete derived report on reopen. A repeated successful derivation reuses
-the same supported-version attempt; an explicit version upgrade creates a new one.
-A failed or changed latest preparation cannot fall back to an older success;
-retry creates a separate attempt. Both native and React emission remain blocked
-by the candidate's unqualified runtime binding.
-
-A native Scratch probe also confirmed that empty Figma slots do not reproduce
-Altitude's absent conditional wrappers: even zero-sized slots retain layout
-gaps. That behavior must be represented and verified explicitly. Empty main
-slots and populated comparison instances are different evidence; inserting
-sample text into a main component would hide this gap, not solve it. A separate
-two-variant native fixture confirmed that hiding the whole wrapper removes its
-spacing and that slot content survives visibility changes and a variant switch.
-The full slot property identity survived; child node IDs changed. This is a
-native capability check with empty main slots, not a source-component fidelity
-result. Automatic reevaluation remains unfinished.
-
-The existing compiler now has a separate **inspection-only source context**.
-The host rederives the pinned visual report, verifies the original runtime
-interface, and preserves the unqualified version-zero binding. It pairs actual
-anatomy parts with compiled nodes, carries whole-wrapper empty-main visibility,
-and retains every observed or refused case. Normal runtime emission still
-refuses. A separate host-only entry point now recompiles that Contract and
-emits empty native mains through the shared renderer. It requires independently
-observed token identities, checks their live values and mode before allocation,
-and creates a fresh operation-owned page. Raw or changed compiled objects
-cannot bypass Contract validation through the batch writer. A separate sample
-adapter uses the same compiler for observed text and SVG content, preserving
-content as comparison data rather than main defaults. A deterministic private
-plan joins that compilation, comparison content and scoped token preparation.
-The host selects and revalidates the newest visual attempt across versions;
-an older success cannot replace a newer failed or incompatible attempt.
-
-The existing token writer can now create a new operation-owned collection with
-only the demonstrated source mode. It refuses name or ownership collisions,
-retains allocated IDs on failure, and supplies a separate read-only script for
-independent verification of collection, variable, mode, alias and value
-identities. It does not adopt or prune existing collections. Carrying a token
-as a variable does not prove that every corresponding source channel has an
-editable native binding. These remain internal preparation and verification
-boundaries; the application apply action and native source-fidelity result
-are still unfinished.
-
-The local service now reserves one durable native operation for a source
-baseline. Its preparation endpoint selects the verified source evidence and
-fixed Scratch target; request bodies cannot supply scripts, file keys or native
-identities. Repeat preparation and reload reuse the saved operation. Execution
-attempts are journaled before delivery, and native acknowledgements retain
-allocation IDs before a separate readback can observe tokens. A lost creation
-response remains outcome-unknown. Explicit retry is limited to a reported
-zero-allocation refusal; read-only observations can be retried separately.
-Changed source or writer versions cannot discard a delayed acknowledgement.
-These journal transitions are covered through the shared writer's API mock;
-the real app has exercised preparation only. Dispatch transport, component
-apply, partial-allocation repair and rollback still need integration and live
-verification. A missing or damaged journal refuses replacement rather than
-creating another native scope.
-
-The component writer preserves source-part metadata, full slot property keys
-and empty-main wrapper visibility. It sets the explicit variable mode before
-styling and retains returned node IDs before later API calls can fail. It also
-uses the shared renderer for separate comparison instances, including observed
-text/SVG samples and recorded wrapper visibility. Font and sample API checks run
-before allocation. A private journal accessor supplies token identities only
-after independent observation and fresh source validation. Component commands
-have a separate durable creation claim, so deleting their later events cannot
-rewind the operation into another creation attempt.
-
-The saved five-variant Button plan has exercised the production preparers,
-journal and shared writer against a temporary journal copy and native API mock:
-all fifteen main slots stayed empty, six comparison instances were filled, and
-the refused case remained in the denominator. This is implementation coverage,
-not a live native conversion. A creation acknowledgement does not verify native
-fidelity. Transport, independent component readback, component retry and repair
-remain unfinished.
-
-`npm run runtime:check` checks the strict reference schema, verified artifact
-inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
-identity claims: preservation requires a matching canonical base and trusted
-journal, and does not prove that the canvas matches either. The source app now
-produces a verified runtime and derived inventory alongside its admission work
-order, not an accepted Contract. Its visual derivation now exposes the source-bound
-candidate; the next boundary is pinning native variable identities and modes,
-lowering the qualified source structure and comparison samples through the
-existing writer, then verifying the actual native canvas through the app.
-Editable-channel qualification remains separate from
-retaining the original runtime; neither a matching hash nor an available MCP
-connection completes that application journey.
-
-After the original Altitude cohort finishes, **Capture missing Button states** observes its original tertiary, bare and danger stories in a separate source-bound run. The baseline and its failures are preserved, not remeasured or replaced. Completed evidence can be reopened after restart; changed parent records, image bytes or source-file hashes invalidate supplemental use. A failed supplemental attempt can be explicitly retried into a new directory. This is targeted evidence acquisition, not a Figma mint or completion of the code-led journey. `npm run source:reference:check` covers the admission and supplemental-service boundaries with real recorded inputs and negative controls.
-
-| Order | User-visible outcome | Required evidence before moving on |
-| --- | --- | --- |
-| 1 · Valid originals | A user selects a real library and sees exactly which styled source/state/theme is being used. | Pinned source and dependencies; loaded fonts/assets/styles; stable original renders; deliberately broken CSS/font/source cases rejected. |
-| 2 · Code-led journey | From that source, the app creates useful editable Figma components without manual role maps, scripts or receipt assembly. | A simple, a stateful and a composed component; original and native Figma screenshots plus structural/token/property checks; repeat generation is a no-op. |
-| 3 · Design-led journey | A user with only a design library gets installable, reusable React components. | Read-only original observations; editable content/variants/tokens; independent browser renders, accessibility and declared behavior checks; no initial code repository required. |
-| 4 · Brownfield repair | A team with both libraries sees drift and authorized repairs execute in both directions. | Real mutations on each side; compatible and conflicting edits; policy enforcement; fresh post-apply checks; retry/interruption/rollback; second run is a no-op. |
-| 5 · Release qualification | Another supported cohort completes the same journeys without component-specific operator intervention. | All claims re-derived on one candidate commit, documented unsupported cases, reproducible evidence and owner-only grade/signature left to the owner. |
-
-Automation should eliminate routine translation labor, not erase missing requirements. Onboarding establishes scope, identity and authority once; subsequent supported changes follow that policy without repeated human adjudication. An unresolved conflict is a safe product result, not permission to guess.
-
-### Evidence that counts
-
-Show the original render, actual target render, exact node/component identity, structured comparison and named limits together. Do not use an HTML imitation of Figma as canvas evidence. Do not tune alignment, thresholds or source styling to make a failing candidate pass. A pixel score and a deterministic fixed point are useful checks, but neither independently proves product usefulness.
-
-The previously measured calendar is historical evidence of conversion against its captured reference, **not qualification of the reference as a styled design-system component**. Preserve its receipts; do not spend another cycle improving that answer key as the next product milestone. Owner grades and signatures remain untouched.
-
-## Start here when resuming development
-
-1. Read this page, [repository instructions](../AGENTS.md) and [contribution gates](../CONTRIBUTING.md). Verify the working directory, live git/PR state and source revisions before acting.
-2. Treat numbered architecture docs, handoffs and receipt narratives as scoped historical evidence unless this page explicitly delegates authority to them. Preserve them; do not bulk-delete history to simplify onboarding.
-3. Keep this page current when the architecture or accepted work order changes. Both application and site consume it directly; the README links here. Update claims and tests with each completed outcome, not merely with the number of passing internal checks.
-4. Report which user outcome actually improved, what was tested, what remains incomplete and the next bounded experiment. Stop repeating an experiment after two attempts without new evidence and diagnose the boundary instead.
-
-This page changes neither signed evidence nor release authorization. No v1 tag, publication, deployment, owner grade or signoff is implied by this plan.
+When resuming work, read this page, [AGENTS.md](../AGENTS.md) and [CONTRIBUTING.md](../CONTRIBUTING.md), then verify the current worktree, source and PR state. After two attempts without new evidence, diagnose and replan.
 
 ### Checking these pages
 
-`npm run test:playground` includes the canonical-document integration tests;
-`npm run docs:check` validates the repository's gated numeric claims and links.
-Build the site with `npm run site:build`. With the local playground on port 5181
-and the built site served on port 5182, `npm run test:product-overview:browser`
-checks desktop/mobile rendering, navigation and exact schematic bytes. These
-checks validate the documentation surfaces, not the conversion journeys above.
+`npm run docs:check` validates public claims and links. `npm run test:playground` includes canonical-document integration checks. `npm run site:build` builds the documentation site. The desktop/mobile documentation smoke test is `npm run test:product-overview:browser` with local servers on ports 5181 and 5182. These checks validate documentation surfaces, not conversion readiness.

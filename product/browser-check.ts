@@ -77,7 +77,7 @@ try {
         width,
         `${name}: document overflows at ${width}px`,
       );
-      assert.equal(observation.imageWidth, 1040);
+      assert.equal(observation.imageWidth, 1080);
       const imageUrl = await page
         .locator(".product-overview__diagram")
         .evaluate((image: HTMLImageElement) => image.currentSrc);
@@ -91,15 +91,13 @@ try {
         readFileSync("docs/assets/product-loop.svg"),
         `${name}: stale schematic bytes`,
       );
-      assert.ok(
-        observation.sections.includes("Which Figma connection does what?"),
-      );
+      assert.ok(observation.sections.includes("Architecture and boundaries"));
       assert.ok(
         observation.sections.includes(
           "How drift must be detected and repaired",
         ),
       );
-      assert.ok(observation.sections.includes("Outcome-first work order"));
+      assert.ok(observation.sections.includes("Plan and measures of success"));
       await page.screenshot({ path: resolve(output, `${name}-${width}.png`) });
       if (width === 1440)
         await page
