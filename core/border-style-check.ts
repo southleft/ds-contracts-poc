@@ -108,6 +108,12 @@ const probe = (o: {
       : undefined;
   return {
     $schema: '', id: 'ds.probe', name: 'Probe', version: '0.1.0',
+    // Complete identity bindings keep this CSS probe on the ordinary contract
+    // path; retained-runtime admission must not be bypassed for test fixtures.
+    bindings: {
+      code: { anchors: { importPath: 'probe', export: 'Probe' } },
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+    },
     semantics: { element: 'button', role: 'button' },
     props: values.size
       ? [{
