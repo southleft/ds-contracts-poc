@@ -1,11 +1,18 @@
 import { walkAnatomy, type Contract } from "../scripts/contract-schema.js";
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
+import { aliasTarget, flattenTokens, makeResolveLiteral } from "./tokens.js";
 
-import type { RuntimeEmissionContext } from "../packages/core/src/runtime-emission.js";
+import type {
+  RuntimeEmissionContext,
+  RuntimePaddingMapping,
+  RuntimeArtifactForEmission,
+} from "../packages/core/src/runtime-emission.js";
 export type {
   RuntimeArtifactForEmission,
   RuntimeProjectionBinding,
   RuntimeEmissionContext,
+  RuntimePaddingMapping,
+  RuntimeScopeValue,
 } from "../packages/core/src/runtime-emission.js";
 const revision = /^sha256:[a-f0-9]{64}$/;
 const identifier = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
@@ -75,13 +82,266 @@ function propertyTypeMatches(
   );
 }
 
-/** Code/Figma location stamps and provenance are not rendering semantics. */
-export function runtimeProjectionRevision(contract: Contract): string {
+const pairKeys = ["padding-block", "padding-inline"] as const;
+const plain = (value: unknown): value is Record<string, unknown> =>
+  !!value &&
+  typeof value === "object" &&
+  !Array.isArray(value) &&
+  (Object.getPrototypeOf(value) === Object.prototype ||
+    Object.getPrototypeOf(value) === null);
+const exactKeys = (
+  value: unknown,
+  keys: string[],
+): value is Record<string, unknown> =>
+  plain(value) &&
+  canonicalJson(Object.keys(value).sort()) === canonicalJson([...keys].sort());
+
+function validatePaddingMapping(mapping: RuntimePaddingMapping): void {
+  if (
+    !exactKeys(mapping, [
+      "kind",
+      "partPath",
+      "storage",
+      "customProperty",
+      "evidenceRevision",
+      "scope",
+    ]) ||
+    mapping.kind !== "host-padding-pair-v1" ||
+    canonicalJson(mapping.partPath) !== '["root"]' ||
+    !["literals", "tokens"].includes(mapping.storage) ||
+    typeof mapping.customProperty !== "string" ||
+    !/^--[a-z][a-z0-9-]*$/.test(mapping.customProperty) ||
+    !revision.test(mapping.evidenceRevision) ||
+    !exactKeys(mapping.scope, ["mode", "brand", "cases", "paddingPairs"]) ||
+    !["light", "dark"].includes(mapping.scope.mode) ||
+    mapping.scope.brand !== "default" ||
+    !Array.isArray(mapping.scope.cases) ||
+    !mapping.scope.cases.length ||
+    mapping.scope.cases.length > 128
+  )
+    refuse("PADDING-MAPPING-INVALID");
+  const pairs = mapping.scope.paddingPairs;
+  if (
+    !Array.isArray(pairs) ||
+    !pairs.length ||
+    pairs.length > 128 ||
+    pairs.some(
+      (pair) =>
+        !exactKeys(pair, ["blockPx", "inlinePx"]) ||
+        [pair.blockPx, pair.inlinePx].some(
+          (value) =>
+            typeof value !== "number" || !Number.isFinite(value) || value < 0,
+        ),
+    ) ||
+    new Set(pairs.map((pair) => canonicalJson(pair))).size !== pairs.length
+  )
+    refuse("PADDING-MAPPING-INVALID");
+  const cases = mapping.scope.cases;
+  if (new Set(cases.map((row) => canonicalJson(row))).size !== cases.length)
+    refuse("PADDING-SCOPE-INVALID");
+  for (const row of cases) {
+    if (!plain(row) || !Object.keys(row).length)
+      refuse("PADDING-SCOPE-INVALID");
+    for (const [name, value] of Object.entries(row)) {
+      if (
+        !safeName(name) ||
+        !plain(value) ||
+        !(
+          (value.kind === "omitted" && exactKeys(value, ["kind"])) ||
+          (value.kind === "value" &&
+            exactKeys(value, ["kind", "value"]) &&
+            (["string", "boolean"].includes(typeof value.value) ||
+              (typeof value.value === "number" &&
+                Number.isFinite(value.value))))
+        )
+      )
+        refuse("PADDING-SCOPE-INVALID");
+    }
+  }
+}
+
+function containsPadding(value: unknown): boolean {
+  if (!value || typeof value !== "object") return false;
+  return Object.entries(value).some(
+    ([key, item]) => /^padding(?:-|[A-Z]|$)/.test(key) || containsPadding(item),
+  );
+}
+
+/** Pair presence and channel identity are never redacted. In particular,
+ * deletion cannot mean reset: native runtime fallback and zero canvas padding
+ * are different. Reset is another explicit pair. */
+function paddingPair(
+  contract: Contract,
+  mapping: RuntimePaddingMapping,
+): [string, string] {
+  validatePaddingMapping(mapping);
+  const root = contract.anatomy.root;
+  if (!root) refuse("PADDING-PART-MISSING");
+  const carrier = root[mapping.storage];
+  if (
+    !carrier ||
+    pairKeys.some(
+      (key) => !Object.hasOwn(carrier, key) || typeof carrier[key] !== "string",
+    )
+  )
+    refuse("PADDING-PAIR-MISSING");
+  for (const [channel, value] of Object.entries(root)) {
+    if (channel === "parts") continue;
+    if (channel === mapping.storage) {
+      if (
+        Object.keys(carrier).some(
+          (key) =>
+            /^padding(?:-|[A-Z]|$)/.test(key) &&
+            !pairKeys.includes(key as (typeof pairKeys)[number]),
+        )
+      )
+        refuse("PADDING-COMPETING-CARRIER");
+    } else if (
+      containsPadding(value) ||
+      (channel === "attrs" &&
+        plain(value) &&
+        typeof value.style === "string" &&
+        /padding\s*(?:-|:)/i.test(value.style))
+    )
+      refuse("PADDING-COMPETING-CARRIER");
+  }
+  const pair = pairKeys.map((key) => carrier[key]) as [string, string];
+  if (mapping.storage === "literals") pair.forEach(paddingPx);
+  else if (
+    pair.some(
+      (value) => !/^\{[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)*\}$/.test(value),
+    )
+  )
+    refuse("PADDING-TOKEN-REF-INVALID");
+  return pair;
+}
+
+function paddingPx(value: unknown): number {
+  if (typeof value !== "string" || !/^(?:\d+(?:\.\d+)?|\.\d+)px$/.test(value))
+    refuse("PADDING-DIMENSION-UNSUPPORTED");
+  const number = Number(value.slice(0, -2));
+  if (!Number.isFinite(number) || number < 0)
+    refuse("PADDING-DIMENSION-UNSUPPORTED");
+  return number;
+}
+
+function scopedValueMatches(
+  value: string | number | boolean,
+  typeText: string,
+): boolean {
+  return typeText
+    .split("|")
+    .map((piece) => piece.trim())
+    .some(
+      (piece) =>
+        piece === typeof value ||
+        (piece === String(value) && typeof value !== "string") ||
+        (typeof value === "string" &&
+          /^(?:"[^"\\]*"|'[^'\\]*')$/.test(piece) &&
+          piece.slice(1, -1) === value),
+    );
+}
+
+function resolvePadding(
+  contract: Contract,
+  mapping: RuntimePaddingMapping,
+  context: RuntimeEmissionContext,
+  artifact: RuntimeArtifactForEmission,
+) {
+  const pair = paddingPair(contract, mapping);
+  if (
+    context.mode !== mapping.scope.mode ||
+    context.brand !== mapping.scope.brand ||
+    (contract.modes !== undefined &&
+      canonicalJson(contract.modes) !== canonicalJson([mapping.scope.mode]))
+  )
+    refuse("PADDING-CONTEXT-UNQUALIFIED");
+  const names = artifact.interface.writableProperties;
+  for (const row of mapping.scope.cases) {
+    if (
+      canonicalJson(Object.keys(row).sort()) !==
+      canonicalJson([...names].sort())
+    )
+      refuse("PADDING-SCOPE-INCOMPLETE");
+    for (const [name, value] of Object.entries(row))
+      if (
+        value.kind === "value" &&
+        !scopedValueMatches(
+          value.value,
+          artifact.interface.properties.find(
+            (prop) => prop.name === name && prop.writable,
+          )!.typeText,
+        )
+      )
+        refuse("PADDING-SCOPE-TYPE-MISMATCH");
+  }
+  // These names are introduced only by the opt-in lowering; v1 byte/admission
+  // behavior remains untouched. A source `style` property is not host CSS.
+  if (["Object", "Array"].includes(contract.name) || names.includes("style"))
+    refuse("PADDING-STYLE-API-COLLISION");
+  let values: unknown[] = pair;
+  if (mapping.storage === "tokens") {
+    const trees = context.tokens;
+    if (
+      !plain(trees) ||
+      !plain(trees.primitives) ||
+      !plain(trees.semantic) ||
+      !plain(trees[mapping.scope.mode]) ||
+      !plain(trees.brands) ||
+      !plain(trees.brands.default)
+    )
+      refuse("PADDING-TOKEN-TREE-INVALID");
+    const all = new Map([
+      ...flattenTokens(trees.primitives),
+      ...flattenTokens(trees.brands.default),
+      ...flattenTokens(trees.semantic),
+      ...flattenTokens(trees[mapping.scope.mode] as Record<string, unknown>),
+    ]);
+    const resolve = makeResolveLiteral(all);
+    values = pair.map((value) => {
+      const name = aliasTarget(value)!;
+      let target: string | null = name;
+      const seen = new Set<string>();
+      while (target) {
+        const entry = all.get(target);
+        if (
+          !entry ||
+          entry.type !== "dimension" ||
+          seen.has(target) ||
+          seen.size >= 10
+        )
+          refuse("PADDING-TOKEN-UNRESOLVED");
+        seen.add(target);
+        target = aliasTarget(entry.value);
+      }
+      return resolve(name);
+    });
+  }
+  const [blockPx, inlinePx] = values.map(paddingPx);
+  if (
+    !mapping.scope.paddingPairs.some(
+      (pair) => pair.blockPx === blockPx && pair.inlinePx === inlinePx,
+    )
+  )
+    refuse("PADDING-PAIR-UNQUALIFIED");
+  return { mapping, blockPx, inlinePx, cssValue: `${blockPx}px ${inlinePx}px` };
+}
+
+/** Code/Figma location stamps and provenance are not rendering semantics.
+ * v2 additionally masks exactly its validated pair values, no other field. */
+export function runtimeProjectionRevision(
+  contract: Contract,
+  padding?: RuntimePaddingMapping,
+): string {
+  if (padding) paddingPair(contract, padding);
   const copy = structuredClone(contract);
   delete copy.provenance;
   delete copy.bindings.code.runtime;
   copy.bindings.code.anchors = { importPath: "", export: "" };
   copy.bindings.figma.anchors = { fileKey: null, componentSetKey: null };
+  if (padding)
+    for (const key of pairKeys)
+      copy.anatomy.root[padding.storage]![key] = "<qualified-padding-value>";
   return revisionOf(copy);
 }
 
@@ -105,12 +365,18 @@ export function resolveRuntimeEmission(
     artifact.interfaceRevision !== reference.interfaceRevision ||
     revisionOf(artifact.interface) !== reference.interfaceRevision ||
     revisionOf(binding) !== reference.bindingRevision ||
-    binding.version !== 1 ||
+    (binding.version !== 1 && binding.version !== 2) ||
     binding.artifactRevision !== reference.artifactRevision ||
     binding.interfaceRevision !== reference.interfaceRevision
   )
     refuse("IDENTITY-MISMATCH");
-  if (binding.contractRevision !== runtimeProjectionRevision(contract))
+  if (
+    binding.contractRevision !==
+    runtimeProjectionRevision(
+      contract,
+      binding.version === 2 ? binding.padding : undefined,
+    )
+  )
     refuse("UNQUALIFIED-CONTRACT-CHANGE");
   if (
     context.tokens === undefined ||
@@ -236,7 +502,18 @@ export function resolveRuntimeEmission(
     )
   )
     refuse("SLOT-ALIAS-UNSAFE");
-  return { artifact, binding, namedSlots: named };
+  const padding =
+    binding.version === 2
+      ? resolvePadding(contract, binding.padding, context, artifact)
+      : undefined;
+  if (
+    padding &&
+    named.some((mapping) =>
+      ["style", "Object", "Array"].includes(mapping.contractSlot),
+    )
+  )
+    refuse("PADDING-STYLE-API-COLLISION");
+  return { artifact, binding, namedSlots: named, padding };
 }
 
 /** The existing React emitter calls this lowering only with an explicit
@@ -246,7 +523,10 @@ export function emitRuntimeReact(
   contract: Contract,
   context?: RuntimeEmissionContext,
 ): { tsx: string; css: string } {
-  const { artifact, namedSlots } = resolveRuntimeEmission(contract, context);
+  const { artifact, namedSlots, padding } = resolveRuntimeEmission(
+    contract,
+    context,
+  );
   const prefix = `./runtime/${artifact.artifactRevision.slice(7)}/`;
   const module = prefix + artifact.interface.module.path;
   const declaration =
@@ -269,6 +549,25 @@ export function emitRuntimeReact(
   const imports = artifact.stylesheets
     .map((file) => `import ${JSON.stringify(prefix + file)};`)
     .join("\n");
+  const paddingGuard = padding
+    ? `  // Finite consumer-input scope; caller CSS and arbitrary slot geometry are not canvas qualification.
+  if (!(${padding.mapping.scope.cases
+    .map(
+      (row) =>
+        `(${Object.entries(row)
+          .map(
+            ([name, value]) =>
+              `props[${JSON.stringify(name)}] === ${value.kind === "omitted" ? "undefined" : JSON.stringify(value.value)}`,
+          )
+          .join(" && ")})`,
+    )
+    .join(
+      " || ",
+    )})) throw new Error('RUNTIME-EMISSION-PADDING-SCOPE-UNQUALIFIED');
+  if (props.style !== undefined && (props.style === null || typeof props.style !== 'object' || Array.isArray(props.style))) throw new Error('RUNTIME-EMISSION-PADDING-STYLE-INVALID');
+  if (props.style && Object.prototype.hasOwnProperty.call(props.style, ${JSON.stringify(padding.mapping.customProperty)})) throw new Error('RUNTIME-EMISSION-PADDING-STYLE-COLLISION');
+`
+    : "";
   // Registration happens at module load before React creates the element.
   // The prepared runtime entry separately enforces source import preconditions.
   const tsx = `/** GENERATED retained original runtime. React 19 direct-element adapter.
@@ -309,8 +608,8 @@ ${
 }
 export function ${contract.name}(props: ${contract.name}Props) {
 ${required.map((name) => `  if (props[${JSON.stringify(name)}] === undefined) throw new Error('RUNTIME-EMISSION-REQUIRED-PROPERTY');`).join("\n")}
-  const { children${namedSlots.map((slot) => `, ${slot.contractSlot}`).join("")}, ...sourceProps } = props;
-  return React.createElement(elementName, sourceProps,
+${paddingGuard}  const { children${namedSlots.map((slot) => `, ${slot.contractSlot}`).join("")}, ...sourceProps } = props;
+  return React.createElement(elementName, ${padding ? `{ ...sourceProps, style: { ...props.style, [${JSON.stringify(padding.mapping.customProperty)}]: ${JSON.stringify(padding.cssValue)} } }` : "sourceProps"},
 ${namedSlots.map((slot) => `    placeSlot(${slot.contractSlot}, ${JSON.stringify(slot.sourceSlot)}),`).join("\n")}
     children);
 }

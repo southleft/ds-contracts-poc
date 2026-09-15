@@ -32,7 +32,7 @@
  *                  absent markers verdict 'unverifiable', never 'match'
  *   6. pr        — the dry-run PR plan, exact lines, zero network
  *   6b. canvas→code — task #40: a proposal names the files it becomes and
- *                  STAMPS the round-trip fact (tool-generated vs hand-built
+ *                  records the origin claim (tool-generated vs hand-built
  *                  vs unrecorded) into the CONTRACT-PROPOSAL envelope that
  *                  `ds-contracts propose-pr` reads
  *   (2b. G9 — the baked sample bundle parses, plans tokens-first, builds)
@@ -2145,29 +2145,41 @@ return { ok: true };
     `✔ brownfield: scan sees ${report.total} sets (${report.backed} contract-backed, ${report.foreign} hand-built) where the marked inventory saw ${marked.inventory.length}; a base-less propose on "HandBuilt" returns a proposal (not a refusal) naming its corpus; a foreign tokenSet replaces that corpus by name; with-base diff and the parse refusal are unchanged`,
   );
 
-  // (d) CANVAS → CODE (task #40) — THE ASYMMETRY, stamped and shown.
-  // A proposal now says what code it becomes and how far that code can be
-  // trusted. The two answers must never be interchangeable: a set this tool
-  // GENERATED round-trips byte for byte; a HAND-BUILT set is an inversion,
-  // so its code is a starting point. `propose-pr` reads the same stamp out
-  // of the export envelope and prints the same sentence on the PR.
+  // (d) CANVAS → CODE (task #40) — origin claims, not reproduction proof.
+  // The SAME dump gets each legacy classification below. Toggling a marker
+  // cannot establish correspondence; no trusted baseline or comparison is
+  // supplied here. `propose-pr` reads these unchanged enum/Boolean values
+  // and prints the shared, explicitly unverified sentence on the PR.
   const handProp = DSC.proposeDiff(handDump, 'HandBuilt', null, { toolGenerated: false });
   const toolProp = DSC.proposeDiff(handDump, 'HandBuilt', null, { toolGenerated: true });
   const unknownProp = DSC.proposeDiff(handDump, 'HandBuilt', null);
   assert(
     handProp.provenance === 'hand-built' && toolProp.provenance === 'tool-generated' &&
       unknownProp.provenance === 'unrecorded',
-    'proposeDiff maps the marker fact to exactly three provenances — and an ABSENT fact is "unrecorded", never quietly hand-built',
+    'proposeDiff preserves three legacy origin labels — an unreported marker observation is "unrecorded"',
   );
   assert(
     handProp.codePlan.sentence.indexOf('STARTING POINT, NOT A REPRODUCTION') >= 0 &&
       handProp.codePlan.sentence.indexOf('INVERSION') >= 0,
-    'the hand-built sentence refuses to call the generated component a reproduction',
+    'the legacy hand-built sentence treats code as an unqualified inversion',
   );
   assert(
-    toolProp.codePlan.sentence.indexOf('true round trip') >= 0 &&
-      toolProp.codePlan.sentence.indexOf('byte for byte') >= 0,
-    'the tool-generated sentence claims the round trip in those words',
+    toolProp.codePlan.sentence.includes('marker claiming ds-contracts origin') &&
+      toolProp.codePlan.sentence.includes('does not prove a successful round trip or byte-identical reproduction') &&
+      ['matching trusted canonical baseline', 'preserved semantics and runtime identity', 'independent comparison']
+        .every((phrase) => toolProp.codePlan.sentence.includes(phrase)),
+    'a self-reported marker requires a trusted baseline, preserved semantics/runtime and independent comparison; it grants no reproduction proof',
+  );
+  assert(
+    handProp.codePlan.sentence.includes('absence does not establish who drew it'),
+    'absence of a marker never proves human authorship',
+  );
+  assert(
+    [handProp, toolProp, unknownProp].every((proposal) =>
+      !/was GENERATED|was HAND-BUILT|is a true round trip|comes back byte for byte|reproduces the component/.test(
+        proposal.codePlan.headline + '\n' + proposal.codePlan.sentence,
+      )),
+    'none of the legacy provenance values can self-certify authorship or correspondence',
   );
   assert(
     unknownProp.codePlan.sentence.indexOf('No canvas provenance was recorded') >= 0,
@@ -2180,7 +2192,7 @@ return { ok: true };
     handEnvelope.provenance.toolGenerated === false && handEnvelope.provenance.kind === 'hand-built' &&
       toolEnvelope.provenance.toolGenerated === true &&
       unknownEnvelope.provenance.toolGenerated === null,
-    'the CONTRACT-PROPOSAL envelope CARRIES the fact (true / false / null) — this is what propose-pr reads to print the right sentence',
+    'the CONTRACT-PROPOSAL envelope preserves the reported origin flag (true / false / null) for CLI compatibility',
   );
   // The file list the Send panel shows is the file list the CLI writes:
   // both come from core/canvas-code-plan.ts. Named paths, not a shape.
@@ -2197,10 +2209,14 @@ return { ok: true };
   );
   assert(
     DSC.codePlanFor('Badge', 'hand-built').headline.indexOf('starting point, not a reproduction') >= 0,
-    'the one-line headline carries the same asymmetry as the sentence',
+    'the unmarked headline retains the inversion limit',
+  );
+  assert(
+    plan.headline.includes('marker only; round-trip verification is still required'),
+    'the marked headline cannot erase the full sentence verification requirements',
   );
   console.log(
-    '✔ canvas→code (task #40): a proposal states what code it becomes (react → Badge/Badge.module.css, Badge/Badge.tsx, Badge/index.ts; html + react-inline named as alternatives) and stamps the round-trip fact into the CONTRACT-PROPOSAL envelope — tool-generated says "byte for byte", hand-built says "STARTING POINT, NOT A REPRODUCTION", and an unknown marker says "not recorded" rather than either',
+    '✔ canvas→code (task #40): code paths and legacy origin flags preserved; a marker claims origin, never round-trip proof; unmarked does not prove human authorship; reproduction requires a trusted baseline, preserved semantics/runtime and independent comparison',
   );
 
   // (e) ENVELOPE v2 — THE EXPORT CARRIES ALL THREE ENGINE OUTPUTS (ranked

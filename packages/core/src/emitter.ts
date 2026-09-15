@@ -40,11 +40,14 @@ export interface EmitterCtx {
    *  script gains a preamble that upserts them as Figma variables, so it runs
    *  in files that never synced them. Absent/empty → no preamble. */
   mintedTokens?: Record<string, unknown>;
-  /** react-inline: token resolution mode (default 'light'). */
+  /** Token resolution mode. react-inline defaults to light; qualified
+   * retained-runtime styling requires an explicit host-selected value. */
   mode?: 'light' | 'dark';
+  /** Explicit host-selected brand for qualified retained-runtime styling. */
+  brand?: string;
   /** Verified retained-runtime artifacts and bindings. This context cannot
    * override the actual token values above. Unsupported targets refuse. */
-  runtimeArtifacts?: Omit<RuntimeEmissionContext, 'tokens'>;
+  runtimeArtifacts?: Omit<RuntimeEmissionContext, 'tokens' | 'mode' | 'brand'>;
 }
 
 export interface Emitter {

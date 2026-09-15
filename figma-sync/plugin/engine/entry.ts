@@ -1842,12 +1842,12 @@ return { inventory: rows };
       count: number;
       entries: unknown[];
     };
-    /** THE ASYMMETRY. 'tool-generated' when the set carries a
-     *  ds_contracts/contractId marker (this tool drew it, so code comes back
-     *  byte for byte); 'hand-built' when it does not (the contract is an
-     *  INVERSION and the code is a starting point). 'unrecorded' only when
-     *  the caller could not say. Stamped into the export envelope so
-     *  `propose-pr` prints the same sentence on the PR. */
+    /** Legacy origin labels, not fidelity or authenticated authorship:
+     *  'tool-generated' reports a ds_contracts/contractId marker;
+     *  'hand-built' reports its absence, not proof a human drew the set;
+     *  'unrecorded' means the caller did not record that observation.
+     *  The shared sentence requires a trusted baseline and independent
+     *  comparison before claiming reproduction. */
     provenance: CanvasProvenance;
     /** What this proposal turns into on the code side — shown in Send
      *  BEFORE anything leaves the canvas. */

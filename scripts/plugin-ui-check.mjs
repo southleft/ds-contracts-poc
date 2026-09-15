@@ -392,9 +392,8 @@ ok(prDryHtml.includes('Commit contracts/ds.hand-built.minted.dtcg.json on '), 't
 ok(prDryHtml.includes("kept in this window's memory, never stored"), 'the session-only token note still closes the dry run');
 
 // --- 5b. CLOSING THE LOOP (task #40): what code does this proposal make? --
-// A hand-built set has no ds_contracts/contractId marker, so the marked
-// inventory does not list it — the proposal is an INVERSION and the panel
-// must say so before the designer sends anything.
+// This unmarked fixture is not in the marked inventory. The proposal is an
+// unqualified INVERSION; absence of the marker cannot establish authorship.
 ok(await shown('#prop-code-section'), 'a proposal opens the "What this becomes in code" section');
 const codeHtml = await page.locator('#prop-code-result').innerHTML();
 ok(codeHtml.includes('Target: React + CSS Modules (react)'), 'the code plan names the target in words and by flag value');
@@ -402,10 +401,11 @@ ok(codeHtml.includes('HandBuilt/HandBuilt.tsx') && codeHtml.includes('HandBuilt/
   'the code plan lists the exact files the CLI would write (got: ' + codeHtml + ')');
 ok(codeHtml.includes('html, react-inline'), 'the other targets a repo can choose are named');
 ok(codeHtml.includes('starting point, not a reproduction'),
-  'HAND-BUILT ASYMMETRY: an unmarked set is headlined as an inversion, never as a round trip');
+  'UNMARKED ORIGIN: the proposal is headlined as an inversion, never verified correspondence');
 ok(codeHtml.includes('STARTING POINT, NOT A REPRODUCTION') && codeHtml.includes('INVERSION'),
   '…and the full sentence refuses to call the generated component a reproduction');
-ok(!codeHtml.includes('byte for byte'), 'a hand-built proposal never claims byte-for-byte reproduction');
+ok(codeHtml.includes('absence does not establish who drew it'), 'an unmarked proposal never claims human authorship');
+ok(!codeHtml.includes('byte for byte'), 'an unmarked proposal never claims byte-for-byte reproduction');
 ok(codeHtml.includes('propose-pr') && codeHtml.includes('ONE pull request'),
   'the panel names the command that carries the contract AND the code in one PR');
 ok(!/style="(?!background)/.test(codeHtml), 'no inline style in the code-plan markup');
@@ -417,8 +417,8 @@ ok(JSON.parse(await page.evaluate(() => {
 })).name.endsWith('.proposal.json'),
   'the download is named .proposal.json — it is a CONTRACT-PROPOSAL envelope, and naming an envelope .contract.json was a trap');
 
-// The OTHER half of the asymmetry: a set this tool generated carries a
-// marker, so the SAME panel must promise the round trip.
+// The SAME fixture is now reported as marked, with no trusted baseline or
+// comparison added. The panel must not promote that Boolean into proof.
 await page.evaluate((dump) => {
   window.__sim.markedSets = [{ contractId: 'ds.badge', name: 'HandBuilt', nodeId: '5:6', key: 'key-5:6', specHash: 'h', props: [], version: '1.1.0', drift: 'in-sync', contractBacked: true, page: 'Page 1' }];
   window.__sim.allSets = null;
@@ -434,9 +434,16 @@ await page.fill('#prop-base', '');
 await page.click('#prop-run');
 await page.waitForTimeout(800);
 const genHtml = await page.locator('#prop-code-result').innerHTML();
-ok(genHtml.includes('byte for byte') && genHtml.includes('true round trip'),
-  'TOOL-GENERATED ASYMMETRY: a marked set IS promised as a round trip (got: ' + genHtml + ')');
-ok(!genHtml.includes('STARTING POINT'), '…and the hand-built warning is gone for a marked set');
+ok(genHtml.includes('marker claiming ds-contracts origin') &&
+  genHtml.includes('does not prove a successful round trip or byte-identical reproduction'),
+  'CLAIMED ORIGIN: a marker does not promise reproduction');
+ok(['matching trusted canonical baseline', 'preserved semantics and runtime identity', 'independent comparison']
+  .every((phrase) => genHtml.includes(phrase)),
+  'the marked proposal names every missing verification requirement');
+ok(genHtml.includes('marker only; round-trip verification is still required'),
+  'the marked headline retains the verification boundary');
+ok(!/was GENERATED|was HAND-BUILT|is a true round trip|comes back byte for byte|reproduces the component/.test(genHtml),
+  'the marker never grants an authorship or reproduction claim');
 
 // the old refusal string is gone from the product
 const uiText = await page.evaluate(() => document.documentElement.innerHTML);

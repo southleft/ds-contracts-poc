@@ -326,6 +326,85 @@ test("registered React target always binds actual token values, never a stale ov
   );
 });
 
+test("qualified padding uses the public emitter's explicit mode and brand, never an artifact-context override", () => {
+  const f = fixture();
+  f.contract.anatomy.root.literals = {
+    "padding-block": "4px",
+    "padding-inline": "8px",
+  };
+  const padding: Extract<RuntimeProjectionBinding, { version: 2 }>["padding"] =
+    {
+      kind: "host-padding-pair-v1",
+      partPath: ["root"],
+      storage: "literals",
+      customProperty: "--probe-padding",
+      evidenceRevision: `sha256:${"c".repeat(64)}`,
+      scope: {
+        mode: "light",
+        brand: "default",
+        paddingPairs: [{ blockPx: 4, inlinePx: 8 }],
+        cases: [
+          Object.fromEntries(
+            f.artifact.interface.writableProperties.map((name) => [
+              name,
+              { kind: "omitted" as const },
+            ]),
+          ),
+        ],
+      },
+    };
+  f.binding = {
+    ...f.binding,
+    version: 2,
+    padding,
+    contractRevision: runtimeProjectionRevision(f.contract, padding),
+  };
+  rebind(f, false);
+  const ctx = {
+    ...existingContext(f),
+    mode: "light" as const,
+    brand: "default",
+    // Deliberately pass runtime extras, as an untyped external host could.
+    // They must not select a different context from the public host fields.
+    runtimeArtifacts: {
+      ...existingContext(f).runtimeArtifacts,
+      mode: "light",
+      brand: "default",
+    },
+  };
+  const expected = emitReact(f.contract, ctx);
+  assert.match(expected.tsx, /4px 8px/);
+  assert.equal(
+    reactEmitter
+      .emit(f.contract, {
+        ...ctx,
+        tokens: structuredClone(tokenValues),
+      })
+      .find((file) => file.path === `${f.contract.name}.tsx`)?.contents,
+    expected.tsx,
+  );
+  for (const selection of [
+    { mode: "dark" as const, brand: "default" },
+    { mode: "light" as const, brand: "other" },
+    { mode: undefined, brand: "default" },
+    { mode: "light" as const, brand: undefined },
+  ]) {
+    assert.throws(
+      () => emitReact(f.contract, { ...ctx, ...selection }),
+      /RUNTIME-EMISSION-PADDING-CONTEXT-UNQUALIFIED/,
+    );
+    assert.throws(
+      () =>
+        reactEmitter.emit(f.contract, {
+          ...ctx,
+          ...selection,
+          tokens: structuredClone(tokenValues),
+        }),
+      /RUNTIME-EMISSION-PADDING-CONTEXT-UNQUALIFIED/,
+    );
+  }
+});
+
 test("direct native TSX and unsupported code emitters refuse retained-runtime contracts before reconstructing anatomy", async (t) => {
   const f = fixture(),
     ctx = existingContext(f);

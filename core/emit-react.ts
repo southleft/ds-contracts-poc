@@ -1060,9 +1060,12 @@ export interface EmitCtx {
   /** Every known contract by id — composition refs resolve through it. */
   contracts: Map<string, Contract>;
   /** Host-verified immutable original runtime and projection bindings. */
-  runtimeArtifacts?: Omit<RuntimeEmissionContext, 'tokens'>;
+  runtimeArtifacts?: Omit<RuntimeEmissionContext, 'tokens' | 'mode' | 'brand'>;
   /** Actual token values; inventory names cannot verify retained styles. */
   tokenValues?: unknown;
+  /** Explicit host-selected scope for qualified retained-runtime styles. */
+  mode?: 'light' | 'dark';
+  brand?: string;
 }
 
 export interface EmitReactResult {
@@ -1088,7 +1091,7 @@ export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
   }
   if (contract.bindings.code.runtime) {
     const result = emitRuntimeReact(contract, ctx.runtimeArtifacts && {
-      ...ctx.runtimeArtifacts, tokens: ctx.tokenValues,
+      ...ctx.runtimeArtifacts, tokens: ctx.tokenValues, mode: ctx.mode, brand: ctx.brand,
     });
     return {
       ...result,
