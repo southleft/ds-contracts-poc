@@ -1,10 +1,31 @@
 # F1 held-out: from capture-only to a compiled calendar
 
-> **Superseded below (2026-09-13).** The initial compile-only account and P2
+> **Historical sections; latest measurement 2026-09-14.** The initial compile-only account and P2
 > parking below are historical. The calendar was minted and scored, then
 > re-minted; the later dated sections record the measurement and named 2px
 > residual. The current score is re-derived by `npm run recipe:f1:check`.
 > Owner grading remains pending.
+
+## Current measurement — selected-day typography (2026-09-14)
+
+Screenshot review exposed another carried-leaf defect: selected `20` was
+16px Regular in Figma versus the source's 18px / 700. The shared recipe and
+proposer now carry the measured state's font and size. A new Scratch mint
+(`290:3875`, calendar `290:3913`) confirms 18px Times New Roman Bold. Two fresh
+Playwright source captures are byte-identical to each other and the committed
+reference. Current AA difference is **3.019%**, down from the historical 3.048%.
+The earlier claim that all remaining differences were substrate was incomplete:
+this typography mismatch was a missing leaf, now closed. The 2px ink-bound and
+named SVG/chevron limitations remain. No pixel-identity claim is made.
+
+Full-calendar compile→collapse→compile tests also found and fixed missing
+readback of trailing header placement, caption font size, and weekday padding.
+Original canonical/Astryx envelopes and the signed v50 writer remain unchanged.
+The current envelope carries 35 facts and six loss receipts. Historical figures
+below describe their dated versions, not the current recipe. Current and prior
+measurements are re-derived together by `recipe/calendar-typography-evidence.test.ts`;
+the independent old screenshots are preserved. See
+`recipe/evidence/f1-calendar-typography-v1/README.md` for provenance and limits.
 
 **Measured 2026-09-05 on `main`.** react-day-picker 10.0.1 `DayPicker`, the
 held-out subject. Every number below re-derives from

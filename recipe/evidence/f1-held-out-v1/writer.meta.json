@@ -2,14 +2,14 @@
   "_marker": "Emitted by recipe/fixture-reader/f1-mint.ts --emit from the committed ledger; re-emit after any calendar@1 or propose change. The writer refuses every file but Scratch.",
   "adapterIdentity": "day-picker-calendar-f1-v1",
   "displayName": "react-day-picker Calendar (F1 held-out)",
-  "recipeHash": "8d74efd36992b1aa54ecc244151d28714b9dc6412b8827ed6d0dd1a5a58d90e8",
-  "envelopeHash": "36977234033ec3994d5df2fa0cbe451a2acc0e56445bf4e67a7b429a59737b76",
-  "pageName": "Recipe Pivot / Calendar / 8d74efd3-calendar-v50",
-  "runIdentity": "8d74efd3-calendar-v50",
+  "recipeHash": "921d8a459973866dae71552b52e762f98dc9018db6c09e7ca7f926ed27981ca0",
+  "envelopeHash": "0e662d82e62fee70eadd1467dfb3515dd2ceea121de6c98117a64c2dc209a181",
+  "pageName": "Recipe Pivot / Calendar / 921d8a45-calendar-v50",
+  "runIdentity": "921d8a45-calendar-v50",
   "header": {
     "navPlacement": "trailing"
   },
   "weekdayPadding": 8,
-  "carriedFacts": 32,
+  "carriedFacts": 35,
   "receipts": 6
 }

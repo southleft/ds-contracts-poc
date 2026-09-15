@@ -1,6 +1,24 @@
 # Visual hill climb — 2026-09-14
 
-This is a work log, not a grade or release approval. No Figma nodes were changed.
+This is a work log, not a grade or release approval. Earlier Badge/coverage
+sections are read-only Figma work; the calendar follow-up minted a new Scratch page.
+
+## Selected-day typography follow-up
+
+The source selected day is 18px / 700; the previous calendar mint used 16px
+Regular. A failing source→propose→compile assertion led to optional per-state
+typography in the shared recipe. Two-way tests also recovered three missing
+readback leaves: trailing header placement, caption size, and weekday padding.
+All 45 calendar tests and frozen v50 checks passed before the live mint.
+
+New Scratch page `290:3875` carries the corrected selected date. Two Playwright
+source captures match each other and the original committed reference exactly.
+AA difference improved from 3.048% to 3.019%; exact mismatch and the 2px ink-bound
+and navigation-glyph limits remain disclosed. The existing aggregate pass had
+hidden a real missing leaf: it did not prove every difference was substrate.
+The current writer and source/image hashes are checked alongside a preserved
+historical predecessor in `recipe/evidence/f1-calendar-typography-v1/`.
+No thresholds, source captures/configs, signed lineages, or owner fields changed.
 
 ## Letter-spacing continuation
 

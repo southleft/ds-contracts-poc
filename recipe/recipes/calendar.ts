@@ -178,6 +178,11 @@ export interface CalendarWeek {
 interface DayStateTokens {
   background: CalendarColorParameter;
   text: CalendarColorParameter;
+  /** A measured non-default state's type; absent inherits the common day type. */
+  typography?: {
+    font: CalendarFontSpec;
+    fontSize: CalendarNumberParameter;
+  };
   /**
    * Optional ring. `@astryxdesign/core` marks TODAY with an inset 1px ring
    * (`boxShadow: inset 0 0 0 1px --color-border-emphasized`) and no background
@@ -397,6 +402,12 @@ const DayStateTokensSchema = z.strictObject({
   ring: ColorParameterSchema.optional(),
   ringWidth: NumberParameterSchema.optional(),
 });
+const StyledDayStateTokensSchema = DayStateTokensSchema.extend({
+  typography: z.strictObject({
+    font: FontSpecSchema,
+    fontSize: NumberParameterSchema,
+  }).optional(),
+});
 
 export const CalendarRecipeInstanceSchema = z.strictObject({
   identity: z.strictObject({ id: z.string().min(1), name: z.string().min(1) }),
@@ -500,9 +511,9 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
     weekNumberText: ColorParameterSchema.optional(),
     dayStates: z.strictObject({
       default: DayStateTokensSchema,
-      today: DayStateTokensSchema,
-      selected: DayStateTokensSchema,
-      outside: DayStateTokensSchema,
+      today: StyledDayStateTokensSchema,
+      selected: StyledDayStateTokensSchema,
+      outside: StyledDayStateTokensSchema,
     }),
     typography: z.strictObject({
       caption: FontSpecSchema,
@@ -755,8 +766,8 @@ const dayComponent = (
          * fallback for the degenerate case where no cell has a label at all.
          */
         representativeDayLabel(instance),
-        instance.tokens.typography.day,
-        cell.fontSize,
+        stateTokens.typography?.font ?? instance.tokens.typography.day,
+        stateTokens.typography?.fontSize ?? cell.fontSize,
         stateTokens.text,
       ),
     ],
@@ -1217,6 +1228,17 @@ export function compileCalendarIr(instance: CalendarRecipeInstance): FrameNode {
 
 export function compileCalendarRecipe(input: unknown): RecipeEnvelope {
   const instance = normalizeCalendarRecipeInstance(input);
+  for (const state of ["today", "selected", "outside"] as const) {
+    const override = instance.tokens.dayStates[state].typography;
+    if (override && canonicalJson(override) === canonicalJson({
+      font: instance.tokens.typography.day,
+      fontSize: instance.tokens.dayCell.fontSize,
+    })) {
+      throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+        `dayStates.${state}.typography duplicates the common day typography; omit the redundant override`,
+      ]);
+    }
+  }
   const totality = checkTotality(instance.inputFacts, instance);
   if (!isTotal(totality))
     throw new RecipeRefusal(
@@ -1681,6 +1703,14 @@ export function collapseCalendarRecipe(
     const component = variantFor(dayGroup, { State: state });
     const button = direct(component, "calendar/day/button", "frame");
     const label = direct(button, "calendar/day/label", "text");
+    const typography = {
+      font: fontFrom(label),
+      fontSize: numberFrom(label, "type.fontSize", label.type.fontSize),
+    };
+    const commonTypography = {
+      font: fontFrom(dayLabel),
+      fontSize: numberFrom(dayLabel, "type.fontSize", dayLabel.type.fontSize),
+    };
     /**
      * Detected from the PAINT, not from a binding. An unbound token (one with
      * no verified DTCG variable) emits no binding at all, so keying off
@@ -1701,6 +1731,9 @@ export function collapseCalendarRecipe(
         "fills.0.color",
         solidColor(label.fills[0], label.role!),
       ),
+      ...(state !== "default" && canonicalJson(typography) !== canonicalJson(commonTypography)
+        ? { typography }
+        : {}),
       ...(hasRing
         ? {
             ring: colorFrom(
@@ -1777,6 +1810,9 @@ export function collapseCalendarRecipe(
 
   const instance = normalizeCalendarRecipeInstance({
     identity: { id: envelope.id, name: envelope.name },
+    ...(header.children[0]?.role === "calendar/caption"
+      ? { header: { navPlacement: "trailing" } }
+      : {}),
     semantic: {
       root: "application",
       grid: "grid",
@@ -1927,6 +1963,18 @@ export function collapseCalendarRecipe(
               "type.fontSize",
               weekdayTextNode.type.fontSize,
             ),
+          }),
+      ...(canonicalJson(numberFrom(captionText, "type.fontSize", captionText.type.fontSize))
+        === canonicalJson(numberFrom(dayLabel, "type.fontSize", dayLabel.type.fontSize))
+        ? {}
+        : {
+            captionFontSize: numberFrom(captionText, "type.fontSize", captionText.type.fontSize),
+          }),
+      ...(weekdayRowFrame.layout.padding.top === 0
+        && !(weekdayRowFrame.bindings ?? []).some((binding) => binding.field === "layout.padding.top")
+        ? {}
+        : {
+            weekdayPadding: numberFrom(weekdayRowFrame, "layout.padding.top", weekdayRowFrame.layout.padding.top),
           }),
       dayStates: {
         default: dayStateFor("default"),

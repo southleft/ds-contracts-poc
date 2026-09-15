@@ -1,0 +1,270 @@
+{
+  "artifactVersion": "f1-calendar-typography-v1",
+  "sourceRevision": "aa90ec337f450aad2ba4e420ba7b4636c7654a5f",
+  "recordedAt": "2026-09-14T23:02:43.055Z",
+  "note": "A recorded live event, not a live check on every offline run and not an owner grade. New source captures repeat byte-identically. Existing dated evidence remains historical.",
+  "source": {
+    "package": "react-day-picker",
+    "version": "10.0.1",
+    "combo": "Calendar:label.1",
+    "ledger": "extract/computed/out/day-picker/calendar/captured-truth.json",
+    "ledgerSha256": "05995e055ba8d2abfec3618a92f1d5dc7e62a42707cb4160df525bad0f4a2a15",
+    "browser": {
+      "viewport": {
+        "width": 900,
+        "height": 900
+      },
+      "deviceScaleFactor": 1,
+      "colorScheme": "light"
+    },
+    "selected": {
+      "text": "20",
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "fontFamily": "Times"
+    }
+  },
+  "writer": {
+    "path": "recipe/evidence/f1-held-out-v1/writer.js",
+    "sha256": "9c33ff049ac884902ba2b992fad9a738bc232398b78ce3024ba0cd04bcb986b1",
+    "_marker": "Emitted by recipe/fixture-reader/f1-mint.ts --emit from the committed ledger; re-emit after any calendar@1 or propose change. The writer refuses every file but Scratch.",
+    "adapterIdentity": "day-picker-calendar-f1-v1",
+    "displayName": "react-day-picker Calendar (F1 held-out)",
+    "recipeHash": "921d8a459973866dae71552b52e762f98dc9018db6c09e7ca7f926ed27981ca0",
+    "envelopeHash": "0e662d82e62fee70eadd1467dfb3515dd2ceea121de6c98117a64c2dc209a181",
+    "pageName": "Recipe Pivot / Calendar / 921d8a45-calendar-v50",
+    "runIdentity": "921d8a45-calendar-v50",
+    "header": {
+      "navPlacement": "trailing"
+    },
+    "weekdayPadding": 8,
+    "carriedFacts": 35,
+    "receipts": 6
+  },
+  "mint": {
+    "writerVersion": 1,
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "290:3875",
+    "pageName": "Recipe Pivot / Calendar / 921d8a45-calendar-v50",
+    "runIdentity": "921d8a45-calendar-v50",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "createdNodeIds": [
+      "290:3875",
+      "290:3876",
+      "290:3880",
+      "290:3879",
+      "290:3878",
+      "290:3883",
+      "290:3882",
+      "290:3881",
+      "290:3886",
+      "290:3885",
+      "290:3884",
+      "290:3889",
+      "290:3888",
+      "290:3887",
+      "290:3892",
+      "290:3895",
+      "290:3898",
+      "290:3901",
+      "290:3904",
+      "290:3907",
+      "290:3910",
+      "290:3891",
+      "290:3915",
+      "290:3917",
+      "290:3916",
+      "290:3919",
+      "290:3918",
+      "290:3914",
+      "290:3921",
+      "290:3922",
+      "290:3923",
+      "290:3924",
+      "290:3925",
+      "290:3926",
+      "290:3927",
+      "290:3920",
+      "290:3930",
+      "290:3933",
+      "290:3936",
+      "290:3939",
+      "290:3942",
+      "290:3945",
+      "290:3948",
+      "290:3929",
+      "290:3952",
+      "290:3955",
+      "290:3958",
+      "290:3961",
+      "290:3964",
+      "290:3967",
+      "290:3970",
+      "290:3951",
+      "290:3974",
+      "290:3977",
+      "290:3980",
+      "290:3983",
+      "290:3986",
+      "290:3989",
+      "290:3992",
+      "290:3973",
+      "290:3996",
+      "290:3999",
+      "290:4002",
+      "290:4005",
+      "290:4008",
+      "290:4011",
+      "290:4014",
+      "290:3995",
+      "290:4018",
+      "290:4021",
+      "290:4024",
+      "290:4027",
+      "290:4030",
+      "290:4033",
+      "290:4036",
+      "290:4017",
+      "290:3928",
+      "290:3913"
+    ],
+    "mutatedNodeIds": [
+      "290:3875"
+    ],
+    "sources": [
+      {
+        "adapterIdentity": "day-picker-calendar-f1-v1",
+        "sectionId": "290:3876",
+        "calendarSetId": "290:3913",
+        "weekSetId": "290:3891",
+        "daySetId": "290:3890",
+        "collectionId": "VariableCollectionId:290:3877",
+        "variableCount": 0,
+        "variantCount": 14,
+        "calendarCells": 3,
+        "weekCells": 7,
+        "dayCells": 4,
+        "instanceCount": 42,
+        "recipeHash": "921d8a459973866dae71552b52e762f98dc9018db6c09e7ca7f926ed27981ca0",
+        "envelopeHash": "0e662d82e62fee70eadd1467dfb3515dd2ceea121de6c98117a64c2dc209a181",
+        "comparedIrFacts": 78
+      }
+    ]
+  },
+  "figma": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageId": "290:3875",
+    "nodeId": "290:3913",
+    "name": "calendar/set :: react-day-picker calendar",
+    "width": 308,
+    "height": 295,
+    "selected": [
+      {
+        "id": "I290:4002;290:3886",
+        "fontSize": 18,
+        "fontName": {
+          "family": "Times New Roman",
+          "style": "Bold"
+        }
+      }
+    ]
+  },
+  "images": {
+    "canvas": "recipe/evidence/f1-calendar-typography-v1/canvas.png",
+    "reference": "recipe/evidence/f1-calendar-typography-v1/reference.png",
+    "repeat": "recipe/evidence/f1-calendar-typography-v1/repeat.png"
+  },
+  "hashes": {
+    "canvas": "751f56d67d24f342e6b277bdea0977873fe007c7c2c2749e37b3c6289d4c837b",
+    "reference": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2",
+    "repeat": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2"
+  },
+  "expected": {
+    "artifactVersion": "recipe-fidelity-v1",
+    "label": "calendar/day-picker",
+    "status": "pass",
+    "bar": {
+      "pctAAMaskedMax": 5
+    },
+    "metrics": {
+      "pctExactUnmasked": 7.281998980112188,
+      "pctAAUnmasked": 3.018867924528302,
+      "pctAAMasked": 3.018867924528302,
+      "canvasPx": "294x263",
+      "realPx": "296x265",
+      "inkCanvasPct": 4.909484956654768,
+      "inkRealPct": 5.688424273329934
+    },
+    "canvas": {
+      "path": "recipe/evidence/f1-calendar-typography-v1/canvas.png",
+      "sha256": "751f56d67d24f342e6b277bdea0977873fe007c7c2c2749e37b3c6289d4c837b"
+    },
+    "reference": {
+      "path": "recipe/evidence/f1-calendar-typography-v1/reference.png",
+      "sha256": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2"
+    },
+    "diff": "recipe/evidence/f1-calendar-typography-v1/diff.png",
+    "referenceCroppedToControl": false,
+    "canvasCroppedToControl": false,
+    "thresholdSweep": [
+      {
+        "threshold": 250,
+        "canvas": "294x263",
+        "reference": "296x265",
+        "agree": false
+      },
+      {
+        "threshold": 245,
+        "canvas": "294x263",
+        "reference": "296x265",
+        "agree": false
+      },
+      {
+        "threshold": 240,
+        "canvas": "294x263",
+        "reference": "296x265",
+        "agree": false
+      },
+      {
+        "threshold": 230,
+        "canvas": "294x263",
+        "reference": "296x265",
+        "agree": false
+      }
+    ],
+    "caveats": [
+      "One state of one component. A pass here is not a pass for the archetype.",
+      "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+      "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+      "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+    ]
+  },
+  "previous": {
+    "manifest": "recipe/evidence/live-fidelity-2026-09-14/manifest.json",
+    "sourceRevision": "dd0c66b66a9e014d3ccffd6fde2c5caca5ac67b8",
+    "figma": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "pageId": "270:2625",
+      "nodeId": "270:2663",
+      "exportedAt": "2026-09-14T14:19:19.450Z"
+    },
+    "canvas": "recipe/evidence/live-fidelity-2026-09-14/canvas/calendar-day-picker.png",
+    "canvasSha256": "0cb6567d743e7aa450c363f84b2f5d15b09c7c258f2ec745a50d62bed65fe636",
+    "metrics": {
+      "pctExactUnmasked": 7.276899541050484,
+      "pctAAUnmasked": 3.0481896991330952,
+      "pctAAMasked": 3.0481896991330952,
+      "canvasPx": "294x263",
+      "realPx": "296x265",
+      "inkCanvasPct": 4.844467108618052,
+      "inkRealPct": 5.688424273329934
+    }
+  },
+  "limitations": [
+    "2px ink-bound difference remains on both axes.",
+    "Navigation uses the already-receipted glyph placeholder, not the source SVG.",
+    "Font rasterization differs between Chromium Times and Figma Times New Roman.",
+    "Only the pinned single-month state is measured; broader capture axes remain named outside the calendar grammar."
+  ]
+}

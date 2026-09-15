@@ -66,7 +66,7 @@ const CALENDAR = {
   scorecard: "recipe/evidence/f1-held-out-v1/score/scorecard.json",
   canvas: "recipe/evidence/f1-held-out-v1/score/canvas.png",
   reference: "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
-  mintedOn: "Scratch (byMp6lt0Ij9b2QbkDGFwBh): 2026-09-05, re-minted 2026-09-13 (page Recipe Pivot / Calendar / 8d74efd3-calendar-v50, calendar/set 270:2663)",
+  mintedOn: "Scratch (byMp6lt0Ij9b2QbkDGFwBh): re-minted 2026-09-14 (page Recipe Pivot / Calendar / 921d8a45-calendar-v50, page 290:3875, calendar/set 290:3913); selected-day typography measured in recipe/evidence/f1-calendar-typography-v1/receipt.json",
   receipt: "parity/receipts/v1/F1-COMPILE-ROUND.md",
 } as const;
 

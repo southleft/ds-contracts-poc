@@ -5,7 +5,7 @@ overallSuccess: **false** · humanGrade: not-run — the owner grades both rows 
 
 ## Row 1 — calendar (react-day-picker)
 
-pass 3.048% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: false. Canvas `recipe/evidence/f1-held-out-v1/score/canvas.png` (sha 0cb6567d743e…) re-scored against `extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png`. Receipt: parity/receipts/v1/F1-COMPILE-ROUND.md.
+pass 3.019% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: false. Canvas `recipe/evidence/f1-held-out-v1/score/canvas.png` (sha 751f56d67d24…) re-scored against `extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png`. Receipt: parity/receipts/v1/F1-COMPILE-ROUND.md.
 
 ## Row 2 — @radix-ui/themes@3.3.0 through recipe:point
 

@@ -22,10 +22,16 @@ const calendar = JSON.parse(
     "utf8",
   ),
 );
+// This file verifies the dated morning event, not today's canonical mint.
+// The successor gate verifies the current writer/canvas and the exact link back
+// to this archived event. Never overwrite old screenshots to make history green.
+const calendarSuccessor = JSON.parse(readFileSync(path.join(root,
+  "recipe/evidence/f1-calendar-typography-v1/receipt.json"), "utf8"));
 canonical.push({
   label: "calendar/day-picker",
-  page: "270:2625",
-  shot: calendar.canvas.path,
+  page: calendarSuccessor.previous.figma.pageId,
+  shot: calendarSuccessor.previous.canvas,
+  committedShot: calendar.canvas.path,
   reference: calendar.reference.path,
 });
 const hash = (p: string) =>
@@ -48,7 +54,7 @@ function verify(record: typeof receipt) {
       assert.equal(row.figma.fileKey, "byMp6lt0Ij9b2QbkDGFwBh", "Scratch only");
       assert.equal(row.figma.pageId, source.page);
       assert.deepEqual(row.committed, {
-        canvas: source.shot,
+        canvas: source.committedShot ?? source.shot,
         reference: source.reference,
       });
       assert.equal(

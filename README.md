@@ -37,9 +37,9 @@ Two directions, one contract in the middle:
 >   [CANVAS-TO-CODE-DESIGNER-EXAM.md](parity/receipts/v1/CANVAS-TO-CODE-DESIGNER-EXAM.md).
 > - **The held-out code→canvas exam (F1) has two rows, both measured, neither
 >   graded.** react-day-picker's calendar was captured, compiled, minted onto
->   Figma and scored at **3.048%** against a 5% bar (re-minted 2026-09-13 after
->   the named 16px ink-box gap was measured to three missing leaves and closed to
->   2px, [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md)). And on
+>   Figma and scored at **3.019%** against a 5% bar (re-minted 2026-09-14 after
+>   recovering selected-day 18px Bold typography; the named 2px ink-box and
+>   chevron limits remain, [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md)). And on
 >   2026-09-13 **Radix Themes** — a held-out library — went through the product's
 >   own `recipe:point` command: avatar scored **1.88%**; switch scored **3.04 /
 >   0 / 2.59 / 0.27%** across its four states; checkbox scored **0 / 0 / 0 /
@@ -708,12 +708,12 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 **Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** The
 active climb is [docs/35](docs/35-two-journey-v1-plan.md).
 
-- **F1 (held-out library, code→canvas) has two measured rows.** react-day-picker and Radix Themes are re-derived together by `npm run recipe:f1:check`. On 2026-09-13,
+- **F1 (held-out library, code→canvas) has two measured rows.** react-day-picker and Radix Themes are re-derived together by `npm run recipe:f1:check`. On 2026-09-14,
   react-day-picker — never previously pointed at by the recipe path — was
   captured, compiled with no hand-authored fixture, minted onto Scratch and
-  scored against the real package's Chromium render at **3.048%** (bar 5%;
-  3.735% on 2026-09-05, re-minted 2026-09-13 once the 16px ink-box gap was
-  measured to three missing leaves). It is a measurement, not a grade, and
+  scored against the real package's Chromium render at **3.019%** (bar 5%;
+  selected-day typography now carries its measured 18px Bold value).
+  It is a measurement, not a grade, and
   the 2px residual is named:
   [F1-COMPILE-ROUND.md](parity/receipts/v1/F1-COMPILE-ROUND.md).
 - **The canvas→code exam has run on a designer's file.** As of 2026-09-13

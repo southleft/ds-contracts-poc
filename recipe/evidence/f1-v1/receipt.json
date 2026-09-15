@@ -9,17 +9,17 @@
     "calendar": {
       "library": "day-picker",
       "subject": "react-day-picker@10.0.1 DayPicker (calendar@1)",
-      "mintedOn": "Scratch (byMp6lt0Ij9b2QbkDGFwBh): 2026-09-05, re-minted 2026-09-13 (page Recipe Pivot / Calendar / 8d74efd3-calendar-v50, calendar/set 270:2663)",
+      "mintedOn": "Scratch (byMp6lt0Ij9b2QbkDGFwBh): re-minted 2026-09-14 (page Recipe Pivot / Calendar / 921d8a45-calendar-v50, page 290:3875, calendar/set 290:3913); selected-day typography measured in recipe/evidence/f1-calendar-typography-v1/receipt.json",
       "canvas": {
         "path": "recipe/evidence/f1-held-out-v1/score/canvas.png",
-        "sha256": "0cb6567d743e7aa450c363f84b2f5d15b09c7c258f2ec745a50d62bed65fe636"
+        "sha256": "751f56d67d24f342e6b277bdea0977873fe007c7c2c2749e37b3c6289d4c837b"
       },
       "reference": {
         "path": "extract/computed/out/day-picker/calendar/orig-shots/label.1__default.png",
         "sha256": "28e6a03aada54e79ad008eafac479cbfb6739758c9d607fad0217efc88ce0ac2"
       },
       "status": "pass",
-      "pctAAMasked": 3.048,
+      "pctAAMasked": 3.019,
       "canvasPx": "294x263",
       "realPx": "296x265",
       "thresholdSweepAgrees": false,
@@ -135,7 +135,7 @@
     }
   },
   "summary": {
-    "calendar": "pass 3.048% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: false",
+    "calendar": "pass 3.019% (bar 5%); ink boxes 294x263 vs 296x265; threshold sweep agrees: false",
     "radix": {
       "scored": 3,
       "scoredRows": 11,

@@ -21,3 +21,8 @@ These are dated snapshot measurements, not a claim about future live-file
 freshness. They do not grade the product, assign owner signoff, or establish
 canvas→code fidelity. The reverse-direction Badge defects are tracked separately
 in `parity/receipts/v1/VISUAL-HILLCLIMB.md`.
+
+The calendar row was superseded later the same day by the selected-day
+typography fix in `../f1-calendar-typography-v1/`. These original PNGs and their
+measurements remain unchanged. The successor check links that historical row
+to the current writer and canonical score; it does not relabel the old mint.
