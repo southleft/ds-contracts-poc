@@ -33,14 +33,14 @@ export interface CandidateVisualJobRecord extends Omit<
   CandidateJobRecord,
   "version"
 > {
-  version: 2;
+  version: 2 | 3;
   operation: "source-visual-assembly";
   preparation: { id: string; reportSha256: string };
 }
 export type AnyCandidateJobRecord =
   CandidateJobRecord | CandidateVisualJobRecord;
 export interface CandidateVisualReportBase {
-  version: 2;
+  version: 2 | 3;
   request: BindingEvidenceRequest;
   binding: CandidateJobRecord["binding"];
   preparation: CandidateVisualJobRecord["preparation"];
@@ -111,6 +111,8 @@ export interface CandidateJobsOptions {
   ): VerifiedBindingSelection;
   validateReport: CandidateReportValidator;
   validateVisualReport?: CandidateVisualReportValidator;
+  /** Server-selected derivation version; historical versions remain readable. */
+  visualJobVersion?: 2 | 3;
   run?: CandidateRun;
 }
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
@@ -260,7 +262,7 @@ export function createCandidateJobs(
   ): value is AnyCandidateJobRecord =>
     object(value) &&
     (value.version === 1 ||
-      (value.version === 2 &&
+      ((value.version === 2 || value.version === 3) &&
         value.operation === "source-visual-assembly" &&
         object(value.preparation) &&
         typeof value.preparation.id === "string" &&
@@ -282,7 +284,7 @@ export function createCandidateJobs(
         "startedAt",
         "reportSha256",
         "problem",
-        ...(value.version === 2 ? ["operation", "preparation"] : []),
+        ...(value.version !== 1 ? ["operation", "preparation"] : []),
       ].includes(key),
     ) &&
     value.id === id &&
@@ -374,9 +376,9 @@ export function createCandidateJobs(
     )
       fail("report-invalid");
     const preparation =
-      job.version === 2 ? selectLatestPreparedVerified(job.request) : undefined;
+      job.version !== 1 ? selectLatestPreparedVerified(job.request) : undefined;
     if (
-      job.version === 2 &&
+      job.version !== 1 &&
       (!preparation ||
         !same(job.preparation, {
           id: preparation.id,
@@ -390,7 +392,7 @@ export function createCandidateJobs(
       readArtifact: (name) => read(job.id, name),
     };
     let summary: CandidateValidatedSummary;
-    if (job.version === 2) {
+    if (job.version !== 1) {
       if (!options.validateVisualReport) fail("visual-validator-unavailable");
       summary = options.validateVisualReport!(
         report as CandidateVisualReportBase,
@@ -426,7 +428,7 @@ export function createCandidateJobs(
       !same(JSON.parse(read(job.id, "job.json").toString()), job)
     )
       fail("evidence-changed-during-validation");
-    if (job.version === 2) {
+    if (job.version !== 1) {
       const after = selectLatestPreparedVerified(job.request);
       if (
         !same(job.preparation, {
@@ -448,13 +450,13 @@ export function createCandidateJobs(
   const snapshot = (job: AnyCandidateJobRecord): CandidateJobSnapshot => {
     const result: CandidateJobSnapshot = {
       id: job.id,
-      ...(job.version === 2
+      ...(job.version !== 1
         ? { operation: "source-visual-assembly" as const }
         : {}),
       state: job.state,
       phase:
         job.state === "running"
-          ? job.version === 2
+          ? job.version !== 1
             ? "assembling"
             : "preparing"
           : job.state === "complete"
@@ -557,9 +559,15 @@ export function createCandidateJobs(
       )
     )
       fail("history-invalid");
+    const visualVersion =
+      options.visualJobVersion === undefined ? 2 : options.visualJobVersion;
+    if (visual && visualVersion !== 2 && visualVersion !== 3)
+      fail("visual-version-invalid");
     const existing = ordered()
       .filter(
-        (job) => same(job.request, request) && (job.version === 2) === visual,
+        (job) =>
+          same(job.request, request) &&
+          job.version === (visual ? visualVersion : 1),
       )
       .at(-1);
     if (existing && (existing.state === "running" || !retry))
@@ -580,7 +588,7 @@ export function createCandidateJobs(
     const job: AnyCandidateJobRecord = {
       ...(visual
         ? {
-            version: 2 as const,
+            version: visualVersion,
             operation: "source-visual-assembly" as const,
             preparation: {
               id: preparation!.id,

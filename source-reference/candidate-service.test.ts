@@ -262,8 +262,13 @@ function candidateStub(f: ReturnType<typeof fixture>) {
       readFileSync(path.join(directory, "job.json"), "utf8"),
     );
     assert.equal(record.operation, "source-visual-assembly");
+    assert.equal(
+      record.version,
+      3,
+      "the application selects the newest derivation",
+    );
     const report: CandidateVisualReportBase = {
-      version: 2,
+      version: record.version,
       request: record.request,
       binding: record.binding,
       preparation: record.preparation,

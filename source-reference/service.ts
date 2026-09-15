@@ -101,6 +101,7 @@ export function createReferenceService(
       bindingJobs.selectLatestVerified(request),
     validateReport:
       candidateOptions.validateReport ?? validateCandidatePreparationReport,
+    visualJobVersion: 3,
     validateVisualReport:
       candidateOptions.validateVisualReport ?? validateCandidateVisualReport,
     ...(candidateOptions.run ? { run: candidateOptions.run } : {}),

@@ -31,8 +31,10 @@ import {
 } from "./candidate-report.js";
 import {
   buildCandidateVisualReport,
+  buildCandidateVisualReportV3,
   readCandidateVisualTokens,
   type CandidateVisualReport,
+  type CandidateVisualReportV3,
 } from "./candidate-visual-report.js";
 import {
   inspectAltitudeButtonRuntimeInputs,
@@ -66,7 +68,8 @@ export function runCandidateJob(
   repoRoot: string,
   id: string,
   services: CandidateRunnerServices = {},
-): CandidatePreparationReport | CandidateVisualReport {
+):
+  CandidatePreparationReport | CandidateVisualReport | CandidateVisualReportV3 {
   const repository = path.resolve(repoRoot);
   if (!UUID.test(id)) fail("id-invalid");
   const directory = path.join(repository, "private/source-candidate-app", id);
@@ -105,7 +108,7 @@ export function runCandidateJob(
   const job = parsed as AnyCandidateJobRecord;
   if (
     !job ||
-    ![1, 2].includes(job.version) ||
+    ![1, 2, 3].includes(job.version) ||
     job.id !== id ||
     job.state !== "running" ||
     Object.keys(job).some(
@@ -119,7 +122,7 @@ export function runCandidateJob(
           "sourceRevision",
           "state",
           "startedAt",
-          ...(job.version === 2 ? ["operation", "preparation"] : []),
+          ...(job.version !== 1 ? ["operation", "preparation"] : []),
         ].includes(key),
     ) ||
     !isBindingEvidenceRequest(job.request) ||
@@ -137,7 +140,7 @@ export function runCandidateJob(
   )
     fail("metadata-invalid");
   if (
-    job.version === 2 &&
+    job.version !== 1 &&
     (job.operation !== "source-visual-assembly" ||
       !job.preparation ||
       Object.keys(job.preparation).some(
@@ -184,7 +187,7 @@ export function runCandidateJob(
     const checkout = path.resolve(repository, "../altitude");
     const inspect =
       services.inspectInputs ?? inspectAltitudeButtonRuntimeInputs;
-    if (job.version === 2) {
+    if (job.version !== 1) {
       // A fresh manager per observation sees newer preparation attempts added
       // during assembly. Its recovery is in-memory only; no worker is launched.
       const selectPreparation =
@@ -275,7 +278,11 @@ export function runCandidateJob(
         fail("preparation-report-changed");
       const readTokens = services.readVisualTokens ?? readCandidateVisualTokens,
         tokens = readTokens(repository);
-      const report = buildCandidateVisualReport(
+      const buildVisual =
+        job.version === 3
+          ? buildCandidateVisualReportV3
+          : buildCandidateVisualReport;
+      const report = buildVisual(
         {
           id: prepared.parent.id,
           reportSha256: prepared.parent.reportSha256,

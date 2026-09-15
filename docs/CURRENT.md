@@ -24,7 +24,7 @@ The arrows describe the target integration. Existing readers, emitters and diff 
 | --- | --- | --- |
 | Source validation | The local app's `/sources` flow captures styled Altitude stories and checks source provenance, font/style readiness and negative controls. | General library onboarding; complete state/theme coverage; automatic qualification of arbitrary libraries. |
 | API and content intake | Exact CEM declarations, runtime property values, slot assignments/fallbacks and native control states accompany the original/replay evidence in `/sources`. Source mutations and semantic replay differences cause named refusals. | An accepted semantic contract, prop-to-part bindings, event behavior, and equivalence of generated IDs across independent renders. An observed inventory is not approval to generate. |
-| Source candidate preparation | The `/sources` workflow prepares the verified original runtime, then derives a measured visual candidate from that saved preparation. It reports source cases, observed/excluded styles and recorded token-name correspondences. Completed attempts reopen after validation; failures and interruptions require explicit retry. | An accepted Contract, generated native Figma components, or verified conversion. Measured style values and structural correspondence do not prove dynamic binding behavior. |
+| Source candidate preparation | The `/sources` workflow prepares the verified original runtime, then derives a measured visual candidate with recorded source-token references and conditional-wrapper snapshot checks. Versioned attempts preserve previous reports and reopen after validation; failures and interruptions require explicit retry. | An accepted Contract, generated native source components, or verified conversion. Measured values and finite wrapper snapshots do not prove arbitrary dynamic behavior. |
 | Contract playground | The checked-out `core/` engine proposes universal contracts and emits React, HTML and Figma scripts. | Its HTML canvas preview is **not** a live Figma export. Its example tours are not the autonomous product workflow. |
 | Retained source runtime | The existing React emitter can reference a host-verified original custom element, preserving its implementation and typed interface. | Automatic admission of a source-bound Contract, qualified editable canvas channels, distributable host packaging and native-canvas round-trip verification. |
 | Code → canvas | Recipe compilation and the shared Figma writer have live-mint evidence. A new bounded rendered-tree compiler produces explicitly unqualified drafts. | Automatic contract onboarding, semantic properties/token bindings, and verified useful component cohorts through the app without hand-authored role maps or pasted scripts. |
@@ -161,13 +161,22 @@ those original observations. Exact source identities preserve wrappers and
 terminal slots; assigned content stays in separate comparison-sample records.
 The existing layout and token fusion carries observed styling without guessing
 public props or sample defaults. Every appearance must be observed before a
-styled candidate is returned. Its tokens remain mechanically named candidates,
-not verified authored token bindings. In `/sources`, choose **Derive measured
+styled candidate is returned. The next version projects exact recorded source
+token names into specific root token references, preserving different names even
+when their current values match. Other references remain provisional. In
+`/sources`, choose **Derive measured
 visual candidate** after preparing the source. This separate attempt reuses the
 saved runtime and original observations without rebuilding or recapturing them.
 The application shows the case coverage, excluded style channels and exact
-recorded source-token correspondences alongside named limitations. It retains
-the preparation unchanged and validates the complete derived report on reopen.
+recorded source-token correspondences alongside named limitations. A bounded
+source AST reducer derives conditional-wrapper predicates without executing the
+source. It checks light-DOM descendants separately from slot assignment, joins
+the selected branch, and compares each predicate result with observed wrapper
+presence. Those finite snapshots retain original-dispatch and stable-query
+assumptions; they do not qualify arbitrary composition or lifecycle behavior.
+It retains the preparation and older visual reports unchanged and validates
+the complete derived report on reopen. A repeated successful derivation reuses
+the same supported-version attempt; an explicit version upgrade creates a new one.
 A failed or changed latest preparation cannot fall back to an older success;
 retry creates a separate attempt. Both native and React emission remain blocked
 by the candidate's unqualified runtime binding.
@@ -176,7 +185,12 @@ A native Scratch probe also confirmed that empty Figma slots do not reproduce
 Altitude's absent conditional wrappers: even zero-sized slots retain layout
 gaps. That behavior must be represented and verified explicitly. Empty main
 slots and populated comparison instances are different evidence; inserting
-sample text into a main component would hide this gap, not solve it.
+sample text into a main component would hide this gap, not solve it. A separate
+two-variant native fixture confirmed that hiding the whole wrapper removes its
+spacing and that slot content survives visibility changes and a variant switch.
+The full slot property identity survived; child node IDs changed. This is a
+native capability check with empty main slots, not a source-component fidelity
+result. The source-qualified lowering and automatic reevaluation remain unfinished.
 
 `npm run runtime:check` checks the strict reference schema, verified artifact
 inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
@@ -184,8 +198,9 @@ identity claims: preservation requires a matching canonical base and trusted
 journal, and does not prove that the canvas matches either. The source app now
 produces a verified runtime and derived inventory alongside its admission work
 order, not an accepted Contract. Its visual derivation now exposes the source-bound
-candidate; the next boundary is qualifying token and conditional-wrapper mappings,
-then verifying the actual native canvas.
+candidate; the next boundary is pinning native variable identities and modes,
+lowering the qualified source structure and comparison samples through the
+existing writer, then verifying the actual native canvas through the app.
 Editable-channel qualification remains separate from
 retaining the original runtime; neither a matching hash nor an available MCP
 connection completes that application journey.

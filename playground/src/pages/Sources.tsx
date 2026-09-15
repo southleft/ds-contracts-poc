@@ -514,7 +514,11 @@ export function Sources() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(
-            job.candidateVisuals?.length ? { retry: true } : {},
+            visualCandidate?.state === "failed" ||
+              visualCandidate?.state === "interrupted" ||
+              visualCandidate?.phase === "visual-refused"
+              ? { retry: true }
+              : {},
           ),
         },
       );
@@ -1012,9 +1016,10 @@ export function Sources() {
                 <h3>Measured visual candidate</h3>
                 <p>
                   Derive source-owned structure, observed styles and recorded
-                  token correspondences from the verified preparation. Source
-                  slots remain separate from comparison content; missing cases
-                  and unsupported wrappers stay visible as limitations.
+                  token references and conditional wrappers from the verified
+                  preparation. Source slots remain separate from comparison
+                  content; missing cases and unsupported wrappers stay visible
+                  as limitations.
                 </p>
                 <div className="source-connect">
                   <button
@@ -1032,7 +1037,9 @@ export function Sources() {
                   >
                     {visualCandidate?.state === "running"
                       ? "Deriving measured visual candidate…"
-                      : visualCandidate
+                      : visualCandidate?.state === "failed" ||
+                          visualCandidate?.state === "interrupted" ||
+                          visualCandidate?.phase === "visual-refused"
                         ? "Retry visual candidate derivation"
                         : "Derive measured visual candidate"}
                   </button>
@@ -1070,10 +1077,22 @@ export function Sources() {
                                     "Unrecorded token identities and native bindings remain unverified.",
                                   "candidate-source-cases-refused":
                                     "Resolve the refused source cases; they remain in the coverage total.",
+                                  "candidate-wrapper-source-case-refused":
+                                    "Resolve the refused source cases; they remain in the coverage total.",
                                   "candidate-visual-refused":
                                     "The recorded evidence could not support a measured visual candidate.",
                                   "candidate-token-bindings-refused":
                                     "The recorded token evidence could not be qualified.",
+                                  "candidate-token-projection-unaccepted":
+                                    "Verify the projected token references against native variable identities and modes.",
+                                  "candidate-wrapper-snapshots-only":
+                                    "Verify conditional wrappers beyond the recorded snapshots, including native slot edits.",
+                                  "candidate-wrapper-branches-unprojected":
+                                    "Verify the remaining source branches before widening this candidate.",
+                                  "candidate-token-projection-refused":
+                                    "Recorded token references could not be safely projected into the candidate.",
+                                  "candidate-wrapper-projection-refused":
+                                    "The source wrapper conditions did not match the recorded component structure.",
                                   "candidate-evidence-unavailable-or-changed":
                                     "Recheck evidence that is missing or has changed before retrying.",
                                   "candidate-visual-assembly-failed":
@@ -1116,6 +1135,17 @@ export function Sources() {
                         ["observedChannels", "Style channels observed"],
                         ["excludedChannels", "Style channels excluded"],
                         ["boundTokenChannels", "Named token correspondences"],
+                        ["projectedTokenPaths", "Source token names retained"],
+                        [
+                          "projectedTokenAddresses",
+                          "Token references projected",
+                        ],
+                        ["wrapperPredicates", "Source wrapper conditions"],
+                        ["wrapperSnapshots", "Wrapper snapshots matched"],
+                        [
+                          "unprojectedWrapperPredicates",
+                          "Unprojected wrapper conditions",
+                        ],
                         [
                           "ambiguousTokenChannels",
                           "Ambiguous recorded references",
