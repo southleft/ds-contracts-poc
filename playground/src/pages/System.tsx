@@ -13,6 +13,7 @@ export function System() {
         className="product-overview__actions"
         aria-label="Try the current capabilities"
       >
+        <Link to="/start">Installation and user journeys</Link>
         <Link to="/sources">Validate a source</Link>
         <Link to="/playground">Explore the contract engine</Link>
       </nav>

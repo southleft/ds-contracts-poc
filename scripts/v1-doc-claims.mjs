@@ -3,6 +3,9 @@
 export function radixReadmeClaimFailures(readme, f1) {
   const text = readme.replace(/\*\*/g, '').replace(/^> ?/gm, '');
   const failures = [];
+  // The product overview no longer carries historical score tables. If it
+  // quotes any Radix scores again, require the complete checked denominator.
+  if (!/Radix|(?:avatar|switch|checkbox) scored|archetypes refuse at the role step/i.test(text)) return failures;
   for (const item of f1.rows.radix.archetypes.filter((a) => a.outcome === 'scored')) {
     const match = new RegExp(`${item.archetype} scored\\s*([\\d.\\s/]+)%`).exec(text);
     const scores = match?.[1].split('/').map(Number);
@@ -69,7 +72,7 @@ export function v1ExamClaimFailures(documents, f1, designer) {
   for (const [file, raw] of Object.entries(documents)) {
     const text = raw.replace(/\*\*/g, '').replace(/^> ?/gm, '');
     const censusClaims = [...text.matchAll(/(\d+)\s+accounting-clean,\s*(\d+)\s+refused by name/g)];
-    if (!censusClaims.length) failures.push(`${file}: missing current designer exam census — update the checker with the wording`);
+    if (!censusClaims.length && file !== 'README.md') failures.push(`${file}: missing current designer exam census — update the checker with the wording`);
     for (const m of censusClaims) {
       if (+m[1] !== clean.length || +m[2] !== refused.length) failures.push(`${file}: designer exam counts disagree with the measured subjects`);
     }
@@ -83,7 +86,8 @@ export function v1ExamClaimFailures(documents, f1, designer) {
     }
     if (file === 'README.md') {
       const scores = [...text.matchAll(/(?:scored at|scored against the real package's Chromium render at)\s*([\d.]+)%/g)];
-      if (scores.length !== 2) failures.push(`${file}: expected both current calendar score claims — update the checker with the wording`);
+      // Historical scores are optional in the overview; every quoted score
+      // still has to match the measured artifact.
       for (const m of scores) if (+m[1] !== f1.rows.calendar.pctAAMasked) failures.push(`${file}: current calendar score ${m[1]} disagrees with F1 measurement ${f1.rows.calendar.pctAAMasked}`);
     }
   }

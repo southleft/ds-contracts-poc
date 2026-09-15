@@ -52,7 +52,7 @@ export function homePage(
     <a class="door" href="${PLAYGROUND_URL}">Try the Playground <span class="door__arrow">→</span></a>
     <a class="door" href="/spec/">Read the Spec <span class="door__arrow">→</span></a>
   </div>
-  <p class="section-note">New here and not sure what this <em>does</em>? <a href="/get-started/">Get started</a> is organised by what you want: a component on the canvas that you want as code (<a href="/get-started/#a">A</a>), components in code that you want in Figma (<a href="/get-started/#b">B</a>), or a mature library on both sides that you want reconciled (<a href="/get-started/#c">C</a>).</p>
+  <p class="section-note">New here and not sure what this <em>does</em>? <a href="/get-started/">Get started</a> is organised by what you want: a component on the canvas that you want as code (<a href="/get-started/#designer-first">A</a>), components in code that you want in Figma (<a href="/get-started/#code-first">B</a>), or a mature library on both sides that you want reconciled (<a href="/get-started/#both-libraries">C</a>).</p>
   <p class="section-note"><strong>Historical scope (2026-08-31).</strong> The recipe-IR proof surface recorded five archetypes (Button, Input, Combobox, Table, Calendar) with live Scratch mints and owner-signed grades; <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a> and <a href="${REPO_URL}/blob/main/docs/26-v1-definition.md">docs/26</a> preserve that evidence. Product <strong>v1 is incomplete</strong>. The checked-out playground uses the current engine, while those historical measurements do not qualify the new source-runtime path. The active product plan is <a href="/system/">the whole loop</a>, including the unfinished application-to-canvas journey.</p>
 </div>
 

@@ -65,6 +65,14 @@ import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js'
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
+import { canonicalJson } from './contract-provenance.js';
+import {
+  resolveNativeSourceProjection,
+  type NativeSourcePartIdentity,
+  type NativeSourceProjectionContext,
+} from './native-source-projection.js';
+import { prepareNativeSourceWrite, wrapNativeSourceWrite, type NativeSourceWriteContext } from './native-source-write.js';
+import { prepareNativeSourceComparisons, NATIVE_COMPARISONS_RUNTIME, type NativeSourceSampleIdentity } from './native-source-comparisons.js';
 
 
 /** A2 grid: a compiled track — the Plugin API's own structured spelling
@@ -114,6 +122,11 @@ export interface NodeSpec {
   /** Round 4: intrinsic glyph size for svg specs (contract icon.size). */
   iconSize?: number;
   name: string;
+  /** Private compile-only source identity; never inferred from a layer name. */
+  nativeSourcePart?: NativeSourcePartIdentity;
+  nativeSourceSample?: NativeSourceSampleIdentity;
+  /** Qualified empty-main whole-wrapper state, never a public component prop. */
+  nativeSourceVisible?: false;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
   fill?: string;
@@ -597,6 +610,13 @@ export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxG
 }
 
 export interface ComponentData {
+  /** Unaccepted inspection output. The writer refuses this until an exact
+   * native token and operation context has a separately qualified path. */
+  nativeSourceCandidate?: {
+    revision: string;
+    purpose: 'source-candidate-inspection';
+    acceptedContract: null;
+  };
   setName: string;
   contractId: string;
   /** Authored contract version — stamped as `ds_contracts/version` so dump
@@ -728,6 +748,14 @@ const STATE_REACTION_TRIGGERS: ReadonlyArray<{ state: ContractState; trigger: St
 /** Data the engine needs — parsed trees and assets, never paths. */
 export interface FigmaEngineInput {
   tokens: TokenTreeInput;
+  /** Host-authenticated finite observation registry. It permits compilation
+   * only; it does not grant native writes or qualify the retained runtime. */
+  nativeSourceCandidate?: NativeSourceProjectionContext;
+  /** Context for compile-time token literals, including numeric typography.
+   * Omission preserves the historical light/default projection. This does
+   * not select native Figma variable modes or grant runtime admission. */
+  mode?: 'light' | 'dark';
+  brand?: string;
   /** Icon asset name → SVG markup (assets/icons/*.svg on the CLI side). */
   icons: Map<string, string>;
   /** When set, duplicate variable names resolve from this Figma collection
@@ -886,7 +914,25 @@ export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string
  * own code, moved verbatim — evals/golden.json guards every emitted byte.
  */
 export function createFigmaEngine(input: FigmaEngineInput) {
+  // Actual source Part objects are paired at the existing lowering sites. A
+  // post-hoc layer-name walk cannot establish this identity (names can repeat,
+  // and layout lowering may reorder or expand nodes).
+  const nativePartOrigins = new WeakMap<NodeSpec, Part>();
+  const compiledData = new WeakMap<ComponentData, string>();
+  const nativeCandidateData = new WeakSet<ComponentData>();
   const variableCollection = input.variableCollection;
+  const mode = input.mode === undefined ? 'light' : input.mode;
+  const brand = input.brand === undefined ? 'default' : input.brand;
+  const isTree = (value: unknown): value is Record<string, unknown> =>
+    value !== null && typeof value === 'object' && !Array.isArray(value);
+  if ((mode !== 'light' && mode !== 'dark') ||
+      !Object.hasOwn(input.tokens, mode) || !isTree(input.tokens[mode])) {
+    throw new Error('FIGMA_CONTEXT_MODE_INVALID: select an existing light or dark token tree');
+  }
+  if (typeof brand !== 'string' || !brand || !isTree(input.tokens.brands) ||
+      !Object.hasOwn(input.tokens.brands, brand) || !isTree(input.tokens.brands[brand])) {
+    throw new Error('FIGMA_CONTEXT_BRAND_INVALID: select an existing brand token tree');
+  }
   const flatten = flattenTokens;
   const primitives = flatten(input.tokens.primitives);
   const semantic = flatten(input.tokens.semantic);
@@ -906,9 +952,9 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   const cssVarName = (dotPath: string) => `var(--${dotPath.split('.').join('-')})`;
 
   function resolveLiteral(dotPath: string): unknown {
-    // Canvas resolves per the DEFAULT brand mode (canvas variants render the
-    // contract's default state; brand modes are switched in the design tool).
-    const all = new Map([...primitives, ...brandModes.get('default')!, ...semantic, ...light]);
+    // All compile-time scalar lowering shares the host-selected context;
+    // native variable binding/mode selection remains a separate operation.
+    const all = new Map([...primitives, ...brandModes.get(brand)!, ...semantic, ...(mode === 'dark' ? dark : light)]);
     let entry = all.get(dotPath);
     let guard = 0;
     while (entry && guard++ < 10) {
@@ -4332,6 +4378,7 @@ function partToSpec(
   // requires an auto-layout parent).
   if (part.overlay) spec.overlay = part.overlay;
   applyStylesWhenOpacity(spec, part, contract, subst);
+  nativePartOrigins.set(spec, part);
   return spec;
 }
 
@@ -5081,7 +5128,13 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
-  refuseRetainedRuntime(contract, 'figma-script', byId);
+  const nativeSource = contract.bindings.code.runtime && input.nativeSourceCandidate
+    ? resolveNativeSourceProjection(contract, { tokens: input.tokens, mode, brand }, input.nativeSourceCandidate)
+    : undefined;
+  // The qualified source fence rejects every composition itself. All other
+  // calls retain the original recursive guard, including ordinary parents
+  // containing retained-runtime children or slot defaults.
+  if (!nativeSource) refuseRetainedRuntime(contract, 'figma-script', byId);
   // compileComponentData is also a public entry, used without schema parsing.
   // Validate every opt-in, including malformed non-axis uses filtered below.
   for (const p of contract.props) if (p.bindings.figma.unsetValue !== undefined) PropSchema.parse(p);
@@ -5220,6 +5273,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       name: nameParts.join(', ') || contract.name,
       layout: layoutSpec(root, true, subst),
     };
+    nativePartOrigins.set(rootSpec, root);
     // resolveTokens, not root.tokens: the root's tokensByProp overrides (v10
     // — per-size padding-inline/height on the owner's Button) resolve per
     // combo exactly like every child part's. Byte-neutral for contracts
@@ -5845,7 +5899,44 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // with the count beside it now, pointing at where the names live.
   const hasCodeOnlyFacts = codeOnlyFacts.length > 0;
 
-  return {
+  if (nativeSource) {
+    const identities = new Map<Part, NativeSourcePartIdentity>();
+    for (const { path, part } of walkAnatomy(contract)) {
+      const identity = nativeSource.parts.get(canonicalJson(path));
+      if (!identity || identities.has(part)) throw new Error('NATIVE_SOURCE_CANDIDATE_PART_PAIRING_INVALID');
+      identities.set(part, identity);
+    }
+    if (stateVariants.length || boolPropsData.length || textOnlyProps.length) {
+      throw new Error('NATIVE_SOURCE_CANDIDATE_API_EXPANSION_REFUSED');
+    }
+    for (const variant of variants) {
+      const seen = new Set<Part>();
+      const pair = (spec: NodeSpec) => {
+        const part = nativePartOrigins.get(spec);
+        const identity = part && identities.get(part);
+        const expectedType = identity?.kind === 'wrapper' ? 'frame' : identity?.kind;
+        if (!part || !identity || seen.has(part) || spec.type !== expectedType ||
+            spec.visibleProp || spec.slotOptional || spec.slotDefault?.length) {
+          throw new Error('NATIVE_SOURCE_CANDIDATE_PART_PAIRING_INVALID');
+        }
+        seen.add(part);
+        spec.nativeSourcePart = structuredClone(identity);
+        if (identity.emptyMainVisible === false) spec.nativeSourceVisible = false;
+        for (const child of spec.children ?? []) pair(child);
+      };
+      pair(variant.spec);
+      if (seen.size !== identities.size) throw new Error('NATIVE_SOURCE_CANDIDATE_PART_COVERAGE_INVALID');
+    }
+  }
+
+  const data: ComponentData = {
+    ...(nativeSource ? {
+      nativeSourceCandidate: {
+        revision: nativeSource.revision,
+        purpose: 'source-candidate-inspection' as const,
+        acceptedContract: null,
+      },
+    } : {}),
     setName: contract.name,
     contractId: contract.id,
     version: contract.version,
@@ -5902,6 +5993,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ...[...variants, ...stateVariants].map((v) => (v.spec.fixedWidth?.px ?? 0) + 60),
     ),
   };
+  compiledData.set(data, canonicalJson(data));
+  if (nativeSource) nativeCandidateData.add(data);
+  return data;
 }
 
 /** The conditional minted-variable preamble (see FigmaScriptCtx.mintedTokens).
@@ -7132,6 +7226,7 @@ function buildComponentScript(
     );
   }
   const data = compileComponentData(contract, byId);
+  if (nativeCandidateData.has(data)) throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
   return buildSyncScript([data], fileKeyOverride ?? contract.bindings.figma.anchors.fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -7149,12 +7244,66 @@ function buildComponentScript(
 // Existing components are skipped, so batches are safe to re-run.
 // ---------------------------------------------------------------------------
 
+/** Batch inputs must be unchanged objects returned by this engine's guarded
+ * compileComponentData. Serialized copies and caller-built descriptors are
+ * not a supported writer boundary; callers must compile their Contracts. */
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
+  for (const data of datas) {
+    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') ||
+        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
+      throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
+    }
+    // Raw or mutated ComponentData cannot provide a route around guarded
+    // Contract compilation. The production batch shell passes these exact
+    // compiler outputs, so its generated bytes remain unchanged.
+    if (compiledData.get(data) !== canonicalJson(data)) throw new Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+  }
   return buildSyncScript(datas, fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Batch sync: ${datas.map((d) => d.setName).join(', ')} (unchanged components skip; changed ones amend in place).`,
     preamble: '',
   });
+}
+
+/** Host-only create door. Recompiles the Contract through the authenticated
+ * source registry; never accepts serialized ComponentData as write authority.
+ * Mains stay empty; supplied source samples fill separate comparison instances.
+ * Independent native readback remains a separate phase. No Contract is accepted. */
+function buildNativeSourceComponentScript(
+  contract: Contract,
+  byId: Map<string, Contract>,
+  context: NativeSourceWriteContext,
+): string {
+  const data = compileComponentData(contract, byId);
+  if (!nativeCandidateData.has(data) || !input.nativeSourceCandidate ||
+      compiledData.get(data) !== canonicalJson(data)) {
+    throw new Error('NATIVE_SOURCE_CANDIDATE_TRUSTED_CONTEXT_MISSING');
+  }
+  const source = resolveNativeSourceProjection(contract, {
+    tokens: input.tokens, mode: input.mode ?? 'light', brand: input.brand ?? 'default',
+  }, input.nativeSourceCandidate);
+  const boundNames = new Set<string>();
+  dataSome(data, spec => {
+    if (!spec.nativeSourcePart || !['root', 'frame', 'slot'].includes(spec.type) ||
+        spec.slotDefault?.length || spec.visibleProp || spec.slotOptional || spec.margins || spec.insetOverlay) {
+      throw new Error('NATIVE_SOURCE_CANDIDATE_PART_PAIRING_INVALID');
+    }
+    for (const value of Object.values(spec.bindings ?? {})) boundNames.add(value);
+    for (const value of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName]) {
+      if (value) boundNames.add(value);
+    }
+    return false;
+  });
+  const comparisons = context.comparisons ? prepareNativeSourceComparisons(contract, data, source.projection, context.comparisons) : undefined;
+  const prepared = prepareNativeSourceWrite(source.projection, context, [...boundNames], comparisons);
+  // Distinct operation machine identity prevents this unaccepted projection
+  // becoming an ordinary Contract sync target later. Source identity lives in
+  // separate provenance metadata, never in an adopted canonical anchor.
+  const scoped = { ...data, contractId: prepared.descriptor.machineId, anchorKey: null };
+  return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
+    header: '// Shared renderer: operation-scoped empty native source mains.',
+    preamble: '', nativeSource: true, nativeComparisons: !!comparisons, nativeSampleSpecs: prepared.sampleSpecs,
+  }));
 }
 
 /** The ONE sync runtime (create + in-place amend), shared by the batch
@@ -7163,36 +7312,42 @@ function buildBatchScript(datas: ComponentData[], fileKey: string | null): strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
-  const hasOpacity = datas.some(dataHasOpacity);
-  const hasShape = datas.some((d) => dataSome(d, (x) => x.shape !== undefined));
+  // Comparison content is not a main default or another component, but its
+  // text/SVG/literal features must participate in the shared runtime scan.
+  const featureDatas = opts.nativeSampleSpecs?.length ? [...datas, {
+    ...datas[0], stateVariants: undefined,
+    variants: opts.nativeSampleSpecs.map((spec, index) => ({ name: '', row: index, col: 0, spec })),
+  }] : datas;
+  const hasOpacity = featureDatas.some(dataHasOpacity);
+  const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
   // seven committed libraries) emit byte-identical scripts.
-  const hasArc = datas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { arc?: unknown }).arc !== undefined));
-  const hasShadow = datas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
-  const hasLineHeight = datas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
-  const hasAbsolute = datas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
-  const hasLits = datas.some((d) => dataSome(d, (x) => x.lits !== undefined));
+  const hasArc = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { arc?: unknown }).arc !== undefined));
+  const hasShadow = featureDatas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
+  const hasLineHeight = featureDatas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
+  const hasAbsolute = featureDatas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
+  const hasLits = featureDatas.some((d) => dataSome(d, (x) => x.lits !== undefined));
   // D2: literal stroke COLOUR — feature-gated like every other lits field so
   // a contract that never carries one emits a byte-identical script.
-  const hasLitStrokeColor = datas.some((d) => dataSome(d, (x) => x.lits?.strokeColor !== undefined));
+  const hasLitStrokeColor = featureDatas.some((d) => dataSome(d, (x) => x.lits?.strokeColor !== undefined));
   // R7 LITERAL INK: the runtime line is emitted only when a spec carries it,
   // so every existing emission stays byte-identical.
-  const hasTextFillLit = datas.some((d) => dataSome(d, (x) => x.textFillLit !== undefined));
+  const hasTextFillLit = featureDatas.some((d) => dataSome(d, (x) => x.textFillLit !== undefined));
   // …and the SHAPE branch's literal ring/weight/radius application.
-  const hasShapeLits = datas.some((d) =>
+  const hasShapeLits = featureDatas.some((d) =>
     dataSome(d, (x) => x.shape !== undefined && (x.lits?.strokeColor !== undefined || x.lits?.strokeWeight !== undefined || x.lits?.strokeSides !== undefined || x.lits?.radius !== undefined)),
   );
   // A2 grid: the whole GRID runtime (declaration + placement passes) is
   // feature-gated — grid-less corpora emit byte-identical scripts.
-  const hasGrid = datas.some((d) => dataSome(d, (x) => x.layout?.mode === 'GRID'));
+  const hasGrid = featureDatas.some((d) => dataSome(d, (x) => x.layout?.mode === 'GRID'));
   // NATIVE SLOTS: the slot runtime (createSlot + unification + the amend
   // rebind + the legacy-INSTANCE_SWAP migration) is feature-gated like the
   // grid runtime — a slot-less contract emits a byte-identical script and
   // never carries a line about slots.
-  const hasSlot = datas.some((d) => dataSome(d, (x) => x.type === 'slot'));
+  const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   // FC-SLOT-BIRTH-BOX generalized: the 100x100 birth box is NOT a slot fact.
   // It survives on ANY childless auto-layout node that reports HUG, because a
   // node with no children never triggers the relayout that would dissolve it.
@@ -7201,7 +7356,7 @@ function buildSyncScript(
   // library divider is 288x1. GRID is excluded: a resize on a GRID frame
   // silently reverts HUG tracks to FLEX (G8/GP4b), so the repair would cost
   // more than the defect.
-  const hasChildlessBox = datas.some((d) =>
+  const hasChildlessBox = featureDatas.some((d) =>
     dataSome(
       d,
       (x) =>
@@ -7210,22 +7365,22 @@ function buildSyncScript(
         x.layout?.mode !== 'GRID',
     ),
   );
-  const hasWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
+  const hasWrap = featureDatas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
   // A COLUMN stack carrying `wrap` is schema-valid and legal CSS, and Figma
   // THROWS on it (layoutWrap is HORIZONTAL-only). Detected statically so the
   // dropped fact is a `†` receipt in the emitted script — the channel the
   // dagger census already counts — rather than a silent skip at runtime.
-  const hasColumnWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true && x.layout?.mode !== 'HORIZONTAL'));
-  const hasEffectStack = datas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
-  const hasGradient = datas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
-  const hasInsetOverlay = datas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
+  const hasColumnWrap = featureDatas.some((d) => dataSome(d, (x) => x.layout?.wrap === true && x.layout?.mode !== 'HORIZONTAL'));
+  const hasEffectStack = featureDatas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
+  const hasGradient = featureDatas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
+  const hasInsetOverlay = featureDatas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
   // Round 5d: margin-box wrapper / outline-lowered OUTSIDE strokes /
   // single-paint glyph variable re-binding — all feature-gated so contracts
   // without these facts emit byte-identical scripts (the golden discipline).
-  const hasMargins = datas.some((d) => dataSome(d, (x) => x.margins !== undefined));
-  const hasStrokeOutside = datas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
-  const hasSvgPaint = datas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
-  const hasTextExtras = datas.some((d) =>
+  const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
+  const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
+  const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
+  const hasTextExtras = featureDatas.some((d) =>
     dataSome(
       d,
       (x) =>
@@ -7244,8 +7399,8 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
 
 await figma.loadAllPagesAsync();
 
-${opts.preamble}const allVars = await figma.variables.getLocalVariablesAsync();
-const varByName = {};
+${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};
+const varByName = ${opts.nativeSource ? 'Object.create(null)' : '{}'};
 for (const v of allVars) varByName[v.name] = v;
 // FC-THEME-ISO: a multi-library file carries colliding variable names across
 // collections (four \`imported/badge/root/background-color/info\`s on the
@@ -7779,16 +7934,16 @@ function applyOverlay(parent, childNode, childSpec) {
 }
 ${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 async function buildNode(spec, registry) {
-  let node;
+  let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}
   if (spec.type === 'svg') {
-    node = figma.createNodeFromSvg(spec.svg);
+    node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);${svgPaintRuntime(hasSvgPaint)}
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}
@@ -7891,7 +8046,7 @@ async function buildNode(spec, registry) {
         '(never on a frame or a component SET); a slot outside a component build is refused',
       );
     }
-    node = registry.owner.createSlot();
+    node = registry.owner.createSlot();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);
     // An empty native slot renders as Figma's own thing: no dashed chrome, no
     // "Slot" text, no placeholder instance (proposal §2). createSlot's default
@@ -7914,7 +8069,7 @@ async function buildNode(spec, registry) {
     }
     registry.slots.push({ spec, slot: node });
   }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc)} else {
-    node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
+    node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it
     // (figma.createSlot is a ComponentNode method).
@@ -8458,14 +8613,14 @@ async function amendComponent(comp, C) {
   return report;
 }
 
-async function syncOne(C) {
+${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOne(C) {
   // Semantic marker → stable anchor → unique explicit legacy-generated name.
   // A same-name foreign node has neither marker and is never adopted.
-  let existing = resolveComponentIdentity(
+  let existing = ${opts.nativeSource ? 'null' : `resolveComponentIdentity(
     { contractId: C.contractId, anchorKey: C.anchorKey, name: C.setName },
     'Sync target "' + C.setName + '"',
     true,
-  );
+  )`};
   // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
   // designer's file stays in sync without losing node ids or keys — but it
   // means "apply this bundle" on a file that already carries these stems
@@ -8538,8 +8693,8 @@ async function syncOne(C) {
   }
 
   // One page per component (see figma-sync/arrange.js for the file layout).
-  let compPage = figma.root.children.find((p) => p.name === displayName);
-  if (!compPage) { compPage = figma.createPage(); compPage.name = displayName; }
+  ${opts.nativeSource ? 'const compPage = NATIVE_PAGE;' : `let compPage = figma.root.children.find((p) => p.name === displayName);
+  if (!compPage) { compPage = figma.createPage(); compPage.name = displayName; }`}
 
   const EV = withStateAxis(C);
   const built = [];
@@ -8557,7 +8712,11 @@ async function syncOne(C) {
   } else {
     target = built[0].comp;
     compPage.appendChild(target);
-  }
+  }${opts.nativeSource ? `
+  NATIVE_RESULT.target = { id: target.id, type: target.type };
+  if (C.isSet) nativeOwn(target);
+  NATIVE_RESULT.target.key = target.key;
+  target.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);` : ''}
 
   // Component properties are minted on the PROPERTY OWNER — the SET for a
   // variant component, the component itself for a standalone — AFTER
@@ -8647,8 +8806,9 @@ async function syncOne(C) {
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
-  ensureHostSection(compPage, target, displayName);
-
+  ${opts.nativeSource ? `NATIVE_RESULT.propertyDefinitions = JSON.parse(JSON.stringify(target.componentPropertyDefinitions));
+  NATIVE_RESULT.variants = built.map(b => ({ id: b.comp.id, key: b.comp.key, name: b.v.name }));` : 'ensureHostSection(compPage, target, displayName);'}
+${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : ''}
   return {
     name: C.setName,
     contractId: C.contractId,
@@ -8667,11 +8827,11 @@ for (const C of COMPONENTS) {
   // report can list the facts under the set whatever the sync did.
   const degradedFrom = DEGRADATIONS.length;
   results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
-}${hasSlot ? `
+}${hasSlot && !opts.nativeSource ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.
 const slotUtility = retireSlotUtility();` : ''}
-return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results${hasSlot ? `, ...(slotUtility ? { slotUtility: slotUtility } : {})` : ''} };
+return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results${hasSlot && !opts.nativeSource ? `, ...(slotUtility ? { slotUtility: slotUtility } : {})` : ''} };
 `;
 }
 
@@ -8680,6 +8840,7 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     compileComponentData,
     buildComponentScript,
     buildBatchScript,
+    buildNativeSourceComponentScript,
     /** One token ref → its resolved literal, or a throw when the ref does not
      *  resolve. Exposed so a SHELL can grade a contract against this engine's
      *  own inventory instead of building a second, drifting resolver. */

@@ -33,14 +33,14 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
           </button>
         </div>
         <div className="drawer__body">
+          <p><a href="/start" onClick={onClose}>Start with your library: installation and the three user journeys</a></p>
           <section>
             <h3 className="drawer__section-title">What this is</h3>
             <p>
               A <b>contract</b> is one JSON file per component: its props and their legal
               values, the parts it&rsquo;s made of, which design token paints each part, and
-              its states. A React component and a Figma component set are both{' '}
-              <i>generated</i> from that file — neither is hand-maintained, and a differ proves
-              they still match.
+              its states. Supported contracts can generate React components and native Figma writer programs.
+              Independent verification of the connected user journey remains unfinished.
             </p>
             <p>
               This page runs the real pre-pivot engine in your browser so you can see that happen. Load a
