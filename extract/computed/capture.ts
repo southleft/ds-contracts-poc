@@ -1443,7 +1443,7 @@ export function preScriptTag(cfg: CaptureConfig): string {
 // @door capture.text-node-admission
 // @door capture.unreadable-sheet-skip
 // @door capture.varprefix-off-switch
-export const captureJs = (selector: string, classAllow?: string, varPrefix?: string) => `(() => {
+export const captureJs = (selector: string, classAllow?: string, varPrefix?: string, rootPath?: readonly string[]) => `(() => {
   ${SHADOW_HELPERS_JS}
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
@@ -1456,7 +1456,7 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
   // SHADOW_HELPERS_JS). \`shStageRoot\` is the ONE implementation of this pick
   // — the interaction drivers stamp the very same element (W3/W4), so the
   // element that is hovered is by construction the element that is read.
-  const rootEl = shStageRoot(stage);
+  const rootEl = ${rootPath ? `(() => { let scope = document, element = null; for (const selector of ${JSON.stringify(rootPath)}) { element = scope?.querySelector(selector); scope = element?.shadowRoot; } return element; })()` : 'shStageRoot(stage)'};
   if (!rootEl) return null;
   const props = window.__ALL_PROPS;
   const allow = ${JSON.stringify(classAllow ?? null)};

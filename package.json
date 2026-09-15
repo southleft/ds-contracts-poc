@@ -10,6 +10,7 @@
   "scripts": {
     "ci:lanes": "tsx .github/scripts/lane-coverage.ts",
     "ci:lane": "tsx .github/scripts/run-lane.ts",
+    "source:reference:check": "tsc -p source-reference/tsconfig.json && node --import tsx --test source-reference/check.test.ts source-reference/replay.test.ts source-reference/service.test.ts source-reference/capture.test.ts",
     "prep:schema": "npm --prefix packages/schema run build",
     "prep:core": "npm run prep:schema && npm --prefix packages/core run build",
     "lint": "oxlint --deny-warnings -A no-unused-vars -A unicorn/no-new-array -A no-unsafe-optional-chaining -A unicorn/prefer-string-starts-ends-with -A no-unreachable .github/scripts packages/cli/src packages/cli/test packages/schema/src packages/core/src packages/emitter-web-components/src workers/assist/src workers/assist/test playground/src dashboard/src site/src",

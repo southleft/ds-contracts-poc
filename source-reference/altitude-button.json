@@ -1,0 +1,23 @@
+{
+  "id": "altitude-local-storybook-button-default-dark",
+  "provenance": "Altitude 0639eccd15bfedc4fa9713d9545a64cef2c0f0a5: .storybook/preview.ts imports styles/main.scss (dark tokens); button.scss uses body-md-bold, background-primary-default, content-primary-weak, space-xs, space and border-radius; styles/dist/tokens.json resolves these to the witnesses below. This is the current local library, NOT the older npm altitude-web-components@1.0.2 corpus.",
+  "path": ["al-button", "button"],
+  "fontFamily": "IBM Plex Sans",
+  "requiredTokens": {
+    "--al-theme-color-background-primary-default": "#4375ff",
+    "--al-theme-color-content-primary-weak": "#000b29",
+    "--al-theme-typography-body-md-bold": "600 1rem/1.5rem IBM Plex Sans, sans-serif",
+    "--al-theme-color-body-background": "#101010"
+  },
+  "requiredStyles": {
+    "display": "inline-flex",
+    "background-color": "rgb(67, 117, 255)",
+    "color": "rgb(0, 11, 41)",
+    "font-size": "16px",
+    "font-weight": "600",
+    "line-height": "24px",
+    "padding-top": "8px",
+    "padding-left": "16px",
+    "border-radius": "4px"
+  }
+}

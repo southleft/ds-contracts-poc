@@ -7,6 +7,7 @@ import { Landing } from "./pages/Landing";
 import { Examples } from "./pages/Examples";
 import { Flow } from "./pages/Flow";
 import { Playground } from "./pages/Playground";
+import { Sources } from "./pages/Sources";
 
 export const REPO_URL = "https://github.com/southleft/ds-contracts-poc";
 
@@ -40,6 +41,9 @@ function TopBar() {
         <span className="topbar__brand-name">Contract Playground</span>
       </Link>
       <nav className="topbar__nav">
+        <Link to="/sources" className={navClass("/sources")}>
+          Source validation
+        </Link>
         <Link to="/playground" className={navClass("/playground")}>
           Playground
         </Link>
@@ -80,6 +84,7 @@ function TopBar() {
 
 function Routes() {
   const { pathname } = useRoute();
+  if (pathname === "/sources") return <Sources />;
   if (pathname === "/playground") return <Playground />;
   if (pathname === "/examples") return <Examples />;
   if (pathname === "/flow") return <Flow />;
@@ -91,6 +96,14 @@ function Routes() {
 /** Persistent: this app still drives the pre-pivot universal-contract
  *  engine. A reader must not take a playground mint as recipe-IR / v1 proof. */
 function PivotBanner() {
+  const { pathname } = useRoute();
+  if (pathname === "/sources")
+    return (
+      <div className="pivot-banner" role="note">
+        Live source validation is the first step of the new workflow. Figma
+        generation and round-trip comparison are not connected here yet.
+      </div>
+    );
   return (
     <div className="pivot-banner" role="note">
       <span>
