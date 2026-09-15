@@ -39,7 +39,7 @@ npx tsc --noEmit  # src, scripts, extract, parity, evals`, 'bash', 'CONTRIBUTING
 <h2 id="other-ways">Other ways to contribute</h2>
 <ul>
 <li><strong>Skepticism.</strong> Genuinely welcome — start with <a href="${REPO_URL}/blob/main/docs/14-questions-and-objections.md">Questions &amp; Objections</a>, where every hard question is asked the skeptic's way and answered with receipts. An unanswered hard question is an issue worth opening.</li>
-<li><strong>Field cases.</strong> Run the extraction against your own library (<a href="/get-started/#adopt">get started · path 3</a>) and report what the pipeline couldn't carry. Named degradations from real systems are how the schema has grown every round so far.</li>
+<li><strong>Field cases.</strong> Run the extraction against your own library (<a href="/operator-guide/#adopt">get started · path 3</a>) and report what the pipeline couldn't carry. Named degradations from real systems are how the schema has grown every round so far.</li>
 <li><strong>A second implementation.</strong> The roadmap's endgame is an implementation this repo's authors didn't write passing a conformance kit. If you're building one — in any language, against any design tool — open an issue early; the conformance kit is being shaped by exactly this conversation.</li>
 </ul>
 

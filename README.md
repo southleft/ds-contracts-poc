@@ -13,6 +13,8 @@ Start with either library. Describe its supported structure, properties, tokens 
 
 ![Three intended workflows: code to contract to editable Figma; Figma to contract to reusable code; changes on either side through comparison, authorized repair and independent verification.](docs/assets/product-loop.svg)
 
+**New here? [Start with your library: installation and the three user journeys](docs/USER-JOURNEYS.md).**
+
 ## What you should be able to do
 
 | Start with | Intended workflow | Result to verify |

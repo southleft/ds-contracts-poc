@@ -5,6 +5,7 @@ import { mkdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { chromium } from "playwright-core";
 import { renderProductOverview } from "./overview.js";
+import { renderJourneyGuide } from "./journeys.js";
 
 const output = resolve("private/product-overview-check", randomUUID());
 mkdirSync(output, { recursive: true });
@@ -106,6 +107,97 @@ try {
       results.push({ name, ...observation });
     }
   }
+  for (const [surface, origin, route] of [
+    ["app", "http://127.0.0.1:5181", "/start"],
+    ["site", "http://127.0.0.1:5182", "/get-started/"],
+  ] as const) {
+    const expected = renderJourneyGuide(
+      readFileSync("docs/USER-JOURNEYS.md", "utf8"),
+      surface,
+    );
+    for (const width of [1440, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(origin + route);
+      await page
+        .getByRole("heading", { name: "Start with your library", exact: true })
+        .waitFor();
+      assert(
+        await page.locator("article").evaluate((article, html) => {
+          const target = document.createElement("div");
+          target.innerHTML = html;
+          return (
+            article.textContent === target.textContent &&
+            JSON.stringify(
+              [...article.querySelectorAll("a")].map((a) =>
+                a.getAttribute("href"),
+              ),
+            ) ===
+              JSON.stringify(
+                [...target.querySelectorAll("a")].map((a) =>
+                  a.getAttribute("href"),
+                ),
+              )
+          );
+        }, expected),
+        `${surface}: user guide is stale`,
+      );
+      assert.equal(
+        await page.evaluate(() => document.documentElement.scrollWidth),
+        width,
+      );
+      for (const id of [
+        "designer-first",
+        "code-first",
+        "both-libraries",
+        "install",
+        "next-delivery",
+      ]) {
+        await page.locator(`article a[href="#${id}"]`).click();
+        assert.equal(new URL(page.url()).hash, `#${id}`);
+        assert(await page.locator(`[id="${id}"]`).count());
+      }
+      await page.goto(origin + route);
+      await page.screenshot({
+        path: resolve(output, `${surface}-start-${width}.png`),
+      });
+      results.push({
+        surface,
+        route,
+        width,
+        guide: "canonical text and links match",
+      });
+    }
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("http://127.0.0.1:5181/");
+  await page.getByRole("link", { name: /I have a Figma library/ }).click();
+  await page
+    .getByRole("link", { name: "open Figma import", exact: true })
+    .click();
+  assert.equal(new URL(page.url()).searchParams.get("source"), "figma");
+  const externalFigmaRequests: string[] = [];
+  page.on("request", (req) => {
+    if (new URL(req.url()).hostname === "api.figma.com")
+      externalFigmaRequests.push(req.url());
+  });
+  await page
+    .getByRole("button", { name: "Demo import (Badge fixture)", exact: true })
+    .click();
+  await page.getByRole("tab", { name: "React", exact: true }).click();
+  await page.locator(".output__file").first().waitFor();
+  const files = await page.locator(".output__files").innerText();
+  assert.match(files, /Badge.*tsx/);
+  assert.match(files, /BadgeProps/);
+  assert.match(files, /var\(--color-feedback-info-background\)/);
+  assert((await page.locator(".output__copy").count()) > 0);
+  assert.deepEqual(externalFigmaRequests, []);
+  await page.screenshot({
+    path: resolve(output, "fixture-import-react-output.png"),
+  });
+  results.push({
+    journey: "start → Figma fixture import → proposed contract → React files",
+    scope: "recorded fixture, no live Figma or reusable-library qualification",
+  });
   await page.setViewportSize({ width: 1440, height: 900 });
   for (const route of ["/", "/sources", "/playground", "/flow"]) {
     await page.goto(`http://127.0.0.1:5181${route}`);

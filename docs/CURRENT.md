@@ -6,6 +6,8 @@ The goal is to connect a team's code and design libraries through a shared contr
 
 This page is the current status and outcome-based work order. It is also rendered in the playground and documentation site at `/system`. Earlier plans and dated measurements do not override it.
 
+For installation and a step-by-step walkthrough from each starting point, read the [user journey guide](../docs/USER-JOURNEYS.md). The local app exposes it at `/start`; the documentation site at `/get-started/`. These entry points now link to available import and source-inspection actions and name unfinished delivery steps.
+
 ## The whole loop
 
 ![Intended workflows: code to contract to editable Figma; Figma to contract to reusable code; and changes through comparison, authorized repair and independent verification.](assets/product-loop.svg)
