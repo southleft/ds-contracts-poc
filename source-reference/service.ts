@@ -15,6 +15,11 @@ import {
 } from "./candidate-jobs.js";
 import { validateCandidatePreparationReport } from "./candidate-report.js";
 import { validateCandidateVisualReport } from "./candidate-visual-report.js";
+import {
+  createNativeOperationJobs,
+  prepareVerifiedNativeOperation,
+  type NativeOperationJobsOptions,
+} from "./native-operation-jobs.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
@@ -89,6 +94,7 @@ export function createReferenceService(
       "run" | "validateReport" | "validateVisualReport"
     >
   > = {},
+  nativeOptions?: NativeOperationJobsOptions,
 ) {
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
@@ -106,6 +112,17 @@ export function createReferenceService(
       candidateOptions.validateVisualReport ?? validateCandidateVisualReport,
     ...(candidateOptions.run ? { run: candidateOptions.run } : {}),
   });
+  const nativeJobs = createNativeOperationJobs(
+    repoRoot,
+    nativeOptions ?? {
+      prepare: (request, operation) =>
+        prepareVerifiedNativeOperation(
+          repoRoot,
+          candidateJobs.selectLatestVisualVerified(request),
+          operation,
+        ),
+    },
+  );
   let active:
     { job: ReferenceJob; child: Pick<ChildProcess, "kill"> } | undefined;
   const execute: Launch =
@@ -602,6 +619,7 @@ export function createReferenceService(
       candidateVisuals: candidates.filter(
         (candidate) => candidate.operation === "source-visual-assembly",
       ),
+      nativeOperation: nativeJobs.forBaseline(job.id),
     };
   };
   function start(
@@ -699,11 +717,13 @@ export function createReferenceService(
     const bindingMatch = /^([a-f0-9-]+)\/button-bindings$/i.exec(route);
     const candidateMatch = /^([a-f0-9-]+)\/button-candidate$/i.exec(route);
     const visualMatch = /^([a-f0-9-]+)\/button-visual-candidate$/i.exec(route);
+    const nativeMatch = /^([a-f0-9-]+)\/button-native-operation$/i.exec(route);
     if (
       req.method === "POST" &&
-      (bindingMatch || candidateMatch || visualMatch)
+      (bindingMatch || candidateMatch || visualMatch || nativeMatch)
     ) {
-      const preparingCandidate = !!candidateMatch || !!visualMatch;
+      const preparingCandidate =
+        !!candidateMatch || !!visualMatch || !!nativeMatch;
       if (!req.headers["content-type"]?.startsWith("application/json")) {
         json(res, 415, { error: "JSON required." });
         return;
@@ -725,6 +745,7 @@ export function createReferenceService(
         }
         if (
           !object(request) ||
+          (nativeMatch && Object.keys(request).length !== 0) ||
           Object.keys(request).some((key) => key !== "retry") ||
           (request.retry !== undefined &&
             (preparingCandidate
@@ -732,16 +753,18 @@ export function createReferenceService(
               : typeof request.retry !== "boolean"))
         ) {
           json(res, 400, {
-            error: preparingCandidate
-              ? "Only an empty object or retry: true is accepted; source evidence and preparation are fixed."
-              : "Only an optional Boolean retry is accepted; source, scripts and replay targets are fixed.",
+            error: nativeMatch
+              ? "Only an empty object is accepted; source evidence, native target and operation identity are fixed."
+              : preparingCandidate
+                ? "Only an empty object or retry: true is accepted; source evidence and preparation are fixed."
+                : "Only an optional Boolean retry is accepted; source, scripts and replay targets are fixed.",
           });
           return;
         }
-        // Both actions use the same host-selected baseline and latest
+        // These actions use the same host-selected baseline and latest
         // supplement. Caller-supplied IDs/hashes cannot override this request.
         const baseline = jobs.get(
-          (visualMatch ?? candidateMatch ?? bindingMatch)![1],
+          (nativeMatch ?? visualMatch ?? candidateMatch ?? bindingMatch)![1],
         );
         const file = baseline
           ? evidenceFile(baseline.id, "measurement.json")
@@ -765,6 +788,7 @@ export function createReferenceService(
         }
         if (
           active ||
+          (nativeMatch && candidateJobs.running) ||
           (preparingCandidate ? bindingJobs.running : candidateJobs.running)
         ) {
           json(res, 409, {
@@ -799,7 +823,8 @@ export function createReferenceService(
             sha256: fileHash(childFile),
           };
         }
-        if (visualMatch)
+        if (nativeMatch) nativeJobs.prepare(evidence);
+        else if (visualMatch)
           candidateJobs.startVisual(evidence, request.retry === true);
         else if (candidateMatch)
           candidateJobs.start(evidence, request.retry === true);
@@ -807,11 +832,13 @@ export function createReferenceService(
         json(res, 202, snapshotWithSupplement(baseline));
       } catch {
         json(res, 409, {
-          error: visualMatch
-            ? "Visual candidate derivation could not start. A current verified source/runtime preparation is required; unavailable, changed or active evidence cannot be reused."
-            : preparingCandidate
-              ? "Source candidate preparation could not start. Complete a current binding trace for the fixed original evidence; unavailable, changed or active evidence cannot be prepared."
-              : "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
+          error: nativeMatch
+            ? "Native operation preparation is unavailable. It requires the current verified visual candidate; changed evidence and existing operation history cannot be replaced. No native execution was requested."
+            : visualMatch
+              ? "Visual candidate derivation could not start. A current verified source/runtime preparation is required; unavailable, changed or active evidence cannot be reused."
+              : preparingCandidate
+                ? "Source candidate preparation could not start. Complete a current binding trace for the fixed original evidence; unavailable, changed or active evidence cannot be prepared."
+                : "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
         });
       }
       return;

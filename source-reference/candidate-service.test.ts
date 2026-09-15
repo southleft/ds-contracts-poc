@@ -18,6 +18,7 @@ import {
   altitudeRevision,
 } from "./altitude-cohort.js";
 import { createReferenceService } from "./service.js";
+import { nativeFixturePrepare } from "./native-operation-test-fixture.js";
 import { createBindingJobs, type BindingTraceReport } from "./binding-jobs.js";
 import {
   loadBindingEvidence,
@@ -706,6 +707,154 @@ test("capture preflight cannot race an admitted candidate job into overlapping e
   }
 });
 
+test("native preparation reserves the host-selected evidence once and exposes no execution material", async () => {
+  const f = fixture();
+  let preparations = 0,
+    executions = 0;
+  const prepare = (
+    request: Parameters<typeof nativeFixturePrepare>[0],
+    operation: Parameters<typeof nativeFixturePrepare>[1],
+  ) => {
+    assert.deepEqual(request, f.request);
+    preparations++;
+    return nativeFixturePrepare(request, operation);
+  };
+  const service = createReferenceService(
+    f.repo,
+    () => {
+      executions++;
+      throw Error("capture forbidden");
+    },
+    () => {
+      executions++;
+      throw Error("replay forbidden");
+    },
+    {
+      run: () => {
+        executions++;
+        throw Error("candidate worker forbidden");
+      },
+    },
+    { prepare },
+  );
+  const server = createServer((req, res) => {
+    void service.handle(req, res);
+  });
+  await listen(server);
+  const base = originOf(server) + "/api/source-reference";
+  const url = `${base}/${f.request.baseline.id}/button-native-operation`;
+  try {
+    for (const payload of [
+      { fileKey: "AnotherFile123" },
+      { script: "return true" },
+      { retry: true },
+      { id: "caller" },
+      { nonce: "caller" },
+      { phase: "token-create" },
+    ]) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      assert.equal(response.status, 400);
+    }
+    assert.equal(preparations, 0);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "{}",
+    });
+    assert.equal(response.status, 202);
+    const first = (await response.json()) as any;
+    assert.equal(first.nativeOperation.phase, "prepared");
+    assert.equal(first.nativeOperation.acceptedContract, null);
+    const id = first.nativeOperation.id;
+    const directory = path.join(
+      f.repo,
+      "private/source-native-app/operations",
+      id,
+    );
+    const header = readFileSync(path.join(directory, "operation.json"));
+    const plan = readFileSync(path.join(directory, "plan.json"));
+    const repeat = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "{}",
+    });
+    assert.equal(repeat.status, 202);
+    assert.equal(((await repeat.json()) as any).nativeOperation.id, id);
+    assert.deepEqual(
+      readFileSync(path.join(directory, "operation.json")),
+      header,
+    );
+    assert.deepEqual(readFileSync(path.join(directory, "plan.json")), plan);
+    const reload = (await (await fetch(base)).json()) as any;
+    assert.deepEqual(reload.latest.nativeOperation, first.nativeOperation);
+    for (const text of [
+      "scriptSha256",
+      "tokenInput",
+      "nonce",
+      "fileKey",
+      f.repo,
+    ])
+      assert.ok(!JSON.stringify(first.nativeOperation).includes(text));
+    assert.equal(executions, 0);
+    assert.equal(
+      (
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Origin: "https://foreign.example",
+          },
+          body: "{}",
+        })
+      ).status,
+      403,
+    );
+    assert.equal(
+      (
+        await fetch(`${base}/native/${id}/dispatch`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: "{}",
+        })
+      ).status,
+      404,
+    );
+  } finally {
+    service.close();
+    await closeServer(server);
+    f.close();
+  }
+});
+
+test("native preparation uses the real visual verifier by default and refuses unavailable source evidence", async () => {
+  const f = fixture();
+  const service = createReferenceService(f.repo);
+  const server = createServer((req, res) => {
+    void service.handle(req, res);
+  });
+  await listen(server);
+  try {
+    const response = await fetch(
+      `${originOf(server)}/api/source-reference/${f.request.baseline.id}/button-native-operation`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: "{}",
+      },
+    );
+    assert.equal(response.status, 409);
+    assert.ok(!JSON.stringify(await response.json()).includes(f.repo));
+  } finally {
+    service.close();
+    await closeServer(server);
+    f.close();
+  }
+});
+
 test("candidate preparation never omits a changed latest supplement or accepts a non-baseline id", async () => {
   const f = fixture(),
     runner = candidateStub(f);
@@ -727,7 +876,11 @@ test("candidate preparation never omits a changed latest supplement or accepts a
       body: "{}",
     });
   try {
-    for (const endpoint of ["button-candidate", "button-visual-candidate"])
+    for (const endpoint of [
+      "button-candidate",
+      "button-visual-candidate",
+      "button-native-operation",
+    ])
       assert.equal(
         (await post(f.request.supplement!.id, endpoint)).status,
         409,
@@ -739,7 +892,11 @@ test("candidate preparation never omits a changed latest supplement or accepts a
       "measurement.json",
     );
     f.put(target, "{ broken record");
-    for (const endpoint of ["button-candidate", "button-visual-candidate"])
+    for (const endpoint of [
+      "button-candidate",
+      "button-visual-candidate",
+      "button-native-operation",
+    ])
       assert.equal((await post(f.request.baseline.id, endpoint)).status, 409);
     assert.equal(runner.calls.length, 0);
   } finally {

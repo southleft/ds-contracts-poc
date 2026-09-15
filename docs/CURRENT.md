@@ -216,6 +216,21 @@ editable native binding. These remain internal preparation and verification
 boundaries; the application apply action and native source-fidelity result
 are still unfinished.
 
+The local service now reserves one durable native operation for a source
+baseline. Its preparation endpoint selects the verified source evidence and
+fixed Scratch target; request bodies cannot supply scripts, file keys or native
+identities. Repeat preparation and reload reuse the saved operation. Execution
+attempts are journaled before delivery, and native acknowledgements retain
+allocation IDs before a separate readback can observe tokens. A lost creation
+response remains outcome-unknown. Explicit retry is limited to a reported
+zero-allocation refusal; read-only observations can be retried separately.
+Changed source or writer versions cannot discard a delayed acknowledgement.
+These journal transitions are covered through the shared writer's API mock;
+the real app has exercised preparation only. Dispatch transport, component
+apply, partial-allocation repair and rollback still need integration and live
+verification. A missing or damaged journal refuses replacement rather than
+creating another native scope.
+
 `npm run runtime:check` checks the strict reference schema, verified artifact
 inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
 identity claims: preservation requires a matching canonical base and trusted
