@@ -74,6 +74,7 @@ Round-trip equivalence means preservation of the **declared supported semantics*
 | Styled-source evidence and unqualified drafts | `source-reference/`, especially `source-reference/compile.ts` |
 | Application-owned source candidate jobs | `source-reference/service.ts`, `source-reference/candidate-jobs.ts`, `source-reference/candidate-run.ts` |
 | Verified evidence selection and candidate inventory | `source-reference/binding-jobs.ts`, `source-reference/candidate-report.ts`, `source-reference/button-candidate-semantics.ts` |
+| Unaccepted source-owned visual candidate | `source-reference/source-bound-anatomy.ts`, `source-reference/source-visual-seed.ts`, `source-reference/source-visual-contract.ts` |
 | Verified original runtime preparation and React lowering | `source-reference/runtime-artifact.ts`, `core/runtime-emission.ts`, `core/emit-react.ts` |
 | Runtime identity preservation and adoption refusal | `core/runtime-reference.ts`, `packages/core/src/contract-provenance.ts` |
 | Actual plugin host | `figma-sync/plugin/engine/entry.ts`, `figma-sync/plugin/code.js` |
@@ -155,6 +156,16 @@ prepared**, not a visual Contract, native canvas output or conversion acceptance
 Matched source spans remain structural evidence, not proof of every dynamic
 binding or behavior.
 
+An internal assembly stage now derives a **measured visual candidate** from
+those original observations. Exact source identities preserve wrappers and
+terminal slots; assigned content stays in separate comparison-sample records.
+The existing layout and token fusion carries observed styling without guessing
+public props or sample defaults. Every appearance must be observed before a
+styled candidate is returned. Its tokens remain mechanically named candidates,
+not verified authored token bindings. This stage is not yet part of the
+application preparation result, and both native and React emission remain
+blocked by its unqualified runtime binding.
+
 A native Scratch probe also confirmed that empty Figma slots do not reproduce
 Altitude's absent conditional wrappers: even zero-sized slots retain layout
 gaps. That behavior must be represented and verified explicitly. Empty main
@@ -166,9 +177,9 @@ inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
 identity claims: preservation requires a matching canonical base and trusted
 journal, and does not prove that the canvas matches either. The source app now
 produces a verified runtime and derived inventory alongside its admission work
-order, not an accepted Contract. Its next boundary is to assemble a source-bound
-Contract and qualified visual projection, then verify
-the actual native canvas. Editable-channel qualification remains separate from
+order, not an accepted Contract. Its next boundary is to qualify and integrate
+the source-bound visual candidate, then verify the actual native canvas.
+Editable-channel qualification remains separate from
 retaining the original runtime; neither a matching hash nor an available MCP
 connection completes that application journey.
 
