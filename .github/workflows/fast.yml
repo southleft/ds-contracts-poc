@@ -619,6 +619,9 @@ jobs:
       - name: schema:fresh (both committed contract.schema.json copies match an in-memory emission of the Zod document)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run schema:fresh
+      - name: figma:unset:check (canvas-only omission preserves public API or refuses)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run figma:unset:check
       - name: contracts:migrate:check (no JSON under the tree still carries a schema-16 spelling — figmaRepresentation / figmaStatePreviews / anchors / slot.figmaProperty)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run contracts:migrate:check

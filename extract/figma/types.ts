@@ -664,6 +664,9 @@ export interface DumpSet {
    *  `0.1.0`. Absence means the set was not drawn by this pipeline (or
    *  predates v1.29). */
   version?: string;
+  /** Shared plugin-data omission declaration. Kept unknown deliberately:
+   * malformed metadata must reach the proposal refusal, not disappear. */
+  unsetVariantAxes?: unknown;
   statePreviewAxis?: {
     axis: string;
     default: string;

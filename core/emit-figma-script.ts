@@ -56,6 +56,8 @@ import {
   type Contract,
   type Part,
   type Prop,
+  PropSchema,
+  omittedCodeBindingConflicts,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
 import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
@@ -651,6 +653,11 @@ export interface ComponentData {
    *  answer instead of a convention. Omitted when no prop declares a Figma
    *  binding. */
   propNames?: Record<string, string>;
+  /** Explicit omission semantics, not a new public enum value. */
+  unsetVariantAxes?: {
+    version: 1;
+    axes: Array<{ property: string; propName: string; codeProp: string; unsetValue: string; values: Array<{ value: string; label: string }> }>;
+  };
   statePreviewAxis?: {
     axis: string;
     default: string;
@@ -3406,7 +3413,7 @@ const boolAxisValues = (p: Prop): string[] =>
 const depEmitsStandalone = (dep: Contract): boolean => {
   const combos = dep.props
     .filter((p) => isEnum(p) || isVariantBool(p))
-    .reduce((n, p) => n * (isEnum(p) ? p.type.enum.length : 2), 1);
+    .reduce((n, p) => n * (isEnum(p) ? p.type.enum.length + (p.bindings.figma.unsetValue === undefined ? 0 : 1) : 2), 1);
   const hasPreviews = Boolean(dep.bindings.figma.statePreviews) && dep.states.length > 0;
   return combos === 1 && !hasPreviews;
 };
@@ -5063,6 +5070,11 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
+  // compileComponentData is also a public entry, used without schema parsing.
+  // Validate every opt-in, including malformed non-axis uses filtered below.
+  for (const p of contract.props) if (p.bindings.figma.unsetValue !== undefined) PropSchema.parse(p);
+  const aliasConflicts = omittedCodeBindingConflicts(contract, contract.props.filter(p => p.bindings.figma.unsetValue !== undefined).map(p => p.bindings.code.prop));
+  if (aliasConflicts.length) throw new Error(`FIGMA_UNSET_BINDING_COLLISION: ${aliasConflicts.join(', ')} collides with a prop, slot, event or generated event binding`);
   refuseUnresolvableRefs(contract, byId);
   refuseMissingRequiredFacts(contract);
   // Variant axes = enum props AND VARIANT-bound boolean props, in prop
@@ -5106,7 +5118,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // text node).
   const hostsRootText = (contract.anatomy.root?.text !== undefined || contract.anatomy.root?.content !== undefined) && !(textProp && !contract.anatomy.root?.parts);
 
-  const orderedValues = (p: Prop): string[] => {
+  // null is an internal discriminant only; it is never written to subst or
+  // the public enum. Omission therefore resolves the actual base carriers.
+  const orderedValues = (p: Prop): Array<string | null> => {
     if (!isEnum(p)) return boolAxisValues(p); // bool axis: default first
     const values = [...p.type.enum];
     const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
@@ -5114,8 +5128,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       values.splice(i, 1);
       values.unshift(String(p.default));
     }
-    return values;
+    return p.bindings.figma.unsetValue === undefined ? values : [null, ...values];
   };
+  const axisLabel = (p: Prop, value: string | null): string =>
+    value === null ? p.bindings.figma.unsetValue! : (p.bindings.figma.values?.[value] ?? value);
 
   const root = contract.anatomy.root;
   /** D5: viewport-pinned-scrim bounding notes (code-only facts, never silent). */
@@ -5151,9 +5167,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     for (let a = 0; a < axes.length; a++) {
       const { prop, values } = axes[a];
       const value = values[combo[a]];
-      subst[prop.name] = value;
+      if (value !== null) subst[prop.name] = value;
       nameParts.push(
-        `${prop.bindings.figma.property}=${prop.bindings.figma.values?.[value] ?? value}`,
+        `${prop.bindings.figma.property}=${axisLabel(prop, value)}`,
       );
       if (a >= 1) col = col * values.length + combo[a];
     }
@@ -5314,8 +5330,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const primaryValues = primary ? primary.values : [null];
     // The descriptor is written from the SAME primaryIdx/values[0] rule the
     // loop below draws with, so the two can never disagree.
-    const figmaLabel = (a: (typeof axes)[number], value: string) =>
-      a.prop.bindings.figma.values?.[value] ?? value;
+    const figmaLabel = (a: (typeof axes)[number], value: string | null) => axisLabel(a.prop, value);
     statePreviewAxis = {
       axis: STATE_PREVIEW_PROPERTY,
       default: STATE_PREVIEW_DEFAULT,
@@ -5338,9 +5353,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         for (let a = 0; a < axes.length; a++) {
           const { prop, values } = axes[a];
           const value = a === primaryIdx ? values[pi]! : values[0];
-          subst[prop.name] = value;
+          if (value !== null) subst[prop.name] = value;
           nameParts.push(
-            `${prop.bindings.figma.property}=${prop.bindings.figma.values?.[value] ?? value}`,
+            `${prop.bindings.figma.property}=${axisLabel(prop, value)}`,
           );
         }
         const previewName = withStateSegment(nameParts.join(', '), statePreviewLabel(stateName));
@@ -5743,7 +5758,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // badge nowhere and nothing naming it. One fact per defaultless axis.
   for (const p of contract.props) {
     // @lower emit.state-unset-plane-undrawn
-    if (!isEnum(p) || p.default !== undefined || p.bindings.figma.kind !== 'VARIANT') continue;
+    if (!isEnum(p) || p.default !== undefined || p.bindings.figma.kind !== 'VARIANT' || p.bindings.figma.unsetValue !== undefined) continue;
     facts.push({
       part: 'root',
       variant: '',
@@ -5848,6 +5863,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         if (typeof prop === 'string' && prop && p.name) map[prop] = p.name;
       }
       return Object.keys(map).length > 0 ? { propNames: map } : {};
+    })(),
+    ...(() => {
+      const axes = contract.props.filter(p => isEnum(p) && p.bindings.figma.unsetValue !== undefined)
+        .map(p => ({
+          property: p.bindings.figma.property!, propName: p.name, codeProp: p.bindings.code.prop,
+          unsetValue: p.bindings.figma.unsetValue!,
+          values: (p.type as { enum: string[] }).enum.map(value => ({ value, label: p.bindings.figma.values?.[value] ?? value })),
+        }));
+      return axes.length ? { unsetVariantAxes: { version: 1 as const, axes } } : {};
     })(),
     ...(contract.semantics && (contract.semantics.element || contract.semantics.role)
       ? {
@@ -8044,6 +8068,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -8303,6 +8329,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -8456,6 +8484,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -8586,6 +8629,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

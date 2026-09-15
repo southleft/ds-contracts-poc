@@ -21,7 +21,6 @@ const meta = {
   },
   args: {
     size: 'large',
-    hasFocusableParent: false,
   },
 } satisfies Meta<typeof Spinner>;
 

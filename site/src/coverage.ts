@@ -216,6 +216,7 @@ reg("props", "bindings", [
   "prop.bindings.figma.kind",
   "prop.bindings.figma.property",
   "prop.bindings.figma.values",
+  "prop.bindings.figma.unsetValue",
   "prop.bindings.code",
   "prop.bindings.code.prop",
 ]);

@@ -27,9 +27,6 @@ const meta = {
   args: {
     size: 'medium',
     textAlign: 'center',
-    fullWidth: false,
-    removeUnderline: false,
-    dataPrimaryLink: false,
     tone: 'default',
     variant: 'secondary',
     withIcon: false,

@@ -2694,6 +2694,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -2955,6 +2957,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -3110,6 +3114,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -3240,6 +3259,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -13807,6 +13828,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -14065,6 +14088,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -14217,6 +14242,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -14347,6 +14387,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -19530,6 +19572,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -19788,6 +19832,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -19940,6 +19986,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -20070,6 +20131,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -28673,6 +28736,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -28933,6 +28998,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -29086,6 +29153,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -29216,6 +29298,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -34627,6 +34711,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -34910,6 +34996,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -35086,6 +35174,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -35216,6 +35319,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -38165,6 +38270,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -38449,6 +38556,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -38626,6 +38735,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -38756,6 +38880,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -44425,6 +44551,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -44683,6 +44811,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -44835,6 +44965,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -44965,6 +45110,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -51844,6 +51991,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -52129,6 +52278,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -52308,6 +52459,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -52438,6 +52604,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -54849,6 +55017,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -55108,6 +55278,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -55260,6 +55432,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -55390,6 +55577,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -60701,6 +60890,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -60959,6 +61150,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -61111,6 +61304,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -61241,6 +61449,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -62772,6 +62982,8 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -63057,6 +63269,8 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -63236,6 +63450,21 @@ async function syncOne(C) {
       key: existing.key,
     };
   }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -63366,6 +63595,8 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

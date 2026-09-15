@@ -453,6 +453,7 @@
     "golden:update": "node scripts/update-golden.mjs",
     "emitters:check": "tsx core/emitters-check.ts",
     "react:conformance:check": "node --import tsx --test core/react-attributes.test.ts core/react-defaultless.test.ts core/react-optional-bool-style.test.ts",
+    "figma:unset:check": "node --import tsx --test core/figma-unset.test.ts",
     "code-connect:check": "tsx core/code-connect-check.ts",
     "canvas:binding:check": "tsx core/canvas-binding-check.ts",
     "variant-drift:check": "tsx parity/variant-drift-check.ts",

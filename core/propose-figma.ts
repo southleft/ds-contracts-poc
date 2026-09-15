@@ -26,6 +26,7 @@ import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPre
 import type { TokenCorpus } from './token-corpus.js';
 import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
+import { readUnsetVariantAxes, orderUnsetObservations, lowerUnsetProposal, UnsetVariantError, type UnsetVariantAxis } from './figma-unset.js';
 import {
   validateExactVariantProjection,
   type ExactProjectionRefusalCode,
@@ -241,7 +242,11 @@ interface Axis {
   /** Figma option values, first = the set's default (the generator emits the
    *  all-defaults combo first and Figma's default variant is positional). */
   values: string[];
+  omitted?: UnsetVariantAxis;
 }
+
+const axisValue = (axis: Axis, label: string): string =>
+  axis.omitted?.values.find(v => v.label === label)?.value ?? camel(label);
 
 const axisValuesOf = (variantName: string): Record<string, string> => {
   if (!variantName.includes('=')) return {};
@@ -956,6 +961,7 @@ function unifyRefs(
     if (diffIdx.length === 1) {
       const i = diffIdx[0];
       for (const axis of axes) {
+        if (axis.omitted) continue; // an omitted prop cannot substitute a token path
         const fits = defined.every((o, k) => {
           const value = axisValuesOf(o.variant)[axis.property];
           return value !== undefined && segs[k][i] === camel(value);
@@ -997,8 +1003,8 @@ function unifyRefs(
       kind: 'per-value',
       perValue: {
         propName: axis.propName,
-        defaultValue: camel(axis.values[0]),
-        byValue: Object.fromEntries([...byValue].map(([v, p]) => [camel(v), `{${p}}`])),
+        defaultValue: axisValue(axis, axis.values[0]),
+        byValue: Object.fromEntries([...byValue].map(([v, p]) => [axisValue(axis, v), `{${p}}`])),
       },
     };
   }
@@ -1270,10 +1276,11 @@ function exactRowsFromProposedContract(
     if (bindings === null || typeof bindings !== 'object' || Array.isArray(bindings)) continue;
     const figma = (bindings as { figma?: unknown }).figma;
     if (figma === null || typeof figma !== 'object' || Array.isArray(figma)) continue;
-    const binding = figma as { kind?: unknown; property?: unknown; values?: unknown };
+    const binding = figma as { kind?: unknown; property?: unknown; values?: unknown; unsetValue?: unknown };
     if (binding.kind !== 'VARIANT' || typeof binding.property !== 'string') continue;
     if (binding.values === null || typeof binding.values !== 'object' || Array.isArray(binding.values)) continue;
     const values = Object.values(binding.values).filter((value): value is string => typeof value === 'string');
+    if (typeof binding.unsetValue === 'string') values.unshift(binding.unsetValue);
     axes.push({ property: binding.property, values });
   }
 
@@ -2983,7 +2990,7 @@ function liftUnboundShapePaintsToLiterals(
         if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
         if (new Set(byValue.values()).size < 2) continue;
         const map: Record<string, Record<string, string>> = {};
-        for (const value of axis.values) map[camel(value)] = { [cssProp]: byValue.get(value)! };
+        for (const value of axis.values) map[axisValue(axis, value)] = { [cssProp]: byValue.get(value)! };
         axisFit = { propName: axis.propName, map };
         break;
       }
@@ -3268,7 +3275,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
       const map: Record<string, { width: string; height: string }> = {};
       for (const value of axis.values) {
         const d = byValue.get(value)!;
-        map[camel(value)] = { width: `${d.width}px`, height: `${d.height}px` };
+        map[axisValue(axis, value)] = { width: `${d.width}px`, height: `${d.height}px` };
       }
       sizeByAxis = { propName: axis.propName, map };
       break;
@@ -3382,13 +3389,13 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
         // The shape NEVER renders at this axis value in the drawn set — the
         // honest completion for combos the design never drew (pointer=true
         // at pointer-position=none) is an explicit display: none.
-        stylesWhen.push({ prop: axis.propName, equals: camel(value), styles: { display: 'none' } });
+        stylesWhen.push({ prop: axis.propName, equals: axisValue(axis, value), styles: { display: 'none' } });
         suppressed++;
         continue;
       }
       const styles = buildStyles(byValue.get(value)!);
       if (!styles) continue;
-      stylesWhen.push({ prop: axis.propName, equals: camel(value), styles });
+      stylesWhen.push({ prop: axis.propName, equals: axisValue(axis, value), styles });
       emitted++;
     }
     if (emitted + suppressed > 0) part.stylesWhen = stylesWhen;
@@ -5667,7 +5674,7 @@ function crossAxisFillByPropOn(
     const stretched: string[] = [];
     for (const [value, mode] of byValue) {
       if (mode !== stretchMode) continue;
-      const key = camel(value);
+      const key = axisValue(axis, value);
       if ((entry.map[key] ??= {})[dim] !== undefined) continue; // an observed size already claims it
       entry.map[key][dim] = '100%';
       stretched.push(key);
@@ -5943,7 +5950,7 @@ function invertLayoutByProp(
       if (t.direction !== base.direction) override.direction = t.direction;
       if (t.justify !== base.justify) override.justify = t.justify;
       if (t.align !== base.align) override.align = t.align;
-      if (Object.keys(override).length > 0) map[camel(value)] = override;
+      if (Object.keys(override).length > 0) map[axisValue(axis, value)] = override;
     }
     if (Object.keys(map).length === 0) return undefined;
     ctx.notes.push(
@@ -6035,7 +6042,7 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
     const map: Record<string, string> = {};
     for (const v of observedValues) {
       const chars = byValue.get(v)!;
-      if (v !== baseValue && chars !== byValue.get(baseValue)) map[camel(v)] = chars;
+      if (v !== baseValue && chars !== byValue.get(baseValue)) map[axisValue(axis, v)] = chars;
     }
     part.text = byValue.get(baseValue)!;
     if (Object.keys(map).length > 0) part.textByProp = { prop: axis.propName, map };
@@ -6084,7 +6091,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
         boolFalseSide = axis;
         continue;
       }
-      return { prop: axis.propName, equals: camel(value) };
+      return { prop: axis.propName, equals: axisValue(axis, value) };
     }
   }
   // No single value predicts presence — try a value SUBSET of one enum axis
@@ -6105,7 +6112,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
     ctx.notes.push(
       `${where}: present exactly where "${axis.property}" is one of ${presentValues.map((v) => `"${v}"`).join(', ')} — proposed as visibleWhen { prop: ${axis.propName}, equals: [${presentValues.map((v) => camel(v)).join(', ')}] } (value-subset form)`,
     );
-    return { prop: axis.propName, equals: presentValues.map((v) => camel(v)) };
+    return { prop: axis.propName, equals: presentValues.map((v) => axisValue(axis, v)) };
   }
   if (boolFalseSide) {
     ctx.notes.push(
@@ -6348,7 +6355,7 @@ function threadInstanceProps(
     const axis = enumAxes.find((a) =>
       values.every((v) => {
         const axisValue = axisValuesOf(v.variant)[a.property];
-        return axisValue !== undefined && typeof v.value === 'string' && camel(axisValue) === v.value;
+        return !a.omitted && axisValue !== undefined && typeof v.value === 'string' && camel(axisValue) === v.value;
       }),
     );
     if (axis) {
@@ -6383,7 +6390,7 @@ function threadInstanceProps(
       const map: Record<string, string> = {};
       for (const value of a.values) {
         const hit = byValue.get(value);
-        if (hit !== undefined) map[camel(value)] = hit;
+        if (hit !== undefined) map[axisValue(a, value)] = hit;
       }
       lookup = { axis: a, map };
       break;
@@ -6525,7 +6532,7 @@ function carryTextOverrides(
     const map: Record<string, string> = {};
     for (const value of axis.values) {
       const hit = byValue.get(value);
-      if (hit !== undefined) map[camel(value)] = hit;
+      if (hit !== undefined) map[axisValue(axis, value)] = hit;
     }
     applied[propName] = { prop: axis.propName, map };
     component.props = applied;
@@ -10189,6 +10196,8 @@ export function proposeFromDump(
   // exact mode). Stripped here, on a private clone, BY NAME per node.
   const slotValueReceipts: string[] = [];
   set = stripNonScalarAppliedProps(set, slotValueReceipts);
+  const unsetAxes = readUnsetVariantAxes(set);
+  if (unsetAxes.length) set = orderUnsetObservations(set);
   const sourceProjection = validateExactVariantProjection(set);
   /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
    *  Present only for sets this pipeline drew with bindings.figma.statePreviews on, and
@@ -10245,7 +10254,7 @@ export function proposeFromDump(
   // DEFAULT mode's variants only — the other modes never feed anatomy,
   // facts, or the mint pass (their resolved literals are receipts, not a
   // second palette).
-  const modePromo = detectModeAxis(applyDeclaredAxisDefaults(parseAxes(set.variants.map((v) => v.name)), set), set.variants, set.setName, preNotes);
+  const modePromo = detectModeAxis(applyDeclaredAxisDefaults(parseAxes(set.variants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property)), set.variants, set.setName, preNotes);
   if (projectionMode === 'exact' && modePromo) {
     semanticProjectionRefusal(sourceProjection, modePromo.axis, 'token-mode');
   }
@@ -10267,7 +10276,7 @@ export function proposeFromDump(
   // are the base the whole pipeline runs on; each promoted state's variants
   // (and the disabled group) are kept aside, names stripped of the state
   // pair, for the root-diff pass after the anatomy is built.
-  let statePromo = detectStateAxis(applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set), preNotes);
+  let statePromo = detectStateAxis(applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property)), preNotes);
   let baseVariants: DumpNode[] | null = null;
   const stateGroups = new Map<PromotedState, DumpNode[]>();
   let disabledGroup: DumpNode[] = [];
@@ -10323,6 +10332,13 @@ export function proposeFromDump(
 
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
+  for (const omitted of unsetAxes) {
+    const axis = axes.find(a => a.property === omitted.property);
+    if (!axis || axis.values[0] !== omitted.unsetValue)
+      throw new UnsetVariantError(`the omitted base plane of ${omitted.property} did not survive projection`);
+    axis.omitted = omitted;
+    axis.propName = omitted.propName;
+  }
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
 
   // Self contract id — the STAMPED id outranks the name-derived slug
@@ -10420,7 +10436,7 @@ export function proposeFromDump(
           // root (`[data-pressed]` / `:not([data-pressed])`), so bool
           // conditioning stays ROOT-ONLY (enforced in mintTokens classify).
           axes: [
-            ...enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(camel) })),
+            ...enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(v => axisValue(a, v)) })),
             ...axes
               .filter((a) => isBoolAxis(a.values))
               .map((a) => ({ propName: a.propName, values: ['true', 'false'], bool: true as const })),
@@ -10430,7 +10446,7 @@ export function proposeFromDump(
               const record: Record<string, string> = {};
               for (const [property, value] of Object.entries(axisValuesOf(v))) {
                 const axis = axes.find((a) => a.property === property);
-                if (axis) record[axis.propName] = isBoolAxis(axis.values) ? value.trim().toLowerCase() : camel(value);
+                if (axis) record[axis.propName] = isBoolAxis(axis.values) ? value.trim().toLowerCase() : axisValue(axis, value);
               }
               return [v, record];
             }),
@@ -10749,15 +10765,16 @@ export function proposeFromDump(
     }
     props.push({
       name: axis.propName,
-      type: { enum: axis.values.map(camel) },
-      default: camel(axis.values[0]),
+      type: { enum: axis.omitted ? axis.omitted.values.map(v => v.value) : axis.values.map(camel) },
+      ...(axis.omitted ? {} : { default: camel(axis.values[0]) }),
       bindings: {
         figma: {
           kind: 'VARIANT',
           property: axis.property,
-          values: Object.fromEntries(axis.values.map((v) => [camel(v), v])),
+          values: Object.fromEntries(axis.values.filter(v => v !== axis.omitted?.unsetValue).map((v) => [axisValue(axis, v), v])),
+          ...(axis.omitted ? { unsetValue: axis.omitted.unsetValue } : {}),
         },
-        code: { prop: axis.propName },
+        code: { prop: axis.omitted?.codeProp ?? axis.propName },
       },
     });
     if (axis.values.length === 2) {
@@ -11384,6 +11401,7 @@ export function proposeFromDump(
   }
 
   // Refuse to emit an unusable proposal.
+  lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
   ContractSchema.parse(contract);
   for (const stub of childStubs) ContractSchema.parse(stub);
   if (stampNote) {

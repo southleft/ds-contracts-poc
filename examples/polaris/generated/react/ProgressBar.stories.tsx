@@ -24,7 +24,6 @@ const meta = {
   args: {
     progress: 40,
     size: 'medium',
-    animated: false,
     tone: 'highlight',
   },
 } satisfies Meta<typeof ProgressBar>;

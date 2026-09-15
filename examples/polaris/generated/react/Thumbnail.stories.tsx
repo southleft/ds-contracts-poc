@@ -22,7 +22,6 @@ const meta = {
   args: {
     size: 'medium',
     alt: 'Black choker necklace',
-    transparent: false,
   },
 } satisfies Meta<typeof Thumbnail>;
 

@@ -1391,6 +1391,11 @@ for (const page of figma.root.children) {
         try { return { propNames: JSON.parse(raw) }; } catch (e) { return {}; }
       })(),
       ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+        if (!raw) return {};
+        try { return { unsetVariantAxes: JSON.parse(raw) }; } catch (e) { return { unsetVariantAxes: raw }; }
+      })(),
+      ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'semantics');
         if (!raw) return {};
         try { return { semantics: JSON.parse(raw) }; } catch (e) { return {}; }

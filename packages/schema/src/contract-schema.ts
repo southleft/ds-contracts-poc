@@ -119,6 +119,53 @@ const ArrayTypeSchema = z.strictObject({
   arrayOf: z.record(z.string(), z.enum(["text", "number", "boolean"])),
 });
 
+// Scoped to the opt-in omission boundary: do not silently reinterpret older
+// contracts. Both React emitters bind aliases directly as strict-module local
+// identifiers; they also own the names below (parameters, rest binding,
+// content/style props, CSS-module import and class composition local).
+const OMITTED_BINDING_RESERVED = new Set([
+  'await', 'break', 'case', 'catch', 'class', 'const', 'continue', 'debugger',
+  'default', 'delete', 'do', 'else', 'enum', 'export', 'extends', 'false',
+  'finally', 'for', 'function', 'if', 'implements', 'import', 'in',
+  'instanceof', 'interface', 'let', 'new', 'null', 'package', 'private',
+  'protected', 'public', 'return', 'static', 'super', 'switch', 'this',
+  'throw', 'true', 'try', 'typeof', 'var', 'void', 'while', 'with', 'yield',
+  'arguments', 'eval', 'undefined',
+  'ref', 'rest', 'classes', 'styles', 'style', 'className', 'children',
+]);
+
+export const isSupportedOmittedCodeBinding = (name: string): boolean =>
+  /^[a-z][A-Za-z0-9]*$/.test(name) && !OMITTED_BINDING_RESERVED.has(name);
+
+/** Data props, slots and events share one consumer namespace. Event helpers
+ * also introduce deterministic local bindings. Check only target omission
+ * aliases; unrelated historical admission rules are unchanged. */
+export function omittedCodeBindingConflicts(contract: unknown, aliases: readonly string[]): string[] {
+  const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+  if (!record(contract) || !aliases.length) return [];
+  const counts = new Map<string, number>();
+  const add = (value: unknown): void => { if (typeof value === 'string') counts.set(value, (counts.get(value) ?? 0) + 1); };
+  const codeName = (value: unknown): unknown => record(value) && record(value.bindings) && record(value.bindings.code) ? value.bindings.code.prop : undefined;
+  const props = Array.isArray(contract.props) ? contract.props.filter(record) : [];
+  props.forEach(p => add(codeName(p)));
+  const walkPart = (part: unknown): void => {
+    if (!record(part)) return;
+    if (record(part.slot)) add(part.slot.name);
+    if (record(part.parts)) Object.values(part.parts).forEach(walkPart);
+  };
+  if (record(contract.anatomy)) Object.values(contract.anatomy).forEach(walkPart);
+  for (const event of Array.isArray(contract.events) ? contract.events : []) {
+    if (!record(event)) continue;
+    add(codeName(event));
+    if (typeof event.name === 'string') add(`handle${pascal(event.name)}`);
+    if (record(event.toggles)) {
+      const code = codeName(props.find(p => p.name === (event.toggles as Record<string, unknown>).prop));
+      if (typeof code === 'string') { add(`${code}Prop`); add(`${code}Uncontrolled`); add(`set${pascal(code)}Uncontrolled`); }
+    }
+  }
+  return [...new Set(aliases)].filter(name => (counts.get(name) ?? 0) > 1).sort();
+}
+
 export const PropSchema = z
   .strictObject({
     name: z.string(),
@@ -145,6 +192,10 @@ export const PropSchema = z
         property: z.string().optional(),
         /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
         values: z.record(z.string(), z.string()).optional(),
+        /** Canvas-only option for an omitted, defaultless enum prop. This
+         * label is NOT a public enum value or a code default. Opt-in keeps
+         * historical contracts' named undrawn-base-plane refusal intact. */
+        unsetValue: z.string().optional(),
       }),
       code: z.strictObject({
         prop: z.string(),
@@ -169,7 +220,30 @@ export const PropSchema = z
         'kind "NONE" declares no canvas property — omit bindings.figma.property',
       path: ["bindings", "figma", "property"],
     },
-  );
+  )
+  .superRefine((p, ctx) => {
+    const label = p.bindings.figma.unsetValue;
+    if (label === undefined) return;
+    const path = ['bindings', 'figma', 'unsetValue'];
+    if (typeof p.type !== 'object' || !('enum' in p.type) ||
+        p.bindings.figma.kind !== 'VARIANT' || p.default !== undefined || p.required === true) {
+      ctx.addIssue({ code: 'custom', path, message: 'unsetValue requires an optional defaultless enum with a VARIANT binding' });
+      return;
+    }
+    if (!label.trim() || label !== label.trim() || /[,=\r\n]/.test(label))
+      ctx.addIssue({ code: 'custom', path, message: 'unsetValue must be a non-empty, trimmed Figma option without comma, equals or newline delimiters' });
+    if (/^(true|false)$/i.test(label))
+      ctx.addIssue({ code: 'custom', path, message: 'unsetValue cannot be a boolean-axis option' });
+    if (!isSupportedOmittedCodeBinding(p.bindings.code.prop))
+      ctx.addIssue({ code: 'custom', path: ['bindings', 'code', 'prop'], message: 'unsupported omitted-plane code binding: invalid identifier or reserved/generated binding collision' });
+    const options = p.type.enum.map(v => p.bindings.figma.values?.[v] ?? v);
+    if (options.some(v => !v.trim() || v !== v.trim() || /[,=\r\n]/.test(v)) || new Set(options).size !== options.length ||
+        !p.bindings.figma.property?.trim() || /[,=\r\n]/.test(p.bindings.figma.property))
+      ctx.addIssue({ code: 'custom', path, message: 'unsetValue requires distinct, unambiguous public canvas options and an axis identity without delimiters' });
+    const identity = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!identity(label) || p.type.enum.some(v => identity(v) === identity(label) || identity(p.bindings.figma.values?.[v] ?? v) === identity(label)))
+      ctx.addIssue({ code: 'custom', path, message: 'unsetValue collides with a public variant option after canonicalization' });
+  });
 
 // ---------------------------------------------------------------------------
 // GRID layout grammar (A2, implements the PINNED proposal
@@ -2655,6 +2729,10 @@ export const ContractSchema = z.strictObject({
   /** v1 provenance is optional for backward compatibility. */
   provenance: ContractProvenanceSchema.optional(),
 }).superRefine((c, ctx) => {
+  const omissionAliases = c.props.filter(p => p.bindings.figma.unsetValue !== undefined).map(p => p.bindings.code.prop);
+  for (const alias of omittedCodeBindingConflicts(c, omissionAliases)) {
+    ctx.addIssue({ code: 'custom', path: ['props'], message: `omitted-plane code binding "${alias}" collides with another prop, slot, event or generated event binding` });
+  }
   // G8 — the ROOT half of the definite-axis referee. A top-level anatomy part
   // has no parent cell to define its box, so a grid root always states both
   // axes (the nested half runs from each part's own child sweep).

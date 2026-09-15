@@ -269,6 +269,9 @@
                     "additionalProperties": {
                       "type": "string"
                     }
+                  },
+                  "unsetValue": {
+                    "type": "string"
                   }
                 },
                 "required": [

@@ -1899,6 +1899,12 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     const stampedSpecHash = stampString('specHash');
     const stampedVersion = stampString('version');
     const stampedPropNames = stampJson<Record<string, string>>('propNames');
+    const rawUnsetVariantAxes = stampString('unsetVariantAxes');
+    // Preserve malformed JSON too: absence and corrupt omission semantics
+    // are not interchangeable observations.
+    const stampedUnsetVariantAxes = rawUnsetVariantAxes === undefined ? undefined : (() => {
+      try { return JSON.parse(rawUnsetVariantAxes) as unknown; } catch { return rawUnsetVariantAxes; }
+    })();
     const stampedSemantics = stampJson<{ element?: string; role?: string }>('semantics');
     const stampedStatePreviewAxis = stampJson<NonNullable<DumpSet['statePreviewAxis']>>('statePreviewAxis');
     // dump v1.5: INSTANCE_SWAP preferredValues, keyed by suffix-stripped
@@ -2038,6 +2044,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(stampedSpecHash ? { specHash: stampedSpecHash } : {}),
       ...(stampedVersion ? { version: stampedVersion } : {}),
       ...(stampedPropNames ? { propNames: stampedPropNames } : {}),
+      ...(stampedUnsetVariantAxes !== undefined ? { unsetVariantAxes: stampedUnsetVariantAxes } : {}),
       ...(stampedSemantics ? { semantics: stampedSemantics } : {}),
       ...(stampedStatePreviewAxis ? { statePreviewAxis: stampedStatePreviewAxis } : {}),
       ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),

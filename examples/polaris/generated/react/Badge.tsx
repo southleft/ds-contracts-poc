@@ -24,10 +24,10 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 /** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Badge/Badge.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: single-tone static bindings on root (background-color/color/font-weight) and label typography REMOVED — the real tone/progress axes contest them per value; the computed floor rebuilds these channels from browser truth (S2 base + per-axis mint). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
-  { tone = 'undefined', progress = 'none', toneAndProgressLabelOverride, className, children, ...rest },
+  { tone, progress = 'none', toneAndProgressLabelOverride, className, children, ...rest },
   ref,
 ) {
-  const classes = [styles.root, styles[`tone-${tone}`], styles[`progress-${progress}`], className].filter(Boolean).join(' ');
+  const classes = [styles.root, tone === undefined ? undefined : styles[`tone-${tone}`], styles[`progress-${progress}`], className].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
       <span className={styles["label-2"]}>Info</span>
