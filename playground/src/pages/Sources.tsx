@@ -72,6 +72,7 @@ interface Job {
   supplements?: Job[];
   bindingTraces?: BindingJobSnapshot[];
   candidatePreparations?: CandidateJobSnapshot[];
+  candidateVisuals?: CandidateJobSnapshot[];
   contractAdmission?: {
     status: "blocked";
     acceptedContract: null;
@@ -340,7 +341,8 @@ export function Sources() {
     !!job?.bindingTraces?.some((trace) => trace.state === "running") ||
     !!job?.candidatePreparations?.some(
       (candidate) => candidate.state === "running",
-    );
+    ) ||
+    !!job?.candidateVisuals?.some((candidate) => candidate.state === "running");
   useEffect(() => {
     let alive = true;
     fetch("/api/source-reference")
@@ -501,9 +503,38 @@ export function Sources() {
       setBusy(false);
     }
   }
+  async function deriveVisualCandidate() {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-visual-candidate`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(
+            job.candidateVisuals?.length ? { retry: true } : {},
+          ),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setJob(data);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Visual candidate derivation could not start.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
   const supplement = job?.supplements?.at(-1);
   const bindingTrace = job?.bindingTraces?.at(-1);
   const candidate = job?.candidatePreparations?.at(-1);
+  const visualCandidate = job?.candidateVisuals?.at(-1);
   const allRows = [...(job?.rows ?? []), ...(supplement?.rows ?? [])];
   const row = allRows.find((r) => r.story === selected);
   return (
@@ -900,9 +931,9 @@ export function Sources() {
             </p>
             <p className="source-note">
               Preparation does not accept a Contract or produce native Figma
-              output. The visual contract, native comparison and complete
-              conversion journey remain pending. No source or Figma file is
-              changed.
+              output. A measured visual candidate can then be derived from the
+              same verified evidence. Native comparison and the complete
+              conversion journey remain pending.
             </p>
             <div className="source-connect">
               <button
@@ -975,6 +1006,153 @@ export function Sources() {
                   ))}
                 </ul>
               </details>
+            )}
+            {(candidate?.phase === "prepared" || visualCandidate) && (
+              <section aria-label="Measured visual candidate">
+                <h3>Measured visual candidate</h3>
+                <p>
+                  Derive source-owned structure, observed styles and recorded
+                  token correspondences from the verified preparation. Source
+                  slots remain separate from comparison content; missing cases
+                  and unsupported wrappers stay visible as limitations.
+                </p>
+                <div className="source-connect">
+                  <button
+                    type="button"
+                    disabled={
+                      busy ||
+                      capturing ||
+                      candidate?.phase !== "prepared" ||
+                      job.state !== "complete" ||
+                      job.sourceStable !== true ||
+                      bindingTrace?.state !== "complete" ||
+                      (!!supplement && supplement.state !== "complete")
+                    }
+                    onClick={() => void deriveVisualCandidate()}
+                  >
+                    {visualCandidate?.state === "running"
+                      ? "Deriving measured visual candidate…"
+                      : visualCandidate
+                        ? "Retry visual candidate derivation"
+                        : "Derive measured visual candidate"}
+                  </button>
+                </div>
+                <p role="status">
+                  {!visualCandidate
+                    ? "No measured visual candidate recorded yet."
+                    : visualCandidate.phase === "measured-candidate"
+                      ? "Measured visual candidate; not accepted or emitted. Native verification remains pending."
+                      : visualCandidate.phase === "visual-refused"
+                        ? "Visual derivation completed with a refusal. The evidence and refused cases are preserved."
+                        : visualCandidate.state === "running"
+                          ? "Deriving the visual candidate from existing evidence and runtime."
+                          : visualCandidate.state === "interrupted"
+                            ? "Visual derivation was interrupted. Retry creates a new attempt."
+                            : "Visual derivation failed or its recorded evidence no longer validates."}
+                </p>
+                {!!visualCandidate?.problems.length && (
+                  <div>
+                    <h4>Still to verify</h4>
+                    <ul>
+                      {[
+                        ...new Set(
+                          visualCandidate.problems.map(
+                            (problem) =>
+                              (
+                                ({
+                                  "candidate-visual-contract-unaccepted":
+                                    "Confirm that the proposed component preserves the source structure and styles.",
+                                  "candidate-runtime-binding-unqualified":
+                                    "Verify that the retained source behavior matches this candidate.",
+                                  "candidate-native-projection-unverified":
+                                    "Create and independently compare the native Figma output.",
+                                  "candidate-token-bindings-observations-only":
+                                    "Unrecorded token identities and native bindings remain unverified.",
+                                  "candidate-source-cases-refused":
+                                    "Resolve the refused source cases; they remain in the coverage total.",
+                                  "candidate-visual-refused":
+                                    "The recorded evidence could not support a measured visual candidate.",
+                                  "candidate-token-bindings-refused":
+                                    "The recorded token evidence could not be qualified.",
+                                  "candidate-evidence-unavailable-or-changed":
+                                    "Recheck evidence that is missing or has changed before retrying.",
+                                  "candidate-visual-assembly-failed":
+                                    "Derivation could not finish. Inspect its recorded details before retrying.",
+                                  "candidate-job-history-invalid":
+                                    "A saved attempt cannot be read or verified. Its history is preserved.",
+                                }) as Record<string, string>
+                              )[problem] ??
+                              "A recorded check still needs review before this candidate can proceed.",
+                          ),
+                        ),
+                      ].map((message) => (
+                        <li key={message}>{message}</li>
+                      ))}
+                    </ul>
+                    <details>
+                      <summary>Technical details</summary>
+                      <ul>
+                        {visualCandidate.problems.map((problem, index) => (
+                          <li key={index}>
+                            <code>{problem}</code>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </div>
+                )}
+                {(visualCandidate?.phase === "measured-candidate" ||
+                  visualCandidate?.phase === "visual-refused") && (
+                  <div
+                    className="source-status"
+                    aria-label="Measured visual inventory, not conversion results"
+                  >
+                    {(
+                      [
+                        ["plannedCases", "Source cases planned"],
+                        ["projectedCases", "Cases projected"],
+                        ["refusedCases", "Refused cases"],
+                        ["stylePlanes", "Style appearances observed"],
+                        ["observedChannels", "Style channels observed"],
+                        ["excludedChannels", "Style channels excluded"],
+                        ["boundTokenChannels", "Named token correspondences"],
+                        [
+                          "ambiguousTokenChannels",
+                          "Ambiguous recorded references",
+                        ],
+                        [
+                          "unresolvedTokenChannels",
+                          "Unresolved recorded references",
+                        ],
+                      ] as const
+                    ).map(([key, label]) =>
+                      visualCandidate.counters[key] === undefined ? null : (
+                        <div key={key}>
+                          <strong>{visualCandidate.counters[key]}</strong>
+                          <small>{label}</small>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                )}
+                <p className="source-note">
+                  Observed styles and token-name matches do not qualify runtime
+                  behavior or native Figma output. No Contract is accepted by
+                  this step.
+                </p>
+                {(job.candidateVisuals?.length ?? 0) > 1 && (
+                  <details>
+                    <summary>Preserved visual derivation attempts</summary>
+                    <ul>
+                      {job.candidateVisuals!.map((attempt) => (
+                        <li key={attempt.id}>
+                          <code>{attempt.id}</code>: {attempt.phase}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </section>
             )}
           </section>
           <div className="source-evidence">

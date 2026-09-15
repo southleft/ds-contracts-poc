@@ -29,6 +29,26 @@ export interface CandidateJobRecord {
   reportSha256?: string;
   problem?: string;
 }
+export interface CandidateVisualJobRecord extends Omit<
+  CandidateJobRecord,
+  "version"
+> {
+  version: 2;
+  operation: "source-visual-assembly";
+  preparation: { id: string; reportSha256: string };
+}
+export type AnyCandidateJobRecord =
+  CandidateJobRecord | CandidateVisualJobRecord;
+export interface CandidateVisualReportBase {
+  version: 2;
+  request: BindingEvidenceRequest;
+  binding: CandidateJobRecord["binding"];
+  preparation: CandidateVisualJobRecord["preparation"];
+  sourceProgramSha256: string;
+  status: "measured-candidate" | "visual-refused";
+  acceptedContract: null;
+  [key: string]: unknown;
+}
 export interface CandidatePreparedReport {
   version: 1;
   request: BindingEvidenceRequest;
@@ -41,7 +61,15 @@ export interface CandidatePreparedReport {
 export interface CandidateJobSnapshot {
   id: string;
   state: CandidateState;
-  phase: "preparing" | "prepared" | "failed" | "interrupted";
+  operation?: "source-preparation" | "source-visual-assembly";
+  phase:
+    | "preparing"
+    | "prepared"
+    | "assembling"
+    | "measured-candidate"
+    | "visual-refused"
+    | "failed"
+    | "interrupted";
   counters: Record<string, number>;
   problems: string[];
 }
@@ -51,6 +79,20 @@ export interface CandidateValidationContext {
   selection: VerifiedBindingSelection;
   readArtifact(relativePath: string): Buffer;
 }
+export interface VerifiedCandidatePreparation {
+  id: string;
+  reportSha256: string;
+  directory: string;
+  report: CandidatePreparedReport;
+  selection: VerifiedBindingSelection;
+}
+export interface CandidateVisualValidationContext extends CandidateValidationContext {
+  preparation: VerifiedCandidatePreparation;
+}
+export type CandidateVisualReportValidator = (
+  report: CandidateVisualReportBase,
+  context: CandidateVisualValidationContext,
+) => CandidateValidatedSummary;
 export interface CandidateValidatedSummary {
   counters: Record<string, number>;
   problems?: string[];
@@ -68,6 +110,7 @@ export interface CandidateJobsOptions {
     request: BindingEvidenceRequest,
   ): VerifiedBindingSelection;
   validateReport: CandidateReportValidator;
+  validateVisualReport?: CandidateVisualReportValidator;
   run?: CandidateRun;
 }
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
@@ -140,11 +183,11 @@ export function createCandidateJobs(
 ) {
   const repository = path.resolve(repoRoot),
     root = path.join(repository, "private/source-candidate-app");
-  const jobs = new Map<string, CandidateJobRecord>();
+  const jobs = new Map<string, AnyCandidateJobRecord>();
   const invalid = new Map<string, string | undefined>();
   let closed = false;
   let active:
-    { job: CandidateJobRecord; child: ReturnType<CandidateRun> } | undefined;
+    { job: AnyCandidateJobRecord; child: ReturnType<CandidateRun> } | undefined;
   const execute = options.run ?? launchCandidate(repository);
   const directories = (create = false) => {
     const canonical = realpathSync(repository);
@@ -195,7 +238,7 @@ export function createCandidateJobs(
     }
     return readFileSync(file);
   };
-  const save = (job: CandidateJobRecord) => {
+  const save = (job: AnyCandidateJobRecord) => {
     const dir = directory(job.id),
       target = path.join(dir, "job.json");
     try {
@@ -214,9 +257,34 @@ export function createCandidateJobs(
   const validRecord = (
     value: unknown,
     id: string,
-  ): value is CandidateJobRecord =>
+  ): value is AnyCandidateJobRecord =>
     object(value) &&
-    value.version === 1 &&
+    (value.version === 1 ||
+      (value.version === 2 &&
+        value.operation === "source-visual-assembly" &&
+        object(value.preparation) &&
+        typeof value.preparation.id === "string" &&
+        UUID.test(value.preparation.id) &&
+        typeof value.preparation.reportSha256 === "string" &&
+        HASH.test(value.preparation.reportSha256) &&
+        Object.keys(value.preparation).every((key) =>
+          ["id", "reportSha256"].includes(key),
+        ))) &&
+    Object.keys(value).every((key) =>
+      [
+        "version",
+        "id",
+        "request",
+        "binding",
+        "sourceProgramSha256",
+        "sourceRevision",
+        "state",
+        "startedAt",
+        "reportSha256",
+        "problem",
+        ...(value.version === 2 ? ["operation", "preparation"] : []),
+      ].includes(key),
+    ) &&
     value.id === id &&
     UUID.test(id) &&
     isBindingEvidenceRequest(value.request) &&
@@ -276,13 +344,13 @@ export function createCandidateJobs(
     return value;
   };
   const selectionMatches = (
-    job: CandidateJobRecord,
+    job: AnyCandidateJobRecord,
     value: VerifiedBindingSelection,
   ) =>
     same(job.binding, { id: value.id, reportSha256: value.reportSha256 }) &&
     job.sourceProgramSha256 === value.evidence.sourceProgramSha256 &&
     job.sourceRevision === value.evidence.sourceRevision;
-  const validate = (job: CandidateJobRecord) => {
+  const validate = (job: AnyCandidateJobRecord) => {
     if (!same(JSON.parse(read(job.id, "job.json").toString()), job))
       fail("metadata-changed");
     const selection = selected(job.request);
@@ -290,22 +358,49 @@ export function createCandidateJobs(
     const bytes = read(job.id, "report.json"),
       digest = sha(bytes);
     if (job.reportSha256 && digest !== job.reportSha256) fail("report-changed");
-    const report = JSON.parse(bytes.toString()) as CandidatePreparedReport;
+    const report = JSON.parse(bytes.toString()) as
+      CandidatePreparedReport | CandidateVisualReportBase;
     if (
       !object(report) ||
-      report.version !== 1 ||
+      report.version !== job.version ||
       !same(report.request, job.request) ||
       !same(report.binding, job.binding) ||
       report.sourceProgramSha256 !== job.sourceProgramSha256 ||
-      report.status !== "prepared" ||
+      (job.version === 1
+        ? report.status !== "prepared"
+        : !["measured-candidate", "visual-refused"].includes(report.status) ||
+          !same(report.preparation, job.preparation)) ||
       report.acceptedContract !== null
     )
       fail("report-invalid");
-    const summary = options.validateReport(report, {
+    const preparation =
+      job.version === 2 ? selectLatestPreparedVerified(job.request) : undefined;
+    if (
+      job.version === 2 &&
+      (!preparation ||
+        !same(job.preparation, {
+          id: preparation.id,
+          reportSha256: preparation.reportSha256,
+        }))
+    )
+      fail("preparation-changed");
+    const context: CandidateValidationContext = {
       directory: directory(job.id),
       selection,
       readArtifact: (name) => read(job.id, name),
-    });
+    };
+    let summary: CandidateValidatedSummary;
+    if (job.version === 2) {
+      if (!options.validateVisualReport) fail("visual-validator-unavailable");
+      summary = options.validateVisualReport!(
+        report as CandidateVisualReportBase,
+        { ...context, preparation: preparation! },
+      );
+    } else
+      summary = options.validateReport(
+        report as CandidatePreparedReport,
+        context,
+      );
     if (
       !object(summary) ||
       !object(summary.counters) ||
@@ -331,19 +426,37 @@ export function createCandidateJobs(
       !same(JSON.parse(read(job.id, "job.json").toString()), job)
     )
       fail("evidence-changed-during-validation");
+    if (job.version === 2) {
+      const after = selectLatestPreparedVerified(job.request);
+      if (
+        !same(job.preparation, {
+          id: after.id,
+          reportSha256: after.reportSha256,
+        })
+      )
+        fail("preparation-changed-during-validation");
+    }
     return {
       digest,
+      report,
+      selection,
+      phase: report.status,
       counters: { ...summary.counters },
       problems: [...(summary.problems ?? [])],
     };
   };
-  const snapshot = (job: CandidateJobRecord): CandidateJobSnapshot => {
+  const snapshot = (job: AnyCandidateJobRecord): CandidateJobSnapshot => {
     const result: CandidateJobSnapshot = {
       id: job.id,
+      ...(job.version === 2
+        ? { operation: "source-visual-assembly" as const }
+        : {}),
       state: job.state,
       phase:
         job.state === "running"
-          ? "preparing"
+          ? job.version === 2
+            ? "assembling"
+            : "preparing"
           : job.state === "complete"
             ? "prepared"
             : job.state,
@@ -353,6 +466,7 @@ export function createCandidateJobs(
     if (job.state === "complete") {
       try {
         const value = validate(job);
+        result.phase = value.phase;
         result.counters = value.counters;
         result.problems = value.problems;
       } catch {
@@ -363,11 +477,171 @@ export function createCandidateJobs(
     }
     return result;
   };
+  /** Reopen every record so a new attempt or a retargeted cached record cannot
+   * make an older success look current. This is observation only, never replay. */
+  const preparationHistory = (request: BindingEvidenceRequest) => {
+    directories();
+    const records: CandidateJobRecord[] = [];
+    const fingerprints: Array<[string, string]> = [];
+    for (const entry of readdirSync(root, { withFileTypes: true })) {
+      if (!UUID.test(entry.name)) continue;
+      let value: unknown;
+      let bytes: Buffer;
+      try {
+        bytes = read(entry.name, "job.json");
+        value = JSON.parse(bytes.toString());
+      } catch {
+        fail("history-invalid");
+      }
+      if (!validRecord(value, entry.name)) {
+        // Clearly attributed unrelated history is not evidence for this source.
+        if (
+          object(value) &&
+          isBindingEvidenceRequest(value.request) &&
+          value.request.baseline.id !== request.baseline.id
+        )
+          continue;
+        fail("history-invalid");
+      }
+      const record = value as AnyCandidateJobRecord;
+      // Fingerprint all records, including unrelated ones that could be retargeted.
+      fingerprints.push([entry.name, sha(bytes!)]);
+      if (
+        record.version === 1 &&
+        record.request.baseline.id === request.baseline.id
+      )
+        records.push(record);
+    }
+    records.sort(
+      (a, b) =>
+        a.startedAt.localeCompare(b.startedAt) || a.id.localeCompare(b.id),
+    );
+    fingerprints.sort(([a], [b]) => a.localeCompare(b));
+    return { records, fingerprint: JSON.stringify(fingerprints) };
+  };
+  const selectLatestPreparedVerified = (
+    request: BindingEvidenceRequest,
+  ): VerifiedCandidatePreparation => {
+    if (!isBindingEvidenceRequest(request)) fail("request-invalid");
+    const before = preparationHistory(request);
+    const job = before.records.at(-1);
+    if (!job || job.state !== "complete" || !same(job.request, request))
+      return fail("latest-preparation-unavailable");
+    const checked = validate(job);
+    if (preparationHistory(request).fingerprint !== before.fingerprint)
+      fail("preparation-history-changed");
+    return structuredClone({
+      id: job.id,
+      reportSha256: checked.digest,
+      directory: directory(job.id),
+      report: checked.report as CandidatePreparedReport,
+      selection: checked.selection,
+    });
+  };
   const ordered = () =>
     [...jobs.values()].sort(
       (a, b) =>
         a.startedAt.localeCompare(b.startedAt) || a.id.localeCompare(b.id),
     );
+  const start = (
+    request: BindingEvidenceRequest,
+    retry = false,
+    visual = false,
+  ): CandidateJobSnapshot => {
+    if (closed) fail("closed");
+    if (!isBindingEvidenceRequest(request) || typeof retry !== "boolean")
+      fail("request-invalid");
+    if (
+      [...invalid.values()].some(
+        (parent) => !parent || parent === request.baseline.id,
+      )
+    )
+      fail("history-invalid");
+    const existing = ordered()
+      .filter(
+        (job) => same(job.request, request) && (job.version === 2) === visual,
+      )
+      .at(-1);
+    if (existing && (existing.state === "running" || !retry))
+      return snapshot(existing);
+    if (active) fail("already-running");
+    const preparation = visual
+      ? selectLatestPreparedVerified(request)
+      : undefined;
+    if (visual && !options.validateVisualReport)
+      fail("visual-validator-unavailable");
+    const selection = selected(request);
+    directories(true);
+    // Strict monotonic job ordering survives same-millisecond retries.
+    const previous = ordered().at(-1);
+    const startedAt = new Date(
+      Math.max(Date.now(), previous ? Date.parse(previous.startedAt) + 1 : 0),
+    ).toISOString();
+    const job: AnyCandidateJobRecord = {
+      ...(visual
+        ? {
+            version: 2 as const,
+            operation: "source-visual-assembly" as const,
+            preparation: {
+              id: preparation!.id,
+              reportSha256: preparation!.reportSha256,
+            },
+          }
+        : { version: 1 as const }),
+      id: randomUUID(),
+      request: structuredClone(request),
+      binding: { id: selection.id, reportSha256: selection.reportSha256 },
+      sourceProgramSha256: selection.evidence.sourceProgramSha256,
+      sourceRevision: selection.evidence.sourceRevision,
+      state: "running",
+      startedAt,
+    };
+    mkdirSync(path.join(root, job.id), { mode: 0o700 });
+    save(job);
+    jobs.set(job.id, job);
+    const pending = { job, child: { kill: () => true } };
+    active = pending;
+    try {
+      const child = execute(
+        ["--import", "tsx", "source-reference/candidate-run.ts", job.id],
+        (error) => {
+          if (job.state !== "interrupted") {
+            try {
+              if (error) fail("run-failed");
+              const checked = validate(job);
+              job.reportSha256 = checked.digest;
+              job.state = "complete";
+            } catch {
+              job.state = "failed";
+              job.problem = visual
+                ? "candidate-visual-assembly-failed"
+                : "candidate-preparation-failed";
+            }
+            try {
+              save(job);
+            } catch {
+              job.state = "failed";
+              job.problem = "candidate-job-save-failed";
+            }
+          }
+          if (active === pending) active = undefined;
+        },
+      );
+      if (active === pending) pending.child = child;
+      else if (job.state === "interrupted") child.kill();
+    } catch {
+      if (active === pending) active = undefined;
+      job.state = "failed";
+      job.problem = "candidate-launch-failed";
+      try {
+        save(job);
+      } catch {
+        /* Preserve partial evidence; never claim completion. */
+      }
+      fail("launch-failed");
+    }
+    return snapshot(job);
+  };
   return {
     list(baselineId: string): CandidateJobSnapshot[] {
       if (!UUID.test(baselineId)) return [];
@@ -389,86 +663,11 @@ export function createCandidateJobs(
     get running() {
       return !!active;
     },
-    start(
-      request: BindingEvidenceRequest,
-      retry = false,
-    ): CandidateJobSnapshot {
-      if (closed) fail("closed");
-      if (!isBindingEvidenceRequest(request) || typeof retry !== "boolean")
-        fail("request-invalid");
-      if (
-        [...invalid.values()].some(
-          (parent) => !parent || parent === request.baseline.id,
-        )
-      )
-        fail("history-invalid");
-      const existing = ordered()
-        .filter((job) => same(job.request, request))
-        .at(-1);
-      if (existing && (existing.state === "running" || !retry))
-        return snapshot(existing);
-      if (active) fail("already-running");
-      const selection = selected(request);
-      directories(true);
-      // Strict monotonic job ordering survives same-millisecond retries.
-      const previous = ordered().at(-1);
-      const startedAt = new Date(
-        Math.max(Date.now(), previous ? Date.parse(previous.startedAt) + 1 : 0),
-      ).toISOString();
-      const job: CandidateJobRecord = {
-        version: 1,
-        id: randomUUID(),
-        request: structuredClone(request),
-        binding: { id: selection.id, reportSha256: selection.reportSha256 },
-        sourceProgramSha256: selection.evidence.sourceProgramSha256,
-        sourceRevision: selection.evidence.sourceRevision,
-        state: "running",
-        startedAt,
-      };
-      mkdirSync(path.join(root, job.id), { mode: 0o700 });
-      save(job);
-      jobs.set(job.id, job);
-      const pending = { job, child: { kill: () => true } };
-      active = pending;
-      try {
-        const child = execute(
-          ["--import", "tsx", "source-reference/candidate-run.ts", job.id],
-          (error) => {
-            if (job.state !== "interrupted") {
-              try {
-                if (error) fail("run-failed");
-                const checked = validate(job);
-                job.reportSha256 = checked.digest;
-                job.state = "complete";
-              } catch {
-                job.state = "failed";
-                job.problem = "candidate-preparation-failed";
-              }
-              try {
-                save(job);
-              } catch {
-                job.state = "failed";
-                job.problem = "candidate-job-save-failed";
-              }
-            }
-            if (active === pending) active = undefined;
-          },
-        );
-        if (active === pending) pending.child = child;
-        else if (job.state === "interrupted") child.kill();
-      } catch {
-        if (active === pending) active = undefined;
-        job.state = "failed";
-        job.problem = "candidate-launch-failed";
-        try {
-          save(job);
-        } catch {
-          /* Preserve partial evidence; never claim completion. */
-        }
-        fail("launch-failed");
-      }
-      return snapshot(job);
-    },
+    start: (request: BindingEvidenceRequest, retry = false) =>
+      start(request, retry),
+    startVisual: (request: BindingEvidenceRequest, retry = false) =>
+      start(request, retry, true),
+    selectLatestPreparedVerified,
     close() {
       closed = true;
       if (active) {

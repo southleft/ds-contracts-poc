@@ -19,14 +19,25 @@ import {
   isBindingEvidenceRequest,
   type BindingEvidenceRequest,
 } from "./binding-evidence.js";
-import type { CandidateJobRecord } from "./candidate-jobs.js";
+import {
+  createCandidateJobs,
+  type AnyCandidateJobRecord,
+  type VerifiedCandidatePreparation,
+} from "./candidate-jobs.js";
 import {
   buildCandidatePreparationReport,
+  createCandidatePreparationValidator,
   type CandidatePreparationReport,
 } from "./candidate-report.js";
 import {
+  buildCandidateVisualReport,
+  readCandidateVisualTokens,
+  type CandidateVisualReport,
+} from "./candidate-visual-report.js";
+import {
   inspectAltitudeButtonRuntimeInputs,
   prepareAltitudeButtonRuntime,
+  readVerifiedRuntimeArtifact,
 } from "./runtime-artifact.js";
 
 export interface CandidateRunnerServices {
@@ -35,6 +46,10 @@ export interface CandidateRunnerServices {
   ): VerifiedBindingSelection;
   inspectInputs?: typeof inspectAltitudeButtonRuntimeInputs;
   prepare?: typeof prepareAltitudeButtonRuntime;
+  selectLatestPreparedVerified?(
+    request: BindingEvidenceRequest,
+  ): VerifiedCandidatePreparation;
+  readVisualTokens?: typeof readCandidateVisualTokens;
 }
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 const HASH = /^[a-f0-9]{64}$/;
@@ -51,7 +66,7 @@ export function runCandidateJob(
   repoRoot: string,
   id: string,
   services: CandidateRunnerServices = {},
-): CandidatePreparationReport {
+): CandidatePreparationReport | CandidateVisualReport {
   const repository = path.resolve(repoRoot);
   if (!UUID.test(id)) fail("id-invalid");
   const directory = path.join(repository, "private/source-candidate-app", id);
@@ -87,10 +102,10 @@ export function runCandidateJob(
   } catch {
     fail("metadata-invalid");
   }
-  const job = parsed as CandidateJobRecord;
+  const job = parsed as AnyCandidateJobRecord;
   if (
     !job ||
-    job.version !== 1 ||
+    ![1, 2].includes(job.version) ||
     job.id !== id ||
     job.state !== "running" ||
     Object.keys(job).some(
@@ -104,6 +119,7 @@ export function runCandidateJob(
           "sourceRevision",
           "state",
           "startedAt",
+          ...(job.version === 2 ? ["operation", "preparation"] : []),
         ].includes(key),
     ) ||
     !isBindingEvidenceRequest(job.request) ||
@@ -118,6 +134,20 @@ export function runCandidateJob(
     typeof job.startedAt !== "string" ||
     !Number.isFinite(Date.parse(job.startedAt)) ||
     new Date(job.startedAt).toISOString() !== job.startedAt
+  )
+    fail("metadata-invalid");
+  if (
+    job.version === 2 &&
+    (job.operation !== "source-visual-assembly" ||
+      !job.preparation ||
+      Object.keys(job.preparation).some(
+        (key) => !["id", "reportSha256"].includes(key),
+      ) ||
+      typeof job.preparation.id !== "string" ||
+      !UUID.test(job.preparation.id) ||
+      job.preparation.id === id ||
+      typeof job.preparation.reportSha256 !== "string" ||
+      !HASH.test(job.preparation.reportSha256))
   )
     fail("metadata-invalid");
   for (const name of ["runtime", "report.json"]) {
@@ -154,6 +184,133 @@ export function runCandidateJob(
     const checkout = path.resolve(repository, "../altitude");
     const inspect =
       services.inspectInputs ?? inspectAltitudeButtonRuntimeInputs;
+    if (job.version === 2) {
+      // A fresh manager per observation sees newer preparation attempts added
+      // during assembly. Its recovery is in-memory only; no worker is launched.
+      const selectPreparation =
+        services.selectLatestPreparedVerified ??
+        ((request: BindingEvidenceRequest) => {
+          const candidates = createCandidateJobs(repository, {
+            selectLatestVerified: select,
+            validateReport: createCandidatePreparationValidator(inspect),
+            run: () => fail("preparation-execution-forbidden"),
+          });
+          try {
+            return candidates.selectLatestPreparedVerified(request);
+          } finally {
+            candidates.close();
+          }
+        });
+      const pinnedPreparation = (current: VerifiedBindingSelection) => {
+        const parent = selectPreparation(structuredClone(job.request));
+        const parentDirectory = path.join(
+          repository,
+          "private/source-candidate-app",
+          job.preparation.id,
+        );
+        if (
+          !parent ||
+          parent.id !== job.preparation.id ||
+          parent.reportSha256 !== job.preparation.reportSha256 ||
+          parent.directory !== parentDirectory ||
+          !same(parent.selection, current)
+        )
+          fail("selected-preparation-changed");
+        directories();
+        if (!lstatSync(parentDirectory).isDirectory())
+          fail("preparation-directory-refused");
+        const readParent = (name: string) => {
+          const file = path.join(parentDirectory, name),
+            stat = lstatSync(file);
+          if (!stat.isFile() || stat.size > 64 * 1024 * 1024)
+            fail("preparation-file-refused");
+          return readFileSync(file);
+        };
+        const reportBytes = readParent("report.json"),
+          metadataBytes = readParent("job.json"),
+          metadata = JSON.parse(metadataBytes.toString());
+        if (
+          sha(reportBytes) !== job.preparation.reportSha256 ||
+          !same(JSON.parse(reportBytes.toString()), parent.report) ||
+          metadata.version !== 1 ||
+          metadata.id !== parent.id ||
+          metadata.state !== "complete" ||
+          metadata.reportSha256 !== parent.reportSha256 ||
+          !same(metadata.request, job.request) ||
+          !same(metadata.binding, job.binding) ||
+          metadata.sourceRevision !== job.sourceRevision ||
+          metadata.sourceProgramSha256 !== job.sourceProgramSha256
+        )
+          fail("selected-preparation-changed");
+        const report = parent.report as CandidatePreparationReport;
+        if (
+          !report.runtime ||
+          typeof report.runtime.artifactRevision !== "string" ||
+          !/^sha256:[a-f0-9]{64}$/.test(report.runtime.artifactRevision)
+        )
+          fail("preparation-runtime-invalid");
+        return {
+          parent,
+          report,
+          metadataHash: sha(metadataBytes),
+          artifactDirectory: path.join(
+            parentDirectory,
+            "runtime",
+            report.runtime.artifactRevision.slice(7),
+          ),
+        };
+      };
+      const prepared = pinnedPreparation(selection),
+        inputs = inspect(checkout),
+        artifact = readVerifiedRuntimeArtifact(
+          prepared.artifactDirectory,
+          prepared.report.runtime.artifactRevision,
+        );
+      const expectedPreparation = buildCandidatePreparationReport(
+        selection,
+        artifact,
+        inputs,
+      );
+      if (!same(expectedPreparation, prepared.report))
+        fail("preparation-report-changed");
+      const readTokens = services.readVisualTokens ?? readCandidateVisualTokens,
+        tokens = readTokens(repository);
+      const report = buildCandidateVisualReport(
+        {
+          id: prepared.parent.id,
+          reportSha256: prepared.parent.reportSha256,
+          report: expectedPreparation,
+        },
+        selection,
+        tokens,
+      );
+      const current = pinnedSelection(),
+        currentPreparation = pinnedPreparation(current),
+        after = inspect(checkout);
+      // Opening again verifies every runtime byte without importing its module.
+      // The immutable manifest digest pins the complete file inventory.
+      const afterArtifact = readVerifiedRuntimeArtifact(
+        currentPreparation.artifactDirectory,
+        currentPreparation.report.runtime.artifactRevision,
+      );
+      if (
+        !same(selection, current) ||
+        !same(inputs, after) ||
+        prepared.metadataHash !== currentPreparation.metadataHash ||
+        !same(prepared.report, currentPreparation.report) ||
+        !same(artifact.manifest, afterArtifact.manifest) ||
+        !same(tokens, readTokens(repository)) ||
+        sha(readJob()) !== jobHash
+      )
+        fail("inputs-changed-during-assembly");
+      directories();
+      writeFileSync(
+        path.join(directory, "report.json"),
+        JSON.stringify(report, null, 2) + "\n",
+        { flag: "wx", mode: 0o600 },
+      );
+      return report;
+    }
     const inputs = inspect(checkout);
     if (inputs.sourceRevision !== selection.evidence.sourceRevision)
       fail("source-changed");

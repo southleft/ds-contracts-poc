@@ -14,6 +14,7 @@ import {
   type CandidateJobsOptions,
 } from "./candidate-jobs.js";
 import { validateCandidatePreparationReport } from "./candidate-report.js";
+import { validateCandidateVisualReport } from "./candidate-visual-report.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
@@ -83,7 +84,10 @@ export function createReferenceService(
   launch?: Launch,
   bindingLaunch?: Launch,
   candidateOptions: Partial<
-    Pick<CandidateJobsOptions, "run" | "validateReport">
+    Pick<
+      CandidateJobsOptions,
+      "run" | "validateReport" | "validateVisualReport"
+    >
   > = {},
 ) {
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
@@ -97,6 +101,8 @@ export function createReferenceService(
       bindingJobs.selectLatestVerified(request),
     validateReport:
       candidateOptions.validateReport ?? validateCandidatePreparationReport,
+    validateVisualReport:
+      candidateOptions.validateVisualReport ?? validateCandidateVisualReport,
     ...(candidateOptions.run ? { run: candidateOptions.run } : {}),
   });
   let active:
@@ -578,15 +584,25 @@ export function createReferenceService(
       problems,
     };
   }
-  const snapshotWithSupplement = (job: ReferenceJob) => ({
-    ...snapshot(job),
-    supplements: [...jobs.values()]
-      .filter((child) => child.parent?.id === job.id)
-      .map(snapshot),
-    contractAdmission: contractAdmission(job),
-    bindingTraces: bindingJobs.list(job.id),
-    candidatePreparations: candidateJobs.list(job.id),
-  });
+  const snapshotWithSupplement = (job: ReferenceJob) => {
+    const candidates = candidateJobs.list(job.id);
+    return {
+      ...snapshot(job),
+      supplements: [...jobs.values()]
+        .filter((child) => child.parent?.id === job.id)
+        .map(snapshot),
+      contractAdmission: contractAdmission(job),
+      bindingTraces: bindingJobs.list(job.id),
+      candidatePreparations: candidates.filter(
+        (candidate) =>
+          candidate.operation === undefined ||
+          candidate.operation === "source-preparation",
+      ),
+      candidateVisuals: candidates.filter(
+        (candidate) => candidate.operation === "source-visual-assembly",
+      ),
+    };
+  };
   function start(
     origin: string,
     cohortId: CohortId = "baseline",
@@ -681,8 +697,12 @@ export function createReferenceService(
     const supplementalMatch = /^([a-f0-9-]+)\/button-variants$/i.exec(route);
     const bindingMatch = /^([a-f0-9-]+)\/button-bindings$/i.exec(route);
     const candidateMatch = /^([a-f0-9-]+)\/button-candidate$/i.exec(route);
-    if (req.method === "POST" && (bindingMatch || candidateMatch)) {
-      const preparingCandidate = !!candidateMatch;
+    const visualMatch = /^([a-f0-9-]+)\/button-visual-candidate$/i.exec(route);
+    if (
+      req.method === "POST" &&
+      (bindingMatch || candidateMatch || visualMatch)
+    ) {
+      const preparingCandidate = !!candidateMatch || !!visualMatch;
       if (!req.headers["content-type"]?.startsWith("application/json")) {
         json(res, 415, { error: "JSON required." });
         return;
@@ -719,7 +739,9 @@ export function createReferenceService(
         }
         // Both actions use the same host-selected baseline and latest
         // supplement. Caller-supplied IDs/hashes cannot override this request.
-        const baseline = jobs.get((candidateMatch ?? bindingMatch)![1]);
+        const baseline = jobs.get(
+          (visualMatch ?? candidateMatch ?? bindingMatch)![1],
+        );
         const file = baseline
           ? evidenceFile(baseline.id, "measurement.json")
           : null;
@@ -746,7 +768,7 @@ export function createReferenceService(
         ) {
           json(res, 409, {
             error:
-              "Another source capture, binding replay or candidate preparation is running. Wait for it to finish.",
+              "Another source capture, binding replay or candidate operation is running. Wait for it to finish.",
           });
           return;
         }
@@ -776,15 +798,19 @@ export function createReferenceService(
             sha256: fileHash(childFile),
           };
         }
-        if (preparingCandidate)
+        if (visualMatch)
+          candidateJobs.startVisual(evidence, request.retry === true);
+        else if (candidateMatch)
           candidateJobs.start(evidence, request.retry === true);
         else bindingJobs.start(evidence, request.retry === true);
         json(res, 202, snapshotWithSupplement(baseline));
       } catch {
         json(res, 409, {
-          error: preparingCandidate
-            ? "Source candidate preparation could not start. Complete a current binding trace for the fixed original evidence; unavailable, changed or active evidence cannot be prepared."
-            : "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
+          error: visualMatch
+            ? "Visual candidate derivation could not start. A current verified source/runtime preparation is required; unavailable, changed or active evidence cannot be reused."
+            : preparingCandidate
+              ? "Source candidate preparation could not start. Complete a current binding trace for the fixed original evidence; unavailable, changed or active evidence cannot be prepared."
+              : "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
         });
       }
       return;

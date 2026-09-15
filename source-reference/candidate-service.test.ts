@@ -27,6 +27,7 @@ import { planBindingInterventions } from "./binding-plan.js";
 import type {
   CandidateJobsOptions,
   CandidatePreparedReport,
+  CandidateVisualReportBase,
 } from "./candidate-jobs.js";
 
 const sha = (bytes: Buffer | string) =>
@@ -174,7 +175,10 @@ function fixture() {
 function candidateStub(f: ReturnType<typeof fixture>) {
   const calls: { args: string[]; done: (error: unknown) => void }[] = [];
   let killed = 0;
-  const options: Pick<CandidateJobsOptions, "run" | "validateReport"> = {
+  const options: Pick<
+    CandidateJobsOptions,
+    "run" | "validateReport" | "validateVisualReport"
+  > = {
     run: (args, done) => {
       calls.push({ args, done });
       return {
@@ -197,6 +201,28 @@ function candidateStub(f: ReturnType<typeof fixture>) {
           slots: 0,
           writableProperties: 0,
         },
+      };
+    },
+    validateVisualReport: (report, context) => {
+      assert.equal(report.acceptedContract, null);
+      assert.deepEqual(context.selection.request, f.request);
+      assert.equal(report.preparation.id, context.preparation.id);
+      assert.equal(
+        report.preparation.reportSha256,
+        context.preparation.reportSha256,
+      );
+      return {
+        counters: {
+          plannedCases: 7,
+          projectedCases: 0,
+          refusedCases: 7,
+          stylePlanes: 0,
+          observedChannels: 0,
+          excludedChannels: 0,
+          boundTokenChannels: 0,
+          unresolvedTokenChannels: 0,
+        },
+        problems: ["fixture-visual-unqualified"],
       };
     },
   };
@@ -223,8 +249,191 @@ function candidateStub(f: ReturnType<typeof fixture>) {
     );
     call.done(null);
   };
-  return { calls, options, finish, killed: () => killed };
+  const finishVisual = (
+    status: CandidateVisualReportBase["status"] = "visual-refused",
+  ) => {
+    const call = calls.at(-1)!;
+    const directory = path.join(
+      f.repo,
+      "private/source-candidate-app",
+      call.args.at(-1)!,
+    );
+    const record = JSON.parse(
+      readFileSync(path.join(directory, "job.json"), "utf8"),
+    );
+    assert.equal(record.operation, "source-visual-assembly");
+    const report: CandidateVisualReportBase = {
+      version: 2,
+      request: record.request,
+      binding: record.binding,
+      preparation: record.preparation,
+      sourceProgramSha256: record.sourceProgramSha256,
+      status,
+      acceptedContract: null,
+      fixture:
+        "Injected validator tests transport only, not source qualification.",
+      privateRuntimePath: path.join(directory, "not-a-real-runtime"),
+    };
+    f.put(path.join(directory, "report.json"), JSON.stringify(report));
+    call.done(null);
+  };
+  return { calls, options, finish, finishVisual, killed: () => killed };
 }
+
+test("visual endpoint preserves preparation bytes, separates histories and requires explicit retries without captures", async () => {
+  const f = fixture(),
+    runner = candidateStub(f);
+  let captures = 0,
+    replays = 0;
+  const service = createReferenceService(
+    f.repo,
+    () => {
+      captures++;
+      return { kill: () => true };
+    },
+    () => {
+      replays++;
+      return { kill: () => true };
+    },
+    runner.options,
+  );
+  const server = createServer((req, res) => {
+    void service.handle(req, res);
+  });
+  await listen(server);
+  const base = originOf(server) + "/api/source-reference";
+  const post = (
+    endpoint: string,
+    body: unknown = {},
+    headers: Record<string, string> = {},
+  ) =>
+    fetch(`${base}/${f.request.baseline.id}/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...headers },
+      body: JSON.stringify(body),
+    });
+  const visual = "button-visual-candidate";
+  try {
+    assert.equal(
+      (await post(visual, {}, { Origin: "https://attacker.invalid" })).status,
+      403,
+    );
+    assert.equal(
+      (await post(visual, {}, { "Content-Type": "text/plain" })).status,
+      415,
+    );
+    for (const body of [
+      null,
+      [],
+      { retry: false },
+      { retry: 1 },
+      { preparation: "chosen" },
+      { runtime: "/tmp" },
+      { source: "caller-owned" },
+      { tokens: {} },
+      { mode: "light" },
+      { reportSha256: "a".repeat(64) },
+    ])
+      assert.equal((await post(visual, body)).status, 400);
+    assert.equal((await post(visual)).status, 409);
+    assert.equal(runner.calls.length, 0, "preparation is required");
+
+    assert.equal((await post("button-candidate")).status, 202);
+    assert.equal((await post(visual)).status, 409);
+    runner.finish();
+    const preparationId = runner.calls[0].args.at(-1)!;
+    const preparationDirectory = path.join(
+      f.repo,
+      "private/source-candidate-app",
+      preparationId,
+    );
+    const originalReport = readFileSync(
+      path.join(preparationDirectory, "report.json"),
+    );
+    const originalJob = readFileSync(
+      path.join(preparationDirectory, "job.json"),
+    );
+    const prepared = await (
+      await fetch(`${base}/${f.request.baseline.id}`)
+    ).json();
+
+    let response = await post(visual);
+    assert.equal(response.status, 202);
+    let job = await response.json();
+    assert.deepEqual(job.candidatePreparations, prepared.candidatePreparations);
+    assert.equal(job.candidateVisuals.length, 1);
+    assert.equal(job.candidateVisuals[0].phase, "assembling");
+    assert.equal(job.candidateVisuals[0].operation, "source-visual-assembly");
+    const visualId = job.candidateVisuals[0].id;
+    assert.notEqual(visualId, preparationId);
+    assert.equal(runner.calls.length, 2);
+    assert.equal((await post(visual)).status, 202);
+    assert.equal((await post(visual, { retry: true })).status, 202);
+    assert.equal(
+      runner.calls.length,
+      2,
+      "active visual submissions deduplicate",
+    );
+    assert.equal((await post("button-candidate", { retry: true })).status, 409);
+    assert.equal((await post("button-bindings", { retry: true })).status, 409);
+    assert.equal(
+      (await post("button-variants", { origin: "http://127.0.0.1:6017" }))
+        .status,
+      409,
+    );
+
+    runner.finishVisual();
+    job = await (await fetch(`${base}/${f.request.baseline.id}`)).json();
+    assert.equal(job.candidateVisuals[0].phase, "visual-refused");
+    assert.equal(job.candidateVisuals[0].state, "complete");
+    assert.equal(job.candidateVisuals[0].counters.refusedCases, 7);
+    assert.deepEqual(job.candidateVisuals[0].problems, [
+      "fixture-visual-unqualified",
+    ]);
+    assert.equal(job.contractAdmission.acceptedContract, null);
+    assert.equal(JSON.stringify(job.candidateVisuals).includes(f.repo), false);
+    assert.equal(
+      JSON.stringify(job.candidateVisuals).includes("privateRuntimePath"),
+      false,
+    );
+    await post(visual);
+    await fetch(base);
+    assert.equal(
+      runner.calls.length,
+      2,
+      "GET and repeat do not replay refusal",
+    );
+
+    response = await post(visual, { retry: true });
+    assert.equal(response.status, 202);
+    job = await response.json();
+    assert.equal(job.candidateVisuals.length, 2);
+    assert.notEqual(job.candidateVisuals[1].id, visualId);
+    runner.finishVisual("measured-candidate");
+    job = await (await fetch(`${base}/${f.request.baseline.id}`)).json();
+    assert.equal(job.candidateVisuals[1].phase, "measured-candidate");
+    assert.equal(job.contractAdmission.acceptedContract, null);
+    assert.deepEqual(job.candidatePreparations, prepared.candidatePreparations);
+    assert.deepEqual(
+      readFileSync(path.join(preparationDirectory, "report.json")),
+      originalReport,
+    );
+    assert.deepEqual(
+      readFileSync(path.join(preparationDirectory, "job.json")),
+      originalJob,
+    );
+    assert.equal(captures + replays, 0);
+    assert.equal(
+      runner.calls.length,
+      3,
+      "one preparation, two explicit visual attempts",
+    );
+  } finally {
+    service.close();
+    await closeServer(server);
+    f.close();
+  }
+});
 
 test("candidate endpoint fixes evidence selection, rejects caller authority, preserves attempts and keeps snapshots read-only", async () => {
   const f = fixture(),
@@ -306,6 +515,7 @@ test("candidate endpoint fixes evidence selection, rejects caller authority, pre
     ]);
     let job = await (await fetch(`${base}/${f.request.baseline.id}`)).json();
     assert.equal(job.candidatePreparations[0].phase, "preparing");
+    assert.deepEqual(job.candidateVisuals, []);
     assert.equal(job.contractAdmission.acceptedContract, null);
     assert.equal(job.denominator, 10);
     assert.equal(job.supplements[0].denominator, 3);
@@ -342,6 +552,7 @@ test("candidate endpoint fixes evidence selection, rejects caller authority, pre
     runner.finish();
     job = await (await fetch(`${base}/${f.request.baseline.id}`)).json();
     assert.equal(job.candidatePreparations[0].phase, "prepared");
+    assert.deepEqual(job.candidateVisuals, []);
     assert.equal(job.contractAdmission.acceptedContract, null);
     await post();
     assert.equal(
@@ -404,16 +615,17 @@ test("candidate preparation refuses active captures or binding replays without l
         },
       );
       assert.equal(response.status, 202);
-      assert.equal(
-        (
-          await fetch(`${base}/${f.request.baseline.id}/button-candidate`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: "{}",
-          })
-        ).status,
-        409,
-      );
+      for (const endpoint of ["button-candidate", "button-visual-candidate"])
+        assert.equal(
+          (
+            await fetch(`${base}/${f.request.baseline.id}/${endpoint}`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: "{}",
+            })
+          ).status,
+          409,
+        );
       assert.equal(runner.calls.length, 0);
     } finally {
       service.close();
@@ -503,14 +715,18 @@ test("candidate preparation never omits a changed latest supplement or accepts a
   });
   await listen(server);
   const base = originOf(server) + "/api/source-reference";
-  const post = (id: string) =>
-    fetch(`${base}/${id}/button-candidate`, {
+  const post = (id: string, endpoint: string) =>
+    fetch(`${base}/${id}/${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: "{}",
     });
   try {
-    assert.equal((await post(f.request.supplement!.id)).status, 409);
+    for (const endpoint of ["button-candidate", "button-visual-candidate"])
+      assert.equal(
+        (await post(f.request.supplement!.id, endpoint)).status,
+        409,
+      );
     const target = path.join(
       f.repo,
       "private/source-reference-app",
@@ -518,7 +734,8 @@ test("candidate preparation never omits a changed latest supplement or accepts a
       "measurement.json",
     );
     f.put(target, "{ broken record");
-    assert.equal((await post(f.request.baseline.id)).status, 409);
+    for (const endpoint of ["button-candidate", "button-visual-candidate"])
+      assert.equal((await post(f.request.baseline.id, endpoint)).status, 409);
     assert.equal(runner.calls.length, 0);
   } finally {
     service.close();

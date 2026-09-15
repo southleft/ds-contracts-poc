@@ -533,3 +533,256 @@ test(
     }
   },
 );
+
+function visualFixture() {
+  const f = fixture();
+  f.options.validateVisualReport = (report, context) => {
+    assert.equal(context.preparation.id, report.preparation.id);
+    assert.equal(
+      context.preparation.reportSha256,
+      report.preparation.reportSha256,
+    );
+    assert.equal(context.preparation.report.status, "prepared");
+    assert.equal(context.preparation.selection.id, f.selection.id);
+    assert.deepEqual(report.visual, { measured: true });
+    return {
+      counters: { plannedCases: 7, projectedCases: 6, refusedCases: 1 },
+    };
+  };
+  const jobs = createCandidateJobs(f.repo, f.options);
+  const parent = jobs.start(f.request);
+  f.report(parent.id);
+  f.done();
+  const parentJob = readFileSync(path.join(f.root, parent.id, "job.json"));
+  const parentReport = readFileSync(
+    path.join(f.root, parent.id, "report.json"),
+  );
+  const writeVisual = (id: string, status = "measured-candidate") => {
+    const job = JSON.parse(
+      readFileSync(path.join(f.root, id, "job.json"), "utf8"),
+    );
+    const value = {
+      version: 2,
+      request: job.request,
+      binding: job.binding,
+      preparation: job.preparation,
+      sourceProgramSha256: job.sourceProgramSha256,
+      status,
+      acceptedContract: null,
+      visual: { measured: true },
+    };
+    writeFileSync(path.join(f.root, id, "report.json"), JSON.stringify(value));
+    return value;
+  };
+  const assertParentUnchanged = () => {
+    assert.deepEqual(
+      readFileSync(path.join(f.root, parent.id, "job.json")),
+      parentJob,
+    );
+    assert.deepEqual(
+      readFileSync(path.join(f.root, parent.id, "report.json")),
+      parentReport,
+    );
+  };
+  return { ...f, jobs, parent, writeVisual, assertParentUnchanged };
+}
+
+test("visual attempts reuse a freshly verified preparation, keep operations distinct, and reopen without execution", () => {
+  const f = visualFixture();
+  try {
+    const selected = f.jobs.selectLatestPreparedVerified(f.request);
+    assert.equal(selected.id, f.parent.id);
+    assert.equal(
+      selected.reportSha256,
+      sha(readFileSync(path.join(f.root, f.parent.id, "report.json"))),
+    );
+    const visual = f.jobs.startVisual(f.request);
+    assert.notEqual(visual.id, f.parent.id);
+    assert.equal(visual.operation, "source-visual-assembly");
+    assert.equal(visual.phase, "assembling");
+    assert.equal(f.jobs.startVisual(f.request, true).id, visual.id);
+    assert.equal(f.jobs.start(f.request).id, f.parent.id);
+    assert.throws(() => f.jobs.start(f.request, true), /already-running/);
+    f.writeVisual(visual.id);
+    f.done();
+    const ready = f.jobs
+      .list(f.request.baseline.id)
+      .find((j) => j.id === visual.id)!;
+    assert.equal(ready.phase, "measured-candidate");
+    assert.deepEqual(ready.counters, {
+      plannedCases: 7,
+      projectedCases: 6,
+      refusedCases: 1,
+    });
+    assert.equal(f.jobs.startVisual(f.request).id, visual.id);
+    f.assertParentUnchanged();
+    const before = readFileSync(path.join(f.root, visual.id, "job.json"));
+    const reopened = createCandidateJobs(f.repo, {
+      ...f.options,
+      run: () => {
+        throw Error("must not run");
+      },
+    });
+    assert.deepEqual(
+      reopened.list(f.request.baseline.id),
+      f.jobs.list(f.request.baseline.id),
+    );
+    assert.equal(
+      reopened.selectLatestPreparedVerified(f.request).id,
+      f.parent.id,
+    );
+    assert.equal(reopened.startVisual(f.request).id, visual.id);
+    reopened.close();
+    assert.deepEqual(
+      readFileSync(path.join(f.root, visual.id, "job.json")),
+      before,
+    );
+    assert.equal(f.counts().calls, 2);
+    const newAttempt = f.jobs.startVisual(f.request, true);
+    assert.notEqual(newAttempt.id, visual.id);
+    assert.equal(f.counts().calls, 3);
+    f.writeVisual(newAttempt.id, "visual-refused");
+    f.done();
+    assert.equal(
+      f.jobs.list(f.request.baseline.id).at(-1)!.phase,
+      "visual-refused",
+    );
+    f.assertParentUnchanged();
+  } finally {
+    f.jobs.close();
+    f.close();
+  }
+});
+
+test("new failed or running preparation invalidates existing visual evidence without fallback or replay", async (t) => {
+  for (const state of ["failed", "running", "interrupted"])
+    await t.test(state, () => {
+      const f = visualFixture();
+      try {
+        const visual = f.jobs.startVisual(f.request);
+        f.writeVisual(visual.id);
+        f.done();
+        const id = "00000000-0000-4000-8000-000000000009";
+        const next = {
+          ...f.readJob(f.parent.id),
+          id,
+          state,
+          startedAt: "2099-01-01T00:00:00.000Z",
+        };
+        delete next.reportSha256;
+        mkdirSync(path.join(f.root, id));
+        writeFileSync(path.join(f.root, id, "job.json"), JSON.stringify(next));
+        assert.throws(
+          () => f.jobs.selectLatestPreparedVerified(f.request),
+          /latest-preparation-unavailable/,
+        );
+        assert.equal(f.jobs.startVisual(f.request).state, "failed");
+        assert.throws(
+          () => f.jobs.startVisual(f.request, true),
+          /latest-preparation-unavailable/,
+        );
+        assert.equal(f.counts().calls, 2);
+        f.assertParentUnchanged();
+      } finally {
+        f.jobs.close();
+        f.close();
+      }
+    });
+});
+
+test("visual validation rejects a changed parent, changed pin and fake acceptance", async (t) => {
+  for (const mutation of [
+    "parent-report",
+    "parent-job",
+    "pin",
+    "accepted",
+    "version",
+  ])
+    await t.test(mutation, () => {
+      const f = visualFixture();
+      try {
+        const visual = f.jobs.startVisual(f.request);
+        const report = f.writeVisual(visual.id);
+        if (mutation === "parent-report")
+          writeFileSync(path.join(f.root, f.parent.id, "report.json"), "{}");
+        if (mutation === "parent-job") {
+          const parent = f.readJob(f.parent.id);
+          parent.sourceRevision = "e".repeat(40);
+          writeFileSync(
+            path.join(f.root, f.parent.id, "job.json"),
+            JSON.stringify(parent),
+          );
+        }
+        if (mutation === "pin")
+          report.preparation.reportSha256 = "e".repeat(64);
+        if (mutation === "accepted")
+          Object.assign(report, { acceptedContract: {} });
+        if (mutation === "version") report.version = 1;
+        writeFileSync(
+          path.join(f.root, visual.id, "report.json"),
+          JSON.stringify(report),
+        );
+        f.done();
+        assert.equal(
+          f.jobs.list(f.request.baseline.id).find((j) => j.id === visual.id)!
+            .state,
+          "failed",
+        );
+        assert.equal(f.counts().calls, 2);
+      } finally {
+        f.jobs.close();
+        f.close();
+      }
+    });
+});
+
+test("latest preparation selector detects newly inserted history during trusted validation", () => {
+  const f = visualFixture();
+  try {
+    const original = f.options.validateReport;
+    f.options.validateReport = (report, context) => {
+      const result = original(report, context);
+      const id = "00000000-0000-4000-8000-000000000009";
+      if (!existsSync(path.join(f.root, id))) {
+        mkdirSync(path.join(f.root, id));
+        writeFileSync(
+          path.join(f.root, id, "job.json"),
+          JSON.stringify({
+            ...f.readJob(f.parent.id),
+            id,
+            state: "failed",
+            startedAt: "2099-01-01T00:00:00.000Z",
+          }),
+        );
+      }
+      return result;
+    };
+    assert.throws(
+      () => f.jobs.selectLatestPreparedVerified(f.request),
+      /preparation-history-changed/,
+    );
+    f.assertParentUnchanged();
+  } finally {
+    f.jobs.close();
+    f.close();
+  }
+});
+
+test("interrupted visual attempts stay interrupted until explicit retry and never modify parent", () => {
+  const f = visualFixture();
+  try {
+    const visual = f.jobs.startVisual(f.request);
+    f.jobs.close();
+    const count = f.counts().calls;
+    const reopened = createCandidateJobs(f.repo, f.options);
+    assert.equal(reopened.startVisual(f.request).state, "interrupted");
+    assert.equal(f.counts().calls, count);
+    assert.equal(reopened.startVisual(f.request, true).phase, "assembling");
+    assert.notEqual(reopened.list(f.request.baseline.id).at(-1)!.id, visual.id);
+    reopened.close();
+    f.assertParentUnchanged();
+  } finally {
+    f.jobs.close();
+    f.close();
+  }
+});
