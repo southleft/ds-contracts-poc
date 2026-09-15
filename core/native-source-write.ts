@@ -11,6 +11,10 @@ import {
 } from "./native-token-context.js";
 import { emitNativeTokenContextReadbackScript } from "./token-set.js";
 import type { NativeSourceCandidateProjection } from "./native-source-projection.js";
+import type {
+  NativeSourceComparisonInput,
+  prepareNativeSourceComparisons,
+} from "./native-source-comparisons.js";
 
 export interface NativeSourceWriteContext {
   /** Allocated once by the application journal, after file policy checks. */
@@ -22,12 +26,14 @@ export interface NativeSourceWriteContext {
     identity: NativeTokenIdentity;
     receipt: NativeTokenContextReceipt;
   };
+  comparisons?: NativeSourceComparisonInput;
 }
 
 export function prepareNativeSourceWrite(
   projection: NativeSourceCandidateProjection,
   context: NativeSourceWriteContext,
   boundNames: string[],
+  comparisons?: ReturnType<typeof prepareNativeSourceComparisons>,
 ) {
   const fail = (code: string): never => {
     throw Error(`native-source-write-${code}`);
@@ -81,6 +87,16 @@ export function prepareNativeSourceWrite(
     tokenPreparationRevision: preparation.revision,
     identity: tokens.identity,
     receipt: tokens.receipt,
+    ...(comparisons
+      ? {
+          comparisons: {
+            revision: comparisons.revision,
+            cases: comparisons.cases,
+            fonts: comparisons.fonts,
+            nodeTypes: comparisons.nodeTypes,
+          },
+        }
+      : {}),
   };
   // A copy at emission time prevents a caller mutating the descriptor while
   // retaining an earlier successful validation.
@@ -90,6 +106,7 @@ export function prepareNativeSourceWrite(
       input,
       tokens.identity,
     ),
+    sampleSpecs: comparisons?.specs ?? [],
   };
 }
 
@@ -136,7 +153,16 @@ function nativeInit(node, spec) {
   nativeOwn(node);
   if (spec.type !== 'slot') NATIVE_PAGE.appendChild(node);
   node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
-  node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
+  if (spec.nativeSourcePart) node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
+  else if (spec.nativeSourceSample) {
+    node.setSharedPluginData('ds_contracts', 'nativeSourceSample', JSON.stringify(spec.nativeSourceSample));
+    // createNodeFromSvg allocates a subtree in one API call. Preserve and own
+    // its returned descendants too; this does not claim vector equivalence.
+    if (spec.type === 'svg') for (const child of node.findAll(() => true)) {
+      nativeOwn(child);
+      child.setSharedPluginData('ds_contracts', 'nativeSourceSample', JSON.stringify(spec.nativeSourceSample));
+    }
+  } else nativeRefuse('node-source-identity-missing');
   if (spec.nativeSourceVisible === false) node.visible = false;
 }
 async function nativeReadTokens() {
@@ -156,11 +182,22 @@ try {
   for (const name of ['loadAllPagesAsync', 'setCurrentPageAsync', 'createPage', 'createComponent', 'createFrame', 'combineAsVariants', 'loadFontAsync']) {
     if (typeof figma[name] !== 'function') nativeRefuse('api-unavailable');
   }
+  if (NATIVE.comparisons) for (const type of NATIVE.comparisons.nodeTypes) {
+    const api = { text: 'createText', svg: 'createNodeFromSvg', frame: 'createFrame' }[type];
+    if (!api || typeof figma[api] !== 'function') nativeRefuse('comparison-api-unavailable');
+  }
   await figma.loadAllPagesAsync();
   nativeFileGuard();
   NATIVE_COLLECTION = await figma.variables.getVariableCollectionByIdAsync(NATIVE.identity.collection.id);
   NATIVE_VARIABLES = await Promise.all(NATIVE.identity.variables.map(v => figma.variables.getVariableByIdAsync(v.id)));
   await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
+  for (const font of NATIVE.comparisons ? NATIVE.comparisons.fonts : []) {
+    let loaded = false;
+    for (const style of font.styles) {
+      try { await figma.loadFontAsync({ family: font.family, style }); loaded = true; break; } catch (_) { /* same-family spelling retry */ }
+    }
+    if (!loaded) nativeRefuse('comparison-font-unavailable');
+  }
   nativeCheckTokens(await nativeReadTokens());
   nativeFileGuard();
   for (const page of figma.root.children) {

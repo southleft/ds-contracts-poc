@@ -21,6 +21,7 @@ import {
   verifyNativeTokenContextReceipt,
   type NativeTokenIdentity,
 } from "../core/native-token-context.js";
+import type { NativeSourceWriteContext } from "../core/native-source-write.js";
 import {
   emitNativeTokenContextReadbackScript,
   emitNativeTokenContextScript,
@@ -34,7 +35,10 @@ import {
 import type { VerifiedCandidateVisual } from "./candidate-jobs.js";
 import type { CandidatePreparationReport } from "./candidate-report.js";
 import { readCandidateVisualTokens } from "./candidate-visual-report.js";
-import { prepareNativeSourceInspectionPlan } from "./native-source-plan.js";
+import {
+  prepareNativeSourceInspectionPlan,
+  buildNativeSourceComponentWrite,
+} from "./native-source-plan.js";
 import { readVerifiedRuntimeArtifact } from "./runtime-artifact.js";
 
 /** The current owner-approved writable target. A request/plan cannot override it. */
@@ -51,7 +55,14 @@ export interface NativeOperationPreparation {
   preparation: Pin;
   plan: Plan;
 }
-export type NativeOperationPhase = "token-create" | "token-readback";
+export type NativeOperationPhase =
+  "token-create" | "token-readback" | "component-create";
+export interface NativeOperationComponentContext {
+  operation: NativeSourceWriteContext["operation"];
+  tokens: NativeSourceWriteContext["tokens"];
+  planRevision: string;
+  journalRevision: string;
+}
 export interface NativeOperationCommand {
   version: 1;
   kind: "SOURCE-NATIVE-OPERATION";
@@ -74,7 +85,10 @@ export interface NativeOperationResult {
   fileKey: string;
   planRevision: string;
   scriptSha256: string;
-  result: NativeTokenCreationResult | NativeTokenReadbackResult;
+  result:
+    | NativeTokenCreationResult
+    | NativeTokenReadbackResult
+    | Record<string, unknown>;
 }
 export interface NativeOperationSnapshot {
   id: string;
@@ -88,6 +102,10 @@ export interface NativeOperationSnapshot {
     | "creation-invalid"
     | "tokens-observed"
     | "observation-refused"
+    | "components-created"
+    | "component-creation-refused"
+    | "component-creation-invalid"
+    | "component-partial-allocation"
     | "evidence-unavailable";
   pendingPhase?: NativeOperationPhase;
   nativeOutcome?: "unknown";
@@ -132,6 +150,7 @@ interface State {
   pending?: NativeOperationCommand;
   problems: string[];
   dispatchedCreate: boolean;
+  dispatchedComponent: boolean;
 }
 export interface NativeOperationJobsOptions {
   /** Trusted in-process preparer. Reopens latest visual/source/runtime evidence
@@ -140,6 +159,11 @@ export interface NativeOperationJobsOptions {
     request: BindingEvidenceRequest,
     operation: { id: string; fileKey: string },
   ): NativeOperationPreparation;
+  /** Host-authenticated source rederivation and existing shared renderer. */
+  buildComponent?(
+    request: BindingEvidenceRequest,
+    context: NativeOperationComponentContext,
+  ): { planRevision: string; script: string };
 }
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
@@ -180,6 +204,36 @@ export function prepareVerifiedNativeOperation(
   selected: VerifiedCandidateVisual,
   operation: { id: string; fileKey: string },
 ): NativeOperationPreparation {
+  const source = readVerifiedNativeSource(repoRoot, selected);
+  return {
+    visual: { id: selected.id, reportSha256: selected.reportSha256 },
+    preparation: {
+      id: selected.preparation.id,
+      reportSha256: selected.preparation.reportSha256,
+    },
+    plan: prepareNativeSourceInspectionPlan({ operation, source }),
+  };
+}
+
+export function prepareVerifiedNativeComponentWrite(
+  repoRoot: string,
+  selected: VerifiedCandidateVisual,
+  context: NativeOperationComponentContext,
+) {
+  if (context.operation.fileKey !== SOURCE_NATIVE_FILE_KEY)
+    fail("write-policy-refused");
+  return buildNativeSourceComponentWrite({
+    source: readVerifiedNativeSource(repoRoot, selected),
+    operation: context.operation,
+    tokens: context.tokens,
+    expectedPlanRevision: context.planRevision,
+  });
+}
+
+function readVerifiedNativeSource(
+  repoRoot: string,
+  selected: VerifiedCandidateVisual,
+) {
   if (
     selected.report.version !== 3 ||
     selected.report.status !== "measured-candidate"
@@ -194,26 +248,19 @@ export function prepareVerifiedNativeOperation(
     revision,
   );
   return {
-    visual: { id: selected.id, reportSha256: selected.reportSha256 },
-    preparation: { id: preparation.id, reportSha256: preparation.reportSha256 },
-    plan: prepareNativeSourceInspectionPlan({
-      operation,
-      source: {
-        preparation: { ...preparation, report },
-        selection: selected.selection,
-        expectedReportRevision: revisionOf(selected.report),
-        tokens: readCandidateVisualTokens(repoRoot),
-        artifact: {
-          artifactRevision: artifact.artifactRevision,
-          interfaceRevision: artifact.interfaceRevision,
-          registrationTag: artifact.registrationTag,
-          interface: artifact.manifest.interface,
-          stylesheets: artifact.manifest.files
-            .filter((f) => f.kind === "stylesheet")
-            .map((f) => f.path),
-        },
-      },
-    }),
+    preparation: { ...preparation, report },
+    selection: selected.selection,
+    expectedReportRevision: revisionOf(selected.report),
+    tokens: readCandidateVisualTokens(repoRoot),
+    artifact: {
+      artifactRevision: artifact.artifactRevision,
+      interfaceRevision: artifact.interfaceRevision,
+      registrationTag: artifact.registrationTag,
+      interface: artifact.manifest.interface,
+      stylesheets: artifact.manifest.files
+        .filter((f) => f.kind === "stylesheet")
+        .map((f) => f.path),
+    },
   };
 }
 
@@ -458,6 +505,123 @@ export function createNativeOperationJobs(
           problems: ["native-operation-native-token-drift"],
         };
   };
+  /** A creation acknowledgement is allocation evidence, not readback. Check
+   * its references and coverage before reporting components-created; never
+   * qualify appearance/editability from this self-report. Raw invalid/partial
+   * acknowledgements are still preserved in the immutable result event. */
+  const acceptComponentCreation = (
+    value: unknown,
+    plan: Plan,
+    id: string,
+  ): Pick<State, "phase" | "problems"> => {
+    const invalid = {
+      phase: "component-creation-invalid" as const,
+      problems: ["native-operation-component-result-invalid"],
+    };
+    if (
+      !object(value) ||
+      value.version !== 1 ||
+      value.operationId !== id ||
+      value.fileKey !== SOURCE_NATIVE_FILE_KEY ||
+      value.acceptedContract !== null ||
+      value.nativeQualification !== "unqualified" ||
+      !Array.isArray(value.nodes) ||
+      !Array.isArray(value.problems)
+    )
+      return invalid;
+    if (
+      value.status === "refused" &&
+      value.allocationAttempted === false &&
+      value.pageId === null &&
+      value.target === null &&
+      !value.nodes.length &&
+      value.problems.length
+    ) {
+      return {
+        phase: "component-creation-refused",
+        problems: ["native-operation-component-write-refused"],
+      };
+    }
+    if (
+      value.status === "partial-or-unknown-allocation" &&
+      value.allocationAttempted === true
+    ) {
+      return {
+        phase: "component-partial-allocation",
+        problems: ["native-operation-component-partial-allocation"],
+      };
+    }
+    const textId = (x: unknown): x is string =>
+      typeof x === "string" && x.length > 0 && x.length <= 512;
+    if (
+      value.status !== "created-candidate" ||
+      value.allocationAttempted !== true ||
+      value.problems.length ||
+      !textId(value.pageId) ||
+      !object(value.target) ||
+      !textId(value.target.id) ||
+      !textId(value.target.key) ||
+      !Array.isArray(value.variants) ||
+      value.variants.length !== plan.plan.component.variants.length ||
+      !object(value.propertyDefinitions) ||
+      !Array.isArray(value.comparisons) ||
+      value.comparisons.length !== plan.plan.samples.cases.length ||
+      !textId(value.comparisonBoardId)
+    )
+      return invalid;
+    if (
+      value.nodes.some(
+        (n: unknown) => !object(n) || !textId(n.id) || !textId(n.type),
+      ) ||
+      new Set(value.nodes.map((n: any) => n.id)).size !== value.nodes.length
+    )
+      return invalid;
+    const nodes = new Map(value.nodes.map((n: any) => [n.id, n.type]));
+    if (
+      nodes.get(value.pageId) !== "PAGE" ||
+      nodes.get(value.comparisonBoardId) !== "FRAME" ||
+      nodes.get(value.target.id) !== value.target.type ||
+      !["COMPONENT", "COMPONENT_SET"].includes(value.target.type) ||
+      value.variants.some(
+        (v: any) =>
+          !object(v) || nodes.get(v.id) !== "COMPONENT" || !textId(v.key),
+      )
+    )
+      return invalid;
+    const instanceIds: string[] = [];
+    for (const [index, c] of value.comparisons.entries()) {
+      const expected = plan.plan.samples.cases[index];
+      if (!object(c) || c.id !== expected.id) return invalid;
+      if (expected.status === "refused") {
+        if (c.status !== "refused" || c.instanceId !== undefined)
+          return invalid;
+      } else {
+        if (
+          c.status !== "created-comparison" ||
+          nodes.get(c.instanceId) !== "INSTANCE" ||
+          !value.variants.some((v: any) => v.id === c.mainId) ||
+          !Array.isArray(c.sourceParts) ||
+          !Array.isArray(c.slots) ||
+          c.sourceParts.some(
+            (p: any) =>
+              !object(p) || !nodes.has(p.nodeId) || !Array.isArray(p.partPath),
+          ) ||
+          c.slots.some(
+            (s: any) =>
+              !object(s) ||
+              nodes.get(s.nodeId) !== "SLOT" ||
+              !textId(s.propertyKey) ||
+              !Array.isArray(s.contentNodeIds) ||
+              s.contentNodeIds.some((n: unknown) => !nodes.has(n)),
+          )
+        )
+          return invalid;
+        instanceIds.push(c.instanceId);
+      }
+    }
+    if (new Set(instanceIds).size !== instanceIds.length) return invalid;
+    return { phase: "components-created", problems: [] };
+  };
   const load = (id: string) => {
     directories();
     ensure(dir(id));
@@ -504,6 +668,13 @@ export function createNativeOperationJobs(
     const claimBytes = present(claimPath) ? bytes(claimPath) : null;
     if (!!claimBytes !== !!entries.length) fail("creation-journal-incomplete");
     const claim = claimBytes ? JSON.parse(claimBytes.toString()) : null;
+    const componentClaimPath = path.join(dir(id), "component-creation.json");
+    const componentClaimBytes = present(componentClaimPath)
+      ? bytes(componentClaimPath)
+      : null;
+    const componentClaim = componentClaimBytes
+      ? JSON.parse(componentClaimBytes.toString())
+      : null;
     const events: Event[] = [];
     const digests: string[] = [];
     let previous = sha(headerBytes);
@@ -511,6 +682,7 @@ export function createNativeOperationJobs(
       phase: "prepared",
       problems: [],
       dispatchedCreate: false,
+      dispatchedComponent: false,
     };
     const attempts = new Set<string>(),
       nonces = new Set<string>();
@@ -556,8 +728,23 @@ export function createNativeOperationJobs(
             fail("creation-replay-refused");
           state.dispatchedCreate = true;
         } else if (c.phase === "token-readback") {
-          if (!state.identity || c.readOnly !== true)
+          if (
+            !state.identity ||
+            c.readOnly !== true ||
+            state.dispatchedComponent
+          )
             fail("observation-precondition-invalid");
+        } else if (c.phase === "component-create") {
+          if (
+            !state.identity ||
+            state.phase !== "tokens-observed" ||
+            state.dispatchedComponent ||
+            c.readOnly !== false ||
+            !componentClaim ||
+            !same(c, componentClaim)
+          )
+            fail("component-creation-precondition-invalid");
+          state.dispatchedComponent = true;
         } else fail("phase-invalid");
         attempts.add(c.attemptId);
         nonces.add(c.nonce);
@@ -573,11 +760,13 @@ export function createNativeOperationJobs(
                 event.envelope.result as NativeTokenCreationResult,
                 plan,
               )
-            : observe(
-                event.envelope.result as NativeTokenReadbackResult,
-                state.identity!,
-                plan,
-              );
+            : state.pending.phase === "component-create"
+              ? acceptComponentCreation(event.envelope.result, plan, id)
+              : observe(
+                  event.envelope.result as NativeTokenReadbackResult,
+                  state.identity!,
+                  plan,
+                );
         Object.assign(state, outcome);
         delete state.pending;
       } else if (event.kind === "abandon-observation") {
@@ -604,12 +793,15 @@ export function createNativeOperationJobs(
       digests.push(previous);
       events.push(event);
     }
+    if (!!componentClaim !== state.dispatchedComponent)
+      fail("component-creation-journal-incomplete");
     const fingerprint = sha(
       encode({
         header: sha(headerBytes),
         plan: sha(planBytes),
         script: sha(scriptBytes),
         claim: claimBytes ? sha(claimBytes) : null,
+        componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
         digests,
       }),
     );
@@ -645,7 +837,11 @@ export function createNativeOperationJobs(
           nativeOutcome: "unknown" as const,
         }
       : {}),
-    ...(loaded.state.phase === "creation-invalid"
+    ...([
+      "creation-invalid",
+      "component-creation-invalid",
+      "component-partial-allocation",
+    ].includes(loaded.state.phase)
       ? { nativeOutcome: "unknown" as const }
       : {}),
     sourceCurrent,
@@ -685,6 +881,17 @@ export function createNativeOperationJobs(
     if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("journal-changed");
     const sequence = loaded.events.length;
+    if (
+      event.kind === "dispatch" &&
+      event.command.phase === "component-create"
+    ) {
+      // Separate claim survives deletion of only the later component events.
+      // A crash between this durable claim and event publication fails closed.
+      write(
+        path.join(dir(loaded.header.id), "component-creation.json"),
+        encode(event.command),
+      );
+    }
     if (sequence === 0) {
       if (event.kind !== "dispatch" || event.command.phase !== "token-create")
         fail("first-dispatch-invalid");
@@ -822,6 +1029,8 @@ export function createNativeOperationJobs(
       authenticate(loaded);
       script = loaded.script;
     } else if (phase === "token-readback") {
+      if (loaded.state.dispatchedComponent)
+        fail("component-phase-already-started");
       if (!loaded.state.identity) fail("allocation-identity-unavailable");
       // Readback remains available for known allocations after source changes.
       // It cannot authorize a write or advance a source/component baseline.
@@ -829,6 +1038,27 @@ export function createNativeOperationJobs(
         loaded.plan.plan.tokenInput,
         loaded.state.identity,
       );
+    } else if (phase === "component-create") {
+      if (loaded.state.dispatchedComponent)
+        fail("component-creation-already-dispatched");
+      if (!options.buildComponent) fail("component-writer-unavailable");
+      const context = verifiedTokenContext(id);
+      if (context.journalRevision !== loaded.fingerprint)
+        fail("journal-changed");
+      const built = options.buildComponent(
+        structuredClone(loaded.header.request),
+        context,
+      );
+      if (
+        built.planRevision !== loaded.plan.revision ||
+        typeof built.script !== "string" ||
+        !built.script.trim() ||
+        Buffer.byteLength(built.script) > 4 * 1024 * 1024
+      )
+        fail("component-script-invalid");
+      // Compilation may reenter the manager or race another host process.
+      authenticate(loaded);
+      script = built.script;
     } else fail("phase-invalid");
     const command: NativeOperationCommand = {
       version: 1,

@@ -235,13 +235,21 @@ creating another native scope.
 
 The component writer preserves source-part metadata, full slot property keys
 and empty-main wrapper visibility. It sets the explicit variable mode before
-styling and retains returned node IDs before later API calls can fail. A private
-journal accessor supplies token identities only after successful independent
-observation and fresh source validation. The saved five-variant Button plan has
-exercised this path in the native API mock, with all fifteen main slots empty.
-This is implementation coverage, not a live native conversion. Comparison
-instances, component command journaling, transport and independent component
-readback remain unfinished.
+styling and retains returned node IDs before later API calls can fail. It also
+uses the shared renderer for separate comparison instances, including observed
+text/SVG samples and recorded wrapper visibility. Font and sample API checks run
+before allocation. A private journal accessor supplies token identities only
+after independent observation and fresh source validation. Component commands
+have a separate durable creation claim, so deleting their later events cannot
+rewind the operation into another creation attempt.
+
+The saved five-variant Button plan has exercised the production preparers,
+journal and shared writer against a temporary journal copy and native API mock:
+all fifteen main slots stayed empty, six comparison instances were filled, and
+the refused case remained in the denominator. This is implementation coverage,
+not a live native conversion. A creation acknowledgement does not verify native
+fidelity. Transport, independent component readback, component retry and repair
+remain unfinished.
 
 `npm run runtime:check` checks the strict reference schema, verified artifact
 inputs, React lowering and refusal boundaries. Canvas markers remain untrusted

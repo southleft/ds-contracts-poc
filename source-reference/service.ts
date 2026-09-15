@@ -18,6 +18,7 @@ import { validateCandidateVisualReport } from "./candidate-visual-report.js";
 import {
   createNativeOperationJobs,
   prepareVerifiedNativeOperation,
+  prepareVerifiedNativeComponentWrite,
   type NativeOperationJobsOptions,
 } from "./native-operation-jobs.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
@@ -120,6 +121,12 @@ export function createReferenceService(
           repoRoot,
           candidateJobs.selectLatestVisualVerified(request),
           operation,
+        ),
+      buildComponent: (request, context) =>
+        prepareVerifiedNativeComponentWrite(
+          repoRoot,
+          candidateJobs.selectLatestVisualVerified(request),
+          context,
         ),
     },
   );

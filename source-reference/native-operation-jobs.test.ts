@@ -32,10 +32,12 @@ const sha = (bytes: string | Buffer) =>
 function fixture(
   t: test.TestContext,
   prepare: NativeOperationJobsOptions["prepare"] = nativeFixturePrepare,
+  buildComponent?: NativeOperationJobsOptions["buildComponent"],
 ) {
   const repo = mkdtempSync(path.join(tmpdir(), "native-journal-"));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
-  const reopen = () => createNativeOperationJobs(repo, { prepare });
+  const reopen = () =>
+    createNativeOperationJobs(repo, { prepare, buildComponent });
   const jobs = reopen(),
     snapshot = jobs.prepare(request);
   const directory = path.join(
@@ -666,5 +668,278 @@ test("an allocation API that throws after a side effect is not a zero-write refu
   assert.throws(
     () => f.jobs.retryCreation(f.snapshot.id),
     /creation-retry-refused/,
+  );
+});
+
+/** Opaque component acknowledgement fixture for journal transitions only.
+ * Actual renderer/source comparisons are tested separately, never inferred
+ * from this deliberately synthetic allocation report. */
+const componentBuilder: NonNullable<
+  NativeOperationJobsOptions["buildComponent"]
+> = (_request, context) => ({
+  planRevision: context.planRevision,
+  script: `return ${JSON.stringify({
+    version: 1,
+    status: "created-candidate",
+    operationId: context.operation.id,
+    fileKey: context.operation.fileKey,
+    acceptedContract: null,
+    nativeQualification: "unqualified",
+    allocationAttempted: true,
+    pageId: "page",
+    target: { id: "main", key: "main-key", type: "COMPONENT" },
+    comparisonBoardId: "board",
+    nodes: [
+      { id: "page", type: "PAGE" },
+      { id: "main", type: "COMPONENT" },
+      { id: "board", type: "FRAME" },
+      { id: "instance", type: "INSTANCE" },
+    ],
+    variants: [{ id: "main", key: "main-key", name: "fixture" }],
+    propertyDefinitions: {},
+    problems: [],
+    comparisons: [
+      {
+        id: "observed",
+        status: "created-comparison",
+        instanceId: "instance",
+        mainId: "main",
+        sourceParts: [{ partPath: ["root"], nodeId: "instance" }],
+        slots: [],
+      },
+      { id: "refused", status: "refused", problems: ["fixture-refusal"] },
+    ],
+  })};`,
+});
+async function componentReady(
+  t: test.TestContext,
+  build = componentBuilder,
+  prepare: NativeOperationJobsOptions["prepare"] = nativeFixturePrepare,
+) {
+  const f = fixture(t, prepare, build),
+    host = nativeFixtureHost();
+  for (const phase of ["token-create", "token-readback"] as const) {
+    const command = f.jobs.dispatch(f.snapshot.id, phase);
+    f.jobs.accept(f.snapshot.id, await host.run(command));
+  }
+  return { ...f, host };
+}
+
+test("component command is durable before delivery, uses observed identities, and cannot be repeated", async (t) => {
+  let seen: any;
+  const f = await componentReady(t, (request, context) => {
+    seen = context;
+    return componentBuilder(request, context);
+  });
+  const command = f.jobs.dispatch(f.snapshot.id, "component-create");
+  assert.equal(command.readOnly, false);
+  assert.equal(seen.tokens.identity.origin, "created");
+  assert(seen.tokens.receipt.collection.id);
+  assert.deepEqual(
+    JSON.parse(
+      readFileSync(path.join(f.directory, "component-creation.json"), "utf8"),
+    ),
+    command,
+  );
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(4), "utf8")).command,
+    command,
+  );
+  assert.equal(f.reopen().get(f.snapshot.id).pendingPhase, "component-create");
+  assert.throws(
+    () => f.reopen().dispatch(f.snapshot.id, "component-create"),
+    /native-outcome-unknown/,
+  );
+  const result = await f.host.run(command);
+  const snapshot = f.jobs.accept(f.snapshot.id, result);
+  assert.equal(snapshot.phase, "components-created");
+  assert.equal(snapshot.acceptedContract, null);
+  assert.equal(snapshot.nativeQualification, "unqualified");
+  assert.throws(
+    () => f.reopen().dispatch(f.snapshot.id, "component-create"),
+    /component-creation-already-dispatched/,
+  );
+  assert.throws(
+    () => f.reopen().dispatch(f.snapshot.id, "token-readback"),
+    /component-phase-already-started/,
+  );
+  assert.deepEqual(f.reopen().accept(f.snapshot.id, result), snapshot);
+  assert(!JSON.stringify(snapshot).includes("main-key"));
+});
+
+test("component creation requires independent token observation, not a creation acknowledgement", async (t) => {
+  const f = fixture(t, nativeFixturePrepare, componentBuilder),
+    host = nativeFixtureHost();
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-create"),
+    /verified-token-observation-required/,
+  );
+  const command = f.jobs.dispatch(f.snapshot.id, "token-create");
+  f.jobs.accept(f.snapshot.id, await host.run(command));
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-create"),
+    /verified-token-observation-required/,
+  );
+  assert.equal(readdirSync(path.join(f.directory, "events")).length, 2);
+});
+
+test("removing later component events cannot rewind to a successful token observation", async (t) => {
+  const f = await componentReady(t);
+  f.jobs.dispatch(f.snapshot.id, "component-create");
+  unlinkSync(f.event(4));
+  assert.throws(
+    () => f.reopen().dispatch(f.snapshot.id, "component-create"),
+    /component-creation-journal-incomplete/,
+  );
+});
+
+test("removing component claim with its dispatch retained refuses the journal", async (t) => {
+  const f = await componentReady(t);
+  f.jobs.dispatch(f.snapshot.id, "component-create");
+  unlinkSync(path.join(f.directory, "component-creation.json"));
+  assert.throws(
+    () => f.reopen().get(f.snapshot.id),
+    /component-creation-precondition-invalid/,
+  );
+});
+
+test("late component acknowledgement is preserved after source changes", async (t) => {
+  let changed = false;
+  const f = await componentReady(t, componentBuilder, (...args) => {
+    if (changed) throw Error("source changed");
+    return nativeFixturePrepare(...args);
+  });
+  const command = f.jobs.dispatch(f.snapshot.id, "component-create");
+  const result = await f.host.run(command);
+  changed = true;
+  const snapshot = f.reopen().accept(f.snapshot.id, result);
+  assert.equal(snapshot.phase, "components-created");
+  assert.equal(snapshot.sourceCurrent, false);
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(5), "utf8")).envelope,
+    result,
+  );
+  assert.throws(
+    () => f.reopen().dispatch(f.snapshot.id, "component-create"),
+    /component-creation-already-dispatched/,
+  );
+});
+
+test("historical component commands are not recompiled while accepting their results", async (t) => {
+  let changed = false;
+  const f = await componentReady(t, (request, context) => {
+    if (changed) throw Error("new compiler refuses");
+    return componentBuilder(request, context);
+  });
+  const command = f.jobs.dispatch(f.snapshot.id, "component-create"),
+    result = await f.host.run(command);
+  changed = true;
+  assert.equal(
+    f.reopen().accept(f.snapshot.id, result).phase,
+    "components-created",
+  );
+});
+
+test("a source change during component compilation prevents dispatch", async (t) => {
+  let changed = false;
+  const f = await componentReady(
+    t,
+    (request, context) => {
+      changed = true;
+      return componentBuilder(request, context);
+    },
+    (...args) => {
+      if (changed) throw Error("source changed");
+      return nativeFixturePrepare(...args);
+    },
+  );
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-create"),
+    /source changed/,
+  );
+  assert.equal(readdirSync(path.join(f.directory, "events")).length, 4);
+  assert(!readdirSync(f.directory).includes("component-creation.json"));
+});
+
+for (const [name, mutate] of Object.entries({
+  "duplicate allocation IDs": (r: any) => {
+    r.nodes.push(r.nodes[0]);
+  },
+  "missing page identity": (r: any) => {
+    r.pageId = "unknown";
+  },
+  "missing comparison case": (r: any) => {
+    r.comparisons.pop();
+  },
+  "promoted refused case": (r: any) => {
+    r.comparisons[1].status = "created-comparison";
+  },
+  "unknown comparison main": (r: any) => {
+    r.comparisons[0].mainId = "unknown";
+  },
+  "accepted Contract claim": (r: any) => {
+    r.acceptedContract = true;
+  },
+}))
+  test(`component acknowledgement with ${name} stays invalid and unretryable`, async (t) => {
+    const f = await componentReady(t),
+      command = f.jobs.dispatch(f.snapshot.id, "component-create");
+    const result = await f.host.run(command);
+    mutate(result.result);
+    const snapshot = f.jobs.accept(f.snapshot.id, result);
+    assert.equal(snapshot.phase, "component-creation-invalid");
+    assert.equal(snapshot.nativeOutcome, "unknown");
+    assert.deepEqual(
+      JSON.parse(readFileSync(f.event(5), "utf8")).envelope,
+      result,
+    );
+    assert.throws(
+      () => f.reopen().dispatch(f.snapshot.id, "component-create"),
+      /component-creation-already-dispatched/,
+    );
+  });
+
+test("partial component allocation is retained without granting creation retry", async (t) => {
+  const f = await componentReady(t),
+    command = f.jobs.dispatch(f.snapshot.id, "component-create");
+  const result = await f.host.run(command);
+  Object.assign(result.result, {
+    status: "partial-or-unknown-allocation",
+    problems: ["API failed"],
+  });
+  const snapshot = f.jobs.accept(f.snapshot.id, result);
+  assert.equal(snapshot.phase, "component-partial-allocation");
+  assert.equal(snapshot.nativeOutcome, "unknown");
+  assert.throws(
+    () => f.jobs.retryCreation(f.snapshot.id),
+    /creation-retry-refused/,
+  );
+  assert.throws(
+    () => f.reopen().dispatch(f.snapshot.id, "component-create"),
+    /component-creation-already-dispatched/,
+  );
+});
+
+test("a competing component dispatch during compilation delivers at most one command", async (t) => {
+  let nested = false,
+    other: ReturnType<typeof createNativeOperationJobs>,
+    delivered: any;
+  const f = await componentReady(t, (request, context) => {
+    if (!nested) {
+      nested = true;
+      delivered = other.dispatch(context.operation.id, "component-create");
+    }
+    return componentBuilder(request, context);
+  });
+  other = f.reopen();
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-create"),
+    /evidence-changed-during-validation/,
+  );
+  assert.equal(delivered.phase, "component-create");
+  assert.equal(readdirSync(path.join(f.directory, "events")).length, 5);
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(4), "utf8")).command,
+    delivered,
   );
 });

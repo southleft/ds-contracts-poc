@@ -19,6 +19,96 @@ const operation = {
   fileKey: "byMp6lt0Ij9b2QbkDGFwBh",
 };
 const clone = <T>(x: T): T => JSON.parse(JSON.stringify(x));
+async function comparisonFixture() {
+  const f = await fixture();
+  const p = f.source.projection;
+  const slot = p.parts.find((part) => part.contractSlotName === "children")!;
+  const before = p.parts.find((part) => part.contractSlotName === "before")!;
+  const slotRecord = (part: typeof slot, specs: any[]) => ({
+    identity: {
+      templateId: part.templateId,
+      sourceNodeId: part.sourceNodeId,
+      sourceSpan: part.sourceSpan,
+    },
+    sourceName: part.sourceSlotName!,
+    status: "lowered" as const,
+    sampleIds: ["sample-1"],
+    sampleRevision: revisionOf({ source: "synthetic content" }),
+    specRevision: revisionOf(specs),
+    specs,
+    problems: [],
+  });
+  const text = {
+    type: "frame",
+    name: "sample",
+    layout: { mode: "HORIZONTAL", primary: "CENTER", counter: "MIN" },
+    lits: { width: 40.5625, height: 24 },
+    children: [
+      {
+        type: "text",
+        name: "text",
+        characters: "Label",
+        fontFamily: "IBM Plex Sans",
+        fontStyle: "Semi Bold",
+        fontSize: 16,
+        lineHeight: { unit: "PIXELS", value: 24 },
+        textFillLit: { r: 0.1, g: 0.2, b: 0.3 },
+        textAlignH: "CENTER",
+      },
+    ],
+  };
+  const samples = {
+    version: 1 as const,
+    status: "comparison-samples-lowered" as const,
+    acceptedContract: null,
+    qualification: "comparison-instance-samples-only" as const,
+    nativeQualification: "unqualified" as const,
+    visualRevision: p.evidence.visualRevision,
+    source: {
+      revision: p.source.revision,
+      sourceSha256: p.source.sourceSha256,
+      sourceProgramSha256: p.source.programSha256,
+      semanticsRevision: p.evidence.semanticsRevision,
+    },
+    problems: [],
+    cases: p.cases.map((c, i) =>
+      c.status === "refused"
+        ? {
+            id: c.id,
+            status: "refused" as const,
+            problems: [...c.problems],
+            slots: [],
+          }
+        : {
+            id: c.id,
+            status: "lowered" as const,
+            problems: [],
+            sourceTreeSha256: c.sourceTreeSha256,
+            topologyObservationSha256: c.topologyObservationSha256,
+            slots: [
+              slotRecord(slot, [clone(text)]),
+              ...(i === 1
+                ? [
+                    slotRecord(before, [
+                      {
+                        type: "svg",
+                        name: "source icon",
+                        iconSize: 24,
+                        svg: '<svg viewBox="0 0 20 20"><path d="M0 0H20V20H0Z" fill="#123456"/></svg>',
+                      },
+                    ]),
+                  ]
+                : []),
+            ],
+          },
+    ),
+  };
+  f.context.comparisons = { samples, revision: revisionOf(samples) };
+  const repin = () => {
+    f.context.comparisons!.revision = revisionOf(samples);
+  };
+  return { ...f, samples, repin };
+}
 async function fixture(paths = ["surface", "space"]) {
   const source = nativeSourceCompilerFixture();
   const host = nativeFixtureHost(),
@@ -443,4 +533,198 @@ test("token drift during allocation cannot return a successful creation candidat
   assert.equal(result.status, "partial-or-unknown-allocation");
   assert(result.target.id);
   assert.deepEqual(result.problems, ["native-source-write-tokens-changed"]);
+});
+
+test("comparison instances use observed variants, full SLOT IDs, source topology, measured text frames and font spelling", async () => {
+  const f = await comparisonFixture();
+  const fonts: Array<{
+    family: string;
+    style: string;
+    beforeAllocation: boolean;
+  }> = [];
+  f.figma.loadFontAsync = async (font: { family: string; style: string }) => {
+    fonts.push({
+      ...font,
+      beforeAllocation: f.figma.root.children.length === 1,
+    });
+    if (font.family === "IBM Plex Sans" && font.style === "Semi Bold")
+      throw Error("use SemiBold");
+  };
+  const sourceBefore = JSON.stringify(f.context);
+  const result = await f.run(f.emit());
+  assert.equal(
+    result.status,
+    "created-candidate",
+    JSON.stringify(result.problems),
+  );
+  assert.equal(JSON.stringify(f.context), sourceBefore);
+  assert.equal(result.comparisons.length, 3);
+  assert.equal(
+    result.comparisons.filter((c: any) => c.status === "created-comparison")
+      .length,
+    2,
+  );
+  assert.equal(result.comparisons[2].status, "refused");
+  const page = f.figma.root.children.find((p: any) => p.id === result.pageId);
+  const set = page.children.find((n: any) => n.id === result.target.id);
+  const board = page.children.find(
+    (n: any) => n.id === result.comparisonBoardId,
+  );
+  assert.equal(board.children.length, 2);
+  assert.equal(set.findAll((n: any) => n.type === "SLOT").length, 6);
+  assert(
+    set
+      .findAll((n: any) => n.type === "SLOT")
+      .every((n: any) => n.children.length === 0),
+  );
+  for (const [i, inst] of board.children.entries()) {
+    assert.equal(
+      (await inst.getMainComponentAsync()).name,
+      i === 0 ? "Variant=(unset)" : "Variant=secondary",
+    );
+    assert.equal(result.comparisons[i].sourceParts.length, 7);
+    for (const recorded of result.comparisons[i].slots) {
+      const slot = inst.findOne((n: any) => n.id === recorded.nodeId);
+      assert.equal(
+        slot.componentPropertyReferences.slotContentId,
+        recorded.propertyKey,
+      );
+      assert(recorded.propertyKey.includes("#"));
+      assert.deepEqual(
+        slot.children.map((n: any) => n.id),
+        recorded.contentNodeIds,
+      );
+    }
+    const text = inst.findOne((n: any) => n.type === "TEXT");
+    assert.equal(text.characters, "Label");
+    assert.deepEqual(clone(text.fontName), {
+      family: "IBM Plex Sans",
+      style: "SemiBold",
+    });
+    assert.equal(text.parent.width, 40.5625);
+    assert.equal(text.parent.height, 24);
+    assert.equal(text.parent.primaryAxisAlignItems, "CENTER");
+    assert.equal(text.textAlignHorizontal, "CENTER");
+    assert.equal(text.lineHeight.value, 24);
+    assert.equal(
+      JSON.parse(text.getSharedPluginData("ds_contracts", "nativeSourceSample"))
+        .caseId,
+      f.samples.cases[i].id,
+    );
+    const wrappers = inst.findAll((n: any) => {
+      const raw = n.getSharedPluginData("ds_contracts", "nativeSourcePart");
+      return raw && JSON.parse(raw).emptyMainVisible === false;
+    });
+    assert(wrappers.every((n: any) => n.visible === (i === 1)));
+  }
+  assert(
+    fonts.some(
+      (font) =>
+        font.family === "Inter" &&
+        font.style === "Semi Bold" &&
+        font.beforeAllocation,
+    ),
+  );
+  assert(
+    fonts.some(
+      (font) =>
+        font.family === "IBM Plex Sans" &&
+        font.style === "SemiBold" &&
+        font.beforeAllocation,
+    ),
+  );
+  assert.deepEqual(
+    result.applied.results.flatMap((r: any) => r.degradations ?? []),
+    [],
+  );
+});
+
+for (const [name, change] of Object.entries({
+  "missing source font": (f: any) => {
+    f.figma.loadFontAsync = async (font: any) => {
+      if (font.family === "IBM Plex Sans") throw Error("missing");
+    };
+  },
+  "missing initial Inter face": (f: any) => {
+    f.figma.loadFontAsync = async (font: any) => {
+      if (font.family === "Inter" && font.style === "Semi Bold")
+        throw Error("missing");
+    };
+  },
+  "missing SVG API": (f: any) => {
+    delete f.figma.createNodeFromSvg;
+  },
+  "missing text API": (f: any) => {
+    delete f.figma.createText;
+  },
+}))
+  test(`comparison preflight refuses ${name} before allocation`, async () => {
+    const f = await comparisonFixture();
+    change(f);
+    const result = await f.run(f.emit());
+    assert.equal(result.status, "refused");
+    assert.equal(result.allocationAttempted, false);
+    assert.equal(f.figma.root.children.length, 1);
+  });
+
+for (const [name, change] of Object.entries({
+  "changed pinned content": (f: any) => {
+    f.samples.cases[0].slots[0].specs[0].children[0].characters = "Changed";
+  },
+  "dropped case": (f: any) => {
+    f.samples.cases.pop();
+    f.repin();
+  },
+  "changed source tree": (f: any) => {
+    f.samples.cases[0].sourceTreeSha256 = "f".repeat(64);
+    f.repin();
+  },
+  "wrong source slot": (f: any) => {
+    f.samples.cases[0].slots[0].sourceName = "missing";
+    f.repin();
+  },
+  "duplicate slot": (f: any) => {
+    f.samples.cases[0].slots.push(clone(f.samples.cases[0].slots[0]));
+    f.repin();
+  },
+  "refused case promoted": (f: any) => {
+    f.samples.cases[2].status = "lowered";
+    f.repin();
+  },
+  "new sample binding": (f: any) => {
+    const slot = f.samples.cases[0].slots[0];
+    slot.specs[0].fill = "surface";
+    slot.specRevision = revisionOf(slot.specs);
+    f.repin();
+  },
+  "nested component reference": (f: any) => {
+    const slot = f.samples.cases[0].slots[0];
+    slot.specs[0].type = "instance";
+    slot.specRevision = revisionOf(slot.specs);
+    f.repin();
+  },
+}))
+  test(`comparison context refuses ${name}`, async () => {
+    const f = await comparisonFixture();
+    change(f);
+    assert.throws(f.emit, /native-source-comparisons-/);
+    assert.equal(f.figma.root.children.length, 1);
+  });
+
+test("comparison failure retains instance/source identities and never alters main slots", async () => {
+  const f = await comparisonFixture();
+  f.figma.createText = () => {
+    throw Error("text allocation failed");
+  };
+  const result = await f.run(f.emit());
+  assert.equal(result.status, "partial-or-unknown-allocation");
+  assert(result.comparisons[0].instanceId);
+  assert.equal(result.comparisons[0].sourceParts.length, 7);
+  const page = f.figma.root.children.find((p: any) => p.id === result.pageId);
+  const set = page.children.find((n: any) => n.id === result.target.id);
+  assert(
+    set
+      .findAll((n: any) => n.type === "SLOT")
+      .every((n: any) => n.children.length === 0),
+  );
 });

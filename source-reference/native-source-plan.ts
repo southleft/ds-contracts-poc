@@ -167,9 +167,10 @@ export function prepareNativeSourceInspectionPlan(
 }
 
 /** Reopen the authenticated source inputs and reproduce the saved full plan
- * before emitting empty native mains through the existing engine. The caller
+ * before emitting empty native mains and observed comparison instances through
+ * the existing engine. The caller
  * must journal the command before delivering it. This function does no I/O and
- * grants no dispatch/retry permission; samples are not applied by this phase. */
+ * grants no dispatch/retry permission or native fidelity qualification. */
 export function buildNativeSourceComponentWrite(
   input: NativeSourcePlanInput & {
     expectedPlanRevision: string;
@@ -190,7 +191,14 @@ export function buildNativeSourceComponentWrite(
   const script = engine.buildNativeSourceComponentScript(
     prepared.contract,
     new Map([[prepared.contract.id, prepared.contract]]),
-    { operation: input.operation, tokens: input.tokens },
+    {
+      operation: input.operation,
+      tokens: input.tokens,
+      comparisons: {
+        samples: current.plan.samples,
+        revision: current.plan.samplesRevision,
+      },
+    },
   );
   return { planRevision: current.revision, script };
 }

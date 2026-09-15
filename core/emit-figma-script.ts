@@ -72,6 +72,7 @@ import {
   type NativeSourceProjectionContext,
 } from './native-source-projection.js';
 import { prepareNativeSourceWrite, wrapNativeSourceWrite, type NativeSourceWriteContext } from './native-source-write.js';
+import { prepareNativeSourceComparisons, NATIVE_COMPARISONS_RUNTIME, type NativeSourceSampleIdentity } from './native-source-comparisons.js';
 
 
 /** A2 grid: a compiled track — the Plugin API's own structured spelling
@@ -123,6 +124,7 @@ export interface NodeSpec {
   name: string;
   /** Private compile-only source identity; never inferred from a layer name. */
   nativeSourcePart?: NativeSourcePartIdentity;
+  nativeSourceSample?: NativeSourceSampleIdentity;
   /** Qualified empty-main whole-wrapper state, never a public component prop. */
   nativeSourceVisible?: false;
   layout?: LayoutSpec;
@@ -7248,7 +7250,7 @@ function buildComponentScript(
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
   for (const data of datas) {
     if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') ||
-        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible'))) {
+        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
       throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
     }
     // Raw or mutated ComponentData cannot provide a route around guarded
@@ -7265,8 +7267,8 @@ function buildBatchScript(datas: ComponentData[], fileKey: string | null): strin
 
 /** Host-only create door. Recompiles the Contract through the authenticated
  * source registry; never accepts serialized ComponentData as write authority.
- * This emits EMPTY mains only. Comparison instances and independent native
- * readback remain separate phases, and no Contract is accepted here. */
+ * Mains stay empty; supplied source samples fill separate comparison instances.
+ * Independent native readback remains a separate phase. No Contract is accepted. */
 function buildNativeSourceComponentScript(
   contract: Contract,
   byId: Map<string, Contract>,
@@ -7292,14 +7294,15 @@ function buildNativeSourceComponentScript(
     }
     return false;
   });
-  const prepared = prepareNativeSourceWrite(source.projection, context, [...boundNames]);
+  const comparisons = context.comparisons ? prepareNativeSourceComparisons(contract, data, source.projection, context.comparisons) : undefined;
+  const prepared = prepareNativeSourceWrite(source.projection, context, [...boundNames], comparisons);
   // Distinct operation machine identity prevents this unaccepted projection
   // becoming an ordinary Contract sync target later. Source identity lives in
   // separate provenance metadata, never in an adopted canonical anchor.
   const scoped = { ...data, contractId: prepared.descriptor.machineId, anchorKey: null };
   return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped empty native source mains.',
-    preamble: '', nativeSource: true,
+    preamble: '', nativeSource: true, nativeComparisons: !!comparisons, nativeSampleSpecs: prepared.sampleSpecs,
   }));
 }
 
@@ -7309,36 +7312,42 @@ function buildNativeSourceComponentScript(
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
-  const hasOpacity = datas.some(dataHasOpacity);
-  const hasShape = datas.some((d) => dataSome(d, (x) => x.shape !== undefined));
+  // Comparison content is not a main default or another component, but its
+  // text/SVG/literal features must participate in the shared runtime scan.
+  const featureDatas = opts.nativeSampleSpecs?.length ? [...datas, {
+    ...datas[0], stateVariants: undefined,
+    variants: opts.nativeSampleSpecs.map((spec, index) => ({ name: '', row: index, col: 0, spec })),
+  }] : datas;
+  const hasOpacity = featureDatas.some(dataHasOpacity);
+  const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
   // seven committed libraries) emit byte-identical scripts.
-  const hasArc = datas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { arc?: unknown }).arc !== undefined));
-  const hasShadow = datas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
-  const hasLineHeight = datas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
-  const hasAbsolute = datas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
-  const hasLits = datas.some((d) => dataSome(d, (x) => x.lits !== undefined));
+  const hasArc = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { arc?: unknown }).arc !== undefined));
+  const hasShadow = featureDatas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
+  const hasLineHeight = featureDatas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
+  const hasAbsolute = featureDatas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
+  const hasLits = featureDatas.some((d) => dataSome(d, (x) => x.lits !== undefined));
   // D2: literal stroke COLOUR — feature-gated like every other lits field so
   // a contract that never carries one emits a byte-identical script.
-  const hasLitStrokeColor = datas.some((d) => dataSome(d, (x) => x.lits?.strokeColor !== undefined));
+  const hasLitStrokeColor = featureDatas.some((d) => dataSome(d, (x) => x.lits?.strokeColor !== undefined));
   // R7 LITERAL INK: the runtime line is emitted only when a spec carries it,
   // so every existing emission stays byte-identical.
-  const hasTextFillLit = datas.some((d) => dataSome(d, (x) => x.textFillLit !== undefined));
+  const hasTextFillLit = featureDatas.some((d) => dataSome(d, (x) => x.textFillLit !== undefined));
   // …and the SHAPE branch's literal ring/weight/radius application.
-  const hasShapeLits = datas.some((d) =>
+  const hasShapeLits = featureDatas.some((d) =>
     dataSome(d, (x) => x.shape !== undefined && (x.lits?.strokeColor !== undefined || x.lits?.strokeWeight !== undefined || x.lits?.strokeSides !== undefined || x.lits?.radius !== undefined)),
   );
   // A2 grid: the whole GRID runtime (declaration + placement passes) is
   // feature-gated — grid-less corpora emit byte-identical scripts.
-  const hasGrid = datas.some((d) => dataSome(d, (x) => x.layout?.mode === 'GRID'));
+  const hasGrid = featureDatas.some((d) => dataSome(d, (x) => x.layout?.mode === 'GRID'));
   // NATIVE SLOTS: the slot runtime (createSlot + unification + the amend
   // rebind + the legacy-INSTANCE_SWAP migration) is feature-gated like the
   // grid runtime — a slot-less contract emits a byte-identical script and
   // never carries a line about slots.
-  const hasSlot = datas.some((d) => dataSome(d, (x) => x.type === 'slot'));
+  const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   // FC-SLOT-BIRTH-BOX generalized: the 100x100 birth box is NOT a slot fact.
   // It survives on ANY childless auto-layout node that reports HUG, because a
   // node with no children never triggers the relayout that would dissolve it.
@@ -7347,7 +7356,7 @@ function buildSyncScript(
   // library divider is 288x1. GRID is excluded: a resize on a GRID frame
   // silently reverts HUG tracks to FLEX (G8/GP4b), so the repair would cost
   // more than the defect.
-  const hasChildlessBox = datas.some((d) =>
+  const hasChildlessBox = featureDatas.some((d) =>
     dataSome(
       d,
       (x) =>
@@ -7356,22 +7365,22 @@ function buildSyncScript(
         x.layout?.mode !== 'GRID',
     ),
   );
-  const hasWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
+  const hasWrap = featureDatas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
   // A COLUMN stack carrying `wrap` is schema-valid and legal CSS, and Figma
   // THROWS on it (layoutWrap is HORIZONTAL-only). Detected statically so the
   // dropped fact is a `†` receipt in the emitted script — the channel the
   // dagger census already counts — rather than a silent skip at runtime.
-  const hasColumnWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true && x.layout?.mode !== 'HORIZONTAL'));
-  const hasEffectStack = datas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
-  const hasGradient = datas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
-  const hasInsetOverlay = datas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
+  const hasColumnWrap = featureDatas.some((d) => dataSome(d, (x) => x.layout?.wrap === true && x.layout?.mode !== 'HORIZONTAL'));
+  const hasEffectStack = featureDatas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
+  const hasGradient = featureDatas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
+  const hasInsetOverlay = featureDatas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
   // Round 5d: margin-box wrapper / outline-lowered OUTSIDE strokes /
   // single-paint glyph variable re-binding — all feature-gated so contracts
   // without these facts emit byte-identical scripts (the golden discipline).
-  const hasMargins = datas.some((d) => dataSome(d, (x) => x.margins !== undefined));
-  const hasStrokeOutside = datas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
-  const hasSvgPaint = datas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
-  const hasTextExtras = datas.some((d) =>
+  const hasMargins = featureDatas.some((d) => dataSome(d, (x) => x.margins !== undefined));
+  const hasStrokeOutside = featureDatas.some((d) => dataSome(d, (x) => x.strokeOutside === true));
+  const hasSvgPaint = featureDatas.some((d) => dataSome(d, (x) => x.svgPaintVar !== undefined));
+  const hasTextExtras = featureDatas.some((d) =>
     dataSome(
       d,
       (x) =>
@@ -7927,14 +7936,14 @@ ${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlo
 async function buildNode(spec, registry) {
   let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}
   if (spec.type === 'svg') {
-    node = figma.createNodeFromSvg(spec.svg);
+    node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);${svgPaintRuntime(hasSvgPaint)}
     // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
     if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
-    node = figma.createText();
+    node = figma.createText();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';${lineHeightRuntime(hasLineHeight)}${textExtrasRuntime(hasTextExtras)}
@@ -8604,7 +8613,7 @@ async function amendComponent(comp, C) {
   return report;
 }
 
-async function syncOne(C) {
+${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOne(C) {
   // Semantic marker → stable anchor → unique explicit legacy-generated name.
   // A same-name foreign node has neither marker and is never adopted.
   let existing = ${opts.nativeSource ? 'null' : `resolveComponentIdentity(
@@ -8799,7 +8808,7 @@ async function syncOne(C) {
   dsStampFingerprints(target);
   ${opts.nativeSource ? `NATIVE_RESULT.propertyDefinitions = JSON.parse(JSON.stringify(target.componentPropertyDefinitions));
   NATIVE_RESULT.variants = built.map(b => ({ id: b.comp.id, key: b.comp.key, name: b.v.name }));` : 'ensureHostSection(compPage, target, displayName);'}
-
+${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : ''}
   return {
     name: C.setName,
     contractId: C.contractId,
