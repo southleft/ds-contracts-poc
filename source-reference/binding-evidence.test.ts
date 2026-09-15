@@ -21,6 +21,7 @@ import {
 import { altitudeCohort, altitudeRevision } from "./altitude-cohort.js";
 import { createBindingJobs, type BindingTraceReport } from "./binding-jobs.js";
 import { planBindingInterventions } from "./binding-plan.js";
+import { matchLitRender } from "./lit-render-match.js";
 import { createReferenceService } from "./service.js";
 import { createServer } from "node:http";
 const sha = (bytes: string | Uint8Array) =>
@@ -156,6 +157,411 @@ function refusedReport(f: ReturnType<typeof fixture>): BindingTraceReport {
     })),
   };
 }
+
+/** Stored original topology, with no fabricated successful dependency probes.
+ * The archive remains synthetic: this is a selector/reader consistency fixture. */
+function structuralReport(f: ReturnType<typeof fixture>): BindingTraceReport {
+  const evidence = loadBindingEvidence(f.repo, f.request);
+  const recorded = JSON.parse(
+    readFileSync(
+      new URL(
+        "./fixtures/lit-render-match/altitude-button.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+  const original = recorded.records.find(
+    (row: { story: string }) => row.story === "atoms-button--default",
+  );
+  assert.equal(sha(original.measurement.json), original.measurement.sha256);
+  const bound = JSON.parse(original.measurement.json).bound;
+  const correspondence = matchLitRender({
+    source: evidence.source,
+    semantics: evidence.rows[0].semantics!,
+    boundTopology: bound,
+  });
+  assert.equal(correspondence.status, "structure-matched");
+  const report = refusedReport(f);
+  report.rows[0] = {
+    ...report.rows[0],
+    status: "structure-matched",
+    matchedElements: correspondence.nodes.length,
+    mappedSlots: correspondence.slots.length,
+    boundTopology: bound,
+    correspondence,
+    differentials: planBindingInterventions(
+      "atoms-button--default",
+      correspondence,
+      bound,
+    ).map((plan) => ({ key: plan.key, problems: ["fixture-not-run"] })),
+  };
+  return report;
+}
+
+test("server-only binding selection verifies sealed evidence and reopens without executing or exposing source in snapshots", () => {
+  const f = fixture();
+  let calls = 0,
+    output = "";
+  const jobs = createBindingJobs(f.repo, (args, done) => {
+    calls++;
+    output = args.at(-1)!;
+    mkdirSync(path.join(output, "atoms-button--default"));
+    writeFileSync(
+      path.join(output, "atoms-button--default/replay.png"),
+      readFileSync(path.join(f.output, "atoms-button--default/source.png")),
+    );
+    writeFileSync(
+      path.join(output, "report.json"),
+      JSON.stringify(structuralReport(f)),
+    );
+    done(null);
+    return { kill: () => true };
+  });
+  try {
+    const job = jobs.start(f.request);
+    assert.equal(job.state, "complete");
+    const before = readFileSync(path.join(output, "job.json"));
+    const selected = jobs.selectLatestVerified(f.request);
+    assert.equal(selected.id, job.id);
+    assert.deepEqual(selected.request, f.request);
+    assert.equal(
+      selected.reportSha256,
+      sha(readFileSync(path.join(output, "report.json"))),
+    );
+    assert.deepEqual(selected.report, structuralReport(f));
+    assert.deepEqual(selected.evidence, loadBindingEvidence(f.repo, f.request));
+    assert.equal(
+      selected.report.rows.filter((row) => row.status === "structure-matched")
+        .length,
+      1,
+    );
+    assert.equal(
+      selected.evidence.rows.length,
+      4,
+      "refused source states remain in the denominator",
+    );
+    assert.equal(selected.report.rows[0].observedDependencies, 0);
+    const recovered = createBindingJobs(f.repo, () => {
+      throw Error("must not launch");
+    });
+    assert.deepEqual(recovered.selectLatestVerified(f.request), selected);
+    assert.deepEqual(jobs.selectLatestVerified(f.request), selected);
+    selected.request.baseline.sha256 = "a".repeat(64);
+    selected.evidence.request.baseline.sha256 = "b".repeat(64);
+    assert.deepEqual(
+      jobs.selectLatestVerified(f.request).request,
+      f.request,
+      "callers cannot mutate the manager's request through the returned handle",
+    );
+    assert.equal(calls, 1);
+    assert.deepEqual(readFileSync(path.join(output, "job.json")), before);
+    for (const snapshot of jobs.list(f.request.baseline.id)) {
+      assert.equal("evidence" in snapshot, false);
+      assert.equal("request" in snapshot, false);
+      assert.equal("reportSha256" in snapshot, false);
+      assert.equal(JSON.stringify(snapshot).includes("harPath"), false);
+      assert.equal(
+        JSON.stringify(snapshot).includes("export class ALButton"),
+        false,
+      );
+    }
+  } finally {
+    jobs.close();
+    f.close();
+  }
+});
+
+test("verified selection refuses wrong parents and a newer running, failed or interrupted attempt instead of older evidence", () => {
+  const f = fixture();
+  let done: (error: unknown) => void = () => {},
+    output = "";
+  const jobs = createBindingJobs(f.repo, (args, cb) => {
+    output = args.at(-1)!;
+    done = cb;
+    return { kill: () => true };
+  });
+  try {
+    assert.throws(
+      () => jobs.selectLatestVerified(f.request),
+      /binding-selection-unavailable/,
+    );
+    jobs.start(f.request);
+    writeFileSync(
+      path.join(output, "report.json"),
+      JSON.stringify(refusedReport(f)),
+    );
+    done(null);
+    assert.doesNotThrow(() => jobs.selectLatestVerified(f.request));
+    assert.throws(
+      () =>
+        jobs.selectLatestVerified({
+          ...f.request,
+          baseline: {
+            ...f.request.baseline,
+            id: "ffffffff-ffff-4fff-8fff-ffffffffffff",
+          },
+        }),
+      /binding-selection-unavailable/,
+    );
+    assert.throws(
+      () =>
+        jobs.selectLatestVerified({
+          ...f.request,
+          baseline: { ...f.request.baseline, sha256: "a".repeat(64) },
+        }),
+      /binding-selection-request-mismatch/,
+    );
+    assert.throws(
+      () =>
+        jobs.selectLatestVerified({
+          ...f.request,
+          baseline: { ...f.request.baseline, id: "../outside" },
+        }),
+      /binding-request-invalid/,
+    );
+    jobs.start(f.request, true);
+    assert.throws(
+      () => jobs.selectLatestVerified(f.request),
+      /binding-selection-(?:not-complete|order-ambiguous)/,
+    );
+    done(Error("fixture stopped"));
+    assert.throws(
+      () => jobs.selectLatestVerified(f.request),
+      /binding-selection-(?:not-complete|order-ambiguous)/,
+    );
+    jobs.start(f.request, true);
+    jobs.close();
+    const recovered = createBindingJobs(f.repo, () => {
+      throw Error("must not launch");
+    });
+    assert.throws(
+      () => recovered.selectLatestVerified(f.request),
+      /binding-selection-(?:not-complete|order-ambiguous)/,
+    );
+    assert.ok(
+      recovered
+        .list(f.request.baseline.id)
+        .some((job) => job.state === "complete"),
+      "the old completed attempt remains visible but cannot win selection",
+    );
+  } finally {
+    jobs.close();
+    f.close();
+  }
+});
+
+test("verified selection rechecks report, source, original/replay image and sealed job bytes", async (t) => {
+  for (const changed of [
+    "report",
+    "source",
+    "original-image",
+    "replay-image",
+    "job",
+  ] as const)
+    await t.test(changed, () => {
+      const f = fixture();
+      let output = "";
+      const jobs = createBindingJobs(f.repo, (args, done) => {
+        output = args.at(-1)!;
+        mkdirSync(path.join(output, "atoms-button--default"));
+        writeFileSync(
+          path.join(output, "atoms-button--default/replay.png"),
+          readFileSync(path.join(f.output, "atoms-button--default/source.png")),
+        );
+        writeFileSync(
+          path.join(output, "report.json"),
+          JSON.stringify(structuralReport(f)),
+        );
+        done(null);
+        return { kill: () => true };
+      });
+      try {
+        jobs.start(f.request);
+        assert.doesNotThrow(() => jobs.selectLatestVerified(f.request));
+        const file =
+          changed === "report"
+            ? path.join(output, "report.json")
+            : changed === "source"
+              ? path.join(
+                  f.dir,
+                  "altitude/libs/al-web-components/components/button/button.ts",
+                )
+              : changed === "original-image"
+                ? path.join(f.output, "atoms-button--default/source.png")
+                : changed === "replay-image"
+                  ? path.join(output, "atoms-button--default/replay.png")
+                  : path.join(output, "job.json");
+        const bytes = readFileSync(file);
+        writeFileSync(
+          file,
+          changed === "report"
+            ? Buffer.concat([bytes, Buffer.from(" ")])
+            : "changed fixture bytes",
+        );
+        assert.throws(
+          () => jobs.selectLatestVerified(f.request),
+          /binding-|Unexpected token/,
+        );
+        writeFileSync(file, bytes);
+        assert.doesNotThrow(
+          () => jobs.selectLatestVerified(f.request),
+          "exact byte restoration restores selection",
+        );
+      } finally {
+        jobs.close();
+        f.close();
+      }
+    });
+});
+
+test("latest selection cannot fall back across supplemental requests or ambiguous recorded timestamps", () => {
+  const f = fixture();
+  let output = "";
+  const jobs = createBindingJobs(f.repo, (args, done) => {
+    output = args.at(-1)!;
+    writeFileSync(
+      path.join(output, "report.json"),
+      JSON.stringify(refusedReport(f)),
+    );
+    done(null);
+    return { kill: () => true };
+  });
+  try {
+    jobs.start(f.request);
+    const earlierFile = path.join(output, "job.json");
+    const earlier = JSON.parse(readFileSync(earlierFile, "utf8"));
+    jobs.start(f.request, true);
+    const latestFile = path.join(output, "job.json");
+    const latest = JSON.parse(readFileSync(latestFile, "utf8"));
+    earlier.startedAt = "2026-09-15T10:00:00.000Z";
+    latest.startedAt = "2026-09-15T10:00:01.000Z";
+    writeFileSync(earlierFile, JSON.stringify(earlier));
+    writeFileSync(latestFile, JSON.stringify(latest));
+    const recovered = createBindingJobs(f.repo);
+    assert.equal(recovered.selectLatestVerified(f.request).id, latest.id);
+    const reportFile = path.join(output, "report.json"),
+      reportBytes = readFileSync(reportFile);
+    writeFileSync(reportFile, Buffer.concat([reportBytes, Buffer.from(" ")]));
+    assert.throws(
+      () => recovered.selectLatestVerified(f.request),
+      /binding-report-changed/,
+    );
+    writeFileSync(reportFile, reportBytes);
+    latest.request.supplement = {
+      id: "ffffffff-ffff-4fff-8fff-ffffffffffff",
+      sha256: "a".repeat(64),
+    };
+    writeFileSync(latestFile, JSON.stringify(latest));
+    assert.throws(
+      () => createBindingJobs(f.repo).selectLatestVerified(f.request),
+      /binding-selection-request-mismatch/,
+    );
+    latest.request = f.request;
+    latest.startedAt = earlier.startedAt;
+    writeFileSync(latestFile, JSON.stringify(latest));
+    assert.throws(
+      () => createBindingJobs(f.repo).selectLatestVerified(f.request),
+      /binding-selection-order-ambiguous/,
+    );
+    writeFileSync(latestFile, "malformed latest attempt");
+    assert.throws(
+      () => createBindingJobs(f.repo).selectLatestVerified(f.request),
+      /binding-selection-history-invalid/,
+    );
+    for (const startedAt of [42, "September 15, 2026 10:00:01 UTC"]) {
+      writeFileSync(latestFile, JSON.stringify({ ...latest, startedAt }));
+      assert.throws(
+        () => createBindingJobs(f.repo).selectLatestVerified(f.request),
+        /binding-selection-history-invalid/,
+      );
+    }
+    latest.startedAt = "2026-09-15T10:00:01.000Z";
+    writeFileSync(latestFile, JSON.stringify(latest));
+    const unknown = path.join(
+      path.dirname(output),
+      "ffffffff-ffff-4fff-8fff-ffffffffffff",
+    );
+    mkdirSync(unknown);
+    assert.throws(
+      () => recovered.selectLatestVerified(f.request),
+      /binding-selection-history-changed/,
+    );
+    assert.throws(
+      () => createBindingJobs(f.repo).selectLatestVerified(f.request),
+      /binding-selection-history-invalid/,
+    );
+    rmSync(unknown, { recursive: true });
+    symlinkSync(output, unknown, "dir");
+    assert.throws(
+      () => recovered.selectLatestVerified(f.request),
+      /binding-selection-history-changed/,
+    );
+    assert.throws(
+      () => createBindingJobs(f.repo).selectLatestVerified(f.request),
+      /binding-selection-history-invalid/,
+    );
+  } finally {
+    jobs.close();
+    f.close();
+  }
+});
+
+test("selection scopes unrelated history but refuses an attempt retargeted into its parent after recovery", () => {
+  const f = fixture();
+  let output = "";
+  const jobs = createBindingJobs(f.repo, (args, done) => {
+    output = args.at(-1)!;
+    writeFileSync(
+      path.join(output, "report.json"),
+      JSON.stringify(refusedReport(f)),
+    );
+    done(null);
+    return { kill: () => true };
+  });
+  try {
+    const selected = jobs.start(f.request);
+    const otherId = "ffffffff-ffff-4fff-8fff-ffffffffffff";
+    const otherDir = path.join(path.dirname(output), otherId);
+    mkdirSync(otherDir);
+    const other = {
+      ...JSON.parse(readFileSync(path.join(output, "job.json"), "utf8")),
+      id: otherId,
+      startedAt: "2099-01-01T00:00:00.000Z",
+      state: "failed",
+      request: {
+        ...f.request,
+        baseline: {
+          ...f.request.baseline,
+          id: "eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee",
+        },
+      },
+    };
+    const otherFile = path.join(otherDir, "job.json");
+    writeFileSync(otherFile, JSON.stringify(other));
+    const recovered = createBindingJobs(f.repo);
+    assert.equal(recovered.selectLatestVerified(f.request).id, selected.id);
+    writeFileSync(otherFile, JSON.stringify({ ...other, request: f.request }));
+    assert.throws(
+      () => recovered.selectLatestVerified(f.request),
+      /binding-selection-(?:history-changed|job-changed)/,
+      "a cached unrelated identity must not hide a newer now-relevant failure",
+    );
+    writeFileSync(
+      otherFile,
+      JSON.stringify({ ...other, startedAt: "invalid unrelated timestamp" }),
+    );
+    assert.equal(
+      createBindingJobs(f.repo).selectLatestVerified(f.request).id,
+      selected.id,
+      "malformed ordering in explicitly unrelated parent history cannot block this baseline",
+    );
+    assert.equal(recovered.selectLatestVerified(f.request).id, selected.id);
+  } finally {
+    jobs.close();
+    f.close();
+  }
+});
 test("binding jobs retain denominator, deduplicate, recover, and reject altered counters/report bytes", () => {
   const f = fixture();
   let done: (error: unknown) => void = () => {};

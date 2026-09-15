@@ -12,6 +12,7 @@ import path from "node:path";
 import {
   loadBindingEvidence,
   isBindingEvidenceRequest,
+  type BindingEvidence,
   type BindingEvidenceRequest,
 } from "./binding-evidence.js";
 import type { BoundTopologyResult } from "./bound-topology.js";
@@ -61,6 +62,16 @@ export interface BindingJobSnapshot {
   rows: BindingTraceRow[];
   problems: string[];
 }
+/** Server-only input to deterministic candidate derivation. Evidence contains
+ * private source/archive paths; never spread this handle into HTTP snapshots.
+ * Verified record consistency is not contract or behavior acceptance. */
+export interface VerifiedBindingSelection {
+  id: string;
+  request: BindingEvidenceRequest;
+  reportSha256: string;
+  report: BindingTraceReport;
+  evidence: BindingEvidence;
+}
 type Launch = (
   args: string[],
   done: (error: unknown) => void,
@@ -76,6 +87,7 @@ const same = (a: unknown, b: unknown) =>
 export function createBindingJobs(repoRoot: string, launch?: Launch) {
   const root = path.join(repoRoot, "private/source-binding-app");
   const jobs = new Map<string, BindingJobRecord>();
+  const invalidHistory = new Set<string>();
   let active:
     { job: BindingJobRecord; child: Pick<ChildProcess, "kill"> } | undefined;
   const execute: Launch =
@@ -137,7 +149,10 @@ export function createBindingJobs(repoRoot: string, launch?: Launch) {
     jobDirectory(job.id);
     renameSync(temporary, target);
   };
-  const report = (job: BindingJobRecord): BindingTraceReport => {
+  const report = (
+    job: BindingJobRecord,
+    evidence = loadBindingEvidence(repoRoot, job.request),
+  ): BindingTraceReport => {
     const bytes = readFileSync(safeFile(job.id, "report.json"));
     if (job.reportSha256 && sha(bytes) !== job.reportSha256)
       throw Error("binding-report-changed");
@@ -168,29 +183,25 @@ export function createBindingJobs(repoRoot: string, launch?: Launch) {
       )
     )
       throw Error("binding-report-incomplete-or-invalid");
-    validateBindingReport(
-      parsed,
-      loadBindingEvidence(repoRoot, job.request),
-      (story, name) => {
-        if (
-          !job.stories.includes(story) ||
-          !/^(?:replay|probe-[0-2]-case-[0-2]-(?:before|after))\.png$/.test(
-            name,
-          )
-        )
-          throw Error("binding-image-path-refused");
-        const dir = path.join(jobDirectory(job.id), story);
-        if (!lstatSync(dir).isDirectory())
-          throw Error("binding-image-directory-refused");
-        return readFileSync(safeFile(job.id, `${story}/${name}`));
-      },
-    );
+    validateBindingReport(parsed, evidence, (story, name) => {
+      if (
+        !job.stories.includes(story) ||
+        !/^(?:replay|probe-[0-2]-case-[0-2]-(?:before|after))\.png$/.test(name)
+      )
+        throw Error("binding-image-path-refused");
+      const dir = path.join(jobDirectory(job.id), story);
+      if (!lstatSync(dir).isDirectory())
+        throw Error("binding-image-directory-refused");
+      return readFileSync(safeFile(job.id, `${story}/${name}`));
+    });
     return parsed;
   };
   try {
     directories();
     for (const dir of readdirSync(root, { withFileTypes: true })) {
-      if (!dir.isDirectory() || !UUID.test(dir.name)) continue;
+      if (!UUID.test(dir.name)) continue;
+      invalidHistory.add(dir.name);
+      if (!dir.isDirectory()) continue;
       try {
         const job = JSON.parse(
           readFileSync(safeFile(dir.name, "job.json"), "utf8"),
@@ -211,12 +222,15 @@ export function createBindingJobs(repoRoot: string, launch?: Launch) {
           (job.reportSha256 !== undefined &&
             !/^[a-f0-9]{64}$/.test(job.reportSha256)) ||
           (job.state === "complete" && !job.reportSha256) ||
+          typeof job.startedAt !== "string" ||
           !Number.isFinite(Date.parse(job.startedAt)) ||
+          new Date(job.startedAt).toISOString() !== job.startedAt ||
           !["running", "complete", "failed", "interrupted"].includes(job.state)
         )
           continue;
         if (job.state === "running") job.state = "interrupted";
         jobs.set(job.id, job);
+        invalidHistory.delete(dir.name);
       } catch {
         /* Incompatible/corrupt private evidence is preserved, not adopted. */
       }
@@ -266,6 +280,97 @@ export function createBindingJobs(repoRoot: string, launch?: Launch) {
     return result;
   }
   return {
+    selectLatestVerified(
+      request: BindingEvidenceRequest,
+    ): VerifiedBindingSelection {
+      if (!isBindingEvidenceRequest(request))
+        throw Error("binding-request-invalid");
+      const relevant = [...jobs.values()]
+        .filter((job) => job.request.baseline.id === request.baseline.id)
+        .sort((a, b) => a.startedAt.localeCompare(b.startedAt));
+      const latest = relevant.at(-1);
+      if (!latest) throw Error("binding-selection-unavailable");
+      const verifyHistory = () => {
+        directories();
+        for (const entry of readdirSync(root, { withFileTypes: true })) {
+          if (!UUID.test(entry.name)) continue;
+          const known = jobs.get(entry.name);
+          const invalid = (): never => {
+            throw Error(
+              known
+                ? "binding-selection-job-changed"
+                : invalidHistory.has(entry.name)
+                  ? "binding-selection-history-invalid"
+                  : "binding-selection-history-changed",
+            );
+          };
+          let current: BindingJobRecord;
+          try {
+            if (!entry.isDirectory()) throw Error();
+            current = JSON.parse(
+              readFileSync(safeFile(entry.name, "job.json"), "utf8"),
+            );
+            if (
+              !current ||
+              current.version !== 1 ||
+              current.id !== entry.name ||
+              !isBindingEvidenceRequest(current.request)
+            )
+              throw Error();
+          } catch {
+            return invalid();
+          }
+          // Re-read parent identities, not only cached ordering. A changed
+          // previously unrelated attempt must not hide a newer relevant one.
+          // An explicitly unrelated parent needs no report/source admission.
+          if (
+            current.request.baseline.id !== request.baseline.id &&
+            known?.request.baseline.id !== request.baseline.id
+          )
+            continue;
+          if (!known) return invalid();
+          if (current.state === "running" && known.state === "interrupted")
+            current.state = "interrupted"; // recovery interpretation, no write
+          if (!same(current, known)) invalid();
+        }
+      };
+      verifyHistory();
+      if (
+        relevant.filter((job) => job.startedAt === latest.startedAt).length !==
+        1
+      )
+        throw Error("binding-selection-order-ambiguous");
+      if (!same(latest.request, request))
+        throw Error("binding-selection-request-mismatch");
+      if (latest.state !== "complete" || !latest.reportSha256)
+        throw Error("binding-selection-not-complete");
+      const evidence = loadBindingEvidence(
+        repoRoot,
+        structuredClone(latest.request),
+      );
+      if (
+        evidence.sourceProgramSha256 !== latest.sourceProgramSha256 ||
+        !same(
+          evidence.rows.map((row) => row.story),
+          latest.stories,
+        )
+      )
+        throw Error("binding-selection-source-changed");
+      const value = report(latest, evidence);
+      verifyHistory();
+      if (
+        sha(readFileSync(safeFile(latest.id, "report.json"))) !==
+        latest.reportSha256
+      )
+        throw Error("binding-report-changed");
+      return {
+        id: latest.id,
+        request: value.request,
+        reportSha256: latest.reportSha256,
+        report: value,
+        evidence,
+      };
+    },
     list(baselineId: string) {
       return [...jobs.values()]
         .filter((job) => job.request.baseline.id === baselineId)
