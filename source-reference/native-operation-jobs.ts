@@ -21,6 +21,11 @@ import {
   verifyNativeTokenContextReceipt,
   type NativeTokenIdentity,
 } from "../core/native-token-context.js";
+import {
+  emitNativeSourceReadbackScript,
+  verifyNativeSourceReadback,
+  type NativeSourceObservationInput,
+} from "../core/native-source-observation.js";
 import type { NativeSourceWriteContext } from "../core/native-source-write.js";
 import {
   emitNativeTokenContextReadbackScript,
@@ -56,7 +61,7 @@ export interface NativeOperationPreparation {
   plan: Plan;
 }
 export type NativeOperationPhase =
-  "token-create" | "token-readback" | "component-create";
+  "token-create" | "token-readback" | "component-create" | "component-readback";
 export interface NativeOperationComponentContext {
   operation: NativeSourceWriteContext["operation"];
   tokens: NativeSourceWriteContext["tokens"];
@@ -103,10 +108,17 @@ export interface NativeOperationSnapshot {
     | "tokens-observed"
     | "observation-refused"
     | "components-created"
+    | "component-structure-observed"
+    | "component-observation-refused"
     | "component-creation-refused"
     | "component-creation-invalid"
     | "component-partial-allocation"
     | "evidence-unavailable";
+  structuralObservation?: {
+    scope: "supported-structure";
+    status: "supported-structure-observed" | "refused";
+    limitations: string[];
+  };
   pendingPhase?: NativeOperationPhase;
   nativeOutcome?: "unknown";
   sourceCurrent: boolean;
@@ -147,6 +159,8 @@ type Event = {
 interface State {
   phase: NativeOperationSnapshot["phase"];
   identity?: NativeTokenIdentity;
+  componentCreation?: Record<string, any>;
+  componentObservation?: ReturnType<typeof verifyNativeSourceReadback>;
   pending?: NativeOperationCommand;
   problems: string[];
   dispatchedCreate: boolean;
@@ -622,6 +636,46 @@ export function createNativeOperationJobs(
     if (new Set(instanceIds).size !== instanceIds.length) return invalid;
     return { phase: "components-created", problems: [] };
   };
+  const componentObservationInput = (
+    state: State,
+    plan: Plan,
+  ): NativeSourceObservationInput => {
+    if (!state.identity || !state.componentCreation)
+      fail("component-allocation-identity-unavailable");
+    return {
+      operation: plan.plan.operation,
+      planRevision: plan.revision,
+      component: plan.plan.component,
+      projection: plan.plan.sourceProjection,
+      samples: plan.plan.samples,
+      tokenInput: plan.plan.tokenInput,
+      tokenIdentity: state.identity,
+      creation: state.componentCreation,
+    };
+  };
+  const observeComponent = (
+    result: unknown,
+    state: State,
+    plan: Plan,
+  ): Pick<State, "phase" | "problems" | "componentObservation"> => {
+    const checked = verifyNativeSourceReadback(
+      componentObservationInput(state, plan),
+      result,
+    );
+    return {
+      phase:
+        checked.status === "supported-structure-observed"
+          ? "component-structure-observed"
+          : "component-observation-refused",
+      // Keep exact node diagnostics in the private readback. Public snapshots
+      // identify the boundary without exposing native IDs or plugin metadata.
+      problems:
+        checked.status === "supported-structure-observed"
+          ? []
+          : ["native-operation-component-readback-refused"],
+      componentObservation: checked,
+    };
+  };
   const load = (id: string) => {
     directories();
     ensure(dir(id));
@@ -745,9 +799,18 @@ export function createNativeOperationJobs(
           )
             fail("component-creation-precondition-invalid");
           state.dispatchedComponent = true;
+        } else if (c.phase === "component-readback") {
+          if (
+            !state.identity ||
+            !state.componentCreation ||
+            !state.dispatchedComponent ||
+            c.readOnly !== true
+          )
+            fail("component-observation-precondition-invalid");
         } else fail("phase-invalid");
         attempts.add(c.attemptId);
         nonces.add(c.nonce);
+        delete state.componentObservation;
         state.pending = c;
         state.phase = "awaiting-native-result";
         state.problems = [];
@@ -762,21 +825,35 @@ export function createNativeOperationJobs(
               )
             : state.pending.phase === "component-create"
               ? acceptComponentCreation(event.envelope.result, plan, id)
-              : observe(
-                  event.envelope.result as NativeTokenReadbackResult,
-                  state.identity!,
-                  plan,
-                );
+              : state.pending.phase === "component-readback"
+                ? observeComponent(event.envelope.result, state, plan)
+                : observe(
+                    event.envelope.result as NativeTokenReadbackResult,
+                    state.identity!,
+                    plan,
+                  );
+        if (
+          state.pending.phase === "component-create" &&
+          outcome.phase === "components-created"
+        )
+          state.componentCreation = structuredClone(event.envelope.result);
         Object.assign(state, outcome);
         delete state.pending;
       } else if (event.kind === "abandon-observation") {
         if (
-          state.pending?.phase !== "token-readback" ||
-          state.pending.attemptId !== event.attemptId
+          !["token-readback", "component-readback"].includes(
+            state.pending?.phase ?? "",
+          ) ||
+          state.pending?.attemptId !== event.attemptId
         )
           fail("observation-abandon-refused");
+        const phase = state.pending!.phase;
         delete state.pending;
-        state.phase = "observation-refused";
+        delete state.componentObservation;
+        state.phase =
+          phase === "component-readback"
+            ? "component-observation-refused"
+            : "observation-refused";
         state.problems = ["native-operation-observation-interrupted"];
       } else if (event.kind === "retry-refused-creation") {
         if (
@@ -843,6 +920,15 @@ export function createNativeOperationJobs(
       "component-partial-allocation",
     ].includes(loaded.state.phase)
       ? { nativeOutcome: "unknown" as const }
+      : {}),
+    ...(loaded.state.componentObservation
+      ? {
+          structuralObservation: {
+            scope: "supported-structure" as const,
+            status: loaded.state.componentObservation.status,
+            limitations: [...loaded.state.componentObservation.limitations],
+          },
+        }
       : {}),
     sourceCurrent,
     acceptedContract: null,
@@ -1059,6 +1145,13 @@ export function createNativeOperationJobs(
       // Compilation may reenter the manager or race another host process.
       authenticate(loaded);
       script = built.script;
+    } else if (phase === "component-readback") {
+      // Known allocations remain inspectable when the source changes. This
+      // observes the saved plan only; sourceCurrent is checked separately and
+      // observation never authorizes admission, allocation or baseline changes.
+      script = emitNativeSourceReadbackScript(
+        componentObservationInput(loaded.state, loaded.plan),
+      );
     } else fail("phase-invalid");
     const command: NativeOperationCommand = {
       version: 1,
@@ -1070,7 +1163,7 @@ export function createNativeOperationJobs(
       fileKey: SOURCE_NATIVE_FILE_KEY,
       planRevision: loaded.plan.revision,
       scriptSha256: sha(script),
-      readOnly: phase === "token-readback",
+      readOnly: phase === "token-readback" || phase === "component-readback",
       script,
     };
     append(loaded, { kind: "dispatch", command });
@@ -1104,13 +1197,14 @@ export function createNativeOperationJobs(
   };
   const retryObservation = (id: string) => {
     const loaded = load(id);
-    if (loaded.state.pending?.phase !== "token-readback")
+    const phase = loaded.state.pending?.phase;
+    if (phase !== "token-readback" && phase !== "component-readback")
       fail("observation-retry-refused");
     append(loaded, {
       kind: "abandon-observation",
-      attemptId: loaded.state.pending.attemptId,
+      attemptId: loaded.state.pending!.attemptId,
     });
-    return dispatch(id, "token-readback");
+    return dispatch(id, phase);
   };
   const retryCreation = (id: string) => {
     const loaded = load(id);

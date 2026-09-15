@@ -943,3 +943,246 @@ test("a competing component dispatch during compilation delivers at most one com
     delivered,
   );
 });
+
+/** Exercise the actual shared component writer and independent reader through
+ * the durable journal; this synthetic compiler fixture is not native evidence. */
+async function independentlyObservedComponents(t: test.TestContext) {
+  const { comparisonFixture } =
+    await import("../core/native-source-writer-test-fixture.js");
+  const { prepareNativeTokenContext } =
+    await import("../core/native-token-context.js");
+  const template = await comparisonFixture();
+  let stale = false;
+  const prepare: NativeOperationJobsOptions["prepare"] = (
+    _request,
+    operation,
+  ) => {
+    if (stale) throw Error("source changed");
+    const seed = nativeFixturePreparation(operation);
+    const tokenInput = {
+      ...template.context.tokens.input,
+      fileKey: operation.fileKey,
+      scopeId: `source-${operation.id}`,
+    };
+    const plan = {
+      ...seed.plan.plan,
+      operation,
+      tokenInput,
+      tokenPreparation: prepareNativeTokenContext(tokenInput),
+      component: template.source.compile(),
+      sourceProjection: template.source.projection,
+      samples: template.samples,
+    };
+    return {
+      ...seed,
+      plan: { plan, revision: revisionOf(plan) } as typeof seed.plan,
+    };
+  };
+  const build: NonNullable<NativeOperationJobsOptions["buildComponent"]> = (
+    _request,
+    context,
+  ) => ({
+    planRevision: context.planRevision,
+    script: template.source
+      .engine()
+      .buildNativeSourceComponentScript(
+        template.source.contract,
+        new Map([[template.source.contract.id, template.source.contract]]),
+        {
+          operation: context.operation,
+          tokens: context.tokens,
+          comparisons: {
+            samples: template.samples,
+            revision: revisionOf(template.samples),
+          },
+        },
+      ),
+  });
+  const f = fixture(t, prepare, build),
+    host = nativeFixtureHost();
+  Object.getPrototypeOf(
+    host.figma.currentPage,
+  ).setExplicitVariableModeForCollection = function (
+    collection: any,
+    mode: string,
+  ) {
+    this.explicitVariableModes = { [collection.id]: mode };
+  };
+  for (const phase of [
+    "token-create",
+    "token-readback",
+    "component-create",
+  ] as const) {
+    const command = f.jobs.dispatch(f.snapshot.id, phase);
+    f.jobs.accept(f.snapshot.id, await host.run(command));
+  }
+  assert.equal(f.jobs.get(f.snapshot.id).phase, "components-created");
+  const creation = JSON.parse(readFileSync(f.event(5), "utf8")).envelope.result;
+  return {
+    ...f,
+    host,
+    creation,
+    makeStale: () => {
+      stale = true;
+    },
+  };
+}
+
+test("component readback observes the saved allocation independently and reopens without qualification", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  assert.equal(f.jobs.get(f.snapshot.id).structuralObservation, undefined);
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  assert.equal(command.readOnly, true);
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(6), "utf8")).command,
+    command,
+  );
+  const envelope = await f.host.run(command);
+  const result = f.jobs.accept(f.snapshot.id, envelope);
+  assert.equal(
+    result.phase,
+    "component-structure-observed",
+    JSON.stringify(result),
+  );
+  assert.equal(result.nativeQualification, "unqualified");
+  assert.equal(result.acceptedContract, null);
+  assert.equal(result.structuralObservation?.scope, "supported-structure");
+  assert(
+    result.structuralObservation?.limitations.includes(
+      "native-visual-fidelity-unverified",
+    ),
+  );
+  assert.deepEqual(f.reopen().get(f.snapshot.id), result);
+  const saved = f.inventory();
+  assert.deepEqual(f.jobs.accept(f.snapshot.id, envelope), result);
+  assert.deepEqual(f.inventory(), saved);
+  for (const privateValue of [
+    f.creation.pageId,
+    command.nonce,
+    command.scriptSha256,
+    "nativeSourceOperation",
+  ])
+    assert(!JSON.stringify(result).includes(privateValue));
+});
+
+test("component observation retry uses a new nonce and never repeats allocation", async (t) => {
+  const f = await independentlyObservedComponents(t),
+    first = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const oldResult = await f.host.run(first);
+  const pages = f.host.figma.root.children.length;
+  const variables = f.host.variables.length;
+  const second = f.reopen().retryObservation(f.snapshot.id);
+  assert.equal(second.phase, "component-readback");
+  assert.equal(second.readOnly, true);
+  assert.notEqual(second.nonce, first.nonce);
+  assert.notEqual(second.attemptId, first.attemptId);
+  assert.equal(second.scriptSha256, first.scriptSha256);
+  assert.throws(
+    () => f.jobs.accept(f.snapshot.id, oldResult),
+    /correlation-mismatch/,
+  );
+  assert.equal(
+    f.jobs.accept(f.snapshot.id, await f.host.run(second)).phase,
+    "component-structure-observed",
+  );
+  assert.equal(f.host.figma.root.children.length, pages);
+  assert.equal(f.host.variables.length, variables);
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-create"),
+    /already-dispatched/,
+  );
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "token-readback"),
+    /component-phase-already-started/,
+  );
+  assert.throws(
+    () => f.jobs.retryCreation(f.snapshot.id),
+    /creation-retry-refused/,
+  );
+});
+
+test("native drift refuses observation and a later read can observe an externally corrected value", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  const page = await f.host.figma.getNodeByIdAsync(f.creation.pageId);
+  const text = page.findOne((n: any) => n.type === "TEXT"),
+    original = text.characters;
+  text.characters = "native edit";
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const refused = f.jobs.accept(f.snapshot.id, await f.host.run(command));
+  assert.equal(refused.phase, "component-observation-refused");
+  assert.deepEqual(refused.problems, [
+    "native-operation-component-readback-refused",
+  ]);
+  assert.equal(refused.structuralObservation?.status, "refused");
+  text.characters = original;
+  const next = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  assert.equal(f.jobs.get(f.snapshot.id).structuralObservation, undefined);
+  assert.equal(
+    f.jobs.accept(f.snapshot.id, await f.host.run(next)).phase,
+    "component-structure-observed",
+  );
+});
+
+test("known component allocations remain inspectable after source changes without claiming current-source agreement", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  f.makeStale();
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const result = f.jobs.accept(f.snapshot.id, await f.host.run(command));
+  assert.equal(result.phase, "component-structure-observed");
+  assert.equal(result.sourceCurrent, false);
+  assert(
+    result.problems.includes("native-operation-source-evidence-unavailable"),
+  );
+  assert.equal(result.nativeQualification, "unqualified");
+});
+
+test("source changes after dispatch do not discard a correlated component readback", async (t) => {
+  const f = await independentlyObservedComponents(t),
+    command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const result = await f.host.run(command);
+  f.makeStale();
+  assert.equal(f.jobs.accept(f.snapshot.id, result).sourceCurrent, false);
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(7), "utf8")).envelope,
+    result,
+  );
+});
+
+test("a self-reported component observation without independent native facts is refused and retained", async (t) => {
+  const f = await independentlyObservedComponents(t),
+    command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const envelope = await f.host.run(command);
+  envelope.result = {
+    status: "supported-structure-observed",
+    acceptedContract: null,
+    nativeQualification: "unqualified",
+  };
+  assert.equal(
+    f.jobs.accept(f.snapshot.id, envelope).phase,
+    "component-observation-refused",
+  );
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(7), "utf8")).envelope,
+    envelope,
+  );
+});
+
+test("component readback cannot start before successful component allocation", async (t) => {
+  const f = await componentReady(t);
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-readback"),
+    /component-allocation-identity-unavailable/,
+  );
+  const command = f.jobs.dispatch(f.snapshot.id, "component-create");
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-readback"),
+    /native-outcome-unknown/,
+  );
+  const result = await f.host.run(command);
+  (result.result as any).status = "partial-or-unknown-allocation";
+  f.jobs.accept(f.snapshot.id, result);
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-readback"),
+    /component-allocation-identity-unavailable/,
+  );
+});
