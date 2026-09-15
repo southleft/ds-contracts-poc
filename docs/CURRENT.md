@@ -197,8 +197,10 @@ The host rederives the pinned visual report, verifies the original runtime
 interface, and preserves the unqualified version-zero binding. It pairs actual
 anatomy parts with compiled nodes, carries whole-wrapper empty-main visibility,
 and retains every observed or refused case. Normal runtime emission still
-refuses; source-candidate script generation is also blocked. The writer still
-needs scoped native ownership and variable-identity integration. Raw or changed compiled objects
+refuses. A separate host-only entry point now recompiles that Contract and
+emits empty native mains through the shared renderer. It requires independently
+observed token identities, checks their live values and mode before allocation,
+and creates a fresh operation-owned page. Raw or changed compiled objects
 cannot bypass Contract validation through the batch writer. A separate sample
 adapter uses the same compiler for observed text and SVG content, preserving
 content as comparison data rather than main defaults. A deterministic private
@@ -230,6 +232,16 @@ the real app has exercised preparation only. Dispatch transport, component
 apply, partial-allocation repair and rollback still need integration and live
 verification. A missing or damaged journal refuses replacement rather than
 creating another native scope.
+
+The component writer preserves source-part metadata, full slot property keys
+and empty-main wrapper visibility. It sets the explicit variable mode before
+styling and retains returned node IDs before later API calls can fail. A private
+journal accessor supplies token identities only after successful independent
+observation and fresh source validation. The saved five-variant Button plan has
+exercised this path in the native API mock, with all fifteen main slots empty.
+This is implementation coverage, not a live native conversion. Comparison
+instances, component command journaling, transport and independent component
+readback remain unfinished.
 
 `npm run runtime:check` checks the strict reference schema, verified artifact
 inputs, React lowering and refusal boundaries. Canvas markers remain untrusted

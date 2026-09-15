@@ -2,6 +2,7 @@
  * inputs. It prepares no executable transport and performs no native writes. */
 import { canonicalJson, revisionOf } from "../core/contract-provenance.js";
 import { createFigmaEngine } from "../core/emit-figma-script.js";
+import type { NativeSourceWriteContext } from "../core/native-source-write.js";
 import {
   prepareNativeTokenContext,
   type NativeTokenContextInput,
@@ -163,4 +164,33 @@ export function prepareNativeSourceInspectionPlan(
     ],
   };
   return { plan, revision: revisionOf(plan) };
+}
+
+/** Reopen the authenticated source inputs and reproduce the saved full plan
+ * before emitting empty native mains through the existing engine. The caller
+ * must journal the command before delivering it. This function does no I/O and
+ * grants no dispatch/retry permission; samples are not applied by this phase. */
+export function buildNativeSourceComponentWrite(
+  input: NativeSourcePlanInput & {
+    expectedPlanRevision: string;
+    tokens: NativeSourceWriteContext["tokens"];
+  },
+) {
+  const current = prepareNativeSourceInspectionPlan(input);
+  if (
+    current.revision !== input.expectedPlanRevision ||
+    !same(current.plan.tokenInput, input.tokens.input)
+  )
+    fail("write-plan-stale");
+  const prepared = prepareNativeSourceCandidate(input.source);
+  const engine = createFigmaEngine({
+    ...prepared.engineInput,
+    icons: new Map(),
+  });
+  const script = engine.buildNativeSourceComponentScript(
+    prepared.contract,
+    new Map([[prepared.contract.id, prepared.contract]]),
+    { operation: input.operation, tokens: input.tokens },
+  );
+  return { planRevision: current.revision, script };
 }

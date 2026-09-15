@@ -69,6 +69,58 @@ async function created(t: test.TestContext) {
   return { ...f, host, command, result };
 }
 
+test("private token accessor requires independent observation and returns isolated host context", async (t) => {
+  const f = await created(t);
+  assert.throws(
+    () => f.jobs.verifiedTokenContext(f.snapshot.id),
+    /verified-token-observation-required/,
+  );
+  const command = f.jobs.dispatch(f.snapshot.id, "token-readback");
+  assert.throws(
+    () => f.jobs.verifiedTokenContext(f.snapshot.id),
+    /verified-token-observation-required/,
+  );
+  const result = await f.host.run(command);
+  f.jobs.accept(f.snapshot.id, result);
+  const before = f.inventory();
+  const context = f.reopen().verifiedTokenContext(f.snapshot.id);
+  assert.equal(context.operation.id, f.snapshot.id);
+  assert.equal(context.operation.fileKey, SOURCE_NATIVE_FILE_KEY);
+  assert.equal(context.planRevision, command.planRevision);
+  assert.equal(context.tokens.identity.origin, "created");
+  assert.deepEqual(context.tokens.receipt, (result.result as any).receipt);
+  context.tokens.identity.variables[0].id = "edited-return-value";
+  assert.notEqual(
+    f.reopen().verifiedTokenContext(f.snapshot.id).tokens.identity.variables[0]
+      .id,
+    "edited-return-value",
+  );
+  assert.deepEqual(f.inventory(), before);
+  const publicSnapshot = JSON.stringify(f.jobs.get(f.snapshot.id));
+  assert(!publicSnapshot.includes("journalRevision"));
+  assert(!publicSnapshot.includes("receipt"));
+  assert(!publicSnapshot.includes("fileKey"));
+});
+
+test("private token accessor refuses a previously successful observation when source changes", async (t) => {
+  let stale = false;
+  const f = fixture(t, (...args) => {
+    if (stale) throw Error("source changed");
+    return nativeFixturePrepare(...args);
+  });
+  const host = nativeFixtureHost();
+  for (const phase of ["token-create", "token-readback"] as const) {
+    const command = f.jobs.dispatch(f.snapshot.id, phase);
+    f.jobs.accept(f.snapshot.id, await host.run(command));
+  }
+  assert.equal(f.jobs.get(f.snapshot.id).phase, "tokens-observed");
+  stale = true;
+  assert.throws(
+    () => f.jobs.verifiedTokenContext(f.snapshot.id),
+    /source changed/,
+  );
+});
+
 test("prepare and reopen retain one operation, exact pins and all historical bytes", (t) => {
   const f = fixture(t),
     before = f.inventory();

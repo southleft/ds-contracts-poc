@@ -894,6 +894,42 @@ export function createNativeOperationJobs(
     append(loaded, { kind: "retry-refused-creation" });
     return dispatch(id, "token-create");
   };
+  /** Private host accessor for the next component phase. Reopens and validates
+   * the entire journal and fresh source before returning native identities.
+   * This is never included in public snapshots or returned by an HTTP route. */
+  const verifiedTokenContext = (id: string) => {
+    const loaded = load(id);
+    if (
+      loaded.state.phase !== "tokens-observed" ||
+      loaded.state.pending ||
+      !loaded.state.identity
+    )
+      fail("verified-token-observation-required");
+    authenticate(loaded);
+    const event = [...loaded.events]
+      .reverse()
+      .find(
+        (e) => e.kind === "result" && e.envelope.phase === "token-readback",
+      );
+    if (event?.kind !== "result") fail("verified-token-observation-required");
+    const result = event.envelope.result as NativeTokenReadbackResult;
+    if (
+      observe(result, loaded.state.identity, loaded.plan).phase !==
+        "tokens-observed" ||
+      !result.receipt
+    )
+      fail("verified-token-observation-required");
+    return structuredClone({
+      operation: { id, fileKey: SOURCE_NATIVE_FILE_KEY },
+      planRevision: loaded.plan.revision,
+      journalRevision: loaded.fingerprint,
+      tokens: {
+        input: loaded.plan.plan.tokenInput,
+        identity: loaded.state.identity,
+        receipt: result.receipt,
+      },
+    });
+  };
   return {
     prepare,
     get,
@@ -902,5 +938,6 @@ export function createNativeOperationJobs(
     accept,
     retryObservation,
     retryCreation,
+    verifiedTokenContext,
   };
 }
