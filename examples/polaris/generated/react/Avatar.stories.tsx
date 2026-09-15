@@ -26,7 +26,6 @@ const meta = {
   args: {
     size: 'md',
     initials: 'TP',
-    customer: false,
     withInitials: true,
   },
 } satisfies Meta<typeof Avatar>;

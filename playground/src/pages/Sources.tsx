@@ -8,6 +8,38 @@ interface Row {
   limitations: string[];
   sourceImage: string | null;
   replayImage: string | null;
+  semanticIntake?: {
+    status: string;
+    tagName?: string;
+    problems: string[];
+    limitations: string[];
+    coverage?: {
+      declaredProperties: number;
+      observedScalarProperties: number;
+      declaredSlots: number;
+      renderedSlots: number;
+      declaredEvents: number;
+    };
+    declaration?: {
+      properties: {
+        name: string;
+        attribute?: string;
+        typeText?: string;
+        default?: string;
+      }[];
+      slots: { name: string }[];
+      events: { name: string }[];
+    };
+    observation?: {
+      properties: Record<string, { kind: string; value?: unknown }>;
+      slots: { name: string }[];
+      nativeElements: {
+        tag: string;
+        attributes: Record<string, string>;
+        properties: Record<string, { kind: string; value?: unknown }>;
+      }[];
+    };
+  } | null;
   compilerInput?: {
     status: string;
     problems: string[];
@@ -23,7 +55,9 @@ interface Row {
 interface Job {
   id: string;
   state: string;
-  startedAt: string;
+  startedAt?: string;
+  completedAt?: string;
+  recovered?: boolean;
   sourceRevision: string;
   theme: string;
   qualified: number;
@@ -192,6 +226,18 @@ export function Sources() {
               </small>
             </div>
             <div>
+              <span>API and content intake</span>
+              <strong>
+                {
+                  job.rows.filter(
+                    (r) => r.semanticIntake?.status === "observed",
+                  ).length
+                }{" "}
+                / {job.denominator} observed
+              </strong>
+              <small>Inventory only — contract not accepted</small>
+            </div>
+            <div>
               <span>Figma fidelity</span>
               <strong>Not measured</strong>
             </div>
@@ -206,8 +252,19 @@ export function Sources() {
           </section>
           <p className="source-note">
             {job.theme} · Source revision <code>{job.sourceRevision}</code> ·
-            Started {new Date(job.startedAt).toLocaleString()}
+            {job.startedAt
+              ? ` Started ${new Date(job.startedAt).toLocaleString()}`
+              : job.completedAt
+                ? ` Recorded ${new Date(job.completedAt).toLocaleString()}`
+                : " Time not recorded"}
           </p>
+          {job.recovered && (
+            <p role="note">
+              Recovered completed evidence after a server restart. These are
+              recorded results, not a new source check or permission to
+              generate.
+            </p>
+          )}
           {job.problem && <p role="alert">{job.problem}</p>}
           <div className="source-evidence">
             <nav aria-label="All selected source states">
@@ -218,7 +275,12 @@ export function Sources() {
                   onClick={() => setSelected(r.story)}
                 >
                   <span>{r.story.replace("--", " / ")}</span>
-                  <small>{r.status.replaceAll("-", " ")}</small>
+                  <small>Source: {r.status.replaceAll("-", " ")}</small>
+                  <small>
+                    API:{" "}
+                    {r.semanticIntake?.status.replaceAll("-", " ") ??
+                      "not observed"}
+                  </small>
                 </button>
               ))}
             </nav>
@@ -277,6 +339,109 @@ export function Sources() {
                     </figure>
                   ))}
                 </div>
+                {row.semanticIntake && (
+                  <section aria-label="Semantic contract intake">
+                    <h3>
+                      Component API and content — {row.semanticIntake.status}
+                    </h3>
+                    <p>
+                      Declared metadata is compared with the actual custom
+                      element and its replay. These are inputs to a contract
+                      proposal, not an accepted contract or proof of reusable
+                      output.
+                    </p>
+                    {row.semanticIntake.coverage && (
+                      <p>
+                        <code>{row.semanticIntake.tagName}</code>:{" "}
+                        {row.semanticIntake.coverage.declaredProperties}{" "}
+                        declared properties,{" "}
+                        {row.semanticIntake.coverage.observedScalarProperties}{" "}
+                        observed scalar values;{" "}
+                        {row.semanticIntake.coverage.renderedSlots} of{" "}
+                        {row.semanticIntake.coverage.declaredSlots} slots
+                        rendered in this state;{" "}
+                        {row.semanticIntake.coverage.declaredEvents} declared
+                        events (behavior not yet tested).
+                      </p>
+                    )}
+                    {!!row.semanticIntake.problems.length && (
+                      <p>
+                        Intake blocked: {row.semanticIntake.problems.join(", ")}
+                      </p>
+                    )}
+                    {row.semanticIntake.declaration && (
+                      <details>
+                        <summary>
+                          Declared API versus observed source state
+                        </summary>
+                        <ul>
+                          {row.semanticIntake.declaration.properties.map(
+                            (property, index) => {
+                              const actual =
+                                row.semanticIntake?.observation?.properties[
+                                  property.name
+                                ];
+                              return (
+                                <li key={`${property.name}-${index}`}>
+                                  <code>{property.name}</code> (
+                                  {property.typeText ?? "type not declared"}):
+                                  observed{" "}
+                                  <code>
+                                    {actual?.kind === "value"
+                                      ? JSON.stringify(actual.value)
+                                      : (actual?.kind ?? "missing")}
+                                  </code>
+                                  ; declared default:{" "}
+                                  <code>
+                                    {property.default ?? "not declared"}
+                                  </code>
+                                </li>
+                              );
+                            },
+                          )}
+                        </ul>
+                        <p>
+                          Declared slots:{" "}
+                          {row.semanticIntake.declaration.slots
+                            .map((slot) => slot.name || "(default)")
+                            .join(", ") || "none"}
+                          .
+                        </p>
+                        <p>
+                          Rendered slots:{" "}
+                          {row.semanticIntake.observation?.slots
+                            .map((slot) => slot.name || "(default)")
+                            .join(", ") || "none"}
+                          . A conditional slot missing from this state is not
+                          assumed absent from the component.
+                        </p>
+                        <p>
+                          Declared events:{" "}
+                          {row.semanticIntake.declaration.events
+                            .map((event) => event.name)
+                            .join(", ") || "none"}
+                          . Names are preserved verbatim, not rewritten as
+                          guessed callbacks.
+                        </p>
+                        <pre>
+                          {JSON.stringify(
+                            row.semanticIntake.observation?.nativeElements,
+                            null,
+                            2,
+                          )}
+                        </pre>
+                      </details>
+                    )}
+                    <details>
+                      <summary>Unresolved semantic evidence</summary>
+                      <ul>
+                        {row.semanticIntake.limitations.map((limit, index) => (
+                          <li key={index}>{limit}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  </section>
+                )}
                 {row.problems.length > 0 && (
                   <div role="note">
                     <h3>Reference rejected</h3>

@@ -24,9 +24,7 @@ const meta = {
     children: { control: 'text', description: 'Promoted from the computed floor: the mounted children render as this part\'s text (captured mount proof).' },
   },
   args: {
-    hideIcon: false,
     tone: 'info',
-    stopAnnouncements: false,
     dismissible: false,
     withAction: false,
     children: 'Use your finance report to get detailed insights.',

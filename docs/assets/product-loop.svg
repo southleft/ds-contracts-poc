@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="570" viewBox="0 0 1040 570" role="img" aria-labelledby="title desc">
+  <title id="title">Contract-mediated conversion and verified repair</title>
+  <desc id="desc">Target integration, not a completed workflow. Code and Figma observations pass through a contract proposal and policy decision. An accepted contract emits both targets through deterministic adapters. Independent verification advances the baseline only on success.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#436081"/></marker></defs>
+  <rect width="1040" height="570" rx="16" fill="#f3f6fa"/>
+  <g font-family="Arial, sans-serif" fill="#172b42">
+    <text x="32" y="39" font-size="23" font-weight="700">One contract authority. Two independently verified surfaces.</text>
+    <text x="32" y="68" font-size="16">TARGET INTEGRATION · existing engines, unfinished application coordinator</text>
+    <g stroke="#436081" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M210 164H280"/><path d="M210 292H280V206"/>
+      <path d="M480 184H545"/><path d="M755 184H813V145H840"/>
+      <path d="M755 184H813V279H840"/>
+      <path d="M920 325V407H740"/>
+      <path d="M1008 149H1024V470H770V431H740"/>
+      <path d="M480 407H410"/><path d="M205 407H16V164H32"/>
+      <path d="M16 292H32"/>
+    </g>
+    <g stroke="#b6c5d6" fill="#fff">
+      <rect x="32" y="115" width="178" height="98" rx="10"/>
+      <rect x="32" y="244" width="178" height="95" rx="10"/>
+      <rect x="280" y="133" width="200" height="102" rx="10"/>
+      <rect x="545" y="124" width="210" height="120" rx="10" fill="#e5efff"/>
+      <rect x="840" y="103" width="168" height="91" rx="10"/>
+      <rect x="840" y="225" width="168" height="100" rx="10"/>
+      <rect x="480" y="348" width="260" height="105" rx="10"/>
+      <rect x="205" y="366" width="205" height="88" rx="10" fill="#e5efff"/>
+    </g>
+    <g font-size="18" font-weight="700">
+      <text x="50" y="146">Code source</text><text x="50" y="275">Figma source</text>
+      <text x="299" y="164">Contract proposal</text><text x="565" y="156">Accepted contract</text>
+      <text x="858" y="133">Code emitter</text><text x="858" y="255">Canvas writer</text>
+      <text x="500" y="379">Independent verification</text><text x="225" y="397">Verified baseline</text>
+    </g>
+    <g font-size="15">
+      <text x="50" y="174">API + styled render</text><text x="50" y="197">versioned observation</text>
+      <text x="50" y="303">Nodes, tokens, states</text><text x="50" y="326">versioned observation</text>
+      <text x="299" y="192">Schema + provenance</text><text x="299" y="216">Diff against baseline</text>
+      <text x="565" y="184">Explicit ownership policy</text><text x="565" y="208">No model adjudication</text><text x="565" y="231">Conflicts stop writes</text>
+      <text x="858" y="160">Reusable code</text><text x="858" y="183">Deterministic build</text>
+      <text x="858" y="282">Canonical IR → nodes</text><text x="858" y="306">Plugin / MCP adapter</text>
+      <text x="500" y="406">Browser + native Figma export</text><text x="500" y="431">Semantics + pixels + behavior</text>
+      <text x="225" y="423">Advance only after pass</text><text x="225" y="443">Reobserve → next run</text>
+    </g>
+    <text x="32" y="501" font-size="17" font-weight="700">Every write needs fresh preconditions and a recoverable operation record.</text>
+    <text x="32" y="532" font-size="16">REST reads observations; the plugin or MCP executes native writes. Neither decides conversion semantics.</text>
+  </g>
+</svg>

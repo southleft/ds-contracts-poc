@@ -1,5 +1,14 @@
 # AGENTS.md
 
+## Current product direction
+
+Read [docs/CURRENT.md](docs/CURRENT.md) before choosing development work. It is
+the active outcome-first architecture and work order, shared by the playground
+and documentation site. Numbered plans and handoffs are historical context,
+not competing current instructions. Preserve signed evidence and owner-only
+grades; do not equate a rendering draft or a green internal gate with a complete
+autonomous journey. Verify the actual checkout, source revision and PR state.
+
 ## Repository instructions
 
 This is `ds-contracts-poc` ("Design System Contracts"), an npm-workspaces monorepo.

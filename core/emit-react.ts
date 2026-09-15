@@ -53,6 +53,7 @@ import { validateContract } from '../packages/core/src/validate.js';
 import { generateCss } from '../packages/core/src/css.js';
 import { ELEMENT_META } from '../packages/core/src/elements.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
+import { reactPartAttrList } from './react-attributes.js';
 
 // Re-export shim — the analysis layer's public names, exactly as this module
 // exported them before the move (plus ELEMENT_META / holderDeclaresPosition,
@@ -256,6 +257,12 @@ export function generateTsx(
   const slots = namedSlots(contract);
   const codePropOf = (propName: string) =>
     contract.props.find((p) => p.name === propName)?.bindings.code.prop ?? propName;
+  // Optional absence is not the string "undefined" (which may itself be an
+  // enum value). Guard every keyed projection, not only destructuring.
+  const whenProvided = (propName: string, expression: string, absent = 'undefined') =>
+    contract.props.find((p) => p.name === propName)?.default === undefined
+      ? `${codePropOf(propName)} === undefined ? ${absent} : ${expression}`
+      : expression;
   const deps = [
     ...new Set(
       walkAnatomy(contract)
@@ -319,12 +326,12 @@ export function generateTsx(
     destructured.push(
       toggledCodeProps.has(p.bindings.code.prop)
         ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
-        : `${p.bindings.code.prop} = '${p.default}'`,
+        : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = '${p.default}'`,
     );
   }
-  for (const p of bools) destructured.push(`${p.bindings.code.prop} = ${p.default === true}`);
+  for (const p of bools) destructured.push(p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${p.default === true}`);
   for (const p of numberProps(contract)) {
-    destructured.push(`${p.bindings.code.prop} = ${typeof p.default === 'number' ? p.default : 0}`);
+    destructured.push(p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = ${p.default}`);
   }
   for (const p of texts) {
     destructured.push(
@@ -361,7 +368,7 @@ export function generateTsx(
     const code = prop.bindings.code.prop;
     const union = (prop.type as { enum: string[] }).enum.map((v) => `'${v}'`).join(' | ');
     prelude.push(
-      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}>('${prop.default}');`,
+      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined ? ' | undefined' : ''}>(${prop.default === undefined ? 'undefined' : `'${prop.default}'`});`,
       `  const ${code} = ${code}Prop ?? ${code}Uncontrolled;`,
     );
   }
@@ -433,9 +440,14 @@ export function generateTsx(
     inertAxes.push(p.name);
     return false;
   });
+  // Presence data attributes intentionally represent truthiness. Optional
+  // bool-conditioned tokens need classes as well to distinguish false from
+  // absence without changing state/style predicates that use those attrs.
+  const classedOptionalBools = bools.filter((p) => p.default === undefined &&
+    (definedClasses === null || [...definedClasses].some((c) => c.startsWith(`${p.name}-`))));
   const classParts = [
     'styles.root',
-    ...classedEnums.map((p) => `styles[\`${p.name}-\${${p.bindings.code.prop}}\`]`),
+    ...[...classedEnums, ...classedOptionalBools].map((p) => whenProvided(p.name, `styles[\`${p.name}-\${${p.bindings.code.prop}}\`]`)),
     'className',
   ];
   const inertNote =
@@ -448,28 +460,17 @@ export function generateTsx(
         `  // structure (a gated part, a per-value text/icon lookup, a child's own props) —\n` +
         `  // or, where the source drew no difference at all, nothing.\n`;
 
-  // `attrs` on a part (root included): a `{prop}` value binds to the prop —
-  // a text prop's code binding is already a string, so it binds bare
-  // (`href={href}`); an enum/number prop is coerced (`{String(size)}`). A
-  // literal lands as a literal (numeric DOM props as numbers).
-  const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
+  // Root and nested attrs share typed native/ARIA projection with the inline emitter.
   const partAttrList = (part: Part | undefined): string[] =>
-    Object.entries(part?.attrs ?? {}).map(([attr, value]) => {
-      const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-      if (ref) {
-        const bound = contract.props.find((p) => p.name === ref[1]);
-        return bound?.type === 'text'
-          ? `${attr}={${codePropOf(ref[1])}}`
-          : `${attr}={String(${codePropOf(ref[1])})}`;
-      }
-      if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return `${attr}={${value}}`;
-      return `${attr}=${JSON.stringify(value)}`;
-    });
+    reactPartAttrList(contract, part, codePropOf);
   const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
 
+  const rootAttrs = contract.anatomy.root?.attrs ?? {};
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
   const elementAttrs: string[] = ['ref={ref}', 'className={classes}'];
-  if (nativeDisabled) elementAttrs.push('disabled={disabled}');
+  if (nativeDisabled && !Object.keys(rootAttrs).some((attr) => attr.toLowerCase() === 'disabled')) {
+    elementAttrs.push(`disabled={${codePropOf('disabled')}}`);
+  }
   for (const p of bools) {
     if (p.name === 'disabled' && nativeDisabled) continue;
     // data-* attributes must be lowercase — kebab-case the prop name
@@ -484,13 +485,12 @@ export function generateTsx(
   // wins over the semantics default below (validateContract refuses a
   // DIFFERING pair by name), and an authored `type` suppresses the implicit
   // type="button" the root event would add.
-  const rootAttrs = contract.anatomy.root?.attrs ?? {};
   elementAttrs.push(...partAttrList(contract.anatomy.root));
   const roleByProp = contract.semantics.roleByProp;
   let roleMapConst = '';
   if (roleByProp) {
     roleMapConst = `const ROLE_MAP: Record<string, string> = ${JSON.stringify(roleByProp.map)};\n\n`;
-    elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
+    elementAttrs.push(`role={${whenProvided(roleByProp.prop, `ROLE_MAP[${codePropOf(roleByProp.prop)}]`, JSON.stringify(contract.semantics.role) ?? 'undefined')}}`);
   } else if (
     rootAttrs.role === undefined &&
     contract.semantics.role &&
@@ -578,7 +578,7 @@ export function generateTsx(
     if (part.icon) {
       const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
       const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);
-      const glyph = `dangerouslySetInnerHTML={{ __html: ICONS[${keyExpr}] }}`;
+      const glyph = `dangerouslySetInnerHTML={{ __html: ${ref ? whenProvided(ref[1], `ICONS[${keyExpr}]`, "''") : `ICONS[${keyExpr}]`} }}`;
       // A bare icon is decorative (aria-hidden). An icon on an interactive
       // element (element/attrs declared) keeps the element semantics — the
       // accessible name comes from attrs (e.g. aria-label) — and only the
@@ -760,7 +760,7 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {
     prelude.push(
-      `  const Tag = ELEMENT_MAP[${codePropOf(elementByProp.prop)}] ?? '${contract.semantics.element}';`,
+      `  const Tag = ${whenProvided(elementByProp.prop, `ELEMENT_MAP[${codePropOf(elementByProp.prop)}] ?? '${contract.semantics.element}'`, `'${contract.semantics.element}'`)};`,
     );
   }
   const typeImports = [
@@ -841,7 +841,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
       }
     } else if (p.type === 'boolean') {
       argTypes.push(`    ${codeName}: { control: 'boolean'${desc} },`);
-      args.push(`    ${codeName}: ${p.default === true},`);
+      if (p.default !== undefined) args.push(`    ${codeName}: ${p.default === true},`);
     } else if (p.type === 'number') {
       argTypes.push(`    ${codeName}: { control: { type: 'number' }${desc} },`);
       if (typeof p.default === 'number') args.push(`    ${codeName}: ${p.default},`);

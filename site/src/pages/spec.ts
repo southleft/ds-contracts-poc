@@ -413,6 +413,7 @@ function propsPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           "ts",
           "prop.bindings — rendered from the schema at build time",
         ) +
+        `<p><code>bindings.figma.unsetValue</code> explicitly reserves a canvas-only option for an omitted, defaultless enum prop. For example, a code API can declare only <code>secondary | danger</code> while omission draws its base appearance; <code>unsetValue: "(unset)"</code> draws that base as a separate Figma variant without adding a public enum value or a code default. The label must be nonempty, unambiguous and distinct from every mapped public value, and is legal only for a defaultless <code>VARIANT</code> enum. Readback removes this canvas-only option only when versioned metadata, property definitions, structured variant rows and the exact matrix corroborate it. Invalid, retired or unsupported omission mappings refuse instead of becoming a new public value. Changing or removing the binding on an existing set requires a fresh lineage; the writer refuses before changing that target and preserves its history. This boundary has offline conformance tests; it is not a claim of live Figma or end-to-end source qualification.</p>` +
         refusals("Refusal rules on props and bindings:", [
           "duplicate prop names; duplicate <em>code</em> bindings across props, slots, and events (the git-merge attack)",
           "two props binding the same design property — the canvas cannot host both",
@@ -1310,7 +1311,7 @@ function specIndex(receipt: CoverageReceipt): { route: string; html: string } {
 <p class="eyebrow">The specification</p>
 <h1>The contract, field by field</h1>
 <p class="lede">This reference is <strong>generated from the schema</strong> — <code>scripts/contract-schema.ts</code>, the same Zod document that validates every contract, typed the generators, and emits the JSON Schema. Docs that are rendered from the spec cannot drift from it.</p>
-<p class="section-note"><strong>Current state (2026-08-31).</strong> This is the universal-contract schema (v17). Recipe-IR is a separate envelope and the v1 proof surface; product v1 is incomplete (F1). Active v1 plan: <a href="${REPO_URL}/blob/main/docs/35-two-journey-v1-plan.md">docs/35</a> (not a ship claim). See <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a>.</p>
+<p class="section-note"><strong>Historical scope (2026-08-31).</strong> This is the universal-contract schema (v17). Recipe-IR is a separate envelope and the v1 proof surface; product v1 is incomplete (F1). Current product plan: <a href="/system/">the whole loop</a> (not a ship claim). See <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a>.</p>
 
 ${section(
   "coverage",

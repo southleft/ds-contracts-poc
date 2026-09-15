@@ -23,9 +23,7 @@ const meta = {
     value: { control: 'text', description: 'Value for form input' },
   },
   args: {
-    labelHidden: false,
     checked: 'unchecked',
-    disabled: false,
   },
 } satisfies Meta<typeof RadioButton>;
 

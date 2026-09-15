@@ -15,6 +15,7 @@ import { checkCoverage } from './src/coverage.js';
 import { computeStats } from './src/stats.js';
 import { buildSpecPages } from './src/pages/spec.js';
 import { homePage } from './src/pages/home.js';
+import { systemPage } from './src/pages/system.js';
 import { buildHowPages } from './src/pages/how.js';
 import { getStartedPage } from './src/pages/get-started.js';
 import { whatWorksPage } from './src/pages/what-works.js';
@@ -67,6 +68,7 @@ const replays = await loadHowReplays();
 
 const pages: Array<{ route: string; html: string }> = [
   homePage(stats, receipt),
+  systemPage(),
   ...(await buildSpecPages(receipt)),
   ...buildHowPages(stats, replays),
   whatWorksPage(),
@@ -114,8 +116,9 @@ for (const page of pages) {
 writeFileSync(path.join(DIST, '404.html'), notFound);
 
 cpSync(path.join(SITE, 'src/styles.css'), path.join(DIST, 'styles.css'));
+cpSync(path.join(ROOT, 'product/overview.css'), path.join(DIST, 'product-overview.css'));
 mkdirSync(path.join(DIST, 'assets'), { recursive: true });
-for (const asset of ['logo-light.svg', 'logo-dark.svg']) {
+for (const asset of ['logo-light.svg', 'logo-dark.svg', 'product-loop.svg']) {
   cpSync(path.join(ROOT, 'docs/assets', asset), path.join(DIST, 'assets', asset));
 }
 // The contract-flow pair declares font-family:inherit, which an SVG inside

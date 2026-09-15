@@ -40,7 +40,7 @@ export async function captureValidatedTree(
   const script = captureJs(stageSelector, undefined, varPrefix, profile.path);
   const tree = (await page.evaluate(script)) as CapturedNode | null;
   const repeat = (await page.evaluate(script)) as CapturedNode | null;
-  const unchanged = await page.screenshot({ fullPage: true });
+  const unchanged = await page.screenshot({ fullPage: true, caret: "initial" });
   const sha = (value: string | Buffer) =>
     createHash("sha256").update(value).digest("hex");
   const problems: string[] = [];

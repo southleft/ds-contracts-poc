@@ -27,7 +27,6 @@ const meta = {
     children: { control: 'text', description: 'Promoted from the computed floor: the root renders its children as direct text (captured mount proof).' },
   },
   args: {
-    breakWord: false,
     numeric: false,
     truncate: false,
     visuallyHidden: false,

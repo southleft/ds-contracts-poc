@@ -26,8 +26,6 @@ const meta = {
   },
   args: {
     checked: 'unchecked',
-    labelHidden: false,
-    disabled: false,
   },
 } satisfies Meta<typeof Checkbox>;
 

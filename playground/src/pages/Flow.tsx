@@ -12,6 +12,11 @@ export function Flow() {
     <div className="landing flowpage">
       <p className="landing__kicker">How it flows — pre-pivot envelope</p>
       <h1>Figma ↔ code, through the contract.</h1>
+      <p className="landing__pitch landing__pitch--aside">
+        These are historical engine tours, not the complete autonomous product
+        workflow. <Link to="/system">The whole loop</Link> explains the active
+        architecture, explicit ownership policy and missing application integration.
+      </p>
       <p className="landing__pitch">
         There is no Figma-to-code converter here and no code-to-Figma converter. There is one pure
         function per direction — one compiles the contract into a Figma script, one proposes a
