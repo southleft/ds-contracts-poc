@@ -61,6 +61,7 @@ import {
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
 import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
+import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
@@ -5080,6 +5081,7 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
+  refuseRetainedRuntime(contract, 'figma-script', byId);
   // compileComponentData is also a public entry, used without schema parsing.
   // Validate every opt-in, including malformed non-axis uses filtered below.
   for (const p of contract.props) if (p.bindings.figma.unsetValue !== undefined) PropSchema.parse(p);

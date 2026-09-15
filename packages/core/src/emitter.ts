@@ -18,6 +18,7 @@
  */
 import type { Contract } from '@ds-contracts/schema';
 import type { TokenTreeInput } from './tokens.js';
+import type { RuntimeEmissionContext } from './runtime-emission.js';
 
 export interface EmittedFile {
   /** Suggested file name (relative), e.g. "Badge.tsx", "badge.html". */
@@ -41,6 +42,9 @@ export interface EmitterCtx {
   mintedTokens?: Record<string, unknown>;
   /** react-inline: token resolution mode (default 'light'). */
   mode?: 'light' | 'dark';
+  /** Verified retained-runtime artifacts and bindings. This context cannot
+   * override the actual token values above. Unsupported targets refuse. */
+  runtimeArtifacts?: Omit<RuntimeEmissionContext, 'tokens'>;
 }
 
 export interface Emitter {

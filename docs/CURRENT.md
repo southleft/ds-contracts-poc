@@ -103,6 +103,18 @@ The local **Source validation** screen now derives a component-admission work or
 
 This distinction matters for the actual Altitude Button: its accessible label and visible slot are separate channels; its `isDisabled` sets ARIA state, not native disabling; its link and button branches attach different attributes and listeners. The current schema cannot carry all of its conditional rendering, lifecycle and form-controller behavior. A faithful code-led implementation must preserve a verified runtime dependency or add tested declarative carriers shared by the existing emitters. It cannot substitute a similar-looking button and call it equivalent. Design-only input likewise cannot reveal undeclared event or form behavior. The Figma compiler now explicitly refuses nonboolean truthy visibility conditions instead of silently drawing those parts unconditionally; the existing boolean and enum-equality projections remain supported.
 
+The first retained-runtime lowering now extends the **existing React emitter**,
+not a second component generator. A Contract may carry three immutable runtime,
+interface and projection identities. A trusted local preparer builds current
+Altitude source with its pinned dependencies; canvas data supplies no executable
+paths. The React adapter keeps original typed properties, lifecycle, shadow DOM,
+slots and refs. Targeted tests cover original-property timing and value removal,
+and require actual token values as well as Contract hashes. Native reconstruction
+targets refuse this reference until qualified; arbitrary design changes cannot
+silently leave code unchanged. Source stories, host packaging, editable canvas
+lowering and the application-to-Figma journey are still unfinished. This is a
+bounded engine step, not a converted cohort or a release-readiness claim.
+
 After the original Altitude cohort finishes, **Capture missing Button states** observes its original tertiary, bare and danger stories in a separate source-bound run. The baseline and its failures are preserved, not remeasured or replaced. Completed evidence can be reopened after restart; changed parent records, image bytes or source-file hashes invalidate supplemental use. A failed supplemental attempt can be explicitly retried into a new directory. This is targeted evidence acquisition, not a Figma mint or completion of the code-led journey. `npm run source:reference:check` covers the admission and supplemental-service boundaries with real recorded inputs and negative controls.
 
 | Order | User-visible outcome | Required evidence before moving on |

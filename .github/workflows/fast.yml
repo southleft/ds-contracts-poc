@@ -239,6 +239,10 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run source:reference:check
 
+      - name: Retained runtime identity and React adapter (no native reconstruction)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run runtime:check
+
       # The recipe/IR pivot's Phase 0 surface (docs/32-recipe-ir-pivot.md): the
       # primitive Figma IR, canonical envelope, normalization, and hashing.
       # Named here on the day it is added rather than later — an experimental

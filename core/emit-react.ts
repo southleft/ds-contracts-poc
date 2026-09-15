@@ -54,6 +54,8 @@ import { generateCss } from '../packages/core/src/css.js';
 import { ELEMENT_META } from '../packages/core/src/elements.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 import { reactPartAttrList } from './react-attributes.js';
+import { emitRuntimeReact } from './runtime-emission.js';
+import { refuseRetainedRuntime, type RuntimeEmissionContext } from '../packages/core/src/runtime-emission.js';
 
 // Re-export shim — the analysis layer's public names, exactly as this module
 // exported them before the move (plus ELEMENT_META / holderDeclaresPosition,
@@ -244,6 +246,7 @@ export function generateTsx(
    *  out-of-tree caller cannot silently change. */
   emittedCss?: string,
 ): string {
+  refuseRetainedRuntime(contract, 'direct generateTsx; use emitReact with verified runtime context');
   // elementByProp renders a dynamic tag — the ref/attrs generalize to the
   // shared HTMLElement surface (the concrete element varies per prop value).
   const elementByProp = contract.semantics.elementByProp;
@@ -1056,6 +1059,10 @@ export interface EmitCtx {
   icons: Map<string, string>;
   /** Every known contract by id — composition refs resolve through it. */
   contracts: Map<string, Contract>;
+  /** Host-verified immutable original runtime and projection bindings. */
+  runtimeArtifacts?: Omit<RuntimeEmissionContext, 'tokens'>;
+  /** Actual token values; inventory names cannot verify retained styles. */
+  tokenValues?: unknown;
 }
 
 export interface EmitReactResult {
@@ -1078,6 +1085,18 @@ export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
   const css = generateCss(contract, ctx.tokens, errors);
   if (errors.length > 0) {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
+  }
+  if (contract.bindings.code.runtime) {
+    const result = emitRuntimeReact(contract, ctx.runtimeArtifacts && {
+      ...ctx.runtimeArtifacts, tokens: ctx.tokenValues,
+    });
+    return {
+      ...result,
+      // The native story generator invents example slot wrappers/defaults.
+      // A retained source needs its own qualified story recipe; do not claim
+      // its original states have been reproduced by those examples.
+      stories: `/** Retained-runtime stories require a qualified source recipe. No generated state examples yet. */\nexport {};\n`,
+    };
   }
   return {
     tsx: generateTsx(contract, ctx.contracts, ctx.icons, css),

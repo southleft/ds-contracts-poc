@@ -190,7 +190,10 @@ export function assertContractProvenance(
   }
 }
 
-/** Stamp an accepted design proposal using the base's last code source. */
+/** Stamp an accepted design proposal using the base's last code source.
+ * Retained runtimes may not be introduced, replaced or dropped by this step.
+ * This equality defense is NOT marker/journal verification or artifact trust:
+ * callers still own those checks before reaching this adoption boundary. */
 export function markAwaitingCodeAdoption(
   base: ProvenancedContract,
   proposed: ProvenancedContract,
@@ -200,6 +203,34 @@ export function markAwaitingCodeAdoption(
     throw new Error(
       `${String(base.id ?? "contract")}: design promotion REFUSED — the canonical contract has no provenance; run a matching code extraction once to bootstrap it before accepting a design-led change.`,
     );
+  }
+  // Keep generic legacy provenance documents working without assuming they
+  // have Contract bindings. When either side names a runtime, however, losing
+  // its code identity is never an ordinary design update. Do not reconstruct
+  // or repair it here: only the earlier verified canvas guard may reattach it.
+  const codeBindings = (doc: ProvenancedContract): Record<string, unknown> => {
+    const bindings = doc.bindings;
+    if (!bindings || typeof bindings !== "object" || Array.isArray(bindings))
+      return {};
+    const code = (bindings as Record<string, unknown>).code;
+    return code && typeof code === "object" && !Array.isArray(code)
+      ? (code as Record<string, unknown>)
+      : {};
+  };
+  const baseCode = codeBindings(base),
+    proposedCode = codeBindings(proposed);
+  if (baseCode.runtime !== undefined || proposedCode.runtime !== undefined) {
+    const refuseRuntime = (reason: string): never => {
+      throw new Error(
+        `${String(base.id ?? "contract")}: design promotion REFUSED — RUNTIME-ADOPTION-${reason}: retained runtime and code anchors must match the canonical base; verify canvas identity before adoption.`,
+      );
+    };
+    if (baseCode.runtime === undefined) refuseRuntime("BINDING-INTRODUCED");
+    if (proposedCode.runtime === undefined) refuseRuntime("BINDING-LOST");
+    if (canonicalJson(baseCode.runtime) !== canonicalJson(proposedCode.runtime))
+      refuseRuntime("BINDING-CHANGED");
+    if (canonicalJson(baseCode.anchors) !== canonicalJson(proposedCode.anchors))
+      refuseRuntime("ANCHORS-CHANGED");
   }
   const out = structuredClone(proposed);
   delete out.provenance;

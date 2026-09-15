@@ -206,6 +206,29 @@ One rule, at every level of the document: a fact that only one tool owns is spel
 
 `anchors` is the DTCG `$extensions` dual-ID pattern applied to components. After phase 2 first generates the canvas component set, its stable identifiers are written back here (`npm run anchors:writeback`). From then on, renames on either side never fork identity — parity checks match by anchor, not by name.
 
+`bindings.code.runtime` is an optional, strict retained-runtime identity. Its
+fields are `version: 1`, `kind: "custom-element"`, and three distinct lowercase
+`sha256:…` references: `artifactRevision` binds the original runtime's verified
+files, `interfaceRevision` binds its full source interface, and `bindingRevision`
+binds the qualified Contract projection. It contains no path, executable code,
+loader or authority to fetch a dependency. Existing contracts omit it unchanged.
+
+The host resolves those identities from trusted, hash-checked artifacts; the
+existing React emitter then mounts the original custom element through a tested
+React 19 adapter. Original typed properties, lifecycle, shadow DOM and refs are
+retained, not inferred from captured pixels. The initial lowering requires the
+exact qualified Contract and actual token-value revisions. Unsupported changes
+refuse instead of returning an unchanged runtime and claiming adoption. Other
+targets currently refuse retained-runtime contracts, including composed
+dependencies; qualified canvas emission and editable style channels remain
+unfinished. The native story examples are not substituted for original source
+stories. This additive identity is not evidence of a completed round trip.
+
+A canvas runtime marker is untrusted data. It may corroborate an existing
+host-owned baseline and journal revision, but must never introduce or change a
+runtime dependency. The pure identity-preservation guard checks this before
+code-adoption provenance is stamped; native canvas integration is not yet wired.
+
 **Schema 17 migration (v16 → v17).** Four tool-specific fields used to leak outside the namespace; the schema now refuses each of them by name, with the new spelling in the message, and `ds-contracts migrate <dir>` (`npm run contracts:migrate` for the whole repo) rewrites a tree in place — key order preserved, every other byte untouched:
 
 | v16 spelling | v17 spelling |

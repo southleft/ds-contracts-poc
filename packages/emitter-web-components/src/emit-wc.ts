@@ -61,6 +61,7 @@
  *   a11y.contrast is a review gate, not a rendering fact (no emitter
  *   renders it) — named here, not silently dropped.
  */
+import { refuseRetainedRuntime } from '@ds-contracts/core';
 import {
   isNativeCheckablePart,
   shapeCssDecls,
@@ -1520,6 +1521,7 @@ function generateManifest(contract: Contract): string {
 // ---------------------------------------------------------------------------
 
 export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResult {
+  refuseRetainedRuntime(contract, 'web-components', ctx.contracts);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
 

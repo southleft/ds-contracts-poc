@@ -61,6 +61,7 @@ import {
 } from './emit-react.js';
 import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 import { reactPartAttrList } from './react-attributes.js';
+import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 
 export interface EmitReactInlineCtx {
   /** Parsed DTCG trees — literals resolve through primitives + default brand
@@ -116,6 +117,7 @@ const isStructural = (part: Part) =>
 type StyleRecord = Record<string, string | number>;
 
 export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): EmitReactInlineResult {
+  refuseRetainedRuntime(contract, 'react-inline', ctx.contracts);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
   if (errors.length > 0) {

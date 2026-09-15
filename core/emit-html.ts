@@ -44,6 +44,7 @@ import {
   type Part,
 } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
+import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 import {
   boolProps,
   ELEMENT_META,
@@ -1315,6 +1316,7 @@ export interface EmitHtmlResult {
 }
 
 export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
+  refuseRetainedRuntime(contract, 'html', ctx.contracts);
   validateStaticHtmlIdentity(contract, ctx);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
