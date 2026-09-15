@@ -1067,7 +1067,7 @@ export function createFigmaMock(options = {}) {
         'minWidth', 'maxWidth', 'minHeight', 'maxHeight', 'clipsContent',
         '_w', '_h', '_resized', 'x', 'y',
       ]) {
-        if (this[field] !== undefined) clone[field] = this[field];
+        if (this[field] !== undefined) clone[field] = structuredClone(this[field]);
       }
       // GRID facts survive instancing (P12: instances place, span and fill
       // in cells natively) — deep copies, never shared track arrays.
@@ -1082,6 +1082,7 @@ export function createFigmaMock(options = {}) {
       for (const gf of ['_gridRow', '_gridCol', '_gridRowSpan', '_gridColSpan', '_gridHAlign', '_gridVAlign']) {
         if (this[gf] !== undefined) clone[gf] = this[gf];
       }
+      clone.boundVariables = structuredClone(this.boundVariables);
       clone.componentPropertyReferences = { ...this.componentPropertyReferences };
       if (this.type === 'TEXT') {
         for (const field of ['characters', 'fontSize', 'fontName', 'letterSpacing', 'lineHeight', 'textCase', 'textDecoration', 'textAlignHorizontal', 'textStyleId']) {
@@ -1097,15 +1098,18 @@ export function createFigmaMock(options = {}) {
       const inst = new MockNode('INSTANCE');
       inst.name = this.name;
       inst._mainComponent = this;
+      inst.boundVariables = structuredClone(this.boundVariables);
       inst.children = [];
       for (const child of this.children ?? []) inst.appendChild(child._cloneForInstance());
       for (const field of [
         'layoutMode', 'primaryAxisAlignItems', 'counterAxisAlignItems',
         'primaryAxisSizingMode', 'counterAxisSizingMode', 'itemSpacing',
         'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'fills', 'strokes',
-        'cornerRadius', 'minWidth', 'minHeight', '_w', '_h', '_resized',
+        'cornerRadius', 'topLeftRadius', 'topRightRadius', 'bottomRightRadius', 'bottomLeftRadius',
+        'strokeWeight', 'strokeAlign', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight',
+        'opacity', 'visible', 'clipsContent', 'effects', 'minWidth', 'minHeight', '_w', '_h', '_resized',
       ]) {
-        if (this[field] !== undefined) inst[field] = this[field];
+        if (this[field] !== undefined) inst[field] = structuredClone(this[field]);
       }
       const source = this.parent?.type === 'COMPONENT_SET' ? this.parent : this;
       // REAL-FIGMA QUIRK (live finding 2026-07-22, Desktop Bridge inspection,
