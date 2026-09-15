@@ -728,6 +728,11 @@ const STATE_REACTION_TRIGGERS: ReadonlyArray<{ state: ContractState; trigger: St
 /** Data the engine needs — parsed trees and assets, never paths. */
 export interface FigmaEngineInput {
   tokens: TokenTreeInput;
+  /** Context for compile-time token literals, including numeric typography.
+   * Omission preserves the historical light/default projection. This does
+   * not select native Figma variable modes or grant runtime admission. */
+  mode?: 'light' | 'dark';
+  brand?: string;
   /** Icon asset name → SVG markup (assets/icons/*.svg on the CLI side). */
   icons: Map<string, string>;
   /** When set, duplicate variable names resolve from this Figma collection
@@ -887,6 +892,18 @@ export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string
  */
 export function createFigmaEngine(input: FigmaEngineInput) {
   const variableCollection = input.variableCollection;
+  const mode = input.mode === undefined ? 'light' : input.mode;
+  const brand = input.brand === undefined ? 'default' : input.brand;
+  const isTree = (value: unknown): value is Record<string, unknown> =>
+    value !== null && typeof value === 'object' && !Array.isArray(value);
+  if ((mode !== 'light' && mode !== 'dark') ||
+      !Object.hasOwn(input.tokens, mode) || !isTree(input.tokens[mode])) {
+    throw new Error('FIGMA_CONTEXT_MODE_INVALID: select an existing light or dark token tree');
+  }
+  if (typeof brand !== 'string' || !brand || !isTree(input.tokens.brands) ||
+      !Object.hasOwn(input.tokens.brands, brand) || !isTree(input.tokens.brands[brand])) {
+    throw new Error('FIGMA_CONTEXT_BRAND_INVALID: select an existing brand token tree');
+  }
   const flatten = flattenTokens;
   const primitives = flatten(input.tokens.primitives);
   const semantic = flatten(input.tokens.semantic);
@@ -906,9 +923,9 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   const cssVarName = (dotPath: string) => `var(--${dotPath.split('.').join('-')})`;
 
   function resolveLiteral(dotPath: string): unknown {
-    // Canvas resolves per the DEFAULT brand mode (canvas variants render the
-    // contract's default state; brand modes are switched in the design tool).
-    const all = new Map([...primitives, ...brandModes.get('default')!, ...semantic, ...light]);
+    // All compile-time scalar lowering shares the host-selected context;
+    // native variable binding/mode selection remains a separate operation.
+    const all = new Map([...primitives, ...brandModes.get(brand)!, ...semantic, ...(mode === 'dark' ? dark : light)]);
     let entry = all.get(dotPath);
     let guard = 0;
     while (entry && guard++ < 10) {

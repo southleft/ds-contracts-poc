@@ -130,6 +130,21 @@ arbitrary source props, caller styles, slot content, or native Figma output;
 the application still has no accepted source-bound Contract. The current
 Altitude evidence is dark-themed, not a light-mode default.
 
+The Figma compiler now accepts an explicit host-selected mode and brand for
+compile-time token values, including numeric typography. This does not yet
+select or verify native variable modes. Source-candidate derivation keeps the
+actual defaultless variant, original typed API and source-identified slots;
+accessible labels do not become visible sample text. Its evidence selector
+rechecks the latest attempt and refuses stale or failed evidence instead of
+falling back to an older success. These are inputs to candidate assembly, not
+an accepted or emitted source component.
+
+A native Scratch probe also confirmed that empty Figma slots do not reproduce
+Altitude's absent conditional wrappers: even zero-sized slots retain layout
+gaps. That behavior must be represented and verified explicitly. Empty main
+slots and populated comparison instances are different evidence; inserting
+sample text into a main component would hide this gap, not solve it.
+
 `npm run runtime:check` checks the strict reference schema, verified artifact
 inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
 identity claims: preservation requires a matching canonical base and trusted
