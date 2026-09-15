@@ -25,6 +25,8 @@ export {
 export type {
   RuntimeArtifactForEmission,
   RuntimeProjectionBinding,
+  RuntimePaddingMapping,
+  RuntimeScopeValue,
   RuntimeEmissionContext,
 } from './runtime-emission.js';
 export { refuseRetainedRuntime } from './runtime-emission.js';

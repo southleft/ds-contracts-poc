@@ -23,8 +23,7 @@ export interface RuntimeArtifactForEmission {
   stylesheets: string[];
 }
 
-export interface RuntimeProjectionBinding {
-  version: 1;
+interface RuntimeProjectionBindingBase {
   artifactRevision: string;
   interfaceRevision: string;
   /** A changed projection refuses until its editable channel has a qualified
@@ -35,11 +34,38 @@ export interface RuntimeProjectionBinding {
   slots: Array<{ contractSlot: string; sourceSlot: string }>;
 }
 
+export type RuntimeScopeValue =
+  { kind: "omitted" } | { kind: "value"; value: string | number | boolean };
+
+/** Host-authenticated hook and finite source-input cases, not editable CSS or
+ * a claim that arbitrary caller styles/content preserve canvas geometry. */
+export interface RuntimePaddingMapping {
+  kind: "host-padding-pair-v1";
+  partPath: ["root"];
+  storage: "literals" | "tokens";
+  customProperty: string;
+  evidenceRevision: string;
+  scope: {
+    mode: "light" | "dark";
+    brand: "default";
+    /** Exact measured values, not a claim about arbitrary finite CSS lengths. */
+    paddingPairs: Array<{ blockPx: number; inlinePx: number }>;
+    /** Each case names every writable original property, including omission. */
+    cases: Array<Record<string, RuntimeScopeValue>>;
+  };
+}
+
+export type RuntimeProjectionBinding = RuntimeProjectionBindingBase &
+  ({ version: 1 } | { version: 2; padding: RuntimePaddingMapping });
+
 export interface RuntimeEmissionContext {
   artifacts: ReadonlyMap<string, RuntimeArtifactForEmission>;
   bindings: ReadonlyMap<string, RuntimeProjectionBinding>;
   /** Actual token values supplied by the emitter host, not token names. */
   tokens: unknown;
+  /** Actual host-selected context; v2 never guesses a mode or brand. */
+  mode?: string;
+  brand?: string;
 }
 
 /** A target without a qualified retained-runtime lowering must not reconstruct

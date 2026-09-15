@@ -25,6 +25,7 @@ The arrows describe the target integration. Existing readers, emitters and diff 
 | Source validation | The local app's `/sources` flow captures styled Altitude stories and checks source provenance, font/style readiness and negative controls. | General library onboarding; complete state/theme coverage; automatic qualification of arbitrary libraries. |
 | API and content intake | Exact CEM declarations, runtime property values, slot assignments/fallbacks and native control states accompany the original/replay evidence in `/sources`. Source mutations and semantic replay differences cause named refusals. | An accepted semantic contract, prop-to-part bindings, event behavior, and equivalence of generated IDs across independent renders. An observed inventory is not approval to generate. |
 | Contract playground | The checked-out `core/` engine proposes universal contracts and emits React, HTML and Figma scripts. | Its HTML canvas preview is **not** a live Figma export. Its example tours are not the autonomous product workflow. |
+| Retained source runtime | The existing React emitter can reference a host-verified original custom element, preserving its implementation and typed interface. | Automatic admission of a source-bound Contract, qualified editable canvas channels, distributable host packaging and native-canvas round-trip verification. |
 | Code → canvas | Recipe compilation and the shared Figma writer have live-mint evidence. A new bounded rendered-tree compiler produces explicitly unqualified drafts. | Automatic contract onboarding, semantic properties/token bindings, and verified useful component cohorts through the app without hand-authored role maps or pasted scripts. |
 | Canvas → code | REST/plugin observations can propose contracts; deterministic emitters produce code. Designer-file exams record accounting and named refusals. | An installable, reusable library with usable content slots, variants, accessibility and behavior. Accounting-clean output is not proof of these properties. |
 | Drift and repair | Typed channel diffs, three-way merge rules, observations, a ledger and a proposal planner exist. | Durable policy-authorized apply → reobserve → verify → baseline advancement, including interruption recovery and conflict-safe retry. The sync spine currently plans; it does not apply. |
@@ -70,6 +71,8 @@ Round-trip equivalence means preservation of the **declared supported semantics*
 | Contract-to-Figma programs | `core/emit-figma-script.ts` |
 | Canonical recipe canvas IR and writer | `recipe/figma-ir.ts`, `recipe/figma-writer-runtime.ts` |
 | Styled-source evidence and unqualified drafts | `source-reference/`, especially `source-reference/compile.ts` |
+| Verified original runtime preparation and React lowering | `source-reference/runtime-artifact.ts`, `core/runtime-emission.ts`, `core/emit-react.ts` |
+| Runtime identity preservation and adoption refusal | `core/runtime-reference.ts`, `packages/core/src/contract-provenance.ts` |
 | Actual plugin host | `figma-sync/plugin/engine/entry.ts`, `figma-sync/plugin/code.js` |
 | Drift classification and merge computation | `core/channel-diff.ts`, `core/three-way-merge.ts` |
 | Observation, baseline ledger and plan-only coordinator | `sync/observe.ts`, `sync/ledger.ts`, `sync/spine.ts` |
@@ -105,8 +108,8 @@ This distinction matters for the actual Altitude Button: its accessible label an
 
 The first retained-runtime lowering now extends the **existing React emitter**,
 not a second component generator. A Contract may carry three immutable runtime,
-interface and projection identities. A trusted local preparer builds current
-Altitude source with its pinned dependencies; canvas data supplies no executable
+interface and projection identities. A trusted local preparer builds the pinned
+Altitude source with its recorded dependencies; canvas data supplies no executable
 paths. The React adapter keeps original typed properties, lifecycle, shadow DOM,
 slots and refs. Targeted tests cover original-property timing and value removal,
 and require actual token values as well as Contract hashes. Native reconstruction
@@ -114,6 +117,28 @@ targets refuse this reference until qualified; arbitrary design changes cannot
 silently leave code unchanged. Source stories, host packaging, editable canvas
 lowering and the application-to-Figma journey are still unfinished. This is a
 bounded engine step, not a converted cohort or a release-readiness claim.
+
+A version-2 **projection binding** now qualifies one bounded editable channel:
+the root's `padding-block` and `padding-inline` pair can reach the original
+runtime's authenticated CSS custom property through the existing React emitter.
+The host pins the source-input cases, observed numeric pairs, mode and brand;
+all other Contract fields and the entire token tree remain checked. Missing
+pairs, unmeasured values, conflicting caller overrides and unrelated edits
+refuse. Reset is an explicit pair, not deletion. Literal values and selection
+of existing dimension tokens share this lowering. This does not qualify
+arbitrary source props, caller styles, slot content, or native Figma output;
+the application still has no accepted source-bound Contract. The current
+Altitude evidence is dark-themed, not a light-mode default.
+
+`npm run runtime:check` checks the strict reference schema, verified artifact
+inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
+identity claims: preservation requires a matching canonical base and trusted
+journal, and does not prove that the canvas matches either. The source app still
+produces an admission work order, not an accepted Contract. Its next boundary is
+to assemble a source-bound Contract and qualified visual projection, then verify
+the actual native canvas. Editable-channel qualification remains separate from
+retaining the original runtime; neither a matching hash nor an available MCP
+connection completes that application journey.
 
 After the original Altitude cohort finishes, **Capture missing Button states** observes its original tertiary, bare and danger stories in a separate source-bound run. The baseline and its failures are preserved, not remeasured or replaced. Completed evidence can be reopened after restart; changed parent records, image bytes or source-file hashes invalidate supplemental use. A failed supplemental attempt can be explicitly retried into a new directory. This is targeted evidence acquisition, not a Figma mint or completion of the code-led journey. `npm run source:reference:check` covers the admission and supplemental-service boundaries with real recorded inputs and negative controls.
 

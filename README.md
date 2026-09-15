@@ -25,12 +25,12 @@ Altitude; historical npm captures do not establish parity with its latest code.
 ## Existing engine and historical measurements
 
 **A design system's source of truth is a contract, not a picture and not a
-component file.** This repo turns a real component into a machine-checked
-contract by *measuring* it — a real Chromium mounts every prop combination and
-reads the computed styles — and then compiles that contract to a Figma
-component set, or reads a Figma set back to code. Nothing is inferred from a
-screenshot, and nothing is invented: a fact is carried, lowered with a declared
-inverse, or refused **by name**.
+component file.** Deterministic adapters propose supported contract facts from
+code or canvas observations. Chromium captures read computed styles for the
+configured component states; they do not recover arbitrary source behavior.
+Existing emitters compile supported contracts to code and native Figma nodes,
+with receipts for carried facts and named limits. A screenshot alone does not
+establish a semantic contract or qualify a complete conversion.
 
 Two directions, one contract in the middle:
 
@@ -167,8 +167,8 @@ This repository is the working proof, and the candidate reference implementation
 <a id="release-candidate-status"></a>
 
 **The RC heading is retired.** Recipe-IR never shipped as an npm release
-candidate. Product **v1 is incomplete**. The active climb is
-[docs/35](docs/35-two-journey-v1-plan.md). A version string, a GitHub
+candidate. Product **v1 is incomplete**. The active work order is
+[docs/CURRENT.md](docs/CURRENT.md). A version string, a GitHub
 prerelease, or `npm i @ds-contracts/cli` is not v1-complete. No new semver
 is invented here.
 
@@ -188,7 +188,7 @@ source-ahead unpublished RCs), not a completed two-journey v1.
 | **Published npm (`@ds-contracts/*`)** | The **universal-contract** envelope (extract / generate / bundle / onboard). `latest` is the stable line (CLI `0.4.0`, schema `16.0.0`, emitter `0.3.0`). npm `next` still carries older package RCs (CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`). Use an exact version; do not assume `latest` or `next` is this tree. | Recipe-IR. A v1 proof. A complete product. |
 | **This source tree** | Root `package.json` still reads `1.0.0-rc.1`. CLI source is `0.5.0-rc.2`, schema `17.0.0-rc.1` (the `bindings` hoist), emitter `0.4.0-rc.2`, and `@ds-contracts/core` `0.1.0-rc.1` — source-ahead and unpublished. npm publish of a recipe surface is **deferred**. | A published recipe-IR RC. |
 | **GitHub releases** | The release history describes the universal-contract envelope; the premature `v1.0.0-rc.1` tag was removed by owner disposition (`release-tag:check`). | A published recipe-IR RC or owner approval of this tree. |
-| **Playground** | The pre-pivot `core/` propose/emit loop, in the browser. | The v1 proof. A recipe-IR demo. |
+| **Playground** | The checked-out `core/` propose/emit loop, plus local source evidence through `/sources`. | A completed autonomous conversion or native Figma fidelity proof. |
 
 Publication, tagging, and deploy remain explicit human approvals. The
 universal-contract release runbook is still [docs/27 — Release Process](docs/27-release-process.md);
@@ -517,7 +517,7 @@ Beyond that, four properties you can rely on:
 
 **→ [ds-contracts-playground.pages.dev](https://ds-contracts-playground.pages.dev)**
 
-**Start here if you want to understand the *universal-contract* model before installing anything.** The playground runs the repository's `core/` engine in your browser — no backend, no accounts, no analytics; credentials are session-only and never leave the browser. Ten minutes there teaches that older loop. **It is not the v1 proof surface.** After the recipe-IR pivot, v1 proof is the five live-minted archetypes and their owner grades ([docs/32](docs/32-recipe-ir-pivot.md)); the active climb is [docs/35](docs/35-two-journey-v1-plan.md). The playground still proposes and emits the pre-pivot `*.contract.json` envelope. Do not treat a playground mint or refusal as recipe-IR evidence.
+**Start with the playground's `/system` page for the current architecture.** Its contract tours run the checked-out `core/` engine in the browser; the local `/sources` workflow uses a local Node service to capture and inspect pinned source evidence. These are distinct from the published CLI and the historical recipe-IR mints in [docs/32](docs/32-recipe-ir-pivot.md). The active work order is [docs/CURRENT.md](docs/CURRENT.md). Neither an HTML canvas preview nor a source-binding trace proves native Figma fidelity or a completed autonomous conversion.
 
 *Try first:* open **Examples**, pick the Badge, then break its contract on purpose — delete a required field, or point a token binding at a name that doesn't exist. The refusal appears on screen, named. That refusal is the whole product.
 
@@ -539,7 +539,7 @@ Every CLI verb is eval-pinned by a consumer-style smoke test.
 
 ## The model
 
-A growing category of tools speaks this vocabulary; this project holds four positions that, together, none of them do. **Bidirectional:** the contract generates *both* the code and the design canvas, and imports from both — round-trips are proven, not promised. **Deterministic:** every artifact is computed from file data and byte-pinned; no LLM guesses in the pipeline (AI is available as an assistant, never as an authority). **Receipted:** anything the pipeline cannot carry is named on screen — a gap is reported, never papered over with a plausible value. **Open:** the schema, the engine, and every instrument that verifies them are in this repository under one permissive license, with no gated tier — because a spec the community can't fully use isn't a spec.
+A growing category of tools speaks this vocabulary; this project holds four positions together. **Bidirectional:** contract readers and emitters exist for both surfaces; bounded round-trip measurements do not prove complete autonomous library conversion. **Deterministic:** every artifact is computed from file data and byte-pinned; no LLM guesses in the pipeline (AI is available as an assistant, never as an authority). **Receipted:** anything the pipeline cannot carry is named on screen — a gap is reported, never papered over with a plausible value. **Open:** the schema, the engine, and every instrument that verifies them are in this repository under one permissive license, with no gated tier — because a spec the community can't fully use isn't a spec.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/contract-flow-dark.svg">
@@ -548,7 +548,9 @@ A growing category of tools speaks this vocabulary; this project holds four posi
 
 Every organization that takes design systems seriously eventually splits into two camps. Some come in from the **code side**: the system is an npm package, and the design files are an aging picture of it. Others come in from the **design side**: the system is a canvas library, and the code is an approximation of the pictures. Both camps are answering the same question — *where does the truth live?* — and both answers fail the same way: whichever surface is declared canonical, the other becomes a hand-maintained copy. Copies drift. Drift erodes trust. Eroded trust is why design reviews turn into arguments about which surface is "right."
 
-This project takes a third position: **the source of truth is neither surface.** Each component is defined once, in a small versioned JSON contract capturing everything design and engineering must agree on — props and their legal values, anatomy, token bindings, slot constraints, accessibility semantics, declared events. Both libraries are *renderers* of that contract: generated from it on the first pass, validated against it forever after.
+This project takes a third position: **the source of truth is neither surface.** A versioned JSON contract records the supported agreement — props and their legal values, anatomy, token bindings, slot constraints, accessibility semantics and declared events. Native declarative emitters generate those supported fields on each surface; independent observations must verify the result.
+
+Code-led contracts can also retain an immutable reference to a verified original runtime. The existing React emitter preserves that implementation's behavior and types instead of reconstructing them from a picture. Only explicitly qualified contract channels may change it; preservation alone does not make arbitrary design edits effective. Design-only input cannot introduce such a dependency through canvas metadata. This bounded engine path and its unfinished application/canvas integration are described in [the current work order](docs/CURRENT.md).
 
 The rule that makes it work: **surfaces never sync side-to-side.** An engineer's new prop and a designer's color change take the same path — flagged by the differ, promoted into the contract as a reviewable diff, then regenerated out to the other surface. One arbiter, version-controlled, no arbitration meetings. It's the governance model that made Git work for code and the DTCG token format work for design tokens, run one level up — at the component-API layer.
 
@@ -610,10 +612,10 @@ All of it is gated by **230 executable checks** (`npm run eval`) that run the re
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, sharded to fit an agent's context window at any component count, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
 | `evals/` | 230 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
 | `conformance/` | The **CSS/DOM conformance fixture** — a synthetic library of labelled CSS constructs, mounted through the unmodified capture pipeline, whose expected disposition is declared IN ADVANCE. Every other instrument here derives its denominator from the same filter that decides carriage, so a channel the filter never opened scores 100%; this one does not, which is what makes the frontier *predictable* instead of discovered one library at a time. Generated matrix: [`conformance/EXPECTATIONS.md`](conformance/EXPECTATIONS.md). | ✅ |
-| `recipe/` | **The v1 proof surface.** Archetype recipes → Figma-capability IR → named-or-carried receipts. Five live-minted, owner-signed archetypes; product v1 still incomplete (F1). Not exported from any published package. | ✅ |
-| `playground/` | The public browser playground ([live](https://ds-contracts-playground.pages.dev)) — a Vite app importing `core/` unmodified. **Pre-pivot:** it still drives the universal-contract path, not recipe-IR. | ✅ |
+| `recipe/` | **Historical recipe proof surface.** Archetype recipes → Figma-capability IR → named-or-carried receipts. Five live-minted, owner-signed archetypes; product v1 still incomplete (F1). Not exported from any published package. | ✅ |
+| `playground/` | A Vite app importing the checked-out `core/` engine, with shared `/system` documentation and a local `/sources` evidence service. The [public deployment](https://ds-contracts-playground.pages.dev) is separate; local changes do not establish its deployed revision. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
-| `docs/` | The working documents — start at [Getting Started](docs/00-getting-started.md). | ✅ |
+| `docs/` | The working documents — start at [CURRENT.md](docs/CURRENT.md) for active direction, then the scoped references. | ✅ |
 
 ## Working in this repository
 
@@ -679,7 +681,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 
 ## Documentation
 
-**If you are new, read these in this order:** the current-state box at the top of this README (what landed, what is still named) → [docs/35 — The two-journey v1 plan](docs/35-two-journey-v1-plan.md) (the active climb; not a ship claim) → [docs/32 — The recipe/IR pivot](docs/32-recipe-ir-pivot.md) (the v1 proof surface) → [docs/26 — Definition of v1](docs/26-v1-definition.md) (the bar, including the additive recipe-path row) → [Choose Your Path](docs/00-choose-your-path.md) (Journeys A–C on the still-shipping universal-contract path) → [Getting Started](docs/00-getting-started.md) (the five-minute orientation for that path). The playground and docs/29 walk the older envelope; they are not the v1 proof.
+**If you are new, start with [docs/CURRENT.md](docs/CURRENT.md)** for the active architecture, implementation inventory and outcome-first work order. Then read [Choose Your Path](docs/00-choose-your-path.md) and [Getting Started](docs/00-getting-started.md) for the existing universal-contract workflows. [docs/35](docs/35-two-journey-v1-plan.md), [docs/32](docs/32-recipe-ir-pivot.md) and [docs/26](docs/26-v1-definition.md) preserve earlier plans and release evidence; they do not override current sequencing. The checked-out playground uses the current engine, but its demonstrations do not prove the complete autonomous journey.
 
 **If you are deciding whether to adopt this, read the pair alongside them** — [What Works](docs/24-what-works.md) (everything the tool provably does, each number carrying the artifact it was read from) and [Known Limitations](docs/23-known-limitations.md) (everything it cannot do, in one place, sourced to a measurement). They share a denominator on purpose; either one alone is a sales document.
 
@@ -713,23 +715,24 @@ That is a claim about the future, so it's held to the same standard as everythin
 28. [Beta Tester Runbook](docs/28-beta-runbook.md) · the three journeys packaged for someone who has never seen this repo — prerequisites, exact commands, what success looks like, the named limitations each track WILL hit, honest time budgets, and the structured issue forms for reporting
 29. [How It Flows](docs/29-how-it-flows.md) · what crosses each of the five hops between Figma and code, carried / named / refused, the six adjudication instruments, and three facts traced both ways
 31. [First-pass](docs/31-first-pass.md) · does the documented chain work on the FIRST try, untouched — the no-retry exam, the graded-pair packet, and why first-pass quality is not the same claim as end-state quality
-32. [**The recipe/IR pivot**](docs/32-recipe-ir-pivot.md) · current v1 proof surface: archetype recipes, Figma-capability IR, named-or-carried receipts, five live-minted owner-signed archetypes; product v1 still incomplete (F1)
+32. [**The recipe/IR pivot**](docs/32-recipe-ir-pivot.md) · historical proof surface: archetype recipes, Figma-capability IR, named-or-carried receipts, five live-minted owner-signed archetypes; product v1 still incomplete (F1)
 33. [Post-v1 plan](docs/33-post-v1-plan.md) · approved next work (design→code perturbation, day-picker F1 exam, lifecycle hardening). Not a claim that v1 shipped.
 34. [The boilerplate hill-climb](docs/34-boilerplate-v1-plan.md) · corpus inventory and honesty constraints remain in force; **sequencing superseded** by docs/35. Product v1 still incomplete
-35. [**The two-journey v1 plan**](docs/35-two-journey-v1-plan.md) · **ACTIVE** — reader as mechanical source of truth, canvas→code as a co-equal pillar, both held-out exams gate v1. Not a ship claim. Product v1 still incomplete
+35. [**The two-journey v1 plan**](docs/35-two-journey-v1-plan.md) · historical plan and held-out exam criteria; product sequencing is superseded by [docs/CURRENT.md](docs/CURRENT.md). Not a ship claim. Product v1 still incomplete
 
 ## Honesty as a design principle
 
 Not everything is expressible yet, and nothing here pretends otherwise:
 
-- **Behavior is a declared boundary — drawn precisely.** Contracts own API, anatomy, tokens, semantics, and the *interaction surface*: declared events like `onToggle`, whose toggle + ARIA state are generated into code and whose presence the differ verifies. The canvas reflects events as description text — it cannot run behavior, and the docs say so. Everything richer (drag, typeahead, focus trapping) stays a hand-written layer by design, not omission.
+- **Behavior has an explicit boundary.** Native declarative contracts describe API, anatomy, tokens, semantics and supported events such as `onToggle`. The canvas can document events but cannot run them. Richer behavior must remain in a verified original runtime, be carried by a tested declarative adapter, or be named unsupported; it is not reconstructed from appearance. Runtime preservation does not qualify editable canvas channels or a complete conversion.
 - **Every absent component is attributed.** The coverage map accounts for an entire 93-component industry library: mirrored, blocked by a *named* schema gap, or behavior-bounded. Coverage has scaled with schema capability, not hand effort — each new schema feature has unlocked a cluster of components mechanically.
 - **Degradation is named, never silent.** Canvas surfaces can't run CSS animations or bind SVG paint to variables, so generated canvas states document their limits; a Figma import on a plan without the variables API reports every unresolved binding by name with nearest-token candidates. Nothing is ever fabricated to look complete.
 
 ## Status
 
-**Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** The
-active climb is [docs/35](docs/35-two-journey-v1-plan.md).
+**Product v1 is still incomplete.** The active outcome-first work order is
+[docs/CURRENT.md](docs/CURRENT.md). The following recipe-IR measurements remain
+historical evidence, not qualification of the new source-runtime journey.
 
 - **F1 (held-out library, code→canvas) has two measured rows.** react-day-picker and Radix Themes are re-derived together by `npm run recipe:f1:check`. On 2026-09-14,
   react-day-picker — never previously pointed at by the recipe path — was
@@ -747,8 +750,9 @@ active climb is [docs/35](docs/35-two-journey-v1-plan.md).
   The named refusals are the map of what the direction cannot yet say.
 - **`overallSuccess` is not flipped** (except Table's existing v32 pin), and
   npm publish of a recipe surface is deferred.
-- The playground and the published CLI still run the pre-pivot
-  universal-contract path.
+- The published CLI remains the universal-contract surface. The checked-out
+  playground uses the current engine; its source validation and runtime work
+  do not yet complete application-to-canvas conversion.
 
 The older universal-contract model remains the published surface. Its measured eval record: 225 passed, 5 named failures, 230 total. `eval:carried:check` permits only the failures recorded in [the measured red ledger](parity/receipts/v1/eval-reds.json); a green CI lane is not a claim of an all-passing suite. Dated earlier results and library rounds belong in [MILESTONES.md](MILESTONES.md). Live relay from the plugin into the playground is off; use a figma.com URL or paste a dump. npm publish of a recipe surface is deferred. [docs/27](docs/27-release-process.md) remains the universal-contract release runbook. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
