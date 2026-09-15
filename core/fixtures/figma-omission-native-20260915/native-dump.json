@@ -1,0 +1,283 @@
+{
+  "_provenance": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "extractedAt": "2026-09-15",
+    "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.",
+    "dumpVersion": "1.32",
+    "sets": [
+      "OmittedValueConformance20260915"
+    ]
+  },
+  "_degradations": [],
+  "_variables": {},
+  "OmittedValueConformance20260915": {
+    "setName": "OmittedValueConformance20260915",
+    "description": "OmittedValueConformance20260915 — generated from contract conformance.omitted-value-20260915 v0.1.0",
+    "contractId": "conformance.omitted-value-20260915",
+    "specHash": "3489794770",
+    "version": "0.1.0",
+    "propNames": {
+      "Variant": "variant"
+    },
+    "unsetVariantAxes": {
+      "version": 1,
+      "axes": [
+        {
+          "property": "Variant",
+          "propName": "variant",
+          "codeProp": "appearance",
+          "unsetValue": "(unset)",
+          "values": [
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "bare",
+              "label": "Bare"
+            },
+            {
+              "value": "danger",
+              "label": "Danger"
+            }
+          ]
+        }
+      ]
+    },
+    "semantics": {
+      "element": "div"
+    },
+    "type": "COMPONENT_SET",
+    "nodeId": "299:4052",
+    "key": "ff8ad63a320e01b2f00970afc0893b7f8b6e14e6",
+    "variants": [
+      {
+        "name": "Variant=(unset)",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Variant": "(unset)"
+        },
+        "bbox": {
+          "width": 144,
+          "height": 40
+        },
+        "abs": {
+          "x": 40,
+          "y": 40,
+          "right": 40,
+          "bottom": 360,
+          "width": 144,
+          "height": 40,
+          "constraints": {
+            "horizontal": "LEFT",
+            "vertical": "TOP"
+          }
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "0055ff"
+        },
+        "children": []
+      },
+      {
+        "name": "Variant=Secondary",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Variant": "Secondary"
+        },
+        "bbox": {
+          "width": 144,
+          "height": 40
+        },
+        "abs": {
+          "x": 40,
+          "y": 120,
+          "right": 40,
+          "bottom": 280,
+          "width": 144,
+          "height": 40,
+          "constraints": {
+            "horizontal": "LEFT",
+            "vertical": "TOP"
+          }
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "889999"
+        },
+        "children": []
+      },
+      {
+        "name": "Variant=Tertiary",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Variant": "Tertiary"
+        },
+        "bbox": {
+          "width": 144,
+          "height": 40
+        },
+        "abs": {
+          "x": 40,
+          "y": 200,
+          "right": 40,
+          "bottom": 200,
+          "width": 144,
+          "height": 40,
+          "constraints": {
+            "horizontal": "LEFT",
+            "vertical": "TOP"
+          }
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "ee0011"
+        },
+        "children": []
+      },
+      {
+        "name": "Variant=Bare",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Variant": "Bare"
+        },
+        "bbox": {
+          "width": 144,
+          "height": 40
+        },
+        "abs": {
+          "x": 40,
+          "y": 280,
+          "right": 40,
+          "bottom": 120,
+          "width": 144,
+          "height": 40,
+          "constraints": {
+            "horizontal": "LEFT",
+            "vertical": "TOP"
+          }
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "889999"
+        },
+        "children": []
+      },
+      {
+        "name": "Variant=Danger",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Variant": "Danger"
+        },
+        "bbox": {
+          "width": 144,
+          "height": 40
+        },
+        "abs": {
+          "x": 40,
+          "y": 360,
+          "right": 40,
+          "bottom": 40,
+          "width": 144,
+          "height": 40,
+          "constraints": {
+            "horizontal": "LEFT",
+            "vertical": "TOP"
+          }
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "FIXED",
+          "counterSizing": "FIXED"
+        },
+        "cornerRadius": 4,
+        "fill": {
+          "hex": "ee0011"
+        },
+        "children": []
+      }
+    ],
+    "propertyDefinitions": {
+      "Variant": {
+        "type": "VARIANT",
+        "defaultValue": "(unset)",
+        "variantOptions": [
+          "(unset)",
+          "Secondary",
+          "Tertiary",
+          "Bare",
+          "Danger"
+        ]
+      }
+    }
+  }
+}

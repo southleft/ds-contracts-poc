@@ -150,6 +150,64 @@
   overflow-x: auto;
   font-size: 0.8rem;
 }
+.source-binding-trace {
+  margin-block: 32px;
+  padding-block: 24px;
+  border-block: 1px solid #8886;
+}
+.source-binding-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.source-binding-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 16px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.source-binding-table caption {
+  text-align: left;
+  margin-bottom: 8px;
+}
+.source-binding-table th,
+.source-binding-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #8886;
+}
+.source-binding-table button,
+.source-binding-select select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid #8886;
+  border-radius: 4px;
+  padding: 8px;
+}
+.source-binding-table button {
+  cursor: pointer;
+}
+.source-binding-table button[aria-pressed="true"] {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+.source-binding-select {
+  display: grid;
+  gap: 8px;
+  margin-block: 18px;
+  max-width: 640px;
+}
+.source-binding-select select {
+  min-width: 0;
+  width: 100%;
+}
+.source-binding-results details {
+  margin-block: 12px;
+}
+.source-binding-images img {
+  width: auto;
+  max-width: 100%;
+}
 @media (max-width: 850px) {
   .source-status {
     grid-template-columns: 1fr 1fr;
@@ -166,5 +224,17 @@
   }
   .source-workspace {
     padding: 24px 16px;
+  }
+}
+@media (max-width: 480px) {
+  .source-binding-table {
+    font-size: 0.8rem;
+  }
+  .source-binding-table th,
+  .source-binding-table td {
+    padding: 8px 6px;
+  }
+  .source-binding-table button {
+    padding: 6px;
   }
 }

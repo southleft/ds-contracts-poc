@@ -64,6 +64,7 @@ import {
 } from '../scripts/contract-schema.js';
 import type { Emitter } from '../packages/core/src/emitter.js';
 import { kebab } from '../packages/core/src/naming.js';
+import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 
 // ---------------------------------------------------------------------------
 // Anchors — read through ONE accessor so the emitter has a single place that
@@ -304,6 +305,7 @@ function header(contract: Contract, plan: CodeConnectPlan, flavour: 'react' | 'h
 // ---------------------------------------------------------------------------
 
 export function emitCodeConnectReact(contract: Contract): string {
+  refuseRetainedRuntime(contract, 'code-connect');
   const plan = planCodeConnect(contract);
   const name = contract.name;
   const attrs = plan.mappings.filter((m) => m.placement === 'attribute');
@@ -341,6 +343,7 @@ export function emitCodeConnectReact(contract: Contract): string {
 export const codeConnectTagOf = (contract: Contract): string => contract.id.replace('.', '-');
 
 export function emitCodeConnectHtml(contract: Contract): string {
+  refuseRetainedRuntime(contract, 'code-connect-html');
   const plan = planCodeConnect(contract);
   const tag = codeConnectTagOf(contract);
   const attrs = plan.mappings.filter((m) => m.placement === 'attribute');

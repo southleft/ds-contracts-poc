@@ -3,15 +3,17 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
-import { altitudeCohort, altitudeRevision } from './altitude-cohort.js';
+import { altitudeCohort, altitudeButtonVariants, altitudeRevision } from './altitude-cohort.js';
 import { watchSourceFailures } from './observe.js';
 import { captureReference, replayReference, archiveInventory } from './replay.js';
 import { captureValidatedTree } from './capture.js';
 import { readCemDeclarations } from '../extract/adapters/cem.js';
 import { captureStableSemantics, assessSemantics, semanticHash } from './semantics.js';
 
-const [origin,checkout,output] = process.argv.slice(2);
+const [origin,checkout,output,selection = 'baseline',parentId,parentSha256] = process.argv.slice(2);
 if (!origin || !checkout || !output) throw new Error('Usage: cohort-run.ts <loopback-origin> <altitude-checkout> <new-private-output>');
+if (!['baseline','button-variants'].includes(selection)) throw new Error('Unknown fixed source cohort');
+const cohort = selection === 'baseline' ? altitudeCohort : altitudeButtonVariants;
 const parsed = new URL(origin);
 if (parsed.protocol !== 'http:' || !['127.0.0.1','localhost','[::1]'].includes(parsed.hostname) || parsed.username || parsed.password || parsed.pathname !== '/' || parsed.search || parsed.hash) throw new Error('Expected unauthenticated loopback origin');
 const git = (...args:string[]) => execFileSync('git',['-C',checkout,...args],{encoding:'utf8'}).trim();
@@ -22,13 +24,23 @@ const sha = (b:Buffer|string) => createHash('sha256').update(b).digest('hex');
 const sourceFiles = [...new Set([...git('ls-files','libs/al-web-components','pnpm-lock.yaml').split('\n'),
   'libs/al-web-components/styles/dist/tokens.json','libs/al-web-components/styles/dist/scss/theme/tokens-dark.scss'])];
 const hashes = Object.fromEntries(sourceFiles.map(f => [f,sha(readFileSync(path.join(checkout,f)))]));
+// Supplement only the missing original stories. Bind the new observation to
+// existing source bytes; never silently recapture or replace the ten-state run.
+let parent: {id:string;measurementSha256:string} | undefined;
+if (selection === 'button-variants') {
+  if (!parentId || !/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(parentId) || !parentSha256 || !/^[a-f0-9]{64}$/.test(parentSha256)) throw new Error('Supplement requires exact parent identity');
+  const bytes = readFileSync(path.join(path.dirname(output),parentId,'measurement.json'));
+  const recorded = JSON.parse(bytes.toString());
+  if (sha(bytes) !== parentSha256 || recorded.sourceRevision !== altitudeRevision || recorded.sourceStable !== true || (recorded.cohortId ?? 'baseline') !== 'baseline' || JSON.stringify(recorded.sourceHashes) !== JSON.stringify(hashes)) throw new Error('Parent source bytes differ; do not combine these observations');
+  parent = {id:parentId,measurementSha256:parentSha256};
+} else if (parentId || parentSha256) throw new Error('Baseline cannot have a parent');
 const manifestPath = 'libs/al-web-components/custom-elements.json';
 const manifest = readCemDeclarations(JSON.parse(readFileSync(path.join(checkout,manifestPath),'utf8')));
 mkdirSync(output,{recursive:false});
 const browser = await chromium.launch({headless:true});
 const rows:Record<string,unknown>[] = [];
 try {
-  for (const {story,profile,limitations} of altitudeCohort) {
+  for (const {story,profile,limitations} of cohort) {
     const dir = path.join(output,story); mkdirSync(dir);
     const har = path.join(dir,'source.har');
     const url = `${parsed.origin}/iframe.html?id=${story}&viewMode=story`;
@@ -91,9 +103,9 @@ try {
   }
 } finally { await browser.close(); }
 const sourceStable = git('rev-parse','HEAD') === altitudeRevision && !git('diff','HEAD','--name-only') && sourceFiles.every(f=>sha(readFileSync(path.join(checkout,f))) === hashes[f]);
-const record = {recordedAt:new Date().toISOString(),sourceRevision:altitudeRevision,sourceHashes:hashes,sourceStable,
+const record = {recordedAt:new Date().toISOString(),cohortId:selection,...(parent ? {parent} : {}),sourceRevision:altitudeRevision,sourceHashes:hashes,sourceStable,
   engineRevision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),engineDirty:!!execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trim(),
-  browser:browser.version(),denominator:altitudeCohort.length,qualified:sourceStable ? rows.filter(r=>r.qualified).length : 0,rows,
+  browser:browser.version(),denominator:cohort.length,qualified:sourceStable ? rows.filter(r=>r.qualified).length : 0,rows,
   scope:'Source witness and recorded-byte replay only. Not independently rebuilt dependencies, Figma parity, behavior approval, automatic onboarding or completed product journey.'};
 writeFileSync(path.join(output,'measurement.json'),JSON.stringify(record,null,2)+'\n');
 console.log(JSON.stringify({qualified:record.qualified,denominator:record.denominator,sourceStable}));

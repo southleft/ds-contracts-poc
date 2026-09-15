@@ -520,6 +520,39 @@
                 "export"
               ],
               "additionalProperties": false
+            },
+            "runtime": {
+              "type": "object",
+              "properties": {
+                "version": {
+                  "type": "number",
+                  "const": 1
+                },
+                "kind": {
+                  "type": "string",
+                  "const": "custom-element"
+                },
+                "artifactRevision": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "interfaceRevision": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "bindingRevision": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "version",
+                "kind",
+                "artifactRevision",
+                "interfaceRevision",
+                "bindingRevision"
+              ],
+              "additionalProperties": false
             }
           },
           "required": [

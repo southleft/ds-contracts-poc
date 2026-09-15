@@ -11,15 +11,13 @@
  * the registered emitters run here, and their output is committed next to
  * the contract.
  *
- * PROVENANCE IS PRINTED, NOT ASSUMED. A component set this tool GENERATED
- * carries a ds_contracts/contractId marker, and canvas → contract → code is
- * a true round trip. A HAND-BUILT set carries no marker: the contract is an
- * INVERSION of what could be read off the canvas, so the generated component
- * is a starting point, not a reproduction. The plugin knows which case it is
- * and stamps it into the CONTRACT-PROPOSAL envelope; the PR body prints the
- * matching sentence from core/canvas-code-plan.ts. When the input is a bare
- * contract document there is no canvas provenance to state, and the body
- * says exactly that instead of picking a side.
+ * PROVENANCE IS A CLAIM, NOT VERIFICATION. A ds_contracts/contractId marker
+ * reports claimed tool origin; absence does not establish human authorship.
+ * The legacy enum travels in the CONTRACT-PROPOSAL envelope, and the PR body
+ * prints the same bounded wording as the plugin from core/canvas-code-plan.ts.
+ * Reproduction requires a matching trusted canonical baseline, preserved
+ * semantics/runtime identity and independent comparison. An unrecorded
+ * origin stays unknown; none of these labels grants correspondence.
  *
  * Token discipline (the playground credential pattern): the fine-grained
  * GitHub token comes from --token or the DS_CONTRACTS_GITHUB_TOKEN /

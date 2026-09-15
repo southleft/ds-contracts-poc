@@ -6,11 +6,12 @@
     "packages/*"
   ],
   "type": "module",
-  "description": "Proof of concept: machine-readable design-system contracts. The v1 proof surface is recipe-IR (archetype recipes + Figma-capability IR + receipts); product v1 is incomplete (F1). The universal JSON contract still powers the CLI, playground, and Journeys A–C.",
+  "description": "Proof of concept: deterministic code and canvas projections through machine-readable design-system contracts. The CLI, playground, and Figma plugin share the checked-out engine. Outcome-first integration and product v1 remain incomplete; docs/CURRENT.md is the active work order.",
   "scripts": {
     "ci:lanes": "tsx .github/scripts/lane-coverage.ts",
     "ci:lane": "tsx .github/scripts/run-lane.ts",
-    "source:reference:check": "tsc -p source-reference/tsconfig.json && node --import tsx --test source-reference/check.test.ts source-reference/replay.test.ts source-reference/service.test.ts source-reference/capture.test.ts source-reference/compile.test.ts source-reference/semantics.test.ts extract/adapters/cem-semantics.test.ts",
+    "runtime:check": "node --import tsx --test packages/schema/test/runtime-binding.test.ts core/runtime-reference.test.ts core/runtime-emission.test.ts core/runtime-padding.test.ts source-reference/runtime-artifact.test.ts",
+    "source:reference:check": "tsc -p source-reference/tsconfig.json && node --import tsx --test source-reference/check.test.ts source-reference/replay.test.ts source-reference/service.test.ts source-reference/supplement.test.ts source-reference/admission-service.test.ts source-reference/capture.test.ts source-reference/compile.test.ts source-reference/semantics.test.ts source-reference/contract-plan.test.ts source-reference/source-program.test.ts source-reference/topology.test.ts source-reference/bound-topology.test.ts source-reference/lit-render-match.test.ts source-reference/binding-evidence.test.ts source-reference/binding-differential.test.ts source-reference/binding-plan.test.ts source-reference/binding-report.test.ts extract/adapters/cem-semantics.test.ts extract/adapters/lit-template.test.ts",
     "prep:schema": "npm --prefix packages/schema run build",
     "prep:core": "npm run prep:schema && npm --prefix packages/core run build",
     "lint": "oxlint --deny-warnings -A no-unused-vars -A unicorn/no-new-array -A no-unsafe-optional-chaining -A unicorn/prefer-string-starts-ends-with -A no-unreachable .github/scripts packages/cli/src packages/cli/test packages/schema/src packages/core/src packages/emitter-web-components/src workers/assist/src workers/assist/test playground/src dashboard/src site/src",
@@ -453,7 +454,7 @@
     "golden:update": "node scripts/update-golden.mjs",
     "emitters:check": "tsx core/emitters-check.ts",
     "react:conformance:check": "node --import tsx --test core/react-attributes.test.ts core/react-defaultless.test.ts core/react-optional-bool-style.test.ts",
-    "figma:unset:check": "node --import tsx --test core/figma-unset.test.ts",
+    "figma:unset:check": "node --import tsx --test core/figma-unset.test.ts core/figma-visible-when.test.ts",
     "code-connect:check": "tsx core/code-connect-check.ts",
     "canvas:binding:check": "tsx core/canvas-binding-check.ts",
     "variant-drift:check": "tsx parity/variant-drift-check.ts",

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import vm from 'node:vm';
 import { ContractSchema, PropSchema, resolveTokens, resolveLayout, resolveLiterals, walkAnatomy, type Contract } from '../scripts/contract-schema.js';
 import { createFigmaEngine } from './emit-figma-script.js';
@@ -317,4 +318,116 @@ test('REST ingestion preserves malformed omission stamp for refusal', () => {
   const response = { nodes: { '1:1': { document: { id: '1:1', name: 'Broken', type: 'COMPONENT_SET', sharedPluginData: { ds_contracts: { unsetVariantAxes: '{broken' } }, children: [] } } } };
   const mapped = mapRestToDump(response as Parameters<typeof mapRestToDump>[0]);
   assert.equal((mapped.dump.Broken as DumpSet).unsetVariantAxes, '{broken');
+});
+
+// Recorded REAL Figma, unlike roundTrip() above (which executes a mock).
+// These bytes were captured from Scratch using engine 3158bee5. Replaying
+// them offline does not refresh that observation or qualify Altitude/the app.
+const nativeFixture = new URL('./fixtures/figma-omission-native-20260915/', import.meta.url);
+const recordedText = (name: string): string => readFileSync(new URL(name, nativeFixture), 'utf8');
+const recordedJson = (name: string) => JSON.parse(recordedText(name));
+const sha256 = (raw: string): string => createHash('sha256').update(raw).digest('hex');
+
+test('recorded real-Figma synthetic omission: identity, public API, five native rows and 144×40 literal paints survive exact replay', () => {
+  const provenance = recordedJson('provenance.json');
+  const source = ContractSchema.parse(recordedJson('contract.json'));
+  const nativeDump = recordedJson('native-dump.json');
+  const observed = nativeDump[source.name] as DumpSet;
+  const before = JSON.stringify(nativeDump);
+  const mint = JSON.parse(recordedJson('native-mint.json').content[0].text);
+  const repeat = JSON.parse(recordedJson('native-repeat.json').content[0].text);
+  assert.equal(provenance.engineCommit, '3158bee500dc74e6b86fcd81d38e0f68ab474277');
+  assert.equal(provenance.measuredAt, '2026-09-15T15:15:27.358Z'); // analysis time, not mint time
+  assert.equal(mint.timestamp, provenance.nativeMintTimestamp);
+  assert.ok(Date.parse(provenance.measuredAt) > mint.timestamp);
+  for (const [name, digest] of Object.entries(provenance.byteExactCopies)) assert.equal(sha256(recordedText(name)), digest, `${name} preserves captured bytes`);
+  assert.equal(provenance.recordedRepeatDumpSha256, sha256(recordedText('native-dump.json')), 'recorded repeat canonical dump matched the first dump; this is not a new repeat execution');
+  assert.equal(mint.success, true, 'captured transport result, not an owner grade');
+  assert.equal(repeat.success, true);
+  assert.equal(mint.fileContext.fileName, 'Scratch Project');
+  assert.equal(mint.fileContext.fileKey, 'byMp6lt0Ij9b2QbkDGFwBh');
+  assert.equal(nativeDump._provenance.fileKey, mint.fileContext.fileKey);
+  assert.equal(source.bindings.figma.anchors.fileKey, mint.fileContext.fileKey);
+  assert.equal(provenance.fileKey, mint.fileContext.fileKey);
+  const identity = mint.result.results.find((row: { contractId: string }) => row.contractId === source.id);
+  assert.ok(identity);
+  assert.equal(identity.nodeId, '299:4052');
+  assert.equal(identity.key, 'ff8ad63a320e01b2f00970afc0893b7f8b6e14e6');
+  assert.equal(observed.contractId, source.id);
+  assert.equal(observed.nodeId, identity.nodeId);
+  assert.equal(observed.key, identity.key);
+  assert.equal(provenance.contractNodeId, identity.nodeId);
+  assert.equal(provenance.contractKey, identity.key);
+  assert.deepEqual(mint.result.createdNodeIds, [identity.nodeId]);
+  assert.deepEqual(repeat.result.createdNodeIds, []);
+  assert.equal(repeat.result.results[0].nodeId, identity.nodeId);
+  assert.equal(repeat.result.results[0].key, identity.key);
+  assert.equal(repeat.result.results[0].skipped, true);
+  assert.equal(repeat.result.results[0].reason, 'unchanged');
+  assert.deepEqual(observed.semantics, source.semantics);
+  assert.deepEqual(nativeDump._variables, {}, 'literal-color fixture has no original token bindings');
+  assert.deepEqual(nativeDump._degradations, []);
+  const publicValues = ['secondary', 'tertiary', 'bare', 'danger'];
+  const nativeOptions = ['(unset)', 'Secondary', 'Tertiary', 'Bare', 'Danger'];
+  assert.equal(observed.variants.length, 5);
+  assert.deepEqual(observed.propertyDefinitions?.Variant, { type: 'VARIANT', defaultValue: '(unset)', variantOptions: nativeOptions });
+  assert.deepEqual(observed.variants.map(v => v.variantProperties?.Variant), nativeOptions);
+
+  const result = proposeFromDump(observed, {
+    corpus: tokenCorpusFromJson({ primitives: {}, semantic: {}, light: {}, brandDefault: {} }),
+    contractIdByName: new Map(), fileKey: nativeDump._provenance.fileKey,
+    projectionMode: 'exact', mintUnbound: true,
+  });
+  assert.equal(result.projection.status, 'verified-exact');
+  assert.equal(result.projection.expectedCount, 5);
+  assert.equal(result.projection.observedCount, 5);
+  const back = ContractSchema.parse(result.contract);
+  assert.equal(back.id, source.id);
+  assert.equal(back.version, source.version);
+  assert.deepEqual(back.semantics, source.semantics);
+  assert.deepEqual(back.bindings.figma.anchors, { fileKey: provenance.fileKey, componentSetKey: identity.key, nodeId: identity.nodeId });
+  const p = back.props.find(p => p.name === 'variant');
+  assert.ok(p);
+  assert.deepEqual(p.type, { enum: publicValues });
+  assert.equal(Object.hasOwn(p, 'default'), false);
+  assert.equal(p.bindings.code.prop, 'appearance');
+  assert.equal(p.bindings.figma.unsetValue, '(unset)');
+  assert.deepEqual(p.bindings, source.props[0].bindings);
+  const replayEngine = createFigmaEngine({
+    tokens: { primitives: {}, semantic: result.mintedTokens?.tree ?? {}, light: {}, dark: {}, brands: { default: {} } },
+    icons: new Map(),
+  });
+  const compiled = replayEngine.compileComponentData(back, new Map([[back.id, back]]));
+  assert.deepEqual(compiled.variants.map(v => v.name), observed.variants.map(v => v.name));
+  const paints = ['#0055ff', '#889999', '#ee0011', '#889999', '#ee0011'];
+  for (const [i, variant] of [undefined, ...publicValues].entries()) {
+    const subst: Record<string, string> = variant === undefined ? {} : { variant };
+    const valueAt = (channel: string) => {
+      const literal = resolveLiterals(back.anatomy.root, subst)[channel];
+      const ref = resolveTokens(back.anatomy.root, subst)[channel];
+      return literal ?? replayEngine.resolveTokenLiteral(ref.slice(1, -1));
+    };
+    assert.deepEqual(observed.variants[i].bbox, { width: 144, height: 40 });
+    assert.equal(valueAt('width'), '144px');
+    assert.equal(valueAt('height'), '40px');
+    assert.equal(`#${observed.variants[i].fill?.hex}`, paints[i]);
+    assert.equal(valueAt('background-color'), paints[i]);
+    assert.equal(resolveLiterals(source.anatomy.root, subst)['background-color'], paints[i]);
+  }
+  assert.equal(JSON.stringify(nativeDump), before, 'proposal must not rewrite captured native evidence');
+});
+
+test('recorded real-Figma replay rejects corrupted default/alias copies without mutating the fixture', () => {
+  const source = ContractSchema.parse(recordedJson('contract.json'));
+  const original = recordedJson('native-dump.json');
+  const observed = original[source.name] as DumpSet;
+  const originalBytes = recordedText('native-dump.json');
+  const alteredDefault = structuredClone(observed);
+  alteredDefault.propertyDefinitions!.Variant.defaultValue = 'Secondary';
+  refusal(() => propose(alteredDefault));
+  const alteredAlias = structuredClone(observed);
+  (alteredAlias.unsetVariantAxes as { axes: Array<{ codeProp: string }> }).axes[0].codeProp = 'class';
+  refusal(() => propose(alteredAlias));
+  assert.deepEqual(observed, recordedJson('native-dump.json')[source.name]);
+  assert.equal(recordedText('native-dump.json'), originalBytes);
 });

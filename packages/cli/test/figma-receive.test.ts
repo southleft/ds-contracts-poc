@@ -8,7 +8,7 @@
  * receiveCommand shell against an in-process fake bridge and asserts the
  * existing contract file's bytes never move without --apply.
  */
-import { test } from "node:test";
+import { beforeEach, test } from "node:test";
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import {
@@ -48,7 +48,27 @@ import {
   proposePrCommand,
 } from "../src/commands/propose-pr.js";
 import { revisionOf } from "../../../core/contract-provenance.js";
+import {
+  provenanceHeadline,
+  provenanceSentence,
+  type CanvasProvenance,
+} from "../../core/src/canvas-code-plan.js";
 import { CliUsageError } from "../src/lib.js";
+
+// The real shell opts into cwd/sync/ledger.json when that file exists. Keep
+// every test's side effects isolated even when invoked from the repo root or
+// when the operator has explicitly configured a different production ledger.
+// Top-level tests in this file are sequential (node:test's default).
+beforeEach((t) => {
+  const directory = mkdtempSync(path.join(tmpdir(), "dsc-receive-ledger-"));
+  const previous = process.env.DS_CONTRACTS_SYNC_LEDGER;
+  process.env.DS_CONTRACTS_SYNC_LEDGER = path.join(directory, "ledger.json");
+  t.after(() => {
+    if (previous === undefined) delete process.env.DS_CONTRACTS_SYNC_LEDGER;
+    else process.env.DS_CONTRACTS_SYNC_LEDGER = previous;
+    rmSync(directory, { recursive: true, force: true });
+  });
+});
 
 // The envelope exactly as an OLDER plugin engine's proposeDiff exportJson
 // built it (no childStubs / mintedTokens) — kept as-is so backward
@@ -71,6 +91,80 @@ const ENVELOPE = {
   },
   proposalNotes: [],
 };
+
+test("canvas origin wording never upgrades a marker into verified correspondence", () => {
+  const marked = provenanceSentence("tool-generated");
+  assert.match(marked, /marker claiming ds-contracts origin/);
+  assert.match(
+    marked,
+    /does not prove a successful round trip or byte-identical reproduction/,
+  );
+  for (const requirement of [
+    "matching trusted canonical baseline",
+    "preserved semantics and runtime identity",
+    "independent comparison",
+  ])
+    assert.ok(marked.includes(requirement), requirement);
+  assert.match(
+    provenanceHeadline("tool-generated"),
+    /marker only; round-trip verification is still required/,
+  );
+
+  const unmarked = provenanceSentence("hand-built");
+  assert.match(unmarked, /absence does not establish who drew it/);
+  assert.match(unmarked, /INVERSION/);
+  assert.match(unmarked, /STARTING POINT, NOT A REPRODUCTION/);
+  assert.match(provenanceHeadline("hand-built"), /Unmarked origin/);
+  assert.match(provenanceSentence("unrecorded"), /design origin is unknown/);
+  for (const kind of ["tool-generated", "hand-built", "unrecorded"] as const) {
+    for (const text of [provenanceHeadline(kind), provenanceSentence(kind)])
+      assert.doesNotMatch(
+        text,
+        /was GENERATED|was HAND-BUILT|this tool drew it|is a true round trip|comes back byte for byte|reproduces the component/,
+      );
+  }
+});
+
+test("propose-pr preserves legacy origin values without granting marker-based proof", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "dsc-propose-origin-"));
+  try {
+    for (const [stamp, kind] of [
+      [true, "tool-generated"],
+      [false, "hand-built"],
+      [undefined, "unrecorded"],
+    ] as const satisfies ReadonlyArray<
+      readonly [boolean | undefined, CanvasProvenance]
+    >) {
+      // The same proposal gets all three claims; no trusted base or comparison
+      // is supplied, so changing this Boolean cannot establish reproduction.
+      const envelope = {
+        ...ENVELOPE,
+        ...(stamp === undefined
+          ? {}
+          : { provenance: { toolGenerated: stamp } }),
+      };
+      const file = path.join(dir, String(stamp) + ".proposal.json");
+      writeFileSync(file, JSON.stringify(envelope));
+      const { plan, input } = buildPlan(file, "acme/design-system", {});
+      assert.equal(plan.provenance, kind);
+      assert.equal(input.provenance, kind);
+      assert.deepEqual(JSON.parse(input.content), ENVELOPE.proposedContract);
+      assert.ok(plan.body.includes(provenanceSentence(kind)));
+      assert.doesNotMatch(
+        plan.body,
+        /was GENERATED|was HAND-BUILT|is a true round trip|reproduces the component/,
+      );
+      if (stamp === true)
+        assert.match(plan.body, /matching trusted canonical baseline/);
+      if (stamp === false)
+        assert.match(plan.body, /absence does not establish who drew it/);
+      if (stamp === undefined)
+        assert.match(plan.body, /design origin is unknown/);
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 /** Schema-valid blank anatomy — the quiet failure Wave 1 acceptance #4 closes. */
 const BLANK_CONTRACT = {
@@ -561,6 +655,9 @@ test("figma receive (shell) without --apply: proposal artifact saved, contract f
       (JSON.parse(readFileSync(artifact, "utf8")) as { type: string }).type,
       CONTRACT_PROPOSAL_TYPE,
     );
+    const ledgerPath = process.env.DS_CONTRACTS_SYNC_LEDGER!;
+    assert.match(path.basename(path.dirname(ledgerPath)), /^dsc-receive-ledger-/);
+    assert.equal(existsSync(ledgerPath), false, "no ledger write without --apply");
 
     // WITH --apply: the contract file becomes the proposal, canonical form.
     const code2 = await figmaCommand([
@@ -576,6 +673,10 @@ test("figma receive (shell) without --apply: proposal artifact saved, contract f
       readFileSync(contractPath, "utf8"),
       JSON.stringify(ENVELOPE.proposedContract, null, 2) + "\n",
     );
+    const ledger = JSON.parse(readFileSync(ledgerPath, "utf8"));
+    assert.equal(ledger.records.length, 1);
+    assert.equal(ledger.records[0].contractId, "polaris.badge");
+    assert.equal(ledger.records[0].provenance, "receive-apply");
   } finally {
     server.close();
     rmSync(dir, { recursive: true, force: true });
@@ -636,6 +737,9 @@ test("figma receive (shell) v2: stub + minted land only WITH --apply; the artifa
       1,
       "the artifact carries the minted tree verbatim",
     );
+    const ledgerPath = process.env.DS_CONTRACTS_SYNC_LEDGER!;
+    assert.match(path.basename(path.dirname(ledgerPath)), /^dsc-receive-ledger-/);
+    assert.equal(existsSync(ledgerPath), false, "no ledger write without --apply");
 
     // WITH --apply: contract + stub + minted all land.
     const code2 = await figmaCommand([
@@ -661,6 +765,10 @@ test("figma receive (shell) v2: stub + minted land only WITH --apply; the artifa
       JSON.stringify(MINTED.tree, null, 2) + "\n",
       "the minted tree lands as a DTCG file",
     );
+    const ledger = JSON.parse(readFileSync(ledgerPath, "utf8"));
+    assert.equal(ledger.records.length, 1);
+    assert.equal(ledger.records[0].contractId, "polaris.badge");
+    assert.equal(ledger.records[0].provenance, "receive-apply");
   } finally {
     server.close();
     rmSync(dir, { recursive: true, force: true });

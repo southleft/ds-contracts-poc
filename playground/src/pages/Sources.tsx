@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import type { SourceContractPlan } from "../../../source-reference/contract-plan";
+import type { SourceBindingInventory } from "../../../source-reference/source-bindings";
+import type { BindingJobSnapshot } from "../../../source-reference/binding-jobs";
 import "./sources.css";
 
 interface Row {
@@ -64,6 +67,16 @@ interface Job {
   denominator: number;
   rows: Row[];
   problem?: string;
+  sourceStable?: boolean;
+  supplements?: Job[];
+  bindingTraces?: BindingJobSnapshot[];
+  contractAdmission?: {
+    status: "blocked";
+    acceptedContract: null;
+    plans: SourceContractPlan[];
+    sourceBindings: SourceBindingInventory[];
+    problems: string[];
+  };
 }
 function problemText(problem: string) {
   if (problem === "probe-state-mismatch:input:disabled")
@@ -82,6 +95,236 @@ function problemText(problem: string) {
     return `The rendered ${problem.split(":")[1]} does not match the source specification.`;
   return "A source check failed; inspect the diagnostic below before proceeding.";
 }
+
+function RenderedBindingTrace({ trace }: { trace: BindingJobSnapshot }) {
+  const [selectedStory, setSelectedStory] = useState("atoms-button--default");
+  const [selectedCase, setSelectedCase] = useState("0:0");
+  const [unavailableImages, setUnavailableImages] = useState<string[]>([]);
+  const row =
+    trace.rows.find((item) => item.story === selectedStory) ?? trace.rows[0];
+  const cases =
+    row?.differentials.flatMap((probe, probeIndex) =>
+      (probe.result?.cases ?? []).map((item, caseIndex) => ({
+        id: `${probeIndex}:${caseIndex}`,
+        probe,
+        probeIndex,
+        caseIndex,
+        item,
+      })),
+    ) ?? [];
+  const selected = cases.find((item) => item.id === selectedCase) ?? cases[0];
+  const observed = trace.rows.reduce(
+    (total, item) => total + item.observedDependencies,
+    0,
+  );
+  const planned = trace.rows.reduce(
+    (total, item) => total + item.plannedDependencies,
+    0,
+  );
+  return (
+    <div className="source-binding-results">
+      <p role="status">
+        <strong>
+          {trace.matched} / {trace.denominator} states structurally matched
+        </strong>
+        {" · "}
+        {trace.state}.
+        {trace.state === "running" &&
+          " Recorded-source replay is running; final results are pending."}
+        {trace.state === "interrupted" &&
+          " The previous process stopped. Retry to create a new attempt; no success is assumed."}
+        {trace.state === "failed" &&
+          " The trace failed or its recorded evidence no longer validates."}
+      </p>
+      {trace.problems.map((problem, index) => (
+        <p role="alert" key={index}>
+          {problem}
+        </p>
+      ))}
+      {trace.rows.length > 0 && (
+        <>
+          <p>
+            <strong>
+              {observed} / {planned} planned dependencies observed
+            </strong>{" "}
+            in finite probes of the default Button only. A structural match is
+            not proof of every attribute, state or behavior.
+          </p>
+          <div className="source-binding-table-wrap">
+            <table className="source-binding-table">
+              <caption>Every selected Button state, including refusals</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Source state</th>
+                  <th scope="col">Structure</th>
+                  <th scope="col">Elements / slots</th>
+                  <th scope="col">Dependencies</th>
+                </tr>
+              </thead>
+              <tbody>
+                {trace.rows.map((item) => (
+                  <tr key={item.story}>
+                    <th scope="row">
+                      <button
+                        type="button"
+                        aria-pressed={row?.story === item.story}
+                        onClick={() => {
+                          setSelectedStory(item.story);
+                          setSelectedCase("0:0");
+                        }}
+                      >
+                        {item.story.replace("atoms-button--", "")}
+                      </button>
+                    </th>
+                    <td>
+                      {item.status === "structure-matched"
+                        ? "Matched"
+                        : "Refused"}
+                    </td>
+                    <td>
+                      {item.matchedElements} / {item.mappedSlots}
+                    </td>
+                    <td>
+                      {item.plannedDependencies
+                        ? `${item.observedDependencies} / ${item.plannedDependencies} observed`
+                        : "Not probed"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {row && (
+            <section aria-label="Selected rendered binding evidence">
+              <h3>{row.story.replace("--", " / ")}</h3>
+              {row.problems.length > 0 && (
+                <ul>
+                  {row.problems.map((problem, index) => (
+                    <li key={index}>
+                      <code>{problem}</code>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {row.differentials.map((probe) => (
+                <details key={probe.key}>
+                  <summary>
+                    {probe.key}:{" "}
+                    {probe.result?.status.replaceAll("-", " ") ??
+                      "not observed"}
+                  </summary>
+                  <ul>
+                    {[...probe.problems, ...(probe.result?.problems ?? [])].map(
+                      (problem, index) => (
+                        <li key={index}>
+                          <code>{problem}</code>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                  {probe.result?.limitations.length ? (
+                    <ul>
+                      {probe.result.limitations.map((limit, index) => (
+                        <li key={index}>{limit}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </details>
+              ))}
+              {cases.length > 0 && (
+                <label className="source-binding-select">
+                  Inspect a controlled replay change
+                  <select
+                    value={selected?.id ?? ""}
+                    onChange={(event) => setSelectedCase(event.target.value)}
+                  >
+                    {cases.map(({ id, probe, item }) => (
+                      <option key={id} value={id}>
+                        {probe.key} →{" "}
+                        {item.value.kind === "undefined"
+                          ? "(omitted / undefined)"
+                          : JSON.stringify(item.value.value)}{" "}
+                        · {item.status}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {selected && (
+                <>
+                  <p className="source-note">
+                    Actual browser captures before and after this one
+                    intervention, not Figma or generated output. The changed
+                    capture does not replace the original answer key. ARIA-only
+                    changes may look identical.
+                  </p>
+                  {selected.item.problems.length > 0 && (
+                    <p>
+                      Case refused:{" "}
+                      <code>{selected.item.problems.join(", ")}</code>
+                    </p>
+                  )}
+                  <div className="source-images source-binding-images">
+                    {(["before", "after"] as const).map((phase) => {
+                      const hash =
+                        phase === "before"
+                          ? selected.item.beforePngSha256
+                          : selected.item.afterPngSha256;
+                      const src = `/api/source-reference/bindings/${encodeURIComponent(trace.id)}/${encodeURIComponent(row.story)}/probe-${selected.probeIndex}-case-${selected.caseIndex}-${phase}.png`;
+                      return (
+                        <figure key={`${selected.id}-${phase}`}>
+                          <figcaption>
+                            {phase === "before"
+                              ? "Before: recorded-source replay"
+                              : "After: controlled source intervention"}
+                          </figcaption>
+                          {unavailableImages.includes(src) ? (
+                            <p role="alert">
+                              This recorded image is unavailable or no longer
+                              validates. It cannot be used as evidence.
+                            </p>
+                          ) : hash && /^[a-f0-9]{64}$/.test(hash) ? (
+                            <a href={src} target="_blank" rel="noreferrer">
+                              <img
+                                src={src}
+                                alt={`${row.story}, ${selected.probe.key}, ${phase} intervention`}
+                                onError={() =>
+                                  setUnavailableImages((current) =>
+                                    current.includes(src)
+                                      ? current
+                                      : [...current, src],
+                                  )
+                                }
+                              />
+                            </a>
+                          ) : (
+                            <p>No verified image recorded for this case.</p>
+                          )}
+                        </figure>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+              {!cases.length && (
+                <p>
+                  No controlled dependency probes were recorded for this state.{" "}
+                  {row.status === "refused"
+                    ? "The refusal remains in the denominator."
+                    : "Only its structural correspondence was checked."}
+                </p>
+              )}
+            </section>
+          )}
+        </>
+      )}
+      <details>
+        <summary>Trace identity</summary>
+        <code>{trace.id}</code>
+      </details>
+    </div>
+  );
+}
 export function Sources() {
   const [origin, setOrigin] = useState("http://127.0.0.1:6017");
   const [job, setJob] = useState<Job | null>(null);
@@ -89,6 +332,10 @@ export function Sources() {
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState("atoms-button--default");
+  const capturing =
+    job?.state === "running" ||
+    !!job?.supplements?.some((supplement) => supplement.state === "running") ||
+    !!job?.bindingTraces?.some((trace) => trace.state === "running");
   useEffect(() => {
     let alive = true;
     fetch("/api/source-reference")
@@ -121,7 +368,7 @@ export function Sources() {
     };
   }, []);
   useEffect(() => {
-    if (job?.state !== "running") return;
+    if (!capturing || !job) return;
     let alive = true;
     const timer = setInterval(
       () =>
@@ -148,7 +395,7 @@ export function Sources() {
       alive = false;
       clearInterval(timer);
     };
-  }, [job?.id, job?.state]);
+  }, [job?.id, capturing]);
   async function validate() {
     setBusy(true);
     setError("");
@@ -167,7 +414,64 @@ export function Sources() {
       setBusy(false);
     }
   }
-  const row = job?.rows.find((r) => r.story === selected);
+  async function captureMissingVariants() {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-variants`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ origin, retry: true }),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setJob(data);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Supplemental capture could not start.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function traceRenderedBindings() {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-bindings`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(
+            job.bindingTraces?.length ? { retry: true } : {},
+          ),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setJob(data);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Binding replay could not start.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  const supplement = job?.supplements?.at(-1);
+  const bindingTrace = job?.bindingTraces?.at(-1);
+  const allRows = [...(job?.rows ?? []), ...(supplement?.rows ?? [])];
+  const row = allRows.find((r) => r.story === selected);
   return (
     <div className="source-workspace">
       <p className="source-eyebrow">Code → design · source connection</p>
@@ -193,7 +497,7 @@ export function Sources() {
             required
           />
         </label>
-        <button disabled={!ready || busy || job?.state === "running"}>
+        <button disabled={!ready || busy || capturing}>
           {busy
             ? "Connecting…"
             : job?.state === "running"
@@ -266,9 +570,292 @@ export function Sources() {
             </p>
           )}
           {job.problem && <p role="alert">{job.problem}</p>}
+          <section
+            className="source-admission"
+            aria-label="Component contract admission"
+          >
+            <h2>What still prevents an editable component?</h2>
+            <p>
+              Source validity is not component completeness. This work order
+              rechecks the recorded images, trees and declared API together. No
+              contract is accepted while bindings and behavior are unproven.
+            </p>
+            {job.contractAdmission?.problems.map((problem) => (
+              <p key={problem}>
+                <code>{problem}</code>
+              </p>
+            ))}
+            {job.contractAdmission?.plans.map((plan) => (
+              <article key={plan.component.tagName}>
+                <h3>
+                  <code>{plan.component.tagName}</code> · contract blocked
+                </h3>
+                <p>
+                  {plan.evidence.observedStories.length} recorded states
+                  contribute semantic evidence;{" "}
+                  {plan.evidence.rejectedStories.length} refused. No Figma
+                  result is implied.
+                </p>
+                <ul>
+                  {plan.enumDomains.map((domain) => (
+                    <li key={domain.property}>
+                      <strong>
+                        {domain.property}: {domain.observed} / {domain.total}{" "}
+                        states observed
+                      </strong>
+                      {domain.omission &&
+                        " (including omission; no public default invented)"}
+                      .
+                      {domain.missing.length > 0 &&
+                        ` Missing: ${domain.missing.map((state) => (state.kind === "omitted" ? "(omitted)" : state.value)).join(", ")}.`}
+                    </li>
+                  ))}
+                </ul>
+                <details>
+                  <summary>
+                    Unresolved bindings, behavior and coverage (
+                    {plan.findings.length})
+                  </summary>
+                  <ul>
+                    {plan.findings.map((finding, index) => (
+                      <li key={index}>
+                        <code>
+                          {finding.code}
+                          {finding.property
+                            ? `: ${finding.property}`
+                            : finding.slot !== undefined
+                              ? `: ${finding.slot || "(default slot)"}`
+                              : ""}
+                        </code>{" "}
+                        {finding.message}
+                        {finding.story && ` (${finding.story})`}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+                {job.contractAdmission?.sourceBindings
+                  ?.filter((facts) => facts.tagName === plan.component.tagName)
+                  .map((facts) => (
+                    <details key={facts.tagName}>
+                      <summary>
+                        Trace the actual source:{" "}
+                        {facts.status === "refused"
+                          ? "source identity refused"
+                          : "syntax read; runtime bindings unverified"}
+                      </summary>
+                      <p>
+                        <code>{facts.entry.path}</code> ·{" "}
+                        {facts.entry.className}. {facts.modules.length} local
+                        code files hash-checked against this recorded run. This
+                        is not a generated component or a complete behavior
+                        contract.
+                      </p>
+                      <p>
+                        Source inventory digest: <code>{facts.digest}</code>
+                      </p>
+                      <h4>Authored render branches and slots</h4>
+                      <ul>
+                        {facts.templates.map((template) => (
+                          <li key={template.id}>
+                            Line {template.line}: {template.role} template ·{" "}
+                            {template.roots.join(", ") || "no static root"}
+                            {template.guards.map((guard, index) => (
+                              <span key={index}>
+                                {" "}
+                                · <code>{guard.expression}</code> is{" "}
+                                {guard.when}
+                              </span>
+                            ))}
+                            {template.guardAlternatives &&
+                              ` · unresolved shared template with ${template.guardAlternatives.length} alternative guard paths; the displayed path is not exclusive`}
+                            {template.slots.length > 0 &&
+                              ` · slots: ${template.slots.map((slot) => slot || "(default)").join(", ")}`}
+                            {!template.syntaxComplete &&
+                              " · contains unsupported syntax"}
+                          </li>
+                        ))}
+                      </ul>
+                      <h4>Attribute, property and event expressions</h4>
+                      <p>
+                        These are source expressions, not inferred matches to
+                        screenshot text. Rendered-part identity and target
+                        preservation remain unproven.
+                      </p>
+                      <ul>
+                        {facts.bindings.map((binding, index) => (
+                          <li key={index}>
+                            Line {binding.line}: <code>{binding.tag}</code> ·{" "}
+                            {binding.channel} <code>{binding.target}</code> ←{" "}
+                            <code>{binding.expression}</code> (
+                            {binding.syntaxKind})
+                          </li>
+                        ))}
+                      </ul>
+                      <h4>Classes in the local import graph</h4>
+                      <p>
+                        Includes base and controller declarations; this is not a
+                        resolved inheritance chain.
+                      </p>
+                      <ul>
+                        {facts.classes.map((cls) => (
+                          <li key={`${cls.modulePath}:${cls.name}`}>
+                            <code>{cls.name}</code>
+                            {cls.extends && (
+                              <>
+                                {" "}
+                                extends <code>{cls.extends}</code>
+                              </>
+                            )}{" "}
+                            · public members:{" "}
+                            {cls.publicMembers.join(", ") || "none"}
+                          </li>
+                        ))}
+                      </ul>
+                      <ul>
+                        {facts.problems.map((problem, index) => (
+                          <li key={index}>
+                            <code>{problem}</code>
+                          </li>
+                        ))}
+                      </ul>
+                      <ul>
+                        {facts.limitations.map((limitation, index) => (
+                          <li key={index}>{limitation}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  ))}
+              </article>
+            ))}
+          </section>
+          <section
+            className="source-admission"
+            aria-label="Additional Button appearance evidence"
+          >
+            <h2>Complete the Button appearance evidence</h2>
+            <p>
+              The original cohort covers the omitted and secondary appearances.
+              Its declared API also includes tertiary, bare and danger. Capture
+              those three original stories without rerunning or replacing the
+              ten-state baseline above.
+            </p>
+            <div className="source-connect">
+              <button
+                type="button"
+                disabled={
+                  busy ||
+                  capturing ||
+                  job.state !== "complete" ||
+                  job.sourceStable !== true ||
+                  (supplement?.state === "complete" &&
+                    supplement.qualified === supplement.denominator)
+                }
+                onClick={() => void captureMissingVariants()}
+              >
+                {supplement?.state === "running"
+                  ? "Capturing missing Button states…"
+                  : supplement?.state === "complete" &&
+                      supplement.qualified === supplement.denominator
+                    ? "Supplemental capture complete"
+                    : supplement
+                      ? "Retry missing Button states"
+                      : "Capture missing Button states"}
+              </button>
+            </div>
+            {supplement && (
+              <p>
+                Additional source references:{" "}
+                <strong>
+                  {supplement.qualified} / {supplement.denominator} valid
+                </strong>{" "}
+                · {supplement.state}. The baseline denominator and rejected
+                states are unchanged.
+              </p>
+            )}
+            {supplement?.problem && <p role="alert">{supplement.problem}</p>}
+            {(job.supplements?.length ?? 0) > 1 && (
+              <details>
+                <summary>Preserved supplemental attempts</summary>
+                <ul>
+                  {job.supplements!.map((attempt) => (
+                    <li key={attempt.id}>
+                      <code>{attempt.id}</code>: {attempt.qualified}/
+                      {attempt.denominator} source references valid ·{" "}
+                      {attempt.state}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+            <p className="source-note">
+              Same pinned source bytes required. This does not prove
+              prop-to-part bindings, token bindings, interaction behavior or a
+              generatable contract. No source or Figma files are changed.
+            </p>
+          </section>
+          <section
+            className="source-admission source-binding-trace"
+            aria-label="Rendered source binding trace"
+          >
+            <h2>Trace rendered bindings</h2>
+            <p>
+              Join the pinned source syntax to its actual rendered elements and
+              slots. Replay all four original Button states, plus the three
+              supplemental appearances when recorded; retain every refused state
+              in the result. No original capture is replaced.
+            </p>
+            <p className="source-note">
+              Controlled probes are limited to three dependencies in the default
+              Button: label → aria-label, isDisabled → aria-disabled, and
+              default slot text. This does not prove the complete API, token
+              bindings, interactions or conversion. No contract is accepted and
+              no Figma file or source file is changed.
+            </p>
+            <div className="source-connect">
+              <button
+                type="button"
+                disabled={
+                  busy ||
+                  capturing ||
+                  job.state !== "complete" ||
+                  job.sourceStable !== true ||
+                  (!!supplement && supplement.state !== "complete")
+                }
+                onClick={() => void traceRenderedBindings()}
+              >
+                {bindingTrace?.state === "running"
+                  ? "Tracing rendered bindings…"
+                  : bindingTrace
+                    ? "Retry rendered binding trace"
+                    : "Trace rendered bindings"}
+              </button>
+            </div>
+            {bindingTrace ? (
+              <RenderedBindingTrace
+                key={bindingTrace.id}
+                trace={bindingTrace}
+              />
+            ) : (
+              <p>No rendered binding trace recorded yet.</p>
+            )}
+            {(job.bindingTraces?.length ?? 0) > 1 && (
+              <details>
+                <summary>Preserved binding trace attempts</summary>
+                <ul>
+                  {job.bindingTraces!.map((attempt) => (
+                    <li key={attempt.id}>
+                      <code>{attempt.id}</code>: {attempt.matched} /{" "}
+                      {attempt.denominator} structurally matched ·{" "}
+                      {attempt.state}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+          </section>
           <div className="source-evidence">
             <nav aria-label="All selected source states">
-              {job.rows.map((r) => (
+              {allRows.map((r) => (
                 <button
                   key={r.story}
                   aria-pressed={selected === r.story}

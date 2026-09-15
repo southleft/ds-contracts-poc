@@ -21,7 +21,7 @@ const card: SourceProfile = {
     'border-radius':'8px','background-color':'rgb(24, 24, 24)',color:'rgb(248, 248, 246)'},
   requiredTokens:{...theme,'--al-theme-color-background-default':'#181818','--al-theme-color-content-default':'#f8f8f6'},
 };
-type CohortEntry = {story:string; profile:SourceProfile; limitations:string[]};
+export type CohortEntry = {story:string; profile:SourceProfile; limitations:string[]};
 function cardProbes(state:string): SourceProfile['probes'] {
   if (state === 'default') return {placeholder:{path:['al-card f-po','.f-po']}};
   return {
@@ -65,3 +65,46 @@ export const altitudeCohort: CohortEntry[] = [
       'Slot reuse and popover behavior not yet measured.'],
   })),
 ];
+
+/** The three declared Button variant values absent from the original cohort.
+ * Keep this separate: supplementing evidence must not rewrite the original
+ * ten-story denominator or turn an unmeasured state into a passing result.
+ * Witnesses follow button.scss's own variant rules and their dark token
+ * aliases, resolved through styles/dist/tokens.json before any capture. */
+export const altitudeButtonVariants = (['tertiary','bare','danger'] as const).map<CohortEntry>(variant => ({
+    story:`atoms-button--${variant}`,
+    profile:{
+      ...button,
+      id:`altitude-button-${variant}`,
+      provenance:`Altitude ${altitudeRevision}: components/button/button.stories.ts exports ${variant[0].toUpperCase() + variant.slice(1)} with variant='${variant}'; components/button/button.scss .al-c-button--${variant} and styles/dist/scss/theme/tokens-dark.scss aliases resolved through styles/dist/tokens.json; original Storybook dark provider, not a learned screenshot oracle.`,
+      path:['al-button',`button.al-c-button--${variant}`],
+      requiredStyles:{
+        ...button.requiredStyles,
+        opacity:'1',
+        'background-color':variant === 'danger' ? 'rgb(240, 87, 53)' : 'rgba(0, 0, 0, 0)',
+        color:variant === 'danger' ? 'rgb(31, 6, 0)' : 'rgb(248, 248, 246)',
+        'border-top-width':variant === 'tertiary' ? '1px' : '0px',
+        'border-top-style':variant === 'tertiary' ? 'solid' : 'none',
+        ...(variant === 'tertiary' ? {'border-top-color':'rgb(138, 138, 138)'} : {}),
+      },
+      requiredTokens:{
+        ...button.requiredTokens,
+        ...(variant === 'danger' ? {
+          '--al-theme-color-background-danger-default':'#f05735',
+          '--al-theme-color-content-danger-weak':'#1f0600',
+        } : {
+          '--al-theme-color-background-transparent-default':'rgba(0, 0, 0, 0)',
+          '--al-theme-color-content-default':'#f8f8f6',
+        }),
+        ...(variant === 'tertiary' ? {
+          '--al-theme-border-width':'1px',
+          '--al-theme-color-border-default':'#8a8a8a',
+        } : {}),
+      },
+      probes:{input:{path:['al-button',`button.al-c-button--${variant}`],properties:{disabled:false}}},
+    },
+    limitations:[
+      'Supplemental original-story source readiness only; acceptance and code/canvas conversion remain unmeasured.',
+      'This observes one declared variant at rest with the original text slot; other props, content, activation and keyboard behavior are not qualified.',
+    ],
+  }));

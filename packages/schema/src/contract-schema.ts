@@ -2569,6 +2569,24 @@ export const CodeAnchorsSchema = z.strictObject({
   export: z.string(),
 });
 
+/** An opt-in, content-addressed reference to an original code runtime.
+ * The artifact retains implementation and dependencies; the interface records
+ * the full public API, including inherited and non-writable/ref members; the
+ * binding record maps the supported contract projection onto that interface.
+ * These identities are deliberately separate. This reference neither reduces
+ * the original API to Contract.props nor proves behavioral/design equivalence.
+ *
+ * Resolution and content verification belong to the trusted emitter context.
+ * No executable source, module path or replacement interface is accepted here
+ * (including when this inert reference is preserved through a canvas). */
+export const CodeRuntimeBindingSchema = z.strictObject({
+  version: z.literal(1),
+  kind: z.literal("custom-element"),
+  artifactRevision: z.string().regex(/^sha256:[0-9a-f]{64}$/),
+  interfaceRevision: z.string().regex(/^sha256:[0-9a-f]{64}$/),
+  bindingRevision: z.string().regex(/^sha256:[0-9a-f]{64}$/),
+});
+
 export const ContractBindingsSchema = z.strictObject({
   figma: z.strictObject({
     /** How this contract manifests on the canvas. 'component' (default)
@@ -2586,6 +2604,9 @@ export const ContractBindingsSchema = z.strictObject({
   code: z.strictObject({
     /** (v16: anchors.code) */
     anchors: CodeAnchorsSchema,
+    /** Optional retained implementation; never silently replaced by generated
+     * native anatomy when its verified artifact or bindings are unavailable. */
+    runtime: CodeRuntimeBindingSchema.optional(),
   }),
 });
 
@@ -2745,6 +2766,7 @@ export type Contract = z.infer<typeof ContractSchema>;
 export type ContractBindings = z.infer<typeof ContractBindingsSchema>;
 export type FigmaAnchors = z.infer<typeof FigmaAnchorsSchema>;
 export type CodeAnchors = z.infer<typeof CodeAnchorsSchema>;
+export type CodeRuntimeBinding = z.infer<typeof CodeRuntimeBindingSchema>;
 export type ContractProvenance = z.infer<typeof ContractProvenanceSchema>;
 export type Prop = z.infer<typeof PropSchema>;
 export type ContractEvent = z.infer<typeof EventSchema>;

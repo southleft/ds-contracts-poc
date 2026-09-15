@@ -145,3 +145,28 @@ These facts are inputs to the existing universal contract authority, not another
 contract schema or generator. The next boundary must prove source-to-part joins,
 typed bindings, legal omitted variants, editable content and event behavior
 through the existing emitters before any generated cohort can be qualified.
+
+## Component admission and missing-state capture
+
+The application derives `contract-plan.ts` results from actual recorded bytes,
+not just a stored green status. It checks manifest/declaration identity,
+source/replay PNG and tree hashes, stored readiness witnesses and exact semantic
+replay. Finite string enums retain omission as distinct from public values.
+Coverage is per axis, not the cross-product of every prop, state and theme.
+Slot assignments and fallbacks, host props, native state and ARIA remain separate;
+equal strings are not proof of a causal content binding. This planner does not
+produce an accepted Contract or infer missing behavior.
+
+On **Source validation**, inspect the component work order below the original
+cohort results. Click **Capture missing Button states** to observe the original
+tertiary, bare and danger stories. This uses the existing capture/replay pipeline
+in a new evidence directory, tied to the exact original measurement and source
+file hashes. The original ten-state denominator and its refusals never change.
+Supplemental results appear separately; a retry requires an explicit action and
+preserves the earlier attempt. No Figma or source files are edited.
+
+Restart recovery and live snapshots reject altered images and mismatched
+parent/source records. Recorded-byte verification does not assert that the
+current Storybook is freshly qualified. A missing/changed recorded manifest
+prevents contract planning. Full API bindings, token meaning, reusable target
+output and the autonomous apply/verify loop remain unfinished.

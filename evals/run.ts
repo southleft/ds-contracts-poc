@@ -5159,21 +5159,19 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     //      promise the CLI has to keep, so the REAL emitters run here and
     //      their paths must equal plannedCodePaths() for html, react-inline
     //      and (through generateCodeFiles, the shipping generator) react.
-    //   b. "BYTE FOR BYTE" IS MEASURED, NOT CLAIMED. The tool-generated PR
-    //      body says re-running the emitters reproduces the component byte
-    //      for byte; so the repo's OWN Badge is regenerated from its OWN
-    //      contract + four token trees + icons and compared to the committed
-    //      files. A formatter change, a prettier bump, a stray emitter tweak
-    //      turns that sentence into a lie — and fails here first.
+    //   b. BYTE IDENTITY IS MEASURED FOR THIS FIXTURE ONLY. The repo's OWN
+    //      Badge is regenerated from its OWN contract + four token trees +
+    //      icons and compared to committed files. That exact comparison is
+    //      retained; no provenance marker generalizes it to other proposals.
     //   c. The react ROOT BARREL is never shipped (it names the whole
     //      library; a proposal knows one component) and its absence is NAMED.
     //   d. A CONTRACT-PROPOSAL envelope is UNWRAPPED — committing the
     //      envelope puts a non-contract where a contract belongs, which is
     //      the exact defect readProposalInput() was written to close.
-    //   e. THE ASYMMETRY IS NON-NEGOTIABLE. tool-generated says "true round
-    //      trip"/"byte for byte"; hand-built says INVERSION and "STARTING
-    //      POINT, NOT A REPRODUCTION" and MUST NOT anywhere say "byte for
-    //      byte"; an unstamped envelope says neither and admits it.
+    //   e. ORIGIN NEVER GRANTS PROOF. tool-generated is a marker claim with
+    //      explicit verification requirements; hand-built is the legacy
+    //      unmarked classification, not proof of human authorship. The same
+    //      proposal receives each flag below; none can certify reproduction.
     //   f. A FRAMEWORK IS NEVER GUESSED: no config and no --target refuses
     //      by name ("not something to guess"), as do a target with nowhere
     //      to put the code and an unregistered target.
@@ -5235,7 +5233,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         for (const f of gen.files) {
           const committed = readFileSync(path.join(CWD, f.destPath), 'utf8');
           if (committed !== f.contents) {
-            throw new Error('NOT a round trip: ' + f.destPath + ' regenerated from the contract in this repo differs from the COMMITTED file (' + committed.length + ' vs ' + f.contents.length + ' chars) — the tool-generated PR body says "byte for byte"');
+            throw new Error('Fixture byte-identity regression: ' + f.destPath + ' regenerated from the contract in this repo differs from the COMMITTED file (' + committed.length + ' vs ' + f.contents.length + ' chars)');
           }
         }
         if (gen.files.some((f) => f.destPath === cfg.outDir + '/index.ts')) {
@@ -5246,7 +5244,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
 
         // (d) A CONTRACT-PROPOSAL envelope is unwrapped to its contract, and
-        //     the plugin's stamp decides the provenance — never a guess.
+        //     the recorded flag retains its legacy label, never proof.
         const dir = path.join(CWD, 'canvas-code-loop');
         mkdirSync(dir, { recursive: true });
         const contractDoc = readJson(CONTRACT);
@@ -5270,17 +5268,17 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           bodies[want] = built.plan.body;
         }
 
-        // (e) THE PR-BODY ASYMMETRY — the sentence a reviewer reads.
+        // (e) ORIGIN IS NOT VERIFICATION — the sentence a reviewer reads.
         for (const [prov, must, mustNot] of [
-          ['tool-generated', ['true round trip', 'byte for byte'], []],
-          ['hand-built', ['STARTING POINT, NOT A REPRODUCTION', 'INVERSION'], ['byte for byte']],
-          ['unrecorded', ['No canvas provenance was recorded'], []],
+          ['tool-generated', ['marker claiming ds-contracts origin', 'does not prove a successful round trip or byte-identical reproduction', 'matching trusted canonical baseline', 'preserved semantics and runtime identity', 'independent comparison'], ['was GENERATED', 'is a true round trip', 'reproduces the component']],
+          ['hand-built', ['STARTING POINT, NOT A REPRODUCTION', 'INVERSION', 'absence does not establish who drew it'], ['byte for byte', 'was HAND-BUILT']],
+          ['unrecorded', ['No canvas provenance was recorded', 'design origin is unknown'], ['is a true round trip', 'was HAND-BUILT', 'was GENERATED']],
         ]) {
           for (const phrase of must) {
             if (!bodies[prov].includes(phrase)) throw new Error(prov + ' PR body must say "' + phrase + '"');
           }
           for (const phrase of mustNot) {
-            if (bodies[prov].includes(phrase)) throw new Error(prov + ' PR body must NEVER say "' + phrase + '" — a hand-built set is an INVERSION, and promising a reproduction is the one thing this loop may not do');
+            if (bodies[prov].includes(phrase)) throw new Error(prov + ' PR body must NEVER say "' + phrase + '" — origin metadata cannot establish authorship or reproduction');
           }
         }
 

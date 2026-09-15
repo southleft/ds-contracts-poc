@@ -61,6 +61,7 @@ import {
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
 import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
+import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
@@ -4917,6 +4918,16 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
       }
     }
   }
+  // Code can test arbitrary prop truthiness; the canvas only lowers a
+  // BOOLEAN property or an explicit enum equality. Otherwise it silently
+  // draws an unconditional part (or treats an enum as the string "true").
+  for (const { name, part } of walkAnatomy(contract)) {
+    if (!part.visibleWhen || part.visibleWhen.equals !== undefined) continue;
+    const prop = contract.props.find((p) => p.name === part.visibleWhen!.prop);
+    if (prop?.type !== 'boolean') errors.push(
+      `${contract.id}: part "${name}" visibleWhen truthiness for "${part.visibleWhen.prop}" is not a boolean canvas condition (FC-VISIBLE-WHEN-TRUTHY-NONBOOLEAN) — declare an explicit enum equality or preserve the source predicate through a supported carrier; refusing to draw it unconditionally`,
+    );
+  }
   // Two slots sharing one Figma property name would mint one property and
   // silently share content between unrelated areas.
   const byProperty = new Map<string, string[]>();
@@ -5070,6 +5081,7 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
+  refuseRetainedRuntime(contract, 'figma-script', byId);
   // compileComponentData is also a public entry, used without schema parsing.
   // Validate every opt-in, including malformed non-axis uses filtered below.
   for (const p of contract.props) if (p.bindings.figma.unsetValue !== undefined) PropSchema.parse(p);

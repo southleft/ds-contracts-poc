@@ -143,6 +143,12 @@ reg("contract", "anchors", [
   "contract.bindings.code.anchors",
   "contract.bindings.code.anchors.importPath",
   "contract.bindings.code.anchors.export",
+  "contract.bindings.code.runtime",
+  "contract.bindings.code.runtime.version",
+  "contract.bindings.code.runtime.kind",
+  "contract.bindings.code.runtime.artifactRevision",
+  "contract.bindings.code.runtime.interfaceRevision",
+  "contract.bindings.code.runtime.bindingRevision",
 ]);
 reg("contract", "provenance", [
   "contract.provenance",

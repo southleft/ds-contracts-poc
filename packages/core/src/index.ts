@@ -22,6 +22,15 @@ export {
   type EmitterCtx,
 } from './emitter.js';
 
+export type {
+  RuntimeArtifactForEmission,
+  RuntimeProjectionBinding,
+  RuntimePaddingMapping,
+  RuntimeScopeValue,
+  RuntimeEmissionContext,
+} from './runtime-emission.js';
+export { refuseRetainedRuntime } from './runtime-emission.js';
+
 // Token loading from JSON objects (never paths).
 export {
   aliasTarget,

@@ -1,0 +1,23 @@
+{
+  "kind": "bounded-native-omission-engine-conformance",
+  "fixturePurpose": "Offline regression replay of recorded real-Figma canonical observations from a synthetic literal-color component. This fixture is not a fresh Figma observation, a current Altitude capture, a token-binding proof or an application-journey qualification.",
+  "engineCommit": "3158bee500dc74e6b86fcd81d38e0f68ab474277",
+  "measuredAt": "2026-09-15T15:15:27.358Z",
+  "nativeMintTimestamp": 1789484842569,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "contractNodeId": "299:4052",
+  "contractKey": "ff8ad63a320e01b2f00970afc0893b7f8b6e14e6",
+  "sourceDirectory": "private/figma-omission-conformance",
+  "byteExactCopies": {
+    "contract.json": "7c6770a9028404472d310b8aa851011f2e3b8d594cfc98241296bc811d6ebcb4",
+    "native-dump.json": "cde68fe1950a4704ac32f503587bb753cc9a33de55bc8127a8aea644bb260f21",
+    "native-mint.json": "2c0490ac51a0f8c57c9c64825d2313f3cad8ab0123b9dcd823d885c9257d4d5f",
+    "native-repeat.json": "ec4b15650e144fb32fda6824d7c8752ab2ce36792518ed4912eb1fee0942358c"
+  },
+  "recordedRepeatDumpSha256": "cde68fe1950a4704ac32f503587bb753cc9a33de55bc8127a8aea644bb260f21",
+  "limits": [
+    "Synthetic literal-color conformance fixture, not an independently styled reference or Altitude conversion.",
+    "No token-binding, content-slot, behavior, cross-theme or application-journey qualification.",
+    "Pixel deltas are measurements only; no release grade or success decision is assigned."
+  ]
+}

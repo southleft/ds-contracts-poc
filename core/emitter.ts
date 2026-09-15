@@ -50,6 +50,10 @@ export const reactEmitter: Emitter = {
       tokens: inventoryOf(ctx.tokens),
       icons: ctx.icons,
       contracts: ctx.contracts,
+      runtimeArtifacts: ctx.runtimeArtifacts,
+      tokenValues: ctx.tokens,
+      mode: ctx.mode,
+      brand: ctx.brand,
     });
     return [
       { path: `${contract.name}.tsx`, contents: tsx },
