@@ -294,3 +294,48 @@ test('html used as an attribute value is not advertised as rendered child topolo
   assert.equal(root(result, 'div').children.length, 0);
   assert.equal(expression(root(result, 'div').attributes[0]).kind, 'template', 'source expression is retained without claiming a DOM child');
 });
+
+test('opaque render control flow stays explicit even when it contains no literal html', () => {
+  for (const statement of [
+    'try { return this.other(); } catch {}',
+    'switch(this.ready) { case true: return this.other(); }',
+    'while(this.ready) { return this.other(); }',
+    'throw new Error("stop");',
+  ]) {
+    const result = read(wrap(statement + ' return html`<button></button>`;'));
+    assert.ok(result.problems.some(problem => problem.code === 'render-control-flow-unresolved'));
+    assert.equal(result.status, 'partial');
+    assert.equal(result.templates.length, 1, 'source template is retained, not claimed reachable');
+  }
+  for (const statement of ['const label = (() => { return "label"; })();', 'function getLabel() { return "label"; }']) {
+    const result = read(wrap(statement + ' return html`<button></button>`;'));
+    assert.ok(!result.problems.some(problem => problem.code === 'render-control-flow-unresolved'), 'a nested function return is not a render return');
+  }
+});
+
+test('render instance writes cannot make post-render scalar observations a branch witness', () => {
+  for (const statement of [
+    'this.href = "changed";', 'this.href ||= "changed";', 'this.count++;', '--this.count;', 'delete this.href;',
+    'this["href"] = "changed";', 'this.state.href = "changed";', '[this.href] = ["changed"];', '({href:this.href} = other);',
+    '(this as any).href = "changed";', 'this!.href = "changed";',
+    '(() => { this.href = "changed"; })();',
+    'const later = () => { this.href = "changed"; };',
+    '(function () { this.href = "changed"; }).call(this);',
+    'function update() { this.href = "changed"; } update.apply(this);',
+    'const update = function () { this.href = "changed"; }; update.bind(this)();',
+    '(function () { this.href = "changed"; }).call(this as any);',
+  ]) {
+    const result = read(wrap(statement + ' return html`<button></button>`;'));
+    assert.ok(result.problems.some(problem => problem.code === 'render-state-mutation-unresolved'), statement);
+    assert.equal(result.status, 'partial');
+    assert.equal(result.templates.length, 1, 'syntax remains inspectable without selecting a render branch');
+  }
+  const inAttribute = read(wrap('return html`<button data-side-effect=${this.href = "changed"}></button>`;'));
+  assert.ok(inAttribute.problems.some(problem => problem.code === 'render-state-mutation-unresolved'));
+  for (const statement of ['let local; [local = this.href] = [];', 'const callback = function () { this.href = "other receiver"; };']) {
+    assert.ok(!read(wrap(statement + ' return html`<button></button>`;')).problems.some(problem => problem.code === 'render-state-mutation-unresolved'), 'reads and another function receiver are not component writes');
+  }
+  const actual = readLitTemplateBindings(fixture);
+  assert.equal(actual.templates.length, 6);
+  assert.ok(!actual.problems.some(problem => problem.code === 'render-state-mutation-unresolved'));
+});

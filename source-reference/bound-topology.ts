@@ -69,7 +69,7 @@ function startMutationMonitor() {
 
 /** Join only overlapping, independently observed facts. Neither text equality
  * nor an element's CSS class is used to infer identity or an API binding. */
-function topologyJoinProblems(
+export function topologyJoinProblems(
   topology: SourceTopology,
   semantics: SemanticObservation,
 ): string[] {

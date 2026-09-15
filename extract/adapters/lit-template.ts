@@ -358,6 +358,67 @@ export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRea
   if (renders[0].asteriskToken || renders[0].modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.AsyncKeyword)) {
     problem('render-method-shape-unsupported', 'Async/generator render returns a Promise/iterator, not a directly returned TemplateResult.', renders[0]); return result;
   }
+  // Post-render scalar observations cannot identify the branch that ran when
+  // render itself writes the instance. Include lexical arrow closures without
+  // guessing whether a helper invokes them; retain the syntax but refuse its
+  // use as complete branch-selection evidence. This is not helper interpretation.
+  const unwrapWrite = (original: ts.Expression): ts.Expression => {
+    let node = unwrap(original);
+    while (ts.isAsExpression(node) || ts.isTypeAssertionExpression(node) || ts.isNonNullExpression(node)) node = unwrap(node.expression);
+    return node;
+  };
+  const componentBoundClosures = new Set<ts.Node>();
+  const localFunction = (expression: ts.Expression): ts.Node | undefined => {
+    const node = unwrapWrite(expression);
+    if (ts.isFunctionExpression(node) || ts.isArrowFunction(node)) return node;
+    if (!ts.isIdentifier(node)) return;
+    const declarations = checker.getSymbolAtLocation(node)?.declarations;
+    if (declarations?.length !== 1) return;
+    const declaration = declarations[0];
+    if (ts.isFunctionDeclaration(declaration)) return declaration;
+    if (ts.isVariableDeclaration(declaration) && declaration.initializer) {
+      const value = unwrap(declaration.initializer);
+      if (ts.isFunctionExpression(value) || ts.isArrowFunction(value)) return value;
+    }
+  };
+  const inspectExplicitReceivers = (node: ts.Node) => {
+    if (ts.isCallExpression(node) && ts.isPropertyAccessExpression(node.expression) && ['call', 'apply', 'bind'].includes(node.expression.name.text) && node.arguments[0]) {
+      const receiver = unwrapWrite(node.arguments[0]), fn = localFunction(node.expression.expression);
+      if (receiver.kind === ts.SyntaxKind.ThisKeyword && classThis(receiver) && fn) componentBoundClosures.add(fn);
+    }
+    ts.forEachChild(node, inspectExplicitReceivers);
+  };
+  inspectExplicitReceivers(renders[0].body);
+  const renderInstanceThis = (node: ts.Node): boolean => {
+    if (classThis(node)) return true;
+    for (let parent = node.parent; parent; parent = parent.parent) {
+      if (ts.isArrowFunction(parent)) continue;
+      if (ts.isFunctionDeclaration(parent) || ts.isFunctionExpression(parent)) return componentBoundClosures.has(parent);
+      if (ts.isClassLike(parent) || ts.isMethodDeclaration(parent)) return false;
+    }
+    return false;
+  };
+  const instanceWriteTarget = (original: ts.Expression): boolean => {
+    const node = unwrapWrite(original);
+    if (ts.isPropertyAccessExpression(node) || ts.isElementAccessExpression(node)) {
+      let receiver = unwrapWrite(node.expression);
+      while (ts.isPropertyAccessExpression(receiver) || ts.isElementAccessExpression(receiver)) receiver = unwrapWrite(receiver.expression);
+      return receiver.kind === ts.SyntaxKind.ThisKeyword && renderInstanceThis(receiver);
+    }
+    if (ts.isArrayLiteralExpression(node)) return node.elements.some(element => !ts.isOmittedExpression(element) && instanceWriteTarget(ts.isSpreadElement(element) ? element.expression : element));
+    if (ts.isObjectLiteralExpression(node)) return node.properties.some(property => ts.isPropertyAssignment(property) ? instanceWriteTarget(property.initializer) : ts.isSpreadAssignment(property) && instanceWriteTarget(property.expression));
+    // A destructuring default's initializer is a read, not an assignment target.
+    if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken) return instanceWriteTarget(node.left);
+    return false;
+  };
+  const inspectRenderWrites = (node: ts.Node) => {
+    const target = ts.isBinaryExpression(node) && node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment && node.operatorToken.kind <= ts.SyntaxKind.LastAssignment ? node.left
+      : (ts.isPrefixUnaryExpression(node) || ts.isPostfixUnaryExpression(node)) && [ts.SyntaxKind.PlusPlusToken, ts.SyntaxKind.MinusMinusToken].includes(node.operator) ? node.operand
+      : ts.isDeleteExpression(node) ? node.expression : undefined;
+    if (target && instanceWriteTarget(target)) problem('render-state-mutation-unresolved', 'Instance state is written within render or a lexical closure. Post-render property observations cannot establish the earlier branch; callback execution and helper side effects are not interpreted.', node);
+    ts.forEachChild(node, inspectRenderWrites);
+  };
+  inspectRenderWrites(renders[0].body);
   const renderExpression = (node: ts.Expression, guards: LitGuard[]) => {
     const value = unwrap(node);
     if (ts.isTaggedTemplateExpression(value) && htmlImport(value.tag)) { readTemplate(value, guards, 'returned'); return; }
@@ -387,6 +448,13 @@ export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRea
         fallthrough = next; continue;
       }
       if (ts.isBlock(statement)) { fallthrough = statements(statement.statements, fallthrough); continue; }
+      // These statements can change the render path without containing any
+      // literal html (for example, try { return this.other(); }). Preserve the
+      // later template, but do not let a topology matcher assume it was reached.
+      // A return inside a local callback/function is not a render-path return;
+      // declarations/initializers remain separate unproven behavior facts.
+      if (ts.isIterationStatement(statement, false) || ts.isSwitchStatement(statement) || ts.isTryStatement(statement) || ts.isThrowStatement(statement) || ts.isBreakStatement(statement) || ts.isContinueStatement(statement) || ts.isLabeledStatement(statement) || ts.isWithStatement(statement))
+        problem('render-control-flow-unresolved', 'Opaque control flow may select a different render outcome; subsequent templates are not complete selection evidence.', statement);
       problem('render-statement-uninterpreted', 'Statement is preserved; local helpers, effects and unsupported control flow are not evaluated.', statement);
       // Import-identified templates inside an unsupported statement remain
       // discoverable but are explicitly NOT returned/selected topology.

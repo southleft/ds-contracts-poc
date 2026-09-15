@@ -8,6 +8,8 @@ import {
   readFileSync,
 } from "node:fs";
 import path from "node:path";
+import { createBindingJobs } from "./binding-jobs.js";
+import type { BindingEvidenceRequest } from "./binding-evidence.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
   altitudeCohort,
@@ -71,10 +73,15 @@ export function loopbackOrigin(value: unknown): string {
 
 /** Dev-only service. No remote files, shell interpolation, Figma writes, HAR
  * downloads or owner grades. Request values cannot choose a script or checkout. */
-export function createReferenceService(repoRoot: string, launch?: Launch) {
+export function createReferenceService(
+  repoRoot: string,
+  launch?: Launch,
+  bindingLaunch?: Launch,
+) {
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
+  const bindingJobs = createBindingJobs(repoRoot, bindingLaunch);
   let active:
     { job: ReferenceJob; child: Pick<ChildProcess, "kill"> } | undefined;
   const execute: Launch =
@@ -560,6 +567,7 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       .filter((child) => child.parent?.id === job.id)
       .map(snapshot),
     contractAdmission: contractAdmission(job),
+    bindingTraces: bindingJobs.list(job.id),
   });
   function start(
     origin: string,
@@ -653,7 +661,125 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       return;
     }
     const supplementalMatch = /^([a-f0-9-]+)\/button-variants$/i.exec(route);
+    const bindingMatch = /^([a-f0-9-]+)\/button-bindings$/i.exec(route);
+    if (req.method === "POST" && bindingMatch) {
+      if (!req.headers["content-type"]?.startsWith("application/json")) {
+        json(res, 415, { error: "JSON required." });
+        return;
+      }
+      try {
+        const chunks: Buffer[] = [];
+        let size = 0;
+        for await (const chunk of req) {
+          size += chunk.length;
+          if (size > 2048) throw Error("Request too large.");
+          chunks.push(Buffer.from(chunk));
+        }
+        const request = JSON.parse(Buffer.concat(chunks).toString());
+        if (
+          !object(request) ||
+          Object.keys(request).some((key) => key !== "retry") ||
+          (request.retry !== undefined && typeof request.retry !== "boolean")
+        ) {
+          json(res, 400, {
+            error:
+              "Only an optional Boolean retry is accepted; source, scripts and replay targets are fixed.",
+          });
+          return;
+        }
+        const baseline = jobs.get(bindingMatch[1]);
+        const file = baseline
+          ? evidenceFile(baseline.id, "measurement.json")
+          : null;
+        const parent = file
+          ? { id: baseline!.id, measurementSha256: fileHash(file) }
+          : undefined;
+        if (
+          !baseline ||
+          baseline.parent ||
+          baseline.state !== "complete" ||
+          !file ||
+          !parentMatches(parent)
+        ) {
+          json(res, 409, {
+            error:
+              "A complete unchanged original baseline is required for binding replay.",
+          });
+          return;
+        }
+        if (active) {
+          json(res, 409, {
+            error:
+              "An original-source capture is running. Wait for it to finish before replaying bindings.",
+          });
+          return;
+        }
+        const supplement = [...jobs.values()]
+          .filter((child) => child.parent?.id === baseline.id)
+          .at(-1);
+        const evidence: BindingEvidenceRequest = {
+          version: 1,
+          baseline: { id: baseline.id, sha256: parent!.measurementSha256 },
+        };
+        if (supplement) {
+          const childFile = evidenceFile(supplement.id, "measurement.json");
+          const child = childFile ? read(childFile) : null;
+          if (
+            supplement.state !== "complete" ||
+            !childFile ||
+            !supplementMatches(child?.parent, child?.sourceHashes)
+          ) {
+            json(res, 409, {
+              error:
+                "The latest supplemental source evidence is incomplete or changed; it cannot be silently omitted.",
+            });
+            return;
+          }
+          evidence.supplement = {
+            id: supplement.id,
+            sha256: fileHash(childFile),
+          };
+        }
+        bindingJobs.start(evidence, request.retry === true);
+        json(res, 202, snapshotWithSupplement(baseline));
+      } catch {
+        json(res, 409, {
+          error:
+            "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
+        });
+      }
+      return;
+    }
+    const bindingImage =
+      /^bindings\/([a-f0-9-]+)\/([a-z-]+)\/(replay\.png|probe-[0-2]-case-[0-2]-(?:before|after)\.png)$/i.exec(
+        route,
+      );
+    if (req.method === "GET" && bindingImage) {
+      const bytes = bindingJobs.image(
+        bindingImage[1],
+        bindingImage[2],
+        bindingImage[3],
+      );
+      if (!bytes) {
+        json(res, 404, {
+          error:
+            "Binding image is unavailable or its evidence no longer validates.",
+        });
+        return;
+      }
+      res.setHeader("Content-Type", "image/png");
+      res.setHeader("Cache-Control", "no-store");
+      res.end(bytes);
+      return;
+    }
     if (req.method === "POST" && (!route || supplementalMatch)) {
+      if (bindingJobs.running) {
+        json(res, 409, {
+          error:
+            "A recorded-source binding replay is running. Wait before starting another capture.",
+        });
+        return;
+      }
       if (!req.headers["content-type"]?.startsWith("application/json")) {
         json(res, 415, { error: "JSON required." });
         return;
@@ -777,6 +903,7 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
   return {
     handle,
     close() {
+      bindingJobs.close();
       if (active) {
         active.job.state = "interrupted";
         active.child.kill("SIGTERM");
