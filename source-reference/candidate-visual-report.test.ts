@@ -14,8 +14,11 @@ import { gunzipSync } from "node:zlib";
 import test from "node:test";
 import { revisionOf } from "../core/contract-provenance.js";
 import { emitReact } from "../core/emit-react.js";
-import { createFigmaEngine } from "../core/emit-figma-script.js";
+import { createFigmaEngine, type NodeSpec } from "../core/emit-figma-script.js";
 import { flattenTokens } from "../core/tokens.js";
+import type { RuntimeArtifactForEmission } from "../core/runtime-emission.js";
+import { prepareNativeSourceCandidate } from "./native-source-candidate.js";
+import { prepareNativeSourceInspectionPlan } from "./native-source-plan.js";
 import type { VerifiedBindingSelection } from "./binding-jobs.js";
 import { altitudeCohort, altitudeButtonVariants } from "./altitude-cohort.js";
 import type { CandidateVisualValidationContext } from "./candidate-jobs.js";
@@ -235,6 +238,259 @@ function v3Fixture() {
     rmSync(directory, { recursive: true, force: true });
   }
 }
+
+/** The native context's trust-boundary fixture retains actual source evidence
+ * but uses a synthetic, hash-pinned runtime interface. It executes no runtime
+ * and makes no native fidelity claim. */
+function nativeContextFixture() {
+  const f = v3Fixture();
+  const iface = {
+    module: { path: "fixture.js", exportName: "Fixture" },
+    declaration: { path: "fixture.d.ts", exportName: "Fixture" },
+    writableProperties: ["variant"],
+    properties: [
+      {
+        name: "variant",
+        typeText: "'secondary' | 'tertiary' | 'bare' | 'danger' | undefined",
+        writable: true,
+      },
+    ],
+    slots: [{ name: "before" }, { name: "" }, { name: "after" }],
+    peerRuntime: {
+      name: "react" as const,
+      major: 19 as const,
+      mounting: "direct-custom-element" as const,
+    },
+  };
+  const artifact: RuntimeArtifactForEmission = {
+    artifactRevision: f.preparation.report.runtime.artifactRevision,
+    interfaceRevision: revisionOf(iface),
+    interface: iface,
+    registrationTag: "native-context-fixture",
+    stylesheets: [],
+  };
+  f.preparation.report.runtime.interfaceRevision = artifact.interfaceRevision;
+  f.preparation.report.semantics.runtime!.interfaceRevision =
+    artifact.interfaceRevision;
+  f.preparation.report.semanticsRevision = revisionOf(
+    f.preparation.report.semantics,
+  );
+  f.preparation.reportSha256 = sha(JSON.stringify(f.preparation.report));
+  const report = buildCandidateVisualReportV3(
+    f.preparation,
+    f.selection,
+    f.tokens,
+  );
+  return { ...f, artifact, expectedReportRevision: revisionOf(report), report };
+}
+
+const nativeOperation = {
+  id: "00000000-0000-4000-8000-000000000003",
+  fileKey: "byMp6lt0Ij9b2QbkDGFwBh",
+};
+
+test("native plan joins the complete source denominator, empty mains, comparison content and scoped variables", () => {
+  const source = nativeContextFixture();
+  const before = JSON.stringify(source);
+  const { plan, revision } = prepareNativeSourceInspectionPlan({
+    source,
+    operation: nativeOperation,
+  });
+  assert.equal(plan.acceptedContract, null);
+  assert.equal(plan.nativeQualification, "unqualified");
+  assert.equal(plan.sourceProjection.binding.version, 0);
+  assert.equal(plan.component.variants.length, 5);
+  assert.deepEqual(plan.component.boolProps, []);
+  assert.equal(plan.samples.cases.length, 7);
+  assert.equal(
+    plan.samples.cases.filter((c) => c.status === "lowered").length,
+    6,
+  );
+  assert.equal(
+    plan.samples.cases.filter((c) => c.status === "refused").length,
+    1,
+  );
+  assert.equal(plan.samples.cases.flatMap((c) => c.slots).length, 7);
+  assert.equal(plan.tokenPreparation.modes.length, 1);
+  assert.equal(plan.tokenPreparation.modes[0].nativeModeName, "Dark");
+  assert.ok(
+    plan.tokenPreparation.requestedTokenPaths.includes(
+      "theme-color-background-primary-default",
+    ),
+  );
+  assert.ok(
+    plan.tokenPreparation.requestedTokenPaths.includes("font-weight-bold"),
+  );
+  const variableNames = new Set(
+    plan.tokenPreparation.variables.map((v) => v.name),
+  );
+  const boundNames = new Set<string>();
+  const inspect = (node: NodeSpec) => {
+    for (const name of Object.values(node.bindings ?? {})) boundNames.add(name);
+    for (const name of [node.fill, node.stroke]) if (name) boundNames.add(name);
+    if (node.type === "slot") assert.equal(node.children?.length ?? 0, 0);
+    for (const child of node.children ?? []) inspect(child);
+  };
+  for (const variant of plan.component.variants) inspect(variant.spec);
+  assert.ok(boundNames.size > 0);
+  for (const name of boundNames)
+    assert.ok(variableNames.has(name), `missing native variable ${name}`);
+  assert.ok(
+    plan.limitations.includes(
+      "source-native-variable-carriage-not-channel-qualification",
+    ),
+  );
+  assert.equal(revisionOf(plan), revision);
+  assert.equal(JSON.stringify(source), before);
+  assert.deepEqual(
+    prepareNativeSourceInspectionPlan({ source, operation: nativeOperation }),
+    { plan, revision },
+  );
+  // A serialized plan is not engine write authority, even though its values
+  // came from verified compilation. Operation integration must recompile.
+  const context = prepareNativeSourceCandidate(source);
+  const engine = createFigmaEngine({
+    ...context.engineInput,
+    icons: new Map(),
+  });
+  assert.throws(
+    () => engine.buildBatchScript([plan.component], nativeOperation.fileKey),
+    /FIGMA_COMPONENT_DATA_UNVERIFIED|NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED/,
+  );
+});
+
+test("native plan scopes target variables without changing source or comparison evidence", () => {
+  const source = nativeContextFixture();
+  const first = prepareNativeSourceInspectionPlan({
+    source,
+    operation: nativeOperation,
+  });
+  for (const operation of [
+    { ...nativeOperation, id: "00000000-0000-4000-8000-000000000004" },
+    { ...nativeOperation, fileKey: "AnotherNativeFile1234" },
+  ]) {
+    const next = prepareNativeSourceInspectionPlan({ source, operation });
+    assert.notEqual(next.revision, first.revision);
+    assert.notEqual(
+      next.plan.tokenPreparation.revision,
+      first.plan.tokenPreparation.revision,
+    );
+    assert.equal(
+      next.plan.sourceProjectionRevision,
+      first.plan.sourceProjectionRevision,
+    );
+    assert.equal(next.plan.componentRevision, first.plan.componentRevision);
+    assert.equal(next.plan.samplesRevision, first.plan.samplesRevision);
+  }
+});
+
+test("native plan refuses unpinned operations and stale source evidence", () => {
+  const source = nativeContextFixture();
+  for (const operation of [
+    { ...nativeOperation, id: "caller-description" },
+    { ...nativeOperation, fileKey: "" },
+    { ...nativeOperation, fileKey: "../another-file" },
+  ])
+    assert.throws(
+      () => prepareNativeSourceInspectionPlan({ source, operation }),
+      /operation-identity-invalid/,
+    );
+  assert.throws(
+    () =>
+      prepareNativeSourceInspectionPlan({
+        source: {
+          ...source,
+          expectedReportRevision: `sha256:${"0".repeat(64)}`,
+        },
+        operation: nativeOperation,
+      }),
+    /report-changed/,
+  );
+});
+
+test("native inspection context rederives the saved v3 evidence and preserves every source identity and refusal", () => {
+  const f = nativeContextFixture();
+  const before = JSON.stringify([
+    f.preparation,
+    f.selection,
+    f.tokens,
+    f.artifact,
+  ]);
+  const result = prepareNativeSourceCandidate(f);
+  assert.equal(result.status, "inspection-context-prepared");
+  assert.equal(result.acceptedContract, null);
+  assert.equal(result.nativeQualification, "unqualified");
+  assert.equal(result.projection.binding.version, 0);
+  assert.deepEqual(result.contract, f.report.tokenProjection.contract);
+  assert.equal(result.projection.parts.length, 7);
+  assert.equal(
+    result.projection.parts.filter((n) => n.emptyMainVisible === false).length,
+    2,
+  );
+  assert.equal(result.projection.cases.length, 7);
+  assert.equal(
+    result.projection.cases.filter((c) => c.status === "observed").length,
+    6,
+  );
+  assert.equal(
+    result.projection.cases.filter((c) => c.status === "refused").length,
+    1,
+  );
+  assert.equal(
+    result.projection.cases
+      .flatMap((c) => c.wrappers ?? [])
+      .filter((w) => w.visible).length,
+    1,
+  );
+  assert.equal(result.projection.evidence.reportRevision, revisionOf(f.report));
+  assert.equal(
+    JSON.stringify([f.preparation, f.selection, f.tokens, f.artifact]),
+    before,
+  );
+  result.projection.parts[0].partPath[0] = "changed-return-value";
+  assert.equal(
+    result.engineInput.nativeSourceCandidate.candidates.values().next().value!
+      .projection.parts[0].partPath[0],
+    "root",
+  );
+});
+
+test("native inspection requires an independently pinned v3 revision", () => {
+  const f = nativeContextFixture();
+  for (const expectedReportRevision of [
+    undefined,
+    "",
+    `sha256:${"0".repeat(64)}`,
+  ])
+    assert.throws(
+      () =>
+        prepareNativeSourceCandidate({
+          ...f,
+          expectedReportRevision: expectedReportRevision as string,
+        }),
+      /report-changed/,
+    );
+  f.tokens.mode = "light" as "dark";
+  assert.throws(
+    () => prepareNativeSourceCandidate(f),
+    /report-changed|token-context/,
+  );
+});
+
+test("native inspection rejects a different runtime interface even with unchanged original evidence", () => {
+  const f = nativeContextFixture();
+  f.artifact.interface.slots[0].name = "unrelated";
+  assert.throws(() => prepareNativeSourceCandidate(f), /runtime-changed/);
+});
+
+test("native inspection refuses unavailable wrapper evidence even when the host pins the refused report", () => {
+  const f = nativeContextFixture();
+  delete f.selection.evidence.sourceProgram;
+  f.expectedReportRevision = revisionOf(
+    buildCandidateVisualReportV3(f.preparation, f.selection, f.tokens),
+  );
+  assert.throws(() => prepareNativeSourceCandidate(f), /evidence-refused/);
+});
 
 test("v2 joins recorded originals and preserves the v1 preparation and seven-case denominator", () => {
   const f = fixture();

@@ -65,6 +65,12 @@ import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js'
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
+import { canonicalJson } from './contract-provenance.js';
+import {
+  resolveNativeSourceProjection,
+  type NativeSourcePartIdentity,
+  type NativeSourceProjectionContext,
+} from './native-source-projection.js';
 
 
 /** A2 grid: a compiled track — the Plugin API's own structured spelling
@@ -114,6 +120,10 @@ export interface NodeSpec {
   /** Round 4: intrinsic glyph size for svg specs (contract icon.size). */
   iconSize?: number;
   name: string;
+  /** Private compile-only source identity; never inferred from a layer name. */
+  nativeSourcePart?: NativeSourcePartIdentity;
+  /** Qualified empty-main whole-wrapper state, never a public component prop. */
+  nativeSourceVisible?: false;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
   fill?: string;
@@ -597,6 +607,13 @@ export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxG
 }
 
 export interface ComponentData {
+  /** Unaccepted inspection output. The writer refuses this until an exact
+   * native token and operation context has a separately qualified path. */
+  nativeSourceCandidate?: {
+    revision: string;
+    purpose: 'source-candidate-inspection';
+    acceptedContract: null;
+  };
   setName: string;
   contractId: string;
   /** Authored contract version — stamped as `ds_contracts/version` so dump
@@ -728,6 +745,9 @@ const STATE_REACTION_TRIGGERS: ReadonlyArray<{ state: ContractState; trigger: St
 /** Data the engine needs — parsed trees and assets, never paths. */
 export interface FigmaEngineInput {
   tokens: TokenTreeInput;
+  /** Host-authenticated finite observation registry. It permits compilation
+   * only; it does not grant native writes or qualify the retained runtime. */
+  nativeSourceCandidate?: NativeSourceProjectionContext;
   /** Context for compile-time token literals, including numeric typography.
    * Omission preserves the historical light/default projection. This does
    * not select native Figma variable modes or grant runtime admission. */
@@ -891,6 +911,12 @@ export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string
  * own code, moved verbatim — evals/golden.json guards every emitted byte.
  */
 export function createFigmaEngine(input: FigmaEngineInput) {
+  // Actual source Part objects are paired at the existing lowering sites. A
+  // post-hoc layer-name walk cannot establish this identity (names can repeat,
+  // and layout lowering may reorder or expand nodes).
+  const nativePartOrigins = new WeakMap<NodeSpec, Part>();
+  const compiledData = new WeakMap<ComponentData, string>();
+  const nativeCandidateData = new WeakSet<ComponentData>();
   const variableCollection = input.variableCollection;
   const mode = input.mode === undefined ? 'light' : input.mode;
   const brand = input.brand === undefined ? 'default' : input.brand;
@@ -4349,6 +4375,7 @@ function partToSpec(
   // requires an auto-layout parent).
   if (part.overlay) spec.overlay = part.overlay;
   applyStylesWhenOpacity(spec, part, contract, subst);
+  nativePartOrigins.set(spec, part);
   return spec;
 }
 
@@ -5098,7 +5125,13 @@ function refuseMissingRequiredFacts(contract: Contract): void {
 }
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
-  refuseRetainedRuntime(contract, 'figma-script', byId);
+  const nativeSource = contract.bindings.code.runtime && input.nativeSourceCandidate
+    ? resolveNativeSourceProjection(contract, { tokens: input.tokens, mode, brand }, input.nativeSourceCandidate)
+    : undefined;
+  // The qualified source fence rejects every composition itself. All other
+  // calls retain the original recursive guard, including ordinary parents
+  // containing retained-runtime children or slot defaults.
+  if (!nativeSource) refuseRetainedRuntime(contract, 'figma-script', byId);
   // compileComponentData is also a public entry, used without schema parsing.
   // Validate every opt-in, including malformed non-axis uses filtered below.
   for (const p of contract.props) if (p.bindings.figma.unsetValue !== undefined) PropSchema.parse(p);
@@ -5237,6 +5270,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       name: nameParts.join(', ') || contract.name,
       layout: layoutSpec(root, true, subst),
     };
+    nativePartOrigins.set(rootSpec, root);
     // resolveTokens, not root.tokens: the root's tokensByProp overrides (v10
     // — per-size padding-inline/height on the owner's Button) resolve per
     // combo exactly like every child part's. Byte-neutral for contracts
@@ -5862,7 +5896,44 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // with the count beside it now, pointing at where the names live.
   const hasCodeOnlyFacts = codeOnlyFacts.length > 0;
 
-  return {
+  if (nativeSource) {
+    const identities = new Map<Part, NativeSourcePartIdentity>();
+    for (const { path, part } of walkAnatomy(contract)) {
+      const identity = nativeSource.parts.get(canonicalJson(path));
+      if (!identity || identities.has(part)) throw new Error('NATIVE_SOURCE_CANDIDATE_PART_PAIRING_INVALID');
+      identities.set(part, identity);
+    }
+    if (stateVariants.length || boolPropsData.length || textOnlyProps.length) {
+      throw new Error('NATIVE_SOURCE_CANDIDATE_API_EXPANSION_REFUSED');
+    }
+    for (const variant of variants) {
+      const seen = new Set<Part>();
+      const pair = (spec: NodeSpec) => {
+        const part = nativePartOrigins.get(spec);
+        const identity = part && identities.get(part);
+        const expectedType = identity?.kind === 'wrapper' ? 'frame' : identity?.kind;
+        if (!part || !identity || seen.has(part) || spec.type !== expectedType ||
+            spec.visibleProp || spec.slotOptional || spec.slotDefault?.length) {
+          throw new Error('NATIVE_SOURCE_CANDIDATE_PART_PAIRING_INVALID');
+        }
+        seen.add(part);
+        spec.nativeSourcePart = structuredClone(identity);
+        if (identity.emptyMainVisible === false) spec.nativeSourceVisible = false;
+        for (const child of spec.children ?? []) pair(child);
+      };
+      pair(variant.spec);
+      if (seen.size !== identities.size) throw new Error('NATIVE_SOURCE_CANDIDATE_PART_COVERAGE_INVALID');
+    }
+  }
+
+  const data: ComponentData = {
+    ...(nativeSource ? {
+      nativeSourceCandidate: {
+        revision: nativeSource.revision,
+        purpose: 'source-candidate-inspection' as const,
+        acceptedContract: null,
+      },
+    } : {}),
     setName: contract.name,
     contractId: contract.id,
     version: contract.version,
@@ -5919,6 +5990,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ...[...variants, ...stateVariants].map((v) => (v.spec.fixedWidth?.px ?? 0) + 60),
     ),
   };
+  compiledData.set(data, canonicalJson(data));
+  if (nativeSource) nativeCandidateData.add(data);
+  return data;
 }
 
 /** The conditional minted-variable preamble (see FigmaScriptCtx.mintedTokens).
@@ -7149,6 +7223,7 @@ function buildComponentScript(
     );
   }
   const data = compileComponentData(contract, byId);
+  if (nativeCandidateData.has(data)) throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
   return buildSyncScript([data], fileKeyOverride ?? contract.bindings.figma.anchors.fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
@@ -7166,7 +7241,20 @@ function buildComponentScript(
 // Existing components are skipped, so batches are safe to re-run.
 // ---------------------------------------------------------------------------
 
+/** Batch inputs must be unchanged objects returned by this engine's guarded
+ * compileComponentData. Serialized copies and caller-built descriptors are
+ * not a supported writer boundary; callers must compile their Contracts. */
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
+  for (const data of datas) {
+    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') ||
+        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible'))) {
+      throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
+    }
+    // Raw or mutated ComponentData cannot provide a route around guarded
+    // Contract compilation. The production batch shell passes these exact
+    // compiler outputs, so its generated bytes remain unchanged.
+    if (compiledData.get(data) !== canonicalJson(data)) throw new Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+  }
   return buildSyncScript(datas, fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Batch sync: ${datas.map((d) => d.setName).join(', ')} (unchanged components skip; changed ones amend in place).`,

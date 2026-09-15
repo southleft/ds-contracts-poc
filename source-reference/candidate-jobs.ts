@@ -86,6 +86,16 @@ export interface VerifiedCandidatePreparation {
   report: CandidatePreparedReport;
   selection: VerifiedBindingSelection;
 }
+/** Server-only evidence for native planning. This contains private source and
+ * artifact locations and must never be spread into HTTP snapshots. */
+export interface VerifiedCandidateVisual {
+  id: string;
+  reportSha256: string;
+  directory: string;
+  report: CandidateVisualReportBase;
+  preparation: VerifiedCandidatePreparation;
+  selection: VerifiedBindingSelection;
+}
 export interface CandidateVisualValidationContext extends CandidateValidationContext {
   preparation: VerifiedCandidatePreparation;
 }
@@ -386,10 +396,19 @@ export function createCandidateJobs(
         }))
     )
       fail("preparation-changed");
+    const artifactDigests = new Map<string, string>();
     const context: CandidateValidationContext = {
       directory: directory(job.id),
       selection,
-      readArtifact: (name) => read(job.id, name),
+      readArtifact: (name) => {
+        const bytes = read(job.id, name),
+          digest = sha(bytes);
+        const prior = artifactDigests.get(name);
+        if (prior !== undefined && prior !== digest)
+          fail("evidence-changed-during-validation");
+        artifactDigests.set(name, digest);
+        return bytes;
+      },
     };
     let summary: CandidateValidatedSummary;
     if (job.version !== 1) {
@@ -422,12 +441,7 @@ export function createCandidateJobs(
           )))
     )
       fail("summary-invalid");
-    if (
-      !selectionMatches(job, selected(job.request)) ||
-      sha(read(job.id, "report.json")) !== digest ||
-      !same(JSON.parse(read(job.id, "job.json").toString()), job)
-    )
-      fail("evidence-changed-during-validation");
+    let verifiedPreparation = preparation;
     if (job.version !== 1) {
       const after = selectLatestPreparedVerified(job.request);
       if (
@@ -437,11 +451,22 @@ export function createCandidateJobs(
         })
       )
         fail("preparation-changed-during-validation");
+      verifiedPreparation = after;
     }
+    if (
+      !selectionMatches(job, selected(job.request)) ||
+      sha(read(job.id, "report.json")) !== digest ||
+      !same(JSON.parse(read(job.id, "job.json").toString()), job)
+    )
+      fail("evidence-changed-during-validation");
+    for (const [name, expected] of artifactDigests)
+      if (sha(read(job.id, name)) !== expected)
+        fail("evidence-changed-during-validation");
     return {
       digest,
       report,
       selection,
+      preparation: verifiedPreparation,
       phase: report.status,
       counters: { ...summary.counters },
       problems: [...(summary.problems ?? [])],
@@ -481,9 +506,9 @@ export function createCandidateJobs(
   };
   /** Reopen every record so a new attempt or a retargeted cached record cannot
    * make an older success look current. This is observation only, never replay. */
-  const preparationHistory = (request: BindingEvidenceRequest) => {
+  const candidateHistory = (request: BindingEvidenceRequest) => {
     directories();
-    const records: CandidateJobRecord[] = [];
+    const records: AnyCandidateJobRecord[] = [];
     const fingerprints: Array<[string, string]> = [];
     for (const entry of readdirSync(root, { withFileTypes: true })) {
       if (!UUID.test(entry.name)) continue;
@@ -508,10 +533,7 @@ export function createCandidateJobs(
       const record = value as AnyCandidateJobRecord;
       // Fingerprint all records, including unrelated ones that could be retargeted.
       fingerprints.push([entry.name, sha(bytes!)]);
-      if (
-        record.version === 1 &&
-        record.request.baseline.id === request.baseline.id
-      )
+      if (record.request.baseline.id === request.baseline.id)
         records.push(record);
     }
     records.sort(
@@ -525,18 +547,89 @@ export function createCandidateJobs(
     request: BindingEvidenceRequest,
   ): VerifiedCandidatePreparation => {
     if (!isBindingEvidenceRequest(request)) fail("request-invalid");
-    const before = preparationHistory(request);
-    const job = before.records.at(-1);
+    const before = candidateHistory(request);
+    const job = before.records.filter((record) => record.version === 1).at(-1);
     if (!job || job.state !== "complete" || !same(job.request, request))
       return fail("latest-preparation-unavailable");
     const checked = validate(job);
-    if (preparationHistory(request).fingerprint !== before.fingerprint)
+    if (candidateHistory(request).fingerprint !== before.fingerprint)
       fail("preparation-history-changed");
     return structuredClone({
       id: job.id,
       reportSha256: checked.digest,
       directory: directory(job.id),
       report: checked.report as CandidatePreparedReport,
+      selection: checked.selection,
+    });
+  };
+  const visualVersion = (): 2 | 3 => {
+    const version =
+      options.visualJobVersion === undefined ? 2 : options.visualJobVersion;
+    if (version !== 2 && version !== 3) fail("visual-version-invalid");
+    return version;
+  };
+  const evidenceFingerprint = (id: string): string => {
+    const entries: Array<[string, string]> = [];
+    const visit = (relative: string) => {
+      const target = relative
+        ? path.join(directory(id), relative)
+        : directory(id);
+      if (!lstatSync(target).isDirectory()) fail("artifact-file-refused");
+      for (const child of readdirSync(target, { withFileTypes: true })) {
+        const name = relative ? `${relative}/${child.name}` : child.name;
+        if (child.isDirectory()) {
+          entries.push([name, "directory"]);
+          visit(name);
+        } else entries.push([name, sha(read(id, name))]);
+      }
+    };
+    visit("");
+    return JSON.stringify(entries.sort(([a], [b]) => a.localeCompare(b)));
+  };
+  /** Select the latest visual attempt, never an earlier success or a previous
+   * configured derivation version. Every call reopens and validates the
+   * complete saved evidence; it cannot start or replay a worker. */
+  const selectLatestVisualVerified = (
+    request: BindingEvidenceRequest,
+  ): VerifiedCandidateVisual => {
+    if (!isBindingEvidenceRequest(request)) fail("request-invalid");
+    const version = visualVersion();
+    const before = candidateHistory(request);
+    const job = before.records.filter((record) => record.version !== 1).at(-1);
+    if (
+      !job ||
+      job.version !== version ||
+      job.state !== "complete" ||
+      !same(job.request, request)
+    )
+      return fail("latest-visual-unavailable");
+    const preparationJob = before.records
+      .filter((record) => record.version === 1)
+      .at(-1);
+    if (
+      !preparationJob ||
+      preparationJob.state !== "complete" ||
+      !same(preparationJob.request, request)
+    )
+      return fail("latest-preparation-unavailable");
+    const visualEvidence = evidenceFingerprint(job.id);
+    const preparationEvidence = evidenceFingerprint(preparationJob.id);
+    const checked = validate(job);
+    if (checked.phase !== "measured-candidate" || !checked.preparation)
+      fail("latest-visual-unavailable");
+    if (candidateHistory(request).fingerprint !== before.fingerprint)
+      fail("visual-history-changed");
+    if (
+      evidenceFingerprint(job.id) !== visualEvidence ||
+      evidenceFingerprint(preparationJob.id) !== preparationEvidence
+    )
+      fail("evidence-changed-during-validation");
+    return structuredClone({
+      id: job.id,
+      reportSha256: checked.digest,
+      directory: directory(job.id),
+      report: checked.report as CandidateVisualReportBase,
+      preparation: checked.preparation!,
       selection: checked.selection,
     });
   };
@@ -559,16 +652,9 @@ export function createCandidateJobs(
       )
     )
       fail("history-invalid");
-    const visualVersion =
-      options.visualJobVersion === undefined ? 2 : options.visualJobVersion;
-    if (visual && visualVersion !== 2 && visualVersion !== 3)
-      fail("visual-version-invalid");
+    const version = visual ? visualVersion() : 1;
     const existing = ordered()
-      .filter(
-        (job) =>
-          same(job.request, request) &&
-          job.version === (visual ? visualVersion : 1),
-      )
+      .filter((job) => same(job.request, request) && job.version === version)
       .at(-1);
     if (existing && (existing.state === "running" || !retry))
       return snapshot(existing);
@@ -588,7 +674,7 @@ export function createCandidateJobs(
     const job: AnyCandidateJobRecord = {
       ...(visual
         ? {
-            version: visualVersion,
+            version: version as 2 | 3,
             operation: "source-visual-assembly" as const,
             preparation: {
               id: preparation!.id,
@@ -676,6 +762,7 @@ export function createCandidateJobs(
     startVisual: (request: BindingEvidenceRequest, retry = false) =>
       start(request, retry, true),
     selectLatestPreparedVerified,
+    selectLatestVisualVerified,
     close() {
       closed = true;
       if (active) {

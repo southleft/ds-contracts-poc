@@ -190,7 +190,31 @@ two-variant native fixture confirmed that hiding the whole wrapper removes its
 spacing and that slot content survives visibility changes and a variant switch.
 The full slot property identity survived; child node IDs changed. This is a
 native capability check with empty main slots, not a source-component fidelity
-result. The source-qualified lowering and automatic reevaluation remain unfinished.
+result. Automatic reevaluation remains unfinished.
+
+The existing compiler now has a separate **inspection-only source context**.
+The host rederives the pinned visual report, verifies the original runtime
+interface, and preserves the unqualified version-zero binding. It pairs actual
+anatomy parts with compiled nodes, carries whole-wrapper empty-main visibility,
+and retains every observed or refused case. Normal runtime emission still
+refuses; source-candidate script generation is also blocked. The writer still
+needs scoped native ownership and variable-identity integration. Raw or changed compiled objects
+cannot bypass Contract validation through the batch writer. A separate sample
+adapter uses the same compiler for observed text and SVG content, preserving
+content as comparison data rather than main defaults. A deterministic private
+plan joins that compilation, comparison content and scoped token preparation.
+The host selects and revalidates the newest visual attempt across versions;
+an older success cannot replace a newer failed or incompatible attempt.
+
+The existing token writer can now create a new operation-owned collection with
+only the demonstrated source mode. It refuses name or ownership collisions,
+retains allocated IDs on failure, and supplies a separate read-only script for
+independent verification of collection, variable, mode, alias and value
+identities. It does not adopt or prune existing collections. Carrying a token
+as a variable does not prove that every corresponding source channel has an
+editable native binding. These remain internal preparation and verification
+boundaries; the application apply action and native source-fidelity result
+are still unfinished.
 
 `npm run runtime:check` checks the strict reference schema, verified artifact
 inputs, React lowering and refusal boundaries. Canvas markers remain untrusted
