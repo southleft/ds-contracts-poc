@@ -1,0 +1,89 @@
+{
+  "id": "conformance.omitted-value-20260915",
+  "name": "OmittedValueConformance20260915",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Engine conformance fixture ONLY: absence is distinct from public enum values. Not an Altitude component, a styled-source reference or v1 qualification. Literal paints intentionally isolate omission; no token-binding claim.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "secondary",
+          "tertiary",
+          "bare",
+          "danger"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "secondary": "Secondary",
+            "tertiary": "Tertiary",
+            "bare": "Bare",
+            "danger": "Danger"
+          },
+          "unsetValue": "(unset)"
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center",
+        "justify": "center"
+      },
+      "literals": {
+        "width": "144px",
+        "height": "40px",
+        "background-color": "#0055ff",
+        "border-radius": "4px"
+      },
+      "literalsByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "secondary": {
+              "background-color": "#889999"
+            },
+            "tertiary": {
+              "background-color": "#ee0011"
+            },
+            "bare": {
+              "background-color": "#889999"
+            },
+            "danger": {
+              "background-color": "#ee0011"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "./OmittedValueConformance20260915",
+        "export": "OmittedValueConformance20260915"
+      }
+    }
+  }
+}

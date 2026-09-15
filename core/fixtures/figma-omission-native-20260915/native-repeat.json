@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"_mcp\":\"figma-console-mcp\",\"success\":true,\"result\":{\"createdNodeIds\":[],\"results\":[{\"name\":\"OmittedValueConformance20260915\",\"contractId\":\"conformance.omitted-value-20260915\",\"skipped\":true,\"reason\":\"unchanged\",\"nodeId\":\"299:4052\",\"key\":\"ff8ad63a320e01b2f00970afc0893b7f8b6e14e6\"}]},\"resultAnalysis\":{\"type\":\"object\",\"isNull\":false,\"isUndefined\":false,\"isEmpty\":false,\"warning\":null},\"fileContext\":{\"fileName\":\"Scratch Project\",\"fileKey\":\"byMp6lt0Ij9b2QbkDGFwBh\"},\"timestamp\":1789485022434}"
+    }
+  ]
+}
