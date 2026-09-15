@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { SourceContractPlan } from "../../../source-reference/contract-plan";
+import type { SourceBindingInventory } from "../../../source-reference/source-bindings";
 import "./sources.css";
 
 interface Row {
@@ -71,6 +72,7 @@ interface Job {
     status: "blocked";
     acceptedContract: null;
     plans: SourceContractPlan[];
+    sourceBindings: SourceBindingInventory[];
     problems: string[];
   };
 }
@@ -369,6 +371,98 @@ export function Sources() {
                     ))}
                   </ul>
                 </details>
+                {job.contractAdmission?.sourceBindings
+                  ?.filter((facts) => facts.tagName === plan.component.tagName)
+                  .map((facts) => (
+                    <details key={facts.tagName}>
+                      <summary>
+                        Trace the actual source:{" "}
+                        {facts.status === "refused"
+                          ? "source identity refused"
+                          : "syntax read; runtime bindings unverified"}
+                      </summary>
+                      <p>
+                        <code>{facts.entry.path}</code> ·{" "}
+                        {facts.entry.className}. {facts.modules.length} local
+                        code files hash-checked against this recorded run. This
+                        is not a generated component or a complete behavior
+                        contract.
+                      </p>
+                      <p>
+                        Source inventory digest: <code>{facts.digest}</code>
+                      </p>
+                      <h4>Authored render branches and slots</h4>
+                      <ul>
+                        {facts.templates.map((template) => (
+                          <li key={template.id}>
+                            Line {template.line}: {template.role} template ·{" "}
+                            {template.roots.join(", ") || "no static root"}
+                            {template.guards.map((guard, index) => (
+                              <span key={index}>
+                                {" "}
+                                · <code>{guard.expression}</code> is{" "}
+                                {guard.when}
+                              </span>
+                            ))}
+                            {template.guardAlternatives &&
+                              ` · unresolved shared template with ${template.guardAlternatives.length} alternative guard paths; the displayed path is not exclusive`}
+                            {template.slots.length > 0 &&
+                              ` · slots: ${template.slots.map((slot) => slot || "(default)").join(", ")}`}
+                            {!template.syntaxComplete &&
+                              " · contains unsupported syntax"}
+                          </li>
+                        ))}
+                      </ul>
+                      <h4>Attribute, property and event expressions</h4>
+                      <p>
+                        These are source expressions, not inferred matches to
+                        screenshot text. Rendered-part identity and target
+                        preservation remain unproven.
+                      </p>
+                      <ul>
+                        {facts.bindings.map((binding, index) => (
+                          <li key={index}>
+                            Line {binding.line}: <code>{binding.tag}</code> ·{" "}
+                            {binding.channel} <code>{binding.target}</code> ←{" "}
+                            <code>{binding.expression}</code> (
+                            {binding.syntaxKind})
+                          </li>
+                        ))}
+                      </ul>
+                      <h4>Classes in the local import graph</h4>
+                      <p>
+                        Includes base and controller declarations; this is not a
+                        resolved inheritance chain.
+                      </p>
+                      <ul>
+                        {facts.classes.map((cls) => (
+                          <li key={`${cls.modulePath}:${cls.name}`}>
+                            <code>{cls.name}</code>
+                            {cls.extends && (
+                              <>
+                                {" "}
+                                extends <code>{cls.extends}</code>
+                              </>
+                            )}{" "}
+                            · public members:{" "}
+                            {cls.publicMembers.join(", ") || "none"}
+                          </li>
+                        ))}
+                      </ul>
+                      <ul>
+                        {facts.problems.map((problem, index) => (
+                          <li key={index}>
+                            <code>{problem}</code>
+                          </li>
+                        ))}
+                      </ul>
+                      <ul>
+                        {facts.limitations.map((limitation, index) => (
+                          <li key={index}>{limitation}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  ))}
               </article>
             ))}
           </section>

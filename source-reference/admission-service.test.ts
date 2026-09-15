@@ -44,6 +44,31 @@ test("application admission rechecks real recorded artifacts and preserves compo
   const manifestFile = path.join(dir, "altitude", fixture.manifestPath);
   mkdirSync(path.dirname(manifestFile), { recursive: true });
   writeFileSync(manifestFile, bytes("manifest.json"));
+  const sourceFixture = JSON.parse(
+    readFileSync(
+      new URL(
+        "./fixtures/source-program-button-recorded.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+  const sourceHashes: Record<string, string> = {
+    [fixture.manifestPath]: fixture.manifestSha256,
+  };
+  for (const [file, record] of Object.entries(sourceFixture.files) as [
+    string,
+    { text: string; sha256: string },
+  ][]) {
+    assert.equal(
+      createHash("sha256").update(record.text).digest("hex"),
+      record.sha256,
+    );
+    const target = path.join(dir, "altitude", file);
+    mkdirSync(path.dirname(target), { recursive: true });
+    writeFileSync(target, record.text);
+    sourceHashes[file] = record.sha256;
+  }
   const rows = altitudeCohort.map(({ story }) => {
     const storyDir = path.join(output, story);
     mkdirSync(storyDir, { recursive: true });
@@ -73,7 +98,7 @@ test("application admission rechecks real recorded artifacts and preserves compo
     JSON.stringify({
       sourceRevision: altitudeRevision,
       sourceStable: true,
-      sourceHashes: { [fixture.manifestPath]: fixture.manifestSha256 },
+      sourceHashes,
       recordedAt: "2026-09-15T15:00:00.000Z",
       denominator: 10,
       qualified: 2,
@@ -98,6 +123,37 @@ test("application admission rechecks real recorded artifacts and preserves compo
         .enumDomains.find((d: any) => d.property === "variant");
     assert.equal(variant(job).observed, 2);
     assert.equal(variant(job).total, 5);
+    const bindings = (job: any) =>
+      job.contractAdmission.sourceBindings.find(
+        (facts: any) => facts.tagName === "al-button",
+      );
+    assert.equal(bindings(job).status, "partial");
+    assert.equal(bindings(job).acceptedContract, null);
+    assert.ok(
+      bindings(job).bindings.some(
+        (binding: any) => binding.target === "aria-label",
+      ),
+    );
+    const sourceFile = path.join(
+      dir,
+      "altitude",
+      sourceFixture.manifestPath.replace(
+        "custom-elements.json",
+        "components/button/button.ts",
+      ),
+    );
+    const originalSource = readFileSync(sourceFile);
+    writeFileSync(sourceFile, "changed source");
+    job = await get();
+    assert.equal(bindings(job).status, "refused");
+    assert.deepEqual(bindings(job).bindings, []);
+    assert.equal(
+      variant(job).observed,
+      2,
+      "changed local source refuses new syntax facts but does not erase valid historical observations",
+    );
+    writeFileSync(sourceFile, originalSource);
+    assert.equal(bindings(await get()).status, "partial");
     const target = path.join(output, "atoms-button--default/measurement.json");
     const original = readFileSync(target);
     writeFileSync(target, "{ corrupt JSON");

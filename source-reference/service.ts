@@ -16,6 +16,10 @@ import {
 } from "./altitude-cohort.js";
 import { readCemDeclarations } from "../extract/adapters/cem.js";
 import {
+  inspectRecordedSourceBindings,
+  type SourceBindingInventory,
+} from "./source-bindings.js";
+import {
   planSourceContract,
   type HashBoundJson,
   type ContractPlanInput,
@@ -396,6 +400,7 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
   }
   function contractAdmission(job: ReferenceJob) {
     const plans: SourceContractPlan[] = [];
+    const sourceBindings: SourceBindingInventory[] = [];
     const problems: string[] = [];
     try {
       const file = evidenceFile(job.id, "measurement.json");
@@ -455,6 +460,18 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
           continue;
         }
         const declaration = declarations[0];
+        sourceBindings.push(
+          inspectRecordedSourceBindings({
+            checkout,
+            revision: final.sourceRevision,
+            manifestPath,
+            manifestSha256,
+            sourceHashes: final.sourceHashes,
+            tagName,
+            modulePath: declaration.modulePath,
+            className: declaration.className,
+          }),
+        );
         const observations: ContractPlanInput["observations"] = [];
         for (const input of inputs) {
           const recordFile = evidenceFile(input.id, "measurement.json");
@@ -533,6 +550,7 @@ export function createReferenceService(repoRoot: string, launch?: Launch) {
       status: "blocked" as const,
       acceptedContract: null,
       plans,
+      sourceBindings,
       problems,
     };
   }
