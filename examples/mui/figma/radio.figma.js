@@ -70,7 +70,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/primary/unchecked",
+                  "svgPaintVar": "imported/radio/icon/color/primary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -79,7 +79,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/primary/unchecked",
+                  "svgPaintVar": "imported/radio/icon-2/color/primary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -143,7 +143,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#1976d2\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/primary/checked",
+                  "svgPaintVar": "imported/radio/icon/color/primary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -152,7 +152,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#1976d2\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/primary/checked",
+                  "svgPaintVar": "imported/radio/icon-2/color/primary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -216,7 +216,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/secondary/unchecked",
+                  "svgPaintVar": "imported/radio/icon/color/secondary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -225,7 +225,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/secondary/unchecked",
+                  "svgPaintVar": "imported/radio/icon-2/color/secondary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -289,7 +289,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#9c27b0\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/secondary/checked",
+                  "svgPaintVar": "imported/radio/icon/color/secondary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -298,7 +298,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#9c27b0\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/secondary/checked",
+                  "svgPaintVar": "imported/radio/icon-2/color/secondary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -362,7 +362,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/error/unchecked",
+                  "svgPaintVar": "imported/radio/icon/color/error/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -371,7 +371,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/error/unchecked",
+                  "svgPaintVar": "imported/radio/icon-2/color/error/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -435,7 +435,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/error/checked",
+                  "svgPaintVar": "imported/radio/icon/color/error/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -444,7 +444,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#d32f2f\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/error/checked",
+                  "svgPaintVar": "imported/radio/icon-2/color/error/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -508,7 +508,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/info/unchecked",
+                  "svgPaintVar": "imported/radio/icon/color/info/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -517,7 +517,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/info/unchecked",
+                  "svgPaintVar": "imported/radio/icon-2/color/info/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -581,7 +581,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#0288d1\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/info/checked",
+                  "svgPaintVar": "imported/radio/icon/color/info/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -590,7 +590,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#0288d1\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/info/checked",
+                  "svgPaintVar": "imported/radio/icon-2/color/info/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -654,7 +654,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/success/unchecked",
+                  "svgPaintVar": "imported/radio/icon/color/success/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -663,7 +663,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/success/unchecked",
+                  "svgPaintVar": "imported/radio/icon-2/color/success/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -727,7 +727,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#2e7d32\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/success/checked",
+                  "svgPaintVar": "imported/radio/icon/color/success/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -736,7 +736,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#2e7d32\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/success/checked",
+                  "svgPaintVar": "imported/radio/icon-2/color/success/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -800,7 +800,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/warning/unchecked",
+                  "svgPaintVar": "imported/radio/icon/color/warning/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -809,7 +809,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/warning/unchecked",
+                  "svgPaintVar": "imported/radio/icon-2/color/warning/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -873,7 +873,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#ed6c02\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/warning/checked",
+                  "svgPaintVar": "imported/radio/icon/color/warning/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -882,7 +882,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#ed6c02\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/warning/checked",
+                  "svgPaintVar": "imported/radio/icon-2/color/warning/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -946,7 +946,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/default/unchecked",
+                  "svgPaintVar": "imported/radio/icon/color/default/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -955,7 +955,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/default/unchecked",
+                  "svgPaintVar": "imported/radio/icon-2/color/default/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -1019,7 +1019,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/default/checked",
+                  "svgPaintVar": "imported/radio/icon/color/default/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -1028,7 +1028,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "icon-2",
                   "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/default/checked",
+                  "svgPaintVar": "imported/radio/icon-2/color/default/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true

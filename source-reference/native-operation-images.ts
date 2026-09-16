@@ -8,6 +8,7 @@ export interface NativeImageSummary {
   sha256: string;
   width: number;
   height: number;
+  layoutSize?: { width: number; height: number };
 }
 export interface NativeImageObservation {
   status: "collected" | "unavailable";
@@ -19,6 +20,10 @@ export function collectNativeImages(
   input: NativeInspectionInput,
   raw: unknown,
 ): { observation: NativeImageObservation; bytes: Map<string, Buffer> } {
+  return collectExpectedNativeImages(input, nativeInspectionExports(input), raw);
+}
+export function collectExpectedNativeImages(input: { operation: { id: string; fileKey: string }; planRevision: string },
+  expected: Array<{ id: string; instanceId: string }>, raw: unknown): { observation: NativeImageObservation; bytes: Map<string, Buffer> } {
   const unavailable = (problem: string) => ({
     observation: {
       status: "unavailable" as const,
@@ -44,7 +49,6 @@ export function collectNativeImages(
       r.problems.length
     )
       return unavailable("native-images-readback-unavailable");
-    const expected = nativeInspectionExports(input);
     if (!Array.isArray(r.images) || !r.images.length)
       return unavailable("native-images-not-collected");
     if (r.images.length !== expected.length)
@@ -85,7 +89,10 @@ export function collectNativeImages(
         return unavailable("native-images-pixel-limit");
       PNG.sync.read(png, { checkCRC: true });
       const sha256 = createHash("sha256").update(png).digest("hex");
-      images.push({ caseId: c.id, sha256, width, height });
+      const node = r.nodes?.find((n: any) => n.id === c.instanceId);
+      const layoutSize = node && [node.values?.width, node.values?.height].every(v => Number.isFinite(v) && v > 0)
+        ? { width: node.values.width, height: node.values.height } : undefined;
+      images.push({ caseId: c.id, sha256, width, height, ...(layoutSize ? { layoutSize } : {}) });
       bytes.set(sha256, png);
     }
     return {

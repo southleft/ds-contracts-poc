@@ -52826,7 +52826,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/unchecked",
+                  "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
               ],
@@ -52954,7 +52954,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/unchecked",
+                  "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
               ],
@@ -53049,7 +53049,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/unchecked",
+                  "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
               ],
@@ -53115,7 +53115,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/checked",
+                  "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
               ],
@@ -53243,7 +53243,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/checked",
+                  "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
               ],
@@ -53338,7 +53338,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/checked",
+                  "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
               ],
@@ -53413,7 +53413,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/unchecked",
+                  "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
               ],
@@ -53511,7 +53511,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/checked",
+                  "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
               ],
@@ -53609,7 +53609,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/unchecked",
+                  "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
               ],
@@ -53706,7 +53706,7 @@ const COMPONENTS = [
                   "type": "svg",
                   "name": "indicator-icon",
                   "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/checked",
+                  "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
               ],

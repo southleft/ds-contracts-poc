@@ -1,3 +1,6 @@
+import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
+import { createNativeUpdatePlans } from './native-update-plans.js';
+import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
 import { createReactReferenceService } from './react-reference.js';
 import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
@@ -105,7 +108,7 @@ export function createReferenceService(
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
 ) {
-  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport }));
+  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans }));
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
@@ -122,9 +125,31 @@ export function createReferenceService(
       candidateOptions.validateVisualReport ?? validateCandidateVisualReport,
     ...(candidateOptions.run ? { run: candidateOptions.run } : {}),
   });
-  const nativeJobs = createNativeOperationJobs(
+  const nativeJobs: ReturnType<typeof createNativeOperationJobs> = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      reactInitial: {
+        prepare: (request, operation) => ({
+          visual: { id: request.anchor.ownership.id, reportSha256: request.anchor.ownership.sha256 },
+          preparation: { id: request.observation.id, reportSha256: request.observation.reportSha256 },
+          plan: prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(request), operation }),
+        }),
+        buildComponent: (request, context) => buildReactInitialNativeWrite({
+          ...reactReference.initialNativeEvidence(request), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
+      reactComparison: {
+        prepare: (request, operation) => ({
+          visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
+          preparation: { id: request.content.id, reportSha256: request.content.reportSha256 },
+          plan: prepareReactComparisonPlan({ ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation }),
+        }),
+        buildComponent: (request, context) => buildReactComparisonWrite({
+          ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
       react: {
         prepare: (request, operation) => ({
           visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
@@ -712,6 +737,15 @@ export function createReferenceService(
     };
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
+  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, id => {
+    const baseline = nativeJobs.reactUpdateBaseline(id);
+    if (baseline.request.kind !== 'react-initial-draft') throw Error('react-update-initial-draft-required');
+    const desired = prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.request), operation: baseline.input.operation });
+    return { parentJournalRevision: baseline.journalRevision, input: {
+      before: baseline.input, baseline: baseline.receipt,
+      desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
+    } };
+  });
   const snapshotWithSupplement = (job: ReferenceJob) => {
     const connectionObservedAt = Date.now();
     const candidates = candidateJobs.list(job.id);

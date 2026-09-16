@@ -8,7 +8,10 @@ import type {CapturedNode} from '../extract/computed/lib.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import {reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
 import {linkReactSourceAnatomy} from './react-source-anatomy.js';
-import {probeReactProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
+import {probeReactProperties,probeReactInitialProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
+import {observeTextFonts} from './text-fonts.js';
+import {observeSvgViewports} from './svg-viewports.js';
+import {sourceBounds} from './source-framing.js';
 import {readReactStyleOrigin} from './react-style-origin.js';
 import {projectReactRootVisual} from './react-root-visual.js';
 import {evidenceSha} from './react-validation-evidence.js';
@@ -56,6 +59,7 @@ export interface ReactPropertyObservationArgs {
  page:Page;program:ReactSourceProgram;ownership:ReactOwnership;tree:CapturedNode;image:string;
  instanceId:string;selector:string;stageSelector?:string;dir:string;assertCurrent:()=>void;
  failures:{runtimeErrors:string[];failedResources:string[]};
+ observationMode?:'live-update'|'initial-mount';
 }
 export type ReactPropertyObservation=Omit<ReactPropertyEffects['rows'][number],'property'|'requested'>;
 
@@ -74,18 +78,22 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const current=await read(),png=await page.screenshot({fullPage:true,caret:'initial'});
   const own=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
   const styles=await readReactStyleOrigin(page,selector,own);
+  const contentEvidence=args.observationMode==='initial-mount'?{
+   fonts:await observeTextFonts(page,[selector],current),svg:await observeSvgViewports(page,[selector],current),
+   bounds:await sourceBounds(page,{path:[selector]}),
+  }:{};
   if(!current||JSON.stringify(current)!==JSON.stringify(await read())||evidenceSha(png)!==evidenceSha(await page.screenshot({fullPage:true,caret:'initial'})))throw Error('react-property-effects-render-unstable');
   if(args.failures.runtimeErrors.length||args.failures.failedResources.length)throw Error('react-property-effects-source-failed');
   if(own.problems.length)throw Error('react-property-effects-ownership-unqualified');
   args.assertCurrent();
-  return {tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles};
+  return {tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,...contentEvidence};
  };
  let usable=true;
  for(const [index,entry] of plan.entries()){
   const row:P&ReactPropertyObservation={id:String(index),...entry,status:'refused'};result.rows.push(row);
   if(!usable){row.problem='prior-observation-invalidated-context';continue;}
   try{
-   const probe=await probeReactProperties(page,selector,program,instanceId,entry.changes,observe);
+   const probe=await (args.observationMode==='initial-mount'?probeReactInitialProperties:probeReactProperties)(page,selector,program,instanceId,entry.changes,observe);
    if(!probe.ownershipRestored||probe.before.treeSha256!==originalTree||probe.restored.treeSha256!==originalTree||probe.before.image!==args.image||probe.restored.image!==args.image)throw Error('react-property-effects-original-not-restored');
    const before=linkReactSourceAnatomy(program,probe.before.ownership,probe.before.tree);
    const changed=linkReactSourceAnatomy(program,probe.changed.ownership,probe.changed.tree);

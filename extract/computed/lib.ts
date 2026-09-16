@@ -29,6 +29,9 @@ export interface CapturedNode {
   /** child NODES in document order: text runs and elements interleaved. */
   nodes: Array<{ t: 'text'; v: string } | { t: 'el'; el: CapturedNode }>;
   style: StyleMap;
+  /** Optional independently observed SVG viewport. The computed CSS census
+   * does not contain this attribute. Never infer it from path extents. */
+  svgViewport?: { viewBox: [number, number, number, number]; preserveAspectRatio: string };
   /** CONFORMANCE FRONTIER (R7): the reader looks at `READ_PSEUDOS`. The DECOR
    *  grammar still promotes `DECOR_PSEUDOS` only — reading is not carrying. */
   pseudo: Partial<Record<ReadPseudo, StyleMap>>;
@@ -431,6 +434,7 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     nodes: n.nodes.map((c) => (c.t === 'text' ? c : { t: 'el' as const, el: normalizeNode(c.el) })),
     style,
     pseudo,
+    ...(n.svgViewport !== undefined ? { svgViewport: structuredClone(n.svgViewport) } : {}),
     // Portal-capture-only attributes: preserved when present, OMITTED when
     // undefined (the census case) so committed captures stay byte-identical.
     ...(n.role !== undefined ? { role: n.role } : {}),
@@ -667,6 +671,9 @@ export const CHANNEL_TO_COMPUTED: Record<string, string[]> = {
   'background-color': ['background-color'],
   color: ['color'],
   fill: ['fill'],
+  // Node opacity is a registered token channel, distinct from paint alpha.
+  // Readers of this channel map must retain it across source state planes.
+  opacity: ['opacity'],
   // Round 5d (owner finding: the canvas Badge radius inspected as a bare 8,
   // no variable): a carried SHORTHAND must cover EVERY constituent longhand.
   // The old single-longhand coverage ('border-radius' → top-left only) left

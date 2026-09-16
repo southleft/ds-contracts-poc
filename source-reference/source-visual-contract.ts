@@ -101,7 +101,10 @@ const keyOf = (n: { templateId: string; sourceNodeId: string }) =>
 const supported = new Set([
   ...LITERAL_CHANNELS,
   ...Object.keys(DECLARED_CHANNELS),
-  ...Object.values(CHANNEL_TO_COMPUTED).flat(),
+  // This version-1 projection reconstructs historical evidence byte for byte.
+  // Opacity was outside its vocabulary; the current React readers admit it
+  // separately through the shared channel map without changing old reports.
+  ...Object.values(CHANNEL_TO_COMPUTED).flat().filter(channel => channel !== "opacity"),
   "display",
   "flex-direction",
   "align-items",

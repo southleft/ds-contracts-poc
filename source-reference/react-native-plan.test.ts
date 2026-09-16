@@ -1,3 +1,6 @@
+import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
+import { reactInitialNativeReservation, isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
+import type { compileReactInitialContract } from './react-initial-contract.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import vm from 'node:vm';
@@ -202,16 +205,35 @@ test('wrong file and interrupted creation remain distinct from a safe repeat', a
   assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
 });
 
-test('React application journal and real companion client run all phases, reopen, and retain one reservation', async t => {
+for (const kind of ['root', 'initial'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-native-journal-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const { input } = inputFixture();
   const request: ReactNativeRequest = { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64),
     ownership: { id: input.operation.id, sha256: 'b'.repeat(64) }, inventorySha256: 'c'.repeat(64),
     caseId: 'button-default', matrixRevision: revisionOf(input.matrix) };
+  const initialRequest: ReactInitialNativeRequest = { version: 1, kind: 'react-initial-draft', anchor: request, caseId: 'button-default',
+    observation: { id: '20000000-0000-4000-8000-000000000099', reportSha256: 'd'.repeat(64), inventorySha256: 'e'.repeat(64) } };
+  const draft: ReturnType<typeof compileReactInitialContract> = { version: 1, qualification: 'observed-initial-state-contract',
+    acceptedContract: null, nativeQualification: 'unqualified', status: 'compiled-draft', problems: [], limitations: [], sourceBindings: [], nativeVariants: [],
+    compiled: { contract: input.matrix.draft!.contract!, tokens: input.matrix.draft!.tokens!, component: input.matrix.draft!.native!, assets: [], problems: [], receipts: [], residuals: [] } };
+  const operationRequest = kind === 'initial' ? initialRequest : request;
+  assert.equal(isReactInitialNativeRequest(initialRequest), true);
+  assert.equal(isReactInitialNativeRequest({ ...initialRequest, executable: 'untrusted' }), false);
+  assert.equal(isReactInitialNativeRequest({ ...initialRequest, observation: { ...initialRequest.observation, id: '../outside' } }), false);
   let current = true;
   const options: NativeOperationJobsOptions = {
     prepare: () => { throw Error('legacy adapter must not run'); },
+    reactInitial: {
+      prepare: (selected, operation) => {
+        assert.deepEqual(selected, initialRequest); if (!current) throw Error('source changed');
+        return { visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
+          preparation: { id: initialRequest.observation.id, reportSha256: initialRequest.observation.reportSha256 },
+          plan: prepareReactInitialNativePlan({ source: input.source, draft, operation }) };
+      },
+      buildComponent: (_, context) => buildReactInitialNativeWrite({ source: input.source, draft, operation: context.operation,
+        expectedPlanRevision: context.planRevision, tokens: context.tokens }),
+    },
     react: {
       prepare: (selected, operation) => {
         assert.deepEqual(selected, request); if (!current) throw Error('source changed');
@@ -224,7 +246,7 @@ test('React application journal and real companion client run all phases, reopen
     },
   };
   let jobs = createNativeOperationJobs(repo, options), transport = createNativeOperationTransport(repo, jobs);
-  const first = jobs.prepare(request), pair = transport.pair(first.id), secret = pair.split('.')[1];
+  const first = jobs.prepare(operationRequest), pair = transport.pair(first.id), secret = pair.split('.')[1];
   const host = nativeFixtureHost(); host.figma.fileKey = REACT_NATIVE_FILE_KEY;
   Object.getPrototypeOf(host.figma.currentPage).setExplicitVariableModeForCollection = function(c: any, m: string) { this.explicitVariableModes = { [c.id]: m }; };
   const storage = new Map<string, any>(), messages: any[] = [];
@@ -257,12 +279,17 @@ test('React application journal and real companion client run all phases, reopen
   assert.equal(jobs.get(first.id).nativeQualification, 'unqualified');
   assert.equal(jobs.get(first.id).imageObservation?.images.length, 2);
   assert.equal(jobs.listReact(request.referenceId)[0].fileKey, REACT_NATIVE_FILE_KEY);
-  assert.equal(jobs.forBaseline(reactNativeReservation(request))!.id, first.id);
+  assert.equal(jobs.forBaseline(kind === 'initial' ? reactInitialNativeReservation(initialRequest) : reactNativeReservation(request))!.id, first.id);
   const before = host.figma.root.findAll(() => true).length;
-  assert.equal(jobs.prepare(request).id, first.id);
+  assert.equal(jobs.prepare(operationRequest).id, first.id);
   await send({ type: 'native-poll' }); assert.equal(messages.at(-1).status, 'finished');
   assert.equal(host.figma.root.findAll(() => true).length, before);
-  assert.throws(() => jobs.prepare({ ...request, matrixRevision: revisionOf('changed') }), /baseline-already-reserved/);
+  assert.throws(() => jobs.prepare(kind === 'initial' ? { ...initialRequest, observation: { ...initialRequest.observation, reportSha256: 'f'.repeat(64) } } : { ...request, matrixRevision: revisionOf('changed') }), /baseline-already-reserved/);
+  assert.equal(jobs.listReact(request.referenceId)[0].kind, kind);
+  if (kind === 'initial') {
+    assert.deepEqual(jobs.reactInitialRequest(first.id), initialRequest);
+    assert.throws(() => jobs.reactRequest(first.id), /react-operation-required/);
+  }
   current = false;
   assert.equal(jobs.get(first.id).sourceCurrent, false);
   assert.equal(jobs.get(first.id).phase, 'component-structure-observed');

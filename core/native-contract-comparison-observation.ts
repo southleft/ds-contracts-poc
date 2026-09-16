@@ -1,0 +1,210 @@
+/** Independent observation of caller content in an existing native main.
+ * Allocation acknowledgements choose IDs; compiler specs choose expectations. */
+import { canonicalJson } from './contract-provenance.js';
+import type { NodeSpec } from './emit-figma-script.js';
+import type { PreparedNativeContractComparison } from './native-contract-comparison.js';
+import { emitNativeContractReadbackScript, emitNativeInventoryReadbackScript, verifyNativeContractReadback,
+  nativeShadowStackMatches, type NativeSourceReadback } from './native-source-observation.js';
+import { resolveNativeSlotIdentities } from './native-slot-identity.js';
+import { verifyNativeTokenContextReceipt, type NativeTokenContextInput, type NativeTokenIdentity } from './native-token-context.js';
+
+type Row = Record<string, any>;
+const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
+const numeric = (actual: unknown, expected: number) => actual === expected || actual === Math.fround(expected);
+const withoutImages = (r: NativeSourceReadback) => { const out = structuredClone(r); delete out.images; return out; };
+export interface NativeContractComparisonObservationInput {
+  operation: { id: string; fileKey: string };
+  planRevision: string;
+  comparison: PreparedNativeContractComparison;
+  tokenInput: NativeTokenContextInput;
+  tokenIdentity: NativeTokenIdentity;
+  creation: Row;
+}
+function checkInput(input: NativeContractComparisonObservationInput) {
+  const { creation: c, comparison: p } = input;
+  if (!c || c.status !== 'created-candidate' || c.operationId !== input.operation.id || c.fileKey !== input.operation.fileKey ||
+      input.operation.id === p.parent.operation.id || input.operation.fileKey !== p.parent.operation.fileKey ||
+      !/^sha256:[a-f0-9]{64}$/.test(input.planRevision) || !Array.isArray(c.nodes) || !c.nodes.length ||
+      c.nodes.some((n: Row) => !n || typeof n.id !== 'string' || !n.id) || new Set(c.nodes.map((n: Row) => n.id)).size !== c.nodes.length ||
+      typeof c.pageId !== 'string' || typeof c.comparisonBoardId !== 'string' || c.target !== null ||
+      c.variants !== undefined || !Array.isArray(c.comparisons) || c.comparisons.length !== 1 ||
+      c.comparisons[0].id !== p.caseId || c.comparisons[0].mainId !== p.mainId || c.comparisons[0].status !== 'created-comparison' ||
+      c.comparisons[0].slots?.length !== 1 || !same(c.comparisons[0].slots[0].specPath, p.slotSpecPath) ||
+      input.tokenInput.fileKey !== input.operation.fileKey || input.tokenIdentity.fileKey !== input.operation.fileKey ||
+      input.tokenInput.scopeId !== 'source-' + input.operation.id ||
+      input.tokenInput.source.revision !== p.projection.source.revision ||
+      input.tokenInput.source.sourceProgramSha256 !== p.projection.source.programSha256 ||
+      input.tokenInput.modes.length !== 1 || input.tokenInput.modes[0].tokenTreeRevision !== p.projection.tokenRevision ||
+      verifyNativeContractReadback(p.parent, p.receipt).status !== 'supported-structure-observed')
+    throw Error('native-contract-comparison-observation-input-invalid');
+}
+export function emitNativeContractComparisonReadbackScript(input: NativeContractComparisonObservationInput, captureImages = false): string {
+  checkInput(input);
+  const parent = emitNativeContractReadbackScript(input.comparison.parent);
+  const inventory = emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
+    pageId: input.creation.pageId, nodes: input.creation.nodes,
+    comparisons: [{ id: input.comparison.caseId, instanceId: input.creation.comparisons[0].instanceId, type: 'INSTANCE' }],
+  }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar'], captureImages);
+  return `// GENERATED independent comparison readback. READ ONLY.
+const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input.operation.id)},
+  fileKey: ${JSON.stringify(input.operation.fileKey)}, planRevision: ${JSON.stringify(input.planRevision)},
+  acceptedContract: null, nativeQualification: 'unqualified', problems: [] };
+async function readParent() { return await (async () => { ${parent} })(); }
+try {
+  const before = await readParent();
+  out.content = await (async () => { ${inventory} })();
+  out.parent = await readParent();
+  if (before.status !== 'native-readback-collected' || out.parent.status !== 'native-readback-collected' ||
+      out.content.status !== 'native-readback-collected' || JSON.stringify(before) !== JSON.stringify(out.parent))
+    throw Error('native-contract-comparison-readback-changed-or-unavailable');
+  out.status = 'native-comparison-readback-collected';
+} catch (error) { out.problems.push(error && error.message ? error.message : 'native-contract-comparison-readback-failed'); }
+return out;
+`;
+}
+export function verifyNativeContractComparisonReadback(input: NativeContractComparisonObservationInput, receipt: unknown) {
+  const problems: string[] = [];
+  const issue = (code: string, row?: Row) => problems.push('native-contract-comparison-' + code + (row ? ':' + row.id : ''));
+  const report = () => ({ version: 1 as const, status: problems.length ? 'refused' as const : 'supported-comparison-structure-observed' as const,
+    acceptedContract: null, nativeQualification: 'unqualified' as const, problems: [...new Set(problems)],
+    limitations: ['native-visual-fidelity-unverified', 'native-svg-geometry-unverified', 'native-computed-geometry-unverified',
+      'comparison-snapshot-not-reusable-anatomy', 'native-resolved-paint-values-unverified'] });
+  try {
+    checkInput(input);
+    const r = receipt as Row, c = input.creation, p = input.comparison;
+    if (!r || r.version !== 1 || r.status !== 'native-comparison-readback-collected' || r.operationId !== input.operation.id ||
+        r.fileKey !== input.operation.fileKey || r.planRevision !== input.planRevision || r.acceptedContract !== null ||
+        r.nativeQualification !== 'unqualified' || !Array.isArray(r.problems) || r.problems.length ||
+        verifyNativeContractReadback(p.parent, r.parent).status !== 'supported-structure-observed' ||
+        !same(withoutImages(r.parent), p.receipt)) { issue('parent-or-envelope-changed'); return report(); }
+    const content = r.content as NativeSourceReadback;
+    if (!content || content.version !== 1 || content.status !== 'native-readback-collected' ||
+        content.receiptKind !== 'independent-native-component-readback' || content.operationId !== input.operation.id ||
+        content.fileKey !== input.operation.fileKey || content.planRevision !== input.planRevision ||
+        content.acceptedContract !== null || content.nativeQualification !== 'unqualified' || content.problems.length || !Array.isArray(content.nodes)) {
+      issue('inventory-unavailable'); return report();
+    }
+    const rows = resolveNativeSlotIdentities(c, content.nodes);
+    if (!rows || new Set(rows.map(n => n.id)).size !== rows.length || !same(rows.map(n => n.id).sort(), c.nodes.map((n: Row) => n.id).sort())) {
+      issue('inventory-changed'); return report();
+    }
+    if (content.tokens?.status !== 'readback-collected' || content.tokens.receiptKind !== 'independent-native-readback' ||
+        verifyNativeTokenContextReceipt({ input: input.tokenInput, expectedIdentity: input.tokenIdentity, receipt: content.tokens.receipt }).status !== 'native-token-context-observed') {
+      issue('token-drift'); return report();
+    }
+    const nodes = new Map(rows.map(n => [n.id, n])), checked = new Set<string>();
+    const meta = (n: Row, key: string) => { try { return JSON.parse(n.metadata[key]); } catch { issue('metadata-' + key, n); return null; } };
+    const owner = { version: 1, operationId: input.operation.id, sourceContractId: p.projection.contractId,
+      sourceContractRevision: p.projection.contractRevision, tokenPreparationRevision: input.tokenIdentity.preparationRevision, acceptedContract: null };
+    for (const row of rows) {
+      const born = c.nodes.find((n: Row) => n.id === row.id);
+      if (row.type !== born.type || (born.key && born.key !== row.key) || !same(meta(row, 'nativeSourceOperation'), owner) ||
+          row.metadata.nativeSourceAllocation !== row.id) issue('ownership', row);
+      if (!Array.isArray(row.childIds) || new Set(row.childIds).size !== row.childIds.length ||
+          row.childIds.some((id: string) => nodes.get(id)?.parentId !== row.id) ||
+          (row.id !== c.pageId && !nodes.get(row.parentId)?.childIds.includes(row.id))) issue('topology', row);
+    }
+    const record = c.comparisons[0], page = nodes.get(c.pageId), board = nodes.get(c.comparisonBoardId), instance = nodes.get(record.instanceId);
+    if (!page || !board || !instance || page.type !== 'PAGE' || board.type !== 'FRAME' || instance.type !== 'INSTANCE' ||
+        !same(page.childIds, [board.id]) || !same(board.childIds, [instance.id]) || instance.mainId !== p.mainId ||
+        board.values.layoutMode !== 'VERTICAL' || board.values.fills?.length ||
+        !same(meta(instance, 'nativeContractCase'), { id: p.caseId, revision: p.revision })) {
+      issue('comparison-roots'); return report();
+    }
+    checked.add(page.id); checked.add(board.id);
+    const parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]));
+    const variableByName = new Map<string, string>(content.tokens.receipt.variables.map((v: Row) => [v.name, v.id]));
+    const sampleMode = { [input.tokenIdentity.collection.id]: input.tokenIdentity.modes[0].modeId };
+    const instanceMode = { ...sampleMode, [p.parent.tokenIdentity.collection.id]: p.parent.tokenIdentity.modes[0].modeId };
+    const alias = (name: string) => ({ type: 'VARIABLE_ALIAS', id: variableByName.get(name) });
+    const paint = (v: any, name: string) => Array.isArray(v) && v.length === 1 && v[0].type === 'SOLID' && v[0].visible !== false &&
+      variableByName.has(name) && same(v[0].boundVariables?.color, alias(name));
+    const sample = (spec: NodeSpec, n?: Row) => {
+      if (!n || checked.has(n.id)) { issue('sample-pairing'); return; }
+      checked.add(n.id); const v = n.values;
+      if (n.type !== ({ frame: 'FRAME', text: 'TEXT', svg: 'FRAME' } as Record<string, string>)[spec.type] ||
+          !same(meta(n, 'nativeContractSample'), spec.nativeContractSample) || !same(v.explicitVariableModes, sampleMode) ||
+          v.visible !== true || (v.opacity !== undefined && !numeric(v.opacity, spec.opacity ?? 1))) issue('sample-identity', n);
+      if (spec.layout && (v.layoutMode !== spec.layout.mode || v.primaryAxisAlignItems !== spec.layout.primary ||
+          v.counterAxisAlignItems !== spec.layout.counter || v.clipsContent !== (spec.clipsContent === true))) issue('sample-layout', n);
+      const bindings = { ...spec.bindings, ...(spec.fixedWidth?.varName ? { width: spec.fixedWidth.varName } : {}),
+        ...(spec.fixedHeight?.varName ? { height: spec.fixedHeight.varName } : {}), ...(spec.fontSizeVar ? { fontSize: spec.fontSizeVar } : {}) };
+      const actual = Object.fromEntries(Object.entries(v.boundVariables ?? {}).filter(([key]) => !['fills', 'strokes'].includes(key)));
+      // Figma reports text-field bindings as arrays, even for uniform text.
+      // Accept exactly one alias; mixed ranges must not collapse to one value.
+      if (n.type === 'TEXT' && Array.isArray(actual.fontSize) && actual.fontSize.length === 1) actual.fontSize = actual.fontSize[0];
+      if (!same(Object.keys(actual).sort(), Object.keys(bindings).sort()) || Object.entries(bindings).some(([field, name]) =>
+        !variableByName.has(name) || !same(actual[field], alias(name)))) issue('sample-bindings', n);
+      for (const field of ['fill', 'stroke'] as const) {
+        const name = spec[field], values = v[field === 'fill' ? 'fills' : 'strokes'] ?? [];
+        if (name ? !paint(values, name) : spec.type !== 'text' && values.length) issue('sample-' + field, n);
+      }
+      if (!nativeShadowStackMatches(spec, v.effects)) issue('sample-effects', n);
+      if (spec.gradient || spec.absolute || spec.overlay || spec.pct !== undefined || spec.rotation || spec.layout?.mode === 'GRID') issue('sample-layout-unqualified', n);
+      for (const field of ['width', 'height'] as const) {
+        const expected = field === 'width' ? spec.fixedWidth?.px ?? spec.lits?.width : spec.fixedHeight?.px ?? spec.lits?.height;
+        if (expected !== undefined && !numeric(v[field], expected)) issue('sample-' + field, n);
+      }
+      for (const [field, value] of Object.entries(spec.lits ?? {})) if (!['width', 'height'].includes(field) && !numeric(v[field], value as number)) issue('sample-literal-' + field, n);
+      if (v.reactions?.length) issue('sample-reactions', n);
+      if (spec.type === 'text') {
+        if (v.characters !== spec.characters || v.fontName?.family !== spec.fontFamily ||
+            ![spec.fontStyle, spec.fontStyle?.replaceAll(' ', '')].includes(v.fontName?.style) || !numeric(v.fontSize, spec.fontSize!) ||
+            !same(v.lineHeight, spec.lineHeight ?? { unit: 'AUTO' }) || (spec.textAlignH && v.textAlignHorizontal !== spec.textAlignH) ||
+            v.textCase !== (spec.textCase ?? 'ORIGINAL') || v.textDecoration !== (spec.textDecoration ?? 'NONE') ||
+            v.textStyleId || n.metadata.fontWeightVar !== (spec.fontWeightVar ?? '') || n.metadata.lineHeightVar !== (spec.lineHeightVar ?? '') ||
+            (spec.letterSpacing && !same(v.letterSpacing, spec.letterSpacing))) issue('sample-text', n);
+        if (spec.textFill ? !paint(v.fills, spec.textFill) :
+          !spec.textFillLit || v.fills?.length !== 1 || Object.keys(v.fills[0].boundVariables ?? {}).length ||
+          !['r','g','b'].every(k => numeric(v.fills[0].color?.[k], (spec.textFillLit as any)[k])) ||
+          !numeric(v.fills[0].opacity ?? 1, spec.textFillLit.a ?? 1)) issue('sample-text-paint', n);
+      }
+      if (spec.type === 'svg') {
+        if (!numeric(v.width, spec.iconSize!) || !numeric(v.height, spec.iconSize!)) issue('sample-svg-size', n);
+        const descend = (row: Row) => {
+          row.childIds.forEach((id: string) => {
+            const child = nodes.get(id);
+            if (!child || checked.has(id) || !same(meta(child, 'nativeContractSample'), spec.nativeContractSample)) { issue('sample-svg-descendant'); return; }
+            checked.add(id);
+            if (spec.svgPaintVar) for (const field of ['fills', 'strokes']) for (const fill of child.values[field] ?? [])
+              if (fill.visible !== false && fill.type === 'SOLID' && !same(fill.boundVariables?.color, alias(spec.svgPaintVar))) issue('sample-svg-paint', child);
+            descend(child);
+          });
+        }; descend(n); return;
+      }
+      if (n.childIds.length !== (spec.children ?? []).length) issue('sample-children', n);
+      (spec.children ?? []).forEach((child, index) => sample(child, nodes.get(n.childIds[index])));
+    };
+    // Content changes a hugging instance's geometry, but not the main's styles,
+    // property bindings or other children. Compare every remaining observed field.
+    const geometry = new Set(['x','y','width','height','relativeTransform','resolvedVariableModes','explicitVariableModes']);
+    const pair = (original: Row | undefined, actual: Row | undefined, specPath: number[]) => {
+      if (!original || !actual || checked.has(actual.id)) { issue('main-instance-pairing'); return; }
+      checked.add(actual.id);
+      if (actual.type !== (specPath.length ? original.type : 'INSTANCE') ||
+          !same(meta(actual, 'nativeContractPart'), meta(original, 'nativeContractPart'))) issue('main-instance-identity', actual);
+      if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : instanceMode)) issue('main-instance-modes', actual);
+      const fields = new Set([...Object.keys(original.values), ...Object.keys(actual.values)]);
+      for (const field of fields) {
+        // A top-level instance has null references; a main inside a set can
+        // report an empty object. Only these two empty representations agree.
+        if (!specPath.length && field === 'componentPropertyReferences' &&
+            [actual.values[field], original.values[field]].every(value => value === null || same(value, {}))) continue;
+        if (!geometry.has(field) && !same(actual.values[field], original.values[field])) issue('main-instance-' + field, actual);
+      }
+      if (!specPath.length) for (const [key, value] of Object.entries(original.variantProperties ?? {}))
+        if (actual.componentProperties?.[key]?.type !== 'VARIANT' || actual.componentProperties[key].value !== value) issue('main-instance-property', actual);
+      if (same(specPath, p.slotSpecPath)) {
+        if (actual.id !== record.slots[0].nodeId || actual.type !== 'SLOT' || actual.childIds.length !== p.specs.length ||
+            actual.values.componentPropertyReferences?.slotContentId !== record.slots[0].propertyKey ||
+            !same(actual.childIds, record.slots[0].contentNodeIds)) issue('slot-content', actual);
+        p.specs.forEach((spec, index) => sample(spec, nodes.get(actual.childIds[index]))); return;
+      }
+      if (original.childIds.length !== actual.childIds.length) issue('main-instance-children', actual);
+      original.childIds.forEach((id: string, index: number) => pair(parentNodes.get(id), nodes.get(actual.childIds[index]), [...specPath, index]));
+    };
+    pair(parentNodes.get(p.mainId), instance, []);
+    if (checked.size !== rows.length) issue('unverified-allocations');
+  } catch { issue('malformed'); }
+  return report();
+}

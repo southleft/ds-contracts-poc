@@ -168,7 +168,7 @@ const COMPONENTS = [
                       "type": "svg",
                       "name": "icon",
                       "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     }
                   ],
@@ -334,7 +334,7 @@ const COMPONENTS = [
                       "type": "svg",
                       "name": "icon",
                       "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     }
                   ],
@@ -500,7 +500,7 @@ const COMPONENTS = [
                       "type": "svg",
                       "name": "icon",
                       "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     }
                   ],
@@ -632,7 +632,7 @@ const COMPONENTS = [
                       "type": "svg",
                       "name": "icon",
                       "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     },
                     {
@@ -795,7 +795,7 @@ const COMPONENTS = [
                       "type": "svg",
                       "name": "icon",
                       "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     },
                     {
@@ -958,7 +958,7 @@ const COMPONENTS = [
                       "type": "svg",
                       "name": "icon",
                       "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svgPaintVar": "imported/accordion/accordion-heading/color",
                       "iconSize": 16
                     },
                     {
@@ -1163,8 +1163,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#16161640\"/></svg>",
+                      "svgPaintVar": "imported/shared/color-16161640",
                       "iconSize": 16
                     }
                   ],
@@ -1295,8 +1295,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#161616\"/></svg>",
-                      "svgPaintVar": "imported/accordion/icon/fill",
+                      "svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"#16161640\"/></svg>",
+                      "svgPaintVar": "imported/shared/color-16161640",
                       "iconSize": 16
                     },
                     {

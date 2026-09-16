@@ -60,13 +60,24 @@ export function prepareNativeContractDraft(
   function visit(spec: NodeSpec, variant: string, specPath: number[]) {
     // Every allocation must pass nativeInit. Nested instances, styled text
     // wrappers, margin boxes and slot defaults need their own ownership mapping.
-    if (!['root', 'frame', 'slot'].includes(spec.type) || spec.slotDefault?.length ||
+    if (!['root', 'frame', 'slot', 'svg', 'shape'].includes(spec.type) || spec.slotDefault?.length ||
         spec.visibleProp || spec.slotOptional || spec.margins || spec.insetOverlay ||
-        spec.nativeSourcePart || spec.nativeSourceSample || spec.nativeSourceVisible !== undefined)
+        spec.nativeSourcePart || spec.nativeSourceSample || spec.nativeSourceVisible !== undefined ||
+        spec.nativeContractSample || spec.nativeContractPart)
       throw Error('NATIVE_CONTRACT_DRAFT_NODE_OWNERSHIP_UNQUALIFIED');
+    if ((spec.type === 'svg' || spec.type === 'shape') && spec.children?.length)
+      throw Error('NATIVE_CONTRACT_DRAFT_LEAF_CHILDREN_UNQUALIFIED');
+    if (spec.type === 'svg' && (!spec.svg || !Number.isFinite(spec.iconSize) || spec.iconSize! <= 0 || spec.rotation))
+      throw Error('NATIVE_CONTRACT_DRAFT_SVG_GEOMETRY_UNQUALIFIED');
+    if (spec.type === 'shape' && (!spec.shape || !['rect', 'ellipse'].includes(spec.shape.kind) || spec.svg ||
+        spec.shape.arc || spec.shape.rotation || spec.lits?.fillColor ||
+        !Number.isFinite(spec.shape.width) || !Number.isFinite(spec.shape.height) || spec.shape.width <= 0 || spec.shape.height <= 0 ||
+        (spec.absolute && (spec.absolute.h !== 'MIN' || spec.absolute.v !== 'MIN' ||
+          !Number.isFinite(spec.absolute.left) || !Number.isFinite(spec.absolute.top)))))
+      throw Error('NATIVE_CONTRACT_DRAFT_SHAPE_GEOMETRY_UNQUALIFIED');
     spec.nativeContractPart = { contractRevision: projection.contractRevision, variant, specPath };
     for (const name of Object.values(spec.bindings ?? {})) boundNames.add(name);
-    for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName])
+    for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.svgPaintVar])
       if (name) boundNames.add(name);
     (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i]));
   }

@@ -29,6 +29,7 @@ export function Surface(props:{children?:string}){return <section {...props}/>}`
 test('observed source box retains font and border declarations through the shared compiler and real React consumers',async()=>{
  const f=fixture(),browser=await chromium.launch();
  try{
+  f.tree.style.opacity='0.5';
   const before=structuredClone({program:f.program,ownership:f.ownership,tree:f.tree});
   const result=projectReactRootVisual(f.program,f.ownership,f.tree);
   assert.equal(result.acceptedContract,null);assert.equal(result.qualification,'observed-root-only');
@@ -36,6 +37,7 @@ test('observed source box retains font and border declarations through the share
   const root=result.roots[0];assert.equal(root.status,'native-compiled',root.problems.join(';'));
   const c=root.contract!;
   assert.equal(c.anatomy.root.declared?.['font-family'],'Georgia, serif');
+  assert.equal(root.native!.variants[0].spec.opacity,0.5);
   assert.equal(c.anatomy.root.declared?.['border-top-style'],'solid');
   assert.deepEqual(c.anatomy.root.slot,{name:'children'});assert.equal(c.anatomy.root.parts,undefined);
   assert.equal(JSON.stringify(c).includes('Original sample'),false);
@@ -58,9 +60,9 @@ test('observed source box retains font and border declarations through the share
    const page=await browser.newPage();
    const render=await mountGenerated(page,c.name,generated.tsx,'css' in generated?generated.css as string:'');
    await page.addStyleTag({content:css});await render({children:'Replacement content'});
-   const value=await page.locator('#root > *').evaluate(n=>({text:n.textContent,display:getComputedStyle(n).display,font:getComputedStyle(n).fontFamily,border:getComputedStyle(n).borderTopStyle,children:n.children.length,width:n.getBoundingClientRect().width}));
+   const value=await page.locator('#root > *').evaluate(n=>({text:n.textContent,display:getComputedStyle(n).display,font:getComputedStyle(n).fontFamily,border:getComputedStyle(n).borderTopStyle,opacity:getComputedStyle(n).opacity,children:n.children.length,width:n.getBoundingClientRect().width}));
    assert.equal(value.text,'Replacement content');assert.equal(value.display,'inline-flex',format);
-   assert.equal(value.font,'Georgia, serif');assert.equal(value.border,'solid');assert.equal(value.children,0);assert.notEqual(value.width,999);
+   assert.equal(value.opacity,'0.5',format);assert.equal(value.font,'Georgia, serif');assert.equal(value.border,'solid');assert.equal(value.children,0);assert.notEqual(value.width,999);
    await render({children:'Updated'});assert.equal(await page.locator('#root > *').textContent(),'Updated');await page.close();
   }
  }finally{await browser.close();rmSync(f.dir,{recursive:true,force:true})}
