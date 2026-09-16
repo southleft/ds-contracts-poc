@@ -7,7 +7,7 @@ import { readReactContentInspection, readReactContentInspectionEvidence } from '
 import type { ReactReference } from './react-reference.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import { isReactComparisonRequest, type ReactComparisonRequest } from './react-comparison-request.js';
-import { compileObservedContent } from './observed-content.js';
+import { recompileSavedObservedContent } from './observed-content.js';
 import type { NativeContractObservationInput, NativeSourceReadback } from '../core/native-source-observation.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
 
@@ -39,8 +39,7 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
   if (evidenceSha(readFileSync(path.join(dir, 'report.json'))) !== request.content.reportSha256) throw Error('react-comparison-report-changed');
   const captured = read('source-tree.json');
   if (canonicalJson(captured.tree) !== canonicalJson(original.captured.tree)) throw Error('react-comparison-source-changed');
-  const content = compileObservedContent(captured.tree, read('text-fonts.json'), read('svg-viewports.json'));
-  if (canonicalJson(content) !== canonicalJson(saved.content)) throw Error('react-comparison-compiler-changed');
+  const {content, sourceCompatibility} = recompileSavedObservedContent(captured.tree, read('text-fonts.json'), read('svg-viewports.json'), saved.content);
   const contract = original.matrix.draft!.contract!;
   const variantName = reactComparisonVariant(contract, original.observedProps);
   const variant = parent.input.component.variants.find(v => v.name === variantName);
@@ -51,6 +50,6 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
     (node.children ?? []).forEach((child, i) => walk(child, [...path, i]));
   }; walk(variant.spec, []);
   if (paths.length !== 1) throw Error('react-comparison-root-slot-ambiguous');
-  return { source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.version === 2 ? composition!.content : content,
+  return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.version === 2 ? composition!.content : content,
     comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0], ...(request.version === 2 ? { instances: composition!.references } : {}) } };
 }

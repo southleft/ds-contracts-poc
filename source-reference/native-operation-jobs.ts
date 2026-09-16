@@ -86,6 +86,7 @@ export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
   visual: Pin;
   preparation: Pin;
   plan: P;
+  sourceCompatibility?: 'identity-opacity-omission';
 }
 export type NativeOperationPhase =
   "token-create" | "token-readback" | "component-create" | "component-readback"
@@ -152,6 +153,7 @@ export interface NativeOperationSnapshot {
   pendingPhase?: NativeOperationPhase;
   nativeOutcome?: "unknown";
   sourceCurrent: boolean;
+  sourceCompatibility?: 'identity-opacity-omission';
   acceptedContract: null;
   nativeQualification: "unqualified";
   counters: {
@@ -1007,6 +1009,7 @@ export function createNativeOperationJobs(
       fail("source-plan-stale");
     if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("evidence-changed-during-validation");
+    return current.sourceCompatibility;
   };
   // The journal is authoritative. Re-derive exports from its current readback;
   // old exports remain private history and cannot survive a retry as current.
@@ -1048,6 +1051,7 @@ export function createNativeOperationJobs(
   const snapshot = (
     loaded: Loaded,
     sourceCurrent: boolean,
+    sourceCompatibility?: 'identity-opacity-omission',
   ): NativeOperationSnapshot => {
     const images = imageArtifacts(loaded);
     return {
@@ -1086,6 +1090,7 @@ export function createNativeOperationJobs(
           }
         : {}),
       sourceCurrent,
+      ...(sourceCurrent && sourceCompatibility ? {sourceCompatibility} : {}),
       acceptedContract: null,
       nativeQualification: "unqualified",
       counters: {
@@ -1228,7 +1233,10 @@ export function createNativeOperationJobs(
   };
   const get = (id: string): NativeOperationSnapshot => {
     const loaded = load(id);
-    return snapshot(loaded, current(loaded));
+    let compatibility;
+    try { compatibility = authenticate(loaded); }
+    catch { return snapshot(loaded, false); }
+    return snapshot(loaded, true, compatibility);
   };
   const forBaseline = (baseline: string): NativeOperationSnapshot | null => {
     if (!present(root)) return null;

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { revisionOf } from '../core/contract-provenance.js';
 import type { CapturedNode } from '../extract/computed/lib.js';
-import { compileObservedContent } from './observed-content.js';
+import { compileObservedContent, recompileSavedObservedContent, type ObservedContentDraft } from './observed-content.js';
 import type { TextFontEvidence } from './text-fonts.js';
 import type { NodeSpec } from '../core/emit-figma-script.js';
 
@@ -18,6 +18,52 @@ function fixture() {
   }] };
   return { tree, fonts };
 }
+
+/** The old root-only snapshot did not mint or emit an opacity channel. */
+function withoutRootOpacity(current: ObservedContentDraft) {
+  const saved = structuredClone(current);
+  delete saved.contract!.anatomy.root.tokens!.opacity;
+  delete (saved.tokens as any).imported['observed-content'].root.opacity;
+  delete saved.component!.variants[0].spec.opacity;
+  return saved;
+}
+
+test('opaque historical snapshots recompile exactly without rewriting evidence or changing new output', () => {
+  const f=fixture(); f.tree.style.opacity='1'; f.fonts.treeRevision=revisionOf(f.tree);
+  const current=compileObservedContent(f.tree,f.fonts),saved=withoutRootOpacity(current);
+  const before=structuredClone({f,saved});
+  const recovered=recompileSavedObservedContent(f.tree,f.fonts,undefined,saved);
+  assert.equal(recovered.sourceCompatibility,'identity-opacity-omission');
+  assert.deepEqual(recovered.content,saved);
+  assert.notEqual(recovered.content,saved,'the result is recompiled, not the supplied snapshot object');
+  assert.deepEqual({f,saved},before);
+  assert.deepEqual(compileObservedContent(f.tree,f.fonts),current);
+  assert.equal(current.component!.variants[0].spec.opacity,1);
+  assert.deepEqual(recompileSavedObservedContent(f.tree,f.fonts,undefined,current),{content:current});
+  for(const mutate of [
+    (x:ObservedContentDraft)=>{x.component!.variants[0].spec.name='Substituted';},
+    (x:ObservedContentDraft)=>{x.contract!.description='different';},
+    (x:ObservedContentDraft)=>{x.inputRevision=revisionOf('other source');},
+    (x:ObservedContentDraft)=>{x.limitations=[];},
+  ]) {const changed=structuredClone(saved);mutate(changed);
+    assert.throws(()=>recompileSavedObservedContent(f.tree,f.fonts,undefined,changed),/compiler-changed/);}
+});
+
+test('opacity recovery cannot hide the historical nonopaque defect or missing evidence', () => {
+  for(const opacity of ['0','0.5','0.999']){
+    const f=fixture();f.tree.style.opacity=opacity;f.fonts.treeRevision=revisionOf(f.tree);
+    const current=compileObservedContent(f.tree,f.fonts);
+    assert.equal(current.component!.variants[0].spec.opacity,Number(opacity));
+    assert.throws(()=>recompileSavedObservedContent(f.tree,f.fonts,undefined,withoutRootOpacity(current)),/compiler-changed/);
+    assert.deepEqual(recompileSavedObservedContent(f.tree,f.fonts,undefined,current),{content:current});
+  }
+  const f=fixture();f.tree.style.opacity='1';f.fonts.treeRevision=revisionOf(f.tree);
+  const saved=withoutRootOpacity(compileObservedContent(f.tree,f.fonts));
+  delete f.tree.style.opacity;f.fonts.treeRevision=revisionOf(f.tree);
+  assert.throws(()=>recompileSavedObservedContent(f.tree,f.fonts,undefined,saved),/compiler-changed/);
+  f.tree.style.opacity='1';f.fonts.treeRevision=revisionOf(f.tree);f.fonts.rows=[];
+  assert.throws(()=>recompileSavedObservedContent(f.tree,f.fonts,undefined,saved),/compiler-changed/);
+});
 
 test('shared observed-content compilation carries text, painted font and styles without qualifying reusable output', () => {
   const f = fixture(), before = structuredClone(f), result = compileObservedContent(f.tree, f.fonts);
