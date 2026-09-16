@@ -85,7 +85,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + (change.channel ?? 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{change.channel ?? 'opacity'}</td><td>{change.before}</td><td>{change.after}</td></tr>)}</tbody></table>}
             {!update.operation && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/prepare`)}>Prepare reviewed correction</button>}
             {update.operation && <>
-              <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.sourceCurrent ? 'Pinned inputs match.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>
+              <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.sourceCurrent ? 'Pinned inputs match.' : update.operation.canRefreshObservation ? 'Pinned inputs match. Inspect again with the current reader to restore verification; the original write will not be repeated.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>
               {!update.connection?.finished && <>
                 <p>Use the current companion plugin in the authorized file. Connect using this update’s code.</p>
                 <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/connection`,update.operation!.id)}>Get update connection code</button>

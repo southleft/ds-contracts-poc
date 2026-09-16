@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import vm from 'node:vm';
+import { emitNativeContractReadbackScript } from '../core/native-source-observation.js';
 import { nativeRootSizeUpdateFixture } from '../core/native-contract-size-update-test-fixture.js';
 import { nativeUpdateFixture } from '../core/native-contract-update-test-fixture.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
@@ -13,10 +14,12 @@ import { createNativeOperationTransport } from './native-operation-transport.js'
 async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture = nativeUpdateFixture) {
   const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
-  let stale=false,lose='',failStorage=false;
+  let stale=false,lose='',failStorage=false,readerRevision=0;
+  const readers={readback:(...args:Parameters<typeof emitNativeContractReadbackScript>) =>
+    (readerRevision ? '// Current independent reader '+readerRevision+'\n' : '') + emitNativeContractReadbackScript(...args)};
   const plans=createNativeUpdatePlans(repo,()=>{if(stale) throw Error('source changed');return {parentJournalRevision:'a'.repeat(64),input:f.input};});
   const proposal=plans.prepare(f.input.before.operation.id);
-  let jobs=createNativeUpdateJobs(repo,plans);
+  let jobs=createNativeUpdateJobs(repo,plans,readers);
   const first=jobs.prepare(proposal.parentId,proposal.id),id=first.id;
   let transport=createNativeOperationTransport(repo,jobs);
   const pair=transport.pair(id),secret=pair.split('.')[1];
@@ -46,8 +49,8 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
   assert.equal(messages.at(-1).status,'ready');transport.start(id);
   return {...f,repo,id,proposal,plans,secret,storage,messages,delivered,
     jobs:()=>jobs,transport:()=>transport,poll:()=>send({type:'native-poll'}),
-    restart:()=>{jobs=createNativeUpdateJobs(repo,plans);transport=createNativeOperationTransport(repo,jobs);send=boot();},
-    stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
+    restart:()=>{jobs=createNativeUpdateJobs(repo,plans,readers);transport=createNativeOperationTransport(repo,jobs);send=boot();},
+    advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
 }
 
 test('the actual companion delivers preflight, an existing-node update, and independent exports across restarts',async t=>{
@@ -118,4 +121,62 @@ test('size correction becomes reusable only after independent readback, and drif
   assert.equal(effective.receipt.nodes!.find(n=>n.id===f.nodes[0].id)!.values.height, 36);
   assert.equal(f.delivered.filter(c=>!c.readOnly).length, 1);
   f.stale(); assert.throws(() => f.jobs().verifiedForParent(parent), /source changed/);
+});
+
+
+test('current read-only inspection recovers a completed correction without replacing its write history',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  const root=path.join(f.repo,'private/source-native-updates',f.id),events=path.join(root,'events');
+  const originals=Object.fromEntries(['operation.json','apply-claim.json',...readdirSync(events).map(n=>'events/'+n)]
+    .map(file=>[file,readFileSync(path.join(root,file),'utf8')]));
+  assert.ok(f.jobs().verifiedForParent(f.proposal.parentId));
+  f.advanceReader();f.restart();
+  assert.equal(f.jobs().get(f.id).sourceCurrent,false);
+  assert.equal(f.jobs().get(f.id).canRefreshObservation,true);
+  assert.throws(()=>f.jobs().verifiedForParent(f.proposal.parentId),/current-reader-observation-required/);
+  f.transport().retryObservation(f.id);
+  const pending=f.jobs().pendingCommand(f.id)!;
+  assert.equal(pending.phase,'update-readback');assert.equal(pending.readOnly,true);
+  assert.ok(pending.script.startsWith('// Current independent reader 1'));
+  f.lose('result');await f.poll();f.restart();await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-verified');
+  assert.equal(f.jobs().get(f.id).sourceCurrent,true);
+  assert.ok(f.jobs().verifiedForParent(f.proposal.parentId));
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+  for(const[file,bytes]of Object.entries(originals))assert.equal(readFileSync(path.join(root,file),'utf8'),bytes);
+  assert.equal(readdirSync(events).length,Object.keys(originals).length); // two new events, two non-event originals
+  f.advanceReader();
+  assert.equal(f.jobs().get(f.id).sourceCurrent,false);
+  f.transport().retryObservation(f.id);f.nodes[0].opacity=0.8;await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-recovery-required');
+  assert.throws(()=>f.jobs().verifiedForParent(f.proposal.parentId),/effective-observation-unavailable/);
+  assert.equal(f.nodes[0].opacity,0.8);
+});
+
+test('reader refresh cannot promote a changed source or replace an unknown write',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  f.advanceReader();f.stale();f.restart();
+  assert.equal(f.jobs().get(f.id).canRefreshObservation,false);
+  f.transport().retryObservation(f.id);
+  assert.ok(!f.jobs().pendingCommand(f.id)!.script.startsWith('// Current independent reader'));
+  await f.poll();assert.equal(f.jobs().get(f.id).sourceCurrent,false);
+  assert.throws(()=>f.jobs().verifiedForParent(f.proposal.parentId),/source changed/);
+  const unknown=await fixture(t);await unknown.poll();unknown.failStorage();await unknown.poll();unknown.advanceReader();
+  assert.equal(unknown.jobs().get(unknown.id).canRefreshObservation,false);
+  assert.throws(()=>unknown.transport().retryObservation(unknown.id),/write-outcome-unknown/);
+});
+
+test('read-only program records refuse changed input, hash and write phase',async t=>{
+  for(const tamper of [
+    (e:any)=>{e.reader.inputRevision='sha256:'+'f'.repeat(64);},
+    (e:any)=>{e.command.script+='\nreturn null;';},
+    (e:any)=>{e.command.phase='update-apply';e.command.readOnly=false;},
+  ]){
+    const f=await fixture(t);await f.poll();await f.poll();await f.poll();f.advanceReader();
+    f.transport().retryObservation(f.id);
+    const dir=path.join(f.repo,'private/source-native-updates',f.id,'events');
+    const file=path.join(dir,readdirSync(dir).sort().at(-1)!);
+    const event=JSON.parse(readFileSync(file,'utf8'));tamper(event);writeFileSync(file,JSON.stringify(event));
+    assert.throws(()=>f.jobs().get(f.id),/reader-dispatch-invalid/);
+  }
 });

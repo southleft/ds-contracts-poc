@@ -20,10 +20,10 @@ type Plans = ReturnType<typeof createNativeUpdatePlans>;
 type Header = { version: 1; id: string; parentId: string; proposalId: string; planRevision: string;
   scripts: Record<Phase, { script: string; sha256: string }> };
 type Entry = { sequence: number; previous: string } & (
-  { kind: 'dispatch'; command: NativeOperationCommand } |
+  { kind: 'dispatch'; command: NativeOperationCommand; reader?: { version: 1; inputRevision: string } } |
   { kind: 'result'; envelope: NativeOperationResult } |
   { kind: 'abandon-observation'; attemptId: string });
-type State = { phase: string; pending?: NativeOperationCommand; wrote: boolean; observation?: unknown; problems: string[] };
+type State = { phase: string; pending?: NativeOperationCommand; wrote: boolean; observation?: unknown; observationScriptSha256?: string; problems: string[] };
 function fail(message: string): never { throw Error('native-update-' + message); }
 function identity(parentId: string, proposalId: string) {
   if (!UUID.test(parentId) || !HASH.test(proposalId)) fail('identity-invalid');
@@ -34,7 +34,10 @@ function correlate(result: NativeOperationResult, command: NativeOperationComman
   if (!result || !['version','operationId','phase','attemptId','nonce','fileKey','planRevision','scriptSha256']
     .every(k => same((result as any)[k], (command as any)[k]))) fail('result-correlation-invalid');
 }
-export function createNativeUpdateJobs(repo: string, plans: Plans) {
+export function createNativeUpdateJobs(repo: string, plans: Plans,
+  readers: { readback?: typeof emitNativeContractReadbackScript } = {}) {
+  // Host-owned compiler dependency. No request may supply executable code.
+  const readback = readers.readback ?? emitNativeContractReadbackScript;
   const root = path.join(repo, 'private', 'source-native-updates');
   const ensure = (dir: string, create = false) => {
     if (!existsSync(dir) && create) mkdirSync(dir, { mode: 0o700 });
@@ -64,7 +67,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
     return Object.fromEntries([
       ['update-preflight-readback',emitNativeContractUpdateScript(plan,'apply',true)],
       ['update-apply',emitNativeContractUpdateScript(plan)],
-      ['update-readback',emitNativeContractReadbackScript(plan.after,true)],
+      ['update-readback',readback(plan.after,true)],
     ].map(([key,script])=>[key,{script,sha256:sha(script)}])) as Header['scripts'];
   };
   const load = (id: string) => {
@@ -83,12 +86,19 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
       if(event.sequence!==sequence || event.previous!==previous) fail('journal-chain-invalid');
       if(event.kind==='dispatch') {
         const c=event.command,p=c.phase as Phase;
-        if(state.pending || !PHASES.includes(p) || c.version!==1 || c.kind!=='SOURCE-NATIVE-OPERATION' || c.operationId!==id || c.fileKey!==plan.before.operation.fileKey || c.planRevision!==header.planRevision || !UUID.test(c.attemptId) || !HASH.test(c.nonce) || attempts.has(c.attemptId) || c.script!==header.scripts[p].script || c.scriptSha256!==header.scripts[p].sha256 || c.readOnly!==(p!=='update-apply')) fail('dispatch-invalid');
+        if(state.pending || !PHASES.includes(p) || c.version!==1 || c.kind!=='SOURCE-NATIVE-OPERATION' || c.operationId!==id || c.fileKey!==plan.before.operation.fileKey || c.planRevision!==header.planRevision || !UUID.test(c.attemptId) || !HASH.test(c.nonce) || attempts.has(c.attemptId) || c.readOnly!==(p!=='update-apply')) fail('dispatch-invalid');
+        if (event.reader) {
+          // New readers append a read-only command to the original chain. They
+          // cannot replace preflight/write programs or change the pinned input.
+          if (p !== 'update-readback' || !state.wrote || event.reader.version !== 1 ||
+              event.reader.inputRevision !== revisionOf(plan.after) || typeof c.script !== 'string' ||
+              sha(c.script) !== c.scriptSha256) fail('reader-dispatch-invalid');
+        } else if (c.script !== header.scripts[p].script || c.scriptSha256 !== header.scripts[p].sha256) fail('dispatch-invalid');
         if(p==='update-apply') {
           if(state.wrote || state.phase!=='update-preflight-observed' || !same(JSON.parse(read(path.join(dir,'apply-claim.json'))),c)) fail('write-precondition-invalid');
           state.wrote=true;
         } else if(p==='update-preflight-readback' ? state.wrote : !state.wrote) fail('readback-precondition-invalid');
-        attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;
+        attempts.add(c.attemptId);state.pending=c;state.phase='awaiting-native-result';delete state.observation;delete state.observationScriptSha256;
       } else if(event.kind==='result') {
         if(!state.pending) fail('unsolicited-result');
         correlate(event.envelope,state.pending);
@@ -102,7 +112,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
           state.phase='update-applied';
           if(!['updated','no-op'].includes(r?.status)) state.problems=['native-update-write-'+String(r?.status ?? 'unknown')];
         } else {
-          state.observation=r;
+          state.observation=r;state.observationScriptSha256=state.pending.scriptSha256;
           state.phase=nativeContractUpdateMatches(plan,r,true) ? 'update-verified' : 'update-recovery-required';
         }
         if(['update-refused','update-recovery-required'].includes(state.phase)) state.problems=['native-update-observation-refused'];
@@ -117,10 +127,18 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
     return {id,dir,header,plan,state,events,previous};
   };
   type Loaded=ReturnType<typeof load>;
-  const authenticate=(l:Loaded) => {
+  const authenticatePlan=(l:Loaded) => {
     const record=plans.current(l.header.parentId,l.header.proposalId);
-    if(record.update.revision!==l.header.planRevision || !same(scripts(record),l.header.scripts)) fail('source-or-compiler-changed');
+    if(record.update.revision!==l.header.planRevision) fail('source-or-compiler-changed');
     if(load(l.id).previous!==l.previous) fail('journal-changed');
+    return record;
+  };
+  const authenticate=(l:Loaded) => {
+    if (!same(scripts(authenticatePlan(l)),l.header.scripts)) fail('source-or-compiler-changed');
+  };
+  const authenticateObservation=(l:Loaded) => {
+    authenticatePlan(l);
+    if (l.state.observationScriptSha256 !== sha(readback(l.plan.after,true))) fail('current-reader-observation-required');
   };
   const append=(l:Loaded,event:Omit<Extract<Entry,{kind:'dispatch'}>,'sequence'|'previous'>|Omit<Extract<Entry,{kind:'result'}>,'sequence'|'previous'>|Omit<Extract<Entry,{kind:'abandon-observation'}>,'sequence'|'previous'>) => {
     if(load(l.id).previous!==l.previous) fail('journal-changed');
@@ -128,8 +146,11 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
     write(path.join(l.dir,'events',`${String(l.events.length).padStart(8,'0')}.json`),{...event,sequence:l.events.length,previous:l.previous});
   };
   const snapshot=(l:Loaded) => {
-    let sourceCurrent=false;try {authenticate(l);sourceCurrent=true;} catch { /* Historical results remain visible. */ }
-    return {id:l.id,parentId:l.header.parentId,proposalId:l.header.proposalId,phase:l.state.phase,sourceCurrent,
+    let sourceCurrent=false, canRefreshObservation=false;
+    try { if(l.state.wrote && l.state.phase==='update-verified') authenticateObservation(l); else authenticate(l); sourceCurrent=true; }
+    catch { /* Historical results remain visible. */ }
+    if (l.state.wrote && l.state.pending?.phase !== 'update-apply') try { authenticatePlan(l);canRefreshObservation=true; } catch { /* Source drift is not reader drift. */ }
+    return {id:l.id,parentId:l.header.parentId,proposalId:l.header.proposalId,phase:l.state.phase,sourceCurrent,canRefreshObservation,
       pendingPhase:l.state.pending?.phase,nativeOutcome:l.state.pending?'unknown' as const:undefined,
       acceptedContract:null,nativeQualification:'unqualified' as const,problems:l.state.problems,
       imageObservation:l.state.observation ? collectNativeImages(l.plan.after,l.state.observation).observation:undefined};
@@ -140,10 +161,20 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
     if(l.state.pending || !PHASES.includes(p)) fail('dispatch-refused');
     if(p==='update-apply' ? l.state.wrote || l.state.phase!=='update-preflight-observed' : p==='update-preflight-readback' ? l.state.wrote : !l.state.wrote) fail('phase-refused');
     if(p==='update-apply') authenticate(l);
+    let program=l.header.scripts[p],reader:Extract<Entry,{kind:'dispatch'}>['reader'];
+    if (p==='update-readback') {
+      // A stale source still permits historical read-only recovery, but only a
+      // freshly authenticated unchanged plan can select today's reader.
+      try {
+        authenticatePlan(l);
+        const script=readback(l.plan.after,true);
+        if(script!==program.script) {program={script,sha256:sha(script)};reader={version:1,inputRevision:revisionOf(l.plan.after)};}
+      } catch { /* Deliver the historical reader; it cannot qualify current reuse. */ }
+    }
     const command:NativeOperationCommand={version:1,kind:'SOURCE-NATIVE-OPERATION',operationId:id,phase:p,
       attemptId:randomUUID(),nonce:randomBytes(32).toString('hex'),fileKey:l.plan.before.operation.fileKey,
-      planRevision:l.header.planRevision,script:l.header.scripts[p].script,scriptSha256:l.header.scripts[p].sha256,readOnly:p!=='update-apply'};
-    append(l,{kind:'dispatch',command});return structuredClone(command);
+      planRevision:l.header.planRevision,script:program.script,scriptSha256:program.sha256,readOnly:p!=='update-apply'};
+    append(l,{kind:'dispatch',command,...(reader?{reader}:{})});return structuredClone(command);
   };
   return {
     get,dispatch,
@@ -159,7 +190,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
       // historical creation receipt. It may already have changed the canvas.
       if (written.length !== 1 || written[0].state.phase !== 'update-verified' || written[0].state.pending)
         fail('effective-observation-unavailable');
-      const l = written[0]; authenticate(l);
+      const l = written[0]; authenticateObservation(l);
       if (!nativeContractUpdateMatches(l.plan, l.state.observation, true)) fail('effective-observation-invalid');
       const receipt = structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
       delete receipt.images;
