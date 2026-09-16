@@ -1,3 +1,4 @@
+import { readRootContent } from './figma-root-content.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
 /**
  * DESIGN → CONTRACT — the PURE core of extract/figma/propose.ts.
@@ -722,6 +723,7 @@ interface Occ {
 interface Merged {
   name: string;
   type: string;
+  rootContent?: true;
   occ: Occ[];
   children: Merged[];
 }
@@ -2444,7 +2446,7 @@ function invertNodeTokens(
     // r11: a native SLOT's itemSpacing is a rendered fact the moment the
     // consumer drops two children in — the drawn child count is not the
     // denominator there (canvas conformance slot-interior-auto-layout).
-    (m.type === 'SLOT' || m.occ.some((o) => (o.node.children?.length ?? 0) > 1)) &&
+    (m.rootContent || m.type === 'SLOT' || m.occ.some((o) => (o.node.children?.length ?? 0) > 1)) &&
     m.occ.some((o) => (o.node.layout?.spacing ?? 0) !== 0)
   ) {
     const spacings = m.occ.map((o) => o.node.layout?.spacing ?? 0);
@@ -5753,7 +5755,7 @@ function invertLayout(
   // consumer's, so its interior justify/align are facts even when no
   // design-time content is drawn (the exam's empty Card Content slot). Read
   // through the node class, not the drawn child count.
-  const hasChildren = m.children.length > 0 || m.type === 'SLOT';
+  const hasChildren = m.rootContent || m.children.length > 0 || m.type === 'SLOT';
   // P21 overlap collections (AvatarGroup shape): negative itemSpacing in
   // EVERY variant means the children OVERLAP — the existing `layout.overlap`
   // vocabulary, whose shipped projection (ds.avatar-group owner-precedent:
@@ -5775,8 +5777,8 @@ function invertLayout(
   // `?? 'MIN'` — primary/counter are OMITTED on GRID captures (dump v1.17);
   // this path is flex-only (the GRID delegate returned above), so an absent
   // field can only be a hand-authored fixture and MIN is the API default.
-  const justify = JUSTIFY_INV[l.primary ?? 'MIN'];
-  const align = ALIGN_INV[l.counter ?? 'MIN'] ?? (stretchEvidence(m) ? 'stretch' : undefined);
+  const justify = JUSTIFY_INV[l.primary ?? 'MIN'] ?? (m.rootContent ? 'start' : undefined);
+  const align = ALIGN_INV[l.counter ?? 'MIN'] ?? (m.rootContent ? 'start' : stretchEvidence(m) ? 'stretch' : undefined);
   // WRAPPING (dump v1.12) — COUNTED BEFORE THE isRoot EARLY RETURN, and that
   // ordering is the whole point. The emitter has written `node.layoutWrap =
   // 'WRAP'` from `layout.wrap` since v15 while the dump never read it back, so
@@ -5795,7 +5797,7 @@ function invertLayout(
     // exactly there proposes no layout block.
     // @door propose.root-default-layout-elided
     // @lower propose.display-root-layout-elided
-    if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {
+    if (!m.rootContent && direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {
       return undefined;
     }
     out.display = 'flex';
@@ -10192,6 +10194,7 @@ export function proposeFromDump(
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
+  const rootContent = readRootContent(set);
   // PHASE 2 EXAM (rest-instance-slot-prop-value): a nested instance's
   // SLOT-typed property value arrives from the REST route as the API's own
   // `{ guid: … }` OBJECT — a slot-content node reference, not a prop value.
@@ -10506,6 +10509,7 @@ export function proposeFromDump(
     ctx.notes,
     `${set.setName}:root`,
   );
+  if (rootContent) merged.rootContent = true;
   const where = `${set.setName}:root`;
 
   // ROUND 3 — instance TEXT overrides, child half: resolve the cross-set
@@ -10585,7 +10589,13 @@ export function proposeFromDump(
   const promotedLabel =
     soleLabel && !autoLabel ? ctx.textPromote?.get(`${where}/label`.slice(`${ctx.setName}:root/`.length)) : undefined;
   const unboundRootText = soleLabel && !autoLabel && promotedLabel === undefined;
-  if (only && (autoLabel || unboundRootText)) {
+  if (rootContent) {
+    const slot: Record<string, unknown> = { name: 'children' };
+    if (rootContent.property !== 'Children') slot.bindings = { figma: { property: rootContent.property } };
+    applySlotAccepts(slot, rootContent.property, ctx, where, true);
+    root.slot = slot;
+    ctx.notes.push(`${where}: verified compiler root content container restored as root children; no extra code element`);
+  } else if (only && (autoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);

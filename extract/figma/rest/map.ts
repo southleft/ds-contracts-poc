@@ -1905,6 +1905,10 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     const stampedUnsetVariantAxes = rawUnsetVariantAxes === undefined ? undefined : (() => {
       try { return JSON.parse(rawUnsetVariantAxes) as unknown; } catch { return rawUnsetVariantAxes; }
     })();
+    const rawRootSlot = stampString('rootSlot');
+    const stampedRootSlot = rawRootSlot === undefined ? undefined : (() => {
+      try { return JSON.parse(rawRootSlot) as unknown; } catch { return rawRootSlot; }
+    })();
     const rawCodeValueAxes = stampString('codeValueAxes');
     // Preserve malformed JSON too: absence and corrupt omission semantics
     // are not interchangeable observations.
@@ -2051,6 +2055,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(stampedVersion ? { version: stampedVersion } : {}),
       ...(stampedPropNames ? { propNames: stampedPropNames } : {}),
       ...(stampedUnsetVariantAxes !== undefined ? { unsetVariantAxes: stampedUnsetVariantAxes } : {}),
+      ...(stampedRootSlot !== undefined ? { rootSlot: stampedRootSlot } : {}),
       ...(stampedCodeValueAxes !== undefined ? { codeValueAxes: stampedCodeValueAxes } : {}),
       ...(stampedSemantics ? { semantics: stampedSemantics } : {}),
       ...(stampedStatePreviewAxis ? { statePreviewAxis: stampedStatePreviewAxis } : {}),

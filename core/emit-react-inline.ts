@@ -216,7 +216,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     Object.values(part.parts ?? {}).every((pp) => pp.slot !== undefined);
 
   const compilePart = (partName: string, part: Part, isRoot: boolean) => {
-    const s: StyleRecord = {};
+    // Contract dimensions are outer box dimensions, as on the CSS-module
+    // and native surfaces. Do not depend on the consumer's global reset.
+    const s: StyleRecord = { boxSizing: 'border-box' };
     // A2 grid (G2/G4): this part's cell under its grid parent — resolved
     // from the shared plan; sizing stays unspelled (stretch is the CSS grid
     // default, the pinned spelling of canvas FILL, G3).

@@ -209,7 +209,7 @@ export function Wrapper(props:API){return <Box {...props}/>;}`;
   };
   assert.throws(
     () => createFigmaEngine({ tokens, icons }).compileComponentData(box, byId),
-    /FIGMA_ROOT_SLOT_UNSUPPORTED/,
+    /FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED/,
     "do not silently erase the slot on the native path",
   );
   const browser = await chromium.launch();

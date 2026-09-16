@@ -669,6 +669,8 @@ export interface DumpSet {
   unsetVariantAxes?: unknown;
   /** Typed code API mappings; malformed metadata remains visible to readers. */
   codeValueAxes?: unknown;
+  /** Compiler-owned root content container; preserve even malformed metadata. */
+  rootSlot?: unknown;
   statePreviewAxis?: {
     axis: string;
     default: string;
