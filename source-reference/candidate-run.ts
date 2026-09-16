@@ -1,6 +1,7 @@
 /** Fixed local worker for an application-created candidate-preparation job.
  * No arbitrary CLI paths, recipe strings, source imports or report adoption. */
 import { createHash } from "node:crypto";
+import type { StatefulCandidatePreparationReport } from "./stateful-candidate-report.js";
 import {
   lstatSync,
   readFileSync,
@@ -26,6 +27,7 @@ import {
 } from "./candidate-jobs.js";
 import {
   buildCandidatePreparationReport,
+  buildAnyCandidatePreparationReport,
   createCandidatePreparationValidator,
   type CandidatePreparationReport,
 } from "./candidate-report.js";
@@ -37,8 +39,8 @@ import {
   type CandidateVisualReportV3,
 } from "./candidate-visual-report.js";
 import {
-  inspectAltitudeButtonRuntimeInputs,
-  prepareAltitudeButtonRuntime,
+  inspectAltitudeRuntimeInputs,
+  prepareAltitudeRuntime,
   readVerifiedRuntimeArtifact,
 } from "./runtime-artifact.js";
 
@@ -46,8 +48,8 @@ export interface CandidateRunnerServices {
   selectLatestVerified?(
     request: BindingEvidenceRequest,
   ): VerifiedBindingSelection;
-  inspectInputs?: typeof inspectAltitudeButtonRuntimeInputs;
-  prepare?: typeof prepareAltitudeButtonRuntime;
+  inspectInputs?: typeof inspectAltitudeRuntimeInputs;
+  prepare?: typeof prepareAltitudeRuntime;
   selectLatestPreparedVerified?(
     request: BindingEvidenceRequest,
   ): VerifiedCandidatePreparation;
@@ -69,7 +71,10 @@ export function runCandidateJob(
   id: string,
   services: CandidateRunnerServices = {},
 ):
-  CandidatePreparationReport | CandidateVisualReport | CandidateVisualReportV3 {
+  | CandidatePreparationReport
+  | StatefulCandidatePreparationReport
+  | CandidateVisualReport
+  | CandidateVisualReportV3 {
   const repository = path.resolve(repoRoot);
   if (!UUID.test(id)) fail("id-invalid");
   const directory = path.join(repository, "private/source-candidate-app", id);
@@ -185,9 +190,10 @@ export function runCandidateJob(
   try {
     const selection = pinnedSelection();
     const checkout = path.resolve(repository, "../altitude");
-    const inspect =
-      services.inspectInputs ?? inspectAltitudeButtonRuntimeInputs;
+    const inspect = services.inspectInputs ?? inspectAltitudeRuntimeInputs;
+    const component = job.request.version === 2 ? "checkbox" : "button";
     if (job.version !== 1) {
+      if (component !== "button") fail("visual-component-unsupported");
       // A fresh manager per observation sees newer preparation attempts added
       // during assembly. Its recovery is in-memory only; no worker is launched.
       const selectPreparation =
@@ -264,7 +270,7 @@ export function runCandidateJob(
         };
       };
       const prepared = pinnedPreparation(selection),
-        inputs = inspect(checkout),
+        inputs = inspect(checkout, component),
         artifact = readVerifiedRuntimeArtifact(
           prepared.artifactDirectory,
           prepared.report.runtime.artifactRevision,
@@ -293,7 +299,7 @@ export function runCandidateJob(
       );
       const current = pinnedSelection(),
         currentPreparation = pinnedPreparation(current),
-        after = inspect(checkout);
+        after = inspect(checkout, component);
       // Opening again verifies every runtime byte without importing its module.
       // The immutable manifest digest pins the complete file inventory.
       const afterArtifact = readVerifiedRuntimeArtifact(
@@ -318,37 +324,40 @@ export function runCandidateJob(
       );
       return report;
     }
-    const inputs = inspect(checkout);
+    const inputs = inspect(checkout, component);
     if (inputs.sourceRevision !== selection.evidence.sourceRevision)
       fail("source-changed");
     directories();
     const outputRoot = path.join(directory, "runtime");
     mkdirSync(outputRoot, { mode: 0o700 });
-    const artifact = (services.prepare ?? prepareAltitudeButtonRuntime)({
-      checkout,
-      expectedInputManifest: inputs,
-      outputRoot,
-      sourceApproval: {
-        kind: "local-source-build",
+    const artifact = (services.prepare ?? prepareAltitudeRuntime)(
+      {
         checkout,
-        sourceRevision: inputs.sourceRevision,
-        inputRevision: inputs.inputRevision,
-        baseline: {
-          path: path.join(
-            repository,
-            "private/source-reference-app",
-            job.request.baseline.id,
-            "measurement.json",
-          ),
-          sha256: job.request.baseline.sha256,
+        expectedInputManifest: inputs,
+        outputRoot,
+        sourceApproval: {
+          kind: "local-source-build",
+          checkout,
+          sourceRevision: inputs.sourceRevision,
+          inputRevision: inputs.inputRevision,
+          baseline: {
+            path: path.join(
+              repository,
+              "private/source-reference-app",
+              job.request.baseline.id,
+              "measurement.json",
+            ),
+            sha256: job.request.baseline.sha256,
+          },
         },
       },
-    });
+      component,
+    );
     const current = pinnedSelection(),
-      after = inspect(checkout);
+      after = inspect(checkout, component);
     if (!same(inputs, after) || sha(readJob()) !== jobHash)
       fail("inputs-changed-during-preparation");
-    const report = buildCandidatePreparationReport(current, artifact, after);
+    const report = buildAnyCandidatePreparationReport(current, artifact, after);
     directories();
     writeFileSync(
       path.join(directory, "report.json"),

@@ -641,12 +641,17 @@ export function Sources() {
     setError("");
     try {
       const response = await fetch(
-        `/api/source-reference/${job.id}/button-candidate`,
+        `/api/source-reference/${job.id}/${traceComponent === "al-checkbox" ? "checkbox" : "button"}-candidate`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(
-            job.candidatePreparations?.length ? { retry: true } : {},
+            job.candidatePreparations?.some(
+              (attempt) =>
+                (attempt.component ?? "al-button") === traceComponent,
+            )
+              ? { retry: true }
+              : {},
           ),
         },
       );
@@ -704,7 +709,11 @@ export function Sources() {
       (trace) => (trace.component ?? "al-button") === traceComponent,
     ) ?? [];
   const bindingTrace = componentTraces.at(-1);
-  const candidate = job?.candidatePreparations?.at(-1);
+  const componentPreparations =
+    job?.candidatePreparations?.filter(
+      (attempt) => (attempt.component ?? "al-button") === traceComponent,
+    ) ?? [];
+  const candidate = componentPreparations.at(-1);
   const visualCandidate = job?.candidateVisuals?.at(-1);
   const allRows = [...(job?.rows ?? []), ...(supplement?.rows ?? [])];
   const row = allRows.find((r) => r.story === selected);
@@ -1136,21 +1145,26 @@ export function Sources() {
           >
             <h2>Source candidate preparation</h2>
             <p>
-              Current preparation adapter: Button. Checkbox source traces are
-              inspectable above; stateful candidate preparation remains in
-              progress.
+              Preparing:{" "}
+              {traceComponent === "al-checkbox" ? "Checkbox" : "Button"}. Choose
+              the component in the trace selector above. Checkbox retains its
+              original runtime, boolean state observations, text, slots and
+              nested components.
             </p>
             <p>
               Prepare the pinned original runtime and source semantics from the
-              latest verified binding trace and its exact baseline and
-              supplement. Previous captures and preparation attempts are
-              preserved.
+              latest verified binding trace and{" "}
+              {traceComponent === "al-button"
+                ? "its exact baseline and supplement."
+                : "its exact baseline."}{" "}
+              Previous captures and preparation attempts are preserved.
             </p>
             <p className="source-note">
               Preparation does not accept a Contract or produce native Figma
               output. A measured visual candidate can then be derived from the
-              same verified evidence. Native comparison and the complete
-              conversion journey remain pending.
+              same verified evidence for Button. Checkbox visual generation
+              remains in progress. Native comparison and the complete conversion
+              journey remain pending.
             </p>
             <div className="source-connect">
               <button
@@ -1160,8 +1174,10 @@ export function Sources() {
                   capturing ||
                   job.state !== "complete" ||
                   job.sourceStable !== true ||
-                  buttonBindingTrace?.state !== "complete" ||
-                  (!!supplement && supplement.state !== "complete")
+                  bindingTrace?.state !== "complete" ||
+                  (traceComponent === "al-button" &&
+                    !!supplement &&
+                    supplement.state !== "complete")
                 }
                 onClick={() => void prepareSourceCandidate()}
               >
@@ -1199,6 +1215,11 @@ export function Sources() {
                     ["structurallyMatchedCases", "Structurally matched"],
                     ["refusedCases", "Refused cases"],
                     ["variantStates", "Style variants observed"],
+                    ["booleanAxes", "Boolean properties retained"],
+                    ["missingBooleanStates", "Unobserved boolean states"],
+                    ["unobservedSlots", "Unobserved source slots"],
+                    ["sourceTexts", "Source text observations"],
+                    ["nestedHosts", "Nested host observations"],
                     ["slots", "Source slots retained"],
                     ["writableProperties", "Writable source properties"],
                   ] as const
@@ -1212,11 +1233,55 @@ export function Sources() {
                 )}
               </div>
             )}
-            {(job.candidatePreparations?.length ?? 0) > 1 && (
+            {candidate?.stateful && (
+              <div className="source-binding-table-wrap">
+                <table className="source-binding-table">
+                  <caption>
+                    Boolean values observed in the prepared source cases
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Property</th>
+                      <th scope="col">Omitted</th>
+                      <th scope="col">Explicit false</th>
+                      <th scope="col">Explicit true</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {candidate.stateful.booleanStates.map((axis) => (
+                      <tr key={axis.property}>
+                        <th scope="row">
+                          <code>{axis.property}</code>
+                        </th>
+                        <td>{axis.omitted}</td>
+                        <td>{axis.explicitFalse}</td>
+                        <td>{axis.explicitTrue}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className="source-note">
+                  Counts describe each property separately. Zero means
+                  unobserved; combinations and editable native state mappings
+                  remain unqualified.
+                </p>
+                <p>
+                  Declared slots:{" "}
+                  {candidate.stateful.slots
+                    .map(
+                      (slot) =>
+                        `${slot.name || "default"} (${slot.observedCases} observed cases)`,
+                    )
+                    .join(" · ")}
+                  . Unobserved slots remain part of the original API.
+                </p>
+              </div>
+            )}
+            {componentPreparations.length > 1 && (
               <details>
                 <summary>Preserved candidate preparation attempts</summary>
                 <ul>
-                  {job.candidatePreparations!.map((attempt) => (
+                  {componentPreparations.map((attempt) => (
                     <li key={attempt.id}>
                       <code>{attempt.id}</code>: {attempt.phase}
                     </li>
@@ -1224,179 +1289,183 @@ export function Sources() {
                 </ul>
               </details>
             )}
-            {(candidate?.phase === "prepared" || visualCandidate) && (
-              <section aria-label="Measured visual candidate">
-                <h3>Measured visual candidate</h3>
-                <p>
-                  Derive source-owned structure, observed styles and recorded
-                  token references and conditional wrappers from the verified
-                  preparation. Source slots remain separate from comparison
-                  content; missing cases and unsupported wrappers stay visible
-                  as limitations.
-                </p>
-                <div className="source-connect">
-                  <button
-                    type="button"
-                    disabled={
-                      busy ||
-                      capturing ||
-                      candidate?.phase !== "prepared" ||
-                      job.state !== "complete" ||
-                      job.sourceStable !== true ||
-                      buttonBindingTrace?.state !== "complete" ||
-                      (!!supplement && supplement.state !== "complete")
-                    }
-                    onClick={() => void deriveVisualCandidate()}
-                  >
-                    {visualCandidate?.state === "running"
-                      ? "Deriving measured visual candidate…"
-                      : visualCandidate?.state === "failed" ||
-                          visualCandidate?.state === "interrupted" ||
-                          visualCandidate?.phase === "visual-refused"
-                        ? "Retry visual candidate derivation"
-                        : "Derive measured visual candidate"}
-                  </button>
-                </div>
-                <p role="status">
-                  {!visualCandidate
-                    ? "No measured visual candidate recorded yet."
-                    : visualCandidate.phase === "measured-candidate"
-                      ? "Measured visual candidate; not accepted or emitted. Native verification remains pending."
-                      : visualCandidate.phase === "visual-refused"
-                        ? "Visual derivation completed with a refusal. The evidence and refused cases are preserved."
-                        : visualCandidate.state === "running"
-                          ? "Deriving the visual candidate from existing evidence and runtime."
-                          : visualCandidate.state === "interrupted"
-                            ? "Visual derivation was interrupted. Retry creates a new attempt."
-                            : "Visual derivation failed or its recorded evidence no longer validates."}
-                </p>
-                {!!visualCandidate?.problems.length && (
-                  <div>
-                    <h4>Still to verify</h4>
-                    <ul>
-                      {[
-                        ...new Set(
-                          visualCandidate.problems.map(
-                            (problem) =>
-                              (
-                                ({
-                                  "candidate-visual-contract-unaccepted":
-                                    "Confirm that the proposed component preserves the source structure and styles.",
-                                  "candidate-runtime-binding-unqualified":
-                                    "Verify that the retained source behavior matches this candidate.",
-                                  "candidate-native-projection-unverified":
-                                    "Create and independently compare the native Figma output.",
-                                  "candidate-token-bindings-observations-only":
-                                    "Unrecorded token identities and native bindings remain unverified.",
-                                  "candidate-source-cases-refused":
-                                    "Resolve the refused source cases; they remain in the coverage total.",
-                                  "candidate-wrapper-source-case-refused":
-                                    "Resolve the refused source cases; they remain in the coverage total.",
-                                  "candidate-visual-refused":
-                                    "The recorded evidence could not support a measured visual candidate.",
-                                  "candidate-token-bindings-refused":
-                                    "The recorded token evidence could not be qualified.",
-                                  "candidate-token-projection-unaccepted":
-                                    "Verify the projected token references against native variable identities and modes.",
-                                  "candidate-wrapper-snapshots-only":
-                                    "Verify conditional wrappers beyond the recorded snapshots, including native slot edits.",
-                                  "candidate-wrapper-branches-unprojected":
-                                    "Verify the remaining source branches before widening this candidate.",
-                                  "candidate-token-projection-refused":
-                                    "Recorded token references could not be safely projected into the candidate.",
-                                  "candidate-wrapper-projection-refused":
-                                    "The source wrapper conditions did not match the recorded component structure.",
-                                  "candidate-evidence-unavailable-or-changed":
-                                    "Recheck evidence that is missing or has changed before retrying.",
-                                  "candidate-visual-assembly-failed":
-                                    "Derivation could not finish. Inspect its recorded details before retrying.",
-                                  "candidate-job-history-invalid":
-                                    "A saved attempt cannot be read or verified. Its history is preserved.",
-                                }) as Record<string, string>
-                              )[problem] ??
-                              "A recorded check still needs review before this candidate can proceed.",
-                          ),
-                        ),
-                      ].map((message) => (
-                        <li key={message}>{message}</li>
-                      ))}
-                    </ul>
-                    <details>
-                      <summary>Technical details</summary>
+            {traceComponent === "al-button" &&
+              (candidate?.phase === "prepared" || visualCandidate) && (
+                <section aria-label="Measured visual candidate">
+                  <h3>Measured visual candidate</h3>
+                  <p>
+                    Derive source-owned structure, observed styles and recorded
+                    token references and conditional wrappers from the verified
+                    preparation. Source slots remain separate from comparison
+                    content; missing cases and unsupported wrappers stay visible
+                    as limitations.
+                  </p>
+                  <div className="source-connect">
+                    <button
+                      type="button"
+                      disabled={
+                        busy ||
+                        capturing ||
+                        candidate?.phase !== "prepared" ||
+                        job.state !== "complete" ||
+                        job.sourceStable !== true ||
+                        buttonBindingTrace?.state !== "complete" ||
+                        (!!supplement && supplement.state !== "complete")
+                      }
+                      onClick={() => void deriveVisualCandidate()}
+                    >
+                      {visualCandidate?.state === "running"
+                        ? "Deriving measured visual candidate…"
+                        : visualCandidate?.state === "failed" ||
+                            visualCandidate?.state === "interrupted" ||
+                            visualCandidate?.phase === "visual-refused"
+                          ? "Retry visual candidate derivation"
+                          : "Derive measured visual candidate"}
+                    </button>
+                  </div>
+                  <p role="status">
+                    {!visualCandidate
+                      ? "No measured visual candidate recorded yet."
+                      : visualCandidate.phase === "measured-candidate"
+                        ? "Measured visual candidate; not accepted or emitted. Native verification remains pending."
+                        : visualCandidate.phase === "visual-refused"
+                          ? "Visual derivation completed with a refusal. The evidence and refused cases are preserved."
+                          : visualCandidate.state === "running"
+                            ? "Deriving the visual candidate from existing evidence and runtime."
+                            : visualCandidate.state === "interrupted"
+                              ? "Visual derivation was interrupted. Retry creates a new attempt."
+                              : "Visual derivation failed or its recorded evidence no longer validates."}
+                  </p>
+                  {!!visualCandidate?.problems.length && (
+                    <div>
+                      <h4>Still to verify</h4>
                       <ul>
-                        {visualCandidate.problems.map((problem, index) => (
-                          <li key={index}>
-                            <code>{problem}</code>
+                        {[
+                          ...new Set(
+                            visualCandidate.problems.map(
+                              (problem) =>
+                                (
+                                  ({
+                                    "candidate-visual-contract-unaccepted":
+                                      "Confirm that the proposed component preserves the source structure and styles.",
+                                    "candidate-runtime-binding-unqualified":
+                                      "Verify that the retained source behavior matches this candidate.",
+                                    "candidate-native-projection-unverified":
+                                      "Create and independently compare the native Figma output.",
+                                    "candidate-token-bindings-observations-only":
+                                      "Unrecorded token identities and native bindings remain unverified.",
+                                    "candidate-source-cases-refused":
+                                      "Resolve the refused source cases; they remain in the coverage total.",
+                                    "candidate-wrapper-source-case-refused":
+                                      "Resolve the refused source cases; they remain in the coverage total.",
+                                    "candidate-visual-refused":
+                                      "The recorded evidence could not support a measured visual candidate.",
+                                    "candidate-token-bindings-refused":
+                                      "The recorded token evidence could not be qualified.",
+                                    "candidate-token-projection-unaccepted":
+                                      "Verify the projected token references against native variable identities and modes.",
+                                    "candidate-wrapper-snapshots-only":
+                                      "Verify conditional wrappers beyond the recorded snapshots, including native slot edits.",
+                                    "candidate-wrapper-branches-unprojected":
+                                      "Verify the remaining source branches before widening this candidate.",
+                                    "candidate-token-projection-refused":
+                                      "Recorded token references could not be safely projected into the candidate.",
+                                    "candidate-wrapper-projection-refused":
+                                      "The source wrapper conditions did not match the recorded component structure.",
+                                    "candidate-evidence-unavailable-or-changed":
+                                      "Recheck evidence that is missing or has changed before retrying.",
+                                    "candidate-visual-assembly-failed":
+                                      "Derivation could not finish. Inspect its recorded details before retrying.",
+                                    "candidate-job-history-invalid":
+                                      "A saved attempt cannot be read or verified. Its history is preserved.",
+                                  }) as Record<string, string>
+                                )[problem] ??
+                                "A recorded check still needs review before this candidate can proceed.",
+                            ),
+                          ),
+                        ].map((message) => (
+                          <li key={message}>{message}</li>
+                        ))}
+                      </ul>
+                      <details>
+                        <summary>Technical details</summary>
+                        <ul>
+                          {visualCandidate.problems.map((problem, index) => (
+                            <li key={index}>
+                              <code>{problem}</code>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    </div>
+                  )}
+                  {(visualCandidate?.phase === "measured-candidate" ||
+                    visualCandidate?.phase === "visual-refused") && (
+                    <div
+                      className="source-status"
+                      aria-label="Measured visual inventory, not conversion results"
+                    >
+                      {(
+                        [
+                          ["plannedCases", "Source cases planned"],
+                          ["projectedCases", "Cases projected"],
+                          ["refusedCases", "Refused cases"],
+                          ["stylePlanes", "Style appearances observed"],
+                          ["observedChannels", "Style channels observed"],
+                          ["excludedChannels", "Style channels excluded"],
+                          ["boundTokenChannels", "Named token correspondences"],
+                          [
+                            "projectedTokenPaths",
+                            "Source token names retained",
+                          ],
+                          [
+                            "projectedTokenAddresses",
+                            "Token references projected",
+                          ],
+                          ["wrapperPredicates", "Source wrapper conditions"],
+                          ["wrapperSnapshots", "Wrapper snapshots matched"],
+                          [
+                            "unprojectedWrapperPredicates",
+                            "Unprojected wrapper conditions",
+                          ],
+                          [
+                            "ambiguousTokenChannels",
+                            "Ambiguous recorded references",
+                          ],
+                          [
+                            "unresolvedTokenChannels",
+                            "Unresolved recorded references",
+                          ],
+                        ] as const
+                      ).map(([key, label]) =>
+                        visualCandidate.counters[key] === undefined ? null : (
+                          <div key={key}>
+                            <strong>{visualCandidate.counters[key]}</strong>
+                            <small>{label}</small>
+                          </div>
+                        ),
+                      )}
+                    </div>
+                  )}
+                  <p className="source-note">
+                    Observed styles and token-name matches do not qualify
+                    runtime behavior or native Figma output. No Contract is
+                    accepted by this step.
+                  </p>
+                  {(job.candidateVisuals?.length ?? 0) > 1 && (
+                    <details>
+                      <summary>Preserved visual derivation attempts</summary>
+                      <ul>
+                        {job.candidateVisuals!.map((attempt) => (
+                          <li key={attempt.id}>
+                            <code>{attempt.id}</code>: {attempt.phase}
                           </li>
                         ))}
                       </ul>
                     </details>
-                  </div>
-                )}
-                {(visualCandidate?.phase === "measured-candidate" ||
-                  visualCandidate?.phase === "visual-refused") && (
-                  <div
-                    className="source-status"
-                    aria-label="Measured visual inventory, not conversion results"
-                  >
-                    {(
-                      [
-                        ["plannedCases", "Source cases planned"],
-                        ["projectedCases", "Cases projected"],
-                        ["refusedCases", "Refused cases"],
-                        ["stylePlanes", "Style appearances observed"],
-                        ["observedChannels", "Style channels observed"],
-                        ["excludedChannels", "Style channels excluded"],
-                        ["boundTokenChannels", "Named token correspondences"],
-                        ["projectedTokenPaths", "Source token names retained"],
-                        [
-                          "projectedTokenAddresses",
-                          "Token references projected",
-                        ],
-                        ["wrapperPredicates", "Source wrapper conditions"],
-                        ["wrapperSnapshots", "Wrapper snapshots matched"],
-                        [
-                          "unprojectedWrapperPredicates",
-                          "Unprojected wrapper conditions",
-                        ],
-                        [
-                          "ambiguousTokenChannels",
-                          "Ambiguous recorded references",
-                        ],
-                        [
-                          "unresolvedTokenChannels",
-                          "Unresolved recorded references",
-                        ],
-                      ] as const
-                    ).map(([key, label]) =>
-                      visualCandidate.counters[key] === undefined ? null : (
-                        <div key={key}>
-                          <strong>{visualCandidate.counters[key]}</strong>
-                          <small>{label}</small>
-                        </div>
-                      ),
-                    )}
-                  </div>
-                )}
-                <p className="source-note">
-                  Observed styles and token-name matches do not qualify runtime
-                  behavior or native Figma output. No Contract is accepted by
-                  this step.
-                </p>
-                {(job.candidateVisuals?.length ?? 0) > 1 && (
-                  <details>
-                    <summary>Preserved visual derivation attempts</summary>
-                    <ul>
-                      {job.candidateVisuals!.map((attempt) => (
-                        <li key={attempt.id}>
-                          <code>{attempt.id}</code>: {attempt.phase}
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                )}
-              </section>
-            )}
+                  )}
+                </section>
+              )}
           </section>
           {(visualCandidate?.phase === "measured-candidate" ||
             job.nativeOperation) && (

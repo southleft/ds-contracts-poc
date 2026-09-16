@@ -1030,7 +1030,7 @@ export function createReferenceService(
     }
     const supplementalMatch = /^([a-f0-9-]+)\/button-variants$/i.exec(route);
     const bindingMatch = /^([a-f0-9-]+)\/(button|checkbox)-bindings$/i.exec(route);
-    const candidateMatch = /^([a-f0-9-]+)\/button-candidate$/i.exec(route);
+    const candidateMatch = /^([a-f0-9-]+)\/(button|checkbox)-candidate$/i.exec(route);
     const visualMatch = /^([a-f0-9-]+)\/button-visual-candidate$/i.exec(route);
     const nativeMatch = /^([a-f0-9-]+)\/button-native-operation$/i.exec(route);
     if (
@@ -1115,7 +1115,7 @@ export function createReferenceService(
         const supplement = [...jobs.values()]
           .filter((child) => child.parent?.id === baseline.id)
           .at(-1);
-        const evidence: BindingEvidenceRequest = bindingMatch?.[2] === "checkbox" ? {
+        const evidence: BindingEvidenceRequest = (bindingMatch?.[2] ?? candidateMatch?.[2]) === "checkbox" ? {
           version: 2, component: "al-checkbox",
           baseline: { id: baseline.id, sha256: parent!.measurementSha256 },
         } : {

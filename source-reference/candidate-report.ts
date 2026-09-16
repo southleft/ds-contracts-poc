@@ -1,6 +1,11 @@
 /** Host-owned source/runtime preparation. No visual Contract is manufactured,
  * no runtime module is evaluated here, and preparation never means conversion. */
 import path from "node:path";
+import {
+  buildStatefulCandidatePreparationReport,
+  summarizeStatefulPreparation,
+  type StatefulCandidatePreparationReport,
+} from "./stateful-candidate-report.js";
 import { canonicalJson, revisionOf } from "../core/contract-provenance.js";
 import type { VerifiedBindingSelection } from "./binding-jobs.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
@@ -14,7 +19,7 @@ import {
 } from "./button-candidate-semantics.js";
 import {
   altitudeButtonRuntimeRecipeIdentity,
-  inspectAltitudeButtonRuntimeInputs,
+  inspectAltitudeRuntimeInputs,
   readVerifiedRuntimeArtifact,
   type RuntimeInputManifest,
   type VerifiedRuntimeArtifact,
@@ -135,10 +140,20 @@ export function buildCandidatePreparationReport(
   });
 }
 
+export function buildAnyCandidatePreparationReport(
+  selection: VerifiedBindingSelection,
+  artifact: VerifiedRuntimeArtifact,
+  inputs: RuntimeInputManifest,
+): CandidatePreparationReport | StatefulCandidatePreparationReport {
+  return selection.request.version === 2
+    ? buildStatefulCandidatePreparationReport(selection, artifact, inputs)
+    : buildCandidatePreparationReport(selection, artifact, inputs);
+}
+
 /** Test seam for read-only current-source inspection, never HTTP-selectable.
  * Artifact verification and semantic re-derivation cannot be replaced here. */
 export function createCandidatePreparationValidator(
-  inspectInputs: typeof inspectAltitudeButtonRuntimeInputs = inspectAltitudeButtonRuntimeInputs,
+  inspectInputs: typeof inspectAltitudeRuntimeInputs = inspectAltitudeRuntimeInputs,
 ): CandidateReportValidator {
   return (value, context) => {
     if (
@@ -164,8 +179,11 @@ export function createCandidatePreparationValidator(
       path.join(directory, "runtime", value.runtime.artifactRevision.slice(7)),
       value.runtime.artifactRevision,
     );
-    const inputs = inspectInputs(path.resolve(repository, "../altitude"));
-    const expected = buildCandidatePreparationReport(
+    const inputs = inspectInputs(
+      path.resolve(repository, "../altitude"),
+      context.selection.request.version === 2 ? "checkbox" : "button",
+    );
+    const expected = buildAnyCandidatePreparationReport(
       context.selection,
       artifact,
       inputs,
@@ -173,6 +191,8 @@ export function createCandidatePreparationValidator(
     // Exact schema/scope comparison rejects added grades, fake acceptance and
     // even self-consistently rehashed but invented source semantics.
     if (!same(value, expected)) fail("preparation-report-mismatch");
+    if (expected.adapter === "altitude-checkbox-runtime-v1")
+      return summarizeStatefulPreparation(expected);
     const { semantics } = expected;
     return {
       counters: {
