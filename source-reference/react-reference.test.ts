@@ -118,6 +118,20 @@ test("reference API retains all ten cases, isolates source execution and refuses
     const reference = await response.json();
     assert.equal(reference.qualification, "unqualified");
     assert.equal(reference.cases.length, 10);
+    assert.equal(
+      (
+        await fetch(base + `/react/${reference.id}/ownership`, {
+          method: "POST",
+          body: "{}",
+        })
+      ).status,
+      400,
+    );
+    assert.equal(
+      (await fetch(base + `/react/${reference.id}/ownership`)).status,
+      404,
+    );
+
     assert.deepEqual(
       reference.cases.map((c: { id: string }) => c.id),
       reactReferenceCases.map((c) => c.id),

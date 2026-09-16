@@ -1,3 +1,4 @@
+import type { ReactOwnershipReport } from "../../../source-reference/react-ownership-run";
 import type { ReactProgramProposal } from "../../../source-reference/react-program-proposal";
 import type {
   ReactSourceComponent,
@@ -12,6 +13,7 @@ interface Reference {
   sourceFiles: number;
   qualification: "unqualified";
   validation?: ReactValidation | null;
+  ownership?: ReactOwnershipReport | null;
   cases: { id: string; subject: string; label: string; url: string }[];
 }
 function rootLabel(root: ReactRootFact): string {
@@ -40,6 +42,48 @@ export function ReactSourceReference() {
     problems: string[];
   } | null>(null);
   const [readingProgram, setReadingProgram] = useState(false);
+  const [ownership, setOwnership] = useState<ReactOwnershipReport | null>(null);
+  async function traceOwnership() {
+    if (!reference) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/react/${reference.id}/ownership`,
+        { method: "POST" },
+      );
+      const data = await response.json();
+      if (!response.ok) throw Error(data.error);
+      setOwnership(data);
+    } catch (e) {
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Component structure could not be observed.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  useEffect(() => {
+    if (!reference || ownership?.state !== "running") return;
+    let cancelled = false;
+    const timer = setInterval(() => {
+      void fetch(`/api/source-reference/react/${reference.id}/ownership`)
+        .then(async (response) => {
+          const data = await response.json();
+          if (!response.ok) throw Error(data.error);
+          if (!cancelled) setOwnership(data);
+        })
+        .catch((e) => {
+          if (!cancelled) setError(String(e));
+        });
+    }, 1500);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [reference?.id, ownership?.state]);
   async function inspectProgram() {
     if (!reference) return;
     setReadingProgram(true);
@@ -64,6 +108,7 @@ export function ReactSourceReference() {
   async function load() {
     setBusy(true);
     setProgram(null);
+    setOwnership(null);
     setError("");
     try {
       const response = await fetch("/api/source-reference/react", {
@@ -73,6 +118,7 @@ export function ReactSourceReference() {
       if (!response.ok) throw Error(result.error);
       setReference(result);
       setValidation(result.validation ?? null);
+      setOwnership(result.ownership ?? null);
       setLoadVersion((v) => v + 1);
     } catch (e) {
       setReference(null);
@@ -140,7 +186,12 @@ export function ReactSourceReference() {
       <button
         type="button"
         onClick={() => void load()}
-        disabled={busy || readingProgram || validation?.state === "running"}
+        disabled={
+          busy ||
+          readingProgram ||
+          validation?.state === "running" ||
+          ownership?.state === "running"
+        }
       >
         {busy
           ? "Loading React originals…"
@@ -171,7 +222,12 @@ export function ReactSourceReference() {
           <button
             type="button"
             onClick={() => void validate()}
-            disabled={busy || readingProgram || validation?.state === "running"}
+            disabled={
+              busy ||
+              readingProgram ||
+              validation?.state === "running" ||
+              ownership?.state === "running"
+            }
           >
             {validation?.state === "running"
               ? "Validating React sources…"
@@ -207,6 +263,83 @@ export function ReactSourceReference() {
               </ul>
             </div>
           )}
+          <section aria-label="React component structure">
+            <h3>Component structure</h3>
+            <p>
+              Locate mounted components and their nested instances in the
+              original render. A separate read-only observation must match the
+              original screenshot and measured tree. This does not yet generate
+              or qualify Figma output.
+            </p>
+            <button
+              type="button"
+              disabled={
+                busy ||
+                readingProgram ||
+                validation?.state === "running" ||
+                ownership?.state === "running"
+              }
+              onClick={() => void traceOwnership()}
+            >
+              {ownership?.state === "running"
+                ? "Tracing React structure…"
+                : "Trace React structure"}
+            </button>
+            {ownership && (
+              <>
+                <p role="status">
+                  {ownership.state === "running"
+                    ? `${ownership.rows.length} of ${ownership.denominator} cases reached; results provisional.`
+                    : `${ownership.matched} / ${ownership.denominator} cases matched the original during structure observation.`}
+                </p>
+                {ownership.problem && <p>{ownership.problem}</p>}
+                {ownership.rows.map((row) => (
+                  <details key={row.id}>
+                    <summary>
+                      {row.id} ·{" "}
+                      {ownership.state === "running"
+                        ? "provisional"
+                        : row.matched
+                          ? "render unchanged"
+                          : "not verified"}
+                    </summary>
+                    {row.problems.length > 0 && (
+                      <p>{row.problems.join(" · ")}</p>
+                    )}
+                    <ul>
+                      {row.ownership?.components.map((instance) => (
+                        <li key={instance.id}>
+                          {instance.source.exportName}
+                          {instance.parent
+                            ? ` inside ${row.ownership?.components.find((i) => i.id === instance.parent)?.source.exportName ?? "unresolved parent"}`
+                            : " at the selected root"}{" "}
+                          · {instance.roots.length} rendered root
+                          {instance.roots.length === 1 ? "" : "s"}
+                        </li>
+                      ))}
+                    </ul>
+                    {ownership.state === "complete" && row.matched && (
+                      <div className="native-image-pair">
+                        {(["source", "observed"] as const).map((side) => (
+                          <figure key={side}>
+                            <figcaption>
+                              {side === "source"
+                                ? "Untouched original"
+                                : "Component observation — same render"}
+                            </figcaption>
+                            <img
+                              alt={`${row.id} ${side} structure check`}
+                              src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/${side}/${side === "source" ? row.sourceImage : row.observedImage}.png`}
+                            />
+                          </figure>
+                        ))}
+                      </div>
+                    )}
+                  </details>
+                ))}
+              </>
+            )}
+          </section>
           {program?.proposal && (
             <section aria-label="React contract proposals">
               <h3>Contract proposals from installed APIs</h3>
@@ -268,7 +401,10 @@ export function ReactSourceReference() {
             <button
               type="button"
               disabled={
-                busy || readingProgram || validation?.state === "running"
+                busy ||
+                readingProgram ||
+                validation?.state === "running" ||
+                ownership?.state === "running"
               }
               onClick={() => void inspectProgram()}
             >
