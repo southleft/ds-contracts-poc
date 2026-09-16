@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
+import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
 
 interface Operation {
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
   connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean };
+  content?: Pick<ReactContentInspection, 'phase' | 'sourceUnchanged' | 'problems'> & Partial<ReactContentInspection>;
 }
 export function ReactNativeInspection({ referenceId, selectedCase, ownership }: {
   referenceId: string; selectedCase: string; ownership: ReactOwnershipReport | null;
@@ -12,7 +14,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [rows, setRows] = useState<Operation[]>([]), [error, setError] = useState('');
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const root = `/api/source-reference/react/${referenceId}`;
-  const active = rows.some(r => r.connection.paired && !r.connection.finished);
+  const active = rows.some(r => (r.connection.paired && !r.connection.finished) || r.content?.phase === 'running');
   useEffect(() => {
     let stopped = false, pending = false;
     const load = async () => {
@@ -71,6 +73,16 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           onClick={() => void action(`native-operation/${id}/retry-observation`)}>{op.pendingPhase ? 'Retry interrupted readback' : 'Inspect native draft again'}</button>}
         {op.nativeOutcome === 'unknown' && <p>The native outcome is unknown. Creation will not be repeated automatically.</p>}
         {op.structuralObservation && <p>Supported structure: {op.structuralObservation.status.replaceAll('-', ' ')}. Visual fidelity remains unverified.</p>}
+        <button type="button" disabled={busy || !op.sourceCurrent || row.content?.phase === 'running'}
+          onClick={() => void action(`native-operation/${id}/content`)}>Prepare caller-content comparison</button>
+        {row.content && <section aria-label="Caller-content preparation">
+          <p>Content preparation: {row.content.phase}. {row.content.sourceUnchanged ? 'The original rendering and source files are unchanged.' : 'Source equivalence is not yet established.'}</p>
+          {!!row.content.fontFamilies?.length && <p>Observed text fonts: {row.content.fontFamilies.join(', ')}.</p>}
+          {row.content.content && <p>{row.content.content.status === 'compiled-comparison-draft'
+            ? 'Caller content compiled for comparison. It has not been placed in a Figma instance or visually verified.'
+            : 'Caller content has unsupported facts that prevent native comparison.'} Reusable main slots remain empty.</p>}
+          {[...row.content.problems, ...(row.content.content?.problems ?? [])].length > 0 && <ul>{[...row.content.problems, ...(row.content.content?.problems ?? [])].map((p, i) => <li key={i}>{p}</li>)}</ul>}
+        </section>}
         {op.problems.length > 0 && <ul>{op.problems.map(p => <li key={p}>{p}</li>)}</ul>}
         {!!op.imageObservation?.images.length && <details><summary>Native root exports · diagnostic only</summary>
           <p>These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.</p>

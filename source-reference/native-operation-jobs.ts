@@ -1375,6 +1375,11 @@ export function createNativeOperationJobs(
     retryObservation,
     retryCreation,
     verifiedTokenContext,
+    reactRequest(id: string): ReactNativeRequest {
+      const { header } = load(id);
+      if (!isReactNativeRequest(header.request)) fail('react-operation-required');
+      return structuredClone(header.request);
+    },
     reactIdentity(id: string) {
       const { header } = load(id);
       if (!isReactNativeRequest(header.request)) fail('react-operation-required');

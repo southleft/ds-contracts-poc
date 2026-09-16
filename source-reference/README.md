@@ -142,6 +142,8 @@ reason to fabricate review provenance or restamp signed fixtures.
 
 ## API and content evidence
 
+React saved native operations expose `POST react/:reference/native-operation/:operation/content`. This accepts no body, resolves the operation's host-owned request, reopens its sealed source tree and performs a targeted unchanged-render check. Painted text fonts and actual SVG viewports are recorded separately; the property matrix is not rerun. `observed-content.ts` reuses the shared computed anatomy/layout/token compiler for comparison snapshots, preserving named refusals and unqualified status. The private `react-content-inspections` records are sealed and reopen after restart. No comparison-instance write or reusable nested anatomy is claimed by this preparation.
+
 The additive `readCemDeclarations()` reader preserves the exact declared public
 properties, defaults as unevaluated source expressions, slots and event names.
 It does not use the legacy CEM adapter's inferred callback names or defaults.

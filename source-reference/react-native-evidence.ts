@@ -55,3 +55,15 @@ export function readReactNativeEvidence(repoRoot: string, reference: ReactRefere
     revision: `sha256:${reference.id}`, programSha256: evidenceSha(programBytes), evidenceRevision: revisionOf(request),
   } };
 }
+
+export function readReactNativeContentEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest) {
+  const original = readReactNativeEvidence(repoRoot, reference, request);
+  const dir = path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id);
+  const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactOwnershipReport;
+  const captured = JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) as
+    Awaited<ReturnType<typeof import('./capture.js').captureValidatedTree>>;
+  if (captured.status !== 'captured' || captured.problems.length || !captured.tree ||
+      captured.treeSha256 !== evidenceSha(Buffer.from(JSON.stringify(captured.tree))) ||
+      captured.treeSha256 !== report.rows.find(row => row.id === request.caseId)?.treeSha256) return fail();
+  return { ...original, captured };
+}

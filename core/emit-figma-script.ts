@@ -3500,7 +3500,7 @@ function svgSinglePaintVar(markup: string, hex: string, paintPath: string | unde
   return paints.size === 1 && paints.has(hex) ? figmaName(paintPath) : undefined;
 }
 
-function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): string {
+function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): { markup: string; paintPath?: string; paintHex: string } {
   let asset = part.icon!.asset;
   const ref = asset.match(PARENT_PROP_REF);
   if (ref) {
@@ -3511,15 +3511,17 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   }
   const svg = iconAssets.get(asset);
   if (!svg) throw new Error(`Unknown icon asset "${asset}" (expected assets/icons/${asset}.svg)`);
-  // Round 4: glyph paint priority — the part's own `fill` channel (promoted
-  // svg hosts), else the text color; currentColor AND attribute-less paths
-  // (CSS-inherited fill) both bake to the resolved literal.
+  // Inherited SVG fill and CSS currentColor are independent paint channels.
+  // A stroke using currentColor follows `color`, even when an ancestor's
+  // initial SVG fill is black. Attribute-less filled shapes use `fill`.
   const paintPath = ctx.glyphFillPath ?? ctx.textFillPath;
   // R7: a LITERAL ink (literals.color on the part or an ancestor) bakes into
   // the glyph exactly as the token path's resolved literal does.
   const hex = paintPath ? String(resolveLiteral(paintPath)) : (ctx.textFillLitCss ?? '#000000');
   const hasPaint = paintPath !== undefined || ctx.textFillLitCss !== undefined;
-  let out = svg.replaceAll('currentColor', hex);
+  const currentHex = ctx.textFillPath ? String(resolveLiteral(ctx.textFillPath)) : (ctx.textFillLitCss ?? '#000000');
+  const usesCurrentColor = svg.includes('currentColor');
+  let out = svg.replaceAll('currentColor', currentHex);
   // Bake the resolved paint as a `fill` ONLY for icons that declare no fill
   // anywhere — pure CSS-inherited glyphs. If the <svg> tag itself already sets
   // fill (e.g. stroke-based icons carry `fill="none"`, coloured via the
@@ -3556,7 +3558,7 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
       .replace(/^(<svg\b[^>]*?)\swidth="[^"]*"/, `$1 width="${part.icon!.size}"`)
       .replace(/^(<svg\b[^>]*?)\sheight="[^"]*"/, `$1 height="${part.icon!.size}"`);
   }
-  return out;
+  return { markup: out, paintPath: usesCurrentColor ? ctx.textFillPath : paintPath, paintHex: usesCurrentColor ? currentHex : hex };
 }
 
 const PLACEHOLDER_ATTR_REF = /^\{([a-z][\w-]*)\}$/;
@@ -4445,11 +4447,9 @@ function partToSpecInner(
   if (part.icon) {
     // The part's own tokens (e.g. a color override) apply to the glyph.
     const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
-    const markup = iconSvg(part, subst, iconCtx);
-    const paintPath = iconCtx.glyphFillPath ?? iconCtx.textFillPath;
+    const { markup, paintPath, paintHex } = iconSvg(part, subst, iconCtx);
     // R7: a literal ink has no variable to re-bind (svgPaintVar stays unset);
     // the baked hex is the literal itself.
-    const paintHex = paintPath ? String(resolveLiteral(paintPath)) : (iconCtx.textFillLitCss ?? '#000000');
     const paintVar = svgSinglePaintVar(markup, paintHex, paintPath);
     // FC-SVG-ROTATION: declared transform rotate(<n>deg) on bare (and
     // box-hosted) icon parts — Polaris Spinner capture gaps at 12 o'clock

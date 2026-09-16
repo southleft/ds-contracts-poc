@@ -1,4 +1,5 @@
 import { startReactOwnership } from "./react-ownership-run.js";
+import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
 import { readReactNativeEvidence, selectReactNativeRequest } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
@@ -148,6 +149,7 @@ export function createReactReferenceService(
   native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport> },
 ) {
   let reference: ReactReference | undefined;
+  const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
     string,
     ReturnType<typeof startReactValidation>
@@ -169,7 +171,7 @@ export function createReactReferenceService(
     route: string,
   ) => {
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
-    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation)$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content)$/.exec(route);
     if (nativeRoute || nativeAction) {
       try {
         if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction)![1]) throw Error('react-native-reference-unavailable');
@@ -188,13 +190,23 @@ export function createReactReferenceService(
               if (new URL(`http://${req.headers.host}`).port !== '5181') throw Error('react-native-pairing-port');
               json(res, 200, { connection: transport.pair(id) }); return;
             }
-            if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
+            if (nativeAction[3] === 'content') {
+              if (contentJobs.get(id)?.state.phase !== 'running') {
+                const job = startReactContentInspection(repoRoot, reference, jobs.reactRequest(id), id);
+                contentJobs.set(id, job);
+                void job.promise.catch(() => { job.state.phase = 'failed'; job.state.problems = ['react-content-evidence-unavailable']; });
+              }
+            } else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
         const observedAt = Date.now();
-        json(res, 200, { operations: jobs.listReact(reference.id).map(row => ({ ...row,
-          connection: transport.status(row.operation.id, observedAt) })) });
+        json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
+          let content;
+          try { content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
+          catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
+          return { ...row, content, connection: transport.status(row.operation.id, observedAt) };
+        }) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
       }

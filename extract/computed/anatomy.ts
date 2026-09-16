@@ -1771,6 +1771,17 @@ export function reconstructSvg(
   }
   // larger user space than its box would silently crop). Circle-only MUI
   // progress rings use the authored offset form `SIZE/2 SIZE/2 SIZE SIZE`.
+  if (svgEl.svgViewport) {
+    const { viewBox, preserveAspectRatio } = svgEl.svgViewport;
+    if (viewBox.length !== 4 || viewBox.some(n => !Number.isFinite(n)) || viewBox[2] <= 0 || viewBox[3] <= 0 ||
+        viewBox[2] !== viewBox[3] || w !== h || preserveAspectRatio !== 'xMidYMid meet') {
+      receipts.push(`svg-observed-viewport-unqualified: ${label} — unsupported viewport or aspect-ratio mapping`);
+      return null;
+    }
+    receipts.push(`svg-viewbox-observed: ${label} — ${viewBox.join(' ')} from source SVG viewport evidence`);
+    return { markup: `<svg viewBox="${viewBox.join(' ')}" xmlns="http://www.w3.org/2000/svg">${paths.join('')}</svg>`,
+      size: w, vb: viewBox[2], extent: maxCoord, bumped: false };
+  }
   // @door anatomy.svg-viewbox-reconstruct
   if (circleOnly && circleCenter !== null && circleCenter > 0) {
     const size = Math.round(circleCenter);

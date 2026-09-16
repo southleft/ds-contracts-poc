@@ -9,7 +9,7 @@
       "stage": "anatomy",
       "status": "proposed",
       "file": "extract/computed/anatomy.ts",
-      "ruleLine": 154,
+      "ruleLine": 155,
       "ruleText": "return 'stretch'; // 'normal' / 'stretch' — a grid item's default IS stretch",
       "css": {
         "construct": "justify-items / align-items / justify-self / align-self on a grid, with any value the mapper does not recognise",
@@ -39,8 +39,8 @@
       "stage": "anatomy",
       "status": "implemented",
       "file": "extract/computed/anatomy.ts",
-      "line": 282,
-      "ruleLine": 283,
+      "line": 283,
+      "ruleLine": 284,
       "ruleText": "if (cols > 1 && rows > 1) {",
       "css": {
         "construct": "a genuinely two-dimensional grid reaching the FLEX-LOWERING path",
@@ -69,8 +69,8 @@
       "stage": "anatomy",
       "status": "implemented",
       "file": "extract/computed/anatomy.ts",
-      "line": 1980,
-      "ruleLine": 1981,
+      "line": 1992,
+      "ruleLine": 1993,
       "ruleText": "if (svgPlans.has(hostIdx)) continue;",
       "css": {
         "construct": "a second (or third) <svg> under a host element that already has an svg plan",
@@ -1009,8 +1009,8 @@
       "stage": "emit",
       "status": "implemented",
       "file": "core/emit-figma-script.ts",
-      "line": 4084,
-      "ruleLine": 4085,
+      "line": 4086,
+      "ruleLine": 4087,
       "ruleText": "if (carried === 4 && numeric) {",
       "css": {
         "construct": "position:absolute with all four insets carried and every one a px length",
@@ -1048,7 +1048,7 @@
       "stage": "emit",
       "status": "proposed",
       "file": "core/emit-figma-script.ts",
-      "ruleLine": 4025,
+      "ruleLine": 4027,
       "ruleText": "if (left === undefined && right === undefined && top === undefined && bottom === undefined) return null;",
       "css": {
         "construct": "position:absolute with NO inset carried — the static-position case",
