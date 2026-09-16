@@ -227,16 +227,10 @@
             ]
           },
           "default": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "number"
-              }
+            "type": [
+              "string",
+              "boolean",
+              "number"
             ]
           },
           "required": {
@@ -359,7 +353,10 @@
                   {
                     "type": "string"
                   }
-                ]
+                ],
+                "additionalItems": false,
+                "minItems": 2,
+                "maxItems": 2
               },
               "aria": {
                 "type": "string",
@@ -460,33 +457,21 @@
               "type": "object",
               "properties": {
                 "fileKey": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
+                  "type": [
+                    "string",
+                    "null"
                   ]
                 },
                 "componentSetKey": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
+                  "type": [
+                    "string",
+                    "null"
                   ]
                 },
                 "nodeId": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
+                  "type": [
+                    "string",
+                    "null"
                   ]
                 }
               },
@@ -1454,13 +1439,9 @@
                       "type": "string"
                     },
                     "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
+                      "type": [
+                        "string",
+                        "boolean"
                       ]
                     }
                   },
@@ -1564,16 +1545,10 @@
                   "type": "string"
                 },
                 "additionalProperties": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "boolean"
-                    },
-                    {
-                      "type": "number"
-                    }
+                  "type": [
+                    "string",
+                    "boolean",
+                    "number"
                   ]
                 }
               }
