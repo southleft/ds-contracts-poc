@@ -5158,6 +5158,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   if (aliasConflicts.length) throw new Error(`FIGMA_UNSET_BINDING_COLLISION: ${aliasConflicts.join(', ')} collides with a prop, slot, event or generated event binding`);
   refuseUnresolvableRefs(contract, byId);
   refuseMissingRequiredFacts(contract);
+  if (contract.anatomy.root?.slot) throw new Error(
+    'FIGMA_ROOT_SLOT_UNSUPPORTED: a root content slot needs a verified native content container; refusing to drop caller content',
+  );
   // Variant axes = enum props AND VARIANT-bound boolean props, in prop
   // declaration order (see isVariantBool). An enum-only contract's axis list
   // is exactly the old enum filter — byte-identical substitution space.

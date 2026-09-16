@@ -100,6 +100,7 @@ export function startReactOwnership(
           "react-ownership-run.ts",
           "react-reference.ts",
           "react-source-program.ts",
+          "react-children.ts",
           "capture.ts",
           "react-reference-profiles.ts",
           "react-reference-cases.ts",

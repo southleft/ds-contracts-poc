@@ -18,6 +18,7 @@ export interface ReactProgramProposal {
     name: string;
     module: string;
     carried: string[];
+    slots: string[];
     platform: string[];
     unsupported: { name: string; type: string; reason: string }[];
     problems: string[];
@@ -156,6 +157,7 @@ export function proposeReactSourceProgram(
         name: component.name,
         module: component.module,
         carried: [],
+        slots: [],
         platform: [],
         unsupported: [],
         problems: component.problems.filter(
@@ -164,7 +166,25 @@ export function proposeReactSourceProgram(
       };
       out.components.push(row);
       const props: ExtractedProp[] = [];
+      const rootChildrenSlot =
+        component.children?.kind === "forwarded" &&
+        component.root.kind === "host";
+      if (!rootChildrenSlot && component.children?.kind === "forwarded")
+        row.problems.push("children-root-consumption-unverified");
+      else if (component.children?.kind === "unresolved")
+        row.problems.push(
+          component.children.reason ?? "children-flow-unresolved",
+        );
       for (const prop of component.props) {
+        if (prop.name === "children" && rootChildrenSlot) {
+          props.push({
+            name: "children",
+            kind: "node",
+            optional: prop.optional,
+            confidence: "declared",
+          });
+          continue;
+        }
         const platform =
           prop.declaredIn.length > 0 &&
           prop.declaredIn.every((d) =>
@@ -245,7 +265,11 @@ export function proposeReactSourceProgram(
             ]
           : []),
       ];
-      resolvedComponents[component.name] = { props, notes };
+      resolvedComponents[component.name] = {
+        props,
+        notes,
+        ...(rootChildrenSlot ? { rootChildrenSlot: true } : {}),
+      };
     }
     inputs.push({ ...input, resolvedComponents });
   }
@@ -255,6 +279,15 @@ export function proposeReactSourceProgram(
     prefix,
     preserveSourceApi: true,
   });
+  for (const row of out.components) {
+    const draft = out.result.proposals.find((p) => p.name === row.name)
+      ?.proposal.contract as
+      { anatomy?: { root?: { slot?: { name: string } } } } | undefined;
+    if (draft?.anatomy?.root?.slot?.name === "children") {
+      row.slots.push("children");
+      row.problems.push("native-root-slot-projection-unverified");
+    }
+  }
   out.problems.push(
     "rendered-anatomy-and-token-correspondence-unverified",
     "native-projection-unverified",

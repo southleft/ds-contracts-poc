@@ -356,6 +356,10 @@ export function ReactSourceReference() {
                     carried; {component.unsupported.length} unsupported
                   </summary>
                   <p>Carried: {component.carried.join(", ") || "None"}</p>
+                  <p>
+                    Reusable content slots:{" "}
+                    {component.slots.join(", ") || "None verified"}
+                  </p>
                   <ul>
                     {component.unsupported.map((prop) => (
                       <li key={prop.name}>
