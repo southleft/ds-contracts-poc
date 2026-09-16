@@ -3762,6 +3762,7 @@ function mapDepProps(
   /** Named-loss sink (single-variant-dep-collapse): the caller appends these
    *  to the instance spec's channelMiss footnote — never a silent drop. */
   ledger?: CodeOnlyFactSeed[],
+  parent?: Contract,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -3795,10 +3796,19 @@ function mapDepProps(
     if (typeof value === 'string') {
       const parentRef = value.match(PARENT_PROP_REF);
       if (parentRef) {
+        const parentProp = parent?.props.find(p => p.name === parentRef[1]);
+        if (parentProp?.type === 'text') {
+          throw new Error(`FIGMA_NESTED_TEXT_PROP_LINK_UNSUPPORTED: ${parent!.id}.${parentProp.name} -> ${dep.id}.${propName}. This compiler does not support live parent-to-child text links in Figma; an editable nested-control projection must be qualified first.`);
+        }
+        if (parentProp?.type === 'boolean' && !isVariantBool(parentProp)) {
+          throw new Error(`FIGMA_NESTED_BOOLEAN_PROP_LINK_UNSUPPORTED: ${parent!.id}.${parentProp.name} -> ${dep.id}.${propName}. This compiler does not support live parent-to-child BOOLEAN links in Figma; use an explicit VARIANT state axis or qualify an editable nested-control projection.`);
+        }
         const resolved = subst[parentRef[1]];
-        if (resolved === undefined)
+        if (resolved === undefined) {
+          if (parentProp?.type === 'boolean' && parentProp.bindings.figma.unsetValue !== undefined) continue;
           throw new Error(`Cannot resolve parent prop mapping "{${parentRef[1]}}"`);
-        value = resolved;
+        }
+        value = parentProp?.type === 'boolean' ? resolved === 'true' : resolved;
       }
     }
     const fig = depProp.bindings.figma;
@@ -4284,7 +4294,7 @@ function partToSpecs(
         dep: dep.name,
         depContractId: dep.id,
         ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text),
+        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text, undefined, contract),
       };
       applyVisibleWhen(spec, part, contract);
       return spec;
@@ -4614,7 +4624,7 @@ function partToSpecInner(
       dep: dep.name,
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger),
+      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract),
     };
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
     // Round 2 iteration 9 — per-instance overrides (component.overrides):

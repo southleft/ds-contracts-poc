@@ -679,40 +679,65 @@ function findComponents(sf: ts.SourceFile): Map<string, PropsTypeRef> {
 
 function collectDefaults(sf: ts.SourceFile, componentName: string): Map<string, string | number | boolean> {
   const defaults = new Map<string, string | number | boolean>();
-  const visit = (node: ts.Node) => {
-    if (ts.isObjectBindingPattern(node)) {
-      for (const el of node.elements) {
-        if (el.initializer && ts.isIdentifier(el.name)) {
-          const init = el.initializer;
-          if (ts.isStringLiteral(init)) defaults.set(el.name.text, init.text);
-          else if (ts.isNumericLiteral(init)) defaults.set(el.name.text, Number(init.text));
-          else if (init.kind === ts.SyntaxKind.TrueKeyword) defaults.set(el.name.text, true);
-          else if (init.kind === ts.SyntaxKind.FalseKeyword) defaults.set(el.name.text, false);
-        }
-      }
-    }
-    // Legacy: Component.defaultProps = { size: 'md' }
-    if (
-      ts.isBinaryExpression(node) &&
-      ts.isPropertyAccessExpression(node.left) &&
-      node.left.name.text === 'defaultProps' &&
-      ts.isIdentifier(node.left.expression) &&
-      node.left.expression.text === componentName &&
-      ts.isObjectLiteralExpression(node.right)
-    ) {
-      for (const prop of node.right.properties) {
-        if (ts.isPropertyAssignment(prop) && ts.isIdentifier(prop.name)) {
-          const init = prop.initializer;
-          if (ts.isStringLiteral(init)) defaults.set(prop.name.text, init.text);
-          else if (ts.isNumericLiteral(init)) defaults.set(prop.name.text, Number(init.text));
-          else if (init.kind === ts.SyntaxKind.TrueKeyword) defaults.set(prop.name.text, true);
-          else if (init.kind === ts.SyntaxKind.FalseKeyword) defaults.set(prop.name.text, false);
-        }
-      }
-    }
-    ts.forEachChild(node, visit);
+  const literal = (name: string, init: ts.Expression | undefined) => {
+    if (!init) return;
+    if (ts.isStringLiteral(init)) defaults.set(name, init.text);
+    else if (ts.isNumericLiteral(init)) defaults.set(name, Number(init.text));
+    else if (init.kind === ts.SyntaxKind.TrueKeyword) defaults.set(name, true);
+    else if (init.kind === ts.SyntaxKind.FalseKeyword) defaults.set(name, false);
   };
-  visit(sf);
+  const pattern = (binding: ts.BindingName) => {
+    if (!ts.isObjectBindingPattern(binding)) return;
+    for (const element of binding.elements) {
+      const key = element.propertyName ?? element.name;
+      if (ts.isIdentifier(key) || ts.isStringLiteral(key)) literal(key.text, element.initializer);
+    }
+  };
+  // Defaults belong to this component's props input, not every destructuring
+  // expression in the module. In a family file, the former whole-file walk
+  // let a child's defaults overwrite its parent's (including omitted booleans).
+  const declarations = new Map<string, ts.FunctionDeclaration | ts.Expression>();
+  for (const statement of sf.statements) {
+    if (ts.isFunctionDeclaration(statement) && statement.name) declarations.set(statement.name.text, statement);
+    if (ts.isVariableStatement(statement)) for (const decl of statement.declarationList.declarations) {
+      if (ts.isIdentifier(decl.name) && decl.initializer) declarations.set(decl.name.text, decl.initializer);
+    }
+  }
+  const seen = new Set<ts.Node>();
+  const resolve = (node: ts.Node | undefined): ts.FunctionDeclaration | ts.FunctionExpression | ts.ArrowFunction | undefined => {
+    if (!node || seen.has(node)) return;
+    seen.add(node);
+    if (ts.isFunctionDeclaration(node) || ts.isFunctionExpression(node) || ts.isArrowFunction(node)) return node;
+    if (ts.isAsExpression(node) || ts.isSatisfiesExpression(node) || ts.isParenthesizedExpression(node)) return resolve(node.expression);
+    if (ts.isCallExpression(node)) return resolve(node.arguments[0]);
+    if (ts.isIdentifier(node)) return resolve(declarations.get(node.text));
+  };
+  const fn = resolve(declarations.get(componentName));
+  const input = fn?.parameters[0];
+  if (input) {
+    pattern(input.name);
+    if (ts.isIdentifier(input.name) && fn?.body && ts.isBlock(fn.body)) {
+      for (const statement of fn.body.statements) {
+        if (!ts.isVariableStatement(statement)) continue;
+        for (const decl of statement.declarationList.declarations) {
+          if (decl.initializer && ts.isIdentifier(decl.initializer) && decl.initializer.text === input.name.text) pattern(decl.name);
+        }
+      }
+    }
+  }
+  // Legacy assignments remain scoped to the named component at module level.
+  for (const statement of sf.statements) {
+    if (!ts.isExpressionStatement(statement)) continue;
+    const node = statement.expression;
+    if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+        ts.isPropertyAccessExpression(node.left) && node.left.name.text === 'defaultProps' &&
+        ts.isIdentifier(node.left.expression) && node.left.expression.text === componentName &&
+        ts.isObjectLiteralExpression(node.right)) {
+      for (const prop of node.right.properties) {
+        if (ts.isPropertyAssignment(prop) && (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name))) literal(prop.name.text, prop.initializer);
+      }
+    }
+  }
   return defaults;
 }
 

@@ -290,6 +290,10 @@ export function proposeContract(
     if (anatomy) {
       const walkContent = (p: ExtractedPart) => {
         if (p.content?.prop) consumed.add(p.content.prop);
+        for (const value of Object.values(p.component?.props ?? {})) {
+          const reference = typeof value === 'string' ? /^\{([a-z][\w-]*)\}$/.exec(value) : null;
+          if (reference) consumed.add(reference[1]);
+        }
         const tb = (p as { textByProp?: { prop?: string } }).textByProp;
         if (tb?.prop) consumed.add(tb.prop);
         for (const child of Object.values(p.parts ?? {})) walkContent(child);

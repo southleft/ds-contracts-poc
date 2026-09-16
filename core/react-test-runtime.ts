@@ -48,6 +48,7 @@ export async function mountGenerated(
   name: string,
   tsx: string,
   css = "",
+  dependencies: Record<string, { tsx: string; css?: string }> = {},
 ) {
   const bundle = await build({
     stdin: {
@@ -73,17 +74,21 @@ export async function mountGenerated(
             path: `${name}.tsx`,
             namespace: "subject",
           }));
-          builder.onLoad({ filter: /.*/, namespace: "subject" }, () => ({
-            contents: tsx,
+          builder.onResolve({ filter: /^\.\.?\/[A-Za-z][\w-]*$/ }, (args) => {
+            const dependency = path.basename(args.path);
+            return dependencies[dependency] ? { path: `${dependency}.tsx`, namespace: "subject" } : undefined;
+          });
+          builder.onLoad({ filter: /.*/, namespace: "subject" }, (args) => ({
+            contents: args.path === `${name}.tsx` ? tsx : dependencies[path.basename(args.path, '.tsx')].tsx,
             loader: "tsx",
             resolveDir: process.cwd(),
           }));
-          builder.onResolve({ filter: /\.module\.css$/ }, () => ({
-            path: `${name}.module.css`,
+          builder.onResolve({ filter: /\.module\.css$/ }, (args) => ({
+            path: path.basename(args.path),
             namespace: "subject-css",
           }));
-          builder.onLoad({ filter: /.*/, namespace: "subject-css" }, () => ({
-            contents: css,
+          builder.onLoad({ filter: /.*/, namespace: "subject-css" }, (args) => ({
+            contents: args.path === `${name}.module.css` ? css : dependencies[path.basename(args.path, '.module.css')]?.css ?? '',
             loader: "local-css",
           }));
         },

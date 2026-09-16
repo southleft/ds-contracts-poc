@@ -96,7 +96,7 @@ test('an oversized or duplicate batch refuses atomically instead of dropping sib
   assert.equal(workspaceSnapshot(), before);
 });
 
-test('retaining a family does not qualify unsupported text or boolean forwarding', () => {
+test('retaining a family preserves typed text and boolean forwarding in the shared contract', () => {
   for (const type of ['string', 'boolean']) {
     const source = familySource.replaceAll("density?: 'compact' | 'comfortable'", `density: ${type}`)
       .replaceAll("density = 'comfortable'", 'density');
@@ -106,7 +106,7 @@ test('retaining a family does not qualify unsupported text or boolean forwarding
     const parent = session.contracts.get('ds.panel')!;
     const errors: string[] = [];
     validateContract(parent, session.contracts, errors, new Map());
-    assert.ok(errors.some(e => e.includes('maps "{density}" but no enum prop')), errors.join('\n'));
+    assert.deepEqual(errors, []); // Native projection has its own capability checks.
   }
 });
 

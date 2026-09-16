@@ -34,6 +34,12 @@ These steps describe the intended product workflow. The full application integra
 
 **No complete journey cohort has yet met the current v1 criteria.** Existing evidence reduces implementation uncertainty, but it is not a percentage of product completion. We do not have an evidence-backed completion date. The milestone exits below show what remains and prevent individual demos from being mistaken for the finish line.
 
+### React import and composition checkpoint
+
+Importing a React source file into the playground now retains its readable component family and each component's minted styling tokens. Generated React preserves explicit root content and forwards supported text and boolean properties to nested components, including empty text, explicit false and omission. Defaults are read from each component's own props input. Browser checks exercise live updates in both generated React formats; the static HTML preview follows the same scalar defaults.
+
+Native Figma generation still refuses live parent-to-child text and BOOLEAN-property links by name. An explicitly declared boolean variant axis can supply child values, but that does not establish general editable nested-property support. These shared compiler fixes do not qualify React source rendering, native visual fidelity or the complete code-led journey. The next milestone remains the application workflow with independently verified editable Figma output.
+
 ### Stateful source intake
 
 The fresh ten-state app capture now records semantic evidence for all four Checkbox states: default, checked, indeterminate and disabled. Total API/content intake is 8/10; the disabled Button and failed Card image remain refused. Original screenshots and tree records match the previous baseline byte for byte in all ten states. This is source intake progress, not Checkbox generation.

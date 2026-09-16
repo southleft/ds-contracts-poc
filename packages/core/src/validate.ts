@@ -115,10 +115,13 @@ export function validateContract(
           errors.push(`${contract.id}: part "${name}" sets ${dep!.id} arrayOf prop "${propName}" — structured values cannot be fixed in anatomy`);
         }
         const parentRef = typeof value === 'string' ? value.match(/^\{([a-z][\w-]*)\}$/) : null;
-        if (parentRef && !enumNames.has(parentRef[1])) {
-          errors.push(
-            `${contract.id}: part "${name}" maps "{${parentRef[1]}}" but no enum prop "${parentRef[1]}" exists on this contract`,
-          );
+        if (parentRef) {
+          const parentProp = contract.props.find((p) => p.name === parentRef[1]);
+          if (!parentProp || (!isEnum(parentProp) && parentProp.type !== 'text' && parentProp.type !== 'boolean')) {
+            errors.push(`${contract.id}: part "${name}" maps "{${parentRef[1]}}" but no enum, text or boolean prop "${parentRef[1]}" exists on this contract`);
+          } else if (!isEnum(parentProp) && depProp && depProp.type !== parentProp.type) {
+            errors.push(`${contract.id}: part "${name}" maps ${parentProp.type} prop "${parentProp.name}" into incompatible ${dep!.id} prop "${propName}" (${JSON.stringify(depProp.type)})`);
+          }
         }
       }
       if (part.component.text !== undefined && dep && !hasChildrenText(dep)) {
