@@ -13,7 +13,7 @@ import type { PropSpace } from '../extract/computed/capture.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactSourceProgram } from './react-source-program.js';
-import { reactChildContextSizing, type ReactChildContext } from './react-child-context.js';
+import { reactChildContextSizing, reactChildContextGrid, type ReactChildContext } from './react-child-context.js';
 
 export interface ReactRootVisual {
   version: 1;
@@ -80,6 +80,8 @@ export function projectReactRootVisual(
         throw Error('react-root-visual-source-content-unqualified');
       const observation = instance.roots[0].observation;
       const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
+      const grid=childContext && styleOrigin ? reactChildContextGrid(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
+      if (grid && !sizing) throw Error('react-child-context-grid-parent-width-unqualified');
       if (Object.keys(observation.pseudo).length) throw Error('react-root-visual-pseudo-content-unprojected');
       const root: CapturedNode = { ...structuredClone(observation), nodes: [],
         style: Object.fromEntries(Object.entries(observation.style).map(([key, value]) => [key, normalizeValue(value)])) };
@@ -87,7 +89,8 @@ export function projectReactRootVisual(
       const name = `ObservedRoot${suffix}`;
       const contract = ContractSchema.parse({ id: `observed.react-${suffix}`, name, version: '0.1.0', status: 'draft',
         description: 'Observed source root only; API, behavior and composition are not projected.',
-        props: [], states: [], semantics: { element: root.tag }, anatomy: { root: { slot: { name: 'children' } } },
+        props: [], states: [], semantics: { element: root.tag }, anatomy: { root: { slot: { name: 'children' },
+          ...(grid ? { layout: grid, literals: sizing } : {}) } },
         bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } },
           code: { anchors: { importPath: `observed/${suffix}`, export: name } } } });
       const enumeration = enumerate([], [], 1, {}), combo = enumeration.combos[0].key;
@@ -136,6 +139,7 @@ export function projectReactRootVisual(
           enriched.anatomy.root.literals={...enriched.anatomy.root.literals,...sizing};
           result.limitations.push('parent-stretch-current-source-context-only');
         }
+        if (grid) result.limitations.push('intrinsic-row-lowering-observed-block-content-only');
         const bindings = observeReactSourceBindings(root, enriched.anatomy.root, tokens, styleOrigin, instance.roots[0].path);
         result.sourceBindings = bindings.sourceBindings;
         for (const binding of bindings.sourceBindings) if (binding.tokenPath)

@@ -304,13 +304,13 @@ test('pinned child context carries a source-proven stretch constraint without ch
   const f=await fixture();
   try {
     const tree=structuredClone(f.tree);
-    Object.assign(tree.style,{width:'360px','align-items':'normal'});
+    Object.assign(tree.style,{width:'360px','align-items':'normal','max-height':'none'});
     if(tree.nodes[0].t!=='el')throw Error('child missing');
     const child=tree.nodes[0].el;
     Object.assign(child.style,{width:'360px',height:'36px','align-self':'auto',position:'static','box-sizing':'border-box',
       'min-width':'auto','max-width':'none','min-height':'auto','max-height':'none','aspect-ratio':'auto',
       'margin-left':'0px','margin-right':'0px','margin-top':'0px','margin-bottom':'0px','flex-grow':'0','flex-basis':'auto',transform:'none'});
-    const origin:ReactStyleOrigin={version:1,roots:[{path:'',tag:'section',channels:[],sizes:[{channel:'width',status:'fixed',value:'360px',selectors:['inline']}]},
+    const origin:ReactStyleOrigin={version:1,roots:[{path:'',tag:'section',channels:[],sizes:[{channel:'width',status:'fixed',value:'360px',selectors:['inline']},{channel:'height',status:'auto',value:'auto',selectors:[]}]},
       {path:'0',tag:'button',channels:[],sizes:['width','height'].map(channel=>({channel:channel as 'width'|'height',status:'auto' as const,value:'auto',selectors:[]}))}]};
     const context={gridConstraints:{version:1 as const,status:'observed' as const,treeRevision:revisionOf(tree),rows:[],problems:[]}};
     const legacy=deriveReactChildRoot(f.program,f.ownership,tree,origin,'child');

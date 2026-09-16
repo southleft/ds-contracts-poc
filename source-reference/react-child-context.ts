@@ -2,6 +2,7 @@
 import { flatten, type CapturedNode } from '../extract/computed/lib.js';
 import type { ReactStyleOrigin } from './react-style-origin.js';
 import { verifiedGridConstraints, type GridConstraintEvidence } from './grid-constraints.js';
+import type { Contract } from '../scripts/contract-schema.js';
 
 export interface ReactChildContext { gridConstraints: GridConstraintEvidence }
 
@@ -11,9 +12,7 @@ export function reactChildContextSizing(tree: CapturedNode, origin: ReactStyleOr
   const nodes=new Map(flatten(tree).map(row=>[row.path,row.node]));
   const root=nodes.get(path);
   if(!root || !path) throw Error('react-child-context-root-missing');
-  // Used track widths do not encode an implicit-column or intrinsic-row rule.
-  // Keep this refusal until the grid grammar preserves that exact constraint.
-  if(grids.some(row=>row.path===path)) throw Error('react-child-context-grid-constraints-unqualified');
+  if(grids.some(row=>row.path===path)) reactChildContextGrid(tree, origin, path, context);
   const style=root.style, facts=origin.roots.find(row=>row.path===path)?.sizes;
   if(!facts || !['width','height'].every(channel=>facts.find(f=>f.channel===channel)?.status==='auto')) return;
   const parentPath=path.includes('.')?path.slice(0,path.lastIndexOf('.')):'';
@@ -21,13 +20,67 @@ export function reactChildContextSizing(tree: CapturedNode, origin: ReactStyleOr
   if(!parent || !parentOrigin) return;
   const width=parentOrigin.sizes?.find(f=>f.channel==='width');
   if(width?.status!=='fixed' || width.value!==parent.style.width) return;
+  // A constrained parent block axis can shrink its children. Intrinsic height
+  // must not be inferred from a single sample in that context.
+  if (parentOrigin.sizes?.find(f => f.channel === 'height')?.status !== 'auto' || parent.style['max-height'] !== 'none') return;
   if(!['flex','inline-flex'].includes(parent.style.display) || parent.style['flex-direction']!=='column' ||
       !['normal','stretch'].includes(parent.style['align-items']) || !['auto','stretch'].includes(style['align-self'])) return;
-  if(!['flex','inline-flex'].includes(style.display) || !['static','relative'].includes(style.position) ||
+  if(!['flex','inline-flex','grid'].includes(style.display) || !['static','relative'].includes(style.position) ||
       style['box-sizing']!=='border-box' || !['auto','0px'].includes(style['min-width']) || style['max-width']!=='none' ||
       !['auto','0px'].includes(style['min-height']) || style['max-height']!=='none' || style['aspect-ratio']!=='auto' ||
       ['margin-left','margin-right','margin-top','margin-bottom'].some(key=>style[key]!=='0px') ||
       style['flex-grow']!=='0' || !['auto','0%'].includes(style['flex-basis']) ||
       style.transform!=='none') throw Error('react-child-context-stretch-constraints-unqualified');
   return {width:'100%',height:'fit-content'};
+}
+
+/** Bounded row-flow lowering, not general auto/min-content equivalence.
+ * In horizontal block flow the admitted items have equal intrinsic block
+ * contributions. An auto-height container has no surplus height to stretch
+ * auto rows. One implicit auto column stretches to the definite content width.
+ * https://www.w3.org/TR/css-sizing-3/#intrinsic-sizes
+ * https://www.w3.org/TR/css-grid-2/#track-sizing
+ * Never derive declarations from the witness's `used` pixel tracks. */
+export function reactChildContextGrid(tree: CapturedNode, origin: ReactStyleOrigin,
+  path: string, context: ReactChildContext): NonNullable<Contract['anatomy']['root']['layout']> | undefined {
+  const witness = verifiedGridConstraints(tree, context.gridConstraints).find(row => row.path === path);
+  if (!witness) return;
+  const fail = (): never => { throw Error('react-child-context-grid-constraints-unqualified'); };
+  const node = flatten(tree).find(row => row.path === path)?.node;
+  if (!node) return fail();
+  const c = witness.computed, s = node.style;
+  const rows = c['grid-template-rows'] === 'none' ? [] : c['grid-template-rows'].split(/\s+/);
+  const intrinsic = (value: string) => ['auto', 'min-content'].includes(value);
+  const automatic = (p: string) => ['width', 'height'].every(channel =>
+    origin.roots.find(row => row.path === p)?.sizes?.find(size => size.channel === channel)?.status === 'auto');
+  if (s.display !== 'grid' || s['writing-mode'] !== 'horizontal-tb' || s.direction !== 'ltr' ||
+      !automatic(path) || c['grid-template-columns'] !== 'none' || c['grid-auto-columns'] !== 'auto' ||
+      c['grid-template-areas'] !== 'none' || c['grid-auto-flow'] !== 'row' ||
+      !rows.every(intrinsic) || !intrinsic(c['grid-auto-rows']) ||
+      !['normal', 'start'].includes(c['align-content']) ||
+      !['normal', 'stretch'].includes(c['justify-content']) ||
+      !['normal', 'stretch'].includes(c['justify-items']) ||
+      !['normal', 'stretch', 'start', 'flex-start'].includes(c['align-items']) ||
+      ['overflow-x', 'overflow-y'].some(key => s[key] !== 'visible')) return fail();
+  let index = 0;
+  for (const child of node.nodes) {
+    if (child.t === 'text') { if (child.v.trim()) return fail(); continue; }
+    const childPath = path ? `${path}.${index++}` : String(index++), style = child.el.style;
+    // Other kinds of intrinsic block contribution require their own proof.
+    if (['img', 'input', 'select', 'textarea', 'video', 'audio', 'canvas', 'svg', 'iframe', 'object', 'embed'].includes(child.el.tag) ||
+        style.display !== 'block' || style['writing-mode'] !== 'horizontal-tb' || style.direction !== 'ltr' ||
+        !automatic(childPath) || !['static', 'relative'].includes(style.position) ||
+        style.order !== '0' || style['aspect-ratio'] !== 'auto' || style.transform !== 'none' ||
+        !['auto', 'normal', 'stretch'].includes(style['justify-self']) ||
+        !['auto', 'normal', 'start', 'flex-start', 'stretch'].includes(style['align-self']) ||
+        ['grid-row-start', 'grid-row-end', 'grid-column-start', 'grid-column-end'].some(key => style[key] !== 'auto') ||
+        ['margin-left', 'margin-right', 'margin-top', 'margin-bottom'].some(key => style[key] !== '0px') ||
+        ['min-width', 'min-height'].some(key => !['auto', '0px'].includes(style[key])) ||
+        ['max-width', 'max-height'].some(key => style[key] !== 'none') ||
+        ['overflow-x', 'overflow-y'].some(key => style[key] !== 'visible')) return fail();
+  }
+  const gap = (value: string) => value === 'normal' ? 0 : /^\d+(?:\.\d+)?px$/.test(value) ? parseFloat(value) : fail();
+  return { display: 'grid', columns: [{ fr: 1 }], flow: 'row', autoRows: { fit: true },
+    ...(rows.length ? { rows: rows.map(() => ({ fit: true as const })) } : {}),
+    gap: { row: gap(c['row-gap']), column: gap(c['column-gap']) } };
 }
