@@ -56,10 +56,16 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       if (!Number.isInteger(index) || index < 0 || !slot.children?.[index]) fail('slot-path-invalid');
       slot = slot.children![index];
     }
-    if (slot.type !== 'slot' || slot.children?.length || slot.slotDefault?.length) fail('empty-slot-required');
-    return mains[0].id as string;
+    if (slot.type !== 'slot' || slot.slotDefault?.length) fail('empty-slot-required');
+    const carrier = slot.children?.[0];
+    if (slot.children?.length && (slot.children.length !== 1 || !slot.rootSlotContent ||
+        !carrier?.rootSlotGridContent || carrier.type !== 'frame' || carrier.layout?.mode !== 'GRID' ||
+        carrier.layout.grid?.flow !== 'ROW_AUTO_FLOW' || carrier.children?.length)) fail('empty-slot-required');
+    return { mainId: mains[0].id as string,
+      ...(carrier ? { contentSpecPath: [...input.slotSpecPath, 0] } : {}) };
+
   };
-  const mainId = select(input);
+  const selected = select(input);
   if ((input.instances?.length ?? 0) > 128) fail('nested-main-limit');
   const instances = (input.instances ?? []).map(reference => {
     if (reference.parent.operation.fileKey !== input.parent.operation.fileKey ||
@@ -71,7 +77,7 @@ export function prepareNativeContractComparison(contract: Contract, component: C
         verifyNativeContractReadback(reference.parent, reference.receipt).status !== 'supported-structure-observed')
       fail('nested-main-observation-required');
     const receipt = structuredClone(reference.receipt); delete receipt.images;
-    return { ...structuredClone(reference), receipt, mainId: select(reference) };
+    return { ...structuredClone(reference), receipt, ...select(reference) };
   });
   if (new Set(instances.map(i => JSON.stringify(i.specPath))).size !== instances.length)
     fail('nested-main-path-ambiguous');
@@ -110,11 +116,28 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     if (spec.children) out.children = spec.children.map((child, i) => annotate(child, [...specPath, i]));
     return out;
   };
+  const checkCapacity = (reference: { parent: NativeContractObservationInput; variantName: string; contentSpecPath?: number[] }, children: NodeSpec[]) => {
+    if (!reference.contentSpecPath) return;
+    let target = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
+    for (const index of reference.contentSpecPath) target = target.children![index];
+    const grid = target.layout!.grid!;
+    if (children.some(child => child.absolute || child.overlay || child.insetOverlay || child.cell) ||
+        children.length > grid.rows.length * grid.columns.length) fail('grid-content-placement-unqualified');
+  };
+  checkCapacity({ ...input, ...selected }, root.children!);
+  for (const reference of instances) {
+    let spec = root;
+    for (const index of reference.specPath) {
+      if (!spec.children?.[index]) fail('nested-main-path-missing');
+      spec = spec.children![index];
+    }
+    checkCapacity(reference, spec.children ?? []);
+  }
   const specs = root.children!.map((spec, i) => annotate(spec, [i]));
   if (used.size !== instances.length) fail('nested-main-path-missing');
   const receipt = structuredClone(input.receipt); delete receipt.images;
   return { projection, boundNames: [...boundNames].sort(), parent: structuredClone(input.parent), receipt,
-    caseId: input.caseId, mainId, variantName: input.variantName,
+    caseId: input.caseId, ...selected, variantName: input.variantName,
     slotSpecPath: [...input.slotSpecPath], ...(instances.length ? { instances } : {}), specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
     revision: revisionOf({ contract, component, source, tokenRevision, context, input: { ...input, receipt } }) };
 }
@@ -250,3 +273,18 @@ async function nativeBuildContractComparison() {
   return { comparisonInstanceId: inst.id, parentMainId: c.mainId, acceptedContract: null, nativeQualification: 'unqualified' };
 }
 `;
+
+/** Preserve the existing receipt/script format when no verified grid carrier is
+ * involved. Only compiler-owned content frames can become insertion targets. */
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean): string {
+  const script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+  if (!gridContent) return script;
+  return script.replace(
+    "  if (!slot || slot.type !== 'SLOT' || slot.children.length) nativeRefuse('comparison-slot-not-empty');",
+    `  const target = c.contentSpecPath ? parts.get(nativeCanonical(c.contentSpecPath)) : slot;
+  if (!slot || slot.type !== 'SLOT' || !target || target.children.length ||
+      (c.contentSpecPath && (target.type !== 'FRAME' || target.layoutMode !== 'GRID' ||
+        target.parent !== slot || slot.children.length !== 1))) nativeRefuse('comparison-slot-not-empty');`,
+  ).replace('saved.contentNodeIds.push(node.id); slot.appendChild(node);',
+    'saved.contentNodeIds.push(node.id); target.appendChild(node);');
+}

@@ -80,8 +80,8 @@ test('missing allocation ownership refuses instead of silently emitting styled t
   assert.throws(() => f.engine.buildNativeContractComparisonScript(f.content, new Map([[f.content.id, f.content]]), f.source, wrongScope, f.comparison), /SCOPE_INVALID/);
 });
 
-async function observedFixture() {
-  const f = await fixture(), creation = await f.run(f.emit());
+async function observedFixture(grid = false) {
+  const f = await fixture(undefined, grid), creation = await f.run(f.emit());
   const data = f.engine.compileComponentData(f.content, new Map([[f.content.id, f.content]]));
   const comparison = prepareNativeContractComparison(f.content, data, f.source, revisionOf(f.tokens), { mode: 'light', brand: 'default' }, f.comparison);
   const input: NativeContractComparisonObservationInput = { operation: f.supplemental.operation, planRevision: revisionOf('comparison plan'), comparison,
@@ -221,9 +221,14 @@ test('comparison variant selection preserves typed null, string null, defaults a
 });
 
 
-async function nestedFixture() {
-  const f = await fixture();
+async function nestedFixture(grid = false) {
+  const f = await fixture(undefined, grid);
   const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
+  if(grid) {
+    child.anatomy.root.layout={display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row'};
+    child.anatomy.root.literals={width:'300px',height:'fit-content'};
+    child.anatomy.root.tokens!.gap='{size}';
+  }
   child.name = 'Main'; // Deliberate display-name collision with the outer main.
   const context = await f.context('10000000-0000-4000-8000-000000000003');
   const data = f.engine.compileNativeContractDraft(child, new Map([[child.id, child]]), f.source);
@@ -252,8 +257,8 @@ async function nestedFixture() {
   return { ...f, content, selected, reference, emit, observe };
 }
 
-test('nested caller content keeps main linkage, independent token contexts and editable slots at multiple depths', async () => {
-  const f = await nestedFixture(), before = await f.run(emitNativeContractReadbackScript(f.reference.parent));
+for (const grid of [false, true]) test(`nested caller content keeps linkage, token contexts and editable slots (${grid ? 'grid' : 'flex'})`, async () => {
+  const f = await nestedFixture(grid), before = await f.run(emitNativeContractReadbackScript(f.reference.parent));
   const mains = f.figma.root.findAll((n: any) => n.type === 'COMPONENT').map((n: any) => n.id);
   const creation = await f.run(f.emit());
   assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
@@ -321,4 +326,31 @@ test('nested references require pinned same-source mains and complete paths befo
   const result = await f.run(script);
   assert.equal(result.status, 'refused'); assert.equal(result.allocationAttempted, false);
   assert.equal(f.figma.root.findAll(() => true).length, count);
+});
+
+
+test('root grid comparisons fill the verified content frame and independently check placements and gap bindings', async () => {
+  const f=await observedFixture(true), {input,receipt}=f;
+  assert.equal(input.creation.status,'created-candidate',JSON.stringify(input.creation));
+  assert.deepEqual(input.comparison.contentSpecPath,[0,0]);
+  const report=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(report.status,'supported-comparison-structure-observed',JSON.stringify(report));
+  const slot=await f.figma.getNodeByIdAsync(input.creation.comparisons[0].slots[0].nodeId);
+  const grid=slot.children[0];
+  assert.equal(slot.children.length,1);assert.equal(grid.layoutMode,'GRID');assert.equal(grid.children.length,2);
+  const main=await f.figma.getNodeByIdAsync(input.comparison.mainId);
+  assert.equal(main.children[0].children[0].children.length,0,'comparison does not fill main defaults');
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+  for(const change of [
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.id).values.gridRowGap++;},
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.id).values.boundVariables.gridColumnGap={type:'VARIABLE_ALIAS',id:'wrong'};},
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.children[1].id).values.gridColumnAnchorIndex=0;},
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.children[0].id).values.gridRowSpan=2;},
+  ]) {const bad=structuredClone(receipt);change(bad);assert.equal(verifyNativeContractComparisonReadback(input,bad).status,'refused');}
+  const count=f.figma.root.findAll(()=>true).length;
+  assert.equal((await f.run(f.emit())).allocationAttempted,false);
+  assert.equal(f.figma.root.findAll(()=>true).length,count,'repeat creates no duplicate');
+  const overflow=structuredClone(f.content), label=overflow.anatomy.root.parts!.label;
+  for(let i=0;i<4;i++)overflow.anatomy.root.parts!['extra'+i]={...label,text:'Extra '+i};
+  assert.throws(()=>f.emit(overflow),/grid-content-placement-unqualified/,'implicit extra rows cannot be invented');
 });

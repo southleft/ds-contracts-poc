@@ -97,11 +97,13 @@ export function prepareNativeSourceWrite(
     ...(contractComparison ? { contractComparison: {
       caseId: contractComparison.caseId, mainId: contractComparison.mainId,
       variantName: contractComparison.variantName, slotSpecPath: contractComparison.slotSpecPath,
+      ...(contractComparison.contentSpecPath ? { contentSpecPath: contractComparison.contentSpecPath } : {}),
       specs: contractComparison.specs, fonts: contractComparison.fonts, nodeTypes: contractComparison.nodeTypes,
       revision: contractComparison.revision, receipt: contractComparison.receipt,
       parent: { tokenIdentity: contractComparison.parent.tokenIdentity },
       ...(contractComparison.instances?.length ? { instances: contractComparison.instances.map(ref => ({
         specPath: ref.specPath, mainId: ref.mainId, slotSpecPath: ref.slotSpecPath,
+        ...(ref.contentSpecPath ? { contentSpecPath: ref.contentSpecPath } : {}),
         parent: { tokenIdentity: ref.parent.tokenIdentity },
       })), dependencyReceipts: dependencies!.parents.map(ref => ref.receipt) } : {}),
     } } : {}),

@@ -167,3 +167,22 @@ for (const [flow, hug] of [[false, false], [true, false], [true, true]]) test(`n
     assert.equal(Object.keys(row.values).some(key => key.startsWith('grid')), false, 'non-grid receipts retain their field vocabulary');
   }
 });
+
+test('native root grid content keeps a verified empty carrier inside its editable slot', async () => {
+  const f=await nativeComparisonFixture();
+  const contract=f.contract('fixture.grid-slot',{root:{slot:{name:'children'},
+    layout:{display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row',gap:{row:8,column:12}},
+    literals:{width:'300px',height:'fit-content'}}});
+  const byId=new Map([[contract.id,contract]]),context=await f.context('10000000-0000-4000-8000-000000000008');
+  const compiled=f.engine.compileNativeContractDraft(contract,byId,f.source);
+  const creation=await f.run(f.engine.buildNativeContractDraftScript(contract,byId,f.source,context));
+  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const input:NativeContractObservationInput={operation:context.operation,planRevision:revisionOf('grid slot plan'),
+    projection:compiled.projection,component:compiled.component,tokenInput:context.tokens.input,tokenIdentity:context.tokens.identity,creation};
+  const receipt=await f.run(emitNativeContractReadbackScript(input));
+  assert.equal(verifyNativeContractReadback(input,receipt).status,'supported-structure-observed',JSON.stringify(verifyNativeContractReadback(input,receipt)));
+  const slot=receipt.nodes.find((n:any)=>n.type==='SLOT'),grid=receipt.nodes.find((n:any)=>n.parentId===slot.id);
+  assert.equal(grid.type,'FRAME');assert.equal(grid.values.layoutMode,'GRID');assert.deepEqual(grid.childIds,[]);
+  const altered=structuredClone(receipt);altered.nodes.find((n:any)=>n.id===grid.id).values.gridRowGap++;
+  assert.ok(verifyNativeContractReadback(input,altered).problems.some(p=>p.includes('grid-gaps')));
+});

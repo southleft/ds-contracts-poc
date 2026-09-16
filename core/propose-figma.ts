@@ -5357,7 +5357,7 @@ function invertGridLayout(
   const derivedRows = Math.max(1, Math.ceil(m.children.length / Math.max(1, g.columns.length)));
   const rowsAreTheDerivation =
     g.rows.length === derivedRows && g.rows.every((t) => t.fr === 1);
-  if (!c.flow || !rowsAreTheDerivation) out.rows = g.rows.map(toTrack);
+  if (m.rootContent || !c.flow || !rowsAreTheDerivation) out.rows = g.rows.map(toTrack);
   // G9.1 — the permanent refusal, receipted on every grid that carries an
   // absolute child through the abs door instead of Part.overlay.
   for (const ch of m.children) {
@@ -10195,6 +10195,7 @@ export function proposeFromDump(
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
   const rootContent = readRootContent(set);
+  if (rootContent?.normalized) set = rootContent.normalized;
   // PHASE 2 EXAM (rest-instance-slot-prop-value): a nested instance's
   // SLOT-typed property value arrives from the REST route as the API's own
   // `{ guid: … }` OBJECT — a slot-content node reference, not a prop value.

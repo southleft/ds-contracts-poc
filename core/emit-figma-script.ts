@@ -1,4 +1,4 @@
-import { prepareNativeContractComparison, NATIVE_CONTRACT_COMPARISON_RUNTIME, NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
+import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
 import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
@@ -134,6 +134,8 @@ export interface NodeSpec {
   nativeSourceVisible?: false;
   /** Synthetic native content container; never a new React element. */
   rootSlotContent?: true;
+  /** Synthetic grid inside a root SLOT; sized after the slot joins its root. */
+  rootSlotGridContent?: true;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
   fill?: string;
@@ -687,7 +689,7 @@ export interface ComponentData {
   propNames?: Record<string, string>;
   /** Canonical native options retain exact typed React values. */
   codeValueAxes?: CodeValueAxes;
-  rootSlot?: { version: 1; property: string; display?: 'inline-flex' };
+  rootSlot?: { version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' };
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
     version: 1 | 2;
@@ -1773,6 +1775,24 @@ const GRID_ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
   end: 'MAX',
 };
 
+/** Grid gaps are two independent, bindable fields. Apply declarations in the
+ * same order as CSS: layout, tokens, then literals; a shorthand sets both. */
+function applyGridGap(spec: NodeSpec, channel: string, value: number | undefined, variable?: string): boolean {
+  if (spec.layout?.mode !== 'GRID' || !['gap', 'row-gap', 'column-gap'].includes(channel)) return false;
+  if (value === undefined || !Number.isFinite(value) || value < 0)
+    throw new Error(`FIGMA_GRID_GAP_UNSUPPORTED: ${channel} needs a nonnegative resolved length`);
+  const grid = spec.layout.grid!;
+  for (const [css, key, field] of [
+    ['row-gap', 'rowGap', 'gridRowGap'], ['column-gap', 'columnGap', 'gridColumnGap'],
+  ] as const) {
+    if (channel !== 'gap' && channel !== css) continue;
+    grid[key] = value;
+    if (variable) (spec.bindings ??= {})[field] = variable;
+    else if (spec.bindings) delete spec.bindings[field];
+  }
+  return true;
+}
+
 function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> = {}): LayoutSpec {
   // v7 layoutByProp: each canvas variant is compiled with every enum axis's
   // value (subst), so the per-variant layout override resolves right here.
@@ -2060,6 +2080,10 @@ function applyTokens(
       tokenPath = tokenPath.replaceAll(`{${propName}}`, value);
     }
     const varName = figmaName(tokenPath);
+    if (spec.layout?.mode === 'GRID' && ['gap', 'row-gap', 'column-gap'].includes(cssProp)) {
+      applyGridGap(spec, cssProp, parseLitPx(String(resolveLiteral(tokenPath))), varName);
+      continue;
+    }
     switch (cssProp) {
       // `background` carries the same single-token binding as
       // `background-color` (the promotion's CSS-shorthand color layer; the
@@ -2653,6 +2677,10 @@ function applyLiterals(
   const next: TextCtx = { ...ctx };
   const li = () => (spec.lits ??= {});
   for (const [cssProp, value] of Object.entries(lits)) {
+    if (spec.layout?.mode === 'GRID' && ['gap', 'row-gap', 'column-gap'].includes(cssProp)) {
+      applyGridGap(spec, cssProp, parseLitPx(value));
+      continue;
+    }
     switch (cssProp) {
       // R7 LITERAL INK — the case this switch never had. The text twin of
       // the `background-color` literal above: a literal SOLID paint on the
@@ -3224,6 +3252,16 @@ function applyStyling(
   ctx: TextCtx,
 ): TextCtx {
   const tokens = resolveTokens(part, subst);
+  if (spec.layout?.mode === 'GRID') {
+    const gap = resolveLayout(part, subst)?.gap;
+    for (const [axis, channel] of [['row', 'row-gap'], ['column', 'column-gap']] as const) {
+      const value = gap?.[axis];
+      if (typeof value !== 'string') continue;
+      let path = value.slice(1, -1);
+      for (const [name, val] of Object.entries(subst)) path = path.replaceAll(`{${name}}`, val);
+      applyGridGap(spec, channel, parseLitPx(String(resolveLiteral(path))), figmaName(path));
+    }
+  }
   // R7: both passes read the SAME absolute gate the placement pass uses
   // (isAbsoluteThisCombo — declared OR this combo's stylesWhen), so an inset
   // that absolutePartPlacement lowers is never named as an in-flow drop.
@@ -4909,11 +4947,35 @@ function nestedSlotNames(part: Part): string[] {
  * child flow. Padding/paint/borders stay on the source box and are not doubled.
  * Runtime sizing is selected after append from the actual parent axes. */
 function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>): NodeSpec {
-  if (!rootSpec.layout || rootSpec.layout.mode === 'GRID' || rootSpec.layout.wrap || isReversed(root, subst))
-    throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: each root plane must use non-wrapping flex layout');
+  if (!rootSpec.layout || rootSpec.layout.wrap || isReversed(root, subst))
+    throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root content requires supported forward flow');
   const spec = partToSpecs('root-content', { slot: root.slot } as Part, contract, byId, ctx, subst)[0];
   if (!spec || spec.type !== 'slot') throw new Error('FIGMA_ROOT_SLOT_INVALID: no native slot projection');
   spec.rootSlotContent = true;
+  if (rootSpec.layout.mode === 'GRID') {
+    const grid = rootSpec.layout.grid!;
+    if (!grid.rows.length || !grid.columns.length || grid.flow !== 'ROW_AUTO_FLOW' || spec.slotDefault?.length)
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: grid content requires declared tracks, row flow and no default content');
+    if ((!grid.hugWidth && !rootSpec.fixedWidth && rootSpec.lits?.width === undefined) ||
+        (!grid.hugHeight && !rootSpec.fixedHeight && rootSpec.lits?.height === undefined))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: grid content axes need declared fixed or intrinsic sizing');
+    // GRID is illegal directly on SLOT. A neutral slot holds the grid frame;
+    // the source root alone retains its paint, padding and declared dimensions.
+    const carrier: NodeSpec = { type: 'frame', name: 'Content layout', rootSlotContent: true,
+      rootSlotGridContent: true, layout: structuredClone(rootSpec.layout), children: [] };
+    spec.layout = { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN' };
+    rootSpec.layout = { ...spec.layout };
+    spec.children = [carrier];
+    // Move the two gap bindings with their drawn grid facts. Neutral wrappers
+    // must not retain bindings that would become active after a token edit.
+    for (const field of ['gridRowGap', 'gridColumnGap']) {
+      if (rootSpec.bindings?.[field] !== undefined) {
+        (carrier.bindings ??= {})[field] = rootSpec.bindings[field];
+        delete rootSpec.bindings[field];
+      }
+    }
+    return spec;
+  }
   spec.layout = { ...rootSpec.layout };
   // Figma ignores the minimum gap under SPACE_BETWEEN. Refuse that semantic
   // mismatch rather than silently overlap changing caller content.
@@ -4995,7 +5057,7 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
     // schema-valid and legal CSS, so they are refused HERE (canvas emission)
     // rather than in the shared contract validator: the code surface renders
     // them fine.
-    if (part.slot && part.layout?.display === 'grid') {
+    if (part.slot && part.layout?.display === 'grid' && part !== contract.anatomy.root) {
       errors.push(
         // @lower emit.slot-grid-refused
         `${contract.id}: slot "${part.slot.name}" declares display:grid — Figma refuses it verbatim ("GRID layoutMode cannot be applied to Slot frames"); a slot interior is NONE/HORIZONTAL/VERTICAL only`,
@@ -5191,8 +5253,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const r = contract.anatomy.root;
     if (r.slot!.name !== 'children' || r.parts || r.content || r.text !== undefined || r.icon || r.component || r.optional)
       throw new Error('FIGMA_ROOT_SLOT_SHAPE_UNSUPPORTED: root content must be one unconditional children slot');
-    if (!r.layout || (r.layout.display !== 'flex' && r.layout.display !== 'inline-flex') || r.layout.wrap || r.layout.direction?.endsWith('-reverse'))
-      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root slots currently require non-wrapping forward flex layout');
+    if (!r.layout || !['flex', 'inline-flex', 'grid'].includes(r.layout.display ?? '') || r.layout.wrap || r.layout.direction?.endsWith('-reverse'))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root slots require supported forward flex or grid layout');
     if (Object.values(r.layoutByProp?.map ?? {}).some(layout => layout.display !== undefined && layout.display !== r.layout!.display))
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: changing outer display across variants needs per-plane content metadata');
   }
@@ -6015,7 +6077,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
       : {}),
     isSet: variants.length + stateVariants.length > 1 || contract.props.some(p => p.bindings.code.values !== undefined),
-    ...(contract.anatomy.root?.slot ? { rootSlot: { version: 1 as const, property: slotFigmaProperty(contract.anatomy.root.slot), ...(contract.anatomy.root.layout?.display === 'inline-flex' ? { display: 'inline-flex' as const } : {}) } } : {}),
+    ...(contract.anatomy.root?.slot ? { rootSlot: contract.anatomy.root.layout?.display === 'grid'
+      ? { version: 2 as const, property: slotFigmaProperty(contract.anatomy.root.slot), display: 'grid' as const }
+      : { version: 1 as const, property: slotFigmaProperty(contract.anatomy.root.slot), ...(contract.anatomy.root.layout?.display === 'inline-flex' ? { display: 'inline-flex' as const } : {}) } } : {}),
     ...(codeValueAxes(contract) ? { codeValueAxes: codeValueAxes(contract) } : {}),
     boolProps: boolPropsData,
     textProps: textOnlyProps,
@@ -7429,7 +7493,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
   const prepared = prepareNativeSourceWrite(compiled.projection, context, compiled.boundNames, undefined, compiled);
   return wrapNativeSourceWrite(prepared, buildSyncScript([data], context.operation.fileKey, {
     header: '// Shared renderer: caller content in an instance of an existing observed main.',
-    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeSampleSpecs: compiled.specs,
+    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
   }));
 }
 
@@ -7439,7 +7503,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -7477,6 +7541,8 @@ function buildSyncScript(
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
+  const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
+  const hasGridGapBindings = featureDatas.some((d) => dataSome(d, (x) => x.bindings?.gridRowGap !== undefined || x.bindings?.gridColumnGap !== undefined));
   // FC-SLOT-BIRTH-BOX generalized: the 100x100 birth box is NOT a slot fact.
   // It survives on ANY childless auto-layout node that reports HUG, because a
   // node with no children never triggers the relayout that would dissolve it.
@@ -7529,12 +7595,19 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
 await figma.loadAllPagesAsync();
 
 ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
-  if (!spec.rootSlotContent) return;
+  if (!spec.rootSlotContent) return;${hasRootGridSlot ? `
+  // The grid must wait until its enclosing slot has its final parent sizing.
+  if (spec.rootSlotGridContent) return;` : ''}
   // FILL under HUG can retain a stale extent (live probe 2026-09-16).
   // Select from the current root after its size and bindings are applied.
   const horizontal = parent.layoutMode === 'HORIZONTAL';
   child.layoutSizingHorizontal = (horizontal ? parent.primaryAxisSizingMode : parent.counterAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';
-  child.layoutSizingVertical = (horizontal ? parent.counterAxisSizingMode : parent.primaryAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';
+  child.layoutSizingVertical = (horizontal ? parent.counterAxisSizingMode : parent.primaryAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';${hasRootGridSlot ? `
+  if (spec.children && spec.children[0] && spec.children[0].rootSlotGridContent) {
+    const grid = child.children[0];
+    grid.layoutSizingHorizontal = child.layoutSizingHorizontal;
+    grid.layoutSizingVertical = child.layoutSizingVertical;
+  }` : ''}
 }
 ` : ''}${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};
 const varByName = ${opts.nativeSource ? 'Object.create(null)' : '{}'};
@@ -7969,7 +8042,10 @@ function dsDeclaredClipStops(n) {
   // unclipping anything above it.
   return dsDeclaredClip.has(n.id);
 }
-function applyFrameSpec(node, spec) {
+function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
+  // Seed an empty synthetic carrier below Figma's 100px birth box. The
+  // declared track and parent sizing writes below determine its final size.
+  if (spec.rootSlotGridContent) node.resize(1, 1);` : ''}
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `
   // A2 grid: GRID frames take the declaration path — the flex fields below
   // (axis aligns, layoutWrap) are not grid facts and are never written.
@@ -8052,7 +8128,11 @@ function applyFrameSpec(node, spec) {
   }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}${hasGrid ? `
   // Resizing can replace HUG tracks with FLEX. Restore the declaration after
   // all bound/literal size writes, before appending or placing any children.
-  if (l.mode === 'GRID') applyGridFrame(node, l);` : ''}
+  if (l.mode === 'GRID') applyGridFrame(node, l);` : ''}${hasGridGapBindings ? `
+  // Rebind after the last literal grid write so variable identity survives.
+  if (l.mode === 'GRID') for (const field of ['gridRowGap', 'gridColumnGap']) {
+    node.setBoundVariable(field, spec.bindings && spec.bindings[field] ? need(spec.bindings[field]) : null);
+  }` : ''}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -8981,7 +9061,7 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
   };
 }
 
-${opts.nativeContractComparison ? (opts.nativeNestedComparison ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
+${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
 for (const C of COMPONENTS) {
   // Every per-set result — created, amended, skipped as unchanged, refused
   // by the create-only door — carries the named receipt, so the plugin's run

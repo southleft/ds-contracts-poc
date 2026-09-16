@@ -1,5 +1,6 @@
 /** Independent observation of caller content in an existing native main.
  * Allocation acknowledgements choose IDs; compiler specs choose expectations. */
+import { nativeGridProblems, NATIVE_GRID_CHILD_FIELDS } from './native-grid-observation.js';
 import { canonicalJson } from './contract-provenance.js';
 import type { NodeSpec } from './emit-figma-script.js';
 import { nativeComparisonDependencies, type PreparedNativeContractComparison } from './native-contract-comparison.js';
@@ -211,7 +212,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     // Content changes a hugging instance's geometry, but not the main's styles,
     // property bindings or other children. Compare every remaining observed field.
     const geometry = new Set(['x','y','width','height','relativeTransform','resolvedVariableModes','explicitVariableModes']);
-    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'specs'>;
+    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'contentSpecPath' | 'variantName' | 'specs'>;
     const pair = (original: Row | undefined, actual: Row | undefined, specPath: number[],
       reference: Reference = p, record: Row = c.comparisons[0], parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]))) => {
       if (!original || !actual || checked.has(actual.id)) { issue('main-instance-pairing'); return; }
@@ -225,14 +226,22 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         // report an empty object. Only these two empty representations agree.
         if (!specPath.length && field === 'componentPropertyReferences' &&
             [actual.values[field], original.values[field]].every(value => value === null || same(value, {}))) continue;
+        if (!specPath.length && NATIVE_GRID_CHILD_FIELDS.includes(field) && nodes.get(actual.parentId)?.values.layoutMode === 'GRID') continue;
         if (!geometry.has(field) && !same(actual.values[field], original.values[field])) issue('main-instance-' + field, actual);
       }
       if (!specPath.length) for (const [key, value] of Object.entries(original.variantProperties ?? {}))
         if (actual.componentProperties?.[key]?.type !== 'VARIANT' || actual.componentProperties[key].value !== value) issue('main-instance-property', actual);
-      if (same(specPath, reference.slotSpecPath)) {
-        if (actual.id !== record.slots[0].nodeId || actual.type !== 'SLOT' || actual.childIds.length !== reference.specs.length ||
-            actual.values.componentPropertyReferences?.slotContentId !== record.slots[0].propertyKey ||
-            !same(actual.childIds, record.slots[0].contentNodeIds)) issue('slot-content', actual);
+      if (same(specPath, reference.slotSpecPath) && (actual.id !== record.slots[0].nodeId || actual.type !== 'SLOT' ||
+          actual.values.componentPropertyReferences?.slotContentId !== record.slots[0].propertyKey)) issue('slot-content', actual);
+      if (same(specPath, reference.contentSpecPath ?? reference.slotSpecPath)) {
+        if (actual.childIds.length !== reference.specs.length || !same(actual.childIds, record.slots[0].contentNodeIds))
+          issue('slot-content', actual);
+        if (reference.contentSpecPath) {
+          let spec = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
+          for (const index of reference.contentSpecPath) spec = spec.children![index];
+          for (const problem of nativeGridProblems({ ...spec, children: reference.specs }, actual.values,
+            actual.childIds.map((id: string) => nodes.get(id)?.values))) issue('grid-content-' + problem, actual);
+        }
         reference.specs.forEach((spec, index) => sample(spec, nodes.get(actual.childIds[index]))); return;
       }
       if (original.childIds.length !== actual.childIds.length) issue('main-instance-children', actual);

@@ -743,11 +743,11 @@ function verifyReadback(
               s.identity.sourceNodeId === spec.nativeSourcePart?.sourceNodeId &&
               s.identity.templateId === spec.nativeSourcePart?.templateId,
           );
-      const specs = sourceSample?.specs ?? [];
+      const specs = isContractDraft(input) ? spec.children ?? [] : sourceSample?.specs ?? [];
       if (n.childIds.length !== specs.length)
         issue("native-source-observation-slot-content", n);
       specs.forEach((child, i) =>
-        visit(child, nodes.get(n.childIds[i]), undefined, {
+        visit(child, nodes.get(n.childIds[i]), undefined, isContractDraft(input) ? undefined : {
           caseId: sourceCase!.id,
           sourceName: sourceSample!.sourceName,
           partPath: spec.nativeSourcePart!.partPath,

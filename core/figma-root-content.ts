@@ -2,16 +2,16 @@ import type { DumpSet } from '../extract/figma/types.js';
 
 /** A marker identifies the compiler projection; drawn facts must still agree.
  * Never unwrap an arbitrary designer-authored frame or trust the marker alone. */
-export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' } | undefined {
+export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' | 'grid'; normalized?: DumpSet } | undefined {
   const raw = set.rootSlot;
   if (raw === undefined) return undefined;
   const fail = (why: string): never => { throw new Error(`FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED: ${why}`); };
   const marker = raw as Record<string, unknown> | null;
   if (!marker || typeof marker !== 'object' || Array.isArray(marker) ||
       !['property|version', 'display|property|version'].includes(Object.keys(marker).sort().join('|')) ||
-      (Object.hasOwn(marker, 'display') && marker.display !== 'inline-flex') ||
-      marker.version !== 1 || typeof marker.property !== 'string' || !marker.property)
-    return fail('invalid version 1 root content declaration');
+      !(marker.version === 1 ? !Object.hasOwn(marker, 'display') || marker.display === 'inline-flex'
+        : marker.version === 2 && marker.display === 'grid') || typeof marker.property !== 'string' || !marker.property)
+    return fail('invalid root content declaration');
   const property = (raw as { property: string }).property;
   const definitions = Object.entries(set.propertyDefinitions ?? {}).filter(([key]) => key.split('#')[0] === property);
   if (definitions.length !== 1 || definitions[0][1].type !== 'SLOT') return fail('missing or ambiguous SLOT definition');
@@ -19,13 +19,59 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
   if (definition.type === 'SLOT' && (definition.description?.includes('REFUSED BY FIGMA') ||
       Object.keys(definition.slotSettings ?? {}).length)) return fail('slot constraints need explicit contract reconciliation');
   if (!set.variants.length) return fail('no observed component planes');
-  for (const root of set.variants) {
+  const normalized = marker.version === 2 ? structuredClone(set) : undefined;
+  let gridDeclaration: string | undefined;
+  for (const root of normalized?.variants ?? set.variants) {
     const slot = root.children?.[0], outer = root.layout, inner = slot?.layout;
     if (root.children?.length !== 1 || slot?.type !== 'SLOT' || slot.name !== property ||
         slot.propRefs?.slotContentId?.split('#')[0] !== property ||
         (slot.slotKey !== undefined && slot.slotKey !== definitions[0][0])) return fail(`${root.name}: content structure disagrees`);
     // Contents of the main are defaults, not a sample to bake into React.
     // Default-content inversion is a separate qualification from empty mains.
+    if (marker.version === 2) {
+      const carrier = slot.children?.[0], grid = carrier?.layout;
+      const slotFields = new Set(['name', 'type', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight']);
+      const frameFields = new Set(['name', 'type', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound']);
+      if (Object.keys(slot).some(key => !slotFields.has(key)) ||
+          Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
+          slot.children?.length !== 1 || carrier?.type !== 'FRAME' || carrier.name !== 'Content layout' ||
+          carrier.children?.length || Object.keys(carrier).some(key => !frameFields.has(key)) ||
+          Object.keys(carrier.bound ?? {}).some(key => !['gridRowGap', 'gridColumnGap'].includes(key)) ||
+          ['itemSpacing', 'gridRowGap', 'gridColumnGap'].some(key => root.bound?.[key] !== undefined))
+        return fail(`${root.name}: grid carrier has independent content, styling or behavior`);
+      if (!outer || !inner || outer.mode !== 'VERTICAL' || inner.mode !== 'VERTICAL' ||
+          outer.primary !== 'MIN' || outer.counter !== 'MIN' || outer.spacing !== 0 || outer.wrap ||
+          inner.primary !== 'MIN' || inner.counter !== 'MIN' || inner.spacing !== 0 || inner.wrap ||
+          inner.padding.some(value => value !== 0) || !grid || grid.mode !== 'GRID' || !grid.grid ||
+          grid.grid.flow !== 'row' || grid.padding.some(value => value !== 0) ||
+          Object.keys(inner).some(key => !['mode', 'primary', 'counter', 'spacing', 'padding', 'primarySizing', 'counterSizing'].includes(key)) ||
+          Object.keys(grid).some(key => !['mode', 'padding', 'primarySizing', 'counterSizing', 'grid'].includes(key)))
+        return fail(`${root.name}: invalid grid carrier flow`);
+      for (const [axis, filled, gridAxis, gridFilled] of [
+        ['primarySizing', slot.fillHeight, 'counterSizing', carrier.fillHeight],
+        ['counterSizing', slot.fillWidth, 'primarySizing', carrier.fillWidth],
+      ] as const) {
+        // FILL is authoritative on children. Native axis sizing may retain
+        // AUTO while FILL supplies the extent from the parent.
+        if (!['AUTO', 'FIXED'].includes(outer[axis]) || !['AUTO', 'FIXED'].includes(inner[axis]) ||
+            !['AUTO', 'FIXED'].includes(grid[gridAxis]) ||
+            Boolean(filled) !== (outer[axis] === 'FIXED') || Boolean(gridFilled) !== Boolean(filled) ||
+            (!filled && (inner[axis] !== 'AUTO' || grid[gridAxis] !== 'AUTO')))
+          return fail(`${root.name}: grid content sizing disagrees with root`);
+      }
+      // The existing grid inverse carries one invariant layout. Do not let
+      // differing planes collapse to the first plane under this exact marker.
+      const declaration = JSON.stringify([grid.grid, carrier.bound ?? {}]);
+      if (gridDeclaration !== undefined && gridDeclaration !== declaration)
+        return fail(`${root.name}: per-variant grid facts need qualified inversion`);
+      gridDeclaration = declaration;
+      // Reconstruct one source root from independently drawn grid facts. Keep
+      // its original outer box/paint; the two neutral containers are synthetic.
+      root.layout = { ...structuredClone(grid), padding: [...outer.padding],
+        primarySizing: outer.counterSizing, counterSizing: outer.primarySizing };
+      if (carrier.bound) root.bound = { ...root.bound, ...carrier.bound };
+      continue;
+    }
     if (slot.children?.length) return fail(`${root.name}: nonempty main content needs qualified default-content inversion`);
     const allowed = new Set(['name', 'type', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight']);
     if (Object.keys(slot).some(key => !allowed.has(key)) ||
@@ -44,5 +90,6 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
           Boolean(filled) !== (outer[axis] === 'FIXED')) return fail(`${root.name}: content sizing disagrees with root`);
     }
   }
-  return { property, display: marker.display === 'inline-flex' ? 'inline-flex' : 'flex' };
+  return normalized ? { property, display: 'grid', normalized }
+    : { property, display: marker.display === 'inline-flex' ? 'inline-flex' : 'flex' };
 }
