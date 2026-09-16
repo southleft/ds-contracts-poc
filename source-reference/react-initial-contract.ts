@@ -26,6 +26,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     problems: [] as string[], limitations: ['observed-initial-inputs-only', 'runtime-interactions-not-projected',
       'nested-component-identity-not-projected', 'source-variable-modes-and-aliases-not-assembled', 'descendant-source-bindings-not-observed', 'native-output-not-verified'],
     sourceBindings: [] as Array<{ observation: string; bindings: ReactSourceBindingProjection['sourceBindings'] }>,
+    nativeVariants: [] as Array<{ observation: string; variant: string }>,
     compiled: undefined as ReturnType<typeof compileObservedContentSweep> | undefined };
   try {
     const expected = planReactInitialStates(program, ownership, tree, observation.instanceId);
@@ -117,6 +118,12 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       retainReactRootSourceBindings(result.compiled.contract, result.compiled.tokens, axes, baseAxisValues, projections);
       const engine = createFigmaEngine({ tokens: { primitives: result.compiled.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map(result.compiled.assets) });
       result.compiled.component = engine.compileComponentData(result.compiled.contract, new Map([[result.compiled.contract.id, result.compiled.contract]]));
+      result.nativeVariants = [...planes.values()].map(plane => ({ observation: plane.rowId,
+        variant: definitions.map(d => d.property + '=' + (plane.assignment[d.property] === d.axis.unset ? '(unset)' : plane.assignment[d.property])).join(', ') }));
+      if (result.nativeVariants.length !== result.compiled.component.variants.length ||
+          new Set(result.nativeVariants.map(v => v.variant)).size !== result.nativeVariants.length ||
+          result.nativeVariants.some(v => !result.compiled!.component!.variants.some(c => c.name === v.variant)))
+        throw Error('react-initial-contract-native-domain-mismatch');
     }
     if (result.compiled.contract) validateContract(result.compiled.contract,
       new Map([[result.compiled.contract.id, result.compiled.contract]]), result.problems, new Map(result.compiled.assets));

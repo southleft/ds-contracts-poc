@@ -6,7 +6,8 @@ import type { SourceFrame } from '../../../source-reference/source-framing';
 import { ReactInitialInspection } from './ReactInitialInspection';
 
 interface Operation {
-  kind: 'root' | 'comparison'; parentOperationId?: string;
+  kind: 'root' | 'comparison' | 'initial';
+  initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
   connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean };
   content?: Pick<ReactContentInspection, 'phase' | 'sourceUnchanged' | 'problems'> & Partial<ReactContentInspection>;
@@ -59,13 +60,13 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     </button>
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
     {error && <p role="alert">{error}</p>}
-    <ReactInitialInspection referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} />
+    <ReactInitialInspection referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} nativeSaved={rows.some(r => r.kind === 'initial' && r.caseId === selectedCase)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
     {rows.map(row => {
-      const op = row.operation, id = op.id, comparison = row.kind === 'comparison';
+      const op = row.operation, id = op.id, comparison = row.kind === 'comparison', initial = row.kind === 'initial';
       const savedComparison = rows.find(r => r.parentOperationId === id);
       return <details key={id} open={row.caseId === selectedCase}>
-        <summary>{row.caseId} {comparison ? '· caller-content comparison' : '· reusable roots'} · {op.phase.replaceAll('-', ' ')}</summary>
-        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} root variants`} · {op.counters.variables} variables · {op.sourceCurrent ? 'source evidence current' : 'source evidence unavailable'}</p>
+        <summary>{row.caseId} {initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'} · {op.phase.replaceAll('-', ' ')}</summary>
+        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {op.sourceCurrent ? 'source evidence current' : 'source evidence unavailable'}</p>
         <p>Target: <a href={`https://www.figma.com/design/${row.fileKey}`} target="_blank" rel="noreferrer">DS Contracts Evaluations</a>.</p>
         {!row.connection.finished && <>
           <p>Open the <a href="/ds-contracts-sync-runner-plugin.zip" download>DS Contracts companion plugin</a> in this file. Under “Connect the local source workflow,” enter the code and choose “Connect / resume.”</p>
@@ -79,9 +80,9 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           onClick={() => void action(`native-operation/${id}/retry-observation`)}>{op.pendingPhase ? 'Retry interrupted readback' : 'Inspect native draft again'}</button>}
         {op.nativeOutcome === 'unknown' && <p>The native outcome is unknown. Creation will not be repeated automatically.</p>}
         {op.structuralObservation && <p>Supported structure: {op.structuralObservation.status.replaceAll('-', ' ')}. Visual fidelity remains unverified.</p>}
-        {!comparison && !savedComparison && <button type="button" disabled={busy || !op.sourceCurrent || row.content?.phase === 'running'}
+        {row.kind === 'root' && !savedComparison && <button type="button" disabled={busy || !op.sourceCurrent || row.content?.phase === 'running'}
           onClick={() => void action(`native-operation/${id}/content`)}>Prepare caller-content comparison</button>}
-        {!comparison && row.content?.content?.status === 'compiled-comparison-draft' && <button type="button"
+        {row.kind === 'root' && row.content?.content?.status === 'compiled-comparison-draft' && <button type="button"
           disabled={busy || !!savedComparison || !op.sourceCurrent || op.phase !== 'component-structure-observed'}
           onClick={() => void action(`native-operation/${id}/comparison`)}>{savedComparison ? 'Comparison operation saved' : 'Prepare native comparison operation'}</button>}
         {row.content && <section aria-label="Caller-content preparation">
@@ -93,8 +94,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           {[...row.content.problems, ...(row.content.content?.problems ?? [])].length > 0 && <ul>{[...row.content.problems, ...(row.content.content?.problems ?? [])].map((p, i) => <li key={i}>{p}</li>)}</ul>}
         </section>}
         {op.problems.length > 0 && <ul>{op.problems.map(p => <li key={p}>{p}</li>)}</ul>}
-        {!!op.imageObservation?.images.length && <details open={comparison}><summary>{comparison ? 'Native caller-content export' : 'Native root exports'} · diagnostic only</summary>
-          <p>{comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
+        {!!op.imageObservation?.images.length && <details open={comparison || initial}><summary>{initial ? 'Native initial-state exports' : comparison ? 'Native caller-content export' : 'Native root exports'} · diagnostic only</summary>
+          <p>{initial ? 'These are observed initial-state mains. Original and native pixels are shown without resizing. Structure and image presence do not qualify visual fidelity or runtime behavior.' : comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
           {comparison && <>
             {!row.sourceFrame && <button type="button" disabled={busy || !op.sourceCurrent}
               onClick={() => void action(`native-operation/${row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
@@ -108,8 +109,14 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               src={`${root}/native-operation/${row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} />
           </figure>}
           {op.imageObservation.images.map(image => <figure key={image.caseId} style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
+            {initial && row.initialStates?.filter(state => 'variant:' + state.variant === image.caseId).map(state => <div key={state.observation}>
+              <p>Original React · {state.variant}</p>
+              <img loading="lazy" style={{ maxWidth: 'none', backgroundColor: 'white' }} alt={`Original state ${state.observation}`}
+                src={`${root}/native-operation/${id}/initial-source/${state.observation}.png`}
+                onError={() => setError('A pinned original state image could not be verified or loaded. Reload unchanged originals before reviewing this comparison.')} />
+            </div>)}
             <figcaption>Native {image.caseId}{image.layoutSize && <><br />Layout: {image.layoutSize.width.toFixed(2)} × {image.layoutSize.height.toFixed(2)} px</>}</figcaption>
-            <div style={{ padding: comparison ? 8 : 0, width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
+            <div style={{ padding: comparison || initial ? 8 : 0, width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${initial ? 'initial state' : comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
           </figure>)}
           </div>
         </details>}

@@ -1,3 +1,4 @@
+import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
 import { createReactReferenceService } from './react-reference.js';
 import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
@@ -126,6 +127,17 @@ export function createReferenceService(
   const nativeJobs: ReturnType<typeof createNativeOperationJobs> = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      reactInitial: {
+        prepare: (request, operation) => ({
+          visual: { id: request.anchor.ownership.id, reportSha256: request.anchor.ownership.sha256 },
+          preparation: { id: request.observation.id, reportSha256: request.observation.reportSha256 },
+          plan: prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(request), operation }),
+        }),
+        buildComponent: (request, context) => buildReactInitialNativeWrite({
+          ...reactReference.initialNativeEvidence(request), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
       reactComparison: {
         prepare: (request, operation) => ({
           visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },

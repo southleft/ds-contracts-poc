@@ -1,3 +1,4 @@
+import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore } from './react-source-framing.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
@@ -166,6 +167,10 @@ export function createReactReferenceService(
     if (!anchor) throw Error('react-initial-saved-observation-required');
     return { reference, anchor };
   });
+  const thisInitialEvidence = (request: ReactInitialNativeRequest) => {
+    if (!reference) throw Error('react-initial-native-reference-unavailable');
+    return initialStates.nativeEvidence(reference, request);
+  };
   const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
     string,
@@ -200,6 +205,15 @@ export function createReactReferenceService(
       } catch { json(res, 409, { error: 'Initial-state inspection unavailable. Load unchanged originals and prepare a supported root from the same saved structure observation first.' }); }
       return;
     }
+    const initialImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/initial-source\/(\d+)\.png$/.exec(route);
+    if (initialImage && req.method === 'GET') {
+      try {
+        if (!native || !reference || reference.id !== initialImage[1]) throw Error('react-initial-reference-unavailable');
+        const bytes = initialStates.nativeImage(reference, native().jobs.reactInitialRequest(initialImage[2]), initialImage[3]);
+        res.setHeader('Content-Type', 'image/png'); res.setHeader('Cache-Control', 'no-store'); res.end(bytes);
+      } catch { json(res, 409, { error: 'Pinned original state image unavailable or changed.' }); }
+      return;
+    }
     const framedImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source-frame\/([a-f0-9]{64})\.png$/.exec(route);
     if (framedImage && req.method === 'GET') {
       try {
@@ -220,16 +234,19 @@ export function createReactReferenceService(
       } catch { json(res, 409, { error: 'Original source image unavailable or changed.' }); }
       return;
     }
+    const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
     const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame)$/.exec(route);
-    if (nativeRoute || nativeAction) {
+    if (nativeRoute || nativeAction || initialNativeRoute) {
       try {
-        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction)![1]) throw Error('react-native-reference-unavailable');
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute)![1]) throw Error('react-native-reference-unavailable');
         const { jobs, transport } = native();
         if (req.method === 'POST') {
           if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
             throw Error('react-native-body-refused');
-          if (nativeRoute?.[2]) {
+          if (initialNativeRoute) {
+            jobs.prepare(initialStates.nativeRequest(reference.id, initialNativeRoute[2]));
+          } else if (nativeRoute?.[2]) {
             const job = ownershipJobs.get(reference.id);
             if (!job) throw Error('react-native-observation-required');
             jobs.prepare(selectReactNativeRequest(repoRoot, job.report(), nativeRoute[2]));
@@ -258,14 +275,17 @@ export function createReactReferenceService(
         const observedAt = Date.now();
         json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
           let content;
-          let sourceFrame, sourceFrameProblem;
+          let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
+          if (row.kind === 'initial' && row.operation.sourceCurrent) {
+            initialStates = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id)).draft.nativeVariants;
+          }
           if (row.kind === 'comparison') {
             try { sourceFrame = frames.read(reference!.id, row.parentOperationId!); }
             catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
           }
           try { if (row.kind === 'root') content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
           catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
-          return { ...row, content, sourceFrame, sourceFrameProblem, connection: transport.status(row.operation.id, observedAt) };
+          return { ...row, content, sourceFrame, sourceFrameProblem, initialStates, connection: transport.status(row.operation.id, observedAt) };
         }) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
@@ -619,6 +639,10 @@ export function createReactReferenceService(
     res.end(reactReferenceHtml(reference));
   };
   return Object.assign(handle, {
+    initialNativeEvidence(request: ReactInitialNativeRequest) {
+      if (!reference) throw Error('react-initial-native-reference-unavailable');
+      return initialStates.nativeEvidence(reference, request);
+    },
     comparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');
       return readReactComparisonEvidence(repoRoot, reference, request, parent);

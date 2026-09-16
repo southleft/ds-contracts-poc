@@ -18,6 +18,7 @@ import { observeReactInitialStates } from './react-initial-state.js';
 import { evidenceSha, inventoryEvidence, evidenceUnchanged } from './react-validation-evidence.js';
 import { cropSourceFrame } from './source-framing.js';
 import { compileReactInitialContract } from './react-initial-contract.js';
+import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 
 type Request = { version: 1; anchor: ReactNativeRequest; caseId: string };
 export interface ReactInitialInspection {
@@ -35,21 +36,25 @@ function original(repo: string, reference: ReactReference, request: Request) {
   if (!row?.matched || row.problems.length || !row.ownership || captured.status !== 'captured' ||
       captured.treeSha256 !== row.treeSha256 || captured.sourcePngSha256 !== row.sourceImage ||
       evidenceSha(JSON.stringify(captured.tree)) !== captured.treeSha256) throw Error('react-initial-original-unavailable');
-  return { captured, ownership: row.ownership, program: JSON.parse(readFileSync(path.join(dir, 'program.json'), 'utf8')) as ReactSourceProgram };
+  const programBytes = readFileSync(path.join(dir, 'program.json'));
+  return { captured, ownership: row.ownership, program: JSON.parse(programBytes.toString()) as ReactSourceProgram,
+    programSha256: evidenceSha(programBytes) };
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
   select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest }) {
   const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void> }>();
-  const input = (referenceId: string, caseId: string) => {
-    const { reference, anchor } = select(referenceId, caseId);
-    const request: Request = { version: 1, anchor, caseId };
+  const from = (reference: ReactReference, request: Request) => {
     const source = original(repo, reference, request), key = revisionOf(request).slice(7);
     return { reference, request, source, key, root: path.join(repo, 'private/react-initial-inspections', key) };
   };
-  const saved = (value: ReturnType<typeof input>) => {
+  const input = (referenceId: string, caseId: string) => {
+    const { reference, anchor } = select(referenceId, caseId);
+    return from(reference, { version: 1, anchor, caseId });
+  };
+  const saved = (value: ReturnType<typeof input>, pinned?: ReactInitialNativeRequest['observation']) => {
     const pointer = path.join(value.root, 'latest.json');
-    if (!existsSync(pointer)) return undefined;
-    const latest = JSON.parse(readFileSync(pointer, 'utf8'));
+    if (!pinned && !existsSync(pointer)) return undefined;
+    const latest = pinned ?? JSON.parse(readFileSync(pointer, 'utf8'));
     if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(latest.id)) throw Error('react-initial-record-invalid');
     const dir = path.join(value.root, latest.id), sealBytes = readFileSync(path.join(dir, 'integrity.json'));
     if (evidenceSha(sealBytes) !== latest.inventorySha256) throw Error('react-initial-inventory-changed');
@@ -57,16 +62,13 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
     const inventory = Object.fromEntries(Object.entries({ ...seal.files, 'integrity.json': latest.inventorySha256 }).sort(([a], [b]) => a.localeCompare(b))) as Record<string,string>;
     if (seal.version !== 1 || !evidenceUnchanged(dir, inventory) ||
         revisionOf(JSON.parse(readFileSync(path.join(dir, 'request.json'), 'utf8'))) !== revisionOf(value.request)) throw Error('react-initial-evidence-changed');
-    const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactInitialInspection;
+    const reportBytes = readFileSync(path.join(dir, 'report.json'));
+    if (pinned && evidenceSha(reportBytes) !== pinned.reportSha256) throw Error('react-initial-report-changed');
+    const report = JSON.parse(reportBytes.toString()) as ReactInitialInspection;
     if (report.id !== latest.id || report.caseId !== value.request.caseId || report.phase === 'running') throw Error('react-initial-report-invalid');
-    return { dir, report };
+    return { dir, report, pin: { id: latest.id as string, inventorySha256: latest.inventorySha256 as string, reportSha256: evidenceSha(reportBytes) } };
   };
-  const read = (referenceId: string, caseId: string) => {
-    const value = input(referenceId, caseId);
-    const running = active.get(value.key);
-    if (running) return structuredClone(running.state);
-    const record = saved(value);
-    if (!record) return undefined;
+  const derive = (value: ReturnType<typeof input>, record: NonNullable<ReturnType<typeof saved>>) => {
     const report = structuredClone(record.report);
     if (report.phase === 'complete' && report.observation) {
       const snapshots = Object.fromEntries(report.observation.rows.map(row => {
@@ -80,17 +82,50 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
     }
     return report;
   };
-  return {
-    read,
-    image(referenceId: string, caseId: string, jobId: string, rowId: string) {
-      if (!/^\d+$/.test(rowId)) throw Error('react-initial-row-invalid');
-      const value = input(referenceId, caseId), record = saved(value);
+  const read = (referenceId: string, caseId: string) => {
+    const value = input(referenceId, caseId), running = active.get(value.key);
+    if (running) return structuredClone(running.state);
+    const record = saved(value);
+    return record ? derive(value, record) : undefined;
+  };
+  const image = (record: ReturnType<typeof saved>, jobId: string, rowId: string) => {
       const row = record?.report.observation?.rows.find(r => r.id === rowId && r.status === 'observed');
       if (!record || record.report.id !== jobId || !row?.image) throw Error('react-initial-image-unavailable');
       const png = readFileSync(path.join(record.dir, 'states', rowId + '.png'));
       const snapshot = JSON.parse(readFileSync(path.join(record.dir, 'states', rowId + '.json'), 'utf8'));
       if (evidenceSha(png) !== row.image || snapshot.image !== row.image || snapshot.treeSha256 !== row.treeSha256) throw Error('react-initial-image-changed');
       return cropSourceFrame(png, snapshot.bounds).bytes;
+  };
+  return {
+    read,
+    nativeRequest(referenceId: string, caseId: string): ReactInitialNativeRequest {
+      const value = input(referenceId, caseId), record = saved(value);
+      if (!record || active.has(value.key) || derive(value, record).draft?.status !== 'compiled-draft')
+        throw Error('react-initial-native-observation-unavailable');
+      return { version: 1, kind: 'react-initial-draft', anchor: value.request.anchor, caseId, observation: record.pin };
+    },
+    nativeEvidence(reference: ReactReference, request: ReactInitialNativeRequest) {
+      if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId)
+        throw Error('react-initial-native-request-invalid');
+      // Resolve the pinned archive directly, never via the latest pointer or
+      // the journal's list/get path (which calls this evidence reader itself).
+      const value = from(reference, { version: 1, anchor: request.anchor, caseId: request.caseId });
+      const record = saved(value, request.observation)!;
+      const report = derive(value, record);
+      if (report.phase !== 'complete' || !report.sourceUnchanged || report.problems.length || report.draft?.status !== 'compiled-draft')
+        throw Error('react-initial-native-observation-unavailable');
+      return { draft: report.draft, source: { revision: 'sha256:' + reference.id,
+        programSha256: value.source.programSha256, evidenceRevision: revisionOf(request) } };
+    },
+    nativeImage(reference: ReactReference, request: ReactInitialNativeRequest, rowId: string) {
+      if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId || !/^\d+$/.test(rowId))
+        throw Error('react-initial-native-image-invalid');
+      const value = from(reference, { version: 1, anchor: request.anchor, caseId: request.caseId });
+      return image(saved(value, request.observation), request.observation.id, rowId);
+    },
+    image(referenceId: string, caseId: string, jobId: string, rowId: string) {
+      if (!/^\d+$/.test(rowId)) throw Error('react-initial-row-invalid');
+      return image(saved(input(referenceId, caseId)), jobId, rowId);
     },
     start(referenceId: string, caseId: string) {
       const value = input(referenceId, caseId), existing = active.get(value.key);

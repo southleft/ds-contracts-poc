@@ -1,3 +1,5 @@
+import { isReactInitialNativeRequest, reactInitialNativeReservation, type ReactInitialNativeRequest } from './react-initial-native-request.js';
+import type { prepareReactInitialNativePlan } from './react-initial-native-plan.js';
 import { isReactComparisonRequest, reactComparisonReservation, type ReactComparisonRequest } from './react-comparison-request.js';
 import type { prepareReactComparisonPlan } from './react-comparison-plan.js';
 import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback, type NativeContractComparisonObservationInput } from '../core/native-contract-comparison-observation.js';
@@ -70,13 +72,15 @@ const POLICY = {
 type SourcePlan = ReturnType<typeof prepareNativeSourceInspectionPlan>;
 type ReactPlan = ReturnType<typeof prepareReactNativePlan>;
 type ComparisonPlan = ReturnType<typeof prepareReactComparisonPlan>;
-type Plan = SourcePlan | ReactPlan | ComparisonPlan;
+type InitialPlan = ReturnType<typeof prepareReactInitialNativePlan>;
+type Plan = SourcePlan | ReactPlan | ComparisonPlan | InitialPlan;
+const isInitialPlan = (p: Plan): p is InitialPlan => 'kind' in p.plan && p.plan.kind === 'react-initial-draft-inspection';
 const isComparisonPlan = (p: Plan): p is ComparisonPlan => 'kind' in p.plan && p.plan.kind === 'react-content-comparison';
-type OperationRequest = BindingEvidenceRequest | ReactNativeRequest | ReactComparisonRequest;
-const validRequest = (v: unknown): v is OperationRequest => isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactComparisonRequest(v);
-const reservation = (r: OperationRequest) => isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
-const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactNativeRequest(r) || isReactComparisonRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
-const isReactPlan = (p: Plan): p is ReactPlan => 'kind' in p.plan && p.plan.kind === 'react-root-draft-inspection';
+type OperationRequest = BindingEvidenceRequest | ReactNativeRequest | ReactComparisonRequest | ReactInitialNativeRequest;
+const validRequest = (v: unknown): v is OperationRequest => isBindingEvidenceRequest(v) || isReactNativeRequest(v) || isReactComparisonRequest(v) || isReactInitialNativeRequest(v);
+const reservation = (r: OperationRequest) => isReactInitialNativeRequest(r) ? reactInitialNativeReservation(r) : isReactComparisonRequest(r) ? reactComparisonReservation(r) : isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
+const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactNativeRequest(r) || isReactComparisonRequest(r) || isReactInitialNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
+const isReactPlan = (p: Plan): p is ReactPlan | InitialPlan => 'kind' in p.plan && (p.plan.kind === 'react-root-draft-inspection' || p.plan.kind === 'react-initial-draft-inspection');
 type Pin = { id: string; reportSha256: string };
 export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
   visual: Pin;
@@ -193,6 +197,10 @@ interface State {
   dispatchedComponent: boolean;
 }
 export interface NativeOperationJobsOptions {
+  reactInitial?: {
+    prepare(request: ReactInitialNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<InitialPlan>;
+    buildComponent(request: ReactInitialNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
+  };
   reactComparison?: {
     prepare(request: ReactComparisonRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ComparisonPlan>;
     buildComponent(request: ReactComparisonRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
@@ -317,6 +325,10 @@ export function createNativeOperationJobs(
   options: NativeOperationJobsOptions,
 ) {
   const prepareInput = (request: OperationRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<Plan> => {
+    if (isReactInitialNativeRequest(request)) {
+      if (!options.reactInitial) fail('react-initial-adapter-unavailable');
+      return options.reactInitial.prepare(request, operation);
+    }
     if (isReactComparisonRequest(request)) {
       if (!options.reactComparison) fail('react-comparison-adapter-unavailable');
       return options.reactComparison.prepare(request, operation);
@@ -409,7 +421,8 @@ export function createNativeOperationJobs(
       plan.plan.acceptedContract !== null ||
       plan.plan.nativeQualification !== "unqualified" ||
       plan.plan.purpose !== "source-candidate-inspection" ||
-      isReactPlan(plan) !== isReactNativeRequest(request) ||
+      isReactPlan(plan) !== (isReactNativeRequest(request) || isReactInitialNativeRequest(request)) ||
+      isInitialPlan(plan) !== isReactInitialNativeRequest(request) ||
       isComparisonPlan(plan) !== isReactComparisonRequest(request) ||
       !same(plan.plan.operation, { id, fileKey }) ||
       plan.plan.tokenInput.fileKey !== fileKey ||
@@ -1267,12 +1280,12 @@ export function createNativeOperationJobs(
     } else if (phase === "component-create") {
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
-      if (isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
+      if (isReactInitialNativeRequest(loaded.header.request) ? !options.reactInitial : isReactComparisonRequest(loaded.header.request) ? !options.reactComparison : isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
       const context = verifiedTokenContext(id);
       if (context.journalRevision !== loaded.fingerprint)
         fail("journal-changed");
       const request = structuredClone(loaded.header.request);
-      const built = isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+      const built = isReactInitialNativeRequest(request) ? options.reactInitial!.buildComponent(request, context) : isReactComparisonRequest(request) ? options.reactComparison!.buildComponent(request, context) : isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
         : options.buildComponent!(request, context);
       if (
         built.planRevision !== loaded.plan.revision ||
@@ -1412,6 +1425,11 @@ export function createNativeOperationJobs(
     retryObservation,
     retryCreation,
     verifiedTokenContext,
+    reactInitialRequest(id: string): ReactInitialNativeRequest {
+      const { header } = load(id);
+      if (!isReactInitialNativeRequest(header.request)) fail('react-initial-operation-required');
+      return structuredClone(header.request);
+    },
     reactRequest(id: string): ReactNativeRequest {
       const { header } = load(id);
       if (!isReactNativeRequest(header.request)) fail('react-operation-required');
@@ -1431,7 +1449,7 @@ export function createNativeOperationJobs(
     },
     reactIdentity(id: string) {
       const { header } = load(id);
-      const request = isReactComparisonRequest(header.request) ? header.request.root : header.request;
+      const request = isReactInitialNativeRequest(header.request) ? { ...header.request.anchor, caseId: header.request.caseId } : isReactComparisonRequest(header.request) ? header.request.root : header.request;
       if (!isReactNativeRequest(request)) fail('react-operation-required');
       return { referenceId: request.referenceId, caseId: request.caseId,
         ownershipId: request.ownership.id, fileKey: header.policy.fileKey };
@@ -1443,10 +1461,12 @@ export function createNativeOperationJobs(
       return readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
-        const request = comparison?.root ?? header.request;
+        const initial = isReactInitialNativeRequest(header.request) ? header.request : undefined;
+        const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
         // get() verifies the saved journal and separately reports source freshness.
-        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: comparison ? 'comparison' as const : 'root' as const,
+        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : 'root' as const,
+          ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
           ...(comparison ? { parentOperationId: comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];
       });

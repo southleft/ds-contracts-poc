@@ -98,6 +98,14 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.equal(repeated.state.id, initialId, 'a completed observation reopens without a new mount');
   assert.deepEqual(PNG.sync.read(initialStore().image(reference.id, 'button-default', initialId, '0')).data, framedPixels.data);
   assert.throws(() => initialStore().image(reference.id, 'button-default', initialId, '../0'), /row-invalid/);
+  const pinned = { version: 1 as const, kind: 'react-initial-draft' as const, anchor: request, caseId: 'button-default',
+    observation: { id: initialId, inventorySha256: evidenceSha(seal), reportSha256: evidenceSha(readFileSync(path.join(initialDir, 'report.json'))) } };
+  assert.throws(() => initialStore().nativeRequest(reference.id, 'button-default'), /observation-unavailable/, 'an incomplete derived contract cannot authorize delivery');
+  writeFileSync(path.join(initialRoot, 'latest.json'), JSON.stringify({ id: '99999999-9999-4999-8999-999999999999', inventorySha256: '0'.repeat(64) }));
+  assert.deepEqual(PNG.sync.read(initialStore().nativeImage(reference, pinned, '0')).data, framedPixels.data, 'pinned delivery never follows a changed latest pointer');
+  assert.throws(() => initialStore().nativeImage(reference, { ...pinned, observation: { ...pinned.observation, reportSha256: '0'.repeat(64) } }, '0'), /report-changed/);
+  assert.throws(() => initialStore().nativeImage(reference, { ...pinned, observation: { ...pinned.observation, inventorySha256: '0'.repeat(64) } }, '0'), /inventory-changed/);
+  writeFileSync(path.join(initialRoot, 'latest.json'), JSON.stringify({ id: initialId, inventorySha256: evidenceSha(seal) }));
   writeFileSync(path.join(initialDir, 'states/0.png'), Buffer.from('changed'));
   assert.throws(() => initialStore().read(reference.id, 'button-default'), /evidence-changed/);
   assert.throws(() => initialStore().image(reference.id, 'button-default', initialId, '0'), /evidence-changed/);
