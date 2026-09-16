@@ -64,7 +64,7 @@ const object = (v: unknown): v is Record<string, any> =>
 
 /** Check the compiled shadow stack independently of the writer. Native numbers
  * may be float32; no broader colour/geometry tolerance is granted here. */
-function shadowsMatch(spec: NodeSpec, effects: unknown): boolean {
+export function nativeShadowStackMatches(spec: NodeSpec, effects: unknown): boolean {
   let expected = spec.effectStack;
   if (!expected && spec.dropShadow) {
     const s = spec.dropShadow, hex = s.color.replace(/^#/, '');
@@ -145,6 +145,17 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     nodes: input.creation.nodes,
     comparisons: nativeInspectionExports(input),
   };
+  return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
+    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames'] : [], captureImages);
+}
+
+/** Shared read-only inventory collector. Callers independently verify the
+ * returned facts against their own authenticated operation plan. */
+export function emitNativeInventoryReadbackScript(expected: {
+  operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
+  nodes: Array<{ id: string; type: string }>;
+  comparisons: Array<{ id: string; instanceId: string; type: string }>;
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false): string {
   const fields = [
     "visible",
     "opacity",
@@ -216,7 +227,7 @@ const stable = x => JSON.stringify((function order(v) {
 })(x));
 function guard() { if (figma.fileKey !== EXPECTED.operation.fileKey) throw Error('native-source-readback-file-mismatch'); }
 async function tokenRead() { return await (async () => {
-${emitNativeTokenContextReadbackScript(input.tokenInput, input.tokenIdentity)}
+${emitNativeTokenContextReadbackScript(tokenInput, tokenIdentity)}
 })(); }
 async function read(page) {
   const nodes = [page, ...page.findAll(() => true)];
@@ -238,7 +249,7 @@ async function read(page) {
       row.mainId = main ? main.id : null;
       row.componentProperties = copy(node.componentProperties);
     }
-    for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'${isContractDraft(input) ? ", 'nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames'" : ''}])
+    for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'${extraMetadata.map(key => ", " + JSON.stringify(key)).join('')}])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
     out.push(row);
   }
@@ -639,7 +650,7 @@ function verifyReadback(
       } else if (spec.type !== "text" && paints.length)
         issue(`native-source-observation-extra-${field}`, n);
     }
-    if (!shadowsMatch(spec, v.effects))
+    if (!nativeShadowStackMatches(spec, v.effects))
       issue("native-source-observation-effects", n);
     if (spec.gradient) issue("native-source-observation-gradient-unverified", n);
     for (const field of ["width", "height"] as const)

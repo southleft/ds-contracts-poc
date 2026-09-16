@@ -19,6 +19,10 @@ export function collectNativeImages(
   input: NativeInspectionInput,
   raw: unknown,
 ): { observation: NativeImageObservation; bytes: Map<string, Buffer> } {
+  return collectExpectedNativeImages(input, nativeInspectionExports(input), raw);
+}
+export function collectExpectedNativeImages(input: { operation: { id: string; fileKey: string }; planRevision: string },
+  expected: Array<{ id: string; instanceId: string }>, raw: unknown): { observation: NativeImageObservation; bytes: Map<string, Buffer> } {
   const unavailable = (problem: string) => ({
     observation: {
       status: "unavailable" as const,
@@ -44,7 +48,6 @@ export function collectNativeImages(
       r.problems.length
     )
       return unavailable("native-images-readback-unavailable");
-    const expected = nativeInspectionExports(input);
     if (!Array.isArray(r.images) || !r.images.length)
       return unavailable("native-images-not-collected");
     if (r.images.length !== expected.length)

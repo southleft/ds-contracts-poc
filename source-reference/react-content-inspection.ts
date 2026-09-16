@@ -99,11 +99,11 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
 
 /** Saved read-only preparation survives a server restart. It grants no native
  * write permission; a writer must rederive the current compiler output. */
-export function readReactContentInspection(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, operationId: string): ReactContentInspection | undefined {
+export function readReactContentInspection(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, operationId: string, selected?: { id: string; inventorySha256: string }): ReactContentInspection | undefined {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId)) throw Error('react-content-operation-invalid');
   const root = path.join(repoRoot, 'private/react-content-inspections', operationId), latestPath = path.join(root, 'latest.json');
-  if (!existsSync(latestPath)) return undefined;
-  const latest = JSON.parse(readFileSync(latestPath, 'utf8'));
+  if (!selected && !existsSync(latestPath)) return undefined;
+  const latest = selected ? { ...selected, requestRevision: revisionOf(request) } : JSON.parse(readFileSync(latestPath, 'utf8'));
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(latest.id) || latest.requestRevision !== revisionOf(request))
     throw Error('react-content-saved-request-changed');
   readReactNativeContentEvidence(repoRoot, reference, request);
@@ -114,6 +114,8 @@ export function readReactContentInspection(repoRoot: string, reference: ReactRef
       Object.values(seal.files).some(value => typeof value !== 'string' || !/^[a-f0-9]{64}$/.test(value))) throw Error('react-content-inventory-invalid');
   const files = Object.fromEntries(Object.entries({ ...seal.files, 'integrity.json': latest.inventorySha256 }).sort(([a], [b]) => a.localeCompare(b))) as Record<string, string>;
   if (seal.version !== 1 || !evidenceUnchanged(dir, files)) throw Error('react-content-evidence-changed');
+  const savedRequest = JSON.parse(readFileSync(path.join(dir, 'request.json'), 'utf8'));
+  if (savedRequest.operationId !== operationId || revisionOf(savedRequest.request) !== revisionOf(request)) throw Error('react-content-saved-request-changed');
   const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactContentInspection;
   if (report.id !== latest.id || report.operationId !== operationId || report.referenceId !== reference.id || report.caseId !== request.caseId || report.phase === 'running')
     throw Error('react-content-report-identity-changed');

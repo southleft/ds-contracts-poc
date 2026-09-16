@@ -1,3 +1,4 @@
+import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
 import { createReactReferenceService } from './react-reference.js';
 import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
@@ -122,9 +123,20 @@ export function createReferenceService(
       candidateOptions.validateVisualReport ?? validateCandidateVisualReport,
     ...(candidateOptions.run ? { run: candidateOptions.run } : {}),
   });
-  const nativeJobs = createNativeOperationJobs(
+  const nativeJobs: ReturnType<typeof createNativeOperationJobs> = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      reactComparison: {
+        prepare: (request, operation) => ({
+          visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
+          preparation: { id: request.content.id, reportSha256: request.content.reportSha256 },
+          plan: prepareReactComparisonPlan({ ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation }),
+        }),
+        buildComponent: (request, context) => buildReactComparisonWrite({
+          ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
       react: {
         prepare: (request, operation) => ({
           visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },

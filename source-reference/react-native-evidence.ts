@@ -65,5 +65,5 @@ export function readReactNativeContentEvidence(repoRoot: string, reference: Reac
   if (captured.status !== 'captured' || captured.problems.length || !captured.tree ||
       captured.treeSha256 !== evidenceSha(Buffer.from(JSON.stringify(captured.tree))) ||
       captured.treeSha256 !== report.rows.find(row => row.id === request.caseId)?.treeSha256) return fail();
-  return { ...original, captured };
+  return { ...original, captured, observedProps: structuredClone(report.rows.find(row => row.id === request.caseId)?.propertyMatrix?.heldProps) };
 }

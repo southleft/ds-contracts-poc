@@ -104,7 +104,10 @@ async function nativeBuildContractComparison() {
   function pair(source, node, path) {
     if ((path.length ? node.type !== source.type : node.type !== 'INSTANCE') ||
         (source.children || []).length !== (node.children || []).length) nativeRefuse('comparison-tree-mismatch');
-    if (path.length) nativeOwn(node);
+    if (path.length) {
+      nativeOwn(node);
+      node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);
+    }
     const identity = JSON.parse(source.getSharedPluginData('ds_contracts', 'nativeContractPart'));
     if (nativeCanonical(identity.specPath) !== nativeCanonical(path)) nativeRefuse('comparison-part-mismatch');
     node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(identity));

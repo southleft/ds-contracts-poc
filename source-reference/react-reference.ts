@@ -1,6 +1,8 @@
+import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
+import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
-import { readReactNativeEvidence, selectReactNativeRequest } from './react-native-evidence.js';
+import { readReactNativeEvidence, readReactNativeContentEvidence, selectReactNativeRequest } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
 import type { createNativeOperationTransport } from './native-operation-transport.js';
@@ -170,8 +172,20 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const originalImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source\.png$/.exec(route);
+    if (originalImage && req.method === 'GET') {
+      try {
+        if (!reference || reference.id !== originalImage[1] || !native) throw Error('source unavailable');
+        const request = native().jobs.reactRequest(originalImage[2]);
+        const evidence = readReactNativeContentEvidence(repoRoot, reference, request);
+        const bytes = readFileSync(path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id, request.caseId, 'source.png'));
+        if (sha(bytes) !== evidence.captured.sourcePngSha256) throw Error('source image changed');
+        res.setHeader('Content-Type', 'image/png'); res.setHeader('Cache-Control', 'no-store'); res.end(bytes);
+      } catch { json(res, 409, { error: 'Original source image unavailable or changed.' }); }
+      return;
+    }
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
-    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content)$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison)$/.exec(route);
     if (nativeRoute || nativeAction) {
       try {
         if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction)![1]) throw Error('react-native-reference-unavailable');
@@ -196,6 +210,9 @@ export function createReactReferenceService(
                 contentJobs.set(id, job);
                 void job.promise.catch(() => { job.state.phase = 'failed'; job.state.problems = ['react-content-evidence-unavailable']; });
               }
+            } else if (nativeAction[3] === 'comparison') {
+              jobs.verifiedReactObservation(id);
+              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id));
             } else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
@@ -203,7 +220,7 @@ export function createReactReferenceService(
         const observedAt = Date.now();
         json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
           let content;
-          try { content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
+          try { if (row.kind === 'root') content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
           catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
           return { ...row, content, connection: transport.status(row.operation.id, observedAt) };
         }) });
@@ -559,6 +576,10 @@ export function createReactReferenceService(
     res.end(reactReferenceHtml(reference));
   };
   return Object.assign(handle, {
+    comparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
+      if (!reference) throw Error('react-native-reference-unavailable');
+      return readReactComparisonEvidence(repoRoot, reference, request, parent);
+    },
     nativeEvidence(request: ReactNativeRequest) {
       if (!reference) throw Error('react-native-reference-unavailable');
       return readReactNativeEvidence(repoRoot, reference, request);
