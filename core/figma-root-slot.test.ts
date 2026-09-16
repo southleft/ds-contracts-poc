@@ -40,11 +40,14 @@ test('unknown, grid, wrapping, reversed and distributed root content cannot sile
   (c:Contract)=>{c.anatomy.root.layout!.direction='row-reverse';},
   (c:Contract)=>{c.anatomy.root.layout!.justify='space-between';},
   (c:Contract)=>{c.anatomy.root.parts={body:{text:'conflict'}};},
+  (c:Contract)=>{c.anatomy.root.layoutByProp={prop:'mode',map:{inline:{display:'inline-flex'}}};},
  ]){const c=seed();mutate(c);assert.throws(()=>compile(c),/FIGMA_ROOT_SLOT_(LAYOUT|DISTRIBUTION|SHAPE)_UNSUPPORTED|slot "children" declares display:grid/);}
 });
 
-test('native root-slot sizing, repeat identity, amend and retirement/readback guards execute on emitted programs',async()=>{
+for(const display of ['flex','inline-flex'] as const) test(`native ${display} root-slot sizing, repeat, amend and checked React readback`,async()=>{
  const c=seed(),byId=new Map([[c.id,c]]);
+ c.anatomy.root.layout!.display=display;
+ const marker={version:1,property:'Children',...(display==='inline-flex'?{display}:{})};
  const {figma,root}=createFigmaMock();
  const context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000}) as Promise<any>;
@@ -53,12 +56,12 @@ test('native root-slot sizing, repeat identity, amend and retirement/readback gu
  const comp=root.findOne((n:any)=>n.type==='COMPONENT'&&n.getSharedPluginData('ds_contracts','contractId')===c.id);
  assert.ok(comp);const slot=comp.children![0];const key=slot.componentPropertyReferences.slotContentId;
  assert.equal(slot.type,'SLOT');assert.equal(slot.layoutSizingHorizontal,'FILL');assert.equal(slot.layoutSizingVertical,'FILL');
- assert.deepEqual(JSON.parse(comp.getSharedPluginData('ds_contracts','rootSlot')),{version:1,property:'Children'});
+ assert.deepEqual(JSON.parse(comp.getSharedPluginData('ds_contracts','rootSlot')),marker);
  await run(script());assert.equal(comp.children![0].id,slot.id);assert.equal(comp.children![0].componentPropertyReferences.slotContentId,key);
  c.anatomy.root.literals={};await run(script());assert.equal(comp.children![0].componentPropertyReferences.slotContentId,key);
  assert.equal(comp.children![0].layoutSizingHorizontal,'HUG');assert.equal(comp.children![0].layoutSizingVertical,'HUG');
  const dumpSource=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ${JSON.stringify([comp.name])};`);
- const dump=JSON.parse(JSON.stringify((await run(dumpSource))[comp.name]));assert.deepEqual(dump.rootSlot,{version:1,property:'Children'});
+ const dump=JSON.parse(JSON.stringify((await run(dumpSource))[comp.name]));assert.deepEqual(dump.rootSlot,marker);
  const corpus=tokenCorpusFromJson({primitives,semantic:{},light:{},brandDefault:{}});
  for(const mode of ['exact','reviewable-inversion'] as const){
   const proposal=proposeFromDump(dump,{corpus,contractIdByName:new Map(),fileKey:null,projectionMode:mode,mintUnbound:true});
@@ -66,6 +69,7 @@ test('native root-slot sizing, repeat identity, amend and retirement/readback gu
   assert.deepEqual(restored.anatomy.root.slot,{name:'children'});
   assert.equal(restored.anatomy.root.parts,undefined);
   assert.equal(restored.anatomy.root.tokens?.gap,'{gap8}');
+  assert.equal(restored.anatomy.root.layout?.display,display);
   assert.equal(restored.anatomy.root.layout?.direction,'column');
   assert.equal(restored.anatomy.root.layout?.align,'start');
   assert.equal(restored.anatomy.root.layout?.justify,'start');
@@ -79,6 +83,7 @@ export function Consumer({reverse=false}:{reverse?:boolean}){const first=<div ke
     const page=await browser.newPage();
     const render=await mountGenerated(page,'Consumer',consumer,'',format==='module'?{[restored.name]:{tsx:generated.tsx,css:'css' in generated ? generated.css as string : ''}}:{});
     await page.addStyleTag({content:':root{--gap8:8px}'});
+    assert.equal(await page.locator('#root > *').evaluate(n=>getComputedStyle(n).display),display,format);
     const measure=()=>page.locator('#root > *').evaluate(n=>({width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height,children:[...n.children].map(c=>({name:c.getAttribute('data-content'),x:c.getBoundingClientRect().x-n.getBoundingClientRect().x,y:c.getBoundingClientRect().y-n.getBoundingClientRect().y}))}));
     assert.deepEqual(await measure(),{width:156,height:88,children:[{name:'first',x:8,y:8},{name:'second',x:8,y:40}]},format);
     await render({reverse:true});assert.deepEqual((await measure()).children,[{name:'second',x:8,y:8},{name:'first',x:8,y:56}]);
@@ -88,6 +93,8 @@ export function Consumer({reverse=false}:{reverse?:boolean}){const first=<div ke
  }
  for(const mutate of [
   (d:any)=>{d.rootSlot.version=2;},
+  (d:any)=>{d.rootSlot.display='grid';},
+  (d:any)=>{d.rootSlot.unrecognized=true;},
   (d:any)=>{d.variants[0].children.push({name:'extra',type:'FRAME'});},
   (d:any)=>{d.variants[0].children[0].fill={color:'#ff0000'};},
   (d:any)=>{d.variants[0].children[0].layout.spacing=17;},
@@ -97,7 +104,11 @@ export function Consumer({reverse=false}:{reverse?:boolean}){const first=<div ke
   (d:any)=>{d.variants[0].children[0].propRefs.slotContentId='Other';},
   (d:any)=>{d.propertyDefinitions={};},
  ]){const changed=structuredClone(dump);mutate(changed);assert.throws(()=>proposeFromDump(changed,{corpus,contractIdByName:new Map()}),/FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED/);}
- const before=comp.children![0].id;delete c.anatomy.root.slot;
+ const before=comp.children![0].id;
+ c.anatomy.root.layout!.display=display==='flex'?'inline-flex':'flex';
+ await assert.rejects(()=>run(script()),/FIGMA_ROOT_SLOT_RETIREMENT_REFUSED/);
+ assert.equal(comp.children![0].id,before);
+ c.anatomy.root.layout!.display=display;delete c.anatomy.root.slot;
  await assert.rejects(()=>run(script()),/FIGMA_ROOT_SLOT_RETIREMENT_REFUSED/);assert.equal(comp.children![0].id,before);
 });
 

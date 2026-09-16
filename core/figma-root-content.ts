@@ -2,13 +2,14 @@ import type { DumpSet } from '../extract/figma/types.js';
 
 /** A marker identifies the compiler projection; drawn facts must still agree.
  * Never unwrap an arbitrary designer-authored frame or trust the marker alone. */
-export function readRootContent(set: DumpSet): { property: string } | undefined {
+export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' } | undefined {
   const raw = set.rootSlot;
   if (raw === undefined) return undefined;
   const fail = (why: string): never => { throw new Error(`FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED: ${why}`); };
   const marker = raw as Record<string, unknown> | null;
   if (!marker || typeof marker !== 'object' || Array.isArray(marker) ||
-      Object.keys(marker).sort().join('|') !== 'property|version' ||
+      !['property|version', 'display|property|version'].includes(Object.keys(marker).sort().join('|')) ||
+      (Object.hasOwn(marker, 'display') && marker.display !== 'inline-flex') ||
       marker.version !== 1 || typeof marker.property !== 'string' || !marker.property)
     return fail('invalid version 1 root content declaration');
   const property = (raw as { property: string }).property;
@@ -43,5 +44,5 @@ export function readRootContent(set: DumpSet): { property: string } | undefined 
           Boolean(filled) !== (outer[axis] === 'FIXED')) return fail(`${root.name}: content sizing disagrees with root`);
     }
   }
-  return { property };
+  return { property, display: marker.display === 'inline-flex' ? 'inline-flex' : 'flex' };
 }

@@ -10527,7 +10527,7 @@ export function proposeFromDump(
   const root: Record<string, unknown> = {};
   const rootKeyByChildName = new Map<string, string>();
   const rootLayout = invertLayout(merged, true, null, ctx, where);
-  if (rootLayout) root.layout = rootLayout;
+  if (rootLayout) root.layout = rootContent ? { ...rootLayout, display: rootContent.display } : rootLayout;
   applyLayoutSplit(root, invertLayoutByProp(merged, ctx, where));
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootDeclared: Record<string, string> = {};

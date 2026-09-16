@@ -682,7 +682,7 @@ export interface ComponentData {
   propNames?: Record<string, string>;
   /** Canonical native options retain exact typed React values. */
   codeValueAxes?: CodeValueAxes;
-  rootSlot?: { version: 1; property: string };
+  rootSlot?: { version: 1; property: string; display?: 'inline-flex' };
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
     version: 1 | 2;
@@ -5184,8 +5184,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const r = contract.anatomy.root;
     if (r.slot!.name !== 'children' || r.parts || r.content || r.text !== undefined || r.icon || r.component || r.optional)
       throw new Error('FIGMA_ROOT_SLOT_SHAPE_UNSUPPORTED: root content must be one unconditional children slot');
-    if (!r.layout || r.layout.display !== 'flex' || r.layout.wrap || r.layout.direction?.endsWith('-reverse'))
+    if (!r.layout || (r.layout.display !== 'flex' && r.layout.display !== 'inline-flex') || r.layout.wrap || r.layout.direction?.endsWith('-reverse'))
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root slots currently require non-wrapping forward flex layout');
+    if (Object.values(r.layoutByProp?.map ?? {}).some(layout => layout.display !== undefined && layout.display !== r.layout!.display))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: changing outer display across variants needs per-plane content metadata');
   }
   // Variant axes = enum props AND VARIANT-bound boolean props, in prop
   // declaration order (see isVariantBool). An enum-only contract's axis list
@@ -6006,7 +6008,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
       : {}),
     isSet: variants.length + stateVariants.length > 1 || contract.props.some(p => p.bindings.code.values !== undefined),
-    ...(contract.anatomy.root?.slot ? { rootSlot: { version: 1 as const, property: slotFigmaProperty(contract.anatomy.root.slot) } } : {}),
+    ...(contract.anatomy.root?.slot ? { rootSlot: { version: 1 as const, property: slotFigmaProperty(contract.anatomy.root.slot), ...(contract.anatomy.root.layout?.display === 'inline-flex' ? { display: 'inline-flex' as const } : {}) } } : {}),
     ...(codeValueAxes(contract) ? { codeValueAxes: codeValueAxes(contract) } : {}),
     boolProps: boolPropsData,
     textProps: textOnlyProps,
