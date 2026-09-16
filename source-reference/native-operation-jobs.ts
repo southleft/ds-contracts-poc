@@ -1430,6 +1430,20 @@ export function createNativeOperationJobs(
       if (!isReactInitialNativeRequest(header.request)) fail('react-initial-operation-required');
       return structuredClone(header.request);
     },
+    reactUpdateBaseline(id: string) {
+      const loaded = load(id);
+      if ((!isReactNativeRequest(loaded.header.request) && !isReactInitialNativeRequest(loaded.header.request)) ||
+          !isReactPlan(loaded.plan) || loaded.state.phase !== 'component-structure-observed' ||
+          loaded.state.pending || !loaded.state.imageReadback)
+        fail('react-update-verified-baseline-required');
+      // The old compiler plan is historical evidence, not write authority.
+      // An update must separately authenticate and pin its current desired input.
+      const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
+      delete input.allocationAnchor;
+      const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
+      delete receipt.images;
+      return structuredClone({ input, receipt, request: loaded.header.request, journalRevision: loaded.fingerprint });
+    },
     reactRequest(id: string): ReactNativeRequest {
       const { header } = load(id);
       if (!isReactNativeRequest(header.request)) fail('react-operation-required');

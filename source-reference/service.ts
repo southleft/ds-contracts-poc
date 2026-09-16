@@ -1,4 +1,5 @@
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
+import { createNativeUpdatePlans } from './native-update-plans.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
 import { createReactReferenceService } from './react-reference.js';
 import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
@@ -107,7 +108,7 @@ export function createReferenceService(
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
 ) {
-  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport }));
+  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans }));
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
@@ -736,6 +737,15 @@ export function createReferenceService(
     };
   });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
+  const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, id => {
+    const baseline = nativeJobs.reactUpdateBaseline(id);
+    if (baseline.request.kind !== 'react-initial-draft') throw Error('react-update-initial-draft-required');
+    const desired = prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.request), operation: baseline.input.operation });
+    return { parentJournalRevision: baseline.journalRevision, input: {
+      before: baseline.input, baseline: baseline.receipt,
+      desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
+    } };
+  });
   const snapshotWithSupplement = (job: ReferenceJob) => {
     const connectionObservedAt = Date.now();
     const candidates = candidateJobs.list(job.id);

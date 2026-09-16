@@ -1,4 +1,5 @@
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
+import type { createNativeUpdatePlans } from './native-update-plans.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore } from './react-source-framing.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
@@ -151,7 +152,7 @@ export function createReactReferenceService(
       repoRoot,
       "../ds-contracts-poc/examples/shadcn/.shadcn-sandbox",
     ),
-  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport> },
+  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans> },
 ) {
   let reference: ReactReference | undefined;
   const frames = createReactSourceFramingStore(repoRoot, (referenceId, operationId) => {
@@ -236,7 +237,7 @@ export function createReactReferenceService(
     }
     const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
-    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame)$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan)$/.exec(route);
     if (nativeRoute || nativeAction || initialNativeRoute) {
       try {
         if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute)![1]) throw Error('react-native-reference-unavailable');
@@ -257,7 +258,11 @@ export function createReactReferenceService(
               if (new URL(`http://${req.headers.host}`).port !== '5181') throw Error('react-native-pairing-port');
               json(res, 200, { connection: transport.pair(id) }); return;
             }
-            if (nativeAction[3] === 'content') {
+            if (nativeAction[3] === 'update-plan') {
+              const updates = native().updates;
+              if (!updates) throw Error('react-update-planning-unavailable');
+              updates.prepare(id);
+            } else if (nativeAction[3] === 'content') {
               if (contentJobs.get(id)?.state.phase !== 'running') {
                 const job = startReactContentInspection(repoRoot, reference, jobs.reactRequest(id), id);
                 contentJobs.set(id, job);
@@ -285,7 +290,8 @@ export function createReactReferenceService(
           }
           try { if (row.kind === 'root') content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
           catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
-          return { ...row, content, sourceFrame, sourceFrameProblem, initialStates, connection: transport.status(row.operation.id, observedAt) };
+          return { ...row, content, sourceFrame, sourceFrameProblem, initialStates,
+            updates: native().updates?.list(row.operation.id) ?? [], connection: transport.status(row.operation.id, observedAt) };
         }) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });

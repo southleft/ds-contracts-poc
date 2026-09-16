@@ -8,6 +8,7 @@ import { ReactInitialInspection } from './ReactInitialInspection';
 interface Operation {
   kind: 'root' | 'comparison' | 'initial';
   initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
+  updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; before: number; after: number }> }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
   connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean };
   content?: Pick<ReactContentInspection, 'phase' | 'sourceUnchanged' | 'problems'> & Partial<ReactContentInspection>;
@@ -66,7 +67,15 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       const savedComparison = rows.find(r => r.parentOperationId === id);
       return <details key={id} open={row.caseId === selectedCase}>
         <summary>{row.caseId} {initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'} · {op.phase.replaceAll('-', ' ')}</summary>
-        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {op.sourceCurrent ? 'source evidence current' : 'source evidence unavailable'}</p>
+        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
+        {initial && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
+          <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
+          {row.updates?.map(update => <div key={update.id}>
+            <p>Proposed update: {update.changes.length} node opacity changes. Existing node identities are retained. This proposal has not changed Figma; live preflight and application delivery are still required.</p>
+            {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Saved opacity</th><th>Proposed opacity</th></tr></thead>
+              <tbody>{update.changes.map(change => <tr key={change.nodeId}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{change.before}</td><td>{change.after}</td></tr>)}</tbody></table>}
+          </div>)}
+        </section>}
         <p>Target: <a href={`https://www.figma.com/design/${row.fileKey}`} target="_blank" rel="noreferrer">DS Contracts Evaluations</a>.</p>
         {!row.connection.finished && <>
           <p>Open the <a href="/ds-contracts-sync-runner-plugin.zip" download>DS Contracts companion plugin</a> in this file. Under “Connect the local source workflow,” enter the code and choose “Connect / resume.”</p>
