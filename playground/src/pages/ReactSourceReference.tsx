@@ -267,9 +267,10 @@ export function ReactSourceReference() {
             <h3>Component structure</h3>
             <p>
               Locate mounted components and their nested instances in the
-              original render. A separate read-only observation must match the
-              original screenshot and measured tree. This does not yet generate
-              or qualify Figma output.
+              original render. A separate observation must match the original
+              screenshot and measured tree. Finite style properties are then
+              varied in an isolated copy and the original render is restored.
+              This does not yet generate or qualify Figma output.
             </p>
             <button
               type="button"
@@ -355,6 +356,23 @@ export function ReactSourceReference() {
                           </li>
                         ))}</ul>
                         <p>Measured values are provisional. Sample sizes, other property combinations, unresolved token bindings, token modes and native visual fidelity remain unqualified.</p>
+                      </section>
+                    )}
+                    {ownership.state === "complete" && row.matched && row.propertyEffects && (
+                      <section aria-label={`${row.id} property effects`}>
+                        <h4>Source property effects</h4>
+                        <p>{row.propertyEffects.rows.filter(r=>r.status==="observed").length} / {row.propertyEffects.planned} planned observations completed. Each changes one property in this original example and verifies restoration. Combined property effects and behavior remain unqualified.</p>
+                        {row.propertyEffects.problems.length>0 && <p>{row.propertyEffects.problems.join(" · ")}</p>}
+                        {row.propertyEffects.skipped.map(p=><p key={p.property}>{p.property}: not observed ({p.reason})</p>)}
+                        {row.propertyEffects.rows.map(effect=><details key={effect.id}>
+                          <summary>{effect.property} = {effect.requested.kind==="omit" ? "omitted" : JSON.stringify(effect.requested.value)} · {effect.status==="refused" ? "not verified" : effect.visibleChange ? "visible change; original restored" : "no visible change; original restored"}</summary>
+                          {effect.problem && <p>{effect.problem}</p>}
+                          {!!effect.changedInstances?.length && <details><summary>Changed component styles</summary>{effect.changedInstances.map(i=><p key={i.instanceId}>{i.name}: {i.channels.join(", ")}</p>)}</details>}
+                          {effect.status==="observed" && <div className="native-image-pair">
+                            <figure><figcaption>Original example · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img alt={`${row.id} original before property change`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`}/></figure>
+                            <figure><figcaption>{effect.property}: {effect.requested.kind==="omit"?"omitted":JSON.stringify(effect.requested.value)} · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/properties/${effect.id}/${effect.image}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img alt={`${row.id} observed ${effect.property} effect`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/properties/${effect.id}/${effect.image}.png`}/></figure>
+                          </div>}
+                        </details>)}
                       </section>
                     )}
                     {ownership.state === "complete" && row.matched && (

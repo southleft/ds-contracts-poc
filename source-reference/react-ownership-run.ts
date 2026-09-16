@@ -1,3 +1,6 @@
+import type {CapturedNode} from '../extract/computed/lib.js';
+import type {ReactStyleOrigin} from './react-style-origin.js';
+import {observeReactPropertyEffects,type ReactPropertyEffects} from './react-property-effects.js';
 import {readReactStyleOrigin} from './react-style-origin.js';
 import { linkReactSourceAnatomy, type ReactSourceAnatomy } from './react-source-anatomy.js';
 import { projectReactRootVisual, type ReactRootVisual } from './react-root-visual.js';
@@ -41,6 +44,7 @@ export interface ReactOwnershipRow {
   ownership?: ReactOwnership;
   anatomy?: ReactSourceAnatomy;
   rootVisual?: ReactRootVisual;
+  propertyEffects?: ReactPropertyEffects;
 }
 export interface ReactOwnershipReport {
   id: string;
@@ -109,6 +113,8 @@ export function startReactOwnership(
           "react-source-anatomy.ts",
           "react-root-visual.ts",
           "react-style-origin.ts",
+          "react-property-probe.ts",
+          "react-property-effects.ts",
           "../extract/computed/fuse.ts",
           "../core/mint-tokens.ts",
           "../core/emit-figma-script.ts",
@@ -136,7 +142,7 @@ export function startReactOwnership(
         const rowDir = path.join(dir, c.id);
         mkdirSync(rowDir);
         try {
-          const pair = [];
+          const pair: Array<{styleOrigin?:ReactStyleOrigin; tree:string; root:CapturedNode; png:string; ownership?:ReactOwnership}> = [];
           for (const instrumented of [false, true]) {
             const side = instrumented ? "observed" : "source";
             const context = await browser.newContext({
@@ -226,6 +232,14 @@ export function startReactOwnership(
                   throw Error("react-ownership-style-origin-unstable");
                 writeFileSync(path.join(rowDir, "style-origin.json"), JSON.stringify(styleOrigin,null,2)+"\n", {flag:"wx"});
               }
+              if (instrumented && ownership && pair[0]?.tree === tree.treeSha256 && pair[0]?.png === tree.sourcePngSha256) {
+                const target = ownership.components.find(i => i.source.exportName === c.subject && i.roots.includes(""))!;
+                row.propertyEffects = await observeReactPropertyEffects({page, program, ownership, tree:tree.tree,
+                  image:tree.sourcePngSha256, instanceId:target.id, selector:profile.path[0],
+                  dir:path.join(rowDir,"properties"), failures,
+                  assertCurrent:()=>{if(stopped || !unchanged())throw Error("react-property-effects-source-changed-or-interrupted");},
+                });
+              }
               pair.push({
                 styleOrigin,
                 tree: tree.treeSha256,
@@ -272,7 +286,7 @@ export function startReactOwnership(
           : "react-ownership-source-changed";
       }
       if (terminal === "failed")
-        for (const row of state.rows) { row.matched = false; delete row.anatomy; delete row.rootVisual; }
+        for (const row of state.rows) { row.matched = false; delete row.anatomy; delete row.rootVisual; delete row.propertyEffects; }
       state.matched = state.rows.filter((r) => r.matched).length;
       writeFileSync(
         path.join(dir, "report.json"),
@@ -301,7 +315,7 @@ export function startReactOwnership(
             problem: current
               ? "react-ownership-evidence-changed"
               : "react-ownership-source-changed",
-            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined, rootVisual: undefined })),
+            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined, rootVisual: undefined, propertyEffects: undefined })),
           };
     },
     close: () => {

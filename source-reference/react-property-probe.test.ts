@@ -1,3 +1,7 @@
+import type {CapturedNode} from '../extract/computed/lib.js';
+import {observeReactPropertyEffects,planReactPropertyEffects} from './react-property-effects.js';
+import {captureJs} from '../extract/computed/capture.js';
+import {evidenceSha} from './react-validation-evidence.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtempSync,writeFileSync,rmSync} from 'node:fs';
@@ -51,5 +55,24 @@ test('real React property experiments preserve context and distinguish delivered
   assert.equal(await page.evaluate(()=>(window as any).__DSC_REACT_OWNERSHIP.propertyProbes.size),0);
   const retry=await probeReactProperty(page,selector,program,id('Surface'),'tone',{kind:'set',value:'loud'},observe);
   assert.equal(retry.ownershipRestored,true,'a failed probe does not leave an active experiment');
+  await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
+  const tree=await page.evaluate(captureJs('#mount',undefined,'--',[selector])) as CapturedNode;
+  const image=evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
+  const plan=planReactPropertyEffects(program,ownership,tree,id('Surface'));
+  assert.deepEqual(plan.plan.map(p=>p.requested),[{kind:'set',value:'quiet'},{kind:'set',value:'loud'},{kind:'omit'}]);
+  const effects=await observeReactPropertyEffects({page,program,ownership,tree,image,instanceId:id('Surface'),selector,stageSelector:'#mount',dir:path.join(dir,'effects'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.deepEqual(effects.problems,[]);assert.equal(effects.rows.length,3);
+  assert.ok(effects.rows.every(r=>r.status==='observed'&&r.restored),JSON.stringify(effects.rows));
+  assert.equal(effects.rows[0].visibleChange,false);assert.equal(effects.rows[1].visibleChange,true);
+  assert.ok(effects.rows[1].changedInstances?.some(i=>i.name==='Surface'&&i.channels.includes('padding-top')));
+  assert.equal(evidenceSha(await page.screenshot({fullPage:true,caret:'initial'})),image);
+  const bad=structuredClone(ownership);bad.components[0].source.sourceSha256='0'.repeat(64);
+  assert.throws(()=>planReactPropertyEffects(program,bad,tree,id('Surface')),/source-unqualified/);
+  let guards=0;
+  const interrupted=await observeReactPropertyEffects({page,program,ownership,tree,image,instanceId:id('Surface'),selector,stageSelector:'#mount',dir:path.join(dir,'interrupted'),assertCurrent:()=>{if(++guards>2)throw Error('source changed');},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.ok(interrupted.rows.every(r=>r.status==='refused'&&!r.image));
+  assert.equal(interrupted.rows[1].problem,'prior-observation-invalidated-context');
+  assert.deepEqual(await observe(),baseline);
+
  }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}
 });
