@@ -192,3 +192,5 @@ parent/source records. Recorded-byte verification does not assert that the
 current Storybook is freshly qualified. A missing/changed recorded manifest
 prevents contract planning. Full API bindings, token meaning, reusable target
 output and the autonomous apply/verify loop remain unfinished.
+
+React comparisons expose **Measure original comparison frame**, backed by `POST react/:reference/native-operation/:rootOperation/source-frame`. It remeasures only the unchanged original in the isolated React runtime; before/after source tree and screenshot hashes must match the sealed capture. The shared immutable framing store crops original pixels without scaling or native-dependent alignment, and retains the full source image. `GET .../source-frame/:hash.png` reopens authenticated evidence and serves the derived crop. Saved metadata reopens without repeating capture; changed source, hidden output and substituted fonts refuse. Native image summaries expose independently read layout dimensions separately from PNG dimensions. These diagnostics do not qualify visual fidelity.

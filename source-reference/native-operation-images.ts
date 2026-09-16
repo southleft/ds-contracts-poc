@@ -8,6 +8,7 @@ export interface NativeImageSummary {
   sha256: string;
   width: number;
   height: number;
+  layoutSize?: { width: number; height: number };
 }
 export interface NativeImageObservation {
   status: "collected" | "unavailable";
@@ -88,7 +89,10 @@ export function collectExpectedNativeImages(input: { operation: { id: string; fi
         return unavailable("native-images-pixel-limit");
       PNG.sync.read(png, { checkCRC: true });
       const sha256 = createHash("sha256").update(png).digest("hex");
-      images.push({ caseId: c.id, sha256, width, height });
+      const node = r.nodes?.find((n: any) => n.id === c.instanceId);
+      const layoutSize = node && [node.values?.width, node.values?.height].every(v => Number.isFinite(v) && v > 0)
+        ? { width: node.values.width, height: node.values.height } : undefined;
+      images.push({ caseId: c.id, sha256, width, height, ...(layoutSize ? { layoutSize } : {}) });
       bytes.set(sha256, png);
     }
     return {

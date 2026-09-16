@@ -1,4 +1,5 @@
 import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
+import { createReactSourceFramingStore } from './react-source-framing.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
@@ -151,6 +152,10 @@ export function createReactReferenceService(
   native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport> },
 ) {
   let reference: ReactReference | undefined;
+  const frames = createReactSourceFramingStore(repoRoot, (referenceId, operationId) => {
+    if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
+    return { reference, request: native().jobs.reactRequest(operationId) };
+  });
   const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
     string,
@@ -172,6 +177,14 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const framedImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source-frame\/([a-f0-9]{64})\.png$/.exec(route);
+    if (framedImage && req.method === 'GET') {
+      try {
+        const bytes = frames.image(framedImage[1], framedImage[2], framedImage[3]);
+        res.setHeader('Content-Type', 'image/png'); res.setHeader('Cache-Control', 'no-store'); res.end(bytes);
+      } catch { json(res, 409, { error: 'Original source framing unavailable or changed.' }); }
+      return;
+    }
     const originalImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source\.png$/.exec(route);
     if (originalImage && req.method === 'GET') {
       try {
@@ -185,7 +198,7 @@ export function createReactReferenceService(
       return;
     }
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
-    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison)$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame)$/.exec(route);
     if (nativeRoute || nativeAction) {
       try {
         if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction)![1]) throw Error('react-native-reference-unavailable');
@@ -210,6 +223,8 @@ export function createReactReferenceService(
                 contentJobs.set(id, job);
                 void job.promise.catch(() => { job.state.phase = 'failed'; job.state.problems = ['react-content-evidence-unavailable']; });
               }
+            } else if (nativeAction[3] === 'source-frame') {
+              await frames.create(reference.id, id);
             } else if (nativeAction[3] === 'comparison') {
               jobs.verifiedReactObservation(id);
               jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id));
@@ -220,9 +235,14 @@ export function createReactReferenceService(
         const observedAt = Date.now();
         json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
           let content;
+          let sourceFrame, sourceFrameProblem;
+          if (row.kind === 'comparison') {
+            try { sourceFrame = frames.read(reference!.id, row.parentOperationId!); }
+            catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
+          }
           try { if (row.kind === 'root') content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
           catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
-          return { ...row, content, connection: transport.status(row.operation.id, observedAt) };
+          return { ...row, content, sourceFrame, sourceFrameProblem, connection: transport.status(row.operation.id, observedAt) };
         }) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });

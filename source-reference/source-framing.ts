@@ -99,7 +99,7 @@ export function cropSourceFrame(source: Buffer, bounds: SourceBox) {
     sourceSize: { width: original.width, height: original.height },
   };
 }
-async function sourceBounds(
+export async function sourceBounds(
   page: Page,
   profile: SourceProfile,
 ): Promise<SourceBox> {
@@ -175,6 +175,22 @@ export function createSourceFramingStore(
   load: (run: string, story: string) => SourceFrameInput,
   measure = measureSourceFrame,
 ) {
+  return createPinnedSourceFramingStore(repoRoot, (run, story) => {
+    const value = load(run, story);
+    if (!hashPattern.test(value.harSha256) || sha(readFileSync(value.harPath)) !== value.harSha256)
+      throw Error('source-framing-input-changed');
+    return value;
+  }, measure, sourceFrameInputHash);
+}
+
+/** Shared immutable crop storage for independently measured source inputs.
+ * The loader authenticates source-specific evidence on every access. */
+export function createPinnedSourceFramingStore<T extends { source: Buffer; sourceSha256: string }>(
+  repoRoot: string,
+  load: (run: string, story: string) => T,
+  measure: (input: T) => Promise<SourceBox>,
+  inputHash: (input: T) => string,
+) {
   const root = path.join(repoRoot, "private", "source-framing");
   let active: { key: string; promise: Promise<SourceFrame> } | undefined;
   function directory(create = false) {
@@ -197,17 +213,16 @@ export function createSourceFramingStore(
     const value = load(run, story);
     if (
       !hashPattern.test(value.sourceSha256) ||
-      !hashPattern.test(value.harSha256) ||
       sha(value.source) !== value.sourceSha256 ||
-      sha(readFileSync(value.harPath)) !== value.harSha256
+      !hashPattern.test(inputHash(value))
     )
       throw Error("source-framing-input-changed");
     return value;
   }
-  function read(value: SourceFrameInput): SourceFrame | null {
+  function read(value: T): SourceFrame | null {
     try {
       directory();
-      const key = sourceFrameInputHash(value),
+      const key = inputHash(value),
         file = path.join(root, key + ".json");
       if (!lstatSync(file).isFile())
         throw Error("source-framing-record-invalid");
@@ -245,7 +260,7 @@ export function createSourceFramingStore(
     },
     async create(run: string, story: string): Promise<SourceFrame> {
       const value = input(run, story),
-        key = sourceFrameInputHash(value),
+        key = inputHash(value),
         existing = read(value);
       if (existing) return existing;
       if (active) {
@@ -255,7 +270,7 @@ export function createSourceFramingStore(
       const promise = (async () => {
         const bounds = await measure(value),
           derived = cropSourceFrame(value.source, bounds);
-        if (sourceFrameInputHash(input(run, story)) !== key)
+        if (inputHash(input(run, story)) !== key)
           throw Error("source-framing-input-changed");
         const record: SourceFrame = {
           version: 1,

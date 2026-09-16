@@ -12,6 +12,8 @@ import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { selectReactNativeRequest } from './react-native-evidence.js';
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
+import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame } from './react-source-framing.js';
+import { PNG } from 'pngjs';
 
 test('targeted content preparation matches sealed rendering, survives reopening and refuses changed evidence', async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-content-'));
@@ -25,11 +27,13 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   const browser = await chromium.launch();
   const context = await browser.newContext({ viewport: { width: 900, height: 600 }, deviceScaleFactor: 1, colorScheme: 'light' });
   const page = await context.newPage(), failures = watchSourceFailures(page);
-  let captured;
+  let captured, sourcePng: Buffer;
   try {
     await page.setContent(reactReferenceHtml(reference));
     captured = await captureValidatedTree(page, reactReferenceProfile('button-default'), failures, '#root', '--');
     assert.equal(captured.status, 'captured', JSON.stringify(captured));
+    sourcePng = await page.screenshot({ fullPage: true, caret: 'initial' });
+    assert.equal(evidenceSha(sourcePng), captured.sourcePngSha256);
   } finally { failures.dispose(); await browser.close(); }
   if (captured.status !== 'captured') throw Error('capture required');
   const operationId = '11111111-1111-4111-8111-111111111111';
@@ -44,8 +48,28 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   writeFileSync(path.join(dir, 'report.json'), JSON.stringify(report));
   writeFileSync(path.join(dir, 'program.json'), JSON.stringify({ files: reference.files }));
   writeFileSync(path.join(dir, 'button-default/source-tree.json'), JSON.stringify(captured));
+  writeFileSync(path.join(dir, 'button-default/source.png'), sourcePng!);
   writeFileSync(path.join(dir, 'integrity.json'), JSON.stringify({ version: 1, files: inventoryEvidence(dir) }));
   const request = selectReactNativeRequest(repo, report, 'button-default');
+  const loadFrame = () => ({ reference, request });
+  const frames = createReactSourceFramingStore(repo, loadFrame);
+  const framed = await frames.create(reference.id, operationId);
+  assert.equal(framed.qualification, 'unqualified');
+  assert.equal(framed.bounds.height, 36);
+  assert(framed.bounds.width > 0 && framed.crop.width < 900);
+  const framedPixels = PNG.sync.read(frames.image(reference.id, operationId, framed.imageSha256));
+  const originalPixels = PNG.sync.read(sourcePng!);
+  for (let y = 0; y < framedPixels.height; y++) for (let x = 0; x < framedPixels.width; x++) {
+    const from = ((y + framed.crop.y) * originalPixels.width + x + framed.crop.x) * 4;
+    const to = (y * framedPixels.width + x) * 4;
+    assert.deepEqual(framedPixels.data.subarray(to, to + 4), originalPixels.data.subarray(from, from + 4));
+  }
+  assert.deepEqual(createReactSourceFramingStore(repo, loadFrame).read(reference.id, operationId), framed);
+  assert.deepEqual(await frames.create(reference.id, operationId), framed, 'repeat reuses the immutable source-only measurement');
+  const frameInput = loadReactFrameInput(repo, reference, request);
+  for (const css of ['button{margin-left:1px}', 'button{visibility:hidden}', 'button{font-family:serif}']) {
+    await assert.rejects(measureReactSourceFrame({ ...frameInput, reference: { ...reference, css: reference.css + css } }), /original-changed/);
+  }
   const job = startReactContentInspection(repo, reference, request, operationId);
   await job.promise;
   assert.equal(job.state.phase, 'complete', job.state.problems.join('\n'));
@@ -59,6 +83,7 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.equal(job.report().phase, 'failed', 'the in-memory UI view must also recheck saved evidence');
   writeFileSync(fonts, bytes);
   writeFileSync(source, 'changed source');
+  assert.throws(() => frames.read(reference.id, operationId), /evidence-unavailable/);
   assert.throws(() => readReactContentInspection(repo, reference, request, operationId), /evidence-unavailable/);
   assert.equal(job.report().sourceUnchanged, false);
   assert.throws(() => startReactContentInspection(repo, reference, request, '../outside'), /operation-invalid/);

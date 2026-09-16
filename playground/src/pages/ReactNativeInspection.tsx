@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
 import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
+import type { SourceFrame } from '../../../source-reference/source-framing';
 
 interface Operation {
   kind: 'root' | 'comparison'; parentOperationId?: string;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
   connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean };
   content?: Pick<ReactContentInspection, 'phase' | 'sourceUnchanged' | 'problems'> & Partial<ReactContentInspection>;
+  sourceFrame?: SourceFrame; sourceFrameProblem?: string;
 }
 export function ReactNativeInspection({ referenceId, selectedCase, ownership }: {
   referenceId: string; selectedCase: string; ownership: ReactOwnershipReport | null;
@@ -91,11 +93,21 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {op.problems.length > 0 && <ul>{op.problems.map(p => <li key={p}>{p}</li>)}</ul>}
         {!!op.imageObservation?.images.length && <details open={comparison}><summary>{comparison ? 'Native caller-content export' : 'Native root exports'} · diagnostic only</summary>
           <p>{comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
+          {comparison && <>
+            {!row.sourceFrame && <button type="button" disabled={busy || !op.sourceCurrent}
+              onClick={() => void action(`native-operation/${row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
+            {row.sourceFrameProblem && <p role="alert">{row.sourceFrameProblem}</p>}
+            <p>{row.sourceFrame ? 'Original pixels cropped around independently measured source bounds, with up to 8 px of surrounding context. Both images use 1 image pixel per CSS pixel on white surfaces; no resizing or best-fit alignment.' : 'The original includes its browser stage. Measure its frame for an unscaled component comparison.'} <a href={`${root}/native-operation/${row.parentOperationId}/source.png`} target="_blank" rel="noreferrer">Open full original</a></p>
+          </>}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'flex-start' }}>
-          {comparison && <figure><img alt={`Original React ${row.caseId}`} src={`${root}/native-operation/${row.parentOperationId}/source.png`} /><figcaption>Original React · unchanged source</figcaption></figure>}
-          {op.imageObservation.images.map(image => <figure key={image.caseId}>
-            <img loading="lazy" alt={`Native ${comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} />
-            <figcaption>{image.caseId}</figcaption>
+          {comparison && <figure style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
+            <figcaption>Original React · unchanged source{row.sourceFrame && <><br />Layout: {row.sourceFrame.bounds.width.toFixed(2)} × {row.sourceFrame.bounds.height.toFixed(2)} px</>}</figcaption>
+            <img alt={`Original React ${row.caseId}`} style={{ maxWidth: 'none', backgroundColor: 'white', ...(row.sourceFrame ? { width: row.sourceFrame.crop.width, height: row.sourceFrame.crop.height } : {}) }}
+              src={`${root}/native-operation/${row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} />
+          </figure>}
+          {op.imageObservation.images.map(image => <figure key={image.caseId} style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
+            <figcaption>Native {image.caseId}{image.layoutSize && <><br />Layout: {image.layoutSize.width.toFixed(2)} × {image.layoutSize.height.toFixed(2)} px</>}</figcaption>
+            <div style={{ padding: comparison ? 8 : 0, width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
           </figure>)}
           </div>
         </details>}
