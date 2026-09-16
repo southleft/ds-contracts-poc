@@ -9,6 +9,12 @@ not competing current instructions. Preserve signed evidence and owner-only
 grades; do not equate a rendering draft or a green internal gate with a complete
 autonomous journey. Verify the actual checkout, source revision and PR state.
 
+V1 targets React ↔ contracts ↔ Figma, including composed components and
+two-way repair. Lit/Web Components integration is paused for planned V1.1;
+preserve its implementation and evidence, but do not expand it as a V1
+prerequisite. Prioritize shared conversion rules and complete user journeys
+over component-specific converters. Existing regression gates remain required.
+
 ## Repository instructions
 
 This is `ds-contracts-poc` ("Design System Contracts"), an npm-workspaces monorepo.
