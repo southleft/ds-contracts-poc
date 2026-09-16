@@ -84,6 +84,7 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
       const sourceRoot = flatten(captured.tree).find(n => n.path === instance.roots[0])!;
       mains.push({ source: selected.draft.source, heldProps: selected.heldProps, contract: selected.draft.contract!,
         sourceSizing: selected.draft.sourceSizing,
+        ...(selected.contentMode==='source-owned' ? {sourceOwnedTrees:{[selected.draft.contract!.name]:selected.sourceOwnedTree!}} : {}),
         styles: { [selected.draft.contract!.name]: [sourceRoot.node.style] }, input: observed.input, receipt: observed.receipt });
       continue;
     }
@@ -119,13 +120,14 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
   for (const child of result.review.rows) {
     child.canPrepareMain = false;
     if (!child.problems.some(problem => [
-      'react-composition-main-not-verified', 'react-composition-held-inputs-differ',
+      'react-composition-main-not-verified', 'react-composition-held-inputs-differ', 'react-composition-observed-subtree-context-differs',
       'react-composition-observed-root-context-differs', 'react-composition-context-main-not-verified',
       'react-comparison-variant-value-unqualified', 'react-comparison-variant-omission-unqualified',
     ].includes(problem)) || operations.some(op =>
       op.kind === 'nested' && op.caseId === request.caseId && op.ownershipId === request.ownership.id && op.nestedInstanceId === child.instanceId)) continue;
     try { deriveReactChildRoot(program, row.ownership, original.captured.tree, origin, child.instanceId,
-      saved.gridConstraints?.status==='observed' ? {gridConstraints:saved.gridConstraints} : undefined); child.canPrepareMain = true; }
+      saved.gridConstraints?.status==='observed' ? {gridConstraints:saved.gridConstraints} : undefined,
+      {fonts:read('text-fonts.json'),svg:read('svg-viewports.json')}); child.canPrepareMain = true; }
     catch (error) { child.preparationProblem = error instanceof Error ? error.message : String(error); }
   }
   return { ...result, content, inspection: saved, inspectionSelection: inspected.selection };

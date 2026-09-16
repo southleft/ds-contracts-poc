@@ -127,6 +127,7 @@ export interface NativeOperationResult {
 export interface NativeOperationSnapshot {
   id: string;
   componentName?: string;
+  sourceOwnedContent?: boolean;
   operation: "source-native-inspection";
   phase:
     | "prepared"
@@ -1060,7 +1061,8 @@ export function createNativeOperationJobs(
       id: loaded.header.id,
       operation: "source-native-inspection",
       phase: loaded.state.phase,
-      ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName } : {}),
+      ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName,
+        ...(!loaded.plan.plan.component.rootSlot ? {sourceOwnedContent:true} : {}) } : {}),
       ...(loaded.state.pending
         ? {
             pendingPhase: loaded.state.pending.phase,
