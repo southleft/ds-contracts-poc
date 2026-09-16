@@ -4,13 +4,14 @@ import { mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync } from 'node
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import vm from 'node:vm';
+import { nativeRootSizeUpdateFixture } from '../core/native-contract-size-update-test-fixture.js';
 import { nativeUpdateFixture } from '../core/native-contract-update-test-fixture.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { createNativeOperationTransport } from './native-operation-transport.js';
 
-async function fixture(t:test.TestContext) {
-  const f=await nativeUpdateFixture(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
+async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture = nativeUpdateFixture) {
+  const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
   let stale=false,lose='',failStorage=false;
   const plans=createNativeUpdatePlans(repo,()=>{if(stale) throw Error('source changed');return {parentJournalRevision:'a'.repeat(64),input:f.input};});
@@ -102,4 +103,19 @@ test('an interrupted readback can be explicitly replaced through the companion',
   f.transport().retryObservation(f.id);f.restart();await f.poll();
   assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
   assert.equal(f.delivered.filter(c=>!c.readOnly).length,0);
+});
+
+
+test('size correction becomes reusable only after independent readback, and drift invalidates it', async t => {
+  const f = await fixture(t, nativeRootSizeUpdateFixture), parent = f.proposal.parentId;
+  assert.equal(f.jobs().verifiedForParent(parent), undefined);
+  await f.poll(); await f.poll();
+  assert.throws(() => f.jobs().verifiedForParent(parent), /effective-observation-unavailable/);
+  f.restart(); await f.poll();
+  assert.equal(f.jobs().get(f.id).phase, 'update-verified');
+  const effective = f.jobs().verifiedForParent(parent)!;
+  assert.equal(effective.input.component.variants[0].spec.lits!.height, 36);
+  assert.equal(effective.receipt.nodes!.find(n=>n.id===f.nodes[0].id)!.values.height, 36);
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length, 1);
+  f.stale(); assert.throws(() => f.jobs().verifiedForParent(parent), /source changed/);
 });

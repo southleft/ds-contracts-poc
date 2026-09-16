@@ -147,6 +147,24 @@ export function createNativeUpdateJobs(repo: string, plans: Plans) {
   };
   return {
     get,dispatch,
+    verifiedForParent(parentId: string) {
+      const written = plans.list(parentId).flatMap(proposal => {
+        const id = identity(parentId, proposal.id);
+        if (!existsSync(path.join(root, id))) return [];
+        const loaded = load(id);
+        return loaded.state.wrote ? [loaded] : [];
+      });
+      if (!written.length) return undefined;
+      // A pending, failed or ambiguous correction cannot fall back to the
+      // historical creation receipt. It may already have changed the canvas.
+      if (written.length !== 1 || written[0].state.phase !== 'update-verified' || written[0].state.pending)
+        fail('effective-observation-unavailable');
+      const l = written[0]; authenticate(l);
+      if (!nativeContractUpdateMatches(l.plan, l.state.observation, true)) fail('effective-observation-invalid');
+      const receipt = structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
+      delete receipt.images;
+      return { input: structuredClone(l.plan.after), receipt };
+    },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
     prepare(parentId:string,proposalId:string) {
       const id=identity(parentId,proposalId);

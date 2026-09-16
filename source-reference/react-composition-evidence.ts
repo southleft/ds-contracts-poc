@@ -47,10 +47,13 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
   const operations = jobs.listReact(reference.id, 'root').sort((a, b) => a.operation.id.localeCompare(b.operation.id));
   for (const operation of operations) {
     if (!['root', 'nested'].includes(operation.kind) || operation.operation.id === parentId ||
-        operation.ownershipId !== request.ownership.id || operation.operation.phase !== 'component-structure-observed' || !operation.operation.sourceCurrent) continue;
+        operation.ownershipId !== request.ownership.id || operation.operation.phase !== 'component-structure-observed') continue;
     const candidate = report.rows.find(r => r.id === operation.caseId);
     if (operation.kind === 'nested') {
-      const observed = jobs.verifiedReactObservation(operation.operation.id);
+      // The verifier can return a separately authenticated, completed update.
+      // A stale creation plan alone is never enough to admit this candidate.
+      let observed;
+      try { observed = jobs.verifiedReactObservation(operation.operation.id); } catch { continue; }
       if (observed.request.ownership.sha256 !== request.ownership.sha256 || observed.request.inventorySha256 !== request.inventorySha256)
         throw Error('react-composition-candidate-archive-changed');
       const selected = readReactNativeEvidence(repo, reference, observed.request).matrix;
@@ -65,7 +68,8 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     }
     if (!candidate?.propertyMatrix || !candidate.rootMatrix?.draft?.contract ||
         !sources.includes(JSON.stringify(candidate.propertyMatrix.source))) continue;
-    const observed = jobs.verifiedReactObservation(operation.operation.id);
+    let observed;
+    try { observed = jobs.verifiedReactObservation(operation.operation.id); } catch { continue; }
     // Reuse only this exact ownership archive, not another same-named export.
     if (observed.request.ownership.sha256 !== request.ownership.sha256 || observed.request.inventorySha256 !== request.inventorySha256)
       throw Error('react-composition-candidate-archive-changed');

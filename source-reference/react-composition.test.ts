@@ -370,3 +370,29 @@ test('pinned child context carries a source-proven stretch constraint without ch
     assert.throws(()=>reactChildContextSizing(tree,origin,'0',grid as any),/grid-constraints-unqualified/,'used pixel tracks cannot enter the new root path');
   } finally {rmSync(f.dir,{recursive:true,force:true});}
 });
+
+
+test('single observed child roots retain only authenticated declared fixed dimensions', async () => {
+  const f = await fixture();
+  try {
+    const child = (f.tree.nodes[0] as {t:'el';el:CapturedNode}).el;
+    child.style.height = '36px'; child.style.width = '120px';
+    const origin: ReactStyleOrigin = {version:1,roots:[{path:'0',tag:'button',channels:[],sizes:[
+      {channel:'height',status:'fixed',value:'36px',selectors:['.height']},
+      {channel:'width',status:'auto',value:'auto',selectors:[]},
+    ]}]};
+    const actual = deriveReactChildRoot(f.program,f.ownership,f.tree,origin,'child');
+    assert.equal(actual.draft.contract!.anatomy.root.literals!.height,'36px');
+    assert.equal(actual.draft.native!.variants[0].spec.lits!.height,36);
+    assert.equal(actual.draft.native!.variants[0].spec.fixedWidth,undefined);
+    assert.equal(actual.draft.native!.variants[0].spec.lits?.width,undefined);
+    for (const key of ['style','className']) {
+      const ownership = structuredClone(f.ownership);ownership.components[1].props[key]={kind:'object'};
+      const unresolved=deriveReactChildRoot(f.program,ownership,f.tree,origin,'child');
+      assert.equal(unresolved.draft.contract!.anatomy.root.literals?.height,undefined);
+    }
+    origin.roots[0].sizes![0].value='40px';
+    const mismatched=deriveReactChildRoot(f.program,f.ownership,f.tree,origin,'child');
+    assert.equal(mismatched.draft.contract!.anatomy.root.literals?.height,undefined);
+  } finally {rmSync(f.dir,{recursive:true,force:true});}
+});

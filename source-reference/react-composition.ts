@@ -96,8 +96,9 @@ export function matchReactComposition(program: ReactSourceProgram, ownership: Re
       if (variants.length !== 1) throw Error('react-composition-variant-unavailable');
       for (const size of main.sourceSizing ?? []) {
         if (size.status !== 'fixed') continue;
-        const actual = variants[0].spec[size.channel === 'height' ? 'fixedHeight' : 'fixedWidth'];
-        if (!size.value || !actual || normalizeValue(`${actual.px}px`) !== normalizeValue(size.value))
+        const spec = variants[0].spec;
+        const actual = spec[size.channel === 'height' ? 'fixedHeight' : 'fixedWidth']?.px ?? spec.lits?.[size.channel];
+        if (!size.value || actual === undefined || normalizeValue(`${actual}px`) !== normalizeValue(size.value))
           throw Error('react-composition-declared-size-not-preserved');
       }
       const slots: number[][] = [];

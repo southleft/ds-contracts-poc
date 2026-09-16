@@ -210,6 +210,8 @@ export interface NativeOperationJobsOptions {
     buildComponent(request: ReactComparisonRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
   };
   react?: {
+    updatedObservation?(id: string): { input: import('../core/native-source-observation.js').NativeContractObservationInput;
+      receipt: import('../core/native-source-observation.js').NativeSourceReadback } | undefined;
     prepare(request: ReactNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ReactPlan>;
     buildComponent(request: ReactNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
   };
@@ -1465,6 +1467,8 @@ export function createNativeOperationJobs(
       if (!isReactNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
           loaded.state.phase !== 'component-structure-observed' || loaded.state.pending || !loaded.state.imageReadback)
         fail('react-parent-observation-required');
+      const updated = options.react?.updatedObservation?.(id);
+      if (updated) return structuredClone({ ...updated, request: loaded.header.request });
       authenticate(loaded);
       const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
       delete input.allocationAnchor;

@@ -1,3 +1,4 @@
+import { prepareNativeRootSizeUpdate, emitNativeRootSizeUpdateScript, nativeRootSizeUpdateMatches, type NativeRootSizeUpdatePlan } from './native-contract-size-update.js';
 /** Bounded corrections to an existing unaccepted native draft. Creation
  * identities remain immutable; the update journal supplies the new revision. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
@@ -12,7 +13,7 @@ export interface NativeContractUpdateInput {
   baseline: NativeSourceReadback;
   desired: { component: ComponentData; revision: string; tokenInput: NativeTokenContextInput };
 }
-export interface NativeContractUpdatePlan {
+export interface NativeOpacityUpdatePlan {
   version: 1; kind: 'native-contract-opacity-update';
   acceptedContract: null; nativeQualification: 'unqualified';
   before: NativeContractObservationInput; baseline: NativeSourceReadback;
@@ -25,7 +26,11 @@ const scalar = (v: unknown): v is number => typeof v === 'number' && Number.isFi
 const part = (node: Record<string, any>) => {
   try { return JSON.parse(node.metadata.nativeContractPart); } catch { return null; }
 };
-export function prepareNativeContractUpdate(input: NativeContractUpdateInput) {
+export type NativeContractUpdatePlan = NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan;
+export function prepareNativeContractUpdate(input: NativeContractUpdateInput): { plan: NativeContractUpdatePlan; revision: string } {
+  return prepareNativeRootSizeUpdate(input, prepareOpacityUpdate) ?? prepareOpacityUpdate(input);
+}
+function prepareOpacityUpdate(input: NativeContractUpdateInput) {
   if (!/^sha256:[a-f0-9]{64}$/.test(input.desired.revision) ||
       verifyNativeContractReadback(input.before, input.baseline).status !== 'supported-structure-observed')
     throw Error('native-update-verified-baseline-required');
@@ -42,7 +47,7 @@ export function prepareNativeContractUpdate(input: NativeContractUpdateInput) {
   const before = structuredClone(input.before); delete before.allocationAnchor;
   const after = structuredClone(before), desired = structuredClone(input.desired.component);
   const baseline = structuredClone(input.baseline); delete baseline.images;
-  const changes: NativeContractUpdatePlan['changes'] = [];
+  const changes: NativeOpacityUpdatePlan['changes'] = [];
   function visit(old: NodeSpec, next: NodeSpec, updated: NodeSpec) {
     if (!old.nativeContractPart || !next.nativeContractPart || old.children?.length !== next.children?.length)
       throw Error('native-update-topology-change-unsupported');
@@ -73,7 +78,7 @@ export function prepareNativeContractUpdate(input: NativeContractUpdateInput) {
     if (!equal({ ...v, spec: undefined }, { ...next, spec: undefined })) throw Error('native-update-variant-change-unsupported');
     visit(v.spec, next.spec, after.component.variants[i].spec);
   });
-  const plan: NativeContractUpdatePlan = { version: 1, kind: 'native-contract-opacity-update', acceptedContract: null,
+  const plan: NativeOpacityUpdatePlan = { version: 1, kind: 'native-contract-opacity-update', acceptedContract: null,
     nativeQualification: 'unqualified', before, baseline, desiredRevision: input.desired.revision, changes, after };
   const revision = revisionOf(plan);
   return { plan, revision };
@@ -88,6 +93,7 @@ export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, recei
 /** Independently check a preflight or completed update against the complete
  * saved observation, allowing only the pinned scalar transitions. */
 export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, receipt: unknown, complete = false): boolean {
+  if (plan.kind === 'native-contract-root-size-update') return nativeRootSizeUpdateMatches(plan, receipt, complete);
   try {
     const normalized = structuredClone(receipt) as NativeSourceReadback;
     delete normalized.images;
@@ -105,6 +111,7 @@ export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, rece
  * values. The same program can finish a partial application or make no writes.
  * Transport must still resolve an unknown delivery before explicitly resuming. */
 export function emitNativeContractUpdateScript(plan: NativeContractUpdatePlan, direction: 'apply' | 'rollback' = 'apply', readOnly = false) {
+  if (plan.kind === 'native-contract-root-size-update') return emitNativeRootSizeUpdateScript(plan, direction, readOnly);
   if (plan.kind !== 'native-contract-opacity-update' || plan.acceptedContract !== null || plan.nativeQualification !== 'unqualified')
     throw Error('native-update-plan-invalid');
   const expected = direction === 'apply' ? plan.after : plan.before;
