@@ -22,6 +22,7 @@ import {
   type NativeOperationJobsOptions,
 } from "./native-operation-jobs.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
+import { createNativeOperationTransport } from "./native-operation-transport.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
   altitudeCohort,
@@ -83,8 +84,9 @@ export function loopbackOrigin(value: unknown): string {
   return url.origin;
 }
 
-/** Dev-only service. No remote files, shell interpolation, Figma writes, HAR
- * downloads or owner grades. Request values cannot choose a script or checkout. */
+/** Dev-only service. No remote files, shell interpolation, HAR downloads or
+ * owner grades. Native execution belongs to the authenticated companion plugin;
+ * request values cannot choose a script, native target or checkout. */
 export function createReferenceService(
   repoRoot: string,
   launch?: Launch,
@@ -609,8 +611,10 @@ export function createReferenceService(
       problems,
     };
   }
+  const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
   const snapshotWithSupplement = (job: ReferenceJob) => {
     const candidates = candidateJobs.list(job.id);
+    const nativeOperation = nativeJobs.forBaseline(job.id);
     return {
       ...snapshot(job),
       supplements: [...jobs.values()]
@@ -626,7 +630,11 @@ export function createReferenceService(
       candidateVisuals: candidates.filter(
         (candidate) => candidate.operation === "source-visual-assembly",
       ),
-      nativeOperation: nativeJobs.forBaseline(job.id),
+      nativeOperation,
+      nativeConnection:
+        nativeOperation && nativeOperation.phase !== "evidence-unavailable"
+          ? nativeTransport.status(nativeOperation.id)
+          : null,
     };
   };
   function start(
@@ -697,13 +705,145 @@ export function createReferenceService(
       json(res, 403, { error: "Local host required." });
       return;
     }
+    const route = (req.url ?? "")
+      .split("?")[0]
+      .replace(/^\/api\/source-reference\/?/, "");
+    // The plugin is a different origin. Only these two routes accept its
+    // high-entropy pairing capability; no general service CORS exemption.
+    const pluginRoute = /^native\/([a-f0-9-]+)\/(claim|result)$/.exec(route);
+    const body = async (limit: number) => {
+      if (!req.headers["content-type"]?.startsWith("application/json"))
+        throw Error("JSON required");
+      const chunks: Buffer[] = [];
+      let size = 0;
+      for await (const chunk of req) {
+        const bytes = Buffer.from(chunk);
+        size += bytes.length;
+        if (size > limit) throw Error("Request too large");
+        chunks.push(bytes);
+      }
+      return JSON.parse(Buffer.concat(chunks).toString());
+    };
+    if (pluginRoute) {
+      if (req.headers.origin === "null") {
+        res.setHeader("Access-Control-Allow-Origin", "null");
+        res.setHeader(
+          "Access-Control-Allow-Headers",
+          "Authorization, Content-Type",
+        );
+        res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+      } else if (req.headers.origin && req.headers.origin !== host.origin) {
+        json(res, 403, { error: "Plugin origin required." });
+        return;
+      }
+      if (req.method === "OPTIONS") {
+        res.statusCode = 204;
+        res.end();
+        return;
+      }
+      if (req.method !== "POST") {
+        json(res, 405, { error: "POST required." });
+        return;
+      }
+      const secret =
+        /^Bearer ([a-f0-9]{64})$/.exec(req.headers.authorization ?? "")?.[1] ??
+        "";
+      try {
+        nativeTransport.authorize(pluginRoute[1], secret);
+      } catch {
+        json(res, 403, { error: "Native connection refused." });
+        return;
+      }
+      try {
+        const payload = await body(
+          pluginRoute[2] === "claim" ? 2048 : 4 * 1024 * 1024,
+        );
+        if (pluginRoute[2] === "claim") {
+          if (
+            !object(payload) ||
+            Object.keys(payload).join() !== "fileKey" ||
+            typeof payload.fileKey !== "string"
+          ) {
+            json(res, 400, {
+              error: "Only the active file identity is accepted.",
+            });
+            return;
+          }
+          json(
+            res,
+            200,
+            nativeTransport.claim(pluginRoute[1], secret, payload.fileKey),
+          );
+        } else {
+          json(
+            res,
+            200,
+            nativeTransport.accept(pluginRoute[1], secret, payload),
+          );
+        }
+      } catch {
+        json(res, 409, {
+          error:
+            "Native delivery could not proceed. Inspect the operation in the local app; a missing result does not authorize another creation.",
+        });
+      }
+      return;
+    }
     if (req.headers.origin && req.headers.origin !== host.origin) {
       json(res, 403, { error: "Same-origin access required." });
       return;
     }
-    const route = (req.url ?? "")
-      .split("?")[0]
-      .replace(/^\/api\/source-reference\/?/, "");
+    const nativeAction =
+      /^([a-f0-9-]+)\/button-native-(connection|start)$/.exec(route);
+    if (req.method === "POST" && nativeAction) {
+      try {
+        const payload = await body(2048);
+        if (!object(payload) || Object.keys(payload).length) {
+          json(res, 400, { error: "Only an empty object is accepted." });
+          return;
+        }
+        const baseline = jobs.get(nativeAction[1]);
+        const operation =
+          baseline && !baseline.parent
+            ? nativeJobs.forBaseline(baseline.id)
+            : null;
+        if (
+          !baseline ||
+          !operation ||
+          operation.phase === "evidence-unavailable"
+        ) {
+          json(res, 409, {
+            error: "Prepare a verified native operation first.",
+          });
+          return;
+        }
+        if (nativeAction[2] === "connection") {
+          // Development manifest explicitly allows this one local app port.
+          if (host.port !== "5181") {
+            json(res, 409, {
+              error: "Native pairing requires the local app on port 5181.",
+            });
+            return;
+          }
+          json(res, 200, { connection: nativeTransport.pair(operation.id) });
+        } else {
+          if (active || candidateJobs.running || bindingJobs.running) {
+            json(res, 409, {
+              error: "Wait for the current source operation to finish.",
+            });
+            return;
+          }
+          nativeTransport.start(operation.id);
+          json(res, 202, snapshotWithSupplement(baseline));
+        }
+      } catch {
+        json(res, 409, {
+          error:
+            "Native connection or start refused. Inspect the saved operation before retrying.",
+        });
+      }
+      return;
+    }
     if (req.method === "GET" && !route) {
       json(res, 200, {
         adapter: "Altitude Web Components",

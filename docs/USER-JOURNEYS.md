@@ -53,7 +53,9 @@ Sorting, pagination, keyboard navigation and data fetching are not established b
 
 **Try today:** [open local source validation](http://localhost:5181/sources) after starting the app. This currently uses a configured local source library. It lets you inspect original evidence and prepare a source-bound candidate; it is not yet a general repository picker. For static TSX/CSS experiments, [open code import](https://ds-contracts-playground.pages.dev/playground?source=code). Static source intake alone does not prove original rendered styling or behavior.
 
-**Where this currently stops:** the source-validation candidate remains unaccepted. Native writing and structural readback have implementation coverage, but authenticated application transport, actual native verification and the complete no-change repeat remain the active integration work. A Figma script shown in the engine explorer is not evidence that the app applied it.
+**Development connection:** after deriving a measured candidate, choose **Prepare connection** in Sources. Run the current companion development plugin in the authorized Scratch file, open **Build → Connect the local source workflow**, paste the connection and choose **Connect / resume**. Return to Sources and choose **Create and inspect**. Keep the app and plugin open: the journal drives token creation/readback followed by component creation/readback. The plugin saves results so an interrupted acknowledgment can be resent without another allocation.
+
+**Where this currently stops:** this connected path has API-mock and browser coverage; its actual Figma output is not yet qualified. The source candidate remains unaccepted. Native visual comparison, editability and a complete no-change repeat remain the next work. A lost command response is reported as unknown, never automatically repeated; complete interruption recovery is still unfinished.
 
 <a id="both-libraries"></a>
 ## Both libraries: connect, compare and repair
@@ -91,7 +93,7 @@ npm run playground
 
 Open [the local start guide](http://localhost:5181/start). The main branch contains merged work; an open PR is a separate revision. Additional source-library setup is required for `/sources`. Worker development has its own dependency install, documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The plugin has existing manual workflows; installing it does not complete the new application's write connection.
+For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The source connection requires the local app on port 5181 and the authorized Scratch file. Pair it using the development steps above. Keep the connection private; it grants delivery and result access for that operation.
 
 **Recommended v1 onboarding, still planned:** one setup flow that connects the workspace, selects the code target, pairs the plugin when needed, and checks permissions/dependencies before the first import. A designer should not need to understand operation journals or assemble JSON by hand.
 
@@ -111,6 +113,8 @@ The direction is to make this application the front door to connected library wo
 ## Next delivery: one complete code-led journey
 
 Development should produce a demonstrable user flow. Tests are acceptance checks for that delivery.
+
+**Current checkpoint:** observation and local app/plugin delivery are implemented and exercised in the API mock and browser. The next run must establish actual native behavior; the full exits below remain open until their Figma evidence exists.
 
 | Checkpoint | User-visible result | Done when |
 | --- | --- | --- |

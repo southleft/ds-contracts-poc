@@ -52,6 +52,27 @@
   overflow-wrap: anywhere;
   max-width: 1000px;
 }
+.source-native {
+  margin: 40px 0;
+  padding: 24px 0;
+  border-block: 1px solid #8886;
+}
+.source-native > label {
+  display: grid;
+  gap: 6px;
+  max-width: 680px;
+}
+.source-native > label input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 10px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+}
 .source-status {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));

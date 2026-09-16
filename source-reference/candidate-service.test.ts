@@ -905,3 +905,168 @@ test("candidate preparation never omits a changed latest supplement or accepts a
     f.close();
   }
 });
+
+test("local native HTTP connection restricts authority and retains correlated plugin results", async () => {
+  const { nativeFixtureHost, SOURCE_NATIVE_FILE_KEY } =
+    await import("./native-operation-test-fixture.js").then(async (m) => ({
+      ...m,
+      ...(await import("./native-operation-jobs.js")),
+    }));
+  const f = fixture();
+  const service = createReferenceService(
+    f.repo,
+    undefined,
+    undefined,
+    {},
+    { prepare: nativeFixturePrepare },
+  );
+  const server = createServer((req, res) => {
+    void service.handle(req, res);
+  });
+  await listen(server);
+  const base = originOf(server) + "/api/source-reference";
+  const target = `${base}/${f.request.baseline.id}/button-native-`;
+  const post = (
+    url: string,
+    payload: unknown,
+    headers: Record<string, string> = {},
+  ) =>
+    new Promise<Response>((resolve, reject) => {
+      // Node fetch rewrites Host; the raw client exercises the development
+      // manifest port guard while the test server keeps an ephemeral port.
+      const request = httpRequest(
+        url,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", ...headers },
+        },
+        (response) => {
+          const chunks: Buffer[] = [];
+          response.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
+          response.on("end", () =>
+            resolve(
+              new Response(Buffer.concat(chunks), {
+                status: response.statusCode,
+                headers: Object.fromEntries(
+                  Object.entries(response.headers)
+                    .filter(([, value]) => value !== undefined)
+                    .map(([key, value]) => [key, String(value)]),
+                ),
+              }),
+            ),
+          );
+        },
+      );
+      request.on("error", reject);
+      request.end(JSON.stringify(payload));
+    });
+  try {
+    assert.equal((await post(target + "operation", {})).status, 202);
+    assert.equal(
+      (await post(target + "connection", {})).status,
+      409,
+      "only the development manifest port may pair",
+    );
+    const host = { Host: "127.0.0.1:5181" };
+    assert.equal(
+      (await post(target + "connection", { fileKey: "other" }, host)).status,
+      400,
+    );
+    assert.equal(
+      (
+        await post(
+          target + "connection",
+          {},
+          { ...host, Origin: "https://other.example" },
+        )
+      ).status,
+      403,
+    );
+    const paired = await post(target + "connection", {}, host);
+    assert.equal(paired.status, 200, await paired.clone().text());
+    const { connection } = (await paired.json()) as any;
+    const [id, secret] = connection.slice(5).split(".");
+    const claim = `${base}/native/${id}/claim`,
+      resultUrl = `${base}/native/${id}/result`;
+    const auth = { Authorization: `Bearer ${secret}`, Origin: "null" };
+    assert.equal(
+      (await post(claim, { fileKey: SOURCE_NATIVE_FILE_KEY })).status,
+      403,
+    );
+    assert.equal(
+      (
+        await post(
+          claim,
+          { fileKey: SOURCE_NATIVE_FILE_KEY },
+          { ...auth, Authorization: `Bearer ${"0".repeat(64)}` },
+        )
+      ).status,
+      403,
+    );
+    assert.equal(
+      (
+        await post(
+          claim,
+          { fileKey: SOURCE_NATIVE_FILE_KEY },
+          { ...auth, Origin: "https://other.example" },
+        )
+      ).status,
+      403,
+    );
+    assert.equal((await post(claim, { fileKey: "other" }, auth)).status, 409);
+    assert.equal(
+      (
+        await post(
+          claim,
+          { fileKey: SOURCE_NATIVE_FILE_KEY, script: "caller" },
+          auth,
+        )
+      ).status,
+      400,
+    );
+    const ready = await post(claim, { fileKey: SOURCE_NATIVE_FILE_KEY }, auth);
+    assert.equal(ready.headers.get("access-control-allow-origin"), "null");
+    assert.deepEqual(await ready.json(), { status: "ready" });
+    assert.equal((await post(target + "start", {})).status, 202);
+    const delivery = (await (
+      await post(claim, { fileKey: SOURCE_NATIVE_FILE_KEY }, auth)
+    ).json()) as any;
+    assert.equal(delivery.status, "command");
+    assert.deepEqual(
+      await (
+        await post(claim, { fileKey: SOURCE_NATIVE_FILE_KEY }, auth)
+      ).json(),
+      { status: "awaiting-result" },
+    );
+    const native = nativeFixtureHost(),
+      envelope = await native.run(delivery.command);
+    assert.equal(
+      (await post(resultUrl, { ...envelope, nonce: "0".repeat(64) }, auth))
+        .status,
+      409,
+    );
+    const accepted = await post(resultUrl, envelope, auth);
+    assert.equal(accepted.status, 200);
+    assert.equal(((await accepted.json()) as any).phase, "tokens-created");
+    assert.equal(
+      (await post(resultUrl, envelope, auth)).status,
+      200,
+      "lost acknowledgement can retry",
+    );
+    const publicResult = (await (await fetch(base)).json()) as any;
+    assert.equal(publicResult.latest.nativeOperation.phase, "tokens-created");
+    assert.equal(publicResult.latest.nativeConnection.connected, true);
+    for (const value of [
+      secret,
+      delivery.command.nonce,
+      delivery.command.scriptSha256,
+      delivery.command.script,
+    ]) {
+      assert(!JSON.stringify(publicResult).includes(value));
+    }
+  } finally {
+    service.close();
+    await closeServer(server);
+    f.close();
+  }
+});

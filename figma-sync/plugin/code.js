@@ -281,6 +281,100 @@ function reportSubject(report) {
 
 let busy = false; // one run at a time, across both modes
 
+// --- LOCAL NATIVE OPERATION TRANSPORT (start) -------------------------------
+// One app-owned journal supplies commands. Fetch never takes a caller URL or
+// caller script. Exclusive host handoff prevents another client from receiving
+// an already delivered creation; durable receipts recover lost acknowledgments.
+const NATIVE_APP_BASE = 'http://127.0.0.1:5181/api/source-reference/native/';
+const NATIVE_SCRATCH = 'byMp6lt0Ij9b2QbkDGFwBh';
+const NATIVE_UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
+const NATIVE_PAIR = new RegExp('^dscn_(' + NATIVE_UUID + ')\\.([a-f0-9]{64})$');
+const nativeConnectionKey = () => 'ds_native_connection:' + String(figma.fileKey || '');
+function nativeStatus(status, message) { post({ type: 'native-status', status, message }); }
+function nativeEnvelope(command, result) {
+  return { version: 1, operationId: command.operationId, phase: command.phase,
+    attemptId: command.attemptId, nonce: command.nonce, fileKey: command.fileKey,
+    planRevision: command.planRevision, scriptSha256: command.scriptSha256, result };
+}
+function nativeCommandValid(c, operationId) {
+  const phases = ['token-create', 'token-readback', 'component-create', 'component-readback'];
+  return c && c.version === 1 && c.kind === 'SOURCE-NATIVE-OPERATION' &&
+    c.operationId === operationId && phases.includes(c.phase) &&
+    new RegExp('^' + NATIVE_UUID + '$').test(c.attemptId) &&
+    /^[a-f0-9]{64}$/.test(c.nonce) && /^sha256:[a-f0-9]{64}$/.test(c.planRevision) &&
+    c.fileKey === NATIVE_SCRATCH && figma.fileKey === NATIVE_SCRATCH &&
+    c.readOnly === c.phase.endsWith('-readback') && typeof c.script === 'string' &&
+    c.script.length > 0 && c.script.length <= 4 * 1024 * 1024 && sha256Hex(c.script) === c.scriptSha256;
+}
+async function nativePoll() {
+  if (busy) { nativeStatus('busy', 'Another plugin operation is running. Waiting.'); return; }
+  busy = true;
+  try {
+    const pair = await figma.clientStorage.getAsync(nativeConnectionKey());
+    const match = typeof pair === 'string' && NATIVE_PAIR.exec(pair);
+    if (!match) { nativeStatus('disconnected', 'Paste the connection from the local app.'); return; }
+    if (figma.fileKey !== NATIVE_SCRATCH) { nativeStatus('refused', 'This source workflow is limited to Scratch.'); return; }
+    const operationId = match[1], secret = match[2];
+    const receiptKey = 'ds_native_receipt:' + operationId;
+    const request = async (route, payload) => {
+      const res = await fetch(NATIVE_APP_BASE + operationId + '/' + route, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + secret },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw Error('Local app refused the request (HTTP ' + res.status + ').');
+      return await res.json();
+    };
+    const deliver = async (envelope) => {
+      await request('result', envelope);
+      await figma.clientStorage.deleteAsync(receiptKey);
+      nativeStatus('connected', 'Result saved by the app. Continuing the inspection.');
+    };
+    const saved = await figma.clientStorage.getAsync(receiptKey);
+    if (saved) {
+      if (saved.stage === 'result' && saved.envelope) { await deliver(saved.envelope); return; }
+      nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; creation will not repeat.');
+      return;
+    }
+    const delivery = await request('claim', { fileKey: figma.fileKey });
+    if (delivery.status !== 'command') {
+      const messages = {
+        ready: 'Connected. Start Create and inspect in the local app.',
+        'awaiting-result': 'The app is waiting for a previously delivered result. Creation will not repeat.',
+        finished: 'Inspection stopped or finished. Review the result and remaining checks in the app.',
+      };
+      nativeStatus(delivery.status, messages[delivery.status] || 'Unexpected response from the app.');
+      return;
+    }
+    const command = delivery.command;
+    if (!nativeCommandValid(command, operationId)) {
+      nativeStatus('refused', 'The operation identity, active file or script integrity did not match. Nothing executed.'); return;
+    }
+    // Await a durable received marker BEFORE any native API call. Reopening the
+    // plugin with this marker cannot rerun a command whose outcome is unknown.
+    await figma.clientStorage.setAsync(receiptKey, { stage: 'received', identity: nativeEnvelope(command, null) });
+    nativeStatus('running', command.readOnly ? 'Reading the actual native nodes…' : 'Creating the scoped native candidate…');
+    let result;
+    try { result = toPlain(await runScript(command.script, { readOnly: command.readOnly })); }
+    catch (e) { result = { status: 'native-execution-outcome-unknown' }; }
+    const envelope = nativeEnvelope(command, result);
+    // A failure here leaves the earlier marker intact. Never interpret a
+    // storage/transport error as permission to repeat a native allocation.
+    await figma.clientStorage.setAsync(receiptKey, { stage: 'result', envelope });
+    await deliver(envelope);
+    if (command.phase === 'component-create' && result && result.status === 'created-candidate') {
+      try {
+        const subject = await figma.getNodeByIdAsync(result.comparisonBoardId || result.pageId);
+        if (subject) await selectAndZoom(subject);
+      } catch (e) { /* saved creation result stands even if selection is unavailable */ }
+    }
+  } catch (e) {
+    // Network errors may contain URLs. Keep capabilities and native data out
+    // of status messages and logs; retained receipts are retried on next poll.
+    nativeStatus('unavailable', 'Could not complete delivery. Keep the local app open; any saved result will be retried.');
+  } finally { busy = false; }
+}
+// --- LOCAL NATIVE OPERATION TRANSPORT (end) ---------------------------------
+
 // The current selection's component set name(s) — the empty-names-box default
 // for the pairing bridge (a real UI kit's ALL-SETS dump is a megadump; the
 // selection is almost always what the designer means). Each selected node
@@ -327,6 +421,20 @@ async function selectionSetNames() {
 
 figma.ui.onmessage = async (msg) => {
   if (!msg || !msg.type) return;
+  if (msg.type === 'native-connect') {
+    const value = typeof msg.connection === 'string' ? msg.connection.trim() : '';
+    if (!NATIVE_PAIR.test(value) || figma.fileKey !== NATIVE_SCRATCH) {
+      nativeStatus('refused', 'Use the connection from the local app in the authorized Scratch file.'); return;
+    }
+    try { await figma.clientStorage.setAsync(nativeConnectionKey(), value); await nativePoll(); }
+    catch (e) { nativeStatus('unavailable', 'The connection could not be saved.'); }
+    return;
+  }
+  if (msg.type === 'native-poll') { await nativePoll(); return; }
+  if (msg.type === 'native-disconnect') {
+    await figma.clientStorage.deleteAsync(nativeConnectionKey());
+    nativeStatus('disconnected', 'Disconnected. Saved operation receipts are retained.'); return;
+  }
   if (msg.type === 'ui-ready') {
     post({ type: 'init', fileKey: figma.fileKey || '' });
     return;
@@ -614,6 +722,7 @@ figma.ui.onmessage = async (msg) => {
   }
   if (busy) {
     figma.notify('A run is already in progress.', { error: true });
+    if (msg.type === 'engine-run') post({ type: 'engine-result', id: msg.id, ok: false, error: 'A run is already in progress.' });
     return;
   }
   if (msg.type === 'engine-run') {
@@ -956,6 +1065,4 @@ function dsCanvasFingerprint(root) {
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return 'v6:' + String(h);
 }
-
-
 

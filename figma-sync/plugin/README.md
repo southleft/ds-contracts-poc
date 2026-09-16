@@ -10,7 +10,7 @@ repo's tokens, contracts and icons baked in (`window.DSC`, built by
 
 - **Build** — "I have contracts (or want the sample); put them on this
   canvas." Paste a contract JSON or a `CONTRACTS-BUNDLE` into the box — JSON
-  is the only thing you ever paste, never a script. The plugin validates it
+  is the input for this contract workflow, never a script. The plugin validates it
   against the schema (plain-words refusals), emits the sync script
   **locally**, runs it in the current file, and selects + zooms the built
   set. Bundles sync in dependency order and upsert their token collections
@@ -91,6 +91,26 @@ repo load shows a named "no engine bundle" message on the engine surfaces
    unzipped `manifest.json`.
 4. Run **DS Contracts Sync Runner** (Plugins → Development). Nothing
    executes until you press a button.
+
+## Connect the local source workflow
+
+Run `npm run playground` on port 5181. In **Sources**, derive a measured source
+candidate and choose **Prepare connection**. Run this development plugin in the
+authorized Scratch file, open **Build → Connect the local source workflow**,
+paste the connection and choose **Connect / resume**. Back in the app, choose
+**Create and inspect**. Keep both open while the app drives token creation,
+independent token readback, component creation and independent structural readback.
+
+The app hands out a command once. The plugin stores its result before returning
+it; **Connect / resume** can resend a saved result after a restart. A command
+whose result was never saved remains unknown and is not executed again.
+**Disconnect** stops subsequent polling; an in-flight operation can still finish.
+This development flow remains unqualified until its actual native output,
+visual fidelity, editability and repeat behavior are verified.
+
+The development manifest enables the private API so the plugin can check the
+actual file identity, as required by [Figma's fileKey API](https://developers.figma.com/docs/plugins/api/figma/).
+Missing or different file identity refuses the source operation.
 
 ## Trust model
 

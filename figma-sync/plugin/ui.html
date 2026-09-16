@@ -219,6 +219,19 @@
      (per-set boxes, protected-edits card, Apply) answers below.
      ==================================================================== -->
 <div class="panel active" id="panel-build" role="tabpanel">
+  <details class="section help">
+    <summary>Connect the local source workflow</summary>
+    <p class="meta">In the local app’s Sources page, prepare the candidate and copy its connection.
+      Open Scratch, connect here, then choose Create and inspect in the app.
+      Keep this plugin open while it creates and reads back the candidate.</p>
+    <label for="native-connection">Local app connection</label>
+    <input id="native-connection" type="password" autocomplete="off" spellcheck="false" placeholder="dscn_…" />
+    <div class="row">
+      <button id="native-connect" class="secondary">Connect / resume</button>
+      <button id="native-disconnect" class="secondary">Disconnect</button>
+    </div>
+    <div id="native-status" class="status" role="status">Not connected.</div>
+  </details>
   <!-- Empty state, two truths. A file with nothing in it gets the sample
        library. A file that ALREADY HAS components (brownfield — the common
        real case) gets told how many, and its first action is to look at
@@ -859,6 +872,23 @@
 
   // --- engine-run correlation ----------------------------------------------
   var enginePending = {}; // id → callback(msg)
+  var nativeTimer = null;
+  $('native-connect').onclick = function () {
+    var connection = $('native-connection').value.trim();
+    parent.postMessage({ pluginMessage: connection
+      ? { type: 'native-connect', connection: connection }
+      : { type: 'native-poll' } }, '*');
+    $('native-connection').value = '';
+    if (nativeTimer) clearInterval(nativeTimer);
+    nativeTimer = setInterval(function () {
+      parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
+    }, 3000);
+  };
+  $('native-disconnect').onclick = function () {
+    if (nativeTimer) clearInterval(nativeTimer);
+    nativeTimer = null;
+    parent.postMessage({ pluginMessage: { type: 'native-disconnect' } }, '*');
+  };
   var engineSeq = 0;
   function engineRun(code, opts, cb) {
     var id = 'e' + (++engineSeq);
@@ -1999,6 +2029,12 @@
       parent.postMessage({ pluginMessage: { type: 'ui-state-load', key: DRIFT_STATE_KEY + ':' + currentFileKey } }, '*');
     } else if (msg.type === 'ui-state') {
       if (msg.key === DRIFT_STATE_KEY + ':' + currentFileKey) showDriftLastChecked(msg.value);
+    } else if (msg.type === 'native-status') {
+      $('native-status').textContent = msg.message || msg.status;
+      if (msg.status === 'disconnected' || msg.status === 'finished') {
+        if (nativeTimer) clearInterval(nativeTimer);
+        nativeTimer = null;
+      }
     } else if (msg.type === 'engine-result') {
       var cb = enginePending[msg.id];
       if (cb) { delete enginePending[msg.id]; cb(msg); }

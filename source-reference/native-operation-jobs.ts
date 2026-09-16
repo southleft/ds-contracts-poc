@@ -1263,5 +1263,13 @@ export function createNativeOperationJobs(
     retryObservation,
     retryCreation,
     verifiedTokenContext,
+    /** Trusted transport only. Never include executable bytes in a public
+     * snapshot. Reauthenticate write inputs immediately before first delivery. */
+    pendingCommand(id: string): NativeOperationCommand | null {
+      const loaded = load(id);
+      if (!loaded.state.pending) return null;
+      if (!loaded.state.pending.readOnly) authenticate(loaded);
+      return structuredClone(loaded.state.pending);
+    },
   };
 }
