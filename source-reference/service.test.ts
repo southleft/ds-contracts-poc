@@ -268,6 +268,8 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
     `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
   const imageBytes = "verified image bytes";
   const imageHash = createHash("sha256").update(imageBytes).digest("hex");
+  const renderBytes = JSON.stringify({fixture: 'retained render evidence'});
+  const renderHash = createHash('sha256').update(renderBytes).digest('hex');
   const rows = altitudeCohort.map(({ story }, index) => ({
     story,
     qualified: index !== 2,
@@ -279,6 +281,8 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
     replay: { status: "valid", sha256: imageHash, problems: [] },
     compilerInput: { status: "verified-capture", problems: [] },
     semanticIntake: { status: "observed", problems: [], limitations: [] },
+    ...(index === 0 ? {renderIntake:{status:'verified-parser-input',problems:[],sourceSha256:'a'.repeat(64),sourcePngSha256:imageHash,
+      sourceRenderSha256:renderHash,replayRenderSha256:renderHash,templateCount:3,staticTagExpressions:4,scope:'Test-only summary'}} : {}),
   }));
   const record = (
     sourceStable = true,
@@ -308,6 +312,8 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
       writeFileSync(path.join(out, story, "source.png"), imageBytes);
       writeFileSync(path.join(out, story, "replay.png"), imageBytes);
       writeFileSync(path.join(out, story, "source.har"), "private archive");
+      writeFileSync(path.join(out, story, 'source-render.json'),renderBytes);
+      writeFileSync(path.join(out, story, 'replay-render.json'),renderBytes);
     }
     writeFileSync(path.join(out, "measurement.json"), JSON.stringify(final));
     return out;
@@ -432,6 +438,14 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
     const restored = await (await fetch(`${base}/${id(1)}`)).json();
     assert.equal(restored.qualified, 9);
     assert.equal(restored.rows[0].semanticIntake.status, "observed");
+    assert.equal(restored.rows[0].renderIntake.status,'verified-parser-input');
+    assert.equal(latest.rows[0].renderIntake.status,'source-invalid');
+    const renderFile=path.join(first,rows[0].story,'source-render.json');
+    writeFileSync(renderFile,'changed');
+    const changedRender=await(await fetch(`${base}/${id(1)}`)).json();
+    assert.equal(changedRender.rows[0].renderIntake.status,'evidence-changed');
+    assert.equal(changedRender.rows[0].status,'valid','template evidence is a separate axis from original image validity');
+    writeFileSync(renderFile,renderBytes);
     assert.equal(
       await (
         await fetch(`${base}/${id(1)}/${rows[0].story}/source.png`)

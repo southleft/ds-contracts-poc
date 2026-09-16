@@ -1,3 +1,5 @@
+import { deriveLitRenderObservationPolicy, installLitRenderObservationProbe, captureStableLitRender } from './lit-render-observation.js';
+import { proveLitStaticTemplates } from './lit-static-template-proof.js';
 import { deriveLifecycleIdentityPolicy, installLifecycleIdentityProbe, semanticReplayMatches } from "./lifecycle-identity.js";
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -51,9 +53,15 @@ try {
       const declarations = manifest.declarations.filter(decl => decl.tagName === profile.path[0]);
       const declaration = declarations.length === 1 ? declarations[0] : undefined;
       const modulePath = declaration && path.posix.join(path.posix.dirname(manifestPath), declaration.modulePath);
-      const identityPolicy = declaration && modulePath ? deriveLifecycleIdentityPolicy({ source:readFileSync(path.join(checkout,modulePath),'utf8'), sourceSha256:hashes[modulePath], modulePath:declaration.modulePath, className:declaration.className }, declaration) : undefined;
+      const sourceInput = declaration && modulePath ? { source:readFileSync(path.join(checkout,modulePath),'utf8'), sourceSha256:hashes[modulePath], modulePath:declaration.modulePath, className:declaration.className } : undefined;
+      const identityPolicy = declaration && sourceInput ? deriveLifecycleIdentityPolicy(sourceInput,declaration) : undefined;
+      const renderPolicy = declaration && sourceInput ? deriveLitRenderObservationPolicy(sourceInput,declaration) : undefined;
+      const installProbes = async (context:Awaited<ReturnType<typeof browser.newContext>>) => {
+        if(identityPolicy) await installLifecycleIdentityProbe(context,identityPolicy);
+        if(renderPolicy) await installLitRenderObservationProbe(context,renderPolicy);
+      };
       context = await browser.newContext({viewport:{width:900,height:600},deviceScaleFactor:1,colorScheme:'dark',serviceWorkers:'block',recordHar:{path:har,content:'embed',mode:'full'}});
-      if (identityPolicy) await installLifecycleIdentityProbe(context,identityPolicy);
+      await installProbes(context);
       const page = await context.newPage(); const failures = watchSourceFailures(page);
       await page.goto(url,{waitUntil:'load',timeout:30000});
       const live = await captureReference(page,profile,failures);
@@ -66,16 +74,20 @@ try {
         ...(sourceTree.status === 'captured' ? {sourceTreeSha256:sourceTree.treeSha256} : {}),
       },manifest.problems.map(problem=>`${problem.code}:${problem.path}`)) : {status:'refused' as const,problems:['component-declaration-not-unique']};
       writeFileSync(path.join(dir,'source-semantics.json'),JSON.stringify(sourceSemantics,null,2)+'\n');
+      const sourceRender = renderPolicy ? await captureStableLitRender(page,[profile.path[0]],live.secondSha256) : undefined;
+      if(renderPolicy) writeFileSync(path.join(dir,'source-render.json'),JSON.stringify(sourceRender ?? null,null,2)+'\n');
       failures.dispose(); await context.close(); context = undefined;
       const replay = await replayReference(browser,har,url,profile,undefined,async (replayPage,replayFailures)=>{
         const tree = await captureValidatedTree(replayPage,profile,replayFailures,'#storybook-root','--al-');
-        return {tree,semantics:declaration ? await captureStableSemantics(replayPage,[profile.path[0]],declaration,tree.status === 'captured' ? tree.sourcePngSha256 : live.secondSha256) : null};
-      }, identityPolicy ? context => installLifecycleIdentityProbe(context,identityPolicy) : undefined);
+        return {tree,semantics:declaration ? await captureStableSemantics(replayPage,[profile.path[0]],declaration,tree.status === 'captured' ? tree.sourcePngSha256 : live.secondSha256) : null,
+          render:renderPolicy ? await captureStableLitRender(replayPage,[profile.path[0]],tree.status === 'captured' ? tree.sourcePngSha256 : live.secondSha256) : undefined};
+      }, installProbes);
       const replayTree = replay.inspection?.tree ?? {status:'refused' as const,problems:['replay-reference-invalid']};
       writeFileSync(path.join(dir,'replay-tree.json'),JSON.stringify(replayTree,null,2)+'\n');
       writeFileSync(path.join(dir,'replay-semantics.json'),JSON.stringify(replay.inspection?.semantics ?? null,null,2)+'\n');
       writeFileSync(path.join(dir,'replay.png'),replay.screenshot);
       row.replay = {status:replay.status,problems:replay.problems,observation:replay.after,sha256:replay.secondSha256,matchesSource:replay.secondSha256 === live.secondSha256};
+      if(renderPolicy) writeFileSync(path.join(dir,'replay-render.json'),JSON.stringify(replay.inspection?.render ?? null,null,2)+'\n');
       row.archive = archiveInventory(har);
       row.qualified = live.status === 'valid' && replay.status === 'valid' && replay.secondSha256 === live.secondSha256;
       const treesMatch = sourceTree.status === 'captured' && replayTree?.status === 'captured' && sourceTree.treeSha256 === replayTree.treeSha256 && sourceTree.sourcePngSha256 === live.secondSha256 && replayTree.sourcePngSha256 === replay.secondSha256;
@@ -84,6 +96,23 @@ try {
         ...(sourceTree.status === 'captured' ? {census:sourceTree.census,boundary:sourceTree.boundary,treeSha256:sourceTree.treeSha256} : {}),
         scope:'Raw compiler input only. Token references are candidates; unreadable stylesheet boundaries are not hidden. No Figma conversion claim.'};
       const semanticMatch = 'observationSha256' in sourceSemantics && replay.inspection?.semantics && semanticReplayMatches(sourceSemantics.observation,replay.inspection.semantics,identityPolicy);
+      if(renderPolicy && sourceInput) {
+        let parserInputVerified = false;
+        let templateCount = 0, staticTagExpressions = 0;
+        const renderProblems:string[] = [];
+        try {
+          if(!sourceRender || !replay.inspection?.render) throw Error('static-template-observation-missing');
+          const originalProof=proveLitStaticTemplates(sourceInput,sourceRender), replayProof=proveLitStaticTemplates(sourceInput,replay.inspection.render);
+          const summarize=(proof:ReturnType<typeof proveLitStaticTemplates>)=>({substitutions:[...proof.substitutions],templateGroups:proof.templateGroups});
+          if(JSON.stringify(summarize(originalProof))!==JSON.stringify(summarize(replayProof))) throw Error('static-template-replay-mismatch');
+          parserInputVerified=true;templateCount=originalProof.templateGroups.length;staticTagExpressions=originalProof.substitutions.size;
+        } catch(error) { renderProblems.push(error instanceof Error && error.message.startsWith('static-template-') ? error.message : 'static-template-verification-refused'); }
+        row.renderIntake={status:row.qualified && treesMatch && semanticMatch && parserInputVerified ? 'verified-parser-input' : 'refused',
+          sourceSha256:sourceInput.sourceSha256,sourcePngSha256:live.secondSha256,
+          sourceRenderSha256:sha(readFileSync(path.join(dir,'source-render.json'))),replayRenderSha256:sha(readFileSync(path.join(dir,'replay-render.json'))),
+          templateCount,staticTagExpressions,problems:renderProblems,
+          scope:'Observed Lit parser input only. Registered static tags are corroborated against exact source strings and archived replay. Dynamic content bindings, nested component preservation and target behavior remain unqualified.'};
+      }
       row.semanticIntake = {
         status:!row.qualified ? 'source-invalid' : sourceSemantics.status === 'observed' && semanticMatch && treesMatch ? 'observed' : 'refused',
         problems:[...sourceSemantics.problems,...(!semanticMatch ? ['semantic-replay-mismatch'] : []),...(!treesMatch ? ['source-tree-not-verified'] : [])],

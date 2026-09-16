@@ -84,6 +84,29 @@ test("TypeScript-only return wrappers preserve matching while static HTML interp
     assert.deepEqual(result.bindings, []);
   }
 });
+
+test("static template correspondence requires exact observed parser input and the same image, tree and host", () => {
+  const input = synthetic('return html`<button part="button" data-value=${this.value}><span><slot></slot></span></button>`;');
+  input.source.source = input.source.source.replace("from 'lit'", "from 'lit/static-html.js'");
+  input.source.sourceSha256 = sha(input.source.source);
+  input.staticRender = {
+    sourcePngSha256: input.semantics.sourcePngSha256,
+    sourceTreeSha256: input.semantics.sourceTreeSha256!,
+    observation: {version:1,policy:{version:1,sourceSha256:input.source.sourceSha256,className:'ALButton',tagName:'al-button'},
+      status:'captured',problems:[],renders:1,last:{staticFields:[],value:{kind:'template',
+        strings:['<button part="button" data-value=', '><span><slot></slot></span></button>'],values:[{kind:'undefined'}]}}},
+  };
+  assert.equal(matchLitRender(input).status,'structure-matched');
+  for(const mutate of [
+    (i:LitRenderInput)=>{i.staticRender!.sourcePngSha256='0'.repeat(64);},
+    (i:LitRenderInput)=>{i.staticRender!.sourceTreeSha256='0'.repeat(64);},
+    (i:LitRenderInput)=>{i.staticRender!.observation.policy.tagName='other-element';},
+    (i:LitRenderInput)=>{i.staticRender!.observation.last!.value={kind:'template',strings:['<different></different>'],values:[]};},
+  ]) {
+    const changed=structuredClone(input);mutate(changed);
+    refused(changed,/render-static-observation-identity-mismatch|static-template-parser-input-unexplained/);
+  }
+});
 function refused(input: LitRenderInput, code: string | RegExp) {
   const result = matchLitRender(input);
   assert.equal(result.status, "refused", JSON.stringify(result));

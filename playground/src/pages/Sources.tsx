@@ -15,6 +15,12 @@ interface Row {
   sourceImage: string | null;
   sourceImageSha256?: string | null;
   replayImage: string | null;
+  renderIntake?: {
+    status: string;
+    templateCount: number;
+    staticTagExpressions: number;
+    problems: string[];
+  };
   semanticIntake?: {
     status: string;
     tagName?: string;
@@ -1558,6 +1564,16 @@ export function Sources() {
                     </figure>
                   ))}
                 </div>
+                {row.renderIntake && (
+                  <section aria-label="Nested component tag observation">
+                    <h3>Nested component tags — {row.renderIntake.status === 'verified-parser-input' ? 'source and replay corroborated' : 'not verified'}</h3>
+                    {row.renderIntake.status === 'verified-parser-input' && <p>The actual Lit render returned {row.renderIntake.templateCount} templates.
+                      Exact source strings and archived replay corroborate {row.renderIntake.staticTagExpressions} static tag expressions,
+                      including opening and closing tags. This does not yet verify nested component conversion or behavior.</p>}
+                    {row.renderIntake.status !== 'verified-parser-input' && <p>Observation status: {row.renderIntake.status}.</p>}
+                    {!!row.renderIntake.problems.length && <p>Unresolved: {row.renderIntake.problems.join(', ')}.</p>}
+                  </section>
+                )}
                 {row.semanticIntake && (
                   <section aria-label="Semantic contract intake">
                     <h3>

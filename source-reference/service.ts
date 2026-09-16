@@ -222,6 +222,7 @@ export function createReferenceService(
       "replay",
       "compilerInput",
       "semanticIntake",
+      "renderIntake",
     ]) {
       if (row[field] === undefined) continue;
       const value = row[field];
@@ -230,6 +231,13 @@ export function createReferenceService(
         return false;
       if (value.limitations !== undefined && !strings(value.limitations))
         return false;
+    }
+    if (row.renderIntake !== undefined) {
+      const render = row.renderIntake as Record<string, unknown>;
+      if (!['verified-parser-input','refused'].includes(String(render.status)) ||
+          ![render.sourceSha256,render.sourcePngSha256,render.sourceRenderSha256,render.replayRenderSha256].every(v => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v)) ||
+          ![render.templateCount,render.staticTagExpressions].every(v => typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 2048) ||
+          typeof render.scope !== 'string') return false;
     }
     if (row.qualified) {
       const source = row.source;
@@ -425,6 +433,14 @@ export function createReferenceService(
                     : "awaiting-source-integrity",
             }
           : null,
+        ...(data?.renderIntake ? {renderIntake: {
+          ...data.renderIntake,
+          status: !parentValid || !evidenceValid || final?.sourceStable !== true || !data.qualified ? 'source-invalid'
+            : [['source-render.json','sourceRenderSha256'],['replay-render.json','replayRenderSha256']].every(([asset,key]) => {
+                const file = evidenceFile(job.id,story,asset);
+                return !!file && fileHash(file) === data.renderIntake[key];
+              }) && data.renderIntake.sourcePngSha256 === data.source.sha256 ? data.renderIntake.status : 'evidence-changed',
+        }} : {}),
         compilerInput: data?.compilerInput
           ? {
               ...data.compilerInput,

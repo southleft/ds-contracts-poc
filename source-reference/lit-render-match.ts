@@ -19,11 +19,16 @@ import {
   type SemanticObservation,
 } from "./semantics.js";
 import type { SourceTopology, TopologyNode, TopologySlot } from "./topology.js";
+import { proveLitStaticTemplates } from "./lit-static-template-proof.js";
+import type { LitRenderObservation } from "./lit-render-observation.js";
 
 export interface LitRenderInput {
   source: LitTemplateInput;
   semantics: SemanticIntake;
   boundTopology: BoundTopologyResult;
+  /** Fresh instrumented render, bound by the calling evidence loader to the
+   * same source image/tree. Never retroactively attached to older captures. */
+  staticRender?: { observation: LitRenderObservation; sourcePngSha256: string; sourceTreeSha256: string };
   /** Enumeration is fail-closed, never truncated. Hard maximum: 128 shapes. */
   maxShapes?: number;
 }
@@ -115,7 +120,13 @@ function fail(code: string): never {
  * evidence loader's responsibility; these hashes are not signatures.
  */
 export function matchLitRender(input: LitRenderInput): LitRenderMatch {
-  const read = readLitTemplateBindings(input.source);
+  let staticProof: ReturnType<typeof proveLitStaticTemplates> | undefined;
+  let staticProblem: string | undefined;
+  if (input.staticRender) {
+    try { staticProof = proveLitStaticTemplates(input.source, input.staticRender.observation); }
+    catch(error) { staticProblem = error instanceof Error ? error.message : 'static-template-observation-invalid'; }
+  }
+  const read = readLitTemplateBindings(input.source, staticProof?.substitutions);
   const { semantics, boundTopology: bound } = input;
   const result: LitRenderMatch = {
     version: 1,
@@ -145,6 +156,10 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
     slots: [],
   };
   try {
+    if (staticProblem) fail(staticProblem);
+    if (input.staticRender && (input.staticRender.sourcePngSha256 !== semantics?.sourcePngSha256 ||
+        input.staticRender.sourceTreeSha256 !== semantics?.sourceTreeSha256 ||
+        input.staticRender.observation.policy.tagName !== semantics?.declaration?.tagName)) fail('render-static-observation-identity-mismatch');
     const limit = input.maxShapes ?? 128;
     if (!Number.isInteger(limit) || limit < 1 || limit > 128)
       fail("render-shape-limit-invalid");
@@ -176,7 +191,7 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
       "render-state-mutation-unresolved",
       "static-html-values-unverified",
     ]);
-    if (read.problems.some((p) => structuralProblems.has(p.code)))
+    if (read.problems.some((p) => structuralProblems.has(p.code) && !(staticProof && p.code === 'static-html-values-unverified')))
       fail("render-source-topology-unresolved");
     result.limitations.push(
       ...read.problems.map(
@@ -419,6 +434,8 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
       slots: LitRenderSlot[];
     }> = [];
     for (const shape of candidates) {
+      if (staticProof && (shape.templates.length !== staticProof.templateGroups.length ||
+          !staticProof.templateGroups.every((group,index) => group.includes(shape.templates[index])))) continue;
       const correspondence = matchShape(shape, topology, semantics.observation);
       if (correspondence) matched.push({ shape, ...correspondence });
     }

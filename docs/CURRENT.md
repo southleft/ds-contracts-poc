@@ -44,7 +44,7 @@ The next stateful step is to carry Checkbox anatomy, checked/disabled state and 
 
 The shared engine can now preserve an optional boolean as three distinct native variants: omitted, false and true. Typed readback restores the boolean API without inventing a default. A scoped live Figma fixture and both generated React surfaces preserve these states, and repeat native generation leaves its node identities and canonical readback unchanged. This is an engine prerequisite; it does not enable Checkbox candidate generation through the application.
 
-The source reader now retains TypeScript return casts and authored static-HTML input/label syntax. This is an internal prerequisite: interpolated static values and registered field-note tag names remain explicit blockers to topology matching. It does not enable a new Checkbox generation action.
+The source reader retains TypeScript return casts and authored static-HTML input/label syntax. Fresh app captures can now observe the actual Lit render result and corroborate registered nested-component tags against exact source strings and archived replay. The observer does not call render again or rewrite the source, and unexpected substitutions remain refusals. This removes a source-reading blocker for Checkbox; source-owned text, nested component preservation and the generic candidate adapter still require integration. It does not enable a new Checkbox generation action.
 
 ### Why integration is taking time
 
