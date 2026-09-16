@@ -97,7 +97,28 @@ function fixture(component: "button" | "checkbox" = "button") {
         story,
         eligible: index === 0,
         problems: index === 0 ? [] : ["fixture-original-unavailable"],
-        ...(index === 0 ? { semantics: checkboxOriginal.semantics } : {}),
+        ...(index === 0
+          ? {
+              semantics: checkboxOriginal.semantics,
+              topology: (() => {
+                const tree = JSON.parse(
+                  readFileSync(
+                    new URL(
+                      "./fixtures/checkbox-anatomy-tree.json",
+                      import.meta.url,
+                    ),
+                    "utf8",
+                  ),
+                );
+                const bytes = gunzipSync(Buffer.from(tree.payload, "base64"));
+                assert.equal(sha(bytes), tree.sha256);
+                return {
+                  tree: JSON.parse(bytes.toString()),
+                  treeSha256: tree.sha256,
+                };
+              })(),
+            }
+          : {}),
       }))
     : recorded.records.map((row: any) => ({
         runId: "recorded",
@@ -509,6 +530,60 @@ test("recipe claims must match the trusted build recipe, not just an arbitrary r
     assert.throws(
       () => buildCandidatePreparationReport(f.selection, f.artifact, f.inputs),
       /candidate-/,
+    );
+  } finally {
+    f.close();
+  }
+});
+
+test("new Checkbox preparation retains v2 anatomy while historical reports keep their original derivation", () => {
+  const f = fixture("checkbox");
+  try {
+    const legacy = buildStatefulCandidatePreparationReport(
+      f.selection,
+      f.artifact,
+      f.inputs,
+    );
+    const before = JSON.stringify(legacy);
+    const report = buildStatefulCandidatePreparationReport(
+      f.selection,
+      f.artifact,
+      f.inputs,
+      { anatomyVersion: 2 },
+    );
+    assert.equal(report.adapter, "altitude-checkbox-runtime-v2");
+    assert.equal(report.anatomy?.version, 2);
+    assert.equal(report.anatomy?.cases.length, 4);
+    assert.equal(
+      report.anatomy?.cases[0].status,
+      "structural-projection",
+      JSON.stringify(report.anatomy?.cases[0].problems),
+    );
+    assert.equal(report.anatomy?.cases[0].pseudoPlanes?.length, 2);
+    assert.equal(
+      report.anatomy?.cases[0].samples.filter(
+        (sample) => sample.nestedHosts?.length,
+      ).length,
+      1,
+    );
+    assert.equal(
+      report.anatomy?.cases.filter((row) => row.status === "refused").length,
+      3,
+    );
+    assert.equal(report.anatomy?.revision, revisionOf(report.anatomy?.cases));
+    const summary = f.validate(report, f.context);
+    assert.equal(summary.counters.anatomyProjectedCases, 1);
+    assert.equal(summary.counters.anatomyRefusedCases, 3);
+    assert.equal(
+      f.validate(legacy, f.context).counters.anatomyProjectedCases,
+      undefined,
+    );
+    assert.equal(JSON.stringify(legacy), before);
+    report.anatomy!.cases[0].pseudoPlanes![0].owner.sourceNodeId = "invented";
+    report.anatomy!.revision = revisionOf(report.anatomy!.cases);
+    assert.throws(
+      () => f.validate(report, f.context),
+      /preparation-report-mismatch/,
     );
   } finally {
     f.close();

@@ -146,7 +146,9 @@ export function buildAnyCandidatePreparationReport(
   inputs: RuntimeInputManifest,
 ): CandidatePreparationReport | StatefulCandidatePreparationReport {
   return selection.request.version === 2
-    ? buildStatefulCandidatePreparationReport(selection, artifact, inputs)
+    ? buildStatefulCandidatePreparationReport(selection, artifact, inputs, {
+        anatomyVersion: 2,
+      })
     : buildCandidatePreparationReport(selection, artifact, inputs);
 }
 
@@ -183,15 +185,25 @@ export function createCandidatePreparationValidator(
       path.resolve(repository, "../altitude"),
       context.selection.request.version === 2 ? "checkbox" : "button",
     );
-    const expected = buildAnyCandidatePreparationReport(
-      context.selection,
-      artifact,
-      inputs,
-    );
+    // Historical v1 reports retain their exact derivation and digest. New
+    // preparations carry v2 anatomy; neither version rewrites the other.
+    const expected =
+      value.adapter === "altitude-checkbox-runtime-v1" &&
+      context.selection.request.version === 2
+        ? buildStatefulCandidatePreparationReport(
+            context.selection,
+            artifact,
+            inputs,
+          )
+        : buildAnyCandidatePreparationReport(
+            context.selection,
+            artifact,
+            inputs,
+          );
     // Exact schema/scope comparison rejects added grades, fake acceptance and
     // even self-consistently rehashed but invented source semantics.
     if (!same(value, expected)) fail("preparation-report-mismatch");
-    if (expected.adapter === "altitude-checkbox-runtime-v1")
+    if (expected.adapter !== "altitude-button-runtime-v1")
       return summarizeStatefulPreparation(expected);
     const { semantics } = expected;
     return {

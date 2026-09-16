@@ -16,6 +16,10 @@ import {
 import { matchLitRender, type LitRenderMatch } from "./lit-render-match.js";
 import type { SourceTopology } from "./topology.js";
 import {
+  projectSourceBoundAnatomy,
+  type SourceBoundAnatomy,
+} from "./source-bound-anatomy.js";
+import {
   altitudeRuntimeRecipeIdentity,
   type RuntimeInputManifest,
   type VerifiedRuntimeArtifact,
@@ -44,7 +48,8 @@ interface StatefulCase {
   topologyObservationSha256?: string;
 }
 export interface StatefulCandidatePreparationReport extends CandidatePreparedReport {
-  adapter: "altitude-checkbox-runtime-v1";
+  adapter: "altitude-checkbox-runtime-v1" | "altitude-checkbox-runtime-v2";
+  anatomy?: { version: 2; cases: SourceBoundAnatomy[]; revision: string };
   qualification: "source-and-runtime-only";
   source: { revision: string; inputRevision: string };
   runtime: { artifactRevision: string; interfaceRevision: string };
@@ -78,6 +83,7 @@ export function buildStatefulCandidatePreparationReport(
   selection: VerifiedBindingSelection,
   artifact: VerifiedRuntimeArtifact,
   inputs: RuntimeInputManifest,
+  options?: { anatomyVersion: 2 },
 ): StatefulCandidatePreparationReport {
   const { evidence, request } = selection,
     { manifest } = artifact;
@@ -338,6 +344,56 @@ export function buildStatefulCandidatePreparationReport(
       "Runtime packaging tests are separate from these source observations; interaction, accessibility and visual fidelity are not graded by this preparation.",
     ],
   };
+  const anatomy =
+    options?.anatomyVersion === 2
+      ? cases.map((row, index) => {
+          const original = evidence.rows[index],
+            bound = selection.report.rows[index];
+          const root = row.nodes.find(
+            (node) =>
+              node.domPath ===
+              bound.boundTopology?.topology?.observation?.rootDomPath,
+          );
+          return projectSourceBoundAnatomy({
+            version: 2,
+            expectedCaseId: row.id,
+            sourceProgramSha256: evidence.sourceProgramSha256,
+            source: evidence.source,
+            case: {
+              id: row.id,
+              story: row.story,
+              status: row.status,
+              problems: row.problems,
+              limitations: [],
+              ...(root
+                ? {
+                    branch: {
+                      templateId: root.templateId,
+                      sourceNodeId: root.sourceNodeId,
+                      tag: root.tag,
+                    },
+                  }
+                : {}),
+              nodes: row.nodes,
+              sourcePngSha256: row.sourcePngSha256,
+              sourceTreeSha256: row.sourceTreeSha256,
+              semanticObservationSha256: row.semanticObservationSha256,
+              topologyObservationSha256: row.topologyObservationSha256,
+            },
+            semantics: bound.replaySemantics!,
+            boundTopology: bound.boundTopology!,
+            staticRender: bound.renderObservation && {
+              observation: bound.renderObservation,
+              sourcePngSha256: row.sourcePngSha256!,
+              sourceTreeSha256: row.sourceTreeSha256!,
+            },
+            tree: {
+              root: original.topology?.tree!,
+              sha256: original.topology?.treeSha256!,
+            },
+          });
+        })
+      : undefined;
   return structuredClone({
     version: 1,
     request,
@@ -345,7 +401,18 @@ export function buildStatefulCandidatePreparationReport(
     sourceProgramSha256: evidence.sourceProgramSha256,
     status: "prepared",
     acceptedContract: null,
-    adapter: "altitude-checkbox-runtime-v1",
+    adapter: anatomy
+      ? "altitude-checkbox-runtime-v2"
+      : "altitude-checkbox-runtime-v1",
+    ...(anatomy
+      ? {
+          anatomy: {
+            version: 2 as const,
+            cases: anatomy,
+            revision: revisionOf(anatomy),
+          },
+        }
+      : {}),
     qualification: "source-and-runtime-only",
     source: {
       revision: inputs.sourceRevision,
@@ -366,6 +433,16 @@ export function summarizeStatefulPreparation(
   const { semantics } = report;
   return {
     counters: {
+      ...(report.anatomy
+        ? {
+            anatomyProjectedCases: report.anatomy.cases.filter(
+              (row) => row.status === "structural-projection",
+            ).length,
+            anatomyRefusedCases: report.anatomy.cases.filter(
+              (row) => row.status === "refused",
+            ).length,
+          }
+        : {}),
       plannedCases: semantics.coverage.expected,
       structurallyMatchedCases: semantics.coverage.matched,
       refusedCases: semantics.coverage.refused,

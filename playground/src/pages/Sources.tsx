@@ -1220,6 +1220,8 @@ export function Sources() {
                     ["unobservedSlots", "Unobserved source slots"],
                     ["sourceTexts", "Source text observations"],
                     ["nestedHosts", "Nested host observations"],
+                    ["anatomyProjectedCases", "Source anatomies prepared"],
+                    ["anatomyRefusedCases", "Source anatomies refused"],
                     ["slots", "Source slots retained"],
                     ["writableProperties", "Writable source properties"],
                   ] as const

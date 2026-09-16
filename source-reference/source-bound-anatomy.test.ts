@@ -133,10 +133,13 @@ function rebind(input: SourceBoundAnatomyInput) {
   input.semantics.observationSha256 = semanticHash(input.semantics.observation);
   input.boundTopology.semanticObservationSha256 =
     input.semantics.observationSha256;
+  if (input.staticRender)
+    input.staticRender.sourceTreeSha256 = input.tree.sha256;
   const match = matchLitRender({
     source: input.source,
     semantics: input.semantics,
     boundTopology: input.boundTopology,
+    ...(input.staticRender ? { staticRender: input.staticRender } : {}),
   });
   if (match.status === "structure-matched") {
     input.case.nodes = structuredClone(match.nodes);
@@ -522,4 +525,193 @@ test("synthetic direct slot keeps original flat paths distinct from pruned-tree 
     result.samples.find((sample) => sample.sourceName === "before")!.flatPath,
     "0",
   );
+});
+
+function checkboxFixture(): SourceBoundAnatomyInput {
+  const read = (name: string) =>
+    JSON.parse(readFileSync(new URL(name, import.meta.url), "utf8"));
+  const record = read("./fixtures/lit-render-match/altitude-checkbox.json");
+  const input = JSON.parse(
+    gunzipSync(Buffer.from(record.payload, "base64")).toString(),
+  );
+  const tree = read("./fixtures/checkbox-anatomy-tree.json");
+  const bytes = gunzipSync(Buffer.from(tree.payload, "base64"));
+  assert.equal(sha(bytes), tree.sha256);
+  const match = matchLitRender(input);
+  assert.equal(
+    match.status,
+    "structure-matched",
+    JSON.stringify(match.problems),
+  );
+  const root = match.nodes.find(
+    (node) =>
+      node.domPath === input.boundTopology.topology.observation.rootDomPath,
+  )!;
+  const story = "atoms-checkbox--default";
+  return {
+    ...input,
+    version: 2,
+    expectedCaseId: story,
+    // Synthetic host envelope only; source/runtime admission has separate tests.
+    sourceProgramSha256: "a".repeat(64),
+    tree: { root: JSON.parse(bytes.toString()), sha256: tree.sha256 },
+    case: {
+      id: story,
+      story,
+      status: "structure-matched",
+      problems: [],
+      limitations: match.limitations,
+      branch: {
+        templateId: root.templateId,
+        sourceNodeId: root.sourceNodeId,
+        tag: root.tag,
+      },
+      nodes: match.nodes,
+      sourcePngSha256: match.sourcePngSha256,
+      sourceTreeSha256: match.sourceTreeSha256,
+      semanticObservationSha256: match.semanticObservationSha256,
+      topologyObservationSha256: match.topologyObservationSha256,
+    },
+  };
+}
+
+test("recorded Checkbox v2 preserves pseudo owners and authored nested fallback separately from consumer content", () => {
+  const input = checkboxFixture(),
+    before = JSON.stringify(input);
+  const result = projectSourceBoundAnatomy(input);
+  assert.equal(
+    result.status,
+    "structural-projection",
+    JSON.stringify(result.problems),
+  );
+  assert.equal(result.version, 2);
+  assert.equal(result.acceptedContract, null);
+  assert.equal(JSON.stringify(input), before);
+  assert.equal(result.pseudoPlanes?.length, 2);
+  assert.equal(result.sourceTexts?.length, 1);
+  const fallback = result.samples.find((sample) => sample.nestedHosts?.length);
+  assert.ok(fallback, JSON.stringify(result.samples));
+  assert.equal(fallback.distribution, "fallback");
+  assert.equal(fallback.nestedHosts?.length, 1);
+  assert.equal(fallback.sourceTexts?.[0].sourceProperty, "fieldNote");
+  assert.ok(
+    result.samples.some((sample) => sample.distribution === "assigned"),
+  );
+  for (const plane of result.pseudoPlanes!) {
+    const element = result.elements.find(
+      (element) => element.visualPath === plane.ownerVisualPath,
+    );
+    assert.ok(element);
+    assert.equal(plane.owner.sourceNodeId, element.sourceNodeId);
+    assert.deepEqual(element.node.pseudo[plane.pseudo], plane.style);
+  }
+  assert.deepEqual(projectSourceBoundAnatomy(input), result);
+});
+
+test("v2 refuses unproven text, pseudo changes and missing static-render evidence without publishing a partial projection", async (t) => {
+  for (const mutation of [
+    "missing-proof",
+    "plane-style",
+    "plane-census",
+    "plane-owner",
+    "raw-style",
+    "authored-text",
+  ]) {
+    await t.test(mutation, () => {
+      const input = checkboxFixture();
+      const topology = input.boundTopology.topology!.observation!;
+      if (mutation === "missing-proof") delete input.staticRender;
+      if (mutation === "plane-style")
+        topology.pseudoPlanes![0].style.color = "rgb(1, 2, 3)";
+      if (mutation === "plane-census") topology.pseudoPlanes!.pop();
+      if (mutation === "plane-owner")
+        topology.pseudoPlanes![0].ownerDomPath = topology.rootDomPath;
+      if (mutation === "raw-style") {
+        const change = (node: CapturedNode): boolean => {
+          if (node.pseudo["::before"]) {
+            node.pseudo["::before"].color = "rgb(1, 2, 3)";
+            return true;
+          }
+          return node.nodes.some(
+            (child) => child.t === "el" && change(child.el),
+          );
+        };
+        assert.ok(change(input.tree.root));
+      }
+      if (mutation === "authored-text") {
+        const text = matchLitRender(input).texts![0];
+        const raw = text
+          .visualPath!.split("/")
+          .slice(1)
+          .reduce((value: any, key) => value[key], input.tree.root);
+        raw.v = "Unproven fallback";
+        topology.nodes.find((node) => node.domPath === text.domPath)!.text =
+          raw.v;
+      }
+      // Rebind changed bytes so a stale hash alone cannot explain rejection.
+      rebind(input);
+      if (input.staticRender)
+        input.staticRender.sourceTreeSha256 = input.tree.sha256;
+      const result = projectSourceBoundAnatomy(input);
+      assert.equal(result.status, "refused");
+      assert.equal(result.root, undefined);
+      assert.equal(result.pseudoPlanes, undefined);
+      assert.deepEqual(result.elements, []);
+      assert.ok(result.problems.length);
+      if (mutation.startsWith("plane-") || mutation === "raw-style")
+        assert.match(result.problems.join(), /pseudo|correspondence/);
+    });
+  }
+});
+
+test("v2 requires explicit opt-in and legacy anatomy still refuses pseudo-bearing trees", () => {
+  const input = checkboxFixture();
+  delete input.version;
+  assert.deepEqual(projectSourceBoundAnatomy(input).problems, [
+    "source-anatomy-projection-version-invalid",
+  ]);
+  delete input.staticRender;
+  assert.equal(projectSourceBoundAnatomy(input).status, "refused");
+  const button = fixture();
+  button.tree.root.pseudo["::before"] = { content: '""' };
+  rebind(button);
+  assert.deepEqual(projectSourceBoundAnatomy(button).problems, [
+    "source-anatomy-tree-shape-unavailable",
+  ]);
+});
+
+test("pseudo on a nested component implementation cannot borrow its host's source identity", () => {
+  const input = checkboxFixture();
+  const topology = input.boundTopology.topology!.observation!;
+  const host = matchLitRender(input).nodes.find((node) =>
+    node.tag.includes("-"),
+  )!;
+  const internal = topology.nodes.find(
+    (node) =>
+      node.kind === "element" &&
+      node.domPath.startsWith(host.domPath + "/shadow/") &&
+      node.visualPath,
+  )!;
+  assert.ok(internal);
+  const raw = internal
+    .visualPath!.split("/")
+    .slice(1)
+    .reduce((value: any, key) => value[key], input.tree.root) as CapturedNode;
+  raw.pseudo["::after"] = { content: '""', width: "1px", height: "1px" };
+  topology.pseudoPlanes!.push({
+    ownerDomPath: internal.domPath,
+    ownerVisualPath: internal.visualPath!,
+    visualPath: internal.visualPath! + "/pseudo/::after",
+    pseudo: "::after",
+    style: raw.pseudo["::after"],
+    ...(internal.slotChain ? { slotChain: internal.slotChain } : {}),
+  });
+  rebind(input);
+  const result = projectSourceBoundAnatomy(input);
+  assert.equal(result.status, "refused");
+  assert.deepEqual(result.problems, [
+    "source-anatomy-pseudo-source-owner-unmapped",
+  ]);
+  assert.equal(result.root, undefined);
+  assert.deepEqual(result.elements, []);
 });
