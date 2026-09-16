@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { nativeComparisonFixture } from '../core/native-contract-comparison-test-fixture.js';
@@ -18,6 +18,11 @@ import { deriveReactChildRoot } from './react-child-root.js';
 import { projectReactRootVisual } from './react-root-visual.js';
 import { prepareReactNativePlan } from './react-native-plan.js';
 import type { ReactStyleOrigin } from './react-style-origin.js';
+import { reactChildContextSizing } from './react-child-context.js';
+import { gridConstraintChannels } from './grid-constraints.js';
+import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
+import { readReactNativeEvidence, selectReactChildRequest, selectReactNativeRequest } from './react-native-evidence.js';
+import type { ReactOwnershipReport } from './react-ownership-run.js';
 
 async function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'react-composition-'));
@@ -60,6 +65,64 @@ export function Child(props: {children?: string; id?: string}) { return <button 
     return { dir, program, tree, ownership, fonts, content, main };
   } catch (error) { rmSync(dir, { recursive: true, force: true }); throw error; }
 }
+
+test('context child requests reopen pinned evidence and refuse substitution without upgrading legacy requests', async () => {
+  const f = await fixture();
+  try {
+    const source = path.join(f.dir, 'components.tsx');
+    const reference = { id: 'a'.repeat(64), files: { [source]: evidenceSha(readFileSync(source)) }, javascript: '', css: '' };
+    const ownershipId = '10000000-0000-4000-8000-000000000001';
+    const operationId = '10000000-0000-4000-8000-000000000002';
+    const inspectionId = '10000000-0000-4000-8000-000000000003';
+    const archive = path.join(f.dir, 'private/react-source-ownership', reference.id, ownershipId);
+    mkdirSync(path.join(archive, 'card-composed'), { recursive: true });
+    const save = (dir: string, file: string, value: unknown) => writeFileSync(path.join(dir, file), JSON.stringify(value));
+    const treeSha256 = evidenceSha(JSON.stringify(f.tree));
+    const report: ReactOwnershipReport = { id: ownershipId, referenceId: reference.id, state: 'complete',
+      acceptedContract: null, denominator: 1, matched: 1, sourceUnchanged: true, rows: [{
+        id: 'card-composed', matched: true, problems: [], treeSha256, ownership: f.ownership,
+        rootMatrix: { version: 1, qualification: 'combined-property-root-draft', acceptedContract: null, problems: [],
+          draft: { status: 'native-compiled', properties: [], contract: f.main.contract,
+            native: f.main.input.component, tokens: {}, problems: [], observations: [], lowerings: [], limitations: [] } },
+      }] };
+    save(archive, 'report.json', report);
+    save(archive, 'program.json', f.program);
+    save(archive, 'card-composed/source-tree.json', { status: 'captured', problems: [], tree: f.tree, treeSha256 });
+    save(archive, 'card-composed/style-origin.json', { version: 1, roots: [
+      { path: '', tag: 'section', channels: [] }, { path: '0', tag: 'button', channels: [] },
+    ] });
+    save(archive, 'integrity.json', { version: 1, files: inventoryEvidence(archive) });
+    const parent = selectReactNativeRequest(f.dir, report, 'card-composed');
+    const legacy = selectReactChildRequest(f.dir, reference, parent, 'child');
+    const legacyEvidence = readReactNativeEvidence(f.dir, reference, legacy);
+    const inspectionRoot = path.join(f.dir, 'private/react-content-inspections', operationId);
+    const inspection = path.join(inspectionRoot, inspectionId);
+    mkdirSync(inspection, { recursive: true });
+    const grids = { version: 1, status: 'observed', treeRevision: revisionOf(f.tree), rows: [], problems: [] };
+    save(inspection, 'request.json', { operationId, request: parent });
+    save(inspection, 'report.json', { id: inspectionId, operationId, referenceId: reference.id,
+      caseId: parent.caseId, phase: 'complete', sourceUnchanged: true, gridConstraints: grids });
+    save(inspection, 'grid-constraints.json', grids);
+    save(inspection, 'integrity.json', { version: 1, files: inventoryEvidence(inspection) });
+    const pin = { operationId, id: inspectionId, inventorySha256: evidenceSha(readFileSync(path.join(inspection, 'integrity.json'))) };
+    const selected = selectReactChildRequest(f.dir, reference, parent, 'child', pin);
+    assert.equal(selected.version, 3);
+    const evidence = readReactNativeEvidence(f.dir, reference, selected);
+    save(inspectionRoot, 'latest.json', { id: 'invalid newer pointer' });
+    assert.deepEqual(readReactNativeEvidence(f.dir, reference, selected), evidence);
+    assert.deepEqual(readReactNativeEvidence(f.dir, reference, legacy), legacyEvidence);
+    assert.throws(() => readReactNativeEvidence(f.dir, reference, {
+      ...selected, constraints: { ...pin, inventorySha256: 'f'.repeat(64) },
+    }), /react-content-inventory-changed/);
+    const original = readFileSync(path.join(inspection, 'grid-constraints.json'));
+    save(inspection, 'grid-constraints.json', { ...grids, treeRevision: revisionOf('different tree') });
+    assert.throws(() => readReactNativeEvidence(f.dir, reference, selected), /react-content-evidence-changed/);
+    assert.deepEqual(readReactNativeEvidence(f.dir, reference, legacy), legacyEvidence);
+    writeFileSync(path.join(inspection, 'grid-constraints.json'), original);
+    save(inspection, 'request.json', { operationId, request: { ...parent, caseId: 'other-case' } });
+    assert.throws(() => readReactNativeEvidence(f.dir, reference, selected), /react-content-evidence-changed/);
+  } finally { rmSync(f.dir, { recursive: true, force: true }); }
+});
 
 test('source export and compiler correspondence select an independently observed child main', async () => {
   const f = await fixture();
@@ -220,6 +283,14 @@ test('nested requests have a separate stable reservation and cannot smuggle mapp
     ownership: { id: '10000000-0000-4000-8000-000000000001', sha256: 'b'.repeat(64) },
     inventorySha256: 'c'.repeat(64), caseId: 'card-composed', matrixRevision: revisionOf('matrix') };
   const child: ReactNativeRequest = { ...root, version: 2, selection: { instanceId: 'instance-4' } };
+  const contextual: ReactNativeRequest = {...child,version:3,constraints:{operationId:'10000000-0000-4000-8000-000000000002',id:'10000000-0000-4000-8000-000000000003',inventorySha256:'d'.repeat(64)}};
+  assert.ok(isReactNativeRequest(contextual));
+  assert.notEqual(reactNativeReservation(contextual),reactNativeReservation(child));
+  assert.equal(reactNativeReservation(contextual),reactNativeReservation({...contextual,constraints:{...contextual.constraints!,id:'10000000-0000-4000-8000-000000000004',inventorySha256:'e'.repeat(64)}}),
+    'a newer inspection cannot allocate another operation behind the existing v3 journal');
+  for(const invalid of [{...contextual,constraints:undefined},{...contextual,version:2},
+    {...contextual,constraints:{...contextual.constraints,path:'/tmp/caller'}},
+    {...contextual,constraints:{...contextual.constraints,inventorySha256:'changed'}}]) assert.equal(isReactNativeRequest(invalid),false);
   assert.ok(isReactNativeRequest(root)); assert.ok(isReactNativeRequest(child));
   assert.notEqual(reactNativeReservation(root), reactNativeReservation(child));
   assert.equal(reactNativeReservation(child), reactNativeReservation({ ...child, matrixRevision: revisionOf('updated') }));
@@ -227,4 +298,38 @@ test('nested requests have a separate stable reservation and cannot smuggle mapp
   for (const invalid of [{ ...root, selection: child.selection }, { ...child, selection: {} },
     { ...child, selection: { instanceId: '../outside' } }, { ...child, selection: { instanceId: 'instance-4', nodeId: '1:2' } },
     { ...child, path: [0] }, { ...child, version: 3 }]) assert.equal(isReactNativeRequest(invalid), false);
+});
+
+test('pinned child context carries a source-proven stretch constraint without changing legacy drafts',async()=>{
+  const f=await fixture();
+  try {
+    const tree=structuredClone(f.tree);
+    Object.assign(tree.style,{width:'360px','align-items':'normal'});
+    if(tree.nodes[0].t!=='el')throw Error('child missing');
+    const child=tree.nodes[0].el;
+    Object.assign(child.style,{width:'360px',height:'36px','align-self':'auto',position:'static','box-sizing':'border-box',
+      'min-width':'auto','max-width':'none','min-height':'auto','max-height':'none','aspect-ratio':'auto',
+      'margin-left':'0px','margin-right':'0px','margin-top':'0px','margin-bottom':'0px','flex-grow':'0','flex-basis':'auto',transform:'none'});
+    const origin:ReactStyleOrigin={version:1,roots:[{path:'',tag:'section',channels:[],sizes:[{channel:'width',status:'fixed',value:'360px',selectors:['inline']}]},
+      {path:'0',tag:'button',channels:[],sizes:['width','height'].map(channel=>({channel:channel as 'width'|'height',status:'auto' as const,value:'auto',selectors:[]}))}]};
+    const context={gridConstraints:{version:1 as const,status:'observed' as const,treeRevision:revisionOf(tree),rows:[],problems:[]}};
+    const legacy=deriveReactChildRoot(f.program,f.ownership,tree,origin,'child');
+    const prepared=deriveReactChildRoot(f.program,f.ownership,tree,origin,'child',context);
+    assert.equal(legacy.draft.contract?.anatomy.root.literals?.width,undefined);
+    assert.equal(prepared.draft.contract?.anatomy.root.literals?.width,'100%');
+    assert.equal(prepared.draft.native?.variants[0].spec.rootFillWidth,true);
+    assert.notEqual(legacy.inputRevision,prepared.inputRevision);
+    assert.deepEqual(deriveReactChildRoot(f.program,f.ownership,tree,origin,'child'),legacy);
+    const autoParent=structuredClone(origin);autoParent.roots[0].sizes![0]={channel:'width',status:'auto',value:'auto',selectors:[]};
+    assert.equal(reactChildContextSizing(tree,autoParent,'0',context),undefined,'measured parent width alone is not a constraint');
+    const malformed=structuredClone(context);malformed.gridConstraints.treeRevision=revisionOf('different');
+    assert.throws(()=>deriveReactChildRoot(f.program,f.ownership,tree,origin,'child',malformed),/evidence-changed/);
+    child.style['max-width']='200px';context.gridConstraints.treeRevision=revisionOf(tree);
+    assert.throws(()=>deriveReactChildRoot(f.program,f.ownership,tree,origin,'child',context),/stretch-constraints-unqualified/);
+    child.style.display='grid';
+    for(const key of gridConstraintChannels)child.style[key]='normal';
+    const grid={...context,gridConstraints:{...context.gridConstraints,treeRevision:revisionOf(tree),rows:[{path:'0',tag:'button',
+      used:Object.fromEntries(gridConstraintChannels.map(key=>[key,child.style[key]])),computed:Object.fromEntries(gridConstraintChannels.map(key=>[key,'normal']))}]}};
+    assert.throws(()=>reactChildContextSizing(tree,origin,'0',grid as any),/grid-constraints-unqualified/,'used pixel tracks cannot enter the new root path');
+  } finally {rmSync(f.dir,{recursive:true,force:true});}
 });

@@ -13,6 +13,7 @@ import type { PropSpace } from '../extract/computed/capture.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactSourceProgram } from './react-source-program.js';
+import { reactChildContextSizing, type ReactChildContext } from './react-child-context.js';
 
 export interface ReactRootVisual {
   version: 1;
@@ -57,9 +58,10 @@ export function projectReactRootVisual(
   tree: CapturedNode,
   styleOrigin?: ReactStyleOrigin,
   instanceIds?: ReadonlySet<string>,
+  childContext?: ReactChildContext,
 ): ReactRootVisual {
   const out: ReactRootVisual = { version: 1, qualification: 'observed-root-only', acceptedContract: null,
-    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}) }), roots: [], problems: [] };
+    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}), ...(childContext ? {childContext} : {}) }), roots: [], problems: [] };
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
   if (anatomy.status !== 'linked') { out.problems = [...anatomy.problems]; return out; }
   for (const instance of anatomy.instances) {
@@ -77,6 +79,7 @@ export function projectReactRootVisual(
           instance.roots[0].correspondence === 'runtime-dependent')
         throw Error('react-root-visual-source-content-unqualified');
       const observation = instance.roots[0].observation;
+      const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
       if (Object.keys(observation.pseudo).length) throw Error('react-root-visual-pseudo-content-unprojected');
       const root: CapturedNode = { ...structuredClone(observation), nodes: [],
         style: Object.fromEntries(Object.entries(observation.style).map(([key, value]) => [key, normalizeValue(value)])) };
@@ -128,6 +131,11 @@ export function projectReactRootVisual(
           ? {...size,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}
           : size.status==='fixed'&&normalizeValue(size.value??'')!==root.style[size.channel]
             ? {...size,status:'unresolved',reason:'size-observation-mismatch'} : size);
+        if(sizing) {
+          if(callerStyle) throw Error('react-child-context-caller-style-unqualified');
+          enriched.anatomy.root.literals={...enriched.anatomy.root.literals,...sizing};
+          result.limitations.push('parent-stretch-current-source-context-only');
+        }
         const bindings = observeReactSourceBindings(root, enriched.anatomy.root, tokens, styleOrigin, instance.roots[0].path);
         result.sourceBindings = bindings.sourceBindings;
         for (const binding of bindings.sourceBindings) if (binding.tokenPath)

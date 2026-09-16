@@ -1483,8 +1483,8 @@ export function createNativeOperationJobs(
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
         // get() verifies the saved journal and separately reports source freshness.
-        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version === 2 ? 'nested' as const : 'root' as const,
-          ...(request.version === 2 ? { nestedInstanceId: request.selection!.instanceId } : {}),
+        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
+          ...(request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
           ...(comparison ? { parentOperationId: comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];

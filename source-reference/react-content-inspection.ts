@@ -138,5 +138,5 @@ export function readReactContentInspectionEvidence(repoRoot: string, reference: 
     if (revisionOf(grids) !== revisionOf(report.gridConstraints)) throw Error('react-content-grid-report-changed');
     if (grids.status === 'observed') verifiedGridConstraints(original.captured.tree, grids);
   }
-  return { report, original };
+  return { report, original, selection: { id: latest.id as string, inventorySha256: latest.inventorySha256 as string } };
 }

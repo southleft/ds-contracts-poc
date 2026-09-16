@@ -6,6 +6,7 @@ import type { ReactSourceProgram } from './react-source-program.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { CapturedNode } from '../extract/computed/lib.js';
 import type { ReactStyleOrigin } from './react-style-origin.js';
+import type { ReactChildContext } from './react-child-context.js';
 
 export interface ReactChildRoot {
   version: 1;
@@ -18,11 +19,11 @@ export interface ReactChildRoot {
   problems: string[];
 }
 export function deriveReactChildRoot(program: ReactSourceProgram, ownership: ReactOwnership,
-  tree: CapturedNode, styleOrigin: ReactStyleOrigin, instanceId: string): ReactChildRoot {
+  tree: CapturedNode, styleOrigin: ReactStyleOrigin, instanceId: string, context?: ReactChildContext): ReactChildRoot {
   const instance = ownership.components.find(c => c.id === instanceId);
   if (!instance?.parent || instance.roots.length !== 1 || instance.roots[0] === '')
     throw Error('react-child-root-nested-source-required');
-  const projection = projectReactRootVisual(program, ownership, tree, styleOrigin, new Set([instanceId]));
+  const projection = projectReactRootVisual(program, ownership, tree, styleOrigin, new Set([instanceId]), context);
   const draft = projection.roots.find(r => r.instanceId === instanceId);
   if (projection.problems.length || !draft || draft.status !== 'native-compiled' || draft.problems.length || !draft.contract || !draft.tokens)
     throw Error('react-child-root-projection-unavailable:' + (draft?.problems.join(',') ?? projection.problems.join(',')));

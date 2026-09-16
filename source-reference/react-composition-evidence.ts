@@ -42,7 +42,7 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
   const sources = row.ownership.components.filter(c => !c.roots.includes('')).map(c => JSON.stringify(c.source));
   // A leaf has no native dependencies to join. Its own archive and content
   // were authenticated above; unrelated native operations cannot affect it.
-  if (!sources.length) return { ...matchReactComposition(program, row.ownership, original.captured.tree, content, mains), content, inspection: saved };
+  if (!sources.length) return { ...matchReactComposition(program, row.ownership, original.captured.tree, content, mains), content, inspection: saved, inspectionSelection: inspected.selection };
   const operations = jobs.listReact(reference.id, 'root').sort((a, b) => a.operation.id.localeCompare(b.operation.id));
   for (const operation of operations) {
     if (!['root', 'nested'].includes(operation.kind) || operation.operation.id === parentId ||
@@ -88,8 +88,9 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     child.canPrepareMain = false;
     if (!child.problems.includes('react-composition-main-not-verified') || operations.some(op =>
       op.kind === 'nested' && op.caseId === request.caseId && op.ownershipId === request.ownership.id && op.nestedInstanceId === child.instanceId)) continue;
-    try { deriveReactChildRoot(program, row.ownership, original.captured.tree, origin, child.instanceId); child.canPrepareMain = true; }
+    try { deriveReactChildRoot(program, row.ownership, original.captured.tree, origin, child.instanceId,
+      saved.gridConstraints?.status==='observed' ? {gridConstraints:saved.gridConstraints} : undefined); child.canPrepareMain = true; }
     catch (error) { child.preparationProblem = error instanceof Error ? error.message : String(error); }
   }
-  return { ...result, content, inspection: saved };
+  return { ...result, content, inspection: saved, inspectionSelection: inspected.selection };
 }

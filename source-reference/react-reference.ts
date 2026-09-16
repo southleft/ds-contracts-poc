@@ -279,12 +279,16 @@ export function createReactReferenceService(
           if (childRoute) {
             const parent = jobs.reactRequest(childRoute[2]);
             if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
-            const review = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs).review;
-            const existing = jobs.listReact(reference.id, 'root').some(row => row.kind === 'nested' &&
+            const composition = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs);
+            const review = composition.review;
+            const existing = jobs.listReact(reference.id, 'root').find(row => row.kind === 'nested' &&
               row.caseId === parent.caseId && row.ownershipId === parent.ownership.id && row.nestedInstanceId === childRoute[3]);
             if (!existing && !review.rows.find(r => r.instanceId === childRoute[3])?.canPrepareMain)
               throw Error('react-child-root-preparation-unavailable');
-            jobs.prepare(selectReactChildRequest(repoRoot, reference, parent, childRoute[3]));
+            const constraints=composition.inspection.gridConstraints?.status==='observed' && composition.inspectionSelection
+              ? {operationId:childRoute[2],...composition.inspectionSelection} : undefined;
+            jobs.prepare(existing ? jobs.reactRequest(existing.operation.id)
+              : selectReactChildRequest(repoRoot, reference, parent, childRoute[3], constraints));
           } else if (updateAction) {
             const { updateJobs, updateTransport }=native();
             const [, , parentId, proposalId, action]=updateAction;
