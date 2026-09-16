@@ -14,6 +14,9 @@ import { planReactInitialStates, type observeReactInitialStates } from './react-
 import { prepareObservedContentTree, compileObservedContentSweep } from './observed-content.js';
 import { evidenceSha } from './react-validation-evidence.js';
 import { validateContract } from '../packages/core/src/validate.js';
+import { observeReactSourceBindings, type ReactSourceBindingProjection } from './react-source-bindings.js';
+import { retainReactRootSourceBindings } from './react-root-sweep.js';
+import { createFigmaEngine } from '../core/emit-figma-script.js';
 
 type Snapshot = ReactPropertySnapshot & { fonts: TextFontEvidence; svg: SvgViewportEvidence };
 export function compileReactInitialContract(program: ReactSourceProgram, ownership: ReactOwnership, tree: CapturedNode,
@@ -21,7 +24,8 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
   const result = { version: 1 as const, qualification: 'observed-initial-state-contract' as const,
     acceptedContract: null, nativeQualification: 'unqualified' as const, status: 'refused' as 'refused' | 'compiled-draft',
     problems: [] as string[], limitations: ['observed-initial-inputs-only', 'runtime-interactions-not-projected',
-      'nested-component-identity-not-projected', 'source-token-identities-not-retained', 'native-output-not-verified'],
+      'nested-component-identity-not-projected', 'source-variable-modes-and-aliases-not-assembled', 'descendant-source-bindings-not-observed', 'native-output-not-verified'],
+    sourceBindings: [] as Array<{ observation: string; bindings: ReactSourceBindingProjection['sourceBindings'] }>,
     compiled: undefined as ReturnType<typeof compileObservedContentSweep> | undefined };
   try {
     const expected = planReactInitialStates(program, ownership, tree, observation.instanceId);
@@ -47,6 +51,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     const enumeration = enumerate(axes, [], 64, baseAxisValues);
     if (enumeration.policy !== 'full-cartesian' || enumeration.combos.length !== observation.rows.length) throw Error('react-initial-contract-domain-incomplete');
     const roots = new Map<string, CapturedNode>(), sizes = new Map<string, Set<string>>();
+    const planes = new Map<string, { snapshot: Snapshot; assignment: Record<string, string>; rowId: string }>();
     for (const row of observation.rows) {
       const snap = snapshots[row.id];
       if (row.status !== 'observed' || !row.restored || !snap || snap.image !== row.image || snap.treeSha256 !== row.treeSha256 ||
@@ -79,6 +84,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       if (['flex', 'inline-flex'].includes(root.style.display)) for (const channel of ['row-gap', 'column-gap'])
         if (root.style[channel] === 'normal') root.style[channel] = '0px';
       roots.set(key, root);
+      planes.set(key, { snapshot: snap, assignment, rowId: row.id });
     }
     if (enumeration.combos.some(c => !roots.has(c.key)) || new Set([...roots.values()].map(r => r.tag)).size !== 1)
       throw Error('react-initial-contract-host-or-domain-changed');
@@ -96,6 +102,22 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     result.compiled = compileObservedContentSweep(space, { name, importName: name, contract: '', sampleText: '', axes: axes.map(a => a.prop) },
       { captures: enumeration.combos.map(c => ({ combo: `${name}:${c.key}`, interaction: 'default', root: roots.get(c.key)! })) } as SweepResult, [...sizes.keys()]);
     result.problems.push(...result.compiled.problems);
+    if (result.compiled.contract && result.compiled.tokens && !result.problems.length) {
+      const projections = new Map<string, ReactSourceBindingProjection>();
+      for (const [key, plane] of planes) {
+        const projection = observeReactSourceBindings(roots.get(key)!, result.compiled.contract.anatomy.root,
+          result.compiled.tokens, plane.snapshot.styleOrigin, '', plane.assignment);
+        projections.set(key, projection);
+        result.sourceBindings.push({ observation: plane.rowId, bindings: projection.sourceBindings });
+        // A declared direct-variable relationship must survive or refuse;
+        // other unresolved channels stay explicitly reported as unresolved.
+        if (projection.sourceBindings.some(b => b.variable && !b.tokenPath))
+          throw Error('react-initial-contract-source-binding-unresolved');
+      }
+      retainReactRootSourceBindings(result.compiled.contract, result.compiled.tokens, axes, baseAxisValues, projections);
+      const engine = createFigmaEngine({ tokens: { primitives: result.compiled.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map(result.compiled.assets) });
+      result.compiled.component = engine.compileComponentData(result.compiled.contract, new Map([[result.compiled.contract.id, result.compiled.contract]]));
+    }
     if (result.compiled.contract) validateContract(result.compiled.contract,
       new Map([[result.compiled.contract.id, result.compiled.contract]]), result.problems, new Map(result.compiled.assets));
     if (!result.problems.length) result.status = 'compiled-draft';

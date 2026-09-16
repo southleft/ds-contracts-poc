@@ -4164,7 +4164,9 @@ function variantParts(
     if (vw && vw.equals !== undefined) {
       const value = subst[vw.prop];
       const eqs = Array.isArray(vw.equals) ? vw.equals : [vw.equals];
-      if (value !== undefined && !eqs.includes(value)) return false;
+      // Omission cannot satisfy an explicit equality predicate. In particular,
+      // an optional enum's native unset plane must not acquire its "on" icon.
+      if (value === undefined || !eqs.includes(value)) return false;
     } else if (vw && subst[vw.prop] !== undefined && subst[vw.prop] !== 'true') {
       // Boolean visibleWhen over a VARIANT-bound bool: the bool is a variant
       // axis, so its value is in subst — the part exists only in the 'true'
@@ -6333,7 +6335,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false, nativeSource = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
@@ -6349,7 +6351,7 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLit
     // v9 shape (#42): a REAL parametric node with native rotation.
     node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
       : spec.shape.kind === 'rect' ? figma.createRectangle()
-      : figma.createPolygon();
+      : figma.createPolygon();${nativeSource ? '\n    nativeInit(node, spec);' : ''}
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
     node.resize(spec.shape.width, spec.shape.height);
 ${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcData, the
@@ -8204,7 +8206,7 @@ async function buildNode(spec, registry) {
       }
     }
     registry.slots.push({ spec, slot: node });
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc, opts.nativeSource)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     applyFrameSpec(node, spec);${hasSlot ? `
     // The variant COMPONENT is the slot owner for everything built below it

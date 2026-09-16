@@ -26,7 +26,7 @@ export function compileReactRootSweep(contract:Contract,axes:EnumAxisSpec[],base
 /** Carry source identities only when their conditional mapping is proved
  * over every observed combination. Cross-axis identities that the contract's
  * per-property binding grammar cannot express refuse, never become guessed names. */
-export function retainReactRootSourceBindings(enriched:Contract,tokens:Record<string,unknown>,axes:EnumAxisSpec[],baseAxisValues:Record<string,string>,projections:Map<string,ReactRootVisual['roots'][number]>){
+export function retainReactRootSourceBindings(enriched:Contract,tokens:Record<string,unknown>,axes:EnumAxisSpec[],baseAxisValues:Record<string,string>,projections:Map<string,Pick<ReactRootVisual['roots'][number],'sourceBindings'|'tokens'>>){
  const enumeration=enumerate(axes,[],256,baseAxisValues);
  if(enumeration.policy!=='full-cartesian'||projections.size!==enumeration.combos.length)throw Error('react-root-bindings-incomplete');
  const boundChannels=new Set([...projections.values()].flatMap(p=>(p.sourceBindings??[]).filter(b=>b.tokenPath).map(b=>b.channel)));

@@ -155,15 +155,24 @@ function nativeFileGuard() {
 const nativeOwner = JSON.stringify({ version: 1, operationId: NATIVE.operation.id,
   sourceContractId: NATIVE.sourceContractId, sourceContractRevision: NATIVE.sourceContractRevision,
   tokenPreparationRevision: NATIVE.tokenPreparationRevision, acceptedContract: null });
-function nativeOwn(node) {
+function nativeRetain(node) {
   // Retain returned identity BEFORE metadata/mode APIs that may throw.
+  if (NATIVE_RESULT.nodes.some(entry => entry.id === node.id)) return;
   const identity = { id: node.id, type: node.type };
   NATIVE_RESULT.nodes.push(identity);
   if (node.key) identity.key = node.key;
+}
+function nativeOwn(node) {
+  nativeRetain(node);
   node.setSharedPluginData('ds_contracts', 'nativeSourceOperation', nativeOwner);
   node.setSharedPluginData('ds_contracts', 'nativeSourceAllocation', node.id);
 }
 function nativeInit(node, spec) {
+  // SVG import returns every descendant at once. Retain the entire allocation
+  // before even the root's first metadata write, which may fail.
+  const svgDescendants = spec.type === 'svg' ? node.findAll(() => true) : [];
+  nativeRetain(node);
+  for (const child of svgDescendants) nativeRetain(child);
   nativeOwn(node);
   if (spec.type !== 'slot') NATIVE_PAGE.appendChild(node);
   node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
@@ -171,13 +180,15 @@ function nativeInit(node, spec) {
     ? "if (spec.nativeContractPart) node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(spec.nativeContractPart));\n  else " : ''}if (spec.nativeSourcePart) node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
   else if (spec.nativeSourceSample || spec.nativeContractSample) {
     node.setSharedPluginData('ds_contracts', spec.nativeContractSample ? 'nativeContractSample' : 'nativeSourceSample', JSON.stringify(spec.nativeContractSample || spec.nativeSourceSample));
-    // createNodeFromSvg allocates a subtree in one API call. Preserve and own
-    // its returned descendants too; this does not claim vector equivalence.
-    if (spec.type === 'svg') for (const child of node.findAll(() => true)) {
-      nativeOwn(child);
-      child.setSharedPluginData('ds_contracts', spec.nativeContractSample ? 'nativeContractSample' : 'nativeSourceSample', JSON.stringify(spec.nativeContractSample || spec.nativeSourceSample));
-    }
   } else nativeRefuse('node-source-identity-missing');
+  // createNodeFromSvg allocates a subtree in one API call. Preserve all
+  // returned IDs and source-part ownership, including reusable draft icons.
+  // Owning the subtree does not establish vector equivalence.
+  for (const child of svgDescendants) {
+    nativeOwn(child);
+    const key = spec.nativeContractPart ? 'nativeContractPart' : spec.nativeSourcePart ? 'nativeSourcePart' : spec.nativeContractSample ? 'nativeContractSample' : 'nativeSourceSample';
+    child.setSharedPluginData('ds_contracts', key, JSON.stringify(spec.nativeContractPart || spec.nativeSourcePart || spec.nativeContractSample || spec.nativeSourceSample));
+  }
   if (spec.nativeSourceVisible === false) node.visible = false;
 }
 async function nativeReadTokens() {

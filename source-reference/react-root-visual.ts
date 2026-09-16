@@ -1,6 +1,6 @@
 /** Observed root projections, not reusable source contracts. The source API,
  * behavior, caller composition and unobserved planes remain separate work. */
-import { flattenTokens } from '../core/tokens.js';
+import { observeReactSourceBindings } from './react-source-bindings.js';
 import type { ReactStyleOrigin, ReactSizeOrigin } from './react-style-origin.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createFigmaEngine, type ComponentData } from '../core/emit-figma-script.js';
@@ -124,34 +124,11 @@ export function projectReactRootVisual(
           ? {...size,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}
           : size.status==='fixed'&&normalizeValue(size.value??'')!==root.style[size.channel]
             ? {...size,status:'unresolved',reason:'size-observation-mismatch'} : size);
-        const leaves = flattenTokens(tokens), named = new Map<string, unknown>(), tokenSelectors = new Map<string, Set<string>>();
-        result.sourceBindings = origin.channels.map(binding => {
-          const base = {channel: binding.channel, ...(binding.variable ? {variable: binding.variable} : {})};
-          const ref = enriched.anatomy.root.tokens?.[binding.channel];
-          const leaf = typeof ref === 'string' ? leaves.get(ref.slice(1, -1)) : undefined;
-          if (binding.status !== 'direct-variable' || !binding.variable || !binding.rawValue || !binding.computedValue)
-            return {...base, reason: binding.reason ?? 'source-binding-unresolved'};
-          if (normalizeValue(binding.computedValue) !== root.style[binding.channel] ||
-              normalizeValue(binding.rawValue) !== normalizeValue(binding.computedValue) ||
-              normalizeValue(root.style[binding.variable] ?? '') !== normalizeValue(binding.rawValue))
-            return {...base, reason: 'source-variable-value-needs-resolution'};
-          if (!leaf || !['color', 'number'].includes(leaf.type)) return {...base, reason: 'projected-channel-not-token-bound'};
-          const values = new Set(styleOrigin.roots.flatMap(r => r.channels.filter(c => c.variable === binding.variable && c.rawValue).map(c => c.rawValue)));
-          if (values.size !== 1) return {...base, reason: 'source-variable-scope-conflict'};
-          // The CSS identifier is reversible and case-sensitive. Never merge
-          // distinct names merely because they currently have equal values.
-          const key = 'v' + Buffer.from(binding.variable, 'utf8').toString('hex');
-          const tokenPath = 'source.css.' + key;
-          const selectors = tokenSelectors.get(key) ?? new Set<string>();
-          for (const selector of binding.selectors) selectors.add(selector);
-          tokenSelectors.set(key, selectors);
-          named.set(key, {$type: leaf.type, $value: leaf.value, $extensions: {'dev.ds-contracts.css-source': {
-            variable: binding.variable, rawValue: binding.rawValue, selectors: [...selectors].sort(),
-          }}});
-          enriched.anatomy.root.tokens![binding.channel] = '{' + tokenPath + '}';
-          return {...base, tokenPath};
-        });
-        if (named.size) tokens.source = {css: Object.fromEntries(named)};
+        const bindings = observeReactSourceBindings(root, enriched.anatomy.root, tokens, styleOrigin, instance.roots[0].path);
+        result.sourceBindings = bindings.sourceBindings;
+        for (const binding of bindings.sourceBindings) if (binding.tokenPath)
+          enriched.anatomy.root.tokens![binding.channel] = '{' + binding.tokenPath + '}';
+        if (bindings.tokens.source) tokens.source = bindings.tokens.source;
         result.limitations.push('source-variable-bindings-current-case-only', 'source-variable-modes-and-aliases-not-assembled');
       }
       const errors: string[] = [];

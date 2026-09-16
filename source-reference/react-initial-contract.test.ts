@@ -51,6 +51,25 @@ test('complete typed initial domains preserve omission and conditional anatomy; 
   assert.deepEqual(prop.type, { enum: ['boolean-false', 'boolean-true', 'mixed'] });
   assert.ok(result.compiled!.receipts.some(r => r.startsWith('optional-adornment-omission-preserved:')));
   assert.deepEqual(run(), result);
+  const bound = structuredClone(snapshots);
+  for (const snapshot of Object.values(bound)) {
+    const variable = snapshot.ownership.components[0].props.value === true ? '--Accent' : '--accent';
+    snapshot.tree.style[variable] = 'rgb(255, 255, 255)';
+    snapshot.treeSha256 = evidenceSha(JSON.stringify(snapshot.tree));
+    snapshot.fonts.treeRevision = snapshot.svg.treeRevision = revisionOf(snapshot.tree);
+    snapshot.styleOrigin.roots[0].channels = [{ channel: 'background-color', status: 'direct-variable', variable,
+      rawValue: 'rgb(255, 255, 255)', computedValue: 'rgb(255, 255, 255)', selectors: ['.surface'] }];
+  }
+  const boundObservation = { ...observation, rows: rows.map(row => ({ ...row, treeSha256: bound[row.id].treeSha256 })) };
+  const identities = run(boundObservation, bound);
+  assert.equal(identities.status, 'compiled-draft', identities.problems.join('\n'));
+  const upper = 'source/css/v' + Buffer.from('--Accent').toString('hex'), lower = 'source/css/v' + Buffer.from('--accent').toString('hex');
+  assert.notEqual(upper, lower);
+  for (const variant of identities.compiled!.component!.variants)
+    assert.equal(variant.spec.fill, variant.name.includes('boolean-true') ? upper : lower, 'equal colors retain distinct, case-sensitive source identities');
+  const mismatchedBinding = structuredClone(bound);
+  mismatchedBinding['0'].styleOrigin.roots[0].channels[0].rawValue = 'rgb(0, 0, 0)';
+  assert.equal(run(boundObservation, mismatchedBinding).status, 'refused');
   assert.equal(run({ ...observation, rows: rows.slice(1) }).status, 'refused');
   for (const mutate of [
     (s: typeof snapshots) => { s['0'].tree.style.width = '18px'; },

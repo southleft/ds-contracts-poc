@@ -574,7 +574,7 @@ function verifyReadback(
                 text: "TEXT",
                 svg: "FRAME",
               } as Record<string, string>
-            )[spec.type];
+            )[spec.type] ?? (spec.type === 'shape' ? spec.shape?.kind === 'rect' ? 'RECTANGLE' : spec.shape?.kind === 'ellipse' ? 'ELLIPSE' : undefined : undefined);
     if (!expectedType || n.type !== expectedType)
       issue("native-source-observation-node-type", n);
     if (!same(v.explicitVariableModes, mode))
@@ -697,7 +697,31 @@ function verifyReadback(
         !numeric(v.height, spec.iconSize!)
       )
         issue("native-source-observation-svg-size", n);
+      if (isContractDraft(input)) {
+        const descend = (row: Record<string, any>) => {
+          for (const id of row.childIds) {
+            const child = nodes.get(id);
+            if (!child || checked.has(id) || !same(meta(child, 'nativeContractPart'), spec.nativeContractPart)) {
+              issue('native-contract-observation-svg-descendant', child); continue;
+            }
+            checked.add(id);
+            if (spec.svgPaintVar) for (const field of ['fills', 'strokes']) for (const p of child.values[field] ?? [])
+              if (p.visible !== false && p.type === 'SOLID' &&
+                  !same(p.boundVariables?.color, { type: 'VARIABLE_ALIAS', id: variableByName.get(spec.svgPaintVar) }))
+                issue('native-contract-observation-svg-paint', child);
+            if (child.values.reactions?.length) issue('native-contract-observation-svg-reactions', child);
+            descend(child);
+          }
+        };
+        descend(n);
+      }
       return; // SVG descendants are inventoried/owned; path equivalence requires visual/vector verification.
+    }
+    if (spec.type === 'shape') {
+      if (!numeric(v.width, spec.shape!.width) || !numeric(v.height, spec.shape!.height))
+        issue('native-contract-observation-shape-size', n);
+      if (spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' || !numeric(v.x, spec.absolute.left!) || !numeric(v.y, spec.absolute.top!)))
+        issue('native-contract-observation-shape-position', n);
     }
     if (spec.type === "slot") {
       if (
