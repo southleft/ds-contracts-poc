@@ -42,6 +42,8 @@ Fresh captures distinguish a narrow supported pattern of lifecycle-generated IDs
 
 The next stateful step is to carry Checkbox anatomy, checked/disabled state and content through candidate preparation and native generation. The current candidate adapter is still Button-specific. Checkbox interaction behavior and the source's mixed-state accessibility remain unqualified.
 
+The source reader now retains TypeScript return casts and authored static-HTML input/label syntax. This is an internal prerequisite: interpolated static values and registered field-note tag names remain explicit blockers to topology matching. It does not enable a new Checkbox generation action.
+
 ### Why integration is taking time
 
 The repository has accumulated readers, emitters and component-specific proofs with different boundaries. Completing the product requires them to share component identity, token meaning, content APIs and reliable execution state. Visual similarity alone cannot establish those properties.

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
+import { chromium } from 'playwright-core';
 import { readLitTemplateBindings, type LitAttribute, type LitExpression, type LitNode, type LitTemplateRead } from './lit-template.js';
 
 const sha = (source: string) => createHash('sha256').update(source).digest('hex');
@@ -68,6 +69,99 @@ test('lexical import aliases and namespace imports identify html/ifDefined witho
     assert.equal(expression(root(result, 'button').attributes[0]).kind, 'if-defined');
     assert.equal(result.templates[0].import.imported, 'html');
   }
+});
+
+test('erased TypeScript wrappers retain template and binding identity without granting runtime helpers semantics', () => {
+  const template = 'html`<button ?disabled=${(this.disabled as boolean)!}><slot></slot></button>`';
+  for (const expression of [`(${template}) as TemplateResult<1>`, `(${template}) satisfies TemplateResult<1>`, `(<TemplateResult<1>>(${template}))!`]) {
+    const source = wrap(`return ${expression};`);
+    const result = read(source);
+    assert.equal(result.status, 'read', JSON.stringify(result.problems));
+    assert.equal(result.templates[0].raw, template);
+    assert.equal(source.slice(result.templates[0].span.start, result.templates[0].span.end), template);
+    const fact = result.templates[0].roots[0];
+    assert.equal(fact.kind, 'element');
+    if (fact.kind === 'element') {
+      const binding = fact.attributes[0].parts[0];
+      assert.equal(binding.kind, 'expression');
+      if (binding.kind === 'expression') {
+        assert.equal(binding.expression.kind, 'property');
+        assert.equal(binding.expression.raw, '(this.disabled as boolean)!');
+      }
+    }
+  }
+  for (const expression of [`helper(${template}) as TemplateResult<1>`, `(this.changed = true, ${template}) as TemplateResult<1>`]) {
+    const result = read(wrap(`return ${expression};`));
+    assert.ok(result.problems.some(p => p.code === 'render-return-unsupported'));
+    assert.ok(!result.templates.some(t => t.role === 'returned'));
+  }
+});
+
+test('static HTML import identity retains syntax while interpolation and dynamic tags remain unverified', () => {
+  for (const module of ['lit/static-html.js', 'lit-html/static.js']) {
+    const imports = `import {html as view} from '${module}';`;
+    const literal = read(wrap('return view`<input type="checkbox">`;', imports));
+    assert.equal(literal.status, 'read');
+    assert.equal(literal.templates[0].import.module, module);
+    const interpolated = read(wrap('return view`<input .checked=${this.checked}>` as TemplateResult<1>;', imports));
+    assert.equal(interpolated.templates[0].complete, true, 'complete authored grammar is not runtime topology proof');
+    assert.ok(interpolated.problems.some(p => p.code === 'static-html-values-unverified'));
+    const dynamic = read(wrap('return view`<${this.tag}><slot></slot></${this.tag}>`;', imports));
+    assert.equal(dynamic.templates[0].complete, false);
+    assert.ok(dynamic.problems.some(p => p.code === 'dynamic-or-unsupported-tag'));
+    for (const body of ['const view = () => null; return view`<input>`;', 'return (helper(view))`<input>`;'])
+      assert.ok(!read(wrap(body, imports)).templates.some(t => t.role === 'returned'));
+  }
+  const wrong = read(wrap('return html`<input>`;', "import {html} from './static-html.js';"));
+  assert.ok(!wrong.templates.some(t => t.role === 'returned'));
+});
+
+test('label/input authored nesting matches the native HTML parser without claiming label behavior', async () => {
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage();
+    for (const html of [
+      '<div><input id="field" type="checkbox"><label for="field"><slot></slot></label></div>',
+      '<label><span><input type="checkbox"></span><slot></slot></label>',
+      '<label><label><input></label></label>',
+    ]) {
+      const result = read(wrap('return html`' + html + '`;'));
+      assert.equal(result.status, 'read', JSON.stringify(result.problems));
+      const authored = (nodes: LitNode[]): unknown[] => nodes.filter(n => n.kind === 'element').map(n => {
+        assert.equal(n.kind, 'element');
+        return n.kind === 'element' ? { tag: n.tag, children: authored(n.children) } : null;
+      });
+      await page.setContent(html);
+      const native = await page.evaluate(`(() => {
+        function walk(parent) {
+          return [...parent.children].map(n => ({ tag: n.localName, children: walk(n) }));
+        }
+        return walk(document.body);
+      })()`);
+      assert.deepEqual(authored(result.templates[0].roots), native);
+    }
+  } finally { await browser.close(); }
+});
+
+test('pinned Checkbox source exposes input and label syntax while registered field-note tags stay refused', () => {
+  const fixture = JSON.parse(readFileSync(new URL('../fixtures/lit-template/altitude-checkbox.json', import.meta.url), 'utf8'));
+  assert.equal(sha(fixture.source), fixture.sourceSha256);
+  assert.equal(fixture.sourceRevision, '0639eccd15bfedc4fa9713d9545a64cef2c0f0a5');
+  const result = readLitTemplateBindings(fixture);
+  assert.equal(result.status, 'partial');
+  assert.equal(result.templates.length, 5);
+  const returned = result.templates.filter(t => t.role === 'returned');
+  assert.equal(returned.length, 1);
+  assert.equal(returned[0].complete, true);
+  assert.equal(returned[0].import.module, 'lit/static-html.js');
+  const input = root(result, 'input'), label = root(result, 'label');
+  assert.equal(input.attributes.find(a => a.name === 'checked')!.channel, 'property');
+  assert.equal(input.attributes.find(a => a.name === 'disabled')!.channel, 'boolean-attribute');
+  assert.equal(expression(label.attributes.find(a => a.name === 'for')!).kind, 'property');
+  assert.ok(result.problems.some(p => p.code === 'static-html-values-unverified'));
+  assert.equal(result.templates.filter(t => !t.complete).length, 2);
+  assert.equal(result.problems.filter(p => p.code === 'dynamic-or-unsupported-tag').length, 2);
+  assert.ok(!result.problems.some(p => p.code === 'returned-template-missing'));
 });
 
 test('lookalike local, wrong-module and shadowed directive identities are not granted import semantics', () => {
