@@ -7,11 +7,13 @@
 
 **Connect your component library in code and your design library in Figma through a shared, machine-readable contract.**
 
-Start with either library. Describe its supported structure, properties, tokens and composition in a contract, then generate the other surface. When both exist, compare changes against their shared baseline and repair differences under your team's ownership policy.
+Start with a React library or a Figma library. Read its supported structure, properties, tokens and composition into a contract, then generate the other surface. When both exist, compare changes against their shared baseline and repair differences under your team's ownership policy.
+
+**V1 focuses on React ↔ contracts ↔ Figma.** Lit and Web Components integration is paused for a planned V1.1 follow-up. The shared contract remains framework-neutral; advanced composition remains in the V1 scope.
 
 **In active development; v1 is not complete.** The engines and local inspection tools can be evaluated today. The complete application journeys below are still being integrated and verified. [Current status, plan and success criteria →](docs/CURRENT.md)
 
-![Three intended workflows: code to contract to editable Figma; Figma to contract to reusable code; changes on either side through comparison, authorized repair and independent verification.](docs/assets/product-loop.svg)
+![V1 workflows: React to contract to editable Figma; Figma to contract to reusable React; changes on either side through comparison, authorized repair and independent verification.](docs/assets/product-loop.svg)
 
 **New here? [Start with your library: installation and the three user journeys](docs/USER-JOURNEYS.md).**
 
@@ -19,11 +21,21 @@ Start with either library. Describe its supported structure, properties, tokens 
 
 | Start with | Intended workflow | Result to verify |
 | --- | --- | --- |
-| **A code library** | Observe the original components and their states → derive a contract → generate native Figma component sets. | Editable variants, properties, token bindings and composition that preserve the supported source semantics. |
+| **A React library** | Observe the original components and their states → derive a contract → generate native Figma component sets. | Editable variants, properties, token bindings and composition that preserve the supported source semantics. |
 | **A Figma library** | Read component sets, properties, variables and nested instances → derive a contract → generate a reusable code library. | Installable React components with usable content APIs, variants, tokens and explicitly supported behavior. |
 | **Both libraries** | Compare fresh observations with the shared contract → resolve changes under an ownership policy → apply and verify repairs. | Supported changes carried in either direction; conflicts reported; repeating a verified operation makes no changes. |
 
 These are the product's success criteria. Current coverage and unfinished work are listed in the [status report](docs/CURRENT.md#where-we-are).
+
+## How it works without AI
+
+**Read → describe → generate → verify.** Readers extract supported facts from source code or native Figma data. The contract records what each component means: its parts, layout, tokens, properties, content and references to other components. Deterministic generators use that contract to produce React code or editable Figma nodes. Independent checks then compare the actual result with the original.
+
+The approach is a compiler built from reusable rules. A table can combine rows, cells, selection controls and menus through the same layout, property and composition rules used elsewhere. We test those rules, their interactions and previously unseen supported compositions; we cannot enumerate every possible component arrangement.
+
+There are limits to what either input says. Arbitrary React logic cannot be recovered from a screenshot, and a drawn sort indicator does not specify a sorting algorithm. Existing code behavior must be preserved within a verified boundary; design-only behavior needs an explicit, supported implementation. Missing or unsupported information must be reported, never guessed. React-first does not mean every React syntax or styling system is supported.
+
+AI may help explain a refusal or draft a proposal, but it is optional. **No AI is required in the conversion path.** The same accepted inputs and generator version must produce the same output. These are the architecture and acceptance rules; the complete application journeys remain unfinished.
 
 ## Built around composition
 
@@ -36,7 +48,8 @@ There is existing table and other composed-component implementation evidence in 
 ## What you can use today
 
 - **Explore contracts and deterministic generation.** The local playground runs the checked-out engine. Supported contracts can produce code and native Figma writer programs.
-- **Inspect original source evidence.** The local `/sources` workflow captures and checks a configured source library, including styling, source identity and bounded API/content observations. Its current source candidate remains unaccepted.
+- **Try React source import.** The code-import view accepts static TSX/CSS experiments and reports supported facts and limitations. It is not yet a general repository import or a verified React-to-Figma journey.
+- **Inspect existing source evidence.** The local `/sources` workflow uses a configured Lit library. It remains available for existing work, but its candidate is unaccepted and its integration is paused for V1.1. It is not the React onboarding path.
 - **Evaluate existing import and generation paths.** CLI and plugin workflows expose proposals and named limitations. They require setup and review; they do not yet deliver the full automatic journeys above.
 
 **Still unfinished:** application-driven code-to-Figma conversion with independent native verification, a qualified design-only reusable-library journey, and reliable two-way repair with recovery and rollback. A matching screenshot, passing engine test or historical component demo does not establish those outcomes.
@@ -51,7 +64,7 @@ npm run prep:schema
 npm run playground
 ```
 
-Open [the local playground](http://localhost:5181). Read `/system` for the current plan; `/sources` requires the configured local source library and its dependencies. Source capture is a local workflow.
+Open [the local start guide](http://localhost:5181/start), then choose code import for a React experiment. Read `/system` for the current plan. The paused Lit `/sources` workflow requires its configured local library and dependencies.
 
 For other development commands, worker setup and validation gates, see [CONTRIBUTING.md](CONTRIBUTING.md). For the existing contract-first walkthrough, see [Getting Started](docs/00-getting-started.md).
 
