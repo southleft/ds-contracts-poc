@@ -1,4 +1,5 @@
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
+import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
  * Contract → Figma sync-script text — the PURE core of scripts/generate-figma.ts.
  *
@@ -66,7 +67,7 @@ import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js'
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
-import { canonicalJson } from './contract-provenance.js';
+import { canonicalJson, revisionOf } from './contract-provenance.js';
 import {
   resolveNativeSourceProjection,
   type NativeSourcePartIdentity,
@@ -125,6 +126,7 @@ export interface NodeSpec {
   name: string;
   /** Private compile-only source identity; never inferred from a layer name. */
   nativeSourcePart?: NativeSourcePartIdentity;
+  nativeContractPart?: NativeContractPartIdentity;
   nativeSourceSample?: NativeSourceSampleIdentity;
   /** Qualified empty-main whole-wrapper state, never a public component prop. */
   nativeSourceVisible?: false;
@@ -613,6 +615,7 @@ export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxG
 }
 
 export interface ComponentData {
+  nativeContractDraft?: { revision: string; acceptedContract: null };
   /** Unaccepted inspection output. The writer refuses this until an exact
    * native token and operation context has a separately qualified path. */
   nativeSourceCandidate?: {
@@ -7307,8 +7310,8 @@ function buildComponentScript(
  * not a supported writer boundary; callers must compile their Contracts. */
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
   for (const data of datas) {
-    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') ||
-        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
+    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') || Object.hasOwn(data, 'nativeContractDraft') ||
+        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeContractPart') || Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
       throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
     }
     // Raw or mutated ComponentData cannot provide a route around guarded
@@ -7361,6 +7364,45 @@ function buildNativeSourceComponentScript(
   return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped empty native source mains.',
     preamble: '', nativeSource: true, nativeComparisons: !!comparisons, nativeSampleSpecs: prepared.sampleSpecs,
+  }));
+}
+
+/** Host inspection path for a normal Contract draft. This deliberately does not
+ * synthesize the paused retained-runtime candidate's template/binding identity.
+ * Recompile on every call; annotations and serialized data are not authority. */
+function compileNativeContractDraft(
+  contract: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+) {
+  const errors: string[] = [];
+  validateContract(contract, byId, errors, input.icons);
+  if (errors.length) throw Error('NATIVE_CONTRACT_DRAFT_INVALID: ' + errors.join('; '));
+  const data = compileComponentData(contract, byId);
+  if (compiledData.get(data) !== canonicalJson(data)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+  // Current observed React drafts carry one exact token tree. Do not silently
+  // claim a theme/brand overlay belongs to the independently observed variables.
+  if (Object.keys(input.tokens.semantic).length || Object.keys(input.tokens.light).length ||
+      Object.keys(input.tokens.dark).length || Object.values(input.tokens.brands).some(tree => Object.keys(tree).length))
+    throw Error('NATIVE_CONTRACT_DRAFT_TOKEN_OVERLAY_UNQUALIFIED');
+  return prepareNativeContractDraft(contract, data, source, revisionOf(input.tokens.primitives), {
+    mode: input.mode ?? 'light', brand: input.brand ?? 'default',
+  });
+}
+
+function buildNativeContractDraftScript(
+  contract: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+  context: NativeSourceWriteContext,
+): string {
+  if (context.comparisons) throw Error('NATIVE_CONTRACT_DRAFT_COMPARISON_MAPPING_REQUIRED');
+  const draft = compileNativeContractDraft(contract, byId, source);
+  const prepared = prepareNativeSourceWrite(draft.projection, context, draft.boundNames);
+  const scoped = { ...draft.component, contractId: prepared.descriptor.machineId, anchorKey: null };
+  return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
+    header: '// Shared renderer: operation-scoped unaccepted Contract draft.',
+    preamble: '', nativeSource: true,
   }));
 }
 
@@ -8930,6 +8972,8 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     buildComponentScript,
     buildBatchScript,
     buildNativeSourceComponentScript,
+    compileNativeContractDraft,
+    buildNativeContractDraftScript,
     /** One token ref → its resolved literal, or a throw when the ref does not
      *  resolve. Exposed so a SHELL can grade a contract against this engine's
      *  own inventory instead of building a second, drifting resolver. */
