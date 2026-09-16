@@ -27,7 +27,8 @@ export interface ReactCompositionReview {
   denominator: number;
   matched: number;
   rows: Array<{ instanceId: string; exportName: string; module: string; sourcePaths: string[];
-    status: 'matched' | 'unresolved'; problems: string[]; operationId?: string; variantName?: string }>;
+    status: 'matched' | 'unresolved'; problems: string[]; operationId?: string; variantName?: string;
+    canPrepareMain?: boolean; preparationProblem?: string }>;
   problems: string[];
   inputRevision: string;
 }

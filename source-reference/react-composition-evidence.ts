@@ -3,7 +3,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { evidenceSha } from './react-validation-evidence.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
-import { readReactNativeContentEvidence } from './react-native-evidence.js';
+import { readReactNativeContentEvidence, readReactNativeEvidence } from './react-native-evidence.js';
+import { deriveReactChildRoot } from './react-child-root.js';
 import { compileObservedContent } from './observed-content.js';
 import { matchReactComposition, type ReactCompositionMain } from './react-composition.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
@@ -39,10 +40,24 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     [...new Set(boundaries)].sort());
   const mains: ReactCompositionMain[] = [];
   const sources = row.ownership.components.filter(c => !c.roots.includes('')).map(c => JSON.stringify(c.source));
-  for (const operation of jobs.listReact(reference.id, 'root').sort((a, b) => a.operation.id.localeCompare(b.operation.id))) {
-    if (operation.kind !== 'root' || operation.operation.id === parentId ||
+  const operations = jobs.listReact(reference.id, 'root').sort((a, b) => a.operation.id.localeCompare(b.operation.id));
+  for (const operation of operations) {
+    if (!['root', 'nested'].includes(operation.kind) || operation.operation.id === parentId ||
         operation.ownershipId !== request.ownership.id || operation.operation.phase !== 'component-structure-observed' || !operation.operation.sourceCurrent) continue;
     const candidate = report.rows.find(r => r.id === operation.caseId);
+    if (operation.kind === 'nested') {
+      const observed = jobs.verifiedReactObservation(operation.operation.id);
+      if (observed.request.ownership.sha256 !== request.ownership.sha256 || observed.request.inventorySha256 !== request.inventorySha256)
+        throw Error('react-composition-candidate-archive-changed');
+      const selected = readReactNativeEvidence(repo, reference, observed.request).matrix;
+      if (selected.qualification !== 'observed-child-root-draft' || !sources.includes(JSON.stringify(selected.draft.source))) continue;
+      const captured = JSON.parse(readFileSync(path.join(dir, operation.caseId, 'source-tree.json'), 'utf8'));
+      const instance = candidate!.ownership!.components.find(c => c.id === selected.instanceId)!;
+      const sourceRoot = flatten(captured.tree).find(n => n.path === instance.roots[0])!;
+      mains.push({ source: selected.draft.source, heldProps: selected.heldProps, contract: selected.draft.contract!,
+        styles: { [selected.draft.contract!.name]: [sourceRoot.node.style] }, input: observed.input, receipt: observed.receipt });
+      continue;
+    }
     if (!candidate?.propertyMatrix || !candidate.rootMatrix?.draft?.contract ||
         !sources.includes(JSON.stringify(candidate.propertyMatrix.source))) continue;
     const observed = jobs.verifiedReactObservation(operation.operation.id);
@@ -64,5 +79,14 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     mains.push({ source: matrix.source, heldProps: matrix.heldProps, styles,
       contract: candidate.rootMatrix.draft.contract, input: observed.input, receipt: observed.receipt });
   }
-  return { ...matchReactComposition(program, row.ownership, original.captured.tree, content, mains), content };
+  const result = matchReactComposition(program, row.ownership, original.captured.tree, content, mains);
+  const origin = JSON.parse(readFileSync(path.join(dir, request.caseId, 'style-origin.json'), 'utf8'));
+  for (const child of result.review.rows) {
+    child.canPrepareMain = false;
+    if (!child.problems.includes('react-composition-main-not-verified') || operations.some(op =>
+      op.kind === 'nested' && op.caseId === request.caseId && op.ownershipId === request.ownership.id && op.nestedInstanceId === child.instanceId)) continue;
+    try { deriveReactChildRoot(program, row.ownership, original.captured.tree, origin, child.instanceId); child.canPrepareMain = true; }
+    catch (error) { child.preparationProblem = error instanceof Error ? error.message : String(error); }
+  }
+  return { ...result, content };
 }

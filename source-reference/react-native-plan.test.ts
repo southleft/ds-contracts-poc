@@ -206,20 +206,21 @@ test('wrong file and interrupted creation remain distinct from a safe repeat', a
   assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
 });
 
-for (const kind of ['root', 'initial'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
+for (const kind of ['root', 'initial', 'nested'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-native-journal-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const { input } = inputFixture();
   const request: ReactNativeRequest = { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64),
     ownership: { id: input.operation.id, sha256: 'b'.repeat(64) }, inventorySha256: 'c'.repeat(64),
     caseId: 'button-default', matrixRevision: revisionOf(input.matrix) };
+  if (kind === 'nested') { request.version = 2; request.selection = { instanceId: 'instance-4' }; }
   const initialRequest: ReactInitialNativeRequest = { version: 1, kind: 'react-initial-draft', anchor: request, caseId: 'button-default',
     observation: { id: '20000000-0000-4000-8000-000000000099', reportSha256: 'd'.repeat(64), inventorySha256: 'e'.repeat(64) } };
   const draft: ReturnType<typeof compileReactInitialContract> = { version: 1, qualification: 'observed-initial-state-contract',
     acceptedContract: null, nativeQualification: 'unqualified', status: 'compiled-draft', problems: [], limitations: [], sourceBindings: [], nativeVariants: [],
     compiled: { contract: input.matrix.draft!.contract!, tokens: input.matrix.draft!.tokens!, component: input.matrix.draft!.native!, assets: [], problems: [], receipts: [], residuals: [] } };
   const operationRequest = kind === 'initial' ? initialRequest : request;
-  assert.equal(isReactInitialNativeRequest(initialRequest), true);
+  assert.equal(isReactInitialNativeRequest(initialRequest), kind !== 'nested');
   assert.equal(isReactInitialNativeRequest({ ...initialRequest, executable: 'untrusted' }), false);
   assert.equal(isReactInitialNativeRequest({ ...initialRequest, observation: { ...initialRequest.observation, id: '../outside' } }), false);
   let current = true;

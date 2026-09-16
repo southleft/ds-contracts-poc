@@ -8,7 +8,7 @@ import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 
 interface Operation {
-  kind: 'root' | 'comparison' | 'initial';
+  kind: 'root' | 'comparison' | 'initial' | 'nested';
   initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; before: number; after: number }>;
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
@@ -71,7 +71,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison', initial = row.kind === 'initial';
       const savedComparison = rows.find(r => r.parentOperationId === id);
       return <details key={id} open={row.caseId === selectedCase}>
-        <summary>{row.caseId} {initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'} · {op.phase.replaceAll('-', ' ')}</summary>
+        <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
+        {row.kind === 'nested' && <p>This main covers the captured child inputs. Other properties, behavior and visual fidelity remain unqualified.</p>}
         <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
         {initial && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
@@ -131,7 +132,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           <table><thead><tr><th>Child export</th><th>Source location</th><th>Native mapping</th></tr></thead>
             <tbody>{row.composition.rows.map(child => <tr key={child.instanceId}>
               <td>{child.exportName}</td><td>{child.sourcePaths.join(', ')}</td>
-              <td>{child.status === 'matched' ? `Verified main · ${child.variantName}` : child.problems.map(compositionProblem).join(' ')}</td>
+              <td>{child.status === 'matched' ? `Verified main · ${child.variantName}` : child.problems.map(compositionProblem).join(' ')}
+                {child.preparationProblem && <p>The child’s root layout or content cannot yet be represented as an editable native main.</p>}
+                {child.canPrepareMain && <button type="button" disabled={busy || !op.sourceCurrent}
+                  onClick={() => void action(`native-operation/${id}/child/${child.instanceId}`)}>Prepare {child.exportName} main</button>}
+              </td>
             </tr>)}</tbody></table>
         </section>}
         {row.content && <section aria-label="Caller-content preparation">

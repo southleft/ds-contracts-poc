@@ -125,6 +125,7 @@ export interface NativeOperationResult {
 }
 export interface NativeOperationSnapshot {
   id: string;
+  componentName?: string;
   operation: "source-native-inspection";
   phase:
     | "prepared"
@@ -1053,6 +1054,7 @@ export function createNativeOperationJobs(
       id: loaded.header.id,
       operation: "source-native-inspection",
       phase: loaded.state.phase,
+      ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName } : {}),
       ...(loaded.state.pending
         ? {
             pendingPhase: loaded.state.pending.phase,
@@ -1481,7 +1483,8 @@ export function createNativeOperationJobs(
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
         // get() verifies the saved journal and separately reports source freshness.
-        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : 'root' as const,
+        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version === 2 ? 'nested' as const : 'root' as const,
+          ...(request.version === 2 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
           ...(comparison ? { parentOperationId: comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];

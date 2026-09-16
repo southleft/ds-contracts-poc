@@ -14,7 +14,7 @@ export function isReactComparisonRequest(v: unknown): v is ReactComparisonReques
   return !!r && ((r.version === 1 && Object.keys(r).sort().join(',') === 'content,kind,parentOperationId,root,version') ||
     (r.version === 2 && Object.keys(r).sort().join(',') === 'composition,content,kind,parentOperationId,root,version' &&
       !!r.composition && Object.keys(r.composition).join(',') === 'revision' && /^sha256:[a-f0-9]{64}$/.test(r.composition.revision))) && r.kind === 'react-content-comparison' && typeof r.parentOperationId === 'string' && uuid.test(r.parentOperationId) &&
-    isReactNativeRequest(r.root) && !!r.content && Object.keys(r.content).sort().join(',') === 'id,inventorySha256,reportSha256' &&
+    isReactNativeRequest(r.root) && r.root.version === 1 && !!r.content && Object.keys(r.content).sort().join(',') === 'id,inventorySha256,reportSha256' &&
     typeof r.content.id === 'string' && uuid.test(r.content.id) && typeof r.content.inventorySha256 === 'string' && /^[a-f0-9]{64}$/.test(r.content.inventorySha256) && typeof r.content.reportSha256 === 'string' && /^[a-f0-9]{64}$/.test(r.content.reportSha256);
 }
 export function reactComparisonReservation(r: ReactComparisonRequest): string {

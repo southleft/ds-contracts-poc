@@ -13,6 +13,10 @@ import type { CapturedNode } from '../extract/computed/lib.js';
 import type { TextFontEvidence } from './text-fonts.js';
 import { isReactComparisonRequest, reactComparisonReservation } from './react-comparison-request.js';
 import type { ReactNativeRequest } from './react-native-request.js';
+import { isReactNativeRequest, reactNativeReservation } from './react-native-request.js';
+import { deriveReactChildRoot } from './react-child-root.js';
+import { prepareReactNativePlan } from './react-native-plan.js';
+import type { ReactStyleOrigin } from './react-style-origin.js';
 
 async function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'react-composition-'));
@@ -172,4 +176,46 @@ test('lost text-only boundaries and invalid ownership keep the child unresolved'
     assert.equal(block.status, 'refused');
     assert.ok(block.problems.some(p => p.startsWith('ordered-text-flow-unqualified')));
   } finally { rmSync(f.dir, { recursive: true, force: true }); }
+});
+
+test('nested main projection preserves a real source slot and refuses unsupported or substituted children', async () => {
+  const f = await fixture();
+  try {
+    const origin: ReactStyleOrigin = { version: 1, roots: [{ path: '', tag: 'section', channels: [] },
+      { path: '0', tag: 'button', channels: [] }] };
+    const before = structuredClone({ program: f.program, ownership: f.ownership, tree: f.tree, origin });
+    const selected = deriveReactChildRoot(f.program, f.ownership, f.tree, origin, 'child');
+    assert.equal(selected.qualification, 'observed-child-root-draft');
+    assert.equal(selected.draft.contract?.name, 'Child');
+    assert.equal(selected.draft.contract?.anatomy.root.slot?.name, 'children');
+    assert.equal(selected.draft.contract?.anatomy.root.parts, undefined, 'sample children must not become reusable anatomy');
+    assert.deepEqual(selected.heldProps, f.ownership.components[1].props);
+    const plan = prepareReactNativePlan({ matrix: selected,
+      source: f.main.input.projection.source, operation: { ...f.main.input.operation, id: '10000000-0000-4000-8000-000000000088' } });
+    assert.equal(plan.plan.component.setName, 'Child');
+    assert.equal(plan.plan.component.variants.length, 1);
+    assert.equal(plan.plan.acceptedContract, null);
+    assert.deepEqual({ program: f.program, ownership: f.ownership, tree: f.tree, origin }, before);
+    for (const id of ['box', 'unknown', '../outside'])
+      assert.throws(() => deriveReactChildRoot(f.program, f.ownership, f.tree, origin, id), /nested-source-required/);
+    const changed = structuredClone(f.ownership); changed.components[1].source.sourceSha256 = 'f'.repeat(64);
+    assert.throws(() => deriveReactChildRoot(f.program, changed, f.tree, origin, 'child'), /projection-unavailable/);
+    const blocked = structuredClone(f.tree); if (blocked.nodes[0].t !== 'el') throw Error('missing child');
+    blocked.nodes[0].el.style.display = 'grid';
+    assert.throws(() => deriveReactChildRoot(f.program, f.ownership, blocked, origin, 'child'), /projection-unavailable/);
+  } finally { rmSync(f.dir, { recursive: true, force: true }); }
+});
+
+test('nested requests have a separate stable reservation and cannot smuggle mappings into legacy requests', () => {
+  const root: ReactNativeRequest = { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64),
+    ownership: { id: '10000000-0000-4000-8000-000000000001', sha256: 'b'.repeat(64) },
+    inventorySha256: 'c'.repeat(64), caseId: 'card-composed', matrixRevision: revisionOf('matrix') };
+  const child: ReactNativeRequest = { ...root, version: 2, selection: { instanceId: 'instance-4' } };
+  assert.ok(isReactNativeRequest(root)); assert.ok(isReactNativeRequest(child));
+  assert.notEqual(reactNativeReservation(root), reactNativeReservation(child));
+  assert.equal(reactNativeReservation(child), reactNativeReservation({ ...child, matrixRevision: revisionOf('updated') }));
+  assert.notEqual(reactNativeReservation(child), reactNativeReservation({ ...child, selection: { instanceId: 'instance-6' } }));
+  for (const invalid of [{ ...root, selection: child.selection }, { ...child, selection: {} },
+    { ...child, selection: { instanceId: '../outside' } }, { ...child, selection: { instanceId: 'instance-4', nodeId: '1:2' } },
+    { ...child, path: [0] }, { ...child, version: 3 }]) assert.equal(isReactNativeRequest(invalid), false);
 });

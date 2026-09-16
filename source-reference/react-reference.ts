@@ -9,7 +9,7 @@ import { createReactInitialInspectionStore } from './react-initial-inspection.js
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
-import { readReactNativeEvidence, readReactNativeContentEvidence, selectReactNativeRequest } from './react-native-evidence.js';
+import { readReactNativeEvidence, readReactNativeContentEvidence, selectReactNativeRequest, selectReactChildRequest } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
 import type { createNativeOperationTransport } from './native-operation-transport.js';
@@ -257,12 +257,13 @@ export function createReactReferenceService(
     }
     const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
+    const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
     const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan)$/.exec(route);
     const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
-    if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage) {
+    if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute) {
       try {
-        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? updateAction ?? updateImage)![1]) throw Error('react-native-reference-unavailable');
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? updateAction ?? updateImage ?? childRoute)![1]) throw Error('react-native-reference-unavailable');
         const { jobs, transport } = native();
         if (updateImage) {
           const { updateJobs }=native();
@@ -275,7 +276,16 @@ export function createReactReferenceService(
         if (req.method === 'POST') {
           if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
             throw Error('react-native-body-refused');
-          if (updateAction) {
+          if (childRoute) {
+            const parent = jobs.reactRequest(childRoute[2]);
+            if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
+            const review = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs).review;
+            const existing = jobs.listReact(reference.id, 'root').some(row => row.kind === 'nested' &&
+              row.caseId === parent.caseId && row.ownershipId === parent.ownership.id && row.nestedInstanceId === childRoute[3]);
+            if (!existing && !review.rows.find(r => r.instanceId === childRoute[3])?.canPrepareMain)
+              throw Error('react-child-root-preparation-unavailable');
+            jobs.prepare(selectReactChildRequest(repoRoot, reference, parent, childRoute[3]));
+          } else if (updateAction) {
             const { updateJobs, updateTransport }=native();
             const [, , parentId, proposalId, action]=updateAction;
             if(!updateJobs || !updateTransport || jobs.reactIdentity(parentId).referenceId!==reference.id) throw Error('react-update-unavailable');

@@ -7,7 +7,7 @@ export interface ReactInitialNativeRequest {
 export function isReactInitialNativeRequest(value: unknown): value is ReactInitialNativeRequest {
   const r = value as ReactInitialNativeRequest;
   return !!r && Object.keys(r).sort().join(',') === 'anchor,caseId,kind,observation,version' &&
-    r.version === 1 && r.kind === 'react-initial-draft' && isReactNativeRequest(r.anchor) &&
+    r.version === 1 && r.kind === 'react-initial-draft' && isReactNativeRequest(r.anchor) && r.anchor.version === 1 &&
     typeof r.caseId === 'string' && /^[a-z][a-z-]{0,79}$/.test(r.caseId) && !!r.observation &&
     Object.keys(r.observation).sort().join(',') === 'id,inventorySha256,reportSha256' &&
     typeof r.observation.id === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(r.observation.id) &&
