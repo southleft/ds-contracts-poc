@@ -667,6 +667,8 @@ export interface DumpSet {
   /** Shared plugin-data omission declaration. Kept unknown deliberately:
    * malformed metadata must reach the proposal refusal, not disappear. */
   unsetVariantAxes?: unknown;
+  /** Typed code API mappings; malformed metadata remains visible to readers. */
+  codeValueAxes?: unknown;
   statePreviewAxis?: {
     axis: string;
     default: string;

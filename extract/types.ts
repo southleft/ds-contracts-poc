@@ -27,6 +27,8 @@ export interface ExtractedProp {
   kind: PropKind;
   /** enum members, for kind 'enum' */
   values?: string[];
+  /** Canonical finite options mapped to their exact source-code values. */
+  codeValues?: Record<string, string | number | boolean | null>;
   default?: string | number | boolean;
   optional: boolean;
   description?: string;

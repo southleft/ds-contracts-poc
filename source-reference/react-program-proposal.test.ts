@@ -70,14 +70,23 @@ test("installed API proposals preserve booleans, omission and declared defaults 
         .unsetValue,
       undefined,
     );
-    for (const name of ["mixed", "nullable", "literal"])
-      assert.equal(
-        toggle.props.some((p) => p.name === name),
-        false,
+    for (const [name, expected] of [
+      ["mixed", [false, true, "indeterminate"]],
+      ["nullable", [null, "one", "two"]],
+      ["literal", [true]],
+    ] as const) {
+      const prop = toggle.props.find((p) => p.name === name)!;
+      assert.ok(prop);
+      assert.deepEqual(
+        new Set(Object.values(prop.bindings.code.values!)),
+        new Set<string | number | boolean | null>(expected),
       );
+      assert.equal(prop.bindings.figma.unsetValue, "(unset)");
+      assert.equal(Object.hasOwn(prop, "default"), false);
+    }
     assert.deepEqual(
       proposal.components[0].unsupported.map((p) => p.name),
-      ["callback", "literal", "mixed", "nullable"],
+      ["callback"],
     );
     assert.ok(toggle.events?.some((e) => e.bindings.code.prop === "onChange"));
     const box = ContractSchema.parse(
@@ -120,7 +129,10 @@ test("changed source, missing modules, duplicate names and compiler failures can
       [program, [input, input], "duplicate-component-name"],
       [{ ...program, problems: ["TS2307"] }, [input], "TS2307"],
     ] as const) {
-      const proposal = proposeReactSourceProgram({ ...p, problems: [...p.problems] }, [...inputs]);
+      const proposal = proposeReactSourceProgram(
+        { ...p, problems: [...p.problems] },
+        [...inputs],
+      );
       assert.equal(proposal.result.proposals.length, 0);
       assert.ok(proposal.problems.some((p) => p.includes(reason)));
     }

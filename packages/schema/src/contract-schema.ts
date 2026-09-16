@@ -199,6 +199,9 @@ export const PropSchema = z
       }),
       code: z.strictObject({
         prop: z.string(),
+        /** Canonical enum option -> exact public code value. This is an
+         * explicit bijection, never a truthiness/string coercion. */
+        values: z.record(z.string(), z.union([z.string(), z.boolean(), z.number().finite(), z.null()])).optional(),
       }),
     }),
   })
@@ -222,6 +225,30 @@ export const PropSchema = z
     },
   )
   .superRefine((p, ctx) => {
+    const codeValues = p.bindings.code.values;
+    if (codeValues !== undefined) {
+      const issue = (message: string) => ctx.addIssue({ code: 'custom', path: ['bindings', 'code', 'values'], message });
+      if (typeof p.type !== 'object' || !('enum' in p.type) || p.bindings.figma.kind !== 'VARIANT') {
+        issue('code values require an enum with a VARIANT binding');
+      } else {
+        const keys = Object.keys(codeValues);
+        if (keys.length !== p.type.enum.length || !p.type.enum.every(v => Object.hasOwn(codeValues, v)))
+          issue('code values must cover exactly every canonical enum option');
+        if (p.type.enum.some(v => !/^[a-zA-Z][a-zA-Z0-9-]*$/.test(v))) issue('mapped canonical options must be safe identifiers; code values may use arbitrary strings');
+        if (!p.required && p.default === undefined && p.bindings.figma.unsetValue === undefined)
+          issue('optional mapped enums without defaults require an explicit native omission option');
+        if (p.bindings.figma.property !== p.bindings.figma.property?.trim()) issue('mapped native property must be trimmed');
+        const labels = p.type.enum.map(v => p.bindings.figma.values?.[v] ?? v);
+        if (new Set(labels).size !== labels.length || labels.some(v => !v.trim() || v !== v.trim() || /[,=\r\n]/.test(v)) || !p.bindings.figma.property?.trim() || /[,=\r\n]/.test(p.bindings.figma.property))
+          issue('mapped values require distinct unambiguous native labels and property identity');
+        if (Object.values(codeValues).some(v => Object.is(v, -0))) issue('negative zero is not a distinct supported code value');
+        const identities = Object.values(codeValues).map(v => JSON.stringify(v));
+        if (new Set(identities).size !== identities.length) issue('code values must be distinct typed scalar values');
+        if (p.default !== undefined && (typeof p.default !== 'string' || !p.type.enum.includes(p.default)))
+          issue('mapped enum default must name a canonical enum option');
+        if (!isSupportedOmittedCodeBinding(p.bindings.code.prop)) issue('unsupported mapped code prop identifier');
+      }
+    }
     const label = p.bindings.figma.unsetValue;
     if (label === undefined) return;
     const path = ['bindings', 'figma', 'unsetValue'];

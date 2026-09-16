@@ -7,6 +7,7 @@
  * Pure; imports @ds-contracts/schema only.
  */
 import {
+  PropSchema,
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
   REF_OVERRIDE_CHANNELS,
@@ -88,6 +89,11 @@ export function validateContract(
   errors: string[],
   iconAssets: Map<string, string>,
 ) {
+  for (const prop of contract.props) if (prop.bindings.code.values) {
+    const parsed = PropSchema.safeParse(prop);
+    if (!parsed.success) errors.push(`${contract.id}: CODE_VALUES_INVALID:${prop.name}: ${parsed.error.message}`);
+    if (contract.bindings.code.runtime) errors.push(`${contract.id}: CODE_VALUES_RUNTIME_UNSUPPORTED: retained-runtime typed API mappings require a verified adapter`);
+  }
   const enumNames = new Set(enumProps(contract).map((p) => p.name));
   const hasChildrenText = (dep: Contract) =>
     dep.props.some((p) => p.type === 'text' && p.bindings.code.prop === 'children');

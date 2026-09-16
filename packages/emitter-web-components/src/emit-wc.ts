@@ -1521,6 +1521,17 @@ function generateManifest(contract: Contract): string {
 // ---------------------------------------------------------------------------
 
 export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResult {
+  const checked = new Set<string>();
+  const refuseMapped = (c: Contract): void => {
+    if (checked.has(c.id)) return;
+    checked.add(c.id);
+    if (c.props.some(p => p.bindings.code.values)) throw new Error(`CODE_VALUES_WEB_COMPONENTS_UNSUPPORTED:${c.id}: typed code mappings are currently implemented for React`);
+    for (const w of walkAnatomy(c)) {
+      const ids = [...(w.part.component ? [w.part.component.id] : []), ...(w.part.slot?.defaultContent ?? []).map(i => i.id)];
+      for (const id of ids) { const dep = ctx.contracts.get(id); if (dep) refuseMapped(dep); }
+    }
+  };
+  refuseMapped(contract);
   refuseRetainedRuntime(contract, 'web-components', ctx.contracts);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);

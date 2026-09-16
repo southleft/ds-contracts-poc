@@ -40,7 +40,7 @@ const reservedProps = new Set([
 const stateProps = new Set(["disabled", "required", "readOnly"]);
 function kind(
   type: ReactTypeFact,
-): Pick<ExtractedProp, "kind" | "values"> | undefined {
+): Pick<ExtractedProp, "kind" | "values" | "codeValues"> | undefined {
   const members =
     type.kind === "union"
       ? type.members.filter((t) => t.kind !== "undefined")
@@ -72,6 +72,38 @@ function kind(
     new Set(members.map((t) => (t as { value: boolean }).value)).size === 2
   )
     return { kind: "boolean" };
+  if (
+    members.length &&
+    members.every((t) => t.kind === "literal" || t.kind === "null")
+  ) {
+    const entries: [string, string | number | boolean | null][] = [];
+    const reserved = new Set(
+      members.flatMap((t) =>
+        t.kind === "literal" && typeof t.value === "string" ? [t.value] : [],
+      ),
+    );
+    const used = new Set<string>();
+    for (const member of members) {
+      const value = member.kind === "literal" ? member.value : null;
+      const base =
+        typeof value === "string" && /^[a-zA-Z][a-zA-Z0-9-]*$/.test(value)
+          ? value
+          : value === null
+            ? "null"
+            : `${typeof value}-${String(value).replace(/[^a-zA-Z0-9-]/g, "-")}`;
+      let key = base,
+        suffix = 1;
+      while (used.has(key) || (typeof value !== "string" && reserved.has(key)))
+        key = `${base}-${suffix++}`;
+      used.add(key);
+      entries.push([key, value]);
+    }
+    return {
+      kind: "enum",
+      values: entries.map(([k]) => k),
+      codeValues: Object.fromEntries(entries),
+    };
+  }
   return undefined;
 }
 
@@ -155,7 +187,7 @@ export function proposeReactSourceProgram(
           classified?.kind === "event" && !/^on[A-Z]/.test(prop.name);
         if (
           !classified ||
-          value === null ||
+          (value === null && !classified?.codeValues) ||
           explicitUndefined ||
           unboundCallback
         ) {
@@ -185,7 +217,15 @@ export function proposeReactSourceProgram(
           ...classified,
           optional: prop.optional,
           confidence: "declared",
-          ...(value !== undefined ? { default: value } : {}),
+          ...(value !== undefined
+            ? {
+                default: classified.codeValues
+                  ? Object.keys(classified.codeValues).find((key) =>
+                      Object.is(classified.codeValues![key], value),
+                    )
+                  : (value as string | number | boolean),
+              }
+            : {}),
         });
       }
       if (component.root.kind !== "host")
