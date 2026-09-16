@@ -1,6 +1,7 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
 import { resolveNativeSlotIdentities } from "./native-slot-identity.js";
+import { NATIVE_GRID_FIELDS, NATIVE_GRID_CHILD_FIELDS, nativeGridProblems } from './native-grid-observation.js';
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
 import type { NativeSourceCandidateProjection } from "./native-source-projection.js";
@@ -237,7 +238,9 @@ async function read(page) {
     const row = { id: node.id, type: node.type, name: node.name, parentId: node.parent ? node.parent.id : null,
       childIds: node.children ? node.children.map(c => c.id) : [], values: {}, metadata: {} };
     if (typeof node.key === 'string') row.key = node.key;
-    for (const field of FIELDS) if (field in node) {
+    const fields = FIELDS.concat(node.layoutMode === 'GRID' ? ${JSON.stringify(NATIVE_GRID_FIELDS)} : [],
+      node.parent && node.parent.layoutMode === 'GRID' ? ${JSON.stringify(NATIVE_GRID_CHILD_FIELDS)} : []);
+    for (const field of fields) if (field in node) {
       const v = node[field];
       row.values[field] = typeof v === 'symbol' ? { mixed: true } : v === undefined ? null : copy(v);
     }
@@ -595,10 +598,12 @@ function verifyReadback(
     if (
       spec.layout &&
       (v.layoutMode !== spec.layout.mode ||
-        v.primaryAxisAlignItems !== spec.layout.primary ||
-        v.counterAxisAlignItems !== spec.layout.counter)
+        (spec.layout.mode !== 'GRID' && (v.primaryAxisAlignItems !== spec.layout.primary ||
+        v.counterAxisAlignItems !== spec.layout.counter)))
     )
       issue("native-source-observation-layout", n);
+    for (const problem of nativeGridProblems(spec, v, n.childIds.map((id: string) => nodes.get(id)?.values)))
+      issue('native-source-observation-grid-' + problem, n);
     if ((spec.opacity !== undefined || v.opacity !== undefined) && v.opacity !== (spec.opacity ?? 1))
       issue("native-source-observation-opacity", n);
     const bindings = {

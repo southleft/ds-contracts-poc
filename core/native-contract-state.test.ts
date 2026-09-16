@@ -9,6 +9,7 @@ import { nativeFixtureHost } from '../source-reference/native-operation-test-fix
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from './token-set.js';
 import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 import type { NativeTokenContextInput } from './native-token-context.js';
+import { nativeComparisonFixture } from './native-contract-comparison-test-fixture.js';
 
 // Native API mock evidence only. No raster or vector fidelity claims.
 async function fixture() {
@@ -104,4 +105,65 @@ test('SVG import retains every allocated descendant before a root metadata failu
   assert.ok(ids.length > 1);
   for (const id of ids) assert.equal(created.nodes.filter((n: any) => n.id === id).length, 1);
   const repeat = await f.run(f.emit()); assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
+});
+
+for (const [flow, hug] of [[false, false], [true, false], [true, true]]) test(`native grid readback checks declared tracks, gaps, ${flow ? 'flow order' : 'cells and spans'}${hug ? ' and hugging height' : ''}`, async () => {
+  const f = await nativeComparisonFixture();
+  const contract = f.contract('fixture.grid', { root: {
+    layout: { display: 'grid', rows: [{ fit: true }, hug ? { fit: true } : { fr: 1 }], columns: [{ px: 80 }, { fr: 1 }],
+      gap: { row: 8, column: 12 }, ...(flow ? { flow: 'row' } : {}) },
+    literals: { width: '300px', height: hug ? 'fit-content' : '180px' },
+    parts: Object.fromEntries(['first', 'second', 'third'].map((name, i) => [name, {
+      layout: { display: 'flex', direction: 'column' }, tokens: { width: '{size}', height: '{size}' },
+      ...(!flow ? { placement: i === 0 ? { row: 0, column: 0, columnSpan: 2, alignX: 'center' }
+        : { row: 1, column: i - 1 } } : {}),
+    }])),
+  } });
+  const byId = new Map([[contract.id, contract]]), context = await f.context('10000000-0000-4000-8000-000000000007');
+  const compiled = f.engine.compileNativeContractDraft(contract, byId, f.source);
+  const creation = await f.run(f.engine.buildNativeContractDraftScript(contract, byId, f.source, context));
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  const input: NativeContractObservationInput = { operation: context.operation, planRevision: revisionOf('grid plan'),
+    projection: compiled.projection, component: compiled.component, tokenInput: context.tokens.input,
+    tokenIdentity: context.tokens.identity, creation };
+  const read = () => f.run(emitNativeContractReadbackScript(input));
+  const receipt = await read(), verify = (value: unknown) => verifyNativeContractReadback(input, value);
+  assert.equal(verify(receipt).status, 'supported-structure-observed', JSON.stringify(verify(receipt)));
+  const grid = receipt.nodes.find((n: any) => n.values.layoutMode === 'GRID');
+  assert.deepEqual(grid.values.gridRowSizes, [{ type: 'HUG', value: 1 }, { type: hug ? 'HUG' : 'FLEX', value: 1 }]);
+  if (hug) {
+    const altered = structuredClone(receipt);
+    altered.nodes.find((n: any) => n.id === grid.id).values.layoutSizingVertical = 'FIXED';
+    assert.ok(verify(altered).problems.some(p => p.includes('grid-hug')));
+  }
+  const live = await f.figma.getNodeByIdAsync(grid.id);
+  // Change the actual native API model, then execute a fresh independent read.
+  live.gridRowGap = 9;
+  assert.ok(verify(await read()).problems.some(p => p.includes('grid-gaps')));
+  live.gridRowGap = 8;
+  live.gridColumnSizes = [{ type: 'FIXED', value: 81 }, { type: 'FLEX', value: 1 }];
+  assert.ok(verify(await read()).problems.some(p => p.includes('grid-columns')));
+  live.gridColumnSizes = [{ type: 'FIXED', value: 80 }, { type: 'FLEX', value: 1 }];
+  assert.equal(verify(await read()).status, 'supported-structure-observed');
+  for (const change of [
+    (v: any) => { v.gridRowCount++; },
+    (v: any) => { v.gridRowSizes[0] = { type: 'FIXED', value: 1 }; },
+    (v: any) => { v.gridColumnCount++; },
+    (v: any) => { v.gridColumnSizes[1].value = 2; },
+    (v: any) => { v.gridColumnGap++; },
+    (v: any) => { v.gridItemsPositioning = flow ? 'MANUAL' : 'ROW_AUTO_FLOW'; },
+    (v: any) => { delete v.gridRowSizes; },
+  ]) {
+    const altered = structuredClone(receipt); change(altered.nodes.find((n: any) => n.id === grid.id).values);
+    assert.equal(verify(altered).status, 'refused');
+  }
+  for (const field of ['gridRowAnchorIndex', 'gridColumnAnchorIndex', 'gridRowSpan', 'gridColumnSpan',
+    'gridChildHorizontalAlign', 'gridChildVerticalAlign']) {
+    const altered = structuredClone(receipt), child = altered.nodes.find((n: any) => n.id === grid.childIds[0]);
+    child.values[field] = field.includes('Align') ? 'MAX' : 99;
+    assert.ok(verify(altered).problems.some(p => p.includes('grid-child-0')), field);
+  }
+  for (const row of f.comparison.receipt.nodes!) {
+    assert.equal(Object.keys(row.values).some(key => key.startsWith('grid')), false, 'non-grid receipts retain their field vocabulary');
+  }
 });

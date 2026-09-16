@@ -8049,7 +8049,10 @@ function applyFrameSpec(node, spec) {
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
-  }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}
+  }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}${hasGrid ? `
+  // Resizing can replace HUG tracks with FLEX. Restore the declaration after
+  // all bound/literal size writes, before appending or placing any children.
+  if (l.mode === 'GRID') applyGridFrame(node, l);` : ''}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
