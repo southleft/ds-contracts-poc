@@ -498,7 +498,8 @@ export function validateContract(
         );
       }
     };
-    if ((part.declared || part.declaredStates) && (part.component || part.slot)) {
+    const rootContentBox = name === 'root' && part === contract.anatomy.root && part.slot?.name === 'children';
+    if ((part.declared || part.declaredStates) && (part.component || (part.slot && !rootContentBox))) {
       errors.push(
         `${contract.id}: part "${name}" is a ${part.component ? 'component instance' : 'slot'} — declared facts cannot restyle it (the child contract / consumer owns its styling)`,
       );
@@ -1236,4 +1237,3 @@ export function validateContract(
     }
   }
 }
-

@@ -1,4 +1,5 @@
 import { linkReactSourceAnatomy, type ReactSourceAnatomy } from './react-source-anatomy.js';
+import { projectReactRootVisual, type ReactRootVisual } from './react-root-visual.js';
 import { chromium, type Browser } from "playwright-core";
 import { randomUUID } from "node:crypto";
 import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
@@ -38,6 +39,7 @@ export interface ReactOwnershipRow {
   treeSha256?: string;
   ownership?: ReactOwnership;
   anatomy?: ReactSourceAnatomy;
+  rootVisual?: ReactRootVisual;
 }
 export interface ReactOwnershipReport {
   id: string;
@@ -104,6 +106,10 @@ export function startReactOwnership(
           "react-source-program.ts",
           "react-children.ts",
           "react-source-anatomy.ts",
+          "react-root-visual.ts",
+          "../extract/computed/fuse.ts",
+          "../core/mint-tokens.ts",
+          "../core/emit-figma-script.ts",
           "capture.ts",
           "react-reference-profiles.ts",
           "react-reference-cases.ts",
@@ -228,6 +234,7 @@ export function startReactOwnership(
           row.treeSha256 = pair[0].tree;
           row.ownership = pair[1].ownership;
           row.anatomy = linkReactSourceAnatomy(program, pair[1].ownership!, pair[0].root);
+          row.rootVisual = projectReactRootVisual(program, pair[1].ownership!, pair[0].root);
           row.matched = true;
           writeFileSync(
             path.join(rowDir, "ownership.json"),
@@ -254,7 +261,7 @@ export function startReactOwnership(
           : "react-ownership-source-changed";
       }
       if (terminal === "failed")
-        for (const row of state.rows) { row.matched = false; delete row.anatomy; }
+        for (const row of state.rows) { row.matched = false; delete row.anatomy; delete row.rootVisual; }
       state.matched = state.rows.filter((r) => r.matched).length;
       writeFileSync(
         path.join(dir, "report.json"),
@@ -283,7 +290,7 @@ export function startReactOwnership(
             problem: current
               ? "react-ownership-evidence-changed"
               : "react-ownership-source-changed",
-            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined })),
+            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined, rootVisual: undefined })),
           };
     },
     close: () => {

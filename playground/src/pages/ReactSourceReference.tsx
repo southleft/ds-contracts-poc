@@ -333,6 +333,25 @@ export function ReactSourceReference() {
                         ))}</ul>
                       </section>
                     )}
+                    {ownership.state === "complete" && row.matched && row.rootVisual && (
+                      <section aria-label={`${row.id} native root check`}>
+                        <h4>Native conversion check</h4>
+                        <p>Checks the observed root box against the native compiler. This does not create Figma components or qualify the full component.</p>
+                        {row.rootVisual.problems.length > 0 && <p>{row.rootVisual.problems.join(" · ")}</p>}
+                        <ul>{row.rootVisual.roots.map(root => (
+                          <li key={root.instanceId}>
+                            {root.source.exportName}: {root.status === "native-compiled" ? "root layout and styles compiled; content and API assembly pending" : root.status === "style-prepared" ? "styles prepared; native layout unsupported" : "source content needs further mapping"}
+                            {root.problems.length > 0 && ` · ${root.problems.join(" · ")}`}
+                            {!!root.residuals?.length && ` · ${root.residuals.length} style facts remain outside the projection`}
+                            {!!root.residuals?.length && <details>
+                              <summary>Unprojected styles for {root.source.exportName}</summary>
+                              <ul>{root.residuals.map((fact, index) => <li key={`${fact.channel}-${index}`}>{fact.channel}: {fact.reason}</li>)}</ul>
+                            </details>}
+                          </li>
+                        ))}</ul>
+                        <p>Measured values are provisional. Sample sizes, other property combinations, source token identities and native visual fidelity remain unqualified.</p>
+                      </section>
+                    )}
                     {ownership.state === "complete" && row.matched && (
                       <div className="native-image-pair">
                         {(["source", "observed"] as const).map((side) => (
