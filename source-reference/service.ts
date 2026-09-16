@@ -141,11 +141,15 @@ export function createReferenceService(
         }),
       },
       reactComparison: {
-        prepare: (request, operation) => ({
-          visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
-          preparation: { id: request.content.id, reportSha256: request.content.reportSha256 },
-          plan: prepareReactComparisonPlan({ ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation }),
-        }),
+        prepare: (request, operation) => {
+          const evidence = reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
+          return {
+            visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
+            preparation: { id: request.content.id, reportSha256: request.content.reportSha256 },
+            plan: prepareReactComparisonPlan({ ...evidence, operation }),
+            ...(evidence.sourceCompatibility ? { sourceCompatibility: evidence.sourceCompatibility } : {}),
+          };
+        },
         buildComponent: (request, context) => buildReactComparisonWrite({
           ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation: context.operation,
           tokens: context.tokens, expectedPlanRevision: context.planRevision,

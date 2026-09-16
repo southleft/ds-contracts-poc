@@ -74,6 +74,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
         {row.kind === 'nested' && <p>This main covers the captured child inputs. Other properties, behavior and visual fidelity remain unqualified.</p>}
         <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
+        {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
         {initial && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {row.updates?.map(update => <div key={update.id}>
