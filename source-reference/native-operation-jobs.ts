@@ -88,7 +88,8 @@ export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
   plan: P;
 }
 export type NativeOperationPhase =
-  "token-create" | "token-readback" | "component-create" | "component-readback";
+  "token-create" | "token-readback" | "component-create" | "component-readback"
+  | "update-preflight-readback" | "update-apply" | "update-readback";
 export interface NativeOperationComponentContext {
   operation: NativeSourceWriteContext["operation"];
   tokens: NativeSourceWriteContext["tokens"];

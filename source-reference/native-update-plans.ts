@@ -61,5 +61,6 @@ export function createNativeUpdatePlans(repo: string, derive: (parentId: string)
       if(canonicalJson(compile(parentId))!==canonicalJson(record)) throw Error('native-update-input-changed');
       return structuredClone(record);
     },
+    saved(parentId: string, id: string) { return structuredClone(read(parentId, id)); },
   };
 }

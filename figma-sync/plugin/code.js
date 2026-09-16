@@ -297,7 +297,7 @@ function nativeEnvelope(command, result) {
     planRevision: command.planRevision, scriptSha256: command.scriptSha256, result };
 }
 function nativeCommandValid(c, operationId) {
-  const phases = ['token-create', 'token-readback', 'component-create', 'component-readback'];
+  const phases = ['token-create', 'token-readback', 'component-create', 'component-readback', 'update-preflight-readback', 'update-apply', 'update-readback'];
   return c && c.version === 1 && c.kind === 'SOURCE-NATIVE-OPERATION' &&
     c.operationId === operationId && phases.includes(c.phase) &&
     new RegExp('^' + NATIVE_UUID + '$').test(c.attemptId) &&
@@ -333,7 +333,7 @@ async function nativePoll() {
     let heldReadback = null;
     if (saved) {
       const identity = saved.stage === 'result' ? saved.envelope : saved.identity;
-      const readback = identity && ['token-readback', 'component-readback'].includes(identity.phase);
+      const readback = identity && ['token-readback', 'component-readback', 'update-preflight-readback', 'update-readback'].includes(identity.phase);
       if (saved.stage === 'result' && saved.envelope) {
         try { await deliver(saved.envelope); return; }
         catch (e) { if (!readback) throw e; }
@@ -368,7 +368,7 @@ async function nativePoll() {
     // A new read-only attempt may replace it only after the app journal has
     // explicitly abandoned the old readback. Creation markers never qualify.
     await figma.clientStorage.setAsync(receiptKey, { stage: 'received', identity: nativeEnvelope(command, null) });
-    nativeStatus('running', command.readOnly ? 'Reading the actual native nodes…' : 'Creating the scoped native candidate…');
+    nativeStatus('running', command.readOnly ? 'Reading the actual native nodes…' : command.phase === 'update-apply' ? 'Applying the reviewed changes to existing nodes…' : 'Creating the scoped native candidate…');
     let result;
     try { result = toPlain(await runScript(command.script, { readOnly: command.readOnly })); }
     catch (e) { result = { status: 'native-execution-outcome-unknown' }; }

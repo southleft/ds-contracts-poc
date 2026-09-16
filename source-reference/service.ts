@@ -1,5 +1,6 @@
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
+import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
 import { createReactReferenceService } from './react-reference.js';
 import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
@@ -108,7 +109,7 @@ export function createReferenceService(
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
 ) {
-  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans }));
+  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport, updates: nativeUpdatePlans, updateJobs: nativeUpdateJobs, updateTransport: nativeUpdateTransport }));
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
@@ -746,6 +747,9 @@ export function createReferenceService(
       desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
     } };
   });
+  const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
+  const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
+  const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;
   const snapshotWithSupplement = (job: ReferenceJob) => {
     const connectionObservedAt = Date.now();
     const candidates = candidateJobs.list(job.id);
@@ -884,7 +888,7 @@ export function createReferenceService(
         /^Bearer ([a-f0-9]{64})$/.exec(req.headers.authorization ?? "")?.[1] ??
         "";
       try {
-        nativeTransport.authorize(pluginRoute[1], secret);
+        deliveryTransport(pluginRoute[1]).authorize(pluginRoute[1], secret);
       } catch {
         json(res, 403, { error: "Native connection refused." });
         return;
@@ -913,7 +917,7 @@ export function createReferenceService(
           json(
             res,
             200,
-            nativeTransport.claim(
+            deliveryTransport(pluginRoute[1]).claim(
               pluginRoute[1],
               secret,
               payload.fileKey,
@@ -924,7 +928,7 @@ export function createReferenceService(
           json(
             res,
             200,
-            nativeTransport.accept(pluginRoute[1], secret, payload),
+            deliveryTransport(pluginRoute[1]).accept(pluginRoute[1], secret, payload),
           );
         }
       } catch {

@@ -4,11 +4,14 @@ import type { ReactOwnershipReport } from '../../../source-reference/react-owner
 import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
 import type { SourceFrame } from '../../../source-reference/source-framing';
 import { ReactInitialInspection } from './ReactInitialInspection';
+import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 
 interface Operation {
   kind: 'root' | 'comparison' | 'initial';
   initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
-  updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; before: number; after: number }> }>;
+  updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; before: number; after: number }>;
+    operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
+    connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
   connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean };
   content?: Pick<ReactContentInspection, 'phase' | 'sourceUnchanged' | 'problems'> & Partial<ReactContentInspection>;
@@ -20,7 +23,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [rows, setRows] = useState<Operation[]>([]), [error, setError] = useState('');
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const root = `/api/source-reference/react/${referenceId}`;
-  const active = rows.some(r => (r.connection.paired && !r.connection.finished) || r.content?.phase === 'running');
+  const active = rows.some(r => (r.connection.paired && !r.connection.finished) || r.content?.phase === 'running' || r.updates?.some(u=>u.connection?.paired&&!u.connection.finished));
   useEffect(() => {
     let stopped = false, pending = false;
     const load = async () => {
@@ -71,9 +74,32 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {initial && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {row.updates?.map(update => <div key={update.id}>
-            <p>Proposed update: {update.changes.length} node opacity changes. Existing node identities are retained. This proposal has not changed Figma; live preflight and application delivery are still required.</p>
+            <p>Reviewed update: {update.changes.length} node opacity changes. Existing node identities are retained. {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
             {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Saved opacity</th><th>Proposed opacity</th></tr></thead>
               <tbody>{update.changes.map(change => <tr key={change.nodeId}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{change.before}</td><td>{change.after}</td></tr>)}</tbody></table>}
+            {!update.operation && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/prepare`)}>Prepare reviewed correction</button>}
+            {update.operation && <>
+              <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.sourceCurrent ? 'Pinned inputs match.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>
+              {!update.connection?.finished && <>
+                <p>Use the current companion plugin in the authorized file. Connect using this update’s code.</p>
+                <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/connection`,update.operation!.id)}>Get update connection code</button>
+                {codes[update.operation.id] && <label>Update connection code <input readOnly value={codes[update.operation.id]} onFocus={e=>e.currentTarget.select()} /></label>}
+                <p>{update.connection?.connected?'Companion connected for this update.':'Waiting for the update connection.'}</p>
+                <button type="button" disabled={busy||!update.operation.sourceCurrent||!update.connection?.paired||update.connection.started} onClick={()=>void action(`native-operation/${id}/update/${update.id}/start`)}>Apply and verify correction</button>
+              </>}
+              {(update.operation.pendingPhase?.endsWith('readback') || ['update-verified','update-refused','update-recovery-required'].includes(update.operation.phase)) && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/retry-observation`)}>Inspect update again</button>}
+              {update.operation.pendingPhase==='update-apply' && <p>A write is awaiting its result. Keep the companion connected; this write will not be repeated automatically.</p>}
+              {!!update.operation.problems.length && <ul>{update.operation.problems.map(p=><li key={p}>{p}</li>)}</ul>}
+              {!!update.operation.imageObservation?.images.length && <details open><summary>Updated native exports · diagnostic only</summary>
+                <p>Fresh exports of the same native nodes, shown without resizing. The original creation exports below remain historical evidence.</p>
+                <div style={{display:'flex',flexWrap:'wrap',gap:24}}>{update.operation.imageObservation.images.map(image=><figure key={image.caseId} style={{margin:0}}>
+                  {row.initialStates?.filter(state=>'variant:'+state.variant===image.caseId).map(state=><div key={state.observation}>
+                    <p>Original React · {state.variant}</p><img loading="lazy" alt={`Original for corrected state ${state.observation}`} style={{maxWidth:'none',backgroundColor:'white'}} src={`${root}/native-operation/${id}/initial-source/${state.observation}.png`} />
+                  </div>)}
+                  <figcaption>{image.caseId}</figcaption><div style={{padding:8,backgroundColor:'white',width:'max-content'}}><img loading="lazy" alt={`Updated native ${image.caseId}`} style={{maxWidth:'none',width:image.width,height:image.height}} src={`${root}/native-operation/${id}/update/${update.id}/images/${image.sha256}.png`} /></div>
+                </figure>)}</div>
+              </details>}
+            </>}
           </div>)}
         </section>}
         <p>Target: <a href={`https://www.figma.com/design/${row.fileKey}`} target="_blank" rel="noreferrer">DS Contracts Evaluations</a>.</p>
