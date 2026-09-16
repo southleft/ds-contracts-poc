@@ -443,6 +443,31 @@ test('managed content materializes intrinsic flow rows without changing the reus
 });
 
 
+test('observed unit grid cells enter a row-flow carrier only when placements agree', async () => {
+  const f = await fixture(undefined, 'flow'), content = structuredClone(f.content);
+  content.anatomy.root.layout = { display: 'grid', columns: [{fr:1}], rows: [{fit:true},{fit:true}] };
+  content.anatomy.root.parts!.icon.placement = {row:0,column:0};
+  content.anatomy.root.parts!.label.placement = {row:1,column:0};
+  const data = f.engine.compileComponentData(content, new Map([[content.id, content]]));
+  assert.deepEqual(data.variants[0].spec.children!.map(c => c.cell), [{row:0,column:0},{row:1,column:0}]);
+  const plan = prepareNativeContractComparison(content,data,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},f.comparison);
+  const creation = await f.run(f.emit(content));
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  const input = {operation:f.supplemental.operation, planRevision:revisionOf('unit-cell comparison'), comparison:plan,
+    tokenInput:f.supplemental.tokens.input, tokenIdentity:f.supplemental.tokens.identity, creation};
+  const receipt = await f.run(emitNativeContractComparisonReadbackScript(input));
+  assert.equal(verifyNativeContractComparisonReadback(input,receipt).status,'supported-comparison-structure-observed');
+  for (const cell of [{row:0,column:0},{row:1,column:1},{row:1,column:0,rowSpan:2},
+    {row:1,column:0,columnSpan:2},{row:1,column:0,hAlign:'CENTER' as const}]) {
+    const changed=structuredClone(data);changed.variants[0].spec.children![1].cell=cell;
+    assert.throws(()=>prepareNativeContractComparison(content,changed,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},f.comparison),/grid-content-placement-unqualified/);
+  }
+  const wrong=structuredClone(receipt), slot=creation.comparisons[0].slots[0];
+  wrong.content.nodes.find((n:any)=>n.id===slot.contentNodeIds[1]).values.gridRowAnchorIndex=0;
+  assert.equal(verifyNativeContractComparisonReadback(input,wrong).status,'refused');
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+});
+
 test('comparison selects Boolean variants without coercing strings or omitted inputs', () => {
   const contract = ContractSchema.parse({ id: 'fixture.bool', name: 'Bool', version: '0.1.0', status: 'draft', description: 'Boolean domain',
     props: [{name:'disabled',type:'boolean',bindings:{code:{prop:'disabled'},figma:{kind:'VARIANT',property:'disabled',unsetValue:'(unset)'}}}],

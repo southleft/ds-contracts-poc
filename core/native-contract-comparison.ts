@@ -147,7 +147,13 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     let target = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
     for (const index of reference.contentSpecPath) target = target.children![index];
     const grid = comparisonContentGrid(target, children).layout!.grid!;
-    if (children.some(child => child.absolute || child.overlay || child.insetOverlay || child.cell) ||
+    // Source grid lowering can retain explicit unit cells even when the
+    // reusable carrier uses row flow. Admit only identical placements;
+    // spans, alignment overrides and reordered cells need separate support.
+    if (children.some((child, index) => child.absolute || child.overlay || child.insetOverlay ||
+        (child.cell && (Object.keys(child.cell).sort().join(',') !== 'column,row' ||
+          child.cell.row !== Math.floor(index / grid.columns.length) ||
+          child.cell.column !== index % grid.columns.length))) ||
         children.length > grid.rows.length * grid.columns.length) fail('grid-content-placement-unqualified');
     return grid.flowRows ? grid.rows : undefined;
   };
