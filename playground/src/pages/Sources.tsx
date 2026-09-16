@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import type { SourceContractPlan } from "../../../source-reference/contract-plan";
 import type { SourceBindingInventory } from "../../../source-reference/source-bindings";
 import type { BindingJobSnapshot } from "../../../source-reference/binding-jobs";
+import type { CandidateJobSnapshot } from "../../../source-reference/candidate-jobs";
+import type { NativeOperationSnapshot } from "../../../source-reference/native-operation-jobs";
 import "./sources.css";
+import { NativeImageComparison } from "./NativeImageComparison";
 
 interface Row {
   story: string;
@@ -10,6 +13,7 @@ interface Row {
   problems: string[];
   limitations: string[];
   sourceImage: string | null;
+  sourceImageSha256?: string | null;
   replayImage: string | null;
   semanticIntake?: {
     status: string;
@@ -34,6 +38,7 @@ interface Row {
       events: { name: string }[];
     };
     observation?: {
+      referenceIdentity?: unknown;
       properties: Record<string, { kind: string; value?: unknown }>;
       slots: { name: string }[];
       nativeElements: {
@@ -70,6 +75,15 @@ interface Job {
   sourceStable?: boolean;
   supplements?: Job[];
   bindingTraces?: BindingJobSnapshot[];
+  candidatePreparations?: CandidateJobSnapshot[];
+  candidateVisuals?: CandidateJobSnapshot[];
+  nativeOperation?: NativeOperationSnapshot | null;
+  nativeConnection?: {
+    paired: boolean;
+    connected: boolean;
+    started: boolean;
+    finished: boolean;
+  } | null;
   contractAdmission?: {
     status: "blocked";
     acceptedContract: null;
@@ -328,14 +342,29 @@ function RenderedBindingTrace({ trace }: { trace: BindingJobSnapshot }) {
 export function Sources() {
   const [origin, setOrigin] = useState("http://127.0.0.1:6017");
   const [job, setJob] = useState<Job | null>(null);
+  const [runs, setRuns] = useState<
+    Array<Pick<Job, "id" | "state" | "startedAt" | "completedAt">>
+  >([]);
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [openingRun, setOpeningRun] = useState(false);
+  const [nativeConnection, setNativeConnection] = useState("");
   const [selected, setSelected] = useState("atoms-button--default");
   const capturing =
     job?.state === "running" ||
     !!job?.supplements?.some((supplement) => supplement.state === "running") ||
-    !!job?.bindingTraces?.some((trace) => trace.state === "running");
+    !!job?.bindingTraces?.some((trace) => trace.state === "running") ||
+    !!job?.candidatePreparations?.some(
+      (candidate) => candidate.state === "running",
+    ) ||
+    !!job?.candidateVisuals?.some(
+      (candidate) => candidate.state === "running",
+    ) ||
+    (!!job?.nativeConnection?.started && !job.nativeConnection.finished);
+  const polling =
+    capturing ||
+    (!!job?.nativeConnection?.paired && !job.nativeConnection.finished);
   useEffect(() => {
     let alive = true;
     fetch("/api/source-reference")
@@ -350,6 +379,7 @@ export function Sources() {
       .then((data) => {
         if (alive) {
           setReady(true);
+          setRuns(data.runs ?? []);
           setJob(data.latest);
           if (!data.checkoutAvailable)
             setError(
@@ -368,34 +398,108 @@ export function Sources() {
     };
   }, []);
   useEffect(() => {
-    if (!capturing || !job) return;
+    if (!polling || !job) return;
     let alive = true;
-    const timer = setInterval(
-      () =>
-        fetch(`/api/source-reference/${job.id}`)
-          .then(async (r) => {
-            if (!r.ok) throw new Error();
-            return r.json();
-          })
-          .then((data) => {
-            if (alive) {
-              setJob(data);
-              setError("");
-            }
-          })
-          .catch(() => {
-            if (alive)
-              setError(
-                "Connection lost. Refresh to reconnect; no result is assumed successful.",
-              );
-          }),
-      1500,
-    );
+    let pending = false;
+    const timer = setInterval(() => {
+      if (pending) return;
+      pending = true;
+      void fetch(`/api/source-reference/${job.id}`)
+        .then(async (r) => {
+          if (!r.ok) throw new Error();
+          return r.json();
+        })
+        .then((data) => {
+          if (alive) {
+            setJob(data);
+            setError("");
+          }
+        })
+        .catch(() => {
+          if (alive)
+            setError(
+              "Connection lost. Refresh to reconnect; no result is assumed successful.",
+            );
+        })
+        .finally(() => {
+          pending = false;
+        });
+    }, 3000);
     return () => {
       alive = false;
       clearInterval(timer);
     };
-  }, [job?.id, capturing]);
+  }, [job?.id, polling]);
+  useEffect(() => {
+    if (!job) return;
+    const summary = {
+      id: job.id,
+      state: job.state,
+      startedAt: job.startedAt,
+      completedAt: job.completedAt,
+    };
+    setRuns((previous) =>
+      previous.some((run) => run.id === job.id)
+        ? previous.map((run) => (run.id === job.id ? summary : run))
+        : [...previous, summary],
+    );
+  }, [job?.id, job?.state, job?.startedAt, job?.completedAt]);
+  async function selectRun(id: string) {
+    setOpeningRun(true);
+    setBusy(true);
+    setError("");
+    setNativeConnection("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${encodeURIComponent(id)}`,
+      );
+      if (!response.ok) throw Error("The selected source run is unavailable.");
+      setJob(await response.json());
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Source run unavailable.");
+    } finally {
+      setBusy(false);
+      setOpeningRun(false);
+    }
+  }
+  async function nativeAction(
+    action: "connection" | "start" | "retry-observation",
+  ) {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    const post = async (suffix: string) => {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-native-${suffix}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: "{}",
+        },
+      );
+      const data = await response.json();
+      if (!response.ok)
+        throw Error(data.error ?? "Native operation unavailable.");
+      return data;
+    };
+    try {
+      if (action === "connection") {
+        if (!job.nativeOperation) await post("operation");
+        const paired = await post("connection");
+        setNativeConnection(paired.connection);
+        const refreshed = await fetch(`/api/source-reference/${job.id}`);
+        if (!refreshed.ok)
+          throw Error("Connection prepared; refresh to inspect the operation.");
+        setJob(await refreshed.json());
+      } else setJob(await post(action));
+    } catch (e) {
+      setError(
+        e instanceof Error ? e.message : "Native operation unavailable.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
   async function validate() {
     setBusy(true);
     setError("");
@@ -468,8 +572,70 @@ export function Sources() {
       setBusy(false);
     }
   }
+  async function prepareSourceCandidate() {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-candidate`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(
+            job.candidatePreparations?.length ? { retry: true } : {},
+          ),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setJob(data);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Source candidate preparation could not start.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function deriveVisualCandidate() {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-visual-candidate`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(
+            visualCandidate?.state === "failed" ||
+              visualCandidate?.state === "interrupted" ||
+              visualCandidate?.phase === "visual-refused"
+              ? { retry: true }
+              : {},
+          ),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setJob(data);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Visual candidate derivation could not start.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
   const supplement = job?.supplements?.at(-1);
   const bindingTrace = job?.bindingTraces?.at(-1);
+  const candidate = job?.candidatePreparations?.at(-1);
+  const visualCandidate = job?.candidateVisuals?.at(-1);
   const allRows = [...(job?.rows ?? []), ...(supplement?.rows ?? [])];
   const row = allRows.find((r) => r.story === selected);
   return (
@@ -499,7 +665,7 @@ export function Sources() {
         </label>
         <button disabled={!ready || busy || capturing}>
           {busy
-            ? "Connecting…"
+            ? "Working…"
             : job?.state === "running"
               ? "Validating all 10 states…"
               : "Connect and validate"}
@@ -511,6 +677,33 @@ export function Sources() {
         source files or Figma files are changed. Other libraries are not yet
         supported by this screen.
       </p>
+      {!ready && !error && (
+        <p role="status">Loading recorded source evidence…</p>
+      )}
+      {openingRun && (
+        <p role="status">Opening the selected recorded source run…</p>
+      )}
+      {runs.length > 0 && (
+        <label className="source-run-select">
+          Recorded source run{" "}
+          <select
+            value={job?.id ?? ""}
+            disabled={busy || capturing}
+            onChange={(event) => void selectRun(event.target.value)}
+          >
+            {[...runs].reverse().map((run) => (
+              <option key={run.id} value={run.id}>
+                {run.startedAt || run.completedAt
+                  ? new Date(
+                      (run.startedAt ?? run.completedAt)!,
+                    ).toLocaleString()
+                  : "Time not recorded"}{" "}
+                · {run.state} · {run.id.slice(0, 8)}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       {error && <p role="alert">{error}</p>}
       {job && (
         <>
@@ -853,6 +1046,445 @@ export function Sources() {
               </details>
             )}
           </section>
+          <section
+            className="source-admission"
+            aria-label="Source candidate preparation"
+          >
+            <h2>Source candidate preparation</h2>
+            <p>
+              Prepare the pinned original runtime and source semantics from the
+              latest verified binding trace and its exact baseline and
+              supplement. Previous captures and preparation attempts are
+              preserved.
+            </p>
+            <p className="source-note">
+              Preparation does not accept a Contract or produce native Figma
+              output. A measured visual candidate can then be derived from the
+              same verified evidence. Native comparison and the complete
+              conversion journey remain pending.
+            </p>
+            <div className="source-connect">
+              <button
+                type="button"
+                disabled={
+                  busy ||
+                  capturing ||
+                  job.state !== "complete" ||
+                  job.sourceStable !== true ||
+                  bindingTrace?.state !== "complete" ||
+                  (!!supplement && supplement.state !== "complete")
+                }
+                onClick={() => void prepareSourceCandidate()}
+              >
+                {candidate?.state === "running"
+                  ? "Preparing source candidate…"
+                  : candidate
+                    ? "Retry source candidate preparation"
+                    : "Prepare source candidate"}
+              </button>
+            </div>
+            <p role="status">
+              {!candidate
+                ? "No source candidate preparation recorded yet."
+                : candidate.phase === "prepared"
+                  ? "Source/runtime prepared; visual contract and native verification still pending."
+                  : candidate.state === "running"
+                    ? "Preparing the original source/runtime. No result is assumed successful."
+                    : candidate.state === "interrupted"
+                      ? "Preparation was interrupted. Retry creates a new attempt; no success is assumed."
+                      : "Source candidate preparation failed or its recorded evidence no longer validates."}
+            </p>
+            {candidate?.problems.map((problem, index) => (
+              <p role="alert" key={index}>
+                <code>{problem}</code>
+              </p>
+            ))}
+            {candidate?.phase === "prepared" && (
+              <div
+                className="source-status"
+                aria-label="Prepared source inventory, not conversion results"
+              >
+                {(
+                  [
+                    ["plannedCases", "Source cases planned"],
+                    ["structurallyMatchedCases", "Structurally matched"],
+                    ["refusedCases", "Refused cases"],
+                    ["variantStates", "Style variants observed"],
+                    ["slots", "Source slots retained"],
+                    ["writableProperties", "Writable source properties"],
+                  ] as const
+                ).map(([key, label]) =>
+                  candidate.counters[key] === undefined ? null : (
+                    <div key={key}>
+                      <strong>{candidate.counters[key]}</strong>
+                      <small>{label}</small>
+                    </div>
+                  ),
+                )}
+              </div>
+            )}
+            {(job.candidatePreparations?.length ?? 0) > 1 && (
+              <details>
+                <summary>Preserved candidate preparation attempts</summary>
+                <ul>
+                  {job.candidatePreparations!.map((attempt) => (
+                    <li key={attempt.id}>
+                      <code>{attempt.id}</code>: {attempt.phase}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+            {(candidate?.phase === "prepared" || visualCandidate) && (
+              <section aria-label="Measured visual candidate">
+                <h3>Measured visual candidate</h3>
+                <p>
+                  Derive source-owned structure, observed styles and recorded
+                  token references and conditional wrappers from the verified
+                  preparation. Source slots remain separate from comparison
+                  content; missing cases and unsupported wrappers stay visible
+                  as limitations.
+                </p>
+                <div className="source-connect">
+                  <button
+                    type="button"
+                    disabled={
+                      busy ||
+                      capturing ||
+                      candidate?.phase !== "prepared" ||
+                      job.state !== "complete" ||
+                      job.sourceStable !== true ||
+                      bindingTrace?.state !== "complete" ||
+                      (!!supplement && supplement.state !== "complete")
+                    }
+                    onClick={() => void deriveVisualCandidate()}
+                  >
+                    {visualCandidate?.state === "running"
+                      ? "Deriving measured visual candidate…"
+                      : visualCandidate?.state === "failed" ||
+                          visualCandidate?.state === "interrupted" ||
+                          visualCandidate?.phase === "visual-refused"
+                        ? "Retry visual candidate derivation"
+                        : "Derive measured visual candidate"}
+                  </button>
+                </div>
+                <p role="status">
+                  {!visualCandidate
+                    ? "No measured visual candidate recorded yet."
+                    : visualCandidate.phase === "measured-candidate"
+                      ? "Measured visual candidate; not accepted or emitted. Native verification remains pending."
+                      : visualCandidate.phase === "visual-refused"
+                        ? "Visual derivation completed with a refusal. The evidence and refused cases are preserved."
+                        : visualCandidate.state === "running"
+                          ? "Deriving the visual candidate from existing evidence and runtime."
+                          : visualCandidate.state === "interrupted"
+                            ? "Visual derivation was interrupted. Retry creates a new attempt."
+                            : "Visual derivation failed or its recorded evidence no longer validates."}
+                </p>
+                {!!visualCandidate?.problems.length && (
+                  <div>
+                    <h4>Still to verify</h4>
+                    <ul>
+                      {[
+                        ...new Set(
+                          visualCandidate.problems.map(
+                            (problem) =>
+                              (
+                                ({
+                                  "candidate-visual-contract-unaccepted":
+                                    "Confirm that the proposed component preserves the source structure and styles.",
+                                  "candidate-runtime-binding-unqualified":
+                                    "Verify that the retained source behavior matches this candidate.",
+                                  "candidate-native-projection-unverified":
+                                    "Create and independently compare the native Figma output.",
+                                  "candidate-token-bindings-observations-only":
+                                    "Unrecorded token identities and native bindings remain unverified.",
+                                  "candidate-source-cases-refused":
+                                    "Resolve the refused source cases; they remain in the coverage total.",
+                                  "candidate-wrapper-source-case-refused":
+                                    "Resolve the refused source cases; they remain in the coverage total.",
+                                  "candidate-visual-refused":
+                                    "The recorded evidence could not support a measured visual candidate.",
+                                  "candidate-token-bindings-refused":
+                                    "The recorded token evidence could not be qualified.",
+                                  "candidate-token-projection-unaccepted":
+                                    "Verify the projected token references against native variable identities and modes.",
+                                  "candidate-wrapper-snapshots-only":
+                                    "Verify conditional wrappers beyond the recorded snapshots, including native slot edits.",
+                                  "candidate-wrapper-branches-unprojected":
+                                    "Verify the remaining source branches before widening this candidate.",
+                                  "candidate-token-projection-refused":
+                                    "Recorded token references could not be safely projected into the candidate.",
+                                  "candidate-wrapper-projection-refused":
+                                    "The source wrapper conditions did not match the recorded component structure.",
+                                  "candidate-evidence-unavailable-or-changed":
+                                    "Recheck evidence that is missing or has changed before retrying.",
+                                  "candidate-visual-assembly-failed":
+                                    "Derivation could not finish. Inspect its recorded details before retrying.",
+                                  "candidate-job-history-invalid":
+                                    "A saved attempt cannot be read or verified. Its history is preserved.",
+                                }) as Record<string, string>
+                              )[problem] ??
+                              "A recorded check still needs review before this candidate can proceed.",
+                          ),
+                        ),
+                      ].map((message) => (
+                        <li key={message}>{message}</li>
+                      ))}
+                    </ul>
+                    <details>
+                      <summary>Technical details</summary>
+                      <ul>
+                        {visualCandidate.problems.map((problem, index) => (
+                          <li key={index}>
+                            <code>{problem}</code>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </div>
+                )}
+                {(visualCandidate?.phase === "measured-candidate" ||
+                  visualCandidate?.phase === "visual-refused") && (
+                  <div
+                    className="source-status"
+                    aria-label="Measured visual inventory, not conversion results"
+                  >
+                    {(
+                      [
+                        ["plannedCases", "Source cases planned"],
+                        ["projectedCases", "Cases projected"],
+                        ["refusedCases", "Refused cases"],
+                        ["stylePlanes", "Style appearances observed"],
+                        ["observedChannels", "Style channels observed"],
+                        ["excludedChannels", "Style channels excluded"],
+                        ["boundTokenChannels", "Named token correspondences"],
+                        ["projectedTokenPaths", "Source token names retained"],
+                        [
+                          "projectedTokenAddresses",
+                          "Token references projected",
+                        ],
+                        ["wrapperPredicates", "Source wrapper conditions"],
+                        ["wrapperSnapshots", "Wrapper snapshots matched"],
+                        [
+                          "unprojectedWrapperPredicates",
+                          "Unprojected wrapper conditions",
+                        ],
+                        [
+                          "ambiguousTokenChannels",
+                          "Ambiguous recorded references",
+                        ],
+                        [
+                          "unresolvedTokenChannels",
+                          "Unresolved recorded references",
+                        ],
+                      ] as const
+                    ).map(([key, label]) =>
+                      visualCandidate.counters[key] === undefined ? null : (
+                        <div key={key}>
+                          <strong>{visualCandidate.counters[key]}</strong>
+                          <small>{label}</small>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                )}
+                <p className="source-note">
+                  Observed styles and token-name matches do not qualify runtime
+                  behavior or native Figma output. No Contract is accepted by
+                  this step.
+                </p>
+                {(job.candidateVisuals?.length ?? 0) > 1 && (
+                  <details>
+                    <summary>Preserved visual derivation attempts</summary>
+                    <ul>
+                      {job.candidateVisuals!.map((attempt) => (
+                        <li key={attempt.id}>
+                          <code>{attempt.id}</code>: {attempt.phase}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </section>
+            )}
+          </section>
+          {(visualCandidate?.phase === "measured-candidate" ||
+            job.nativeOperation) && (
+            <section
+              className="source-native"
+              aria-label="Native Figma inspection"
+            >
+              <h2>Create and inspect in Figma</h2>
+              <p>
+                Create this source candidate in the authorized Scratch file,
+                then read its actual nodes back. Tokens, component variants and
+                comparison instances share the saved source plan.
+              </p>
+              <ol>
+                <li>
+                  <a href="/ds-contracts-sync-runner-plugin.zip" download>
+                    Download the current companion plugin
+                  </a>
+                  , import its manifest through Figma’s Development plugins
+                  menu, and run it in Scratch.
+                </li>
+                <li>
+                  Copy the connection below into Build → Connect the local
+                  source workflow.
+                </li>
+                <li>Keep the plugin open and start the inspection here.</li>
+              </ol>
+              <div className="source-connect">
+                <button
+                  type="button"
+                  disabled={busy || (!job.nativeOperation && capturing)}
+                  onClick={() => void nativeAction("connection")}
+                >
+                  Prepare connection
+                </button>
+                {nativeConnection && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      void navigator.clipboard
+                        .writeText(nativeConnection)
+                        .catch(() =>
+                          setError(
+                            "Could not copy the connection. Select it in the field below.",
+                          ),
+                        );
+                    }}
+                  >
+                    Copy connection
+                  </button>
+                )}
+                <button
+                  type="button"
+                  disabled={
+                    busy ||
+                    !job.nativeConnection?.connected ||
+                    job.nativeConnection.started
+                  }
+                  onClick={() => void nativeAction("start")}
+                >
+                  Create and inspect
+                </button>
+                {(job.nativeOperation?.pendingPhase === "token-readback" ||
+                  job.nativeOperation?.pendingPhase === "component-readback" ||
+                  job.nativeOperation?.phase === "observation-refused" ||
+                  job.nativeOperation?.phase ===
+                    "component-observation-refused" ||
+                  job.nativeOperation?.phase ===
+                    "component-structure-observed") && (
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => void nativeAction("retry-observation")}
+                  >
+                    {job.nativeOperation?.phase ===
+                    "component-structure-observed"
+                      ? "Inspect again"
+                      : "Retry readback"}
+                  </button>
+                )}
+              </div>
+              {nativeConnection && (
+                <label>
+                  Connection (keep private)
+                  <input
+                    type="text"
+                    value={nativeConnection}
+                    readOnly
+                    onFocus={(event) => event.target.select()}
+                  />
+                </label>
+              )}
+              <p role="status">
+                {!job.nativeOperation
+                  ? "No native operation prepared."
+                  : job.nativeOperation.phase === "component-structure-observed"
+                    ? "Supported native structure observed. Visual fidelity, editability and the complete journey are still unqualified."
+                    : `Operation: ${job.nativeOperation.phase.replaceAll("-", " ")}. ${job.nativeConnection?.connected ? "Plugin connected." : "Waiting for the companion plugin."}`}
+              </p>
+              {job.nativeOperation && !job.nativeOperation.sourceCurrent && (
+                <p>
+                  The source has changed or cannot be verified. Its saved native
+                  result does not establish agreement with the current source.
+                </p>
+              )}
+              {job.nativeOperation?.nativeOutcome === "unknown" && (
+                <p>
+                  A dispatched operation has no verified result yet. Reconnect
+                  the same plugin to deliver a saved result. Creation will not
+                  repeat.
+                </p>
+              )}
+              {!!job.nativeOperation?.problems.length && (
+                <details>
+                  <summary>Operation diagnostics</summary>
+                  <ul>
+                    {job.nativeOperation.problems.map((problem) => (
+                      <li key={problem}>
+                        <code>{problem}</code>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+              {job.nativeOperation?.imageObservation && (
+                <section
+                  className="native-image-observation"
+                  aria-label="Native comparison exports"
+                >
+                  <h3>Inspect native output</h3>
+                  <p>
+                    Open a state to frame its original and compare both images
+                    at the same scale. Framing is measured from an exact replay
+                    of the recorded source. Backgrounds and raster rounding can
+                    differ; visual fidelity remains unqualified.
+                  </p>
+                  {job.nativeOperation.imageObservation.images.map((image) => {
+                    const [run, story] = image.caseId.split(":");
+                    const source = allRows.find(
+                      (row) =>
+                        row.story === story &&
+                        row.sourceImage ===
+                          `/api/source-reference/${run}/${story}/source.png`,
+                    );
+                    const sourceUrl =
+                      job.nativeOperation!.sourceCurrent &&
+                      source?.status === "valid" &&
+                      source.sourceImageSha256
+                        ? `${source.sourceImage}?sha256=${source.sourceImageSha256}`
+                        : null;
+                    const nativeUrl = `/api/source-reference/native/${job.nativeOperation!.id}/images/${job.nativeOperation!.imageObservation!.attemptId}/${image.sha256}.png`;
+                    return (
+                      <NativeImageComparison
+                        key={`${image.caseId}:${nativeUrl}`}
+                        caseId={image.caseId}
+                        sourceUrl={sourceUrl}
+                        nativeUrl={nativeUrl}
+                        width={image.width}
+                        height={image.height}
+                      />
+                    );
+                  })}
+                  {job.nativeOperation.imageObservation.problems.map(
+                    (problem) => (
+                      <p key={problem}>
+                        <code>{problem}</code>
+                      </p>
+                    ),
+                  )}
+                </section>
+              )}
+              <p className="source-note">
+                This creates an unaccepted inspection candidate. Structural
+                readback does not establish visual fidelity or qualify v1.
+              </p>
+            </section>
+          )}
           <div className="source-evidence">
             <nav aria-label="All selected source states">
               {allRows.map((r) => (
@@ -951,6 +1583,16 @@ export function Sources() {
                         events (behavior not yet tested).
                       </p>
                     )}
+                    {!!row.semanticIntake.observation?.referenceIdentity &&
+                      row.semanticIntake.status === "observed" && (
+                        <p>
+                          Local ID references were checked with an explicit
+                          lifecycle probe. Supported generated IDs can differ
+                          across replays; caller IDs and state must match
+                          exactly. This does not qualify interaction or
+                          accessibility behavior.
+                        </p>
+                      )}
                     {!!row.semanticIntake.problems.length && (
                       <p>
                         Intake blocked: {row.semanticIntake.problems.join(", ")}

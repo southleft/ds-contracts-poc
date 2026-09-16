@@ -13,6 +13,16 @@ asserting and the one command that reproduces it.
 <!-- Defect first. What was wrong, in whose words, before the good news. If
 this is a new capability rather than a fix, say what could not be done. -->
 
+## User outcome and current status
+
+<!-- What can a user now complete? Through which interface? Name remaining
+manual steps and unsupported cases. If this is internal work only, say so.
+Update docs/CURRENT.md when usability, coverage or milestone status changes. -->
+
+- Outcome and scope:
+- Current milestone and next step:
+- Public status updated, or why the state of use is unchanged:
+
 ## The mechanism
 
 <!-- Which file, which function, which refusal is now emitted by name. -->

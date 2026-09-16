@@ -52,6 +52,27 @@
   overflow-wrap: anywhere;
   max-width: 1000px;
 }
+.source-native {
+  margin: 40px 0;
+  padding: 24px 0;
+  border-block: 1px solid #8886;
+}
+.source-native > label {
+  display: grid;
+  gap: 6px;
+  max-width: 680px;
+}
+.source-native > label input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 10px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+}
 .source-status {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -237,4 +258,63 @@
   .source-binding-table button {
     padding: 6px;
   }
+}
+
+.native-image-observation {
+  margin-block: 1.25rem;
+}
+.native-image-observation details {
+  margin-block: 0.75rem;
+}
+.native-image-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.native-image-pair figure {
+  min-width: 0;
+  margin: 0;
+  overflow: auto;
+}
+.native-image-pair figcaption {
+  margin-block: 0.5rem;
+}
+.native-image-pair img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 640px) {
+  .native-image-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+.native-comparison-scale {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+.native-comparison-scale select {
+  font: inherit;
+  width: auto;
+}
+.native-comparison-scale {
+  white-space: nowrap;
+}
+.native-image-pair-framed img {
+  max-width: none;
+  image-rendering: pixelated;
+}
+.native-comparison-surface {
+  width: max-content;
+  background-color: #eee;
+  background-image: conic-gradient(
+    #ddd 25%,
+    transparent 0 50%,
+    #ddd 0 75%,
+    transparent 0
+  );
+  background-size: 16px 16px;
 }

@@ -67,6 +67,23 @@ function rebind(input: LitRenderInput): void {
 }
 const button =
   'html`<button part="button"><span><slot></slot></span></button>`';
+
+test("TypeScript-only return wrappers preserve matching while static HTML interpolation cannot borrow ordinary Lit proof", () => {
+  const ordinary = matchLitRender(synthetic(`return ${button};`));
+  const wrapped = matchLitRender(synthetic(`return (${button}) as TemplateResult<1>;`));
+  assert.equal(wrapped.status, "structure-matched");
+  assert.deepEqual(wrapped.nodes.map(n => [n.tag, n.domPath]), ordinary.nodes.map(n => [n.tag, n.domPath]));
+  for (const module of ['lit/static-html.js', 'lit-html/static.js']) {
+    const input = synthetic('return html`<button part="button" data-unknown=${this.value}><span><slot></slot></span></button>`;');
+    input.source.source = input.source.source.replace("from 'lit'", `from '${module}'`);
+    input.source.sourceSha256 = sha(input.source.source);
+    const result = matchLitRender(input);
+    assert.equal(result.status, "refused");
+    assert.ok(result.problems.includes("render-source-topology-unresolved"));
+    assert.ok(result.sourceRead.problems.some(p => p.code === "static-html-values-unverified"));
+    assert.deepEqual(result.bindings, []);
+  }
+});
 function refused(input: LitRenderInput, code: string | RegExp) {
   const result = matchLitRender(input);
   assert.equal(result.status, "refused", JSON.stringify(result));

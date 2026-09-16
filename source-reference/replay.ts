@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import type { Browser, Page } from 'playwright-core';
+import type { Browser, BrowserContext, Page } from 'playwright-core';
 import { checkSource, type SourceProfile } from './check.js';
 import { observeSource, watchSourceFailures } from './observe.js';
 
@@ -34,7 +34,7 @@ export async function captureReference(page: Page, profile: SourceProfile,
 }
 
 export async function replayReference<Inspection = undefined>(browser: Browser, har: string, url: string, profile: SourceProfile,
-  viewport = {width:900,height:600}, inspect?: (page:Page, failures:ReturnType<typeof watchSourceFailures>) => Promise<Inspection>) {
+  viewport = {width:900,height:600}, inspect?: (page:Page, failures:ReturnType<typeof watchSourceFailures>) => Promise<Inspection>, beforeNavigate?: (context: BrowserContext) => Promise<void>) {
   // A fresh context isolates cookies, browser cache, fonts and service workers.
   const context = await browser.newContext({viewport, deviceScaleFactor:1, colorScheme:'dark', serviceWorkers:'block'});
   await context.routeFromHAR(har, {notFound:'abort', update:false});
@@ -42,6 +42,7 @@ export async function replayReference<Inspection = undefined>(browser: Browser, 
   const page = await context.newPage();
   const failures = watchSourceFailures(page);
   try {
+    await beforeNavigate?.(context);
     await page.goto(url, {waitUntil:'load', timeout:30000});
     const reference = await captureReference(page, profile, failures);
     const inspection = inspect && reference.status === 'valid' ? await inspect(page,failures) : undefined;

@@ -27,6 +27,14 @@
  *   everything else (font stacks, shadow strings) → STRING
  */
 import type { TokenTreeInput } from './tokens.js';
+import {
+  prepareNativeTokenContext,
+  verifyNativeTokenContextReceipt,
+  type NativeTokenContextInput,
+  type NativeTokenContextReceipt,
+  type NativeTokenIdentity,
+  type NativeTokenPreparation,
+} from './native-token-context.js';
 
 // ---------------------------------------------------------------------------
 // Payload shape + referee
@@ -871,6 +879,43 @@ const reportVariableDrift = (collectionName) => {
 // The sync script (the example scripts' runtime, parameterized)
 // ---------------------------------------------------------------------------
 
+/** One concrete/alias writer for legacy upsert and scoped candidate creation.
+ * The scoped caller supplies an allocation-recording create function and a
+ * create-only applyValue. Default output stays byte-identical to legacy. */
+function tokenRowsUpsertRuntime(createVariable = 'figma.variables.createVariable'): string {
+  return `let created = 0, updated = 0;
+const skippedValues = SKIPPED_VALUES.slice();
+// pass 1: create/refresh every variable with concrete values
+for (const t of TOKENS) {
+  if (t.type === 'ALIAS') continue;
+  // Runtime door: a payload row that is not a string/number/colour (a composite
+  // that escaped the compiler) is skipped BY NAME, never stringified.
+  const shapeOk = (x) => typeof x === 'string' || typeof x === 'number' || (x && typeof x === 'object' && typeof x.r === 'number');
+  if (!shapeOk(t.light) || !shapeOk(t.dark)) { skippedValues.push(t.name + ': ' + (Array.isArray(t.light) ? 'array' : typeof t.light)); continue; }
+  let v = existing.get(t.name);
+  const isNew = !v;
+  if (!v) { v = ${createVariable}(t.name, col, t.type); existing.set(t.name, v); created++; } else { updated++; }
+  applyValue(v, lightId, lightName, t.light, isNew);
+  if (darkId) applyValue(v, darkId, 'Dark', t.dark, isNew);
+}
+// pass 2: minted aliases — REAL variable aliases to the base tokens the
+// library's own source named (they inherit the target's Light/Dark values)
+let aliased = 0;
+for (const t of TOKENS) {
+  if (t.type !== 'ALIAS') continue;
+  const target = existing.get(t.target);
+  if (!target) throw new Error('token sync: alias target missing: ' + t.target + ' (for ' + t.name + ')');
+  let v = existing.get(t.name);
+  const isNew = !v;
+  const resolvedType = target.resolvedType;
+  if (!v) { v = ${createVariable}(t.name, col, resolvedType); existing.set(t.name, v); created++; } else { updated++; }
+  const alias = figma.variables.createVariableAlias(target);
+  applyValue(v, lightId, lightName, alias, isNew);
+  if (darkId) applyValue(v, darkId, 'Dark', alias, isNew);
+  aliased++;
+}`;
+}
+
 /** tokenSet → deterministic Figma Plugin-API script text: one collection
  *  named tokenSet.name, a Dark mode ONLY when the set carries dark values
  *  (an addMode the plan refuses is named in `modeSkipped`, not thrown),
@@ -965,37 +1010,7 @@ const existing = new Map();
 for (const v of await figma.variables.getLocalVariablesAsync()) {
   if (v.variableCollectionId === col.id) existing.set(v.name, v);
 }
-let created = 0, updated = 0;
-const skippedValues = SKIPPED_VALUES.slice();
-// pass 1: create/refresh every variable with concrete values
-for (const t of TOKENS) {
-  if (t.type === 'ALIAS') continue;
-  // Runtime door: a payload row that is not a string/number/colour (a composite
-  // that escaped the compiler) is skipped BY NAME, never stringified.
-  const shapeOk = (x) => typeof x === 'string' || typeof x === 'number' || (x && typeof x === 'object' && typeof x.r === 'number');
-  if (!shapeOk(t.light) || !shapeOk(t.dark)) { skippedValues.push(t.name + ': ' + (Array.isArray(t.light) ? 'array' : typeof t.light)); continue; }
-  let v = existing.get(t.name);
-  const isNew = !v;
-  if (!v) { v = figma.variables.createVariable(t.name, col, t.type); existing.set(t.name, v); created++; } else { updated++; }
-  applyValue(v, lightId, lightName, t.light, isNew);
-  if (darkId) applyValue(v, darkId, 'Dark', t.dark, isNew);
-}
-// pass 2: minted aliases — REAL variable aliases to the base tokens the
-// library's own source named (they inherit the target's Light/Dark values)
-let aliased = 0;
-for (const t of TOKENS) {
-  if (t.type !== 'ALIAS') continue;
-  const target = existing.get(t.target);
-  if (!target) throw new Error('token sync: alias target missing: ' + t.target + ' (for ' + t.name + ')');
-  let v = existing.get(t.name);
-  const isNew = !v;
-  const resolvedType = target.resolvedType;
-  if (!v) { v = figma.variables.createVariable(t.name, col, resolvedType); existing.set(t.name, v); created++; } else { updated++; }
-  const alias = figma.variables.createVariableAlias(target);
-  applyValue(v, lightId, lightName, alias, isNew);
-  if (darkId) applyValue(v, darkId, 'Dark', alias, isNew);
-  aliased++;
-}
+${tokenRowsUpsertRuntime()}
 reportVariableDrift(${JSON.stringify(col)});
 if (skippedValues.length > 0) {
   console.warn('[ds-contracts] ' + skippedValues.length + ' token(s) skipped — their $value has no Figma variable shape: ' + skippedValues.join('; '));
@@ -1031,5 +1046,245 @@ for (const t of TEXT_STYLES) {
 const modeNames = col.modes.map((m) => m.name).join('/');
 figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated, ' + pruned + ' pruned, ' + leftovers.length + ' leftover(s), ' + variableDrift.length + ' edited value(s) ' + (DS_OVERWRITE_TOKENS ? 'overwritten' : 'kept') + ', ' + skippedValues.length + ' skipped (' + TOKENS.length + ' total, ' + aliased + ' aliases, modes ' + modeNames + '; ' + createdStyles + ' text styles created)');
 return { created, updated, aliased, pruned, leftovers, pruneSkipped, variableDrift, driftOverwritten: DS_OVERWRITE_TOKENS, skippedValues, modeSkipped, modes: col.modes.map((m) => m.name), total: TOKENS.length, textStyles: TEXT_STYLES.length, createdStyles };
+`;
+}
+
+export interface NativeTokenCreationResult {
+  version: 1;
+  status: 'created-candidate' | 'refused' | 'partial-allocation';
+  acceptedContract: null;
+  nativeQualification: 'unqualified';
+  preparationRevision: string;
+  receiptKind: 'creation-objects-only';
+  /** Retained even when metadata, value writes or subsequent reads fail. */
+  allocation: {
+    collection: { id: string | null; key: string | null; name: string | null } | null;
+    modes: NativeTokenIdentity['modes'];
+    variables: { tokenPath: string; id: string | null; key: string | null }[];
+  };
+  creationIdentity?: NativeTokenIdentity;
+  receipt?: NativeTokenContextReceipt;
+  created?: number;
+  aliased?: number;
+  problems: string[];
+}
+
+export interface NativeTokenReadbackResult {
+  version: 1;
+  status: 'readback-collected' | 'refused';
+  acceptedContract: null;
+  nativeQualification: 'unqualified';
+  preparationRevision: string;
+  receiptKind: 'independent-native-readback';
+  receipt?: NativeTokenContextReceipt;
+  problems: string[];
+}
+
+function scopedTokenPreparation(input: NativeTokenContextInput): NativeTokenPreparation {
+  const preparation = prepareNativeTokenContext(input);
+  if (preparation.modes.length !== 1) {
+    throw new Error('native-token-write-single-mode-required');
+  }
+  return preparation;
+}
+
+/** Shared read-only helpers for creation-object receipts and later independent
+ * native reads. Ownership metadata is an identity precondition, not authority
+ * granted by a collection name. The host authenticates this preparation. */
+function nativeTokenReceiptRuntime(preparation: NativeTokenPreparation): string {
+  return `const PREPARATION = ${JSON.stringify(preparation)};
+const NS = 'ds_contracts', OWNERSHIP_KEY = 'nativeTokenContext';
+const OWNERSHIP = { scopeId: PREPARATION.scopeId, preparationRevision: PREPARATION.revision, source: PREPARATION.source };
+const copy = (value) => JSON.parse(JSON.stringify(value));
+const textId = (value) => typeof value === 'string' && value.length > 0 ? value : null;
+const refuse = (code) => { throw new Error('native-token-write-' + code); };
+const problem = (error) => error && typeof error.message === 'string' && /^native-token-write-[a-z-]+$/.test(error.message) ? error.message : 'native-token-write-native-operation-failed';
+const fileGuard = () => { if (!figma.fileKey || figma.fileKey !== PREPARATION.fileKey) refuse('file-mismatch'); };
+const requireApi = (names) => {
+  if (!figma.variables || names.some((name) => typeof figma.variables[name] !== 'function')) refuse('api-unavailable');
+};
+const readOwner = (object) => {
+  if (!object || typeof object.getSharedPluginData !== 'function') refuse('ownership-unreadable');
+  const raw = object.getSharedPluginData(NS, OWNERSHIP_KEY);
+  if (raw === '') return null;
+  if (typeof raw !== 'string') refuse('ownership-unreadable');
+  let owner;
+  try { owner = JSON.parse(raw); } catch { refuse('ownership-unreadable'); }
+  if (!owner || typeof owner !== 'object' || Array.isArray(owner) || !textId(owner.scopeId)) refuse('ownership-unreadable');
+  return owner;
+};
+const receiptOf = (collection, variables) => ({
+  fileKey: figma.fileKey,
+  collection: {
+    id: collection.id, key: collection.key, name: collection.name, remote: collection.remote,
+    ownership: readOwner(collection), defaultModeId: collection.defaultModeId,
+    modes: collection.modes.map((mode) => ({ modeId: mode.modeId, name: mode.name })),
+  },
+  variables: variables.map((variable) => ({
+    id: variable.id, key: variable.key, name: variable.name, variableCollectionId: variable.variableCollectionId,
+    resolvedType: variable.resolvedType, remote: variable.remote, valuesByMode: copy(variable.valuesByMode),
+  })),
+});
+`;
+}
+
+/** New-owned-only candidate creation through the SAME two-pass token writer.
+ * It never adopts a pre-existing collection, adds an inferred mode, changes a
+ * historical value, prunes variables, creates text styles or honors overwrite
+ * flags. Persist creationIdentity/allocation before requesting independent
+ * readback. A creation-object receipt is not a verification result. */
+export function emitNativeTokenContextScript(input: NativeTokenContextInput): {
+  preparation: NativeTokenPreparation;
+  script: string;
+} {
+  const preparation = scopedTokenPreparation(input);
+  const script = `// GENERATED scoped candidate token creation by the existing token-set writer.
+// Host-owned new collection only. Returned creation objects are NOT independent readback.
+${nativeTokenReceiptRuntime(preparation)}
+const result = { version: 1, status: 'refused', acceptedContract: null, nativeQualification: 'unqualified',
+  preparationRevision: PREPARATION.revision, receiptKind: 'creation-objects-only',
+  allocation: { collection: null, modes: [], variables: [] }, problems: [] };
+try {
+  fileGuard();
+  requireApi(['getLocalVariableCollectionsAsync', 'getLocalVariablesAsync', 'createVariableCollection', 'createVariable', 'createVariableAlias']);
+  const [collections, variables] = await Promise.all([
+    figma.variables.getLocalVariableCollectionsAsync(), figma.variables.getLocalVariablesAsync(),
+  ]);
+  fileGuard();
+  if (!Array.isArray(collections) || !Array.isArray(variables)) refuse('inventory-unreadable');
+  // No search result is ever adopted. Name collisions and ownership markers
+  // (including renamed collections or stranded variables) stop all writes.
+  for (const collection of collections) {
+    if (collection.name === PREPARATION.collectionName) refuse('collection-name-collision');
+    if (readOwner(collection)?.scopeId === PREPARATION.scopeId) refuse('scope-collision');
+  }
+  for (const variable of variables) if (readOwner(variable)?.scopeId === PREPARATION.scopeId) refuse('scope-collision');
+  const priorCollectionIds = new Set(collections.map((c) => c.id));
+  const priorCollectionKeys = new Set(collections.map((c) => c.key));
+  const priorVariableIds = new Set(variables.map((v) => v.id));
+  const priorVariableKeys = new Set(variables.map((v) => v.key));
+  const mode = PREPARATION.modes[0];
+  fileGuard();
+  const col = figma.variables.createVariableCollection(PREPARATION.collectionName);
+  // Capture allocation BEFORE any metadata, mode or value write can fail.
+  result.allocation.collection = { id: textId(col?.id), key: textId(col?.key), name: textId(col?.name) };
+  result.allocation.modes = Array.isArray(col?.modes) ? col.modes.filter((m) => textId(m?.modeId)).map((m) => ({
+    sourceMode: mode.sourceMode, brand: mode.brand, modeId: m.modeId, name: textId(m.name) || '',
+  })) : [];
+  fileGuard();
+  if (!textId(col?.id) || !textId(col?.key) || col.name !== PREPARATION.collectionName || col.remote !== false ||
+    priorCollectionIds.has(col.id) || priorCollectionKeys.has(col.key)) refuse('created-collection-identity');
+  if (typeof col.setSharedPluginData !== 'function' || typeof col.renameMode !== 'function' || !Array.isArray(col.modes) || col.modes.length !== 1 || !textId(col.modes[0].modeId) || col.defaultModeId !== col.modes[0].modeId) refuse('created-collection-capability');
+  col.setSharedPluginData(NS, OWNERSHIP_KEY, JSON.stringify(OWNERSHIP));
+  fileGuard();
+  const lightId = col.modes[0].modeId, lightName = mode.nativeModeName, darkId = null;
+  col.renameMode(lightId, lightName);
+  result.allocation.modes[0].name = col.modes[0].name;
+  if (col.modes[0].name !== lightName) refuse('created-mode-identity');
+  const existing = new Map(), allocated = new Map();
+  const byName = new Map(PREPARATION.variables.map((v) => [v.name, v]));
+  const createOwnedVariable = (name, collection, type) => {
+    fileGuard();
+    const expected = byName.get(name);
+    if (!expected || expected.resolvedType !== type || existing.has(name) || collection !== col) refuse('variable-plan-mismatch');
+    const variable = figma.variables.createVariable(name, collection, type);
+    result.allocation.variables.push({ tokenPath: expected.tokenPath, id: textId(variable?.id), key: textId(variable?.key) });
+    fileGuard();
+    if (!textId(variable?.id) || !textId(variable?.key) || variable.name !== name || variable.variableCollectionId !== col.id || variable.resolvedType !== type || variable.remote !== false ||
+      priorVariableIds.has(variable.id) || priorVariableKeys.has(variable.key) || allocated.has(variable.id) || [...allocated.values()].some((v) => v.key === variable.key)) refuse('created-variable-identity');
+    if (typeof variable.setSharedPluginData !== 'function' || typeof variable.setValueForMode !== 'function') refuse('created-variable-capability');
+    allocated.set(variable.id, variable);
+    variable.setSharedPluginData(NS, OWNERSHIP_KEY, JSON.stringify({ ...OWNERSHIP, tokenPath: expected.tokenPath, collectionId: col.id, collectionKey: col.key }));
+    return variable;
+  };
+  const applyValue = (variable, modeId, modeName, value, created) => {
+    fileGuard();
+    if (!created || allocated.get(variable.id) !== variable || modeId !== lightId || modeName !== lightName) refuse('existing-value-write');
+    variable.setValueForMode(modeId, value);
+    return true;
+  };
+  const TOKENS = mode.rows, SKIPPED_VALUES = [];
+  ${tokenRowsUpsertRuntime('createOwnedVariable')}
+  if (updated !== 0 || skippedValues.length || created !== PREPARATION.variables.length) refuse('incomplete-creation');
+  fileGuard();
+  // Identity is assembled from the original allocation records, never from a
+  // later name lookup or readback. Keep it even if receipt access now fails.
+  result.creationIdentity = { origin: 'created', preparationRevision: PREPARATION.revision, fileKey: PREPARATION.fileKey,
+    collection: copy(result.allocation.collection), modes: copy(result.allocation.modes), variables: copy(result.allocation.variables) };
+  result.receipt = receiptOf(col, [...allocated.values()]);
+  result.created = created;
+  result.aliased = aliased;
+  result.status = 'created-candidate';
+} catch (error) {
+  result.status = result.allocation.collection ? 'partial-allocation' : 'refused';
+  result.problems = [problem(error)];
+}
+return result;
+`;
+  return { preparation, script };
+}
+
+/** Emit a separate READ-ONLY observation by the identity persisted from
+ * creation (or a verified earlier observation). This never performs name
+ * discovery or repairs drift. The host must run verifyNativeTokenContextReceipt
+ * on its result; collection of a receipt is not a verification pass. */
+export function emitNativeTokenContextReadbackScript(
+  input: NativeTokenContextInput,
+  identity: NativeTokenIdentity,
+): string {
+  const preparation = scopedTokenPreparation(input);
+  // Use the pure verifier to validate the expectation's complete ID/mode/path
+  // shape. These generated expected values authenticate NO native observation.
+  const variables = new Map(identity?.variables?.map((v) => [v.tokenPath, v]) ?? []);
+  const expectedReceipt: NativeTokenContextReceipt = {
+    fileKey: identity?.fileKey,
+    collection: {
+      ...identity?.collection,
+      remote: false,
+      ownership: { scopeId: preparation.scopeId, preparationRevision: preparation.revision, source: preparation.source },
+      defaultModeId: identity?.modes?.[0]?.modeId,
+      modes: identity?.modes?.map((m) => ({ modeId: m.modeId, name: m.name })) ?? [],
+    },
+    variables: preparation.variables.map((v) => {
+      const expected = variables.get(v.tokenPath);
+      return {
+        id: expected?.id ?? '', key: expected?.key ?? '', name: v.name,
+        variableCollectionId: identity?.collection?.id, resolvedType: v.resolvedType, remote: false,
+        valuesByMode: Object.fromEntries(v.values.map(({ value }, index) => [identity?.modes?.[index]?.modeId,
+          value && typeof value === 'object' && 'type' in value
+            ? { type: 'VARIABLE_ALIAS', id: variables.get(value.targetPath)?.id ?? '' }
+            : value,
+        ])),
+      };
+    }),
+  };
+  const checked = verifyNativeTokenContextReceipt({ input, expectedIdentity: identity, receipt: expectedReceipt });
+  if (checked.status !== 'native-token-context-observed') throw new Error(checked.problems[0]);
+  return `// GENERATED read-only native token observation. No allocation or repair.
+${nativeTokenReceiptRuntime(preparation)}
+const EXPECTED = ${JSON.stringify(identity)};
+const result = { version: 1, status: 'refused', acceptedContract: null, nativeQualification: 'unqualified',
+  preparationRevision: PREPARATION.revision, receiptKind: 'independent-native-readback', problems: [] };
+try {
+  fileGuard();
+  requireApi(['getVariableCollectionByIdAsync', 'getVariableByIdAsync']);
+  const collection = await figma.variables.getVariableCollectionByIdAsync(EXPECTED.collection.id);
+  fileGuard();
+  if (!collection || collection.id !== EXPECTED.collection.id || collection.key !== EXPECTED.collection.key) refuse('readback-collection-identity');
+  const expectedIds = EXPECTED.variables.map((v) => v.id).sort();
+  const checkInventory = () => {
+    if (!Array.isArray(collection.variableIds) || JSON.stringify([...collection.variableIds].sort()) !== JSON.stringify(expectedIds)) refuse('readback-variable-inventory');
+  };
+  checkInventory();
+  const variables = await Promise.all(EXPECTED.variables.map((v) => figma.variables.getVariableByIdAsync(v.id)));
+  fileGuard();
+  checkInventory();
+  if (variables.some((v, i) => !v || v.id !== EXPECTED.variables[i].id || v.key !== EXPECTED.variables[i].key || v.variableCollectionId !== collection.id)) refuse('readback-variable-identity');
+  result.receipt = receiptOf(collection, variables);
+  result.status = 'readback-collected';
+} catch (error) {
+  result.problems = [problem(error)];
+}
+return result;
 `;
 }

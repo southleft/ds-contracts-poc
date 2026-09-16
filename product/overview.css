@@ -74,3 +74,14 @@
     padding: 0.65rem;
   }
 }
+
+.product-overview pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid #7d8b9b66;
+  border-radius: 0.35rem;
+}
+.product-overview [id] {
+  scroll-margin-top: 6rem;
+}

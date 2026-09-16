@@ -1,3 +1,5 @@
+import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
+import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
 import {
@@ -8,8 +10,23 @@ import {
   readFileSync,
 } from "node:fs";
 import path from "node:path";
+import { createSourceFramingStore } from "./source-framing.js";
+import { recordedStoryUrl } from "./binding-evidence.js";
 import { createBindingJobs } from "./binding-jobs.js";
+import {
+  createCandidateJobs,
+  type CandidateJobsOptions,
+} from "./candidate-jobs.js";
+import { validateCandidatePreparationReport } from "./candidate-report.js";
+import { validateCandidateVisualReport } from "./candidate-visual-report.js";
+import {
+  createNativeOperationJobs,
+  prepareVerifiedNativeOperation,
+  prepareVerifiedNativeComponentWrite,
+  type NativeOperationJobsOptions,
+} from "./native-operation-jobs.js";
 import type { BindingEvidenceRequest } from "./binding-evidence.js";
+import { createNativeOperationTransport } from "./native-operation-transport.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import {
   altitudeCohort,
@@ -71,17 +88,54 @@ export function loopbackOrigin(value: unknown): string {
   return url.origin;
 }
 
-/** Dev-only service. No remote files, shell interpolation, Figma writes, HAR
- * downloads or owner grades. Request values cannot choose a script or checkout. */
+/** Dev-only service. No remote files, shell interpolation, HAR downloads or
+ * owner grades. Native execution belongs to the authenticated companion plugin;
+ * request values cannot choose a script, native target or checkout. */
 export function createReferenceService(
   repoRoot: string,
   launch?: Launch,
   bindingLaunch?: Launch,
+  candidateOptions: Partial<
+    Pick<
+      CandidateJobsOptions,
+      "run" | "validateReport" | "validateVisualReport"
+    >
+  > = {},
+  nativeOptions?: NativeOperationJobsOptions,
 ) {
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
   const bindingJobs = createBindingJobs(repoRoot, bindingLaunch);
+  // Trusted in-process callbacks only. HTTP requests never choose builders,
+  // validators, original source paths, revisions or artifact locations.
+  const candidateJobs = createCandidateJobs(repoRoot, {
+    selectLatestVerified: (request) =>
+      bindingJobs.selectLatestVerified(request),
+    validateReport:
+      candidateOptions.validateReport ?? validateCandidatePreparationReport,
+    visualJobVersion: 3,
+    validateVisualReport:
+      candidateOptions.validateVisualReport ?? validateCandidateVisualReport,
+    ...(candidateOptions.run ? { run: candidateOptions.run } : {}),
+  });
+  const nativeJobs = createNativeOperationJobs(
+    repoRoot,
+    nativeOptions ?? {
+      prepare: (request, operation) =>
+        prepareVerifiedNativeOperation(
+          repoRoot,
+          candidateJobs.selectLatestVisualVerified(request),
+          operation,
+        ),
+      buildComponent: (request, context) =>
+        prepareVerifiedNativeComponentWrite(
+          repoRoot,
+          candidateJobs.selectLatestVisualVerified(request),
+          context,
+        ),
+    },
+  );
   let active:
     { job: ReferenceJob; child: Pick<ChildProcess, "kill"> } | undefined;
   const execute: Launch =
@@ -384,6 +438,12 @@ export function createReferenceService(
                     : "awaiting-source-integrity",
             }
           : null,
+        sourceImageSha256:
+          evidenceValid &&
+          data?.qualified &&
+          /^[a-f0-9]{64}$/.test(data?.source?.sha256 ?? "")
+            ? data.source.sha256
+            : null,
         sourceImage: evidenceFile(job.id, story, "source.png")
           ? `/api/source-reference/${job.id}/${story}/source.png`
           : null,
@@ -531,6 +591,33 @@ export function createReferenceService(
             });
           }
         }
+        // Re-derive any identity policy from the authenticated local source
+        // graph. Never trust the receipt to authorize its own ID renaming.
+        const identityProgram = loadRecordedSourceProgram({
+          checkout,
+          revision: final.sourceRevision,
+          manifestPath,
+          manifestSha256,
+          sourceHashes: final.sourceHashes,
+          modulePath: declaration.modulePath,
+          className: declaration.className,
+        });
+        const identityEntry =
+          identityProgram.status !== "refused" &&
+          identityProgram.modules.find(
+            (m) => m.path === identityProgram.entryPath,
+          );
+        const identityPolicy = identityEntry
+          ? deriveLifecycleIdentityPolicy(
+              {
+                source: identityEntry.text,
+                sourceSha256: identityEntry.sha256,
+                modulePath: declaration.modulePath,
+                className: declaration.className,
+              },
+              declaration,
+            )
+          : undefined;
         plans.push(
           planSourceContract({
             component: {
@@ -544,6 +631,7 @@ export function createReferenceService(
               manifestSha256,
             },
             declaration,
+            identityPolicy,
             declarationProblems: manifest.problems,
             observations,
           }),
@@ -561,14 +649,65 @@ export function createReferenceService(
       problems,
     };
   }
-  const snapshotWithSupplement = (job: ReferenceJob) => ({
-    ...snapshot(job),
-    supplements: [...jobs.values()]
-      .filter((child) => child.parent?.id === job.id)
-      .map(snapshot),
-    contractAdmission: contractAdmission(job),
-    bindingTraces: bindingJobs.list(job.id),
+  const sourceFraming = createSourceFramingStore(repoRoot, (run, story) => {
+    const job = jobs.get(run);
+    const fixed =
+      job && cohort(job.cohortId).find((entry) => entry.story === story);
+    const summary =
+      job && snapshot(job).rows.find((row) => row.story === story);
+    const file = fixed && evidenceFile(run, story, "measurement.json");
+    const row = file && read(file);
+    const sourceFile = fixed && evidenceFile(run, story, "source.png");
+    const harFile = fixed && evidenceFile(run, story, "source.har");
+    if (
+      !job ||
+      job.state !== "complete" ||
+      !fixed ||
+      summary?.status !== "valid" ||
+      !row ||
+      !sourceFile ||
+      !harFile ||
+      JSON.stringify(row.profile) !== JSON.stringify(fixed.profile) ||
+      !/^[a-f0-9]{64}$/.test(row.archive?.sha256 ?? "") ||
+      fileHash(harFile) !== row.archive.sha256
+    )
+      throw Error("source-framing-evidence-unavailable");
+    return {
+      source: readFileSync(sourceFile),
+      sourceSha256: row.source.sha256,
+      harPath: harFile,
+      harSha256: row.archive.sha256,
+      url: recordedStoryUrl(readFileSync(harFile), story),
+      profile: fixed.profile,
+    };
   });
+  const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
+  const snapshotWithSupplement = (job: ReferenceJob) => {
+    const connectionObservedAt = Date.now();
+    const candidates = candidateJobs.list(job.id);
+    const nativeOperation = nativeJobs.forBaseline(job.id);
+    return {
+      ...snapshot(job),
+      supplements: [...jobs.values()]
+        .filter((child) => child.parent?.id === job.id)
+        .map(snapshot),
+      contractAdmission: contractAdmission(job),
+      bindingTraces: bindingJobs.list(job.id),
+      candidatePreparations: candidates.filter(
+        (candidate) =>
+          candidate.operation === undefined ||
+          candidate.operation === "source-preparation",
+      ),
+      candidateVisuals: candidates.filter(
+        (candidate) => candidate.operation === "source-visual-assembly",
+      ),
+      nativeOperation,
+      nativeConnection:
+        nativeOperation && nativeOperation.phase !== "evidence-unavailable"
+          ? nativeTransport.status(nativeOperation.id, connectionObservedAt)
+          : null,
+    };
+  };
   function start(
     origin: string,
     cohortId: CohortId = "baseline",
@@ -637,13 +776,218 @@ export function createReferenceService(
       json(res, 403, { error: "Local host required." });
       return;
     }
+    const route = (req.url ?? "")
+      .split("?")[0]
+      .replace(/^\/api\/source-reference\/?/, "");
+    // The plugin is a different origin. Only these two routes accept its
+    // high-entropy pairing capability; no general service CORS exemption.
+    const pluginRoute = /^native\/([a-f0-9-]+)\/(claim|result)$/.exec(route);
+    const body = async (limit: number) => {
+      if (!req.headers["content-type"]?.startsWith("application/json"))
+        throw Error("JSON required");
+      const chunks: Buffer[] = [];
+      let size = 0;
+      for await (const chunk of req) {
+        const bytes = Buffer.from(chunk);
+        size += bytes.length;
+        if (size > limit) throw Error("Request too large");
+        chunks.push(bytes);
+      }
+      return JSON.parse(Buffer.concat(chunks).toString());
+    };
+    if (pluginRoute) {
+      if (req.headers.origin === "null") {
+        res.setHeader("Access-Control-Allow-Origin", "null");
+        res.setHeader(
+          "Access-Control-Allow-Headers",
+          "Authorization, Content-Type",
+        );
+        res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+      } else if (req.headers.origin && req.headers.origin !== host.origin) {
+        json(res, 403, { error: "Plugin origin required." });
+        return;
+      }
+      if (req.method === "OPTIONS") {
+        res.statusCode = 204;
+        res.end();
+        return;
+      }
+      if (req.method !== "POST") {
+        json(res, 405, { error: "POST required." });
+        return;
+      }
+      const secret =
+        /^Bearer ([a-f0-9]{64})$/.exec(req.headers.authorization ?? "")?.[1] ??
+        "";
+      try {
+        nativeTransport.authorize(pluginRoute[1], secret);
+      } catch {
+        json(res, 403, { error: "Native connection refused." });
+        return;
+      }
+      try {
+        const payload = await body(
+          pluginRoute[2] === "claim" ? 2048 : 4 * 1024 * 1024,
+        );
+        if (pluginRoute[2] === "claim") {
+          if (
+            !object(payload) ||
+            Object.keys(payload).some(
+              (key) => !["fileKey", "replaceReadbackAttemptId"].includes(key),
+            ) ||
+            typeof payload.fileKey !== "string" ||
+            (payload.replaceReadbackAttemptId !== undefined &&
+              (typeof payload.replaceReadbackAttemptId !== "string" ||
+                !UUID.test(payload.replaceReadbackAttemptId)))
+          ) {
+            json(res, 400, {
+              error:
+                "Only the active file and an optional interrupted readback identity are accepted.",
+            });
+            return;
+          }
+          json(
+            res,
+            200,
+            nativeTransport.claim(
+              pluginRoute[1],
+              secret,
+              payload.fileKey,
+              payload.replaceReadbackAttemptId,
+            ),
+          );
+        } else {
+          json(
+            res,
+            200,
+            nativeTransport.accept(pluginRoute[1], secret, payload),
+          );
+        }
+      } catch {
+        json(res, 409, {
+          error:
+            "Native delivery could not proceed. Inspect the operation in the local app; a missing result does not authorize another creation.",
+        });
+      }
+      return;
+    }
     if (req.headers.origin && req.headers.origin !== host.origin) {
       json(res, 403, { error: "Same-origin access required." });
       return;
     }
-    const route = (req.url ?? "")
-      .split("?")[0]
-      .replace(/^\/api\/source-reference\/?/, "");
+    const framingRoute =
+      /^([a-f0-9-]+)\/([a-z-]+)\/framing(?:\/([a-f0-9]{64})\.png)?$/.exec(
+        route,
+      );
+    if (framingRoute && (req.method === "GET" || req.method === "POST")) {
+      const [, run, story, imageHash] = framingRoute;
+      try {
+        if (!UUID.test(run) || !stories.has(story))
+          throw Error("source-framing-target-invalid");
+        if (req.method === "POST") {
+          const payload = await body(2048);
+          if (imageHash || !object(payload) || Object.keys(payload).length) {
+            json(res, 400, {
+              error:
+                "Only an empty object is accepted; the recorded source chooses the framing.",
+            });
+            return;
+          }
+          if (active || candidateJobs.running || bindingJobs.running)
+            throw Error("source-framing-busy");
+          json(res, 200, { frame: await sourceFraming.create(run, story) });
+        } else if (imageHash) {
+          const bytes = sourceFraming.image(run, story, imageHash);
+          res.setHeader("Content-Type", "image/png");
+          res.setHeader("Cache-Control", "no-store");
+          res.setHeader("X-Content-Type-Options", "nosniff");
+          res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+          res.end(bytes);
+        } else json(res, 200, { frame: sourceFraming.read(run, story) });
+      } catch {
+        json(res, req.method === "POST" ? 409 : 404, {
+          error:
+            "Source framing unavailable. The original must replay exactly and its recorded evidence must remain unchanged. Wait for any active framing request before retrying.",
+        });
+      }
+      return;
+    }
+    const nativeImage =
+      /^native\/([a-f0-9-]+)\/images\/([a-f0-9-]+)\/([a-f0-9]{64})\.png$/.exec(
+        route,
+      );
+    if (req.method === "GET" && nativeImage) {
+      try {
+        const png = nativeJobs.image(
+          nativeImage[1],
+          nativeImage[2],
+          nativeImage[3],
+        );
+        res.setHeader("Content-Type", "image/png");
+        res.setHeader("Cache-Control", "no-store");
+        res.setHeader("X-Content-Type-Options", "nosniff");
+        res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+        res.end(png);
+      } catch {
+        json(res, 404, { error: "Current native image unavailable." });
+      }
+      return;
+    }
+    const nativeAction =
+      /^([a-f0-9-]+)\/button-native-(connection|start|retry-observation)$/.exec(
+        route,
+      );
+    if (req.method === "POST" && nativeAction) {
+      try {
+        const payload = await body(2048);
+        if (!object(payload) || Object.keys(payload).length) {
+          json(res, 400, { error: "Only an empty object is accepted." });
+          return;
+        }
+        const baseline = jobs.get(nativeAction[1]);
+        const operation =
+          baseline && !baseline.parent
+            ? nativeJobs.forBaseline(baseline.id)
+            : null;
+        if (
+          !baseline ||
+          !operation ||
+          operation.phase === "evidence-unavailable"
+        ) {
+          json(res, 409, {
+            error: "Prepare a verified native operation first.",
+          });
+          return;
+        }
+        if (nativeAction[2] === "connection") {
+          // Development manifest explicitly allows this one local app port.
+          if (host.port !== "5181") {
+            json(res, 409, {
+              error: "Native pairing requires the local app on port 5181.",
+            });
+            return;
+          }
+          json(res, 200, { connection: nativeTransport.pair(operation.id) });
+        } else {
+          if (active || candidateJobs.running || bindingJobs.running) {
+            json(res, 409, {
+              error: "Wait for the current source operation to finish.",
+            });
+            return;
+          }
+          if (nativeAction[2] === "retry-observation")
+            nativeTransport.retryObservation(operation.id);
+          else nativeTransport.start(operation.id);
+          json(res, 202, snapshotWithSupplement(baseline));
+        }
+      } catch {
+        json(res, 409, {
+          error:
+            "Native connection or start refused. Inspect the saved operation before retrying.",
+        });
+      }
+      return;
+    }
     if (req.method === "GET" && !route) {
       json(res, 200, {
         adapter: "Altitude Web Components",
@@ -652,6 +996,14 @@ export function createReferenceService(
         checkoutAvailable: existsSync(
           path.join(checkout, "libs/al-web-components/.storybook/preview.ts"),
         ),
+        runs: [...jobs.values()]
+          .filter((job) => !job.parent)
+          .map(({ id, state, startedAt, completedAt }) => ({
+            id,
+            state,
+            startedAt,
+            completedAt,
+          })),
         latest: [...jobs.values()].filter((job) => !job.parent).at(-1)
           ? snapshotWithSupplement(
               [...jobs.values()].filter((job) => !job.parent).at(-1)!,
@@ -662,7 +1014,15 @@ export function createReferenceService(
     }
     const supplementalMatch = /^([a-f0-9-]+)\/button-variants$/i.exec(route);
     const bindingMatch = /^([a-f0-9-]+)\/button-bindings$/i.exec(route);
-    if (req.method === "POST" && bindingMatch) {
+    const candidateMatch = /^([a-f0-9-]+)\/button-candidate$/i.exec(route);
+    const visualMatch = /^([a-f0-9-]+)\/button-visual-candidate$/i.exec(route);
+    const nativeMatch = /^([a-f0-9-]+)\/button-native-operation$/i.exec(route);
+    if (
+      req.method === "POST" &&
+      (bindingMatch || candidateMatch || visualMatch || nativeMatch)
+    ) {
+      const preparingCandidate =
+        !!candidateMatch || !!visualMatch || !!nativeMatch;
       if (!req.headers["content-type"]?.startsWith("application/json")) {
         json(res, 415, { error: "JSON required." });
         return;
@@ -675,19 +1035,36 @@ export function createReferenceService(
           if (size > 2048) throw Error("Request too large.");
           chunks.push(Buffer.from(chunk));
         }
-        const request = JSON.parse(Buffer.concat(chunks).toString());
+        let request: unknown;
+        try {
+          request = JSON.parse(Buffer.concat(chunks).toString());
+        } catch {
+          json(res, 400, { error: "A JSON object is required." });
+          return;
+        }
         if (
           !object(request) ||
+          (nativeMatch && Object.keys(request).length !== 0) ||
           Object.keys(request).some((key) => key !== "retry") ||
-          (request.retry !== undefined && typeof request.retry !== "boolean")
+          (request.retry !== undefined &&
+            (preparingCandidate
+              ? request.retry !== true
+              : typeof request.retry !== "boolean"))
         ) {
           json(res, 400, {
-            error:
-              "Only an optional Boolean retry is accepted; source, scripts and replay targets are fixed.",
+            error: nativeMatch
+              ? "Only an empty object is accepted; source evidence, native target and operation identity are fixed."
+              : preparingCandidate
+                ? "Only an empty object or retry: true is accepted; source evidence and preparation are fixed."
+                : "Only an optional Boolean retry is accepted; source, scripts and replay targets are fixed.",
           });
           return;
         }
-        const baseline = jobs.get(bindingMatch[1]);
+        // These actions use the same host-selected baseline and latest
+        // supplement. Caller-supplied IDs/hashes cannot override this request.
+        const baseline = jobs.get(
+          (nativeMatch ?? visualMatch ?? candidateMatch ?? bindingMatch)![1],
+        );
         const file = baseline
           ? evidenceFile(baseline.id, "measurement.json")
           : null;
@@ -702,15 +1079,20 @@ export function createReferenceService(
           !parentMatches(parent)
         ) {
           json(res, 409, {
-            error:
-              "A complete unchanged original baseline is required for binding replay.",
+            error: preparingCandidate
+              ? "A complete unchanged original baseline is required for source candidate preparation."
+              : "A complete unchanged original baseline is required for binding replay.",
           });
           return;
         }
-        if (active) {
+        if (
+          active ||
+          (nativeMatch && candidateJobs.running) ||
+          (preparingCandidate ? bindingJobs.running : candidateJobs.running)
+        ) {
           json(res, 409, {
             error:
-              "An original-source capture is running. Wait for it to finish before replaying bindings.",
+              "Another source capture, binding replay or candidate operation is running. Wait for it to finish.",
           });
           return;
         }
@@ -740,12 +1122,22 @@ export function createReferenceService(
             sha256: fileHash(childFile),
           };
         }
-        bindingJobs.start(evidence, request.retry === true);
+        if (nativeMatch) nativeJobs.prepare(evidence);
+        else if (visualMatch)
+          candidateJobs.startVisual(evidence, request.retry === true);
+        else if (candidateMatch)
+          candidateJobs.start(evidence, request.retry === true);
+        else bindingJobs.start(evidence, request.retry === true);
         json(res, 202, snapshotWithSupplement(baseline));
       } catch {
         json(res, 409, {
-          error:
-            "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
+          error: nativeMatch
+            ? "Native operation preparation is unavailable. It requires the current verified visual candidate; changed evidence and existing operation history cannot be replaced. No native execution was requested."
+            : visualMatch
+              ? "Visual candidate derivation could not start. A current verified source/runtime preparation is required; unavailable, changed or active evidence cannot be reused."
+              : preparingCandidate
+                ? "Source candidate preparation could not start. Complete a current binding trace for the fixed original evidence; unavailable, changed or active evidence cannot be prepared."
+                : "Binding replay could not start. Its fixed original evidence is unavailable, changed, or another replay is active.",
         });
       }
       return;
@@ -773,10 +1165,10 @@ export function createReferenceService(
       return;
     }
     if (req.method === "POST" && (!route || supplementalMatch)) {
-      if (bindingJobs.running) {
+      if (bindingJobs.running || candidateJobs.running) {
         json(res, 409, {
           error:
-            "A recorded-source binding replay is running. Wait before starting another capture.",
+            "A source binding replay or candidate preparation is running. Wait before starting another capture.",
         });
         return;
       }
@@ -860,6 +1252,15 @@ export function createReferenceService(
           });
           return;
         }
+        // Storybook preflight awaited network I/O. Re-check immediately before
+        // launching: another request may have started a replay/preparation.
+        if (bindingJobs.running || candidateJobs.running) {
+          json(res, 409, {
+            error:
+              "A source binding replay or candidate preparation started during preflight. No capture was launched.",
+          });
+          return;
+        }
         const job = start(origin, selection, parent);
         json(res, 202, snapshotWithSupplement(baseline ?? job));
       } catch {
@@ -891,9 +1292,19 @@ export function createReferenceService(
       ) {
         const file = evidenceFile(id, story, asset);
         if (file) {
+          const png = readFileSync(file);
+          const expected = new URL(req.url!, host).searchParams.get("sha256");
+          if (
+            expected !== null &&
+            (!/^[a-f0-9]{64}$/.test(expected) ||
+              createHash("sha256").update(png).digest("hex") !== expected)
+          ) {
+            json(res, 404, { error: "Recorded source image changed." });
+            return;
+          }
           res.setHeader("Content-Type", "image/png");
           res.setHeader("Cache-Control", "no-store");
-          res.end(readFileSync(file));
+          res.end(png);
           return;
         }
       }
@@ -903,6 +1314,7 @@ export function createReferenceService(
   return {
     handle,
     close() {
+      candidateJobs.close();
       bindingJobs.close();
       if (active) {
         active.job.state = "interrupted";

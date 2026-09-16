@@ -8,6 +8,7 @@ import { Examples } from "./pages/Examples";
 import { Flow } from "./pages/Flow";
 import { Playground } from "./pages/Playground";
 import { Sources } from "./pages/Sources";
+import { Start } from "./pages/Start";
 import { System } from "./pages/System";
 
 export const REPO_URL = "https://github.com/southleft/ds-contracts-poc";
@@ -42,6 +43,9 @@ function TopBar() {
         <span className="topbar__brand-name">Contract Playground</span>
       </Link>
       <nav className="topbar__nav">
+        <Link to="/start" className={navClass("/start")}>
+          Start here
+        </Link>
         <Link to="/system" className={navClass("/system")}>
           The whole loop
         </Link>
@@ -88,6 +92,7 @@ function TopBar() {
 
 function Routes() {
   const { pathname } = useRoute();
+  if (pathname === "/start") return <Start />;
   if (pathname === "/system") return <System />;
   if (pathname === "/sources") return <Sources />;
   if (pathname === "/playground") return <Playground />;
@@ -104,17 +109,18 @@ function PivotBanner() {
   if (pathname === "/sources")
     return (
       <div className="pivot-banner" role="note">
-        Live source validation is the first step of the new workflow. Figma
-        generation and round-trip comparison are not connected here yet.
-        {" "}<Link to="/system">See the whole loop and remaining work.</Link>
+        Validate live source, then create and inspect a Figma candidate with the
+        local development plugin. Native exports are diagnostic; the complete
+        round-trip workflow is still unqualified.{" "}
+        <Link to="/system">See the whole loop and remaining work.</Link>
       </div>
     );
   return (
     <div className="pivot-banner" role="note">
       <span>
-        Current engine, incomplete product integration. The contract demo's canvas
-        preview is HTML, not a live Figma export. Autonomous v1 is not complete.{" "}
-        <Link to="/system">The whole loop and remaining work</Link>
+        Current engine, incomplete product integration. The contract demo's
+        canvas preview is HTML, not a live Figma export. Autonomous v1 is not
+        complete. <Link to="/system">The whole loop and remaining work</Link>
       </span>
     </div>
   );

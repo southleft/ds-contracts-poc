@@ -5,42 +5,19 @@ import { contractsById } from "../engine/data";
 export function Landing() {
   return (
     <div className="landing">
-      <p className="landing__kicker">
-        Design-system contracts — engine explorer
-      </p>
-      <h1>The contract loop, in your browser.</h1>
+      <p className="landing__kicker">Design System Contracts</p>
+      <h1>Start with the library you have.</h1>
       <p className="landing__pitch">
-        A <b>contract</b> is one JSON file per component. It records the things
-        design and engineering have to agree on — the props and their legal
-        values, the parts the component is made of, which design token paints
-        each part, and its states. Both a React component and a real Figma
-        component set can be <i>generated</i> from supported contracts. The
-        autonomous apply-and-reobserve product loop is not connected yet.
+        Turn supported component facts into a shared contract, generate the
+        other surface, and verify the result. The goal includes tables, forms
+        and other composed components with nested instances, slots, variants and
+        tokens.
       </p>
       <p className="landing__pitch">
-        This page runs the current checked-out <code>core/</code> engine's
-        universal-contract workflow —
-        the same code behind a {contractsById.size}-component library — right
-        in your browser. Load a contract, change it, and watch what happens:
-        the React, the HTML, the Figma sync script and the canvas preview all
-        move together, and anything the engine can&rsquo;t do it says out loud
-        instead of guessing. The canvas preview is HTML, not a native Figma
-        export. Editing a pasted contract is local; connected import and source
-        validation are separate operations.
-      </p>
-      <p className="landing__pitch">
-        <b>Start here:</b> open an example, then break its contract on purpose —
-        delete a required field, or point a token binding at a name that
-        doesn&rsquo;t exist. The refusal that appears, named and on screen, is
-        the whole idea.
-      </p>
-      <p className="landing__pitch landing__pitch--aside">
-        <b>What to use next:</b>{" "}
-        <Link to="/sources">Source validation</Link> checks a real styled
-        original before conversion. <Link to="/system">The whole loop</Link>{" "}
-        explains the current architecture, transport adapters and remaining
-        code-led, design-led and brownfield work. This engine explorer teaches
-        contract mechanics; it does not prove those complete journeys.
+        Today you can import and inspect proposals, explore generated code, and
+        validate a configured local source library. Complete connected
+        conversion and two-way repair are still in development. Choose a path
+        for its setup, available actions and remaining steps.
       </p>
 
       {/* The one-line thesis: it may wrap BETWEEN steps at narrow widths but
@@ -66,52 +43,50 @@ export function Landing() {
       </div>
 
       <div className="landing__ctas">
-        <Link to="/flow" className="cta">
-          <div className="cta__title">How it flows</div>
+        <a href="/start#designer-first" className="cta">
+          <div className="cta__title">I have a Figma library</div>
           <div className="cta__desc">
-            Two guided walkthroughs — code → Figma and Figma → code — through
-            the contract, on the real engine, with every receipt shown as it is
-            produced.
+            Import an approved set, review its contract and inspect generated
+            code. See the steps to reusable library delivery.
           </div>
-        </Link>
-        <Link to="/examples" className="cta">
-          <div className="cta__title">Try an example</div>
+        </a>
+        <a href="/start#code-first" className="cta">
+          <div className="cta__title">I have a code library</div>
           <div className="cta__desc">
-            Pick from the gallery — atoms to compositions, plus foreign code
-            degrading honestly.
+            Inspect original components and their states. Follow the path to
+            editable native Figma components.
           </div>
-        </Link>
-        <Link to="/playground?source=figma" className="cta">
-          <div className="cta__title">Import from Figma</div>
+        </a>
+        <a href="/start#both-libraries" className="cta">
+          <div className="cta__title">I already have both</div>
           <div className="cta__desc">
-            Paste a figma.com component URL + token; get a proposed contract
-            with real bindings or named degradations.
+            Understand identity mapping, shared ownership, drift comparison and
+            the repair workflow being built.
           </div>
-        </Link>
-        <Link to="/playground?source=code" className="cta">
-          <div className="cta__title">Paste code</div>
-          <div className="cta__desc">
-            TSX + CSS in, a proposed contract out — raw values reported with
-            nearest-token candidates, never invented.
-          </div>
-        </Link>
+        </a>
       </div>
+      <p className="landing__pitch landing__pitch--aside">
+        <Link to="/start">Installation and full user guide</Link>
+        {" · "}
+        <Link to="/examples">Explore examples</Link>
+        {" · "}
+        <Link to="/system">Current status and milestone exits</Link>
+      </p>
 
       <p className="landing__foot">
-        Same pre-pivot engine, no demo copy: the code emitting here generates
-        the repo&rsquo;s {contractsById.size} shipping{" "}
-        <code>*.contract.json</code> components, byte-guarded by its evals.
-        That is not recipe-IR.{" "}
+        The explorer runs the checked-out engine over {contractsById.size}{" "}
+        repository contracts. Generated previews are useful engine checks;
+        native Figma verification remains separate.{" "}
         <a href={REPO_URL} target="_blank" rel="noreferrer">
           Source on GitHub
         </a>{" "}
         ·{" "}
         <a
-          href={`${REPO_URL}/blob/main/MILESTONES.md`}
+          href={`${REPO_URL}/blob/main/docs/CURRENT.md`}
           target="_blank"
           rel="noreferrer"
         >
-          Milestones
+          Current status
         </a>
       </p>
     </div>
