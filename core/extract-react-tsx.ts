@@ -753,6 +753,10 @@ export interface SourceFileInput {
   sourcePath: string;
   /** The .tsx/.ts source text. */
   source: string;
+  /** Optional installed-program API facts. The host reader must verify these
+   * against this exact source and declaration bytes. Syntax-only callers keep
+   * their existing behavior; anatomy is still read from the original JSX. */
+  resolvedComponents?: Record<string, { props: ExtractedProp[]; notes: string[] }>;
   /** Co-located *.module.css text, when one exists — unlocks anatomy. */
   css?: string;
   /** Sibling type files (`<basename>.types.ts` convention) whose interface/
@@ -785,6 +789,11 @@ export function extractFromSource(
   const cvaTables = collectCvaTables(sf);
   for (const [componentName, propsType] of findComponents(sf)) {
     if (seen.has(componentName)) continue;
+    const installed = input.resolvedComponents?.[componentName];
+    if (input.resolvedComponents && !installed) {
+      skipped?.push({ name: componentName, source: input.sourcePath, reason: 'component has no verified installed-program API facts' });
+      continue;
+    }
     const { resolved, members, unresolved, heritage, forceOptional, unionNote } = membersOf(propsType, table);
     const typeNode = typeNodeOf(propsType, table);
     const cvaProps = typeNode ? cvaPropsFrom(typeNode, cvaTables) : [];
@@ -793,7 +802,7 @@ export function extractFromSource(
     const unresolvedRefs = [...new Set(unresolved)].filter(
       (u) => !(cvaProps.length > 0 && u.startsWith('VariantProps<')),
     );
-    if (members.length === 0 && cvaProps.length === 0) {
+    if (!installed && members.length === 0 && cvaProps.length === 0) {
       if (!resolved) {
         // A component we can SEE but cannot READ is reported, never
         // silently dropped — silent omission is the failure mode this
@@ -824,76 +833,82 @@ export function extractFromSource(
     seen.add(componentName);
     // Receipts a hollow or partially-read API must carry (extraction
     // proposes, never decides — and never claims silently).
-    const componentNotes: string[] = [];
-    if (members.length === 0 && cvaProps.length === 0) {
-      componentNotes.push(
-        heritage.length > 0
-          ? `props type has NO OWN members (extends ${heritage.join(', ')} — parent members are outside single-file extraction): zero own props is what this module declares — review`
-          : 'props type resolved with NO members — a zero-prop API is what this module declares; review',
-      );
-    } else if (unresolvedRefs.length > 0) {
-      componentNotes.push(
-        `props type composes named reference(s) [${unresolvedRefs.join(', ')}] whose members are outside module scope — those props are NOT carried (single-file extraction)`,
-      );
-    }
-    if (unionNote) componentNotes.push(unionNote);
-    // HERITAGE RECEIPT (Astryx round — found by the .doc.mjs referee): an
-    // interface WITH own members used to name its `extends` parents only in
-    // the zero-own-members receipt; a partially-read surface (`MoreMenuProps
-    // extends Pick<BaseProps, 'xstyle' | …>`) dropped them silently. Parent
-    // members are outside single-file extraction BY DESIGN — but the
-    // omission must be receipted, never silent.
-    if (heritage.length > 0 && (members.length > 0 || cvaProps.length > 0)) {
-      componentNotes.push(
-        `props type extends ${heritage.join(', ')} — parent members are outside single-file extraction and are NOT carried`,
-      );
-    }
-    const defaults = collectDefaults(sf, componentName);
-    const props: ExtractedProp[] = [...cvaProps];
-    for (const [i, p] of cvaProps.entries()) {
-      if (defaults.has(p.name) && p.default === undefined) {
-        props[i] = { ...p, default: defaults.get(p.name) };
+    const componentNotes: string[] = [...(installed?.notes ?? [])];
+    if (!installed) {
+      if (members.length === 0 && cvaProps.length === 0) {
+        componentNotes.push(
+          heritage.length > 0
+            ? `props type has NO OWN members (extends ${heritage.join(', ')} — parent members are outside single-file extraction): zero own props is what this module declares — review`
+            : 'props type resolved with NO members — a zero-prop API is what this module declares; review',
+        );
+      } else if (unresolvedRefs.length > 0) {
+        componentNotes.push(
+          `props type composes named reference(s) [${unresolvedRefs.join(', ')}] whose members are outside module scope — those props are NOT carried (single-file extraction)`,
+        );
+      }
+      if (unionNote) componentNotes.push(unionNote);
+      // HERITAGE RECEIPT (Astryx round — found by the .doc.mjs referee): an
+      // interface WITH own members used to name its `extends` parents only in
+      // the zero-own-members receipt; a partially-read surface (`MoreMenuProps
+      // extends Pick<BaseProps, 'xstyle' | …>`) dropped them silently. Parent
+      // members are outside single-file extraction BY DESIGN — but the
+      // omission must be receipted, never silent.
+      if (heritage.length > 0 && (members.length > 0 || cvaProps.length > 0)) {
+        componentNotes.push(
+          `props type extends ${heritage.join(', ')} — parent members are outside single-file extraction and are NOT carried`,
+        );
       }
     }
-    for (const m of members) {
-      if (!m.name || !ts.isIdentifier(m.name)) continue;
-      if (props.some((x) => x.name === (m.name as ts.Identifier).text)) continue;
-      const propName = m.name.text;
-      const cls = classifyMember(m, table, (note) => componentNotes.push(`prop \`${propName}\`: ${note}`));
-      if (!cls) continue;
-      // DEFAULT PRECEDENCE, and the disagreement is RECEIPTED, never merged.
-      // An initializer/defaultProps value is what the component RUNS; a JSDoc
-      // tag is what the library SAYS. When both exist and differ, the runtime
-      // fact wins and the documentation gap is named — silently reconciling
-      // them would hide a real drift between a library's docs and its code.
-      const runtimeDefault = defaults.has(propName) ? defaults.get(propName) : undefined;
-      const doc = jsDocDefault(m);
-      let docDefault: string | number | boolean | undefined;
-      if (doc) {
-        if ('unparsed' in doc) {
-          componentNotes.push(
-            `prop \`${propName}\`: JSDoc @${doc.tag} carries PROSE, not a literal ("${doc.unparsed}") — no default carried (a documented default is only read when it is a single literal token)`,
-          );
-        } else if (cls.kind === 'enum' && cls.values !== undefined && !cls.values.includes(String(doc.value))) {
-          componentNotes.push(
-            `prop \`${propName}\`: JSDoc @${doc.tag} documents "${String(doc.value)}", which is NOT one of the declared enum values [${cls.values.join(', ')}] — not carried as the default (a default outside its own value set is a contradiction, named rather than absorbed)`,
-          );
-        } else if (runtimeDefault !== undefined && runtimeDefault !== doc.value) {
-          componentNotes.push(
-            `prop \`${propName}\`: JSDoc @${doc.tag} documents ${JSON.stringify(doc.value)} but the initializer/defaultProps sets ${JSON.stringify(runtimeDefault)} — the INITIALIZER wins (it is what the component runs); the documented default is recorded here, never silently reconciled`,
-          );
-        } else {
-          docDefault = doc.value;
+    const props: ExtractedProp[] = installed ? structuredClone(installed.props) : readSyntacticProps();
+    function readSyntacticProps(): ExtractedProp[] {
+      const defaults = collectDefaults(sf, componentName);
+      const props: ExtractedProp[] = [...cvaProps];
+      for (const [i, p] of cvaProps.entries()) {
+        if (defaults.has(p.name) && p.default === undefined) {
+          props[i] = { ...p, default: defaults.get(p.name) };
         }
       }
-      const propDefault = runtimeDefault !== undefined ? runtimeDefault : docDefault;
-      props.push({
-        name: m.name.text,
-        optional: !!m.questionToken || (forceOptional?.has(m.name.text) ?? false),
-        ...(jsDocText(m) ? { description: jsDocText(m) } : {}),
-        ...cls,
-        ...(propDefault !== undefined ? { default: propDefault } : {}),
-      });
+      for (const m of members) {
+        if (!m.name || !ts.isIdentifier(m.name)) continue;
+        if (props.some((x) => x.name === (m.name as ts.Identifier).text)) continue;
+        const propName = m.name.text;
+        const cls = classifyMember(m, table, (note) => componentNotes.push(`prop \`${propName}\`: ${note}`));
+        if (!cls) continue;
+        // DEFAULT PRECEDENCE, and the disagreement is RECEIPTED, never merged.
+        // An initializer/defaultProps value is what the component RUNS; a JSDoc
+        // tag is what the library SAYS. When both exist and differ, the runtime
+        // fact wins and the documentation gap is named — silently reconciling
+        // them would hide a real drift between a library's docs and its code.
+        const runtimeDefault = defaults.has(propName) ? defaults.get(propName) : undefined;
+        const doc = jsDocDefault(m);
+        let docDefault: string | number | boolean | undefined;
+        if (doc) {
+          if ('unparsed' in doc) {
+            componentNotes.push(
+              `prop \`${propName}\`: JSDoc @${doc.tag} carries PROSE, not a literal ("${doc.unparsed}") — no default carried (a documented default is only read when it is a single literal token)`,
+            );
+          } else if (cls.kind === 'enum' && cls.values !== undefined && !cls.values.includes(String(doc.value))) {
+            componentNotes.push(
+              `prop \`${propName}\`: JSDoc @${doc.tag} documents "${String(doc.value)}", which is NOT one of the declared enum values [${cls.values.join(', ')}] — not carried as the default (a default outside its own value set is a contradiction, named rather than absorbed)`,
+            );
+          } else if (runtimeDefault !== undefined && runtimeDefault !== doc.value) {
+            componentNotes.push(
+              `prop \`${propName}\`: JSDoc @${doc.tag} documents ${JSON.stringify(doc.value)} but the initializer/defaultProps sets ${JSON.stringify(runtimeDefault)} — the INITIALIZER wins (it is what the component runs); the documented default is recorded here, never silently reconciled`,
+            );
+          } else {
+            docDefault = doc.value;
+          }
+        }
+        const propDefault = runtimeDefault !== undefined ? runtimeDefault : docDefault;
+        props.push({
+          name: m.name.text,
+          optional: !!m.questionToken || (forceOptional?.has(m.name.text) ?? false),
+          ...(jsDocText(m) ? { description: jsDocText(m) } : {}),
+          ...cls,
+          ...(propDefault !== undefined ? { default: propDefault } : {}),
+        });
+      }
+      return props;
     }
     let cssVars: string[] | undefined;
     let anatomy: ExtractedComponent['anatomy'];

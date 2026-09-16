@@ -1,3 +1,4 @@
+import type { ReactProgramProposal } from "../../../source-reference/react-program-proposal";
 import type {
   ReactSourceComponent,
   ReactRootFact,
@@ -34,6 +35,7 @@ export function ReactSourceReference() {
     status: string;
     sourceFiles: number;
     compatibilityNotes: string[];
+    proposal: ReactProgramProposal;
     components: ReactSourceComponent[];
     problems: string[];
   } | null>(null);
@@ -204,6 +206,57 @@ export function ReactSourceReference() {
                 ))}
               </ul>
             </div>
+          )}
+          {program?.proposal && (
+            <section aria-label="React contract proposals">
+              <h3>Contract proposals from installed APIs</h3>
+              <p>
+                {program.proposal.result.proposals.length} incomplete drafts.
+                These use the existing contract importer with installed property
+                types. Styling, source-to-node correspondence and native output
+                are still unverified.
+              </p>
+              {program.proposal.components.map((component) => (
+                <details key={component.name}>
+                  <summary>
+                    {component.name}: {component.carried.length} API properties
+                    carried; {component.unsupported.length} unsupported
+                  </summary>
+                  <p>Carried: {component.carried.join(", ") || "None"}</p>
+                  <ul>
+                    {component.unsupported.map((prop) => (
+                      <li key={prop.name}>
+                        {prop.name}: {prop.type} — {prop.reason}
+                      </li>
+                    ))}
+                  </ul>
+                  <p>{component.problems.join(" · ")}</p>
+                  <details>
+                    <summary>
+                      Platform forwarding outside the native API
+                    </summary>
+                    <p>{component.platform.join(", ")}</p>
+                  </details>
+                  <details>
+                    <summary>Proposed contract JSON</summary>
+                    <pre>
+                      {JSON.stringify(
+                        program.proposal.result.proposals.find(
+                          (p) => p.name === component.name,
+                        )?.proposal.contract ?? null,
+                        null,
+                        2,
+                      )}
+                    </pre>
+                  </details>
+                </details>
+              ))}
+              <ul>
+                {program.proposal.problems.map((problem) => (
+                  <li key={problem}>{problem}</li>
+                ))}
+              </ul>
+            </section>
           )}
           <section aria-label="React source API inspection">
             <h3>Source APIs and component roots</h3>

@@ -1,3 +1,4 @@
+import { proposeReactSourceProgram } from "./react-program-proposal.js";
 import {
   readReactSourceProgram,
   reactSourceProgramUnchanged,
@@ -254,7 +255,25 @@ export function createReactReferenceService(
           !reactSourceProgramUnchanged(program)
         )
           throw Error("source-changed");
-        const record = { version: 1, referenceId: reference.id, program };
+        const proposal = proposeReactSourceProgram(
+          program,
+          modules.map((module) => ({
+            sourcePath: module,
+            source: readFileSync(path.join(root, module), "utf8"),
+            css: "",
+          })),
+        );
+        if (
+          !reactReferenceUnchanged(reference) ||
+          !reactSourceProgramUnchanged(program)
+        )
+          throw Error("source-changed");
+        const record = {
+          version: 2,
+          referenceId: reference.id,
+          program,
+          proposal,
+        };
         const bytes = JSON.stringify(record, null, 2) + "\n";
         const id = sha(bytes);
         const dir = path.join(
@@ -281,6 +300,7 @@ export function createReactReferenceService(
           acceptedContract: null,
           sourceFiles: Object.keys(program.files).length,
           components: program.components,
+          proposal,
           problems: program.problems,
         });
       } catch {
