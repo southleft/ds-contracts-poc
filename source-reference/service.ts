@@ -1,3 +1,4 @@
+import { createReactReferenceService } from './react-reference.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
 import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
@@ -103,6 +104,7 @@ export function createReferenceService(
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
 ) {
+  const reactReference = createReactReferenceService(repoRoot);
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
@@ -889,6 +891,10 @@ export function createReferenceService(
     }
     if (req.headers.origin && req.headers.origin !== host.origin) {
       json(res, 403, { error: "Same-origin access required." });
+      return;
+    }
+    if (route === "react" || route.startsWith("react/")) {
+      await reactReference(req, res, route);
       return;
     }
     const framingRoute =

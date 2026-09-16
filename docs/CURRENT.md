@@ -1,6 +1,6 @@
 # Code ↔ contracts ↔ canvas
 
-**Public project status · updated 2026-09-15 · v1 is not complete.**
+**Public project status · updated 2026-09-16 · v1 is not complete.**
 
 The goal is to connect a team's code and design libraries through a shared contract: code becomes editable design components, design becomes reusable code, and supported changes can be repaired in either direction. This includes composed component sets such as data tables, forms and dialogs, with nested components, slots, instance swaps and other properties.
 
@@ -35,6 +35,8 @@ These steps describe the intended product workflow. The full application integra
 **No complete journey cohort has yet met the current v1 criteria.** Existing evidence reduces implementation uncertainty, but it is not a percentage of product completion. We do not have an evidence-backed completion date. The milestone exits below show what remains and prevent individual demos from being mistaken for the finish line.
 
 ### React import and composition checkpoint
+
+The local **Source validation** page now opens the actual React implementation for a fixed ten-case shadcn cohort: Button, Checkbox and a composed Card. **Load React originals** records the loaded source/dependency files, preserves the reference privately and shows the selected original in an isolated browser frame. A changed input invalidates that reference. These originals are explicitly unqualified: source-readiness checks, archived replay and native conversion are not connected to this React action yet. Earlier Lit evaluation controls remain available in a collapsed V1.1 section. The [React V1 scope](../docs/REACT-V1-SCOPE.md) freezes the selected cases and outcome requirements.
 
 Importing a React source file into the playground now retains its readable component family and each component's minted styling tokens. Generated React preserves explicit root content and forwards supported text and boolean properties to nested components, including empty text, explicit false and omission. Defaults are read from each component's own props input. Browser checks exercise live updates in both generated React formats; the static HTML preview follows the same scalar defaults.
 
