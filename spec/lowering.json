@@ -9,7 +9,7 @@
       "stage": "anatomy",
       "status": "proposed",
       "file": "extract/computed/anatomy.ts",
-      "ruleLine": 155,
+      "ruleLine": 156,
       "ruleText": "return 'stretch'; // 'normal' / 'stretch' — a grid item's default IS stretch",
       "css": {
         "construct": "justify-items / align-items / justify-self / align-self on a grid, with any value the mapper does not recognise",
@@ -39,8 +39,8 @@
       "stage": "anatomy",
       "status": "implemented",
       "file": "extract/computed/anatomy.ts",
-      "line": 283,
-      "ruleLine": 284,
+      "line": 284,
+      "ruleLine": 285,
       "ruleText": "if (cols > 1 && rows > 1) {",
       "css": {
         "construct": "a genuinely two-dimensional grid reaching the FLEX-LOWERING path",
@@ -69,8 +69,8 @@
       "stage": "anatomy",
       "status": "implemented",
       "file": "extract/computed/anatomy.ts",
-      "line": 1992,
-      "ruleLine": 1993,
+      "line": 1993,
+      "ruleLine": 1994,
       "ruleText": "if (svgPlans.has(hostIdx)) continue;",
       "css": {
         "construct": "a second (or third) <svg> under a host element that already has an svg plan",

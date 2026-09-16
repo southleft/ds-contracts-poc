@@ -47,6 +47,12 @@ export function ReactInitialInspection({ referenceId, caseId, available }: { ref
     {error && <p role="alert">{error}</p>}
     {result && <>
       <p>Initial-state inspection: {result.phase}. {result.sourceUnchanged ? 'Original source and rendering restored.' : 'Source equivalence is not yet established.'}</p>
+      {result.draft && <section aria-label="Initial-state contract draft">
+        <h4>Initial-state contract draft: {result.draft.status}</h4>
+        <p>{result.draft.compiled?.component?.variants.length ?? 0} native variant specifications assembled from saved observations. This has not created or verified Figma output. Source token identities, nested component mappings and interaction behavior remain unqualified.</p>
+        {result.draft.compiled?.contract && <p>Observed inputs: {result.draft.compiled.contract.props.map(p => p.name).join(', ')}. Omitted values remain separate from explicit values.</p>}
+        {!!result.draft.problems.length && <ul>{result.draft.problems.map(p => <li key={p}>{p}</li>)}</ul>}
+      </section>}
       {result.observation && <>
         <p>{result.observation.rows.filter(r => r.status === 'observed').length} / {result.observation.planned} initial input combinations observed. Native state mapping and interaction behavior remain unqualified.</p>
         <details><summary>Review observed initial states</summary>

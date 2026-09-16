@@ -31,6 +31,7 @@
  */
 import type { Contract, Part } from '../../scripts/contract-schema.js';
 import { preserveOrderedFlexText } from './ordered-text.js';
+import { unpaintedPseudoBox } from './unpainted-pseudo.js';
 import { GRID_REFUSALS, walkAnatomy } from '../../scripts/contract-schema.js';
 import { parseGridAutoFlow, parseGridLine, parseGridSelfAlign, parseGridTemplateAreas, parseGridTrackList, type GridAreaIR, type GridTrackIR } from '../../core/grid-css.js';
 import { PRESENCE_ON, PRESENCE_OFF, type ComponentConfig, type PropSpace } from './capture.js';
@@ -2247,6 +2248,20 @@ export function promoteAnatomy(
       // planes included — a disabled checked Radio keeps its dot; an
       // enabled-only domain would fabricate a hidden-when-disabled fact).
       const domain = allDefaultCombos.filter((combo) => union.alignedByKey.get(`${combo.key}__default`)![i]);
+      // Preserve a fully observed, uniform empty box rather than dropping it
+      // for lack of paint. Its event behavior remains a separate qualification.
+      if (!hostIsShapeLeaf && domain.length) {
+        const boxes = domain.map(combo => {
+          const node = union.alignedByKey.get(`${combo.key}__default`)![i]!.node;
+          return unpaintedPseudoBox(node.style, node.pseudo[pe]);
+        });
+        if (boxes.every(box => box && JSON.stringify(box) === JSON.stringify(boxes[0]))) {
+          const name = `${e.partName}-${pe.slice(2)}`;
+          out.push([name, boxes[0]!]);
+          receipts.push(`pseudo-unpainted-box-carried: ${e.partName}${pe} → ${name}; uniform editable geometry with no paint; pointer-events retained as code-only declaration; native hit testing and DOM event retargeting unqualified`);
+          continue;
+        }
+      }
       // COINCIDENT-SHADOW FOLD (mui/slider live-canvas round, 2026-08-11).
       //
       // A pseudo whose ONLY paint is a box-shadow was refused by name
@@ -3725,6 +3740,10 @@ export function promoteAnatomy(
     if (!ax || ax.unset === undefined) continue;
     const prop = contract.props.find((p) => p.name === axProp);
     if (!prop || typeof prop.type !== 'object' || !('enum' in prop.type)) continue;
+    if (prop.bindings.figma.unsetValue !== undefined) {
+      receipts.push(`optional-adornment-omission-preserved: ${axProp} uses an explicit canvas omission option; no public enum member or code default is fabricated`);
+      continue;
+    }
     if (prop.type.enum.includes(ax.unset) || prop.default !== undefined) continue;
     prop.type.enum = [ax.unset, ...prop.type.enum];
     (prop as { default?: unknown }).default = ax.unset;

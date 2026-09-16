@@ -17,11 +17,13 @@ import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
 import { evidenceSha, inventoryEvidence, evidenceUnchanged } from './react-validation-evidence.js';
 import { cropSourceFrame } from './source-framing.js';
+import { compileReactInitialContract } from './react-initial-contract.js';
 
 type Request = { version: 1; anchor: ReactNativeRequest; caseId: string };
 export interface ReactInitialInspection {
   id: string; caseId: string; phase: 'running' | 'complete' | 'failed'; sourceUnchanged: boolean;
   observation?: Awaited<ReturnType<typeof observeReactInitialStates>>; problems: string[];
+  draft?: ReturnType<typeof compileReactInitialContract>;
 }
 function original(repo: string, reference: ReactReference, request: Request) {
   reactReferenceProfile(request.caseId);
@@ -61,7 +63,22 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
   };
   const read = (referenceId: string, caseId: string) => {
     const value = input(referenceId, caseId);
-    return structuredClone(active.get(value.key)?.state ?? saved(value)?.report);
+    const running = active.get(value.key);
+    if (running) return structuredClone(running.state);
+    const record = saved(value);
+    if (!record) return undefined;
+    const report = structuredClone(record.report);
+    if (report.phase === 'complete' && report.observation) {
+      const snapshots = Object.fromEntries(report.observation.rows.map(row => {
+        if (!/^\d+$/.test(row.id)) throw Error('react-initial-row-invalid');
+        return [row.id, JSON.parse(readFileSync(path.join(record.dir, 'states', row.id + '.json'), 'utf8'))];
+      }));
+      // Derived from authenticated immutable observations under today's compiler;
+      // never overwrite the historical observation or accept a contract here.
+      report.draft = compileReactInitialContract(value.source.program, value.source.ownership, value.source.captured.tree,
+        report.observation, snapshots);
+    }
+    return report;
   };
   return {
     read,

@@ -90,7 +90,10 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   writeFileSync(path.join(initialDir, 'integrity.json'), seal);
   writeFileSync(path.join(initialRoot, 'latest.json'), JSON.stringify({ id: initialId, inventorySha256: evidenceSha(seal) }));
   const initialStore = () => createReactInitialInspectionStore(repo, repo, () => ({ reference, anchor: request }));
-  assert.deepEqual(initialStore().read(reference.id, 'button-default'), initialReport);
+  const reopened = initialStore().read(reference.id, 'button-default')!;
+  const { draft: diagnosticDraft, ...reopenedObservation } = reopened;
+  assert.deepEqual(reopenedObservation, initialReport);
+  assert.equal(diagnosticDraft?.status, 'refused', 'a persistence-only fixture does not qualify a source contract');
   const repeated = initialStore().start(reference.id, 'button-default'); await repeated.promise;
   assert.equal(repeated.state.id, initialId, 'a completed observation reopens without a new mount');
   assert.deepEqual(PNG.sync.read(initialStore().image(reference.id, 'button-default', initialId, '0')).data, framedPixels.data);

@@ -76,3 +76,48 @@ test('reconstructed SVG viewports stay refused instead of becoming comparison wr
   assert.doesNotMatch(icon?.svg ?? '', /stroke="#000000"/);
   assert.ok(icon?.svgPaintVar?.endsWith('/color'), 'currentColor binds to color, independently of inherited SVG fill');
 });
+
+function unpaintedFixture() {
+  const f = fixture();
+  f.tree.style.position = 'relative';
+  const st: Record<string, string> = { content: '\"\"', position: 'absolute', display: 'block', visibility: 'visible', opacity: '1',
+    'box-sizing': 'border-box', 'pointer-events': 'auto', 'background-color': 'rgba(0, 0, 0, 0)', 'outline-style': 'none',
+    'clip-path': 'none', clip: 'auto', 'mix-blend-mode': 'normal', width: '38px', height: '30px', left: '-12px', top: '-8px' };
+  for (const channel of ['background-image', 'border-image-source', 'box-shadow', 'text-shadow', 'filter', 'backdrop-filter',
+    'mask-image', 'transform', 'translate', 'rotate', 'scale', 'animation-name']) st[channel] = 'none';
+  for (const side of ['top', 'right', 'bottom', 'left']) {
+    st[`border-${side}-width`] = '0px'; st[`padding-${side}`] = '0px'; st[`margin-${side}`] = '0px';
+  }
+  f.tree.pseudo['::after'] = st;
+  f.fonts.treeRevision = revisionOf(f.tree);
+  return f;
+}
+
+test('unpainted absolute pseudo boxes retain editable geometry and code-only pointer declarations', () => {
+  const f = unpaintedFixture(), before = structuredClone(f), result = compileObservedContent(f.tree, f.fonts);
+  assert.equal(result.status, 'compiled-comparison-draft', result.problems.join('\n'));
+  const part = result.contract!.anatomy.root.parts!['root-after'];
+  assert.deepEqual(part.shape, { kind: 'rect', width: 38, height: 30 });
+  assert.equal(part.declared?.['pointer-events'], 'auto');
+  assert.equal(part.literals?.['background-color'], 'transparent');
+  assert.match(part.description!, /not qualified/);
+  const spec = result.component!.variants[0].spec.children!.find(c => c.name === 'root-after')!;
+  assert.equal(spec.shape?.width, 38); assert.equal(spec.shape?.height, 30);
+  assert.equal(spec.absolute?.left, -12); assert.equal(spec.absolute?.top, -8);
+  assert.equal(spec.lits?.fillClear, true);
+  assert.ok(result.receipts.some(r => r.startsWith('pseudo-unpainted-box-carried:')));
+  assert.deepEqual(f, before);
+});
+
+test('unpainted-box admission never treats unknown paint or placement as empty geometry', () => {
+  for (const [channel, value] of [ ['background-image', 'linear-gradient(red, blue)'], ['box-shadow', '0px 0px 3px red'],
+    ['border-image-source', 'url(image.png)'], ['filter', 'blur(2px)'], ['backdrop-filter', 'blur(2px)'],
+    ['content', '\"glyph\"'], ['left', 'auto'], ['translate', '4px'], ['border-left-width', '1px'], ['mask-image', undefined] ] as Array<[string, string | undefined]>) {
+    const f = unpaintedFixture();
+    if (value === undefined) delete f.tree.pseudo['::after']![channel]; else f.tree.pseudo['::after']![channel] = value;
+    f.fonts.treeRevision = revisionOf(f.tree);
+    const result = compileObservedContent(f.tree, f.fonts);
+    assert.equal(result.status, 'refused', channel);
+    assert.ok(!result.receipts.some(r => r.startsWith('pseudo-unpainted-box-carried:')), channel);
+  }
+});

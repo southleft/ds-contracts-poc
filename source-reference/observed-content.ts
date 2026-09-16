@@ -44,17 +44,7 @@ export function compileObservedContent(tree: CapturedNode, fonts: TextFontEviden
     ],
   };
   try {
-    const root = withPaintedTextFonts(tree, fonts);
-    if (svg) for (const row of verifiedSvgViewports(tree, svg)) {
-      let node = root;
-      for (const index of row.path) node = node.nodes.filter(c => c.t === 'el')[index].el;
-      node.svgViewport = row.viewport;
-    }
-    const normalize = (n: CapturedNode) => {
-      n.style = Object.fromEntries(Object.entries(n.style).map(([key, value]) => [key, normalizeValue(value)]));
-      for (const c of n.nodes) if (c.t === 'el') normalize(c.el);
-    };
-    normalize(root);
+    const root = prepareObservedContentTree(tree, fonts, svg);
     const name = 'ObservedContent';
     const contract = ContractSchema.parse({ id: 'observed.content', name, version: '0.1.0', status: 'draft',
       description: 'Observed caller composition for comparison only; no reusable component API is inferred.', props: [], states: [],
@@ -65,33 +55,61 @@ export function compileObservedContent(tree: CapturedNode, fonts: TextFontEviden
     const space: PropSpace = { contract, axes: [], presence: new Map(), stateProps: [], enumeration, baseComboKey: key, baseAxisValues: {}, heldFixed: [] };
     const comp: ComponentConfig = { name, importName: name, contract: '', sampleText: '', axes: [] };
     const sweep = { captures: [{ combo: `${name}:${key}`, interaction: 'default', root }] } as SweepResult;
-    const aligned = alignSweep(sweep, comp, space, '');
-    const promoted = promoteAnatomy(space, comp, aligned.union, 'observed-content');
-    out.receipts = [...promoted.receipts];
-    out.problems.push(...promoted.refusals);
-    // A reconstructed viewBox is not the authored SVG viewport. Preserve the
-    // diagnostic receipt, but never allow that guess to authorize a write.
-    if (promoted.receipts.some(r => /^svg-viewbox-(?:reconstructed|bumped|circle-offset|unified):/.test(r)))
-      out.problems.push('observed-content-svg-authored-viewport-required');
-    const styled = new Map(aligned.baseFlat.map(e => [e.partName, new Set(Object.keys(e.node.style).filter(c => !reactRootStyleExclusion(c)))]));
-    const consumed = new Set([...promoted.consumed].map(i => aligned.partNames[i]));
-    const layout = enrichLayout(aligned, space, styled, promoted.contract);
-    if (layout.contradictions.length) out.problems.push('observed-content-layout-contradiction');
-    const prep = prepareMint(aligned, comp, space, styled, [], layout.handled, promoted.contract, consumed, new Set(promoted.partIndex.keys()), promoted.gridMintRefusals);
-    out.residuals = prep.codeOnly;
-    const minted = mintTokens(name, prep.baseObs, prep.axes, { nestedPairs: true });
-    const states = mintTokens(name, prep.stateObs, prep.axes, { nestedPairs: true });
-    const applied = applyMintToContract(promoted.contract, space, minted, prep.baseObs, states, prep.stateObs,
-      layout.enriched, prep.declared, prep.declaredStates, prep.setPlaneLiterals,
-      { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas }, prep.stateCodeOnly);
-    out.contract = ContractSchema.parse(applied.enriched);
-    out.tokens = structuredClone(minted.tree);
-    out.assets = [...promoted.assets];
-    const engine = createFigmaEngine({ tokens: { primitives: out.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: promoted.assets });
-    out.component = engine.compileComponentData(out.contract, new Map([[out.contract.id, out.contract]]));
+    Object.assign(out, compileObservedContentSweep(space, comp, sweep));
     if (!out.problems.length) out.status = 'compiled-comparison-draft';
   } catch (error) {
     out.problems.push(error instanceof Error ? error.message : 'observed-content-compiler-failed');
   }
   return out;
+}
+
+/** Shared preparation for single samples and complete observed property sweeps. */
+export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence) {
+  const root = withPaintedTextFonts(tree, fonts);
+  if (svg) for (const row of verifiedSvgViewports(tree, svg)) {
+    let node = root;
+    for (const index of row.path) node = node.nodes.filter(c => c.t === 'el')[index].el;
+    node.svgViewport = row.viewport;
+  }
+  const normalize = (n: CapturedNode) => {
+    n.style = Object.fromEntries(Object.entries(n.style).map(([key, value]) => [key, normalizeValue(value)]));
+    for (const c of n.nodes) if (c.t === 'el') normalize(c.el);
+  };
+  normalize(root);
+  return root;
+}
+
+/** Shared anatomy/paint compiler. The caller authenticates and enumerates the
+ * input domain; this routine does not turn samples into a supported source API. */
+export function compileObservedContentSweep(space: PropSpace, comp: ComponentConfig, sweep: SweepResult,
+  rootSizing: string[] = []) {
+  const result: Pick<ObservedContentDraft, 'receipts' | 'problems' | 'residuals' | 'contract' | 'tokens' | 'assets' | 'component'> = {
+    receipts: [], problems: [], residuals: [],
+  };
+  const name = comp.name;
+  const aligned = alignSweep(sweep, comp, space, '');
+  const promoted = promoteAnatomy(space, comp, aligned.union, 'observed-content');
+  result.receipts = [...promoted.receipts];
+  result.problems.push(...promoted.refusals);
+  // A reconstructed viewBox is not the authored SVG viewport. Preserve the
+  // diagnostic receipt, but never allow that guess to authorize a write.
+  if (promoted.receipts.some(r => /^svg-viewbox-(?:reconstructed|bumped|circle-offset|unified):/.test(r)))
+    result.problems.push('observed-content-svg-authored-viewport-required');
+  const styled = new Map(aligned.baseFlat.map(e => [e.partName, new Set(Object.keys(e.node.style).filter(c => !reactRootStyleExclusion(c) || e.partName === 'root' && rootSizing.includes(c)))]));
+  const consumed = new Set([...promoted.consumed].map(i => aligned.partNames[i]));
+  const layout = enrichLayout(aligned, space, styled, promoted.contract);
+  if (layout.contradictions.length) result.problems.push('observed-content-layout-contradiction');
+  const prep = prepareMint(aligned, comp, space, styled, [], layout.handled, promoted.contract, consumed, new Set(promoted.partIndex.keys()), promoted.gridMintRefusals);
+  result.residuals = prep.codeOnly;
+  const minted = mintTokens(name, prep.baseObs, prep.axes, { nestedPairs: true });
+  const states = mintTokens(name, prep.stateObs, prep.axes, { nestedPairs: true });
+  const applied = applyMintToContract(promoted.contract, space, minted, prep.baseObs, states, prep.stateObs,
+    layout.enriched, prep.declared, prep.declaredStates, prep.setPlaneLiterals,
+    { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas }, prep.stateCodeOnly);
+  result.contract = ContractSchema.parse(applied.enriched);
+  result.tokens = structuredClone(minted.tree);
+  result.assets = [...promoted.assets];
+  const engine = createFigmaEngine({ tokens: { primitives: result.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: promoted.assets });
+  result.component = engine.compileComponentData(result.contract, new Map([[result.contract.id, result.contract]]));
+  return result;
 }
