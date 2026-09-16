@@ -15,6 +15,8 @@ import { gunzipSync } from "node:zlib";
 import path from "node:path";
 import {
   loadBindingEvidence,
+  isBindingEvidenceRequest,
+  bindingStories,
   recordedStoryUrl,
   type BindingEvidenceRequest,
 } from "./binding-evidence.js";
@@ -901,6 +903,91 @@ test("recorded evidence reuses the existing planner, retains refused states and 
       /binding-source-program-refused/,
     );
   } finally {
+    f.close();
+  }
+});
+
+test("versioned Checkbox requests preserve the four-state cohort and reject cross-component or supplemental overrides", () => {
+  const baseline = {
+    id: "00000000-0000-4000-8000-000000000001",
+    sha256: "a".repeat(64),
+  };
+  const request: BindingEvidenceRequest = {
+    version: 2,
+    component: "al-checkbox",
+    baseline,
+  };
+  assert.equal(isBindingEvidenceRequest(request), true);
+  assert.deepEqual(bindingStories(request), [
+    "atoms-checkbox--default",
+    "atoms-checkbox--checked",
+    "atoms-checkbox--indeterminate",
+    "atoms-checkbox--disabled",
+  ]);
+  for (const changed of [
+    { ...request, version: 1 },
+    { ...request, component: "al-button" },
+    { ...request, component: undefined },
+    { ...request, supplement: baseline },
+    { ...request, script: "arbitrary" },
+  ])
+    assert.equal(isBindingEvidenceRequest(changed), false);
+  assert.equal(isBindingEvidenceRequest({ version: 1, baseline }), true);
+});
+
+test("newer Checkbox history does not replace the verified Button selection for the same baseline", () => {
+  const f = fixture();
+  let output = "";
+  const jobs = createBindingJobs(f.repo, (args, done) => {
+    output = args.at(-1)!;
+    writeFileSync(
+      path.join(output, "report.json"),
+      JSON.stringify(refusedReport(f)),
+    );
+    done(null);
+    return { kill: () => true };
+  });
+  try {
+    const selected = jobs.start(f.request),
+      id = "ffffffff-ffff-4fff-8fff-ffffffffffff";
+    const directory = path.join(path.dirname(output), id);
+    mkdirSync(directory);
+    const request: BindingEvidenceRequest = {
+      version: 2,
+      component: "al-checkbox",
+      baseline: f.request.baseline,
+    };
+    const job = {
+      ...JSON.parse(readFileSync(path.join(output, "job.json"), "utf8")),
+      id,
+      request,
+      stories: bindingStories(request),
+      state: "failed",
+      startedAt: "2099-01-01T00:00:00.000Z",
+    };
+    writeFileSync(path.join(directory, "job.json"), JSON.stringify(job));
+    const recovered = createBindingJobs(f.repo);
+    assert.equal(recovered.selectLatestVerified(f.request).id, selected.id);
+    assert.equal(
+      recovered.list(f.request.baseline.id).find((item) => item.id === id)
+        ?.component,
+      "al-checkbox",
+    );
+    assert.throws(
+      () => recovered.selectLatestVerified(request),
+      /binding-selection-not-complete/,
+    );
+    writeFileSync(
+      path.join(directory, "job.json"),
+      JSON.stringify({ ...job, request: f.request }),
+    );
+    assert.throws(
+      () => recovered.selectLatestVerified(f.request),
+      /binding-selection-job-changed/,
+    );
+    recovered.close();
+  } finally {
+    jobs.close();
     f.close();
   }
 });

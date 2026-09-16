@@ -187,6 +187,9 @@ export function buildSourceVisualContractCandidate(
         sourceProgramSha256: semantics.source.programSha256,
         case: sourceCase,
       });
+      // The Button seed below has no lowering for v2 text/pseudo/dependencies.
+      // A richer anatomy must never be silently interpreted as its v1 shape.
+      if (projection.version !== 1) fail("projection-version-unsupported");
       out.cases.push({
         id: sourceCase.id,
         status:

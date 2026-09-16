@@ -72,7 +72,7 @@ export interface LitTemplateInput { source: string; sourceSha256: string; module
 /** Syntactic evidence only. No source execution, file/module resolution,
  * arbitrary helper interpretation, inferred role map, or accepted Contract.
  * Import identities are lexical facts, NOT authentication of installed code. */
-export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRead {
+export function readLitTemplateBindings(input: LitTemplateInput, observedStaticTags?: ReadonlyMap<number, string>): LitTemplateRead {
   const result: LitTemplateRead = {
     version: 1, status: 'refused', sourceSha256: input.sourceSha256, modulePath: input.modulePath, className: input.className,
     templates: [], members: [], bases: [], problems: [],
@@ -227,7 +227,14 @@ export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRea
         chars(node.template.head.getStart(sourceFile) + 1, node.template.head.end - 2);
         let interpolationStart = node.template.head.end - 2;
         for (const part of node.template.templateSpans) {
-          units.push({ expression: part.expression, offset: interpolationStart, end: part.literal.getStart(sourceFile) + 1 });
+          const observedTag = observedStaticTags?.get(part.expression.getStart(sourceFile));
+          if (observedTag !== undefined) {
+            // Supplied only after independent parser-input corroboration. This
+            // remains a syntactic view; the unverified-static-values problem is
+            // retained for callers without that separate runtime evidence.
+            if (!/^[a-z][a-z0-9]*(?:-[a-z0-9]+)+$/.test(observedTag)) throw new Error('observed-static-tag-invalid');
+            for (const char of observedTag) units.push({ char, offset: interpolationStart });
+          } else units.push({ expression: part.expression, offset: interpolationStart, end: part.literal.getStart(sourceFile) + 1 });
           chars(part.literal.getStart(sourceFile) + 1, part.literal.end - (part.literal.kind === ts.SyntaxKind.TemplateTail ? 1 : 2));
           interpolationStart = part.literal.end - 2;
         }
