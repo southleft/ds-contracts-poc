@@ -117,3 +117,16 @@ test('winning source CSS variable survives the shared React and native compilers
   assert.equal(projectReactRootVisual(f.program,f.ownership,f.tree,stale).roots[0].sourceBindings?.find(b=>b.channel==='background-color')?.reason,'source-variable-value-needs-resolution');
  }finally{await browser.close();rmSync(f.dir,{recursive:true,force:true})}
 });
+
+
+test('caller style inputs cannot become source-owned fixed sizes',()=>{
+ const f=fixture();try{
+  const origin={version:1 as const,roots:[{path:'',tag:'section',channels:[],sizes:[{channel:'width' as const,status:'fixed' as const,value:'999px',authoredValue:'999px',selectors:['<inline>']}]}]};
+  assert.equal(projectReactRootVisual(f.program,f.ownership,f.tree,origin).roots[0].sourceSizing![0].status,'fixed');
+  for(const [key,value] of [['style',{kind:'object'}],['className','consumer-width']] as const){
+   const own=structuredClone(f.ownership);own.components[0].props[key]=value;
+   const size=projectReactRootVisual(f.program,own,f.tree,origin).roots[0].sourceSizing![0];
+   assert.equal(size.status,'unresolved');assert.equal(size.reason,'caller-style-input-needs-ownership-proof');
+  }
+ }finally{rmSync(f.dir,{recursive:true,force:true})}
+});

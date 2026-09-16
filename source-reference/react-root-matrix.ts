@@ -1,5 +1,6 @@
 /** Combined finite style properties, assembled only from their full observed
  * cartesian product. This does not assemble caller children or runtime behavior. */
+import {prepareReactRootSizing,type ReactSizingReport} from './react-root-sizing.js';
 import {revisionOf} from '../core/contract-provenance.js';
 import {ContractSchema} from '../scripts/contract-schema.js';
 import {validateContract} from '../packages/core/src/validate.js';
@@ -16,7 +17,7 @@ import type {ReactPropertySnapshot,ReactRootVariants} from './react-root-variant
 import {evidenceSha} from './react-validation-evidence.js';
 export interface ReactRootMatrix {
  version:1;qualification:'combined-property-root-draft';acceptedContract:null;
- draft?:Omit<ReactRootVariants['drafts'][number],'property'>&{properties:string[]};problems:string[];
+ draft?:Omit<ReactRootVariants['drafts'][number],'property'>&{properties:string[];sizing?:ReactSizingReport[]};problems:string[];
 }
 export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:ReactOwnership,tree:CapturedNode,
  matrix:ReactPropertyMatrix,snapshots:Record<string,ReactPropertySnapshot>):ReactRootMatrix{
@@ -28,7 +29,7 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    expected.plan.length!==matrix.planned||expected.plan.length!==matrix.rows.length||matrix.rows.some((r,i)=>r.id!==String(i)||JSON.stringify(r.changes)!==JSON.stringify(expected.plan[i].changes)))throw Error('react-root-matrix-plan-mismatch');
   if(!expected.axes.length)return out;
   const result:NonNullable<ReactRootMatrix['draft']>={properties:expected.axes.map(a=>a.property),status:'refused',problems:[],observations:[],lowerings:[],limitations:[
-   'observed-context-and-selected-finite-properties-only','boolean-and-runtime-state-apis-not-projected','descendant-effects-not-assembled','sample-dimensions-not-source-constraints','behavior-not-projected','native-fidelity-not-verified']};out.draft=result;
+   'observed-context-and-selected-finite-properties-only','boolean-and-runtime-state-apis-not-projected','descendant-effects-not-assembled','unresolved-sizing-and-responsive-constraints-not-projected','behavior-not-projected','native-fidelity-not-verified']};out.draft=result;
   try{
    const source=program.components.find(c=>c.module===matrix.source.module&&c.exportName===matrix.source.exportName&&c.sourceSha256===matrix.source.sourceSha256&&c.span.start===matrix.source.span.start&&c.span.end===matrix.source.span.end)!;
    const definitions=expected.axes.map(({property})=>{
@@ -59,6 +60,8 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
     const linked=linkReactSourceAnatomy(program,snap.ownership,snap.tree).instances.find(i=>i.instanceId===matrix.instanceId);
     const projected=projectReactRootVisual(program,snap.ownership,snap.tree,snap.styleOrigin).roots.find(r=>r.instanceId===matrix.instanceId);
     if(!linked||linked.content!=='caller-slot'||linked.roots.length!==1||!projected?.contract)throw Error('react-root-matrix-content-unqualified');
+    const prior=projections.get(key);
+    if(prior&&(JSON.stringify(prior.sourceBindings)!==JSON.stringify(projected.sourceBindings)||JSON.stringify(prior.sourceSizing)!==JSON.stringify(projected.sourceSizing)))throw Error('react-root-matrix-default-provenance-differs');
     const root:CapturedNode={...structuredClone(linked.roots[0].observation),nodes:[],style:Object.fromEntries(Object.entries(linked.roots[0].observation.style).map(([k,v])=>[k,normalizeValue(v)]))};
     // Same bounded flex-gap lowering as the single-property adapter (CSS Align3 8.1).
     if(root.style.display==='flex'||root.style.display==='inline-flex')for(const channel of ['row-gap','column-gap'])if(root.style[channel]==='normal'){
@@ -68,11 +71,12 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    }
    if(roots.size!==enumeration.combos.length||enumeration.combos.some(c=>!roots.has(c.key)))throw Error('react-root-matrix-missing-combination');
    if(new Set([...roots.values()].map(r=>r.tag)).size!==1)throw Error('react-root-matrix-host-changed');
-   const suffix=revisionOf({source:matrix.source,properties:result.properties,planes:[...roots].map(([value,root])=>({value,tag:root.tag,style:Object.fromEntries(Object.entries(root.style).filter(([channel])=>!reactRootStyleExclusion(channel)))}))}).slice(7,23),name=`RootMatrix${suffix}`;
+   const sizing=prepareReactRootSizing(axes,baseAxisValues,roots,projections);result.sizing=sizing.reports;
+   const suffix=revisionOf({sizing:[...projections].map(([key,p])=>[key,p.sourceSizing]),source:matrix.source,properties:result.properties,planes:[...roots].map(([value,root])=>({value,tag:root.tag,style:Object.fromEntries(Object.entries(root.style).filter(([channel])=>!reactRootStyleExclusion(channel)))}))}).slice(7,23),name=`RootMatrix${suffix}`;
    const contract=ContractSchema.parse({id:`observed.react-matrix-${suffix}`,name,version:'0.1.0',status:'draft',description:`Observed ${source.exportName} root style matrix; other APIs and composition remain unqualified.`,
     props:definitions.map(({property,prop,classified,values,defaultKey})=>({name:property,type:{enum:values},...(defaultKey===undefined?{}:{default:defaultKey}),...(!prop.optional?{required:true}:{}),bindings:{code:{prop:property,...(classified.codeValues?{values:classified.codeValues}:{})},figma:{kind:'VARIANT',property,values:Object.fromEntries(values.map(v=>[v,v])),...(defaultKey===undefined&&prop.optional?{unsetValue:'(unset)'}:{})}}})),
     states:[],semantics:{element:[...roots.values()][0].tag},anatomy:{root:{slot:{name:'children'}}},bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
-   const {enriched,tokens,residuals}=compileReactRootSweep(contract,axes,baseAxisValues,roots);retainReactRootSourceBindings(enriched,tokens,axes,baseAxisValues,projections);
+   const {enriched,tokens,residuals}=compileReactRootSweep(contract,axes,baseAxisValues,roots,sizing.channels);sizing.apply(enriched,tokens);retainReactRootSourceBindings(enriched,tokens,axes,baseAxisValues,projections);sizing.verify(enriched,tokens);
    if(enriched.anatomy.root.parts||enriched.anatomy.root.content||enriched.anatomy.root.slot?.name!=='children')throw Error('react-root-matrix-content-boundary-changed');
    const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)throw Error('react-root-matrix-invalid:'+errors.join(';'));
    result.contract=enriched;result.tokens=tokens;result.residuals=residuals;result.status='style-prepared';

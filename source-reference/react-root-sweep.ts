@@ -6,7 +6,7 @@ import type {PropSpace} from '../extract/computed/capture.js';
 import {mintTokens} from '../core/mint-tokens.js';
 import {reactRootStyleExclusion,type ReactRootVisual} from './react-root-visual.js';
 
-export function compileReactRootSweep(contract:Contract,axes:EnumAxisSpec[],baseAxisValues:Record<string,string>,roots:Map<string,CapturedNode>){
+export function compileReactRootSweep(contract:Contract,axes:EnumAxisSpec[],baseAxisValues:Record<string,string>,roots:Map<string,CapturedNode>,sizingChannels:Set<string>=new Set()){
  const enumeration=enumerate(axes,[],256,baseAxisValues);
  if(enumeration.policy!=='full-cartesian'||roots.size!==enumeration.combos.length||enumeration.combos.some(c=>!roots.has(c.key)))throw Error('react-root-sweep-incomplete');
  const captures:Capture[]=enumeration.combos.map(c=>({combo:c.key,interaction:'default',root:roots.get(c.key)!}));
@@ -15,7 +15,7 @@ export function compileReactRootSweep(contract:Contract,axes:EnumAxisSpec[],base
  const base=byKey.get(baseCombo.key+'__default')!,baseFlat=alignedByKey.get(baseCombo.key+'__default')!;
  const aligned:AlignedSweep={captures,byKey,base,baseFlat,inBase:[true],partNames:['root'],union:{entries:[{id:0,sig:'root',rep:base.root,repPath:'',repKey:baseCombo.key,inBase:true,parent:null,children:[],partName:'root'}],alignedByKey,receipts:[]},getAligned:key=>alignedByKey.get(key)??[null],structureReceipts:[],anatomyJoin:[{part:'root',join:'matched'}],staticOnlyParts:[]};
  const space:PropSpace={contract,axes,presence:new Map(),stateProps:[],enumeration,baseComboKey:baseCombo.key,baseAxisValues,heldFixed:[]};
- const channels=new Set([...roots.values()].flatMap(r=>Object.keys(r.style)).filter(c=>!reactRootStyleExclusion(c))),styled=new Map([['root',channels]]);
+ const channels=new Set([...roots.values()].flatMap(r=>Object.keys(r.style)).filter(c=>!reactRootStyleExclusion(c)||sizingChannels.has(c))),styled=new Map([['root',channels]]);
  const layout=enrichLayout(aligned,space,styled,contract);if(layout.contradictions.length)throw Error('react-root-sweep-layout-contradiction');
  const name=contract.name,prep=prepareMint(aligned,{name,importName:name,contract:'',sampleText:'',axes:axes.map(a=>a.prop)},space,styled,[],layout.handled,contract);
  const minted=mintTokens(name,prep.baseObs,prep.axes,{nestedPairs:true}),states=mintTokens(name,prep.stateObs,prep.axes,{nestedPairs:true});

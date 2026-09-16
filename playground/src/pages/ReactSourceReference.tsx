@@ -361,12 +361,13 @@ export function ReactSourceReference() {
                     {ownership.state === "complete" && row.matched && row.rootMatrix && (
                       <section aria-label={`${row.id} root matrix`}>
                         <h4>Combined root style draft</h4>
-                        <p>Selected finite properties are observed together. The draft preserves their root styling and a replaceable children slot. Boolean state, nested styling, source sizing constraints and native visual fidelity remain unqualified.</p>
+                        <p>Selected finite properties are observed together. The draft preserves their root styling and a replaceable children slot. Fixed source sizes are retained where their origin is verified. Boolean state, nested styling, responsive sizing and native visual fidelity remain unqualified.</p>
                         {row.rootMatrix.problems.length>0 && <p>{row.rootMatrix.problems.join(" · ")}</p>}
                         {row.rootMatrix.draft && [row.rootMatrix.draft].map(draft=><details key="draft">
                           <summary>{draft.properties.join(" × ")}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root combinations compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
                           {draft.problems.length>0 && <p>{draft.problems.join(" · ")}</p>}
                           {draft.contract?.props.map(prop=><p key={prop.name}>{prop.name}: {Object.values(prop.bindings.code.values ?? (typeof prop.type==="object" && "enum" in prop.type ? Object.fromEntries(prop.type.enum.map(v=>[v,v])) : {})).map(v=>JSON.stringify(v)).join(", ")}</p>)}
+                          {draft.sizing?.map(size=><p key={size.channel}>{size.channel}: {size.status==="retained"?"source constraint retained":size.status==="intrinsic"?"automatic sizing; sample dimensions not fixed":`not projected (${size.reason})`}</p>)}
                           {!!draft.lowerings.length && <p>{draft.lowerings.length} normal flex-gap values use equivalent zero spacing.</p>}
                           {!!draft.residuals?.length && <details><summary>Unprojected styling</summary><ul>{draft.residuals.map((r,i)=><li key={i}>{r.channel}: {r.reason}</li>)}</ul></details>}
                         </details>)}

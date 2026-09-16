@@ -122,6 +122,7 @@ export function startReactOwnership(
           "react-property-matrix.ts",
           "react-root-matrix.ts",
           "react-root-sweep.ts",
+          "react-root-sizing.ts",
           "react-program-proposal.ts",
           "../extract/computed/fuse.ts",
           "../core/mint-tokens.ts",

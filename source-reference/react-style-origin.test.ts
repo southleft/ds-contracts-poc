@@ -39,3 +39,29 @@ test('browser source names follow layer and selector priority, never same-value 
   assert.equal(by(rows).reason,'winning-value-not-direct-variable');
  }finally{await browser.close()}
 });
+
+test('typed size provenance distinguishes authored constraints from measured auto and responsive sizes',async()=>{
+ const browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  const read=async(css:string)=>{
+   await page.setContent(`<style>:root{--space:.25rem;--alias:var(--space)}.subject{display:inline-flex;box-sizing:border-box}${css}</style><button id="subject" class="subject">Replaceable content</button>`);
+   return (await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!;
+  };
+  let rows=await read('.subject{height:calc(var(--alias) * 9)}');
+  assert.equal(rows.find(r=>r.channel==='height')!.value,'36px');
+  assert.equal(rows.find(r=>r.channel==='height')!.status,'fixed');
+  assert.equal(rows.find(r=>r.channel==='width')!.status,'auto');
+  for(const value of ['50%','50vw','calc(100% - 5px)','10em','min(40px,10vw)']){
+   rows=await read(`.subject{width:${value}}`);
+   assert.equal(rows.find(r=>r.channel==='width')!.status,'unresolved',value);
+  }
+  rows=await read('.subject{width:40px;min-width:80px}');
+  assert.equal(rows.find(r=>r.channel==='width')!.reason,'size-clamped-or-layout-dependent');
+  rows=await read('.subject{width:40px;inline-size:50px}');
+  assert.equal(rows.find(r=>r.channel==='width')!.reason,'logical-size-cascade-unsupported');
+  rows=await read('.subject{width:40px}.subject{width:50px}');
+  assert.equal(rows.find(r=>r.channel==='width')!.reason,'cascade-order-tie');
+  rows=await read('.subject{--unit:10vw;width:calc(var(--unit) * 2)}');
+  assert.equal(rows.find(r=>r.channel==='width')!.reason,'responsive-or-unsupported-size-expression');
+ }finally{await browser.close()}
+});

@@ -1,7 +1,7 @@
 /** Observed root projections, not reusable source contracts. The source API,
  * behavior, caller composition and unobserved planes remain separate work. */
 import { flattenTokens } from '../core/tokens.js';
-import type { ReactStyleOrigin } from './react-style-origin.js';
+import type { ReactStyleOrigin, ReactSizeOrigin } from './react-style-origin.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createFigmaEngine, type ComponentData } from '../core/emit-figma-script.js';
 import { mintTokens } from '../core/mint-tokens.js';
@@ -28,6 +28,7 @@ export interface ReactRootVisual {
     tokens?: Record<string, unknown>;
     native?: ComponentData;
     channels: Array<{ channel: string; status: 'observed' | 'excluded'; reason: string }>;
+    sourceSizing?: ReactSizeOrigin[];
     sourceBindings?: Array<{channel: string; variable?: string; tokenPath?: string; reason?: string}>;
     residuals?: ReturnType<typeof prepareMint>['codeOnly'];
     problems: string[];
@@ -117,6 +118,12 @@ export function projectReactRootVisual(
         if (styleOrigin.version !== 1) throw Error('react-root-visual-style-origin-version');
         const origin = styleOrigin.roots.find(r => r.path === instance.roots[0].path);
         if (!origin || origin.tag !== root.tag) throw Error('react-root-visual-style-origin-mismatch');
+        const props=ownership.components.find(c=>c.id===instance.instanceId)!.props;
+        const callerStyle=['style','className'].some(key=>Object.hasOwn(props,key)&&props[key]!==null&&props[key]!==''&&JSON.stringify(props[key])!==JSON.stringify({kind:'undefined'}));
+        result.sourceSizing=origin.sizes?.map(size=>callerStyle
+          ? {...size,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}
+          : size.status==='fixed'&&normalizeValue(size.value??'')!==root.style[size.channel]
+            ? {...size,status:'unresolved',reason:'size-observation-mismatch'} : size);
         const leaves = flattenTokens(tokens), named = new Map<string, unknown>(), tokenSelectors = new Map<string, Set<string>>();
         result.sourceBindings = origin.channels.map(binding => {
           const base = {channel: binding.channel, ...(binding.variable ? {variable: binding.variable} : {})};
