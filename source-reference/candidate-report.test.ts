@@ -15,6 +15,7 @@ import { gunzipSync } from "node:zlib";
 import { matchLitRender } from "./lit-render-match.js";
 import { bindingStories } from "./binding-evidence.js";
 import { buildStatefulCandidatePreparationReport } from "./stateful-candidate-report.js";
+import { prepareStatefulSourceDependencies } from "./source-component-dependencies.js";
 import { revisionOf } from "../core/contract-provenance.js";
 import type { VerifiedBindingSelection } from "./binding-jobs.js";
 import {
@@ -584,6 +585,44 @@ test("new Checkbox preparation retains v2 anatomy while historical reports keep 
     assert.throws(
       () => f.validate(report, f.context),
       /preparation-report-mismatch/,
+    );
+  } finally {
+    f.close();
+  }
+});
+
+test("native dependency planning re-derives the saved preparation before accepting child identities", () => {
+  const f = fixture("checkbox");
+  try {
+    const report = buildStatefulCandidatePreparationReport(
+      f.selection,
+      f.artifact,
+      f.inputs,
+      { anatomyVersion: 2 },
+    );
+    const input = {
+      preparation: {
+        id: "00000000-0000-4000-8000-000000000001",
+        reportSha256: "a".repeat(64),
+        directory: f.context.directory,
+        report,
+        selection: f.selection,
+      },
+      artifact: f.artifact,
+      inputs: f.inputs,
+      packageJson: "{}",
+    };
+    assert.throws(
+      () => prepareStatefulSourceDependencies(input),
+      /source-dependency-source-program-unavailable/,
+    );
+    report.anatomy!.cases[0].samples.find(
+      (s) => s.nestedHosts?.length,
+    )!.nestedHosts![0].tag = "invented-child";
+    report.anatomy!.revision = revisionOf(report.anatomy!.cases);
+    assert.throws(
+      () => prepareStatefulSourceDependencies(input),
+      /source-dependency-preparation-changed/,
     );
   } finally {
     f.close();
