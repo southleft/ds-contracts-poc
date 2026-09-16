@@ -1,3 +1,7 @@
+import {
+  observeReferenceIdentity,
+  type ReferenceIdentityObservation,
+} from "./lifecycle-identity.js";
 import { createHash } from "node:crypto";
 import type { Page } from "playwright-core";
 import type { CemDeclarationFacts } from "../extract/adapters/cem.js";
@@ -16,6 +20,7 @@ export type AssignedContent =
       shadow?: AssignedContent[];
     };
 export interface SemanticObservation {
+  referenceIdentity?: ReferenceIdentityObservation;
   problems: string[];
   hostTag: string;
   hostCount: number;
@@ -198,9 +203,11 @@ export async function observeSemantics(
   };
   // tsx preserves helper function names with __name. Keep that helper lexical
   // inside the serialized probe, never install globals in the source page.
-  return page.evaluate(
+  const result: SemanticObservation = await page.evaluate(
     `(() => { const __name = value => value; return (${observe.toString()})(${JSON.stringify({ hostPath, names: declaration.properties.map((p) => p.name) })}); })()`,
   );
+  const referenceIdentity = await observeReferenceIdentity(page, hostPath);
+  return referenceIdentity ? { ...result, referenceIdentity } : result;
 }
 
 /** Bounded observation window, not proof that arbitrary getters are pure.

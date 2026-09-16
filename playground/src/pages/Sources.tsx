@@ -5,6 +5,7 @@ import type { BindingJobSnapshot } from "../../../source-reference/binding-jobs"
 import type { CandidateJobSnapshot } from "../../../source-reference/candidate-jobs";
 import type { NativeOperationSnapshot } from "../../../source-reference/native-operation-jobs";
 import "./sources.css";
+import { NativeImageComparison } from "./NativeImageComparison";
 
 interface Row {
   story: string;
@@ -37,6 +38,7 @@ interface Row {
       events: { name: string }[];
     };
     observation?: {
+      referenceIdentity?: unknown;
       properties: Record<string, { kind: string; value?: unknown }>;
       slots: { name: string }[];
       nativeElements: {
@@ -340,9 +342,13 @@ function RenderedBindingTrace({ trace }: { trace: BindingJobSnapshot }) {
 export function Sources() {
   const [origin, setOrigin] = useState("http://127.0.0.1:6017");
   const [job, setJob] = useState<Job | null>(null);
+  const [runs, setRuns] = useState<
+    Array<Pick<Job, "id" | "state" | "startedAt" | "completedAt">>
+  >([]);
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [openingRun, setOpeningRun] = useState(false);
   const [nativeConnection, setNativeConnection] = useState("");
   const [selected, setSelected] = useState("atoms-button--default");
   const capturing =
@@ -373,6 +379,7 @@ export function Sources() {
       .then((data) => {
         if (alive) {
           setReady(true);
+          setRuns(data.runs ?? []);
           setJob(data.latest);
           if (!data.checkoutAvailable)
             setError(
@@ -423,6 +430,38 @@ export function Sources() {
       clearInterval(timer);
     };
   }, [job?.id, polling]);
+  useEffect(() => {
+    if (!job) return;
+    const summary = {
+      id: job.id,
+      state: job.state,
+      startedAt: job.startedAt,
+      completedAt: job.completedAt,
+    };
+    setRuns((previous) =>
+      previous.some((run) => run.id === job.id)
+        ? previous.map((run) => (run.id === job.id ? summary : run))
+        : [...previous, summary],
+    );
+  }, [job?.id, job?.state, job?.startedAt, job?.completedAt]);
+  async function selectRun(id: string) {
+    setOpeningRun(true);
+    setBusy(true);
+    setError("");
+    setNativeConnection("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${encodeURIComponent(id)}`,
+      );
+      if (!response.ok) throw Error("The selected source run is unavailable.");
+      setJob(await response.json());
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Source run unavailable.");
+    } finally {
+      setBusy(false);
+      setOpeningRun(false);
+    }
+  }
   async function nativeAction(
     action: "connection" | "start" | "retry-observation",
   ) {
@@ -626,7 +665,7 @@ export function Sources() {
         </label>
         <button disabled={!ready || busy || capturing}>
           {busy
-            ? "Connecting…"
+            ? "Working…"
             : job?.state === "running"
               ? "Validating all 10 states…"
               : "Connect and validate"}
@@ -638,6 +677,33 @@ export function Sources() {
         source files or Figma files are changed. Other libraries are not yet
         supported by this screen.
       </p>
+      {!ready && !error && (
+        <p role="status">Loading recorded source evidence…</p>
+      )}
+      {openingRun && (
+        <p role="status">Opening the selected recorded source run…</p>
+      )}
+      {runs.length > 0 && (
+        <label className="source-run-select">
+          Recorded source run{" "}
+          <select
+            value={job?.id ?? ""}
+            disabled={busy || capturing}
+            onChange={(event) => void selectRun(event.target.value)}
+          >
+            {[...runs].reverse().map((run) => (
+              <option key={run.id} value={run.id}>
+                {run.startedAt || run.completedAt
+                  ? new Date(
+                      (run.startedAt ?? run.completedAt)!,
+                    ).toLocaleString()
+                  : "Time not recorded"}{" "}
+                · {run.state} · {run.id.slice(0, 8)}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       {error && <p role="alert">{error}</p>}
       {job && (
         <>
@@ -1373,9 +1439,10 @@ export function Sources() {
                 >
                   <h3>Inspect native output</h3>
                   <p>
-                    Recorded source and native instance exports. Their framing
-                    and backgrounds may differ. Visual fidelity is unqualified;
-                    these images are not a pixel comparison or a pass.
+                    Open a state to frame its original and compare both images
+                    at the same scale. Framing is measured from an exact replay
+                    of the recorded source. Backgrounds and raster rounding can
+                    differ; visual fidelity remains unqualified.
                   </p>
                   {job.nativeOperation.imageObservation.images.map((image) => {
                     const [run, story] = image.caseId.split(":");
@@ -1393,49 +1460,14 @@ export function Sources() {
                         : null;
                     const nativeUrl = `/api/source-reference/native/${job.nativeOperation!.id}/images/${job.nativeOperation!.imageObservation!.attemptId}/${image.sha256}.png`;
                     return (
-                      <details key={image.caseId}>
-                        <summary>
-                          {story || image.caseId} · {image.width} ×{" "}
-                          {image.height} native pixels
-                        </summary>
-                        <div className="native-image-pair">
-                          <figure>
-                            <figcaption>Recorded source</figcaption>
-                            {sourceUrl ? (
-                              <a
-                                href={sourceUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                <img
-                                  src={sourceUrl}
-                                  alt={`Recorded source: ${story}`}
-                                />
-                              </a>
-                            ) : (
-                              <p>
-                                Matching current source evidence is unavailable.
-                                The native export is retained for inspection.
-                              </p>
-                            )}
-                          </figure>
-                          <figure>
-                            <figcaption>
-                              Native instance · unqualified
-                            </figcaption>
-                            <a
-                              href={nativeUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <img
-                                src={nativeUrl}
-                                alt={`Native comparison instance: ${story || image.caseId}`}
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </details>
+                      <NativeImageComparison
+                        key={`${image.caseId}:${nativeUrl}`}
+                        caseId={image.caseId}
+                        sourceUrl={sourceUrl}
+                        nativeUrl={nativeUrl}
+                        width={image.width}
+                        height={image.height}
+                      />
                     );
                   })}
                   {job.nativeOperation.imageObservation.problems.map(
@@ -1551,6 +1583,16 @@ export function Sources() {
                         events (behavior not yet tested).
                       </p>
                     )}
+                    {!!row.semanticIntake.observation?.referenceIdentity &&
+                      row.semanticIntake.status === "observed" && (
+                        <p>
+                          Local ID references were checked with an explicit
+                          lifecycle probe. Supported generated IDs can differ
+                          across replays; caller IDs and state must match
+                          exactly. This does not qualify interaction or
+                          accessibility behavior.
+                        </p>
+                      )}
                     {!!row.semanticIntake.problems.length && (
                       <p>
                         Intake blocked: {row.semanticIntake.problems.join(", ")}

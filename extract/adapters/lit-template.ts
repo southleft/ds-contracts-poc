@@ -107,7 +107,9 @@ export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRea
   if (classes.length !== 1) { problem('class-identity-not-unique', 'Expected exactly one named top-level class declaration.'); return result; }
   const cls = classes[0];
   const unwrap = (node: ts.Expression): ts.Expression => {
-    while (ts.isParenthesizedExpression(node)) node = node.expression;
+    // These TypeScript wrappers disappear at runtime. Keep original spans/raw
+    // text in facts; never unwrap calls, comma expressions or optional access.
+    while (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isTypeAssertionExpression(node) || ts.isNonNullExpression(node) || ts.isSatisfiesExpression(node)) node = node.expression;
     return node;
   };
   function importIdentity(expression: ts.Expression): LitImportIdentity | undefined {
@@ -129,7 +131,7 @@ export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRea
   }
   const htmlImport = (node: ts.Expression) => {
     const identity = importIdentity(node);
-    return identity?.imported === 'html' && ['lit', 'lit-html'].includes(identity.module) ? identity : undefined;
+    return identity?.imported === 'html' && ['lit', 'lit-html', 'lit/static-html.js', 'lit-html/static.js'].includes(identity.module) ? identity : undefined;
   };
   const templates = new Map<number, LitTemplate>();
   const templateId = (node: ts.Node) => `template:${node.getStart(sourceFile)}:${node.end}`;
@@ -186,7 +188,7 @@ export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRea
   // This is not a full HTML tree builder. Table/select/formatting/document
   // contexts can insert, close or move nodes, so do not advertise their authored
   // nesting as browser topology. Expand only with native-parser conformance.
-  const normalElements = new Set(['div', 'span', 'button', 'a', 'slot', 'input', 'img', 'br', 'hr']);
+  const normalElements = new Set(['div', 'span', 'button', 'a', 'label', 'slot', 'input', 'img', 'br', 'hr']);
   function readTemplate(node: ts.TaggedTemplateExpression, guards: LitGuard[], role: LitTemplate['role']): LitTemplate {
     const prior = templates.get(node.pos);
     if (prior) {
@@ -215,6 +217,13 @@ export function readLitTemplateBindings(input: LitTemplateInput): LitTemplateRea
     try {
       if (ts.isNoSubstitutionTemplateLiteral(node.template)) chars(node.template.getStart(sourceFile) + 1, node.template.end - 1);
       else {
+        // Static HTML can splice branded values into the parser input, even in
+        // an apparent attribute/child position. Retain authored syntax but do
+        // not let ordinary Lit topology matching treat these as ordinary holes.
+        // Resolving unsafeStatic/literal or component registries needs separate
+        // evidence; names, type annotations and similar DOM are insufficient.
+        if (['lit/static-html.js', 'lit-html/static.js'].includes(template.import.module))
+          problem('static-html-values-unverified', 'Static HTML interpolations may alter parser input. Authored syntax is retained; runtime static values and dynamic tag identities require independent verification.', node);
         chars(node.template.head.getStart(sourceFile) + 1, node.template.head.end - 2);
         let interpolationStart = node.template.head.end - 2;
         for (const part of node.template.templateSpans) {

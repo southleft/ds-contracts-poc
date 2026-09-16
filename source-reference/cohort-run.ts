@@ -1,3 +1,4 @@
+import { deriveLifecycleIdentityPolicy, installLifecycleIdentityProbe, semanticReplayMatches } from "./lifecycle-identity.js";
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -8,7 +9,7 @@ import { watchSourceFailures } from './observe.js';
 import { captureReference, replayReference, archiveInventory } from './replay.js';
 import { captureValidatedTree } from './capture.js';
 import { readCemDeclarations } from '../extract/adapters/cem.js';
-import { captureStableSemantics, assessSemantics, semanticHash } from './semantics.js';
+import { captureStableSemantics, assessSemantics } from './semantics.js';
 
 const [origin,checkout,output,selection = 'baseline',parentId,parentSha256] = process.argv.slice(2);
 if (!origin || !checkout || !output) throw new Error('Usage: cohort-run.ts <loopback-origin> <altitude-checkout> <new-private-output>');
@@ -47,7 +48,12 @@ try {
     let context:Awaited<ReturnType<typeof browser.newContext>> | undefined;
     const row:Record<string,unknown> = {story,profile,limitations,qualified:false};
     try {
+      const declarations = manifest.declarations.filter(decl => decl.tagName === profile.path[0]);
+      const declaration = declarations.length === 1 ? declarations[0] : undefined;
+      const modulePath = declaration && path.posix.join(path.posix.dirname(manifestPath), declaration.modulePath);
+      const identityPolicy = declaration && modulePath ? deriveLifecycleIdentityPolicy({ source:readFileSync(path.join(checkout,modulePath),'utf8'), sourceSha256:hashes[modulePath], modulePath:declaration.modulePath, className:declaration.className }, declaration) : undefined;
       context = await browser.newContext({viewport:{width:900,height:600},deviceScaleFactor:1,colorScheme:'dark',serviceWorkers:'block',recordHar:{path:har,content:'embed',mode:'full'}});
+      if (identityPolicy) await installLifecycleIdentityProbe(context,identityPolicy);
       const page = await context.newPage(); const failures = watchSourceFailures(page);
       await page.goto(url,{waitUntil:'load',timeout:30000});
       const live = await captureReference(page,profile,failures);
@@ -55,8 +61,6 @@ try {
       row.source = {status:live.status,problems:live.problems,observation:live.after,sha256:live.secondSha256};
       const sourceTree = live.status === 'valid' ? await captureValidatedTree(page,profile,failures,'#storybook-root','--al-') : {status:'refused' as const,problems:['source-reference-invalid']};
       writeFileSync(path.join(dir,'source-tree.json'),JSON.stringify(sourceTree,null,2)+'\n');
-      const declarations = manifest.declarations.filter(decl => decl.tagName === profile.path[0]);
-      const declaration = declarations.length === 1 ? declarations[0] : undefined;
       const sourceSemantics = declaration ? assessSemantics(declaration,await captureStableSemantics(page,[profile.path[0]],declaration,live.secondSha256),{
         valid:live.status === 'valid',sourcePngSha256:live.secondSha256,
         ...(sourceTree.status === 'captured' ? {sourceTreeSha256:sourceTree.treeSha256} : {}),
@@ -66,7 +70,7 @@ try {
       const replay = await replayReference(browser,har,url,profile,undefined,async (replayPage,replayFailures)=>{
         const tree = await captureValidatedTree(replayPage,profile,replayFailures,'#storybook-root','--al-');
         return {tree,semantics:declaration ? await captureStableSemantics(replayPage,[profile.path[0]],declaration,tree.status === 'captured' ? tree.sourcePngSha256 : live.secondSha256) : null};
-      });
+      }, identityPolicy ? context => installLifecycleIdentityProbe(context,identityPolicy) : undefined);
       const replayTree = replay.inspection?.tree ?? {status:'refused' as const,problems:['replay-reference-invalid']};
       writeFileSync(path.join(dir,'replay-tree.json'),JSON.stringify(replayTree,null,2)+'\n');
       writeFileSync(path.join(dir,'replay-semantics.json'),JSON.stringify(replay.inspection?.semantics ?? null,null,2)+'\n');
@@ -79,7 +83,7 @@ try {
         problems:treesMatch ? [] : [...sourceTree.problems,...(replayTree?.problems ?? []),'source-replay-tree-not-verified'],
         ...(sourceTree.status === 'captured' ? {census:sourceTree.census,boundary:sourceTree.boundary,treeSha256:sourceTree.treeSha256} : {}),
         scope:'Raw compiler input only. Token references are candidates; unreadable stylesheet boundaries are not hidden. No Figma conversion claim.'};
-      const semanticMatch = 'observationSha256' in sourceSemantics && replay.inspection?.semantics && sourceSemantics.observationSha256 === semanticHash(replay.inspection.semantics);
+      const semanticMatch = 'observationSha256' in sourceSemantics && replay.inspection?.semantics && semanticReplayMatches(sourceSemantics.observation,replay.inspection.semantics,identityPolicy);
       row.semanticIntake = {
         status:!row.qualified ? 'source-invalid' : sourceSemantics.status === 'observed' && semanticMatch && treesMatch ? 'observed' : 'refused',
         problems:[...sourceSemantics.problems,...(!semanticMatch ? ['semantic-replay-mismatch'] : []),...(!treesMatch ? ['source-tree-not-verified'] : [])],

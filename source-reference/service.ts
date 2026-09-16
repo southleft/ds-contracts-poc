@@ -1,3 +1,5 @@
+import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
+import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
 import {
@@ -8,6 +10,8 @@ import {
   readFileSync,
 } from "node:fs";
 import path from "node:path";
+import { createSourceFramingStore } from "./source-framing.js";
+import { recordedStoryUrl } from "./binding-evidence.js";
 import { createBindingJobs } from "./binding-jobs.js";
 import {
   createCandidateJobs,
@@ -587,6 +591,33 @@ export function createReferenceService(
             });
           }
         }
+        // Re-derive any identity policy from the authenticated local source
+        // graph. Never trust the receipt to authorize its own ID renaming.
+        const identityProgram = loadRecordedSourceProgram({
+          checkout,
+          revision: final.sourceRevision,
+          manifestPath,
+          manifestSha256,
+          sourceHashes: final.sourceHashes,
+          modulePath: declaration.modulePath,
+          className: declaration.className,
+        });
+        const identityEntry =
+          identityProgram.status !== "refused" &&
+          identityProgram.modules.find(
+            (m) => m.path === identityProgram.entryPath,
+          );
+        const identityPolicy = identityEntry
+          ? deriveLifecycleIdentityPolicy(
+              {
+                source: identityEntry.text,
+                sourceSha256: identityEntry.sha256,
+                modulePath: declaration.modulePath,
+                className: declaration.className,
+              },
+              declaration,
+            )
+          : undefined;
         plans.push(
           planSourceContract({
             component: {
@@ -600,6 +631,7 @@ export function createReferenceService(
               manifestSha256,
             },
             declaration,
+            identityPolicy,
             declarationProblems: manifest.problems,
             observations,
           }),
@@ -617,6 +649,38 @@ export function createReferenceService(
       problems,
     };
   }
+  const sourceFraming = createSourceFramingStore(repoRoot, (run, story) => {
+    const job = jobs.get(run);
+    const fixed =
+      job && cohort(job.cohortId).find((entry) => entry.story === story);
+    const summary =
+      job && snapshot(job).rows.find((row) => row.story === story);
+    const file = fixed && evidenceFile(run, story, "measurement.json");
+    const row = file && read(file);
+    const sourceFile = fixed && evidenceFile(run, story, "source.png");
+    const harFile = fixed && evidenceFile(run, story, "source.har");
+    if (
+      !job ||
+      job.state !== "complete" ||
+      !fixed ||
+      summary?.status !== "valid" ||
+      !row ||
+      !sourceFile ||
+      !harFile ||
+      JSON.stringify(row.profile) !== JSON.stringify(fixed.profile) ||
+      !/^[a-f0-9]{64}$/.test(row.archive?.sha256 ?? "") ||
+      fileHash(harFile) !== row.archive.sha256
+    )
+      throw Error("source-framing-evidence-unavailable");
+    return {
+      source: readFileSync(sourceFile),
+      sourceSha256: row.source.sha256,
+      harPath: harFile,
+      harSha256: row.archive.sha256,
+      url: recordedStoryUrl(readFileSync(harFile), story),
+      profile: fixed.profile,
+    };
+  });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
   const snapshotWithSupplement = (job: ReferenceJob) => {
     const connectionObservedAt = Date.now();
@@ -811,6 +875,43 @@ export function createReferenceService(
       json(res, 403, { error: "Same-origin access required." });
       return;
     }
+    const framingRoute =
+      /^([a-f0-9-]+)\/([a-z-]+)\/framing(?:\/([a-f0-9]{64})\.png)?$/.exec(
+        route,
+      );
+    if (framingRoute && (req.method === "GET" || req.method === "POST")) {
+      const [, run, story, imageHash] = framingRoute;
+      try {
+        if (!UUID.test(run) || !stories.has(story))
+          throw Error("source-framing-target-invalid");
+        if (req.method === "POST") {
+          const payload = await body(2048);
+          if (imageHash || !object(payload) || Object.keys(payload).length) {
+            json(res, 400, {
+              error:
+                "Only an empty object is accepted; the recorded source chooses the framing.",
+            });
+            return;
+          }
+          if (active || candidateJobs.running || bindingJobs.running)
+            throw Error("source-framing-busy");
+          json(res, 200, { frame: await sourceFraming.create(run, story) });
+        } else if (imageHash) {
+          const bytes = sourceFraming.image(run, story, imageHash);
+          res.setHeader("Content-Type", "image/png");
+          res.setHeader("Cache-Control", "no-store");
+          res.setHeader("X-Content-Type-Options", "nosniff");
+          res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+          res.end(bytes);
+        } else json(res, 200, { frame: sourceFraming.read(run, story) });
+      } catch {
+        json(res, req.method === "POST" ? 409 : 404, {
+          error:
+            "Source framing unavailable. The original must replay exactly and its recorded evidence must remain unchanged. Wait for any active framing request before retrying.",
+        });
+      }
+      return;
+    }
     const nativeImage =
       /^native\/([a-f0-9-]+)\/images\/([a-f0-9-]+)\/([a-f0-9]{64})\.png$/.exec(
         route,
@@ -895,6 +996,14 @@ export function createReferenceService(
         checkoutAvailable: existsSync(
           path.join(checkout, "libs/al-web-components/.storybook/preview.ts"),
         ),
+        runs: [...jobs.values()]
+          .filter((job) => !job.parent)
+          .map(({ id, state, startedAt, completedAt }) => ({
+            id,
+            state,
+            startedAt,
+            completedAt,
+          })),
         latest: [...jobs.values()].filter((job) => !job.parent).at(-1)
           ? snapshotWithSupplement(
               [...jobs.values()].filter((job) => !job.parent).at(-1)!,

@@ -76,6 +76,45 @@ test("source API: all states retained, no premature success, isolated assets and
     const response = await post();
     assert.equal(response.status, 202);
     const job = await response.json();
+    const framing = `${base}/${job.id}/atoms-button--default/framing`;
+    assert.equal(
+      (
+        await fetch(framing, {
+          headers: { Origin: "https://attacker.invalid" },
+        })
+      ).status,
+      403,
+    );
+    assert.equal(
+      (await fetch(framing)).status,
+      404,
+      "incomplete source has no frame",
+    );
+    assert.equal(
+      (
+        await fetch(framing, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bounds: { x: 0, y: 0, width: 10, height: 10 },
+          }),
+        })
+      ).status,
+      400,
+      "caller cannot supply desired crop geometry",
+    );
+    assert.equal(
+      (
+        await fetch(framing, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: "{}",
+        })
+      ).status,
+      409,
+      "incomplete evidence cannot be framed",
+    );
+    assert.equal((await fetch(`${framing}/${"0".repeat(64)}.png`)).status, 404);
     assert.equal(job.rows.length, 10);
     assert.equal(job.qualified, 0);
     assert.ok(
@@ -354,7 +393,17 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
   await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
   const base = `http://127.0.0.1:${(server.address() as { port: number }).port}/api/source-reference`;
   try {
-    const latest = (await (await fetch(base)).json()).latest;
+    const listing = await (await fetch(base)).json();
+    const latest = listing.latest;
+    assert.ok(listing.runs.some((run: { id: string }) => run.id === id(1)));
+    assert.ok(listing.runs.some((run: { id: string }) => run.id === id(2)));
+    assert.ok(
+      listing.runs.every((run: Record<string, unknown>) =>
+        Object.keys(run).every((key) =>
+          ["id", "state", "startedAt", "completedAt"].includes(key),
+        ),
+      ),
+    );
     assert.equal(latest.id, id(2));
     assert.equal(latest.state, "complete");
     assert.equal(latest.recovered, true);

@@ -174,6 +174,7 @@ export function matchLitRender(input: LitRenderInput): LitRenderMatch {
       "render-fallthrough-unresolved",
       "render-control-flow-unresolved",
       "render-state-mutation-unresolved",
+      "static-html-values-unverified",
     ]);
     if (read.problems.some((p) => structuralProblems.has(p.code)))
       fail("render-source-topology-unresolved");

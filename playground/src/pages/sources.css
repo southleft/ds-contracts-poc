@@ -289,3 +289,32 @@
     grid-template-columns: 1fr;
   }
 }
+
+.native-comparison-scale {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+.native-comparison-scale select {
+  font: inherit;
+  width: auto;
+}
+.native-comparison-scale {
+  white-space: nowrap;
+}
+.native-image-pair-framed img {
+  max-width: none;
+  image-rendering: pixelated;
+}
+.native-comparison-surface {
+  width: max-content;
+  background-color: #eee;
+  background-image: conic-gradient(
+    #ddd 25%,
+    transparent 0 50%,
+    #ddd 0 75%,
+    transparent 0
+  );
+  background-size: 16px 16px;
+}
