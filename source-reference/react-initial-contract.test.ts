@@ -29,6 +29,7 @@ test('complete typed initial domains preserve omission and conditional anatomy; 
     const id = String(i), changed = structuredClone(tree), own = structuredClone(ownership), value = entry.changes.value;
     if (value.kind === 'omit') delete own.components[0].props.value;
     else own.components[0].props.value = value.value;
+    changed.style.opacity = value.kind === 'set' ? value.value === true ? '0.5' : value.value === 'mixed' ? '0' : '1' : '1';
     if (value.kind === 'set' && value.value) {
       changed.nodes = [{ t: 'el', el: { tag: 'span', classes: ['mark'], pseudo: {}, nodes: [], style: { display: 'block', width: '8px', height: '8px', 'background-color': value.value === true ? 'rgb(0, 0, 0)' : 'rgb(255, 0, 0)' } } }];
       own.nodes.push({ path: '0', tag: 'span', nearestComponent: 'instance-0', createdBy: 'instance-0' });
@@ -45,6 +46,8 @@ test('complete typed initial domains preserve omission and conditional anatomy; 
   const run = (o = observation, s = snapshots) => compileReactInitialContract(program, ownership, tree, o, s);
   const result = run(); assert.equal(result.status, 'compiled-draft', result.problems.join('\n'));
   assert.equal(result.compiled!.component!.variants.length, 4);
+  for (const variant of result.compiled!.component!.variants)
+    assert.equal(variant.spec.opacity, variant.name.includes('boolean-true') ? 0.5 : variant.name.includes('mixed') ? 0 : 1, 'observed node opacity, including zero, survives the conditional token compiler');
   const prop = result.compiled!.contract!.props[0];
   assert.equal(prop.default, undefined); assert.equal(prop.bindings.figma.unsetValue, '(unset)');
   assert.deepEqual(prop.bindings.code.values, { 'boolean-false': false, 'boolean-true': true, mixed: 'mixed' });

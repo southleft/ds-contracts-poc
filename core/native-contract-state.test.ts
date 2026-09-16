@@ -21,13 +21,13 @@ async function fixture() {
     vector.fills = []; vector.strokes = [{ type: 'SOLID', color: { r: 0, g: 0, b: 0 } }]; frame.appendChild(vector); return frame;
   };
   const run = async (script: string) => JSON.parse(JSON.stringify(await vm.runInNewContext(`(async()=>{${script}\n})()`, { figma, console }, { timeout: 5000 })));
-  const tokens = { ink: { $type: 'color', $value: '#fafafa' }, size: { $type: 'dimension', $value: '16px' } };
+  const tokens = { ink: { $type: 'color', $value: '#fafafa' }, size: { $type: 'dimension', $value: '16px' }, faded: { $type: 'number', $value: 0.5 } };
   const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } },
     icons: new Map([['glyph', '<svg viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 4" stroke="currentColor"/></svg>']]) });
   const contract = ContractSchema.parse({ id: 'fixture.initial', name: 'Initial', version: '0.1.0', status: 'draft',
     description: 'Synthetic finite initial-state draft', states: [], semantics: { element: 'button' }, props: [{ name: 'value', type: { enum: ['off','on'] },
       bindings: { code: { prop: 'value' }, figma: { kind: 'VARIANT', property: 'Value', unsetValue: '(unset)' } } }],
-    anatomy: { root: { layout: { display: 'flex', direction: 'row', align: 'center', justify: 'center' }, tokens: { width: '{size}', height: '{size}' }, parts: {
+    anatomy: { root: { layout: { display: 'flex', direction: 'row', align: 'center', justify: 'center' }, tokens: { width: '{size}', height: '{size}', opacity: '{faded}' }, parts: {
       glyph: { icon: { asset: 'glyph', size: 14 }, tokens: { color: '{ink}' }, visibleWhen: { prop: 'value', equals: 'on' } },
       region: { shape: { kind: 'rect', width: 38, height: 30 }, declared: { position: 'absolute', 'pointer-events': 'auto' },
         literals: { left: '-12px', top: '-8px', 'background-color': 'transparent' } },
@@ -55,8 +55,12 @@ test('stateful native drafts own shapes and SVG descendants, verify them indepen
   const receipt = await f.run(emitNativeContractReadbackScript(input));
   const result = verifyNativeContractReadback(input, receipt);
   assert.equal(result.status, 'supported-structure-observed', JSON.stringify(result));
+  for (const node of receipt.nodes.filter((n: any) => n.type === 'COMPONENT'))
+    assert.equal(node.values.opacity, 0.5, 'the writer applies node opacity to every variant');
   assert.equal(result.nativeQualification, 'unqualified');
   for (const mutate of [
+    (r: any) => { r.nodes.find((n: any) => n.type === 'COMPONENT').values.opacity = 1; },
+    (r: any) => { delete r.nodes.find((n: any) => n.type === 'COMPONENT').values.opacity; },
     (r: any) => { r.nodes.find((n: any) => n.type === 'RECTANGLE').values.width += 1; },
     (r: any) => { r.nodes.find((n: any) => n.type === 'RECTANGLE').values.x += 1; },
     (r: any) => { r.nodes.find((n: any) => n.type === 'RECTANGLE').metadata.nativeContractPart = '{}'; },

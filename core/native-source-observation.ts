@@ -599,7 +599,7 @@ function verifyReadback(
         v.counterAxisAlignItems !== spec.layout.counter)
     )
       issue("native-source-observation-layout", n);
-    if (v.opacity !== undefined && v.opacity !== (spec.opacity ?? 1))
+    if ((spec.opacity !== undefined || v.opacity !== undefined) && v.opacity !== (spec.opacity ?? 1))
       issue("native-source-observation-opacity", n);
     const bindings = {
       ...spec.bindings,
