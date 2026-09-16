@@ -1,13 +1,6 @@
 # 12 · Roadmap
 
-> **Current state (2026-08-31).** The recipe-IR pivot landed on main
-> (`4caebfc5b`). Five archetypes are live-minted and owner-signed. Product
-> **v1 is incomplete** (F1 whole-corpus / unseen-library). The active v1
-> climb is [docs/35](35-two-journey-v1-plan.md) (not a ship claim). This
-> page's four phases still describe the *spec* roadmap (harden → brownfield
-> → spec candidacy → governance). They do not restate the pivot. See
-> [docs/32](32-recipe-ir-pivot.md) and the current-state box on
-> [ROADMAP.md](../ROADMAP.md).
+> **Current product plan:** [docs/CURRENT.md](CURRENT.md) targets React ↔ contracts ↔ Figma for V1. Lit/Web Components integration is paused for planned V1.1. V1 is incomplete. This page preserves the longer-term specification roadmap and its dated evidence; it does not set the active product work order.
 
 Where this project intends to go, in public. Each phase has a **falsifiable exit criterion** — the same standard the rest of the repo holds itself to. Phases overlap in practice; the exit criteria don't move.
 
