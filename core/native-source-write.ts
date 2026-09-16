@@ -1,3 +1,4 @@
+import { nativeComparisonDependencies } from './native-contract-comparison.js';
 import type { PreparedNativeContractComparison } from './native-contract-comparison.js';
 import { emitNativeContractReadbackScript } from './native-source-observation.js';
 /** Host-owned, create-only source inspection writer context. This is not
@@ -78,6 +79,7 @@ export function prepareNativeSourceWrite(
   const names = new Set(preparation.variables.map((v) => v.name));
   if (boundNames.some((name) => !names.has(name)))
     fail("token-binding-outside-scope");
+  const dependencies = contractComparison ? nativeComparisonDependencies(contractComparison) : undefined;
   const descriptor = {
     version: 1,
     purpose: "source-candidate-inspection",
@@ -98,6 +100,10 @@ export function prepareNativeSourceWrite(
       specs: contractComparison.specs, fonts: contractComparison.fonts, nodeTypes: contractComparison.nodeTypes,
       revision: contractComparison.revision, receipt: contractComparison.receipt,
       parent: { tokenIdentity: contractComparison.parent.tokenIdentity },
+      ...(contractComparison.instances?.length ? { instances: contractComparison.instances.map(ref => ({
+        specPath: ref.specPath, mainId: ref.mainId, slotSpecPath: ref.slotSpecPath,
+        parent: { tokenIdentity: ref.parent.tokenIdentity },
+      })), dependencyReceipts: dependencies!.parents.map(ref => ref.receipt) } : {}),
     } } : {}),
     ...(comparisons
       ? {
@@ -119,6 +125,7 @@ export function prepareNativeSourceWrite(
       tokens.identity,
     ),
     sampleSpecs: comparisons?.specs ?? contractComparison?.specs ?? [],
+    comparisonNestedReadbackScripts: dependencies?.parents.map(ref => emitNativeContractReadbackScript(ref.parent)),
     comparisonParentReadbackScript: contractComparison ? emitNativeContractReadbackScript(contractComparison.parent) : undefined,
   };
 }
@@ -208,7 +215,12 @@ ${prepared.descriptor.contractComparison ? `async function nativeCheckComparison
 ${prepared.comparisonParentReadbackScript}
   })();
   delete observed.images;
-  if (nativeCanonical(observed) !== nativeCanonical(NATIVE.contractComparison.receipt)) nativeRefuse('comparison-parent-changed');
+  if (nativeCanonical(observed) !== nativeCanonical(NATIVE.contractComparison.receipt)) nativeRefuse('comparison-parent-changed');${(prepared.comparisonNestedReadbackScripts ?? []).map((script, index) => `
+  {
+    const nested = await (async () => { ${script} })();
+    delete nested.images;
+    if (nativeCanonical(nested) !== nativeCanonical(NATIVE.contractComparison.dependencyReceipts[${index}])) nativeRefuse('comparison-nested-main-changed');
+  }`).join('\n')}
 }
 ` : ''}try {
   nativeFileGuard();

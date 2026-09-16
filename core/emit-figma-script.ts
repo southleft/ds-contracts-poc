@@ -1,4 +1,4 @@
-import { prepareNativeContractComparison, NATIVE_CONTRACT_COMPARISON_RUNTIME, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
+import { prepareNativeContractComparison, NATIVE_CONTRACT_COMPARISON_RUNTIME, NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
 import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
@@ -7418,7 +7418,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
   validateContract(contract, byId, errors, input.icons);
   if (errors.length) throw Error('NATIVE_CONTRACT_COMPARISON_INVALID: ' + errors.join('; '));
   if (context.comparisons || context.operation.fileKey !== comparison.parent.operation.fileKey ||
-      context.operation.id === comparison.parent.operation.id) throw Error('NATIVE_CONTRACT_COMPARISON_SCOPE_INVALID');
+      (context.operation.id === comparison.parent.operation.id || comparison.instances?.some(ref => ref.parent.operation.id === context.operation.id))) throw Error('NATIVE_CONTRACT_COMPARISON_SCOPE_INVALID');
   if (Object.keys(input.tokens.semantic).length || Object.keys(input.tokens.light).length ||
       Object.keys(input.tokens.dark).length || Object.values(input.tokens.brands).some(tree => Object.keys(tree).length))
     throw Error('NATIVE_CONTRACT_DRAFT_TOKEN_OVERLAY_UNQUALIFIED');
@@ -7429,7 +7429,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
   const prepared = prepareNativeSourceWrite(compiled.projection, context, compiled.boundNames, undefined, compiled);
   return wrapNativeSourceWrite(prepared, buildSyncScript([data], context.operation.fileKey, {
     header: '// Shared renderer: caller content in an instance of an existing observed main.',
-    preamble: '', nativeSource: true, nativeContractComparison: true, nativeSampleSpecs: compiled.specs,
+    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeSampleSpecs: compiled.specs,
   }));
 }
 
@@ -7439,7 +7439,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -8071,7 +8071,7 @@ function applyOverlay(parent, childNode, childSpec) {
 }
 ${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 async function buildNode(spec, registry) {
-  let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}
+  let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   if (spec.type === 'svg') {
     node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fills = [];
@@ -8978,7 +8978,7 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
   };
 }
 
-${opts.nativeContractComparison ? NATIVE_CONTRACT_COMPARISON_RUNTIME + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
+${opts.nativeContractComparison ? (opts.nativeNestedComparison ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
 for (const C of COMPONENTS) {
   // Every per-set result — created, amended, skipped as unchanged, refused
   // by the create-only door — carries the named receipt, so the plugin's run

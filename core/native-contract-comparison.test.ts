@@ -59,7 +59,7 @@ async function fixture(fileKey?: string) {
   const comparison: NativeContractComparisonInput = { parent, receipt, caseId: 'sample', variantName: mainData.component.variants[0].name, slotSpecPath: [0] };
   const supplemental = await context('10000000-0000-4000-8000-000000000002');
   const emit = (c: Contract = content, selected = comparison) => engine.buildNativeContractComparisonScript(c, new Map([[c.id, c]]), source, supplemental, selected);
-  return { ...host, run, engine, tokens, source, content, assets, comparison, supplemental, emit };
+  return { ...host, run, engine, tokens, source, content, assets, comparison, supplemental, emit, contract, context };
 }
 
 test('shared writer fills an instance of the existing main, retaining editable content and both token contexts', async () => {
@@ -262,4 +262,107 @@ test('comparison variant selection preserves typed null, string null, defaults a
   delete contract.props[0].default; contract.props[0].bindings.figma.unsetValue = '(unset)';
   assert.equal(reactComparisonVariant(contract, {}), 'Tone=(unset)');
   assert.throws(() => reactComparisonVariant(contract, { appearance: { kind: 'object' } }), /value-unqualified/);
+});
+
+
+async function nestedFixture() {
+  const f = await fixture();
+  const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
+  child.name = 'Main'; // Deliberate display-name collision with the outer main.
+  const context = await f.context('10000000-0000-4000-8000-000000000003');
+  const data = f.engine.compileNativeContractDraft(child, new Map([[child.id, child]]), f.source);
+  const creation = await f.run(f.engine.buildNativeContractDraftScript(child, new Map([[child.id, child]]), f.source, context));
+  assert.equal(creation.status, 'created-candidate');
+  const parent: NativeContractObservationInput = { operation: context.operation, planRevision: revisionOf('nested main plan'),
+    projection: data.projection, component: data.component, tokenInput: context.tokens.input, tokenIdentity: context.tokens.identity, creation };
+  const receipt = await f.run(emitNativeContractReadbackScript(parent));
+  const text = (value: string) => ({ text: value, tokens: { color: '{surface}', 'font-size': '{size}' }, declared: { 'font-family': 'Inter' } });
+  const content = f.contract('fixture.composed', { root: { layout: { display: 'flex', direction: 'column' }, parts: {
+    first: { layout: { display: 'flex', direction: 'row' }, parts: {
+      nested: { layout: { display: 'flex', direction: 'row' }, parts: { label: text('First editable content') } },
+    } },
+    second: { layout: { display: 'flex', direction: 'row' }, parts: { secondLabel: text('Second editable content') } },
+  } } });
+  const reference = { parent, receipt, variantName: data.component.variants[0].name, slotSpecPath: [0] };
+  const selected: NativeContractComparisonInput = { ...f.comparison, instances: [[0], [0, 0], [1]].map(specPath => ({ ...reference, specPath })) };
+  const emit = () => f.emit(content, selected);
+  const observe = async (creation: any) => {
+    const component = f.engine.compileComponentData(content, new Map([[content.id, content]]));
+    const comparison = prepareNativeContractComparison(content, component, f.source, revisionOf(f.tokens), { mode: 'light', brand: 'default' }, selected);
+    const input: NativeContractComparisonObservationInput = { operation: f.supplemental.operation, planRevision: revisionOf('nested composition'), comparison,
+      tokenInput: f.supplemental.tokens.input, tokenIdentity: f.supplemental.tokens.identity, creation };
+    return { input, receipt: await f.run(emitNativeContractComparisonReadbackScript(input, true)) };
+  };
+  return { ...f, content, selected, reference, emit, observe };
+}
+
+test('nested caller content keeps main linkage, independent token contexts and editable slots at multiple depths', async () => {
+  const f = await nestedFixture(), before = await f.run(emitNativeContractReadbackScript(f.reference.parent));
+  const mains = f.figma.root.findAll((n: any) => n.type === 'COMPONENT').map((n: any) => n.id);
+  const creation = await f.run(f.emit());
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  assert.deepEqual(f.figma.root.findAll((n: any) => n.type === 'COMPONENT').map((n: any) => n.id), mains);
+  const records = creation.comparisons[0].nested;
+  assert.deepEqual(records.map((r: any) => r.index), [0, 1, 2]);
+  for (const record of records) {
+    const node = await f.figma.getNodeByIdAsync(record.instanceId);
+    assert.equal(node.type, 'INSTANCE');
+    assert.equal((await node.getMainComponentAsync()).id, f.reference.parent.creation.variants[0].id);
+    assert.equal(node.children[0].type, 'SLOT');
+    assert.equal(node.explicitVariableModes[f.reference.parent.tokenIdentity.collection.id], f.reference.parent.tokenIdentity.modes[0].modeId);
+  }
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)), before);
+  const { input, receipt } = await f.observe(creation);
+  assert.equal(receipt.nested.length, 1, 'repeated uses share one independent read of their pinned main');
+  assert.equal(verifyNativeContractComparisonReadback(input, receipt).status, 'supported-comparison-structure-observed', JSON.stringify(verifyNativeContractComparisonReadback(input, receipt)));
+  assert.deepEqual(await f.run(emitNativeContractComparisonReadbackScript(input, true)), receipt);
+  // Figma may materialize every descendant under the outer slot using
+  // instance-derived IDs. Nested instances must retain their original roles.
+  const rebased = structuredClone(receipt), outerSlot = creation.comparisons[0].slots[0].nodeId;
+  const aliases = new Map(creation.nodes.filter((n: any) => n.slotIdentity).map((n: any) => [n.id, `${outerSlot};derived-${n.id}`]));
+  for (const row of rebased.content.nodes) {
+    row.id = aliases.get(row.id) ?? row.id; row.parentId = aliases.get(row.parentId) ?? row.parentId;
+    row.childIds = row.childIds.map((id: string) => aliases.get(id) ?? id);
+  }
+  assert.equal(verifyNativeContractComparisonReadback(input, rebased).status, 'supported-comparison-structure-observed');
+  rebased.content.nodes.find((n: any) => n.type === 'TEXT').metadata.nativeSourceAllocation = 'forged';
+  assert.equal(verifyNativeContractComparisonReadback(input, rebased).status, 'refused');
+  assert.equal((await f.run(f.emit())).allocationAttempted, false, 'repeat must not create another composition');
+  const changed = structuredClone(receipt);
+  changed.content.nodes.find((n: any) => n.id === records[1].instanceId).mainId = f.comparison.parent.creation.variants[0].id;
+  assert.equal(verifyNativeContractComparisonReadback(input, changed).status, 'refused');
+  const wrongContent = structuredClone(receipt);
+  wrongContent.content.nodes.find((n: any) => n.type === 'TEXT').values.characters = 'Lost caller text';
+  assert.equal(verifyNativeContractComparisonReadback(input, wrongContent).status, 'refused');
+  const wrongTokens = structuredClone(receipt);
+  wrongTokens.content.nodes.find((n: any) => n.id === records[1].instanceId).values.explicitVariableModes = {};
+  assert.equal(verifyNativeContractComparisonReadback(input, wrongTokens).status, 'refused');
+  const omitted = structuredClone(input); omitted.creation.comparisons[0].nested.pop();
+  assert.equal(verifyNativeContractComparisonReadback(omitted, receipt).status, 'refused');
+  const changedMain = await f.figma.getNodeByIdAsync(f.reference.parent.creation.variants[0].id);
+  changedMain.name = 'Native child changed after creation';
+  const changedRead = await f.run(emitNativeContractComparisonReadbackScript(input));
+  assert.equal(verifyNativeContractComparisonReadback(input, changedRead).status, 'refused');
+});
+
+test('nested references require pinned same-source mains and complete paths before allocation', async () => {
+  const f = await nestedFixture();
+  for (const mutate of [
+    (c: NativeContractComparisonInput) => { c.instances![0].specPath = [99]; },
+    (c: NativeContractComparisonInput) => { c.instances![0].specPath = [1]; },
+    (c: NativeContractComparisonInput) => { c.instances![0].specPath = [0, 0, 0]; },
+    (c: NativeContractComparisonInput) => { c.instances![0].parent.operation.fileKey = 'wrong-file'; },
+    (c: NativeContractComparisonInput) => { c.instances![0].parent.projection.source.programSha256 = 'f'.repeat(64); },
+    (c: NativeContractComparisonInput) => { c.instances![0].slotSpecPath = []; },
+    (c: NativeContractComparisonInput) => { c.instances![0].receipt.nodes!.find(n => n.type === 'COMPONENT')!.metadata.nativeContractPart = '{}'; },
+  ]) {
+    const changed = structuredClone(f.selected); mutate(changed);
+    assert.throws(() => f.engine.buildNativeContractComparisonScript(f.content, new Map([[f.content.id, f.content]]), f.source, f.supplemental, changed), /native-contract-comparison-/);
+  }
+  const script = f.emit();
+  const count = f.figma.root.findAll(() => true).length;
+  (await f.figma.getNodeByIdAsync(f.reference.parent.creation.variants[0].id)).name = 'Designer changed the main';
+  const result = await f.run(script);
+  assert.equal(result.status, 'refused'); assert.equal(result.allocationAttempted, false);
+  assert.equal(f.figma.root.findAll(() => true).length, count);
 });

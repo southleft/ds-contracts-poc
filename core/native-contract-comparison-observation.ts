@@ -2,7 +2,7 @@
  * Allocation acknowledgements choose IDs; compiler specs choose expectations. */
 import { canonicalJson } from './contract-provenance.js';
 import type { NodeSpec } from './emit-figma-script.js';
-import type { PreparedNativeContractComparison } from './native-contract-comparison.js';
+import { nativeComparisonDependencies, type PreparedNativeContractComparison } from './native-contract-comparison.js';
 import { emitNativeContractReadbackScript, emitNativeInventoryReadbackScript, verifyNativeContractReadback,
   nativeShadowStackMatches, type NativeSourceReadback } from './native-source-observation.js';
 import { resolveNativeSlotIdentities } from './native-slot-identity.js';
@@ -40,6 +40,8 @@ function checkInput(input: NativeContractComparisonObservationInput) {
 }
 export function emitNativeContractComparisonReadbackScript(input: NativeContractComparisonObservationInput, captureImages = false): string {
   checkInput(input);
+  const nested = nativeComparisonDependencies(input.comparison).parents;
+  const nestedScripts = nested.map(ref => emitNativeContractReadbackScript(ref.parent));
   const parent = emitNativeContractReadbackScript(input.comparison.parent);
   const inventory = emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
     pageId: input.creation.pageId, nodes: input.creation.nodes,
@@ -51,9 +53,15 @@ const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input
   acceptedContract: null, nativeQualification: 'unqualified', problems: [] };
 async function readParent() { return await (async () => { ${parent} })(); }
 try {
-  const before = await readParent();
+  const before = await readParent();${nested.length ? `
+  const nestedReaders = [${nestedScripts.map(script => `async () => { ${script} }`).join(',')}];
+  const nestedBefore = [];
+  for (const read of nestedReaders) nestedBefore.push(await read());` : ''}
   out.content = await (async () => { ${inventory} })();
-  out.parent = await readParent();
+  out.parent = await readParent();${nested.length ? `
+  out.nested = [];
+  for (const read of nestedReaders) out.nested.push(await read());
+  if (JSON.stringify(nestedBefore) !== JSON.stringify(out.nested)) throw Error('native-contract-comparison-nested-readback-changed');` : ''}
   if (before.status !== 'native-readback-collected' || out.parent.status !== 'native-readback-collected' ||
       out.content.status !== 'native-readback-collected' || JSON.stringify(before) !== JSON.stringify(out.parent))
     throw Error('native-contract-comparison-readback-changed-or-unavailable');
@@ -77,6 +85,20 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         r.nativeQualification !== 'unqualified' || !Array.isArray(r.problems) || r.problems.length ||
         verifyNativeContractReadback(p.parent, r.parent).status !== 'supported-structure-observed' ||
         !same(withoutImages(r.parent), p.receipt)) { issue('parent-or-envelope-changed'); return report(); }
+    const dependencies = nativeComparisonDependencies(p);
+    const references = p.instances ?? [], nestedRecords = c.comparisons[0].nested ?? [];
+    if (!Array.isArray(nestedRecords) || nestedRecords.length !== references.length ||
+        new Set(nestedRecords.map((n: Row) => n.index)).size !== references.length ||
+        references.length && (!Array.isArray(r.nested) || r.nested.length !== dependencies.parents.length)) {
+      issue('nested-inventory'); return report();
+    }
+    for (const [index, ref] of references.entries()) {
+      if (verifyNativeContractReadback(ref.parent, r.nested[dependencies.indices[index]]).status !== 'supported-structure-observed' ||
+          !same(withoutImages(r.nested[dependencies.indices[index]]), ref.receipt) ||
+          ref.parent.operation.fileKey !== input.operation.fileKey || ref.parent.operation.id === input.operation.id) {
+        issue('nested-main-changed'); return report();
+      }
+    }
     const content = r.content as NativeSourceReadback;
     if (!content || content.version !== 1 || content.status !== 'native-readback-collected' ||
         content.receiptKind !== 'independent-native-component-readback' || content.operationId !== input.operation.id ||
@@ -115,12 +137,23 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     const parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]));
     const variableByName = new Map<string, string>(content.tokens.receipt.variables.map((v: Row) => [v.name, v.id]));
     const sampleMode = { [input.tokenIdentity.collection.id]: input.tokenIdentity.modes[0].modeId };
-    const instanceMode = { ...sampleMode, [p.parent.tokenIdentity.collection.id]: p.parent.tokenIdentity.modes[0].modeId };
     const alias = (name: string) => ({ type: 'VARIABLE_ALIAS', id: variableByName.get(name) });
     const paint = (v: any, name: string) => Array.isArray(v) && v.length === 1 && v[0].type === 'SOLID' && v[0].visible !== false &&
       variableByName.has(name) && same(v[0].boundVariables?.color, alias(name));
     const sample = (spec: NodeSpec, n?: Row) => {
       if (!n || checked.has(n.id)) { issue('sample-pairing'); return; }
+      if (spec.nativeContractSample?.instance !== undefined) {
+        const index = spec.nativeContractSample.instance, reference = references[index];
+        const record = nestedRecords.find((row: Row) => row.index === index);
+        if (!reference || !record || record.instanceId !== n.id || record.mainId !== reference.mainId ||
+            n.mainId !== reference.mainId || record.status !== 'created-comparison' || record.slots?.length !== 1 ||
+            !same(record.slots[0].specPath, reference.slotSpecPath) ||
+            !same(spec.nativeContractSample.specPath, reference.specPath) ||
+            !same(meta(n, 'nativeContractSample'), spec.nativeContractSample)) { issue('nested-instance-identity', n); return; }
+        const parentNodes = new Map(reference.receipt.nodes!.map(row => [row.id, row]));
+        pair(parentNodes.get(reference.mainId), n, [], { ...reference, specs: spec.children ?? [] }, record, parentNodes);
+        return;
+      }
       checked.add(n.id); const v = n.values;
       if (n.type !== ({ frame: 'FRAME', text: 'TEXT', svg: 'FRAME' } as Record<string, string>)[spec.type] ||
           !same(meta(n, 'nativeContractSample'), spec.nativeContractSample) || !same(v.explicitVariableModes, sampleMode) ||
@@ -178,12 +211,14 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     // Content changes a hugging instance's geometry, but not the main's styles,
     // property bindings or other children. Compare every remaining observed field.
     const geometry = new Set(['x','y','width','height','relativeTransform','resolvedVariableModes','explicitVariableModes']);
-    const pair = (original: Row | undefined, actual: Row | undefined, specPath: number[]) => {
+    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'specs'>;
+    const pair = (original: Row | undefined, actual: Row | undefined, specPath: number[],
+      reference: Reference = p, record: Row = c.comparisons[0], parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]))) => {
       if (!original || !actual || checked.has(actual.id)) { issue('main-instance-pairing'); return; }
       checked.add(actual.id);
       if (actual.type !== (specPath.length ? original.type : 'INSTANCE') ||
           !same(meta(actual, 'nativeContractPart'), meta(original, 'nativeContractPart'))) issue('main-instance-identity', actual);
-      if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : instanceMode)) issue('main-instance-modes', actual);
+      if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : { ...sampleMode, [reference.parent.tokenIdentity.collection.id]: reference.parent.tokenIdentity.modes[0].modeId })) issue('main-instance-modes', actual);
       const fields = new Set([...Object.keys(original.values), ...Object.keys(actual.values)]);
       for (const field of fields) {
         // A top-level instance has null references; a main inside a set can
@@ -194,14 +229,14 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       }
       if (!specPath.length) for (const [key, value] of Object.entries(original.variantProperties ?? {}))
         if (actual.componentProperties?.[key]?.type !== 'VARIANT' || actual.componentProperties[key].value !== value) issue('main-instance-property', actual);
-      if (same(specPath, p.slotSpecPath)) {
-        if (actual.id !== record.slots[0].nodeId || actual.type !== 'SLOT' || actual.childIds.length !== p.specs.length ||
+      if (same(specPath, reference.slotSpecPath)) {
+        if (actual.id !== record.slots[0].nodeId || actual.type !== 'SLOT' || actual.childIds.length !== reference.specs.length ||
             actual.values.componentPropertyReferences?.slotContentId !== record.slots[0].propertyKey ||
             !same(actual.childIds, record.slots[0].contentNodeIds)) issue('slot-content', actual);
-        p.specs.forEach((spec, index) => sample(spec, nodes.get(actual.childIds[index]))); return;
+        reference.specs.forEach((spec, index) => sample(spec, nodes.get(actual.childIds[index]))); return;
       }
       if (original.childIds.length !== actual.childIds.length) issue('main-instance-children', actual);
-      original.childIds.forEach((id: string, index: number) => pair(parentNodes.get(id), nodes.get(actual.childIds[index]), [...specPath, index]));
+      original.childIds.forEach((id: string, index: number) => pair(parentNodes.get(id), nodes.get(actual.childIds[index]), [...specPath, index], reference, record, parentNodes));
     };
     pair(parentNodes.get(p.mainId), instance, []);
     if (checked.size !== rows.length) issue('unverified-allocations');

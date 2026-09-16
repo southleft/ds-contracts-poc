@@ -11,6 +11,15 @@ export interface NativeContractSampleIdentity {
   contentRevision: string;
   /** Compiler path in the observed content; not a reusable anatomy claim. */
   specPath: number[];
+  /** Index into the host-verified nested-main list, never a canvas name. */
+  instance?: number;
+}
+export interface NativeContractComparisonReference {
+  specPath: number[];
+  parent: NativeContractObservationInput;
+  receipt: NativeSourceReadback;
+  variantName: string;
+  slotSpecPath: number[];
 }
 export interface NativeContractComparisonInput {
   parent: NativeContractObservationInput;
@@ -18,6 +27,8 @@ export interface NativeContractComparisonInput {
   caseId: string;
   variantName: string;
   slotSpecPath: number[];
+  /** Host-selected source ownership mappings; never inferred by component name or paint. */
+  instances?: NativeContractComparisonReference[];
 }
 export function prepareNativeContractComparison(contract: Contract, component: ComponentData,
   source: NativeContractDraftSource, tokenRevision: string, context: { mode: string; brand: string },
@@ -35,16 +46,36 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       contract.bindings.figma.anchors.componentSetKey || component.variants.length !== 1 || component.stateVariants?.length ||
       component.boolProps.length || component.textProps.length || component.nativeSourceCandidate || component.nativeContractDraft)
     fail('snapshot-contract-required');
-  const variants = input.parent.component.variants.filter(v => v.name === input.variantName);
-  const mains = input.parent.creation.variants.filter((v: { name: string }) => v.name === input.variantName);
-  if (variants.length !== 1 || mains.length !== 1) fail('main-ambiguous');
-  let slot = variants[0].spec;
-  if (!Array.isArray(input.slotSpecPath) || input.slotSpecPath.length > 32) fail('slot-path-invalid');
-  for (const index of input.slotSpecPath) {
-    if (!Number.isInteger(index) || index < 0 || !slot.children?.[index]) fail('slot-path-invalid');
-    slot = slot.children![index];
-  }
-  if (slot.type !== 'slot' || slot.children?.length || slot.slotDefault?.length) fail('empty-slot-required');
+  const select = (input: Omit<NativeContractComparisonInput, 'caseId'>) => {
+    const variants = input.parent.component.variants.filter(v => v.name === input.variantName);
+    const mains = input.parent.creation.variants.filter((v: { name: string }) => v.name === input.variantName);
+    if (variants.length !== 1 || mains.length !== 1) fail('main-ambiguous');
+    let slot = variants[0].spec;
+    if (!Array.isArray(input.slotSpecPath) || input.slotSpecPath.length > 32) fail('slot-path-invalid');
+    for (const index of input.slotSpecPath) {
+      if (!Number.isInteger(index) || index < 0 || !slot.children?.[index]) fail('slot-path-invalid');
+      slot = slot.children![index];
+    }
+    if (slot.type !== 'slot' || slot.children?.length || slot.slotDefault?.length) fail('empty-slot-required');
+    return mains[0].id as string;
+  };
+  const mainId = select(input);
+  if ((input.instances?.length ?? 0) > 128) fail('nested-main-limit');
+  const instances = (input.instances ?? []).map(reference => {
+    if (reference.parent.operation.fileKey !== input.parent.operation.fileKey ||
+        reference.parent.projection.context.mode !== context.mode || reference.parent.projection.context.brand !== context.brand ||
+        reference.parent.projection.source.revision !== source.revision ||
+        reference.parent.projection.source.programSha256 !== source.programSha256 ||
+        !Array.isArray(reference.specPath) || !reference.specPath.length || reference.specPath.length > 32 ||
+        reference.specPath.some(i => !Number.isInteger(i) || i < 0) ||
+        verifyNativeContractReadback(reference.parent, reference.receipt).status !== 'supported-structure-observed')
+      fail('nested-main-observation-required');
+    const receipt = structuredClone(reference.receipt); delete receipt.images;
+    return { ...structuredClone(reference), receipt, mainId: select(reference) };
+  });
+  if (new Set(instances.map(i => JSON.stringify(i.specPath))).size !== instances.length)
+    fail('nested-main-path-ambiguous');
+  const used = new Set<number>();
   const root = component.variants[0].spec;
   if (root.type !== 'root' || !root.children?.length) fail('content-missing');
   const projection: NativeContractDraftProjection = { version: 1, kind: 'contract-draft', purpose: 'source-candidate-inspection',
@@ -70,18 +101,39 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       spec.textFill, spec.fontSizeVar, spec.fontWeightVar, spec.lineHeightVar, spec.svgPaintVar]) if (name) boundNames.add(name);
     nodeTypes.add(spec.type);
     const out = structuredClone(spec);
-    out.nativeContractSample = { caseId: input.caseId, contentRevision: revisionOf(contract), specPath };
+    const instance = instances.findIndex(ref => JSON.stringify(ref.specPath) === JSON.stringify(specPath));
+    if (instance !== -1) {
+      if (spec.type !== 'frame' || !spec.children?.length) fail('nested-caller-content-required');
+      used.add(instance);
+    }
+    out.nativeContractSample = { caseId: input.caseId, contentRevision: revisionOf(contract), specPath, ...(instance !== -1 ? { instance } : {}) };
     if (spec.children) out.children = spec.children.map((child, i) => annotate(child, [...specPath, i]));
     return out;
   };
   const specs = root.children!.map((spec, i) => annotate(spec, [i]));
+  if (used.size !== instances.length) fail('nested-main-path-missing');
   const receipt = structuredClone(input.receipt); delete receipt.images;
   return { projection, boundNames: [...boundNames].sort(), parent: structuredClone(input.parent), receipt,
-    caseId: input.caseId, mainId: mains[0].id as string, variantName: input.variantName,
-    slotSpecPath: [...input.slotSpecPath], specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
+    caseId: input.caseId, mainId, variantName: input.variantName,
+    slotSpecPath: [...input.slotSpecPath], ...(instances.length ? { instances } : {}), specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
     revision: revisionOf({ contract, component, source, tokenRevision, context, input: { ...input, receipt } }) };
 }
 export type PreparedNativeContractComparison = ReturnType<typeof prepareNativeContractComparison>;
+
+/** A repeated child main needs one independent read, even when used many
+ * times. Deduplicate by the complete pinned evidence, never by display name. */
+export function nativeComparisonDependencies(comparison: PreparedNativeContractComparison) {
+  const parents: Array<{ parent: NativeContractObservationInput; receipt: NativeSourceReadback }> = [];
+  const keys = new Map<string, number>();
+  const indices = (comparison.instances ?? []).map(ref => {
+    const key = revisionOf({ parent: ref.parent, receipt: ref.receipt });
+    let index = keys.get(key);
+    if (index === undefined) { index = parents.length; keys.set(key, index); parents.push({ parent: ref.parent, receipt: ref.receipt }); }
+    return index;
+  });
+  return { parents, indices };
+}
+
 
 /** Runs in the shared renderer, using exactly its buildNode/token resolution. */
 export const NATIVE_CONTRACT_COMPARISON_RUNTIME = `
@@ -129,5 +181,72 @@ async function nativeBuildContractComparison() {
   dsStampFingerprints(inst);
   recorded.status = 'created-comparison';
   return { comparisonInstanceId: inst.id, parentMainId: main.id, acceptedContract: null, nativeQualification: 'unqualified' };
+}
+`;
+
+/** Nested instances use the same verified main/slot path as the outer instance.
+ * All clones are operation-owned; referenced mains remain independently read. */
+export const NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME = `
+async function nativeFillContractInstance(c, specs, container, name, save) {
+  const main = await figma.getNodeByIdAsync(c.mainId); nativeFileGuard();
+  if (!main || main.type !== 'COMPONENT') nativeRefuse('comparison-main-unavailable');
+  const inst = main.createInstance(); nativeOwn(inst); container.appendChild(inst); inst.name = name;
+  const recorded = { id: name, status: 'building', instanceId: inst.id, mainId: main.id, sourceParts: [], slots: [] };
+  save(recorded);
+  const parentCollection = await figma.variables.getVariableCollectionByIdAsync(c.parent.tokenIdentity.collection.id); nativeFileGuard();
+  inst.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);
+  inst.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
+  if ((await inst.getMainComponentAsync()).id !== main.id) nativeRefuse('comparison-main-mismatch');
+  const parts = new Map();
+  function pair(source, node, path) {
+    if ((path.length ? node.type !== source.type : node.type !== 'INSTANCE') ||
+        (source.children || []).length !== (node.children || []).length) nativeRefuse('comparison-tree-mismatch');
+    if (path.length) {
+      nativeOwn(node);
+      node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);
+    }
+    const identity = JSON.parse(source.getSharedPluginData('ds_contracts', 'nativeContractPart'));
+    if (nativeCanonical(identity.specPath) !== nativeCanonical(path)) nativeRefuse('comparison-part-mismatch');
+    node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(identity));
+    if (node.type === 'SLOT' && node.componentPropertyReferences.slotContentId !== source.componentPropertyReferences.slotContentId)
+      nativeRefuse('comparison-slot-property-mismatch');
+    parts.set(nativeCanonical(path), node); recorded.sourceParts.push({ specPath: path, nodeId: node.id });
+    (source.children || []).forEach((child, i) => pair(child, node.children[i], path.concat(i)));
+  }
+  pair(main, inst, []);
+  const slot = parts.get(nativeCanonical(c.slotSpecPath));
+  if (!slot || slot.type !== 'SLOT' || slot.children.length) nativeRefuse('comparison-slot-not-empty');
+  const saved = { specPath: c.slotSpecPath, nodeId: slot.id, propertyKey: slot.componentPropertyReferences.slotContentId, contentNodeIds: [] };
+  recorded.slots.push(saved);
+  for (const spec of specs) {
+    const node = await buildNode(spec, { texts: [], slots: [], visibles: [] });
+    saved.contentNodeIds.push(node.id); slot.appendChild(node);
+  }
+
+  recorded.status = 'created-comparison';
+  return inst;
+}
+async function nativeBuildNestedContractComparison(spec) {
+  const c = NATIVE.contractComparison, index = spec.nativeContractSample.instance;
+  const reference = c.instances[index];
+  if (!reference || nativeCanonical(reference.specPath) !== nativeCanonical(spec.nativeContractSample.specPath))
+    nativeRefuse('nested-comparison-reference-missing');
+  const node = await nativeFillContractInstance(reference, spec.children || [], NATIVE_PAGE, spec.name, record => {
+    record.index = index;
+    (NATIVE_RESULT.comparisons[0].nested || (NATIVE_RESULT.comparisons[0].nested = [])).push(record);
+  });
+  node.setSharedPluginData('ds_contracts', 'nativeContractSample', JSON.stringify(spec.nativeContractSample));
+  return node;
+}
+async function nativeBuildContractComparison() {
+  const c = NATIVE.contractComparison;
+  const board = figma.createFrame(); nativeOwn(board); NATIVE_PAGE.appendChild(board);
+  NATIVE_RESULT.comparisonBoardId = board.id;
+  board.name = 'Observed caller content'; board.fills = []; board.layoutMode = 'VERTICAL';
+  board.primaryAxisSizingMode = 'AUTO'; board.counterAxisSizingMode = 'AUTO';
+  const inst = await nativeFillContractInstance(c, c.specs, board, c.caseId, record => { NATIVE_RESULT.comparisons = [record]; });
+  inst.setSharedPluginData('ds_contracts', 'nativeContractCase', JSON.stringify({ id: c.caseId, revision: c.revision }));
+  dsStampFingerprints(inst);
+  return { comparisonInstanceId: inst.id, parentMainId: c.mainId, acceptedContract: null, nativeQualification: 'unqualified' };
 }
 `;
