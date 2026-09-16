@@ -42,6 +42,8 @@ Fresh captures distinguish a narrow supported pattern of lifecycle-generated IDs
 
 The next stateful step is to carry Checkbox anatomy, checked/disabled state and content through candidate preparation and native generation. The current candidate adapter is still Button-specific. Checkbox interaction behavior and the source's mixed-state accessibility remain unqualified.
 
+The shared engine can now preserve an optional boolean as three distinct native variants: omitted, false and true. Typed readback restores the boolean API without inventing a default. A scoped live Figma fixture and both generated React surfaces preserve these states, and repeat native generation leaves its node identities and canonical readback unchanged. This is an engine prerequisite; it does not enable Checkbox candidate generation through the application.
+
 The source reader now retains TypeScript return casts and authored static-HTML input/label syntax. This is an internal prerequisite: interpolated static values and registered field-note tag names remain explicit blockers to topology matching. It does not enable a new Checkbox generation action.
 
 ### Why integration is taking time
@@ -85,7 +87,7 @@ Code-led contracts may retain an immutable reference to a host-verified original
 | Figma MCP / Desktop Bridge | Engineering access for native execution and screenshots. A successful engineering probe does not prove the application journey. |
 | CLI and local application service | Invoke the same deterministic readers, compilers and verification logic; retain operation state. |
 
-The local source workflow currently uses a configured sibling library. Each run must check the actual source and dependency identities; old captures do not establish current-source parity. Engineering writes are limited to Scratch. Altitude and CBDS remain read-only references.
+The local source workflow currently uses a configured sibling library. Each run must check the actual source and dependency identities; old captures do not establish current-source parity. Engineering writes are limited to Scratch and the user-provided DS Contracts Evaluations file. Existing operations remain bound to their original file; new targets require new operation identities. Altitude and CBDS remain read-only references.
 
 ### Implementation map
 

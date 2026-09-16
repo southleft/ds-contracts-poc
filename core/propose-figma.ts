@@ -10765,7 +10765,7 @@ export function proposeFromDump(
     }
     props.push({
       name: axis.propName,
-      type: { enum: axis.omitted ? axis.omitted.values.map(v => v.value) : axis.values.map(camel) },
+      type: axis.omitted?.valueType === 'boolean' ? 'boolean' : { enum: axis.omitted ? axis.omitted.values.map(v => v.value) : axis.values.map(camel) },
       ...(axis.omitted ? {} : { default: camel(axis.values[0]) }),
       bindings: {
         figma: {

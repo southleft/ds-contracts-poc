@@ -332,11 +332,11 @@ export function validateContract(
       const tbpProp = contract.props.find((pr) => pr.name === tbp.prop);
       if (!tbpProp) {
         errors.push(`${contract.id}: part "${name}" tokensByProp references unknown prop "${tbp.prop}"`);
-      } else if (!isEnum(tbpProp)) {
-        errors.push(`${contract.id}: part "${name}" tokensByProp prop "${tbp.prop}" must be an enum prop`);
+      } else if (!isEnum(tbpProp) && !(isVariantBool(tbpProp) && tbpProp.bindings.figma.unsetValue !== undefined)) {
+        errors.push(`${contract.id}: part "${name}" tokensByProp prop "${tbp.prop}" must be an enum or an optional boolean with an omitted VARIANT plane`);
       } else {
         for (const [k, overrides] of Object.entries(tbp.map)) {
-          if (!tbpProp.type.enum.includes(k)) {
+          if (!(isEnum(tbpProp) ? tbpProp.type.enum : ['false', 'true']).includes(k)) {
             errors.push(`${contract.id}: part "${name}" tokensByProp map key "${k}" is not a value of prop "${tbp.prop}"`);
           }
           for (const ref of Object.values(overrides)) {
