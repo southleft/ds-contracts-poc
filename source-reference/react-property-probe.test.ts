@@ -4,7 +4,7 @@ import {captureJs} from '../extract/computed/capture.js';
 import {evidenceSha} from './react-validation-evidence.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,writeFileSync,rmSync} from 'node:fs';
+import {mkdirSync,mkdtempSync,writeFileSync,rmSync} from 'node:fs';
 import path from 'node:path';
 import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
@@ -13,6 +13,7 @@ import {reactOwnershipHook,reactOwnershipRead,type ReactOwnership} from './react
 import {probeReactProperty} from './react-property-probe.js';
 
 test('real React property experiments preserve context and distinguish delivered props from rendered effects',async()=>{
+ mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
  const dir=mkdtempSync(path.join(process.cwd(),'private/react-property-fixture-')),browser=await chromium.launch();
  const source=`import React from 'react';
  export function Surface({tone='quiet',children}:{tone?:'quiet'|'loud';children?:React.ReactNode}){return <section style={{padding:tone==='loud'?20:8}}>{children}</section>}
