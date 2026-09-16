@@ -56,12 +56,16 @@ export function projectReactRootVisual(
   ownership: ReactOwnership,
   tree: CapturedNode,
   styleOrigin?: ReactStyleOrigin,
+  instanceIds?: ReadonlySet<string>,
 ): ReactRootVisual {
   const out: ReactRootVisual = { version: 1, qualification: 'observed-root-only', acceptedContract: null,
     inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}) }), roots: [], problems: [] };
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
   if (anatomy.status !== 'linked') { out.problems = [...anatomy.problems]; return out; }
   for (const instance of anatomy.instances) {
+    // A child operation needs this root only. Still authenticate the complete
+    // source/ownership join above and retain the same whole-input revision.
+    if (instanceIds && !instanceIds.has(instance.instanceId)) continue;
     const result: ReactRootVisual['roots'][number] = { instanceId: instance.instanceId,
       source: structuredClone(instance.source), status: 'refused', channels: [], problems: [],
       limitations: [...instance.problems, 'source-api-and-behavior-not-projected',

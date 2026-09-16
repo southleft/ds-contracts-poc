@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { evidenceSha } from './react-validation-evidence.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
-import { readReactNativeContentEvidence, readReactNativeEvidence } from './react-native-evidence.js';
+import { readReactNativeEvidence } from './react-native-evidence.js';
 import { deriveReactChildRoot } from './react-child-root.js';
 import { compileObservedContent } from './observed-content.js';
 import { matchReactComposition, type ReactCompositionMain } from './react-composition.js';
@@ -13,22 +13,22 @@ import type { ReactNativeRequest } from './react-native-request.js';
 import type { ReactReference } from './react-reference.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
 import type { ReactPropertySnapshot } from './react-root-variants.js';
-import { readReactContentInspection } from './react-content-inspection.js';
+import { readReactContentInspectionEvidence } from './react-content-inspection.js';
 import { flatten } from '../extract/computed/lib.js';
 
 export function readReactCompositionEvidence(repo: string, reference: ReactReference, request: ReactNativeRequest,
   parentId: string, jobs: Pick<ReturnType<typeof createNativeOperationJobs>, 'listReact' | 'verifiedReactObservation'>,
   pinnedContent?: { id: string; inventorySha256: string }) {
-  const original = readReactNativeContentEvidence(repo, reference, request);
+  const inspected = readReactContentInspectionEvidence(repo, reference, request, parentId, pinnedContent);
+  if (!inspected || inspected.report.phase !== 'complete' || !inspected.report.sourceUnchanged ||
+      inspected.report.content?.status !== 'compiled-comparison-draft') throw Error('react-composition-content-unavailable');
+  const { original, report: saved } = inspected;
   const dir = path.join(repo, 'private/react-source-ownership', request.referenceId, request.ownership.id);
   // The original reader already authenticated every file in this inventory.
   const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactOwnershipReport;
   const row = report.rows.find(r => r.id === request.caseId)!;
   const program = JSON.parse(readFileSync(path.join(dir, 'program.json'), 'utf8')) as ReactSourceProgram;
   if (!row.ownership) throw Error('react-composition-ownership-unavailable');
-  const saved = readReactContentInspection(repo, reference, request, parentId, pinnedContent);
-  if (!saved || saved.phase !== 'complete' || !saved.sourceUnchanged || saved.content?.status !== 'compiled-comparison-draft')
-    throw Error('react-composition-content-unavailable');
   const contentDir = path.join(repo, 'private/react-content-inspections', parentId, saved.id);
   const read = (name: string) => JSON.parse(readFileSync(path.join(contentDir, name), 'utf8'));
   const sourceNodes = new Map(flatten(original.captured.tree).map(n => [n.path, n.node]));
@@ -40,6 +40,9 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     [...new Set(boundaries)].sort());
   const mains: ReactCompositionMain[] = [];
   const sources = row.ownership.components.filter(c => !c.roots.includes('')).map(c => JSON.stringify(c.source));
+  // A leaf has no native dependencies to join. Its own archive and content
+  // were authenticated above; unrelated native operations cannot affect it.
+  if (!sources.length) return { ...matchReactComposition(program, row.ownership, original.captured.tree, content, mains), content, inspection: saved };
   const operations = jobs.listReact(reference.id, 'root').sort((a, b) => a.operation.id.localeCompare(b.operation.id));
   for (const operation of operations) {
     if (!['root', 'nested'].includes(operation.kind) || operation.operation.id === parentId ||
@@ -88,5 +91,5 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     try { deriveReactChildRoot(program, row.ownership, original.captured.tree, origin, child.instanceId); child.canPrepareMain = true; }
     catch (error) { child.preparationProblem = error instanceof Error ? error.message : String(error); }
   }
-  return { ...result, content };
+  return { ...result, content, inspection: saved };
 }

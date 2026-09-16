@@ -22,7 +22,7 @@ export function deriveReactChildRoot(program: ReactSourceProgram, ownership: Rea
   const instance = ownership.components.find(c => c.id === instanceId);
   if (!instance?.parent || instance.roots.length !== 1 || instance.roots[0] === '')
     throw Error('react-child-root-nested-source-required');
-  const projection = projectReactRootVisual(program, ownership, tree, styleOrigin);
+  const projection = projectReactRootVisual(program, ownership, tree, styleOrigin, new Set([instanceId]));
   const draft = projection.roots.find(r => r.instanceId === instanceId);
   if (projection.problems.length || !draft || draft.status !== 'native-compiled' || draft.problems.length || !draft.contract || !draft.tokens)
     throw Error('react-child-root-projection-unavailable:' + (draft?.problems.join(',') ?? projection.problems.join(',')));

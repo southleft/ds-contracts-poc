@@ -3,8 +3,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { evidenceSha } from './react-validation-evidence.js';
-import { readReactNativeContentEvidence } from './react-native-evidence.js';
-import { readReactContentInspection } from './react-content-inspection.js';
+import { readReactContentInspection, readReactContentInspectionEvidence } from './react-content-inspection.js';
 import type { ReactReference } from './react-reference.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import { isReactComparisonRequest, type ReactComparisonRequest } from './react-comparison-request.js';
@@ -29,10 +28,11 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
       canonicalJson(parent.request) !== canonicalJson(request.root)) throw Error('react-comparison-parent-changed');
   if (request.version === 2 && (!composition || composition.review.status !== 'ready' || composition.review.inputRevision !== request.composition!.revision))
     throw Error('react-composition-pinned-mapping-changed');
-  const original = readReactNativeContentEvidence(repoRoot, reference, request.root);
-  const saved = readReactContentInspection(repoRoot, reference, request.root, request.parentOperationId,
+  const inspected = readReactContentInspectionEvidence(repoRoot, reference, request.root, request.parentOperationId,
     { id: request.content.id, inventorySha256: request.content.inventorySha256 });
-  if (!saved || saved.phase !== 'complete' || !saved.sourceUnchanged || saved.content?.status !== 'compiled-comparison-draft' || !original.observedProps)
+  if (!inspected) throw Error('react-comparison-content-unavailable');
+  const { original, report: saved } = inspected;
+  if (saved.phase !== 'complete' || !saved.sourceUnchanged || saved.content?.status !== 'compiled-comparison-draft' || !original.observedProps)
     throw Error('react-comparison-content-unavailable');
   const dir = path.join(repoRoot, 'private/react-content-inspections', request.parentOperationId, request.content.id);
   const read = (name: string) => JSON.parse(readFileSync(path.join(dir, name), 'utf8'));

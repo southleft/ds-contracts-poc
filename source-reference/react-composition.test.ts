@@ -15,6 +15,7 @@ import { isReactComparisonRequest, reactComparisonReservation } from './react-co
 import type { ReactNativeRequest } from './react-native-request.js';
 import { isReactNativeRequest, reactNativeReservation } from './react-native-request.js';
 import { deriveReactChildRoot } from './react-child-root.js';
+import { projectReactRootVisual } from './react-root-visual.js';
 import { prepareReactNativePlan } from './react-native-plan.js';
 import type { ReactStyleOrigin } from './react-style-origin.js';
 
@@ -183,6 +184,14 @@ test('nested main projection preserves a real source slot and refuses unsupporte
   try {
     const origin: ReactStyleOrigin = { version: 1, roots: [{ path: '', tag: 'section', channels: [] },
       { path: '0', tag: 'button', channels: [] }] };
+    const allRoots = projectReactRootVisual(f.program, f.ownership, f.tree, origin);
+    const oneRoot = projectReactRootVisual(f.program, f.ownership, f.tree, origin, new Set(['child']));
+    assert.deepEqual(oneRoot, { ...allRoots, roots: allRoots.roots.filter(r => r.instanceId === 'child') },
+      'selecting one child must retain identical native output and the whole-source revision');
+    const invalidParent = structuredClone(f.ownership);
+    invalidParent.components[0].source.sourceSha256 = '0'.repeat(64);
+    assert.equal(projectReactRootVisual(f.program, invalidParent, f.tree, origin, new Set(['child'])).roots.length, 0,
+      'selection must not bypass the source identity of an unselected ancestor');
     const before = structuredClone({ program: f.program, ownership: f.ownership, tree: f.tree, origin });
     const selected = deriveReactChildRoot(f.program, f.ownership, f.tree, origin, 'child');
     assert.equal(selected.qualification, 'observed-child-root-draft');

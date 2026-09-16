@@ -344,11 +344,24 @@ export function createReactReferenceService(
             try { sourceFrame = frames.read(reference!.id, row.parentOperationId!); }
             catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
           }
-          try { if (row.kind === 'root') content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
-          catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
-          if (row.kind === 'root' && content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft') {
-            try { composition = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id, jobs).review; }
-            catch { compositionProblem = 'Nested component evidence is unavailable or changed. Reload the unchanged original and inspect its content.'; }
+          if (row.kind === 'root') {
+            const id = row.operation.id, running = contentJobs.get(id);
+            try {
+              if (running && running.state.phase !== 'complete') content = running.report();
+              else {
+                try {
+                  // The composition reader authenticates and returns the saved
+                  // inspection too. Do not read the same sealed archive twice.
+                  const evidence = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(id), id, jobs);
+                  if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
+                  content = evidence.inspection; composition = evidence.review;
+                } catch {
+                  content = running?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(id), id);
+                  if (content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft')
+                    compositionProblem = 'Nested component evidence is unavailable or changed. Reload the unchanged original and inspect its content.';
+                }
+              }
+            } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
           }
           return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates,
             updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
