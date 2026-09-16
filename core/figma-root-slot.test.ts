@@ -137,11 +137,12 @@ test('fixed content roots keep their native outer dimensions without a consumer 
  }}finally{await browser.close()}
 });
 
-for (const intrinsic of [false, true]) for (const spacing of ['layout', 'token', 'mixed', 'literal', 'fractional'] as const)
+for (const intrinsic of [false, true]) for (const spacing of ['layout', 'token', 'mixed', 'literal', 'fractional', 'flow'] as const)
 if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one React root (${intrinsic ? 'intrinsic' : 'fixed'} height, ${spacing} gaps)`, async () => {
  const c=seed();
  c.anatomy.root.layout={display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row',gap:{row:8,column:12}};
  if(spacing==='fractional')c.anatomy.root.layout.rows=[{fr:1}];
+ if(spacing==='flow'){delete c.anatomy.root.layout.rows;c.anatomy.root.layout.autoRows={fit:true};}
  delete c.anatomy.root.tokens!.gap;
  let expectedGap: {row:number|string;column:number|string}={row:8,column:12};
  if(spacing==='token') {
@@ -172,7 +173,7 @@ if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one Re
  assert.ok(comp);const nativeSlot=comp.children![0],nativeGrid=nativeSlot.children![0];
  assert.equal(nativeSlot.type,'SLOT');assert.equal(nativeGrid.type,'FRAME');assert.equal(nativeGrid.layoutMode,'GRID');
  assert.equal(nativeGrid.layoutSizingHorizontal,'FILL');assert.equal(nativeGrid.layoutSizingVertical,intrinsic?'HUG':'FILL');
- assert.deepEqual(JSON.parse(JSON.stringify(nativeGrid.gridRowSizes)),spacing==='fractional'?[{type:'FLEX',value:1}]:[{type:'HUG',value:1},{type:'HUG',value:1}]);
+ assert.deepEqual(JSON.parse(JSON.stringify(nativeGrid.gridRowSizes)),spacing==='fractional'?[{type:'FLEX',value:1}]:spacing==='flow'?[{type:'HUG',value:1}]:[{type:'HUG',value:1},{type:'HUG',value:1}]);
  const source=readFileSync(new URL('../extract/figma/dump.plugin.js',import.meta.url),'utf8').replace(/^const TARGET_SETS = \[[^\n]*\];$/m,`const TARGET_SETS = ${JSON.stringify([comp.name])};`);
  const dump=JSON.parse(JSON.stringify((await run(source))[comp.name]));
  const corpus=tokenCorpusFromJson({primitives,semantic:{},light:{},brandDefault:{}});
@@ -184,6 +185,13 @@ if (!intrinsic || spacing !== 'fractional') test(`grid root slot restores one Re
  assert.equal(restored.anatomy.root.layout?.display,'grid');
  assert.deepEqual(restored.anatomy.root.layout?.columns,[{fr:1},{fr:1}]);
  assert.deepEqual(restored.anatomy.root.layout?.rows,c.anatomy.root.layout.rows,'empty content must not erase declared fractional rows');
+ assert.deepEqual(restored.anatomy.root.layout?.autoRows,c.anatomy.root.layout.autoRows);
+ if(spacing==='flow') {
+  for(const mutate of [(g:any)=>{g.rows[0]={px:23}},(g:any)=>{g.flowRows.version=2},(g:any)=>{g.flowRows.extra=true}]){
+   const bad=structuredClone(dump);mutate(bad.variants[0].children[0].children[0].layout.grid);
+   assert.throws(()=>proposeFromDump(bad,options),/grid-flow-rows-/);
+  }
+ }
  assert.deepEqual(restored.anatomy.root.layout?.gap,expectedGap);
  assert.equal(nativeGrid.gridRowGap,typeof expectedGap.row==='number'?expectedGap.row:8);
  assert.equal(nativeGrid.gridColumnGap,typeof expectedGap.column==='number'?expectedGap.column:8);

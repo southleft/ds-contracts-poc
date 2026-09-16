@@ -528,6 +528,8 @@ export const LayoutSchema = z
      *  ordering, P2, is an EMITTER obligation, not a schema concern). */
     rows: z.array(GridTrackSchema).min(1).optional(),
     columns: z.array(GridTrackSchema).min(1).optional(),
+    /** Sizing of extra rows; managed native writes materialize the row count. */
+    autoRows: GridTrackSchema.optional(),
     /** G1 — the independent gap pair (see GridGapSchema). */
     gap: GridGapSchema.optional(),
     /** G4 — named areas as slot anchors (see GridAreaSchema). */
@@ -557,6 +559,10 @@ export const LayoutSchema = z
             'display: "grid" requires a declared "columns" track list — the declared tracks ARE the contract fact (G1)',
         });
       }
+      if (l.autoRows !== undefined && l.flow !== "row") {
+        ctx.addIssue({ code: "custom", path: ["autoRows"],
+          message: 'autoRows requires flow: "row"' });
+      }
       if (l.flow === "row") {
         // G5′ (2026-08-08): `rows` MAY be declared under flow. GP6/GP6b measured
         // gridItemsPositioning='ROW_AUTO_FLOW' and declared gridRowSizes coexisting
@@ -584,7 +590,7 @@ export const LayoutSchema = z
         });
       }
     } else {
-      for (const f of ["rows", "columns", "gap", "areas", "flow"] as const) {
+      for (const f of ["rows", "columns", "autoRows", "gap", "areas", "flow"] as const) {
         if (l[f] !== undefined) {
           ctx.addIssue({
             code: "custom",
@@ -2249,7 +2255,7 @@ export function checkGridAxesDefinite(
     (tracks ?? []).some((t) => "fr" in t);
   // Under flow with `rows` OMITTED the emitter derives ceil(n/cols) × {fr:1},
   // so the ROW axis carries fr even though the contract spells no track.
-  const rowsAreFlex = l.flow === "row" && l.rows === undefined ? true : hasFr(l.rows);
+  const rowsAreFlex = hasFr(l.rows) || (l.autoRows ? hasFr([l.autoRows]) : l.flow === "row" && l.rows === undefined);
   for (const [axis, axisHasFr] of [
     ["width", hasFr(l.columns)],
     ["height", rowsAreFlex],
@@ -2362,7 +2368,7 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
     // GP10 measured 5 children over 2 columns with 2 declared rows: anchors
     // reached row 2 while gridRowCount stayed 2 and gridRowSizes stayed two
     // entries — P9's lossy readback, reproduced under declared rows.
-    if (l.rows !== undefined && cols > 0) {
+    if (l.rows !== undefined && l.autoRows === undefined && cols > 0) {
       const needed = Math.max(1, Math.ceil(inFlow.length / cols));
       if (rows < needed) {
         issue(
@@ -2826,6 +2832,7 @@ export interface ResolvedLayout {
    *  always survive resolution unchanged. */
   rows?: GridTrack[];
   columns?: GridTrack[];
+  autoRows?: GridTrack;
   gap?: { row: number | string; column: number | string };
   areas?: Record<string, GridArea>;
   flow?: "row";

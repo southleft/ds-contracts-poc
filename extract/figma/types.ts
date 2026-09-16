@@ -43,6 +43,8 @@ export interface DumpGridTrack {
  *  bounded auto-flow. Absence on a `mode: 'GRID'` layout means the producer
  *  predates v1.17 — NOT an empty grid; consumers refuse by name. */
 export interface DumpGrid {
+  /** Managed implicit-row recipe; extraction must validate against drawn tracks. */
+  flowRows?: unknown;
   rows: DumpGridTrack[];
   columns: DumpGridTrack[];
   /** Literal gridRowGap / gridColumnGap (px) — INDEPENDENT facts (P2).

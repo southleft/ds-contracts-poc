@@ -10,7 +10,7 @@ import type { NativeTokenContextInput } from './native-token-context.js';
 import { emitNativeContractReadbackScript, type NativeContractObservationInput } from './native-source-observation.js';
 import type { NativeContractComparisonInput } from './native-contract-comparison.js';
 
-export async function nativeComparisonFixture(fileKey?: string, gridRoot = false) {
+export async function nativeComparisonFixture(fileKey?: string, gridRoot: boolean | 'flow' = false) {
   const host = nativeFixtureHost(), { figma } = host;
   if (fileKey) figma.fileKey = fileKey;
   Object.getPrototypeOf(figma.currentPage).setExplicitVariableModeForCollection = function(c: any, mode: string) {
@@ -28,6 +28,7 @@ export async function nativeComparisonFixture(fileKey?: string, gridRoot = false
   const main = contract('fixture.main', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{surface}' } } });
   if (gridRoot) {
     main.anatomy.root.layout = { display: 'grid', columns: [{fr:1},{fr:1}], rows: [{fit:true},{fit:true}], flow:'row' };
+    if(gridRoot==='flow') { main.anatomy.root.layout.columns=[{fr:1}];delete main.anatomy.root.layout.rows;main.anatomy.root.layout.autoRows={fit:true}; }
     main.anatomy.root.literals = {width:'300px',height:'fit-content'};
     main.anatomy.root.tokens!.gap = '{size}';
   }

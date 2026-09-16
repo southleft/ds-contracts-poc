@@ -1,3 +1,4 @@
+import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
 import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
@@ -106,6 +107,7 @@ export interface LayoutSpec {
     rowGap: number;
     columnGap: number;
     flow?: 'ROW_AUTO_FLOW';
+    flowRows?: GridFlowRows;
     /** G8 (2026-08-08) — an INTRINSICALLY SIZED axis: the contract's
      *  `literals.width/height: "fit-content"` lowered to the canvas's
      *  layoutSizing{Horizontal,Vertical} = 'HUG'. `primary/counterAxisSizingMode`
@@ -913,7 +915,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt17-preserve-empty-literal-size';
+export const RUNTIME_EMIT_REV = 'rt18-managed-grid-flow-rows';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -1826,6 +1828,7 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
         // Under flow, rows are re-declared per compiled variant by
         // stampGridCells (ceil of the ACTUAL child count — G5/P9).
         rows: (l.rows ?? []).map(toTrack),
+        ...(l.autoRows ? { flowRows: { version: 1 as const, rows: (l.rows ?? []).map(toTrack), autoRows: toTrack(l.autoRows) } } : {}),
         columns: (l.columns ?? []).map(toTrack),
         // @lower emit.grid-gap-pair-kept
         rowGap: gapPx(l.gap?.row),
@@ -4284,7 +4287,10 @@ function stampGridCells(parentSpec: NodeSpec, part: Part, subst: Record<string, 
     // written verbatim — GP6/GP6b measured ROW_AUTO_FLOW and declared
     // gridRowSizes coexisting natively. Only an OMITTED row list is derived,
     // so every pre-G5′ flow contract compiles to the same bytes.
-    if (g.rows.length === 0) {
+    // @lower emit.grid-managed-flow-rows
+    if (g.flowRows) {
+      g.rows = materializeFlowRows(g.flowRows, g.columns.length, children.filter(c => !c.overlay && !c.insetOverlay && !c.absolute).length);
+    } else if (g.rows.length === 0) {
       const inFlow = children.filter((c) => !c.overlay && !c.insetOverlay && !c.absolute).length;
       const rowsN = Math.max(1, Math.ceil(inFlow / Math.max(1, g.columns.length)));
       g.rows = Array.from({ length: rowsN }, () => ({ type: 'FLEX' as const, value: 1 }));
@@ -4955,6 +4961,7 @@ function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byI
   spec.rootSlotContent = true;
   if (rootSpec.layout.mode === 'GRID') {
     const grid = rootSpec.layout.grid!;
+    if (grid.flowRows) grid.rows = materializeFlowRows(grid.flowRows, grid.columns.length, 0);
     if (!grid.rows.length || !grid.columns.length || grid.flow !== 'ROW_AUTO_FLOW' || spec.slotDefault?.length)
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: grid content requires declared tracks, row flow and no default content');
     if ((!grid.hugWidth && !rootSpec.fixedWidth && rootSpec.lits?.width === undefined) ||
@@ -6836,6 +6843,7 @@ function applyGridFrame(node, l) {
   // value can never recover). HUG is written as the bare type, never valued.
   const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
   node.gridRowSizes = g.rows.map(trackWrite);
+  node.setSharedPluginData('ds_contracts', 'gridFlowRows', g.flowRows ? JSON.stringify(g.flowRows) : '');
   node.gridColumnSizes = g.columns.map(trackWrite);
   node.gridRowGap = g.rowGap;
   node.gridColumnGap = g.columnGap;

@@ -819,6 +819,49 @@
                 ]
               }
             },
+            "autoRows": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "px": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    }
+                  },
+                  "required": [
+                    "px"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "fr": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    }
+                  },
+                  "required": [
+                    "fr"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "fit": {
+                      "type": "boolean",
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "fit"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
             "gap": {
               "type": "object",
               "properties": {

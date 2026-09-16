@@ -146,8 +146,10 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     nodes: input.creation.nodes,
     comparisons: nativeInspectionExports(input),
   };
+  const managedRows = (spec: NodeSpec): boolean => !!spec.layout?.grid?.flowRows || (spec.children ?? []).some(managedRows);
+  const extra = input.component.variants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
-    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames'] : [], captureImages);
+    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages);
 }
 
 /** Shared read-only inventory collector. Callers independently verify the
@@ -587,6 +589,8 @@ function verifyReadback(
       issue("native-source-observation-source-part", n);
     if (sample && !same(meta(n, "nativeSourceSample"), sample))
       issue("native-source-observation-sample-identity", n);
+    if (spec.layout?.grid?.flowRows && !same(meta(n, 'gridFlowRows'), spec.layout.grid.flowRows))
+      issue('native-source-observation-grid-flow-recipe', n);
     const wrapper = sourceCase?.wrappers?.find((w) =>
       same(w.partPath, spec.nativeSourcePart?.partPath),
     );

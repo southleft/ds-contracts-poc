@@ -1,3 +1,4 @@
+import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
 /**
@@ -5349,6 +5350,15 @@ function invertGridLayout(
   const toTrack = (t: NonNullable<typeof g.rows>[number]): Record<string, unknown> =>
     t.fit === true ? { fit: true } : t.px !== undefined ? { px: t.px } : { fr: t.fr as number };
   const out: Record<string, unknown> = { display: 'grid' };
+  const flowRows = g.flowRows === undefined ? undefined : readGridFlowRows(g.flowRows, g.columns.length,
+    m.children.filter(ch => !ch.occ.some(o => o.node.abs !== undefined)).length,
+    g.rows.map(t => t.fit ? { type: 'HUG', value: 1 } : t.px !== undefined ? { type: 'FIXED', value: t.px } : { type: 'FLEX', value: t.fr! }));
+  if (flowRows) {
+    if (!c.flow) throw Error('grid-flow-rows-requires-row-flow');
+    const sourceTrack = (t: FlowTrack) => t.type === 'HUG' ? { fit: true } : t.type === 'FIXED' ? { px: t.value } : { fr: t.value };
+    out.autoRows = sourceTrack(flowRows.autoRows);
+    if (flowRows.rows.length) out.rows = flowRows.rows.map(sourceTrack);
+  }
   // G5′: declared rows under flow ARE a contract fact now — but the emitter's
   // OWN derivation (ceil(children/columns) × {fr:1}) is not. Carrying that back
   // would turn a derived track list into a declared one and the round trip
@@ -5357,7 +5367,7 @@ function invertGridLayout(
   const derivedRows = Math.max(1, Math.ceil(m.children.length / Math.max(1, g.columns.length)));
   const rowsAreTheDerivation =
     g.rows.length === derivedRows && g.rows.every((t) => t.fr === 1);
-  if (m.rootContent || !c.flow || !rowsAreTheDerivation) out.rows = g.rows.map(toTrack);
+  if (!flowRows && (m.rootContent || !c.flow || !rowsAreTheDerivation)) out.rows = g.rows.map(toTrack);
   // G9.1 — the permanent refusal, receipted on every grid that carries an
   // absolute child through the abs door instead of Part.overlay.
   for (const ch of m.children) {
@@ -5430,7 +5440,7 @@ function carryGridAxisSizing(
     // resolves against a size supplied from OUTSIDE the part on both surfaces,
     // so an fr-bearing axis is not a silence to close — and `fit-content` is
     // refused on it anyway (G8.2, `grid-hug-flex-axis`).
-    const rowsDerived = layout.flow === 'row' && layout.rows === undefined;
+    const rowsDerived = layout.autoRows ? hasFr([layout.autoRows]) : layout.flow === 'row' && layout.rows === undefined;
     const axisHasFr =
       axis === 'width' ? hasFr(layout.columns) : rowsDerived || hasFr(layout.rows);
     if (axisHasFr) continue;
@@ -9126,14 +9136,14 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
       // (`grid-hug-flex-axis`). Silence is legal on that axis — the fraction
       // resolves against a host-supplied size. Do not write the hug and lose
       // the whole set (Figma DS Section Header / Footer).
-      const grid = root.layout as { display?: string; columns?: unknown; rows?: unknown; flow?: string } | undefined;
+      const grid = root.layout as { display?: string; columns?: unknown; rows?: unknown; autoRows?: unknown; flow?: string } | undefined;
       const hasFr = (tracks: unknown): boolean =>
         Array.isArray(tracks) && tracks.some((t) => t !== null && typeof t === 'object' && 'fr' in (t as object));
       const axisHasFr =
         grid?.display === 'grid' &&
         (dim === 'width'
           ? hasFr(grid.columns)
-          : (grid.flow === 'row' && grid.rows === undefined) || hasFr(grid.rows));
+          : (grid.autoRows ? hasFr([grid.autoRows]) : grid.flow === 'row' && grid.rows === undefined) || hasFr(grid.rows));
       if (axisHasFr) {
         ctx.notes.push(
           `${where}: root ${dim} HUGS on a grid whose ${dim === 'width' ? 'columns' : 'rows'} contain {fr} — hug NOT carried (grid-hug-flex-axis); the fraction stands and the host supplies the definite size`,

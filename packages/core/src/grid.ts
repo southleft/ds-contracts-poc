@@ -96,6 +96,7 @@ export function gridParentDecls(
   l: {
     rows?: GridTrack[];
     columns?: GridTrack[];
+    autoRows?: GridTrack;
     gap?: { row: number | string; column: number | string };
     areas?: Record<string, GridArea>;
     flow?: 'row';
@@ -110,6 +111,7 @@ export function gridParentDecls(
     d.push(`grid-template-areas: ${gridTemplateAreasValue(l.rows.length, (l.columns ?? []).length, l.areas)}`);
   }
   if (l.flow === 'row') d.push('grid-auto-flow: row');
+  if (l.autoRows) d.push(`grid-auto-rows: ${gridTrackCss(l.autoRows)}`);
   if (l.gap) {
     d.push(`row-gap: ${gridGapCss(l.gap.row, tokenRefCss, where)}`);
     d.push(`column-gap: ${gridGapCss(l.gap.column, tokenRefCss, where)}`);

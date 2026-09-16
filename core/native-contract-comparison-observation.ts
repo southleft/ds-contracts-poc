@@ -3,7 +3,7 @@
 import { nativeGridProblems, NATIVE_GRID_CHILD_FIELDS } from './native-grid-observation.js';
 import { canonicalJson } from './contract-provenance.js';
 import type { NodeSpec } from './emit-figma-script.js';
-import { nativeComparisonDependencies, type PreparedNativeContractComparison } from './native-contract-comparison.js';
+import { comparisonContentGrid, nativeComparisonDependencies, type PreparedNativeContractComparison } from './native-contract-comparison.js';
 import { emitNativeContractReadbackScript, emitNativeInventoryReadbackScript, verifyNativeContractReadback,
   nativeShadowStackMatches, type NativeSourceReadback } from './native-source-observation.js';
 import { resolveNativeSlotIdentities } from './native-slot-identity.js';
@@ -47,7 +47,8 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
   const inventory = emitNativeInventoryReadbackScript({ operation: input.operation, planRevision: input.planRevision,
     pageId: input.creation.pageId, nodes: input.creation.nodes,
     comparisons: [{ id: input.comparison.caseId, instanceId: input.creation.comparisons[0].instanceId, type: 'INSTANCE' }],
-  }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar'], captureImages);
+  }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar',
+    ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages);
   return `// GENERATED independent comparison readback. READ ONLY.
 const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input.operation.id)},
   fileKey: ${JSON.stringify(input.operation.fileKey)}, planRevision: ${JSON.stringify(input.planRevision)},
@@ -220,6 +221,14 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       if (actual.type !== (specPath.length ? original.type : 'INSTANCE') ||
           !same(meta(actual, 'nativeContractPart'), meta(original, 'nativeContractPart'))) issue('main-instance-identity', actual);
       if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : { ...sampleMode, [reference.parent.tokenIdentity.collection.id]: reference.parent.tokenIdentity.modes[0].modeId })) issue('main-instance-modes', actual);
+      let contentGrid: NodeSpec | undefined;
+      if (reference.contentSpecPath && same(specPath, reference.contentSpecPath)) {
+        let spec = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
+        for (const index of reference.contentSpecPath) spec = spec.children![index];
+        contentGrid = comparisonContentGrid(spec, reference.specs);
+        if (contentGrid.layout?.grid?.flowRows && !same(meta(actual, 'gridFlowRows'), contentGrid.layout.grid.flowRows))
+          issue('grid-flow-recipe', actual);
+      }
       const fields = new Set([...Object.keys(original.values), ...Object.keys(actual.values)]);
       for (const field of fields) {
         // A top-level instance has null references; a main inside a set can
@@ -227,6 +236,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         if (!specPath.length && field === 'componentPropertyReferences' &&
             [actual.values[field], original.values[field]].every(value => value === null || same(value, {}))) continue;
         if (!specPath.length && NATIVE_GRID_CHILD_FIELDS.includes(field) && nodes.get(actual.parentId)?.values.layoutMode === 'GRID') continue;
+        if (contentGrid?.layout?.grid?.flowRows && ['gridRowCount', 'gridRowSizes'].includes(field)) continue;
         if (!geometry.has(field) && !same(actual.values[field], original.values[field])) issue('main-instance-' + field, actual);
       }
       if (!specPath.length) for (const [key, value] of Object.entries(original.variantProperties ?? {}))
@@ -239,7 +249,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         if (reference.contentSpecPath) {
           let spec = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
           for (const index of reference.contentSpecPath) spec = spec.children![index];
-          for (const problem of nativeGridProblems({ ...spec, children: reference.specs }, actual.values,
+          for (const problem of nativeGridProblems(comparisonContentGrid(spec, reference.specs), actual.values,
             actual.childIds.map((id: string) => nodes.get(id)?.values))) issue('grid-content-' + problem, actual);
         }
         reference.specs.forEach((spec, index) => sample(spec, nodes.get(actual.childIds[index]))); return;
