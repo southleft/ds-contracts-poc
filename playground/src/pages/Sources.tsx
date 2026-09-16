@@ -1308,13 +1308,18 @@ export function Sources() {
                   job.nativeOperation?.pendingPhase === "component-readback" ||
                   job.nativeOperation?.phase === "observation-refused" ||
                   job.nativeOperation?.phase ===
-                    "component-observation-refused") && (
+                    "component-observation-refused" ||
+                  job.nativeOperation?.phase ===
+                    "component-structure-observed") && (
                   <button
                     type="button"
                     disabled={busy}
                     onClick={() => void nativeAction("retry-observation")}
                   >
-                    Retry readback
+                    {job.nativeOperation?.phase ===
+                    "component-structure-observed"
+                      ? "Inspect again"
+                      : "Retry readback"}
                   </button>
                 )}
               </div>

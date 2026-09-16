@@ -499,3 +499,59 @@ test("source validation latency cannot expire a heartbeat sampled at request ent
     "heartbeat grants no dispatch authority",
   );
 });
+
+test("a completed inspection can observe unchanged or edited nodes without allocating again", async (t) => {
+  const f = await fixture(t);
+  f.start();
+  for (let i = 0; i < 4; i++) await f.poll();
+  assert.equal(f.jobs.get(f.id).phase, "component-structure-observed");
+  const page = f.host.figma.root.children.find(
+    (node: any) => node.children.length,
+  );
+  const before = {
+    pages: f.host.figma.root.children.length,
+    nodes: page.findAll().length,
+    variables: f.host.variables.length,
+  };
+  const firstAttempt = f.jobs.get(f.id).imageObservation?.attemptId;
+  f.transport.retryObservation(f.id);
+  assert.equal(f.transport.status(f.id).finished, false);
+  assert.equal(
+    f.jobs.get(f.id).imageObservation,
+    undefined,
+    "prior images stop representing the current observation",
+  );
+  await f.poll();
+  assert.equal(f.jobs.get(f.id).phase, "component-structure-observed");
+  assert.notEqual(f.jobs.get(f.id).imageObservation?.attemptId, firstAttempt);
+  const text = page.findOne((node: any) => node.type === "TEXT");
+  const original = text.characters;
+  text.characters = "independent edit";
+  f.transport.retryObservation(f.id);
+  await f.poll();
+  assert.equal(f.jobs.get(f.id).phase, "component-observation-refused");
+  text.characters = original;
+  f.transport.retryObservation(f.id);
+  await f.poll();
+  assert.equal(f.jobs.get(f.id).phase, "component-structure-observed");
+  assert.deepEqual(
+    {
+      pages: f.host.figma.root.children.length,
+      nodes: page.findAll().length,
+      variables: f.host.variables.length,
+    },
+    before,
+  );
+  assert.deepEqual(
+    f.delivered.map((c) => c.phase),
+    [
+      "token-create",
+      "token-readback",
+      "component-create",
+      "component-readback",
+      "component-readback",
+      "component-readback",
+      "component-readback",
+    ],
+  );
+});

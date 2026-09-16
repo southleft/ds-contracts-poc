@@ -1261,7 +1261,8 @@ export function createNativeOperationJobs(
       loaded.state.pending?.phase ??
       (loaded.state.phase === "observation-refused"
         ? "token-readback"
-        : loaded.state.phase === "component-observation-refused"
+        : loaded.state.phase === "component-observation-refused" ||
+            loaded.state.phase === "component-structure-observed"
           ? "component-readback"
           : undefined);
     if (phase !== "token-readback" && phase !== "component-readback")
