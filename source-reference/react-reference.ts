@@ -1,3 +1,4 @@
+import { startReactValidation } from "./react-reference-validation.js";
 import { build, type Loader } from "esbuild";
 import { createHash } from "node:crypto";
 import { readFileSync, mkdirSync, writeFileSync, realpathSync } from "node:fs";
@@ -135,6 +136,10 @@ export function createReactReferenceService(
     ),
 ) {
   let reference: ReactReference | undefined;
+  const validations = new Map<
+    string,
+    ReturnType<typeof startReactValidation>
+  >();
   let loading: Promise<ReactReference> | undefined;
   const json = (res: ServerResponse, status: number, body: unknown) => {
     res.statusCode = status;
@@ -142,7 +147,11 @@ export function createReactReferenceService(
     res.setHeader("Cache-Control", "no-store");
     res.end(JSON.stringify(body));
   };
-  return async (req: IncomingMessage, res: ServerResponse, route: string) => {
+  const handle = async (
+    req: IncomingMessage,
+    res: ServerResponse,
+    route: string,
+  ) => {
     if (route === "react" && req.method === "POST") {
       if (
         Number(req.headers["content-length"] ?? 0) > 0 ||
@@ -195,6 +204,7 @@ export function createReactReferenceService(
           theme: "Light (sandbox stylesheet)",
           sourceFiles: Object.keys(reference.files).length,
           qualification: "unqualified",
+          validation: validations.get(reference.id)?.report() ?? null,
           cases: reactReferenceCases.map((c) => ({
             ...c,
             url: `/api/source-reference/react/${reference!.id}?case=${c.id}`,
@@ -207,6 +217,76 @@ export function createReactReferenceService(
         });
       } finally {
         loading = undefined;
+      }
+      return;
+    }
+    const validationRoute = /^react\/([a-f0-9]{64})\/validate$/.exec(route);
+    if (validationRoute && reference?.id === validationRoute[1]) {
+      if (req.method === "POST") {
+        if (
+          Number(req.headers["content-length"] ?? 0) > 0 ||
+          req.headers["transfer-encoding"]
+        ) {
+          json(res, 400, { error: "This action accepts no request body." });
+          return;
+        }
+        try {
+          let job = validations.get(reference.id);
+          if (job?.state.state !== "running") {
+            job = startReactValidation(
+              reference,
+              new URL(`http://${req.headers.host}`).origin,
+              path.join(repoRoot, "private/react-source-validations"),
+            );
+            validations.set(reference.id, job);
+            void job.promise.catch(() => {
+              job!.state.state = "failed";
+              job!.state.valid = 0;
+              for (const row of job!.state.rows) row.sourceValid = false;
+              job!.state.problem = "validation-evidence-unavailable";
+            });
+          }
+          json(res, 202, job.report());
+        } catch {
+          json(res, 409, {
+            error:
+              "Source or readiness witnesses changed. Reload originals; new source versions require reviewed witnesses.",
+          });
+        }
+        return;
+      }
+      const job = validations.get(reference.id);
+      if (req.method === "GET" && job) {
+        json(res, 200, job.report());
+        return;
+      }
+      json(res, 404, { error: "No validation for this reference." });
+      return;
+    }
+    const imageRoute =
+      /^react\/([a-f0-9]{64})\/([a-f0-9-]{36})\/([a-z-]+)\/(source|replay)\/([a-f0-9]{64})\.png$/.exec(
+        route,
+      );
+    if (req.method === "GET" && imageRoute) {
+      const [, referenceId, jobId, caseId, side, hash] = imageRoute;
+      const job = validations.get(referenceId);
+      const row = job?.state.rows.find((r) => r.id === caseId);
+      const expected = side === "source" ? row?.sourceImage : row?.replayImage;
+      if (job?.state.id !== jobId || !expected || expected !== hash) {
+        json(res, 404, { error: "Recorded source image not found." });
+        return;
+      }
+      try {
+        const bytes = readFileSync(path.join(job.dir, caseId, side + ".png"));
+        if (sha(bytes) !== hash) throw Error("changed");
+        res.setHeader("Content-Type", "image/png");
+        res.setHeader("Cache-Control", "no-store");
+        res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+        res.end(bytes);
+      } catch {
+        json(res, 409, {
+          error: "Recorded source image changed or unavailable.",
+        });
       }
       return;
     }
@@ -240,4 +320,9 @@ export function createReactReferenceService(
     );
     res.end(reactReferenceHtml(reference));
   };
+  return Object.assign(handle, {
+    close() {
+      for (const job of validations.values()) job.close();
+    },
+  });
 }

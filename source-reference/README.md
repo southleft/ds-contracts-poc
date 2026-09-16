@@ -6,7 +6,13 @@ Configure `DS_CONTRACTS_REACT_SOURCE_ROOT` on the dev-server process to point to
 
 The reference identity includes the fixture entry, package/lock/config files, exact loaded source/dependency bytes, CSS and font bytes, and emitted runtime assets. The reference runs in a sandbox without same-origin privileges or network access. Inputs are rechecked before serving; changing an input requires a new reference. Immutable private artifacts are stored under `private/react-source-references/<identity>/`. After a server restart, loading the same unchanged source reconstructs the same reference; older archived artifacts are not presented as fresh validation.
 
-**Current qualification: unqualified.** This is the actual React rendering and input provenance, not proof of styled-source validity, dependency reproducibility, native fidelity or a completed journey. Connect the existing readiness, negative-control and archived-replay checks before admitting source to conversion. The earlier Lit workflow below is parked for V1.1 and remains available under the collapsed archive section.
+**Validate React sources** runs the existing source-readiness and measured-tree reader on all ten originals, archives the loaded resources, then replays them in a fresh browser context without network fallback. Original/replay screenshots and trees must match. Pinned source modules, theme rules and font metadata supply independent style/state/font witnesses. A textless Checkbox requires its uniquely associated visible label, not arbitrary adjacent text.
+
+Button, Checkbox and composed Card representatives must each reject all five negative controls: missing CSS, theme, font, root and hidden root. Corruptions affect disposable pages only. The hidden-root check waits for the source's own visibility transition. The opaque sandbox itself forbids service workers; the runner verifies this restriction without Playwright's incompatible service-worker-block injection. Runtime errors remain failures.
+
+Results are provisional until source-integrity and control-completeness checks finish. Private immutable records under `private/react-source-validations/<reference>/<run>/` include screenshots, HAR, measured trees, source/replay checks, engine/profile identities and evidence hashes. Modified or missing evidence invalidates the served result. A server restart retains the records but requires a new validation; persisted validation recovery is not implemented. Each retry gets a new run identity.
+
+Source readiness is separate from dependency-build reproducibility, Figma fidelity, editability, behavior and workflow completion. Native conversion is not connected to this React action yet. The earlier Lit workflow below is parked for V1.1 and remains available under the collapsed archive section.
 
 ---
 

@@ -1339,6 +1339,7 @@ export function createReferenceService(
   return {
     handle,
     close() {
+      reactReference.close();
       candidateJobs.close();
       bindingJobs.close();
       if (active) {

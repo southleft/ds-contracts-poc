@@ -34,9 +34,9 @@ export async function captureReference(page: Page, profile: SourceProfile,
 }
 
 export async function replayReference<Inspection = undefined>(browser: Browser, har: string, url: string, profile: SourceProfile,
-  viewport = {width:900,height:600}, inspect?: (page:Page, failures:ReturnType<typeof watchSourceFailures>) => Promise<Inspection>, beforeNavigate?: (context: BrowserContext) => Promise<void>) {
+  viewport = {width:900,height:600}, inspect?: (page:Page, failures:ReturnType<typeof watchSourceFailures>) => Promise<Inspection>, beforeNavigate?: (context: BrowserContext) => Promise<void>, colorScheme: 'light' | 'dark' | 'no-preference' = 'dark', opaqueSandbox = false) {
   // A fresh context isolates cookies, browser cache, fonts and service workers.
-  const context = await browser.newContext({viewport, deviceScaleFactor:1, colorScheme:'dark', serviceWorkers:'block'});
+  const context = await browser.newContext({viewport, deviceScaleFactor:1, colorScheme, serviceWorkers:opaqueSandbox ? 'allow' : 'block'});
   await context.routeFromHAR(har, {notFound:'abort', update:false});
   await context.routeWebSocket('**/*', socket => socket.close());
   const page = await context.newPage();
@@ -44,6 +44,7 @@ export async function replayReference<Inspection = undefined>(browser: Browser, 
   try {
     await beforeNavigate?.(context);
     await page.goto(url, {waitUntil:'load', timeout:30000});
+    if (opaqueSandbox) await requireOpaqueSandbox(page);
     const reference = await captureReference(page, profile, failures);
     const inspection = inspect && reference.status === 'valid' ? await inspect(page,failures) : undefined;
     return {...reference,inspection};
@@ -61,4 +62,15 @@ export function archiveInventory(file: string) {
     return {method:entry.request.method, urlSha256:sha(Buffer.from(entry.request.url)), status:entry.response.status,
       bodySha256:body === null ? null : sha(body), bytes:body?.length ?? 0};
   })};
+}
+
+/** Playwright's serviceWorkers:block init script itself throws in an opaque
+ * sandbox. In this mode the browser's sandbox forbids service workers instead;
+ * verify that boundary before accepting a capture. Never ignore page errors. */
+export async function requireOpaqueSandbox(page: Page) {
+  const blocked = await page.evaluate(() => {
+    try { void navigator.serviceWorker; return false; }
+    catch (error) { return error instanceof DOMException && error.name === 'SecurityError'; }
+  });
+  if (!blocked) throw Error('reference-opaque-sandbox-required');
 }
