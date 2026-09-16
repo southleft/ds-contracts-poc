@@ -521,6 +521,16 @@ function validateApproval(
   }
 }
 
+/** Read-only identity of the fixed trusted recipe, not source execution or an
+ * authorization token. Used when reopening an application-owned preparation. */
+export function altitudeButtonRuntimeRecipeIdentity() {
+  return {
+    version: "altitude-vite-memory-v1",
+    sha256: sha(BUILD_RECIPE),
+    conditions: ["browser", "module", "production"],
+  };
+}
+
 /** Fresh original-library build. The returned bytes remain private and are not
  * approved for conversion merely because their package identity validates. */
 export function prepareAltitudeButtonRuntime(
@@ -680,10 +690,10 @@ export function prepareAltitudeButtonRuntime(
       baselineSha256: request.sourceApproval.baseline.sha256,
     },
     recipe: {
-      version: "altitude-vite-memory-v1",
-      sha256: sha(BUILD_RECIPE),
+      version: altitudeButtonRuntimeRecipeIdentity().version,
+      sha256: altitudeButtonRuntimeRecipeIdentity().sha256,
       node: process.version,
-      conditions: ["browser", "module", "production"],
+      conditions: altitudeButtonRuntimeRecipeIdentity().conditions,
       repeatedBuildIdentical: true,
     },
     interface: iface,

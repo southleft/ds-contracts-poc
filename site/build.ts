@@ -17,6 +17,7 @@ import { buildSpecPages } from './src/pages/spec.js';
 import { homePage } from './src/pages/home.js';
 import { systemPage } from './src/pages/system.js';
 import { buildHowPages } from './src/pages/how.js';
+import { operatorGuidePage } from './src/pages/operator-guide.js';
 import { getStartedPage } from './src/pages/get-started.js';
 import { whatWorksPage } from './src/pages/what-works.js';
 import { contributePage } from './src/pages/contribute.js';
@@ -73,6 +74,7 @@ const pages: Array<{ route: string; html: string }> = [
   ...buildHowPages(stats, replays),
   whatWorksPage(),
   getStartedPage(),
+  operatorGuidePage(),
   cliPage(),
   emittersPage(),
   contributePage(),

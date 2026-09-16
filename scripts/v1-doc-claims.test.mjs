@@ -38,18 +38,22 @@ test('exam prose rejects stale calendar scores and designer counts without gradi
   const designer = { subjects: [{ outcome: 'accounting-zero-silent', silent: 0, unexplained: 0 }, { outcome: 'refused-by-name', refusal: { message: 'named refusal' } }] };
   const readme = 'scored at **3.048%**; scored against the real package\'s Chromium render at **3.048%**; 1 accounting-clean, 1 refused by name';
   assert.deepEqual(v1ExamClaimFailures({ 'README.md': readme }, f1, designer), []);
+  assert.deepEqual(v1ExamClaimFailures({ 'README.md': 'Current status is in docs/CURRENT.md.' }, f1, designer), []);
   assert.match(v1ExamClaimFailures({ 'README.md': readme.replace('3.048', '3.735') }, f1, designer).join('\n'), /current calendar score/);
   assert.match(v1ExamClaimFailures({ 'README.md': readme.replace('1 accounting-clean', '2 accounting-clean') }, f1, designer).join('\n'), /designer exam counts/);
   assert.throws(() => v1ExamClaimFailures({}, f1, { subjects: [{ outcome: 'accounting-zero-silent', silent: 1, unexplained: 0 }] }), /unaccounted/);
 });
 
-test('README current Radix status cannot keep a mint refusal after successful measurement', () => {
-  const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+test('optional README Radix claims cannot contradict successful measurements', () => {
+  const overview = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+  const readme = 'Radix: avatar scored 1.88%; switch scored 3.04 / 0 / 2.59 / 0.27%; checkbox scored 0 / 0 / 0 / 0 / 0.39 / 0%; 2 archetypes refuse at the role step';
   const f1 = JSON.parse(readFileSync(new URL('../recipe/evidence/f1-v1/receipt.json', import.meta.url), 'utf8'));
   assert.equal(f1.rows.radix.archetypes.find((a) => a.archetype === 'checkbox').outcome, 'scored');
   assert.deepEqual(radixReadmeClaimFailures(readme, f1), []);
   const normalized = readme.replace(/\*\*/g, '');
   assert.ok(radixReadmeClaimFailures(normalized.replace('0.39', '8.39'), f1).some((p) => p.includes('checkbox scores')));
   assert.ok(radixReadmeClaimFailures(normalized.replace('2 archetypes refuse', '3 archetypes refuse'), f1).some((p) => p.includes('role refusal count')));
-  assert.ok(radixReadmeClaimFailures('', f1).length > 0);
+  assert.deepEqual(radixReadmeClaimFailures(overview, f1), []);
+  assert.deepEqual(radixReadmeClaimFailures('', f1), []);
+  assert.ok(radixReadmeClaimFailures('Radix: checkbox scored 0%', f1).length > 0);
 });

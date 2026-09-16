@@ -59,25 +59,31 @@ and the archetype gate you changed (`recipe:button:check`,
 `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`,
 `recipe:calendar:check`). **Do not flip `overallSuccess`.** **Do not restamp
 hashed RECORDs.** Product v1 is incomplete (F1) until a true v1-completion
-record says otherwise. The playground still drives the pre-pivot
-universal-contract path — do not treat a playground run as recipe-IR proof.
+record says otherwise. The playground runs the checked-out engine; its
+demonstrations do not qualify the complete conversion or repair journeys.
 
-The active climb is `recipe/` plus
-[docs/35 — The two-journey v1 plan](docs/35-two-journey-v1-plan.md)
-(reader as mechanical source of truth; canvas→code as a co-equal pillar).
-Old universal-contract surfaces (`core/`, `playground/`, `packages/`,
-Journeys A–C) stay where they are and remain CI-load-bearing; they are
-labeled LEGACY, not moved. Published `@ds-contracts/*` packages and GitHub
-releases `v1.0.0-rc.1` (and earlier) are the **pre-pivot universal-contract**
-envelope. Recipe-IR never shipped as an npm RC; the old RC publish path
-remains deferred. The universal-contract release runbook is still
-[docs/27 — Release Process](docs/27-release-process.md) — it is not a claim
-that a recipe-IR RC is in flight. Record each result in
-[RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). A manifest version is not
-evidence that npm, a GitHub release, a tag, or the deployed sites contain that
-version. Contributors may prepare packs and evidence; only the designated
-owners approve tags, GitHub releases, npm publication, dist-tag changes, and
-Cloudflare deployment. Do not invent a new semver in a labeling commit.
+The active work order is [docs/CURRENT.md](docs/CURRENT.md): complete the
+code-led journey, design-led journey, two-way repair and independent cohort
+qualification. Existing engine and recipe checks remain load-bearing. Historical
+plans do not override this sequence, and a green lane alone does not complete it.
+
+Contributors may prepare packages and evidence. Tags, publication, deployments
+and owner grades require explicit owner approval. See the
+[release process](docs/27-release-process.md) for the existing package workflow.
+
+## Public status and housekeeping
+
+Every pull request describes what users can do after the change, what was
+verified, what still fails or requires manual work, and the next milestone step.
+Update [docs/CURRENT.md](docs/CURRENT.md) when usability, coverage or milestone
+status changes. If a change only improves internal machinery, say so explicitly.
+Use the README for product purpose and current usability, not an experiment log.
+
+Archive superseded working narratives and detailed handoffs in gitignored
+`private/` directories. Keep reproducible fixtures, CI inputs, scoped technical
+references and signed evidence available to their checks; do not rewrite grades
+or remove evidence required to reproduce a claim. A private archive preserves
+local working history, not a replacement for reproducible public validation.
 
 **`npm run docs:check` is the anti-rot gate for prose.** Eval counts, the contract count, the token count, the capture-config count, and every relative link in `README.md` / `ROADMAP.md` / `CONTRIBUTING.md` / `docs/*.md` are re-derived from the repo and compared to what the docs say; a disagreement fails by name. It reads `evals/results.json` and never runs the suite, so it costs seconds. If you add or remove an eval case, run `npm run eval` (which rewrites `evals/results.json`) and then `npm run docs:check` will tell you exactly which lines to update. A number that is deliberately historical — "Round 5 shipped with 24/24 evals" — gets `<!-- docs-check:ignore -->` on its line, and nothing else does.
 

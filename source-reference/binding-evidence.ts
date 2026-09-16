@@ -13,7 +13,10 @@ import {
   type ContractPlanInput,
   type HashBoundJson,
 } from "./contract-plan.js";
-import { loadRecordedSourceProgram } from "./source-program.js";
+import {
+  loadRecordedSourceProgram,
+  type RecordedSourceProgram,
+} from "./source-program.js";
 import type { SemanticIntake } from "./semantics.js";
 import type { TopologyInput } from "./topology.js";
 
@@ -37,6 +40,9 @@ export interface BindingEvidence {
   source: LitTemplateInput;
   sourcePath: string;
   sourceProgramSha256: string;
+  /** Server-only graph already authenticated by the evidence loader. Older
+   * evidence/test seams may omit it; newer derivations must refuse absence. */
+  sourceProgram?: RecordedSourceProgram;
   sourceRevision: string;
   rows: BindingEvidenceRow[];
 }
@@ -350,6 +356,7 @@ export function loadBindingEvidence(
     source,
     sourcePath: entry.path,
     sourceProgramSha256: program.digest,
+    sourceProgram: program,
     sourceRevision: baseline.value.sourceRevision,
     rows,
   };

@@ -3,9 +3,50 @@ import { readFileSync, existsSync } from "node:fs";
 import { test } from "node:test";
 import { renderProductOverview } from "./overview.js";
 import { systemPage } from "../site/src/pages/system.js";
+import { renderJourneyGuide } from "./journeys.js";
+import { getStartedPage } from "../site/src/pages/get-started.js";
 
 const read = (file: string) => readFileSync(file, "utf8");
 const markdown = read("docs/CURRENT.md");
+
+test("one user guide reaches the current app actions and the site without local-route dead ends", () => {
+  const guide = read("docs/USER-JOURNEYS.md");
+  const app = renderJourneyGuide(guide, "app");
+  const site = renderJourneyGuide(guide, "site");
+  assert.ok(getStartedPage().html.includes(`<article>${site}</article>`));
+  assert.match(app, /href="\/playground\?source=figma"/);
+  assert.match(app, /href="\/playground\?source=code"/);
+  assert.match(app, /href="\/sources"/);
+  assert.match(
+    site,
+    /href="https:\/\/ds-contracts-playground.pages.dev\/playground\?source=figma"/,
+  );
+  assert.match(site, /href="http:\/\/localhost:5181\/sources"/);
+  for (const html of [app, site]) {
+    for (const anchor of [
+      "designer-first",
+      "code-first",
+      "both-libraries",
+      "install",
+      "next-delivery",
+    ])
+      assert.ok(html.includes(`id="${anchor}"`));
+    assert.match(html, /Still in development/);
+    assert.match(html, /Where this currently stops/);
+  }
+  assert.match(read("playground/src/pages/Start.tsx"), /USER-JOURNEYS.md\?raw/);
+  assert.match(
+    read("playground/src/App.tsx"),
+    /pathname === "\/start"\) return <Start \/>/,
+  );
+  assert.match(
+    renderJourneyGuide(
+      guide.replace("Start with your library", "CHANGED GUIDE"),
+      "app",
+    ),
+    /CHANGED GUIDE/,
+  );
+});
 
 test("both product surfaces render the canonical document, including its scope and diagram", () => {
   const html = renderProductOverview(markdown, "/assets/product-loop.svg");
