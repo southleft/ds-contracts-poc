@@ -1,3 +1,4 @@
+import {readReactStyleOrigin} from './react-style-origin.js';
 import { linkReactSourceAnatomy, type ReactSourceAnatomy } from './react-source-anatomy.js';
 import { projectReactRootVisual, type ReactRootVisual } from './react-root-visual.js';
 import { chromium, type Browser } from "playwright-core";
@@ -107,6 +108,7 @@ export function startReactOwnership(
           "react-children.ts",
           "react-source-anatomy.ts",
           "react-root-visual.ts",
+          "react-style-origin.ts",
           "../extract/computed/fuse.ts",
           "../core/mint-tokens.ts",
           "../core/emit-figma-script.ts",
@@ -216,7 +218,16 @@ export function startReactOwnership(
                 )
                   throw Error("react-ownership-subject-root-unmatched");
               }
+              const styleOrigin = ownership ? await readReactStyleOrigin(page, profile.path[0], ownership) : undefined;
+              if (styleOrigin) {
+                const repeat = await readReactStyleOrigin(page, profile.path[0], ownership!);
+                if (JSON.stringify(styleOrigin) !== JSON.stringify(repeat) ||
+                    evidenceSha(await page.screenshot({fullPage:true,caret:"initial"})) !== tree.sourcePngSha256)
+                  throw Error("react-ownership-style-origin-unstable");
+                writeFileSync(path.join(rowDir, "style-origin.json"), JSON.stringify(styleOrigin,null,2)+"\n", {flag:"wx"});
+              }
               pair.push({
+                styleOrigin,
                 tree: tree.treeSha256,
                 root: tree.tree,
                 png: tree.sourcePngSha256,
@@ -234,7 +245,7 @@ export function startReactOwnership(
           row.treeSha256 = pair[0].tree;
           row.ownership = pair[1].ownership;
           row.anatomy = linkReactSourceAnatomy(program, pair[1].ownership!, pair[0].root);
-          row.rootVisual = projectReactRootVisual(program, pair[1].ownership!, pair[0].root);
+          row.rootVisual = projectReactRootVisual(program, pair[1].ownership!, pair[0].root, pair[1].styleOrigin);
           row.matched = true;
           writeFileSync(
             path.join(rowDir, "ownership.json"),

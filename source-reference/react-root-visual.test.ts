@@ -5,6 +5,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {chromium} from 'playwright-core';
 import {readReactSourceProgram} from './react-source-program.js';
+import {readReactStyleOrigin} from './react-style-origin.js';
 import {projectReactRootVisual} from './react-root-visual.js';
 import type {ReactOwnership} from './react-ownership.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
@@ -87,4 +88,32 @@ test('root content declarations do not grant styling ownership over nested slots
   const errors:string[]=[];validateContract(nested,new Map([[nested.id,nested]]),errors,new Map());
   assert.ok(errors.some(e=>e.includes('declared facts cannot restyle')));
  }finally{rmSync(f.dir,{recursive:true,force:true})}
+});
+
+
+test('winning source CSS variable survives the shared React and native compilers',async()=>{
+ const f=fixture(),browser=await chromium.launch();try{
+  const page=await browser.newPage();
+  await page.setContent('<style>:root{--brand:rgb(10, 20, 30)} section{background-color:var(--brand)}</style><section>Original sample</section>');
+  f.tree.style['--brand']='rgb(10, 20, 30)';
+  const origin=await readReactStyleOrigin(page,'section',f.ownership);
+  const result=projectReactRootVisual(f.program,f.ownership,f.tree,origin),root=result.roots[0];
+  assert.equal(root.status,'native-compiled',root.problems.join(';'));
+  const binding=root.sourceBindings!.find(b=>b.channel==='background-color')!;
+  assert.equal(binding.variable,'--brand');assert.ok(binding.tokenPath);
+  assert.equal(root.contract!.anatomy.root.tokens!['background-color'],'{'+binding.tokenPath+'}');
+  assert.equal(flattenTokens(root.tokens!).get(binding.tokenPath!)?.value,'#0a141e');
+  assert.equal(root.native!.variants[0].spec.fill,binding.tokenPath!.replaceAll('.', '/'), 'native fill must bind the source variable');
+  const c=root.contract!,tokens={primitives:root.tokens!,semantic:{},light:{},dark:{},brands:{default:{}}};
+  const flat=flattenTokens(root.tokens!);
+  const generated=emitReact(c,{tokens:new Set(flat.keys()),icons:new Map(),contracts:new Map([[c.id,c]])});
+  const consumer=await browser.newPage(),render=await mountGenerated(consumer,c.name,generated.tsx,generated.css);
+  await consumer.addStyleTag({content:':root{'+[...flat].map(([k,v])=>`--${k.replaceAll('.','-')}:${v.value}`).join(';')+'}'});
+  await render({children:'New content'});
+  assert.equal(await consumer.locator('#root > *').evaluate(n=>getComputedStyle(n).backgroundColor),'rgb(10, 20, 30)');
+  await consumer.addStyleTag({content:':root{--'+binding.tokenPath!.replaceAll('.','-')+':rgb(40, 50, 60)}'});
+  assert.equal(await consumer.locator('#root > *').evaluate(n=>getComputedStyle(n).backgroundColor),'rgb(40, 50, 60)');
+  const stale=structuredClone(origin);stale.roots[0].channels.find(b=>b.channel==='background-color')!.computedValue='rgb(0, 0, 0)';
+  assert.equal(projectReactRootVisual(f.program,f.ownership,f.tree,stale).roots[0].sourceBindings?.find(b=>b.channel==='background-color')?.reason,'source-variable-value-needs-resolution');
+ }finally{await browser.close();rmSync(f.dir,{recursive:true,force:true})}
 });

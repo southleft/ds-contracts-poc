@@ -342,6 +342,11 @@ export function ReactSourceReference() {
                           <li key={root.instanceId}>
                             {root.source.exportName}: {root.status === "native-compiled" ? "root layout and styles compiled; content and API assembly pending" : root.status === "style-prepared" ? "styles prepared; native layout unsupported" : "source content needs further mapping"}
                             {root.problems.length > 0 && ` · ${root.problems.join(" · ")}`}
+                            {!!root.sourceBindings?.length && <ul aria-label={`${root.source.exportName} source token bindings`}>
+                              {root.sourceBindings.map(binding => <li key={binding.channel}>
+                                {binding.channel}: {binding.tokenPath ? `${binding.variable} retained as a shared source token` : `source binding unresolved (${binding.reason})`}
+                              </li>)}
+                            </ul>}
                             {!!root.residuals?.length && ` · ${root.residuals.length} style facts remain outside the projection`}
                             {!!root.residuals?.length && <details>
                               <summary>Unprojected styles for {root.source.exportName}</summary>
@@ -349,7 +354,7 @@ export function ReactSourceReference() {
                             </details>}
                           </li>
                         ))}</ul>
-                        <p>Measured values are provisional. Sample sizes, other property combinations, source token identities and native visual fidelity remain unqualified.</p>
+                        <p>Measured values are provisional. Sample sizes, other property combinations, unresolved token bindings, token modes and native visual fidelity remain unqualified.</p>
                       </section>
                     )}
                     {ownership.state === "complete" && row.matched && (

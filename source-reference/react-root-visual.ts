@@ -1,5 +1,7 @@
 /** Observed root projections, not reusable source contracts. The source API,
  * behavior, caller composition and unobserved planes remain separate work. */
+import { flattenTokens } from '../core/tokens.js';
+import type { ReactStyleOrigin } from './react-style-origin.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createFigmaEngine, type ComponentData } from '../core/emit-figma-script.js';
 import { mintTokens } from '../core/mint-tokens.js';
@@ -26,6 +28,7 @@ export interface ReactRootVisual {
     tokens?: Record<string, unknown>;
     native?: ComponentData;
     channels: Array<{ channel: string; status: 'observed' | 'excluded'; reason: string }>;
+    sourceBindings?: Array<{channel: string; variable?: string; tokenPath?: string; reason?: string}>;
     residuals?: ReturnType<typeof prepareMint>['codeOnly'];
     problems: string[];
     limitations: string[];
@@ -51,9 +54,10 @@ export function projectReactRootVisual(
   program: ReactSourceProgram,
   ownership: ReactOwnership,
   tree: CapturedNode,
+  styleOrigin?: ReactStyleOrigin,
 ): ReactRootVisual {
   const out: ReactRootVisual = { version: 1, qualification: 'observed-root-only', acceptedContract: null,
-    inputRevision: revisionOf({ program, ownership, tree }), roots: [], problems: [] };
+    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}) }), roots: [], problems: [] };
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
   if (anatomy.status !== 'linked') { out.problems = [...anatomy.problems]; return out; }
   for (const instance of anatomy.instances) {
@@ -108,14 +112,49 @@ export function projectReactRootVisual(
       const enriched = ContractSchema.parse(applied.enriched);
       if (enriched.props.length || enriched.states.length || enriched.anatomy.root.parts || enriched.anatomy.root.content ||
           enriched.anatomy.root.slot?.name !== 'children') throw Error('react-root-visual-content-boundary-changed');
+      const tokens = structuredClone(minted.tree);
+      if (styleOrigin) {
+        if (styleOrigin.version !== 1) throw Error('react-root-visual-style-origin-version');
+        const origin = styleOrigin.roots.find(r => r.path === instance.roots[0].path);
+        if (!origin || origin.tag !== root.tag) throw Error('react-root-visual-style-origin-mismatch');
+        const leaves = flattenTokens(tokens), named = new Map<string, unknown>(), tokenSelectors = new Map<string, Set<string>>();
+        result.sourceBindings = origin.channels.map(binding => {
+          const base = {channel: binding.channel, ...(binding.variable ? {variable: binding.variable} : {})};
+          const ref = enriched.anatomy.root.tokens?.[binding.channel];
+          const leaf = typeof ref === 'string' ? leaves.get(ref.slice(1, -1)) : undefined;
+          if (binding.status !== 'direct-variable' || !binding.variable || !binding.rawValue || !binding.computedValue)
+            return {...base, reason: binding.reason ?? 'source-binding-unresolved'};
+          if (normalizeValue(binding.computedValue) !== root.style[binding.channel] ||
+              normalizeValue(binding.rawValue) !== normalizeValue(binding.computedValue) ||
+              normalizeValue(root.style[binding.variable] ?? '') !== normalizeValue(binding.rawValue))
+            return {...base, reason: 'source-variable-value-needs-resolution'};
+          if (!leaf || !['color', 'number'].includes(leaf.type)) return {...base, reason: 'projected-channel-not-token-bound'};
+          const values = new Set(styleOrigin.roots.flatMap(r => r.channels.filter(c => c.variable === binding.variable && c.rawValue).map(c => c.rawValue)));
+          if (values.size !== 1) return {...base, reason: 'source-variable-scope-conflict'};
+          // The CSS identifier is reversible and case-sensitive. Never merge
+          // distinct names merely because they currently have equal values.
+          const key = 'v' + Buffer.from(binding.variable, 'utf8').toString('hex');
+          const tokenPath = 'source.css.' + key;
+          const selectors = tokenSelectors.get(key) ?? new Set<string>();
+          for (const selector of binding.selectors) selectors.add(selector);
+          tokenSelectors.set(key, selectors);
+          named.set(key, {$type: leaf.type, $value: leaf.value, $extensions: {'dev.ds-contracts.css-source': {
+            variable: binding.variable, rawValue: binding.rawValue, selectors: [...selectors].sort(),
+          }}});
+          enriched.anatomy.root.tokens![binding.channel] = '{' + tokenPath + '}';
+          return {...base, tokenPath};
+        });
+        if (named.size) tokens.source = {css: Object.fromEntries(named)};
+        result.limitations.push('source-variable-bindings-current-case-only', 'source-variable-modes-and-aliases-not-assembled');
+      }
       const errors: string[] = [];
       validateContract(enriched, new Map([[enriched.id, enriched]]), errors, new Map());
       if (errors.length) throw Error(`react-root-visual-contract-invalid: ${errors.join('; ')}`);
       result.contract = enriched;
-      result.tokens = structuredClone(minted.tree);
+      result.tokens = tokens;
       result.residuals = [...prep.codeOnly, ...prep.stateCodeOnly];
       result.status = 'style-prepared';
-      const engine = createFigmaEngine({ tokens: { primitives: minted.tree, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
+      const engine = createFigmaEngine({ tokens: { primitives: tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
       result.native = engine.compileComponentData(enriched, new Map([[enriched.id, enriched]]));
       result.status = 'native-compiled';
     } catch (error) {
