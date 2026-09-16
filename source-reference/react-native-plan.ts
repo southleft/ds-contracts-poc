@@ -46,7 +46,7 @@ export function prepareReactNativePlan(input: ReactNativePlanInput) {
       tokens: structuredClone(draft.tokens!), tokenTreeRevision: compiled.projection.tokenRevision }],
   };
   const plan = {
-    version: 1 as const, kind: 'react-root-draft-inspection' as const,
+    version: 1 as const, kind: 'react-root-draft-inspection' as const, purpose: 'source-candidate-inspection' as const,
     acceptedContract: null, nativeQualification: 'unqualified' as const,
     operation: { ...input.operation }, matrixRevision: revisionOf(input.matrix),
     projection: compiled.projection, component: compiled.component,

@@ -6,6 +6,7 @@ import type {
 } from "../../../source-reference/react-source-program";
 import type { ReactValidation } from "../../../source-reference/react-reference-validation";
 import { useEffect, useState } from "react";
+import { ReactNativeInspection } from './ReactNativeInspection';
 interface Reference {
   id: string;
   source: string;
@@ -286,6 +287,7 @@ export function ReactSourceReference() {
                 ? "Tracing React structure…"
                 : "Trace React structure"}
             </button>
+            <ReactNativeInspection key={reference.id} referenceId={reference.id} selectedCase={selected} ownership={ownership} />
             {ownership && (
               <>
                 <p role="status">
@@ -631,8 +633,9 @@ export function ReactSourceReference() {
             Original at 900 px wide. Scroll horizontally on smaller screens.
           </p>
           <p>
-            Source checks do not qualify Figma conversion. Native generation is
-            the next integration step. The existing import workspace remains
+            Source checks do not qualify Figma conversion. Native root inspection
+            is available for supported drafts; complete content, state and visual
+            comparisons remain unfinished. The existing import workspace remains
             available from <a href="/playground">Playground</a>.
           </p>
         </>

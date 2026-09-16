@@ -27,9 +27,10 @@ import {
   type NativeTokenIdentity,
 } from "../core/native-token-context.js";
 import {
-  emitNativeSourceReadbackScript,
-  verifyNativeSourceReadback,
+  emitNativeInspectionReadbackScript,
+  verifyNativeInspectionReadback,
   type NativeSourceObservationInput,
+  type NativeInspectionInput,
 } from "../core/native-source-observation.js";
 import type { NativeSourceWriteContext } from "../core/native-source-write.js";
 import {
@@ -50,20 +51,31 @@ import {
   buildNativeSourceComponentWrite,
 } from "./native-source-plan.js";
 import { readVerifiedRuntimeArtifact } from "./runtime-artifact.js";
+import type { prepareReactNativePlan } from './react-native-plan.js';
+import { isReactNativeRequest, reactNativeReservation, type ReactNativeRequest } from './react-native-request.js';
 
 /** The current owner-approved writable target. A request/plan cannot override it. */
 export const SOURCE_NATIVE_FILE_KEY = "byMp6lt0Ij9b2QbkDGFwBh";
+/** Owner-supplied evaluation file, only for new React operation identities. */
+export const REACT_NATIVE_FILE_KEY = 'T56aKuRnoay1L7CKAjSWRO';
 const POLICY = {
   version: 1,
   fileKey: SOURCE_NATIVE_FILE_KEY,
   ownership: "new-operation-only",
 } as const;
-type Plan = ReturnType<typeof prepareNativeSourceInspectionPlan>;
+type SourcePlan = ReturnType<typeof prepareNativeSourceInspectionPlan>;
+type ReactPlan = ReturnType<typeof prepareReactNativePlan>;
+type Plan = SourcePlan | ReactPlan;
+type OperationRequest = BindingEvidenceRequest | ReactNativeRequest;
+const validRequest = (v: unknown): v is OperationRequest => isBindingEvidenceRequest(v) || isReactNativeRequest(v);
+const reservation = (r: OperationRequest) => isReactNativeRequest(r) ? reactNativeReservation(r) : r.baseline.id;
+const policyFor = (r: OperationRequest) => ({ ...POLICY, fileKey: isReactNativeRequest(r) ? REACT_NATIVE_FILE_KEY : SOURCE_NATIVE_FILE_KEY });
+const isReactPlan = (p: Plan): p is ReactPlan => 'kind' in p.plan && p.plan.kind === 'react-root-draft-inspection';
 type Pin = { id: string; reportSha256: string };
-export interface NativeOperationPreparation {
+export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
   visual: Pin;
   preparation: Pin;
-  plan: Plan;
+  plan: P;
 }
 export type NativeOperationPhase =
   "token-create" | "token-readback" | "component-create" | "component-readback";
@@ -142,8 +154,8 @@ interface Header {
   version: 1;
   id: string;
   startedAt: string;
-  request: BindingEvidenceRequest;
-  policy: typeof POLICY;
+  request: OperationRequest;
+  policy: ReturnType<typeof policyFor>;
   visual: Pin;
   preparation: Pin;
   planRevision: string;
@@ -167,7 +179,7 @@ interface State {
   identity?: NativeTokenIdentity;
   componentCreation?: Record<string, any>;
   allocationAnchor?: NativeSourceObservationInput["allocationAnchor"];
-  componentObservation?: ReturnType<typeof verifyNativeSourceReadback>;
+  componentObservation?: ReturnType<typeof verifyNativeInspectionReadback>;
   imageReadback?: NativeOperationResult;
   pending?: NativeOperationCommand;
   problems: string[];
@@ -175,6 +187,10 @@ interface State {
   dispatchedComponent: boolean;
 }
 export interface NativeOperationJobsOptions {
+  react?: {
+    prepare(request: ReactNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ReactPlan>;
+    buildComponent(request: ReactNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
+  };
   /** Trusted in-process preparer. Reopens latest visual/source/runtime evidence
    * and compiles it for this exact host-allocated operation. Never an HTTP input. */
   prepare(
@@ -290,6 +306,13 @@ export function createNativeOperationJobs(
   repoRoot: string,
   options: NativeOperationJobsOptions,
 ) {
+  const prepareInput = (request: OperationRequest, operation: {id: string; fileKey: string}): NativeOperationPreparation<Plan> => {
+    if (isReactNativeRequest(request)) {
+      if (!options.react) fail('react-adapter-unavailable');
+      return options.react.prepare(request, operation);
+    }
+    return options.prepare(request, operation);
+  };
   const privateRoot = path.join(repoRoot, "private");
   const root = path.join(privateRoot, "source-native-app");
   const operations = path.join(root, "operations"),
@@ -354,14 +377,15 @@ export function createNativeOperationJobs(
       const header = JSON.parse(
         bytes(path.join(dir(id), "operation.json")).toString(),
       ) as Header;
-      if (!isBindingEvidenceRequest(header.request))
+      if (!validRequest(header.request))
         fail("history-unavailable");
-      if (header.request.baseline.id === baseline) return true;
+      if (reservation(header.request) === baseline) return true;
     }
     return false;
   };
-  const validatePlan = (prepared: NativeOperationPreparation, id: string) => {
+  const validatePlan = (prepared: NativeOperationPreparation<Plan>, id: string, request: OperationRequest) => {
     const plan = prepared.plan;
+    const fileKey = policyFor(request).fileKey;
     if (
       !pin(prepared.visual) ||
       !pin(prepared.preparation) ||
@@ -371,17 +395,19 @@ export function createNativeOperationJobs(
       plan.plan.acceptedContract !== null ||
       plan.plan.nativeQualification !== "unqualified" ||
       plan.plan.purpose !== "source-candidate-inspection" ||
-      !same(plan.plan.operation, { id, fileKey: SOURCE_NATIVE_FILE_KEY }) ||
-      plan.plan.tokenInput.fileKey !== SOURCE_NATIVE_FILE_KEY ||
+      isReactPlan(plan) !== isReactNativeRequest(request) ||
+      !same(plan.plan.operation, { id, fileKey }) ||
+      plan.plan.tokenInput.fileKey !== fileKey ||
       plan.plan.tokenInput.scopeId !== `source-${id}`
     )
       fail("preparation-invalid");
   };
   const validatePreparation = (
-    prepared: NativeOperationPreparation,
+    prepared: NativeOperationPreparation<Plan>,
     id: string,
+    request: OperationRequest,
   ) => {
-    validatePlan(prepared, id);
+    validatePlan(prepared, id, request);
     const plan = prepared.plan;
     const compiled = emitNativeTokenContextScript(plan.plan.tokenInput);
     if (!same(compiled.preparation, plan.plan.tokenPreparation))
@@ -544,7 +570,7 @@ export function createNativeOperationJobs(
       !object(value) ||
       value.version !== 1 ||
       value.operationId !== id ||
-      value.fileKey !== SOURCE_NATIVE_FILE_KEY ||
+      value.fileKey !== plan.plan.operation.fileKey ||
       value.acceptedContract !== null ||
       value.nativeQualification !== "unqualified" ||
       !Array.isArray(value.nodes) ||
@@ -586,9 +612,8 @@ export function createNativeOperationJobs(
       !Array.isArray(value.variants) ||
       value.variants.length !== plan.plan.component.variants.length ||
       !object(value.propertyDefinitions) ||
-      !Array.isArray(value.comparisons) ||
-      value.comparisons.length !== plan.plan.samples.cases.length ||
-      !textId(value.comparisonBoardId)
+      (isReactPlan(plan) ? value.comparisons !== undefined || value.comparisonBoardId !== undefined :
+        !Array.isArray(value.comparisons) || value.comparisons.length !== plan.plan.samples.cases.length || !textId(value.comparisonBoardId))
     )
       return invalid;
     if (
@@ -601,7 +626,7 @@ export function createNativeOperationJobs(
     const nodes = new Map(value.nodes.map((n: any) => [n.id, n.type]));
     if (
       nodes.get(value.pageId) !== "PAGE" ||
-      nodes.get(value.comparisonBoardId) !== "FRAME" ||
+      (!isReactPlan(plan) && nodes.get(value.comparisonBoardId) !== "FRAME") ||
       nodes.get(value.target.id) !== value.target.type ||
       !["COMPONENT", "COMPONENT_SET"].includes(value.target.type) ||
       value.variants.some(
@@ -610,6 +635,7 @@ export function createNativeOperationJobs(
       )
     )
       return invalid;
+    if (isReactPlan(plan)) return { phase: 'components-created', problems: [] };
     const instanceIds: string[] = [];
     for (const [index, c] of value.comparisons.entries()) {
       const expected = plan.plan.samples.cases[index];
@@ -647,15 +673,16 @@ export function createNativeOperationJobs(
   const componentObservationInput = (
     state: State,
     plan: Plan,
-  ): NativeSourceObservationInput => {
+  ): NativeInspectionInput => {
     if (!state.identity || !state.componentCreation)
       fail("component-allocation-identity-unavailable");
     return {
       operation: plan.plan.operation,
       planRevision: plan.revision,
       component: plan.plan.component,
-      projection: plan.plan.sourceProjection,
-      samples: plan.plan.samples,
+      ...(isReactPlan(plan) ? { projection: plan.plan.projection } : {
+        projection: plan.plan.sourceProjection, samples: plan.plan.samples,
+      }),
       tokenInput: plan.plan.tokenInput,
       tokenIdentity: state.identity,
       creation: state.componentCreation,
@@ -667,7 +694,7 @@ export function createNativeOperationJobs(
     state: State,
     plan: Plan,
   ): Pick<State, "phase" | "problems" | "componentObservation"> => {
-    const checked = verifyNativeSourceReadback(
+    const checked = verifyNativeInspectionReadback(
       componentObservationInput(state, plan),
       result,
     );
@@ -696,8 +723,8 @@ export function createNativeOperationJobs(
       header.version !== 1 ||
       header.id !== id ||
       !date(header.startedAt) ||
-      !isBindingEvidenceRequest(header.request) ||
-      !same(header.policy, POLICY) ||
+      !validRequest(header.request) ||
+      !same(header.policy, policyFor(header.request)) ||
       !pin(header.visual) ||
       !pin(header.preparation) ||
       !REVISION.test(header.planRevision) ||
@@ -707,7 +734,7 @@ export function createNativeOperationJobs(
       fail("header-invalid");
     // Atomic publication reserves exactly one operation for a source baseline.
     // Unpublished partial preparations can never dispatch. They remain on disk.
-    if (!bytes(pointer(header.request.baseline.id)).equals(headerBytes))
+    if (!bytes(pointer(reservation(header.request))).equals(headerBytes))
       fail("baseline-reservation-mismatch");
     const planBytes = bytes(path.join(dir(id), "plan.json"));
     const scriptBytes = bytes(path.join(dir(id), "token-create.js"));
@@ -720,6 +747,7 @@ export function createNativeOperationJobs(
     validatePlan(
       { visual: header.visual, preparation: header.preparation, plan },
       id,
+      header.request,
     );
     if (plan.revision !== header.planRevision) fail("compiled-plan-changed");
     // Historical commands are immutable evidence. Recompiling them with a new
@@ -772,7 +800,7 @@ export function createNativeOperationJobs(
           c.version !== 1 ||
           c.kind !== "SOURCE-NATIVE-OPERATION" ||
           c.operationId !== id ||
-          c.fileKey !== SOURCE_NATIVE_FILE_KEY ||
+          c.fileKey !== header.policy.fileKey ||
           c.planRevision !== plan.revision ||
           !UUID.test(c.attemptId) ||
           !HASH.test(c.nonce) ||
@@ -913,11 +941,11 @@ export function createNativeOperationJobs(
   };
   type Loaded = ReturnType<typeof load>;
   const authenticate = (loaded: Loaded) => {
-    const current = options.prepare(structuredClone(loaded.header.request), {
+    const current = prepareInput(structuredClone(loaded.header.request), {
       id: loaded.header.id,
-      fileKey: SOURCE_NATIVE_FILE_KEY,
+      fileKey: loaded.header.policy.fileKey,
     });
-    if (validatePreparation(current, loaded.header.id) !== loaded.script)
+    if (validatePreparation(current, loaded.header.id, loaded.header.request) !== loaded.script)
       fail("compiled-script-changed");
     if (
       !same(current.visual, loaded.header.visual) ||
@@ -1008,8 +1036,8 @@ export function createNativeOperationJobs(
       nativeQualification: "unqualified",
       counters: {
         variants: loaded.plan.plan.component.variants.length,
-        sourceCases: loaded.plan.plan.samples.cases.length,
-        loweredCases: loaded.plan.plan.samples.cases.filter(
+        sourceCases: isReactPlan(loaded.plan) ? 1 : loaded.plan.plan.samples.cases.length,
+        loweredCases: isReactPlan(loaded.plan) ? 0 : loaded.plan.plan.samples.cases.filter(
           (c) => c.status === "lowered",
         ).length,
         variables: loaded.plan.plan.tokenPreparation.variables.length,
@@ -1080,11 +1108,11 @@ export function createNativeOperationJobs(
     );
   };
   const prepare = (
-    request: BindingEvidenceRequest,
+    request: OperationRequest,
   ): NativeOperationSnapshot => {
-    if (!isBindingEvidenceRequest(request)) fail("request-invalid");
+    if (!validRequest(request)) fail("request-invalid");
     directories(true);
-    const target = pointer(request.baseline.id);
+    const target = pointer(reservation(request));
     if (present(target)) {
       const header = JSON.parse(bytes(target).toString()) as Header;
       if (!same(header.request, request)) fail("baseline-already-reserved");
@@ -1094,21 +1122,21 @@ export function createNativeOperationJobs(
     }
     // A missing index is not permission to create a replacement scope. An
     // earlier prepared/dispatched operation may still own native objects.
-    if (priorBaseline(request.baseline.id))
+    if (priorBaseline(reservation(request)))
       fail("baseline-reservation-missing");
     const id = randomUUID();
-    const prepared = options.prepare(structuredClone(request), {
+    const prepared = prepareInput(structuredClone(request), {
       id,
-      fileKey: SOURCE_NATIVE_FILE_KEY,
+      fileKey: policyFor(request).fileKey,
     });
-    const script = validatePreparation(prepared, id),
+    const script = validatePreparation(prepared, id, request),
       planBytes = encode(prepared.plan);
     const header: Header = {
       version: 1,
       id,
       startedAt: new Date().toISOString(),
       request: structuredClone(request),
-      policy: POLICY,
+      policy: policyFor(request),
       visual: prepared.visual,
       preparation: prepared.preparation,
       planRevision: prepared.plan.revision,
@@ -1118,9 +1146,9 @@ export function createNativeOperationJobs(
     // Recheck source before publishing any executable operation identity.
     if (
       !same(
-        options.prepare(structuredClone(request), {
+        prepareInput(structuredClone(request), {
           id,
-          fileKey: SOURCE_NATIVE_FILE_KEY,
+          fileKey: policyFor(request).fileKey,
         }),
         prepared,
       )
@@ -1201,14 +1229,13 @@ export function createNativeOperationJobs(
     } else if (phase === "component-create") {
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
-      if (!options.buildComponent) fail("component-writer-unavailable");
+      if (isReactNativeRequest(loaded.header.request) ? !options.react : !options.buildComponent) fail("component-writer-unavailable");
       const context = verifiedTokenContext(id);
       if (context.journalRevision !== loaded.fingerprint)
         fail("journal-changed");
-      const built = options.buildComponent(
-        structuredClone(loaded.header.request),
-        context,
-      );
+      const request = structuredClone(loaded.header.request);
+      const built = isReactNativeRequest(request) ? options.react!.buildComponent(request, context)
+        : options.buildComponent!(request, context);
       if (
         built.planRevision !== loaded.plan.revision ||
         typeof built.script !== "string" ||
@@ -1223,7 +1250,7 @@ export function createNativeOperationJobs(
       // Known allocations remain inspectable when the source changes. This
       // observes the saved plan only; sourceCurrent is checked separately and
       // observation never authorizes admission, allocation or baseline changes.
-      script = emitNativeSourceReadbackScript(
+      script = emitNativeInspectionReadbackScript(
         componentObservationInput(loaded.state, loaded.plan),
         true,
       );
@@ -1235,7 +1262,7 @@ export function createNativeOperationJobs(
       phase,
       attemptId: randomUUID(),
       nonce: randomBytes(32).toString("hex"),
-      fileKey: SOURCE_NATIVE_FILE_KEY,
+      fileKey: loaded.header.policy.fileKey,
       planRevision: loaded.plan.revision,
       scriptSha256: sha(script),
       readOnly: phase === "token-readback" || phase === "component-readback",
@@ -1329,7 +1356,7 @@ export function createNativeOperationJobs(
     )
       fail("verified-token-observation-required");
     return structuredClone({
-      operation: { id, fileKey: SOURCE_NATIVE_FILE_KEY },
+      operation: { id, fileKey: loaded.header.policy.fileKey },
       planRevision: loaded.plan.revision,
       journalRevision: loaded.fingerprint,
       tokens: {
@@ -1348,11 +1375,29 @@ export function createNativeOperationJobs(
     retryObservation,
     retryCreation,
     verifiedTokenContext,
+    reactIdentity(id: string) {
+      const { header } = load(id);
+      if (!isReactNativeRequest(header.request)) fail('react-operation-required');
+      return { referenceId: header.request.referenceId, caseId: header.request.caseId,
+        ownershipId: header.request.ownership.id, fileKey: header.policy.fileKey };
+    },
+    listReact(referenceId: string) {
+      if (!HASH.test(referenceId)) fail('request-invalid');
+      if (!present(root)) return [];
+      directories();
+      return readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
+        const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
+        if (!isReactNativeRequest(header.request) || header.request.referenceId !== referenceId) return [];
+        // get() verifies the saved journal and separately reports source freshness.
+        return [{ caseId: header.request.caseId, ownershipId: header.request.ownership.id,
+          fileKey: header.policy.fileKey, operation: get(id) }];
+      });
+    },
     /** Transport scheduling only. Freshness is intentionally absent; writes
      * still authenticate their source during dispatch and first delivery. */
     deliveryState(id: string) {
-      const { state } = load(id);
-      return { phase: state.phase, pendingPhase: state.pending?.phase };
+      const { state, header } = load(id);
+      return { phase: state.phase, pendingPhase: state.pending?.phase, fileKey: header.policy.fileKey };
     },
     abandonedObservationPhase(id: string, attemptId: string) {
       const loaded = load(id);

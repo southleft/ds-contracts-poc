@@ -1,4 +1,8 @@
 import { startReactOwnership } from "./react-ownership-run.js";
+import { readReactNativeEvidence, selectReactNativeRequest } from './react-native-evidence.js';
+import type { ReactNativeRequest } from './react-native-request.js';
+import type { createNativeOperationJobs } from './native-operation-jobs.js';
+import type { createNativeOperationTransport } from './native-operation-transport.js';
 import { proposeReactSourceProgram } from "./react-program-proposal.js";
 import {
   readReactSourceProgram,
@@ -141,6 +145,7 @@ export function createReactReferenceService(
       repoRoot,
       "../ds-contracts-poc/examples/shadcn/.shadcn-sandbox",
     ),
+  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport> },
 ) {
   let reference: ReactReference | undefined;
   const validations = new Map<
@@ -163,6 +168,38 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation)$/.exec(route);
+    if (nativeRoute || nativeAction) {
+      try {
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction)![1]) throw Error('react-native-reference-unavailable');
+        const { jobs, transport } = native();
+        if (req.method === 'POST') {
+          if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
+            throw Error('react-native-body-refused');
+          if (nativeRoute?.[2]) {
+            const job = ownershipJobs.get(reference.id);
+            if (!job) throw Error('react-native-observation-required');
+            jobs.prepare(selectReactNativeRequest(repoRoot, job.report(), nativeRoute[2]));
+          } else if (nativeAction) {
+            const id = nativeAction[2];
+            if (jobs.reactIdentity(id).referenceId !== reference.id) throw Error('react-native-operation-mismatch');
+            if (nativeAction[3] === 'connection') {
+              if (new URL(`http://${req.headers.host}`).port !== '5181') throw Error('react-native-pairing-port');
+              json(res, 200, { connection: transport.pair(id) }); return;
+            }
+            if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
+            else transport.start(id);
+          } else throw Error('react-native-action-invalid');
+        } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
+        const observedAt = Date.now();
+        json(res, 200, { operations: jobs.listReact(reference.id).map(row => ({ ...row,
+          connection: transport.status(row.operation.id, observedAt) })) });
+      } catch {
+        json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
+      }
+      return;
+    }
     if (route === "react" && req.method === "POST") {
       if (
         Number(req.headers["content-length"] ?? 0) > 0 ||
@@ -510,6 +547,10 @@ export function createReactReferenceService(
     res.end(reactReferenceHtml(reference));
   };
   return Object.assign(handle, {
+    nativeEvidence(request: ReactNativeRequest) {
+      if (!reference) throw Error('react-native-reference-unavailable');
+      return readReactNativeEvidence(repoRoot, reference, request);
+    },
     close() {
       for (const job of validations.values()) job.close();
       for (const job of ownershipJobs.values()) job.close();

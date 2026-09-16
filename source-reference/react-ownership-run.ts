@@ -310,6 +310,12 @@ export function startReactOwnership(
         { flag: "wx" },
       );
       sealed = inventoryEvidence(dir);
+      // The host pins this seal when preparing a native operation. Its hash is
+      // retained by the journal, allowing re-opening after a server restart.
+      const seal = JSON.stringify({ version: 1, files: sealed }, null, 2) + '\n';
+      writeFileSync(path.join(dir, 'integrity.json'), seal, { flag: 'wx' });
+      sealed = Object.fromEntries(Object.entries({ ...sealed, 'integrity.json': evidenceSha(seal) })
+        .sort(([a], [b]) => a.localeCompare(b)));
       state.state = terminal;
     }
   })();

@@ -15,7 +15,6 @@ import {
 } from "node:fs";
 import path from "node:path";
 import {
-  SOURCE_NATIVE_FILE_KEY,
   type createNativeOperationJobs,
   type NativeOperationPhase,
   type NativeOperationResult,
@@ -142,7 +141,7 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
     replaceReadbackAttemptId?: string,
   ) => {
     authorize(id, secret);
-    if (fileKey !== SOURCE_NATIVE_FILE_KEY) fail("file-refused");
+    if (fileKey !== jobs.deliveryState(id).fileKey) fail("file-refused");
     seen.set(id, Date.now());
     const dir = directory(id),
       state = status(id);

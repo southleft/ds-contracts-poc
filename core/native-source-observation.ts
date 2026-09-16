@@ -4,6 +4,7 @@ import { resolveNativeSlotIdentities } from "./native-slot-identity.js";
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
 import type { NativeSourceCandidateProjection } from "./native-source-projection.js";
+import type { NativeContractDraftProjection } from "./native-contract-draft.js";
 import type { NativeSourceComparisonInput } from "./native-source-comparisons.js";
 import { emitNativeTokenContextReadbackScript } from "./token-set.js";
 import {
@@ -40,13 +41,56 @@ export interface NativeSourceReadback {
   images?: Array<{ caseId: string; nodeId: string; pngBase64: string }>;
   problems: string[];
 }
+export interface NativeContractObservationInput extends Omit<NativeSourceObservationInput, 'projection' | 'samples'> {
+  projection: NativeContractDraftProjection;
+}
+export type NativeInspectionInput = NativeSourceObservationInput | NativeContractObservationInput;
+function isContractDraft(input: NativeInspectionInput): input is NativeContractObservationInput {
+  return 'kind' in input.projection && input.projection.kind === 'contract-draft';
+}
+/** Exports are diagnostic mains for a Contract draft; source comparisons remain
+ * separate instances. Neither image kind is a visual-fidelity result. */
+export function nativeInspectionExports(input: NativeInspectionInput): Array<{id: string; instanceId: string; type: string}> {
+  return isContractDraft(input)
+    ? input.creation.variants.map((v: any) => ({ id: `variant:${v.name}`, instanceId: v.id, type: 'COMPONENT' }))
+    : input.creation.comparisons.filter((c: any) => c.status === 'created-comparison')
+      .map((c: any) => ({ id: c.id, instanceId: c.instanceId, type: 'INSTANCE' }));
+}
 const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
 const numeric = (actual: unknown, expected: number) =>
   actual === expected || actual === Math.fround(expected);
 const object = (v: unknown): v is Record<string, any> =>
   !!v && typeof v === "object" && !Array.isArray(v);
 
-function checkInput(input: NativeSourceObservationInput) {
+/** Check the compiled shadow stack independently of the writer. Native numbers
+ * may be float32; no broader colour/geometry tolerance is granted here. */
+function shadowsMatch(spec: NodeSpec, effects: unknown): boolean {
+  let expected = spec.effectStack;
+  if (!expected && spec.dropShadow) {
+    const s = spec.dropShadow, hex = s.color.replace(/^#/, '');
+    if (!/^(?:[a-f0-9]{6}|[a-f0-9]{8})$/i.test(hex)) return false;
+    expected = [{ ...s, color: { r: parseInt(hex.slice(0, 2), 16) / 255,
+      g: parseInt(hex.slice(2, 4), 16) / 255, b: parseInt(hex.slice(4, 6), 16) / 255,
+      a: hex.length === 8 ? parseInt(hex.slice(6, 8), 16) / 255 : 1 } }];
+  }
+  const layers = expected ?? [];
+  if (!Array.isArray(effects)) return layers.length === 0 && effects === undefined;
+  if (effects.length !== layers.length) return false;
+  return layers.every((layer, index) => {
+    const effect = effects[index];
+    if (!object(effect) || effect.type !== (layer.inner ? 'INNER_SHADOW' : 'DROP_SHADOW') ||
+        effect.visible !== true || effect.blendMode !== 'NORMAL' ||
+        !object(effect.offset) || !object(effect.color) ||
+        !numeric(effect.offset.x, layer.x) || !numeric(effect.offset.y, layer.y) ||
+        !numeric(effect.radius, layer.radius) || !numeric(effect.spread, layer.spread ?? 0) ||
+        (effect.boundVariables !== undefined && (!object(effect.boundVariables) || Object.keys(effect.boundVariables).length)) ||
+        (effect.showShadowBehindNode !== undefined && effect.showShadowBehindNode !== true)) return false;
+    return (['r', 'g', 'b', 'a'] as const).every(channel =>
+      numeric(effect.color[channel], layer.color[channel] ?? 1));
+  });
+}
+
+function checkInput(input: NativeInspectionInput) {
   const c = input.creation;
   if (
     !c ||
@@ -60,19 +104,21 @@ function checkInput(input: NativeSourceObservationInput) {
     typeof c.pageId !== "string" ||
     !c.target ||
     !Array.isArray(c.variants) ||
-    !Array.isArray(c.comparisons) ||
     input.tokenInput.fileKey !== input.operation.fileKey ||
     input.tokenIdentity.fileKey !== input.operation.fileKey ||
     input.tokenInput.scopeId !== `source-${input.operation.id}` ||
-    !same(input.component.nativeSourceCandidate, {
+    !(isContractDraft(input) ?
+      same(input.component.nativeContractDraft, { revision: revisionOf(input.projection), acceptedContract: null }) &&
+      !input.component.nativeSourceCandidate && c.comparisons === undefined && c.comparisonBoardId === undefined :
+      Array.isArray(c.comparisons) && same(input.component.nativeSourceCandidate, {
       revision: revisionOf(input.projection),
       purpose: "source-candidate-inspection",
       acceptedContract: null,
-    }) ||
-    !same(
+    }) &&
+    same(
       input.samples.cases.map((row) => row.id),
       input.projection.cases.map((row) => row.id),
-    ) ||
+    )) ||
     !/^sha256:[a-f0-9]{64}$/.test(input.planRevision)
   )
     throw Error("native-source-observation-input-invalid");
@@ -85,15 +131,19 @@ export function emitNativeSourceReadbackScript(
   input: NativeSourceObservationInput,
   captureImages = false,
 ): string {
+  return emitNativeInspectionReadbackScript(input, captureImages);
+}
+export function emitNativeContractReadbackScript(input: NativeContractObservationInput, captureImages = false): string {
+  return emitNativeInspectionReadbackScript(input, captureImages);
+}
+export function emitNativeInspectionReadbackScript(input: NativeInspectionInput, captureImages = false): string {
   checkInput(input);
   const expected = {
     operation: input.operation,
     planRevision: input.planRevision,
     pageId: input.creation.pageId,
     nodes: input.creation.nodes,
-    comparisons: input.creation.comparisons
-      .filter((c: any) => c.status === "created-comparison")
-      .map((c: any) => ({ id: c.id, instanceId: c.instanceId })),
+    comparisons: nativeInspectionExports(input),
   };
   const fields = [
     "visible",
@@ -188,7 +238,7 @@ async function read(page) {
       row.mainId = main ? main.id : null;
       row.componentProperties = copy(node.componentProperties);
     }
-    for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'])
+    for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'${isContractDraft(input) ? ", 'nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames'" : ''}])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
     out.push(row);
   }
@@ -205,7 +255,7 @@ try {
     captureImages
       ? `for (const c of EXPECTED.comparisons) {
     const node = await figma.getNodeByIdAsync(c.instanceId); guard();
-    if (!node || node.type !== 'INSTANCE' || typeof node.exportAsync !== 'function' || typeof figma.base64Encode !== 'function')
+    if (!node || node.type !== c.type || typeof node.exportAsync !== 'function' || typeof figma.base64Encode !== 'function')
       throw Error('native-source-readback-export-unavailable');
     const png = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } }); guard();
     if (!png || !png.length) throw Error('native-source-readback-export-invalid');
@@ -251,6 +301,13 @@ export function verifyNativeSourceReadback(
     return observationReport(["native-source-observation-malformed"]);
   }
 }
+export function verifyNativeContractReadback(input: NativeContractObservationInput, receipt: unknown) {
+  return verifyNativeInspectionReadback(input, receipt);
+}
+export function verifyNativeInspectionReadback(input: NativeInspectionInput, receipt: unknown) {
+  try { return verifyReadback(input, receipt); }
+  catch { return observationReport(['native-source-observation-malformed']); }
+}
 
 function observationReport(problems: string[]) {
   return {
@@ -273,7 +330,7 @@ function observationReport(problems: string[]) {
 }
 
 function verifyReadback(
-  input: NativeSourceObservationInput,
+  input: NativeInspectionInput,
   receipt: unknown,
   exactIds = false,
 ) {
@@ -320,7 +377,9 @@ function verifyReadback(
     problems.push("native-source-observation-node-inventory");
     return report();
   }
-  if (!exactIds) {
+  // Empty draft mains have exact allocation IDs. Only recorded comparison
+  // slot descendants may use the source workflow's clone-identity bridge.
+  if (!exactIds && !isContractDraft(input)) {
     const anchor = input.allocationAnchor;
     if (
       anchor &&
@@ -399,21 +458,21 @@ function verifyReadback(
   };
   const target = nodes.get(c.target.id),
     page = nodes.get(c.pageId),
-    board = nodes.get(c.comparisonBoardId);
-  if (!target || !page || !board) {
+    board = isContractDraft(input) ? undefined : nodes.get(c.comparisonBoardId);
+  if (!target || !page || (!isContractDraft(input) && !board)) {
     issue("native-source-observation-roots-missing");
     return report();
   }
   if (
     page.type !== "PAGE" ||
-    !same([...page.childIds].sort(), [target.id, board.id].sort()) ||
-    board.type !== "FRAME" ||
+    !same([...page.childIds].sort(), [target.id, ...(board ? [board.id] : [])].sort()) ||
+    (board && board.type !== "FRAME") ||
     target.parentId !== page.id ||
-    board.parentId !== page.id
+    (board && board.parentId !== page.id)
   )
     issue("native-source-observation-page-scope");
   if (
-    target.type !== "COMPONENT_SET" ||
+    target.type !== (input.component.isSet ? "COMPONENT_SET" : "COMPONENT") ||
     target.metadata.contractId !==
       `source-native:${input.operation.id}:${input.projection.contractId}` ||
     target.key !== c.target.key ||
@@ -431,6 +490,14 @@ function verifyReadback(
     }
   }
   const axes = input.component.unsetVariantAxes?.axes ?? [];
+  const draftAxes = new Map<string, Set<string>>();
+  if (isContractDraft(input) && input.component.isSet) for (const variant of input.component.variants)
+    for (const segment of variant.name.split(', ')) {
+      const i = segment.indexOf('='), property = segment.slice(0, i), value = segment.slice(i + 1);
+      if (i <= 0) throw Error('native-contract-observation-variant-name');
+      if (!draftAxes.has(property)) draftAxes.set(property, new Set());
+      draftAxes.get(property)!.add(value);
+    }
   const expectedSlots = new Set<string>();
   const collect = (s: NodeSpec) => {
     if (s.type === "slot") expectedSlots.add(s.slotProperty!);
@@ -439,7 +506,7 @@ function verifyReadback(
   input.component.variants.forEach((v) => collect(v.spec));
   if (
     !same([...slotKeys.keys()].sort(), [...expectedSlots].sort()) ||
-    Object.keys(defs).length !== expectedSlots.size + axes.length
+    Object.keys(defs).length !== expectedSlots.size + (isContractDraft(input) ? draftAxes.size : axes.length)
   )
     issue("native-source-observation-property-inventory");
   for (const axis of axes) {
@@ -454,6 +521,18 @@ function verifyReadback(
       )
     )
       issue("native-source-observation-variant-axis");
+  }
+  if (isContractDraft(input)) {
+    for (const [property, values] of draftAxes) {
+      const def = defs[property];
+      if (!def || def.type !== 'VARIANT' || def.defaultValue !== values.values().next().value ||
+          !same([...(def.variantOptions ?? [])].sort(), [...values].sort()))
+        issue('native-contract-observation-variant-axis');
+    }
+    for (const key of ['rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames'] as const) {
+      if (input.component[key] ? !same(meta(target, key), input.component[key]) : !!target.metadata[key])
+        issue(`native-contract-observation-${key}`);
+    }
   }
   const checked = new Set<string>();
   const paint = (actual: any, expected: any) =>
@@ -489,7 +568,8 @@ function verifyReadback(
       issue("native-source-observation-node-type", n);
     if (!same(v.explicitVariableModes, mode))
       issue("native-source-observation-mode", n);
-    if (!sample && !same(meta(n, "nativeSourcePart"), spec.nativeSourcePart))
+    if (!sample && !same(meta(n, isContractDraft(input) ? 'nativeContractPart' : 'nativeSourcePart'),
+      isContractDraft(input) ? spec.nativeContractPart : spec.nativeSourcePart))
       issue("native-source-observation-source-part", n);
     if (sample && !same(meta(n, "nativeSourceSample"), sample))
       issue("native-source-observation-sample-identity", n);
@@ -559,13 +639,9 @@ function verifyReadback(
       } else if (spec.type !== "text" && paints.length)
         issue(`native-source-observation-extra-${field}`, n);
     }
-    if (
-      spec.effectStack?.length ||
-      spec.dropShadow ||
-      spec.gradient ||
-      (v.effects?.length ?? 0) !== 0
-    )
-      issue("native-source-observation-effect-unverified", n);
+    if (!shadowsMatch(spec, v.effects))
+      issue("native-source-observation-effects", n);
+    if (spec.gradient) issue("native-source-observation-gradient-unverified", n);
     for (const field of ["width", "height"] as const)
       if (
         spec.lits?.[field] !== undefined &&
@@ -619,7 +695,7 @@ function verifyReadback(
       )
         issue("native-source-observation-slot-key", n);
       const sourceSample =
-        sourceCase &&
+        isContractDraft(input) ? undefined : sourceCase &&
         input.samples.cases
           .find((c) => c.id === sourceCase.id)
           ?.slots.find(
@@ -656,20 +732,21 @@ function verifyReadback(
   };
   if (
     c.variants.length !== input.component.variants.length ||
-    !same(
+    (input.component.isSet && !same(
       target.childIds,
       c.variants.map((v: any) => v.id),
-    )
+    ))
   )
     issue("native-source-observation-variant-inventory");
   const mainIds = new Map<string, string>();
   input.component.variants.forEach((variant, i) => {
     const born = c.variants[i],
       node = born && nodes.get(born.id);
-    if (!node || node.name !== variant.name || node.key !== born.key)
+    if (!node || (input.component.isSet && node.name !== variant.name) || node.key !== born.key ||
+        (!input.component.isSet && (c.variants.length !== 1 || node.id !== target.id)))
       issue("native-source-observation-variant-identity", node);
     if (
-      node &&
+      input.component.isSet && node &&
       !same(
         node.variantProperties,
         Object.fromEntries(
@@ -687,6 +764,7 @@ function verifyReadback(
     }
   });
   const expectedInstances: string[] = [];
+  if (isContractDraft(input)) return report();
   for (const sourceCase of input.projection.cases) {
     const born = c.comparisons.find((v: any) => v.id === sourceCase.id);
     if (
@@ -720,7 +798,7 @@ function verifyReadback(
       !variant ||
       !inst ||
       inst.mainId !== mainIds.get(name) ||
-      inst.parentId !== board.id
+      inst.parentId !== board!.id
     ) {
       issue("native-source-observation-case-main", inst);
       continue;
@@ -734,7 +812,7 @@ function verifyReadback(
       issue("native-source-observation-case-identity", inst);
     visit(variant.spec, inst, sourceCase, undefined, true);
   }
-  if (!same(board.childIds, expectedInstances))
+  if (!same(board!.childIds, expectedInstances))
     issue("native-source-observation-comparison-inventory");
   return report();
 }
