@@ -13,6 +13,7 @@ import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { observeTextFonts } from './text-fonts.js';
 import { observeSvgViewports } from './svg-viewports.js';
+import { observeGridConstraints, verifiedGridConstraints, type GridConstraintEvidence } from './grid-constraints.js';
 import { compileObservedContent, type ObservedContentDraft } from './observed-content.js';
 import { evidenceSha, evidenceUnchanged, inventoryEvidence } from './react-validation-evidence.js';
 
@@ -25,6 +26,7 @@ export interface ReactContentInspection {
   sourceUnchanged: boolean;
   content?: ObservedContentDraft;
   fontFamilies?: string[];
+  gridConstraints?: GridConstraintEvidence;
   problems: string[];
 }
 export function startReactContentInspection(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, operationId: string) {
@@ -59,6 +61,8 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
         save('text-fonts.json', fonts);
         const svg = await observeSvgViewports(page, profile.path, captured.tree);
         save('svg-viewports.json', svg);
+        const grids = await observeGridConstraints(page, profile.path, captured.tree);
+        save('grid-constraints.json', grids);
         const repeat = await captureValidatedTree(page, profile, failures, '#root', '--');
         if (repeat.status !== 'captured' || repeat.treeSha256 !== captured.treeSha256 || repeat.sourcePngSha256 !== captured.sourcePngSha256)
           throw Error('react-content-source-changed-during-read');
@@ -66,6 +70,7 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
         if (!reactReferenceUnchanged(reference)) throw Error('react-content-source-files-changed');
         state.content = compileObservedContent(captured.tree, fonts, svg);
         state.fontFamilies = [...new Set(fonts.rows.flatMap(row => row.fonts.map(font => font.familyName)))].sort();
+        state.gridConstraints = grids;
         state.sourceUnchanged = true;
         state.phase = 'complete';
       } finally { failures.dispose(); }
@@ -126,5 +131,12 @@ export function readReactContentInspectionEvidence(repoRoot: string, reference: 
   const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactContentInspection;
   if (report.id !== latest.id || report.operationId !== operationId || report.referenceId !== reference.id || report.caseId !== request.caseId || report.phase === 'running')
     throw Error('react-content-report-identity-changed');
+  // Historical inspections have no grid witness. Never enrich their reports
+  // from a new inspection or a mutable latest pointer.
+  if (report.gridConstraints) {
+    const grids = JSON.parse(readFileSync(path.join(dir, 'grid-constraints.json'), 'utf8')) as GridConstraintEvidence;
+    if (revisionOf(grids) !== revisionOf(report.gridConstraints)) throw Error('react-content-grid-report-changed');
+    if (grids.status === 'observed') verifiedGridConstraints(original.captured.tree, grids);
+  }
   return { report, original };
 }

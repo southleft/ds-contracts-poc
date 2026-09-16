@@ -142,6 +142,16 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.content && <section aria-label="Caller-content preparation">
           <p>Content preparation: {row.content.phase}. {row.content.sourceUnchanged ? 'The original rendering and source files are unchanged.' : 'Source equivalence is not yet established.'}</p>
           {!!row.content.fontFamilies?.length && <p>Observed text fonts: {row.content.fontFamilies.join(', ')}.</p>}
+          {row.content.gridConstraints && (row.content.gridConstraints.status === 'observed'
+            ? !!row.content.gridConstraints.rows.length && <details><summary>Source grid constraints · {row.content.gridConstraints.rows.length} grids</summary>
+              <p>Current CSS constraints and rendered track sizes are shown separately. These observations do not qualify native conversion or other content and viewport combinations.</p>
+              {row.content.gridConstraints.rows.map(grid => <section key={grid.path} aria-label={`Grid at ${grid.path || 'root'}`}>
+                <h4>{row.composition?.rows.find(child => child.sourcePaths.includes(grid.path))?.exportName ?? 'Source element'} · {grid.path || 'root'}</h4>
+                <div style={{overflowX:'auto'}}><table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th scope="col">Constraint</th><th scope="col">Computed CSS</th><th scope="col">Rendered value</th></tr></thead>
+                  <tbody>{Object.entries(grid.computed).map(([channel, value]) => <tr key={channel}><th scope="row">{channel}</th><td>{value}</td><td>{grid.used[channel as keyof typeof grid.used]}</td></tr>)}</tbody></table></div>
+              </section>)}
+            </details>
+            : <p role="alert">Source grid constraints could not be verified: {row.content.gridConstraints.problems.join(', ')}.</p>)}
           {row.content.content && <p>{row.content.content.status === 'compiled-comparison-draft'
             ? 'Caller content compiled for comparison. Review the separate native comparison operation when prepared; visual fidelity remains unverified.'
             : 'Caller content has unsupported facts that prevent native comparison.'} Reusable main slots remain empty.</p>}
