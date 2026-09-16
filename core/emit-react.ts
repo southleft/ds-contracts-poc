@@ -25,6 +25,7 @@
  *   - `content` parts render a bound text prop
  *   - optional parts render conditionally on their slot prop
  */
+import { rootContentJsx } from './root-content.js';
 import {
   isNativeCheckablePart,
   pascal,
@@ -752,13 +753,15 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
   }
 
   const root = contract.anatomy.root;
+  const explicitRootContent = rootContentJsx(root, codePropOf);
   const rootInner = root.parts || gridPlan.placeholders.has('root')
     ? [
+        ...(explicitRootContent !== undefined ? [explicitRootContent] : []),
         ...Object.entries(root.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
         // A2 grid (G4): empty root-grid areas render placeholders too.
         ...(gridPlaceholderJsx('root') ? [gridPlaceholderJsx('root')] : []),
       ].join('\n')
-    : '{children}';
+    : explicitRootContent ?? '{children}';
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {

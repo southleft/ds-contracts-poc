@@ -1287,12 +1287,17 @@ function renderComponentHtml(
   // <option> wrapper is the only faithful rendering of a select's default
   // content. (Authored anatomies should carry explicit element:"option"
   // parts; this covers the part-less text fallback.)
-  const rootText = escapeHtml(extraText ?? textDefaultOf(contract));
+  const explicitRootText = root.content ? textValue(root.content.prop)
+    : root.text !== undefined
+      ? (root.textByProp?.map[propValue(root.textByProp.prop) ?? ''] ?? root.text)
+      : undefined;
+  const rootText = escapeHtml(explicitRootText ?? extraText ?? textDefaultOf(contract));
   // A2 grid (G4): empty root-grid areas render placeholder elements after
   // the declared children (a grid root whose areas are ALL empty renders
   // only placeholders — the grid's shape, nothing invented in it).
   const rootInner = root.parts || gridPlan.placeholders.has('root')
     ? [
+        ...(explicitRootText !== undefined ? [`${indent}  ${rootText}`] : []),
         ...Object.entries(root.parts ?? {}).map(([childName, child]) =>
           renderPart(childName, child, indent + '  ', el),
         ),
