@@ -148,6 +148,45 @@ test("reference API retains all ten cases, isolates source execution and refuses
       (await (await fetch(base + "/react", { method: "POST" })).json()).id,
       reference.id,
     );
+    const programUrl = base + `/react/${reference.id}/program`;
+    assert.equal(
+      (
+        await fetch(programUrl, {
+          method: "POST",
+          body: JSON.stringify({ modules: ["/etc/passwd"] }),
+        })
+      ).status,
+      400,
+    );
+    const programResponse = await fetch(programUrl, { method: "POST" });
+    assert.equal(programResponse.status, 200);
+    const program = await programResponse.json();
+    assert.equal(program.acceptedContract, null);
+    assert.equal(program.referenceId, reference.id);
+    assert.equal(
+      program.status,
+      "refused",
+      "fixture lacks installed declarations and JSX config; never claim complete API extraction",
+    );
+    assert.ok(program.problems.length > 0);
+    assert.equal(
+      (await (await fetch(programUrl, { method: "POST" })).json()).id,
+      program.id,
+    );
+    const recordPath = path.join(
+      repo,
+      "private/react-source-programs",
+      reference.id,
+      program.id + ".json",
+    );
+    const recorded = JSON.parse(readFileSync(recordPath, "utf8"));
+    assert.equal(recorded.program.acceptedContract, null);
+    writeFileSync(recordPath, "changed");
+    assert.equal(
+      (await fetch(programUrl, { method: "POST" })).status,
+      409,
+      "immutable records cannot be restamped",
+    );
     put("tailwind.css", "body{display:none}");
     assert.equal(
       (await fetch(base + `/react/${reference.id}?case=card-composed`)).status,

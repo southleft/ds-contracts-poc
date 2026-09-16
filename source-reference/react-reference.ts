@@ -1,3 +1,7 @@
+import {
+  readReactSourceProgram,
+  reactSourceProgramUnchanged,
+} from "./react-source-program.js";
 import { startReactValidation } from "./react-reference-validation.js";
 import { build, type Loader } from "esbuild";
 import { createHash } from "node:crypto";
@@ -217,6 +221,73 @@ export function createReactReferenceService(
         });
       } finally {
         loading = undefined;
+      }
+      return;
+    }
+    const programRoute = /^react\/([a-f0-9]{64})\/program$/.exec(route);
+    if (
+      programRoute &&
+      reference?.id === programRoute[1] &&
+      req.method === "POST"
+    ) {
+      if (
+        Number(req.headers["content-length"] ?? 0) > 0 ||
+        req.headers["transfer-encoding"]
+      ) {
+        json(res, 400, { error: "This action accepts no request body." });
+        return;
+      }
+      try {
+        if (!reactReferenceUnchanged(reference)) throw Error("source-changed");
+        const root = realpathSync(sourceRoot);
+        const modules = Object.keys(reference.files)
+          .filter(
+            (file) =>
+              file.startsWith(path.join(root, "src") + path.sep) &&
+              file.endsWith(".tsx"),
+          )
+          .map((file) => path.relative(root, file));
+        if (!modules.length) throw Error("component-modules-unavailable");
+        const program = readReactSourceProgram(root, modules);
+        if (
+          !reactReferenceUnchanged(reference) ||
+          !reactSourceProgramUnchanged(program)
+        )
+          throw Error("source-changed");
+        const record = { version: 1, referenceId: reference.id, program };
+        const bytes = JSON.stringify(record, null, 2) + "\n";
+        const id = sha(bytes);
+        const dir = path.join(
+          repoRoot,
+          "private/react-source-programs",
+          reference.id,
+        );
+        mkdirSync(dir, { recursive: true });
+        const file = path.join(dir, id + ".json");
+        try {
+          writeFileSync(file, bytes, { flag: "wx" });
+        } catch (error) {
+          if (
+            (error as NodeJS.ErrnoException).code !== "EEXIST" ||
+            readFileSync(file, "utf8") !== bytes
+          )
+            throw error;
+        }
+        json(res, 200, {
+          id,
+          referenceId: reference.id,
+          status: program.status,
+          compatibilityNotes: program.compatibilityNotes,
+          acceptedContract: null,
+          sourceFiles: Object.keys(program.files).length,
+          components: program.components,
+          problems: program.problems,
+        });
+      } catch {
+        json(res, 409, {
+          error:
+            "Source APIs could not be read from unchanged installed source and declarations. Reload originals before trying again.",
+        });
       }
       return;
     }
