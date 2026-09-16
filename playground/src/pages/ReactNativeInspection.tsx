@@ -1,3 +1,4 @@
+import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useEffect, useState } from 'react';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
@@ -16,6 +17,7 @@ interface Operation {
   connection: { paired: boolean; connected: boolean; started: boolean; finished: boolean };
   content?: Pick<ReactContentInspection, 'phase' | 'sourceUnchanged' | 'problems'> & Partial<ReactContentInspection>;
   sourceFrame?: SourceFrame; sourceFrameProblem?: string;
+  composition?: ReactCompositionReview; compositionProblem?: string;
 }
 export function ReactNativeInspection({ referenceId, selectedCase, ownership }: {
   referenceId: string; selectedCase: string; ownership: ReactOwnershipReport | null;
@@ -118,8 +120,20 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.kind === 'root' && !savedComparison && <button type="button" disabled={busy || !op.sourceCurrent || row.content?.phase === 'running'}
           onClick={() => void action(`native-operation/${id}/content`)}>Prepare caller-content comparison</button>}
         {row.kind === 'root' && row.content?.content?.status === 'compiled-comparison-draft' && <button type="button"
-          disabled={busy || !!savedComparison || !op.sourceCurrent || op.phase !== 'component-structure-observed'}
+          disabled={busy || !!savedComparison || !op.sourceCurrent || op.phase !== 'component-structure-observed' || row.composition?.status !== 'ready' || !!row.compositionProblem}
           onClick={() => void action(`native-operation/${id}/comparison`)}>{savedComparison ? 'Comparison operation saved' : 'Prepare native comparison operation'}</button>}
+        {row.compositionProblem && <p role="alert">{row.compositionProblem}</p>}
+        {!!row.composition?.problems.length && <p role="alert">The captured source and compiled content do not have a verified correspondence. Composed output is unavailable until this is resolved.</p>}
+        {!!row.composition?.denominator && <section aria-label="Nested component mapping">
+          <h4>Nested component mapping</h4>
+          <p>{row.composition.matched} of {row.composition.denominator} child instances matched to independently inspected native mains.
+            {row.composition.status === 'incomplete' ? ' Resolve every required child before creating this composed comparison.' : ' Source mappings are ready; native creation and visual comparison remain separate checks.'}</p>
+          <table><thead><tr><th>Child export</th><th>Source location</th><th>Native mapping</th></tr></thead>
+            <tbody>{row.composition.rows.map(child => <tr key={child.instanceId}>
+              <td>{child.exportName}</td><td>{child.sourcePaths.join(', ')}</td>
+              <td>{child.status === 'matched' ? `Verified main · ${child.variantName}` : child.problems.map(compositionProblem).join(' ')}</td>
+            </tr>)}</tbody></table>
+        </section>}
         {row.content && <section aria-label="Caller-content preparation">
           <p>Content preparation: {row.content.phase}. {row.content.sourceUnchanged ? 'The original rendering and source files are unchanged.' : 'Source equivalence is not yet established.'}</p>
           {!!row.content.fontFamilies?.length && <p>Observed text fonts: {row.content.fontFamilies.join(', ')}.</p>}
@@ -158,4 +172,20 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       </details>;
     })}
   </section>;
+}
+
+
+function compositionProblem(code: string): string {
+  const messages: Record<string, string> = {
+    'react-composition-runtime-or-multiple-root-unqualified': 'Runtime-owned content or multiple roots still need a supported mapping.',
+    'react-composition-compiler-path-unavailable': 'The observed child has no unambiguous native content node.',
+    'react-composition-main-ambiguous': 'Several verified mains match this export; selection is unresolved.',
+    'react-composition-main-not-verified': 'Create and independently inspect this child’s native main.',
+    'react-composition-main-readback-invalid': 'Inspect the child’s native main again before using it.',
+    'react-composition-held-inputs-differ': 'This usage supplies inputs outside the child’s observed property matrix.',
+    'react-composition-observed-root-context-differs': 'This child’s styling differs in its parent context; the standalone main cannot be reused yet.',
+    'react-composition-variant-unavailable': 'The child’s observed property values have no verified native variant.',
+    'react-composition-root-slot-unavailable': 'The child needs one supported editable content slot.',
+  };
+  return messages[code] ?? 'The child’s source properties need a supported mapping.';
 }

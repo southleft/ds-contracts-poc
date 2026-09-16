@@ -1,3 +1,4 @@
+import { readReactCompositionEvidence } from './react-composition-evidence.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
@@ -295,7 +296,7 @@ export function createReactReferenceService(
               await frames.create(reference.id, id);
             } else if (nativeAction[3] === 'comparison') {
               jobs.verifiedReactObservation(id);
-              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id));
+              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs)));
             } else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
@@ -303,6 +304,7 @@ export function createReactReferenceService(
         const observedAt = Date.now();
         json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
           let content;
+          let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
           if (row.kind === 'initial') {
             // A corrected compiler plan differs from creation without changing
@@ -316,7 +318,11 @@ export function createReactReferenceService(
           }
           try { if (row.kind === 'root') content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
           catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
-          return { ...row, content, sourceFrame, sourceFrameProblem, initialStates,
+          if (row.kind === 'root' && content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft') {
+            try { composition = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id, jobs).review; }
+            catch { compositionProblem = 'Nested component evidence is unavailable or changed. Reload the unchanged original and inspect its content.'; }
+          }
+          return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates,
             updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
@@ -680,7 +686,9 @@ export function createReactReferenceService(
     },
     comparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');
-      return readReactComparisonEvidence(repoRoot, reference, request, parent);
+      return readReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
+        ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
+          { id: request.content.id, inventorySha256: request.content.inventorySha256 }) : undefined);
     },
     nativeEvidence(request: ReactNativeRequest) {
       if (!reference) throw Error('react-native-reference-unavailable');

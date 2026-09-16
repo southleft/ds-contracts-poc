@@ -1469,12 +1469,13 @@ export function createNativeOperationJobs(
       return { referenceId: request.referenceId, caseId: request.caseId,
         ownershipId: request.ownership.id, fileKey: header.policy.fileKey };
     },
-    listReact(referenceId: string) {
+    listReact(referenceId: string, kind?: 'root') {
       if (!HASH.test(referenceId)) fail('request-invalid');
       if (!present(root)) return [];
       directories();
       return readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
+        if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
         const initial = isReactInitialNativeRequest(header.request) ? header.request : undefined;
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;

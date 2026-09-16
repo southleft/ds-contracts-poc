@@ -27,13 +27,15 @@ export interface ObservedContentDraft {
   tokens?: Record<string, unknown>;
   component?: ComponentData;
   assets?: Array<[string, string]>;
+  /** Opt-in compiler correspondence; paths are this observation's DOM addresses. */
+  sourcePaths?: Array<{ sourcePath: string; partName: string; specPath: number[]; type: string }>;
   receipts: string[];
   residuals: ReturnType<typeof prepareMint>['codeOnly'];
   problems: string[];
   limitations: string[];
 }
 
-export function compileObservedContent(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence): ObservedContentDraft {
+export function compileObservedContent(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence, includeSourcePaths = false): ObservedContentDraft {
   const out: ObservedContentDraft = {
     version: 1, status: 'refused', qualification: 'observed-comparison-content-only', acceptedContract: null,
     nativeQualification: 'unqualified', inputRevision: revisionOf({ tree, fonts, ...(svg ? { svg } : {}) }), treeRevision: revisionOf(tree), fontsRevision: revisionOf(fonts),
@@ -55,7 +57,7 @@ export function compileObservedContent(tree: CapturedNode, fonts: TextFontEviden
     const space: PropSpace = { contract, axes: [], presence: new Map(), stateProps: [], enumeration, baseComboKey: key, baseAxisValues: {}, heldFixed: [] };
     const comp: ComponentConfig = { name, importName: name, contract: '', sampleText: '', axes: [] };
     const sweep = { captures: [{ combo: `${name}:${key}`, interaction: 'default', root }] } as SweepResult;
-    Object.assign(out, compileObservedContentSweep(space, comp, sweep));
+    Object.assign(out, compileObservedContentSweep(space, comp, sweep, [], includeSourcePaths));
     if (!out.problems.length) out.status = 'compiled-comparison-draft';
   } catch (error) {
     out.problems.push(error instanceof Error ? error.message : 'observed-content-compiler-failed');
@@ -82,8 +84,8 @@ export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEv
 /** Shared anatomy/paint compiler. The caller authenticates and enumerates the
  * input domain; this routine does not turn samples into a supported source API. */
 export function compileObservedContentSweep(space: PropSpace, comp: ComponentConfig, sweep: SweepResult,
-  rootSizing: string[] = []) {
-  const result: Pick<ObservedContentDraft, 'receipts' | 'problems' | 'residuals' | 'contract' | 'tokens' | 'assets' | 'component'> = {
+  rootSizing: string[] = [], includeSourcePaths = false) {
+  const result: Pick<ObservedContentDraft, 'receipts' | 'problems' | 'residuals' | 'contract' | 'tokens' | 'assets' | 'component' | 'sourcePaths'> = {
     receipts: [], problems: [], residuals: [],
   };
   const name = comp.name;
@@ -111,5 +113,21 @@ export function compileObservedContentSweep(space: PropSpace, comp: ComponentCon
   result.assets = [...promoted.assets];
   const engine = createFigmaEngine({ tokens: { primitives: result.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: promoted.assets });
   result.component = engine.compileComponentData(result.contract, new Map([[result.contract.id, result.contract]]));
+  if (includeSourcePaths) {
+    const specs = new Map<string, Array<{ specPath: number[]; type: string }>>();
+    const walk = (node: ComponentData['variants'][number]['spec'], specPath: number[]) => {
+      specs.set(node.name, [...(specs.get(node.name) ?? []), { specPath, type: node.type }]);
+      node.children?.forEach((child, i) => walk(child, [...specPath, i]));
+    };
+    walk(result.component.variants[0].spec, []);
+    result.sourcePaths = [];
+    for (const [partName, index] of promoted.partIndex) {
+      const entry = aligned.union.entries[index], found = specs.get(partName) ?? [];
+      // These are names assigned by this exact anatomy promotion, never names
+      // recovered heuristically from source tags/classes or canvas layers.
+      if (entry && !promoted.consumed.has(index) && found.length === 1)
+        result.sourcePaths.push({ sourcePath: entry.repPath, partName, ...found[0] });
+    }
+  }
   return result;
 }
