@@ -761,18 +761,29 @@ export function createReferenceService(
         if (pluginRoute[2] === "claim") {
           if (
             !object(payload) ||
-            Object.keys(payload).join() !== "fileKey" ||
-            typeof payload.fileKey !== "string"
+            Object.keys(payload).some(
+              (key) => !["fileKey", "replaceReadbackAttemptId"].includes(key),
+            ) ||
+            typeof payload.fileKey !== "string" ||
+            (payload.replaceReadbackAttemptId !== undefined &&
+              (typeof payload.replaceReadbackAttemptId !== "string" ||
+                !UUID.test(payload.replaceReadbackAttemptId)))
           ) {
             json(res, 400, {
-              error: "Only the active file identity is accepted.",
+              error:
+                "Only the active file and an optional interrupted readback identity are accepted.",
             });
             return;
           }
           json(
             res,
             200,
-            nativeTransport.claim(pluginRoute[1], secret, payload.fileKey),
+            nativeTransport.claim(
+              pluginRoute[1],
+              secret,
+              payload.fileKey,
+              payload.replaceReadbackAttemptId,
+            ),
           );
         } else {
           json(
@@ -794,7 +805,9 @@ export function createReferenceService(
       return;
     }
     const nativeAction =
-      /^([a-f0-9-]+)\/button-native-(connection|start)$/.exec(route);
+      /^([a-f0-9-]+)\/button-native-(connection|start|retry-observation)$/.exec(
+        route,
+      );
     if (req.method === "POST" && nativeAction) {
       try {
         const payload = await body(2048);
@@ -833,7 +846,9 @@ export function createReferenceService(
             });
             return;
           }
-          nativeTransport.start(operation.id);
+          if (nativeAction[2] === "retry-observation")
+            nativeTransport.retryObservation(operation.id);
+          else nativeTransport.start(operation.id);
           json(res, 202, snapshotWithSupplement(baseline));
         }
       } catch {

@@ -1032,6 +1032,11 @@ test("local native HTTP connection restricts authority and retains correlated pl
       await post(claim, { fileKey: SOURCE_NATIVE_FILE_KEY }, auth)
     ).json()) as any;
     assert.equal(delivery.status, "command");
+    assert.equal(
+      (await post(target + "retry-observation", {})).status,
+      409,
+      "creation cannot be retried through the read-only endpoint",
+    );
     assert.deepEqual(
       await (
         await post(claim, { fileKey: SOURCE_NATIVE_FILE_KEY }, auth)
@@ -1064,6 +1069,41 @@ test("local native HTTP connection restricts authority and retains correlated pl
     ]) {
       assert(!JSON.stringify(publicResult).includes(value));
     }
+    const readback = (await (
+      await post(claim, { fileKey: SOURCE_NATIVE_FILE_KEY }, auth)
+    ).json()) as any;
+    assert.equal(readback.command.phase, "token-readback");
+    assert.equal(
+      (await post(target + "retry-observation", {}, { Origin: "null" })).status,
+      403,
+    );
+    assert.equal((await post(target + "retry-observation", {})).status, 202);
+    const replacement = (await (
+      await post(
+        claim,
+        {
+          fileKey: SOURCE_NATIVE_FILE_KEY,
+          replaceReadbackAttemptId: readback.command.attemptId,
+        },
+        auth,
+      )
+    ).json()) as any;
+    assert.equal(
+      replacement.supersedesReadbackAttemptId,
+      readback.command.attemptId,
+    );
+    assert.equal(replacement.command.readOnly, true);
+    assert.notEqual(replacement.command.attemptId, readback.command.attemptId);
+    assert.equal(
+      (await post(resultUrl, await native.run(readback.command), auth)).status,
+      409,
+      "abandoned observations cannot advance the journal",
+    );
+    assert.equal(
+      (await post(resultUrl, await native.run(replacement.command), auth))
+        .status,
+      200,
+    );
   } finally {
     service.close();
     await closeServer(server);

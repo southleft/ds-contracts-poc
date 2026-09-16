@@ -2031,7 +2031,7 @@
       if (msg.key === DRIFT_STATE_KEY + ':' + currentFileKey) showDriftLastChecked(msg.value);
     } else if (msg.type === 'native-status') {
       $('native-status').textContent = msg.message || msg.status;
-      if (msg.status === 'disconnected' || msg.status === 'finished') {
+      if (msg.status === 'disconnected') {
         if (nativeTimer) clearInterval(nativeTimer);
         nativeTimer = null;
       }

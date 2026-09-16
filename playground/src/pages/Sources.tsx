@@ -422,7 +422,9 @@ export function Sources() {
       clearInterval(timer);
     };
   }, [job?.id, polling]);
-  async function nativeAction(action: "connection" | "start") {
+  async function nativeAction(
+    action: "connection" | "start" | "retry-observation",
+  ) {
     if (!job) return;
     setBusy(true);
     setError("");
@@ -449,7 +451,7 @@ export function Sources() {
         if (!refreshed.ok)
           throw Error("Connection prepared; refresh to inspect the operation.");
         setJob(await refreshed.json());
-      } else setJob(await post("start"));
+      } else setJob(await post(action));
     } catch (e) {
       setError(
         e instanceof Error ? e.message : "Native operation unavailable.",
@@ -1269,9 +1271,7 @@ export function Sources() {
               <div className="source-connect">
                 <button
                   type="button"
-                  disabled={
-                    busy || capturing || job.nativeConnection?.finished === true
-                  }
+                  disabled={busy || (!job.nativeOperation && capturing)}
                   onClick={() => void nativeAction("connection")}
                 >
                   Prepare connection
@@ -1303,6 +1303,19 @@ export function Sources() {
                 >
                   Create and inspect
                 </button>
+                {(job.nativeOperation?.pendingPhase === "token-readback" ||
+                  job.nativeOperation?.pendingPhase === "component-readback" ||
+                  job.nativeOperation?.phase === "observation-refused" ||
+                  job.nativeOperation?.phase ===
+                    "component-observation-refused") && (
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => void nativeAction("retry-observation")}
+                  >
+                    Retry readback
+                  </button>
+                )}
               </div>
               {nativeConnection && (
                 <label>

@@ -1197,13 +1197,21 @@ export function createNativeOperationJobs(
   };
   const retryObservation = (id: string) => {
     const loaded = load(id);
-    const phase = loaded.state.pending?.phase;
+    const phase =
+      loaded.state.pending?.phase ??
+      (loaded.state.phase === "observation-refused"
+        ? "token-readback"
+        : loaded.state.phase === "component-observation-refused"
+          ? "component-readback"
+          : undefined);
     if (phase !== "token-readback" && phase !== "component-readback")
       fail("observation-retry-refused");
-    append(loaded, {
-      kind: "abandon-observation",
-      attemptId: loaded.state.pending!.attemptId,
-    });
+    if (loaded.state.pending) {
+      append(loaded, {
+        kind: "abandon-observation",
+        attemptId: loaded.state.pending.attemptId,
+      });
+    }
     return dispatch(id, phase);
   };
   const retryCreation = (id: string) => {
@@ -1263,6 +1271,29 @@ export function createNativeOperationJobs(
     retryObservation,
     retryCreation,
     verifiedTokenContext,
+    /** Transport scheduling only. Freshness is intentionally absent; writes
+     * still authenticate their source during dispatch and first delivery. */
+    deliveryState(id: string) {
+      const { state } = load(id);
+      return { phase: state.phase, pendingPhase: state.pending?.phase };
+    },
+    abandonedObservationPhase(id: string, attemptId: string) {
+      const loaded = load(id);
+      if (
+        !loaded.events.some(
+          (event) =>
+            event.kind === "abandon-observation" &&
+            event.attemptId === attemptId,
+        )
+      )
+        return null;
+      const event = loaded.events.find(
+        (event) =>
+          event.kind === "dispatch" && event.command.attemptId === attemptId,
+      );
+      if (event?.kind !== "dispatch" || !event.command.readOnly) return null;
+      return event.command.phase;
+    },
     /** Trusted transport only. Never include executable bytes in a public
      * snapshot. Reauthenticate write inputs immediately before first delivery. */
     pendingCommand(id: string): NativeOperationCommand | null {

@@ -102,8 +102,12 @@ paste the connection and choose **Connect / resume**. Back in the app, choose
 independent token readback, component creation and independent structural readback.
 
 The app hands out a command once. The plugin stores its result before returning
-it; **Connect / resume** can resend a saved result after a restart. A command
+it; **Connect / resume** can resend a saved result after a restart. A creation
 whose result was never saved remains unknown and is not executed again.
+For an interrupted or refused observation, use **Retry readback** in the app.
+The plugin can replace a held readback only after the app journal retires that
+attempt; the replacement is read-only and cannot repeat creation. Keep the
+connection open to receive that replacement.
 **Disconnect** stops subsequent polling; an in-flight operation can still finish.
 This development flow remains unqualified until its actual native output,
 visual fidelity, editability and repeat behavior are verified.

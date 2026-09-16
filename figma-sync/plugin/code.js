@@ -330,12 +330,22 @@ async function nativePoll() {
       nativeStatus('connected', 'Result saved by the app. Continuing the inspection.');
     };
     const saved = await figma.clientStorage.getAsync(receiptKey);
+    let heldReadback = null;
     if (saved) {
-      if (saved.stage === 'result' && saved.envelope) { await deliver(saved.envelope); return; }
-      nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; creation will not repeat.');
-      return;
+      const identity = saved.stage === 'result' ? saved.envelope : saved.identity;
+      const readback = identity && ['token-readback', 'component-readback'].includes(identity.phase);
+      if (saved.stage === 'result' && saved.envelope) {
+        try { await deliver(saved.envelope); return; }
+        catch (e) { if (!readback) throw e; }
+      }
+      if (readback) heldReadback = identity;
+      else {
+        nativeStatus('unknown', 'An operation was interrupted before its result was saved. Inspect it in the app; creation will not repeat.');
+        return;
+      }
     }
-    const delivery = await request('claim', { fileKey: figma.fileKey });
+    const delivery = await request('claim', { fileKey: figma.fileKey,
+      ...(heldReadback ? { replaceReadbackAttemptId: heldReadback.attemptId } : {}) });
     if (delivery.status !== 'command') {
       const messages = {
         ready: 'Connected. Start Create and inspect in the local app.',
@@ -349,8 +359,14 @@ async function nativePoll() {
     if (!nativeCommandValid(command, operationId)) {
       nativeStatus('refused', 'The operation identity, active file or script integrity did not match. Nothing executed.'); return;
     }
+    if (heldReadback && (!command.readOnly || command.phase !== heldReadback.phase ||
+        command.attemptId === heldReadback.attemptId || delivery.supersedesReadbackAttemptId !== heldReadback.attemptId)) {
+      nativeStatus('refused', 'The app did not confirm replacement of the interrupted readback. Nothing executed.'); return;
+    }
     // Await a durable received marker BEFORE any native API call. Reopening the
     // plugin with this marker cannot rerun a command whose outcome is unknown.
+    // A new read-only attempt may replace it only after the app journal has
+    // explicitly abandoned the old readback. Creation markers never qualify.
     await figma.clientStorage.setAsync(receiptKey, { stage: 'received', identity: nativeEnvelope(command, null) });
     nativeStatus('running', command.readOnly ? 'Reading the actual native nodes…' : 'Creating the scoped native candidate…');
     let result;
@@ -1065,4 +1081,3 @@ function dsCanvasFingerprint(root) {
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return 'v6:' + String(h);
 }
-

@@ -55,7 +55,9 @@ Sorting, pagination, keyboard navigation and data fetching are not established b
 
 **Development connection:** after deriving a measured candidate, choose **Prepare connection** in Sources. Run the current companion development plugin in the authorized Scratch file, open **Build → Connect the local source workflow**, paste the connection and choose **Connect / resume**. Return to Sources and choose **Create and inspect**. Keep the app and plugin open: the journal drives token creation/readback followed by component creation/readback. The plugin saves results so an interrupted acknowledgment can be resent without another allocation.
 
-**Where this currently stops:** this connected path has API-mock and browser coverage; its actual Figma output is not yet qualified. The source candidate remains unaccepted. Native visual comparison, editability and a complete no-change repeat remain the next work. A lost command response is reported as unknown, never automatically repeated; complete interruption recovery is still unfinished.
+If a readback is interrupted or refuses the observed state, choose **Retry readback** after addressing the reported issue. The journal retires the old observation and creates a new read-only attempt; this never repeats component or token creation. **Prepare connection** remains available if the plugin needs to reconnect.
+
+**Where this currently stops:** this connected path has API-mock and browser coverage; its actual Figma output is not yet qualified. The source candidate remains unaccepted. Native visual comparison, editability and a complete no-change repeat remain the next work. A lost creation response without a saved receipt is reported as unknown, never automatically repeated; complete interruption recovery is still unfinished.
 
 <a id="both-libraries"></a>
 ## Both libraries: connect, compare and repair

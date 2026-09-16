@@ -123,14 +123,21 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
   const status = (id: string) => {
     const dir = directory(id);
     const connected = Date.now() - (seen.get(id) ?? 0) < 15_000;
+    const started = existsSync(path.join(dir, "started.json"));
+    const state = started ? jobs.deliveryState(id) : null;
     return {
       paired: existsSync(path.join(dir, "connection.json")),
       connected,
-      started: existsSync(path.join(dir, "started.json")),
-      finished: existsSync(path.join(dir, "finished.json")),
+      started,
+      finished: !!state && !state.pendingPhase && !NEXT[state.phase],
     };
   };
-  const claim = (id: string, secret: string, fileKey: string) => {
+  const claim = (
+    id: string,
+    secret: string,
+    fileKey: string,
+    replaceReadbackAttemptId?: string,
+  ) => {
     authorize(id, secret);
     if (fileKey !== SOURCE_NATIVE_FILE_KEY) fail("file-refused");
     seen.set(id, Date.now());
@@ -138,25 +145,32 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
       state = status(id);
     if (!state.started) return { status: "ready" as const };
     if (state.finished) return { status: "finished" as const };
-    const snapshot = jobs.get(id);
+    const replacingPhase =
+      replaceReadbackAttemptId === undefined
+        ? null
+        : UUID.test(replaceReadbackAttemptId)
+          ? jobs.abandonedObservationPhase(id, replaceReadbackAttemptId)
+          : null;
+    if (replaceReadbackAttemptId !== undefined && !replacingPhase)
+      return { status: "awaiting-result" as const };
+    const snapshot = jobs.deliveryState(id);
     if (!snapshot.pendingPhase) {
       const next = NEXT[snapshot.phase];
-      if (!next) {
-        try {
-          write(path.join(dir, "finished.json"), {
-            version: 1,
-            id,
-            phase: snapshot.phase,
-          });
-        } catch (e) {
-          if ((e as NodeJS.ErrnoException).code !== "EEXIST") throw e;
-        }
-        return { status: "finished" as const };
-      }
+      if (!next) return { status: "finished" as const };
+      if (replaceReadbackAttemptId !== undefined)
+        return { status: "awaiting-result" as const };
       jobs.dispatch(id, next);
     }
     const command = jobs.pendingCommand(id);
     if (!command) fail("command-unavailable");
+    if (
+      replaceReadbackAttemptId !== undefined &&
+      (!command.readOnly ||
+        command.phase !== replacingPhase ||
+        command.attemptId === replaceReadbackAttemptId)
+    ) {
+      return { status: "awaiting-result" as const };
+    }
     const file = path.join(dir, `${command.attemptId}.json`);
     if (existsSync(file)) {
       if (read(file).commandSha256 !== sha(command)) fail("claim-invalid");
@@ -174,7 +188,13 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
         return { status: "awaiting-result" as const };
       throw e;
     }
-    return { status: "command" as const, command };
+    return {
+      status: "command" as const,
+      command,
+      ...(replaceReadbackAttemptId === undefined
+        ? {}
+        : { supersedesReadbackAttemptId: replaceReadbackAttemptId }),
+    };
   };
   const accept = (
     id: string,
@@ -194,5 +214,10 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
     // checking fresh source; a stale source must never erase a late native ack.
     return jobs.accept(id, result);
   };
-  return { pair, start, status, authorize, claim, accept };
+  const retryObservation = (id: string) => {
+    connection(id);
+    if (!status(id).started) fail("observation-retry-refused");
+    jobs.retryObservation(id);
+  };
+  return { pair, start, status, authorize, claim, accept, retryObservation };
 }
