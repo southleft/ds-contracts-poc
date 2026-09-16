@@ -69,8 +69,8 @@
       "stage": "anatomy",
       "status": "implemented",
       "file": "extract/computed/anatomy.ts",
-      "line": 1993,
-      "ruleLine": 1994,
+      "line": 1994,
+      "ruleLine": 1995,
       "ruleText": "if (svgPlans.has(hostIdx)) continue;",
       "css": {
         "construct": "a second (or third) <svg> under a host element that already has an svg plan",

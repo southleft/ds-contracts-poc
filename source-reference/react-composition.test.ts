@@ -139,5 +139,37 @@ test('lost text-only boundaries and invalid ownership keep the child unresolved'
     assert.equal(result.review.denominator, 1);
     assert.deepEqual(result.review.rows[0].problems, ['react-composition-compiler-path-unavailable']);
     assert.equal(result.references.length, 0);
+    const preserved = compileObservedContent(tree, fonts, undefined, true, ['0']);
+    assert.equal(preserved.status, 'compiled-comparison-draft', preserved.problems.join(','));
+    const path = preserved.sourcePaths!.find(p => p.sourcePath === '0')!;
+    assert.equal(path.type, 'frame');
+    let spec = preserved.component!.variants[0].spec;
+    for (const index of path.specPath) spec = spec.children![index];
+    assert.equal(spec.children?.[0].characters, 'Save');
+    assert.equal(spec.children?.[0].fontFamily, 'Inter');
+    assert.equal(spec.children?.[0].fontSize, 14);
+    assert.ok(spec.fill, 'the source box keeps its background');
+    const matched = matchReactComposition(f.program, ownership, tree, preserved, [f.main]);
+    assert.equal(matched.review.status, 'ready', JSON.stringify(matched.review));
+    assert.equal(matched.review.matched, 1);
+    assert.deepEqual(matched.references[0].specPath, path.specPath);
+    const translucent = structuredClone(tree);
+    if (translucent.nodes[0].t !== 'el') throw Error('missing child');
+    translucent.nodes[0].el.style.opacity = '0.5';
+    const translucentContent = compileObservedContent(translucent, { ...fonts, treeRevision: revisionOf(translucent) }, undefined, true, ['0']);
+    assert.equal(translucentContent.status, 'compiled-comparison-draft');
+    let translucentSpec = translucentContent.component!.variants[0].spec;
+    for (const index of path.specPath) translucentSpec = translucentSpec.children![index];
+    assert.equal(translucentSpec.opacity, 0.5);
+    assert.ok(translucentSpec.children![0].opacity === undefined || translucentSpec.children![0].opacity === 1,
+      'anonymous text must not multiply its parent opacity');
+    assert.equal(translucentSpec.children![0].fill, undefined, 'box paint must not be repeated on the text');
+    const unsupported = structuredClone(tree);
+    if (unsupported.nodes[0].t !== 'el') throw Error('missing child');
+    unsupported.nodes[0].el.style.display = 'block';
+    const blockFonts = { ...fonts, treeRevision: revisionOf(unsupported) };
+    const block = compileObservedContent(unsupported, blockFonts, undefined, true, ['0']);
+    assert.equal(block.status, 'refused');
+    assert.ok(block.problems.some(p => p.startsWith('ordered-text-flow-unqualified')));
   } finally { rmSync(f.dir, { recursive: true, force: true }); }
 });

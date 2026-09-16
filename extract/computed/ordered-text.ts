@@ -10,14 +10,17 @@ export interface OrderedContentObservation {
 /** CSS flex creates an anonymous item for each contiguous text run. Preserve
  * those items beside element parts instead of concatenating all text before
  * all children. These are layout parts, not new source elements or public APIs.
- * No measured box is copied into a reusable dimension. */
+ * A host-proven component boundary can opt in for a single text item too, so
+ * its box remains independently addressable. No measured box is copied into a
+ * reusable dimension. */
 export function preserveOrderedFlexText(
   part: Part,
   observations: OrderedContentObservation[],
   name: string,
   usedNames: Set<string>,
+  preserveBoundary = false,
 ): { changed: boolean; problem?: string } {
-  if (!observations.length || (!part.content && part.text === undefined) || !part.parts)
+  if (!observations.length || (!part.content && part.text === undefined) || (!part.parts && !preserveBoundary))
     return { changed: false };
   const sequence = ({ node, elementParts }: OrderedContentObservation) => {
     const items: Array<{ text: string } | { element: string }> = [];
@@ -42,10 +45,10 @@ export function preserveOrderedFlexText(
   const shape = (s: NonNullable<typeof ordered>) => s.map(i => 'text' in i ? { text: true } : i);
   if (sequences.some(s => JSON.stringify(shape(s!)) !== JSON.stringify(shape(ordered))))
     return refuse('sequence-varies');
-  if (!ordered.some(i => 'element' in i)) return { changed: false };
+  if (!preserveBoundary && !ordered.some(i => 'element' in i)) return { changed: false };
   const runs = ordered.filter(i => 'text' in i);
   // The ordinary root/part content spelling is already faithful in this case.
-  if (!runs.length || (runs.length === 1 && 'text' in ordered[0])) return { changed: false };
+  if (!runs.length || (!preserveBoundary && runs.length === 1 && 'text' in ordered[0])) return { changed: false };
   if (observations.some(({ node }) => !['flex', 'inline-flex'].includes(node.style.display) ||
       !(node.style['white-space-collapse'] === 'collapse' || ['normal', 'nowrap'].includes(node.style['white-space'])) ||
       (node.style['white-space'] && !['normal', 'nowrap'].includes(node.style['white-space'])) ||
@@ -55,14 +58,14 @@ export function preserveOrderedFlexText(
     return refuse('sequence-varies');
   const elementNames = ordered.flatMap(i => 'element' in i ? [i.element] : []);
   if (new Set(elementNames).size !== elementNames.length ||
-      Object.keys(part.parts).length !== elementNames.length || elementNames.some(n => !Object.hasOwn(part.parts!, n)))
+      Object.keys(part.parts ?? {}).length !== elementNames.length || elementNames.some(n => !Object.hasOwn(part.parts!, n)))
     return refuse('element-join-unqualified');
   if ((part.content || part.textByProp) && runs.length !== 1)
     return refuse('binding-spans-elements');
   const children: Record<string, Part> = {};
   let textIndex = 0;
   for (const item of ordered) {
-    if ('element' in item) { children[item.element] = part.parts[item.element]; continue; }
+    if ('element' in item) { children[item.element] = part.parts![item.element]; continue; }
     let childName = `${name}-text-${++textIndex}`;
     while (usedNames.has(childName)) childName += '-run';
     usedNames.add(childName);

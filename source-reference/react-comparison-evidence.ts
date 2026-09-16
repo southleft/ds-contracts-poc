@@ -51,6 +51,6 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
     (node.children ?? []).forEach((child, i) => walk(child, [...path, i]));
   }; walk(variant.spec, []);
   if (paths.length !== 1) throw Error('react-comparison-root-slot-ambiguous');
-  return { source: { ...original.source, evidenceRevision: revisionOf(request) }, content,
+  return { source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.version === 2 ? composition!.content : content,
     comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0], ...(request.version === 2 ? { instances: composition!.references } : {}) } };
 }

@@ -1,4 +1,5 @@
 import { readReactCompositionEvidence } from './react-composition-evidence.js';
+import { restoreReactOwnership } from './react-ownership-restore.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
@@ -183,6 +184,23 @@ export function createReactReferenceService(
     string,
     ReturnType<typeof startReactOwnership>
   >();
+  const savedOwnership = (current: ReactReference) => {
+    let job = ownershipJobs.get(current.id);
+    if (!job && native) {
+      try {
+        const jobs = native().jobs;
+        const pinned = jobs.listReact(current.id, 'root').filter(row => row.operation.sourceCurrent)
+          .map(row => jobs.reactRequest(row.operation.id));
+        const archives = new Set(pinned.map(r => JSON.stringify([r.ownership, r.inventorySha256])));
+        // Do not let recency or filesystem order choose between different baselines.
+        if (archives.size === 1) {
+          job = restoreReactOwnership(repoRoot, current, pinned[0]);
+          ownershipJobs.set(current.id, job);
+        }
+      } catch { /* Leave unavailable; never start an implicit observation. */ }
+    }
+    return job;
+  };
   let loading: Promise<ReactReference> | undefined;
   const json = (res: ServerResponse, status: number, body: unknown) => {
     res.statusCode = status;
@@ -386,7 +404,7 @@ export function createReactReferenceService(
           sourceFiles: Object.keys(reference.files).length,
           qualification: "unqualified",
           validation: validations.get(reference.id)?.report() ?? null,
-          ownership: ownershipJobs.get(reference.id)?.report() ?? null,
+          ownership: savedOwnership(reference)?.report() ?? null,
           cases: reactReferenceCases.map((c) => ({
             ...c,
             url: `/api/source-reference/react/${reference!.id}?case=${c.id}`,
@@ -523,7 +541,7 @@ export function createReactReferenceService(
         }
         return;
       }
-      const job = ownershipJobs.get(reference.id);
+      const job = savedOwnership(reference);
       if (req.method === "GET" && job) {
         json(res, 200, job.report());
         return;

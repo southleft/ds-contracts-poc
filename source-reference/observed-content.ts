@@ -35,10 +35,12 @@ export interface ObservedContentDraft {
   limitations: string[];
 }
 
-export function compileObservedContent(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence, includeSourcePaths = false): ObservedContentDraft {
+export function compileObservedContent(tree: CapturedNode, fonts: TextFontEvidence, svg?: SvgViewportEvidence,
+  includeSourcePaths = false, preserveTextBoxes: string[] = []): ObservedContentDraft {
   const out: ObservedContentDraft = {
     version: 1, status: 'refused', qualification: 'observed-comparison-content-only', acceptedContract: null,
-    nativeQualification: 'unqualified', inputRevision: revisionOf({ tree, fonts, ...(svg ? { svg } : {}) }), treeRevision: revisionOf(tree), fontsRevision: revisionOf(fonts),
+    nativeQualification: 'unqualified', inputRevision: revisionOf({ tree, fonts, ...(svg ? { svg } : {}),
+      ...(preserveTextBoxes.length ? { preserveTextBoxes } : {}) }), treeRevision: revisionOf(tree), fontsRevision: revisionOf(fonts),
     receipts: [], residuals: [], problems: [], limitations: [
       'comparison-snapshot-not-reusable-anatomy', 'nested-component-identity-not-projected',
       'sample-geometry-not-a-reusable-constraint', 'native-font-metrics-not-verified',
@@ -57,7 +59,7 @@ export function compileObservedContent(tree: CapturedNode, fonts: TextFontEviden
     const space: PropSpace = { contract, axes: [], presence: new Map(), stateProps: [], enumeration, baseComboKey: key, baseAxisValues: {}, heldFixed: [] };
     const comp: ComponentConfig = { name, importName: name, contract: '', sampleText: '', axes: [] };
     const sweep = { captures: [{ combo: `${name}:${key}`, interaction: 'default', root }] } as SweepResult;
-    Object.assign(out, compileObservedContentSweep(space, comp, sweep, [], includeSourcePaths));
+    Object.assign(out, compileObservedContentSweep(space, comp, sweep, [], includeSourcePaths, preserveTextBoxes));
     if (!out.problems.length) out.status = 'compiled-comparison-draft';
   } catch (error) {
     out.problems.push(error instanceof Error ? error.message : 'observed-content-compiler-failed');
@@ -84,13 +86,14 @@ export function prepareObservedContentTree(tree: CapturedNode, fonts: TextFontEv
 /** Shared anatomy/paint compiler. The caller authenticates and enumerates the
  * input domain; this routine does not turn samples into a supported source API. */
 export function compileObservedContentSweep(space: PropSpace, comp: ComponentConfig, sweep: SweepResult,
-  rootSizing: string[] = [], includeSourcePaths = false) {
+  rootSizing: string[] = [], includeSourcePaths = false, preserveTextBoxes: string[] = []) {
   const result: Pick<ObservedContentDraft, 'receipts' | 'problems' | 'residuals' | 'contract' | 'tokens' | 'assets' | 'component' | 'sourcePaths'> = {
     receipts: [], problems: [], residuals: [],
   };
   const name = comp.name;
   const aligned = alignSweep(sweep, comp, space, '');
-  const promoted = promoteAnatomy(space, comp, aligned.union, 'observed-content');
+  const promoted = promoteAnatomy(space, comp, aligned.union, 'observed-content',
+    { preserveTextBoxes: new Set(preserveTextBoxes) });
   result.receipts = [...promoted.receipts];
   result.problems.push(...promoted.refusals);
   // A reconstructed viewBox is not the authored SVG viewport. Preserve the

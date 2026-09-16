@@ -30,7 +30,13 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     throw Error('react-composition-content-unavailable');
   const contentDir = path.join(repo, 'private/react-content-inspections', parentId, saved.id);
   const read = (name: string) => JSON.parse(readFileSync(path.join(contentDir, name), 'utf8'));
-  const content = compileObservedContent(original.captured.tree, read('text-fonts.json'), read('svg-viewports.json'), true);
+  const sourceNodes = new Map(flatten(original.captured.tree).map(n => [n.path, n.node]));
+  // Keep the observed flex box around a source component's anonymous text item.
+  // This does not infer a text-only public children API or a block/grid rule.
+  const boundaries = row.ownership.components.flatMap(c => c.roots).filter(p => p !== '' &&
+    ['flex', 'inline-flex'].includes(sourceNodes.get(p)?.style.display ?? ''));
+  const content = compileObservedContent(original.captured.tree, read('text-fonts.json'), read('svg-viewports.json'), true,
+    [...new Set(boundaries)].sort());
   const mains: ReactCompositionMain[] = [];
   const sources = row.ownership.components.filter(c => !c.roots.includes('')).map(c => JSON.stringify(c.source));
   for (const operation of jobs.listReact(reference.id, 'root').sort((a, b) => a.operation.id.localeCompare(b.operation.id))) {

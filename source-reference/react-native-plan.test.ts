@@ -1,3 +1,4 @@
+import { restoreReactOwnership } from './react-ownership-restore.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { reactInitialNativeReservation, isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { compileReactInitialContract } from './react-initial-contract.js';
@@ -310,7 +311,15 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   writeFileSync(sealPath, JSON.stringify({ version: 1, files: inventoryEvidence(dir) }));
   const request = selectReactNativeRequest(repo, report, 'button-default');
   assert.equal(readReactNativeEvidence(repo, reference, request).source.revision, 'sha256:'+reference.id);
+  const restored = restoreReactOwnership(repo, reference, request);
+  assert.deepEqual(restored.report(), JSON.parse(JSON.stringify(report)));
+  assert.equal(restored.dir, dir);
+  const view = restored.report(); view.rows[0].matched = false;
+  assert.equal(restored.report().rows[0].matched, true, 'views cannot mutate the restored archive');
   writeFileSync(file, 'changed source');
+  assert.equal(restored.report().sourceUnchanged, false);
+  assert.equal(restored.report().matched, 0);
+  assert.equal(restored.report().rows[0].rootMatrix, undefined);
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
   writeFileSync(file, 'unchanged source');
   const reportPath = path.join(dir, 'report.json'), original = readFileSync(reportPath);
@@ -321,5 +330,7 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
   rmSync(path.join(dir, 'unexpected.txt'));
   writeFileSync(sealPath, '{}');
+  assert.equal(restored.report().matched, 0);
+  assert.equal(restored.report().problem, 'react-ownership-evidence-changed');
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
 });
