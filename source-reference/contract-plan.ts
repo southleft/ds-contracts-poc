@@ -1,3 +1,8 @@
+import {
+  referenceIdentitySchema,
+  semanticReplayMatches,
+  type LifecycleIdentityPolicy,
+} from "./lifecycle-identity.js";
 import { createHash } from "node:crypto";
 import { z } from "zod";
 import type {
@@ -29,6 +34,8 @@ export interface ContractPlanInput {
    * source checkout validation, or parent/supplement authorization occurs here. */
   source: { revision: string; manifestPath: string; manifestSha256: string };
   declaration: CemDeclarationFacts;
+  /** Derived by the host from hash-verified source, never from the receipt. */
+  identityPolicy?: LifecycleIdentityPolicy;
   declarationProblems: CemProblem[];
   observations: Array<{
     story: string;
@@ -139,6 +146,7 @@ const assigned: z.ZodType<AssignedContent> = z.lazy(() =>
 );
 const observation = z
   .object({
+    referenceIdentity: referenceIdentitySchema.optional(),
     problems: z.array(z.string()),
     hostTag: z.string().min(1),
     hostCount: z.number().int().nonnegative(),
@@ -565,7 +573,7 @@ export function planSourceContract(
         "observation-hash-mismatch",
       );
       requireEvidence(
-        source.observationSha256 === semanticHash(replay),
+        semanticReplayMatches(source.observation, replay, input.identityPolicy),
         "semantic-replay-mismatch",
       );
       requireEvidence(

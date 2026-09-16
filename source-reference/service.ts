@@ -1,3 +1,5 @@
+import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
+import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
 import {
@@ -589,6 +591,33 @@ export function createReferenceService(
             });
           }
         }
+        // Re-derive any identity policy from the authenticated local source
+        // graph. Never trust the receipt to authorize its own ID renaming.
+        const identityProgram = loadRecordedSourceProgram({
+          checkout,
+          revision: final.sourceRevision,
+          manifestPath,
+          manifestSha256,
+          sourceHashes: final.sourceHashes,
+          modulePath: declaration.modulePath,
+          className: declaration.className,
+        });
+        const identityEntry =
+          identityProgram.status !== "refused" &&
+          identityProgram.modules.find(
+            (m) => m.path === identityProgram.entryPath,
+          );
+        const identityPolicy = identityEntry
+          ? deriveLifecycleIdentityPolicy(
+              {
+                source: identityEntry.text,
+                sourceSha256: identityEntry.sha256,
+                modulePath: declaration.modulePath,
+                className: declaration.className,
+              },
+              declaration,
+            )
+          : undefined;
         plans.push(
           planSourceContract({
             component: {
@@ -602,6 +631,7 @@ export function createReferenceService(
               manifestSha256,
             },
             declaration,
+            identityPolicy,
             declarationProblems: manifest.problems,
             observations,
           }),
@@ -966,6 +996,14 @@ export function createReferenceService(
         checkoutAvailable: existsSync(
           path.join(checkout, "libs/al-web-components/.storybook/preview.ts"),
         ),
+        runs: [...jobs.values()]
+          .filter((job) => !job.parent)
+          .map(({ id, state, startedAt, completedAt }) => ({
+            id,
+            state,
+            startedAt,
+            completedAt,
+          })),
         latest: [...jobs.values()].filter((job) => !job.parent).at(-1)
           ? snapshotWithSupplement(
               [...jobs.values()].filter((job) => !job.parent).at(-1)!,

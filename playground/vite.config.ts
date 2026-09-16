@@ -67,6 +67,7 @@ export default defineConfig({
   },
   server: {
     port: 5181,
+    strictPort: true,
     // Vite runs CORS before configureServer middleware. Let the source service
     // handle preflights for its two capability-protected plugin endpoints; keep
     // Vite's default origin policy for every other resource.

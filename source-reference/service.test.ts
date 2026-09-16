@@ -393,7 +393,17 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
   await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
   const base = `http://127.0.0.1:${(server.address() as { port: number }).port}/api/source-reference`;
   try {
-    const latest = (await (await fetch(base)).json()).latest;
+    const listing = await (await fetch(base)).json();
+    const latest = listing.latest;
+    assert.ok(listing.runs.some((run: { id: string }) => run.id === id(1)));
+    assert.ok(listing.runs.some((run: { id: string }) => run.id === id(2)));
+    assert.ok(
+      listing.runs.every((run: Record<string, unknown>) =>
+        Object.keys(run).every((key) =>
+          ["id", "state", "startedAt", "completedAt"].includes(key),
+        ),
+      ),
+    );
     assert.equal(latest.id, id(2));
     assert.equal(latest.state, "complete");
     assert.equal(latest.recovered, true);

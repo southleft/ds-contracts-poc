@@ -1,3 +1,4 @@
+import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
 import { createHash } from "node:crypto";
 import { lstatSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -299,6 +300,7 @@ export function loadBindingEvidence(
       manifestSha256,
     },
     declaration,
+    identityPolicy: deriveLifecycleIdentityPolicy(source, declaration),
     declarationProblems: manifest.problems,
     observations,
   });

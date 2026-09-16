@@ -341,6 +341,9 @@ function RenderedBindingTrace({ trace }: { trace: BindingJobSnapshot }) {
 export function Sources() {
   const [origin, setOrigin] = useState("http://127.0.0.1:6017");
   const [job, setJob] = useState<Job | null>(null);
+  const [runs, setRuns] = useState<
+    Array<Pick<Job, "id" | "state" | "startedAt" | "completedAt">>
+  >([]);
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -374,6 +377,7 @@ export function Sources() {
       .then((data) => {
         if (alive) {
           setReady(true);
+          setRuns(data.runs ?? []);
           setJob(data.latest);
           if (!data.checkoutAvailable)
             setError(
@@ -424,6 +428,36 @@ export function Sources() {
       clearInterval(timer);
     };
   }, [job?.id, polling]);
+  useEffect(() => {
+    if (!job) return;
+    const summary = {
+      id: job.id,
+      state: job.state,
+      startedAt: job.startedAt,
+      completedAt: job.completedAt,
+    };
+    setRuns((previous) =>
+      previous.some((run) => run.id === job.id)
+        ? previous.map((run) => (run.id === job.id ? summary : run))
+        : [...previous, summary],
+    );
+  }, [job?.id, job?.state, job?.startedAt, job?.completedAt]);
+  async function selectRun(id: string) {
+    setBusy(true);
+    setError("");
+    setNativeConnection("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/${encodeURIComponent(id)}`,
+      );
+      if (!response.ok) throw Error("The selected source run is unavailable.");
+      setJob(await response.json());
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Source run unavailable.");
+    } finally {
+      setBusy(false);
+    }
+  }
   async function nativeAction(
     action: "connection" | "start" | "retry-observation",
   ) {
@@ -639,6 +673,27 @@ export function Sources() {
         source files or Figma files are changed. Other libraries are not yet
         supported by this screen.
       </p>
+      {runs.length > 0 && (
+        <label className="source-run-select">
+          Recorded source run{" "}
+          <select
+            value={job?.id ?? ""}
+            disabled={busy || capturing}
+            onChange={(event) => void selectRun(event.target.value)}
+          >
+            {[...runs].reverse().map((run) => (
+              <option key={run.id} value={run.id}>
+                {run.startedAt || run.completedAt
+                  ? new Date(
+                      (run.startedAt ?? run.completedAt)!,
+                    ).toLocaleString()
+                  : "Time not recorded"}{" "}
+                · {run.state} · {run.id.slice(0, 8)}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       {error && <p role="alert">{error}</p>}
       {job && (
         <>
