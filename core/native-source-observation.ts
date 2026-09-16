@@ -197,7 +197,7 @@ try {
   const page = await figma.getNodeByIdAsync(EXPECTED.pageId); guard();
   if (!page || page.type !== 'PAGE' || page.id !== EXPECTED.pageId) throw Error('native-source-readback-page-missing');
   const firstTokens = await tokenRead(), first = await read(page);
-  const images = [];
+  const images = []; let imageBytes = 0;
   ${
     captureImages
       ? `for (const c of EXPECTED.comparisons) {
@@ -205,7 +205,9 @@ try {
     if (!node || node.type !== 'INSTANCE' || typeof node.exportAsync !== 'function' || typeof figma.base64Encode !== 'function')
       throw Error('native-source-readback-export-unavailable');
     const png = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } }); guard();
-    if (!png || png.length > 1024 * 1024) throw Error('native-source-readback-export-invalid');
+    if (!png || !png.length) throw Error('native-source-readback-export-invalid');
+    imageBytes += png.length;
+    if (imageBytes > 1024 * 1024) throw Error('native-source-readback-image-byte-limit');
     images.push({ caseId: c.id, nodeId: c.instanceId, pngBase64: figma.base64Encode(png) });
   }`
       : ""
@@ -216,6 +218,18 @@ try {
   if (stable(first) !== stable(second) || stable(firstTokens) !== stable(secondTokens)) throw Error('native-source-readback-changed-during-observation');
   result.nodes = second; result.tokens = secondTokens; result.images = images;
   result.status = 'native-readback-collected';
+  // Bound the actual UTF-8 payload and leave room for envelope/journal fields.
+  let resultBytes = 0;
+  for (const char of JSON.stringify(result, null, 2)) {
+    const cp = char.codePointAt(0);
+    resultBytes += cp <= 127 ? 1 : cp <= 2047 ? 2 : cp <= 65535 ? 3 : 4;
+    // The host's pretty-printed envelope indents every nested result line.
+    if (cp === 10) resultBytes += 2;
+  }
+  if (resultBytes > 3 * 1024 * 1024) {
+    delete result.nodes; delete result.tokens; delete result.images;
+    result.status = 'refused'; throw Error('native-source-readback-result-byte-limit');
+  }
 } catch (error) { result.problems = [error && error.message ? error.message : 'native-source-readback-api-failed']; }
 return result;
 `;

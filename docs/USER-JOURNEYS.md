@@ -57,6 +57,8 @@ Sorting, pagination, keyboard navigation and data fetching are not established b
 
 If a readback is interrupted or refuses the observed state, choose **Retry readback** after addressing the reported issue. The journal retires the old observation and creates a new read-only attempt; this never repeats component or token creation. **Prepare connection** remains available if the plugin needs to reconnect.
 
+**Inspect the exports:** after component readback, Sources shows each native comparison instance beside its recorded source case when the source evidence is still current. Exports are retained privately and tied to the readback attempt; retrying readback withdraws the previous images from the current view. Native exports have transparent backgrounds and may use different framing from the source capture. This view is diagnostic, not a pixel score or a visual-fidelity pass. Missing, malformed or oversized exports are explicit refusals; the current local transport bounds all PNGs in one readback to 1 MiB combined and 16 million decoded pixels. These are transport limits, not component-support or fidelity thresholds.
+
 **Where this currently stops:** this connected path has API-mock and browser coverage; its actual Figma output is not yet qualified. The source candidate remains unaccepted. Native visual comparison, editability and a complete no-change repeat remain the next work. A lost creation response without a saved receipt is reported as unknown, never automatically repeated; complete interruption recovery is still unfinished.
 
 <a id="both-libraries"></a>

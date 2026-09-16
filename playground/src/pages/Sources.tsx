@@ -12,6 +12,7 @@ interface Row {
   problems: string[];
   limitations: string[];
   sourceImage: string | null;
+  sourceImageSha256?: string | null;
   replayImage: string | null;
   semanticIntake?: {
     status: string;
@@ -1359,6 +1360,87 @@ export function Sources() {
                     ))}
                   </ul>
                 </details>
+              )}
+              {job.nativeOperation?.imageObservation && (
+                <section
+                  className="native-image-observation"
+                  aria-label="Native comparison exports"
+                >
+                  <h3>Inspect native output</h3>
+                  <p>
+                    Recorded source and native instance exports. Their framing
+                    and backgrounds may differ. Visual fidelity is unqualified;
+                    these images are not a pixel comparison or a pass.
+                  </p>
+                  {job.nativeOperation.imageObservation.images.map((image) => {
+                    const [run, story] = image.caseId.split(":");
+                    const source = allRows.find(
+                      (row) =>
+                        row.story === story &&
+                        row.sourceImage ===
+                          `/api/source-reference/${run}/${story}/source.png`,
+                    );
+                    const sourceUrl =
+                      job.nativeOperation!.sourceCurrent &&
+                      source?.status === "valid" &&
+                      source.sourceImageSha256
+                        ? `${source.sourceImage}?sha256=${source.sourceImageSha256}`
+                        : null;
+                    const nativeUrl = `/api/source-reference/native/${job.nativeOperation!.id}/images/${job.nativeOperation!.imageObservation!.attemptId}/${image.sha256}.png`;
+                    return (
+                      <details key={image.caseId}>
+                        <summary>
+                          {story || image.caseId} · {image.width} ×{" "}
+                          {image.height} native pixels
+                        </summary>
+                        <div className="native-image-pair">
+                          <figure>
+                            <figcaption>Recorded source</figcaption>
+                            {sourceUrl ? (
+                              <a
+                                href={sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <img
+                                  src={sourceUrl}
+                                  alt={`Recorded source: ${story}`}
+                                />
+                              </a>
+                            ) : (
+                              <p>
+                                Matching current source evidence is unavailable.
+                                The native export is retained for inspection.
+                              </p>
+                            )}
+                          </figure>
+                          <figure>
+                            <figcaption>
+                              Native instance · unqualified
+                            </figcaption>
+                            <a
+                              href={nativeUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <img
+                                src={nativeUrl}
+                                alt={`Native comparison instance: ${story || image.caseId}`}
+                              />
+                            </a>
+                          </figure>
+                        </div>
+                      </details>
+                    );
+                  })}
+                  {job.nativeOperation.imageObservation.problems.map(
+                    (problem) => (
+                      <p key={problem}>
+                        <code>{problem}</code>
+                      </p>
+                    ),
+                  )}
+                </section>
               )}
               <p className="source-note">
                 This creates an unaccepted inspection candidate. Structural

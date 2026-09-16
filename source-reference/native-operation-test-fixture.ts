@@ -1,6 +1,7 @@
 /** State-machine fixture only. Its small synthetic plan is NOT a qualified
  * source projection; production always uses prepareVerifiedNativeOperation. */
 import vm from "node:vm";
+import { PNG } from "pngjs";
 import { revisionOf } from "../core/contract-provenance.js";
 import {
   prepareNativeTokenContext,
@@ -95,6 +96,17 @@ export function nativeFixtureHost() {
     variables = h.variables as any[],
     collections = h.collections as any[];
   figma.fileKey = SOURCE_NATIVE_FILE_KEY;
+  // Synthetic one-pixel export for transport tests only. Never native evidence.
+  const pixel = PNG.sync.write({
+    width: 1,
+    height: 1,
+    data: Buffer.from([255, 0, 255, 255]),
+  } as PNG);
+  figma.base64Encode = (bytes: Uint8Array) =>
+    Buffer.from(bytes).toString("base64");
+  Object.getPrototypeOf(figma.currentPage).exportAsync = async function () {
+    return new Uint8Array(pixel);
+  };
   const collection = figma.variables.createVariableCollection.bind(
     figma.variables,
   );

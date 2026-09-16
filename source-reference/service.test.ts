@@ -407,6 +407,16 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
         404,
         asset,
       );
+    const pinnedImage = `${base}/${id(1)}/${rows[0].story}/source.png?sha256=${createHash("sha256").update(imageBytes).digest("hex")}`;
+    assert.equal((await fetch(pinnedImage)).status, 200);
+    assert.equal(
+      (
+        await fetch(
+          `${base}/${id(1)}/${rows[0].story}/source.png?sha256=${"0".repeat(64)}`,
+        )
+      ).status,
+      404,
+    );
     rmSync(image);
     symlinkSync(path.join(outside, "measurement.json"), image);
     assert.equal(

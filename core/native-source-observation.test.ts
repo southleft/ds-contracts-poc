@@ -333,6 +333,7 @@ test("reader refuses changes during an async observation", async () => {
 
 test("reader refuses file switches and unavailable image export", async () => {
   const f = await observedFixture();
+  f.figma.base64Encode = undefined;
   const exported = await f.run(emitNativeSourceReadbackScript(f.input, true));
   assert.equal(exported.status, "refused");
   assert.deepEqual(exported.problems, [

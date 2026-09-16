@@ -259,3 +259,33 @@
     padding: 6px;
   }
 }
+
+.native-image-observation {
+  margin-block: 1.25rem;
+}
+.native-image-observation details {
+  margin-block: 0.75rem;
+}
+.native-image-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.native-image-pair figure {
+  min-width: 0;
+  margin: 0;
+  overflow: auto;
+}
+.native-image-pair figcaption {
+  margin-block: 0.5rem;
+}
+.native-image-pair img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 640px) {
+  .native-image-pair {
+    grid-template-columns: 1fr;
+  }
+}

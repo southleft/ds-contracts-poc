@@ -14,8 +14,13 @@ import {
   readdirSync,
   readFileSync,
   writeFileSync,
+  unlinkSync,
 } from "node:fs";
 import path from "node:path";
+import {
+  collectNativeImages,
+  type NativeImageObservation,
+} from "./native-operation-images.js";
 import { canonicalJson, revisionOf } from "../core/contract-provenance.js";
 import {
   verifyNativeTokenContextReceipt,
@@ -119,6 +124,7 @@ export interface NativeOperationSnapshot {
     status: "supported-structure-observed" | "refused";
     limitations: string[];
   };
+  imageObservation?: NativeImageObservation & { attemptId: string };
   pendingPhase?: NativeOperationPhase;
   nativeOutcome?: "unknown";
   sourceCurrent: boolean;
@@ -161,6 +167,7 @@ interface State {
   identity?: NativeTokenIdentity;
   componentCreation?: Record<string, any>;
   componentObservation?: ReturnType<typeof verifyNativeSourceReadback>;
+  imageReadback?: NativeOperationResult;
   pending?: NativeOperationCommand;
   problems: string[];
   dispatchedCreate: boolean;
@@ -325,7 +332,7 @@ export function createNativeOperationJobs(
       closeSync(fd);
     }
   };
-  const write = (file: string, value: string) => {
+  const write = (file: string, value: string | Buffer) => {
     const fd = openSync(file, "wx", 0o600);
     try {
       writeFileSync(fd, value);
@@ -811,6 +818,7 @@ export function createNativeOperationJobs(
         attempts.add(c.attemptId);
         nonces.add(c.nonce);
         delete state.componentObservation;
+        delete state.imageReadback;
         state.pending = c;
         state.phase = "awaiting-native-result";
         state.problems = [];
@@ -837,6 +845,8 @@ export function createNativeOperationJobs(
           outcome.phase === "components-created"
         )
           state.componentCreation = structuredClone(event.envelope.result);
+        if (state.pending.phase === "component-readback")
+          state.imageReadback = event.envelope;
         Object.assign(state, outcome);
         delete state.pending;
       } else if (event.kind === "abandon-observation") {
@@ -850,6 +860,7 @@ export function createNativeOperationJobs(
         const phase = state.pending!.phase;
         delete state.pending;
         delete state.componentObservation;
+        delete state.imageReadback;
         state.phase =
           phase === "component-readback"
             ? "component-observation-refused"
@@ -901,53 +912,100 @@ export function createNativeOperationJobs(
     if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("evidence-changed-during-validation");
   };
+  // The journal is authoritative. Re-derive exports from its current readback;
+  // old exports remain private history and cannot survive a retry as current.
+  const imageArtifacts = (loaded: Loaded) => {
+    const envelope = loaded.state.imageReadback;
+    if (!envelope) return null;
+    const collected = collectNativeImages(
+      componentObservationInput(loaded.state, loaded.plan),
+      envelope.result,
+    );
+    if (collected.bytes.size) {
+      const directory = path.join(dir(loaded.header.id), "images");
+      ensure(directory, true);
+      for (const [hash, png] of collected.bytes) {
+        const file = path.join(directory, `${hash}.png`);
+        if (!present(file)) {
+          // Publish a complete fsynced export atomically. A crash may leave
+          // a private temporary file; it cannot poison the canonical hash path.
+          const temporary = path.join(
+            directory,
+            `${hash}-${randomUUID()}.pending`,
+          );
+          write(temporary, png);
+          try {
+            linkSync(temporary, file);
+          } catch (error) {
+            if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
+          } finally {
+            unlinkSync(temporary);
+            syncDir(directory);
+          }
+        }
+        if (!bytes(file).equals(png)) fail("image-artifact-changed");
+      }
+    }
+    return { ...collected, attemptId: envelope.attemptId };
+  };
   const snapshot = (
     loaded: Loaded,
     sourceCurrent: boolean,
-  ): NativeOperationSnapshot => ({
-    id: loaded.header.id,
-    operation: "source-native-inspection",
-    phase: loaded.state.phase,
-    ...(loaded.state.pending
-      ? {
-          pendingPhase: loaded.state.pending.phase,
-          nativeOutcome: "unknown" as const,
-        }
-      : {}),
-    ...([
-      "creation-invalid",
-      "component-creation-invalid",
-      "component-partial-allocation",
-    ].includes(loaded.state.phase)
-      ? { nativeOutcome: "unknown" as const }
-      : {}),
-    ...(loaded.state.componentObservation
-      ? {
-          structuralObservation: {
-            scope: "supported-structure" as const,
-            status: loaded.state.componentObservation.status,
-            limitations: [...loaded.state.componentObservation.limitations],
-          },
-        }
-      : {}),
-    sourceCurrent,
-    acceptedContract: null,
-    nativeQualification: "unqualified",
-    counters: {
-      variants: loaded.plan.plan.component.variants.length,
-      sourceCases: loaded.plan.plan.samples.cases.length,
-      loweredCases: loaded.plan.plan.samples.cases.filter(
-        (c) => c.status === "lowered",
-      ).length,
-      variables: loaded.plan.plan.tokenPreparation.variables.length,
-    },
-    problems: [
-      ...loaded.state.problems,
-      ...(!sourceCurrent
-        ? ["native-operation-source-evidence-unavailable"]
-        : []),
-    ],
-  });
+  ): NativeOperationSnapshot => {
+    const images = imageArtifacts(loaded);
+    return {
+      id: loaded.header.id,
+      operation: "source-native-inspection",
+      phase: loaded.state.phase,
+      ...(loaded.state.pending
+        ? {
+            pendingPhase: loaded.state.pending.phase,
+            nativeOutcome: "unknown" as const,
+          }
+        : {}),
+      ...([
+        "creation-invalid",
+        "component-creation-invalid",
+        "component-partial-allocation",
+      ].includes(loaded.state.phase)
+        ? { nativeOutcome: "unknown" as const }
+        : {}),
+      ...(loaded.state.componentObservation
+        ? {
+            structuralObservation: {
+              scope: "supported-structure" as const,
+              status: loaded.state.componentObservation.status,
+              limitations: [...loaded.state.componentObservation.limitations],
+            },
+          }
+        : {}),
+      ...(images
+        ? {
+            imageObservation: {
+              ...images.observation,
+              attemptId: images.attemptId,
+            },
+          }
+        : {}),
+      sourceCurrent,
+      acceptedContract: null,
+      nativeQualification: "unqualified",
+      counters: {
+        variants: loaded.plan.plan.component.variants.length,
+        sourceCases: loaded.plan.plan.samples.cases.length,
+        loweredCases: loaded.plan.plan.samples.cases.filter(
+          (c) => c.status === "lowered",
+        ).length,
+        variables: loaded.plan.plan.tokenPreparation.variables.length,
+      },
+      problems: [
+        ...loaded.state.problems,
+        ...(!sourceCurrent
+          ? ["native-operation-source-evidence-unavailable"]
+          : []),
+      ],
+    };
+  };
   const current = (loaded: Loaded) => {
     try {
       authenticate(loaded);
@@ -1151,6 +1209,7 @@ export function createNativeOperationJobs(
       // observation never authorizes admission, allocation or baseline changes.
       script = emitNativeSourceReadbackScript(
         componentObservationInput(loaded.state, loaded.plan),
+        true,
       );
     } else fail("phase-invalid");
     const command: NativeOperationCommand = {
@@ -1174,7 +1233,8 @@ export function createNativeOperationJobs(
     envelope: NativeOperationResult,
   ): NativeOperationSnapshot => {
     const serialized = encode(envelope);
-    if (serialized.length > 4 * 1024 * 1024) fail("result-too-large");
+    if (Buffer.byteLength(serialized) > 4 * 1024 * 1024)
+      fail("result-too-large");
     // Validate the bytes that will actually persist, including omission of
     // undefined fields in an in-process transport's malformed response.
     envelope = JSON.parse(serialized) as NativeOperationResult;
@@ -1293,6 +1353,18 @@ export function createNativeOperationJobs(
       );
       if (event?.kind !== "dispatch" || !event.command.readOnly) return null;
       return event.command.phase;
+    },
+    image(id: string, attemptId: string, hash: string) {
+      if (!UUID.test(attemptId) || !HASH.test(hash))
+        fail("image-request-invalid");
+      const artifacts = imageArtifacts(load(id));
+      if (
+        !artifacts ||
+        artifacts.attemptId !== attemptId ||
+        !artifacts.bytes.has(hash)
+      )
+        fail("image-unavailable");
+      return Buffer.from(artifacts.bytes.get(hash)!);
     },
     /** Trusted transport only. Never include executable bytes in a public
      * snapshot. Reauthenticate write inputs immediately before first delivery. */

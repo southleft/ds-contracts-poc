@@ -434,6 +434,12 @@ export function createReferenceService(
                     : "awaiting-source-integrity",
             }
           : null,
+        sourceImageSha256:
+          evidenceValid &&
+          data?.qualified &&
+          /^[a-f0-9]{64}$/.test(data?.source?.sha256 ?? "")
+            ? data.source.sha256
+            : null,
         sourceImage: evidenceFile(job.id, story, "source.png")
           ? `/api/source-reference/${job.id}/${story}/source.png`
           : null,
@@ -804,6 +810,27 @@ export function createReferenceService(
       json(res, 403, { error: "Same-origin access required." });
       return;
     }
+    const nativeImage =
+      /^native\/([a-f0-9-]+)\/images\/([a-f0-9-]+)\/([a-f0-9]{64})\.png$/.exec(
+        route,
+      );
+    if (req.method === "GET" && nativeImage) {
+      try {
+        const png = nativeJobs.image(
+          nativeImage[1],
+          nativeImage[2],
+          nativeImage[3],
+        );
+        res.setHeader("Content-Type", "image/png");
+        res.setHeader("Cache-Control", "no-store");
+        res.setHeader("X-Content-Type-Options", "nosniff");
+        res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+        res.end(png);
+      } catch {
+        json(res, 404, { error: "Current native image unavailable." });
+      }
+      return;
+    }
     const nativeAction =
       /^([a-f0-9-]+)\/button-native-(connection|start|retry-observation)$/.exec(
         route,
@@ -1155,9 +1182,19 @@ export function createReferenceService(
       ) {
         const file = evidenceFile(id, story, asset);
         if (file) {
+          const png = readFileSync(file);
+          const expected = new URL(req.url!, host).searchParams.get("sha256");
+          if (
+            expected !== null &&
+            (!/^[a-f0-9]{64}$/.test(expected) ||
+              createHash("sha256").update(png).digest("hex") !== expected)
+          ) {
+            json(res, 404, { error: "Recorded source image changed." });
+            return;
+          }
           res.setHeader("Content-Type", "image/png");
           res.setHeader("Cache-Control", "no-store");
-          res.end(readFileSync(file));
+          res.end(png);
           return;
         }
       }
