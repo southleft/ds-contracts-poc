@@ -4,7 +4,7 @@ import {enumerate} from '../extract/computed/lib.js';
 import type {ReactRootVisual} from './react-root-visual.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
+import {mkdirSync,mkdtempSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import path from 'node:path';
 import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
@@ -22,6 +22,7 @@ import {flattenTokens} from '../core/tokens.js';
 import {mountGenerated,generatedTypeErrors} from '../core/react-test-runtime.js';
 
 for(const defaulted of [true,false])test(`coupled source properties preserve typed React/native combinations with ${defaulted?'a declared default':'omission as its own plane'}`,async()=>{
+ mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
  const dir=mkdtempSync(path.join(process.cwd(),'private/root-matrix-fixture-')),browser=await chromium.launch();
  try{
   const source=`import React from 'react';
