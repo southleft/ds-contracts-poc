@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import vm from 'node:vm';
+import { createFigmaMock, type MockNode } from '../scripts/plugin-engine-mock-figma.mjs';
 import { chromium } from 'playwright-core';
 import { ContractSchema, validateContract, type Contract } from './index.js';
 import { proposeFromCode } from './propose-code.js';
@@ -51,8 +53,9 @@ test('source defaults belong to the component props across supported declaration
       ${declaration}
       export function Sibling({ label = 'Wrong sibling', disabled = true }: Props) { return <button>{label}</button>; }
     ` }, { tokens: [] });
-    const subject = result.proposals.find(p => p.proposal.contract.name === 'Subject')?.proposal.contract;
-    assert.ok(subject, declaration);
+    const proposed = result.proposals.find(p => p.proposal.contract.name === 'Subject')?.proposal.contract;
+    assert.ok(proposed, declaration);
+    const subject = ContractSchema.parse(proposed);
     assert.equal(subject.props.find(p => p.name === 'label')?.default, 'Own', declaration);
     assert.equal(subject.props.find(p => p.name === 'disabled')?.default, false, declaration);
   }
@@ -132,4 +135,58 @@ test('native boolean VARIANT forwarding uses real booleans and preserves an omit
   const contracts = new Map<string, Contract>([...ctx.contracts, [contract.id, contract]]);
   const data = createFigmaEngine(ctx).compileComponentData(contract, contracts);
   assert.deepEqual(data.variants.map(v => v.spec.children![0].depProps), [{}, { Disabled: false }, { Disabled: true }]);
+});
+
+interface ComposedMockNode extends MockNode {
+  children: ComposedMockNode[];
+  isExposedInstance: boolean;
+  exposedInstances: ComposedMockNode[];
+  componentProperties: Record<string, { type: string; value: unknown }>;
+  componentPropertyDefinitions: Record<string, unknown>;
+  createInstance(): ComposedMockNode;
+  remove(): void;
+}
+
+test('native composed components expose child controls on create, amend and no-op repeat', async () => {
+  for (const variantSet of [false, true]) {
+    const { parent, child, ctx } = family();
+    parent.props = variantSet ? [{ name: 'size', type: { enum: ['small', 'large'] }, default: 'small',
+      bindings: { code: { prop: 'size' }, figma: { kind: 'VARIANT', property: 'Size', values: { small: 'Small', large: 'Large' } } } }] : [];
+    const part = Object.values(parent.anatomy.root.parts!)[0];
+    part.component!.props = { label: 'Composed label', disabled: false };
+    const engine = createFigmaEngine(ctx);
+    assert.equal(engine.compileComponentData(parent, ctx.contracts).nestedPropertyControls, 1);
+    assert.equal(engine.compileComponentData(child, ctx.contracts).nestedPropertyControls, undefined);
+    const { figma, root } = createFigmaMock();
+    const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 });
+    await run(engine.buildComponentScript(child, ctx.contracts));
+    await run(engine.buildComponentScript(parent, ctx.contracts));
+    const target = root.findOne(n => ['COMPONENT', 'COMPONENT_SET'].includes(n.type) && n.getSharedPluginData('ds_contracts', 'contractId') === parent.id) as ComposedMockNode | null;
+    assert.ok(target);
+    const inspect = () => {
+      const components = variantSet ? target.children : [target];
+      for (const component of components) {
+        const nested = component.findOne(n => n.type === 'INSTANCE');
+        assert.ok(nested);
+        assert.equal(nested.isExposedInstance, true);
+        const instance = component.createInstance();
+        try {
+          assert.equal(instance.exposedInstances.length, 1);
+          const props = instance.exposedInstances[0].componentProperties;
+          assert.equal(Object.entries(props).find(([k]) => k.split('#')[0] === 'Label')?.[1].value, 'Composed label');
+          assert.equal(Object.entries(props).find(([k]) => k.split('#')[0] === 'Disabled')?.[1].value, false);
+          assert.throws(() => { instance.exposedInstances[0].isExposedInstance = false; }, /inherited/);
+        } finally { instance.remove(); }
+      }
+      assert.ok(!Object.keys(target.componentPropertyDefinitions).some(k => k.startsWith('Label#')), 'no disconnected parent Label property');
+      return components.map(c => [c.id, ...c.findAll(n => n.type === 'INSTANCE').map(n => n.id)]);
+    };
+    const before = inspect();
+    await run(engine.buildComponentScript(parent, ctx.contracts));
+    assert.deepEqual(inspect(), before, 'same compiled input leaves main and child instance identities unchanged');
+    parent.description += ' Updated description forces the existing amend path.';
+    await run(engine.buildComponentScript(parent, ctx.contracts));
+    assert.equal(inspect()[0][0], before[0][0], 'amend preserves component identity and exposes rebuilt children');
+  }
 });
