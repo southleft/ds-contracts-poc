@@ -199,6 +199,8 @@ function compositionProblem(code: string): string {
     'react-composition-main-not-verified': 'Create and independently inspect this child’s native main.',
     'react-composition-main-readback-invalid': 'Inspect the child’s native main again before using it.',
     'react-composition-held-inputs-differ': 'This usage supplies inputs outside the child’s observed property matrix.',
+    'react-composition-context-main-not-verified': 'No inspected main matches this child’s exact inputs and source styling.',
+    'react-composition-declared-size-not-preserved': 'The inspected main does not retain a source-declared dimension. Correct its sizing before composing it.',
     'react-composition-observed-root-context-differs': 'This child’s styling differs in its parent context; the standalone main cannot be reused yet.',
     'react-composition-variant-unavailable': 'The child’s observed property values have no verified native variant.',
     'react-composition-root-slot-unavailable': 'The child needs one supported editable content slot.',

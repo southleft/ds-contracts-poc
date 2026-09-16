@@ -10,6 +10,7 @@ import { reactRootStyleExclusion } from './react-root-visual.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactSourceProgram } from './react-source-program.js';
 import type { ObservedContentDraft } from './observed-content.js';
+import type { ReactSizeOrigin } from './react-style-origin.js';
 
 export interface ReactCompositionMain {
   source: ReactOwnership['components'][number]['source'];
@@ -17,6 +18,8 @@ export interface ReactCompositionMain {
   heldProps: Record<string, unknown>;
   /** Independently authenticated source observations for each emitted variant. */
   styles: Record<string, Array<Record<string, string>>>;
+  /** Authenticated declared dimensions for a single observed child root. */
+  sourceSizing?: ReactSizeOrigin[];
   input: NativeContractObservationInput;
   receipt: NativeSourceReadback;
 }
@@ -65,19 +68,38 @@ export function matchReactComposition(program: ReactSourceProgram, ownership: Re
       const paths = content.sourcePaths.filter(p => p.sourcePath === child.roots[0].path && p.type === 'frame');
       if (paths.length !== 1 || !paths[0].specPath.length) throw Error('react-composition-compiler-path-unavailable');
       const candidates = mains.filter(m => same(m.source, child.source));
-      if (candidates.length !== 1) throw Error(candidates.length ? 'react-composition-main-ambiguous' : 'react-composition-main-not-verified');
-      const main = candidates[0], observed = ownership.components.find(c => c.id === child.instanceId)!;
+      if (!candidates.length) throw Error('react-composition-main-not-verified');
+      const observed = ownership.components.find(c => c.id === child.instanceId)!;
+      // The same export can have separately observed input/context domains.
+      // Select within those domains before testing uniqueness; never normalize
+      // omitted inputs to false or infer equivalence from matching paint.
+      const rejected: string[] = [];
+      const qualified = candidates.flatMap(main => {
+        try {
+          const variantName = reactComparisonVariant(main.contract, observed.props);
+          const axes = new Set(main.contract.props.map(p => p.bindings.code.prop));
+          const held = (props: Record<string, unknown>) => Object.fromEntries(Object.entries(props)
+            .filter(([key]) => key !== 'children' && !axes.has(key)));
+          if (!same(held(main.heldProps), held(observed.props))) throw Error('react-composition-held-inputs-differ');
+          const styles = main.styles[variantName];
+          if (!styles?.length || styles.some(style => !same(rootStyle(style), rootStyle(child.roots[0].observation.style))))
+            throw Error('react-composition-observed-root-context-differs');
+          return [{ main, variantName }];
+        } catch (error) { rejected.push(error instanceof Error ? error.message : String(error)); return []; }
+      });
+      if (!qualified.length) throw Error(new Set(rejected).size === 1 ? rejected[0] : 'react-composition-context-main-not-verified');
+      if (qualified.length !== 1) throw Error('react-composition-main-ambiguous');
+      const { main, variantName } = qualified[0];
       if (verifyNativeContractReadback(main.input, main.receipt).status !== 'supported-structure-observed')
         throw Error('react-composition-main-readback-invalid');
-      const variantName = reactComparisonVariant(main.contract, observed.props);
-      const axes = new Set(main.contract.props.map(p => p.bindings.code.prop));
-      const held = (props: Record<string, unknown>) => Object.fromEntries(Object.entries(props).filter(([key]) => key !== 'children' && !axes.has(key)));
-      if (!same(held(main.heldProps), held(observed.props))) throw Error('react-composition-held-inputs-differ');
-      const styles = main.styles[variantName];
-      if (!styles?.length || styles.some(style => !same(rootStyle(style), rootStyle(child.roots[0].observation.style))))
-        throw Error('react-composition-observed-root-context-differs');
       const variants = main.input.component.variants.filter(v => v.name === variantName);
       if (variants.length !== 1) throw Error('react-composition-variant-unavailable');
+      for (const size of main.sourceSizing ?? []) {
+        if (size.status !== 'fixed') continue;
+        const actual = variants[0].spec[size.channel === 'height' ? 'fixedHeight' : 'fixedWidth'];
+        if (!size.value || !actual || normalizeValue(`${actual.px}px`) !== normalizeValue(size.value))
+          throw Error('react-composition-declared-size-not-preserved');
+      }
       const slots: number[][] = [];
       const walk = (node: typeof variants[number]['spec'], path: number[]) => {
         if (node.type === 'slot' && node.rootSlotContent) slots.push(path);

@@ -59,6 +59,7 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
       const instance = candidate!.ownership!.components.find(c => c.id === selected.instanceId)!;
       const sourceRoot = flatten(captured.tree).find(n => n.path === instance.roots[0])!;
       mains.push({ source: selected.draft.source, heldProps: selected.heldProps, contract: selected.draft.contract!,
+        sourceSizing: selected.draft.sourceSizing,
         styles: { [selected.draft.contract!.name]: [sourceRoot.node.style] }, input: observed.input, receipt: observed.receipt });
       continue;
     }
@@ -87,7 +88,11 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
   const origin = JSON.parse(readFileSync(path.join(dir, request.caseId, 'style-origin.json'), 'utf8'));
   for (const child of result.review.rows) {
     child.canPrepareMain = false;
-    if (!child.problems.includes('react-composition-main-not-verified') || operations.some(op =>
+    if (!child.problems.some(problem => [
+      'react-composition-main-not-verified', 'react-composition-held-inputs-differ',
+      'react-composition-observed-root-context-differs', 'react-composition-context-main-not-verified',
+      'react-comparison-variant-value-unqualified', 'react-comparison-variant-omission-unqualified',
+    ].includes(problem)) || operations.some(op =>
       op.kind === 'nested' && op.caseId === request.caseId && op.ownershipId === request.ownership.id && op.nestedInstanceId === child.instanceId)) continue;
     try { deriveReactChildRoot(program, row.ownership, original.captured.tree, origin, child.instanceId,
       saved.gridConstraints?.status==='observed' ? {gridConstraints:saved.gridConstraints} : undefined); child.canPrepareMain = true; }

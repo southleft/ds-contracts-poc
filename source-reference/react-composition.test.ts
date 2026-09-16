@@ -152,6 +152,9 @@ test('unresolved children remain in coverage and cannot become a flattened succe
       ['held-inputs-differ', (_x, mains) => { mains[0].heldProps.id = 'different'; }],
       ['observed-root-context-differs', (_x, mains) => { mains[0].styles.Main[0].color = 'rgb(0, 0, 0)'; }],
       ['main-readback-invalid', (_x, mains) => { mains[0].receipt.nodes = []; }],
+      ['declared-size-not-preserved', (_x, mains) => {
+        mains[0].sourceSizing = [{ channel: 'height', status: 'fixed', value: '36px', selectors: ['.height'] }];
+      }],
       ['compiler-path-unavailable', (x) => { x.content.sourcePaths = []; }],
       ['runtime-or-multiple-root-unqualified', (x) => { delete x.ownership.nodes[1].createdBy; }],
     ];
@@ -164,6 +167,35 @@ test('unresolved children remain in coverage and cannot become a flattened succe
       assert.equal(result.references.length, 0, reason);
       assert.ok(result.review.rows[0].problems.some(p => p.endsWith(reason)), JSON.stringify(result.review));
     }
+  } finally { rmSync(f.dir, { recursive: true, force: true }); }
+});
+
+test('composition selects exact observed inputs and context without boolean or omission coercion', async () => {
+  const f = await fixture();
+  try {
+    const otherInputs = structuredClone(f.main);
+    otherInputs.heldProps.disabled = false;
+    const otherContext = structuredClone(f.main);
+    otherContext.styles.Main[0].color = 'rgb(0, 0, 0)';
+    for (const mains of [[otherInputs, f.main, otherContext], [otherContext, f.main, otherInputs]]) {
+      const result = matchReactComposition(f.program, f.ownership, f.tree, f.content, mains);
+      assert.equal(result.review.status, 'ready', JSON.stringify(result.review));
+      assert.equal(result.references.length, 1);
+      assert.deepEqual(result.references[0].parent, f.main.input);
+    }
+    for (const value of [false, true, null, { kind: 'undefined' }]) {
+      const candidate = structuredClone(f.main);
+      candidate.heldProps.disabled = value;
+      const result = matchReactComposition(f.program, f.ownership, f.tree, f.content, [candidate]);
+      assert.equal(result.review.matched, 0);
+      assert.deepEqual(result.review.rows[0].problems, ['react-composition-held-inputs-differ']);
+    }
+    const missing = matchReactComposition(f.program, f.ownership, f.tree, f.content, [otherInputs, otherContext]);
+    assert.equal(missing.review.matched, 0);
+    assert.deepEqual(missing.review.rows[0].problems, ['react-composition-context-main-not-verified']);
+    const ambiguous = matchReactComposition(f.program, f.ownership, f.tree, f.content,
+      [otherInputs, f.main, structuredClone(f.main)]);
+    assert.deepEqual(ambiguous.review.rows[0].problems, ['react-composition-main-ambiguous']);
   } finally { rmSync(f.dir, { recursive: true, force: true }); }
 });
 
