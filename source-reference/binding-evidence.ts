@@ -75,9 +75,16 @@ export function isBindingEvidenceRequest(
   );
 }
 
+// Parsed URLs depend only on these exact bytes and the requested story. Keep
+// freshness/path/hash validation at the caller; never cache an evidence verdict.
+const archiveUrls = new Map<string, string>();
+
 /** These are recorded replay URLs, never arbitrary URLs supplied by the UI.
  * Do not expose archives or their URLs in public application responses. */
 export function recordedStoryUrl(harBytes: Uint8Array, story: string): string {
+  const cacheKey = sha(harBytes) + ":" + story;
+  const cached = archiveUrls.get(cacheKey);
+  if (cached) return cached;
   const har = JSON.parse(Buffer.from(harBytes).toString("utf8"));
   if (!Array.isArray(har?.log?.entries))
     throw new Error("binding-archive-invalid");
@@ -113,7 +120,11 @@ export function recordedStoryUrl(harBytes: Uint8Array, story: string): string {
   }
   if (candidates.size !== 1)
     throw new Error("binding-archive-story-not-unique");
-  return [...candidates][0];
+  const result = [...candidates][0];
+  if (archiveUrls.size >= 16)
+    archiveUrls.delete(archiveUrls.keys().next().value!);
+  archiveUrls.set(cacheKey, result);
+  return result;
 }
 
 /** Read the same fixed recorded cohort as the app admission planner. This adds

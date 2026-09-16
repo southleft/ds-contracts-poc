@@ -1,6 +1,5 @@
-import { createHash } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
-import { PNG } from "pngjs";
+import { validPngDigest } from "./png-integrity.js";
 import type { BindingEvidence } from "./binding-evidence.js";
 import type { BindingTraceReport } from "./binding-jobs.js";
 import { matchLitRender } from "./lit-render-match.js";
@@ -8,7 +7,6 @@ import { planBindingInterventions } from "./binding-plan.js";
 import { checkDependency } from "./binding-differential.js";
 import { semanticHash } from "./semantics.js";
 
-const sha = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
 const same = isDeepStrictEqual;
 const strings = (v: unknown): v is string[] =>
   Array.isArray(v) && v.every((x) => typeof x === "string");
@@ -29,26 +27,12 @@ export function validateBindingReport(
     const cached = checked.get(key);
     if (cached) return cached;
     const bytes = image(story, name);
-    // Bound allocation before decoding. This is an artifact safety limit,
-    // not a visual score, tolerance, crop, or resizing operation.
-    requireEvidence(
-      bytes.length >= 33 &&
-        bytes
-          .subarray(0, 8)
-          .equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) &&
-        bytes.readUInt32BE(8) === 13 &&
-        bytes.toString("ascii", 12, 16) === "IHDR" &&
-        bytes.readUInt32BE(16) > 0 &&
-        bytes.readUInt32BE(20) > 0 &&
-        bytes.readUInt32BE(16) * bytes.readUInt32BE(20) <= 16_777_216,
-      "image-invalid",
-    );
+    let digest: string;
     try {
-      PNG.sync.read(bytes, { checkCRC: true });
+      digest = validPngDigest(bytes);
     } catch {
       throw Error("binding-report-image-invalid");
     }
-    const digest = sha(bytes);
     checked.set(key, digest);
     return digest;
   };
