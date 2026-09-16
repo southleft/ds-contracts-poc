@@ -36,6 +36,8 @@ These steps describe the intended product workflow. The full application integra
 
 ### Stateful source intake
 
+The fresh ten-state app capture now records semantic evidence for all four Checkbox states: default, checked, indeterminate and disabled. Total API/content intake is 8/10; the disabled Button and failed Card image remain refused. Original screenshots and tree records match the previous baseline byte for byte in all ten states. This is source intake progress, not Checkbox generation.
+
 Fresh captures distinguish a narrow supported pattern of lifecycle-generated IDs from caller-supplied IDs. The source reader identifies direct `nanoid()` fallback assignments to declared string properties. An explicit lifecycle probe records unset-before/assigned-after values, and replay checks unique IDs and local label/help-text references in their actual shadow-root scopes. Every raw ID and receipt remains intact. Missing provenance, duplicate IDs, broken references, state changes and caller-ID changes remain refusals. This establishes bounded DOM-reference equivalence, not behavior or accessibility approval; historical captures are not retroactively qualified.
 
 The next stateful step is to carry Checkbox anatomy, checked/disabled state and content through candidate preparation and native generation. The current candidate adapter is still Button-specific. Checkbox interaction behavior and the source's mixed-state accessibility remain unqualified.

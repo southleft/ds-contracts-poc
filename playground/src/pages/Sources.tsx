@@ -38,6 +38,7 @@ interface Row {
       events: { name: string }[];
     };
     observation?: {
+      referenceIdentity?: unknown;
       properties: Record<string, { kind: string; value?: unknown }>;
       slots: { name: string }[];
       nativeElements: {
@@ -347,6 +348,7 @@ export function Sources() {
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [openingRun, setOpeningRun] = useState(false);
   const [nativeConnection, setNativeConnection] = useState("");
   const [selected, setSelected] = useState("atoms-button--default");
   const capturing =
@@ -443,6 +445,7 @@ export function Sources() {
     );
   }, [job?.id, job?.state, job?.startedAt, job?.completedAt]);
   async function selectRun(id: string) {
+    setOpeningRun(true);
     setBusy(true);
     setError("");
     setNativeConnection("");
@@ -456,6 +459,7 @@ export function Sources() {
       setError(e instanceof Error ? e.message : "Source run unavailable.");
     } finally {
       setBusy(false);
+      setOpeningRun(false);
     }
   }
   async function nativeAction(
@@ -661,7 +665,7 @@ export function Sources() {
         </label>
         <button disabled={!ready || busy || capturing}>
           {busy
-            ? "Connecting…"
+            ? "Working…"
             : job?.state === "running"
               ? "Validating all 10 states…"
               : "Connect and validate"}
@@ -673,6 +677,12 @@ export function Sources() {
         source files or Figma files are changed. Other libraries are not yet
         supported by this screen.
       </p>
+      {!ready && !error && (
+        <p role="status">Loading recorded source evidence…</p>
+      )}
+      {openingRun && (
+        <p role="status">Opening the selected recorded source run…</p>
+      )}
       {runs.length > 0 && (
         <label className="source-run-select">
           Recorded source run{" "}
@@ -1573,6 +1583,16 @@ export function Sources() {
                         events (behavior not yet tested).
                       </p>
                     )}
+                    {!!row.semanticIntake.observation?.referenceIdentity &&
+                      row.semanticIntake.status === "observed" && (
+                        <p>
+                          Local ID references were checked with an explicit
+                          lifecycle probe. Supported generated IDs can differ
+                          across replays; caller IDs and state must match
+                          exactly. This does not qualify interaction or
+                          accessibility behavior.
+                        </p>
+                      )}
                     {!!row.semanticIntake.problems.length && (
                       <p>
                         Intake blocked: {row.semanticIntake.problems.join(", ")}
