@@ -10,7 +10,8 @@ import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
 import {readReactSourceProgram} from './react-source-program.js';
 import {reactOwnershipHook,reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
-import {probeReactProperty} from './react-property-probe.js';
+import {probeReactProperty,probeReactInitialProperties} from './react-property-probe.js';
+import {planReactInitialStates,observeReactInitialStates} from './react-initial-state.js';
 
 test('real React property experiments preserve context and distinguish delivered props from rendered effects',async()=>{
  mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
@@ -24,7 +25,7 @@ test('real React property experiments preserve context and distinguish delivered
   writeFileSync(path.join(dir,'components.tsx'),source);
   const program=readReactSourceProgram(dir,['components.tsx']);assert.deepEqual(program.problems,[]);
   const registry=program.components.map(c=>`{identity:${JSON.stringify({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span})},value:${c.exportName}}`).join(',');
-  const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[${registry}];flushSync(()=>createRoot(document.getElementById('mount')).render(<Surface><Toggle checked={false}/><Initial defaultChecked={false}/></Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
+  const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=[${registry}];flushSync(()=>createRoot(document.getElementById('mount')).render(<Surface><Toggle checked={false}/><Initial defaultChecked={false}/></Surface>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
   const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
   await page.setContent('<div id="mount"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
   const selector='#mount > section';
@@ -39,6 +40,23 @@ test('real React property experiments preserve context and distinguish delivered
   const initial=await probeReactProperty(page,selector,program,id('Initial'),'defaultChecked',{kind:'set',value:true},observe);
   assert.deepEqual(initial.changed.inputs,[false,false],'delivering a default prop does not prove a live state change');
   assert.deepEqual(initial.restored,baseline);
+  const mounted=await probeReactInitialProperties(page,selector,program,id('Initial'),{defaultChecked:{kind:'set',value:true}},observe);
+  assert.deepEqual(mounted.changed.inputs,[false,true],'a fresh mount exercises initial state, unlike a live default prop update');
+  assert.deepEqual(mounted.restored,baseline);assert.equal(mounted.ownershipRestored,true);
+  const absent=await probeReactInitialProperties(page,selector,program,id('Initial'),{defaultChecked:{kind:'omit'}},observe);
+  assert.deepEqual(absent.changed,baseline);assert.equal(absent.ownershipRestored,true);
+  await assert.rejects(probeReactInitialProperties(page,selector,program,id('Initial'),{defaultChecked:{kind:'set',value:true}},async()=>{
+   const v=await observe();if(v.inputs[1])throw Error('initial capture failed');return v;
+  }),/initial capture failed/);
+  assert.deepEqual(await observe(),baseline,'a failed initial-state observation restores the original mount');
+  await page.evaluate(()=>{
+   const renderer=[...(window as any).__DSC_REACT_OWNERSHIP.renderers.values()][0] as any;
+   const original=renderer.scheduleRoot;
+   renderer.scheduleRoot=(...args:any[])=>{renderer.scheduleRoot=original;original(...args);throw Error('initial renderer failed after scheduling');};
+  });
+  await assert.rejects(probeReactInitialProperties(page,selector,program,id('Initial'),{defaultChecked:{kind:'set',value:true}},observe),/initial renderer failed after scheduling/);
+  assert.deepEqual(await observe(),baseline,'a partial remount failure restores the original root');
+  assert.equal(await page.evaluate(()=>(window as any).__DSC_REACT_OWNERSHIP.propertyProbes.size),0);
   const omitted=await probeReactProperty(page,selector,program,id('Toggle'),'checked',{kind:'omit'},observe);
   assert.deepEqual(omitted.changed.inputs,[false,false]);assert.equal(omitted.ownershipRestored,true);
   for(const [property,value] of [['tone','unsupported'],['children','replace']] as const)
@@ -59,6 +77,14 @@ test('real React property experiments preserve context and distinguish delivered
   await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
   const tree=await page.evaluate(captureJs('#mount',undefined,'--',[selector])) as CapturedNode;
   const image=evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
+  const initialPlan=planReactInitialStates(program,ownership,tree,id('Initial'));
+  assert.deepEqual(initialPlan.axes,[{property:'defaultChecked',values:[{kind:'set',value:false},{kind:'set',value:true},{kind:'omit'}]}]);
+  const initialStates=await observeReactInitialStates({page,program,ownership,tree,image,instanceId:id('Initial'),selector,stageSelector:'#mount',dir:path.join(dir,'initial-states'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.equal(initialStates.qualification,'finite-initial-mounts-only');
+  assert.equal(initialStates.rows.length,3);assert.deepEqual(initialStates.problems,[]);
+  assert(initialStates.rows.every(r=>r.status==='observed'&&r.restored),JSON.stringify(initialStates.rows));
+  assert.equal(initialStates.rows[1].visibleChange,true);assert.equal(initialStates.rows[0].visibleChange,false);
+  assert.deepEqual(await observe(),baseline);
   const plan=planReactPropertyEffects(program,ownership,tree,id('Surface'));
   assert.deepEqual(plan.plan.map(p=>p.requested),[{kind:'set',value:'quiet'},{kind:'set',value:'loud'},{kind:'omit'}]);
   const effects=await observeReactPropertyEffects({page,program,ownership,tree,image,instanceId:id('Surface'),selector,stageSelector:'#mount',dir:path.join(dir,'effects'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});

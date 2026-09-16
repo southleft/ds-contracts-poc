@@ -63,7 +63,7 @@ export async function buildReactOwnershipReference(
           `{identity:${JSON.stringify(c)},value:__dscModule${modules.indexOf(c.module)}[${JSON.stringify(c.exportName)}]}`,
       )
       .join(",") +
-    "];";
+    "];\nwindow.__DSC_REACT_CLONE_ELEMENT = React.cloneElement;";
   const reference = await buildReactReference(root, entry);
   if (
     JSON.stringify(reference.files) !== JSON.stringify(original.files) ||

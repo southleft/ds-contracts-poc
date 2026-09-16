@@ -14,6 +14,8 @@ import { startReactContentInspection, readReactContentInspection } from './react
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame } from './react-source-framing.js';
 import { PNG } from 'pngjs';
+import { revisionOf } from '../core/contract-provenance.js';
+import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 
 test('targeted content preparation matches sealed rendering, survives reopening and refuses changed evidence', async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-content-'));
@@ -39,7 +41,8 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   const operationId = '11111111-1111-4111-8111-111111111111';
   const report: ReactOwnershipReport = { id: '22222222-2222-4222-8222-222222222222', referenceId: reference.id,
     state: 'complete', acceptedContract: null, denominator: 1, matched: 1, sourceUnchanged: true, rows: [{
-      id: 'button-default', matched: true, problems: [], treeSha256: captured.treeSha256,
+      id: 'button-default', matched: true, problems: [], treeSha256: captured.treeSha256, sourceImage: captured.sourcePngSha256,
+      ownership: { version: 1, rendererVersions: [], components: [], nodes: [], problems: [] },
       rootMatrix: { version: 1, qualification: 'combined-property-root-draft', acceptedContract: null, problems: [],
         draft: { status: 'native-compiled', problems: [], properties: [], observations: [], lowerings: [], limitations: [], sizing: [] } } as ReactOwnershipReport['rows'][number]['rootMatrix'],
     }] };
@@ -70,6 +73,32 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   for (const css of ['button{margin-left:1px}', 'button{visibility:hidden}', 'button{font-family:serif}']) {
     await assert.rejects(measureReactSourceFrame({ ...frameInput, reference: { ...reference, css: reference.css + css } }), /original-changed/);
   }
+  // Persistence and preview checks reuse a sealed source fixture. Actual fresh
+  // mounts and restoration are exercised in react-property-probe.test.ts.
+  const initialRequest = { version: 1, anchor: request, caseId: 'button-default' };
+  const initialId = '33333333-3333-4333-8333-333333333333';
+  const initialRoot = path.join(repo, 'private/react-initial-inspections', revisionOf(initialRequest).slice(7));
+  const initialDir = path.join(initialRoot, initialId);
+  mkdirSync(path.join(initialDir, 'states'), { recursive: true });
+  const initialReport = { id: initialId, caseId: 'button-default', phase: 'complete', sourceUnchanged: true, problems: [],
+    observation: { rows: [{ id: '0', status: 'observed', image: captured.sourcePngSha256, treeSha256: captured.treeSha256 }] } };
+  writeFileSync(path.join(initialDir, 'request.json'), JSON.stringify(initialRequest));
+  writeFileSync(path.join(initialDir, 'report.json'), JSON.stringify(initialReport));
+  writeFileSync(path.join(initialDir, 'states/0.png'), sourcePng!);
+  writeFileSync(path.join(initialDir, 'states/0.json'), JSON.stringify({ image: captured.sourcePngSha256, treeSha256: captured.treeSha256, bounds: framed.bounds }));
+  const seal = JSON.stringify({ version: 1, files: inventoryEvidence(initialDir) });
+  writeFileSync(path.join(initialDir, 'integrity.json'), seal);
+  writeFileSync(path.join(initialRoot, 'latest.json'), JSON.stringify({ id: initialId, inventorySha256: evidenceSha(seal) }));
+  const initialStore = () => createReactInitialInspectionStore(repo, repo, () => ({ reference, anchor: request }));
+  assert.deepEqual(initialStore().read(reference.id, 'button-default'), initialReport);
+  const repeated = initialStore().start(reference.id, 'button-default'); await repeated.promise;
+  assert.equal(repeated.state.id, initialId, 'a completed observation reopens without a new mount');
+  assert.deepEqual(PNG.sync.read(initialStore().image(reference.id, 'button-default', initialId, '0')).data, framedPixels.data);
+  assert.throws(() => initialStore().image(reference.id, 'button-default', initialId, '../0'), /row-invalid/);
+  writeFileSync(path.join(initialDir, 'states/0.png'), Buffer.from('changed'));
+  assert.throws(() => initialStore().read(reference.id, 'button-default'), /evidence-changed/);
+  assert.throws(() => initialStore().image(reference.id, 'button-default', initialId, '0'), /evidence-changed/);
+  writeFileSync(path.join(initialDir, 'states/0.png'), sourcePng!);
   const job = startReactContentInspection(repo, reference, request, operationId);
   await job.promise;
   assert.equal(job.state.phase, 'complete', job.state.problems.join('\n'));
@@ -83,6 +112,7 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.equal(job.report().phase, 'failed', 'the in-memory UI view must also recheck saved evidence');
   writeFileSync(fonts, bytes);
   writeFileSync(source, 'changed source');
+  assert.throws(() => initialStore().read(reference.id, 'button-default'), /evidence-unavailable/);
   assert.throws(() => frames.read(reference.id, operationId), /evidence-unavailable/);
   assert.throws(() => readReactContentInspection(repo, reference, request, operationId), /evidence-unavailable/);
   assert.equal(job.report().sourceUnchanged, false);

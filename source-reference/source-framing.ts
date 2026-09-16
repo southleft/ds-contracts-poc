@@ -101,7 +101,7 @@ export function cropSourceFrame(source: Buffer, bounds: SourceBox) {
 }
 export async function sourceBounds(
   page: Page,
-  profile: SourceProfile,
+  profile: Pick<SourceProfile, 'path'>,
 ): Promise<SourceBox> {
   return page.evaluate((selectors) => {
     let root: Document | ShadowRoot | null = document,

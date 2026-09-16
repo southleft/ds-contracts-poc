@@ -3,6 +3,7 @@ import type { NativeOperationSnapshot } from '../../../source-reference/native-o
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
 import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
 import type { SourceFrame } from '../../../source-reference/source-framing';
+import { ReactInitialInspection } from './ReactInitialInspection';
 
 interface Operation {
   kind: 'root' | 'comparison'; parentOperationId?: string;
@@ -58,6 +59,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     </button>
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
     {error && <p role="alert">{error}</p>}
+    <ReactInitialInspection referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} />
     {rows.map(row => {
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison';
       const savedComparison = rows.find(r => r.parentOperationId === id);

@@ -1,5 +1,6 @@
 import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore } from './react-source-framing.js';
+import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
@@ -156,6 +157,15 @@ export function createReactReferenceService(
     if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
     return { reference, request: native().jobs.reactRequest(operationId) };
   });
+  const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, (referenceId) => {
+    if (!native || !reference || reference.id !== referenceId) throw Error('react-initial-reference-unavailable');
+    // Reuse the immutable ownership archive already pinned by a saved root
+    // operation. No fresh property matrix or browser-supplied evidence paths.
+    const roots = native().jobs.listReact(referenceId).filter(r => r.kind === 'root' && r.operation.sourceCurrent);
+    const anchor = roots.map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id))[0];
+    if (!anchor) throw Error('react-initial-saved-observation-required');
+    return { reference, anchor };
+  });
   const contentJobs = new Map<string, ReturnType<typeof startReactContentInspection>>();
   const validations = new Map<
     string,
@@ -177,6 +187,19 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const initialRoute = /^react\/([a-f0-9]{64})\/initial-states\/([a-z-]+)(?:\/([a-f0-9-]{36})\/(\d+)\.png)?$/.exec(route);
+    if (initialRoute) {
+      try {
+        if (initialRoute[3] && req.method === 'GET') {
+          const bytes = initialStates.image(initialRoute[1], initialRoute[2], initialRoute[3], initialRoute[4]);
+          res.setHeader('Content-Type', 'image/png'); res.setHeader('Cache-Control', 'no-store'); res.end(bytes);
+        } else if (!initialRoute[3] && ['GET','POST'].includes(req.method ?? '')) {
+          if (req.method === 'POST') void initialStates.start(initialRoute[1], initialRoute[2]).promise.catch(() => {});
+          json(res, 200, { inspection: initialStates.read(initialRoute[1], initialRoute[2]) ?? null });
+        } else throw Error('react-initial-method-invalid');
+      } catch { json(res, 409, { error: 'Initial-state inspection unavailable. Load unchanged originals and prepare a supported root from the same saved structure observation first.' }); }
+      return;
+    }
     const framedImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source-frame\/([a-f0-9]{64})\.png$/.exec(route);
     if (framedImage && req.method === 'GET') {
       try {
