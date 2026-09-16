@@ -336,6 +336,8 @@ export interface NodeSpec {
    *  preview renders width:100%; the sync runtime keeps hug sizing — a named
    *  preview-only stage fact (the component has no intrinsic width). */
   blockRoot?: boolean;
+  /** Full-width reusable root; its standalone canvas width is a preview only. */
+  rootFillWidth?: true;
   /** CARBON LIVE-DEFECT ROUND (D5): the root is a VIEWPORT-PINNED overlay
    *  scrim (`inset: 0` on all four edges) whose captured width/height
    *  measured the CAPTURE STAGE, not the component. The canvas box is bound
@@ -691,7 +693,8 @@ export interface ComponentData {
   propNames?: Record<string, string>;
   /** Canonical native options retain exact typed React values. */
   codeValueAxes?: CodeValueAxes;
-  rootSlot?: { version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' };
+  rootSlot?: { version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' } |
+    { version: 3; property: string; display: 'flex' | 'inline-flex' | 'grid'; width: 'fill' };
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
     version: 1 | 2;
@@ -902,7 +905,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
       'layoutSizingVertical' in ${nodeExpr} && ${nodeExpr}.children &&
       (${specExpr}.type === 'slot' || ${nodeExpr}.children.length === 0)) {
     remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name,
-      Boolean(${specExpr}.fixedWidth || (${specExpr}.lits && ${specExpr}.lits.width !== undefined)),
+      Boolean(${specExpr}.rootFillWidth || ${specExpr}.fixedWidth || (${specExpr}.lits && ${specExpr}.lits.width !== undefined)),
       Boolean(${specExpr}.fixedHeight || (${specExpr}.lits && ${specExpr}.lits.height !== undefined)));
   }`
     : '';
@@ -915,7 +918,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt18-managed-grid-flow-rows';
+export const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -4959,12 +4962,17 @@ function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byI
   const spec = partToSpecs('root-content', { slot: root.slot } as Part, contract, byId, ctx, subst)[0];
   if (!spec || spec.type !== 'slot') throw new Error('FIGMA_ROOT_SLOT_INVALID: no native slot projection');
   spec.rootSlotContent = true;
+  // @lower emit.root-content-parent-width
+  if (resolveLiterals(root, subst).width === '100%') {
+    if (rootSpec.fixedWidth) throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_BOUND_SIZE_CONFLICT');
+    rootSpec.rootFillWidth = true;
+  }
   if (rootSpec.layout.mode === 'GRID') {
     const grid = rootSpec.layout.grid!;
     if (grid.flowRows) grid.rows = materializeFlowRows(grid.flowRows, grid.columns.length, 0);
     if (!grid.rows.length || !grid.columns.length || grid.flow !== 'ROW_AUTO_FLOW' || spec.slotDefault?.length)
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: grid content requires declared tracks, row flow and no default content');
-    if ((!grid.hugWidth && !rootSpec.fixedWidth && rootSpec.lits?.width === undefined) ||
+    if ((!grid.hugWidth && !rootSpec.rootFillWidth && !rootSpec.fixedWidth && rootSpec.lits?.width === undefined) ||
         (!grid.hugHeight && !rootSpec.fixedHeight && rootSpec.lits?.height === undefined))
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: grid content axes need declared fixed or intrinsic sizing');
     // GRID is illegal directly on SLOT. A neutral slot holds the grid frame;
@@ -6057,6 +6065,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     }
   }
 
+  const fillRootSlot = [...variants, ...stateVariants].some(v => v.spec.rootFillWidth);
+  if (fillRootSlot && ![...variants, ...stateVariants].every(v => v.spec.rootFillWidth))
+    throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_VARIANCE_UNQUALIFIED');
   const data: ComponentData = {
     ...([...variants, ...stateVariants].some(v => specSome(v.spec, n => n.type === 'instance'))
       ? { nestedPropertyControls: 1 as const } : {}),
@@ -6085,7 +6096,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
       : {}),
     isSet: variants.length + stateVariants.length > 1 || contract.props.some(p => p.bindings.code.values !== undefined),
-    ...(contract.anatomy.root?.slot ? { rootSlot: contract.anatomy.root.layout?.display === 'grid'
+    ...(contract.anatomy.root?.slot ? { rootSlot: fillRootSlot
+      ? { version: 3 as const, property: slotFigmaProperty(contract.anatomy.root.slot), width: 'fill' as const, display: contract.anatomy.root.layout?.display ?? 'flex' }
+      : contract.anatomy.root.layout?.display === 'grid'
       ? { version: 2 as const, property: slotFigmaProperty(contract.anatomy.root.slot), display: 'grid' as const }
       : { version: 1 as const, property: slotFigmaProperty(contract.anatomy.root.slot), ...(contract.anatomy.root.layout?.display === 'inline-flex' ? { display: 'inline-flex' as const } : {}) } } : {}),
     ...(codeValueAxes(contract) ? { codeValueAxes: codeValueAxes(contract) } : {}),
@@ -7502,7 +7515,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
   const prepared = prepareNativeSourceWrite(compiled.projection, context, compiled.boundNames, undefined, compiled);
   return wrapNativeSourceWrite(prepared, buildSyncScript([data], context.operation.fileKey, {
     header: '// Shared renderer: caller content in an instance of an existing observed main.',
-    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
+    preamble: '', nativeSource: true, nativeContractComparison: true, nativeNestedComparison: !!compiled.instances?.length, nativeFullWidthComparison: !!compiled.instances?.some(ref => ref.fillWidth), nativeGridComparison: !!compiled.contentSpecPath || !!compiled.instances?.some(ref => ref.contentSpecPath), nativeSampleSpecs: compiled.specs,
   }));
 }
 
@@ -7512,7 +7525,7 @@ function buildNativeContractComparisonScript(contract: Contract, byId: Map<strin
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeNestedComparison?: boolean; nativeFullWidthComparison?: boolean; nativeGridComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -8055,6 +8068,7 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // Seed an empty synthetic carrier below Figma's 100px birth box. The
   // declared track and parent sizing writes below determine its final size.
   if (spec.rootSlotGridContent) node.resize(1, 1);` : ''}
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `
   // A2 grid: GRID frames take the declaration path — the flex fields below
   // (axis aligns, layoutWrap) are not grid facts and are never written.
@@ -8065,6 +8079,12 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   }` : ''}
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -9070,7 +9090,7 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
   };
 }
 
-${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
+${opts.nativeContractComparison ? nativeContractComparisonRuntime(!!opts.nativeNestedComparison, !!opts.nativeGridComparison, !!opts.nativeFullWidthComparison) + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
 for (const C of COMPONENTS) {
   // Every per-set result — created, amended, skipped as unchanged, refused
   // by the create-only door — carries the named receipt, so the plugin's run

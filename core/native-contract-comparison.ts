@@ -71,10 +71,12 @@ export function prepareNativeContractComparison(contract: Contract, component: C
         !carrier?.rootSlotGridContent || carrier.type !== 'frame' || carrier.layout?.mode !== 'GRID' ||
         carrier.layout.grid?.flow !== 'ROW_AUTO_FLOW' || carrier.children?.length)) fail('empty-slot-required');
     return { mainId: mains[0].id as string,
+      ...(variants[0].spec.rootFillWidth ? { fillWidth: true as const } : {}),
       ...(carrier ? { contentSpecPath: [...input.slotSpecPath, 0] } : {}) };
 
   };
   const selected = select(input);
+  if (selected.fillWidth) fail('root-fill-width-needs-parent-context');
   if ((input.instances?.length ?? 0) > 128) fail('nested-main-limit');
   const instances = (input.instances ?? []).map(reference => {
     if (reference.parent.operation.fileKey !== input.parent.operation.fileKey ||
@@ -145,6 +147,29 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   }
   const specs = root.children!.map((spec, i) => annotate(spec, [i]));
   if (used.size !== instances.length) fail('nested-main-path-missing');
+  // A full-width child needs an independently known containing width. Do
+  // not let Figma resolve a HUG/FILL cycle using the main's preview box.
+  const fixedWidth = (spec: NodeSpec) => Boolean(spec.fixedWidth) ||
+    (typeof spec.lits?.width === 'number' && Number.isFinite(spec.lits.width) && spec.lits.width > 0);
+  for (const reference of instances.filter(ref => ref.fillWidth)) {
+    const parentPath = reference.specPath.slice(0, -1);
+    const hostReference = parentPath.length
+      ? instances.find(ref => JSON.stringify(ref.specPath) === JSON.stringify(parentPath))
+      : { ...input, ...selected };
+    let host: NodeSpec, definite: boolean;
+    if (hostReference) {
+      const hostRoot = hostReference.parent.component.variants.find(v => v.name === hostReference.variantName)!.spec;
+      host = hostRoot;
+      for (const index of hostReference.contentSpecPath ?? hostReference.slotSpecPath) host = host.children![index];
+      definite = fixedWidth(host) || Boolean(host.rootSlotContent && (hostRoot.rootFillWidth || fixedWidth(hostRoot)));
+    } else {
+      host = root;
+      for (const index of parentPath) host = host.children![index];
+      definite = fixedWidth(host);
+    }
+    if (!definite || !['VERTICAL', 'GRID'].includes(host.layout?.mode ?? ''))
+      fail('nested-fill-width-parent-unqualified');
+  }
   const receipt = structuredClone(input.receipt); delete receipt.images;
   return { projection, boundNames: [...boundNames].sort(), parent: structuredClone(input.parent), receipt,
     caseId: input.caseId, ...selected, ...(contentRows ? { contentRows } : {}), variantName: input.variantName,
@@ -286,8 +311,26 @@ async function nativeBuildContractComparison() {
 
 /** Preserve the existing receipt/script format when no verified grid carrier is
  * involved. Only compiler-owned content frames can become insertion targets. */
-export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean): string {
-  const script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false): string {
+  let script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+  if (fillWidth) script = script.replace('  dsStampFingerprints(inst);', `
+  // Construction uses a temporary page parent. Set FILL only after every
+  // nested instance is attached, from outer parents toward inner children.
+  const records = NATIVE_RESULT.comparisons[0].nested || [];
+  const refs = c.instances.map((ref, index) => ({ ...ref, index }))
+    .filter(ref => ref.fillWidth).sort((a, b) => a.specPath.length - b.specPath.length);
+  for (const ref of refs) {
+    const record = records.find(row => row.index === ref.index);
+    const node = record && await figma.getNodeByIdAsync(record.instanceId); nativeFileGuard();
+    const parent = node && node.parent;
+    if (!node || !parent || !['VERTICAL', 'GRID'].includes(parent.layoutMode) ||
+        (parent.layoutSizingHorizontal !== 'FILL' &&
+          (parent.layoutMode === 'GRID' ? parent.primaryAxisSizingMode : parent.counterAxisSizingMode) !== 'FIXED'))
+      nativeRefuse('nested-fill-width-parent-unqualified');
+    node.layoutSizingHorizontal = 'FILL';
+    if (node.layoutSizingHorizontal !== 'FILL') nativeRefuse('nested-fill-width-refused');
+  }
+  dsStampFingerprints(inst);`);
   if (!gridContent) return script;
   return script.replace(
     "  if (!slot || slot.type !== 'SLOT' || slot.children.length) nativeRefuse('comparison-slot-not-empty');",

@@ -608,6 +608,10 @@ function verifyReadback(
       issue("native-source-observation-layout", n);
     for (const problem of nativeGridProblems(spec, v, n.childIds.map((id: string) => nodes.get(id)?.values)))
       issue('native-source-observation-grid-' + problem, n);
+    if (spec.rootFillWidth && (v.layoutSizingHorizontal !== 'FIXED' ||
+        (v.layoutMode === 'HORIZONTAL' ? v.primaryAxisSizingMode : v.counterAxisSizingMode) !== 'FIXED' ||
+        nodes.get(n.childIds[0])?.values.layoutSizingHorizontal !== 'FILL'))
+      issue('native-source-observation-root-fill-width', n);
     if ((spec.opacity !== undefined || v.opacity !== undefined) && v.opacity !== (spec.opacity ?? 1))
       issue("native-source-observation-opacity", n);
     const bindings = {

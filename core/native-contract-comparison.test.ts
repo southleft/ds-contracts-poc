@@ -11,7 +11,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { revisionOf } from './contract-provenance.js';
-import { emitNativeContractReadbackScript, type NativeContractObservationInput } from './native-source-observation.js';
+import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 import { prepareNativeContractComparison, type NativeContractComparisonInput } from './native-contract-comparison.js';
 
 
@@ -221,14 +221,18 @@ test('comparison variant selection preserves typed null, string null, defaults a
 });
 
 
-async function nestedFixture(grid: boolean | 'flow' = false) {
-  const f = await fixture(undefined, grid);
+async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false) {
+  const f = await fixture(undefined, fillWidth ? 'flow' : grid);
   const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
   if(grid) {
     child.anatomy.root.layout={display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row'};
     if(grid==='flow') { child.anatomy.root.layout.columns=[{fr:1}];delete child.anatomy.root.layout.rows;child.anatomy.root.layout.autoRows={fit:true}; }
     child.anatomy.root.literals={width:'300px',height:'fit-content'};
     child.anatomy.root.tokens!.gap='{size}';
+  }
+  if (fillWidth) {
+    child.anatomy.root.literals={width:'100%',height:'fit-content'};
+    if (!grid) child.anatomy.root.layout={display:'flex',direction:'column'};
   }
   child.name = 'Main'; // Deliberate display-name collision with the outer main.
   const context = await f.context('10000000-0000-4000-8000-000000000003');
@@ -238,6 +242,7 @@ async function nestedFixture(grid: boolean | 'flow' = false) {
   const parent: NativeContractObservationInput = { operation: context.operation, planRevision: revisionOf('nested main plan'),
     projection: data.projection, component: data.component, tokenInput: context.tokens.input, tokenIdentity: context.tokens.identity, creation };
   const receipt = await f.run(emitNativeContractReadbackScript(parent));
+  assert.equal(verifyNativeContractReadback(parent,receipt).status,'supported-structure-observed',JSON.stringify({report:verifyNativeContractReadback(parent,receipt),root:receipt.nodes?.find((n:any)=>n.id===creation.variants[0].id)?.values}));
   const text = (value: string) => ({ text: value, tokens: { color: '{surface}', 'font-size': '{size}' }, declared: { 'font-family': 'Inter' } });
   const content = f.contract('fixture.composed', { root: { layout: { display: 'flex', direction: 'column' }, parts: {
     first: { layout: { display: 'flex', direction: 'row' }, parts: {
@@ -248,7 +253,7 @@ async function nestedFixture(grid: boolean | 'flow' = false) {
   if(grid==='flow')Object.assign(content.anatomy.root.parts!.second.parts!,{thirdLabel:text('Third'),fourthLabel:text('Fourth')});
   const reference = { parent, receipt, variantName: data.component.variants[0].name, slotSpecPath: [0] };
   const selected: NativeContractComparisonInput = { ...f.comparison, instances: [[0], [0, 0], [1]].map(specPath => ({ ...reference, specPath })) };
-  const emit = () => f.emit(content, selected);
+  const emit = (c=content, selection=selected) => f.emit(c, selection);
   const observe = async (creation: any) => {
     const component = f.engine.compileComponentData(content, new Map([[content.id, content]]));
     const comparison = prepareNativeContractComparison(content, component, f.source, revisionOf(f.tokens), { mode: 'light', brand: 'default' }, selected);
@@ -258,6 +263,36 @@ async function nestedFixture(grid: boolean | 'flow' = false) {
   };
   return { ...f, content, selected, reference, emit, observe };
 }
+
+for (const grid of [false, 'flow'] as const) test(`nested full-width content uses its final parent and refuses an indefinite host (${grid || 'flex'})`, async () => {
+  const f=await nestedFixture(grid,true);
+  const before=await f.run(emitNativeContractReadbackScript(f.reference.parent));
+  for(const mutate of [
+    (r:any)=>{r.nodes.find((n:any)=>n.id===f.reference.parent.creation.variants[0].id).values.layoutSizingHorizontal='HUG';},
+    (r:any)=>{r.nodes.find((n:any)=>n.type==='SLOT').values.layoutSizingHorizontal='HUG';},
+  ]){const bad=structuredClone(before);mutate(bad);assert.equal(verifyNativeContractReadback(f.reference.parent,bad).status,'refused');}
+  const creation=await f.run(f.emit());assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  for(const record of creation.comparisons[0].nested){
+    const node=await f.figma.getNodeByIdAsync(record.instanceId);
+    assert.equal(node.layoutSizingHorizontal,'FILL');
+    assert.notEqual(node.parent.type,'PAGE');
+  }
+  const {input,receipt}=await f.observe(creation);
+  const verified=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(verified.status,'supported-comparison-structure-observed',JSON.stringify(verified));
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)),before);
+  for(const sizing of ['FIXED','HUG']) {
+    const bad=structuredClone(receipt);
+    bad.content.nodes.find((n:any)=>n.id===creation.comparisons[0].nested[1].instanceId).values.layoutSizingHorizontal=sizing;
+    assert.equal(verifyNativeContractComparisonReadback(input,bad).status,'refused');
+  }
+  const noHost={...f.selected,instances:f.selected.instances!.filter(ref=>JSON.stringify(ref.specPath)!=='[0]')};
+  assert.throws(()=>f.emit(f.content,noHost),/nested-fill-width-parent-unqualified/);
+  assert.throws(()=>f.emit(f.content,{...f.reference,caseId:'standalone'}),/root-fill-width-needs-parent-context/);
+  const count=f.figma.root.findAll(()=>true).length;
+  assert.equal((await f.run(f.emit())).allocationAttempted,false);
+  assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
 
 for (const grid of [false, true, 'flow'] as const) test(`nested caller content keeps linkage, token contexts and editable slots (${grid === 'flow' ? 'managed grid' : grid ? 'grid' : 'flex'})`, async () => {
   const f = await nestedFixture(grid), before = await f.run(emitNativeContractReadbackScript(f.reference.parent));

@@ -9049,7 +9049,7 @@ function buildChildStub(
  *  to a variable stays the variable's. Field case: the CBDS Dialog's
  *  per-size widths (320/496/800) — without them the body text never wraps
  *  and every variant renders hundreds of px too wide. */
-function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, rootTokens: Record<string, string>, ctx: Ctx, where: string) {
+function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, rootTokens: Record<string, string>, ctx: Ctx, where: string, fullWidthContent = false) {
   if (!ctx.mint) return;
   // Overlay-flattened class (round 2 iteration 2): a root WITHOUT auto-layout
   // is a canvas-positioned frame — it cannot hug, so BOTH axes are drawn
@@ -9086,6 +9086,9 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
   // captured-variable convention on the same root — visual-parity receipt:
   // Dialog width minted 272 for a drawn 320 box.)
   for (const dim of ['width', 'height'] as const) {
+    // A checked full-width content marker describes a parent constraint.
+    // Its standalone native main has a preview width, not a size token.
+    if (dim === 'width' && fullWidthContent) continue;
     const fixedIn = withBox.filter((o) => fixedAxis(o, dim));
     // A partial binding is refused by unifyField, so it is not a carried
     // dimension. Keep uniformly bound dimensions authoritative, but let the
@@ -10653,11 +10656,17 @@ export function proposeFromDump(
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
   invertNodeEffects(merged, rootTokens, ctx, where);
-  invertRootFixedSize(merged, root, rootTokens, ctx, where);
+  invertRootFixedSize(merged, root, rootTokens, ctx, where, rootContent?.fillWidth);
   // G8: a grid ROOT states each axis too. Runs AFTER invertRootFixedSize so an
   // axis that door already made definite (px mint, or its own 'fit-content'
   // all-HUG branch) is left exactly as it found it.
   carryGridAxisSizing(merged, root, ctx, where, rootTokens);
+  if (rootContent?.fillWidth) {
+    const containsWidth = (v: ByPropCollector): boolean => Object.values(v.map).some(tokens => Object.hasOwn(tokens, 'width')) || (v.additional ?? []).some(containsWidth);
+    if (containsWidth(rootTokensByProp)) throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_VARIANCE_UNQUALIFIED');
+    delete rootTokens.width;
+    root.literals = { ...(root.literals as Record<string, string> | undefined), width: '100%' };
+  }
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
 

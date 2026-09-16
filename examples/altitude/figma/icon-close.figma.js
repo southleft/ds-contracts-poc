@@ -724,12 +724,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -1224,7 +1231,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt18-managed-grid-flow-rows';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

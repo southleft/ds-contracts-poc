@@ -2,15 +2,18 @@ import type { DumpSet } from '../extract/figma/types.js';
 
 /** A marker identifies the compiler projection; drawn facts must still agree.
  * Never unwrap an arbitrary designer-authored frame or trust the marker alone. */
-export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' | 'grid'; normalized?: DumpSet } | undefined {
+export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' | 'grid'; normalized?: DumpSet; fillWidth?: true } | undefined {
   const raw = set.rootSlot;
   if (raw === undefined) return undefined;
   const fail = (why: string): never => { throw new Error(`FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED: ${why}`); };
   const marker = raw as Record<string, unknown> | null;
+  const keys = marker && Object.keys(marker).sort().join('|');
   if (!marker || typeof marker !== 'object' || Array.isArray(marker) ||
-      !['property|version', 'display|property|version'].includes(Object.keys(marker).sort().join('|')) ||
-      !(marker.version === 1 ? !Object.hasOwn(marker, 'display') || marker.display === 'inline-flex'
-        : marker.version === 2 && marker.display === 'grid') || typeof marker.property !== 'string' || !marker.property)
+      !(marker.version === 3
+        ? keys === 'display|property|version|width' && marker.width === 'fill' && typeof marker.display === 'string' && ['flex','inline-flex','grid'].includes(marker.display)
+        : ['property|version', 'display|property|version'].includes(keys!) &&
+          (marker.version === 1 ? !Object.hasOwn(marker, 'display') || marker.display === 'inline-flex'
+            : marker.version === 2 && marker.display === 'grid')) || typeof marker.property !== 'string' || !marker.property)
     return fail('invalid root content declaration');
   const property = (raw as { property: string }).property;
   const definitions = Object.entries(set.propertyDefinitions ?? {}).filter(([key]) => key.split('#')[0] === property);
@@ -19,7 +22,8 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
   if (definition.type === 'SLOT' && (definition.description?.includes('REFUSED BY FIGMA') ||
       Object.keys(definition.slotSettings ?? {}).length)) return fail('slot constraints need explicit contract reconciliation');
   if (!set.variants.length) return fail('no observed component planes');
-  const normalized = marker.version === 2 ? structuredClone(set) : undefined;
+  const normalized = marker.display === 'grid' ? structuredClone(set) : undefined;
+  const sizing = marker.version === 3 ? { fillWidth: true as const } : {};
   let gridDeclaration: string | undefined;
   for (const root of normalized?.variants ?? set.variants) {
     const slot = root.children?.[0], outer = root.layout, inner = slot?.layout;
@@ -28,7 +32,10 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
         (slot.slotKey !== undefined && slot.slotKey !== definitions[0][0])) return fail(`${root.name}: content structure disagrees`);
     // Contents of the main are defaults, not a sample to bake into React.
     // Default-content inversion is a separate qualification from empty mains.
-    if (marker.version === 2) {
+    if (marker.version === 3 && (!outer ||
+        (outer.mode === 'HORIZONTAL' ? outer.primarySizing : outer.counterSizing) !== 'FIXED' || root.bound?.width))
+      return fail(`${root.name}: full-width root must have an unbound fixed preview width`);
+    if (marker.display === 'grid') {
       const carrier = slot.children?.[0], grid = carrier?.layout;
       const slotFields = new Set(['name', 'type', 'layout', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight']);
       const frameFields = new Set(['name', 'type', 'layout', 'children', 'fillWidth', 'fillHeight', 'bound']);
@@ -86,10 +93,14 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
     if (Object.keys(inner).some(key => !layoutFields.has(key))) return fail(`${root.name}: unsupported content layout facts`);
     const horizontal = outer.mode === 'HORIZONTAL';
     for (const [axis, filled] of [['primarySizing', horizontal ? slot.fillWidth : slot.fillHeight], ['counterSizing', horizontal ? slot.fillHeight : slot.fillWidth]] as const) {
-      if (!['AUTO', 'FIXED'].includes(outer[axis]) || inner[axis] !== outer[axis] ||
+      // FILL supplies the extent; native children may retain AUTO on that
+      // axis. The v3 declaration separately validates the fixed main preview.
+      const innerAgrees = inner[axis] === outer[axis] ||
+        (marker.version === 3 && filled && inner[axis] === 'AUTO');
+      if (!['AUTO', 'FIXED'].includes(outer[axis]) || !innerAgrees ||
           Boolean(filled) !== (outer[axis] === 'FIXED')) return fail(`${root.name}: content sizing disagrees with root`);
     }
   }
-  return normalized ? { property, display: 'grid', normalized }
-    : { property, display: marker.display === 'inline-flex' ? 'inline-flex' : 'flex' };
+  return normalized ? { property, display: 'grid', normalized, ...sizing }
+    : { property, display: marker.display === 'inline-flex' ? 'inline-flex' : 'flex', ...sizing };
 }

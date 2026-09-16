@@ -106,6 +106,7 @@ export function prepareNativeSourceWrite(
         specPath: ref.specPath, mainId: ref.mainId, slotSpecPath: ref.slotSpecPath,
         ...(ref.contentSpecPath ? { contentSpecPath: ref.contentSpecPath } : {}),
         ...(ref.contentRows ? { contentRows: ref.contentRows } : {}),
+        ...(ref.fillWidth ? { fillWidth: true } : {}),
         parent: { tokenIdentity: ref.parent.tokenIdentity },
       })), dependencyReceipts: dependencies!.parents.map(ref => ref.receipt) } : {}),
     } } : {}),

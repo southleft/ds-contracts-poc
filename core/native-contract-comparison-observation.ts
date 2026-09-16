@@ -218,6 +218,14 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
       reference: Reference = p, record: Row = c.comparisons[0], parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]))) => {
       if (!original || !actual || checked.has(actual.id)) { issue('main-instance-pairing'); return; }
       checked.add(actual.id);
+      const fullWidth = reference.parent.component.variants.find(v => v.name === reference.variantName)?.spec.rootFillWidth;
+      if (!specPath.length && fullWidth) {
+        const host = nodes.get(actual.parentId)?.values;
+        if (actual.values.layoutSizingHorizontal !== 'FILL' || !host || !['VERTICAL', 'GRID'].includes(host.layoutMode) ||
+            (host.layoutSizingHorizontal !== 'FILL' &&
+              (host.layoutMode === 'GRID' ? host.primaryAxisSizingMode : host.counterAxisSizingMode) !== 'FIXED'))
+          issue('nested-fill-width', actual);
+      }
       if (actual.type !== (specPath.length ? original.type : 'INSTANCE') ||
           !same(meta(actual, 'nativeContractPart'), meta(original, 'nativeContractPart'))) issue('main-instance-identity', actual);
       if (!same(actual.values.explicitVariableModes, specPath.length ? original.values.explicitVariableModes : { ...sampleMode, [reference.parent.tokenIdentity.collection.id]: reference.parent.tokenIdentity.modes[0].modeId })) issue('main-instance-modes', actual);
@@ -236,6 +244,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         if (!specPath.length && field === 'componentPropertyReferences' &&
             [actual.values[field], original.values[field]].every(value => value === null || same(value, {}))) continue;
         if (!specPath.length && NATIVE_GRID_CHILD_FIELDS.includes(field) && nodes.get(actual.parentId)?.values.layoutMode === 'GRID') continue;
+        if (!specPath.length && fullWidth && field === 'layoutSizingHorizontal') continue;
         if (contentGrid?.layout?.grid?.flowRows && ['gridRowCount', 'gridRowSizes'].includes(field)) continue;
         if (!geometry.has(field) && !same(actual.values[field], original.values[field])) issue('main-instance-' + field, actual);
       }
