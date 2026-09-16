@@ -8,7 +8,7 @@ import type {CapturedNode} from '../extract/computed/lib.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import {reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
 import {linkReactSourceAnatomy} from './react-source-anatomy.js';
-import {probeReactProperty,type ReactPropertyValue} from './react-property-probe.js';
+import {probeReactProperties,type ReactPropertyValue,type ReactPropertyChanges} from './react-property-probe.js';
 import {readReactStyleOrigin} from './react-style-origin.js';
 import {projectReactRootVisual} from './react-root-visual.js';
 import {evidenceSha} from './react-validation-evidence.js';
@@ -52,14 +52,17 @@ export function planReactPropertyEffects(program:ReactSourceProgram,ownership:Re
 
 /** Called only inside the host's isolated, resource-locked source context,
  * after its untouched and observed source renders have matched. */
-export async function observeReactPropertyEffects(args:{
+export interface ReactPropertyObservationArgs {
  page:Page;program:ReactSourceProgram;ownership:ReactOwnership;tree:CapturedNode;image:string;
  instanceId:string;selector:string;stageSelector?:string;dir:string;assertCurrent:()=>void;
  failures:{runtimeErrors:string[];failedResources:string[]};
-}):Promise<ReactPropertyEffects>{
+}
+export type ReactPropertyObservation=Omit<ReactPropertyEffects['rows'][number],'property'|'requested'>;
+
+/** Both single-axis and joint observations use the same capture/restoration boundary. */
+export async function observeReactPropertyPlan<P extends {changes:ReactPropertyChanges}>(args:ReactPropertyObservationArgs,plan:P[]){
  const {page,program,ownership,tree,instanceId,selector,dir}=args;
- const {plan,...facts}=planReactPropertyEffects(program,ownership,tree,instanceId);
- const result:ReactPropertyEffects={version:1,qualification:'one-property-at-a-time',instanceId,...facts,planned:plan.length,rows:[],problems:[]};
+ const result:{rows:Array<P&ReactPropertyObservation>;problems:string[]}={rows:[],problems:[]};
  if(!plan.length)return result;
  mkdirSync(dir,{recursive:true});
  const originalTree=evidenceSha(JSON.stringify(tree));
@@ -79,10 +82,10 @@ export async function observeReactPropertyEffects(args:{
  };
  let usable=true;
  for(const [index,entry] of plan.entries()){
-  const row:ReactPropertyEffects['rows'][number]={id:String(index),...entry,status:'refused'};result.rows.push(row);
+  const row:P&ReactPropertyObservation={id:String(index),...entry,status:'refused'};result.rows.push(row);
   if(!usable){row.problem='prior-observation-invalidated-context';continue;}
   try{
-   const probe=await probeReactProperty(page,selector,program,instanceId,entry.property,entry.requested,observe);
+   const probe=await probeReactProperties(page,selector,program,instanceId,entry.changes,observe);
    if(!probe.ownershipRestored||probe.before.treeSha256!==originalTree||probe.restored.treeSha256!==originalTree||probe.before.image!==args.image||probe.restored.image!==args.image)throw Error('react-property-effects-original-not-restored');
    const before=linkReactSourceAnatomy(program,probe.before.ownership,probe.before.tree);
    const changed=linkReactSourceAnatomy(program,probe.changed.ownership,probe.changed.tree);
@@ -110,6 +113,14 @@ export async function observeReactPropertyEffects(args:{
    usable=false;result.problems.push('property-observation-context-invalidated');
   }
  }
- writeFileSync(path.join(dir,'report.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+ return result;
+}
+
+export async function observeReactPropertyEffects(args:ReactPropertyObservationArgs):Promise<ReactPropertyEffects>{
+ const {plan,...facts}=planReactPropertyEffects(args.program,args.ownership,args.tree,args.instanceId);
+ const observed=await observeReactPropertyPlan(args,plan.map(p=>({...p,changes:{[p.property]:p.requested}})));
+ const result:ReactPropertyEffects={version:1,qualification:'one-property-at-a-time',instanceId:args.instanceId,...facts,planned:plan.length,
+  ...observed,rows:observed.rows.map(({changes:_,...row})=>row)};
+ mkdirSync(args.dir,{recursive:true});writeFileSync(path.join(args.dir,'report.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
  return result;
 }

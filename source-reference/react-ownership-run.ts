@@ -1,7 +1,8 @@
-import {assembleReactRootVariants,type ReactRootVariants,type ReactPropertySnapshot} from './react-root-variants.js';
+import type {ReactPropertySnapshot} from './react-root-variants.js';
+import {assembleReactRootMatrix,type ReactRootMatrix} from './react-root-matrix.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
 import type {ReactStyleOrigin} from './react-style-origin.js';
-import {observeReactPropertyEffects,type ReactPropertyEffects} from './react-property-effects.js';
+import {observeReactPropertyMatrix,type ReactPropertyMatrix} from './react-property-matrix.js';
 import {readReactStyleOrigin} from './react-style-origin.js';
 import { linkReactSourceAnatomy, type ReactSourceAnatomy } from './react-source-anatomy.js';
 import { projectReactRootVisual, type ReactRootVisual } from './react-root-visual.js';
@@ -45,8 +46,8 @@ export interface ReactOwnershipRow {
   ownership?: ReactOwnership;
   anatomy?: ReactSourceAnatomy;
   rootVisual?: ReactRootVisual;
-  propertyEffects?: ReactPropertyEffects;
-  rootVariants?: ReactRootVariants;
+  propertyMatrix?: ReactPropertyMatrix;
+  rootMatrix?: ReactRootMatrix;
 }
 export interface ReactOwnershipReport {
   id: string;
@@ -118,6 +119,9 @@ export function startReactOwnership(
           "react-property-probe.ts",
           "react-property-effects.ts",
           "react-root-variants.ts",
+          "react-property-matrix.ts",
+          "react-root-matrix.ts",
+          "react-root-sweep.ts",
           "react-program-proposal.ts",
           "../extract/computed/fuse.ts",
           "../core/mint-tokens.ts",
@@ -238,9 +242,9 @@ export function startReactOwnership(
               }
               if (instrumented && ownership && pair[0]?.tree === tree.treeSha256 && pair[0]?.png === tree.sourcePngSha256) {
                 const target = ownership.components.find(i => i.source.exportName === c.subject && i.roots.includes(""))!;
-                row.propertyEffects = await observeReactPropertyEffects({page, program, ownership, tree:tree.tree,
+                row.propertyMatrix = await observeReactPropertyMatrix({page, program, ownership, tree:tree.tree,
                   image:tree.sourcePngSha256, instanceId:target.id, selector:profile.path[0],
-                  dir:path.join(rowDir,"properties"), failures,
+                  dir:path.join(rowDir,"matrix"), failures,
                   assertCurrent:()=>{if(stopped || !unchanged())throw Error("react-property-effects-source-changed-or-interrupted");},
                 });
               }
@@ -264,12 +268,12 @@ export function startReactOwnership(
           row.ownership = pair[1].ownership;
           row.anatomy = linkReactSourceAnatomy(program, pair[1].ownership!, pair[0].root);
           row.rootVisual = projectReactRootVisual(program, pair[1].ownership!, pair[0].root, pair[1].styleOrigin);
-          if(row.propertyEffects){
-            const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(row.propertyEffects.rows
+          if(row.propertyMatrix){
+            const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(row.propertyMatrix.rows
               .filter(effect=>effect.status==="observed")
-              .map(effect=>[effect.id,JSON.parse(readFileSync(path.join(rowDir,"properties",effect.id+".json"),"utf8"))]));
-            row.rootVariants=assembleReactRootVariants(program,pair[1].ownership!,pair[0].root,row.propertyEffects,snapshots);
-            writeFileSync(path.join(rowDir,"root-variants.json"),JSON.stringify(row.rootVariants,null,2)+"\n",{flag:"wx"});
+              .map(effect=>[effect.id,JSON.parse(readFileSync(path.join(rowDir,"matrix",effect.id+".json"),"utf8"))]));
+            row.rootMatrix=assembleReactRootMatrix(program,pair[1].ownership!,pair[0].root,row.propertyMatrix,snapshots);
+            writeFileSync(path.join(rowDir,"root-matrix.json"),JSON.stringify(row.rootMatrix,null,2)+"\n",{flag:"wx"});
           }
           row.matched = true;
           writeFileSync(
@@ -297,7 +301,7 @@ export function startReactOwnership(
           : "react-ownership-source-changed";
       }
       if (terminal === "failed")
-        for (const row of state.rows) { row.matched = false; delete row.anatomy; delete row.rootVisual; delete row.propertyEffects; delete row.rootVariants; }
+        for (const row of state.rows) { row.matched = false; delete row.anatomy; delete row.rootVisual; delete row.propertyMatrix; delete row.rootMatrix; }
       state.matched = state.rows.filter((r) => r.matched).length;
       writeFileSync(
         path.join(dir, "report.json"),
@@ -326,7 +330,7 @@ export function startReactOwnership(
             problem: current
               ? "react-ownership-evidence-changed"
               : "react-ownership-source-changed",
-            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined, rootVisual: undefined, propertyEffects: undefined, rootVariants: undefined })),
+            rows: state.rows.map((r) => ({ ...r, matched: false, anatomy: undefined, rootVisual: undefined, propertyMatrix: undefined, rootMatrix: undefined })),
           };
     },
     close: () => {

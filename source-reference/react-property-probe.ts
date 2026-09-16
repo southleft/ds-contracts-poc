@@ -6,6 +6,7 @@ import {reactOwnershipRead, type ReactOwnership} from './react-ownership.js';
 import type {ReactSourceProgram, ReactTypeFact} from './react-source-program.js';
 
 export type ReactPropertyValue = {kind:'set'; value:string|number|boolean|null} | {kind:'omit'};
+export type ReactPropertyChanges = Record<string,ReactPropertyValue>;
 const reserved = new Set(['children','className','style','ref','key','id','__proto__','constructor','prototype']);
 const admits = (type:ReactTypeFact,value:unknown):boolean => type.kind==='union'
   ? type.members.some(member=>admits(member,value))
@@ -19,19 +20,22 @@ const sameSource=(a:ReactOwnership['components'][number]['source'],b:ReactOwners
  * is never itself evidence that the component responds to it. A defaultChecked
  * update, for example, need not update an already-mounted uncontrolled input.
  * Restoration is checked separately and is not a business-state rollback. */
-export async function probeReactProperty<T>(
+export async function probeReactProperties<T>(
  page:Page, selector:string, program:ReactSourceProgram, instanceId:string,
- property:string, requested:ReactPropertyValue, observe:()=>Promise<T>,
-):Promise<{before:T; changed:T; restored:T; ownershipRestored:boolean; requested:ReactPropertyValue}> {
- if(program.problems.length||reserved.has(property)) throw Error('react-property-probe-input-unsupported');
+ changes:ReactPropertyChanges, observe:()=>Promise<T>,
+):Promise<{before:T; changed:T; restored:T; ownershipRestored:boolean; changes:ReactPropertyChanges}> {
+ if(program.problems.length||!Object.keys(changes).length||Object.keys(changes).some(property=>reserved.has(property))) throw Error('react-property-probe-input-unsupported');
  const baseline=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
  if(baseline.problems.length) throw Error('react-property-probe-ownership-unqualified');
  const instance=baseline.components.find(c=>c.id===instanceId);
  const source=instance&&program.components.find(c=>sameSource(c,instance.source));
- const prop=source?.props.find(p=>p.name===property);
- if(!instance||!source||!prop) throw Error('react-property-probe-source-or-prop-missing');
- if(requested.kind==='omit' ? !prop.optional : !admits(prop.type,requested.value))
-  throw Error('react-property-probe-value-outside-source-api');
+ if(!instance||!source) throw Error('react-property-probe-source-or-prop-missing');
+ for(const [property,requested] of Object.entries(changes)){
+  const prop=source.props.find(p=>p.name===property);
+  if(!prop)throw Error('react-property-probe-source-or-prop-missing');
+  if(requested.kind==='omit' ? !prop.optional : !admits(prop.type,requested.value))
+   throw Error('react-property-probe-value-outside-source-api');
+ }
  const token=randomUUID();
  const mutate=(restore:boolean)=>page.evaluate(`(()=>{
   const state=window.__DSC_REACT_OWNERSHIP;
@@ -50,7 +54,13 @@ export async function probeReactProperty<T>(
   }else{
    if(state.propertyProbes.size)throw Error('react-property-probe-overlap');
    state.propertyProbes.set(key,target.fiber.memoizedProps);
-   ${requested.kind==='omit'?`renderer.overridePropsDeletePath(target.fiber,[${JSON.stringify(property)}]);`:`renderer.overrideProps(target.fiber,[${JSON.stringify(property)}],${JSON.stringify(requested.value)});`}
+   // All requested inputs change in ONE renderer update. Sequential calls
+   // would read the same memoizedProps and can overwrite earlier patches.
+   const next={...target.fiber.memoizedProps};
+   for(const [property,requested] of Object.entries(${JSON.stringify(changes)})){
+    if(requested.kind==='omit')delete next[property];else next[property]=requested.value;
+   }
+   renderer.overrideProps(target.fiber,[],next);
   }
   return revision;
  })()`);
@@ -67,7 +77,7 @@ export async function probeReactProperty<T>(
   const revision=await mutate(false);
   const next=await settle(revision),observed=next.components.find(c=>c.id===instanceId);
   if(!observed||!sameSource(observed.source,instance.source)||
-   (requested.kind==='omit'?Object.hasOwn(observed.props,property):!Object.is(observed.props[property],requested.value)))
+   Object.entries(changes).some(([property,requested])=>requested.kind==='omit'?Object.hasOwn(observed.props,property):!Object.is(observed.props[property],requested.value)))
    throw Error('react-property-probe-prop-not-applied');
   changed=await observe();
  }finally{
@@ -80,5 +90,12 @@ export async function probeReactProperty<T>(
   }
  }
  const restored=await observe(),after=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
- return {before,changed:changed!,restored,ownershipRestored:JSON.stringify(after)===JSON.stringify(baseline),requested};
+ return {before,changed:changed!,restored,ownershipRestored:JSON.stringify(after)===JSON.stringify(baseline),changes};
+}
+
+/** Existing one-property callers use the same atomic patch and restoration. */
+export async function probeReactProperty<T>(page:Page,selector:string,program:ReactSourceProgram,instanceId:string,
+ property:string,requested:ReactPropertyValue,observe:()=>Promise<T>){
+ const {changes:_,...result}=await probeReactProperties(page,selector,program,instanceId,{[property]:requested},observe);
+ return {...result,requested};
 }

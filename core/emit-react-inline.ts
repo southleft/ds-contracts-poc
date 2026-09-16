@@ -407,9 +407,23 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       for (const [value, overrides] of Object.entries(entry.map)) {
         const decls: StyleRecord = {};
         for (const [cssProp, ref] of Object.entries(overrides)) {
-          decls[camel(cssProp)] = resolveValue(stripBraces(ref));
-          if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
-            decls.minWidth = resolveValue(stripBraces(ref));
+          const refPath = stripBraces(ref), placeholders = placeholdersIn(refPath);
+          // A per-value map may retain one OTHER enum placeholder. This is
+          // how the shared compiler carries a coupled axis with omission.
+          if (placeholders.length === 1) {
+            const other = placeholders[0];
+            for (const otherValue of substByName.get(other) ?? []) {
+              const resolved = resolveValue(refPath.replaceAll(`{${other}}`, otherValue));
+              const compound: StyleRecord = { [camel(cssProp)]: resolved };
+              if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) compound.minWidth = resolved;
+              applyBorderStyle(compound, { [cssProp]: ref }, 'tokens', part.declared);
+              addVariantCompound([[entry.prop, value], [other, otherValue]], partName, compound);
+            }
+          } else {
+            decls[camel(cssProp)] = resolveValue(refPath);
+            if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
+              decls.minWidth = resolveValue(refPath);
+            }
           }
         }
         applyBorderStyle(decls, overrides, 'tokens', part.declared);

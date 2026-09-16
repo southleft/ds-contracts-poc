@@ -358,35 +358,36 @@ export function ReactSourceReference() {
                         <p>Measured values are provisional. Sample sizes, other property combinations, unresolved token bindings, token modes and native visual fidelity remain unqualified.</p>
                       </section>
                     )}
-                    {ownership.state === "complete" && row.matched && row.rootVariants && row.rootVariants.drafts.length>0 && (
-                      <section aria-label={`${row.id} root variants`}>
-                        <h4>Reusable root style drafts</h4>
-                        <p>Each draft preserves one observed property and a replaceable children slot. Other properties, nested styling and native visual fidelity still need assembly and verification.</p>
-                        {row.rootVariants.problems.length>0 && <p>{row.rootVariants.problems.join(" · ")}</p>}
-                        {row.rootVariants.drafts.map(draft=><details key={draft.property}>
-                          <summary>{draft.property}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root variants compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
+                    {ownership.state === "complete" && row.matched && row.rootMatrix && (
+                      <section aria-label={`${row.id} root matrix`}>
+                        <h4>Combined root style draft</h4>
+                        <p>Selected finite properties are observed together. The draft preserves their root styling and a replaceable children slot. Boolean state, nested styling, source sizing constraints and native visual fidelity remain unqualified.</p>
+                        {row.rootMatrix.problems.length>0 && <p>{row.rootMatrix.problems.join(" · ")}</p>}
+                        {row.rootMatrix.draft && [row.rootMatrix.draft].map(draft=><details key="draft">
+                          <summary>{draft.properties.join(" × ")}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root combinations compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
                           {draft.problems.length>0 && <p>{draft.problems.join(" · ")}</p>}
-                          {draft.contract && <p>Source values: {Object.values(draft.contract.props[0].bindings.code.values ?? (typeof draft.contract.props[0].type==="object" && "enum" in draft.contract.props[0].type ? Object.fromEntries(draft.contract.props[0].type.enum.map(v=>[v,v])) : {})).map(v=>JSON.stringify(v)).join(", ")}. Caller text and sample dimensions are excluded.</p>}
+                          {draft.contract?.props.map(prop=><p key={prop.name}>{prop.name}: {Object.values(prop.bindings.code.values ?? (typeof prop.type==="object" && "enum" in prop.type ? Object.fromEntries(prop.type.enum.map(v=>[v,v])) : {})).map(v=>JSON.stringify(v)).join(", ")}</p>)}
                           {!!draft.lowerings.length && <p>{draft.lowerings.length} normal flex-gap values use equivalent zero spacing.</p>}
                           {!!draft.residuals?.length && <details><summary>Unprojected styling</summary><ul>{draft.residuals.map((r,i)=><li key={i}>{r.channel}: {r.reason}</li>)}</ul></details>}
                         </details>)}
                       </section>
                     )}
-                    {ownership.state === "complete" && row.matched && row.propertyEffects && (
-                      <section aria-label={`${row.id} property effects`}>
-                        <h4>Source property effects</h4>
-                        <p>{row.propertyEffects.rows.filter(r=>r.status==="observed").length} / {row.propertyEffects.planned} planned observations completed. Each changes one property in this original example and verifies restoration. Combined property effects and behavior remain unqualified.</p>
-                        {row.propertyEffects.problems.length>0 && <p>{row.propertyEffects.problems.join(" · ")}</p>}
-                        {row.propertyEffects.skipped.map(p=><p key={p.property}>{p.property}: not observed ({p.reason})</p>)}
-                        {row.propertyEffects.rows.map(effect=><details key={effect.id}>
-                          <summary>{effect.property} = {effect.requested.kind==="omit" ? "omitted" : JSON.stringify(effect.requested.value)} · {effect.status==="refused" ? "not verified" : effect.visibleChange ? "visible change; original restored" : "no visible change; original restored"}</summary>
+                    {ownership.state === "complete" && row.matched && row.propertyMatrix && (
+                      <section aria-label={`${row.id} property matrix`}>
+                        <h4>Combined source property effects</h4>
+                        <p>{row.propertyMatrix.rows.filter(r=>r.status==="observed").length} / {row.propertyMatrix.planned} planned combinations observed. Each changes all selected properties in one React update and verifies restoration. Omission is observed separately before any default is collapsed.</p>
+                        {row.propertyMatrix.axes.map(axis=><p key={axis.property}>{axis.property}: {axis.values.map(v=>v.kind==="omit"?"omitted":JSON.stringify(v.value)).join(", ")}</p>)}
+                        {row.propertyMatrix.problems.length>0 && <p>{row.propertyMatrix.problems.join(" · ")}</p>}
+                        <details><summary>Properties outside this observation</summary>{row.propertyMatrix.skipped.map(p=><p key={p.property}>{p.property}: {p.reason}</p>)}</details>
+                        <details><summary>Review observed combinations</summary>{row.propertyMatrix.rows.map(effect=><details key={effect.id}>
+                          <summary>{Object.entries(effect.changes).map(([property,value])=>`${property} = ${value.kind==="omit"?"omitted":JSON.stringify(value.value)}`).join(" · ")} · {effect.status==="refused" ? "not verified" : effect.visibleChange ? "visible change; original restored" : "no visible change; original restored"}</summary>
                           {effect.problem && <p>{effect.problem}</p>}
                           {!!effect.changedInstances?.length && <details><summary>Changed component styles</summary>{effect.changedInstances.map(i=><p key={i.instanceId}>{i.name}: {i.channels.join(", ")}</p>)}</details>}
                           {effect.status==="observed" && <div className="native-image-pair">
-                            <figure><figcaption>Original example · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img alt={`${row.id} original before property change`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`}/></figure>
-                            <figure><figcaption>{effect.property}: {effect.requested.kind==="omit"?"omitted":JSON.stringify(effect.requested.value)} · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/properties/${effect.id}/${effect.image}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img alt={`${row.id} observed ${effect.property} effect`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/properties/${effect.id}/${effect.image}.png`}/></figure>
+                            <figure><figcaption>Original example · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img loading="lazy" alt={`${row.id} original before property changes`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`}/></figure>
+                            <figure><figcaption>Observed combination {effect.id} · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/matrix/${effect.id}/${effect.image}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img loading="lazy" alt={`${row.id} observed combination ${effect.id}`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/matrix/${effect.id}/${effect.image}.png`}/></figure>
                           </div>}
-                        </details>)}
+                        </details>)}</details>
                       </section>
                     )}
                     {ownership.state === "complete" && row.matched && (

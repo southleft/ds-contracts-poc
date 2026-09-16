@@ -361,16 +361,16 @@ export function createReactReferenceService(
       json(res, 404, { error: "No structure observation for this reference." });
       return;
     }
-    const propertyImage = /^react\/([a-f0-9]{64})\/ownership\/([a-f0-9-]{36})\/([a-z-]+)\/properties\/(\d+)\/([a-f0-9]{64})\.png$/.exec(route);
+    const propertyImage = /^react\/([a-f0-9]{64})\/ownership\/([a-f0-9-]{36})\/([a-z-]+)\/matrix\/(\d+)\/([a-f0-9]{64})\.png$/.exec(route);
     if (req.method === "GET" && propertyImage) {
       const [, referenceId, jobId, caseId, index, hash] = propertyImage;
       const job = ownershipJobs.get(referenceId), report = job?.report();
-      const row = report?.rows.find(r=>r.id===caseId), effect = row?.propertyEffects?.rows.find(r=>r.id===index);
+      const row = report?.rows.find(r=>r.id===caseId), effect = row?.propertyMatrix?.rows.find(r=>r.id===index);
       if(job?.state.id!==jobId || report?.state!=="complete" || !row?.matched || effect?.status!=="observed" || effect.image!==hash) {
         json(res,404,{error:"Verified property image unavailable."}); return;
       }
       try {
-        const bytes=readFileSync(path.join(job!.dir,caseId,"properties",index+".png"));
+        const bytes=readFileSync(path.join(job!.dir,caseId,"matrix",index+".png"));
         if(sha(bytes)!==hash)throw Error("changed");
         res.setHeader("Content-Type","image/png"); res.setHeader("Cache-Control","no-store");
         res.setHeader("Cross-Origin-Resource-Policy","same-origin"); res.end(bytes);

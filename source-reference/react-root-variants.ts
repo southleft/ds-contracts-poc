@@ -1,13 +1,12 @@
+import {compileReactRootSweep,retainReactRootSourceBindings} from './react-root-sweep.js';
 /** Reusable one-property root drafts from authenticated source observations.
  * Other properties, descendant effects and native fidelity stay unqualified. */
 import {revisionOf} from '../core/contract-provenance.js';
-import {ContractSchema,resolveTokens,tokensByPropEntries,type Contract} from '../scripts/contract-schema.js';
+import {ContractSchema,type Contract} from '../scripts/contract-schema.js';
 import {validateContract} from '../packages/core/src/validate.js';
 import {createFigmaEngine,type ComponentData} from '../core/emit-figma-script.js';
-import {mintTokens} from '../core/mint-tokens.js';
-import {enumerate,normalizeValue,type Capture,type CapturedNode,type FlatEl} from '../extract/computed/lib.js';
-import {enrichLayout,prepareMint,applyMintToContract,type AlignedSweep} from '../extract/computed/fuse.js';
-import type {PropSpace} from '../extract/computed/capture.js';
+import {enumerate,normalizeValue,type CapturedNode} from '../extract/computed/lib.js';
+import type {prepareMint} from '../extract/computed/fuse.js';
 import type {ReactSourceProgram} from './react-source-program.js';
 import type {ReactOwnership} from './react-ownership.js';
 import type {ReactStyleOrigin} from './react-style-origin.js';
@@ -101,46 +100,12 @@ export function assembleReactRootVariants(program:ReactSourceProgram,ownership:R
       bindings:{code:{prop:property,...(classified.codeValues?{values:classified.codeValues}:{})},figma:{kind:'VARIANT',property,values:Object.fromEntries(values.map(v=>[v,v])),...(defaultKey===undefined&&prop.optional?{unsetValue:'(unset)'}:{})}}}],
      states:[],semantics:{element:roots.get(baseValue)!.tag},anatomy:{root:{slot:{name:'children'}}},
      bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
-    const captures:Capture[]=enumeration.combos.map(c=>({combo:c.key,interaction:'default',root:roots.get(c.axisValues[property])!}));
-    const byKey=new Map(captures.map(c=>[c.combo+'__default',c])),alignedByKey=new Map(captures.map(c=>[c.combo+'__default',[{path:'',sig:'root',partName:'root',node:c.root}] as FlatEl[]]));
-    const baseCombo=enumeration.combos.find(c=>c.axisValues[property]===baseValue)!,base=byKey.get(baseCombo.key+'__default')!,baseFlat=alignedByKey.get(baseCombo.key+'__default')!;
-    const aligned:AlignedSweep={captures,byKey,base,baseFlat,inBase:[true],partNames:['root'],union:{entries:[{id:0,sig:'root',rep:base.root,repPath:'',repKey:baseCombo.key,inBase:true,parent:null,children:[],partName:'root'}],alignedByKey,receipts:[]},getAligned:key=>alignedByKey.get(key)??[null],structureReceipts:[],anatomyJoin:[{part:'root',join:'matched'}],staticOnlyParts:[]};
-    const space:PropSpace={contract,axes:[axis],presence:new Map(),stateProps:[],enumeration,baseComboKey:baseCombo.key,baseAxisValues,heldFixed:[]};
-    const channels=new Set([...roots.values()].flatMap(r=>Object.keys(r.style)).filter(c=>!reactRootStyleExclusion(c))),styled=new Map([['root',channels]]);
-    const layout=enrichLayout(aligned,space,styled,contract);if(layout.contradictions.length)throw Error('react-root-variants-layout-contradiction');
-    const prep=prepareMint(aligned,{name,importName:name,contract:'',sampleText:'',axes:[property]},space,styled,[],layout.handled,contract);
-    const minted=mintTokens(name,prep.baseObs,prep.axes,{nestedPairs:true}),states=mintTokens(name,prep.stateObs,prep.axes,{nestedPairs:true});
-    const applied=applyMintToContract(contract,space,minted,prep.baseObs,states,prep.stateObs,layout.enriched,prep.declared,prep.declaredStates,prep.setPlaneLiterals,{only:prep.inheritanceOnly,stateDeltas:prep.inheritanceStateDeltas},prep.stateCodeOnly);
-    const enriched=ContractSchema.parse(applied.enriched),tokens=structuredClone(minted.tree);
-    const named:Record<string,any>=Object.create(null),bindingMaps:Record<string,Record<string,string>>=Object.create(null);
-    const boundChannels=new Set([...projections.values()].flatMap(p=>(p.sourceBindings??[]).filter(b=>b.tokenPath).map(b=>b.channel)));
-    for(const channel of boundChannels){
-     for(const value of axisValues){
-      const projection=projections.get(value)!,binding=projection.sourceBindings?.find(b=>b.channel===channel&&b.tokenPath);
-      let ref=resolveTokens(enriched.anatomy.root,{[property]:value})[channel]?.replaceAll('{'+property+'}',value);
-      if(binding?.tokenPath){
-       const key=binding.tokenPath.split('.').at(-1)!,leaf=(projection.tokens?.source as any)?.css?.[key];
-       if(!leaf)throw Error('react-root-variants-source-token-missing');
-       if(named[key]&&(named[key].$type!==leaf.$type||JSON.stringify(named[key].$value)!==JSON.stringify(leaf.$value)))throw Error('react-root-variants-source-variable-scope-conflict');
-       if(!named[key])named[key]=structuredClone(leaf);
-       else{const a=named[key].$extensions['dev.ds-contracts.css-source'],b=leaf.$extensions['dev.ds-contracts.css-source'];a.selectors=[...new Set([...a.selectors,...b.selectors])].sort();}
-       ref='{'+binding.tokenPath+'}';
-      }
-      if(!ref)throw Error('react-root-variants-binding-channel-missing');
-      if(value===unset&&defaultKey===undefined){enriched.anatomy.root.tokens??={};enriched.anatomy.root.tokens[channel]=ref;}
-      else (bindingMaps[value]??={})[channel]=ref;
-     }
-    }
-    if(Object.keys(named).length)tokens.source={css:named};
-    if(Object.keys(bindingMaps).length){
-     // Replace this axis's binding for the affected channels, preserving other
-     // channels. A channel/prop pair may occur only once in the shared schema.
-     const entries=tokensByPropEntries(enriched.anatomy.root).map(e=>({...e,map:Object.fromEntries(Object.entries(e.map).map(([k,v])=>[k,Object.fromEntries(Object.entries(v).filter(([c])=>e.prop!==property||!boundChannels.has(c)))]))}));
-     enriched.anatomy.root.tokensByProp=[...entries,{prop:property,map:bindingMaps}];
-    }
+    const byCombo=new Map(enumeration.combos.map(c=>[c.key,roots.get(c.axisValues[property])!]));
+    const {enriched,tokens,residuals}=compileReactRootSweep(contract,[axis],baseAxisValues,byCombo);
+    retainReactRootSourceBindings(enriched,tokens,[axis],baseAxisValues,new Map(enumeration.combos.map(c=>[c.key,projections.get(c.axisValues[property])!])));
     if(enriched.anatomy.root.parts||enriched.anatomy.root.content||enriched.anatomy.root.slot?.name!=='children')throw Error('react-root-variants-content-boundary-changed');
     const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)throw Error('react-root-variants-invalid:'+errors.join(';'));
-    result.contract=enriched;result.tokens=tokens;result.residuals=[...prep.codeOnly,...prep.stateCodeOnly];result.status='style-prepared';
+    result.contract=enriched;result.tokens=tokens;result.residuals=residuals;result.status='style-prepared';
     const engine=createFigmaEngine({tokens:{primitives:tokens,semantic:{},light:{},dark:{},brands:{default:{}}},icons:new Map()});
     result.native=engine.compileComponentData(enriched,new Map([[enriched.id,enriched]]));result.status='native-compiled';
    }catch(error){result.problems.push(error instanceof Error?error.message:String(error));}
