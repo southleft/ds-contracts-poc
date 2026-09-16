@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildPluginZip } from "../scripts/build-plugin-zip.mjs";
-import { createReferenceService } from "../source-reference/service";
+import { createReferenceService } from "../source-reference/service.js";
 
 const playgroundRoot = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(playgroundRoot, "..");
@@ -67,6 +67,10 @@ export default defineConfig({
   },
   server: {
     port: 5181,
+    // Vite runs CORS before configureServer middleware. Let the source service
+    // handle preflights for its two capability-protected plugin endpoints; keep
+    // Vite's default origin policy for every other resource.
+    cors: { preflightContinue: true },
     fs: {
       // The playground imports the engine and its data from outside its own
       // root (../core, ../contracts, ../tokens, ../assets, ../src/styles,

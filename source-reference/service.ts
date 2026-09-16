@@ -619,6 +619,7 @@ export function createReferenceService(
   }
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
   const snapshotWithSupplement = (job: ReferenceJob) => {
+    const connectionObservedAt = Date.now();
     const candidates = candidateJobs.list(job.id);
     const nativeOperation = nativeJobs.forBaseline(job.id);
     return {
@@ -639,7 +640,7 @@ export function createReferenceService(
       nativeOperation,
       nativeConnection:
         nativeOperation && nativeOperation.phase !== "evidence-unavailable"
-          ? nativeTransport.status(nativeOperation.id)
+          ? nativeTransport.status(nativeOperation.id, connectionObservedAt)
           : null,
     };
   };

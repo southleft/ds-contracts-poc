@@ -285,7 +285,7 @@ let busy = false; // one run at a time, across both modes
 // One app-owned journal supplies commands. Fetch never takes a caller URL or
 // caller script. Exclusive host handoff prevents another client from receiving
 // an already delivered creation; durable receipts recover lost acknowledgments.
-const NATIVE_APP_BASE = 'http://127.0.0.1:5181/api/source-reference/native/';
+const NATIVE_APP_BASE = 'http://localhost:5181/api/source-reference/native/';
 const NATIVE_SCRATCH = 'byMp6lt0Ij9b2QbkDGFwBh';
 const NATIVE_UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
 const NATIVE_PAIR = new RegExp('^dscn_(' + NATIVE_UUID + ')\\.([a-f0-9]{64})$');

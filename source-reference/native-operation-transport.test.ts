@@ -38,10 +38,10 @@ test("development manifest exposes file identity and the fixed local app endpoin
   );
   assert.equal(manifest.enablePrivatePluginApi, true);
   assert(
-    manifest.networkAccess.devAllowedDomains.includes("http://127.0.0.1:5181"),
+    manifest.networkAccess.devAllowedDomains.includes("http://localhost:5181"),
   );
   assert(
-    !manifest.networkAccess.allowedDomains.includes("http://127.0.0.1:5181"),
+    !manifest.networkAccess.allowedDomains.includes("http://localhost:5181"),
   );
 });
 async function fixture(t: test.TestContext) {
@@ -126,7 +126,7 @@ async function fixture(t: test.TestContext) {
   const fetch = async (url: string, init: any) => {
     assert(
       url.startsWith(
-        `http://127.0.0.1:5181/api/source-reference/native/${id}/`,
+        `http://localhost:5181/api/source-reference/native/${id}/`,
       ),
     );
     const supplied = init.headers.Authorization.slice(7),
@@ -475,4 +475,27 @@ test("finished inspections keep a read-only failed observation retryable", async
   assert.equal(f.transport.status(f.id).finished, false);
   await f.poll();
   assert.equal(f.jobs.get(f.id).phase, "component-structure-observed");
+});
+
+test("source validation latency cannot expire a heartbeat sampled at request entry", async (t) => {
+  const f = await fixture(t);
+  let now = Date.now();
+  t.mock.method(Date, "now", () => now);
+  await f.poll();
+  const observedAt = now;
+  assert.equal(f.transport.status(f.id).connected, true);
+  now += 16_000;
+  assert.equal(f.transport.status(f.id, observedAt).connected, true);
+  assert.equal(
+    f.transport.status(f.id).connected,
+    false,
+    "a later request sees real expiry",
+  );
+  await f.poll();
+  assert.equal(f.transport.status(f.id).connected, true);
+  assert.equal(
+    f.jobs.get(f.id).phase,
+    "prepared",
+    "heartbeat grants no dispatch authority",
+  );
 });

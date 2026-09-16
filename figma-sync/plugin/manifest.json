@@ -16,8 +16,8 @@
     "devAllowedDomains": [
       "http://localhost:8765",
       "http://localhost:8787",
-      "http://127.0.0.1:5181"
+      "http://localhost:5181"
     ],
-    "reasoning": "The workers.dev origin is the pairing bridge and the standing channel: Send POSTs the read-only component dump there, and Build/Changes receive pushed contract bundles from it (by pairing code, or by read key from a CI-published channel). api.github.com carries the OPTIONAL Propose-change PR flow (BYO fine-grained token, session-only, never stored; dry-run sends nothing). Dev-only: the local runner fetches generated figma-sync scripts from npm run figma:serve (port 8765), 8787 is wrangler dev for testing the bridge locally, and 127.0.0.1:5181 connects the authenticated local source-operation journal to the companion plugin."
+    "reasoning": "The workers.dev origin is the pairing bridge and the standing channel: Send POSTs the read-only component dump there, and Build/Changes receive pushed contract bundles from it (by pairing code, or by read key from a CI-published channel). api.github.com carries the OPTIONAL Propose-change PR flow (BYO fine-grained token, session-only, never stored; dry-run sends nothing). Dev-only: the local runner fetches generated figma-sync scripts from npm run figma:serve (port 8765), 8787 is wrangler dev for testing the bridge locally, and localhost:5181 connects the authenticated local source-operation journal to the companion plugin."
   }
 }

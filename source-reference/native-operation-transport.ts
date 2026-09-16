@@ -120,9 +120,12 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
       }
     }
   };
-  const status = (id: string) => {
+  const status = (id: string, observedAt = Date.now()) => {
     const dir = directory(id);
-    const connected = Date.now() - (seen.get(id) ?? 0) < 15_000;
+    // Liveness is sampled at request entry, before synchronous source validation
+    // can prevent the event loop from processing another plugin heartbeat.
+    const lastSeen = seen.get(id);
+    const connected = lastSeen !== undefined && observedAt - lastSeen < 15_000;
     const started = existsSync(path.join(dir, "started.json"));
     const state = started ? jobs.deliveryState(id) : null;
     return {
