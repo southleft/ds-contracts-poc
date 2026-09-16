@@ -318,6 +318,21 @@ export function ReactSourceReference() {
                         </li>
                       ))}
                     </ul>
+                    {ownership.state === "complete" && row.matched && row.anatomy && (
+                      <section aria-label={`${row.id} source anatomy`}>
+                        <h4>Source-to-rendered anatomy</h4>
+                        <p>Observed roots and caller content are linked below. Styling rules, native behavior and generation remain unqualified.</p>
+                        {row.anatomy.problems.length > 0 && <p>{row.anatomy.problems.join(" · ")}</p>}
+                        <ul>{row.anatomy.instances.map(instance => (
+                          <li key={instance.instanceId}>
+                            {instance.source.exportName}: {instance.roots.map(root => `<${root.tag}> (${root.correspondence})`).join(", ")}
+                            {instance.content === "caller-slot" ? " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
+                            {instance.dependencies.length > 0 && ` · ${instance.dependencies.length} nested component instance(s) kept as references`}
+                            {instance.problems.length > 0 && ` · ${instance.problems.join(" · ")}`}
+                          </li>
+                        ))}</ul>
+                      </section>
+                    )}
                     {ownership.state === "complete" && row.matched && (
                       <div className="native-image-pair">
                         {(["source", "observed"] as const).map((side) => (
