@@ -21,6 +21,8 @@ export interface NativeContractComparisonReference {
   receipt: NativeSourceReadback;
   variantName: string;
   slotSpecPath: number[];
+  /** Preserve the complete observed main; no caller slot is populated. */
+  contentMode?: 'source-owned';
 }
 export interface NativeContractComparisonInput {
   parent: NativeContractObservationInput;
@@ -55,10 +57,16 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       contract.bindings.figma.anchors.componentSetKey || component.variants.length !== 1 || component.stateVariants?.length ||
       component.boolProps.length || component.textProps.length || component.nativeSourceCandidate || component.nativeContractDraft)
     fail('snapshot-contract-required');
-  const select = (input: Omit<NativeContractComparisonInput, 'caseId'>) => {
+  const select = (input: Omit<NativeContractComparisonInput, 'caseId'> & { contentMode?: 'source-owned' }) => {
     const variants = input.parent.component.variants.filter(v => v.name === input.variantName);
     const mains = input.parent.creation.variants.filter((v: { name: string }) => v.name === input.variantName);
     if (variants.length !== 1 || mains.length !== 1) fail('main-ambiguous');
+    if (input.contentMode === 'source-owned') {
+      const hasSlot = (spec: NodeSpec): boolean => spec.type === 'slot' || !!spec.children?.some(hasSlot);
+      if (input.slotSpecPath.length || input.parent.component.rootSlot || hasSlot(variants[0].spec) ||
+          variants[0].spec.rootFillWidth) fail('source-owned-main-unqualified');
+      return { mainId: mains[0].id as string };
+    }
     let slot = variants[0].spec;
     if (!Array.isArray(input.slotSpecPath) || input.slotSpecPath.length > 32) fail('slot-path-invalid');
     for (const index of input.slotSpecPath) {
@@ -120,10 +128,11 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     const out = structuredClone(spec);
     const instance = instances.findIndex(ref => JSON.stringify(ref.specPath) === JSON.stringify(specPath));
     if (instance !== -1) {
-      if (spec.type !== 'frame' || !spec.children?.length) fail('nested-caller-content-required');
+      if (spec.type !== 'frame' || (!spec.children?.length && instances[instance].contentMode !== 'source-owned')) fail('nested-caller-content-required');
       used.add(instance);
     }
     out.nativeContractSample = { caseId: input.caseId, contentRevision: revisionOf(contract), specPath, ...(instance !== -1 ? { instance } : {}) };
+    if (instance !== -1 && instances[instance].contentMode === 'source-owned') { delete out.children; return out; }
     if (spec.children) out.children = spec.children.map((child, i) => annotate(child, [...specPath, i]));
     return out;
   };
@@ -149,7 +158,7 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       if (!spec.children?.[index]) fail('nested-main-path-missing');
       spec = spec.children![index];
     }
-    Object.assign(reference, { contentRows: checkCapacity(reference, spec.children ?? []) });
+    if (reference.contentMode !== 'source-owned') Object.assign(reference, { contentRows: checkCapacity(reference, spec.children ?? []) });
   }
   const specs = root.children!.map((spec, i) => annotate(spec, [i]));
   if (used.size !== instances.length) fail('nested-main-path-missing');
@@ -317,8 +326,12 @@ async function nativeBuildContractComparison() {
 
 /** Preserve the existing receipt/script format when no verified grid carrier is
  * involved. Only compiler-owned content frames can become insertion targets. */
-export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false): string {
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false): string {
   let script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+  if (sourceOwned) script = script.replace(
+    '  const slot = parts.get(nativeCanonical(c.slotSpecPath));',
+    "  if (c.contentMode === 'source-owned') { recorded.status = 'created-comparison'; return inst; }\n  const slot = parts.get(nativeCanonical(c.slotSpecPath));"
+  ).replace("if (nativeCanonical(identity.specPath) !== nativeCanonical(path))", "if (c.contentMode !== 'source-owned' && nativeCanonical(identity.specPath) !== nativeCanonical(path))");
   if (fillWidth) script = script.replace('  dsStampFingerprints(inst);', `
   // Construction uses a temporary page parent. Set FILL only after every
   // nested instance is attached, from outer parents toward inner children.

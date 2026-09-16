@@ -104,6 +104,7 @@ export function prepareNativeSourceWrite(
       parent: { tokenIdentity: contractComparison.parent.tokenIdentity },
       ...(contractComparison.instances?.length ? { instances: contractComparison.instances.map(ref => ({
         specPath: ref.specPath, mainId: ref.mainId, slotSpecPath: ref.slotSpecPath,
+        ...(ref.contentMode ? { contentMode: ref.contentMode } : {}),
         ...(ref.contentSpecPath ? { contentSpecPath: ref.contentSpecPath } : {}),
         ...(ref.contentRows ? { contentRows: ref.contentRows } : {}),
         ...(ref.fillWidth ? { fillWidth: true } : {}),

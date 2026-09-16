@@ -148,8 +148,8 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         const index = spec.nativeContractSample.instance, reference = references[index];
         const record = nestedRecords.find((row: Row) => row.index === index);
         if (!reference || !record || record.instanceId !== n.id || record.mainId !== reference.mainId ||
-            n.mainId !== reference.mainId || record.status !== 'created-comparison' || record.slots?.length !== 1 ||
-            !same(record.slots[0].specPath, reference.slotSpecPath) ||
+            n.mainId !== reference.mainId || record.status !== 'created-comparison' || record.slots?.length !== (reference.contentMode === 'source-owned' ? 0 : 1) ||
+            (reference.contentMode !== 'source-owned' && !same(record.slots[0].specPath, reference.slotSpecPath)) ||
             !same(spec.nativeContractSample.specPath, reference.specPath) ||
             !same(meta(n, 'nativeContractSample'), spec.nativeContractSample)) { issue('nested-instance-identity', n); return; }
         const parentNodes = new Map(reference.receipt.nodes!.map(row => [row.id, row]));
@@ -213,7 +213,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     // Content changes a hugging instance's geometry, but not the main's styles,
     // property bindings or other children. Compare every remaining observed field.
     const geometry = new Set(['x','y','width','height','relativeTransform','resolvedVariableModes','explicitVariableModes']);
-    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'contentSpecPath' | 'variantName' | 'specs'>;
+    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'contentSpecPath' | 'variantName' | 'specs'> & { contentMode?: 'source-owned' };
     const pair = (original: Row | undefined, actual: Row | undefined, specPath: number[],
       reference: Reference = p, record: Row = c.comparisons[0], parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]))) => {
       if (!original || !actual || checked.has(actual.id)) { issue('main-instance-pairing'); return; }
@@ -246,13 +246,15 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
         if (!specPath.length && NATIVE_GRID_CHILD_FIELDS.includes(field) && nodes.get(actual.parentId)?.values.layoutMode === 'GRID') continue;
         if (!specPath.length && fullWidth && field === 'layoutSizingHorizontal') continue;
         if (contentGrid?.layout?.grid?.flowRows && ['gridRowCount', 'gridRowSizes'].includes(field)) continue;
-        if (!geometry.has(field) && !same(actual.values[field], original.values[field])) issue('main-instance-' + field, actual);
+        if ((!geometry.has(field) || reference.contentMode === 'source-owned' &&
+            (['width', 'height'].includes(field) || specPath.length > 0 && ['x', 'y', 'relativeTransform'].includes(field))) &&
+            !same(actual.values[field], original.values[field])) issue('main-instance-' + field, actual);
       }
       if (!specPath.length) for (const [key, value] of Object.entries(original.variantProperties ?? {}))
         if (actual.componentProperties?.[key]?.type !== 'VARIANT' || actual.componentProperties[key].value !== value) issue('main-instance-property', actual);
-      if (same(specPath, reference.slotSpecPath) && (actual.id !== record.slots[0].nodeId || actual.type !== 'SLOT' ||
+      if (reference.contentMode !== 'source-owned' && same(specPath, reference.slotSpecPath) && (actual.id !== record.slots[0].nodeId || actual.type !== 'SLOT' ||
           actual.values.componentPropertyReferences?.slotContentId !== record.slots[0].propertyKey)) issue('slot-content', actual);
-      if (same(specPath, reference.contentSpecPath ?? reference.slotSpecPath)) {
+      if (reference.contentMode !== 'source-owned' && same(specPath, reference.contentSpecPath ?? reference.slotSpecPath)) {
         if (actual.childIds.length !== reference.specs.length || !same(actual.childIds, record.slots[0].contentNodeIds))
           issue('slot-content', actual);
         if (reference.contentSpecPath) {

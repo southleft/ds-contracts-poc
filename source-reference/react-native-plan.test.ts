@@ -290,9 +290,11 @@ for (const kind of ['root', 'initial', 'nested'] as const) test(`React ${kind} j
   assert.equal(jobs.listReact(request.referenceId)[0].kind, kind);
   if (kind === 'initial') {
     assert.deepEqual(jobs.reactInitialRequest(first.id), initialRequest);
+    assert.deepEqual(jobs.verifiedReactInitialObservation(first.id).request, initialRequest);
     assert.throws(() => jobs.reactRequest(first.id), /react-operation-required/);
   }
   current = false;
+  if (kind === 'initial') assert.throws(() => jobs.verifiedReactInitialObservation(first.id));
   assert.equal(jobs.get(first.id).sourceCurrent, false);
   assert.equal(jobs.get(first.id).phase, 'component-structure-observed');
 });

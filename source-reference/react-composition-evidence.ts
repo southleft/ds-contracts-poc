@@ -5,7 +5,7 @@ import { evidenceSha } from './react-validation-evidence.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
 import { readReactNativeEvidence } from './react-native-evidence.js';
 import { deriveReactChildRoot } from './react-child-root.js';
-import { compileObservedContent } from './observed-content.js';
+import { compileObservedContent, prepareObservedContentTree } from './observed-content.js';
 import { matchReactComposition, type ReactCompositionMain } from './react-composition.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import type { ReactSourceProgram } from './react-source-program.js';
@@ -14,11 +14,13 @@ import type { ReactReference } from './react-reference.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
 import type { ReactPropertySnapshot } from './react-root-variants.js';
 import { readReactContentInspectionEvidence } from './react-content-inspection.js';
+import type { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import { flatten } from '../extract/computed/lib.js';
 
 export function readReactCompositionEvidence(repo: string, reference: ReactReference, request: ReactNativeRequest,
-  parentId: string, jobs: Pick<ReturnType<typeof createNativeOperationJobs>, 'listReact' | 'verifiedReactObservation'>,
-  pinnedContent?: { id: string; inventorySha256: string }) {
+  parentId: string, jobs: Pick<ReturnType<typeof createNativeOperationJobs>, 'listReact' | 'verifiedReactObservation' | 'verifiedReactInitialObservation'>,
+  pinnedContent?: { id: string; inventorySha256: string },
+  initialEvidence?: ReturnType<typeof createReactInitialInspectionStore>['nativeEvidence']) {
   const inspected = readReactContentInspectionEvidence(repo, reference, request, parentId, pinnedContent);
   if (!inspected || inspected.report.phase !== 'complete' || !inspected.report.sourceUnchanged ||
       inspected.report.content?.status !== 'compiled-comparison-draft') throw Error('react-composition-content-unavailable');
@@ -40,15 +42,34 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
   const content = compileObservedContent(original.captured.tree, read('text-fonts.json'), read('svg-viewports.json'), true,
     [...new Set(boundaries)].sort());
   const mains: ReactCompositionMain[] = [];
+  const staleInitialSources: ReactCompositionMain['source'][] = [];
   const sources = row.ownership.components.filter(c => !c.roots.includes('')).map(c => JSON.stringify(c.source));
   // A leaf has no native dependencies to join. Its own archive and content
   // were authenticated above; unrelated native operations cannot affect it.
   if (!sources.length) return { ...matchReactComposition(program, row.ownership, original.captured.tree, content, mains), content, inspection: saved, inspectionSelection: inspected.selection };
-  const operations = jobs.listReact(reference.id, 'root').sort((a, b) => a.operation.id.localeCompare(b.operation.id));
+  const operations = jobs.listReact(reference.id, 'mains').sort((a, b) => a.operation.id.localeCompare(b.operation.id));
   for (const operation of operations) {
-    if (!['root', 'nested'].includes(operation.kind) || operation.operation.id === parentId ||
+    if (!['root', 'nested', 'initial'].includes(operation.kind) || operation.operation.id === parentId ||
         operation.ownershipId !== request.ownership.id || operation.operation.phase !== 'component-structure-observed') continue;
     const candidate = report.rows.find(r => r.id === operation.caseId);
+    if (operation.kind === 'initial') {
+      if (!initialEvidence) continue;
+      let observed;
+      try { observed = jobs.verifiedReactInitialObservation(operation.operation.id); } catch {
+        const source = candidate?.ownership?.components.find(c => c.roots.includes(''))?.source;
+        if (source) staleInitialSources.push(source);
+        continue;
+      }
+      if (observed.request.anchor.ownership.sha256 !== request.ownership.sha256 ||
+          observed.request.anchor.inventorySha256 !== request.inventorySha256)
+        throw Error('react-composition-candidate-archive-changed');
+      const selected = initialEvidence(reference, observed.request);
+      if (!sources.includes(JSON.stringify(selected.composition.source))) continue;
+      mains.push({ source: selected.composition.source, heldProps: selected.composition.heldProps,
+        sourceOwnedTrees: selected.composition.trees, styles: {}, contract: selected.draft.compiled!.contract!,
+        input: observed.input, receipt: observed.receipt });
+      continue;
+    }
     if (operation.kind === 'nested') {
       // The verifier can return a separately authenticated, completed update.
       // A stale creation plan alone is never enough to admit this candidate.
@@ -88,7 +109,12 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
     mains.push({ source: matrix.source, heldProps: matrix.heldProps, styles,
       contract: candidate.rootMatrix.draft.contract, input: observed.input, receipt: observed.receipt });
   }
-  const result = matchReactComposition(program, row.ownership, original.captured.tree, content, mains);
+  const result = matchReactComposition(program, row.ownership, original.captured.tree, content, mains,
+    prepareObservedContentTree(original.captured.tree, read('text-fonts.json'), read('svg-viewports.json')));
+  for (const row of result.review.rows) if (row.problems.includes('react-composition-main-not-verified') &&
+      staleInitialSources.some(source => source.module === row.module && source.exportName === row.exportName))
+    row.problems = row.problems.map(problem => problem === 'react-composition-main-not-verified'
+      ? 'react-composition-initial-main-observation-stale' : problem);
   const origin = JSON.parse(readFileSync(path.join(dir, request.caseId, 'style-origin.json'), 'utf8'));
   for (const child of result.review.rows) {
     child.canPrepareMain = false;

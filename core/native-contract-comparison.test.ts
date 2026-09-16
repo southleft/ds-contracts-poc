@@ -441,3 +441,19 @@ test('managed content materializes intrinsic flow rows without changing the reus
   assert.equal((await f.run(f.emit())).allocationAttempted,false);
   assert.equal(f.figma.root.findAll(()=>true).length,count);
 });
+
+
+test('comparison selects Boolean variants without coercing strings or omitted inputs', () => {
+  const contract = ContractSchema.parse({ id: 'fixture.bool', name: 'Bool', version: '0.1.0', status: 'draft', description: 'Boolean domain',
+    props: [{name:'disabled',type:'boolean',bindings:{code:{prop:'disabled'},figma:{kind:'VARIANT',property:'disabled',unsetValue:'(unset)'}}}],
+    states: [], semantics: {element:'button'}, anatomy:{root:{}},
+    bindings:{code:{anchors:{importPath:'./fixture',export:'Bool'}},figma:{anchors:{fileKey:null,componentSetKey:null}}} });
+  assert.equal(reactComparisonVariant(contract, {disabled:false}), 'disabled=false');
+  assert.equal(reactComparisonVariant(contract, {disabled:true}), 'disabled=true');
+  assert.equal(reactComparisonVariant(contract, {}), 'disabled=(unset)');
+  assert.equal(reactComparisonVariant(contract, {disabled:{kind:'undefined'}}), 'disabled=(unset)');
+  for (const disabled of ['false','true',0,1,null]) assert.throws(()=>reactComparisonVariant(contract,{disabled}),/value-unqualified/);
+  contract.props[0].bindings.code.values = {false:'enabled',true:'disabled'};
+  assert.equal(reactComparisonVariant(contract,{disabled:'disabled'}),'disabled=true');
+  assert.throws(()=>reactComparisonVariant(contract,{disabled:true}),/value-unqualified/);
+});

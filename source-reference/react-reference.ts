@@ -279,7 +279,7 @@ export function createReactReferenceService(
           if (childRoute) {
             const parent = jobs.reactRequest(childRoute[2]);
             if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
-            const composition = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs);
+            const composition = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs, undefined, initialStates.nativeEvidence);
             const review = composition.review;
             const existing = jobs.listReact(reference.id, 'root').find(row => row.kind === 'nested' &&
               row.caseId === parent.caseId && row.ownershipId === parent.ownership.id && row.nestedInstanceId === childRoute[3]);
@@ -328,7 +328,7 @@ export function createReactReferenceService(
               await frames.create(reference.id, id);
             } else if (nativeAction[3] === 'comparison') {
               jobs.verifiedReactObservation(id);
-              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs)));
+              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs, undefined, initialStates.nativeEvidence)));
             } else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
@@ -356,7 +356,7 @@ export function createReactReferenceService(
                 try {
                   // The composition reader authenticates and returns the saved
                   // inspection too. Do not read the same sealed archive twice.
-                  const evidence = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(id), id, jobs);
+                  const evidence = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(id), id, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
                   if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
                   content = evidence.inspection; composition = evidence.review;
                 } catch {
@@ -733,7 +733,7 @@ export function createReactReferenceService(
       if (!reference) throw Error('react-native-reference-unavailable');
       return readReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
         ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
-          { id: request.content.id, inventorySha256: request.content.inventorySha256 }) : undefined);
+          { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
     },
     nativeEvidence(request: ReactNativeRequest) {
       if (!reference) throw Error('react-native-reference-unavailable');

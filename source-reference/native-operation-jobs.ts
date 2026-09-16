@@ -1476,6 +1476,20 @@ export function createNativeOperationJobs(
       delete receipt.images;
       return structuredClone({ input, receipt, request: loaded.header.request });
     },
+    verifiedReactInitialObservation(id: string) {
+      const loaded = load(id);
+      if (!isReactInitialNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
+          loaded.state.phase !== 'component-structure-observed' || loaded.state.pending || !loaded.state.imageReadback)
+        fail('react-parent-observation-required');
+      const updated = options.react?.updatedObservation?.(id);
+      if (updated) return structuredClone({ ...updated, request: loaded.header.request });
+      authenticate(loaded);
+      const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
+      delete input.allocationAnchor;
+      const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
+      delete receipt.images;
+      return structuredClone({ input, receipt, request: loaded.header.request });
+    },
     reactIdentity(id: string) {
       const { header } = load(id);
       const request = isReactInitialNativeRequest(header.request) ? { ...header.request.anchor, caseId: header.request.caseId } : isReactComparisonRequest(header.request) ? header.request.root : header.request;
@@ -1483,13 +1497,14 @@ export function createNativeOperationJobs(
       return { referenceId: request.referenceId, caseId: request.caseId,
         ownershipId: request.ownership.id, fileKey: header.policy.fileKey };
     },
-    listReact(referenceId: string, kind?: 'root') {
+    listReact(referenceId: string, kind?: 'root' | 'mains') {
       if (!HASH.test(referenceId)) fail('request-invalid');
       if (!present(root)) return [];
       directories();
       return readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
         if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
+        if (kind === 'mains' && !isReactNativeRequest(header.request) && !isReactInitialNativeRequest(header.request)) return [];
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
         const initial = isReactInitialNativeRequest(header.request) ? header.request : undefined;
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;

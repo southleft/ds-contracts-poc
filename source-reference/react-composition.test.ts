@@ -4,6 +4,7 @@ import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { nativeComparisonFixture } from '../core/native-contract-comparison-test-fixture.js';
+import { emitNativeContractReadbackScript, type NativeContractObservationInput } from '../core/native-source-observation.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import { readReactSourceProgram } from './react-source-program.js';
 import { compileObservedContent } from './observed-content.js';
@@ -24,7 +25,7 @@ import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { readReactNativeEvidence, selectReactChildRequest, selectReactNativeRequest } from './react-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 
-async function fixture() {
+async function fixture(sourceOwned = false) {
   const dir = mkdtempSync(path.join(tmpdir(), 'react-composition-'));
   try {
     writeFileSync(path.join(dir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { jsx: 'preserve', strict: true, target: 'ES2022', skipLibCheck: true } }));
@@ -60,6 +61,21 @@ export function Child(props: {children?: string; id?: string}) { return <button 
     const content = compileObservedContent(tree, fonts, undefined, true);
     assert.equal(content.status, 'compiled-comparison-draft', content.problems.join(','));
     const native = await nativeComparisonFixture();
+    if (sourceOwned) {
+      // Runtime-owned source content uses a complete native main, not a slot.
+      delete ownership.nodes[1].createdBy;
+      const owned = native.contract('fixture.main', { root: { layout: { display: 'inline-flex', direction: 'row' },
+        literals: { width: '16px', height: '16px' } } });
+      const context = await native.context('10000000-0000-4000-8000-000000000003');
+      const data = native.engine.compileNativeContractDraft(owned, new Map([[owned.id, owned]]), native.source);
+      const creation = await native.run(native.engine.buildNativeContractDraftScript(owned, new Map([[owned.id, owned]]), native.source, context));
+      const input: NativeContractObservationInput = { operation: context.operation, planRevision: revisionOf('owned'),
+        projection: data.projection, component: data.component, tokenInput: context.tokens.input, tokenIdentity: context.tokens.identity, creation };
+      const receipt = await native.run(emitNativeContractReadbackScript(input));
+      const main: ReactCompositionMain = { source: source('Child'), contract: owned, heldProps: { id: 'save' },
+        styles: {}, sourceOwnedTrees: { Main: structuredClone(child) }, input, receipt };
+      return { dir, program, tree, ownership, fonts, content, main };
+    }
     const main: ReactCompositionMain = { source: source('Child'), contract: native.main, heldProps: { id: 'save' },
       styles: { Main: [child.style] }, input: native.comparison.parent, receipt: native.comparison.receipt };
     return { dir, program, tree, ownership, fonts, content, main };
@@ -156,7 +172,7 @@ test('unresolved children remain in coverage and cannot become a flattened succe
         mains[0].sourceSizing = [{ channel: 'height', status: 'fixed', value: '36px', selectors: ['.height'] }];
       }],
       ['compiler-path-unavailable', (x) => { x.content.sourcePaths = []; }],
-      ['runtime-or-multiple-root-unqualified', (x) => { delete x.ownership.nodes[1].createdBy; }],
+      ['content-ownership-differs', (x) => { delete x.ownership.nodes[1].createdBy; }],
     ];
     for (const [reason, change] of changes) {
       const copy = structuredClone(f), mains = [structuredClone(f.main)]; change(copy, mains);
@@ -395,4 +411,30 @@ test('single observed child roots retain only authenticated declared fixed dimen
     const mismatched=deriveReactChildRoot(f.program,f.ownership,f.tree,origin,'child');
     assert.equal(mismatched.draft.contract!.anatomy.root.literals?.height,undefined);
   } finally {rmSync(f.dir,{recursive:true,force:true});}
+});
+
+
+test('runtime-owned composition requires exact complete source context and verified native identity', async () => {
+  const f = await fixture(true);
+  try {
+    const result = matchReactComposition(f.program, f.ownership, f.tree, f.content, [f.main]);
+    assert.equal(result.review.status, 'ready', JSON.stringify(result.review));
+    assert.equal(result.references[0].contentMode, 'source-owned');
+    assert.deepEqual(result.references[0].slotSpecPath, []);
+    for (const change of [
+      (main: ReactCompositionMain) => { main.sourceOwnedTrees!.Main.style['font-size'] = '16px'; },
+      (main: ReactCompositionMain) => { main.sourceOwnedTrees!.Main.nodes = []; },
+      (main: ReactCompositionMain) => { main.sourceOwnedTrees!.Main.svgViewport = {viewBox:[0,0,16,16],preserveAspectRatio:'xMidYMid meet'}; },
+      (main: ReactCompositionMain) => { main.sourceOwnedTrees!.Main.pseudo = { '::after': { width: '10px' } }; },
+    ]) {
+      const main = structuredClone(f.main); change(main);
+      const refused = matchReactComposition(f.program, f.ownership, f.tree, f.content, [main]);
+      assert.equal(refused.review.matched, 0);
+      assert.deepEqual(refused.review.rows[0].problems, ['react-composition-observed-subtree-context-differs']);
+    }
+    const changed = structuredClone(f.main); changed.receipt.nodes = [];
+    assert.equal(matchReactComposition(f.program, f.ownership, f.tree, f.content, [changed]).review.matched, 0);
+    const wrongInput = structuredClone(f.main); wrongInput.heldProps.id = 'other';
+    assert.equal(matchReactComposition(f.program, f.ownership, f.tree, f.content, [wrongInput]).review.matched, 0);
+  } finally { rmSync(f.dir, { recursive: true, force: true }); }
 });
