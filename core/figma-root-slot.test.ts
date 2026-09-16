@@ -123,13 +123,14 @@ test('REST retains malformed root metadata so proposal cannot silently unwrap it
 });
 
 
-for (const display of ['flex', 'inline-flex', 'grid'] as const) test(`full-width ${display} content restores a parent-relative React width`, async () => {
+for (const display of ['flex', 'inline-flex', 'grid', 'block'] as const) test(`full-width ${display} content restores a parent-relative React width`, async () => {
  const c=seed();c.anatomy.root.literals={width:'100%',height:'fit-content'};
  c.anatomy.root.layout=display==='grid'
   ? {display,columns:[{fr:1}],rows:[{fit:true}],autoRows:{fit:true},flow:'row'}
-  : {display,direction:'column',align:'start'};
+  : display === 'block' ? undefined : {display,direction:'column',align:'start'};
+ if(display==='block'){c.anatomy.root.declared={display:'block'};delete c.anatomy.root.tokens!.gap;}
  const data=compile(c);
- assert.deepEqual(data.rootSlot,{version:3,property:'Children',display,width:'fill'});
+ assert.deepEqual(data.rootSlot,{version:display==='block'?4:3,property:'Children',display,width:'fill'});
  assert.equal(data.variants[0].spec.rootFillWidth,true);
  const {figma,root}=createFigmaMock(),context=vm.createContext({figma,console:{log(){},warn(){},error(){}}});
  const run=(code:string)=>vm.runInContext(`(async()=>{${code}\n})()`,context,{timeout:20000}) as Promise<any>;
@@ -145,6 +146,14 @@ for (const display of ['flex', 'inline-flex', 'grid'] as const) test(`full-width
  const proposal=proposeFromDump(dump,options),restored=ContractSchema.parse(proposal.contract);
  assert.equal(restored.anatomy.root.literals?.width,'100%');
  assert.equal(restored.anatomy.root.tokens?.width,undefined);
+ if(display==='block'){
+  assert.equal(restored.anatomy.root.declared?.display,'block');assert.equal(restored.anatomy.root.layout,undefined);
+  assert.equal(restored.anatomy.root.literals?.height,'fit-content');
+  for(const mutate of [(d:any)=>{d.variants[0].layout.mode='HORIZONTAL';},
+    (d:any)=>{d.variants[0].layout.spacing=8;},(d:any)=>{d.variants[0].layout.primarySizing='FIXED';}]){
+   const bad=structuredClone(dump);mutate(bad);assert.throws(()=>proposeFromDump(bad,options),/FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED/);
+  }
+ }
  for(const mutate of [
   (d:any)=>{d.rootSlot.width='auto';},
   (d:any)=>{d.variants[0].layout.counterSizing='AUTO';},
@@ -156,10 +165,18 @@ for (const display of ['flex', 'inline-flex', 'grid'] as const) test(`full-width
   const mergedTokens={...tokens,primitives:{...primitives,...proposal.mintedTokens?.tree}},flat=flattenTokens(mergedTokens.primitives);
   const generated=format==='inline'?emitReactInline(contract,{tokens:mergedTokens,icons:new Map(),contracts:new Map([[contract.id,contract]])})
    :emitReact(contract,{tokens:new Set(flat.keys()),icons:new Map(),contracts:new Map([[contract.id,contract]])});
-  const consumer=generated.tsx+`\nexport function Consumer({width=360}:{width?:number}){return <div style={{width}}><${contract.name}><span>Reusable content</span></${contract.name}></div>}`;
+  const consumer=generated.tsx+(display==='block'
+   ? `\nexport function Consumer({width=360,label="Reusable content"}:{width?:number;label?:string}){return <div style={{width}}><${contract.name}>{label}</${contract.name}><div data-reference style={{padding:8,boxSizing:'border-box'}}>{label}</div></div>}`
+   : `\nexport function Consumer({width=360}:{width?:number}){return <div style={{width}}><${contract.name}><span>Reusable content</span></${contract.name}></div>}`);
   const page=await browser.newPage(),render=await mountGenerated(page,'Consumer',consumer,'',format==='module'?{[contract.name]:{tsx:generated.tsx,css:'css' in generated?generated.css as string:''}}:{});
   await page.addStyleTag({content:':root{'+[...flat].map(([name,token])=>'--'+name.replaceAll('.','-')+':'+token.value).join(';')+'}'});
-  for(const width of [360,520,240]){await render({width});assert.equal(await page.locator('#root > div > *').evaluate(n=>n.getBoundingClientRect().width),width,`${format}/${contract.id}`);}
+  for(const width of [360,520,240]){await render({width});assert.equal(await page.locator('#root > div > :first-child').evaluate(n=>n.getBoundingClientRect().width),width,`${format}/${contract.id}`);
+   if(display==='block')for(const label of ['Short title','A longer description with enough text to wrap across several lines when the parent width is reduced. '.repeat(3)]){
+    await render({width,label});
+    assert.equal(await page.locator('#root > div > :first-child').evaluate(n=>getComputedStyle(n).display),'block');
+    const boxes=await page.locator('#root > div > *').evaluateAll(nodes=>nodes.map(n=>({width:n.getBoundingClientRect().width,height:n.getBoundingClientRect().height,text:n.textContent})));
+    assert.deepEqual(boxes[0],boxes[1],`${format}/${contract.id}/${width}/text wrapping`);
+   }}
   await page.close();
  }} finally {await browser.close();}
 });

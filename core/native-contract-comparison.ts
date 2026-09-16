@@ -128,6 +128,12 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     return out;
   };
   const checkCapacity = (reference: { parent: NativeContractObservationInput; variantName: string; contentSpecPath?: number[] }, children: NodeSpec[]) => {
+    // An observed text run has one native text node. Native vertical flow is
+    // not CSS inline formatting: mixed inline/block children need a separate
+    // lowering before they can enter a block root comparison.
+    if (reference.parent.component.rootSlot?.display === 'block' &&
+        (children.length !== 1 || children[0].type !== 'text' || children[0].absolute || children[0].overlay))
+      fail('block-inline-content-unqualified');
     if (!reference.contentSpecPath) return;
     let target = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
     for (const index of reference.contentSpecPath) target = target.children![index];

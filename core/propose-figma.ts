@@ -10541,7 +10541,8 @@ export function proposeFromDump(
   const root: Record<string, unknown> = {};
   const rootKeyByChildName = new Map<string, string>();
   const rootLayout = invertLayout(merged, true, null, ctx, where);
-  if (rootLayout) root.layout = rootContent ? { ...rootLayout, display: rootContent.display } : rootLayout;
+  if (rootContent?.display === 'block') root.declared = { display: 'block' };
+  else if (rootLayout) root.layout = rootContent ? { ...rootLayout, display: rootContent.display } : rootLayout;
   applyLayoutSplit(root, invertLayoutByProp(merged, ctx, where));
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootDeclared: Record<string, string> = {};
@@ -10665,7 +10666,8 @@ export function proposeFromDump(
     const containsWidth = (v: ByPropCollector): boolean => Object.values(v.map).some(tokens => Object.hasOwn(tokens, 'width')) || (v.additional ?? []).some(containsWidth);
     if (containsWidth(rootTokensByProp)) throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_VARIANCE_UNQUALIFIED');
     delete rootTokens.width;
-    root.literals = { ...(root.literals as Record<string, string> | undefined), width: '100%' };
+    root.literals = { ...(root.literals as Record<string, string> | undefined), width: '100%',
+      ...(rootContent.display === 'block' ? { height: 'fit-content' } : {}) };
   }
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);

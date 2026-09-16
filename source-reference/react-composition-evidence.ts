@@ -32,10 +32,11 @@ export function readReactCompositionEvidence(repo: string, reference: ReactRefer
   const contentDir = path.join(repo, 'private/react-content-inspections', parentId, saved.id);
   const read = (name: string) => JSON.parse(readFileSync(path.join(contentDir, name), 'utf8'));
   const sourceNodes = new Map(flatten(original.captured.tree).map(n => [n.path, n.node]));
-  // Keep the observed flex box around a source component's anonymous text item.
-  // This does not infer a text-only public children API or a block/grid rule.
+  // Keep each source-owned flex or text-only block box independently
+  // addressable. This preserves observed content, not a public children API.
   const boundaries = row.ownership.components.flatMap(c => c.roots).filter(p => p !== '' &&
-    ['flex', 'inline-flex'].includes(sourceNodes.get(p)?.style.display ?? ''));
+    (['flex', 'inline-flex'].includes(sourceNodes.get(p)?.style.display ?? '') ||
+      (sourceNodes.get(p)?.style.display === 'block' && sourceNodes.get(p)!.nodes.every(node => node.t === 'text'))));
   const content = compileObservedContent(original.captured.tree, read('text-fonts.json'), read('svg-viewports.json'), true,
     [...new Set(boundaries)].sort());
   const mains: ReactCompositionMain[] = [];

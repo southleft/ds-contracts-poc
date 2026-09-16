@@ -221,7 +221,7 @@ test('comparison variant selection preserves typed null, string null, defaults a
 });
 
 
-async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false) {
+async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, block = false) {
   const f = await fixture(undefined, fillWidth ? 'flow' : grid);
   const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
   if(grid) {
@@ -234,6 +234,7 @@ async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false) 
     child.anatomy.root.literals={width:'100%',height:'fit-content'};
     if (!grid) child.anatomy.root.layout={display:'flex',direction:'column'};
   }
+  if (block) { delete child.anatomy.root.layout; child.anatomy.root.declared={display:'block'}; }
   child.name = 'Main'; // Deliberate display-name collision with the outer main.
   const context = await f.context('10000000-0000-4000-8000-000000000003');
   const data = f.engine.compileNativeContractDraft(child, new Map([[child.id, child]]), f.source);
@@ -251,8 +252,9 @@ async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false) 
     second: { layout: { display: 'flex', direction: 'row' }, parts: { secondLabel: text('Second editable content') } },
   } } });
   if(grid==='flow')Object.assign(content.anatomy.root.parts!.second.parts!,{thirdLabel:text('Third'),fourthLabel:text('Fourth')});
+  if(block){content.anatomy.root.parts!.first.literals={width:'300px'};content.anatomy.root.parts!.first.layout!.direction='column';}
   const reference = { parent, receipt, variantName: data.component.variants[0].name, slotSpecPath: [0] };
-  const selected: NativeContractComparisonInput = { ...f.comparison, instances: [[0], [0, 0], [1]].map(specPath => ({ ...reference, specPath })) };
+  const selected: NativeContractComparisonInput = { ...f.comparison, instances: (block?[[0,0],[1]]:[[0], [0, 0], [1]]).map(specPath => ({ ...reference, specPath })) };
   const emit = (c=content, selection=selected) => f.emit(c, selection);
   const observe = async (creation: any) => {
     const component = f.engine.compileComponentData(content, new Map([[content.id, content]]));
@@ -263,6 +265,26 @@ async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false) 
   };
   return { ...f, content, selected, reference, emit, observe };
 }
+
+test('block text instances keep native identities and reject unlowered inline composition before allocation',async()=>{
+ const f=await nestedFixture(false,true,true);
+ const mixed=structuredClone(f.content);
+ mixed.anatomy.root.parts!.second.parts!.extra={text:'another inline run'};
+ assert.throws(()=>f.emit(mixed),/block-inline-content-unqualified/);
+ const before=await f.run(emitNativeContractReadbackScript(f.reference.parent));
+ const creation=await f.run(f.emit());assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+ const {input,receipt}=await f.observe(creation);
+ assert.equal(verifyNativeContractComparisonReadback(input,receipt).status,'supported-comparison-structure-observed');
+ assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)),before);
+ for(const record of creation.comparisons[0].nested){
+  const node=await f.figma.getNodeByIdAsync(record.instanceId);
+  assert.equal(node.layoutSizingHorizontal,'FILL');
+  assert.equal((await node.getMainComponentAsync()).id,f.reference.parent.creation.variants[0].id);
+  assert.equal(node.children[0].children.length,1);assert.equal(node.children[0].children[0].type,'TEXT');
+ }
+ const count=f.figma.root.findAll(()=>true).length;
+ assert.equal((await f.run(f.emit())).allocationAttempted,false);assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
 
 for (const grid of [false, 'flow'] as const) test(`nested full-width content uses its final parent and refuses an indefinite host (${grid || 'flex'})`, async () => {
   const f=await nestedFixture(grid,true);

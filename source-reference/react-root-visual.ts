@@ -8,7 +8,7 @@ import { mintTokens } from '../core/mint-tokens.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, type Contract } from '../scripts/contract-schema.js';
 import { enrichLayout, prepareMint, applyMintToContract, type AlignedSweep } from '../extract/computed/fuse.js';
-import { enumerate, isFusable, normalizeValue, CHANNEL_TO_COMPUTED, type CapturedNode, type Capture, type FlatEl } from '../extract/computed/lib.js';
+import { enumerate, flatten, isFusable, normalizeValue, CHANNEL_TO_COMPUTED, type CapturedNode, type Capture, type FlatEl } from '../extract/computed/lib.js';
 import type { PropSpace } from '../extract/computed/capture.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactOwnership } from './react-ownership.js';
@@ -82,6 +82,11 @@ export function projectReactRootVisual(
       const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
       const grid=childContext && styleOrigin ? reactChildContextGrid(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
       if (grid && !sizing) throw Error('react-child-context-grid-parent-width-unqualified');
+      const captured = flatten(tree).find(row => row.path === instance.roots[0].path)!.node;
+      if (observation.style.display === 'block' && (!sizing || captured.nodes.some(node => node.t !== 'text') ||
+          observation.style['writing-mode'] !== 'horizontal-tb' || observation.style.direction !== 'ltr'))
+        throw Error('react-root-block-content-unqualified');
+      if (observation.style.display === 'block') result.limitations.push('native-block-content-observed-text-only');
       if (Object.keys(observation.pseudo).length) throw Error('react-root-visual-pseudo-content-unprojected');
       const root: CapturedNode = { ...structuredClone(observation), nodes: [],
         style: Object.fromEntries(Object.entries(observation.style).map(([key, value]) => [key, normalizeValue(value)])) };

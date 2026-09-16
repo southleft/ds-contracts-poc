@@ -694,7 +694,8 @@ export interface ComponentData {
   /** Canonical native options retain exact typed React values. */
   codeValueAxes?: CodeValueAxes;
   rootSlot?: { version: 1; property: string; display?: 'inline-flex' } | { version: 2; property: string; display: 'grid' } |
-    { version: 3; property: string; display: 'flex' | 'inline-flex' | 'grid'; width: 'fill' };
+    { version: 3; property: string; display: 'flex' | 'inline-flex' | 'grid'; width: 'fill' } |
+    { version: 4; property: string; display: 'block'; width: 'fill' };
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
     version: 1 | 2;
@@ -4959,6 +4960,9 @@ function nestedSlotNames(part: Part): string[] {
 function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>): NodeSpec {
   if (!rootSpec.layout || rootSpec.layout.wrap || isReversed(root, subst))
     throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root content requires supported forward flow');
+  if (root.declared?.display === 'block' && !root.layout &&
+      (rootSpec.bindings?.itemSpacing || rootSpec.lits?.itemSpacing))
+    throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: block flow has no flex gap');
   const spec = partToSpecs('root-content', { slot: root.slot } as Part, contract, byId, ctx, subst)[0];
   if (!spec || spec.type !== 'slot') throw new Error('FIGMA_ROOT_SLOT_INVALID: no native slot projection');
   spec.rootSlotContent = true;
@@ -5269,7 +5273,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const r = contract.anatomy.root;
     if (r.slot!.name !== 'children' || r.parts || r.content || r.text !== undefined || r.icon || r.component || r.optional)
       throw new Error('FIGMA_ROOT_SLOT_SHAPE_UNSUPPORTED: root content must be one unconditional children slot');
-    if (!r.layout || !['flex', 'inline-flex', 'grid'].includes(r.layout.display ?? '') || r.layout.wrap || r.layout.direction?.endsWith('-reverse'))
+    const blockContent = r.declared?.display === 'block' && !r.layout &&
+      r.literals?.width === '100%' && r.literals?.height === 'fit-content' && !r.layoutByProp;
+    if (!blockContent && (!r.layout || !['flex', 'inline-flex', 'grid'].includes(r.layout.display ?? '') || r.layout.wrap || r.layout.direction?.endsWith('-reverse')))
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root slots require supported forward flex or grid layout');
     if (Object.values(r.layoutByProp?.map ?? {}).some(layout => layout.display !== undefined && layout.display !== r.layout!.display))
       throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: changing outer display across variants needs per-plane content metadata');
@@ -6096,7 +6102,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
       : {}),
     isSet: variants.length + stateVariants.length > 1 || contract.props.some(p => p.bindings.code.values !== undefined),
-    ...(contract.anatomy.root?.slot ? { rootSlot: fillRootSlot
+    ...(contract.anatomy.root?.slot ? { rootSlot: contract.anatomy.root.declared?.display === 'block' && !contract.anatomy.root.layout
+      ? { version: 4 as const, property: slotFigmaProperty(contract.anatomy.root.slot), display: 'block' as const, width: 'fill' as const }
+      : fillRootSlot
       ? { version: 3 as const, property: slotFigmaProperty(contract.anatomy.root.slot), width: 'fill' as const, display: contract.anatomy.root.layout?.display ?? 'flex' }
       : contract.anatomy.root.layout?.display === 'grid'
       ? { version: 2 as const, property: slotFigmaProperty(contract.anatomy.root.slot), display: 'grid' as const }

@@ -105,3 +105,12 @@ test('unsupported flow, ambiguous bindings, missing joins and changing order ref
     assert.deepEqual(part, before);
   }
 });
+
+test('an explicit text-only block boundary preserves one inline run without admitting mixed inline flow',()=>{
+ const part:Part={text:'A title'},observed=node([text('A '),text('title')],{display:'block'});
+ assert.deepEqual(preserveOrderedFlexText(part,[{node:observed,elementParts:[]}],'title',new Set(),true),{changed:true});
+ assert.deepEqual(part.parts,{'title-text-1':{text:'A title'}});
+ const mixed:Part={text:'after',parts:{mark:{}}},before=structuredClone(mixed);
+ const result=preserveOrderedFlexText(mixed,[{node:node([marker(),text('after')],{display:'block'}),elementParts:['mark']}],'mixed',new Set(),true);
+ assert.match(result.problem!,/flow-unqualified/);assert.deepEqual(mixed,before);
+});

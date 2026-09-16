@@ -19,13 +19,15 @@ export function reactChildContextSizing(tree: CapturedNode, origin: ReactStyleOr
   const parent=nodes.get(parentPath), parentOrigin=origin.roots.find(row=>row.path===parentPath);
   if(!parent || !parentOrigin) return;
   const width=parentOrigin.sizes?.find(f=>f.channel==='width');
-  if(width?.status!=='fixed' || width.value!==parent.style.width) return;
+  const parentGrid=parent.style.display==='grid' ? reactChildContextGrid(tree,origin,parentPath,context) : undefined;
+  const inheritedGridWidth=parentGrid && parentPath && reactChildContextSizing(tree,origin,parentPath,context);
+  if(!inheritedGridWidth && (width?.status!=='fixed' || width.value!==parent.style.width)) return;
   // A constrained parent block axis can shrink its children. Intrinsic height
   // must not be inferred from a single sample in that context.
   if (parentOrigin.sizes?.find(f => f.channel === 'height')?.status !== 'auto' || parent.style['max-height'] !== 'none') return;
-  if(!['flex','inline-flex'].includes(parent.style.display) || parent.style['flex-direction']!=='column' ||
-      !['normal','stretch'].includes(parent.style['align-items']) || !['auto','stretch'].includes(style['align-self'])) return;
-  if(!['flex','inline-flex','grid'].includes(style.display) || !['static','relative'].includes(style.position) ||
+  if(!parentGrid && (!['flex','inline-flex'].includes(parent.style.display) || parent.style['flex-direction']!=='column' ||
+      !['normal','stretch'].includes(parent.style['align-items']) || !['auto','stretch'].includes(style['align-self']))) return;
+  if(!['flex','inline-flex','grid','block'].includes(style.display) || !['static','relative'].includes(style.position) ||
       style['box-sizing']!=='border-box' || !['auto','0px'].includes(style['min-width']) || style['max-width']!=='none' ||
       !['auto','0px'].includes(style['min-height']) || style['max-height']!=='none' || style['aspect-ratio']!=='auto' ||
       ['margin-left','margin-right','margin-top','margin-bottom'].some(key=>style[key]!=='0px') ||

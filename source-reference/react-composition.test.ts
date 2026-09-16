@@ -237,8 +237,13 @@ test('lost text-only boundaries and invalid ownership keep the child unresolved'
     unsupported.nodes[0].el.style.display = 'block';
     const blockFonts = { ...fonts, treeRevision: revisionOf(unsupported) };
     const block = compileObservedContent(unsupported, blockFonts, undefined, true, ['0']);
-    assert.equal(block.status, 'refused');
-    assert.ok(block.problems.some(p => p.startsWith('ordered-text-flow-unqualified')));
+    assert.equal(block.status, 'compiled-comparison-draft');
+    const blockPath=block.sourcePaths!.find(p=>p.sourcePath==='0'&&p.type==='frame');
+    assert.ok(blockPath,'a text-only block keeps its source component box');
+    unsupported.nodes[0].el.style['white-space-collapse']='preserve';
+    const pre=compileObservedContent(unsupported,{...fonts,treeRevision:revisionOf(unsupported)},undefined,true,['0']);
+    assert.equal(pre.status,'refused');
+    assert.ok(pre.problems.some(p=>p.startsWith('ordered-text-flow-unqualified')));
   } finally { rmSync(f.dir, { recursive: true, force: true }); }
 });
 

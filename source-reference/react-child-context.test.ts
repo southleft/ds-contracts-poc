@@ -83,3 +83,17 @@ test('bounded intrinsic grid normalization preserves wrapping, content changes a
     }
   }finally{await browser.close();}
 });
+
+test('text block sizing follows a qualified grid parent to its definite containing width',()=>{
+ const f=fixture(),before=structuredClone(f);
+ assert.deepEqual(reactChildContextSizing(f.tree,f.origin,'0.0',f.context),{width:'100%',height:'fit-content'});
+ assert.deepEqual(f,before);
+ const indefinite=fixture();indefinite.origin.roots[0].sizes![0].status='auto';
+ assert.equal(reactChildContextSizing(indefinite.tree,indefinite.origin,'0.0',indefinite.context),undefined);
+ for(const mutate of [(x:ReturnType<typeof fixture>)=>{x.child.style['justify-self']='start';},
+   (x:ReturnType<typeof fixture>)=>{x.child.style['margin-left']='8px';},
+   (x:ReturnType<typeof fixture>)=>{x.child.style['grid-column-start']='2';}]){
+  const changed=fixture();mutate(changed);changed.context.gridConstraints.treeRevision=revisionOf(changed.tree);
+  assert.throws(()=>reactChildContextSizing(changed.tree,changed.origin,'0.0',changed.context),/grid-constraints-unqualified/);
+ }
+});

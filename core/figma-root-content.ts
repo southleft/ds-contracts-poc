@@ -2,15 +2,16 @@ import type { DumpSet } from '../extract/figma/types.js';
 
 /** A marker identifies the compiler projection; drawn facts must still agree.
  * Never unwrap an arbitrary designer-authored frame or trust the marker alone. */
-export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' | 'grid'; normalized?: DumpSet; fillWidth?: true } | undefined {
+export function readRootContent(set: DumpSet): { property: string; display: 'flex' | 'inline-flex' | 'grid' | 'block'; normalized?: DumpSet; fillWidth?: true } | undefined {
   const raw = set.rootSlot;
   if (raw === undefined) return undefined;
   const fail = (why: string): never => { throw new Error(`FIGMA_ROOT_SLOT_READBACK_UNQUALIFIED: ${why}`); };
   const marker = raw as Record<string, unknown> | null;
   const keys = marker && Object.keys(marker).sort().join('|');
   if (!marker || typeof marker !== 'object' || Array.isArray(marker) ||
-      !(marker.version === 3
-        ? keys === 'display|property|version|width' && marker.width === 'fill' && typeof marker.display === 'string' && ['flex','inline-flex','grid'].includes(marker.display)
+      !([3,4].includes(marker.version as number)
+        ? keys === 'display|property|version|width' && marker.width === 'fill' && typeof marker.display === 'string' &&
+          (marker.version === 4 ? marker.display === 'block' : ['flex','inline-flex','grid'].includes(marker.display))
         : ['property|version', 'display|property|version'].includes(keys!) &&
           (marker.version === 1 ? !Object.hasOwn(marker, 'display') || marker.display === 'inline-flex'
             : marker.version === 2 && marker.display === 'grid')) || typeof marker.property !== 'string' || !marker.property)
@@ -23,7 +24,7 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
       Object.keys(definition.slotSettings ?? {}).length)) return fail('slot constraints need explicit contract reconciliation');
   if (!set.variants.length) return fail('no observed component planes');
   const normalized = marker.display === 'grid' ? structuredClone(set) : undefined;
-  const sizing = marker.version === 3 ? { fillWidth: true as const } : {};
+  const sizing = [3,4].includes(marker.version as number) ? { fillWidth: true as const } : {};
   let gridDeclaration: string | undefined;
   for (const root of normalized?.variants ?? set.variants) {
     const slot = root.children?.[0], outer = root.layout, inner = slot?.layout;
@@ -32,7 +33,7 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
         (slot.slotKey !== undefined && slot.slotKey !== definitions[0][0])) return fail(`${root.name}: content structure disagrees`);
     // Contents of the main are defaults, not a sample to bake into React.
     // Default-content inversion is a separate qualification from empty mains.
-    if (marker.version === 3 && (!outer ||
+    if (sizing.fillWidth && (!outer ||
         (outer.mode === 'HORIZONTAL' ? outer.primarySizing : outer.counterSizing) !== 'FIXED' || root.bound?.width))
       return fail(`${root.name}: full-width root must have an unbound fixed preview width`);
     if (marker.display === 'grid') {
@@ -80,6 +81,9 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
       continue;
     }
     if (slot.children?.length) return fail(`${root.name}: nonempty main content needs qualified default-content inversion`);
+    if (marker.display === 'block' && (!outer || outer.mode !== 'VERTICAL' || outer.primary !== 'MIN' ||
+        outer.counter !== 'MIN' || outer.spacing !== 0 || outer.primarySizing !== 'AUTO' || root.bound?.itemSpacing))
+      return fail(`${root.name}: block content requires intrinsic vertical flow without flex distribution`);
     const allowed = new Set(['name', 'type', 'layout', 'bound', 'propRefs', 'slotKey', 'children', 'fillWidth', 'fillHeight']);
     if (Object.keys(slot).some(key => !allowed.has(key)) ||
         Object.keys(slot.propRefs ?? {}).some(key => key !== 'slotContentId') ||
@@ -96,11 +100,11 @@ export function readRootContent(set: DumpSet): { property: string; display: 'fle
       // FILL supplies the extent; native children may retain AUTO on that
       // axis. The v3 declaration separately validates the fixed main preview.
       const innerAgrees = inner[axis] === outer[axis] ||
-        (marker.version === 3 && filled && inner[axis] === 'AUTO');
+        (sizing.fillWidth && filled && inner[axis] === 'AUTO');
       if (!['AUTO', 'FIXED'].includes(outer[axis]) || !innerAgrees ||
           Boolean(filled) !== (outer[axis] === 'FIXED')) return fail(`${root.name}: content sizing disagrees with root`);
     }
   }
   return normalized ? { property, display: 'grid', normalized, ...sizing }
-    : { property, display: marker.display === 'inline-flex' ? 'inline-flex' : 'flex', ...sizing };
+    : { property, display: marker.display === 'block' ? 'block' : marker.display === 'inline-flex' ? 'inline-flex' : 'flex', ...sizing };
 }
