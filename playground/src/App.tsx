@@ -109,8 +109,9 @@ function PivotBanner() {
   if (pathname === "/sources")
     return (
       <div className="pivot-banner" role="note">
-        Live source validation is the first step of the new workflow. Figma
-        generation and round-trip comparison are not connected here yet.{" "}
+        Validate live source, then create and inspect a Figma candidate with the
+        local development plugin. Native exports are diagnostic; the complete
+        round-trip workflow is still unqualified.{" "}
         <Link to="/system">See the whole loop and remaining work.</Link>
       </div>
     );

@@ -53,7 +53,15 @@ Sorting, pagination, keyboard navigation and data fetching are not established b
 
 **Try today:** [open local source validation](http://localhost:5181/sources) after starting the app. This currently uses a configured local source library. It lets you inspect original evidence and prepare a source-bound candidate; it is not yet a general repository picker. For static TSX/CSS experiments, [open code import](https://ds-contracts-playground.pages.dev/playground?source=code). Static source intake alone does not prove original rendered styling or behavior.
 
-**Where this currently stops:** the source-validation candidate remains unaccepted. Native writing and structural readback have implementation coverage, but authenticated application transport, actual native verification and the complete no-change repeat remain the active integration work. A Figma script shown in the engine explorer is not evidence that the app applied it.
+**Development connection:** after deriving a measured candidate, choose **Prepare connection** in Sources. Run the current companion development plugin in the authorized Scratch file, open **Build → Connect the local source workflow**, paste the connection and choose **Connect / resume**. Return to Sources and choose **Create and inspect**. Keep the app and plugin open: the journal drives token creation/readback followed by component creation/readback. The plugin saves results so an interrupted acknowledgment can be resent without another allocation.
+
+If a readback is interrupted or refuses the observed state, choose **Retry readback** after addressing the reported issue. The journal retires the old observation and creates a new read-only attempt; this never repeats component or token creation. **Prepare connection** remains available if the plugin needs to reconnect.
+
+**Inspect again:** once the supported structure has been observed, use **Inspect again** to read the same candidate and export its current instances. This is read-only: it does not create variables or components. A changed supported property is reported as a mismatch; after correcting it in Figma, use **Retry readback**. Each observation keeps its own private evidence. This checks the saved candidate, not a two-way repair or an accepted design change.
+
+**Inspect the exports:** after component readback, Sources shows each native comparison instance beside its recorded source case when the source evidence is still current. Exports are retained privately and tied to the readback attempt; retrying readback withdraws the previous images from the current view. Native exports have transparent backgrounds and may use different framing from the source capture. This view is diagnostic, not a pixel score or a visual-fidelity pass. Missing, malformed or oversized exports are explicit refusals; the current local transport bounds all PNGs in one readback to 1 MiB combined and 16 million decoded pixels. These are transport limits, not component-support or fidelity thresholds.
+
+**Where this currently stops:** the first live Button cycle has completed in Scratch, including independent structural readback and six native exports. Reinspection preserved the exports and token values; an injected text change was detected and recovery after restoration was verified. This is one bounded candidate, not a visual-fidelity or full-cohort qualification. The source candidate remains unaccepted. Native visual comparison, editability and a complete no-change repeat remain the next work. A lost creation response without a saved receipt is reported as unknown, never automatically repeated; complete interruption recovery is still unfinished.
 
 <a id="both-libraries"></a>
 ## Both libraries: connect, compare and repair
@@ -91,7 +99,7 @@ npm run playground
 
 Open [the local start guide](http://localhost:5181/start). The main branch contains merged work; an open PR is a separate revision. Additional source-library setup is required for `/sources`. Worker development has its own dependency install, documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The plugin has existing manual workflows; installing it does not complete the new application's write connection.
+For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The source connection requires the local app on port 5181 and the authorized Scratch file. Pair it using the development steps above. Keep the connection private; it grants delivery and result access for that operation.
 
 **Recommended v1 onboarding, still planned:** one setup flow that connects the workspace, selects the code target, pairs the plugin when needed, and checks permissions/dependencies before the first import. A designer should not need to understand operation journals or assemble JSON by hand.
 
@@ -111,6 +119,8 @@ The direction is to make this application the front door to connected library wo
 ## Next delivery: one complete code-led journey
 
 Development should produce a demonstrable user flow. Tests are acceptance checks for that delivery.
+
+**Current checkpoint:** the local app/plugin flow has completed a live Button creation and structural inspection, followed by unchanged reinspection, deliberate text-drift detection and recovery. No variables or components were recreated for those readbacks. Visual fidelity, broader editability and the simple/stateful/composed cohort remain open; the bounded checkpoint does not close the full exits below.
 
 | Checkpoint | User-visible result | Done when |
 | --- | --- | --- |

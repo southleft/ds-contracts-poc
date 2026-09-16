@@ -333,6 +333,7 @@ test("reader refuses changes during an async observation", async () => {
 
 test("reader refuses file switches and unavailable image export", async () => {
   const f = await observedFixture();
+  f.figma.base64Encode = undefined;
   const exported = await f.run(emitNativeSourceReadbackScript(f.input, true));
   assert.equal(exported.status, "refused");
   assert.deepEqual(exported.problems, [
@@ -354,4 +355,140 @@ test("mock instances retain isolated binding and paint objects from their mains"
   inst.fills[0].boundVariables.color.id = "changed";
   assert.notEqual(main.boundVariables.itemSpacing.id, "changed");
   assert.notEqual(main.fills[0].boundVariables.color.id, "changed");
+});
+
+function settledSlotReceipt(input: NativeSourceObservationInput, receipt: any) {
+  const out = clone(receipt);
+  const aliases = new Map<string, string>();
+  for (const [i, n] of input.creation.nodes.entries()) {
+    if (n.slotIdentity)
+      aliases.set(n.id, `${n.slotIdentity.slotId};settled:${i}`);
+  }
+  assert(
+    aliases.size > 0,
+    "fixture must contain actual allocated slot content",
+  );
+  for (const n of out.nodes) {
+    n.id = aliases.get(n.id) ?? n.id;
+    n.parentId = aliases.get(n.parentId) ?? n.parentId;
+    n.childIds = n.childIds.map((id: string) => aliases.get(id) ?? id);
+  }
+  return out;
+}
+
+test("settled slot IDs retain allocation identity without relaxing roots or supported properties", async () => {
+  const f = await observedFixture();
+  const first = await f.read();
+  const settled = settledSlotReceipt(f.input, first);
+  assert.equal(
+    verifyNativeSourceReadback(f.input, settled).status,
+    "supported-structure-observed",
+  );
+  const cases: Array<[string, (r: any) => void]> = [
+    [
+      "missing allocation stamp",
+      (r) => {
+        delete r.nodes.find((n: any) => n.id.includes(";settled:")).metadata
+          .nativeSourceAllocation;
+      },
+    ],
+    [
+      "unknown replacement ID",
+      (r) => {
+        r.nodes.find((n: any) => n.id.includes(";settled:")).id = "unrelated";
+      },
+    ],
+    [
+      "copied allocation identity",
+      (r) => {
+        const ns = r.nodes.filter((n: any) => n.id.includes(";settled:"));
+        ns[1].metadata.nativeSourceAllocation =
+          ns[0].metadata.nativeSourceAllocation;
+      },
+    ],
+    [
+      "replaced root",
+      (r) => {
+        r.nodes.find((n: any) => n.type === "COMPONENT_SET").id =
+          "foreign-root";
+      },
+    ],
+    [
+      "extra slot descendant",
+      (r) => {
+        const n = clone(r.nodes.find((n: any) => n.id.includes(";settled:")));
+        n.id += "-extra";
+        r.nodes.push(n);
+      },
+    ],
+    [
+      "changed text",
+      (r) => {
+        r.nodes.find(
+          (n: any) => n.type === "TEXT" && n.id.includes(";settled:"),
+        ).values.characters = "Changed";
+      },
+    ],
+    [
+      "foreign owner",
+      (r) => {
+        r.nodes.find((n: any) =>
+          n.id.includes(";settled:"),
+        ).metadata.nativeSourceOperation = "{}";
+      },
+    ],
+    [
+      "wrong slot",
+      (r) => {
+        const n = r.nodes.find((n: any) => n.id.includes(";settled:"));
+        n.parentId = f.creation.pageId;
+      },
+    ],
+  ];
+  for (const [name, mutate] of cases) {
+    const changed = clone(settled);
+    mutate(changed);
+    assert.equal(
+      verifyNativeSourceReadback(f.input, changed).status,
+      "refused",
+      name,
+    );
+  }
+});
+
+test("legacy slot identity requires a separately verified exact-ID anchor", async () => {
+  const f = await observedFixture();
+  const first = await f.read();
+  const settled = settledSlotReceipt(f.input, first);
+  const input = clone(f.input);
+  for (const n of input.creation.nodes) delete n.slotIdentity;
+  for (const r of [first, settled])
+    for (const n of r.nodes) delete n.metadata.nativeSourceAllocation;
+  assert.equal(verifyNativeSourceReadback(input, settled).status, "refused");
+  input.allocationAnchor = first;
+  assert.equal(
+    verifyNativeSourceReadback(input, settled).status,
+    "supported-structure-observed",
+  );
+  input.allocationAnchor = settled;
+  assert.equal(
+    verifyNativeSourceReadback(input, settled).status,
+    "refused",
+    "latest receipt cannot authorize its own new IDs",
+  );
+  input.allocationAnchor = clone(first);
+  input.allocationAnchor!.nodes!.find(
+    (n: any) => n.type === "TEXT",
+  )!.values.characters = "false anchor";
+  assert.equal(verifyNativeSourceReadback(input, settled).status, "refused");
+  input.allocationAnchor = first;
+  const changed = clone(settled);
+  changed.nodes.find(
+    (n: any) => n.type === "TEXT" && n.id.includes(";settled:"),
+  ).values.characters = "Changed";
+  assert.equal(
+    verifyNativeSourceReadback(input, changed).status,
+    "refused",
+    "anchor supplies identity, never current semantics",
+  );
 });

@@ -1,5 +1,6 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
+import { resolveNativeSlotIdentities } from "./native-slot-identity.js";
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
 import type { NativeSourceCandidateProjection } from "./native-source-projection.js";
@@ -22,6 +23,8 @@ export interface NativeSourceObservationInput {
   /** Independently persisted allocation acknowledgement, never a readback's
    * own suggestion of which native IDs should have been written. */
   creation: Record<string, any>;
+  /** Host-retained first observation, never supplied by the current readback. */
+  allocationAnchor?: NativeSourceReadback;
 }
 export interface NativeSourceReadback {
   version: 1;
@@ -185,7 +188,7 @@ async function read(page) {
       row.mainId = main ? main.id : null;
       row.componentProperties = copy(node.componentProperties);
     }
-    for (const key of ['nativeSourceOperation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'])
+    for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
     out.push(row);
   }
@@ -197,7 +200,7 @@ try {
   const page = await figma.getNodeByIdAsync(EXPECTED.pageId); guard();
   if (!page || page.type !== 'PAGE' || page.id !== EXPECTED.pageId) throw Error('native-source-readback-page-missing');
   const firstTokens = await tokenRead(), first = await read(page);
-  const images = [];
+  const images = []; let imageBytes = 0;
   ${
     captureImages
       ? `for (const c of EXPECTED.comparisons) {
@@ -205,7 +208,9 @@ try {
     if (!node || node.type !== 'INSTANCE' || typeof node.exportAsync !== 'function' || typeof figma.base64Encode !== 'function')
       throw Error('native-source-readback-export-unavailable');
     const png = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } }); guard();
-    if (!png || png.length > 1024 * 1024) throw Error('native-source-readback-export-invalid');
+    if (!png || !png.length) throw Error('native-source-readback-export-invalid');
+    imageBytes += png.length;
+    if (imageBytes > 1024 * 1024) throw Error('native-source-readback-image-byte-limit');
     images.push({ caseId: c.id, nodeId: c.instanceId, pngBase64: figma.base64Encode(png) });
   }`
       : ""
@@ -216,6 +221,18 @@ try {
   if (stable(first) !== stable(second) || stable(firstTokens) !== stable(secondTokens)) throw Error('native-source-readback-changed-during-observation');
   result.nodes = second; result.tokens = secondTokens; result.images = images;
   result.status = 'native-readback-collected';
+  // Bound the actual UTF-8 payload and leave room for envelope/journal fields.
+  let resultBytes = 0;
+  for (const char of JSON.stringify(result, null, 2)) {
+    const cp = char.codePointAt(0);
+    resultBytes += cp <= 127 ? 1 : cp <= 2047 ? 2 : cp <= 65535 ? 3 : 4;
+    // The host's pretty-printed envelope indents every nested result line.
+    if (cp === 10) resultBytes += 2;
+  }
+  if (resultBytes > 3 * 1024 * 1024) {
+    delete result.nodes; delete result.tokens; delete result.images;
+    result.status = 'refused'; throw Error('native-source-readback-result-byte-limit');
+  }
 } catch (error) { result.problems = [error && error.message ? error.message : 'native-source-readback-api-failed']; }
 return result;
 `;
@@ -255,7 +272,11 @@ function observationReport(problems: string[]) {
   };
 }
 
-function verifyReadback(input: NativeSourceObservationInput, receipt: unknown) {
+function verifyReadback(
+  input: NativeSourceObservationInput,
+  receipt: unknown,
+  exactIds = false,
+) {
   const problems: string[] = [];
   const report = () => observationReport(problems);
   try {
@@ -281,8 +302,8 @@ function verifyReadback(input: NativeSourceObservationInput, receipt: unknown) {
     problems.push("native-source-observation-receipt-invalid");
     return report();
   }
-  const c = input.creation,
-    rows = receipt.nodes as Record<string, any>[];
+  const c = input.creation;
+  let rows = receipt.nodes as Record<string, any>[];
   if (
     rows.some(
       (n) =>
@@ -294,7 +315,29 @@ function verifyReadback(input: NativeSourceObservationInput, receipt: unknown) {
     rows.some(
       (n) => typeof n.id !== "string" || !n.id || typeof n.type !== "string",
     ) ||
-    new Set(rows.map((n) => n.id)).size !== rows.length ||
+    new Set(rows.map((n) => n.id)).size !== rows.length
+  ) {
+    problems.push("native-source-observation-node-inventory");
+    return report();
+  }
+  if (!exactIds) {
+    const anchor = input.allocationAnchor;
+    if (
+      anchor &&
+      verifyReadback({ ...input, allocationAnchor: undefined }, anchor, true)
+        .status !== "supported-structure-observed"
+    ) {
+      problems.push("native-source-observation-allocation-anchor-invalid");
+      return report();
+    }
+    const resolved = resolveNativeSlotIdentities(c, rows, anchor?.nodes);
+    if (!resolved) {
+      problems.push("native-source-observation-node-inventory");
+      return report();
+    }
+    rows = resolved;
+  }
+  if (
     !same(rows.map((n) => n.id).sort(), c.nodes.map((n: any) => n.id).sort())
   ) {
     problems.push("native-source-observation-node-inventory");

@@ -3,6 +3,7 @@ import type { SourceContractPlan } from "../../../source-reference/contract-plan
 import type { SourceBindingInventory } from "../../../source-reference/source-bindings";
 import type { BindingJobSnapshot } from "../../../source-reference/binding-jobs";
 import type { CandidateJobSnapshot } from "../../../source-reference/candidate-jobs";
+import type { NativeOperationSnapshot } from "../../../source-reference/native-operation-jobs";
 import "./sources.css";
 
 interface Row {
@@ -11,6 +12,7 @@ interface Row {
   problems: string[];
   limitations: string[];
   sourceImage: string | null;
+  sourceImageSha256?: string | null;
   replayImage: string | null;
   semanticIntake?: {
     status: string;
@@ -73,6 +75,13 @@ interface Job {
   bindingTraces?: BindingJobSnapshot[];
   candidatePreparations?: CandidateJobSnapshot[];
   candidateVisuals?: CandidateJobSnapshot[];
+  nativeOperation?: NativeOperationSnapshot | null;
+  nativeConnection?: {
+    paired: boolean;
+    connected: boolean;
+    started: boolean;
+    finished: boolean;
+  } | null;
   contractAdmission?: {
     status: "blocked";
     acceptedContract: null;
@@ -334,6 +343,7 @@ export function Sources() {
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [nativeConnection, setNativeConnection] = useState("");
   const [selected, setSelected] = useState("atoms-button--default");
   const capturing =
     job?.state === "running" ||
@@ -342,7 +352,13 @@ export function Sources() {
     !!job?.candidatePreparations?.some(
       (candidate) => candidate.state === "running",
     ) ||
-    !!job?.candidateVisuals?.some((candidate) => candidate.state === "running");
+    !!job?.candidateVisuals?.some(
+      (candidate) => candidate.state === "running",
+    ) ||
+    (!!job?.nativeConnection?.started && !job.nativeConnection.finished);
+  const polling =
+    capturing ||
+    (!!job?.nativeConnection?.paired && !job.nativeConnection.finished);
   useEffect(() => {
     let alive = true;
     fetch("/api/source-reference")
@@ -375,34 +391,76 @@ export function Sources() {
     };
   }, []);
   useEffect(() => {
-    if (!capturing || !job) return;
+    if (!polling || !job) return;
     let alive = true;
-    const timer = setInterval(
-      () =>
-        fetch(`/api/source-reference/${job.id}`)
-          .then(async (r) => {
-            if (!r.ok) throw new Error();
-            return r.json();
-          })
-          .then((data) => {
-            if (alive) {
-              setJob(data);
-              setError("");
-            }
-          })
-          .catch(() => {
-            if (alive)
-              setError(
-                "Connection lost. Refresh to reconnect; no result is assumed successful.",
-              );
-          }),
-      1500,
-    );
+    let pending = false;
+    const timer = setInterval(() => {
+      if (pending) return;
+      pending = true;
+      void fetch(`/api/source-reference/${job.id}`)
+        .then(async (r) => {
+          if (!r.ok) throw new Error();
+          return r.json();
+        })
+        .then((data) => {
+          if (alive) {
+            setJob(data);
+            setError("");
+          }
+        })
+        .catch(() => {
+          if (alive)
+            setError(
+              "Connection lost. Refresh to reconnect; no result is assumed successful.",
+            );
+        })
+        .finally(() => {
+          pending = false;
+        });
+    }, 3000);
     return () => {
       alive = false;
       clearInterval(timer);
     };
-  }, [job?.id, capturing]);
+  }, [job?.id, polling]);
+  async function nativeAction(
+    action: "connection" | "start" | "retry-observation",
+  ) {
+    if (!job) return;
+    setBusy(true);
+    setError("");
+    const post = async (suffix: string) => {
+      const response = await fetch(
+        `/api/source-reference/${job.id}/button-native-${suffix}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: "{}",
+        },
+      );
+      const data = await response.json();
+      if (!response.ok)
+        throw Error(data.error ?? "Native operation unavailable.");
+      return data;
+    };
+    try {
+      if (action === "connection") {
+        if (!job.nativeOperation) await post("operation");
+        const paired = await post("connection");
+        setNativeConnection(paired.connection);
+        const refreshed = await fetch(`/api/source-reference/${job.id}`);
+        if (!refreshed.ok)
+          throw Error("Connection prepared; refresh to inspect the operation.");
+        setJob(await refreshed.json());
+      } else setJob(await post(action));
+    } catch (e) {
+      setError(
+        e instanceof Error ? e.message : "Native operation unavailable.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
   async function validate() {
     setBusy(true);
     setError("");
@@ -1185,6 +1243,216 @@ export function Sources() {
               </section>
             )}
           </section>
+          {(visualCandidate?.phase === "measured-candidate" ||
+            job.nativeOperation) && (
+            <section
+              className="source-native"
+              aria-label="Native Figma inspection"
+            >
+              <h2>Create and inspect in Figma</h2>
+              <p>
+                Create this source candidate in the authorized Scratch file,
+                then read its actual nodes back. Tokens, component variants and
+                comparison instances share the saved source plan.
+              </p>
+              <ol>
+                <li>
+                  <a href="/ds-contracts-sync-runner-plugin.zip" download>
+                    Download the current companion plugin
+                  </a>
+                  , import its manifest through Figma’s Development plugins
+                  menu, and run it in Scratch.
+                </li>
+                <li>
+                  Copy the connection below into Build → Connect the local
+                  source workflow.
+                </li>
+                <li>Keep the plugin open and start the inspection here.</li>
+              </ol>
+              <div className="source-connect">
+                <button
+                  type="button"
+                  disabled={busy || (!job.nativeOperation && capturing)}
+                  onClick={() => void nativeAction("connection")}
+                >
+                  Prepare connection
+                </button>
+                {nativeConnection && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      void navigator.clipboard
+                        .writeText(nativeConnection)
+                        .catch(() =>
+                          setError(
+                            "Could not copy the connection. Select it in the field below.",
+                          ),
+                        );
+                    }}
+                  >
+                    Copy connection
+                  </button>
+                )}
+                <button
+                  type="button"
+                  disabled={
+                    busy ||
+                    !job.nativeConnection?.connected ||
+                    job.nativeConnection.started
+                  }
+                  onClick={() => void nativeAction("start")}
+                >
+                  Create and inspect
+                </button>
+                {(job.nativeOperation?.pendingPhase === "token-readback" ||
+                  job.nativeOperation?.pendingPhase === "component-readback" ||
+                  job.nativeOperation?.phase === "observation-refused" ||
+                  job.nativeOperation?.phase ===
+                    "component-observation-refused" ||
+                  job.nativeOperation?.phase ===
+                    "component-structure-observed") && (
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => void nativeAction("retry-observation")}
+                  >
+                    {job.nativeOperation?.phase ===
+                    "component-structure-observed"
+                      ? "Inspect again"
+                      : "Retry readback"}
+                  </button>
+                )}
+              </div>
+              {nativeConnection && (
+                <label>
+                  Connection (keep private)
+                  <input
+                    type="text"
+                    value={nativeConnection}
+                    readOnly
+                    onFocus={(event) => event.target.select()}
+                  />
+                </label>
+              )}
+              <p role="status">
+                {!job.nativeOperation
+                  ? "No native operation prepared."
+                  : job.nativeOperation.phase === "component-structure-observed"
+                    ? "Supported native structure observed. Visual fidelity, editability and the complete journey are still unqualified."
+                    : `Operation: ${job.nativeOperation.phase.replaceAll("-", " ")}. ${job.nativeConnection?.connected ? "Plugin connected." : "Waiting for the companion plugin."}`}
+              </p>
+              {job.nativeOperation && !job.nativeOperation.sourceCurrent && (
+                <p>
+                  The source has changed or cannot be verified. Its saved native
+                  result does not establish agreement with the current source.
+                </p>
+              )}
+              {job.nativeOperation?.nativeOutcome === "unknown" && (
+                <p>
+                  A dispatched operation has no verified result yet. Reconnect
+                  the same plugin to deliver a saved result. Creation will not
+                  repeat.
+                </p>
+              )}
+              {!!job.nativeOperation?.problems.length && (
+                <details>
+                  <summary>Operation diagnostics</summary>
+                  <ul>
+                    {job.nativeOperation.problems.map((problem) => (
+                      <li key={problem}>
+                        <code>{problem}</code>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+              {job.nativeOperation?.imageObservation && (
+                <section
+                  className="native-image-observation"
+                  aria-label="Native comparison exports"
+                >
+                  <h3>Inspect native output</h3>
+                  <p>
+                    Recorded source and native instance exports. Their framing
+                    and backgrounds may differ. Visual fidelity is unqualified;
+                    these images are not a pixel comparison or a pass.
+                  </p>
+                  {job.nativeOperation.imageObservation.images.map((image) => {
+                    const [run, story] = image.caseId.split(":");
+                    const source = allRows.find(
+                      (row) =>
+                        row.story === story &&
+                        row.sourceImage ===
+                          `/api/source-reference/${run}/${story}/source.png`,
+                    );
+                    const sourceUrl =
+                      job.nativeOperation!.sourceCurrent &&
+                      source?.status === "valid" &&
+                      source.sourceImageSha256
+                        ? `${source.sourceImage}?sha256=${source.sourceImageSha256}`
+                        : null;
+                    const nativeUrl = `/api/source-reference/native/${job.nativeOperation!.id}/images/${job.nativeOperation!.imageObservation!.attemptId}/${image.sha256}.png`;
+                    return (
+                      <details key={image.caseId}>
+                        <summary>
+                          {story || image.caseId} · {image.width} ×{" "}
+                          {image.height} native pixels
+                        </summary>
+                        <div className="native-image-pair">
+                          <figure>
+                            <figcaption>Recorded source</figcaption>
+                            {sourceUrl ? (
+                              <a
+                                href={sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <img
+                                  src={sourceUrl}
+                                  alt={`Recorded source: ${story}`}
+                                />
+                              </a>
+                            ) : (
+                              <p>
+                                Matching current source evidence is unavailable.
+                                The native export is retained for inspection.
+                              </p>
+                            )}
+                          </figure>
+                          <figure>
+                            <figcaption>
+                              Native instance · unqualified
+                            </figcaption>
+                            <a
+                              href={nativeUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <img
+                                src={nativeUrl}
+                                alt={`Native comparison instance: ${story || image.caseId}`}
+                              />
+                            </a>
+                          </figure>
+                        </div>
+                      </details>
+                    );
+                  })}
+                  {job.nativeOperation.imageObservation.problems.map(
+                    (problem) => (
+                      <p key={problem}>
+                        <code>{problem}</code>
+                      </p>
+                    ),
+                  )}
+                </section>
+              )}
+              <p className="source-note">
+                This creates an unaccepted inspection candidate. Structural
+                readback does not establish visual fidelity or qualify v1.
+              </p>
+            </section>
+          )}
           <div className="source-evidence">
             <nav aria-label="All selected source states">
               {allRows.map((r) => (

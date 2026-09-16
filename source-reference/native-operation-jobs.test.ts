@@ -943,3 +943,465 @@ test("a competing component dispatch during compilation delivers at most one com
     delivered,
   );
 });
+
+/** Exercise the actual shared component writer and independent reader through
+ * the durable journal; this synthetic compiler fixture is not native evidence. */
+async function independentlyObservedComponents(t: test.TestContext) {
+  const { comparisonFixture } =
+    await import("../core/native-source-writer-test-fixture.js");
+  const { prepareNativeTokenContext } =
+    await import("../core/native-token-context.js");
+  const template = await comparisonFixture();
+  let stale = false;
+  const prepare: NativeOperationJobsOptions["prepare"] = (
+    _request,
+    operation,
+  ) => {
+    if (stale) throw Error("source changed");
+    const seed = nativeFixturePreparation(operation);
+    const tokenInput = {
+      ...template.context.tokens.input,
+      fileKey: operation.fileKey,
+      scopeId: `source-${operation.id}`,
+    };
+    const plan = {
+      ...seed.plan.plan,
+      operation,
+      tokenInput,
+      tokenPreparation: prepareNativeTokenContext(tokenInput),
+      component: template.source.compile(),
+      sourceProjection: template.source.projection,
+      samples: template.samples,
+    };
+    return {
+      ...seed,
+      plan: { plan, revision: revisionOf(plan) } as typeof seed.plan,
+    };
+  };
+  const build: NonNullable<NativeOperationJobsOptions["buildComponent"]> = (
+    _request,
+    context,
+  ) => ({
+    planRevision: context.planRevision,
+    script: template.source
+      .engine()
+      .buildNativeSourceComponentScript(
+        template.source.contract,
+        new Map([[template.source.contract.id, template.source.contract]]),
+        {
+          operation: context.operation,
+          tokens: context.tokens,
+          comparisons: {
+            samples: template.samples,
+            revision: revisionOf(template.samples),
+          },
+        },
+      ),
+  });
+  const f = fixture(t, prepare, build),
+    host = nativeFixtureHost();
+  Object.getPrototypeOf(
+    host.figma.currentPage,
+  ).setExplicitVariableModeForCollection = function (
+    collection: any,
+    mode: string,
+  ) {
+    this.explicitVariableModes = { [collection.id]: mode };
+  };
+  for (const phase of [
+    "token-create",
+    "token-readback",
+    "component-create",
+  ] as const) {
+    const command = f.jobs.dispatch(f.snapshot.id, phase);
+    f.jobs.accept(f.snapshot.id, await host.run(command));
+  }
+  assert.equal(f.jobs.get(f.snapshot.id).phase, "components-created");
+  const creation = JSON.parse(readFileSync(f.event(5), "utf8")).envelope.result;
+  return {
+    ...f,
+    host,
+    creation,
+    makeStale: () => {
+      stale = true;
+    },
+  };
+}
+
+test("component readback observes the saved allocation independently and reopens without qualification", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  assert.equal(f.jobs.get(f.snapshot.id).structuralObservation, undefined);
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  assert.equal(command.readOnly, true);
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(6), "utf8")).command,
+    command,
+  );
+  const envelope = await f.host.run(command);
+  const result = f.jobs.accept(f.snapshot.id, envelope);
+  assert.equal(
+    result.phase,
+    "component-structure-observed",
+    JSON.stringify(result),
+  );
+  assert.equal(result.nativeQualification, "unqualified");
+  assert.equal(result.acceptedContract, null);
+  assert.equal(result.structuralObservation?.scope, "supported-structure");
+  assert(
+    result.structuralObservation?.limitations.includes(
+      "native-visual-fidelity-unverified",
+    ),
+  );
+  assert.deepEqual(f.reopen().get(f.snapshot.id), result);
+  const saved = f.inventory();
+  assert.deepEqual(f.jobs.accept(f.snapshot.id, envelope), result);
+  assert.deepEqual(f.inventory(), saved);
+  for (const privateValue of [
+    f.creation.pageId,
+    command.nonce,
+    command.scriptSha256,
+    "nativeSourceOperation",
+  ])
+    assert(!JSON.stringify(result).includes(privateValue));
+});
+
+test("component observation retry uses a new nonce and never repeats allocation", async (t) => {
+  const f = await independentlyObservedComponents(t),
+    first = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const oldResult = await f.host.run(first);
+  const pages = f.host.figma.root.children.length;
+  const variables = f.host.variables.length;
+  const second = f.reopen().retryObservation(f.snapshot.id);
+  assert.equal(second.phase, "component-readback");
+  assert.equal(second.readOnly, true);
+  assert.notEqual(second.nonce, first.nonce);
+  assert.notEqual(second.attemptId, first.attemptId);
+  assert.equal(second.scriptSha256, first.scriptSha256);
+  assert.throws(
+    () => f.jobs.accept(f.snapshot.id, oldResult),
+    /correlation-mismatch/,
+  );
+  assert.equal(
+    f.jobs.accept(f.snapshot.id, await f.host.run(second)).phase,
+    "component-structure-observed",
+  );
+  assert.equal(f.host.figma.root.children.length, pages);
+  assert.equal(f.host.variables.length, variables);
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-create"),
+    /already-dispatched/,
+  );
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "token-readback"),
+    /component-phase-already-started/,
+  );
+  assert.throws(
+    () => f.jobs.retryCreation(f.snapshot.id),
+    /creation-retry-refused/,
+  );
+});
+
+test("native drift refuses observation and a later read can observe an externally corrected value", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  const page = await f.host.figma.getNodeByIdAsync(f.creation.pageId);
+  const text = page.findOne((n: any) => n.type === "TEXT"),
+    original = text.characters;
+  text.characters = "native edit";
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const refused = f.jobs.accept(f.snapshot.id, await f.host.run(command));
+  assert.equal(refused.phase, "component-observation-refused");
+  assert.deepEqual(refused.problems, [
+    "native-operation-component-readback-refused",
+  ]);
+  assert.equal(refused.structuralObservation?.status, "refused");
+  text.characters = original;
+  const next = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  assert.equal(f.jobs.get(f.snapshot.id).structuralObservation, undefined);
+  assert.equal(
+    f.jobs.accept(f.snapshot.id, await f.host.run(next)).phase,
+    "component-structure-observed",
+  );
+});
+
+test("known component allocations remain inspectable after source changes without claiming current-source agreement", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  f.makeStale();
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const result = f.jobs.accept(f.snapshot.id, await f.host.run(command));
+  assert.equal(result.phase, "component-structure-observed");
+  assert.equal(result.sourceCurrent, false);
+  assert(
+    result.problems.includes("native-operation-source-evidence-unavailable"),
+  );
+  assert.equal(result.nativeQualification, "unqualified");
+});
+
+test("source changes after dispatch do not discard a correlated component readback", async (t) => {
+  const f = await independentlyObservedComponents(t),
+    command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const result = await f.host.run(command);
+  f.makeStale();
+  assert.equal(f.jobs.accept(f.snapshot.id, result).sourceCurrent, false);
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(7), "utf8")).envelope,
+    result,
+  );
+});
+
+test("a self-reported component observation without independent native facts is refused and retained", async (t) => {
+  const f = await independentlyObservedComponents(t),
+    command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const envelope = await f.host.run(command);
+  envelope.result = {
+    status: "supported-structure-observed",
+    acceptedContract: null,
+    nativeQualification: "unqualified",
+  };
+  assert.equal(
+    f.jobs.accept(f.snapshot.id, envelope).phase,
+    "component-observation-refused",
+  );
+  assert.deepEqual(
+    JSON.parse(readFileSync(f.event(7), "utf8")).envelope,
+    envelope,
+  );
+});
+
+test("component readback cannot start before successful component allocation", async (t) => {
+  const f = await componentReady(t);
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-readback"),
+    /component-allocation-identity-unavailable/,
+  );
+  const command = f.jobs.dispatch(f.snapshot.id, "component-create");
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-readback"),
+    /native-outcome-unknown/,
+  );
+  const result = await f.host.run(command);
+  (result.result as any).status = "partial-or-unknown-allocation";
+  f.jobs.accept(f.snapshot.id, result);
+  assert.throws(
+    () => f.jobs.dispatch(f.snapshot.id, "component-readback"),
+    /component-allocation-identity-unavailable/,
+  );
+});
+
+test("native PNGs are private, pinned to the current readback, and survive reopen without qualification", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const envelope = await f.host.run(command);
+  // Valid diagnostic images remain useful when authored structure is refused.
+  (envelope.result as any).nodes = [];
+  const snapshot = f.jobs.accept(f.snapshot.id, envelope);
+  assert.equal(snapshot.phase, "component-observation-refused");
+  const images = snapshot.imageObservation!;
+  assert.equal(images.status, "collected");
+  assert.equal(images.qualification, "unqualified");
+  assert.equal(
+    images.images.length,
+    f.creation.comparisons.filter((c: any) => c.status === "created-comparison")
+      .length,
+  );
+  const hash = images.images[0].sha256;
+  const png = f.reopen().image(f.snapshot.id, command.attemptId, hash);
+  assert.equal(sha(png), hash);
+  assert.deepEqual(
+    png,
+    readFileSync(path.join(f.directory, "images", `${hash}.png`)),
+  );
+  assert(!JSON.stringify(snapshot).includes("pngBase64"));
+  assert.throws(
+    () => f.jobs.image(f.snapshot.id, command.attemptId, "0".repeat(64)),
+    /image-unavailable/,
+  );
+  // Images remain inspectable when the original changes, without agreement.
+  f.makeStale();
+  assert.equal(f.jobs.get(f.snapshot.id).sourceCurrent, false);
+  assert.deepEqual(f.jobs.image(f.snapshot.id, command.attemptId, hash), png);
+  // A retry immediately withdraws old current URLs, while preserving history.
+  f.jobs.retryObservation(f.snapshot.id);
+  assert.equal(f.jobs.get(f.snapshot.id).imageObservation, undefined);
+  assert.throws(
+    () => f.jobs.image(f.snapshot.id, command.attemptId, hash),
+    /image-unavailable/,
+  );
+  assert.deepEqual(
+    readFileSync(path.join(f.directory, "images", `${hash}.png`)),
+    png,
+  );
+});
+
+for (const [name, mutate, problem] of [
+  [
+    "wrong case",
+    (r: any) => {
+      r.images[0].caseId = "foreign";
+    },
+    "instance-mismatch",
+  ],
+  [
+    "wrong instance",
+    (r: any) => {
+      r.images[0].nodeId = "foreign";
+    },
+    "instance-mismatch",
+  ],
+  [
+    "duplicate case",
+    (r: any) => {
+      r.images[1] = r.images[0];
+    },
+    "instance-mismatch",
+  ],
+  [
+    "missing case",
+    (r: any) => {
+      r.images.pop();
+    },
+    "denominator-mismatch",
+  ],
+  [
+    "invalid PNG",
+    (r: any) => {
+      r.images[0].pngBase64 = Buffer.from("not a PNG").toString("base64");
+    },
+    "png-invalid",
+  ],
+  [
+    "noncanonical base64",
+    (r: any) => {
+      r.images[0].pngBase64 += "\n";
+    },
+    "encoding-invalid",
+  ],
+  [
+    "CRC corruption",
+    (r: any) => {
+      const p = Buffer.from(r.images[0].pngBase64, "base64");
+      p[29] ^= 1;
+      r.images[0].pngBase64 = p.toString("base64");
+    },
+    "png-invalid",
+  ],
+  [
+    "pixel bomb",
+    (r: any) => {
+      const p = Buffer.from(r.images[0].pngBase64, "base64");
+      p.writeUInt32BE(0xffffffff, 16);
+      r.images[0].pngBase64 = p.toString("base64");
+    },
+    "pixel-limit",
+  ],
+] as Array<[string, (r: any) => void, string]>) {
+  test(`native image rejects ${name} independently of structural status`, async (t) => {
+    const f = await independentlyObservedComponents(t);
+    const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+    const result = await f.host.run(command);
+    mutate(result.result);
+    const snapshot = f.jobs.accept(f.snapshot.id, result);
+    assert.equal(snapshot.phase, "component-structure-observed");
+    assert.equal(snapshot.imageObservation?.status, "unavailable");
+    assert(
+      snapshot.imageObservation?.problems.some((p) => p.includes(problem)),
+    );
+    assert.deepEqual(snapshot.imageObservation?.images, []);
+    assert.equal(snapshot.nativeQualification, "unqualified");
+  });
+}
+
+test("native exports explicitly refuse aggregate overflow without returning an undeliverable result", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  Object.getPrototypeOf(f.host.figma.currentPage).exportAsync = async () =>
+    new Uint8Array(1024 * 1024 + 1);
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const result = await f.host.run(command);
+  assert.deepEqual((result.result as any).problems, [
+    "native-source-readback-image-byte-limit",
+  ]);
+  assert.equal((result.result as any).images, undefined);
+  const snapshot = f.jobs.accept(f.snapshot.id, result);
+  assert.equal(snapshot.phase, "component-observation-refused");
+  assert.equal(snapshot.nativeOutcome, undefined);
+});
+
+test("export cache recovers from a missing file but refuses changed bytes and symlinks", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  const c = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const snapshot = f.jobs.accept(f.snapshot.id, await f.host.run(c));
+  const hash = snapshot.imageObservation!.images[0].sha256;
+  const file = path.join(f.directory, "images", `${hash}.png`);
+  const original = readFileSync(file);
+  unlinkSync(file);
+  assert.deepEqual(
+    f.reopen().image(f.snapshot.id, c.attemptId, hash),
+    original,
+  );
+  writeFileSync(file, "changed");
+  assert.throws(
+    () => f.reopen().image(f.snapshot.id, c.attemptId, hash),
+    /image-artifact-changed/,
+  );
+  unlinkSync(file);
+  symlinkSync(f.event(0), file);
+  assert.throws(
+    () => f.reopen().image(f.snapshot.id, c.attemptId, hash),
+    /artifact-refused/,
+  );
+});
+
+test("HTTP serves only the current attempt's validated PNG through the local app boundary", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const snapshot = f.jobs.accept(f.snapshot.id, await f.host.run(command));
+  const image = snapshot.imageObservation!.images[0];
+  const { createReferenceService } = await import("./service.js");
+  const { createServer } = await import("node:http");
+  const service = createReferenceService(f.repo);
+  const server = createServer((req, res) => {
+    void service.handle(req, res);
+  });
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  t.after(async () => {
+    service.close();
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+  });
+  const address = server.address() as { port: number };
+  const url = `http://127.0.0.1:${address.port}/api/source-reference/native/${f.snapshot.id}/images/${command.attemptId}/${image.sha256}.png`;
+  const response = await fetch(url);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("content-type"), "image/png");
+  assert.equal(response.headers.get("cache-control"), "no-store");
+  assert.equal(
+    response.headers.get("cross-origin-resource-policy"),
+    "same-origin",
+  );
+  assert.equal(sha(Buffer.from(await response.arrayBuffer())), image.sha256);
+  assert.equal(
+    (await fetch(url, { headers: { Origin: "https://example.com" } })).status,
+    403,
+  );
+  assert.equal(
+    (await fetch(url.replace(image.sha256, "0".repeat(64)))).status,
+    404,
+  );
+  f.jobs.dispatch(f.snapshot.id, "component-readback");
+  assert.equal((await fetch(url)).status, 404);
+});
+
+test("oversized multibyte native metadata returns a bounded explicit refusal", async (t) => {
+  const f = await independentlyObservedComponents(t);
+  const node = await f.host.figma.getNodeByIdAsync(f.creation.target.id);
+  node.getSharedPluginData = () => "界".repeat(200_000);
+  const command = f.jobs.dispatch(f.snapshot.id, "component-readback");
+  const envelope = await f.host.run(command);
+  assert.deepEqual((envelope.result as any).problems, [
+    "native-source-readback-result-byte-limit",
+  ]);
+  assert.equal((envelope.result as any).nodes, undefined);
+  assert.equal((envelope.result as any).images, undefined);
+  assert.equal(
+    f.jobs.accept(f.snapshot.id, envelope).phase,
+    "component-observation-refused",
+  );
+});

@@ -407,6 +407,16 @@ test("completed cohorts recover read-only after restart; invalid and escaping ev
         404,
         asset,
       );
+    const pinnedImage = `${base}/${id(1)}/${rows[0].story}/source.png?sha256=${createHash("sha256").update(imageBytes).digest("hex")}`;
+    assert.equal((await fetch(pinnedImage)).status, 200);
+    assert.equal(
+      (
+        await fetch(
+          `${base}/${id(1)}/${rows[0].story}/source.png?sha256=${"0".repeat(64)}`,
+        )
+      ).status,
+      404,
+    );
     rmSync(image);
     symlinkSync(path.join(outside, "measurement.json"), image);
     assert.equal(
@@ -448,4 +458,81 @@ test("only credential-free local origins are accepted", () => {
     loopbackOrigin("http://localhost:6017/"),
     "http://localhost:6017",
   );
+});
+
+test("actual playground middleware preserves the restricted Figma preflight boundary", async () => {
+  const { createServer: createViteServer, mergeConfig } = await import("vite");
+  const { default: playgroundConfig } =
+    await import("../playground/vite.config.js");
+  // Keep the actual source API plugin and server/CORS configuration. React's
+  // dependency optimizer and ZIP packaging are unrelated to this HTTP boundary
+  // and can leave background compilation running during parallel test teardown.
+  const apiConfig = {
+    ...playgroundConfig,
+    plugins: (playgroundConfig.plugins ?? []).filter(
+      (plugin: any) => plugin?.name === "ds-source-references",
+    ),
+  };
+  const vite = await createViteServer(
+    mergeConfig(apiConfig, {
+      configFile: false,
+      logLevel: "silent",
+      server: { middlewareMode: true, hmr: false, watch: null },
+      optimizeDeps: { noDiscovery: true, include: [] },
+    }),
+  );
+  const server = createServer(vite.middlewares);
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const origin = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
+  const endpoint =
+    "/api/source-reference/native/00000000-0000-4000-8000-000000000000/claim";
+  const preflight = (route: string, requestOrigin = "null") =>
+    fetch(origin + route, {
+      method: "OPTIONS",
+      headers: {
+        Origin: requestOrigin,
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "authorization,content-type",
+      },
+    });
+  try {
+    for (const action of ["claim", "result"]) {
+      const response = await preflight(endpoint.replace(/claim$/, action));
+      assert.equal(response.status, 204);
+      assert.equal(response.headers.get("access-control-allow-origin"), "null");
+      assert.equal(
+        response.headers.get("access-control-allow-methods"),
+        "POST, OPTIONS",
+      );
+    }
+    const unauthorized = await fetch(origin + endpoint, {
+      method: "POST",
+      headers: { Origin: "null", "Content-Type": "application/json" },
+      body: "{}",
+    });
+    assert.equal(
+      unauthorized.status,
+      403,
+      "preflight does not authorize a claim",
+    );
+    const hostile = await preflight(endpoint, "https://attacker.invalid");
+    assert.equal(hostile.status, 403);
+    assert.equal(hostile.headers.get("access-control-allow-origin"), null);
+    for (const route of [
+      "/api/source-reference",
+      endpoint.replace(/claim$/, "start"),
+      "/src/App.tsx",
+    ]) {
+      const response = await preflight(route);
+      assert.equal(
+        response.headers.get("access-control-allow-origin"),
+        null,
+        route,
+      );
+    }
+  } finally {
+    server.closeAllConnections();
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+    await vite.close();
+  }
 });

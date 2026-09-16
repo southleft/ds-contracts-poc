@@ -148,6 +148,7 @@ function nativeOwn(node) {
   NATIVE_RESULT.nodes.push(identity);
   if (node.key) identity.key = node.key;
   node.setSharedPluginData('ds_contracts', 'nativeSourceOperation', nativeOwner);
+  node.setSharedPluginData('ds_contracts', 'nativeSourceAllocation', node.id);
 }
 function nativeInit(node, spec) {
   nativeOwn(node);
@@ -225,6 +226,22 @@ ${render}
   })();
   nativeFileGuard();
   nativeCheckTokens(await nativeReadTokens());
+  // Slot content can become instance-derived clones after this run. Preserve
+  // both the allocation stamp and its exact role under a stable slot root.
+  for (const c of (NATIVE_RESULT.comparisons || [])) if (c.status === 'created-comparison') {
+    for (const saved of c.slots) {
+      const slot = await figma.getNodeByIdAsync(saved.nodeId); nativeFileGuard();
+      if (!slot || slot.type !== 'SLOT') nativeRefuse('slot-identity-unavailable');
+      function record(node, path) {
+        const allocation = node.getSharedPluginData('ds_contracts', 'nativeSourceAllocation');
+        const identity = NATIVE_RESULT.nodes.find(n => n.id === allocation);
+        if (!identity || identity.slotIdentity) nativeRefuse('slot-allocation-ambiguous');
+        identity.slotIdentity = { slotId: slot.id, path };
+        (node.children || []).forEach((child, i) => record(child, path.concat(i)));
+      }
+      slot.children.forEach((child, i) => record(child, [i]));
+    }
+  }
   NATIVE_RESULT.applied = applied;
   NATIVE_RESULT.status = 'created-candidate';
 } catch (error) {

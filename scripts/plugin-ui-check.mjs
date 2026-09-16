@@ -454,6 +454,21 @@ ok(uiText.indexOf('keep their overrides (same nodes') < 0,
 ok(uiText.indexOf('the Drift tab') < 0,
   'no shipped string still names the "Drift tab" — the tab is called Changes');
 
+// The local connection is explicit and scoped to the source workflow.
+await page.locator('#tab-build').click();
+await page.getByText('Connect the local source workflow', { exact: true }).click();
+await page.locator('#native-connection').fill('dscn_test-private-connection');
+await page.locator('#native-connect').click();
+await page.waitForFunction(() => window.__sim.sent.includes('native-connect'));
+ok(await page.locator('#native-connection').inputValue() === '', 'native connection clears the secret input after sending');
+ok(await page.evaluate(() => window.__sim.sent.includes('native-connect')), 'native connection uses the dedicated host message');
+await page.evaluate(() => window.postMessage({ pluginMessage: { type: 'native-status', status: 'ready', message: 'Connected. Start in the local app.' } }, '*'));
+await page.waitForFunction(() => document.querySelector('#native-status').textContent === 'Connected. Start in the local app.');
+ok(await page.locator('#native-status').innerText() === 'Connected. Start in the local app.', 'native status reaches the visible plugin panel');
+await page.locator('#native-disconnect').click();
+await page.waitForFunction(() => window.__sim.sent.includes('native-disconnect'));
+ok(await page.evaluate(() => window.__sim.sent.includes('native-disconnect')), 'native disconnect stops the explicit polling session');
+
 console.log('\nconsole/page errors: ' + (errors.length ? '\n  ' + errors.join('\n  ') : 'none'));
 if (errors.length) fails.push('console/page errors');
 await browser.close();
