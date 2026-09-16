@@ -6,7 +6,11 @@ import test from "node:test";
 import { chromium, type Page } from "playwright-core";
 import { captureJs } from "../extract/computed/capture.js";
 import type { CapturedNode } from "../extract/computed/lib.js";
-import { captureSourceTopology, type TopologyInput } from "./topology.js";
+import {
+  captureSourceTopology,
+  topologyPseudoProblems,
+  type TopologyInput,
+} from "./topology.js";
 
 const sha = (value: string | Uint8Array) =>
   createHash("sha256").update(value).digest("hex");
@@ -230,7 +234,7 @@ test("nested shadow ownership and raw SVG identity survive while nonpainting met
   }
 });
 
-test("wrong image/tree, ambiguous roots and unsupported pseudo planes refuse without partial topology", async () => {
+test("wrong image/tree and ambiguous roots refuse without partial topology", async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   try {
@@ -259,14 +263,6 @@ test("wrong image/tree, ambiguous roots and unsupported pseudo planes refuse wit
     );
     let result = await captureSourceTopology(page, await measured(page));
     assert.deepEqual(result.problems, ["topology-path-not-unique"]);
-    await fixture(
-      page,
-      "Text",
-      "<style>button::before{content:'Pseudo'}</style><button><slot></slot></button>",
-    );
-    result = await captureSourceTopology(page, await measured(page));
-    assert.deepEqual(result.problems, ["topology-pseudo-planes-unrepresented"]);
-    assert.equal(result.observation, undefined);
   } finally {
     await browser.close();
   }
@@ -291,6 +287,130 @@ test("a distribution getter that mutates and restores source attributes cannot p
     });
     const result = await captureSourceTopology(page, input);
     assert.deepEqual(result.problems, ["topology-source-mutated"]);
+    assert.equal(result.observation, undefined);
+  } finally {
+    await browser.close();
+  }
+});
+
+test("pseudo planes retain exact owners, channels and slot distribution without becoming DOM nodes", async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  try {
+    await fixture(
+      page,
+      "<span>Same</span>",
+      `<style>
+      button::before {content:'Same';color:rgb(1,2,3)}
+      button::after {content:'';width:4px;display:block;background:red}
+      ::slotted(span)::before {content:'Same';color:rgb(4,5,6)}
+      li {display:list-item} input::placeholder {color:rgb(7,8,9)}
+      </style><button><slot></slot><li>Same</li><input placeholder='Same'></button>`,
+    );
+    const input = await measured(page);
+    const result = await captureSourceTopology(page, input);
+    assert.equal(result.status, "captured", JSON.stringify(result));
+    const topology = result.observation!;
+    assert.deepEqual(topologyPseudoProblems(topology), []);
+    const planes = topology.pseudoPlanes!;
+    assert.deepEqual(
+      planes.map((p) => p.pseudo),
+      ["::before", "::after", "::before", "::marker", "::placeholder"],
+    );
+    const rootBefore = planes[0],
+      slottedBefore = planes[2];
+    assert.equal(rootBefore.ownerDomPath, topology.rootDomPath);
+    assert.equal(rootBefore.visualPath, "/pseudo/::before");
+    assert.equal(rootBefore.style.color, "rgb(1, 2, 3)");
+    assert.equal(slottedBefore.ownerDomPath, "host/0");
+    assert.equal(slottedBefore.style.color, "rgb(4, 5, 6)");
+    assert.deepEqual(slottedBefore.slotChain, [topology.slots[0].domPath]);
+    assert.ok(
+      planes.every(
+        (p) => Object.keys(p.style).length === input.channels.length,
+      ),
+    );
+    assert.equal(
+      topology.nodes.some((n) => n.domPath.includes("::")),
+      false,
+    );
+    assert.equal(
+      sha(await page.screenshot({ fullPage: true, caret: "initial" })),
+      input.sourcePngSha256,
+    );
+    for (const mutate of [
+      (p: typeof rootBefore) => {
+        p.ownerDomPath = "host/0";
+      },
+      (p: typeof rootBefore) => {
+        p.visualPath = "/wrong";
+      },
+      (p: typeof rootBefore) => {
+        p.slotChain = ["made-up-slot"];
+      },
+    ]) {
+      const changed = structuredClone(topology);
+      mutate(changed.pseudoPlanes![0]);
+      assert.deepEqual(topologyPseudoProblems(changed), [
+        "topology-pseudo-owner-invalid",
+      ]);
+    }
+    const duplicate = structuredClone(topology);
+    duplicate.pseudoPlanes!.push(duplicate.pseudoPlanes![0]);
+    assert.deepEqual(topologyPseudoProblems(duplicate), [
+      "topology-pseudo-owner-invalid",
+    ]);
+    const badStyle = structuredClone(topology);
+    badStyle.pseudoPlanes![0].style = {};
+    assert.deepEqual(topologyPseudoProblems(badStyle), [
+      "topology-pseudo-style-invalid",
+    ]);
+    const forged = structuredClone(input);
+    forged.tree.pseudo["::before"]!.color = "rgb(99, 99, 99)";
+    forged.treeSha256 = sha(JSON.stringify(forged.tree));
+    const refused = await captureSourceTopology(page, forged);
+    assert.deepEqual(refused.problems, ["topology-source-tree-changed"]);
+    assert.equal(refused.observation, undefined);
+  } finally {
+    await browser.close();
+  }
+});
+
+test("independent pseudo read rejects changed CSS even when the initial tree and pixels match", async () => {
+  const browser = await chromium.launch(),
+    page = await browser.newPage();
+  try {
+    await fixture(
+      page,
+      "Text",
+      "<style>button::before{content:'Same';color:rgb(1,2,3)}</style><button><slot></slot></button>",
+    );
+    const input = await measured(page);
+    await page.evaluate(() => {
+      const original = window.getComputedStyle;
+      let reads = 0;
+      window.getComputedStyle = function (element, pseudo) {
+        const style = original.call(this, element, pseudo);
+        if (
+          pseudo === "::before" &&
+          element.tagName === "BUTTON" &&
+          ++reads === 2
+        )
+          return new Proxy(style, {
+            get(target, key) {
+              return key === "getPropertyValue"
+                ? (name: string) =>
+                    name === "color"
+                      ? "rgb(99, 99, 99)"
+                      : target.getPropertyValue(name)
+                : Reflect.get(target, key, target);
+            },
+          });
+        return style;
+      };
+    });
+    const result = await captureSourceTopology(page, input);
+    assert.deepEqual(result.problems, ["topology-pseudo-style-mismatch"]);
     assert.equal(result.observation, undefined);
   } finally {
     await browser.close();

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { gunzipSync } from "node:zlib";
 import { matchLitRender, type LitRenderInput } from "./lit-render-match.js";
 import { assessSemantics, semanticHash } from "./semantics.js";
 
@@ -70,41 +71,96 @@ const button =
 
 test("TypeScript-only return wrappers preserve matching while static HTML interpolation cannot borrow ordinary Lit proof", () => {
   const ordinary = matchLitRender(synthetic(`return ${button};`));
-  const wrapped = matchLitRender(synthetic(`return (${button}) as TemplateResult<1>;`));
+  const wrapped = matchLitRender(
+    synthetic(`return (${button}) as TemplateResult<1>;`),
+  );
   assert.equal(wrapped.status, "structure-matched");
-  assert.deepEqual(wrapped.nodes.map(n => [n.tag, n.domPath]), ordinary.nodes.map(n => [n.tag, n.domPath]));
-  for (const module of ['lit/static-html.js', 'lit-html/static.js']) {
-    const input = synthetic('return html`<button part="button" data-unknown=${this.value}><span><slot></slot></span></button>`;');
-    input.source.source = input.source.source.replace("from 'lit'", `from '${module}'`);
+  assert.deepEqual(
+    wrapped.nodes.map((n) => [n.tag, n.domPath]),
+    ordinary.nodes.map((n) => [n.tag, n.domPath]),
+  );
+  for (const module of ["lit/static-html.js", "lit-html/static.js"]) {
+    const input = synthetic(
+      'return html`<button part="button" data-unknown=${this.value}><span><slot></slot></span></button>`;',
+    );
+    input.source.source = input.source.source.replace(
+      "from 'lit'",
+      `from '${module}'`,
+    );
     input.source.sourceSha256 = sha(input.source.source);
     const result = matchLitRender(input);
     assert.equal(result.status, "refused");
     assert.ok(result.problems.includes("render-source-topology-unresolved"));
-    assert.ok(result.sourceRead.problems.some(p => p.code === "static-html-values-unverified"));
+    assert.ok(
+      result.sourceRead.problems.some(
+        (p) => p.code === "static-html-values-unverified",
+      ),
+    );
     assert.deepEqual(result.bindings, []);
   }
 });
 
 test("static template correspondence requires exact observed parser input and the same image, tree and host", () => {
-  const input = synthetic('return html`<button part="button" data-value=${this.value}><span><slot></slot></span></button>`;');
-  input.source.source = input.source.source.replace("from 'lit'", "from 'lit/static-html.js'");
+  const input = synthetic(
+    'return html`<button part="button" data-value=${this.value}><span><slot></slot></span></button>`;',
+  );
+  input.source.source = input.source.source.replace(
+    "from 'lit'",
+    "from 'lit/static-html.js'",
+  );
   input.source.sourceSha256 = sha(input.source.source);
   input.staticRender = {
     sourcePngSha256: input.semantics.sourcePngSha256,
     sourceTreeSha256: input.semantics.sourceTreeSha256!,
-    observation: {version:1,policy:{version:1,sourceSha256:input.source.sourceSha256,className:'ALButton',tagName:'al-button'},
-      status:'captured',problems:[],renders:1,last:{staticFields:[],value:{kind:'template',
-        strings:['<button part="button" data-value=', '><span><slot></slot></span></button>'],values:[{kind:'undefined'}]}}},
+    observation: {
+      version: 1,
+      policy: {
+        version: 1,
+        sourceSha256: input.source.sourceSha256,
+        className: "ALButton",
+        tagName: "al-button",
+      },
+      status: "captured",
+      problems: [],
+      renders: 1,
+      last: {
+        staticFields: [],
+        value: {
+          kind: "template",
+          strings: [
+            '<button part="button" data-value=',
+            "><span><slot></slot></span></button>",
+          ],
+          values: [{ kind: "undefined" }],
+        },
+      },
+    },
   };
-  assert.equal(matchLitRender(input).status,'structure-matched');
-  for(const mutate of [
-    (i:LitRenderInput)=>{i.staticRender!.sourcePngSha256='0'.repeat(64);},
-    (i:LitRenderInput)=>{i.staticRender!.sourceTreeSha256='0'.repeat(64);},
-    (i:LitRenderInput)=>{i.staticRender!.observation.policy.tagName='other-element';},
-    (i:LitRenderInput)=>{i.staticRender!.observation.last!.value={kind:'template',strings:['<different></different>'],values:[]};},
+  assert.equal(matchLitRender(input).status, "structure-matched");
+  for (const mutate of [
+    (i: LitRenderInput) => {
+      i.staticRender!.sourcePngSha256 = "0".repeat(64);
+    },
+    (i: LitRenderInput) => {
+      i.staticRender!.sourceTreeSha256 = "0".repeat(64);
+    },
+    (i: LitRenderInput) => {
+      i.staticRender!.observation.policy.tagName = "other-element";
+    },
+    (i: LitRenderInput) => {
+      i.staticRender!.observation.last!.value = {
+        kind: "template",
+        strings: ["<different></different>"],
+        values: [],
+      };
+    },
   ]) {
-    const changed=structuredClone(input);mutate(changed);
-    refused(changed,/render-static-observation-identity-mismatch|static-template-parser-input-unexplained/);
+    const changed = structuredClone(input);
+    mutate(changed);
+    refused(
+      changed,
+      /render-static-observation-identity-mismatch|static-template-parser-input-unexplained/,
+    );
   }
 });
 function refused(input: LitRenderInput, code: string | RegExp) {
@@ -381,13 +437,13 @@ test("comment and ASCII whitespace policy is explicit; visible source text is no
     synthetic(
       'return html`<button part="button"><span>Label<slot></slot></span></button>`;',
     ),
-    "render-source-text-unbound",
+    "render-structure-mismatch",
   );
   refused(
     synthetic(
       'return html`<button part="button">${0 && html`<div></div>`}<span><slot></slot></span></button>`;',
     ),
-    "render-child-expression-unresolved",
+    "render-structure-mismatch",
   );
 });
 
@@ -495,4 +551,139 @@ test("a render mutation cannot select an unexecuted same-shaped branch from post
     );
     assert.equal(result.selectedTemplateIds.length, 0);
   }
+});
+
+function actualCheckbox(): LitRenderInput {
+  const fixture = JSON.parse(
+    readFileSync(
+      new URL(
+        "./fixtures/lit-render-match/altitude-checkbox.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+  const payload = gunzipSync(Buffer.from(fixture.payload, "base64")).toString();
+  assert.equal(sha(payload), fixture.sha256);
+  return JSON.parse(payload);
+}
+test("actual Checkbox source text traces its property span and exact nested fallback node without consuming slot content", () => {
+  const input = actualCheckbox(),
+    result = matchLitRender(input);
+  assert.equal(
+    result.status,
+    "structure-matched",
+    JSON.stringify(result.problems),
+  );
+  assert.equal(result.acceptedContract, null);
+  assert.equal(result.matchingShapes, 1);
+  assert.equal((result.texts ?? []).length, 1);
+  const text = result.texts![0];
+  assert.equal(text.sourceProperty, "fieldNote");
+  assert.equal(
+    input.source.source.slice(text.sourceSpan.start, text.sourceSpan.end),
+    "this.fieldNote",
+  );
+  assert.equal(text.value, "This is a field note.");
+  assert.equal(text.domPath, "host/shadow/2/5/1/2");
+  assert.equal(text.visualPath, "/nodes/5/el/nodes/1/el/nodes/2");
+  assert.equal(
+    result.slots.find((s) => s.name === "field-note")?.distribution,
+    "fallback",
+  );
+  assert.equal(
+    result.texts!.some((t) =>
+      result.slots.some((s) => s.assigned.includes(t.domPath)),
+    ),
+    false,
+  );
+  assert.equal(
+    input.boundTopology.topology!.observation!.pseudoPlanes!.length,
+    2,
+  );
+});
+
+test("source-owned text mismatches, additional equal text and invalid pseudo owners are refused", () => {
+  for (const mutate of [
+    (i: LitRenderInput) => {
+      i.semantics.observation.properties.fieldNote = {
+        kind: "value",
+        value: "Different",
+      };
+    },
+    (i: LitRenderInput) => {
+      i.boundTopology.topology!.observation!.nodes.find(
+        (n) => n.domPath === "host/shadow/2/5/1/2",
+      )!.text = "Different";
+    },
+    (i: LitRenderInput) => {
+      i.boundTopology.topology!.observation!.nodes.push({
+        kind: "text",
+        domPath: "host/shadow/2/50",
+        text: "This is a field note.",
+      });
+    },
+    (i: LitRenderInput) => {
+      i.boundTopology.topology!.observation!.pseudoPlanes![0].ownerDomPath =
+        "host";
+    },
+  ]) {
+    const input = actualCheckbox();
+    mutate(input);
+    rebind(input);
+    const result = matchLitRender(input);
+    assert.equal(result.status, "refused");
+    assert.equal((result.texts ?? []).length, 0);
+    assert.ok(result.problems.length);
+  }
+});
+
+test("literal text and numeric zero retain identity; unsupported content expressions remain refused", () => {
+  for (const value of ["Literal", 0]) {
+    const input = actualCheckbox(),
+      before = input.source.source;
+    input.source.source = before.replace(
+      "> ${this.fieldNote} </${this.fieldNoteEl}>",
+      typeof value === "string"
+        ? ">Literal</${this.fieldNoteEl}>"
+        : ">${0}</${this.fieldNoteEl}>",
+    );
+    input.source.sourceSha256 = sha(input.source.source);
+    // Synthetic ordinary-Lit source with literal registered tags: no fabricated
+    // runtime observation is borrowed for a changed static template.
+    input.source.source = input.source.source
+      .replace("from 'lit/static-html.js'", "from 'lit'")
+      .replaceAll("${this.fieldNoteEl}", "al-field-note");
+    input.source.sourceSha256 = sha(input.source.source);
+    delete input.staticRender;
+    const top = input.boundTopology.topology!.observation!;
+    top.nodes.find((n) => n.domPath === "host/shadow/2/5/1/2")!.text =
+      String(value);
+    // Slot semantic fallback must describe the same synthetic text.
+    const slot = input.semantics.observation.slots.find(
+      (s) => s.name === "field-note",
+    )!;
+    const rewrite = (nodes: any[]) => {
+      for (const node of nodes) {
+        if (node.kind === "text" && node.text === "This is a field note.")
+          node.text = String(value);
+        if (node.children) rewrite(node.children);
+        if (node.shadow) rewrite(node.shadow);
+      }
+    };
+    rewrite(slot.fallback);
+    rebind(input);
+    const result = matchLitRender(input);
+    assert.equal(
+      result.status,
+      "structure-matched",
+      JSON.stringify(result.problems),
+    );
+    assert.equal(result.texts![0].value, String(value));
+    assert.equal(result.texts![0].sourceProperty, undefined);
+  }
+  const input = actualCheckbox();
+  input.semantics.observation.properties.fieldNote = { kind: "non-scalar" };
+  rebind(input);
+  assert.equal(matchLitRender(input).status, "refused");
 });
