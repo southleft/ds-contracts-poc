@@ -531,6 +531,10 @@ export function deriveButtonCandidateSemantics(
         );
         continue;
       }
+      if (match.texts?.length) {
+        current.problems.push("candidate-source-owned-text-unmapped");
+        continue;
+      }
       const branches = result.coverage.branches.filter(
         (branch) =>
           match.selectedTemplateIds.includes(branch.templateId) &&

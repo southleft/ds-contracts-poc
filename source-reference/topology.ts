@@ -1,7 +1,12 @@
 import { createHash } from "node:crypto";
 import type { Page } from "playwright-core";
 import { captureJs, SHADOW_HELPERS_JS } from "../extract/computed/capture.js";
-import type { CapturedNode } from "../extract/computed/lib.js";
+import {
+  READ_PSEUDOS,
+  type CapturedNode,
+  type ReadPseudo,
+  type StyleMap,
+} from "../extract/computed/lib.js";
 
 export interface TopologyInput {
   hostPath: readonly string[];
@@ -39,12 +44,23 @@ export interface TopologySlot {
   distribution: "assigned" | "fallback";
   visualPaths: string[];
 }
+export interface TopologyPseudoPlane {
+  /** A CSS plane belongs to an Element; it is never a fabricated DOM Node. */
+  ownerDomPath: string;
+  ownerVisualPath: string;
+  pseudo: ReadPseudo;
+  visualPath: string;
+  style: StyleMap;
+  slotChain?: string[];
+}
 export interface SourceTopology {
   hostDomPath: "host";
   rootDomPath: string;
   nodes: TopologyNode[];
   slots: TopologySlot[];
   omitted: Array<{ domPath: string; reason: string }>;
+  /** Absent for historical observations without pseudo planes. */
+  pseudoPlanes?: TopologyPseudoPlane[];
 }
 export type TopologyResult = {
   status: "captured" | "refused";
@@ -58,6 +74,47 @@ export type TopologyResult = {
 const digest = (value: string | Uint8Array) =>
   createHash("sha256").update(value).digest("hex");
 
+/** Validate persisted owner edges before consumers join semantic or source
+ * bindings. Runtime capture separately corroborates these styles against CSS. */
+export function topologyPseudoProblems(topology: SourceTopology): string[] {
+  if (topology.pseudoPlanes === undefined) return [];
+  const planes = topology.pseudoPlanes;
+  if (!Array.isArray(planes) || planes.length > 8000)
+    return ["topology-pseudo-record-invalid"];
+  const seen = new Set<string>();
+  for (const plane of planes) {
+    if (
+      !plane ||
+      typeof plane !== "object" ||
+      !READ_PSEUDOS.includes(plane.pseudo)
+    )
+      return ["topology-pseudo-record-invalid"];
+    const owner = topology.nodes.find(
+      (node) => node.domPath === plane.ownerDomPath,
+    );
+    if (
+      !owner ||
+      owner.kind !== "element" ||
+      owner.visualPath === undefined ||
+      plane.ownerVisualPath !== owner.visualPath ||
+      plane.visualPath !== `${owner.visualPath}/pseudo/${plane.pseudo}` ||
+      seen.has(plane.visualPath) ||
+      JSON.stringify(plane.slotChain) !== JSON.stringify(owner.slotChain)
+    )
+      return ["topology-pseudo-owner-invalid"];
+    if (
+      !plane.style ||
+      typeof plane.style !== "object" ||
+      Array.isArray(plane.style) ||
+      !Object.keys(plane.style).length ||
+      !Object.values(plane.style).every((value) => typeof value === "string")
+    )
+      return ["topology-pseudo-style-invalid"];
+    seen.add(plane.visualPath);
+  }
+  return [];
+}
+
 // Supplied lexically from the production helper string, never installed on the
 // source window. Used as an identity-level referee, not a rewritten reader.
 declare const shChildNodesOf: (element: Element) => Node[];
@@ -65,8 +122,8 @@ declare const shChildNodesOf: (element: Element) => Node[];
 function topologyProbe(
   input: Pick<
     TopologyInput,
-    "hostPath" | "rootPath" | "stageSelector" | "tree"
-  >,
+    "hostPath" | "rootPath" | "stageSelector" | "tree" | "channels"
+  > & { readPseudos: readonly ReadPseudo[] },
 ): SourceTopology {
   const select = (selectors: readonly string[]): Element => {
     let scope: Document | ShadowRoot | null = document;
@@ -95,6 +152,7 @@ function topologyProbe(
   if (stages.length !== 1 || !ancestor)
     throw new Error("topology-stage-identity-mismatch");
   const nodes: TopologyNode[] = [];
+  const pseudoPlanes: TopologyPseudoPlane[] = [];
   const identity = new Map<Node, string>();
   const facts = new Map<Node, TopologyNode>();
   const slotElements: HTMLSlotElement[] = [];
@@ -233,8 +291,45 @@ function topologyProbe(
   ) => {
     if (captured.tag !== tagOf(element))
       throw new Error("topology-captured-tag-mismatch");
-    if (Object.keys(captured.pseudo).length)
-      throw new Error("topology-pseudo-planes-unrepresented");
+    // Resolve ownership by the same actual Element used by the positional
+    // visual-tree join. Then independently read every captured CSS channel.
+    // Equal text/styles never choose an owner, and a pseudo is not a DOM child.
+    const elementStyle = getComputedStyle(element);
+    const observedPseudos: string[] = [];
+    for (const pseudo of input.readPseudos) {
+      const computed = getComputedStyle(element, pseudo);
+      const content = computed.getPropertyValue("content");
+      const present =
+        pseudo === "::before" || pseudo === "::after"
+          ? content !== "none" && content !== "normal"
+          : computed.getPropertyValue("display") !== "" &&
+            (pseudo !== "::marker" ||
+              elementStyle.getPropertyValue("display") === "list-item") &&
+            (pseudo !== "::placeholder" || "placeholder" in element);
+      if (!present) continue;
+      observedPseudos.push(pseudo);
+      const style = Object.fromEntries(
+        input.channels.map((channel) => [
+          channel,
+          computed.getPropertyValue(channel),
+        ]),
+      );
+      if (JSON.stringify(style) !== JSON.stringify(captured.pseudo[pseudo]))
+        throw new Error("topology-pseudo-style-mismatch");
+      pseudoPlanes.push({
+        ownerDomPath: domPathOf(element),
+        ownerVisualPath: visualPath,
+        pseudo,
+        visualPath: `${visualPath}/pseudo/${pseudo}`,
+        style,
+        ...(inheritedSlots.length ? { slotChain: [...inheritedSlots] } : {}),
+      });
+    }
+    if (
+      JSON.stringify(observedPseudos) !==
+      JSON.stringify(Object.keys(captured.pseudo))
+    )
+      throw new Error("topology-pseudo-census-mismatch");
     if ("closedShadowRootSuspect" in captured)
       throw new Error("topology-shadow-boundary-unrepresented");
     attach(element, visualPath, inheritedSlots);
@@ -275,7 +370,14 @@ function topologyProbe(
     });
   };
   walk(root, input.tree, "", []);
-  return { hostDomPath: "host", rootDomPath, nodes, slots, omitted };
+  return {
+    hostDomPath: "host",
+    rootDomPath,
+    nodes,
+    slots,
+    omitted,
+    ...(pseudoPlanes.length ? { pseudoPlanes } : {}),
+  };
 }
 
 /** Additive observation only. The existing visual reader is executed verbatim
@@ -293,7 +395,7 @@ export async function captureSourceTopology(
     limitations: [
       "Topology identities are observation-local, not cross-state stable IDs or causal prop bindings.",
       "Visual hashes do not bind older semantic observations: consumers must independently reconcile these attributes and slot identities with the same semantic evidence before joining source bindings.",
-      "Pseudo planes and inaccessible custom-element shadow roots are refused. SVG metadata is explicitly excluded by the unchanged visual reader; SVG nodes are not reconstructed into assets.",
+      "Pseudo planes retain their actual Element owner and independently checked styles; this is not canvas promotion or behavioral qualification. Inaccessible custom-element shadow roots are refused. SVG metadata is explicitly excluded by the unchanged visual reader; SVG nodes are not reconstructed into assets.",
       "Bounded mutation checks do not sandbox source getters or establish source readiness, behavior, token semantics or a generatable contract.",
     ],
   };
@@ -345,7 +447,7 @@ export async function captureSourceTopology(
       if (digest(JSON.stringify(tree)) !== input.treeSha256)
         throw new Error("topology-source-tree-changed");
       return page.evaluate<SourceTopology>(
-        `(() => { const __name = value => value; ${SHADOW_HELPERS_JS} return (${topologyProbe.toString()})(${JSON.stringify({ hostPath: input.hostPath, rootPath: input.rootPath, stageSelector: input.stageSelector, tree })}); })()`,
+        `(() => { const __name = value => value; ${SHADOW_HELPERS_JS} return (${topologyProbe.toString()})(${JSON.stringify({ hostPath: input.hostPath, rootPath: input.rootPath, stageSelector: input.stageSelector, tree, channels: input.channels, readPseudos: READ_PSEUDOS })}); })()`,
       );
     };
     const first = await read(),

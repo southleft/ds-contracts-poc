@@ -192,7 +192,7 @@ export const PropSchema = z
         property: z.string().optional(),
         /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
         values: z.record(z.string(), z.string()).optional(),
-        /** Canvas-only option for an omitted, defaultless enum prop. This
+        /** Canvas-only option for an omitted, defaultless enum/boolean prop. This
          * label is NOT a public enum value or a code default. Opt-in keeps
          * historical contracts' named undrawn-base-plane refusal intact. */
         unsetValue: z.string().optional(),
@@ -225,9 +225,9 @@ export const PropSchema = z
     const label = p.bindings.figma.unsetValue;
     if (label === undefined) return;
     const path = ['bindings', 'figma', 'unsetValue'];
-    if (typeof p.type !== 'object' || !('enum' in p.type) ||
+    if (!(p.type === 'boolean' || (typeof p.type === 'object' && 'enum' in p.type)) ||
         p.bindings.figma.kind !== 'VARIANT' || p.default !== undefined || p.required === true) {
-      ctx.addIssue({ code: 'custom', path, message: 'unsetValue requires an optional defaultless enum with a VARIANT binding' });
+      ctx.addIssue({ code: 'custom', path, message: 'unsetValue requires an optional defaultless enum or boolean with a VARIANT binding' });
       return;
     }
     if (!label.trim() || label !== label.trim() || /[,=\r\n]/.test(label))
@@ -236,12 +236,15 @@ export const PropSchema = z
       ctx.addIssue({ code: 'custom', path, message: 'unsetValue cannot be a boolean-axis option' });
     if (!isSupportedOmittedCodeBinding(p.bindings.code.prop))
       ctx.addIssue({ code: 'custom', path: ['bindings', 'code', 'prop'], message: 'unsupported omitted-plane code binding: invalid identifier or reserved/generated binding collision' });
-    const options = p.type.enum.map(v => p.bindings.figma.values?.[v] ?? v);
+    const domain = p.type === 'boolean' ? ['false', 'true'] : p.type.enum;
+    if (p.type === 'boolean' && Object.keys(p.bindings.figma.values ?? {}).some(v => !domain.includes(v)))
+      ctx.addIssue({ code: 'custom', path, message: 'boolean omission bindings may map only false and true' });
+    const options = domain.map(v => p.bindings.figma.values?.[v] ?? v);
     if (options.some(v => !v.trim() || v !== v.trim() || /[,=\r\n]/.test(v)) || new Set(options).size !== options.length ||
         !p.bindings.figma.property?.trim() || /[,=\r\n]/.test(p.bindings.figma.property))
       ctx.addIssue({ code: 'custom', path, message: 'unsetValue requires distinct, unambiguous public canvas options and an axis identity without delimiters' });
     const identity = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (!identity(label) || p.type.enum.some(v => identity(v) === identity(label) || identity(p.bindings.figma.values?.[v] ?? v) === identity(label)))
+    if (!identity(label) || domain.some(v => identity(v) === identity(label) || identity(p.bindings.figma.values?.[v] ?? v) === identity(label)))
       ctx.addIssue({ code: 'custom', path, message: 'unsetValue collides with a public variant option after canonicalization' });
   });
 

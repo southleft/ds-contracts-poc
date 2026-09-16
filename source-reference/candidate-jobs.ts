@@ -12,6 +12,7 @@ import {
 import path from "node:path";
 import {
   isBindingEvidenceRequest,
+  bindingComponent,
   type BindingEvidenceRequest,
 } from "./binding-evidence.js";
 import type { VerifiedBindingSelection } from "./binding-jobs.js";
@@ -58,7 +59,18 @@ export interface CandidatePreparedReport {
   acceptedContract: null;
   [key: string]: unknown;
 }
+export interface StatefulPreparationInventory {
+  booleanStates: Array<{
+    property: string;
+    omitted: number;
+    explicitFalse: number;
+    explicitTrue: number;
+  }>;
+  slots: Array<{ name: string; observedCases: number }>;
+}
 export interface CandidateJobSnapshot {
+  stateful?: StatefulPreparationInventory;
+  component?: "al-checkbox";
   id: string;
   state: CandidateState;
   operation?: "source-preparation" | "source-visual-assembly";
@@ -104,6 +116,7 @@ export type CandidateVisualReportValidator = (
   context: CandidateVisualValidationContext,
 ) => CandidateValidatedSummary;
 export interface CandidateValidatedSummary {
+  stateful?: StatefulPreparationInventory;
   counters: Record<string, number>;
   problems?: string[];
 }
@@ -441,6 +454,50 @@ export function createCandidateJobs(
           )))
     )
       fail("summary-invalid");
+    if (summary.stateful !== undefined) {
+      const inventory = summary.stateful;
+      const count = (n: unknown) =>
+        typeof n === "number" && Number.isSafeInteger(n) && n >= 0;
+      if (
+        job.request.version !== 2 ||
+        !object(inventory) ||
+        Object.keys(inventory).some(
+          (k) => !["booleanStates", "slots"].includes(k),
+        ) ||
+        !Array.isArray(inventory.booleanStates) ||
+        inventory.booleanStates.length > 64 ||
+        !Array.isArray(inventory.slots) ||
+        inventory.slots.length > 64 ||
+        inventory.booleanStates.some(
+          (row) =>
+            !object(row) ||
+            Object.keys(row).some(
+              (k) =>
+                ![
+                  "property",
+                  "omitted",
+                  "explicitFalse",
+                  "explicitTrue",
+                ].includes(k),
+            ) ||
+            typeof row.property !== "string" ||
+            !/^[A-Za-z_$][\w$]*$/.test(row.property) ||
+            row.property.length > 100 ||
+            ![row.omitted, row.explicitFalse, row.explicitTrue].every(count),
+        ) ||
+        inventory.slots.some(
+          (row) =>
+            !object(row) ||
+            Object.keys(row).some(
+              (k) => !["name", "observedCases"].includes(k),
+            ) ||
+            typeof row.name !== "string" ||
+            !/^[a-zA-Z0-9_-]{0,100}$/.test(row.name) ||
+            !count(row.observedCases),
+        )
+      )
+        fail("summary-invalid");
+    }
     let verifiedPreparation = preparation;
     if (job.version !== 1) {
       const after = selectLatestPreparedVerified(job.request);
@@ -467,6 +524,9 @@ export function createCandidateJobs(
       report,
       selection,
       preparation: verifiedPreparation,
+      ...(summary.stateful
+        ? { stateful: structuredClone(summary.stateful) }
+        : {}),
       phase: report.status,
       counters: { ...summary.counters },
       problems: [...(summary.problems ?? [])],
@@ -475,6 +535,9 @@ export function createCandidateJobs(
   const snapshot = (job: AnyCandidateJobRecord): CandidateJobSnapshot => {
     const result: CandidateJobSnapshot = {
       id: job.id,
+      ...(job.request.version === 2
+        ? { component: "al-checkbox" as const }
+        : {}),
       ...(job.version !== 1
         ? { operation: "source-visual-assembly" as const }
         : {}),
@@ -495,6 +558,7 @@ export function createCandidateJobs(
         const value = validate(job);
         result.phase = value.phase;
         result.counters = value.counters;
+        if (value.stateful) result.stateful = value.stateful;
         result.problems = value.problems;
       } catch {
         result.state = "failed";
@@ -533,7 +597,10 @@ export function createCandidateJobs(
       const record = value as AnyCandidateJobRecord;
       // Fingerprint all records, including unrelated ones that could be retargeted.
       fingerprints.push([entry.name, sha(bytes!)]);
-      if (record.request.baseline.id === request.baseline.id)
+      if (
+        record.request.baseline.id === request.baseline.id &&
+        bindingComponent(record.request) === bindingComponent(request)
+      )
         records.push(record);
     }
     records.sort(
@@ -652,6 +719,7 @@ export function createCandidateJobs(
       )
     )
       fail("history-invalid");
+    if (visual && request.version !== 1) fail("visual-component-unsupported");
     const version = visual ? visualVersion() : 1;
     const existing = ordered()
       .filter((job) => same(job.request, request) && job.version === version)

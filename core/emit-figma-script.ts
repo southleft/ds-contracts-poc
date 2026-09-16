@@ -676,8 +676,8 @@ export interface ComponentData {
   propNames?: Record<string, string>;
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
-    version: 1;
-    axes: Array<{ property: string; propName: string; codeProp: string; unsetValue: string; values: Array<{ value: string; label: string }> }>;
+    version: 1 | 2;
+    axes: Array<{ property: string; propName: string; codeProp: string; unsetValue: string; valueType?: 'boolean' | 'enum'; values: Array<{ value: string; label: string }> }>;
   };
   statePreviewAxis?: {
     axis: string;
@@ -3460,7 +3460,7 @@ const boolAxisValues = (p: Prop): string[] =>
 const depEmitsStandalone = (dep: Contract): boolean => {
   const combos = dep.props
     .filter((p) => isEnum(p) || isVariantBool(p))
-    .reduce((n, p) => n * (isEnum(p) ? p.type.enum.length + (p.bindings.figma.unsetValue === undefined ? 0 : 1) : 2), 1);
+    .reduce((n, p) => n * ((isEnum(p) ? p.type.enum.length : 2) + (p.bindings.figma.unsetValue === undefined ? 0 : 1)), 1);
   const hasPreviews = Boolean(dep.bindings.figma.statePreviews) && dep.states.length > 0;
   return combos === 1 && !hasPreviews;
 };
@@ -5186,7 +5186,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // null is an internal discriminant only; it is never written to subst or
   // the public enum. Omission therefore resolves the actual base carriers.
   const orderedValues = (p: Prop): Array<string | null> => {
-    if (!isEnum(p)) return boolAxisValues(p); // bool axis: default first
+    if (!isEnum(p)) return p.bindings.figma.unsetValue === undefined ? boolAxisValues(p) : [null, ...boolAxisValues(p)];
     const values = [...p.type.enum];
     const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
     if (i > 0) {
@@ -5968,13 +5968,16 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       return Object.keys(map).length > 0 ? { propNames: map } : {};
     })(),
     ...(() => {
-      const axes = contract.props.filter(p => isEnum(p) && p.bindings.figma.unsetValue !== undefined)
+      const axes = contract.props.filter(p => (isEnum(p) || isVariantBool(p)) && p.bindings.figma.unsetValue !== undefined)
         .map(p => ({
           property: p.bindings.figma.property!, propName: p.name, codeProp: p.bindings.code.prop,
           unsetValue: p.bindings.figma.unsetValue!,
-          values: (p.type as { enum: string[] }).enum.map(value => ({ value, label: p.bindings.figma.values?.[value] ?? value })),
+          ...(p.type === 'boolean' ? { valueType: 'boolean' as const } : {}),
+          values: (p.type === 'boolean' ? ['false', 'true'] : (p.type as { enum: string[] }).enum).map(value => ({ value, label: p.bindings.figma.values?.[value] ?? value })),
         }));
-      return axes.length ? { unsetVariantAxes: { version: 1 as const, axes } } : {};
+      const typed = axes.some(a => a.valueType === 'boolean');
+      return axes.length ? { unsetVariantAxes: { version: typed ? 2 as const : 1 as const,
+        axes: typed ? axes.map(a => ({ ...a, valueType: a.valueType ?? 'enum' as const })) : axes } } : {};
     })(),
     ...(contract.semantics && (contract.semantics.element || contract.semantics.role)
       ? {
@@ -8661,7 +8664,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
       try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
       const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
       if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
-        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue${datas.some(d => d.unsetVariantAxes) ? " && (next.valueType || 'enum') === (old.valueType || 'enum')" : ''})))) {
         throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
       }
     }

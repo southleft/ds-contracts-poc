@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { revisionOf } from "../core/contract-provenance.js";
@@ -350,4 +351,20 @@ test("a truthy nonboolean source-eligibility marker cannot qualify a case", () =
   assert.equal(result.cases[0].status, "refused");
   assert.equal(result.coverage.cases.expected, 3);
   assert.equal(result.coverage.cases.matched, 2);
+});
+
+test('the Button adapter refuses newly traceable source text instead of dropping it from candidate semantics',()=>{
+  const input=fixture();
+  input.source.source=input.source.source.replaceAll('>\n            <slot></slot>','>Owned<slot></slot>');
+  input.source.sourceSha256=createHash('sha256').update(input.source.source).digest('hex');
+  for(const row of input.cases){
+    const topology=row.boundTopology!.topology!.observation!;
+    const slot=topology.slots.find(s=>s.name==='')!;
+    const parent=slot.domPath.slice(0,slot.domPath.lastIndexOf('/'));
+    const text=topology.nodes.find(n=>n.domPath===parent+'/0')!;
+    assert.equal(text.kind,'text');text.text='Owned';
+    row.boundTopology!.topology!.observationSha256=semanticHash(topology);
+  }
+  const result=deriveButtonCandidateSemantics(input);
+  assert.ok(result.cases.every(row=>row.status==='refused' && row.problems.includes('candidate-source-owned-text-unmapped')));
 });
