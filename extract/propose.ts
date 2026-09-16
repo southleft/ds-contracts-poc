@@ -118,6 +118,7 @@ export function proposeContract(
   c: ExtractedComponent,
   prefix: string,
   mint?: ProposeMintOptions,
+  options: { preserveSourceApi?: boolean } = {},
 ): ProposalResult {
   const notes: string[] = [...(c.notes ?? [])];
   const props: Record<string, unknown>[] = [];
@@ -153,12 +154,13 @@ export function proposeContract(
     const base = {
       name: p.name,
       ...(p.description ? { description: p.description } : {}),
+      ...(options.preserveSourceApi && !p.optional ? { required: true } : {}),
     };
     if (p.kind === 'enum' && p.values && p.values.length > 0) {
       const dflt =
         typeof p.default === 'string' && p.values.includes(p.default)
           ? p.default
-          : toggleDefaults.has(p.name) && p.values.includes(toggleDefaults.get(p.name)!)
+          : !options.preserveSourceApi && toggleDefaults.has(p.name) && p.values.includes(toggleDefaults.get(p.name)!)
             ? toggleDefaults.get(p.name)!
             : undefined;
       props.push({
@@ -180,6 +182,19 @@ export function proposeContract(
       if (dflt !== undefined && p.default === undefined) {
         notes.push(`prop \`${p.name}\`: default '${dflt}' read from the uncontrolled useState initializer`);
       }
+    } else if (p.kind === 'boolean' && options.preserveSourceApi) {
+      props.push({
+        ...base, type: 'boolean',
+        ...(typeof p.default === 'boolean' ? { default: p.default } : {}),
+        bindings: {
+          code: { prop: p.name },
+          figma: { kind: 'VARIANT', property: titleCase(p.name),
+            values: { false: 'False', true: 'True' },
+            ...(p.optional && p.default === undefined ? { unsetValue: '(unset)' } : {}),
+          },
+        },
+      });
+      notes.push(`prop \`${p.name}\`: boolean type and source default/omission preserved; native axis binding is proposed and its visual effect remains unverified`);
     } else if (p.kind === 'boolean' && AXIS_BY_BOOL_PROP[p.name] !== undefined) {
       // A boolean that SELECTS A RENDERING is an enum axis in the contract —
       // the shape every committed seed hand-authors for `checked`. The
@@ -228,7 +243,7 @@ export function proposeContract(
       // not in code (the round-trip identity eval states exactly this; seeding
       // "Children" here turned a tolerated CODE-ABSENT into a mismatch).
       const seeded =
-        p.kind === 'string' && !p.optional && p.default === undefined && p.name !== 'children'
+        !options.preserveSourceApi && p.kind === 'string' && !p.optional && p.default === undefined && p.name !== 'children'
           ? titleCase(p.name)
           : undefined;
       props.push({
@@ -290,6 +305,10 @@ export function proposeContract(
     if (anatomy) {
       const walkContent = (p: ExtractedPart) => {
         if (p.content?.prop) consumed.add(p.content.prop);
+        for (const value of Object.values(p.component?.props ?? {})) {
+          const reference = typeof value === 'string' ? /^\{([a-z][\w-]*)\}$/.exec(value) : null;
+          if (reference) consumed.add(reference[1]);
+        }
         const tb = (p as { textByProp?: { prop?: string } }).textByProp;
         if (tb?.prop) consumed.add(tb.prop);
         for (const child of Object.values(p.parts ?? {})) walkContent(child);

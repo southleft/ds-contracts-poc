@@ -1951,8 +1951,10 @@ export const ComponentRefSchema = z.strictObject({
   id: z.string(),
   /** Fixed prop values, spelled canonically; mapped through the CHILD
    *  contract's bindings on each surface. A string value of the form
-   *  "{parentProp}" maps the PARENT's enum prop into the child per variant
-   *  (code: `childProp={parentProp}`; Figma: resolved per variant combo).
+   *  "{parentProp}" forwards a parent enum, text or boolean prop to the child
+   *  (code: `childProp={parentProp}`). Text and boolean forwarding must retain
+   *  their types. Figma resolves variant axes per combo; dynamic nested TEXT
+   *  and BOOLEAN links need a supported target projection or refuse by name.
    *  The object form (PropByPropSchema) is the same idea through a per-value
    *  LOOKUP when the child's spelling differs from the parent's. */
   props: z

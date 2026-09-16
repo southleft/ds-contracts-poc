@@ -34,7 +34,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
   const classes = [styles.root, styles[`variant-${variant}`], className].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
-      {children}
+      {'New'}
     </span>
   );
 });

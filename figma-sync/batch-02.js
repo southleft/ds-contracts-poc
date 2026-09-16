@@ -1386,6 +1386,7 @@ const COMPONENTS = [
     "colW": 380
   },
   {
+    "nestedPropertyControls": 1,
     "setName": "Card",
     "contractId": "ds.card",
     "version": "1.1.0",
@@ -4296,6 +4297,7 @@ async function buildNode(spec, registry) {
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
+    (registry.nestedControls || (registry.nestedControls = [])).push(node);
   } else if (spec.type === 'slot') {
     // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
     // the slot is minted by the variant component that owns it and moved into
@@ -4839,6 +4841,7 @@ async function amendSet(set, C) {
   }
       report.rebuiltVariants++;
     }
+    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
     for (const t of registry.texts) {
       let k = defKey(t.prop);
       if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -5063,6 +5066,7 @@ async function amendComponent(comp, C) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
       Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
+  for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -5202,6 +5206,7 @@ async function syncOne(C) {
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
     const comp = await buildNode(v.spec, registry);
+    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
     built.push({ v, comp, registry });
   }
 

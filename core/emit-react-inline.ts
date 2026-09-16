@@ -24,6 +24,7 @@
  *     hover/focus pseudo-classes above (the css/html emitters enforce it).
  *   · Composition imports sibling inline-emitted components ('./Dep').
  */
+import { rootContentJsx } from './root-content.js';
 import {
   TOKEN_CHANNELS,
   borderStyleDecls,
@@ -879,15 +880,17 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // is unused in that case (the isMultiRoot branch returns before the template
   // is assembled), so these reads are guarded rather than duplicated.
   const root = contract.anatomy.root;
+  const explicitRootContent = rootContentJsx(root, codePropOf);
   const rootInner = root?.parts || gridPlan.placeholders.has('root')
     ? [
+        ...(explicitRootContent !== undefined ? [explicitRootContent] : []),
         ...Object.entries(root?.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
         // A2 grid (G4): empty root-grid areas render placeholders too.
         ...(gridPlan.placeholders.get('root') ?? []).map(
           (area) => `<div style=${styleExpr(area, false, [])} />`,
         ),
       ].join('\n')
-    : '{children}';
+    : explicitRootContent ?? '{children}';
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {

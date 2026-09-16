@@ -53,11 +53,13 @@ Sorting, pagination, keyboard navigation and data fetching are not established b
 | 5 · Generate and verify | Choose **Create design components**. | Create native components, variants, variables and editable properties. Fill separate instances for comparison while keeping reusable main content empty where appropriate. |
 | 6 · Use and maintain | Place instances, edit supported properties and run again after a source change. | Independently read back native structure and exported images. Verify that supported changes survive and an unchanged repeat makes no writes. |
 
+**Inspect original React sources locally:** open `/sources`, choose **Load React originals**, then **Validate React sources** for the configured ten-case Button, Checkbox and composed Card cohort. **Inspect React APIs** reads its installed declarations and shows incomplete contract proposals. Source checks do not qualify Figma generation or behavior; unsupported APIs remain visible. This preset is not a general repository picker.
+
 **Try today:** [open code import](https://ds-contracts-playground.pages.dev/playground?source=code) for a static TSX/CSS experiment. Use the local app's same code-import view when working from this checkout. Review the proposed contract and named limitations before inspecting generated output. The current reader recognizes bounded syntax and styling patterns; a successful API proposal alone does not prove rendered styling, behavior or native Figma fidelity.
 
 **Where this currently stops:** connecting an arbitrary React repository, carrying its full component family through native generation, and qualifying the output are unfinished. The steps above describe the intended delivery. There is no claim that every React pattern, styling system or dependency is supported.
 
-**Existing Lit experiments:** [open local source validation](http://localhost:5181/sources) to inspect the configured Altitude library and its saved work. This is the paused Web Components path, not React onboarding. Its bounded native Button inspection demonstrated app/plugin transport and structural readback; visual fidelity and editability remain unqualified. Preserve recorded runs and operation identities when reopening work. Further Lit integration is planned after React V1.
+**Existing Lit experiments:** [open local source validation](http://localhost:5181/sources) and expand **Lit evaluation archive — parked for V1.1** to inspect the configured Altitude library and its saved work. That archive is the paused Web Components path. Its bounded native Button inspection demonstrated app/plugin transport and structural readback; visual fidelity and editability remain unqualified. Preserve recorded runs and operation identities when reopening work. Further Lit integration is planned after React V1.
 
 <a id="both-libraries"></a>
 ## Both libraries: connect, compare and repair
@@ -93,7 +95,7 @@ npm run prep:schema
 npm run playground
 ```
 
-Open [the local start guide](http://localhost:5181/start). The main branch contains merged work; an open PR is a separate revision. Start a React experiment from code import. The paused Lit `/sources` workflow requires its configured source library; React onboarding does not depend on that setup. Worker development has its own dependency install, documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
+Open [the local start guide](http://localhost:5181/start). The main branch contains merged work; an open PR is a separate revision. Start a React experiment from code import. The React `/sources` preset and archived Lit flow each require their configured source library; the React path does not depend on the Lit setup. Worker development has its own dependency install, documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The existing Lit source connection requires the local app on port 5181 and its authorized file. On `/sources`, **Prepare connection** supplies the operation connection; in the plugin use **Build → Connect the local source workflow** and **Connect / resume**. This development connection is not a completed React import action. Keep it private; it grants delivery and result access for that operation.
 
@@ -115,7 +117,7 @@ The deterministic boundary starts with verified inputs and explicit decisions: t
 
 ## Is the playground still useful?
 
-Yes: `/playground` runs the checked-out engine; `/sources` preserves the paused Lit source-inspection workflow; `/flow` demonstrates scoped engine steps using recorded inputs. These are useful development surfaces. They do not collectively prove the complete product journey.
+Yes: `/playground` runs the checked-out engine; `/sources` verifies a configured React cohort and preserves the paused Lit source-inspection archive; `/flow` demonstrates scoped engine steps using recorded inputs. These are useful development surfaces. They do not collectively prove the complete product journey.
 
 The direction is to make this application the front door to connected library workflows. Engine tutorials remain available, while onboarding starts with the user's library and desired result. The documentation site explains setup and expectations; the application executes and reports the operation.
 
@@ -124,7 +126,7 @@ The direction is to make this application the front door to connected library wo
 
 Development should produce a demonstrable user flow. Tests are acceptance checks for that delivery.
 
-**Current checkpoint:** static React readers and shared generators exist. A separate Lit Button experiment exercised the app/plugin connection, but did not qualify React import or native visual fidelity. No complete React journey has met the V1 criteria.
+**Current checkpoint:** the app verifies ten configured original React cases and proposes installed API facts; static React readers and shared generators also exist. A separate Lit Button experiment exercised the app/plugin connection, but did not qualify React import or native visual fidelity. No complete React journey has met the V1 criteria.
 
 | Checkpoint | User-visible result | Done when |
 | --- | --- | --- |

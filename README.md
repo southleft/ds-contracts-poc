@@ -49,7 +49,7 @@ There is existing table and other composed-component implementation evidence in 
 
 - **Explore contracts and deterministic generation.** The local playground runs the checked-out engine. Supported contracts can produce code and native Figma writer programs.
 - **Try React source import.** The code-import view accepts static TSX/CSS experiments and reports supported facts and limitations. It is not yet a general repository import or a verified React-to-Figma journey.
-- **Inspect existing source evidence.** The local `/sources` workflow uses a configured Lit library. It remains available for existing work, but its candidate is unaccepted and its integration is paused for V1.1. It is not the React onboarding path.
+- **Inspect original React sources.** The local `/sources` workflow opens a configured Button, Checkbox and composed Card cohort, verifies original styling and states, and proposes installed API facts. It is not yet general repository onboarding or native generation. Earlier Lit work remains in a collapsed V1.1 archive.
 - **Evaluate existing import and generation paths.** CLI and plugin workflows expose proposals and named limitations. They require setup and review; they do not yet deliver the full automatic journeys above.
 
 **Still unfinished:** application-driven code-to-Figma conversion with independent native verification, a qualified design-only reusable-library journey, and reliable two-way repair with recovery and rollback. A matching screenshot, passing engine test or historical component demo does not establish those outcomes.
@@ -64,7 +64,7 @@ npm run prep:schema
 npm run playground
 ```
 
-Open [the local start guide](http://localhost:5181/start), then choose code import for a React experiment. Read `/system` for the current plan. The paused Lit `/sources` workflow requires its configured local library and dependencies.
+Open [the local start guide](http://localhost:5181/start), then choose code import for a React experiment. Read `/system` for the current plan. The `/sources` presets require their configured local source libraries and dependencies; they do not yet provide an arbitrary repository picker.
 
 For other development commands, worker setup and validation gates, see [CONTRIBUTING.md](CONTRIBUTING.md). For the existing contract-first walkthrough, see [Getting Started](docs/00-getting-started.md).
 

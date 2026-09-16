@@ -636,6 +636,9 @@ export interface ComponentData {
    *  StatusDot.label) — added as unbound TEXT properties so the API surface
    *  matches the contract. */
   textProps: Array<{ property: string; default: string }>;
+  /** Expose existing child controls; never invent a parent property alias.
+   * Included in the spec hash so earlier compositions receive this update. */
+  nestedPropertyControls?: 1;
   fontStyles: string[];
   variants: VariantSpec[];
   /** bindings.figma.statePreviews: canvas-only preview variants carrying the "State"
@@ -3762,6 +3765,7 @@ function mapDepProps(
   /** Named-loss sink (single-variant-dep-collapse): the caller appends these
    *  to the instance spec's channelMiss footnote — never a silent drop. */
   ledger?: CodeOnlyFactSeed[],
+  parent?: Contract,
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -3795,10 +3799,19 @@ function mapDepProps(
     if (typeof value === 'string') {
       const parentRef = value.match(PARENT_PROP_REF);
       if (parentRef) {
+        const parentProp = parent?.props.find(p => p.name === parentRef[1]);
+        if (parentProp?.type === 'text') {
+          throw new Error(`FIGMA_NESTED_TEXT_PROP_LINK_UNSUPPORTED: ${parent!.id}.${parentProp.name} -> ${dep.id}.${propName}. This compiler does not support live parent-to-child text links in Figma; an editable nested-control projection must be qualified first.`);
+        }
+        if (parentProp?.type === 'boolean' && !isVariantBool(parentProp)) {
+          throw new Error(`FIGMA_NESTED_BOOLEAN_PROP_LINK_UNSUPPORTED: ${parent!.id}.${parentProp.name} -> ${dep.id}.${propName}. This compiler does not support live parent-to-child BOOLEAN links in Figma; use an explicit VARIANT state axis or qualify an editable nested-control projection.`);
+        }
         const resolved = subst[parentRef[1]];
-        if (resolved === undefined)
+        if (resolved === undefined) {
+          if (parentProp?.type === 'boolean' && parentProp.bindings.figma.unsetValue !== undefined) continue;
           throw new Error(`Cannot resolve parent prop mapping "{${parentRef[1]}}"`);
-        value = resolved;
+        }
+        value = parentProp?.type === 'boolean' ? resolved === 'true' : resolved;
       }
     }
     const fig = depProp.bindings.figma;
@@ -4284,7 +4297,7 @@ function partToSpecs(
         dep: dep.name,
         depContractId: dep.id,
         ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text),
+        depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text, undefined, contract),
       };
       applyVisibleWhen(spec, part, contract);
       return spec;
@@ -4614,7 +4627,7 @@ function partToSpecInner(
       dep: dep.name,
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger),
+      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract),
     };
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
     // Round 2 iteration 9 — per-instance overrides (component.overrides):
@@ -5930,6 +5943,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   }
 
   const data: ComponentData = {
+    ...([...variants, ...stateVariants].some(v => specSome(v.spec, n => n.type === 'instance'))
+      ? { nestedPropertyControls: 1 as const } : {}),
     ...(nativeSource ? {
       nativeSourceCandidate: {
         revision: nativeSource.revision,
@@ -7324,6 +7339,7 @@ function buildSyncScript(
     variants: opts.nativeSampleSpecs.map((spec, index) => ({ name: '', row: index, col: 0, spec })),
   }] : datas;
   const hasOpacity = featureDatas.some(dataHasOpacity);
+  const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
   // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
   // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
@@ -8037,7 +8053,8 @@ async function buildNode(spec, registry) {
     );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();
-    if (spec.depProps) setInstanceProps(node, spec.depProps, target);
+    if (spec.depProps) setInstanceProps(node, spec.depProps, target);${hasNestedPropertyControls ? `
+    (registry.nestedControls || (registry.nestedControls = [])).push(node);` : ''}
   } else if (spec.type === 'slot') {
     // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
     // the slot is minted by the variant component that owns it and moved into
@@ -8365,7 +8382,8 @@ async function amendSet(set, C) {
         }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
       }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
       report.rebuiltVariants++;
-    }
+    }${hasNestedPropertyControls ? `
+    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;` : ''}
     for (const t of registry.texts) {
       let k = defKey(t.prop);
       if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -8565,7 +8583,8 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
   }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
-  for (const t of registry.texts) {
+  ${hasNestedPropertyControls ? `for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+  ` : ''}for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
     else if (defs[k] && defs[k].defaultValue !== t.default && !report.editedDefaults.includes(t.prop)) {
@@ -8703,7 +8722,8 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
   const built = [];
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
-    const comp = await buildNode(v.spec, registry);
+    const comp = await buildNode(v.spec, registry);${hasNestedPropertyControls ? `
+    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;` : ''}
     built.push({ v, comp, registry });
   }
 

@@ -1032,7 +1032,7 @@ function renderComponentHtml(
         .map((rec) => {
           const depState: RenderState = { subst: {}, bools: {} };
           for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-          for (const p of boolProps(dep)) depState.bools[p.name] = p.default === true;
+          for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
           for (const [pn, v] of Object.entries(part.component!.props ?? {})) {
             if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
             if (typeof v === 'object') {
@@ -1043,7 +1043,13 @@ function renderComponentHtml(
               continue;
             }
             const parentRef = v.match(/^\{([a-z][\w-]*)\}$/);
-            depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
+            const parentProp = parentRef ? contract.props.find(p => p.name === parentRef[1]) : undefined;
+            if (parentProp?.type === 'boolean') {
+              if (state.bools[parentProp.name] !== undefined) depState.bools[pn] = state.bools[parentProp.name];
+            } else if (parentProp?.type === 'text') {
+              const value = propValue(parentProp.name) ?? parentProp.default;
+              if (typeof value === 'string') depState.subst[pn] = value;
+            } else depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
           }
           let itemText: string | undefined;
           for (const [field, v] of Object.entries(rec)) {
@@ -1060,7 +1066,7 @@ function renderComponentHtml(
       const dep = ctx.contracts.get(part.component.id)!;
       const depState: RenderState = { subst: {}, bools: {} };
       for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-      for (const p of boolProps(dep)) depState.bools[p.name] = p.default === true;
+      for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
       for (const [pn, v] of Object.entries(part.component.props ?? {})) {
         if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
         if (typeof v === 'object') {
@@ -1071,7 +1077,13 @@ function renderComponentHtml(
           continue;
         }
         const parentRef = v.match(/^\{([a-z][\w-]*)\}$/);
-        depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
+        const parentProp = parentRef ? contract.props.find(p => p.name === parentRef[1]) : undefined;
+        if (parentProp?.type === 'boolean') {
+          if (state.bools[parentProp.name] !== undefined) depState.bools[pn] = state.bools[parentProp.name];
+        } else if (parentProp?.type === 'text') {
+          const value = propValue(parentProp.name) ?? parentProp.default;
+          if (typeof value === 'string') depState.subst[pn] = value;
+        } else depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
       }
       // A2 grid (G3/P12): an instance cell rides a wrapper element — its
       // class carries the placement (see componentCss).
@@ -1098,7 +1110,7 @@ function renderComponentHtml(
           const dep = ctx.contracts.get(item.id)!;
           const depState: RenderState = { subst: {}, bools: {} };
           for (const p of enumProps(dep)) depState.subst[p.name] = String(p.default ?? p.type.enum[0]);
-          for (const p of boolProps(dep)) depState.bools[p.name] = p.default === true;
+          for (const p of boolProps(dep)) if (typeof p.default === 'boolean') depState.bools[p.name] = p.default;
           for (const [pn, v] of Object.entries(item.props ?? {})) {
             if (typeof v === 'boolean') depState.bools[pn] = v;
             else depState.subst[pn] = v;
@@ -1287,12 +1299,17 @@ function renderComponentHtml(
   // <option> wrapper is the only faithful rendering of a select's default
   // content. (Authored anatomies should carry explicit element:"option"
   // parts; this covers the part-less text fallback.)
-  const rootText = escapeHtml(extraText ?? textDefaultOf(contract));
+  const explicitRootText = root.content ? textValue(root.content.prop)
+    : root.text !== undefined
+      ? (root.textByProp?.map[propValue(root.textByProp.prop) ?? ''] ?? root.text)
+      : undefined;
+  const rootText = escapeHtml(explicitRootText ?? extraText ?? textDefaultOf(contract));
   // A2 grid (G4): empty root-grid areas render placeholder elements after
   // the declared children (a grid root whose areas are ALL empty renders
   // only placeholders — the grid's shape, nothing invented in it).
   const rootInner = root.parts || gridPlan.placeholders.has('root')
     ? [
+        ...(explicitRootText !== undefined ? [`${indent}  ${rootText}`] : []),
         ...Object.entries(root.parts ?? {}).map(([childName, child]) =>
           renderPart(childName, child, indent + '  ', el),
         ),
@@ -1350,7 +1367,7 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
     for (const p of enumProps(contract)) {
       if (p.default !== undefined) s.subst[p.name] = String(p.default);
     }
-    for (const p of boolProps(contract)) s.bools[p.name] = p.default === true;
+    for (const p of boolProps(contract)) if (typeof p.default === 'boolean') s.bools[p.name] = p.default;
     return s;
   };
 

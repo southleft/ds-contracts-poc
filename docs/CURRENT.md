@@ -1,10 +1,8 @@
-# Code ↔ contracts ↔ canvas
+# React ↔ contracts ↔ Figma
 
 **Public project status · updated 2026-09-16 · v1 is not complete.**
 
-The goal is to connect a team's code and design libraries through a shared contract: code becomes editable design components, design becomes reusable code, and supported changes can be repaired in either direction. This includes composed component sets such as data tables, forms and dialogs, with nested components, slots, instance swaps and other properties.
-
-**V1 scope: React ↔ contracts ↔ Figma.** Lit and Web Components integration is paused for a planned V1.1 follow-up after the React journeys qualify. Their adapters, fixtures and evidence are preserved. The shared contract remains framework-neutral. Stateful and composed components, design-only React delivery and brownfield repair remain V1 requirements.
+V1 targets React; Lit/Web Components are parked for V1.1. The goal is to connect a team's code and design libraries through a shared contract: code becomes editable design components, design becomes reusable code, and supported changes can be repaired in either direction. This includes composed component sets such as data tables, forms and dialogs, with nested components, slots, instance swaps and other properties.
 
 This page is the current status and outcome-based work order. It is also rendered in the playground and documentation site at `/system`. Earlier plans and dated measurements do not override it.
 
@@ -24,18 +22,29 @@ These steps describe the intended product workflow. The full application integra
 
 ## Where we are
 
-**Current milestone: complete the first React-led journey through the application.** Static React import, shared contract generators and a local companion-plugin connection exist. The React input path still needs a verified connection from the original styled component family to editable native Figma output. No complete React journey has qualified V1.
+**Current milestone: complete the first React-led journey through the application.** The app opens the original styled React implementation for the fixed Button, Checkbox and composed Card cohort. Source validation records the originals, checks authored style/font/state witnesses, replays archived resources without network fallback, and checks that intentionally broken references are rejected. Native conversion is the next integration step for this React entry point.
 
 | Area | Demonstrated today | Remaining product gap |
 | --- | --- | --- |
-| React intake | Static TSX extraction and bounded CSS/StyleX anatomy extraction produce proposals. The reader can resolve some sibling types and helpers. | Publish the supported syntax/styling boundary, preserve complete dependency families through the app, and verify the original rendered states. API extraction alone is not visual or behavioral conversion. |
-| Shared generation | Contract emitters represent layout, tokens, properties, content, slots and nested component references in React and native Figma programs. | Join these capabilities into the React user journey and verify their interactions across simple, stateful and composed components. |
-| Native application connection | A bounded Lit Button cycle has exercised scoped variables, native variants, independent structural readback, native exports and repeat inspection through the app/plugin. Deliberate text drift was detected. | This is reusable integration evidence, not React import qualification. Visual fidelity, editability, candidate admission and complete interruption recovery remain unqualified. |
-| Figma → reusable React | Readers propose contracts; deterministic emitters generate code. Existing designer-file checks account for supported facts and refusals. | Install and use the output as a reusable React library from design-only input, including content, variants, accessibility and declared behavior. |
+| Original React source | A host-configured source preset opens ten original cases. The app exposes source checks, archived replay, measured trees, negative controls and side-by-side source images. Changed inputs or altered evidence invalidate readiness. | General repository onboarding, broader theme/state coverage and the admission boundary into conversion. |
+| React → editable Figma | React import retains component families, tokens, root content and supported nested scalar properties. Shared native emitters and the companion-plugin operation journal exist. Scoped native checks demonstrate editable child controls and stable repeat identities. | Connect the validated React sources to the native operation path; verify original-versus-Figma fidelity, structure and editability across the whole cohort. Parent-to-child live property mappings remain incomplete. |
+| Figma → reusable React | Readers propose contracts and deterministic emitters generate React. | Install and use the output from design-only input in a clean consumer, including content, variants, accessibility and declared behavior. |
 | Changes and repair | Channel diffs, three-way merge rules, observations, a ledger and proposal planning exist. | The sync spine currently plans; it does not apply. Durable two-way apply, fresh verification, conflict handling, recovery and rollback need end-to-end proof. |
-| Release readiness | Engine checks and scoped component evidence are available. | The complete React/Figma journeys and an independent cohort have not qualified v1. |
+| Release readiness | Shared engine checks and bounded evidence are available. | Complete both journeys, repair/recovery and the independent cohort before qualifying V1. |
 
 **No complete journey cohort has yet met the current v1 criteria.** Existing evidence reduces implementation uncertainty, but it is not a percentage of product completion. We do not have an evidence-backed completion date.
+
+### React import and composition checkpoint
+
+The local **Source validation** page opens the actual React implementation for a fixed ten-case shadcn cohort: Button, Checkbox and a composed Card. **Load React originals**, then **Validate React sources**, records the source/dependency identities, checks styles, theme, painted fonts and selected states, and compares stable original screenshots and measured trees with a fresh network-isolated replay. Representative cases must also reject missing CSS, theme, fonts, missing content and hidden content. Results remain provisional until final source-integrity checks finish. All ten cases stay in the denominator.
+
+This validates the configured reference; it does not qualify Figma fidelity, editability, behavior or a complete journey. It is a fixed source preset, not automatic onboarding for arbitrary React repositories. Evidence stays private; after a dev-server restart, previous captures remain archived and the app requires a new validation. The [React V1 scope](../docs/REACT-V1-SCOPE.md) freezes the selected cases and outcome requirements. Earlier Lit controls remain in a collapsed V1.1 archive.
+
+**Inspect React APIs** reads the original component modules with their installed TypeScript declarations. It retains inherited property types (including Checkbox's boolean/indeterminate union), declared defaults, forwarded spreads, conditional root choices and nested component references. The app distinguishes unresolved reads and stores the original source/declaration hashes privately. These facts expose information the single-file importer currently misses, including inherited types and the `Comp` alias. The live family read retains nine definitions but remains incomplete because their inherited `inlist` field is typed `any`; that field is named as unresolved. The same action now feeds supported installed API facts into the existing contract proposer and displays nine incomplete contract drafts. Optional booleans retain their type and distinguish omission from false; required text receives no invented default. Inherited platform forwarding is listed separately from the native API. Mixed boolean/string domains (Checkbox's checked states), nullable domains (Button's variant and size), and other unrepresentable types remain named omissions beside the draft. These are incomplete proposals, not accepted contracts. Binding source roots, nested components, content and styling to rendered nodes, preserving the unsupported API domains, and native generation remain unfinished.
+
+Importing a React source file into the playground now retains its readable component family and each component's minted styling tokens. Generated React preserves explicit root content and forwards supported text and boolean properties to nested components, including empty text, explicit false and omission. Defaults are read from each component's own props input. Browser checks exercise live updates in both generated React formats; the static HTML preview follows the same scalar defaults.
+
+Generated Figma compositions expose their child instances' existing controls in the parent properties panel. A scoped live check confirms nested text edits and boolean values, and an unchanged repeat preserves node identities and instance overrides. Create and amend paths are covered for standalone parents and variant sets. This exposes child controls; it does not alias a React parent prop to a child prop. Native generation still refuses live parent-to-child text and BOOLEAN-property links by name. An explicitly declared boolean variant axis can supply child values. These shared compiler fixes do not qualify React source rendering, native visual fidelity or the complete code-led journey. The next milestone remains the application workflow with independently verified editable Figma output.
 
 ### Build rules that compose
 
@@ -47,7 +56,7 @@ This does not make arbitrary React programs convertible. Source patterns and sty
 
 ### Lit and Web Components: paused for planned V1.1
 
-The configured Altitude `/sources` flow and its existing records remain available. They are not the React starting point or a prerequisite for React V1. Its native Button inspection is bounded evidence; Checkbox source observations do not establish native conversion. Neither qualifies a complete Web Components journey.
+The configured Altitude flow and its existing records remain available under the collapsed Lit evaluation archive on `/sources`. They are not the React starting point or a prerequisite for React V1. Its native Button inspection is bounded evidence; Checkbox source observations do not establish native conversion. Neither qualifies a complete Web Components journey.
 
 Preserve the current adapters, fixtures, tests, source captures and operation identities. Archive detailed working logs privately; keep reproducible checks and signed evidence intact. Resume framework-specific integration after the React V1 exits below, beginning with fresh source/dependency checks and a comparison against the then-current shared rules. Existing regression gates still run; pausing expansion does not waive them. V1.1 is a planned scope, not a release date or a support claim.
 
@@ -55,7 +64,7 @@ Preserve the current adapters, fixtures, tests, source captures and operation id
 
 | Order | Milestone | Exit evidence | Status |
 | --- | --- | --- | --- |
-| 1 | Bound and verify React intake | Document supported React syntax and styling; pin source/dependencies; load original styles/fonts/assets; verify states and reject deliberately broken inputs. | Existing static readers; complete React intake qualification remains open. |
+| 1 | Bound and verify React intake | Document supported React syntax and styling; pin source/dependencies; load original styles/fonts/assets; verify states and reject deliberately broken inputs. | Fixed styled cohort verified; general repository intake remains open. |
 | 2 | Complete React → Figma through the app | Simple, stateful and composed React components through the same shared rules; editable native output; original/native screenshots and structural/token/property checks; no manual role maps or pasted scripts; repeat makes no changes. | **Active integration milestone.** |
 | 3 | Complete Figma → reusable React | Design-only input; clean consumer installs the generated library; content APIs, variants, tokens, accessibility and declared behavior work; independent browser comparison. | Engines exist; full journey unqualified. |
 | 4 | Repair an existing React/Figma pair safely | Real edits on either side; authorized changes applied; conflicting/stale edits handled; interruption/retry/rollback demonstrated; fresh verification; repeat makes no changes. | Foundations exist; full repair loop unqualified. |
@@ -108,7 +117,7 @@ The paused Lit source workflow uses a configured sibling library. Each run must 
 | React and Figma contract proposals | `playground/src/engine/code-import.ts`, `playground/src/engine/figma-import.ts`, `extract/figma/rest/fetch.ts` |
 | Contract-to-Figma programs | `core/emit-figma-script.ts` |
 | Canonical recipe canvas IR and writer | `recipe/figma-ir.ts`, `recipe/figma-writer-runtime.ts` |
-| Paused Lit source workflow and reusable observation infrastructure | `source-reference/`, especially `source-reference/compile.ts` |
+| React source intake, paused Lit workflow and reusable observation infrastructure | `source-reference/`, especially `source-reference/compile.ts` |
 | Application-owned source candidate jobs | `source-reference/service.ts`, `source-reference/candidate-jobs.ts`, `source-reference/candidate-run.ts` |
 | Verified evidence selection and candidate inventory | `source-reference/binding-jobs.ts`, `source-reference/candidate-report.ts`, `source-reference/button-candidate-semantics.ts` |
 | Unaccepted source-owned visual candidate | `source-reference/source-bound-anatomy.ts`, `source-reference/source-visual-seed.ts`, `source-reference/source-visual-contract.ts` |

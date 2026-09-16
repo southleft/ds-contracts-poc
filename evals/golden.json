@@ -242,7 +242,7 @@
   "figma-sync/09-blockquote.js": "9c327fab722c909e8bc00fbf69ac26178c64a8c2b82b0d375a3f803fc73565f2",
   "figma-sync/10-breadcrumbitem.js": "dbc705bf0d0abf9ef174320b7c7056ae3bb401f87789e5b373abecb5d1f3f260",
   "figma-sync/11-breadcrumbs.js": "67655745105414aa76cf84a228801c6defe9dd2d984d541653843637180d4211",
-  "figma-sync/12-card.js": "56fe06471f2e80b010b8bd4cb1fac7180bc891cb54a79fc3db45bccab0652c3d",
+  "figma-sync/12-card.js": "5a2a960adccb7714ac4e1af57ea792009cda4708476c76b426fea0cded458dd8",
   "figma-sync/13-chatmessagemetadata.js": "498332e2ada30030faffb5460477f196fa61a99f1423b190d7c70912952a3588",
   "figma-sync/14-chatmessage.js": "65d327c3ea0ab5363b72d76159a31f6875f2c77abe5e6e93a132528596809e4e",
   "figma-sync/15-chatsystemmessage.js": "0aa8e72f37c2430dc1ca2e9e230204f2eb6ba7d481fabdeb5a7172948a39deff",
@@ -277,7 +277,7 @@
   "figma-sync/44-tablecell.js": "c78ee1a9471beeda70f1dd2dc133b44b2398bc9f3394d085bbf1cb33ad1dba61",
   "figma-sync/45-tableheadercell.js": "550c1ac76a43c9d32ceb07c21531fd8040863757dd24b72a2293595c9236737c",
   "figma-sync/46-tablerow.js": "0228207591f8c5006d7cd63c991351f1ed931aba3535595258107961e903bad1",
-  "figma-sync/47-table.js": "3f7eb7c8db944851eba7d41d838476c5fbc632bd1281d7b916e27c4616ea6996",
+  "figma-sync/47-table.js": "ed405db0d25cf509d59a23ed0a4976188cb091853d32f58d8130c2edeac89976",
   "figma-sync/48-textarea.js": "58e4b19f9f1667cdf1c88ac996dc048b3dc4cbbbb6574edc7fd0769156d775c1",
   "figma-sync/49-textfield.js": "e7b470f4c45d80a0c4f57a4cbd67d2de90c3aa5c76067092eb957e72c3b73a82",
   "figma-sync/50-toast.js": "a424a02cf71dea57dd0da06522ca81e6c4b0495e63805902c7bef0c171c66a69",
@@ -287,8 +287,8 @@
   "figma-sync/54-topnav.js": "89d68224c3064fadd0063563ff4fe109cc55e0c5740fd3c79fa21a8368b34276",
   "figma-sync/55-typeaheaditem.js": "8513987ec8ff09df52cc1135182a4a30fb7adff4af5f1e663064c5c655584626",
   "figma-sync/batch-01.js": "dfe74a53a2aa6728f911326e886ca57f9a83572f4f30e277884a488341ab06a8",
-  "figma-sync/batch-02.js": "45dd170db4ae7cf7e9ca9296c9ff6174d303ce0eb50067cb0ad091797ed0b629",
+  "figma-sync/batch-02.js": "5e426fe9e3da68195005db2e6e9b0cb951f78f572880ae38fd591e6544245525",
   "figma-sync/batch-03.js": "d83530d622c7e5eee7c869658d42ab545d01892ee6411871f3957800d238e1d0",
-  "figma-sync/batch-04.js": "40ada635e94745aff7ffa3e5266379a8591e45f56fd7b55e055382f49c13936e",
+  "figma-sync/batch-04.js": "0ba50d7387c9a1df3b1195a27091d48d5e0443dd01f9c860a59247688c5a611a",
   "figma-sync/batch-05.js": "c1e8a197872b09716a39eb547cd853af473597e76844efcc7d62a26fda3eabe1"
 }

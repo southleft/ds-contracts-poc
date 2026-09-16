@@ -123,3 +123,15 @@ export function buildSessionRegistry(entries: WorkspaceEntry[]): SessionRegistry
 export function sessionRegistry(): SessionRegistry {
   return buildSessionRegistry(workspaceSnapshot());
 }
+
+/** Real imports override bundled examples with the same id. Otherwise an
+ * imported parent's <Button> can silently resolve to the demo Button instead
+ * of the source Button that arrived with it. The editor remains authoritative
+ * for its own id; provisional stubs are filled separately at lower priority. */
+export function contractsInSession(
+  bundled: Map<string, Contract>,
+  session: SessionRegistry,
+  current: Contract,
+): Map<string, Contract> {
+  return new Map([...bundled, ...session.contracts, [current.id, current]]);
+}
