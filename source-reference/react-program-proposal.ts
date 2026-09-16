@@ -39,7 +39,7 @@ const reservedProps = new Set([
   "id",
 ]);
 const stateProps = new Set(["disabled", "required", "readOnly"]);
-function kind(
+export function classifyReactProperty(
   type: ReactTypeFact,
 ): Pick<ExtractedProp, "kind" | "values" | "codeValues"> | undefined {
   const members =
@@ -197,7 +197,7 @@ export function proposeReactSourceProgram(
           row.platform.push(prop.name);
           continue;
         }
-        const classified = kind(prop.type);
+        const classified = classifyReactProperty(prop.type);
         const value = component.defaults[prop.name];
         const explicitUndefined =
           !prop.optional &&

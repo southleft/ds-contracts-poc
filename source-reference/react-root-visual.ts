@@ -163,3 +163,6 @@ export function projectReactRootVisual(
   }
   return out;
 }
+
+/** Shared channel boundary for multi-observation root style assembly. */
+export { exclusion as reactRootStyleExclusion };

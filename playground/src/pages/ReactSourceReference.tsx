@@ -358,6 +358,20 @@ export function ReactSourceReference() {
                         <p>Measured values are provisional. Sample sizes, other property combinations, unresolved token bindings, token modes and native visual fidelity remain unqualified.</p>
                       </section>
                     )}
+                    {ownership.state === "complete" && row.matched && row.rootVariants && row.rootVariants.drafts.length>0 && (
+                      <section aria-label={`${row.id} root variants`}>
+                        <h4>Reusable root style drafts</h4>
+                        <p>Each draft preserves one observed property and a replaceable children slot. Other properties, nested styling and native visual fidelity still need assembly and verification.</p>
+                        {row.rootVariants.problems.length>0 && <p>{row.rootVariants.problems.join(" · ")}</p>}
+                        {row.rootVariants.drafts.map(draft=><details key={draft.property}>
+                          <summary>{draft.property}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root variants compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
+                          {draft.problems.length>0 && <p>{draft.problems.join(" · ")}</p>}
+                          {draft.contract && <p>Source values: {Object.values(draft.contract.props[0].bindings.code.values ?? (typeof draft.contract.props[0].type==="object" && "enum" in draft.contract.props[0].type ? Object.fromEntries(draft.contract.props[0].type.enum.map(v=>[v,v])) : {})).map(v=>JSON.stringify(v)).join(", ")}. Caller text and sample dimensions are excluded.</p>}
+                          {!!draft.lowerings.length && <p>{draft.lowerings.length} normal flex-gap values use equivalent zero spacing.</p>}
+                          {!!draft.residuals?.length && <details><summary>Unprojected styling</summary><ul>{draft.residuals.map((r,i)=><li key={i}>{r.channel}: {r.reason}</li>)}</ul></details>}
+                        </details>)}
+                      </section>
+                    )}
                     {ownership.state === "complete" && row.matched && row.propertyEffects && (
                       <section aria-label={`${row.id} property effects`}>
                         <h4>Source property effects</h4>
