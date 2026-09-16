@@ -464,8 +464,17 @@ test("actual playground middleware preserves the restricted Figma preflight boun
   const { createServer: createViteServer, mergeConfig } = await import("vite");
   const { default: playgroundConfig } =
     await import("../playground/vite.config.js");
+  // Keep the actual source API plugin and server/CORS configuration. React's
+  // dependency optimizer and ZIP packaging are unrelated to this HTTP boundary
+  // and can leave background compilation running during parallel test teardown.
+  const apiConfig = {
+    ...playgroundConfig,
+    plugins: (playgroundConfig.plugins ?? []).filter(
+      (plugin: any) => plugin?.name === "ds-source-references",
+    ),
+  };
   const vite = await createViteServer(
-    mergeConfig(playgroundConfig, {
+    mergeConfig(apiConfig, {
       configFile: false,
       logLevel: "silent",
       server: { middlewareMode: true, hmr: false, watch: null },

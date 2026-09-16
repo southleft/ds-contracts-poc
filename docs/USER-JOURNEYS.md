@@ -61,7 +61,7 @@ If a readback is interrupted or refuses the observed state, choose **Retry readb
 
 **Inspect the exports:** after component readback, Sources shows each native comparison instance beside its recorded source case when the source evidence is still current. Exports are retained privately and tied to the readback attempt; retrying readback withdraws the previous images from the current view. Native exports have transparent backgrounds and may use different framing from the source capture. This view is diagnostic, not a pixel score or a visual-fidelity pass. Missing, malformed or oversized exports are explicit refusals; the current local transport bounds all PNGs in one readback to 1 MiB combined and 16 million decoded pixels. These are transport limits, not component-support or fidelity thresholds.
 
-**Where this currently stops:** this connected path has API-mock and browser coverage; its actual Figma output is not yet qualified. The source candidate remains unaccepted. Native visual comparison, editability and a complete no-change repeat remain the next work. A lost creation response without a saved receipt is reported as unknown, never automatically repeated; complete interruption recovery is still unfinished.
+**Where this currently stops:** the first live Button cycle has completed in Scratch, including independent structural readback and six native exports. Reinspection preserved the exports and token values; an injected text change was detected and recovery after restoration was verified. This is one bounded candidate, not a visual-fidelity or full-cohort qualification. The source candidate remains unaccepted. Native visual comparison, editability and a complete no-change repeat remain the next work. A lost creation response without a saved receipt is reported as unknown, never automatically repeated; complete interruption recovery is still unfinished.
 
 <a id="both-libraries"></a>
 ## Both libraries: connect, compare and repair
@@ -120,7 +120,7 @@ The direction is to make this application the front door to connected library wo
 
 Development should produce a demonstrable user flow. Tests are acceptance checks for that delivery.
 
-**Current checkpoint:** observation and local app/plugin delivery are implemented and exercised in the API mock and browser. The next run must establish actual native behavior; the full exits below remain open until their Figma evidence exists.
+**Current checkpoint:** the local app/plugin flow has completed a live Button creation and structural inspection, followed by unchanged reinspection, deliberate text-drift detection and recovery. No variables or components were recreated for those readbacks. Visual fidelity, broader editability and the simple/stateful/composed cohort remain open; the bounded checkpoint does not close the full exits below.
 
 | Checkpoint | User-visible result | Done when |
 | --- | --- | --- |

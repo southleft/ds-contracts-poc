@@ -1,5 +1,6 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
+import { resolveNativeSlotIdentities } from "./native-slot-identity.js";
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
 import type { NativeSourceCandidateProjection } from "./native-source-projection.js";
@@ -22,6 +23,8 @@ export interface NativeSourceObservationInput {
   /** Independently persisted allocation acknowledgement, never a readback's
    * own suggestion of which native IDs should have been written. */
   creation: Record<string, any>;
+  /** Host-retained first observation, never supplied by the current readback. */
+  allocationAnchor?: NativeSourceReadback;
 }
 export interface NativeSourceReadback {
   version: 1;
@@ -185,7 +188,7 @@ async function read(page) {
       row.mainId = main ? main.id : null;
       row.componentProperties = copy(node.componentProperties);
     }
-    for (const key of ['nativeSourceOperation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'])
+    for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
     out.push(row);
   }
@@ -269,7 +272,11 @@ function observationReport(problems: string[]) {
   };
 }
 
-function verifyReadback(input: NativeSourceObservationInput, receipt: unknown) {
+function verifyReadback(
+  input: NativeSourceObservationInput,
+  receipt: unknown,
+  exactIds = false,
+) {
   const problems: string[] = [];
   const report = () => observationReport(problems);
   try {
@@ -295,8 +302,8 @@ function verifyReadback(input: NativeSourceObservationInput, receipt: unknown) {
     problems.push("native-source-observation-receipt-invalid");
     return report();
   }
-  const c = input.creation,
-    rows = receipt.nodes as Record<string, any>[];
+  const c = input.creation;
+  let rows = receipt.nodes as Record<string, any>[];
   if (
     rows.some(
       (n) =>
@@ -308,7 +315,29 @@ function verifyReadback(input: NativeSourceObservationInput, receipt: unknown) {
     rows.some(
       (n) => typeof n.id !== "string" || !n.id || typeof n.type !== "string",
     ) ||
-    new Set(rows.map((n) => n.id)).size !== rows.length ||
+    new Set(rows.map((n) => n.id)).size !== rows.length
+  ) {
+    problems.push("native-source-observation-node-inventory");
+    return report();
+  }
+  if (!exactIds) {
+    const anchor = input.allocationAnchor;
+    if (
+      anchor &&
+      verifyReadback({ ...input, allocationAnchor: undefined }, anchor, true)
+        .status !== "supported-structure-observed"
+    ) {
+      problems.push("native-source-observation-allocation-anchor-invalid");
+      return report();
+    }
+    const resolved = resolveNativeSlotIdentities(c, rows, anchor?.nodes);
+    if (!resolved) {
+      problems.push("native-source-observation-node-inventory");
+      return report();
+    }
+    rows = resolved;
+  }
+  if (
     !same(rows.map((n) => n.id).sort(), c.nodes.map((n: any) => n.id).sort())
   ) {
     problems.push("native-source-observation-node-inventory");

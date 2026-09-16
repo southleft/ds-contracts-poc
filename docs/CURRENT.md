@@ -22,7 +22,7 @@ These steps describe the intended product workflow. The full application integra
 
 ## Where we are
 
-**Current milestone: complete the first code-led journey through the application.** Source inspection, bounded candidate preparation and a local companion-plugin connection are implemented. The first live Button inspection has completed through the app and development plugin: scoped variables, five variants, six comparison instances, independent structural readback and six native exports. One refused source case remains in the coverage total. A repeat inspection currently refuses Figma’s replacement IDs inside instance slots even when the exports are unchanged; durable slot identity is the next integration fix. Visual fidelity, editability and admission remain unqualified.
+**Current milestone: complete the first code-led journey through the application.** Source inspection, bounded candidate preparation and a local companion-plugin connection are implemented. The first live Button inspection has completed through the app and development plugin: scoped variables, five variants, six comparison instances, independent structural readback and six native exports. One refused source case remains in the coverage total. The same candidate has passed read-only repeat inspection with identical exports and token values. A deliberate native text edit was detected, and restoring it recovered the original result. Slot identities remain traceable when Figma normalizes instance contents; no new creation commands were issued for these inspections. Visual fidelity, editability and admission remain unqualified.
 
 | Area | Demonstrated today | Remaining product gap |
 | --- | --- | --- |

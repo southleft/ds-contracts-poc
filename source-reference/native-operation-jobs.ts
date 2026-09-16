@@ -166,6 +166,7 @@ interface State {
   phase: NativeOperationSnapshot["phase"];
   identity?: NativeTokenIdentity;
   componentCreation?: Record<string, any>;
+  allocationAnchor?: NativeSourceObservationInput["allocationAnchor"];
   componentObservation?: ReturnType<typeof verifyNativeSourceReadback>;
   imageReadback?: NativeOperationResult;
   pending?: NativeOperationCommand;
@@ -658,6 +659,7 @@ export function createNativeOperationJobs(
       tokenInput: plan.plan.tokenInput,
       tokenIdentity: state.identity,
       creation: state.componentCreation,
+      allocationAnchor: state.allocationAnchor,
     };
   };
   const observeComponent = (
@@ -845,8 +847,22 @@ export function createNativeOperationJobs(
           outcome.phase === "components-created"
         )
           state.componentCreation = structuredClone(event.envelope.result);
-        if (state.pending.phase === "component-readback")
+        if (state.pending.phase === "component-readback") {
           state.imageReadback = event.envelope;
+          // Preserve a legacy anchor only when its node inventory still exactly
+          // matches creation. The verifier rechecks its complete semantics before
+          // using it; newer writers carry durable allocation stamps themselves.
+          const r = event.envelope.result as any;
+          if (
+            !state.allocationAnchor &&
+            outcome.phase === "component-structure-observed" &&
+            same(
+              r.nodes.map((n: any) => n.id).sort(),
+              state.componentCreation!.nodes.map((n: any) => n.id).sort(),
+            )
+          )
+            state.allocationAnchor = structuredClone(r);
+        }
         Object.assign(state, outcome);
         delete state.pending;
       } else if (event.kind === "abandon-observation") {
