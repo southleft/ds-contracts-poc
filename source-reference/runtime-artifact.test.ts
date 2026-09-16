@@ -16,6 +16,11 @@ import { pathToFileURL } from "node:url";
 import { revisionOf } from "../core/contract-provenance.js";
 import {
   inspectAltitudeButtonRuntimeInputs,
+  inspectAltitudeRuntimeInputs,
+  altitudeButtonRuntimeRecipeIdentity,
+  altitudeRuntimeRecipeIdentity,
+  ALTITUDE_CHECKBOX_REGISTRATION_GUARD,
+  prepareAltitudeRuntime,
   prepareAltitudeButtonRuntime,
   readVerifiedRuntimeArtifact,
   type RuntimeArtifactManifest,
@@ -349,6 +354,7 @@ test("preparation requires explicit trusted-local approval and unchanged baselin
     const request = {
       checkout: root,
       expectedInputManifest: {
+        adapter: "altitude-button-v1",
         sourceRevision: "a".repeat(40),
         inputRevision: "b".repeat(64),
       },
@@ -369,6 +375,10 @@ test("preparation requires explicit trusted-local approval and unchanged baselin
       /approval-required/,
     );
     request.sourceApproval.kind = "local-source-build";
+    assert.throws(
+      () => prepareAltitudeRuntime(request as never, "checkbox"),
+      /approval-required/,
+    );
     writeFileSync(request.sourceApproval.baseline.path, "{}");
     assert.throws(
       () => prepareAltitudeButtonRuntime(request as never),
@@ -393,7 +403,8 @@ test(
   {
     skip:
       !process.env.DS_RUNTIME_ARTIFACT_DIR ||
-      !process.env.DS_RUNTIME_ARTIFACT_REVISION,
+      !process.env.DS_RUNTIME_ARTIFACT_REVISION ||
+      process.env.DS_RUNTIME_ARTIFACT_COMPONENT === "checkbox",
   },
   async () => {
     const artifact = readVerifiedRuntimeArtifact(
@@ -516,7 +527,12 @@ test(
     );
     const checkout = realpathSync(process.env.DS_RUNTIME_ARTIFACT_CHECKOUT!);
     assert.equal(
-      inspectAltitudeButtonRuntimeInputs(checkout).inputRevision,
+      inspectAltitudeRuntimeInputs(
+        checkout,
+        artifact.manifest.interface.tagBase === "al-checkbox"
+          ? "checkbox"
+          : "button",
+      ).inputRevision,
       artifact.manifest.inputs.inputRevision,
     );
     const lib = path.join(checkout, "libs/al-web-components");
@@ -540,7 +556,25 @@ test(
         ]),
     );
     const virtual = path.join(lib, "__runtime_consumer_typecheck__.ts");
-    const source = `import type {ALButton} from './dist/components/button/button';
+    const source =
+      artifact.manifest.interface.tagBase === "al-checkbox"
+        ? `
+import {ALCheckbox} from './dist/components/checkbox/checkbox.js';
+import type {ALFieldNote} from './dist/components/field-note/field-note.js';
+declare const checkbox: ALCheckbox;
+declare const note: ALFieldNote;
+checkbox.isChecked = true; checkbox.isDisabled = false;
+checkbox.isIndeterminate = true; checkbox.fieldNote = 'Updated note';
+checkbox.errorNote = 'Validation error'; checkbox.value = 'accepted';
+checkbox.handleOnChange(); checkbox.handleOnKeydown(new KeyboardEvent('keydown'));
+checkbox.componentClassNames('source-class');
+note.isError = true;
+// @ts-expect-error original boolean is not a string union
+checkbox.isChecked = 'mixed';
+// @ts-expect-error source does not declare a numeric field note
+checkbox.fieldNote = 1;
+`
+        : `import type {ALButton} from './dist/components/button/button';
 import {ALButton as OriginalConstructor} from './dist/components/button/button.js';
 const constructor: typeof OriginalConstructor = OriginalConstructor;
 declare const button: ALButton;
@@ -591,5 +625,303 @@ button.isPressed = 'other';
       })),
       [],
     );
+  },
+);
+
+test("component-specific runtime recipes preserve the exact historical Button build and reject unknown targets", () => {
+  assert.equal(
+    altitudeButtonRuntimeRecipeIdentity().sha256,
+    "d926537ca44b0dabcbf46ee8b16160a827ebdf26de291bd3f2d5ef5a8bb49cef",
+  );
+  assert.deepEqual(
+    altitudeRuntimeRecipeIdentity("button"),
+    altitudeButtonRuntimeRecipeIdentity(),
+  );
+  assert.notEqual(
+    altitudeRuntimeRecipeIdentity("checkbox").sha256,
+    altitudeButtonRuntimeRecipeIdentity().sha256,
+  );
+  assert.equal(
+    altitudeRuntimeRecipeIdentity("checkbox").version,
+    "altitude-checkbox-vite-memory-v1",
+  );
+  assert.throws(
+    () => altitudeRuntimeRecipeIdentity("arbitrary" as never),
+    /component-unsupported/,
+  );
+  assert.throws(
+    () => prepareAltitudeRuntime({} as never, "arbitrary" as never),
+    /component-unsupported/,
+  );
+});
+
+test("nested registration reserves the original constructor, repeats without writes and rejects a foreign constructor", () => {
+  const run = new Function(
+    "PackageJson",
+    "ALFieldNote",
+    "customElements",
+    ALTITUDE_CHECKBOX_REGISTRATION_GUARD,
+  );
+  class Original {
+    static el = "al-field-note";
+  }
+  class Foreign {}
+  const registrations = new Map<string, unknown>();
+  const writes: string[] = [];
+  const registry = {
+    get: (tag: string) => registrations.get(tag),
+    define: (tag: string, constructor: unknown) => {
+      registrations.set(tag, constructor);
+      writes.push(tag);
+    },
+  };
+  run({ version: "1.0.0" }, Original, registry);
+  run({ version: "1.0.0" }, Original, registry);
+  assert.deepEqual(writes, ["al-field-note-1-0-0"]);
+  assert.equal(registrations.get(writes[0]), Original);
+  registrations.set(writes[0], Foreign);
+  assert.throws(
+    () => run({ version: "1.0.0" }, Original, registry),
+    /NESTED-REGISTRY-COLLISION/,
+  );
+  assert.equal(writes.length, 1);
+  assert.equal(registrations.get(writes[0]), Foreign);
+  run({ version: "2.0.0_rc" }, Original, registry);
+  assert.equal(registrations.get("al-field-note-2-0-0-rc"), Original);
+});
+
+test(
+  "original Checkbox runtime retains state, events, text and nested slots and refuses registry collisions",
+  {
+    skip:
+      process.env.DS_RUNTIME_ARTIFACT_COMPONENT !== "checkbox" ||
+      !process.env.DS_RUNTIME_ARTIFACT_DIR ||
+      !process.env.DS_RUNTIME_ARTIFACT_REVISION,
+  },
+  async () => {
+    const artifact = readVerifiedRuntimeArtifact(
+      process.env.DS_RUNTIME_ARTIFACT_DIR!,
+      process.env.DS_RUNTIME_ARTIFACT_REVISION!,
+    );
+    assert.equal(artifact.manifest.interface.module.exportName, "ALCheckbox");
+    assert.ok(artifact.files.has("components/field-note/field-note.d.ts"));
+    assert.equal(
+      artifact.manifest.recipe.sha256,
+      altitudeRuntimeRecipeIdentity("checkbox").sha256,
+    );
+    const { chromium } = await import("playwright-core");
+    const browser = await chromium.launch({ headless: true });
+    try {
+      for (const mode of ["ordinary", "auto", "collision"] as const) {
+        const context = await browser.newContext({ serviceWorkers: "block" });
+        try {
+          await context.route("**/*", async (route) => {
+            const url = new URL(route.request().url());
+            if (url.origin !== "http://127.0.0.1:43211") return route.abort();
+            if (url.pathname === "/")
+              return route.fulfill({
+                contentType: "text/html",
+                body: "<!doctype html><main></main>",
+              });
+            const bytes = artifact.files.get(url.pathname.slice(1));
+            return bytes
+              ? route.fulfill({
+                  body: bytes,
+                  contentType: url.pathname.endsWith(".css")
+                    ? "text/css"
+                    : "text/javascript",
+                })
+              : route.abort();
+          });
+          const page = await context.newPage();
+          await page.goto("http://127.0.0.1:43211/");
+          const result = await page.evaluate(
+            async ({ mode, module, tag }) => {
+              if (mode === "auto")
+                Reflect.set(globalThis, "alAutoRegistry", true);
+              const childTag = "al-field-note-1-0-0";
+              if (mode === "collision")
+                customElements.define(childTag, class extends HTMLElement {});
+              let defines = 0;
+              const define = customElements.define.bind(customElements);
+              customElements.define = (...args) => {
+                defines++;
+                return define(...args);
+              };
+              try {
+                const loaded = await import("/" + module.path);
+                const repeated = await import("/" + module.path);
+                if (repeated[module.exportName] !== loaded[module.exportName])
+                  throw Error("runtime-module-changed");
+                customElements.define(tag, loaded[module.exportName]);
+                type Checkbox = HTMLElement & {
+                  isChecked?: boolean;
+                  isIndeterminate?: boolean;
+                  isDisabled?: boolean;
+                  isRequired?: boolean;
+                  isError?: boolean;
+                  fieldNote?: string;
+                  errorNote?: string;
+                  fieldId?: string;
+                  ariaDescribedBy?: string;
+                  value?: string;
+                  updateComplete: Promise<unknown>;
+                };
+                const rows = [];
+                for (const state of [
+                  "default",
+                  "checked",
+                  "indeterminate",
+                  "disabled",
+                ]) {
+                  const host = document.createElement(tag) as Checkbox;
+                  if (state === "checked") host.isChecked = true;
+                  if (state === "indeterminate") host.isIndeterminate = true;
+                  if (state === "disabled") host.isDisabled = true;
+                  host.fieldNote = "Original help";
+                  host.value = "accepted";
+                  host.append("Original label");
+                  const events: unknown[] = [];
+                  host.addEventListener("onCheckboxChange", (e) =>
+                    events.push((e as CustomEvent).detail),
+                  );
+                  document.querySelector("main")!.append(host);
+                  await host.updateComplete;
+                  const input = host.shadowRoot!.querySelector("input")!;
+                  const child = host.shadowRoot!.querySelector(
+                    childTag,
+                  ) as HTMLElement & { updateComplete: Promise<unknown> };
+                  await child.updateComplete;
+                  const initial = {
+                    checked: input.checked,
+                    disabled: input.disabled,
+                    omitted: host.isChecked === undefined,
+                    indeterminateClass: !!host.shadowRoot!.querySelector(
+                      ".al-is-indeterminate",
+                    ),
+                    nested:
+                      !!child.shadowRoot?.querySelector(".al-c-field-note"),
+                    text: child.textContent?.trim(),
+                    linked:
+                      input.id === host.fieldId &&
+                      input.getAttribute("aria-describedby") === child.id &&
+                      !!child.id,
+                  };
+                  input.click();
+                  await host.updateComplete;
+                  const clicked = {
+                    checked: host.isChecked ?? null,
+                    indeterminate: host.isIndeterminate ?? null,
+                    events: events.slice(),
+                  };
+                  if (state !== "disabled") {
+                    input.dispatchEvent(
+                      new KeyboardEvent("keydown", {
+                        code: "Enter",
+                        bubbles: true,
+                      }),
+                    );
+                    await host.updateComplete;
+                  }
+                  host.fieldNote = "Updated help";
+                  host.isRequired = true;
+                  host.isError = true;
+                  host.errorNote = "Validation error";
+                  await host.updateComplete;
+                  const updated = {
+                    sameChild:
+                      child === host.shadowRoot!.querySelector(childTag),
+                    text: child.textContent?.trim(),
+                    required: input.required,
+                    checked: host.isChecked ?? null,
+                    events: events.slice(),
+                    error: host
+                      .shadowRoot!.querySelector('slot[name="error"]')
+                      ?.textContent?.trim(),
+                  };
+                  const slotted = document.createElement("strong");
+                  slotted.slot = "field-note";
+                  slotted.textContent = "Custom nested content";
+                  host.append(slotted);
+                  await host.updateComplete;
+                  const assigned = (
+                    host.shadowRoot!.querySelector(
+                      'slot[name="field-note"]',
+                    ) as HTMLSlotElement
+                  ).assignedElements();
+                  rows.push({
+                    state,
+                    initial,
+                    clicked,
+                    updated,
+                    customSlot: assigned[0] === slotted,
+                  });
+                  host.remove();
+                }
+                return { status: "loaded", defines, rows };
+              } catch (error) {
+                return { status: "refused", defines, message: String(error) };
+              }
+            },
+            {
+              mode,
+              module: artifact.manifest.interface.module,
+              tag: artifact.registrationTag,
+            },
+          );
+          if (mode !== "ordinary") {
+            assert.equal(result.status, "refused", JSON.stringify(result));
+            assert.equal(result.defines, 0);
+            assert.match(
+              result.message!,
+              mode === "auto"
+                ? /AUTO-REGISTRY-REFUSED/
+                : /NESTED-REGISTRY-COLLISION/,
+            );
+          } else {
+            assert.equal(result.status, "loaded", JSON.stringify(result));
+            assert.equal(result.defines, 2);
+            assert.equal(result.rows!.length, 4);
+            for (const row of result.rows!) {
+              const disabled = row.state === "disabled",
+                checked = row.state === "checked";
+              assert.deepEqual(row.initial, {
+                checked,
+                disabled,
+                omitted: !checked,
+                indeterminateClass: row.state === "indeterminate",
+                nested: true,
+                text: "Original help",
+                linked: true,
+              });
+              assert.equal(row.clicked.checked, disabled ? null : !checked);
+              assert.equal(
+                row.clicked.indeterminate,
+                row.state === "indeterminate" ? false : null,
+              );
+              assert.equal(row.clicked.events.length, disabled ? 0 : 1);
+              assert.equal(row.updated.events.length, disabled ? 0 : 2);
+              if (!disabled)
+                assert.deepEqual(row.clicked.events[0], {
+                  checked: !checked,
+                  indeterminate:
+                    row.state === "indeterminate" ? false : undefined,
+                  value: "accepted",
+                });
+              assert.equal(row.updated.checked, disabled ? null : checked);
+              assert.equal(row.updated.sameChild, true);
+              assert.equal(row.updated.text, "Updated help");
+              assert.equal(row.updated.required, true);
+              assert.equal(row.updated.error, "Validation error");
+              assert.equal(row.customSlot, true);
+            }
+          }
+        } finally {
+          await context.close();
+        }
+      }
+    } finally {
+      await browser.close();
+    }
   },
 );

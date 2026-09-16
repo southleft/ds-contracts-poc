@@ -1,3 +1,4 @@
+import { proveLitStaticTemplates } from "./lit-static-template-proof.js";
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
 import { createHash } from "node:crypto";
 import { lstatSync, readFileSync } from "node:fs";
@@ -22,7 +23,8 @@ import type { SemanticIntake } from "./semantics.js";
 import type { TopologyInput } from "./topology.js";
 
 export interface BindingEvidenceRequest {
-  version: 1;
+  version: 1 | 2;
+  component?: "al-checkbox";
   baseline: { id: string; sha256: string };
   supplement?: { id: string; sha256: string };
 }
@@ -66,14 +68,32 @@ export function isBindingEvidenceRequest(
     HASH.test(v.sha256);
   return (
     object(value) &&
-    value.version === 1 &&
+    (value.version === 1 || value.version === 2) &&
     Object.keys(value).every((key) =>
-      ["version", "baseline", "supplement"].includes(key),
+      (value.version === 1
+        ? ["version", "baseline", "supplement"]
+        : ["version", "baseline", "component"]
+      ).includes(key),
     ) &&
+    (value.version === 1
+      ? value.component === undefined
+      : value.component === "al-checkbox" && value.supplement === undefined) &&
     ref(value.baseline) &&
     (value.supplement === undefined || ref(value.supplement))
   );
 }
+
+export const bindingComponent = (request: BindingEvidenceRequest) =>
+  request.version === 2 ? "al-checkbox" : "al-button";
+export const bindingStories = (request: BindingEvidenceRequest) =>
+  [
+    ...altitudeCohort.filter(
+      (row) => row.profile.path[0] === bindingComponent(request),
+    ),
+    ...(request.version === 1 && request.supplement
+      ? altitudeButtonVariants
+      : []),
+  ].map((row) => row.story);
 
 // Parsed URLs depend only on these exact bytes and the requested story. Keep
 // freshness/path/hash validation at the caller; never cache an evidence verdict.
@@ -219,7 +239,7 @@ export function loadBindingEvidence(
     throw new Error("binding-manifest-changed");
   const manifest = readCemDeclarations(JSON.parse(manifestBytes.toString()));
   const declarations = manifest.declarations.filter(
-    (declaration) => declaration.tagName === "al-button",
+    (declaration) => declaration.tagName === bindingComponent(request),
   );
   if (declarations.length !== 1)
     throw new Error("binding-declaration-not-unique");
@@ -339,6 +359,24 @@ export function loadBindingEvidence(
         harSha256 = sha(harBytes);
       if (measurement.archive?.sha256 !== harSha256)
         throw new Error("binding-archive-hash-mismatch");
+      if (request.version === 2) {
+        const render = measurement.renderIntake;
+        if (
+          render?.status !== "verified-parser-input" ||
+          render.sourceSha256 !== source.sourceSha256 ||
+          render.sourcePngSha256 !== tree.sourcePngSha256
+        )
+          throw Error("binding-static-original-unverified");
+        for (const [name, key] of [
+          ["source-render.json", "sourceRenderSha256"],
+          ["replay-render.json", "replayRenderSha256"],
+        ]) {
+          const bytes = readFileSync(file(row.runId, row.story, name));
+          if (sha(bytes) !== render[key])
+            throw Error("binding-static-original-changed");
+          proveLitStaticTemplates(source, JSON.parse(bytes.toString()));
+        }
+      }
       row.replay = {
         harPath,
         harSha256,
