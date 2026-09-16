@@ -77,10 +77,10 @@ export async function buildReactOwnershipReference(
  * bounded adapter for the verified renderer version, not a stable React API. */
 export const reactOwnershipHook = `(() => {
  if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__) throw Error('react-ownership-existing-hook');
- const renderers=new Map(), roots=new Map();let next=0;
+ const renderers=new Map(), roots=new Map();let next=0, revision=0;
  const hook={supportsFiber:true,renderers,
   inject(renderer){const id=++next;renderers.set(id,renderer);return id;},
-  onCommitFiberRoot(id,root,_priority,didError){roots.set(root,{id,root,didError});},
+  onCommitFiberRoot(id,root,_priority,didError){roots.set(root,{id,root,didError,revision:++revision});},
   onCommitFiberUnmount(){},onPostCommitFiberRoot(){}
  };
  Object.defineProperty(window,'__REACT_DEVTOOLS_GLOBAL_HOOK__',{value:hook});
