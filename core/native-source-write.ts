@@ -1,3 +1,5 @@
+import type { PreparedNativeContractComparison } from './native-contract-comparison.js';
+import { emitNativeContractReadbackScript } from './native-source-observation.js';
 /** Host-owned, create-only source inspection writer context. This is not
  * Contract admission or native fidelity verification. The renderer remains
  * buildSyncScript in emit-figma-script; this module supplies its scope guard. */
@@ -35,6 +37,7 @@ export function prepareNativeSourceWrite(
   context: NativeSourceWriteContext,
   boundNames: string[],
   comparisons?: ReturnType<typeof prepareNativeSourceComparisons>,
+  contractComparison?: PreparedNativeContractComparison,
 ) {
   const fail = (code: string): never => {
     throw Error(`native-source-write-${code}`);
@@ -89,6 +92,13 @@ export function prepareNativeSourceWrite(
     tokenPreparationRevision: preparation.revision,
     identity: tokens.identity,
     receipt: tokens.receipt,
+    ...(contractComparison ? { contractComparison: {
+      caseId: contractComparison.caseId, mainId: contractComparison.mainId,
+      variantName: contractComparison.variantName, slotSpecPath: contractComparison.slotSpecPath,
+      specs: contractComparison.specs, fonts: contractComparison.fonts, nodeTypes: contractComparison.nodeTypes,
+      revision: contractComparison.revision, receipt: contractComparison.receipt,
+      parent: { tokenIdentity: contractComparison.parent.tokenIdentity },
+    } } : {}),
     ...(comparisons
       ? {
           comparisons: {
@@ -108,7 +118,8 @@ export function prepareNativeSourceWrite(
       input,
       tokens.identity,
     ),
-    sampleSpecs: comparisons?.specs ?? [],
+    sampleSpecs: comparisons?.specs ?? contractComparison?.specs ?? [],
+    comparisonParentReadbackScript: contractComparison ? emitNativeContractReadbackScript(contractComparison.parent) : undefined,
   };
 }
 
@@ -158,13 +169,13 @@ function nativeInit(node, spec) {
   node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
   ${'kind' in prepared.descriptor.projection
     ? "if (spec.nativeContractPart) node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(spec.nativeContractPart));\n  else " : ''}if (spec.nativeSourcePart) node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
-  else if (spec.nativeSourceSample) {
-    node.setSharedPluginData('ds_contracts', 'nativeSourceSample', JSON.stringify(spec.nativeSourceSample));
+  else if (spec.nativeSourceSample || spec.nativeContractSample) {
+    node.setSharedPluginData('ds_contracts', spec.nativeContractSample ? 'nativeContractSample' : 'nativeSourceSample', JSON.stringify(spec.nativeContractSample || spec.nativeSourceSample));
     // createNodeFromSvg allocates a subtree in one API call. Preserve and own
     // its returned descendants too; this does not claim vector equivalence.
     if (spec.type === 'svg') for (const child of node.findAll(() => true)) {
       nativeOwn(child);
-      child.setSharedPluginData('ds_contracts', 'nativeSourceSample', JSON.stringify(spec.nativeSourceSample));
+      child.setSharedPluginData('ds_contracts', spec.nativeContractSample ? 'nativeContractSample' : 'nativeSourceSample', JSON.stringify(spec.nativeContractSample || spec.nativeSourceSample));
     }
   } else nativeRefuse('node-source-identity-missing');
   if (spec.nativeSourceVisible === false) node.visible = false;
@@ -181,12 +192,20 @@ function nativeCheckTokens(observed) {
   if (observed.status !== 'readback-collected' ||
       nativeCanonical(observed.receipt) !== nativeCanonical(NATIVE.receipt)) nativeRefuse('tokens-changed');
 }
-try {
+${prepared.descriptor.contractComparison ? `async function nativeCheckComparisonParent() {
+  const observed = await (async () => {
+${prepared.comparisonParentReadbackScript}
+  })();
+  delete observed.images;
+  if (nativeCanonical(observed) !== nativeCanonical(NATIVE.contractComparison.receipt)) nativeRefuse('comparison-parent-changed');
+}
+` : ''}try {
   nativeFileGuard();
   for (const name of ['loadAllPagesAsync', 'setCurrentPageAsync', 'createPage', 'createComponent', 'createFrame', 'combineAsVariants', 'loadFontAsync']) {
     if (typeof figma[name] !== 'function') nativeRefuse('api-unavailable');
   }
-  if (NATIVE.comparisons) for (const type of NATIVE.comparisons.nodeTypes) {
+  const comparison = NATIVE.contractComparison || NATIVE.comparisons;
+  if (comparison) for (const type of comparison.nodeTypes) {
     const api = { text: 'createText', svg: 'createNodeFromSvg', frame: 'createFrame' }[type];
     if (!api || typeof figma[api] !== 'function') nativeRefuse('comparison-api-unavailable');
   }
@@ -195,7 +214,7 @@ try {
   NATIVE_COLLECTION = await figma.variables.getVariableCollectionByIdAsync(NATIVE.identity.collection.id);
   NATIVE_VARIABLES = await Promise.all(NATIVE.identity.variables.map(v => figma.variables.getVariableByIdAsync(v.id)));
   await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  for (const font of NATIVE.comparisons ? NATIVE.comparisons.fonts : []) {
+  for (const font of comparison ? comparison.fonts : []) {
     let loaded = false;
     for (const style of font.styles) {
       try { await figma.loadFontAsync({ family: font.family, style }); loaded = true; break; } catch (_) { /* same-family spelling retry */ }
@@ -217,6 +236,7 @@ try {
       if (node.getSharedPluginData('ds_contracts', 'contractId') === NATIVE.machineId) nativeRefuse('scope-collision');
     }
   }
+  ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent(); nativeFileGuard();' : ''}
   NATIVE_RESULT.allocationAttempted = true;
   NATIVE_PAGE = figma.createPage();
   NATIVE_RESULT.pageId = NATIVE_PAGE.id;
@@ -229,6 +249,7 @@ ${render}
   })();
   nativeFileGuard();
   nativeCheckTokens(await nativeReadTokens());
+  ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent();' : ''}
   // Slot content can become instance-derived clones after this run. Preserve
   // both the allocation stamp and its exact role under a stable slot root.
   for (const c of (NATIVE_RESULT.comparisons || [])) if (c.status === 'created-comparison') {

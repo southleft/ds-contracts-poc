@@ -1,3 +1,4 @@
+import { prepareNativeContractComparison, NATIVE_CONTRACT_COMPARISON_RUNTIME, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
 import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
@@ -127,6 +128,7 @@ export interface NodeSpec {
   /** Private compile-only source identity; never inferred from a layer name. */
   nativeSourcePart?: NativeSourcePartIdentity;
   nativeContractPart?: NativeContractPartIdentity;
+  nativeContractSample?: NativeContractSampleIdentity;
   nativeSourceSample?: NativeSourceSampleIdentity;
   /** Qualified empty-main whole-wrapper state, never a public component prop. */
   nativeSourceVisible?: false;
@@ -7311,7 +7313,7 @@ function buildComponentScript(
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
   for (const data of datas) {
     if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') || Object.hasOwn(data, 'nativeContractDraft') ||
-        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeContractPart') || Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
+        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeContractSample') || Object.hasOwn(spec, 'nativeContractPart') || Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
       throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
     }
     // Raw or mutated ComponentData cannot provide a route around guarded
@@ -7406,13 +7408,36 @@ function buildNativeContractDraftScript(
   }));
 }
 
+/** Create comparison instances referencing existing observed mains. The content
+ * contract is recompiled here; serialized specs are never executable input. */
+function buildNativeContractComparisonScript(contract: Contract, byId: Map<string, Contract>,
+  source: NativeContractDraftSource, context: NativeSourceWriteContext, comparison: NativeContractComparisonInput): string {
+  const errors: string[] = [];
+  validateContract(contract, byId, errors, input.icons);
+  if (errors.length) throw Error('NATIVE_CONTRACT_COMPARISON_INVALID: ' + errors.join('; '));
+  if (context.comparisons || context.operation.fileKey !== comparison.parent.operation.fileKey ||
+      context.operation.id === comparison.parent.operation.id) throw Error('NATIVE_CONTRACT_COMPARISON_SCOPE_INVALID');
+  if (Object.keys(input.tokens.semantic).length || Object.keys(input.tokens.light).length ||
+      Object.keys(input.tokens.dark).length || Object.values(input.tokens.brands).some(tree => Object.keys(tree).length))
+    throw Error('NATIVE_CONTRACT_DRAFT_TOKEN_OVERLAY_UNQUALIFIED');
+  const data = compileComponentData(contract, byId);
+  const compiled = prepareNativeContractComparison(contract, data, source, revisionOf(input.tokens.primitives), {
+    mode: input.mode ?? 'light', brand: input.brand ?? 'default',
+  }, comparison);
+  const prepared = prepareNativeSourceWrite(compiled.projection, context, compiled.boundNames, undefined, compiled);
+  return wrapNativeSourceWrite(prepared, buildSyncScript([data], context.operation.fileKey, {
+    header: '// Shared renderer: caller content in an instance of an existing observed main.',
+    preamble: '', nativeSource: true, nativeContractComparison: true, nativeSampleSpecs: compiled.specs,
+  }));
+}
+
 /** The ONE sync runtime (create + in-place amend), shared by the batch
  *  script and (#60 fix 2) every per-component script. `preamble` carries the
  *  minted-variable upsert for playground per-component emissions. */
 function buildSyncScript(
   datas: ComponentData[],
   fileKey: string | null,
-  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeSampleSpecs?: NodeSpec[] },
+  opts: { header: string; preamble: string; variableCollection?: string; nativeSource?: boolean; nativeComparisons?: boolean; nativeContractComparison?: boolean; nativeSampleSpecs?: NodeSpec[] },
 ): string {
   // Comparison content is not a main default or another component, but its
   // text/SVG/literal features must participate in the shared runtime scan.
@@ -8951,7 +8976,7 @@ ${opts.nativeComparisons ? '  await nativeBuildComparisons(target, built);\n' : 
   };
 }
 
-const results = [];
+${opts.nativeContractComparison ? NATIVE_CONTRACT_COMPARISON_RUNTIME + '\nreturn await nativeBuildContractComparison();\n' : ''}const results = [];
 for (const C of COMPONENTS) {
   // Every per-set result — created, amended, skipped as unchanged, refused
   // by the create-only door — carries the named receipt, so the plugin's run
@@ -8974,6 +8999,7 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     buildNativeSourceComponentScript,
     compileNativeContractDraft,
     buildNativeContractDraftScript,
+    buildNativeContractComparisonScript,
     /** One token ref → its resolved literal, or a throw when the ref does not
      *  resolve. Exposed so a SHELL can grade a contract against this engine's
      *  own inventory instead of building a second, drifting resolver. */
