@@ -900,7 +900,8 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
       'layoutSizingVertical' in ${nodeExpr} && ${nodeExpr}.children &&
       (${specExpr}.type === 'slot' || ${nodeExpr}.children.length === 0)) {
     remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name,
-      Boolean(${specExpr}.fixedWidth), Boolean(${specExpr}.fixedHeight));
+      Boolean(${specExpr}.fixedWidth || (${specExpr}.lits && ${specExpr}.lits.width !== undefined)),
+      Boolean(${specExpr}.fixedHeight || (${specExpr}.lits && ${specExpr}.lits.height !== undefined)));
   }`
     : '';
 
@@ -912,7 +913,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+export const RUNTIME_EMIT_REV = 'rt17-preserve-empty-literal-size';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
