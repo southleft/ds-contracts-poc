@@ -756,7 +756,7 @@ export interface SourceFileInput {
   /** Optional installed-program API facts. The host reader must verify these
    * against this exact source and declaration bytes. Syntax-only callers keep
    * their existing behavior; anatomy is still read from the original JSX. */
-  resolvedComponents?: Record<string, { props: ExtractedProp[]; notes: string[] }>;
+  resolvedComponents?: Record<string, { props: ExtractedProp[]; notes: string[]; rootChildrenSlot?: boolean }>;
   /** Co-located *.module.css text, when one exists — unlocks anatomy. */
   css?: string;
   /** Sibling type files (`<basename>.types.ts` convention) whose interface/
@@ -925,6 +925,14 @@ export function extractFromSource(
       // identity read from stylex.props spreads. Rule styling (tokens,
       // layout) is a named review item until the StyleX token round.
       anatomy = extractAnatomy({ sf, src, componentName, props, css: '', tokens: tokens(), stylex: true, helpers: input.helpers }) ?? undefined;
+    }
+    if (installed?.rootChildrenSlot) {
+      if (anatomy && !anatomy.root.component && !anatomy.root.parts &&
+          !anatomy.root.content && anatomy.root.text === undefined) {
+        anatomy.root.slot = { name: 'children' };
+        anatomy.notes = anatomy.notes.filter(n => !n.startsWith('jsx: root renders {children} directly'));
+        anatomy.notes.push('jsx: installed source proves caller children reach the host root unchanged; preserved as a reusable default slot, without sample content');
+      } else componentNotes.push('children-slot-anatomy-conflict: source proof could not attach to a plain host root');
     }
     out.push({
       name: componentName,

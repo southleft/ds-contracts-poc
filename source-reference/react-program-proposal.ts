@@ -18,6 +18,7 @@ export interface ReactProgramProposal {
     name: string;
     module: string;
     carried: string[];
+    slots: string[];
     platform: string[];
     unsupported: { name: string; type: string; reason: string }[];
     problems: string[];
@@ -38,9 +39,9 @@ const reservedProps = new Set([
   "id",
 ]);
 const stateProps = new Set(["disabled", "required", "readOnly"]);
-function kind(
+export function classifyReactProperty(
   type: ReactTypeFact,
-): Pick<ExtractedProp, "kind" | "values"> | undefined {
+): Pick<ExtractedProp, "kind" | "values" | "codeValues"> | undefined {
   const members =
     type.kind === "union"
       ? type.members.filter((t) => t.kind !== "undefined")
@@ -72,6 +73,38 @@ function kind(
     new Set(members.map((t) => (t as { value: boolean }).value)).size === 2
   )
     return { kind: "boolean" };
+  if (
+    members.length &&
+    members.every((t) => t.kind === "literal" || t.kind === "null")
+  ) {
+    const entries: [string, string | number | boolean | null][] = [];
+    const reserved = new Set(
+      members.flatMap((t) =>
+        t.kind === "literal" && typeof t.value === "string" ? [t.value] : [],
+      ),
+    );
+    const used = new Set<string>();
+    for (const member of members) {
+      const value = member.kind === "literal" ? member.value : null;
+      const base =
+        typeof value === "string" && /^[a-zA-Z][a-zA-Z0-9-]*$/.test(value)
+          ? value
+          : value === null
+            ? "null"
+            : `${typeof value}-${String(value).replace(/[^a-zA-Z0-9-]/g, "-")}`;
+      let key = base,
+        suffix = 1;
+      while (used.has(key) || (typeof value !== "string" && reserved.has(key)))
+        key = `${base}-${suffix++}`;
+      used.add(key);
+      entries.push([key, value]);
+    }
+    return {
+      kind: "enum",
+      values: entries.map(([k]) => k),
+      codeValues: Object.fromEntries(entries),
+    };
+  }
   return undefined;
 }
 
@@ -124,6 +157,7 @@ export function proposeReactSourceProgram(
         name: component.name,
         module: component.module,
         carried: [],
+        slots: [],
         platform: [],
         unsupported: [],
         problems: component.problems.filter(
@@ -132,7 +166,25 @@ export function proposeReactSourceProgram(
       };
       out.components.push(row);
       const props: ExtractedProp[] = [];
+      const rootChildrenSlot =
+        component.children?.kind === "forwarded" &&
+        component.root.kind === "host";
+      if (!rootChildrenSlot && component.children?.kind === "forwarded")
+        row.problems.push("children-root-consumption-unverified");
+      else if (component.children?.kind === "unresolved")
+        row.problems.push(
+          component.children.reason ?? "children-flow-unresolved",
+        );
       for (const prop of component.props) {
+        if (prop.name === "children" && rootChildrenSlot) {
+          props.push({
+            name: "children",
+            kind: "node",
+            optional: prop.optional,
+            confidence: "declared",
+          });
+          continue;
+        }
         const platform =
           prop.declaredIn.length > 0 &&
           prop.declaredIn.every((d) =>
@@ -145,7 +197,7 @@ export function proposeReactSourceProgram(
           row.platform.push(prop.name);
           continue;
         }
-        const classified = kind(prop.type);
+        const classified = classifyReactProperty(prop.type);
         const value = component.defaults[prop.name];
         const explicitUndefined =
           !prop.optional &&
@@ -155,7 +207,7 @@ export function proposeReactSourceProgram(
           classified?.kind === "event" && !/^on[A-Z]/.test(prop.name);
         if (
           !classified ||
-          value === null ||
+          (value === null && !classified?.codeValues) ||
           explicitUndefined ||
           unboundCallback
         ) {
@@ -185,7 +237,15 @@ export function proposeReactSourceProgram(
           ...classified,
           optional: prop.optional,
           confidence: "declared",
-          ...(value !== undefined ? { default: value } : {}),
+          ...(value !== undefined
+            ? {
+                default: classified.codeValues
+                  ? Object.keys(classified.codeValues).find((key) =>
+                      Object.is(classified.codeValues![key], value),
+                    )
+                  : (value as string | number | boolean),
+              }
+            : {}),
         });
       }
       if (component.root.kind !== "host")
@@ -205,7 +265,11 @@ export function proposeReactSourceProgram(
             ]
           : []),
       ];
-      resolvedComponents[component.name] = { props, notes };
+      resolvedComponents[component.name] = {
+        props,
+        notes,
+        ...(rootChildrenSlot ? { rootChildrenSlot: true } : {}),
+      };
     }
     inputs.push({ ...input, resolvedComponents });
   }
@@ -215,6 +279,15 @@ export function proposeReactSourceProgram(
     prefix,
     preserveSourceApi: true,
   });
+  for (const row of out.components) {
+    const draft = out.result.proposals.find((p) => p.name === row.name)
+      ?.proposal.contract as
+      { anatomy?: { root?: { slot?: { name: string } } } } | undefined;
+    if (draft?.anatomy?.root?.slot?.name === "children") {
+      row.slots.push("children");
+      row.problems.push("native-root-slot-projection-unverified");
+    }
+  }
   out.problems.push(
     "rendered-anatomy-and-token-correspondence-unverified",
     "native-projection-unverified",

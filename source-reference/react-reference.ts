@@ -1,3 +1,8 @@
+import { startReactOwnership } from "./react-ownership-run.js";
+import { readReactNativeEvidence, selectReactNativeRequest } from './react-native-evidence.js';
+import type { ReactNativeRequest } from './react-native-request.js';
+import type { createNativeOperationJobs } from './native-operation-jobs.js';
+import type { createNativeOperationTransport } from './native-operation-transport.js';
 import { proposeReactSourceProgram } from "./react-program-proposal.js";
 import {
   readReactSourceProgram,
@@ -39,6 +44,7 @@ export interface ReactReference {
  * path, executable or dependency. esbuild parses source; it never executes it. */
 export async function buildReactReference(
   sourceRoot: string,
+  entry: string = reactReferenceEntry,
 ): Promise<ReactReference> {
   sourceRoot = realpathSync(sourceRoot);
   const files: Record<string, string> = {};
@@ -55,7 +61,7 @@ export async function buildReactReference(
   }
   const output = await build({
     stdin: {
-      contents: reactReferenceEntry,
+      contents: entry,
       resolveDir: sourceRoot,
       sourcefile: "react-reference.tsx",
       loader: "tsx",
@@ -98,7 +104,7 @@ export async function buildReactReference(
   if (!javascript || !css) throw Error("react-reference-output-missing");
   const identity = {
     version: 1,
-    entry: sha(reactReferenceEntry),
+    entry: sha(entry),
     files: Object.entries(files)
       .map(([file, hash]) => [path.relative(sourceRoot, file), hash])
       .sort(),
@@ -139,11 +145,16 @@ export function createReactReferenceService(
       repoRoot,
       "../ds-contracts-poc/examples/shadcn/.shadcn-sandbox",
     ),
+  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport> },
 ) {
   let reference: ReactReference | undefined;
   const validations = new Map<
     string,
     ReturnType<typeof startReactValidation>
+  >();
+  const ownershipJobs = new Map<
+    string,
+    ReturnType<typeof startReactOwnership>
   >();
   let loading: Promise<ReactReference> | undefined;
   const json = (res: ServerResponse, status: number, body: unknown) => {
@@ -157,6 +168,38 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation)$/.exec(route);
+    if (nativeRoute || nativeAction) {
+      try {
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction)![1]) throw Error('react-native-reference-unavailable');
+        const { jobs, transport } = native();
+        if (req.method === 'POST') {
+          if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
+            throw Error('react-native-body-refused');
+          if (nativeRoute?.[2]) {
+            const job = ownershipJobs.get(reference.id);
+            if (!job) throw Error('react-native-observation-required');
+            jobs.prepare(selectReactNativeRequest(repoRoot, job.report(), nativeRoute[2]));
+          } else if (nativeAction) {
+            const id = nativeAction[2];
+            if (jobs.reactIdentity(id).referenceId !== reference.id) throw Error('react-native-operation-mismatch');
+            if (nativeAction[3] === 'connection') {
+              if (new URL(`http://${req.headers.host}`).port !== '5181') throw Error('react-native-pairing-port');
+              json(res, 200, { connection: transport.pair(id) }); return;
+            }
+            if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
+            else transport.start(id);
+          } else throw Error('react-native-action-invalid');
+        } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
+        const observedAt = Date.now();
+        json(res, 200, { operations: jobs.listReact(reference.id).map(row => ({ ...row,
+          connection: transport.status(row.operation.id, observedAt) })) });
+      } catch {
+        json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
+      }
+      return;
+    }
     if (route === "react" && req.method === "POST") {
       if (
         Number(req.headers["content-length"] ?? 0) > 0 ||
@@ -210,6 +253,7 @@ export function createReactReferenceService(
           sourceFiles: Object.keys(reference.files).length,
           qualification: "unqualified",
           validation: validations.get(reference.id)?.report() ?? null,
+          ownership: ownershipJobs.get(reference.id)?.report() ?? null,
           cases: reactReferenceCases.map((c) => ({
             ...c,
             url: `/api/source-reference/react/${reference!.id}?case=${c.id}`,
@@ -308,6 +352,97 @@ export function createReactReferenceService(
           error:
             "Source APIs could not be read from unchanged installed source and declarations. Reload originals before trying again.",
         });
+      }
+      return;
+    }
+    const ownershipRoute = /^react\/([a-f0-9]{64})\/ownership$/.exec(route);
+    if (ownershipRoute && reference?.id === ownershipRoute[1]) {
+      if (req.method === "POST") {
+        if (
+          Number(req.headers["content-length"] ?? 0) > 0 ||
+          req.headers["transfer-encoding"]
+        ) {
+          json(res, 400, { error: "This action accepts no request body." });
+          return;
+        }
+        try {
+          let job = ownershipJobs.get(reference.id);
+          if (job?.state.state !== "running") {
+            job = startReactOwnership(
+              reference,
+              realpathSync(sourceRoot),
+              path.join(repoRoot, "private/react-source-ownership"),
+            );
+            ownershipJobs.set(reference.id, job);
+            void job.promise.catch(() => {
+              job!.state.state = "failed";
+              job!.state.matched = 0;
+              job!.state.problem = "react-ownership-evidence-unavailable";
+              for (const row of job!.state.rows) row.matched = false;
+            });
+          }
+          json(res, 202, job.report());
+        } catch {
+          json(res, 409, {
+            error:
+              "React structure observation unavailable: original source or installed declarations changed.",
+          });
+        }
+        return;
+      }
+      const job = ownershipJobs.get(reference.id);
+      if (req.method === "GET" && job) {
+        json(res, 200, job.report());
+        return;
+      }
+      json(res, 404, { error: "No structure observation for this reference." });
+      return;
+    }
+    const propertyImage = /^react\/([a-f0-9]{64})\/ownership\/([a-f0-9-]{36})\/([a-z-]+)\/matrix\/(\d+)\/([a-f0-9]{64})\.png$/.exec(route);
+    if (req.method === "GET" && propertyImage) {
+      const [, referenceId, jobId, caseId, index, hash] = propertyImage;
+      const job = ownershipJobs.get(referenceId), report = job?.report();
+      const row = report?.rows.find(r=>r.id===caseId), effect = row?.propertyMatrix?.rows.find(r=>r.id===index);
+      if(job?.state.id!==jobId || report?.state!=="complete" || !row?.matched || effect?.status!=="observed" || effect.image!==hash) {
+        json(res,404,{error:"Verified property image unavailable."}); return;
+      }
+      try {
+        const bytes=readFileSync(path.join(job!.dir,caseId,"matrix",index+".png"));
+        if(sha(bytes)!==hash)throw Error("changed");
+        res.setHeader("Content-Type","image/png"); res.setHeader("Cache-Control","no-store");
+        res.setHeader("Cross-Origin-Resource-Policy","same-origin"); res.end(bytes);
+      } catch {json(res,409,{error:"Recorded property image changed."});}
+      return;
+    }
+    const ownershipImage =
+      /^react\/([a-f0-9]{64})\/ownership\/([a-f0-9-]{36})\/([a-z-]+)\/(source|observed)\/([a-f0-9]{64})\.png$/.exec(
+        route,
+      );
+    if (req.method === "GET" && ownershipImage) {
+      const [, referenceId, jobId, caseId, side, hash] = ownershipImage;
+      const job = ownershipJobs.get(referenceId),
+        report = job?.report(),
+        row = report?.rows.find((r) => r.id === caseId);
+      const expected =
+        side === "source" ? row?.sourceImage : row?.observedImage;
+      if (
+        job?.state.id !== jobId ||
+        !row?.matched ||
+        report?.state !== "complete" ||
+        expected !== hash
+      ) {
+        json(res, 404, { error: "Verified structure image unavailable." });
+        return;
+      }
+      try {
+        const bytes = readFileSync(path.join(job!.dir, caseId, side + ".png"));
+        if (sha(bytes) !== hash) throw Error("changed");
+        res.setHeader("Content-Type", "image/png");
+        res.setHeader("Cache-Control", "no-store");
+        res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+        res.end(bytes);
+      } catch {
+        json(res, 409, { error: "Recorded structure image changed." });
       }
       return;
     }
@@ -412,8 +547,13 @@ export function createReactReferenceService(
     res.end(reactReferenceHtml(reference));
   };
   return Object.assign(handle, {
+    nativeEvidence(request: ReactNativeRequest) {
+      if (!reference) throw Error('react-native-reference-unavailable');
+      return readReactNativeEvidence(repoRoot, reference, request);
+    },
     close() {
       for (const job of validations.values()) job.close();
+      for (const job of ownershipJobs.values()) job.close();
     },
   });
 }

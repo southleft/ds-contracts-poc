@@ -2849,7 +2849,9 @@ export function prepareMint(
   // @door fuse.declarable-part-gate
   const declarablePart = (partName: string): Part | undefined => {
     const p = partByName.get(partName);
-    if (!p || p.component || p.slot) return undefined; // ref/slot parts never carry declared facts
+    // A root children slot describes content inside the source-owned box;
+    // declared facts style that box, not a nested consumer-owned slot.
+    if (!p || p.component || (p.slot && !(partName === 'root' && p.slot.name === 'children'))) return undefined;
     return p;
   };
 
@@ -3697,7 +3699,7 @@ export function applyMintToContract(
   // static layer wins on collision (??=), like every other enrichment.
   for (const de of declaredEnrichments) {
     const target = partByName.get(de.part);
-    if (!target || target.component || target.slot) continue; // guarded upstream; belt and braces
+    if (!target || target.component || (target.slot && !(de.part === 'root' && target.slot.name === 'children'))) continue;
     if (de.when) {
       target.stylesWhen ??= [];
       const existing = target.stylesWhen.find((sw) => sw.prop === de.when!.prop && sw.equals === de.when!.equals);
@@ -3715,7 +3717,7 @@ export function applyMintToContract(
   }
   for (const de of declaredStateEnrichments) {
     const target = partByName.get(de.part);
-    if (!target || target.component || target.slot) continue;
+    if (!target || target.component || (target.slot && !(de.part === 'root' && target.slot.name === 'children'))) continue;
     target.declaredStates ??= {};
     target.declaredStates[de.state] ??= {};
     if (!(de.channel in target.declaredStates[de.state])) {

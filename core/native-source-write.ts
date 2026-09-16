@@ -11,6 +11,7 @@ import {
 } from "./native-token-context.js";
 import { emitNativeTokenContextReadbackScript } from "./token-set.js";
 import type { NativeSourceCandidateProjection } from "./native-source-projection.js";
+import type { NativeContractDraftProjection } from "./native-contract-draft.js";
 import type {
   NativeSourceComparisonInput,
   prepareNativeSourceComparisons,
@@ -30,7 +31,7 @@ export interface NativeSourceWriteContext {
 }
 
 export function prepareNativeSourceWrite(
-  projection: NativeSourceCandidateProjection,
+  projection: NativeSourceCandidateProjection | NativeContractDraftProjection,
   context: NativeSourceWriteContext,
   boundNames: string[],
   comparisons?: ReturnType<typeof prepareNativeSourceComparisons>,
@@ -58,7 +59,8 @@ export function prepareNativeSourceWrite(
     input.modes.length !== 1 ||
     input.modes[0].sourceMode !== projection.context.mode ||
     input.modes[0].brand !== projection.context.brand ||
-    input.modes[0].tokenTreeRevision !== projection.binding.tokenRevision ||
+    input.modes[0].tokenTreeRevision !== ('kind' in projection
+      ? projection.tokenRevision : projection.binding.tokenRevision) ||
     tokens.identity.origin !== "created"
   )
     fail("token-source-context");
@@ -83,7 +85,7 @@ export function prepareNativeSourceWrite(
     sourceContractRevision: projection.contractRevision,
     projection,
     machineId: `source-native:${operation.id}:${projection.contractId}`,
-    pageName: `DS source candidate / ${operation.id}`,
+    pageName: `${'kind' in projection ? 'DS contract draft' : 'DS source candidate'} / ${operation.id}`,
     tokenPreparationRevision: preparation.revision,
     identity: tokens.identity,
     receipt: tokens.receipt,
@@ -154,7 +156,8 @@ function nativeInit(node, spec) {
   nativeOwn(node);
   if (spec.type !== 'slot') NATIVE_PAGE.appendChild(node);
   node.setExplicitVariableModeForCollection(NATIVE_COLLECTION, NATIVE.identity.modes[0].modeId);
-  if (spec.nativeSourcePart) node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
+  ${'kind' in prepared.descriptor.projection
+    ? "if (spec.nativeContractPart) node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(spec.nativeContractPart));\n  else " : ''}if (spec.nativeSourcePart) node.setSharedPluginData('ds_contracts', 'nativeSourcePart', JSON.stringify(spec.nativeSourcePart));
   else if (spec.nativeSourceSample) {
     node.setSharedPluginData('ds_contracts', 'nativeSourceSample', JSON.stringify(spec.nativeSourceSample));
     // createNodeFromSvg allocates a subtree in one API call. Preserve and own

@@ -1,3 +1,4 @@
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React code emission — the PURE core of scripts/generate-components.ts.
  *
@@ -123,7 +124,7 @@ function depAttrString(
       const chain = Object.entries(value.map)
         .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
         .join('');
-      parts.push(` ${codeName}={${chain}undefined}`);
+      parts.push(` ${codeName}={${codeValueExpression(depProp, chain + 'undefined')}}`);
       continue;
     }
     if (typeof value === 'boolean') {
@@ -162,9 +163,9 @@ function depAttrString(
     if (parentRef && parent) {
       // Parent→child prop mapping: `density: "{density}"` → density={density}
       const parentProp = parent.props.find((p) => p.name === parentRef[1]);
-      parts.push(` ${codeName}={${parentProp?.bindings.code.prop ?? parentRef[1]}}`);
+      parts.push(` ${codeName}={${codeValueExpression(depProp, parentProp?.bindings.code.prop ?? parentRef[1])}}`);
     } else {
-      parts.push(` ${codeName}="${value}"`);
+      parts.push(depProp && hasCodeValues(depProp) ? ` ${codeName}={${codeValueLiteral(depProp,value)}}` : ` ${codeName}="${value}"`);
     }
   }
   return parts.join('');
@@ -248,6 +249,7 @@ export function generateTsx(
   emittedCss?: string,
 ): string {
   refuseRetainedRuntime(contract, 'direct generateTsx; use emitReact with verified runtime context');
+  validateCodeValueConsumers(contract);
   // elementByProp renders a dynamic tag — the ref/attrs generalize to the
   // shared HTMLElement surface (the concrete element varies per prop value).
   const elementByProp = contract.semantics.elementByProp;
@@ -299,8 +301,8 @@ export function generateTsx(
   for (const p of contract.props) {
     const doc = p.description ? `  /** ${p.description} */\n` : '';
     if (isEnum(p)) {
-      const union = p.type.enum.map((v) => `'${v}'`).join(' | ');
-      propLines.push(`${doc}  ${p.bindings.code.prop}?: ${union};`);
+      const union = hasCodeValues(p) ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ');
+      propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${union};`);
     } else if (isArrayType(p)) {
       const fields = Object.entries(p.type.arrayOf)
         .map(([f, t]) => `${f}: ${t === 'text' ? 'string' : t}`)
@@ -328,7 +330,7 @@ export function generateTsx(
   // destructure default — undefined means "uncontrolled", backed by useState.
   for (const p of enums) {
     destructured.push(
-      toggledCodeProps.has(p.bindings.code.prop)
+      hasCodeValues(p) ? mappedPropBinding(p, contract.props.indexOf(p), toggledCodeProps.has(p.bindings.code.prop)) : toggledCodeProps.has(p.bindings.code.prop)
         ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
         : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = '${p.default}'`,
     );
@@ -365,7 +367,7 @@ export function generateTsx(
   destructured.push('className', childrenDefault, '...rest');
 
   // Body prelude: uncontrolled state + handlers for declared events.
-  const prelude: string[] = [];
+  const prelude: string[] = mappedPropPrelude(contract);
   for (const ev of events) {
     if (!ev.toggles) continue;
     const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
@@ -611,7 +613,7 @@ export function generateTsx(
             childrenField = field;
             return '';
           }
-          return ` ${depProp.bindings.code.prop}={item.${field}}`;
+          return ` ${depProp.bindings.code.prop}={${codeValueExpression(depProp, `item.${field}`)}}`;
         })
         .join('');
       const node = childrenField
@@ -743,7 +745,7 @@ ${propLines.join('\n')}
 
 /** ${contract.description}${seeLines(contract)} */
 export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
-  return (
+${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
     <>
       ${rootsJsx}
     </>
@@ -828,13 +830,13 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
     const desc = p.description ? `, description: '${p.description.replace(/'/g, "\\'")}'` : '';
     if (isEnum(p)) {
       argTypes.push(
-        `    ${codeName}: { control: 'select', options: [${p.type.enum.map((v) => `'${v}'`).join(', ')}]${desc} },`,
+        `    ${codeName}: { control: 'select', options: [${p.type.enum.map((v) => hasCodeValues(p) ? codeValueLiteral(p,v) : `'${v}'`).join(', ')}]${desc} },`,
       );
       // Toggled props get NO default arg: undefined = uncontrolled, so the
       // component is actually interactive in the Playground. Setting the
       // control switches it to controlled — the standard React pattern.
       if (p.default !== undefined && !toggledPropNames.has(p.name)) {
-        args.push(`    ${codeName}: '${p.default}',`);
+        args.push(`    ${codeName}: ${hasCodeValues(p) ? codeValueLiteral(p,String(p.default)) : `'${p.default}'`},`);
       }
     } else if (isArrayType(p)) {
       argTypes.push(`    ${codeName}: { control: false${desc} },`);
@@ -853,7 +855,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
       if (typeof p.default === 'number') args.push(`    ${codeName}: ${p.default},`);
     } else {
       argTypes.push(`    ${codeName}: { control: 'text'${desc} },`);
-      if (typeof p.default === 'string') args.push(`    ${codeName}: '${p.default}',`);
+      if (typeof p.default === 'string') args.push(`    ${codeName}: ${hasCodeValues(p) ? codeValueLiteral(p,String(p.default)) : `'${p.default}'`},`);
     }
   }
   for (const { slot } of slots) {
@@ -888,7 +890,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
             if (!/^[A-Za-z_]/.test(storyName)) storyName = `${pascal(enums[0].name)}${storyName}`;
             return `
 export const ${storyName}: Story = {
-  args: { ${enums[0].bindings.code.prop}: '${v}' },
+  args: { ${enums[0].bindings.code.prop}: ${hasCodeValues(enums[0]) ? codeValueLiteral(enums[0],v) : `'${v}'`} },
 };`;
           })
           .join('\n')
@@ -965,8 +967,8 @@ export const With${pascal(slot.name)}: Story = {
       const rowCells = colCombos
         .map((combo) => {
           const attrs = [
-            `${rowProp.bindings.code.prop}="${row}"`,
-            ...colAxes.map((axis, i) => `${axis.bindings.code.prop}="${combo[i]}"`),
+            hasCodeValues(rowProp) ? `${rowProp.bindings.code.prop}={${codeValueLiteral(rowProp,row)}}` : `${rowProp.bindings.code.prop}="${row}"`,
+            ...colAxes.map((axis, i) => hasCodeValues(axis) ? `${axis.bindings.code.prop}={${codeValueLiteral(axis,combo[i])}}` : `${axis.bindings.code.prop}="${combo[i]}"`),
             ...requiredTextAttrs,
           ].join(' ');
           // Children arrive via a slot OR a children-bound text prop

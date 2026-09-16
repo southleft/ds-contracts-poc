@@ -55,6 +55,8 @@ Sorting, pagination, keyboard navigation and data fetching are not established b
 
 **Inspect original React sources locally:** open `/sources`, choose **Load React originals**, then **Validate React sources** for the configured ten-case Button, Checkbox and composed Card cohort. **Inspect React APIs** reads its installed declarations and shows incomplete contract proposals. Source checks do not qualify Figma generation or behavior; unsupported APIs remain visible. This preset is not a general repository picker.
 
+**Inspect a native root draft locally:** after **Trace React structure** completes, choose a supported Button or Card case and **Prepare … for Figma**. Open the companion plugin in the authorized file shown by the app, obtain the connection code, and use **Build → Connect the local source workflow → Connect / resume**. Then choose **Create and inspect native draft** in the app. This creates root variants and bound variables with empty editable content slots. Review the structural result and diagnostic exports. **Inspect native draft again** reads the same objects; it does not create replacements. After a server restart, reload unchanged originals to recover the saved operation. Checkbox and full composed-content conversion remain unfinished.
+
 **Try today:** [open code import](https://ds-contracts-playground.pages.dev/playground?source=code) for a static TSX/CSS experiment. Use the local app's same code-import view when working from this checkout. Review the proposed contract and named limitations before inspecting generated output. The current reader recognizes bounded syntax and styling patterns; a successful API proposal alone does not prove rendered styling, behavior or native Figma fidelity.
 
 **Where this currently stops:** connecting an arbitrary React repository, carrying its full component family through native generation, and qualifying the output are unfinished. The steps above describe the intended delivery. There is no claim that every React pattern, styling system or dependency is supported.
@@ -97,7 +99,7 @@ npm run playground
 
 Open [the local start guide](http://localhost:5181/start). The main branch contains merged work; an open PR is a separate revision. Start a React experiment from code import. The React `/sources` preset and archived Lit flow each require their configured source library; the React path does not depend on the Lit setup. Worker development has its own dependency install, documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The existing Lit source connection requires the local app on port 5181 and its authorized file. On `/sources`, **Prepare connection** supplies the operation connection; in the plugin use **Build → Connect the local source workflow** and **Connect / resume**. This development connection is not a completed React import action. Keep it private; it grants delivery and result access for that operation.
+For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The local app must use port 5181 and the plugin must be open in the authorized target shown by the app. The React root-inspection flow uses **Prepare … for Figma**, **Get connection code**, then **Create and inspect native draft**. In the plugin use **Build → Connect the local source workflow → Connect / resume**. If an older development registration has the same plugin ID, remove that obsolete registration and import the current manifest; this does not delete source files or canvas content. This development flow is not a completed React component-family import. Keep it private; it grants delivery and result access for that operation.
 
 **Recommended v1 onboarding, still planned:** one setup flow that connects the workspace, selects the code target, pairs the plugin when needed, and checks permissions/dependencies before the first import. A designer should not need to understand operation journals or assemble JSON by hand.
 
@@ -126,7 +128,7 @@ The direction is to make this application the front door to connected library wo
 
 Development should produce a demonstrable user flow. Tests are acceptance checks for that delivery.
 
-**Current checkpoint:** the app verifies ten configured original React cases and proposes installed API facts; static React readers and shared generators also exist. A separate Lit Button experiment exercised the app/plugin connection, but did not qualify React import or native visual fidelity. No complete React journey has met the V1 criteria.
+**Current checkpoint:** the app verifies ten configured original React cases, proposes installed API facts, and creates supported editable native root drafts through the companion plugin. Live Button structure readback and restart/reinspection passed. Caller-content comparisons, stateful/composed output and visual fidelity remain unfinished. No complete React journey has met the V1 criteria.
 
 | Checkpoint | User-visible result | Done when |
 | --- | --- | --- |

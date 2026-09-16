@@ -172,8 +172,9 @@ export function proposeContract(
             kind: 'VARIANT',
             property: titleCase(p.name),
             values: Object.fromEntries(p.values.map((v) => [v, titleCase(v)])),
+            ...(p.codeValues && p.optional && dflt === undefined ? { unsetValue: '(unset)' } : {}),
           },
-          code: { prop: p.name },
+          code: { prop: p.name, ...(p.codeValues ? { values: p.codeValues } : {}) },
         },
       });
       notes.push(

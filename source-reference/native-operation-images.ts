@@ -1,7 +1,7 @@
 /** Private diagnostic exports. Image presence never qualifies visual fidelity. */
 import { createHash } from "node:crypto";
 import { PNG } from "pngjs";
-import type { NativeSourceObservationInput } from "../core/native-source-observation.js";
+import { nativeInspectionExports, type NativeInspectionInput } from "../core/native-source-observation.js";
 
 export interface NativeImageSummary {
   caseId: string;
@@ -16,7 +16,7 @@ export interface NativeImageObservation {
   problems: string[];
 }
 export function collectNativeImages(
-  input: NativeSourceObservationInput,
+  input: NativeInspectionInput,
   raw: unknown,
 ): { observation: NativeImageObservation; bytes: Map<string, Buffer> } {
   const unavailable = (problem: string) => ({
@@ -44,9 +44,7 @@ export function collectNativeImages(
       r.problems.length
     )
       return unavailable("native-images-readback-unavailable");
-    const expected = input.creation.comparisons.filter(
-      (c: any) => c.status === "created-comparison",
-    );
+    const expected = nativeInspectionExports(input);
     if (!Array.isArray(r.images) || !r.images.length)
       return unavailable("native-images-not-collected");
     if (r.images.length !== expected.length)

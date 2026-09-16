@@ -1,3 +1,4 @@
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React with INLINE STYLES, token refs RESOLVED to literals — the
  * zero-infrastructure emitter for orgs without a token pipeline: no CSS
@@ -119,6 +120,7 @@ type StyleRecord = Record<string, string | number>;
 
 export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): EmitReactInlineResult {
   refuseRetainedRuntime(contract, 'react-inline', ctx.contracts);
+  validateCodeValueConsumers(contract);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
   if (errors.length > 0) {
@@ -214,7 +216,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     Object.values(part.parts ?? {}).every((pp) => pp.slot !== undefined);
 
   const compilePart = (partName: string, part: Part, isRoot: boolean) => {
-    const s: StyleRecord = {};
+    // Contract dimensions are outer box dimensions, as on the CSS-module
+    // and native surfaces. Do not depend on the consumer's global reset.
+    const s: StyleRecord = { boxSizing: 'border-box' };
     // A2 grid (G2/G4): this part's cell under its grid parent — resolved
     // from the shared plan; sizing stays unspelled (stretch is the CSS grid
     // default, the pinned spelling of canvas FILL, G3).
@@ -403,9 +407,23 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       for (const [value, overrides] of Object.entries(entry.map)) {
         const decls: StyleRecord = {};
         for (const [cssProp, ref] of Object.entries(overrides)) {
-          decls[camel(cssProp)] = resolveValue(stripBraces(ref));
-          if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
-            decls.minWidth = resolveValue(stripBraces(ref));
+          const refPath = stripBraces(ref), placeholders = placeholdersIn(refPath);
+          // A per-value map may retain one OTHER enum placeholder. This is
+          // how the shared compiler carries a coupled axis with omission.
+          if (placeholders.length === 1) {
+            const other = placeholders[0];
+            for (const otherValue of substByName.get(other) ?? []) {
+              const resolved = resolveValue(refPath.replaceAll(`{${other}}`, otherValue));
+              const compound: StyleRecord = { [camel(cssProp)]: resolved };
+              if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) compound.minWidth = resolved;
+              applyBorderStyle(compound, { [cssProp]: ref }, 'tokens', part.declared);
+              addVariantCompound([[entry.prop, value], [other, otherValue]], partName, compound);
+            }
+          } else {
+            decls[camel(cssProp)] = resolveValue(refPath);
+            if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
+              decls.minWidth = resolveValue(refPath);
+            }
           }
         }
         applyBorderStyle(decls, overrides, 'tokens', part.declared);
@@ -520,7 +538,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   for (const p of contract.props) {
     const doc = p.description ? `  /** ${p.description} */\n` : '';
     if (isEnum(p)) {
-      propLines.push(`${doc}  ${p.bindings.code.prop}?: ${p.type.enum.map((v) => `'${v}'`).join(' | ')};`);
+      propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${hasCodeValues(p) ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ')};`);
     } else if (isArrayType(p)) {
       const fields = Object.entries(p.type.arrayOf)
         .map(([f, t]) => `${f}: ${t === 'text' ? 'string' : t}`)
@@ -546,7 +564,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const destructured: string[] = [];
   for (const p of enums) {
     destructured.push(
-      toggledCodeProps.has(p.bindings.code.prop)
+      hasCodeValues(p) ? mappedPropBinding(p, contract.props.indexOf(p), toggledCodeProps.has(p.bindings.code.prop)) : toggledCodeProps.has(p.bindings.code.prop)
         ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
         : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = '${p.default}'`,
     );
@@ -568,7 +586,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   destructured.push('style', 'children', '...rest');
 
   // Uncontrolled toggles + handlers — identical pattern to the CSS-Module emitter.
-  const prelude: string[] = [];
+  const prelude: string[] = mappedPropPrelude(contract);
   for (const ev of events) {
     if (!ev.toggles) continue;
     const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
@@ -726,7 +744,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         const chain = Object.entries(value.map)
           .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
           .join('');
-        parts.push(` ${codeName}={${chain}undefined}`);
+        parts.push(` ${codeName}={${codeValueExpression(depProp, chain + 'undefined')}}`);
         continue;
       }
       if (typeof value === 'boolean') {
@@ -750,9 +768,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       }
       if (parentRef) {
         const parentProp = contract.props.find((p) => p.name === parentRef[1]);
-        parts.push(` ${codeName}={${parentProp?.bindings.code.prop ?? parentRef[1]}}`);
+        parts.push(` ${codeName}={${codeValueExpression(depProp, parentProp?.bindings.code.prop ?? parentRef[1])}}`);
       } else {
-        parts.push(` ${codeName}="${value}"`);
+        parts.push(depProp && hasCodeValues(depProp) ? ` ${codeName}={${codeValueLiteral(depProp,value)}}` : ` ${codeName}="${value}"`);
       }
     }
     return parts.join('');
@@ -785,6 +803,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
               const codeName = depProp?.bindings.code.prop ?? field;
               if (typeof v === 'string' && codeName === 'children') {
                 itemText = v;
+              } else if (depProp && hasCodeValues(depProp) && typeof v === 'string') {
+                fieldAttrs += ` ${codeName}={${codeValueLiteral(depProp,v)}}`;
               } else if (typeof v === 'boolean') {
                 fieldAttrs += v ? ` ${codeName}` : '';
               } else if (typeof v === 'number') {
@@ -1046,7 +1066,7 @@ ${propLines.join('\n')}
 
 /** ${contract.description}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
 export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
-  return (
+${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
     <>
       ${keyframesNode}${rootsJsx}
     </>

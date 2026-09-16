@@ -1,3 +1,5 @@
+import { readRootContent } from './figma-root-content.js';
+import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
 /**
  * DESIGN → CONTRACT — the PURE core of extract/figma/propose.ts.
  *
@@ -243,10 +245,13 @@ interface Axis {
    *  all-defaults combo first and Figma's default variant is positional). */
   values: string[];
   omitted?: UnsetVariantAxis;
+  codeValues?: CodeValueAxis;
 }
 
+const isBooleanAxis = (axis: Axis): boolean => !axis.codeValues && isBoolAxis(axis.values);
+
 const axisValue = (axis: Axis, label: string): string =>
-  axis.omitted?.values.find(v => v.label === label)?.value ?? camel(label);
+  axis.omitted?.values.find(v => v.label === label)?.value ?? axis.codeValues?.values.find(v => v.label === label)?.value ?? camel(label);
 
 const axisValuesOf = (variantName: string): Record<string, string> => {
   if (!variantName.includes('=')) return {};
@@ -370,7 +375,7 @@ export interface StatePromotion {
  *  weak evidence). Near-misses on a NAMED axis are noted, never guessed. */
 function detectStateAxis(axes: Axis[], notes: string[]): StatePromotion | null {
   for (const axis of axes) {
-    if (isBoolAxis(axis.values)) continue;
+    if (isBooleanAxis(axis)) continue;
     const named = /^states?$/i.test(axis.property.trim());
     const unmapped = axis.values.filter((v) => INTERACTION_STATE_BY_VALUE[normStateValue(v)] === undefined);
     if (unmapped.length > 0) {
@@ -555,7 +560,7 @@ function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string, carriage?: M
 function detectModeAxis(axes: Axis[], variants: DumpNode[], setName: string, notes: string[]): ModePromotion | null {
   for (const axis of axes) {
     if (!MODE_AXIS_NAME.test(axis.property.trim())) continue;
-    if (isBoolAxis(axis.values)) continue;
+    if (isBooleanAxis(axis)) continue;
     const unmapped = axis.values.filter((v) => !MODE_AXIS_VALUES.has(normStateValue(v)));
     if (unmapped.length > 0) {
       notes.push(
@@ -664,7 +669,7 @@ export function inferSemantics(setName: string, axes: Axis[], interactive: boole
   }
   if (/\b(heading|title)\b/i.test(setName)) {
     const level = axes.find(
-      (a) => /^levels?$/i.test(a.property.trim()) && !isBoolAxis(a.values) && a.values.every((v) => /^h?[1-6]$/i.test(v.trim())),
+      (a) => /^levels?$/i.test(a.property.trim()) && !isBooleanAxis(a) && a.values.every((v) => /^h?[1-6]$/i.test(v.trim())),
     );
     if (level) {
       const heading = (v: string) => `h${v.trim().replace(/^h/i, '')}`;
@@ -718,6 +723,7 @@ interface Occ {
 interface Merged {
   name: string;
   type: string;
+  rootContent?: true;
   occ: Occ[];
   children: Merged[];
 }
@@ -982,7 +988,7 @@ function unifyRefs(
   // values); this is the fallback for vocabularies whose names spell scale
   // steps, not axis values.
   for (const axis of axes) {
-    if (isBoolAxis(axis.values)) continue;
+    if (isBooleanAxis(axis)) continue;
     const byValue = new Map<string, string>();
     let fits = true;
     for (const o of defined) {
@@ -1016,7 +1022,7 @@ function unifyRefs(
   // is detected here and NAMED with its axis; see BoolAxisFn for why the
   // per-value binding itself is not proposed.
   for (const axis of axes) {
-    if (!isBoolAxis(axis.values)) continue;
+    if (!isBooleanAxis(axis)) continue;
     const byValue = new Map<string, string>();
     let fits = true;
     for (const o of defined) {
@@ -2440,7 +2446,7 @@ function invertNodeTokens(
     // r11: a native SLOT's itemSpacing is a rendered fact the moment the
     // consumer drops two children in — the drawn child count is not the
     // denominator there (canvas conformance slot-interior-auto-layout).
-    (m.type === 'SLOT' || m.occ.some((o) => (o.node.children?.length ?? 0) > 1)) &&
+    (m.rootContent || m.type === 'SLOT' || m.occ.some((o) => (o.node.children?.length ?? 0) > 1)) &&
     m.occ.some((o) => (o.node.layout?.spacing ?? 0) !== 0)
   ) {
     const spacings = m.occ.map((o) => o.node.layout?.spacing ?? 0);
@@ -2618,7 +2624,7 @@ function invertNodeOpacity(
   if (distinct.length > 1) {
     // One boolean axis, opaque on the false side → stylesWhen.
     for (const axis of ctx.axes) {
-      if (!isBoolAxis(axis.values)) continue;
+      if (!isBooleanAxis(axis)) continue;
       const side = (want: string) =>
         new Set(
           occ
@@ -2971,7 +2977,7 @@ function liftUnboundShapePaintsToLiterals(
     } else {
       let axisFit: { propName: string; map: Record<string, Record<string, string>> } | null = null;
       for (const axis of ctx.axes) {
-        if (isBoolAxis(axis.values)) continue;
+        if (isBooleanAxis(axis)) continue;
         const byValue = new Map<string, string>();
         let fits = true;
         for (const row of values) {
@@ -3095,7 +3101,7 @@ function invertHiddenVisibility(m: Merged, part: Record<string, unknown>, ctx: C
     return;
   }
   for (const axis of ctx.axes) {
-    if (isBoolAxis(axis.values)) {
+    if (isBooleanAxis(axis)) {
       const fits = m.occ.every((o) => {
         const v = (axisValuesOf(o.variant)[axis.property] ?? '').trim().toLowerCase();
         return (o.node.hidden === true) === (v === 'false');
@@ -3254,7 +3260,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   let sizeByAxis: { propName: string; map: Record<string, { width: string; height: string }> } | null = null;
   if (sizes.length > 1) {
     for (const axis of ctx.axes) {
-      if (isBoolAxis(axis.values)) continue;
+      if (isBooleanAxis(axis)) continue;
       const byValue = new Map<string, { width: number; height: number }>();
       let fits = true;
       for (const s of shapes) {
@@ -3363,7 +3369,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   };
 
   for (const axis of ctx.axes) {
-    if (isBoolAxis(axis.values)) continue;
+    if (isBooleanAxis(axis)) continue;
     const byValue = new Map<string, (typeof shapes)[number]>();
     let fits = true;
     for (const s of shapes) {
@@ -5644,7 +5650,7 @@ function crossAxisFillByPropOn(
     }
   }
   for (const axis of ctx.axes) {
-    if (isBoolAxis(axis.values)) continue;
+    if (isBooleanAxis(axis)) continue;
     const byValue = new Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>();
     let fits = true;
     for (const x of modes) {
@@ -5749,7 +5755,7 @@ function invertLayout(
   // consumer's, so its interior justify/align are facts even when no
   // design-time content is drawn (the exam's empty Card Content slot). Read
   // through the node class, not the drawn child count.
-  const hasChildren = m.children.length > 0 || m.type === 'SLOT';
+  const hasChildren = m.rootContent || m.children.length > 0 || m.type === 'SLOT';
   // P21 overlap collections (AvatarGroup shape): negative itemSpacing in
   // EVERY variant means the children OVERLAP — the existing `layout.overlap`
   // vocabulary, whose shipped projection (ds.avatar-group owner-precedent:
@@ -5771,8 +5777,8 @@ function invertLayout(
   // `?? 'MIN'` — primary/counter are OMITTED on GRID captures (dump v1.17);
   // this path is flex-only (the GRID delegate returned above), so an absent
   // field can only be a hand-authored fixture and MIN is the API default.
-  const justify = JUSTIFY_INV[l.primary ?? 'MIN'];
-  const align = ALIGN_INV[l.counter ?? 'MIN'] ?? (stretchEvidence(m) ? 'stretch' : undefined);
+  const justify = JUSTIFY_INV[l.primary ?? 'MIN'] ?? (m.rootContent ? 'start' : undefined);
+  const align = ALIGN_INV[l.counter ?? 'MIN'] ?? (m.rootContent ? 'start' : stretchEvidence(m) ? 'stretch' : undefined);
   // WRAPPING (dump v1.12) — COUNTED BEFORE THE isRoot EARLY RETURN, and that
   // ordering is the whole point. The emitter has written `node.layoutWrap =
   // 'WRAP'` from `layout.wrap` since v15 while the dump never read it back, so
@@ -5791,7 +5797,7 @@ function invertLayout(
     // exactly there proposes no layout block.
     // @door propose.root-default-layout-elided
     // @lower propose.display-root-layout-elided
-    if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {
+    if (!m.rootContent && direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {
       return undefined;
     }
     out.display = 'flex';
@@ -5926,7 +5932,7 @@ function invertLayoutByProp(
   const base = tuples[0].tuple!;
   if (tuples.every((t) => key(t.tuple!) === key(base))) return undefined;
   for (const axis of ctx.axes) {
-    if (isBoolAxis(axis.values)) continue;
+    if (isBooleanAxis(axis)) continue;
     const byValue = new Map<string, Tuple>();
     let fits = true;
     for (const t of tuples) {
@@ -5960,7 +5966,7 @@ function invertLayoutByProp(
   }
   // ROUND 6 — the BOOLEAN axis, carried through stylesWhen (see the header).
   for (const axis of ctx.axes) {
-    if (!isBoolAxis(axis.values)) continue;
+    if (!isBooleanAxis(axis)) continue;
     const byValue = new Map<string, Tuple>();
     let fits = true;
     for (const t of tuples) {
@@ -6018,7 +6024,7 @@ function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, wher
     .filter((o) => o.node.text?.characters !== undefined)
     .map((o) => ({ variant: o.variant, chars: o.node.text!.characters! }));
   if (obs.length < 2 || new Set(obs.map((o) => o.chars)).size <= 1) return;
-  for (const axis of ctx.axes.filter((a) => !isBoolAxis(a.values))) {
+  for (const axis of ctx.axes.filter((a) => !isBooleanAxis(a))) {
     const byValue = new Map<string, string>();
     let pure = true;
     for (const o of obs) {
@@ -6077,7 +6083,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
       // A true/false axis promotes to a BOOLEAN prop (see the props pass) —
       // `equals: "true"` would refuse at the referee (visibleWhen.equals is
       // enum vocabulary). The truthy form `{ prop }` is the boolean spelling.
-      if (isBoolAxis(axis.values)) {
+      if (isBooleanAxis(axis)) {
         if (value.trim().toLowerCase() === 'true') {
           ctx.notes.push(
             `${where}: present exactly where "${axis.property}" is true — proposed as visibleWhen { prop: ${axis.propName} } (boolean axis, truthy form)`,
@@ -6100,7 +6106,7 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
   // leadingDropdown/trailingDropdown). Membership carries as the array form
   // of visibleWhen.equals. Subset values keep the axis's declared order.
   for (const axis of ctx.axes) {
-    if (isBoolAxis(axis.values)) continue;
+    if (isBooleanAxis(axis)) continue;
     const presentValues = axis.values.filter((value) =>
       ctx.totalVariants.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value),
     );
@@ -6345,7 +6351,7 @@ function threadInstanceProps(
   instanceOf: string,
 ) {
   if (perOccurrence.length < 2) return;
-  const enumAxes = ctx.axes.filter((a) => !isBoolAxis(a.values));
+  const enumAxes = ctx.axes.filter((a) => !isBooleanAxis(a));
   for (const propName of Object.keys(base)) {
     const values = perOccurrence
       .filter((o) => o.canonical[propName] !== undefined)
@@ -6413,7 +6419,7 @@ function threadInstanceProps(
       // NAMED with its axis instead of the false "without tracking any enum
       // axis" receipt, and the first value stays carried.
       let boolFn: { axis: Axis; whenFalse: string; whenTrue: string } | undefined;
-      for (const a of ctx.axes.filter((ax) => isBoolAxis(ax.values))) {
+      for (const a of ctx.axes.filter((ax) => isBooleanAxis(ax))) {
         const byValue = new Map<string, string>();
         let pure = values.length > 0;
         for (const v of values) {
@@ -6518,7 +6524,7 @@ function carryTextOverrides(
   }
   // Varying: a pure function of one enum axis binds as a per-value lookup —
   // the same classification threadInstanceProps applies to applied props.
-  for (const axis of ctx.axes.filter((a) => !isBoolAxis(a.values))) {
+  for (const axis of ctx.axes.filter((a) => !isBooleanAxis(a))) {
     const byValue = new Map<string, string>();
     let pure = true;
     for (const v of values) {
@@ -10188,6 +10194,7 @@ export function proposeFromDump(
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
+  const rootContent = readRootContent(set);
   // PHASE 2 EXAM (rest-instance-slot-prop-value): a nested instance's
   // SLOT-typed property value arrives from the REST route as the API's own
   // `{ guid: … }` OBJECT — a slot-content node reference, not a prop value.
@@ -10196,6 +10203,7 @@ export function proposeFromDump(
   // exact mode). Stripped here, on a private clone, BY NAME per node.
   const slotValueReceipts: string[] = [];
   set = stripNonScalarAppliedProps(set, slotValueReceipts);
+  const typedAxes = readCodeValueAxes(set);
   const unsetAxes = readUnsetVariantAxes(set);
   if (unsetAxes.length) set = orderUnsetObservations(set);
   const sourceProjection = validateExactVariantProjection(set);
@@ -10254,7 +10262,7 @@ export function proposeFromDump(
   // DEFAULT mode's variants only — the other modes never feed anatomy,
   // facts, or the mint pass (their resolved literals are receipts, not a
   // second palette).
-  const modePromo = detectModeAxis(applyDeclaredAxisDefaults(parseAxes(set.variants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property)), set.variants, set.setName, preNotes);
+  const modePromo = detectModeAxis(applyDeclaredAxisDefaults(parseAxes(set.variants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property) && !typedAxes.some(u => u.property === a.property)), set.variants, set.setName, preNotes);
   if (projectionMode === 'exact' && modePromo) {
     semanticProjectionRefusal(sourceProjection, modePromo.axis, 'token-mode');
   }
@@ -10276,7 +10284,7 @@ export function proposeFromDump(
   // are the base the whole pipeline runs on; each promoted state's variants
   // (and the disabled group) are kept aside, names stripped of the state
   // pair, for the root-diff pass after the anatomy is built.
-  let statePromo = detectStateAxis(applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property)), preNotes);
+  let statePromo = detectStateAxis(applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set).filter(a => !unsetAxes.some(u => u.property === a.property) && !typedAxes.some(u => u.property === a.property)), preNotes);
   let baseVariants: DumpNode[] | null = null;
   const stateGroups = new Map<PromotedState, DumpNode[]>();
   let disabledGroup: DumpNode[] = [];
@@ -10332,6 +10340,12 @@ export function proposeFromDump(
 
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
   const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
+  for (const mapped of typedAxes) {
+    const axis = axes.find(a => a.property === mapped.property);
+    if (!axis) throw Error(`FIGMA_CODE_VALUES_PROJECTION_UNSUPPORTED:${mapped.property}`);
+    axis.codeValues = mapped;
+    axis.propName = mapped.propName;
+  }
   for (const omitted of unsetAxes) {
     const axis = axes.find(a => a.property === omitted.property);
     if (!axis || axis.values[0] !== omitted.unsetValue)
@@ -10339,7 +10353,7 @@ export function proposeFromDump(
     axis.omitted = omitted;
     axis.propName = omitted.propName;
   }
-  const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
+  const enumAxes = axes.filter((a) => !isBooleanAxis(a));
 
   // Self contract id — the STAMPED id outranks the name-derived slug
   // (FC-DUMP-PROPOSE-CONTRACT-ID-DROPPED). A set this pipeline drew already
@@ -10438,7 +10452,7 @@ export function proposeFromDump(
           axes: [
             ...enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(v => axisValue(a, v)) })),
             ...axes
-              .filter((a) => isBoolAxis(a.values))
+              .filter((a) => isBooleanAxis(a))
               .map((a) => ({ propName: a.propName, values: ['true', 'false'], bool: true as const })),
           ],
           axisValuesByVariant: new Map(
@@ -10446,7 +10460,7 @@ export function proposeFromDump(
               const record: Record<string, string> = {};
               for (const [property, value] of Object.entries(axisValuesOf(v))) {
                 const axis = axes.find((a) => a.property === property);
-                if (axis) record[axis.propName] = isBoolAxis(axis.values) ? value.trim().toLowerCase() : axisValue(axis, value);
+                if (axis) record[axis.propName] = isBooleanAxis(axis) ? value.trim().toLowerCase() : axisValue(axis, value);
               }
               return [v, record];
             }),
@@ -10495,6 +10509,7 @@ export function proposeFromDump(
     ctx.notes,
     `${set.setName}:root`,
   );
+  if (rootContent) merged.rootContent = true;
   const where = `${set.setName}:root`;
 
   // ROUND 3 — instance TEXT overrides, child half: resolve the cross-set
@@ -10512,7 +10527,7 @@ export function proposeFromDump(
   const root: Record<string, unknown> = {};
   const rootKeyByChildName = new Map<string, string>();
   const rootLayout = invertLayout(merged, true, null, ctx, where);
-  if (rootLayout) root.layout = rootLayout;
+  if (rootLayout) root.layout = rootContent ? { ...rootLayout, display: rootContent.display } : rootLayout;
   applyLayoutSplit(root, invertLayoutByProp(merged, ctx, where));
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootDeclared: Record<string, string> = {};
@@ -10574,7 +10589,13 @@ export function proposeFromDump(
   const promotedLabel =
     soleLabel && !autoLabel ? ctx.textPromote?.get(`${where}/label`.slice(`${ctx.setName}:root/`.length)) : undefined;
   const unboundRootText = soleLabel && !autoLabel && promotedLabel === undefined;
-  if (only && (autoLabel || unboundRootText)) {
+  if (rootContent) {
+    const slot: Record<string, unknown> = { name: 'children' };
+    if (rootContent.property !== 'Children') slot.bindings = { figma: { property: rootContent.property } };
+    applySlotAccepts(slot, rootContent.property, ctx, where, true);
+    root.slot = slot;
+    ctx.notes.push(`${where}: verified compiler root content container restored as root children; no extra code element`);
+  } else if (only && (autoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
@@ -10744,7 +10765,7 @@ export function proposeFromDump(
   // author would write and extract/propose.ts conventions.
   const props: Array<Record<string, unknown>> = [];
   for (const axis of axes) {
-    if (isBoolAxis(axis.values)) {
+    if (isBooleanAxis(axis)) {
       props.push({
         name: axis.propName,
         type: 'boolean',
@@ -10765,8 +10786,8 @@ export function proposeFromDump(
     }
     props.push({
       name: axis.propName,
-      type: axis.omitted?.valueType === 'boolean' ? 'boolean' : { enum: axis.omitted ? axis.omitted.values.map(v => v.value) : axis.values.map(camel) },
-      ...(axis.omitted ? {} : { default: camel(axis.values[0]) }),
+      type: axis.omitted?.valueType === 'boolean' ? 'boolean' : { enum: axis.omitted ? axis.omitted.values.map(v => v.value) : axis.values.map(v => axisValue(axis, v)) },
+      ...(axis.omitted ? {} : { default: axisValue(axis, axis.values[0]) }),
       bindings: {
         figma: {
           kind: 'VARIANT',
@@ -11402,6 +11423,7 @@ export function proposeFromDump(
 
   // Refuse to emit an unusable proposal.
   lowerUnsetProposal(contract, unsetAxes.map(a => ({ ...a, internalValue: camel(a.unsetValue) })));
+  restoreCodeValueAxes(contract, typedAxes);
   ContractSchema.parse(contract);
   for (const stub of childStubs) ContractSchema.parse(stub);
   if (stampNote) {

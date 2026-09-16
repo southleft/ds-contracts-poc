@@ -166,9 +166,106 @@ test("legacy compiler options are acknowledged for reading without hiding type e
     assert.ok(broken.problems.some((p) => p.includes("TS2307")));
   }));
 
-test('an explicitly any-typed inherited property is retained by name beside usable typed facts',()=>fixture(dir=>{
- writeFileSync(path.join(dir,'primitive.ts'),declarations.replace('checked?:Checked','inlist?:any;checked?:Checked'));
- const result=readReactSourceProgram(dir,['components.tsx']);assert.equal(result.status,'refused');
- const toggle=result.components.find(c=>c.name==='Toggle')!;assert.equal(toggle.props.find(p=>p.name==='inlist')!.type.kind,'any');
- assert.ok(toggle.problems.includes('unresolved-prop-type:inlist'));assert.equal(toggle.props.find(p=>p.name==='checked')!.type.kind,'union');
-}));
+test("an explicitly any-typed inherited property is retained by name beside usable typed facts", () =>
+  fixture((dir) => {
+    writeFileSync(
+      path.join(dir, "primitive.ts"),
+      declarations.replace("checked?:Checked", "inlist?:any;checked?:Checked"),
+    );
+    const result = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.equal(result.status, "refused");
+    const toggle = result.components.find((c) => c.name === "Toggle")!;
+    assert.equal(
+      toggle.props.find((p) => p.name === "inlist")!.type.kind,
+      "any",
+    );
+    assert.ok(toggle.problems.includes("unresolved-prop-type:inlist"));
+    assert.equal(
+      toggle.props.find((p) => p.name === "checked")!.type.kind,
+      "union",
+    );
+  }));
+
+test("children flow respects input identity, JSX precedence, exclusion, defaults and mutation", () =>
+  fixture((dir) => {
+    const body = `type API={children?:string;className?:string};
+export function Spread(props:API){return <div {...props}/>;}
+export function Rest({className,...rest}:API){return <div className={className} {...rest}/>;}
+export function Renamed({children:body,...rest}:API){return <div {...rest}>{body}</div>;}
+export function Member(props:API){return <div>{props.children}</div>;}
+export function Index(props:API){return <div children={props['children']}/>;}
+export function ExplicitLast(props:API){return <div {...props} children="fixed"/>;}
+export function SpreadLast(props:API){return <div children="fixed" {...props}/>;}
+export function NestedWins(props:API){return <div {...props}>fixed</div>;}
+export function Newline(props:API){return <div {...props}>\n   </div>;}
+export function Space(props:API){return <div {...props}> </div>;}
+export function Comment(props:API){return <div {...props}>{/* no override */}</div>;}
+export function Removed({children,...rest}:API){return <div {...rest}/>;}
+export function Defaulted({children='fallback'}:API){return <div>{children}</div>;}
+export function Changed(props:API){props.children='changed';return <div {...props}/>;}
+export function Escaped(props:API){Object.assign(props,{children:'changed'});return <div {...props}/>;}
+export function Transformed({children}:API){return <div>{children?.toUpperCase()}</div>;}
+export function Composed({children}:API){return <div>prefix{children}</div>;}
+export function UnknownLast(props:API){const other={};return <div {...props} {...other}/>;}
+export function ExplicitWins(props:API){const other={};return <div {...other} children={props.children}/>;}
+export function Primitive(props:API){return <div {...props}/>;}
+export function Imported(props:API){return <Primitive {...props}/>;}
+export function Shadowed(props:API){const identity=(props:API)=>props.children;return <div {...props}/>;}
+export function FalseMatch(props:API){const children='fixed';return <div>{children}</div>;}
+export function Early(props:API){if(props.children)return <div/>;return <div {...props}/>;}
+export function Arguments(props:API){arguments[0].children='changed';return <div {...props}/>;}
+export function Evaluated(props:API){eval("props.children='changed'");return <div {...props}/>;}
+export function Loop(props:API){while(Math.random()>0.5){return <div/>;}return <div {...props}/>;}
+export function SiblingDefault({children,x=(children='replaced')}:{children?:string;x?:string}){return <div>{children}</div>;}
+`;
+    writeFileSync(
+      path.join(dir, "components.tsx"),
+      "import './primitive';\n" + body,
+    );
+    const p = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(p.problems, []);
+    const fact = (name: string) =>
+      p.components.find((c) => c.name === name)!.children;
+    for (const name of [
+      "Spread",
+      "Rest",
+      "Renamed",
+      "Member",
+      "Index",
+      "SpreadLast",
+      "Newline",
+      "Comment",
+      "ExplicitWins",
+      "Imported",
+      "Shadowed",
+    ])
+      assert.equal(
+        fact(name).kind,
+        "forwarded",
+        `${name}: ${JSON.stringify(fact(name))}`,
+      );
+    for (const name of ["ExplicitLast", "NestedWins", "Space"])
+      assert.equal(fact(name).kind, "replaced", name);
+    assert.equal(fact("Removed").kind, "absent");
+    for (const name of [
+      "Defaulted",
+      "Changed",
+      "Escaped",
+      "Transformed",
+      "Composed",
+      "UnknownLast",
+      "FalseMatch",
+      "Early",
+      "Loop",
+      "Arguments",
+      "Evaluated",
+      "SiblingDefault",
+    ])
+      assert.equal(
+        fact(name).kind,
+        "unresolved",
+        `${name}: ${JSON.stringify(fact(name))}`,
+      );
+    assert.equal(fact("Changed").reason, "children-input-escape-or-mutation");
+    assert.equal(fact("Early").reason, "children-control-flow-unresolved");
+  }));

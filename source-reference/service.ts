@@ -1,4 +1,5 @@
 import { createReactReferenceService } from './react-reference.js';
+import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
 import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
@@ -104,7 +105,7 @@ export function createReferenceService(
   > = {},
   nativeOptions?: NativeOperationJobsOptions,
 ) {
-  const reactReference = createReactReferenceService(repoRoot);
+  const reactReference = createReactReferenceService(repoRoot, undefined, () => ({ jobs: nativeJobs, transport: nativeTransport }));
   const evidenceRoot = path.join(repoRoot, "private", "source-reference-app");
   const checkout = path.resolve(repoRoot, "..", "altitude");
   const jobs = new Map<string, ReferenceJob>();
@@ -124,6 +125,17 @@ export function createReferenceService(
   const nativeJobs = createNativeOperationJobs(
     repoRoot,
     nativeOptions ?? {
+      react: {
+        prepare: (request, operation) => ({
+          visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
+          preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
+          plan: prepareReactNativePlan({ ...reactReference.nativeEvidence(request), operation }),
+        }),
+        buildComponent: (request, context) => buildReactNativeComponentWrite({
+          ...reactReference.nativeEvidence(request), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
       prepare: (request, operation) =>
         prepareVerifiedNativeOperation(
           repoRoot,

@@ -1,3 +1,4 @@
+import type { ReactOwnershipReport } from "../../../source-reference/react-ownership-run";
 import type { ReactProgramProposal } from "../../../source-reference/react-program-proposal";
 import type {
   ReactSourceComponent,
@@ -5,6 +6,7 @@ import type {
 } from "../../../source-reference/react-source-program";
 import type { ReactValidation } from "../../../source-reference/react-reference-validation";
 import { useEffect, useState } from "react";
+import { ReactNativeInspection } from './ReactNativeInspection';
 interface Reference {
   id: string;
   source: string;
@@ -12,6 +14,7 @@ interface Reference {
   sourceFiles: number;
   qualification: "unqualified";
   validation?: ReactValidation | null;
+  ownership?: ReactOwnershipReport | null;
   cases: { id: string; subject: string; label: string; url: string }[];
 }
 function rootLabel(root: ReactRootFact): string {
@@ -40,6 +43,48 @@ export function ReactSourceReference() {
     problems: string[];
   } | null>(null);
   const [readingProgram, setReadingProgram] = useState(false);
+  const [ownership, setOwnership] = useState<ReactOwnershipReport | null>(null);
+  async function traceOwnership() {
+    if (!reference) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/source-reference/react/${reference.id}/ownership`,
+        { method: "POST" },
+      );
+      const data = await response.json();
+      if (!response.ok) throw Error(data.error);
+      setOwnership(data);
+    } catch (e) {
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Component structure could not be observed.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  useEffect(() => {
+    if (!reference || ownership?.state !== "running") return;
+    let cancelled = false;
+    const timer = setInterval(() => {
+      void fetch(`/api/source-reference/react/${reference.id}/ownership`)
+        .then(async (response) => {
+          const data = await response.json();
+          if (!response.ok) throw Error(data.error);
+          if (!cancelled) setOwnership(data);
+        })
+        .catch((e) => {
+          if (!cancelled) setError(String(e));
+        });
+    }, 1500);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [reference?.id, ownership?.state]);
   async function inspectProgram() {
     if (!reference) return;
     setReadingProgram(true);
@@ -64,6 +109,7 @@ export function ReactSourceReference() {
   async function load() {
     setBusy(true);
     setProgram(null);
+    setOwnership(null);
     setError("");
     try {
       const response = await fetch("/api/source-reference/react", {
@@ -73,6 +119,7 @@ export function ReactSourceReference() {
       if (!response.ok) throw Error(result.error);
       setReference(result);
       setValidation(result.validation ?? null);
+      setOwnership(result.ownership ?? null);
       setLoadVersion((v) => v + 1);
     } catch (e) {
       setReference(null);
@@ -140,7 +187,12 @@ export function ReactSourceReference() {
       <button
         type="button"
         onClick={() => void load()}
-        disabled={busy || readingProgram || validation?.state === "running"}
+        disabled={
+          busy ||
+          readingProgram ||
+          validation?.state === "running" ||
+          ownership?.state === "running"
+        }
       >
         {busy
           ? "Loading React originals…"
@@ -171,7 +223,12 @@ export function ReactSourceReference() {
           <button
             type="button"
             onClick={() => void validate()}
-            disabled={busy || readingProgram || validation?.state === "running"}
+            disabled={
+              busy ||
+              readingProgram ||
+              validation?.state === "running" ||
+              ownership?.state === "running"
+            }
           >
             {validation?.state === "running"
               ? "Validating React sources…"
@@ -207,6 +264,157 @@ export function ReactSourceReference() {
               </ul>
             </div>
           )}
+          <section aria-label="React component structure">
+            <h3>Component structure</h3>
+            <p>
+              Locate mounted components and their nested instances in the
+              original render. A separate observation must match the original
+              screenshot and measured tree. Finite style properties are then
+              varied in an isolated copy and the original render is restored.
+              This does not yet generate or qualify Figma output.
+            </p>
+            <button
+              type="button"
+              disabled={
+                busy ||
+                readingProgram ||
+                validation?.state === "running" ||
+                ownership?.state === "running"
+              }
+              onClick={() => void traceOwnership()}
+            >
+              {ownership?.state === "running"
+                ? "Tracing React structure…"
+                : "Trace React structure"}
+            </button>
+            <ReactNativeInspection key={reference.id} referenceId={reference.id} selectedCase={selected} ownership={ownership} />
+            {ownership && (
+              <>
+                <p role="status">
+                  {ownership.state === "running"
+                    ? `${ownership.rows.length} of ${ownership.denominator} cases reached; results provisional.`
+                    : `${ownership.matched} / ${ownership.denominator} cases matched the original during structure observation.`}
+                </p>
+                {ownership.problem && <p>{ownership.problem}</p>}
+                {ownership.rows.map((row) => (
+                  <details key={row.id}>
+                    <summary>
+                      {row.id} ·{" "}
+                      {ownership.state === "running"
+                        ? "provisional"
+                        : row.matched
+                          ? "render unchanged"
+                          : "not verified"}
+                    </summary>
+                    {row.problems.length > 0 && (
+                      <p>{row.problems.join(" · ")}</p>
+                    )}
+                    <ul>
+                      {row.ownership?.components.map((instance) => (
+                        <li key={instance.id}>
+                          {instance.source.exportName}
+                          {instance.parent
+                            ? ` inside ${row.ownership?.components.find((i) => i.id === instance.parent)?.source.exportName ?? "unresolved parent"}`
+                            : " at the selected root"}{" "}
+                          · {instance.roots.length} rendered root
+                          {instance.roots.length === 1 ? "" : "s"}
+                        </li>
+                      ))}
+                    </ul>
+                    {ownership.state === "complete" && row.matched && row.anatomy && (
+                      <section aria-label={`${row.id} source anatomy`}>
+                        <h4>Source-to-rendered anatomy</h4>
+                        <p>Observed roots and caller content are linked below. Styling rules, native behavior and generation remain unqualified.</p>
+                        {row.anatomy.problems.length > 0 && <p>{row.anatomy.problems.join(" · ")}</p>}
+                        <ul>{row.anatomy.instances.map(instance => (
+                          <li key={instance.instanceId}>
+                            {instance.source.exportName}: {instance.roots.map(root => `<${root.tag}> (${root.correspondence})`).join(", ")}
+                            {instance.content === "caller-slot" ? " · reusable caller-content slot; sample children are not component anatomy" : instance.content === "unresolved" ? " · content ownership unresolved" : " · authored or dependency-rendered content"}
+                            {instance.dependencies.length > 0 && ` · ${instance.dependencies.length} nested component instance(s) kept as references`}
+                            {instance.problems.length > 0 && ` · ${instance.problems.join(" · ")}`}
+                          </li>
+                        ))}</ul>
+                      </section>
+                    )}
+                    {ownership.state === "complete" && row.matched && row.rootVisual && (
+                      <section aria-label={`${row.id} native root check`}>
+                        <h4>Native conversion check</h4>
+                        <p>Checks the observed root box against the native compiler. This does not create Figma components or qualify the full component.</p>
+                        {row.rootVisual.problems.length > 0 && <p>{row.rootVisual.problems.join(" · ")}</p>}
+                        <ul>{row.rootVisual.roots.map(root => (
+                          <li key={root.instanceId}>
+                            {root.source.exportName}: {root.status === "native-compiled" ? "root layout and styles compiled; content and API assembly pending" : root.status === "style-prepared" ? "styles prepared; native layout unsupported" : "source content needs further mapping"}
+                            {root.problems.length > 0 && ` · ${root.problems.join(" · ")}`}
+                            {!!root.sourceBindings?.length && <ul aria-label={`${root.source.exportName} source token bindings`}>
+                              {root.sourceBindings.map(binding => <li key={binding.channel}>
+                                {binding.channel}: {binding.tokenPath ? `${binding.variable} retained as a shared source token` : `source binding unresolved (${binding.reason})`}
+                              </li>)}
+                            </ul>}
+                            {!!root.residuals?.length && ` · ${root.residuals.length} style facts remain outside the projection`}
+                            {!!root.residuals?.length && <details>
+                              <summary>Unprojected styles for {root.source.exportName}</summary>
+                              <ul>{root.residuals.map((fact, index) => <li key={`${fact.channel}-${index}`}>{fact.channel}: {fact.reason}</li>)}</ul>
+                            </details>}
+                          </li>
+                        ))}</ul>
+                        <p>Measured values are provisional. Sample sizes, other property combinations, unresolved token bindings, token modes and native visual fidelity remain unqualified.</p>
+                      </section>
+                    )}
+                    {ownership.state === "complete" && row.matched && row.rootMatrix && (
+                      <section aria-label={`${row.id} root matrix`}>
+                        <h4>Combined root style draft</h4>
+                        <p>Selected finite properties are observed together. The draft preserves their root styling and a replaceable children slot. Fixed source sizes are retained where their origin is verified. Boolean state, nested styling, responsive sizing and native visual fidelity remain unqualified.</p>
+                        {row.rootMatrix.problems.length>0 && <p>{row.rootMatrix.problems.join(" · ")}</p>}
+                        {row.rootMatrix.draft && [row.rootMatrix.draft].map(draft=><details key="draft">
+                          <summary>{draft.properties.join(" × ")}: {draft.status==="native-compiled"?`${draft.native?.variants.length} native root combinations compiled`:draft.status==="style-prepared"?"styles prepared; native compilation incomplete":"assembly refused"}</summary>
+                          {draft.problems.length>0 && <p>{draft.problems.join(" · ")}</p>}
+                          {draft.contract?.props.map(prop=><p key={prop.name}>{prop.name}: {Object.values(prop.bindings.code.values ?? (typeof prop.type==="object" && "enum" in prop.type ? Object.fromEntries(prop.type.enum.map(v=>[v,v])) : {})).map(v=>JSON.stringify(v)).join(", ")}</p>)}
+                          {draft.sizing?.map(size=><p key={size.channel}>{size.channel}: {size.status==="retained"?"source constraint retained":size.status==="intrinsic"?"automatic sizing; sample dimensions not fixed":`not projected (${size.reason})`}</p>)}
+                          {!!draft.lowerings.length && <p>{draft.lowerings.length} normal flex-gap values use equivalent zero spacing.</p>}
+                          {!!draft.residuals?.length && <details><summary>Unprojected styling</summary><ul>{draft.residuals.map((r,i)=><li key={i}>{r.channel}: {r.reason}</li>)}</ul></details>}
+                        </details>)}
+                      </section>
+                    )}
+                    {ownership.state === "complete" && row.matched && row.propertyMatrix && (
+                      <section aria-label={`${row.id} property matrix`}>
+                        <h4>Combined source property effects</h4>
+                        <p>{row.propertyMatrix.rows.filter(r=>r.status==="observed").length} / {row.propertyMatrix.planned} planned combinations observed. Each changes all selected properties in one React update and verifies restoration. Omission is observed separately before any default is collapsed.</p>
+                        {row.propertyMatrix.axes.map(axis=><p key={axis.property}>{axis.property}: {axis.values.map(v=>v.kind==="omit"?"omitted":JSON.stringify(v.value)).join(", ")}</p>)}
+                        {row.propertyMatrix.problems.length>0 && <p>{row.propertyMatrix.problems.join(" · ")}</p>}
+                        <details><summary>Properties outside this observation</summary>{row.propertyMatrix.skipped.map(p=><p key={p.property}>{p.property}: {p.reason}</p>)}</details>
+                        <details><summary>Review observed combinations</summary>{row.propertyMatrix.rows.map(effect=><details key={effect.id}>
+                          <summary>{Object.entries(effect.changes).map(([property,value])=>`${property} = ${value.kind==="omit"?"omitted":JSON.stringify(value.value)}`).join(" · ")} · {effect.status==="refused" ? "not verified" : effect.visibleChange ? "visible change; original restored" : "no visible change; original restored"}</summary>
+                          {effect.problem && <p>{effect.problem}</p>}
+                          {!!effect.changedInstances?.length && <details><summary>Changed component styles</summary>{effect.changedInstances.map(i=><p key={i.instanceId}>{i.name}: {i.channels.join(", ")}</p>)}</details>}
+                          {effect.status==="observed" && <div className="native-image-pair">
+                            <figure><figcaption>Original example · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img loading="lazy" alt={`${row.id} original before property changes`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/source/${row.sourceImage}.png`}/></figure>
+                            <figure><figcaption>Observed combination {effect.id} · <a href={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/matrix/${effect.id}/${effect.image}.png`} target="_blank" rel="noreferrer">Full size</a></figcaption><img loading="lazy" alt={`${row.id} observed combination ${effect.id}`} src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/matrix/${effect.id}/${effect.image}.png`}/></figure>
+                          </div>}
+                        </details>)}</details>
+                      </section>
+                    )}
+                    {ownership.state === "complete" && row.matched && (
+                      <div className="native-image-pair">
+                        {(["source", "observed"] as const).map((side) => (
+                          <figure key={side}>
+                            <figcaption>
+                              {side === "source"
+                                ? "Untouched original"
+                                : "Component observation — same render"}
+                            </figcaption>
+                            <img
+                              alt={`${row.id} ${side} structure check`}
+                              src={`/api/source-reference/react/${reference.id}/ownership/${ownership.id}/${row.id}/${side}/${side === "source" ? row.sourceImage : row.observedImage}.png`}
+                            />
+                          </figure>
+                        ))}
+                      </div>
+                    )}
+                  </details>
+                ))}
+              </>
+            )}
+          </section>
           {program?.proposal && (
             <section aria-label="React contract proposals">
               <h3>Contract proposals from installed APIs</h3>
@@ -223,6 +431,10 @@ export function ReactSourceReference() {
                     carried; {component.unsupported.length} unsupported
                   </summary>
                   <p>Carried: {component.carried.join(", ") || "None"}</p>
+                  <p>
+                    Reusable content slots:{" "}
+                    {component.slots.join(", ") || "None verified"}
+                  </p>
                   <ul>
                     {component.unsupported.map((prop) => (
                       <li key={prop.name}>
@@ -268,7 +480,10 @@ export function ReactSourceReference() {
             <button
               type="button"
               disabled={
-                busy || readingProgram || validation?.state === "running"
+                busy ||
+                readingProgram ||
+                validation?.state === "running" ||
+                ownership?.state === "running"
               }
               onClick={() => void inspectProgram()}
             >
@@ -418,8 +633,9 @@ export function ReactSourceReference() {
             Original at 900 px wide. Scroll horizontally on smaller screens.
           </p>
           <p>
-            Source checks do not qualify Figma conversion. Native generation is
-            the next integration step. The existing import workspace remains
+            Source checks do not qualify Figma conversion. Native root inspection
+            is available for supported drafts; complete content, state and visual
+            comparisons remain unfinished. The existing import workspace remains
             available from <a href="/playground">Playground</a>.
           </p>
         </>

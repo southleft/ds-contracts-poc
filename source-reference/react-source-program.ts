@@ -1,4 +1,5 @@
 import ts from "typescript";
+import { readReactChildren, type ReactChildrenFact } from "./react-children.js";
 import { createHash } from "node:crypto";
 import { readFileSync, realpathSync } from "node:fs";
 import path from "node:path";
@@ -48,6 +49,7 @@ export interface ReactSourceComponent {
   markers: { name: string; value: string }[];
   defaults: Record<string, string | number | boolean | null>;
   forwardedProps: string[];
+  children: ReactChildrenFact;
   componentReferences: {
     span: { start: number; end: number };
     target: ReactRootFact;
@@ -267,6 +269,10 @@ export function readReactSourceProgram(
           markers: [],
           defaults: {},
           forwardedProps: [],
+          children: {
+            kind: "unresolved",
+            reason: "single-jsx-root-unresolved",
+          },
           componentReferences: [],
           problems: [],
         };
@@ -399,6 +405,16 @@ export function readReactSourceProgram(
           rootNode &&
           (ts.isJsxElement(rootNode) || ts.isJsxSelfClosingElement(rootNode))
         ) {
+          component.children = component.problems.includes(
+            "component-return-control-flow-unresolved",
+          )
+            ? { kind: "unresolved", reason: "children-control-flow-unresolved" }
+            : readReactChildren(
+                fn,
+                rootNode,
+                checker,
+                component.props.some((p) => p.name === "children"),
+              );
           const opening = ts.isJsxElement(rootNode)
             ? rootNode.openingElement
             : rootNode;

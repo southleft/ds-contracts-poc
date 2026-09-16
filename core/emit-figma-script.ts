@@ -1,3 +1,5 @@
+import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
+import { prepareNativeContractDraft, type NativeContractDraftSource, type NativeContractPartIdentity } from './native-contract-draft.js';
 /**
  * Contract → Figma sync-script text — the PURE core of scripts/generate-figma.ts.
  *
@@ -65,7 +67,7 @@ import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js'
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 import { checkRequiredFacts, type Posture } from './required-facts.js';
-import { canonicalJson } from './contract-provenance.js';
+import { canonicalJson, revisionOf } from './contract-provenance.js';
 import {
   resolveNativeSourceProjection,
   type NativeSourcePartIdentity,
@@ -124,9 +126,12 @@ export interface NodeSpec {
   name: string;
   /** Private compile-only source identity; never inferred from a layer name. */
   nativeSourcePart?: NativeSourcePartIdentity;
+  nativeContractPart?: NativeContractPartIdentity;
   nativeSourceSample?: NativeSourceSampleIdentity;
   /** Qualified empty-main whole-wrapper state, never a public component prop. */
   nativeSourceVisible?: false;
+  /** Synthetic native content container; never a new React element. */
+  rootSlotContent?: true;
   layout?: LayoutSpec;
   bindings?: Record<string, string>;
   fill?: string;
@@ -610,6 +615,7 @@ export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxG
 }
 
 export interface ComponentData {
+  nativeContractDraft?: { revision: string; acceptedContract: null };
   /** Unaccepted inspection output. The writer refuses this until an exact
    * native token and operation context has a separately qualified path. */
   nativeSourceCandidate?: {
@@ -677,6 +683,9 @@ export interface ComponentData {
    *  answer instead of a convention. Omitted when no prop declares a Figma
    *  binding. */
   propNames?: Record<string, string>;
+  /** Canonical native options retain exact typed React values. */
+  codeValueAxes?: CodeValueAxes;
+  rootSlot?: { version: 1; property: string; display?: 'inline-flex' };
   /** Explicit omission semantics, not a new public enum value. */
   unsetVariantAxes?: {
     version: 1 | 2;
@@ -4892,6 +4901,25 @@ function nestedSlotNames(part: Part): string[] {
   return out;
 }
 
+/** Keep the source box on the component; its sole native slot owns only
+ * child flow. Padding/paint/borders stay on the source box and are not doubled.
+ * Runtime sizing is selected after append from the actual parent axes. */
+function rootContentSlot(root: Part, rootSpec: NodeSpec, contract: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>): NodeSpec {
+  if (!rootSpec.layout || rootSpec.layout.mode === 'GRID' || rootSpec.layout.wrap || isReversed(root, subst))
+    throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: each root plane must use non-wrapping flex layout');
+  const spec = partToSpecs('root-content', { slot: root.slot } as Part, contract, byId, ctx, subst)[0];
+  if (!spec || spec.type !== 'slot') throw new Error('FIGMA_ROOT_SLOT_INVALID: no native slot projection');
+  spec.rootSlotContent = true;
+  spec.layout = { ...rootSpec.layout };
+  // Figma ignores the minimum gap under SPACE_BETWEEN. Refuse that semantic
+  // mismatch rather than silently overlap changing caller content.
+  if (spec.layout.primary === 'SPACE_BETWEEN')
+    throw new Error('FIGMA_ROOT_SLOT_DISTRIBUTION_UNSUPPORTED: native space-between does not preserve the CSS minimum gap');
+  if (rootSpec.bindings?.itemSpacing !== undefined) spec.bindings = { itemSpacing: rootSpec.bindings.itemSpacing };
+  if (rootSpec.lits?.itemSpacing !== undefined) spec.lits = { itemSpacing: rootSpec.lits.itemSpacing };
+  return spec;
+}
+
 /** The SLOT property `description` — Figma's only surface for a slot fact it
  *  cannot enforce. `accepts` carries functionally as `preferredValues`, which
  *  is a PICKER HINT: it sorts the listed components to the top of the swap
@@ -5155,6 +5183,15 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   if (aliasConflicts.length) throw new Error(`FIGMA_UNSET_BINDING_COLLISION: ${aliasConflicts.join(', ')} collides with a prop, slot, event or generated event binding`);
   refuseUnresolvableRefs(contract, byId);
   refuseMissingRequiredFacts(contract);
+  if (contract.anatomy.root?.slot) {
+    const r = contract.anatomy.root;
+    if (r.slot!.name !== 'children' || r.parts || r.content || r.text !== undefined || r.icon || r.component || r.optional)
+      throw new Error('FIGMA_ROOT_SLOT_SHAPE_UNSUPPORTED: root content must be one unconditional children slot');
+    if (!r.layout || (r.layout.display !== 'flex' && r.layout.display !== 'inline-flex') || r.layout.wrap || r.layout.direction?.endsWith('-reverse'))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root slots currently require non-wrapping forward flex layout');
+    if (Object.values(r.layoutByProp?.map ?? {}).some(layout => layout.display !== undefined && layout.display !== r.layout!.display))
+      throw new Error('FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: changing outer display across variants needs per-plane content metadata');
+  }
   // Variant axes = enum props AND VARIANT-bound boolean props, in prop
   // declaration order (see isVariantBool). An enum-only contract's axis list
   // is exactly the old enum filter — byte-identical substitution space.
@@ -5303,7 +5340,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ) {
       rootSpec.blockRoot = true;
     }
-    if (root.icon && Object.keys(root.parts ?? {}).length === 0) {
+    if (root.slot) {
+      rootSpec.children = [rootContentSlot(root, rootSpec, contract, byId, ctx, subst)];
+    } else if (root.icon && Object.keys(root.parts ?? {}).length === 0) {
       // FC-ROOT-ICON-NOT-EMITTED (Flowbite Spinner, 2026-08-14).
       //
       // A contract may promote the icon onto the ROOT itself — Flowbite's
@@ -5477,7 +5516,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         ) {
           rootSpec.blockRoot = true;
         }
-        if (root.parts || hostsRootText) {
+        if (root.slot) {
+          rootSpec.children = [rootContentSlot(root, rootSpec, contract, byId, ctx, subst)];
+        } else if (root.parts || hostsRootText) {
           // v13: part-level state overrides apply INSIDE the preview variant
           // (withPartStateOverrides) — the State=Disabled cell draws the
           // disabled label color, mirroring .root:disabled .label on the CSS
@@ -5969,7 +6010,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ...(contract.documentationLinks && contract.documentationLinks.length > 0
       ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
       : {}),
-    isSet: variants.length + stateVariants.length > 1,
+    isSet: variants.length + stateVariants.length > 1 || contract.props.some(p => p.bindings.code.values !== undefined),
+    ...(contract.anatomy.root?.slot ? { rootSlot: { version: 1 as const, property: slotFigmaProperty(contract.anatomy.root.slot), ...(contract.anatomy.root.layout?.display === 'inline-flex' ? { display: 'inline-flex' as const } : {}) } } : {}),
+    ...(codeValueAxes(contract) ? { codeValueAxes: codeValueAxes(contract) } : {}),
     boolProps: boolPropsData,
     textProps: textOnlyProps,
     fontStyles: [...fontStyles],
@@ -7267,8 +7310,8 @@ function buildComponentScript(
  * not a supported writer boundary; callers must compile their Contracts. */
 function buildBatchScript(datas: ComponentData[], fileKey: string | null): string {
   for (const data of datas) {
-    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') ||
-        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
+    if (nativeCandidateData.has(data) || Object.hasOwn(data, 'nativeSourceCandidate') || Object.hasOwn(data, 'nativeContractDraft') ||
+        dataSome(data, (spec) => Object.hasOwn(spec, 'nativeContractPart') || Object.hasOwn(spec, 'nativeSourcePart') || Object.hasOwn(spec, 'nativeSourceVisible') || Object.hasOwn(spec, 'nativeSourceSample'))) {
       throw new Error('NATIVE_SOURCE_CANDIDATE_WRITE_CONTEXT_REQUIRED');
     }
     // Raw or mutated ComponentData cannot provide a route around guarded
@@ -7324,6 +7367,45 @@ function buildNativeSourceComponentScript(
   }));
 }
 
+/** Host inspection path for a normal Contract draft. This deliberately does not
+ * synthesize the paused retained-runtime candidate's template/binding identity.
+ * Recompile on every call; annotations and serialized data are not authority. */
+function compileNativeContractDraft(
+  contract: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+) {
+  const errors: string[] = [];
+  validateContract(contract, byId, errors, input.icons);
+  if (errors.length) throw Error('NATIVE_CONTRACT_DRAFT_INVALID: ' + errors.join('; '));
+  const data = compileComponentData(contract, byId);
+  if (compiledData.get(data) !== canonicalJson(data)) throw Error('FIGMA_COMPONENT_DATA_UNVERIFIED');
+  // Current observed React drafts carry one exact token tree. Do not silently
+  // claim a theme/brand overlay belongs to the independently observed variables.
+  if (Object.keys(input.tokens.semantic).length || Object.keys(input.tokens.light).length ||
+      Object.keys(input.tokens.dark).length || Object.values(input.tokens.brands).some(tree => Object.keys(tree).length))
+    throw Error('NATIVE_CONTRACT_DRAFT_TOKEN_OVERLAY_UNQUALIFIED');
+  return prepareNativeContractDraft(contract, data, source, revisionOf(input.tokens.primitives), {
+    mode: input.mode ?? 'light', brand: input.brand ?? 'default',
+  });
+}
+
+function buildNativeContractDraftScript(
+  contract: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+  context: NativeSourceWriteContext,
+): string {
+  if (context.comparisons) throw Error('NATIVE_CONTRACT_DRAFT_COMPARISON_MAPPING_REQUIRED');
+  const draft = compileNativeContractDraft(contract, byId, source);
+  const prepared = prepareNativeSourceWrite(draft.projection, context, draft.boundNames);
+  const scoped = { ...draft.component, contractId: prepared.descriptor.machineId, anchorKey: null };
+  return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
+    header: '// Shared renderer: operation-scoped unaccepted Contract draft.',
+    preamble: '', nativeSource: true,
+  }));
+}
+
 /** The ONE sync runtime (create + in-place amend), shared by the batch
  *  script and (#60 fix 2) every per-component script. `preamble` carries the
  *  minted-variable upsert for playground per-component emissions. */
@@ -7367,6 +7449,7 @@ function buildSyncScript(
   // grid runtime — a slot-less contract emits a byte-identical script and
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
+  const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
   // FC-SLOT-BIRTH-BOX generalized: the 100x100 birth box is NOT a slot fact.
   // It survives on ANY childless auto-layout node that reports HUG, because a
   // node with no children never triggers the relayout that would dissolve it.
@@ -7418,7 +7501,15 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
 
 await figma.loadAllPagesAsync();
 
-${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};
+${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
+  if (!spec.rootSlotContent) return;
+  // FILL under HUG can retain a stale extent (live probe 2026-09-16).
+  // Select from the current root after its size and bindings are applied.
+  const horizontal = parent.layoutMode === 'HORIZONTAL';
+  child.layoutSizingHorizontal = (horizontal ? parent.primaryAxisSizingMode : parent.counterAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';
+  child.layoutSizingVertical = (horizontal ? parent.counterAxisSizingMode : parent.primaryAxisSizingMode) === 'AUTO' ? 'HUG' : 'FILL';
+}
+` : ''}${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};
 const varByName = ${opts.nativeSource ? 'Object.create(null)' : '{}'};
 for (const v of allVars) varByName[v.name] = v;
 // FC-THEME-ISO: a multi-library file carries colliding variable names across
@@ -8142,7 +8233,7 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-    }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
+    }${hasRootSlot ? '\n    sizeRootContent(node, childNode, child);' : ''}${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
   }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -8257,6 +8348,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  set.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -8379,7 +8471,7 @@ async function amendSet(set, C) {
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-        }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
+        }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
       }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
       report.rebuiltVariants++;
     }${hasNestedPropertyControls ? `
@@ -8519,6 +8611,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  comp.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -8581,7 +8674,7 @@ async function amendComponent(comp, C) {
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-    }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
+    }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
   }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
   ${hasNestedPropertyControls ? `for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
   ` : ''}for (const t of registry.texts) {
@@ -8677,6 +8770,20 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -8825,6 +8932,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');${hasRootSlot ? "\n  target.setSharedPluginData('ds_contracts', 'rootSlot', C.rootSlot ? JSON.stringify(C.rootSlot) : '');" : ''}
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -8864,6 +8972,8 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     buildComponentScript,
     buildBatchScript,
     buildNativeSourceComponentScript,
+    compileNativeContractDraft,
+    buildNativeContractDraftScript,
     /** One token ref → its resolved literal, or a throw when the ref does not
      *  resolve. Exposed so a SHELL can grade a contract against this engine's
      *  own inventory instead of building a second, drifting resolver. */

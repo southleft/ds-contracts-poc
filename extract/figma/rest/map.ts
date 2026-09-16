@@ -1905,6 +1905,16 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     const stampedUnsetVariantAxes = rawUnsetVariantAxes === undefined ? undefined : (() => {
       try { return JSON.parse(rawUnsetVariantAxes) as unknown; } catch { return rawUnsetVariantAxes; }
     })();
+    const rawRootSlot = stampString('rootSlot');
+    const stampedRootSlot = rawRootSlot === undefined ? undefined : (() => {
+      try { return JSON.parse(rawRootSlot) as unknown; } catch { return rawRootSlot; }
+    })();
+    const rawCodeValueAxes = stampString('codeValueAxes');
+    // Preserve malformed JSON too: absence and corrupt omission semantics
+    // are not interchangeable observations.
+    const stampedCodeValueAxes = rawCodeValueAxes === undefined ? undefined : (() => {
+      try { return JSON.parse(rawCodeValueAxes) as unknown; } catch { return rawCodeValueAxes; }
+    })();
     const stampedSemantics = stampJson<{ element?: string; role?: string }>('semantics');
     const stampedStatePreviewAxis = stampJson<NonNullable<DumpSet['statePreviewAxis']>>('statePreviewAxis');
     // dump v1.5: INSTANCE_SWAP preferredValues, keyed by suffix-stripped
@@ -2045,6 +2055,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(stampedVersion ? { version: stampedVersion } : {}),
       ...(stampedPropNames ? { propNames: stampedPropNames } : {}),
       ...(stampedUnsetVariantAxes !== undefined ? { unsetVariantAxes: stampedUnsetVariantAxes } : {}),
+      ...(stampedRootSlot !== undefined ? { rootSlot: stampedRootSlot } : {}),
+      ...(stampedCodeValueAxes !== undefined ? { codeValueAxes: stampedCodeValueAxes } : {}),
       ...(stampedSemantics ? { semantics: stampedSemantics } : {}),
       ...(stampedStatePreviewAxis ? { statePreviewAxis: stampedStatePreviewAxis } : {}),
       ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),

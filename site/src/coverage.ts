@@ -225,6 +225,7 @@ reg("props", "bindings", [
   "prop.bindings.figma.unsetValue",
   "prop.bindings.code",
   "prop.bindings.code.prop",
+  "prop.bindings.code.values",
 ]);
 
 // --- Anatomy & parts -------------------------------------------------------
