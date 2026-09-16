@@ -8,6 +8,8 @@ import {
   readFileSync,
 } from "node:fs";
 import path from "node:path";
+import { createSourceFramingStore } from "./source-framing.js";
+import { recordedStoryUrl } from "./binding-evidence.js";
 import { createBindingJobs } from "./binding-jobs.js";
 import {
   createCandidateJobs,
@@ -617,6 +619,38 @@ export function createReferenceService(
       problems,
     };
   }
+  const sourceFraming = createSourceFramingStore(repoRoot, (run, story) => {
+    const job = jobs.get(run);
+    const fixed =
+      job && cohort(job.cohortId).find((entry) => entry.story === story);
+    const summary =
+      job && snapshot(job).rows.find((row) => row.story === story);
+    const file = fixed && evidenceFile(run, story, "measurement.json");
+    const row = file && read(file);
+    const sourceFile = fixed && evidenceFile(run, story, "source.png");
+    const harFile = fixed && evidenceFile(run, story, "source.har");
+    if (
+      !job ||
+      job.state !== "complete" ||
+      !fixed ||
+      summary?.status !== "valid" ||
+      !row ||
+      !sourceFile ||
+      !harFile ||
+      JSON.stringify(row.profile) !== JSON.stringify(fixed.profile) ||
+      !/^[a-f0-9]{64}$/.test(row.archive?.sha256 ?? "") ||
+      fileHash(harFile) !== row.archive.sha256
+    )
+      throw Error("source-framing-evidence-unavailable");
+    return {
+      source: readFileSync(sourceFile),
+      sourceSha256: row.source.sha256,
+      harPath: harFile,
+      harSha256: row.archive.sha256,
+      url: recordedStoryUrl(readFileSync(harFile), story),
+      profile: fixed.profile,
+    };
+  });
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
   const snapshotWithSupplement = (job: ReferenceJob) => {
     const connectionObservedAt = Date.now();
@@ -809,6 +843,43 @@ export function createReferenceService(
     }
     if (req.headers.origin && req.headers.origin !== host.origin) {
       json(res, 403, { error: "Same-origin access required." });
+      return;
+    }
+    const framingRoute =
+      /^([a-f0-9-]+)\/([a-z-]+)\/framing(?:\/([a-f0-9]{64})\.png)?$/.exec(
+        route,
+      );
+    if (framingRoute && (req.method === "GET" || req.method === "POST")) {
+      const [, run, story, imageHash] = framingRoute;
+      try {
+        if (!UUID.test(run) || !stories.has(story))
+          throw Error("source-framing-target-invalid");
+        if (req.method === "POST") {
+          const payload = await body(2048);
+          if (imageHash || !object(payload) || Object.keys(payload).length) {
+            json(res, 400, {
+              error:
+                "Only an empty object is accepted; the recorded source chooses the framing.",
+            });
+            return;
+          }
+          if (active || candidateJobs.running || bindingJobs.running)
+            throw Error("source-framing-busy");
+          json(res, 200, { frame: await sourceFraming.create(run, story) });
+        } else if (imageHash) {
+          const bytes = sourceFraming.image(run, story, imageHash);
+          res.setHeader("Content-Type", "image/png");
+          res.setHeader("Cache-Control", "no-store");
+          res.setHeader("X-Content-Type-Options", "nosniff");
+          res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+          res.end(bytes);
+        } else json(res, 200, { frame: sourceFraming.read(run, story) });
+      } catch {
+        json(res, req.method === "POST" ? 409 : 404, {
+          error:
+            "Source framing unavailable. The original must replay exactly and its recorded evidence must remain unchanged. Wait for any active framing request before retrying.",
+        });
+      }
       return;
     }
     const nativeImage =

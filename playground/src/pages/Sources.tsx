@@ -5,6 +5,7 @@ import type { BindingJobSnapshot } from "../../../source-reference/binding-jobs"
 import type { CandidateJobSnapshot } from "../../../source-reference/candidate-jobs";
 import type { NativeOperationSnapshot } from "../../../source-reference/native-operation-jobs";
 import "./sources.css";
+import { NativeImageComparison } from "./NativeImageComparison";
 
 interface Row {
   story: string;
@@ -1373,9 +1374,10 @@ export function Sources() {
                 >
                   <h3>Inspect native output</h3>
                   <p>
-                    Recorded source and native instance exports. Their framing
-                    and backgrounds may differ. Visual fidelity is unqualified;
-                    these images are not a pixel comparison or a pass.
+                    Open a state to frame its original and compare both images
+                    at the same scale. Framing is measured from an exact replay
+                    of the recorded source. Backgrounds and raster rounding can
+                    differ; visual fidelity remains unqualified.
                   </p>
                   {job.nativeOperation.imageObservation.images.map((image) => {
                     const [run, story] = image.caseId.split(":");
@@ -1393,49 +1395,14 @@ export function Sources() {
                         : null;
                     const nativeUrl = `/api/source-reference/native/${job.nativeOperation!.id}/images/${job.nativeOperation!.imageObservation!.attemptId}/${image.sha256}.png`;
                     return (
-                      <details key={image.caseId}>
-                        <summary>
-                          {story || image.caseId} · {image.width} ×{" "}
-                          {image.height} native pixels
-                        </summary>
-                        <div className="native-image-pair">
-                          <figure>
-                            <figcaption>Recorded source</figcaption>
-                            {sourceUrl ? (
-                              <a
-                                href={sourceUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                <img
-                                  src={sourceUrl}
-                                  alt={`Recorded source: ${story}`}
-                                />
-                              </a>
-                            ) : (
-                              <p>
-                                Matching current source evidence is unavailable.
-                                The native export is retained for inspection.
-                              </p>
-                            )}
-                          </figure>
-                          <figure>
-                            <figcaption>
-                              Native instance · unqualified
-                            </figcaption>
-                            <a
-                              href={nativeUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <img
-                                src={nativeUrl}
-                                alt={`Native comparison instance: ${story || image.caseId}`}
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </details>
+                      <NativeImageComparison
+                        key={`${image.caseId}:${nativeUrl}`}
+                        caseId={image.caseId}
+                        sourceUrl={sourceUrl}
+                        nativeUrl={nativeUrl}
+                        width={image.width}
+                        height={image.height}
+                      />
                     );
                   })}
                   {job.nativeOperation.imageObservation.problems.map(
