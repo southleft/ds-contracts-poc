@@ -1,3 +1,4 @@
+import { reactToggleAria } from './react-toggle-aria.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React with INLINE STYLES, token refs RESOLVED to literals — the
@@ -632,15 +633,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     let s = partEl === 'button' ? ' type="button"' : '';
     s += ` onClick={handle${pascal(ev.name)}}`;
-    if (ev.toggles?.aria) {
-      const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
-      const code = prop.bindings.code.prop;
-      const [off, on] = ev.toggles.between;
-      const others = (prop.type as { enum: string[] }).enum.filter((v) => v !== off && v !== on);
-      s += others.length
-        ? ` aria-${ev.toggles.aria}={${code} === '${on}' ? true : ${code} === '${off}' ? false : 'mixed'}`
-        : ` aria-${ev.toggles.aria}={${code} === '${on}'}`;
-    }
+    s += reactToggleAria(contract, ev);
     return s;
   };
 
@@ -951,7 +944,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     elementMapConst = `const ELEMENT_MAP: Record<string, ElementType> = ${JSON.stringify(elementByProp.map)};\n\n`;
   }
   const rootEvent = events.find((e) => e.trigger === 'root');
-  if (rootEvent) elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
+  if (rootEvent) {
+    if (contract.semantics.element === 'button' && rootAttrs.type === undefined) elementAttrs.push('type="button"');
+    elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
+    const aria = reactToggleAria(contract, rootEvent);
+    if (aria) elementAttrs.push(aria.trim());
+  }
   elementAttrs.push('{...rest}');
 
   // Flatten variant styles into a single lookup: `${prop}-${value}:${part}`.

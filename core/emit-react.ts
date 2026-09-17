@@ -1,3 +1,4 @@
+import { reactToggleAria } from './react-toggle-aria.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React code emission — the PURE core of scripts/generate-components.ts.
@@ -416,15 +417,7 @@ export function generateTsx(
     }
     let s = partEl === 'button' ? ' type="button"' : '';
     s += ` onClick={handle${pascal(ev.name)}}`;
-    if (ev.toggles?.aria) {
-      const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
-      const code = prop.bindings.code.prop;
-      const [off, on] = ev.toggles.between;
-      const others = (prop.type as { enum: string[] }).enum.filter((v) => v !== off && v !== on);
-      s += others.length
-        ? ` aria-${ev.toggles.aria}={${code} === '${on}' ? true : ${code} === '${off}' ? false : 'mixed'}`
-        : ` aria-${ev.toggles.aria}={${code} === '${on}'}`;
-    }
+    s += reactToggleAria(contract, ev);
     return s;
   };
 
@@ -517,12 +510,8 @@ export function generateTsx(
       elementAttrs.push('type="button"');
     }
     elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
-    if (rootEvent.toggles?.aria) {
-      const prop = contract.props.find((p) => p.name === rootEvent.toggles!.prop)!;
-      const code = prop.bindings.code.prop;
-      const [, on] = rootEvent.toggles.between;
-      elementAttrs.push(`aria-${rootEvent.toggles.aria}={${code} === '${on}'}`);
-    }
+    const aria = reactToggleAria(contract, rootEvent);
+    if (aria) elementAttrs.push(aria.trim());
   }
   elementAttrs.push('{...rest}');
 
