@@ -1,3 +1,4 @@
+import {nativeOwnedComparisonFixture as fixture} from './native-owned-comparison-test-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { nativeComparisonFixture } from './native-contract-comparison-test-fixture.js';
@@ -6,32 +7,9 @@ import { emitNativeContractReadbackScript, verifyNativeContractReadback, type Na
 import { prepareNativeContractComparison, type NativeContractComparisonInput } from './native-contract-comparison.js';
 import { emitNativeContractComparisonReadbackScript, verifyNativeContractComparisonReadback } from './native-contract-comparison-observation.js';
 
-async function fixture() {
-  const f = await nativeComparisonFixture();
-  const child = f.contract('fixture.owned', {root: {layout: {display:'inline-flex',direction:'row'}, literals:{width:'32px',height:'32px'}, parts:{
-    indicator:{icon:{asset:'check',size:16},tokens:{color:'{ink}'}},
-  }}});
-  const context = await f.context('10000000-0000-4000-8000-000000000003');
-  const data = f.engine.compileNativeContractDraft(child,new Map([[child.id,child]]),f.source);
-  const creation = await f.run(f.engine.buildNativeContractDraftScript(child,new Map([[child.id,child]]),f.source,context));
-  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
-  const parent: NativeContractObservationInput = {operation:context.operation,planRevision:revisionOf('owned'),
-    projection:data.projection,component:data.component,tokenInput:context.tokens.input,tokenIdentity:context.tokens.identity,creation};
-  const receipt = await f.run(emitNativeContractReadbackScript(parent));
-  assert.equal(verifyNativeContractReadback(parent,receipt).status,'supported-structure-observed');
-  const content = f.contract('fixture.content',{root:{layout:{display:'flex',direction:'row'},parts:{
-    owned:{layout:{display:'flex',direction:'row'},parts:{ignored:{text:'Do not duplicate internal content'}}},
-  }}});
-  const selected: NativeContractComparisonInput = {...f.comparison,instances:[{specPath:[0],parent,receipt,
-    variantName:data.component.variants[0].name,slotSpecPath:[],contentMode:'source-owned'}]};
-  const component = f.engine.compileComponentData(content,new Map([[content.id,content]]));
-  const comparison = prepareNativeContractComparison(content,component,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},selected);
-  const emit = (input = selected) => f.emit(content,input);
-  return {...f,selected,comparison,emit,parent,receipt};
-}
 
-test('source-owned child preserves its complete native subtree and main link without inserting caller content',async()=>{
-  const f=await fixture();
+for(const wrapped of [false,true]) test(`source-owned child preserves fixed sizing and per-descendant modes (wrapped=${wrapped})`,async()=>{
+  const f=await fixture(wrapped);
   const creation=await f.run(f.emit());
   assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
   const record=creation.comparisons[0].nested[0];

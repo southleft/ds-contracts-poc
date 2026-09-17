@@ -297,7 +297,7 @@ function nativeEnvelope(command, result) {
     planRevision: command.planRevision, scriptSha256: command.scriptSha256, result };
 }
 function nativeCommandValid(c, operationId) {
-  const phases = ['token-create', 'token-readback', 'component-create', 'component-readback', 'update-preflight-readback', 'update-apply', 'update-readback', 'comparison-recovery-readback', 'comparison-recovery-apply'];
+  const phases = ['token-create', 'token-readback', 'component-create', 'component-readback', 'update-preflight-readback', 'update-apply', 'update-readback', 'comparison-recovery-readback', 'comparison-recovery-apply', 'comparison-repair-preflight-readback', 'comparison-repair-apply'];
   return c && c.version === 1 && c.kind === 'SOURCE-NATIVE-OPERATION' &&
     c.operationId === operationId && phases.includes(c.phase) &&
     new RegExp('^' + NATIVE_UUID + '$').test(c.attemptId) &&
@@ -333,7 +333,7 @@ async function nativePoll() {
     let heldReadback = null;
     if (saved) {
       const identity = saved.stage === 'result' ? saved.envelope : saved.identity;
-      const readback = identity && ['token-readback', 'component-readback', 'update-preflight-readback', 'update-readback', 'comparison-recovery-readback'].includes(identity.phase);
+      const readback = identity && ['token-readback', 'component-readback', 'update-preflight-readback', 'update-readback', 'comparison-recovery-readback', 'comparison-repair-preflight-readback'].includes(identity.phase);
       if (saved.stage === 'result' && saved.envelope) {
         try { await deliver(saved.envelope); return; }
         catch (e) { if (!readback) throw e; }

@@ -382,7 +382,9 @@ export function nativeContractComparisonRuntime(nested: boolean, gridContent: bo
   if (sourceOwned) script = script.replace(
     '  const slot = parts.get(nativeCanonical(c.slotSpecPath));',
     "  if (c.contentMode === 'source-owned') { recorded.status = 'created-comparison'; return inst; }\n  const slot = parts.get(nativeCanonical(c.slotSpecPath));"
-  ).replace("if (nativeCanonical(identity.specPath) !== nativeCanonical(path))", "if (c.contentMode !== 'source-owned' && nativeCanonical(identity.specPath) !== nativeCanonical(path))");
+  ).replace("if (nativeCanonical(identity.specPath) !== nativeCanonical(path))", "if (c.contentMode !== 'source-owned' && nativeCanonical(identity.specPath) !== nativeCanonical(path))")
+    .replace("node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);",
+      "if (c.contentMode !== 'source-owned' || Object.hasOwn(source.explicitVariableModes || {}, parentCollection.id)) node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);");
   if (fillWidth) script = script.replace('  dsStampFingerprints(inst);', `
   // Construction uses a temporary page parent. Set FILL only after every
   // nested instance is attached, from outer parents toward inner children.

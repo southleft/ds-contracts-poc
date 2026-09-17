@@ -8358,7 +8358,7 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
-      child.type === 'frame' && (!child.children || child.children.length === 0) &&
+      child.type === 'frame' && (!child.children || child.children.length === 0) &&${opts.nativeSourceOwnedComparison ? '\n      child.nativeContractSample?.instance === undefined &&' : ''}
       !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
       // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
       // sizing is meaningless there (real Figma drops it the moment
@@ -8609,7 +8609,7 @@ async function amendSet(set, C) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
-          childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+          childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&${opts.nativeSourceOwnedComparison ? '\n      childSpec.nativeContractSample?.instance === undefined &&' : ''}
           !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
@@ -8812,7 +8812,7 @@ async function amendComponent(comp, C) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
-      childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+      childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&${opts.nativeSourceOwnedComparison ? '\n      childSpec.nativeContractSample?.instance === undefined &&' : ''}
       !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
