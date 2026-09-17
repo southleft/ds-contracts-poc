@@ -43,6 +43,28 @@ test('migration refuses unrelated compiler edits and live conflicts without allo
  assert.equal(result.status,'refused');assert.equal(f.root.children.length,1);assert.deepEqual(result.allocations,[]);
 });
 
+test('paint migration preserves allocation ownership after an earlier contract revision correction',async()=>{
+ const f=await fixture(),input=structuredClone(f.input);
+ const oldRevision=input.before.component.variants[0].spec.nativeContractPart!.contractRevision;
+ const nextRevision=revisionOf({newerContract:true});
+ const retag=(node:any)=>{node.nativeContractPart.contractRevision=nextRevision;node.children?.forEach(retag);};
+ input.desired.component.variants.forEach(v=>retag(v.spec));
+ input.desired.revision=revisionOf(input.desired.component);
+ const {plan}=prepareNativeContractUpdate(input);
+ assert.equal(plan.kind,'native-contract-background-update');
+ assert.equal(plan.after.component.variants[0].spec.nativeContractPart!.contractRevision,oldRevision);
+ assert.equal(plan.after.component.variants[0].spec.children![0].nativeContractPart!.contractRevision,oldRevision);
+ assert.equal((await f.run(emitNativeContractUpdateScript(plan))).status,'updated');
+ const read=await f.run(emitNativeContractReadbackScript(plan.after));
+ assert.ok(nativeContractUpdateMatches(plan,read,true));
+ assert.equal((await f.run(emitNativeContractUpdateScript(plan))).status,'no-op');
+ const mixed=structuredClone(input);mixed.desired.component.variants[0].spec.children![0].nativeContractPart!.contractRevision=oldRevision;
+ assert.throws(()=>prepareNativeContractUpdate(mixed),/source-identity-changed/);
+ const changed=structuredClone(input);changed.desired.component.variants[0].spec.opacity=0.5;
+ assert.throws(()=>prepareNativeContractUpdate(changed),/mixed-channels/);
+ assert.equal(input.desired.component.variants[0].spec.nativeContractPart!.contractRevision,nextRevision,'proposal inputs remain unchanged');
+});
+
 test('a failure after allocation rolls back its layer and restores original metadata and paint',async()=>{
  const f=await fixture(),slot=f.root.children[0],before=slot.getSharedPluginData('ds_contracts','nativeContractPart');
  const original=slot.setSharedPluginData.bind(slot);let fail=true;

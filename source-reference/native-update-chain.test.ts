@@ -81,3 +81,26 @@ test('a migrated allocation is retained through repeat preparation and a later s
  assert.equal(f.jobs().get(second.operation.id).phase,'update-verified');
  assert.deepEqual(f.jobs().verifiedForParent(f.parent)!.input.creation.nodes,original.input.creation.nodes);
 });
+
+test('a paint migration follows a verified scalar correction without replacing its allocation owner',async t=>{
+ const f=await fixture(t,nativeBackgroundUpdateFixture),paint=structuredClone(f.input.desired);
+ f.input.desired.component=structuredClone(f.input.before.component);
+ for(const v of f.input.desired.component.variants)v.spec.opacity=0.5;
+ f.input.desired.revision=revisionOf(f.input.desired.component);
+ const first=f.prepare();await f.finish(first.operation.id);
+ const before=f.jobs().verifiedForParent(f.parent)!;
+ f.input.desired=paint;
+ const revision=revisionOf({updatedContract:true});
+ const retag=(node:any)=>{node.nativeContractPart.contractRevision=revision;node.children?.forEach(retag);};
+ for(const v of f.input.desired.component.variants){v.spec.opacity=0.5;retag(v.spec);}
+ f.input.desired.revision=revisionOf(f.input.desired.component);
+ const second=f.prepare();
+ assert.equal(f.plans.saved(f.parent,second.proposal.id).update.plan.kind,'native-contract-background-update');
+ await f.finish(second.operation.id);
+ const after=f.jobs().verifiedForParent(f.parent)!;
+ assert.deepEqual(after.input.creation.nodes.slice(0,before.input.creation.nodes.length),before.input.creation.nodes);
+ assert.equal(after.input.component.variants[0].spec.nativeContractPart!.contractRevision,
+   before.input.component.variants[0].spec.nativeContractPart!.contractRevision);
+ assert.equal(after.input.component.variants[0].spec.opacity,0.5);
+ assert.equal(f.plans.prepare(f.parent).id,second.proposal.id);
+});

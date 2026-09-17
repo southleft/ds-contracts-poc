@@ -25,6 +25,22 @@ export function prepareNativeBackgroundUpdate(input:NativeContractUpdateInput,
   if(!input.before.component.variants.some((v,i)=>addsPaint(v.spec,input.desired.component.variants[i]?.spec)))return null;
   const sanitized=copy(input), changes:NativeBackgroundUpdatePlan['changes']=[];
   const desired=copy(input.desired.component);
+  // Allocation metadata identifies the historical contract that owns these
+  // nodes. A prior verified scalar correction can already implement a newer
+  // contract revision without retagging those allocations. Preserve that
+  // owner while deriving the paint migration; the exact semantic comparison
+  // below must still account for every field besides this paint-layer rule.
+  const oldRevision=input.before.component.variants[0]?.spec.nativeContractPart?.contractRevision??fail('source-identity-changed');
+  const nextRevision=desired.variants[0]?.spec.nativeContractPart?.contractRevision??fail('source-identity-changed');
+  function preserveOwner(spec:NodeSpec, expected:string, replacement:string) {
+    const identity=spec.nativeContractPart??fail('source-identity-changed');
+    if(identity.contractRevision!==expected)fail('source-identity-changed');
+    identity.contractRevision=replacement;
+    spec.children?.forEach(child=>preserveOwner(child,expected,replacement));
+  }
+  for(const variant of input.before.component.variants)preserveOwner(copy(variant.spec),oldRevision,oldRevision);
+  for(const component of [desired,sanitized.desired.component])
+    for(const variant of component.variants)preserveOwner(variant.spec,nextRevision,oldRevision);
   const resolve=makeResolveLiteral(flattenTokens(input.before.tokenInput.modes[0].tokens));
   function visit(old:NodeSpec,next:NodeSpec|undefined,normalized:NodeSpec|undefined,variant:string,
     owner?:NativeBackgroundUpdatePlan['changes'][number]) {
