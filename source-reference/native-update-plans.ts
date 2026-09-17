@@ -5,7 +5,7 @@ import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
 import { closeSync, existsSync, fsyncSync, lstatSync, mkdirSync, openSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
-import { prepareNativeContractUpdate, nativeContractUpdateMatches, type NativeContractUpdateInput } from '../core/native-contract-update.js';
+import { prepareNativeContractUpdate, nativeContractUpdateMatches, nativeContractUpdateAfter, type NativeContractUpdateInput } from '../core/native-contract-update.js';
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const HASH = /^[a-f0-9]{64}$/;
 export interface NativeUpdateHistoryEntry {
@@ -49,7 +49,7 @@ export function createNativeUpdatePlans(repo: string,
       if(entry.phase!=='update-verified' || entry.pending || !entry.receipt || !HASH.test(entry.journalRevision) ||
           !nativeContractUpdateMatches(plan,entry.receipt,true)) throw Error('native-update-effective-observation-unavailable');
       predecessor={proposalId:entry.proposalId,journalRevision:entry.journalRevision};
-      before=structuredClone(plan.after);baseline=clean(entry.receipt);
+      before=nativeContractUpdateAfter(plan,entry.receipt);baseline=clean(entry.receipt);
     }
     return {predecessor,before,baseline};
   };

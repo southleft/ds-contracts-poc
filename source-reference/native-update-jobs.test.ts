@@ -1,3 +1,4 @@
+import {nativeBackgroundUpdateFixture} from '../core/native-contract-background-update-test-fixture.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -13,7 +14,7 @@ import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { createNativeOperationTransport } from './native-operation-transport.js';
 
-async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture = nativeUpdateFixture) {
+async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture | typeof nativeBackgroundUpdateFixture = nativeUpdateFixture) {
   const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
   let stale=false,lose='',failStorage=false,readerRevision=0,derivations=0;
@@ -224,4 +225,18 @@ test('a display evidence snapshot cannot prepare, dispatch, accept or redeliver 
  });
  assert.deepEqual(readdirSync(path.join(f.repo,'private/source-native-updates',f.id,'events')),before);
  await f.poll();assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
+});
+
+
+test('the companion migrates a background once and independent readback adopts only the new paint allocation',async t=>{
+ const f=await fixture(t,nativeBackgroundUpdateFixture),before=f.input.before.creation.nodes.map((n:any)=>n.id);
+ await f.poll();assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
+ f.lose('result');await f.poll();f.restart();await f.poll();await f.poll();
+ assert.equal(f.jobs().get(f.id).phase,'update-verified',JSON.stringify(f.messages.slice(-3)));
+ assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+ const effective=f.jobs().verifiedForParent(f.proposal.parentId)!;
+ assert.equal(effective.input.creation.nodes.length,before.length+1);
+ assert.ok(before.every((id:string)=>effective.input.creation.nodes.some((n:any)=>n.id===id)));
+ f.transport().retryObservation(f.id);await f.poll();
+ assert.equal(f.jobs().get(f.id).phase,'update-verified');assert.equal(f.nodes[0].children.length,2);
 });

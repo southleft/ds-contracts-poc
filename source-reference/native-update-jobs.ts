@@ -5,7 +5,7 @@ import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import { closeSync, existsSync, fsyncSync, lstatSync, mkdirSync, openSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
-import { emitNativeContractUpdateScript, nativeContractUpdateMatches } from '../core/native-contract-update.js';
+import { emitNativeContractUpdateScript, nativeContractUpdateMatches, nativeContractUpdateAfter } from '../core/native-contract-update.js';
 import { emitNativeContractReadbackScript } from '../core/native-source-observation.js';
 import { collectNativeImages } from './native-operation-images.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
@@ -217,7 +217,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       if(!nativeContractUpdateMatches(l.plan,l.state.observation,true)) fail('effective-observation-invalid');
       const receipt=structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
       delete receipt.images;
-      return {input:structuredClone(l.plan.after),receipt};
+      return {input:nativeContractUpdateAfter(l.plan,receipt),receipt};
     },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
     prepare(parentId:string,proposalId:string) {

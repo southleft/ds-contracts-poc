@@ -257,7 +257,7 @@ async function read(page) {
     }
     for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'${extraMetadata.map(key => ", " + JSON.stringify(key)).join('')}])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
-    ${backgroundParts.length ? `if (row.metadata.nativeContractPart && ${JSON.stringify(backgroundParts)}.includes(stable(JSON.parse(row.metadata.nativeContractPart)))) row.values.constraints = copy(node.constraints);` : ''}
+    ${backgroundParts.length ? `if (node.type === 'RECTANGLE' && row.metadata.nativeContractPart && ${JSON.stringify(backgroundParts)}.includes(stable(JSON.parse(row.metadata.nativeContractPart)))) { row.values.constraints = copy(node.constraints); const migration = node.getSharedPluginData('ds_contracts', 'nativeBackgroundMigration'); if (migration) row.metadata.nativeBackgroundMigration = migration; }` : ''}
     out.push(row);
   }
   return out;

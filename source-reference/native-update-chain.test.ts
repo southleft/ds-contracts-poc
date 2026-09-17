@@ -1,3 +1,4 @@
+import {nativeBackgroundUpdateFixture} from '../core/native-contract-background-update-test-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtempSync,readFileSync,rmSync} from 'node:fs';
@@ -8,8 +9,8 @@ import {nativeUpdateFixture} from '../core/native-contract-update-test-fixture.j
 import {createNativeUpdatePlans} from './native-update-plans.js';
 import {createNativeUpdateJobs} from './native-update-jobs.js';
 
-async function fixture(t:test.TestContext) {
- const f=await nativeUpdateFixture(),repo=mkdtempSync(path.join(tmpdir(),'native-update-chain-'));
+async function fixture(t:test.TestContext,make:typeof nativeUpdateFixture|typeof nativeBackgroundUpdateFixture=nativeUpdateFixture) {
+ const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-chain-'));
  t.after(()=>rmSync(repo,{recursive:true,force:true}));
  let stale=false;
  const plans=createNativeUpdatePlans(repo,()=>{if(stale)throw Error('source drift');return {parentJournalRevision:'a'.repeat(64),input:f.input};},id=>jobs.updateHistory(id));
@@ -65,4 +66,18 @@ test('a changed native field or predecessor journal cannot be adopted as the sec
  f.nodes[0].name=f.plans.saved(f.parent,first.proposal.id).update.plan.baseline.nodes!.find(n=>n.id===f.nodes[0].id)!.name;
  await f.step(first.operation.id,'update-readback');
  assert.throws(()=>f.plans.current(f.parent,second.proposal.id),/input-changed/);
+});
+
+
+test('a migrated allocation is retained through repeat preparation and a later scalar correction',async t=>{
+ const f=await fixture(t,nativeBackgroundUpdateFixture),first=f.prepare();
+ await f.finish(first.operation.id);
+ assert.equal(f.plans.prepare(f.parent).id,first.proposal.id);
+ const original=f.jobs().verifiedForParent(f.parent)!;
+ f.next();const second=f.prepare(),record=f.plans.saved(f.parent,second.proposal.id);
+ assert.equal(record.update.plan.kind,'native-contract-opacity-update');
+ assert.deepEqual(record.update.plan.before.creation.nodes,original.input.creation.nodes);
+ await f.finish(second.operation.id);
+ assert.equal(f.jobs().get(second.operation.id).phase,'update-verified');
+ assert.deepEqual(f.jobs().verifiedForParent(f.parent)!.input.creation.nodes,original.input.creation.nodes);
 });
