@@ -2,7 +2,7 @@
  * compiler. Runtime behavior and reusable child identities are separate work. */
 import { revisionOf } from '../core/contract-provenance.js';
 import { ContractSchema } from '../scripts/contract-schema.js';
-import { enumerate, comboKey, normalizeValue, type CapturedNode } from '../extract/computed/lib.js';
+import { enumerate, comboKey, normalizeValue, flatten, type CapturedNode } from '../extract/computed/lib.js';
 import type { PropSpace, SweepResult } from '../extract/computed/capture.js';
 import type { ReactSourceProgram } from './react-source-program.js';
 import type { ReactOwnership } from './react-ownership.js';
@@ -17,8 +17,17 @@ import { validateContract } from '../packages/core/src/validate.js';
 import { observeReactSourceBindings, type ReactSourceBindingProjection } from './react-source-bindings.js';
 import { retainReactRootSourceBindings } from './react-root-sweep.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
+import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 
 type Snapshot = ReactPropertySnapshot & { fonts: TextFontEvidence; svg: SvgViewportEvidence };
+export function reactInitialObservedRoot(snapshot: Snapshot, instanceId: string) {
+  const instance = snapshot.ownership.components.find(c => c.id === instanceId);
+  if (!instance || instance.roots.length !== 1) throw Error('react-initial-contract-source-root-mismatch');
+  const rootPath = instance.roots[0], prepared = prepareObservedContentTree(snapshot.tree, snapshot.fonts, snapshot.svg);
+  const root = flatten(prepared).find(row => row.path === rootPath)?.node;
+  if (!root) throw Error('react-initial-contract-source-root-mismatch');
+  return { rootPath, root: structuredClone(root) };
+}
 export function compileReactInitialContract(program: ReactSourceProgram, ownership: ReactOwnership, tree: CapturedNode,
   observation: Awaited<ReturnType<typeof observeReactInitialStates>>, snapshots: Record<string, Snapshot>) {
   const result = { version: 1 as const, qualification: 'observed-initial-state-contract' as const,
@@ -30,6 +39,14 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     compiled: undefined as ReturnType<typeof compileObservedContentSweep> | undefined };
   try {
     const expected = planReactInitialStates(program, ownership, tree, observation.instanceId);
+    const originalInstance = ownership.components.find(c => c.id === observation.instanceId)!;
+    const originalPath = originalInstance.roots[0];
+    const nested = originalPath !== '';
+    if (nested) {
+      const linked = linkReactSourceAnatomy(program, ownership, tree).instances.find(c => c.instanceId === observation.instanceId);
+      if (!originalInstance.parent || !linked || linked.content !== 'authored-or-runtime' || linked.dependencies.length)
+        throw Error('react-initial-contract-nested-leaf-required');
+    }
     if (observation.version !== 1 || observation.qualification !== 'finite-initial-mounts-only' || observation.problems.length ||
         !expected.plan.length || expected.plan.length !== observation.planned || expected.plan.length !== observation.rows.length ||
         revisionOf(expected.source) !== revisionOf(observation.source) || revisionOf(expected.heldProps) !== revisionOf(observation.heldProps) ||
@@ -53,16 +70,22 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     if (enumeration.policy !== 'full-cartesian' || enumeration.combos.length !== observation.rows.length) throw Error('react-initial-contract-domain-incomplete');
     const roots = new Map<string, CapturedNode>(), sizes = new Set<string>();
     const sizeModes = new Map<string, string>();
-    const planes = new Map<string, { snapshot: Snapshot; assignment: Record<string, string>; rowId: string }>();
+    const planes = new Map<string, { snapshot: Snapshot; assignment: Record<string, string>; rowId: string; rootPath: string }>();
     for (const row of observation.rows) {
       const snap = snapshots[row.id];
       if (row.status !== 'observed' || !row.restored || !snap || snap.image !== row.image || snap.treeSha256 !== row.treeSha256 ||
           evidenceSha(JSON.stringify(snap.tree)) !== row.treeSha256 || snap.ownership.problems.length)
         throw Error('react-initial-contract-observation-unverified');
       const instance = snap.ownership.components.find(c => c.id === observation.instanceId);
-      if (!instance || revisionOf(instance.source) !== revisionOf(expected.source) || instance.roots.length !== 1 || instance.roots[0] !== '')
+      if (!instance || revisionOf(instance.source) !== revisionOf(expected.source) || instance.roots.length !== 1 || instance.roots[0] !== originalPath || instance.parent !== originalInstance.parent)
         throw Error('react-initial-contract-source-root-mismatch');
-      if (snap.ownership.components.length !== 1) throw Error('react-initial-contract-nested-identity-unqualified');
+      if (!nested && snap.ownership.components.length !== 1) throw Error('react-initial-contract-nested-identity-unqualified');
+      if (nested) {
+        const linked = linkReactSourceAnatomy(program, snap.ownership, snap.tree);
+        const child = linked.instances.find(c => c.instanceId === observation.instanceId);
+        if (linked.status !== 'linked' || !child || child.content !== 'authored-or-runtime' || child.dependencies.length)
+          throw Error('react-initial-contract-nested-leaf-required');
+      }
       const held = { ...instance.props }, original = { ...expected.heldProps }, assignment: Record<string, string> = {};
       for (const d of definitions) {
         const requested = row.changes[d.property]; delete held[d.property]; delete original[d.property];
@@ -74,8 +97,8 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       if (revisionOf(held) !== revisionOf(original)) throw Error('react-initial-contract-held-props-changed');
       const key = comboKey(axes, [], assignment, {});
       if (roots.has(key)) throw Error('react-initial-contract-duplicate-combination');
-      const root = prepareObservedContentTree(snap.tree, snap.fonts, snap.svg);
-      const origin = snap.styleOrigin.roots.find(r => r.path === '' && r.tag === root.tag);
+      const { root, rootPath } = reactInitialObservedRoot(snap, observation.instanceId);
+      const origin = snap.styleOrigin.roots.find(r => r.path === rootPath && r.tag === root.tag);
       for (const channel of ['width', 'height']) {
         const size = origin?.sizes?.find(s => s.channel === channel);
         // An unconstrained inline flex row owns its content-sized width. Never
@@ -100,7 +123,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       if (['flex', 'inline-flex'].includes(root.style.display)) for (const channel of ['row-gap', 'column-gap'])
         if (root.style[channel] === 'normal') root.style[channel] = '0px';
       roots.set(key, root);
-      planes.set(key, { snapshot: snap, assignment, rowId: row.id });
+      planes.set(key, { snapshot: snap, assignment, rowId: row.id, rootPath });
     }
     if (enumeration.combos.some(c => !roots.has(c.key)) || new Set([...roots.values()].map(r => r.tag)).size !== 1)
       throw Error('react-initial-contract-host-or-domain-changed');
@@ -122,7 +145,7 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       const projections = new Map<string, ReactSourceBindingProjection>();
       for (const [key, plane] of planes) {
         const projection = observeReactSourceBindings(roots.get(key)!, result.compiled.contract.anatomy.root,
-          result.compiled.tokens, plane.snapshot.styleOrigin, '', plane.assignment);
+          result.compiled.tokens, plane.snapshot.styleOrigin, plane.rootPath, plane.assignment);
         projections.set(key, projection);
         result.sourceBindings.push({ observation: plane.rowId, bindings: projection.sourceBindings });
         // A declared direct-variable relationship must survive or refuse;

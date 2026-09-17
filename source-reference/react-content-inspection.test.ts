@@ -100,6 +100,9 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   writeFileSync(path.join(initialDir, 'integrity.json'), seal);
   writeFileSync(path.join(initialRoot, 'latest.json'), JSON.stringify({ id: initialId, inventorySha256: evidenceSha(seal) }));
   const initialStore = () => createReactInitialInspectionStore(repo, repo, () => ({ reference, anchor: request }));
+  assert.throws(() => initialStore().read(reference.id, 'button-default', 'instance-9'), /nested-instance-unavailable/,
+    'a caller cannot select a child absent from the sealed ownership record');
+  assert.throws(() => initialStore().read(reference.id, 'button-default', '../outside'), /instance-invalid/);
   const reopened = initialStore().read(reference.id, 'button-default')!;
   const { draft: diagnosticDraft, ...reopenedObservation } = reopened;
   assert.deepEqual(reopenedObservation, initialReport);

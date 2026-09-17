@@ -254,6 +254,16 @@ for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React 
   assert.equal(isReactInitialNativeRequest(initialRequest), kind !== 'nested');
   assert.equal(isReactInitialNativeRequest({ ...initialRequest, executable: 'untrusted' }), false);
   assert.equal(isReactInitialNativeRequest({ ...initialRequest, observation: { ...initialRequest.observation, id: '../outside' } }), false);
+  if(kind==='initial') {
+    const nested: ReactInitialNativeRequest = { ...initialRequest, version: 2, instanceId: 'instance-4' };
+    assert(isReactInitialNativeRequest(nested));
+    assert(!isReactInitialNativeRequest({ ...nested, instanceId: '../outside' }));
+    assert(!isReactInitialNativeRequest({ ...nested, version: 1 }));
+    assert.notEqual(reactInitialNativeReservation(nested), reactInitialNativeReservation(initialRequest));
+    assert.notEqual(reactInitialNativeReservation(nested), reactInitialNativeReservation({ ...nested, instanceId: 'instance-5' }));
+    assert.equal(reactInitialNativeReservation(nested), reactInitialNativeReservation({ ...nested,
+      observation: { ...nested.observation, reportSha256: 'f'.repeat(64) } }), 'a new observation does not allocate a duplicate of the same source instance');
+  }
   let current = true;
   const options: NativeOperationJobsOptions = {
     prepare: () => { throw Error('legacy adapter must not run'); },

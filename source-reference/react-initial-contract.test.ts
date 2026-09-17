@@ -15,7 +15,8 @@ test('complete typed initial domains preserve omission and conditional anatomy; 
   const dir = mkdtempSync(path.resolve('private/react-initial-contract-test-'));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   writeFileSync(path.join(dir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { strict: true, skipLibCheck: true, jsx: 'react-jsx', moduleResolution: 'Bundler', module: 'ESNext' } }));
-  writeFileSync(path.join(dir, 'surface.tsx'), `import React from 'react'; export function Surface({value}:{value?:false|true|'mixed'}) { return <div>{value && <span />}</div> }`);
+  writeFileSync(path.join(dir, 'surface.tsx'), `import React from 'react'; export function Surface({value}:{value?:false|true|'mixed'}) { return <div><React.Fragment>{value && <span />}</React.Fragment></div> }
+    export function Wrapper({children}:{children?:React.ReactNode}) { return <section>{children}</section> }`);
   const program = readReactSourceProgram(dir, ['surface.tsx']); assert.deepEqual(program.problems, []);
   const source = program.components[0];
   const ownership: ReactOwnership = { version: 1, rendererVersions: ['19.2.4'], problems: [], components: [{ id: 'instance-0',
@@ -54,6 +55,49 @@ test('complete typed initial domains preserve omission and conditional anatomy; 
   assert.deepEqual(prop.type, { enum: ['boolean-false', 'boolean-true', 'mixed'] });
   assert.ok(result.compiled!.receipts.some(r => r.startsWith('optional-adornment-omission-preserved:')));
   assert.deepEqual(run(), result);
+  // Keep the full parent observation authenticated while compiling only the
+  // selected child's states. The parent must not become part of its anatomy.
+  const wrapper = program.components.find(c => c.exportName === 'Wrapper')!;
+  const wrapOwnership = (own: ReactOwnership): ReactOwnership => ({ ...own,
+    components: [
+      { id: 'instance-1', source: { module: wrapper.module, exportName: wrapper.exportName, sourceSha256: wrapper.sourceSha256, span: wrapper.span }, props: {}, roots: [''] },
+      ...own.components.map(c => ({ ...c, parent: 'instance-1', roots: c.roots.map(p => p ? '0.' + p : '0') })),
+    ],
+    nodes: [{ path: '', tag: 'section', nearestComponent: 'instance-1', createdBy: 'instance-1' },
+      ...own.nodes.map(n => ({ ...n, path: n.path ? '0.' + n.path : '0' }))],
+  });
+  const wrapTree = (child: CapturedNode): CapturedNode => ({ tag: 'section', classes: [], pseudo: {},
+    style: { display: 'flex', width: '360px', height: '200px', 'font-size': '14px', 'line-height': '20px' }, nodes: [{ t: 'el', el: child }] });
+  const nestedSnapshots = structuredClone(snapshots);
+  for (const snapshot of Object.values(nestedSnapshots)) {
+    snapshot.tree = wrapTree(snapshot.tree);
+    snapshot.ownership = wrapOwnership(snapshot.ownership);
+    snapshot.styleOrigin.roots.forEach(r => { r.path = r.path ? '0.' + r.path : '0'; });
+    snapshot.treeSha256 = evidenceSha(JSON.stringify(snapshot.tree));
+    snapshot.fonts.treeRevision = snapshot.svg.treeRevision = revisionOf(snapshot.tree);
+  }
+  const nestedObservation = { ...observation, rows: rows.map(r => ({ ...r, treeSha256: nestedSnapshots[r.id].treeSha256 })) };
+  const nestedRun = (samples = nestedSnapshots) => compileReactInitialContract(program, wrapOwnership(ownership), wrapTree(tree), nestedObservation, samples);
+  const nested = nestedRun();
+  assert.equal(nested.status, 'compiled-draft', nested.problems.join('\n'));
+  assert.equal(nested.compiled!.component!.variants.length, 4);
+  for (const variant of nested.compiled!.component!.variants) {
+    assert.equal(variant.spec.fixedWidth?.px, 16, 'the parent width must not become the child width');
+    assert.equal(variant.spec.fixedHeight?.px, 16, 'the parent height must not become the child height');
+    const originalVariant = result.compiled!.component!.variants.find(v => v.name === variant.name)!;
+    assert.deepEqual(variant.spec.layout, originalVariant.spec.layout);
+    assert.equal(variant.spec.opacity, originalVariant.spec.opacity);
+    assert.equal(variant.spec.children?.length, originalVariant.spec.children?.length);
+  }
+  for (const mutate of [
+    (s: typeof nestedSnapshots) => { s['0'].ownership.components[1].parent = 'missing-parent'; },
+    (s: typeof nestedSnapshots) => { s['0'].ownership.components[1].roots = ['']; },
+    (s: typeof nestedSnapshots) => { s['0'].ownership.components[1].source.sourceSha256 = '0'.repeat(64); },
+    (s: typeof nestedSnapshots) => { s['0'].tree.style.width = '999px'; },
+  ]) {
+    const changed = structuredClone(nestedSnapshots); mutate(changed);
+    assert.equal(nestedRun(changed).status, 'refused', 'changed identity or whole-parent evidence cannot qualify child states');
+  }
   const bound = structuredClone(snapshots);
   for (const snapshot of Object.values(bound)) {
     const variable = snapshot.ownership.components[0].props.value === true ? '--Accent' : '--accent';

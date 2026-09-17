@@ -82,11 +82,22 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
    fonts:await observeTextFonts(page,[selector],current),svg:await observeSvgViewports(page,[selector],current),
    bounds:await sourceBounds(page,{path:[selector]}),
   }:{};
+  let initialSelection;
+  if(args.observationMode==='initial-mount'){
+   const target=own.components.find(c=>c.id===instanceId);
+   if(!target||target.roots.length!==1)throw Error('react-initial-selection-unavailable');
+   const selectedPath=target.roots[0];
+   if(selectedPath){
+    if(!/^\d+(?:\.\d+)*$/.test(selectedPath))throw Error('react-initial-selection-invalid');
+    const selected=selector+selectedPath.split('.').map(i=>' > :nth-child('+(Number(i)+1)+')').join('');
+    initialSelection={instanceId,path:selectedPath,bounds:await sourceBounds(page,{path:[selected]})};
+   }
+  }
   if(!current||JSON.stringify(current)!==JSON.stringify(await read())||evidenceSha(png)!==evidenceSha(await page.screenshot({fullPage:true,caret:'initial'})))throw Error('react-property-effects-render-unstable');
   if(args.failures.runtimeErrors.length||args.failures.failedResources.length)throw Error('react-property-effects-source-failed');
   if(own.problems.length)throw Error('react-property-effects-ownership-unqualified');
   args.assertCurrent();
-  return {tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,...contentEvidence};
+  return {tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,...contentEvidence,...(initialSelection?{initialSelection}:{})};
  };
  let usable=true;
  for(const [index,entry] of plan.entries()){
