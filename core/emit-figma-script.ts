@@ -7529,7 +7529,7 @@ function buildNativeContractDraftScript(
   return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped unaccepted Contract draft.',
     preamble: '', nativeSource: true,
-  }));
+  }), draft.fonts);
 }
 
 /** Create comparison instances referencing existing observed mains. The content
@@ -8136,7 +8136,10 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // collision is one contract away and a silent revert is indistinguishable
   // from the fact never having been carried.
   if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
-  if (node.type === 'FRAME') node.fills = [];
+  if (node.type === 'FRAME') node.fills = [];${opts.nativeSource ? `
+  // Fresh native draft roots must not inherit Figma's invisible white birth
+  // fill when their paint lives on a separate padding-box layer.
+  if (spec.nativeContractPart && spec.type === 'root' && !spec.fill && !spec.lits?.fillColor && !spec.gradient) node.fills = [];` : ''}
   // FC-AMEND-CANNOT-CLEAR (astryx/banner live-canvas round, 2026-08-11).
   //
   // This function only ever SET what the spec declares, so on the AMEND path

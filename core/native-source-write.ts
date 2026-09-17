@@ -163,6 +163,7 @@ export type PreparedNativeSourceWrite = ReturnType<
 export function wrapNativeSourceWrite(
   prepared: PreparedNativeSourceWrite,
   render: string,
+  draftFonts: Array<{ family: string; styles: string[] }> = [],
 ): string {
   return `// GENERATED scoped source-candidate inspection. Fresh objects only.
 const NATIVE = ${JSON.stringify(prepared.descriptor)};
@@ -260,12 +261,12 @@ ${prepared.comparisonParentReadbackScript}
   NATIVE_COLLECTION = await figma.variables.getVariableCollectionByIdAsync(NATIVE.identity.collection.id);
   NATIVE_VARIABLES = await Promise.all(NATIVE.identity.variables.map(v => figma.variables.getVariableByIdAsync(v.id)));
   await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  for (const font of comparison ? comparison.fonts : []) {
+  for (const font of ${draftFonts.length ? JSON.stringify(draftFonts) : 'comparison ? comparison.fonts : []'}) {
     let loaded = false;
     for (const style of font.styles) {
       try { await figma.loadFontAsync({ family: font.family, style }); loaded = true; break; } catch (_) { /* same-family spelling retry */ }
     }
-    if (!loaded) nativeRefuse('comparison-font-unavailable');
+    if (!loaded) nativeRefuse('${draftFonts.length ? 'draft-font-unavailable' : 'comparison-font-unavailable'}');
   }
   nativeCheckTokens(await nativeReadTokens());
   nativeFileGuard();

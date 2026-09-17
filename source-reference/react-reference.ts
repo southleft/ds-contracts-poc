@@ -169,8 +169,10 @@ export function createReactReferenceService(
     if (!native || !reference || reference.id !== referenceId) throw Error('react-initial-reference-unavailable');
     // Reuse the immutable ownership archive already pinned by a saved root
     // operation. No fresh property matrix or browser-supplied evidence paths.
-    const roots = native().jobs.listReact(referenceId).filter(r => r.kind === 'root' && r.operation.sourceCurrent);
-    const anchor = roots.map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id))[0];
+    const anchor = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => {
+      const roots = native!().jobs.listReact(referenceId).filter(r => r.kind === 'root' && r.operation.sourceCurrent);
+      return roots.map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id))[0];
+    }));
     if (!anchor) throw Error('react-initial-saved-observation-required');
     return { reference, anchor };
   });

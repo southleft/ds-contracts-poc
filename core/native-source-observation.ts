@@ -151,6 +151,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   };
   const managedRows = (spec: NodeSpec): boolean => !!spec.layout?.grid?.flowRows || (spec.children ?? []).some(managedRows);
   const extra = input.component.variants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
+  const hasText = (spec: NodeSpec): boolean => spec.type === 'text' || !!spec.children?.some(hasText);
+  if (isContractDraft(input) && input.component.variants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
     isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, false, backgroundPaintIdentities(input.component));
 }
@@ -624,13 +626,17 @@ function verifyReadback(
       issue("native-source-observation-opacity", n);
     const bindings = {
       ...spec.bindings,
+      ...(isContractDraft(input) && spec.fontSizeVar ? { fontSize: spec.fontSizeVar } : {}),
       ...(spec.fixedWidth ? { width: spec.fixedWidth.varName } : {}),
       ...(spec.fixedHeight?.varName
         ? { height: spec.fixedHeight.varName }
         : {}),
     };
+    const observedBindings = { ...v.boundVariables };
+    if (isContractDraft(input) && spec.type === 'text' && Array.isArray(observedBindings.fontSize) && observedBindings.fontSize.length === 1)
+      observedBindings.fontSize = observedBindings.fontSize[0];
     if (
-      Object.entries(v.boundVariables ?? {}).some(
+      Object.entries(observedBindings).some(
         ([field, value]) =>
           !["fills", "strokes"].includes(field) &&
           (!object(value) || value.type !== "VARIABLE_ALIAS"),
@@ -638,7 +644,7 @@ function verifyReadback(
     )
       issue("native-source-observation-extra-bindings", n);
     const actualBindings = Object.fromEntries(
-      Object.entries(v.boundVariables ?? {}).filter(
+      Object.entries(observedBindings).filter(
         ([, value]) => object(value) && value.type === "VARIABLE_ALIAS",
       ),
     );
@@ -704,17 +710,25 @@ function verifyReadback(
       )
         issue("native-source-observation-text-decoration", n);
       if (
-        !same(v.lineHeight, spec.lineHeight) ||
+        !same(v.lineHeight, spec.lineHeight ?? (isContractDraft(input) ? { unit: 'AUTO' } : undefined)) ||
         (spec.textAlignH && v.textAlignHorizontal !== spec.textAlignH)
       )
         issue("native-source-observation-typography", n);
-      if (
+      if (isContractDraft(input) && spec.textFill) {
+        if (!variableByName.has(spec.textFill) || v.fills?.length !== 1 || v.fills[0].type !== 'SOLID' ||
+            v.fills[0].visible === false || !same(v.fills[0].boundVariables?.color,
+              { type: 'VARIABLE_ALIAS', id: variableByName.get(spec.textFill) }))
+          issue('native-source-observation-text-paint', n);
+      } else if (
         v.fills?.length !== 1 ||
         !paint(v.fills[0].color, spec.textFillLit) ||
         (v.fills[0].opacity ?? 1) !== (spec.textFillLit?.a ?? 1) ||
         Object.keys(v.fills[0].boundVariables ?? {}).length
       )
         issue("native-source-observation-text-paint", n);
+      if (isContractDraft(input) && (n.metadata.fontWeightVar !== (spec.fontWeightVar ?? '') ||
+          n.metadata.lineHeightVar !== (spec.lineHeightVar ?? '')))
+        issue('native-source-observation-text-token-identity', n);
     }
     if (spec.type === "svg") {
       if (
