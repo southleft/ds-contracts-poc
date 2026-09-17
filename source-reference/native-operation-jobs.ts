@@ -986,7 +986,10 @@ export function createNativeOperationJobs(
           if(state.comparisonRepair.version===1)state.repairWritten=true;
           else (state.repairRevisionsWritten??=[]).push(state.comparisonRepair.revision);
         } else if (c.phase === 'comparison-recovery-readback') {
-          if (!canRecover(state,plan) || c.readOnly!==true || c.script!==emitNativeComparisonRecoveryReadbackScript(recoveryInput(state,plan))) fail('recovery-read-precondition-invalid');
+          // Stored reader bytes are hash-bound above. Compiler upgrades can
+          // change the reader; its result still must pass the independent
+          // recovery planner below against the unchanged pinned input.
+          if (!canRecover(state,plan) || c.readOnly!==true) fail('recovery-read-precondition-invalid');
         } else if (c.phase === 'comparison-recovery-apply') {
           if (state.phase!=='comparison-recovery-observed' || !state.recovery || state.recoveryWritten || c.readOnly!==false || !same(c,recoveryClaim)) fail('recovery-write-precondition-invalid');
           state.recoveryWritten=true;

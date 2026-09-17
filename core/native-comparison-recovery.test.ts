@@ -1,4 +1,5 @@
-import {mkdtempSync,rmSync,readFileSync,readdirSync,unlinkSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {mkdtempSync,rmSync,readFileSync,readdirSync,unlinkSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {createNativeOperationJobs,REACT_NATIVE_FILE_KEY,type NativeOperationJobsOptions} from '../source-reference/native-operation-jobs.js';
@@ -146,6 +147,24 @@ test('app journal continues once, retains original evidence, and recovers interr
   const entries=readdirSync(events).map(name=>JSON.parse(readFileSync(path.join(events,name),'utf8')));
   assert.equal(entries.filter(e=>e.kind==='dispatch'&&e.command.phase==='component-create').length,1);
   assert.equal(entries.filter(e=>e.kind==='dispatch'&&e.command.phase==='comparison-recovery-apply').length,1);
+  // Model a historical, semantically equivalent reader with different bytes.
+  // Re-sign this synthetic journal only; production journals are immutable.
+  const sha=(value:string)=>createHash('sha256').update(value).digest('hex');
+  let previous=sha(readFileSync(path.join(events,'../operation.json'),'utf8')),readerAttempt='',readerSha='',readerFile='';
+  for(const name of readdirSync(events).sort()){
+    const file=path.join(events,name),event=JSON.parse(readFileSync(file,'utf8'));
+    if(event.kind==='dispatch'&&event.command.phase==='comparison-recovery-readback'){
+      event.command.script+='\n// Historical reader formatting';event.command.scriptSha256=sha(event.command.script);
+      readerAttempt=event.command.attemptId;readerSha=event.command.scriptSha256;readerFile=file;
+    }
+    if(event.kind==='result'&&event.envelope.attemptId===readerAttempt)event.envelope.scriptSha256=readerSha;
+    event.previousSha256=previous;const bytes=JSON.stringify(event);writeFileSync(file,bytes);previous=sha(bytes);
+  }
+  jobs=createNativeOperationJobs(repo,options);
+  assert.equal(jobs.get(saved.id).phase,'component-structure-observed');
+  assert.throws(()=>jobs.dispatch(saved.id,'comparison-recovery-apply'));
+  const stored=readFileSync(readerFile,'utf8'),tampered=JSON.parse(stored);tampered.command.script+='\n// Unhashed edit';writeFileSync(readerFile,JSON.stringify(tampered));
+  assert.throws(()=>jobs.get(saved.id),/dispatch-invalid|journal-chain-invalid/);writeFileSync(readerFile,stored);
   for(const name of readdirSync(events).slice(8)) unlinkSync(path.join(events,name));
   assert.throws(()=>jobs.get(saved.id),/recovery-write-journal-incomplete/);
 });
