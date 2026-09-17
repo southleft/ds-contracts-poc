@@ -1,4 +1,5 @@
 import { reactToggleAria } from './react-toggle-aria.js';
+import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React with INLINE STYLES, token refs RESOLVED to literals — the
@@ -559,7 +560,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   }
   for (const ev of events) {
     const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
-    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: () => void;`);
+    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: ${reactEventCallbackType(contract, ev)};`);
   }
 
   const destructured: string[] = [];
@@ -606,7 +607,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const [off, on] = ev.toggles.between;
       body.push(`set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
     }
-    body.push(`${ev.bindings.code.prop}?.();`);
+    body.push(reactEventCallbackCall(contract, ev));
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
   }
 
@@ -839,7 +840,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (part.slot) {
       const el = part.element ?? 'div';
       const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
-      const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>{${expr}}</${el}>`;
+      const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${expr}}</${el}>`;
       return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
     if (part.content) {
@@ -863,7 +864,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         : part.text;
       return wrapVisibleWhen(
         part,
-        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>${inner}</${el}>`,
+        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,
       );
     }
     if (part.meter) {

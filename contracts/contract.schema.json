@@ -350,6 +350,10 @@
                   "prop": {
                     "type": "string",
                     "pattern": "^on[A-Z][a-zA-Z0-9]*$"
+                  },
+                  "argument": {
+                    "type": "string",
+                    "const": "next-value"
                   }
                 },
                 "required": [

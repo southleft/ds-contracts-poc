@@ -427,6 +427,7 @@ reg("events", "event-fields", [
   "event.bindings",
   "event.bindings.code",
   "event.bindings.code.prop",
+  "event.bindings.code.argument",
 ]);
 reg("events", "toggles", [
   "event.toggles",

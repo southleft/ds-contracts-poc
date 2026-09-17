@@ -2544,7 +2544,12 @@ export const EventSchema = z.strictObject({
   name: z.string().regex(/^[a-z][a-zA-Z0-9]*$/),
   description: z.string().optional(),
   bindings: z.strictObject({
-    code: z.strictObject({ prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/) }),
+    code: z.strictObject({
+      prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/),
+      /** React callback receives the next public value of toggles.prop.
+       * Omission preserves the existing zero-argument callback API. */
+      argument: z.literal("next-value").optional(),
+    }),
   }),
   /** Anatomy part (by name) whose activation fires the event; 'root' allowed. */
   trigger: z.string(),
@@ -2788,6 +2793,17 @@ export const ContractSchema = z.strictObject({
   /** v1 provenance is optional for backward compatibility. */
   provenance: ContractProvenanceSchema.optional(),
 }).superRefine((c, ctx) => {
+  for (const [index, event] of (c.events ?? []).entries()) {
+    if (event.bindings.code.argument !== 'next-value') continue;
+    const prop = c.props.find(p => p.name === event.toggles?.prop);
+    const values = prop && typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
+    if (!event.toggles || !values ||
+        event.toggles.between[0] === event.toggles.between[1] ||
+        event.toggles.between.some(value => !values.includes(value))) {
+      ctx.addIssue({ code: 'custom', path: ['events', index, 'bindings', 'code', 'argument'],
+        message: 'next-value requires a toggle between two distinct values of an existing enum prop' });
+    }
+  }
   const omissionAliases = c.props.filter(p => p.bindings.figma.unsetValue !== undefined).map(p => p.bindings.code.prop);
   for (const alias of omittedCodeBindingConflicts(c, omissionAliases)) {
     ctx.addIssue({ code: 'custom', path: ['props'], message: `omitted-plane code binding "${alias}" collides with another prop, slot, event or generated event binding` });

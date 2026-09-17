@@ -1246,7 +1246,7 @@ function eventsPage(): { route: string; html: string } {
         name: "Event name, lowerCamel.",
         description: "Flows into JSDoc and the canvas component description.",
         bindings:
-          "Code-only by declared fidelity limit: the callback prop, which must be <code>on*</code>.",
+          "Code-only by declared fidelity limit: <code>code.prop</code> names the callback and must be <code>on*</code>. Optional <code>code.argument: next-value</code> makes both React emitters pass the next toggled value, using the prop's public <code>bindings.code.values</code> mapping when present. It requires a toggle between two distinct enum values. For example, an internal off/on axis mapped to false/true calls <code>onCheckedChange(true)</code>, not the internal axis key. A controlled value remains owned by the caller; the callback reports the requested next value. Omit <code>argument</code> to keep the existing zero-argument callback. This declaration does not infer behavior from a drawing or source type and does not change the Web Component CustomEvent API.",
         trigger:
           "The anatomy part (by name) whose activation fires the event; <code>root</code> allowed.",
         toggles: "See below.",
