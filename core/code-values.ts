@@ -67,7 +67,7 @@ export function validateCodeValueConsumers(contract: Contract): void {
   const mapped = contract.props.filter(hasCodeValues);
   if (!mapped.length) return;
   mapped.forEach((p) => PropSchema.parse(p));
-  const names = new Set(contract.props.map((p) => p.bindings.code.prop));
+  const names = new Set(contract.props.flatMap((p) => [p.bindings.code.prop,...(p.bindings.code.initial ? [p.bindings.code.initial.prop] : [])]));
   for (const w of walkAnatomy(contract))
     if (w.part.slot) names.add(w.part.slot.name);
   for (const e of contract.events ?? []) names.add(e.bindings.code.prop);

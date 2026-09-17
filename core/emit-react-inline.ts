@@ -1,3 +1,4 @@
+import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
@@ -27,7 +28,7 @@ import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, m
  *     hover/focus pseudo-classes above (the css/html emitters enforce it).
  *   · Composition imports sibling inline-emitted components ('./Dep').
  */
-import { rootContentJsx } from './root-content.js';
+import { rootContentJsx, literalTextJsx } from './root-content.js';
 import {
   TOKEN_CHANNELS,
   borderStyleDecls,
@@ -121,6 +122,7 @@ const isStructural = (part: Part) =>
 type StyleRecord = Record<string, string | number>;
 
 export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): EmitReactInlineResult {
+  validateReactInitialBindings(contract);
   refuseRetainedRuntime(contract, 'react-inline', ctx.contracts);
   validateCodeValueConsumers(contract);
   const errors: string[] = [];
@@ -554,6 +556,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       propLines.push(`${doc}  ${p.bindings.code.prop}${p.required ? '' : '?'}: string;`);
     }
   }
+  for (const p of contract.props.filter(p => p.bindings.code.initial)) {
+    propLines.push(`  /** Initial value, read only on mount when uncontrolled. */\n  ${p.bindings.code.initial!.prop}?: ${codeValueUnion(p)};`);
+  }
   for (const { slot, part } of slots) {
     const doc = part.description ? `  /** ${part.description} */\n` : '';
     propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
@@ -583,6 +588,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     );
   }
   for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
+  for (const p of contract.props.filter(p => p.bindings.code.initial))
+    destructured.push(`${p.bindings.code.initial!.prop}: ${reactInitialInput(contract,p)}`);
   for (const { slot } of slots) destructured.push(slot.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
   destructured.push('style', 'children', '...rest');
@@ -595,7 +602,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     const code = prop.bindings.code.prop;
     const union = (prop.type as { enum: string[] }).enum.map((v) => `'${v}'`).join(' | ');
     prelude.push(
-      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined ? ' | undefined' : ''}>(${prop.default === undefined ? 'undefined' : `'${prop.default}'`});`,
+      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined && prop.bindings.code.initial?.default === undefined ? ' | undefined' : ''}>(${reactInitialValue(contract,prop)});`,
       `  const ${code} = ${code}Prop ?? ${code}Uncontrolled;`,
     );
   }
@@ -605,7 +612,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
       const code = prop.bindings.code.prop;
       const [off, on] = ev.toggles.between;
-      body.push(`set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
+      body.push(`${prop.bindings.code.initial ? `if (${code}Prop === undefined) ` : ''}set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
     }
     body.push(reactEventCallbackCall(contract, ev));
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
@@ -829,7 +836,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           ? depChildren.default
           : undefined);
       const instance = text !== undefined
-        ? `<${dep.name}${attrs}>${text}</${dep.name}>`
+        ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
         : `<${dep.name}${attrs} />`;
       // A2 grid (G3/P12): an instance cell rides a wrapper span whose style
       // carries the placement (see the baseStyles entries above).
@@ -861,7 +868,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         ? `{${Object.entries(tb.map)
             .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
             .join('')}${JSON.stringify(part.text)}}`
-        : part.text;
+        : literalTextJsx(part.text);
       return wrapVisibleWhen(
         part,
         `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,

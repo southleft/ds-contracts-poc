@@ -1521,6 +1521,7 @@ function generateManifest(contract: Contract): string {
 // ---------------------------------------------------------------------------
 
 export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResult {
+  if (contract.props.some(p => p.bindings.code.initial)) throw new Error('WEB_COMPONENT_INITIAL_CODE_BINDING_UNSUPPORTED');
   const checked = new Set<string>();
   const refuseMapped = (c: Contract): void => {
     if (checked.has(c.id)) return;

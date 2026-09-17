@@ -12,3 +12,9 @@ export function rootContentJsx(root: Part | undefined, codePropOf: (name: string
     .join('') : '';
   return `{${choices}${JSON.stringify(root.text)}}`;
 }
+
+/** Keep ordinary historical output stable, while literal JSX punctuation,
+ * entities and meaningful whitespace must be emitted as a string expression. */
+export function literalTextJsx(text:string):string {
+  return /[<>{}&\r\n\t]/.test(text) || text !== text.trim() ? `{${JSON.stringify(text)}}` : text;
+}

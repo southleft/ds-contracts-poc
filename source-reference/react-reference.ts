@@ -1,3 +1,4 @@
+import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import { selectReactComparisonCase } from './react-comparison-case.js';
 import { reactComparisonContentScope, reactComparisonContentOperation } from './react-comparison-request.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
@@ -170,15 +171,22 @@ export function createReactReferenceService(
     if (!native || !reference || reference.id !== referenceId) throw Error('react-initial-reference-unavailable');
     // Reuse the immutable ownership archive already pinned by a saved root
     // operation. No fresh property matrix or browser-supplied evidence paths.
-    const anchor = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => {
-      const roots = native!().jobs.listReact(referenceId, 'root').filter(r => r.kind === 'root' && r.operation.sourceCurrent);
-      return roots.map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id))[0];
+    const selected = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => {
+      const roots = native!().jobs.listReact(referenceId, 'root').filter(r => r.kind === 'root');
+      const current = roots.filter(r => r.operation.sourceCurrent)
+        .map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id));
+      // Native plan compatibility is not source freshness. Initial-state reads
+      // independently authenticate the old source archive, without authorizing
+      // a native write or replacing that operation's pinned compiler output.
+      return { anchor: current[0], anchors: roots.map(r => native!().jobs.reactRequest(r.operation.id)) };
     }));
+    const { anchor, anchors } = selected;
     if (!anchor) throw Error('react-initial-saved-observation-required');
-    return { reference, anchor };
+    return { reference, anchor, anchors };
   };
   const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
-  const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
+  const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource,
+    (referenceId,caseId,report) => projectReactBehaviorContract(initialStates.read(referenceId,caseId),report));
   const thisInitialEvidence = (request: ReactInitialNativeRequest) => {
     if (!reference) throw Error('react-initial-native-reference-unavailable');
     return initialStates.nativeEvidence(reference, request);

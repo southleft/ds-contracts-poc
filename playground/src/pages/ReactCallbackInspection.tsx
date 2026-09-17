@@ -119,6 +119,13 @@ export function ReactCallbackInspection({
               : "Original equivalence is not yet established."}
           </p>
           {result.restoration && <p>Each trial verifies restored structure and ownership, then replays the unchanged original page and requires an exact image match. Same-mount pixel differences retained: {result.restoration.checks.filter(check => !check.sameMountPixelsMatch).length}. This does not demonstrate recovery of a user's runtime state.</p>}
+          {result.draft && <section aria-label="Generated behavior draft">
+            <h4>React behavior draft: {result.draft.status}</h4>
+            {result.draft.contract && <p>State API: {result.draft.contract.props.filter(prop=>prop.bindings.code.initial).map(prop=>`${prop.bindings.code.prop} (controlled), ${prop.bindings.code.initial!.prop} (initial only)`).join(', ')}. Callback: {result.draft.contract.events?.map(event=>event.bindings.code.prop).join(', ')}.</p>}
+            <p>This code combines observed state behavior with the saved appearance draft. Controlled-state visual comparisons, associated label composition, generated-consumer qualification and native metadata preservation remain unfinished.</p>
+            {result.draft.tsx && <details><summary>Review generated React code</summary><pre style={{maxHeight:320,overflow:'auto'}}><code>{result.draft.tsx}</code></pre></details>}
+            {result.draft.problems.map(problem=><p key={problem}>{problem}</p>)}
+          </section>}
           {result.observation?.relationships.map((row) => (
             <p key={row.callback + ":" + row.property}>
               <strong>

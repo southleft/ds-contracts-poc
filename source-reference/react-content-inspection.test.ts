@@ -103,6 +103,15 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   const reopened = initialStore().read(reference.id, 'button-default')!;
   const { draft: diagnosticDraft, ...reopenedObservation } = reopened;
   assert.deepEqual(reopenedObservation, initialReport);
+  const currentAnchor = { ...request, compilation: 'current' as const };
+  const recovered = createReactInitialInspectionStore(repo, repo, () => ({ reference,
+    anchor: currentAnchor, anchors: [request] }));
+  assert.deepEqual(recovered.read(reference.id, 'button-default'), reopened,
+    'a compiler anchor change reopens the same authenticated source observation');
+  assert.equal(recovered.start(reference.id, 'button-default').state.id, initialId);
+  assert.equal(createReactInitialInspectionStore(repo, repo, () => ({ reference,
+    anchor: currentAnchor, anchors: [{ ...request, inventorySha256: '0'.repeat(64) }] }))
+    .read(reference.id, 'button-default'), undefined, 'different source seals cannot supply the missing observation');
   assert.equal(diagnosticDraft?.status, 'refused', 'a persistence-only fixture does not qualify a source contract');
   const repeated = initialStore().start(reference.id, 'button-default'); await repeated.promise;
   assert.equal(repeated.state.id, initialId, 'a completed observation reopens without a new mount');
@@ -117,6 +126,7 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.throws(() => initialStore().nativeImage(reference, { ...pinned, observation: { ...pinned.observation, inventorySha256: '0'.repeat(64) } }, '0'), /inventory-changed/);
   writeFileSync(path.join(initialRoot, 'latest.json'), JSON.stringify({ id: initialId, inventorySha256: evidenceSha(seal) }));
   writeFileSync(path.join(initialDir, 'states/0.png'), Buffer.from('changed'));
+  assert.throws(() => recovered.read(reference.id, 'button-default'), /evidence-changed/);
   assert.throws(() => initialStore().read(reference.id, 'button-default'), /evidence-changed/);
   assert.throws(() => initialStore().image(reference.id, 'button-default', initialId, '0'), /evidence-changed/);
   writeFileSync(path.join(initialDir, 'states/0.png'), sourcePng!);

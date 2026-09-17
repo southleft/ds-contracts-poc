@@ -285,6 +285,21 @@
                   "prop": {
                     "type": "string"
                   },
+                  "initial": {
+                    "type": "object",
+                    "properties": {
+                      "prop": {
+                        "type": "string"
+                      },
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "prop"
+                    ],
+                    "additionalProperties": false
+                  },
                   "values": {
                     "type": "object",
                     "propertyNames": {

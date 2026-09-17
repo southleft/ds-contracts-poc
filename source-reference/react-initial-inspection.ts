@@ -43,14 +43,25 @@ export function readReactInspectionOriginal(repo: string, reference: ReactRefere
     programSha256: evidenceSha(programBytes) };
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
-  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest }) {
+  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest; anchors?: ReactNativeRequest[] }) {
   const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void> }>();
   const from = (reference: ReactReference, request: Request) => {
     const source = readReactInspectionOriginal(repo, reference, request), key = revisionOf(request).slice(7);
     return { reference, request, source, key, root: path.join(repo, 'private/react-initial-inspections', key) };
   };
   const input = (referenceId: string, caseId: string) => {
-    const { reference, anchor } = select(referenceId, caseId);
+    const selected = select(referenceId, caseId), { reference } = selected;
+    // A different root in the same sealed cohort may become the selected
+    // anchor after a compiler change. Reopen its existing initial observation
+    // without recapturing or rewriting it. Only host-verified root requests
+    // with the exact same source archive are eligible; from/saved still verify
+    // the full request, current files and immutable evidence inventory.
+    const candidates = [selected.anchor, ...(selected.anchors ?? []).filter(anchor =>
+      anchor.referenceId === selected.anchor.referenceId &&
+      anchor.inventorySha256 === selected.anchor.inventorySha256 &&
+      revisionOf(anchor.ownership) === revisionOf(selected.anchor.ownership))];
+    const anchor = candidates.find(anchor => existsSync(path.join(repo, 'private/react-initial-inspections',
+      revisionOf({ version: 1, anchor, caseId }).slice(7), 'latest.json'))) ?? selected.anchor;
     return from(reference, { version: 1, anchor, caseId });
   };
   const saved = (value: ReturnType<typeof input>, pinned?: ReactInitialNativeRequest['observation']) => {

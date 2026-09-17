@@ -1,3 +1,4 @@
+import type {ReactBehaviorContract} from './react-behavior-contract.js';
 import {
   mkdirSync,
   readFileSync,
@@ -45,6 +46,7 @@ export interface ReactCallbackInspection {
   phase: "running" | "complete" | "failed";
   sourceUnchanged: boolean;
   observation?: ReactCallbackBehavior;
+  draft?: ReactBehaviorContract;
   restoration?: {strategy:'verify-structure-then-replay-original';checks:Array<{sameMountPixelsMatch:boolean}>};
   problems: string[];
 }
@@ -104,6 +106,7 @@ export function createReactCallbackInspectionStore(
     referenceId: string,
     caseId: string,
   ) => { reference: ReactReference; anchor: ReactNativeRequest },
+  derive?: (referenceId:string,caseId:string,report:ReactCallbackInspection)=>ReactBehaviorContract,
 ) {
   const active = new Map<
     string,
@@ -127,7 +130,9 @@ export function createReactCallbackInspectionStore(
     read(referenceId: string, caseId: string) {
       const running = active.get(referenceId + "/" + caseId);
       if (running) return structuredClone(running.state);
-      return structuredClone(saved(input(referenceId, caseId)));
+      const report=structuredClone(saved(input(referenceId, caseId)));
+      if(report?.phase==='complete'&&derive)report.draft=derive(referenceId,caseId,report);
+      return report;
     },
     start(referenceId: string, caseId: string) {
       const activeKey = referenceId + "/" + caseId;

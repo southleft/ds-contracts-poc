@@ -226,6 +226,9 @@ reg("props", "bindings", [
   "prop.bindings.code",
   "prop.bindings.code.prop",
   "prop.bindings.code.values",
+  "prop.bindings.code.initial",
+  "prop.bindings.code.initial.prop",
+  "prop.bindings.code.initial.default",
 ]);
 
 // --- Anatomy & parts -------------------------------------------------------
