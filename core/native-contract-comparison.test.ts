@@ -598,3 +598,22 @@ test('comparison export refuses render bounds that change while rasterization is
  assert.equal(receipt.status,'refused');
  assert(receipt.content.problems.includes('native-source-readback-export-bounds-changed'));
 });
+
+
+test('root paint removal preserves nested source paths and emitted instance identities', async () => {
+  const f = await nestedFixture();
+  Object.assign(f.content.anatomy.root, {
+    tokens: { 'background-color': '{surface}' },
+    declared: { 'background-clip': 'padding-box' },
+    literals: { 'border-width': '1px', 'border-radius': '8px' },
+  });
+  for (const reference of f.selected.instances!) reference.specPath[0]++;
+  const originalPaths = structuredClone(f.selected.instances!.map(ref => ref.specPath));
+  const creation = await f.run(f.emit());
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  const { input, receipt } = await f.observe(creation);
+  assert.deepEqual(input.comparison.instances.map(ref => ref.specPath), [[0], [0, 0], [1]]);
+  assert.deepEqual(f.selected.instances!.map(ref => ref.specPath), originalPaths);
+  assert.equal(creation.comparisons[0].nested.length, 3);
+  assert.equal(verifyNativeContractComparisonReadback(input, receipt).status, 'supported-comparison-structure-observed');
+});

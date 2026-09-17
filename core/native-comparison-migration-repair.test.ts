@@ -155,3 +155,17 @@ test('an independent content edit during adoption is preserved and reported for 
  assert.equal(result.status,'recovery-required');assert.equal(label.characters,'Designer change');
  assert.equal(f.paint.getSharedPluginData('ds_contracts','nativeSourceAllocation'),f.migration.additions[0].mainNodeId);
 });
+
+
+test('comparison caller content excludes only the synthetic paint on the replaced root',async()=>{
+ const f=await fixture(),contract=structuredClone(f.content);
+ contract.anatomy.root.tokens={'background-color':'{surface}'};
+ contract.anatomy.root.declared={'background-clip':'padding-box'};
+ contract.anatomy.root.literals={'border-width':'1px','border-radius':'8px'};
+ const component=f.engine.compileComponentData(contract,new Map([[contract.id,contract]]));
+ assert.ok(component.variants[0].spec.children![0].backgroundPaint);
+ const comparison=prepareNativeContractComparison(contract,component,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},f.input.comparison);
+ assert.deepEqual(comparison.specs.map(s=>s.type),['svg','text']);
+ assert.deepEqual(comparison.specs.map(s=>s.nativeContractSample!.specPath),[[0],[1]]);
+ assert.equal(comparison.specs[1].characters,'Save changes');
+});

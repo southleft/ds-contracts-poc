@@ -167,3 +167,26 @@ test('unpainted-box admission never treats unknown paint or placement as empty g
     assert.ok(!result.receipts.some(r => r.startsWith('pseudo-unpainted-box-carried:')), channel);
   }
 });
+
+
+test('historical root paint recompiles through the shared rule without admitting other source or descendant changes',()=>{
+ const f=fixture();Object.assign(f.tree.style,{opacity:'1','background-clip':'padding-box','border-width':'1px','border-radius':'8px'});f.fonts.treeRevision=revisionOf(f.tree);
+ const current=compileObservedContent(f.tree,f.fonts),saved=withoutRootOpacity(current);
+ const root=saved.component!.variants[0].spec,paint=root.children!.shift()!;
+ assert.ok(paint.backgroundPaint);root.fill=paint.fill;delete root.backgroundClip;
+ const facts=saved.component!.codeOnlyFacts??=[];
+ facts.push({part:'root',kind:'declared',channel:'background-clip',value:'padding-box',reason:'Background clipping exists only in code.',variants:{count:1,of:1}});
+ // Receipts are sorted by the compiler; this fixture has no other facts.
+ assert.equal(facts.length,1);
+ saved.component!.description+=' † (1 code-only facts — see plugin report)';
+ const snapshot=structuredClone(saved),result=recompileSavedObservedContent(f.tree,f.fonts,undefined,saved);
+ assert.equal(result.sourceCompatibility,'identity-opacity-omission');assert.ok(result.content.component!.variants[0].spec.children![0].backgroundPaint);
+ assert.deepEqual(saved,snapshot);
+ for(const mutate of [
+  (x:ObservedContentDraft)=>{x.component!.variants[0].spec.children![0].characters='Other';},
+  (x:ObservedContentDraft)=>{x.component!.variants[0].spec.fill='other';},
+  (x:ObservedContentDraft)=>{x.component!.codeOnlyFacts![0].reason='Unknown reason';},
+  (x:ObservedContentDraft)=>{x.tokens={};},
+  (x:ObservedContentDraft)=>{x.contract!.anatomy.root.declared!['background-clip']='content-box';},
+ ]){const changed=structuredClone(saved);mutate(changed);assert.throws(()=>recompileSavedObservedContent(f.tree,f.fonts,undefined,changed),/compiler-changed/);}
+});

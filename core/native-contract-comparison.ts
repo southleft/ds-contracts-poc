@@ -119,6 +119,10 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   const used = new Set<number>();
   const root = component.variants[0].spec;
   if (root.type !== 'root' || !root.children?.length) fail('content-missing');
+  // Synthetic root paint is already inherited from the linked main. Only
+  // caller content belongs in its slot; counting paint would duplicate it.
+  const rootContent = root.children!.filter(child=>!child.backgroundPaint);
+  if(!rootContent.length)fail('content-missing');
   const projection: NativeContractDraftProjection = { version: 1, kind: 'contract-draft', purpose: 'source-candidate-inspection',
     acceptedContract: null, nativeQualification: 'unqualified', contractId: contract.id, contractRevision: revisionOf(contract),
     tokenRevision, source: structuredClone(source), context: { ...context } };
@@ -173,7 +177,7 @@ export function prepareNativeContractComparison(contract: Contract, component: C
         children.length > grid.rows.length * grid.columns.length) fail('grid-content-placement-unqualified');
     return grid.flowRows ? grid.rows : undefined;
   };
-  const contentRows = checkCapacity({ ...input, ...selected }, root.children!);
+  const contentRows = checkCapacity({ ...input, ...selected }, rootContent);
   for (const reference of instances) {
     let spec = root;
     for (const index of reference.specPath) {
@@ -182,7 +186,14 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     }
     if (reference.contentMode !== 'source-owned') Object.assign(reference, { contentRows: checkCapacity(reference, spec.children ?? []) });
   }
-  const specs = root.children!.map((spec, i) => annotate(spec, [i]));
+  // Incoming references address the full compiler tree. After checking that
+  // tree, rebase only the removed root paint indices into caller-content paths.
+  for (const reference of instances) {
+    const contentIndex = rootContent.indexOf(root.children![reference.specPath[0]]);
+    if (contentIndex < 0) fail('nested-main-path-missing');
+    reference.specPath = [contentIndex, ...reference.specPath.slice(1)];
+  }
+  const specs = rootContent.map((spec, i) => annotate(spec, [i]));
   if (used.size !== instances.length) fail('nested-main-path-missing');
   // A full-width child needs an independently known containing width. Do
   // not let Figma resolve a HUG/FILL cycle using the main's preview box.

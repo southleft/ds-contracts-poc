@@ -2,6 +2,8 @@
  * anatomy/layout/token pipeline. This is a comparison snapshot, never a main
  * component definition or evidence of reusable nested component semantics.
  */
+import {lowerPaddingBoxBackground} from '../core/figma-background-clip.js';
+import {flattenTokens,makeResolveLiteral,pxOrNull} from '../core/tokens.js';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { createFigmaEngine, type ComponentData } from '../core/emit-figma-script.js';
 import { mintTokens } from '../core/mint-tokens.js';
@@ -40,20 +42,42 @@ export function compileObservedContent(tree: CapturedNode, fonts: TextFontEviden
   return compileContent(tree, fonts, svg, includeSourcePaths, preserveTextBoxes, false);
 }
 
+/** A root paint plane belongs to the linked main, not caller content. Prove
+ * the complete old snapshot becomes the fresh one by this single shared
+ * lowering rule; no descendant, token, source or contract delta is ignored. */
+function rootPaintRecompileMatches(saved:ObservedContentDraft,current:ObservedContentDraft):boolean {
+  if(!saved.component||!saved.tokens||saved.contract?.anatomy.root.declared?.['background-clip']!=='padding-box')return false;
+  const expected=structuredClone(saved),component=expected.component!;
+  const facts=component.codeOnlyFacts??[],removed=facts.filter(f=>f.part==='root'&&f.kind==='declared'&&f.channel==='background-clip'&&f.value==='padding-box'&&f.reason==='Background clipping exists only in code.'&&f.variants?.count===component.variants.length&&f.variants?.of===component.variants.length);
+  if(!removed.length)return false;
+  const resolve=makeResolveLiteral(flattenTokens(saved.tokens));
+  for(const variant of component.variants)if(!lowerPaddingBoxBackground(variant.spec,name=>{
+    try{return pxOrNull(resolve(name.replaceAll('/','.')))??undefined;}catch{return undefined;}
+  }))return false;
+  const remaining=facts.filter(f=>!removed.includes(f));
+  if(remaining.length)component.codeOnlyFacts=remaining;else delete component.codeOnlyFacts;
+  const suffix=` † (${facts.length} code-only facts — see plugin report)`;
+  if(!component.description.endsWith(suffix))return false;
+  component.description=component.description.slice(0,-suffix.length)+(remaining.length?` † (${remaining.length} code-only facts — see plugin report)`:'');
+  return canonicalJson(expected)===canonicalJson(current);
+}
+
 /** Re-open an authenticated snapshot, never adopt its stored output on trust.
  * The pre-opacity compiler omitted identity opacity. That representation is
  * recoverable only when every observed element is explicitly fully opaque,
  * and fresh compilation reproduces the ENTIRE old result exactly. Missing or
- * nonidentity opacity, pseudo content and every other compiler delta refuse.
+ * nonidentity opacity and pseudo content refuse. The exact shared root paint
+ * lowering above is the only additional compiler transition admitted; all
+ * other compiler deltas refuse.
  * New observations always use the current compiler, including opacity. */
 export function recompileSavedObservedContent(tree: CapturedNode, fonts: TextFontEvidence,
   svg: SvgViewportEvidence | undefined, saved: ObservedContentDraft) {
   const current = compileObservedContent(tree, fonts, svg);
-  if (saved.status === 'compiled-comparison-draft' && canonicalJson(current) === canonicalJson(saved)) return { content: current };
+  if (saved.status === 'compiled-comparison-draft' && (canonicalJson(current) === canonicalJson(saved)||rootPaintRecompileMatches(saved,current))) return { content: current };
   if (saved.version === 1 && saved.status === 'compiled-comparison-draft' &&
       flatten(tree).every(({ node }) => node.style.opacity === '1' && Object.keys(node.pseudo).length === 0)) {
     const legacy = compileContent(tree, fonts, svg, false, [], true);
-    if (legacy.status === 'compiled-comparison-draft' && canonicalJson(legacy) === canonicalJson(saved))
+    if (legacy.status === 'compiled-comparison-draft' && (canonicalJson(legacy) === canonicalJson(saved)||rootPaintRecompileMatches(saved,legacy)))
       return { content: legacy, sourceCompatibility: 'identity-opacity-omission' as const };
   }
   throw Error('react-comparison-compiler-changed');
