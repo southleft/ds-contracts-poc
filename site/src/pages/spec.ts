@@ -1154,7 +1154,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           props:
             'Fixed prop values; <code>"{parentProp}"</code> threads a parent enum through.',
           initialProps:
-            'React mount-only inputs, keyed by canonical child enum property. Canonical literals or <code>"{parentEnum}"</code> references target the child’s <code>bindings.code.initial.prop</code>; changes after mounting do not reset state. A controlled input supplied through <code>props</code> takes priority. Root/repeated references and direct Figma, HTML and Web Components emission currently refuse this field.',
+            'React mount-only inputs, keyed by canonical child enum property. Canonical literals or <code>"{parentEnum}"</code> references target the child’s <code>bindings.code.initial.prop</code>; changes after mounting do not reset state. A controlled input supplied through <code>props</code> takes priority. Figma can select finite fresh-mount design variants, preserving initializer omission/defaults and controlled precedence; this does not implement mount-time state on the canvas or qualify reverse reconstruction. Root/repeated references, HTML and Web Components emission still refuse this field.',
           text: "Overrides the child’s <code>children</code> text prop (code: JSX children; canvas: text override on the instance).",
           overrides:
             'Per-instance channel overrides — see <a href="#ref-overrides">below</a>.',

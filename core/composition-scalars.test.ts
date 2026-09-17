@@ -157,7 +157,12 @@ test('composed initialProps initialize once, preserve public scalar mappings and
     } finally { await page.close(); }
   }
   assert.throws(() => htmlEmitter.emit(parent, ctx), /HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
-  assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
+  const native = createFigmaEngine(ctx).compileComponentData(parent, ctx.contracts);
+  assert.ok(native.variants.length > 0);
+  for (const variant of native.variants) {
+    assert.equal(variant.spec.children!.find(n => n.name === 'fixed')!.depProps!.State, 'On');
+    assert.equal(variant.spec.children!.find(n => n.name === 'controlled')!.depProps!.State, 'Off');
+  }
   const unmappedParent = structuredClone(parent);
   delete unmappedParent.props.find(p => p.name === 'starting')!.bindings.code.values;
   assert.throws(() => emitWebComponent(unmappedParent, { ...ctx, tokens: new Set<string>() }), /WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
@@ -370,4 +375,76 @@ test('native composed components expose child controls on create, amend and no-o
     await run(engine.buildComponentScript(parent, ctx.contracts));
     assert.equal(inspect()[0][0], before[0][0], 'amend preserves component identity and exposes rebuilt children');
   }
+});
+
+test('native fresh-mount variants preserve initializer omission, controlled precedence and authored mappings', async () => {
+  const { parent, child, ctx } = callerFamily();
+  const state = child.props.find(p => p.name === 'state')!;
+  state.bindings.code = { prop: 'checked', values: { off: false, on: true }, initial: { prop: 'defaultChecked', default: 'off' } };
+  state.bindings.figma.unsetValue = 'Unset'; delete state.default;
+  child.anatomy.root = { layout: { display: 'flex', direction: 'row' }, parts: {
+    indicator: { text: 'Selected', visibleWhen: { prop: 'state', equals: 'on' } },
+  } };
+  const axis = (name: string) => ({ name, type: { enum: ['off', 'on'] }, bindings: {
+    code: { prop: name, values: { off: false, on: true } },
+    figma: { kind: 'VARIANT' as const, property: name, unsetValue: 'Omitted', values: { off: 'Off', on: 'On' } },
+  } });
+  parent.props = [axis('starting'), axis('current')];
+  parent.anatomy.root.parts = {
+    fixed: { component: { id: child.id, initialProps: { state: 'on' } } },
+    mapped: { component: { id: child.id, initialProps: { state: '{starting}' } } },
+    controlled: { component: { id: child.id, props: { state: '{current}' }, initialProps: { state: '{starting}' } } },
+  };
+  const engine = createFigmaEngine(ctx), data = engine.compileComponentData(parent, ctx.contracts);
+  assert.equal(data.variants.length, 9);
+  const { figma, root } = createFigmaMock();
+  const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 });
+  await run(engine.buildComponentScript(child, ctx.contracts));
+  await run(engine.buildComponentScript(parent, ctx.contracts));
+  const target = root.findOne(n => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === parent.id) as ComposedMockNode;
+  assert.ok(target);
+  for (const variant of data.variants) {
+    const start = /starting=([^,]+)/.exec(variant.name)![1], current = /current=([^,]+)/.exec(variant.name)![1];
+    const initial = start === 'Omitted' ? 'Off' : start;
+    const expected = ['On', initial, current === 'Omitted' ? initial : current];
+    assert.deepEqual(variant.spec.children!.map(n => n.depProps!.State), expected);
+    assert.deepEqual(variant.spec.children![1].depInitialProps, { state: '{starting}' });
+    const component = target.children.find(n => n.name === variant.name)!;
+    assert.ok(component);
+    assert.deepEqual(component.findAll(n => n.type === 'INSTANCE').map(n => n.componentProperties!.State.value), expected,
+      'actual written child properties follow the parent variant, including omitted controlled inputs');
+    // The shared mock records setProperties but does not swap the cloned
+    // subtree for VARIANT changes. Inspect the written target variants
+    // separately; a live instance-swap proof remains required.
+    const childSet = root.findOne(n => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === child.id) as ComposedMockNode;
+    for (const selected of expected) {
+      const main = childSet.children.find(n => n.name.includes(`State=${selected}`))!;
+      assert.ok(main);
+      assert.equal(main.findAll(n => n.type === 'TEXT').length, selected === 'On' ? 1 : 0);
+    }
+  }
+  const ids = target.findAll(() => true).map(n => n.id);
+  await run(engine.buildComponentScript(parent, ctx.contracts));
+  assert.deepEqual(target.findAll(() => true).map(n => n.id), ids, 'repeat does not recreate variants or nested instances');
+  const initial = state.bindings.code.initial!;
+  delete initial.default;
+  const omitted = engine.compileComponentData(parent, ctx.contracts).variants.find(v => v.name === 'starting=Omitted, current=Omitted')!;
+  assert.deepEqual(omitted.spec.children![1].depProps, {}, 'absent initializer and absent default preserve omission');
+  state.default = 'on';
+  const defaulted = engine.compileComponentData(parent, ctx.contracts).variants.find(v => v.name === 'starting=Omitted, current=Omitted')!;
+  assert.equal(defaulted.spec.children![1].depProps!.State, 'On', 'omitted initializer falls back to the child canonical default');
+  delete state.default; initial.default = 'off';
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { state: 'missing' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { label: 'on' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { state: '{absent}' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { state: 'on' };
+  parent.props[0].bindings.figma = { kind: 'NONE' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.props[0] = axis('starting');
+  state.bindings.figma = { kind: 'NONE' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
 });

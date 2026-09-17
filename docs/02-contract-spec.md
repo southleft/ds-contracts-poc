@@ -82,7 +82,14 @@ its own public code spelling, including booleans. Omission leaves the child's
 initializer unset; changes after mounting do not reset state. Ordinary
 `component.props` still targets the controlled input, which takes priority when
 both are supplied. Root references and repeated instances currently refuse
-`initialProps`, as do direct Figma, HTML and Web Components emission.
+`initialProps`, as do HTML and Web Components emission. Figma compilation can
+project finite enum initializers into fresh-mount design variants: an omitted
+parent value uses the child's declared initializer default when present, and a
+supplied controlled value wins. The authored initializer mapping remains in the
+compiled instance specification. This static projection does not implement React
+state lifetime on the canvas or qualify reverse reconstruction. Child and parent
+state inputs must have compatible native variant bindings; text and Boolean
+property aliases remain unsupported.
 
 ```jsonc
 "anatomy": {
