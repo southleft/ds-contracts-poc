@@ -172,6 +172,12 @@ test("reference API retains all ten cases, isolates source execution and refuses
     const callerUrl = base + `/react/${reference.id}/native-operation/10000000-0000-4000-8000-000000000001/caller-react`;
     assert.equal((await fetch(callerUrl)).status, 409);
     assert.equal((await fetch(callerUrl + '/preview', { method: 'POST', body: '{}' })).status, 409);
+    for (const kind of ['initial-states', 'callback-behavior']) {
+      const contextual = callerUrl + '/child/instance-5/' + kind;
+      assert.equal((await fetch(contextual)).status, 409, 'contextual observation requires a saved operation and ownership');
+      assert.equal((await fetch(contextual, { method: 'POST', body: JSON.stringify({ contract: {}, sourceRoot: '/etc' }) })).status, 409);
+      assert.equal((await fetch(contextual, { method: 'DELETE' })).status, 409);
+    }
     const programUrl = base + `/react/${reference.id}/program`;
     assert.equal(
       (

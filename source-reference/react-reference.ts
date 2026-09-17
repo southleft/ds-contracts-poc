@@ -1,5 +1,6 @@
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
+import {revisionOf} from '../core/contract-provenance.js';
 import {compileReactCallerNative} from './react-caller-native.js';
 import {buildReactCallerPreview} from './react-caller-preview.js';
 import {buildReactBehaviorPreview} from './react-behavior-preview.js';
@@ -14,7 +15,7 @@ import type { createNativeUpdateJobs } from './native-update-jobs.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
-import { createReactInitialInspectionStore } from './react-initial-inspection.js';
+import { createReactInitialInspectionStore, reactInspectionRequest } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
@@ -190,7 +191,7 @@ export function createReactReferenceService(
   };
   const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
   const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource,
-    (referenceId,caseId,report) => projectReactBehaviorContract(initialStates.read(referenceId,caseId),report));
+    (referenceId,caseId,report) => projectReactBehaviorContract(initialStates.read(referenceId,caseId,report.instanceId),report));
   const thisInitialEvidence = (request: ReactInitialNativeRequest) => {
     if (!reference) throw Error('react-initial-native-reference-unavailable');
     return initialStates.nativeEvidence(reference, request);
@@ -233,6 +234,31 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const contextual = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react\/child\/(instance-\d+)\/(initial-states|callback-behavior)$/.exec(route);
+    if (contextual) {
+      try {
+        if (!['GET','POST'].includes(req.method ?? '') || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
+            !native || !reference || reference.id !== contextual[1] || !reactReferenceUnchanged(reference))
+          throw Error('react-contextual-request-invalid');
+        const request = native().jobs.reactRequest(contextual[2]);
+        if (request.version !== 1 || request.referenceId !== reference.id) throw Error('react-contextual-source-mismatch');
+        const store = contextual[4] === 'initial-states' ? initialStates : callbacks;
+        const running = req.method === 'GET' ? store.running(reactInspectionRequest(request, request.caseId, contextual[3])) : undefined;
+        // Running status cannot authorize generation. The source was checked
+        // above; sealed evidence is fully re-read once the job is terminal.
+        if (running) { json(res, 200, { inspection: running }); return; }
+        const selected = selectInspectionSource(reference.id).anchor;
+        if (request.version !== 1 || request.referenceId !== reference.id ||
+            revisionOf(request.ownership) !== revisionOf(selected.ownership) || request.inventorySha256 !== selected.inventorySha256)
+          throw Error('react-contextual-source-mismatch');
+        if (req.method === 'POST') {
+          const job = store.start(reference.id, request.caseId, contextual[3]);
+          void job.promise.catch(() => {});
+          json(res, 200, { inspection: job.state });
+        } else json(res, 200, { inspection: store.read(reference.id, request.caseId, contextual[3]) ?? null });
+      } catch { json(res, 409, { error: 'Contextual inspection requires an unchanged saved composition and its exact nested source instance.' }); }
+      return;
+    }
     const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview|\/native-compilation)?$/.exec(route);
     if (callerReact) {
       try {
@@ -241,10 +267,10 @@ export function createReactReferenceService(
           throw Error('react-caller-request-invalid');
         const current = reference;
         const graph = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => readReactCallerCompositionGraph(repoRoot, current,
-          native!().jobs.reactRequest(callerReact[2]), callerReact[2], caseId => {
-            const behavior = callbacks.read(current.id, caseId)?.draft;
+          native!().jobs.reactRequest(callerReact[2]), callerReact[2], (caseId, instanceId) => {
+            const behavior = callbacks.read(current.id, caseId, instanceId)?.draft;
             if (behavior?.status !== 'generated-draft' || !behavior.contract) return undefined;
-            const initial = initialStates.nativeEvidence(current, initialStates.nativeRequest(current.id, caseId));
+            const initial = initialStates.nativeEvidence(current, initialStates.nativeRequest(current.id, caseId, instanceId));
             return { ...initial.composition, initialContract: initial.draft.compiled!.contract!, contract: behavior.contract,
               tokens: initial.draft.compiled!.tokens!, assets: initial.draft.compiled!.assets ?? [] };
           })));

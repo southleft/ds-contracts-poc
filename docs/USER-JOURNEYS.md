@@ -63,6 +63,15 @@ On a saved operation, **Prepare caller-content comparison** reads its original t
 
 **Inspect initial states:** after preparing a supported root, select a case and choose **Inspect … initial states**. This varies finite caller inputs on fresh mounts and restores the original rendering. Supported saved observations enable **Prepare initial states for Figma**, followed by the same companion connection and creation flow. The current Button family has native text and content-sized width, but its live structural and full-family image verification remain failed. Preserve that saved operation for correction. Initial-state observations do not establish live updates, keyboard interactions or an editable content API.
 
+**Inspect a stateful child in its composition:** for the configured composed Card, open its saved caller-content review:
+
+1. Choose **Generate React composition** to review the nested component identities and any source-context differences.
+2. Choose **Inspect Checkbox states in composition**, then **Inspect Checkbox behavior in composition**. The app observes the child inside its original Card, including inherited styles and its associated label, and verifies restoration of the full original after each trial.
+3. Choose **Generate React composition** again to use the contextual evidence. **Try generated composition** opens two independent copies with editable content and state controls.
+4. Choose **Check native composition** to compile the same parent and dependencies for Figma. This is a compilation review; delivery of this graph and native editability verification remain unfinished.
+
+Completed state and behavior observations reopen on a repeat action. Failed attempts remain recorded. A standalone component observation cannot establish that it behaves or renders identically inside another component.
+
 **Where this currently stops:** connecting an arbitrary React repository, carrying its full component family through native generation, and qualifying the output are unfinished. The steps above describe the intended delivery. There is no claim that every React pattern, styling system or dependency is supported.
 
 **Existing Lit experiments:** [open local source validation](http://localhost:5181/sources) and expand **Lit evaluation archive — parked for V1.1** to inspect the configured Altitude library and its saved work. That archive is the paused Web Components path. Its bounded native Button inspection demonstrated app/plugin transport and structural readback; visual fidelity and editability remain unqualified. Preserve recorded runs and operation identities when reopening work. Further Lit integration is planned after React V1.

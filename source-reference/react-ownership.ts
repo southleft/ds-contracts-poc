@@ -147,7 +147,11 @@ export const reactOwnershipRead = (selector: string) => `(() => {
  }};walk(committed[0].root.current,undefined);
  for(const [element,path] of paths){
   const host=hostFibers.get(element);if(!host){out.problems.push('react-ownership-dom-without-fiber:'+path);continue;}
-  const createdBy=fibers.get(host.fiber._debugOwner);
+  // React can retain a host's creation owner in the other buffer when only a
+  // descendant renders. Accept only a reciprocal alternate of a known current
+  // fiber; never infer source ownership from a name or the nearest component.
+  const owner=host.fiber._debugOwner;
+  const createdBy=fibers.get(owner)??(owner?.alternate?.alternate===owner?fibers.get(owner.alternate):undefined);
   out.nodes.push({path,tag:element.localName.toLowerCase(),...(host.nearestComponent?{nearestComponent:host.nearestComponent}:{}),...(createdBy?{createdBy}:{})});
  }
  // Roots are actual topmost DOM descendants of each exported instance, not

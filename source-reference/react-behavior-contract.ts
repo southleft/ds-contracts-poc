@@ -32,6 +32,7 @@ export function projectReactBehaviorContract(
     if (
       !initial ||
       initial.caseId !== behavior.caseId ||
+      initial.instanceId !== behavior.instanceId ||
       initial.phase !== "complete" ||
       !initial.sourceUnchanged ||
       initial.problems.length ||
@@ -47,6 +48,10 @@ export function projectReactBehaviorContract(
     )
       throw Error("behavior-contract-source-evidence-incomplete");
     const observed = behavior.observation;
+    if ((behavior.instanceId && !observed.target) || (observed.target &&
+        (observed.target.instanceId !== initial.observation.instanceId ||
+         revisionOf(observed.target.source) !== revisionOf(initial.observation.source))))
+      throw Error('behavior-contract-source-target-mismatch');
     const controlled = observed.relationships.filter(
         (r) => r.status === "controlled-observed",
       ),

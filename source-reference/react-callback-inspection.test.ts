@@ -14,7 +14,7 @@ import { readReactCallbackInspectionRecord } from "./react-callback-inspection.j
 import { evidenceSha, inventoryEvidence } from "./react-validation-evidence.js";
 import type { ReactNativeRequest } from "./react-native-request.js";
 
-test("sealed callback records reopen independently of inventory insertion order and refuse tampering or stale source", () => {
+for (const nested of [false, true]) test(`sealed ${nested ? 'nested' : 'root'} callback records reopen independently of inventory insertion order and refuse tampering or stale source`, () => {
   const root = mkdtempSync(path.join(tmpdir(), "callback-record-")),
     id = randomUUID(),
     dir = path.join(root, id),
@@ -31,10 +31,12 @@ test("sealed callback records reopen independently of inventory insertion order 
       inventorySha256: hash,
       matrixRevision: "sha256:" + hash,
     };
-  const request = { version: 1 as const, anchor, caseId: "checkbox-unchecked" };
+  const request = nested ? { version: 2 as const, anchor, caseId: 'checkbox-unchecked', instanceId: 'instance-4' }
+    : { version: 1 as const, anchor, caseId: "checkbox-unchecked" };
   const report = {
     id,
     caseId: request.caseId,
+    ...(nested ? { instanceId: 'instance-4', observation: { target: { instanceId: 'instance-4' } } } : {}),
     phase: "complete",
     sourceUnchanged: true,
     problems: [],

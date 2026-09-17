@@ -51,7 +51,7 @@ export function readReactInspectionOriginal(repo: string, reference: ReactRefere
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
   select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest; anchors?: ReactNativeRequest[] }) {
-  const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void> }>();
+  const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void>; request: Request }>();
   const from = (reference: ReactReference, request: Request) => {
     const source = readReactInspectionOriginal(repo, reference, request), key = revisionOf(request).slice(7);
     return { reference, request, source, key, root: path.join(repo, 'private/react-initial-inspections', key) };
@@ -154,6 +154,13 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
   };
   return {
     read,
+    running(request: ReactInspectionRequest) {
+      const job = [...active.values()].find(({ request: r }) => r.caseId === request.caseId && r.version === request.version &&
+        (r.version !== 2 || request.version === 2 && r.instanceId === request.instanceId) &&
+        r.anchor.referenceId === request.anchor.referenceId && r.anchor.inventorySha256 === request.anchor.inventorySha256 &&
+        revisionOf(r.anchor.ownership) === revisionOf(request.anchor.ownership));
+      return job ? structuredClone(job.state) : undefined;
+    },
     nativeRequest(referenceId: string, caseId: string, instanceId?: string): ReactInitialNativeRequest {
       const value = input(referenceId, caseId, instanceId), record = saved(value);
       if (!record || active.has(value.key) || derive(value, record).draft?.status !== 'compiled-draft')
@@ -224,7 +231,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
           } finally { active.delete(value.key); }
         }
       })();
-      const job = { state, promise }; active.set(value.key, job); return job;
+      const job = { state, promise, request: value.request }; active.set(value.key, job); return job;
     },
   };
 }

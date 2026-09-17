@@ -10,11 +10,11 @@ import type { ReactSourceProgram } from './react-source-program.js';
 /** All locations come from the host-owned request and sealed inventories.
  * No posted contract, source code or native identity can enter this reader. */
 export function readReactCallerComposition(repo: string, reference: ReactReference, request: ReactNativeRequest,
-  operationId: string, behavior: (caseId: string) => ReactCallerBehavior | undefined) {
+  operationId: string, behavior: (caseId: string, instanceId?: string) => ReactCallerBehavior | undefined) {
   return readReactCallerCompositionGraph(repo, reference, request, operationId, behavior).draft;
 }
 export function readReactCallerCompositionGraph(repo: string, reference: ReactReference, request: ReactNativeRequest,
-  operationId: string, behavior: (caseId: string) => ReactCallerBehavior | undefined) {
+  operationId: string, behavior: (caseId: string, instanceId?: string) => ReactCallerBehavior | undefined) {
   const inspected = readReactContentInspectionEvidence(repo, reference, request, operationId);
   if (!inspected || inspected.report.phase !== 'complete' || !inspected.report.sourceUnchanged ||
       inspected.report.problems.length || !inspected.report.labelAssociations)
@@ -28,6 +28,9 @@ export function readReactCallerCompositionGraph(repo: string, reference: ReactRe
   const childSources = new Set(row.ownership.components.filter(c => !c.roots.includes('')).map(c => JSON.stringify(c.source)));
   const candidates = report.rows.filter(r => r.ownership?.components.some(c => c.roots.includes('') && childSources.has(JSON.stringify(c.source))));
   const behaviors: ReactCallerBehavior[] = [];
+  for (const child of row.ownership.components.filter(c => c.parent && !c.roots.includes(''))) {
+    try { const value = behavior(request.caseId, child.id); if (value) behaviors.push(value); } catch { /* Missing contextual observations cannot qualify this child. */ }
+  }
   for (const candidate of candidates) {
     // Missing initial/behavior observations cannot authorize a child. The
     // projector reports the unresolved identity; never launch a hidden read.

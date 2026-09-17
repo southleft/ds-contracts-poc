@@ -13,7 +13,7 @@ import {
 import { probeReactInitialProperties } from "./react-property-probe.js";
 import { observeReactCallbackBehavior } from "./react-callback-behavior.js";
 
-test("original callback values distinguish controlled and initial-only inputs without API-name heuristics", async () => {
+for (const nested of [false, true]) test(`original ${nested ? 'nested' : 'root'} callback values distinguish controlled and initial-only inputs without API-name heuristics`, async () => {
   mkdirSync("private", { recursive: true });
   const dir = mkdtempSync(
     path.join(process.cwd(), "private/callback-fixture-"),
@@ -27,7 +27,8 @@ test("original callback values distinguish controlled and initial-only inputs wi
    return <button id="control" type="button" role="checkbox" disabled={disabled} aria-checked={current==='partial'?'mixed':current} onClick={()=>{
     const next=current===true?false:true;if(value===undefined)setLocal(next);emit?.call({receiver:'original'},next);
    }}>Choose</button>;
-  }`;
+  }
+  export function Frame({children}:{children?:React.ReactNode}) { return <main>{children}</main> }`;
     writeFileSync(
       path.join(dir, "tsconfig.json"),
       JSON.stringify({
@@ -54,7 +55,7 @@ test("original callback values distinguish controlled and initial-only inputs wi
       stdin: {
         contents:
           source +
-          `;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity[0])},value:Switch}];window.delegated=[];flushSync(()=>createRoot(document.getElementById('mount')).render(<main><label htmlFor="control">Preference</label><Switch initialValue={false} emit={function(value){window.delegated.push({value,receiver:this.receiver});return 42;}}/></main>));`,
+          `;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity[0])},value:Switch},{identity:${JSON.stringify(identity[1])},value:Frame}];window.delegated=[];flushSync(()=>createRoot(document.getElementById('mount')).render(<${nested ? 'Frame' : 'main'}><label htmlFor="control">Preference</label><Switch initialValue={false} emit={function(value){window.delegated.push({value,receiver:this.receiver});return 42;}}/></${nested ? 'Frame' : 'main'}>));`,
         resolveDir: dir,
         loader: "tsx",
       },
@@ -67,12 +68,12 @@ test("original callback values distinguish controlled and initial-only inputs wi
     const page = await context.newPage();
     await page.setContent('<div id="mount"></div>');
     await page.addScriptTag({ content: bundle.outputFiles[0].text });
-    const selector = "#control";
+    const selector = nested ? '#mount > main' : '#control';
     const ownership = (await page.evaluate(
       reactOwnershipRead(selector),
     )) as ReactOwnership;
     assert.deepEqual(ownership.problems, []);
-    const instanceId = ownership.components[0].id;
+    const instanceId = ownership.components.find(c => c.source.exportName === 'Switch')!.id;
     const original = await page.locator("#mount").innerHTML();
     let restores = 0;
     const assertRestored = async () => {
@@ -94,6 +95,8 @@ test("original callback values distinguish controlled and initial-only inputs wi
     };
     const result = await observeReactCallbackBehavior(args);
     assert.deepEqual(result.problems, []);
+    assert.equal(result.target?.instanceId, instanceId);
+    assert.equal(result.target?.rootPath, nested ? '1' : '');
     assert.equal(result.rows.length, 12);
     assert.deepEqual(
       result.relationships.map((r) => [r.property, r.status]),
@@ -147,7 +150,7 @@ test("original callback values distinguish controlled and initial-only inputs wi
         { initialValue: { kind: "set", value: true } },
         async (phase) => {
           if (phase === "changed") {
-            await page.locator(selector).click();
+            await page.locator('#control').click();
             throw Error("interrupted trial");
           }
           return null;
@@ -198,7 +201,7 @@ test("original callback values distinguish controlled and initial-only inputs wi
       ...args,
       ownership: disabledOwnership,
       assertRestored: async () => {
-        assert.equal(await page.locator(selector).isDisabled(), true);
+        assert.equal(await page.locator('#control').isDisabled(), true);
         assert.deepEqual(
           await page.evaluate(reactOwnershipRead(selector)),
           disabledOwnership,

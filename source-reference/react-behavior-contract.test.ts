@@ -221,3 +221,21 @@ test("summary labels alone cannot admit changed, ambiguous or incomplete callbac
     assert(draft.problems.length);
   }
 });
+
+test('nested appearance and callback evidence must identify the same source instance', () => {
+  const { initial, behavior } = observations();
+  initial.instanceId = behavior.instanceId = initial.observation!.instanceId = 'instance-4';
+  const source = { module: '/fixture/control.tsx', exportName: 'Control', sourceSha256: 'a'.repeat(64), span: { start: 0, end: 20 } };
+  initial.observation!.source = source;
+  behavior.observation!.target = { instanceId: 'instance-4', source, rootPath: '1.0' };
+  assert.equal(projectReactBehaviorContract(initial, behavior).status, 'generated-draft');
+  for (const mutate of [
+    (b: ReactCallbackInspection) => { delete b.instanceId; },
+    (b: ReactCallbackInspection) => { delete b.observation!.target; },
+    (b: ReactCallbackInspection) => { b.observation!.target!.instanceId = 'instance-5'; },
+    (b: ReactCallbackInspection) => { b.observation!.target!.source.sourceSha256 = 'b'.repeat(64); },
+  ]) {
+    const changed = structuredClone(behavior); mutate(changed);
+    assert.equal(projectReactBehaviorContract(initial, changed).status, 'refused');
+  }
+});

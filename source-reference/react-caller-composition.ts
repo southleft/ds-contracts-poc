@@ -150,7 +150,7 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
       const ref: NonNullable<Part['component']> = { id: '', props: {} };
       if (child.content === 'authored-or-runtime') {
         if (child.dependencies.length) throw Error('react-caller-runtime-composition-unqualified');
-        const matches = input.behaviors.filter(candidate => {
+        const compatible = input.behaviors.filter(candidate => {
           if (!same(candidate.source, child.source)) return false;
           try {
             const variant = reactComparisonVariant(candidate.initialContract, observed.props);
@@ -159,6 +159,9 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
             return same(held(candidate.heldProps), held(observed.props)) && compareReactCallerContext(candidate.trees[variant], prepared.get(sourcePath)) !== undefined;
           } catch { return false; }
         });
+        const exact = compatible.filter(candidate =>
+          compareReactCallerContext(candidate.trees[reactComparisonVariant(candidate.initialContract, observed.props)], prepared.get(sourcePath))?.length === 0);
+        const matches = exact.length ? exact : compatible;
         if (matches.length !== 1) throw Error('react-caller-behavior-context-unavailable:' + sourcePath);
         const candidate = matches[0]; dependency = structuredClone(candidate.contract); childTokens = candidate.tokens; childAssets = candidate.assets;
         const context = compareReactCallerContext(candidate.trees[reactComparisonVariant(candidate.initialContract, observed.props)], prepared.get(sourcePath))!;

@@ -16,7 +16,7 @@ import {
   type ReactReference,
 } from "./react-reference.js";
 import type { ReactNativeRequest } from "./react-native-request.js";
-import { readReactInspectionOriginal } from "./react-initial-inspection.js";
+import { readReactInspectionOriginal, reactInspectionRequest, type ReactInspectionRequest } from "./react-initial-inspection.js";
 import {
   readReactSourceProgram,
   reactSourceProgramUnchanged,
@@ -43,6 +43,7 @@ import {
 export interface ReactCallbackInspection {
   id: string;
   caseId: string;
+  instanceId?: string;
   phase: "running" | "complete" | "failed";
   sourceUnchanged: boolean;
   observation?: ReactCallbackBehavior;
@@ -52,7 +53,7 @@ export interface ReactCallbackInspection {
 }
 export function readReactCallbackInspectionRecord(value: {
   root: string;
-  request: { version: 1; anchor: ReactNativeRequest; caseId: string };
+  request: ReactInspectionRequest;
 }) {
   const pointer = path.join(value.root, "latest.json");
   if (!existsSync(pointer)) return;
@@ -86,6 +87,8 @@ export function readReactCallbackInspectionRecord(value: {
   if (
     report.id !== latest.id ||
     report.caseId !== value.request.caseId ||
+    report.instanceId !== (value.request.version === 2 ? value.request.instanceId : undefined) ||
+    (value.request.version === 2 && report.phase === 'complete' && report.observation?.target?.instanceId !== value.request.instanceId) ||
     report.phase === "running"
   )
     throw Error("callback-report-invalid");
@@ -110,11 +113,11 @@ export function createReactCallbackInspectionStore(
 ) {
   const active = new Map<
     string,
-    { state: ReactCallbackInspection; promise: Promise<void> }
+    { state: ReactCallbackInspection; promise: Promise<void>; request: ReactInspectionRequest }
   >();
-  const input = (referenceId: string, caseId: string) => {
+  const input = (referenceId: string, caseId: string, instanceId?: string) => {
     const { reference, anchor } = select(referenceId, caseId),
-      request = { version: 1 as const, anchor, caseId };
+      request = reactInspectionRequest(anchor, caseId, instanceId);
     const source = readReactInspectionOriginal(repo, reference, request),
       key = revisionOf(request).slice(7);
     return {
@@ -127,18 +130,26 @@ export function createReactCallbackInspectionStore(
   };
   const saved = readReactCallbackInspectionRecord;
   return {
-    read(referenceId: string, caseId: string) {
-      const running = active.get(referenceId + "/" + caseId);
+    running(request: ReactInspectionRequest) {
+      const job = [...active.values()].find(({ request: r }) => r.caseId === request.caseId && r.version === request.version &&
+        (r.version !== 2 || request.version === 2 && r.instanceId === request.instanceId) &&
+        r.anchor.referenceId === request.anchor.referenceId && r.anchor.inventorySha256 === request.anchor.inventorySha256 &&
+        revisionOf(r.anchor.ownership) === revisionOf(request.anchor.ownership));
+      return job ? structuredClone(job.state) : undefined;
+    },
+    read(referenceId: string, caseId: string, instanceId?: string) {
+      const selected = input(referenceId, caseId, instanceId);
+      const running = active.get(selected.key);
       if (running) return structuredClone(running.state);
-      const report=structuredClone(saved(input(referenceId, caseId)));
+      const report=structuredClone(saved(selected));
       if(report?.phase==='complete'&&derive)report.draft=derive(referenceId,caseId,report);
       return report;
     },
-    start(referenceId: string, caseId: string) {
-      const activeKey = referenceId + "/" + caseId;
+    start(referenceId: string, caseId: string, instanceId?: string) {
+      const value = input(referenceId, caseId, instanceId);
+      const activeKey = value.key;
       const existing = active.get(activeKey);
       if (existing) return existing;
-      const value = input(referenceId, caseId);
       const prior = saved(value);
       if (prior?.phase === "complete")
         return { state: prior, promise: Promise.resolve() };
@@ -162,6 +173,7 @@ export function createReactCallbackInspectionStore(
       const state: ReactCallbackInspection = {
         id: randomUUID(),
         caseId,
+        ...(instanceId === undefined ? {} : { instanceId }),
         phase: "running",
         sourceUnchanged: false,
         restoration: {strategy:"verify-structure-then-replay-original",checks:[]},
@@ -242,8 +254,10 @@ export function createReactCallbackInspectionStore(
             const ownership = (await page.evaluate(
               reactOwnershipRead(profile.path[0]),
             )) as ReactOwnership;
-            if (revisionOf(ownership) !== revisionOf(value.source.ownership))
+            if (revisionOf(ownership) !== revisionOf(value.source.ownership)) {
+              save('ownership-restoration-failure-' + ++restorationFailures + '.json', { expected: value.source.ownership, observed: ownership });
               throw Error("callback-original-ownership-not-restored");
+            }
             if (replay && captured.status === 'captured') {
               const sameMountPixelsMatch = captured.sourcePngSha256 === value.source.captured.sourcePngSha256;
               if (!sameMountPixelsMatch) {
@@ -266,7 +280,7 @@ export function createReactCallbackInspectionStore(
               .waitFor({ state: "attached", timeout: 15000 });
             await assertRestored();
             const targets = value.source.ownership.components.filter((c) =>
-              c.roots.includes(""),
+              instanceId ? c.id === instanceId : c.roots.includes(""),
             );
             if (targets.length !== 1) throw Error("callback-root-ambiguous");
             state.observation = await observeReactCallbackBehavior({
@@ -318,7 +332,7 @@ export function createReactCallbackInspectionStore(
           }
         }
       })();
-      const job = { state, promise };
+      const job = { state, promise, request: value.request };
       active.set(activeKey, job);
       return job;
     },

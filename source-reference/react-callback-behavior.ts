@@ -1,6 +1,7 @@
 import type { Page } from "playwright-core";
 import type { ReactSourceProgram } from "./react-source-program.js";
-import type { ReactOwnership } from "./react-ownership.js";
+import { reactOwnershipRead, type ReactOwnership } from "./react-ownership.js";
+import { revisionOf } from '../core/contract-provenance.js';
 import {
   reactCallbackCandidate,
   type ReactCallbackCandidate,
@@ -16,6 +17,7 @@ type Scalar = string | number | boolean | null;
 type Control = { checked: string; disabled: boolean };
 export interface ReactCallbackBehavior {
   qualification: "observed-source-checkbox-behavior-only";
+  target?: { instanceId: string; source: ReactOwnership['components'][number]['source']; rootPath: string };
   candidates: ReactCallbackCandidate[];
   rows: Array<{
     callback: string;
@@ -61,11 +63,16 @@ export async function observeReactCallbackBehavior(input: {
         c.span.end === instance.source.span.end,
     );
   if (!component) throw Error("callback-source-identity-missing");
+  if (!instance || instance.roots.length !== 1) throw Error('callback-control-root-ambiguous');
+  const rootPath = instance.roots[0];
+  if (rootPath && !/^\d+(?:\.\d+)*$/.test(rootPath)) throw Error('callback-control-path-invalid');
+  const controlSelector = selector + (rootPath ? rootPath.split('.').map(i => ' > :nth-child(' + (Number(i) + 1) + ')').join('') : '');
   const candidates = component.props
     .filter((p) => p.callbackSignatures?.length)
     .map((p) => reactCallbackCandidate(component, p));
   const result: ReactCallbackBehavior = {
     qualification: "observed-source-checkbox-behavior-only",
+    target: { instanceId, source: structuredClone(instance.source), rootPath },
     candidates,
     rows: [],
     relationships: [],
@@ -79,9 +86,13 @@ export async function observeReactCallbackBehavior(input: {
         ),
     );
   const read = async (): Promise<Control> => {
-    if ((await page.locator(selector).count()) !== 1)
+    const current = await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
+    const target = current.components.find(c => c.id === instanceId);
+    if (current.problems.length || !target || revisionOf(target.source) !== revisionOf(instance.source) ||
+        target.roots.length !== 1 || target.roots[0] !== rootPath) throw Error('callback-control-identity-changed');
+    if ((await page.locator(controlSelector).count()) !== 1)
       throw Error("callback-control-ambiguous");
-    return page.locator(selector).evaluate((element) => {
+    return page.locator(controlSelector).evaluate((element) => {
       const native =
         element instanceof HTMLInputElement && element.type === "checkbox";
       if (!native && element.getAttribute("role") !== "checkbox")
@@ -108,14 +119,14 @@ export async function observeReactCallbackBehavior(input: {
     disabled: boolean,
   ) => {
     if (action === "space") {
-      await page.locator(selector).focus();
+      await page.locator(controlSelector).focus();
       const focused = await page
-        .locator(selector)
+        .locator(controlSelector)
         .evaluate((element) => document.activeElement === element);
       if (focused === disabled) throw Error("callback-focus-mismatch");
       await page.keyboard.press("Space");
     } else {
-      const label = await page.locator(selector).evaluateHandle((element) => {
+      const label = await page.locator(controlSelector).evaluateHandle((element) => {
         const labels =
           element instanceof HTMLInputElement ||
           element instanceof HTMLButtonElement
