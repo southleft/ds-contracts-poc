@@ -1,3 +1,4 @@
+import { prepareNativeComparisonRecovery, emitNativeComparisonRecoveryReadbackScript, type PreparedNativeComparisonRecovery } from './native-comparison-recovery.js';
 import { nativeComparisonDependencies } from './native-contract-comparison.js';
 import type { PreparedNativeContractComparison } from './native-contract-comparison.js';
 import { emitNativeContractReadbackScript } from './native-source-observation.js';
@@ -31,6 +32,8 @@ export interface NativeSourceWriteContext {
     receipt: NativeTokenContextReceipt;
   };
   comparisons?: NativeSourceComparisonInput;
+  /** Host-authenticated partial allocation plus independent empty-instance preflight. */
+  comparisonRecovery?: PreparedNativeComparisonRecovery;
 }
 
 export function prepareNativeSourceWrite(
@@ -80,6 +83,17 @@ export function prepareNativeSourceWrite(
   if (boundNames.some((name) => !names.has(name)))
     fail("token-binding-outside-scope");
   const dependencies = contractComparison ? nativeComparisonDependencies(contractComparison) : undefined;
+  const recovery = context.comparisonRecovery;
+  if (recovery) {
+    const checked = prepareNativeComparisonRecovery(recovery.input, recovery.observation);
+    if (!contractComparison || canonicalJson(checked) !== canonicalJson(recovery) ||
+        canonicalJson(recovery.input.comparison) !== canonicalJson(contractComparison) ||
+        canonicalJson(recovery.input.operation) !== canonicalJson(operation) ||
+        canonicalJson(recovery.input.tokenInput) !== canonicalJson(input) ||
+        canonicalJson(recovery.input.tokenIdentity) !== canonicalJson(tokens.identity) ||
+        canonicalJson((recovery.observation as any).content.tokens.receipt) !== canonicalJson(tokens.receipt))
+      fail('recovery-context-changed');
+  }
   const descriptor = {
     version: 1,
     purpose: "source-candidate-inspection",
@@ -92,16 +106,24 @@ export function prepareNativeSourceWrite(
     machineId: `source-native:${operation.id}:${projection.contractId}`,
     pageName: `${'kind' in projection ? 'DS contract draft' : 'DS source candidate'} / ${operation.id}`,
     tokenPreparationRevision: preparation.revision,
+    ...(recovery ? { recovery: { revision: recovery.revision, creation: recovery.input.creation, observation: recovery.observation } } : {}),
     identity: tokens.identity,
     receipt: tokens.receipt,
     ...(contractComparison ? { contractComparison: {
       caseId: contractComparison.caseId, mainId: contractComparison.mainId,
       variantName: contractComparison.variantName, slotSpecPath: contractComparison.slotSpecPath,
+      ...(contractComparison.instanceWidth !== undefined ? {instanceWidth:contractComparison.instanceWidth} : {}),
+      ...(contractComparison.contentSpecPath ? { contentSpecPath: contractComparison.contentSpecPath } : {}),
+      ...(contractComparison.contentRows ? { contentRows: contractComparison.contentRows } : {}),
       specs: contractComparison.specs, fonts: contractComparison.fonts, nodeTypes: contractComparison.nodeTypes,
       revision: contractComparison.revision, receipt: contractComparison.receipt,
       parent: { tokenIdentity: contractComparison.parent.tokenIdentity },
       ...(contractComparison.instances?.length ? { instances: contractComparison.instances.map(ref => ({
         specPath: ref.specPath, mainId: ref.mainId, slotSpecPath: ref.slotSpecPath,
+        ...(ref.contentMode ? { contentMode: ref.contentMode } : {}),
+        ...(ref.contentSpecPath ? { contentSpecPath: ref.contentSpecPath } : {}),
+        ...(ref.contentRows ? { contentRows: ref.contentRows } : {}),
+        ...(ref.fillWidth ? { fillWidth: true } : {}),
         parent: { tokenIdentity: ref.parent.tokenIdentity },
       })), dependencyReceipts: dependencies!.parents.map(ref => ref.receipt) } : {}),
     } } : {}),
@@ -120,6 +142,7 @@ export function prepareNativeSourceWrite(
   // retaining an earlier successful validation.
   return {
     descriptor: JSON.parse(canonicalJson(descriptor)) as typeof descriptor,
+    recoveryReadbackScript: recovery ? emitNativeComparisonRecoveryReadbackScript(recovery.input) : undefined,
     readbackScript: emitNativeTokenContextReadbackScript(
       input,
       tokens.identity,
@@ -247,21 +270,30 @@ ${prepared.comparisonParentReadbackScript}
   nativeCheckTokens(await nativeReadTokens());
   nativeFileGuard();
   for (const page of figma.root.children) {
-    if (page.name === NATIVE.pageName) nativeRefuse('page-name-collision');
+    if (page.name === NATIVE.pageName${prepared.descriptor.recovery ? ' && page.id !== NATIVE.recovery.creation.pageId' : ''}) nativeRefuse('page-name-collision');
     for (const node of [page, ...page.findAll(() => true)]) {
       const raw = node.getSharedPluginData('ds_contracts', 'nativeSourceOperation');
       if (raw) {
         let owner;
         try { owner = JSON.parse(raw); } catch (_) { nativeRefuse('ownership-unreadable'); }
         if (!owner || typeof owner.operationId !== 'string') nativeRefuse('ownership-unreadable');
-        if (owner.operationId === NATIVE.operation.id) nativeRefuse('scope-collision');
+        if (owner.operationId === NATIVE.operation.id${prepared.descriptor.recovery ? ' && !NATIVE.recovery.creation.nodes.some(n => n.id === node.id)' : ''}) nativeRefuse('scope-collision');
       }
       if (node.getSharedPluginData('ds_contracts', 'contractId') === NATIVE.machineId) nativeRefuse('scope-collision');
     }
   }
   ${prepared.descriptor.contractComparison ? 'await nativeCheckComparisonParent(); nativeFileGuard();' : ''}
+  ${prepared.descriptor.recovery ? `NATIVE_PAGE = await figma.getNodeByIdAsync(NATIVE.recovery.creation.pageId); nativeFileGuard();
+  const recoveryObserved = await (async()=>{${prepared.recoveryReadbackScript}})();
+  nativeFileGuard();
+  if (nativeCanonical(recoveryObserved) !== nativeCanonical(NATIVE.recovery.observation)) nativeRefuse('recovery-preflight-changed');
+  if (!NATIVE_PAGE || NATIVE_PAGE.getSharedPluginData('ds_contracts','nativeComparisonRecoveryClaim')) nativeRefuse('recovery-already-claimed');
+  // Claim synchronously before the first mutation. A failed continuation remains
+  // retained and cannot reuse this preflight or be automatically replayed.
+  NATIVE_PAGE.setSharedPluginData('ds_contracts','nativeComparisonRecoveryClaim',NATIVE.recovery.revision);
   NATIVE_RESULT.allocationAttempted = true;
-  NATIVE_PAGE = figma.createPage();
+  for (const identity of NATIVE.recovery.creation.nodes) NATIVE_RESULT.nodes.push(identity);` : `NATIVE_RESULT.allocationAttempted = true;
+  NATIVE_PAGE = figma.createPage();`}
   NATIVE_RESULT.pageId = NATIVE_PAGE.id;
   nativeOwn(NATIVE_PAGE);
   NATIVE_PAGE.name = NATIVE.pageName;

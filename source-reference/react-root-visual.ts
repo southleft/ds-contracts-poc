@@ -8,11 +8,12 @@ import { mintTokens } from '../core/mint-tokens.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { ContractSchema, DECLARED_CHANNELS, LITERAL_CHANNELS, type Contract } from '../scripts/contract-schema.js';
 import { enrichLayout, prepareMint, applyMintToContract, type AlignedSweep } from '../extract/computed/fuse.js';
-import { enumerate, isFusable, normalizeValue, CHANNEL_TO_COMPUTED, type CapturedNode, type Capture, type FlatEl } from '../extract/computed/lib.js';
+import { enumerate, flatten, isFusable, normalizeValue, CHANNEL_TO_COMPUTED, type CapturedNode, type Capture, type FlatEl } from '../extract/computed/lib.js';
 import type { PropSpace } from '../extract/computed/capture.js';
 import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import type { ReactOwnership } from './react-ownership.js';
 import type { ReactSourceProgram } from './react-source-program.js';
+import { reactChildContextSizing, reactChildContextGrid, type ReactChildContext } from './react-child-context.js';
 
 export interface ReactRootVisual {
   version: 1;
@@ -57,9 +58,10 @@ export function projectReactRootVisual(
   tree: CapturedNode,
   styleOrigin?: ReactStyleOrigin,
   instanceIds?: ReadonlySet<string>,
+  childContext?: ReactChildContext,
 ): ReactRootVisual {
   const out: ReactRootVisual = { version: 1, qualification: 'observed-root-only', acceptedContract: null,
-    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}) }), roots: [], problems: [] };
+    inputRevision: revisionOf({ program, ownership, tree, ...(styleOrigin ? {styleOrigin} : {}), ...(childContext ? {childContext} : {}) }), roots: [], problems: [] };
   const anatomy = linkReactSourceAnatomy(program, ownership, tree);
   if (anatomy.status !== 'linked') { out.problems = [...anatomy.problems]; return out; }
   for (const instance of anatomy.instances) {
@@ -77,6 +79,14 @@ export function projectReactRootVisual(
           instance.roots[0].correspondence === 'runtime-dependent')
         throw Error('react-root-visual-source-content-unqualified');
       const observation = instance.roots[0].observation;
+      const sizing=childContext && styleOrigin ? reactChildContextSizing(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
+      const grid=childContext && styleOrigin ? reactChildContextGrid(tree,styleOrigin,instance.roots[0].path,childContext) : undefined;
+      if (grid && !sizing) throw Error('react-child-context-grid-parent-width-unqualified');
+      const captured = flatten(tree).find(row => row.path === instance.roots[0].path)!.node;
+      if (observation.style.display === 'block' && (!sizing || captured.nodes.some(node => node.t !== 'text') ||
+          observation.style['writing-mode'] !== 'horizontal-tb' || observation.style.direction !== 'ltr'))
+        throw Error('react-root-block-content-unqualified');
+      if (observation.style.display === 'block') result.limitations.push('native-block-content-observed-text-only');
       if (Object.keys(observation.pseudo).length) throw Error('react-root-visual-pseudo-content-unprojected');
       const root: CapturedNode = { ...structuredClone(observation), nodes: [],
         style: Object.fromEntries(Object.entries(observation.style).map(([key, value]) => [key, normalizeValue(value)])) };
@@ -84,7 +94,8 @@ export function projectReactRootVisual(
       const name = `ObservedRoot${suffix}`;
       const contract = ContractSchema.parse({ id: `observed.react-${suffix}`, name, version: '0.1.0', status: 'draft',
         description: 'Observed source root only; API, behavior and composition are not projected.',
-        props: [], states: [], semantics: { element: root.tag }, anatomy: { root: { slot: { name: 'children' } } },
+        props: [], states: [], semantics: { element: root.tag }, anatomy: { root: { slot: { name: 'children' },
+          ...(grid ? { layout: grid, literals: sizing } : {}) } },
         bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } },
           code: { anchors: { importPath: `observed/${suffix}`, export: name } } } });
       const enumeration = enumerate([], [], 1, {}), combo = enumeration.combos[0].key;
@@ -128,6 +139,12 @@ export function projectReactRootVisual(
           ? {...size,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}
           : size.status==='fixed'&&normalizeValue(size.value??'')!==root.style[size.channel]
             ? {...size,status:'unresolved',reason:'size-observation-mismatch'} : size);
+        if(sizing) {
+          if(callerStyle) throw Error('react-child-context-caller-style-unqualified');
+          enriched.anatomy.root.literals={...enriched.anatomy.root.literals,...sizing};
+          result.limitations.push('parent-stretch-current-source-context-only');
+        }
+        if (grid) result.limitations.push('intrinsic-row-lowering-observed-block-content-only');
         const bindings = observeReactSourceBindings(root, enriched.anatomy.root, tokens, styleOrigin, instance.roots[0].path);
         result.sourceBindings = bindings.sourceBindings;
         for (const binding of bindings.sourceBindings) if (binding.tokenPath)

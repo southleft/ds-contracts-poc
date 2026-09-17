@@ -17,6 +17,7 @@ import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
 import { evidenceSha, inventoryEvidence, evidenceUnchanged } from './react-validation-evidence.js';
 import { cropSourceFrame } from './source-framing.js';
+import { prepareObservedContentTree } from './observed-content.js';
 import { compileReactInitialContract } from './react-initial-contract.js';
 import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 
@@ -114,7 +115,12 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       const report = derive(value, record);
       if (report.phase !== 'complete' || !report.sourceUnchanged || report.problems.length || report.draft?.status !== 'compiled-draft')
         throw Error('react-initial-native-observation-unavailable');
-      return { draft: report.draft, source: { revision: 'sha256:' + reference.id,
+      const trees = Object.fromEntries(report.draft.nativeVariants.map(variant => {
+        const snapshot = JSON.parse(readFileSync(path.join(record.dir, 'states', variant.observation + '.json'), 'utf8'));
+        return [variant.variant, prepareObservedContentTree(snapshot.tree, snapshot.fonts, snapshot.svg)];
+      }));
+      return { draft: report.draft, composition: { source: report.observation!.source,
+        heldProps: report.observation!.heldProps, trees }, source: { revision: 'sha256:' + reference.id,
         programSha256: value.source.programSha256, evidenceRevision: revisionOf(request) } };
     },
     nativeImage(reference: ReactReference, request: ReactInitialNativeRequest, rowId: string) {

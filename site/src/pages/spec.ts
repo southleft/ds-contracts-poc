@@ -621,6 +621,7 @@ function layoutPage(): { route: string; html: string } {
           rows: 'G1: declared row track list. Each track is exactly one of <code>{px}</code>, <code>{fr}</code>, or <code>{fit: true}</code> — the three spellings the Plugin API round-trips (FIXED / FLEX / HUG). Required on a grid unless <code>flow: "row"</code> lets the emitter derive them.',
           columns:
             "G1: declared column track list — required on every <code>display: grid</code>. Same track spellings as <code>rows</code>.",
+          autoRows: 'Optional sizing for extra rows, requiring <code>flow: "row"</code>. One positive <code>{px}</code>, positive <code>{fr}</code>, or <code>{fit: true}</code> track; declared rows keep their sizes. Managed native writes recompute the required row count from content, rather than relying on automatic canvas overflow.',
           gap: "G1: independent <code>row</code> / <code>column</code> gaps (px or token refs). There is no single-value shorthand — proposers normalize CSS <code>gap</code> into the pair.",
           areas:
             "G4: named areas as slot anchors. The key is simultaneously a slot name and a placement rect (row/column/spans). A part with the same name takes the area; declaring both an area and an explicit <code>placement</code> for one name is schema-invalid.",
@@ -642,6 +643,7 @@ function layoutPage(): { route: string; html: string } {
       "Grid — declared tracks, areas, flow",
       ["generated", "curated"],
       `<p>A2 grid is a first-class layout mode, not a flex fallback. <code>display: "grid"</code> requires a declared <code>columns</code> track list; <code>rows</code> are required unless <code>flow: "row"</code> lets the emitter derive them. Flex facts (<code>direction</code>, <code>align</code>, <code>justify</code>, <code>wrap</code>, <code>overlap</code>) are schema-invalid on a grid. Both surfaces carry the same tracks, gap pair, and cell rects — Figma has no native area names, so the contract owns them.</p>` +
+        `<p><code>layout.autoRows</code> supplies one repeated track for rows beyond the declared list: <code>{px: 24}</code> fixes their height, <code>{fr: 1}</code> shares available space, and <code>{fit: true}</code> hugs content. It requires <code>flow: "row"</code>; existing sizing constraints still apply. The code emitter carries the extra-row sizing rule, while managed Figma writes materialize enough rows for the current content and retain the rule for checked reverse extraction. Arbitrary manual canvas insertion does not trigger this managed update. Multiple alternating extra-row tracks, column flow and dense flow remain unsupported.</p>` +
         refusals("Refusals:", [
           "<code>display: grid</code> without <code>columns</code>",
           "flex-only fields together with <code>display: grid</code>",

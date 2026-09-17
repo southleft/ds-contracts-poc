@@ -146,8 +146,10 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
     nodes: input.creation.nodes,
     comparisons: nativeInspectionExports(input),
   };
+  const managedRows = (spec: NodeSpec): boolean => !!spec.layout?.grid?.flowRows || (spec.children ?? []).some(managedRows);
+  const extra = input.component.variants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
-    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames'] : [], captureImages);
+    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages);
 }
 
 /** Shared read-only inventory collector. Callers independently verify the
@@ -587,6 +589,8 @@ function verifyReadback(
       issue("native-source-observation-source-part", n);
     if (sample && !same(meta(n, "nativeSourceSample"), sample))
       issue("native-source-observation-sample-identity", n);
+    if (spec.layout?.grid?.flowRows && !same(meta(n, 'gridFlowRows'), spec.layout.grid.flowRows))
+      issue('native-source-observation-grid-flow-recipe', n);
     const wrapper = sourceCase?.wrappers?.find((w) =>
       same(w.partPath, spec.nativeSourcePart?.partPath),
     );
@@ -604,6 +608,10 @@ function verifyReadback(
       issue("native-source-observation-layout", n);
     for (const problem of nativeGridProblems(spec, v, n.childIds.map((id: string) => nodes.get(id)?.values)))
       issue('native-source-observation-grid-' + problem, n);
+    if (spec.rootFillWidth && (v.layoutSizingHorizontal !== 'FIXED' ||
+        (v.layoutMode === 'HORIZONTAL' ? v.primaryAxisSizingMode : v.counterAxisSizingMode) !== 'FIXED' ||
+        nodes.get(n.childIds[0])?.values.layoutSizingHorizontal !== 'FILL'))
+      issue('native-source-observation-root-fill-width', n);
     if ((spec.opacity !== undefined || v.opacity !== undefined) && v.opacity !== (spec.opacity ?? 1))
       issue("native-source-observation-opacity", n);
     const bindings = {
@@ -743,11 +751,11 @@ function verifyReadback(
               s.identity.sourceNodeId === spec.nativeSourcePart?.sourceNodeId &&
               s.identity.templateId === spec.nativeSourcePart?.templateId,
           );
-      const specs = sourceSample?.specs ?? [];
+      const specs = isContractDraft(input) ? spec.children ?? [] : sourceSample?.specs ?? [];
       if (n.childIds.length !== specs.length)
         issue("native-source-observation-slot-content", n);
       specs.forEach((child, i) =>
-        visit(child, nodes.get(n.childIds[i]), undefined, {
+        visit(child, nodes.get(n.childIds[i]), undefined, isContractDraft(input) ? undefined : {
           caseId: sourceCase!.id,
           sourceName: sourceSample!.sourceName,
           partPath: spec.nativeSourcePart!.partPath,

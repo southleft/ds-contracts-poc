@@ -12,7 +12,7 @@ import { flattenTokens } from '../core/tokens.js';
 
 export function reactComparisonVariant(contract: Contract, actualProps: Record<string, unknown>): string {
   const properties = contract.props.map(prop => {
-    if (typeof prop.type !== 'object' || !('enum' in prop.type) || prop.bindings.figma.kind !== 'VARIANT' || !prop.bindings.figma.property)
+    if ((prop.type !== 'boolean' && (typeof prop.type !== 'object' || !('enum' in prop.type))) || prop.bindings.figma.kind !== 'VARIANT' || !prop.bindings.figma.property)
       throw Error('react-comparison-variant-type-unqualified');
     const raw = actualProps[prop.bindings.code.prop];
     const absent = !Object.hasOwn(actualProps, prop.bindings.code.prop) ||
@@ -22,8 +22,12 @@ export function reactComparisonVariant(contract: Contract, actualProps: Record<s
       label = prop.default === undefined ? prop.bindings.figma.unsetValue : prop.bindings.figma.values?.[String(prop.default)] ?? String(prop.default);
     } else {
       // null is a meaningful mapped value; nullish fallback would erase it.
-      const exact = prop.type.enum.filter(value => canonicalJson(prop.bindings.code.values && Object.hasOwn(prop.bindings.code.values, value)
-        ? prop.bindings.code.values[value] : value) === canonicalJson(raw));
+      const values = prop.type === 'boolean' ? ['false', 'true'] : prop.type.enum;
+      const exact = values.filter(value => {
+        const codeValue = prop.bindings.code.values && Object.hasOwn(prop.bindings.code.values, value)
+          ? prop.bindings.code.values[value] : prop.type === 'boolean' ? value === 'true' : value;
+        return canonicalJson(codeValue) === canonicalJson(raw);
+      });
       if (exact.length !== 1) throw Error('react-comparison-variant-value-unqualified');
       label = prop.bindings.figma.values?.[exact[0]] ?? exact[0];
     }
@@ -62,11 +66,11 @@ export function prepareReactComparisonPlan(input: ReactComparisonPlanInput) {
     limitations: [...input.content.limitations, 'native-comparison-not-independently-observed'] };
   return { plan, revision: revisionOf(plan) };
 }
-export function buildReactComparisonWrite(input: ReactComparisonPlanInput & { expectedPlanRevision: string; tokens: NativeSourceWriteContext['tokens'] }) {
+export function buildReactComparisonWrite(input: ReactComparisonPlanInput & { expectedPlanRevision: string; tokens: NativeSourceWriteContext['tokens']; comparisonRecovery?: NativeSourceWriteContext['comparisonRecovery'] }) {
   const planned = prepareReactComparisonPlan(input);
   if (planned.revision !== input.expectedPlanRevision || canonicalJson(planned.plan.tokenInput) !== canonicalJson(input.tokens.input))
     throw Error('react-comparison-write-stale');
   const { engine, contracts, contract } = compiled(input);
   return { planRevision: planned.revision, script: engine.buildNativeContractComparisonScript(contract, contracts, input.source,
-    { operation: input.operation, tokens: input.tokens }, input.comparison) };
+    { operation: input.operation, tokens: input.tokens, comparisonRecovery:input.comparisonRecovery }, input.comparison) };
 }

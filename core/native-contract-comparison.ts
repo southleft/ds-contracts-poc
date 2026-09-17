@@ -1,8 +1,9 @@
+import { materializeFlowRows } from './grid-flow-rows.js';
 /** Comparison content belongs to an instance of an independently observed main.
  * No source-template identity is invented and the main is never rewritten. */
 import { revisionOf } from './contract-provenance.js';
 import type { Contract } from '../scripts/contract-schema.js';
-import type { ComponentData, NodeSpec } from './emit-figma-script.js';
+import type { ComponentData, NodeSpec, GridTrackSpec } from './emit-figma-script.js';
 import type { NativeContractDraftProjection, NativeContractDraftSource } from './native-contract-draft.js';
 import { verifyNativeContractReadback, type NativeContractObservationInput, type NativeSourceReadback } from './native-source-observation.js';
 
@@ -20,6 +21,8 @@ export interface NativeContractComparisonReference {
   receipt: NativeSourceReadback;
   variantName: string;
   slotSpecPath: number[];
+  /** Preserve the complete observed main; no caller slot is populated. */
+  contentMode?: 'source-owned';
 }
 export interface NativeContractComparisonInput {
   parent: NativeContractObservationInput;
@@ -27,9 +30,19 @@ export interface NativeContractComparisonInput {
   caseId: string;
   variantName: string;
   slotSpecPath: number[];
+  /** Authenticated width of this caller usage, never a reusable main size. */
+  instanceWidth?: number;
   /** Host-selected source ownership mappings; never inferred by component name or paint. */
   instances?: NativeContractComparisonReference[];
 }
+export function comparisonContentGrid(spec: NodeSpec, children: NodeSpec[]): NodeSpec {
+  const result = structuredClone(spec);
+  result.children = children;
+  const grid = result.layout?.grid;
+  if (grid?.flowRows) grid.rows = materializeFlowRows(grid.flowRows, grid.columns.length, children.length);
+  return result;
+}
+
 export function prepareNativeContractComparison(contract: Contract, component: ComponentData,
   source: NativeContractDraftSource, tokenRevision: string, context: { mode: string; brand: string },
   input: NativeContractComparisonInput) {
@@ -46,20 +59,48 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       contract.bindings.figma.anchors.componentSetKey || component.variants.length !== 1 || component.stateVariants?.length ||
       component.boolProps.length || component.textProps.length || component.nativeSourceCandidate || component.nativeContractDraft)
     fail('snapshot-contract-required');
-  const select = (input: Omit<NativeContractComparisonInput, 'caseId'>) => {
+  const select = (input: Omit<NativeContractComparisonInput, 'caseId'> & { contentMode?: 'source-owned' }) => {
     const variants = input.parent.component.variants.filter(v => v.name === input.variantName);
     const mains = input.parent.creation.variants.filter((v: { name: string }) => v.name === input.variantName);
     if (variants.length !== 1 || mains.length !== 1) fail('main-ambiguous');
+    if (input.contentMode === 'source-owned') {
+      const hasSlot = (spec: NodeSpec): boolean => spec.type === 'slot' || !!spec.children?.some(hasSlot);
+      if (input.slotSpecPath.length || input.parent.component.rootSlot || hasSlot(variants[0].spec) ||
+          variants[0].spec.rootFillWidth) fail('source-owned-main-unqualified');
+      return { mainId: mains[0].id as string };
+    }
     let slot = variants[0].spec;
     if (!Array.isArray(input.slotSpecPath) || input.slotSpecPath.length > 32) fail('slot-path-invalid');
     for (const index of input.slotSpecPath) {
       if (!Number.isInteger(index) || index < 0 || !slot.children?.[index]) fail('slot-path-invalid');
       slot = slot.children![index];
     }
-    if (slot.type !== 'slot' || slot.children?.length || slot.slotDefault?.length) fail('empty-slot-required');
-    return mains[0].id as string;
+    if (slot.type !== 'slot' || slot.slotDefault?.length) fail('empty-slot-required');
+    const carrier = slot.children?.[0];
+    if (slot.children?.length && (slot.children.length !== 1 || !slot.rootSlotContent ||
+        !carrier?.rootSlotGridContent || carrier.type !== 'frame' || carrier.layout?.mode !== 'GRID' ||
+        carrier.layout.grid?.flow !== 'ROW_AUTO_FLOW' || carrier.children?.length)) fail('empty-slot-required');
+    return { mainId: mains[0].id as string,
+      ...(variants[0].spec.rootFillWidth ? { fillWidth: true as const } : {}),
+      ...(carrier ? { contentSpecPath: [...input.slotSpecPath, 0] } : {}) };
+
   };
-  const mainId = select(input);
+  const selected = select(input);
+  if (selected.fillWidth) fail('root-fill-width-needs-parent-context');
+  if (input.instanceWidth !== undefined) {
+    const root = input.parent.component.variants.find(v => v.name === input.variantName)!.spec;
+    let slot = root;
+    for (const index of input.slotSpecPath) slot = slot.children![index];
+    if (!Number.isFinite(input.instanceWidth) || input.instanceWidth <= 0 || input.instanceWidth > 100000 ||
+        root.layout?.mode !== 'VERTICAL' || !root.layout.stretchChildren || root.fixedWidth ||
+        root.lits?.width !== undefined || root.lits?.minWidth !== undefined ||
+        ['width','minWidth','maxWidth'].some(k => root.bindings?.[k]) ||
+        !slot.rootSlotContent || slot.layout?.mode !== 'VERTICAL' || !slot.layout.stretchChildren ||
+        slot.fixedWidth || slot.lits?.width !== undefined || slot.lits?.minWidth !== undefined ||
+        ['width','minWidth','maxWidth'].some(k=>slot.bindings?.[k]) ||
+        input.slotSpecPath.length !== 1 || selected.contentSpecPath)
+      fail('instance-width-unqualified');
+  }
   if ((input.instances?.length ?? 0) > 128) fail('nested-main-limit');
   const instances = (input.instances ?? []).map(reference => {
     if (reference.parent.operation.fileKey !== input.parent.operation.fileKey ||
@@ -71,7 +112,7 @@ export function prepareNativeContractComparison(contract: Contract, component: C
         verifyNativeContractReadback(reference.parent, reference.receipt).status !== 'supported-structure-observed')
       fail('nested-main-observation-required');
     const receipt = structuredClone(reference.receipt); delete receipt.images;
-    return { ...structuredClone(reference), receipt, mainId: select(reference) };
+    return { ...structuredClone(reference), receipt, ...select(reference), contentRows: undefined as GridTrackSpec[] | undefined };
   });
   if (new Set(instances.map(i => JSON.stringify(i.specPath))).size !== instances.length)
     fail('nested-main-path-ambiguous');
@@ -103,19 +144,75 @@ export function prepareNativeContractComparison(contract: Contract, component: C
     const out = structuredClone(spec);
     const instance = instances.findIndex(ref => JSON.stringify(ref.specPath) === JSON.stringify(specPath));
     if (instance !== -1) {
-      if (spec.type !== 'frame' || !spec.children?.length) fail('nested-caller-content-required');
+      if (spec.type !== 'frame' || (!spec.children?.length && instances[instance].contentMode !== 'source-owned')) fail('nested-caller-content-required');
       used.add(instance);
     }
     out.nativeContractSample = { caseId: input.caseId, contentRevision: revisionOf(contract), specPath, ...(instance !== -1 ? { instance } : {}) };
+    if (instance !== -1 && instances[instance].contentMode === 'source-owned') { delete out.children; return out; }
     if (spec.children) out.children = spec.children.map((child, i) => annotate(child, [...specPath, i]));
     return out;
   };
+  const checkCapacity = (reference: { parent: NativeContractObservationInput; variantName: string; contentSpecPath?: number[] }, children: NodeSpec[]) => {
+    // An observed text run has one native text node. Native vertical flow is
+    // not CSS inline formatting: mixed inline/block children need a separate
+    // lowering before they can enter a block root comparison.
+    if (reference.parent.component.rootSlot?.display === 'block' &&
+        (children.length !== 1 || children[0].type !== 'text' || children[0].absolute || children[0].overlay))
+      fail('block-inline-content-unqualified');
+    if (!reference.contentSpecPath) return;
+    let target = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
+    for (const index of reference.contentSpecPath) target = target.children![index];
+    const grid = comparisonContentGrid(target, children).layout!.grid!;
+    // Source grid lowering can retain explicit unit cells even when the
+    // reusable carrier uses row flow. Admit only identical placements;
+    // spans, alignment overrides and reordered cells need separate support.
+    if (children.some((child, index) => child.absolute || child.overlay || child.insetOverlay ||
+        (child.cell && (Object.keys(child.cell).sort().join(',') !== 'column,row' ||
+          child.cell.row !== Math.floor(index / grid.columns.length) ||
+          child.cell.column !== index % grid.columns.length))) ||
+        children.length > grid.rows.length * grid.columns.length) fail('grid-content-placement-unqualified');
+    return grid.flowRows ? grid.rows : undefined;
+  };
+  const contentRows = checkCapacity({ ...input, ...selected }, root.children!);
+  for (const reference of instances) {
+    let spec = root;
+    for (const index of reference.specPath) {
+      if (!spec.children?.[index]) fail('nested-main-path-missing');
+      spec = spec.children![index];
+    }
+    if (reference.contentMode !== 'source-owned') Object.assign(reference, { contentRows: checkCapacity(reference, spec.children ?? []) });
+  }
   const specs = root.children!.map((spec, i) => annotate(spec, [i]));
   if (used.size !== instances.length) fail('nested-main-path-missing');
+  // A full-width child needs an independently known containing width. Do
+  // not let Figma resolve a HUG/FILL cycle using the main's preview box.
+  const fixedWidth = (spec: NodeSpec) => Boolean(spec.fixedWidth) ||
+    (typeof spec.lits?.width === 'number' && Number.isFinite(spec.lits.width) && spec.lits.width > 0);
+  for (const reference of instances.filter(ref => ref.fillWidth)) {
+    const parentPath = reference.specPath.slice(0, -1);
+    const hostReference = parentPath.length
+      ? instances.find(ref => JSON.stringify(ref.specPath) === JSON.stringify(parentPath))
+      : { ...input, ...selected };
+    let host: NodeSpec, definite: boolean;
+    if (hostReference) {
+      const hostRoot = hostReference.parent.component.variants.find(v => v.name === hostReference.variantName)!.spec;
+      host = hostRoot;
+      for (const index of hostReference.contentSpecPath ?? hostReference.slotSpecPath) host = host.children![index];
+      definite = fixedWidth(host) || Boolean(host.rootSlotContent && (hostRoot.rootFillWidth || fixedWidth(hostRoot) ||
+        (!parentPath.length && input.instanceWidth !== undefined)));
+    } else {
+      host = root;
+      for (const index of parentPath) host = host.children![index];
+      definite = fixedWidth(host);
+    }
+    if (!definite || !['VERTICAL', 'GRID'].includes(host.layout?.mode ?? ''))
+      fail('nested-fill-width-parent-unqualified');
+  }
   const receipt = structuredClone(input.receipt); delete receipt.images;
   return { projection, boundNames: [...boundNames].sort(), parent: structuredClone(input.parent), receipt,
-    caseId: input.caseId, mainId, variantName: input.variantName,
-    slotSpecPath: [...input.slotSpecPath], ...(instances.length ? { instances } : {}), specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
+    caseId: input.caseId, ...selected, ...(contentRows ? { contentRows } : {}), variantName: input.variantName,
+    slotSpecPath: [...input.slotSpecPath], ...(input.instanceWidth !== undefined ? {instanceWidth:input.instanceWidth} : {}),
+    ...(instances.length ? { instances } : {}), specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
     revision: revisionOf({ contract, component, source, tokenRevision, context, input: { ...input, receipt } }) };
 }
 export type PreparedNativeContractComparison = ReturnType<typeof prepareNativeContractComparison>;
@@ -250,3 +347,78 @@ async function nativeBuildContractComparison() {
   return { comparisonInstanceId: inst.id, parentMainId: c.mainId, acceptedContract: null, nativeQualification: 'unqualified' };
 }
 `;
+
+/** Preserve the existing receipt/script format when no verified grid carrier is
+ * involved. Only compiler-owned content frames can become insertion targets. */
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false, recovery = false): string {
+  let script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+  if (recovery) {
+    script = script.replace("  const board = figma.createFrame(); nativeOwn(board); NATIVE_PAGE.appendChild(board);",
+      "  const board = await figma.getNodeByIdAsync(NATIVE.recovery.creation.comparisonBoardId); nativeFileGuard(); nativeOwn(board);");
+    script = script.replace("const inst = main.createInstance(); nativeOwn(inst);",
+      "const inst = c === NATIVE.contractComparison ? await figma.getNodeByIdAsync(NATIVE.recovery.creation.comparisons[0].instanceId) : main.createInstance(); nativeFileGuard(); nativeOwn(inst);");
+  }
+  if (instanceWidth) script = script.replace('  pair(main, inst, []);', `  pair(main, inst, []);
+  if (c.instanceWidth !== undefined) {
+    if (inst.layoutMode !== 'VERTICAL') nativeRefuse('comparison-instance-width-layout');
+    const primarySizing = inst.primaryAxisSizingMode, verticalSizing = inst.layoutSizingVertical;
+    // Use the standard resize operation used by guarded root-size repair.
+    // Native resizeWithoutConstraints can leave a hugging instance at its
+    // intrinsic width before the later FIXED assignment (live Card evidence).
+    inst.resize(c.instanceWidth, inst.height);
+    inst.counterAxisSizingMode = 'FIXED';
+    inst.layoutSizingHorizontal = 'FIXED';
+    inst.primaryAxisSizingMode = primarySizing;
+    inst.layoutSizingVertical = verticalSizing;
+    if (Math.abs(inst.width - c.instanceWidth) > 0.001 || inst.layoutSizingHorizontal !== 'FIXED')
+      nativeRefuse('comparison-instance-width-refused');
+  }`).replace('  const slot = parts.get(nativeCanonical(c.slotSpecPath));', `  const slot = parts.get(nativeCanonical(c.slotSpecPath));
+  if (c.instanceWidth !== undefined) {
+    if (!slot || slot.type !== 'SLOT' || slot.parent !== inst) nativeRefuse('comparison-instance-width-slot');
+    slot.counterAxisSizingMode = 'FIXED';
+    slot.layoutSizingHorizontal = 'FILL';
+    if (slot.layoutSizingHorizontal !== 'FILL') nativeRefuse('comparison-instance-width-slot-refused');
+  }`);
+  if (sourceOwned) script = script.replace(
+    '  const slot = parts.get(nativeCanonical(c.slotSpecPath));',
+    "  if (c.contentMode === 'source-owned') { recorded.status = 'created-comparison'; return inst; }\n  const slot = parts.get(nativeCanonical(c.slotSpecPath));"
+  ).replace("if (nativeCanonical(identity.specPath) !== nativeCanonical(path))", "if (c.contentMode !== 'source-owned' && nativeCanonical(identity.specPath) !== nativeCanonical(path))")
+    .replace("node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);",
+      "if (c.contentMode !== 'source-owned' || Object.hasOwn(source.explicitVariableModes || {}, parentCollection.id)) node.setExplicitVariableModeForCollection(parentCollection, c.parent.tokenIdentity.modes[0].modeId);");
+  if (fillWidth) script = script.replace('  dsStampFingerprints(inst);', `
+  // Construction uses a temporary page parent. Set FILL only after every
+  // nested instance is attached, from outer parents toward inner children.
+  const records = NATIVE_RESULT.comparisons[0].nested || [];
+  const refs = c.instances.map((ref, index) => ({ ...ref, index }))
+    .filter(ref => ref.fillWidth).sort((a, b) => a.specPath.length - b.specPath.length);
+  for (const ref of refs) {
+    const record = records.find(row => row.index === ref.index);
+    const node = record && await figma.getNodeByIdAsync(record.instanceId); nativeFileGuard();
+    const parent = node && node.parent;
+    if (!node || !parent || !['VERTICAL', 'GRID'].includes(parent.layoutMode) ||
+        (parent.layoutSizingHorizontal !== 'FILL' &&
+          (parent.layoutMode === 'GRID' ? parent.primaryAxisSizingMode : parent.counterAxisSizingMode) !== 'FIXED'))
+      nativeRefuse('nested-fill-width-parent-unqualified');
+    node.layoutSizingHorizontal = 'FILL';
+    if (node.layoutSizingHorizontal !== 'FILL') nativeRefuse('nested-fill-width-refused');
+  }
+  dsStampFingerprints(inst);`);
+  if (!gridContent) return script;
+  return script.replace(
+    "  if (!slot || slot.type !== 'SLOT' || slot.children.length) nativeRefuse('comparison-slot-not-empty');",
+    `  const target = c.contentSpecPath ? parts.get(nativeCanonical(c.contentSpecPath)) : slot;
+  if (!slot || slot.type !== 'SLOT' || !target || target.children.length ||
+      (c.contentSpecPath && (target.type !== 'FRAME' || target.layoutMode !== 'GRID' ||
+        target.parent !== slot || slot.children.length !== 1))) nativeRefuse('comparison-slot-not-empty');
+  if (c.contentRows) {
+    if (!c.contentSpecPath) nativeRefuse('comparison-grid-rows-without-carrier');
+    target.gridRowCount = c.contentRows.length;
+    target.gridRowSizes = c.contentRows.map(t => t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
+  }`,
+  ).replace("node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(identity));",
+    `node.setSharedPluginData('ds_contracts', 'nativeContractPart', JSON.stringify(identity));
+    const rowRecipe = source.getSharedPluginData('ds_contracts', 'gridFlowRows');
+    if (rowRecipe) node.setSharedPluginData('ds_contracts', 'gridFlowRows', rowRecipe);`
+  ).replace('saved.contentNodeIds.push(node.id); slot.appendChild(node);',
+    'saved.contentNodeIds.push(node.id); target.appendChild(node);');
+}

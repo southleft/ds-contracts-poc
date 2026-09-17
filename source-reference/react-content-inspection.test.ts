@@ -116,6 +116,8 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.equal(job.state.sourceUnchanged, true);
   assert.equal(job.state.content?.status, 'compiled-comparison-draft');
   assert.deepEqual(job.state.fontFamilies, ['Inter']);
+  assert.equal(job.state.gridConstraints?.status, 'observed');
+  assert.deepEqual(job.state.gridConstraints?.rows, []);
   assert.deepEqual(readReactContentInspection(repo, reference, request, operationId), job.report());
   const paired = readReactContentInspectionEvidence(repo, reference, request, operationId)!;
   assert.deepEqual(paired.report, job.report());
@@ -130,6 +132,10 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.throws(() => readReactContentInspection(repo, reference, request, operationId), /evidence-changed/);
   assert.equal(job.report().phase, 'failed', 'the in-memory UI view must also recheck saved evidence');
   writeFileSync(fonts, bytes);
+  const grids = path.join(job.dir, 'grid-constraints.json'), gridBytes = readFileSync(grids);
+  writeFileSync(grids, '{}');
+  assert.throws(() => readReactContentInspection(repo, reference, request, operationId), /evidence-changed/);
+  writeFileSync(grids, gridBytes);
   writeFileSync(source, 'changed source');
   assert.throws(() => initialStore().read(reference.id, 'button-default'), /evidence-unavailable/);
   assert.throws(() => frames.read(reference.id, operationId), /evidence-unavailable/);

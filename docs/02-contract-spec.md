@@ -125,14 +125,15 @@ Five features from the second schema gauntlet, each shipped with a consuming con
 
 **Structured props.** `type: { arrayOf: Record<field, 'text' | 'number' | 'boolean'> }` declares a list-of-records prop (Breadcrumbs items, Select options). Code-only by declared fidelity limit — the canvas has no list-of-records property type — so the design binding is `{ "kind": "NONE" }` with no `property`, and every design-side consumer (figma generator, differ, diagnose) skips the prop rather than reporting it behind. Code renders `items?: Array<{ … }>`: no default destructure (undefined means "not provided", never a silent `[]`) and excluded from `...rest`. Guardrails: `arrayOf` ⇔ `kind: "NONE"` in both directions, no defaults, at least one field.
 
-## Grid layout (A2 — the declared-track grammar)
+## Grid layout (declared tracks and managed row flow)
 
 `layout.display: "grid"` joins the flex vocabulary, carrying the **declared-track
 subset** of CSS grid — the half the canvas round-trips byte-exactly
 (`layoutMode: "GRID"`, probed in [docs/research/grid-recon-probes.md](research/grid-recon-probes.md);
 grammar pinned in [docs/research/layout-grammar-proposal.md](research/layout-grammar-proposal.md), G1–G7).
 
-**Tracks and gaps (G1).** `layout.rows` / `layout.columns` are REQUIRED arrays of
+**Tracks and gaps (G1).** `layout.columns` is required; `layout.rows` is required
+unless `layout.flow: "row"` is present. Both are arrays of
 track objects — exactly one of `{"px": n}`, `{"fr": n}` (both may be fractional),
 or `{"fit": true}` (the canvas HUG track; its exact code spelling is
 `fit-content(100%)`, P14). Zero and negative values are schema-invalid: the
@@ -171,15 +172,36 @@ probe dead-end, via the `GRID_REFUSALS` registry
 `grid-child-grow`. Conformance pins nine of these as measured cases
 (`conformance/MANIFEST.json`, `grid-*` REFUSED rows).
 
-**Honest boundary.** Code→contract promotion carries **auto-placed** grids as
-of 2026-08-08 (G5: the cell is derived from child order as CSS row flow
-resolves it, then declared — explicit anchors when the author declared row
-tracks, `layout.flow: "row"` when they did not), which is what released the
-frozen subset's staged widen of `grid-2d` to CARRIED. Half-auto children,
-mixed auto/explicit siblings and occupancy past the declared tracks stay
-refused by name ([docs/23 §B.22](23-known-limitations.md)). CANVAS→contract is
-the direction still missing: `core/propose-figma.ts` does not read the dump's
-`grid` block, so a drawn grid proposes as the flex-era lowering.
+**Managed row sizing.** With `flow: "row"`, optional `autoRows` supplies one
+track object for each row beyond the declared `rows` list. For example:
+
+```json
+{"display":"grid","columns":[{"fr":1}],"rows":[{"fit":true},{"fit":true}],"autoRows":{"fit":true},"flow":"row"}
+```
+
+React emits the two explicit tracks and `grid-auto-rows: fit-content(100%)`.
+The native compiler and caller-content comparison writer materialize enough
+explicit Figma rows for the supplied children. The main stays empty when it
+has a root content slot. Native metadata retains the original declared rows
+and the extra-row rule; reverse extraction validates the observed tracks
+against that recipe before restoring it. Removing supplied content drops only
+derived rows, retaining explicitly declared empty rows and their gaps.
+
+This is a **managed content operation**, not automatic native CSS behavior.
+Adding children directly in Figma beyond its declared rows can leave content
+misplaced. Readback refuses an inconsistent row declaration; the companion
+must regenerate the track count for the changed content. Existing contracts
+without `autoRows` keep their previous behavior. Column flow, dense placement,
+repeating implicit-track lists and unresolved intrinsic keywords remain
+unsupported. `autoRows` requires forward row flow, and fractional tracks still
+require a definite axis rather than intrinsic sizing.
+
+**Conversion boundary.** CSS-module extraction and native extraction both
+carry supported grid tracks, gaps and forward row flow. Native extraction
+also checks the compiler-owned content carrier before restoring a single React
+root. Mixed automatic/explicit placement and unqualified overflow remain
+refusals. These shared rules do not qualify arbitrary CSS or complete the
+source-derived React Card journey; see [current status](CURRENT.md).
 
 ## State previews (`bindings.figma.statePreviews`, v8; spelled `figmaStatePreviews` until schema 17)
 

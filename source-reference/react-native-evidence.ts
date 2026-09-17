@@ -9,7 +9,12 @@ import { reactReferenceUnchanged, type ReactReference } from './react-reference.
 import { reactSourceProgramUnchanged, type ReactSourceProgram } from './react-source-program.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { isReactNativeRequest, type ReactNativeRequest } from './react-native-request.js';
+import { linkReactSourceAnatomy } from './react-source-anatomy.js';
 import { deriveReactChildRoot } from './react-child-root.js';
+import { readReactContentInspectionEvidence } from './react-content-inspection.js';
+import type { ReactRootMatrix } from './react-root-matrix.js';
+import type { ReactChildRoot } from './react-child-root.js';
+import type { NativeContractDraftSource } from '../core/native-contract-draft.js';
 
 const fail = (): never => { throw Error('react-native-evidence-unavailable'); };
 /** Only call with the current runner's already authenticated report. */
@@ -29,16 +34,19 @@ export function selectReactNativeRequest(repoRoot: string, report: ReactOwnershi
 }
 
 export function selectReactChildRequest(repoRoot: string, reference: ReactReference, parent: ReactNativeRequest,
-  instanceId: string): ReactNativeRequest {
+  instanceId: string, constraints?: ReactNativeRequest['constraints']): ReactNativeRequest {
   if (parent.version !== 1) throw Error('react-child-parent-root-required');
-  const request: ReactNativeRequest = { ...structuredClone(parent), version: 2, selection: { instanceId } };
+  const request: ReactNativeRequest = { ...structuredClone(parent), version: constraints ? 3 : 2, selection: { instanceId },
+    ...(constraints ? {constraints:structuredClone(constraints)} : {}) };
   readReactNativeEvidence(repoRoot, reference, request);
   return request;
 }
 
 /** Existing journal requests retain these exact hashes across restarts. A new
  * request must first come from selectReactNativeRequest on a current runner. */
-export function readReactNativeEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest) {
+export function readReactNativeEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest): {
+  matrix: ReactRootMatrix | ReactChildRoot; source: NativeContractDraftSource;
+} {
   if (!isReactNativeRequest(request) || reference.id !== request.referenceId || !reactReferenceUnchanged(reference)) fail();
   const dir = path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id);
   const sealBytes = readFileSync(path.join(dir, 'integrity.json'));
@@ -60,11 +68,25 @@ export function readReactNativeEvidence(repoRoot: string, reference: ReactRefere
   const programBytes = readFileSync(path.join(dir, 'program.json'));
   const program = JSON.parse(programBytes.toString()) as ReactSourceProgram;
   if (!reactSourceProgramUnchanged(program) || !reactReferenceUnchanged(reference)) fail();
-  const captured = request.version === 2 ? JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) : undefined;
+  const captured = request.version !== 1 ? JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) : undefined;
   if (captured && (captured.status !== 'captured' || captured.problems.length || !captured.tree ||
       captured.treeSha256 !== evidenceSha(JSON.stringify(captured.tree)) || captured.treeSha256 !== row.treeSha256)) fail();
+  let context,ownedEvidence;
+  if(request.version===3) {
+    const parent={...request,version:1 as const};delete parent.selection;delete parent.constraints;
+    const pin=request.constraints!;
+    const inspection=readReactContentInspectionEvidence(repoRoot,reference,parent,pin.operationId,{id:pin.id,inventorySha256:pin.inventorySha256});
+    if(!inspection || inspection.report.phase!=='complete' || !inspection.report.sourceUnchanged ||
+        inspection.report.gridConstraints?.status!=='observed') return fail();
+    context={gridConstraints:inspection.report.gridConstraints};
+    if(linkReactSourceAnatomy(program,row.ownership!,captured.tree).instances.find(i=>i.instanceId===request.selection!.instanceId)?.content==='authored-or-runtime') {
+      const contentDir=path.join(repoRoot,'private/react-content-inspections',pin.operationId,pin.id);
+      ownedEvidence={fonts:JSON.parse(readFileSync(path.join(contentDir,'text-fonts.json'),'utf8')),
+        svg:JSON.parse(readFileSync(path.join(contentDir,'svg-viewports.json'),'utf8'))};
+    }
+  }
   const matrix = request.version === 1 ? structuredClone(row.rootMatrix!) : deriveReactChildRoot(program, row.ownership!, captured.tree,
-    JSON.parse(readFileSync(path.join(dir, request.caseId, 'style-origin.json'), 'utf8')), request.selection!.instanceId);
+    JSON.parse(readFileSync(path.join(dir, request.caseId, 'style-origin.json'), 'utf8')), request.selection!.instanceId,context,ownedEvidence);
   return { matrix, source: {
     revision: `sha256:${reference.id}`, programSha256: evidenceSha(programBytes), evidenceRevision: revisionOf(request),
   } };

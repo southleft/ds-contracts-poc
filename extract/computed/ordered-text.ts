@@ -11,8 +11,9 @@ export interface OrderedContentObservation {
  * those items beside element parts instead of concatenating all text before
  * all children. These are layout parts, not new source elements or public APIs.
  * A host-proven component boundary can opt in for a single text item too, so
- * its box remains independently addressable. No measured box is copied into a
- * reusable dimension. */
+ * its box remains independently addressable. A text-only block boundary also
+ * retains its box, with one inline text run; mixed block/inline flow refuses.
+ * No measured box is copied into a reusable dimension. */
 export function preserveOrderedFlexText(
   part: Part,
   observations: OrderedContentObservation[],
@@ -49,7 +50,9 @@ export function preserveOrderedFlexText(
   const runs = ordered.filter(i => 'text' in i);
   // The ordinary root/part content spelling is already faithful in this case.
   if (!runs.length || (!preserveBoundary && runs.length === 1 && 'text' in ordered[0])) return { changed: false };
-  if (observations.some(({ node }) => !['flex', 'inline-flex'].includes(node.style.display) ||
+  const blockText = preserveBoundary && ordered.length === 1 && runs.length === 1 &&
+    observations.every(({node}) => node.style.display === 'block' && node.nodes.every(child => child.t === 'text'));
+  if (observations.some(({ node }) => (!blockText && !['flex', 'inline-flex'].includes(node.style.display)) ||
       !(node.style['white-space-collapse'] === 'collapse' || ['normal', 'nowrap'].includes(node.style['white-space'])) ||
       (node.style['white-space'] && !['normal', 'nowrap'].includes(node.style['white-space'])) ||
       (node.style['white-space-collapse'] && node.style['white-space-collapse'] !== 'collapse')))

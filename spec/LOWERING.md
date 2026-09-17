@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **57** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **59** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -919,3 +919,27 @@ This is a check on the *declared* forms, not an executed round trip — the empi
 > **`emit.margin-box-wrapper`.** The forward leg mints a frame literally named `<child> (margin box)`. `grep -a` over the 11,574-line inverse finds exactly **one** occurrence, and it is a mention inside a note string — not a recognizer. So the inverse reads the wrapper as an ordinary anatomy part, promotes it, and the next forward pass lowers *that* part again. **The structure grows every pass.**
 
 That is the measured result of option (a) — the spacer node — with its inverse half never written. It is the incumbent, and it is the thing that already broke.
+
+
+### Managed implicit rows
+
+`emit.grid-managed-flow-rows` materializes one `autoRows` track rule into
+explicit Figma rows for the current supplied content. It retains the declared
+rows and implicit rule in `gridFlowRows` metadata, which inversion checks
+against independently observed native tracks. Direct canvas child insertion
+cannot update that rule automatically; inconsistent tracks refuse. The shared
+writer and comparison tests, a live native comparison, and live-dump-to-React
+checks exercise this managed boundary. The frozen conformance baseline has no
+case for the addition, so the register verdict remains `untested`.
+
+
+### Parent-relative root content width
+
+`emit.root-content-parent-width` preserves `width:100%` for supported root
+content. The reusable native main has a standalone preview width; a nested
+instance fills its qualified containing column or grid. Inversion checks the
+root-slot metadata and native sizing and retains `width:100%` instead of
+minting preview pixels. An indefinite parent or standalone comparison without
+a containing context refuses. Live native resizing and live-dump React checks
+exercise this boundary; the frozen baseline has no case, so its register
+verdict remains `untested`.

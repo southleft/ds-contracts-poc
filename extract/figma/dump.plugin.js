@@ -661,6 +661,8 @@ async function dumpNode(node, nodePath, parent) {
       columnGap: node.gridColumnGap,
     };
     if (node.gridItemsPositioning === 'ROW_AUTO_FLOW') grid.flow = 'row';
+    const flowRows = node.getSharedPluginData('ds_contracts', 'gridFlowRows');
+    if (flowRows) { try { grid.flowRows = JSON.parse(flowRows); } catch (_) { grid.flowRows = flowRows; } }
     out.layout = {
       mode: 'GRID',
       padding: [node.paddingTop, node.paddingRight, node.paddingBottom, node.paddingLeft],

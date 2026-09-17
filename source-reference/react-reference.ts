@@ -258,7 +258,7 @@ export function createReactReferenceService(
     const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
     const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
-    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan)$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison)$/.exec(route);
     const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
     if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute) {
@@ -279,12 +279,16 @@ export function createReactReferenceService(
           if (childRoute) {
             const parent = jobs.reactRequest(childRoute[2]);
             if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
-            const review = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs).review;
-            const existing = jobs.listReact(reference.id, 'root').some(row => row.kind === 'nested' &&
+            const composition = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs, undefined, initialStates.nativeEvidence);
+            const review = composition.review;
+            const existing = jobs.listReact(reference.id, 'root').find(row => row.kind === 'nested' &&
               row.caseId === parent.caseId && row.ownershipId === parent.ownership.id && row.nestedInstanceId === childRoute[3]);
             if (!existing && !review.rows.find(r => r.instanceId === childRoute[3])?.canPrepareMain)
               throw Error('react-child-root-preparation-unavailable');
-            jobs.prepare(selectReactChildRequest(repoRoot, reference, parent, childRoute[3]));
+            const constraints=composition.inspection.gridConstraints?.status==='observed' && composition.inspectionSelection
+              ? {operationId:childRoute[2],...composition.inspectionSelection} : undefined;
+            jobs.prepare(existing ? jobs.reactRequest(existing.operation.id)
+              : selectReactChildRequest(repoRoot, reference, parent, childRoute[3], constraints));
           } else if (updateAction) {
             const { updateJobs, updateTransport }=native();
             const [, , parentId, proposalId, action]=updateAction;
@@ -324,8 +328,10 @@ export function createReactReferenceService(
               await frames.create(reference.id, id);
             } else if (nativeAction[3] === 'comparison') {
               jobs.verifiedReactObservation(id);
-              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs)));
-            } else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
+              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs, undefined, initialStates.nativeEvidence)));
+            } else if (nativeAction[3] === 'repair-comparison') jobs.dispatch(id,'comparison-repair-preflight-readback');
+            else if (nativeAction[3] === 'resume-comparison') jobs.dispatch(id,'comparison-recovery-readback');
+            else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
@@ -352,7 +358,7 @@ export function createReactReferenceService(
                 try {
                   // The composition reader authenticates and returns the saved
                   // inspection too. Do not read the same sealed archive twice.
-                  const evidence = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(id), id, jobs);
+                  const evidence = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(id), id, jobs, undefined, (_reference, request) => thisInitialEvidence(request));
                   if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
                   content = evidence.inspection; composition = evidence.review;
                 } catch {
@@ -729,7 +735,7 @@ export function createReactReferenceService(
       if (!reference) throw Error('react-native-reference-unavailable');
       return readReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
         ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
-          { id: request.content.id, inventorySha256: request.content.inventorySha256 }) : undefined);
+          { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
     },
     nativeEvidence(request: ReactNativeRequest) {
       if (!reference) throw Error('react-native-reference-unavailable');

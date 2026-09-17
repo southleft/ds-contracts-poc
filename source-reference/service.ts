@@ -152,10 +152,11 @@ export function createReferenceService(
         },
         buildComponent: (request, context) => buildReactComparisonWrite({
           ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation: context.operation,
-          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision, comparisonRecovery:context.comparisonRecovery,
         }),
       },
       react: {
+        updatedObservation: id => nativeUpdateJobs.verifiedForParent(id),
         prepare: (request, operation) => ({
           visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
           preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
@@ -744,8 +745,9 @@ export function createReferenceService(
   const nativeTransport = createNativeOperationTransport(repoRoot, nativeJobs);
   const nativeUpdatePlans = createNativeUpdatePlans(repoRoot, id => {
     const baseline = nativeJobs.reactUpdateBaseline(id);
-    if (baseline.request.kind !== 'react-initial-draft') throw Error('react-update-initial-draft-required');
-    const desired = prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.request), operation: baseline.input.operation });
+    const desired = baseline.request.kind === 'react-initial-draft'
+      ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.request), operation: baseline.input.operation })
+      : prepareReactNativePlan({ ...reactReference.nativeEvidence(baseline.request), operation: baseline.input.operation });
     return { parentJournalRevision: baseline.journalRevision, input: {
       before: baseline.input, baseline: baseline.receipt,
       desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },

@@ -11,7 +11,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ContractSchema } from '../scripts/contract-schema.js';
 import { revisionOf } from './contract-provenance.js';
-import { emitNativeContractReadbackScript, type NativeContractObservationInput } from './native-source-observation.js';
+import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 import { prepareNativeContractComparison, type NativeContractComparisonInput } from './native-contract-comparison.js';
 
 
@@ -80,8 +80,8 @@ test('missing allocation ownership refuses instead of silently emitting styled t
   assert.throws(() => f.engine.buildNativeContractComparisonScript(f.content, new Map([[f.content.id, f.content]]), f.source, wrongScope, f.comparison), /SCOPE_INVALID/);
 });
 
-async function observedFixture() {
-  const f = await fixture(), creation = await f.run(f.emit());
+async function observedFixture(grid: boolean | 'flow' = false) {
+  const f = await fixture(undefined, grid), creation = await f.run(f.emit());
   const data = f.engine.compileComponentData(f.content, new Map([[f.content.id, f.content]]));
   const comparison = prepareNativeContractComparison(f.content, data, f.source, revisionOf(f.tokens), { mode: 'light', brand: 'default' }, f.comparison);
   const input: NativeContractComparisonObservationInput = { operation: f.supplemental.operation, planRevision: revisionOf('comparison plan'), comparison,
@@ -221,9 +221,20 @@ test('comparison variant selection preserves typed null, string null, defaults a
 });
 
 
-async function nestedFixture() {
-  const f = await fixture();
+async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, block = false, callerWidth = false) {
+  const f = await fixture(undefined, callerWidth ? 'column' : fillWidth ? 'flow' : grid);
   const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
+  if(grid) {
+    child.anatomy.root.layout={display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row'};
+    if(grid==='flow') { child.anatomy.root.layout.columns=[{fr:1}];delete child.anatomy.root.layout.rows;child.anatomy.root.layout.autoRows={fit:true}; }
+    child.anatomy.root.literals={width:'300px',height:'fit-content'};
+    child.anatomy.root.tokens!.gap='{size}';
+  }
+  if (fillWidth) {
+    child.anatomy.root.literals={width:'100%',height:'fit-content'};
+    if (!grid) child.anatomy.root.layout={display:'flex',direction:'column'};
+  }
+  if (block) { delete child.anatomy.root.layout; child.anatomy.root.declared={display:'block'}; }
   child.name = 'Main'; // Deliberate display-name collision with the outer main.
   const context = await f.context('10000000-0000-4000-8000-000000000003');
   const data = f.engine.compileNativeContractDraft(child, new Map([[child.id, child]]), f.source);
@@ -232,6 +243,7 @@ async function nestedFixture() {
   const parent: NativeContractObservationInput = { operation: context.operation, planRevision: revisionOf('nested main plan'),
     projection: data.projection, component: data.component, tokenInput: context.tokens.input, tokenIdentity: context.tokens.identity, creation };
   const receipt = await f.run(emitNativeContractReadbackScript(parent));
+  assert.equal(verifyNativeContractReadback(parent,receipt).status,'supported-structure-observed',JSON.stringify({report:verifyNativeContractReadback(parent,receipt),root:receipt.nodes?.find((n:any)=>n.id===creation.variants[0].id)?.values}));
   const text = (value: string) => ({ text: value, tokens: { color: '{surface}', 'font-size': '{size}' }, declared: { 'font-family': 'Inter' } });
   const content = f.contract('fixture.composed', { root: { layout: { display: 'flex', direction: 'column' }, parts: {
     first: { layout: { display: 'flex', direction: 'row' }, parts: {
@@ -239,9 +251,11 @@ async function nestedFixture() {
     } },
     second: { layout: { display: 'flex', direction: 'row' }, parts: { secondLabel: text('Second editable content') } },
   } } });
+  if(grid==='flow')Object.assign(content.anatomy.root.parts!.second.parts!,{thirdLabel:text('Third'),fourthLabel:text('Fourth')});
+  if(block){content.anatomy.root.parts!.first.literals={width:'300px'};content.anatomy.root.parts!.first.layout!.direction='column';}
   const reference = { parent, receipt, variantName: data.component.variants[0].name, slotSpecPath: [0] };
-  const selected: NativeContractComparisonInput = { ...f.comparison, instances: [[0], [0, 0], [1]].map(specPath => ({ ...reference, specPath })) };
-  const emit = () => f.emit(content, selected);
+  const selected: NativeContractComparisonInput = { ...f.comparison, ...(callerWidth?{instanceWidth:360}:{}), instances: (block?[[0,0],[1]]:[[0], [0, 0], [1]]).map(specPath => ({ ...reference, specPath })) };
+  const emit = (c=content, selection=selected) => f.emit(c, selection);
   const observe = async (creation: any) => {
     const component = f.engine.compileComponentData(content, new Map([[content.id, content]]));
     const comparison = prepareNativeContractComparison(content, component, f.source, revisionOf(f.tokens), { mode: 'light', brand: 'default' }, selected);
@@ -252,8 +266,69 @@ async function nestedFixture() {
   return { ...f, content, selected, reference, emit, observe };
 }
 
-test('nested caller content keeps main linkage, independent token contexts and editable slots at multiple depths', async () => {
-  const f = await nestedFixture(), before = await f.run(emitNativeContractReadbackScript(f.reference.parent));
+test('block text instances keep native identities and reject unlowered inline composition before allocation',async()=>{
+ const f=await nestedFixture(false,true,true);
+ const mixed=structuredClone(f.content);
+ mixed.anatomy.root.parts!.second.parts!.extra={text:'another inline run'};
+ assert.throws(()=>f.emit(mixed),/block-inline-content-unqualified/);
+ const before=await f.run(emitNativeContractReadbackScript(f.reference.parent));
+ const creation=await f.run(f.emit());assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+ const {input,receipt}=await f.observe(creation);
+ assert.equal(verifyNativeContractComparisonReadback(input,receipt).status,'supported-comparison-structure-observed');
+ assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)),before);
+ for(const record of creation.comparisons[0].nested){
+  const node=await f.figma.getNodeByIdAsync(record.instanceId);
+  assert.equal(node.layoutSizingHorizontal,'FILL');
+  assert.equal((await node.getMainComponentAsync()).id,f.reference.parent.creation.variants[0].id);
+  assert.equal(node.children[0].children.length,1);assert.equal(node.children[0].children[0].type,'TEXT');
+ }
+ const count=f.figma.root.findAll(()=>true).length;
+ assert.equal((await f.run(f.emit())).allocationAttempted,false);assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
+
+for (const grid of [false, 'flow'] as const) test(`nested full-width content uses its final parent and refuses an indefinite host (${grid || 'flex'})`, async () => {
+  const f=await nestedFixture(grid,true);
+  const before=await f.run(emitNativeContractReadbackScript(f.reference.parent));
+  for(const mutate of [
+    (r:any)=>{r.nodes.find((n:any)=>n.id===f.reference.parent.creation.variants[0].id).values.layoutSizingHorizontal='HUG';},
+    (r:any)=>{r.nodes.find((n:any)=>n.type==='SLOT').values.layoutSizingHorizontal='HUG';},
+  ]){const bad=structuredClone(before);mutate(bad);assert.equal(verifyNativeContractReadback(f.reference.parent,bad).status,'refused');}
+  const creation=await f.run(f.emit());assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  for(const record of creation.comparisons[0].nested){
+    const node=await f.figma.getNodeByIdAsync(record.instanceId);
+    assert.equal(node.layoutSizingHorizontal,'FILL');
+    assert.notEqual(node.parent.type,'PAGE');
+  }
+  const {input,receipt}=await f.observe(creation);
+  const verified=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(verified.status,'supported-comparison-structure-observed',JSON.stringify(verified));
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)),before);
+  for(const sizing of ['FIXED','HUG']) {
+    const bad=structuredClone(receipt);
+    bad.content.nodes.find((n:any)=>n.id===creation.comparisons[0].nested[1].instanceId).values.layoutSizingHorizontal=sizing;
+    assert.equal(verifyNativeContractComparisonReadback(input,bad).status,'refused');
+  }
+  const noHost={...f.selected,instances:f.selected.instances!.filter(ref=>JSON.stringify(ref.specPath)!=='[0]')};
+  assert.throws(()=>f.emit(f.content,noHost),/nested-fill-width-parent-unqualified/);
+  assert.throws(()=>f.emit(f.content,{...f.reference,caseId:'standalone'}),/root-fill-width-needs-parent-context/);
+  const count=f.figma.root.findAll(()=>true).length;
+  assert.equal((await f.run(f.emit())).allocationAttempted,false);
+  assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
+
+test('caller width establishes the containing block for nested full-width instances',async()=>{
+  const f=await nestedFixture(false,true,false,true), missing={...f.selected};delete missing.instanceWidth;
+  assert.throws(()=>f.emit(f.content,missing),/nested-fill-width-parent-unqualified/);
+  const creation=await f.run(f.emit());assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const {input,receipt}=await f.observe(creation), report=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(report.status,'supported-comparison-structure-observed',JSON.stringify(report));
+  for(const record of creation.comparisons[0].nested){const node=await f.figma.getNodeByIdAsync(record.instanceId);assert.equal(node.layoutSizingHorizontal,'FILL');assert.equal(node.width,360);}
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)),f.reference.receipt);
+});
+
+for (const grid of [false, true, 'flow'] as const) test(`nested caller content keeps linkage, token contexts and editable slots (${grid === 'flow' ? 'managed grid' : grid ? 'grid' : 'flex'})`, async () => {
+  const f = await nestedFixture(grid), before = await f.run(emitNativeContractReadbackScript(f.reference.parent));
   const mains = f.figma.root.findAll((n: any) => n.type === 'COMPONENT').map((n: any) => n.id);
   const creation = await f.run(f.emit());
   assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
@@ -321,4 +396,134 @@ test('nested references require pinned same-source mains and complete paths befo
   const result = await f.run(script);
   assert.equal(result.status, 'refused'); assert.equal(result.allocationAttempted, false);
   assert.equal(f.figma.root.findAll(() => true).length, count);
+});
+
+
+test('root grid comparisons fill the verified content frame and independently check placements and gap bindings', async () => {
+  const f=await observedFixture(true), {input,receipt}=f;
+  assert.equal(input.creation.status,'created-candidate',JSON.stringify(input.creation));
+  assert.deepEqual(input.comparison.contentSpecPath,[0,0]);
+  const report=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(report.status,'supported-comparison-structure-observed',JSON.stringify(report));
+  const slot=await f.figma.getNodeByIdAsync(input.creation.comparisons[0].slots[0].nodeId);
+  const grid=slot.children[0];
+  assert.equal(slot.children.length,1);assert.equal(grid.layoutMode,'GRID');assert.equal(grid.children.length,2);
+  const main=await f.figma.getNodeByIdAsync(input.comparison.mainId);
+  assert.equal(main.children[0].children[0].children.length,0,'comparison does not fill main defaults');
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+  for(const change of [
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.id).values.gridRowGap++;},
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.id).values.boundVariables.gridColumnGap={type:'VARIABLE_ALIAS',id:'wrong'};},
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.children[1].id).values.gridColumnAnchorIndex=0;},
+    (r:any)=>{r.content.nodes.find((n:any)=>n.id===grid.children[0].id).values.gridRowSpan=2;},
+  ]) {const bad=structuredClone(receipt);change(bad);assert.equal(verifyNativeContractComparisonReadback(input,bad).status,'refused');}
+  const count=f.figma.root.findAll(()=>true).length;
+  assert.equal((await f.run(f.emit())).allocationAttempted,false);
+  assert.equal(f.figma.root.findAll(()=>true).length,count,'repeat creates no duplicate');
+  const overflow=structuredClone(f.content), label=overflow.anatomy.root.parts!.label;
+  for(let i=0;i<4;i++)overflow.anatomy.root.parts!['extra'+i]={...label,text:'Extra '+i};
+  assert.throws(()=>f.emit(overflow),/grid-content-placement-unqualified/,'implicit extra rows cannot be invented');
+});
+
+
+test('managed content materializes intrinsic flow rows without changing the reusable main', async () => {
+  const f = await observedFixture('flow'), { input, receipt } = f;
+  const report = verifyNativeContractComparisonReadback(input, receipt);
+  assert.equal(report.status, 'supported-comparison-structure-observed', JSON.stringify(report));
+  const slot = await f.figma.getNodeByIdAsync(input.creation.comparisons[0].slots[0].nodeId);
+  const grid = slot.children[0];
+  assert.equal(grid.gridRowCount, 2);
+  const main = await f.figma.getNodeByIdAsync(input.comparison.mainId);
+  assert.equal(main.children[0].children[0].gridRowCount, 1);
+  assert.equal(main.children[0].children[0].children.length, 0);
+  for (const mutate of [(v:any)=>{v.gridRowCount=1},(v:any)=>{v.gridRowSizes[1]={type:'FIXED',value:20}}]) {
+    const bad = structuredClone(receipt); mutate(bad.content.nodes.find((n:any)=>n.id===grid.id).values);
+    assert.equal(verifyNativeContractComparisonReadback(input,bad).status,'refused');
+  }
+  const missingRecipe=structuredClone(receipt);
+  delete missingRecipe.content.nodes.find((n:any)=>n.id===grid.id).metadata.gridFlowRows;
+  assert.equal(verifyNativeContractComparisonReadback(input,missingRecipe).status,'refused');
+  const extra = structuredClone(f.content);
+  for(let i=0;i<4;i++)extra.anatomy.root.parts!['extra'+i]={...extra.anatomy.root.parts!.label,text:'Extra '+i};
+  const data=f.engine.compileComponentData(extra,new Map([[extra.id,extra]]));
+  const plan=prepareNativeContractComparison(extra,data,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},f.comparison);
+  assert.equal(plan.contentRows?.length,6);
+  const count=f.figma.root.findAll(()=>true).length;
+  assert.equal((await f.run(f.emit())).allocationAttempted,false);
+  assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
+
+
+test('observed unit grid cells enter a row-flow carrier only when placements agree', async () => {
+  const f = await fixture(undefined, 'flow'), content = structuredClone(f.content);
+  content.anatomy.root.layout = { display: 'grid', columns: [{fr:1}], rows: [{fit:true},{fit:true}] };
+  content.anatomy.root.parts!.icon.placement = {row:0,column:0};
+  content.anatomy.root.parts!.label.placement = {row:1,column:0};
+  const data = f.engine.compileComponentData(content, new Map([[content.id, content]]));
+  assert.deepEqual(data.variants[0].spec.children!.map(c => c.cell), [{row:0,column:0},{row:1,column:0}]);
+  const plan = prepareNativeContractComparison(content,data,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},f.comparison);
+  const creation = await f.run(f.emit(content));
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  const input = {operation:f.supplemental.operation, planRevision:revisionOf('unit-cell comparison'), comparison:plan,
+    tokenInput:f.supplemental.tokens.input, tokenIdentity:f.supplemental.tokens.identity, creation};
+  const receipt = await f.run(emitNativeContractComparisonReadbackScript(input));
+  assert.equal(verifyNativeContractComparisonReadback(input,receipt).status,'supported-comparison-structure-observed');
+  for (const cell of [{row:0,column:0},{row:1,column:1},{row:1,column:0,rowSpan:2},
+    {row:1,column:0,columnSpan:2},{row:1,column:0,hAlign:'CENTER' as const}]) {
+    const changed=structuredClone(data);changed.variants[0].spec.children![1].cell=cell;
+    assert.throws(()=>prepareNativeContractComparison(content,changed,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},f.comparison),/grid-content-placement-unqualified/);
+  }
+  const wrong=structuredClone(receipt), slot=creation.comparisons[0].slots[0];
+  wrong.content.nodes.find((n:any)=>n.id===slot.contentNodeIds[1]).values.gridRowAnchorIndex=0;
+  assert.equal(verifyNativeContractComparisonReadback(input,wrong).status,'refused');
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+});
+
+test('caller width sizes only the comparison instance and independent readback rejects width or mode drift', async()=>{
+  const f=await fixture(undefined,'column');
+  const main=await f.figma.getNodeByIdAsync(f.comparison.parent.creation.variants[0].id);
+  const createInstance=main.createInstance.bind(main);
+  main.createInstance=()=>{
+    const instance=createInstance(), resize=instance.resizeWithoutConstraints.bind(instance);
+    // A native retained instance remained 1 px after this API followed
+    // by FIXED. Model that observation locally; do not alter old fixtures.
+    instance.resizeWithoutConstraints=(width:number,height:number)=>{
+      const intrinsicWidth=instance.width, hugging=instance.counterAxisSizingMode==='AUTO';
+      resize(width,height);if(hugging)resize(intrinsicWidth,height);
+    };
+    return instance;
+  };
+  const selected={...f.comparison,instanceWidth:360};
+  const data=f.engine.compileComponentData(f.content,new Map([[f.content.id,f.content]]));
+  const comparison=prepareNativeContractComparison(f.content,data,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},selected);
+  const creation=await f.run(f.emit(f.content,selected));
+  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const input:NativeContractComparisonObservationInput={operation:f.supplemental.operation,planRevision:revisionOf('caller width'),comparison,
+    tokenInput:f.supplemental.tokens.input,tokenIdentity:f.supplemental.tokens.identity,creation};
+  const receipt=await f.run(emitNativeContractComparisonReadbackScript(input));
+  const report=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(report.status,'supported-comparison-structure-observed',JSON.stringify({report,values:receipt.content.nodes.find((n:any)=>n.id===creation.comparisons[0].instanceId).values}));
+  for(const change of [(v:any)=>{v.width=359},(v:any)=>{v.layoutSizingHorizontal='HUG'},(v:any)=>{v.counterAxisSizingMode='AUTO'}]){
+    const wrong=structuredClone(receipt);change(wrong.content.nodes.find((n:any)=>n.id===creation.comparisons[0].instanceId).values);
+    assert.equal(verifyNativeContractComparisonReadback(input,wrong).status,'refused');
+  }
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+  assert.equal((await f.run(f.emit(f.content,selected))).allocationAttempted,false);
+  for(const instanceWidth of [0,-1,NaN,Infinity,100001])assert.throws(()=>f.emit(f.content,{...selected,instanceWidth}),/instance-width-unqualified/);
+  const horizontal=await fixture();assert.throws(()=>horizontal.emit(horizontal.content,{...horizontal.comparison,instanceWidth:360}),/instance-width-unqualified/);
+});
+
+test('comparison selects Boolean variants without coercing strings or omitted inputs', () => {
+  const contract = ContractSchema.parse({ id: 'fixture.bool', name: 'Bool', version: '0.1.0', status: 'draft', description: 'Boolean domain',
+    props: [{name:'disabled',type:'boolean',bindings:{code:{prop:'disabled'},figma:{kind:'VARIANT',property:'disabled',unsetValue:'(unset)'}}}],
+    states: [], semantics: {element:'button'}, anatomy:{root:{}},
+    bindings:{code:{anchors:{importPath:'./fixture',export:'Bool'}},figma:{anchors:{fileKey:null,componentSetKey:null}}} });
+  assert.equal(reactComparisonVariant(contract, {disabled:false}), 'disabled=false');
+  assert.equal(reactComparisonVariant(contract, {disabled:true}), 'disabled=true');
+  assert.equal(reactComparisonVariant(contract, {}), 'disabled=(unset)');
+  assert.equal(reactComparisonVariant(contract, {disabled:{kind:'undefined'}}), 'disabled=(unset)');
+  for (const disabled of ['false','true',0,1,null]) assert.throws(()=>reactComparisonVariant(contract,{disabled}),/value-unqualified/);
+  contract.props[0].bindings.code.values = {false:'enabled',true:'disabled'};
+  assert.equal(reactComparisonVariant(contract,{disabled:'disabled'}),'disabled=true');
+  assert.throws(()=>reactComparisonVariant(contract,{disabled:true}),/value-unqualified/);
 });

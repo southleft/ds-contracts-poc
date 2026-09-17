@@ -25,7 +25,7 @@ function nativeDraft(input: ReactNativePlanInput) {
     throw Error('react-native-plan-draft-unavailable');
   const engine = createFigmaEngine({ tokens: {
     primitives: draft.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} },
-  }, icons: new Map() });
+  }, icons: new Map(matrix.qualification==='observed-child-root-draft' ? matrix.assets : []) });
   const contracts = new Map([[draft.contract.id, draft.contract]]);
   if (canonicalJson(engine.compileComponentData(draft.contract, contracts)) !== canonicalJson(draft.native))
     throw Error('react-native-plan-compiler-output-changed');

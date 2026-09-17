@@ -973,6 +973,8 @@ function mapLayout(node: RestNode, ctx: Ctx, nodePath: string): DumpLayout | und
       columnGap: node.gridColumnGap ?? 0,
       ...(node.gridItemsPositioning === 'ROW_AUTO_FLOW' ? { flow: 'row' as const } : {}),
     };
+    const flowRows = node.sharedPluginData?.ds_contracts?.gridFlowRows;
+    if (flowRows) { try { grid.flowRows = JSON.parse(flowRows); } catch { grid.flowRows = flowRows; } }
     return {
       mode: 'GRID',
       padding: [node.paddingTop ?? 0, node.paddingRight ?? 0, node.paddingBottom ?? 0, node.paddingLeft ?? 0],

@@ -10,7 +10,7 @@ import type { createNativeUpdateJobs } from '../../../source-reference/native-up
 interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested';
   initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
-  updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; before: number; after: number }>;
+  updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; channel?: 'width' | 'height'; before: number; after: number }>;
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
@@ -70,20 +70,23 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     {rows.map(row => {
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison', initial = row.kind === 'initial';
       const savedComparison = rows.find(r => r.parentOperationId === id);
+      const corrected = row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent);
+      const currentProblems = op.problems.filter(problem => !corrected || problem !== 'native-operation-source-evidence-unavailable');
       return <details key={id} open={row.caseId === selectedCase}>
         <summary>{row.kind === 'nested' ? `${op.componentName ?? 'Nested component'} · observed child root` : `${row.caseId} ${initial ? '· observed initial states' : comparison ? '· caller-content comparison' : '· reusable roots'}`} · {op.phase.replaceAll('-', ' ')}</summary>
-        {row.kind === 'nested' && <p>This main covers the captured child inputs. Other properties, behavior and visual fidelity remain unqualified.</p>}
-        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
+        {row.kind === 'nested' && <p>This main covers the captured child inputs. {op.sourceOwnedContent ? 'It retains the component’s own internal content.' : 'Its caller-content slot remains empty.'} Other properties, behavior and visual fidelity remain unqualified.</p>}
+        {comparison && op.comparisonWidth !== undefined && <p>This comparison uses the original caller’s declared {op.comparisonWidth} px width. The reusable main keeps its own sizing rules.</p>}
+        <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {corrected ? 'verified correction matches current inputs; original creation retained below' : op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
-        {initial && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
+        {(initial || row.kind === 'nested') && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {row.updates?.map(update => <div key={update.id}>
-            <p>Reviewed update: {update.changes.length} node opacity changes. Existing node identities are retained. {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
-            {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Saved opacity</th><th>Proposed opacity</th></tr></thead>
-              <tbody>{update.changes.map(change => <tr key={change.nodeId}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{change.before}</td><td>{change.after}</td></tr>)}</tbody></table>}
+            <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
+            {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Property</th><th>Saved value</th><th>Proposed value</th></tr></thead>
+              <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + (change.channel ?? 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{change.channel ?? 'opacity'}</td><td>{change.before}</td><td>{change.after}</td></tr>)}</tbody></table>}
             {!update.operation && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/prepare`)}>Prepare reviewed correction</button>}
             {update.operation && <>
-              <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.sourceCurrent ? 'Pinned inputs match.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>
+              <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.sourceCurrent ? 'Pinned inputs match.' : update.operation.canRefreshObservation ? 'Pinned inputs match. Inspect again with the current reader to restore verification; the original write will not be repeated.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>
               {!update.connection?.finished && <>
                 <p>Use the current companion plugin in the authorized file. Connect using this update’s code.</p>
                 <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/connection`,update.operation!.id)}>Get update connection code</button>
@@ -107,7 +110,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           </div>)}
         </section>}
         <p>Target: <a href={`https://www.figma.com/design/${row.fileKey}`} target="_blank" rel="noreferrer">DS Contracts Evaluations</a>.</p>
-        {!row.connection.finished && <>
+        {(!row.connection.finished || op.canResumeComparison || op.comparisonRepair) && <>
           <p>Open the <a href="/ds-contracts-sync-runner-plugin.zip" download>DS Contracts companion plugin</a> in this file. Under “Connect the local source workflow,” enter the code and choose “Connect / resume.”</p>
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/connection`, id)}>Get connection code</button>
           {codes[id] && <label>Connection code <input readOnly value={codes[id]} onFocus={e => e.currentTarget.select()} /></label>}
@@ -115,7 +118,20 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           <button type="button" disabled={busy || !op.sourceCurrent || !row.connection.paired || row.connection.started}
             onClick={() => void action(`native-operation/${id}/start`)}>{comparison ? 'Create and inspect native comparison' : 'Create and inspect native draft'}</button>
         </>}
-        {(op.pendingPhase?.endsWith('readback') || ['observation-refused', 'component-observation-refused', 'component-structure-observed'].includes(op.phase)) && <button type="button" disabled={busy}
+        {op.comparisonRepair && <section aria-label="Repair linked instances">
+          <p>The independent readback found supported corrections to linked instances. The app will check the same nodes, source mains and tokens again before applying these changes.</p>
+          <ul>{op.comparisonRepair.changes.map((change,index)=><li key={index}>{change.kind==='height'
+            ? `Restore the main’s height binding: ${change.before} → ${change.after} px.`
+            : 'Remove an extra variable mode from a descendant to match its main.'}</li>)}</ul>
+          <button type="button" disabled={busy || !row.connection.paired}
+            onClick={() => void action(`native-operation/${id}/repair-comparison`)}>Verify and repair linked instances</button>
+        </section>}
+        {op.canResumeComparison && <section aria-label="Resume retained comparison">
+          <p>The retained instance is empty. Recovery will inspect its ownership, source mains and tokens, then continue in the same instance if they still match. Original creation evidence stays intact.</p>
+          <button type="button" disabled={busy || !row.connection.paired}
+            onClick={() => void action(`native-operation/${id}/resume-comparison`)}>Inspect and resume retained comparison</button>
+        </section>}
+        {!corrected && (op.pendingPhase?.endsWith('readback') || ['observation-refused', 'component-observation-refused', 'component-structure-observed'].includes(op.phase)) && <button type="button" disabled={busy}
           onClick={() => void action(`native-operation/${id}/retry-observation`)}>{op.pendingPhase ? 'Retry interrupted readback' : 'Inspect native draft again'}</button>}
         {op.nativeOutcome === 'unknown' && <p>The native outcome is unknown. Creation will not be repeated automatically.</p>}
         {op.structuralObservation && <p>Supported structure: {op.structuralObservation.status.replaceAll('-', ' ')}. Visual fidelity remains unverified.</p>}
@@ -143,14 +159,24 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.content && <section aria-label="Caller-content preparation">
           <p>Content preparation: {row.content.phase}. {row.content.sourceUnchanged ? 'The original rendering and source files are unchanged.' : 'Source equivalence is not yet established.'}</p>
           {!!row.content.fontFamilies?.length && <p>Observed text fonts: {row.content.fontFamilies.join(', ')}.</p>}
+          {row.content.gridConstraints && (row.content.gridConstraints.status === 'observed'
+            ? !!row.content.gridConstraints.rows.length && <details><summary>Source grid constraints · {row.content.gridConstraints.rows.length} grids</summary>
+              <p>Current CSS constraints and rendered track sizes are shown separately. These observations do not qualify native conversion or other content and viewport combinations.</p>
+              {row.content.gridConstraints.rows.map(grid => <section key={grid.path} aria-label={`Grid at ${grid.path || 'root'}`}>
+                <h4>{row.composition?.rows.find(child => child.sourcePaths.includes(grid.path))?.exportName ?? 'Source element'} · {grid.path || 'root'}</h4>
+                <div style={{overflowX:'auto'}}><table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th scope="col">Constraint</th><th scope="col">Computed CSS</th><th scope="col">Rendered value</th></tr></thead>
+                  <tbody>{Object.entries(grid.computed).map(([channel, value]) => <tr key={channel}><th scope="row">{channel}</th><td>{value}</td><td>{grid.used[channel as keyof typeof grid.used]}</td></tr>)}</tbody></table></div>
+              </section>)}
+            </details>
+            : <p role="alert">Source grid constraints could not be verified: {row.content.gridConstraints.problems.join(', ')}.</p>)}
           {row.content.content && <p>{row.content.content.status === 'compiled-comparison-draft'
             ? 'Caller content compiled for comparison. Review the separate native comparison operation when prepared; visual fidelity remains unverified.'
             : 'Caller content has unsupported facts that prevent native comparison.'} Reusable main slots remain empty.</p>}
           {[...row.content.problems, ...(row.content.content?.problems ?? [])].length > 0 && <ul>{[...row.content.problems, ...(row.content.content?.problems ?? [])].map((p, i) => <li key={i}>{p}</li>)}</ul>}
         </section>}
-        {op.problems.length > 0 && <ul>{op.problems.map(p => <li key={p}>{p}</li>)}</ul>}
+        {currentProblems.length > 0 && <ul>{currentProblems.map(p => <li key={p}>{p}</li>)}</ul>}
         {!!op.imageObservation?.images.length && <details open={comparison || initial}><summary>{initial ? 'Native initial-state exports' : comparison ? 'Native caller-content export' : 'Native root exports'} · diagnostic only</summary>
-          <p>{initial ? 'These are observed initial-state mains. Original and native pixels are shown without resizing. Structure and image presence do not qualify visual fidelity or runtime behavior.' : comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
+          <p>{initial ? 'These are observed initial-state mains. Original and native pixels are shown without resizing. Structure and image presence do not qualify visual fidelity or runtime behavior.' : comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : op.sourceOwnedContent ? 'These mains retain the component’s own observed internal content. Other inputs, runtime interactions and visual fidelity remain unqualified.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
           {comparison && <>
             {!row.sourceFrame && <button type="button" disabled={busy || !op.sourceCurrent}
               onClick={() => void action(`native-operation/${row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
@@ -189,6 +215,12 @@ function compositionProblem(code: string): string {
     'react-composition-main-not-verified': 'Create and independently inspect this child’s native main.',
     'react-composition-main-readback-invalid': 'Inspect the child’s native main again before using it.',
     'react-composition-held-inputs-differ': 'This usage supplies inputs outside the child’s observed property matrix.',
+    'react-composition-context-main-not-verified': 'No inspected main matches this child’s exact inputs and source styling.',
+    'react-composition-declared-size-not-preserved': 'The inspected main does not retain a source-declared dimension. Correct its sizing before composing it.',
+    'react-composition-observed-subtree-context-differs': 'The complete child differs from its observed initial state in this parent context. Inspect this usage before reusing the main.',
+    'react-composition-initial-main-observation-stale': 'A saved initial-state main exists, but its current verification is unavailable. Recover its readback before reusing it.',
+    'react-composition-content-ownership-differs': 'The inspected main does not match how this child owns its content.',
+    'react-comparison-variant-type-unqualified': 'This child’s property type has no supported native variant mapping.',
     'react-composition-observed-root-context-differs': 'This child’s styling differs in its parent context; the standalone main cannot be reused yet.',
     'react-composition-variant-unavailable': 'The child’s observed property values have no verified native variant.',
     'react-composition-root-slot-unavailable': 'The child needs one supported editable content slot.',

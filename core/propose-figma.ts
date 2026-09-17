@@ -1,3 +1,4 @@
+import { readGridFlowRows, type FlowTrack } from './grid-flow-rows.js';
 import { readRootContent } from './figma-root-content.js';
 import { readCodeValueAxes, restoreCodeValueAxes, type CodeValueAxis } from './figma-code-values.js';
 /**
@@ -5349,6 +5350,15 @@ function invertGridLayout(
   const toTrack = (t: NonNullable<typeof g.rows>[number]): Record<string, unknown> =>
     t.fit === true ? { fit: true } : t.px !== undefined ? { px: t.px } : { fr: t.fr as number };
   const out: Record<string, unknown> = { display: 'grid' };
+  const flowRows = g.flowRows === undefined ? undefined : readGridFlowRows(g.flowRows, g.columns.length,
+    m.children.filter(ch => !ch.occ.some(o => o.node.abs !== undefined)).length,
+    g.rows.map(t => t.fit ? { type: 'HUG', value: 1 } : t.px !== undefined ? { type: 'FIXED', value: t.px } : { type: 'FLEX', value: t.fr! }));
+  if (flowRows) {
+    if (!c.flow) throw Error('grid-flow-rows-requires-row-flow');
+    const sourceTrack = (t: FlowTrack) => t.type === 'HUG' ? { fit: true } : t.type === 'FIXED' ? { px: t.value } : { fr: t.value };
+    out.autoRows = sourceTrack(flowRows.autoRows);
+    if (flowRows.rows.length) out.rows = flowRows.rows.map(sourceTrack);
+  }
   // G5′: declared rows under flow ARE a contract fact now — but the emitter's
   // OWN derivation (ceil(children/columns) × {fr:1}) is not. Carrying that back
   // would turn a derived track list into a declared one and the round trip
@@ -5357,7 +5367,7 @@ function invertGridLayout(
   const derivedRows = Math.max(1, Math.ceil(m.children.length / Math.max(1, g.columns.length)));
   const rowsAreTheDerivation =
     g.rows.length === derivedRows && g.rows.every((t) => t.fr === 1);
-  if (!c.flow || !rowsAreTheDerivation) out.rows = g.rows.map(toTrack);
+  if (!flowRows && (m.rootContent || !c.flow || !rowsAreTheDerivation)) out.rows = g.rows.map(toTrack);
   // G9.1 — the permanent refusal, receipted on every grid that carries an
   // absolute child through the abs door instead of Part.overlay.
   for (const ch of m.children) {
@@ -5430,7 +5440,7 @@ function carryGridAxisSizing(
     // resolves against a size supplied from OUTSIDE the part on both surfaces,
     // so an fr-bearing axis is not a silence to close — and `fit-content` is
     // refused on it anyway (G8.2, `grid-hug-flex-axis`).
-    const rowsDerived = layout.flow === 'row' && layout.rows === undefined;
+    const rowsDerived = layout.autoRows ? hasFr([layout.autoRows]) : layout.flow === 'row' && layout.rows === undefined;
     const axisHasFr =
       axis === 'width' ? hasFr(layout.columns) : rowsDerived || hasFr(layout.rows);
     if (axisHasFr) continue;
@@ -9039,7 +9049,7 @@ function buildChildStub(
  *  to a variable stays the variable's. Field case: the CBDS Dialog's
  *  per-size widths (320/496/800) — without them the body text never wraps
  *  and every variant renders hundreds of px too wide. */
-function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, rootTokens: Record<string, string>, ctx: Ctx, where: string) {
+function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, rootTokens: Record<string, string>, ctx: Ctx, where: string, fullWidthContent = false) {
   if (!ctx.mint) return;
   // Overlay-flattened class (round 2 iteration 2): a root WITHOUT auto-layout
   // is a canvas-positioned frame — it cannot hug, so BOTH axes are drawn
@@ -9076,6 +9086,9 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
   // captured-variable convention on the same root — visual-parity receipt:
   // Dialog width minted 272 for a drawn 320 box.)
   for (const dim of ['width', 'height'] as const) {
+    // A checked full-width content marker describes a parent constraint.
+    // Its standalone native main has a preview width, not a size token.
+    if (dim === 'width' && fullWidthContent) continue;
     const fixedIn = withBox.filter((o) => fixedAxis(o, dim));
     // A partial binding is refused by unifyField, so it is not a carried
     // dimension. Keep uniformly bound dimensions authoritative, but let the
@@ -9126,14 +9139,14 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
       // (`grid-hug-flex-axis`). Silence is legal on that axis — the fraction
       // resolves against a host-supplied size. Do not write the hug and lose
       // the whole set (Figma DS Section Header / Footer).
-      const grid = root.layout as { display?: string; columns?: unknown; rows?: unknown; flow?: string } | undefined;
+      const grid = root.layout as { display?: string; columns?: unknown; rows?: unknown; autoRows?: unknown; flow?: string } | undefined;
       const hasFr = (tracks: unknown): boolean =>
         Array.isArray(tracks) && tracks.some((t) => t !== null && typeof t === 'object' && 'fr' in (t as object));
       const axisHasFr =
         grid?.display === 'grid' &&
         (dim === 'width'
           ? hasFr(grid.columns)
-          : (grid.flow === 'row' && grid.rows === undefined) || hasFr(grid.rows));
+          : (grid.autoRows ? hasFr([grid.autoRows]) : grid.flow === 'row' && grid.rows === undefined) || hasFr(grid.rows));
       if (axisHasFr) {
         ctx.notes.push(
           `${where}: root ${dim} HUGS on a grid whose ${dim === 'width' ? 'columns' : 'rows'} contain {fr} — hug NOT carried (grid-hug-flex-axis); the fraction stands and the host supplies the definite size`,
@@ -10195,6 +10208,7 @@ export function proposeFromDump(
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
   const rootContent = readRootContent(set);
+  if (rootContent?.normalized) set = rootContent.normalized;
   // PHASE 2 EXAM (rest-instance-slot-prop-value): a nested instance's
   // SLOT-typed property value arrives from the REST route as the API's own
   // `{ guid: … }` OBJECT — a slot-content node reference, not a prop value.
@@ -10527,7 +10541,8 @@ export function proposeFromDump(
   const root: Record<string, unknown> = {};
   const rootKeyByChildName = new Map<string, string>();
   const rootLayout = invertLayout(merged, true, null, ctx, where);
-  if (rootLayout) root.layout = rootContent ? { ...rootLayout, display: rootContent.display } : rootLayout;
+  if (rootContent?.display === 'block') root.declared = { display: 'block' };
+  else if (rootLayout) root.layout = rootContent ? { ...rootLayout, display: rootContent.display } : rootLayout;
   applyLayoutSplit(root, invertLayoutByProp(merged, ctx, where));
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootDeclared: Record<string, string> = {};
@@ -10642,11 +10657,18 @@ export function proposeFromDump(
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
   invertNodeEffects(merged, rootTokens, ctx, where);
-  invertRootFixedSize(merged, root, rootTokens, ctx, where);
+  invertRootFixedSize(merged, root, rootTokens, ctx, where, rootContent?.fillWidth);
   // G8: a grid ROOT states each axis too. Runs AFTER invertRootFixedSize so an
   // axis that door already made definite (px mint, or its own 'fit-content'
   // all-HUG branch) is left exactly as it found it.
   carryGridAxisSizing(merged, root, ctx, where, rootTokens);
+  if (rootContent?.fillWidth) {
+    const containsWidth = (v: ByPropCollector): boolean => Object.values(v.map).some(tokens => Object.hasOwn(tokens, 'width')) || (v.additional ?? []).some(containsWidth);
+    if (containsWidth(rootTokensByProp)) throw Error('FIGMA_ROOT_SLOT_FILL_WIDTH_VARIANCE_UNQUALIFIED');
+    delete rootTokens.width;
+    root.literals = { ...(root.literals as Record<string, string> | undefined), width: '100%',
+      ...(rootContent.display === 'block' ? { height: 'fit-content' } : {}) };
+  }
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
 
