@@ -117,6 +117,49 @@ test('scalar mappings reject cross-type and unknown parent properties', () => {
   assert.ok(missing.some(e => e.includes('no enum, text or boolean prop "missing"')));
 });
 
+test('parent IDs and labels reach distinct child controls and rebind without cross-activation', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const { parent, child, ctx } = family();
+  const text = (name: string, code: string) => ({ name, type: 'text' as const,
+    bindings: { code: { prop: code }, figma: { kind: 'TEXT' as const, property: name } } });
+  child.props.push(text('identity', 'controlId'));
+  child.anatomy.root.attrs = { ...child.anatomy.root.attrs, id: '{identity}' };
+  parent.props.push(text('firstId', 'primaryId'), text('secondId', 'secondaryId'));
+  parent.anatomy.root.parts = {
+    first: { component: { id: child.id, props: { identity: '{firstId}', label: '{label}', disabled: '{disabled}' } } },
+    firstCaption: { element: 'label', attrs: { for: '{firstId}' }, text: 'First control' },
+    second: { component: { id: child.id, props: { identity: '{secondId}', label: 'Other control', disabled: false } } },
+    secondCaption: { element: 'label', attrs: { htmlFor: '{secondId}' }, text: 'Second control' },
+  };
+  const errors: string[] = []; validateContract(parent, ctx.contracts, errors, ctx.icons);
+  assert.deepEqual(errors, []);
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const parentFiles = emitter.emit(parent, ctx), childFiles = emitter.emit(child, ctx);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, parent.name, parentFiles[0].contents,
+        parentFiles.find(f => f.path.endsWith('.css'))?.contents ?? '',
+        { [child.name]: { tsx: childFiles[0].contents, css: childFiles.find(f => f.path.endsWith('.css'))?.contents } });
+      for (const [primaryId, secondaryId] of [['one', 'two'], ['replacement-one', 'replacement-two']]) {
+        await render({ primaryId, secondaryId, label: 'Updated child', disabled: false });
+        assert.deepEqual(await page.locator('label').evaluateAll(labels => labels.map(label => (label as HTMLLabelElement).control?.id)), [primaryId, secondaryId]);
+        assert.deepEqual(await page.locator('button').allTextContents(), ['Updated child', 'Other control']);
+        // Listen to actual browser activation; do not manually dispatch events
+        // or construct the association in the generated DOM.
+        await page.evaluate(() => { (window as unknown as { activations: string[] }).activations = [];
+          document.querySelectorAll('button').forEach(button => { button.onclick = () => (window as unknown as { activations: string[] }).activations.push(button.id); }); });
+        await page.getByText('First control', { exact: true }).click();
+        await page.getByText('Second control', { exact: true }).click();
+        assert.deepEqual(await page.evaluate(() => (window as unknown as { activations: string[] }).activations), [primaryId, secondaryId]);
+        await render({ primaryId, secondaryId, label: '', disabled: true });
+        assert.equal(await page.locator('button').first().textContent(), '');
+        await page.getByText('First control', { exact: true }).click({ force: true });
+        assert.deepEqual(await page.evaluate(() => (window as unknown as { activations: string[] }).activations), [primaryId, secondaryId]);
+      }
+    } finally { await page.close(); }
+  }
+});
+
 test('native text and BOOLEAN-property links refuse instead of freezing defaults', () => {
   const { parent, ctx } = family();
   assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_NESTED_TEXT_PROP_LINK_UNSUPPORTED/);

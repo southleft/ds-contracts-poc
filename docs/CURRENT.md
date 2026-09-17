@@ -80,6 +80,8 @@ The shared shadow parser now handles supported OKLab/OKLCH colors in ordered CSS
 
 ### Build rules that compose
 
+The caller-content review can now record native HTML label-to-control relationships separately from appearance. For the composed Card, the application verified the “Receive updates” label and its actual control while preserving the original rendering. Missing controls, duplicate IDs and relationships outside the selected composition are reported. Both React emitters retain declared label associations and changing parent-to-child IDs; automatic projection of these observed relationships into reusable generated compositions remains unfinished.
+
 A contract describes the component's parts, layout, tokens, properties, content and references to other components. Readers derive supported facts from React source or native Figma data; generators compile those facts into the other surface. The conversion path requires no AI. Optional AI proposals must pass the same validation as user-authored input.
 
 A finite set of rules can describe many compositions. A table should reuse the rules for rows, cells, selection controls, slots and nested menus. Development must test those rules and their interactions rather than add a bespoke converter for every component name. New examples should expose a missing shared rule or verify an existing one.

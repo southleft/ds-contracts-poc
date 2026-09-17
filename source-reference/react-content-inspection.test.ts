@@ -138,6 +138,8 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.deepEqual(job.state.fontFamilies, ['Inter']);
   assert.equal(job.state.gridConstraints?.status, 'observed');
   assert.deepEqual(job.state.gridConstraints?.rows, []);
+  assert.equal(job.state.labelAssociations?.status, 'observed');
+  assert.deepEqual(job.state.labelAssociations?.rows, []);
   assert.deepEqual(readReactContentInspection(repo, reference, request, operationId), job.report());
   const paired = readReactContentInspectionEvidence(repo, reference, request, operationId)!;
   assert.deepEqual(paired.report, job.report());
@@ -156,6 +158,10 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   writeFileSync(grids, '{}');
   assert.throws(() => readReactContentInspection(repo, reference, request, operationId), /evidence-changed/);
   writeFileSync(grids, gridBytes);
+  const labels = path.join(job.dir, 'label-associations.json'), labelBytes = readFileSync(labels);
+  writeFileSync(labels, '{}');
+  assert.throws(() => readReactContentInspection(repo, reference, request, operationId), /evidence-changed/);
+  writeFileSync(labels, labelBytes);
   writeFileSync(source, 'changed source');
   assert.throws(() => initialStore().read(reference.id, 'button-default'), /evidence-unavailable/);
   assert.throws(() => frames.read(reference.id, operationId), /evidence-unavailable/);

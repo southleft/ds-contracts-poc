@@ -16,6 +16,7 @@ import { observeSvgViewports } from './svg-viewports.js';
 import { observeGridConstraints, verifiedGridConstraints, type GridConstraintEvidence } from './grid-constraints.js';
 import { compileObservedContent, type ObservedContentDraft } from './observed-content.js';
 import { evidenceSha, evidenceUnchanged, inventoryEvidence } from './react-validation-evidence.js';
+import { observeLabelAssociations, verifiedLabelAssociations, type LabelAssociationEvidence } from './label-associations.js';
 
 export interface ReactContentInspection {
   id: string;
@@ -27,6 +28,7 @@ export interface ReactContentInspection {
   content?: ObservedContentDraft;
   fontFamilies?: string[];
   gridConstraints?: GridConstraintEvidence;
+  labelAssociations?: LabelAssociationEvidence;
   problems: string[];
 }
 export function startReactContentInspection(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, operationId: string) {
@@ -63,6 +65,8 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
         save('svg-viewports.json', svg);
         const grids = await observeGridConstraints(page, profile.path, captured.tree);
         save('grid-constraints.json', grids);
+        const labels = await observeLabelAssociations(page, profile.path, captured.tree);
+        save('label-associations.json', labels);
         const repeat = await captureValidatedTree(page, profile, failures, '#root', '--');
         if (repeat.status !== 'captured' || repeat.treeSha256 !== captured.treeSha256 || repeat.sourcePngSha256 !== captured.sourcePngSha256)
           throw Error('react-content-source-changed-during-read');
@@ -71,6 +75,7 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
         state.content = compileObservedContent(captured.tree, fonts, svg);
         state.fontFamilies = [...new Set(fonts.rows.flatMap(row => row.fonts.map(font => font.familyName)))].sort();
         state.gridConstraints = grids;
+        state.labelAssociations = labels;
         state.sourceUnchanged = true;
         state.phase = 'complete';
       } finally { failures.dispose(); }
@@ -137,6 +142,13 @@ export function readReactContentInspectionEvidence(repoRoot: string, reference: 
     const grids = JSON.parse(readFileSync(path.join(dir, 'grid-constraints.json'), 'utf8')) as GridConstraintEvidence;
     if (revisionOf(grids) !== revisionOf(report.gridConstraints)) throw Error('react-content-grid-report-changed');
     if (grids.status === 'observed') verifiedGridConstraints(original.captured.tree, grids);
+  }
+  // Absence in a historical inspection means unobserved, never an empty or
+  // successful relationship result. New records remain separately sealed.
+  if (report.labelAssociations) {
+    const labels = JSON.parse(readFileSync(path.join(dir, 'label-associations.json'), 'utf8')) as LabelAssociationEvidence;
+    if (revisionOf(labels) !== revisionOf(report.labelAssociations)) throw Error('react-content-label-report-changed');
+    if (labels.status === 'observed') verifiedLabelAssociations(original.captured.tree, labels);
   }
   return { report, original, selection: { id: latest.id as string, inventorySha256: latest.inventorySha256 as string } };
 }

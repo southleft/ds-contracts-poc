@@ -200,6 +200,17 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.content && <section aria-label="Caller-content preparation">
           <p>Content preparation: {row.content.phase}. {row.content.sourceUnchanged ? 'The original rendering and source files are unchanged.' : 'Source equivalence is not yet established.'}</p>
           {!!row.content.fontFamilies?.length && <p>Observed text fonts: {row.content.fontFamilies.join(', ')}.</p>}
+          {row.kind === 'root' && row.content.phase === 'complete' && row.content.sourceUnchanged && !row.content.labelAssociations &&
+            <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/content`)}>Read source label relationships</button>}
+          {row.content.labelAssociations ? (row.content.labelAssociations.status === 'observed'
+            ? <details><summary>Source label relationships · {row.content.labelAssociations.rows.length}</summary>
+              <p>These are browser-verified relationships within this caller composition. Generated associations, reusable IDs and native property mappings remain unqualified.</p>
+              <table style={{borderSpacing:'12px 6px',textAlign:'left'}}><thead><tr><th>Label</th><th>Control</th><th>Association</th></tr></thead><tbody>
+                {row.content.labelAssociations.rows.map(label => <tr key={label.labelPath}><td>{label.text}</td><td>{label.controlTag} · {label.controlPath || 'root'}</td><td>{label.mode === 'explicit' ? `Explicit ID: ${label.sourceId}` : 'Control inside label'}</td></tr>)}
+              </tbody></table>
+            </details>
+            : <p>Source label relationships could not be carried within this composition: {row.content.labelAssociations.problems.join(', ')}.</p>)
+            : <p>Label relationships were not recorded in this saved preparation.</p>}
           {row.content.gridConstraints && (row.content.gridConstraints.status === 'observed'
             ? !!row.content.gridConstraints.rows.length && <details><summary>Source grid constraints · {row.content.gridConstraints.rows.length} grids</summary>
               <p>Current CSS constraints and rendered track sizes are shown separately. These observations do not qualify native conversion or other content and viewport combinations.</p>
