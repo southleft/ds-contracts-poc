@@ -1,3 +1,4 @@
+import {nativeDefaultFillRepairBaseline} from '../core/native-contract-default-fill-update.js';
 import {rebaseComparisonCreation} from '../core/native-comparison-main-migration.js';
 import {prepareNativeComparisonMigrationRepair} from '../core/native-comparison-migration-repair.js';
 import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
@@ -1628,7 +1629,7 @@ export function createNativeOperationJobs(
     reactUpdateBaseline(id: string) {
       const loaded = load(id);
       if ((!isReactNativeRequest(loaded.header.request) && !isReactInitialNativeRequest(loaded.header.request)) ||
-          !isReactPlan(loaded.plan) || loaded.state.phase !== 'component-structure-observed' ||
+          !isReactPlan(loaded.plan) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) ||
           loaded.state.pending || !loaded.state.imageReadback)
         fail('react-update-verified-baseline-required');
       // The old compiler plan is historical evidence, not write authority.
@@ -1637,6 +1638,8 @@ export function createNativeOperationJobs(
       delete input.allocationAnchor;
       const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
       delete receipt.images;
+      if (loaded.state.phase !== 'component-structure-observed' && !nativeDefaultFillRepairBaseline(input, receipt))
+        fail('react-update-verified-baseline-required');
       return structuredClone({ input, receipt, request: loaded.header.request, journalRevision: loaded.fingerprint });
     },
     reactRequest(id: string): ReactNativeRequest {
@@ -1653,10 +1656,11 @@ export function createNativeOperationJobs(
     verifiedReactObservation(id: string) {
       const loaded = load(id);
       if (!isReactNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
-          loaded.state.phase !== 'component-structure-observed' || loaded.state.pending || !loaded.state.imageReadback)
+          !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) || loaded.state.pending || !loaded.state.imageReadback)
         fail('react-parent-observation-required');
       const updated = options.react?.updatedObservation?.(id);
       if (updated) return structuredClone({ ...updated, request: loaded.header.request });
+      if (loaded.state.phase !== 'component-structure-observed') fail('react-parent-observation-required');
       authenticate(loaded);
       const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
       delete input.allocationAnchor;
@@ -1667,10 +1671,11 @@ export function createNativeOperationJobs(
     verifiedReactInitialObservation(id: string) {
       const loaded = load(id);
       if (!isReactInitialNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
-          loaded.state.phase !== 'component-structure-observed' || loaded.state.pending || !loaded.state.imageReadback)
+          !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) || loaded.state.pending || !loaded.state.imageReadback)
         fail('react-parent-observation-required');
       const updated = options.react?.updatedObservation?.(id);
       if (updated) return structuredClone({ ...updated, request: loaded.header.request });
+      if (loaded.state.phase !== 'component-structure-observed') fail('react-parent-observation-required');
       authenticate(loaded);
       const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
       delete input.allocationAnchor;

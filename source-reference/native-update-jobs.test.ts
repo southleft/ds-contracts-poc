@@ -1,3 +1,4 @@
+import {nativeDefaultFillUpdateFixture} from '../core/native-contract-default-fill-update-test-fixture.js';
 import {nativeBackgroundUpdateFixture} from '../core/native-contract-background-update-test-fixture.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import test from 'node:test';
@@ -14,7 +15,7 @@ import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { createNativeOperationTransport } from './native-operation-transport.js';
 
-async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture | typeof nativeBackgroundUpdateFixture = nativeUpdateFixture) {
+async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture | typeof nativeBackgroundUpdateFixture | typeof nativeDefaultFillUpdateFixture = nativeUpdateFixture) {
   const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
   let stale=false,lose='',failStorage=false,readerRevision=0,derivations=0;
@@ -263,4 +264,16 @@ test('display responses share verified update reads but delivery reauthenticates
   assert.equal(f.jobs().get(f.id).sourceCurrent, false);
   assert.throws(() => f.jobs().verifiedForParent(f.proposal.parentId), /source changed/);
   withEvidenceReadSnapshot(() => assert.equal(f.jobs().get(f.id).sourceCurrent, false));
+});
+
+ test('default-fill repair uses the companion journal and independent readback without duplicating nodes', async t => {
+  const f = await fixture(t, nativeDefaultFillUpdateFixture), ids = f.figma.root.findAll(()=>true).map((n:any)=>n.id);
+  for (const phase of ['update-preflight-observed','update-applied','update-verified']) {
+    await f.poll(); assert.equal(f.jobs().get(f.id).phase,phase,JSON.stringify(f.messages.slice(-2)));f.restart();
+  }
+  assert.deepEqual(f.figma.root.findAll(()=>true).map((n:any)=>n.id),ids);
+  assert.ok(f.nodes.every((n:any)=>n.fills.length===0));
+  f.transport().retryObservation(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-verified');
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
 });

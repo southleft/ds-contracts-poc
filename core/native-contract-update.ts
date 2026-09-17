@@ -1,3 +1,4 @@
+import {prepareNativeDefaultFillUpdate, nativeDefaultFillUpdateMatches, emitNativeDefaultFillUpdateScript, type NativeDefaultFillUpdatePlan} from './native-contract-default-fill-update.js';
 import {prepareNativeBackgroundUpdate, nativeBackgroundUpdateMatches, resolveNativeBackgroundUpdateInput, emitNativeBackgroundUpdateScript, type NativeBackgroundUpdatePlan} from './native-contract-background-update.js';
 import {prepareNativeSvgUpdate,emitNativeSvgUpdateScript,nativeSvgUpdateMatches,type NativeSvgUpdatePlan} from './native-contract-svg-update.js';
 import { prepareNativeRootSizeUpdate, emitNativeRootSizeUpdateScript, nativeRootSizeUpdateMatches, type NativeRootSizeUpdatePlan } from './native-contract-size-update.js';
@@ -29,9 +30,9 @@ const scalar = (v: unknown): v is number => typeof v === 'number' && Number.isFi
 const part = (node: Record<string, any>) => {
   try { return JSON.parse(node.metadata.nativeContractPart); } catch { return null; }
 };
-export type NativeContractUpdatePlan = NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan | NativeShadowUpdatePlan | NativeSvgUpdatePlan | NativeBackgroundUpdatePlan;
+export type NativeContractUpdatePlan = NativeDefaultFillUpdatePlan | NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan | NativeShadowUpdatePlan | NativeSvgUpdatePlan | NativeBackgroundUpdatePlan;
 export function prepareNativeContractUpdate(input: NativeContractUpdateInput): { plan: NativeContractUpdatePlan; revision: string } {
-  return prepareNativeBackgroundUpdate(input, prepareOpacityUpdate) ?? prepareNativeSvgUpdate(input, prepareOpacityUpdate) ?? prepareNativeShadowUpdate(input, prepareOpacityUpdate) ?? prepareNativeRootSizeUpdate(input, prepareOpacityUpdate) ?? prepareOpacityUpdate(input);
+  return prepareNativeDefaultFillUpdate(input, prepareOpacityUpdate) ?? prepareNativeBackgroundUpdate(input, prepareOpacityUpdate) ?? prepareNativeSvgUpdate(input, prepareOpacityUpdate) ?? prepareNativeShadowUpdate(input, prepareOpacityUpdate) ?? prepareNativeRootSizeUpdate(input, prepareOpacityUpdate) ?? prepareOpacityUpdate(input);
 }
 function prepareOpacityUpdate(input: NativeContractUpdateInput) {
   if (!/^sha256:[a-f0-9]{64}$/.test(input.desired.revision) ||
@@ -95,6 +96,8 @@ export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, recei
     catch {const result=verifyNativeContractReadback(plan.before,receipt);return {...result,status:'refused' as const,problems:[...result.problems,'native-update-background-observation-mismatch']};}
   }
   const result = verifyNativeContractReadback(direction === 'apply' ? plan.after : plan.before, receipt);
+  if (plan.kind === 'native-contract-default-fill-update' && !nativeDefaultFillUpdateMatches(plan, receipt, direction === 'apply'))
+    return { ...result, status: 'refused' as const, problems: [...result.problems, 'native-update-default-fill-observation-mismatch'] };
   if (plan.kind === 'native-contract-svg-update' && (!nativeSvgUpdateMatches(plan, receipt, direction === 'apply') ||
       direction === 'rollback' && plan.changes.some(c => (receipt as NativeSourceReadback)?.nodes?.find(n => n.id === c.nodeId)?.values.strokeWeight !== c.before)))
     return { ...result, status: 'refused' as const, problems: [...result.problems, 'native-update-svg-observation-mismatch'] };
@@ -104,6 +107,7 @@ export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, recei
 /** Independently check a preflight or completed update against the complete
  * saved observation, allowing only the pinned scalar transitions. */
 export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, receipt: unknown, complete = false): boolean {
+  if (plan.kind === 'native-contract-default-fill-update') return nativeDefaultFillUpdateMatches(plan, receipt, complete);
   if (plan.kind === 'native-contract-background-update') return nativeBackgroundUpdateMatches(plan,receipt,complete);
   if (plan.kind === 'native-contract-svg-update') return nativeSvgUpdateMatches(plan, receipt, complete);
   if (plan.kind === 'native-contract-shadow-update') return nativeShadowUpdateMatches(plan, receipt, complete);
@@ -126,6 +130,7 @@ export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, rece
  * values. The same program can finish a partial application or make no writes.
  * Transport must still resolve an unknown delivery before explicitly resuming. */
 export function emitNativeContractUpdateScript(plan: NativeContractUpdatePlan, direction: 'apply' | 'rollback' = 'apply', readOnly = false) {
+  if (plan.kind === 'native-contract-default-fill-update') return emitNativeDefaultFillUpdateScript(plan, direction, readOnly);
   if (plan.kind === 'native-contract-background-update') return emitNativeBackgroundUpdateScript(plan,direction,readOnly);
   if (plan.kind === 'native-contract-svg-update') return emitNativeSvgUpdateScript(plan, direction, readOnly);
   if (plan.kind === 'native-contract-shadow-update') return emitNativeShadowUpdateScript(plan, direction, readOnly);
