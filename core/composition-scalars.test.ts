@@ -9,6 +9,8 @@ import { reactEmitter, reactInlineEmitter, htmlEmitter, figmaScriptEmitter } fro
 import { createFigmaEngine } from './emit-figma-script.js';
 import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
 import { emitWebComponent } from '../packages/emitter-web-components/src/emit-wc.js';
+import { scopeContractResources, type ContractResources } from './scoped-contract-resources.js';
+import { flattenTokens, makeResolveLiteral } from './tokens.js';
 
 function callerFamily() {
   const { parent, child, ctx } = family();
@@ -450,8 +452,8 @@ test('native fresh-mount variants preserve initializer omission, controlled prec
 });
 
 test('native caller content populates linked slots without altering child mains or duplicating defaults', async () => {
-  for (const mode of ['flex', 'grid', 'nested'] as const) {
-    const grid = mode === 'grid';
+  for (const mode of ['flex', 'grid', 'grid-fill', 'nested'] as const) {
+    const grid = mode === 'grid' || mode === 'grid-fill';
     const { parent, child, ctx } = family();
     parent.props = [{ name: 'caption', type: 'text', default: 'Caller caption',
       bindings: { code: { prop: 'caption' }, figma: { kind: 'TEXT', property: 'Caption' } } }];
@@ -462,6 +464,7 @@ test('native caller content populates linked slots without altering child mains 
         slot: { name: 'children', ...(!useGrid ? { defaultContent: [{ id: child.id, props: { label: 'Default content' } }] } : {}) } } },
       bindings: { ...parent.bindings, code: { anchors: { importPath: `./${name}`, export: name } } } });
     const frame = shell('ds.caller-frame', 'CallerFrame'), body = shell('ds.caller-body', 'CallerBody', grid);
+    if (mode === 'grid-fill') body.anatomy.root.literals!.width = '100%';
     ctx.contracts.set(frame.id, frame); ctx.contracts.set(body.id, body);
     body.anatomy.root.literals!['font-size'] = '21px';
     if (mode === 'nested') {
@@ -483,25 +486,43 @@ test('native caller content populates linked slots without altering child mains 
       } },
       empty: { component: { id: frame.id }, parts: {} },
     } };
+    const dependencies = [child, frame, body];
+    if (mode === 'grid-fill') {
+      const leaf = shell('ds.caller-leaf', 'CallerLeaf');
+      dependencies.push(leaf); ctx.contracts.set(leaf.id, leaf);
+      parent.anatomy.root.parts!.first.parts!.body.parts!.caption = {
+        component: { id: leaf.id }, parts: { captionText: { content: { prop: 'caption' } } },
+      };
+    }
     const contractsBefore = JSON.stringify([...ctx.contracts]);
     const engine = createFigmaEngine(ctx), data = engine.compileComponentData(parent, ctx.contracts);
     assert.equal(JSON.stringify([...ctx.contracts]), contractsBefore);
     const { figma, root } = createFigmaMock();
     const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
     const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 });
-    for (const c of [child, frame, body]) await run(engine.buildComponentScript(c, ctx.contracts));
-    const mains = [child, frame, body].map(c => root.findOne(n => ['COMPONENT', 'COMPONENT_SET'].includes(n.type) && n.getSharedPluginData('ds_contracts', 'contractId') === c.id) as ComposedMockNode);
+    for (const c of dependencies) await run(engine.buildComponentScript(c, ctx.contracts));
+    const mains = dependencies.map(c => root.findOne(n => ['COMPONENT', 'COMPONENT_SET'].includes(n.type) && n.getSharedPluginData('ds_contracts', 'contractId') === c.id) as ComposedMockNode);
     const mainSnapshot = (main: ComposedMockNode) => JSON.stringify({ properties: main.componentPropertyDefinitions, nodes: main.findAll(() => true).map(n => [n.id, n.type, n.name, n.characters]) });
     const before = mains.map(mainSnapshot);
     await run(engine.buildComponentScript(parent, ctx.contracts));
     const main = root.findOne(n => n.type === 'COMPONENT' && n.getSharedPluginData('ds_contracts', 'contractId') === parent.id) as ComposedMockNode;
     assert.ok(main);
     assert.deepEqual(main.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption'));
-    assert.equal(main.findAll(n => n.type === 'INSTANCE').length, 4);
+    assert.equal(main.findAll(n => n.type === 'INSTANCE').length, mode === 'grid-fill' ? 5 : 4);
     assert.equal(main.findOne(n => n.type === 'TEXT' && n.characters === 'Caller caption')!.fontSize, 21, 'caller content inherits the child host typography');
-    assert.equal(main.findAll(n => n.type === 'SLOT').length, 3);
+    assert.equal(main.findAll(n => n.type === 'SLOT').length, mode === 'grid-fill' ? 4 : 3);
     assert.equal(main.children.find(n => n.name === 'empty')!.findAll(n => n.type === 'TEXT').length, 0, 'explicit empty children override slot defaults');
     assert.equal(main.children.find(n => n.name === 'first')!.layoutSizingHorizontal, 'FILL');
+    if (mode === 'grid-fill') {
+      const instance = main.findOne(n => n.type === 'INSTANCE' && n.name === 'body')!;
+      assert.equal(instance.layoutSizingHorizontal, 'FILL');
+      const slot = instance.findOne(n => n.type === 'SLOT')!;
+      assert.equal(slot.layoutSizingHorizontal, 'FILL', 'slot sizing is refreshed after its instance joins the sized parent');
+      assert.equal(slot.children![0].layoutSizingHorizontal, 'FILL');
+      const leaf = slot.findOne(n => n.type === 'INSTANCE' && n.name === 'caption')!;
+      assert.equal(leaf.layoutSizingHorizontal, 'FILL', 'nested full-width child occupies the established grid cell');
+      assert.equal(leaf.findOne(n => n.type === 'SLOT')!.layoutSizingHorizontal, 'FILL');
+    }
     assert.deepEqual(mains.map(mainSnapshot), before);
     assert.equal(Object.values(main.componentPropertyDefinitions).filter((v: any) => v.type === 'SLOT').length, 0,
       'child-owned slots do not become disconnected parent properties');
@@ -542,4 +563,72 @@ test('native caller content populates linked slots without altering child mains 
     parent.anatomy.root = { component: { id: frame.id }, parts: {} };
     assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /non-repeated nested instance/);
   }
+});
+
+test('composition resources preserve colliding token values and caller property references across native compilation', () => {
+  const { parent, child } = family();
+  parent.props = [{ name: 'tone', type: 'text', default: '{tone}',
+    bindings: { code: { prop: 'tone' }, figma: { kind: 'TEXT', property: 'Caption' } } }];
+  const shell = (id: string, name: string) => ContractSchema.parse({ ...child, id, name, props: [],
+    anatomy: { root: { layout: { display: 'flex', direction: 'column' }, literals: { width: '100%' },
+      tokens: { 'font-size': '{type.size}', color: '{paint.alias}' }, slot: { name: 'children' } } } });
+  const first = shell('ds.first', 'First'), second = shell('ds.second', 'Second');
+  parent.anatomy.root = { layout: { display: 'flex', direction: 'column' }, literals: { width: '300px' }, parts: {
+    first: { component: { id: first.id }, parts: { caption: { content: { prop: 'tone' } } } },
+    second: { component: { id: second.id }, parts: { caption: { content: { prop: 'tone' } } } },
+  } };
+  const resources: ContractResources[] = [{ contractId: parent.id, tokens: {}, assets: [] },
+    ...[first, second].map((c, i) => ({ contractId: c.id, assets: [] as Array<[string, string]>, tokens: {
+      type: { size: { $type: 'dimension', $value: i ? '27px' : '21px' } },
+      paint: { $type: 'color', base: { $value: i ? '#0000ff' : '#ff0000' }, alias: { $value: '{paint.base}' } },
+    } }))];
+  const originals = structuredClone({ contracts: [parent, first, second], resources });
+  const scoped = scopeContractResources([parent, first, second], resources);
+  assert.deepEqual({ contracts: [parent, first, second], resources }, originals);
+  assert.equal(scopeContractResources([second, parent, first], [...resources].reverse()).revision, scoped.revision);
+  assert.deepEqual(scoped.contracts.get(parent.id)!.props, parent.props, 'property names, literal defaults and bindings are not token refs');
+  const resolve = makeResolveLiteral(flattenTokens(scoped.tokens));
+  const colors = scoped.mappings.filter(m => m.contractId !== parent.id).map(m => resolve(`${m.tokenPrefix}.paint.alias`));
+  assert.deepEqual(colors, ['#ff0000', '#0000ff']);
+  const engine = createFigmaEngine({ tokens: { primitives: scoped.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: scoped.icons });
+  const compiled = engine.compileComponentData(scoped.contracts.get(parent.id)!, scoped.contracts);
+  const texts = compiled.variants[0].spec.children!.map(instance => instance.children![0].children![0]);
+  assert.deepEqual(texts.map(t => t.fontSize), [21, 27]);
+  assert.deepEqual(texts.map(t => t.contentProp), ['Caption', 'Caption']);
+  assert.notEqual(texts[0].textFill, texts[1].textFill);
+  const edit = structuredClone(resources); (edit[1].tokens.type as any).size.$value = '23px';
+  const changed = scopeContractResources([parent, first, second], edit);
+  assert.notEqual(changed.revision, scoped.revision);
+  assert.equal(changed.mappings.find(m => m.contractId === second.id)!.tokenPrefix,
+    scoped.mappings.find(m => m.contractId === second.id)!.tokenPrefix, 'editing one resource does not retarget another');
+  assert.throws(() => scopeContractResources([parent, first, second], resources.slice(1)), /IDENTITIES_INVALID/);
+  const dangling = structuredClone(resources); (dangling[1].tokens.paint as any).alias.$value = '{missing}';
+  assert.throws(() => scopeContractResources([parent, first, second], dangling), /Cannot resolve token/);
+  const cycle = structuredClone(resources); (cycle[1].tokens.paint as any).base.$value = '{paint.alias}';
+  assert.throws(() => scopeContractResources([parent, first, second], cycle), /Cannot resolve token/);
+});
+
+test('composition resources preserve distinct literal SVG assets and refuse missing or dynamic identities', () => {
+  const { parent, child } = family();
+  for (const c of [parent, child]) { c.props = []; c.anatomy.root = { parts: { icon: { icon: { asset: 'glyph', size: 16 } } } }; }
+  const a = '<svg viewBox="0 0 16 16"><path d="M0 0L16 16"/></svg>';
+  const b = '<svg viewBox="0 0 16 16"><path d="M0 16L16 0"/></svg>';
+  const resources: ContractResources[] = [parent, child].map((c, i) => ({ contractId: c.id, tokens: {}, assets: [['glyph', i ? b : a]] }));
+  const scoped = scopeContractResources([parent, child], resources);
+  const engine = createFigmaEngine({ tokens: { primitives: scoped.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: scoped.icons });
+  assert.equal(new Set([...scoped.contracts.values()].map(c => c.anatomy.root.parts!.icon.icon!.asset)).size, 2);
+  for (const original of [parent, child]) {
+    const c = scoped.contracts.get(original.id)!;
+    const compiled = engine.compileComponentData(c, scoped.contracts);
+    const baseline = createFigmaEngine({ tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } },
+      icons: new Map([['glyph', original === parent ? a : b]]) }).compileComponentData(original, new Map([[original.id, original]]));
+    assert.equal(compiled.variants[0].spec.children![0].svg, baseline.variants[0].spec.children![0].svg);
+  }
+  resources[0].assets.push(['glyph', a]);
+  assert.throws(() => scopeContractResources([parent, child], resources), /ASSET_IDENTITY_DUPLICATE/);
+  resources[0].assets = [];
+  assert.throws(() => scopeContractResources([parent, child], resources), /ASSET_UNRESOLVED/);
+  parent.props.push({ name: 'glyph', type: { enum: ['glyph'] }, bindings: { code: { prop: 'glyph' }, figma: { kind: 'VARIANT', property: 'Glyph' } } });
+  parent.anatomy.root.parts!.icon.icon!.asset = '{glyph}';
+  assert.throws(() => scopeContractResources([parent, child], resources), /DYNAMIC_ASSET_UNQUALIFIED/);
 });

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { readReactContentInspectionEvidence } from './react-content-inspection.js';
-import { projectReactCallerComposition, type ReactCallerBehavior } from './react-caller-composition.js';
+import { projectReactCallerCompositionGraph, type ReactCallerBehavior } from './react-caller-composition.js';
 import type { ReactReference } from './react-reference.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
@@ -10,6 +10,10 @@ import type { ReactSourceProgram } from './react-source-program.js';
 /** All locations come from the host-owned request and sealed inventories.
  * No posted contract, source code or native identity can enter this reader. */
 export function readReactCallerComposition(repo: string, reference: ReactReference, request: ReactNativeRequest,
+  operationId: string, behavior: (caseId: string) => ReactCallerBehavior | undefined) {
+  return readReactCallerCompositionGraph(repo, reference, request, operationId, behavior).draft;
+}
+export function readReactCallerCompositionGraph(repo: string, reference: ReactReference, request: ReactNativeRequest,
   operationId: string, behavior: (caseId: string) => ReactCallerBehavior | undefined) {
   const inspected = readReactContentInspectionEvidence(repo, reference, request, operationId);
   if (!inspected || inspected.report.phase !== 'complete' || !inspected.report.sourceUnchanged ||
@@ -30,7 +34,7 @@ export function readReactCallerComposition(repo: string, reference: ReactReferen
     try { const value = behavior(candidate.id); if (value) behaviors.push(value); } catch { /* Unavailable evidence is not a candidate. */ }
   }
   const content = path.join(repo, 'private/react-content-inspections', operationId, inspected.selection.id);
-  return projectReactCallerComposition({ program, ownership: row.ownership, tree: inspected.original.captured.tree,
+  return projectReactCallerCompositionGraph({ program, ownership: row.ownership, tree: inspected.original.captured.tree,
     origin: read(path.join(archive, request.caseId, 'style-origin.json')), fonts: read(path.join(content, 'text-fonts.json')),
     svg: read(path.join(content, 'svg-viewports.json')), grids: inspected.report.gridConstraints,
     labels: inspected.report.labelAssociations, behaviors });

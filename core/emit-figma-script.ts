@@ -5354,7 +5354,8 @@ function annotateFillW(rootSpec: NodeSpec): void {
     const gridParent = s.layout?.mode === 'GRID';
     for (const c of kids) {
       if (c.callerRootFillWidth && (!ready || (!gridParent && s.layout?.mode !== 'VERTICAL')))
-        throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: full-width child needs a definite column or grid');
+        throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: full-width child needs a definite column or grid' +
+          ` (child ${c.name}, parent ${s.name}, mode ${s.layout?.mode ?? 'none'}, width established ${ready})`);
       const fills = !gridParent && ready && isCandidate(c);
       if (fills) {
         c.fillW = true;
@@ -5366,7 +5367,12 @@ function annotateFillW(rootSpec: NodeSpec): void {
       // runtime skips FILL for it — CSS justify-self beats the stretch
       // default), so its subtree is NOT width-established; treating it as
       // established FILLed the dialog's Close button into its whole cell.
-      walk(c, fills || hasOwnWidth(c) || (gridParent && c.cell?.hAlign === undefined));
+      // Root content slots and their neutral grid carriers inherit an already
+      // established source box through sizeRootContent. They do not create a
+      // new intrinsic width; carrying that fact lets nested full-width
+      // instances use the same known width without inventing a fixed size.
+      walk(c, fills || hasOwnWidth(c) || (c.rootSlotContent === true && established) ||
+        (gridParent && c.cell?.hAlign === undefined));
     }
   };
   walk(rootSpec, hasOwnWidth(rootSpec));
@@ -7779,6 +7785,11 @@ ${hasRootSlot ? `function sizeRootContent(parent, child, spec) {
     grid.layoutSizingVertical = child.layoutSizingVertical;
   }` : ''}
 }
+` : ''}${hasCallerSlots && hasRootSlot ? `const callerSlotsByInstance = new WeakMap();
+function sizeCallerSlots(node) {
+  for (const entry of callerSlotsByInstance.get(node) || []) sizeRootContent(node, entry.slot, entry.spec);
+  for (const child of node.children || []) sizeCallerSlots(child);
+}
 ` : ''}${opts.preamble}const allVars = ${opts.nativeSource ? 'NATIVE_VARIABLES' : 'await figma.variables.getLocalVariablesAsync()'};
 const varByName = ${opts.nativeSource ? 'Object.create(null)' : '{}'};
 for (const v of allVars) varByName[v.name] = v;
@@ -8506,7 +8517,9 @@ ${hasCallerSlots ? `  if (spec.type === 'instance' && spec.children) {
     for (const child of spec.children) {
       if (!child.callerSlotProperty) throw Error('CALLER_SLOT_SPEC_REQUIRED');
       const slot = await buildNode(child, registry, node);
-      ${hasRootSlot ? 'sizeRootContent(node, slot, child);' : ''}
+      ${hasRootSlot ? `sizeRootContent(node, slot, child);
+      const entries = callerSlotsByInstance.get(node) || [];
+      entries.push({ slot, spec: child }); callerSlotsByInstance.set(node, entries);` : ''}
     }
     // The dependency already owns its layout and private descendants. Do not
     // position the inherited slot as a new direct child of this instance.
@@ -8553,7 +8566,7 @@ ${hasCallerSlots ? `  if (spec.type === 'instance' && spec.children) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(node, childNode, child);' : ''}${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
-  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}
+  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}${hasCallerSlots && hasRootSlot ? "\n  if (spec.type === 'root') sizeCallerSlots(node);" : ''}
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
     for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
@@ -8791,7 +8804,7 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
-      }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
+      }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n      sizeCallerSlots(comp);' : ''}
       report.rebuiltVariants++;
     }${hasNestedPropertyControls ? `
     for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;` : ''}
@@ -8994,7 +9007,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
-  }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
+  }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}${hasCallerSlots && hasRootSlot ? '\n  sizeCallerSlots(comp);' : ''}
   ${hasNestedPropertyControls ? `for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;
   ` : ''}for (const t of registry.texts) {
     let k = defKey(t.prop);

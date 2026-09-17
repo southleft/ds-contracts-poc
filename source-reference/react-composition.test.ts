@@ -24,13 +24,15 @@ import { gridConstraintChannels } from './grid-constraints.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { readReactNativeEvidence, selectReactChildRequest, selectReactNativeRequest } from './react-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
-import { projectReactCallerComposition, compareReactCallerContext } from './react-caller-composition.js';
+import { projectReactCallerComposition, projectReactCallerCompositionGraph, compareReactCallerContext } from './react-caller-composition.js';
+import { compileReactCallerNative } from './react-caller-native.js';
 import { buildReactCallerPreview } from './react-caller-preview.js';
 import { chromium } from 'playwright-core';
 import { generatedTypeErrors } from '../core/react-test-runtime.js';
 
 test('source caller projection preserves editable content and distinct generated label IDs in the real consumer', async t => {
   const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
+  f.tree.style.width = '240px';
   const button = f.tree.nodes[0]; assert.equal(button.t, 'el'); if (button.t !== 'el') return;
   f.tree.nodes.push({ t: 'el', el: { tag: 'label', classes: [], style: { ...button.el.style, display: 'inline' }, pseudo: {}, nodes: [{ t: 'text', v: 'Activate' }] } });
   f.ownership.nodes.push({ path: '1', tag: 'label', nearestComponent: 'box' });
@@ -44,6 +46,19 @@ test('source caller projection preserves editable content and distinct generated
   const draft = projectReactCallerComposition(input);
   assert.equal(draft.status, 'generated-draft', draft.problems.join(','));
   assert.equal(draft.children.length, 1); assert.equal(draft.identities.length, 1);
+  const graph = projectReactCallerCompositionGraph(input), before = structuredClone(graph);
+  assert.deepEqual(graph.draft, draft);
+  assert.equal(graph.resources.length, draft.contracts!.length);
+  const native = compileReactCallerNative(graph);
+  assert.deepEqual(graph, before, 'native projection cannot mutate the source-derived React graph');
+  assert.equal(native.report.components.length, 2);
+  assert.equal(native.report.observedWidth, 240);
+  assert.equal(native.report.components.find(c => c.contractId === draft.contract!.id)!.editableTextProperties.length, 2);
+  assert.ok(native.report.blockers.includes('native-dependency-reuse-unverified'));
+  assert.ok(native.report.blockers.includes('native-composition-delivery-unimplemented'));
+  assert.equal(compileReactCallerNative(graph).report.graphRevision, native.report.graphRevision);
+  assert.throws(() => compileReactCallerNative({ ...graph, resources: graph.resources.slice(1) }), /IDENTITIES_INVALID/);
+  assert.throws(() => compileReactCallerNative({ ...graph, draft: { ...draft, observedWidth: undefined } }), /source-unavailable/);
   const parent = draft.modules!.find(m => m.name === draft.contract!.name)!;
   assert.deepEqual(generatedTypeErrors(parent.name, parent.tsx, Object.fromEntries(draft.modules!.filter(m => m !== parent).map(m => [m.name, m.tsx]))), []);
   const output = await buildReactCallerPreview(process.cwd(), draft);

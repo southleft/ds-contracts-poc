@@ -1,5 +1,6 @@
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
-import {readReactCallerComposition} from './react-caller-composition-evidence.js';
+import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
+import {compileReactCallerNative} from './react-caller-native.js';
 import {buildReactCallerPreview} from './react-caller-preview.js';
 import {buildReactBehaviorPreview} from './react-behavior-preview.js';
 import { selectReactComparisonCase } from './react-comparison-case.js';
@@ -232,14 +233,14 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
-    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview)?$/.exec(route);
+    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview|\/native-compilation)?$/.exec(route);
     if (callerReact) {
       try {
         if (req.method !== 'GET' || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
             !native || !reference || reference.id !== callerReact[1] || !reactReferenceUnchanged(reference))
           throw Error('react-caller-request-invalid');
         const current = reference;
-        const draft = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => readReactCallerComposition(repoRoot, current,
+        const graph = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => readReactCallerCompositionGraph(repoRoot, current,
           native!().jobs.reactRequest(callerReact[2]), callerReact[2], caseId => {
             const behavior = callbacks.read(current.id, caseId)?.draft;
             if (behavior?.status !== 'generated-draft' || !behavior.contract) return undefined;
@@ -248,6 +249,12 @@ export function createReactReferenceService(
               tokens: initial.draft.compiled!.tokens!, assets: initial.draft.compiled!.assets ?? [] };
           })));
         if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+        const { draft } = graph;
+        if (callerReact[3] === '/native-compilation') {
+          const { report } = compileReactCallerNative(graph);
+          if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+          json(res, 200, { compilation: report }); return;
+        }
         if (!callerReact[3]) { json(res, 200, { draft }); return; }
         const output = await buildReactCallerPreview(repoRoot, draft);
         if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');

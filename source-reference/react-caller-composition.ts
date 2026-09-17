@@ -67,11 +67,24 @@ export function compareReactCallerContext(generated: CapturedNode | undefined, s
   });
   return same(a, b) ? differences : undefined;
 }
-export function projectReactCallerComposition(input: {
+export interface ReactCallerCompositionInput {
   program: ReactSourceProgram; ownership: ReactOwnership; tree: CapturedNode; origin: ReactStyleOrigin;
   fonts: TextFontEvidence; svg: SvgViewportEvidence; grids?: GridConstraintEvidence; labels: LabelAssociationEvidence;
   behaviors: ReactCallerBehavior[];
-}): ReactCallerComposition {
+}
+export interface ReactCallerCompositionResources {
+  contractId: string;
+  tokens: Record<string, unknown>;
+  assets: Array<[string, string]>;
+}
+/** Host-side resources are kept separate from the public React preview. */
+export function projectReactCallerComposition(input: ReactCallerCompositionInput): ReactCallerComposition {
+  return projectReactCallerCompositionGraph(input).draft;
+}
+export function projectReactCallerCompositionGraph(input: ReactCallerCompositionInput): {
+  draft: ReactCallerComposition; resources: ReactCallerCompositionResources[];
+} {
+  let resources: ReactCallerCompositionResources[] = [];
   const result: ReactCallerComposition = { status: 'refused', problems: [], identities: [], children: [], contextDifferences: [], inputRevision: revisionOf(input),
     limitations: ['observed-composition-context-only', 'unobserved-layout-and-property-planes-unqualified', 'native-caller-property-mapping-unqualified',
       'external-fonts-not-bundled', 'generated-consumer-not-installed', 'visual-fidelity-not-qualified'] };
@@ -203,7 +216,9 @@ export function projectReactCallerComposition(input: {
     const modules = [...contracts.values()].map(c => ({ name: c.name, tsx: emitReactInline(c,
       { contracts, icons: contexts.get(c.id)!.assets, tokens: { primitives: contexts.get(c.id)!.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } } }).tsx }));
     result.contract = ContractSchema.parse(contract); result.contracts = [...contracts.values()]; result.modules = modules;
+    resources = [...contexts].map(([contractId, context]) => ({ contractId,
+      tokens: structuredClone(context.tokens), assets: [...context.assets] }));
     result.status = 'generated-draft';
   } catch (error) { result.problems.push(error instanceof Error ? error.message : String(error)); }
-  return result;
+  return { draft: result, resources };
 }
