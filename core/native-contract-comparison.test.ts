@@ -282,9 +282,24 @@ test('comparison variant selection preserves typed null, string null, defaults a
 });
 
 
-async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, block = false, callerWidth = false) {
+async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, block = false, callerWidth = false, paint = false) {
   const f = await fixture(undefined, callerWidth ? 'column' : fillWidth ? 'flow' : grid);
+  if (paint) {
+    // This fixture models uniform inset STRETCH paint under a HUG instance.
+    // The live retained Card readback measured its inherited paint at 114x34
+    // inside a 116x36 Button. The general mock leaves absolute boxes fixed.
+    const proto = Object.getPrototypeOf(f.figma.currentPage);
+    for (const [dimension, axis, position] of [['width','horizontal','x'],['height','vertical','y']] as const) {
+      const descriptor = Object.getOwnPropertyDescriptor(proto, dimension)!;
+      Object.defineProperty(proto, dimension, { ...descriptor, get() {
+        return this.type === 'RECTANGLE' && this.layoutPositioning === 'ABSOLUTE' && this.parent && this.constraints?.[axis] === 'STRETCH'
+          ? Math.max(0.01, this.parent[dimension] - 2 * this[position]) : descriptor.get!.call(this);
+      } });
+    }
+  }
   const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
+  if (paint) Object.assign(child.anatomy.root, { declared: { 'background-clip': 'padding-box' },
+    literals: { 'border-width': '1px', 'border-radius': '8px' } });
   if(grid) {
     child.anatomy.root.layout={display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row'};
     if(grid==='flow') { child.anatomy.root.layout.columns=[{fr:1}];delete child.anatomy.root.layout.rows;child.anatomy.root.layout.autoRows={fit:true}; }
@@ -312,10 +327,15 @@ async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, 
     } },
     second: { layout: { display: 'flex', direction: 'row' }, parts: { secondLabel: text('Second editable content') } },
   } } });
+  if (paint) for (const part of [content.anatomy.root.parts!.first,
+    content.anatomy.root.parts!.first.parts!.nested, content.anatomy.root.parts!.second]) {
+    Object.assign(part, { tokens: { 'background-color': '{ink}' }, declared: { 'background-clip': 'padding-box' },
+      literals: { 'border-width': '1px', 'border-radius': '8px' } });
+  }
   if(grid==='flow')Object.assign(content.anatomy.root.parts!.second.parts!,{thirdLabel:text('Third'),fourthLabel:text('Fourth')});
   if(block){content.anatomy.root.parts!.first.literals={width:'300px'};content.anatomy.root.parts!.first.layout!.direction='column';}
-  const reference = { parent, receipt, variantName: data.component.variants[0].name, slotSpecPath: [0] };
-  const selected: NativeContractComparisonInput = { ...f.comparison, ...(callerWidth?{instanceWidth:360}:{}), instances: (block?[[0,0],[1]]:[[0], [0, 0], [1]]).map(specPath => ({ ...reference, specPath })) };
+  const reference = { parent, receipt, variantName: data.component.variants[0].name, slotSpecPath: [paint ? 1 : 0] };
+  const selected: NativeContractComparisonInput = { ...f.comparison, ...(callerWidth?{instanceWidth:360}:{}), instances: (block?[[0,0],[1]]:[[0], [0, paint ? 1 : 0], [1]]).map(specPath => ({ ...reference, specPath })) };
   const emit = (c=content, selection=selected) => f.emit(c, selection);
   const observe = async (creation: any) => {
     const component = f.engine.compileComponentData(content, new Map([[content.id, content]]));
@@ -617,4 +637,29 @@ test('root paint removal preserves nested source paths and emitted instance iden
   assert.deepEqual(f.selected.instances!.map(ref => ref.specPath), originalPaths);
   assert.equal(creation.comparisons[0].nested.length, 3);
   assert.equal(verifyNativeContractComparisonReadback(input, receipt).status, 'supported-comparison-structure-observed');
+});
+
+test('nested linked roots inherit paint once and preserve caller paths through multiple painted ancestors', async () => {
+  const f = await nestedFixture(false, false, false, false, true);
+  Object.assign(f.content.anatomy.root, { tokens: { 'background-color': '{surface}' },
+    declared: { 'background-clip': 'padding-box' }, literals: { 'border-width': '1px', 'border-radius': '8px' } });
+  for (const reference of f.selected.instances!) reference.specPath[0]++;
+  const originalPaths = structuredClone(f.selected.instances!.map(ref => ref.specPath));
+  const creation = await f.run(f.emit());
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  const { input, receipt } = await f.observe(creation);
+  assert.deepEqual(input.comparison.instances!.map(ref => ref.specPath), [[0], [0, 0], [1]]);
+  assert.deepEqual(f.selected.instances!.map(ref => ref.specPath), originalPaths);
+  assert.equal(creation.comparisons[0].nested.length, 3);
+  assert.equal(receipt.content.nodes.filter((n:any) => n.name === 'Background paint').length, 3);
+  assert.deepEqual(receipt.content.nodes.filter((n:any) => n.type === 'TEXT').map((n:any) => n.values.characters).sort(),
+    ['First editable content', 'Second editable content']);
+  assert.equal(verifyNativeContractComparisonReadback(input, receipt).status, 'supported-comparison-structure-observed',
+    JSON.stringify(verifyNativeContractComparisonReadback(input, receipt)));
+  const unlinked = structuredClone(f.selected); unlinked.instances!.splice(1, 1);
+  assert.throws(() => f.emit(f.content, unlinked), /content-allocation-ownership-unqualified/);
+  const paintReference = structuredClone(f.selected); paintReference.instances![1].specPath = [1, 0];
+  assert.throws(() => f.emit(f.content, paintReference), /nested-main-path-missing/);
+  const different = structuredClone(f.content); different.anatomy.root.parts!.first.literals!['border-width'] = '2px';
+  assert.throws(() => f.emit(different), /nested-inherited-paint-unqualified/);
 });

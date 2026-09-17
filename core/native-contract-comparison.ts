@@ -1,7 +1,7 @@
 import { materializeFlowRows } from './grid-flow-rows.js';
 /** Comparison content belongs to an instance of an independently observed main.
  * No source-template identity is invented and the main is never rewritten. */
-import { revisionOf } from './contract-provenance.js';
+import { canonicalJson, revisionOf } from './contract-provenance.js';
 import type { Contract } from '../scripts/contract-schema.js';
 import type { ComponentData, NodeSpec, GridTrackSpec } from './emit-figma-script.js';
 import type { NativeContractDraftProjection, NativeContractDraftSource } from './native-contract-draft.js';
@@ -117,11 +117,50 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   if (new Set(instances.map(i => JSON.stringify(i.specPath))).size !== instances.length)
     fail('nested-main-path-ambiguous');
   const used = new Set<number>();
-  const root = component.variants[0].spec;
-  if (root.type !== 'root' || !root.children?.length) fail('content-missing');
-  // Synthetic root paint is already inherited from the linked main. Only
-  // caller content belongs in its slot; counting paint would duplicate it.
-  const rootContent = root.children!.filter(child=>!child.backgroundPaint);
+  const compiledRoot = component.variants[0].spec;
+  if (compiledRoot.type !== 'root' || !compiledRoot.children?.length) fail('content-missing');
+  // Linked roots inherit their paint from independently read mains. Remove
+  // compiler paint layers from caller content at every linked boundary, and
+  // translate descendant paths through those removals before joining them.
+  // Unlinked frames retain their complete content and normal admission checks.
+  const callerPaths = new Map<string, number[]>();
+  let callerCount = 0;
+  const callerTree = (spec: NodeSpec, sourcePath: number[], callerPath: number[]): NodeSpec => {
+    if (++callerCount > 4096 || sourcePath.length > 32) fail('content-allocation-ownership-unqualified');
+    callerPaths.set(JSON.stringify(sourcePath), callerPath);
+    const reference = instances.find(ref => JSON.stringify(ref.specPath) === JSON.stringify(sourcePath));
+    const inherited = !sourcePath.length || !!reference;
+    const out = structuredClone(spec);
+    const paint = inherited ? spec.children?.filter(child => child.backgroundPaint) ?? [] : [];
+    if (reference && paint.length) {
+      const main = reference.parent.component.variants.find(v => v.name === reference.variantName)!.spec;
+      const mainPaint = main.children?.[0];
+      if (paint.length !== 1 || paint[0] !== spec.children![0] || spec.backgroundClip !== 'padding-box' ||
+          main.backgroundClip !== 'padding-box' || !mainPaint?.backgroundPaint ||
+          canonicalJson(paint[0].backgroundPaint) !== canonicalJson(mainPaint.backgroundPaint))
+        fail('nested-inherited-paint-unqualified');
+      // Preserve the logical linked-root fields used by historical content
+      // comparisons. Actual paint and bindings are verified on the main.
+      delete out.backgroundClip;
+      if (paint[0].fill) out.fill = paint[0].fill;
+      if (paint[0].lits?.fillColor) out.lits = { ...out.lits, fillColor: paint[0].lits.fillColor };
+    }
+    if (spec.children) {
+      out.children = [];
+      spec.children.forEach((child, index) => {
+        if (inherited && child.backgroundPaint) return;
+        out.children!.push(callerTree(child, [...sourcePath, index], [...callerPath, out.children!.length]));
+      });
+    }
+    return out;
+  };
+  const root = callerTree(compiledRoot, [], []);
+  for (const reference of instances) {
+    const callerPath = callerPaths.get(JSON.stringify(reference.specPath));
+    if (!callerPath) fail('nested-main-path-missing');
+    reference.specPath = [...callerPath!];
+  }
+  const rootContent = root.children!;
   if(!rootContent.length)fail('content-missing');
   const projection: NativeContractDraftProjection = { version: 1, kind: 'contract-draft', purpose: 'source-candidate-inspection',
     acceptedContract: null, nativeQualification: 'unqualified', contractId: contract.id, contractRevision: revisionOf(contract),
@@ -185,13 +224,6 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       spec = spec.children![index];
     }
     if (reference.contentMode !== 'source-owned') Object.assign(reference, { contentRows: checkCapacity(reference, spec.children ?? []) });
-  }
-  // Incoming references address the full compiler tree. After checking that
-  // tree, rebase only the removed root paint indices into caller-content paths.
-  for (const reference of instances) {
-    const contentIndex = rootContent.indexOf(root.children![reference.specPath[0]]);
-    if (contentIndex < 0) fail('nested-main-path-missing');
-    reference.specPath = [contentIndex, ...reference.specPath.slice(1)];
   }
   const specs = rootContent.map((spec, i) => annotate(spec, [i]));
   if (used.size !== instances.length) fail('nested-main-path-missing');
