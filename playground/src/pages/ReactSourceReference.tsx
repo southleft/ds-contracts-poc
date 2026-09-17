@@ -447,6 +447,33 @@ export function ReactSourceReference() {
                     ))}
                   </ul>
                   <p>{component.problems.join(" · ")}</p>
+                  {!!component.callbacks?.length && (
+                    <details>
+                      <summary>
+                        Callback signatures and possible state inputs
+                      </summary>
+                      <p>
+                        Matching types are candidates for interaction checks.
+                        They do not prove a state relationship, and these
+                        callbacks are not emitted as zero-argument events.
+                      </p>
+                      <ul>
+                        {component.callbacks.map((callback) => (
+                          <li key={callback.callback}>
+                            <strong>{callback.callback}</strong>:{" "}
+                            {callback.signature}
+                            <br />
+                            Possible state inputs:{" "}
+                            {callback.stateProperties.join(", ") ||
+                              "None"}.{" "}
+                            {callback.status === "needs-observation"
+                              ? "Interaction checks must establish which input controls state and what this callback returns."
+                              : "This callback signature is not yet supported."}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
                   <details>
                     <summary>
                       Platform forwarding outside the native API
