@@ -336,7 +336,7 @@ export function createReactReferenceService(
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
         const observedAt = Date.now();
-        json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
+        json(res, 200, { operations: jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
@@ -374,7 +374,7 @@ export function createReactReferenceService(
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
             }), connection: transport.status(row.operation.id, observedAt) };
-        }) });
+        })) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
       }

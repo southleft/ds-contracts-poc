@@ -802,7 +802,28 @@ export function createNativeOperationJobs(
       componentObservation: checked,
     };
   };
-  const load = (id: string) => {
+  // A display response can visit the same dependency many times. Reuse its
+  // checked observation only within this synchronous, non-authorizing scope.
+  // Nothing survives into another request or a native command's authorization.
+  let readSnapshot: Map<string, unknown> | undefined;
+  const assertWriteScope = () => { if (readSnapshot) fail('write-during-read-snapshot'); };
+  function withReadSnapshot<T>(read: () => T): T {
+    const outer = readSnapshot;
+    readSnapshot ??= new Map();
+    try {
+      const result = read();
+      if (result && typeof (result as any).then === 'function') fail('async-read-snapshot');
+      return result;
+    } finally { readSnapshot = outer; }
+  }
+  function readOnce<T>(key: string, read: () => T): T {
+    if (!readSnapshot) return read();
+    if (readSnapshot.has(key)) return structuredClone(readSnapshot.get(key)) as T;
+    const value = read();
+    readSnapshot.set(key, structuredClone(value));
+    return value;
+  }
+  const loadFresh = (id: string) => {
     directories();
     ensure(dir(id));
     ensure(path.join(dir(id), "events"));
@@ -1063,8 +1084,9 @@ export function createNativeOperationJobs(
     );
     return { header, plan, script, state, events, previous, fingerprint };
   };
-  type Loaded = ReturnType<typeof load>;
-  const authenticate = (loaded: Loaded) => {
+  type Loaded = ReturnType<typeof loadFresh>;
+  const load = (id: string): Loaded => readOnce('journal:'+id, () => loadFresh(id));
+  const authenticate = (loaded: Loaded) => readOnce('source:'+loaded.header.id+':'+loaded.fingerprint, () => {
     const current = prepareInput(structuredClone(loaded.header.request), {
       id: loaded.header.id,
       fileKey: loaded.header.policy.fileKey,
@@ -1077,10 +1099,10 @@ export function createNativeOperationJobs(
       !same(current.plan, loaded.plan)
     )
       fail("source-plan-stale");
-    if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
+    if (loadFresh(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("evidence-changed-during-validation");
     return current.sourceCompatibility;
-  };
+  });
   // The journal is authoritative. Re-derive exports from its current readback;
   // old exports remain private history and cannot survive a retry as current.
   const imageArtifacts = (loaded: Loaded) => {
@@ -1200,6 +1222,7 @@ export function createNativeOperationJobs(
       | { kind: "abandon-observation"; attemptId: string }
       | { kind: "retry-refused-creation" },
   ) => {
+    assertWriteScope();
     if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("journal-changed");
     const sequence = loaded.events.length;
@@ -1248,6 +1271,7 @@ export function createNativeOperationJobs(
   const prepare = (
     request: OperationRequest,
   ): NativeOperationSnapshot => {
+    assertWriteScope();
     if (!validRequest(request)) fail("request-invalid");
     directories(true);
     const target = pointer(reservation(request));
@@ -1310,13 +1334,13 @@ export function createNativeOperationJobs(
     }
     return snapshot(load(id), true);
   };
-  const get = (id: string): NativeOperationSnapshot => {
+  const get = (id: string): NativeOperationSnapshot => readOnce('snapshot:'+id, () => {
     const loaded = load(id);
     let compatibility;
     try { compatibility = authenticate(loaded); }
     catch { return snapshot(loaded, false); }
     return snapshot(loaded, true, compatibility);
-  };
+  });
   const forBaseline = (baseline: string): NativeOperationSnapshot | null => {
     if (!present(root)) return null;
     try {
@@ -1350,6 +1374,7 @@ export function createNativeOperationJobs(
     id: string,
     phase: NativeOperationPhase,
   ): NativeOperationCommand => {
+    assertWriteScope();
     const loaded = load(id);
     if (loaded.state.pending) fail("native-outcome-unknown");
     let script: string;
@@ -1436,6 +1461,7 @@ export function createNativeOperationJobs(
     id: string,
     envelope: NativeOperationResult,
   ): NativeOperationSnapshot => {
+    assertWriteScope();
     const serialized = encode(envelope);
     if (Buffer.byteLength(serialized) > 4 * 1024 * 1024)
       fail("result-too-large");
@@ -1460,6 +1486,7 @@ export function createNativeOperationJobs(
     return snapshot(next, current(next));
   };
   const retryObservation = (id: string) => {
+    assertWriteScope();
     const loaded = load(id);
     const phase =
       loaded.state.pending?.phase ??
@@ -1480,6 +1507,7 @@ export function createNativeOperationJobs(
     return dispatch(id, phase);
   };
   const retryCreation = (id: string) => {
+    assertWriteScope();
     const loaded = load(id);
     if (
       loaded.state.pending ||
@@ -1528,6 +1556,7 @@ export function createNativeOperationJobs(
     });
   };
   return {
+    withReadSnapshot,
     prepare,
     get,
     forBaseline,
@@ -1596,6 +1625,7 @@ export function createNativeOperationJobs(
         ownershipId: request.ownership.id, fileKey: header.policy.fileKey };
     },
     listReact(referenceId: string, kind?: 'root' | 'mains') {
+      return withReadSnapshot(() => {
       if (!HASH.test(referenceId)) fail('request-invalid');
       if (!present(root)) return [];
       directories();
@@ -1613,6 +1643,7 @@ export function createNativeOperationJobs(
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
           ...(comparison ? { parentOperationId: comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];
+      });
       });
     },
     /** Transport scheduling only. Freshness is intentionally absent; writes
@@ -1653,6 +1684,7 @@ export function createNativeOperationJobs(
     /** Trusted transport only. Never include executable bytes in a public
      * snapshot. Reauthenticate write inputs immediately before first delivery. */
     pendingCommand(id: string): NativeOperationCommand | null {
+      assertWriteScope();
       const loaded = load(id);
       if (!loaded.state.pending) return null;
       if (!loaded.state.pending.readOnly) authenticate(loaded);

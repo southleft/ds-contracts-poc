@@ -23,19 +23,20 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   referenceId: string; selectedCase: string; ownership: ReactOwnershipReport | null;
 }) {
   const [rows, setRows] = useState<Operation[]>([]), [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const root = `/api/source-reference/react/${referenceId}`;
   const active = rows.some(r => (r.connection.paired && !r.connection.finished) || r.content?.phase === 'running' || r.updates?.some(u=>u.connection?.paired&&!u.connection.finished));
   useEffect(() => {
     let stopped = false, pending = false;
     const load = async () => {
-      if (pending) return; pending = true;
+      if (pending) return; pending = true; setLoading(true);
       try {
         const response = await fetch(`${root}/native`), result = await response.json();
         if (!response.ok) throw Error(result.error);
         if (!stopped) { setRows(result.operations); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
-      finally { pending = false; }
+      finally { pending = false; if (!stopped) setLoading(false); }
     };
     void load();
     const timer = active ? setInterval(() => void load(), 4000) : undefined;
@@ -61,7 +62,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     <h3>Inspect editable Figma roots</h3>
     <p>Create a native draft from the observed root styles and properties. Its content slot stays empty and editable.
       Prepare separate caller-content instances for comparison below. Visual fidelity, stateful behavior and the complete composed component remain unqualified.</p>
-    <button type="button" disabled={busy || !ready} onClick={() => void action(`native/${selectedCase}`)}>
+    {loading && <p role="status">{rows.length ? 'Refreshing saved Figma inspections…' : 'Loading saved Figma inspections…'}</p>}
+    <button type="button" disabled={busy || loading || !ready} onClick={() => void action(`native/${selectedCase}`)}>
       Prepare {selectedCase} for Figma
     </button>
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
