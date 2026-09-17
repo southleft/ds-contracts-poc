@@ -5,7 +5,7 @@ import {canonicalJson, revisionOf} from './contract-provenance.js';
 import {flattenTokens,makeResolveLiteral,pxOrNull} from './tokens.js';
 import {lowerPaddingBoxBackground} from './figma-background-clip.js';
 import type {NodeSpec} from './emit-figma-script.js';
-import {emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeSourceReadback} from './native-source-observation.js';
+import {emitNativeContractReadbackScript, verifyNativeContractReadback} from './native-source-observation.js';
 import type {NativeContractUpdateInput, NativeOpacityUpdatePlan} from './native-contract-update.js';
 
 type Rewrite = {nodeId:string; before:string; after:string};
@@ -149,6 +149,7 @@ const inspectBackgroundDelta = new Function('return '+INSPECT_BACKGROUND_DELTA)(
 export function resolveNativeBackgroundUpdateInput(plan:NativeBackgroundUpdatePlan,receipt:unknown) {
   const allocations=inspectBackgroundDelta(plan,receipt,true),after=copy(plan.after);
   after.creation.nodes.push(...allocations);
+  after.backgroundMigration={desiredRevision:plan.desiredRevision,allocationRevision:plan.allocationRevision};
   if(verifyNativeContractReadback(after,receipt).status!=='supported-structure-observed')fail('independent-readback');
   return after;
 }

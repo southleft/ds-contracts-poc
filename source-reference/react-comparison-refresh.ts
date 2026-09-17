@@ -1,3 +1,4 @@
+import {verifiedComparisonMainMigration,mainNodeAtPath,type NativeComparisonMainMigration} from '../core/native-comparison-main-migration.js';
 /** Read-only reinspection after verified main corrections. Creation authority
  * and native content metadata always remain pinned to the original plan. */
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
@@ -8,7 +9,7 @@ type Plan = ReturnType<typeof prepareReactComparisonPlan>;
 export interface ReactComparisonRefresh { request: ReactComparisonRequest; plan: Plan }
 const same = (a: unknown,b: unknown) => canonicalJson(a) === canonicalJson(b);
 
-export function refreshedComparisonPlan(original: Plan, request: ReactComparisonRequest, refresh: ReactComparisonRefresh): Plan {
+export function refreshedComparisonPlan(original: Plan, request: ReactComparisonRequest, refresh: ReactComparisonRefresh): Plan & {mainMigrations?:NativeComparisonMainMigration[]} {
   const fail = (): never => { throw Error('react-comparison-refresh-changed-content-or-identity'); };
   const normalizedRequest = structuredClone(refresh.request);
   // A composed mapping revision includes compiler diagnostics. All original
@@ -18,11 +19,20 @@ export function refreshedComparisonPlan(original: Plan, request: ReactComparison
   const normalized = structuredClone(refresh.plan.plan), old = original.plan;
   const pairs = [[old.comparison,normalized.comparison],
     ...(old.comparison.instances ?? []).map((ref,i)=>[ref,normalized.comparison.instances?.[i]])];
-  for (const [before,after] of pairs) {
+  const mainMigrations:NativeComparisonMainMigration[]=[];
+  for (const [pairIndex,[before,after]] of pairs.entries()) {
     if (!before || !after || verifyNativeContractReadback(after.parent,after.receipt).status !== 'supported-structure-observed') fail();
     const stableParent = structuredClone(after!.parent);
     stableParent.component = before!.parent.component;
-    if (!same(stableParent,before!.parent)) fail();
+    if (!same(stableParent,before!.parent)) {
+      mainMigrations.push(verifiedComparisonMainMigration(before!.parent,before!.receipt,after!.parent,after!.receipt,before!.mainId,pairIndex-1));
+      for(const key of ['slotSpecPath','contentSpecPath'] as const){
+        const oldPath=before![key],newPath=after![key];
+        if(!oldPath&&!newPath)continue;
+        if(!oldPath||!newPath||mainNodeAtPath(before!.receipt,before!.mainId,oldPath)?.id!==mainNodeAtPath(after!.receipt,after!.mainId,newPath)?.id)fail();
+        (after as any)[key]=structuredClone(oldPath);
+      }
+    }
     after!.parent = structuredClone(before!.parent); after!.receipt = structuredClone(before!.receipt);
   }
   normalized.comparison.projection.source.evidenceRevision = old.comparison.projection.source.evidenceRevision;
@@ -39,5 +49,11 @@ export function refreshedComparisonPlan(original: Plan, request: ReactComparison
     ref.parent = structuredClone(refresh.plan.plan.comparison.instances![i].parent);
     ref.receipt = structuredClone(refresh.plan.plan.comparison.instances![i].receipt);
   });
-  return result;
+  const updated=[result.plan.comparison,...result.plan.comparison.instances??[]];
+  const fresh=[refresh.plan.plan.comparison,...refresh.plan.plan.comparison.instances??[]];
+  for(const migration of mainMigrations)for(const key of ['slotSpecPath','contentSpecPath'] as const){
+    const value=fresh[migration.index+1][key];
+    if(value)(updated[migration.index+1] as any)[key]=structuredClone(value);
+  }
+  return {...result,...(mainMigrations.length?{mainMigrations}:{})};
 }

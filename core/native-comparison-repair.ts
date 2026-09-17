@@ -1,3 +1,4 @@
+import {emitNativeComparisonMigrationRepairScript,nativeComparisonMigrationRepairMatches} from './native-comparison-migration-repair.js';
 /** Correct two known projection defects on existing linked, source-owned
  * instances. Expectations come from verified mains; unrelated edits refuse. */
 import {canonicalJson,revisionOf} from './contract-provenance.js';
@@ -7,9 +8,9 @@ type Row=Record<string,any>;
 const same=(a:unknown,b:unknown)=>canonicalJson(a)===canonicalJson(b);
 function fail(s:string):never {throw Error('native-comparison-repair-'+s);}
 const clean=(value:unknown):Row=>{const r=structuredClone(value) as Row;if(r?.content)r.content.images=[];return r;};
-type Change={nodeId:string;kind:'height';before:number;after:number;variableId:string}|{nodeId:string;kind:'mode';collectionId:string;before:string}|{nodeId:string;kind:'comparison-clipping';before:true;after:false};
+type Change={nodeId:string;kind:'height';before:number;after:number;variableId:string}|{nodeId:string;kind:'mode';collectionId:string;before:string}|{nodeId:string;kind:'comparison-clipping';before:true;after:false}|{nodeId:string;kind:'metadata';key:string;before:string;after:string};
 export interface NativeComparisonRepairPlan {
-  version:1|2;input:NativeContractComparisonObservationInput;before:Row;after:Row;changes:Change[];revision:string;
+  version:1|2|3;input:NativeContractComparisonObservationInput;before:Row;after:Row;changes:Change[];revision:string;migrationOriginalCreation?:Row;
 }
 /** The app-owned presentation frame is not part of the source component.
  * Restore only its neutral framing; never remove clipping inside a component. */
@@ -95,11 +96,13 @@ export function prepareNativeComparisonRepair(input:NativeContractComparisonObse
   return {...plan,revision:revisionOf(plan)};
 }
 export function nativeComparisonRepairMatches(plan:NativeComparisonRepairPlan,receipt:unknown,complete=false){
+  if(plan.version===3)return nativeComparisonMigrationRepairMatches(plan,receipt,complete);
   const normalize=(value:unknown)=>{const r=clean(value);const nodes=resolveNativeSlotIdentities(plan.input.creation,r.content?.nodes??[]);if(!nodes)fail('allocation-unavailable');r.content.nodes=nodes;return r;};
   try {const r=normalize(receipt);return same(r,normalize(plan.after))&&verifyNativeContractComparisonReadback(plan.input,receipt).status==='supported-comparison-structure-observed'||!complete&&same(r,normalize(plan.before));}
   catch{return false;}
 }
 export function emitNativeComparisonRepairScript(plan:NativeComparisonRepairPlan,readOnly=false):string {
+  if(plan.version===3)return emitNativeComparisonMigrationRepairScript(plan,readOnly);
   if(!same((plan.version===2?prepareNativeComparisonFrameRepair:prepareNativeComparisonRepair)(plan.input,plan.before),plan))fail('plan-changed');
   return `// GENERATED guarded correction of existing linked instances. No allocation.
 const plan=${JSON.stringify(plan)},readOnly=${readOnly};

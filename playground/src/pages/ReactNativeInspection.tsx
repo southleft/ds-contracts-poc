@@ -151,7 +151,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           <p>The independent readback found supported corrections to the retained comparison. The app will check the same nodes, source mains and tokens again before applying these changes.</p>
           <ul>{op.comparisonRepair.changes.map((change,index)=><li key={index}>{change.kind==='height'
             ? `Restore the main’s height binding: ${change.before} → ${change.after} px.`
-            : change.kind==='comparison-clipping' ? 'Allow outer shadows beyond the comparison frame; preserve clipping inside the component.' : 'Remove an extra variable mode from a descendant to match its main.'}</li>)}</ul>
+            : change.kind==='metadata' ? 'Reconcile the inherited background layer and existing content identities with the verified main.' : change.kind==='comparison-clipping' ? 'Allow outer shadows beyond the comparison frame; preserve clipping inside the component.' : 'Remove an extra variable mode from a descendant to match its main.'}</li>)}</ul>
           <button type="button" disabled={busy || !row.connection.paired}
             onClick={() => void action(`native-operation/${id}/repair-comparison`)}>Verify and repair comparison</button>
         </section>}

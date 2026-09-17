@@ -4,8 +4,8 @@ import {revisionOf} from './contract-provenance.js';
 import {emitNativeContractReadbackScript} from './native-source-observation.js';
 import {prepareNativeContractUpdate} from './native-contract-update.js';
 
-export async function nativeBackgroundUpdateFixture(nested:boolean|'shape'=false) {
- const f=await nativeComparisonFixture(),old=structuredClone(f.main);
+export async function nativeBackgroundUpdateFixture(nested:boolean|'shape'=false,fileKey?:string) {
+ const f=await nativeComparisonFixture(fileKey),old=structuredClone(f.main);
  // The minimal host does not derive transform matrices from x/y. Model that
  // native relationship for newly allocated rectangles, not in product code.
  const createRectangle=f.figma.createRectangle.bind(f.figma);

@@ -45,6 +45,8 @@ export interface NativeSourceReadback {
 }
 export interface NativeContractObservationInput extends Omit<NativeSourceObservationInput, 'projection' | 'samples'> {
   projection: NativeContractDraftProjection;
+  /** Host-derived provenance for an independently verified allocation extension. */
+  backgroundMigration?: {desiredRevision:string;allocationRevision:string};
 }
 export type NativeInspectionInput = NativeSourceObservationInput | NativeContractObservationInput;
 function isContractDraft(input: NativeInspectionInput): input is NativeContractObservationInput {

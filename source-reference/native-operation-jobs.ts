@@ -1,3 +1,5 @@
+import {rebaseComparisonCreation} from '../core/native-comparison-main-migration.js';
+import {prepareNativeComparisonMigrationRepair} from '../core/native-comparison-migration-repair.js';
 import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
 import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
 import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
@@ -218,6 +220,7 @@ interface State {
   recovery?: PreparedNativeComparisonRecovery;
   recoveryWritten?: boolean;
   comparisonRepair?: NativeComparisonRepairPlan;
+  comparisonMigration?:NativeComparisonRepairPlan;
   repairWritten?: boolean;
   repairRevisionsWritten?: string[];
   comparisonRefresh?: ReactComparisonRefresh;
@@ -765,10 +768,13 @@ export function createNativeOperationJobs(
     };
   };
   const comparisonObservationInput = (state: State, plan: ComparisonPlan): NativeContractComparisonObservationInput => {
-    if (state.comparisonRefresh) plan = refreshedComparisonPlan(plan, state.comparisonRefresh.request, state.comparisonRefresh);
+    const refreshed:ReturnType<typeof refreshedComparisonPlan>=state.comparisonRefresh?refreshedComparisonPlan(plan,state.comparisonRefresh.request,state.comparisonRefresh):plan;
     if (!state.identity || !state.componentCreation) fail('component-allocation-identity-unavailable');
-    return { operation: plan.plan.operation, planRevision: plan.revision, comparison: plan.plan.comparison,
-      tokenInput: plan.plan.tokenInput, tokenIdentity: state.identity, creation: state.componentCreation };
+    const mainMigrations=refreshed.mainMigrations;
+    const migrated=state.comparisonMigration&&state.repairRevisionsWritten?.includes(state.comparisonMigration.revision);
+    const creation=migrated?state.comparisonMigration!.input.creation:mainMigrations?rebaseComparisonCreation(state.componentCreation,mainMigrations):state.componentCreation;
+    return { operation: refreshed.plan.operation, planRevision: refreshed.revision, comparison: refreshed.plan.comparison,
+      tokenInput: refreshed.plan.tokenInput, tokenIdentity: state.identity, creation,...(mainMigrations?{mainMigrations}:{}) };
   };
   const recoveryInput = (state: State, plan: Plan) => {
     if (!isComparisonPlan(plan) || !state.identity || !state.partialCreation) fail('comparison-partial-required');
@@ -785,6 +791,10 @@ export function createNativeOperationJobs(
     if(state.phase==='comparison-repair-refused'&&state.comparisonRepair&&!repairWasWritten(state,state.comparisonRepair))return state.comparisonRepair;
     if(!['component-structure-observed','component-observation-refused'].includes(state.phase)||!state.imageReadback)fail('comparison-repair-observation-required');
     const input=comparisonObservationInput(state,plan);
+    if(input.mainMigrations?.length&&!(state.comparisonMigration&&repairWasWritten(state,state.comparisonMigration))){
+      const migration=prepareNativeComparisonMigrationRepair(input,state.imageReadback.result);
+      if(!repairWasWritten(state,migration))return migration;
+    }
     // A fresh supported observation can expose a diagnostic-frame defect even
     // after a previous, separately claimed correction of linked instances.
     try {
@@ -981,6 +991,7 @@ export function createNativeOperationJobs(
         } else if(c.phase==='comparison-repair-preflight-readback'){
           if(!availableRepair(state,plan)||c.readOnly!==true||!event.comparisonRepair||!same(event.comparisonRepair,repairPlan(state,plan)))fail('repair-read-precondition-invalid');
           state.comparisonRepair=structuredClone(event.comparisonRepair);
+          if(event.comparisonRepair.version===3)state.comparisonMigration=structuredClone(event.comparisonRepair);
         } else if(c.phase==='comparison-repair-apply'){
           if(state.phase!=='comparison-repair-observed'||!state.comparisonRepair||repairWasWritten(state,state.comparisonRepair)||c.readOnly!==false||!same(c,state.comparisonRepair.version===1?repairClaim:revisionRepairClaims[state.comparisonRepair.revision]))fail('repair-write-precondition-invalid');
           if(state.comparisonRepair.version===1)state.repairWritten=true;
@@ -1411,7 +1422,7 @@ export function createNativeOperationJobs(
     let script: string;
     let comparisonRepair: NativeComparisonRepairPlan | undefined;
     let comparisonRefresh: ReactComparisonRefresh | undefined;
-    if (loaded.state.comparisonRefresh && !phase.endsWith("readback") && !(phase==='comparison-repair-apply'&&loaded.state.comparisonRepair?.version===2)) fail("comparison-refresh-read-only");
+    if (loaded.state.comparisonRefresh && !phase.endsWith("readback") && !(phase==='comparison-repair-apply'&&[2,3].includes(loaded.state.comparisonRepair?.version??0))) fail("comparison-refresh-read-only");
     if (phase === "token-create") {
       if (loaded.state.dispatchedCreate) fail("creation-already-dispatched");
       authenticate(loaded);
