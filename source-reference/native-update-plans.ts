@@ -1,4 +1,5 @@
-import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
+import {randomUUID} from 'node:crypto';
+import {assertOutsideEvidenceSnapshot,evidenceReadOnce} from './evidence-read-snapshot.js';
 /** Immutable, host-derived update proposals. This store never dispatches a
  * program or authorizes applying a stale proposal; delivery reauthentication
  * must call current() before any future write. */
@@ -16,6 +17,7 @@ export function createNativeUpdatePlans(repo: string,
   derive: (parentId: string) => { parentJournalRevision: string; input: NativeContractUpdateInput },
   history?: (parentId: string) => NativeUpdateHistoryEntry[]) {
   const root = path.join(repo, 'private', 'source-native-update-plans');
+  const displayScope = 'native-update-plans:' + randomUUID();
   function directory(parentId: string, create = false) {
     if (!UUID.test(parentId)) throw Error('native-update-parent-invalid');
     const target = path.join(root, parentId);
@@ -61,7 +63,7 @@ export function createNativeUpdatePlans(repo: string,
       ...(tip.predecessor ? {predecessor:tip.predecessor} : {}),
       update: prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline}) };
   };
-  const read = (parentId: string, id: string): Record => {
+  const read = (parentId: string, id: string): Record => evidenceReadOnce(displayScope, {parentId,id}, () => {
     if (!HASH.test(id)) throw Error('native-update-plan-id-invalid');
     const dir=directory(parentId); if (!dir) throw Error('native-update-plan-unavailable');
     const file=path.join(dir,id+'.json'),stat=lstatSync(file);
@@ -70,7 +72,7 @@ export function createNativeUpdatePlans(repo: string,
     if (record.version!==1 || record.parentId!==parentId || revisionOf(record).slice(7)!==id ||
         revisionOf(record.update.plan)!==record.update.revision) throw Error('native-update-plan-changed');
     return record;
-  };
+  });
   const view = (record: Record) => ({ id: revisionOf(record).slice(7), parentId: record.parentId, status:'planned' as const,
     qualification:'unapplied-update-proposal' as const, desiredRevision:record.update.plan.desiredRevision,
     changes:structuredClone(record.update.plan.changes), limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified'] });
@@ -99,9 +101,11 @@ export function createNativeUpdatePlans(repo: string,
       return readdirSync(dir).filter(f=>/^[a-f0-9]{64}\.json$/.test(f)).sort().map(f=>view(read(parentId,f.slice(0,-5))));
     },
     current(parentId: string,id: string) {
-      const record=read(parentId,id);
-      if(canonicalJson(compile(parentId,id))!==canonicalJson(record)) throw Error('native-update-input-changed');
-      return structuredClone(record);
+      return evidenceReadOnce(displayScope + ':current', {parentId,id}, () => {
+        const record=read(parentId,id);
+        if(canonicalJson(compile(parentId,id))!==canonicalJson(record)) throw Error('native-update-input-changed');
+        return structuredClone(record);
+      });
     },
     saved(parentId: string, id: string) { return structuredClone(read(parentId, id)); },
   };

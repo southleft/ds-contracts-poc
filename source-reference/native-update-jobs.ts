@@ -1,4 +1,4 @@
-import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
+import {assertOutsideEvidenceSnapshot,evidenceReadOnce} from './evidence-read-snapshot.js';
 /** Updates are children of immutable creation evidence. The existing companion
  * transport delivers these commands; no target allocation or baseline rewrite. */
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
@@ -40,6 +40,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   // Host-owned compiler dependency. No request may supply executable code.
   const readback = readers.readback ?? emitNativeContractReadbackScript;
   const root = path.join(repo, 'private', 'source-native-updates');
+  const displayScope = 'native-update-jobs:' + randomUUID();
   const ensure = (dir: string, create = false) => {
     if (!existsSync(dir) && create) mkdirSync(dir, { mode: 0o700 });
     const stat = lstatSync(dir);
@@ -71,7 +72,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       ['update-readback',readback(plan.after,true)],
     ].map(([key,script])=>[key,{script,sha256:sha(script)}])) as Header['scripts'];
   };
-  const load = (id: string) => {
+  const load = (id: string) => evidenceReadOnce(displayScope, id, () => {
     const dir=directory(id), headerBytes=read(path.join(dir,'operation.json'));
     const header=JSON.parse(headerBytes) as Header;
     if(header.version!==1 || header.id!==id || identity(header.parentId,header.proposalId)!==id) fail('header-invalid');
@@ -126,7 +127,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     }
     if(existsSync(path.join(dir,'apply-claim.json'))!==state.wrote) fail('write-journal-incomplete');
     return {id,dir,header,plan,state,events,previous};
-  };
+  });
   type Loaded=ReturnType<typeof load>;
   const authenticatePlan=(l:Loaded) => {
     const record=plans.current(l.header.parentId,l.header.proposalId);
@@ -161,7 +162,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       acceptedContract:null,nativeQualification:'unqualified' as const,problems:l.state.problems,
       imageObservation:l.state.observation ? collectNativeImages(l.plan.after,l.state.observation).observation:undefined};
   };
-  const get=(id:string)=>snapshot(load(id));
+  const get=(id:string)=>evidenceReadOnce(displayScope + ':view', id, () => snapshot(load(id)));
   const dispatch=(id:string,phase:NativeOperationPhase):NativeOperationCommand=>{
     assertOutsideEvidenceSnapshot();
     const l=load(id),p=phase as Phase;
@@ -202,22 +203,24 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       });
     },
     verifiedForParent(parentId: string) {
-      const written = plans.list(parentId).flatMap(proposal => {
-        const id=identity(parentId,proposal.id);
-        if(!existsSync(path.join(root,id))) return [];
-        const loaded=load(id);
-        return loaded.state.wrote ? [loaded] : [];
+      return evidenceReadOnce(displayScope + ':parent', parentId, () => {
+        const written = plans.list(parentId).flatMap(proposal => {
+          const id=identity(parentId,proposal.id);
+          if(!existsSync(path.join(root,id))) return [];
+          const loaded=load(id);
+          return loaded.state.wrote ? [loaded] : [];
+        });
+        if(!written.length) return undefined;
+        if(written.some(l=>l.state.phase!=='update-verified'||l.state.pending)) fail('effective-observation-unavailable');
+        const predecessors=new Set(written.map(l=>plans.saved(parentId,l.header.proposalId).predecessor?.proposalId));
+        const tips=written.filter(l=>!predecessors.has(l.header.proposalId));
+        if(tips.length!==1) fail('effective-observation-unavailable');
+        const l=tips[0];authenticateObservation(l); // Reauthenticates the entire pinned chain and current source.
+        if(!nativeContractUpdateMatches(l.plan,l.state.observation,true)) fail('effective-observation-invalid');
+        const receipt=structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
+        delete receipt.images;
+        return {input:nativeContractUpdateAfter(l.plan,receipt),receipt};
       });
-      if(!written.length) return undefined;
-      if(written.some(l=>l.state.phase!=='update-verified'||l.state.pending)) fail('effective-observation-unavailable');
-      const predecessors=new Set(written.map(l=>plans.saved(parentId,l.header.proposalId).predecessor?.proposalId));
-      const tips=written.filter(l=>!predecessors.has(l.header.proposalId));
-      if(tips.length!==1) fail('effective-observation-unavailable');
-      const l=tips[0];authenticateObservation(l); // Reauthenticates the entire pinned chain and current source.
-      if(!nativeContractUpdateMatches(l.plan,l.state.observation,true)) fail('effective-observation-invalid');
-      const receipt=structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
-      delete receipt.images;
-      return {input:nativeContractUpdateAfter(l.plan,receipt),receipt};
     },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
     prepare(parentId:string,proposalId:string) {

@@ -240,3 +240,27 @@ test('the companion migrates a background once and independent readback adopts o
  f.transport().retryObservation(f.id);await f.poll();
  assert.equal(f.jobs().get(f.id).phase,'update-verified');assert.equal(f.nodes[0].children.length,2);
 });
+
+
+test('display responses share verified update reads but delivery reauthenticates after the scope closes', async t => {
+  const f = await fixture(t);
+  await f.poll(); await f.poll(); await f.poll();
+  const before = f.derivations();
+  withEvidenceReadSnapshot(() => {
+    assert.equal(f.jobs().get(f.id).sourceCurrent, true);
+    const first = f.jobs().verifiedForParent(f.proposal.parentId)!;
+    const original = structuredClone(first);
+    first.input.creation.variants[0].id = 'tampered';
+    const calls = f.derivations();
+    assert.deepEqual(f.jobs().verifiedForParent(f.proposal.parentId), original);
+    assert.equal(f.jobs().get(f.id).sourceCurrent, true);
+    assert.equal(f.derivations(), calls);
+    assert.throws(() => f.jobs().pendingCommand(f.id), /write-during-evidence-read-snapshot/);
+    assert.throws(() => f.jobs().dispatch(f.id, 'update-readback'), /write-during-evidence-read-snapshot/);
+  });
+  assert.ok(f.derivations() > before);
+  f.stale();
+  assert.equal(f.jobs().get(f.id).sourceCurrent, false);
+  assert.throws(() => f.jobs().verifiedForParent(f.proposal.parentId), /source changed/);
+  withEvidenceReadSnapshot(() => assert.equal(f.jobs().get(f.id).sourceCurrent, false));
+});
