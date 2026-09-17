@@ -118,6 +118,7 @@ export function ReactCallbackInspection({
               ? "Original source, rendering and ownership restored."
               : "Original equivalence is not yet established."}
           </p>
+          {result.restoration && <p>Each trial verifies restored structure and ownership, then replays the unchanged original page and requires an exact image match. Same-mount pixel differences retained: {result.restoration.checks.filter(check => !check.sameMountPixelsMatch).length}. This does not demonstrate recovery of a user's runtime state.</p>}
           {result.observation?.relationships.map((row) => (
             <p key={row.callback + ":" + row.property}>
               <strong>

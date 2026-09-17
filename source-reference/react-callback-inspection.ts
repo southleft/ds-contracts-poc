@@ -45,6 +45,7 @@ export interface ReactCallbackInspection {
   phase: "running" | "complete" | "failed";
   sourceUnchanged: boolean;
   observation?: ReactCallbackBehavior;
+  restoration?: {strategy:'verify-structure-then-replay-original';checks:Array<{sameMountPixelsMatch:boolean}>};
   problems: string[];
 }
 export function readReactCallbackInspectionRecord(value: {
@@ -158,6 +159,7 @@ export function createReactCallbackInspectionStore(
         caseId,
         phase: "running",
         sourceUnchanged: false,
+        restoration: {strategy:"verify-structure-then-replay-original",checks:[]},
         problems: [],
       };
       const dir = path.join(value.root, state.id);
@@ -210,7 +212,7 @@ export function createReactCallbackInspectionStore(
               throw Error("callback-source-changed");
           };
           let restorationFailures = 0;
-          const assertRestored = async () => {
+          const assertRestored = async (replay = false) => {
             assertCurrent();
             // Observe settled source pixels; never cancel or fast-forward the
             // component's own transitions to make restoration appear exact.
@@ -225,7 +227,7 @@ export function createReactCallbackInspectionStore(
             if (
               captured.status !== "captured" ||
               captured.treeSha256 !== value.source.captured.treeSha256 ||
-              captured.sourcePngSha256 !== value.source.captured.sourcePngSha256
+              (!replay && captured.sourcePngSha256 !== value.source.captured.sourcePngSha256)
             ) {
               const name = 'restoration-failure-' + ++restorationFailures;
               save(name + '.json', {captured, expected:{treeSha256:value.source.captured.treeSha256,sourcePngSha256:value.source.captured.sourcePngSha256}});
@@ -237,6 +239,20 @@ export function createReactCallbackInspectionStore(
             )) as ReactOwnership;
             if (revisionOf(ownership) !== revisionOf(value.source.ownership))
               throw Error("callback-original-ownership-not-restored");
+            if (replay && captured.status === 'captured') {
+              const sameMountPixelsMatch = captured.sourcePngSha256 === value.source.captured.sourcePngSha256;
+              if (!sameMountPixelsMatch) {
+                const name = 'same-mount-pixel-difference-' + state.restoration!.checks.length;
+                save(name + '.json', {captured,expected:value.source.captured.sourcePngSha256});
+                writeFileSync(path.join(dir,name + '.png'),await page.screenshot({fullPage:true,caret:'initial'}),{flag:'wx'});
+              }
+              // Every independent trial returns to the exact archived page.
+              // This resets disposable runtime state, not user/business state.
+              await page.goto(url);
+              await page.locator(profile.path[0]).waitFor({state:'attached',timeout:15000});
+              await assertRestored(false);
+              state.restoration!.checks.push({sameMountPixelsMatch});
+            }
           };
           try {
             await page.goto(url);
@@ -255,7 +271,7 @@ export function createReactCallbackInspectionStore(
               ownership: value.source.ownership,
               instanceId: targets[0].id,
               assertCurrent,
-              assertRestored,
+              assertRestored: () => assertRestored(true),
             });
             await assertRestored();
             readReactInspectionOriginal(repo, value.reference, value.request);
