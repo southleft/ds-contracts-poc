@@ -145,12 +145,17 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     if(event.kind==='dispatch' && event.command.phase==='update-apply') write(path.join(l.dir,'apply-claim.json'),event.command);
     write(path.join(l.dir,'events',`${String(l.events.length).padStart(8,'0')}.json`),{...event,sequence:l.events.length,previous:l.previous});
   };
+  const superseded=(l:Loaded) => plans.list(l.header.parentId).some(proposal=>{
+    if(plans.saved(l.header.parentId,proposal.id).predecessor?.proposalId!==l.header.proposalId)return false;
+    const id=identity(l.header.parentId,proposal.id);
+    return existsSync(path.join(root,id))&&load(id).state.wrote;
+  });
   const snapshot=(l:Loaded) => {
     let sourceCurrent=false, canRefreshObservation=false;
     try { if(l.state.wrote && l.state.phase==='update-verified') authenticateObservation(l); else authenticate(l); sourceCurrent=true; }
     catch { /* Historical results remain visible. */ }
     if (l.state.wrote && l.state.pending?.phase !== 'update-apply') try { authenticatePlan(l);canRefreshObservation=true; } catch { /* Source drift is not reader drift. */ }
-    return {id:l.id,parentId:l.header.parentId,proposalId:l.header.proposalId,phase:l.state.phase,sourceCurrent,canRefreshObservation,
+    return {id:l.id,parentId:l.header.parentId,proposalId:l.header.proposalId,phase:l.state.phase,sourceCurrent,canRefreshObservation,superseded:superseded(l),
       pendingPhase:l.state.pending?.phase,nativeOutcome:l.state.pending?'unknown' as const:undefined,
       acceptedContract:null,nativeQualification:'unqualified' as const,problems:l.state.problems,
       imageObservation:l.state.observation ? collectNativeImages(l.plan.after,l.state.observation).observation:undefined};
@@ -158,6 +163,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   const get=(id:string)=>snapshot(load(id));
   const dispatch=(id:string,phase:NativeOperationPhase):NativeOperationCommand=>{
     const l=load(id),p=phase as Phase;
+    if(superseded(l))fail('superseded-observation-is-historical');
     if(l.state.pending || !PHASES.includes(p)) fail('dispatch-refused');
     if(p==='update-apply' ? l.state.wrote || l.state.phase!=='update-preflight-observed' : p==='update-preflight-readback' ? l.state.wrote : !l.state.wrote) fail('phase-refused');
     if(p==='update-apply') authenticate(l);
@@ -178,23 +184,32 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   };
   return {
     get,dispatch,
+    updateHistory(parentId: string) {
+      return plans.list(parentId).flatMap(proposal => {
+        const id=identity(parentId,proposal.id);
+        if(!existsSync(path.join(root,id))) return [];
+        const l=load(id);
+        return l.state.wrote ? [{proposalId:proposal.id,journalRevision:l.previous,phase:l.state.phase,
+          pending:!!l.state.pending,receipt:structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback | undefined}] : [];
+      });
+    },
     verifiedForParent(parentId: string) {
       const written = plans.list(parentId).flatMap(proposal => {
-        const id = identity(parentId, proposal.id);
-        if (!existsSync(path.join(root, id))) return [];
-        const loaded = load(id);
+        const id=identity(parentId,proposal.id);
+        if(!existsSync(path.join(root,id))) return [];
+        const loaded=load(id);
         return loaded.state.wrote ? [loaded] : [];
       });
-      if (!written.length) return undefined;
-      // A pending, failed or ambiguous correction cannot fall back to the
-      // historical creation receipt. It may already have changed the canvas.
-      if (written.length !== 1 || written[0].state.phase !== 'update-verified' || written[0].state.pending)
-        fail('effective-observation-unavailable');
-      const l = written[0]; authenticateObservation(l);
-      if (!nativeContractUpdateMatches(l.plan, l.state.observation, true)) fail('effective-observation-invalid');
-      const receipt = structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
+      if(!written.length) return undefined;
+      if(written.some(l=>l.state.phase!=='update-verified'||l.state.pending)) fail('effective-observation-unavailable');
+      const predecessors=new Set(written.map(l=>plans.saved(parentId,l.header.proposalId).predecessor?.proposalId));
+      const tips=written.filter(l=>!predecessors.has(l.header.proposalId));
+      if(tips.length!==1) fail('effective-observation-unavailable');
+      const l=tips[0];authenticateObservation(l); // Reauthenticates the entire pinned chain and current source.
+      if(!nativeContractUpdateMatches(l.plan,l.state.observation,true)) fail('effective-observation-invalid');
+      const receipt=structuredClone(l.state.observation) as import('../core/native-source-observation.js').NativeSourceReadback;
       delete receipt.images;
-      return { input: structuredClone(l.plan.after), receipt };
+      return {input:structuredClone(l.plan.after),receipt};
     },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
     prepare(parentId:string,proposalId:string) {

@@ -6,12 +6,13 @@ import { tmpdir } from 'node:os';
 import vm from 'node:vm';
 import { emitNativeContractReadbackScript } from '../core/native-source-observation.js';
 import { nativeRootSizeUpdateFixture } from '../core/native-contract-size-update-test-fixture.js';
+import { nativeSvgUpdateFixture } from '../core/native-contract-svg-update-test-fixture.js';
 import { nativeUpdateFixture } from '../core/native-contract-update-test-fixture.js';
 import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { createNativeOperationTransport } from './native-operation-transport.js';
 
-async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture = nativeUpdateFixture) {
+async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture = nativeUpdateFixture) {
   const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
   let stale=false,lose='',failStorage=false,readerRevision=0;
@@ -179,4 +180,16 @@ test('read-only program records refuse changed input, hash and write phase',asyn
     const event=JSON.parse(readFileSync(file,'utf8'));tamper(event);writeFileSync(file,JSON.stringify(event));
     assert.throws(()=>f.jobs().get(f.id),/reader-dispatch-invalid/);
   }
+});
+
+
+test('the bundled companion delivers the SVG stroke correction with a separate verified export',async t=>{
+  const f=await fixture(t,nativeSvgUpdateFixture),ids=f.figma.root.findAll(()=>true).map((n:any)=>n.id);
+  for(const expected of ['update-preflight-observed','update-applied','update-verified']) {
+    await f.poll();assert.equal(f.jobs().get(f.id).phase,expected,JSON.stringify(f.messages.slice(-3)));f.restart();
+  }
+  assert.deepEqual(f.figma.root.findAll(()=>true).map((n:any)=>n.id),ids);
+  assert.equal(f.figma.root.findAll((n:any)=>n.type==='VECTOR')[0].strokeWeight,Math.fround(14/12));
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+  assert.ok(f.jobs().verifiedForParent(f.proposal.parentId));
 });

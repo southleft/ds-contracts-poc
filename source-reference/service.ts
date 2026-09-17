@@ -756,7 +756,7 @@ export function createReferenceService(
       before: baseline.input, baseline: baseline.receipt,
       desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
     } };
-  });
+  }, id => nativeUpdateJobs.updateHistory(id));
   const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
   const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
   const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;

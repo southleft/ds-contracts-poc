@@ -4,10 +4,16 @@
 import { closeSync, existsSync, fsyncSync, lstatSync, mkdirSync, openSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
-import { prepareNativeContractUpdate, type NativeContractUpdateInput } from '../core/native-contract-update.js';
+import { prepareNativeContractUpdate, nativeContractUpdateMatches, type NativeContractUpdateInput } from '../core/native-contract-update.js';
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const HASH = /^[a-f0-9]{64}$/;
-export function createNativeUpdatePlans(repo: string, derive: (parentId: string) => { parentJournalRevision: string; input: NativeContractUpdateInput }) {
+export interface NativeUpdateHistoryEntry {
+  proposalId: string; journalRevision: string; phase: string; pending: boolean;
+  receipt?: NativeContractUpdateInput['baseline'];
+}
+export function createNativeUpdatePlans(repo: string,
+  derive: (parentId: string) => { parentJournalRevision: string; input: NativeContractUpdateInput },
+  history?: (parentId: string) => NativeUpdateHistoryEntry[]) {
   const root = path.join(repo, 'private', 'source-native-update-plans');
   function directory(parentId: string, create = false) {
     if (!UUID.test(parentId)) throw Error('native-update-parent-invalid');
@@ -18,13 +24,42 @@ export function createNativeUpdatePlans(repo: string, derive: (parentId: string)
     }
     return target;
   }
-  const compile = (parentId: string) => {
+  type Predecessor = { proposalId: string; journalRevision: string };
+  type Record = { version: 1; parentId: string; parentJournalRevision: string;
+    predecessor?: Predecessor; update: ReturnType<typeof prepareNativeContractUpdate> };
+  const same = (a: unknown, b: unknown) => canonicalJson(a) === canonicalJson(b);
+  const clean = (receipt: NativeContractUpdateInput['baseline']) => { const r=structuredClone(receipt);delete r.images;return r; };
+  // Each written correction must be a single successor of the last verified
+  // observation. Historical compiler output is evidence, not current authority.
+  const chain = (parentId: string, source: ReturnType<typeof derive>, self?: string) => {
+    const remaining = [...(history?.(parentId) ?? [])];
+    let predecessor: Predecessor | undefined, before=source.input.before, baseline=clean(source.input.baseline);
+    while (remaining.length) {
+      const candidates=remaining.filter(e => same(read(parentId,e.proposalId).predecessor,predecessor));
+      if(candidates.length!==1) throw Error('native-update-history-branch-or-gap');
+      const entry=candidates[0],record=read(parentId,entry.proposalId),plan=record.update.plan;
+      if(record.parentJournalRevision!==source.parentJournalRevision || !same(plan.before,before) || !same(plan.baseline,baseline))
+        throw Error('native-update-history-baseline-changed');
+      remaining.splice(remaining.indexOf(entry),1);
+      if(entry.proposalId===self) {
+        if(remaining.length) throw Error('native-update-superseded');
+        return {predecessor,before,baseline};
+      }
+      if(entry.phase!=='update-verified' || entry.pending || !entry.receipt || !HASH.test(entry.journalRevision) ||
+          !nativeContractUpdateMatches(plan,entry.receipt,true)) throw Error('native-update-effective-observation-unavailable');
+      predecessor={proposalId:entry.proposalId,journalRevision:entry.journalRevision};
+      before=structuredClone(plan.after);baseline=clean(entry.receipt);
+    }
+    return {predecessor,before,baseline};
+  };
+  const compile = (parentId: string, self?: string): Record => {
     const source = derive(parentId);
     if (!HASH.test(source.parentJournalRevision)) throw Error('native-update-parent-journal-invalid');
-    return { version: 1 as const, parentId, parentJournalRevision: source.parentJournalRevision,
-      update: prepareNativeContractUpdate(source.input) };
+    const tip=chain(parentId,source,self);
+    return { version: 1, parentId, parentJournalRevision: source.parentJournalRevision,
+      ...(tip.predecessor ? {predecessor:tip.predecessor} : {}),
+      update: prepareNativeContractUpdate({...source.input,before:tip.before,baseline:tip.baseline}) };
   };
-  type Record = ReturnType<typeof compile>;
   const read = (parentId: string, id: string): Record => {
     if (!HASH.test(id)) throw Error('native-update-plan-id-invalid');
     const dir=directory(parentId); if (!dir) throw Error('native-update-plan-unavailable');
@@ -40,7 +75,12 @@ export function createNativeUpdatePlans(repo: string, derive: (parentId: string)
     changes:structuredClone(record.update.plan.changes), limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified'] });
   return {
     prepare(parentId: string) {
-      const record=compile(parentId),id=revisionOf(record).slice(7),dir=directory(parentId,true)!;
+      const record=compile(parentId);
+      if(!record.update.plan.changes.length && record.predecessor) {
+        const previous=read(parentId,record.predecessor.proposalId);
+        if(same(compile(parentId,record.predecessor.proposalId),previous))return view(previous);
+      }
+      const id=revisionOf(record).slice(7),dir=directory(parentId,true)!;
       const file=path.join(dir,id+'.json');
       if (!existsSync(file)) {
         let fd: number | undefined;
@@ -58,7 +98,7 @@ export function createNativeUpdatePlans(repo: string, derive: (parentId: string)
     },
     current(parentId: string,id: string) {
       const record=read(parentId,id);
-      if(canonicalJson(compile(parentId))!==canonicalJson(record)) throw Error('native-update-input-changed');
+      if(canonicalJson(compile(parentId,id))!==canonicalJson(record)) throw Error('native-update-input-changed');
       return structuredClone(record);
     },
     saved(parentId: string, id: string) { return structuredClone(read(parentId, id)); },
