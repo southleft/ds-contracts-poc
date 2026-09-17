@@ -506,13 +506,20 @@ function verifyReadback(
   )
     issue("native-source-observation-component-identity");
   const defs = target.definitions ?? {},
-    slotKeys = new Map<string, string>();
+    slotKeys = new Map<string, string>(),
+    textKeys = new Map<string, string>();
   for (const [key, def] of Object.entries(defs) as Array<[string, any]>) {
     if (def.type === "SLOT") {
       const display = key.slice(0, key.lastIndexOf("#"));
       if (!key.includes("#") || slotKeys.has(display))
         issue("native-source-observation-slot-property-ambiguous");
       slotKeys.set(display, key);
+    }
+    if (isContractDraft(input) && def.type === 'TEXT') {
+      const display = key.slice(0, key.lastIndexOf('#'));
+      if (!key.includes('#') || textKeys.has(display))
+        issue('native-contract-observation-text-property-ambiguous');
+      textKeys.set(display, key);
     }
   }
   const axes = input.component.unsetVariantAxes?.axes ?? [];
@@ -525,14 +532,22 @@ function verifyReadback(
       draftAxes.get(property)!.add(value);
     }
   const expectedSlots = new Set<string>();
+  const expectedTexts = new Map<string, string>();
   const collect = (s: NodeSpec) => {
     if (s.type === "slot") expectedSlots.add(s.slotProperty!);
+    if (isContractDraft(input) && s.contentProp !== undefined) {
+      if (s.type !== 'text' || typeof s.characters !== 'string' ||
+          (expectedTexts.has(s.contentProp) && expectedTexts.get(s.contentProp) !== s.characters))
+        throw Error('native-contract-observation-text-mapping');
+      expectedTexts.set(s.contentProp, s.characters!);
+    }
     (s.children ?? []).forEach(collect);
   };
   input.component.variants.forEach((v) => collect(v.spec));
   if (
     !same([...slotKeys.keys()].sort(), [...expectedSlots].sort()) ||
-    Object.keys(defs).length !== expectedSlots.size + (isContractDraft(input) ? draftAxes.size : axes.length)
+    !same([...textKeys.keys()].sort(), [...expectedTexts.keys()].sort()) ||
+    Object.keys(defs).length !== expectedSlots.size + expectedTexts.size + (isContractDraft(input) ? draftAxes.size : axes.length)
   )
     issue("native-source-observation-property-inventory");
   for (const axis of axes) {
@@ -549,6 +564,11 @@ function verifyReadback(
       issue("native-source-observation-variant-axis");
   }
   if (isContractDraft(input)) {
+    for (const [property, defaultValue] of expectedTexts) {
+      const key = textKeys.get(property), def = key && defs[key];
+      if (!def || def.type !== 'TEXT' || def.defaultValue !== defaultValue)
+        issue('native-contract-observation-text-property');
+    }
     for (const [property, values] of draftAxes) {
       const def = defs[property];
       if (!def || def.type !== 'VARIANT' || def.defaultValue !== values.values().next().value ||
@@ -597,6 +617,12 @@ function verifyReadback(
     if (!sample && !same(meta(n, isContractDraft(input) ? 'nativeContractPart' : 'nativeSourcePart'),
       isContractDraft(input) ? spec.nativeContractPart : spec.nativeSourcePart))
       issue("native-source-observation-source-part", n);
+    if (isContractDraft(input)) {
+      const references = spec.type === 'slot' ? { slotContentId: slotKeys.get(spec.slotProperty!) }
+        : spec.contentProp !== undefined ? { characters: textKeys.get(spec.contentProp) } : {};
+      if (!same(v.componentPropertyReferences ?? {}, references))
+        issue('native-contract-observation-property-references', n);
+    }
     if (sample && !same(meta(n, "nativeSourceSample"), sample))
       issue("native-source-observation-sample-identity", n);
     if (spec.layout?.grid?.flowRows && !same(meta(n, 'gridFlowRows'), spec.layout.grid.flowRows))

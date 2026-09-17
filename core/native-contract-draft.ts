@@ -58,6 +58,16 @@ export function prepareNativeContractDraft(
   const data = structuredClone(component);
   const boundNames = new Set<string>();
   const fonts = new Map<string, { family: string; styles: string[] }>();
+  const textProperties = new Map<string, string>();
+  for (const prop of contract.props.filter(p => p.bindings.figma.kind === 'TEXT')) {
+    const name = prop.bindings.figma.property;
+    // A property must drive actual text, with a source-declared default. A
+    // compiler placeholder or an inert property is not an editable mapping.
+    if (prop.type !== 'text' || !name || typeof prop.default !== 'string' || textProperties.has(name))
+      throw Error('NATIVE_CONTRACT_DRAFT_TEXT_MAPPING_UNQUALIFIED');
+    textProperties.set(name, prop.default);
+  }
+  const boundTextProperties = new Set<string>();
   function visit(spec: NodeSpec, variant: string, specPath: number[], parent?:NodeSpec) {
     // Every allocation must pass nativeInit. Nested instances, styled text
     // wrappers, margin boxes and slot defaults need their own ownership mapping.
@@ -66,11 +76,17 @@ export function prepareNativeContractDraft(
         spec.nativeSourcePart || spec.nativeSourceSample || spec.nativeSourceVisible !== undefined ||
         spec.nativeContractSample || spec.nativeContractPart)
       throw Error('NATIVE_CONTRACT_DRAFT_NODE_OWNERSHIP_UNQUALIFIED');
-    if (spec.type === 'text' && (spec.children?.length || spec.contentProp || spec.textStyle ||
+    if (spec.type === 'text' && (spec.children?.length || spec.textStyle ||
         spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings || spec.absolute || spec.overlay ||
         spec.pct !== undefined || spec.rotation || spec.layout || spec.lits ||
         typeof spec.characters !== 'string' || !spec.fontFamily || !spec.fontStyle || !Number.isFinite(spec.fontSize)))
       throw Error('NATIVE_CONTRACT_DRAFT_TEXT_OWNERSHIP_UNQUALIFIED');
+    if (spec.contentProp !== undefined) {
+      if (spec.type !== 'text' || !textProperties.has(spec.contentProp) ||
+          spec.characters !== textProperties.get(spec.contentProp))
+        throw Error('NATIVE_CONTRACT_DRAFT_TEXT_MAPPING_UNQUALIFIED');
+      boundTextProperties.add(spec.contentProp);
+    }
     if (spec.type === 'text') {
       fonts.set('Inter/' + spec.fontStyle, { family: 'Inter', styles: [spec.fontStyle!] });
       fonts.set(spec.fontFamily + '/' + spec.fontStyle, { family: spec.fontFamily!,
@@ -104,6 +120,8 @@ export function prepareNativeContractDraft(
     (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i],spec));
   }
   data.variants.forEach(v => visit(v.spec, v.name, []));
+  if (boundTextProperties.size !== textProperties.size)
+    throw Error('NATIVE_CONTRACT_DRAFT_TEXT_MAPPING_UNQUALIFIED');
   data.nativeContractDraft = { revision: revisionOf(projection), acceptedContract: null };
   return { projection, component: data, boundNames: [...boundNames].sort(), fonts: [...fonts.values()] };
 }
