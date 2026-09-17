@@ -158,7 +158,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
+                          "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/shared/color-00000042",
                           "iconSize": 16
                         }
@@ -231,7 +231,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-2",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
+                          "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/shared/color-00000042",
                           "iconSize": 16
                         }
@@ -319,7 +319,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "autocomplete-popupindicator-icon",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
                               "svgPaintVar": "imported/autocomplete/autocomplete-popupindicator/color",
                               "iconSize": 24
                             }
@@ -587,7 +587,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
+                          "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/shared/color-00000042",
                           "iconSize": 16
                         }
@@ -660,7 +660,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-2",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
+                          "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/shared/color-00000042",
                           "iconSize": 16
                         }
@@ -748,7 +748,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "autocomplete-popupindicator-icon",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
                               "svgPaintVar": "imported/autocomplete/autocomplete-popupindicator/color",
                               "iconSize": 24
                             }

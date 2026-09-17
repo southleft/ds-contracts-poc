@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (24 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (23 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -201,7 +201,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
@@ -301,7 +301,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
@@ -503,7 +503,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
@@ -604,7 +604,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
@@ -672,11 +672,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -764,11 +765,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -796,7 +798,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
@@ -864,11 +866,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -896,7 +899,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
@@ -1186,22 +1189,6 @@ const COMPONENTS = [
         "variants": {
           "count": 9,
           "of": 9
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 3,
-          "of": 9,
-          "names": [
-            "Checked=Unchecked, State=Focus Visible",
-            "Checked=Checked, State=Focus Visible",
-            "Checked=Indeterminate, State=Focus Visible"
-          ]
         }
       }
     ],

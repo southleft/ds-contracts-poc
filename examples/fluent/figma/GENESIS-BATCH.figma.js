@@ -35942,7 +35942,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "part-0-1-0-icon",
-                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 4.09 4.22 L 4.15 4.15 A 0.5 0.5 0 0 1 4.78 4.09 L 4.85 4.15 L 10 9.29 L 15.15 4.15 A 0.5 0.5 0 0 1 15.78 4.09 L 15.85 4.15 C 16.03 4.32 16.05 4.59 15.91 4.78 L 15.85 4.85 L 10.71 10 L 15.85 15.15 C 16.03 15.32 16.05 15.59 15.91 15.78 L 15.85 15.85 A 0.5 0.5 0 0 1 15.22 15.91 L 15.15 15.85 L 10 10.71 L 4.85 15.85 A 0.5 0.5 0 0 1 4.22 15.91 L 4.15 15.85 A 0.5 0.5 0 0 1 4.09 15.22 L 4.15 15.15 L 9.29 10 L 4.15 4.85 A 0.5 0.5 0 0 1 4.09 4.22 L 4.15 4.15 Z\" fill=\"#242424\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 4.09 4.22 L 4.15 4.15 A 0.5 0.5 0 0 1 4.78 4.09 L 4.85 4.15 L 10 9.29 L 15.15 4.15 A 0.5 0.5 0 0 1 15.78 4.09 L 15.85 4.15 C 16.03 4.32 16.05 4.59 15.91 4.78 L 15.85 4.85 L 10.71 10 L 15.85 15.15 C 16.03 15.32 16.05 15.59 15.91 15.78 L 15.85 15.85 A 0.5 0.5 0 0 1 15.22 15.91 L 15.15 15.85 L 10 10.71 L 4.85 15.85 A 0.5 0.5 0 0 1 4.22 15.91 L 4.15 15.85 A 0.5 0.5 0 0 1 4.09 15.22 L 4.15 15.15 L 9.29 10 L 4.15 4.85 A 0.5 0.5 0 0 1 4.09 4.22 L 4.15 4.15 Z\" fill=\"#242424\"/></svg>",
                           "svgPaintVar": "imported/shared/color-242424",
                           "iconSize": 20
                         }
@@ -52898,7 +52898,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
@@ -53026,7 +53026,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
@@ -53121,7 +53121,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
@@ -53187,7 +53187,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
@@ -53315,7 +53315,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
@@ -53410,7 +53410,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
@@ -53485,7 +53485,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
@@ -53583,7 +53583,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }
@@ -53681,7 +53681,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/unchecked",
                   "iconSize": 18
                 }
@@ -53778,7 +53778,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/switch/indicator/color/checked",
                   "iconSize": 18
                 }

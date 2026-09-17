@@ -118,7 +118,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"#1976d2\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"#1976d2\"/></svg>",
                               "svgPaintVar": "imported/shared/color-1976d2",
                               "grow": true,
                               "iconSize": 24,
@@ -184,7 +184,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon-2",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 L 18.59 10.59 L 13 16.17 V 4 H 11 V 16.17 L 5.42 10.58 L 4 12 L 12 20 L 20 12 Z\" fill=\"#00000099\"/></svg>",
+                              "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 L 18.59 10.59 L 13 16.17 V 4 H 11 V 16.17 L 5.42 10.58 L 4 12 L 12 20 L 20 12 Z\" fill=\"#00000099\"/></svg>",
                               "svgPaintVar": "imported/shared/color-00000099",
                               "iconSize": 18
                             }
@@ -421,7 +421,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon-3",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"#00000099\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"#00000099\"/></svg>",
                               "svgPaintVar": "imported/shared/color-00000099",
                               "grow": true,
                               "iconSize": 24,
@@ -711,7 +711,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon-4",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"#1976d2\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"#1976d2\"/></svg>",
                               "svgPaintVar": "imported/shared/color-1976d2",
                               "grow": true,
                               "iconSize": 24,
@@ -1037,7 +1037,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"#1976d2\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"#1976d2\"/></svg>",
                               "svgPaintVar": "imported/shared/color-1976d2",
                               "grow": true,
                               "iconSize": 24,
@@ -1103,7 +1103,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon-2",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 L 18.59 10.59 L 13 16.17 V 4 H 11 V 16.17 L 5.42 10.58 L 4 12 L 12 20 L 20 12 Z\" fill=\"#00000099\"/></svg>",
+                              "svg": "<svg height=\"18\" width=\"18\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 L 18.59 10.59 L 13 16.17 V 4 H 11 V 16.17 L 5.42 10.58 L 4 12 L 12 20 L 20 12 Z\" fill=\"#00000099\"/></svg>",
                               "svgPaintVar": "imported/shared/color-00000099",
                               "iconSize": 18
                             }
@@ -1340,7 +1340,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon-3",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"#00000099\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"#00000099\"/></svg>",
                               "svgPaintVar": "imported/shared/color-00000099",
                               "grow": true,
                               "iconSize": 24,
@@ -1630,7 +1630,7 @@ const COMPONENTS = [
                             {
                               "type": "svg",
                               "name": "icon-4",
-                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"#1976d2\"/></svg>",
+                              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"#1976d2\"/></svg>",
                               "svgPaintVar": "imported/shared/color-1976d2",
                               "grow": true,
                               "iconSize": 24,
