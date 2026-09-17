@@ -3603,11 +3603,19 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): { mar
     // floor-reconstructed glyphs) that was a path's stroke-width, so the
     // Checkbox check drew at stroke-width 14 (a blob) and the Avatar xl
     // silhouette at stroke-width 40 (a filled square). Assets without a
-    // root width/height keep their markup; the renderers/runtime size the
-    // node from iconSize.
-    out = out
-      .replace(/^(<svg\b[^>]*?)\swidth="[^"]*"/, `$1 width="${part.icon!.size}"`)
-      .replace(/^(<svg\b[^>]*?)\sheight="[^"]*"/, `$1 height="${part.icon!.size}"`);
+    // root width/height must receive an explicit viewport too: resizing a
+    // Figma SVG frame after import scales its paths but leaves strokes at
+    // their original weight. Import at the intended viewport so viewBox
+    // geometry, strokes and preserveAspectRatio are evaluated together.
+    out = out.replace(/^<svg\b[^>]*>/, tag => {
+      for (const dimension of ['width', 'height']) {
+        const attribute = new RegExp(`\\s${dimension}=(?:"[^"]*"|'[^']*')`);
+        tag = attribute.test(tag)
+          ? tag.replace(attribute, ` ${dimension}="${part.icon!.size}"`)
+          : tag.replace(/^<svg\b/, `<svg ${dimension}="${part.icon!.size}"`);
+      }
+      return tag;
+    });
   }
   return { markup: out, paintPath: usesCurrentColor ? ctx.textFillPath : paintPath, paintHex: usesCurrentColor ? currentHex : hex };
 }
