@@ -612,6 +612,7 @@ test('root paint removal preserves nested source paths and emitted instance iden
   const creation = await f.run(f.emit());
   assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
   const { input, receipt } = await f.observe(creation);
+  assert.ok(input.comparison.instances);
   assert.deepEqual(input.comparison.instances.map(ref => ref.specPath), [[0], [0, 0], [1]]);
   assert.deepEqual(f.selected.instances!.map(ref => ref.specPath), originalPaths);
   assert.equal(creation.comparisons[0].nested.length, 3);

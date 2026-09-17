@@ -7,7 +7,7 @@ import {prepareNativeContractUpdate,emitNativeContractUpdateScript,nativeContrac
 
 
 test('paint migration retains old nodes, independently resolves new allocation and repeats with no allocation',async()=>{
- const f=await fixture(),oldIds=f.input.baseline.nodes!.map(n=>n.id),slot=f.root.children[0];
+ const f=await fixture(),oldIds:string[]=f.input.baseline.nodes!.map((n:{id:string})=>n.id),slot=f.root.children[0];
  const pre=await f.run(emitNativeContractUpdateScript(f.plan,'apply',true));
  assert.equal(pre.status,'preflight-observed',JSON.stringify(pre.problems));assert.ok(nativeContractUpdateMatches(f.plan,pre.observation));
  const applied=await f.run(emitNativeContractUpdateScript(f.plan));

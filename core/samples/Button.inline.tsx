@@ -21,6 +21,7 @@ const KEYFRAMES = "@keyframes ds-inline-spin { to { transform: rotate(360deg); }
 
 const S: Record<string, CSSProperties> = {
   "root": {
+    "boxSizing": "border-box",
     "display": "inline-flex",
     "flexDirection": "row",
     "alignItems": "center",
@@ -33,11 +34,14 @@ const S: Record<string, CSSProperties> = {
     "fontWeight": 500
   },
   "loadingSpinner": {
+    "boxSizing": "border-box",
     "display": "inline-flex",
     "flexShrink": 0,
     "animation": "ds-inline-spin 0.8s linear infinite"
   },
-  "label": {}
+  "label": {
+    "boxSizing": "border-box"
+  }
 };
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */

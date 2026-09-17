@@ -15,6 +15,7 @@ import type { CSSProperties, HTMLAttributes } from 'react';
 
 const S: Record<string, CSSProperties> = {
   "root": {
+    "boxSizing": "border-box",
     "display": "inline-flex",
     "alignItems": "center",
     "justifyContent": "center",

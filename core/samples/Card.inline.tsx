@@ -20,6 +20,7 @@ import { Avatar } from './Avatar';
 
 const S: Record<string, CSSProperties> = {
   "root": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flexDirection": "column",
     "alignItems": "stretch",
@@ -33,6 +34,7 @@ const S: Record<string, CSSProperties> = {
     "maxWidth": "320px"
   },
   "header": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flexDirection": "row",
     "alignItems": "center",
@@ -41,12 +43,14 @@ const S: Record<string, CSSProperties> = {
     "paddingBlock": "8px"
   },
   "title": {
+    "boxSizing": "border-box",
     "color": "#111827",
     "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
     "fontSize": "16px",
     "fontWeight": 600
   },
   "body": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flexDirection": "column",
     "alignItems": "stretch",
@@ -58,6 +62,7 @@ const S: Record<string, CSSProperties> = {
     "fontSize": "14px"
   },
   "footer": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flexDirection": "row",
     "alignItems": "center",
