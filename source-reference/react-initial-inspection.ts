@@ -1,3 +1,4 @@
+import {evidenceReadOnce} from './evidence-read-snapshot.js';
 /** Targeted initial-state observation against an existing sealed ownership
  * archive. No native writes, arbitrary source paths, or matrix recapture. */
 import { mkdirSync, readFileSync, writeFileSync, existsSync, renameSync } from 'node:fs';
@@ -97,15 +98,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       if (evidenceSha(png) !== row.image || snapshot.image !== row.image || snapshot.treeSha256 !== row.treeSha256) throw Error('react-initial-image-changed');
       return cropSourceFrame(png, snapshot.bounds).bytes;
   };
-  return {
-    read,
-    nativeRequest(referenceId: string, caseId: string): ReactInitialNativeRequest {
-      const value = input(referenceId, caseId), record = saved(value);
-      if (!record || active.has(value.key) || derive(value, record).draft?.status !== 'compiled-draft')
-        throw Error('react-initial-native-observation-unavailable');
-      return { version: 1, kind: 'react-initial-draft', anchor: value.request.anchor, caseId, observation: record.pin };
-    },
-    nativeEvidence(reference: ReactReference, request: ReactInitialNativeRequest) {
+  const nativeEvidenceFresh=(reference: ReactReference, request: ReactInitialNativeRequest) => {
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId)
         throw Error('react-initial-native-request-invalid');
       // Resolve the pinned archive directly, never via the latest pointer or
@@ -122,6 +115,18 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       return { draft: report.draft, composition: { source: report.observation!.source,
         heldProps: report.observation!.heldProps, trees }, source: { revision: 'sha256:' + reference.id,
         programSha256: value.source.programSha256, evidenceRevision: revisionOf(request) } };
+  };
+  return {
+    read,
+    nativeRequest(referenceId: string, caseId: string): ReactInitialNativeRequest {
+      const value = input(referenceId, caseId), record = saved(value);
+      if (!record || active.has(value.key) || derive(value, record).draft?.status !== 'compiled-draft')
+        throw Error('react-initial-native-observation-unavailable');
+      return { version: 1, kind: 'react-initial-draft', anchor: value.request.anchor, caseId, observation: record.pin };
+    },
+    nativeEvidence(reference:ReactReference,request:ReactInitialNativeRequest) {
+      return evidenceReadOnce('react-initial',{repo,referenceId:reference.id,files:reference.files,request},
+        ()=>nativeEvidenceFresh(reference,request));
     },
     nativeImage(reference: ReactReference, request: ReactInitialNativeRequest, rowId: string) {
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId || !/^\d+$/.test(rowId))

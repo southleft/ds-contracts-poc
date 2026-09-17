@@ -9,6 +9,9 @@ export interface NativeImageSummary {
   width: number;
   height: number;
   layoutSize?: { width: number; height: number };
+  /** Logical layout origin inside the unscaled export, from native bounds. */
+  layoutOffset?: { x: number; y: number };
+  textBoxes?: Array<{ nodeId: string; text: string; width: number; family: string; style: string; size: number }>;
 }
 export interface NativeImageObservation {
   status: "collected" | "unavailable";
@@ -92,7 +95,34 @@ export function collectExpectedNativeImages(input: { operation: { id: string; fi
       const node = r.nodes?.find((n: any) => n.id === c.instanceId);
       const layoutSize = node && [node.values?.width, node.values?.height].every(v => Number.isFinite(v) && v > 0)
         ? { width: node.values.width, height: node.values.height } : undefined;
-      images.push({ caseId: c.id, sha256, width, height, ...(layoutSize ? { layoutSize } : {}) });
+      const bounds = image.exportBounds;
+      let layoutOffset: NativeImageSummary['layoutOffset'];
+      if (bounds !== undefined) {
+        if (![bounds?.layout,bounds?.render].every(b=>b && ['x','y','width','height'].every(k=>Number.isFinite(b[k])) && b.width>0 && b.height>0))
+          return unavailable('native-images-export-bounds-invalid');
+        const {layout,render}=bounds;
+        // Only report alignment when native geometry accounts for every export
+        // pixel. Rotated or differently rounded exports remain unaligned.
+        if (layoutSize && Math.abs(layout.width-layoutSize.width)<1e-6 && Math.abs(layout.height-layoutSize.height)<1e-6 &&
+            Math.ceil(render.x+render.width)-Math.floor(render.x)===width && Math.ceil(render.y+render.height)-Math.floor(render.y)===height)
+          layoutOffset={x:layout.x-Math.floor(render.x),y:layout.y-Math.floor(render.y)};
+      }
+      const nodes = new Map<string, any>((r.nodes ?? []).map((n: any) => [n.id, n]));
+      const within = (id: string) => {
+        const visited = new Set<string>();
+        while (id !== c.instanceId) {
+          if (visited.has(id) || !nodes.has(id)) return false;
+          visited.add(id); id = nodes.get(id).parentId;
+        }
+        return true;
+      };
+      const textBoxes = [...nodes.values()].filter(n => n.type === 'TEXT' && within(n.id)).flatMap(n => {
+        const v = n.values;
+        return v && typeof v.characters === 'string' && typeof v.fontName?.family === 'string' &&
+          typeof v.fontName?.style === 'string' && Number.isFinite(v.width) && v.width > 0 && Number.isFinite(v.fontSize) && v.fontSize > 0
+          ? [{ nodeId: n.id, text: v.characters, width: v.width, family: v.fontName.family, style: v.fontName.style, size: v.fontSize }] : [];
+      });
+      images.push({ caseId: c.id, sha256, width, height, ...(layoutSize ? { layoutSize } : {}), ...(layoutOffset ? { layoutOffset } : {}), ...(textBoxes.length ? { textBoxes } : {}) });
       bytes.set(sha256, png);
     }
     return {

@@ -12,7 +12,7 @@ import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { selectReactNativeRequest } from './react-native-evidence.js';
 import { startReactContentInspection, readReactContentInspection, readReactContentInspectionEvidence } from './react-content-inspection.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
-import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame } from './react-source-framing.js';
+import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceFrame, measureReactSourceTypography } from './react-source-framing.js';
 import { PNG } from 'pngjs';
 import { revisionOf } from '../core/contract-provenance.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
@@ -70,6 +70,16 @@ test('targeted content preparation matches sealed rendering, survives reopening 
   assert.deepEqual(createReactSourceFramingStore(repo, loadFrame).read(reference.id, operationId), framed);
   assert.deepEqual(await frames.create(reference.id, operationId), framed, 'repeat reuses the immutable source-only measurement');
   const frameInput = loadReactFrameInput(repo, reference, request);
+  const typography = await measureReactSourceTypography(frameInput);
+  assert.equal(typography.sourceSha256, captured.sourcePngSha256);
+  assert.equal(typography.rows.length, 1);
+  assert.equal(typography.rows[0].text, 'Fixture label');
+  assert.equal(typography.rows[0].family, 'Inter');
+  assert.equal(typography.rows[0].weight, '500');
+  assert.equal(typography.rows[0].lines, 1);
+  assert(typography.rows[0].width > 0);
+  assert.deepEqual(await measureReactSourceTypography(frameInput), typography);
+  await assert.rejects(measureReactSourceTypography({ ...frameInput, reference: { ...reference, css: reference.css + 'button{font-family:serif}' } }), /original-changed/);
   for (const css of ['button{margin-left:1px}', 'button{visibility:hidden}', 'button{font-family:serif}']) {
     await assert.rejects(measureReactSourceFrame({ ...frameInput, reference: { ...reference, css: reference.css + css } }), /original-changed/);
   }

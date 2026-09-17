@@ -3,7 +3,7 @@ import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
 import { createReactReferenceService } from './react-reference.js';
-import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
+import { prepareReactNativePlan, prepareReactNativeFreshPlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite, buildReactNativeFreshComponentWrite } from './react-native-plan.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
 import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
@@ -141,6 +141,10 @@ export function createReferenceService(
         }),
       },
       reactComparison: {
+        refresh: (request, operation) => {
+          const fresh = reactReference.refreshComparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
+          return {request:fresh.request,plan:prepareReactComparisonPlan({...fresh.evidence,operation})};
+        },
         prepare: (request, operation) => {
           const evidence = reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
           return {
@@ -160,9 +164,9 @@ export function createReferenceService(
         prepare: (request, operation) => ({
           visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
           preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
-          plan: prepareReactNativePlan({ ...reactReference.nativeEvidence(request), operation }),
+          plan: (request.compilation === 'current' ? prepareReactNativeFreshPlan : prepareReactNativePlan)({ ...reactReference.nativeEvidence(request), operation }),
         }),
-        buildComponent: (request, context) => buildReactNativeComponentWrite({
+        buildComponent: (request, context) => (request.compilation === 'current' ? buildReactNativeFreshComponentWrite : buildReactNativeComponentWrite)({
           ...reactReference.nativeEvidence(request), operation: context.operation,
           tokens: context.tokens, expectedPlanRevision: context.planRevision,
         }),
@@ -747,12 +751,12 @@ export function createReferenceService(
     const baseline = nativeJobs.reactUpdateBaseline(id);
     const desired = baseline.request.kind === 'react-initial-draft'
       ? prepareReactInitialNativePlan({ ...reactReference.initialNativeEvidence(baseline.request), operation: baseline.input.operation })
-      : prepareReactNativePlan({ ...reactReference.nativeEvidence(baseline.request), operation: baseline.input.operation });
+      : prepareReactNativeCorrectionPlan({ ...reactReference.nativeEvidence(baseline.request), operation: baseline.input.operation });
     return { parentJournalRevision: baseline.journalRevision, input: {
       before: baseline.input, baseline: baseline.receipt,
       desired: { component: desired.plan.component, revision: desired.revision, tokenInput: desired.plan.tokenInput },
     } };
-  });
+  }, id => nativeUpdateJobs.updateHistory(id));
   const nativeUpdateJobs = createNativeUpdateJobs(repoRoot, nativeUpdatePlans);
   const nativeUpdateTransport = createNativeOperationTransport(repoRoot, nativeUpdateJobs);
   const deliveryTransport = (id: string) => nativeUpdateJobs.has(id) ? nativeUpdateTransport : nativeTransport;

@@ -232,3 +232,30 @@ test("reference API retains all ten cases, isolates source execution and refuses
     rmSync(repo, { recursive: true, force: true });
   }
 });
+
+
+test("update image HTTP delivery uses the checked archive without a current-source snapshot", async t => {
+  const {root}=fixture(),repo=mkdtempSync(path.join(tmpdir(),'react-image-route-'));
+  t.after(()=>{rmSync(root,{recursive:true,force:true});rmSync(repo,{recursive:true,force:true});});
+  const parent='10000000-0000-4000-8000-000000000008',proposal='a'.repeat(64),hash='b'.repeat(64);
+  let referenceId='',reads=0;
+  const png=Buffer.from('checked archive image');
+  const handle=createReactReferenceService(repo,root,()=>({jobs:{listReact:()=>[],reactIdentity:(id:string)=>{
+    assert.equal(id,parent);return {referenceId};}},transport:{},updateJobs:{
+    forProposal:()=>{throw Error('must not recompile the current source for an image');},
+    imageForProposal:(p:string,id:string,h:string)=>{assert.equal(p,parent);assert.equal(id,proposal);assert.equal(h,hash);reads++;return png;}
+  }} as any));
+  const server=createServer((req,res)=>{void handle(req,res,(req.url??'').slice(1));});
+  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));
+  t.after(()=>server.close());
+  const base=`http://127.0.0.1:${(server.address() as {port:number}).port}`;
+  referenceId=(await (await fetch(base+'/react',{method:'POST'})).json()).id;
+  const route=`/react/${referenceId}/native-operation/${parent}/update/${proposal}/images/${hash}.png`;
+  const response=await fetch(base+route);
+  assert.equal(response.status,200);assert.equal(response.headers.get('content-type'),'image/png');
+  assert.equal(response.headers.get('cache-control'),'no-store');assert.deepEqual(Buffer.from(await response.arrayBuffer()),png);
+  assert.equal(reads,1);
+  assert.equal((await fetch(base+route,{method:'POST'})).status,409);assert.equal(reads,1);
+  referenceId='c'.repeat(64);
+  assert.equal((await fetch(base+route)).status,409);assert.equal(reads,1);
+});

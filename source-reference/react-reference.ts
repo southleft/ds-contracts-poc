@@ -1,10 +1,11 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { readReactCompositionEvidence } from './react-composition-evidence.js';
 import { restoreReactOwnership } from './react-ownership-restore.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
-import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
-import { createReactSourceFramingStore } from './react-source-framing.js';
+import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
+import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
@@ -226,6 +227,21 @@ export function createReactReferenceService(
       } catch { json(res, 409, { error: 'Initial-state inspection unavailable. Load unchanged originals and prepare a supported root from the same saved structure observation first.' }); }
       return;
     }
+    const typography = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source-typography$/.exec(route);
+    if (typography && req.method === 'POST') {
+      try {
+        if (!native || !reference || reference.id !== typography[1] || !reactReferenceUnchanged(reference))
+          throw Error('react-source-typography-reference-unavailable');
+        const request = native().jobs.reactRequest(typography[2]);
+        if (request.referenceId !== reference.id) throw Error('react-source-typography-reference-mismatch');
+        const input = loadReactFrameInput(repoRoot, reference, request);
+        const measured = await measureReactSourceTypography(input);
+        if (!reactReferenceUnchanged(reference) || loadReactFrameInput(repoRoot, reference, request).sourceSha256 !== measured.sourceSha256)
+          throw Error('react-source-typography-source-changed');
+        json(res, 200, { typography: measured });
+      } catch { json(res, 409, { error: 'Original typography could not be measured unchanged. Mixed text and nested inline content are not yet supported by this diagnostic.' }); }
+      return;
+    }
     const initialImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/initial-source\/(\d+)\.png$/.exec(route);
     if (initialImage && req.method === 'GET') {
       try {
@@ -268,9 +284,7 @@ export function createReactReferenceService(
         if (updateImage) {
           const { updateJobs }=native();
           if(req.method!=='GET' || !updateJobs || jobs.reactIdentity(updateImage[2]).referenceId!==reference.id) throw Error('react-update-image-refused');
-          const update=updateJobs.forProposal(updateImage[2],updateImage[3]);
-          if(!update) throw Error('react-update-unavailable');
-          const png=updateJobs.image(update.id,updateImage[4]);
+          const png=updateJobs.imageForProposal(updateImage[2],updateImage[3],updateImage[4]);
           res.writeHead(200,{'Content-Type':'image/png','Content-Length':png.length,'Cache-Control':'no-store'});res.end(png);return;
         }
         if (req.method === 'POST') {
@@ -306,7 +320,10 @@ export function createReactReferenceService(
           } else if (nativeRoute?.[2]) {
             const job = ownershipJobs.get(reference.id);
             if (!job) throw Error('react-native-observation-required');
-            jobs.prepare(selectReactNativeRequest(repoRoot, job.report(), nativeRoute[2]));
+            const report = job.report();
+            const existing = jobs.listReact(reference.id).find(row => row.kind === 'root' && row.caseId === nativeRoute[2] && row.ownershipId === report.id);
+            if (existing) jobs.get(existing.operation.id);
+            else jobs.prepare({ ...selectReactNativeRequest(repoRoot, report, nativeRoute[2]), compilation: 'current' });
           } else if (nativeAction) {
             const id = nativeAction[2];
             if (jobs.reactIdentity(id).referenceId !== reference.id) throw Error('react-native-operation-mismatch');
@@ -336,7 +353,7 @@ export function createReactReferenceService(
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
         const observedAt = Date.now();
-        json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
+        json(res, 200, { operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
@@ -374,7 +391,7 @@ export function createReactReferenceService(
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
             }), connection: transport.status(row.operation.id, observedAt) };
-        }) });
+        }))) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
       }
@@ -730,6 +747,12 @@ export function createReactReferenceService(
     initialNativeEvidence(request: ReactInitialNativeRequest) {
       if (!reference) throw Error('react-initial-native-reference-unavailable');
       return initialStates.nativeEvidence(reference, request);
+    },
+    refreshComparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
+      if (!reference) throw Error('react-native-reference-unavailable');
+      return refreshReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
+        ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
+          { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
     },
     comparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');

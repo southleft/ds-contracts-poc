@@ -1,3 +1,4 @@
+import { evidenceReadOnce } from './evidence-read-snapshot.js';
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
@@ -54,7 +55,7 @@ export function inventoryEvidence(root: string): Record<string, string> {
 }
 export function evidenceUnchanged(root: string, files: Record<string, string>) {
   try {
-    return JSON.stringify(inventoryEvidence(root)) === JSON.stringify(files);
+    return JSON.stringify(evidenceReadOnce('inventory',path.resolve(root),()=>inventoryEvidence(root))) === JSON.stringify(files);
   } catch {
     return false;
   }

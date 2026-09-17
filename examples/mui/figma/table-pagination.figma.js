@@ -166,7 +166,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon",
-                      "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
+                      "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
                       "svgPaintVar": "imported/pagination/icon/color",
                       "iconSize": 24,
                       "insetOverlay": true,
@@ -232,7 +232,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "buttonbase-root-icon",
-                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.41 16.09 L 10.83 11.5 L 15.41 6.91 L 14 5.5 L 8 11.5 L 14 17.5 Z\" fill=\"#00000042\"/></svg>",
+                          "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.41 16.09 L 10.83 11.5 L 15.41 6.91 L 14 5.5 L 8 11.5 L 14 17.5 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/pagination/buttonbase-root/color",
                           "iconSize": 24
                         }
@@ -274,7 +274,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "buttonbase-root-2-icon",
-                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.59 16.34 L 13.17 11.75 L 8.59 7.16 L 10 5.75 L 16 11.75 L 10 17.75 Z\" fill=\"#00000042\"/></svg>",
+                          "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.59 16.34 L 13.17 11.75 L 8.59 7.16 L 10 5.75 L 16 11.75 L 10 17.75 Z\" fill=\"#00000042\"/></svg>",
                           "svgPaintVar": "imported/pagination/buttonbase-root-2/color",
                           "iconSize": 24
                         }

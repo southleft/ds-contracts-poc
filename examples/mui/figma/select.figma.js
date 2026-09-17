@@ -90,7 +90,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "icon",
-              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
+              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
               "svgPaintVar": "imported/select/icon/color",
               "iconSize": 24,
               "insetOverlay": true,
@@ -262,7 +262,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "icon",
-              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
+              "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
               "svgPaintVar": "imported/select/icon/color",
               "iconSize": 24,
               "insetOverlay": true,

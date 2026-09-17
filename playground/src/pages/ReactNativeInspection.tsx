@@ -1,16 +1,29 @@
+import { nativeImageFraming } from '../native-image-framing';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useEffect, useState } from 'react';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
 import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
 import type { SourceFrame } from '../../../source-reference/source-framing';
+import type { SourceTypography } from '../../../source-reference/react-source-framing';
 import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
+import type { NativeContractUpdatePlan } from '../../../core/native-contract-update';
+
+function correctionValue(value: NativeContractUpdatePlan['changes'][number]['before']) {
+  if (typeof value === 'number') return Number(value.toFixed(4));
+  if (!value.length) return 'No shadows';
+  return <ol>{value.map((effect,index)=><li key={index}>
+    {effect.type==='INNER_SHADOW'?'Inner':'Outer'} shadow: offset {effect.offset.x}, {effect.offset.y} px;
+    blur {effect.radius} px; spread {effect.spread} px;
+    color rgb({[effect.color.r,effect.color.g,effect.color.b].map(c=>Math.round(c*255)).join(', ')}), {Math.round(effect.color.a*100)}% opacity
+  </li>)}</ol>;
+}
 
 interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested';
   initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
-  updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; channel?: 'width' | 'height'; before: number; after: number }>;
+  updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes'];
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
@@ -23,24 +36,36 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   referenceId: string; selectedCase: string; ownership: ReactOwnershipReport | null;
 }) {
   const [rows, setRows] = useState<Operation[]>([]), [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
+  const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
   const root = `/api/source-reference/react/${referenceId}`;
   const active = rows.some(r => (r.connection.paired && !r.connection.finished) || r.content?.phase === 'running' || r.updates?.some(u=>u.connection?.paired&&!u.connection.finished));
   useEffect(() => {
     let stopped = false, pending = false;
     const load = async () => {
-      if (pending) return; pending = true;
+      if (pending) return; pending = true; setLoading(true);
       try {
         const response = await fetch(`${root}/native`), result = await response.json();
         if (!response.ok) throw Error(result.error);
         if (!stopped) { setRows(result.operations); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
-      finally { pending = false; }
+      finally { pending = false; if (!stopped) setLoading(false); }
     };
     void load();
     const timer = active ? setInterval(() => void load(), 4000) : undefined;
     return () => { stopped = true; if (timer) clearInterval(timer); };
   }, [root, active]);
+  async function inspectTypography(parentId: string, key: string) {
+    setBusy(true); setError('');
+    try {
+      const response = await fetch(`${root}/native-operation/${parentId}/source-typography`, { method: 'POST' });
+      const result = await response.json();
+      if (!response.ok) throw Error(result.error);
+      setTypography(old => ({ ...old, [key]: result.typography }));
+    } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
+    finally { setBusy(false); }
+  }
   async function action(route: string, id?: string) {
     setBusy(true); setError('');
     try {
@@ -61,7 +86,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     <h3>Inspect editable Figma roots</h3>
     <p>Create a native draft from the observed root styles and properties. Its content slot stays empty and editable.
       Prepare separate caller-content instances for comparison below. Visual fidelity, stateful behavior and the complete composed component remain unqualified.</p>
-    <button type="button" disabled={busy || !ready} onClick={() => void action(`native/${selectedCase}`)}>
+    {loading && <p role="status">{rows.length ? 'Refreshing saved Figma inspections…' : 'Loading saved Figma inspections…'}</p>}
+    <button type="button" disabled={busy || loading || !ready} onClick={() => void action(`native/${selectedCase}`)}>
       Prepare {selectedCase} for Figma
     </button>
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
@@ -77,16 +103,18 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {row.kind === 'nested' && <p>This main covers the captured child inputs. {op.sourceOwnedContent ? 'It retains the component’s own internal content.' : 'Its caller-content slot remains empty.'} Other properties, behavior and visual fidelity remain unqualified.</p>}
         {comparison && op.comparisonWidth !== undefined && <p>This comparison uses the original caller’s declared {op.comparisonWidth} px width. The reusable main keeps its own sizing rules.</p>}
         <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {corrected ? 'verified correction matches current inputs; original creation retained below' : op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
+        {op.comparisonBaselineRefreshed && <p>This read-only inspection checks the retained instance against verified main corrections. Original creation records and node identities are preserved.</p>}
+        {op.sourceCompilerRecompiled && <p>This new draft uses the current compiler with the unchanged, verified source observations. The original capture remains intact. This prepared output is pinned before creation; existing Figma operations are not replaced.</p>}
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
-        {(initial || row.kind === 'nested') && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
+        {!comparison && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {row.updates?.map(update => <div key={update.id}>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
             {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Property</th><th>Saved value</th><th>Proposed value</th></tr></thead>
-              <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + (change.channel ?? 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{change.channel ?? 'opacity'}</td><td>{change.before}</td><td>{change.after}</td></tr>)}</tbody></table>}
+              <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + ('channel' in change ? change.channel : 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{'channel' in change ? change.channel==='effects'?'Shadow stack':change.channel==='strokeWeight'?'Stroke width (px)':change.channel : 'opacity'}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>}
             {!update.operation && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/prepare`)}>Prepare reviewed correction</button>}
             {update.operation && <>
-              <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.sourceCurrent ? 'Pinned inputs match.' : update.operation.canRefreshObservation ? 'Pinned inputs match. Inspect again with the current reader to restore verification; the original write will not be repeated.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>
+              <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.superseded ? 'Historical correction. Its result is preserved in a later correction chain.' : update.operation.sourceCurrent ? 'Pinned inputs match.' : update.operation.canRefreshObservation ? 'Pinned inputs match. Inspect again with the current reader to restore verification; the original write will not be repeated.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>
               {!update.connection?.finished && <>
                 <p>Use the current companion plugin in the authorized file. Connect using this update’s code.</p>
                 <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/connection`,update.operation!.id)}>Get update connection code</button>
@@ -94,7 +122,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 <p>{update.connection?.connected?'Companion connected for this update.':'Waiting for the update connection.'}</p>
                 <button type="button" disabled={busy||!update.operation.sourceCurrent||!update.connection?.paired||update.connection.started} onClick={()=>void action(`native-operation/${id}/update/${update.id}/start`)}>Apply and verify correction</button>
               </>}
-              {(update.operation.pendingPhase?.endsWith('readback') || ['update-verified','update-refused','update-recovery-required'].includes(update.operation.phase)) && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/retry-observation`)}>Inspect update again</button>}
+              {!update.operation.superseded && (update.operation.pendingPhase?.endsWith('readback') || ['update-verified','update-refused','update-recovery-required'].includes(update.operation.phase)) && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/retry-observation`)}>Inspect update again</button>}
               {update.operation.pendingPhase==='update-apply' && <p>A write is awaiting its result. Keep the companion connected; this write will not be repeated automatically.</p>}
               {!!update.operation.problems.length && <ul>{update.operation.problems.map(p=><li key={p}>{p}</li>)}</ul>}
               {!!update.operation.imageObservation?.images.length && <details open><summary>Updated native exports · diagnostic only</summary>
@@ -118,13 +146,13 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           <button type="button" disabled={busy || !op.sourceCurrent || !row.connection.paired || row.connection.started}
             onClick={() => void action(`native-operation/${id}/start`)}>{comparison ? 'Create and inspect native comparison' : 'Create and inspect native draft'}</button>
         </>}
-        {op.comparisonRepair && <section aria-label="Repair linked instances">
-          <p>The independent readback found supported corrections to linked instances. The app will check the same nodes, source mains and tokens again before applying these changes.</p>
+        {op.comparisonRepair && <section aria-label="Repair retained comparison">
+          <p>The independent readback found supported corrections to the retained comparison. The app will check the same nodes, source mains and tokens again before applying these changes.</p>
           <ul>{op.comparisonRepair.changes.map((change,index)=><li key={index}>{change.kind==='height'
             ? `Restore the main’s height binding: ${change.before} → ${change.after} px.`
-            : 'Remove an extra variable mode from a descendant to match its main.'}</li>)}</ul>
+            : change.kind==='comparison-clipping' ? 'Allow outer shadows beyond the comparison frame; preserve clipping inside the component.' : 'Remove an extra variable mode from a descendant to match its main.'}</li>)}</ul>
           <button type="button" disabled={busy || !row.connection.paired}
-            onClick={() => void action(`native-operation/${id}/repair-comparison`)}>Verify and repair linked instances</button>
+            onClick={() => void action(`native-operation/${id}/repair-comparison`)}>Verify and repair comparison</button>
         </section>}
         {op.canResumeComparison && <section aria-label="Resume retained comparison">
           <p>The retained instance is empty. Recovery will inspect its ownership, source mains and tokens, then continue in the same instance if they still match. Original creation evidence stays intact.</p>
@@ -181,13 +209,13 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             {!row.sourceFrame && <button type="button" disabled={busy || !op.sourceCurrent}
               onClick={() => void action(`native-operation/${row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
             {row.sourceFrameProblem && <p role="alert">{row.sourceFrameProblem}</p>}
-            <p>{row.sourceFrame ? 'Original pixels cropped around independently measured source bounds, with up to 8 px of surrounding context. Both images use 1 image pixel per CSS pixel on white surfaces; no resizing or best-fit alignment.' : 'The original includes its browser stage. Measure its frame for an unscaled component comparison.'} <a href={`${root}/native-operation/${row.parentOperationId}/source.png`} target="_blank" rel="noreferrer">Open full original</a></p>
+            <p>{row.sourceFrame ? 'Original pixels cropped around independently measured source bounds, with up to 8 px of surrounding context. Both images use 1 image pixel per CSS pixel on white surfaces. Where native render bounds are available, layout origins align from geometry; no resizing or best-fit alignment.' : 'The original includes its browser stage. Measure its frame for an unscaled component comparison.'} <a href={`${root}/native-operation/${row.parentOperationId}/source.png`} target="_blank" rel="noreferrer">Open full original</a></p>
           </>}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'flex-start' }}>
           {comparison && <figure style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
             <figcaption>Original React · unchanged source{row.sourceFrame && <><br />Layout: {row.sourceFrame.bounds.width.toFixed(2)} × {row.sourceFrame.bounds.height.toFixed(2)} px</>}</figcaption>
-            <img alt={`Original React ${row.caseId}`} style={{ maxWidth: 'none', backgroundColor: 'white', ...(row.sourceFrame ? { width: row.sourceFrame.crop.width, height: row.sourceFrame.crop.height } : {}) }}
-              src={`${root}/native-operation/${row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} />
+            <div style={{...nativeImageFraming(row.sourceFrame,op.imageObservation?.images[0]).source,width:'max-content',backgroundColor:'white'}}><img alt={`Original React ${row.caseId}`} style={{ maxWidth: 'none', backgroundColor: 'white', ...(row.sourceFrame ? { width: row.sourceFrame.crop.width, height: row.sourceFrame.crop.height } : {}) }}
+              src={`${root}/native-operation/${row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} /></div>
           </figure>}
           {op.imageObservation.images.map(image => <figure key={image.caseId} style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
             {initial && row.initialStates?.filter(state => 'variant:' + state.variant === image.caseId).map(state => <div key={state.observation}>
@@ -197,9 +225,25 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 onError={() => setError('A pinned original state image could not be verified or loaded. Reload unchanged originals before reviewing this comparison.')} />
             </div>)}
             <figcaption>Native {image.caseId}{image.layoutSize && <><br />Layout: {image.layoutSize.width.toFixed(2)} × {image.layoutSize.height.toFixed(2)} px</>}</figcaption>
-            <div style={{ padding: comparison || initial ? 8 : 0, width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${initial ? 'initial state' : comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
+            <div style={{ padding: comparison || initial ? 8 : 0, ...(comparison ? nativeImageFraming(row.sourceFrame,image).native : {}), width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${initial ? 'initial state' : comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
           </figure>)}
           </div>
+          {comparison && op.sourceCurrent && op.imageObservation.attemptId && <details>
+            <summary>Compare text measurements</summary>
+            <p>Matching font names do not prove matching font versions. This diagnostic compares browser text advances with native text-box widths. Wrapping, box sizing and renderer rounding can also differ; it does not grade fidelity or change either output.</p>
+            <button type="button" disabled={busy} onClick={() => void inspectTypography(row.parentOperationId!, `${referenceId}/${id}/${op.imageObservation!.attemptId}`)}>Measure original text</button>
+            {typography[`${referenceId}/${id}/${op.imageObservation.attemptId}`]?.rows.map((text,index) => {
+              const measured = typography[`${referenceId}/${id}/${op.imageObservation!.attemptId}`];
+              const matches = op.imageObservation!.images.flatMap(image => image.textBoxes ?? []).filter(box => box.text === text.text);
+              const native = matches.length === 1 && measured.rows.filter(row => row.text === text.text).length === 1 ? matches[0] : undefined;
+              return <section key={index} aria-label={`Text measurement: ${text.text}`}>
+                <h4>{text.text}</h4>
+                <p>Original: {text.family} · {text.face} · {text.size} · weight {text.weight}. Text advance: {text.width.toFixed(2)} px · {text.lines} line rectangle(s).</p>
+                {native ? <p>Native: {native.family} · {native.style} · {native.size} px. Text box: {native.width.toFixed(2)} px.{text.lines === 1 ? ` Difference: ${(native.width-text.width).toFixed(2)} px.` : ' Wrapped text is not a single-line width comparison.'}</p>
+                  : <p>No unique native text match; repeated or missing strings require a structural mapping.</p>}
+              </section>;
+            })}
+          </details>}
         </details>}
       </details>;
     })}

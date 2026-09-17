@@ -1,4 +1,6 @@
+import {prepareNativeSvgUpdate,emitNativeSvgUpdateScript,nativeSvgUpdateMatches,type NativeSvgUpdatePlan} from './native-contract-svg-update.js';
 import { prepareNativeRootSizeUpdate, emitNativeRootSizeUpdateScript, nativeRootSizeUpdateMatches, type NativeRootSizeUpdatePlan } from './native-contract-size-update.js';
+import { prepareNativeShadowUpdate, emitNativeShadowUpdateScript, nativeShadowUpdateMatches, type NativeShadowUpdatePlan } from './native-contract-shadow-update.js';
 /** Bounded corrections to an existing unaccepted native draft. Creation
  * identities remain immutable; the update journal supplies the new revision. */
 import { canonicalJson, revisionOf } from './contract-provenance.js';
@@ -26,9 +28,9 @@ const scalar = (v: unknown): v is number => typeof v === 'number' && Number.isFi
 const part = (node: Record<string, any>) => {
   try { return JSON.parse(node.metadata.nativeContractPart); } catch { return null; }
 };
-export type NativeContractUpdatePlan = NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan;
+export type NativeContractUpdatePlan = NativeOpacityUpdatePlan | NativeRootSizeUpdatePlan | NativeShadowUpdatePlan | NativeSvgUpdatePlan;
 export function prepareNativeContractUpdate(input: NativeContractUpdateInput): { plan: NativeContractUpdatePlan; revision: string } {
-  return prepareNativeRootSizeUpdate(input, prepareOpacityUpdate) ?? prepareOpacityUpdate(input);
+  return prepareNativeSvgUpdate(input, prepareOpacityUpdate) ?? prepareNativeShadowUpdate(input, prepareOpacityUpdate) ?? prepareNativeRootSizeUpdate(input, prepareOpacityUpdate) ?? prepareOpacityUpdate(input);
 }
 function prepareOpacityUpdate(input: NativeContractUpdateInput) {
   if (!/^sha256:[a-f0-9]{64}$/.test(input.desired.revision) ||
@@ -87,12 +89,18 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput) {
 /** Host verification uses the same independent reader as creation, with the
  * old immutable allocation identities and explicitly updated expected values. */
 export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, receipt: unknown, direction: 'apply' | 'rollback' = 'apply') {
-  return verifyNativeContractReadback(direction === 'apply' ? plan.after : plan.before, receipt);
+  const result = verifyNativeContractReadback(direction === 'apply' ? plan.after : plan.before, receipt);
+  if (plan.kind === 'native-contract-svg-update' && (!nativeSvgUpdateMatches(plan, receipt, direction === 'apply') ||
+      direction === 'rollback' && plan.changes.some(c => (receipt as NativeSourceReadback)?.nodes?.find(n => n.id === c.nodeId)?.values.strokeWeight !== c.before)))
+    return { ...result, status: 'refused' as const, problems: [...result.problems, 'native-update-svg-observation-mismatch'] };
+  return result;
 }
 
 /** Independently check a preflight or completed update against the complete
  * saved observation, allowing only the pinned scalar transitions. */
 export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, receipt: unknown, complete = false): boolean {
+  if (plan.kind === 'native-contract-svg-update') return nativeSvgUpdateMatches(plan, receipt, complete);
+  if (plan.kind === 'native-contract-shadow-update') return nativeShadowUpdateMatches(plan, receipt, complete);
   if (plan.kind === 'native-contract-root-size-update') return nativeRootSizeUpdateMatches(plan, receipt, complete);
   try {
     const normalized = structuredClone(receipt) as NativeSourceReadback;
@@ -111,6 +119,8 @@ export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, rece
  * values. The same program can finish a partial application or make no writes.
  * Transport must still resolve an unknown delivery before explicitly resuming. */
 export function emitNativeContractUpdateScript(plan: NativeContractUpdatePlan, direction: 'apply' | 'rollback' = 'apply', readOnly = false) {
+  if (plan.kind === 'native-contract-svg-update') return emitNativeSvgUpdateScript(plan, direction, readOnly);
+  if (plan.kind === 'native-contract-shadow-update') return emitNativeShadowUpdateScript(plan, direction, readOnly);
   if (plan.kind === 'native-contract-root-size-update') return emitNativeRootSizeUpdateScript(plan, direction, readOnly);
   if (plan.kind !== 'native-contract-opacity-update' || plan.acceptedContract !== null || plan.nativeQualification !== 'unqualified')
     throw Error('native-update-plan-invalid');

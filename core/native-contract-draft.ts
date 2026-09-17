@@ -57,7 +57,7 @@ export function prepareNativeContractDraft(
   };
   const data = structuredClone(component);
   const boundNames = new Set<string>();
-  function visit(spec: NodeSpec, variant: string, specPath: number[]) {
+  function visit(spec: NodeSpec, variant: string, specPath: number[], parent?:NodeSpec) {
     // Every allocation must pass nativeInit. Nested instances, styled text
     // wrappers, margin boxes and slot defaults need their own ownership mapping.
     if (!['root', 'frame', 'slot', 'svg', 'shape'].includes(spec.type) || spec.slotDefault?.length ||
@@ -69,17 +69,27 @@ export function prepareNativeContractDraft(
       throw Error('NATIVE_CONTRACT_DRAFT_LEAF_CHILDREN_UNQUALIFIED');
     if (spec.type === 'svg' && (!spec.svg || !Number.isFinite(spec.iconSize) || spec.iconSize! <= 0 || spec.rotation))
       throw Error('NATIVE_CONTRACT_DRAFT_SVG_GEOMETRY_UNQUALIFIED');
+    if(spec.backgroundPaint){
+      const {inset,radius}=spec.backgroundPaint,a=spec.absolute;
+      if(spec.type!=='shape'||spec.shape?.kind!=='rect'||spec.shape.width!==1||spec.shape.height!==1||
+          parent?.backgroundClip!=='padding-box'||parent.children?.[0]!==spec||
+          ![inset,radius].every(v=>Number.isFinite(v)&&v>=0)||
+          !a||a.h!=='STRETCH'||a.v!=='STRETCH'||![a.left,a.right,a.top,a.bottom].every(v=>v===inset)||
+          spec.lits?.radius!==radius||spec.stroke||spec.bindings||spec.effectStack||spec.dropShadow||
+          Object.keys(spec.lits??{}).some(k=>!['radius','fillColor'].includes(k)))
+        throw Error('NATIVE_CONTRACT_DRAFT_BACKGROUND_GEOMETRY_UNQUALIFIED');
+    }
     if (spec.type === 'shape' && (!spec.shape || !['rect', 'ellipse'].includes(spec.shape.kind) || spec.svg ||
-        spec.shape.arc || spec.shape.rotation || spec.lits?.fillColor ||
+        spec.shape.arc || spec.shape.rotation || (spec.lits?.fillColor && !spec.backgroundPaint) ||
         !Number.isFinite(spec.shape.width) || !Number.isFinite(spec.shape.height) || spec.shape.width <= 0 || spec.shape.height <= 0 ||
-        (spec.absolute && (spec.absolute.h !== 'MIN' || spec.absolute.v !== 'MIN' ||
+        (spec.absolute && !spec.backgroundPaint && (spec.absolute.h !== 'MIN' || spec.absolute.v !== 'MIN' ||
           !Number.isFinite(spec.absolute.left) || !Number.isFinite(spec.absolute.top)))))
       throw Error('NATIVE_CONTRACT_DRAFT_SHAPE_GEOMETRY_UNQUALIFIED');
     spec.nativeContractPart = { contractRevision: projection.contractRevision, variant, specPath };
     for (const name of Object.values(spec.bindings ?? {})) boundNames.add(name);
     for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.svgPaintVar])
       if (name) boundNames.add(name);
-    (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i]));
+    (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i],spec));
   }
   data.variants.forEach(v => visit(v.spec, v.name, []));
   data.nativeContractDraft = { revision: revisionOf(projection), acceptedContract: null };

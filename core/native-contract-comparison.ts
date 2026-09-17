@@ -240,7 +240,7 @@ async function nativeBuildContractComparison() {
   if (!main || main.type !== 'COMPONENT') nativeRefuse('comparison-main-unavailable');
   const board = figma.createFrame(); nativeOwn(board); NATIVE_PAGE.appendChild(board);
   NATIVE_RESULT.comparisonBoardId = board.id;
-  board.name = 'Observed caller content'; board.fills = []; board.layoutMode = 'VERTICAL';
+  board.name = 'Observed caller content'; board.fills = []; board.layoutMode = 'VERTICAL'; board.clipsContent = false;
   board.primaryAxisSizingMode = 'AUTO'; board.counterAxisSizingMode = 'AUTO';
   const inst = main.createInstance(); nativeOwn(inst); board.appendChild(inst); inst.name = c.caseId;
   const recorded = { id: c.caseId, status: 'building', instanceId: inst.id, mainId: main.id, sourceParts: [], slots: [] };
@@ -339,7 +339,7 @@ async function nativeBuildContractComparison() {
   const c = NATIVE.contractComparison;
   const board = figma.createFrame(); nativeOwn(board); NATIVE_PAGE.appendChild(board);
   NATIVE_RESULT.comparisonBoardId = board.id;
-  board.name = 'Observed caller content'; board.fills = []; board.layoutMode = 'VERTICAL';
+  board.name = 'Observed caller content'; board.fills = []; board.layoutMode = 'VERTICAL'; board.clipsContent = false;
   board.primaryAxisSizingMode = 'AUTO'; board.counterAxisSizingMode = 'AUTO';
   const inst = await nativeFillContractInstance(c, c.specs, board, c.caseId, record => { NATIVE_RESULT.comparisons = [record]; });
   inst.setSharedPluginData('ds_contracts', 'nativeContractCase', JSON.stringify({ id: c.caseId, revision: c.revision }));

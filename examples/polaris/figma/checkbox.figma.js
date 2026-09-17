@@ -338,7 +338,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-6",
-                          "svg": "<svg viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/checkbox/icon-6/color",
                           "iconSize": 14,
                           "absolute": {
@@ -538,7 +538,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-4",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 5 10 C 5 9.586 5.336 9.25 5.75 9.25 H 14.25 C 14.664 9.25 15 9.586 15 10 S 14.664 10.75 14.25 10.75 H 5.75 C 5.336 10.75 5 10.414 5 10 Z\" fill=\"#303030\" fill-rule=\"evenodd\"/></svg>",
+                          "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 5 10 C 5 9.586 5.336 9.25 5.75 9.25 H 14.25 C 14.664 9.25 15 9.586 15 10 S 14.664 10.75 14.25 10.75 H 5.75 C 5.336 10.75 5 10.414 5 10 Z\" fill=\"#303030\" fill-rule=\"evenodd\"/></svg>",
                           "svgPaintVar": "imported/shared/color-303030",
                           "iconSize": 22,
                           "absolute": {

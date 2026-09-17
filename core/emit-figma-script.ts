@@ -1,3 +1,4 @@
+import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
@@ -64,7 +65,7 @@ import {
   omittedCodeBindingConflicts,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
-import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
+import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime, okColorToRgba } from './token-set.js';
 import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
@@ -124,6 +125,9 @@ export interface LayoutSpec {
 
 export interface NodeSpec {
   type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg' | 'shape';
+  backgroundClip?: 'padding-box';
+  /** Synthetic, independently verified paint plane; not a content/API part. */
+  backgroundPaint?: {inset:number;radius:number};
   /** Round 4: intrinsic glyph size for svg specs (contract icon.size). */
   iconSize?: number;
   name: string;
@@ -1584,8 +1588,11 @@ function splitTopLevel(value: string): string[] {
   return out;
 }
 
-/** A CSS color literal (hex / rgb() / rgba()) → RGBA floats. */
+/** A CSS color literal → RGBA floats, using the shared OKLab conversion. */
 function parseCssColor(v: string): { r: number; g: number; b: number; a?: number } | undefined {
+  const modern = okColorToRgba(v);
+  if (modern) return Object.values(modern).every(Number.isFinite)
+    ? { r: modern.r / 255, g: modern.g / 255, b: modern.b / 255, a: modern.a } : undefined;
   return parseLitColor(v);
 }
 
@@ -1610,7 +1617,7 @@ function parseShadowStack(value: string): NodeSpec['effectStack'] | undefined {
       inner = true;
       rest = rest.replace(/(^| )inset( |$)/, ' ').trim();
     }
-    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/);
+    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|(?:rgba?|oklab|oklch)\([^)]*\))/);
     if (!colorMatch) return undefined;
     const color = parseCssColor(colorMatch[1]);
     if (!color) return undefined;
@@ -3600,11 +3607,19 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): { mar
     // floor-reconstructed glyphs) that was a path's stroke-width, so the
     // Checkbox check drew at stroke-width 14 (a blob) and the Avatar xl
     // silhouette at stroke-width 40 (a filled square). Assets without a
-    // root width/height keep their markup; the renderers/runtime size the
-    // node from iconSize.
-    out = out
-      .replace(/^(<svg\b[^>]*?)\swidth="[^"]*"/, `$1 width="${part.icon!.size}"`)
-      .replace(/^(<svg\b[^>]*?)\sheight="[^"]*"/, `$1 height="${part.icon!.size}"`);
+    // root width/height must receive an explicit viewport too: resizing a
+    // Figma SVG frame after import scales its paths but leaves strokes at
+    // their original weight. Import at the intended viewport so viewBox
+    // geometry, strokes and preserveAspectRatio are evaluated together.
+    out = out.replace(/^<svg\b[^>]*>/, tag => {
+      for (const dimension of ['width', 'height']) {
+        const attribute = new RegExp(`\\s${dimension}=(?:"[^"]*"|'[^']*')`);
+        tag = attribute.test(tag)
+          ? tag.replace(attribute, ` ${dimension}="${part.icon!.size}"`)
+          : tag.replace(/^<svg\b/, `<svg ${dimension}="${part.icon!.size}"`);
+      }
+      return tag;
+    });
   }
   return { markup: out, paintPath: usesCurrentColor ? ctx.textFillPath : paintPath, paintHex: usesCurrentColor ? currentHex : hex };
 }
@@ -5732,12 +5747,25 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // feeding one trailing `†`: 279 channel misses and 19 declared facts on
   // the eight Flowbite contracts collapsed to 8 bare daggers, and nothing a
   // designer could open named a single one of them.
+  const backgroundLowering=new Map<Part,boolean[]>();
+  const lowerBackground=(spec:NodeSpec) => {
+    (spec.children??[]).forEach(lowerBackground);
+    const part=nativePartOrigins.get(spec);
+    if(part?.declared?.['background-clip']!=='padding-box')return;
+    // @lower emit.padding-box-background-plane
+    const lowered=lowerPaddingBoxBackground(spec,name=>{
+      try{return pxOrNull(resolveLiteral(name.split('/').join('.')))??undefined;}catch{return undefined;}
+    });
+    backgroundLowering.set(part,[...backgroundLowering.get(part)??[],lowered]);
+  };
+  variants.forEach(v=>lowerBackground(v.spec));
   const facts: CodeOnlyFactObservation[] = [];
   // v15 (S4): declared-not-drawn facts. 'draw'-verdict base facts render
   // natively and need no receipt; state-plane declared facts are always
   // code-only (state previews do not draw declared facts yet — a named limit).
   for (const { name: partName, part } of walkAnatomy(contract)) {
     const note = (channel: string, value: string, state?: string) => {
+      if(channel==='background-clip'&&!state&&value==='padding-box'&&backgroundLowering.get(part)?.every(Boolean))return;
       const reg = DECLARED_CHANNELS[channel];
       // R8 (2026-08-22): a channel the registry does not know used to
       // `return` here — "refused upstream by validateContract" — which is

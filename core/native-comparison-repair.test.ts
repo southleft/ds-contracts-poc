@@ -12,7 +12,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {nativeOwnedComparisonFixture} from './native-owned-comparison-test-fixture.js';
 import {emitNativeContractComparisonReadbackScript,verifyNativeContractComparisonReadback} from './native-contract-comparison-observation.js';
-import {prepareNativeComparisonRepair,emitNativeComparisonRepairScript,nativeComparisonRepairMatches} from './native-comparison-repair.js';
+import {prepareNativeComparisonFrameRepair,prepareNativeComparisonRepair,emitNativeComparisonRepairScript,nativeComparisonRepairMatches} from './native-comparison-repair.js';
 import {revisionOf,canonicalJson} from './contract-provenance.js';
 import {resolveNativeSlotIdentities} from './native-slot-identity.js';
 
@@ -105,6 +105,7 @@ test('app journal repairs once and independently verifies while retaining creati
  const f=await nativeOwnedComparisonFixture(true,true,REACT_NATIVE_FILE_KEY),repo=mkdtempSync(path.join(tmpdir(),'comparison-repair-'));
  t.after(()=>rmSync(repo,{recursive:true,force:true}));
  const legacy=(built:{script:string;planRevision:string})=>({...built,script:built.script
+   .replaceAll('board.clipsContent = false;','board.topLeftRadius=board.topRightRadius=board.bottomLeftRadius=board.bottomRightRadius=0;')
    .replaceAll('child.nativeContractSample?.instance === undefined &&','')
    .replace("if (c.contentMode !== 'source-owned' || Object.hasOwn(source.explicitVariableModes || {}, parentCollection.id)) ",'')
    .replaceAll("childNode.layoutSizingVertical = 'FILL';", "if(childNode.type==='INSTANCE')childNode.setBoundVariable('height',null);childNode.layoutSizingVertical = 'FILL';")});
@@ -116,10 +117,10 @@ test('app journal repairs once and independently verifies while retaining creati
     root: { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64), ownership: { id: '10000000-0000-4000-8000-000000000010', sha256: 'b'.repeat(64) },
       inventorySha256: 'c'.repeat(64), caseId: 'sample', matrixRevision: revisionOf('matrix') },
     content: { id: '10000000-0000-4000-8000-000000000011', reportSha256: 'd'.repeat(64), inventorySha256: 'e'.repeat(64) } };
-  let current = true, preparations = 0;
+  let current = true;
   const options: NativeOperationJobsOptions = { prepare: () => { throw Error('unexpected source adapter'); }, reactComparison: {
     prepare: (selected, operation) => {
-      preparations++; assert.deepEqual(selected, request); if (!current) throw Error('source changed');
+      assert.deepEqual(selected, request); if (!current) throw Error('source changed');
       return { visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
         preparation: { id: request.content.id, reportSha256: request.content.reportSha256 },
         plan: prepareReactComparisonPlan({ operation, content, source: f.source, comparison: f.selected }) };
@@ -130,7 +131,7 @@ test('app journal repairs once and independently verifies while retaining creati
 
  let jobs=createNativeOperationJobs(repo,options);const saved=jobs.prepare(request);
  const run=async(phase:Parameters<typeof jobs.dispatch>[1])=>{
-   const command=jobs.dispatch(saved.id,phase),{script,kind,readOnly,...identity}=command,result=await f.run(script);
+   const command=jobs.dispatch(saved.id,phase),{script,kind:_kind,readOnly:_readOnly,...identity}=command,result=await f.run(script);
    jobs.accept(saved.id,{...identity,result});jobs=createNativeOperationJobs(repo,options);return command;
  };
  for(const phase of ['token-create','token-readback','component-create','component-readback'] as const)await run(phase);
@@ -139,13 +140,29 @@ test('app journal repairs once and independently verifies while retaining creati
  const originals=readdirSync(events).map(name=>[name,readFileSync(path.join(events,name),'utf8')] as const);
  await run('comparison-repair-preflight-readback');assert.equal(jobs.get(saved.id).phase,'comparison-repair-observed');
  current=false;assert.throws(()=>jobs.dispatch(saved.id,'comparison-repair-apply'));current=true;
- const write=jobs.dispatch(saved.id,'comparison-repair-apply'),{script,kind,readOnly,...identity}=write,result=await f.run(script);
+ const write=jobs.dispatch(saved.id,'comparison-repair-apply'),{script,kind:_kind,readOnly:_readOnly,...identity}=write,result=await f.run(script);
  assert.equal(result.status,'updated',JSON.stringify(result));
  jobs=createNativeOperationJobs(repo,options);assert.throws(()=>jobs.dispatch(saved.id,'comparison-repair-apply'));assert.throws(()=>jobs.retryObservation(saved.id));
  jobs.accept(saved.id,{...identity,result});await run('component-readback');
- assert.equal(jobs.get(saved.id).phase,'component-structure-observed');assert.equal(jobs.get(saved.id).comparisonRepair,undefined);
+ assert.equal(jobs.get(saved.id).phase,'component-structure-observed');assert.equal(jobs.get(saved.id).comparisonRepair?.changes[0].kind,'comparison-clipping');
  for(const [name,bytes] of originals)assert.equal(readFileSync(path.join(events,name),'utf8'),bytes);
  assert.equal(readdirSync(events).map(n=>JSON.parse(readFileSync(path.join(events,n),'utf8'))).filter(e=>e.kind==='dispatch'&&e.command.phase==='comparison-repair-apply').length,1);
+ const oldClaim=readFileSync(path.join(events,'../comparison-repair.json'),'utf8');
+ const nodeCount=f.figma.root.findAll(()=>true).length;
+ await run('comparison-repair-preflight-readback');
+ const frameWrite=jobs.dispatch(saved.id,'comparison-repair-apply'),{script:frameScript,kind:_k,readOnly:_ro,...frameIdentity}=frameWrite;
+ jobs=createNativeOperationJobs(repo,options);
+ assert.throws(()=>jobs.dispatch(saved.id,'comparison-repair-apply'));
+ const frameResult=await f.run(frameScript);assert.equal(frameResult.status,'updated');
+ jobs.accept(saved.id,{...frameIdentity,result:frameResult});await run('component-readback');
+ assert.equal(jobs.get(saved.id).phase,'component-structure-observed');
+ assert.equal(jobs.get(saved.id).comparisonRepair,undefined);
+ assert.equal(f.figma.root.findAll(()=>true).length,nodeCount);
+ assert.equal(readFileSync(path.join(events,'../comparison-repair.json'),'utf8'),oldClaim);
+ assert.equal(readdirSync(path.join(events,'..')).filter(n=>/^comparison-repair-[a-f0-9]{64}\.json$/.test(n)).length,1);
+ assert.throws(()=>jobs.dispatch(saved.id,'comparison-repair-apply'));
+ await run('component-readback');assert.equal(jobs.get(saved.id).comparisonRepair,undefined);
+
 });
 
 test('rollback preserves an independent edit made after assignment',async()=>{
@@ -154,4 +171,38 @@ test('rollback preserves an independent edit made after assignment',async()=>{
  const result=await f.run(emitNativeComparisonRepairScript(f.plan));
  assert.equal(result.status,'recovery-required',JSON.stringify(result));
  assert(result.unrestored.includes(f.root.id));assert.equal(f.root.height,99);
+});
+
+async function frameFixture(){
+ const f=await fixture();await f.run(emitNativeComparisonRepairScript(f.plan));
+ const board=await f.figma.getNodeByIdAsync(f.input.creation.comparisonBoardId);board.clipsContent=true;
+ // Model the native per-corner defaults absent from the minimal API mock.
+ board.topLeftRadius=board.topRightRadius=board.bottomLeftRadius=board.bottomRightRadius=0;
+ const before=await f.read(),plan=prepareNativeComparisonFrameRepair(f.input,before);
+ return {...f,board,before,plan};
+}
+test('neutral comparison frame correction preserves component clipping, all allocations and repeats without writes',async()=>{
+ const f=await frameFixture(),count=f.figma.root.findAll(()=>true).length;
+ const instance=await f.figma.getNodeByIdAsync(f.input.creation.comparisons[0].instanceId),clip=instance.clipsContent;
+ assert.equal(f.plan.version,2);assert.deepEqual(f.plan.changes,[{nodeId:f.board.id,kind:'comparison-clipping',before:true,after:false}]);
+ assert.equal((await f.run(emitNativeComparisonRepairScript(f.plan,true))).status,'preflight-observed');
+ const script=emitNativeComparisonRepairScript(f.plan);
+ assert.equal((await f.run(script)).status,'updated');assert.equal(f.board.clipsContent,false);assert.equal(instance.clipsContent,clip);
+ assert(nativeComparisonRepairMatches(f.plan,await f.read(),true));assert.equal((await f.run(script)).status,'no-op');
+ assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
+test('frame correction rejects styled or edited wrappers and rolls back only its clipping channel',async()=>{
+ const f=await frameFixture();
+ for(const change of [
+  (r:any)=>r.content.nodes.find((n:any)=>n.id===f.board.id).values.paddingLeft=4,
+  (r:any)=>r.content.nodes.find((n:any)=>n.id===f.board.id).values.fills=[{type:'SOLID',color:{r:1,g:0,b:0}}],
+  (r:any)=>r.content.nodes.find((n:any)=>n.id===f.root.id).values.opacity=.4,
+  (r:any)=>r.content.nodes.find((n:any)=>n.id===f.board.id).metadata.nativeSourceAllocation='foreign',
+ ]){const r=structuredClone(f.before);change(r);assert.throws(()=>prepareNativeComparisonFrameRepair(f.input,r));}
+ let clip=true;
+ Object.defineProperty(f.board,'clipsContent',{configurable:true,get:()=>clip,set:value=>{clip=value;if(value===false)throw Error('simulated setter failure')}});
+ assert.equal((await f.run(emitNativeComparisonRepairScript(f.plan))).status,'rolled-back');assert.equal(f.board.clipsContent,true);
+ Object.defineProperty(f.board,'clipsContent',{configurable:true,get:()=>clip,set:value=>{clip=value;if(value===false)f.board.name='Independent edit'}});
+ assert.equal((await f.run(emitNativeComparisonRepairScript(f.plan))).status,'recovery-required');
+ assert.equal(f.board.clipsContent,true);assert.equal(f.board.name,'Independent edit');
 });

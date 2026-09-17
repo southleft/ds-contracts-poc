@@ -1,5 +1,6 @@
+import {refreshedComparisonPlan} from '../source-reference/react-comparison-refresh.js';
 import { nativeComparisonFixture as fixture } from './native-contract-comparison-test-fixture.js';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createNativeOperationJobs, REACT_NATIVE_FILE_KEY, type NativeOperationJobsOptions } from '../source-reference/native-operation-jobs.js';
@@ -14,6 +15,15 @@ import { revisionOf } from './contract-provenance.js';
 import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from './native-source-observation.js';
 import { prepareNativeContractComparison, type NativeContractComparisonInput } from './native-contract-comparison.js';
 
+
+test('comparison board preserves the main instance outer effects without disabling component clipping',async()=>{
+  const f=await fixture(); const creation=await f.run(f.emit());
+  const board=await f.figma.getNodeByIdAsync(creation.comparisonBoardId);
+  const instance=await f.figma.getNodeByIdAsync(creation.comparisons[0].instanceId);
+  const main=await f.figma.getNodeByIdAsync(f.comparison.parent.creation.variants[0].id);
+  assert.equal(board.clipsContent,false,'the diagnostic frame must not crop native effect outsets');
+  assert.equal(instance.clipsContent,main.clipsContent,'preserve the component clipping decision');
+});
 
 test('shared writer fills an instance of the existing main, retaining editable content and both token contexts', async () => {
   const f = await fixture(), before = await f.run(emitNativeContractReadbackScript(f.comparison.parent));
@@ -167,6 +177,10 @@ test('comparison operation persists through every journal phase and repeat selec
     content: { id: '10000000-0000-4000-8000-000000000011', reportSha256: 'd'.repeat(64), inventorySha256: 'e'.repeat(64) } };
   let current = true, preparations = 0;
   const options: NativeOperationJobsOptions = { prepare: () => { throw Error('unexpected source adapter'); }, reactComparison: {
+    refresh: (selected,operation) => {
+      if (!current) throw Error('source changed');
+      return {request:selected,plan:prepareReactComparisonPlan({operation,content,source:f.source,comparison:f.comparison})};
+    },
     prepare: (selected, operation) => {
       preparations++; assert.deepEqual(selected, request); if (!current) throw Error('source changed');
       return { visual: { id: request.root.ownership.id, reportSha256: request.root.ownership.sha256 },
@@ -200,6 +214,53 @@ test('comparison operation persists through every journal phase and repeat selec
   jobs.accept(saved.id, { ...identity, result: await f.run(script) });
   assert.equal(jobs.get(saved.id).phase, 'component-structure-observed');
   assert.equal(f.figma.root.findAll(() => true).length, count);
+  const directory=path.join(repo,'private/source-native-app/operations',saved.id);
+  const originalPlan=readFileSync(path.join(directory,'plan.json'),'utf8');
+  const originalHeader=readFileSync(path.join(directory,'operation.json'),'utf8');
+  const originalEvent=readFileSync(path.join(directory,'events/00000007.json'),'utf8');
+  const creation=JSON.parse(readFileSync(path.join(directory,'events/00000005.json'),'utf8')).envelope.result;
+  const main=await f.figma.getNodeByIdAsync(f.comparison.parent.creation.variants[0].id);
+  main.opacity=0.5;f.comparison.parent.component.variants[0].spec.opacity=0.5;
+  f.comparison.receipt=await f.run(emitNativeContractReadbackScript(f.comparison.parent));
+  // The mock does not propagate main edits; model the existing native instance.
+  const instance=await f.figma.getNodeByIdAsync(creation.comparisons[0].instanceId);instance.opacity=0.5;
+  const refreshCandidate=options.reactComparison!.refresh!(request,{id:saved.id,fileKey:REACT_NATIVE_FILE_KEY});
+  const originalParsed=JSON.parse(originalPlan);
+  for(const change of [
+    (r:any)=>{r.request.content.reportSha256='f'.repeat(64)},
+    (r:any)=>{r.plan.plan.comparison.specs[0].name='different content'},
+    (r:any)=>{r.plan.plan.comparison.mainId='different main'},
+    (r:any)=>{r.plan.plan.comparison.parent.creation.nodes[0].id='different allocation'},
+    (r:any)=>{r.plan.plan.comparison.projection.source.programSha256='f'.repeat(64)},
+    (r:any)=>{r.plan.plan.tokenInput.scopeId='different tokens'},
+  ]) {
+    const modified=structuredClone(refreshCandidate);change(modified);modified.plan.revision=revisionOf(modified.plan.plan);
+    assert.throws(()=>refreshedComparisonPlan(originalParsed,request,modified),/refresh-changed-content-or-identity/);
+  }
+  assert.equal(jobs.get(saved.id).sourceCurrent,false,'old result cannot qualify a corrected main');
+  const refreshed=jobs.retryObservation(saved.id);
+  assert.equal(refreshed.readOnly,true);
+  jobs=createNativeOperationJobs(repo,options);
+  assert.equal(jobs.pendingCommand(saved.id)!.script,refreshed.script,'restart retains pinned read');
+  const {script:refreshScript,readOnly:_rr,kind:_rk,...refreshIdentity}=refreshed;
+  jobs.accept(saved.id,{...refreshIdentity,result:await f.run(refreshScript)});
+  jobs=createNativeOperationJobs(repo,options);
+  assert.equal(jobs.get(saved.id).phase,'component-structure-observed');
+  assert.equal(jobs.get(saved.id).sourceCurrent,true);
+  assert.equal(jobs.get(saved.id).comparisonBaselineRefreshed,true);
+  assert.equal(f.figma.root.findAll(()=>true).length,count);
+  assert.equal(readFileSync(path.join(directory,'plan.json'),'utf8'),originalPlan);
+  assert.equal(readFileSync(path.join(directory,'operation.json'),'utf8'),originalHeader);
+  assert.equal(readFileSync(path.join(directory,'events/00000007.json'),'utf8'),originalEvent);
+  assert.throws(()=>jobs.dispatch(saved.id,'component-create'),/read-only/);
+  const repeat=jobs.retryObservation(saved.id),{script:repeatScript,readOnly:_ro,kind:_kind,...repeatIdentity}=repeat;
+  jobs.accept(saved.id,{...repeatIdentity,result:await f.run(repeatScript)});
+  assert.equal(jobs.get(saved.id).sourceCurrent,true);
+  instance.opacity=0.8;
+  const conflict=jobs.retryObservation(saved.id),{script:conflictScript,readOnly:_cr,kind:_ck,...conflictIdentity}=conflict;
+  jobs.accept(saved.id,{...conflictIdentity,result:await f.run(conflictScript)});
+  assert.equal(jobs.get(saved.id).phase,'component-observation-refused');
+  assert.equal(instance.opacity,0.8);
   current = false;
   assert.equal(jobs.get(saved.id).sourceCurrent, false);
   assert.throws(() => jobs.prepare(request), /source changed/);
@@ -526,4 +587,14 @@ test('comparison selects Boolean variants without coercing strings or omitted in
   contract.props[0].bindings.code.values = {false:'enabled',true:'disabled'};
   assert.equal(reactComparisonVariant(contract,{disabled:'disabled'}),'disabled=true');
   assert.throws(()=>reactComparisonVariant(contract,{disabled:true}),/value-unqualified/);
+});
+
+test('comparison export refuses render bounds that change while rasterization is pending',async()=>{
+ const f=await observedFixture(),instance=await f.figma.getNodeByIdAsync(f.input.creation.comparisons[0].instanceId);
+ Object.defineProperty(instance,'absoluteRenderBounds',{configurable:true,writable:true,value:{x:-2,y:-1,width:instance.width+4,height:instance.height+4}});
+ const original=instance.exportAsync.bind(instance);
+ instance.exportAsync=async(...args:any[])=>{const png=await original(...args);instance.absoluteRenderBounds.x-=1;return png;};
+ const receipt=await f.run(emitNativeContractComparisonReadbackScript(f.input,true));
+ assert.equal(receipt.status,'refused');
+ assert(receipt.content.problems.includes('native-source-readback-export-bounds-changed'));
 });

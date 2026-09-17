@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **59** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **60** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -849,7 +849,7 @@ A sign convention, a first-wins tie-break, and a token binding that stops at one
 
 **Why.** A decision by OMISSION, which is the purest form the register can record: the schema declares the field, the emitter writes it, the runtime applies it, the inverse reads it back — and no producer ever sets it, because nothing reads the CSS property. Every link of the chain exists except the first. Capture is not the gap: window.__ALL_PROPS records every Chromium longhand including flex-wrap. This is a lowering hole, not a capture hole.
 
-### `overlap` — 1 rule (0 implemented, 0 proposed, 1 wall)
+### `overlap` — 2 rules (1 implemented, 0 proposed, 1 wall)
 
 `layout.overlap` is the mirror image: the INVERSE can detect it on a canvas a designer built by hand, and the forward direction has no code path to produce it. The Figma emitter reads `overlap` only inside comments.
 
@@ -886,6 +886,12 @@ Read nowhere, and more dangerous than a plain drop: it mints as a channel no reg
 - visual reordering entirely; and, worse than a drop, a channel name no registry knows can make validateContract refuse the whole component
 
 **Why.** Cited to the tab-size incident recorded at this very site, because the shape is identical: a page-global numeric property nobody registered reached the mint, became a channel the registry did not know, and made validateContract refuse 32 whole components by name. `order` has every one of those properties today. Registered as a WALL because the honest lowering is refusal — CSS `order` reorders without moving the DOM, and Figma has only child order, so the two are not the same fact.
+
+#### `emit.padding-box-background-plane`
+
+Solid `background-clip: padding-box` on a flex root or frame lowers to an absolute rectangle behind content. It retains the colour binding, subtracts a uniform border width from each edge, and uses `max(0, outer radius - border width)` for the inner radius. The outer layout, stroke, effects and radius bindings stay on the original node. Native stretch constraints follow content-driven box resizing.
+
+Native creation and populated comparison tests verify the paint geometry and reject altered dimensions, insets, radii, order and bindings. Other clip modes, multiple backgrounds, asymmetric borders/radii, gradients and grid retain explicit code-only receipts. Inner radii are derived during compilation; direct native radius-token edits need recompilation. Reverse reconstruction and migration of existing app output remain unqualified. The register's round-trip verdict is therefore `untested`.
 
 ## What this register does not do
 

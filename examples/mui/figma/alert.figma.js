@@ -68,7 +68,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-info",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/info/standard",
                   "iconSize": 22
                 }
@@ -162,7 +162,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-info",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/info/filled",
                   "iconSize": 22
                 }
@@ -256,7 +256,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-info",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 9 H 13 V 7 H 11 M 12 20 C 7.59 20 4 16.41 4 12 C 4 7.59 7.59 4 12 4 C 16.41 4 20 7.59 20 12 C 20 16.41 16.41 20 12 20 M 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 A 10 10 0 0 0 12 2 M 11 17 H 13 V 11 H 11 V 17 Z\" fill=\"#0288d1\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/info/outlined",
                   "iconSize": 22
                 }
@@ -350,7 +350,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-error",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/error/standard",
                   "iconSize": 22
                 }
@@ -444,7 +444,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-error",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/error/filled",
                   "iconSize": 22
                 }
@@ -538,7 +538,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-error",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 15 H 13 V 17 H 11 Z M 11 7 H 13 V 13 H 11 Z M 11.99 2 C 6.47 2 2 6.48 2 12 S 6.47 22 11.99 22 C 17.52 22 22 17.52 22 12 S 17.52 2 11.99 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/error/outlined",
                   "iconSize": 22
                 }
@@ -632,7 +632,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-warning",
-                  "svg": "<svg viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/warning/standard",
                   "iconSize": 22
                 }
@@ -726,7 +726,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-warning",
-                  "svg": "<svg viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/warning/filled",
                   "iconSize": 22
                 }
@@ -820,7 +820,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-warning",
-                  "svg": "<svg viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 23 23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 5.99 L 19.53 19 H 4.47 L 12 5.99 M 12 2 L 1 21 H 23 L 12 2 Z M 13 16 H 11 V 18 H 13 V 16 Z M 13 10 H 11 V 14 H 13 V 10 Z\" fill=\"#ed6c02\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/warning/outlined",
                   "iconSize": 22
                 }
@@ -914,7 +914,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-success",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/success/standard",
                   "iconSize": 22
                 }
@@ -1008,7 +1008,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-success",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#ffffff\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#ffffff\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/success/filled",
                   "iconSize": 22
                 }
@@ -1102,7 +1102,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "alert-icon-success",
-                  "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
+                  "svg": "<svg height=\"22\" width=\"22\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 A 8 8 0 0 1 12 4 C 12.76 4 13.5 4.11 14.2 4.31 L 15.77 2.74 C 14.61 2.26 13.34 2 12 2 A 10 10 0 0 0 2 12 A 10 10 0 0 0 12 22 A 10 10 0 0 0 22 12 M 7.91 10.08 L 6.5 11.5 L 11 16 L 21 6 L 19.59 4.58 L 11 13.17 L 7.91 10.08 Z\" fill=\"#2e7d32\"/></svg>",
                   "svgPaintVar": "imported/alert/alert-icon/color/success/outlined",
                   "iconSize": 22
                 }

@@ -75,7 +75,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-unchecked",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"#00000099\"/></svg>",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 5 V 19 H 5 V 5 H 19 M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z\" fill=\"#00000099\"/></svg>",
                   "svgPaintVar": "imported/checkbox/icon/color/unchecked",
                   "iconSize": 24,
                   "fillW": true
@@ -139,7 +139,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-checked",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"#1976d2\"/></svg>",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\" fill=\"#1976d2\"/></svg>",
                   "svgPaintVar": "imported/checkbox/icon/color/checked",
                   "iconSize": 24,
                   "fillW": true
@@ -203,7 +203,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-indeterminate",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"#1976d2\"/></svg>",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 3 H 5 C 3.9 3 3 3.9 3 5 V 19 C 3 20.1 3.9 21 5 21 H 19 C 20.1 21 21 20.1 21 19 V 5 C 21 3.9 20.1 3 19 3 Z M 17 13 H 7 V 11 H 17 V 13 Z\" fill=\"#1976d2\"/></svg>",
                   "svgPaintVar": "imported/checkbox/icon/color/indeterminate",
                   "iconSize": 24,
                   "fillW": true

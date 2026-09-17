@@ -5,7 +5,74 @@ import { mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createNativeUpdatePlans } from '../source-reference/native-update-plans.js';
-import { prepareNativeContractUpdate, emitNativeContractUpdateScript, verifyNativeContractUpdate } from './native-contract-update.js';
+import { prepareNativeContractUpdate, emitNativeContractUpdateScript, verifyNativeContractUpdate, nativeContractUpdateMatches } from './native-contract-update.js';
+
+async function shadowFixture() {
+  const f = await fixture(), input = structuredClone(f.input);
+  input.desired.component = structuredClone(input.before.component);
+  for (const variant of input.desired.component.variants) variant.spec.effectStack = [
+    { x: 0, y: 0, radius: 0, spread: 1, color: { r: 10/255, g: 10/255, b: 10/255, a: 0.1 } },
+    { x: 0, y: 1, radius: 2, color: { r: 0, g: 0, b: 0, a: 0.05 } },
+  ];
+  return { ...f, input, plan: prepareNativeContractUpdate(input).plan };
+}
+
+test('root shadow correction preserves nodes, verifies complete stacks, repeats and rolls back', async () => {
+  const f = await shadowFixture(), ids = f.figma.root.findAll(() => true).map((n:any)=>n.id);
+  assert.equal(f.plan.kind, 'native-contract-shadow-update');
+  const preflight = await f.run(emitNativeContractUpdateScript(f.plan,'apply',true));
+  assert.equal(preflight.status,'preflight-observed',JSON.stringify(preflight.problems));
+  const applied = await f.run(emitNativeContractUpdateScript(f.plan));
+  assert.equal(applied.status,'updated',JSON.stringify(applied.problems));
+  assert.equal(verifyNativeContractUpdate(f.plan,applied.observation).status,'supported-structure-observed');
+  assert.ok(nativeContractUpdateMatches(f.plan,applied.observation,true));
+  const nativeFloats = structuredClone(applied.observation);
+  for(const row of nativeFloats.nodes.filter((n:any)=>n.type==='COMPONENT')) for(const e of row.values.effects) {
+    e.color.r=Math.fround(e.color.r);e.color.a=Math.fround(e.color.a);e.showShadowBehindNode=true;e.boundVariables={};
+  }
+  assert.ok(nativeContractUpdateMatches(f.plan,nativeFloats,true));
+  nativeFloats.nodes.find((n:any)=>n.type==='COMPONENT').values.effects[0].color.a=0;
+  assert.equal(nativeContractUpdateMatches(f.plan,nativeFloats,true),false);
+  assert.deepEqual(f.figma.root.findAll(()=>true).map((n:any)=>n.id),ids);
+  assert.equal((await f.run(emitNativeContractUpdateScript(f.plan))).status,'no-op');
+  const rollback=await f.run(emitNativeContractUpdateScript(f.plan,'rollback'));
+  assert.equal(rollback.status,'updated');assert.ok(nativeContractUpdateMatches(f.plan,rollback.observation));
+});
+
+test('shadow correction refuses concurrent edits, mixed changes and invalid effects', async () => {
+  const f=await shadowFixture();
+  const mixed=structuredClone(f.input);mixed.desired.component.variants[0].spec.opacity=0.8;
+  assert.throws(()=>prepareNativeContractUpdate(mixed),/shadow-mixed-channels/);
+  const invalid=structuredClone(f.input);invalid.desired.component.variants[0].spec.effectStack![0].color.a=2;
+  assert.throws(()=>prepareNativeContractUpdate(invalid),/shadow-values-invalid/);
+  f.nodes[0].effects=[{type:'LAYER_BLUR',radius:4,visible:true}];
+  const refused=await f.run(emitNativeContractUpdateScript(f.plan));
+  assert.equal(refused.status,'refused');assert.deepEqual(refused.changes,[]);
+  assert.equal(f.nodes[0].effects[0].type,'LAYER_BLUR');
+});
+
+test('restored shadow refusals may change only the generated description count',async()=>{
+  const f=await shadowFixture(),input=structuredClone(f.input);
+  input.before.component.codeOnlyFacts=[{part:'root',kind:'shadow',channel:'box-shadow',value:'old unsupported stack',
+    reason:'unsupported',variants:{count:2,of:2}}];
+  input.before.component.description='Fixture † (1 code-only facts — see plugin report)';
+  input.desired.component.codeOnlyFacts=[];input.desired.component.description='Fixture';
+  const plan=prepareNativeContractUpdate(input).plan;
+  assert.equal(plan.after.component.description,input.before.component.description);
+  assert.deepEqual(plan.after.component.codeOnlyFacts,[]);
+  input.desired.component.description='unrelated replacement';
+  assert.throws(()=>prepareNativeContractUpdate(input),/shadow-description-change/);
+});
+
+test('shadow assignment failure restores attempted changes and preserves independent edits',async()=>{
+  const f=await shadowFixture();let effects=f.nodes[1].effects;
+  Object.defineProperty(f.nodes[1],'effects',{configurable:true,get:()=>effects,set:(next:any[])=>{
+    if(next.length){f.nodes[0].name='independent rename';throw Error('effect assignment failed');}effects=next;
+  }});
+  const result=await f.run(emitNativeContractUpdateScript(f.plan));
+  assert.equal(result.status,'rolled-back',JSON.stringify(result.problems));
+  assert.ok(f.nodes.every((n:any)=>n.effects.length===0));assert.equal(f.nodes[0].name,'independent rename');
+});
 
 test('owned scalar update preserves identities, verifies, repeats without writes, and rolls back', async () => {
   const f = await fixture(), ids = f.figma.root.findAll(() => true).map((n:any)=>n.id);
