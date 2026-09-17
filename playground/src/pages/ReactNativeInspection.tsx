@@ -5,6 +5,7 @@ import type { NativeOperationSnapshot } from '../../../source-reference/native-o
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
 import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
 import type { SourceFrame } from '../../../source-reference/source-framing';
+import type { SourceTypography } from '../../../source-reference/react-source-framing';
 import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 import type { NativeContractUpdatePlan } from '../../../core/native-contract-update';
@@ -37,6 +38,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [rows, setRows] = useState<Operation[]>([]), [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
+  const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
   const root = `/api/source-reference/react/${referenceId}`;
   const active = rows.some(r => (r.connection.paired && !r.connection.finished) || r.content?.phase === 'running' || r.updates?.some(u=>u.connection?.paired&&!u.connection.finished));
   useEffect(() => {
@@ -54,6 +56,16 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     const timer = active ? setInterval(() => void load(), 4000) : undefined;
     return () => { stopped = true; if (timer) clearInterval(timer); };
   }, [root, active]);
+  async function inspectTypography(parentId: string, key: string) {
+    setBusy(true); setError('');
+    try {
+      const response = await fetch(`${root}/native-operation/${parentId}/source-typography`, { method: 'POST' });
+      const result = await response.json();
+      if (!response.ok) throw Error(result.error);
+      setTypography(old => ({ ...old, [key]: result.typography }));
+    } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
+    finally { setBusy(false); }
+  }
   async function action(route: string, id?: string) {
     setBusy(true); setError('');
     try {
@@ -215,6 +227,22 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             <div style={{ padding: comparison || initial ? 8 : 0, ...(comparison ? nativeImageFraming(row.sourceFrame,image).native : {}), width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${initial ? 'initial state' : comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
           </figure>)}
           </div>
+          {comparison && op.sourceCurrent && op.imageObservation.attemptId && <details>
+            <summary>Compare text measurements</summary>
+            <p>Matching font names do not prove matching font versions. This diagnostic compares browser text advances with native text-box widths. Wrapping, box sizing and renderer rounding can also differ; it does not grade fidelity or change either output.</p>
+            <button type="button" disabled={busy} onClick={() => void inspectTypography(row.parentOperationId!, `${referenceId}/${id}/${op.imageObservation!.attemptId}`)}>Measure original text</button>
+            {typography[`${referenceId}/${id}/${op.imageObservation.attemptId}`]?.rows.map((text,index) => {
+              const measured = typography[`${referenceId}/${id}/${op.imageObservation!.attemptId}`];
+              const matches = op.imageObservation!.images.flatMap(image => image.textBoxes ?? []).filter(box => box.text === text.text);
+              const native = matches.length === 1 && measured.rows.filter(row => row.text === text.text).length === 1 ? matches[0] : undefined;
+              return <section key={index} aria-label={`Text measurement: ${text.text}`}>
+                <h4>{text.text}</h4>
+                <p>Original: {text.family} · {text.face} · {text.size} · weight {text.weight}. Text advance: {text.width.toFixed(2)} px · {text.lines} line rectangle(s).</p>
+                {native ? <p>Native: {native.family} · {native.style} · {native.size} px. Text box: {native.width.toFixed(2)} px.{text.lines === 1 ? ` Difference: ${(native.width-text.width).toFixed(2)} px.` : ' Wrapped text is not a single-line width comparison.'}</p>
+                  : <p>No unique native text match; repeated or missing strings require a structural mapping.</p>}
+              </section>;
+            })}
+          </details>}
         </details>}
       </details>;
     })}

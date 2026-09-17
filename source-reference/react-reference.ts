@@ -4,7 +4,7 @@ import type { ReactInitialNativeRequest } from './react-initial-native-request.j
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
-import { createReactSourceFramingStore } from './react-source-framing.js';
+import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
@@ -224,6 +224,21 @@ export function createReactReferenceService(
           json(res, 200, { inspection: initialStates.read(initialRoute[1], initialRoute[2]) ?? null });
         } else throw Error('react-initial-method-invalid');
       } catch { json(res, 409, { error: 'Initial-state inspection unavailable. Load unchanged originals and prepare a supported root from the same saved structure observation first.' }); }
+      return;
+    }
+    const typography = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/source-typography$/.exec(route);
+    if (typography && req.method === 'POST') {
+      try {
+        if (!native || !reference || reference.id !== typography[1] || !reactReferenceUnchanged(reference))
+          throw Error('react-source-typography-reference-unavailable');
+        const request = native().jobs.reactRequest(typography[2]);
+        if (request.referenceId !== reference.id) throw Error('react-source-typography-reference-mismatch');
+        const input = loadReactFrameInput(repoRoot, reference, request);
+        const measured = await measureReactSourceTypography(input);
+        if (!reactReferenceUnchanged(reference) || loadReactFrameInput(repoRoot, reference, request).sourceSha256 !== measured.sourceSha256)
+          throw Error('react-source-typography-source-changed');
+        json(res, 200, { typography: measured });
+      } catch { json(res, 409, { error: 'Original typography could not be measured unchanged. Mixed text and nested inline content are not yet supported by this diagnostic.' }); }
       return;
     }
     const initialImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/initial-source\/(\d+)\.png$/.exec(route);

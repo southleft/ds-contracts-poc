@@ -240,6 +240,10 @@ test('native shadow bounds align logical origins without rescaling or cropping e
  const read=()=>collectExpectedNativeImages(input,[{id:'card',instanceId:'instance'}],raw);
  const actual=read();assert.equal(actual.observation.status,'collected');
  const image=actual.observation.images[0];assert.deepEqual(image.layoutOffset,{x:2,y:1});
+ const text={id:'text',type:'TEXT',parentId:'instance',values:{width:94,fontSize:14,characters:'Save changes',fontName:{family:'Inter',style:'Medium'}}};
+ (raw.nodes as any[]).push(text,{...text,id:'foreign',parentId:'other'}, {...text,id:'cycle',parentId:'cycle'});
+ assert.deepEqual(read().observation.images[0].textBoxes,[{nodeId:'text',text:'Save changes',width:94,family:'Inter',style:'Medium',size:14}],
+  'only text in the exported instance is compared; foreign nodes and cycles never match');
  assert.equal(actual.bytes.get(image.sha256)!.equals(pixels),true,'pixels remain the original native export');
  const frame={bounds:{x:32,y:40,width:360,height:200},crop:{x:24,y:32,width:376,height:216}} as import('./source-framing.js').SourceFrame;
  assert.deepEqual(nativeImageFraming(frame,image),{source:{paddingLeft:0,paddingTop:0},native:{paddingLeft:6,paddingTop:7}});

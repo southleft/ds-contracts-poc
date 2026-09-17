@@ -11,6 +11,7 @@ export interface NativeImageSummary {
   layoutSize?: { width: number; height: number };
   /** Logical layout origin inside the unscaled export, from native bounds. */
   layoutOffset?: { x: number; y: number };
+  textBoxes?: Array<{ nodeId: string; text: string; width: number; family: string; style: string; size: number }>;
 }
 export interface NativeImageObservation {
   status: "collected" | "unavailable";
@@ -106,7 +107,22 @@ export function collectExpectedNativeImages(input: { operation: { id: string; fi
             Math.ceil(render.x+render.width)-Math.floor(render.x)===width && Math.ceil(render.y+render.height)-Math.floor(render.y)===height)
           layoutOffset={x:layout.x-Math.floor(render.x),y:layout.y-Math.floor(render.y)};
       }
-      images.push({ caseId: c.id, sha256, width, height, ...(layoutSize ? { layoutSize } : {}), ...(layoutOffset ? { layoutOffset } : {}) });
+      const nodes = new Map<string, any>((r.nodes ?? []).map((n: any) => [n.id, n]));
+      const within = (id: string) => {
+        const visited = new Set<string>();
+        while (id !== c.instanceId) {
+          if (visited.has(id) || !nodes.has(id)) return false;
+          visited.add(id); id = nodes.get(id).parentId;
+        }
+        return true;
+      };
+      const textBoxes = [...nodes.values()].filter(n => n.type === 'TEXT' && within(n.id)).flatMap(n => {
+        const v = n.values;
+        return v && typeof v.characters === 'string' && typeof v.fontName?.family === 'string' &&
+          typeof v.fontName?.style === 'string' && Number.isFinite(v.width) && v.width > 0 && Number.isFinite(v.fontSize) && v.fontSize > 0
+          ? [{ nodeId: n.id, text: v.characters, width: v.width, family: v.fontName.family, style: v.fontName.style, size: v.fontSize }] : [];
+      });
+      images.push({ caseId: c.id, sha256, width, height, ...(layoutSize ? { layoutSize } : {}), ...(layoutOffset ? { layoutOffset } : {}), ...(textBoxes.length ? { textBoxes } : {}) });
       bytes.set(sha256, png);
     }
     return {
