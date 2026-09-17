@@ -19,6 +19,7 @@ import {
   requireOpaqueSandbox,
 } from "./replay.js";
 import { captureValidatedTree } from "./capture.js";
+import { observeCheckboxBehavior, type CheckboxBehavior } from './control-behavior.js';
 import { reactReferenceCases } from "./react-reference-cases.js";
 import {
   reactReferenceProfile,
@@ -42,6 +43,7 @@ export interface ReactValidationRow {
     census?: unknown;
   };
   negativeControls?: { name: string; rejected: boolean; problems: string[] }[];
+  behavior?: CheckboxBehavior & { restored: boolean };
 }
 export interface ReactValidation {
   id: string;
@@ -175,6 +177,7 @@ export function startReactValidation(
             "observe.ts",
             "replay.ts",
             "capture.ts",
+            "control-behavior.ts",
             "../extract/computed/capture.ts",
             "../extract/computed/lib.ts",
           ].map((file) => [
@@ -234,6 +237,24 @@ export function startReactValidation(
               flag: "wx",
             });
             row.sourceImage = sha(source.screenshot);
+            if (sourceTree?.status === 'captured' && profile.associatedLabelText !== undefined) {
+              const checked = profile.probes?.state.properties?.ariaChecked;
+              const disabled = profile.probes?.state.properties?.disabled;
+              if (!['false','true','mixed'].includes(String(checked)) || typeof disabled !== 'boolean')
+                throw Error('behavior-profile-incomplete');
+              const behavior = await observeCheckboxBehavior(page, {
+                selector: profile.path[0], checked: checked as 'false' | 'true' | 'mixed', disabled, label: profile.associatedLabelText,
+              }, async () => {
+                await page.reload({ waitUntil: 'load' });
+                await page.locator(profile.path[0]).waitFor({ timeout: 15000 });
+                await requireOpaqueSandbox(page);
+                await page.evaluate(() => document.fonts.ready);
+              });
+              const restored = await captureValidatedTree(page, profile, failures, '#root', '--');
+              row.behavior = { ...behavior, restored: restored.status === 'captured' &&
+                restored.treeSha256 === sourceTree.treeSha256 && restored.sourcePngSha256 === sourceTree.sourcePngSha256 };
+              save('behavior.json', row.behavior);
+            }
             failures.dispose();
           } finally {
             await context.close();
@@ -257,6 +278,10 @@ export function startReactValidation(
           });
           row.replayImage = sha(replay.screenshot);
           row.problems = [...source!.problems, ...replay.problems];
+          if (row.behavior) {
+            row.problems.push(...row.behavior.problems);
+            if (!row.behavior.restored) row.problems.push('behavior-original-not-restored');
+          }
           if (source!.secondSha256 !== replay.secondSha256)
             row.problems.push("source-replay-pixels-differ");
           const replayTree = replay.inspection;

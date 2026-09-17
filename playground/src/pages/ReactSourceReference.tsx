@@ -259,6 +259,10 @@ export function ReactSourceReference() {
                     {row.negativeControls
                       ? ` · ${row.negativeControls.filter((n) => n.rejected).length}/${row.negativeControls.length} negative controls rejected`
                       : ""}
+                    {row.behavior && <details><summary>Original Checkbox interactions · {row.behavior.status === 'observed' && row.behavior.restored ? 'observed and restored' : 'not verified'}</summary>
+                      <p>Original React behavior only. This does not establish Figma interactions or generated React behavior.</p>
+                      <ul>{row.behavior.rows.map(action => <li key={action.action}>{action.action === 'space' ? 'Space key' : 'Associated label'}: {action.before} → {action.after}; expected {action.expected} · {action.passed ? 'observed' : 'failed'}</li>)}</ul>
+                    </details>}
                   </li>
                 ))}
               </ul>
