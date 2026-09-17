@@ -23,7 +23,7 @@ function correctionValue(value: NativeContractUpdatePlan['changes'][number]['bef
 
 interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested';
-  initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
+  initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes'];
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
@@ -83,20 +83,30 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   }
   const selected = ownership?.rows.find(r => r.id === selectedCase);
   const ready = ownership?.state === 'complete' && ownership.sourceUnchanged && selected?.matched && selected.rootMatrix?.draft?.status === 'native-compiled';
+  const selectedMatrix = ownership?.rows.find(row => row.id === selectedCase)?.rootMatrix;
+  const reusableRoot = selectedMatrix && rows.find(row => row.kind === 'root' && row.caseId !== selectedCase &&
+    (row.operation.sourceCurrent || row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent)) &&
+    JSON.stringify(ownership?.rows.find(source => source.id === row.caseId)?.rootMatrix) === JSON.stringify(selectedMatrix));
   return <section className="react-native-inspection">
     <h3>Inspect editable Figma roots</h3>
     <p>Create a native draft from the observed root styles and properties. Its content slot stays empty and editable.
       Prepare separate caller-content instances for comparison below. Visual fidelity, stateful behavior and the complete composed component remain unqualified.</p>
     {loading && <p role="status">{rows.length ? 'Refreshing saved Figma inspections…' : 'Loading saved Figma inspections…'}</p>}
-    <button type="button" disabled={busy || loading || !ready} onClick={() => void action(`native/${selectedCase}`)}>
+    {reusableRoot ? <>
+      <p>This case uses the same observed component family as {reusableRoot.caseId}. Compare its content using that existing native main.</p>
+      <button type="button" disabled={busy || loading || !ready}
+        onClick={() => void action(`native-operation/${reusableRoot.operation.id}/compare-case/${selectedCase}`)}>
+        {busy ? 'Preparing comparison…' : `Compare ${selectedCase} using existing main`}
+      </button>
+    </> : <button type="button" disabled={busy || loading || !ready} onClick={() => void action(`native/${selectedCase}`)}>
       Prepare {selectedCase} for Figma
-    </button>
+    </button>}
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
     {error && <p role="alert">{error}</p>}
     <ReactInitialInspection referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} nativeSaved={rows.some(r => r.kind === 'initial' && r.caseId === selectedCase)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
     {rows.map(row => {
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison', initial = row.kind === 'initial';
-      const savedComparison = rows.find(r => r.parentOperationId === id);
+      const savedComparison = rows.find(r => r.parentOperationId === id && r.caseId === row.caseId);
       const corrected = row.updates?.some(update => update.operation?.phase === 'update-verified' && update.operation.sourceCurrent);
       const currentProblems = op.problems.filter(problem => !corrected || problem !== 'native-operation-source-evidence-unavailable');
       return <details key={id} open={row.caseId === selectedCase}>
@@ -208,15 +218,15 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           <p>{initial ? 'These are observed initial-state mains. Original and native pixels are shown without resizing. Structure and image presence do not qualify visual fidelity or runtime behavior.' : comparison ? 'This export comes from the saved native instance with caller content. Image presence alone does not establish visual fidelity.' : op.sourceOwnedContent ? 'These mains retain the component’s own observed internal content. Other inputs, runtime interactions and visual fidelity remain unqualified.' : 'These are empty component mains. They are not comparisons against the caller’s content or a passing fidelity result.'}</p>
           {comparison && <>
             {!row.sourceFrame && <button type="button" disabled={busy || !op.sourceCurrent}
-              onClick={() => void action(`native-operation/${row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
+              onClick={() => void action(`native-operation/${row.sourceOperationId ?? row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
             {row.sourceFrameProblem && <p role="alert">{row.sourceFrameProblem}</p>}
-            <p>{row.sourceFrame ? 'Original pixels cropped around independently measured source bounds, with up to 8 px of surrounding context. Both images use 1 image pixel per CSS pixel on white surfaces. Where native render bounds are available, layout origins align from geometry; no resizing or best-fit alignment.' : 'The original includes its browser stage. Measure its frame for an unscaled component comparison.'} <a href={`${root}/native-operation/${row.parentOperationId}/source.png`} target="_blank" rel="noreferrer">Open full original</a></p>
+            <p>{row.sourceFrame ? 'Original pixels cropped around independently measured source bounds, with up to 8 px of surrounding context. Both images use 1 image pixel per CSS pixel on white surfaces. Where native render bounds are available, layout origins align from geometry; no resizing or best-fit alignment.' : 'The original includes its browser stage. Measure its frame for an unscaled component comparison.'} <a href={`${root}/native-operation/${row.sourceOperationId ?? row.parentOperationId}/source.png`} target="_blank" rel="noreferrer">Open full original</a></p>
           </>}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'flex-start' }}>
           {comparison && <figure style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
             <figcaption>Original React · unchanged source{row.sourceFrame && <><br />Layout: {row.sourceFrame.bounds.width.toFixed(2)} × {row.sourceFrame.bounds.height.toFixed(2)} px</>}</figcaption>
             <div style={{...nativeImageFraming(row.sourceFrame,op.imageObservation?.images[0]).source,width:'max-content',backgroundColor:'white'}}><img alt={`Original React ${row.caseId}`} style={{ maxWidth: 'none', backgroundColor: 'white', ...(row.sourceFrame ? { width: row.sourceFrame.crop.width, height: row.sourceFrame.crop.height } : {}) }}
-              src={`${root}/native-operation/${row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} /></div>
+              src={`${root}/native-operation/${row.sourceOperationId ?? row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} /></div>
           </figure>}
           {op.imageObservation.images.map(image => <figure key={image.caseId} style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
             {initial && row.initialStates?.filter(state => 'variant:' + state.variant === image.caseId).map(state => <div key={state.observation}>
@@ -232,7 +242,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           {comparison && op.sourceCurrent && op.imageObservation.attemptId && <details>
             <summary>Compare text measurements</summary>
             <p>Matching font names do not prove matching font versions. This diagnostic compares browser text advances with native text-box widths. Wrapping, box sizing and renderer rounding can also differ; it does not grade fidelity or change either output.</p>
-            <button type="button" disabled={busy} onClick={() => void inspectTypography(row.parentOperationId!, `${referenceId}/${id}/${op.imageObservation!.attemptId}`)}>Measure original text</button>
+            <button type="button" disabled={busy} onClick={() => void inspectTypography((row.sourceOperationId ?? row.parentOperationId)!, `${referenceId}/${id}/${op.imageObservation!.attemptId}`)}>Measure original text</button>
             {typography[`${referenceId}/${id}/${op.imageObservation.attemptId}`]?.rows.map((text,index) => {
               const measured = typography[`${referenceId}/${id}/${op.imageObservation!.attemptId}`];
               const matches = op.imageObservation!.images.flatMap(image => image.textBoxes ?? []).filter(box => box.text === text.text);

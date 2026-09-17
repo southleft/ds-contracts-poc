@@ -1644,6 +1644,12 @@ export function createNativeOperationJobs(
       if (!isReactNativeRequest(header.request)) fail('react-operation-required');
       return structuredClone(header.request);
     },
+    reactSourceRequest(id: string): ReactNativeRequest {
+      const { header } = load(id);
+      const request = isReactComparisonRequest(header.request) ? header.request.root : header.request;
+      if (!isReactNativeRequest(request)) fail('react-operation-required');
+      return structuredClone(request);
+    },
     verifiedReactObservation(id: string) {
       const loaded = load(id);
       if (!isReactNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
@@ -1696,7 +1702,7 @@ export function createNativeOperationJobs(
         return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
           ...(request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
-          ...(comparison ? { parentOperationId: comparison.parentOperationId } : {}),
+          ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 ? id : comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];
       });
       });

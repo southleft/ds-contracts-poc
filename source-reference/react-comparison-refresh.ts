@@ -14,7 +14,7 @@ export function refreshedComparisonPlan(original: Plan, request: ReactComparison
   const normalizedRequest = structuredClone(refresh.request);
   // A composed mapping revision includes compiler diagnostics. All original
   // source/archive pins remain identical; actual mappings are compared below.
-  if (request.version === 2 && normalizedRequest.version === 2) normalizedRequest.composition = request.composition;
+  if (request.composition && normalizedRequest.composition) normalizedRequest.composition = request.composition;
   if (!same(normalizedRequest,request) || refresh.plan.revision !== revisionOf(refresh.plan.plan)) fail();
   const normalized = structuredClone(refresh.plan.plan), old = original.plan;
   const pairs = [[old.comparison,normalized.comparison],
