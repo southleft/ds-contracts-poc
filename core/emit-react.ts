@@ -642,7 +642,9 @@ export function generateTsx(
       // dropping contract visibleWhen (AUDIT-ROUND-1: emitter-drops-
       // visibleWhen-on-component-parts).
       const instance =
-        text !== undefined
+        part.parts !== undefined
+          ? `<${dep.name}${attrs}><>\n${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('\n')}\n</></${dep.name}>`
+          : text !== undefined
           ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
           : `<${dep.name}${attrs} />`;
       // Round 2 iteration 9 — per-instance overrides ride a structural

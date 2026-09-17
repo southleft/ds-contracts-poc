@@ -2533,6 +2533,11 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v4, gap G1. */
     visibleWhen: VisibleWhenSchema.optional(),
     optional: z.boolean().optional(),
+    /** Nested anatomy. On a component reference, these are caller-owned
+     *  React children supplied to the dependency's unique, unconstrained
+     *  children slot, evaluated in the parent contract's scope. An explicit
+     *  empty object supplies an empty Fragment; omission leaves children unset. Other
+     *  emitters must refuse until they support this projection. */
     parts: z.record(z.string(), PartSchema).optional(),
   }).superRefine(validateGridPart),
 );

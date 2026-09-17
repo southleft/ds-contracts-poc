@@ -1528,6 +1528,7 @@ export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResu
     checked.add(c.id);
     if (c.props.some(p => p.bindings.code.values)) throw new Error(`CODE_VALUES_WEB_COMPONENTS_UNSUPPORTED:${c.id}: typed code mappings are currently implemented for React`);
     for (const w of walkAnatomy(c)) {
+      if (w.part.component && w.part.parts !== undefined) throw new Error('WEB_COMPONENT_CALLER_PARTS_UNSUPPORTED');
       const ids = [...(w.part.component ? [w.part.component.id] : []), ...(w.part.slot?.defaultContent ?? []).map(i => i.id)];
       for (const id of ids) { const dep = ctx.contracts.get(id); if (dep) refuseMapped(dep); }
     }

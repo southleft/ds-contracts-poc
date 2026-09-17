@@ -63,6 +63,18 @@ Anatomy is a **nested tree** of named parts (CEM's slots/parts, Curtis's anatomy
 
 Parts with none of these are structural (frames/elements containing `parts`). `optional: true` renders conditionally in code and toggles visibility on the canvas. Composition rules: part names are unique per contract; cycles and unknown contract refs **fail the build**; sync scripts emit in dependency order. See [docs/08](08-composition-and-spec.md) for the design rationale.
 
+For React output, a nested `component` reference can also carry `parts`: these
+are caller-owned children passed through the child's unique `children` slot.
+Their property references resolve against the parent contract, and nested
+component references retain their own implementations and state. The child
+slot must be unconstrained: required content, arity bounds and restricted
+acceptance need separate projection support. Competing text, slot, content or
+repeat declarations are refused. An empty `parts: {}` supplies an empty React
+Fragment; omission leaves children unset. Slot `defaultContent` remains
+design/story sample content, never a runtime default. Direct Figma, HTML and
+Web Components emission explicitly refuse caller parts until implemented;
+this React rule does not qualify native composition or source extraction.
+
 ```jsonc
 "anatomy": {
   "root": {

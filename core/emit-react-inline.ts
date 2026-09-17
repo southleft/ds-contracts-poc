@@ -845,14 +845,16 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         (!childrenApplied && !depSelfDefaults && typeof depChildren?.default === 'string'
           ? depChildren.default
           : undefined);
-      const instance = text !== undefined
+      const instance = part.parts !== undefined
+        ? `<${dep.name}${attrs}><>\n${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('\n')}\n</></${dep.name}>`
+        : text !== undefined
         ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
         : `<${dep.name}${attrs} />`;
       // A2 grid (G3/P12): an instance cell rides a wrapper span whose style
       // carries the placement (see the baseStyles entries above).
-      return gridPlan.wrappedInstances.has(partName)
+      return wrapVisibleWhen(part, gridPlan.wrappedInstances.has(partName)
         ? `<span style=${styleExpr(partName, false, [])}>${instance}</span>`
-        : instance;
+        : instance);
     }
     if (part.slot) {
       const el = part.element ?? 'div';

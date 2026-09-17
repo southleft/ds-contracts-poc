@@ -7,7 +7,97 @@ import { ContractSchema, validateContract, type Contract } from './index.js';
 import { proposeFromCode } from './propose-code.js';
 import { reactEmitter, reactInlineEmitter, htmlEmitter, figmaScriptEmitter } from './emitter.js';
 import { createFigmaEngine } from './emit-figma-script.js';
-import { mountGenerated } from './react-test-runtime.js';
+import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
+import { emitWebComponent } from '../packages/emitter-web-components/src/emit-wc.js';
+
+function callerFamily() {
+  const { parent, child, ctx } = family();
+  const text = (name: string) => ({ name, type: 'text' as const,
+    bindings: { code: { prop: name }, figma: { kind: 'TEXT' as const, property: name } } });
+  child.props.push(text('identity'), { name: 'state', type: { enum: ['off', 'on'] }, default: 'off',
+    bindings: { code: { prop: 'checked' }, figma: { kind: 'VARIANT', property: 'State', values: { off: 'Off', on: 'On' } } } });
+  child.semantics.role = 'checkbox';
+  child.semantics.roleException = 'A button with declared checkbox toggle behavior.';
+  child.anatomy.root.attrs = { id: '{identity}' };
+  child.events = [{ name: 'change', trigger: 'root', toggles: { prop: 'state', between: ['off', 'on'], aria: 'checked' },
+    bindings: { code: { prop: 'onCheckedChange' } } }];
+  const shell = (id: string, name: string) => ContractSchema.parse({ ...parent, id, name, props: [],
+    anatomy: { root: { slot: { name: 'children', defaultContent: [{ id: child.id, props: { label: 'Default control' } }] } } },
+    bindings: { ...parent.bindings, code: { anchors: { importPath: `./${name}`, export: name } } } });
+  const frame = shell('ds.frame', 'Frame'), body = shell('ds.body', 'Body');
+  ctx.contracts.set(frame.id, frame); ctx.contracts.set(body.id, body);
+  parent.props.push(text('firstId'), text('secondId'));
+  parent.props.push({ name: 'show', type: 'boolean', default: true,
+    bindings: { code: { prop: 'show' }, figma: { kind: 'BOOLEAN', property: 'Show' } } });
+  parent.anatomy.root.parts = {};
+  for (const key of ['first', 'second']) parent.anatomy.root.parts[key] = {
+    component: { id: frame.id }, visibleWhen: { prop: 'show' }, parts: {
+      [`${key}Body`]: { component: { id: body.id }, parts: {
+        [`${key}Control`]: { component: { id: child.id, props: { identity: `{${key}Id}`, label: '{label}', disabled: '{disabled}' } } },
+        [`${key}Caption`]: { element: 'label', attrs: { for: `{${key}Id}` }, text: `${key} label` },
+      } },
+    },
+  };
+  return { parent, child, frame, body, ctx };
+}
+
+test('nested caller children retain independent child state and parent label bindings on both React targets', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const { parent, ctx } = callerFamily();
+  for (const contract of ctx.contracts.values()) {
+    const errors: string[] = []; validateContract(contract, ctx.contracts, errors, ctx.icons);
+    assert.deepEqual(errors, []);
+  }
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const output = [...ctx.contracts.values()].map(c => ({ name: c.name, files: emitter.emit(c, ctx) }));
+    const files = output.find(o => o.name === parent.name)!.files;
+    const deps = Object.fromEntries(output.filter(o => o.name !== parent.name).map(o => [o.name, {
+      tsx: o.files[0].contents, css: o.files.find(f => f.path.endsWith('.css'))?.contents,
+    }]));
+    assert.deepEqual(generatedTypeErrors(parent.name, files[0].contents, Object.fromEntries(Object.entries(deps).map(([name, d]) => [name, d.tsx]))), []);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, parent.name, files[0].contents, files.find(f => f.path.endsWith('.css'))?.contents, deps);
+      await render({ firstId: 'one', secondId: 'two', label: 'Toggle', disabled: false });
+      assert.deepEqual(await page.locator('button').allTextContents(), ['Toggle', 'Toggle']);
+      await page.getByText('first label', { exact: true }).click();
+      assert.equal(await page.locator('#one').getAttribute('aria-checked'), 'true');
+      assert.equal(await page.locator('#two').getAttribute('aria-checked'), 'false');
+      await page.locator('#two').press('Space');
+      assert.equal(await page.locator('#two').getAttribute('aria-checked'), 'true');
+      await render({ firstId: 'new-one', secondId: 'new-two', label: 'Changed', disabled: false });
+      assert.deepEqual(await page.locator('label').evaluateAll(labels => labels.map(l => (l as HTMLLabelElement).control?.id)), ['new-one', 'new-two']);
+      assert.deepEqual(await page.locator('button').allTextContents(), ['Changed', 'Changed']);
+      assert.deepEqual(await page.locator('button').evaluateAll(buttons => buttons.map(b => b.getAttribute('aria-checked'))), ['true', 'true']);
+      await page.getByText('second label', { exact: true }).click();
+      assert.equal(await page.locator('#new-two').getAttribute('aria-checked'), 'false');
+      await render({ firstId: 'new-one', secondId: 'new-two', disabled: true });
+      await page.getByText('first label', { exact: true }).click({ force: true });
+      assert.equal(await page.locator('#new-one').getAttribute('aria-checked'), 'true');
+      assert.equal(await page.locator('#new-one').isDisabled(), true);
+      await render({ show: false });
+      assert.equal(await page.locator('button').count(), 0);
+    } finally { await page.close(); }
+  }
+});
+
+test('caller parts refuse missing, competing or constrained slots and unsupported projections', () => {
+  const { parent, frame, ctx } = callerFamily();
+  const errors = () => { const errors: string[] = []; validateContract(parent, ctx.contracts, errors, ctx.icons); return errors.join('\n'); };
+  const slot = frame.anatomy.root.slot!;
+  delete frame.anatomy.root.slot;
+  assert.match(errors(), /no unique children slot/);
+  frame.anatomy.root.slot = { ...slot, min: 1 };
+  assert.match(errors(), /constrained children slot/);
+  frame.anatomy.root.slot = slot;
+  parent.anatomy.root.parts!.first.component!.text = 'Conflicting';
+  assert.match(errors(), /conflicting component caller content/);
+  delete parent.anatomy.root.parts!.first.component!.text;
+  assert.equal(errors(), '');
+  assert.throws(() => htmlEmitter.emit(parent, ctx), /HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
+  assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
+  assert.throws(() => emitWebComponent(parent, { ...ctx, tokens: new Set<string>() }), /WEB_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
+});
 
 function family() {
   const result = proposeFromCode({ sourcePath: 'family.tsx', css: '', source: `
