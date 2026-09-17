@@ -162,6 +162,10 @@ test("reference API retains all ten cases, isolates source execution and refuses
       (await (await fetch(base + "/react", { method: "POST" })).json()).id,
       reference.id,
     );
+    const callbackUrl = base + `/react/${reference.id}/callback-behavior/checkbox-unchecked`;
+    assert.equal((await fetch(callbackUrl, {method:'POST',body:JSON.stringify({sourceRoot:'/etc',callback:'arbitrary'})})).status,400);
+    assert.equal((await fetch(callbackUrl, {method:'DELETE'})).status,409);
+    assert.equal((await fetch(callbackUrl, {method:'POST'})).status,409,'a loaded reference alone cannot replace a sealed source observation');
     const programUrl = base + `/react/${reference.id}/program`;
     assert.equal(
       (

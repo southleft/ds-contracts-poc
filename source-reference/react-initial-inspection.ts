@@ -28,7 +28,7 @@ export interface ReactInitialInspection {
   observation?: Awaited<ReturnType<typeof observeReactInitialStates>>; problems: string[];
   draft?: ReturnType<typeof compileReactInitialContract>;
 }
-function original(repo: string, reference: ReactReference, request: Request) {
+export function readReactInspectionOriginal(repo: string, reference: ReactReference, request: Request) {
   reactReferenceProfile(request.caseId);
   readReactNativeEvidence(repo, reference, request.anchor);
   const dir = path.join(repo, 'private/react-source-ownership', reference.id, request.anchor.ownership.id);
@@ -46,7 +46,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
   select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest }) {
   const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void> }>();
   const from = (reference: ReactReference, request: Request) => {
-    const source = original(repo, reference, request), key = revisionOf(request).slice(7);
+    const source = readReactInspectionOriginal(repo, reference, request), key = revisionOf(request).slice(7);
     return { reference, request, source, key, root: path.join(repo, 'private/react-initial-inspections', key) };
   };
   const input = (referenceId: string, caseId: string) => {
@@ -180,7 +180,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
               } });
             if (!state.observation.planned || state.observation.problems.length || state.observation.rows.some(r => r.status !== 'observed' || !r.restored))
               throw Error('react-initial-observation-incomplete');
-            original(repo, value.reference, value.request);
+            readReactInspectionOriginal(repo, value.reference, value.request);
             state.sourceUnchanged = true; state.phase = 'complete';
           } finally { failures.dispose(); }
         } catch (e) { state.phase = 'failed'; state.problems = [e instanceof Error ? e.message : String(e)]; }

@@ -1,4 +1,5 @@
 import test from "node:test";
+import { ContractSchema } from "../scripts/contract-schema.js";
 import assert from "node:assert/strict";
 import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -85,7 +86,7 @@ test("installed callback signatures retain ambiguity and reject unsupported beha
     const proposal = proposeReactSourceProgram(program, [
       { sourcePath: "subject.tsx", source },
     ]);
-    const contract = proposal.result.proposals[0].proposal.contract;
+    const contract = ContractSchema.parse(proposal.result.proposals[0].proposal.contract);
     assert.deepEqual(
       contract.events?.map((e) => e.bindings.code.prop),
       ["onActivate"],

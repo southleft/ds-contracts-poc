@@ -6,6 +6,7 @@ import type { ReactOwnershipReport } from '../../../source-reference/react-owner
 import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
 import type { SourceFrame } from '../../../source-reference/source-framing';
 import type { SourceTypography } from '../../../source-reference/react-source-framing';
+import { ReactCallbackInspection } from './ReactCallbackInspection';
 import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
 import type { NativeContractUpdatePlan } from '../../../core/native-contract-update';
@@ -103,6 +104,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     </button>}
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
     {error && <p role="alert">{error}</p>}
+    <ReactCallbackInspection key={referenceId + ':' + selectedCase} referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} />
     <ReactInitialInspection referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} nativeSaved={rows.some(r => r.kind === 'initial' && r.caseId === selectedCase)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
     {rows.map(row => {
       const op = row.operation, id = op.id, comparison = row.kind === 'comparison', initial = row.kind === 'initial';

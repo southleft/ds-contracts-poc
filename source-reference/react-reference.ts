@@ -8,6 +8,7 @@ import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
+import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
@@ -165,17 +166,19 @@ export function createReactReferenceService(
     if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
     return { reference, request: native().jobs.reactSourceRequest(operationId) };
   });
-  const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, (referenceId) => {
+  const selectInspectionSource = (referenceId: string) => {
     if (!native || !reference || reference.id !== referenceId) throw Error('react-initial-reference-unavailable');
     // Reuse the immutable ownership archive already pinned by a saved root
     // operation. No fresh property matrix or browser-supplied evidence paths.
     const anchor = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => {
-      const roots = native!().jobs.listReact(referenceId).filter(r => r.kind === 'root' && r.operation.sourceCurrent);
+      const roots = native!().jobs.listReact(referenceId, 'root').filter(r => r.kind === 'root' && r.operation.sourceCurrent);
       return roots.map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id))[0];
     }));
     if (!anchor) throw Error('react-initial-saved-observation-required');
     return { reference, anchor };
-  });
+  };
+  const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
+  const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
   const thisInitialEvidence = (request: ReactInitialNativeRequest) => {
     if (!reference) throw Error('react-initial-native-reference-unavailable');
     return initialStates.nativeEvidence(reference, request);
@@ -218,6 +221,21 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const callbackRoute = /^react\/([a-f0-9]{64})\/callback-behavior\/([a-z-]+)$/.exec(route);
+    if (callbackRoute) {
+      try {
+        if (!['GET', 'POST'].includes(req.method ?? '')) throw Error('callback-method-invalid');
+        if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding']) {
+          json(res, 400, { error: 'This action accepts no request body.' }); return;
+        }
+        if (req.method === 'POST') {
+          const job = callbacks.start(callbackRoute[1], callbackRoute[2]);
+          void job.promise.catch(() => {});
+          json(res, 200, { inspection: job.state });
+        } else json(res, 200, { inspection: callbacks.read(callbackRoute[1], callbackRoute[2]) ?? null });
+      } catch { json(res, 409, { error: 'Callback inspection unavailable. Load unchanged originals and use the saved structure observation first.' }); }
+      return;
+    }
     const initialRoute = /^react\/([a-f0-9]{64})\/initial-states\/([a-z-]+)(?:\/([a-f0-9-]{36})\/(\d+)\.png)?$/.exec(route);
     if (initialRoute) {
       try {

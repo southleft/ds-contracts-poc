@@ -1,6 +1,7 @@
 /** Property experiments run only in a disposable, host-authenticated React
  * source context. They never edit source files or infer behavior from pixels. */
 import type {Page} from 'playwright-core';
+import {reactCallbackCandidate} from './react-callback-candidates.js';
 import {randomUUID} from 'node:crypto';
 import {reactOwnershipRead, type ReactOwnership} from './react-ownership.js';
 import type {ReactSourceProgram, ReactTypeFact} from './react-source-program.js';
@@ -29,7 +30,7 @@ async function propertyInput(page:Page,selector:string,program:ReactSourceProgra
   if(requested.kind==='omit' ? !prop.optional : !admits(prop.type,requested.value))
    throw Error('react-property-probe-value-outside-source-api');
  }
- return {baseline,instance};
+ return {baseline,instance,source};
 }
 
 /** The callback records the real render/DOM, so a successfully delivered prop
@@ -102,9 +103,21 @@ export async function probeReactProperties<T>(
  * resets runtime state and never claims to preserve a user's interaction history.
  * The target must be an exact caller-owned element in the rendered root input;
  * children constructed inside another component require a different boundary. */
+export interface ReactCallbackObservation {
+ calls:Array<Array<string|number|boolean|null>>; problems:string[];
+}
 export async function probeReactInitialProperties<T>(page:Page,selector:string,program:ReactSourceProgram,instanceId:string,
- changes:ReactPropertyChanges,observe:()=>Promise<T>){
- const {baseline,instance}=await propertyInput(page,selector,program,instanceId,changes),token=randomUUID();
+ changes:ReactPropertyChanges,observe:(phase:'before'|'changed'|'restored',readCallback:()=>Promise<ReactCallbackObservation>)=>Promise<T>,callback?:string){
+ const {baseline,instance,source}=await propertyInput(page,selector,program,instanceId,changes),token=randomUUID();
+ if(callback){
+  const prop=source.props.find(p=>p.name===callback);
+  if(reserved.has(callback)||Object.hasOwn(changes,callback)||!prop||reactCallbackCandidate(source,prop).status!=='needs-observation')
+   throw Error('react-initial-callback-unsupported');
+ }
+ const readCallback=()=>page.evaluate(key=>{
+  const record=(window as any).__DSC_REACT_OWNERSHIP?.propertyProbes?.get(key);
+  return record?.callback ?? {calls:[],problems:[]};
+ },token) as Promise<ReactCallbackObservation>;
  const mutate=(restore:boolean)=>page.evaluate(`(()=>{
   const state=window.__DSC_REACT_OWNERSHIP,clone=window.__DSC_REACT_CLONE_ELEMENT;
   const roots=state&&[...state.roots.values()].filter(r=>r.root.current?.child);
@@ -122,7 +135,7 @@ export async function probeReactInitialProperties<T>(page:Page,selector:string,p
   const find=fiber=>{for(let n=fiber;n;n=n.sibling){const identity=values.get(n.elementType)||values.get(n.type);if(identity){if('instance-'+sequence++===${JSON.stringify(instanceId)})target={fiber:n,identity};}if(n.child)find(n.child);}};
   find(root.root.current);
   if(!target||JSON.stringify(target.identity)!==${JSON.stringify(JSON.stringify(instance.source))})throw Error('react-initial-probe-target-changed');
-  const original=root.root.current.memoizedState.element;let matches=0;
+  const original=root.root.current.memoizedState.element,callback={calls:[],problems:[]};let matches=0;
   const rewrite=element=>{
    if(Array.isArray(element))return element.map(rewrite);
    if(!element||typeof element!=='object'||element.$$typeof!==Symbol.for('react.transitional.element'))return element;
@@ -134,13 +147,25 @@ export async function probeReactInitialProperties<T>(page:Page,selector:string,p
      // on its result. No key/ref/type or child ownership is replaced.
      if(requested.kind==='omit')delete props[property];else props[property]=requested.value;
     }
+    const callbackName=${JSON.stringify(callback ?? null)};
+    if(callbackName){
+     const originalCallback=props[callbackName];
+     if(originalCallback!==undefined&&typeof originalCallback!=='function')throw Error('react-initial-callback-not-callable');
+     props[callbackName]=function(...args){
+      if(callback.calls.length>=128){if(!callback.problems.includes('callback-observation-overflow'))callback.problems.push('callback-observation-overflow');}
+      else if(args.some(value=>value!==null&&!['string','boolean','number'].includes(typeof value)||typeof value==='number'&&!Number.isFinite(value)))callback.problems.push('callback-nonscalar-argument');
+      else callback.calls.push(args);
+      // Observe only. Preserve the caller's receiver, return and exceptions.
+      return originalCallback?.apply(this,args);
+     };
+    }
    }
    if(Object.hasOwn(props,'children'))props.children=rewrite(props.children);
    return {...clone(element),props};
   };
   const changed=rewrite(original);
   if(matches!==1||!changed||changed.$$typeof!==Symbol.for('react.transitional.element'))throw Error('react-initial-probe-caller-element-not-unique');
-  state.propertyProbes.set(key,{kind:'initial',element:original});
+  state.propertyProbes.set(key,{kind:'initial',element:original,callback});
   renderer.scheduleRoot(root.root,clone(changed,{key:'dsc-initial-'+key}));return revision;
  })()`);
  const settle=async(revision:unknown)=>{
@@ -150,20 +175,20 @@ export async function probeReactInitialProperties<T>(page:Page,selector:string,p
   if(next.problems.length)throw Error('react-initial-probe-render-unqualified:'+next.problems.join(','));
   return next;
  };
- const before=await observe();let changed:T;
+ const before=await observe('before',readCallback);let changed:T,callbackObservation:ReactCallbackObservation={calls:[],problems:[]};
  try{
   const next=await settle(await mutate(false)),observed=next.components.find(c=>c.id===instanceId);
   if(!observed||!sameSource(observed.source,instance.source)||Object.entries(changes).some(([p,v])=>v.kind==='omit'?Object.hasOwn(observed.props,p):!Object.is(observed.props[p],v.value)))
    throw Error('react-initial-probe-prop-not-applied');
-  changed=await observe();
+  changed=await observe('changed',readCallback);callbackObservation=await readCallback();
  }finally{
   if(await page.evaluate(key=>(window as any).__DSC_REACT_OWNERSHIP?.propertyProbes?.has(key)===true,token)){
    await settle(await mutate(true));
    await page.evaluate(key=>(window as any).__DSC_REACT_OWNERSHIP.propertyProbes.delete(key),token);
   }
  }
- const restored=await observe(),after=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
- return {before,changed:changed!,restored,ownershipRestored:JSON.stringify(after)===JSON.stringify(baseline),changes};
+ const restored=await observe('restored',readCallback),after=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
+ return {before,changed:changed!,restored,ownershipRestored:JSON.stringify(after)===JSON.stringify(baseline),changes,callbackObservation};
 }
 
 /** Existing one-property callers use the same atomic patch and restoration. */
