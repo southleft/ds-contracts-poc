@@ -133,7 +133,7 @@ export function ReactCallbackInspection({
                 Review callback values and state transitions (
                 {result.observation.rows.length} trials)
               </summary>
-              <table>
+              <table style={{ borderSpacing: "12px 6px", textAlign: "left" }}>
                 <thead>
                   <tr>
                     <th>Input</th>
