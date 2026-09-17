@@ -47,6 +47,53 @@ export interface ReactCallbackInspection {
   observation?: ReactCallbackBehavior;
   problems: string[];
 }
+export function readReactCallbackInspectionRecord(value: {
+  root: string;
+  request: { version: 1; anchor: ReactNativeRequest; caseId: string };
+}) {
+  const pointer = path.join(value.root, "latest.json");
+  if (!existsSync(pointer)) return;
+  const latest = JSON.parse(readFileSync(pointer, "utf8")) as {id:string;inventorySha256:string};
+  if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(latest.id))
+    throw Error("callback-record-invalid");
+  const dir = path.join(value.root, latest.id),
+    sealBytes = readFileSync(path.join(dir, "integrity.json"));
+  if (evidenceSha(sealBytes) !== latest.inventorySha256)
+    throw Error("callback-inventory-changed");
+  const seal = JSON.parse(sealBytes.toString()) as {version:number;files:Record<string,string>};
+  if (
+    seal.version !== 1 ||
+    !evidenceUnchanged(
+      dir,
+      Object.fromEntries(
+        Object.entries({
+          ...seal.files,
+          "integrity.json": latest.inventorySha256,
+        }).sort(([a], [b]) => a.localeCompare(b)),
+      ),
+    ) ||
+    revisionOf(
+      JSON.parse(readFileSync(path.join(dir, "request.json"), "utf8")),
+    ) !== revisionOf(value.request)
+  )
+    throw Error("callback-evidence-changed");
+  const report = JSON.parse(
+    readFileSync(path.join(dir, "report.json"), "utf8"),
+  ) as ReactCallbackInspection;
+  if (
+    report.id !== latest.id ||
+    report.caseId !== value.request.caseId ||
+    report.phase === "running"
+  )
+    throw Error("callback-report-invalid");
+  const program = JSON.parse(
+    readFileSync(path.join(dir, "program.json"), "utf8"),
+  );
+  if (!reactSourceProgramUnchanged(program))
+    throw Error("callback-program-changed");
+  return report;
+}
+
 /** Separate immutable observations. Earlier ownership and initial-state records
  * are inputs, never rewritten to retrofit new checker or behavior facts. */
 export function createReactCallbackInspectionStore(
@@ -74,52 +121,15 @@ export function createReactCallbackInspectionStore(
       root: path.join(repo, "private/react-callback-inspections", key),
     };
   };
-  const saved = (value: ReturnType<typeof input>) => {
-    const pointer = path.join(value.root, "latest.json");
-    if (!existsSync(pointer)) return;
-    const latest = JSON.parse(readFileSync(pointer, "utf8"));
-    if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(latest.id))
-      throw Error("callback-record-invalid");
-    const dir = path.join(value.root, latest.id),
-      sealBytes = readFileSync(path.join(dir, "integrity.json"));
-    if (evidenceSha(sealBytes) !== latest.inventorySha256)
-      throw Error("callback-inventory-changed");
-    const seal = JSON.parse(sealBytes.toString());
-    if (
-      seal.version !== 1 ||
-      !evidenceUnchanged(dir, {
-        ...seal.files,
-        "integrity.json": latest.inventorySha256,
-      }) ||
-      revisionOf(
-        JSON.parse(readFileSync(path.join(dir, "request.json"), "utf8")),
-      ) !== revisionOf(value.request)
-    )
-      throw Error("callback-evidence-changed");
-    const report = JSON.parse(
-      readFileSync(path.join(dir, "report.json"), "utf8"),
-    ) as ReactCallbackInspection;
-    if (
-      report.id !== latest.id ||
-      report.caseId !== value.request.caseId ||
-      report.phase === "running"
-    )
-      throw Error("callback-report-invalid");
-    const program = JSON.parse(
-      readFileSync(path.join(dir, "program.json"), "utf8"),
-    );
-    if (!reactSourceProgramUnchanged(program))
-      throw Error("callback-program-changed");
-    return report;
-  };
+  const saved = readReactCallbackInspectionRecord;
   return {
     read(referenceId: string, caseId: string) {
-      const running = active.get(referenceId + '/' + caseId);
+      const running = active.get(referenceId + "/" + caseId);
       if (running) return structuredClone(running.state);
       return structuredClone(saved(input(referenceId, caseId)));
     },
     start(referenceId: string, caseId: string) {
-      const activeKey = referenceId + '/' + caseId;
+      const activeKey = referenceId + "/" + caseId;
       const existing = active.get(activeKey);
       if (existing) return existing;
       const value = input(referenceId, caseId);
