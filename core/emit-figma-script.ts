@@ -8550,8 +8550,8 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
-    }
-    ${hasCallerContent ? `if (spec.callerContentProp) {
+    }${hasCallerContent ? `
+    if (spec.callerContentProp) {
       node.setSharedPluginData('ds_contracts', 'callerContentProperty', spec.callerContentProp);
     }` : ''}
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
