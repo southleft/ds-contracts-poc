@@ -209,8 +209,12 @@ export function createReactCallbackInspectionStore(
             )
               throw Error("callback-source-changed");
           };
+          let restorationFailures = 0;
           const assertRestored = async () => {
             assertCurrent();
+            // Observe settled source pixels; never cancel or fast-forward the
+            // component's own transitions to make restoration appear exact.
+            await page.waitForFunction(() => document.getAnimations().every(animation => animation.playState === 'finished' || animation.playState === 'idle'), undefined, {timeout:5000});
             const captured = await captureValidatedTree(
               page,
               profile,
@@ -222,8 +226,12 @@ export function createReactCallbackInspectionStore(
               captured.status !== "captured" ||
               captured.treeSha256 !== value.source.captured.treeSha256 ||
               captured.sourcePngSha256 !== value.source.captured.sourcePngSha256
-            )
+            ) {
+              const name = 'restoration-failure-' + ++restorationFailures;
+              save(name + '.json', {captured, expected:{treeSha256:value.source.captured.treeSha256,sourcePngSha256:value.source.captured.sourcePngSha256}});
+              writeFileSync(path.join(dir,name + '.png'),await page.screenshot({fullPage:true,caret:'initial'}),{flag:'wx'});
               throw Error("callback-original-render-not-restored");
+            }
             const ownership = (await page.evaluate(
               reactOwnershipRead(profile.path[0]),
             )) as ReactOwnership;
