@@ -1153,10 +1153,13 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           id: "The child contract’s id, e.g. <code>ds.avatar</code>.",
           props:
             'Fixed prop values; <code>"{parentProp}"</code> threads a parent enum through.',
+          initialProps:
+            'React mount-only inputs, keyed by canonical child enum property. Canonical literals or <code>"{parentEnum}"</code> references target the child’s <code>bindings.code.initial.prop</code>; changes after mounting do not reset state. A controlled input supplied through <code>props</code> takes priority. Root/repeated references and direct Figma, HTML and Web Components emission currently refuse this field.',
           text: "Overrides the child’s <code>children</code> text prop (code: JSX children; canvas: text override on the instance).",
           overrides:
             'Per-instance channel overrides — see <a href="#ref-overrides">below</a>.',
         }) +
+        `<p>On a nested component ref, <code>parts</code> can supply caller-owned React content through the child’s unique, unconstrained <code>children</code> slot. Bindings remain in parent scope while each child keeps its implementation and state. Native projection and automatic source coverage require separate verification.</p>` +
         refusals("Refusals:", [
           "unknown child contracts; cycles (<code>a contract cannot compose itself</code>)",
           "setting an unknown child prop, or an <code>arrayOf</code> child prop — structured values cannot be fixed in anatomy",

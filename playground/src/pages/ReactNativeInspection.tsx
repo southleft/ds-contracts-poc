@@ -1,6 +1,7 @@
 import { nativeImageFraming } from '../native-image-framing';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useEffect, useState } from 'react';
+import { ReactCallerCompositionReview } from './ReactCallerCompositionReview';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
 import type { ReactOwnershipReport } from '../../../source-reference/react-ownership-run';
 import type { ReactContentInspection } from '../../../source-reference/react-content-inspection';
@@ -211,6 +212,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             </details>
             : <p>Source label relationships could not be carried within this composition: {row.content.labelAssociations.problems.join(', ')}.</p>)
             : <p>Label relationships were not recorded in this saved preparation.</p>}
+          {row.kind === 'root' && row.content.phase === 'complete' && row.content.sourceUnchanged && row.content.labelAssociations?.status === 'observed' &&
+            <ReactCallerCompositionReview key={id} root={root} operationId={id} />}
           {row.content.gridConstraints && (row.content.gridConstraints.status === 'observed'
             ? !!row.content.gridConstraints.rows.length && <details><summary>Source grid constraints · {row.content.gridConstraints.rows.length} grids</summary>
               <p>Current CSS constraints and rendered track sizes are shown separately. These observations do not qualify native conversion or other content and viewport combinations.</p>

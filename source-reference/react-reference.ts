@@ -1,4 +1,6 @@
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
+import {readReactCallerComposition} from './react-caller-composition-evidence.js';
+import {buildReactCallerPreview} from './react-caller-preview.js';
 import {buildReactBehaviorPreview} from './react-behavior-preview.js';
 import { selectReactComparisonCase } from './react-comparison-case.js';
 import { reactComparisonContentScope, reactComparisonContentOperation } from './react-comparison-request.js';
@@ -230,6 +232,31 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview)?$/.exec(route);
+    if (callerReact) {
+      try {
+        if (req.method !== 'GET' || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
+            !native || !reference || reference.id !== callerReact[1] || !reactReferenceUnchanged(reference))
+          throw Error('react-caller-request-invalid');
+        const current = reference;
+        const draft = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => readReactCallerComposition(repoRoot, current,
+          native!().jobs.reactRequest(callerReact[2]), callerReact[2], caseId => {
+            const behavior = callbacks.read(current.id, caseId)?.draft;
+            if (behavior?.status !== 'generated-draft' || !behavior.contract) return undefined;
+            const initial = initialStates.nativeEvidence(current, initialStates.nativeRequest(current.id, caseId));
+            return { ...initial.composition, initialContract: initial.draft.compiled!.contract!, contract: behavior.contract,
+              tokens: initial.draft.compiled!.tokens!, assets: initial.draft.compiled!.assets ?? [] };
+          })));
+        if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+        if (!callerReact[3]) { json(res, 200, { draft }); return; }
+        const output = await buildReactCallerPreview(repoRoot, draft);
+        if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+        res.setHeader('Content-Type', 'text/html; charset=utf-8'); res.setHeader('Cache-Control', 'no-store');
+        res.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox allow-scripts");
+        res.end(reactReferenceHtml({ ...current, ...output }));
+      } catch { json(res, 409, { error: 'Generated composition unavailable. Unchanged source, saved content relationships and compatible behavior observations are required.' }); }
+      return;
+    }
     const behaviorPreview = /^react\/([a-f0-9]{64})\/behavior-preview\/([a-z-]+)$/.exec(route);
     if (behaviorPreview) {
       try {

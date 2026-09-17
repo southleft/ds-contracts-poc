@@ -133,6 +133,21 @@ export function validateContract(
       if (part.component.text !== undefined && dep && !hasChildrenText(dep)) {
         errors.push(`${contract.id}: part "${name}" sets text but ${dep.id} has no children text prop`);
       }
+      if (part.component.initialProps) {
+        if (p.length === 1 || part.repeat)
+          errors.push(`${contract.id}: part "${name}" initialProps require a non-repeated nested component`);
+        for (const [key, value] of Object.entries(part.component.initialProps)) {
+          const child = dep?.props.find(prop => prop.name === key);
+          if (!child || !isEnum(child) || !child.bindings.code.initial) {
+            errors.push(`${contract.id}: part "${name}" initialProps has no declared child initializer for "${key}"`);
+            continue;
+          }
+          const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+          const parent = ref && contract.props.find(prop => prop.name === ref[1]);
+          if (ref ? !parent || !isEnum(parent) || parent.type.enum.some(v => !child.type.enum.includes(v)) : !child.type.enum.includes(value))
+            errors.push(`${contract.id}: part "${name}" initialProps value for "${key}" is outside the child canonical domain`);
+        }
+      }
       if (part.parts !== undefined) {
         // These parts belong to the caller. They enter the child's default
         // ReactNode slot; they are not an override of its private anatomy.

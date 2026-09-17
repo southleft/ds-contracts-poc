@@ -1,4 +1,5 @@
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { reactInitialAttributes } from './react-composition-initial.js';
 import { svgIconViewport } from './svg-icon-viewport.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
@@ -834,7 +835,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {});
+      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component);
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.

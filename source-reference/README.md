@@ -220,3 +220,16 @@ The shared computed channel map includes node opacity, so root projections and f
 `react-behavior-contract.ts` derives a separate React draft from authenticated callback and initial appearance records for the same case. It rechecks the finite action/state/payload rows and requires an omitted initializer to match exactly one explicit value across every other captured input context. It preserves the canonical appearance axis while binding the code side to separate controlled and initial-only public inputs, and emits the observed next-value callback. It does not rewrite the static/native contract or add a second canvas axis. The application shows this draft and its generated React code. Controlled-source appearance, associated label composition, clean-consumer delivery and native metadata preservation remain unqualified.
 
 **Try generated React beside the original** runs that emitted draft in an isolated consumer beside the unchanged original case. The consumer can pass omitted or explicit values, remount with a new initializer, accept or hold controlled updates, disable supported controls, and display actual callback values. `GET react/:reference/behavior-preview/:case` bundles the authenticated host-derived code; it accepts no caller-supplied source or contract and blocks external network access and same-origin privileges. The preview uses emitted inline styles, with no source stylesheet to conceal missing rules. External fonts, caller label composition, clean-package installation and full visual equivalence remain outside this preview's qualification.
+
+**Generate React composition** in caller-content preparation uses the sealed
+ownership, content, label and compatible behavior observations to assemble
+source-owned children. `GET react/:reference/native-operation/:id/caller-react`
+returns the derived draft; `/preview` bundles its modules and a normal consumer.
+Both accept no request body. The consumer supplies unique IDs with React useId,
+edits caller text, and exercises two independent copies. `component.initialProps`
+preserves mount-only child inputs instead of freezing them as controlled props.
+Each inline module resolves its own authenticated token context. A text-free
+control's differing font-size/line-height may be displayed as an explicit
+preview discrepancy; other subtree differences refuse reuse. This grants no
+native write or fidelity qualification. General layout/API coverage, shared
+package token assembly, native mappings and clean installation remain open.

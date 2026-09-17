@@ -409,6 +409,7 @@ reg("composition", "component-refs", [
   "part.component",
   "componentRef.id",
   "componentRef.props",
+  "componentRef.initialProps",
   "componentRef.text",
 ]);
 // Round 2 iteration 9: per-instance overrides + the root-only consumption list.

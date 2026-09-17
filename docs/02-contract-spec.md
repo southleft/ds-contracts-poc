@@ -75,6 +75,15 @@ design/story sample content, never a runtime default. Direct Figma, HTML and
 Web Components emission explicitly refuse caller parts until implemented;
 this React rule does not qualify native composition or source extraction.
 
+`component.initialProps` supplies mount-only values to the child's declared
+`bindings.code.initial.prop`. Keys are canonical child enum property names;
+values are canonical literals or `{parentEnum}` references. Each side retains
+its own public code spelling, including booleans. Omission leaves the child's
+initializer unset; changes after mounting do not reset state. Ordinary
+`component.props` still targets the controlled input, which takes priority when
+both are supplied. Root references and repeated instances currently refuse
+`initialProps`, as do direct Figma, HTML and Web Components emission.
+
 ```jsonc
 "anatomy": {
   "root": {

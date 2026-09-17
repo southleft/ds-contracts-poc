@@ -1608,6 +1608,15 @@
                 ]
               }
             },
+            "initialProps": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
             "text": {
               "type": "string"
             },

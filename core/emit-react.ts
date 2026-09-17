@@ -1,4 +1,5 @@
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { reactInitialAttributes } from './react-composition-initial.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
@@ -619,7 +620,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract);
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component);
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be

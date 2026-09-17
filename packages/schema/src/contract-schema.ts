@@ -2002,6 +2002,10 @@ export const ComponentRefSchema = z.strictObject({
   props: z
     .record(z.string(), z.union([z.string(), z.boolean(), PropByPropSchema]))
     .optional(),
+  /** React mount-only inputs, keyed by canonical child enum property.
+   *  Targets bindings.code.initial.prop instead of the controlled prop.
+   *  Values are canonical literals or {parentEnum} references. */
+  initialProps: z.record(z.string(), z.string()).optional(),
   /** Overrides the child's `children` text prop (code: JSX children;
    *  Figma: TEXT property override on the instance). */
   text: z.string().optional(),

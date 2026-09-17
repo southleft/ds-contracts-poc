@@ -121,6 +121,54 @@ function family() {
   return { parent, child, ctx };
 }
 
+test('composed initialProps initialize once, preserve public scalar mappings and defer to controlled inputs', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const { parent, child, ctx } = callerFamily();
+  const state = child.props.find(p => p.name === 'state')!;
+  state.bindings.code = { prop: 'checked', values: { off: false, on: true }, initial: { prop: 'defaultChecked', default: 'off' } };
+  state.bindings.figma.unsetValue = 'Unset';
+  delete state.default;
+  parent.props.push({ name: 'starting', type: { enum: ['off', 'on'] },
+    bindings: { code: { prop: 'start', values: { off: 'no', on: 'yes' } }, figma: { kind: 'VARIANT', property: 'Starting', unsetValue: 'Unset', values: { off: 'Off', on: 'On' } } } });
+  parent.anatomy.root.parts = {
+    fixed: { component: { id: child.id, props: { identity: 'fixed', disabled: false }, initialProps: { state: 'on' } } },
+    mapped: { component: { id: child.id, props: { identity: 'mapped', disabled: false }, initialProps: { state: '{starting}' } } },
+    controlled: { component: { id: child.id, props: { identity: 'controlled', disabled: false, state: 'off' }, initialProps: { state: 'on' } } },
+  };
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const output = emitter.emit(parent, ctx), dependency = emitter.emit(child, ctx);
+    assert.deepEqual(generatedTypeErrors(parent.name, output[0].contents, { [child.name]: dependency[0].contents }), []);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, parent.name, output[0].contents, output.find(f => f.path.endsWith('.css'))?.contents,
+        { [child.name]: { tsx: dependency[0].contents, css: dependency.find(f => f.path.endsWith('.css'))?.contents } });
+      assert.equal(await page.locator('#fixed').getAttribute('aria-checked'), 'true');
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'false');
+      await render({ start: 'yes' });
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'false', 'initializer does not reset mounted state');
+      await page.locator('#fixed').press('Space');
+      await page.locator('#mapped').press('Space');
+      await page.locator('#controlled').press('Space');
+      assert.deepEqual(await page.locator('button').evaluateAll(nodes => nodes.map(n => n.getAttribute('aria-checked'))), ['false', 'true', 'false']);
+      await render({ start: 'no' });
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'true');
+      await page.evaluate(() => (window as unknown as { renderSubject(props: unknown): void }).renderSubject({ key: 'fresh', start: 'yes' }));
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'true', 'new mount reads typed initializer');
+    } finally { await page.close(); }
+  }
+  assert.throws(() => htmlEmitter.emit(parent, ctx), /HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
+  assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
+  const unmappedParent = structuredClone(parent);
+  delete unmappedParent.props.find(p => p.name === 'starting')!.bindings.code.values;
+  assert.throws(() => emitWebComponent(unmappedParent, { ...ctx, tokens: new Set<string>() }), /WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
+  const errors: string[] = [];
+  parent.anatomy.root.parts.fixed.component!.initialProps = { label: 'invalid' };
+  parent.anatomy.root.parts.mapped.component!.initialProps = { state: '{missing}' };
+  validateContract(parent, ctx.contracts, errors, ctx.icons);
+  assert.ok(errors.some(e => e.includes('no declared child initializer')));
+  assert.ok(errors.some(e => e.includes('outside the child canonical domain')));
+});
+
 test('source defaults belong to the component props across supported declaration forms', () => {
   const declarations = [
     `export function Subject({ label = 'Own', disabled = false }: Props) { return <button disabled={disabled}>{label}</button>; }`,

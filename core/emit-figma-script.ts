@@ -4697,6 +4697,7 @@ function partToSpecInner(
   }
   if (part.component) {
     const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
+    if (part.component.initialProps) throw new Error('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
     if (part.parts !== undefined) throw new Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: direct emission cannot populate component caller slots');
     const depLedger: CodeOnlyFactSeed[] = [];
     const spec: NodeSpec = {
