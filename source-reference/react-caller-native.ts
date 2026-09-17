@@ -1,7 +1,7 @@
 /** Compile the sealed source composition using the shared native engine.
  * This host-side bridge creates no operation, variables or Figma nodes. */
 import { walkAnatomy } from '../scripts/contract-schema.js';
-import { createFigmaEngine, nativeCallerPropertyBlockers } from '../core/emit-figma-script.js';
+import { createFigmaEngine, nativeCallerContentMappings, nativeCallerPropertyBlockers } from '../core/emit-figma-script.js';
 import { scopeContractResources } from '../core/scoped-contract-resources.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import type { projectReactCallerCompositionGraph } from './react-caller-composition.js';
@@ -11,7 +11,8 @@ export interface ReactCallerNativeCompilation {
   inputRevision: string;
   graphRevision: string;
   observedWidth: number;
-  components: Array<{ contractId: string; name: string; variants: number; editableTextProperties: string[] }>;
+  components: Array<{ contractId: string; name: string; variants: number; editableTextProperties: string[];
+    editableCanvasText: Array<{ property: string; nodeName: string }> }>;
   resources: Array<{ contractId: string; tokens: number; assets: number }>;
   unsupportedPropertyBindings: Array<{ contractId: string; property: string; kind: 'TEXT' | 'BOOLEAN'; nodeName: string }>;
   blockers: string[];
@@ -43,12 +44,14 @@ export function compileReactCallerNative(graph: ReturnType<typeof projectReactCa
       editableTextProperties: scoped.contracts.get(c.contractId)!.props
         .filter(p => p.type === 'text' && p.bindings.figma.kind === 'TEXT' &&
           !unsupportedPropertyBindings.some(binding => binding.contractId === c.contractId && binding.property === p.bindings.figma.property))
-        .map(p => p.bindings.figma.property!) })),
+        .filter(p => !nativeCallerContentMappings(c).some(binding => binding.property === p.bindings.figma.property))
+        .map(p => p.bindings.figma.property!),
+      editableCanvasText: nativeCallerContentMappings(c) })),
     unsupportedPropertyBindings,
     resources: scoped.mappings.map(m => ({ contractId: m.contractId, tokens: m.tokenPaths.length, assets: m.assets.length })),
     blockers: [...(draft.contextDifferences.length ? ['source-context-differences-unqualified'] : []),
       ...(unsupportedPropertyBindings.length ? ['native-caller-slot-property-bindings-unsupported'] : []),
-      'native-dependency-reuse-unverified', 'native-composition-delivery-unimplemented', 'live-editability-and-fidelity-unverified'],
+      'native-composition-delivery-unverified', 'live-editability-and-fidelity-unverified'],
   };
   return { report, scoped, components };
 }

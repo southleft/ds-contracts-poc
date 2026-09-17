@@ -6,11 +6,14 @@ import { chromium } from 'playwright-core';
 import { ContractSchema, validateContract, type Contract } from './index.js';
 import { proposeFromCode } from './propose-code.js';
 import { reactEmitter, reactInlineEmitter, htmlEmitter, figmaScriptEmitter } from './emitter.js';
-import { createFigmaEngine } from './emit-figma-script.js';
+import { createFigmaEngine, type NodeSpec } from './emit-figma-script.js';
 import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
 import { emitWebComponent } from '../packages/emitter-web-components/src/emit-wc.js';
 import { scopeContractResources, type ContractResources } from './scoped-contract-resources.js';
 import { flattenTokens, makeResolveLiteral } from './tokens.js';
+import { nativeComparisonFixture } from './native-contract-comparison-test-fixture.js';
+import { emitNativeContractReadbackScript, verifyNativeContractReadback } from './native-source-observation.js';
+import { revisionOf } from './contract-provenance.js';
 
 function callerFamily() {
   const { parent, child, ctx } = family();
@@ -500,12 +503,17 @@ test('native caller content populates linked slots without altering child mains 
     const contractsBefore = JSON.stringify([...ctx.contracts]);
     const engine = createFigmaEngine(ctx), data = engine.compileComponentData(parent, ctx.contracts);
     assert.equal(JSON.stringify([...ctx.contracts]), contractsBefore);
-    assert.throws(() => engine.buildComponentScript(parent, ctx.contracts), /FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED.*Caption/);
-    assert.throws(() => engine.buildBatchScript([data], null), /FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED.*Caption/);
-    // A contract explicitly requesting no native parent-property binding can
-    // still draw slot content. This is a distinct supported case, not an
-    // automatic downgrade of the rejected Caption mapping above.
-    parent.props[0].bindings.figma = { kind: 'NONE' };
+    const callerText: NodeSpec[] = [];
+    const collectCallerText = (spec: NodeSpec) => {
+      if (spec.callerContentProp) callerText.push(spec);
+      spec.children?.forEach(collectCallerText);
+    };
+    data.variants.forEach(variant => collectCallerText(variant.spec));
+    assert.ok(callerText.length > 0);
+    assert.ok(callerText.every(spec => spec.callerContentProp === 'Caption' && spec.contentProp === undefined));
+    assert.doesNotThrow(() => engine.buildBatchScript([data], null));
+    // BOOLEAN visibility has no equivalent direct-edit representation and
+    // remains an explicit pre-allocation blocker.
     parent.props.push({ name: 'showCaption', type: 'boolean', default: true,
       bindings: { code: { prop: 'showCaption' }, figma: { kind: 'BOOLEAN', property: 'Show caption' } } });
     const captionPart = parent.anatomy.root.parts!.first.parts!.body.parts!.caption;
@@ -558,10 +566,15 @@ test('native caller content populates linked slots without altering child mains 
     const instance = main.createInstance();
     assert.equal(instance.exposedInstances.length, 2, 'only eligible direct children are exposed by the parent');
     assert.equal(Object.keys(instance.componentProperties).some(k => k.startsWith('Caption#')), false);
+    const callerCaption = instance.findOne(n => n.type === 'TEXT' && n.getSharedPluginData('ds_contracts', 'callerContentProperty') === 'Caption')!;
+    assert.ok(callerCaption, 'caller text keeps exact contract correspondence on the editable native node');
+    callerCaption.characters = 'Direct canvas edit';
+    assert.deepEqual(instance.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Direct canvas edit'));
+    assert.deepEqual(main.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption'), 'editing an instance does not change the main');
     const heading = Object.keys(instance.componentProperties).find(k => k.startsWith('Heading#'))!;
     assert.ok(heading, 'direct component text can still bind while other content occupies nested slots');
     (instance as any).setProperties({ [heading]: 'Changed panel title' });
-    assert.deepEqual(instance.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption', 'Changed panel title'));
+    assert.deepEqual(instance.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Direct canvas edit', 'Changed panel title'));
     assert.deepEqual(main.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption'));
     instance.remove();
     const ids = main.findAll(() => true).map(n => n.id);
@@ -600,6 +613,43 @@ test('native caller content populates linked slots without altering child mains 
   }
 });
 
+test('native caller graph owns linked instances, preserves borrowed internals and passes independent readback', async () => {
+  const fixture = await nativeComparisonFixture();
+  const frame = fixture.contract('fixture.graph-frame', { root: { layout: { display: 'flex', direction: 'column' },
+    slot: { name: 'children' } } });
+  const parent = fixture.contract('fixture.graph-main', { root: { layout: { display: 'flex', direction: 'column' }, parts: {
+    frame: { component: { id: frame.id }, parts: {
+      caption: { content: { prop: 'caption' }, tokens: { color: '{ink}' }, declared: { 'font-family': 'Inter' } },
+    } },
+  } } });
+  parent.props = [{ name: 'caption', type: 'text', default: 'Caller caption',
+    bindings: { code: { prop: 'caption' }, figma: { kind: 'TEXT', property: 'Caption' } } }];
+  const contracts = new Map([[parent.id, parent], [frame.id, frame]]);
+  const engine = createFigmaEngine({ tokens: { primitives: fixture.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } },
+    icons: new Map(fixture.assets) });
+  const operation = await fixture.context('10000000-0000-4000-8000-000000000004');
+  const compiled = engine.compileNativeContractGraphDraft(parent, contracts, fixture.source, operation.operation.id);
+  assert.equal(compiled.components.at(-1), compiled.component);
+  assert.ok(compiled.components.every(component => component.contractId.startsWith(`source-native:${operation.operation.id}:`)));
+  const creation = await fixture.run(engine.buildNativeContractGraphDraftScript(parent, contracts, fixture.source, operation));
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  assert.equal(creation.graphTargets.length, 2);
+  const input = { operation: operation.operation, planRevision: revisionOf('caller graph plan'),
+    projection: compiled.projection, component: compiled.component, graphComponents: compiled.components,
+    tokenInput: operation.tokens.input, tokenIdentity: operation.tokens.identity, creation };
+  const receipt = await fixture.run(emitNativeContractReadbackScript(input));
+  const verification = verifyNativeContractReadback(input, receipt);
+  assert.equal(verification.status, 'supported-structure-observed', JSON.stringify(verification));
+  const instance = fixture.figma.root.findOne((n: any) => n.type === 'INSTANCE' &&
+    n.getSharedPluginData('ds_contracts', 'nativeContractPart'))!;
+  assert.ok(instance);
+  const caller = instance.findOne((n: any) => n.type === 'TEXT' &&
+    n.getSharedPluginData('ds_contracts', 'callerContentProperty') === 'Caption')!;
+  assert.equal(caller.characters, 'Caller caption');
+  assert.ok(receipt.nodes.some((n: any) => !creation.nodes.some((born: any) => born.id === n.id)),
+    'independent readback inventories inherited instance sublayers without mutating them');
+});
+
 test('composition resources preserve colliding token values and caller property references across native compilation', () => {
   const { parent, child } = family();
   parent.props = [{ name: 'tone', type: 'text', default: '{tone}',
@@ -629,7 +679,8 @@ test('composition resources preserve colliding token values and caller property 
   const compiled = engine.compileComponentData(scoped.contracts.get(parent.id)!, scoped.contracts);
   const texts = compiled.variants[0].spec.children!.map(instance => instance.children![0].children![0]);
   assert.deepEqual(texts.map(t => t.fontSize), [21, 27]);
-  assert.deepEqual(texts.map(t => t.contentProp), ['Caption', 'Caption']);
+  assert.deepEqual(texts.map(t => t.callerContentProp), ['Caption', 'Caption']);
+  assert.deepEqual(texts.map(t => t.contentProp), [undefined, undefined]);
   assert.notEqual(texts[0].textFill, texts[1].textFill);
   const edit = structuredClone(resources); (edit[1].tokens.type as any).size.$value = '23px';
   const changed = scopeContractResources([parent, first, second], edit);

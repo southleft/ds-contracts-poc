@@ -68,24 +68,44 @@ export function prepareNativeContractDraft(
     textProperties.set(name, prop.default);
   }
   const boundTextProperties = new Set<string>();
-  function visit(spec: NodeSpec, variant: string, specPath: number[], parent?:NodeSpec) {
+  function visit(spec: NodeSpec, variant: string, specPath: number[], parent?:NodeSpec, insideCallerSlot = false) {
+    // A caller-slot spec points at a SLOT already owned by the dependency
+    // instance. It is a navigation carrier, not an allocation in this draft.
+    // Its children are caller-owned allocations and are qualified below.
+    if (spec.callerSlotProperty !== undefined) {
+      if (spec.type !== 'slot' || !spec.callerSlotProperty || !spec.slotProperty ||
+          spec.callerSlotProperty !== spec.slotProperty || spec.nativeContractPart ||
+          spec.nativeContractSample || spec.nativeSourcePart || spec.nativeSourceSample)
+        throw Error('NATIVE_CONTRACT_DRAFT_CALLER_SLOT_OWNERSHIP_UNQUALIFIED');
+      (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i], spec, true));
+      return;
+    }
     // Every allocation must pass nativeInit. Nested instances, styled text
     // wrappers, margin boxes and slot defaults need their own ownership mapping.
-    if (!['root', 'frame', 'slot', 'svg', 'shape', 'text'].includes(spec.type) || spec.slotDefault?.length ||
+    if (!['root', 'frame', 'slot', 'svg', 'shape', 'text', 'instance'].includes(spec.type) || spec.slotDefault?.length ||
         spec.visibleProp || spec.slotOptional || spec.margins || spec.insetOverlay ||
         spec.nativeSourcePart || spec.nativeSourceSample || spec.nativeSourceVisible !== undefined ||
         spec.nativeContractSample || spec.nativeContractPart)
       throw Error('NATIVE_CONTRACT_DRAFT_NODE_OWNERSHIP_UNQUALIFIED');
+    if (spec.type === 'instance' && (!spec.dep || !spec.depContractId || spec.depAnchorKey ||
+        (spec.children ?? []).some(child => child.callerSlotProperty === undefined)))
+      throw Error('NATIVE_CONTRACT_DRAFT_INSTANCE_OWNERSHIP_UNQUALIFIED');
     if (spec.type === 'text' && (spec.children?.length || spec.textStyle ||
         spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings || spec.absolute || spec.overlay ||
         spec.pct !== undefined || spec.rotation || spec.layout || spec.lits ||
         typeof spec.characters !== 'string' || !spec.fontFamily || !spec.fontStyle || !Number.isFinite(spec.fontSize)))
       throw Error('NATIVE_CONTRACT_DRAFT_TEXT_OWNERSHIP_UNQUALIFIED');
     if (spec.contentProp !== undefined) {
-      if (spec.type !== 'text' || !textProperties.has(spec.contentProp) ||
+      if (insideCallerSlot || spec.type !== 'text' || !textProperties.has(spec.contentProp) ||
           spec.characters !== textProperties.get(spec.contentProp))
         throw Error('NATIVE_CONTRACT_DRAFT_TEXT_MAPPING_UNQUALIFIED');
       boundTextProperties.add(spec.contentProp);
+    }
+    if (spec.callerContentProp !== undefined) {
+      if (!insideCallerSlot || spec.type !== 'text' || !textProperties.has(spec.callerContentProp) ||
+          spec.characters !== textProperties.get(spec.callerContentProp))
+        throw Error('NATIVE_CONTRACT_DRAFT_CALLER_TEXT_MAPPING_UNQUALIFIED');
+      boundTextProperties.add(spec.callerContentProp);
     }
     if (spec.type === 'text') {
       fonts.set('Inter/' + spec.fontStyle, { family: 'Inter', styles: [spec.fontStyle!] });
@@ -117,7 +137,7 @@ export function prepareNativeContractDraft(
     for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.svgPaintVar,
       spec.textFill, spec.fontSizeVar, spec.fontWeightVar, spec.lineHeightVar])
       if (name) boundNames.add(name);
-    (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i],spec));
+    (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i], spec, insideCallerSlot));
   }
   data.variants.forEach(v => visit(v.spec, v.name, []));
   if (boundTextProperties.size !== textProperties.size)

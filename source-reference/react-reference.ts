@@ -1,6 +1,6 @@
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
 import {readReactCallerCompositionGraph} from './react-caller-composition-evidence.js';
-import {revisionOf} from '../core/contract-provenance.js';
+import {canonicalJson, revisionOf} from '../core/contract-provenance.js';
 import {compileReactCallerNative} from './react-caller-native.js';
 import {buildReactCallerPreview} from './react-caller-preview.js';
 import {buildReactBehaviorPreview} from './react-behavior-preview.js';
@@ -21,6 +21,7 @@ import { startReactOwnership } from "./react-ownership-run.js";
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
 import { readReactNativeEvidence, readReactNativeContentEvidence, selectReactNativeRequest, selectReactChildRequest } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
+import { isReactCallerNativeRequest, reactCallerNativeReservation, type ReactCallerNativeRequest } from './react-caller-native-request.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
 import type { createNativeOperationTransport } from './native-operation-transport.js';
 import { proposeReactSourceProgram } from "./react-program-proposal.js";
@@ -192,6 +193,34 @@ export function createReactReferenceService(
   const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
   const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource,
     (referenceId,caseId,report) => projectReactBehaviorContract(initialStates.read(referenceId,caseId,report.instanceId),report));
+  const callerGraph = (operationId: string) => {
+    if (!native || !reference || !reactReferenceUnchanged(reference)) throw Error('react-caller-source-unavailable');
+    const current = reference;
+    const request = native().jobs.reactRequest(operationId);
+    if (request.version !== 1 || request.referenceId !== current.id) throw Error('react-caller-source-mismatch');
+    const graph = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => readReactCallerCompositionGraph(repoRoot, current,
+      request, operationId, (caseId, instanceId) => {
+        const behavior = callbacks.read(current.id, caseId, instanceId)?.draft;
+        if (behavior?.status !== 'generated-draft' || !behavior.contract) return undefined;
+        const initial = initialStates.nativeEvidence(current, initialStates.nativeRequest(current.id, caseId, instanceId));
+        return { ...initial.composition, initialContract: initial.draft.compiled!.contract!, contract: behavior.contract,
+          tokens: initial.draft.compiled!.tokens!, assets: initial.draft.compiled!.assets ?? [] };
+      })));
+    if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+    return { current, request, graph };
+  };
+  const callerNativeEvidence = (request: ReactCallerNativeRequest) => {
+    if (!isReactCallerNativeRequest(request)) throw Error('react-caller-native-request-invalid');
+    const current = callerGraph(request.parentOperationId);
+    const nativeCompilation = compileReactCallerNative(current.graph);
+    if (request.referenceId !== current.current.id || request.caseId !== current.request.caseId ||
+        request.inventorySha256 !== current.request.inventorySha256 ||
+        canonicalJson(request.ownership) !== canonicalJson(current.request.ownership) ||
+        request.graphRevision !== nativeCompilation.report.graphRevision)
+      throw Error('react-caller-native-evidence-changed');
+    const { source } = readReactNativeEvidence(repoRoot, current.current, current.request);
+    return { graph: current.graph, source };
+  };
   const thisInitialEvidence = (request: ReactInitialNativeRequest) => {
     if (!reference) throw Error('react-initial-native-reference-unavailable');
     return initialStates.nativeEvidence(reference, request);
@@ -259,34 +288,36 @@ export function createReactReferenceService(
       } catch { json(res, 409, { error: 'Contextual inspection requires an unchanged saved composition and its exact nested source instance.' }); }
       return;
     }
-    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview|\/native-compilation)?$/.exec(route);
+    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview|\/native-compilation|\/native-operation)?$/.exec(route);
     if (callerReact) {
       try {
-        if (req.method !== 'GET' || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
+        if (!['GET', ...(callerReact[3] === '/native-operation' ? ['POST'] : [])].includes(req.method ?? '') || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
             !native || !reference || reference.id !== callerReact[1] || !reactReferenceUnchanged(reference))
           throw Error('react-caller-request-invalid');
-        const current = reference;
-        const graph = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => readReactCallerCompositionGraph(repoRoot, current,
-          native!().jobs.reactRequest(callerReact[2]), callerReact[2], (caseId, instanceId) => {
-            const behavior = callbacks.read(current.id, caseId, instanceId)?.draft;
-            if (behavior?.status !== 'generated-draft' || !behavior.contract) return undefined;
-            const initial = initialStates.nativeEvidence(current, initialStates.nativeRequest(current.id, caseId, instanceId));
-            return { ...initial.composition, initialContract: initial.draft.compiled!.contract!, contract: behavior.contract,
-              tokens: initial.draft.compiled!.tokens!, assets: initial.draft.compiled!.assets ?? [] };
-          })));
-        if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+        const current = callerGraph(callerReact[2]);
+        const { graph } = current;
         const { draft } = graph;
         if (callerReact[3] === '/native-compilation') {
           const { report } = compileReactCallerNative(graph);
-          if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+          if (!reactReferenceUnchanged(current.current)) throw Error('react-caller-source-changed');
           json(res, 200, { compilation: report }); return;
+        }
+        if (callerReact[3] === '/native-operation') {
+          const compilation = compileReactCallerNative(graph);
+          const selected: ReactCallerNativeRequest = { version: 1, kind: 'react-caller-graph-draft',
+            referenceId: current.request.referenceId, parentOperationId: callerReact[2], ownership: current.request.ownership,
+            inventorySha256: current.request.inventorySha256, caseId: current.request.caseId,
+            graphRevision: compilation.report.graphRevision };
+          const operation = req.method === 'POST' ? native().jobs.prepare(selected)
+            : native().jobs.forBaseline(reactCallerNativeReservation(selected));
+          json(res, 200, { operation, connection: operation ? native().transport.status(operation.id, Date.now()) : null }); return;
         }
         if (!callerReact[3]) { json(res, 200, { draft }); return; }
         const output = await buildReactCallerPreview(repoRoot, draft);
-        if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+        if (!reactReferenceUnchanged(current.current)) throw Error('react-caller-source-changed');
         res.setHeader('Content-Type', 'text/html; charset=utf-8'); res.setHeader('Cache-Control', 'no-store');
         res.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox allow-scripts");
-        res.end(reactReferenceHtml({ ...current, ...output }));
+        res.end(reactReferenceHtml({ ...current.current, ...output }));
       } catch { json(res, 409, { error: 'Generated composition unavailable. Unchanged source, saved content relationships and compatible behavior observations are required.' }); }
       return;
     }
@@ -899,6 +930,7 @@ export function createReactReferenceService(
       if (!reference) throw Error('react-native-reference-unavailable');
       return readReactNativeEvidence(repoRoot, reference, request);
     },
+    callerNativeEvidence,
     close() {
       for (const job of validations.values()) job.close();
       for (const job of ownershipJobs.values()) job.close();

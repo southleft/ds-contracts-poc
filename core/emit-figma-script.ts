@@ -57,6 +57,7 @@ import {
   statePreviewSubstProps,
   withStateSegment,
   baseTwinName,
+  sortByDependencies,
   walkAnatomy,
   type Contract,
   type Part,
@@ -458,6 +459,10 @@ export interface NodeSpec {
    *  Absent whenever textFill is set (a bound paint wins). */
   textFillLit?: { r: number; g: number; b: number; a?: number };
   contentProp?: string;
+  /** Caller-owned text inside an INSTANCE SLOT cannot reference an enclosing
+   * component property. It remains a directly editable native TEXT node and
+   * carries this exact contract-property identity for deterministic readback. */
+  callerContentProp?: string;
   // instance
   dep?: string;
   /** Authoritative semantic identity for a nested component. Names are only
@@ -955,6 +960,37 @@ export function nativeCallerPropertyBlockers(data: ComponentData) {
     node.children?.forEach(child => visit(child, inside));
   };
   [...data.variants, ...(data.stateVariants ?? [])].forEach(variant => visit(variant.spec, false));
+  return [...found.values()];
+}
+
+/** Promote parent TEXT mappings inside caller slots to direct canvas editing.
+ * Figma strips or rejects enclosing component-property references at this
+ * boundary, while the TEXT node itself remains editable. BOOLEAN visibility
+ * mappings still require a different representation and remain blockers. */
+function lowerNativeCallerContentSpecs(variants: VariantSpec[]) {
+  const visit = (node: NodeSpec, insideCallerSlot: boolean) => {
+    const inside = insideCallerSlot || node.callerSlotProperty !== undefined;
+    if (inside && node.contentProp !== undefined) {
+      if (node.type !== 'text' || node.callerContentProp !== undefined)
+        throw Error('FIGMA_CALLER_SLOT_TEXT_MAPPING_INVALID');
+      node.callerContentProp = node.contentProp;
+      delete node.contentProp;
+    }
+    node.children?.forEach(child => visit(child, inside));
+  };
+  variants.forEach(variant => visit(variant.spec, false));
+}
+
+export function nativeCallerContentMappings(data: ComponentData) {
+  const found = new Map<string, { property: string; nodeName: string }>();
+  const visit = (node: NodeSpec) => {
+    if (node.callerContentProp)
+      found.set(JSON.stringify([node.callerContentProp, node.name]), {
+        property: node.callerContentProp, nodeName: node.name,
+      });
+    node.children?.forEach(visit);
+  };
+  [...data.variants, ...(data.stateVariants ?? [])].forEach(variant => visit(variant.spec));
   return [...found.values()];
 }
 
@@ -5848,10 +5884,17 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     }
   }
 
+  // Caller text remains native and editable inside the instance slot, but it
+  // cannot reference the enclosing component's property. Lower that boundary
+  // before classifying unbound properties so no inert parent TEXT control is
+  // minted for content represented directly on the canvas.
+  lowerNativeCallerContentSpecs([...variants, ...stateVariants]);
+
   // Text props bound to a text node somewhere in the compiled specs.
   const boundTextProps = new Set<string>();
   const collectBound = (s: NodeSpec) => {
     if (s.contentProp) boundTextProps.add(s.contentProp);
+    if (s.callerContentProp) boundTextProps.add(s.callerContentProp);
     (s.children ?? []).forEach(collectBound);
   };
   variants.forEach((v) => collectBound(v.spec));
@@ -7665,6 +7708,78 @@ function buildNativeContractDraftScript(
   }), draft.fonts);
 }
 
+function scopeNativeGraphComponent(data: ComponentData, ids: Map<string, string>) {
+  const scoped = structuredClone(data);
+  scoped.contractId = ids.get(data.contractId)!;
+  const visit = (spec: NodeSpec) => {
+    if (spec.depContractId) {
+      const id = ids.get(spec.depContractId);
+      if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
+      spec.depContractId = id;
+      delete spec.depAnchorKey;
+    }
+    for (const item of spec.slotDefault ?? []) {
+      const id = ids.get(item.contractId);
+      if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
+      item.contractId = id;
+      delete item.anchorKey;
+    }
+    for (const item of spec.slotAccepts ?? []) {
+      const id = ids.get(item.contractId);
+      if (!id) throw Error('NATIVE_CONTRACT_GRAPH_DEPENDENCY_UNQUALIFIED');
+      item.contractId = id;
+      delete item.anchorKey;
+    }
+    spec.children?.forEach(visit);
+  };
+  [...scoped.variants, ...(scoped.stateVariants ?? [])].forEach(variant => visit(variant.spec));
+  return scoped;
+}
+
+/** Compile a closed React component graph into one operation-owned native
+ * draft. Dependencies are emitted first; every semantic identity is scoped to
+ * this operation, while nativeContractPart keeps the original contract
+ * revision. The parent remains the readback target. */
+function compileNativeContractGraphDraft(
+  parent: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+  operationId: string,
+) {
+  if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId) || byId.get(parent.id) !== parent)
+    throw Error('NATIVE_CONTRACT_GRAPH_IDENTITY_REQUIRED');
+  const ordered = sortByDependencies([...byId.values()]);
+  if (ordered.at(-1)?.id !== parent.id)
+    throw Error('NATIVE_CONTRACT_GRAPH_PARENT_ORDER_UNQUALIFIED');
+  const compiled = ordered.map(contract => compileNativeContractDraft(contract, byId, source));
+  const ids = new Map(ordered.map(contract => [contract.id, `source-native:${operationId}:${contract.id}`]));
+  const components = compiled.map(row => scopeNativeGraphComponent(row.component, ids));
+  const parentIndex = ordered.findIndex(contract => contract.id === parent.id);
+  return {
+    projection: compiled[parentIndex].projection,
+    component: components[parentIndex],
+    components,
+    componentRevisions: components.map(component => ({ contractId: component.contractId, revision: revisionOf(component) })),
+    boundNames: [...new Set(compiled.flatMap(row => row.boundNames))].sort(),
+    fonts: [...new Map(compiled.flatMap(row => row.fonts).map(font => [JSON.stringify(font), font])).values()],
+  };
+}
+
+function buildNativeContractGraphDraftScript(
+  parent: Contract,
+  byId: Map<string, Contract>,
+  source: NativeContractDraftSource,
+  context: NativeSourceWriteContext,
+) {
+  if (context.comparisons) throw Error('NATIVE_CONTRACT_GRAPH_COMPARISON_MAPPING_REQUIRED');
+  const graph = compileNativeContractGraphDraft(parent, byId, source, context.operation.id);
+  const prepared = prepareNativeSourceWrite(graph.projection, context, graph.boundNames);
+  return wrapNativeSourceWrite(prepared, buildSyncScript(graph.components, context.operation.fileKey, {
+    header: '// Shared renderer: operation-scoped unaccepted Contract graph.',
+    preamble: '', nativeSource: true,
+  }), graph.fonts);
+}
+
 /** Create comparison instances referencing existing observed mains. The content
  * contract is recompiled here; serialized specs are never executable input. */
 function buildNativeContractComparisonScript(contract: Contract, byId: Map<string, Contract>,
@@ -7736,6 +7851,7 @@ function buildSyncScript(
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
   const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined));
+  const hasCallerContent = featureDatas.some(d => dataSome(d, x => x.callerContentProp !== undefined));
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
   const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
   const hasGridGapBindings = featureDatas.some((d) => dataSome(d, (x) => x.bindings?.gridRowGap !== undefined || x.bindings?.gridColumnGap !== undefined));
@@ -8435,6 +8551,9 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }
+    ${hasCallerContent ? `if (spec.callerContentProp) {
+      node.setSharedPluginData('ds_contracts', 'callerContentProperty', spec.callerContentProp);
+    }` : ''}
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
@@ -8483,7 +8602,7 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
       false,
     );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-    node = main.createInstance();
+    node = main.createInstance();${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);${hasNestedPropertyControls ? `
     (registry.nestedControls || (registry.nestedControls = [])).push(node);` : ''}
   } else if (spec.type === 'slot') {
@@ -8545,6 +8664,9 @@ ${hasCallerSlots ? `  // Attach before populating caller slots. Moving an alread
       const entries = callerSlotsByInstance.get(node) || [];
       entries.push({ slot, spec: child }); callerSlotsByInstance.set(node, entries);` : ''}
     }
+    ${opts.nativeSource ? `// Inherited instance sublayers are private Figma nodes. Writing plugin
+    // data to one can invalidate every sibling handle. The independent readback
+    // authenticates them through this owned instance and its owned main.` : ''}
     // The dependency already owns its layout and private descendants. Do not
     // position the inherited slot as a new direct child of this instance.
     return node;
@@ -9314,7 +9436,9 @@ for (const C of COMPONENTS) {
   // report can list the facts under the set whatever the sync did.
   const degradedFrom = DEGRADATIONS.length;
   results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
-}${hasSlot && !opts.nativeSource ? `
+}${opts.nativeSource && datas.length > 1 ? `
+NATIVE_RESULT.graphTargets = results.map(result => ({ contractId: result.contractId, id: result.nodeId, key: result.key }));
+` : ''}${hasSlot && !opts.nativeSource ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.
 const slotUtility = retireSlotUtility();` : ''}
@@ -9330,6 +9454,8 @@ return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId),
     buildNativeSourceComponentScript,
     compileNativeContractDraft,
     buildNativeContractDraftScript,
+    compileNativeContractGraphDraft,
+    buildNativeContractGraphDraftScript,
     buildNativeContractComparisonScript,
     /** One token ref → its resolved literal, or a throw when the ref does not
      *  resolve. Exposed so a SHELL can grade a contract against this engine's

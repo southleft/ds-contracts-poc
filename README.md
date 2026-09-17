@@ -49,10 +49,10 @@ There is existing table and other composed-component implementation evidence in 
 
 - **Explore contracts and deterministic generation.** The local playground runs the checked-out engine. Supported contracts can produce code and native Figma writer programs.
 - **Try React source import.** The code-import view accepts static TSX/CSS experiments and reports supported facts and limitations. It is not yet a general repository import or a verified React-to-Figma journey.
-- **Inspect original React sources.** The local `/sources` workflow opens a configured Button, Checkbox and composed Card cohort, verifies original styling and states, and proposes installed API facts. It is not yet general repository onboarding or native generation. Earlier Lit work remains in a collapsed V1.1 archive.
+- **Inspect original React sources.** The local `/sources` workflow opens a configured Button, Checkbox and composed Card cohort, verifies original styling and states, proposes installed API facts, and can deliver supported root or composed component graphs to the authorized Figma evaluation file through the companion plugin. The composed Card graph has passed live independent structure readback and a repeat run created no duplicates. This remains a configured preset rather than general repository onboarding, and visual qualification is still in progress. Earlier Lit work remains in a collapsed V1.1 archive.
 - **Evaluate existing import and generation paths.** CLI and plugin workflows expose proposals and named limitations. They require setup and review; they do not yet deliver the full automatic journeys above.
 
-**Still unfinished:** application-driven code-to-Figma conversion with independent native verification, a qualified design-only reusable-library journey, and reliable two-way repair with recovery and rollback. A matching screenshot, passing engine test or historical component demo does not establish those outcomes.
+**Still unfinished:** visual qualification and a cohesive application review for the React-to-Figma journey, a qualified design-only reusable-library journey, and reliable two-way repair with recovery and rollback. A matching screenshot, passing engine test or historical component demo does not establish those outcomes.
 
 ### Run locally
 
