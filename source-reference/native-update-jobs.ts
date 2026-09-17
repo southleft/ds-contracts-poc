@@ -1,3 +1,4 @@
+import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
 /** Updates are children of immutable creation evidence. The existing companion
  * transport delivers these commands; no target allocation or baseline rewrite. */
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
@@ -162,6 +163,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   };
   const get=(id:string)=>snapshot(load(id));
   const dispatch=(id:string,phase:NativeOperationPhase):NativeOperationCommand=>{
+    assertOutsideEvidenceSnapshot();
     const l=load(id),p=phase as Phase;
     if(superseded(l))fail('superseded-observation-is-historical');
     if(l.state.pending || !PHASES.includes(p)) fail('dispatch-refused');
@@ -181,6 +183,12 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       attemptId:randomUUID(),nonce:randomBytes(32).toString('hex'),fileKey:l.plan.before.operation.fileKey,
       planRevision:l.header.planRevision,script:program.script,scriptSha256:program.sha256,readOnly:p!=='update-apply'};
     append(l,{kind:'dispatch',command,...(reader?{reader}:{})});return structuredClone(command);
+  };
+  const image=(id:string,hash:string) => {
+    if(!HASH.test(hash))fail('image-request-invalid');
+    const l=load(id),data=collectNativeImages(l.plan.after,l.state.observation).bytes.get(hash);
+    if(!data)fail('image-unavailable');
+    return Buffer.from(data);
   };
   return {
     get,dispatch,
@@ -213,6 +221,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     },
     has(id:string) { if(!UUID.test(id)) return false;return existsSync(path.join(root,id)); },
     prepare(parentId:string,proposalId:string) {
+      assertOutsideEvidenceSnapshot();
       const id=identity(parentId,proposalId);
       if(existsSync(path.join(root,id))) return get(id);
       const record=plans.current(parentId,proposalId);
@@ -223,8 +232,9 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     },
     forProposal(parentId:string,proposalId:string) { const id=identity(parentId,proposalId);return existsSync(path.join(root,id))?get(id):null; },
     deliveryState(id:string) {const l=load(id);return {phase:l.state.phase,pendingPhase:l.state.pending?.phase,fileKey:l.plan.before.operation.fileKey};},
-    pendingCommand(id:string) {const l=load(id);if(l.state.pending&&!l.state.pending.readOnly) authenticate(l);return structuredClone(l.state.pending??null);},
+    pendingCommand(id:string) {assertOutsideEvidenceSnapshot();const l=load(id);if(l.state.pending&&!l.state.pending.readOnly) authenticate(l);return structuredClone(l.state.pending??null);},
     accept(id:string,envelope:NativeOperationResult) {
+      assertOutsideEvidenceSnapshot();
       const serialized=JSON.stringify(envelope);if(Buffer.byteLength(serialized)>4*1024*1024) fail('result-too-large');
       envelope=JSON.parse(serialized);const l=load(id);
       const prior=l.events.find(e=>e.kind==='result'&&e.envelope.attemptId===envelope?.attemptId);
@@ -233,6 +243,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       append(l,{kind:'result',envelope});return get(id);
     },
     retryObservation(id:string) {
+      assertOutsideEvidenceSnapshot();
       let l=load(id);if(l.state.pending&&!l.state.pending.readOnly) fail('write-outcome-unknown');
       const phase=l.state.pending?.phase ?? (l.state.wrote?'update-readback':'update-preflight-readback');
       if(l.state.pending) {append(l,{kind:'abandon-observation',attemptId:l.state.pending.attemptId});l=load(id);}
@@ -243,6 +254,11 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       const e=l.events.find(e=>e.kind==='dispatch'&&e.command.attemptId===attemptId);
       return e?.kind==='dispatch'&&e.command.readOnly?e.command.phase:null;
     },
-    image(id:string,hash:string) {if(!HASH.test(hash)) fail('image-request-invalid');const l=load(id),data=collectNativeImages(l.plan.after,l.state.observation).bytes.get(hash);if(!data) fail('image-unavailable');return Buffer.from(data);},
+    image,
+    // Historical exports are bound to their immutable proposal and checked
+    // journal. Looking up an image does not authorize a new native operation.
+    imageForProposal(parentId:string,proposalId:string,hash:string) {
+      return image(identity(parentId,proposalId),hash);
+    },
   };
 }

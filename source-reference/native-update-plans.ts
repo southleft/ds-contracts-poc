@@ -1,3 +1,4 @@
+import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
 /** Immutable, host-derived update proposals. This store never dispatches a
  * program or authorizes applying a stale proposal; delivery reauthentication
  * must call current() before any future write. */
@@ -75,6 +76,7 @@ export function createNativeUpdatePlans(repo: string,
     changes:structuredClone(record.update.plan.changes), limitations:['live-preflight-required','application-delivery-pending','visual-fidelity-unqualified'] });
   return {
     prepare(parentId: string) {
+      assertOutsideEvidenceSnapshot();
       const record=compile(parentId);
       if(!record.update.plan.changes.length && record.predecessor) {
         const previous=read(parentId,record.predecessor.proposalId);

@@ -1,3 +1,4 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { readReactCompositionEvidence } from './react-composition-evidence.js';
 import { restoreReactOwnership } from './react-ownership-restore.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
@@ -283,9 +284,7 @@ export function createReactReferenceService(
         if (updateImage) {
           const { updateJobs }=native();
           if(req.method!=='GET' || !updateJobs || jobs.reactIdentity(updateImage[2]).referenceId!==reference.id) throw Error('react-update-image-refused');
-          const update=updateJobs.forProposal(updateImage[2],updateImage[3]);
-          if(!update) throw Error('react-update-unavailable');
-          const png=updateJobs.image(update.id,updateImage[4]);
+          const png=updateJobs.imageForProposal(updateImage[2],updateImage[3],updateImage[4]);
           res.writeHead(200,{'Content-Type':'image/png','Content-Length':png.length,'Cache-Control':'no-store'});res.end(png);return;
         }
         if (req.method === 'POST') {
@@ -354,7 +353,7 @@ export function createReactReferenceService(
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
         const observedAt = Date.now();
-        json(res, 200, { operations: jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
+        json(res, 200, { operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
@@ -392,7 +391,7 @@ export function createReactReferenceService(
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
             }), connection: transport.status(row.operation.id, observedAt) };
-        })) });
+        }))) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
       }

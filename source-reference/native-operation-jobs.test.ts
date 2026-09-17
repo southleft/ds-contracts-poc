@@ -1,3 +1,4 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import {
@@ -85,6 +86,12 @@ test('display snapshots reuse checked reads but cannot authorize writes or leak 
       ()=>f.jobs.pendingCommand(id),()=>f.jobs.accept(id,{} as NativeOperationResult),
       ()=>f.jobs.retryObservation(id),()=>f.jobs.retryCreation(id)])
       assert.throws(write,/write-during-read-snapshot/);
+  });
+  withEvidenceReadSnapshot(()=>{
+    for(const write of [()=>f.jobs.prepare(request),()=>f.jobs.dispatch(id,'token-create'),
+      ()=>f.jobs.pendingCommand(id),()=>f.jobs.accept(id,{} as NativeOperationResult),
+      ()=>f.jobs.retryObservation(id),()=>f.jobs.retryCreation(id)])
+      assert.throws(write,/write-during-evidence-read-snapshot/);
   });
   assert.equal(calls,1);assert.deepEqual(f.inventory(),before);
   assert.equal(f.jobs.get(id).sourceCurrent,false);assert.equal(calls,2);

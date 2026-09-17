@@ -1,3 +1,4 @@
+import {evidenceReadOnce} from './evidence-read-snapshot.js';
 /** Host-owned selection and re-opening of sealed React source evidence.
  * No path, Contract, native ID or script is accepted from a browser request.
  */
@@ -44,7 +45,11 @@ export function selectReactChildRequest(repoRoot: string, reference: ReactRefere
 
 /** Existing journal requests retain these exact hashes across restarts. A new
  * request must first come from selectReactNativeRequest on a current runner. */
-export function readReactNativeEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest): {
+export function readReactNativeEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest) {
+  return evidenceReadOnce('react-native', {repoRoot,referenceId:reference.id,files:reference.files,request},
+    ()=>readReactNativeEvidenceFresh(repoRoot,reference,request));
+}
+function readReactNativeEvidenceFresh(repoRoot: string, reference: ReactReference, request: ReactNativeRequest): {
   matrix: ReactRootMatrix | ReactChildRoot; source: NativeContractDraftSource;
 } {
   if (!isReactNativeRequest(request) || reference.id !== request.referenceId || !reactReferenceUnchanged(reference)) fail();

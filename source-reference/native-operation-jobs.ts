@@ -1,3 +1,4 @@
+import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
 import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
 import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
 import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
@@ -823,7 +824,7 @@ export function createNativeOperationJobs(
   // checked observation only within this synchronous, non-authorizing scope.
   // Nothing survives into another request or a native command's authorization.
   let readSnapshot: Map<string, unknown> | undefined;
-  const assertWriteScope = () => { if (readSnapshot) fail('write-during-read-snapshot'); };
+  const assertWriteScope = () => { assertOutsideEvidenceSnapshot(); if (readSnapshot) fail('write-during-read-snapshot'); };
   function withReadSnapshot<T>(read: () => T): T {
     const outer = readSnapshot;
     readSnapshot ??= new Map();

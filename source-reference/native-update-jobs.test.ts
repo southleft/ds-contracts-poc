@@ -1,3 +1,4 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
@@ -15,10 +16,10 @@ import { createNativeOperationTransport } from './native-operation-transport.js'
 async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture = nativeUpdateFixture) {
   const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
-  let stale=false,lose='',failStorage=false,readerRevision=0;
+  let stale=false,lose='',failStorage=false,readerRevision=0,derivations=0;
   const readers={readback:(...args:Parameters<typeof emitNativeContractReadbackScript>) =>
     (readerRevision ? '// Current independent reader '+readerRevision+'\n' : '') + emitNativeContractReadbackScript(...args)};
-  const plans=createNativeUpdatePlans(repo,()=>{if(stale) throw Error('source changed');return {parentJournalRevision:'a'.repeat(64),input:f.input};});
+  const plans=createNativeUpdatePlans(repo,()=>{derivations++;if(stale) throw Error('source changed');return {parentJournalRevision:'a'.repeat(64),input:f.input};});
   const proposal=plans.prepare(f.input.before.operation.id);
   let jobs=createNativeUpdateJobs(repo,plans,readers);
   const first=jobs.prepare(proposal.parentId,proposal.id),id=first.id;
@@ -51,7 +52,7 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
   return {...f,repo,id,proposal,plans,secret,storage,messages,delivered,
     jobs:()=>jobs,transport:()=>transport,poll:()=>send({type:'native-poll'}),
     restart:()=>{jobs=createNativeUpdateJobs(repo,plans,readers);transport=createNativeOperationTransport(repo,jobs);send=boot();},
-    advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
+    derivations:()=>derivations,advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
 }
 
 test('the actual companion delivers preflight, an existing-node update, and independent exports across restarts',async t=>{
@@ -192,4 +193,35 @@ test('the bundled companion delivers the SVG stroke correction with a separate v
   assert.equal(f.figma.root.findAll((n:any)=>n.type==='VECTOR')[0].strokeWeight,Math.fround(14/12));
   assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
   assert.ok(f.jobs().verifiedForParent(f.proposal.parentId));
+});
+
+
+test('historical image lookup verifies its journal and hash without rederiving current source',async t=>{
+  const f=await fixture(t);await f.poll();await f.poll();await f.poll();
+  const hash=f.jobs().get(f.id).imageObservation!.images[0].sha256;
+  const expected=f.jobs().image(f.id,hash),count=f.derivations();
+  f.stale(); // Historical images remain visible; stale source cannot authorize a write.
+  assert.deepEqual(f.jobs().imageForProposal(f.proposal.parentId,f.proposal.id,hash),expected);
+  assert.equal(f.derivations(),count);
+  assert.throws(()=>f.jobs().imageForProposal(f.proposal.parentId,f.proposal.id,'f'.repeat(64)),/image-unavailable/);
+  assert.throws(()=>f.jobs().imageForProposal('10000000-0000-4000-8000-000000000099',f.proposal.id,hash));
+  assert.throws(()=>f.jobs().imageForProposal(f.proposal.parentId,'f'.repeat(64),hash));
+  const dir=path.join(f.repo,'private/source-native-updates',f.id,'events');
+  const file=path.join(dir,readdirSync(dir).sort().at(-1)!);
+  const event=JSON.parse(readFileSync(file,'utf8'));event.envelope.scriptSha256='0'.repeat(64);writeFileSync(file,JSON.stringify(event));
+  assert.throws(()=>f.jobs().imageForProposal(f.proposal.parentId,f.proposal.id,hash),/result-correlation-invalid/);
+  assert.equal(f.derivations(),count);
+});
+
+
+test('a display evidence snapshot cannot prepare, dispatch, accept or redeliver an update',async t=>{
+ const f=await fixture(t),before=readdirSync(path.join(f.repo,'private/source-native-updates',f.id,'events'));
+ withEvidenceReadSnapshot(()=>{
+  assert.ok(f.jobs().get(f.id));
+  for(const mutate of [()=>f.plans.prepare(f.proposal.parentId),()=>f.jobs().prepare(f.proposal.parentId,f.proposal.id),
+   ()=>f.jobs().dispatch(f.id,'update-apply'),()=>f.jobs().accept(f.id,{} as any),()=>f.jobs().retryObservation(f.id),()=>f.jobs().pendingCommand(f.id)])
+    assert.throws(mutate,/write-during-evidence-read-snapshot/);
+ });
+ assert.deepEqual(readdirSync(path.join(f.repo,'private/source-native-updates',f.id,'events')),before);
+ await f.poll();assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
 });

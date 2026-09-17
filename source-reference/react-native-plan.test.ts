@@ -1,3 +1,4 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { restoreReactOwnership } from './react-ownership-restore.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { reactInitialNativeReservation, isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
@@ -351,6 +352,14 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   assert.equal(readReactNativeEvidence(repo, reference, request).source.revision, 'sha256:'+reference.id);
   const freshRequest: ReactNativeRequest={...request,compilation:'current'};
   assert.equal(readReactNativeEvidence(repo,reference,freshRequest).source.revision,'sha256:'+reference.id);
+  withEvidenceReadSnapshot(()=>{
+    const checked=readReactNativeEvidence(repo,reference,request);checked.source.revision='mutated caller copy';
+    writeFileSync(file,'changed during display');
+    assert.equal(readReactNativeEvidence(repo,reference,structuredClone(request)).source.revision,'sha256:'+reference.id);
+    assert.throws(()=>readReactNativeEvidence(repo,reference,{...request,inventorySha256:'f'.repeat(64)}),/unavailable/);
+  });
+  assert.throws(()=>readReactNativeEvidence(repo,reference,request),/unavailable/,'the next read must observe the changed source');
+  writeFileSync(file,'unchanged source');
   const restored = restoreReactOwnership(repo, reference, request);
   assert.deepEqual(restored.report(), JSON.parse(JSON.stringify(report)));
   assert.equal(restored.dir, dir);
