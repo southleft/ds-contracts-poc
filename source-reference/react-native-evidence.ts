@@ -9,6 +9,7 @@ import { reactReferenceUnchanged, type ReactReference } from './react-reference.
 import { reactSourceProgramUnchanged, type ReactSourceProgram } from './react-source-program.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
 import { isReactNativeRequest, type ReactNativeRequest } from './react-native-request.js';
+import { deriveReactChildRoot } from './react-child-root.js';
 
 const fail = (): never => { throw Error('react-native-evidence-unavailable'); };
 /** Only call with the current runner's already authenticated report. */
@@ -24,6 +25,14 @@ export function selectReactNativeRequest(repoRoot: string, report: ReactOwnershi
     ownership: { id: report.id, sha256: evidenceSha(bytes) }, caseId,
     inventorySha256: evidenceSha(readFileSync(path.join(dir, 'integrity.json'))), matrixRevision: revisionOf(row.rootMatrix) };
   if (!isReactNativeRequest(request)) fail();
+  return request;
+}
+
+export function selectReactChildRequest(repoRoot: string, reference: ReactReference, parent: ReactNativeRequest,
+  instanceId: string): ReactNativeRequest {
+  if (parent.version !== 1) throw Error('react-child-parent-root-required');
+  const request: ReactNativeRequest = { ...structuredClone(parent), version: 2, selection: { instanceId } };
+  readReactNativeEvidence(repoRoot, reference, request);
   return request;
 }
 
@@ -51,12 +60,18 @@ export function readReactNativeEvidence(repoRoot: string, reference: ReactRefere
   const programBytes = readFileSync(path.join(dir, 'program.json'));
   const program = JSON.parse(programBytes.toString()) as ReactSourceProgram;
   if (!reactSourceProgramUnchanged(program) || !reactReferenceUnchanged(reference)) fail();
-  return { matrix: structuredClone(row.rootMatrix!), source: {
+  const captured = request.version === 2 ? JSON.parse(readFileSync(path.join(dir, request.caseId, 'source-tree.json'), 'utf8')) : undefined;
+  if (captured && (captured.status !== 'captured' || captured.problems.length || !captured.tree ||
+      captured.treeSha256 !== evidenceSha(JSON.stringify(captured.tree)) || captured.treeSha256 !== row.treeSha256)) fail();
+  const matrix = request.version === 1 ? structuredClone(row.rootMatrix!) : deriveReactChildRoot(program, row.ownership!, captured.tree,
+    JSON.parse(readFileSync(path.join(dir, request.caseId, 'style-origin.json'), 'utf8')), request.selection!.instanceId);
+  return { matrix, source: {
     revision: `sha256:${reference.id}`, programSha256: evidenceSha(programBytes), evidenceRevision: revisionOf(request),
   } };
 }
 
 export function readReactNativeContentEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest) {
+  if (request.version !== 1) throw Error('react-child-content-requires-parent-comparison');
   const original = readReactNativeEvidence(repoRoot, reference, request);
   const dir = path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id);
   const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactOwnershipReport;

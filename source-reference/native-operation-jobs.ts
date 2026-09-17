@@ -86,9 +86,11 @@ export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
   visual: Pin;
   preparation: Pin;
   plan: P;
+  sourceCompatibility?: 'identity-opacity-omission';
 }
 export type NativeOperationPhase =
-  "token-create" | "token-readback" | "component-create" | "component-readback";
+  "token-create" | "token-readback" | "component-create" | "component-readback"
+  | "update-preflight-readback" | "update-apply" | "update-readback";
 export interface NativeOperationComponentContext {
   operation: NativeSourceWriteContext["operation"];
   tokens: NativeSourceWriteContext["tokens"];
@@ -124,6 +126,7 @@ export interface NativeOperationResult {
 }
 export interface NativeOperationSnapshot {
   id: string;
+  componentName?: string;
   operation: "source-native-inspection";
   phase:
     | "prepared"
@@ -150,6 +153,7 @@ export interface NativeOperationSnapshot {
   pendingPhase?: NativeOperationPhase;
   nativeOutcome?: "unknown";
   sourceCurrent: boolean;
+  sourceCompatibility?: 'identity-opacity-omission';
   acceptedContract: null;
   nativeQualification: "unqualified";
   counters: {
@@ -1005,6 +1009,7 @@ export function createNativeOperationJobs(
       fail("source-plan-stale");
     if (load(loaded.header.id).fingerprint !== loaded.fingerprint)
       fail("evidence-changed-during-validation");
+    return current.sourceCompatibility;
   };
   // The journal is authoritative. Re-derive exports from its current readback;
   // old exports remain private history and cannot survive a retry as current.
@@ -1046,12 +1051,14 @@ export function createNativeOperationJobs(
   const snapshot = (
     loaded: Loaded,
     sourceCurrent: boolean,
+    sourceCompatibility?: 'identity-opacity-omission',
   ): NativeOperationSnapshot => {
     const images = imageArtifacts(loaded);
     return {
       id: loaded.header.id,
       operation: "source-native-inspection",
       phase: loaded.state.phase,
+      ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName } : {}),
       ...(loaded.state.pending
         ? {
             pendingPhase: loaded.state.pending.phase,
@@ -1083,6 +1090,7 @@ export function createNativeOperationJobs(
           }
         : {}),
       sourceCurrent,
+      ...(sourceCurrent && sourceCompatibility ? {sourceCompatibility} : {}),
       acceptedContract: null,
       nativeQualification: "unqualified",
       counters: {
@@ -1225,7 +1233,10 @@ export function createNativeOperationJobs(
   };
   const get = (id: string): NativeOperationSnapshot => {
     const loaded = load(id);
-    return snapshot(loaded, current(loaded));
+    let compatibility;
+    try { compatibility = authenticate(loaded); }
+    catch { return snapshot(loaded, false); }
+    return snapshot(loaded, true, compatibility);
   };
   const forBaseline = (baseline: string): NativeOperationSnapshot | null => {
     if (!present(root)) return null;
@@ -1468,18 +1479,20 @@ export function createNativeOperationJobs(
       return { referenceId: request.referenceId, caseId: request.caseId,
         ownershipId: request.ownership.id, fileKey: header.policy.fileKey };
     },
-    listReact(referenceId: string) {
+    listReact(referenceId: string, kind?: 'root') {
       if (!HASH.test(referenceId)) fail('request-invalid');
       if (!present(root)) return [];
       directories();
       return readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const header = JSON.parse(bytes(path.join(dir(id), 'operation.json')).toString()) as Header;
+        if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
         const initial = isReactInitialNativeRequest(header.request) ? header.request : undefined;
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
         // get() verifies the saved journal and separately reports source freshness.
-        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : 'root' as const,
+        return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version === 2 ? 'nested' as const : 'root' as const,
+          ...(request.version === 2 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
           ...(comparison ? { parentOperationId: comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];

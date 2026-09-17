@@ -951,6 +951,9 @@ function applyFrameSpec(node, spec) {
       }
     }
   }
+  // Resizing can replace HUG tracks with FLEX. Restore the declaration after
+  // all bound/literal size writes, before appending or placing any children.
+  if (l.mode === 'GRID') applyGridFrame(node, l);
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —

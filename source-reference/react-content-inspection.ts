@@ -100,13 +100,20 @@ export function startReactContentInspection(repoRoot: string, reference: ReactRe
 /** Saved read-only preparation survives a server restart. It grants no native
  * write permission; a writer must rederive the current compiler output. */
 export function readReactContentInspection(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, operationId: string, selected?: { id: string; inventorySha256: string }): ReactContentInspection | undefined {
+  return readReactContentInspectionEvidence(repoRoot, reference, request, operationId, selected)?.report;
+}
+
+/** Return the original that was authenticated with this saved inspection.
+ * Callers needing both must not reopen the whole archive just to discard a
+ * second copy. This is a fresh read on every call, never a freshness cache. */
+export function readReactContentInspectionEvidence(repoRoot: string, reference: ReactReference, request: ReactNativeRequest, operationId: string, selected?: { id: string; inventorySha256: string }) {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(operationId)) throw Error('react-content-operation-invalid');
   const root = path.join(repoRoot, 'private/react-content-inspections', operationId), latestPath = path.join(root, 'latest.json');
   if (!selected && !existsSync(latestPath)) return undefined;
   const latest = selected ? { ...selected, requestRevision: revisionOf(request) } : JSON.parse(readFileSync(latestPath, 'utf8'));
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(latest.id) || latest.requestRevision !== revisionOf(request))
     throw Error('react-content-saved-request-changed');
-  readReactNativeContentEvidence(repoRoot, reference, request);
+  const original = readReactNativeContentEvidence(repoRoot, reference, request);
   const dir = path.join(root, latest.id), sealBytes = readFileSync(path.join(dir, 'integrity.json'));
   if (evidenceSha(sealBytes) !== latest.inventorySha256) throw Error('react-content-inventory-changed');
   const seal = JSON.parse(sealBytes.toString());
@@ -119,5 +126,5 @@ export function readReactContentInspection(repoRoot: string, reference: ReactRef
   const report = JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8')) as ReactContentInspection;
   if (report.id !== latest.id || report.operationId !== operationId || report.referenceId !== reference.id || report.caseId !== request.caseId || report.phase === 'running')
     throw Error('react-content-report-identity-changed');
-  return report;
+  return { report, original };
 }

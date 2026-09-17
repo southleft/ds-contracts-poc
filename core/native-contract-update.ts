@@ -85,6 +85,21 @@ export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, recei
   return verifyNativeContractReadback(direction === 'apply' ? plan.after : plan.before, receipt);
 }
 
+/** Independently check a preflight or completed update against the complete
+ * saved observation, allowing only the pinned scalar transitions. */
+export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, receipt: unknown, complete = false): boolean {
+  try {
+    const normalized = structuredClone(receipt) as NativeSourceReadback;
+    delete normalized.images;
+    for (const change of plan.changes) {
+      const row = normalized.nodes?.find(n => n.id === change.nodeId);
+      if (!row || !(complete ? [change.after] : [change.before, change.after]).includes(row.values.opacity)) return false;
+      row.values.opacity = change.before;
+    }
+    return equal(normalized, plan.baseline) && verifyNativeContractReadback(plan.before, normalized).status === 'supported-structure-observed';
+  } catch { return false; }
+}
+
 /** No allocation, deletion or metadata rewriting. A fresh complete readback
  * must match the saved baseline except for this operation's exact before/after
  * values. The same program can finish a partial application or make no writes.

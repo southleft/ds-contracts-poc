@@ -1,12 +1,15 @@
+import { readReactCompositionEvidence } from './react-composition-evidence.js';
+import { restoreReactOwnership } from './react-ownership-restore.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
+import type { createNativeUpdateJobs } from './native-update-jobs.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore } from './react-source-framing.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
 import { startReactContentInspection, readReactContentInspection } from './react-content-inspection.js';
-import { readReactNativeEvidence, readReactNativeContentEvidence, selectReactNativeRequest } from './react-native-evidence.js';
+import { readReactNativeEvidence, readReactNativeContentEvidence, selectReactNativeRequest, selectReactChildRequest } from './react-native-evidence.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import type { createNativeOperationJobs } from './native-operation-jobs.js';
 import type { createNativeOperationTransport } from './native-operation-transport.js';
@@ -152,7 +155,7 @@ export function createReactReferenceService(
       repoRoot,
       "../ds-contracts-poc/examples/shadcn/.shadcn-sandbox",
     ),
-  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans> },
+  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans>; updateJobs?: ReturnType<typeof createNativeUpdateJobs>; updateTransport?: ReturnType<typeof createNativeOperationTransport> },
 ) {
   let reference: ReactReference | undefined;
   const frames = createReactSourceFramingStore(repoRoot, (referenceId, operationId) => {
@@ -181,6 +184,23 @@ export function createReactReferenceService(
     string,
     ReturnType<typeof startReactOwnership>
   >();
+  const savedOwnership = (current: ReactReference) => {
+    let job = ownershipJobs.get(current.id);
+    if (!job && native) {
+      try {
+        const jobs = native().jobs;
+        const pinned = jobs.listReact(current.id, 'root').filter(row => row.operation.sourceCurrent)
+          .map(row => jobs.reactRequest(row.operation.id));
+        const archives = new Set(pinned.map(r => JSON.stringify([r.ownership, r.inventorySha256])));
+        // Do not let recency or filesystem order choose between different baselines.
+        if (archives.size === 1) {
+          job = restoreReactOwnership(repoRoot, current, pinned[0]);
+          ownershipJobs.set(current.id, job);
+        }
+      } catch { /* Leave unavailable; never start an implicit observation. */ }
+    }
+    return job;
+  };
   let loading: Promise<ReactReference> | undefined;
   const json = (res: ServerResponse, status: number, body: unknown) => {
     res.statusCode = status;
@@ -237,15 +257,47 @@ export function createReactReferenceService(
     }
     const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
+    const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
     const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan)$/.exec(route);
-    if (nativeRoute || nativeAction || initialNativeRoute) {
+    const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation)$/.exec(route);
+    const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
+    if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute) {
       try {
-        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute)![1]) throw Error('react-native-reference-unavailable');
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? updateAction ?? updateImage ?? childRoute)![1]) throw Error('react-native-reference-unavailable');
         const { jobs, transport } = native();
+        if (updateImage) {
+          const { updateJobs }=native();
+          if(req.method!=='GET' || !updateJobs || jobs.reactIdentity(updateImage[2]).referenceId!==reference.id) throw Error('react-update-image-refused');
+          const update=updateJobs.forProposal(updateImage[2],updateImage[3]);
+          if(!update) throw Error('react-update-unavailable');
+          const png=updateJobs.image(update.id,updateImage[4]);
+          res.writeHead(200,{'Content-Type':'image/png','Content-Length':png.length,'Cache-Control':'no-store'});res.end(png);return;
+        }
         if (req.method === 'POST') {
           if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
             throw Error('react-native-body-refused');
-          if (initialNativeRoute) {
+          if (childRoute) {
+            const parent = jobs.reactRequest(childRoute[2]);
+            if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
+            const review = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs).review;
+            const existing = jobs.listReact(reference.id, 'root').some(row => row.kind === 'nested' &&
+              row.caseId === parent.caseId && row.ownershipId === parent.ownership.id && row.nestedInstanceId === childRoute[3]);
+            if (!existing && !review.rows.find(r => r.instanceId === childRoute[3])?.canPrepareMain)
+              throw Error('react-child-root-preparation-unavailable');
+            jobs.prepare(selectReactChildRequest(repoRoot, reference, parent, childRoute[3]));
+          } else if (updateAction) {
+            const { updateJobs, updateTransport }=native();
+            const [, , parentId, proposalId, action]=updateAction;
+            if(!updateJobs || !updateTransport || jobs.reactIdentity(parentId).referenceId!==reference.id) throw Error('react-update-unavailable');
+            const update=action==='prepare'?updateJobs.prepare(parentId,proposalId):updateJobs.forProposal(parentId,proposalId);
+            if(!update) throw Error('react-update-unavailable');
+            if(action==='connection') {
+              if(new URL(`http://${req.headers.host}`).port!=='5181') throw Error('react-native-pairing-port');
+              json(res,200,{connection:updateTransport.pair(update.id)});return;
+            }
+            if(action==='start') updateTransport.start(update.id);
+            if(action==='retry-observation') updateTransport.retryObservation(update.id);
+          } else if (initialNativeRoute) {
             jobs.prepare(initialStates.nativeRequest(reference.id, initialNativeRoute[2]));
           } else if (nativeRoute?.[2]) {
             const job = ownershipJobs.get(reference.id);
@@ -272,7 +324,7 @@ export function createReactReferenceService(
               await frames.create(reference.id, id);
             } else if (nativeAction[3] === 'comparison') {
               jobs.verifiedReactObservation(id);
-              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id));
+              jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs)));
             } else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
@@ -280,18 +332,42 @@ export function createReactReferenceService(
         const observedAt = Date.now();
         json(res, 200, { operations: jobs.listReact(reference.id).map(row => {
           let content;
+          let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
-          if (row.kind === 'initial' && row.operation.sourceCurrent) {
-            initialStates = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id)).draft.nativeVariants;
+          if (row.kind === 'initial') {
+            // A corrected compiler plan differs from creation without changing
+            // its pinned source archive. Authenticate that archive separately.
+            try { initialStates = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id)).draft.nativeVariants; }
+            catch { /* Image endpoints independently refuse unavailable source. */ }
           }
           if (row.kind === 'comparison') {
             try { sourceFrame = frames.read(reference!.id, row.parentOperationId!); }
             catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
           }
-          try { if (row.kind === 'root') content = contentJobs.get(row.operation.id)?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(row.operation.id), row.operation.id); }
-          catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
-          return { ...row, content, sourceFrame, sourceFrameProblem, initialStates,
-            updates: native().updates?.list(row.operation.id) ?? [], connection: transport.status(row.operation.id, observedAt) };
+          if (row.kind === 'root') {
+            const id = row.operation.id, running = contentJobs.get(id);
+            try {
+              if (running && running.state.phase !== 'complete') content = running.report();
+              else {
+                try {
+                  // The composition reader authenticates and returns the saved
+                  // inspection too. Do not read the same sealed archive twice.
+                  const evidence = readReactCompositionEvidence(repoRoot, reference!, jobs.reactRequest(id), id, jobs);
+                  if (running && evidence.inspection.id !== running.state.id) throw Error('react-content-persistence-pending');
+                  content = evidence.inspection; composition = evidence.review;
+                } catch {
+                  content = running?.report() ?? readReactContentInspection(repoRoot, reference!, jobs.reactRequest(id), id);
+                  if (content?.phase === 'complete' && content.content?.status === 'compiled-comparison-draft')
+                    compositionProblem = 'Nested component evidence is unavailable or changed. Reload the unchanged original and inspect its content.';
+                }
+              }
+            } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
+          }
+          return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates,
+            updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
+              const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
+              return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
+            }), connection: transport.status(row.operation.id, observedAt) };
         }) });
       } catch {
         json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
@@ -351,7 +427,7 @@ export function createReactReferenceService(
           sourceFiles: Object.keys(reference.files).length,
           qualification: "unqualified",
           validation: validations.get(reference.id)?.report() ?? null,
-          ownership: ownershipJobs.get(reference.id)?.report() ?? null,
+          ownership: savedOwnership(reference)?.report() ?? null,
           cases: reactReferenceCases.map((c) => ({
             ...c,
             url: `/api/source-reference/react/${reference!.id}?case=${c.id}`,
@@ -488,7 +564,7 @@ export function createReactReferenceService(
         }
         return;
       }
-      const job = ownershipJobs.get(reference.id);
+      const job = savedOwnership(reference);
       if (req.method === "GET" && job) {
         json(res, 200, job.report());
         return;
@@ -651,7 +727,9 @@ export function createReactReferenceService(
     },
     comparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');
-      return readReactComparisonEvidence(repoRoot, reference, request, parent);
+      return readReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
+        ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
+          { id: request.content.id, inventorySha256: request.content.inventorySha256 }) : undefined);
     },
     nativeEvidence(request: ReactNativeRequest) {
       if (!reference) throw Error('react-native-reference-unavailable');

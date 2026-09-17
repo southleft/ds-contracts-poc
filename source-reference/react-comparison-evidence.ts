@@ -1,42 +1,45 @@
+import type { readReactCompositionEvidence } from './react-composition-evidence.js';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { evidenceSha } from './react-validation-evidence.js';
-import { readReactNativeContentEvidence } from './react-native-evidence.js';
-import { readReactContentInspection } from './react-content-inspection.js';
+import { readReactContentInspection, readReactContentInspectionEvidence } from './react-content-inspection.js';
 import type { ReactReference } from './react-reference.js';
 import type { ReactNativeRequest } from './react-native-request.js';
 import { isReactComparisonRequest, type ReactComparisonRequest } from './react-comparison-request.js';
-import { compileObservedContent } from './observed-content.js';
+import { recompileSavedObservedContent } from './observed-content.js';
 import type { NativeContractObservationInput, NativeSourceReadback } from '../core/native-source-observation.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
 
-export function selectReactComparisonRequest(repoRoot: string, reference: ReactReference, root: ReactNativeRequest, parentOperationId: string): ReactComparisonRequest {
+export function selectReactComparisonRequest(repoRoot: string, reference: ReactReference, root: ReactNativeRequest, parentOperationId: string, composition?: ReturnType<typeof readReactCompositionEvidence>): ReactComparisonRequest {
   const saved = readReactContentInspection(repoRoot, reference, root, parentOperationId);
   if (!saved || saved.phase !== 'complete' || !saved.sourceUnchanged || saved.content?.status !== 'compiled-comparison-draft')
     throw Error('react-comparison-content-unavailable');
   const dir = path.join(repoRoot, 'private/react-content-inspections', parentOperationId, saved.id);
-  return { version: 1, kind: 'react-content-comparison', parentOperationId, root: structuredClone(root), content: {
+  if (composition && composition.review.status !== 'ready') throw Error('react-composition-required-children-unresolved');
+  return { ...(composition?.review.denominator ? { version: 2 as const, composition: { revision: composition.review.inputRevision } } : { version: 1 as const }), kind: 'react-content-comparison', parentOperationId, root: structuredClone(root), content: {
     id: saved.id, reportSha256: evidenceSha(readFileSync(path.join(dir, 'report.json'))),
     inventorySha256: evidenceSha(readFileSync(path.join(dir, 'integrity.json'))),
   } };
 }
 export function readReactComparisonEvidence(repoRoot: string, reference: ReactReference, request: ReactComparisonRequest,
-  parent: { input: NativeContractObservationInput; receipt: NativeSourceReadback; request: ReactNativeRequest }) {
+  parent: { input: NativeContractObservationInput; receipt: NativeSourceReadback; request: ReactNativeRequest }, composition?: ReturnType<typeof readReactCompositionEvidence>) {
   if (!isReactComparisonRequest(request) || parent.input.operation.id !== request.parentOperationId ||
       canonicalJson(parent.request) !== canonicalJson(request.root)) throw Error('react-comparison-parent-changed');
-  const original = readReactNativeContentEvidence(repoRoot, reference, request.root);
-  const saved = readReactContentInspection(repoRoot, reference, request.root, request.parentOperationId,
+  if (request.version === 2 && (!composition || composition.review.status !== 'ready' || composition.review.inputRevision !== request.composition!.revision))
+    throw Error('react-composition-pinned-mapping-changed');
+  const inspected = readReactContentInspectionEvidence(repoRoot, reference, request.root, request.parentOperationId,
     { id: request.content.id, inventorySha256: request.content.inventorySha256 });
-  if (!saved || saved.phase !== 'complete' || !saved.sourceUnchanged || saved.content?.status !== 'compiled-comparison-draft' || !original.observedProps)
+  if (!inspected) throw Error('react-comparison-content-unavailable');
+  const { original, report: saved } = inspected;
+  if (saved.phase !== 'complete' || !saved.sourceUnchanged || saved.content?.status !== 'compiled-comparison-draft' || !original.observedProps)
     throw Error('react-comparison-content-unavailable');
   const dir = path.join(repoRoot, 'private/react-content-inspections', request.parentOperationId, request.content.id);
   const read = (name: string) => JSON.parse(readFileSync(path.join(dir, name), 'utf8'));
   if (evidenceSha(readFileSync(path.join(dir, 'report.json'))) !== request.content.reportSha256) throw Error('react-comparison-report-changed');
   const captured = read('source-tree.json');
   if (canonicalJson(captured.tree) !== canonicalJson(original.captured.tree)) throw Error('react-comparison-source-changed');
-  const content = compileObservedContent(captured.tree, read('text-fonts.json'), read('svg-viewports.json'));
-  if (canonicalJson(content) !== canonicalJson(saved.content)) throw Error('react-comparison-compiler-changed');
+  const {content, sourceCompatibility} = recompileSavedObservedContent(captured.tree, read('text-fonts.json'), read('svg-viewports.json'), saved.content);
   const contract = original.matrix.draft!.contract!;
   const variantName = reactComparisonVariant(contract, original.observedProps);
   const variant = parent.input.component.variants.find(v => v.name === variantName);
@@ -47,6 +50,6 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
     (node.children ?? []).forEach((child, i) => walk(child, [...path, i]));
   }; walk(variant.spec, []);
   if (paths.length !== 1) throw Error('react-comparison-root-slot-ambiguous');
-  return { source: { ...original.source, evidenceRevision: revisionOf(request) }, content,
-    comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0] } };
+  return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.version === 2 ? composition!.content : content,
+    comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0], ...(request.version === 2 ? { instances: composition!.references } : {}) } };
 }

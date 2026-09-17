@@ -1,3 +1,4 @@
+import { restoreReactOwnership } from './react-ownership-restore.js';
 import { prepareReactInitialNativePlan, buildReactInitialNativeWrite } from './react-initial-native-plan.js';
 import { reactInitialNativeReservation, isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { compileReactInitialContract } from './react-initial-contract.js';
@@ -205,20 +206,21 @@ test('wrong file and interrupted creation remain distinct from a safe repeat', a
   assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
 });
 
-for (const kind of ['root', 'initial'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
+for (const kind of ['root', 'initial', 'nested'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-native-journal-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const { input } = inputFixture();
   const request: ReactNativeRequest = { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64),
     ownership: { id: input.operation.id, sha256: 'b'.repeat(64) }, inventorySha256: 'c'.repeat(64),
     caseId: 'button-default', matrixRevision: revisionOf(input.matrix) };
+  if (kind === 'nested') { request.version = 2; request.selection = { instanceId: 'instance-4' }; }
   const initialRequest: ReactInitialNativeRequest = { version: 1, kind: 'react-initial-draft', anchor: request, caseId: 'button-default',
     observation: { id: '20000000-0000-4000-8000-000000000099', reportSha256: 'd'.repeat(64), inventorySha256: 'e'.repeat(64) } };
   const draft: ReturnType<typeof compileReactInitialContract> = { version: 1, qualification: 'observed-initial-state-contract',
     acceptedContract: null, nativeQualification: 'unqualified', status: 'compiled-draft', problems: [], limitations: [], sourceBindings: [], nativeVariants: [],
     compiled: { contract: input.matrix.draft!.contract!, tokens: input.matrix.draft!.tokens!, component: input.matrix.draft!.native!, assets: [], problems: [], receipts: [], residuals: [] } };
   const operationRequest = kind === 'initial' ? initialRequest : request;
-  assert.equal(isReactInitialNativeRequest(initialRequest), true);
+  assert.equal(isReactInitialNativeRequest(initialRequest), kind !== 'nested');
   assert.equal(isReactInitialNativeRequest({ ...initialRequest, executable: 'untrusted' }), false);
   assert.equal(isReactInitialNativeRequest({ ...initialRequest, observation: { ...initialRequest.observation, id: '../outside' } }), false);
   let current = true;
@@ -310,7 +312,15 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   writeFileSync(sealPath, JSON.stringify({ version: 1, files: inventoryEvidence(dir) }));
   const request = selectReactNativeRequest(repo, report, 'button-default');
   assert.equal(readReactNativeEvidence(repo, reference, request).source.revision, 'sha256:'+reference.id);
+  const restored = restoreReactOwnership(repo, reference, request);
+  assert.deepEqual(restored.report(), JSON.parse(JSON.stringify(report)));
+  assert.equal(restored.dir, dir);
+  const view = restored.report(); view.rows[0].matched = false;
+  assert.equal(restored.report().rows[0].matched, true, 'views cannot mutate the restored archive');
   writeFileSync(file, 'changed source');
+  assert.equal(restored.report().sourceUnchanged, false);
+  assert.equal(restored.report().matched, 0);
+  assert.equal(restored.report().rows[0].rootMatrix, undefined);
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
   writeFileSync(file, 'unchanged source');
   const reportPath = path.join(dir, 'report.json'), original = readFileSync(reportPath);
@@ -321,5 +331,7 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
   rmSync(path.join(dir, 'unexpected.txt'));
   writeFileSync(sealPath, '{}');
+  assert.equal(restored.report().matched, 0);
+  assert.equal(restored.report().problem, 'react-ownership-evidence-changed');
   assert.throws(() => readReactNativeEvidence(repo, reference, request), /unavailable/);
 });

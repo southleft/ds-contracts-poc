@@ -1869,6 +1869,7 @@ export function promoteAnatomy(
   comp: ComponentConfig,
   union: UnionResult,
   componentKebab: string,
+  options: { preserveTextBoxes?: ReadonlySet<string> } = {},
 ): PromotionResult {
   const receipts: string[] = [];
   const refusals: string[] = [];
@@ -2127,7 +2128,8 @@ export function promoteAnatomy(
         .map(child => child.partName);
       return [{ node: observed.node, elementParts }];
     });
-    const result = preserveOrderedFlexText(part, observations, entry.partName, usedContentNames);
+    const result = preserveOrderedFlexText(part, observations, entry.partName, usedContentNames,
+      options.preserveTextBoxes?.has(entry.repPath));
     if (result.problem) refusals.push(result.problem);
     if (result.changed) receipts.push(`ordered-flex-text-carried: ${entry.partName} retains its observed text/element sequence as anonymous text items`);
   };
