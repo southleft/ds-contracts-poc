@@ -8,6 +8,7 @@ import type { NativeSourceCandidateProjection } from "./native-source-projection
 import type { NativeContractDraftProjection } from "./native-contract-draft.js";
 import type { NativeSourceComparisonInput } from "./native-source-comparisons.js";
 import { emitNativeTokenContextReadbackScript } from "./token-set.js";
+import {backgroundPaintIdentities} from './figma-background-clip.js';
 import {
   verifyNativeTokenContextReceipt,
   type NativeTokenContextInput,
@@ -149,7 +150,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const managedRows = (spec: NodeSpec): boolean => !!spec.layout?.grid?.flowRows || (spec.children ?? []).some(managedRows);
   const extra = input.component.variants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
-    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages);
+    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, false, backgroundPaintIdentities(input.component));
 }
 
 /** Shared read-only inventory collector. Callers independently verify the
@@ -158,7 +159,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false, backgroundParts:string[]=[]): string {
   const fields = [
     "visible",
     "opacity",
@@ -256,6 +257,7 @@ async function read(page) {
     }
     for (const key of ['nativeSourceOperation', 'nativeSourceAllocation', 'nativeSourcePart', 'nativeSourceSample', 'nativeSourceCase', 'contractId', 'specHash', 'canvasFingerprint'${extraMetadata.map(key => ", " + JSON.stringify(key)).join('')}])
       row.metadata[key] = node.getSharedPluginData('ds_contracts', key);
+    ${backgroundParts.length ? `if (row.metadata.nativeContractPart && ${JSON.stringify(backgroundParts)}.includes(stable(JSON.parse(row.metadata.nativeContractPart)))) row.values.constraints = copy(node.constraints);` : ''}
     out.push(row);
   }
   return out;
@@ -614,7 +616,7 @@ function verifyReadback(
       issue('native-source-observation-grid-' + problem, n);
     if (spec.rootFillWidth && (v.layoutSizingHorizontal !== 'FIXED' ||
         (v.layoutMode === 'HORIZONTAL' ? v.primaryAxisSizingMode : v.counterAxisSizingMode) !== 'FIXED' ||
-        nodes.get(n.childIds[0])?.values.layoutSizingHorizontal !== 'FILL'))
+        nodes.get(n.childIds[(spec.children??[]).findIndex(child=>!child.backgroundPaint)])?.values.layoutSizingHorizontal !== 'FILL'))
       issue('native-source-observation-root-fill-width', n);
     if ((spec.opacity !== undefined || v.opacity !== undefined) && v.opacity !== (spec.opacity ?? 1))
       issue("native-source-observation-opacity", n);
@@ -664,6 +666,10 @@ function verifyReadback(
           })
         )
           issue(`native-source-observation-${field}-binding`, n);
+      } else if (field==='fill'&&spec.backgroundPaint&&spec.lits?.fillColor) {
+        if(paints.length!==1 || paints[0].type!=='SOLID' || !paint(paints[0].color,spec.lits.fillColor) ||
+           !numeric(paints[0].opacity??1,spec.lits.fillColor.a??1) || Object.keys(paints[0].boundVariables??{}).length)
+          issue('native-contract-observation-background-paint',n);
       } else if (spec.type !== "text" && paints.length)
         issue(`native-source-observation-extra-${field}`, n);
     }
@@ -735,8 +741,15 @@ function verifyReadback(
       return; // SVG descendants are inventoried/owned; path equivalence requires visual/vector verification.
     }
     if (spec.type === 'shape') {
-      if (!numeric(v.width, spec.shape!.width) || !numeric(v.height, spec.shape!.height))
+      const parent=nodes.get(n.parentId),background=spec.backgroundPaint;
+      const width=background?Math.max(0.01,(parent?.values.width??NaN)-2*background.inset):spec.shape!.width;
+      const height=background?Math.max(0.01,(parent?.values.height??NaN)-2*background.inset):spec.shape!.height;
+      if (!numeric(v.width, width) || !numeric(v.height, height))
         issue('native-contract-observation-shape-size', n);
+      if(background&&(!numeric(v.cornerRadius,background.radius)||
+          !numeric(background.radius,Math.max(0,(parent?.values.cornerRadius??NaN)-background.inset))||
+          !same(v.constraints,{horizontal:'STRETCH',vertical:'STRETCH'})||parent?.childIds[0]!==n.id))
+        issue('native-contract-observation-background-geometry',n);
       if (spec.absolute && (v.layoutPositioning !== 'ABSOLUTE' || !numeric(v.x, spec.absolute.left!) || !numeric(v.y, spec.absolute.top!)))
         issue('native-contract-observation-shape-position', n);
     }

@@ -1,5 +1,6 @@
 /** Independent observation of caller content in an existing native main.
  * Allocation acknowledgements choose IDs; compiler specs choose expectations. */
+import {backgroundPaintIdentities} from './figma-background-clip.js';
 import { nativeGridProblems, NATIVE_GRID_CHILD_FIELDS } from './native-grid-observation.js';
 import { canonicalJson } from './contract-provenance.js';
 import type { NodeSpec } from './emit-figma-script.js';
@@ -48,7 +49,8 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
     pageId: input.creation.pageId, nodes: input.creation.nodes,
     comparisons: [{ id: input.comparison.caseId, instanceId: input.creation.comparisons[0].instanceId, type: 'INSTANCE' }],
   }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar',
-    ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages, true);
+    ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages, true,
+    [input.comparison.parent,...nested.map(ref=>ref.parent)].flatMap(p=>backgroundPaintIdentities(p.component)));
   return `// GENERATED independent comparison readback. READ ONLY.
 const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input.operation.id)},
   fileKey: ${JSON.stringify(input.operation.fileKey)}, planRevision: ${JSON.stringify(input.planRevision)},
@@ -245,6 +247,16 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
           issue('grid-flow-recipe', actual);
       }
       const fields = new Set([...Object.keys(original.values), ...Object.keys(actual.values)]);
+      let pairedSpec:NodeSpec|undefined=reference.parent.component.variants.find(v=>v.name===reference.variantName)!.spec;
+      for(const index of specPath)pairedSpec=pairedSpec?.children?.[index];
+      const background=pairedSpec?.backgroundPaint;
+      if(background){
+        const host=nodes.get(actual.parentId)?.values,v=actual.values;
+        if(!host||!numeric(v.x,background.inset)||!numeric(v.y,background.inset)||
+            !numeric(v.width,Math.max(0.01,host.width-2*background.inset))||
+            !numeric(v.height,Math.max(0.01,host.height-2*background.inset))||
+            !numeric(v.cornerRadius,Math.max(0,host.cornerRadius-background.inset)))issue('main-instance-background-geometry',actual);
+      }
       for (const field of fields) {
         // A top-level instance has null references; a main inside a set can
         // report an empty object. Only these two empty representations agree.

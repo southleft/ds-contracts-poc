@@ -1,3 +1,4 @@
+import { lowerPaddingBoxBackground } from './figma-background-clip.js';
 import { materializeFlowRows, type GridFlowRows } from './grid-flow-rows.js';
 import { prepareNativeContractComparison, nativeContractComparisonRuntime, type NativeContractComparisonInput, type NativeContractSampleIdentity } from './native-contract-comparison.js';
 import { codeValueAxes, type CodeValueAxes } from './figma-code-values.js';
@@ -124,6 +125,9 @@ export interface LayoutSpec {
 
 export interface NodeSpec {
   type: 'root' | 'frame' | 'text' | 'instance' | 'slot' | 'svg' | 'shape';
+  backgroundClip?: 'padding-box';
+  /** Synthetic, independently verified paint plane; not a content/API part. */
+  backgroundPaint?: {inset:number;radius:number};
   /** Round 4: intrinsic glyph size for svg specs (contract icon.size). */
   iconSize?: number;
   name: string;
@@ -5743,12 +5747,25 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // feeding one trailing `†`: 279 channel misses and 19 declared facts on
   // the eight Flowbite contracts collapsed to 8 bare daggers, and nothing a
   // designer could open named a single one of them.
+  const backgroundLowering=new Map<Part,boolean[]>();
+  const lowerBackground=(spec:NodeSpec) => {
+    (spec.children??[]).forEach(lowerBackground);
+    const part=nativePartOrigins.get(spec);
+    if(part?.declared?.['background-clip']!=='padding-box')return;
+    // @lower emit.padding-box-background-plane
+    const lowered=lowerPaddingBoxBackground(spec,name=>{
+      try{return pxOrNull(resolveLiteral(name.split('/').join('.')))??undefined;}catch{return undefined;}
+    });
+    backgroundLowering.set(part,[...backgroundLowering.get(part)??[],lowered]);
+  };
+  variants.forEach(v=>lowerBackground(v.spec));
   const facts: CodeOnlyFactObservation[] = [];
   // v15 (S4): declared-not-drawn facts. 'draw'-verdict base facts render
   // natively and need no receipt; state-plane declared facts are always
   // code-only (state previews do not draw declared facts yet — a named limit).
   for (const { name: partName, part } of walkAnatomy(contract)) {
     const note = (channel: string, value: string, state?: string) => {
+      if(channel==='background-clip'&&!state&&value==='padding-box'&&backgroundLowering.get(part)?.every(Boolean))return;
       const reg = DECLARED_CHANNELS[channel];
       // R8 (2026-08-22): a channel the registry does not know used to
       // `return` here — "refused upstream by validateContract" — which is
