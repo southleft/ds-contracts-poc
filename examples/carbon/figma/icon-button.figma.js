@@ -71,7 +71,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -157,7 +157,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -243,7 +243,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -329,7 +329,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/primary",
                       "iconSize": 16
                     }
@@ -415,7 +415,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -501,7 +501,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -587,7 +587,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -673,7 +673,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/secondary",
                       "iconSize": 16
                     }
@@ -759,7 +759,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -845,7 +845,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -931,7 +931,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -1017,7 +1017,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                       "iconSize": 16
                     }
@@ -1103,7 +1103,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }
@@ -1189,7 +1189,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }
@@ -1275,7 +1275,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }
@@ -1361,7 +1361,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "btn-icon",
-                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svg": "<svg height=\"16\" width=\"16\" fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
                       "svgPaintVar": "imported/icon-button/btn/color/ghost",
                       "iconSize": 16
                     }

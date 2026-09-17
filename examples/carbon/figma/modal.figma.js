@@ -217,7 +217,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }
@@ -603,7 +603,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }
@@ -989,7 +989,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }
@@ -1375,7 +1375,7 @@ const COMPONENTS = [
                                     {
                                       "type": "svg",
                                       "name": "btn-icon",
-                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                       "svgPaintVar": "imported/shared/color-ffffff",
                                       "iconSize": 20
                                     }

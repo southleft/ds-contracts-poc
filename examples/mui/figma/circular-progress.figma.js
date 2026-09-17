@@ -37,7 +37,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-indeterminate",
-              "svg": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\"/></svg>",
+              "svg": "<svg height=\"40\" width=\"40\" viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\"/></svg>",
               "svgPaintVar": "imported/circular-progress/root/color",
               "iconSize": 40,
               "fillW": true
@@ -66,7 +66,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-determinate",
-              "svg": "<svg viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\" stroke-dasharray=\"126.92\" stroke-dashoffset=\"50.768\"/></svg>",
+              "svg": "<svg height=\"40\" width=\"40\" viewBox=\"22 22 44 44\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"44\" cy=\"44\" r=\"20.2\" fill=\"none\" stroke=\"#1976d2\" stroke-width=\"3.6\" stroke-dasharray=\"126.92\" stroke-dashoffset=\"50.768\"/></svg>",
               "svgPaintVar": "imported/circular-progress/root/color",
               "iconSize": 40,
               "fillW": true

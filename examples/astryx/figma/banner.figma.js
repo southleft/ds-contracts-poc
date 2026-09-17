@@ -84,7 +84,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-info",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/info",
                           "iconSize": 20
                         }
@@ -206,7 +206,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-info",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 16 V 12\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 8 H 12.01\" stroke=\"#00458c\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/info",
                           "iconSize": 20
                         }
@@ -328,7 +328,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-warning",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/warning",
                           "iconSize": 20
                         }
@@ -450,7 +450,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-warning",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.73 18 L 13.73 4 A 2 2 0 0 0 10.25 4 L 2.25 18 A 2 2 0 0 0 4 21 H 20 A 2 2 0 0 0 21.73 18\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 9 V 13\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 12 17 H 12.01\" stroke=\"#584400\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/warning",
                           "iconSize": 20
                         }
@@ -572,7 +572,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-error",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/error",
                           "iconSize": 20
                         }
@@ -694,7 +694,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-error",
-                          "svg": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"none\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 15 9 L 9 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 9 L 15 15\" stroke=\"#89001a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/error",
                           "iconSize": 20
                         }
@@ -816,7 +816,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-success",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/success",
                           "iconSize": 20
                         }
@@ -938,7 +938,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "icon-success",
-                          "svg": "<svg fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                          "svg": "<svg height=\"20\" width=\"20\" fill=\"none\" viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 21.801 10 A 10 10 0 1 1 17 3.335\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M 9 11 L 12 14 L 22 4\" stroke=\"#0c5700\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
                           "svgPaintVar": "imported/banner/icon/color/success",
                           "iconSize": 20
                         }

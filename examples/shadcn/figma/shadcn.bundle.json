@@ -5391,17 +5391,6 @@
         {
           "part": "root",
           "kind": "declared",
-          "channel": "background-clip",
-          "value": "padding-box",
-          "reason": "Background clipping exists only in code.",
-          "variants": {
-            "count": 72,
-            "of": 72
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
           "channel": "border-bottom-style",
           "value": "solid",
           "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
@@ -5508,25 +5497,6 @@
             "count": 72,
             "of": 72
           }
-        },
-        {
-          "part": "root",
-          "kind": "shadow",
-          "channel": "box-shadow",
-          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-          "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-          "variants": {
-            "count": 6,
-            "of": 72,
-            "names": [
-              "Variant=Default, Size=Default, State=Focus Visible",
-              "Variant=Outline, Size=Default, State=Focus Visible",
-              "Variant=Secondary, Size=Default, State=Focus Visible",
-              "Variant=Ghost, Size=Default, State=Focus Visible",
-              "Variant=Destructive, Size=Default, State=Focus Visible",
-              "Variant=Link, Size=Default, State=Focus Visible"
-            ]
-          }
         }
       ]
     },
@@ -5632,17 +5602,6 @@
             "names": [
               "Size=Sm"
             ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "shadow",
-          "channel": "box-shadow",
-          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-          "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-          "variants": {
-            "count": 2,
-            "of": 2
           }
         }
       ]
@@ -5923,22 +5882,6 @@
             "count": 9,
             "of": 9
           }
-        },
-        {
-          "part": "root",
-          "kind": "shadow",
-          "channel": "box-shadow",
-          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-          "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-          "variants": {
-            "count": 3,
-            "of": 9,
-            "names": [
-              "Checked=Unchecked, State=Focus Visible",
-              "Checked=Checked, State=Focus Visible",
-              "Checked=Indeterminate, State=Focus Visible"
-            ]
-          }
         }
       ]
     },
@@ -6169,21 +6112,6 @@
           "variants": {
             "count": 4,
             "of": 4
-          }
-        },
-        {
-          "part": "root",
-          "kind": "shadow",
-          "channel": "box-shadow",
-          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-          "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-          "variants": {
-            "count": 2,
-            "of": 4,
-            "names": [
-              "State=Active",
-              "State=Focus Visible"
-            ]
           }
         }
       ]
@@ -6617,17 +6545,6 @@
           }
         },
         {
-          "part": "part-0",
-          "kind": "shadow",
-          "channel": "box-shadow",
-          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-          "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-          "variants": {
-            "count": 8,
-            "of": 8
-          }
-        },
-        {
           "part": "root",
           "kind": "channel",
           "channel": "border-bottom-color",
@@ -6828,21 +6745,6 @@
           "variants": {
             "count": 8,
             "of": 8
-          }
-        },
-        {
-          "part": "root",
-          "kind": "shadow",
-          "channel": "box-shadow",
-          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-          "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-          "variants": {
-            "count": 2,
-            "of": 8,
-            "names": [
-              "Size=Default, Checked=Unchecked, State=Focus Visible",
-              "Size=Sm, Checked=Unchecked, State=Focus Visible"
-            ]
           }
         }
       ]
