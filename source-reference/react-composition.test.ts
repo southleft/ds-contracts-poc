@@ -29,6 +29,33 @@ import { compileReactCallerNative } from './react-caller-native.js';
 import { buildReactCallerPreview } from './react-caller-preview.js';
 import { chromium } from 'playwright-core';
 import { generatedTypeErrors } from '../core/react-test-runtime.js';
+import type { NodeSpec } from '../core/emit-figma-script.js';
+
+test('caller text preserves its observed font when a component boundary replaces its inherited CSS alias', async t => {
+  const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
+  f.tree.style.width = '240px';
+  const child = f.tree.nodes[0]; assert.equal(child.t, 'el'); if (child.t !== 'el') return;
+  child.el.nodes = [{ t: 'text', v: 'Save' }];
+  child.el.style['font-family'] = '"Browser Font Alias", sans-serif';
+  f.ownership.nodes = f.ownership.nodes.filter(n => n.path !== '0.0');
+  f.fonts.treeRevision = revisionOf(f.tree);
+  f.fonts.rows[0] = { ...f.fonts.rows[0], path: [0], text: 'Save', cssFamily: child.el.style['font-family'] };
+  const input = { program: f.program, ownership: f.ownership, tree: f.tree, fonts: f.fonts,
+    svg: { version: 1 as const, treeRevision: revisionOf(f.tree), status: 'observed' as const, rows: [], problems: [] },
+    origin: { version: 1 as const, roots: [{ path: '0', tag: 'button', channels: [] }] },
+    labels: { version: 1 as const, treeRevision: revisionOf(f.tree), status: 'observed' as const, rows: [], problems: [] }, behaviors: [] };
+  const original = structuredClone(input), graph = projectReactCallerCompositionGraph(input);
+  assert.equal(graph.draft.status, 'generated-draft', graph.draft.problems.join(','));
+  const native = compileReactCallerNative(graph), text: NodeSpec[] = [];
+  const visit = (node: NodeSpec) => { if (node.contentProp) text.push(node); node.children?.forEach(visit); };
+  native.components.find(c => c.contractId === graph.draft.contract!.id)!.variants.forEach(v => visit(v.spec));
+  assert.equal(text.length, 1);
+  assert.equal(text[0].characters, 'Save');
+  assert.equal(text[0].fontFamily, 'Inter', 'the observed family survives caller-slot inheritance; the CSS alias is not a native font');
+  assert.deepEqual(input, original, 'source and font observations stay immutable');
+  const stale = structuredClone(input); stale.fonts.rows[0].cssFamily = 'Different alias';
+  assert.equal(projectReactCallerCompositionGraph(stale).draft.status, 'refused');
+});
 
 test('source caller projection preserves editable content and distinct generated label IDs in the real consumer', async t => {
   const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));

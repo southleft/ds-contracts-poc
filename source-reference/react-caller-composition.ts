@@ -4,6 +4,7 @@
 import { ContractSchema, walkAnatomy, type Contract, type Part } from '../scripts/contract-schema.js';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { emitReactInline } from '../core/emit-react-inline.js';
+import type { NodeSpec } from '../core/emit-figma-script.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { flatten, type CapturedNode } from '../extract/computed/lib.js';
 import { compileObservedContent, prepareObservedContentTree } from './observed-content.js';
@@ -96,7 +97,7 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
     const labels = verifiedLabelAssociations(tree, input.labels);
     const boundaries = ownership.components.flatMap(c => c.roots).filter(path => path !== '');
     const content = compileObservedContent(tree, fonts, svg, true, boundaries);
-    if (content.status !== 'compiled-comparison-draft' || content.problems.length || !content.contract || !content.tokens || !content.sourcePaths)
+    if (content.status !== 'compiled-comparison-draft' || content.problems.length || !content.contract || !content.tokens || !content.sourcePaths || content.component?.variants.length !== 1)
       throw Error('react-caller-content-unavailable');
     const contract = structuredClone(content.contract);
     contract.id = 'observed.caller-' + result.inputRevision.slice(7, 23); contract.name = 'GeneratedSourceComposition';
@@ -135,8 +136,27 @@ export function projectReactCallerCompositionGraph(input: ReactCallerComposition
     const own = (part: Part) => { ownedParts.add(part); Object.values(part.parts ?? {}).forEach(own); };
     for (const child of anatomy.instances.filter(c => c.content === 'authored-or-runtime'))
       for (const root of child.roots) own(partAt(root.path));
+    // The content compiler has already resolved CSS aliases against the
+    // observed painted fonts. Keep that identity on caller text before its
+    // ancestor is replaced with a dependency: the dependency's empty slot can
+    // otherwise reintroduce a CSS font-family alias that is not a native font.
+    const nativeParts = new Map<string, NodeSpec[]>();
+    const indexNativePart = (spec: NodeSpec) => {
+      nativeParts.set(spec.name, [...(nativeParts.get(spec.name) ?? []), spec]);
+      spec.children?.forEach(indexNativePart);
+    };
+    indexNativePart(content.component.variants[0].spec);
     let textIndex = 0;
-    for (const { part } of walkAnatomy(contract)) if (!ownedParts.has(part) && typeof part.text === 'string') {
+    for (const { part, name } of walkAnatomy(contract)) if (!ownedParts.has(part) && typeof part.text === 'string') {
+      const matches = nativeParts.get(name) ?? [], texts: NodeSpec[] = [];
+      const collectText = (spec: NodeSpec) => {
+        if (spec.type === 'text' && spec.characters === part.text) texts.push(spec);
+        spec.children?.forEach(collectText);
+      };
+      if (matches.length === 1) collectText(matches[0]);
+      if (texts.length !== 1 || !texts[0].fontFamily)
+        throw Error('react-caller-text-font-correspondence-unavailable:' + name);
+      part.declared = { ...part.declared, 'font-family': JSON.stringify(texts[0].fontFamily) };
       const prop = `content${++textIndex}`;
       contract.props.push({ name: prop, type: 'text', default: part.text,
         bindings: { code: { prop }, figma: { kind: 'NONE' } } });
