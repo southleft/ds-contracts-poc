@@ -469,6 +469,10 @@ export interface NodeSpec {
   /** Authored mount-only mapping; depProps is its static fresh-mount preview,
    * not evidence that a canvas property implements React state lifetime. */
   depInitialProps?: Record<string, string>;
+  /** Reuse this slot on the containing child instance; never create a parent
+   * slot property or replace the child main. Children belong to the caller. */
+  callerSlotProperty?: string;
+  callerRootFillWidth?: true;
   // slot
   slotProperty?: string;
   slotOptional?: boolean;
@@ -948,6 +952,7 @@ export function createFigmaEngine(input: FigmaEngineInput) {
   // post-hoc layer-name walk cannot establish this identity (names can repeat,
   // and layout lowering may reorder or expand nodes).
   const nativePartOrigins = new WeakMap<NodeSpec, Part>();
+  const compilingCallerDeps = new Set<string>();
   const compiledData = new WeakMap<ComponentData, string>();
   const nativeCandidateData = new WeakSet<ComponentData>();
   const variableCollection = input.variableCollection;
@@ -3945,6 +3950,74 @@ function mapDepProps(
   return out;
 }
 
+function orderedVariantValues(p: Prop): Array<string | null> {
+    if (!isEnum(p)) return p.bindings.figma.unsetValue === undefined ? boolAxisValues(p) : [null, ...boolAxisValues(p)];
+    const values = [...p.type.enum];
+    const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
+    if (i > 0) {
+      values.splice(i, 1);
+      values.unshift(String(p.default));
+    }
+    return p.bindings.figma.unsetValue === undefined ? values : [null, ...values];
+}
+const axisLabel = (p: Prop, value: string | null): string =>
+    value === null ? p.bindings.figma.unsetValue! : (p.bindings.figma.values?.[value] ?? value);
+
+/** Compile caller content in parent property scope and child typography scope.
+ * The child compiler remains authoritative for slot geometry and variant layout. */
+function callerSlotSpec(part: Part, dep: Contract, props: Record<string, string | boolean>,
+  parent: Contract, byId: Map<string, Contract>, ctx: TextCtx, subst: Record<string, string>) {
+  const fail = (why: string): never => { throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: ' + why); };
+  const slots = walkAnatomy(dep).filter(w => w.part.slot?.name === 'children');
+  if (slots.length !== 1) fail('dependency needs one children slot');
+  const slot = slots[0].part.slot!;
+  if (slot.acceptsMode === 'restrict' || slot.required || slot.min !== undefined || slot.max !== undefined)
+    fail('constrained caller slots need a separate projection');
+  if (part.repeat || part.component!.text !== undefined || part.slot || part.content || part.text !== undefined || part.icon || part.meter ||
+      dep.props.some(p => p.bindings.code.prop === 'children' && Object.hasOwn(part.component!.props ?? {}, p.name)))
+    fail('competing caller content');
+  const childSubst: Record<string, string> = {}, names: string[] = [];
+  for (const axis of dep.props.filter(p => isEnum(p) || isVariantBool(p))) {
+    if (axis.bindings.figma.kind !== 'VARIANT') fail('child axis has no native variant binding');
+    const values = orderedVariantValues(axis), wanted = props[axis.bindings.figma.property!];
+    const selected = wanted === undefined ? [values[0]] : values.filter(v => axisLabel(axis, v) === String(wanted));
+    if (selected.length !== 1) fail('child variant is ambiguous');
+    const value = selected[0];
+    if (value !== null) childSubst[axis.name] = value;
+    names.push(`${axis.bindings.figma.property}=${axisLabel(axis, value)}`);
+  }
+  if (compilingCallerDeps.has(dep.id)) fail('cyclic caller dependency');
+  compilingCallerDeps.add(dep.id);
+  let data: ComponentData;
+  try { data = compileComponentData(dep, byId); }
+  finally { compilingCallerDeps.delete(dep.id); }
+  const variant = data.variants.find(v => v.name === (names.join(', ') || dep.name));
+  if (!variant) fail('child variant is unavailable');
+  const property = slotFigmaProperty(slot), matches: NodeSpec[] = [];
+  const visit = (spec: NodeSpec) => { if (spec.type === 'slot' && spec.slotProperty === property) matches.push(spec); (spec.children ?? []).forEach(visit); };
+  visit(variant!.spec);
+  if (matches.length !== 1) fail('selected variant has no unique caller slot');
+  let childCtx = ctx;
+  const path = slots[0].path;
+  for (const entry of walkAnatomy(dep)) if (entry.path.length <= path.length && entry.path.every((p, i) => p === path[i]))
+    childCtx = applyStyling({ type: 'frame', name: entry.name }, entry.part, childSubst, childCtx);
+  const children = variantParts(part.parts!, subst).flatMap(([name, child]) => partToSpecs(name, child, parent, byId, childCtx, subst));
+  const result = structuredClone(matches[0]);
+  result.callerSlotProperty = property;
+  delete result.slotDefault;
+  if (result.children?.[0]?.rootSlotGridContent) {
+    const carrier = result.children[0], grid = carrier.layout!.grid!;
+    if (result.children.length !== 1 || grid.flow !== 'ROW_AUTO_FLOW') fail('unsupported content carrier');
+    carrier.children = children;
+    if (grid.flowRows) grid.rows = materializeFlowRows(grid.flowRows, grid.columns.length, children.length);
+    if (children.length > grid.rows.length * grid.columns.length) fail('caller content exceeds declared grid capacity');
+  } else {
+    if (result.children?.length) fail('unsupported existing slot anatomy');
+    result.children = children;
+  }
+  return { slot: result, root: variant!.spec };
+}
+
 /** A canvas variant depicts a fresh mount, not a running React instance.
  * Resolve declared finite initializers independently, then let supplied
  * controlled values win. Never reinterpret text/visibility as state. */
@@ -4731,7 +4804,7 @@ function partToSpecInner(
     const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
     const initialProps = part.component.initialProps
       ? mapDepInitialProps(dep, part.component.initialProps, subst, contract) : undefined;
-    if (part.parts !== undefined) throw new Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: direct emission cannot populate component caller slots');
+
     const depLedger: CodeOnlyFactSeed[] = [];
     const spec: NodeSpec = {
       type: 'instance',
@@ -4742,6 +4815,14 @@ function partToSpecInner(
       depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract) },
       ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
+    if (part.parts !== undefined) {
+      const caller = callerSlotSpec(part, dep, spec.depProps!, contract, byId, ctx, subst);
+      spec.children = [caller.slot];
+      spec.layout = structuredClone(caller.root.layout);
+      if (caller.root.fixedWidth) spec.fixedWidth = structuredClone(caller.root.fixedWidth);
+      if (caller.root.lits?.width !== undefined) spec.lits = { width: caller.root.lits.width };
+      if (caller.root.rootFillWidth) spec.callerRootFillWidth = true;
+    }
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
     // Round 2 iteration 9 — per-instance overrides (component.overrides):
     // natively a resize / image-fill / paint override on THIS instance, but
@@ -5103,7 +5184,11 @@ function slotPropertyDescription(slot: NonNullable<Part['slot']>): string {
  *  resolve at all are refused here. */
 function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>): void {
   const errors: string[] = [];
-  for (const { name, part } of walkAnatomy(contract)) {
+  for (const { name, part, path } of walkAnatomy(contract)) {
+    if (part.component && (path.length === 1 || part.repeat)) {
+      if (part.parts !== undefined) errors.push('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: caller parts require a non-repeated nested instance');
+      if (part.component.initialProps) errors.push('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializers require a non-repeated nested instance');
+    }
     if (part.component && !byId.has(part.component.id)) {
       errors.push(
         `${contract.id}: part "${name}" references component "${part.component.id}" which has no contract in scope`,
@@ -5192,6 +5277,7 @@ function annotateFillW(rootSpec: NodeSpec): void {
   const hasOwnWidth = (s: NodeSpec): boolean =>
     s.fixedWidth !== undefined || s.lits?.width !== undefined || s.pct != null;
   const canHug = (s: NodeSpec): boolean => {
+    if (s.callerRootFillWidth && !hasOwnWidth(s)) return false;
     if (hasOwnWidth(s) || s.type === 'text' || s.type === 'svg' || s.type === 'instance' || s.shape !== undefined) {
       return true;
     }
@@ -5250,7 +5336,7 @@ function annotateFillW(rootSpec: NodeSpec): void {
       !hasOwnWidth(c) &&
       // @lower emit.size-text-hug-vs-fill
       !(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&
-      (c.grow === true ||
+      (c.callerRootFillWidth === true || c.grow === true ||
         (s.layout?.stretchChildren === true &&
           (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL' &&
           c.type !== 'instance'));
@@ -5267,6 +5353,8 @@ function annotateFillW(rootSpec: NodeSpec): void {
     // tracks size the cell the way a fixed width sizes a box).
     const gridParent = s.layout?.mode === 'GRID';
     for (const c of kids) {
+      if (c.callerRootFillWidth && (!ready || (!gridParent && s.layout?.mode !== 'VERTICAL')))
+        throw Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: full-width child needs a definite column or grid');
       const fills = !gridParent && ready && isCandidate(c);
       if (fills) {
         c.fillW = true;
@@ -5374,19 +5462,6 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 
   // null is an internal discriminant only; it is never written to subst or
   // the public enum. Omission therefore resolves the actual base carriers.
-  const orderedValues = (p: Prop): Array<string | null> => {
-    if (!isEnum(p)) return p.bindings.figma.unsetValue === undefined ? boolAxisValues(p) : [null, ...boolAxisValues(p)];
-    const values = [...p.type.enum];
-    const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
-    if (i > 0) {
-      values.splice(i, 1);
-      values.unshift(String(p.default));
-    }
-    return p.bindings.figma.unsetValue === undefined ? values : [null, ...values];
-  };
-  const axisLabel = (p: Prop, value: string | null): string =>
-    value === null ? p.bindings.figma.unsetValue! : (p.bindings.figma.values?.[value] ?? value);
-
   const root = contract.anatomy.root;
   /** D5: viewport-pinned-scrim bounding notes (code-only facts, never silent). */
   const scrimNotes: CodeOnlyFactObservation[] = [];
@@ -5401,7 +5476,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // amend paths both rely on that ordering invariant.
   // Grid mapping: rows = axis 0's values; columns = the ordered cartesian
   // product of axes 1..n (a 5×3×2 component renders 5 rows × 6 columns).
-  const axes = axisProps.map((p) => ({ prop: p, values: orderedValues(p) }));
+  const axes = axisProps.map((p) => ({ prop: p, values: orderedVariantValues(p) }));
   let combos: number[][] = [[]];
   for (const axis of axes) {
     const next: number[][] = [];
@@ -7634,6 +7709,7 @@ function buildSyncScript(
   // grid runtime — a slot-less contract emits a byte-identical script and
   // never carries a line about slots.
   const hasSlot = featureDatas.some((d) => dataSome(d, (x) => x.type === 'slot'));
+  const hasCallerSlots = featureDatas.some(d => dataSome(d, x => x.callerSlotProperty !== undefined));
   const hasRootSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotContent === true));
   const hasRootGridSlot = featureDatas.some((d) => dataSome(d, (x) => x.rootSlotGridContent === true));
   const hasGridGapBindings = featureDatas.some((d) => dataSome(d, (x) => x.bindings?.gridRowGap !== undefined || x.bindings?.gridColumnGap !== undefined));
@@ -8257,9 +8333,28 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 ${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
-async function buildNode(spec, registry) {
+${hasCallerSlots ? `function callerCanExpose(instance) {
+  for (let parent = instance.parent; parent; parent = parent.parent) {
+    if (parent.type === 'INSTANCE') return false;
+    if (parent.type === 'COMPONENT') return true;
+  }
+  return false;
+}
+` : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller' : ''}) {
   let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
-  if (spec.type === 'svg') {
+  ${hasCallerSlots ? `if (spec.callerSlotProperty) {
+    if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
+    const main = await caller.getMainComponentAsync();
+    if (!main) throw Error('CALLER_SLOT_MAIN_UNAVAILABLE');
+    const owner = main.parent?.type === 'COMPONENT_SET' ? main.parent : main;
+    const keys = Object.entries(owner.componentPropertyDefinitions).filter(([key, def]) =>
+      def.type === 'SLOT' && (key === spec.callerSlotProperty || key.startsWith(spec.callerSlotProperty + '#'))).map(([key]) => key);
+    if (keys.length !== 1) throw Error('CALLER_SLOT_PROPERTY_AMBIGUOUS');
+    const slots = caller.findAll(n => n.type === 'SLOT' && n.componentPropertyReferences?.slotContentId === keys[0]);
+    if (slots.length !== 1) throw Error('CALLER_SLOT_NODE_AMBIGUOUS');
+    node = slots[0];
+    for (const child of [...node.children]) child.remove();
+  } else ` : ''}if (spec.type === 'svg') {
     node = figma.createNodeFromSvg(spec.svg);${opts.nativeSource ? '\n    nativeInit(node, spec);' : ''}
     node.fills = [];
     node.clipsContent = false;
@@ -8403,11 +8498,21 @@ async function buildNode(spec, registry) {
 ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: renaming the
   // layer renames the linked SLOT property (probe 2b), so the contract's
   // slot.bindings.figma.property is spelled here and nowhere else.
-  node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;` : `  node.name = spec.name;`}${opacityRuntime(hasOpacity)}
+  ${hasCallerSlots ? 'if (!spec.callerSlotProperty) ' : ''}node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;` : `  node.name = spec.name;`}${opacityRuntime(hasOpacity)}
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
-  const built = [];
+${hasCallerSlots ? `  if (spec.type === 'instance' && spec.children) {
+    for (const child of spec.children) {
+      if (!child.callerSlotProperty) throw Error('CALLER_SLOT_SPEC_REQUIRED');
+      const slot = await buildNode(child, registry, node);
+      ${hasRootSlot ? 'sizeRootContent(node, slot, child);' : ''}
+    }
+    // The dependency already owns its layout and private descendants. Do not
+    // position the inherited slot as a new direct child of this instance.
+    return node;
+  }
+` : ''}  const built = [];
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'node')}
@@ -8689,7 +8794,7 @@ async function amendSet(set, C) {
       }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
       report.rebuiltVariants++;
     }${hasNestedPropertyControls ? `
-    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;` : ''}
+    for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;` : ''}
     for (const t of registry.texts) {
       let k = defKey(t.prop);
       if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -8890,7 +8995,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${hasRootSlot ? '\n    sizeRootContent(comp, childNode, childSpec);' : ''}${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
   }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
-  ${hasNestedPropertyControls ? `for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;
+  ${hasNestedPropertyControls ? `for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;
   ` : ''}for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -9044,7 +9149,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
     const comp = await buildNode(v.spec, registry);${hasNestedPropertyControls ? `
-    for (const instance of registry.nestedControls || []) instance.isExposedInstance = true;` : ''}
+    for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;` : ''}
     built.push({ v, comp, registry });
   }
 

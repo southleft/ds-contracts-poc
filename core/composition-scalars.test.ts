@@ -95,7 +95,7 @@ test('caller parts refuse missing, competing or constrained slots and unsupporte
   delete parent.anatomy.root.parts!.first.component!.text;
   assert.equal(errors(), '');
   assert.throws(() => htmlEmitter.emit(parent, ctx), /HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
-  assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
+  assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED/);
   assert.throws(() => emitWebComponent(parent, { ...ctx, tokens: new Set<string>() }), /WEB_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
 });
 
@@ -447,4 +447,99 @@ test('native fresh-mount variants preserve initializer omission, controlled prec
   parent.props[0] = axis('starting');
   state.bindings.figma = { kind: 'NONE' };
   assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+});
+
+test('native caller content populates linked slots without altering child mains or duplicating defaults', async () => {
+  for (const mode of ['flex', 'grid', 'nested'] as const) {
+    const grid = mode === 'grid';
+    const { parent, child, ctx } = family();
+    parent.props = [{ name: 'caption', type: 'text', default: 'Caller caption',
+      bindings: { code: { prop: 'caption' }, figma: { kind: 'TEXT', property: 'Caption' } } }];
+    const shell = (id: string, name: string, useGrid = false) => ContractSchema.parse({ ...parent, id, name, props: [],
+      anatomy: { root: { layout: useGrid
+        ? { display: 'grid', columns: [{ fr: 1 }, { fr: 1 }], rows: [{ fit: true }], flow: 'row' }
+        : { display: 'flex', direction: 'column' }, literals: { width: useGrid ? '240px' : '100%', height: 'fit-content' },
+        slot: { name: 'children', ...(!useGrid ? { defaultContent: [{ id: child.id, props: { label: 'Default content' } }] } : {}) } } },
+      bindings: { ...parent.bindings, code: { anchors: { importPath: `./${name}`, export: name } } } });
+    const frame = shell('ds.caller-frame', 'CallerFrame'), body = shell('ds.caller-body', 'CallerBody', grid);
+    ctx.contracts.set(frame.id, frame); ctx.contracts.set(body.id, body);
+    body.anatomy.root.literals!['font-size'] = '21px';
+    if (mode === 'nested') {
+      const slot = body.anatomy.root.slot!; delete body.anatomy.root.slot;
+      body.anatomy.root.literals!.width = '240px';
+      body.anatomy.root.parts = { heading: { text: 'Private heading' }, region: {
+        layout: { display: 'flex', direction: 'column' }, literals: { width: '120px' }, parts: {
+          content: { slot, layout: { display: 'flex', direction: 'column' } },
+        },
+      } };
+    }
+    const expectedText = (caption: string) => [...(mode === 'nested' ? ['Private heading'] : []), caption, 'Save'];
+    parent.anatomy.root = { layout: { display: 'flex', direction: 'column' }, literals: { width: '300px', 'font-size': '12px' }, parts: {
+      first: { component: { id: frame.id }, parts: {
+        body: { component: { id: body.id }, parts: {
+          caption: { content: { prop: 'caption' } },
+          action: { component: { id: child.id, props: { label: 'Save', disabled: false } } },
+        } },
+      } },
+      empty: { component: { id: frame.id }, parts: {} },
+    } };
+    const contractsBefore = JSON.stringify([...ctx.contracts]);
+    const engine = createFigmaEngine(ctx), data = engine.compileComponentData(parent, ctx.contracts);
+    assert.equal(JSON.stringify([...ctx.contracts]), contractsBefore);
+    const { figma, root } = createFigmaMock();
+    const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+    const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 });
+    for (const c of [child, frame, body]) await run(engine.buildComponentScript(c, ctx.contracts));
+    const mains = [child, frame, body].map(c => root.findOne(n => ['COMPONENT', 'COMPONENT_SET'].includes(n.type) && n.getSharedPluginData('ds_contracts', 'contractId') === c.id) as ComposedMockNode);
+    const mainSnapshot = (main: ComposedMockNode) => JSON.stringify({ properties: main.componentPropertyDefinitions, nodes: main.findAll(() => true).map(n => [n.id, n.type, n.name, n.characters]) });
+    const before = mains.map(mainSnapshot);
+    await run(engine.buildComponentScript(parent, ctx.contracts));
+    const main = root.findOne(n => n.type === 'COMPONENT' && n.getSharedPluginData('ds_contracts', 'contractId') === parent.id) as ComposedMockNode;
+    assert.ok(main);
+    assert.deepEqual(main.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption'));
+    assert.equal(main.findAll(n => n.type === 'INSTANCE').length, 4);
+    assert.equal(main.findOne(n => n.type === 'TEXT' && n.characters === 'Caller caption')!.fontSize, 21, 'caller content inherits the child host typography');
+    assert.equal(main.findAll(n => n.type === 'SLOT').length, 3);
+    assert.equal(main.children.find(n => n.name === 'empty')!.findAll(n => n.type === 'TEXT').length, 0, 'explicit empty children override slot defaults');
+    assert.equal(main.children.find(n => n.name === 'first')!.layoutSizingHorizontal, 'FILL');
+    assert.deepEqual(mains.map(mainSnapshot), before);
+    assert.equal(Object.values(main.componentPropertyDefinitions).filter((v: any) => v.type === 'SLOT').length, 0,
+      'child-owned slots do not become disconnected parent properties');
+    const instance = main.createInstance();
+    assert.equal(instance.exposedInstances.length, 2, 'only eligible direct children are exposed by the parent');
+    const caption = Object.keys(instance.componentProperties).find(k => k.startsWith('Caption#'))!;
+    assert.ok(caption);
+    (instance as any).setProperties({ [caption]: 'Changed caller caption' });
+    assert.deepEqual(instance.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Changed caller caption'));
+    assert.deepEqual(main.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption'));
+    instance.remove();
+    const ids = main.findAll(() => true).map(n => n.id);
+    await run(engine.buildComponentScript(parent, ctx.contracts));
+    assert.deepEqual(main.findAll(() => true).map(n => n.id), ids);
+    assert.equal(data.variants[0].spec.children![0].children![0].callerSlotProperty, 'Children');
+    frame.anatomy.root.slot!.min = 1;
+    assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /CALLER_PARTS_UNSUPPORTED/);
+    delete frame.anatomy.root.slot!.min;
+    const bodyPart = parent.anatomy.root.parts!.first.parts!.body;
+    if (grid) {
+      bodyPart.parts!.third = { text: 'Third' };
+      assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /caller content exceeds declared grid capacity/);
+      body.anatomy.root.layout = { display: 'grid', columns: [{ fr: 1 }, { fr: 1 }], autoRows: { fit: true }, flow: 'row' };
+      const flowing = engine.compileComponentData(parent, ctx.contracts);
+      const carrier = flowing.variants[0].spec.children![0].children![0].children![0].children![0].children![0];
+      assert.equal(carrier.layout!.grid!.rows.length, 2);
+      assert.equal(carrier.children!.length, 3);
+      delete bodyPart.parts!.third;
+    }
+    parent.anatomy.root.parts!.empty.component!.text = 'Competing';
+    assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /competing caller content/);
+    delete parent.anatomy.root.parts!.empty.component!.text;
+    delete parent.anatomy.root.literals!.width;
+    assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /full-width child needs a definite column or grid/);
+    parent.anatomy.root.literals!.width = '300px';
+    parent.anatomy.root.parts!.empty.repeat = { from: 'items', sample: [] } as any;
+    assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /non-repeated nested instance/);
+    parent.anatomy.root = { component: { id: frame.id }, parts: {} };
+    assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /non-repeated nested instance/);
+  }
 });
