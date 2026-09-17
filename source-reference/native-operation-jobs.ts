@@ -1,5 +1,5 @@
 import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
-import { prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
+import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
 import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
 import { isReactInitialNativeRequest, reactInitialNativeReservation, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { prepareReactInitialNativePlan } from './react-initial-native-plan.js';
@@ -217,6 +217,7 @@ interface State {
   recoveryWritten?: boolean;
   comparisonRepair?: NativeComparisonRepairPlan;
   repairWritten?: boolean;
+  repairRevisionsWritten?: string[];
   comparisonRefresh?: ReactComparisonRefresh;
 }
 export interface NativeOperationJobsOptions {
@@ -775,14 +776,24 @@ export function createNativeOperationJobs(
     if (state.pending || state.recoveryWritten || !['component-partial-allocation','comparison-recovery-refused'].includes(state.phase)) return false;
     try { emitNativeComparisonRecoveryReadbackScript(recoveryInput(state,plan)); return true; } catch { return false; }
   };
+  const repairWasWritten=(state:State,repair:NativeComparisonRepairPlan)=>repair.version===1
+    ? state.repairWritten===true : state.repairRevisionsWritten?.includes(repair.revision)===true;
   const repairPlan = (state: State, plan: Plan) => {
-    if(!isComparisonPlan(plan) || state.repairWritten) fail('comparison-repair-unavailable');
-    if(state.comparisonRepair) return state.comparisonRepair;
-    if(state.phase!=='component-observation-refused' || !state.imageReadback) fail('comparison-repair-observation-required');
-    return prepareNativeComparisonRepair(comparisonObservationInput(state,plan),state.imageReadback.result);
+    if(!isComparisonPlan(plan)) fail('comparison-repair-unavailable');
+    if(state.phase==='comparison-repair-refused'&&state.comparisonRepair&&!repairWasWritten(state,state.comparisonRepair))return state.comparisonRepair;
+    if(!['component-structure-observed','component-observation-refused'].includes(state.phase)||!state.imageReadback)fail('comparison-repair-observation-required');
+    const input=comparisonObservationInput(state,plan);
+    // A fresh supported observation can expose a diagnostic-frame defect even
+    // after a previous, separately claimed correction of linked instances.
+    try {
+      const frame=prepareNativeComparisonFrameRepair(input,state.imageReadback.result);
+      if(!repairWasWritten(state,frame))return frame;
+    } catch { /* Other differences must pass the existing bounded planner. */ }
+    if(state.repairWritten||state.comparisonRefresh)fail('comparison-repair-unavailable');
+    return prepareNativeComparisonRepair(input,state.imageReadback.result);
   };
   const availableRepair = (state: State,plan: Plan) => {
-    if(state.pending || !['component-observation-refused','comparison-repair-refused'].includes(state.phase)) return undefined;
+    if(state.pending || !['component-structure-observed','component-observation-refused','comparison-repair-refused'].includes(state.phase)) return undefined;
     try{return repairPlan(state,plan);}catch{return undefined;}
   };
   const observeComponent = (
@@ -886,6 +897,8 @@ export function createNativeOperationJobs(
     const recoveryClaim=present(recoveryClaimPath)?JSON.parse(bytes(recoveryClaimPath).toString()):null;
     const repairClaimPath=path.join(dir(id),"comparison-repair.json");
     const repairClaim=present(repairClaimPath)?JSON.parse(bytes(repairClaimPath).toString()):null;
+    const revisionRepairClaims=Object.fromEntries(readdirSync(dir(id)).filter(name=>/^comparison-repair-[a-f0-9]{64}\.json$/.test(name)).sort()
+      .map(name=>['sha256:'+name.slice(18,-5),JSON.parse(bytes(path.join(dir(id),name)).toString())]));
     const events: Event[] = [];
     const digests: string[] = [];
     let previous = sha(headerBytes);
@@ -967,8 +980,9 @@ export function createNativeOperationJobs(
           if(!availableRepair(state,plan)||c.readOnly!==true||!event.comparisonRepair||!same(event.comparisonRepair,repairPlan(state,plan)))fail('repair-read-precondition-invalid');
           state.comparisonRepair=structuredClone(event.comparisonRepair);
         } else if(c.phase==='comparison-repair-apply'){
-          if(state.phase!=='comparison-repair-observed'||!state.comparisonRepair||state.repairWritten||c.readOnly!==false||!same(c,repairClaim))fail('repair-write-precondition-invalid');
-          state.repairWritten=true;
+          if(state.phase!=='comparison-repair-observed'||!state.comparisonRepair||repairWasWritten(state,state.comparisonRepair)||c.readOnly!==false||!same(c,state.comparisonRepair.version===1?repairClaim:revisionRepairClaims[state.comparisonRepair.revision]))fail('repair-write-precondition-invalid');
+          if(state.comparisonRepair.version===1)state.repairWritten=true;
+          else (state.repairRevisionsWritten??=[]).push(state.comparisonRepair.revision);
         } else if (c.phase === 'comparison-recovery-readback') {
           if (!canRecover(state,plan) || c.readOnly!==true || c.script!==emitNativeComparisonRecoveryReadbackScript(recoveryInput(state,plan))) fail('recovery-read-precondition-invalid');
         } else if (c.phase === 'comparison-recovery-apply') {
@@ -1090,6 +1104,7 @@ export function createNativeOperationJobs(
         claim: claimBytes ? sha(claimBytes) : null,
         componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
         ...(repairClaim ? {repairClaim:sha(encode(repairClaim))} : {}),
+        ...(Object.keys(revisionRepairClaims).length?{revisionRepairClaims:sha(encode(revisionRepairClaims))}:{}),
         ...(recoveryClaim ? {recoveryClaim:sha(encode(recoveryClaim))} : {}),
         digests,
       }),
@@ -1251,7 +1266,7 @@ export function createNativeOperationJobs(
       );
     }
     if(event.kind==='dispatch' && event.command.phase==='comparison-repair-apply')
-      write(path.join(dir(loaded.header.id),'comparison-repair.json'),encode(event.command));
+      write(path.join(dir(loaded.header.id),loaded.state.comparisonRepair!.version===1?'comparison-repair.json':`comparison-repair-${loaded.state.comparisonRepair!.revision.slice(7)}.json`),encode(event.command));
     if(event.kind==='dispatch' && event.command.phase==='comparison-recovery-apply')
       write(path.join(dir(loaded.header.id),'comparison-recovery.json'),encode(event.command));
     if (sequence === 0) {
@@ -1393,7 +1408,7 @@ export function createNativeOperationJobs(
     let script: string;
     let comparisonRepair: NativeComparisonRepairPlan | undefined;
     let comparisonRefresh: ReactComparisonRefresh | undefined;
-    if (loaded.state.comparisonRefresh && !phase.endsWith("readback")) fail("comparison-refresh-read-only");
+    if (loaded.state.comparisonRefresh && !phase.endsWith("readback") && !(phase==='comparison-repair-apply'&&loaded.state.comparisonRepair?.version===2)) fail("comparison-refresh-read-only");
     if (phase === "token-create") {
       if (loaded.state.dispatchedCreate) fail("creation-already-dispatched");
       authenticate(loaded);
@@ -1412,7 +1427,7 @@ export function createNativeOperationJobs(
       comparisonRepair=availableRepair(loaded.state,loaded.plan);if(!comparisonRepair)fail('comparison-repair-unavailable');
       authenticate(loaded);script=emitNativeComparisonRepairScript(comparisonRepair,true);
     } else if(phase==='comparison-repair-apply'){
-      if(loaded.state.phase!=='comparison-repair-observed'||!loaded.state.comparisonRepair||loaded.state.repairWritten)fail('comparison-repair-unavailable');
+      if(loaded.state.phase!=='comparison-repair-observed'||!loaded.state.comparisonRepair||repairWasWritten(loaded.state,loaded.state.comparisonRepair))fail('comparison-repair-unavailable');
       authenticate(loaded);script=emitNativeComparisonRepairScript(loaded.state.comparisonRepair);
     } else if (phase === 'comparison-recovery-readback') {
       if(!canRecover(loaded.state,loaded.plan)) fail('comparison-recovery-refused');

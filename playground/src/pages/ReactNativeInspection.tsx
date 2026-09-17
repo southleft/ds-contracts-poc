@@ -1,3 +1,4 @@
+import { nativeImageFraming } from '../native-image-framing';
 import type { ReactCompositionReview } from '../../../source-reference/react-composition';
 import { useEffect, useState } from 'react';
 import type { NativeOperationSnapshot } from '../../../source-reference/native-operation-jobs';
@@ -132,13 +133,13 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           <button type="button" disabled={busy || !op.sourceCurrent || !row.connection.paired || row.connection.started}
             onClick={() => void action(`native-operation/${id}/start`)}>{comparison ? 'Create and inspect native comparison' : 'Create and inspect native draft'}</button>
         </>}
-        {op.comparisonRepair && <section aria-label="Repair linked instances">
-          <p>The independent readback found supported corrections to linked instances. The app will check the same nodes, source mains and tokens again before applying these changes.</p>
+        {op.comparisonRepair && <section aria-label="Repair retained comparison">
+          <p>The independent readback found supported corrections to the retained comparison. The app will check the same nodes, source mains and tokens again before applying these changes.</p>
           <ul>{op.comparisonRepair.changes.map((change,index)=><li key={index}>{change.kind==='height'
             ? `Restore the main’s height binding: ${change.before} → ${change.after} px.`
-            : 'Remove an extra variable mode from a descendant to match its main.'}</li>)}</ul>
+            : change.kind==='comparison-clipping' ? 'Allow outer shadows beyond the comparison frame; preserve clipping inside the component.' : 'Remove an extra variable mode from a descendant to match its main.'}</li>)}</ul>
           <button type="button" disabled={busy || !row.connection.paired}
-            onClick={() => void action(`native-operation/${id}/repair-comparison`)}>Verify and repair linked instances</button>
+            onClick={() => void action(`native-operation/${id}/repair-comparison`)}>Verify and repair comparison</button>
         </section>}
         {op.canResumeComparison && <section aria-label="Resume retained comparison">
           <p>The retained instance is empty. Recovery will inspect its ownership, source mains and tokens, then continue in the same instance if they still match. Original creation evidence stays intact.</p>
@@ -195,13 +196,13 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
             {!row.sourceFrame && <button type="button" disabled={busy || !op.sourceCurrent}
               onClick={() => void action(`native-operation/${row.parentOperationId}/source-frame`)}>Measure original comparison frame</button>}
             {row.sourceFrameProblem && <p role="alert">{row.sourceFrameProblem}</p>}
-            <p>{row.sourceFrame ? 'Original pixels cropped around independently measured source bounds, with up to 8 px of surrounding context. Both images use 1 image pixel per CSS pixel on white surfaces; no resizing or best-fit alignment.' : 'The original includes its browser stage. Measure its frame for an unscaled component comparison.'} <a href={`${root}/native-operation/${row.parentOperationId}/source.png`} target="_blank" rel="noreferrer">Open full original</a></p>
+            <p>{row.sourceFrame ? 'Original pixels cropped around independently measured source bounds, with up to 8 px of surrounding context. Both images use 1 image pixel per CSS pixel on white surfaces. Where native render bounds are available, layout origins align from geometry; no resizing or best-fit alignment.' : 'The original includes its browser stage. Measure its frame for an unscaled component comparison.'} <a href={`${root}/native-operation/${row.parentOperationId}/source.png`} target="_blank" rel="noreferrer">Open full original</a></p>
           </>}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'flex-start' }}>
           {comparison && <figure style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
             <figcaption>Original React · unchanged source{row.sourceFrame && <><br />Layout: {row.sourceFrame.bounds.width.toFixed(2)} × {row.sourceFrame.bounds.height.toFixed(2)} px</>}</figcaption>
-            <img alt={`Original React ${row.caseId}`} style={{ maxWidth: 'none', backgroundColor: 'white', ...(row.sourceFrame ? { width: row.sourceFrame.crop.width, height: row.sourceFrame.crop.height } : {}) }}
-              src={`${root}/native-operation/${row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} />
+            <div style={{...nativeImageFraming(row.sourceFrame,op.imageObservation?.images[0]).source,width:'max-content',backgroundColor:'white'}}><img alt={`Original React ${row.caseId}`} style={{ maxWidth: 'none', backgroundColor: 'white', ...(row.sourceFrame ? { width: row.sourceFrame.crop.width, height: row.sourceFrame.crop.height } : {}) }}
+              src={`${root}/native-operation/${row.parentOperationId}/${row.sourceFrame ? `source-frame/${row.sourceFrame.imageSha256}.png` : 'source.png'}`} /></div>
           </figure>}
           {op.imageObservation.images.map(image => <figure key={image.caseId} style={{ margin: 0, maxWidth: '100%', overflow: 'auto' }}>
             {initial && row.initialStates?.filter(state => 'variant:' + state.variant === image.caseId).map(state => <div key={state.observation}>
@@ -211,7 +212,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
                 onError={() => setError('A pinned original state image could not be verified or loaded. Reload unchanged originals before reviewing this comparison.')} />
             </div>)}
             <figcaption>Native {image.caseId}{image.layoutSize && <><br />Layout: {image.layoutSize.width.toFixed(2)} × {image.layoutSize.height.toFixed(2)} px</>}</figcaption>
-            <div style={{ padding: comparison || initial ? 8 : 0, width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${initial ? 'initial state' : comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
+            <div style={{ padding: comparison || initial ? 8 : 0, ...(comparison ? nativeImageFraming(row.sourceFrame,image).native : {}), width: 'max-content', backgroundColor: 'white' }}><img loading="lazy" style={{ maxWidth: 'none', width: image.width, height: image.height }} alt={`Native ${initial ? 'initial state' : comparison ? 'comparison' : 'root'} ${image.caseId}`} src={`/api/source-reference/native/${id}/images/${op.imageObservation!.attemptId}/${image.sha256}.png`} /></div>
           </figure>)}
           </div>
         </details>}

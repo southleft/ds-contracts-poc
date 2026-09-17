@@ -48,7 +48,7 @@ export function emitNativeContractComparisonReadbackScript(input: NativeContract
     pageId: input.creation.pageId, nodes: input.creation.nodes,
     comparisons: [{ id: input.comparison.caseId, instanceId: input.creation.comparisons[0].instanceId, type: 'INSTANCE' }],
   }, input.tokenInput, input.tokenIdentity, ['nativeContractPart', 'nativeContractSample', 'nativeContractCase', 'fontWeightVar', 'lineHeightVar',
-    ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages);
+    ...(input.comparison.contentRows || input.comparison.instances?.some(ref => ref.contentRows) ? ['gridFlowRows'] : [])], captureImages, true);
   return `// GENERATED independent comparison readback. READ ONLY.
 const out = { version: 1, status: 'refused', operationId: ${JSON.stringify(input.operation.id)},
   fileKey: ${JSON.stringify(input.operation.fileKey)}, planRevision: ${JSON.stringify(input.planRevision)},

@@ -158,7 +158,7 @@ export function emitNativeInventoryReadbackScript(expected: {
   operation: { id: string; fileKey: string }; planRevision: string; pageId: string;
   nodes: Array<{ id: string; type: string }>;
   comparisons: Array<{ id: string; instanceId: string; type: string }>;
-}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false): string {
+}, tokenInput: NativeTokenContextInput, tokenIdentity: NativeTokenIdentity, extraMetadata: string[], captureImages = false, captureExportBounds = false): string {
   const fields = [
     "visible",
     "opacity",
@@ -273,11 +273,15 @@ try {
     const node = await figma.getNodeByIdAsync(c.instanceId); guard();
     if (!node || node.type !== c.type || typeof node.exportAsync !== 'function' || typeof figma.base64Encode !== 'function')
       throw Error('native-source-readback-export-unavailable');
-    const png = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } }); guard();
+    ${captureExportBounds ? `const exportBounds = node.absoluteBoundingBox && node.absoluteRenderBounds
+      ? JSON.parse(JSON.stringify({ layout: node.absoluteBoundingBox, render: node.absoluteRenderBounds })) : undefined;
+    ` : ''}const png = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } }); guard();${captureExportBounds ? `
+    if (exportBounds && stable(exportBounds) !== stable({ layout: node.absoluteBoundingBox, render: node.absoluteRenderBounds }))
+      throw Error('native-source-readback-export-bounds-changed');` : ''}
     if (!png || !png.length) throw Error('native-source-readback-export-invalid');
     imageBytes += png.length;
     if (imageBytes > 1024 * 1024) throw Error('native-source-readback-image-byte-limit');
-    images.push({ caseId: c.id, nodeId: c.instanceId, pngBase64: figma.base64Encode(png) });
+    images.push({ caseId: c.id, nodeId: c.instanceId, pngBase64: figma.base64Encode(png)${captureExportBounds ? ', ...(exportBounds ? { exportBounds } : {})' : ''} });
   }`
       : ""
   }

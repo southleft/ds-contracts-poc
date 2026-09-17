@@ -16,6 +16,15 @@ import { emitNativeContractReadbackScript, verifyNativeContractReadback, type Na
 import { prepareNativeContractComparison, type NativeContractComparisonInput } from './native-contract-comparison.js';
 
 
+test('comparison board preserves the main instance outer effects without disabling component clipping',async()=>{
+  const f=await fixture(); const creation=await f.run(f.emit());
+  const board=await f.figma.getNodeByIdAsync(creation.comparisonBoardId);
+  const instance=await f.figma.getNodeByIdAsync(creation.comparisons[0].instanceId);
+  const main=await f.figma.getNodeByIdAsync(f.comparison.parent.creation.variants[0].id);
+  assert.equal(board.clipsContent,false,'the diagnostic frame must not crop native effect outsets');
+  assert.equal(instance.clipsContent,main.clipsContent,'preserve the component clipping decision');
+});
+
 test('shared writer fills an instance of the existing main, retaining editable content and both token contexts', async () => {
   const f = await fixture(), before = await f.run(emitNativeContractReadbackScript(f.comparison.parent));
   const componentCount = f.figma.root.findAll((n: any) => n.type === 'COMPONENT').length;
@@ -578,4 +587,14 @@ test('comparison selects Boolean variants without coercing strings or omitted in
   contract.props[0].bindings.code.values = {false:'enabled',true:'disabled'};
   assert.equal(reactComparisonVariant(contract,{disabled:'disabled'}),'disabled=true');
   assert.throws(()=>reactComparisonVariant(contract,{disabled:true}),/value-unqualified/);
+});
+
+test('comparison export refuses render bounds that change while rasterization is pending',async()=>{
+ const f=await observedFixture(),instance=await f.figma.getNodeByIdAsync(f.input.creation.comparisons[0].instanceId);
+ Object.defineProperty(instance,'absoluteRenderBounds',{configurable:true,writable:true,value:{x:-2,y:-1,width:instance.width+4,height:instance.height+4}});
+ const original=instance.exportAsync.bind(instance);
+ instance.exportAsync=async(...args:any[])=>{const png=await original(...args);instance.absoluteRenderBounds.x-=1;return png;};
+ const receipt=await f.run(emitNativeContractComparisonReadbackScript(f.input,true));
+ assert.equal(receipt.status,'refused');
+ assert(receipt.content.problems.includes('native-source-readback-export-bounds-changed'));
 });
