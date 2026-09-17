@@ -1,4 +1,5 @@
 import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { svgIconViewport } from './svg-icon-viewport.js';
 import { reactToggleAria } from './react-toggle-aria.js';
 import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
@@ -712,16 +713,24 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   // Icon assets (fixed names + enum expansions), same table as the CSS-Module emitter.
   const neededIcons = new Map<string, string>();
+  const sizedIcons = new Map<number, Map<string, string>>();
   for (const { part } of walkAnatomy(contract)) {
     if (!part.icon) continue;
     const m = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
-    if (m) {
+    if (m && !part.icon.size) {
       const enumProp = contract.props.find((p) => p.name === m[1]);
       if (enumProp && isEnum(enumProp)) {
         for (const v of enumProp.type.enum) neededIcons.set(v, ctx.icons.get(v) ?? '');
       }
-    } else {
+    } else if (!part.icon.size) {
       neededIcons.set(part.icon.asset, ctx.icons.get(part.icon.asset) ?? '');
+    }
+    if (part.icon.size) {
+      const assets = m ? contract.props.find(p => p.name === m[1]) : undefined;
+      const keys = m ? (assets && isEnum(assets) ? assets.type.enum : []) : [part.icon.asset];
+      const table = sizedIcons.get(part.icon.size) ?? new Map<string, string>();
+      for (const key of keys) table.set(key, svgIconViewport(ctx.icons.get(key) ?? '', part.icon.size));
+      sizedIcons.set(part.icon.size, table);
     }
   }
 
@@ -781,7 +790,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (part.icon) {
       const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
       const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);
-      const glyph = `dangerouslySetInnerHTML={{ __html: ${ref ? whenProvided(ref[1], `ICONS[${keyExpr}]`, "''") : `ICONS[${keyExpr}]`} }}`;
+      const table = part.icon.size ? `SIZED_ICONS[${part.icon.size}]` : 'ICONS';
+      const glyph = `dangerouslySetInnerHTML={{ __html: ${ref ? whenProvided(ref[1], `${table}[${keyExpr}]`, "''") : `${table}[${keyExpr}]`} }}`;
       const node = part.element
         ? `<${part.element} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, part.element)}><span aria-hidden="true" style={{ display: 'inline-flex' }} ${glyph} /></${part.element}>`
         : `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" ${glyph} />`;
@@ -974,6 +984,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           .map(([kk, v]) => `  ${JSON.stringify(kk)}: ${JSON.stringify(v)},`)
           .join('\n')}\n};\n\n`
       : '';
+  const sizedIconsConst = sizedIcons.size
+    ? `const SIZED_ICONS: Record<number, Record<string, string>> = ${JSON.stringify(Object.fromEntries([...sizedIcons].map(([size, icons]) => [size, Object.fromEntries(icons)])), null, 2)};\n\n`
+    : '';
   const keyframes: string[] = [];
   if (usedAnimations.has('spin')) keyframes.push('@keyframes ds-inline-spin { to { transform: rotate(360deg); } }');
   if (usedAnimations.has('pulse')) keyframes.push('@keyframes ds-inline-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }');
@@ -1061,7 +1074,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
@@ -1097,7 +1110,7 @@ ${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${roleMapConst}${elementMapConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};

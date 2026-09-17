@@ -1,4 +1,5 @@
 import {projectReactBehaviorContract} from './react-behavior-contract.js';
+import {buildReactBehaviorPreview} from './react-behavior-preview.js';
 import { selectReactComparisonCase } from './react-comparison-case.js';
 import { reactComparisonContentScope, reactComparisonContentOperation } from './react-comparison-request.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
@@ -229,6 +230,24 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const behaviorPreview = /^react\/([a-f0-9]{64})\/behavior-preview\/([a-z-]+)$/.exec(route);
+    if (behaviorPreview) {
+      try {
+        if (req.method !== 'GET' || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
+          throw Error('react-behavior-preview-request-invalid');
+        const draft = callbacks.read(behaviorPreview[1], behaviorPreview[2])?.draft;
+        if (!draft) throw Error('react-behavior-preview-draft-unavailable');
+        const output = await buildReactBehaviorPreview(repoRoot, draft);
+        if (!reference || reference.id !== behaviorPreview[1] || !reactReferenceUnchanged(reference)) throw Error('react-behavior-preview-source-changed');
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-store');
+        res.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox allow-scripts");
+        res.end(reactReferenceHtml({ ...reference, ...output }));
+      } catch {
+        json(res, 409, { error: 'Generated React preview unavailable. A current verified behavior draft is required.' });
+      }
+      return;
+    }
     const callbackRoute = /^react\/([a-f0-9]{64})\/callback-behavior\/([a-z-]+)$/.exec(route);
     if (callbackRoute) {
       try {

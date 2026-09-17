@@ -5,6 +5,9 @@ import type { ReactInitialInspection } from "./react-initial-inspection.js";
 import type { ReactCallbackInspection } from "./react-callback-inspection.js";
 import { projectReactBehaviorContract } from "./react-behavior-contract.js";
 import { generatedTypeErrors } from "../core/react-test-runtime.js";
+import { buildReactBehaviorPreview } from './react-behavior-preview.js';
+import { reactReferenceHtml } from './react-reference.js';
+import { chromium } from 'playwright-core';
 
 function observations() {
   const contract = ContractSchema.parse({
@@ -137,6 +140,37 @@ function observations() {
   } as ReactCallbackInspection;
   return { initial, behavior };
 }
+test('the application preview runs emitted behavior with real consumer controls and exact callback values', async t => {
+  const {initial,behavior}=observations();
+  const draft=projectReactBehaviorContract(initial,behavior);
+  await assert.rejects(buildReactBehaviorPreview(process.cwd(),{...draft,status:'refused'}),/draft-unavailable/);
+  const output=await buildReactBehaviorPreview(process.cwd(),draft);
+  const browser=await chromium.launch();t.after(()=>browser.close());
+  const page=await browser.newPage();
+  await page.setContent(reactReferenceHtml({id:'preview',files:{},...output}));
+  const control=page.getByRole('region',{name:'Generated component'}).getByRole('checkbox');
+  const value=page.getByLabel('Input value'),mode=page.getByLabel('State management');
+  const remount=page.getByRole('button',{name:'Remount with current inputs'});
+  const calls=page.getByLabel('Callback values');
+  assert.equal(await control.getAttribute('aria-checked'),'false');
+  await value.selectOption({label:'"indeterminate"'});
+  assert.equal(await control.getAttribute('aria-checked'),'false','initial-only input updates do not overwrite mounted state');
+  await remount.click();
+  assert.equal(await control.getAttribute('aria-checked'),'mixed');
+  await control.press('Space');
+  assert.equal(await control.getAttribute('aria-checked'),'true');
+  assert.equal(await calls.textContent(),'[true]');
+  await mode.selectOption('hold');await remount.click();
+  await control.click();
+  assert.equal(await calls.textContent(),'[true]');
+  assert.equal(await control.getAttribute('aria-checked'),'mixed','held controlled values do not follow the requested update');
+  await mode.selectOption('accept');await remount.click();
+  await control.press('Space');await control.click();
+  assert.equal(await calls.textContent(),'[true,false]');
+  assert.equal(await control.getAttribute('aria-checked'),'false');
+  assert.match(await page.getByRole('region',{name:'React consumer controls'}).innerText(),/onValueChange/);
+  assert.equal(await page.locator('style').textContent(),output.css,'source styles are not used to cover missing generated rules');
+});
 test("observed relationships produce a typed React draft while retaining the original appearance contract", () => {
   const { initial, behavior } = observations(),
     before = structuredClone(initial);

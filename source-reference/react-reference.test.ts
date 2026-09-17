@@ -166,6 +166,9 @@ test("reference API retains all ten cases, isolates source execution and refuses
     assert.equal((await fetch(callbackUrl, {method:'POST',body:JSON.stringify({sourceRoot:'/etc',callback:'arbitrary'})})).status,400);
     assert.equal((await fetch(callbackUrl, {method:'DELETE'})).status,409);
     assert.equal((await fetch(callbackUrl, {method:'POST'})).status,409,'a loaded reference alone cannot replace a sealed source observation');
+    const previewUrl = base + `/react/${reference.id}/behavior-preview/checkbox-unchecked`;
+    assert.equal((await fetch(previewUrl)).status,409,'a loaded reference cannot authorize generated preview without verified observations');
+    assert.equal((await fetch(previewUrl,{method:'POST',body:'{}'})).status,409,'the preview accepts no caller-supplied contract or code');
     const programUrl = base + `/react/${reference.id}/program`;
     assert.equal(
       (

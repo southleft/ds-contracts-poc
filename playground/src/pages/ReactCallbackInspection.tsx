@@ -12,12 +12,14 @@ export function ReactCallbackInspection({
 }) {
   const [result, setResult] = useState<Inspection | null>(null),
     [error, setError] = useState(""),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [preview, setPreview] = useState(false);
   const endpoint = `/api/source-reference/react/${referenceId}/callback-behavior/${caseId}`;
   useEffect(() => {
     let stopped = false,
       pending = false;
     setResult(null);
+    setPreview(false);
     setError("");
     if (!available) return;
     const load = async () => {
@@ -123,6 +125,16 @@ export function ReactCallbackInspection({
             <h4>React behavior draft: {result.draft.status}</h4>
             {result.draft.contract && <p>State API: {result.draft.contract.props.filter(prop=>prop.bindings.code.initial).map(prop=>`${prop.bindings.code.prop} (controlled), ${prop.bindings.code.initial!.prop} (initial only)`).join(', ')}. Callback: {result.draft.contract.events?.map(event=>event.bindings.code.prop).join(', ')}.</p>}
             <p>This code combines observed state behavior with the saved appearance draft. Controlled-state visual comparisons, associated label composition, generated-consumer qualification and native metadata preservation remain unfinished.</p>
+            {result.draft.status === 'generated-draft' && <>
+              <button type="button" onClick={()=>setPreview(value=>!value)}>{preview?'Close React comparison':'Try generated React beside the original'}</button>
+              {preview && <section aria-label="Original and generated React comparison">
+                <p>Both views are interactive. The original includes its caller composition; the generated view currently contains the control only. This is a review surface, not a visual pass.</p>
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,340px),1fr))',gap:16}}>
+                  <div><h5>Unchanged original case</h5><iframe title="Original behavior comparison" sandbox="allow-scripts" src={`/api/source-reference/react/${referenceId}?case=${caseId}`} style={{width:'100%',height:580,border:'1px solid #ddd'}}/></div>
+                  <div><h5>Generated React control</h5><iframe title="Generated React behavior preview" sandbox="allow-scripts" src={`/api/source-reference/react/${referenceId}/behavior-preview/${caseId}`} style={{width:'100%',height:580,border:'1px solid #ddd'}}/></div>
+                </div>
+              </section>}
+            </>}
             {result.draft.tsx && <details><summary>Review generated React code</summary><pre style={{maxHeight:320,overflow:'auto'}}><code>{result.draft.tsx}</code></pre></details>}
             {result.draft.problems.map(problem=><p key={problem}>{problem}</p>)}
           </section>}
