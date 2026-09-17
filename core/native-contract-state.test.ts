@@ -11,6 +11,60 @@ import { emitNativeContractReadbackScript, verifyNativeContractReadback, type Na
 import type { NativeTokenContextInput } from './native-token-context.js';
 import { nativeComparisonFixture } from './native-contract-comparison-test-fixture.js';
 
+test('static draft text retains native ownership, font and paint tokens through independent readback', async () => {
+  const f = await nativeComparisonFixture(), c = structuredClone(f.content);
+  c.anatomy.root.literals = { height: '36px' };
+  const createComponent = f.figma.createComponent.bind(f.figma);
+  f.figma.createComponent = () => {
+    const node = createComponent();
+    node.fills = [{ type: 'SOLID', visible: false, opacity: 1, color: { r: 1, g: 1, b: 1 }, boundVariables: {} }];
+    return node;
+  };
+  const byId = new Map([[c.id, c]]), compiled = f.engine.compileNativeContractDraft(c, byId, f.source);
+  const emit = () => f.engine.buildNativeContractDraftScript(c, byId, f.source, f.supplemental);
+  const created = await f.run(emit());
+  assert.equal(created.status, 'created-candidate', JSON.stringify(created));
+  const input: NativeContractObservationInput = { operation: f.supplemental.operation, planRevision: revisionOf('static-text'),
+    projection: compiled.projection, component: compiled.component, tokenInput: f.supplemental.tokens.input,
+    tokenIdentity: f.supplemental.tokens.identity, creation: created };
+  const receipt = await f.run(emitNativeContractReadbackScript(input));
+  assert.deepEqual(receipt.nodes.find((n: any) => n.type === 'COMPONENT').values.fills, [], 'unrequested native birth fill is cleared');
+  assert.equal(verifyNativeContractReadback(input, receipt).status, 'supported-structure-observed', JSON.stringify(verifyNativeContractReadback(input, receipt)));
+  const text = receipt.nodes.find((n: any) => n.type === 'TEXT');
+  assert.equal(text.values.characters, 'Save changes');
+  assert.equal(receipt.nodes.find((n: any) => n.type === 'COMPONENT').values.primaryAxisSizingMode, 'AUTO');
+  const uniform = structuredClone(receipt);
+  uniform.nodes.find((n: any) => n.type === 'TEXT').values.boundVariables.fontSize = [text.values.boundVariables.fontSize];
+  assert.equal(verifyNativeContractReadback(input, uniform).status, 'supported-structure-observed', 'native uniform text binding arrays are supported');
+  for (const mutate of [
+    (n: any) => { n.values.characters = 'Changed'; },
+    (n: any) => { n.values.fontName.family = 'Wrong'; },
+    (n: any) => { n.values.boundVariables.fontSize = []; },
+    (n: any) => { n.values.boundVariables.fontSize = [n.values.boundVariables.fontSize, n.values.boundVariables.fontSize]; },
+    (n: any) => { n.values.fills[0].boundVariables.color.id = 'wrong'; },
+    (n: any) => { n.metadata.fontWeightVar = 'invented'; },
+    (n: any) => { n.metadata.lineHeightVar = 'invented'; },
+    (n: any) => { n.metadata.nativeContractPart = '{}'; },
+  ]) {
+    const changed = structuredClone(receipt); mutate(changed.nodes.find((n: any) => n.type === 'TEXT'));
+    assert.equal(verifyNativeContractReadback(input, changed).status, 'refused');
+  }
+  const count = f.figma.root.findAll(() => true).length;
+  const repeat = await f.run(emit());
+  assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
+  assert.equal(f.figma.root.findAll(() => true).length, count);
+  const wrapped = structuredClone(c);
+  wrapped.anatomy.root.parts!.label.tokens!['background-color'] = '{surface}';
+  assert.throws(() => f.engine.compileNativeContractDraft(wrapped, new Map([[wrapped.id, wrapped]]), f.source), /TEXT_OWNERSHIP_UNQUALIFIED/);
+  const unavailable = structuredClone(c);
+  unavailable.anatomy.root.parts!.label.declared!['font-family'] = 'Missing Face';
+  const load = f.figma.loadFontAsync.bind(f.figma);
+  f.figma.loadFontAsync = async (font: any) => { if (font.family === 'Missing Face') throw Error('unavailable'); return load(font); };
+  const refused = await f.run(f.engine.buildNativeContractDraftScript(unavailable, new Map([[unavailable.id, unavailable]]), f.source, f.supplemental));
+  assert.equal(refused.status, 'refused'); assert.equal(refused.allocationAttempted, false);
+  assert.ok(refused.problems.includes('native-source-write-draft-font-unavailable'), JSON.stringify(refused));
+});
+
 // Native API mock evidence only. No raster or vector fidelity claims.
 test('OKLab shadow rings retain their complete stack through native emission and independent readback', async () => {
   const f = await nativeComparisonFixture();

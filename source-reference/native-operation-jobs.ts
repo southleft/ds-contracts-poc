@@ -1,3 +1,6 @@
+import {nativeDefaultFillRepairBaseline} from '../core/native-contract-default-fill-update.js';
+import {rebaseComparisonCreation} from '../core/native-comparison-main-migration.js';
+import {prepareNativeComparisonMigrationRepair} from '../core/native-comparison-migration-repair.js';
 import {assertOutsideEvidenceSnapshot} from './evidence-read-snapshot.js';
 import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
 import { prepareNativeComparisonFrameRepair, prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
@@ -218,6 +221,7 @@ interface State {
   recovery?: PreparedNativeComparisonRecovery;
   recoveryWritten?: boolean;
   comparisonRepair?: NativeComparisonRepairPlan;
+  comparisonMigration?:NativeComparisonRepairPlan;
   repairWritten?: boolean;
   repairRevisionsWritten?: string[];
   comparisonRefresh?: ReactComparisonRefresh;
@@ -765,10 +769,13 @@ export function createNativeOperationJobs(
     };
   };
   const comparisonObservationInput = (state: State, plan: ComparisonPlan): NativeContractComparisonObservationInput => {
-    if (state.comparisonRefresh) plan = refreshedComparisonPlan(plan, state.comparisonRefresh.request, state.comparisonRefresh);
+    const refreshed:ReturnType<typeof refreshedComparisonPlan>=state.comparisonRefresh?refreshedComparisonPlan(plan,state.comparisonRefresh.request,state.comparisonRefresh):plan;
     if (!state.identity || !state.componentCreation) fail('component-allocation-identity-unavailable');
-    return { operation: plan.plan.operation, planRevision: plan.revision, comparison: plan.plan.comparison,
-      tokenInput: plan.plan.tokenInput, tokenIdentity: state.identity, creation: state.componentCreation };
+    const mainMigrations=refreshed.mainMigrations;
+    const migrated=state.comparisonMigration&&state.repairRevisionsWritten?.includes(state.comparisonMigration.revision);
+    const creation=migrated?state.comparisonMigration!.input.creation:mainMigrations?rebaseComparisonCreation(state.componentCreation,mainMigrations):state.componentCreation;
+    return { operation: refreshed.plan.operation, planRevision: refreshed.revision, comparison: refreshed.plan.comparison,
+      tokenInput: refreshed.plan.tokenInput, tokenIdentity: state.identity, creation,...(mainMigrations?{mainMigrations}:{}) };
   };
   const recoveryInput = (state: State, plan: Plan) => {
     if (!isComparisonPlan(plan) || !state.identity || !state.partialCreation) fail('comparison-partial-required');
@@ -785,6 +792,10 @@ export function createNativeOperationJobs(
     if(state.phase==='comparison-repair-refused'&&state.comparisonRepair&&!repairWasWritten(state,state.comparisonRepair))return state.comparisonRepair;
     if(!['component-structure-observed','component-observation-refused'].includes(state.phase)||!state.imageReadback)fail('comparison-repair-observation-required');
     const input=comparisonObservationInput(state,plan);
+    if(input.mainMigrations?.length&&!(state.comparisonMigration&&repairWasWritten(state,state.comparisonMigration))){
+      const migration=prepareNativeComparisonMigrationRepair(input,state.imageReadback.result);
+      if(!repairWasWritten(state,migration))return migration;
+    }
     // A fresh supported observation can expose a diagnostic-frame defect even
     // after a previous, separately claimed correction of linked instances.
     try {
@@ -981,6 +992,7 @@ export function createNativeOperationJobs(
         } else if(c.phase==='comparison-repair-preflight-readback'){
           if(!availableRepair(state,plan)||c.readOnly!==true||!event.comparisonRepair||!same(event.comparisonRepair,repairPlan(state,plan)))fail('repair-read-precondition-invalid');
           state.comparisonRepair=structuredClone(event.comparisonRepair);
+          if(event.comparisonRepair.version===3)state.comparisonMigration=structuredClone(event.comparisonRepair);
         } else if(c.phase==='comparison-repair-apply'){
           if(state.phase!=='comparison-repair-observed'||!state.comparisonRepair||repairWasWritten(state,state.comparisonRepair)||c.readOnly!==false||!same(c,state.comparisonRepair.version===1?repairClaim:revisionRepairClaims[state.comparisonRepair.revision]))fail('repair-write-precondition-invalid');
           if(state.comparisonRepair.version===1)state.repairWritten=true;
@@ -1414,7 +1426,7 @@ export function createNativeOperationJobs(
     let script: string;
     let comparisonRepair: NativeComparisonRepairPlan | undefined;
     let comparisonRefresh: ReactComparisonRefresh | undefined;
-    if (loaded.state.comparisonRefresh && !phase.endsWith("readback") && !(phase==='comparison-repair-apply'&&loaded.state.comparisonRepair?.version===2)) fail("comparison-refresh-read-only");
+    if (loaded.state.comparisonRefresh && !phase.endsWith("readback") && !(phase==='comparison-repair-apply'&&[2,3].includes(loaded.state.comparisonRepair?.version??0))) fail("comparison-refresh-read-only");
     if (phase === "token-create") {
       if (loaded.state.dispatchedCreate) fail("creation-already-dispatched");
       authenticate(loaded);
@@ -1617,7 +1629,7 @@ export function createNativeOperationJobs(
     reactUpdateBaseline(id: string) {
       const loaded = load(id);
       if ((!isReactNativeRequest(loaded.header.request) && !isReactInitialNativeRequest(loaded.header.request)) ||
-          !isReactPlan(loaded.plan) || loaded.state.phase !== 'component-structure-observed' ||
+          !isReactPlan(loaded.plan) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) ||
           loaded.state.pending || !loaded.state.imageReadback)
         fail('react-update-verified-baseline-required');
       // The old compiler plan is historical evidence, not write authority.
@@ -1626,6 +1638,8 @@ export function createNativeOperationJobs(
       delete input.allocationAnchor;
       const receipt = structuredClone(loaded.state.imageReadback.result) as unknown as import('../core/native-source-observation.js').NativeSourceReadback;
       delete receipt.images;
+      if (loaded.state.phase !== 'component-structure-observed' && !nativeDefaultFillRepairBaseline(input, receipt))
+        fail('react-update-verified-baseline-required');
       return structuredClone({ input, receipt, request: loaded.header.request, journalRevision: loaded.fingerprint });
     },
     reactRequest(id: string): ReactNativeRequest {
@@ -1633,13 +1647,20 @@ export function createNativeOperationJobs(
       if (!isReactNativeRequest(header.request)) fail('react-operation-required');
       return structuredClone(header.request);
     },
+    reactSourceRequest(id: string): ReactNativeRequest {
+      const { header } = load(id);
+      const request = isReactComparisonRequest(header.request) ? header.request.root : header.request;
+      if (!isReactNativeRequest(request)) fail('react-operation-required');
+      return structuredClone(request);
+    },
     verifiedReactObservation(id: string) {
       const loaded = load(id);
       if (!isReactNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
-          loaded.state.phase !== 'component-structure-observed' || loaded.state.pending || !loaded.state.imageReadback)
+          !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) || loaded.state.pending || !loaded.state.imageReadback)
         fail('react-parent-observation-required');
       const updated = options.react?.updatedObservation?.(id);
       if (updated) return structuredClone({ ...updated, request: loaded.header.request });
+      if (loaded.state.phase !== 'component-structure-observed') fail('react-parent-observation-required');
       authenticate(loaded);
       const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
       delete input.allocationAnchor;
@@ -1650,10 +1671,11 @@ export function createNativeOperationJobs(
     verifiedReactInitialObservation(id: string) {
       const loaded = load(id);
       if (!isReactInitialNativeRequest(loaded.header.request) || !isReactPlan(loaded.plan) ||
-          loaded.state.phase !== 'component-structure-observed' || loaded.state.pending || !loaded.state.imageReadback)
+          !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase) || loaded.state.pending || !loaded.state.imageReadback)
         fail('react-parent-observation-required');
       const updated = options.react?.updatedObservation?.(id);
       if (updated) return structuredClone({ ...updated, request: loaded.header.request });
+      if (loaded.state.phase !== 'component-structure-observed') fail('react-parent-observation-required');
       authenticate(loaded);
       const input = componentObservationInput(loaded.state, loaded.plan) as import('../core/native-source-observation.js').NativeContractObservationInput;
       delete input.allocationAnchor;
@@ -1685,7 +1707,7 @@ export function createNativeOperationJobs(
         return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,
           ...(request.version !== 1 ? { nestedInstanceId: request.selection!.instanceId } : {}),
           ...(initial ? { initialObservation: structuredClone(initial.observation) } : {}),
-          ...(comparison ? { parentOperationId: comparison.parentOperationId } : {}),
+          ...(comparison ? { parentOperationId: comparison.parentOperationId, sourceOperationId: comparison.version === 3 ? id : comparison.parentOperationId } : {}),
           fileKey: header.policy.fileKey, operation: get(id) }];
       });
       });

@@ -27,6 +27,18 @@ export interface ReactSourceProp {
   optional: boolean;
   type: ReactTypeFact;
   declaredIn: { file: string; start: number; end: number }[];
+  /** Installed checker facts, not behavior inferred from the callback name.
+   * Older archives omit this field and cannot establish a callback signature. */
+  callbackSignatures?: Array<{
+    parameters: Array<{
+      name: string;
+      optional: boolean;
+      rest: boolean;
+      type: ReactTypeFact;
+    }>;
+    typeParameters: number;
+    returnsVoid: boolean;
+  }>;
 }
 export interface ReactRootFact {
   kind: "host" | "component" | "conditional" | "unresolved";
@@ -287,16 +299,58 @@ export function readReactSourceProgram(
           component.problems.push("component-props-type-unresolved");
         component.props = checker
           .getPropertiesOfType(propsType)
-          .map((prop) => ({
-            name: prop.getName(),
-            optional: !!(prop.flags & ts.SymbolFlags.Optional),
-            type: fact(checker.getTypeOfSymbolAtLocation(prop, fn)),
-            declaredIn: (prop.declarations ?? []).map((d) => ({
-              file: path.relative(root, d.getSourceFile().fileName),
-              start: d.getStart(),
-              end: d.end,
-            })),
-          }))
+          .map((prop) => {
+            const type = checker.getTypeOfSymbolAtLocation(prop, fn);
+            const signatures = checker
+              .getNonNullableType(type)
+              .getCallSignatures();
+            return {
+              name: prop.getName(),
+              optional: !!(prop.flags & ts.SymbolFlags.Optional),
+              type: fact(type),
+              ...(signatures.length
+                ? {
+                    callbackSignatures: signatures.map((signature) => ({
+                      typeParameters: signature.typeParameters?.length ?? 0,
+                      returnsVoid: !!(
+                        checker.getReturnTypeOfSignature(signature).flags &
+                        ts.TypeFlags.Void
+                      ),
+                      parameters: signature.parameters.map((parameter) => {
+                        const declaration = parameter.valueDeclaration;
+                        return {
+                          name: parameter.getName(),
+                          optional:
+                            !!(parameter.flags & ts.SymbolFlags.Optional) ||
+                            !!(
+                              declaration &&
+                              ts.isParameter(declaration) &&
+                              (declaration.questionToken ||
+                                declaration.initializer)
+                            ),
+                          rest: !!(
+                            declaration &&
+                            ts.isParameter(declaration) &&
+                            declaration.dotDotDotToken
+                          ),
+                          type: fact(
+                            checker.getTypeOfSymbolAtLocation(
+                              parameter,
+                              declaration ?? fn,
+                            ),
+                          ),
+                        };
+                      }),
+                    })),
+                  }
+                : {}),
+              declaredIn: (prop.declarations ?? []).map((d) => ({
+                file: path.relative(root, d.getSourceFile().fileName),
+                start: d.getStart(),
+                end: d.end,
+              })),
+            };
+          })
           .sort((a, b) => a.name.localeCompare(b.name));
         for (const prop of component.props) {
           const unresolved = (type: ReactTypeFact): boolean =>

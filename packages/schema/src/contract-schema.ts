@@ -147,7 +147,10 @@ export function omittedCodeBindingConflicts(contract: unknown, aliases: readonly
   const add = (value: unknown): void => { if (typeof value === 'string') counts.set(value, (counts.get(value) ?? 0) + 1); };
   const codeName = (value: unknown): unknown => record(value) && record(value.bindings) && record(value.bindings.code) ? value.bindings.code.prop : undefined;
   const props = Array.isArray(contract.props) ? contract.props.filter(record) : [];
-  props.forEach(p => add(codeName(p)));
+  props.forEach(p => {
+    add(codeName(p));
+    if (record(p.bindings) && record(p.bindings.code) && record(p.bindings.code.initial)) add(p.bindings.code.initial.prop);
+  });
   const walkPart = (part: unknown): void => {
     if (!record(part)) return;
     if (record(part.slot)) add(part.slot.name);
@@ -199,6 +202,12 @@ export const PropSchema = z
       }),
       code: z.strictObject({
         prop: z.string(),
+        /** React uncontrolled initializer for this state axis. Values use the
+         * same public mapping; the optional fallback is a canonical enum key. */
+        initial: z.strictObject({
+          prop: z.string().refine(name => isSupportedOmittedCodeBinding(name) && !['constructor','prototype'].includes(name), 'unsupported initial code prop identifier'),
+          default: z.string().optional(),
+        }).optional(),
         /** Canonical enum option -> exact public code value. This is an
          * explicit bijection, never a truthiness/string coercion. */
         values: z.record(z.string(), z.union([z.string(), z.boolean(), z.number().finite(), z.null()])).optional(),
@@ -1993,6 +2002,10 @@ export const ComponentRefSchema = z.strictObject({
   props: z
     .record(z.string(), z.union([z.string(), z.boolean(), PropByPropSchema]))
     .optional(),
+  /** React mount-only inputs, keyed by canonical child enum property.
+   *  Targets bindings.code.initial.prop instead of the controlled prop.
+   *  Values are canonical literals or {parentEnum} references. */
+  initialProps: z.record(z.string(), z.string()).optional(),
   /** Overrides the child's `children` text prop (code: JSX children;
    *  Figma: TEXT property override on the instance). */
   text: z.string().optional(),
@@ -2524,6 +2537,11 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v4, gap G1. */
     visibleWhen: VisibleWhenSchema.optional(),
     optional: z.boolean().optional(),
+    /** Nested anatomy. On a component reference, these are caller-owned
+     *  React children supplied to the dependency's unique, unconstrained
+     *  children slot, evaluated in the parent contract's scope. An explicit
+     *  empty object supplies an empty Fragment; omission leaves children unset. Other
+     *  emitters must refuse until they support this projection. */
     parts: z.record(z.string(), PartSchema).optional(),
   }).superRefine(validateGridPart),
 );
@@ -2544,7 +2562,12 @@ export const EventSchema = z.strictObject({
   name: z.string().regex(/^[a-z][a-zA-Z0-9]*$/),
   description: z.string().optional(),
   bindings: z.strictObject({
-    code: z.strictObject({ prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/) }),
+    code: z.strictObject({
+      prop: z.string().regex(/^on[A-Z][a-zA-Z0-9]*$/),
+      /** React callback receives the next public value of toggles.prop.
+       * Omission preserves the existing zero-argument callback API. */
+      argument: z.literal("next-value").optional(),
+    }),
   }),
   /** Anatomy part (by name) whose activation fires the event; 'root' allowed. */
   trigger: z.string(),
@@ -2788,6 +2811,29 @@ export const ContractSchema = z.strictObject({
   /** v1 provenance is optional for backward compatibility. */
   provenance: ContractProvenanceSchema.optional(),
 }).superRefine((c, ctx) => {
+  for (const [index, event] of (c.events ?? []).entries()) {
+    if (event.bindings.code.argument !== 'next-value') continue;
+    const prop = c.props.find(p => p.name === event.toggles?.prop);
+    const values = prop && typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
+    if (!event.toggles || !values ||
+        event.toggles.between[0] === event.toggles.between[1] ||
+        event.toggles.between.some(value => !values.includes(value))) {
+      ctx.addIssue({ code: 'custom', path: ['events', index, 'bindings', 'code', 'argument'],
+        message: 'next-value requires a toggle between two distinct values of an existing enum prop' });
+    }
+  }
+  const initialProps = c.props.filter(p => p.bindings.code.initial);
+  for (const prop of initialProps) {
+    const initial = prop.bindings.code.initial!;
+    const values = typeof prop.type === 'object' && 'enum' in prop.type ? prop.type.enum : undefined;
+    const toggles = c.events?.filter(e => e.toggles?.prop === prop.name) ?? [];
+    if (!values || toggles.length !== 1 || toggles[0]?.toggles?.between[0] === toggles[0]?.toggles?.between[1] || toggles[0]?.toggles?.between.some(value => !values?.includes(value)) || prop.required || !isSupportedOmittedCodeBinding(prop.bindings.code.prop) ||
+        (initial.default !== undefined && !values.includes(initial.default)) ||
+        (initial.default !== undefined && prop.default !== undefined && initial.default !== prop.default))
+      ctx.addIssue({code:'custom',path:['props',c.props.indexOf(prop),'bindings','code','initial'],message:'initial code binding requires one optional enum toggle and a valid, consistent canonical default'});
+  }
+  for (const alias of omittedCodeBindingConflicts(c, initialProps.map(p => p.bindings.code.initial!.prop)))
+    ctx.addIssue({code:'custom',path:['props'],message:`initial code binding "${alias}" collides with another prop, slot, event or generated binding`});
   const omissionAliases = c.props.filter(p => p.bindings.figma.unsetValue !== undefined).map(p => p.bindings.code.prop);
   for (const alias of omittedCodeBindingConflicts(c, omissionAliases)) {
     ctx.addIssue({ code: 'custom', path: ['props'], message: `omitted-plane code binding "${alias}" collides with another prop, slot, event or generated event binding` });

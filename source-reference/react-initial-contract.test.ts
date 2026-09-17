@@ -84,4 +84,39 @@ test('complete typed initial domains preserve omission and conditional anatomy; 
     const changed = structuredClone(snapshots); mutate(changed);
     assert.equal(run(observation, changed).status, 'refused');
   }
+
+  const intrinsic = structuredClone(snapshots);
+  for (const [id, snapshot] of Object.entries(intrinsic)) {
+    Object.assign(snapshot.tree.style, { display: 'inline-flex', 'flex-direction': 'row', 'flex-wrap': 'nowrap',
+      'flex-grow': '0', 'flex-shrink': '0', 'flex-basis': 'auto', 'min-width': '0px', 'max-width': 'none',
+      'writing-mode': 'horizontal-tb', position: 'static', width: `${80 + Number(id) * 20}px` });
+    snapshot.styleOrigin.roots[0].sizes![0] = { channel: 'width', status: 'auto', value: 'auto', selectors: [] };
+  }
+  const intrinsicRun = (samples = intrinsic) => {
+    const sealed = structuredClone(samples);
+    for (const snapshot of Object.values(sealed)) {
+      snapshot.treeSha256 = evidenceSha(JSON.stringify(snapshot.tree));
+      snapshot.fonts.treeRevision = snapshot.svg.treeRevision = revisionOf(snapshot.tree);
+    }
+    return run({ ...observation, rows: rows.map(row => ({ ...row, treeSha256: sealed[row.id].treeSha256 })) }, sealed);
+  };
+  const hugging = intrinsicRun();
+  assert.equal(hugging.status, 'compiled-draft', hugging.problems.join('\n'));
+  for (const variant of hugging.compiled!.component!.variants) {
+    assert.equal(variant.spec.layout?.mode, 'HORIZONTAL');
+    assert.equal(variant.spec.fixedWidth, undefined, 'sample content width must not become a native fixed size');
+    assert.equal(variant.spec.lits?.width, undefined);
+    assert.equal(variant.spec.fixedHeight?.px, 16, 'the independently fixed axis remains fixed');
+  }
+  for (const styles of [
+    { display: 'flex' }, { 'flex-wrap': 'wrap' }, { 'flex-grow': '1' }, { 'flex-shrink': '1' },
+    { 'flex-basis': '100px' }, { 'min-width': '100px' }, { 'max-width': '200px' },
+    { 'writing-mode': 'vertical-rl' }, { position: 'absolute' }, { 'flex-direction': 'column' },
+  ]) {
+    const changed = structuredClone(intrinsic); Object.assign(changed['0'].tree.style, styles);
+    assert.ok(intrinsicRun(changed).problems.includes('react-initial-contract-root-sizing-unqualified:width'));
+  }
+  const mixed = structuredClone(intrinsic);
+  mixed['0'].styleOrigin.roots[0].sizes![0] = { channel: 'width', status: 'fixed', value: mixed['0'].tree.style.width, selectors: ['.surface'] };
+  assert.ok(intrinsicRun(mixed).problems.includes('react-initial-contract-root-sizing-mixed:width'));
 });

@@ -1,3 +1,9 @@
+import {projectReactBehaviorContract} from './react-behavior-contract.js';
+import {readReactCallerComposition} from './react-caller-composition-evidence.js';
+import {buildReactCallerPreview} from './react-caller-preview.js';
+import {buildReactBehaviorPreview} from './react-behavior-preview.js';
+import { selectReactComparisonCase } from './react-comparison-case.js';
+import { reactComparisonContentScope, reactComparisonContentOperation } from './react-comparison-request.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import { readReactCompositionEvidence } from './react-composition-evidence.js';
 import { restoreReactOwnership } from './react-ownership-restore.js';
@@ -6,6 +12,7 @@ import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
+import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
 import { startReactOwnership } from "./react-ownership-run.js";
@@ -161,17 +168,28 @@ export function createReactReferenceService(
   let reference: ReactReference | undefined;
   const frames = createReactSourceFramingStore(repoRoot, (referenceId, operationId) => {
     if (!native || !reference || reference.id !== referenceId) throw Error('react-source-framing-reference-unavailable');
-    return { reference, request: native().jobs.reactRequest(operationId) };
+    return { reference, request: native().jobs.reactSourceRequest(operationId) };
   });
-  const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, (referenceId) => {
+  const selectInspectionSource = (referenceId: string) => {
     if (!native || !reference || reference.id !== referenceId) throw Error('react-initial-reference-unavailable');
     // Reuse the immutable ownership archive already pinned by a saved root
     // operation. No fresh property matrix or browser-supplied evidence paths.
-    const roots = native().jobs.listReact(referenceId).filter(r => r.kind === 'root' && r.operation.sourceCurrent);
-    const anchor = roots.map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id))[0];
+    const selected = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => {
+      const roots = native!().jobs.listReact(referenceId, 'root').filter(r => r.kind === 'root');
+      const current = roots.filter(r => r.operation.sourceCurrent)
+        .map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id));
+      // Native plan compatibility is not source freshness. Initial-state reads
+      // independently authenticate the old source archive, without authorizing
+      // a native write or replacing that operation's pinned compiler output.
+      return { anchor: current[0], anchors: roots.map(r => native!().jobs.reactRequest(r.operation.id)) };
+    }));
+    const { anchor, anchors } = selected;
     if (!anchor) throw Error('react-initial-saved-observation-required');
-    return { reference, anchor };
-  });
+    return { reference, anchor, anchors };
+  };
+  const initialStates = createReactInitialInspectionStore(repoRoot, sourceRoot, selectInspectionSource);
+  const callbacks = createReactCallbackInspectionStore(repoRoot, sourceRoot, selectInspectionSource,
+    (referenceId,caseId,report) => projectReactBehaviorContract(initialStates.read(referenceId,caseId),report));
   const thisInitialEvidence = (request: ReactInitialNativeRequest) => {
     if (!reference) throw Error('react-initial-native-reference-unavailable');
     return initialStates.nativeEvidence(reference, request);
@@ -214,6 +232,64 @@ export function createReactReferenceService(
     res: ServerResponse,
     route: string,
   ) => {
+    const callerReact = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/caller-react(\/preview)?$/.exec(route);
+    if (callerReact) {
+      try {
+        if (req.method !== 'GET' || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'] ||
+            !native || !reference || reference.id !== callerReact[1] || !reactReferenceUnchanged(reference))
+          throw Error('react-caller-request-invalid');
+        const current = reference;
+        const draft = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => readReactCallerComposition(repoRoot, current,
+          native!().jobs.reactRequest(callerReact[2]), callerReact[2], caseId => {
+            const behavior = callbacks.read(current.id, caseId)?.draft;
+            if (behavior?.status !== 'generated-draft' || !behavior.contract) return undefined;
+            const initial = initialStates.nativeEvidence(current, initialStates.nativeRequest(current.id, caseId));
+            return { ...initial.composition, initialContract: initial.draft.compiled!.contract!, contract: behavior.contract,
+              tokens: initial.draft.compiled!.tokens!, assets: initial.draft.compiled!.assets ?? [] };
+          })));
+        if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+        if (!callerReact[3]) { json(res, 200, { draft }); return; }
+        const output = await buildReactCallerPreview(repoRoot, draft);
+        if (!reactReferenceUnchanged(current)) throw Error('react-caller-source-changed');
+        res.setHeader('Content-Type', 'text/html; charset=utf-8'); res.setHeader('Cache-Control', 'no-store');
+        res.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox allow-scripts");
+        res.end(reactReferenceHtml({ ...current, ...output }));
+      } catch { json(res, 409, { error: 'Generated composition unavailable. Unchanged source, saved content relationships and compatible behavior observations are required.' }); }
+      return;
+    }
+    const behaviorPreview = /^react\/([a-f0-9]{64})\/behavior-preview\/([a-z-]+)$/.exec(route);
+    if (behaviorPreview) {
+      try {
+        if (req.method !== 'GET' || Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
+          throw Error('react-behavior-preview-request-invalid');
+        const draft = callbacks.read(behaviorPreview[1], behaviorPreview[2])?.draft;
+        if (!draft) throw Error('react-behavior-preview-draft-unavailable');
+        const output = await buildReactBehaviorPreview(repoRoot, draft);
+        if (!reference || reference.id !== behaviorPreview[1] || !reactReferenceUnchanged(reference)) throw Error('react-behavior-preview-source-changed');
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-store');
+        res.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src data:; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox allow-scripts");
+        res.end(reactReferenceHtml({ ...reference, ...output }));
+      } catch {
+        json(res, 409, { error: 'Generated React preview unavailable. A current verified behavior draft is required.' });
+      }
+      return;
+    }
+    const callbackRoute = /^react\/([a-f0-9]{64})\/callback-behavior\/([a-z-]+)$/.exec(route);
+    if (callbackRoute) {
+      try {
+        if (!['GET', 'POST'].includes(req.method ?? '')) throw Error('callback-method-invalid');
+        if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding']) {
+          json(res, 400, { error: 'This action accepts no request body.' }); return;
+        }
+        if (req.method === 'POST') {
+          const job = callbacks.start(callbackRoute[1], callbackRoute[2]);
+          void job.promise.catch(() => {});
+          json(res, 200, { inspection: job.state });
+        } else json(res, 200, { inspection: callbacks.read(callbackRoute[1], callbackRoute[2]) ?? null });
+      } catch { json(res, 409, { error: 'Callback inspection unavailable. Load unchanged originals and use the saved structure observation first.' }); }
+      return;
+    }
     const initialRoute = /^react\/([a-f0-9]{64})\/initial-states\/([a-z-]+)(?:\/([a-f0-9-]{36})\/(\d+)\.png)?$/.exec(route);
     if (initialRoute) {
       try {
@@ -232,7 +308,7 @@ export function createReactReferenceService(
       try {
         if (!native || !reference || reference.id !== typography[1] || !reactReferenceUnchanged(reference))
           throw Error('react-source-typography-reference-unavailable');
-        const request = native().jobs.reactRequest(typography[2]);
+        const request = native().jobs.reactSourceRequest(typography[2]);
         if (request.referenceId !== reference.id) throw Error('react-source-typography-reference-mismatch');
         const input = loadReactFrameInput(repoRoot, reference, request);
         const measured = await measureReactSourceTypography(input);
@@ -263,7 +339,7 @@ export function createReactReferenceService(
     if (originalImage && req.method === 'GET') {
       try {
         if (!reference || reference.id !== originalImage[1] || !native) throw Error('source unavailable');
-        const request = native().jobs.reactRequest(originalImage[2]);
+        const request = native().jobs.reactSourceRequest(originalImage[2]);
         const evidence = readReactNativeContentEvidence(repoRoot, reference, request);
         const bytes = readFileSync(path.join(repoRoot, 'private/react-source-ownership', request.referenceId, request.ownership.id, request.caseId, 'source.png'));
         if (sha(bytes) !== evidence.captured.sourcePngSha256) throw Error('source image changed');
@@ -274,12 +350,13 @@ export function createReactReferenceService(
     const initialNativeRoute = /^react\/([a-f0-9]{64})\/native-initial\/([a-z-]+)$/.exec(route);
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
     const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
+    const caseComparisonRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/compare-case\/([a-z-]+)$/.exec(route);
     const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison)$/.exec(route);
     const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
-    if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute) {
+    if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute) {
       try {
-        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? updateAction ?? updateImage ?? childRoute)![1]) throw Error('react-native-reference-unavailable');
+        if (!native || !reference || reference.id !== (nativeRoute ?? nativeAction ?? initialNativeRoute ?? updateAction ?? updateImage ?? childRoute ?? caseComparisonRoute)![1]) throw Error('react-native-reference-unavailable');
         const { jobs, transport } = native();
         if (updateImage) {
           const { updateJobs }=native();
@@ -290,7 +367,31 @@ export function createReactReferenceService(
         if (req.method === 'POST') {
           if (Number(req.headers['content-length'] ?? 0) > 0 || req.headers['transfer-encoding'])
             throw Error('react-native-body-refused');
-          if (childRoute) {
+          if (caseComparisonRoute) {
+            const [, , parentId, caseId] = caseComparisonRoute;
+            const parent = jobs.verifiedReactObservation(parentId);
+            const source = selectReactComparisonCase(repoRoot, reference, parent.request, caseId);
+            const existing = jobs.listReact(reference.id).find(row => row.kind === 'comparison' &&
+              row.parentOperationId === parentId && row.caseId === caseId && row.ownershipId === source.ownership.id);
+            if (!existing) {
+              const scope = reactComparisonContentScope(parentId, source);
+              let inspected = readReactContentInspection(repoRoot, reference, source, scope);
+              if (!inspected || inspected.phase !== 'complete') {
+                let job = contentJobs.get(scope);
+                if (!job || job.state.phase !== 'running') {
+                  job = startReactContentInspection(repoRoot, reference, source, scope);
+                  contentJobs.set(scope, job);
+                }
+                await job.promise;
+                inspected = job.report();
+              }
+              if (inspected.phase !== 'complete' || !inspected.sourceUnchanged) throw Error('react-comparison-content-unavailable');
+              const composition = readReactCompositionEvidence(repoRoot, reference, source, scope, jobs, undefined, initialStates.nativeEvidence);
+              const selected = selectReactComparisonRequest(repoRoot, reference, source, scope, composition);
+              const prepared = jobs.prepare({ ...selected, version: 3, parentOperationId: parentId, mainRoot: parent.request });
+              await frames.create(reference.id, prepared.id);
+            } else if (!existing.operation.sourceCurrent) throw Error('react-comparison-source-changed');
+          } else if (childRoute) {
             const parent = jobs.reactRequest(childRoute[2]);
             if (parent.referenceId !== reference.id) throw Error('react-child-parent-source-mismatch');
             const composition = readReactCompositionEvidence(repoRoot, reference, parent, childRoute[2], jobs, undefined, initialStates.nativeEvidence);
@@ -356,15 +457,16 @@ export function createReactReferenceService(
         json(res, 200, { operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
-          let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
+          let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
           if (row.kind === 'initial') {
             // A corrected compiler plan differs from creation without changing
             // its pinned source archive. Authenticate that archive separately.
-            try { initialStates = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id)).draft.nativeVariants; }
+            try { const evidence = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id));
+              initialStates = evidence.draft.nativeVariants.map(state => ({ ...state, frame: evidence.frames[state.observation] })); }
             catch { /* Image endpoints independently refuse unavailable source. */ }
           }
           if (row.kind === 'comparison') {
-            try { sourceFrame = frames.read(reference!.id, row.parentOperationId!); }
+            try { sourceFrame = frames.read(reference!.id, row.sourceOperationId!); }
             catch { sourceFrameProblem = 'Original source framing unavailable or changed.'; }
           }
           if (row.kind === 'root') {
@@ -750,14 +852,14 @@ export function createReactReferenceService(
     },
     refreshComparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');
-      return refreshReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
-        ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
+      return refreshReactComparisonEvidence(repoRoot, reference, request, parent, request.composition
+        ? readReactCompositionEvidence(repoRoot, reference, request.root, reactComparisonContentOperation(request), native!().jobs,
           { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
     },
     comparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');
-      return readReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
-        ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
+      return readReactComparisonEvidence(repoRoot, reference, request, parent, request.composition
+        ? readReactCompositionEvidence(repoRoot, reference, request.root, reactComparisonContentOperation(request), native!().jobs,
           { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
     },
     nativeEvidence(request: ReactNativeRequest) {

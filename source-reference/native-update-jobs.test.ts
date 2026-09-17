@@ -1,3 +1,6 @@
+import {PNG} from 'pngjs';
+import {nativeDefaultFillUpdateFixture} from '../core/native-contract-default-fill-update-test-fixture.js';
+import {nativeBackgroundUpdateFixture} from '../core/native-contract-background-update-test-fixture.js';
 import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -13,12 +16,12 @@ import { createNativeUpdatePlans } from './native-update-plans.js';
 import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { createNativeOperationTransport } from './native-operation-transport.js';
 
-async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture = nativeUpdateFixture) {
+async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | typeof nativeRootSizeUpdateFixture | typeof nativeSvgUpdateFixture | typeof nativeBackgroundUpdateFixture | typeof nativeDefaultFillUpdateFixture = nativeUpdateFixture, legacyFraming = false) {
   const f=await make(),repo=mkdtempSync(path.join(tmpdir(),'native-update-delivery-'));
   t.after(()=>rmSync(repo,{recursive:true,force:true}));
   let stale=false,lose='',failStorage=false,readerRevision=0,derivations=0;
   const readers={readback:(...args:Parameters<typeof emitNativeContractReadbackScript>) =>
-    (readerRevision ? '// Current independent reader '+readerRevision+'\n' : '') + emitNativeContractReadbackScript(...args)};
+    (readerRevision ? '// Current independent reader '+readerRevision+'\n' : '') + emitNativeContractReadbackScript(args[0], args[1], legacyFraming ? false : args[2])};
   const plans=createNativeUpdatePlans(repo,()=>{derivations++;if(stale) throw Error('source changed');return {parentJournalRevision:'a'.repeat(64),input:f.input};});
   const proposal=plans.prepare(f.input.before.operation.id);
   let jobs=createNativeUpdateJobs(repo,plans,readers);
@@ -52,7 +55,7 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
   return {...f,repo,id,proposal,plans,secret,storage,messages,delivered,
     jobs:()=>jobs,transport:()=>transport,poll:()=>send({type:'native-poll'}),
     restart:()=>{jobs=createNativeUpdateJobs(repo,plans,readers);transport=createNativeOperationTransport(repo,jobs);send=boot();},
-    derivations:()=>derivations,advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
+    enableFraming:()=>{legacyFraming=false;},derivations:()=>derivations,advanceReader:()=>{readerRevision++;},stale:()=>{stale=true;},lose:(where:string)=>{lose=where;},failStorage:()=>{failStorage=true;}};
 }
 
 test('the actual companion delivers preflight, an existing-node update, and independent exports across restarts',async t=>{
@@ -224,4 +227,79 @@ test('a display evidence snapshot cannot prepare, dispatch, accept or redeliver 
  });
  assert.deepEqual(readdirSync(path.join(f.repo,'private/source-native-updates',f.id,'events')),before);
  await f.poll();assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
+});
+
+
+test('the companion migrates a background once and independent readback adopts only the new paint allocation',async t=>{
+ const f=await fixture(t,nativeBackgroundUpdateFixture),before=f.input.before.creation.nodes.map((n:any)=>n.id);
+ await f.poll();assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
+ f.lose('result');await f.poll();f.restart();await f.poll();await f.poll();
+ assert.equal(f.jobs().get(f.id).phase,'update-verified',JSON.stringify(f.messages.slice(-3)));
+ assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+ const effective=f.jobs().verifiedForParent(f.proposal.parentId)!;
+ assert.equal(effective.input.creation.nodes.length,before.length+1);
+ assert.ok(before.every((id:string)=>effective.input.creation.nodes.some((n:any)=>n.id===id)));
+ f.transport().retryObservation(f.id);await f.poll();
+ assert.equal(f.jobs().get(f.id).phase,'update-verified');assert.equal(f.nodes[0].children.length,2);
+});
+
+
+test('display responses share verified update reads but delivery reauthenticates after the scope closes', async t => {
+  const f = await fixture(t);
+  await f.poll(); await f.poll(); await f.poll();
+  const before = f.derivations();
+  withEvidenceReadSnapshot(() => {
+    assert.equal(f.jobs().get(f.id).sourceCurrent, true);
+    const first = f.jobs().verifiedForParent(f.proposal.parentId)!;
+    const original = structuredClone(first);
+    first.input.creation.variants[0].id = 'tampered';
+    const calls = f.derivations();
+    assert.deepEqual(f.jobs().verifiedForParent(f.proposal.parentId), original);
+    assert.equal(f.jobs().get(f.id).sourceCurrent, true);
+    assert.equal(f.derivations(), calls);
+    assert.throws(() => f.jobs().pendingCommand(f.id), /write-during-evidence-read-snapshot/);
+    assert.throws(() => f.jobs().dispatch(f.id, 'update-readback'), /write-during-evidence-read-snapshot/);
+  });
+  assert.ok(f.derivations() > before);
+  f.stale();
+  assert.equal(f.jobs().get(f.id).sourceCurrent, false);
+  assert.throws(() => f.jobs().verifiedForParent(f.proposal.parentId), /source changed/);
+  withEvidenceReadSnapshot(() => assert.equal(f.jobs().get(f.id).sourceCurrent, false));
+});
+
+ test('default-fill repair uses the companion journal and independent readback without duplicating nodes', async t => {
+  const f = await fixture(t, nativeDefaultFillUpdateFixture), ids = f.figma.root.findAll(()=>true).map((n:any)=>n.id);
+  for (const phase of ['update-preflight-observed','update-applied','update-verified']) {
+    await f.poll(); assert.equal(f.jobs().get(f.id).phase,phase,JSON.stringify(f.messages.slice(-2)));f.restart();
+  }
+  assert.deepEqual(f.figma.root.findAll(()=>true).map((n:any)=>n.id),ids);
+  assert.ok(f.nodes.every((n:any)=>n.fills.length===0));
+  f.transport().retryObservation(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-verified');
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+});
+
+
+test('read-only framing enrichment preserves current structural evidence and never repeats the update', async t => {
+  const f = await fixture(t, nativeUpdateFixture, true);
+  const png = new PNG({width:20,height:18}); png.data.fill(255);
+  for (const node of f.nodes) {
+    Object.defineProperty(node, 'absoluteBoundingBox', {value:{x:40,y:20,width:16,height:16},configurable:true});
+    Object.defineProperty(node, 'absoluteRenderBounds', {value:{x:38,y:19,width:20,height:18},configurable:true});
+    node.exportAsync = async()=>PNG.sync.write(png);
+  }
+  await f.poll();await f.poll();await f.poll();
+  assert.equal(f.jobs().get(f.id).sourceCurrent,true);
+  assert.equal(f.jobs().get(f.id).imageObservation!.images[0].layoutOffset,undefined);
+  f.enableFraming();f.restart();
+  assert.equal(f.jobs().get(f.id).sourceCurrent,true,'adding image geometry does not invalidate the old structural proof');
+  f.transport().retryObservation(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-verified');
+  assert.deepEqual(f.jobs().get(f.id).imageObservation!.images[0].layoutOffset,{x:2,y:1});
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+  const originalExport=f.nodes[0].exportAsync;
+  f.nodes[0].exportAsync=async()=>{const bytes=await originalExport();f.nodes[0].absoluteRenderBounds.x++;return bytes;};
+  f.transport().retryObservation(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-recovery-required','moving export bounds during rasterization refuse observation');
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
 });

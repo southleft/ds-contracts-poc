@@ -1,3 +1,4 @@
+import type {NativeComparisonMainMigration} from './native-comparison-main-migration.js';
 /** Independent observation of caller content in an existing native main.
  * Allocation acknowledgements choose IDs; compiler specs choose expectations. */
 import {backgroundPaintIdentities} from './figma-background-clip.js';
@@ -21,6 +22,7 @@ export interface NativeContractComparisonObservationInput {
   tokenInput: NativeTokenContextInput;
   tokenIdentity: NativeTokenIdentity;
   creation: Row;
+  mainMigrations?:NativeComparisonMainMigration[];
 }
 function checkInput(input: NativeContractComparisonObservationInput) {
   const { creation: c, comparison: p } = input;

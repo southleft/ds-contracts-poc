@@ -466,6 +466,9 @@ export interface NodeSpec {
   /** Stable Figma identity when the child contract already has an anchor. */
   depAnchorKey?: string;
   depProps?: Record<string, string | boolean>;
+  /** Authored mount-only mapping; depProps is its static fresh-mount preview,
+   * not evidence that a canvas property implements React state lifetime. */
+  depInitialProps?: Record<string, string>;
   // slot
   slotProperty?: string;
   slotOptional?: boolean;
@@ -3882,7 +3885,7 @@ function mapDepProps(
         }
         const resolved = subst[parentRef[1]];
         if (resolved === undefined) {
-          if (parentProp?.type === 'boolean' && parentProp.bindings.figma.unsetValue !== undefined) continue;
+          if (parentProp && (parentProp.type === 'boolean' || isEnum(parentProp)) && parentProp.bindings.figma.unsetValue !== undefined) continue;
           throw new Error(`Cannot resolve parent prop mapping "{${parentRef[1]}}"`);
         }
         value = parentProp?.type === 'boolean' ? resolved === 'true' : resolved;
@@ -3940,6 +3943,35 @@ function mapDepProps(
     } else if (textProp) out[textProp.bindings.figma.property!] = text;
   }
   return out;
+}
+
+/** A canvas variant depicts a fresh mount, not a running React instance.
+ * Resolve declared finite initializers independently, then let supplied
+ * controlled values win. Never reinterpret text/visibility as state. */
+function mapDepInitialProps(dep: Contract, initial: Record<string, string>,
+  subst: Record<string, string>, parent: Contract): Record<string, string | boolean> {
+  const values: Record<string, string> = {};
+  for (const [name, raw] of Object.entries(initial)) {
+    const child = dep.props.find(p => p.name === name);
+    if (!child || !isEnum(child) || !child.bindings.code.initial || child.bindings.figma.kind !== 'VARIANT')
+      throw new Error('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializer needs a declared child enum and native variant');
+    const ref = raw.match(PARENT_PROP_REF);
+    let value = raw;
+    if (ref) {
+      const prop = parent.props.find(p => p.name === ref[1]);
+      if (!prop || !isEnum(prop) || prop.bindings.figma.kind !== 'VARIANT' ||
+          prop.type.enum.some(v => !child.type.enum.includes(v)))
+        throw new Error('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: parent initializer domain is not a compatible variant axis');
+      const resolved = subst[prop.name] ?? child.bindings.code.initial.default ?? child.default;
+      // Match React's initializer fallback while retaining true omission.
+      if (resolved === undefined) continue;
+      value = String(resolved);
+    }
+    if (!child.type.enum.includes(value))
+      throw new Error('FIGMA_COMPONENT_INITIAL_PROPS_UNSUPPORTED: initializer value is outside the child domain');
+    values[name] = value;
+  }
+  return mapDepProps(dep, values, subst, undefined, undefined, parent);
 }
 
 /** visibleWhen on a boolean prop → runtime visibility binding fields.
@@ -4697,6 +4729,9 @@ function partToSpecInner(
   }
   if (part.component) {
     const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
+    const initialProps = part.component.initialProps
+      ? mapDepInitialProps(dep, part.component.initialProps, subst, contract) : undefined;
+    if (part.parts !== undefined) throw new Error('FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED: direct emission cannot populate component caller slots');
     const depLedger: CodeOnlyFactSeed[] = [];
     const spec: NodeSpec = {
       type: 'instance',
@@ -4704,7 +4739,8 @@ function partToSpecInner(
       dep: dep.name,
       depContractId: dep.id,
       ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
-      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract),
+      depProps: { ...initialProps, ...mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger, contract) },
+      ...(part.component.initialProps ? { depInitialProps: { ...part.component.initialProps } } : {}),
     };
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
     // Round 2 iteration 9 — per-instance overrides (component.overrides):
@@ -7529,7 +7565,7 @@ function buildNativeContractDraftScript(
   return wrapNativeSourceWrite(prepared, buildSyncScript([scoped], context.operation.fileKey, {
     header: '// Shared renderer: operation-scoped unaccepted Contract draft.',
     preamble: '', nativeSource: true,
-  }));
+  }), draft.fonts);
 }
 
 /** Create comparison instances referencing existing observed mains. The content
@@ -8136,7 +8172,10 @@ function applyFrameSpec(node, spec) {${hasRootGridSlot ? `
   // collision is one contract away and a silent revert is indistinguishable
   // from the fact never having been carried.
   if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
-  if (node.type === 'FRAME') node.fills = [];
+  if (node.type === 'FRAME') node.fills = [];${opts.nativeSource ? `
+  // Fresh native draft roots must not inherit Figma's invisible white birth
+  // fill when their paint lives on a separate padding-box layer.
+  if (spec.nativeContractPart && spec.type === 'root' && !spec.fill && !spec.lits?.fillColor && !spec.gradient) node.fills = [];` : ''}
   // FC-AMEND-CANNOT-CLEAR (astryx/banner live-canvas round, 2026-08-11).
   //
   // This function only ever SET what the spec declares, so on the AMEND path

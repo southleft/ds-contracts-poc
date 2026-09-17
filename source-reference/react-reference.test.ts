@@ -162,6 +162,16 @@ test("reference API retains all ten cases, isolates source execution and refuses
       (await (await fetch(base + "/react", { method: "POST" })).json()).id,
       reference.id,
     );
+    const callbackUrl = base + `/react/${reference.id}/callback-behavior/checkbox-unchecked`;
+    assert.equal((await fetch(callbackUrl, {method:'POST',body:JSON.stringify({sourceRoot:'/etc',callback:'arbitrary'})})).status,400);
+    assert.equal((await fetch(callbackUrl, {method:'DELETE'})).status,409);
+    assert.equal((await fetch(callbackUrl, {method:'POST'})).status,409,'a loaded reference alone cannot replace a sealed source observation');
+    const previewUrl = base + `/react/${reference.id}/behavior-preview/checkbox-unchecked`;
+    assert.equal((await fetch(previewUrl)).status,409,'a loaded reference cannot authorize generated preview without verified observations');
+    assert.equal((await fetch(previewUrl,{method:'POST',body:'{}'})).status,409,'the preview accepts no caller-supplied contract or code');
+    const callerUrl = base + `/react/${reference.id}/native-operation/10000000-0000-4000-8000-000000000001/caller-react`;
+    assert.equal((await fetch(callerUrl)).status, 409);
+    assert.equal((await fetch(callerUrl + '/preview', { method: 'POST', body: '{}' })).status, 409);
     const programUrl = base + `/react/${reference.id}/program`;
     assert.equal(
       (

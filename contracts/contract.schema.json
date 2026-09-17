@@ -285,6 +285,21 @@
                   "prop": {
                     "type": "string"
                   },
+                  "initial": {
+                    "type": "object",
+                    "properties": {
+                      "prop": {
+                        "type": "string"
+                      },
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "prop"
+                    ],
+                    "additionalProperties": false
+                  },
                   "values": {
                     "type": "object",
                     "propertyNames": {
@@ -350,6 +365,10 @@
                   "prop": {
                     "type": "string",
                     "pattern": "^on[A-Z][a-zA-Z0-9]*$"
+                  },
+                  "argument": {
+                    "type": "string",
+                    "const": "next-value"
                   }
                 },
                 "required": [
@@ -1587,6 +1606,15 @@
                     "additionalProperties": false
                   }
                 ]
+              }
+            },
+            "initialProps": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
               }
             },
             "text": {

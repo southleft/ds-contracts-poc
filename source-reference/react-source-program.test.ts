@@ -63,6 +63,24 @@ test("installed generic props and conditional JSX roots retain typed identities 
         [false, true, "indeterminate", "undefined"].sort(),
       );
     assert.ok(checked.declaredIn.some((d) => d.file === "primitive.ts"));
+    const signature = toggle.props.find(
+      (p) => p.name === "onChange",
+    )!.callbackSignatures!;
+    assert.equal(signature.length, 1);
+    assert.equal(signature[0].returnsVoid, true);
+    assert.equal(signature[0].typeParameters, 0);
+    assert.equal(signature[0].parameters[0].name, "value");
+    assert.equal(signature[0].parameters[0].optional, false);
+    assert.equal(signature[0].parameters[0].rest, false);
+    const parameterType = signature[0].parameters[0].type;
+    assert.equal(parameterType.kind, "union");
+    if (parameterType.kind === "union")
+      assert.deepEqual(
+        parameterType.members
+          .map((t) => (t.kind === "literal" ? t.value : t.kind))
+          .sort(),
+        [false, true, "indeterminate"].sort(),
+      );
     assert.deepEqual(toggle.root, {
       kind: "component",
       name: "Primitive.Root",

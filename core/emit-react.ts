@@ -1,3 +1,7 @@
+import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { reactInitialAttributes } from './react-composition-initial.js';
+import { reactToggleAria } from './react-toggle-aria.js';
+import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
 import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React code emission — the PURE core of scripts/generate-components.ts.
@@ -26,7 +30,7 @@ import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, m
  *   - `content` parts render a bound text prop
  *   - optional parts render conditionally on their slot prop
  */
-import { rootContentJsx } from './root-content.js';
+import { rootContentJsx, literalTextJsx } from './root-content.js';
 import {
   isNativeCheckablePart,
   pascal,
@@ -316,13 +320,16 @@ export function generateTsx(
       propLines.push(`${doc}  ${p.bindings.code.prop}${p.required ? '' : '?'}: string;`);
     }
   }
+  for (const p of contract.props.filter(p => p.bindings.code.initial)) {
+    propLines.push(`  /** Initial value, read only on mount when uncontrolled. */\n  ${p.bindings.code.initial!.prop}?: ${codeValueUnion(p)};`);
+  }
   for (const { slot, part } of slots) {
     const doc = part.description ? `  /** ${part.description} */\n` : '';
     propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
   }
   for (const ev of events) {
     const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
-    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: () => void;`);
+    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: ${reactEventCallbackType(contract, ev)};`);
   }
 
   const destructured: string[] = [];
@@ -350,6 +357,8 @@ export function generateTsx(
   // provided" (never a silent []). Pulled out so {...rest} cannot leak a
   // structured prop onto the DOM element.
   for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
+  for (const p of contract.props.filter(p => p.bindings.code.initial))
+    destructured.push(`${p.bindings.code.initial!.prop}: ${reactInitialInput(contract,p)}`);
   for (const { slot } of slots) destructured.push(slot.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
   // ROUND 3: `children` normally has no destructure default — a JSX-children
@@ -374,7 +383,7 @@ export function generateTsx(
     const code = prop.bindings.code.prop;
     const union = (prop.type as { enum: string[] }).enum.map((v) => `'${v}'`).join(' | ');
     prelude.push(
-      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined ? ' | undefined' : ''}>(${prop.default === undefined ? 'undefined' : `'${prop.default}'`});`,
+      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined && prop.bindings.code.initial?.default === undefined ? ' | undefined' : ''}>(${reactInitialValue(contract,prop)});`,
       `  const ${code} = ${code}Prop ?? ${code}Uncontrolled;`,
     );
   }
@@ -384,9 +393,9 @@ export function generateTsx(
       const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
       const code = prop.bindings.code.prop;
       const [off, on] = ev.toggles.between;
-      body.push(`set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
+      body.push(`${prop.bindings.code.initial ? `if (${code}Prop === undefined) ` : ''}set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
     }
-    body.push(`${ev.bindings.code.prop}?.();`);
+    body.push(reactEventCallbackCall(contract, ev));
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
   }
 
@@ -416,15 +425,7 @@ export function generateTsx(
     }
     let s = partEl === 'button' ? ' type="button"' : '';
     s += ` onClick={handle${pascal(ev.name)}}`;
-    if (ev.toggles?.aria) {
-      const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
-      const code = prop.bindings.code.prop;
-      const [off, on] = ev.toggles.between;
-      const others = (prop.type as { enum: string[] }).enum.filter((v) => v !== off && v !== on);
-      s += others.length
-        ? ` aria-${ev.toggles.aria}={${code} === '${on}' ? true : ${code} === '${off}' ? false : 'mixed'}`
-        : ` aria-${ev.toggles.aria}={${code} === '${on}'}`;
-    }
+    s += reactToggleAria(contract, ev);
     return s;
   };
 
@@ -517,12 +518,8 @@ export function generateTsx(
       elementAttrs.push('type="button"');
     }
     elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
-    if (rootEvent.toggles?.aria) {
-      const prop = contract.props.find((p) => p.name === rootEvent.toggles!.prop)!;
-      const code = prop.bindings.code.prop;
-      const [, on] = rootEvent.toggles.between;
-      elementAttrs.push(`aria-${rootEvent.toggles.aria}={${code} === '${on}'}`);
-    }
+    const aria = reactToggleAria(contract, rootEvent);
+    if (aria) elementAttrs.push(aria.trim());
   }
   elementAttrs.push('{...rest}');
 
@@ -623,7 +620,7 @@ export function generateTsx(
     }
     if (part.component) {
       const dep = byId.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {}, contract);
+      const attrs = depAttrString(dep, part.component.props ?? {}, contract) + reactInitialAttributes(contract, dep, part.component);
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — instance text overrides: when the host APPLIES the child's
       // children prop (component.props), the child's own default must not be
@@ -646,8 +643,10 @@ export function generateTsx(
       // dropping contract visibleWhen (AUDIT-ROUND-1: emitter-drops-
       // visibleWhen-on-component-parts).
       const instance =
-        text !== undefined
-          ? `<${dep.name}${attrs}>${text}</${dep.name}>`
+        part.parts !== undefined
+          ? `<${dep.name}${attrs}><>\n${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('\n')}\n</></${dep.name}>`
+          : text !== undefined
+          ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
           : `<${dep.name}${attrs} />`;
       // Round 2 iteration 9 — per-instance overrides ride a structural
       // wrapper span (its class sets the child's override custom
@@ -664,7 +663,7 @@ export function generateTsx(
     if (part.slot) {
       const el = part.element ?? 'div';
       const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
-      const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>{${expr}}</${el}>`;
+      const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${expr}}</${el}>`;
       return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
     if (part.content) {
@@ -686,10 +685,10 @@ export function generateTsx(
         ? `{${Object.entries(tb.map)
             .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
             .join('')}${JSON.stringify(part.text)}}`
-        : part.text;
+        : literalTextJsx(part.text);
       return wrapVisibleWhen(
         part,
-        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>${inner}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,
       );
     }
     if (part.meter) {
@@ -1088,6 +1087,7 @@ const seeLines = (contract: Contract): string =>
   (contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('');
 
 export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
+  validateReactInitialBindings(contract);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
   const css = generateCss(contract, ctx.tokens, errors);

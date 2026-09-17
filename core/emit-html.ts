@@ -1349,6 +1349,8 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
     if (seen.has(c.id)) return;
     seen.add(c.id);
     for (const w of walkAnatomy(c)) {
+      if (w.part.component?.initialProps) throw new Error('HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED');
+      if (w.part.component && w.part.parts !== undefined) throw new Error('HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED');
       if (w.part.component) collectCss(ctx.contracts.get(w.part.component.id)!);
       for (const item of w.part.slot?.defaultContent ?? []) collectCss(ctx.contracts.get(item.id)!);
     }

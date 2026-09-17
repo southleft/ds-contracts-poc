@@ -1,5 +1,10 @@
 import { createHash } from "node:crypto";
 import {
+  callbackSignatureProblem,
+  reactCallbackCandidate,
+  type ReactCallbackCandidate,
+} from "./react-callback-candidates.js";
+import {
   proposeFromCode,
   type ProposeCodeResult,
 } from "../core/propose-code.js";
@@ -21,6 +26,7 @@ export interface ReactProgramProposal {
     slots: string[];
     platform: string[];
     unsupported: { name: string; type: string; reason: string }[];
+    callbacks: ReactCallbackCandidate[];
     problems: string[];
   }[];
   problems: string[];
@@ -160,6 +166,7 @@ export function proposeReactSourceProgram(
         slots: [],
         platform: [],
         unsupported: [],
+        callbacks: [],
         problems: component.problems.filter(
           (p) => !p.startsWith("unresolved-prop-type:"),
         ),
@@ -205,11 +212,18 @@ export function proposeReactSourceProgram(
           prop.type.members.some((t) => t.kind === "undefined");
         const unboundCallback =
           classified?.kind === "event" && !/^on[A-Z]/.test(prop.name);
+        const callbackProblem =
+          classified?.kind === "event" && !unboundCallback
+            ? callbackSignatureProblem(prop)
+            : undefined;
+        if (callbackProblem)
+          row.callbacks.push(reactCallbackCandidate(component, prop));
         if (
           !classified ||
           (value === null && !classified?.codeValues) ||
           explicitUndefined ||
-          unboundCallback
+          unboundCallback ||
+          callbackProblem
         ) {
           row.unsupported.push({
             name: prop.name,
@@ -221,7 +235,9 @@ export function proposeReactSourceProgram(
                   ? "required-undefined-not-representable"
                   : unboundCallback
                     ? "function-not-an-event"
-                    : "type-not-representable",
+                    : callbackProblem
+                      ? callbackProblem
+                      : "type-not-representable",
           });
           props.push({
             name: prop.name,

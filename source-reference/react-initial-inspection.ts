@@ -17,7 +17,7 @@ import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
 import { evidenceSha, inventoryEvidence, evidenceUnchanged } from './react-validation-evidence.js';
-import { cropSourceFrame } from './source-framing.js';
+import { cropSourceFrame, type SourceFrame } from './source-framing.js';
 import { prepareObservedContentTree } from './observed-content.js';
 import { compileReactInitialContract } from './react-initial-contract.js';
 import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
@@ -28,7 +28,7 @@ export interface ReactInitialInspection {
   observation?: Awaited<ReturnType<typeof observeReactInitialStates>>; problems: string[];
   draft?: ReturnType<typeof compileReactInitialContract>;
 }
-function original(repo: string, reference: ReactReference, request: Request) {
+export function readReactInspectionOriginal(repo: string, reference: ReactReference, request: Request) {
   reactReferenceProfile(request.caseId);
   readReactNativeEvidence(repo, reference, request.anchor);
   const dir = path.join(repo, 'private/react-source-ownership', reference.id, request.anchor.ownership.id);
@@ -43,14 +43,25 @@ function original(repo: string, reference: ReactReference, request: Request) {
     programSha256: evidenceSha(programBytes) };
 }
 export function createReactInitialInspectionStore(repo: string, sourceRoot: string,
-  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest }) {
+  select: (referenceId: string, caseId: string) => { reference: ReactReference; anchor: ReactNativeRequest; anchors?: ReactNativeRequest[] }) {
   const active = new Map<string, { state: ReactInitialInspection; promise: Promise<void> }>();
   const from = (reference: ReactReference, request: Request) => {
-    const source = original(repo, reference, request), key = revisionOf(request).slice(7);
+    const source = readReactInspectionOriginal(repo, reference, request), key = revisionOf(request).slice(7);
     return { reference, request, source, key, root: path.join(repo, 'private/react-initial-inspections', key) };
   };
   const input = (referenceId: string, caseId: string) => {
-    const { reference, anchor } = select(referenceId, caseId);
+    const selected = select(referenceId, caseId), { reference } = selected;
+    // A different root in the same sealed cohort may become the selected
+    // anchor after a compiler change. Reopen its existing initial observation
+    // without recapturing or rewriting it. Only host-verified root requests
+    // with the exact same source archive are eligible; from/saved still verify
+    // the full request, current files and immutable evidence inventory.
+    const candidates = [selected.anchor, ...(selected.anchors ?? []).filter(anchor =>
+      anchor.referenceId === selected.anchor.referenceId &&
+      anchor.inventorySha256 === selected.anchor.inventorySha256 &&
+      revisionOf(anchor.ownership) === revisionOf(selected.anchor.ownership))];
+    const anchor = candidates.find(anchor => existsSync(path.join(repo, 'private/react-initial-inspections',
+      revisionOf({ version: 1, anchor, caseId }).slice(7), 'latest.json'))) ?? selected.anchor;
     return from(reference, { version: 1, anchor, caseId });
   };
   const saved = (value: ReturnType<typeof input>, pinned?: ReactInitialNativeRequest['observation']) => {
@@ -90,13 +101,16 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
     const record = saved(value);
     return record ? derive(value, record) : undefined;
   };
-  const image = (record: ReturnType<typeof saved>, jobId: string, rowId: string) => {
+  const framedImage = (record: ReturnType<typeof saved>, jobId: string, rowId: string) => {
       const row = record?.report.observation?.rows.find(r => r.id === rowId && r.status === 'observed');
       if (!record || record.report.id !== jobId || !row?.image) throw Error('react-initial-image-unavailable');
       const png = readFileSync(path.join(record.dir, 'states', rowId + '.png'));
       const snapshot = JSON.parse(readFileSync(path.join(record.dir, 'states', rowId + '.json'), 'utf8'));
       if (evidenceSha(png) !== row.image || snapshot.image !== row.image || snapshot.treeSha256 !== row.treeSha256) throw Error('react-initial-image-changed');
-      return cropSourceFrame(png, snapshot.bounds).bytes;
+      const cropped = cropSourceFrame(png, snapshot.bounds);
+      const frame: SourceFrame = { version: 1, sourceSha256: row.image, inputSha256: revisionOf({ pin: record.pin, rowId }).slice(7),
+        imageSha256: evidenceSha(cropped.bytes), bounds: snapshot.bounds, crop: cropped.crop, sourceSize: cropped.sourceSize, qualification: 'unqualified' };
+      return { bytes: cropped.bytes, frame };
   };
   const nativeEvidenceFresh=(reference: ReactReference, request: ReactInitialNativeRequest) => {
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId)
@@ -112,7 +126,9 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
         const snapshot = JSON.parse(readFileSync(path.join(record.dir, 'states', variant.observation + '.json'), 'utf8'));
         return [variant.variant, prepareObservedContentTree(snapshot.tree, snapshot.fonts, snapshot.svg)];
       }));
-      return { draft: report.draft, composition: { source: report.observation!.source,
+      const frames = Object.fromEntries(report.draft.nativeVariants.map(variant =>
+        [variant.observation, framedImage(record, record.report.id, variant.observation).frame]));
+      return { draft: report.draft, frames, composition: { source: report.observation!.source,
         heldProps: report.observation!.heldProps, trees }, source: { revision: 'sha256:' + reference.id,
         programSha256: value.source.programSha256, evidenceRevision: revisionOf(request) } };
   };
@@ -132,11 +148,11 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId || !/^\d+$/.test(rowId))
         throw Error('react-initial-native-image-invalid');
       const value = from(reference, { version: 1, anchor: request.anchor, caseId: request.caseId });
-      return image(saved(value, request.observation), request.observation.id, rowId);
+      return framedImage(saved(value, request.observation), request.observation.id, rowId).bytes;
     },
     image(referenceId: string, caseId: string, jobId: string, rowId: string) {
       if (!/^\d+$/.test(rowId)) throw Error('react-initial-row-invalid');
-      return image(saved(input(referenceId, caseId)), jobId, rowId);
+      return framedImage(saved(input(referenceId, caseId)), jobId, rowId).bytes;
     },
     start(referenceId: string, caseId: string) {
       const value = input(referenceId, caseId), existing = active.get(value.key);
@@ -175,7 +191,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
               } });
             if (!state.observation.planned || state.observation.problems.length || state.observation.rows.some(r => r.status !== 'observed' || !r.restored))
               throw Error('react-initial-observation-incomplete');
-            original(repo, value.reference, value.request);
+            readReactInspectionOriginal(repo, value.reference, value.request);
             state.sourceUnchanged = true; state.phase = 'complete';
           } finally { failures.dispose(); }
         } catch (e) { state.phase = 'failed'; state.problems = [e instanceof Error ? e.message : String(e)]; }

@@ -38,7 +38,7 @@ export function Box({tone='quiet',...props}:{tone?:'quiet'|'loud';label:string;s
     writeFileSync(
       path.join(root, "types.ts"),
       `declare global{namespace JSX{interface Element{} interface IntrinsicElements{button:any;div:any}}}
-export interface InputAPI{active?:boolean;checked?:boolean;requiredFlag:boolean;disabled?:boolean;mixed?:boolean|'indeterminate';nullable?:'one'|'two'|null;literal?:true;callback?:(v:boolean)=>void;onChange?:(v:boolean)=>void;}`,
+export interface InputAPI{active?:boolean;checked?:boolean;requiredFlag:boolean;disabled?:boolean;mixed?:boolean|'indeterminate';nullable?:'one'|'two'|null;literal?:true;callback?:(v:boolean)=>void;onChange?:(v:boolean)=>void;onActivate?:()=>void;}`,
     );
     writeFileSync(path.join(root, "components.tsx"), source);
     fn(root, source);
@@ -94,9 +94,25 @@ test("installed API proposals preserve booleans, omission and declared defaults 
     }
     assert.deepEqual(
       proposal.components[0].unsupported.map((p) => p.name),
-      ["callback"],
+      ["callback", "onChange"],
     );
-    assert.ok(toggle.events?.some((e) => e.bindings.code.prop === "onChange"));
+    assert.ok(
+      !toggle.events?.some((e) => e.bindings.code.prop === "onChange"),
+      "do not silently erase a callback argument",
+    );
+    assert.ok(
+      toggle.events?.some((e) => e.bindings.code.prop === "onActivate"),
+      "a checker-proven zero-argument signature retains the existing API",
+    );
+    const callback = proposal.components[0].callbacks.find(
+      (c) => c.callback === "onChange",
+    )!;
+    assert.equal(callback.status, "needs-observation");
+    assert.ok(callback.stateProperties.includes("checked"));
+    assert.ok(
+      callback.stateProperties.includes("disabled"),
+      "matching booleans are ambiguous, not evidence of behavior",
+    );
     const box = ContractSchema.parse(
       proposal.result.proposals.find((p) => p.name === "Box")!.proposal
         .contract,

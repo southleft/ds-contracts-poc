@@ -226,6 +226,9 @@ reg("props", "bindings", [
   "prop.bindings.code",
   "prop.bindings.code.prop",
   "prop.bindings.code.values",
+  "prop.bindings.code.initial",
+  "prop.bindings.code.initial.prop",
+  "prop.bindings.code.initial.default",
 ]);
 
 // --- Anatomy & parts -------------------------------------------------------
@@ -406,6 +409,7 @@ reg("composition", "component-refs", [
   "part.component",
   "componentRef.id",
   "componentRef.props",
+  "componentRef.initialProps",
   "componentRef.text",
 ]);
 // Round 2 iteration 9: per-instance overrides + the root-only consumption list.
@@ -427,6 +431,7 @@ reg("events", "event-fields", [
   "event.bindings",
   "event.bindings.code",
   "event.bindings.code.prop",
+  "event.bindings.code.argument",
 ]);
 reg("events", "toggles", [
   "event.toggles",

@@ -63,6 +63,34 @@ Anatomy is a **nested tree** of named parts (CEM's slots/parts, Curtis's anatomy
 
 Parts with none of these are structural (frames/elements containing `parts`). `optional: true` renders conditionally in code and toggles visibility on the canvas. Composition rules: part names are unique per contract; cycles and unknown contract refs **fail the build**; sync scripts emit in dependency order. See [docs/08](08-composition-and-spec.md) for the design rationale.
 
+For React output, a nested `component` reference can also carry `parts`: these
+are caller-owned children passed through the child's unique `children` slot.
+Their property references resolve against the parent contract, and nested
+component references retain their own implementations and state. The child
+slot must be unconstrained: required content, arity bounds and restricted
+acceptance need separate projection support. Competing text, slot, content or
+repeat declarations are refused. An empty `parts: {}` supplies an empty React
+Fragment; omission leaves children unset. Slot `defaultContent` remains
+design/story sample content, never a runtime default. Direct Figma, HTML and
+Web Components emission explicitly refuse caller parts until implemented;
+this React rule does not qualify native composition or source extraction.
+
+`component.initialProps` supplies mount-only values to the child's declared
+`bindings.code.initial.prop`. Keys are canonical child enum property names;
+values are canonical literals or `{parentEnum}` references. Each side retains
+its own public code spelling, including booleans. Omission leaves the child's
+initializer unset; changes after mounting do not reset state. Ordinary
+`component.props` still targets the controlled input, which takes priority when
+both are supplied. Root references and repeated instances currently refuse
+`initialProps`, as do HTML and Web Components emission. Figma compilation can
+project finite enum initializers into fresh-mount design variants: an omitted
+parent value uses the child's declared initializer default when present, and a
+supplied controlled value wins. The authored initializer mapping remains in the
+compiled instance specification. This static projection does not implement React
+state lifetime on the canvas or qualify reverse reconstruction. Child and parent
+state inputs must have compatible native variant bindings; text and Boolean
+property aliases remain unsupported.
+
 ```jsonc
 "anatomy": {
   "root": {

@@ -57,14 +57,25 @@ export function prepareNativeContractDraft(
   };
   const data = structuredClone(component);
   const boundNames = new Set<string>();
+  const fonts = new Map<string, { family: string; styles: string[] }>();
   function visit(spec: NodeSpec, variant: string, specPath: number[], parent?:NodeSpec) {
     // Every allocation must pass nativeInit. Nested instances, styled text
     // wrappers, margin boxes and slot defaults need their own ownership mapping.
-    if (!['root', 'frame', 'slot', 'svg', 'shape'].includes(spec.type) || spec.slotDefault?.length ||
+    if (!['root', 'frame', 'slot', 'svg', 'shape', 'text'].includes(spec.type) || spec.slotDefault?.length ||
         spec.visibleProp || spec.slotOptional || spec.margins || spec.insetOverlay ||
         spec.nativeSourcePart || spec.nativeSourceSample || spec.nativeSourceVisible !== undefined ||
         spec.nativeContractSample || spec.nativeContractPart)
       throw Error('NATIVE_CONTRACT_DRAFT_NODE_OWNERSHIP_UNQUALIFIED');
+    if (spec.type === 'text' && (spec.children?.length || spec.contentProp || spec.textStyle ||
+        spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings || spec.absolute || spec.overlay ||
+        spec.pct !== undefined || spec.rotation || spec.layout || spec.lits ||
+        typeof spec.characters !== 'string' || !spec.fontFamily || !spec.fontStyle || !Number.isFinite(spec.fontSize)))
+      throw Error('NATIVE_CONTRACT_DRAFT_TEXT_OWNERSHIP_UNQUALIFIED');
+    if (spec.type === 'text') {
+      fonts.set('Inter/' + spec.fontStyle, { family: 'Inter', styles: [spec.fontStyle!] });
+      fonts.set(spec.fontFamily + '/' + spec.fontStyle, { family: spec.fontFamily!,
+        styles: [...new Set([spec.fontStyle!, spec.fontStyle!.replaceAll(' ', '')])] });
+    }
     if ((spec.type === 'svg' || spec.type === 'shape') && spec.children?.length)
       throw Error('NATIVE_CONTRACT_DRAFT_LEAF_CHILDREN_UNQUALIFIED');
     if (spec.type === 'svg' && (!spec.svg || !Number.isFinite(spec.iconSize) || spec.iconSize! <= 0 || spec.rotation))
@@ -87,11 +98,12 @@ export function prepareNativeContractDraft(
       throw Error('NATIVE_CONTRACT_DRAFT_SHAPE_GEOMETRY_UNQUALIFIED');
     spec.nativeContractPart = { contractRevision: projection.contractRevision, variant, specPath };
     for (const name of Object.values(spec.bindings ?? {})) boundNames.add(name);
-    for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.svgPaintVar])
+    for (const name of [spec.fill, spec.stroke, spec.fixedWidth?.varName, spec.fixedHeight?.varName, spec.svgPaintVar,
+      spec.textFill, spec.fontSizeVar, spec.fontWeightVar, spec.lineHeightVar])
       if (name) boundNames.add(name);
     (spec.children ?? []).forEach((child, i) => visit(child, variant, [...specPath, i],spec));
   }
   data.variants.forEach(v => visit(v.spec, v.name, []));
   data.nativeContractDraft = { revision: revisionOf(projection), acceptedContract: null };
-  return { projection, component: data, boundNames: [...boundNames].sort() };
+  return { projection, component: data, boundNames: [...boundNames].sort(), fonts: [...fonts.values()] };
 }

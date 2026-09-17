@@ -24,6 +24,57 @@ import { gridConstraintChannels } from './grid-constraints.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { readReactNativeEvidence, selectReactChildRequest, selectReactNativeRequest } from './react-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
+import { projectReactCallerComposition, compareReactCallerContext } from './react-caller-composition.js';
+import { buildReactCallerPreview } from './react-caller-preview.js';
+import { chromium } from 'playwright-core';
+import { generatedTypeErrors } from '../core/react-test-runtime.js';
+
+test('source caller projection preserves editable content and distinct generated label IDs in the real consumer', async t => {
+  const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
+  const button = f.tree.nodes[0]; assert.equal(button.t, 'el'); if (button.t !== 'el') return;
+  f.tree.nodes.push({ t: 'el', el: { tag: 'label', classes: [], style: { ...button.el.style, display: 'inline' }, pseudo: {}, nodes: [{ t: 'text', v: 'Activate' }] } });
+  f.ownership.nodes.push({ path: '1', tag: 'label', nearestComponent: 'box' });
+  f.fonts.treeRevision = revisionOf(f.tree);
+  f.fonts.rows.push({ ...f.fonts.rows[0], path: [1], text: 'Activate', fonts: [{ familyName: 'Inter', postScriptName: 'Inter-Regular', isCustomFont: true, glyphCount: 8 }] });
+  const input = { program: f.program, ownership: f.ownership, tree: f.tree, fonts: f.fonts,
+    svg: { version: 1 as const, treeRevision: revisionOf(f.tree), status: 'observed' as const, rows: [], problems: [] },
+    origin: { version: 1 as const, roots: [{ path: '0', tag: 'button', channels: [] }] },
+    labels: { version: 1 as const, treeRevision: revisionOf(f.tree), status: 'observed' as const, problems: [],
+      rows: [{ labelPath: '1', controlPath: '0', controlTag: 'button', mode: 'explicit' as const, sourceId: 'save', text: 'Activate' }] }, behaviors: [] };
+  const draft = projectReactCallerComposition(input);
+  assert.equal(draft.status, 'generated-draft', draft.problems.join(','));
+  assert.equal(draft.children.length, 1); assert.equal(draft.identities.length, 1);
+  const parent = draft.modules!.find(m => m.name === draft.contract!.name)!;
+  assert.deepEqual(generatedTypeErrors(parent.name, parent.tsx, Object.fromEntries(draft.modules!.filter(m => m !== parent).map(m => [m.name, m.tsx]))), []);
+  const output = await buildReactCallerPreview(process.cwd(), draft);
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const page = await browser.newPage();
+  await page.setContent('<div id="root"></div>'); await page.addStyleTag({ content: output.css }); await page.addScriptTag({ content: output.javascript });
+  const labels = page.locator('.examples label');
+  const ids = await labels.evaluateAll(nodes => nodes.map(node => (node as HTMLLabelElement).control?.id));
+  assert.equal(ids.length, 2); assert.ok(ids.every(Boolean)); assert.equal(new Set(ids).size, 2); assert.ok(!ids.includes('save'));
+  const text = draft.contract!.props.find(p => p.default === 'Activate')!;
+  await page.getByLabel(text.name, { exact: true }).fill('Updated caption');
+  assert.deepEqual(await labels.allTextContents(), ['Updated caption', 'Updated caption']);
+  assert.deepEqual(await labels.evaluateAll(nodes => nodes.map(node => (node as HTMLLabelElement).control?.id)), ids);
+  const broken = projectReactCallerComposition({ ...input, labels: { ...input.labels, treeRevision: 'changed' } });
+  assert.equal(broken.status, 'refused'); assert.equal(broken.modules, undefined);
+  await assert.rejects(buildReactCallerPreview(process.cwd(), broken), /draft-unavailable/);
+});
+
+test('caller preview reports text-free typography discrepancies but refuses changed paint, text, dimensions and structure', () => {
+  const tree: CapturedNode = { tag: 'button', classes: [], pseudo: {}, nodes: [], style: { 'font-size': '16px', 'line-height': '24px', width: '16px', color: 'red' } };
+  assert.deepEqual(compareReactCallerContext(tree, structuredClone(tree)), []);
+  const source = structuredClone(tree); source.style['font-size'] = '14px';
+  assert.deepEqual(compareReactCallerContext(tree, source), [{ field: 'root.style.font-size', generated: '16px', source: '14px' }]);
+  for (const mutate of [
+    (node: CapturedNode) => { node.style.width = '17px'; },
+    (node: CapturedNode) => { node.style.color = 'blue'; },
+    (node: CapturedNode) => { node.nodes.push({ t: 'text', v: 'Text' }); },
+    (node: CapturedNode) => { node.pseudo['::after'] = { content: '"Text"' }; },
+    (node: CapturedNode) => { node.tag = 'input'; },
+  ]) { const changed = structuredClone(source); mutate(changed); assert.equal(compareReactCallerContext(tree, changed), undefined); }
+});
 
 async function fixture(sourceOwned = false) {
   const dir = mkdtempSync(path.join(tmpdir(), 'react-composition-'));

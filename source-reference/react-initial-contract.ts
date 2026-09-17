@@ -51,7 +51,8 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     const axes = definitions.map(d => d.axis), baseAxisValues = Object.fromEntries(definitions.map(d => [d.property, d.base]));
     const enumeration = enumerate(axes, [], 64, baseAxisValues);
     if (enumeration.policy !== 'full-cartesian' || enumeration.combos.length !== observation.rows.length) throw Error('react-initial-contract-domain-incomplete');
-    const roots = new Map<string, CapturedNode>(), sizes = new Map<string, Set<string>>();
+    const roots = new Map<string, CapturedNode>(), sizes = new Set<string>();
+    const sizeModes = new Map<string, string>();
     const planes = new Map<string, { snapshot: Snapshot; assignment: Record<string, string>; rowId: string }>();
     for (const row of observation.rows) {
       const snap = snapshots[row.id];
@@ -77,9 +78,23 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
       const origin = snap.styleOrigin.roots.find(r => r.path === '' && r.tag === root.tag);
       for (const channel of ['width', 'height']) {
         const size = origin?.sizes?.find(s => s.channel === channel);
-        if (size?.status !== 'fixed' || !size.value || normalizeValue(size.value) !== root.style[channel])
+        // An unconstrained inline flex row owns its content-sized width. Never
+        // mint the current label's measured width as a fixed component size.
+        // Block fill, wrapping, flex allocation and mixed fixed/auto domains
+        // need their own evidence and remain refused here.
+        const intrinsic = channel === 'width' && size?.status === 'auto' && size.value === 'auto' &&
+          root.style.display === 'inline-flex' && root.style['flex-direction'] === 'row' &&
+          root.style['flex-wrap'] === 'nowrap' && root.style['flex-grow'] === '0' &&
+          root.style['flex-shrink'] === '0' && root.style['flex-basis'] === 'auto' &&
+          root.style['min-width'] === '0px' && root.style['max-width'] === 'none' &&
+          root.style['writing-mode'] === 'horizontal-tb' && root.style.position === 'static';
+        if (!intrinsic && (size?.status !== 'fixed' || !size.value || normalizeValue(size.value) !== root.style[channel]))
           throw Error('react-initial-contract-root-sizing-unqualified:' + channel);
-        const values = sizes.get(channel) ?? new Set<string>(); values.add(root.style[channel]); sizes.set(channel, values);
+        const mode = intrinsic ? 'intrinsic' : 'fixed';
+        if (sizeModes.has(channel) && sizeModes.get(channel) !== mode)
+          throw Error('react-initial-contract-root-sizing-mixed:' + channel);
+        sizeModes.set(channel, mode);
+        if (!intrinsic) sizes.add(channel);
       }
       // CSS normal gaps have zero used value in non-multicol flex containers.
       if (['flex', 'inline-flex'].includes(root.style.display)) for (const channel of ['row-gap', 'column-gap'])

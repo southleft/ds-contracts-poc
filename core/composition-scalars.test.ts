@@ -7,7 +7,97 @@ import { ContractSchema, validateContract, type Contract } from './index.js';
 import { proposeFromCode } from './propose-code.js';
 import { reactEmitter, reactInlineEmitter, htmlEmitter, figmaScriptEmitter } from './emitter.js';
 import { createFigmaEngine } from './emit-figma-script.js';
-import { mountGenerated } from './react-test-runtime.js';
+import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
+import { emitWebComponent } from '../packages/emitter-web-components/src/emit-wc.js';
+
+function callerFamily() {
+  const { parent, child, ctx } = family();
+  const text = (name: string) => ({ name, type: 'text' as const,
+    bindings: { code: { prop: name }, figma: { kind: 'TEXT' as const, property: name } } });
+  child.props.push(text('identity'), { name: 'state', type: { enum: ['off', 'on'] }, default: 'off',
+    bindings: { code: { prop: 'checked' }, figma: { kind: 'VARIANT', property: 'State', values: { off: 'Off', on: 'On' } } } });
+  child.semantics.role = 'checkbox';
+  child.semantics.roleException = 'A button with declared checkbox toggle behavior.';
+  child.anatomy.root.attrs = { id: '{identity}' };
+  child.events = [{ name: 'change', trigger: 'root', toggles: { prop: 'state', between: ['off', 'on'], aria: 'checked' },
+    bindings: { code: { prop: 'onCheckedChange' } } }];
+  const shell = (id: string, name: string) => ContractSchema.parse({ ...parent, id, name, props: [],
+    anatomy: { root: { slot: { name: 'children', defaultContent: [{ id: child.id, props: { label: 'Default control' } }] } } },
+    bindings: { ...parent.bindings, code: { anchors: { importPath: `./${name}`, export: name } } } });
+  const frame = shell('ds.frame', 'Frame'), body = shell('ds.body', 'Body');
+  ctx.contracts.set(frame.id, frame); ctx.contracts.set(body.id, body);
+  parent.props.push(text('firstId'), text('secondId'));
+  parent.props.push({ name: 'show', type: 'boolean', default: true,
+    bindings: { code: { prop: 'show' }, figma: { kind: 'BOOLEAN', property: 'Show' } } });
+  parent.anatomy.root.parts = {};
+  for (const key of ['first', 'second']) parent.anatomy.root.parts[key] = {
+    component: { id: frame.id }, visibleWhen: { prop: 'show' }, parts: {
+      [`${key}Body`]: { component: { id: body.id }, parts: {
+        [`${key}Control`]: { component: { id: child.id, props: { identity: `{${key}Id}`, label: '{label}', disabled: '{disabled}' } } },
+        [`${key}Caption`]: { element: 'label', attrs: { for: `{${key}Id}` }, text: `${key} label` },
+      } },
+    },
+  };
+  return { parent, child, frame, body, ctx };
+}
+
+test('nested caller children retain independent child state and parent label bindings on both React targets', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const { parent, ctx } = callerFamily();
+  for (const contract of ctx.contracts.values()) {
+    const errors: string[] = []; validateContract(contract, ctx.contracts, errors, ctx.icons);
+    assert.deepEqual(errors, []);
+  }
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const output = [...ctx.contracts.values()].map(c => ({ name: c.name, files: emitter.emit(c, ctx) }));
+    const files = output.find(o => o.name === parent.name)!.files;
+    const deps = Object.fromEntries(output.filter(o => o.name !== parent.name).map(o => [o.name, {
+      tsx: o.files[0].contents, css: o.files.find(f => f.path.endsWith('.css'))?.contents,
+    }]));
+    assert.deepEqual(generatedTypeErrors(parent.name, files[0].contents, Object.fromEntries(Object.entries(deps).map(([name, d]) => [name, d.tsx]))), []);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, parent.name, files[0].contents, files.find(f => f.path.endsWith('.css'))?.contents, deps);
+      await render({ firstId: 'one', secondId: 'two', label: 'Toggle', disabled: false });
+      assert.deepEqual(await page.locator('button').allTextContents(), ['Toggle', 'Toggle']);
+      await page.getByText('first label', { exact: true }).click();
+      assert.equal(await page.locator('#one').getAttribute('aria-checked'), 'true');
+      assert.equal(await page.locator('#two').getAttribute('aria-checked'), 'false');
+      await page.locator('#two').press('Space');
+      assert.equal(await page.locator('#two').getAttribute('aria-checked'), 'true');
+      await render({ firstId: 'new-one', secondId: 'new-two', label: 'Changed', disabled: false });
+      assert.deepEqual(await page.locator('label').evaluateAll(labels => labels.map(l => (l as HTMLLabelElement).control?.id)), ['new-one', 'new-two']);
+      assert.deepEqual(await page.locator('button').allTextContents(), ['Changed', 'Changed']);
+      assert.deepEqual(await page.locator('button').evaluateAll(buttons => buttons.map(b => b.getAttribute('aria-checked'))), ['true', 'true']);
+      await page.getByText('second label', { exact: true }).click();
+      assert.equal(await page.locator('#new-two').getAttribute('aria-checked'), 'false');
+      await render({ firstId: 'new-one', secondId: 'new-two', disabled: true });
+      await page.getByText('first label', { exact: true }).click({ force: true });
+      assert.equal(await page.locator('#new-one').getAttribute('aria-checked'), 'true');
+      assert.equal(await page.locator('#new-one').isDisabled(), true);
+      await render({ show: false });
+      assert.equal(await page.locator('button').count(), 0);
+    } finally { await page.close(); }
+  }
+});
+
+test('caller parts refuse missing, competing or constrained slots and unsupported projections', () => {
+  const { parent, frame, ctx } = callerFamily();
+  const errors = () => { const errors: string[] = []; validateContract(parent, ctx.contracts, errors, ctx.icons); return errors.join('\n'); };
+  const slot = frame.anatomy.root.slot!;
+  delete frame.anatomy.root.slot;
+  assert.match(errors(), /no unique children slot/);
+  frame.anatomy.root.slot = { ...slot, min: 1 };
+  assert.match(errors(), /constrained children slot/);
+  frame.anatomy.root.slot = slot;
+  parent.anatomy.root.parts!.first.component!.text = 'Conflicting';
+  assert.match(errors(), /conflicting component caller content/);
+  delete parent.anatomy.root.parts!.first.component!.text;
+  assert.equal(errors(), '');
+  assert.throws(() => htmlEmitter.emit(parent, ctx), /HTML_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
+  assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
+  assert.throws(() => emitWebComponent(parent, { ...ctx, tokens: new Set<string>() }), /WEB_COMPONENT_CALLER_PARTS_UNSUPPORTED/);
+});
 
 function family() {
   const result = proposeFromCode({ sourcePath: 'family.tsx', css: '', source: `
@@ -30,6 +120,59 @@ function family() {
   const ctx = { contracts, icons: new Map<string, string>(), tokens: { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } } };
   return { parent, child, ctx };
 }
+
+test('composed initialProps initialize once, preserve public scalar mappings and defer to controlled inputs', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const { parent, child, ctx } = callerFamily();
+  const state = child.props.find(p => p.name === 'state')!;
+  state.bindings.code = { prop: 'checked', values: { off: false, on: true }, initial: { prop: 'defaultChecked', default: 'off' } };
+  state.bindings.figma.unsetValue = 'Unset';
+  delete state.default;
+  parent.props.push({ name: 'starting', type: { enum: ['off', 'on'] },
+    bindings: { code: { prop: 'start', values: { off: 'no', on: 'yes' } }, figma: { kind: 'VARIANT', property: 'Starting', unsetValue: 'Unset', values: { off: 'Off', on: 'On' } } } });
+  parent.anatomy.root.parts = {
+    fixed: { component: { id: child.id, props: { identity: 'fixed', disabled: false }, initialProps: { state: 'on' } } },
+    mapped: { component: { id: child.id, props: { identity: 'mapped', disabled: false }, initialProps: { state: '{starting}' } } },
+    controlled: { component: { id: child.id, props: { identity: 'controlled', disabled: false, state: 'off' }, initialProps: { state: 'on' } } },
+  };
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const output = emitter.emit(parent, ctx), dependency = emitter.emit(child, ctx);
+    assert.deepEqual(generatedTypeErrors(parent.name, output[0].contents, { [child.name]: dependency[0].contents }), []);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, parent.name, output[0].contents, output.find(f => f.path.endsWith('.css'))?.contents,
+        { [child.name]: { tsx: dependency[0].contents, css: dependency.find(f => f.path.endsWith('.css'))?.contents } });
+      assert.equal(await page.locator('#fixed').getAttribute('aria-checked'), 'true');
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'false');
+      await render({ start: 'yes' });
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'false', 'initializer does not reset mounted state');
+      await page.locator('#fixed').press('Space');
+      await page.locator('#mapped').press('Space');
+      await page.locator('#controlled').press('Space');
+      assert.deepEqual(await page.locator('button').evaluateAll(nodes => nodes.map(n => n.getAttribute('aria-checked'))), ['false', 'true', 'false']);
+      await render({ start: 'no' });
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'true');
+      await page.evaluate(() => (window as unknown as { renderSubject(props: unknown): void }).renderSubject({ key: 'fresh', start: 'yes' }));
+      assert.equal(await page.locator('#mapped').getAttribute('aria-checked'), 'true', 'new mount reads typed initializer');
+    } finally { await page.close(); }
+  }
+  assert.throws(() => htmlEmitter.emit(parent, ctx), /HTML_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
+  const native = createFigmaEngine(ctx).compileComponentData(parent, ctx.contracts);
+  assert.ok(native.variants.length > 0);
+  for (const variant of native.variants) {
+    assert.equal(variant.spec.children!.find(n => n.name === 'fixed')!.depProps!.State, 'On');
+    assert.equal(variant.spec.children!.find(n => n.name === 'controlled')!.depProps!.State, 'Off');
+  }
+  const unmappedParent = structuredClone(parent);
+  delete unmappedParent.props.find(p => p.name === 'starting')!.bindings.code.values;
+  assert.throws(() => emitWebComponent(unmappedParent, { ...ctx, tokens: new Set<string>() }), /WEB_COMPONENT_INITIAL_PROPS_UNSUPPORTED/);
+  const errors: string[] = [];
+  parent.anatomy.root.parts.fixed.component!.initialProps = { label: 'invalid' };
+  parent.anatomy.root.parts.mapped.component!.initialProps = { state: '{missing}' };
+  validateContract(parent, ctx.contracts, errors, ctx.icons);
+  assert.ok(errors.some(e => e.includes('no declared child initializer')));
+  assert.ok(errors.some(e => e.includes('outside the child canonical domain')));
+});
 
 test('source defaults belong to the component props across supported declaration forms', () => {
   const declarations = [
@@ -117,6 +260,49 @@ test('scalar mappings reject cross-type and unknown parent properties', () => {
   assert.ok(missing.some(e => e.includes('no enum, text or boolean prop "missing"')));
 });
 
+test('parent IDs and labels reach distinct child controls and rebind without cross-activation', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  const { parent, child, ctx } = family();
+  const text = (name: string, code: string) => ({ name, type: 'text' as const,
+    bindings: { code: { prop: code }, figma: { kind: 'TEXT' as const, property: name } } });
+  child.props.push(text('identity', 'controlId'));
+  child.anatomy.root.attrs = { ...child.anatomy.root.attrs, id: '{identity}' };
+  parent.props.push(text('firstId', 'primaryId'), text('secondId', 'secondaryId'));
+  parent.anatomy.root.parts = {
+    first: { component: { id: child.id, props: { identity: '{firstId}', label: '{label}', disabled: '{disabled}' } } },
+    firstCaption: { element: 'label', attrs: { for: '{firstId}' }, text: 'First control' },
+    second: { component: { id: child.id, props: { identity: '{secondId}', label: 'Other control', disabled: false } } },
+    secondCaption: { element: 'label', attrs: { htmlFor: '{secondId}' }, text: 'Second control' },
+  };
+  const errors: string[] = []; validateContract(parent, ctx.contracts, errors, ctx.icons);
+  assert.deepEqual(errors, []);
+  for (const emitter of [reactEmitter, reactInlineEmitter]) {
+    const parentFiles = emitter.emit(parent, ctx), childFiles = emitter.emit(child, ctx);
+    const page = await browser.newPage();
+    try {
+      const render = await mountGenerated(page, parent.name, parentFiles[0].contents,
+        parentFiles.find(f => f.path.endsWith('.css'))?.contents ?? '',
+        { [child.name]: { tsx: childFiles[0].contents, css: childFiles.find(f => f.path.endsWith('.css'))?.contents } });
+      for (const [primaryId, secondaryId] of [['one', 'two'], ['replacement-one', 'replacement-two']]) {
+        await render({ primaryId, secondaryId, label: 'Updated child', disabled: false });
+        assert.deepEqual(await page.locator('label').evaluateAll(labels => labels.map(label => (label as HTMLLabelElement).control?.id)), [primaryId, secondaryId]);
+        assert.deepEqual(await page.locator('button').allTextContents(), ['Updated child', 'Other control']);
+        // Listen to actual browser activation; do not manually dispatch events
+        // or construct the association in the generated DOM.
+        await page.evaluate(() => { (window as unknown as { activations: string[] }).activations = [];
+          document.querySelectorAll('button').forEach(button => { button.onclick = () => (window as unknown as { activations: string[] }).activations.push(button.id); }); });
+        await page.getByText('First control', { exact: true }).click();
+        await page.getByText('Second control', { exact: true }).click();
+        assert.deepEqual(await page.evaluate(() => (window as unknown as { activations: string[] }).activations), [primaryId, secondaryId]);
+        await render({ primaryId, secondaryId, label: '', disabled: true });
+        assert.equal(await page.locator('button').first().textContent(), '');
+        await page.getByText('First control', { exact: true }).click({ force: true });
+        assert.deepEqual(await page.evaluate(() => (window as unknown as { activations: string[] }).activations), [primaryId, secondaryId]);
+      }
+    } finally { await page.close(); }
+  }
+});
+
 test('native text and BOOLEAN-property links refuse instead of freezing defaults', () => {
   const { parent, ctx } = family();
   assert.throws(() => figmaScriptEmitter.emit(parent, ctx), /FIGMA_NESTED_TEXT_PROP_LINK_UNSUPPORTED/);
@@ -189,4 +375,76 @@ test('native composed components expose child controls on create, amend and no-o
     await run(engine.buildComponentScript(parent, ctx.contracts));
     assert.equal(inspect()[0][0], before[0][0], 'amend preserves component identity and exposes rebuilt children');
   }
+});
+
+test('native fresh-mount variants preserve initializer omission, controlled precedence and authored mappings', async () => {
+  const { parent, child, ctx } = callerFamily();
+  const state = child.props.find(p => p.name === 'state')!;
+  state.bindings.code = { prop: 'checked', values: { off: false, on: true }, initial: { prop: 'defaultChecked', default: 'off' } };
+  state.bindings.figma.unsetValue = 'Unset'; delete state.default;
+  child.anatomy.root = { layout: { display: 'flex', direction: 'row' }, parts: {
+    indicator: { text: 'Selected', visibleWhen: { prop: 'state', equals: 'on' } },
+  } };
+  const axis = (name: string) => ({ name, type: { enum: ['off', 'on'] }, bindings: {
+    code: { prop: name, values: { off: false, on: true } },
+    figma: { kind: 'VARIANT' as const, property: name, unsetValue: 'Omitted', values: { off: 'Off', on: 'On' } },
+  } });
+  parent.props = [axis('starting'), axis('current')];
+  parent.anatomy.root.parts = {
+    fixed: { component: { id: child.id, initialProps: { state: 'on' } } },
+    mapped: { component: { id: child.id, initialProps: { state: '{starting}' } } },
+    controlled: { component: { id: child.id, props: { state: '{current}' }, initialProps: { state: '{starting}' } } },
+  };
+  const engine = createFigmaEngine(ctx), data = engine.compileComponentData(parent, ctx.contracts);
+  assert.equal(data.variants.length, 9);
+  const { figma, root } = createFigmaMock();
+  const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
+  const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 });
+  await run(engine.buildComponentScript(child, ctx.contracts));
+  await run(engine.buildComponentScript(parent, ctx.contracts));
+  const target = root.findOne(n => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === parent.id) as ComposedMockNode;
+  assert.ok(target);
+  for (const variant of data.variants) {
+    const start = /starting=([^,]+)/.exec(variant.name)![1], current = /current=([^,]+)/.exec(variant.name)![1];
+    const initial = start === 'Omitted' ? 'Off' : start;
+    const expected = ['On', initial, current === 'Omitted' ? initial : current];
+    assert.deepEqual(variant.spec.children!.map(n => n.depProps!.State), expected);
+    assert.deepEqual(variant.spec.children![1].depInitialProps, { state: '{starting}' });
+    const component = target.children.find(n => n.name === variant.name)!;
+    assert.ok(component);
+    assert.deepEqual(component.findAll(n => n.type === 'INSTANCE').map(n => n.componentProperties!.State.value), expected,
+      'actual written child properties follow the parent variant, including omitted controlled inputs');
+    // The shared mock records setProperties but does not swap the cloned
+    // subtree for VARIANT changes. Inspect the written target variants
+    // separately; a live instance-swap proof remains required.
+    const childSet = root.findOne(n => n.type === 'COMPONENT_SET' && n.getSharedPluginData('ds_contracts', 'contractId') === child.id) as ComposedMockNode;
+    for (const selected of expected) {
+      const main = childSet.children.find(n => n.name.includes(`State=${selected}`))!;
+      assert.ok(main);
+      assert.equal(main.findAll(n => n.type === 'TEXT').length, selected === 'On' ? 1 : 0);
+    }
+  }
+  const ids = target.findAll(() => true).map(n => n.id);
+  await run(engine.buildComponentScript(parent, ctx.contracts));
+  assert.deepEqual(target.findAll(() => true).map(n => n.id), ids, 'repeat does not recreate variants or nested instances');
+  const initial = state.bindings.code.initial!;
+  delete initial.default;
+  const omitted = engine.compileComponentData(parent, ctx.contracts).variants.find(v => v.name === 'starting=Omitted, current=Omitted')!;
+  assert.deepEqual(omitted.spec.children![1].depProps, {}, 'absent initializer and absent default preserve omission');
+  state.default = 'on';
+  const defaulted = engine.compileComponentData(parent, ctx.contracts).variants.find(v => v.name === 'starting=Omitted, current=Omitted')!;
+  assert.equal(defaulted.spec.children![1].depProps!.State, 'On', 'omitted initializer falls back to the child canonical default');
+  delete state.default; initial.default = 'off';
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { state: 'missing' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { label: 'on' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { state: '{absent}' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.anatomy.root.parts!.fixed.component!.initialProps = { state: 'on' };
+  parent.props[0].bindings.figma = { kind: 'NONE' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
+  parent.props[0] = axis('starting');
+  state.bindings.figma = { kind: 'NONE' };
+  assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /INITIAL_PROPS_UNSUPPORTED/);
 });

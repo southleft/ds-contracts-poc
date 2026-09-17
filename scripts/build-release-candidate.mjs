@@ -47,6 +47,8 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-09-17: css.js imports this pure CSS identifier serializer;
+    // both its runtime module and declaration belong in the installed package.
     // Reviewed 2026-09-15: the public emitter context imports the pure runtime
     // binding types and unsupported-target guard. No source artifact is packed.
     // Reviewed 2026-08-23 for slice 3 (the cheap pure siblings: figma-names,
@@ -66,6 +68,8 @@ const PACKAGES = [
       "dist/canvas-code-plan.js",
       "dist/contract-provenance.d.ts",
       "dist/contract-provenance.js",
+      "dist/css-identifier.d.ts",
+      "dist/css-identifier.js",
       "dist/css.d.ts",
       "dist/css.js",
       "dist/elements.d.ts",

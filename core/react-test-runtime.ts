@@ -5,11 +5,12 @@ import { build } from "esbuild";
 import ts from "typescript";
 import type { Page } from "playwright-core";
 
-export function generatedTypeErrors(name: string, tsx: string): string[] {
+export function generatedTypeErrors(name: string, tsx: string, dependencies: Record<string, string> = {}): string[] {
   const file = path.resolve(`core/__generated_${name}.tsx`);
   const declarations = path.resolve("core/__generated_styles.d.ts");
   const files = new Map([
     [file, tsx],
+    ...Object.entries(dependencies).map(([name, contents]) => [path.resolve(`core/${name}.tsx`), contents] as [string, string]),
     [
       declarations,
       'declare module "*.module.css" { const styles: Record<string, string>; export default styles; }',
@@ -31,6 +32,12 @@ export function generatedTypeErrors(name: string, tsx: string): string[] {
   const originalExists = host.fileExists.bind(host);
   host.readFile = (file) => files.get(file) ?? originalRead(file);
   host.fileExists = (file) => files.has(file) || originalExists(file);
+  host.resolveModuleNames = (names, containingFile) => names.map(moduleName => {
+    const dependency = path.basename(moduleName);
+    if (/^\.\.?\//.test(moduleName) && Object.hasOwn(dependencies, dependency))
+      return { resolvedFileName: path.resolve(`core/${dependency}.tsx`), extension: ts.Extension.Tsx };
+    return ts.resolveModuleName(moduleName, containingFile, options, host).resolvedModule;
+  });
   host.getSourceFile = (file, languageVersion) => {
     const contents = host.readFile(file);
     return contents === undefined
