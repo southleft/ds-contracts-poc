@@ -128,6 +128,7 @@ export interface NativeOperationSnapshot {
   id: string;
   componentName?: string;
   sourceOwnedContent?: boolean;
+  comparisonWidth?: number;
   operation: "source-native-inspection";
   phase:
     | "prepared"
@@ -1060,6 +1061,8 @@ export function createNativeOperationJobs(
     return {
       id: loaded.header.id,
       operation: "source-native-inspection",
+      ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.instanceWidth !== undefined
+        ? {comparisonWidth:loaded.plan.plan.comparison.instanceWidth} : {}),
       phase: loaded.state.phase,
       ...(isReactPlan(loaded.plan) ? { componentName: loaded.plan.plan.component.setName,
         ...(!loaded.plan.plan.component.rootSlot ? {sourceOwnedContent:true} : {}) } : {}),

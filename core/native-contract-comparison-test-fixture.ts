@@ -10,7 +10,7 @@ import type { NativeTokenContextInput } from './native-token-context.js';
 import { emitNativeContractReadbackScript, type NativeContractObservationInput } from './native-source-observation.js';
 import type { NativeContractComparisonInput } from './native-contract-comparison.js';
 
-export async function nativeComparisonFixture(fileKey?: string, gridRoot: boolean | 'flow' = false) {
+export async function nativeComparisonFixture(fileKey?: string, gridRoot: boolean | 'flow' | 'column' = false) {
   const host = nativeFixtureHost(), { figma } = host;
   if (fileKey) figma.fileKey = fileKey;
   Object.getPrototypeOf(figma.currentPage).setExplicitVariableModeForCollection = function(c: any, mode: string) {
@@ -26,7 +26,8 @@ export async function nativeComparisonFixture(fileKey?: string, gridRoot: boolea
     description: 'Synthetic compiler comparison fixture, never native fidelity evidence', props: [], states: [], semantics: { element: 'button' }, anatomy,
     bindings: { code: { anchors: { importPath: './fixture', export: 'Fixture' } }, figma: { anchors: { fileKey: null, componentSetKey: null } } } });
   const main = contract('fixture.main', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{surface}' } } });
-  if (gridRoot) {
+  if(gridRoot==='column') main.anatomy.root.layout={display:'flex',direction:'column'};
+  if (gridRoot && gridRoot!=='column') {
     main.anatomy.root.layout = { display: 'grid', columns: [{fr:1},{fr:1}], rows: [{fit:true},{fit:true}], flow:'row' };
     if(gridRoot==='flow') { main.anatomy.root.layout.columns=[{fr:1}];delete main.anatomy.root.layout.rows;main.anatomy.root.layout.autoRows={fit:true}; }
     main.anatomy.root.literals = {width:'300px',height:'fit-content'};

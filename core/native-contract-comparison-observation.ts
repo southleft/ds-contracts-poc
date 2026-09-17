@@ -213,11 +213,18 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
     // Content changes a hugging instance's geometry, but not the main's styles,
     // property bindings or other children. Compare every remaining observed field.
     const geometry = new Set(['x','y','width','height','relativeTransform','resolvedVariableModes','explicitVariableModes']);
-    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'contentSpecPath' | 'variantName' | 'specs'> & { contentMode?: 'source-owned' };
+    type Reference = Pick<PreparedNativeContractComparison, 'parent' | 'slotSpecPath' | 'contentSpecPath' | 'variantName' | 'specs'> & { contentMode?: 'source-owned'; instanceWidth?: number };
     const pair = (original: Row | undefined, actual: Row | undefined, specPath: number[],
       reference: Reference = p, record: Row = c.comparisons[0], parentNodes = new Map(p.receipt.nodes!.map(n => [n.id, n]))) => {
       if (!original || !actual || checked.has(actual.id)) { issue('main-instance-pairing'); return; }
       checked.add(actual.id);
+      if (!specPath.length && reference.instanceWidth !== undefined &&
+          (!numeric(actual.values.width, reference.instanceWidth) || actual.values.layoutSizingHorizontal !== 'FIXED' ||
+            actual.values.counterAxisSizingMode !== 'FIXED' || actual.values.layoutMode !== 'VERTICAL'))
+        issue('instance-width', actual);
+      const callerWidthSlot=reference.instanceWidth !== undefined && same(specPath,reference.slotSpecPath);
+      if(callerWidthSlot && (actual.values.layoutSizingHorizontal!=='FILL' || actual.values.counterAxisSizingMode!=='FIXED'))
+        issue('instance-width-slot',actual);
       const fullWidth = reference.parent.component.variants.find(v => v.name === reference.variantName)?.spec.rootFillWidth;
       if (!specPath.length && fullWidth) {
         const host = nodes.get(actual.parentId)?.values;
@@ -245,6 +252,7 @@ export function verifyNativeContractComparisonReadback(input: NativeContractComp
             [actual.values[field], original.values[field]].every(value => value === null || same(value, {}))) continue;
         if (!specPath.length && NATIVE_GRID_CHILD_FIELDS.includes(field) && nodes.get(actual.parentId)?.values.layoutMode === 'GRID') continue;
         if (!specPath.length && fullWidth && field === 'layoutSizingHorizontal') continue;
+        if (((!specPath.length && reference.instanceWidth !== undefined) || callerWidthSlot) && ['counterAxisSizingMode','layoutSizingHorizontal'].includes(field)) continue;
         if (contentGrid?.layout?.grid?.flowRows && ['gridRowCount', 'gridRowSizes'].includes(field)) continue;
         if ((!geometry.has(field) || reference.contentMode === 'source-owned' &&
             (['width', 'height'].includes(field) || specPath.length > 0 && ['x', 'y', 'relativeTransform'].includes(field))) &&

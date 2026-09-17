@@ -30,6 +30,8 @@ export interface NativeContractComparisonInput {
   caseId: string;
   variantName: string;
   slotSpecPath: number[];
+  /** Authenticated width of this caller usage, never a reusable main size. */
+  instanceWidth?: number;
   /** Host-selected source ownership mappings; never inferred by component name or paint. */
   instances?: NativeContractComparisonReference[];
 }
@@ -85,6 +87,20 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   };
   const selected = select(input);
   if (selected.fillWidth) fail('root-fill-width-needs-parent-context');
+  if (input.instanceWidth !== undefined) {
+    const root = input.parent.component.variants.find(v => v.name === input.variantName)!.spec;
+    let slot = root;
+    for (const index of input.slotSpecPath) slot = slot.children![index];
+    if (!Number.isFinite(input.instanceWidth) || input.instanceWidth <= 0 || input.instanceWidth > 100000 ||
+        root.layout?.mode !== 'VERTICAL' || !root.layout.stretchChildren || root.fixedWidth ||
+        root.lits?.width !== undefined || root.lits?.minWidth !== undefined ||
+        ['width','minWidth','maxWidth'].some(k => root.bindings?.[k]) ||
+        !slot.rootSlotContent || slot.layout?.mode !== 'VERTICAL' || !slot.layout.stretchChildren ||
+        slot.fixedWidth || slot.lits?.width !== undefined || slot.lits?.minWidth !== undefined ||
+        ['width','minWidth','maxWidth'].some(k=>slot.bindings?.[k]) ||
+        input.slotSpecPath.length !== 1 || selected.contentSpecPath)
+      fail('instance-width-unqualified');
+  }
   if ((input.instances?.length ?? 0) > 128) fail('nested-main-limit');
   const instances = (input.instances ?? []).map(reference => {
     if (reference.parent.operation.fileKey !== input.parent.operation.fileKey ||
@@ -182,7 +198,8 @@ export function prepareNativeContractComparison(contract: Contract, component: C
       const hostRoot = hostReference.parent.component.variants.find(v => v.name === hostReference.variantName)!.spec;
       host = hostRoot;
       for (const index of hostReference.contentSpecPath ?? hostReference.slotSpecPath) host = host.children![index];
-      definite = fixedWidth(host) || Boolean(host.rootSlotContent && (hostRoot.rootFillWidth || fixedWidth(hostRoot)));
+      definite = fixedWidth(host) || Boolean(host.rootSlotContent && (hostRoot.rootFillWidth || fixedWidth(hostRoot) ||
+        (!parentPath.length && input.instanceWidth !== undefined)));
     } else {
       host = root;
       for (const index of parentPath) host = host.children![index];
@@ -194,7 +211,8 @@ export function prepareNativeContractComparison(contract: Contract, component: C
   const receipt = structuredClone(input.receipt); delete receipt.images;
   return { projection, boundNames: [...boundNames].sort(), parent: structuredClone(input.parent), receipt,
     caseId: input.caseId, ...selected, ...(contentRows ? { contentRows } : {}), variantName: input.variantName,
-    slotSpecPath: [...input.slotSpecPath], ...(instances.length ? { instances } : {}), specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
+    slotSpecPath: [...input.slotSpecPath], ...(input.instanceWidth !== undefined ? {instanceWidth:input.instanceWidth} : {}),
+    ...(instances.length ? { instances } : {}), specs, fonts: [...fonts.values()], nodeTypes: [...nodeTypes].sort(),
     revision: revisionOf({ contract, component, source, tokenRevision, context, input: { ...input, receipt } }) };
 }
 export type PreparedNativeContractComparison = ReturnType<typeof prepareNativeContractComparison>;
@@ -332,8 +350,29 @@ async function nativeBuildContractComparison() {
 
 /** Preserve the existing receipt/script format when no verified grid carrier is
  * involved. Only compiler-owned content frames can become insertion targets. */
-export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false): string {
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false): string {
   let script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+  if (instanceWidth) script = script.replace('  pair(main, inst, []);', `  pair(main, inst, []);
+  if (c.instanceWidth !== undefined) {
+    if (inst.layoutMode !== 'VERTICAL') nativeRefuse('comparison-instance-width-layout');
+    const primarySizing = inst.primaryAxisSizingMode, verticalSizing = inst.layoutSizingVertical;
+    // Use the standard resize operation used by guarded root-size repair.
+    // Native resizeWithoutConstraints can leave a hugging instance at its
+    // intrinsic width before the later FIXED assignment (live Card evidence).
+    inst.resize(c.instanceWidth, inst.height);
+    inst.counterAxisSizingMode = 'FIXED';
+    inst.layoutSizingHorizontal = 'FIXED';
+    inst.primaryAxisSizingMode = primarySizing;
+    inst.layoutSizingVertical = verticalSizing;
+    if (Math.abs(inst.width - c.instanceWidth) > 0.001 || inst.layoutSizingHorizontal !== 'FIXED')
+      nativeRefuse('comparison-instance-width-refused');
+  }`).replace('  const slot = parts.get(nativeCanonical(c.slotSpecPath));', `  const slot = parts.get(nativeCanonical(c.slotSpecPath));
+  if (c.instanceWidth !== undefined) {
+    if (!slot || slot.type !== 'SLOT' || slot.parent !== inst) nativeRefuse('comparison-instance-width-slot');
+    slot.counterAxisSizingMode = 'FIXED';
+    slot.layoutSizingHorizontal = 'FILL';
+    if (slot.layoutSizingHorizontal !== 'FILL') nativeRefuse('comparison-instance-width-slot-refused');
+  }`);
   if (sourceOwned) script = script.replace(
     '  const slot = parts.get(nativeCanonical(c.slotSpecPath));',
     "  if (c.contentMode === 'source-owned') { recorded.status = 'created-comparison'; return inst; }\n  const slot = parts.get(nativeCanonical(c.slotSpecPath));"

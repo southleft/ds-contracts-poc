@@ -221,8 +221,8 @@ test('comparison variant selection preserves typed null, string null, defaults a
 });
 
 
-async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, block = false) {
-  const f = await fixture(undefined, fillWidth ? 'flow' : grid);
+async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, block = false, callerWidth = false) {
+  const f = await fixture(undefined, callerWidth ? 'column' : fillWidth ? 'flow' : grid);
   const child = f.contract('fixture.child', { root: { slot: { name: 'children' }, layout: { display: 'inline-flex', direction: 'row' }, tokens: { 'background-color': '{ink}' } } });
   if(grid) {
     child.anatomy.root.layout={display:'grid',columns:[{fr:1},{fr:1}],rows:[{fit:true},{fit:true}],flow:'row'};
@@ -254,7 +254,7 @@ async function nestedFixture(grid: boolean | 'flow' = false, fillWidth = false, 
   if(grid==='flow')Object.assign(content.anatomy.root.parts!.second.parts!,{thirdLabel:text('Third'),fourthLabel:text('Fourth')});
   if(block){content.anatomy.root.parts!.first.literals={width:'300px'};content.anatomy.root.parts!.first.layout!.direction='column';}
   const reference = { parent, receipt, variantName: data.component.variants[0].name, slotSpecPath: [0] };
-  const selected: NativeContractComparisonInput = { ...f.comparison, instances: (block?[[0,0],[1]]:[[0], [0, 0], [1]]).map(specPath => ({ ...reference, specPath })) };
+  const selected: NativeContractComparisonInput = { ...f.comparison, ...(callerWidth?{instanceWidth:360}:{}), instances: (block?[[0,0],[1]]:[[0], [0, 0], [1]]).map(specPath => ({ ...reference, specPath })) };
   const emit = (c=content, selection=selected) => f.emit(c, selection);
   const observe = async (creation: any) => {
     const component = f.engine.compileComponentData(content, new Map([[content.id, content]]));
@@ -314,6 +314,17 @@ for (const grid of [false, 'flow'] as const) test(`nested full-width content use
   const count=f.figma.root.findAll(()=>true).length;
   assert.equal((await f.run(f.emit())).allocationAttempted,false);
   assert.equal(f.figma.root.findAll(()=>true).length,count);
+});
+
+test('caller width establishes the containing block for nested full-width instances',async()=>{
+  const f=await nestedFixture(false,true,false,true), missing={...f.selected};delete missing.instanceWidth;
+  assert.throws(()=>f.emit(f.content,missing),/nested-fill-width-parent-unqualified/);
+  const creation=await f.run(f.emit());assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const {input,receipt}=await f.observe(creation), report=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(report.status,'supported-comparison-structure-observed',JSON.stringify(report));
+  for(const record of creation.comparisons[0].nested){const node=await f.figma.getNodeByIdAsync(record.instanceId);assert.equal(node.layoutSizingHorizontal,'FILL');assert.equal(node.width,360);}
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.reference.parent)),f.reference.receipt);
 });
 
 for (const grid of [false, true, 'flow'] as const) test(`nested caller content keeps linkage, token contexts and editable slots (${grid === 'flow' ? 'managed grid' : grid ? 'grid' : 'flex'})`, async () => {
@@ -466,6 +477,40 @@ test('observed unit grid cells enter a row-flow carrier only when placements agr
   wrong.content.nodes.find((n:any)=>n.id===slot.contentNodeIds[1]).values.gridRowAnchorIndex=0;
   assert.equal(verifyNativeContractComparisonReadback(input,wrong).status,'refused');
   assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+});
+
+test('caller width sizes only the comparison instance and independent readback rejects width or mode drift', async()=>{
+  const f=await fixture(undefined,'column');
+  const main=await f.figma.getNodeByIdAsync(f.comparison.parent.creation.variants[0].id);
+  const createInstance=main.createInstance.bind(main);
+  main.createInstance=()=>{
+    const instance=createInstance(), resize=instance.resizeWithoutConstraints.bind(instance);
+    // A native retained instance remained 1 px after this API followed
+    // by FIXED. Model that observation locally; do not alter old fixtures.
+    instance.resizeWithoutConstraints=(width:number,height:number)=>{
+      const intrinsicWidth=instance.width, hugging=instance.counterAxisSizingMode==='AUTO';
+      resize(width,height);if(hugging)resize(intrinsicWidth,height);
+    };
+    return instance;
+  };
+  const selected={...f.comparison,instanceWidth:360};
+  const data=f.engine.compileComponentData(f.content,new Map([[f.content.id,f.content]]));
+  const comparison=prepareNativeContractComparison(f.content,data,f.source,revisionOf(f.tokens),{mode:'light',brand:'default'},selected);
+  const creation=await f.run(f.emit(f.content,selected));
+  assert.equal(creation.status,'created-candidate',JSON.stringify(creation));
+  const input:NativeContractComparisonObservationInput={operation:f.supplemental.operation,planRevision:revisionOf('caller width'),comparison,
+    tokenInput:f.supplemental.tokens.input,tokenIdentity:f.supplemental.tokens.identity,creation};
+  const receipt=await f.run(emitNativeContractComparisonReadbackScript(input));
+  const report=verifyNativeContractComparisonReadback(input,receipt);
+  assert.equal(report.status,'supported-comparison-structure-observed',JSON.stringify({report,values:receipt.content.nodes.find((n:any)=>n.id===creation.comparisons[0].instanceId).values}));
+  for(const change of [(v:any)=>{v.width=359},(v:any)=>{v.layoutSizingHorizontal='HUG'},(v:any)=>{v.counterAxisSizingMode='AUTO'}]){
+    const wrong=structuredClone(receipt);change(wrong.content.nodes.find((n:any)=>n.id===creation.comparisons[0].instanceId).values);
+    assert.equal(verifyNativeContractComparisonReadback(input,wrong).status,'refused');
+  }
+  assert.deepEqual(await f.run(emitNativeContractReadbackScript(f.comparison.parent)),f.comparison.receipt);
+  assert.equal((await f.run(f.emit(f.content,selected))).allocationAttempted,false);
+  for(const instanceWidth of [0,-1,NaN,Infinity,100001])assert.throws(()=>f.emit(f.content,{...selected,instanceWidth}),/instance-width-unqualified/);
+  const horizontal=await fixture();assert.throws(()=>horizontal.emit(horizontal.content,{...horizontal.comparison,instanceWidth:360}),/instance-width-unqualified/);
 });
 
 test('comparison selects Boolean variants without coercing strings or omitted inputs', () => {

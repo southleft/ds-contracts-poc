@@ -10,6 +10,7 @@ import { isReactComparisonRequest, type ReactComparisonRequest } from './react-c
 import { recompileSavedObservedContent } from './observed-content.js';
 import type { NativeContractObservationInput, NativeSourceReadback } from '../core/native-source-observation.js';
 import { reactComparisonVariant } from './react-comparison-plan.js';
+import {reactComparisonInstanceWidth} from './react-comparison-context.js';
 
 export function selectReactComparisonRequest(repoRoot: string, reference: ReactReference, root: ReactNativeRequest, parentOperationId: string, composition?: ReturnType<typeof readReactCompositionEvidence>): ReactComparisonRequest {
   const saved = readReactContentInspection(repoRoot, reference, root, parentOperationId);
@@ -50,6 +51,11 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
     (node.children ?? []).forEach((child, i) => walk(child, [...path, i]));
   }; walk(variant.spec, []);
   if (paths.length !== 1) throw Error('react-comparison-root-slot-ambiguous');
+  const originPath=path.join(repoRoot,'private/react-source-ownership',request.root.referenceId,request.root.ownership.id,request.root.caseId,'style-origin.json');
+  // The original reader authenticated this inventory above. Pin the current
+  // caller width into the comparison plan, leaving the main plan unchanged.
+  const instanceWidth=reactComparisonInstanceWidth(captured.tree,JSON.parse(readFileSync(originPath,'utf8')));
   return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.version === 2 ? composition!.content : content,
-    comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0], ...(request.version === 2 ? { instances: composition!.references } : {}) } };
+    comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0],
+      ...(instanceWidth!==undefined ? {instanceWidth} : {}), ...(request.version === 2 ? { instances: composition!.references } : {}) } };
 }
