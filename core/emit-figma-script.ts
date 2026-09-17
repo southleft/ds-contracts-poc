@@ -942,6 +942,22 @@ export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string
   );
 }
 
+/** Native Figma cannot bind an enclosing component's properties to content
+ * inside an instance slot. Insertion strips existing references; rebinding
+ * throws. Keep compilation inspectable, but refuse writes before allocation. */
+export function nativeCallerPropertyBlockers(data: ComponentData) {
+  const found = new Map<string, { property: string; kind: 'TEXT' | 'BOOLEAN'; nodeName: string }>();
+  const visit = (node: NodeSpec, insideCallerSlot: boolean) => {
+    const inside = insideCallerSlot || node.callerSlotProperty !== undefined;
+    if (inside) for (const [property, kind] of [[node.contentProp, 'TEXT'], [node.visibleProp, 'BOOLEAN']] as const) {
+      if (property) found.set(JSON.stringify([property, kind, node.name]), { property, kind, nodeName: node.name });
+    }
+    node.children?.forEach(child => visit(child, inside));
+  };
+  [...data.variants, ...(data.stateVariants ?? [])].forEach(variant => visit(variant.spec, false));
+  return [...found.values()];
+}
+
 /**
  * The compiled engine over one token corpus: reuse it across contracts (the
  * CLI builds it once for all 51). All functions inside are the generator's
@@ -7686,6 +7702,10 @@ function buildSyncScript(
     ...datas[0], stateVariants: undefined,
     variants: opts.nativeSampleSpecs.map((spec, index) => ({ name: '', row: index, col: 0, spec })),
   }] : datas;
+  const callerPropertyBlockers = featureDatas.flatMap(data => nativeCallerPropertyBlockers(data)
+    .map(blocker => `${data.contractId}:${blocker.property}:${blocker.nodeName}`));
+  if (callerPropertyBlockers.length)
+    throw Error('FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED: ' + callerPropertyBlockers.join(', '));
   const hasOpacity = featureDatas.some(dataHasOpacity);
   const hasNestedPropertyControls = featureDatas.some(d => d.nestedPropertyControls === 1);
   const hasShape = featureDatas.some((d) => dataSome(d, (x) => x.shape !== undefined));
@@ -8351,7 +8371,7 @@ ${hasCallerSlots ? `function callerCanExpose(instance) {
   }
   return false;
 }
-` : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller' : ''}) {
+` : ''}async function buildNode(spec, registry${hasCallerSlots ? ', caller, parent' : ''}) {
   let node;${opts.nativeSource ? '\n  nativeFileGuard();' : ''}${opts.nativeNestedComparison ? '\n  if (spec.nativeContractSample?.instance !== undefined) return await nativeBuildNestedContractComparison(spec);' : ''}
   ${hasCallerSlots ? `if (spec.callerSlotProperty) {
     if (!caller || caller.type !== 'INSTANCE') throw Error('CALLER_SLOT_INSTANCE_REQUIRED');
@@ -8513,7 +8533,11 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
-${hasCallerSlots ? `  if (spec.type === 'instance' && spec.children) {
+${hasCallerSlots ? `  // Attach before populating caller slots. Moving an already-populated
+  // instance into another instance's slot invalidates its private sublayers
+  // in native Figma. Frames carrying such instances must also be built in place.
+  if (parent && !spec.callerSlotProperty) parent.appendChild(node);
+  if (spec.type === 'instance' && spec.children) {
     for (const child of spec.children) {
       if (!child.callerSlotProperty) throw Error('CALLER_SLOT_SPEC_REQUIRED');
       const slot = await buildNode(child, registry, node);
@@ -8527,8 +8551,8 @@ ${hasCallerSlots ? `  if (spec.type === 'instance' && spec.children) {
   }
 ` : ''}  const built = [];
   for (const child of spec.children || []) {
-    const childNode = await buildNode(child, registry);
-    node.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'node')}
+    const childNode = await buildNode(child, registry${hasCallerSlots ? ', undefined, node' : ''});
+    ${hasCallerSlots ? 'if (childNode.parent !== node) ' : ''}node.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'node')}
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);${absoluteCall(hasAbsolute, 'node, childNode, child')}
     if (child.pct != null) {
@@ -8777,7 +8801,7 @@ async function amendSet(set, C) {
     let comp = existingByName.get(v.name);
     const registry = { texts: [], slots: [], visibles: [] };
     if (!comp) {
-      comp = await buildNode(v.spec, registry);
+      comp = await buildNode(v.spec, registry${hasCallerSlots ? ', undefined, set' : ''});
       set.appendChild(comp);
       report.addedVariants.push(v.name);
     } else {
@@ -8786,8 +8810,8 @@ async function amendSet(set, C) {
       registry.owner = comp;` : ''}
       const built = [];
       for (const childSpec of v.spec.children || []) {
-        const childNode = await buildNode(childSpec, registry);
-        comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
+        const childNode = await buildNode(childSpec, registry${hasCallerSlots ? ', undefined, comp' : ''});
+        ${hasCallerSlots ? 'if (childNode.parent !== comp) ' : ''}comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
         if (childSpec.pct != null) {
@@ -8989,8 +9013,8 @@ async function amendComponent(comp, C) {
   registry.owner = comp;` : ''}
   const built = [];
   for (const childSpec of v.spec.children || []) {
-    const childNode = await buildNode(childSpec, registry);
-    comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
+    const childNode = await buildNode(childSpec, registry${hasCallerSlots ? ', undefined, comp' : ''});
+    ${hasCallerSlots ? 'if (childNode.parent !== comp) ' : ''}comp.appendChild(childNode);${overflowPropagateCall(hasAbsolute || hasInsetOverlay, 'childNode', 'comp')}
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
     if (childSpec.pct != null) {
@@ -9161,7 +9185,7 @@ ${opts.nativeComparisons ? NATIVE_COMPARISONS_RUNTIME : ''}async function syncOn
   const built = [];
   for (const v of EV) {
     const registry = { texts: [], slots: [], visibles: [] };
-    const comp = await buildNode(v.spec, registry);${hasNestedPropertyControls ? `
+    const comp = await buildNode(v.spec, registry${hasCallerSlots ? ', undefined, compPage' : ''});${hasNestedPropertyControls ? `
     for (const instance of registry.nestedControls || []) ${hasCallerSlots ? 'if (callerCanExpose(instance)) ' : ''}instance.isExposedInstance = true;` : ''}
     built.push({ v, comp, registry });
   }

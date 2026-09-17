@@ -104,10 +104,14 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
         <button type="button" onClick={() => setPreview(value => !value)}>{preview ? 'Close generated composition' : 'Try generated composition'}</button>
         <button type="button" disabled={busy} onClick={() => void compileNative()}>Check native composition</button>
         {native && <section aria-label="Native composition compilation">
-          <h5>Native composition compiled · delivery unfinished</h5>
+          <h5>{native.unsupportedPropertyBindings?.length ? 'Native composition blocked · unsupported property bindings' : 'Native composition compiled · delivery unfinished'}</h5>
           <p>{native.components.length} components compiled at the observed {native.observedWidth} px width, with separate token and asset identities for each component. This check creates no Figma objects.</p>
           <ul>{native.components.map(component => <li key={component.contractId}>{component.contractId === draft.contract!.id ? 'Source composition' : draft.children.find(child => child.contractId === component.contractId)?.exportName ?? component.name}: {component.variants} native {component.variants === 1 ? 'variant' : 'variants'}{component.editableTextProperties.length ? `, ${component.editableTextProperties.length} caller text properties` : ''}.</li>)}</ul>
           <p>Before delivery, the application must verify reuse of the existing child components and connect this graph to the companion operation. Live editing and visual verification remain required.</p>
+          {!!native.unsupportedPropertyBindings?.length && <div role="alert">
+            <p>Figma cannot connect these parent properties to content inside a nested instance slot. Delivery is refused before creating nodes; the requested mappings have not been dropped.</p>
+            <ul>{native.unsupportedPropertyBindings.map(binding => <li key={`${binding.contractId}:${binding.property}:${binding.nodeName}`}>{binding.property} → {binding.nodeName} ({binding.kind.toLowerCase()}).</li>)}</ul>
+          </div>}
           {native.blockers.includes('source-context-differences-unqualified') && <p>The reported source typography differences still prevent qualification of child reuse.</p>}
         </section>}
         {preview && <iframe title="Generated React caller composition" src={`${url}/preview`} sandbox="allow-scripts" style={{ width: '100%', height: 900, border: '1px solid #ccc', marginTop: 12 }} />}

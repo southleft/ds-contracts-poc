@@ -1,7 +1,7 @@
 /** Compile the sealed source composition using the shared native engine.
  * This host-side bridge creates no operation, variables or Figma nodes. */
 import { walkAnatomy } from '../scripts/contract-schema.js';
-import { createFigmaEngine } from '../core/emit-figma-script.js';
+import { createFigmaEngine, nativeCallerPropertyBlockers } from '../core/emit-figma-script.js';
 import { scopeContractResources } from '../core/scoped-contract-resources.js';
 import { revisionOf } from '../core/contract-provenance.js';
 import type { projectReactCallerCompositionGraph } from './react-caller-composition.js';
@@ -13,6 +13,7 @@ export interface ReactCallerNativeCompilation {
   observedWidth: number;
   components: Array<{ contractId: string; name: string; variants: number; editableTextProperties: string[] }>;
   resources: Array<{ contractId: string; tokens: number; assets: number }>;
+  unsupportedPropertyBindings: Array<{ contractId: string; property: string; kind: 'TEXT' | 'BOOLEAN'; nodeName: string }>;
   blockers: string[];
 }
 export function compileReactCallerNative(graph: ReturnType<typeof projectReactCallerCompositionGraph>) {
@@ -33,14 +34,20 @@ export function compileReactCallerNative(graph: ReturnType<typeof projectReactCa
   const scoped = scopeContractResources(contracts, graph.resources);
   const engine = createFigmaEngine({ tokens: { primitives: scoped.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: scoped.icons });
   const components = [...scoped.contracts.values()].map(contract => engine.compileComponentData(contract, scoped.contracts));
+  const unsupportedPropertyBindings = components.flatMap(component => nativeCallerPropertyBlockers(component)
+    .map(binding => ({ contractId: component.contractId, ...binding })));
   const report: ReactCallerNativeCompilation = {
     status: 'compiled-draft', inputRevision: draft.inputRevision,
     graphRevision: revisionOf({ resources: scoped.revision, components }), observedWidth: draft.observedWidth!,
     components: components.map(c => ({ contractId: c.contractId, name: c.setName, variants: c.variants.length,
       editableTextProperties: scoped.contracts.get(c.contractId)!.props
-        .filter(p => p.type === 'text' && p.bindings.figma.kind === 'TEXT').map(p => p.bindings.figma.property!) })),
+        .filter(p => p.type === 'text' && p.bindings.figma.kind === 'TEXT' &&
+          !unsupportedPropertyBindings.some(binding => binding.contractId === c.contractId && binding.property === p.bindings.figma.property))
+        .map(p => p.bindings.figma.property!) })),
+    unsupportedPropertyBindings,
     resources: scoped.mappings.map(m => ({ contractId: m.contractId, tokens: m.tokenPaths.length, assets: m.assets.length })),
     blockers: [...(draft.contextDifferences.length ? ['source-context-differences-unqualified'] : []),
+      ...(unsupportedPropertyBindings.length ? ['native-caller-slot-property-bindings-unsupported'] : []),
       'native-dependency-reuse-unverified', 'native-composition-delivery-unimplemented', 'live-editability-and-fidelity-unverified'],
   };
   return { report, scoped, components };

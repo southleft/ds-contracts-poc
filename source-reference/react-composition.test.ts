@@ -80,7 +80,10 @@ test('source caller projection preserves editable content and distinct generated
   assert.deepEqual(graph, before, 'native projection cannot mutate the source-derived React graph');
   assert.equal(native.report.components.length, 2);
   assert.equal(native.report.observedWidth, 240);
-  assert.equal(native.report.components.find(c => c.contractId === draft.contract!.id)!.editableTextProperties.length, 2);
+  assert.equal(native.report.components.find(c => c.contractId === draft.contract!.id)!.editableTextProperties.length, 1);
+  assert.equal(native.report.unsupportedPropertyBindings.length, 1, 'nested slot text is not advertised as a working parent text property');
+  assert.equal(native.report.unsupportedPropertyBindings[0].kind, 'TEXT');
+  assert.ok(native.report.blockers.includes('native-caller-slot-property-bindings-unsupported'));
   assert.ok(native.report.blockers.includes('native-dependency-reuse-unverified'));
   assert.ok(native.report.blockers.includes('native-composition-delivery-unimplemented'));
   assert.equal(compileReactCallerNative(graph).report.graphRevision, native.report.graphRevision);

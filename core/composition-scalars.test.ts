@@ -476,7 +476,9 @@ test('native caller content populates linked slots without altering child mains 
         },
       } };
     }
-    const expectedText = (caption: string) => [...(mode === 'nested' ? ['Private heading'] : []), caption, 'Save'];
+    const expectedText = (caption: string, heading = 'Panel title') => [...(mode === 'nested' ? ['Private heading'] : []), caption, 'Save', heading];
+    parent.props.push({ name: 'heading', type: 'text', default: 'Panel title',
+      bindings: { code: { prop: 'heading' }, figma: { kind: 'TEXT', property: 'Heading' } } });
     parent.anatomy.root = { layout: { display: 'flex', direction: 'column' }, literals: { width: '300px', 'font-size': '12px' }, parts: {
       first: { component: { id: frame.id }, parts: {
         body: { component: { id: body.id }, parts: {
@@ -485,6 +487,7 @@ test('native caller content populates linked slots without altering child mains 
         } },
       } },
       empty: { component: { id: frame.id }, parts: {} },
+      heading: { content: { prop: 'heading' } },
     } };
     const dependencies = [child, frame, body];
     if (mode === 'grid-fill') {
@@ -497,10 +500,36 @@ test('native caller content populates linked slots without altering child mains 
     const contractsBefore = JSON.stringify([...ctx.contracts]);
     const engine = createFigmaEngine(ctx), data = engine.compileComponentData(parent, ctx.contracts);
     assert.equal(JSON.stringify([...ctx.contracts]), contractsBefore);
+    assert.throws(() => engine.buildComponentScript(parent, ctx.contracts), /FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED.*Caption/);
+    assert.throws(() => engine.buildBatchScript([data], null), /FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED.*Caption/);
+    // A contract explicitly requesting no native parent-property binding can
+    // still draw slot content. This is a distinct supported case, not an
+    // automatic downgrade of the rejected Caption mapping above.
+    parent.props[0].bindings.figma = { kind: 'NONE' };
+    parent.props.push({ name: 'showCaption', type: 'boolean', default: true,
+      bindings: { code: { prop: 'showCaption' }, figma: { kind: 'BOOLEAN', property: 'Show caption' } } });
+    const captionPart = parent.anatomy.root.parts!.first.parts!.body.parts!.caption;
+    captionPart.visibleWhen = { prop: 'showCaption' };
+    assert.throws(() => engine.buildComponentScript(parent, ctx.contracts), /FIGMA_CALLER_SLOT_PROPERTY_BINDING_UNSUPPORTED.*Show caption/);
+    delete captionPart.visibleWhen;
+    parent.props.pop();
     const { figma, root } = createFigmaMock();
     const context = vm.createContext({ figma, console: { log() {}, warn() {}, error() {} } });
     const run = (code: string) => vm.runInContext(`(async () => {\n${code}\n})()`, context, { timeout: 20_000 });
     for (const c of dependencies) await run(engine.buildComponentScript(c, ctx.contracts));
+    // Live Figma invalidates private sublayers when an instance whose slot
+    // already has caller content is moved into another instance's slot.
+    // This test-host guard rejects that observed bad construction order; it
+    // does not pretend to model Figma's virtual node IDs or their stale handles.
+    const prototype = Object.getPrototypeOf(root), append = prototype.appendChild;
+    prototype.appendChild = function (node: MockNode) {
+      if (this.type === 'SLOT' && this._owningInstance() && node.parent !== this) {
+        const populated = [node, ...node.findAll()].some((n: any) => n.type === 'INSTANCE' &&
+          Object.values(n._slotFills ?? {}).some((fill: any) => fill.length > 0));
+        if (populated) throw Error('native-slot-reparent-invalidates-populated-instance');
+      }
+      return append.call(this, node);
+    };
     const mains = dependencies.map(c => root.findOne(n => ['COMPONENT', 'COMPONENT_SET'].includes(n.type) && n.getSharedPluginData('ds_contracts', 'contractId') === c.id) as ComposedMockNode);
     const mainSnapshot = (main: ComposedMockNode) => JSON.stringify({ properties: main.componentPropertyDefinitions, nodes: main.findAll(() => true).map(n => [n.id, n.type, n.name, n.characters]) });
     const before = mains.map(mainSnapshot);
@@ -528,16 +557,21 @@ test('native caller content populates linked slots without altering child mains 
       'child-owned slots do not become disconnected parent properties');
     const instance = main.createInstance();
     assert.equal(instance.exposedInstances.length, 2, 'only eligible direct children are exposed by the parent');
-    const caption = Object.keys(instance.componentProperties).find(k => k.startsWith('Caption#'))!;
-    assert.ok(caption);
-    (instance as any).setProperties({ [caption]: 'Changed caller caption' });
-    assert.deepEqual(instance.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Changed caller caption'));
+    assert.equal(Object.keys(instance.componentProperties).some(k => k.startsWith('Caption#')), false);
+    const heading = Object.keys(instance.componentProperties).find(k => k.startsWith('Heading#'))!;
+    assert.ok(heading, 'direct component text can still bind while other content occupies nested slots');
+    (instance as any).setProperties({ [heading]: 'Changed panel title' });
+    assert.deepEqual(instance.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption', 'Changed panel title'));
     assert.deepEqual(main.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Caller caption'));
     instance.remove();
     const ids = main.findAll(() => true).map(n => n.id);
     await run(engine.buildComponentScript(parent, ctx.contracts));
     assert.deepEqual(main.findAll(() => true).map(n => n.id), ids);
     assert.equal(data.variants[0].spec.children![0].children![0].callerSlotProperty, 'Children');
+    parent.props[0].default = 'Amended caller caption';
+    await run(engine.buildComponentScript(parent, ctx.contracts));
+    assert.deepEqual(main.findAll(n => n.type === 'TEXT').map(n => n.characters), expectedText('Amended caller caption'));
+    assert.deepEqual(mains.map(mainSnapshot), before, 'amendment also builds caller content in place without changing dependencies');
     frame.anatomy.root.slot!.min = 1;
     assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /CALLER_PARTS_UNSUPPORTED/);
     delete frame.anatomy.root.slot!.min;
@@ -555,6 +589,7 @@ test('native caller content populates linked slots without altering child mains 
     parent.anatomy.root.parts!.empty.component!.text = 'Competing';
     assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /competing caller content/);
     delete parent.anatomy.root.parts!.empty.component!.text;
+    delete parent.anatomy.root.parts!.heading;
     delete parent.anatomy.root.literals!.width;
     assert.throws(() => engine.compileComponentData(parent, ctx.contracts), /full-width child needs a definite column or grid/);
     parent.anatomy.root.literals!.width = '300px';
