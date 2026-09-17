@@ -17,7 +17,7 @@ import { captureValidatedTree } from './capture.js';
 import { watchSourceFailures } from './observe.js';
 import { observeReactInitialStates } from './react-initial-state.js';
 import { evidenceSha, inventoryEvidence, evidenceUnchanged } from './react-validation-evidence.js';
-import { cropSourceFrame } from './source-framing.js';
+import { cropSourceFrame, type SourceFrame } from './source-framing.js';
 import { prepareObservedContentTree } from './observed-content.js';
 import { compileReactInitialContract } from './react-initial-contract.js';
 import { isReactInitialNativeRequest, type ReactInitialNativeRequest } from './react-initial-native-request.js';
@@ -90,13 +90,16 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
     const record = saved(value);
     return record ? derive(value, record) : undefined;
   };
-  const image = (record: ReturnType<typeof saved>, jobId: string, rowId: string) => {
+  const framedImage = (record: ReturnType<typeof saved>, jobId: string, rowId: string) => {
       const row = record?.report.observation?.rows.find(r => r.id === rowId && r.status === 'observed');
       if (!record || record.report.id !== jobId || !row?.image) throw Error('react-initial-image-unavailable');
       const png = readFileSync(path.join(record.dir, 'states', rowId + '.png'));
       const snapshot = JSON.parse(readFileSync(path.join(record.dir, 'states', rowId + '.json'), 'utf8'));
       if (evidenceSha(png) !== row.image || snapshot.image !== row.image || snapshot.treeSha256 !== row.treeSha256) throw Error('react-initial-image-changed');
-      return cropSourceFrame(png, snapshot.bounds).bytes;
+      const cropped = cropSourceFrame(png, snapshot.bounds);
+      const frame: SourceFrame = { version: 1, sourceSha256: row.image, inputSha256: revisionOf({ pin: record.pin, rowId }).slice(7),
+        imageSha256: evidenceSha(cropped.bytes), bounds: snapshot.bounds, crop: cropped.crop, sourceSize: cropped.sourceSize, qualification: 'unqualified' };
+      return { bytes: cropped.bytes, frame };
   };
   const nativeEvidenceFresh=(reference: ReactReference, request: ReactInitialNativeRequest) => {
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId)
@@ -112,7 +115,9 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
         const snapshot = JSON.parse(readFileSync(path.join(record.dir, 'states', variant.observation + '.json'), 'utf8'));
         return [variant.variant, prepareObservedContentTree(snapshot.tree, snapshot.fonts, snapshot.svg)];
       }));
-      return { draft: report.draft, composition: { source: report.observation!.source,
+      const frames = Object.fromEntries(report.draft.nativeVariants.map(variant =>
+        [variant.observation, framedImage(record, record.report.id, variant.observation).frame]));
+      return { draft: report.draft, frames, composition: { source: report.observation!.source,
         heldProps: report.observation!.heldProps, trees }, source: { revision: 'sha256:' + reference.id,
         programSha256: value.source.programSha256, evidenceRevision: revisionOf(request) } };
   };
@@ -132,11 +137,11 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId || !/^\d+$/.test(rowId))
         throw Error('react-initial-native-image-invalid');
       const value = from(reference, { version: 1, anchor: request.anchor, caseId: request.caseId });
-      return image(saved(value, request.observation), request.observation.id, rowId);
+      return framedImage(saved(value, request.observation), request.observation.id, rowId).bytes;
     },
     image(referenceId: string, caseId: string, jobId: string, rowId: string) {
       if (!/^\d+$/.test(rowId)) throw Error('react-initial-row-invalid');
-      return image(saved(input(referenceId, caseId)), jobId, rowId);
+      return framedImage(saved(input(referenceId, caseId)), jobId, rowId).bytes;
     },
     start(referenceId: string, caseId: string) {
       const value = input(referenceId, caseId), existing = active.get(value.key);

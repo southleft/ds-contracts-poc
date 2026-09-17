@@ -137,10 +137,10 @@ export function emitNativeSourceReadbackScript(
 ): string {
   return emitNativeInspectionReadbackScript(input, captureImages);
 }
-export function emitNativeContractReadbackScript(input: NativeContractObservationInput, captureImages = false): string {
-  return emitNativeInspectionReadbackScript(input, captureImages);
+export function emitNativeContractReadbackScript(input: NativeContractObservationInput, captureImages = false, captureExportBounds = false): string {
+  return emitNativeInspectionReadbackScript(input, captureImages, captureExportBounds);
 }
-export function emitNativeInspectionReadbackScript(input: NativeInspectionInput, captureImages = false): string {
+export function emitNativeInspectionReadbackScript(input: NativeInspectionInput, captureImages = false, captureExportBounds = false): string {
   checkInput(input);
   const expected = {
     operation: input.operation,
@@ -154,7 +154,7 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const hasText = (spec: NodeSpec): boolean => spec.type === 'text' || !!spec.children?.some(hasText);
   if (isContractDraft(input) && input.component.variants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
-    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, false, backgroundPaintIdentities(input.component));
+    isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, captureExportBounds, backgroundPaintIdentities(input.component));
 }
 
 /** Shared read-only inventory collector. Callers independently verify the

@@ -385,11 +385,12 @@ export function createReactReferenceService(
         json(res, 200, { operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
-          let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string }> | undefined;
+          let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
           if (row.kind === 'initial') {
             // A corrected compiler plan differs from creation without changing
             // its pinned source archive. Authenticate that archive separately.
-            try { initialStates = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id)).draft.nativeVariants; }
+            try { const evidence = thisInitialEvidence(jobs.reactInitialRequest(row.operation.id));
+              initialStates = evidence.draft.nativeVariants.map(state => ({ ...state, frame: evidence.frames[state.observation] })); }
             catch { /* Image endpoints independently refuse unavailable source. */ }
           }
           if (row.kind === 'comparison') {

@@ -69,7 +69,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
     return Object.fromEntries([
       ['update-preflight-readback',emitNativeContractUpdateScript(plan,'apply',true)],
       ['update-apply',emitNativeContractUpdateScript(plan)],
-      ['update-readback',readback(plan.after,true)],
+      ['update-readback',readback(plan.after,true,true)],
     ].map(([key,script])=>[key,{script,sha256:sha(script)}])) as Header['scripts'];
   };
   const load = (id: string) => evidenceReadOnce(displayScope, id, () => {
@@ -140,7 +140,10 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
   };
   const authenticateObservation=(l:Loaded) => {
     authenticatePlan(l);
-    if (l.state.observationScriptSha256 !== sha(readback(l.plan.after,true))) fail('current-reader-observation-required');
+    // Export geometry enriches images only. An otherwise current historical
+    // reader still proves structure; missing framing is reported separately.
+    if (![sha(readback(l.plan.after,true,true)), sha(readback(l.plan.after,true))].includes(l.state.observationScriptSha256 ?? ''))
+      fail('current-reader-observation-required');
   };
   const append=(l:Loaded,event:Omit<Extract<Entry,{kind:'dispatch'}>,'sequence'|'previous'>|Omit<Extract<Entry,{kind:'result'}>,'sequence'|'previous'>|Omit<Extract<Entry,{kind:'abandon-observation'}>,'sequence'|'previous'>) => {
     if(load(l.id).previous!==l.previous) fail('journal-changed');
@@ -176,7 +179,7 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
       // freshly authenticated unchanged plan can select today's reader.
       try {
         authenticatePlan(l);
-        const script=readback(l.plan.after,true);
+        const script=readback(l.plan.after,true,true);
         if(script!==program.script) {program={script,sha256:sha(script)};reader={version:1,inputRevision:revisionOf(l.plan.after)};}
       } catch { /* Deliver the historical reader; it cannot qualify current reuse. */ }
     }
