@@ -40,7 +40,14 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
   if (evidenceSha(readFileSync(path.join(dir, 'report.json'))) !== request.content.reportSha256) throw Error('react-comparison-report-changed');
   const captured = read('source-tree.json');
   if (canonicalJson(captured.tree) !== canonicalJson(original.captured.tree)) throw Error('react-comparison-source-changed');
-  const {content, sourceCompatibility} = recompileSavedObservedContent(captured.tree, read('text-fonts.json'), read('svg-viewports.json'), saved.content);
+  // Composed requests authenticate a freshly compiled, ownership-aware content
+  // plan through the pinned composition review above. The original flat
+  // snapshot is not their rendered input (it includes children replaced by
+  // linked mains); requiring it to recompile byte-identically would make an
+  // unrelated compiler improvement invalidate an unchanged composed plan.
+  const {content, sourceCompatibility} = request.version === 2
+    ? { content: composition!.content, sourceCompatibility: undefined }
+    : recompileSavedObservedContent(captured.tree, read('text-fonts.json'), read('svg-viewports.json'), saved.content);
   const contract = original.matrix.draft!.contract!;
   const variantName = reactComparisonVariant(contract, original.observedProps);
   const variant = parent.input.component.variants.find(v => v.name === variantName);
@@ -58,4 +65,13 @@ export function readReactComparisonEvidence(repoRoot: string, reference: ReactRe
   return { ...(sourceCompatibility ? {sourceCompatibility} : {}), source: { ...original.source, evidenceRevision: revisionOf(request) }, content: request.version === 2 ? composition!.content : content,
     comparison: { parent: parent.input, receipt: parent.receipt, caseId: request.root.caseId, variantName, slotSpecPath: paths[0],
       ...(instanceWidth!==undefined ? {instanceWidth} : {}), ...(request.version === 2 ? { instances: composition!.references } : {}) } };
+}
+
+/** Select only a new read-only mapping revision from the SAME archived input. */
+export function refreshReactComparisonEvidence(repoRoot: string, reference: ReactReference, request: ReactComparisonRequest,
+  parent: Parameters<typeof readReactComparisonEvidence>[3], composition?: ReturnType<typeof readReactCompositionEvidence>) {
+  const selected = structuredClone(request);
+  if (selected.version === 2 && composition?.review.status === 'ready')
+    selected.composition = { revision: composition.review.inputRevision };
+  return { request: selected, evidence: readReactComparisonEvidence(repoRoot, reference, selected, parent, composition) };
 }

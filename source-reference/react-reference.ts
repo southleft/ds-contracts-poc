@@ -3,7 +3,7 @@ import { restoreReactOwnership } from './react-ownership-restore.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
-import { selectReactComparisonRequest, readReactComparisonEvidence } from './react-comparison-evidence.js';
+import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore } from './react-source-framing.js';
 import { createReactInitialInspectionStore } from './react-initial-inspection.js';
 import type { ReactComparisonRequest } from './react-comparison-request.js';
@@ -730,6 +730,12 @@ export function createReactReferenceService(
     initialNativeEvidence(request: ReactInitialNativeRequest) {
       if (!reference) throw Error('react-initial-native-reference-unavailable');
       return initialStates.nativeEvidence(reference, request);
+    },
+    refreshComparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
+      if (!reference) throw Error('react-native-reference-unavailable');
+      return refreshReactComparisonEvidence(repoRoot, reference, request, parent, request.version === 2
+        ? readReactCompositionEvidence(repoRoot, reference, request.root, request.parentOperationId, native!().jobs,
+          { id: request.content.id, inventorySha256: request.content.inventorySha256 }, initialStates.nativeEvidence) : undefined);
     },
     comparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');

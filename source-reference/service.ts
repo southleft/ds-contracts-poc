@@ -141,6 +141,10 @@ export function createReferenceService(
         }),
       },
       reactComparison: {
+        refresh: (request, operation) => {
+          const fresh = reactReference.refreshComparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
+          return {request:fresh.request,plan:prepareReactComparisonPlan({...fresh.evidence,operation})};
+        },
         prepare: (request, operation) => {
           const evidence = reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId));
           return {

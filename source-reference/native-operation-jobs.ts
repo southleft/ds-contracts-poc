@@ -1,3 +1,4 @@
+import {refreshedComparisonPlan,type ReactComparisonRefresh} from './react-comparison-refresh.js';
 import { prepareNativeComparisonRepair, emitNativeComparisonRepairScript, nativeComparisonRepairMatches, type NativeComparisonRepairPlan } from '../core/native-comparison-repair.js';
 import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
 import { isReactInitialNativeRequest, reactInitialNativeReservation, type ReactInitialNativeRequest } from './react-initial-native-request.js';
@@ -128,6 +129,7 @@ export interface NativeOperationResult {
     | Record<string, unknown>;
 }
 export interface NativeOperationSnapshot {
+  comparisonBaselineRefreshed?: boolean;
   id: string;
   componentName?: string;
   sourceOwnedContent?: boolean;
@@ -194,7 +196,7 @@ type Event = {
   previousSha256: string;
   recordedAt: string;
 } & (
-  | { kind: "dispatch"; command: Dispatch; comparisonRepair?: NativeComparisonRepairPlan }
+  | { kind: "dispatch"; command: Dispatch; comparisonRepair?: NativeComparisonRepairPlan; comparisonRefresh?: ReactComparisonRefresh }
   | { kind: "result"; envelope: NativeOperationResult }
   | { kind: "abandon-observation"; attemptId: string }
   | { kind: "retry-refused-creation" }
@@ -215,6 +217,7 @@ interface State {
   recoveryWritten?: boolean;
   comparisonRepair?: NativeComparisonRepairPlan;
   repairWritten?: boolean;
+  comparisonRefresh?: ReactComparisonRefresh;
 }
 export interface NativeOperationJobsOptions {
   reactInitial?: {
@@ -222,6 +225,7 @@ export interface NativeOperationJobsOptions {
     buildComponent(request: ReactInitialNativeRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
   };
   reactComparison?: {
+    refresh?(request: ReactComparisonRequest, operation: { id: string; fileKey: string }): ReactComparisonRefresh;
     prepare(request: ReactComparisonRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ComparisonPlan>;
     buildComponent(request: ReactComparisonRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
   };
@@ -758,6 +762,7 @@ export function createNativeOperationJobs(
     };
   };
   const comparisonObservationInput = (state: State, plan: ComparisonPlan): NativeContractComparisonObservationInput => {
+    if (state.comparisonRefresh) plan = refreshedComparisonPlan(plan, state.comparisonRefresh.request, state.comparisonRefresh);
     if (!state.identity || !state.componentCreation) fail('component-allocation-identity-unavailable');
     return { operation: plan.plan.operation, planRevision: plan.revision, comparison: plan.plan.comparison,
       tokenInput: plan.plan.tokenInput, tokenIdentity: state.identity, creation: state.componentCreation };
@@ -907,6 +912,13 @@ export function createNativeOperationJobs(
         fail("journal-chain-invalid");
       if (event.kind === "dispatch") {
         const c = event.command;
+        if (event.comparisonRefresh) {
+          if (c.phase !== "component-readback" || !c.readOnly || !isComparisonPlan(plan) || !isReactComparisonRequest(header.request)) fail("comparison-refresh-read-only");
+          refreshedComparisonPlan(plan,header.request,event.comparisonRefresh);
+          state.comparisonRefresh=structuredClone(event.comparisonRefresh);
+          // Preserve the issued reader across compiler upgrades. Its bytes are
+          // hash-bound below; the independent verifier uses the pinned input.
+        }
         if (sequence === 0 && (!same(c, claim) || c.phase !== "token-create"))
           fail("creation-claim-mismatch");
         if (
@@ -1087,7 +1099,7 @@ export function createNativeOperationJobs(
   type Loaded = ReturnType<typeof loadFresh>;
   const load = (id: string): Loaded => readOnce('journal:'+id, () => loadFresh(id));
   const authenticate = (loaded: Loaded) => readOnce('source:'+loaded.header.id+':'+loaded.fingerprint, () => {
-    const current = prepareInput(structuredClone(loaded.header.request), {
+    const current = prepareInput(structuredClone(loaded.state.comparisonRefresh?.request ?? loaded.header.request), {
       id: loaded.header.id,
       fileKey: loaded.header.policy.fileKey,
     });
@@ -1096,7 +1108,7 @@ export function createNativeOperationJobs(
     if (
       !same(current.visual, loaded.header.visual) ||
       !same(current.preparation, loaded.header.preparation) ||
-      !same(current.plan, loaded.plan)
+      !same(current.plan, loaded.state.comparisonRefresh?.plan ?? loaded.plan)
     )
       fail("source-plan-stale");
     if (loadFresh(loaded.header.id).fingerprint !== loaded.fingerprint)
@@ -1149,6 +1161,7 @@ export function createNativeOperationJobs(
     return {
       id: loaded.header.id,
       operation: "source-native-inspection",
+      ...(loaded.state.comparisonRefresh ? {comparisonBaselineRefreshed:true}:{}),
       canResumeComparison: sourceCurrent && canRecover(loaded.state,loaded.plan),
       ...(sourceCurrent && availableRepair(loaded.state,loaded.plan) ? {comparisonRepair:{changes:structuredClone(availableRepair(loaded.state,loaded.plan)!.changes)}} : {}),
       ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.instanceWidth !== undefined
@@ -1217,7 +1230,7 @@ export function createNativeOperationJobs(
   const append = (
     loaded: Loaded,
     event:
-      | { kind: "dispatch"; command: Dispatch; comparisonRepair?: NativeComparisonRepairPlan }
+      | { kind: "dispatch"; command: Dispatch; comparisonRepair?: NativeComparisonRepairPlan; comparisonRefresh?: ReactComparisonRefresh }
       | { kind: "result"; envelope: NativeOperationResult }
       | { kind: "abandon-observation"; attemptId: string }
       | { kind: "retry-refused-creation" },
@@ -1379,6 +1392,8 @@ export function createNativeOperationJobs(
     if (loaded.state.pending) fail("native-outcome-unknown");
     let script: string;
     let comparisonRepair: NativeComparisonRepairPlan | undefined;
+    let comparisonRefresh: ReactComparisonRefresh | undefined;
+    if (loaded.state.comparisonRefresh && !phase.endsWith("readback")) fail("comparison-refresh-read-only");
     if (phase === "token-create") {
       if (loaded.state.dispatchedCreate) fail("creation-already-dispatched");
       authenticate(loaded);
@@ -1437,7 +1452,15 @@ export function createNativeOperationJobs(
       // Known allocations remain inspectable when the source changes. This
       // observes the saved plan only; sourceCurrent is checked separately and
       // observation never authorizes admission, allocation or baseline changes.
-      script = isComparisonPlan(loaded.plan) ? emitNativeContractComparisonReadbackScript(comparisonObservationInput(loaded.state, loaded.plan), true) : emitNativeInspectionReadbackScript(
+      if(isComparisonPlan(loaded.plan) && isReactComparisonRequest(loaded.header.request) && options.reactComparison?.refresh) {
+        try {
+          const fresh=options.reactComparison.refresh(structuredClone(loaded.header.request),loaded.plan.plan.operation);
+          refreshedComparisonPlan(loaded.plan,loaded.header.request,fresh);
+          if(loadFresh(id).fingerprint!==loaded.fingerprint) fail('evidence-changed-during-validation');
+          if (!same(fresh.plan,loaded.plan)) comparisonRefresh=fresh;
+        } catch { /* Historical reads remain possible; freshness still refuses. */ }
+      }
+      script = isComparisonPlan(loaded.plan) ? emitNativeContractComparisonReadbackScript(comparisonObservationInput({...loaded.state,...(comparisonRefresh?{comparisonRefresh}:{})}, loaded.plan), true) : emitNativeInspectionReadbackScript(
         componentObservationInput(loaded.state, loaded.plan), true,
       );
     } else fail("phase-invalid");
@@ -1454,7 +1477,7 @@ export function createNativeOperationJobs(
       readOnly: phase.endsWith("-readback"),
       script,
     };
-    append(loaded, { kind: "dispatch", command, ...(comparisonRepair?{comparisonRepair}:{}) });
+    append(loaded, { kind: "dispatch", command, ...(comparisonRepair?{comparisonRepair}:{}),...(comparisonRefresh?{comparisonRefresh}:{}) });
     return structuredClone(command);
   };
   const accept = (
