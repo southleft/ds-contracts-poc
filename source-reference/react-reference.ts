@@ -321,7 +321,10 @@ export function createReactReferenceService(
           } else if (nativeRoute?.[2]) {
             const job = ownershipJobs.get(reference.id);
             if (!job) throw Error('react-native-observation-required');
-            jobs.prepare(selectReactNativeRequest(repoRoot, job.report(), nativeRoute[2]));
+            const report = job.report();
+            const existing = jobs.listReact(reference.id).find(row => row.kind === 'root' && row.caseId === nativeRoute[2] && row.ownershipId === report.id);
+            if (existing) jobs.get(existing.operation.id);
+            else jobs.prepare({ ...selectReactNativeRequest(repoRoot, report, nativeRoute[2]), compilation: 'current' });
           } else if (nativeAction) {
             const id = nativeAction[2];
             if (jobs.reactIdentity(id).referenceId !== reference.id) throw Error('react-native-operation-mismatch');

@@ -34,6 +34,8 @@ These steps describe the intended product workflow. The full application integra
 
 **No complete journey cohort has yet met the current v1 criteria.** Existing evidence reduces implementation uncertainty, but it is not a percentage of product completion. We do not have an evidence-backed completion date.
 
+New root drafts can use the current compiler with unchanged, verified source observations, without repeating the source capture. Their prepared output is pinned before creation. Existing operations retain their original identity and evidence; compiler changes do not authorize replacing them.
+
 ### What the React application can do now
 
 The local `/sources` page opens a fixed ten-case shadcn cohort: Button, Checkbox and a composed Card. **Validate React sources** checks the originals, theme, fonts and selected states against an isolated archived replay; representative cases must reject deliberately missing or hidden content and assets. This is a configured source preset, not arbitrary repository onboarding. The [React V1 scope](../docs/REACT-V1-SCOPE.md) defines the cohort and required outcomes.

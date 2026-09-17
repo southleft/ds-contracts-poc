@@ -2,6 +2,8 @@ import { createHash } from 'node:crypto';
 
 export interface ReactNativeRequest {
   version: 1 | 2 | 3;
+  /** New preparation from authenticated source facts; historical journals omit it. */
+  compilation?: 'current';
   selection?: { instanceId: string };
   constraints?: { operationId: string; id: string; inventorySha256: string };
   kind: 'react-root-draft';
@@ -15,6 +17,10 @@ const object = (v: unknown): v is Record<string, any> => !!v && typeof v === 'ob
 const hash = /^[a-f0-9]{64}$/;
 const uuid = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 export function isReactNativeRequest(v: unknown): v is ReactNativeRequest {
+  if (object(v) && 'compilation' in v) {
+    const { compilation, ...original } = v;
+    return compilation === 'current' && isReactNativeRequest(original);
+  }
   return object(v) && ((v.version === 1 && Object.keys(v).sort().join(',') === 'caseId,inventorySha256,kind,matrixRevision,ownership,referenceId,version') ||
     ((v.version === 2 && Object.keys(v).sort().join(',') === 'caseId,inventorySha256,kind,matrixRevision,ownership,referenceId,selection,version' ||
       v.version === 3 && Object.keys(v).sort().join(',') === 'caseId,constraints,inventorySha256,kind,matrixRevision,ownership,referenceId,selection,version' &&

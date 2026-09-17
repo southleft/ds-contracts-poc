@@ -16,7 +16,7 @@ export interface ReactNativePlanInput {
   source: NativeContractDraftSource;
   matrix: ReactRootMatrix | ReactChildRoot;
 }
-function nativeDraft(input: ReactNativePlanInput, recompileForCorrection = false) {
+function nativeDraft(input: ReactNativePlanInput, recompile = false) {
   const { matrix } = input, draft = matrix.draft;
   if (matrix.version !== 1 || !['combined-property-root-draft', 'observed-child-root-draft'].includes(matrix.qualification) ||
       matrix.acceptedContract !== null || matrix.problems.length ||
@@ -27,7 +27,7 @@ function nativeDraft(input: ReactNativePlanInput, recompileForCorrection = false
     primitives: draft.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} },
   }, icons: new Map(matrix.qualification==='observed-child-root-draft' ? matrix.assets : []) });
   const contracts = new Map([[draft.contract.id, draft.contract]]);
-  if (!recompileForCorrection && canonicalJson(engine.compileComponentData(draft.contract, contracts)) !== canonicalJson(draft.native))
+  if (!recompile && canonicalJson(engine.compileComponentData(draft.contract, contracts)) !== canonicalJson(draft.native))
     throw Error('react-native-plan-compiler-output-changed');
   const compiled = engine.compileNativeContractDraft(draft.contract, contracts, input.source);
   return { engine, contracts, draft, compiled };
@@ -37,17 +37,30 @@ export function prepareReactNativePlan(input: ReactNativePlanInput) {
   return preparePlan(input, false);
 }
 
+/** A new operation may compile unchanged, authenticated source facts with the
+ * current compiler. It receives its own pinned plan, never the revision of a
+ * historical creation or correction. The saved source draft stays immutable. */
+export function prepareReactNativeFreshPlan(input: ReactNativePlanInput) {
+  const compiled = preparePlan(input, true);
+  const plan = { ...compiled.plan, sourceCompilation: {
+    kind: 'fresh-from-authenticated-source' as const,
+    archivedDraftRevision: revisionOf(input.matrix.draft!.native),
+    componentRevision: compiled.plan.componentRevision,
+  } };
+  return { plan, revision: revisionOf(plan) };
+}
+
 /** The host must authenticate the original archive before requesting a current
- * compiler correction. Creation still requires its exact saved compiler output;
- * only the separate bounded update planner can authorize this desired state. */
+ * compiler correction. This revision cannot authorize creation; only the
+ * separate bounded update planner can authorize this desired state. */
 export function prepareReactNativeCorrectionPlan(input: ReactNativePlanInput) {
   return preparePlan(input, true);
 }
-function preparePlan(input: ReactNativePlanInput, recompileForCorrection: boolean) {
+function preparePlan(input: ReactNativePlanInput, recompile: boolean) {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input.operation.id) ||
       !/^[A-Za-z0-9]{10,80}$/.test(input.operation.fileKey))
     throw Error('react-native-plan-operation-invalid');
-  const { draft, compiled } = nativeDraft(input, recompileForCorrection);
+  const { draft, compiled } = nativeDraft(input, recompile);
   const tokenInput: NativeTokenContextInput = {
     fileKey: input.operation.fileKey, scopeId: `source-${input.operation.id}`,
     source: { revision: input.source.revision, sourceProgramSha256: input.source.programSha256,
@@ -75,11 +88,22 @@ export function buildReactNativeComponentWrite(input: ReactNativePlanInput & {
   expectedPlanRevision: string;
   tokens: NativeSourceWriteContext['tokens'];
 }) {
-  const current = prepareReactNativePlan(input);
+  return buildWrite(input, false);
+}
+export function buildReactNativeFreshComponentWrite(input: ReactNativePlanInput & {
+  expectedPlanRevision: string;
+  tokens: NativeSourceWriteContext['tokens'];
+}) {
+  return buildWrite(input, true);
+}
+function buildWrite(input: ReactNativePlanInput & {
+  expectedPlanRevision: string; tokens: NativeSourceWriteContext['tokens'];
+}, fresh: boolean) {
+  const current = fresh ? prepareReactNativeFreshPlan(input) : prepareReactNativePlan(input);
   if (current.revision !== input.expectedPlanRevision ||
       canonicalJson(current.plan.tokenInput) !== canonicalJson(input.tokens.input))
     throw Error('react-native-plan-write-stale');
-  const { engine, contracts, draft } = nativeDraft(input);
+  const { engine, contracts, draft } = nativeDraft(input, fresh);
   return { planRevision: current.revision, script: engine.buildNativeContractDraftScript(
     draft.contract!, contracts, input.source, { operation: input.operation, tokens: input.tokens },
   ) };

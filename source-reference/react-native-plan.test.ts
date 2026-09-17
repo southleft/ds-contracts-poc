@@ -11,7 +11,7 @@ import { revisionOf } from '../core/contract-provenance.js';
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from '../core/token-set.js';
 import { nativeFixtureHost } from './native-operation-test-fixture.js';
 import { SOURCE_NATIVE_FILE_KEY } from './native-operation-jobs.js';
-import { prepareReactNativePlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite } from './react-native-plan.js';
+import { prepareReactNativePlan, prepareReactNativeFreshPlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite, buildReactNativeFreshComponentWrite } from './react-native-plan.js';
 import type { ReactRootMatrix } from './react-root-matrix.js';
 import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from '../core/native-source-observation.js';
 import { collectNativeImages } from './native-operation-images.js';
@@ -20,7 +20,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createNativeOperationJobs, REACT_NATIVE_FILE_KEY, type NativeOperationJobsOptions } from './native-operation-jobs.js';
 import { createNativeOperationTransport } from './native-operation-transport.js';
-import { reactNativeReservation, type ReactNativeRequest } from './react-native-request.js';
+import { isReactNativeRequest, reactNativeReservation, type ReactNativeRequest } from './react-native-request.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { selectReactNativeRequest, readReactNativeEvidence } from './react-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
@@ -80,6 +80,16 @@ test('current correction compilation preserves archived output and cannot replac
   assert.ok(correction.plan.component.variants.every(v=>v.spec.effectStack?.length===1));
   assert.deepEqual(saved,frozen);
   assert.throws(()=>buildReactNativeComponentWrite({...saved,expectedPlanRevision:correction.revision,tokens:f.tokens}),/compiler-output-changed/);
+  const fresh = prepareReactNativeFreshPlan(saved);
+  assert.notEqual(fresh.revision, correction.revision, 'a new preparation has distinct authority from a correction');
+  assert.deepEqual(prepareReactNativeFreshPlan(saved), fresh);
+  assert.equal(fresh.plan.sourceCompilation.archivedDraftRevision, revisionOf(saved.matrix.draft!.native));
+  assert.throws(()=>buildReactNativeFreshComponentWrite({...saved,expectedPlanRevision:correction.revision,tokens:f.tokens}),/write-stale/);
+  const drifted=structuredClone(saved);drifted.matrix.draft!.contract!.name+='Changed';
+  assert.throws(()=>buildReactNativeFreshComponentWrite({...drifted,expectedPlanRevision:fresh.revision,tokens:f.tokens}),/write-stale/);
+  const write=buildReactNativeFreshComponentWrite({...saved,expectedPlanRevision:fresh.revision,tokens:f.tokens});
+  const result=await f.run(write.script);assert.equal(result.status,'created-candidate',JSON.stringify(result.problems));
+  assert.deepEqual(saved,frozen,'fresh preparation and creation cannot rewrite the original source draft');
 });
 
 test('React draft uses shared scoped writer without a retained runtime and preserves empty editable content', async () => {
@@ -218,14 +228,22 @@ test('wrong file and interrupted creation remain distinct from a safe repeat', a
   assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
 });
 
-for (const kind of ['root', 'initial', 'nested'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
+for (const kind of ['root', 'initial', 'nested', 'fresh'] as const) test(`React ${kind} journal and real companion client run all phases, reopen, and retain one reservation`, async t => {
   const repo = mkdtempSync(path.join(tmpdir(), 'react-native-journal-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const { input } = inputFixture();
+  if (kind === 'fresh') input.matrix.draft!.native!.setName='Archived compiler output';
   const request: ReactNativeRequest = { version: 1, kind: 'react-root-draft', referenceId: 'a'.repeat(64),
     ownership: { id: input.operation.id, sha256: 'b'.repeat(64) }, inventorySha256: 'c'.repeat(64),
     caseId: 'button-default', matrixRevision: revisionOf(input.matrix) };
   if (kind === 'nested') { request.version = 2; request.selection = { instanceId: 'instance-4' }; }
+  if (kind === 'fresh') {
+    request.compilation='current';
+    const legacy={...request};delete legacy.compilation;
+    assert.equal(reactNativeReservation(request),reactNativeReservation(legacy),'compiler refresh never obtains a replacement reservation');
+    assert(isReactNativeRequest(request));assert(!isReactNativeRequest({...request,compilation:'unchecked'}));
+    assert(!isReactNativeRequest({...request,script:'untrusted'}));
+  }
   const initialRequest: ReactInitialNativeRequest = { version: 1, kind: 'react-initial-draft', anchor: request, caseId: 'button-default',
     observation: { id: '20000000-0000-4000-8000-000000000099', reportSha256: 'd'.repeat(64), inventorySha256: 'e'.repeat(64) } };
   const draft: ReturnType<typeof compileReactInitialContract> = { version: 1, qualification: 'observed-initial-state-contract',
@@ -253,9 +271,9 @@ for (const kind of ['root', 'initial', 'nested'] as const) test(`React ${kind} j
         assert.deepEqual(selected, request); if (!current) throw Error('source changed');
         return { visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
           preparation: { id: request.ownership.id, reportSha256: request.matrixRevision.slice(7) },
-          plan: prepareReactNativePlan({ ...input, operation }) };
+          plan: (request.compilation ? prepareReactNativeFreshPlan : prepareReactNativePlan)({ ...input, operation }) };
       },
-      buildComponent: (_, context) => buildReactNativeComponentWrite({ ...input, operation: context.operation,
+      buildComponent: (_, context) => (request.compilation ? buildReactNativeFreshComponentWrite : buildReactNativeComponentWrite)({ ...input, operation: context.operation,
         expectedPlanRevision: context.planRevision, tokens: context.tokens }),
     },
   };
@@ -299,7 +317,12 @@ for (const kind of ['root', 'initial', 'nested'] as const) test(`React ${kind} j
   await send({ type: 'native-poll' }); assert.equal(messages.at(-1).status, 'finished');
   assert.equal(host.figma.root.findAll(() => true).length, before);
   assert.throws(() => jobs.prepare(kind === 'initial' ? { ...initialRequest, observation: { ...initialRequest.observation, reportSha256: 'f'.repeat(64) } } : { ...request, matrixRevision: revisionOf('changed') }), /baseline-already-reserved/);
-  assert.equal(jobs.listReact(request.referenceId)[0].kind, kind);
+  assert.equal(jobs.listReact(request.referenceId)[0].kind, kind === 'fresh' ? 'root' : kind);
+  if(kind === 'fresh') {
+    assert.equal(jobs.get(first.id).sourceCompilerRecompiled,true);
+    const legacy={...request};delete legacy.compilation;
+    assert.throws(()=>jobs.prepare(legacy),/baseline-already-reserved/);
+  }
   if (kind === 'initial') {
     assert.deepEqual(jobs.reactInitialRequest(first.id), initialRequest);
     assert.deepEqual(jobs.verifiedReactInitialObservation(first.id).request, initialRequest);
@@ -326,12 +349,15 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   writeFileSync(sealPath, JSON.stringify({ version: 1, files: inventoryEvidence(dir) }));
   const request = selectReactNativeRequest(repo, report, 'button-default');
   assert.equal(readReactNativeEvidence(repo, reference, request).source.revision, 'sha256:'+reference.id);
+  const freshRequest: ReactNativeRequest={...request,compilation:'current'};
+  assert.equal(readReactNativeEvidence(repo,reference,freshRequest).source.revision,'sha256:'+reference.id);
   const restored = restoreReactOwnership(repo, reference, request);
   assert.deepEqual(restored.report(), JSON.parse(JSON.stringify(report)));
   assert.equal(restored.dir, dir);
   const view = restored.report(); view.rows[0].matched = false;
   assert.equal(restored.report().rows[0].matched, true, 'views cannot mutate the restored archive');
   writeFileSync(file, 'changed source');
+  assert.throws(()=>readReactNativeEvidence(repo,reference,freshRequest),/unavailable/);
   assert.equal(restored.report().sourceUnchanged, false);
   assert.equal(restored.report().matched, 0);
   assert.equal(restored.report().rows[0].rootMatrix, undefined);

@@ -166,6 +166,7 @@ export interface NativeOperationSnapshot {
   pendingPhase?: NativeOperationPhase;
   nativeOutcome?: "unknown";
   sourceCurrent: boolean;
+  sourceCompilerRecompiled?: boolean;
   sourceCompatibility?: 'identity-opacity-omission';
   acceptedContract: null;
   nativeQualification: "unqualified";
@@ -1215,6 +1216,7 @@ export function createNativeOperationJobs(
           }
         : {}),
       sourceCurrent,
+      ...(isReactNativeRequest(loaded.header.request) && loaded.header.request.compilation === 'current' ? { sourceCompilerRecompiled: true } : {}),
       ...(sourceCurrent && sourceCompatibility ? {sourceCompatibility} : {}),
       acceptedContract: null,
       nativeQualification: "unqualified",
