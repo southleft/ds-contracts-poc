@@ -66,11 +66,11 @@ export function prepareReactComparisonPlan(input: ReactComparisonPlanInput) {
     limitations: [...input.content.limitations, 'native-comparison-not-independently-observed'] };
   return { plan, revision: revisionOf(plan) };
 }
-export function buildReactComparisonWrite(input: ReactComparisonPlanInput & { expectedPlanRevision: string; tokens: NativeSourceWriteContext['tokens'] }) {
+export function buildReactComparisonWrite(input: ReactComparisonPlanInput & { expectedPlanRevision: string; tokens: NativeSourceWriteContext['tokens']; comparisonRecovery?: NativeSourceWriteContext['comparisonRecovery'] }) {
   const planned = prepareReactComparisonPlan(input);
   if (planned.revision !== input.expectedPlanRevision || canonicalJson(planned.plan.tokenInput) !== canonicalJson(input.tokens.input))
     throw Error('react-comparison-write-stale');
   const { engine, contracts, contract } = compiled(input);
   return { planRevision: planned.revision, script: engine.buildNativeContractComparisonScript(contract, contracts, input.source,
-    { operation: input.operation, tokens: input.tokens }, input.comparison) };
+    { operation: input.operation, tokens: input.tokens, comparisonRecovery:input.comparisonRecovery }, input.comparison) };
 }

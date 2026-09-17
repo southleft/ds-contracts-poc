@@ -152,7 +152,7 @@ export function createReferenceService(
         },
         buildComponent: (request, context) => buildReactComparisonWrite({
           ...reactReference.comparisonEvidence(request, nativeJobs.verifiedReactObservation(request.parentOperationId)), operation: context.operation,
-          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision, comparisonRecovery:context.comparisonRecovery,
         }),
       },
       react: {

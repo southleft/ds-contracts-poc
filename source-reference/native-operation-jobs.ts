@@ -1,3 +1,4 @@
+import { emitNativeComparisonRecoveryReadbackScript, prepareNativeComparisonRecovery, type PreparedNativeComparisonRecovery } from '../core/native-comparison-recovery.js';
 import { isReactInitialNativeRequest, reactInitialNativeReservation, type ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { prepareReactInitialNativePlan } from './react-initial-native-plan.js';
 import { isReactComparisonRequest, reactComparisonReservation, type ReactComparisonRequest } from './react-comparison-request.js';
@@ -90,12 +91,13 @@ export interface NativeOperationPreparation<P extends Plan = SourcePlan> {
 }
 export type NativeOperationPhase =
   "token-create" | "token-readback" | "component-create" | "component-readback"
-  | "update-preflight-readback" | "update-apply" | "update-readback";
+  | "update-preflight-readback" | "update-apply" | "update-readback" | "comparison-recovery-readback" | "comparison-recovery-apply";
 export interface NativeOperationComponentContext {
   operation: NativeSourceWriteContext["operation"];
   tokens: NativeSourceWriteContext["tokens"];
   planRevision: string;
   journalRevision: string;
+  comparisonRecovery?: PreparedNativeComparisonRecovery;
 }
 export interface NativeOperationCommand {
   version: 1;
@@ -129,6 +131,7 @@ export interface NativeOperationSnapshot {
   componentName?: string;
   sourceOwnedContent?: boolean;
   comparisonWidth?: number;
+  canResumeComparison?: boolean;
   operation: "source-native-inspection";
   phase:
     | "prepared"
@@ -144,6 +147,8 @@ export interface NativeOperationSnapshot {
     | "component-observation-refused"
     | "component-creation-refused"
     | "component-creation-invalid"
+    | "comparison-recovery-observed"
+    | "comparison-recovery-refused"
     | "component-partial-allocation"
     | "evidence-unavailable";
   structuralObservation?: {
@@ -201,6 +206,9 @@ interface State {
   problems: string[];
   dispatchedCreate: boolean;
   dispatchedComponent: boolean;
+  partialCreation?: Record<string, any>;
+  recovery?: PreparedNativeComparisonRecovery;
+  recoveryWritten?: boolean;
 }
 export interface NativeOperationJobsOptions {
   reactInitial?: {
@@ -748,6 +756,14 @@ export function createNativeOperationJobs(
     return { operation: plan.plan.operation, planRevision: plan.revision, comparison: plan.plan.comparison,
       tokenInput: plan.plan.tokenInput, tokenIdentity: state.identity, creation: state.componentCreation };
   };
+  const recoveryInput = (state: State, plan: Plan) => {
+    if (!isComparisonPlan(plan) || !state.identity || !state.partialCreation) fail('comparison-partial-required');
+    return comparisonObservationInput({...state,componentCreation:state.partialCreation},plan);
+  };
+  const canRecover = (state: State, plan: Plan) => {
+    if (state.pending || state.recoveryWritten || !['component-partial-allocation','comparison-recovery-refused'].includes(state.phase)) return false;
+    try { emitNativeComparisonRecoveryReadbackScript(recoveryInput(state,plan)); return true; } catch { return false; }
+  };
   const observeComponent = (
     result: unknown,
     state: State,
@@ -824,6 +840,8 @@ export function createNativeOperationJobs(
     const componentClaim = componentClaimBytes
       ? JSON.parse(componentClaimBytes.toString())
       : null;
+    const recoveryClaimPath=path.join(dir(id),"comparison-recovery.json");
+    const recoveryClaim=present(recoveryClaimPath)?JSON.parse(bytes(recoveryClaimPath).toString()):null;
     const events: Event[] = [];
     const digests: string[] = [];
     let previous = sha(headerBytes);
@@ -894,6 +912,11 @@ export function createNativeOperationJobs(
           )
             fail("component-creation-precondition-invalid");
           state.dispatchedComponent = true;
+        } else if (c.phase === 'comparison-recovery-readback') {
+          if (!canRecover(state,plan) || c.readOnly!==true || c.script!==emitNativeComparisonRecoveryReadbackScript(recoveryInput(state,plan))) fail('recovery-read-precondition-invalid');
+        } else if (c.phase === 'comparison-recovery-apply') {
+          if (state.phase!=='comparison-recovery-observed' || !state.recovery || state.recoveryWritten || c.readOnly!==false || !same(c,recoveryClaim)) fail('recovery-write-precondition-invalid');
+          state.recoveryWritten=true;
         } else if (c.phase === "component-readback") {
           if (
             !state.identity ||
@@ -913,13 +936,18 @@ export function createNativeOperationJobs(
       } else if (event.kind === "result") {
         if (!state.pending) fail("unsolicited-result");
         correlate(event.envelope, state.pending);
-        const outcome =
+        let recoveryOutcome: Pick<State,'phase'|'problems'> | undefined;
+        if(state.pending.phase==='comparison-recovery-readback') {
+          try {state.recovery=prepareNativeComparisonRecovery(recoveryInput(state,plan),event.envelope.result);recoveryOutcome={phase:'comparison-recovery-observed',problems:[]};}
+          catch {delete state.recovery;recoveryOutcome={phase:'comparison-recovery-refused',problems:['native-operation-recovery-preflight-refused']};}
+        }
+        const outcome = recoveryOutcome ?? (
           state.pending.phase === "token-create"
             ? acceptCreation(
                 event.envelope.result as NativeTokenCreationResult,
                 plan,
               )
-            : state.pending.phase === "component-create"
+            : ["component-create","comparison-recovery-apply"].includes(state.pending.phase)
               ? acceptComponentCreation(event.envelope.result, plan, id)
               : state.pending.phase === "component-readback"
                 ? observeComponent(event.envelope.result, state, plan)
@@ -927,9 +955,10 @@ export function createNativeOperationJobs(
                     event.envelope.result as NativeTokenReadbackResult,
                     state.identity!,
                     plan,
-                  );
+                  ));
+        if(state.pending.phase==='component-create' && outcome.phase==='component-partial-allocation') state.partialCreation=structuredClone(event.envelope.result);
         if (
-          state.pending.phase === "component-create" &&
+          ["component-create","comparison-recovery-apply"].includes(state.pending.phase) &&
           outcome.phase === "components-created"
         )
           state.componentCreation = structuredClone(event.envelope.result);
@@ -953,7 +982,7 @@ export function createNativeOperationJobs(
         delete state.pending;
       } else if (event.kind === "abandon-observation") {
         if (
-          !["token-readback", "component-readback"].includes(
+          !["token-readback", "component-readback", "comparison-recovery-readback"].includes(
             state.pending?.phase ?? "",
           ) ||
           state.pending?.attemptId !== event.attemptId
@@ -964,7 +993,7 @@ export function createNativeOperationJobs(
         delete state.componentObservation;
         delete state.imageReadback;
         state.phase =
-          phase === "component-readback"
+          phase === "comparison-recovery-readback" ? "comparison-recovery-refused" : phase === "component-readback"
             ? "component-observation-refused"
             : "observation-refused";
         state.problems = ["native-operation-observation-interrupted"];
@@ -985,6 +1014,7 @@ export function createNativeOperationJobs(
     }
     if (!!componentClaim !== state.dispatchedComponent)
       fail("component-creation-journal-incomplete");
+    if (!!recoveryClaim !== !!state.recoveryWritten) fail("recovery-write-journal-incomplete");
     const fingerprint = sha(
       encode({
         header: sha(headerBytes),
@@ -992,6 +1022,7 @@ export function createNativeOperationJobs(
         script: sha(scriptBytes),
         claim: claimBytes ? sha(claimBytes) : null,
         componentClaim: componentClaimBytes ? sha(componentClaimBytes) : null,
+        ...(recoveryClaim ? {recoveryClaim:sha(encode(recoveryClaim))} : {}),
         digests,
       }),
     );
@@ -1061,6 +1092,7 @@ export function createNativeOperationJobs(
     return {
       id: loaded.header.id,
       operation: "source-native-inspection",
+      canResumeComparison: sourceCurrent && canRecover(loaded.state,loaded.plan),
       ...(isComparisonPlan(loaded.plan) && loaded.plan.plan.comparison.instanceWidth !== undefined
         ? {comparisonWidth:loaded.plan.plan.comparison.instanceWidth} : {}),
       phase: loaded.state.phase,
@@ -1146,6 +1178,8 @@ export function createNativeOperationJobs(
         encode(event.command),
       );
     }
+    if(event.kind==='dispatch' && event.command.phase==='comparison-recovery-apply')
+      write(path.join(dir(loaded.header.id),'comparison-recovery.json'),encode(event.command));
     if (sequence === 0) {
       if (event.kind !== "dispatch" || event.command.phase !== "token-create")
         fail("first-dispatch-invalid");
@@ -1295,6 +1329,20 @@ export function createNativeOperationJobs(
         loaded.plan.plan.tokenInput,
         loaded.state.identity,
       );
+    } else if (phase === 'comparison-recovery-readback') {
+      if(!canRecover(loaded.state,loaded.plan)) fail('comparison-recovery-refused');
+      authenticate(loaded);
+      script=emitNativeComparisonRecoveryReadbackScript(recoveryInput(loaded.state,loaded.plan));
+    } else if (phase === 'comparison-recovery-apply') {
+      if(loaded.state.phase!=='comparison-recovery-observed' || loaded.state.recoveryWritten || !loaded.state.recovery || !isReactComparisonRequest(loaded.header.request) || !options.reactComparison) fail('comparison-recovery-refused');
+      authenticate(loaded);
+      const recovery=loaded.state.recovery;
+      const built=options.reactComparison.buildComponent(loaded.header.request,{
+        operation:loaded.plan.plan.operation,planRevision:loaded.plan.revision,journalRevision:loaded.fingerprint,
+        tokens:{input:loaded.plan.plan.tokenInput,identity:loaded.state.identity!,receipt:(recovery.observation as any).content.tokens.receipt},comparisonRecovery:recovery,
+      });
+      if(built.planRevision!==loaded.plan.revision || typeof built.script!=='string' || !built.script.trim() || Buffer.byteLength(built.script)>4*1024*1024) fail('component-script-invalid');
+      authenticate(loaded);script=built.script;
     } else if (phase === "component-create") {
       if (loaded.state.dispatchedComponent)
         fail("component-creation-already-dispatched");
@@ -1333,7 +1381,7 @@ export function createNativeOperationJobs(
       fileKey: loaded.header.policy.fileKey,
       planRevision: loaded.plan.revision,
       scriptSha256: sha(script),
-      readOnly: phase === "token-readback" || phase === "component-readback",
+      readOnly: phase.endsWith("-readback"),
       script,
     };
     append(loaded, { kind: "dispatch", command });
@@ -1376,7 +1424,7 @@ export function createNativeOperationJobs(
             loaded.state.phase === "component-structure-observed"
           ? "component-readback"
           : undefined);
-    if (phase !== "token-readback" && phase !== "component-readback")
+    if (phase !== "token-readback" && phase !== "component-readback" && phase !== "comparison-recovery-readback")
       fail("observation-retry-refused");
     if (loaded.state.pending) {
       append(loaded, {

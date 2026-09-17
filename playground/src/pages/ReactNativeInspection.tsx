@@ -110,7 +110,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           </div>)}
         </section>}
         <p>Target: <a href={`https://www.figma.com/design/${row.fileKey}`} target="_blank" rel="noreferrer">DS Contracts Evaluations</a>.</p>
-        {!row.connection.finished && <>
+        {(!row.connection.finished || op.canResumeComparison) && <>
           <p>Open the <a href="/ds-contracts-sync-runner-plugin.zip" download>DS Contracts companion plugin</a> in this file. Under “Connect the local source workflow,” enter the code and choose “Connect / resume.”</p>
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/connection`, id)}>Get connection code</button>
           {codes[id] && <label>Connection code <input readOnly value={codes[id]} onFocus={e => e.currentTarget.select()} /></label>}
@@ -118,6 +118,11 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
           <button type="button" disabled={busy || !op.sourceCurrent || !row.connection.paired || row.connection.started}
             onClick={() => void action(`native-operation/${id}/start`)}>{comparison ? 'Create and inspect native comparison' : 'Create and inspect native draft'}</button>
         </>}
+        {op.canResumeComparison && <section aria-label="Resume retained comparison">
+          <p>The retained instance is empty. Recovery will inspect its ownership, source mains and tokens, then continue in the same instance if they still match. Original creation evidence stays intact.</p>
+          <button type="button" disabled={busy || !row.connection.paired}
+            onClick={() => void action(`native-operation/${id}/resume-comparison`)}>Inspect and resume retained comparison</button>
+        </section>}
         {!corrected && (op.pendingPhase?.endsWith('readback') || ['observation-refused', 'component-observation-refused', 'component-structure-observed'].includes(op.phase)) && <button type="button" disabled={busy}
           onClick={() => void action(`native-operation/${id}/retry-observation`)}>{op.pendingPhase ? 'Retry interrupted readback' : 'Inspect native draft again'}</button>}
         {op.nativeOutcome === 'unknown' && <p>The native outcome is unknown. Creation will not be repeated automatically.</p>}

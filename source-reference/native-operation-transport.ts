@@ -42,6 +42,7 @@ const NEXT: Partial<
   Record<string, NativeOperationPhase>
 > = {
   prepared: "token-create",
+  "comparison-recovery-observed": "comparison-recovery-apply",
   "tokens-created": "token-readback",
   "tokens-observed": "component-create",
   "components-created": "component-readback",

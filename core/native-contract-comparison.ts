@@ -350,8 +350,14 @@ async function nativeBuildContractComparison() {
 
 /** Preserve the existing receipt/script format when no verified grid carrier is
  * involved. Only compiler-owned content frames can become insertion targets. */
-export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false): string {
+export function nativeContractComparisonRuntime(nested: boolean, gridContent: boolean, fillWidth = false, sourceOwned = false, instanceWidth = false, recovery = false): string {
   let script = nested ? NATIVE_CONTRACT_NESTED_COMPARISON_RUNTIME : NATIVE_CONTRACT_COMPARISON_RUNTIME;
+  if (recovery) {
+    script = script.replace("  const board = figma.createFrame(); nativeOwn(board); NATIVE_PAGE.appendChild(board);",
+      "  const board = await figma.getNodeByIdAsync(NATIVE.recovery.creation.comparisonBoardId); nativeFileGuard(); nativeOwn(board);");
+    script = script.replace("const inst = main.createInstance(); nativeOwn(inst);",
+      "const inst = c === NATIVE.contractComparison ? await figma.getNodeByIdAsync(NATIVE.recovery.creation.comparisons[0].instanceId) : main.createInstance(); nativeFileGuard(); nativeOwn(inst);");
+  }
   if (instanceWidth) script = script.replace('  pair(main, inst, []);', `  pair(main, inst, []);
   if (c.instanceWidth !== undefined) {
     if (inst.layoutMode !== 'VERTICAL') nativeRefuse('comparison-instance-width-layout');
