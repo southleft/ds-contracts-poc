@@ -12,6 +12,51 @@ import type { NativeTokenContextInput } from './native-token-context.js';
 import { nativeComparisonFixture } from './native-contract-comparison-test-fixture.js';
 
 // Native API mock evidence only. No raster or vector fidelity claims.
+test('OKLab shadow rings retain their complete stack through native emission and independent readback', async () => {
+  const f = await nativeComparisonFixture();
+  // Browser-computed Tailwind ring plus elevation. Keep transparent layers and
+  // order too: accepting only the final RGB layer would silently lose the ring.
+  const shadow = 'rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.145 0 0 / 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px';
+  const c = structuredClone(f.main);
+  c.anatomy.root.literals = { 'box-shadow': shadow };
+  const byId = new Map([[c.id, c]]);
+  const compiled = f.engine.compileNativeContractDraft(c, byId, f.source);
+  const spec = compiled.component.variants[0].spec;
+  assert.equal(spec.effectStack?.length, 3);
+  assert.deepEqual(spec.effectStack?.[1], {
+    x: 0, y: 0, radius: 0, spread: 1,
+    color: { r: 10 / 255, g: 10 / 255, b: 10 / 255, a: 0.1 },
+  });
+  assert.ok(!compiled.component.codeOnlyFacts?.some(fact => fact.channel === 'box-shadow'));
+  const tokenContract = structuredClone(c);
+  delete tokenContract.anatomy.root.literals!['box-shadow'];
+  tokenContract.anatomy.root.tokens!['box-shadow'] = '{ring}';
+  const tokenEngine = createFigmaEngine({ tokens: { primitives: { ...f.tokens, ring: { $type: 'shadow', $value: shadow } },
+    semantic: {}, light: {}, dark: {}, brands: { default: {} } }, icons: new Map() });
+  assert.deepEqual(tokenEngine.compileComponentData(tokenContract, new Map([[tokenContract.id, tokenContract]])).variants[0].spec.effectStack, spec.effectStack);
+  const created = await f.run(f.engine.buildNativeContractDraftScript(c, byId, f.source, f.supplemental));
+  assert.equal(created.status, 'created-candidate');
+  const input: NativeContractObservationInput = { operation: f.supplemental.operation, planRevision: revisionOf('shadow'),
+    projection: compiled.projection, component: compiled.component, tokenInput: f.supplemental.tokens.input,
+    tokenIdentity: f.supplemental.tokens.identity, creation: created };
+  const receipt = await f.run(emitNativeContractReadbackScript(input));
+  assert.equal(verifyNativeContractReadback(input, receipt).status, 'supported-structure-observed');
+  const changed = structuredClone(receipt);
+  changed.nodes.find((n: any) => n.type === 'COMPONENT').values.effects[1].color.a = 0;
+  assert.equal(verifyNativeContractReadback(input, changed).status, 'refused');
+
+  for (const color of ['oklch(14.5% 0 0 / 10%)', 'oklab(1.45e-1 0 0 / 10%)']) {
+    c.anatomy.root.literals!['box-shadow'] = `${color} 0px 0px 0px 1px`;
+    assert.deepEqual(f.engine.compileComponentData(c, byId).variants[0].spec.effectStack, [spec.effectStack![1]]);
+  }
+  for (const color of ['oklab(0.1 broken 0)', 'oklab(1e999 0 0)', 'oklch(0.1 0 unknown)', 'color-mix(in oklab, red, blue)']) {
+    c.anatomy.root.literals!['box-shadow'] = `${color} 0px 0px 0px 1px, rgba(0,0,0,0.2) 0px 1px 2px`;
+    const refused = f.engine.compileComponentData(c, byId);
+    assert.equal(refused.variants[0].spec.effectStack, undefined);
+    assert.ok(refused.codeOnlyFacts?.some(fact => fact.channel === 'box-shadow'));
+  }
+});
+
 async function fixture() {
   const host = nativeFixtureHost(), { figma } = host;
   const proto = Object.getPrototypeOf(figma.currentPage);

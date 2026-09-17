@@ -6,11 +6,22 @@ import type { ReactContentInspection } from '../../../source-reference/react-con
 import type { SourceFrame } from '../../../source-reference/source-framing';
 import { ReactInitialInspection } from './ReactInitialInspection';
 import type { createNativeUpdateJobs } from '../../../source-reference/native-update-jobs';
+import type { NativeContractUpdatePlan } from '../../../core/native-contract-update';
+
+function correctionValue(value: NativeContractUpdatePlan['changes'][number]['before']) {
+  if (typeof value === 'number') return value;
+  if (!value.length) return 'No shadows';
+  return <ol>{value.map((effect,index)=><li key={index}>
+    {effect.type==='INNER_SHADOW'?'Inner':'Outer'} shadow: offset {effect.offset.x}, {effect.offset.y} px;
+    blur {effect.radius} px; spread {effect.spread} px;
+    color rgb({[effect.color.r,effect.color.g,effect.color.b].map(c=>Math.round(c*255)).join(', ')}), {Math.round(effect.color.a*100)}% opacity
+  </li>)}</ol>;
+}
 
 interface Operation {
   kind: 'root' | 'comparison' | 'initial' | 'nested';
   initialStates?: Array<{ observation: string; variant: string }>; parentOperationId?: string;
-  updates?: Array<{ id: string; status: 'planned'; changes: Array<{ nodeId: string; variant: string; part: string; channel?: 'width' | 'height'; before: number; after: number }>;
+  updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes'];
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
     connection?: {paired:boolean;connected:boolean;started:boolean;finished:boolean} }>;
   caseId: string; ownershipId: string; fileKey: string; operation: NativeOperationSnapshot;
@@ -80,12 +91,12 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {comparison && op.comparisonWidth !== undefined && <p>This comparison uses the original caller’s declared {op.comparisonWidth} px width. The reusable main keeps its own sizing rules.</p>}
         <p>{comparison ? 'Instance of the saved main' : `${op.counters.variants} ${initial ? 'initial-state' : 'root'} variants`} · {op.counters.variables} variables · {corrected ? 'verified correction matches current inputs; original creation retained below' : op.sourceCurrent ? 'saved plan matches current inputs' : 'saved plan differs from current inputs, or inputs are unavailable'}</p>
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
-        {(initial || row.kind === 'nested') && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
+        {!comparison && op.phase === 'component-structure-observed' && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
           {row.updates?.map(update => <div key={update.id}>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
             {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Property</th><th>Saved value</th><th>Proposed value</th></tr></thead>
-              <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + (change.channel ?? 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{change.channel ?? 'opacity'}</td><td>{change.before}</td><td>{change.after}</td></tr>)}</tbody></table>}
+              <tbody>{update.changes.map(change => <tr key={change.nodeId + ':' + ('channel' in change ? change.channel : 'opacity')}><td><a href={`https://www.figma.com/design/${row.fileKey}?node-id=${change.nodeId.replace(':','-')}`} target="_blank" rel="noreferrer">{change.variant}</a></td><td>{change.part}</td><td>{'channel' in change ? change.channel==='effects'?'Shadow stack':change.channel : 'opacity'}</td><td>{correctionValue(change.before)}</td><td>{correctionValue(change.after)}</td></tr>)}</tbody></table>}
             {!update.operation && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/prepare`)}>Prepare reviewed correction</button>}
             {update.operation && <>
               <p>Update: {update.operation.phase.replaceAll('-',' ')}. {update.operation.sourceCurrent ? 'Pinned inputs match.' : update.operation.canRefreshObservation ? 'Pinned inputs match. Inspect again with the current reader to restore verification; the original write will not be repeated.' : 'Inputs changed or are unavailable; writes are blocked.'}</p>

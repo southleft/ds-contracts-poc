@@ -16,7 +16,7 @@ export interface ReactNativePlanInput {
   source: NativeContractDraftSource;
   matrix: ReactRootMatrix | ReactChildRoot;
 }
-function nativeDraft(input: ReactNativePlanInput) {
+function nativeDraft(input: ReactNativePlanInput, recompileForCorrection = false) {
   const { matrix } = input, draft = matrix.draft;
   if (matrix.version !== 1 || !['combined-property-root-draft', 'observed-child-root-draft'].includes(matrix.qualification) ||
       matrix.acceptedContract !== null || matrix.problems.length ||
@@ -27,17 +27,27 @@ function nativeDraft(input: ReactNativePlanInput) {
     primitives: draft.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} },
   }, icons: new Map(matrix.qualification==='observed-child-root-draft' ? matrix.assets : []) });
   const contracts = new Map([[draft.contract.id, draft.contract]]);
-  if (canonicalJson(engine.compileComponentData(draft.contract, contracts)) !== canonicalJson(draft.native))
+  if (!recompileForCorrection && canonicalJson(engine.compileComponentData(draft.contract, contracts)) !== canonicalJson(draft.native))
     throw Error('react-native-plan-compiler-output-changed');
   const compiled = engine.compileNativeContractDraft(draft.contract, contracts, input.source);
   return { engine, contracts, draft, compiled };
 }
 
 export function prepareReactNativePlan(input: ReactNativePlanInput) {
+  return preparePlan(input, false);
+}
+
+/** The host must authenticate the original archive before requesting a current
+ * compiler correction. Creation still requires its exact saved compiler output;
+ * only the separate bounded update planner can authorize this desired state. */
+export function prepareReactNativeCorrectionPlan(input: ReactNativePlanInput) {
+  return preparePlan(input, true);
+}
+function preparePlan(input: ReactNativePlanInput, recompileForCorrection: boolean) {
   if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(input.operation.id) ||
       !/^[A-Za-z0-9]{10,80}$/.test(input.operation.fileKey))
     throw Error('react-native-plan-operation-invalid');
-  const { draft, compiled } = nativeDraft(input);
+  const { draft, compiled } = nativeDraft(input, recompileForCorrection);
   const tokenInput: NativeTokenContextInput = {
     fileKey: input.operation.fileKey, scopeId: `source-${input.operation.id}`,
     source: { revision: input.source.revision, sourceProgramSha256: input.source.programSha256,

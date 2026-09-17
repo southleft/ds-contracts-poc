@@ -11,7 +11,7 @@ import { revisionOf } from '../core/contract-provenance.js';
 import { emitNativeTokenContextScript, emitNativeTokenContextReadbackScript } from '../core/token-set.js';
 import { nativeFixtureHost } from './native-operation-test-fixture.js';
 import { SOURCE_NATIVE_FILE_KEY } from './native-operation-jobs.js';
-import { prepareReactNativePlan, buildReactNativeComponentWrite } from './react-native-plan.js';
+import { prepareReactNativePlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite } from './react-native-plan.js';
 import type { ReactRootMatrix } from './react-root-matrix.js';
 import { emitNativeContractReadbackScript, verifyNativeContractReadback, type NativeContractObservationInput } from '../core/native-source-observation.js';
 import { collectNativeImages } from './native-operation-images.js';
@@ -69,6 +69,18 @@ async function hostFixture(shadow?: string) {
   const emit = () => buildReactNativeComponentWrite({ ...input, expectedPlanRevision: prepared.revision, tokens }).script;
   return { ...host, input, engine, prepared, tokens, emit, run };
 }
+
+test('current correction compilation preserves archived output and cannot replace creation authority', async () => {
+  const f = await hostFixture('oklab(0.145 0 0 / 0.1) 0px 0px 0px 1px');
+  const saved = structuredClone(f.input);
+  for(const variant of saved.matrix.draft!.native!.variants) delete variant.spec.effectStack;
+  const frozen = structuredClone(saved);
+  assert.throws(()=>prepareReactNativePlan(saved),/compiler-output-changed/);
+  const correction = prepareReactNativeCorrectionPlan(saved);
+  assert.ok(correction.plan.component.variants.every(v=>v.spec.effectStack?.length===1));
+  assert.deepEqual(saved,frozen);
+  assert.throws(()=>buildReactNativeComponentWrite({...saved,expectedPlanRevision:correction.revision,tokens:f.tokens}),/compiler-output-changed/);
+});
 
 test('React draft uses shared scoped writer without a retained runtime and preserves empty editable content', async () => {
   const f = await hostFixture(), script = f.emit();

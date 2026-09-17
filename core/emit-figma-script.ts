@@ -64,7 +64,7 @@ import {
   omittedCodeBindingConflicts,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
-import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
+import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime, okColorToRgba } from './token-set.js';
 import { refuseRetainedRuntime } from '../packages/core/src/runtime-emission.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
@@ -1584,8 +1584,11 @@ function splitTopLevel(value: string): string[] {
   return out;
 }
 
-/** A CSS color literal (hex / rgb() / rgba()) → RGBA floats. */
+/** A CSS color literal → RGBA floats, using the shared OKLab conversion. */
 function parseCssColor(v: string): { r: number; g: number; b: number; a?: number } | undefined {
+  const modern = okColorToRgba(v);
+  if (modern) return Object.values(modern).every(Number.isFinite)
+    ? { r: modern.r / 255, g: modern.g / 255, b: modern.b / 255, a: modern.a } : undefined;
   return parseLitColor(v);
 }
 
@@ -1610,7 +1613,7 @@ function parseShadowStack(value: string): NodeSpec['effectStack'] | undefined {
       inner = true;
       rest = rest.replace(/(^| )inset( |$)/, ' ').trim();
     }
-    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/);
+    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|(?:rgba?|oklab|oklch)\([^)]*\))/);
     if (!colorMatch) return undefined;
     const color = parseCssColor(colorMatch[1]);
     if (!color) return undefined;
