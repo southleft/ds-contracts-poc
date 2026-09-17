@@ -36,6 +36,8 @@ These steps describe the intended product workflow. The full application integra
 
 New root drafts can use the current compiler with unchanged, verified source observations, without repeating the source capture. Their prepared output is pinned before creation. Existing operations retain their original identity and evidence; compiler changes do not authorize replacing them.
 
+Both preselected Card arrangements now have populated native comparisons and pass independent supported-structure readback. The header/body/footer case reused five existing child mains without a corrective edit; the other includes seven children with Checkbox and Button. Their exported images pass the existing 5% antialias-tolerant image-difference limit at 2.52% and 1.68%, respectively. That scorer trims surrounding whitespace; the app separately aligns images by measured layout origins. These are two rendered-case results, not qualification of the full cohort, responsive behavior or the complete journey.
+
 ### What the React application can do now
 
 The local `/sources` page opens a fixed ten-case shadcn cohort: Button, Checkbox and a composed Card. **Validate React sources** checks the originals, theme, fonts and selected states against an isolated archived replay; representative cases must reject deliberately missing or hidden content and assets. This is a configured source preset, not arbitrary repository onboarding. The [React V1 scope](../docs/REACT-V1-SCOPE.md) defines the cohort and required outcomes.
