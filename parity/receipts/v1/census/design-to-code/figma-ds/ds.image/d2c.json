@@ -129,7 +129,7 @@
   "generatedFiles": {
     "react/Image/Image.module.css": "ff1d3d4ae0fd2267fc8f55e3bd33aad00e6f5fa35b6ab2bd18bf95536ab905c9",
     "react/Image/Image.stories.tsx": "801a16b5148a0861de91bc958a6c51716cea3c4af0f1a52cfb33b55f8855907b",
-    "react/Image/Image.tsx": "40cb504c892d4869a684acb5280fe91f83eead5678bb12628cce949efdc2bc4a",
+    "react/Image/Image.tsx": "c9ebd9a37b3e00ac59ba6f086623fb0285d2420c326d5f9f5f67caf4a8946ac7",
     "react/Image/index.ts": "977fc22315de6b799603d19e4bcfa3f725d8af82ba0b909d87b4019986ce06f6",
     "wc/ds-image.ts": "4438b26e9b5e15a8867b13b0474be58a295f90444860967b2a9c6a612993013c",
     "wc/ds-image.css.ts": "fd36afe107214a1250958c22bcc2c223101ef63b2737b0f561072f205a61d258",

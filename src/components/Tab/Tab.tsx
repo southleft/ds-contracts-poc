@@ -2,15 +2,12 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/tab.contract.json (ds.tab v1.0.0)
  * Regenerate with: npm run generate
- *
- * `children` OMITTED from ButtonHTMLAttributes<HTMLButtonElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Tab.module.css';
 
-export interface TabProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Selection state — selected tabs render semibold in the accent color. */
   state?: 'default' | 'selected';
   /** Visible tab text. */
@@ -22,7 +19,7 @@ export interface TabProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
 
 /** A single tab in a TabList. API mirrors industry convention (Astryx Tab) with selection flattened to a state enum so both surfaces render it truthfully; selection behavior itself is a declared boundary. */
 export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
-  { state = 'default', label, icon, endContent, className, ...rest },
+  { state = 'default', label, icon, endContent, className, children, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`state-${state}`], className].filter(Boolean).join(' ');

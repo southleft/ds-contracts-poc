@@ -2,18 +2,12 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/side-nav-item.contract.json (ds.side-nav-item v1.0.0)
  * Regenerate with: npm run generate
- *
- * `children` OMITTED from AnchorHTMLAttributes<HTMLAnchorElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import styles from './SideNavItem.module.css';
 
-export interface SideNavItemProps extends Omit<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  'children'
-> {
+export interface SideNavItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** Whether this item is the current page. */
   state?: 'default' | 'selected';
   /** Item text. */
@@ -27,7 +21,7 @@ export interface SideNavItemProps extends Omit<
 
 /** A sidebar navigation row: icon, label, and trailing content, with a selected state. API mirrors industry convention (Astryx SideNavItem); nesting and collapse are behavior-layer boundaries. */
 export const SideNavItem = forwardRef<HTMLAnchorElement, SideNavItemProps>(function SideNavItem(
-  { state = 'default', label, href = '#', icon, endContent, className, ...rest },
+  { state = 'default', label, href = '#', icon, endContent, className, children, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`state-${state}`], className].filter(Boolean).join(' ');

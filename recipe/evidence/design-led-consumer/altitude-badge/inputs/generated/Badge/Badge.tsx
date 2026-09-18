@@ -2,15 +2,12 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/badge.contract.json (ds.badge v0.1.0)
  * Regenerate with: npm run generate
- *
- * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Badge.module.css';
 
-export interface BadgeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'neutral' | 'danger' | 'info' | 'success' | 'warning';
   shape?: 'label' | 'dot';
   text?: string;
@@ -32,7 +29,7 @@ Accessibility
 Docs: https://altitude.pages.dev/docs/components/badge/
  * @see https://altitude.pages.dev/docs/components/badge/ */
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(function Badge(
-  { variant = 'neutral', shape = 'label', text = 'Badge', className, ...rest },
+  { variant = 'neutral', shape = 'label', text = 'Badge', className, children, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`variant-${variant}`], styles[`shape-${shape}`], className]

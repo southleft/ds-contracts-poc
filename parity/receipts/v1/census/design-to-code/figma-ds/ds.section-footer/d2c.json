@@ -193,7 +193,7 @@
   "generatedFiles": {
     "react/SectionFooter/SectionFooter.module.css": "d593e11296380c4ec074ff3381a29240d1b0e03924f004c4097a7704091b25be",
     "react/SectionFooter/SectionFooter.stories.tsx": "33d9c486c656f12b54ac6446bf89eec51a988a3e594384a236f3e4cb0c2c12d3",
-    "react/SectionFooter/SectionFooter.tsx": "feecb505d65606172ceaea5520a008097a1daee86d36b5330960e34a5b7f505f",
+    "react/SectionFooter/SectionFooter.tsx": "d34f75d908a7c6b59125a3b71dff6ad6483699e788a7c9c3d22e1a63d7c05824",
     "react/SectionFooter/index.ts": "0aa9b444896f528ec363268d3e9946d8d7cf29d43ab9b1f180624e64592ab4bc",
     "wc/ds-section-footer.ts": "2de6dc477ca664a543edde16cc402fe2adf91662ed78bab730d797916ac158cb",
     "wc/ds-section-footer.css.ts": "297ac3cf4ec9de43e5196d615cec4a0798e99550ba0393a7040554258ab41d60",

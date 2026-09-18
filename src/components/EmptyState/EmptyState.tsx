@@ -6,18 +6,12 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   title
- *
- * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './EmptyState.module.css';
 
-export interface EmptyStateProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'children' | 'title'
-> {
+export interface EmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Primary message. */
   title: string;
   /** Secondary text explaining what will appear here and how. */
@@ -36,6 +30,7 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(function E
     icon,
     actions,
     className,
+    children,
     ...rest
   },
   ref,

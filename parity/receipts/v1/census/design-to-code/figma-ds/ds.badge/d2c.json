@@ -253,7 +253,7 @@
   "generatedFiles": {
     "react/Badge/Badge.module.css": "1070110f1b70cce1fce3e2ab01be783809f311a96ad017ed15fd5186178cb603",
     "react/Badge/Badge.stories.tsx": "6821f7484c6842bdee77b0645f83d993e655cd2c858eb0149813bcc006dae8f6",
-    "react/Badge/Badge.tsx": "75f0d2fd45b2025c8de748ea149ab82a658d48795b6c909c6782c1121bf0705a",
+    "react/Badge/Badge.tsx": "7be9d0a396311a201725a1c22bdff5bcf49329febb2853e619e911b726ef3a3f",
     "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "wc/ds-badge.ts": "9ec9d31a4388794c50bcf7af1623d40a31b3dff8f8038bc25df47e6266b4b54d",
     "wc/ds-badge.css.ts": "5c974f19f57cb3117a3894fdaade9ec2d9e5fd1102ded8edb6c1773d4abeb024",

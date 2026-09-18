@@ -2,15 +2,12 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/two-column.contract.json (ds.two-column v1.0.0)
  * Regenerate with: npm run generate
- *
- * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './TwoColumn.module.css';
 
-export interface TwoColumnProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TwoColumnProps extends HTMLAttributes<HTMLDivElement> {
   /** Leading column slot. */
   start?: ReactNode;
   /** Trailing column slot. */
@@ -19,7 +16,7 @@ export interface TwoColumnProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ch
 
 /** Two equal fr columns, each a slot. The simplest declared-track grid: G1 tracks, G2 explicit placement, one row that hugs its content. */
 export const TwoColumn = forwardRef<HTMLDivElement, TwoColumnProps>(function TwoColumn(
-  { start, end, className, ...rest },
+  { start, end, className, children, ...rest },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');

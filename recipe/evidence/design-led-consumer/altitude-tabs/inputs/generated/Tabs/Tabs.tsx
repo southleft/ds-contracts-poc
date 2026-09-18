@@ -2,9 +2,6 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/tabs.contract.json (ds.tabs v0.1.0)
  * Regenerate with: npm run generate
- *
- * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -12,7 +9,7 @@ import { Tab } from '../Tab';
 import { TabPanel } from '../TabPanel';
 import styles from './Tabs.module.css';
 
-export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'stretch';
   items?: Array<{ text: string }>;
 }
@@ -39,7 +36,7 @@ Accessibility
 Docs: https://altitude.pages.dev/docs/components/tabs/
  * @see https://altitude.pages.dev/docs/components/tabs/ */
 export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
-  { variant = 'default', items, className, ...rest },
+  { variant = 'default', items, className, children, ...rest },
   ref,
 ) {
   // axis-inert (ledgered, not a throw): variant — no `.<axis>-*` rule

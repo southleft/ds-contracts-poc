@@ -6,16 +6,13 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   style
- *
- * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import { SizeSmall } from '../SizeSmall';
 import styles from './Badge.module.css';
 
-export interface BadgeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'style'> {
+export interface BadgeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'style'> {
   type?: 'brand' | 'success' | 'warning' | 'danger' | 'neutral' | 'accent';
   style?: 'fill' | 'tonal' | 'outline';
   size?: 'large' | 'small';
@@ -24,7 +21,7 @@ export interface BadgeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(function Badge(
-  { type = 'brand', style = 'fill', size = 'large', rounded = false, className, ...rest },
+  { type = 'brand', style = 'fill', size = 'large', rounded = false, className, children, ...rest },
   ref,
 ) {
   const classes = [

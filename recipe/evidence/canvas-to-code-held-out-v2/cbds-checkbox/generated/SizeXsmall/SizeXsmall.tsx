@@ -2,22 +2,19 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/size-xsmall.contract.json (ds.size-xsmall v0.1.0)
  * Regenerate with: npm run generate
- *
- * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './SizeXsmall.module.css';
 
-export interface SizeXsmallProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
+export interface SizeXsmallProps extends HTMLAttributes<HTMLSpanElement> {
   iconSwap?: string;
   size?: 'xsmall';
 }
 
 /** STUB contract auto-proposed for the nested "size=xsmall" instances of Checkbox — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub. */
 export const SizeXsmall = forwardRef<HTMLSpanElement, SizeXsmallProps>(function SizeXsmall(
-  { size = 'xsmall', iconSwap = '184:89713', className, ...rest },
+  { size = 'xsmall', iconSwap = '184:89713', className, children, ...rest },
   ref,
 ) {
   // axis-inert (ledgered, not a throw): size — no `.<axis>-*` rule

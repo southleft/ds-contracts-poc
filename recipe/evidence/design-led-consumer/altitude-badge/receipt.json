@@ -7,7 +7,7 @@
   "fileKey": "y83n4o9LOGs74oAoguFcGS",
   "generatedSha256": {
     "Badge/Badge.module.css": "0483950277cf342c75952ca281e36543cfd66dc158f1b129cf2d5162834fbe72",
-    "Badge/Badge.tsx": "2771bb72c487d40966c20a3ae086bf6c6e8648a21286db6e727fd3f09e1862c8",
+    "Badge/Badge.tsx": "e7fd834efc62ba308e6c1d4ed1d0dac9b8cec1ea73953e8700e62c9dd05e8b1c",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
     "tokens.css": "49544e5db0e14b90e24420cf69f061fbae937a40c2d520a9d8a7257e04328677"
@@ -261,7 +261,7 @@
     "children": {
       "contractDeclaresSlot": false,
       "renderedAtRuntime": false,
-      "refusedByType": true
+      "refusedByType": false
     },
     "variants": [
       {
@@ -617,6 +617,7 @@
     ]
   },
   "problems": [
+    "children-accepted-but-discarded",
     "image-difference-above-limit:variant-danger_shape-label:17.37%",
     "content-size-mismatch:variant-danger_shape-label:53x20 vs 57x20",
     "image-difference-above-limit:variant-neutral_shape-label:15.79%",
@@ -646,7 +647,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "28a5bee1734b3364b205d1c18ef3cc80033ad3f23697500d6093a5f023d4ff3f",
+    "tarballSha256": "a3edd06cde4919ff47ef92ac223bd6f785fa59520e339ecde4a50da7d83bdd40",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -662,7 +663,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "5b37bae8fddf96a4931dec7490466323a2cadb7ecfb6909822402a2538484184",
+    "lockfileSha256": "22987f69976693d087b2a7097d8453d20b5ae93ca74c00b331d79b6f506dbcf1",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {

@@ -352,7 +352,7 @@
   "generatedFiles": {
     "react/Button/Button.module.css": "986dbc6279dce3aa3b5b67e7ce11de162975ccf7e6dd312ffe1385a91949af1f",
     "react/Button/Button.stories.tsx": "89116f45c629db0ee76ce94f0e37c64cde5fc43da2f4d4cb9afb3e48237fafd4",
-    "react/Button/Button.tsx": "c2ad51a851a2a8f467028a51a8c5218af854db36fb54320aa1547e94c402bd63",
+    "react/Button/Button.tsx": "43049acdf02670ae9af3c3581e0140f5191b9875601547522750a4f276a410fc",
     "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
     "wc/ds-button.ts": "8bb69300dfeb9b4723e305cb3ac3c6acc2ee777fdb5e9e0056c4f2c769e78b04",
     "wc/ds-button.css.ts": "44eac862a750d84aa6a02f30ca4995605d06e51e8eda5498b86a20f10666dff2",

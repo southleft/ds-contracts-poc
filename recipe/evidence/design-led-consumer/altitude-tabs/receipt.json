@@ -7,13 +7,13 @@
   "fileKey": "y83n4o9LOGs74oAoguFcGS",
   "generatedSha256": {
     "Tab/Tab.module.css": "67b44b34f96087fb91b0a1168aa93b79b27372980506802509be911c2f4bfbf3",
-    "Tab/Tab.tsx": "e36f1937210675d817250f77902c4c47fc633f421d93e185a21459bb7c087ee6",
+    "Tab/Tab.tsx": "959da0d23764ab75be05b453880c5e4e48a35b19c5b4839c09daea86f2bc7267",
     "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
     "TabPanel/TabPanel.module.css": "59d528d2893d1d23839f375793f84ccfe9f9a7bb8cfd91d2d72bca1282f2594b",
-    "TabPanel/TabPanel.tsx": "ad86f9bb84bd079445ec8f238ebed8d66301c1166b070bffac150696e6ffa914",
+    "TabPanel/TabPanel.tsx": "6cfdf56c5b1157179f752cdd195923b44391fe6a0faeb71422a30897e90a4373",
     "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
     "Tabs/Tabs.module.css": "9badb84f00a42d96cc86d2bcddb7f60eb14b90ac421f00630c28594abaa45e28",
-    "Tabs/Tabs.tsx": "627c8ea2a45c8a960654524529924d03c54f8d4a3f19f8bd305334d42e9bb84d",
+    "Tabs/Tabs.tsx": "0300f4078c792a14b18bd02a2c24731a7c32d411eae089bd6c5a5adb8f51ce7d",
     "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
     "index.ts": "25e7ac738b17998e667231e3df3f250944878c59895f4bde53199c3b3d2c3032",
     "tokens.css": "ab3d2c40dfb58663524539d4ee0dd07aa65a3e48940196453c2e6f210c305c1c"
@@ -109,7 +109,7 @@
     "children": {
       "contractDeclaresSlot": false,
       "renderedAtRuntime": false,
-      "refusedByType": true
+      "refusedByType": false
     },
     "variants": [
       {
@@ -191,6 +191,7 @@
     ]
   },
   "problems": [
+    "children-accepted-but-discarded",
     "variant-axis-inert-ledgered:variant",
     "image-difference-above-limit:variant-default:5.67%",
     "image-difference-above-limit:variant-stretch:6.14%"
@@ -218,7 +219,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "6b690dab9d1ebfab9883483f9a3a6199079aa1f2a34aa766e4371b86df228abf",
+    "tarballSha256": "3b0877d4c55552fe5c2a61cb8a72213203b067ce016aaaaba3142eee3a201545",
     "distFiles": [
       "Tab",
       "Tab/Tab.d.ts",
@@ -246,7 +247,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "200af719988dc66230f570b163003f55a8e168d73f38c262266c5a434fb1a676",
+    "lockfileSha256": "ecb85befa4d038a9746b7e471115df7d34c36114d7fb660086a1a18b7f089d39",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {

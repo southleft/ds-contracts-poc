@@ -289,7 +289,7 @@
   "generatedFiles": {
     "react/ToggleSwitch/ToggleSwitch.module.css": "40af71e3b5706e6fde9e3ee2275b37446a24b27c1f29735aff0beea929c801b2",
     "react/ToggleSwitch/ToggleSwitch.stories.tsx": "afc9eef96d1359d299eddfbeadac8e1d6fcc487c7eb24ac6276879305a613f17",
-    "react/ToggleSwitch/ToggleSwitch.tsx": "8a9fe182de42e91e3d27eab388397201e9bc2a844fb3ab8f4d457d520f54402c",
+    "react/ToggleSwitch/ToggleSwitch.tsx": "81769c03177e4398371cb62efb9df7a9fb3e91dc2cccdd34b69c6ddacca52479",
     "react/ToggleSwitch/index.ts": "940e8045eef208ba44215094dbae139c3481631c48b04c20baf7e4b44f853bba",
     "wc/flowbite-toggleswitch.ts": "4aa4980d8217c434f3e4b2cb0e07bb0012ee035c75129b04df1e2561ff39d13e",
     "wc/flowbite-toggleswitch.css.ts": "9822eccde3d4f0693a062e6b81f4c37f0003597a5f17ab0f88d0ad95e39e51ce",

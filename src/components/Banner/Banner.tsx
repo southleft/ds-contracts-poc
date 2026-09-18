@@ -6,9 +6,6 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   title
- *
- * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -33,7 +30,7 @@ const ROLE_MAP: Record<string, string> = {
   error: 'alert',
 };
 
-export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'title'> {
+export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Feedback tone — drives the color scheme, the leading icon, and the ARIA role (error/warning announce as alerts). */
   status?: 'info' | 'success' | 'warning' | 'error';
   /** card = standalone with radius; section = full-bleed, square. */
@@ -58,6 +55,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
     description = 'Supporting detail that explains what happened and what to do next.',
     endContent,
     className,
+    children,
     ...rest
   },
   ref,

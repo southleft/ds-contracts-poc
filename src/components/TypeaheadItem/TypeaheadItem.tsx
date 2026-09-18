@@ -2,15 +2,12 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/typeahead-item.contract.json (ds.typeahead-item v1.0.0)
  * Regenerate with: npm run generate
- *
- * `children` OMITTED from HTMLAttributes<HTMLDivElement> — the contract declares no slot or
- * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './TypeaheadItem.module.css';
 
-export interface TypeaheadItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TypeaheadItemProps extends HTMLAttributes<HTMLDivElement> {
   /** Primary result text. */
   label: string;
   /** Secondary text below the label. */
@@ -21,7 +18,14 @@ export interface TypeaheadItemProps extends Omit<HTMLAttributes<HTMLDivElement>,
 
 /** Default dropdown item for search results: label with optional icon and description. API mirrors industry convention (Astryx TypeaheadItem) with the item object flattened to explicit props. */
 export const TypeaheadItem = forwardRef<HTMLDivElement, TypeaheadItemProps>(function TypeaheadItem(
-  { label, description = 'Supporting detail about this result.', icon, className, ...rest },
+  {
+    label,
+    description = 'Supporting detail about this result.',
+    icon,
+    className,
+    children,
+    ...rest
+  },
   ref,
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');

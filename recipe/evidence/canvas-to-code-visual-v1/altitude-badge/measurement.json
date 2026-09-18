@@ -259,7 +259,7 @@
     },
     {
       "path": "generated/Badge/Badge.tsx",
-      "sha256": "13e13c714759b8c01d01d7417c2b498c398339f1855bc189528a7f7584ecd1dc"
+      "sha256": "5c6005619cfae77386e035d641013e6461cdb504135033e14c47eaa108b42410"
     },
     {
       "path": "generated/Badge/index.ts",
@@ -279,17 +279,5 @@
     "Dated snapshot comparison, not a live freshness assertion.",
     "Pixel threshold is not exact pixel identity; raw mismatch percentages are retained.",
     "No owner grade, signoff, or overall success is assigned."
-  ],
-  "emittedRefresh": {
-    "at": "2026-09-18",
-    "reason": "core/emit-react.ts omits `children` from the props type and destructure of components whose JSX never renders them; Badge.tsx changed in its interface and parameter list only",
-    "changed": [
-      {
-        "path": "generated/Badge/Badge.tsx",
-        "from": "5c6005619cfa",
-        "to": "13e13c714759"
-      }
-    ],
-    "proof": "old and new Badge.tsx rendered through the same esbuild + Chromium harness on this platform (darwin-arm64, Chromium 149) produced byte-identical screenshots for all 10 variants, so the recorded screenshots, hashes and metrics stand"
-  }
+  ]
 }

@@ -308,12 +308,9 @@ function emitProbe() {
   return { css, tsx, inline, wc };
 }
 const emitted = emitProbe();
-// The probe renders no `children`, so the CSS Modules emitter also refuses
-// them by type (core/emit-react.ts refuseUnrenderedChildren); the collision
-// omissions stay exactly content, hidden, title.
 check(
-  "react: Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'content' | 'hidden' | 'title'>",
-  emitted.tsx.includes("export interface CollisionProbeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'content' | 'hidden' | 'title'> {"),
+  "react: Props extends Omit<HTMLAttributes<HTMLDivElement>, 'content' | 'hidden' | 'title'>",
+  emitted.tsx.includes("export interface CollisionProbeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'content' | 'hidden' | 'title'> {"),
 );
 check('react: the header NAMES the omitted attrs', /DOM attrs OMITTED from HTMLAttributes<HTMLDivElement>[\s\S]*\n \* {3}content, hidden, title\n/.test(emitted.tsx));
 check(
@@ -368,7 +365,7 @@ try {
   writeFileSync(path.join(dir, 'CollisionProbe.module.css'), emitted.css);
   writeFileSync(path.join(dir, 'CollisionProbe.tsx'), emitted.tsx);
   writeFileSync(path.join(dir, 'CollisionProbe.inline.tsx'), emitted.inline);
-  const control = emitted.tsx.replace("Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'content' | 'hidden' | 'title'>", 'HTMLAttributes<HTMLDivElement>');
+  const control = emitted.tsx.replace("Omit<HTMLAttributes<HTMLDivElement>, 'content' | 'hidden' | 'title'>", 'HTMLAttributes<HTMLDivElement>');
   writeFileSync(path.join(dir, 'Control.tsx'), control);
   const wcEntry = 'ds-collision-probe.ts';
   writeFileSync(path.join(dir, wcEntry), emitted.wc.element);
