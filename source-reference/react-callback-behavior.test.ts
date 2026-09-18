@@ -225,3 +225,60 @@ for (const nested of [false, true]) test(`original ${nested ? 'nested' : 'root'}
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+/** The observed role decides the class, never the export name: this fixture's
+ * export is called Checkbox and renders a switch. */
+async function observeRole(role: string, partial: boolean) {
+  mkdirSync("private", { recursive: true });
+  const dir = mkdtempSync(path.join(process.cwd(), "private/callback-role-fixture-"));
+  const browser = await chromium.launch();
+  try {
+    const source = `import React from 'react';
+  type State=${partial ? "false|true|'partial'" : "false|true"};
+  export function Checkbox({value,initialValue=false,emit}:{value?:State;initialValue?:State;emit?:(value:State)=>void}){
+   const [local,setLocal]=React.useState<State>(initialValue);const current=value===undefined?local:value;
+   return <button id="control" type="button" role=${JSON.stringify(role)} aria-checked={current===true?'true':current===false?'false':'mixed'} onClick={()=>{
+    const next=current===true?false:true;if(value===undefined)setLocal(next);emit?.(next);
+   }}>Choose</button>;
+  }`;
+    writeFileSync(path.join(dir, "tsconfig.json"), JSON.stringify({ compilerOptions: { strict: true, skipLibCheck: true, jsx: "react-jsx", target: "ES2022", module: "ESNext", moduleResolution: "Bundler" } }));
+    writeFileSync(path.join(dir, "components.tsx"), source);
+    const program = readReactSourceProgram(dir, ["components.tsx"]);
+    assert.deepEqual(program.problems, []);
+    const c = program.components[0];
+    const identity = { module: c.module, exportName: c.exportName, sourceSha256: c.sourceSha256, span: c.span };
+    const bundle = await build({
+      stdin: { contents: source + `;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_CLONE_ELEMENT=React.cloneElement;window.__DSC_REACT_EXPORTS=[{identity:${JSON.stringify(identity)},value:Checkbox}];flushSync(()=>createRoot(document.getElementById('mount')).render(<main><label htmlFor="control">Preference</label><Checkbox initialValue={false} emit={()=>{}}/></main>));`,
+        resolveDir: dir, loader: "tsx" },
+      bundle: true, write: false, format: "iife",
+    });
+    const context = await browser.newContext();
+    await context.addInitScript(reactOwnershipHook);
+    const page = await context.newPage();
+    await page.setContent('<div id="mount"></div>');
+    await page.addScriptTag({ content: bundle.outputFiles[0].text });
+    const ownership = (await page.evaluate(reactOwnershipRead("#control"))) as ReactOwnership;
+    assert.deepEqual(ownership.problems, []);
+    return await observeReactCallbackBehavior({ page, selector: "#control", program, ownership,
+      instanceId: ownership.components[0].id, assertRestored: async () => {}, assertCurrent: () => {} });
+  } finally {
+    await browser.close();
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+test("a switch is observed by its role like a checkbox; a mixed switch and roles outside the class are refused", async () => {
+  const observed = await observeRole("switch", false);
+  assert.deepEqual(observed.problems, []);
+  assert.equal(observed.role, "switch");
+  assert.equal(observed.qualification, "observed-source-checkbox-behavior-only", "the recorded identifier is unchanged; role carries the class member");
+  assert.equal(observed.rows.length, 8, "two inputs, two values, two activations");
+  assert.deepEqual(observed.relationships.map((r) => [r.property, r.status]),
+    [["initialValue", "initial-only-observed"], ["value", "controlled-observed"]]);
+  assert.equal((await observeRole("checkbox", true)).role, "checkbox");
+  const mixed = await observeRole("switch", true);
+  assert.deepEqual(mixed.problems, ["callback-control-state-unsupported-for-role"]);
+  assert.deepEqual(mixed.relationships, []);
+  const radio = await observeRole("radio", false);
+  assert.deepEqual(radio.problems, ["callback-control-role-unsupported"]);
+  assert.equal(radio.role, undefined);
+});

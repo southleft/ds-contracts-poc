@@ -234,10 +234,13 @@ export function startReactValidation(
               flag: "wx",
             });
             row.sourceImage = sha(source.screenshot);
-            if (sourceTree?.status === 'captured' && profile.associatedLabelText !== undefined) {
-              const checked = profile.probes?.state.properties?.ariaChecked;
-              const disabled = profile.probes?.state.properties?.disabled;
-              if (!['false','true','mixed'].includes(String(checked)) || typeof disabled !== 'boolean')
+            // A witness that states a checked state describes a checked-state
+            // toggle and its interactions are exercised. A labelled control
+            // whose witness states none is not assumed to be one.
+            const checked = profile.probes?.state?.properties?.ariaChecked;
+            if (sourceTree?.status === 'captured' && checked !== undefined) {
+              const disabled = profile.probes?.state?.properties?.disabled;
+              if (!['false','true','mixed'].includes(String(checked)) || typeof disabled !== 'boolean' || profile.associatedLabelText === undefined)
                 throw Error('behavior-profile-incomplete');
               const behavior = await observeCheckboxBehavior(page, {
                 selector: profile.path[0], checked: checked as 'false' | 'true' | 'mixed', disabled, label: profile.associatedLabelText,
