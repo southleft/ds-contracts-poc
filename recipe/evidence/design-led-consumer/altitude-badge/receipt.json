@@ -6,7 +6,8 @@
   "component": "Badge",
   "fileKey": "y83n4o9LOGs74oAoguFcGS",
   "generatedSha256": {
-    "Badge/Badge.module.css": "0483950277cf342c75952ca281e36543cfd66dc158f1b129cf2d5162834fbe72",
+    "Badge/Badge.module.css": "0e60fef0e14c2ac547a9e1669321164c14b2980b7bc940d93f682ac187e3c092",
+    "Badge/Badge.stories.tsx": "fdd105f527688631b8b7732444139ec580bbf97300d9d81dda53e050ccc268ee",
     "Badge/Badge.tsx": "e7fd834efc62ba308e6c1d4ed1d0dac9b8cec1ea73953e8700e62c9dd05e8b1c",
     "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
     "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
@@ -25,7 +26,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(56, 25, 28)",
         "color": "rgb(0, 0, 0)",
-        "width": 52.265625,
+        "width": 57.265625,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -50,7 +51,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(121, 116, 105)",
         "color": "rgb(0, 0, 0)",
-        "width": 52.265625,
+        "width": 57.265625,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -75,7 +76,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(43, 58, 99)",
         "color": "rgb(0, 0, 0)",
-        "width": 52.265625,
+        "width": 57.265625,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -100,7 +101,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(20, 48, 31)",
         "color": "rgb(0, 0, 0)",
-        "width": 52.265625,
+        "width": 57.265625,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -125,7 +126,7 @@
         "text": "Badge",
         "backgroundColor": "rgb(47, 38, 16)",
         "color": "rgb(0, 0, 0)",
-        "width": 52.265625,
+        "width": 57.265625,
         "height": 20,
         "tag": "div",
         "role": null,
@@ -317,15 +318,15 @@
       {
         "key": "variant-danger_shape-label",
         "figmaImage": "figma-3538_35762.png",
-        "mismatchPercent": 17.36842105263158,
-        "withinLimit": false,
+        "mismatchPercent": 3.189655172413793,
+        "withinLimit": true,
         "inkCoveragePercent": {
-          "consumer": 91.89,
+          "consumer": 92.59,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -335,7 +336,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -347,15 +348,15 @@
       {
         "key": "variant-neutral_shape-label",
         "figmaImage": "figma-3538_35764.png",
-        "mismatchPercent": 15.789473684210526,
+        "mismatchPercent": 5.258620689655173,
         "withinLimit": false,
         "inkCoveragePercent": {
-          "consumer": 93.58,
+          "consumer": 94.14,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -365,7 +366,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -377,15 +378,15 @@
       {
         "key": "variant-info_shape-label",
         "figmaImage": "figma-3538_35766.png",
-        "mismatchPercent": 17.192982456140353,
+        "mismatchPercent": 6.896551724137931,
         "withinLimit": false,
         "inkCoveragePercent": {
-          "consumer": 91.89,
+          "consumer": 92.59,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -395,7 +396,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -407,15 +408,15 @@
       {
         "key": "variant-success_shape-label",
         "figmaImage": "figma-3538_35768.png",
-        "mismatchPercent": 17.280701754385966,
-        "withinLimit": false,
+        "mismatchPercent": 4.322033898305085,
+        "withinLimit": true,
         "inkCoveragePercent": {
-          "consumer": 90.19,
+          "consumer": 91.02,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 54,
+            "width": 59,
             "height": 20
           },
           "figma": {
@@ -425,7 +426,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 54,
+            "width": 59,
             "height": 20
           },
           "figma": {
@@ -437,15 +438,15 @@
       {
         "key": "variant-warning_shape-label",
         "figmaImage": "figma-3538_35770.png",
-        "mismatchPercent": 18.771929824561404,
-        "withinLimit": false,
+        "mismatchPercent": 4.741379310344827,
+        "withinLimit": true,
         "inkCoveragePercent": {
-          "consumer": 91.89,
+          "consumer": 92.59,
           "figma": 94.39
         },
         "contentSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -455,7 +456,7 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 53,
+            "width": 58,
             "height": 20
           },
           "figma": {
@@ -618,16 +619,8 @@
   },
   "problems": [
     "children-accepted-but-discarded",
-    "image-difference-above-limit:variant-danger_shape-label:17.37%",
-    "content-size-mismatch:variant-danger_shape-label:53x20 vs 57x20",
-    "image-difference-above-limit:variant-neutral_shape-label:15.79%",
-    "content-size-mismatch:variant-neutral_shape-label:53x20 vs 57x20",
-    "image-difference-above-limit:variant-info_shape-label:17.19%",
-    "content-size-mismatch:variant-info_shape-label:53x20 vs 57x20",
-    "image-difference-above-limit:variant-success_shape-label:17.28%",
-    "content-size-mismatch:variant-success_shape-label:54x20 vs 57x20",
-    "image-difference-above-limit:variant-warning_shape-label:18.77%",
-    "content-size-mismatch:variant-warning_shape-label:53x20 vs 57x20"
+    "image-difference-above-limit:variant-neutral_shape-label:5.26%",
+    "image-difference-above-limit:variant-info_shape-label:6.90%"
   ],
   "limitations": [
     "single component set; composition, nested instances and instance swaps are not exercised here",
@@ -637,8 +630,7 @@
   "inputs": {
     "degradations": {
       "variables-unavailable": 1,
-      "variable-unresolved": 85,
-      "text-channel-unsupported": 5
+      "variable-unresolved": 85
     },
     "stubContracts": [],
     "componentFolders": [
@@ -647,7 +639,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/badge",
-    "tarballSha256": "a3edd06cde4919ff47ef92ac223bd6f785fa59520e339ecde4a50da7d83bdd40",
+    "tarballSha256": "d43c6731861449c2eeae97868eedf9546f129ecd2067cbd3e112acf39845e51e",
     "distFiles": [
       "Badge",
       "Badge/Badge.d.ts",
@@ -663,11 +655,11 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "22987f69976693d087b2a7097d8453d20b5ae93ca74c00b331d79b6f506dbcf1",
+    "lockfileSha256": "7bfd37726b1bd2f70a3ae28b7a7544a94702d959383418484e8fc16995c6b4fd",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 16559,
+      "bytes": 16582,
       "tokenDefinitions": 303,
       "tokenDefinitionsExpected": 303
     }

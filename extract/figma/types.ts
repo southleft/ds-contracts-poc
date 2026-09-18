@@ -357,7 +357,24 @@ export interface DumpNode {
    *  Absence in older dumps means not captured, never "no gradient". */
   gradient?: DumpGradient;
   stroke?: DumpPaint;
+  /** The ONE literal stroke weight, when all four sides share it. Since dump
+   *  v1.34 it is ABSENT on a node whose sides differ (see `strokeWeights`):
+   *  such a node has no uniform weight, and the number Figma reports in its
+   *  place (REST says 0 for sides [1, 0, 1, 0]; the Plugin API says
+   *  `figma.mixed`) is not a drawn fact. */
   strokeWeight?: number;
+  /** Per-side literal stroke weights in px (dump v1.34, additive) — written
+   *  ONLY when the four sides are not all equal (a header rule drawn top 1 /
+   *  right 0 / bottom 1 / left 0), in place of `strokeWeight`, never beside
+   *  it: one node carries exactly one of the two spellings, so no consumer
+   *  can read a uniform weight AND a per-side one off the same stroke. A
+   *  side's 0 is a DRAWN fact here (the designer drew no rule on that side)
+   *  and is kept. Inverts to the `border-top-width` / `border-right-width` /
+   *  `border-bottom-width` / `border-left-width` literal channels. Bound
+   *  per-side weights ride `bound` (strokeTopWeight…) instead. Absence means
+   *  not captured (dump ≤ v1.33 receipted it as `stroke-weights-nonuniform`),
+   *  never zero. */
+  strokeWeights?: { top: number; right: number; bottom: number; left: number };
   /** Where the stroke weight is drawn relative to the node box (dump v1.11,
    *  additive). Captured on EVERY stroke, INSIDE included — an ABSENT field
    *  means "not captured" (dump ≤ v1.10), which is NOT the same fact as
