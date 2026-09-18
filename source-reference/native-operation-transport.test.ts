@@ -132,12 +132,15 @@ async function fixture(t: test.TestContext) {
     const supplied = init.headers.Authorization.slice(7),
       payload = JSON.parse(init.body);
     let body: any;
+    if (url.endsWith("/begin")) return { ok: true, json: async () => transport.begin(id, supplied, payload.attemptId) };
     if (url.endsWith("/claim")) {
       body = transport.claim(
         id,
         supplied,
         payload.fileKey,
         payload.replaceReadbackAttemptId,
+        payload.resolveWriteAttemptId,
+        payload.protocol,
       );
       if (body.command) delivered.push(body.command);
     } else {

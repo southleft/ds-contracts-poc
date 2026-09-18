@@ -89,7 +89,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
         report.instanceId !== (value.request.version === 2 ? value.request.instanceId : undefined)) throw Error('react-initial-report-invalid');
     return { dir, report, pin: { id: latest.id as string, inventorySha256: latest.inventorySha256 as string, reportSha256: evidenceSha(reportBytes) } };
   };
-  const derive = (value: ReturnType<typeof input>, record: NonNullable<ReturnType<typeof saved>>) => {
+  const derive = (value: ReturnType<typeof input>, record: NonNullable<ReturnType<typeof saved>>, identity?: string) => {
     const report = structuredClone(record.report);
     if (report.phase === 'complete' && report.observation) {
       const observedId = report.observation.instanceId;
@@ -103,7 +103,7 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
       // Derived from authenticated immutable observations under today's compiler;
       // never overwrite the historical observation or accept a contract here.
       report.draft = compileReactInitialContract(value.source.program, value.source.ownership, value.source.captured.tree,
-        report.observation, snapshots);
+        report.observation, snapshots, identity);
     }
     return report;
   };
@@ -132,14 +132,14 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
         imageSha256: evidenceSha(cropped.bytes), bounds, crop: cropped.crop, sourceSize: cropped.sourceSize, qualification: 'unqualified' };
       return { bytes: cropped.bytes, frame };
   };
-  const nativeEvidenceFresh=(reference: ReactReference, request: ReactInitialNativeRequest) => {
+  const nativeEvidenceFresh=(reference: ReactReference, request: ReactInitialNativeRequest, identity?: string) => {
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId)
         throw Error('react-initial-native-request-invalid');
       // Resolve the pinned archive directly, never via the latest pointer or
       // the journal's list/get path (which calls this evidence reader itself).
       const value = from(reference, reactInspectionRequest(request.anchor, request.caseId, request.version === 2 ? request.instanceId : undefined));
       const record = saved(value, request.observation)!;
-      const report = derive(value, record);
+      const report = derive(value, record, identity);
       if (report.phase !== 'complete' || !report.sourceUnchanged || report.problems.length || report.draft?.status !== 'compiled-draft')
         throw Error('react-initial-native-observation-unavailable');
       const trees = Object.fromEntries(report.draft.nativeVariants.map(variant => {
@@ -167,9 +167,10 @@ export function createReactInitialInspectionStore(repo: string, sourceRoot: stri
         throw Error('react-initial-native-observation-unavailable');
       return { ...value.request, kind: 'react-initial-draft', observation: record.pin };
     },
-    nativeEvidence(reference:ReactReference,request:ReactInitialNativeRequest) {
-      return evidenceReadOnce('react-initial',{repo,referenceId:reference.id,files:reference.files,request},
-        ()=>nativeEvidenceFresh(reference,request));
+    /** `identity` compiles for an existing native component; see compileReactInitialContract. */
+    nativeEvidence(reference:ReactReference,request:ReactInitialNativeRequest,identity?:string) {
+      return evidenceReadOnce('react-initial',{repo,referenceId:reference.id,files:reference.files,request,identity},
+        ()=>nativeEvidenceFresh(reference,request,identity));
     },
     nativeImage(reference: ReactReference, request: ReactInitialNativeRequest, rowId: string) {
       if (!isReactInitialNativeRequest(request) || reference.id !== request.anchor.referenceId || !/^\d+$/.test(rowId))
