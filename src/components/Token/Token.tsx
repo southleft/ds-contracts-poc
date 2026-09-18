@@ -6,12 +6,15 @@
  * DOM attrs OMITTED from HTMLAttributes<HTMLSpanElement> — the contract's own props claim these
  * names, so the HTML attribute of the same name cannot be passed through ...rest:
  *   color
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './Token.module.css';
 
-export interface TokenProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'> {
+export interface TokenProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children' | 'color'> {
   /** Color variant. */
   color?:
     | 'default'
@@ -47,7 +50,6 @@ export const Token = forwardRef<HTMLSpanElement, TokenProps>(function Token(
     icon,
     endContent,
     className,
-    children,
     ...rest
   },
   ref,

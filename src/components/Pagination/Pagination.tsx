@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/pagination.contract.json (ds.pagination v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -14,7 +17,7 @@ const ICONS: Record<string, string> = {
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="7.8,5.5 12.3,10 7.8,14.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
-export interface PaginationProps extends HTMLAttributes<HTMLElement> {
+export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
   /** Numbered trail, compact page label, or dot indicators. */
   variant?: 'pages' | 'compact' | 'dots';
   /** The compact variant's label text. */
@@ -25,7 +28,7 @@ export interface PaginationProps extends HTMLAttributes<HTMLElement> {
 
 /** Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries — the pages variant shows a representative trail. */
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagination(
-  { variant = 'pages', pageLabel = 'Page 2 of 10', label, className, children, ...rest },
+  { variant = 'pages', pageLabel = 'Page 2 of 10', label, className, ...rest },
   ref,
 ) {
   // axis-inert (ledgered, not a throw): variant — no `.<axis>-*` rule
