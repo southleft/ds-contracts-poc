@@ -46,6 +46,7 @@ import { alignPair, diffPair, readPng, writeTriptych } from '../extract/figma/vi
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGE_LIMIT_PERCENT = 5; // the existing antialias-tolerant limit (docs/CURRENT.md)
+const SIZE_SLACK_PX = 2; // antialias slack on trimmed content bounds, never a fidelity allowance
 
 type Args = { dump: string; contract: string; generated: string; component: string; out: string; token?: string };
 function parseArgs(argv: string[]): Args {
@@ -61,15 +62,29 @@ const run = (cmd: string, args: string[], cwd: string) => {
   catch (error: any) { throw new Error(`${path.basename(cmd)} ${args.slice(0, 2).join(' ')} failed: ${String(error.stdout ?? '').trim().split('\n').slice(0, 3).join(' | ')} ${String(error.stderr ?? '').trim().split('\n').slice(0, 3).join(' | ')}`); }
 };
 
-interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, string>; hasText: boolean; textProp?: string }
+interface Case { key: string; nodeId: string; figmaName: string; props: Record<string, unknown>; hasText: boolean; textProp?: string }
+
+/** Array props (`arrayOf`) take the design's own repeat sample from the
+ * contract anatomy; the consumer supplies no content of its own. */
+function arraySamples(contract: any): Record<string, unknown[]> {
+  const out: Record<string, unknown[]> = {};
+  const walk = (node: any) => {
+    if (!node || typeof node !== 'object') return;
+    if (node.repeat?.itemsProp && Array.isArray(node.repeat.sample)) out[node.repeat.itemsProp] = node.repeat.sample;
+    for (const value of Object.values(node)) if (value && typeof value === 'object') walk(value);
+  };
+  walk(contract.anatomy);
+  return out;
+}
 
 function deriveCases(dump: any, contract: any, component: string): Case[] {
   const set = dump[component] ?? Object.values(dump).find((v: any) => v && typeof v === 'object' && v.setName === component);
   if (!set || !Array.isArray(set.variants)) throw new Error(`design:consumer:check — dump has no component set "${component}"`);
   const variantProps = (contract.props as any[]).filter(p => p.bindings?.figma?.kind === 'VARIANT');
   const textProp = (contract.props as any[]).find(p => p.bindings?.figma?.kind === 'TEXT' && p.type === 'text');
+  const samples = arraySamples(contract);
   return set.variants.map((variant: any) => {
-    const props: Record<string, string> = {};
+    const props: Record<string, unknown> = { ...samples };
     for (const segment of String(variant.name).split(',').map((s: string) => s.trim())) {
       const eq = segment.indexOf('='); if (eq <= 0) continue;
       const property = segment.slice(0, eq), value = segment.slice(eq + 1);
@@ -78,7 +93,7 @@ function deriveCases(dump: any, contract: any, component: string): Case[] {
       const entry = Object.entries(prop.bindings.figma.values ?? {}).find(([, figmaValue]) => figmaValue === value);
       if (entry) props[prop.name] = entry[0];
     }
-    const key = Object.entries(props).map(([k, v]) => `${k}-${v}`).join('_') || 'default';
+    const key = Object.entries(props).filter(([k]) => !(k in samples)).map(([k, v]) => `${k}-${v}`).join('_') || 'default';
     return { key, nodeId: variant.nodeId ?? '', figmaName: variant.name, props, hasText: !!textProp, textProp: textProp?.name };
   });
 }
@@ -128,7 +143,7 @@ function writeConsumer(work: string, lib: { name: string; tarball: string }, com
   writeFileSync(path.join(consumer, 'package.json'), JSON.stringify({ name: 'clean-consumer', private: true, type: 'module', version: '0.0.0',
     dependencies: { react: reactVersion, 'react-dom': reactVersion, [lib.name]: `file:${lib.tarball}` }, devDependencies: { vite: '^7' } }, null, 2));
   writeFileSync(path.join(consumer, 'vite.config.js'), "export default { base: './', esbuild: { jsx: 'automatic' }, build: { minify: false } };\n");
-  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:transparent}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
+  writeFileSync(path.join(consumer, 'index.html'), '<!doctype html><html><head><meta charset="utf-8"><style>html{color-scheme:light}body{margin:0;background:#fff}*,*::before,*::after{animation:none!important;transition:none!important}</style></head><body><div id="root"></div><script type="module" src="./main.jsx"></script></body></html>\n');
   writeFileSync(path.join(consumer, 'cases.json'), JSON.stringify(cases.map(c => ({ key: c.key, props: c.props, textProp: c.textProp ?? null }))));
   writeFileSync(path.join(consumer, 'main.jsx'), `import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -203,6 +218,13 @@ async function main() {
     ] };
   const walk = (dir: string, base = dir): void => { for (const entry of readdirSync(dir)) { const p = path.join(dir, entry); statSync(p).isDirectory() ? walk(p, base) : (receipt.generatedSha256[path.relative(base, p)] = sha256(readFileSync(p))); } };
   walk(args.generated);
+  // What the reader already gave up on, and which dependencies are placeholders.
+  const degradations: Array<{ code?: string }> = Array.isArray(dump._degradations) ? dump._degradations : [];
+  receipt.inputs = {
+    degradations: Object.fromEntries([...new Set(degradations.map(d => d.code ?? 'unknown'))].map(code => [code, degradations.filter(d => (d.code ?? 'unknown') === code).length])),
+    stubContracts: readdirSync(path.dirname(args.contract)).filter(f => /\.stub\.contract(\.proposed)?\.json$/.test(f)),
+    componentFolders: readdirSync(args.generated).filter(f => statSync(path.join(args.generated, f)).isDirectory()),
+  };
   try {
     const lib = packageLibrary(args.generated, args.component, work);
     receipt.package = { name: lib.name, tarballSha256: lib.tarballSha256, distFiles: readdirSync(lib.dist, { recursive: true }).map(String).sort() };
@@ -262,7 +284,9 @@ async function main() {
         if (font && !font.available) problems.push(`font-unavailable-in-consumer:${c.key}:${font.family.split(',')[0].trim()}`);
         const text = (await cell.innerText()).trim();
         if (!(style.width > 0 && style.height > 0)) problems.push(`zero-size-render:${c.key}`);
-        const shot = path.join(args.out, `consumer-${c.key}.png`); await cell.screenshot({ path: shot, timeout: 10000, omitBackground: true });
+        // The root element's layout box on a white page, the same comparison
+        // basis the application uses; Figma's export is the node's own bounds.
+        const shot = path.join(args.out, `consumer-${c.key}.png`); await root.screenshot({ path: shot, timeout: 10000 });
         receipt.cases.push({ key: c.key, figmaName: c.figmaName, nodeId: c.nodeId, props: c.props, rendered: { text, ...style, font }, screenshot: path.basename(shot) });
       }
       // Behavior: the TEXT-bound prop must change the rendered text wherever the design shows text.
@@ -277,6 +301,19 @@ async function main() {
         else if (changed.length !== textBearing.length) problems.push('text-prop-discarded');
         await page.evaluate(() => (window as any).__consumer.setText(null));
       } else receipt.behavior.text = { prop: null, note: 'contract declares no TEXT-bound prop' };
+      // Behavior: array props with text fields must render replaced item text.
+      receipt.behavior.arrays = [];
+      for (const [prop, sample] of Object.entries(arraySamples(contract))) {
+        const textField = sample.length && typeof sample[0] === 'object' ? Object.keys(sample[0] as object).find(k => typeof (sample[0] as any)[k] === 'string') : undefined;
+        if (!textField) { receipt.behavior.arrays.push({ prop, note: 'no text field in sample' }); continue; }
+        const replaced = sample.map((item, i) => ({ ...(item as object), [textField]: `Replaced item ${i + 1}` }));
+        await page.evaluate(([name, value]) => (window as any).__consumer.setVariantOverride({ [name]: value }), [prop, replaced] as const);
+        const texts = await Promise.all(cases.map(async c => (await page.locator(`[data-cell="${c.key}"]`).innerText())));
+        await page.evaluate(() => (window as any).__consumer.setVariantOverride(null));
+        const rendered = cases.filter((c, i) => replaced.every((item: any) => texts[i].includes(item[textField]))).map(c => c.key);
+        receipt.behavior.arrays.push({ prop, textField, items: sample.length, cellsRenderingAllItems: rendered });
+        if (rendered.length !== cases.length) problems.push(`array-prop-items-not-rendered:${prop}`);
+      }
       // Behavior: React children. If the contract declares no slot, the component
       // must not silently accept and discard them; if it declares one, they must render.
       {
@@ -307,7 +344,11 @@ async function main() {
         const shouldChange = cases.filter(c => c.props[prop.name] !== undefined && c.props[prop.name] !== target);
         const didChange = shouldChange.filter(c => baseline[c.key] !== switched[c.key]);
         receipt.behavior.variants.push({ prop: prop.name, switchedTo: target, cellsExpectedToChange: shouldChange.map(c => c.key), cellsChanged: didChange.map(c => c.key) });
-        if (didChange.length !== shouldChange.length) problems.push(`variant-prop-discarded:${prop.name}`);
+        if (didChange.length !== shouldChange.length) {
+          // The emitter ledgers an axis whose values drew no style difference on the canvas; name that reader outcome apart from a dropped prop.
+          const inert = new RegExp(`axis-inert \\(ledgered, not a throw\\): ${prop.bindings.code?.prop ?? prop.name}\\b`).test(readFileSync(path.join(args.generated, args.component, `${args.component}.tsx`), 'utf8'));
+          problems.push(inert ? `variant-axis-inert-ledgered:${prop.name}` : `variant-prop-discarded:${prop.name}`);
+        }
       }
       if (errors.length) problems.push(...errors.map(e => 'consumer-runtime-error: ' + e.slice(0, 200)));
     } finally { await browser.close(); server.close(); }
@@ -326,9 +367,16 @@ async function main() {
       writeTriptych(path.join(args.out, `triptych-${c.key}.png`), aligned, diff.diff);
       const percent = diff.unmaskedPct;
       if (!Number.isFinite(percent)) { problems.push(`image-score-unavailable:${c.key}`); receipt.images.cases.push({ key: c.key, status: 'image-score-unavailable' }); continue; }
-      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, withinLimit: percent <= IMAGE_LIMIT_PERCENT,
+      // Share of non-white, non-transparent pixels on each side: a mostly
+      // white surface can score under the limit while drawing far less ink.
+      const ink = (png: import('pngjs').PNG) => { let n = 0; for (let i = 0; i < png.data.length; i += 4) if (png.data[i + 3] > 8 && (png.data[i] < 247 || png.data[i + 1] < 247 || png.data[i + 2] < 247)) n++; return Math.round(10000 * n / (png.width * png.height)) / 100; };
+      receipt.images.cases.push({ key: c.key, figmaImage: path.basename(file), mismatchPercent: percent, withinLimit: percent <= IMAGE_LIMIT_PERCENT, inkCoveragePercent: { consumer: ink(ours), figma: ink(theirs) },
         contentSize: { consumer: aligned.aContent, figma: aligned.bContent }, screenshotSize: { consumer: { width: ours.width, height: ours.height }, figma: { width: theirs.width, height: theirs.height } } });
       if (percent > IMAGE_LIMIT_PERCENT) problems.push(`image-difference-above-limit:${c.key}:${percent.toFixed(2)}%`);
+      // Mostly-white surfaces can score under the pixel limit while the
+      // rendered size is wrong; the trimmed content size must agree too.
+      const dw = Math.abs(aligned.aContent.width - aligned.bContent.width), dh = Math.abs(aligned.aContent.height - aligned.bContent.height);
+      if (dw > SIZE_SLACK_PX || dh > SIZE_SLACK_PX) problems.push(`content-size-mismatch:${c.key}:${aligned.aContent.width}x${aligned.aContent.height} vs ${aligned.bContent.width}x${aligned.bContent.height}`);
     } else problems.push('figma-images-unavailable');
   } catch (error) {
     problems.push('check-failed: ' + (error instanceof Error ? error.message : String(error)).split('\n')[0]);

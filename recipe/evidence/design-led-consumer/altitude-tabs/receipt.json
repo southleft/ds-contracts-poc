@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "Tabs",
+  "fileKey": "y83n4o9LOGs74oAoguFcGS",
+  "generatedSha256": {
+    "Tab/Tab.module.css": "67b44b34f96087fb91b0a1168aa93b79b27372980506802509be911c2f4bfbf3",
+    "Tab/Tab.tsx": "e36f1937210675d817250f77902c4c47fc633f421d93e185a21459bb7c087ee6",
+    "Tab/index.ts": "4b40495fdb71ccdf8cff76262ca0272380ae3e041473b97aa58d36f6b9059f7d",
+    "TabPanel/TabPanel.module.css": "59d528d2893d1d23839f375793f84ccfe9f9a7bb8cfd91d2d72bca1282f2594b",
+    "TabPanel/TabPanel.tsx": "ad86f9bb84bd079445ec8f238ebed8d66301c1166b070bffac150696e6ffa914",
+    "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
+    "Tabs/Tabs.module.css": "9badb84f00a42d96cc86d2bcddb7f60eb14b90ac421f00630c28594abaa45e28",
+    "Tabs/Tabs.tsx": "627c8ea2a45c8a960654524529924d03c54f8d4a3f19f8bd305334d42e9bb84d",
+    "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
+    "index.ts": "25e7ac738b17998e667231e3df3f250944878c59895f4bde53199c3b3d2c3032",
+    "tokens.css": "ab3d2c40dfb58663524539d4ee0dd07aa65a3e48940196453c2e6f210c305c1c"
+  },
+  "cases": [
+    {
+      "key": "variant-default",
+      "figmaName": "Variant=Default",
+      "nodeId": "3558:61901",
+      "props": {
+        "items": [
+          {
+            "text": "Tab label"
+          },
+          {
+            "text": "Tab label"
+          },
+          {
+            "text": "Tab label"
+          }
+        ],
+        "variant": "default"
+      },
+      "rendered": {
+        "text": "Tab label\nTab label\nTab label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 439,
+        "height": 174,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-default.png"
+    },
+    {
+      "key": "variant-stretch",
+      "figmaName": "Variant=Stretch",
+      "nodeId": "3558:61928",
+      "props": {
+        "items": [
+          {
+            "text": "Tab label"
+          },
+          {
+            "text": "Tab label"
+          },
+          {
+            "text": "Tab label"
+          }
+        ],
+        "variant": "stretch"
+      },
+      "rendered": {
+        "text": "Tab label\nTab label\nTab label",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "width": 439,
+        "height": 174,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "Times",
+          "weight": "400",
+          "size": "16px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-stretch.png"
+    }
+  ],
+  "behavior": {
+    "text": {
+      "prop": null,
+      "note": "contract declares no TEXT-bound prop"
+    },
+    "arrays": [
+      {
+        "prop": "items",
+        "textField": "text",
+        "items": 3,
+        "cellsRenderingAllItems": [
+          "variant-default",
+          "variant-stretch"
+        ]
+      }
+    ],
+    "children": {
+      "contractDeclaresSlot": false,
+      "renderedAtRuntime": false,
+      "refusedByType": true
+    },
+    "variants": [
+      {
+        "prop": "variant",
+        "switchedTo": "default",
+        "cellsExpectedToChange": [
+          "variant-stretch"
+        ],
+        "cellsChanged": []
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1, no text mask)",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "variant-default",
+        "figmaImage": "figma-3558_61901.png",
+        "mismatchPercent": 5.66628701594533,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 1.41,
+          "figma": 12.72
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 439,
+            "height": 174
+          },
+          "figma": {
+            "width": 438,
+            "height": 176
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 439,
+            "height": 174
+          },
+          "figma": {
+            "width": 439,
+            "height": 176
+          }
+        }
+      },
+      {
+        "key": "variant-stretch",
+        "figmaImage": "figma-3558_61928.png",
+        "mismatchPercent": 6.141281838890039,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 1.41,
+          "figma": 13.26
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 439,
+            "height": 174
+          },
+          "figma": {
+            "width": 439,
+            "height": 176
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 439,
+            "height": 174
+          },
+          "figma": {
+            "width": 439,
+            "height": 176
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "variant-axis-inert-ledgered:variant",
+    "image-difference-above-limit:variant-default:5.67%",
+    "image-difference-above-limit:variant-stretch:6.14%"
+  ],
+  "limitations": [
+    "single component set; composition, nested instances and instance swaps are not exercised here",
+    "declared behavior beyond text and variant props is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 44,
+      "stroke-weights-nonuniform": 2
+    },
+    "stubContracts": [
+      "ds-tab-2.stub.contract.proposed.json",
+      "ds-tab-panel.stub.contract.proposed.json"
+    ],
+    "componentFolders": [
+      "Tab",
+      "TabPanel",
+      "Tabs"
+    ]
+  },
+  "package": {
+    "name": "@ds-contracts-generated/tabs",
+    "tarballSha256": "6b690dab9d1ebfab9883483f9a3a6199079aa1f2a34aa766e4371b86df228abf",
+    "distFiles": [
+      "Tab",
+      "Tab/Tab.d.ts",
+      "Tab/Tab.js",
+      "Tab/Tab.module.css",
+      "Tab/index.d.ts",
+      "Tab/index.js",
+      "TabPanel",
+      "TabPanel/TabPanel.d.ts",
+      "TabPanel/TabPanel.js",
+      "TabPanel/TabPanel.module.css",
+      "TabPanel/index.d.ts",
+      "TabPanel/index.js",
+      "Tabs",
+      "Tabs/Tabs.d.ts",
+      "Tabs/Tabs.js",
+      "Tabs/Tabs.module.css",
+      "Tabs/index.d.ts",
+      "Tabs/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "0d50238e20633bab8147a9848554aef919e51cb198c4fc4b11ed676097de94bc",
+    "repoPathInLockfile": false,
+    "builtCss": {
+      "bytes": 15719,
+      "tokenDefinitions": 291,
+      "tokenDefinitionsExpected": 291
+    }
+  },
+  "outcome": "refused-or-failed"
+}

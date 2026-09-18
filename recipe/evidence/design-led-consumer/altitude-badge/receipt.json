@@ -257,6 +257,7 @@
         "variant-warning_shape-label"
       ]
     },
+    "arrays": [],
     "children": {
       "contractDeclaresSlot": false,
       "renderedAtRuntime": false,
@@ -318,32 +319,10 @@
         "figmaImage": "figma-3538_35762.png",
         "mismatchPercent": 17.36842105263158,
         "withinLimit": false,
-        "contentSize": {
-          "consumer": {
-            "width": 52,
-            "height": 20
-          },
-          "figma": {
-            "width": 57,
-            "height": 20
-          }
+        "inkCoveragePercent": {
+          "consumer": 91.89,
+          "figma": 94.39
         },
-        "screenshotSize": {
-          "consumer": {
-            "width": 61,
-            "height": 28
-          },
-          "figma": {
-            "width": 57,
-            "height": 20
-          }
-        }
-      },
-      {
-        "key": "variant-neutral_shape-label",
-        "figmaImage": "figma-3538_35764.png",
-        "mismatchPercent": 15.789473684210526,
-        "withinLimit": false,
         "contentSize": {
           "consumer": {
             "width": 53,
@@ -356,8 +335,38 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 61,
-            "height": 28
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-neutral_shape-label",
+        "figmaImage": "figma-3538_35764.png",
+        "mismatchPercent": 15.789473684210526,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 93.58,
+          "figma": 94.39
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
           },
           "figma": {
             "width": 57,
@@ -368,11 +377,15 @@
       {
         "key": "variant-info_shape-label",
         "figmaImage": "figma-3538_35766.png",
-        "mismatchPercent": 16.49122807017544,
+        "mismatchPercent": 17.192982456140353,
         "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 91.89,
+          "figma": 94.39
+        },
         "contentSize": {
           "consumer": {
-            "width": 52,
+            "width": 53,
             "height": 20
           },
           "figma": {
@@ -382,8 +395,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 61,
-            "height": 28
+            "width": 53,
+            "height": 20
           },
           "figma": {
             "width": 57,
@@ -396,9 +409,13 @@
         "figmaImage": "figma-3538_35768.png",
         "mismatchPercent": 17.280701754385966,
         "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 90.19,
+          "figma": 94.39
+        },
         "contentSize": {
           "consumer": {
-            "width": 52,
+            "width": 54,
             "height": 20
           },
           "figma": {
@@ -408,8 +425,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 62,
-            "height": 28
+            "width": 54,
+            "height": 20
           },
           "figma": {
             "width": 57,
@@ -422,9 +439,13 @@
         "figmaImage": "figma-3538_35770.png",
         "mismatchPercent": 18.771929824561404,
         "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 91.89,
+          "figma": 94.39
+        },
         "contentSize": {
           "consumer": {
-            "width": 52,
+            "width": 53,
             "height": 20
           },
           "figma": {
@@ -434,8 +455,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 61,
-            "height": 28
+            "width": 53,
+            "height": 20
           },
           "figma": {
             "width": 57,
@@ -448,9 +469,13 @@
         "figmaImage": "figma-3625_17418.png",
         "mismatchPercent": 0,
         "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
         "contentSize": {
           "consumer": {
-            "width": 8,
+            "width": 9,
             "height": 8
           },
           "figma": {
@@ -460,8 +485,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 17,
-            "height": 26
+            "width": 9,
+            "height": 8
           },
           "figma": {
             "width": 8,
@@ -474,9 +499,13 @@
         "figmaImage": "figma-3625_17420.png",
         "mismatchPercent": 0,
         "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
         "contentSize": {
           "consumer": {
-            "width": 8,
+            "width": 9,
             "height": 8
           },
           "figma": {
@@ -486,8 +515,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 17,
-            "height": 26
+            "width": 9,
+            "height": 8
           },
           "figma": {
             "width": 8,
@@ -500,9 +529,13 @@
         "figmaImage": "figma-3625_17422.png",
         "mismatchPercent": 0,
         "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
         "contentSize": {
           "consumer": {
-            "width": 8,
+            "width": 9,
             "height": 8
           },
           "figma": {
@@ -512,8 +545,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 17,
-            "height": 26
+            "width": 9,
+            "height": 8
           },
           "figma": {
             "width": 8,
@@ -526,9 +559,13 @@
         "figmaImage": "figma-3625_17424.png",
         "mismatchPercent": 0,
         "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
         "contentSize": {
           "consumer": {
-            "width": 8,
+            "width": 9,
             "height": 8
           },
           "figma": {
@@ -538,8 +575,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 17,
-            "height": 26
+            "width": 9,
+            "height": 8
           },
           "figma": {
             "width": 8,
@@ -552,9 +589,13 @@
         "figmaImage": "figma-3625_17426.png",
         "mismatchPercent": 0,
         "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
         "contentSize": {
           "consumer": {
-            "width": 8,
+            "width": 9,
             "height": 8
           },
           "figma": {
@@ -564,8 +605,8 @@
         },
         "screenshotSize": {
           "consumer": {
-            "width": 17,
-            "height": 26
+            "width": 9,
+            "height": 8
           },
           "figma": {
             "width": 8,
@@ -577,16 +618,32 @@
   },
   "problems": [
     "image-difference-above-limit:variant-danger_shape-label:17.37%",
+    "content-size-mismatch:variant-danger_shape-label:53x20 vs 57x20",
     "image-difference-above-limit:variant-neutral_shape-label:15.79%",
-    "image-difference-above-limit:variant-info_shape-label:16.49%",
+    "content-size-mismatch:variant-neutral_shape-label:53x20 vs 57x20",
+    "image-difference-above-limit:variant-info_shape-label:17.19%",
+    "content-size-mismatch:variant-info_shape-label:53x20 vs 57x20",
     "image-difference-above-limit:variant-success_shape-label:17.28%",
-    "image-difference-above-limit:variant-warning_shape-label:18.77%"
+    "content-size-mismatch:variant-success_shape-label:54x20 vs 57x20",
+    "image-difference-above-limit:variant-warning_shape-label:18.77%",
+    "content-size-mismatch:variant-warning_shape-label:53x20 vs 57x20"
   ],
   "limitations": [
     "single component set; composition, nested instances and instance swaps are not exercised here",
     "declared behavior beyond text and variant props is not exercised",
     "accessibility is not measured beyond the rendered element"
   ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 85,
+      "text-channel-unsupported": 5
+    },
+    "stubContracts": [],
+    "componentFolders": [
+      "Badge"
+    ]
+  },
   "package": {
     "name": "@ds-contracts-generated/badge",
     "tarballSha256": "28a5bee1734b3364b205d1c18ef3cc80033ad3f23697500d6093a5f023d4ff3f",
@@ -605,7 +662,7 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "dfe6678c1a8b2777fe875d2447e240f16594810767322961ed153432a5831d30",
+    "lockfileSha256": "dcd96f9ae41118a3c00b7b5b992f3ff738eba9ead6d5650cce3a6f378db8b2f8",
     "repoPathInLockfile": false,
     "builtCss": {
       "bytes": 16559,
