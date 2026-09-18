@@ -23,8 +23,20 @@ function correctionValue(value: NativeContractUpdatePlan['changes'][number]['bef
   </li>)}</ol>;
 }
 
+/** An existing native operation for one of these source cases that still
+ * follows another revision of the source. */
+interface MovedOperation { operationId: string; caseId: string; kind: 'root' | 'initial'; followedReferenceId: string; fileKey: string; phase: string }
+function updateProblem(problem: string) {
+  const [name, ...node] = problem.split(':'), nodeId = node.join(':');
+  if (name === 'native-update-observation-refused') return 'The canvas did not match what this update expected. Nothing further was written.';
+  if (name === 'native-update-baseline-conflict') return 'Another property of these components changed in Figma after the last verified readback. Restore it, or review it as a design change, then inspect again.';
+  if (name === 'native-update-node-missing') return `Node ${nodeId} no longer exists in the file.`;
+  if (name === 'native-update-file-mismatch') return 'The companion is connected to a different Figma file.';
+  if (name.endsWith('-conflict')) return `${nodeId ? `Node ${nodeId}: t` : 'T'}he property this update changes holds a value that is neither the saved value nor the proposed value. It was edited in Figma; this update will not overwrite it.`;
+  return problem;
+}
 interface Operation {
-  kind: 'root' | 'comparison' | 'initial' | 'nested';
+  kind: 'root' | 'comparison' | 'initial' | 'nested'; sourceRevisions?: string[];
   initialStates?: Array<{ observation: string; variant: string; frame?: SourceFrame }>; parentOperationId?: string; sourceOperationId?: string;
   updates?: Array<{ id: string; status: 'planned'; changes: NativeContractUpdatePlan['changes'];
     operation?: ReturnType<ReturnType<typeof createNativeUpdateJobs>['get']> | null;
@@ -39,6 +51,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   referenceId: string; selectedCase: string; ownership: ReactOwnershipReport | null;
 }) {
   const [rows, setRows] = useState<Operation[]>([]), [error, setError] = useState('');
+  const [moved, setMoved] = useState<MovedOperation[]>([]), [reviewed, setReviewed] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
@@ -52,7 +65,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       try {
         const response = await fetch(`${root}/native`), result = await response.json();
         if (!response.ok) throw Error(result.error);
-        if (!stopped) { setRows(result.operations); setError(''); }
+        if (!stopped) { setRows(result.operations); setMoved(result.moved ?? []); setError(''); }
       } catch (e) { if (!stopped) setError(e instanceof Error ? e.message : String(e)); }
       finally { pending = false; if (!stopped) setLoading(false); }
     };
@@ -74,13 +87,22 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     setBusy(true); setError('');
     try {
       const response = await fetch(`${root}/${route}`, { method: 'POST' }), result = await response.json();
-      if (!response.ok) throw Error(result.error);
+      if (!response.ok) throw Error(result.reason ? `${result.error} Refused by: ${result.reason}` : result.error);
       if (result.connection && id) {
         setCodes(old => ({ ...old, [id]: result.connection }));
         const refreshed = await fetch(`${root}/native`), snapshot = await refreshed.json();
         if (!refreshed.ok) throw Error(snapshot.error);
-        setRows(snapshot.operations);
-      } else setRows(result.operations);
+        setRows(snapshot.operations); setMoved(snapshot.moved ?? []);
+      } else {
+        const review = /^native-operation\/([a-f0-9-]{36})\/update-plan$/.exec(route);
+        if (review) {
+          // A repeat review that plans nothing reopens the verified correction.
+          const ids = (list: Operation[]) => (list.find(r => r.operation.id === review[1])?.updates ?? []).map(u => u.id).join();
+          const after: Operation[] = result.operations, tip = after.find(r => r.operation.id === review[1])?.updates?.some(u => u.operation?.phase === 'update-verified' && u.operation.sourceCurrent && !u.operation.superseded);
+          setReviewed(old => ({ ...old, [review[1]]: ids(rows) === ids(after) && tip ? 'Reviewed again: the current source and compiler plan no further changes. The verified correction below stands and nothing was prepared or written.' : '' }));
+        }
+        setRows(result.operations); setMoved(result.moved ?? []);
+      }
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
     finally { setBusy(false); }
   }
@@ -105,6 +127,10 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
       Prepare {selectedCase} for Figma
     </button>}
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
+    {moved.map(m => <section key={m.operationId} aria-label="Existing native component from another source revision">
+      <p>An existing native {m.kind === 'initial' ? 'initial-state set' : 'root family'} for <strong>{m.caseId}</strong> follows another revision of this source ({m.followedReferenceId.slice(0, 8)}…). Following the current source keeps that operation, its Figma nodes and its verified corrections, and writes nothing to Figma. Afterwards, <em>Review compiler update</em> shows what the source change would alter on those same nodes. Preparing the case again instead would create a second component.</p>
+      <button type="button" disabled={busy || loading} onClick={() => void action(`native-operation/${m.operationId}/adopt-source`)}>Follow the current source with the existing {m.caseId} {m.kind === 'initial' ? 'states' : 'roots'}</button>
+    </section>)}
     {error && <p role="alert">{error}</p>}
     <ReactCallbackInspection key={referenceId + ':' + selectedCase} referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} />
     <ReactInitialInspection referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} nativeSaved={rows.some(r => r.kind === 'initial' && r.caseId === selectedCase)} nativeBusy={busy} prepareNative={() => void action(`native-initial/${selectedCase}`)} />
@@ -121,8 +147,10 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
         {op.comparisonBaselineRefreshed && <p>This read-only inspection checks the retained instance against verified main corrections. Original creation records and node identities are preserved.</p>}
         {op.sourceCompilerRecompiled && <p>This new draft uses the current compiler with the unchanged, verified source observations. The original capture remains intact. This prepared output is pinned before creation; existing Figma operations are not replaced.</p>}
         {op.sourceCompatibility === 'identity-opacity-omission' && <p>Saved comparison recovered. Its fully opaque source still matches the original output.</p>}
+        {(row.sourceRevisions?.length ?? 0) > 1 && <p>This operation has followed {row.sourceRevisions!.length} source revisions ({row.sourceRevisions!.map(r => r.slice(0, 8)).join(' → ')}). Its creation evidence belongs to the first; changes since then arrive only as reviewed updates to the same nodes. Content and comparison inspections recorded against an earlier revision are unavailable here.</p>}
         {!comparison && ['component-structure-observed','component-observation-refused'].includes(op.phase) && <section aria-label="Native update review">
           <button type="button" disabled={busy} onClick={() => void action(`native-operation/${id}/update-plan`)}>Review compiler update</button>
+          {reviewed[id] && <p role="status">{reviewed[id]}</p>}
           {row.updates?.map(update => <div key={update.id}>
             <p>Reviewed update: {update.changes.length} property corrections. Existing node identities are retained. {update.changes.some(c=>'channel' in c&&c.channel==='background-clip')&&'This migration adds an editable background layer to each listed component and preserves its content slot.'} {update.operation?.phase==='update-verified' ? 'A separate readback verified the corrected values and unchanged surrounding structure. Visual fidelity remains unqualified.' : 'Preparation does not change Figma. Connect the companion and apply the correction to inspect, update and independently read back these nodes.'}</p>
             {!!update.changes.length && <table style={{ borderSpacing: '12px 6px', textAlign: 'left' }}><thead><tr><th>Variant</th><th>Part</th><th>Property</th><th>Saved value</th><th>Proposed value</th></tr></thead>
@@ -139,7 +167,7 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
               </>}
               {!update.operation.superseded && (update.operation.pendingPhase?.endsWith('readback') || ['update-verified','update-refused','update-recovery-required'].includes(update.operation.phase)) && <button type="button" disabled={busy} onClick={()=>void action(`native-operation/${id}/update/${update.id}/retry-observation`)}>Inspect update again</button>}
               {update.operation.pendingPhase==='update-apply' && <p>A write is awaiting its result. Keep the companion connected; this write will not be repeated automatically.</p>}
-              {!!update.operation.problems.length && <ul>{update.operation.problems.map(p=><li key={p}>{p}</li>)}</ul>}
+              {!!update.operation.problems.length && <ul>{update.operation.problems.map(p=><li key={p}>{updateProblem(p)} <code>{p}</code></li>)}</ul>}
               {!!update.operation.imageObservation?.images.length && <details open><summary>Updated native exports · diagnostic only</summary>
                 <p>Fresh exports of the same native nodes at original pixel scale. Recorded source and native layout origins align when export bounds are available; missing geometry remains unaligned. The original creation exports below remain historical evidence.</p>
                 <div style={{display:'flex',flexWrap:'wrap',gap:24}}>{update.operation.imageObservation.images.map(image=><figure key={image.caseId} style={{margin:0}}>

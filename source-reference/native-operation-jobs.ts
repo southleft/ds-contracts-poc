@@ -240,6 +240,9 @@ export interface NativeOperationJobsOptions {
     buildComponent(request: ReactComparisonRequest, context: NativeOperationComponentContext): { planRevision: string; script: string };
   };
   react?: {
+    /** The sealed source observation an existing operation follows today. A
+     * recorded succession may replace the creation pin; absent, it is the pin. */
+    effectiveSource?(id: string, original: ReactNativeRequest | ReactInitialNativeRequest): ReactNativeRequest | ReactInitialNativeRequest;
     updatedObservation?(id: string): { input: import('../core/native-source-observation.js').NativeContractObservationInput;
       receipt: import('../core/native-source-observation.js').NativeSourceReadback } | undefined;
     prepare(request: ReactNativeRequest, operation: { id: string; fileKey: string }): NativeOperationPreparation<ReactPlan>;
@@ -1142,6 +1145,11 @@ export function createNativeOperationJobs(
   };
   type Loaded = ReturnType<typeof loadFresh>;
   const load = (id: string): Loaded => readOnce('journal:'+id, () => loadFresh(id));
+  // Creation evidence stays pinned to its own source revision. Only root and
+  // initial-state operations can follow a later observation of the same case.
+  const effectiveSource = <R>(id: string, request: R): R | ReactNativeRequest | ReactInitialNativeRequest =>
+    options.react?.effectiveSource && (isReactInitialNativeRequest(request) || (isReactNativeRequest(request) && request.version === 1))
+      ? options.react.effectiveSource(id, request) : request;
   const authenticate = (loaded: Loaded) => readOnce('source:'+loaded.header.id+':'+loaded.fingerprint, () => {
     const current = prepareInput(structuredClone(loaded.state.comparisonRefresh?.request ?? loaded.header.request), {
       id: loaded.header.id,
@@ -1637,7 +1645,9 @@ export function createNativeOperationJobs(
     reactInitialRequest(id: string): ReactInitialNativeRequest {
       const { header } = load(id);
       if (!isReactInitialNativeRequest(header.request)) fail('react-initial-operation-required');
-      return structuredClone(header.request);
+      // Original-source images shown beside the native states follow the
+      // observation this operation follows today.
+      return structuredClone(effectiveSource(id, header.request) as ReactInitialNativeRequest);
     },
     reactUpdateBaseline(id: string) {
       const loaded = load(id);
@@ -1653,12 +1663,26 @@ export function createNativeOperationJobs(
       delete receipt.images;
       if (loaded.state.phase !== 'component-structure-observed' && !nativeDefaultFillRepairBaseline(input, receipt))
         fail('react-update-verified-baseline-required');
-      return structuredClone({ input, receipt, request: loaded.header.request, journalRevision: loaded.fingerprint });
+      return structuredClone({ input, receipt, request: loaded.header.request, source: effectiveSource(id, loaded.header.request),
+        journalRevision: loaded.fingerprint });
+    },
+    /** Creation pin of an operation that can follow a later source observation. */
+    reactSuccessionSubject(id: string) {
+      const { header } = load(id);
+      if (!isReactInitialNativeRequest(header.request) && !(isReactNativeRequest(header.request) && header.request.version === 1))
+        fail('react-succession-kind-unsupported');
+      return structuredClone(header.request);
     },
     reactRequest(id: string): ReactNativeRequest {
       const { header } = load(id);
       if (!isReactNativeRequest(header.request)) fail('react-operation-required');
       return structuredClone(header.request);
+    },
+    /** The sealed root observation this operation follows today. */
+    reactEffectiveRequest(id: string): ReactNativeRequest {
+      const { header } = load(id);
+      if (!isReactNativeRequest(header.request)) fail('react-operation-required');
+      return structuredClone(effectiveSource(id, header.request) as ReactNativeRequest);
     },
     reactSourceRequest(id: string): ReactNativeRequest {
       const { header } = load(id);
@@ -1702,10 +1726,25 @@ export function createNativeOperationJobs(
         referenceId: header.request.referenceId, caseId: header.request.caseId,
         ownershipId: header.request.ownership.id, fileKey: header.policy.fileKey,
       };
-      const request = isReactInitialNativeRequest(header.request) ? { ...header.request.anchor, caseId: header.request.caseId } : isReactComparisonRequest(header.request) ? header.request.root : header.request;
+      const pin = isReactComparisonRequest(header.request) ? header.request.root : effectiveSource(id, header.request as ReactNativeRequest | ReactInitialNativeRequest);
+      const request = isReactInitialNativeRequest(pin) ? { ...pin.anchor, caseId: pin.caseId } : pin;
       if (!isReactNativeRequest(request)) fail('react-operation-required');
       return { referenceId: request.referenceId, caseId: request.caseId,
         ownershipId: request.ownership.id, fileKey: header.policy.fileKey };
+    },
+    /** Existing operations for these source cases that follow another source
+     * revision. They are candidates for an explicit succession, never listed
+     * as current and never matched by recency. */
+    listReactMoved(referenceId: string) {
+      return withReadSnapshot(() => readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
+        const loaded = load(id), creation = loaded.header.request;
+        if (!isReactInitialNativeRequest(creation) && !(isReactNativeRequest(creation) && creation.version === 1)) return [];
+        const pin = effectiveSource(id, creation) as ReactNativeRequest | ReactInitialNativeRequest;
+        const followed = isReactInitialNativeRequest(pin) ? pin.anchor.referenceId : pin.referenceId;
+        if (followed === referenceId || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase)) return [];
+        return [{ operationId: id, caseId: pin.caseId, kind: isReactInitialNativeRequest(pin) ? 'initial' as const : 'root' as const,
+          followedReferenceId: followed, fileKey: loaded.header.policy.fileKey, phase: loaded.state.phase }];
+      }));
     },
     listReact(referenceId: string, kind?: 'root' | 'mains') {
       return withReadSnapshot(() => {
@@ -1717,8 +1756,9 @@ export function createNativeOperationJobs(
         if (kind === 'root' && !isReactNativeRequest(header.request)) return [];
         if (kind === 'mains' && !isReactNativeRequest(header.request) && !isReactInitialNativeRequest(header.request)) return [];
         const comparison = isReactComparisonRequest(header.request) ? header.request : undefined;
-        const initial = isReactInitialNativeRequest(header.request) ? header.request : undefined;
-        const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? header.request;
+        const pin = comparison ? undefined : effectiveSource(id, header.request);
+        const initial = isReactInitialNativeRequest(pin) ? pin : undefined;
+        const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? pin;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];
         // get() verifies the saved journal and separately reports source freshness.
         return [{ caseId: request.caseId, ownershipId: request.ownership.id, kind: initial ? 'initial' as const : comparison ? 'comparison' as const : request.version !== 1 ? 'nested' as const : 'root' as const,

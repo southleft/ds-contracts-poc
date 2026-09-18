@@ -764,7 +764,7 @@ function verifyReadback(
         (v.layoutMode === 'HORIZONTAL' ? v.primaryAxisSizingMode : v.counterAxisSizingMode) !== 'FIXED' ||
         nodes.get(n.childIds[(spec.children??[]).findIndex(child=>!child.backgroundPaint)])?.values.layoutSizingHorizontal !== 'FILL'))
       issue('native-source-observation-root-fill-width', n);
-    if ((spec.opacity !== undefined || v.opacity !== undefined) && v.opacity !== (spec.opacity ?? 1))
+    if ((spec.opacity !== undefined || v.opacity !== undefined) && !numeric(v.opacity, spec.opacity ?? 1))
       issue("native-source-observation-opacity", n);
     const bindings = {
       ...spec.bindings,

@@ -117,7 +117,13 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
           state.observation=r;state.observationScriptSha256=state.pending.scriptSha256;
           state.phase=nativeContractUpdateMatches(plan,r,true) ? 'update-verified' : 'update-recovery-required';
         }
-        if(['update-refused','update-recovery-required'].includes(state.phase)) state.problems=['native-update-observation-refused'];
+        if(['update-refused','update-recovery-required'].includes(state.phase)) {
+          // The native program names the check that refused: a conflicting node,
+          // an unrelated canvas edit, a missing node. Keep those names beside the
+          // summary; "refused" alone gives an operator nothing to resolve.
+          const named=Array.isArray(r?.problems)?(r.problems as unknown[]).filter((p):p is string=>typeof p==='string'&&/^native-update-[A-Za-z0-9:;._-]{1,160}$/.test(p)).slice(0,20):[];
+          state.problems=['native-update-observation-refused',...new Set(named)];
+        }
         delete state.pending;
       } else if(event.kind==='abandon-observation') {
         if(!state.pending?.readOnly || event.attemptId!==state.pending.attemptId) fail('observation-abandon-refused');
