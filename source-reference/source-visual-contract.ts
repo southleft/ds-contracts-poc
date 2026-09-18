@@ -101,7 +101,10 @@ const keyOf = (n: { templateId: string; sourceNodeId: string }) =>
 const supported = new Set([
   ...LITERAL_CHANNELS,
   ...Object.keys(DECLARED_CHANNELS),
-  ...Object.values(CHANNEL_TO_COMPUTED).flat(),
+  // This version-1 projection reconstructs historical evidence byte for byte.
+  // Opacity was outside its vocabulary; the current React readers admit it
+  // separately through the shared channel map without changing old reports.
+  ...Object.values(CHANNEL_TO_COMPUTED).flat().filter(channel => channel !== "opacity"),
   "display",
   "flex-direction",
   "align-items",
@@ -187,6 +190,9 @@ export function buildSourceVisualContractCandidate(
         sourceProgramSha256: semantics.source.programSha256,
         case: sourceCase,
       });
+      // The Button seed below has no lowering for v2 text/pseudo/dependencies.
+      // A richer anatomy must never be silently interpreted as its v1 shape.
+      if (projection.version !== 1) fail("projection-version-unsupported");
       out.cases.push({
         id: sourceCase.id,
         status:

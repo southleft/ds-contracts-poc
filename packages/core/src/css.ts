@@ -1,3 +1,4 @@
+import {cssIdentifier} from './css-identifier.js';
 /**
  * Contract → scoped CSS text — the stylesheet every code target shares
  * (React CSS Modules, static HTML, the web-components constructable sheet).
@@ -64,7 +65,7 @@ function stylesWhenRules(contract: Contract, partName: string, part: Part, isRoo
       const dataName = prop.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
       base = nativeDisabled ? '.root:disabled' : `.root[data-${dataName}]`;
     }
-    const selector = isRootPart ? base : `${base} .${partName}`;
+    const selector = isRootPart ? base : `${base} .${cssIdentifier(partName)}`;
     const decls = Object.entries(sw.styles)
       .map(([k, v]) => `  ${k}: ${v};`)
       .join('\n');
@@ -148,7 +149,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         // the cell; display: grid makes the lone instance stretch into it
         // (the CSS spelling of the canvas FILL default).
         const cell = gridPlan.cells.get(name);
-        if (cell) lines.push('', `.${name} {`, ...[...cell, 'display: grid'].map((d) => `  ${d};`), '}');
+        if (cell) lines.push('', `.${cssIdentifier(name)} {`, ...[...cell, 'display: grid'].map((d) => `  ${d};`), '}');
         continue; // instances style themselves via their own contract
       }
       const decls: string[] = [];
@@ -176,7 +177,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       if (part.icon) {
         decls.push('display: inline-flex', 'flex-shrink: 0');
         if (part.icon.size) {
-          lines.push('', `.${name} svg {`, `  width: ${part.icon.size}px;`, `  height: ${part.icon.size}px;`, '}');
+          lines.push('', `.${cssIdentifier(name)} svg {`, `  width: ${part.icon.size}px;`, `  height: ${part.icon.size}px;`, '}');
         }
       }
       // Non-substituted token refs → var(--…); single-placeholder refs are a
@@ -192,7 +193,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
       for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
       if (decls.length > 0) {
-        lines.push('', `.${name} {`, ...decls.map((d) => `  ${d};`), '}');
+        lines.push('', `.${cssIdentifier(name)} {`, ...decls.map((d) => `  ${d};`), '}');
       }
       // A2 grid (G4): empty areas own placeholder rules right after their
       // parent's rule — the placement is visible with nothing in it.
@@ -782,7 +783,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       // override wrapper's rule (one wrapper, both jobs).
       const cell = gridPlan.cells.get(name);
       if (ov.length === 0 && cell) {
-        lines.push('', `.${name} {`, ...[...cell, 'display: grid'].map((d) => `  ${d};`), '}');
+        lines.push('', `.${cssIdentifier(name)} {`, ...[...cell, 'display: grid'].map((d) => `  ${d};`), '}');
       }
       if (ov.length > 0) {
         const wrapDecls: string[] = cell ? [...cell, 'display: grid'] : ['display: inline-flex'];
@@ -811,7 +812,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
               for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
               if (!checkToken(resolved, `anatomy.${name}.component.overrides.${channel}`)) continue;
               const sel = combo.map(([ph, value]) => `.${ph}-${value}`).join('');
-              wrapSubRules.push(`\n${sel} .${name} {\n  ${ovVar}: ${cssVar(resolved)};\n}`);
+              wrapSubRules.push(`\n${sel} .${cssIdentifier(name)} {\n  ${ovVar}: ${cssVar(resolved)};\n}`);
             }
             continue;
           }
@@ -819,7 +820,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
             wrapDecls.push(`${ovVar}: ${cssVar(refPath)}`);
           }
         }
-        lines.push('', `.${name} {`, ...wrapDecls.map((d) => `  ${d};`), '}');
+        lines.push('', `.${cssIdentifier(name)} {`, ...wrapDecls.map((d) => `  ${d};`), '}');
         lines.push(...wrapSubRules);
       }
       continue; // instances style themselves via their own contract
@@ -894,7 +895,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     if (part.icon) {
       decls.push('display: inline-flex', 'flex-shrink: 0');
       if (part.icon.size) {
-        lines.push('', `.${name} svg {`, `  width: ${part.icon.size}px;`, `  height: ${part.icon.size}px;`, '}');
+        lines.push('', `.${cssIdentifier(name)} svg {`, `  width: ${part.icon.size}px;`, `  height: ${part.icon.size}px;`, '}');
       }
       if (part.element === 'button') {
         decls.push(
@@ -929,10 +930,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           for (const value of enums.get(overlapPhs[0]) ?? []) {
             const resolved = refPath.replaceAll(`{${overlapPhs[0]}}`, value);
             if (!checkToken(resolved, `anatomy.${name}.tokens.gap`)) continue;
-            nestedSubRules.push(`\n.${overlapPhs[0]}-${value} .${name} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
+            nestedSubRules.push(`\n.${overlapPhs[0]}-${value} .${cssIdentifier(name)} > * + * {\n  margin-left: ${cssVar(resolved)};\n}`);
           }
         } else if (checkToken(refPath, `anatomy.${name}.tokens.gap`)) {
-          nestedSubRules.push(`\n.${name} > * + * {\n  margin-left: ${cssVar(refPath)};\n}`);
+          nestedSubRules.push(`\n.${cssIdentifier(name)} > * + * {\n  margin-left: ${cssVar(refPath)};\n}`);
         }
         continue;
       }
@@ -955,7 +956,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         // expansion.
         for (const { combo, resolved } of expandRef(`anatomy.${name}.tokens.${cssProp}`, refPath)) {
           if (!checkToken(resolved, `anatomy.${name}.tokens.${cssProp}`)) continue;
-          nestedSubRules.push(`\n.${comboCls(combo)} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          nestedSubRules.push(`\n.${comboCls(combo)} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
         }
         continue;
       }
@@ -1001,21 +1002,21 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
                 if (!enumRules.has(single)) enumRules.set(single, new Map());
               }
               nestedSubRules.push(
-                `\n.${entry.prop}-${value}.${phs[0]}-${phValue} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`,
+                `\n.${entry.prop}-${value}.${phs[0]}-${phValue} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}`,
               );
             }
             continue;
           }
           if (!checkToken(refPath, `anatomy.${name}.tokensByProp.${value}.${cssProp}`)) continue;
           nestedSubRules.push(
-            `\n.${entry.prop}-${value} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
+            `\n.${entry.prop}-${value} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
           );
         }
         // FC-BORDER-STYLE-NOT-SYNTHESISED — a per-variant SHORTHAND width earns
         // the keyword in its own rule (round 9's rule, at a scope it never
         // reached).
         for (const d of borderStyleDecls(overrides, 'tokens', part.declared)) {
-          nestedSubRules.push(`\n.${entry.prop}-${value} .${name} {\n  ${d};\n}`);
+          nestedSubRules.push(`\n.${entry.prop}-${value} .${cssIdentifier(name)} {\n  ${d};\n}`);
         }
       }
     }
@@ -1031,7 +1032,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         // land in the per-variant rule or the border never paints.
         for (const d of borderStyleDecls(overrides, 'literals', part.declared)) lDecls.push(`  ${d};`);
         if (lDecls.length === 0) continue;
-        nestedSubRules.push(`\n.${entry.prop}-${value} .${name} {\n${lDecls.join('\n')}\n}`);
+        nestedSubRules.push(`\n.${entry.prop}-${value} .${cssIdentifier(name)} {\n${lDecls.join('\n')}\n}`);
       }
     }
     // v15 declared facts on a nested part: verbatim base decls + per-state
@@ -1049,7 +1050,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       const sel = STATE_SELECTORS[state];
       if (!sel) continue; // refused by validateContract
       const dDecls = Object.entries(overrides).map(([cssProp, value]) => `  ${cssProp}: ${value};`);
-      if (dDecls.length > 0) nestedSubRules.push(`\n.root${sel} .${name} {\n${dDecls.join('\n')}\n}`);
+      if (dDecls.length > 0) nestedSubRules.push(`\n.root${sel} .${cssIdentifier(name)} {\n${dDecls.join('\n')}\n}`);
     }
     // v17 statesByProp on a NESTED part — the map form of the placeholder
     // branch just below: a descendant rule under the root's enum class AND
@@ -1070,7 +1071,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         const phs = placeholdersIn(refPath);
         if (phs.length === 0) {
           if (checkToken(refPath, `anatomy.${name}.states.${state}.${cssProp}`)) {
-            nestedSubRules.push(`\n.root${sel} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+            nestedSubRules.push(`\n.root${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
           }
           continue;
         }
@@ -1078,7 +1079,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         // level down (.variant-danger[data-loading]:hover .label).
         for (const { combo, resolved } of expandRef(`anatomy.${name}.states.${state}.${cssProp}`, refPath)) {
           if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
-          nestedSubRules.push(`\n.${comboCls(combo)}${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          nestedSubRules.push(`\n.${comboCls(combo)}${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
         }
       }
     }
@@ -1091,7 +1092,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         for (const [cssProp, ref] of Object.entries(overrides)) {
           const refPath = stripBraces(ref);
           if (!checkToken(refPath, `anatomy.${name}.statesByProp.${entry.prop}.${value}.${entry.state}.${cssProp}`)) continue;
-          nestedSubRules.push(`\n.${entry.prop}-${value}${sel} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+          nestedSubRules.push(`\n.${entry.prop}-${value}${sel} .${cssIdentifier(name)} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
         }
       }
     }
@@ -1102,7 +1103,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         const lDecls = layoutOverrideDecls(override);
         if (lDecls.length === 0) continue;
         nestedSubRules.push(
-          `\n.${part.layoutByProp.prop}-${value} .${name} {\n${lDecls.map((d) => `  ${d};`).join('\n')}\n}`,
+          `\n.${part.layoutByProp.prop}-${value} .${cssIdentifier(name)} {\n${lDecls.map((d) => `  ${d};`).join('\n')}\n}`,
         );
       }
     }
@@ -1114,14 +1115,14 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       if (!isNativeCheckablePart(child)) continue;
       decls.push('position: relative');
       nestedSubRules.push(
-        `\n.${name}:has(> .${childName}:focus-visible) {\n  outline-style: solid;\n  outline-offset: 2px;\n}`,
+        `\n.${cssIdentifier(name)}:has(> .${cssIdentifier(childName)}:focus-visible) {\n  outline-style: solid;\n  outline-offset: 2px;\n}`,
       );
     }
     // v7 stylesWhen on a nested part.
     nestedSubRules.push(...stylesWhenRules(contract, name, part, false));
     if (decls.length === 0 && nestedSubRules.length === 0) continue;
     if (decls.length > 0) {
-      lines.push('', `.${name} {`);
+      lines.push('', `.${cssIdentifier(name)} {`);
       for (const d of decls) lines.push(`  ${d};`);
       lines.push('}');
     }
@@ -1130,7 +1131,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     lines.push(...gridPlaceholderRules(name));
     lines.push(...nestedSubRules);
     if (part.icon && part.element) {
-      lines.push('', `.${name}Glyph {`, '  display: inline-flex;', '}');
+      lines.push('', `.${cssIdentifier(name)}Glyph {`, '  display: inline-flex;', '}');
     }
   }
 

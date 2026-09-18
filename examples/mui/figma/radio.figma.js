@@ -69,8 +69,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/primary/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/primary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -78,8 +78,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/primary/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/primary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -142,8 +142,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#1976d2\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/primary/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#1976d2\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/primary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -151,8 +151,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#1976d2\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/primary/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#1976d2\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/primary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -215,8 +215,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/secondary/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/secondary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -224,8 +224,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/secondary/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/secondary/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -288,8 +288,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#9c27b0\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/secondary/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#9c27b0\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/secondary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -297,8 +297,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#9c27b0\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/secondary/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#9c27b0\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/secondary/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -361,8 +361,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/error/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/error/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -370,8 +370,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/error/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/error/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -434,8 +434,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/error/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#d32f2f\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/error/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -443,8 +443,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#d32f2f\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/error/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#d32f2f\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/error/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -507,8 +507,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/info/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/info/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -516,8 +516,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/info/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/info/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -580,8 +580,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#0288d1\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/info/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#0288d1\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/info/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -589,8 +589,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#0288d1\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/info/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#0288d1\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/info/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -653,8 +653,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/success/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/success/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -662,8 +662,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/success/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/success/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -726,8 +726,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#2e7d32\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/success/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#2e7d32\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/success/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -735,8 +735,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#2e7d32\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/success/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#2e7d32\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/success/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -799,8 +799,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/warning/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/warning/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -808,8 +808,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/warning/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/warning/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -872,8 +872,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#ed6c02\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/warning/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#ed6c02\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/warning/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -881,8 +881,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#ed6c02\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/warning/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#ed6c02\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/warning/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -945,8 +945,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/default/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/default/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -954,8 +954,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/default/unchecked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/default/unchecked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -1018,8 +1018,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon/fill/default/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.48 2 2 6.48 2 12 S 6.48 22 12 22 S 22 17.52 22 12 S 17.52 2 12 2 Z M 12 20 C 7.58 20 4 16.42 4 12 S 7.58 4 12 4 S 20 7.58 20 12 S 16.42 20 12 20 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon/color/default/checked",
                   "grow": true,
                   "iconSize": 24,
                   "fillW": true
@@ -1027,8 +1027,8 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
-                  "svgPaintVar": "imported/radio/icon-2/fill/default/checked",
+                  "svg": "<svg height=\"24\" width=\"24\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.465 8.465 C 9.37 7.56 10.62 7 12 7 C 14.76 7 17 9.24 17 12 C 17 13.38 16.44 14.63 15.535 15.535 C 14.63 16.44 13.38 17 12 17 C 9.24 17 7 14.76 7 12 C 7 10.62 7.56 9.37 8.465 8.465 Z\" fill=\"#00000099\"/></svg>",
+                  "svgPaintVar": "imported/radio/icon-2/color/default/checked",
                   "grow": true,
                   "iconSize": 24,
                   "insetOverlay": true
@@ -2013,12 +2013,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -2620,7 +2627,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2688,6 +2695,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -2951,6 +2959,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -3110,6 +3119,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -3253,6 +3276,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

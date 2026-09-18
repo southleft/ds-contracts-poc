@@ -816,6 +816,7 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   // A2 grid: GRID frames take the declaration path — the flex fields below
   // (axis aligns, layoutWrap) are not grid facts and are never written.
@@ -826,6 +827,12 @@ function applyFrameSpec(node, spec) {
   }
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -951,6 +958,9 @@ function applyFrameSpec(node, spec) {
       }
     }
   }
+  // Resizing can replace HUG tracks with FLEX. Restore the declaration after
+  // all bound/literal size writes, before appending or placing any children.
+  if (l.mode === 'GRID') applyGridFrame(node, l);
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -993,6 +1003,7 @@ function applyGridFrame(node, l) {
   // value can never recover). HUG is written as the bare type, never valued.
   const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
   node.gridRowSizes = g.rows.map(trackWrite);
+  node.setSharedPluginData('ds_contracts', 'gridFlowRows', g.flowRows ? JSON.stringify(g.flowRows) : '');
   node.gridColumnSizes = g.columns.map(trackWrite);
   node.gridRowGap = g.rowGap;
   node.gridColumnGap = g.columnGap;
@@ -1630,7 +1641,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -1698,6 +1709,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -1959,6 +1971,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -2116,6 +2129,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -2259,6 +2286,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -3043,12 +3071,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -3587,7 +3622,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -3655,6 +3690,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -3915,6 +3951,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -4071,6 +4108,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -4214,6 +4265,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -5789,12 +5841,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -6284,7 +6343,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -6352,6 +6411,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -6612,6 +6672,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -6768,6 +6829,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -6911,6 +6986,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -6952,7 +7028,7 @@ const COMPONENTS = [
     "contractId": "shadcn.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract shadcn.button v0.2.0 † (17 code-only facts — see plugin report)",
+    "description": "Button — generated from contract shadcn.button v0.2.0 † (15 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -6989,10 +7065,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/default",
             "paddingRight": "imported/button/root/padding-right/default"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7009,7 +7109,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7036,10 +7137,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/xs",
             "paddingRight": "imported/button/root/padding-right/xs"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7056,7 +7181,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7083,10 +7209,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/sm",
             "paddingRight": "imported/button/root/padding-right/sm"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7103,7 +7253,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7130,10 +7281,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/lg",
             "paddingRight": "imported/button/root/padding-right/lg"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7150,7 +7325,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7177,10 +7353,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon",
             "paddingRight": "imported/button/root/padding-right/icon"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7197,7 +7397,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7224,10 +7425,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-xs",
             "paddingRight": "imported/button/root/padding-right/icon-xs"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7244,7 +7469,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7271,10 +7497,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-sm",
             "paddingRight": "imported/button/root/padding-right/icon-sm"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7291,7 +7541,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7318,10 +7569,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-lg",
             "paddingRight": "imported/button/root/padding-right/icon-lg"
           },
-          "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/default",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -7338,7 +7613,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7365,7 +7641,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/default",
             "paddingRight": "imported/button/root/padding-right/default"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -7426,6 +7701,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -7441,7 +7741,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7468,7 +7769,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/xs",
             "paddingRight": "imported/button/root/padding-right/xs"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -7529,6 +7829,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -7544,7 +7869,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7571,7 +7897,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/sm",
             "paddingRight": "imported/button/root/padding-right/sm"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -7632,6 +7957,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -7647,7 +7997,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7674,7 +8025,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/lg",
             "paddingRight": "imported/button/root/padding-right/lg"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -7735,6 +8085,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -7750,7 +8125,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7777,7 +8153,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon",
             "paddingRight": "imported/button/root/padding-right/icon"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -7838,6 +8213,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -7853,7 +8253,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7880,7 +8281,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-xs",
             "paddingRight": "imported/button/root/padding-right/icon-xs"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -7941,6 +8341,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -7956,7 +8381,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -7983,7 +8409,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-sm",
             "paddingRight": "imported/button/root/padding-right/icon-sm"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -8044,6 +8469,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -8059,7 +8509,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8086,7 +8537,6 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-lg",
             "paddingRight": "imported/button/root/padding-right/icon-lg"
           },
-          "fill": "imported/button/root/background-color/outline",
           "stroke": "imported/button/root/border-top-color/outline",
           "effectStack": [
             {
@@ -8147,6 +8597,31 @@ const COMPONENTS = [
           ],
           "children": [
             {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/outline",
+              "lits": {
+                "radius": 7
+              }
+            },
+            {
               "type": "text",
               "name": "label",
               "characters": "Button",
@@ -8162,7 +8637,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8189,10 +8665,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/default",
             "paddingRight": "imported/button/root/padding-right/default"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8209,7 +8709,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8236,10 +8737,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/xs",
             "paddingRight": "imported/button/root/padding-right/xs"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8256,7 +8781,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8283,10 +8809,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/sm",
             "paddingRight": "imported/button/root/padding-right/sm"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8303,7 +8853,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8330,10 +8881,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/lg",
             "paddingRight": "imported/button/root/padding-right/lg"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8350,7 +8925,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8377,10 +8953,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon",
             "paddingRight": "imported/button/root/padding-right/icon"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8397,7 +8997,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8424,10 +9025,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-xs",
             "paddingRight": "imported/button/root/padding-right/icon-xs"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8444,7 +9069,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8471,10 +9097,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-sm",
             "paddingRight": "imported/button/root/padding-right/icon-sm"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8491,7 +9141,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8518,10 +9169,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-lg",
             "paddingRight": "imported/button/root/padding-right/icon-lg"
           },
-          "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/secondary",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8538,7 +9213,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8565,10 +9241,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/default",
             "paddingRight": "imported/button/root/padding-right/default"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8585,7 +9285,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8612,10 +9313,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/xs",
             "paddingRight": "imported/button/root/padding-right/xs"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8632,7 +9357,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8659,10 +9385,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/sm",
             "paddingRight": "imported/button/root/padding-right/sm"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8679,7 +9429,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8706,10 +9457,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/lg",
             "paddingRight": "imported/button/root/padding-right/lg"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8726,7 +9501,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8753,10 +9529,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon",
             "paddingRight": "imported/button/root/padding-right/icon"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8773,7 +9573,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8800,10 +9601,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-xs",
             "paddingRight": "imported/button/root/padding-right/icon-xs"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8820,7 +9645,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8847,10 +9673,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-sm",
             "paddingRight": "imported/button/root/padding-right/icon-sm"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8867,7 +9717,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8894,10 +9745,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-lg",
             "paddingRight": "imported/button/root/padding-right/icon-lg"
           },
-          "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/ghost",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8914,7 +9789,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8941,10 +9817,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/default",
             "paddingRight": "imported/button/root/padding-right/default"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -8961,7 +9861,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -8988,10 +9889,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/xs",
             "paddingRight": "imported/button/root/padding-right/xs"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9008,7 +9933,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9035,10 +9961,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/sm",
             "paddingRight": "imported/button/root/padding-right/sm"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9055,7 +10005,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9082,10 +10033,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/lg",
             "paddingRight": "imported/button/root/padding-right/lg"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9102,7 +10077,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9129,10 +10105,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon",
             "paddingRight": "imported/button/root/padding-right/icon"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9149,7 +10149,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9176,10 +10177,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-xs",
             "paddingRight": "imported/button/root/padding-right/icon-xs"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9196,7 +10221,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9223,10 +10249,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-sm",
             "paddingRight": "imported/button/root/padding-right/icon-sm"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9243,7 +10293,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9270,10 +10321,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-lg",
             "paddingRight": "imported/button/root/padding-right/icon-lg"
           },
-          "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/destructive",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9290,7 +10365,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9317,10 +10393,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/default",
             "paddingRight": "imported/button/root/padding-right/default"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9337,7 +10437,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9364,10 +10465,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/xs",
             "paddingRight": "imported/button/root/padding-right/xs"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9384,7 +10509,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9411,10 +10537,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/sm",
             "paddingRight": "imported/button/root/padding-right/sm"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9431,7 +10581,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9458,10 +10609,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/lg",
             "paddingRight": "imported/button/root/padding-right/lg"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9478,7 +10653,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9505,10 +10681,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon",
             "paddingRight": "imported/button/root/padding-right/icon"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9525,7 +10725,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9552,10 +10753,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-xs",
             "paddingRight": "imported/button/root/padding-right/icon-xs"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9572,7 +10797,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9599,10 +10825,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-sm",
             "paddingRight": "imported/button/root/padding-right/icon-sm"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9619,7 +10869,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       },
       {
@@ -9646,10 +10897,34 @@ const COMPONENTS = [
             "paddingLeft": "imported/button/root/padding-left/icon-lg",
             "paddingRight": "imported/button/root/padding-right/icon-lg"
           },
-          "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
           "effectStack": [],
           "children": [
+            {
+              "type": "shape",
+              "name": "Background paint",
+              "shape": {
+                "kind": "rect",
+                "width": 1,
+                "height": 1
+              },
+              "backgroundPaint": {
+                "inset": 1,
+                "radius": 7
+              },
+              "absolute": {
+                "h": "STRETCH",
+                "v": "STRETCH",
+                "left": 1,
+                "right": 1,
+                "top": 1,
+                "bottom": 1
+              },
+              "fill": "imported/button/root/background-color/link",
+              "lits": {
+                "radius": 7
+              }
+            },
             {
               "type": "text",
               "name": "label",
@@ -9666,7 +10941,8 @@ const COMPONENTS = [
               },
               "contentProp": "Content"
             }
-          ]
+          ],
+          "backgroundClip": "padding-box"
         }
       }
     ],
@@ -10388,7 +11664,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10474,11 +11807,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -10538,7 +11872,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/secondary",
           "stroke": "imported/button/root/border-top-color/secondary",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10585,7 +11976,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/ghost",
           "stroke": "imported/button/root/border-top-color/ghost",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10632,7 +12080,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/destructive",
           "stroke": "imported/button/root/border-top-color/destructive",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.9058823529411765,
+                "g": 0,
+                "b": 0.043137254901960784,
+                "a": 0.2
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -10679,7 +12184,64 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/link",
           "stroke": "imported/button/root/border-top-color/link",
-          "effectStack": [],
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            }
+          ],
           "children": [
             {
               "type": "text",
@@ -11206,17 +12768,6 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "declared",
-        "channel": "background-clip",
-        "value": "padding-box",
-        "reason": "Background clipping exists only in code.",
-        "variants": {
-          "count": 72,
-          "of": 72
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
         "channel": "border-bottom-style",
         "value": "solid",
         "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
@@ -11323,23 +12874,2348 @@ const COMPONENTS = [
           "count": 72,
           "of": 72
         }
+      }
+    ],
+    "colW": 380
+  }
+];
+const ROW_H = 240, PAD = 40;
+
+const EXPECTED_FILE_KEY = null;
+if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
+  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
+}
+
+await figma.loadAllPagesAsync();
+
+const allVars = await figma.variables.getLocalVariablesAsync();
+const varByName = {};
+for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
+const need = (name) => {
+  const v = varByName[name];
+  if (!v) throw new Error('Missing variable: ' + name);
+  return v;
+};
+const boundPaint = (varName, consumer) => {
+  // Seed the base with the resolved value when a consumer node is known:
+  // Figma keeps rendering a reassigned bound paint's BASE color on
+  // pre-existing nodes (fresh nodes normalize at assignment) — without the
+  // seed, amended variants render black. The binding itself is unchanged.
+  // B-3 finding 2: the resolved ALPHA rides the seed too (paint opacity) —
+  // discarding it rendered Badge's rgba(0,0,0,.06) pill as opaque black on
+  // amended nodes.
+  const v = need(varName);
+  let base = { r: 0, g: 0, b: 0 };
+  let alpha = 1;
+  if (consumer) {
+    try {
+      const r = v.resolveForConsumer(consumer);
+      if (r && r.value && r.value.r !== undefined) {
+        base = { r: r.value.r, g: r.value.g, b: r.value.b };
+        if (typeof r.value.a === 'number') alpha = r.value.a;
+      }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
+  }
+  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
+};
+
+// Named text styles (synced by 01-tokens.js): consumers look up OUR styles
+// only — the ds_contracts/textStyleToken marker is identity, a foreign style
+// sharing a name is never used. When a compiled spec carries textStyle, the
+// named style MUST bind — missing or failed setTextStyleIdAsync refuses by
+// the stable code text-style-identity-refused (never silently keep raw props).
+let _textStyleMap = null;
+async function ourTextStyle(name) {
+  if (!_textStyleMap) {
+    _textStyleMap = {};
+    for (const s of await figma.getLocalTextStylesAsync()) {
+      if (s.getSharedPluginData('ds_contracts', 'textStyleToken')) _textStyleMap[s.name] = s;
+    }
+  }
+  return _textStyleMap[name] || null;
+}
+
+const fontStyles = new Set(['Medium']);
+for (const C of COMPONENTS) for (const s of C.fontStyles) fontStyles.add(s);
+for (const style of fontStyles) {
+  await figma.loadFontAsync({ family: 'Inter', style });
+}
+
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
+// canvas-only preview overlay; base variants gain an explicit State=Default
+// segment so every variant in the set carries the axis (Figma derives
+// variant properties from names). Contracts without previews pass through
+// untouched — names, hashes, and amend reconciliation are unchanged.
+function withStateAxis(C) {
+  if (!C.stateVariants || C.stateVariants.length === 0) return C.variants;
+  return C.variants.map((v) => {
+    const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
+    return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
+  }).concat(C.stateVariants);
+}
+
+// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
+// State=Default variant that has a hover/active twin gets a Figma prototype
+// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
+// instead of showing a static grid of previews.
+//
+// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
+// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
+// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
+// transition is ALWAYS null — durations/easings are not contract facts, and
+// the capability matrix keeps animation code-only.
+//
+// The write goes through setReactionsAsync, never `node.reactions = […]`:
+// the property is read-only whenever a manifest declares
+// documentAccess: dynamic-page, and the async setter is correct in BOTH
+// modes. The headless mock enforces this (assignment THROWS there).
+//
+// OWNERSHIP: within a set the contract opts in for, variant reactions are
+// contract-owned — every variant is normalized (sources get their pair,
+// everything else is cleared). Sets whose contract carries no stateReactions
+// are NEVER touched, so hand-authored prototyping elsewhere survives.
+async function wireStateReactions(setNode, byName, C) {
+  const wires = C.stateReactions || [];
+  if (wires.length === 0) return 0;
+  if (!C.isSet) {
+    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
+  }
+  const grouped = {};
+  for (const w of wires) {
+    const src = byName.get(w.from);
+    const dst = byName.get(w.to);
+    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
+    // both variants exist in every path that reaches here.
+    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
+    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
+    (grouped[w.from] = grouped[w.from] || []).push({
+      trigger: { type: w.trigger },
+      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
+    });
+  }
+  let wired = 0;
+  for (const child of setNode.children) {
+    const want = grouped[child.name] || [];
+    const have = child.reactions || [];
+    if (want.length === 0 && have.length === 0) continue;
+    await child.setReactionsAsync(want);
+    if (want.length > 0) wired++;
+  }
+  return wired;
+}
+
+function isSyncTarget(n) {
+  return n.type === 'COMPONENT_SET' ||
+    (n.type === 'COMPONENT' && (!n.parent || n.parent.type !== 'COMPONENT_SET'));
+}
+
+function allSyncTargets() {
+  const out = [];
+  for (const page of figma.root.children) {
+    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
+  }
+  return out;
+}
+
+// One resolver for nested instances, slot defaults/preferred values, and
+// top-level amend targets. Semantic identity wins; names are admitted only
+// for explicit pre-contractId generated nodes.
+function resolveComponentIdentity(ref, purpose, allowMissing) {
+  const targets = allSyncTargets();
+  const exact = targets.filter(
+    (n) => n.getSharedPluginData('ds_contracts', 'contractId') === ref.contractId,
+  );
+  if (exact.length > 1) {
+    throw new Error(
+      purpose + ': duplicate ds_contracts/contractId "' + ref.contractId +
+      '" on ' + exact.length + ' component targets — refusing ambiguous identity',
+    );
+  }
+  if (exact.length === 1) return exact[0];
+
+  if (ref.anchorKey) {
+    const anchored = targets.filter((n) => n.key === ref.anchorKey);
+    if (anchored.length > 1) {
+      throw new Error(
+        purpose + ': duplicate Figma anchor key "' + ref.anchorKey +
+        '" — refusing ambiguous identity',
+      );
+    }
+    if (anchored.length === 1) {
+      const marker = anchored[0].getSharedPluginData('ds_contracts', 'contractId');
+      if (marker && marker !== ref.contractId) {
+        throw new Error(
+          purpose + ': anchor key "' + ref.anchorKey + '" belongs to contractId "' +
+          marker + '", not "' + ref.contractId + '" — refusing contradictory identity',
+        );
+      }
+      return anchored[0];
+    }
+  }
+
+  const legacy = targets.filter(
+    (n) => n.name === ref.name &&
+      n.getSharedPluginData('ds_contracts', 'contractId') === '' &&
+      n.getSharedPluginData('ds_contracts', 'specHash') !== '',
+  );
+  if (legacy.length > 1) {
+    throw new Error(
+      purpose + ': duplicate explicit legacy-generated name "' + ref.name +
+      '" on ' + legacy.length + ' unmarked component targets — refusing ambiguous identity',
+    );
+  }
+  if (legacy.length === 1) return legacy[0];
+  if (allowMissing) return null;
+  throw new Error(
+    purpose + ': component not found for contractId "' + ref.contractId + '"' +
+    (ref.anchorKey ? ', anchor key "' + ref.anchorKey + '"' : '') +
+    ', or unique explicit legacy-generated name "' + ref.name + '" (sync it first)',
+  );
+}
+
+function setInstanceProps(inst, props, owner) {
+  // REAL-FIGMA QUIRK (live finding 2026-07-22, pinned by the named refusal +
+  // Desktop Bridge probes; supersedes the 07-21 "mixed VARIANT+TEXT call"
+  // inference, which was wrong): a freshly created instance's
+  // componentProperties can LAG behind its component set within a session,
+  // listing only the VARIANT axes — the live composite refused with
+  // "available: Variant, Size, State" on a Button set that demonstrably
+  // carried Label/Disabled/Loading. The set's componentPropertyDefinitions
+  // are always complete, and setProperties with the FULL set-level key
+  // applies correctly even while the instance's view lags (probe-verified).
+  // So: resolve against the instance first, fall back to the OWNER's
+  // definitions, and refuse by name only when neither knows the property.
+  const instProps = inst.componentProperties;
+  const instKeys = Object.keys(instProps);
+  let ownerDefs = {};
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
+  const ownerKeys = Object.keys(ownerDefs);
+  const variantProps = {};
+  const otherProps = {};
+  const missing = [];
+  for (const [wanted, value] of Object.entries(props)) {
+    const match = (k) => k === wanted || k.startsWith(wanted + '#');
+    const key = instKeys.find(match) || ownerKeys.find(match);
+    if (!key) { missing.push(wanted); continue; }
+    const def = instProps[key] || ownerDefs[key] || {};
+    if (def.type === 'VARIANT') variantProps[key] = value; else otherProps[key] = value;
+  }
+  // 2026-07-21 (live-canvas finding, handoff 08#1): the old silent no-op is
+  // exactly how the repeated Badge instances kept their default text live —
+  // the contract said Label="Shipping", nothing matched, nothing was
+  // reported, the build claimed success. A contract binding the runtime
+  // cannot honor is a refusal, BY NAME, like every other refusal here.
+  if (missing.length > 0) {
+    const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
+    throw new Error(
+      'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
+      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
+      ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
+    );
+  }
+  // Defensive two-phase apply (cheap): variant swap first, then non-variant
+  // values on the settled instance — set-level property ids are stable
+  // across the swap, so the resolved keys stay valid either way.
+  if (Object.keys(variantProps).length > 0) inst.setProperties(variantProps);
+  if (Object.keys(otherProps).length > 0) inst.setProperties(otherProps);
+}
+
+// Owner request (2026-07-21, roadmap P1): generated components land ON a
+// named SECTION with a light background — not floating on the canvas. The
+// section is identity-marked (ds_contracts/hostFor) so create and amend both
+// re-fit the SAME section instead of stacking new ones; a component already
+// hosted keeps its section.
+//
+// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
+// page "Census / altitude"). This function used to end with a hardcoded
+// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
+// amend. Two separate defects rode on that one pair of lines:
+//
+//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
+//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
+//      each other; the owner opened the file, saw three set titles
+//      superimposed and a jumble of dots and slivers, and concluded the
+//      output was garbage. Most of those sets rendered CORRECTLY — they were
+//      simply buried. One coordinate did more damage to the project's
+//      credibility than any real conversion defect.
+//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
+//      somewhere was teleported to 100,100 by the next re-mint. That is what
+//      the live evidence showed: five of the eight altitude sections were at
+//      100,100 while Divider/Heading/Link still sat in the column a previous
+//      pass had laid out — the five were the ones the last run re-amended.
+//
+// THE RULE NOW, and why it is exactly this rule:
+//
+//   · An EXISTING host section is never repositioned. Its x/y are the
+//     designer's, not ours. A re-mint refits the section's SIZE around the
+//     rebuilt target and leaves the origin alone, so a manual reposition
+//     survives every subsequent amend.
+//   · A NEW host section is appended BELOW everything already on the page:
+//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
+//     Collision-free by construction, regardless of how wide or tall the
+//     neighbours are.
+//
+// DETERMINISM, stated precisely, because the census screenshots depend on it:
+// minting a corpus into an EMPTY page twice produces byte-identical
+// coordinates — placement is a pure function of (mint order, sibling extents)
+// and mint order is the plan's contract order. Re-minting into a page that
+// already holds the sets moves NOTHING, because every section is found by
+// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
+// into the gutter below it and touch its neighbour. Reflowing the neighbours
+// would be the only way to prevent that, and reflowing is precisely the
+// behaviour that destroys a designer's manual position — so growth-overlap is
+// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
+//
+// A single column, not a wrapped grid: host sections on the real corpus range
+// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
+// rule has to reflow a shelf when one member grows, and reflow is the thing
+// that cannot coexist with "the designer's position survives". The column is
+// the layout that keeps both promises at once.
+function ensureHostSection(page, target, displayName) {
+  const HOST_PAD = 60;
+  // The gutter between stacked host sections. Wide enough that a section can
+  // grow on amend without immediately touching its neighbour (see
+  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
+  // pages were already hand-laid to.
+  const HOST_GUTTER = 200;
+  const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
+  let section = null;
+  for (const child of page.children) {
+    if (child.type === 'SECTION' && child.getSharedPluginData('ds_contracts', 'hostFor') === contractId) {
+      section = child;
+      break;
+    }
+  }
+  const isNewSection = !section;
+  // Measured BEFORE the new section joins the page, so it can never measure
+  // itself, and skipping "target" — a freshly built set is parked on the page
+  // until the line below adopts it, and counting it would push the section
+  // below its own contents.
+  let nextY = 0;
+  if (isNewSection) {
+    for (const child of page.children) {
+      if (child === target) continue;
+      let bottom;
+      try { bottom = child.y + child.height; } catch (e) { continue; }
+      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
+      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
+    }
+    section = figma.createSection();
+    page.appendChild(section);
+    section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
+  }
+  section.name = displayName;
+  section.fills = [{ type: 'SOLID', color: { r: 0.969, g: 0.973, b: 0.98 } }];
+  section.appendChild(target);
+  target.x = HOST_PAD;
+  target.y = HOST_PAD;
+  section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
+  // ONLY a section this call created gets a position. An existing one keeps
+  // wherever the designer left it — that is the whole of defect (2).
+  if (isNewSection) {
+    section.x = 0;
+    section.y = nextY;
+  }
+  return section;
+}
+
+
+// FC-OVERFLOW-CLIP-LOST: node ids whose clip the CONTRACT declared
+// (overflow-x/y hidden|clip). The unclip walks consult this so a declared clip
+// can never be reverted silently by an overhanging descendant.
+const dsDeclaredClip = new Set();
+// Ancestors an OVERHANG (absolute / inset overlay) actually unclipped — see
+// propagateOverflowVisible. Distinguishes "unclipped because something hangs
+// out of it" from "unclipped because CSS overflow defaults to visible".
+const dsOverhangUnclip = new Set();
+/** Does a DECLARED clip stop the unclip walk at this node? See the body — the
+ *  contract's captured overflow outranks the emitter's out-of-flow heuristic,
+ *  and the walk ends rather than reverting a fact the contract stated. */
+function dsDeclaredClipStops(n) {
+  // A DECLARED clip beats the unclip heuristic, and the walk STOPS here.
+  //
+  // The heuristic is broader than CSS: it unclips every ancestor of any
+  // out-of-flow child, but position:absolute does not ask its ancestors to
+  // stop clipping — an absolutely positioned child inside overflow:hidden is
+  // clipped, normally and correctly. The rule exists for one real case (a
+  // Slider thumb at left:-10 genuinely hanging outside its track), and it was
+  // reading "is out of flow" as if it meant "hangs outside the box".
+  //
+  // Fluent Spinner is the counter-example that made this visible: its root
+  // declares overflow hidden (captured from the real component) and its
+  // spinnerTail declares position:absolute INSIDE that root. Nothing overhangs.
+  // The heuristic would have silently thrown the captured clip away.
+  //
+  // A captured fact outranks an inference about one. Stopping is also
+  // sufficient: content clipped at this boundary cannot be revealed by
+  // unclipping anything above it.
+  return dsDeclaredClip.has(n.id);
+}
+function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
+  const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
+  node.layoutMode = l.mode;
+  node.primaryAxisAlignItems = l.primary;
+  node.counterAxisAlignItems = l.counter;
+  node.primaryAxisSizingMode = 'AUTO';
+  node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
+  // FC-OVERFLOW-CLIP-LOST: remember WHO asked for the clip. Three runtime
+  // loops (applyShapeAbsolute / applyInsetOverlay / propagateOverflowVisible)
+  // walk every ancestor setting clipsContent=false for an overhanging child,
+  // and they would silently revert a clip the contract declared — last write
+  // wins and nothing reports it. Measured across the whole corpus: NO
+  // clip-declaring part has an absolute/insetOverlay/overlay descendant, so
+  // this never fires today. It is recorded rather than trusted, because the
+  // collision is one contract away and a silent revert is indistinguishable
+  // from the fact never having been carried.
+  if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
+  if (node.type === 'FRAME') node.fills = [];
+  // FC-AMEND-CANNOT-CLEAR (astryx/banner live-canvas round, 2026-08-11).
+  //
+  // This function only ever SET what the spec declares, so on the AMEND path
+  // a spacing fact the contract has since DROPPED survived on the node
+  // forever. The create path never showed it — a fresh createComponent starts
+  // at 0 — so the two paths silently disagreed, and `specHash` matching made
+  // it invisible: the script reports "skipped: unchanged" while the canvas
+  // carries a value the contract does not claim.
+  //
+  // Measured: astryx/banner's root carried a bound 12/16 padding + gap 8 that
+  // its committed spec does not declare, applying the header's padding TWICE
+  // (header 299x64 → root 331x88) against a reference and a contract render
+  // that both measure 64 tall. Across all 77 scored cells on the two
+  // connected files it is the ONLY root in that state — every other root with
+  // padding declares it — so this reset changes exactly one scored cell.
+  //
+  // Only the ROOT needs it: amend removes and rebuilds every child, so no
+  // descendant can carry stale state. Reset to Figma's own defaults FIRST,
+  // then apply what the spec declares below.
+  for (const field of ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'itemSpacing']) {
+    if (spec.bindings && spec.bindings[field] !== undefined) continue;
+    if (spec.lits && spec.lits[field] !== undefined) continue;
+    try {
+      if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
+  }
+  for (const [field, varName] of Object.entries(spec.bindings || {})) {
+    node.setBoundVariable(field, need(varName));
+  }
+  if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
+  if (spec.stroke) {
+    node.strokes = [boundPaint(spec.stroke, node)];
+    node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
+  }
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
+  }
+  if (spec.fixedWidth || spec.fixedHeight) {
+    const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
+    const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
+    node.resize(w, h);
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
+    if (spec.fixedWidth) {
+      if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
+      else node.counterAxisSizingMode = 'FIXED';
+      node.setBoundVariable('width', need(spec.fixedWidth.varName));
+    }
+    if (spec.fixedHeight) {
+      if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
+      else node.primaryAxisSizingMode = 'FIXED';
+      if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
+}
+
+// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
+// layoutPositioning ABSOLUTE requires an auto-layout parent.
+function applyOverlay(parent, childNode, childSpec) {
+  if (!childSpec.overlay) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const p = childSpec.overlay.placement;
+    childNode.constraints =
+      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
+      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
+      { horizontal: 'MIN', vertical: 'MIN' };
+    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
+    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
+    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
+    else { childNode.x = parent.width; childNode.y = 0; }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
+}
+
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
+    // overhanging absolute thumbs (Slider left:-10) aren't half-cut by a
+    // grandparent track that still defaults to clipsContent:true.
+    for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+      if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      if (dsDeclaredClipStops(n)) break;
+      n.clipsContent = false;
+      dsOverhangUnclip.add(n.id);
+    }
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
+}
+
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        if (fw != null || fh != null) {
+          childNode.resize(
+            Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
+            Math.max(1, fh != null ? fh : (parent.height - (o.top || 0) - (o.bottom || 0))),
+          );
+        } else {
+          childNode.resize(
+            Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+            Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+          );
+        }
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
+  }
+}
+
+function propagateOverflowVisible(childNode, parent) {
+  if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
+  if (!dsOverhangUnclip.has(childNode.id)) return;
+  for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+    if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+    if (dsDeclaredClipStops(n)) break;
+    n.clipsContent = false;
+    dsOverhangUnclip.add(n.id);
+  }
+}
+
+async function buildNode(spec, registry) {
+  let node;
+  if (spec.type === 'svg') {
+    node = figma.createNodeFromSvg(spec.svg);
+    node.fills = [];
+    node.clipsContent = false;
+    if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
+  } else if (spec.type === 'text') {
+    node = figma.createText();
+    node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
+    node.fontSize = spec.fontSize || 16;
+    node.characters = spec.characters || '';
+    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
+    if (spec.textStyle) {
+      // Exact-definition match compiled in: ride the named style. Text
+      // styles own typography only — the bound fill paint below coexists.
+      // Fail closed: a compiled textStyle that cannot bind is identity loss.
+      const st = await ourTextStyle(spec.textStyle);
+      if (!st) {
+        throw new Error(
+          'text-style-identity-refused: missing local text style "' + spec.textStyle +
+          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
+        );
+      }
+      try {
+        await node.setTextStyleIdAsync(st.id);
+      } catch (e) {
+        throw new Error(
+          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
+          '": ' + (e && e.message ? e.message : String(e)),
+        );
+      }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
+    }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
+    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
+    if (spec.contentProp) {
+      registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
+    }
+    if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
+      // Styled static text (page chips, dots, thumbs): wrap in a frame so
+      // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
+      const wrap = figma.createFrame();
+      wrap.layoutMode = 'HORIZONTAL';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.primaryAxisSizingMode = 'AUTO';
+      wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
+      wrap.fills = [];
+      for (const [field, varName] of Object.entries(spec.bindings || {})) {
+        wrap.setBoundVariable(field, need(varName));
+      }
+      if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.characters) wrap.appendChild(node); else node.remove();
+      if (spec.fixedWidth || spec.fixedHeight) {
+        wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
+        if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
+        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; if (spec.fixedHeight.varName) wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); else wrap.resize(wrap.width, spec.fixedHeight.px); }
+      }
+      wrap.name = spec.name;
+      node = wrap;
+    }
+  } else if (spec.type === 'instance') {
+    const target = resolveComponentIdentity(
+      { contractId: spec.depContractId, anchorKey: spec.depAnchorKey, name: spec.dep },
+      'Instance "' + spec.name + '"',
+      false,
+    );
+    const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+    node = main.createInstance();
+    if (spec.depProps) setInstanceProps(node, spec.depProps, target);
+  } else if (spec.type === 'slot') {
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
+    applyFrameSpec(node, spec);
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
+      node.appendChild(inst);
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
+      }
+    }
+    registry.slots.push({ spec, slot: node });
+  } else if (spec.type === 'shape') {
+    // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
+    // ROUND-cap polyline SVG (see collapseTwoSideStrokeGlyph). Keep type
+    // 'shape' so absolute/rotation placement still uses shape.width/height.
+    if (spec.svg) {
+      node = figma.createNodeFromSvg(spec.svg);
+      node.fills = [];
+      node.clipsContent = false;
+      try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { degrade('FC-RT-SVG-RESIZE-REFUSED', node, 'the glyph kept its intrinsic size (resize to ' + spec.shape.width + 'x' + spec.shape.height + ' refused)', e); }
+      if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
+  }
+    } else {
+    // v9 shape (#42): a REAL parametric node with native rotation.
+    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+      : spec.shape.kind === 'rect' ? figma.createRectangle()
+      : figma.createPolygon();
+    if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
+    node.resize(spec.shape.width, spec.shape.height);
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
+    // RadioButton checked dot's white, compiled from the decor's
+    // background-color literal) was DROPPED here (the shape branch never runs
+    // applyFrameSpec's litsRuntime), so the dot landed with no fill and had to
+    // be hand-corrected on canvas each re-amend. Apply it at the SOURCE:
+    // bound fill wins; else a literal fill; else clear.
+    node.fills = spec.fill
+      ? [boundPaint(spec.fill, node)]
+      : (spec.lits && spec.lits.fillColor)
+        ? [{ type: 'SOLID', color: { r: spec.lits.fillColor.r, g: spec.lits.fillColor.g, b: spec.lits.fillColor.b }, opacity: spec.lits.fillColor.a === undefined ? 1 : spec.lits.fillColor.a }]
+        : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
+    // Carbon checkbox box is a transparent square with a 1px border — a ring
+    // with no paint, no weight and no radius is not a box.
+    else if (spec.lits && spec.lits.strokeColor) {
+      node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
+      node.strokeAlign = 'INSIDE';
+    }
+    if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
+    if (spec.lits && spec.lits.strokeSides) {
+      const sw = spec.lits.strokeSides;
+      // ELLIPSE/LINE/etc. expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible".
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
+  }
+    }
+  } else {
+    node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
+    applyFrameSpec(node, spec);
+  }
+  node.name = spec.name;
+  // Node opacity (dump v1.2 channel): applies to every node kind.
+  // Unbind first: a stale OPACITY variable (repo 0-1 token bound into
+  // Figma's percent-scaled field) wins over the literal and paints 0.5
+  // as 0.5% — the Disabled wash (visual-parity Button, 93.91% masked).
+  if (typeof spec.opacity === 'number') {
+    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { degrade('FC-RT-OPACITY-UNBIND-REFUSED', node, 'a stale opacity variable could not be unbound before the literal opacity was set; the variable may still win over spec.opacity', e); }
+    node.opacity = spec.opacity;
+  }
+  if (spec.visibleProp) {
+    registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
+  }
+  const built = [];
+  for (const child of spec.children || []) {
+    const childNode = await buildNode(child, registry);
+    node.appendChild(childNode);
+    propagateOverflowVisible(childNode, node);
+    built.push([child, childNode]);
+    applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
+    if (child.pct != null) {
+      try {
+        childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
+        childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
+    }
+    if (
+      child.type === 'frame' && (!child.children || child.children.length === 0) &&
+      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
+      // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
+      // sizing is meaningless there (real Figma drops it the moment
+      // layoutPositioning becomes ABSOLUTE) and the instruction only made
+      // the Dialog backdrop LOOK healthy in the headless mock while the
+      // canvas drew a squat band. Out-of-flow boxes are sized by
+      // resizeOutOfFlow against the parent's final box.
+      !child.overlay && !child.insetOverlay && !child.absolute
+    ) {
+      // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
+      // height follows the auto-layout parent (FILL), never Figma's 100×100
+      // createFrame artifact (Phase B-2 finding 4: ProgressBar indicators
+      // overflowed their fixed-height tracks). Width stays the spec'd
+      // fraction (meter pct) or the placeholder box, named in the component
+      // description.
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
+    }
+    // FILL is compiled (annotateFillW): candidates only fill when the parent
+    // width is established — the hug↔fill collapse class stays impossible.
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  resizeOutOfFlow(node, built);
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
+  return node;
+}
+
+
+// djb2 over the compiled spec — stored on the set so unchanged components
+// skip cheaply and CHANGED ones amend in place.
+
+var dsVarNames = {};
+var dsVarNamesLoaded = false;
+function dsSetVarNames(m) { dsVarNames = m || {}; dsVarNamesLoaded = true; return dsVarNames; }
+// Callers with an async prologue (the emitted script's top-level await, the
+// plugin's check-drift handler) populate the map ONCE; the sync walk reads it.
+async function dsLoadVarNames() {
+  var m = {};
+  try {
+    var all = await figma.variables.getLocalVariablesAsync();
+    for (var i = 0; i < all.length; i++) m[all[i].id] = all[i].name;
+  } catch (e) {}
+  return dsSetVarNames(m);
+}
+// THE UNLOADED MAP IS A REFUSAL, NOT A DIFFERENT ANSWER.
+//
+// v6 spells bindings by NAME, and the name map can only be filled from an
+// ASYNC api. A call site that forgets to await dsLoadVarNames() used to get a
+// perfectly well-formed hash -- computed over (unresolved) everywhere -- that
+// simply did not equal the stamp. Three separate sites hit that in one round
+// (the emitted script, the plugin's inventory walk, and the engine gate's own
+// new-Function harness), and every one reported a FALSE 'canvas-edited'
+// verdict on an untouched file rather than an error. Telling a designer that
+// applying would overwrite edits that do not exist is a louder wrong answer
+// than the missed detach v6 was built to catch.
+//
+// So the unloaded state now refuses BY NAME at the first binding it is asked
+// to resolve. A forgotten preload becomes an immediate, located error instead
+// of a plausible hash -- the same reason styledChannels takes a REQUIRED
+// FusionEnv rather than an optional one. dsSetVarNames({}) is the way to say
+// deliberately that no names are available.
+function dsVarName(id) {
+  if (!id) return '(none)';
+  if (!dsVarNamesLoaded) {
+    throw new Error(
+      'dsCanvasFingerprint: the variable-name map was never loaded. v6 spells bindings by NAME, so every path that COMPUTES a fingerprint must ' +
+      'await dsLoadVarNames() (or call dsSetVarNames({}) to state deliberately that no names are available) before walking. ' +
+      'Without it every bound field resolves to (unresolved) and the hash silently disagrees with the stamp.',
+    );
+  }
+  if (dsVarNames[id]) return dsVarNames[id];
+  // Real Figma (non-dynamic-page documents) still answers synchronously;
+  // where it does not, the preloaded map above is the answer.
+  try {
+    if (typeof figma !== 'undefined' && figma.variables && figma.variables.getVariableById) {
+      var v = figma.variables.getVariableById(id);
+      if (v && v.name) { dsVarNames[id] = v.name; return v.name; }
+    }
+  } catch (e) {}
+  return '(unresolved)';
+}
+// Paints serialize with aliases as NAMES: a run-scoped VariableID makes the
+// line unusable across files, which is the whole defect v6 closes.
+function dsPaints(paints) {
+  return JSON.stringify(paints, function (k, v) {
+    if (v && typeof v === 'object' && v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
+      return { var: dsVarName(v.id) };
+    }
+    return v;
+  });
+}
+function dsCanvasSnapshot(root) {
+  var lines = [];
+  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
+  var factsOf = function (n, id) {
+    var out = [];
+    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + dsPaints(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + dsPaints(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
+    try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
+    try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
+    try { if (n.type === 'TEXT') out.push(id + '|text|"' + n.characters + '" ' + String(n.fontSize) + 'px ' + JSON.stringify(n.fontName)); } catch (e) {}
+    try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
+    try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
+    try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
+    // v6: DIRECT variable bindings, one channel per field so the drift
+    // reporter can pair each independently. Array-valued aliases
+    // (fills/strokes/characters) are skipped — they ride their own channel,
+    // the same split dump.plugin.js makes.
+    try {
+      var bv = n.boundVariables;
+      if (bv) {
+        var bf = Object.keys(bv).sort();
+        for (var bi = 0; bi < bf.length; bi++) {
+          var al = bv[bf[bi]];
+          if (!al || Object.prototype.toString.call(al) === '[object Array]' || !al.id) continue;
+          out.push(id + '|bound:' + bf[bi] + '|' + dsVarName(al.id));
+        }
+      }
+    } catch (e) {}
+    // v4 (live finding: description + added property were invisible):
+    try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
+    try {
+      if (n.componentPropertyDefinitions) {
+        var defs = n.componentPropertyDefinitions;
+        var names = Object.keys(defs).sort();
+        for (var d = 0; d < names.length; d++) {
+          var def = defs[names[d]];
+          out.push(id + '|propdef|' + names[d] + ':' + def.type + '=' + String(def.defaultValue));
+        }
+      }
+    } catch (e) {}
+    // v5 (prototype-wiring round): interactions are generated facts now.
+    // Destination by NAME (resolved among the node's siblings — a variant
+    // swap is always intra-set); an unresolvable id is named honestly rather
+    // than leaked as a run-scoped number.
+    try {
+      var rx = n.reactions;
+      if (rx && rx.length) {
+        var destName = function (nn, destId) {
+          if (!destId) return '(none)';
+          try {
+            var p = nn.parent;
+            var sibs = (p && p.children) || [];
+            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
+          } catch (e2) {}
+          return '(external)';
+        };
+        for (var ri = 0; ri < rx.length; ri++) {
+          var rr = rx[ri];
+          var acts = rr.actions || (rr.action ? [rr.action] : []);
+          var trg = (rr.trigger && rr.trigger.type) || '(none)';
+          for (var ai = 0; ai < acts.length; ai++) {
+            var ac = acts[ai];
+            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
+          }
+        }
+      }
+    } catch (e) {}
+    return out;
+  };
+  var walk = function (n, path) {
+    var id = path + ':' + n.type + '/' + n.name;
+    var fs = factsOf(n, id);
+    for (var i = 0; i < fs.length; i++) lines.push(fs[i]);
+    var kids = n.children || [];
+    for (var i2 = 0; i2 < kids.length; i2++) walk(kids[i2], path + '/' + i2);
+  };
+  walk(root, '');
+  return lines;
+}
+function dsCanvasSetSnapshot(node) {
+  // the SET's OWN facts only (description, property definitions, name) —
+  // small enough to store on the set node; variants own their subtrees.
+  var lines = [];
+  var id = ':' + node.type + '/' + node.name;
+  try { if (node.description) lines.push(id + '|description|' + node.description); } catch (e) {}
+  try {
+    if (node.componentPropertyDefinitions) {
+      var defs = node.componentPropertyDefinitions;
+      var names = Object.keys(defs).sort();
+      for (var d = 0; d < names.length; d++) {
+        var def = defs[names[d]];
+        lines.push(id + '|propdef|' + names[d] + ':' + def.type + '=' + String(def.defaultValue));
+      }
+    }
+  } catch (e) {}
+  return lines;
+}
+function dsCanvasFingerprint(root) {
+  var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
+  var h = 5381;
+  for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
+  return 'v6:' + String(h);
+}
+
+// v6: bindings are fingerprinted by variable NAME, and every Figma variable
+// API that survives dynamic-page loading is async — so the id→name map is
+// filled ONCE here, from the emitted script's top-level await, and the sync
+// walk reads it. This runs AFTER the source above on purpose: the
+// dsVarNames initializer would clobber an earlier fill.
+await dsLoadVarNames();
+
+// DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
+// Check Drift can LOCALIZE an edit to the exact variant (live finding:
+// "canvas edited" over 63 Button variants is not actionable).
+function dsStampFingerprints(node) {
+  node.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(node));
+  // v3: variants also store the SNAPSHOT the hash derives from, so Check
+  // Drift can say WHAT changed, not just that something did. Each variant
+  // node owns its own pluginData quota — the set never carries the bulk.
+  if (node.type === 'COMPONENT_SET') {
+    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
+    for (const child of node.children) {
+      child.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(child));
+      child.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(child)));
+    }
+  } else {
+    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
+    node.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(node)));
+  }
+}
+
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
+function specHash(C) {
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
+  for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
+  return String(h);
+}
+
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
+// IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
+// existing COMPONENT_SET against the compiled spec while preserving what
+// instances bind to — the set node + key, each variant COMPONENT node, and
+// existing componentProperty IDs. Variant interiors are contract-owned and
+// rebuilt from spec (manual interior edits are drift by definition);
+// instance-level property overrides survive because property IDs do.
+// Destructive changes (extra variants from removed enum values) are
+// REPORTED, never deleted — except State preview leftovers when
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+async function amendSet(set, C) {
+  set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
+  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
+  }
+  const hash = specHash(C);
+  if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
+    // unstable under real Figma's deferred layout) re-baselines NOW. A
+    // current-version stamp is never overwritten on skip: canvas edits stay
+    // detectable.
+    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
+      dsStampFingerprints(set);
+    }
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
+  }
+  const report = { name: C.setName, contractId: C.contractId, amended: true, nodeId: set.id, key: set.key,
+    addedVariants: [], rebuiltVariants: 0, extraVariants: [], addedProps: [], editedDefaults: [] };
+  const defs = set.componentPropertyDefinitions;
+  const newKeys = {};
+  const defKey = (name) => newKeys[name] ||
+    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+
+  for (const w of [
+    ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
+    ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
+  ]) {
+    const k = defKey(w.name);
+    if (!k) { newKeys[w.name] = set.addComponentProperty(w.name, w.type, w.def); report.addedProps.push(w.name); }
+    else if (defs[k].type === w.type && defs[k].defaultValue !== w.def) {
+      set.editComponentProperty(k, { defaultValue: w.def });
+      report.editedDefaults.push(w.name);
+    }
+  }
+
+  // Sets gaining/losing the State preview axis reconcile by RENAME, not
+  // duplication: an existing variant whose name matches an expected name
+  // minus the ', State=Default' segment IS that variant (instances point at
+  // it), so it is renamed in place — every variant node ID is preserved.
+  // Main-file finding, 2026-07-08: name-only matching built 12 duplicates
+  // and stranded the 12 originals as off-axis extras.
+  const EV = withStateAxis(C);
+  const expected = new Map(EV.map((v) => [v.name, v]));
+  for (const ch of set.children) {
+    if (expected.has(ch.name)) continue;
+    const gained = ch.name + ', State=Default';
+    const lost = ch.name.replace(', State=Default', '');
+    if (expected.has(gained) && !set.children.some((o) => o.name === gained)) {
+      ch.name = gained;
+      report.renamedVariants = report.renamedVariants || [];
+      report.renamedVariants.push(gained);
+    } else if (lost !== ch.name && expected.has(lost) && !set.children.some((o) => o.name === lost)) {
+      ch.name = lost;
+      report.renamedVariants = report.renamedVariants || [];
+      report.renamedVariants.push(lost);
+    } else {
+      report.extraVariants.push(ch.name);
+    }
+  }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
+  const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
+
+  for (const v of EV) {
+    let comp = existingByName.get(v.name);
+    const registry = { texts: [], slots: [], visibles: [] };
+    if (!comp) {
+      comp = await buildNode(v.spec, registry);
+      set.appendChild(comp);
+      report.addedVariants.push(v.name);
+    } else {
+      for (const child of [...comp.children]) child.remove();
+      applyFrameSpec(comp, v.spec);
+      const built = [];
+      for (const childSpec of v.spec.children || []) {
+        const childNode = await buildNode(childSpec, registry);
+        comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
+        built.push([childSpec, childNode]);
+        applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
+        if (childSpec.pct != null) {
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
+        }
+        if (
+          childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+          !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
+        ) {
+          // #60 fix 4 (amend path): same empty-child declared default.
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
+        }
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+        }
+      }
+  resizeOutOfFlow(comp, built);
+      report.rebuiltVariants++;
+    }
+    for (const t of registry.texts) {
+      let k = defKey(t.prop);
+      if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
+      else if (defs[k] && defs[k].defaultValue !== t.default && !report.editedDefaults.includes(t.prop)) {
+        set.editComponentProperty(k, { defaultValue: t.default });
+        report.editedDefaults.push(t.prop);
+      }
+      t.node.componentPropertyReferences = { characters: k };
+    }
+    for (const sl of registry.slots) {
+      let k = defKey(sl.spec.slotProperty);
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
+          );
+        }
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
+      }
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
+      if (sl.spec.slotOptional) {
+        let vk = defKey('Show ' + sl.spec.slotProperty);
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
+      }
+    }
+    for (const vis of registry.visibles) {
+      const k = defKey(vis.prop);
+      if (!k) continue;
+      vis.node.componentPropertyReferences = { visible: k };
+      vis.node.visible = vis.default;
+    }
+  }
+
+  // Contract default combo must be the FIRST variant (Figma default = first).
+  const first = set.children.find((ch) => ch.name === EV[0].name);
+  if (first && set.children[0] !== first) set.insertChild(0, first);
+
+  // Grid re-layout with the create path's math.
+  const specByName = new Map(EV.map((sv) => [sv.name, sv]));
+  const rowsN = Math.max(...EV.map((vv) => vv.row)) + 1;
+  const colsN = Math.max(...EV.map((vv) => vv.col)) + 1;
+  const colWs = new Array(colsN).fill(0);
+  const rowHs = new Array(rowsN).fill(0);
+  for (const child of set.children) {
+    const sp = specByName.get(child.name);
+    if (!sp) continue;
+    colWs[sp.col] = Math.max(colWs[sp.col], child.width);
+    rowHs[sp.row] = Math.max(rowHs[sp.row], child.height);
+  }
+  for (const child of set.children) {
+    const sp = specByName.get(child.name);
+    if (!sp) continue;
+    let x = PAD, y = PAD;
+    for (let i = 0; i < sp.col; i++) x += colWs[i] + PAD;
+    for (let i = 0; i < sp.row; i++) y += rowHs[i] + PAD;
+    child.x = x; child.y = y;
+  }
+  // B-3 finding 4: after re-gridding, the SET CONTAINER refits to the
+  // children's extent + grid padding (the create path's exact math) —
+  // without this, added variants/columns stayed clipped by stale bounds
+  // (Banner's Focus column, Button's 220-cell grid, ProgressBar's height).
+  // Extra (human-owned) variants may sit beyond the grid; never shrink
+  // below their extent.
+  {
+    let totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
+    let totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    for (const child of set.children) {
+      totalW = Math.max(totalW, child.x + child.width + PAD);
+      totalH = Math.max(totalH, child.y + child.height + PAD);
+    }
+    set.resizeWithoutConstraints(totalW, totalH);
+  }
+  set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
+  set.setSharedPluginData('ds_contracts', 'specHash', hash);
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
+  // are part of what gets stamped (a stripped reaction is drift).
+  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
+  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
+  // mismatch means the canvas was edited after generation.
+  dsStampFingerprints(set);
+  // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
+  const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
+  if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
+  return report;
+}
+
+// #60 fix 3: IN-PLACE AMEND for standalone COMPONENTs (non-set: Badge/Tag
+// class) — the same identity-marker update semantics as amendSet: the
+// component node (and key) instances bind to is preserved; the interior is
+// contract-owned and rebuilt from spec; existing componentProperty IDs
+// survive via defKey. Unchanged specs skip on the stored specHash.
+async function amendComponent(comp, C) {
+  comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
+  // specHash early return, exactly like the identity markers above.
+  // Without this, a NODE whose content is unchanged keeps whatever coordinate
+  // it already carries forever: re-running the sync could never repair a page,
+  // only a human dragging things could. The altitude collision was in that
+  // state. Placement has to be a FIXED POINT — run the sync twice and get the
+  // same page — so the skip path is not allowed to be a dead end for it.
+  // The call AFTER the rebuild still exists and is still the one that re-fits
+  // the section to the FINAL size; this one only guarantees convergence.
+  {
+    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
+  }
+  const hash = specHash(C);
+  if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
+    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
+    if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
+      dsStampFingerprints(comp);
+    }
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
+  }
+  const report = { name: C.setName, contractId: C.contractId, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
+  const defs = comp.componentPropertyDefinitions;
+  const newKeys = {};
+  const defKey = (name) => newKeys[name] ||
+    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
+  for (const w of [
+    ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
+    ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
+  ]) {
+    const k = defKey(w.name);
+    if (!k) { newKeys[w.name] = comp.addComponentProperty(w.name, w.type, w.def); report.addedProps.push(w.name); }
+    else if (defs[k].type === w.type && defs[k].defaultValue !== w.def) {
+      comp.editComponentProperty(k, { defaultValue: w.def });
+      report.editedDefaults.push(w.name);
+    }
+  }
+  const v = C.variants[0];
+  const registry = { texts: [], slots: [], visibles: [] };
+  for (const child of [...comp.children]) child.remove();
+  applyFrameSpec(comp, v.spec);
+  const built = [];
+  for (const childSpec of v.spec.children || []) {
+    const childNode = await buildNode(childSpec, registry);
+    comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
+    built.push([childSpec, childNode]);
+    applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
+    if (childSpec.pct != null) {
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
+    }
+    if (
+      childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
+      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
+      !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
+    ) {
+      // #60 fix 4 (standalone amend path): same empty-child declared default.
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
+    }
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  resizeOutOfFlow(comp, built);
+  for (const t of registry.texts) {
+    let k = defKey(t.prop);
+    if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
+    else if (defs[k] && defs[k].defaultValue !== t.default && !report.editedDefaults.includes(t.prop)) {
+      comp.editComponentProperty(k, { defaultValue: t.default });
+      report.editedDefaults.push(t.prop);
+    }
+    t.node.componentPropertyReferences = { characters: k };
+  }
+  for (const sl of registry.slots) {
+    let k = defKey(sl.spec.slotProperty);
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
+        );
+      }
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
+    }
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
+    if (sl.spec.slotOptional) {
+      let vk = defKey('Show ' + sl.spec.slotProperty);
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
+    }
+  }
+  for (const vis of registry.visibles) {
+    const k = defKey(vis.prop);
+    if (!k) continue;
+    vis.node.componentPropertyReferences = { visible: k };
+    vis.node.visible = vis.default;
+  }
+  comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
+  comp.setSharedPluginData('ds_contracts', 'specHash', hash);
+  dsStampFingerprints(comp);
+  // Re-fit (or adopt into) the host section — mirrors amendSet.
+  const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
+  if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
+  return report;
+}
+
+async function syncOne(C) {
+  // Semantic marker → stable anchor → unique explicit legacy-generated name.
+  // A same-name foreign node has neither marker and is never adopted.
+  let existing = resolveComponentIdentity(
+    { contractId: C.contractId, anchorKey: C.anchorKey, name: C.setName },
+    'Sync target "' + C.setName + '"',
+    true,
+  );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
+  // Retiring/renaming an internal omission option must not leave its retained
+  // history eligible to become a public enum option. Refuse before ANY writes
+  // to this target. A new lineage is required; owner history is never deleted.
+  if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
+    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
+    if (previousRaw) {
+      let previous;
+      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
+      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
+      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
+        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
+        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
+      }
+    }
+  }
+  if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
+    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  }
+  if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
+    return await amendSet(existing, C);
+  }
+  // #60 fix 3: standalone COMPONENTs (Badge/Tag class) amend in place too —
+  // the "amend supports variant sets in v1" skip forced delete+recreate and
+  // re-minted node ids/keys (Phase B-2 named finding 2).
+  if (existing && existing.type === 'COMPONENT' && !C.isSet) {
+    return await amendComponent(existing, C);
+  }
+  if (existing) {
+    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
+  }
+
+  // A same-named unmarked set is foreign: leave it alone, disambiguate ours.
+  let displayName = C.setName;
+  for (const page of figma.root.children) {
+    const foreign = page.findOne(
+      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === C.setName,
+    );
+    if (foreign) { displayName = C.setName + ' (' + C.contractId + ')'; break; }
+  }
+
+  // One page per component (see figma-sync/arrange.js for the file layout).
+  let compPage = figma.root.children.find((p) => p.name === displayName);
+  if (!compPage) { compPage = figma.createPage(); compPage.name = displayName; }
+
+  const EV = withStateAxis(C);
+  const built = [];
+  for (const v of EV) {
+    const registry = { texts: [], slots: [], visibles: [] };
+    const comp = await buildNode(v.spec, registry);
+    built.push({ v, comp, registry });
+  }
+
+  let target;
+  if (C.isSet) {
+    // combineAsVariants requires the nodes to already be ON the parent page.
+    for (const b of built) compPage.appendChild(b.comp);
+    target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
+  } else {
+    target = built[0].comp;
+    compPage.appendChild(target);
+  }
+
+  // Component properties are minted on the PROPERTY OWNER — the SET for a
+  // variant component, the component itself for a standalone — AFTER
+  // combineAsVariants, one key per property name, wired into every variant.
+  // (2026-07-21, live-canvas finding, handoff 08#1: the old per-variant
+  // pre-combine minting produced id-suffixed keys that real set-instances
+  // never surface, so an instance's TEXT property silently failed to apply —
+  // repeated Badge instances kept the default "Badge" live. The amend path
+  // (amendSet) always minted set-level; the create path now matches it.)
+  const keys = {};
+  const mintOnce = (name, type, def, opts) => {
+    if (!keys[name]) keys[name] = target.addComponentProperty(name, type, def, opts);
+    return keys[name];
+  };
+  for (const bp of C.boolProps) mintOnce(bp.property, 'BOOLEAN', bp.default);
+  for (const tp of C.textProps || []) mintOnce(tp.property, 'TEXT', tp.default);
+  for (const b of built) {
+    for (const t of b.registry.texts) {
+      t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
+    }
+    for (const s of b.registry.slots) {
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
+      if (s.spec.slotOptional) {
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
+      }
+    }
+    for (const vis of b.registry.visibles) {
+      const key = keys[vis.prop];
+      if (!key) continue;
+      vis.node.componentPropertyReferences = { visible: key };
+      vis.node.visible = vis.default;
+    }
+  }
+
+  if (C.isSet) {
+    // Tight grid: rows = first axis, columns = second; per-track max sizing.
+    const specByName = new Map(EV.map((s) => [s.name, s]));
+    const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
+    const colsN = Math.max(...EV.map((v) => v.col)) + 1;
+    const colWs = new Array(colsN).fill(0);
+    const rowHs = new Array(rowsN).fill(0);
+    for (const child of target.children) {
+      const spec = specByName.get(child.name);
+      if (!spec) continue;
+      colWs[spec.col] = Math.max(colWs[spec.col], child.width);
+      rowHs[spec.row] = Math.max(rowHs[spec.row], child.height);
+    }
+    for (const child of target.children) {
+      const spec = specByName.get(child.name);
+      if (!spec) continue;
+      let x = PAD, y = PAD;
+      for (let i = 0; i < spec.col; i++) x += colWs[i] + PAD;
+      for (let i = 0; i < spec.row; i++) y += rowHs[i] + PAD;
+      child.x = x;
+      child.y = y;
+    }
+    const totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
+    const totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
+    target.resizeWithoutConstraints(totalW, totalH);
+  }
+  target.name = displayName;
+  target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
+  target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
+  target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
+    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
+  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
+  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
+  dsStampFingerprints(target);
+  ensureHostSection(compPage, target, displayName);
+
+  return {
+    name: C.setName,
+    contractId: C.contractId,
+    nodeId: target.id,
+    key: target.key,
+    variants: C.isSet ? target.children.length : 1,
+    properties: Object.keys(target.componentPropertyDefinitions || {}),
+    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
+  };
+}
+
+const results = [];
+for (const C of COMPONENTS) {
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
+}
+return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
+
+})();
+
+// ───── card.figma.js ─────
+await (async () => {
+// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
+// Source of truth: contracts/card.contract.json (shadcn.card v0.2.0)
+// Amend-capable (#60): an existing component (set) carrying our identity
+// marker is reconciled IN PLACE (same node id + key); unchanged specs skip.
+const COMPONENTS = [
+  {
+    "setName": "Card",
+    "contractId": "shadcn.card",
+    "version": "0.2.0",
+    "anchorKey": null,
+    "description": "Card — generated from contract shadcn.card v0.2.0 † (8 code-only facts — see plugin report)",
+    "isSet": true,
+    "boolProps": [],
+    "textProps": [],
+    "fontStyles": [
+      "Medium",
+      "Regular"
+    ],
+    "variants": [
+      {
+        "name": "Size=Default",
+        "row": 0,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Size=Default",
+          "layout": {
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "fill": "imported/card/root/background-color",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-14",
+            "bottomRightRadius": "imported/shared/size-14",
+            "topLeftRadius": "imported/shared/size-14",
+            "topRightRadius": "imported/shared/size-14",
+            "paddingBottom": "imported/card/root/padding-bottom/default",
+            "paddingTop": "imported/card/root/padding-top/default",
+            "itemSpacing": "imported/card/root/row-gap/default"
+          },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.0392156862745098,
+                "g": 0.0392156862745098,
+                "b": 0.0392156862745098,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 2,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.05
+              }
+            }
+          ],
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "bindings": {
+                "topLeftRadius": "imported/shared/size-14",
+                "topRightRadius": "imported/shared/size-14",
+                "itemSpacing": "imported/card/part-0/row-gap",
+                "paddingLeft": "imported/card/part-0/padding-left/default",
+                "paddingRight": "imported/card/part-0/padding-right/default"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label",
+                  "characters": "Card title",
+                  "fontSize": 16,
+                  "fontStyle": "Medium",
+                  "fontSizeVar": "imported/card/label/font-size/default",
+                  "fontWeightVar": "imported/card/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  }
+                },
+                {
+                  "type": "text",
+                  "name": "label-2",
+                  "characters": "Card description",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/card/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/card/label-2/color",
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "name": "label-3",
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-3-text",
+                  "characters": "Card content copy for the shadcn round.",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/card/label-3/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  }
+                }
+              ],
+              "bindings": {
+                "itemSpacing": "imported/card/label-3/row-gap",
+                "paddingLeft": "imported/card/label-3/padding-left/default",
+                "paddingRight": "imported/card/label-3/padding-right/default"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Size=Sm",
+        "row": 1,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Size=Sm",
+          "layout": {
+            "mode": "VERTICAL",
+            "primary": "MIN",
+            "counter": "MIN",
+            "stretchChildren": true
+          },
+          "fill": "imported/card/root/background-color",
+          "bindings": {
+            "bottomLeftRadius": "imported/shared/size-14",
+            "bottomRightRadius": "imported/shared/size-14",
+            "topLeftRadius": "imported/shared/size-14",
+            "topRightRadius": "imported/shared/size-14",
+            "paddingBottom": "imported/card/root/padding-bottom/sm",
+            "paddingTop": "imported/card/root/padding-top/sm",
+            "itemSpacing": "imported/card/root/row-gap/sm"
+          },
+          "effectStack": [
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              }
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "radius": 0,
+              "color": {
+                "r": 0.0392156862745098,
+                "g": 0.0392156862745098,
+                "b": 0.0392156862745098,
+                "a": 0.1
+              },
+              "spread": 1
+            },
+            {
+              "x": 0,
+              "y": 1,
+              "radius": 2,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.05
+              }
+            }
+          ],
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "frame",
+              "name": "part-0",
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "bindings": {
+                "topLeftRadius": "imported/shared/size-14",
+                "topRightRadius": "imported/shared/size-14",
+                "itemSpacing": "imported/card/part-0/row-gap",
+                "paddingLeft": "imported/card/part-0/padding-left/sm",
+                "paddingRight": "imported/card/part-0/padding-right/sm"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label",
+                  "characters": "Card title",
+                  "fontSize": 14,
+                  "fontStyle": "Medium",
+                  "fontSizeVar": "imported/card/label/font-size/sm",
+                  "fontWeightVar": "imported/card/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  }
+                },
+                {
+                  "type": "text",
+                  "name": "label-2",
+                  "characters": "Card description",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/card/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/card/label-2/color",
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "name": "label-3",
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "MIN",
+                "counter": "MIN",
+                "stretchChildren": true
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "name": "label-3-text",
+                  "characters": "Card content copy for the shadcn round.",
+                  "fontSize": 14,
+                  "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/card/label-3/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  }
+                }
+              ],
+              "bindings": {
+                "itemSpacing": "imported/card/label-3/row-gap",
+                "paddingLeft": "imported/card/label-3/padding-left/sm",
+                "paddingRight": "imported/card/label-3/padding-right/sm"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "propNames": {
+      "Size": "size"
+    },
+    "semantics": {
+      "element": "div"
+    },
+    "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.card.label-3.column-gap}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.card.part-0.column-gap}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.card.part-0.grid-template-columns.default}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 1,
+          "of": 2,
+          "names": [
+            "Size=Default"
+          ]
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.card.part-0.grid-template-columns.sm}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 1,
+          "of": 2,
+          "names": [
+            "Size=Sm"
+          ]
+        }
       },
       {
         "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
+        "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.card.root.column-gap.default}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
         "variants": {
-          "count": 6,
-          "of": 72,
+          "count": 1,
+          "of": 2,
           "names": [
-            "Variant=Default, Size=Default, State=Focus Visible",
-            "Variant=Outline, Size=Default, State=Focus Visible",
-            "Variant=Secondary, Size=Default, State=Focus Visible",
-            "Variant=Ghost, Size=Default, State=Focus Visible",
-            "Variant=Destructive, Size=Default, State=Focus Visible",
-            "Variant=Link, Size=Default, State=Focus Visible"
+            "Size=Default"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.card.root.column-gap.sm}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 1,
+          "of": 2,
+          "names": [
+            "Size=Sm"
           ]
         }
       }
@@ -11781,12 +15657,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -12033,14 +15916,6 @@ async function buildNode(spec, registry) {
     applyFrameSpec(node, spec);
   }
   node.name = spec.name;
-  // Node opacity (dump v1.2 channel): applies to every node kind.
-  // Unbind first: a stale OPACITY variable (repo 0-1 token bound into
-  // Figma's percent-scaled field) wins over the literal and paints 0.5
-  // as 0.5% — the Disabled wash (visual-parity Button, 93.91% masked).
-  if (typeof spec.opacity === 'number') {
-    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { degrade('FC-RT-OPACITY-UNBIND-REFUSED', node, 'a stale opacity variable could not be unbound before the literal opacity was set; the variable may still win over spec.opacity', e); }
-    node.opacity = spec.opacity;
-  }
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
@@ -12296,7 +16171,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -12364,6 +16239,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -12624,6 +16500,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -12780,6 +16657,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -12923,1949 +16814,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
-  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
-  // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
-  const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
-  dsStampFingerprints(target);
-  ensureHostSection(compPage, target, displayName);
-
-  return {
-    name: C.setName,
-    contractId: C.contractId,
-    nodeId: target.id,
-    key: target.key,
-    variants: C.isSet ? target.children.length : 1,
-    properties: Object.keys(target.componentPropertyDefinitions || {}),
-    ...(wiredReactions > 0 ? { wiredReactions: wiredReactions } : {}),
-  };
-}
-
-const results = [];
-for (const C of COMPONENTS) {
-  // Every per-set result — created, amended, skipped as unchanged, refused
-  // by the create-only door — carries the named receipt, so the plugin's run
-  // report can list the facts under the set whatever the sync did.
-  const degradedFrom = DEGRADATIONS.length;
-  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
-}
-return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
-
-})();
-
-// ───── card.figma.js ─────
-await (async () => {
-// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
-// Source of truth: contracts/card.contract.json (shadcn.card v0.2.0)
-// Amend-capable (#60): an existing component (set) carrying our identity
-// marker is reconciled IN PLACE (same node id + key); unchanged specs skip.
-const COMPONENTS = [
-  {
-    "setName": "Card",
-    "contractId": "shadcn.card",
-    "version": "0.2.0",
-    "anchorKey": null,
-    "description": "Card — generated from contract shadcn.card v0.2.0 † (9 code-only facts — see plugin report)",
-    "isSet": true,
-    "boolProps": [],
-    "textProps": [],
-    "fontStyles": [
-      "Medium",
-      "Regular"
-    ],
-    "variants": [
-      {
-        "name": "Size=Default",
-        "row": 0,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Size=Default",
-          "layout": {
-            "mode": "VERTICAL",
-            "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
-          },
-          "fill": "imported/card/root/background-color",
-          "bindings": {
-            "bottomLeftRadius": "imported/shared/size-14",
-            "bottomRightRadius": "imported/shared/size-14",
-            "topLeftRadius": "imported/shared/size-14",
-            "topRightRadius": "imported/shared/size-14",
-            "paddingBottom": "imported/card/root/padding-bottom/default",
-            "paddingTop": "imported/card/root/padding-top/default",
-            "itemSpacing": "imported/card/root/row-gap/default"
-          },
-          "clipsContent": true,
-          "children": [
-            {
-              "type": "frame",
-              "name": "part-0",
-              "layout": {
-                "mode": "VERTICAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "bindings": {
-                "topLeftRadius": "imported/shared/size-14",
-                "topRightRadius": "imported/shared/size-14",
-                "itemSpacing": "imported/card/part-0/row-gap",
-                "paddingLeft": "imported/card/part-0/padding-left/default",
-                "paddingRight": "imported/card/part-0/padding-right/default"
-              },
-              "children": [
-                {
-                  "type": "text",
-                  "name": "label",
-                  "characters": "Card title",
-                  "fontSize": 16,
-                  "fontStyle": "Medium",
-                  "fontSizeVar": "imported/card/label/font-size/default",
-                  "fontWeightVar": "imported/card/label/font-weight",
-                  "lineHeightVar": "imported/shared/size-20",
-                  "lineHeight": {
-                    "value": 20,
-                    "unit": "PIXELS"
-                  }
-                },
-                {
-                  "type": "text",
-                  "name": "label-2",
-                  "characters": "Card description",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
-                  "fontWeightVar": "imported/card/label-2/font-weight",
-                  "lineHeightVar": "imported/shared/size-20",
-                  "textFill": "imported/card/label-2/color",
-                  "lineHeight": {
-                    "value": 20,
-                    "unit": "PIXELS"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "name": "label-3",
-              "layout": {
-                "mode": "VERTICAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "children": [
-                {
-                  "type": "text",
-                  "name": "label-3-text",
-                  "characters": "Card content copy for the shadcn round.",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
-                  "fontWeightVar": "imported/card/label-3/font-weight",
-                  "lineHeightVar": "imported/shared/size-20",
-                  "lineHeight": {
-                    "value": 20,
-                    "unit": "PIXELS"
-                  }
-                }
-              ],
-              "bindings": {
-                "itemSpacing": "imported/card/label-3/row-gap",
-                "paddingLeft": "imported/card/label-3/padding-left/default",
-                "paddingRight": "imported/card/label-3/padding-right/default"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "name": "Size=Sm",
-        "row": 1,
-        "col": 0,
-        "spec": {
-          "type": "root",
-          "name": "Size=Sm",
-          "layout": {
-            "mode": "VERTICAL",
-            "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
-          },
-          "fill": "imported/card/root/background-color",
-          "bindings": {
-            "bottomLeftRadius": "imported/shared/size-14",
-            "bottomRightRadius": "imported/shared/size-14",
-            "topLeftRadius": "imported/shared/size-14",
-            "topRightRadius": "imported/shared/size-14",
-            "paddingBottom": "imported/card/root/padding-bottom/sm",
-            "paddingTop": "imported/card/root/padding-top/sm",
-            "itemSpacing": "imported/card/root/row-gap/sm"
-          },
-          "clipsContent": true,
-          "children": [
-            {
-              "type": "frame",
-              "name": "part-0",
-              "layout": {
-                "mode": "VERTICAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "bindings": {
-                "topLeftRadius": "imported/shared/size-14",
-                "topRightRadius": "imported/shared/size-14",
-                "itemSpacing": "imported/card/part-0/row-gap",
-                "paddingLeft": "imported/card/part-0/padding-left/sm",
-                "paddingRight": "imported/card/part-0/padding-right/sm"
-              },
-              "children": [
-                {
-                  "type": "text",
-                  "name": "label",
-                  "characters": "Card title",
-                  "fontSize": 14,
-                  "fontStyle": "Medium",
-                  "fontSizeVar": "imported/card/label/font-size/sm",
-                  "fontWeightVar": "imported/card/label/font-weight",
-                  "lineHeightVar": "imported/shared/size-20",
-                  "lineHeight": {
-                    "value": 20,
-                    "unit": "PIXELS"
-                  }
-                },
-                {
-                  "type": "text",
-                  "name": "label-2",
-                  "characters": "Card description",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
-                  "fontWeightVar": "imported/card/label-2/font-weight",
-                  "lineHeightVar": "imported/shared/size-20",
-                  "textFill": "imported/card/label-2/color",
-                  "lineHeight": {
-                    "value": 20,
-                    "unit": "PIXELS"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "name": "label-3",
-              "layout": {
-                "mode": "VERTICAL",
-                "primary": "MIN",
-                "counter": "MIN",
-                "stretchChildren": true
-              },
-              "children": [
-                {
-                  "type": "text",
-                  "name": "label-3-text",
-                  "characters": "Card content copy for the shadcn round.",
-                  "fontSize": 14,
-                  "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
-                  "fontWeightVar": "imported/card/label-3/font-weight",
-                  "lineHeightVar": "imported/shared/size-20",
-                  "lineHeight": {
-                    "value": 20,
-                    "unit": "PIXELS"
-                  }
-                }
-              ],
-              "bindings": {
-                "itemSpacing": "imported/card/label-3/row-gap",
-                "paddingLeft": "imported/card/label-3/padding-left/sm",
-                "paddingRight": "imported/card/label-3/padding-right/sm"
-              }
-            }
-          ]
-        }
-      }
-    ],
-    "propNames": {
-      "Size": "size"
-    },
-    "semantics": {
-      "element": "div"
-    },
-    "codeOnlyFacts": [
-      {
-        "part": "label",
-        "kind": "declared",
-        "channel": "display",
-        "value": "block",
-        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-        "variants": {
-          "count": 2,
-          "of": 2
-        }
-      },
-      {
-        "part": "label-2",
-        "kind": "declared",
-        "channel": "display",
-        "value": "block",
-        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-        "variants": {
-          "count": 2,
-          "of": 2
-        }
-      },
-      {
-        "part": "label-3",
-        "kind": "channel",
-        "channel": "column-gap",
-        "value": "{imported.card.label-3.column-gap}",
-        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-        "variants": {
-          "count": 2,
-          "of": 2
-        }
-      },
-      {
-        "part": "part-0",
-        "kind": "channel",
-        "channel": "column-gap",
-        "value": "{imported.card.part-0.column-gap}",
-        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-        "variants": {
-          "count": 2,
-          "of": 2
-        }
-      },
-      {
-        "part": "part-0",
-        "kind": "channel",
-        "channel": "grid-template-columns",
-        "value": "{imported.card.part-0.grid-template-columns.default}",
-        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
-        "variants": {
-          "count": 1,
-          "of": 2,
-          "names": [
-            "Size=Default"
-          ]
-        }
-      },
-      {
-        "part": "part-0",
-        "kind": "channel",
-        "channel": "grid-template-columns",
-        "value": "{imported.card.part-0.grid-template-columns.sm}",
-        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
-        "variants": {
-          "count": 1,
-          "of": 2,
-          "names": [
-            "Size=Sm"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "column-gap",
-        "value": "{imported.card.root.column-gap.default}",
-        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-        "variants": {
-          "count": 1,
-          "of": 2,
-          "names": [
-            "Size=Default"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "column-gap",
-        "value": "{imported.card.root.column-gap.sm}",
-        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-        "variants": {
-          "count": 1,
-          "of": 2,
-          "names": [
-            "Size=Sm"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 2
-        }
-      }
-    ],
-    "colW": 380
-  }
-];
-const ROW_H = 240, PAD = 40;
-
-const EXPECTED_FILE_KEY = null;
-if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
-  throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
-}
-
-await figma.loadAllPagesAsync();
-
-const allVars = await figma.variables.getLocalVariablesAsync();
-const varByName = {};
-for (const v of allVars) varByName[v.name] = v;
-// FC-THEME-ISO: a multi-library file carries colliding variable names across
-// collections (four `imported/badge/root/background-color/info`s on the
-// Testing file). The last-created-collection-wins map above silently rebound
-// fills across libraries (altitude Badge rendered a Polaris provisional
-// light-blue). Prefer the single collection covering the MOST of THIS
-// script's referenced names; names unique to one collection still resolve
-// globally, and an explicit preferred collection (below) still wins.
-{
-  const _names = new Set(allVars.map((v) => v.name));
-  const _wanted = new Set();
-  const _walk = (x) => {
-    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
-    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
-    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
-  };
-  _walk(COMPONENTS);
-  let _dupe = false;
-  const _seen = new Set();
-  for (const v of allVars) {
-    if (!_wanted.has(v.name)) continue;
-    if (_seen.has(v.name)) { _dupe = true; break; }
-    _seen.add(v.name);
-  }
-  if (_dupe) {
-    const _cov = new Map();
-    for (const v of allVars) {
-      if (!_wanted.has(v.name)) continue;
-      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
-      _cov.get(v.variableCollectionId).add(v.name);
-    }
-    let _best = null, _bestN = 0;
-    for (const [_colId, _covered] of _cov) {
-      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
-    }
-    if (_best !== null) {
-      for (const v of allVars) {
-        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
-      }
-    }
-  }
-}
-// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
-// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
-// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
-// flow placement, min sizes, truncation, a paint base) with NO trace in the
-// result. Each now pushes ONE named entry here; syncOne's report carries
-// the entries raised while it ran as report.degradations (the same code /
-// nodePath / message shape the dump script's _degradations uses), and the
-// plugin UI lists them under the set beside the code-only facts. A
-// degradation is never a failure: the sync still completes, it just says so.
-const DEGRADATIONS = [];
-function nodePathOf(node) {
-  const parts = [];
-  let n = node;
-  let guard = 0;
-  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
-  return parts.join('/');
-}
-function degrade(code, node, message, e) {
-  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
-}
-const need = (name) => {
-  const v = varByName[name];
-  if (!v) throw new Error('Missing variable: ' + name);
-  return v;
-};
-const boundPaint = (varName, consumer) => {
-  // Seed the base with the resolved value when a consumer node is known:
-  // Figma keeps rendering a reassigned bound paint's BASE color on
-  // pre-existing nodes (fresh nodes normalize at assignment) — without the
-  // seed, amended variants render black. The binding itself is unchanged.
-  // B-3 finding 2: the resolved ALPHA rides the seed too (paint opacity) —
-  // discarding it rendered Badge's rgba(0,0,0,.06) pill as opaque black on
-  // amended nodes.
-  const v = need(varName);
-  let base = { r: 0, g: 0, b: 0 };
-  let alpha = 1;
-  if (consumer) {
-    try {
-      const r = v.resolveForConsumer(consumer);
-      if (r && r.value && r.value.r !== undefined) {
-        base = { r: r.value.r, g: r.value.g, b: r.value.b };
-        if (typeof r.value.a === 'number') alpha = r.value.a;
-      }
-    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
-  }
-  return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
-};
-
-// Named text styles (synced by 01-tokens.js): consumers look up OUR styles
-// only — the ds_contracts/textStyleToken marker is identity, a foreign style
-// sharing a name is never used. When a compiled spec carries textStyle, the
-// named style MUST bind — missing or failed setTextStyleIdAsync refuses by
-// the stable code text-style-identity-refused (never silently keep raw props).
-let _textStyleMap = null;
-async function ourTextStyle(name) {
-  if (!_textStyleMap) {
-    _textStyleMap = {};
-    for (const s of await figma.getLocalTextStylesAsync()) {
-      if (s.getSharedPluginData('ds_contracts', 'textStyleToken')) _textStyleMap[s.name] = s;
-    }
-  }
-  return _textStyleMap[name] || null;
-}
-
-const fontStyles = new Set(['Medium']);
-for (const C of COMPONENTS) for (const s of C.fontStyles) fontStyles.add(s);
-for (const style of fontStyles) {
-  await figma.loadFontAsync({ family: 'Inter', style });
-}
-
-// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
-// canvas-only preview overlay; base variants gain an explicit State=Default
-// segment so every variant in the set carries the axis (Figma derives
-// variant properties from names). Contracts without previews pass through
-// untouched — names, hashes, and amend reconciliation are unchanged.
-function withStateAxis(C) {
-  if (!C.stateVariants || C.stateVariants.length === 0) return C.variants;
-  return C.variants.map((v) => {
-    const name = v.name.indexOf('=') >= 0 ? v.name + ', State=Default' : 'State=Default';
-    return Object.assign({}, v, { name: name, spec: Object.assign({}, v.spec, { name: name }) });
-  }).concat(C.stateVariants);
-}
-
-// PROTOTYPE WIRING: turn the State preview axis into LIVE behavior. Each
-// State=Default variant that has a hover/active twin gets a Figma prototype
-// reaction CHANGE_TO that twin, so presentation mode swaps on hover/press
-// instead of showing a static grid of previews.
-//
-// Shapes are pinned by figma-sync/plugin/typings/reactions.d.ts (vendored
-// from @figma/plugin-typings@1.131.0): trigger {type:'ON_HOVER'|'ON_PRESS'},
-// action {type:'NODE', destinationId, navigation:'CHANGE_TO', transition}.
-// transition is ALWAYS null — durations/easings are not contract facts, and
-// the capability matrix keeps animation code-only.
-//
-// The write goes through setReactionsAsync, never `node.reactions = […]`:
-// the property is read-only whenever a manifest declares
-// documentAccess: dynamic-page, and the async setter is correct in BOTH
-// modes. The headless mock enforces this (assignment THROWS there).
-//
-// OWNERSHIP: within a set the contract opts in for, variant reactions are
-// contract-owned — every variant is normalized (sources get their pair,
-// everything else is cleared). Sets whose contract carries no stateReactions
-// are NEVER touched, so hand-authored prototyping elsewhere survives.
-async function wireStateReactions(setNode, byName, C) {
-  const wires = C.stateReactions || [];
-  if (wires.length === 0) return 0;
-  if (!C.isSet) {
-    throw new Error('State reactions on a non-set component (' + C.setName + ') — variant swaps need siblings');
-  }
-  const grouped = {};
-  for (const w of wires) {
-    const src = byName.get(w.from);
-    const dst = byName.get(w.to);
-    // REFUSE BY NAME rather than silently skipping: the emitter guarantees
-    // both variants exist in every path that reaches here.
-    if (!src) throw new Error('State reaction source variant not found in "' + C.setName + '": ' + w.from);
-    if (!dst) throw new Error('State reaction destination variant not found in "' + C.setName + '": ' + w.to);
-    (grouped[w.from] = grouped[w.from] || []).push({
-      trigger: { type: w.trigger },
-      actions: [{ type: 'NODE', destinationId: dst.id, navigation: 'CHANGE_TO', transition: null }],
-    });
-  }
-  let wired = 0;
-  for (const child of setNode.children) {
-    const want = grouped[child.name] || [];
-    const have = child.reactions || [];
-    if (want.length === 0 && have.length === 0) continue;
-    await child.setReactionsAsync(want);
-    if (want.length > 0) wired++;
-  }
-  return wired;
-}
-
-function isSyncTarget(n) {
-  return n.type === 'COMPONENT_SET' ||
-    (n.type === 'COMPONENT' && (!n.parent || n.parent.type !== 'COMPONENT_SET'));
-}
-
-function allSyncTargets() {
-  const out = [];
-  for (const page of figma.root.children) {
-    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
-  }
-  return out;
-}
-
-// One resolver for nested instances, slot defaults/preferred values, and
-// top-level amend targets. Semantic identity wins; names are admitted only
-// for explicit pre-contractId generated nodes.
-function resolveComponentIdentity(ref, purpose, allowMissing) {
-  const targets = allSyncTargets();
-  const exact = targets.filter(
-    (n) => n.getSharedPluginData('ds_contracts', 'contractId') === ref.contractId,
-  );
-  if (exact.length > 1) {
-    throw new Error(
-      purpose + ': duplicate ds_contracts/contractId "' + ref.contractId +
-      '" on ' + exact.length + ' component targets — refusing ambiguous identity',
-    );
-  }
-  if (exact.length === 1) return exact[0];
-
-  if (ref.anchorKey) {
-    const anchored = targets.filter((n) => n.key === ref.anchorKey);
-    if (anchored.length > 1) {
-      throw new Error(
-        purpose + ': duplicate Figma anchor key "' + ref.anchorKey +
-        '" — refusing ambiguous identity',
-      );
-    }
-    if (anchored.length === 1) {
-      const marker = anchored[0].getSharedPluginData('ds_contracts', 'contractId');
-      if (marker && marker !== ref.contractId) {
-        throw new Error(
-          purpose + ': anchor key "' + ref.anchorKey + '" belongs to contractId "' +
-          marker + '", not "' + ref.contractId + '" — refusing contradictory identity',
-        );
-      }
-      return anchored[0];
-    }
-  }
-
-  const legacy = targets.filter(
-    (n) => n.name === ref.name &&
-      n.getSharedPluginData('ds_contracts', 'contractId') === '' &&
-      n.getSharedPluginData('ds_contracts', 'specHash') !== '',
-  );
-  if (legacy.length > 1) {
-    throw new Error(
-      purpose + ': duplicate explicit legacy-generated name "' + ref.name +
-      '" on ' + legacy.length + ' unmarked component targets — refusing ambiguous identity',
-    );
-  }
-  if (legacy.length === 1) return legacy[0];
-  if (allowMissing) return null;
-  throw new Error(
-    purpose + ': component not found for contractId "' + ref.contractId + '"' +
-    (ref.anchorKey ? ', anchor key "' + ref.anchorKey + '"' : '') +
-    ', or unique explicit legacy-generated name "' + ref.name + '" (sync it first)',
-  );
-}
-
-function setInstanceProps(inst, props, owner) {
-  // REAL-FIGMA QUIRK (live finding 2026-07-22, pinned by the named refusal +
-  // Desktop Bridge probes; supersedes the 07-21 "mixed VARIANT+TEXT call"
-  // inference, which was wrong): a freshly created instance's
-  // componentProperties can LAG behind its component set within a session,
-  // listing only the VARIANT axes — the live composite refused with
-  // "available: Variant, Size, State" on a Button set that demonstrably
-  // carried Label/Disabled/Loading. The set's componentPropertyDefinitions
-  // are always complete, and setProperties with the FULL set-level key
-  // applies correctly even while the instance's view lags (probe-verified).
-  // So: resolve against the instance first, fall back to the OWNER's
-  // definitions, and refuse by name only when neither knows the property.
-  const instProps = inst.componentProperties;
-  const instKeys = Object.keys(instProps);
-  let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
-  const ownerKeys = Object.keys(ownerDefs);
-  const variantProps = {};
-  const otherProps = {};
-  const missing = [];
-  for (const [wanted, value] of Object.entries(props)) {
-    const match = (k) => k === wanted || k.startsWith(wanted + '#');
-    const key = instKeys.find(match) || ownerKeys.find(match);
-    if (!key) { missing.push(wanted); continue; }
-    const def = instProps[key] || ownerDefs[key] || {};
-    if (def.type === 'VARIANT') variantProps[key] = value; else otherProps[key] = value;
-  }
-  // 2026-07-21 (live-canvas finding, handoff 08#1): the old silent no-op is
-  // exactly how the repeated Badge instances kept their default text live —
-  // the contract said Label="Shipping", nothing matched, nothing was
-  // reported, the build claimed success. A contract binding the runtime
-  // cannot honor is a refusal, BY NAME, like every other refusal here.
-  if (missing.length > 0) {
-    const seen = instKeys.concat(ownerKeys.filter((k) => instKeys.indexOf(k) < 0));
-    throw new Error(
-      'Instance "' + inst.name + '": component propert' + (missing.length === 1 ? 'y "' : 'ies "') + missing.join('", "') +
-      '" not found (instance + set expose: ' + (seen.map((k) => k.split('#')[0]).join(', ') || 'none') +
-      ') — the dependency does not expose the properties this contract binds; sync the dependency component first',
-    );
-  }
-  // Defensive two-phase apply (cheap): variant swap first, then non-variant
-  // values on the settled instance — set-level property ids are stable
-  // across the swap, so the resolved keys stay valid either way.
-  if (Object.keys(variantProps).length > 0) inst.setProperties(variantProps);
-  if (Object.keys(otherProps).length > 0) inst.setProperties(otherProps);
-}
-
-// Owner request (2026-07-21, roadmap P1): generated components land ON a
-// named SECTION with a light background — not floating on the canvas. The
-// section is identity-marked (ds_contracts/hostFor) so create and amend both
-// re-fit the SAME section instead of stacking new ones; a component already
-// hosted keeps its section.
-//
-// FC-HOST-SECTION-COLLISION (measured live 2026-08-26 on the scratch file,
-// page "Census / altitude"). This function used to end with a hardcoded
-// "section.x = 100; section.y = 100;" — UNCONDITIONALLY, on create AND on
-// amend. Two separate defects rode on that one pair of lines:
-//
-//   1. NO SIBLING AWARENESS. Every set minted into one page landed on the
-//      SAME coordinate. Eight altitude sets sat at 100,100 stacked on top of
-//      each other; the owner opened the file, saw three set titles
-//      superimposed and a jumble of dots and slivers, and concluded the
-//      output was garbage. Most of those sets rendered CORRECTLY — they were
-//      simply buried. One coordinate did more damage to the project's
-//      credibility than any real conversion defect.
-//   2. AMEND SNAPPED THE DESIGNER BACK. A section a person had dragged
-//      somewhere was teleported to 100,100 by the next re-mint. That is what
-//      the live evidence showed: five of the eight altitude sections were at
-//      100,100 while Divider/Heading/Link still sat in the column a previous
-//      pass had laid out — the five were the ones the last run re-amended.
-//
-// THE RULE NOW, and why it is exactly this rule:
-//
-//   · An EXISTING host section is never repositioned. Its x/y are the
-//     designer's, not ours. A re-mint refits the section's SIZE around the
-//     rebuilt target and leaves the origin alone, so a manual reposition
-//     survives every subsequent amend.
-//   · A NEW host section is appended BELOW everything already on the page:
-//     x = 0, y = (max bottom edge of the page's existing children) + gutter.
-//     Collision-free by construction, regardless of how wide or tall the
-//     neighbours are.
-//
-// DETERMINISM, stated precisely, because the census screenshots depend on it:
-// minting a corpus into an EMPTY page twice produces byte-identical
-// coordinates — placement is a pure function of (mint order, sibling extents)
-// and mint order is the plan's contract order. Re-minting into a page that
-// already holds the sets moves NOTHING, because every section is found by
-// hostFor. What is NOT guaranteed: a section that GROWS on amend can grow
-// into the gutter below it and touch its neighbour. Reflowing the neighbours
-// would be the only way to prevent that, and reflowing is precisely the
-// behaviour that destroys a designer's manual position — so growth-overlap is
-// a NAMED residual (FC-HOST-SECTION-GROWTH), not a silent one.
-//
-// A single column, not a wrapped grid: host sections on the real corpus range
-// from 144px to 12,500px wide (polaris.text, polaris.button). Any row-packing
-// rule has to reflow a shelf when one member grows, and reflow is the thing
-// that cannot coexist with "the designer's position survives". The column is
-// the layout that keeps both promises at once.
-function ensureHostSection(page, target, displayName) {
-  const HOST_PAD = 60;
-  // The gutter between stacked host sections. Wide enough that a section can
-  // grow on amend without immediately touching its neighbour (see
-  // FC-HOST-SECTION-GROWTH above), and it matches the spacing the census
-  // pages were already hand-laid to.
-  const HOST_GUTTER = 200;
-  const contractId = target.getSharedPluginData('ds_contracts', 'contractId');
-  let section = null;
-  for (const child of page.children) {
-    if (child.type === 'SECTION' && child.getSharedPluginData('ds_contracts', 'hostFor') === contractId) {
-      section = child;
-      break;
-    }
-  }
-  const isNewSection = !section;
-  // Measured BEFORE the new section joins the page, so it can never measure
-  // itself, and skipping "target" — a freshly built set is parked on the page
-  // until the line below adopts it, and counting it would push the section
-  // below its own contents.
-  let nextY = 0;
-  if (isNewSection) {
-    for (const child of page.children) {
-      if (child === target) continue;
-      let bottom;
-      try { bottom = child.y + child.height; } catch (e) { continue; }
-      if (typeof bottom !== 'number' || !isFinite(bottom)) continue;
-      if (bottom + HOST_GUTTER > nextY) nextY = bottom + HOST_GUTTER;
-    }
-    section = figma.createSection();
-    page.appendChild(section);
-    section.setSharedPluginData('ds_contracts', 'hostFor', contractId);
-  }
-  section.name = displayName;
-  section.fills = [{ type: 'SOLID', color: { r: 0.969, g: 0.973, b: 0.98 } }];
-  section.appendChild(target);
-  target.x = HOST_PAD;
-  target.y = HOST_PAD;
-  section.resizeWithoutConstraints(target.width + HOST_PAD * 2, target.height + HOST_PAD * 2);
-  // ONLY a section this call created gets a position. An existing one keeps
-  // wherever the designer left it — that is the whole of defect (2).
-  if (isNewSection) {
-    section.x = 0;
-    section.y = nextY;
-  }
-  return section;
-}
-
-
-// FC-OVERFLOW-CLIP-LOST: node ids whose clip the CONTRACT declared
-// (overflow-x/y hidden|clip). The unclip walks consult this so a declared clip
-// can never be reverted silently by an overhanging descendant.
-const dsDeclaredClip = new Set();
-// Ancestors an OVERHANG (absolute / inset overlay) actually unclipped — see
-// propagateOverflowVisible. Distinguishes "unclipped because something hangs
-// out of it" from "unclipped because CSS overflow defaults to visible".
-const dsOverhangUnclip = new Set();
-/** Does a DECLARED clip stop the unclip walk at this node? See the body — the
- *  contract's captured overflow outranks the emitter's out-of-flow heuristic,
- *  and the walk ends rather than reverting a fact the contract stated. */
-function dsDeclaredClipStops(n) {
-  // A DECLARED clip beats the unclip heuristic, and the walk STOPS here.
-  //
-  // The heuristic is broader than CSS: it unclips every ancestor of any
-  // out-of-flow child, but position:absolute does not ask its ancestors to
-  // stop clipping — an absolutely positioned child inside overflow:hidden is
-  // clipped, normally and correctly. The rule exists for one real case (a
-  // Slider thumb at left:-10 genuinely hanging outside its track), and it was
-  // reading "is out of flow" as if it meant "hangs outside the box".
-  //
-  // Fluent Spinner is the counter-example that made this visible: its root
-  // declares overflow hidden (captured from the real component) and its
-  // spinnerTail declares position:absolute INSIDE that root. Nothing overhangs.
-  // The heuristic would have silently thrown the captured clip away.
-  //
-  // A captured fact outranks an inference about one. Stopping is also
-  // sufficient: content clipped at this boundary cannot be revealed by
-  // unclipping anything above it.
-  return dsDeclaredClip.has(n.id);
-}
-function applyFrameSpec(node, spec) {
-  const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
-  node.layoutMode = l.mode;
-  node.primaryAxisAlignItems = l.primary;
-  node.counterAxisAlignItems = l.counter;
-  node.primaryAxisSizingMode = 'AUTO';
-  node.counterAxisSizingMode = 'AUTO';
-  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
-  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
-  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
-  // Unclip unless the contract explicitly asks for canvas clip.
-  node.clipsContent = spec.clipsContent === true;
-  // FC-OVERFLOW-CLIP-LOST: remember WHO asked for the clip. Three runtime
-  // loops (applyShapeAbsolute / applyInsetOverlay / propagateOverflowVisible)
-  // walk every ancestor setting clipsContent=false for an overhanging child,
-  // and they would silently revert a clip the contract declared — last write
-  // wins and nothing reports it. Measured across the whole corpus: NO
-  // clip-declaring part has an absolute/insetOverlay/overlay descendant, so
-  // this never fires today. It is recorded rather than trusted, because the
-  // collision is one contract away and a silent revert is indistinguishable
-  // from the fact never having been carried.
-  if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
-  if (node.type === 'FRAME') node.fills = [];
-  // FC-AMEND-CANNOT-CLEAR (astryx/banner live-canvas round, 2026-08-11).
-  //
-  // This function only ever SET what the spec declares, so on the AMEND path
-  // a spacing fact the contract has since DROPPED survived on the node
-  // forever. The create path never showed it — a fresh createComponent starts
-  // at 0 — so the two paths silently disagreed, and `specHash` matching made
-  // it invisible: the script reports "skipped: unchanged" while the canvas
-  // carries a value the contract does not claim.
-  //
-  // Measured: astryx/banner's root carried a bound 12/16 padding + gap 8 that
-  // its committed spec does not declare, applying the header's padding TWICE
-  // (header 299x64 → root 331x88) against a reference and a contract render
-  // that both measure 64 tall. Across all 77 scored cells on the two
-  // connected files it is the ONLY root in that state — every other root with
-  // padding declares it — so this reset changes exactly one scored cell.
-  //
-  // Only the ROOT needs it: amend removes and rebuilds every child, so no
-  // descendant can carry stale state. Reset to Figma's own defaults FIRST,
-  // then apply what the spec declares below.
-  for (const field of ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'itemSpacing']) {
-    if (spec.bindings && spec.bindings[field] !== undefined) continue;
-    if (spec.lits && spec.lits[field] !== undefined) continue;
-    try {
-      if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
-    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
-  }
-  for (const [field, varName] of Object.entries(spec.bindings || {})) {
-    node.setBoundVariable(field, need(varName));
-  }
-  if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
-  if (spec.stroke) {
-    node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = 'INSIDE';
-    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
-    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
-  }
-  if (spec.fixedWidth || spec.fixedHeight) {
-    const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
-    const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
-    node.resize(w, h);
-    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
-    if (spec.fixedWidth) {
-      if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
-      else node.counterAxisSizingMode = 'FIXED';
-      node.setBoundVariable('width', need(spec.fixedWidth.varName));
-    }
-    if (spec.fixedHeight) {
-      if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
-      else node.primaryAxisSizingMode = 'FIXED';
-      if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
-    }
-  }
-}
-
-// v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
-// layoutPositioning ABSOLUTE requires an auto-layout parent.
-function applyOverlay(parent, childNode, childSpec) {
-  if (!childSpec.overlay) return;
-  try {
-    childNode.layoutPositioning = 'ABSOLUTE';
-    const p = childSpec.overlay.placement;
-    childNode.constraints =
-      p === 'bottom' ? { horizontal: 'MIN', vertical: 'MAX' } :
-      p === 'end' ? { horizontal: 'MAX', vertical: 'MIN' } :
-      { horizontal: 'MIN', vertical: 'MIN' };
-    if (p === 'top') { childNode.x = 0; childNode.y = -childNode.height; }
-    else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
-    else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
-    else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
-}
-
-async function buildNode(spec, registry) {
-  let node;
-  if (spec.type === 'svg') {
-    node = figma.createNodeFromSvg(spec.svg);
-    node.fills = [];
-    node.clipsContent = false;
-    if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
-    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
-    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
-  } else if (spec.type === 'text') {
-    node = figma.createText();
-    node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
-    node.fontSize = spec.fontSize || 16;
-    node.characters = spec.characters || '';
-    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
-    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
-      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
-    }
-    if (spec.textStyle) {
-      // Exact-definition match compiled in: ride the named style. Text
-      // styles own typography only — the bound fill paint below coexists.
-      // Fail closed: a compiled textStyle that cannot bind is identity loss.
-      const st = await ourTextStyle(spec.textStyle);
-      if (!st) {
-        throw new Error(
-          'text-style-identity-refused: missing local text style "' + spec.textStyle +
-          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
-        );
-      }
-      try {
-        await node.setTextStyleIdAsync(st.id);
-      } catch (e) {
-        throw new Error(
-          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
-          '": ' + (e && e.message ? e.message : String(e)),
-        );
-      }
-    } else if (spec.fontSizeVar) {
-      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
-      // overrides its group's weight, and Figma clears textStyleId on any
-      // fontName write), so the SIZE VARIABLE carries the identity instead.
-      // Bound AFTER fontName/fontSize so the literal stays the fallback.
-      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
-    }
-    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
-    // font weight, so the token cannot ride a variable the way the size does.
-    // Stamp it instead: without this the node draws "Medium" and a reader
-    // cannot tell a DECLARED weight from the runtime default. Written as ''
-    // (which deletes the key) when the contract binds no weight, so a node
-    // that stops declaring one cannot keep answering with a stale token.
-    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
-    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
-    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
-    if (spec.contentProp) {
-      registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
-    }
-    if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
-      // Styled static text (page chips, dots, thumbs): wrap in a frame so
-      // fills/dimensions/radius apply to a container, not the glyphs.
-      //
-      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
-      // at the top rather than top-left". The wrapper's CENTER/CENTER was
-      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
-      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
-      // fill and no fixed size at all: they are wrapped only to carry
-      // min-width/min-height bindings the floor promoted (Carbon's own reset
-      // declares `min-width: 0`), and then the wrapper re-centered text that
-      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
-      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
-      // the wrapper centered it in a 430px row.
-      //
-      // A wrapper with no drawn box inherits the CSS truth (start/start); a
-      // wrapper that DOES draw a box keeps the centering it was built for.
-      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
-      const wrap = figma.createFrame();
-      wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
-      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
-      wrap.primaryAxisSizingMode = 'AUTO';
-      wrap.counterAxisSizingMode = 'AUTO';
-      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
-      wrap.clipsContent = false;
-      wrap.fills = [];
-      for (const [field, varName] of Object.entries(spec.bindings || {})) {
-        wrap.setBoundVariable(field, need(varName));
-      }
-      if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
-      if (spec.characters) wrap.appendChild(node); else node.remove();
-      if (spec.fixedWidth || spec.fixedHeight) {
-        wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
-        if (spec.fixedWidth) { wrap.primaryAxisSizingMode = 'FIXED'; wrap.setBoundVariable('width', need(spec.fixedWidth.varName)); }
-        if (spec.fixedHeight) { wrap.counterAxisSizingMode = 'FIXED'; if (spec.fixedHeight.varName) wrap.setBoundVariable('height', need(spec.fixedHeight.varName)); else wrap.resize(wrap.width, spec.fixedHeight.px); }
-      }
-      wrap.name = spec.name;
-      node = wrap;
-    }
-  } else if (spec.type === 'instance') {
-    const target = resolveComponentIdentity(
-      { contractId: spec.depContractId, anchorKey: spec.depAnchorKey, name: spec.dep },
-      'Instance "' + spec.name + '"',
-      false,
-    );
-    const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-    node = main.createInstance();
-    if (spec.depProps) setInstanceProps(node, spec.depProps, target);
-  } else if (spec.type === 'slot') {
-    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
-    // the slot is minted by the variant component that owns it and moved into
-    // place by the ordinary child append below — a slot in a nested frame
-    // keeps its property binding (probe 2f).
-    if (!registry.owner) {
-      throw new Error(
-        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
-        '(never on a frame or a component SET); a slot outside a component build is refused',
-      );
-    }
-    node = registry.owner.createSlot();
-    applyFrameSpec(node, spec);
-    // An empty native slot renders as Figma's own thing: no dashed chrome, no
-    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
-    // solid-white fill is Figma's, not the contract's — the part's own styling
-    // (usually nothing) is the truth.
-    if (!spec.fill) node.fills = [];
-    for (const item of spec.slotDefault || []) {
-      const target = resolveComponentIdentity(
-        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-        'Slot "' + spec.name + '" default',
-        false,
-      );
-      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-      const inst = main.createInstance();
-      if (item.props) setInstanceProps(inst, item.props, target);
-      node.appendChild(inst);
-      if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
-      }
-    }
-    registry.slots.push({ spec, slot: node });
-  } else {
-    node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
-    applyFrameSpec(node, spec);
-  }
-  node.name = spec.name;
-  if (spec.visibleProp) {
-    registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
-  }
-  const built = [];
-  for (const child of spec.children || []) {
-    const childNode = await buildNode(child, registry);
-    node.appendChild(childNode);
-    built.push([child, childNode]);
-    applyOverlay(node, childNode, child);
-    if (child.pct != null) {
-      try {
-        childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
-        childNode.primaryAxisSizingMode = 'FIXED';
-        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
-        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
-        // so the fraction above was taken of a hugging 2px track. Stamp the
-        // fraction; the ROOT re-applies it once the whole tree has laid out.
-        childNode.setPluginData('ds_meter', String(child.pct));
-      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
-    }
-    if (
-      child.type === 'frame' && (!child.children || child.children.length === 0) &&
-      !child.fixedHeight && !(child.lits && child.lits.height !== undefined) && !child.shape &&
-      // ROUND 6: an OUT-OF-FLOW child is not in the auto-layout flow — FILL
-      // sizing is meaningless there (real Figma drops it the moment
-      // layoutPositioning becomes ABSOLUTE) and the instruction only made
-      // the Dialog backdrop LOOK healthy in the headless mock while the
-      // canvas drew a squat band. Out-of-flow boxes are sized by
-      // resizeOutOfFlow against the parent's final box.
-      !child.overlay && !child.insetOverlay && !child.absolute
-    ) {
-      // #60 fix 4: empty runtime-sized geometry gets DECLARED defaults —
-      // height follows the auto-layout parent (FILL), never Figma's 100×100
-      // createFrame artifact (Phase B-2 finding 4: ProgressBar indicators
-      // overflowed their fixed-height tracks). Width stays the spec'd
-      // fraction (meter pct) or the placeholder box, named in the component
-      // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
-    }
-    // FILL is compiled (annotateFillW): candidates only fill when the parent
-    // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-    }
-  }
-  if (spec.type === 'root') {
-    // meters: re-apply each stamped fraction against its track's LAID-OUT width
-    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
-      const pct = Number(m.getPluginData('ds_meter'));
-      m.setPluginData('ds_meter', '');
-      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
-    }
-  }
-  return node;
-}
-
-
-// djb2 over the compiled spec — stored on the set so unchanged components
-// skip cheaply and CHANGED ones amend in place.
-
-var dsVarNames = {};
-var dsVarNamesLoaded = false;
-function dsSetVarNames(m) { dsVarNames = m || {}; dsVarNamesLoaded = true; return dsVarNames; }
-// Callers with an async prologue (the emitted script's top-level await, the
-// plugin's check-drift handler) populate the map ONCE; the sync walk reads it.
-async function dsLoadVarNames() {
-  var m = {};
-  try {
-    var all = await figma.variables.getLocalVariablesAsync();
-    for (var i = 0; i < all.length; i++) m[all[i].id] = all[i].name;
-  } catch (e) {}
-  return dsSetVarNames(m);
-}
-// THE UNLOADED MAP IS A REFUSAL, NOT A DIFFERENT ANSWER.
-//
-// v6 spells bindings by NAME, and the name map can only be filled from an
-// ASYNC api. A call site that forgets to await dsLoadVarNames() used to get a
-// perfectly well-formed hash -- computed over (unresolved) everywhere -- that
-// simply did not equal the stamp. Three separate sites hit that in one round
-// (the emitted script, the plugin's inventory walk, and the engine gate's own
-// new-Function harness), and every one reported a FALSE 'canvas-edited'
-// verdict on an untouched file rather than an error. Telling a designer that
-// applying would overwrite edits that do not exist is a louder wrong answer
-// than the missed detach v6 was built to catch.
-//
-// So the unloaded state now refuses BY NAME at the first binding it is asked
-// to resolve. A forgotten preload becomes an immediate, located error instead
-// of a plausible hash -- the same reason styledChannels takes a REQUIRED
-// FusionEnv rather than an optional one. dsSetVarNames({}) is the way to say
-// deliberately that no names are available.
-function dsVarName(id) {
-  if (!id) return '(none)';
-  if (!dsVarNamesLoaded) {
-    throw new Error(
-      'dsCanvasFingerprint: the variable-name map was never loaded. v6 spells bindings by NAME, so every path that COMPUTES a fingerprint must ' +
-      'await dsLoadVarNames() (or call dsSetVarNames({}) to state deliberately that no names are available) before walking. ' +
-      'Without it every bound field resolves to (unresolved) and the hash silently disagrees with the stamp.',
-    );
-  }
-  if (dsVarNames[id]) return dsVarNames[id];
-  // Real Figma (non-dynamic-page documents) still answers synchronously;
-  // where it does not, the preloaded map above is the answer.
-  try {
-    if (typeof figma !== 'undefined' && figma.variables && figma.variables.getVariableById) {
-      var v = figma.variables.getVariableById(id);
-      if (v && v.name) { dsVarNames[id] = v.name; return v.name; }
-    }
-  } catch (e) {}
-  return '(unresolved)';
-}
-// Paints serialize with aliases as NAMES: a run-scoped VariableID makes the
-// line unusable across files, which is the whole defect v6 closes.
-function dsPaints(paints) {
-  return JSON.stringify(paints, function (k, v) {
-    if (v && typeof v === 'object' && v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
-      return { var: dsVarName(v.id) };
-    }
-    return v;
-  });
-}
-function dsCanvasSnapshot(root) {
-  var lines = [];
-  var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
-  var factsOf = function (n, id) {
-    var out = [];
-    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + dsPaints(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + dsPaints(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
-    try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
-    try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
-    try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
-    try { if (n.type === 'TEXT') out.push(id + '|text|"' + n.characters + '" ' + String(n.fontSize) + 'px ' + JSON.stringify(n.fontName)); } catch (e) {}
-    try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
-    try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
-    try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
-    // v6: DIRECT variable bindings, one channel per field so the drift
-    // reporter can pair each independently. Array-valued aliases
-    // (fills/strokes/characters) are skipped — they ride their own channel,
-    // the same split dump.plugin.js makes.
-    try {
-      var bv = n.boundVariables;
-      if (bv) {
-        var bf = Object.keys(bv).sort();
-        for (var bi = 0; bi < bf.length; bi++) {
-          var al = bv[bf[bi]];
-          if (!al || Object.prototype.toString.call(al) === '[object Array]' || !al.id) continue;
-          out.push(id + '|bound:' + bf[bi] + '|' + dsVarName(al.id));
-        }
-      }
-    } catch (e) {}
-    // v4 (live finding: description + added property were invisible):
-    try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
-    try {
-      if (n.componentPropertyDefinitions) {
-        var defs = n.componentPropertyDefinitions;
-        var names = Object.keys(defs).sort();
-        for (var d = 0; d < names.length; d++) {
-          var def = defs[names[d]];
-          out.push(id + '|propdef|' + names[d] + ':' + def.type + '=' + String(def.defaultValue));
-        }
-      }
-    } catch (e) {}
-    // v5 (prototype-wiring round): interactions are generated facts now.
-    // Destination by NAME (resolved among the node's siblings — a variant
-    // swap is always intra-set); an unresolvable id is named honestly rather
-    // than leaked as a run-scoped number.
-    try {
-      var rx = n.reactions;
-      if (rx && rx.length) {
-        var destName = function (nn, destId) {
-          if (!destId) return '(none)';
-          try {
-            var p = nn.parent;
-            var sibs = (p && p.children) || [];
-            for (var s = 0; s < sibs.length; s++) if (sibs[s].id === destId) return sibs[s].name;
-          } catch (e2) {}
-          return '(external)';
-        };
-        for (var ri = 0; ri < rx.length; ri++) {
-          var rr = rx[ri];
-          var acts = rr.actions || (rr.action ? [rr.action] : []);
-          var trg = (rr.trigger && rr.trigger.type) || '(none)';
-          for (var ai = 0; ai < acts.length; ai++) {
-            var ac = acts[ai];
-            out.push(id + '|reaction|' + trg + String.fromCharCode(8594) + (ac.navigation || ac.type) + ' ' + destName(n, ac.destinationId));
-          }
-        }
-      }
-    } catch (e) {}
-    return out;
-  };
-  var walk = function (n, path) {
-    var id = path + ':' + n.type + '/' + n.name;
-    var fs = factsOf(n, id);
-    for (var i = 0; i < fs.length; i++) lines.push(fs[i]);
-    var kids = n.children || [];
-    for (var i2 = 0; i2 < kids.length; i2++) walk(kids[i2], path + '/' + i2);
-  };
-  walk(root, '');
-  return lines;
-}
-function dsCanvasSetSnapshot(node) {
-  // the SET's OWN facts only (description, property definitions, name) —
-  // small enough to store on the set node; variants own their subtrees.
-  var lines = [];
-  var id = ':' + node.type + '/' + node.name;
-  try { if (node.description) lines.push(id + '|description|' + node.description); } catch (e) {}
-  try {
-    if (node.componentPropertyDefinitions) {
-      var defs = node.componentPropertyDefinitions;
-      var names = Object.keys(defs).sort();
-      for (var d = 0; d < names.length; d++) {
-        var def = defs[names[d]];
-        lines.push(id + '|propdef|' + names[d] + ':' + def.type + '=' + String(def.defaultValue));
-      }
-    }
-  } catch (e) {}
-  return lines;
-}
-function dsCanvasFingerprint(root) {
-  var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
-  var h = 5381;
-  for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v6:' + String(h);
-}
-
-// v6: bindings are fingerprinted by variable NAME, and every Figma variable
-// API that survives dynamic-page loading is async — so the id→name map is
-// filled ONCE here, from the emitted script's top-level await, and the sync
-// walk reads it. This runs AFTER the source above on purpose: the
-// dsVarNames initializer would clobber an earlier fill.
-await dsLoadVarNames();
-
-// DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
-// Check Drift can LOCALIZE an edit to the exact variant (live finding:
-// "canvas edited" over 63 Button variants is not actionable).
-function dsStampFingerprints(node) {
-  node.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(node));
-  // v3: variants also store the SNAPSHOT the hash derives from, so Check
-  // Drift can say WHAT changed, not just that something did. Each variant
-  // node owns its own pluginData quota — the set never carries the bulk.
-  if (node.type === 'COMPONENT_SET') {
-    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
-    for (const child of node.children) {
-      child.setSharedPluginData('ds_contracts', 'canvasFingerprint', dsCanvasFingerprint(child));
-      child.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(child)));
-    }
-  } else {
-    node.setSharedPluginData('ds_contracts', 'canvasSetSnapshot', JSON.stringify(dsCanvasSetSnapshot(node)));
-    node.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(dsCanvasSnapshot(node)));
-  }
-}
-
-// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
-// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
-// skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
-function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
-  for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return String(h);
-}
-
-// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
-// C.codeOnlyFacts is the sorted list of facts the contract carries and the
-// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
-// plugin data has a per-entry size limit, so the stamp keeps as many FULL
-// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
-// part.channel ("+N more"), then counts whatever still does not fit. The
-// count is always exact; the full list rides the bundle JSON and the
-// per-set result the plugin report lists. Written as '' (deletes the key)
-// when there is nothing to name, so a set that lost its last fact does not
-// keep a stale receipt.
-const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
-function codeOnlyFactsStamp(C) {
-  const facts = C.codeOnlyFacts || [];
-  if (facts.length === 0) return '';
-  const kept = [];
-  const moreNames = [];
-  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
-  for (const f of facts) {
-    kept.push(f);
-    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
-  }
-  for (let i = kept.length; i < facts.length; i++) {
-    moreNames.push(facts[i].part + '.' + facts[i].channel);
-    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
-  }
-  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
-  if (stamp.more > 0) stamp.moreNames = moreNames;
-  return JSON.stringify(stamp);
-}
-function withCodeOnlyFacts(report, C, degradedFrom) {
-  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
-  // R7: the runtime degradations raised while this set synced ride the same
-  // per-set result — named beside the facts, never only in a console.
-  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
-  return report;
-}
-
-// IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
-// existing COMPONENT_SET against the compiled spec while preserving what
-// instances bind to — the set node + key, each variant COMPONENT node, and
-// existing componentProperty IDs. Variant interiors are contract-owned and
-// rebuilt from spec (manual interior edits are drift by definition);
-// instance-level property overrides survive because property IDs do.
-// Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — except State preview leftovers when
-// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
-async function amendSet(set, C) {
-  set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
-  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
-  // return so a set that skips as unchanged still carries a current marker.
-  // Written as '' (which deletes the key) when the contract no longer opts
-  // into previews — a stale descriptor would describe a matrix nobody drew.
-  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
-    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
-  set.setSharedPluginData('ds_contracts', 'semantics',
-    C.semantics ? JSON.stringify(C.semantics) : '');
-  set.setSharedPluginData('ds_contracts', 'propNames',
-    C.propNames ? JSON.stringify(C.propNames) : '');
-  set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
-    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
-  // The named receipt — refreshed BEFORE the specHash early return, like the
-  // markers above, so an unchanged set still carries a current one.
-  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
-  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
-  // specHash early return, exactly like the identity markers above.
-  // Without this, a NODE whose content is unchanged keeps whatever coordinate
-  // it already carries forever: re-running the sync could never repair a page,
-  // only a human dragging things could. The altitude collision was in that
-  // state. Placement has to be a FIXED POINT — run the sync twice and get the
-  // same page — so the skip path is not allowed to be a dead end for it.
-  // The call AFTER the rebuild still exists and is still the one that re-fits
-  // the section to the FINAL size; this one only guarantees convergence.
-  {
-    const hostPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
-    if (hostPage && hostPage.type === 'PAGE') ensureHostSection(hostPage, set, set.name);
-  }
-  const hash = specHash(C);
-  if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
-    // unstable under real Figma's deferred layout) re-baselines NOW. A
-    // current-version stamp is never overwritten on skip: canvas edits stay
-    // detectable.
-    var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
-      dsStampFingerprints(set);
-    }
-    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
-  }
-  const report = { name: C.setName, contractId: C.contractId, amended: true, nodeId: set.id, key: set.key,
-    addedVariants: [], rebuiltVariants: 0, extraVariants: [], addedProps: [], editedDefaults: [] };
-  const defs = set.componentPropertyDefinitions;
-  const newKeys = {};
-  const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
-
-  for (const w of [
-    ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
-    ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
-  ]) {
-    const k = defKey(w.name);
-    if (!k) { newKeys[w.name] = set.addComponentProperty(w.name, w.type, w.def); report.addedProps.push(w.name); }
-    else if (defs[k].type === w.type && defs[k].defaultValue !== w.def) {
-      set.editComponentProperty(k, { defaultValue: w.def });
-      report.editedDefaults.push(w.name);
-    }
-  }
-
-  // Sets gaining/losing the State preview axis reconcile by RENAME, not
-  // duplication: an existing variant whose name matches an expected name
-  // minus the ', State=Default' segment IS that variant (instances point at
-  // it), so it is renamed in place — every variant node ID is preserved.
-  // Main-file finding, 2026-07-08: name-only matching built 12 duplicates
-  // and stranded the 12 originals as off-axis extras.
-  const EV = withStateAxis(C);
-  const expected = new Map(EV.map((v) => [v.name, v]));
-  for (const ch of set.children) {
-    if (expected.has(ch.name)) continue;
-    const gained = ch.name + ', State=Default';
-    const lost = ch.name.replace(', State=Default', '');
-    if (expected.has(gained) && !set.children.some((o) => o.name === gained)) {
-      ch.name = gained;
-      report.renamedVariants = report.renamedVariants || [];
-      report.renamedVariants.push(gained);
-    } else if (lost !== ch.name && expected.has(lost) && !set.children.some((o) => o.name === lost)) {
-      ch.name = lost;
-      report.renamedVariants = report.renamedVariants || [];
-      report.renamedVariants.push(lost);
-    } else {
-      report.extraVariants.push(ch.name);
-    }
-  }
-  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior statePreviews:true
-  // sync must be removed — otherwise amend leaves a doubled showcase grid.
-  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
-  if (!expectedHasState && report.extraVariants.length) {
-    const removed = [];
-    for (const name of [...report.extraVariants]) {
-      if (!/, State=/.test(name)) continue;
-      const ch = set.children.find((c) => c.name === name);
-      if (ch) {
-        ch.remove();
-        removed.push(name);
-      }
-    }
-    if (removed.length) {
-      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
-      report.removedVariants = removed;
-    }
-  }
-  const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
-
-  for (const v of EV) {
-    let comp = existingByName.get(v.name);
-    const registry = { texts: [], slots: [], visibles: [] };
-    if (!comp) {
-      comp = await buildNode(v.spec, registry);
-      set.appendChild(comp);
-      report.addedVariants.push(v.name);
-    } else {
-      for (const child of [...comp.children]) child.remove();
-      applyFrameSpec(comp, v.spec);
-      const built = [];
-      for (const childSpec of v.spec.children || []) {
-        const childNode = await buildNode(childSpec, registry);
-        comp.appendChild(childNode);
-        built.push([childSpec, childNode]);
-        applyOverlay(comp, childNode, childSpec);
-        if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
-        }
-        if (
-          childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-          !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
-          !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
-        ) {
-          // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
-        }
-        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-        }
-      }
-      report.rebuiltVariants++;
-    }
-    for (const t of registry.texts) {
-      let k = defKey(t.prop);
-      if (!k) { k = set.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
-      else if (defs[k] && defs[k].defaultValue !== t.default && !report.editedDefaults.includes(t.prop)) {
-        set.editComponentProperty(k, { defaultValue: t.default });
-        report.editedDefaults.push(t.prop);
-      }
-      t.node.componentPropertyReferences = { characters: k };
-    }
-    for (const sl of registry.slots) {
-      let k = defKey(sl.spec.slotProperty);
-      // MIGRATION (proposal §6.2): the same display name carried by the OLD
-      // INSTANCE_SWAP convention is the same slot — but the two property
-      // types cannot share an id, so the legacy one retires here (reported)
-      // and the natively minted SLOT property takes over. ANY OTHER type
-      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
-      // property to make room would destroy every instance override bound to
-      // it, so that refuses by name instead.
-      if (k && defs[k] && defs[k].type !== 'SLOT') {
-        if (defs[k].type !== 'INSTANCE_SWAP') {
-          throw new Error(
-            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
-          );
-        }
-        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
-        k = null;
-      }
-      const bound = bindSlot(set, sl, k);
-      if (!k) {
-        newKeys[sl.spec.slotProperty] = bound.key;
-        report.addedProps.push(sl.spec.slotProperty);
-      } else if (bound.rebound) {
-        // The headline invariant: the rebuilt slot went back onto the
-        // PRESERVED property id, so every instance fill keyed to it survives
-        // this amend (probe 2d.3).
-        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
-      }
-      if (sl.spec.slotOptional) {
-        let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — an empty slot still occupies its box
-        // (Toast/ChatMessage live finding). Designers opt in.
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        // BOTH references in one write: componentPropertyReferences is
-        // replaced wholesale, and dropping slotContentId here would unbind
-        // the slot (and strand its content) to gain a visibility toggle.
-        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
-        sl.slot.visible = false;
-      }
-    }
-    for (const vis of registry.visibles) {
-      const k = defKey(vis.prop);
-      if (!k) continue;
-      vis.node.componentPropertyReferences = { visible: k };
-      vis.node.visible = vis.default;
-    }
-  }
-
-  // Contract default combo must be the FIRST variant (Figma default = first).
-  const first = set.children.find((ch) => ch.name === EV[0].name);
-  if (first && set.children[0] !== first) set.insertChild(0, first);
-
-  // Grid re-layout with the create path's math.
-  const specByName = new Map(EV.map((sv) => [sv.name, sv]));
-  const rowsN = Math.max(...EV.map((vv) => vv.row)) + 1;
-  const colsN = Math.max(...EV.map((vv) => vv.col)) + 1;
-  const colWs = new Array(colsN).fill(0);
-  const rowHs = new Array(rowsN).fill(0);
-  for (const child of set.children) {
-    const sp = specByName.get(child.name);
-    if (!sp) continue;
-    colWs[sp.col] = Math.max(colWs[sp.col], child.width);
-    rowHs[sp.row] = Math.max(rowHs[sp.row], child.height);
-  }
-  for (const child of set.children) {
-    const sp = specByName.get(child.name);
-    if (!sp) continue;
-    let x = PAD, y = PAD;
-    for (let i = 0; i < sp.col; i++) x += colWs[i] + PAD;
-    for (let i = 0; i < sp.row; i++) y += rowHs[i] + PAD;
-    child.x = x; child.y = y;
-  }
-  // B-3 finding 4: after re-gridding, the SET CONTAINER refits to the
-  // children's extent + grid padding (the create path's exact math) —
-  // without this, added variants/columns stayed clipped by stale bounds
-  // (Banner's Focus column, Button's 220-cell grid, ProgressBar's height).
-  // Extra (human-owned) variants may sit beyond the grid; never shrink
-  // below their extent.
-  {
-    let totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
-    let totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
-    for (const child of set.children) {
-      totalW = Math.max(totalW, child.x + child.width + PAD);
-      totalH = Math.max(totalH, child.y + child.height + PAD);
-    }
-    set.resizeWithoutConstraints(totalW, totalH);
-  }
-  set.description = C.description;
-  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
-  set.setSharedPluginData('ds_contracts', 'specHash', hash);
-  // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
-  // are part of what gets stamped (a stripped reaction is drift).
-  report.wiredReactions = await wireStateReactions(set, new Map(set.children.map((ch) => [ch.name, ch])), C);
-  // DRIFT ROUND: the canvas fingerprint — recomputed by Check Drift; a
-  // mismatch means the canvas was edited after generation.
-  dsStampFingerprints(set);
-  // Re-fit (or adopt into) the host section — legacy un-hosted sets gain one.
-  const setPage = set.parent && set.parent.type === 'SECTION' ? set.parent.parent : set.parent;
-  if (setPage && setPage.type === 'PAGE') ensureHostSection(setPage, set, set.name);
-  return report;
-}
-
-// #60 fix 3: IN-PLACE AMEND for standalone COMPONENTs (non-set: Badge/Tag
-// class) — the same identity-marker update semantics as amendSet: the
-// component node (and key) instances bind to is preserved; the interior is
-// contract-owned and rebuilt from spec; existing componentProperty IDs
-// survive via defKey. Unchanged specs skip on the stored specHash.
-async function amendComponent(comp, C) {
-  comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
-  // A STANDALONE component gets the identity stamps too. amendSet and the
-  // create path carried these from the start; this path did not, so Card and
-  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
-  // sets — re-synced with no semantics and no propNames, and the inverter fell
-  // back to guessing their host element and prop names. Same '' -> delete rule
-  // as everywhere else. (No backticks in this region: it is inside the emitted
-  // runtime's template literal, and one would terminate it.)
-  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
-    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
-  comp.setSharedPluginData('ds_contracts', 'semantics',
-    C.semantics ? JSON.stringify(C.semantics) : '');
-  comp.setSharedPluginData('ds_contracts', 'propNames',
-    C.propNames ? JSON.stringify(C.propNames) : '');
-  comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
-    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
-  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
-  // FIXED POINT — the host section is adopted and re-fitted BEFORE the
-  // specHash early return, exactly like the identity markers above.
-  // Without this, a NODE whose content is unchanged keeps whatever coordinate
-  // it already carries forever: re-running the sync could never repair a page,
-  // only a human dragging things could. The altitude collision was in that
-  // state. Placement has to be a FIXED POINT — run the sync twice and get the
-  // same page — so the skip path is not allowed to be a dead end for it.
-  // The call AFTER the rebuild still exists and is still the one that re-fits
-  // the section to the FINAL size; this one only guarantees convergence.
-  {
-    const hostPageC = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
-    if (hostPageC && hostPageC.type === 'PAGE') ensureHostSection(hostPageC, comp, comp.name);
-  }
-  const hash = specHash(C);
-  if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
-    var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
-      dsStampFingerprints(comp);
-    }
-    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
-  }
-  const report = { name: C.setName, contractId: C.contractId, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
-  const defs = comp.componentPropertyDefinitions;
-  const newKeys = {};
-  const defKey = (name) => newKeys[name] ||
-    Object.keys(defs).find((k) => k.split('#')[0] === name) || null;
-  for (const w of [
-    ...C.boolProps.map((bp) => ({ name: bp.property, type: 'BOOLEAN', def: bp.default })),
-    ...(C.textProps || []).map((tp) => ({ name: tp.property, type: 'TEXT', def: tp.default })),
-  ]) {
-    const k = defKey(w.name);
-    if (!k) { newKeys[w.name] = comp.addComponentProperty(w.name, w.type, w.def); report.addedProps.push(w.name); }
-    else if (defs[k].type === w.type && defs[k].defaultValue !== w.def) {
-      comp.editComponentProperty(k, { defaultValue: w.def });
-      report.editedDefaults.push(w.name);
-    }
-  }
-  const v = C.variants[0];
-  const registry = { texts: [], slots: [], visibles: [] };
-  for (const child of [...comp.children]) child.remove();
-  applyFrameSpec(comp, v.spec);
-  const built = [];
-  for (const childSpec of v.spec.children || []) {
-    const childNode = await buildNode(childSpec, registry);
-    comp.appendChild(childNode);
-    built.push([childSpec, childNode]);
-    applyOverlay(comp, childNode, childSpec);
-    if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
-    }
-    if (
-      childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
-      !childSpec.fixedHeight && !(childSpec.lits && childSpec.lits.height !== undefined) && !childSpec.shape &&
-      !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
-    ) {
-      // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
-    }
-    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
-    }
-  }
-  for (const t of registry.texts) {
-    let k = defKey(t.prop);
-    if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
-    else if (defs[k] && defs[k].defaultValue !== t.default && !report.editedDefaults.includes(t.prop)) {
-      comp.editComponentProperty(k, { defaultValue: t.default });
-      report.editedDefaults.push(t.prop);
-    }
-    t.node.componentPropertyReferences = { characters: k };
-  }
-  for (const sl of registry.slots) {
-    let k = defKey(sl.spec.slotProperty);
-    if (k && defs[k] && defs[k].type !== 'SLOT') {
-      if (defs[k].type !== 'INSTANCE_SWAP') {
-        throw new Error(
-          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
-        );
-      }
-      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
-      k = null;
-    }
-    const bound = bindSlot(comp, sl, k);
-    if (!k) {
-      newKeys[sl.spec.slotProperty] = bound.key;
-      report.addedProps.push(sl.spec.slotProperty);
-    } else if (bound.rebound) {
-      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
-    }
-    if (sl.spec.slotOptional) {
-      let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
-      sl.slot.visible = false;
-    }
-  }
-  for (const vis of registry.visibles) {
-    const k = defKey(vis.prop);
-    if (!k) continue;
-    vis.node.componentPropertyReferences = { visible: k };
-    vis.node.visible = vis.default;
-  }
-  comp.description = C.description;
-  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
-  comp.setSharedPluginData('ds_contracts', 'specHash', hash);
-  dsStampFingerprints(comp);
-  // Re-fit (or adopt into) the host section — mirrors amendSet.
-  const compPage2 = comp.parent && comp.parent.type === 'SECTION' ? comp.parent.parent : comp.parent;
-  if (compPage2 && compPage2.type === 'PAGE') ensureHostSection(compPage2, comp, comp.name);
-  return report;
-}
-
-async function syncOne(C) {
-  // Semantic marker → stable anchor → unique explicit legacy-generated name.
-  // A same-name foreign node has neither marker and is never adopted.
-  let existing = resolveComponentIdentity(
-    { contractId: C.contractId, anchorKey: C.anchorKey, name: C.setName },
-    'Sync target "' + C.setName + '"',
-    true,
-  );
-  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
-  // designer's file stays in sync without losing node ids or keys — but it
-  // means "apply this bundle" on a file that already carries these stems
-  // REWRITES them. A first look, a spare file, or any run that must not touch
-  // shipped pages needs a door that cannot write over existing work.
-  //
-  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
-  // already-identified set is REFUSED BY NAME instead of amended: nothing is
-  // written to it, not even the identity re-stamp below. Fresh stems on the
-  // same file still create normally, so a partially-populated file fills in
-  // its gaps without disturbing what is already there.
-  //
-  // This deliberately adds NO second identity scheme: the same
-  // resolveComponentIdentity decides what "already exists" means, so the door
-  // can never adopt a node the amend path would have refused.
-  const DS_CREATE_ONLY =
-    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
-  if (existing && DS_CREATE_ONLY) {
-    return {
-      name: C.setName,
-      contractId: C.contractId,
-      skipped: true,
-      createOnly: true,
-      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
-        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
-        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
-      nodeId: existing.id,
-      key: existing.key,
-    };
-  }
-  // Retiring/renaming an internal omission option must not leave its retained
-  // history eligible to become a public enum option. Refuse before ANY writes
-  // to this target. A new lineage is required; owner history is never deleted.
-  if (existing) {
-    const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
-    if (previousRaw) {
-      let previous;
-      try { previous = JSON.parse(previousRaw); } catch (_) { previous = null; }
-      const nextAxes = C.unsetVariantAxes && C.unsetVariantAxes.axes;
-      if (!nextAxes || (previous && Array.isArray(previous.axes) && previous.axes.some(old =>
-        !nextAxes.some(next => next.property === old.property && next.unsetValue === old.unsetValue)))) {
-        throw new Error('FIGMA_UNSET_RETIREMENT_REFUSED: cannot retire an omitted plane in place; retained canvas history would become public API. Use an explicitly new lineage.');
-      }
-    }
-  }
-  if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
-    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-  }
-  if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
-    return await amendSet(existing, C);
-  }
-  // #60 fix 3: standalone COMPONENTs (Badge/Tag class) amend in place too —
-  // the "amend supports variant sets in v1" skip forced delete+recreate and
-  // re-minted node ids/keys (Phase B-2 named finding 2).
-  if (existing && existing.type === 'COMPONENT' && !C.isSet) {
-    return await amendComponent(existing, C);
-  }
-  if (existing) {
-    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
-  }
-
-  // A same-named unmarked set is foreign: leave it alone, disambiguate ours.
-  let displayName = C.setName;
-  for (const page of figma.root.children) {
-    const foreign = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === C.setName,
-    );
-    if (foreign) { displayName = C.setName + ' (' + C.contractId + ')'; break; }
-  }
-
-  // One page per component (see figma-sync/arrange.js for the file layout).
-  let compPage = figma.root.children.find((p) => p.name === displayName);
-  if (!compPage) { compPage = figma.createPage(); compPage.name = displayName; }
-
-  const EV = withStateAxis(C);
-  const built = [];
-  for (const v of EV) {
-    const registry = { texts: [], slots: [], visibles: [] };
-    const comp = await buildNode(v.spec, registry);
-    built.push({ v, comp, registry });
-  }
-
-  let target;
-  if (C.isSet) {
-    // combineAsVariants requires the nodes to already be ON the parent page.
-    for (const b of built) compPage.appendChild(b.comp);
-    target = figma.combineAsVariants(built.map((b) => b.comp), compPage);
-  } else {
-    target = built[0].comp;
-    compPage.appendChild(target);
-  }
-
-  // Component properties are minted on the PROPERTY OWNER — the SET for a
-  // variant component, the component itself for a standalone — AFTER
-  // combineAsVariants, one key per property name, wired into every variant.
-  // (2026-07-21, live-canvas finding, handoff 08#1: the old per-variant
-  // pre-combine minting produced id-suffixed keys that real set-instances
-  // never surface, so an instance's TEXT property silently failed to apply —
-  // repeated Badge instances kept the default "Badge" live. The amend path
-  // (amendSet) always minted set-level; the create path now matches it.)
-  const keys = {};
-  const mintOnce = (name, type, def, opts) => {
-    if (!keys[name]) keys[name] = target.addComponentProperty(name, type, def, opts);
-    return keys[name];
-  };
-  for (const bp of C.boolProps) mintOnce(bp.property, 'BOOLEAN', bp.default);
-  for (const tp of C.textProps || []) mintOnce(tp.property, 'TEXT', tp.default);
-  for (const b of built) {
-    for (const t of b.registry.texts) {
-      t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
-    }
-    for (const s of b.registry.slots) {
-      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
-      // property; after combineAsVariants they all sit on the set under the
-      // same display name. The first variant's id is canonical — every other
-      // slot node rebinds to it and its duplicate is deleted, so the set ends
-      // with ONE SLOT property that instance fills can ride across a variant
-      // switch.
-      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
-      keys[s.spec.slotProperty] = bound.key;
-      if (s.spec.slotOptional) {
-        s.slot.componentPropertyReferences = {
-          slotContentId: bound.key,
-          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
-        };
-        s.slot.visible = false;
-      }
-    }
-    for (const vis of b.registry.visibles) {
-      const key = keys[vis.prop];
-      if (!key) continue;
-      vis.node.componentPropertyReferences = { visible: key };
-      vis.node.visible = vis.default;
-    }
-  }
-
-  if (C.isSet) {
-    // Tight grid: rows = first axis, columns = second; per-track max sizing.
-    const specByName = new Map(EV.map((s) => [s.name, s]));
-    const rowsN = Math.max(...EV.map((v) => v.row)) + 1;
-    const colsN = Math.max(...EV.map((v) => v.col)) + 1;
-    const colWs = new Array(colsN).fill(0);
-    const rowHs = new Array(rowsN).fill(0);
-    for (const child of target.children) {
-      const spec = specByName.get(child.name);
-      if (!spec) continue;
-      colWs[spec.col] = Math.max(colWs[spec.col], child.width);
-      rowHs[spec.row] = Math.max(rowHs[spec.row], child.height);
-    }
-    for (const child of target.children) {
-      const spec = specByName.get(child.name);
-      if (!spec) continue;
-      let x = PAD, y = PAD;
-      for (let i = 0; i < spec.col; i++) x += colWs[i] + PAD;
-      for (let i = 0; i < spec.row; i++) y += rowHs[i] + PAD;
-      child.x = x;
-      child.y = y;
-    }
-    const totalW = colWs.reduce((a, b) => a + b, 0) + PAD * (colsN + 1);
-    const totalH = rowHs.reduce((a, b) => a + b, 0) + PAD * (rowsN + 1);
-    target.resizeWithoutConstraints(totalW, totalH);
-  }
-  target.name = displayName;
-  target.description = C.description;
-  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
-  target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
-  target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
-  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
-    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
-  target.setSharedPluginData('ds_contracts', 'semantics',
-    C.semantics ? JSON.stringify(C.semantics) : '');
-  target.setSharedPluginData('ds_contracts', 'propNames',
-    C.propNames ? JSON.stringify(C.propNames) : '');
-  target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
-    C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -14907,7 +16856,7 @@ const COMPONENTS = [
     "contractId": "shadcn.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (24 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (23 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -15100,7 +17049,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
@@ -15200,7 +17149,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
@@ -15402,7 +17351,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
@@ -15503,7 +17452,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
@@ -15571,11 +17520,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -15663,11 +17613,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -15695,7 +17646,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
@@ -15763,11 +17714,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -15795,7 +17747,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
@@ -16085,22 +18037,6 @@ const COMPONENTS = [
         "variants": {
           "count": 9,
           "of": 9
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 3,
-          "of": 9,
-          "names": [
-            "Checked=Unchecked, State=Focus Visible",
-            "Checked=Checked, State=Focus Visible",
-            "Checked=Indeterminate, State=Focus Visible"
-          ]
         }
       }
     ],
@@ -16570,12 +18506,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -16902,7 +18845,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -17114,7 +19058,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -17182,6 +19126,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -17327,7 +19272,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -17466,6 +19412,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -17551,7 +19498,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -17646,6 +19594,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -17789,6 +19751,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -17830,7 +19793,7 @@ const COMPONENTS = [
     "contractId": "shadcn.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract shadcn.input v0.2.0 † (20 code-only facts — see plugin report)",
+    "description": "Input — generated from contract shadcn.input v0.2.0 † (19 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -18138,11 +20101,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -18251,11 +20215,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -18539,21 +20504,6 @@ const COMPONENTS = [
         "variants": {
           "count": 4,
           "of": 4
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 4,
-          "names": [
-            "State=Active",
-            "State=Focus Visible"
-          ]
         }
       }
     ],
@@ -18994,12 +20944,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -19509,7 +21466,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -19577,6 +21534,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -19837,6 +21795,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -19993,6 +21952,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -20136,6 +22109,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -20300,7 +22274,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "icon",
-              "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 9 L 12 15 L 18 9\" fill=\"none\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svg": "<svg height=\"16\" width=\"16\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 9 L 12 15 L 18 9\" fill=\"none\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
               "svgPaintVar": "imported/shared/color-737373",
               "iconSize": 16
             }
@@ -21080,12 +23054,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -21645,7 +23626,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -21713,6 +23694,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -21973,6 +23955,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -22129,6 +24112,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -22272,6 +24269,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -22313,7 +24311,7 @@ const COMPONENTS = [
     "contractId": "shadcn.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract shadcn.switch v0.2.0 † (27 code-only facts — see plugin report)",
+    "description": "Switch — generated from contract shadcn.switch v0.2.0 † (25 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -22426,6 +24424,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -22544,6 +24599,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -22662,6 +24774,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -22780,6 +24949,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -22908,6 +25134,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -23027,6 +25310,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -23102,11 +25442,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -23145,6 +25486,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 16,
                 "varName": "imported/switch/part-0/height/default"
@@ -23220,11 +25618,12 @@ const COMPONENTS = [
               "y": 0,
               "radius": 0,
               "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 0
-              }
+                "r": 0.6313725490196078,
+                "g": 0.6313725490196078,
+                "b": 0.6313725490196078,
+                "a": 0.5
+              },
+              "spread": 3
             },
             {
               "x": 0,
@@ -23263,6 +25662,63 @@ const COMPONENTS = [
                 "topLeftRadius": "imported/shared/size-9999",
                 "topRightRadius": "imported/shared/size-9999"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0.0392156862745098,
+                    "g": 0.0392156862745098,
+                    "b": 0.0392156862745098,
+                    "a": 1
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "radius": 0,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
               "fixedHeight": {
                 "px": 12,
                 "varName": "imported/switch/part-0/height/sm"
@@ -23373,17 +25829,6 @@ const COMPONENTS = [
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.4, 0, 0.2, 1)",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
-        "variants": {
-          "count": 8,
-          "of": 8
-        }
-      },
-      {
-        "part": "part-0",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
         "variants": {
           "count": 8,
           "of": 8
@@ -23590,21 +26035,6 @@ const COMPONENTS = [
         "variants": {
           "count": 8,
           "of": 8
-        }
-      },
-      {
-        "part": "root",
-        "kind": "shadow",
-        "channel": "box-shadow",
-        "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0",
-        "reason": "parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar",
-        "variants": {
-          "count": 2,
-          "of": 8,
-          "names": [
-            "Size=Default, Checked=Unchecked, State=Focus Visible",
-            "Size=Sm, Checked=Unchecked, State=Focus Visible"
-          ]
         }
       }
     ],
@@ -24074,12 +26504,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -24397,7 +26834,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -24609,7 +27047,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -24677,6 +27115,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -24822,7 +27261,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -24961,6 +27401,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -25046,7 +27487,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -25141,6 +27583,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -25284,6 +27740,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -26597,12 +29054,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -27104,7 +29568,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -27172,6 +29636,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -27432,6 +29897,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -27588,6 +30054,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -27731,6 +30211,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
@@ -28491,12 +30972,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -28905,7 +31393,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -29117,7 +31606,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -29185,6 +31674,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -29333,7 +31823,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -29472,6 +31963,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -29560,7 +32052,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -29655,6 +32148,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -29798,6 +32305,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

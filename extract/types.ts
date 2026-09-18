@@ -27,6 +27,8 @@ export interface ExtractedProp {
   kind: PropKind;
   /** enum members, for kind 'enum' */
   values?: string[];
+  /** Canonical finite options mapped to their exact source-code values. */
+  codeValues?: Record<string, string | number | boolean | null>;
   default?: string | number | boolean;
   optional: boolean;
   description?: string;
@@ -87,6 +89,7 @@ export interface ExtractedPart {
      *  named refusal receipt, never a silent drop. */
     rows?: Array<{ px: number } | { fr: number } | { fit: true }>;
     columns?: Array<{ px: number } | { fr: number } | { fit: true }>;
+    autoRows?: { px: number } | { fr: number } | { fit: true };
     /** G1 — the independent gap pair (px number or resolved token ref). */
     gap?: { row: number | string; column: number | string };
     /** G4 — named areas from grid-template-areas; the NAME is the slot

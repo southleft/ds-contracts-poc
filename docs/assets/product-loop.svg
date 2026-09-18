@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="600" viewBox="0 0 1080 600" role="img" aria-labelledby="title desc">
-  <title id="title">Code and canvas, connected through contracts</title>
-  <desc id="desc">Intended workflows, still in development. Code library to shared contract to editable Figma component sets. Figma library to shared contract to reusable code library. Changes on either side are compared against the shared baseline, repaired under an ownership policy, then independently verified. Scope includes data tables, nested components, slots, instance swaps, variants and tokens.</desc>
+  <title id="title">React and Figma, connected through contracts</title>
+  <desc id="desc">Intended workflows, still in development. React library to shared contract to editable Figma component sets. Figma library to shared contract to reusable React library. Changes on either side are compared against the shared baseline, repaired under an ownership policy, then independently verified. Scope includes data tables, nested components, slots, instance swaps, variants and tokens.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 9 5 1 9" fill="none" stroke="#3b6559" stroke-width="1.6"/></marker>
   </defs>
   <rect width="1080" height="600" rx="12" fill="#f5f6f2"/>
   <g font-family="Arial, Helvetica, sans-serif" fill="#1f3430">
-    <text x="36" y="44" font-size="25" font-weight="700">Code and canvas, connected through contracts</text>
-    <text x="36" y="73" font-size="16" fill="#52645e">Intended user journeys · application integration and verification in progress</text>
+    <text x="36" y="44" font-size="25" font-weight="700">React and Figma, connected through contracts</text>
+    <text x="36" y="73" font-size="16" fill="#52645e">V1 focus · deterministic conversion · complete journeys still in development</text>
     <g font-size="14" font-weight="700" letter-spacing="1.3" fill="#52645e">
       <text x="36" y="113">START WITH YOUR LIBRARY</text>
       <text x="405" y="113">DESCRIBE WHAT IT MEANS</text>
@@ -22,12 +22,12 @@
       <rect x="775" y="251" width="270" height="98" rx="7"/>
     </g>
     <g font-size="21" font-weight="700">
-      <text x="55" y="164">Code library</text>
+      <text x="55" y="164">React library</text>
       <text x="424" y="164">Shared contract</text>
       <text x="794" y="164">Editable Figma</text>
       <text x="55" y="284">Figma library</text>
       <text x="424" y="284">Shared contract</text>
-      <text x="794" y="284">Reusable code</text>
+      <text x="794" y="284">Reusable React</text>
     </g>
     <g font-size="16" fill="#52645e">
       <text x="55" y="191">Components, APIs and states</text>

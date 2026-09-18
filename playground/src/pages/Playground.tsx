@@ -106,6 +106,7 @@ import {
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
 import { activeTokens } from '../engine/token-source';
 import { applyLinkedScope, linkedImportScope, mergeTrees } from '../engine/linked-scope';
+import { recordCodeProposals } from '../engine/code-import-workspace';
 import { sessionRegistry } from '../engine/session-registry';
 import { setChildStubs } from '../engine/stub-contracts';
 import { validateContractText } from '../engine/validate';
@@ -796,8 +797,8 @@ export function Playground() {
     result.proposals.forEach(({ name, proposal }, index) => {
       // The LOADED proposal's MINTED lines move into the dedicated group
       // below (kind 'minted' — where the assist rename block attaches, the
-      // Figma path's spelling); other proposals keep them inline since only
-      // the loaded contract's layer is registered.
+      // Figma path's spelling); dependencies keep their own notes and token
+      // layers in the workspace for the linked-component resolver.
       const isLoaded = index === 0;
       const notes = isLoaded ? proposal.notes.filter((n) => !n.startsWith('MINTED ')) : proposal.notes;
       if (notes.length > 0) {
@@ -828,23 +829,13 @@ export function Playground() {
     const first = result.proposals[0];
     if (first) {
       const contractText = pretty(first.proposal.contract);
-      // Minted provisional layer (imported.*) — registered BEFORE the text
-      // lands so the editor's first validation pass already resolves the
-      // refs; the workspace entry carries it for restore (same as Figma).
-      const minted: MintedTokenLayer | null =
-        first.proposal.mintedTokens && first.proposal.mintedTokens.count > 0 ? first.proposal.mintedTokens : null;
+      // Store every proposal and its own token layer BEFORE rendering the
+      // entry component. The existing session graph resolves nested imports.
+      const recorded = recordCodeProposals(result, codeReceipts)[0];
+      const minted = recorded.entry.mintedTokens ?? null;
       setMintedTokens(minted);
-      setCapturedTokens(null); // code imports carry no Figma variables
-      setChildStubs(null); // code proposals ship no child stubs
-      // A successful code import lands in the session workspace.
-      const recorded = recordImport({
-        name: first.name,
-        contractId: contractIdOf(first.proposal.contract),
-        source: 'code',
-        contractText,
-        receipts: codeReceipts,
-        ...(minted ? { mintedTokens: minted } : {}),
-      });
+      setCapturedTokens(null);
+      setChildStubs(null);
       setReceipts(recorded.receipts);
       setText(contractText);
       setProvenance(`proposed from code — ${first.name}`);

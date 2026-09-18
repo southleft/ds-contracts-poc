@@ -1,0 +1,29 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tab-2.contract.json (ds.tab-2 v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  height: var(--imported-stub-tab-2-root-height);
+  background-color: var(--imported-stub-tab-2-root-background-color);
+  border-width: var(--imported-stub-tab-2-root-border-width);
+}
+
+.active-yes {
+  border-color: var(--imported-stub-tab-2-root-border-color-yes);
+}
+
+.active-no {
+  border-color: var(--imported-stub-tab-2-root-border-color-no);
+}
