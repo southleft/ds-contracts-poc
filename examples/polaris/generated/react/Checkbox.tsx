@@ -2,6 +2,9 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/checkbox.contract.json (polaris.checkbox v0.4.0)
  * Regenerate with: npm run generate
+ *
+ * `children` OMITTED from HTMLAttributes<HTMLSpanElement> — the contract declares no slot or
+ * children-bound text, so JSX children would be discarded; the type refuses them.
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -12,7 +15,7 @@ const ICONS: Record<string, string> = {
   "checkbox-icon-6": "<svg viewBox=\"0 0 14 14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 1.5 5.5 L 3.44655 8.22517 C 3.72862 8.62007 4.30578 8.64717 4.62362 8.28044 L 10.5 1.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
 };
 
-export interface CheckboxProps extends HTMLAttributes<HTMLSpanElement> {
+export interface CheckboxProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
   /** Checked state (round 4: enumerated as a contract enum — the real API is boolean | 'indeterminate'; the capture maps unchecked→false, checked→true, indeterminate→'indeterminate'). The check/indeterminate glyphs and the checked backdrop ride this axis. */
   checked?: 'unchecked' | 'checked' | 'indeterminate';
   /** Indicates the ID of the element that is controlled by the checkbox */
@@ -33,7 +36,7 @@ export interface CheckboxProps extends HTMLAttributes<HTMLSpanElement> {
 
 /** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Checkbox/Checkbox.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color) removed — the checked axis contests them per value; the floor rebuilds from browser truth. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const Checkbox = forwardRef<HTMLSpanElement, CheckboxProps>(function Checkbox(
-  { checked = 'unchecked', labelHidden, disabled, ariaControls, ariaDescribedBy, name, value, labelClassName, className, children, ...rest },
+  { checked = 'unchecked', labelHidden, disabled, ariaControls, ariaDescribedBy, name, value, labelClassName, className, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`checked-${checked}`], className].filter(Boolean).join(' ');
