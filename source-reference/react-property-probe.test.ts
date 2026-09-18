@@ -107,6 +107,10 @@ test('real React property experiments preserve context and distinguish delivered
   const interrupted=await observeReactPropertyEffects({page,program,ownership,tree,image,instanceId:id('Surface'),selector,stageSelector:'#mount',dir:path.join(dir,'interrupted'),assertCurrent:()=>{if(++guards>2)throw Error('source changed');},failures:{runtimeErrors:[],failedResources:[]}});
   assert.ok(interrupted.rows.every(r=>r.status==='refused'&&!r.image));
   assert.equal(interrupted.rows[1].problem,'prior-observation-invalidated-context');
+  // A probe page that never matched the sealed original names which witness disagreed.
+  const mismatched=await observeReactPropertyEffects({page,program,ownership,tree,image:'0'.repeat(64),instanceId:id('Surface'),selector,stageSelector:'#mount',dir:path.join(dir,'mismatched'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.equal(mismatched.rows[0].status,'refused');
+  assert.equal(mismatched.rows[0].problem,'react-property-effects-original-not-restored:before-image;restored-image');
   assert.deepEqual(await observe(),baseline);
 
  }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}

@@ -105,7 +105,11 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   if(!usable){row.problem='prior-observation-invalidated-context';continue;}
   try{
    const probe=await (args.observationMode==='initial-mount'?probeReactInitialProperties:probeReactProperties)(page,selector,program,instanceId,entry.changes,observe);
-   if(!probe.ownershipRestored||probe.before.treeSha256!==originalTree||probe.restored.treeSha256!==originalTree||probe.before.image!==args.image||probe.restored.image!==args.image)throw Error('react-property-effects-original-not-restored');
+   // Name WHICH witness disagreed: a probe page that never matched the sealed
+   // original is a different defect from a render that did not come back.
+   const unrestored=[!probe.ownershipRestored&&'ownership',probe.before.treeSha256!==originalTree&&'before-tree',probe.before.image!==args.image&&'before-image',
+    probe.restored.treeSha256!==originalTree&&'restored-tree',probe.restored.image!==args.image&&'restored-image'].filter(Boolean);
+   if(unrestored.length)throw Error('react-property-effects-original-not-restored:'+unrestored.join(';'));
    const before=linkReactSourceAnatomy(program,probe.before.ownership,probe.before.tree);
    const changed=linkReactSourceAnatomy(program,probe.changed.ownership,probe.changed.tree);
    if(before.status!=='linked'||changed.status!=='linked')throw Error('react-property-effects-anatomy-unqualified');

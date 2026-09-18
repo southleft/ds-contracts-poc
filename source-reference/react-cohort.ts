@@ -32,6 +32,9 @@ export interface ReactCohort {
   negativeCaseIds: readonly string[];
   /** Only a declared cohort: its bytes are source and enter the identity. */
   declaration?: { file: string; sha256: string };
+  /** Only a declared cohort: the `./`-relative modules its cases mount. The
+   * build resolves each to a source file that the witnesses must pin. */
+  mountedModules?: readonly string[];
 }
 
 /** The cohort this application was first written around. Its entry bytes and
@@ -212,6 +215,15 @@ function witness(value: unknown): Witness {
   };
 }
 
+/** Pinning only files that never change would let a changed component keep
+ * its old witnesses. Every mounted workspace module must resolve to a pinned
+ * file; resolution is the bundler's, recorded by the build, never guessed. */
+export function requireWitnessedModules(cohort: ReactCohort, resolved: ReadonlyMap<string, string>) {
+  for (const module of cohort.mountedModules ?? []) {
+    const file = resolved.get(module);
+    if (!file || !Object.hasOwn(cohort.witnessFiles, file)) refuse("witness-files-incomplete");
+  }
+}
 const components = (node: ReactCaseElement): Array<{ module: string; export: string }> => [
   ...("module" in node ? [{ module: node.module, export: node.export }] : []),
   ...(node.children ?? []).flatMap((child) => (typeof child === "string" ? [] : components(child))),
@@ -221,7 +233,7 @@ const components = (node: ReactCaseElement): Array<{ module: string; export: str
  * so a declaration can select what is mounted but cannot author code. The
  * runtime contract is the built-in entry's: `?case=`, the same refusal for an
  * unknown id, `#root`, and a `React` binding the structure observer extends. */
-export function reactCasesEntry(
+function reactCasesEntry(
   cases: ReadonlyArray<{ id: string; mount: ReactCaseElement }>,
   sideEffectImports: readonly string[],
 ) {
@@ -293,6 +305,8 @@ export function parseReactCases(bytes: Buffer | string, file = reactCasesFile): 
       ([name, hash]) =>
         !/^[A-Za-z0-9_@.][A-Za-z0-9_@./-]*$/.test(name) ||
         name.split("/").some((part) => part === ".." || part === "." || part === "") ||
+        // The declaration cannot witness itself; its bytes are identity already.
+        name === reactCasesFile ||
         !/^[a-f0-9]{64}$/.test(hash),
     )
   )
@@ -333,6 +347,7 @@ export function parseReactCases(bytes: Buffer | string, file = reactCasesFile): 
     witnessFiles,
     negativeCaseIds: cases.filter((c) => c.negativeControl).map((c) => c.id),
     declaration: { file, sha256 },
+    mountedModules: [...new Set(cases.flatMap((c) => components(c.mount)).map((c) => c.module).filter((m) => m.startsWith("./")))].sort(),
   };
 }
 

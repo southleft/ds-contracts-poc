@@ -22,14 +22,10 @@ export const reactWitnessFiles: Record<string, string> = {
     "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
 };
 export function reactWitnessesMatch(reference: ReactReference) {
-  const roots = Object.keys(reference.files)
-    .filter((f) => f.endsWith("/src/index.css"))
-    .map((f) => f.slice(0, -"/src/index.css".length));
   return (
-    roots.length === 1 &&
     Object.keys(reference.cohort.witnessFiles).length > 0 &&
     Object.entries(reference.cohort.witnessFiles).every(
-      ([file, hash]) => reference.files[path.join(roots[0], file)] === hash,
+      ([file, hash]) => reference.files[path.join(reference.sourceRoot, file)] === hash,
     )
   );
 }

@@ -228,7 +228,7 @@ for (const nested of [false, true]) test(`original ${nested ? 'nested' : 'root'}
 
 /** The observed role decides the class, never the export name: this fixture's
  * export is called Checkbox and renders a switch. */
-async function observeRole(role: string, partial: boolean) {
+async function observeRole(role: string, partial: boolean, roleExpression = JSON.stringify(role)) {
   mkdirSync("private", { recursive: true });
   const dir = mkdtempSync(path.join(process.cwd(), "private/callback-role-fixture-"));
   const browser = await chromium.launch();
@@ -237,7 +237,7 @@ async function observeRole(role: string, partial: boolean) {
   type State=${partial ? "false|true|'partial'" : "false|true"};
   export function Checkbox({value,initialValue=false,emit}:{value?:State;initialValue?:State;emit?:(value:State)=>void}){
    const [local,setLocal]=React.useState<State>(initialValue);const current=value===undefined?local:value;
-   return <button id="control" type="button" role=${JSON.stringify(role)} aria-checked={current===true?'true':current===false?'false':'mixed'} onClick={()=>{
+   return <button id="control" type="button" role={${roleExpression}} aria-checked={current===true?'true':current===false?'false':'mixed'} onClick={()=>{
     const next=current===true?false:true;if(value===undefined)setLocal(next);emit?.(next);
    }}>Choose</button>;
   }`;
@@ -281,4 +281,10 @@ test("a switch is observed by its role like a checkbox; a mixed switch and roles
   const radio = await observeRole("radio", false);
   assert.deepEqual(radio.problems, ["callback-control-role-unsupported"]);
   assert.equal(radio.role, undefined);
+  // Both roles are members, but one observation describes one member: a source
+  // whose role follows its input is refused, not recorded under its first role.
+  const changing = await observeRole("switch", false, "value===true?'checkbox':'switch'");
+  assert.deepEqual(changing.problems, ["callback-control-role-changed"]);
+  assert.equal(changing.role, "switch");
+  assert.deepEqual(changing.relationships, []);
 });

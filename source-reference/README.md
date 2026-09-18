@@ -38,11 +38,11 @@ Without a declaration the built-in shadcn cohort above is used, and its entry by
 }
 ```
 
-A `mount` element is either a component (`module` and `export`) or a host element (`tag`), each with optional JSON `props` and `children` (strings or further elements). `subject` is the export name rendered at the case's root; the structure observation selects the root instance by it. A `witness` maps onto `SourceProfile` in `check.ts`: `path`, optional `fontPath`, optional `associatedLabelText`, `requiredStyles`, and optional `probes` with `path`, `styles` and `properties`. `fontFamily` and `requiredTokens` apply to every case. `witnessFiles` pins the sha256 of the source files the witnesses were authored from.
+A `mount` element is either a component (`module` and `export`) or a host element (`tag`), each with optional JSON `props` and `children` (strings or further elements). `subject` is the export name rendered at the case's root; the structure observation selects the root instance by it. A `witness` maps onto `SourceProfile` in `check.ts`: `path`, optional `fontPath`, optional `associatedLabelText`, `requiredStyles`, and optional `probes` with `path`, `styles` and `properties`. `fontFamily` and `requiredTokens` apply to every case. `witnessFiles` pins the sha256 of the source files the witnesses were authored from. It must include the resolved source file of every `./`-relative module the cases mount (`./src/components/ui/badge` resolves to `src/components/ui/badge.tsx`; resolution is the bundler's, recorded by the build), so a changed component source always forces renewed witnesses. It cannot name the declaration itself.
 
 Witnesses are authored by the workspace owner from the source's own CSS, tokens and font metadata. They are an independent check of the capture and must never be sampled from converter output. A changed source file requires renewed witnesses.
 
-The entry program is generated deterministically: component imports are deduplicated, sorted and aliased, side-effect imports keep their declared order because stylesheet order is cascade order, elements are built with `React.createElement`, and every declared string reaches the program only through `JSON.stringify`. The declaration's bytes are recorded with the other source files, so editing it produces a new reference identity and invalidates the loaded reference.
+The entry program is generated deterministically: component imports are deduplicated, sorted and aliased, side-effect imports keep their declared order because stylesheet order is cascade order, elements are built with `React.createElement`, and every declared string reaches the program only through `JSON.stringify`. The declaration's bytes are recorded with the other source files, so editing or removing it produces a new reference identity and invalidates the loaded reference. The reverse holds too: once anything exists at the declaration path, usable or not, a reference loaded from the built-in cohort is stale and must be reloaded.
 
 The workspace must still provide `package.json`, `package-lock.json`, `tsconfig.json`, `src/index.css` and `capture-input.css`, which the reference records unconditionally, and component modules must live under `src/` as `.tsx` for the API and structure readers to select them.
 
@@ -63,7 +63,12 @@ A declaration is refused by name rather than partially applied. **Load React ori
 | `react-cases-mount-invalid`, `react-cases-children-invalid`, `react-cases-too-deep` | A malformed element, or nesting deeper than 12 levels. |
 | `react-cases-id-invalid`, `react-cases-id-duplicate` | A case id must match `^[a-z][a-z-]{0,79}$` and be unique. |
 | `react-cases-negative-control-required` | Each distinct `subject` needs exactly one case with `"negativeControl": true`. |
-| `react-cases-tokens-invalid`, `react-cases-witness-files-invalid`, `react-cases-witness-invalid` | Empty or malformed tokens, pinned files or witness. |
+| `react-cases-tokens-invalid`, `react-cases-witness-files-invalid`, `react-cases-witness-invalid` | Empty or malformed tokens, pinned files or witness, or a pinned path that is the declaration itself. |
+| `react-cases-witness-files-incomplete` | A mounted `./`-relative module resolves to a source file that `witnessFiles` does not pin. Reported when the reference is built. |
+
+Two limits of a declaration are the owner's responsibility, not something the app can check. A `subject` is matched by export name only: two different components exported under one name from different modules count as one subject. And one negative control per subject is only as strong as the owner's honesty about subjects: declaring unlike components under one subject reduces how many cases must reject every corruption.
+
+Native operations created from another cohort are not offered for **Follow the current source** when the loaded cohort has no case with that id, and the action refuses them with `react-source-succession-case-not-in-cohort`.
 
 Interaction and callback observation covers the ARIA checked-state toggle class by observed role: `checkbox`, and `switch` with `true`/`false` only, since ARIA defines no mixed switch. A witness that states `probes.state.properties.ariaChecked` (with `disabled` and `associatedLabelText`) has its label and Space-key interactions exercised; one that states none is not treated as a toggle. Other roles are refused by name. Switch observation is covered by automated tests and has not been demonstrated live.
 

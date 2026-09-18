@@ -14,7 +14,7 @@ function fixture(t: test.TestContext, change: (row: any) => void = () => {}) {
   const repo = mkdtempSync(path.join(tmpdir(), 'reuse-family-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const source = path.join(repo, 'original.tsx'); writeFileSync(source, 'original');
-  const reference = { id: 'a'.repeat(64), css: '', javascript: '', files: { [source]: evidenceSha(Buffer.from('original')) }, cohort: builtinReactCohort };
+  const reference = { id: 'a'.repeat(64), css: '', javascript: '', files: { [source]: evidenceSha(Buffer.from('original')) }, cohort: builtinReactCohort, sourceRoot: repo };
   const row = { id: 'button-default', matched: true, problems: [], ownership: {
     components: [{ roots: [''], source: { file: 'component.tsx', exportName: 'Control' } }],
   }, propertyMatrix: { heldProps: { tone: 'default', disabled: false, children: { kind: 'array' } } },

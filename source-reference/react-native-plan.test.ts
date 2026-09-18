@@ -352,7 +352,7 @@ test('host-selected React evidence reopens after restart and refuses changed sou
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const { input } = inputFixture(), file = path.join(repo, 'source.tsx');
   writeFileSync(file, 'unchanged source');
-  const reference = { id: 'a'.repeat(64), files: { [file]: evidenceSha('unchanged source') }, javascript: '', css: '', cohort: builtinReactCohort };
+  const reference = { id: 'a'.repeat(64), files: { [file]: evidenceSha('unchanged source') }, javascript: '', css: '', cohort: builtinReactCohort, sourceRoot: repo };
   const report: ReactOwnershipReport = { id: input.operation.id, referenceId: reference.id, state: 'complete', acceptedContract: null,
     denominator: 1, matched: 1, sourceUnchanged: true, rows: [{ id: 'button-default', matched: true, problems: [], rootMatrix: input.matrix }] };
   const dir = path.join(repo, 'private/react-source-ownership', reference.id, report.id); mkdirSync(dir, { recursive: true });

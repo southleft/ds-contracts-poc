@@ -42,6 +42,9 @@ const badgeSource =
 const avatarSource =
   "import React from 'react';export const Avatar=(props)=> <span data-slot=\"avatar\" {...props}/>;";
 const badge = { module: "./src/components/ui/badge", export: "Badge" };
+/** `<!--` then `<script` once put the HTML parser in the double-escaped script
+ * state: the real closing tag was swallowed and the page mounted nothing. */
+const hostileText = 'A <!-- <script> </script> "quoted"';
 const witness = {
   path: ['[data-slot="badge"]'],
   requiredStyles: { display: "inline" },
@@ -54,7 +57,7 @@ const declaration = () => ({
   fontFamily: "Inter",
   sideEffectImports: ["./tailwind.css"],
   requiredTokens: { "--original": "red" },
-  witnessFiles: { "src/components/ui/badge.tsx": sha(badgeSource) },
+  witnessFiles: { "src/components/ui/badge.tsx": sha(badgeSource), "src/components/ui/avatar.tsx": sha(avatarSource) },
   cases: [
     {
       id: "badge-row",
@@ -64,7 +67,7 @@ const declaration = () => ({
         tag: "div",
         props: { style: { display: "flex", gap: 8 } },
         children: [
-          { ...badge, children: ["A </script> \"quoted\""] },
+          { ...badge, children: [hostileText] },
           { module: "./src/components/ui/avatar", export: "Avatar" },
         ],
       },
@@ -164,7 +167,7 @@ test("entry generation is deterministic, byte-stable and carries declared string
     'const known = ["badge-row","badge-default"];',
     "if (!known.includes(selected)) throw Error('Unknown reference case');",
     "const mounts = new Map([",
-    '["badge-row",()=>React.createElement("div",{"style":{"display":"flex","gap":8}},React.createElement(__c1,null,"A </script> \\"quoted\\""),React.createElement(__c0,null))],',
+    '["badge-row",()=>React.createElement("div",{"style":{"display":"flex","gap":8}},React.createElement(__c1,null,"A <!-- <script> </script> \\"quoted\\""),React.createElement(__c0,null))],',
     '["badge-default",()=>React.createElement(__c1,{"title":"status"},"New")],',
     "]);",
     "createRoot(document.getElementById('root')).render(mounts.get(selected)());",
@@ -216,6 +219,7 @@ test("every unusable declaration is refused by name", () => {
     ["witness-files-invalid", (d) => (d.witnessFiles = { "../badge.tsx": sha("x") })],
     ["witness-files-invalid", (d) => (d.witnessFiles = { "/abs/badge.tsx": sha("x") })],
     ["witness-files-invalid", (d) => (d.witnessFiles = { "src/badge.tsx": "not-a-hash" })],
+    ["witness-files-invalid", (d) => (d.witnessFiles["ds-contracts.react.json"] = sha("self"))],
     ["cases-invalid", (d) => (d.cases = [])],
     ["cases-invalid", (d) => (d.cases = {})],
     ["too-large", (d) => (d.cases = Array.from({ length: 65 }, (_, i) => ({ ...d.cases[1], id: "badge-" + "a".repeat(i + 1) })))],
@@ -306,9 +310,12 @@ test("a declaration's bytes are part of the reference identity; its absence chan
     const builtin = await buildReactReference(root);
     assert.equal(builtin.cohort, builtinReactCohort);
     assert.ok(!Object.keys(builtin.files).some((f) => f.endsWith(reactCasesFile)));
+    assert.ok(reactReferenceUnchanged(builtin));
     put(reactCasesFile, JSON.stringify(declaration()));
+    assert.equal(reactReferenceUnchanged(builtin), false, "a declaration added after load makes the built-in reference stale");
     const declared = await buildReactReference(root);
     assert.equal(declared.cohort.declared, true);
+    assert.ok(reactReferenceUnchanged(declared));
     assert.notEqual(declared.id, builtin.id);
     // The build records real paths, so the entry is found by name.
     assert.equal(Object.entries(declared.files).find(([f]) => f.endsWith("/" + reactCasesFile))?.[1], sha(JSON.stringify(declaration())));
@@ -325,10 +332,109 @@ test("a declaration's bytes are part of the reference identity; its absence chan
     assert.equal(reactWitnessesMatch(await buildReactReference(root)), false);
     // Removing the declaration restores the built-in identity exactly.
     put("src/components/ui/badge.tsx", badgeSource);
+    const current = await buildReactReference(root);
+    assert.ok(reactReferenceUnchanged(current));
     rmSync(path.join(root, reactCasesFile));
+    assert.equal(reactReferenceUnchanged(current), false, "a removed declaration invalidates the reference built from it");
     assert.equal((await buildReactReference(root)).id, builtin.id);
+    assert.ok(reactReferenceUnchanged(builtin), "and the built-in reference is current again");
+    // Anything at the declaration path stales a built-in reference, usable or not.
+    for (const broken of ["{not json", JSON.stringify({ version: 2 })]) {
+      put(reactCasesFile, broken);
+      assert.equal(reactReferenceUnchanged(builtin), false, broken);
+      rmSync(path.join(root, reactCasesFile));
+    }
+    mkdirSync(path.join(root, reactCasesFile));
+    assert.equal(reactReferenceUnchanged(builtin), false, "a directory at the declaration path");
+    rmSync(path.join(root, reactCasesFile), { recursive: true });
+    symlinkSync(path.join(root, "missing-target.json"), path.join(root, reactCasesFile));
+    assert.equal(reactReferenceUnchanged(builtin), false, "a dangling symlink at the declaration path");
+    rmSync(path.join(root, reactCasesFile));
+    // A declared reference whose file becomes a symlink to identical bytes is stale too.
+    put(reactCasesFile, JSON.stringify(declaration()));
+    const regular = await buildReactReference(root);
+    put("copy.json", JSON.stringify(declaration()));
+    rmSync(path.join(root, reactCasesFile));
+    symlinkSync(path.join(root, "copy.json"), path.join(root, reactCasesFile));
+    assert.equal(reactReferenceUnchanged(regular), false);
   } finally {
     rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("witnesses must pin the resolved source of every mounted workspace module; a vacuous map is refused", async () => {
+  const { root, put } = fixture();
+  try {
+    // Pinning only a file that never changes would let a changed component keep its witnesses.
+    put(reactCasesFile, edited((d) => (d.witnessFiles = { "package.json": sha('{"type":"module"}') })));
+    await assert.rejects(buildReactReference(root), /^Error: react-cases-witness-files-incomplete$/);
+    // Every mounted module, not just the subject's: Avatar is mounted beside Badge.
+    put(reactCasesFile, edited((d) => delete d.witnessFiles["src/components/ui/avatar.tsx"]));
+    await assert.rejects(buildReactReference(root), /^Error: react-cases-witness-files-incomplete$/);
+    // Resolution is the bundler's: the specifier has no extension, the pinned file does.
+    put(reactCasesFile, edited((d) => (d.witnessFiles = { "src/components/ui/badge": sha(badgeSource), "src/components/ui/avatar": sha(avatarSource) })));
+    await assert.rejects(buildReactReference(root), /^Error: react-cases-witness-files-incomplete$/);
+    put(reactCasesFile, JSON.stringify(declaration()));
+    const reference = await buildReactReference(root);
+    assert.ok(reactWitnessesMatch(reference));
+    assert.deepEqual(reference.cohort.mountedModules, ["./src/components/ui/avatar", "./src/components/ui/badge"]);
+    // A changed component source without renewed witnesses: covered, and no longer matching.
+    put("src/components/ui/avatar.tsx", avatarSource + "\n// changed\n");
+    const changed = await buildReactReference(root);
+    assert.notEqual(changed.id, reference.id);
+    assert.equal(reactWitnessesMatch(changed), false);
+    assert.equal(builtinReactCohort.mountedModules, undefined, "the built-in cohort already pins its component files and is unchanged");
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("a loaded built-in reference is refused once a declaration appears; operations of another cohort are not offered", async () => {
+  const { root, put } = fixture(true);
+  const repo = mkdtempSync(path.join(tmpdir(), "react-cohort-repo-"));
+  const operation = (n: number) => `10000000-0000-4000-8000-00000000000${n}`;
+  const moved = [
+    { operationId: operation(1), caseId: "button-default", kind: "root", followedReferenceId: "f".repeat(64), fileKey: "k", phase: "component-structure-observed" },
+    { operationId: operation(2), caseId: "badge-default", kind: "root", followedReferenceId: "f".repeat(64), fileKey: "k", phase: "component-structure-observed" },
+  ];
+  const adopted: string[] = [];
+  const handle = createReactReferenceService(repo, root, () => ({
+    jobs: { listReact: () => [], listReactMoved: () => moved, withReadSnapshot: (read: () => unknown) => read(),
+      reactSuccessionSubject: (id: string) => ({ kind: "react-root-draft", caseId: moved.find((m) => m.operationId === id)!.caseId }) },
+    transport: {}, successions: { adopt: (id: string) => adopted.push(id) }, updateJobs: { updateHistory: () => [] },
+  }) as any);
+  const server = createServer((req, res) => void handle(req, res, new URL(req.url!, "http://localhost").pathname.replace("/api/source-reference/", "")));
+  server.listen(0, "127.0.0.1");
+  await once(server, "listening");
+  const base = `http://127.0.0.1:${(server.address() as { port: number }).port}/api/source-reference`;
+  try {
+    const builtin = await (await fetch(base + "/react", { method: "POST" })).json();
+    assert.equal(builtin.source, "shadcn source sandbox");
+    assert.deepEqual((await (await fetch(base + `/react/${builtin.id}/native`)).json()).moved.map((m: { caseId: string }) => m.caseId), ["button-default"],
+      "the built-in cohort offers its own moved operation and not another cohort's");
+    assert.equal((await fetch(base + `/react/${builtin.id}?case=button-default`)).status, 200);
+    put(reactCasesFile, "{not json");
+    assert.equal((await fetch(base + `/react/${builtin.id}?case=button-default`)).status, 409, "a broken declaration added after load");
+    put(reactCasesFile, JSON.stringify(declaration()));
+    assert.equal((await fetch(base + `/react/${builtin.id}?case=button-default`)).status, 409, "a usable declaration added after load");
+    const declared = await (await fetch(base + "/react", { method: "POST" })).json();
+    assert.notEqual(declared.id, builtin.id);
+    assert.deepEqual((await (await fetch(base + `/react/${declared.id}/native`)).json()).moved.map((m: { caseId: string }) => m.caseId), ["badge-default"],
+      "an operation whose case this cohort does not have cannot follow it and is not offered");
+    // The action itself refuses by name; hiding the offer is not the guard.
+    const refused = await fetch(base + `/react/${declared.id}/native-operation/${operation(1)}/adopt-source`, { method: "POST" });
+    assert.equal(refused.status, 409);
+    assert.equal((await refused.json()).reason, "react-source-succession-case-not-in-cohort");
+    assert.deepEqual(adopted, []);
+    put(reactCasesFile, edited((d) => (d.witnessFiles = { "package.json": sha('{"type":"module"}') })));
+    const vacuous = await fetch(base + "/react", { method: "POST" });
+    assert.equal(vacuous.status, 409);
+    assert.equal((await vacuous.json()).reason, "react-cases-witness-files-incomplete");
+  } finally {
+    handle.close();
+    server.close();
+    rmSync(root, { recursive: true, force: true });
+    rmSync(repo, { recursive: true, force: true });
   }
 });
 
@@ -387,7 +493,14 @@ test("the generated entry keeps the built-in runtime contract and accepts the st
   };
   const row = await render("badge-row", reactReferenceHtml(observed));
   await row.page.locator('[data-slot="badge"]').waitFor({ timeout: 15000 });
-  assert.equal(await row.page.locator('[data-slot="badge"]').textContent(), 'A </script> "quoted"', "declared text is data, never markup or code");
+  assert.equal(await row.page.locator('[data-slot="badge"]').textContent(), hostileText, "declared text is data, never markup or code");
+  // The extra escaping touches only `<!--`. `<script` stays as written: alone it
+  // is inert, and the built-in bundle contains it, so rewriting it would change
+  // the bytes of a reference.html that is already saved for that reference.
+  const inert = { css: "a{}", javascript: 'const a="<script>";const b="</script>";' };
+  assert.equal(reactReferenceHtml(inert), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>a{}</style></head><body style="padding:32px"><div id="root"></div><script>const a="<script>";const b="<\\/script>";</script></body></html>`);
+  assert.ok(reactReferenceHtml({ css: "", javascript: 'const c="<!--";' }).includes('const c="\\x3C!--";'));
+  assert.ok(!reactReferenceHtml(observed).slice(reactReferenceHtml(observed).indexOf("<script>")).includes("<!--"));
   assert.equal(await row.page.locator('#root > div > [data-slot="avatar"]').count(), 1);
   assert.equal(await row.page.locator("#root > div").evaluate((node) => getComputedStyle(node).gap), "8px");
   assert.deepEqual(await row.page.evaluate(() => {
