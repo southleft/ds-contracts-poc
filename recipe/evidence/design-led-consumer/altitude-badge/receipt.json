@@ -1,0 +1,676 @@
+{
+  "version": 1,
+  "kind": "design-led-clean-consumer-check",
+  "acceptedContract": null,
+  "qualification": "unqualified",
+  "component": "Badge",
+  "fileKey": "y83n4o9LOGs74oAoguFcGS",
+  "generatedSha256": {
+    "Badge/Badge.module.css": "0483950277cf342c75952ca281e36543cfd66dc158f1b129cf2d5162834fbe72",
+    "Badge/Badge.tsx": "e7fd834efc62ba308e6c1d4ed1d0dac9b8cec1ea73953e8700e62c9dd05e8b1c",
+    "Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "index.ts": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
+    "tokens.css": "49544e5db0e14b90e24420cf69f061fbae937a40c2d520a9d8a7257e04328677"
+  },
+  "cases": [
+    {
+      "key": "variant-danger_shape-label",
+      "figmaName": "Variant=Danger, Shape=Label",
+      "nodeId": "3538:35762",
+      "props": {
+        "variant": "danger",
+        "shape": "label"
+      },
+      "rendered": {
+        "text": "Badge",
+        "backgroundColor": "rgb(56, 25, 28)",
+        "color": "rgb(0, 0, 0)",
+        "width": 52.265625,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-danger_shape-label.png"
+    },
+    {
+      "key": "variant-neutral_shape-label",
+      "figmaName": "Variant=Neutral, Shape=Label",
+      "nodeId": "3538:35764",
+      "props": {
+        "variant": "neutral",
+        "shape": "label"
+      },
+      "rendered": {
+        "text": "Badge",
+        "backgroundColor": "rgb(121, 116, 105)",
+        "color": "rgb(0, 0, 0)",
+        "width": 52.265625,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-neutral_shape-label.png"
+    },
+    {
+      "key": "variant-info_shape-label",
+      "figmaName": "Variant=Info, Shape=Label",
+      "nodeId": "3538:35766",
+      "props": {
+        "variant": "info",
+        "shape": "label"
+      },
+      "rendered": {
+        "text": "Badge",
+        "backgroundColor": "rgb(43, 58, 99)",
+        "color": "rgb(0, 0, 0)",
+        "width": 52.265625,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-info_shape-label.png"
+    },
+    {
+      "key": "variant-success_shape-label",
+      "figmaName": "Variant=Success, Shape=Label",
+      "nodeId": "3538:35768",
+      "props": {
+        "variant": "success",
+        "shape": "label"
+      },
+      "rendered": {
+        "text": "Badge",
+        "backgroundColor": "rgb(20, 48, 31)",
+        "color": "rgb(0, 0, 0)",
+        "width": 52.265625,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-success_shape-label.png"
+    },
+    {
+      "key": "variant-warning_shape-label",
+      "figmaName": "Variant=Warning, Shape=Label",
+      "nodeId": "3538:35770",
+      "props": {
+        "variant": "warning",
+        "shape": "label"
+      },
+      "rendered": {
+        "text": "Badge",
+        "backgroundColor": "rgb(47, 38, 16)",
+        "color": "rgb(0, 0, 0)",
+        "width": 52.265625,
+        "height": 20,
+        "tag": "div",
+        "role": null,
+        "font": {
+          "family": "\"Public Sans\"",
+          "weight": "600",
+          "size": "12px",
+          "available": true
+        }
+      },
+      "screenshot": "consumer-variant-warning_shape-label.png"
+    },
+    {
+      "key": "variant-danger_shape-dot",
+      "figmaName": "Variant=Danger, Shape=Dot",
+      "nodeId": "3625:17418",
+      "props": {
+        "variant": "danger",
+        "shape": "dot"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(56, 25, 28)",
+        "color": "rgb(0, 0, 0)",
+        "width": 8,
+        "height": 8,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-danger_shape-dot.png"
+    },
+    {
+      "key": "variant-neutral_shape-dot",
+      "figmaName": "Variant=Neutral, Shape=Dot",
+      "nodeId": "3625:17420",
+      "props": {
+        "variant": "neutral",
+        "shape": "dot"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(121, 116, 105)",
+        "color": "rgb(0, 0, 0)",
+        "width": 8,
+        "height": 8,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-neutral_shape-dot.png"
+    },
+    {
+      "key": "variant-info_shape-dot",
+      "figmaName": "Variant=Info, Shape=Dot",
+      "nodeId": "3625:17422",
+      "props": {
+        "variant": "info",
+        "shape": "dot"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(43, 58, 99)",
+        "color": "rgb(0, 0, 0)",
+        "width": 8,
+        "height": 8,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-info_shape-dot.png"
+    },
+    {
+      "key": "variant-success_shape-dot",
+      "figmaName": "Variant=Success, Shape=Dot",
+      "nodeId": "3625:17424",
+      "props": {
+        "variant": "success",
+        "shape": "dot"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(20, 48, 31)",
+        "color": "rgb(0, 0, 0)",
+        "width": 8,
+        "height": 8,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-success_shape-dot.png"
+    },
+    {
+      "key": "variant-warning_shape-dot",
+      "figmaName": "Variant=Warning, Shape=Dot",
+      "nodeId": "3625:17426",
+      "props": {
+        "variant": "warning",
+        "shape": "dot"
+      },
+      "rendered": {
+        "text": "",
+        "backgroundColor": "rgb(47, 38, 16)",
+        "color": "rgb(0, 0, 0)",
+        "width": 8,
+        "height": 8,
+        "tag": "div",
+        "role": null,
+        "font": null
+      },
+      "screenshot": "consumer-variant-warning_shape-dot.png"
+    }
+  ],
+  "behavior": {
+    "text": {
+      "prop": "text",
+      "textBearingCells": [
+        "variant-danger_shape-label",
+        "variant-neutral_shape-label",
+        "variant-info_shape-label",
+        "variant-success_shape-label",
+        "variant-warning_shape-label"
+      ],
+      "changedCells": [
+        "variant-danger_shape-label",
+        "variant-neutral_shape-label",
+        "variant-info_shape-label",
+        "variant-success_shape-label",
+        "variant-warning_shape-label"
+      ]
+    },
+    "arrays": [],
+    "children": {
+      "contractDeclaresSlot": false,
+      "renderedAtRuntime": false,
+      "refusedByType": false
+    },
+    "variants": [
+      {
+        "prop": "variant",
+        "switchedTo": "neutral",
+        "cellsExpectedToChange": [
+          "variant-danger_shape-label",
+          "variant-info_shape-label",
+          "variant-success_shape-label",
+          "variant-warning_shape-label",
+          "variant-danger_shape-dot",
+          "variant-info_shape-dot",
+          "variant-success_shape-dot",
+          "variant-warning_shape-dot"
+        ],
+        "cellsChanged": [
+          "variant-danger_shape-label",
+          "variant-info_shape-label",
+          "variant-success_shape-label",
+          "variant-warning_shape-label",
+          "variant-danger_shape-dot",
+          "variant-info_shape-dot",
+          "variant-success_shape-dot",
+          "variant-warning_shape-dot"
+        ]
+      },
+      {
+        "prop": "shape",
+        "switchedTo": "label",
+        "cellsExpectedToChange": [
+          "variant-danger_shape-dot",
+          "variant-neutral_shape-dot",
+          "variant-info_shape-dot",
+          "variant-success_shape-dot",
+          "variant-warning_shape-dot"
+        ],
+        "cellsChanged": [
+          "variant-danger_shape-dot",
+          "variant-neutral_shape-dot",
+          "variant-info_shape-dot",
+          "variant-success_shape-dot",
+          "variant-warning_shape-dot"
+        ]
+      }
+    ]
+  },
+  "images": {
+    "status": "figma-images-collected",
+    "reason": null,
+    "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (whitespace-trimmed, pixelmatch threshold 0.1, no text mask)",
+    "limitPercent": 5,
+    "cases": [
+      {
+        "key": "variant-danger_shape-label",
+        "figmaImage": "figma-3538_35762.png",
+        "mismatchPercent": 17.36842105263158,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 91.89,
+          "figma": 94.39
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-neutral_shape-label",
+        "figmaImage": "figma-3538_35764.png",
+        "mismatchPercent": 15.789473684210526,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 93.58,
+          "figma": 94.39
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-info_shape-label",
+        "figmaImage": "figma-3538_35766.png",
+        "mismatchPercent": 17.192982456140353,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 91.89,
+          "figma": 94.39
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-success_shape-label",
+        "figmaImage": "figma-3538_35768.png",
+        "mismatchPercent": 17.280701754385966,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 90.19,
+          "figma": 94.39
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 54,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 54,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-warning_shape-label",
+        "figmaImage": "figma-3538_35770.png",
+        "mismatchPercent": 18.771929824561404,
+        "withinLimit": false,
+        "inkCoveragePercent": {
+          "consumer": 91.89,
+          "figma": 94.39
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 53,
+            "height": 20
+          },
+          "figma": {
+            "width": 57,
+            "height": 20
+          }
+        }
+      },
+      {
+        "key": "variant-danger_shape-dot",
+        "figmaImage": "figma-3625_17418.png",
+        "mismatchPercent": 0,
+        "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        }
+      },
+      {
+        "key": "variant-neutral_shape-dot",
+        "figmaImage": "figma-3625_17420.png",
+        "mismatchPercent": 0,
+        "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        }
+      },
+      {
+        "key": "variant-info_shape-dot",
+        "figmaImage": "figma-3625_17422.png",
+        "mismatchPercent": 0,
+        "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        }
+      },
+      {
+        "key": "variant-success_shape-dot",
+        "figmaImage": "figma-3625_17424.png",
+        "mismatchPercent": 0,
+        "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        }
+      },
+      {
+        "key": "variant-warning_shape-dot",
+        "figmaImage": "figma-3625_17426.png",
+        "mismatchPercent": 0,
+        "withinLimit": true,
+        "inkCoveragePercent": {
+          "consumer": 83.33,
+          "figma": 93.75
+        },
+        "contentSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        },
+        "screenshotSize": {
+          "consumer": {
+            "width": 9,
+            "height": 8
+          },
+          "figma": {
+            "width": 8,
+            "height": 8
+          }
+        }
+      }
+    ]
+  },
+  "problems": [
+    "children-accepted-but-discarded",
+    "image-difference-above-limit:variant-danger_shape-label:17.37%",
+    "content-size-mismatch:variant-danger_shape-label:53x20 vs 57x20",
+    "image-difference-above-limit:variant-neutral_shape-label:15.79%",
+    "content-size-mismatch:variant-neutral_shape-label:53x20 vs 57x20",
+    "image-difference-above-limit:variant-info_shape-label:17.19%",
+    "content-size-mismatch:variant-info_shape-label:53x20 vs 57x20",
+    "image-difference-above-limit:variant-success_shape-label:17.28%",
+    "content-size-mismatch:variant-success_shape-label:54x20 vs 57x20",
+    "image-difference-above-limit:variant-warning_shape-label:18.77%",
+    "content-size-mismatch:variant-warning_shape-label:53x20 vs 57x20"
+  ],
+  "limitations": [
+    "single component set; composition, nested instances and instance swaps are not exercised here",
+    "declared behavior beyond text and variant props is not exercised",
+    "accessibility is not measured beyond the rendered element"
+  ],
+  "inputs": {
+    "degradations": {
+      "variables-unavailable": 1,
+      "variable-unresolved": 85,
+      "text-channel-unsupported": 5
+    },
+    "stubContracts": [],
+    "componentFolders": [
+      "Badge"
+    ]
+  },
+  "package": {
+    "name": "@ds-contracts-generated/badge",
+    "tarballSha256": "a3edd06cde4919ff47ef92ac223bd6f785fa59520e339ecde4a50da7d83bdd40",
+    "distFiles": [
+      "Badge",
+      "Badge/Badge.d.ts",
+      "Badge/Badge.js",
+      "Badge/Badge.module.css",
+      "Badge/index.d.ts",
+      "Badge/index.js",
+      "index.d.ts",
+      "index.js",
+      "tokens.css"
+    ]
+  },
+  "consumer": {
+    "react": ">=18",
+    "installedVersion": "0.0.0-generated",
+    "lockfileSha256": "22987f69976693d087b2a7097d8453d20b5ae93ca74c00b331d79b6f506dbcf1",
+    "repoPathInLockfile": false,
+    "repoPathInInstalledFiles": [],
+    "builtCss": {
+      "bytes": 16559,
+      "tokenDefinitions": 303,
+      "tokenDefinitionsExpected": 303
+    }
+  },
+  "outcome": "refused-or-failed"
+}
