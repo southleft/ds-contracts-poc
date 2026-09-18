@@ -110,3 +110,60 @@ const resolve: Resolver = new Function('canonicalJson',
 export function resolveNativeSlotIdentities(creation: Row, rows: Row[], anchorRows?: Row[]): Row[] | null {
   return resolve(creation, rows, anchorRows);
 }
+
+/** Figma also re-identifies caller content placed in a nested instance's slot
+ * after a save or reload: a born `12:34` reads back as `I<instance>;<slot>;<n>`.
+ * Contract-draft graphs record no slot roles, so resolve those rows only by
+ * their durable allocation stamp, born type/key and live slot topology under a
+ * born instance. Inherited main sublayers keep their main's stamp and are not
+ * candidates: a row is caller content only when its nearest SLOT-or-INSTANCE
+ * ancestor is a SLOT. Names are never consulted. Returns null on a duplicate
+ * or unrelated stamp so the caller refuses instead of guessing. */
+export function resolveNativeGraphSlotIdentities(creation: Row, rows: Row[]): Row[] | null {
+  try {
+    const born = new Map<string, Row>(creation.nodes.map((n: Row) => [n.id, n]));
+    const live = new Map<string, Row>(rows.map((n) => [n.id, n]));
+    if (live.size !== rows.length) return null;
+    const bornInstance = (row: Row | undefined) => {
+      if (!row || row.type !== 'INSTANCE') return false;
+      if (born.has(row.id)) return born.get(row.id)!.type === 'INSTANCE';
+      const stamp = row.metadata?.nativeSourceAllocation;
+      return typeof stamp === 'string' && born.get(stamp)?.type === 'INSTANCE';
+    };
+    const boundary = (row: Row) => {
+      const seen = new Set<string>([row.id]);
+      for (let cursor = live.get(row.parentId); cursor && !seen.has(cursor.id); cursor = live.get(cursor.parentId)) {
+        seen.add(cursor.id);
+        if (cursor.type === 'SLOT' || cursor.type === 'INSTANCE') return cursor;
+      }
+      return undefined;
+    };
+    const aliases = new Map<string, string>();
+    const claimed = new Set<string>();
+    for (const n of rows) {
+      if (born.has(n.id)) continue;
+      const slot = boundary(n);
+      if (!slot || slot.type !== 'SLOT') continue;
+      const stamp = n.metadata?.nativeSourceAllocation;
+      if (typeof stamp !== 'string' || !born.has(stamp)) continue;
+      // A stamped copy beside its still-present original is a duplicate.
+      if (live.has(stamp) || claimed.has(stamp)) return null;
+      const original = born.get(stamp)!;
+      if (n.type !== original.type || (original.key && original.key !== n.key)) return null;
+      // The slot owns the re-identified ID and sits inside an instance that
+      // this operation created (directly or through the same bridge).
+      if (!n.id.startsWith(`${slot.id};`) || !bornInstance(boundary(slot))) return null;
+      claimed.add(stamp);
+      aliases.set(n.id, stamp);
+    }
+    if (!aliases.size) return rows;
+    return rows.map((n) => ({
+      ...n,
+      id: aliases.get(n.id) ?? n.id,
+      parentId: aliases.get(n.parentId) ?? n.parentId,
+      childIds: n.childIds.map((id: string) => aliases.get(id) ?? id),
+    }));
+  } catch {
+    return null;
+  }
+}

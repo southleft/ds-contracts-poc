@@ -1,6 +1,6 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
-import { resolveNativeSlotIdentities } from "./native-slot-identity.js";
+import { resolveNativeSlotIdentities, resolveNativeGraphSlotIdentities } from "./native-slot-identity.js";
 import { NATIVE_GRID_FIELDS, NATIVE_GRID_CHILD_FIELDS, nativeGridProblems } from './native-grid-observation.js';
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
@@ -414,8 +414,17 @@ function verifyReadback(
     problems.push("native-source-observation-node-inventory");
     return report();
   }
-  // Empty draft mains have exact allocation IDs. Only recorded comparison
-  // slot descendants may use the source workflow's clone-identity bridge.
+  // Empty draft mains have exact allocation IDs. Recorded comparison slot
+  // descendants use the source workflow's clone-identity bridge; caller content
+  // inside a graph draft's nested instance slots resolves by allocation stamp.
+  if (!exactIds && isContractDraft(input) && input.graphComponents) {
+    const resolved = resolveNativeGraphSlotIdentities(c, rows);
+    if (!resolved) {
+      problems.push("native-source-observation-node-inventory");
+      return report();
+    }
+    rows = resolved;
+  }
   if (!exactIds && !isContractDraft(input)) {
     const anchor = input.allocationAnchor;
     if (

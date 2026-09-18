@@ -648,7 +648,56 @@ test('native caller graph owns linked instances, preserves borrowed internals an
   assert.equal(caller.characters, 'Caller caption');
   assert.ok(receipt.nodes.some((n: any) => !creation.nodes.some((born: any) => born.id === n.id)),
     'independent readback inventories inherited instance sublayers without mutating them');
+
+  // Figma re-identifies caller content inside a nested instance's slot after a
+  // save or reload (`12:34` becomes `I<instance>;<slot>;<n>`). The rows keep
+  // their allocation stamp, type and slot topology; nothing else may relax.
+  const settled = settledGraphSlotReceipt(creation, receipt);
+  assert.equal(verifyNativeContractReadback(input, settled).status, 'supported-structure-observed', 'settled slot IDs');
+  const settledRows = (r: any) => r.nodes.filter((n: any) => n.id.includes(';settled:'));
+  const tampered: Array<[string, (r: any) => void]> = [
+    ['missing allocation stamp', r => { settledRows(r)[0].metadata.nativeSourceAllocation = ''; }],
+    ['copied allocation stamp', r => { const s = settledRows(r)[0], copy = structuredClone(s); copy.id = `${s.id}-copy`;
+      r.nodes.find((n: any) => n.id === s.parentId).childIds.push(copy.id); r.nodes.push(copy); }],
+    ['original still present beside its copy', r => { const s = settledRows(r)[0]; r.nodes.push({ ...structuredClone(s), id: s.metadata.nativeSourceAllocation }); }],
+    ['changed node type', r => { settledRows(r)[0].type = 'RECTANGLE'; }],
+    ['ID outside the owning slot', r => { const s = settledRows(r)[0], old = s.id; s.id = 'foreign:1';
+      for (const n of r.nodes) { n.childIds = n.childIds.map((id: string) => id === old ? s.id : id); if (n.parentId === old) n.parentId = s.id; } }],
+    ['moved out of the slot', r => { const s = settledRows(r)[0], parent = r.nodes.find((n: any) => n.id === s.parentId), page = r.nodes.find((n: any) => n.id === creation.pageId);
+      parent.childIds = parent.childIds.filter((id: string) => id !== s.id); s.parentId = page.id; page.childIds.push(s.id); }],
+    ['changed caller text', r => { settledRows(r).find((n: any) => n.type === 'TEXT').values.characters = 'Changed'; }],
+    ['foreign owner', r => { settledRows(r)[0].metadata.nativeSourceOperation = '{}'; }],
+  ];
+  for (const [name, mutate] of tampered) {
+    const changed = structuredClone(settled); mutate(changed);
+    assert.equal(verifyNativeContractReadback(input, changed).status, 'refused', name);
+  }
 });
+
+/** Rewrites every born caller-content row under a nested instance's slot to a
+ * slot-derived ID, as Figma does after a reload, preserving stamps and topology. */
+function settledGraphSlotReceipt(creation: any, receipt: any) {
+  const out = structuredClone(receipt);
+  const born = new Set<string>(creation.nodes.map((n: any) => n.id));
+  const rows = new Map<string, any>(out.nodes.map((n: any) => [n.id, n]));
+  const boundary = (row: any) => {
+    for (let cursor = rows.get(row.parentId); cursor; cursor = rows.get(cursor.parentId))
+      if (cursor.type === 'SLOT' || cursor.type === 'INSTANCE') return cursor;
+    return undefined;
+  };
+  const aliases = new Map<string, string>();
+  out.nodes.forEach((n: any, i: number) => {
+    const slot = boundary(n);
+    if (born.has(n.id) && slot?.type === 'SLOT') aliases.set(n.id, `${slot.id};settled:${i}`);
+  });
+  assert.ok(aliases.size > 0, 'fixture must place caller content inside a nested instance slot');
+  for (const n of out.nodes) {
+    n.id = aliases.get(n.id) ?? n.id;
+    n.parentId = aliases.get(n.parentId) ?? n.parentId;
+    n.childIds = n.childIds.map((id: string) => aliases.get(id) ?? id);
+  }
+  return out;
+}
 
 test('composition resources preserve colliding token values and caller property references across native compilation', () => {
   const { parent, child } = family();
