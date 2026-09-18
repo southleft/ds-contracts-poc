@@ -76,7 +76,7 @@ populate the child's existing native slot, replacing its design defaults only
 on that instance. It preserves parent property scope and child typography,
 including supported flex, grid and nested slot locations. Full-width children
 require a definite column or grid context; grid content must fit declared or
-managed rows. Caller-owned text can bind to parent TEXT properties. Exposing
+managed rows. Caller-owned text inside a child slot stays directly editable on the canvas; Figma cannot bind it to a parent TEXT property, so the native generator lowers such a mapping to canvas content and reports it as editable canvas text. Exposing
 eligible direct child controls does not create arbitrary property aliases across
 nested instances. This writer path has test-host coverage; live canvas behavior,
 automatic source integration and reverse reconstruction remain unqualified.

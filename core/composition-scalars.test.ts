@@ -621,6 +621,7 @@ test('native caller graph owns linked instances, preserves borrowed internals an
     frame: { component: { id: frame.id }, parts: {
       caption: { content: { prop: 'caption' }, tokens: { color: '{ink}' }, declared: { 'font-family': 'Inter' } },
     } },
+    spare: { component: { id: frame.id } },
   } } });
   parent.props = [{ name: 'caption', type: 'text', default: 'Caller caption',
     bindings: { code: { prop: 'caption' }, figma: { kind: 'TEXT', property: 'Caption' } } }];
@@ -667,6 +668,12 @@ test('native caller graph owns linked instances, preserves borrowed internals an
       parent.childIds = parent.childIds.filter((id: string) => id !== s.id); s.parentId = page.id; page.childIds.push(s.id); }],
     ['changed caller text', r => { settledRows(r).find((n: any) => n.type === 'TEXT').values.characters = 'Changed'; }],
     ['foreign owner', r => { settledRows(r)[0].metadata.nativeSourceOperation = '{}'; }],
+    ['content dropped into an unfilled inherited slot', r => {
+      const born = new Set(creation.nodes.map((n: any) => n.id));
+      const slot = r.nodes.find((n: any) => n.type === 'SLOT' && !born.has(n.id) && n.childIds.length === 0);
+      assert.ok(slot, 'fixture keeps one inherited slot unfilled');
+      r.nodes.push({ id: 'foreign:rect', type: 'RECTANGLE', name: 'dropped', parentId: slot.id, childIds: [], values: {}, metadata: {} });
+      slot.childIds.push('foreign:rect'); }],
   ];
   for (const [name, mutate] of tampered) {
     const changed = structuredClone(settled); mutate(changed);

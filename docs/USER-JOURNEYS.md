@@ -68,7 +68,8 @@ On a saved operation, **Prepare caller-content comparison** reads its original t
 1. Choose **Generate React composition** to review the nested component identities and any source-context differences.
 2. Choose **Inspect Checkbox states in composition**, then **Inspect Checkbox behavior in composition**. The app observes the child inside its original Card, including inherited styles and its associated label, and verifies restoration of the full original after each trial.
 3. Choose **Generate React composition** again to use the contextual evidence. **Try generated composition** opens two independent copies with editable content and state controls.
-4. Choose **Check native composition** to compile the same parent and dependencies for Figma. This is a compilation review; delivery of this graph and native editability verification remain unfinished.
+4. Choose **Check native composition** to compile the same parent and dependencies for Figma. This is a compilation review that creates no Figma objects.
+5. Choose **Prepare native graph operation**, connect the companion in the authorized file, then **Create and inspect native graph**. The app creates the dependency mains and parent variants in one operation, reads the parent structure back independently, and shows the unchanged React source beside the native default variant at original pixel scale. Dependency internals are verified by identity only; visual fidelity remains unqualified.
 
 Completed state and behavior observations reopen on a repeat action. Failed attempts remain recorded. A standalone component observation cannot establish that it behaves or renders identically inside another component.
 

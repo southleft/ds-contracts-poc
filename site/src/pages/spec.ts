@@ -1159,7 +1159,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           overrides:
             'Per-instance channel overrides — see <a href="#ref-overrides">below</a>.',
         }) +
-        `<p>On a nested component ref, <code>parts</code> can supply caller-owned React content through the child’s unique, unconstrained <code>children</code> slot. Bindings remain in parent scope while each child keeps its implementation and state. The native generator can populate the child’s existing slot without changing its main; test-host checks cover flex/grid layouts, nested slot locations and parent-bound caller text. Live native behavior, automatic source integration and reverse reconstruction still require verification.</p>` +
+        `<p>On a nested component ref, <code>parts</code> can supply caller-owned React content through the child’s unique, unconstrained <code>children</code> slot. Bindings remain in parent scope while each child keeps its implementation and state. The native generator can populate the child’s existing slot without changing its main; test-host checks cover flex/grid layouts and nested slot locations; caller text inside a slot stays canvas-editable because Figma cannot bind it to a parent TEXT property. Live native behavior, automatic source integration and reverse reconstruction still require verification.</p>` +
         refusals("Refusals:", [
           "unknown child contracts; cycles (<code>a contract cannot compose itself</code>)",
           "setting an unknown child prop, or an <code>arrayOf</code> child prop — structured values cannot be fixed in anatomy",

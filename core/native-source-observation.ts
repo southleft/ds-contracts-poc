@@ -700,6 +700,34 @@ function verifyReadback(
       };
       descend(n);
       for (const row of descendants) if (borrowedIds.has(row.id)) checked.add(row.id);
+      // Inherited slots the parent leaves unfilled are the only place a canvas
+      // edit can add content inside an instance. They must mirror the main's
+      // own slot children exactly (empty for reusable mains); every child is
+      // paired by type and by the allocation stamp of the main's node.
+      const filledKeys = new Set<string>();
+      for (const slotSpec of spec.children ?? []) for (const [candidate, definition] of Object.entries(depTarget?.definitions ?? {}) as Array<[string, any]>)
+        if (definition.type === 'SLOT' && (candidate === slotSpec.callerSlotProperty || candidate.startsWith(slotSpec.callerSlotProperty + '#'))) filledKeys.add(candidate);
+      const slotsOf = (root: Record<string, any> | undefined, stopAt: Set<string>) => {
+        const found = new Map<string, Record<string, any>>(); const seen = new Set<string>();
+        const walk = (row: Record<string, any>) => { for (const id of row.childIds) {
+          const child = nodes.get(id); if (!child || seen.has(id)) continue; seen.add(id);
+          const key = child.type === 'SLOT' ? child.values.componentPropertyReferences?.slotContentId : undefined;
+          if (typeof key === 'string') { if (found.has(key)) issue('native-contract-observation-inherited-slot', child); found.set(key, child); if (stopAt.has(key)) continue; }
+          walk(child);
+        } };
+        if (root) walk(root);
+        return found;
+      };
+      const mainRow = nodes.get(n.mainId), mainSlots = slotsOf(mainRow, new Set());
+      for (const [key, slot] of slotsOf(n, filledKeys)) {
+        if (filledKeys.has(key)) continue;
+        const mainSlot = mainSlots.get(key);
+        if (!mainRow || !mainSlot) { issue('native-contract-observation-inherited-slot', slot); continue; }
+        if (slot.childIds.length !== mainSlot.childIds.length || slot.childIds.some((id: string, index: number) => {
+          const child = nodes.get(id), mainChild = nodes.get(mainSlot.childIds[index]);
+          return !child || !mainChild || child.type !== mainChild.type || child.metadata.nativeSourceAllocation !== mainChild.id;
+        })) issue('native-contract-observation-inherited-slot-content', slot);
+      }
       for (const slotSpec of spec.children ?? []) {
         const key = depTarget && Object.entries(depTarget.definitions ?? {}).filter(([candidate, definition]: [string, any]) =>
           definition.type === 'SLOT' && (candidate === slotSpec.callerSlotProperty || candidate.startsWith(slotSpec.callerSlotProperty + '#'))).map(([candidate]) => candidate);
