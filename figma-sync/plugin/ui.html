@@ -879,11 +879,14 @@
       ? { type: 'native-connect', connection: connection }
       : { type: 'native-poll' } }, '*');
     $('native-connection').value = '';
+    startNativePolling();
+  };
+  function startNativePolling(resumeOnly) {
     if (nativeTimer) clearInterval(nativeTimer);
     nativeTimer = setInterval(function () {
-      parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
+      parent.postMessage({ pluginMessage: { type: 'native-poll', resumeOnly: !!resumeOnly } }, '*');
     }, 3000);
-  };
+  }
   $('native-disconnect').onclick = function () {
     if (nativeTimer) clearInterval(nativeTimer);
     nativeTimer = null;
@@ -2024,14 +2027,20 @@
     if (msg.type === 'init') {
       currentFileKey = msg.fileKey || '';
       syncSurfaces();
+
       // The remembered "drift last checked" line is per FILE — a timestamp
       // from another file would be a small lie.
       parent.postMessage({ pluginMessage: { type: 'ui-state-load', key: DRIFT_STATE_KEY + ':' + currentFileKey } }, '*');
     } else if (msg.type === 'ui-state') {
       if (msg.key === DRIFT_STATE_KEY + ':' + currentFileKey) showDriftLastChecked(msg.value);
+    } else if (msg.type === 'native-resume') {
+      // The controller holds a saved result or an interrupted command for this
+      // file. Finishing that needs no new consent; anything new still does.
+      parent.postMessage({ pluginMessage: { type: 'native-poll', resumeOnly: true } }, '*');
+      startNativePolling(true);
     } else if (msg.type === 'native-status') {
       $('native-status').textContent = msg.message || msg.status;
-      if (msg.status === 'disconnected') {
+      if (msg.status === 'disconnected' || msg.status === 'resume-complete') {
         if (nativeTimer) clearInterval(nativeTimer);
         nativeTimer = null;
       }

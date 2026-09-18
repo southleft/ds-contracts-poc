@@ -34,6 +34,10 @@ export type NativeContractUpdatePlan = NativeDefaultFillUpdatePlan | NativeOpaci
 export function prepareNativeContractUpdate(input: NativeContractUpdateInput): { plan: NativeContractUpdatePlan; revision: string } {
   return prepareNativeDefaultFillUpdate(input, prepareOpacityUpdate) ?? prepareNativeBackgroundUpdate(input, prepareOpacityUpdate) ?? prepareNativeSvgUpdate(input, prepareOpacityUpdate) ?? prepareNativeShadowUpdate(input, prepareOpacityUpdate) ?? prepareNativeRootSizeUpdate(input, prepareOpacityUpdate) ?? prepareOpacityUpdate(input);
 }
+/** Figma stores opacity as IEEE-754 float32: writing 0.4 reads back as
+ * 0.4000000059604645. Exact, or the float32 image of the intended value; no
+ * wider tolerance. The same policy already governs colours, strokes and grids. */
+const stored = (actual: unknown, expected: number) => actual === expected || actual === Math.fround(expected);
 function prepareOpacityUpdate(input: NativeContractUpdateInput) {
   if (!/^sha256:[a-f0-9]{64}$/.test(input.desired.revision) ||
       verifyNativeContractReadback(input.before, input.baseline).status !== 'supported-structure-observed')
@@ -46,7 +50,9 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput) {
     const desired = input.desired.tokenInput.modes.find(m => m.sourceMode === mode.sourceMode && m.brand === mode.brand && m.nativeModeName === mode.nativeModeName);
     if (!desired) throw Error('native-update-token-mode-unsupported');
     const oldTokens = flattenTokens(mode.tokens), newTokens = flattenTokens(desired.tokens);
-    for (const [name, value] of oldTokens) if (!equal(value, newTokens.get(name))) throw Error('native-update-bound-token-change-unsupported');
+    // Name the token: an operator cannot resolve "a token changed".
+    for (const [name, value] of oldTokens) if (!equal(value, newTokens.get(name)))
+      throw Error('native-update-bound-token-change-unsupported:' + (newTokens.has(name) ? 'changed' : 'removed') + ';' + name.replace(/[^A-Za-z0-9._-]/g, '_').slice(0, 60));
   }
   const before = structuredClone(input.before); delete before.allocationAnchor;
   const after = structuredClone(before), desired = structuredClone(input.desired.component);
@@ -69,7 +75,7 @@ function prepareOpacityUpdate(input: NativeContractUpdateInput) {
     const target = next.opacity ?? 1;
     if (!scalar(target)) throw Error('native-update-opacity-invalid');
     updated.opacity = target;
-    if (rows[0].values.opacity !== target) changes.push({ nodeId: rows[0].id, variant: old.nativeContractPart.variant,
+    if (!stored(rows[0].values.opacity, target)) changes.push({ nodeId: rows[0].id, variant: old.nativeContractPart.variant,
       part: old.nativeContractPart.specPath.length ? old.name : 'Component', before: rows[0].values.opacity, after: target });
     old.children?.forEach((child, i) => visit(child, next.children![i], updated.children![i]));
   }
@@ -104,6 +110,16 @@ export function verifyNativeContractUpdate(plan: NativeContractUpdatePlan, recei
   return result;
 }
 
+/** True only when a fresh readback is the saved baseline itself: no part of the
+ * update reached the canvas and nothing else moved. Conservative by design; a
+ * readback that is neither this nor the completed update stays unresolved. */
+export function nativeContractUpdateUntouched(plan: NativeContractUpdatePlan, receipt: unknown): boolean {
+  try {
+    const normalized = structuredClone(receipt) as NativeSourceReadback;
+    delete normalized.images;
+    return equal(normalized, plan.baseline) && verifyNativeContractReadback(plan.before, normalized).status === 'supported-structure-observed';
+  } catch { return false; }
+}
 /** Independently check a preflight or completed update against the complete
  * saved observation, allowing only the pinned scalar transitions. */
 export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, receipt: unknown, complete = false): boolean {
@@ -117,7 +133,7 @@ export function nativeContractUpdateMatches(plan: NativeContractUpdatePlan, rece
     delete normalized.images;
     for (const change of plan.changes) {
       const row = normalized.nodes?.find(n => n.id === change.nodeId);
-      if (!row || !(complete ? [change.after] : [change.before, change.after]).includes(row.values.opacity)) return false;
+      if (!row || !(complete ? [change.after] : [change.before, change.after]).some(value => stored(row.values.opacity, value))) return false;
       row.values.opacity = change.before;
     }
     return equal(normalized, plan.baseline) && verifyNativeContractReadback(plan.before, normalized).status === 'supported-structure-observed';
@@ -144,6 +160,7 @@ const out = { version: 1, kind: 'native-contract-update-result', direction, stat
 const canonical = value => JSON.stringify((function sort(v) { if (Array.isArray(v)) return v.map(sort); if (v && typeof v === 'object') return Object.fromEntries(Object.keys(v).sort().filter(k => v[k] !== undefined).map(k => [k, sort(v[k])])); return v; })(value));
 const clean = value => { const copy = JSON.parse(JSON.stringify(value)); delete copy.images; return copy; };
 const attempted = [];
+const stored = (actual, expected) => actual === expected || actual === Math.fround(expected);
 try {
   if (figma.fileKey !== plan.before.operation.fileKey) throw Error('native-update-file-mismatch');
   const nodes = new Map();
@@ -157,7 +174,7 @@ try {
   const states = [];
   for (const change of plan.changes) {
     const row = normalized.nodes?.find(n => n.id === change.nodeId), node = nodes.get(change.nodeId);
-    if (!row || ![change.before, change.after].includes(row.values.opacity) || node.opacity !== row.values.opacity || node.boundVariables?.opacity)
+    if (!row || ![change.before, change.after].some(value => stored(row.values.opacity, value)) || node.opacity !== row.values.opacity || node.boundVariables?.opacity)
       throw Error('native-update-opacity-conflict:' + change.nodeId);
     states.push({ nodeId: change.nodeId, value: row.values.opacity });
     row.values.opacity = change.before;
@@ -169,7 +186,7 @@ try {
   // precondition checks and writes. Every attempt is recorded before assignment.
   for (const change of plan.changes) {
     const node = nodes.get(change.nodeId), target = direction === 'apply' ? change.after : change.before;
-    if (node.opacity === target) continue;
+    if (stored(node.opacity, target)) continue;
     attempted.push({ node, change, previous: node.opacity });
     node.opacity = target;
     out.changes.push(change.nodeId);
@@ -177,7 +194,12 @@ try {
   out.observation = await (async () => { ${emitNativeContractReadbackScript(expected)} })();
   const expectedAfter = clean(plan.baseline);
   for (const change of plan.changes) expectedAfter.nodes.find(n => n.id === change.nodeId).values.opacity = direction === 'apply' ? change.after : change.before;
-  if (canonical(clean(out.observation)) !== canonical(expectedAfter)) throw Error('native-update-postcondition-conflict');
+  const observedAfter = clean(out.observation);
+  for (const change of plan.changes) {
+    const row = observedAfter.nodes?.find(n => n.id === change.nodeId), value = direction === 'apply' ? change.after : change.before;
+    if (row && stored(row.values.opacity, value)) row.values.opacity = value;
+  }
+  if (canonical(observedAfter) !== canonical(expectedAfter)) throw Error('native-update-postcondition-conflict');
   out.status = out.changes.length ? 'updated' : 'no-op';
 } catch (error) {
   out.problems.push(error && error.message ? error.message : String(error));
@@ -185,7 +207,7 @@ try {
   for (const attempt of attempted.reverse()) {
     try {
       const target = direction === 'apply' ? attempt.change.after : attempt.change.before;
-      if (attempt.node.opacity === target) attempt.node.opacity = attempt.previous;
+      if (stored(attempt.node.opacity, target)) attempt.node.opacity = attempt.previous;
       if (attempt.node.opacity !== attempt.previous) unrestored.push(attempt.change.nodeId);
     } catch { unrestored.push(attempt.change.nodeId); }
   }
