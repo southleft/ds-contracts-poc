@@ -18,13 +18,13 @@ export const Tab = forwardRef<HTMLSpanElement, TabProps>(function Tab(
   { state = 'default', active = 'yes', text = 'Tab label', className, children, ...rest },
   ref,
 ) {
-  // axis-inert (ledgered, not a throw): state — no `.<axis>-*` rule
-  // exists in Tab.module.css, so no class is composed for it. A reference
+  // axis-inert (ledgered, not a throw): state, active — no `.<axis>-*` rule
+  // exists in Tab.module.css, so no class is composed for them. A reference
   // to an unemitted class resolves to `undefined` and is filtered out, so emitting
-  // one only made a style-less axis LOOK styled. Whatever this axis carries rides
+  // one only made a style-less axis LOOK styled. Whatever these axes carry rides
   // structure (a gated part, a per-value text/icon lookup, a child's own props) —
   // or, where the source drew no difference at all, nothing.
-  const classes = [styles.root, styles[`active-${active}`], className].filter(Boolean).join(' ');
+  const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
       <span className={styles.text}>{text}</span>

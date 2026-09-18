@@ -2,8 +2,8 @@
   "_provenance": {
     "fileKey": "y83n4o9LOGs74oAoguFcGS",
     "extractedAt": "2026-09-18",
-    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.32) for design→contract proposal.",
-    "dumpVersion": "1.32",
+    "note": "Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.33) for design→contract proposal.",
+    "dumpVersion": "1.33",
     "captureGaps": [
       "variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent; FIX: regenerate the token with file_variables:read and re-run",
       "absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line",
@@ -93,6 +93,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
             },
@@ -144,6 +145,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
             },
@@ -195,6 +197,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
             },
@@ -246,6 +249,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
             },
@@ -297,6 +301,7 @@
               "fontStyle": "Semi Bold",
               "lineHeight": 20,
               "fontFamily": "Public Sans",
+              "letterSpacing": 1,
               "style": "typography/body/xs/semibold",
               "styleKey": "f4824c932c7ad35b74ec8a73a8638f3a8b0d9081"
             },
@@ -522,11 +527,6 @@
       "message": "fill: variable id VariableID:386:753 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Badge:Variant=Danger, Shape=Label/Badge",
-      "message": "text: text channel(s) with no dump v1 projection: letterSpacing 1 — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Badge:Variant=Neutral, Shape=Label",
       "message": "itemSpacing: variable id VariableID:3653:29281 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
@@ -570,11 +570,6 @@
       "code": "variable-unresolved",
       "nodePath": "Badge:Variant=Neutral, Shape=Label/Badge",
       "message": "fill: variable id VariableID:386:741 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Badge:Variant=Neutral, Shape=Label/Badge",
-      "message": "text: text channel(s) with no dump v1 projection: letterSpacing 1 — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",
@@ -622,11 +617,6 @@
       "message": "fill: variable id VariableID:386:747 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Badge:Variant=Info, Shape=Label/Badge",
-      "message": "text: text channel(s) with no dump v1 projection: letterSpacing 1 — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Badge:Variant=Success, Shape=Label",
       "message": "itemSpacing: variable id VariableID:3653:29281 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
@@ -672,11 +662,6 @@
       "message": "fill: variable id VariableID:386:749 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
     },
     {
-      "code": "text-channel-unsupported",
-      "nodePath": "Badge:Variant=Success, Shape=Label/Badge",
-      "message": "text: text channel(s) with no dump v1 projection: letterSpacing 1 — typography carries (fontSize, fontStyle, style identity) only"
-    },
-    {
       "code": "variable-unresolved",
       "nodePath": "Badge:Variant=Warning, Shape=Label",
       "message": "itemSpacing: variable id VariableID:3653:29281 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
@@ -720,11 +705,6 @@
       "code": "variable-unresolved",
       "nodePath": "Badge:Variant=Warning, Shape=Label/Badge",
       "message": "fill: variable id VariableID:386:751 unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); regenerate the token with file_variables:read and re-run; resolved value used meanwhile"
-    },
-    {
-      "code": "text-channel-unsupported",
-      "nodePath": "Badge:Variant=Warning, Shape=Label/Badge",
-      "message": "text: text channel(s) with no dump v1 projection: letterSpacing 1 — typography carries (fontSize, fontStyle, style identity) only"
     },
     {
       "code": "variable-unresolved",

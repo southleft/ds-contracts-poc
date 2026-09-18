@@ -89,6 +89,9 @@
           "declared": {
             "font-family": "Public Sans"
           },
+          "literals": {
+            "letter-spacing": "1px"
+          },
           "content": {
             "prop": "text"
           },
