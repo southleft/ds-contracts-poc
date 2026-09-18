@@ -4,7 +4,7 @@ import {captureJs} from '../extract/computed/capture.js';
 import {evidenceSha} from './react-validation-evidence.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdirSync,mkdtempSync,writeFileSync,rmSync} from 'node:fs';
+import {mkdirSync,mkdtempSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import path from 'node:path';
 import {build} from 'esbuild';
 import {chromium} from 'playwright-core';
@@ -84,6 +84,14 @@ test('real React property experiments preserve context and distinguish delivered
   assert.equal(initialStates.rows.length,3);assert.deepEqual(initialStates.problems,[]);
   assert(initialStates.rows.every(r=>r.status==='observed'&&r.restored),JSON.stringify(initialStates.rows));
   assert.equal(initialStates.rows[1].visibleChange,true);assert.equal(initialStates.rows[0].visibleChange,false);
+  const selectedBounds=await page.locator('input[aria-label="initial"]').boundingBox();
+  for(const row of initialStates.rows){
+   const snapshot=JSON.parse(readFileSync(path.join(dir,'initial-states',row.id+'.json'),'utf8'));
+   assert.equal(snapshot.initialSelection.instanceId,id('Initial'));
+   assert.equal(snapshot.initialSelection.path,'1');
+   assert.deepEqual(snapshot.initialSelection.bounds,selectedBounds,'nested frames measure the exact child in its original parent');
+   assert.equal(snapshot.tree.tag,'section','the full parent remains the restoration and integrity boundary');
+  }
   assert.deepEqual(await observe(),baseline);
   const plan=planReactPropertyEffects(program,ownership,tree,id('Surface'));
   assert.deepEqual(plan.plan.map(p=>p.requested),[{kind:'set',value:'quiet'},{kind:'set',value:'loud'},{kind:'omit'}]);

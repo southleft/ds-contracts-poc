@@ -4,6 +4,7 @@
 import { ContractSchema, walkAnatomy, type Contract, type Part } from '../scripts/contract-schema.js';
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 import { emitReactInline } from '../core/emit-react-inline.js';
+import type { NodeSpec } from '../core/emit-figma-script.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { flatten, type CapturedNode } from '../extract/computed/lib.js';
 import { compileObservedContent, prepareObservedContentTree } from './observed-content.js';
@@ -67,11 +68,24 @@ export function compareReactCallerContext(generated: CapturedNode | undefined, s
   });
   return same(a, b) ? differences : undefined;
 }
-export function projectReactCallerComposition(input: {
+export interface ReactCallerCompositionInput {
   program: ReactSourceProgram; ownership: ReactOwnership; tree: CapturedNode; origin: ReactStyleOrigin;
   fonts: TextFontEvidence; svg: SvgViewportEvidence; grids?: GridConstraintEvidence; labels: LabelAssociationEvidence;
   behaviors: ReactCallerBehavior[];
-}): ReactCallerComposition {
+}
+export interface ReactCallerCompositionResources {
+  contractId: string;
+  tokens: Record<string, unknown>;
+  assets: Array<[string, string]>;
+}
+/** Host-side resources are kept separate from the public React preview. */
+export function projectReactCallerComposition(input: ReactCallerCompositionInput): ReactCallerComposition {
+  return projectReactCallerCompositionGraph(input).draft;
+}
+export function projectReactCallerCompositionGraph(input: ReactCallerCompositionInput): {
+  draft: ReactCallerComposition; resources: ReactCallerCompositionResources[];
+} {
+  let resources: ReactCallerCompositionResources[] = [];
   const result: ReactCallerComposition = { status: 'refused', problems: [], identities: [], children: [], contextDifferences: [], inputRevision: revisionOf(input),
     limitations: ['observed-composition-context-only', 'unobserved-layout-and-property-planes-unqualified', 'native-caller-property-mapping-unqualified',
       'external-fonts-not-bundled', 'generated-consumer-not-installed', 'visual-fidelity-not-qualified'] };
@@ -83,7 +97,7 @@ export function projectReactCallerComposition(input: {
     const labels = verifiedLabelAssociations(tree, input.labels);
     const boundaries = ownership.components.flatMap(c => c.roots).filter(path => path !== '');
     const content = compileObservedContent(tree, fonts, svg, true, boundaries);
-    if (content.status !== 'compiled-comparison-draft' || content.problems.length || !content.contract || !content.tokens || !content.sourcePaths)
+    if (content.status !== 'compiled-comparison-draft' || content.problems.length || !content.contract || !content.tokens || !content.sourcePaths || content.component?.variants.length !== 1)
       throw Error('react-caller-content-unavailable');
     const contract = structuredClone(content.contract);
     contract.id = 'observed.caller-' + result.inputRevision.slice(7, 23); contract.name = 'GeneratedSourceComposition';
@@ -122,8 +136,27 @@ export function projectReactCallerComposition(input: {
     const own = (part: Part) => { ownedParts.add(part); Object.values(part.parts ?? {}).forEach(own); };
     for (const child of anatomy.instances.filter(c => c.content === 'authored-or-runtime'))
       for (const root of child.roots) own(partAt(root.path));
+    // The content compiler has already resolved CSS aliases against the
+    // observed painted fonts. Keep that identity on caller text before its
+    // ancestor is replaced with a dependency: the dependency's empty slot can
+    // otherwise reintroduce a CSS font-family alias that is not a native font.
+    const nativeParts = new Map<string, NodeSpec[]>();
+    const indexNativePart = (spec: NodeSpec) => {
+      nativeParts.set(spec.name, [...(nativeParts.get(spec.name) ?? []), spec]);
+      spec.children?.forEach(indexNativePart);
+    };
+    indexNativePart(content.component.variants[0].spec);
     let textIndex = 0;
-    for (const { part } of walkAnatomy(contract)) if (!ownedParts.has(part) && typeof part.text === 'string') {
+    for (const { part, name } of walkAnatomy(contract)) if (!ownedParts.has(part) && typeof part.text === 'string') {
+      const matches = nativeParts.get(name) ?? [], texts: NodeSpec[] = [];
+      const collectText = (spec: NodeSpec) => {
+        if (spec.type === 'text' && spec.characters === part.text) texts.push(spec);
+        spec.children?.forEach(collectText);
+      };
+      if (matches.length === 1) collectText(matches[0]);
+      if (texts.length !== 1 || !texts[0].fontFamily)
+        throw Error('react-caller-text-font-correspondence-unavailable:' + name);
+      part.declared = { ...part.declared, 'font-family': JSON.stringify(texts[0].fontFamily) };
       const prop = `content${++textIndex}`;
       contract.props.push({ name: prop, type: 'text', default: part.text,
         bindings: { code: { prop }, figma: { kind: 'NONE' } } });
@@ -137,7 +170,7 @@ export function projectReactCallerComposition(input: {
       const ref: NonNullable<Part['component']> = { id: '', props: {} };
       if (child.content === 'authored-or-runtime') {
         if (child.dependencies.length) throw Error('react-caller-runtime-composition-unqualified');
-        const matches = input.behaviors.filter(candidate => {
+        const compatible = input.behaviors.filter(candidate => {
           if (!same(candidate.source, child.source)) return false;
           try {
             const variant = reactComparisonVariant(candidate.initialContract, observed.props);
@@ -146,6 +179,9 @@ export function projectReactCallerComposition(input: {
             return same(held(candidate.heldProps), held(observed.props)) && compareReactCallerContext(candidate.trees[variant], prepared.get(sourcePath)) !== undefined;
           } catch { return false; }
         });
+        const exact = compatible.filter(candidate =>
+          compareReactCallerContext(candidate.trees[reactComparisonVariant(candidate.initialContract, observed.props)], prepared.get(sourcePath))?.length === 0);
+        const matches = exact.length ? exact : compatible;
         if (matches.length !== 1) throw Error('react-caller-behavior-context-unavailable:' + sourcePath);
         const candidate = matches[0]; dependency = structuredClone(candidate.contract); childTokens = candidate.tokens; childAssets = candidate.assets;
         const context = compareReactCallerContext(candidate.trees[reactComparisonVariant(candidate.initialContract, observed.props)], prepared.get(sourcePath))!;
@@ -203,7 +239,9 @@ export function projectReactCallerComposition(input: {
     const modules = [...contracts.values()].map(c => ({ name: c.name, tsx: emitReactInline(c,
       { contracts, icons: contexts.get(c.id)!.assets, tokens: { primitives: contexts.get(c.id)!.tokens, semantic: {}, light: {}, dark: {}, brands: { default: {} } } }).tsx }));
     result.contract = ContractSchema.parse(contract); result.contracts = [...contracts.values()]; result.modules = modules;
+    resources = [...contexts].map(([contractId, context]) => ({ contractId,
+      tokens: structuredClone(context.tokens), assets: [...context.assets] }));
     result.status = 'generated-draft';
   } catch (error) { result.problems.push(error instanceof Error ? error.message : String(error)); }
-  return result;
+  return { draft: result, resources };
 }

@@ -1099,6 +1099,10 @@ export function createFigmaMock(options = {}) {
       }
       clone.boundVariables = structuredClone(this.boundVariables);
       clone.componentPropertyReferences = { ...this.componentPropertyReferences };
+      // Live Figma inherits shared plugin data onto an instance's private
+      // sublayers (measured on nested TEXT content, 2026-09-17). Preserve it
+      // so correspondence metadata is testable on the actual editable layer.
+      clone._shared = new Map(this._shared);
       if (this.type === 'TEXT') {
         for (const field of ['characters', 'fontSize', 'fontName', 'letterSpacing', 'lineHeight', 'textCase', 'textDecoration', 'textAlignHorizontal', 'textStyleId']) {
           clone[field] = this[field];

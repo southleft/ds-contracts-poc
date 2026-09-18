@@ -24,13 +24,43 @@ import { gridConstraintChannels } from './grid-constraints.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { readReactNativeEvidence, selectReactChildRequest, selectReactNativeRequest } from './react-native-evidence.js';
 import type { ReactOwnershipReport } from './react-ownership-run.js';
-import { projectReactCallerComposition, compareReactCallerContext } from './react-caller-composition.js';
+import { projectReactCallerComposition, projectReactCallerCompositionGraph, compareReactCallerContext } from './react-caller-composition.js';
+import { compileReactCallerNative } from './react-caller-native.js';
+import { isReactCallerNativeRequest, reactCallerNativeReservation } from './react-caller-native-request.js';
 import { buildReactCallerPreview } from './react-caller-preview.js';
 import { chromium } from 'playwright-core';
 import { generatedTypeErrors } from '../core/react-test-runtime.js';
+import type { NodeSpec } from '../core/emit-figma-script.js';
+
+test('caller text preserves its observed font when a component boundary replaces its inherited CSS alias', async t => {
+  const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
+  f.tree.style.width = '240px';
+  const child = f.tree.nodes[0]; assert.equal(child.t, 'el'); if (child.t !== 'el') return;
+  child.el.nodes = [{ t: 'text', v: 'Save' }];
+  child.el.style['font-family'] = '"Browser Font Alias", sans-serif';
+  f.ownership.nodes = f.ownership.nodes.filter(n => n.path !== '0.0');
+  f.fonts.treeRevision = revisionOf(f.tree);
+  f.fonts.rows[0] = { ...f.fonts.rows[0], path: [0], text: 'Save', cssFamily: child.el.style['font-family'] };
+  const input = { program: f.program, ownership: f.ownership, tree: f.tree, fonts: f.fonts,
+    svg: { version: 1 as const, treeRevision: revisionOf(f.tree), status: 'observed' as const, rows: [], problems: [] },
+    origin: { version: 1 as const, roots: [{ path: '0', tag: 'button', channels: [] }] },
+    labels: { version: 1 as const, treeRevision: revisionOf(f.tree), status: 'observed' as const, rows: [], problems: [] }, behaviors: [] };
+  const original = structuredClone(input), graph = projectReactCallerCompositionGraph(input);
+  assert.equal(graph.draft.status, 'generated-draft', graph.draft.problems.join(','));
+  const native = compileReactCallerNative(graph), text: NodeSpec[] = [];
+  const visit = (node: NodeSpec) => { if (node.callerContentProp) text.push(node); node.children?.forEach(visit); };
+  native.components.find(c => c.contractId === graph.draft.contract!.id)!.variants.forEach(v => visit(v.spec));
+  assert.equal(text.length, 1);
+  assert.equal(text[0].characters, 'Save');
+  assert.equal(text[0].fontFamily, 'Inter', 'the observed family survives caller-slot inheritance; the CSS alias is not a native font');
+  assert.deepEqual(input, original, 'source and font observations stay immutable');
+  const stale = structuredClone(input); stale.fonts.rows[0].cssFamily = 'Different alias';
+  assert.equal(projectReactCallerCompositionGraph(stale).draft.status, 'refused');
+});
 
 test('source caller projection preserves editable content and distinct generated label IDs in the real consumer', async t => {
   const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
+  f.tree.style.width = '240px';
   const button = f.tree.nodes[0]; assert.equal(button.t, 'el'); if (button.t !== 'el') return;
   f.tree.nodes.push({ t: 'el', el: { tag: 'label', classes: [], style: { ...button.el.style, display: 'inline' }, pseudo: {}, nodes: [{ t: 'text', v: 'Activate' }] } });
   f.ownership.nodes.push({ path: '1', tag: 'label', nearestComponent: 'box' });
@@ -44,6 +74,25 @@ test('source caller projection preserves editable content and distinct generated
   const draft = projectReactCallerComposition(input);
   assert.equal(draft.status, 'generated-draft', draft.problems.join(','));
   assert.equal(draft.children.length, 1); assert.equal(draft.identities.length, 1);
+  const graph = projectReactCallerCompositionGraph(input), before = structuredClone(graph);
+  assert.deepEqual(graph.draft, draft);
+  assert.equal(graph.resources.length, draft.contracts!.length);
+  const native = compileReactCallerNative(graph);
+  assert.deepEqual(graph, before, 'native projection cannot mutate the source-derived React graph');
+  assert.equal(native.report.components.length, 2);
+  assert.equal(native.report.observedWidth, 240);
+  assert.equal(native.report.observedVariant, native.components.find(c => c.contractId === draft.contract!.id)!.variants[0].name);
+  const nativeParent = native.report.components.find(c => c.contractId === draft.contract!.id)!;
+  assert.equal(nativeParent.editableTextProperties.length, 1, 'direct parent text remains a property-panel control');
+  assert.equal(nativeParent.editableCanvasText.length, 1);
+  assert.ok(nativeParent.editableCanvasText[0].property);
+  assert.ok(nativeParent.editableCanvasText[0].nodeName);
+  assert.equal(native.report.unsupportedPropertyBindings.length, 0, 'caller text is represented by a directly editable native node');
+  assert.ok(!native.report.blockers.includes('native-caller-slot-property-bindings-unsupported'));
+  assert.ok(native.report.blockers.includes('native-composition-delivery-unverified'));
+  assert.equal(compileReactCallerNative(graph).report.graphRevision, native.report.graphRevision);
+  assert.throws(() => compileReactCallerNative({ ...graph, resources: graph.resources.slice(1) }), /IDENTITIES_INVALID/);
+  assert.throws(() => compileReactCallerNative({ ...graph, draft: { ...draft, observedWidth: undefined } }), /source-unavailable/);
   const parent = draft.modules!.find(m => m.name === draft.contract!.name)!;
   assert.deepEqual(generatedTypeErrors(parent.name, parent.tsx, Object.fromEntries(draft.modules!.filter(m => m !== parent).map(m => [m.name, m.tsx]))), []);
   const output = await buildReactCallerPreview(process.cwd(), draft);
@@ -60,6 +109,22 @@ test('source caller projection preserves editable content and distinct generated
   const broken = projectReactCallerComposition({ ...input, labels: { ...input.labels, treeRevision: 'changed' } });
   assert.equal(broken.status, 'refused'); assert.equal(broken.modules, undefined);
   await assert.rejects(buildReactCallerPreview(process.cwd(), broken), /draft-unavailable/);
+});
+
+test('caller graph requests validate exact evidence while retaining one native reservation', () => {
+  const request = {
+    version: 1 as const, kind: 'react-caller-graph-draft' as const,
+    referenceId: 'a'.repeat(64), parentOperationId: '10000000-0000-4000-8000-000000000001',
+    ownership: { id: '20000000-0000-4000-8000-000000000002', sha256: 'b'.repeat(64) },
+    inventorySha256: 'c'.repeat(64), caseId: 'card-composed', graphRevision: `sha256:${'d'.repeat(64)}`,
+  };
+  assert.ok(isReactCallerNativeRequest(request));
+  const reservation = reactCallerNativeReservation(request);
+  assert.match(reservation, /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/);
+  assert.equal(reactCallerNativeReservation({ ...request, graphRevision: `sha256:${'e'.repeat(64)}` }), reservation,
+    'a changed graph cannot obtain a second native allocation behind the same source composition');
+  assert.equal(isReactCallerNativeRequest({ ...request, graphRevision: 'changed' }), false);
+  assert.equal(isReactCallerNativeRequest({ ...request, unexpected: true }), false);
 });
 
 test('caller preview reports text-free typography discrepancies but refuses changed paint, text, dimensions and structure', () => {

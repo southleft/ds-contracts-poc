@@ -4,6 +4,7 @@ import { createNativeUpdateJobs } from './native-update-jobs.js';
 import { prepareReactComparisonPlan, buildReactComparisonWrite } from './react-comparison-plan.js';
 import { createReactReferenceService } from './react-reference.js';
 import { prepareReactNativePlan, prepareReactNativeFreshPlan, prepareReactNativeCorrectionPlan, buildReactNativeComponentWrite, buildReactNativeFreshComponentWrite } from './react-native-plan.js';
+import { prepareReactCallerNativePlan, buildReactCallerNativeWrite } from './react-caller-native-plan.js';
 import { deriveLifecycleIdentityPolicy } from "./lifecycle-identity.js";
 import { loadRecordedSourceProgram } from "./source-program.js";
 import { execFile, type ChildProcess } from "node:child_process";
@@ -168,6 +169,20 @@ export function createReferenceService(
         }),
         buildComponent: (request, context) => (request.compilation === 'current' ? buildReactNativeFreshComponentWrite : buildReactNativeComponentWrite)({
           ...reactReference.nativeEvidence(request), operation: context.operation,
+          tokens: context.tokens, expectedPlanRevision: context.planRevision,
+        }),
+      },
+      reactCaller: {
+        prepare: (request, operation) => {
+          const evidence = reactReference.callerNativeEvidence(request);
+          return {
+            visual: { id: request.ownership.id, reportSha256: request.ownership.sha256 },
+            preparation: { id: request.ownership.id, reportSha256: request.graphRevision.slice(7) },
+            plan: prepareReactCallerNativePlan({ ...evidence, operation }),
+          };
+        },
+        buildComponent: (request, context) => buildReactCallerNativeWrite({
+          ...reactReference.callerNativeEvidence(request), operation: context.operation,
           tokens: context.tokens, expectedPlanRevision: context.planRevision,
         }),
       },

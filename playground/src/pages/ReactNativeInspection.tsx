@@ -43,7 +43,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
   const [busy, setBusy] = useState(false), [codes, setCodes] = useState<Record<string, string>>({});
   const [typography, setTypography] = useState<Record<string, SourceTypography>>({});
   const root = `/api/source-reference/react/${referenceId}`;
-  const active = rows.some(r => (r.connection.paired && !r.connection.finished) || r.content?.phase === 'running' || r.updates?.some(u=>u.connection?.paired&&!u.connection.finished));
+  const active = rows.some(r => (r.connection.paired && r.connection.started && !r.connection.finished) || r.content?.phase === 'running' ||
+    r.updates?.some(u => u.connection?.paired && u.connection.started && !u.connection.finished));
   useEffect(() => {
     let stopped = false, pending = false;
     const load = async () => {

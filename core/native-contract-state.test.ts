@@ -11,6 +11,75 @@ import { emitNativeContractReadbackScript, verifyNativeContractReadback, type Na
 import type { NativeTokenContextInput } from './native-token-context.js';
 import { nativeComparisonFixture } from './native-contract-comparison-test-fixture.js';
 
+test('draft text properties drive every bound text node and independent readback rejects inert or misbound controls', async () => {
+  const f = await nativeComparisonFixture();
+  const c = f.contract('fixture.editable', { root: {
+    layout: { display: 'flex', direction: 'column' },
+    declared: { 'font-family': 'Inter' }, tokens: { color: '{ink}', 'font-size': '{size}' },
+    parts: {
+      heading: { content: { prop: 'title' } },
+      repeated: { content: { prop: 'title' } },
+      caption: { content: { prop: 'caption' } },
+    },
+  } });
+  c.props = [
+    { name: 'tone', type: { enum: ['quiet', 'loud'] }, default: 'quiet',
+      bindings: { code: { prop: 'tone' }, figma: { kind: 'VARIANT', property: 'Tone' } } },
+    ...['title', 'caption'].map(name => ({ name, type: 'text' as const, default: 'Original',
+      bindings: { code: { prop: name }, figma: { kind: 'TEXT' as const, property: name } } })),
+  ];
+  const byId = new Map([[c.id, c]]), compiled = f.engine.compileNativeContractDraft(c, byId, f.source);
+  const emit = () => f.engine.buildNativeContractDraftScript(c, byId, f.source, f.supplemental);
+  const creation = await f.run(emit());
+  assert.equal(creation.status, 'created-candidate', JSON.stringify(creation));
+  const input: NativeContractObservationInput = { operation: f.supplemental.operation, planRevision: revisionOf('editable-text'),
+    projection: compiled.projection, component: compiled.component, tokenInput: f.supplemental.tokens.input,
+    tokenIdentity: f.supplemental.tokens.identity, creation };
+  const receipt = await f.run(emitNativeContractReadbackScript(input));
+  assert.equal(verifyNativeContractReadback(input, receipt).status, 'supported-structure-observed', JSON.stringify(verifyNativeContractReadback(input, receipt)));
+  const target = await f.figma.getNodeByIdAsync(creation.target.id);
+  const titleKey = Object.keys(target.componentPropertyDefinitions).find(key => key.startsWith('title#'))!;
+  const captionKey = Object.keys(target.componentPropertyDefinitions).find(key => key.startsWith('caption#'))!;
+  assert.ok(titleKey); assert.ok(captionKey);
+  assert.equal(Object.keys(target.componentPropertyDefinitions).length, 3);
+  for (const main of target.children) {
+    const first = main.createInstance(), second = main.createInstance();
+    first.setProperties({ [titleKey]: 'Changed title', [captionKey]: '' });
+    assert.deepEqual(first.findAll((n: any) => n.type === 'TEXT').map((n: any) => n.characters), ['Changed title', 'Changed title', '']);
+    assert.deepEqual(second.findAll((n: any) => n.type === 'TEXT').map((n: any) => n.characters), ['Original', 'Original', 'Original']);
+    assert.deepEqual(main.findAll((n: any) => n.type === 'TEXT').map((n: any) => n.characters), ['Original', 'Original', 'Original']);
+    first.remove(); second.remove();
+  }
+  for (const mutate of [
+    (r: any) => { r.nodes.find((n: any) => n.type === 'TEXT').values.componentPropertyReferences = {}; },
+    (r: any) => { r.nodes.find((n: any) => n.type === 'TEXT').values.componentPropertyReferences.characters = captionKey; },
+    (r: any) => { r.nodes.find((n: any) => n.type === 'TEXT').values.componentPropertyReferences.visible = titleKey; },
+    (r: any) => { r.nodes.find((n: any) => n.type === 'COMPONENT').values.componentPropertyReferences = { characters: titleKey }; },
+    (r: any) => { r.nodes.find((n: any) => n.id === target.id).definitions[titleKey].defaultValue = 'Other'; },
+    (r: any) => { r.nodes.find((n: any) => n.id === target.id).definitions['title#duplicate'] = { type: 'TEXT', defaultValue: 'Original' }; },
+  ]) {
+    const changed = structuredClone(receipt); mutate(changed);
+    // Even matching writer acknowledgement cannot authorize a different API.
+    const adjusted = structuredClone(input);
+    adjusted.creation.propertyDefinitions = structuredClone(changed.nodes.find((n: any) => n.id === target.id).definitions);
+    assert.equal(verifyNativeContractReadback(adjusted, changed).status, 'refused');
+  }
+  const count = f.figma.root.findAll(() => true).length;
+  const repeat = await f.run(emit());
+  assert.equal(repeat.status, 'refused'); assert.equal(repeat.allocationAttempted, false);
+  assert.equal(f.figma.root.findAll(() => true).length, count);
+  const inert = structuredClone(c);
+  inert.props.push({ name: 'unused', type: 'text', default: 'Unused', bindings: { code: { prop: 'unused' }, figma: { kind: 'TEXT', property: 'Unused' } } });
+  assert.throws(() => f.engine.compileNativeContractDraft(inert, new Map([[inert.id, inert]]), f.source), /MAPPING_UNQUALIFIED/);
+  const unspecified = structuredClone(c);
+  delete unspecified.props[1].default;
+  assert.throws(() => f.engine.compileNativeContractDraft(unspecified, new Map([[unspecified.id, unspecified]]), f.source), /TEXT_MAPPING_UNQUALIFIED/);
+  const empty = structuredClone(c);
+  empty.props[1].default = '';
+  assert.ok(f.engine.compileNativeContractDraft(empty, new Map([[empty.id, empty]]), f.source)
+    .component.variants.every(v => v.spec.children!.filter(n => n.contentProp === 'title').every(n => n.characters === '')));
+});
+
 test('static draft text retains native ownership, font and paint tokens through independent readback', async () => {
   const f = await nativeComparisonFixture(), c = structuredClone(f.content);
   c.anatomy.root.literals = { height: '36px' };

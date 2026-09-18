@@ -1,6 +1,6 @@
 /** Independent native observation. Creation acknowledgements supply IDs only;
  * expected semantics come from the saved host-authenticated source plan. */
-import { resolveNativeSlotIdentities } from "./native-slot-identity.js";
+import { resolveNativeSlotIdentities, resolveNativeGraphSlotIdentities } from "./native-slot-identity.js";
 import { NATIVE_GRID_FIELDS, NATIVE_GRID_CHILD_FIELDS, nativeGridProblems } from './native-grid-observation.js';
 import { canonicalJson, revisionOf } from "./contract-provenance.js";
 import type { ComponentData, NodeSpec } from "./emit-figma-script.js";
@@ -45,6 +45,8 @@ export interface NativeSourceReadback {
 }
 export interface NativeContractObservationInput extends Omit<NativeSourceObservationInput, 'projection' | 'samples'> {
   projection: NativeContractDraftProjection;
+  /** Closed operation-scoped graph, in dependency order with component last. */
+  graphComponents?: ComponentData[];
   /** Host-derived provenance for an independently verified allocation extension. */
   backgroundMigration?: {desiredRevision:string;allocationRevision:string};
 }
@@ -96,6 +98,12 @@ export function nativeShadowStackMatches(spec: NodeSpec, effects: unknown): bool
 
 function checkInput(input: NativeInspectionInput) {
   const c = input.creation;
+  const graphValid = !isContractDraft(input) || input.graphComponents === undefined ||
+    (Array.isArray(input.graphComponents) && input.graphComponents.length > 1 &&
+     same(input.graphComponents.at(-1), input.component) &&
+     new Set(input.graphComponents.map(component => component.contractId)).size === input.graphComponents.length &&
+     input.graphComponents.every(component => component.nativeContractDraft && !component.nativeSourceCandidate) &&
+     Array.isArray(c?.graphTargets) && c.graphTargets.length === input.graphComponents.length);
   if (
     !c ||
     c.status !== "created-candidate" ||
@@ -111,6 +119,7 @@ function checkInput(input: NativeInspectionInput) {
     input.tokenInput.fileKey !== input.operation.fileKey ||
     input.tokenIdentity.fileKey !== input.operation.fileKey ||
     input.tokenInput.scopeId !== `source-${input.operation.id}` ||
+    !graphValid ||
     !(isContractDraft(input) ?
       same(input.component.nativeContractDraft, { revision: revisionOf(input.projection), acceptedContract: null }) &&
       !input.component.nativeSourceCandidate && c.comparisons === undefined && c.comparisonBoardId === undefined :
@@ -153,6 +162,8 @@ export function emitNativeInspectionReadbackScript(input: NativeInspectionInput,
   const extra = input.component.variants.some(v => managedRows(v.spec)) ? ['gridFlowRows'] : [];
   const hasText = (spec: NodeSpec): boolean => spec.type === 'text' || !!spec.children?.some(hasText);
   if (isContractDraft(input) && input.component.variants.some(v => hasText(v.spec))) extra.push('fontWeightVar', 'lineHeightVar');
+  const hasCallerContent = (spec: NodeSpec): boolean => spec.callerContentProp !== undefined || !!spec.children?.some(hasCallerContent);
+  if (isContractDraft(input) && input.component.variants.some(v => hasCallerContent(v.spec))) extra.push('callerContentProperty');
   return emitNativeInventoryReadbackScript(expected, input.tokenInput, input.tokenIdentity,
     isContractDraft(input) ? ['nativeContractPart', 'rootSlot', 'codeValueAxes', 'unsetVariantAxes', 'semantics', 'propNames', ...extra] : extra, captureImages, captureExportBounds, backgroundPaintIdentities(input.component));
 }
@@ -403,8 +414,17 @@ function verifyReadback(
     problems.push("native-source-observation-node-inventory");
     return report();
   }
-  // Empty draft mains have exact allocation IDs. Only recorded comparison
-  // slot descendants may use the source workflow's clone-identity bridge.
+  // Empty draft mains have exact allocation IDs. Recorded comparison slot
+  // descendants use the source workflow's clone-identity bridge; caller content
+  // inside a graph draft's nested instance slots resolves by allocation stamp.
+  if (!exactIds && isContractDraft(input) && input.graphComponents) {
+    const resolved = resolveNativeGraphSlotIdentities(c, rows);
+    if (!resolved) {
+      problems.push("native-source-observation-node-inventory");
+      return report();
+    }
+    rows = resolved;
+  }
   if (!exactIds && !isContractDraft(input)) {
     const anchor = input.allocationAnchor;
     if (
@@ -422,13 +442,27 @@ function verifyReadback(
     }
     rows = resolved;
   }
-  if (
-    !same(rows.map((n) => n.id).sort(), c.nodes.map((n: any) => n.id).sort())
-  ) {
+  const bornIds = new Set(c.nodes.map((n: any) => n.id));
+  const rowById = new Map(rows.map((n) => [n.id, n]));
+  const borrowedIds = new Set<string>();
+  if (isContractDraft(input) && input.graphComponents) {
+    const descendBorrowed = (row: Record<string, any>) => {
+      for (const id of row.childIds) {
+        const child = rowById.get(id);
+        if (!child || bornIds.has(id) || borrowedIds.has(id)) continue;
+        borrowedIds.add(id); descendBorrowed(child);
+      }
+    };
+    for (const born of c.nodes) if (born.type === 'INSTANCE') {
+      const row = rowById.get(born.id); if (row) descendBorrowed(row);
+    }
+  }
+  if (c.nodes.some((n: any) => !rowById.has(n.id)) ||
+      rows.some(n => !bornIds.has(n.id) && !borrowedIds.has(n.id))) {
     problems.push("native-source-observation-node-inventory");
     return report();
   }
-  const nodes = new Map(rows.map((n) => [n.id, n]));
+  const nodes = rowById;
   const issue = (code: string, node?: Record<string, any>) =>
     problems.push(`${code}${node ? `:${node.id}` : ""}`);
   const meta = (node: Record<string, any>, key: string) => {
@@ -449,10 +483,12 @@ function verifyReadback(
   };
   for (const n of rows) {
     const born = c.nodes.find((v: any) => v.id === n.id);
-    if (n.type !== born.type || (born.key && n.key !== born.key))
-      issue("native-source-observation-node-identity", n);
-    if (!same(meta(n, "nativeSourceOperation"), owner))
-      issue("native-source-observation-ownership", n);
+    if (born) {
+      if (n.type !== born.type || (born.key && n.key !== born.key))
+        issue("native-source-observation-node-identity", n);
+      if (!same(meta(n, "nativeSourceOperation"), owner))
+        issue("native-source-observation-ownership", n);
+    }
     if (n.id !== c.pageId && !nodes.get(n.parentId)?.childIds.includes(n.id))
       issue("native-source-observation-parent", n);
     if (
@@ -489,9 +525,17 @@ function verifyReadback(
     issue("native-source-observation-roots-missing");
     return report();
   }
+  const graphTargets = isContractDraft(input) && input.graphComponents
+    ? c.graphTargets : [{ contractId: input.component.contractId, id: c.target.id, key: c.target.key }];
+  if (isContractDraft(input) && input.graphComponents &&
+      (!Array.isArray(graphTargets) || graphTargets.length !== input.graphComponents.length ||
+       !same(graphTargets.map((row: any) => row.contractId), input.graphComponents.map(component => component.contractId)) ||
+       graphTargets.at(-1)?.id !== c.target.id))
+    issue('native-contract-observation-graph-targets');
+  const graphTargetIds = Array.isArray(graphTargets) ? graphTargets.map((row: any) => row.id) : [target.id];
   if (
     page.type !== "PAGE" ||
-    !same([...page.childIds].sort(), [target.id, ...(board ? [board.id] : [])].sort()) ||
+    !same([...page.childIds].sort(), [...graphTargetIds, ...(board ? [board.id] : [])].sort()) ||
     (board && board.type !== "FRAME") ||
     target.parentId !== page.id ||
     (board && board.parentId !== page.id)
@@ -505,14 +549,29 @@ function verifyReadback(
     !same(target.definitions, c.propertyDefinitions)
   )
     issue("native-source-observation-component-identity");
+  if (isContractDraft(input) && input.graphComponents && Array.isArray(graphTargets)) {
+    for (const [index, component] of input.graphComponents.entries()) {
+      const identity = graphTargets[index], graphTarget = identity && nodes.get(identity.id);
+      if (!graphTarget || graphTarget.metadata.contractId !== component.contractId || graphTarget.key !== identity.key ||
+          graphTarget.type !== (component.isSet ? 'COMPONENT_SET' : 'COMPONENT'))
+        issue('native-contract-observation-graph-component', graphTarget);
+    }
+  }
   const defs = target.definitions ?? {},
-    slotKeys = new Map<string, string>();
+    slotKeys = new Map<string, string>(),
+    textKeys = new Map<string, string>();
   for (const [key, def] of Object.entries(defs) as Array<[string, any]>) {
     if (def.type === "SLOT") {
       const display = key.slice(0, key.lastIndexOf("#"));
       if (!key.includes("#") || slotKeys.has(display))
         issue("native-source-observation-slot-property-ambiguous");
       slotKeys.set(display, key);
+    }
+    if (isContractDraft(input) && def.type === 'TEXT') {
+      const display = key.slice(0, key.lastIndexOf('#'));
+      if (!key.includes('#') || textKeys.has(display))
+        issue('native-contract-observation-text-property-ambiguous');
+      textKeys.set(display, key);
     }
   }
   const axes = input.component.unsetVariantAxes?.axes ?? [];
@@ -525,14 +584,22 @@ function verifyReadback(
       draftAxes.get(property)!.add(value);
     }
   const expectedSlots = new Set<string>();
+  const expectedTexts = new Map<string, string>();
   const collect = (s: NodeSpec) => {
-    if (s.type === "slot") expectedSlots.add(s.slotProperty!);
+    if (s.type === "slot" && s.callerSlotProperty === undefined) expectedSlots.add(s.slotProperty!);
+    if (isContractDraft(input) && s.contentProp !== undefined) {
+      if (s.type !== 'text' || typeof s.characters !== 'string' ||
+          (expectedTexts.has(s.contentProp) && expectedTexts.get(s.contentProp) !== s.characters))
+        throw Error('native-contract-observation-text-mapping');
+      expectedTexts.set(s.contentProp, s.characters!);
+    }
     (s.children ?? []).forEach(collect);
   };
   input.component.variants.forEach((v) => collect(v.spec));
   if (
     !same([...slotKeys.keys()].sort(), [...expectedSlots].sort()) ||
-    Object.keys(defs).length !== expectedSlots.size + (isContractDraft(input) ? draftAxes.size : axes.length)
+    !same([...textKeys.keys()].sort(), [...expectedTexts.keys()].sort()) ||
+    Object.keys(defs).length !== expectedSlots.size + expectedTexts.size + (isContractDraft(input) ? draftAxes.size : axes.length)
   )
     issue("native-source-observation-property-inventory");
   for (const axis of axes) {
@@ -549,6 +616,11 @@ function verifyReadback(
       issue("native-source-observation-variant-axis");
   }
   if (isContractDraft(input)) {
+    for (const [property, defaultValue] of expectedTexts) {
+      const key = textKeys.get(property), def = key && defs[key];
+      if (!def || def.type !== 'TEXT' || def.defaultValue !== defaultValue)
+        issue('native-contract-observation-text-property');
+    }
     for (const [property, values] of draftAxes) {
       const def = defs[property];
       if (!def || def.type !== 'VARIANT' || def.defaultValue !== values.values().next().value ||
@@ -588,6 +660,7 @@ function verifyReadback(
                 slot: "SLOT",
                 text: "TEXT",
                 svg: "FRAME",
+                instance: "INSTANCE",
               } as Record<string, string>
             )[spec.type] ?? (spec.type === 'shape' ? spec.shape?.kind === 'rect' ? 'RECTANGLE' : spec.shape?.kind === 'ellipse' ? 'ELLIPSE' : undefined : undefined);
     if (!expectedType || n.type !== expectedType)
@@ -597,6 +670,75 @@ function verifyReadback(
     if (!sample && !same(meta(n, isContractDraft(input) ? 'nativeContractPart' : 'nativeSourcePart'),
       isContractDraft(input) ? spec.nativeContractPart : spec.nativeSourcePart))
       issue("native-source-observation-source-part", n);
+    if (isContractDraft(input)) {
+      const references = spec.type === 'slot' ? { slotContentId: slotKeys.get(spec.slotProperty!) }
+        : spec.contentProp !== undefined ? { characters: textKeys.get(spec.contentProp) } : {};
+      if (!same(v.componentPropertyReferences ?? {}, references))
+        issue('native-contract-observation-property-references', n);
+      if ((n.metadata.callerContentProperty ?? '') !== (spec.callerContentProp ?? ''))
+        issue('native-contract-observation-caller-content-property', n);
+    }
+    if (isContractDraft(input) && spec.type === 'instance') {
+      const graphComponents = input.graphComponents ?? [];
+      const dep = graphComponents.find(component => component.contractId === spec.depContractId);
+      const identity = Array.isArray(c.graphTargets) && c.graphTargets.find((row: any) => row.contractId === spec.depContractId);
+      const depTarget = identity && nodes.get(identity.id);
+      const mainMatches = depTarget && (depTarget.type === 'COMPONENT'
+        ? n.mainId === depTarget.id : depTarget.type === 'COMPONENT_SET' && depTarget.childIds.includes(n.mainId));
+      if (!dep || !depTarget || !mainMatches) issue('native-contract-observation-instance-main', n);
+      for (const [property, value] of Object.entries(spec.depProps ?? {})) {
+        const matches = Object.entries(n.componentProperties ?? {}).filter(([key]) => key === property || key.startsWith(property + '#'));
+        if (matches.length !== 1 || !same((matches[0][1] as any)?.value, value))
+          issue('native-contract-observation-instance-property', n);
+      }
+      const descendants: Record<string, any>[] = [];
+      const descend = (row: Record<string, any>) => {
+        for (const id of row.childIds) { const child = nodes.get(id); if (child) {
+          descendants.push(child);
+          if (!child.metadata.nativeContractPart) descend(child);
+        } }
+      };
+      descend(n);
+      for (const row of descendants) if (borrowedIds.has(row.id)) checked.add(row.id);
+      // Inherited slots the parent leaves unfilled are the only place a canvas
+      // edit can add content inside an instance. They must mirror the main's
+      // own slot children exactly (empty for reusable mains); every child is
+      // paired by type and by the allocation stamp of the main's node.
+      const filledKeys = new Set<string>();
+      for (const slotSpec of spec.children ?? []) for (const [candidate, definition] of Object.entries(depTarget?.definitions ?? {}) as Array<[string, any]>)
+        if (definition.type === 'SLOT' && (candidate === slotSpec.callerSlotProperty || candidate.startsWith(slotSpec.callerSlotProperty + '#'))) filledKeys.add(candidate);
+      const slotsOf = (root: Record<string, any> | undefined, stopAt: Set<string>) => {
+        const found = new Map<string, Record<string, any>>(); const seen = new Set<string>();
+        const walk = (row: Record<string, any>) => { for (const id of row.childIds) {
+          const child = nodes.get(id); if (!child || seen.has(id)) continue; seen.add(id);
+          const key = child.type === 'SLOT' ? child.values.componentPropertyReferences?.slotContentId : undefined;
+          if (typeof key === 'string') { if (found.has(key)) issue('native-contract-observation-inherited-slot', child); found.set(key, child); if (stopAt.has(key)) continue; }
+          walk(child);
+        } };
+        if (root) walk(root);
+        return found;
+      };
+      const mainRow = nodes.get(n.mainId), mainSlots = slotsOf(mainRow, new Set());
+      for (const [key, slot] of slotsOf(n, filledKeys)) {
+        if (filledKeys.has(key)) continue;
+        const mainSlot = mainSlots.get(key);
+        if (!mainRow || !mainSlot) { issue('native-contract-observation-inherited-slot', slot); continue; }
+        if (slot.childIds.length !== mainSlot.childIds.length || slot.childIds.some((id: string, index: number) => {
+          const child = nodes.get(id), mainChild = nodes.get(mainSlot.childIds[index]);
+          return !child || !mainChild || child.type !== mainChild.type || child.metadata.nativeSourceAllocation !== mainChild.id;
+        })) issue('native-contract-observation-inherited-slot-content', slot);
+      }
+      for (const slotSpec of spec.children ?? []) {
+        const key = depTarget && Object.entries(depTarget.definitions ?? {}).filter(([candidate, definition]: [string, any]) =>
+          definition.type === 'SLOT' && (candidate === slotSpec.callerSlotProperty || candidate.startsWith(slotSpec.callerSlotProperty + '#'))).map(([candidate]) => candidate);
+        const slots = key?.length === 1 ? descendants.filter(row => row.type === 'SLOT' && row.values.componentPropertyReferences?.slotContentId === key[0]) : [];
+        if (slots.length !== 1 || slots[0].childIds.length !== (slotSpec.children ?? []).length) {
+          issue('native-contract-observation-instance-caller-slot', n); continue;
+        }
+        (slotSpec.children ?? []).forEach((child, index) => visit(child, nodes.get(slots[0].childIds[index])));
+      }
+      return;
+    }
     if (sample && !same(meta(n, "nativeSourceSample"), sample))
       issue("native-source-observation-sample-identity", n);
     if (spec.layout?.grid?.flowRows && !same(meta(n, 'gridFlowRows'), spec.layout.grid.flowRows))

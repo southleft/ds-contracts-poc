@@ -42,6 +42,27 @@ const fixture = `
  window.__DSC_REACT_EXPORTS=[{identity:identity('First'),value:First},{identity:identity('Second'),value:Second}];
  flushSync(()=>createRoot(document.getElementById('mount')).render(<First><Second checked={false}/><Second checked={null}/></First>));`;
 
+test('a child state update retains source owners when React switches ancestor fiber buffers', async () => {
+  const browser = await chromium.launch();
+  try {
+    const { context, page, read } = await mount(browser, `
+      function Parent({children}) { return <section>{children}</section> }
+      function Child() { const [count,setCount]=React.useState(0); return <button onClick={()=>setCount(count+1)}>{count}</button> }
+      window.__DSC_REACT_EXPORTS=[{identity:identity('Parent'),value:Parent},{identity:identity('Child'),value:Child}];
+      flushSync(()=>createRoot(document.getElementById('mount')).render(<Parent><Child/></Parent>));`);
+    try {
+      const original = await read();
+      assert.equal(original.nodes[0].createdBy, 'instance-0');
+      assert.equal(original.nodes[1].createdBy, 'instance-1');
+      for (let count = 1; count <= 3; count++) {
+        await page.getByRole('button').click();
+        assert.equal(await page.getByRole('button').textContent(), String(count));
+        assert.deepEqual(await read(), original, 'runtime state changes do not change the source that creates a host node');
+      }
+    } finally { await context.close(); }
+  } finally { await browser.close(); }
+});
+
 test("real renderer matches export objects through memo and forwardRef, keeping repeated instances and typed props", async () => {
   const browser = await chromium.launch();
   try {

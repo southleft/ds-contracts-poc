@@ -71,9 +71,16 @@ slot must be unconstrained: required content, arity bounds and restricted
 acceptance need separate projection support. Competing text, slot, content or
 repeat declarations are refused. An empty `parts: {}` supplies an empty React
 Fragment; omission leaves children unset. Slot `defaultContent` remains
-design/story sample content, never a runtime default. Direct Figma, HTML and
-Web Components emission explicitly refuse caller parts until implemented;
-this React rule does not qualify native composition or source extraction.
+design/story sample content, never a runtime default. The Figma generator can
+populate the child's existing native slot, replacing its design defaults only
+on that instance. It preserves parent property scope and child typography,
+including supported flex and grid layouts. The writer also fills slots below a child's root, but graph readback currently verifies only slots directly under the dependency's root and refuses deeper locations by name. Full-width children
+require a definite column or grid context; grid content must fit declared or
+managed rows. Caller-owned text inside a child slot stays directly editable on the canvas; Figma cannot bind it to a parent TEXT property, so the native generator lowers such a mapping to canvas content and reports it as editable canvas text. Exposing
+eligible direct child controls does not create arbitrary property aliases across
+nested instances. This writer path has test-host coverage; live canvas behavior,
+automatic source integration and reverse reconstruction remain unqualified.
+HTML and Web Components emission still refuse caller parts.
 
 `component.initialProps` supplies mount-only values to the child's declared
 `bindings.code.initial.prop`. Keys are canonical child enum property names;
