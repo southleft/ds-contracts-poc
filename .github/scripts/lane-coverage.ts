@@ -94,6 +94,13 @@ const EXCLUDED: Record<string, string> = {
   // measured. Wiring `eval` in beside it would run the 15-minute suite twice for
   // one measurement. The gate that reads the record row-by-row against the
   // committed one, `eval:record:check`, is wired into the fast lane unchanged.
+  // Not gate-shaped by name, listed so its absence from every lane is a decision
+  // on the record: it REBUILDS recipe/evidence/react-native-fidelity-v1/ from the
+  // private operation journals, which are never committed. Its offline half,
+  // react:native:fidelity:check, recomputes every number from the committed bytes
+  // and IS laned (fast).
+  "root:react:native:fidelity:record":
+    "needs the private operation archive (hash-chained journals and source inspections that are never committed); its offline half react:native:fidelity:check is laned (fast)",
   "root:eval":
     "run by the full lane through eval:carried:check, which records to the same path; wiring it separately would run the suite twice",
   // These three `--check` scripts are NOT checks. Every build-*-live-proof-vN.ts

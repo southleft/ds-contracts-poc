@@ -1,0 +1,5392 @@
+{
+  "artifactVersion": "react-native-fidelity-manifest-v1",
+  "qualification": "measured-not-graded",
+  "acceptedContract": null,
+  "note": "Portable evidence for the code-led (React -> contract -> native Figma) cohort. Measurements only: no owner grade, sign-off or accepted contract is recorded or implied. Paths are relative to this directory. Journals stay private; every committed byte is hashed here and every journal event it came from is named with its sha256.",
+  "sourceReferenceId": "0907e10c3d63ae5f0ef60a31726e79e20b80cbc36599ee3e3ba230a1483cda7e",
+  "harness": {
+    "viewport": {
+      "width": 900,
+      "height": 600
+    },
+    "deviceScaleFactor": 1,
+    "cite": "source-reference/react-initial-inspection.ts (browser.newContext viewport 900x600, deviceScaleFactor 1) and source-reference/replay.ts"
+  },
+  "cohorts": [
+    {
+      "id": "button-initial",
+      "component": "Button",
+      "description": "Button, 24 initial-state variants (disabled × variant). Native: the reader readback (export bounds recorded) of the default-fill update of the initial-state operation. Source: the pinned initial-state inspection of the original shadcn Button.",
+      "native": {
+        "operationId": "61f15677-e1c0-4d38-a27d-616d99d17eec",
+        "updateId": "190cfa33-d0fa-b0f1-1a74-2c4659e8a2df",
+        "proposalId": "4d902c1f6d84d69454e15cd00316d723519fb60256c66e7490c9b18c30270a56",
+        "journalEvent": "190cfa33-d0fa-b0f1-1a74-2c4659e8a2df/events/00000007.json",
+        "journalEventSha256": "8a62d52701e6dd73f2146e171b08e12c9ae7a246ff8fedc010820267727d98d3",
+        "journalEventsVerified": 8,
+        "journalHeadSha256": "8a62d52701e6dd73f2146e171b08e12c9ae7a246ff8fedc010820267727d98d3",
+        "attemptId": "c8197730-2b18-41b8-b717-d43a3b27f2a7",
+        "phase": "update-readback",
+        "recordedAt": null,
+        "planRevision": "sha256:eaa37bfbe1e799253ffeeef629a6182b2f8a7ee79838adc9591c43b944cb4ded",
+        "images": 24,
+        "nodes": 74
+      },
+      "source": {
+        "referenceId": "0907e10c3d63ae5f0ef60a31726e79e20b80cbc36599ee3e3ba230a1483cda7e",
+        "ownershipId": "8c3437f5-8eba-4f78-92fc-a9ffbfb41af9",
+        "inspectionId": "71bf5fff-ccc4-4824-a937-b5a2bc6838a5",
+        "caseId": "button-disabled",
+        "instanceId": "instance-0",
+        "module": "src/components/ui/button.tsx",
+        "exportName": "Button",
+        "sourceSha256": "972808a00bd6fe16935206ec74197f724a31375731737d19694bbb3b6f265050",
+        "inventorySha256": "f0be139f4d0d30ddc87770489d998c2f5df7b523019115ad17b3a7faf55da88e",
+        "reportSha256": "aa8107b31ee081e3a5f7c7125c46d33c720054ec5df3373a162cee32fd36a05b",
+        "pinnedBy": "the native operation's journal header (request.observation)"
+      },
+      "pairs": [
+        {
+          "id": "button-initial/disabled=false, variant=null",
+          "variant": "disabled=false, variant=null",
+          "observation": "0",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/0.native.png",
+              "sha256": "f6e1f084ed296bf60093b2edb63b442e03288e1e6ae5775a3b5c83c2d2ac96a1",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/0.source.png",
+              "sha256": "1a0525f6db745d6867d5ca1a1478b3004212080a7a4a4537897b5f40fecbc776",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1191",
+            "caseId": "variant:disabled=false, variant=null",
+            "exportBounds": {
+              "layout": {
+                "x": 196,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 196,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1193",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "446408888d5d8864d38abbdf5de9e84cd380b4458b2438a3f03ac22de98518bd",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/0.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=false, variant=default",
+          "variant": "disabled=false, variant=default",
+          "observation": "1",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/1.native.png",
+              "sha256": "aad475b74b44caa447cc95cb2ce58aa11f9ab34930c5f72d72b608a59fd22698",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/1.source.png",
+              "sha256": "54a04b5580befaa24809bcb6427fde6a02ea79195bdd76a380a9406d88a41991",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1194",
+            "caseId": "variant:disabled=false, variant=default",
+            "exportBounds": {
+              "layout": {
+                "x": 352,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 352,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1196",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "8fedaff561d542775cee835ffa3a2d75b76c277f63b70cae61505dc10a06efd3",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/1.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=false, variant=outline",
+          "variant": "disabled=false, variant=outline",
+          "observation": "2",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/2.native.png",
+              "sha256": "5319bddf748f410d973b77e8b48eb06840e0c515b9830f3235b6a9d2cba328b2",
+              "width": 120,
+              "height": 40
+            },
+            "source": {
+              "path": "button-initial/2.source.png",
+              "sha256": "e832e70b6ff431ccfc7e52ba198fed1745408f887285a69a2dad48472cf735ca",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1197",
+            "caseId": "variant:disabled=false, variant=outline",
+            "exportBounds": {
+              "layout": {
+                "x": 508,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 506,
+                "y": 115,
+                "width": 120,
+                "height": 40
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1199",
+                "characters": "Save changes",
+                "x": 13,
+                "y": 9,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "aa95913de061560726ba696c48db13b77b7b6cdfbd1e17fb19fb0d889feeec55",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/2.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=false, variant=secondary",
+          "variant": "disabled=false, variant=secondary",
+          "observation": "3",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/3.native.png",
+              "sha256": "947d762e4a01daae76b5aa3bf8a2ddaad190c63bb8d89f6f63e1ffa779bc224c",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/3.source.png",
+              "sha256": "3d11da52cb7e3b771dd57726302c9c64dcdd093e1f31cff336be7dec359ca0c5",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1200",
+            "caseId": "variant:disabled=false, variant=secondary",
+            "exportBounds": {
+              "layout": {
+                "x": 664,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 664,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1202",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "cca6db4e18e8e20a32a5f72b41c4f2f36c7588296db061db423e3b2a3843bae7",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/3.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=false, variant=ghost",
+          "variant": "disabled=false, variant=ghost",
+          "observation": "4",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/4.native.png",
+              "sha256": "f6e1f084ed296bf60093b2edb63b442e03288e1e6ae5775a3b5c83c2d2ac96a1",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/4.source.png",
+              "sha256": "1a0525f6db745d6867d5ca1a1478b3004212080a7a4a4537897b5f40fecbc776",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1203",
+            "caseId": "variant:disabled=false, variant=ghost",
+            "exportBounds": {
+              "layout": {
+                "x": 820,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 820,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1205",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "446408888d5d8864d38abbdf5de9e84cd380b4458b2438a3f03ac22de98518bd",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/4.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=false, variant=destructive",
+          "variant": "disabled=false, variant=destructive",
+          "observation": "5",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/5.native.png",
+              "sha256": "ffb90c29b74f4431fd6e0b840ad4abcd07bcac4c9fda9204ac7c4e1e2a17ea00",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/5.source.png",
+              "sha256": "140a936c7b2bc414f3849f593ffb70708403663496b10e3b7dac199bc44fc52f",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1206",
+            "caseId": "variant:disabled=false, variant=destructive",
+            "exportBounds": {
+              "layout": {
+                "x": 976,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 976,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1208",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "d3fc9998a63f5512aa02c4b82e7167dd08fae6a1a7f067d4e28bc96204e27709",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/5.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=false, variant=link",
+          "variant": "disabled=false, variant=link",
+          "observation": "6",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/6.native.png",
+              "sha256": "f41ce5674f940e0cd8af40139e4c127d498fda00c86d8e18319f60833447ea48",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/6.source.png",
+              "sha256": "7fefce64fd4bab21a8c75609551bdbc0f831e10ed04e09459b8269cef1a5fb22",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1209",
+            "caseId": "variant:disabled=false, variant=link",
+            "exportBounds": {
+              "layout": {
+                "x": 1132,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 1132,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1211",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "9a8903fe5da6e4ec3c0f42bc6e62cbe66f1db53830ea45c4c2208d37da17d589",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/6.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=false, variant=(unset)",
+          "variant": "disabled=false, variant=(unset)",
+          "observation": "7",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/7.native.png",
+              "sha256": "aad475b74b44caa447cc95cb2ce58aa11f9ab34930c5f72d72b608a59fd22698",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/7.source.png",
+              "sha256": "54a04b5580befaa24809bcb6427fde6a02ea79195bdd76a380a9406d88a41991",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1188",
+            "caseId": "variant:disabled=false, variant=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 40,
+                "y": 116,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1190",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "8fedaff561d542775cee835ffa3a2d75b76c277f63b70cae61505dc10a06efd3",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/7.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=null",
+          "variant": "disabled=true, variant=null",
+          "observation": "8",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/8.native.png",
+              "sha256": "b1cd93f1398f3874ecddd241b413e4bd50fe997c281a20fd252757a86077e2a7",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/8.source.png",
+              "sha256": "afb404ba766f5b9b0ef9b8a47aed781f5f6c57d04b961d4280a78ac6180cd7d1",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1215",
+            "caseId": "variant:disabled=true, variant=null",
+            "exportBounds": {
+              "layout": {
+                "x": 196,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 196,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1217",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "3440db1bfd18dd94e9ab23528cc8c9872e960624767207d673f39e15f26e1ff2",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/8.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=default",
+          "variant": "disabled=true, variant=default",
+          "observation": "9",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/9.native.png",
+              "sha256": "863c8218313a2c812ccf1066ac71e5c9e37318c21e1dc84fe1da9a418671e492",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/9.source.png",
+              "sha256": "d8cd2220843abeb47648ae2302eea9ea60f17341fefe6327c0abccd7db9df4f3",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1218",
+            "caseId": "variant:disabled=true, variant=default",
+            "exportBounds": {
+              "layout": {
+                "x": 352,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 352,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1220",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "6fe11f0b4d16efb17c2ef8bd25b0e9e18a635bc59783c6de7a676b1f70a03ee1",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/9.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=outline",
+          "variant": "disabled=true, variant=outline",
+          "observation": "10",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/10.native.png",
+              "sha256": "05d620d789d41135b1b6c1bed05d31d51320875c3ded05beb92fab6bd6c62523",
+              "width": 120,
+              "height": 40
+            },
+            "source": {
+              "path": "button-initial/10.source.png",
+              "sha256": "0077c9bf5062c6187dec2b8d26e76428be5021f112fa28cc32f0a8e46bd78c9c",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1221",
+            "caseId": "variant:disabled=true, variant=outline",
+            "exportBounds": {
+              "layout": {
+                "x": 508,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 506,
+                "y": 191,
+                "width": 120,
+                "height": 40
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1223",
+                "characters": "Save changes",
+                "x": 13,
+                "y": 9,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "36c1e9e534e2adff6ffb6e096fa4fd2b0a3c2eb4caf9975be34a1097dd00c0c5",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/10.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=secondary",
+          "variant": "disabled=true, variant=secondary",
+          "observation": "11",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/11.native.png",
+              "sha256": "a92313fe70c2220524a7b97dad7c4a3e000d15cb1a9fe0dbb7a28d3b6ed0d66e",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/11.source.png",
+              "sha256": "e03bc320710a29d95431cef1574dfe7ef978708f9691a675ba4709a2f8f2be81",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1224",
+            "caseId": "variant:disabled=true, variant=secondary",
+            "exportBounds": {
+              "layout": {
+                "x": 664,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 664,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1226",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "9771907abac01f36445b6a0d899782bae2b160ee3d4bc894d42c14bbd46689da",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/11.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=ghost",
+          "variant": "disabled=true, variant=ghost",
+          "observation": "12",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/12.native.png",
+              "sha256": "b1cd93f1398f3874ecddd241b413e4bd50fe997c281a20fd252757a86077e2a7",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/12.source.png",
+              "sha256": "afb404ba766f5b9b0ef9b8a47aed781f5f6c57d04b961d4280a78ac6180cd7d1",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1227",
+            "caseId": "variant:disabled=true, variant=ghost",
+            "exportBounds": {
+              "layout": {
+                "x": 820,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 820,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1229",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "3440db1bfd18dd94e9ab23528cc8c9872e960624767207d673f39e15f26e1ff2",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/12.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=destructive",
+          "variant": "disabled=true, variant=destructive",
+          "observation": "13",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/13.native.png",
+              "sha256": "00e896dfbd412e81cc10da926c3c7b11ba6c442f6eba1efb87ba0e77cac14f1d",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/13.source.png",
+              "sha256": "c50163f917774bd0a12f4bb246639498eb7231cf54ca7fba266698d780a9fb95",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1230",
+            "caseId": "variant:disabled=true, variant=destructive",
+            "exportBounds": {
+              "layout": {
+                "x": 976,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 976,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1232",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "76bdd44bf95161fad36bf202fe589602fa4c0a85b142d65a54c948e99c9ae953",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/13.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=link",
+          "variant": "disabled=true, variant=link",
+          "observation": "14",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/14.native.png",
+              "sha256": "23ea92eaa53ca449f79f4aff4797818761ab0bb33bbf27c2314023e3a67aa80c",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/14.source.png",
+              "sha256": "0defe451306aa7b14d837723f6041e321a615d02cd19971980b51f61ba68099d",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1233",
+            "caseId": "variant:disabled=true, variant=link",
+            "exportBounds": {
+              "layout": {
+                "x": 1132,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 1132,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1235",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "17ba03f007bb471c88665508a5fb9e25e056f3d37ad168ee10ed7891e1607d26",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/14.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=true, variant=(unset)",
+          "variant": "disabled=true, variant=(unset)",
+          "observation": "15",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/15.native.png",
+              "sha256": "863c8218313a2c812ccf1066ac71e5c9e37318c21e1dc84fe1da9a418671e492",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/15.source.png",
+              "sha256": "d8cd2220843abeb47648ae2302eea9ea60f17341fefe6327c0abccd7db9df4f3",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1212",
+            "caseId": "variant:disabled=true, variant=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 40,
+                "y": 192,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1214",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "6fe11f0b4d16efb17c2ef8bd25b0e9e18a635bc59783c6de7a676b1f70a03ee1",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/15.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=null",
+          "variant": "disabled=(unset), variant=null",
+          "observation": "16",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/16.native.png",
+              "sha256": "f6e1f084ed296bf60093b2edb63b442e03288e1e6ae5775a3b5c83c2d2ac96a1",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/16.source.png",
+              "sha256": "1a0525f6db745d6867d5ca1a1478b3004212080a7a4a4537897b5f40fecbc776",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1167",
+            "caseId": "variant:disabled=(unset), variant=null",
+            "exportBounds": {
+              "layout": {
+                "x": 196,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 196,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1169",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "446408888d5d8864d38abbdf5de9e84cd380b4458b2438a3f03ac22de98518bd",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/16.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=default",
+          "variant": "disabled=(unset), variant=default",
+          "observation": "17",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/17.native.png",
+              "sha256": "aad475b74b44caa447cc95cb2ce58aa11f9ab34930c5f72d72b608a59fd22698",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/17.source.png",
+              "sha256": "54a04b5580befaa24809bcb6427fde6a02ea79195bdd76a380a9406d88a41991",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1170",
+            "caseId": "variant:disabled=(unset), variant=default",
+            "exportBounds": {
+              "layout": {
+                "x": 352,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 352,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1172",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "8fedaff561d542775cee835ffa3a2d75b76c277f63b70cae61505dc10a06efd3",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/17.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=outline",
+          "variant": "disabled=(unset), variant=outline",
+          "observation": "18",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/18.native.png",
+              "sha256": "5319bddf748f410d973b77e8b48eb06840e0c515b9830f3235b6a9d2cba328b2",
+              "width": 120,
+              "height": 40
+            },
+            "source": {
+              "path": "button-initial/18.source.png",
+              "sha256": "e832e70b6ff431ccfc7e52ba198fed1745408f887285a69a2dad48472cf735ca",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1173",
+            "caseId": "variant:disabled=(unset), variant=outline",
+            "exportBounds": {
+              "layout": {
+                "x": 508,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 506,
+                "y": 39,
+                "width": 120,
+                "height": 40
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1175",
+                "characters": "Save changes",
+                "x": 13,
+                "y": 9,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "aa95913de061560726ba696c48db13b77b7b6cdfbd1e17fb19fb0d889feeec55",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/18.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=secondary",
+          "variant": "disabled=(unset), variant=secondary",
+          "observation": "19",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/19.native.png",
+              "sha256": "947d762e4a01daae76b5aa3bf8a2ddaad190c63bb8d89f6f63e1ffa779bc224c",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/19.source.png",
+              "sha256": "3d11da52cb7e3b771dd57726302c9c64dcdd093e1f31cff336be7dec359ca0c5",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1176",
+            "caseId": "variant:disabled=(unset), variant=secondary",
+            "exportBounds": {
+              "layout": {
+                "x": 664,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 664,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1178",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "cca6db4e18e8e20a32a5f72b41c4f2f36c7588296db061db423e3b2a3843bae7",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/19.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=ghost",
+          "variant": "disabled=(unset), variant=ghost",
+          "observation": "20",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/20.native.png",
+              "sha256": "f6e1f084ed296bf60093b2edb63b442e03288e1e6ae5775a3b5c83c2d2ac96a1",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/20.source.png",
+              "sha256": "1a0525f6db745d6867d5ca1a1478b3004212080a7a4a4537897b5f40fecbc776",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1179",
+            "caseId": "variant:disabled=(unset), variant=ghost",
+            "exportBounds": {
+              "layout": {
+                "x": 820,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 820,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1181",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "446408888d5d8864d38abbdf5de9e84cd380b4458b2438a3f03ac22de98518bd",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/20.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=destructive",
+          "variant": "disabled=(unset), variant=destructive",
+          "observation": "21",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/21.native.png",
+              "sha256": "ffb90c29b74f4431fd6e0b840ad4abcd07bcac4c9fda9204ac7c4e1e2a17ea00",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/21.source.png",
+              "sha256": "140a936c7b2bc414f3849f593ffb70708403663496b10e3b7dac199bc44fc52f",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1182",
+            "caseId": "variant:disabled=(unset), variant=destructive",
+            "exportBounds": {
+              "layout": {
+                "x": 976,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 976,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1184",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "d3fc9998a63f5512aa02c4b82e7167dd08fae6a1a7f067d4e28bc96204e27709",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/21.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=link",
+          "variant": "disabled=(unset), variant=link",
+          "observation": "22",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/22.native.png",
+              "sha256": "f41ce5674f940e0cd8af40139e4c127d498fda00c86d8e18319f60833447ea48",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/22.source.png",
+              "sha256": "7fefce64fd4bab21a8c75609551bdbc0f831e10ed04e09459b8269cef1a5fb22",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1185",
+            "caseId": "variant:disabled=(unset), variant=link",
+            "exportBounds": {
+              "layout": {
+                "x": 1132,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 1132,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1187",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "9a8903fe5da6e4ec3c0f42bc6e62cbe66f1db53830ea45c4c2208d37da17d589",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/22.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-initial/disabled=(unset), variant=(unset)",
+          "variant": "disabled=(unset), variant=(unset)",
+          "observation": "23",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "button-initial/23.native.png",
+              "sha256": "aad475b74b44caa447cc95cb2ce58aa11f9ab34930c5f72d72b608a59fd22698",
+              "width": 116,
+              "height": 36
+            },
+            "source": {
+              "path": "button-initial/23.source.png",
+              "sha256": "54a04b5580befaa24809bcb6427fde6a02ea79195bdd76a380a9406d88a41991",
+              "width": 132,
+              "height": 52
+            }
+          },
+          "native": {
+            "nodeId": "45:1164",
+            "caseId": "variant:disabled=(unset), variant=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              },
+              "render": {
+                "x": 40,
+                "y": 40,
+                "width": 116,
+                "height": 36
+              }
+            },
+            "layoutOffset": {
+              "x": 0,
+              "y": 0
+            },
+            "layoutSize": {
+              "width": 116,
+              "height": 36
+            },
+            "textRects": [
+              {
+                "nodeId": "45:1166",
+                "characters": "Save changes",
+                "x": 11,
+                "y": 8,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "8fedaff561d542775cee835ffa3a2d75b76c277f63b70cae61505dc10a06efd3",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 115.8125,
+              "height": 36
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 132,
+              "height": 52
+            },
+            "boundsRecord": "states/23.json bounds",
+            "typography": [
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        }
+      ],
+      "notMeasured": []
+    },
+    {
+      "id": "checkbox-initial",
+      "component": "Checkbox",
+      "description": "Checkbox, 12 initial-state variants (defaultChecked × disabled), control only. Native: the LATEST verified update readback that carries images (update d9c7a2b4…, 2026-09-18, after the live two-way-update proofs returned the canvas to opacity 0.5); the earlier privately scored run read update 0b978ebf…. Source: the pinned initial-state inspection of the original shadcn Checkbox.",
+      "native": {
+        "operationId": "a62ab364-a451-43c6-bed6-7e9455693552",
+        "updateId": "d9c7a2b4-fe66-8d5c-d7c6-5e28edadb516",
+        "proposalId": "58278a619ea536c7abf3c50866e81700bf20e943f27363fe7d1045c84311cbbc",
+        "journalEvent": "d9c7a2b4-fe66-8d5c-d7c6-5e28edadb516/events/00000006.json",
+        "journalEventSha256": "978963e12c80d78f4bb6fd14ec284a195f8d167376210e950cfc7e809ef6677d",
+        "journalEventsVerified": 7,
+        "journalHeadSha256": "978963e12c80d78f4bb6fd14ec284a195f8d167376210e950cfc7e809ef6677d",
+        "attemptId": "73501039-2552-4a4b-be68-2c8d1e393afc",
+        "phase": "update-readback",
+        "recordedAt": null,
+        "planRevision": "sha256:38d68e7a412ad7dc5706ea070b532dc5069e8fb1c7e85a1229b76857a1e45ec4",
+        "images": 12,
+        "nodes": 44
+      },
+      "source": {
+        "referenceId": "0907e10c3d63ae5f0ef60a31726e79e20b80cbc36599ee3e3ba230a1483cda7e",
+        "ownershipId": "8c3437f5-8eba-4f78-92fc-a9ffbfb41af9",
+        "inspectionId": "8002ed1c-96a5-471a-9257-b1937c9bab97",
+        "caseId": "checkbox-unchecked",
+        "instanceId": "instance-0",
+        "module": "src/components/ui/checkbox.tsx",
+        "exportName": "Checkbox",
+        "sourceSha256": "2f5f0c90bce6753d7ba68534c006419be0f05758b913f0ea4c41c380a5cf6366",
+        "inventorySha256": "a3bfe2e5295d0bcbf6949077fd5e6439820ae5674d8a0f56baa3fbd3c9a10a3d",
+        "reportSha256": "e022743c816ae81f008e50d3d724a9f6bc1b7c8925a934550a8771d26a141d73",
+        "pinnedBy": "the native operation's journal header (request.observation)"
+      },
+      "pairs": [
+        {
+          "id": "checkbox-initial/defaultChecked=boolean-false, disabled=false",
+          "variant": "defaultChecked=boolean-false, disabled=false",
+          "observation": "0",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/0.native.png",
+              "sha256": "7ca22d9109bc4d894a47b9ded44a0bd54f923df7e880874eeafb2811f2166087",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/0.source.png",
+              "sha256": "80161ff8d929bf44e4d0bdbf488c16d75465587a1d717da4be972a81ae07702b",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:414",
+            "caseId": "variant:defaultChecked=boolean-false, disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 96,
+                "y": 96,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 94,
+                "y": 95,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "a6967ed82a5ba4bb34dbe843805e1ffcb09c60f3d50f75cc33d150e746c7bf55",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/0.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=boolean-false, disabled=true",
+          "variant": "defaultChecked=boolean-false, disabled=true",
+          "observation": "1",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/1.native.png",
+              "sha256": "5b45b65330f124699a49a0e6cbe9d5159bea50fb545b6d6cee46f4be5d6ff4f6",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/1.source.png",
+              "sha256": "61a10e46fbb0c558874f6f150041ff2dbda534b131cda6013104dbf3b1403c5d",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:416",
+            "caseId": "variant:defaultChecked=boolean-false, disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 152,
+                "y": 96,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 150,
+                "y": 95,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "1ad2024f0fdd1fa0ef9a1fe0a6c2b2373f49145938f79b62521480f4126a2612",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/1.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=boolean-false, disabled=(unset)",
+          "variant": "defaultChecked=boolean-false, disabled=(unset)",
+          "observation": "2",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/2.native.png",
+              "sha256": "7ca22d9109bc4d894a47b9ded44a0bd54f923df7e880874eeafb2811f2166087",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/2.source.png",
+              "sha256": "80161ff8d929bf44e4d0bdbf488c16d75465587a1d717da4be972a81ae07702b",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:412",
+            "caseId": "variant:defaultChecked=boolean-false, disabled=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 96,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 38,
+                "y": 95,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "a6967ed82a5ba4bb34dbe843805e1ffcb09c60f3d50f75cc33d150e746c7bf55",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/2.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=boolean-true, disabled=false",
+          "variant": "defaultChecked=boolean-true, disabled=false",
+          "observation": "3",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/3.native.png",
+              "sha256": "d6f685d0411c96dec0f26d4ccc6f9f5cb5a749060c715a7f9b348f1db262462f",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/3.source.png",
+              "sha256": "0bbc689faf35449516d235309b4c0c384e181708dbf935c2b1287d0bc1f5fff3",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:423",
+            "caseId": "variant:defaultChecked=boolean-true, disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 96,
+                "y": 152,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 94,
+                "y": 151,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "c839e2bf2a13140b3aa31f63e83bf2fc6d325895a6d11a8e553e372c9f8acad6",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/3.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=boolean-true, disabled=true",
+          "variant": "defaultChecked=boolean-true, disabled=true",
+          "observation": "4",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/4.native.png",
+              "sha256": "9ac15b5e0c0f4a3e5a57b1e6654eb6f56315549e8507fcdf4979a65b0013db73",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/4.source.png",
+              "sha256": "62e4b832c8d80d80a770ccbdd62d19a3a04c3f5b13f5b83d0aab4a1e48d050b2",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:428",
+            "caseId": "variant:defaultChecked=boolean-true, disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 152,
+                "y": 152,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 150,
+                "y": 151,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "e0658f2d8dda498c0c3395014680768644e45b5849091688a064c6807ca32d12",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/4.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=boolean-true, disabled=(unset)",
+          "variant": "defaultChecked=boolean-true, disabled=(unset)",
+          "observation": "5",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/5.native.png",
+              "sha256": "d6f685d0411c96dec0f26d4ccc6f9f5cb5a749060c715a7f9b348f1db262462f",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/5.source.png",
+              "sha256": "0bbc689faf35449516d235309b4c0c384e181708dbf935c2b1287d0bc1f5fff3",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:418",
+            "caseId": "variant:defaultChecked=boolean-true, disabled=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 152,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 38,
+                "y": 151,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "c839e2bf2a13140b3aa31f63e83bf2fc6d325895a6d11a8e553e372c9f8acad6",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/5.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=indeterminate, disabled=false",
+          "variant": "defaultChecked=indeterminate, disabled=false",
+          "observation": "6",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/6.native.png",
+              "sha256": "e7a1bed9e0be6fd019c734fe0aef8d7be420c184efaecdc2bb4f026d91d712a5",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/6.source.png",
+              "sha256": "936a38863ed91252ef745255a6fd26f6a21d3cdab7aeec3c5cdfe5e11707de08",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:438",
+            "caseId": "variant:defaultChecked=indeterminate, disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 96,
+                "y": 208,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 94,
+                "y": 207,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "e14501e0b78ed083c8f90ccfa3642408541e5cce38e8ccf288f4b87a25f52689",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/6.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=indeterminate, disabled=true",
+          "variant": "defaultChecked=indeterminate, disabled=true",
+          "observation": "7",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/7.native.png",
+              "sha256": "663cb04231ee616e22d5b9ffd2a7392beabe37213312f960bf32986489212d2c",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/7.source.png",
+              "sha256": "f50c37975de78c45d08460f22ce30c7534f91b557d98ed6de5be506c239d3351",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:443",
+            "caseId": "variant:defaultChecked=indeterminate, disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 152,
+                "y": 208,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 150,
+                "y": 207,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "2bda1b22c4c7f6c32c20708046f61abed4f2d2039400f04a35bf8a474924089b",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/7.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=indeterminate, disabled=(unset)",
+          "variant": "defaultChecked=indeterminate, disabled=(unset)",
+          "observation": "8",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/8.native.png",
+              "sha256": "e7a1bed9e0be6fd019c734fe0aef8d7be420c184efaecdc2bb4f026d91d712a5",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/8.source.png",
+              "sha256": "936a38863ed91252ef745255a6fd26f6a21d3cdab7aeec3c5cdfe5e11707de08",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:433",
+            "caseId": "variant:defaultChecked=indeterminate, disabled=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 208,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 38,
+                "y": 207,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "e14501e0b78ed083c8f90ccfa3642408541e5cce38e8ccf288f4b87a25f52689",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/8.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=(unset), disabled=false",
+          "variant": "defaultChecked=(unset), disabled=false",
+          "observation": "9",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/9.native.png",
+              "sha256": "7ca22d9109bc4d894a47b9ded44a0bd54f923df7e880874eeafb2811f2166087",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/9.source.png",
+              "sha256": "80161ff8d929bf44e4d0bdbf488c16d75465587a1d717da4be972a81ae07702b",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:408",
+            "caseId": "variant:defaultChecked=(unset), disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 96,
+                "y": 40,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 94,
+                "y": 39,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "a6967ed82a5ba4bb34dbe843805e1ffcb09c60f3d50f75cc33d150e746c7bf55",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/9.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=(unset), disabled=true",
+          "variant": "defaultChecked=(unset), disabled=true",
+          "observation": "10",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/10.native.png",
+              "sha256": "5b45b65330f124699a49a0e6cbe9d5159bea50fb545b6d6cee46f4be5d6ff4f6",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/10.source.png",
+              "sha256": "61a10e46fbb0c558874f6f150041ff2dbda534b131cda6013104dbf3b1403c5d",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:410",
+            "caseId": "variant:defaultChecked=(unset), disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 152,
+                "y": 40,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 150,
+                "y": 39,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "1ad2024f0fdd1fa0ef9a1fe0a6c2b2373f49145938f79b62521480f4126a2612",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/10.json bounds",
+            "typography": []
+          }
+        },
+        {
+          "id": "checkbox-initial/defaultChecked=(unset), disabled=(unset)",
+          "variant": "defaultChecked=(unset), disabled=(unset)",
+          "observation": "11",
+          "pairedBy": "the observation's property changes spell exactly one native variant name",
+          "files": {
+            "native": {
+              "path": "checkbox-initial/11.native.png",
+              "sha256": "7ca22d9109bc4d894a47b9ded44a0bd54f923df7e880874eeafb2811f2166087",
+              "width": 20,
+              "height": 20
+            },
+            "source": {
+              "path": "checkbox-initial/11.source.png",
+              "sha256": "80161ff8d929bf44e4d0bdbf488c16d75465587a1d717da4be972a81ae07702b",
+              "width": 32,
+              "height": 32
+            }
+          },
+          "native": {
+            "nodeId": "14:406",
+            "caseId": "variant:defaultChecked=(unset), disabled=(unset)",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 40,
+                "width": 16,
+                "height": 16
+              },
+              "render": {
+                "x": 38,
+                "y": 39,
+                "width": 20,
+                "height": 20
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 16,
+              "height": 16
+            },
+            "textRects": [],
+            "typography": []
+          },
+          "source": {
+            "originalSha256": "a6967ed82a5ba4bb34dbe843805e1ffcb09c60f3d50f75cc33d150e746c7bf55",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 36,
+              "width": 16,
+              "height": 16
+            },
+            "crop": {
+              "x": 24,
+              "y": 28,
+              "width": 32,
+              "height": 32
+            },
+            "boundsRecord": "states/11.json bounds",
+            "typography": []
+          }
+        }
+      ],
+      "notMeasured": []
+    },
+    {
+      "id": "card-composed-variants",
+      "component": "Card (composed)",
+      "description": "The composed Card's six parent variants (the nested Checkbox's forwarded defaultChecked × disabled). Native: the 2026-09-18 read-only readback of the native graph operation. Source: the original Card story mounted with the nested Checkbox (instance-5) in each initial state — an independent inspection the native plan does not cite; paired by property values.",
+      "native": {
+        "operationId": "4e6e22c3-b90d-41e3-bd11-ac50571507ce",
+        "journalEvent": "4e6e22c3-b90d-41e3-bd11-ac50571507ce/events/00000011.json",
+        "journalEventSha256": "bc80eb00d54d83f42f70ec97721384413906ae5436b27557b67d945c4a20c5ae",
+        "journalEventsVerified": 12,
+        "journalHeadSha256": "bc80eb00d54d83f42f70ec97721384413906ae5436b27557b67d945c4a20c5ae",
+        "attemptId": "ff406354-4159-49aa-ae48-05429c688b46",
+        "phase": "component-readback",
+        "recordedAt": "2026-09-18T10:56:49.802Z",
+        "planRevision": "sha256:1f02c63eae32eca18c46f7554fbff040b1c5b2ff5a124aa84c885ec2a36239fc",
+        "images": 6,
+        "nodes": 209
+      },
+      "source": {
+        "referenceId": "0907e10c3d63ae5f0ef60a31726e79e20b80cbc36599ee3e3ba230a1483cda7e",
+        "ownershipId": "8c3437f5-8eba-4f78-92fc-a9ffbfb41af9",
+        "inspectionId": "ce701240-dd52-4311-bc07-3405f2f18476",
+        "caseId": "card-composed",
+        "instanceId": "instance-5",
+        "module": "src/components/ui/checkbox.tsx",
+        "exportName": "Checkbox",
+        "sourceSha256": "2f5f0c90bce6753d7ba68534c006419be0f05758b913f0ea4c41c380a5cf6366",
+        "inventorySha256": "9e1c294471a79155bc97c291e62377911d810a71fb35fda76dd009d29b05be7e",
+        "reportSha256": "958b3085342344f37f0d9a02832a98a363941311600ec40c0620559847971402",
+        "pinnedBy": "its own archive inventory only — the native plan does not cite this inspection; they share source reference, ownership archive and case"
+      },
+      "pairs": [
+        {
+          "id": "card-composed-variants/control5DefaultChecked=boolean-false, control5Disabled=false",
+          "variant": "control5DefaultChecked=boolean-false, control5Disabled=false",
+          "observation": "0",
+          "pairedBy": "the nested Checkbox's (instance-5) property changes spell exactly one parent variant name under the plan's forwarded axes control5DefaultChecked / control5Disabled",
+          "files": {
+            "native": {
+              "path": "card-composed-variants/0.native.png",
+              "sha256": "bf2ed49d073123e7bc00540eff1c1fe1cf91c03e08d63e359b7dd6eaa521b5bf",
+              "width": 364,
+              "height": 204
+            },
+            "source": {
+              "path": "card-composed-variants/0.source.png",
+              "sha256": "6a6b5bb83157518a98b970092e2a0bbf49b34fb5107c9d6410b00f213f6d4bbf",
+              "width": 376,
+              "height": 216
+            }
+          },
+          "native": {
+            "nodeId": "51:2693",
+            "caseId": "variant:control5DefaultChecked=boolean-false, control5Disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 280,
+                "width": 360,
+                "height": 200
+              },
+              "render": {
+                "x": 38,
+                "y": 279,
+                "width": 364,
+                "height": 204
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 200
+            },
+            "textRects": [
+              {
+                "nodeId": "I51:2694;51:2547;51:2702;51:2550;51:2705",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I51:2694;51:2547;51:2708;51:2552;51:2711",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2712;51:2554;51:2724",
+                "characters": "Receive updates",
+                "x": 50,
+                "y": 97,
+                "width": 110,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2725;51:2599;51:2731;51:2602;51:2734",
+                "characters": "Save changes",
+                "x": 37,
+                "y": 149,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Receive updates",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "98928a6d236ffb1fb6cbd58cabc8b7df07f037dfdb51b1aa64e6353e162bce74",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 200
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 216
+            },
+            "boundsRecord": "states/0.json bounds",
+            "typography": [
+              {
+                "text": "Manage your notifications.",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Receive updates",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "card-composed-variants/control5DefaultChecked=boolean-false, control5Disabled=true",
+          "variant": "control5DefaultChecked=boolean-false, control5Disabled=true",
+          "observation": "1",
+          "pairedBy": "the nested Checkbox's (instance-5) property changes spell exactly one parent variant name under the plan's forwarded axes control5DefaultChecked / control5Disabled",
+          "files": {
+            "native": {
+              "path": "card-composed-variants/1.native.png",
+              "sha256": "8b7181c2592672650de26709e12bb75fb7fee26a1fe6d99ed34bda031ec37f1d",
+              "width": 364,
+              "height": 204
+            },
+            "source": {
+              "path": "card-composed-variants/1.source.png",
+              "sha256": "2e193ad1b00b4cfd83a5b96676812204cfd8b55a275e91eee3bca14be90f46d2",
+              "width": 376,
+              "height": 216
+            }
+          },
+          "native": {
+            "nodeId": "51:2735",
+            "caseId": "variant:control5DefaultChecked=boolean-false, control5Disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 440,
+                "y": 280,
+                "width": 360,
+                "height": 200
+              },
+              "render": {
+                "x": 438,
+                "y": 279,
+                "width": 364,
+                "height": 204
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 200
+            },
+            "textRects": [
+              {
+                "nodeId": "I51:2736;51:2547;51:2744;51:2550;51:2747",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I51:2736;51:2547;51:2750;51:2552;51:2753",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2754;51:2554;51:2766",
+                "characters": "Receive updates",
+                "x": 50,
+                "y": 97,
+                "width": 110,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2767;51:2599;51:2773;51:2602;51:2776",
+                "characters": "Save changes",
+                "x": 37,
+                "y": 149,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Receive updates",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "7e759d84a0dd41167508802796c2140eea02f296186e2f8e9f4b1fe25f93af95",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 200
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 216
+            },
+            "boundsRecord": "states/1.json bounds",
+            "typography": [
+              {
+                "text": "Manage your notifications.",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Receive updates",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "card-composed-variants/control5DefaultChecked=boolean-true, control5Disabled=false",
+          "variant": "control5DefaultChecked=boolean-true, control5Disabled=false",
+          "observation": "3",
+          "pairedBy": "the nested Checkbox's (instance-5) property changes spell exactly one parent variant name under the plan's forwarded axes control5DefaultChecked / control5Disabled",
+          "files": {
+            "native": {
+              "path": "card-composed-variants/3.native.png",
+              "sha256": "2dc059df2d8b3b6ec7c0755e533210b49a9cfc104d0e1612162dc4f6f58f91e0",
+              "width": 364,
+              "height": 204
+            },
+            "source": {
+              "path": "card-composed-variants/3.source.png",
+              "sha256": "237272e290f63e055f0afce31e7af2d6422e0677d7936c0aea287fcf3788ad84",
+              "width": 376,
+              "height": 216
+            }
+          },
+          "native": {
+            "nodeId": "51:2603",
+            "caseId": "variant:control5DefaultChecked=boolean-true, control5Disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 40,
+                "width": 360,
+                "height": 200
+              },
+              "render": {
+                "x": 38,
+                "y": 39,
+                "width": 364,
+                "height": 204
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 200
+            },
+            "textRects": [
+              {
+                "nodeId": "I51:2604;51:2547;51:2612;51:2550;51:2615",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I51:2604;51:2547;51:2618;51:2552;51:2621",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2622;51:2554;51:2637",
+                "characters": "Receive updates",
+                "x": 50,
+                "y": 97,
+                "width": 110,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2638;51:2599;51:2644;51:2602;51:2647",
+                "characters": "Save changes",
+                "x": 37,
+                "y": 149,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Receive updates",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "e2e2bb89974d1af263744d3fecc9a758b6b4465e8dbd9b1cc278ae3cce9bebed",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 200
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 216
+            },
+            "boundsRecord": "states/3.json bounds",
+            "typography": [
+              {
+                "text": "Manage your notifications.",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Receive updates",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "card-composed-variants/control5DefaultChecked=boolean-true, control5Disabled=true",
+          "variant": "control5DefaultChecked=boolean-true, control5Disabled=true",
+          "observation": "4",
+          "pairedBy": "the nested Checkbox's (instance-5) property changes spell exactly one parent variant name under the plan's forwarded axes control5DefaultChecked / control5Disabled",
+          "files": {
+            "native": {
+              "path": "card-composed-variants/4.native.png",
+              "sha256": "4c722376137aa5260ecf7b3319cb9d8145ce531f6cb9cc9e861f22967b168d31",
+              "width": 364,
+              "height": 204
+            },
+            "source": {
+              "path": "card-composed-variants/4.source.png",
+              "sha256": "2e311cac3cff72ea57cd4f459d4632a35617ddd8ea23f159172496d273527c0e",
+              "width": 376,
+              "height": 216
+            }
+          },
+          "native": {
+            "nodeId": "51:2648",
+            "caseId": "variant:control5DefaultChecked=boolean-true, control5Disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 440,
+                "y": 40,
+                "width": 360,
+                "height": 200
+              },
+              "render": {
+                "x": 438,
+                "y": 39,
+                "width": 364,
+                "height": 204
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 200
+            },
+            "textRects": [
+              {
+                "nodeId": "I51:2649;51:2547;51:2657;51:2550;51:2660",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I51:2649;51:2547;51:2663;51:2552;51:2666",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2667;51:2554;51:2682",
+                "characters": "Receive updates",
+                "x": 50,
+                "y": 97,
+                "width": 110,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2683;51:2599;51:2689;51:2602;51:2692",
+                "characters": "Save changes",
+                "x": 37,
+                "y": 149,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Receive updates",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "92d465a3b9f59562fe5a538bebca7b0cdf7f7a542ca2a213fe8558390af4d147",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 200
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 216
+            },
+            "boundsRecord": "states/4.json bounds",
+            "typography": [
+              {
+                "text": "Manage your notifications.",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Receive updates",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "card-composed-variants/control5DefaultChecked=indeterminate, control5Disabled=false",
+          "variant": "control5DefaultChecked=indeterminate, control5Disabled=false",
+          "observation": "6",
+          "pairedBy": "the nested Checkbox's (instance-5) property changes spell exactly one parent variant name under the plan's forwarded axes control5DefaultChecked / control5Disabled",
+          "files": {
+            "native": {
+              "path": "card-composed-variants/6.native.png",
+              "sha256": "64581e966efd82ff1e1eb9bcde292db9dc785192f6c7432c6bab62158c2d9e09",
+              "width": 364,
+              "height": 204
+            },
+            "source": {
+              "path": "card-composed-variants/6.source.png",
+              "sha256": "2a901e74c1280e1514f3fe7e465a9185f05ef96515d0b273cd3f993b3aa4af52",
+              "width": 376,
+              "height": 216
+            }
+          },
+          "native": {
+            "nodeId": "51:2777",
+            "caseId": "variant:control5DefaultChecked=indeterminate, control5Disabled=false",
+            "exportBounds": {
+              "layout": {
+                "x": 40,
+                "y": 520,
+                "width": 360,
+                "height": 200
+              },
+              "render": {
+                "x": 38,
+                "y": 519,
+                "width": 364,
+                "height": 204
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 200
+            },
+            "textRects": [
+              {
+                "nodeId": "I51:2778;51:2547;51:2786;51:2550;51:2789",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I51:2778;51:2547;51:2792;51:2552;51:2795",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2796;51:2554;51:2811",
+                "characters": "Receive updates",
+                "x": 50,
+                "y": 97,
+                "width": 110,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2812;51:2599;51:2818;51:2602;51:2821",
+                "characters": "Save changes",
+                "x": 37,
+                "y": 149,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Receive updates",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "d607f1ba3a0928e00c43fa968b93b0db4bad5ba8c3fb92878361da0a909640f0",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 200
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 216
+            },
+            "boundsRecord": "states/6.json bounds",
+            "typography": [
+              {
+                "text": "Manage your notifications.",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Receive updates",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        },
+        {
+          "id": "card-composed-variants/control5DefaultChecked=indeterminate, control5Disabled=true",
+          "variant": "control5DefaultChecked=indeterminate, control5Disabled=true",
+          "observation": "7",
+          "pairedBy": "the nested Checkbox's (instance-5) property changes spell exactly one parent variant name under the plan's forwarded axes control5DefaultChecked / control5Disabled",
+          "files": {
+            "native": {
+              "path": "card-composed-variants/7.native.png",
+              "sha256": "0ba3b1e6a68252693e53c3efd40cf5876fcd1c1f2bd1c468f0fdb0559b920145",
+              "width": 364,
+              "height": 204
+            },
+            "source": {
+              "path": "card-composed-variants/7.source.png",
+              "sha256": "f73bc8e5ae00bc41bddfa2bcb9c5afc19b717f810bedb6488e310e1644880d0f",
+              "width": 376,
+              "height": 216
+            }
+          },
+          "native": {
+            "nodeId": "51:2822",
+            "caseId": "variant:control5DefaultChecked=indeterminate, control5Disabled=true",
+            "exportBounds": {
+              "layout": {
+                "x": 440,
+                "y": 520,
+                "width": 360,
+                "height": 200
+              },
+              "render": {
+                "x": 438,
+                "y": 519,
+                "width": 364,
+                "height": 204
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 200
+            },
+            "textRects": [
+              {
+                "nodeId": "I51:2823;51:2547;51:2831;51:2550;51:2834",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I51:2823;51:2547;51:2837;51:2552;51:2840",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2841;51:2554;51:2856",
+                "characters": "Receive updates",
+                "x": 50,
+                "y": 97,
+                "width": 110,
+                "height": 20
+              },
+              {
+                "nodeId": "I51:2857;51:2599;51:2863;51:2602;51:2866",
+                "characters": "Save changes",
+                "x": 37,
+                "y": 149,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Receive updates",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "501806993eb55677a8a42fac0371179ee565b721687f868b4938c7cb22e78ba0",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 200
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 216
+            },
+            "boundsRecord": "states/7.json bounds",
+            "typography": [
+              {
+                "text": "Manage your notifications.",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Receive updates",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Save changes",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": "Inter",
+                "postScriptName": "Inter-Regular_Medium",
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        }
+      ],
+      "notMeasured": []
+    },
+    {
+      "id": "card-composed-frame",
+      "component": "Card (composed)",
+      "description": "The retained single composed-Card comparison frame. Native: the LATEST readback of the comparison operation (event 39, 2026-09-17); the earlier privately scored 1.683 % read event 29's export. Source: the ownership archive's original, framed by the app's own source-framing record.",
+      "native": {
+        "operationId": "95db6913-5dfc-4eae-86bf-e520c43cec7d",
+        "journalEvent": "95db6913-5dfc-4eae-86bf-e520c43cec7d/events/00000039.json",
+        "journalEventSha256": "11b07ad006a5f8d59d2f96f9e342b452d555881fae92db085d8e187eeeb11911",
+        "journalEventsVerified": 40,
+        "journalHeadSha256": "11b07ad006a5f8d59d2f96f9e342b452d555881fae92db085d8e187eeeb11911",
+        "attemptId": "4233dfe8-3b6d-495a-b6bf-dead7df96d0b",
+        "phase": "component-readback",
+        "recordedAt": "2026-09-17T16:29:34.841Z",
+        "planRevision": "sha256:1f48c67948c5dd90d90753b550401661b6cc2be123818c578dc60633b3f32de4",
+        "images": 1,
+        "nodes": 29
+      },
+      "source": {
+        "referenceId": "0907e10c3d63ae5f0ef60a31726e79e20b80cbc36599ee3e3ba230a1483cda7e",
+        "ownershipId": "8c3437f5-8eba-4f78-92fc-a9ffbfb41af9",
+        "caseId": "card-composed",
+        "inventorySha256": "6fee9f59e515505c3f599b2b312d94785fbc134ca993cbfa00655c715efb9981",
+        "reportSha256": "f79ef56cbe714528bd3595c056b97292c4b4e60ba5d009227790dd1521d46f2b",
+        "pinnedBy": "the native operation's journal header (request.root)"
+      },
+      "pairs": [
+        {
+          "id": "card-composed-frame/card-composed",
+          "variant": "card-composed",
+          "observation": "source",
+          "pairedBy": "the operation header names this ownership case; the readback carries one comparison image",
+          "files": {
+            "native": {
+              "path": "card-composed-frame/0.native.png",
+              "sha256": "2dc059df2d8b3b6ec7c0755e533210b49a9cfc104d0e1612162dc4f6f58f91e0",
+              "width": 364,
+              "height": 204
+            },
+            "source": {
+              "path": "card-composed-frame/0.source.png",
+              "sha256": "237272e290f63e055f0afce31e7af2d6422e0677d7936c0aea287fcf3788ad84",
+              "width": 376,
+              "height": 216
+            }
+          },
+          "native": {
+            "nodeId": "28:806",
+            "caseId": "card-composed",
+            "exportBounds": {
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 360,
+                "height": 200
+              },
+              "render": {
+                "x": -2,
+                "y": -1,
+                "width": 364,
+                "height": 204
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 200
+            },
+            "textRects": [
+              {
+                "nodeId": "I28:806;27:769;28:826;23:654;28:818;23:671;28:817",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I28:806;27:769;28:826;23:654;28:824;23:687;28:823",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "I28:806;27:769;28:846;17:470;28:845",
+                "characters": "Receive updates",
+                "x": 50,
+                "y": 97,
+                "width": 110,
+                "height": 20
+              },
+              {
+                "nodeId": "I28:806;27:769;28:860;23:637;28:859;24:712;28:857",
+                "characters": "Save changes",
+                "x": 37,
+                "y": 149,
+                "width": 94,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Receive updates",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Save changes",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "e2e2bb89974d1af263744d3fecc9a758b6b4465e8dbd9b1cc278ae3cce9bebed",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 200
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 216
+            },
+            "boundsRecord": "source-framing/180329c74d60d912f7852751c2b54dcb09f459c4e985f763974252cf87ea818e.json (inputSha256 180329c74d60d912f7852751c2b54dcb09f459c4e985f763974252cf87ea818e)",
+            "typography": [
+              {
+                "text": "Manage your notifications.",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Receive updates",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Save changes",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        }
+      ],
+      "notMeasured": []
+    },
+    {
+      "id": "card-content-frame",
+      "component": "Card (content)",
+      "description": "The retained single Card-content comparison frame. Native: the comparison operation's readback (event 7). Source: the ownership archive's original, framed by the app's own source-framing record.",
+      "native": {
+        "operationId": "4a709124-54b4-4468-a0d9-307fe5a56122",
+        "journalEvent": "4a709124-54b4-4468-a0d9-307fe5a56122/events/00000007.json",
+        "journalEventSha256": "1cc197bf30d309b97ddea51fafafc4b6e3d03597fea473ad17be23adddef52a8",
+        "journalEventsVerified": 8,
+        "journalHeadSha256": "1cc197bf30d309b97ddea51fafafc4b6e3d03597fea473ad17be23adddef52a8",
+        "attemptId": "0913faf2-6b99-46c6-8785-796088e8b234",
+        "phase": "component-readback",
+        "recordedAt": "2026-09-17T03:01:24.710Z",
+        "planRevision": "sha256:de80ee103abb0002a57357de3251213703753f9a29b9e96738113651892981ae",
+        "images": 1,
+        "nodes": 19
+      },
+      "source": {
+        "referenceId": "0907e10c3d63ae5f0ef60a31726e79e20b80cbc36599ee3e3ba230a1483cda7e",
+        "ownershipId": "8c3437f5-8eba-4f78-92fc-a9ffbfb41af9",
+        "caseId": "card-content",
+        "inventorySha256": "6fee9f59e515505c3f599b2b312d94785fbc134ca993cbfa00655c715efb9981",
+        "reportSha256": "f79ef56cbe714528bd3595c056b97292c4b4e60ba5d009227790dd1521d46f2b",
+        "pinnedBy": "the native operation's journal header (request.root)"
+      },
+      "pairs": [
+        {
+          "id": "card-content-frame/card-content",
+          "variant": "card-content",
+          "observation": "source",
+          "pairedBy": "the operation header names this ownership case; the readback carries one comparison image",
+          "files": {
+            "native": {
+              "path": "card-content-frame/0.native.png",
+              "sha256": "3ab292e3fd1f8a53af20ffd4dd98c35d2ab736989db356e358ba64bd112b86d4",
+              "width": 364,
+              "height": 188
+            },
+            "source": {
+              "path": "card-content-frame/0.source.png",
+              "sha256": "ab4ddef313934aad6eff25cc6101766c044c9440468660c828bab79b56f4f1f1",
+              "width": 376,
+              "height": 200
+            }
+          },
+          "native": {
+            "nodeId": "35:912",
+            "caseId": "card-content",
+            "exportBounds": {
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 360,
+                "height": 184
+              },
+              "render": {
+                "x": -2,
+                "y": -1,
+                "width": 364,
+                "height": 188
+              }
+            },
+            "layoutOffset": {
+              "x": 2,
+              "y": 1
+            },
+            "layoutSize": {
+              "width": 360,
+              "height": 184
+            },
+            "textRects": [
+              {
+                "nodeId": "I35:912;35:886;35:932;23:654;35:924;23:671;35:923",
+                "characters": "Workspace settings",
+                "x": 26,
+                "y": 25,
+                "width": 152,
+                "height": 24
+              },
+              {
+                "nodeId": "I35:912;35:886;35:932;23:654;35:930;23:687;35:929",
+                "characters": "Manage your notifications.",
+                "x": 26,
+                "y": 53,
+                "width": 176,
+                "height": 20
+              },
+              {
+                "nodeId": "35:935",
+                "characters": "Choose which updates you receive.",
+                "x": 26,
+                "y": 97,
+                "width": 236,
+                "height": 20
+              },
+              {
+                "nodeId": "35:945",
+                "characters": "Settings apply to this workspace.",
+                "x": 26,
+                "y": 141,
+                "width": 220,
+                "height": 20
+              }
+            ],
+            "typography": [
+              {
+                "characters": "Choose which updates you receive.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Manage your notifications.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Settings apply to this workspace.",
+                "family": "Inter",
+                "style": "Regular",
+                "fontSize": 14,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 20
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              },
+              {
+                "characters": "Workspace settings",
+                "family": "Inter",
+                "style": "Medium",
+                "fontSize": 16,
+                "lineHeight": {
+                  "unit": "PIXELS",
+                  "value": 24
+                },
+                "letterSpacing": {
+                  "unit": "PERCENT",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "source": {
+            "originalSha256": "365a1b8b035e9f6c2d4776299b9b6646da059e6880cf65422eb2603e7c99c98e",
+            "originalSize": {
+              "width": 900,
+              "height": 600
+            },
+            "bounds": {
+              "x": 32,
+              "y": 32,
+              "width": 360,
+              "height": 184
+            },
+            "crop": {
+              "x": 24,
+              "y": 24,
+              "width": 376,
+              "height": 200
+            },
+            "boundsRecord": "source-framing/92aac49ea2b1d62368db890d04570511d38563311f37f3afd6747c3d07e63fbd.json (inputSha256 92aac49ea2b1d62368db890d04570511d38563311f37f3afd6747c3d07e63fbd)",
+            "typography": [
+              {
+                "text": "Choose which updates you receive.",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Manage your notifications.",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Settings apply to this workspace.",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "400",
+                "fontSize": "14px",
+                "lineHeight": "20px",
+                "letterSpacing": "normal"
+              },
+              {
+                "text": "Workspace settings",
+                "family": null,
+                "postScriptName": null,
+                "cssFamily": "\"Inter Variable\", sans-serif",
+                "cssWeight": "500",
+                "fontSize": "16px",
+                "lineHeight": "24px",
+                "letterSpacing": "normal"
+              }
+            ]
+          }
+        }
+      ],
+      "notMeasured": []
+    },
+    {
+      "id": "button-root-matrix",
+      "component": "Button",
+      "description": "The retained Button family: 63 native mains (size × variant). NOT MEASURED — see the reason below.",
+      "native": {
+        "operationId": "e9bd4394-5801-4afc-8fde-b6c1807161a4",
+        "updateId": "c620c0e9-dc6f-7e2a-3008-0896399a0a86",
+        "proposalId": "6365bfb8beb940bf5295004d167d274f7efff145be5d9011720ce0d4042e135f",
+        "journalEvent": "c620c0e9-dc6f-7e2a-3008-0896399a0a86/events/00000007.json",
+        "journalEventSha256": "81e24136306dbb7c114f62ffd1af28c0ba39ddad5d2bff093d1462ef67dca6c8",
+        "journalEventsVerified": 8,
+        "journalHeadSha256": "81e24136306dbb7c114f62ffd1af28c0ba39ddad5d2bff093d1462ef67dca6c8",
+        "attemptId": "c4c98dfd-33e0-43e3-ad61-669fa6091df0",
+        "phase": "update-readback",
+        "recordedAt": null,
+        "planRevision": "sha256:9e119e4dc535304f5c25d8be6d44655d6d10e12bd2215783a07ac471a1117bc6",
+        "images": 63,
+        "nodes": 191,
+        "imagesWithExportBounds": 0
+      },
+      "source": {
+        "referenceId": "0907e10c3d63ae5f0ef60a31726e79e20b80cbc36599ee3e3ba230a1483cda7e",
+        "ownershipId": "8c3437f5-8eba-4f78-92fc-a9ffbfb41af9",
+        "caseId": "button-default",
+        "matrixObservations": 80,
+        "variantsWithAnOriginalImage": 63,
+        "originalsWithRecordedBounds": 0,
+        "inventorySha256": "6fee9f59e515505c3f599b2b312d94785fbc134ca993cbfa00655c715efb9981",
+        "pinnedBy": "the native operation's journal header (request.inventorySha256)"
+      },
+      "pairs": [],
+      "notMeasured": [
+        {
+          "variant": "size=default, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=default, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=default, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=default, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=default, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=default, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=default, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=null, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=null, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=null, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=null, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=null, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=null, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=null, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=xs, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=xs, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=xs, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=xs, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=xs, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=xs, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=xs, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=sm, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=sm, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=sm, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=sm, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=sm, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=sm, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=sm, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=lg, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=lg, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=lg, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=lg, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=lg, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=lg, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=lg, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-xs, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-xs, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-xs, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-xs, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-xs, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-xs, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-xs, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-sm, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-sm, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-sm, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-sm, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-sm, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-sm, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-sm, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-lg, variant=default",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-lg, variant=null",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-lg, variant=outline",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-lg, variant=secondary",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-lg, variant=ghost",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-lg, variant=destructive",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        },
+        {
+          "variant": "size=icon-lg, variant=link",
+          "reason": "native main is a root with an EMPTY Children slot; the original React mount carries caller content (the label), so the pair is not like-for-like"
+        }
+      ],
+      "notMeasuredReason": "A per-variant ORIGINAL React image exists for 63 of the 63 variants (the ownership archive's 80-observation property matrix), but no honest pair can be built: (1) every one of the 63 native mains is a Button root whose Children slot is EMPTY (component + background rectangle + slot, no text), while every original mount renders the caller's label, so an image comparison would measure the absent caller content, not the root; (2) 0 of the matrix originals record layout bounds and 0 of the 63 native exports record export bounds, so neither side has a recorded layout origin. No image was committed for this cohort and nothing was substituted."
+    }
+  ]
+}

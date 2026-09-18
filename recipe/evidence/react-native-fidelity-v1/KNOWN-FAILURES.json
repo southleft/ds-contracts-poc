@@ -1,0 +1,35 @@
+{
+  "_marker": "KNOWN FAILURES — a shrink-only ratchet read by scripts/react-native-fidelity-check.ts. Every row is a measured historical FAIL with its cause. Admitted classes: font-substrate, font-metrics (needs `measured`), alignment-trim-threshold (proof recomputed by the check). Nothing here changes a score; the check is red on a failing row not listed, on a listed row that passes, and on a listed row whose class the measurements contradict.",
+  "qualification": "measured-not-graded",
+  "failures": {
+    "button-initial/disabled=false, variant=null": {
+      "class": "font-substrate",
+      "cause": "9.195 % historical. The variant paints no background, so the ink trim reduces the pair to the label alone (native 92x14, source 94x14): the 1 px antialiasing fringe Chromium paints at the glyph edges becomes the whole denominator. Typography is identical on both sides (Inter Medium 14/20, letter-spacing 0). Placed by the recorded layout origins the pair differs by 1.646 % (113 of 6864 px) with 0 differing pixels outside the native text box; Chromium lays down 1.133x Figma's ink for the same glyphs. The native text box covers the whole trimmed cell, so the glyph-masked pass has nothing left to score (the text-only row branch)."
+    },
+    "button-initial/disabled=false, variant=ghost": {
+      "class": "font-substrate",
+      "cause": "9.195 % historical. The variant paints no background, so the ink trim reduces the pair to the label alone (native 92x14, source 94x14): the 1 px antialiasing fringe Chromium paints at the glyph edges becomes the whole denominator. Typography is identical on both sides (Inter Medium 14/20, letter-spacing 0). Placed by the recorded layout origins the pair differs by 1.646 % (113 of 6864 px) with 0 differing pixels outside the native text box; Chromium lays down 1.133x Figma's ink for the same glyphs. The native text box covers the whole trimmed cell, so the glyph-masked pass has nothing left to score (the text-only row branch)."
+    },
+    "button-initial/disabled=false, variant=link": {
+      "class": "font-substrate",
+      "cause": "9.043 % historical. The variant paints no background, so the ink trim reduces the pair to the label alone (native 92x14, source 94x14): the 1 px antialiasing fringe Chromium paints at the glyph edges becomes the whole denominator. Typography is identical on both sides (Inter Medium 14/20, letter-spacing 0). Placed by the recorded layout origins the pair differs by 1.617 % (111 of 6864 px) with 0 differing pixels outside the native text box; Chromium lays down 1.1326x Figma's ink for the same glyphs. The native text box covers the whole trimmed cell, so the glyph-masked pass has nothing left to score (the text-only row branch)."
+    },
+    "button-initial/disabled=true, variant=secondary": {
+      "class": "alignment-trim-threshold",
+      "cause": "6.166 % historical, and NOT a font residual. Both sides paint the half-opaque secondary background; Figma composites it to rgb(250,250,250) and Chromium to rgb(249,249,249). The shared scorer trims ink with a strict < 250, so the native background is trimmed away (native 92x14) while the source keeps its whole button (114x34), and a text strip is compared with a button. Placed by the recorded layout origins the pair differs by 0.626 % (43 of 6864 px), 0 outside the native text box; glyph-masked 0.000 %. The check recomputes this proof from the committed bytes and is red if any part of it stops holding. The scorer is unchanged and the 6.166 % stays the row's historical number."
+    },
+    "button-initial/disabled=(unset), variant=null": {
+      "class": "font-substrate",
+      "cause": "9.195 % historical. The variant paints no background, so the ink trim reduces the pair to the label alone (native 92x14, source 94x14): the 1 px antialiasing fringe Chromium paints at the glyph edges becomes the whole denominator. Typography is identical on both sides (Inter Medium 14/20, letter-spacing 0). Placed by the recorded layout origins the pair differs by 1.646 % (113 of 6864 px) with 0 differing pixels outside the native text box; Chromium lays down 1.133x Figma's ink for the same glyphs. The native text box covers the whole trimmed cell, so the glyph-masked pass has nothing left to score (the text-only row branch)."
+    },
+    "button-initial/disabled=(unset), variant=ghost": {
+      "class": "font-substrate",
+      "cause": "9.195 % historical. The variant paints no background, so the ink trim reduces the pair to the label alone (native 92x14, source 94x14): the 1 px antialiasing fringe Chromium paints at the glyph edges becomes the whole denominator. Typography is identical on both sides (Inter Medium 14/20, letter-spacing 0). Placed by the recorded layout origins the pair differs by 1.646 % (113 of 6864 px) with 0 differing pixels outside the native text box; Chromium lays down 1.133x Figma's ink for the same glyphs. The native text box covers the whole trimmed cell, so the glyph-masked pass has nothing left to score (the text-only row branch)."
+    },
+    "button-initial/disabled=(unset), variant=link": {
+      "class": "font-substrate",
+      "cause": "9.043 % historical. The variant paints no background, so the ink trim reduces the pair to the label alone (native 92x14, source 94x14): the 1 px antialiasing fringe Chromium paints at the glyph edges becomes the whole denominator. Typography is identical on both sides (Inter Medium 14/20, letter-spacing 0). Placed by the recorded layout origins the pair differs by 1.617 % (111 of 6864 px) with 0 differing pixels outside the native text box; Chromium lays down 1.1326x Figma's ink for the same glyphs. The native text box covers the whole trimmed cell, so the glyph-masked pass has nothing left to score (the text-only row branch)."
+    }
+  },
+  "recorded": "2026-09-18"
+}

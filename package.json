@@ -541,7 +541,9 @@
     "curated-facts:self-test": "node scripts/curated-fact-guard-self-test.mjs",
     "recipe:table:tail-census:format": "prettier --write recipe/evidence/table-tail-census-v1.json",
     "test:audit-classify": "node --test scripts/audit-classify.test.mjs",
-    "design:consumer:check": "tsx scripts/design-consumer-check.ts"
+    "design:consumer:check": "tsx scripts/design-consumer-check.ts",
+    "react:native:fidelity:check": "tsx scripts/react-native-fidelity-check.ts && node --import tsx --test scripts/react-native-fidelity-check.test.ts",
+    "react:native:fidelity:record": "tsx scripts/react-native-fidelity-record.ts"
   },
   "engines": {
     "node": ">=20"
