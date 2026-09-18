@@ -140,6 +140,7 @@ async function fixture(t: test.TestContext) {
         payload.fileKey,
         payload.replaceReadbackAttemptId,
         payload.resolveWriteAttemptId,
+        payload.protocol,
       );
       if (body.command) delivered.push(body.command);
     } else {

@@ -40,7 +40,7 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
     let response;
     if(url.endsWith('/begin')) return {ok:true,json:async()=>transport.begin(id,supplied,payload.attemptId)};
     if(url.endsWith('/claim')) {
-      response=transport.claim(id,supplied,payload.fileKey,payload.replaceReadbackAttemptId,payload.resolveWriteAttemptId);
+      response=transport.claim(id,supplied,payload.fileKey,payload.replaceReadbackAttemptId,payload.resolveWriteAttemptId,payload.protocol);
       if('command' in response) delivered.push(response.command);
     } else response=transport.accept(id,supplied,payload);
     if(lose===(url.endsWith('/claim')?'claim':'result')){lose='';throw Error('response lost');}

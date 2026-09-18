@@ -25,12 +25,13 @@ function correctionValue(value: NativeContractUpdatePlan['changes'][number]['bef
 
 /** An existing native operation for one of these source cases that still
  * follows another revision of the source. */
-interface MovedOperation { operationId: string; caseId: string; kind: 'root' | 'initial'; followedReferenceId: string; fileKey: string; phase: string }
+interface MovedOperation { operationId: string; caseId: string; kind: 'root' | 'initial'; followedReferenceId: string; fileKey: string; phase: string; successionProblem?: string }
 function updateProblem(problem: string) {
   const [name, ...node] = problem.split(':'), nodeId = node.join(':');
   if (name === 'native-update-observation-refused') return 'The canvas did not match what this update expected. Nothing further was written.';
   if (name === 'native-update-write-begun-outcome-unresolved') return 'The companion had begun this write, but the canvas still shows the earlier values. It may still land. Nothing is retried; inspect again once the companion has settled.';
   if (name === 'native-update-late-write-result-contradicts-canvas') return 'A result arrived for a write that was already settled from the canvas, and it disagrees with that reading. Inspect the update again before anything else is applied.';
+  if (name === 'native-update-write-ran-without-begin') return 'A companion older than this app executed a write without asking. Close every open companion window and reopen the plugin, then inspect this update again.';
   if (name === 'native-update-baseline-conflict') return 'Another property of these components changed in Figma after the last verified readback. Restore it, or review it as a design change, then inspect again.';
   if (name === 'native-update-node-missing') return `Node ${nodeId} no longer exists in the file.`;
   if (name === 'native-update-file-mismatch') return 'The companion is connected to a different Figma file.';
@@ -131,7 +132,8 @@ export function ReactNativeInspection({ referenceId, selectedCase, ownership }: 
     {!ready && <p>Complete a matching structure observation with a compiled root draft for the selected case first.</p>}
     {moved.map(m => <section key={m.operationId} aria-label="Existing native component from another source revision">
       <p>An existing native {m.kind === 'initial' ? 'initial-state set' : 'root family'} for <strong>{m.caseId}</strong> follows another revision of this source ({m.followedReferenceId.slice(0, 8)}…). Following the current source keeps that operation, its Figma nodes and its verified corrections, and writes nothing to Figma. Afterwards, <em>Review compiler update</em> shows what the source change would alter on those same nodes. Preparing the case again instead would create a second component.</p>
-      <button type="button" disabled={busy || loading} onClick={() => void action(`native-operation/${m.operationId}/adopt-source`)}>Follow the current source with the existing {m.caseId} {m.kind === 'initial' ? 'states' : 'roots'}</button>
+      {m.successionProblem && <p role="alert">Its source-succession record cannot be read, so it cannot follow this source until that is repaired. Do not prepare this case again: that would create a second component. <code>{m.successionProblem}</code></p>}
+      <button type="button" disabled={busy || loading || !!m.successionProblem} onClick={() => void action(`native-operation/${m.operationId}/adopt-source`)}>Follow the current source with the existing {m.caseId} {m.kind === 'initial' ? 'states' : 'roots'}</button>
     </section>)}
     {error && <p role="alert">{error}</p>}
     <ReactCallbackInspection key={referenceId + ':' + selectedCase} referenceId={referenceId} caseId={selectedCase} available={rows.some(r => r.kind === 'root' && r.operation.sourceCurrent)} />

@@ -88,7 +88,7 @@ test('a late result claiming a write the canvas read found untouched raises reco
  const f=await fixture(t);await f.run('update-preflight-readback');
  const lost=f.jobs().dispatch(f.id,'update-apply');await f.settle();
  assert.equal(f.jobs().accept(f.id,{...lost,result:{status:'updated'}}).phase,'update-recovery-required');
- assert.deepEqual(f.jobs().get(f.id).problems,['native-update-late-write-result-contradicts-canvas']);
+ assert.deepEqual(f.jobs().get(f.id).problems,['native-update-write-ran-without-begin','native-update-late-write-result-contradicts-canvas']);
  f.restart();assert.equal(f.jobs().get(f.id).phase,'update-recovery-required');
  // The canvas may hold this update's values: every chain guard must see a written, unverified correction.
  assert.equal(f.jobs().updateHistory(f.parent).length,1);
@@ -132,19 +132,19 @@ test('the companion must ask before a write executes, and is refused once a canv
 test('a second poller cannot turn an untouched settlement into a second write, and the stalled first poller cannot begin',async t=>{
  const f=await fixture(t),transport=createNativeOperationTransport(f.repo,f.jobs());
  const secret=transport.pair(f.id).split('.')[1],fileKey=f.input.before.operation.fileKey;transport.start(f.id);
- const preflight=transport.claim(f.id,secret,fileKey);assert.ok(preflight.status==='command');
+ const preflight=transport.claim(f.id,secret,fileKey,undefined,undefined,2);assert.ok(preflight.status==='command');
  if(preflight.status==='command')transport.accept(f.id,secret,{...preflight.command,result:await f.run_script(preflight.command.script)});
- const a=transport.claim(f.id,secret,fileKey);assert.ok(a.status==='command'&&!a.command.readOnly,'poller A is handed the write, then stalls');
+ const a=transport.claim(f.id,secret,fileKey,undefined,undefined,2);assert.ok(a.status==='command'&&!a.command.readOnly,'poller A is handed the write, then stalls');
  transport.resolveWriteOutcome(f.id);
- const b=transport.claim(f.id,secret,fileKey);assert.ok(b.status==='command'&&b.command.readOnly,'poller B takes the canvas read');
+ const b=transport.claim(f.id,secret,fileKey,undefined,undefined,2);assert.ok(b.status==='command'&&b.command.readOnly,'poller B takes the canvas read');
  if(b.status==='command')transport.accept(f.id,secret,{...b.command,result:await f.run_script(b.command.script)});
  assert.equal(f.jobs().get(f.id).phase,'update-write-untouched');
- for(let i=0;i<3;i++)assert.equal(transport.claim(f.id,secret,fileKey).status,'finished','no preflight and no second write is handed out');
+ for(let i=0;i<3;i++)assert.equal(transport.claim(f.id,secret,fileKey,undefined,undefined,2).status,'finished','no preflight and no second write is handed out');
  if(a.status==='command')assert.throws(()=>transport.begin(f.id,secret,a.command.attemptId),/write-begin-refused/,'A wakes up and may not execute');
  assert.ok(f.nodes.every((n:any)=>n.opacity===0.5));assert.equal(f.writes(),1);
  // Only an explicit operator decision sends another write, and that one must ask too.
  transport.rearmWrite(f.id);
- for(let i=0;i<3;i++){const d=transport.claim(f.id,secret,fileKey);assert.equal(d.status,'command');if(d.status!=='command')break;
+ for(let i=0;i<3;i++){const d=transport.claim(f.id,secret,fileKey,undefined,undefined,2);assert.equal(d.status,'command');if(d.status!=='command')break;
   if(!d.command.readOnly)transport.begin(f.id,secret,d.command.attemptId);
   transport.accept(f.id,secret,{...d.command,result:await f.run_script(d.command.script)});}
  assert.equal(f.jobs().get(f.id).phase,'update-verified');assert.equal(f.writes(),2);
@@ -166,12 +166,38 @@ test('a canvas read is refused without an unresolved write, and a forged one fai
 test('a companion holding an interrupted write marker is handed only the read that settles that write',async t=>{
  const f=await fixture(t),transport=createNativeOperationTransport(f.repo,f.jobs());
  const secret=transport.pair(f.id).split('.')[1],fileKey=f.input.before.operation.fileKey;transport.start(f.id);
- for(let i=0;i<2;i++){const d=transport.claim(f.id,secret,fileKey);assert.equal(d.status,'command');
+ for(let i=0;i<2;i++){const d=transport.claim(f.id,secret,fileKey,undefined,undefined,2);assert.equal(d.status,'command');
   if(d.status==='command'&&d.command.readOnly)transport.accept(f.id,secret,{...d.command,result:await f.run_script(d.command.script)});else if(d.status==='command')var write=d.command;}
  // The companion died after taking the write. It reconnects holding that marker.
- assert.equal(transport.claim(f.id,secret,fileKey,undefined,write!.attemptId).status,'awaiting-result');
+ assert.equal(transport.claim(f.id,secret,fileKey,undefined,write!.attemptId,2).status,'awaiting-result');
  transport.resolveWriteOutcome(f.id);
- assert.equal(transport.claim(f.id,secret,fileKey,undefined,'00000000-0000-4000-8000-000000000000').status,'awaiting-result','another write\'s marker is not served');
- const d=transport.claim(f.id,secret,fileKey,undefined,write!.attemptId);
+ assert.equal(transport.claim(f.id,secret,fileKey,undefined,'00000000-0000-4000-8000-000000000000',2).status,'awaiting-result','another write\'s marker is not served');
+ const d=transport.claim(f.id,secret,fileKey,undefined,write!.attemptId,2);
  assert.ok(d.status==='command'&&d.command.readOnly&&d.resolvesWriteAttemptId===write!.attemptId);
+});
+
+test('a companion older than the begin handshake is never handed a write, and no attempt is burned on it',async t=>{
+ const f=await fixture(t),transport=createNativeOperationTransport(f.repo,f.jobs());
+ const secret=transport.pair(f.id).split('.')[1],fileKey=f.input.before.operation.fileKey;transport.start(f.id);
+ const preflight=transport.claim(f.id,secret,fileKey);assert.ok(preflight.status==='command'&&preflight.command.readOnly,'reads are still served');
+ if(preflight.status==='command')transport.accept(f.id,secret,{...preflight.command,result:await f.run_script(preflight.command.script)});
+ const events=()=>readdirSync(path.join(f.dir,'events')).length,before=events();
+ for(let i=0;i<3;i++)assert.equal(transport.claim(f.id,secret,fileKey).status,'companion-upgrade-required');
+ assert.equal(events(),before,'the write was not even dispatched');assert.equal(existsSync(path.join(f.dir,'apply-claim.json')),false);
+ const current=transport.claim(f.id,secret,fileKey,undefined,undefined,2);
+ assert.ok(current.status==='command'&&!current.command.readOnly,'the current companion receives it');
+ assert.equal(transport.claim(f.id,secret,fileKey).status,'companion-upgrade-required','and an old one still cannot take it over');
+});
+
+test('any late result after an untouched settlement names a companion that wrote without asking; after an unresolved one a rollback raises recovery',async t=>{
+ const f=await fixture(t);await f.run('update-preflight-readback');
+ const lost=f.jobs().dispatch(f.id,'update-apply');await f.settle();
+ const benign=f.jobs().accept(f.id,{...lost,result:{status:'no-op'}});
+ assert.equal(benign.phase,'update-write-untouched');assert.deepEqual(benign.problems,['native-update-write-ran-without-begin']);
+ const g=await fixture(t);await g.run('update-preflight-readback');
+ const begun=g.jobs().dispatch(g.id,'update-apply');g.jobs().beginWrite(g.id,begun.attemptId);await g.settle();
+ await g.run_script(begun.script);g.jobs().retryObservation(g.id);
+ const read=g.jobs().pendingCommand(g.id)!;g.jobs().accept(g.id,{...read,result:await g.run_script(read.script)});
+ assert.equal(g.jobs().get(g.id).phase,'update-verified');
+ assert.equal(g.jobs().accept(g.id,{...begun,result:{status:'rolled-back'}}).phase,'update-recovery-required','verified must not survive its own write reporting a rollback');
 });

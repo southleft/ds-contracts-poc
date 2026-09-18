@@ -942,9 +942,10 @@ export function createReferenceService(
           if (
             !object(payload) ||
             Object.keys(payload).some(
-              (key) => !["fileKey", "replaceReadbackAttemptId", "resolveWriteAttemptId"].includes(key),
+              (key) => !["fileKey", "replaceReadbackAttemptId", "resolveWriteAttemptId", "protocol"].includes(key),
             ) ||
             typeof payload.fileKey !== "string" ||
+            (payload.protocol !== undefined && payload.protocol !== 2) ||
             [payload.replaceReadbackAttemptId, payload.resolveWriteAttemptId].some(
               (attempt) => attempt !== undefined && (typeof attempt !== "string" || !UUID.test(attempt)))
           ) {
@@ -963,6 +964,7 @@ export function createReferenceService(
               payload.fileKey,
               payload.replaceReadbackAttemptId as string | undefined,
               payload.resolveWriteAttemptId as string | undefined,
+              payload.protocol as number | undefined,
             ),
           );
         } else {

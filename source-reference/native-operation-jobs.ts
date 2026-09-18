@@ -1742,11 +1742,16 @@ export function createNativeOperationJobs(
       return withReadSnapshot(() => readdirSync(operations).filter(id => UUID.test(id)).flatMap(id => {
         const loaded = load(id), creation = loaded.header.request;
         if (!isReactInitialNativeRequest(creation) && !(isReactNativeRequest(creation) && creation.version === 1)) return [];
-        let pin: ReactNativeRequest | ReactInitialNativeRequest;
-        try { pin = effectiveSource(id, creation) as ReactNativeRequest | ReactInitialNativeRequest; } catch { return []; }
+        // Positional `instance-N` initial states cannot follow a later observation.
+        if (isReactInitialNativeRequest(creation) && creation.version !== 1) return [];
+        let pin: ReactNativeRequest | ReactInitialNativeRequest, successionProblem: string | undefined;
+        // An unreadable record must stay VISIBLE here: hidden, the only path left
+        // under a changed source would allocate a second component.
+        try { pin = effectiveSource(id, creation) as ReactNativeRequest | ReactInitialNativeRequest; }
+        catch { pin = creation; successionProblem = 'native-source-succession-unreadable:' + id; }
         const followed = isReactInitialNativeRequest(pin) ? pin.anchor.referenceId : pin.referenceId;
-        if (followed === referenceId || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase)) return [];
-        return [{ operationId: id, caseId: pin.caseId, kind: isReactInitialNativeRequest(pin) ? 'initial' as const : 'root' as const,
+        if ((followed === referenceId && !successionProblem) || !['component-structure-observed','component-observation-refused'].includes(loaded.state.phase)) return [];
+        return [{ ...(successionProblem ? { successionProblem } : {}), operationId: id, caseId: pin.caseId, kind: isReactInitialNativeRequest(pin) ? 'initial' as const : 'root' as const,
           followedReferenceId: followed, fileKey: loaded.header.policy.fileKey, phase: loaded.state.phase }];
       }));
     },
@@ -1764,7 +1769,11 @@ export function createNativeOperationJobs(
         // update planning refuses by name); it must not take the listing down.
         let pin: unknown, successionProblem: string | undefined;
         try { pin = comparison ? undefined : effectiveSource(id, header.request); }
-        catch (error) { pin = header.request; successionProblem = (error instanceof Error ? error.message : 'native-source-succession-unreadable') + ':' + id; }
+        catch (error) {
+          const message = error instanceof Error ? error.message : '';
+          // Identifier-shaped names only, as for every other refusal that reaches the browser.
+          pin = header.request; successionProblem = (/^[a-z][a-z0-9-]{2,100}$/.test(message) ? message : 'native-source-succession-unreadable') + ':' + id;
+        }
         const initial = isReactInitialNativeRequest(pin) ? pin : undefined;
         const request = initial ? { ...initial.anchor, caseId: initial.caseId } : comparison?.root ?? pin;
         if (!isReactNativeRequest(request) || request.referenceId !== referenceId) return [];

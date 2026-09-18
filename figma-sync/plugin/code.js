@@ -306,7 +306,9 @@ function nativeCommandValid(c, operationId) {
     c.readOnly === c.phase.endsWith('-readback') && typeof c.script === 'string' &&
     c.script.length > 0 && c.script.length <= 4 * 1024 * 1024 && sha256Hex(c.script) === c.scriptSha256;
 }
-async function nativePoll() {
+// `resumeOnly`: opened without a click. Finish what this plugin already holds
+// (deliver a saved result, settle an interrupted command) and take nothing new.
+async function nativePoll(resumeOnly) {
   if (busy) { nativeStatus('busy', 'Another plugin operation is running. Waiting.'); return; }
   busy = true;
   try {
@@ -344,7 +346,12 @@ async function nativePoll() {
     // An interrupted write is never run again. The only command this plugin
     // will take while holding its marker is the app's read of the actual
     // nodes that settles it; the app confirms which write that read resolves.
-    const delivery = await request('claim', { fileKey: figma.fileKey,
+    if (resumeOnly && !heldReadback && !heldWrite) {
+      nativeStatus('resume-complete', saved ? 'Saved result delivered. Press Connect / resume to continue this operation.' : 'Nothing left to finish. Press Connect / resume to continue.');
+      return;
+    }
+    // protocol 2: this companion asks the app before executing any write.
+    const delivery = await request('claim', { fileKey: figma.fileKey, protocol: 2,
       ...(heldReadback ? { replaceReadbackAttemptId: heldReadback.attemptId } : {}),
       ...(heldWrite ? { resolveWriteAttemptId: heldWrite.attemptId } : {}) });
     if (heldWrite && delivery.status !== 'command') {
@@ -356,6 +363,7 @@ async function nativePoll() {
         ready: 'Connected. Start Create and inspect in the local app.',
         'awaiting-result': 'The app is waiting for a previously delivered result. Creation will not repeat.',
         finished: 'Inspection stopped or finished. Review the result and remaining checks in the app.',
+        'companion-upgrade-required': 'This companion is older than the local app. Close and reopen the plugin.',
       };
       nativeStatus(delivery.status, messages[delivery.status] || 'Unexpected response from the app.');
       return;
@@ -462,7 +470,7 @@ figma.ui.onmessage = async (msg) => {
     catch (e) { nativeStatus('unavailable', 'The connection could not be saved.'); }
     return;
   }
-  if (msg.type === 'native-poll') { await nativePoll(); return; }
+  if (msg.type === 'native-poll') { await nativePoll(msg.resumeOnly === true); return; }
   if (msg.type === 'native-disconnect') {
     await figma.clientStorage.deleteAsync(nativeConnectionKey());
     nativeStatus('disconnected', 'Disconnected. Saved operation receipts are retained.'); return;
@@ -470,8 +478,9 @@ figma.ui.onmessage = async (msg) => {
   if (msg.type === 'ui-ready') {
     post({ type: 'init', fileKey: figma.fileKey || '' });
     // Resume by itself ONLY to finish something this plugin already holds: a
-    // saved result to deliver or an interrupted command to settle. Taking new
-    // commands still waits for Connect / resume.
+    // saved result to deliver or an interrupted command to settle. Those polls
+    // are resume-only and stop when nothing is held; the next phase of the
+    // operation, including any write, still waits for Connect / resume.
     try {
       const pair = await figma.clientStorage.getAsync(nativeConnectionKey());
       const match = typeof pair === 'string' && NATIVE_PAIR.exec(pair);

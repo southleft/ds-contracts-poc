@@ -133,10 +133,13 @@ export function createNativeUpdateJobs(repo: string, plans: Plans,
         const settlement=state.settled.get(event.envelope?.attemptId);
         if(!settlement || state.pending) fail('late-result-invalid');
         // Allow-list: only results consistent with the settlement are benign.
-        const status=String((event.envelope.result as any)?.status),benign=settlement==='untouched'?['no-op','refused']:settlement==='landed'?['updated','no-op']:undefined;
-        if(benign && !benign.includes(status)) {
+        const status=String((event.envelope.result as any)?.status),benign=settlement==='untouched'?['no-op','refused']:['updated','no-op'];
+        // Untouched means begin was refused from then on: any result at all proves a
+        // program ran without permission (a companion older than the handshake).
+        if(settlement==='untouched') state.problems=[...new Set([...state.problems,'native-update-write-ran-without-begin'])];
+        if(!benign.includes(status)) {
           // The canvas may hold this update's values: it re-enters every chain guard as a written, unverified correction.
-          state.phase='update-recovery-required';state.wrote=true;state.problems=['native-update-late-write-result-contradicts-canvas'];
+          state.phase='update-recovery-required';state.wrote=true;state.problems=[...new Set([...state.problems,'native-update-late-write-result-contradicts-canvas'])];
         }
       } else if(event.kind==='result' && state.unresolved) {
         if(!state.pending) fail('unsolicited-result');

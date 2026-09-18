@@ -160,6 +160,7 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     fileKey: string,
     replaceReadbackAttemptId?: string,
     resolveWriteAttemptId?: string,
+    protocol?: number,
   ) => {
     authorize(id, secret);
     // A companion that died mid-write holds that write's marker and will run
@@ -184,6 +185,14 @@ export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(
     if (replaceReadbackAttemptId !== undefined && !replacingPhase)
       return { status: "awaiting-result" as const };
     const snapshot = jobs.deliveryState(id);
+    // A journal with the begin handshake hands a write only to a companion that
+    // will ask first. An older sandbox left open across an upgrade gets nothing:
+    // checked before dispatch and before the claim file, so no attempt is burned.
+    const writes = (phase?: string) => !!phase && !phase.endsWith("-readback");
+    if (jobs.beginWrite && protocol !== 2 && writes(snapshot.pendingPhase ?? NEXT[snapshot.phase])) {
+      seen.set(id, Date.now());
+      return { status: "companion-upgrade-required" as const };
+    }
     if (!snapshot.pendingPhase) {
       const next = NEXT[snapshot.phase];
       if (!next) return { status: "finished" as const };

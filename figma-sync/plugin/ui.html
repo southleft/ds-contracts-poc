@@ -881,10 +881,10 @@
     $('native-connection').value = '';
     startNativePolling();
   };
-  function startNativePolling() {
+  function startNativePolling(resumeOnly) {
     if (nativeTimer) clearInterval(nativeTimer);
     nativeTimer = setInterval(function () {
-      parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
+      parent.postMessage({ pluginMessage: { type: 'native-poll', resumeOnly: !!resumeOnly } }, '*');
     }, 3000);
   }
   $('native-disconnect').onclick = function () {
@@ -2036,11 +2036,11 @@
     } else if (msg.type === 'native-resume') {
       // The controller holds a saved result or an interrupted command for this
       // file. Finishing that needs no new consent; anything new still does.
-      parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
-      startNativePolling();
+      parent.postMessage({ pluginMessage: { type: 'native-poll', resumeOnly: true } }, '*');
+      startNativePolling(true);
     } else if (msg.type === 'native-status') {
       $('native-status').textContent = msg.message || msg.status;
-      if (msg.status === 'disconnected') {
+      if (msg.status === 'disconnected' || msg.status === 'resume-complete') {
         if (nativeTimer) clearInterval(nativeTimer);
         nativeTimer = null;
       }
