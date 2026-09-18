@@ -14,7 +14,6 @@ import {
   reactSourceProgramUnchanged,
   type ReactSourceProgram,
 } from "./react-source-program.js";
-import { reactReferenceEntry } from "./react-reference-cases.js";
 
 export async function buildReactOwnershipReference(
   root: string,
@@ -47,8 +46,10 @@ export async function buildReactOwnershipReference(
   )
     throw Error("react-ownership-duplicate-export");
   const modules = [...new Set(entries.map((c) => c.module))];
+  // The observed program is the original's own cohort entry plus read-only
+  // export identities. The cohort is never re-read from disk here.
   const entry =
-    reactReferenceEntry +
+    original.cohort.entry +
     "\n" +
     modules
       .map(
@@ -64,7 +65,7 @@ export async function buildReactOwnershipReference(
       )
       .join(",") +
     "];\nwindow.__DSC_REACT_CLONE_ELEMENT = React.cloneElement;";
-  const reference = await buildReactReference(root, entry);
+  const reference = await buildReactReference(root, original.cohort, entry);
   if (
     JSON.stringify(reference.files) !== JSON.stringify(original.files) ||
     !reactSourceProgramUnchanged(program)

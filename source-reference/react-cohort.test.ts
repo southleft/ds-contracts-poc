@@ -1,0 +1,405 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { createHash } from "node:crypto";
+import { once } from "node:events";
+import { createServer } from "node:http";
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { chromium } from "playwright-core";
+import {
+  builtinReactCohort,
+  loadReactCohort,
+  parseReactCases,
+  reactCasesFile,
+} from "./react-cohort.js";
+import { reactReferenceEntry } from "./react-reference-cases.js";
+import {
+  reactReferenceProfile,
+  reactReferenceProfileFor,
+  reactWitnessesMatch,
+} from "./react-reference-profiles.js";
+import {
+  buildReactReference,
+  createReactReferenceService,
+  reactReferenceHtml,
+  reactReferenceUnchanged,
+} from "./react-reference.js";
+import { buildReactOwnershipReference } from "./react-ownership.js";
+import type { ReactSourceProgram } from "./react-source-program.js";
+
+const sha = (value: string | Buffer) =>
+  createHash("sha256").update(value).digest("hex");
+const badgeSource =
+  "import React from 'react';export const Badge=(props)=> <span data-slot=\"badge\" {...props}/>;";
+const avatarSource =
+  "import React from 'react';export const Avatar=(props)=> <span data-slot=\"avatar\" {...props}/>;";
+const badge = { module: "./src/components/ui/badge", export: "Badge" };
+const witness = {
+  path: ['[data-slot="badge"]'],
+  requiredStyles: { display: "inline" },
+};
+/** A family the application was never written around. */
+const declaration = () => ({
+  version: 1,
+  source: "Fixture family",
+  theme: "Fixture light",
+  fontFamily: "Inter",
+  sideEffectImports: ["./tailwind.css"],
+  requiredTokens: { "--original": "red" },
+  witnessFiles: { "src/components/ui/badge.tsx": sha(badgeSource) },
+  cases: [
+    {
+      id: "badge-row",
+      subject: "Badge",
+      label: "Beside an avatar",
+      mount: {
+        tag: "div",
+        props: { style: { display: "flex", gap: 8 } },
+        children: [
+          { ...badge, children: ["A </script> \"quoted\""] },
+          { module: "./src/components/ui/avatar", export: "Avatar" },
+        ],
+      },
+      witness,
+    },
+    {
+      id: "badge-default",
+      subject: "Badge",
+      label: "Default",
+      negativeControl: true,
+      mount: { ...badge, props: { title: "status" }, children: ["New"] },
+      witness: {
+        ...witness,
+        fontPath: ['[data-slot="badge"]'],
+        associatedLabelText: "Status",
+        probes: {
+          state: {
+            path: ['[data-slot="badge"]'],
+            styles: { opacity: "1" },
+            properties: { hidden: false, title: "status" },
+          },
+        },
+      },
+    },
+  ],
+});
+const edited = (change: (d: any) => void) => {
+  const d = declaration() as any;
+  change(d);
+  return JSON.stringify(d);
+};
+
+function fixture(withBuiltinSources = false) {
+  const root = mkdtempSync(path.join(tmpdir(), "react-cohort-"));
+  const put = (file: string, text: string) => {
+    mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    writeFileSync(path.join(root, file), text);
+  };
+  put("package.json", '{"type":"module"}');
+  put("package-lock.json", "{}");
+  put("tsconfig.json", "{}");
+  put("src/index.css", ":root{--original:red}");
+  put("capture-input.css", ":root{--original:red}");
+  put("tailwind.css", ":root{--original:red}");
+  put("src/components/ui/badge.tsx", badgeSource);
+  put("src/components/ui/avatar.tsx", avatarSource);
+  if (withBuiltinSources) {
+    put("src/components/ui/button.tsx", "import React from 'react';export const Button=(props)=> <button {...props}/>;");
+    put("src/components/ui/checkbox.tsx", "import React from 'react';export const Checkbox=(props)=> <input type='checkbox' {...props}/>;");
+    put("src/components/ui/card.tsx", "import React from 'react';const Part=(props)=><div {...props}/>;export {Part as Card,Part as CardHeader,Part as CardTitle,Part as CardDescription,Part as CardContent,Part as CardFooter};");
+    put("node_modules/lucide-react/package.json", '{"main":"index.js"}');
+    put("node_modules/lucide-react/index.js", "export const PlusIcon=()=>null;");
+    put("node_modules/@fontsource-variable/inter/package.json", '{"main":"index.css"}');
+    put("node_modules/@fontsource-variable/inter/index.css", "body{font-family:sans-serif}");
+  }
+  mkdirSync(path.join(root, "node_modules"), { recursive: true });
+  for (const name of ["react", "react-dom", "scheduler"])
+    symlinkSync(path.resolve("node_modules", name), path.join(root, "node_modules", name), "dir");
+  return { root, put };
+}
+
+test("the built-in cohort is frozen: entry bytes, case records and negative controls", () => {
+  // The recorded reference identity and every sealed observation made from the
+  // built-in cohort depend on these bytes. A deliberate change re-records them.
+  assert.equal(sha(reactReferenceEntry), "828b06f236b366090c86cb7b891f499a8d21c4fae5b747c33c60d93b6a7fc25a");
+  assert.equal(sha(JSON.stringify(builtinReactCohort.cases)), "b9226e907da968c8f169a4513bbab2a82b020de03ea840ec1c181c900dd0a980");
+  assert.equal(builtinReactCohort.entry, reactReferenceEntry);
+  assert.equal(builtinReactCohort.declared, false);
+  assert.equal(builtinReactCohort.declaration, undefined);
+  assert.equal(builtinReactCohort.cases.length, 10);
+  assert.deepEqual(builtinReactCohort.negativeCaseIds, ["button-default", "checkbox-unchecked", "card-composed"]);
+  // Exactly one control per subject: the same rule a declaration must satisfy.
+  for (const subject of new Set(builtinReactCohort.cases.map((c) => c.subject)))
+    assert.equal(builtinReactCohort.cases.filter((c) => c.subject === subject && builtinReactCohort.negativeCaseIds.includes(c.id)).length, 1, subject);
+  for (const c of builtinReactCohort.cases)
+    assert.deepEqual(builtinReactCohort.profile(c.id), reactReferenceProfile(c.id));
+});
+
+test("a subject without an authored witness is refused, never given another subject's witness", () => {
+  assert.throws(() => reactReferenceProfileFor({ id: "switch-on", subject: "Switch" }), /^Error: react-reference-subject-unwitnessed$/);
+  assert.throws(() => reactReferenceProfile("switch-on"), /^Error: react-reference-case-unknown$/);
+  assert.throws(() => builtinReactCohort.profile("switch-on"), /^Error: react-reference-case-unknown$/);
+  assert.throws(() => parseReactCases(JSON.stringify(declaration())).profile("button-default"), /^Error: react-reference-case-unknown$/);
+  assert.equal(reactReferenceProfileFor({ id: "card-content", subject: "Card" }).path[0], '[data-slot="card"]');
+});
+
+test("entry generation is deterministic, byte-stable and carries declared strings only as data", () => {
+  const cohort = parseReactCases(JSON.stringify(declaration()));
+  assert.equal(cohort.entry, [
+    "",
+    "import React from 'react';",
+    "import {createRoot} from 'react-dom/client';",
+    'import {Avatar as __c0} from "./src/components/ui/avatar";',
+    'import {Badge as __c1} from "./src/components/ui/badge";',
+    'import "./tailwind.css";',
+    "const selected = new URLSearchParams(location.search).get('case');",
+    'const known = ["badge-row","badge-default"];',
+    "if (!known.includes(selected)) throw Error('Unknown reference case');",
+    "const mounts = new Map([",
+    '["badge-row",()=>React.createElement("div",{"style":{"display":"flex","gap":8}},React.createElement(__c1,null,"A </script> \\"quoted\\""),React.createElement(__c0,null))],',
+    '["badge-default",()=>React.createElement(__c1,{"title":"status"},"New")],',
+    "]);",
+    "createRoot(document.getElementById('root')).render(mounts.get(selected)());",
+    "",
+  ].join("\n"));
+  assert.equal(parseReactCases(JSON.stringify(declaration())).entry, cohort.entry);
+  // Whitespace is not program text; a repeated side-effect import is one import.
+  assert.equal(parseReactCases(JSON.stringify(declaration(), null, 4)).entry, cohort.entry);
+  assert.equal(parseReactCases(edited((d) => d.sideEffectImports.push("./tailwind.css"))).entry, cohort.entry);
+  // Stylesheet order is cascade order and is kept as declared.
+  assert.match(parseReactCases(edited((d) => (d.sideEffectImports = ["./z.css", "./a.css"]))).entry, /import "\.\/z\.css";\nimport "\.\/a\.css";/);
+  assert.deepEqual(cohort.cases, [
+    { id: "badge-row", subject: "Badge", label: "Beside an avatar" },
+    { id: "badge-default", subject: "Badge", label: "Default" },
+  ]);
+  assert.deepEqual(cohort.negativeCaseIds, ["badge-default"]);
+  assert.equal(cohort.source, "Fixture family");
+  assert.equal(cohort.theme, "Fixture light");
+  const profile = cohort.profile("badge-default");
+  assert.deepEqual({ ...profile, provenance: undefined }, {
+    id: "badge-default", provenance: undefined, fontFamily: "Inter", requiredTokens: { "--original": "red" },
+    path: ['[data-slot="badge"]'], fontPath: ['[data-slot="badge"]'], associatedLabelText: "Status",
+    requiredStyles: { display: "inline" },
+    probes: { state: { path: ['[data-slot="badge"]'], styles: { opacity: "1" }, properties: { hidden: false, title: "status" } } },
+  });
+  assert.match(profile.provenance, new RegExp(`^ds-contracts\\.react\\.json sha256 ${sha(JSON.stringify(declaration()))}: `));
+  profile.requiredStyles.display = "none";
+  assert.equal(cohort.profile("badge-default").requiredStyles.display, "inline", "a reader cannot alter a witness");
+});
+
+test("every unusable declaration is refused by name", () => {
+  const nested = (depth: number): unknown => depth ? { tag: "div", children: [nested(depth - 1)] } : { ...badge };
+  const deepProps = (depth: number): unknown => depth ? { v: deepProps(depth - 1) } : 1;
+  const refusals: Array<[string, (d: any) => void]> = [
+    ["version-unsupported", (d) => (d.version = 2)],
+    ["version-unsupported", (d) => delete d.version],
+    ["shape-invalid", (d) => (d.extra = true)],
+    ["shape-invalid", (d) => delete d.witnessFiles],
+    ["label-invalid", (d) => (d.source = "")],
+    ["label-invalid", (d) => (d.theme = "two\nlines")],
+    ["label-invalid", (d) => (d.fontFamily = 7)],
+    ["label-invalid", (d) => (d.cases[0].label = " ")],
+    ["side-effect-import-invalid", (d) => (d.sideEffectImports = ["../outside.css"])],
+    ["side-effect-import-invalid", (d) => (d.sideEffectImports = ["/etc/passwd"])],
+    ["side-effect-import-invalid", (d) => (d.sideEffectImports = "./tailwind.css")],
+    ["tokens-invalid", (d) => (d.requiredTokens = {})],
+    ["tokens-invalid", (d) => (d.requiredTokens = { primary: "red" })],
+    ["witness-files-invalid", (d) => (d.witnessFiles = {})],
+    ["witness-files-invalid", (d) => (d.witnessFiles = { "../badge.tsx": sha("x") })],
+    ["witness-files-invalid", (d) => (d.witnessFiles = { "/abs/badge.tsx": sha("x") })],
+    ["witness-files-invalid", (d) => (d.witnessFiles = { "src/badge.tsx": "not-a-hash" })],
+    ["cases-invalid", (d) => (d.cases = [])],
+    ["cases-invalid", (d) => (d.cases = {})],
+    ["too-large", (d) => (d.cases = Array.from({ length: 65 }, (_, i) => ({ ...d.cases[1], id: "badge-" + "a".repeat(i + 1) })))],
+    ["case-invalid", (d) => (d.cases[0].extra = 1)],
+    ["case-invalid", (d) => delete d.cases[0].witness],
+    ["id-invalid", (d) => (d.cases[0].id = "Badge_Row")],
+    ["id-invalid", (d) => (d.cases[0].id = "badge-2")],
+    ["id-invalid", (d) => (d.cases[0].id = "a".repeat(81))],
+    ["id-duplicate", (d) => (d.cases[0].id = "badge-default")],
+    ["subject-invalid", (d) => (d.cases[0].subject = "Badge Row")],
+    ["subject-not-mounted", (d) => (d.cases[0].subject = "Avatar", d.cases[0].mount = { ...badge })],
+    ["negative-control-required", (d) => delete d.cases[1].negativeControl],
+    ["negative-control-required", (d) => (d.cases[0].negativeControl = true)],
+    ["negative-control-required", (d) => (d.cases[1].negativeControl = "yes")],
+    ["negative-control-required", (d) => (d.cases[0].subject = "Avatar")],
+    ["mount-invalid", (d) => (d.cases[0].mount = "Badge")],
+    ["mount-invalid", (d) => (d.cases[0].mount = { ...badge, tag: "div" })],
+    ["mount-invalid", (d) => (d.cases[0].mount = { module: badge.module })],
+    ["mount-invalid", (d) => (d.cases[0].mount = { ...badge, code: "alert(1)" })],
+    ["module-invalid", (d) => (d.cases[0].mount = { ...badge, module: "../../etc/badge" })],
+    ["module-invalid", (d) => (d.cases[0].mount = { ...badge, module: "./src/../../badge" })],
+    ["module-invalid", (d) => (d.cases[0].mount = { ...badge, module: "/abs/badge" })],
+    ["module-invalid", (d) => (d.cases[0].mount = { ...badge, module: 'x";alert(1);"' })],
+    ["module-invalid", (d) => (d.cases[0].mount = { ...badge, module: "https://example.com/badge.js" })],
+    ["export-invalid", (d) => (d.cases[0].mount = { ...badge, export: "Badge;alert(1)" })],
+    ["export-invalid", (d) => (d.cases[0].mount = { ...badge, export: "a b" })],
+    ["tag-invalid", (d) => (d.cases[0].mount.tag = "script")],
+    ["tag-invalid", (d) => (d.cases[0].mount.tag = "iframe")],
+    ["tag-invalid", (d) => (d.cases[0].mount.tag = "my-element")],
+    ["tag-invalid", (d) => (d.cases[0].mount.tag = "Div")],
+    ["props-invalid", (d) => (d.cases[0].mount.props = { onClick: "alert(1)" })],
+    ["props-invalid", (d) => (d.cases[0].mount.props = { dangerouslySetInnerHTML: { __html: "<b>x</b>" } })],
+    ["props-invalid", (d) => (d.cases[0].mount.props = { style: { dangerouslySetInnerHTML: 1 } })],
+    ["props-invalid", (d) => (d.cases[0].mount.props = { ref: "r" })],
+    ["props-invalid", (d) => (d.cases[0].mount.props = { key: "k" })],
+    ["props-invalid", (d) => (d.cases[0].mount.props = { children: "x" })],
+    ["props-invalid", (d) => (d.cases[0].mount.props = ["a"])],
+    ["props-invalid", (d) => (d.cases[0].mount.props = { v: deepProps(12) })],
+    ["children-invalid", (d) => (d.cases[0].mount.children = "text")],
+    ["mount-invalid", (d) => (d.cases[0].mount.children = [7])],
+    ["too-deep", (d) => (d.cases[0].mount = nested(12))],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, path: [] })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, requiredStyles: {} })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, sampledFrom: "converter" })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, fontPath: "x" })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, associatedLabelText: "" })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, probes: { state: {} } })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, probes: { state: { path: ["a"], extra: 1 } } })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, probes: { state: { path: ["a"], properties: { checked: null } } } })],
+    ["witness-invalid", (d) => (d.cases[0].witness = { ...witness, probes: { "bad name": { path: ["a"] } } })],
+  ];
+  for (const [problem, change] of refusals)
+    assert.throws(() => parseReactCases(edited(change)), new RegExp(`^Error: react-cases-${problem}$`), problem + ": " + change);
+  // Twelve levels are admitted; the thirteenth is refused.
+  parseReactCases(edited((d) => (d.cases[0].mount = nested(11))));
+  assert.throws(() => parseReactCases("{not json"), /^Error: react-cases-json-invalid$/);
+  assert.throws(() => parseReactCases("[]"), /^Error: react-cases-shape-invalid$/);
+  assert.throws(() => parseReactCases(" ".repeat(256 * 1024 + 1)), /^Error: react-cases-too-large$/);
+  // `__proto__` in an object literal is syntax. It must never reach the program.
+  assert.throws(() => parseReactCases(JSON.stringify(declaration()).replace('{"title":"status"}', '{"__proto__":{"polluted":true}}')), /^Error: react-cases-props-invalid$/);
+});
+
+test("the declaration is a regular file in the configured root; absence selects the built-in cohort", () => {
+  const { root, put } = fixture();
+  try {
+    assert.equal(loadReactCohort(root), builtinReactCohort);
+    put("elsewhere.json", JSON.stringify(declaration()));
+    symlinkSync(path.join(root, "elsewhere.json"), path.join(root, reactCasesFile));
+    assert.throws(() => loadReactCohort(root), /^Error: react-cases-not-regular-file$/);
+    rmSync(path.join(root, reactCasesFile));
+    mkdirSync(path.join(root, reactCasesFile));
+    assert.throws(() => loadReactCohort(root), /^Error: react-cases-not-regular-file$/);
+    rmSync(path.join(root, reactCasesFile), { recursive: true });
+    put(reactCasesFile, JSON.stringify(declaration()) + " ".repeat(256 * 1024));
+    assert.throws(() => loadReactCohort(root), /^Error: react-cases-too-large$/);
+    put(reactCasesFile, JSON.stringify(declaration()));
+    const cohort = loadReactCohort(root);
+    assert.equal(cohort.declared, true);
+    assert.deepEqual(cohort.declaration, { file: path.join(root, reactCasesFile), sha256: sha(JSON.stringify(declaration())) });
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("a declaration's bytes are part of the reference identity; its absence changes nothing", async () => {
+  const { root, put } = fixture(true);
+  try {
+    const builtin = await buildReactReference(root);
+    assert.equal(builtin.cohort, builtinReactCohort);
+    assert.ok(!Object.keys(builtin.files).some((f) => f.endsWith(reactCasesFile)));
+    put(reactCasesFile, JSON.stringify(declaration()));
+    const declared = await buildReactReference(root);
+    assert.equal(declared.cohort.declared, true);
+    assert.notEqual(declared.id, builtin.id);
+    // The build records real paths, so the entry is found by name.
+    assert.equal(Object.entries(declared.files).find(([f]) => f.endsWith("/" + reactCasesFile))?.[1], sha(JSON.stringify(declaration())));
+    assert.equal((await buildReactReference(root)).id, declared.id, "deterministic");
+    assert.ok(reactWitnessesMatch(declared));
+    // Only a witness value changes: the program is identical, the identity is not.
+    put(reactCasesFile, edited((d) => (d.cases[0].witness.requiredStyles.display = "inline-flex")));
+    assert.equal(reactReferenceUnchanged(declared), false, "an edited declaration invalidates the loaded reference");
+    const rewitnessed = await buildReactReference(root);
+    assert.equal(rewitnessed.cohort.entry, declared.cohort.entry);
+    assert.notEqual(rewitnessed.id, declared.id);
+    // A changed source file no longer matches the owner's pinned witness.
+    put("src/components/ui/badge.tsx", badgeSource + "\n// changed\n");
+    assert.equal(reactWitnessesMatch(await buildReactReference(root)), false);
+    // Removing the declaration restores the built-in identity exactly.
+    put("src/components/ui/badge.tsx", badgeSource);
+    rmSync(path.join(root, reactCasesFile));
+    assert.equal((await buildReactReference(root)).id, builtin.id);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("the application serves a declared family it was never written around, and names a refused declaration", async () => {
+  const { root, put } = fixture();
+  const repo = mkdtempSync(path.join(tmpdir(), "react-cohort-repo-"));
+  put(reactCasesFile, JSON.stringify(declaration()));
+  const handle = createReactReferenceService(repo, root);
+  const server = createServer((req, res) => void handle(req, res, new URL(req.url!, "http://localhost").pathname.replace("/api/source-reference/", "")));
+  server.listen(0, "127.0.0.1");
+  await once(server, "listening");
+  const base = `http://127.0.0.1:${(server.address() as { port: number }).port}/api/source-reference`;
+  try {
+    const reference = await (await fetch(base + "/react", { method: "POST" })).json();
+    assert.equal(reference.source, "Fixture family");
+    assert.equal(reference.theme, "Fixture light");
+    assert.deepEqual(reference.cases.map((c: { id: string }) => c.id), ["badge-row", "badge-default"]);
+    assert.equal((await fetch(base + `/react/${reference.id}?case=badge-default`)).status, 200);
+    assert.equal((await fetch(base + `/react/${reference.id}?case=button-default`)).status, 404, "a built-in case is not part of a declared cohort");
+    const provenance = JSON.parse(readFileSync(path.join(repo, "private/react-source-references", reference.id, "provenance.json"), "utf8"));
+    assert.equal(provenance.entrySha256, sha(parseReactCases(JSON.stringify(declaration())).entry));
+    assert.deepEqual(provenance.cases, reference.cases.map(({ id, subject, label }: Record<string, string>) => ({ id, subject, label })));
+    put(reactCasesFile, edited((d) => (d.cases[0].mount.tag = "script")));
+    assert.equal((await fetch(base + `/react/${reference.id}?case=badge-default`)).status, 409, "the loaded reference no longer matches its declaration");
+    const refused = await fetch(base + "/react", { method: "POST" });
+    assert.equal(refused.status, 409);
+    assert.equal((await refused.json()).reason, "react-cases-tag-invalid");
+  } finally {
+    handle.close();
+    server.close();
+    rmSync(root, { recursive: true, force: true });
+    rmSync(repo, { recursive: true, force: true });
+  }
+});
+
+test("the generated entry keeps the built-in runtime contract and accepts the structure observer's extension", async (t) => {
+  const { root, put } = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  put(reactCasesFile, JSON.stringify(declaration()));
+  const original = await buildReactReference(root);
+  const file = Object.keys(original.files).find((f) => f.endsWith("/src/components/ui/badge.tsx"))!;
+  const observed = await buildReactOwnershipReference(path.dirname(path.dirname(path.dirname(path.dirname(file)))), original, {
+    files: { [file]: original.files[file] }, problems: [],
+    components: [{ module: "src/components/ui/badge.tsx", exportName: "Badge", sourceSha256: original.files[file], span: { start: 0, end: 1 } }],
+  } as unknown as ReactSourceProgram);
+  assert.equal(observed.cohort, original.cohort, "the observed program is built from the original's cohort");
+  assert.deepEqual(observed.files, original.files);
+  const browser = await chromium.launch();
+  t.after(() => browser.close());
+  const render = async (caseId: string, html: string) => {
+    const page = await browser.newPage(), errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.route("**/*", (route) => route.request().url().startsWith("http://127.0.0.1/cohort") ? route.fulfill({ status: 200, contentType: "text/html", body: html }) : route.abort());
+    await page.goto("http://127.0.0.1/cohort?case=" + caseId);
+    return { page, errors };
+  };
+  const row = await render("badge-row", reactReferenceHtml(observed));
+  await row.page.locator('[data-slot="badge"]').waitFor({ timeout: 15000 });
+  assert.equal(await row.page.locator('[data-slot="badge"]').textContent(), 'A </script> "quoted"', "declared text is data, never markup or code");
+  assert.equal(await row.page.locator('#root > div > [data-slot="avatar"]').count(), 1);
+  assert.equal(await row.page.locator("#root > div").evaluate((node) => getComputedStyle(node).gap), "8px");
+  assert.deepEqual(await row.page.evaluate(() => {
+    const w = window as unknown as { __DSC_REACT_EXPORTS: Array<{ identity: { exportName: string }; value: unknown }>; __DSC_REACT_CLONE_ELEMENT: unknown };
+    return { exports: w.__DSC_REACT_EXPORTS.map((e) => [e.identity.exportName, typeof e.value]), clone: typeof w.__DSC_REACT_CLONE_ELEMENT };
+  }), { exports: [["Badge", "function"]], clone: "function" });
+  assert.deepEqual(row.errors, []);
+  const single = await render("badge-default", reactReferenceHtml(original));
+  await single.page.locator('[data-slot="badge"][title="status"]').waitFor({ timeout: 15000 });
+  assert.equal(await single.page.locator("#root > *").count(), 1);
+  const unknown = await render("button-default", reactReferenceHtml(original));
+  await unknown.page.waitForTimeout(200);
+  assert.deepEqual(unknown.errors, ["Unknown reference case"]);
+  assert.equal(await unknown.page.locator("#root > *").count(), 0);
+});

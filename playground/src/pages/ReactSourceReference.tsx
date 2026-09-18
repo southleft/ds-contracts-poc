@@ -29,7 +29,8 @@ function rootLabel(root: ReactRootFact): string {
 export function ReactSourceReference() {
   const [reference, setReference] = useState<Reference | null>(null);
   const [validation, setValidation] = useState<ReactValidation | null>(null);
-  const [selected, setSelected] = useState("button-default");
+  // The served cohort decides which cases exist; nothing is assumed here.
+  const [selected, setSelected] = useState("");
   const [busy, setBusy] = useState(false);
   const [loadVersion, setLoadVersion] = useState(0);
   const [error, setError] = useState("");
@@ -116,8 +117,16 @@ export function ReactSourceReference() {
         method: "POST",
       });
       const result = await response.json();
-      if (!response.ok) throw Error(result.error);
+      if (!response.ok)
+        throw Error(
+          result.reason ? `${result.error} (${result.reason})` : result.error,
+        );
       setReference(result);
+      setSelected((previous) =>
+        (result as Reference).cases.some((c) => c.id === previous)
+          ? previous
+          : ((result as Reference).cases[0]?.id ?? ""),
+      );
       setValidation(result.validation ?? null);
       setOwnership(result.ownership ?? null);
       setLoadVersion((v) => v + 1);
@@ -180,9 +189,10 @@ export function ReactSourceReference() {
     >
       <h2 id="react-original-title">React originals</h2>
       <p>
-        Inspect the actual shadcn source components before conversion: Button,
-        Checkbox and a composed Card. All ten selected cases remain in the
-        cohort.
+        Inspect the actual source components before conversion. A source
+        workspace may declare its own cases; without a declaration the built-in
+        shadcn cohort is used (Button, Checkbox and a composed Card, ten cases).
+        Every case remains in the cohort.
       </p>
       <button
         type="button"
@@ -213,11 +223,12 @@ export function ReactSourceReference() {
                   : "unqualified"}
               .
             </strong>{" "}
-            Original React runtime with its sandbox theme and fonts. Figma
+            Original React runtime with its own theme and fonts. Figma
             fidelity, editable output and behavior remain unqualified.
           </p>
           <p>
-            {reference.theme} · {reference.sourceFiles} recorded input files ·
+            {reference.source} · {reference.theme} · {reference.sourceFiles}{" "}
+            recorded input files ·
             Reference {reference.id.slice(0, 12)}
           </p>
           <button

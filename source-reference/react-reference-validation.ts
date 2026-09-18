@@ -4,7 +4,6 @@ import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  negativeCaseIds,
   negativeControlNames,
   completeNegativeControls,
   inventoryEvidence,
@@ -20,11 +19,7 @@ import {
 } from "./replay.js";
 import { captureValidatedTree } from "./capture.js";
 import { observeCheckboxBehavior, type CheckboxBehavior } from './control-behavior.js';
-import { reactReferenceCases } from "./react-reference-cases.js";
-import {
-  reactReferenceProfile,
-  reactWitnessesMatch,
-} from "./react-reference-profiles.js";
+import { reactWitnessesMatch } from "./react-reference-profiles.js";
 import {
   reactReferenceUnchanged,
   type ReactReference,
@@ -65,7 +60,6 @@ export interface ReactValidation {
 }
 const sha = (bytes: Buffer | string) =>
   createHash("sha256").update(bytes).digest("hex");
-const negativeCases = new Set<string>(negativeCaseIds);
 
 export async function corruptReactReference(
   page: Page,
@@ -134,12 +128,14 @@ export function startReactValidation(
 ) {
   if (!reactReferenceUnchanged(reference) || !reactWitnessesMatch(reference))
     throw Error("react-reference-witnesses-changed");
+  const cohort = reference.cohort;
+  const negativeCases = new Set<string>(cohort.negativeCaseIds);
   const state: ReactValidation = {
     id: randomUUID(),
     referenceId: reference.id,
     state: "running",
     startedAt: new Date().toISOString(),
-    denominator: reactReferenceCases.length,
+    denominator: cohort.cases.length,
     valid: 0,
     sourceUnchanged: false,
     rows: [],
@@ -163,7 +159,7 @@ export function startReactValidation(
         browser: browser.version(),
         profilesSha256: sha(
           JSON.stringify(
-            reactReferenceCases.map((c) => reactReferenceProfile(c.id)),
+            cohort.cases.map((c) => cohort.profile(c.id)),
           ),
         ),
         files: Object.fromEntries(
@@ -172,6 +168,7 @@ export function startReactValidation(
             "react-validation-evidence.ts",
             "react-reference-profiles.ts",
             "react-reference-cases.ts",
+            "react-cohort.ts",
             "react-reference.ts",
             "check.ts",
             "observe.ts",
@@ -186,9 +183,9 @@ export function startReactValidation(
           ]),
         ),
       };
-      for (const entry of reactReferenceCases) {
+      for (const entry of cohort.cases) {
         if (stopped) throw Error("react-validation-interrupted");
-        const profile = reactReferenceProfile(entry.id);
+        const profile = cohort.profile(entry.id);
         const url = `${origin}/api/source-reference/react/${reference.id}?case=${entry.id}`;
         const row: ReactValidationRow = {
           id: entry.id,
@@ -369,7 +366,10 @@ export function startReactValidation(
       }
       state.sourceUnchanged =
         reactReferenceUnchanged(reference) && reactWitnessesMatch(reference);
-      const controlsProven = completeNegativeControls(state.rows);
+      const controlsProven = completeNegativeControls(
+        state.rows,
+        cohort.negativeCaseIds,
+      );
       if (!controlsProven) state.problem = "negative-controls-incomplete";
       if (!state.sourceUnchanged)
         state.problem = "source-changed-during-validation";

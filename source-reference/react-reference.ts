@@ -36,10 +36,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, mkdirSync, writeFileSync, realpathSync } from "node:fs";
 import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import {
-  reactReferenceCases,
-  reactReferenceEntry,
-} from "./react-reference-cases.js";
+import { loadReactCohort, type ReactCohort } from "./react-cohort.js";
 
 const sha = (value: string | Buffer) =>
   createHash("sha256").update(value).digest("hex");
@@ -60,16 +57,25 @@ export interface ReactReference {
   files: Record<string, string>;
   javascript: string;
   css: string;
+  /** The cohort these bytes were built from. Readers take cases and witnesses
+   * from here so that they always belong to the reference being read. */
+  cohort: ReactCohort;
 }
 
 /** A host-configured source root; no browser request can choose a filesystem
  * path, executable or dependency. esbuild parses source; it never executes it. */
 export async function buildReactReference(
   sourceRoot: string,
-  entry: string = reactReferenceEntry,
+  cohort?: ReactCohort,
+  entry?: string,
 ): Promise<ReactReference> {
   sourceRoot = realpathSync(sourceRoot);
+  cohort ??= loadReactCohort(sourceRoot);
+  entry ??= cohort.entry;
   const files: Record<string, string> = {};
+  // A declaration selects the cases and authors the witnesses, so its bytes
+  // are source: editing it is a new reference. Absent, identity is unchanged.
+  if (cohort.declaration) files[cohort.declaration.file] = cohort.declaration.sha256;
   for (const file of [
     "package.json",
     "package-lock.json",
@@ -140,6 +146,7 @@ export async function buildReactReference(
     ),
     javascript,
     css,
+    cohort,
   };
   if (!reactReferenceUnchanged(reference))
     throw Error("react-reference-source-changed");
@@ -154,7 +161,7 @@ export function reactReferenceUnchanged(reference: ReactReference) {
     return false;
   }
 }
-export function reactReferenceHtml(reference: ReactReference) {
+export function reactReferenceHtml(reference: Pick<ReactReference, 'css' | 'javascript'>) {
   // Script/style raw-text elements must not let source literals close their tags.
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>${reference.css.replace(/<\/style/gi, "<\\/style")}</style></head><body style="padding:32px"><div id="root"></div><script>${reference.javascript.replace(/<\/script/gi, "<\\/script")}</script></body></html>`;
 }
@@ -305,8 +312,13 @@ export function createReactReferenceService(
           throw Error('react-caller-request-invalid');
         if (callerReact[3] === '/source-frame') {
           const request = native().jobs.reactRequest(callerReact[2]);
-          if (request.referenceId !== reference.id || request.caseId !== 'card-composed')
-            throw Error('react-caller-source-frame-mismatch');
+          if (request.referenceId !== reference.id) throw Error('react-caller-source-frame-mismatch');
+          // This frame reviews a caller composition, so it exists only for an
+          // operation whose sealed evidence generates one with nested children.
+          // That is a fact about the observed structure, not about a case name.
+          const { draft } = callerGraph(callerReact[2]).graph;
+          if (draft.status !== 'generated-draft' || !draft.children.length)
+            throw Error('react-caller-source-frame-composition-required');
           const frame = req.method === 'POST'
             ? await frames.create(reference.id, callerReact[2])
             : frames.read(reference.id, callerReact[2]);
@@ -651,9 +663,9 @@ export function createReactReferenceService(
                 id: reference.id,
                 sourceRoot,
                 files: reference.files,
-                entrySha256: sha(reactReferenceEntry),
+                entrySha256: sha(reference.cohort.entry),
                 qualification: "unqualified",
-                cases: reactReferenceCases,
+                cases: reference.cohort.cases,
               },
               null,
               2,
@@ -671,21 +683,26 @@ export function createReactReferenceService(
         }
         json(res, 200, {
           id: reference.id,
-          source: "shadcn source sandbox",
-          theme: "Light (sandbox stylesheet)",
+          source: reference.cohort.source,
+          theme: reference.cohort.theme,
           sourceFiles: Object.keys(reference.files).length,
           qualification: "unqualified",
           validation: validations.get(reference.id)?.report() ?? null,
           ownership: savedOwnership(reference)?.report() ?? null,
-          cases: reactReferenceCases.map((c) => ({
+          cases: reference.cohort.cases.map((c) => ({
             ...c,
             url: `/api/source-reference/react/${reference!.id}?case=${c.id}`,
           })),
         });
-      } catch {
+      } catch (error) {
+        // A refused declaration is named so its author can correct it. Only an
+        // identifier leaves the host: no path, file content or parser text.
+        const message = error instanceof Error ? error.message : "";
+        const reason = /^react-cases-[a-z-]{2,60}$/.test(message) ? message : undefined;
         json(res, 409, {
           error:
-            "React originals unavailable or changed. Configure DS_CONTRACTS_REACT_SOURCE_ROOT with the existing shadcn source sandbox and its installed dependencies; source files are never modified by this action.",
+            "React originals unavailable or changed. Configure DS_CONTRACTS_REACT_SOURCE_ROOT with a source workspace and its installed dependencies; source files are never modified by this action.",
+          ...(reason ? { reason } : {}),
         });
       } finally {
         loading = undefined;
@@ -947,7 +964,7 @@ export function createReactReferenceService(
       req.method !== "GET" ||
       !match ||
       reference?.id !== match[1] ||
-      !reactReferenceCases.some((c) => c.id === caseId)
+      !reference.cohort.cases.some((c) => c.id === caseId)
     ) {
       json(res, 404, {
         error: "React reference not found. Load originals in the application.",

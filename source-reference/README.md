@@ -4,6 +4,69 @@ The local app's `/sources` page now starts with **React originals**. **Load Reac
 
 Configure `DS_CONTRACTS_REACT_SOURCE_ROOT` on the dev-server process to point to an existing shadcn source sandbox with its installed dependencies. The local owner setup defaults to the original `ds-contracts-poc/examples/shadcn/.shadcn-sandbox` sibling checkout. Requests cannot choose a filesystem path or executable. This preset is not automatic onboarding for an arbitrary React repository.
 
+## Declaring a workspace's own cases
+
+Without a declaration the built-in shadcn cohort above is used, and its entry bytes, case records and reference identity are unchanged. A source workspace can instead declare its own cohort in an optional `ds-contracts.react.json` at the configured source root, so a component family can be brought to the app without editing application code. This path is covered by automated tests in `react-cohort.test.ts`; it has not been demonstrated live against Figma.
+
+```json
+{
+  "version": 1,
+  "source": "Acme source workspace",
+  "theme": "Light",
+  "fontFamily": "Inter",
+  "sideEffectImports": ["@fontsource-variable/inter", "./tailwind.css"],
+  "requiredTokens": { "--primary": "oklch(0.205 0 0)" },
+  "witnessFiles": { "src/components/ui/badge.tsx": "<sha256 of that file>" },
+  "cases": [
+    {
+      "id": "badge-default",
+      "subject": "Badge",
+      "label": "Default",
+      "negativeControl": true,
+      "mount": {
+        "module": "./src/components/ui/badge",
+        "export": "Badge",
+        "props": { "variant": "default" },
+        "children": ["New"]
+      },
+      "witness": {
+        "path": ["[data-slot=\"badge\"]"],
+        "requiredStyles": { "display": "inline-flex", "font-size": "12px" }
+      }
+    }
+  ]
+}
+```
+
+A `mount` element is either a component (`module` and `export`) or a host element (`tag`), each with optional JSON `props` and `children` (strings or further elements). `subject` is the export name rendered at the case's root; the structure observation selects the root instance by it. A `witness` maps onto `SourceProfile` in `check.ts`: `path`, optional `fontPath`, optional `associatedLabelText`, `requiredStyles`, and optional `probes` with `path`, `styles` and `properties`. `fontFamily` and `requiredTokens` apply to every case. `witnessFiles` pins the sha256 of the source files the witnesses were authored from.
+
+Witnesses are authored by the workspace owner from the source's own CSS, tokens and font metadata. They are an independent check of the capture and must never be sampled from converter output. A changed source file requires renewed witnesses.
+
+The entry program is generated deterministically: component imports are deduplicated, sorted and aliased, side-effect imports keep their declared order because stylesheet order is cascade order, elements are built with `React.createElement`, and every declared string reaches the program only through `JSON.stringify`. The declaration's bytes are recorded with the other source files, so editing it produces a new reference identity and invalidates the loaded reference.
+
+The workspace must still provide `package.json`, `package-lock.json`, `tsconfig.json`, `src/index.css` and `capture-input.css`, which the reference records unconditionally, and component modules must live under `src/` as `.tsx` for the API and structure readers to select them.
+
+A declaration is refused by name rather than partially applied. **Load React originals** reports the identifier:
+
+| Refusal | Cause |
+| --- | --- |
+| `react-cases-not-regular-file`, `react-cases-unreadable` | The declaration is a symlink, a directory or cannot be read. |
+| `react-cases-too-large` | More than 256 KiB, or more than 64 cases. |
+| `react-cases-json-invalid`, `react-cases-shape-invalid`, `react-cases-case-invalid` | Not JSON, or an unknown or missing key. Unknown keys are refused, not ignored. |
+| `react-cases-version-unsupported` | `version` is not `1`. |
+| `react-cases-label-invalid` | `source`, `theme`, `fontFamily` or a case `label` is empty, too long or multi-line. |
+| `react-cases-side-effect-import-invalid`, `react-cases-module-invalid` | A specifier is neither `./`-relative without `..` segments nor a bare package specifier. |
+| `react-cases-export-invalid`, `react-cases-subject-invalid` | Not a JavaScript identifier. |
+| `react-cases-subject-not-mounted` | The case's `mount` never instantiates its `subject`. |
+| `react-cases-tag-invalid` | Not a lowercase host tag, or one of `script`, `style`, `iframe`, `object`, `embed`, `link`, `meta`. |
+| `react-cases-props-invalid` | Not plain JSON, deeper than 12 levels, or a key that starts with `on`, or is `ref`, `key`, `children`, `dangerouslySetInnerHTML` or `__proto__`. |
+| `react-cases-mount-invalid`, `react-cases-children-invalid`, `react-cases-too-deep` | A malformed element, or nesting deeper than 12 levels. |
+| `react-cases-id-invalid`, `react-cases-id-duplicate` | A case id must match `^[a-z][a-z-]{0,79}$` and be unique. |
+| `react-cases-negative-control-required` | Each distinct `subject` needs exactly one case with `"negativeControl": true`. |
+| `react-cases-tokens-invalid`, `react-cases-witness-files-invalid`, `react-cases-witness-invalid` | Empty or malformed tokens, pinned files or witness. |
+
+Callback and toggle behavior observation remains limited to checkbox-shaped controls; a declared cohort does not widen it.
+
 The reference identity includes the fixture entry, package/lock/config files, exact loaded source/dependency bytes, CSS and font bytes, and emitted runtime assets. The reference runs in a sandbox without same-origin privileges or network access. Inputs are rechecked before serving; changing an input requires a new reference. Immutable private artifacts are stored under `private/react-source-references/<identity>/`. After a server restart, loading the same unchanged source reconstructs the same reference; older archived artifacts are not presented as fresh validation.
 
 **Validate React sources** runs the existing source-readiness and measured-tree reader on all ten originals, archives the loaded resources, then replays them in a fresh browser context without network fallback. Original/replay screenshots and trees must match. Pinned source modules, theme rules and font metadata supply independent style/state/font witnesses. A textless Checkbox requires its uniquely associated visible label, not arbitrary adjacent text.

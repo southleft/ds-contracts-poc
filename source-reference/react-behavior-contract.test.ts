@@ -147,7 +147,7 @@ test('the application preview runs emitted behavior with real consumer controls 
   const output=await buildReactBehaviorPreview(process.cwd(),draft);
   const browser=await chromium.launch();t.after(()=>browser.close());
   const page=await browser.newPage();
-  await page.setContent(reactReferenceHtml({id:'preview',files:{},...output}));
+  await page.setContent(reactReferenceHtml(output));
   const control=page.getByRole('region',{name:'Generated component'}).getByRole('checkbox');
   const value=page.getByLabel('Input value'),mode=page.getByLabel('State management');
   const remount=page.getByRole('button',{name:'Remount with current inputs'});

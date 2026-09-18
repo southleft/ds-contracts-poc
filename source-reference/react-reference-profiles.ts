@@ -27,14 +27,24 @@ export function reactWitnessesMatch(reference: ReactReference) {
     .map((f) => f.slice(0, -"/src/index.css".length));
   return (
     roots.length === 1 &&
-    Object.entries(reactWitnessFiles).every(
+    Object.keys(reference.cohort.witnessFiles).length > 0 &&
+    Object.entries(reference.cohort.witnessFiles).every(
       ([file, hash]) => reference.files[path.join(roots[0], file)] === hash,
     )
   );
 }
+/** The built-in cohort's witnesses. Readers take a profile from the cohort of
+ * the reference they read, never from this function directly. */
 export function reactReferenceProfile(id: string): SourceProfile {
   const selected = reactReferenceCases.find((c) => c.id === id);
   if (!selected) throw Error("react-reference-case-unknown");
+  return reactReferenceProfileFor(selected);
+}
+export function reactReferenceProfileFor(selected: {
+  id: string;
+  subject: string;
+}): SourceProfile {
+  const id = selected.id;
   const base = {
     id,
     provenance:
@@ -113,6 +123,10 @@ export function reactReferenceProfile(id: string): SourceProfile {
           : {}),
       },
     };
+  // A subject without an authored witness is refused. Borrowing another
+  // subject's witness would judge the wrong component and could pass.
+  if (selected.subject !== "Card")
+    throw Error("react-reference-subject-unwitnessed");
   return {
     ...base,
     path: ['[data-slot="card"]'],

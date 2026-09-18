@@ -7,13 +7,14 @@ import { selectReactComparisonCase, assertReactComparisonFamily } from './react-
 import { selectReactNativeRequest } from './react-native-evidence.js';
 import { evidenceSha, inventoryEvidence } from './react-validation-evidence.js';
 import { revisionOf } from '../core/contract-provenance.js';
+import { builtinReactCohort } from './react-cohort.js';
 import { isReactComparisonRequest, reactComparisonReservation, reactComparisonContentOperation, reactComparisonContentScope } from './react-comparison-request.js';
 
 function fixture(t: test.TestContext, change: (row: any) => void = () => {}) {
   const repo = mkdtempSync(path.join(tmpdir(), 'reuse-family-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const source = path.join(repo, 'original.tsx'); writeFileSync(source, 'original');
-  const reference = { id: 'a'.repeat(64), css: '', javascript: '', files: { [source]: evidenceSha(Buffer.from('original')) } };
+  const reference = { id: 'a'.repeat(64), css: '', javascript: '', files: { [source]: evidenceSha(Buffer.from('original')) }, cohort: builtinReactCohort };
   const row = { id: 'button-default', matched: true, problems: [], ownership: {
     components: [{ roots: [''], source: { file: 'component.tsx', exportName: 'Control' } }],
   }, propertyMatrix: { heldProps: { tone: 'default', disabled: false, children: { kind: 'array' } } },

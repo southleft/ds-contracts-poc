@@ -3,15 +3,16 @@ import test from "node:test";
 import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { builtinReactCohort } from "./react-cohort.js";
 import {
   completeNegativeControls,
-  negativeCaseIds,
   negativeControlNames,
   inventoryEvidence,
   evidenceUnchanged,
 } from "./react-validation-evidence.js";
 
 test("controls require every selected case and all five distinct successful corruptions", () => {
+  const negativeCaseIds = builtinReactCohort.negativeCaseIds;
   const good = negativeCaseIds.map((id) => ({
     id,
     negativeControls: negativeControlNames.map((name) => ({
@@ -19,9 +20,10 @@ test("controls require every selected case and all five distinct successful corr
       rejected: true,
     })),
   }));
-  assert.equal(completeNegativeControls(good), true);
-  assert.equal(completeNegativeControls(good.slice(1)), false);
-  assert.equal(completeNegativeControls([...good, good[0]]), false);
+  assert.equal(completeNegativeControls(good, negativeCaseIds), true);
+  assert.equal(completeNegativeControls(good.slice(1), negativeCaseIds), false);
+  assert.equal(completeNegativeControls([...good, good[0]], negativeCaseIds), false);
+  assert.equal(completeNegativeControls(good, []), false, "a cohort naming no control proves nothing");
   for (const bad of [
     [],
     good[0].negativeControls.slice(1),
@@ -29,10 +31,10 @@ test("controls require every selected case and all five distinct successful corr
     good[0].negativeControls.map((c, i) => ({ ...c, rejected: i !== 0 })),
   ])
     assert.equal(
-      completeNegativeControls([
-        { ...good[0], negativeControls: bad },
-        ...good.slice(1),
-      ]),
+      completeNegativeControls(
+        [{ ...good[0], negativeControls: bad }, ...good.slice(1)],
+        negativeCaseIds,
+      ),
       false,
     );
 });

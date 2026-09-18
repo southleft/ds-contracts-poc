@@ -31,6 +31,7 @@ import { buildReactCallerPreview } from './react-caller-preview.js';
 import { chromium } from 'playwright-core';
 import { generatedTypeErrors } from '../core/react-test-runtime.js';
 import type { NodeSpec } from '../core/emit-figma-script.js';
+import { builtinReactCohort } from './react-cohort.js';
 
 test('caller text preserves its observed font when a component boundary replaces its inherited CSS alias', async t => {
   const f = await fixture(); t.after(() => rmSync(f.dir, { recursive: true, force: true }));
@@ -202,7 +203,7 @@ test('context child requests reopen pinned evidence and refuse substitution with
   const f = await fixture();
   try {
     const source = path.join(f.dir, 'components.tsx');
-    const reference = { id: 'a'.repeat(64), files: { [source]: evidenceSha(readFileSync(source)) }, javascript: '', css: '' };
+    const reference = { id: 'a'.repeat(64), files: { [source]: evidenceSha(readFileSync(source)) }, javascript: '', css: '', cohort: builtinReactCohort };
     const ownershipId = '10000000-0000-4000-8000-000000000001';
     const operationId = '10000000-0000-4000-8000-000000000002';
     const inspectionId = '10000000-0000-4000-8000-000000000003';
