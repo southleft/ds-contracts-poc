@@ -122,9 +122,21 @@ export interface RecordImportResult {
   receipts: Receipts | null;
 }
 
-/** A successful import lands in the workspace. Newest first, capped. */
-export function recordImport(input: RecordImportInput): RecordImportResult {
-  const entry: WorkspaceEntry = {
+/** Record a complete import family atomically. Input order is retained, so
+ * the entry component stays first. Refuse an oversized family before changing
+ * the workspace rather than evicting one of its dependencies during import. */
+export function recordImports(inputs: RecordImportInput[]): RecordImportResult[] {
+  if (inputs.length > WORKSPACE_CAP) {
+    throw new Error(`workspace-import-too-large: ${inputs.length} components exceed the session limit of ${WORKSPACE_CAP}; no components were imported.`);
+  }
+  const identities = new Set<string>();
+  for (const input of inputs) {
+    const identity = JSON.stringify([input.source, input.name]);
+    if (identities.has(identity)) throw new Error(`workspace-duplicate-import: ${input.name} (${input.source}); no components were imported.`);
+    identities.add(identity);
+  }
+  if (inputs.length === 0) return [];
+  const imported: WorkspaceEntry[] = inputs.map((input) => ({
     id: `ws-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     name: input.name,
     contractId: input.contractId,
@@ -135,35 +147,36 @@ export function recordImport(input: RecordImportInput): RecordImportResult {
     ...(input.capturedTokens && input.capturedTokens.count > 0 ? { capturedTokens: input.capturedTokens } : {}),
     ...(input.childStubs && input.childStubs.length > 0 ? { childStubs: input.childStubs } : {}),
     importedAt: Date.now(),
-  };
+  }));
   const notes: string[] = [];
-  const kept = entries.filter((e) => !(e.source === input.source && e.name === input.name));
-  const next = [entry, ...kept];
+  const kept = entries.filter((e) => !identities.has(JSON.stringify([e.source, e.name])));
+  const next = [...imported, ...kept];
   if (next.length > WORKSPACE_CAP) {
-    const evicted = next.splice(WORKSPACE_CAP);
-    for (const old of evicted) {
-      notes.push(
-        `workspace: evicted the oldest entry "${old.name}" (${old.source}) — the session keeps ${WORKSPACE_CAP}.`,
-      );
+    for (const old of next.splice(WORKSPACE_CAP)) {
+      notes.push(`workspace: evicted the oldest entry "${old.name}" (${old.source}) — the session keeps ${WORKSPACE_CAP}.`);
     }
   }
   entries = next;
   const storageNote = persist();
   if (storageNote) notes.push(storageNote);
   notify();
-
-  if (notes.length === 0) return { entry, receipts: input.receipts };
   const group: ReceiptGroup = {
     title: 'Workspace',
     kind: 'note',
     entries: notes.map((message) => ({ message })),
   };
-  return {
+  return imported.map((entry) => ({
     entry,
-    receipts: input.receipts
-      ? { ...input.receipts, groups: [...input.receipts.groups, group] }
-      : { source: 'workspace', groups: [group] },
-  };
+    receipts: notes.length === 0 ? entry.receipts : {
+      source: entry.receipts?.source ?? 'workspace',
+      groups: [...(entry.receipts?.groups ?? []), group],
+    },
+  }));
+}
+
+/** A single import uses the same atomic store path. */
+export function recordImport(input: RecordImportInput): RecordImportResult {
+  return recordImports([input])[0];
 }
 
 export function removeWorkspaceEntry(id: string): void {

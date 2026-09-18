@@ -8,6 +8,8 @@ export interface UnsetVariantAxis {
   propName: string;
   codeProp: string;
   unsetValue: string;
+  /** Only v2 metadata can restore a boolean API. Display labels never infer it. */
+  valueType?: 'boolean' | 'enum';
   values: Array<{ value: string; label: string }>;
 }
 
@@ -27,13 +29,17 @@ export function readUnsetVariantAxes(set: DumpSet): UnsetVariantAxis[] {
   const raw = set.unsetVariantAxes;
   if (raw === undefined) return [];
   const fail = (reason: string): never => { throw new UnsetVariantError(reason); };
-  if (!object(raw) || !keysExactly(raw, ['version', 'axes']) || raw.version !== 1 || !Array.isArray(raw.axes) || raw.axes.length === 0)
-    return fail('expected a non-empty version 1 axes declaration');
+  if (!object(raw) || !keysExactly(raw, ['version', 'axes']) || ![1, 2].includes(raw.version as number) || !Array.isArray(raw.axes) || raw.axes.length === 0)
+    return fail('expected a non-empty version 1 or 2 axes declaration');
+  if (raw.version === 2 && !raw.axes.some(a => object(a) && a.valueType === 'boolean'))
+    return fail('version 2 requires an explicit boolean axis');
   const properties = new Set<string>();
   const props = new Set<string>();
   const codeProps = new Set<string>();
   return raw.axes.map((a): UnsetVariantAxis => {
-    if (!object(a) || !keysExactly(a, ['property', 'propName', 'codeProp', 'unsetValue', 'values']) ||
+    const boolean = object(a) && raw.version === 2 && a.valueType === 'boolean';
+    if (!object(a) || (raw.version === 2 && !['boolean', 'enum'].includes(a.valueType as string)) ||
+        !keysExactly(a, ['property', 'propName', 'codeProp', 'unsetValue', 'values', ...(raw.version === 2 ? ['valueType'] : [])]) ||
         typeof a.property !== 'string' || !a.property || typeof a.propName !== 'string' || !a.propName ||
         typeof a.codeProp !== 'string' || !isSupportedOmittedCodeBinding(a.codeProp) ||
         typeof a.unsetValue !== 'string' || !Array.isArray(a.values) || !a.values.length)
@@ -46,10 +52,12 @@ export function readUnsetVariantAxes(set: DumpSet): UnsetVariantAxis[] {
       return { value: v.value, label: v.label };
     });
     const labels = [a.unsetValue, ...values.map(v => v.label)];
+    if (boolean && (values.length !== 2 || values[0].value !== 'false' || values[1].value !== 'true'))
+      return fail(`boolean axis ${a.property} requires canonical false/true values`);
     if (new Set(labels).size !== labels.length || new Set(values.map(v => v.value)).size !== values.length)
       return fail(`duplicate public value or canvas option on ${a.property}`);
     const checked = PropSchema.safeParse({
-      name: a.propName, type: { enum: values.map(v => v.value) },
+      name: a.propName, type: boolean ? 'boolean' : { enum: values.map(v => v.value) },
       bindings: { code: { prop: a.codeProp }, figma: {
         kind: 'VARIANT', property: a.property, unsetValue: a.unsetValue,
         values: Object.fromEntries(values.map(v => [v.value, v.label])),
@@ -72,7 +80,8 @@ export function readUnsetVariantAxes(set: DumpSet): UnsetVariantAxis[] {
     const property = a.property;
     if (!labels.every(label => set.variants.some(v => v.variantProperties?.[property] === label)))
       return fail(`missing drawn option on ${a.property}`);
-    return { property: a.property, propName: a.propName, codeProp: a.codeProp, unsetValue: a.unsetValue, values };
+    return { property: a.property, propName: a.propName, codeProp: a.codeProp, unsetValue: a.unsetValue,
+      ...(raw.version === 2 ? { valueType: boolean ? 'boolean' as const : 'enum' as const } : {}), values };
   });
 }
 

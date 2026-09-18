@@ -1,3 +1,5 @@
+import { nativeImageFraming } from '../playground/src/native-image-framing.js';
+import { collectExpectedNativeImages } from './native-operation-images.js';
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -226,4 +228,28 @@ test("framing measures the exact archived shadow-root target with no live server
     await browser.close();
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('native shadow bounds align logical origins without rescaling or cropping either image',()=>{
+ const pixels=PNG.sync.write(new PNG({width:364,height:204}));
+ const input={operation:{id:'comparison',fileKey:'file'},planRevision:'sha256:'+ 'a'.repeat(64)};
+ const raw={version:1,status:'native-readback-collected',receiptKind:'independent-native-component-readback',
+  operationId:input.operation.id,fileKey:input.operation.fileKey,planRevision:input.planRevision,acceptedContract:null,nativeQualification:'unqualified',problems:[],
+  nodes:[{id:'instance',values:{width:360,height:200}}],images:[{caseId:'card',nodeId:'instance',pngBase64:pixels.toString('base64'),
+   exportBounds:{layout:{x:100,y:100,width:360,height:200},render:{x:98,y:99,width:364,height:204}}}]};
+ const read=()=>collectExpectedNativeImages(input,[{id:'card',instanceId:'instance'}],raw);
+ const actual=read();assert.equal(actual.observation.status,'collected');
+ const image=actual.observation.images[0];assert.deepEqual(image.layoutOffset,{x:2,y:1});
+ const text={id:'text',type:'TEXT',parentId:'instance',values:{width:94,fontSize:14,characters:'Save changes',fontName:{family:'Inter',style:'Medium'}}};
+ (raw.nodes as any[]).push(text,{...text,id:'foreign',parentId:'other'}, {...text,id:'cycle',parentId:'cycle'});
+ assert.deepEqual(read().observation.images[0].textBoxes,[{nodeId:'text',text:'Save changes',width:94,family:'Inter',style:'Medium',size:14}],
+  'only text in the exported instance is compared; foreign nodes and cycles never match');
+ assert.equal(actual.bytes.get(image.sha256)!.equals(pixels),true,'pixels remain the original native export');
+ const frame={bounds:{x:32,y:40,width:360,height:200},crop:{x:24,y:32,width:376,height:216}} as import('./source-framing.js').SourceFrame;
+ assert.deepEqual(nativeImageFraming(frame,image),{source:{paddingLeft:0,paddingTop:0},native:{paddingLeft:6,paddingTop:7}});
+ assert.deepEqual(nativeImageFraming(frame,{...image,layoutOffset:{x:16,y:20}}),{source:{paddingLeft:8,paddingTop:12},native:{paddingLeft:0,paddingTop:0}});
+ raw.images[0].exportBounds.render.width=363;
+ assert.equal(read().observation.images[0].layoutOffset,undefined,'unknown raster bounds do not invent alignment');
+ raw.images[0].exportBounds.render.x=NaN;
+ assert.equal(read().observation.status,'unavailable');
 });

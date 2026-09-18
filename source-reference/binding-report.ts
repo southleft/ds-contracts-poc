@@ -5,6 +5,10 @@ import type { BindingTraceReport } from "./binding-jobs.js";
 import { matchLitRender } from "./lit-render-match.js";
 import { planBindingInterventions } from "./binding-plan.js";
 import { checkDependency } from "./binding-differential.js";
+import {
+  deriveLifecycleIdentityPolicy,
+  semanticReplayMatches,
+} from "./lifecycle-identity.js";
 import { semanticHash } from "./semantics.js";
 
 const same = isDeepStrictEqual;
@@ -55,6 +59,12 @@ export function validateBindingReport(
     const input = evidence.rows[index];
     requireEvidence(strings(row.problems), "problems-invalid");
     let match;
+    if (evidence.request.version === 1)
+      requireEvidence(
+        row.replaySemantics === undefined &&
+          row.renderObservation === undefined,
+        "unexpected-replay-evidence",
+      );
     if (row.correspondence) {
       requireEvidence(
         input.eligible &&
@@ -70,10 +80,42 @@ export function validateBindingReport(
             input.semantics.sourceTreeSha256,
         "topology-original-mismatch",
       );
+      let semantics = input.semantics;
+      if (evidence.request.version === 2) {
+        requireEvidence(
+          row.replaySemantics && row.renderObservation,
+          "fresh-replay-evidence-missing",
+        );
+        semantics = row.replaySemantics;
+        requireEvidence(
+          semantics.status === "observed" &&
+            same(semantics.declaration, input.semantics.declaration) &&
+            semantics.sourcePngSha256 === input.semantics.sourcePngSha256 &&
+            semantics.sourceTreeSha256 === input.semantics.sourceTreeSha256 &&
+            semanticReplayMatches(
+              input.semantics.observation,
+              semantics.observation,
+              deriveLifecycleIdentityPolicy(
+                evidence.source,
+                input.semantics.declaration,
+              ),
+            ),
+          "fresh-semantics-mismatch",
+        );
+      }
       match = matchLitRender({
         source: evidence.source,
-        semantics: input.semantics,
+        semantics,
         boundTopology: row.boundTopology,
+        ...(evidence.request.version === 2
+          ? {
+              staticRender: {
+                observation: row.renderObservation!,
+                sourcePngSha256: semantics.sourcePngSha256,
+                sourceTreeSha256: semantics.sourceTreeSha256!,
+              },
+            }
+          : {}),
       });
       requireEvidence(
         same(row.correspondence, match),

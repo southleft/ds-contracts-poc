@@ -1,3 +1,4 @@
+import {withEvidenceReadSnapshot} from './evidence-read-snapshot.js';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import {
@@ -70,6 +71,46 @@ async function created(t: test.TestContext) {
   assert.equal(f.jobs.accept(f.snapshot.id, result).phase, "tokens-created");
   return { ...f, host, command, result };
 }
+
+test('display snapshots reuse checked reads but cannot authorize writes or leak into later requests', t => {
+  let calls=0,stale=false;
+  const f=fixture(t,(request,operation)=>{calls++;if(stale)throw Error('source changed');return nativeFixturePrepare(request,operation);});
+  const id=f.snapshot.id,before=f.inventory();calls=0;
+  f.jobs.withReadSnapshot(()=>{
+    const first=f.jobs.get(id);assert.equal(first.sourceCurrent,true);
+    first.counters.variables=999;
+    stale=true;
+    const second=f.jobs.withReadSnapshot(()=>f.jobs.get(id));
+    assert.equal(second.sourceCurrent,true);assert.notEqual(second.counters.variables,999);
+    for(const write of [()=>f.jobs.prepare(request),()=>f.jobs.dispatch(id,'token-create'),
+      ()=>f.jobs.pendingCommand(id),()=>f.jobs.accept(id,{} as NativeOperationResult),
+      ()=>f.jobs.retryObservation(id),()=>f.jobs.retryCreation(id)])
+      assert.throws(write,/write-during-read-snapshot/);
+  });
+  withEvidenceReadSnapshot(()=>{
+    for(const write of [()=>f.jobs.prepare(request),()=>f.jobs.dispatch(id,'token-create'),
+      ()=>f.jobs.pendingCommand(id),()=>f.jobs.accept(id,{} as NativeOperationResult),
+      ()=>f.jobs.retryObservation(id),()=>f.jobs.retryCreation(id)])
+      assert.throws(write,/write-during-evidence-read-snapshot/);
+  });
+  assert.equal(calls,1);assert.deepEqual(f.inventory(),before);
+  assert.equal(f.jobs.get(id).sourceCurrent,false);assert.equal(calls,2);
+  assert.throws(()=>f.jobs.dispatch(id,'token-create'),/source changed/);
+  assert.deepEqual(f.inventory(),before);
+  stale=false;
+  assert.throws(()=>f.jobs.withReadSnapshot(()=>{f.jobs.get(id);throw Error('display failed')}),/display failed/);
+  stale=true;assert.equal(f.jobs.get(id).sourceCurrent,false);
+  assert.throws(()=>f.jobs.withReadSnapshot(()=>Promise.resolve()),/async-read-snapshot/);
+  stale=false;assert.equal(f.jobs.get(id).sourceCurrent,true);
+});
+
+test('display caching retains the fresh journal check during source authentication',t=>{
+  let change: (()=>void)|undefined;
+  const f=fixture(t,(request,operation)=>{change?.();change=undefined;return nativeFixturePrepare(request,operation);});
+  const file=path.join(f.directory,'operation.json');
+  change=()=>{const header=JSON.parse(readFileSync(file,'utf8'));header.startedAt='2025-01-01T00:00:00.000Z';writeFileSync(file,JSON.stringify(header));};
+  assert.equal(f.jobs.withReadSnapshot(()=>f.jobs.get(f.snapshot.id)).sourceCurrent,false);
+});
 
 test("private token accessor requires independent observation and returns isolated host context", async (t) => {
   const f = await created(t);

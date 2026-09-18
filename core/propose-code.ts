@@ -18,6 +18,9 @@ export interface ProposeCodeCtx {
   tokens: unknown[] | TokenIndex;
   /** Contract id namespace (default "ds" → "ds.<kebab-name>"). */
   prefix?: string;
+  /** Keep declared primitive types, requiredness and omission; do not invent
+   * boolean enum APIs or required-text defaults for source-backed proposals. */
+  preserveSourceApi?: boolean;
   /** OPT-IN provisional minting: unbindable styled declarations (raw
    *  literals + foreign var()s) become `imported.*` leaves and the proposal
    *  binds to them (ProposalResult.mintedTokens carries the tree). Default
@@ -60,7 +63,7 @@ export function proposeFromCode(
   const proposals: Array<{ name: string; proposal: ProposalResult }> = [];
   for (const input of inputs) {
     for (const component of extractFromSource(input, () => index, seen, skipped)) {
-      proposals.push({ name: component.name, proposal: proposeContract(component, ctx.prefix ?? 'ds', mint) });
+      proposals.push({ name: component.name, proposal: proposeContract(component, ctx.prefix ?? 'ds', mint, { preserveSourceApi: ctx.preserveSourceApi }) });
     }
   }
   return { proposals, skipped };

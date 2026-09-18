@@ -63,6 +63,41 @@ Anatomy is a **nested tree** of named parts (CEM's slots/parts, Curtis's anatomy
 
 Parts with none of these are structural (frames/elements containing `parts`). `optional: true` renders conditionally in code and toggles visibility on the canvas. Composition rules: part names are unique per contract; cycles and unknown contract refs **fail the build**; sync scripts emit in dependency order. See [docs/08](08-composition-and-spec.md) for the design rationale.
 
+For React output, a nested `component` reference can also carry `parts`: these
+are caller-owned children passed through the child's unique `children` slot.
+Their property references resolve against the parent contract, and nested
+component references retain their own implementations and state. The child
+slot must be unconstrained: required content, arity bounds and restricted
+acceptance need separate projection support. Competing text, slot, content or
+repeat declarations are refused. An empty `parts: {}` supplies an empty React
+Fragment; omission leaves children unset. Slot `defaultContent` remains
+design/story sample content, never a runtime default. The Figma generator can
+populate the child's existing native slot, replacing its design defaults only
+on that instance. It preserves parent property scope and child typography,
+including supported flex and grid layouts. The writer also fills slots below a child's root, but graph readback currently verifies only slots directly under the dependency's root and refuses deeper locations by name. Full-width children
+require a definite column or grid context; grid content must fit declared or
+managed rows. Caller-owned text inside a child slot stays directly editable on the canvas; Figma cannot bind it to a parent TEXT property, so the native generator lowers such a mapping to canvas content and reports it as editable canvas text. Exposing
+eligible direct child controls does not create arbitrary property aliases across
+nested instances. This writer path has test-host coverage; live canvas behavior,
+automatic source integration and reverse reconstruction remain unqualified.
+HTML and Web Components emission still refuse caller parts.
+
+`component.initialProps` supplies mount-only values to the child's declared
+`bindings.code.initial.prop`. Keys are canonical child enum property names;
+values are canonical literals or `{parentEnum}` references. Each side retains
+its own public code spelling, including booleans. Omission leaves the child's
+initializer unset; changes after mounting do not reset state. Ordinary
+`component.props` still targets the controlled input, which takes priority when
+both are supplied. Root references and repeated instances currently refuse
+`initialProps`, as do HTML and Web Components emission. Figma compilation can
+project finite enum initializers into fresh-mount design variants: an omitted
+parent value uses the child's declared initializer default when present, and a
+supplied controlled value wins. The authored initializer mapping remains in the
+compiled instance specification. This static projection does not implement React
+state lifetime on the canvas or qualify reverse reconstruction. Child and parent
+state inputs must have compatible native variant bindings; text and Boolean
+property aliases remain unsupported.
+
 ```jsonc
 "anatomy": {
   "root": {
@@ -125,14 +160,15 @@ Five features from the second schema gauntlet, each shipped with a consuming con
 
 **Structured props.** `type: { arrayOf: Record<field, 'text' | 'number' | 'boolean'> }` declares a list-of-records prop (Breadcrumbs items, Select options). Code-only by declared fidelity limit — the canvas has no list-of-records property type — so the design binding is `{ "kind": "NONE" }` with no `property`, and every design-side consumer (figma generator, differ, diagnose) skips the prop rather than reporting it behind. Code renders `items?: Array<{ … }>`: no default destructure (undefined means "not provided", never a silent `[]`) and excluded from `...rest`. Guardrails: `arrayOf` ⇔ `kind: "NONE"` in both directions, no defaults, at least one field.
 
-## Grid layout (A2 — the declared-track grammar)
+## Grid layout (declared tracks and managed row flow)
 
 `layout.display: "grid"` joins the flex vocabulary, carrying the **declared-track
 subset** of CSS grid — the half the canvas round-trips byte-exactly
 (`layoutMode: "GRID"`, probed in [docs/research/grid-recon-probes.md](research/grid-recon-probes.md);
 grammar pinned in [docs/research/layout-grammar-proposal.md](research/layout-grammar-proposal.md), G1–G7).
 
-**Tracks and gaps (G1).** `layout.rows` / `layout.columns` are REQUIRED arrays of
+**Tracks and gaps (G1).** `layout.columns` is required; `layout.rows` is required
+unless `layout.flow: "row"` is present. Both are arrays of
 track objects — exactly one of `{"px": n}`, `{"fr": n}` (both may be fractional),
 or `{"fit": true}` (the canvas HUG track; its exact code spelling is
 `fit-content(100%)`, P14). Zero and negative values are schema-invalid: the
@@ -171,15 +207,36 @@ probe dead-end, via the `GRID_REFUSALS` registry
 `grid-child-grow`. Conformance pins nine of these as measured cases
 (`conformance/MANIFEST.json`, `grid-*` REFUSED rows).
 
-**Honest boundary.** Code→contract promotion carries **auto-placed** grids as
-of 2026-08-08 (G5: the cell is derived from child order as CSS row flow
-resolves it, then declared — explicit anchors when the author declared row
-tracks, `layout.flow: "row"` when they did not), which is what released the
-frozen subset's staged widen of `grid-2d` to CARRIED. Half-auto children,
-mixed auto/explicit siblings and occupancy past the declared tracks stay
-refused by name ([docs/23 §B.22](23-known-limitations.md)). CANVAS→contract is
-the direction still missing: `core/propose-figma.ts` does not read the dump's
-`grid` block, so a drawn grid proposes as the flex-era lowering.
+**Managed row sizing.** With `flow: "row"`, optional `autoRows` supplies one
+track object for each row beyond the declared `rows` list. For example:
+
+```json
+{"display":"grid","columns":[{"fr":1}],"rows":[{"fit":true},{"fit":true}],"autoRows":{"fit":true},"flow":"row"}
+```
+
+React emits the two explicit tracks and `grid-auto-rows: fit-content(100%)`.
+The native compiler and caller-content comparison writer materialize enough
+explicit Figma rows for the supplied children. The main stays empty when it
+has a root content slot. Native metadata retains the original declared rows
+and the extra-row rule; reverse extraction validates the observed tracks
+against that recipe before restoring it. Removing supplied content drops only
+derived rows, retaining explicitly declared empty rows and their gaps.
+
+This is a **managed content operation**, not automatic native CSS behavior.
+Adding children directly in Figma beyond its declared rows can leave content
+misplaced. Readback refuses an inconsistent row declaration; the companion
+must regenerate the track count for the changed content. Existing contracts
+without `autoRows` keep their previous behavior. Column flow, dense placement,
+repeating implicit-track lists and unresolved intrinsic keywords remain
+unsupported. `autoRows` requires forward row flow, and fractional tracks still
+require a definite axis rather than intrinsic sizing.
+
+**Conversion boundary.** CSS-module extraction and native extraction both
+carry supported grid tracks, gaps and forward row flow. Native extraction
+also checks the compiler-owned content carrier before restoring a single React
+root. Mixed automatic/explicit placement and unqualified overflow remain
+refusals. These shared rules do not qualify arbitrary CSS or complete the
+source-derived React Card journey; see [current status](CURRENT.md).
 
 ## State previews (`bindings.figma.statePreviews`, v8; spelled `figmaStatePreviews` until schema 17)
 

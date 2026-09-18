@@ -318,3 +318,8 @@
   );
   background-size: 16px 16px;
 }
+
+.react-source-reference { border-bottom: 1px solid var(--line, #ddd); padding-block: 16px 28px; margin-bottom: 28px; }
+.react-source-reference select { display: block; width: min(100%, 440px); margin-block: 8px 16px; }
+.react-source-viewport { width: 100%; overflow: auto; border: 1px solid var(--line, #ddd); }
+.react-source-frame { display: block; width: 900px; height: 390px; border: 0; background: white; }

@@ -222,7 +222,7 @@
   <details class="section help">
     <summary>Connect the local source workflow</summary>
     <p class="meta">In the local app’s Sources page, prepare the candidate and copy its connection.
-      Open Scratch, connect here, then choose Create and inspect in the app.
+      Open the authorized target shown in the app, connect here, then choose Create and inspect in the app.
       Keep this plugin open while it creates and reads back the candidate.</p>
     <label for="native-connection">Local app connection</label>
     <input id="native-connection" type="password" autocomplete="off" spellcheck="false" placeholder="dscn_…" />
@@ -2774,6 +2774,8 @@ async function dumpNode(node, nodePath, parent) {
       columnGap: node.gridColumnGap,
     };
     if (node.gridItemsPositioning === 'ROW_AUTO_FLOW') grid.flow = 'row';
+    const flowRows = node.getSharedPluginData('ds_contracts', 'gridFlowRows');
+    if (flowRows) { try { grid.flowRows = JSON.parse(flowRows); } catch (_) { grid.flowRows = flowRows; } }
     out.layout = {
       mode: 'GRID',
       padding: [node.paddingTop, node.paddingRight, node.paddingBottom, node.paddingLeft],
@@ -3507,6 +3509,16 @@ for (const page of figma.root.children) {
         const raw = node.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
         if (!raw) return {};
         try { return { unsetVariantAxes: JSON.parse(raw) }; } catch (e) { return { unsetVariantAxes: raw }; }
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'rootSlot');
+        if (!raw) return {};
+        try { return { rootSlot: JSON.parse(raw) }; } catch (e) { return { rootSlot: raw }; }
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'codeValueAxes');
+        if (!raw) return {};
+        try { return { codeValueAxes: JSON.parse(raw) }; } catch (e) { return { codeValueAxes: raw }; }
       })(),
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'semantics');

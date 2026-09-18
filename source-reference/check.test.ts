@@ -94,3 +94,20 @@ test('state and slotted font witnesses reject plausible but wrong stories', asyn
     assert.ok((await check()).problems.includes('font-substitution'));
   } finally { failures.dispose(); await browser.close(); }
 });
+
+test('textless controls require their actual visible unique label and its painted font',async()=>{
+  const browser=await chromium.launch();const page=await browser.newPage();const failures=watchSourceFailures(page);
+  const labeled:SourceProfile={...profile,path:['#control'],associatedLabelText:'Receive updates'};
+  const original=()=>html().replace('<button style="">Reference</button>','<button id="control" role="checkbox" aria-checked="false"></button><label for="control" style="font:16px IBM Plex Sans">Receive updates</label>');
+  const check=async()=>checkSource(labeled,await observeSource(page,labeled,failures));
+  try{
+    for(const [mutation,problem] of [
+      [()=>{},null],
+      [()=>{document.querySelector('label')!.htmlFor='unrelated';},'label-association-invalid'],
+      [()=>{document.querySelector('label')!.style.display='none';},'label-not-visible'],
+      [()=>{document.querySelector('label')!.textContent='Different label';},'label-text-mismatch'],
+      [()=>{document.querySelector('label')!.style.fontFamily='serif';},'font-substitution'],
+      [()=>{const duplicate=document.createElement('div');duplicate.id='control';document.body.append(duplicate);},'label-association-invalid'],
+    ] as const){await page.setContent(original());await page.evaluate(()=>document.fonts.ready);await page.evaluate(mutation);const result=await check();if(problem)assert.ok(result.problems.includes(problem),JSON.stringify(result));else assert.equal(result.status,'valid',JSON.stringify(result));}
+  }finally{failures.dispose();await browser.close();}
+});

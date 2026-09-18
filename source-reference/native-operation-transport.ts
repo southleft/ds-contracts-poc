@@ -15,13 +15,22 @@ import {
 } from "node:fs";
 import path from "node:path";
 import {
-  SOURCE_NATIVE_FILE_KEY,
-  type createNativeOperationJobs,
+  type NativeOperationCommand,
   type NativeOperationPhase,
   type NativeOperationResult,
 } from "./native-operation-jobs.js";
 
-type Jobs = ReturnType<typeof createNativeOperationJobs>;
+/** Creation and updates share delivery guarantees while retaining separate
+ * typed journals. Neither controller accepts caller-supplied programs. */
+export interface NativeDeliveryJobs {
+  get(id: string): { phase: string; sourceCurrent: boolean };
+  deliveryState(id: string): { phase: string; pendingPhase?: NativeOperationPhase; fileKey: string };
+  dispatch(id: string, phase: NativeOperationPhase): NativeOperationCommand;
+  pendingCommand(id: string): NativeOperationCommand | null;
+  abandonedObservationPhase(id: string, attemptId: string): NativeOperationPhase | null;
+  accept(id: string, result: NativeOperationResult): unknown;
+  retryObservation(id: string): unknown;
+}
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const SECRET = /^[a-f0-9]{64}$/;
 function fail(message: string): never {
@@ -30,15 +39,20 @@ function fail(message: string): never {
 const sha = (value: unknown) =>
   createHash("sha256").update(JSON.stringify(value)).digest("hex");
 const NEXT: Partial<
-  Record<ReturnType<Jobs["get"]>["phase"], NativeOperationPhase>
+  Record<string, NativeOperationPhase>
 > = {
   prepared: "token-create",
+  "comparison-repair-observed": "comparison-repair-apply",
+  "comparison-recovery-observed": "comparison-recovery-apply",
   "tokens-created": "token-readback",
   "tokens-observed": "component-create",
   "components-created": "component-readback",
+  "update-prepared": "update-preflight-readback",
+  "update-preflight-observed": "update-apply",
+  "update-applied": "update-readback",
 };
 
-export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
+export function createNativeOperationTransport<Jobs extends NativeDeliveryJobs>(repoRoot: string, jobs: Jobs) {
   const root = path.join(repoRoot, "private", "source-native-transport");
   const seen = new Map<string, number>();
   const ensure = (directory: string, create = true) => {
@@ -142,7 +156,7 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
     replaceReadbackAttemptId?: string,
   ) => {
     authorize(id, secret);
-    if (fileKey !== SOURCE_NATIVE_FILE_KEY) fail("file-refused");
+    if (fileKey !== jobs.deliveryState(id).fileKey) fail("file-refused");
     seen.set(id, Date.now());
     const dir = directory(id),
       state = status(id);
@@ -215,7 +229,7 @@ export function createNativeOperationTransport(repoRoot: string, jobs: Jobs) {
       fail("claim-invalid");
     // The journal verifies every correlation field and stores the result before
     // checking fresh source; a stale source must never erase a late native ack.
-    return jobs.accept(id, result);
+    return jobs.accept(id, result) as ReturnType<Jobs['accept']>;
   };
   const retryObservation = (id: string) => {
     connection(id);

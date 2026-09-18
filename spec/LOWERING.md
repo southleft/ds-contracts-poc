@@ -6,7 +6,7 @@ A **door** ([`DOOR-REGISTER.md`](./DOOR-REGISTER.md)) decides whether a computed
 
 `margin` between two stacked siblings has no Figma twin. Something has to choose — parent `itemSpacing`, parent padding, a synthetic wrapper node, or a named refusal. That choice **is** the conversion, and every one of them was made in code and written down nowhere.
 
-This register names **57** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
+This register names **60** lowering rules across 6 stages. Each states the CSS construct, the exact context predicate it fires in, the Figma construct it produces, what the inverse returns, what is lost, and the **canonical form** the two directions must converge on.
 
 ## Why this exists, and why it is not a second door register
 
@@ -849,7 +849,7 @@ A sign convention, a first-wins tie-break, and a token binding that stops at one
 
 **Why.** A decision by OMISSION, which is the purest form the register can record: the schema declares the field, the emitter writes it, the runtime applies it, the inverse reads it back — and no producer ever sets it, because nothing reads the CSS property. Every link of the chain exists except the first. Capture is not the gap: window.__ALL_PROPS records every Chromium longhand including flex-wrap. This is a lowering hole, not a capture hole.
 
-### `overlap` — 1 rule (0 implemented, 0 proposed, 1 wall)
+### `overlap` — 2 rules (1 implemented, 0 proposed, 1 wall)
 
 `layout.overlap` is the mirror image: the INVERSE can detect it on a canvas a designer built by hand, and the forward direction has no code path to produce it. The Figma emitter reads `overlap` only inside comments.
 
@@ -887,6 +887,12 @@ Read nowhere, and more dangerous than a plain drop: it mints as a channel no reg
 
 **Why.** Cited to the tab-size incident recorded at this very site, because the shape is identical: a page-global numeric property nobody registered reached the mint, became a channel the registry did not know, and made validateContract refuse 32 whole components by name. `order` has every one of those properties today. Registered as a WALL because the honest lowering is refusal — CSS `order` reorders without moving the DOM, and Figma has only child order, so the two are not the same fact.
 
+#### `emit.padding-box-background-plane`
+
+Solid `background-clip: padding-box` on a flex root or frame lowers to an absolute rectangle behind content. It retains the colour binding, subtracts a uniform border width from each edge, and uses `max(0, outer radius - border width)` for the inner radius. The outer layout, stroke, effects and radius bindings stay on the original node. Native stretch constraints follow content-driven box resizing.
+
+Native creation and populated comparison tests verify the paint geometry and reject altered dimensions, insets, radii, order and bindings. Other clip modes, multiple backgrounds, asymmetric borders/radii, gradients and grid retain explicit code-only receipts. Inner radii are derived during compilation; direct native radius-token edits need recompilation. Reverse reconstruction and migration of existing app output remain unqualified. The register's round-trip verdict is therefore `untested`.
+
 ## What this register does not do
 
 It does not change what the engine lowers. Naming, not carrying — the same discipline as the door register. The five items below are **plain bugs rather than decisions**; every one is registered as `proposed` with its site cited, and every one is left alone. A fix shipped inside a documentation change is how unexercised claims get made.
@@ -919,3 +925,27 @@ This is a check on the *declared* forms, not an executed round trip — the empi
 > **`emit.margin-box-wrapper`.** The forward leg mints a frame literally named `<child> (margin box)`. `grep -a` over the 11,574-line inverse finds exactly **one** occurrence, and it is a mention inside a note string — not a recognizer. So the inverse reads the wrapper as an ordinary anatomy part, promotes it, and the next forward pass lowers *that* part again. **The structure grows every pass.**
 
 That is the measured result of option (a) — the spacer node — with its inverse half never written. It is the incumbent, and it is the thing that already broke.
+
+
+### Managed implicit rows
+
+`emit.grid-managed-flow-rows` materializes one `autoRows` track rule into
+explicit Figma rows for the current supplied content. It retains the declared
+rows and implicit rule in `gridFlowRows` metadata, which inversion checks
+against independently observed native tracks. Direct canvas child insertion
+cannot update that rule automatically; inconsistent tracks refuse. The shared
+writer and comparison tests, a live native comparison, and live-dump-to-React
+checks exercise this managed boundary. The frozen conformance baseline has no
+case for the addition, so the register verdict remains `untested`.
+
+
+### Parent-relative root content width
+
+`emit.root-content-parent-width` preserves `width:100%` for supported root
+content. The reusable native main has a standalone preview width; a nested
+instance fills its qualified containing column or grid. Inversion checks the
+root-slot metadata and native sizing and retains `width:100%` instead of
+minting preview pixels. An indefinite parent or standalone comparison without
+a containing context refuses. Live native resizing and live-dump React checks
+exercise this boundary; the frozen baseline has no case, so its register
+verdict remains `untested`.

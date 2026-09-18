@@ -14,6 +14,35 @@ const allNodes = (root: NodeSpec): NodeSpec[] => [
   ...(root.children ?? []).flatMap(allNodes),
 ];
 
+test("optional source booleans require all three typed observations before native compilation", () => {
+  const f = fixture();
+  f.contract.props[0].type = "boolean";
+  f.artifact.interface.properties[0].typeText = "boolean";
+  f.artifact.interfaceRevision = revisionOf(f.artifact.interface);
+  f.binding.interfaceRevision = f.artifact.interfaceRevision;
+  f.contract.bindings.code.runtime!.interfaceRevision = f.artifact.interfaceRevision;
+  const template = structuredClone(f.projection.cases[0]);
+  const refused = f.projection.cases.at(-1)!;
+  f.projection.cases = [undefined, false, true].map((value, index) => ({
+    ...structuredClone(template), id: `boolean-case-${index}`,
+    properties: { variant: value === undefined ? { kind: "omitted" as const } : { kind: "value" as const, value } },
+  }));
+  f.projection.cases.push(refused);
+  f.reseal();
+  const data = f.compile();
+  assert.deepEqual(data.variants.map(v => v.name), ["Variant=(unset)", "Variant=false", "Variant=true"]);
+  assert.deepEqual(data.boolProps, []);
+  assert.equal(data.unsetVariantAxes!.axes[0].valueType, "boolean");
+  const cases = structuredClone(f.projection.cases);
+  f.projection.cases.splice(1, 1);
+  f.reseal();
+  assert.throws(f.compile, /NATIVE_SOURCE_CANDIDATE_VARIANT_COVERAGE_INCOMPLETE/);
+  f.projection.cases = cases;
+  f.projection.cases[1].properties!.variant = { kind: "value", value: "false" };
+  f.reseal();
+  assert.throws(f.compile, /NATIVE_SOURCE_CANDIDATE_CASE_PROPERTY_INVALID/);
+});
+
 test("host-qualified compile preserves retained runtime/API and pairs every original part across reordered variants", () => {
   const f = fixture(),
     before = canonicalJson({

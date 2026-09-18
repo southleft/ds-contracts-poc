@@ -1,3 +1,9 @@
+import { reactInitialInput, reactInitialValue, validateReactInitialBindings } from './react-initial-value.js';
+import { reactInitialAttributes } from './react-composition-initial.js';
+import { svgIconViewport } from './svg-icon-viewport.js';
+import { reactToggleAria } from './react-toggle-aria.js';
+import { reactEventCallbackCall, reactEventCallbackType } from './react-event-callback.js';
+import { hasCodeValues, codeValueUnion, codeValueLiteral, codeValueExpression, mappedPropBinding, mappedPropPrelude, validateCodeValueConsumers } from './code-values.js';
 /**
  * Contract → React with INLINE STYLES, token refs RESOLVED to literals — the
  * zero-infrastructure emitter for orgs without a token pipeline: no CSS
@@ -24,6 +30,7 @@
  *     hover/focus pseudo-classes above (the css/html emitters enforce it).
  *   · Composition imports sibling inline-emitted components ('./Dep').
  */
+import { rootContentJsx, literalTextJsx } from './root-content.js';
 import {
   TOKEN_CHANNELS,
   borderStyleDecls,
@@ -117,7 +124,9 @@ const isStructural = (part: Part) =>
 type StyleRecord = Record<string, string | number>;
 
 export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): EmitReactInlineResult {
+  validateReactInitialBindings(contract);
   refuseRetainedRuntime(contract, 'react-inline', ctx.contracts);
+  validateCodeValueConsumers(contract);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
   if (errors.length > 0) {
@@ -213,7 +222,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     Object.values(part.parts ?? {}).every((pp) => pp.slot !== undefined);
 
   const compilePart = (partName: string, part: Part, isRoot: boolean) => {
-    const s: StyleRecord = {};
+    // Contract dimensions are outer box dimensions, as on the CSS-module
+    // and native surfaces. Do not depend on the consumer's global reset.
+    const s: StyleRecord = { boxSizing: 'border-box' };
     // A2 grid (G2/G4): this part's cell under its grid parent — resolved
     // from the shared plan; sizing stays unspelled (stretch is the CSS grid
     // default, the pinned spelling of canvas FILL, G3).
@@ -402,9 +413,23 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       for (const [value, overrides] of Object.entries(entry.map)) {
         const decls: StyleRecord = {};
         for (const [cssProp, ref] of Object.entries(overrides)) {
-          decls[camel(cssProp)] = resolveValue(stripBraces(ref));
-          if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
-            decls.minWidth = resolveValue(stripBraces(ref));
+          const refPath = stripBraces(ref), placeholders = placeholdersIn(refPath);
+          // A per-value map may retain one OTHER enum placeholder. This is
+          // how the shared compiler carries a coupled axis with omission.
+          if (placeholders.length === 1) {
+            const other = placeholders[0];
+            for (const otherValue of substByName.get(other) ?? []) {
+              const resolved = resolveValue(refPath.replaceAll(`{${other}}`, otherValue));
+              const compound: StyleRecord = { [camel(cssProp)]: resolved };
+              if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) compound.minWidth = resolved;
+              applyBorderStyle(compound, { [cssProp]: ref }, 'tokens', part.declared);
+              addVariantCompound([[entry.prop, value], [other, otherValue]], partName, compound);
+            }
+          } else {
+            decls[camel(cssProp)] = resolveValue(refPath);
+            if (isRoot && cssProp === 'max-width' && slotWrapperFloorOf(part)) {
+              decls.minWidth = resolveValue(refPath);
+            }
           }
         }
         applyBorderStyle(decls, overrides, 'tokens', part.declared);
@@ -519,7 +544,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   for (const p of contract.props) {
     const doc = p.description ? `  /** ${p.description} */\n` : '';
     if (isEnum(p)) {
-      propLines.push(`${doc}  ${p.bindings.code.prop}?: ${p.type.enum.map((v) => `'${v}'`).join(' | ')};`);
+      propLines.push(`${doc}  ${p.bindings.code.prop}${hasCodeValues(p) && p.required ? '' : '?'}: ${hasCodeValues(p) ? codeValueUnion(p) : p.type.enum.map((v) => `'${v}'`).join(' | ')};`);
     } else if (isArrayType(p)) {
       const fields = Object.entries(p.type.arrayOf)
         .map(([f, t]) => `${f}: ${t === 'text' ? 'string' : t}`)
@@ -533,19 +558,22 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       propLines.push(`${doc}  ${p.bindings.code.prop}${p.required ? '' : '?'}: string;`);
     }
   }
+  for (const p of contract.props.filter(p => p.bindings.code.initial)) {
+    propLines.push(`  /** Initial value, read only on mount when uncontrolled. */\n  ${p.bindings.code.initial!.prop}?: ${codeValueUnion(p)};`);
+  }
   for (const { slot, part } of slots) {
     const doc = part.description ? `  /** ${part.description} */\n` : '';
     propLines.push(`${doc}  ${slot.name}?: ReactNode;`);
   }
   for (const ev of events) {
     const doc = ev.description ?? `Fires when the ${ev.trigger} is activated.`;
-    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: () => void;`);
+    propLines.push(`  /** ${doc} */\n  ${ev.bindings.code.prop}?: ${reactEventCallbackType(contract, ev)};`);
   }
 
   const destructured: string[] = [];
   for (const p of enums) {
     destructured.push(
-      toggledCodeProps.has(p.bindings.code.prop)
+      hasCodeValues(p) ? mappedPropBinding(p, contract.props.indexOf(p), toggledCodeProps.has(p.bindings.code.prop)) : toggledCodeProps.has(p.bindings.code.prop)
         ? `${p.bindings.code.prop}: ${p.bindings.code.prop}Prop`
         : p.default === undefined ? p.bindings.code.prop : `${p.bindings.code.prop} = '${p.default}'`,
     );
@@ -562,19 +590,21 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     );
   }
   for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
+  for (const p of contract.props.filter(p => p.bindings.code.initial))
+    destructured.push(`${p.bindings.code.initial!.prop}: ${reactInitialInput(contract,p)}`);
   for (const { slot } of slots) destructured.push(slot.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
   destructured.push('style', 'children', '...rest');
 
   // Uncontrolled toggles + handlers — identical pattern to the CSS-Module emitter.
-  const prelude: string[] = [];
+  const prelude: string[] = mappedPropPrelude(contract);
   for (const ev of events) {
     if (!ev.toggles) continue;
     const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
     const code = prop.bindings.code.prop;
     const union = (prop.type as { enum: string[] }).enum.map((v) => `'${v}'`).join(' | ');
     prelude.push(
-      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined ? ' | undefined' : ''}>(${prop.default === undefined ? 'undefined' : `'${prop.default}'`});`,
+      `  const [${code}Uncontrolled, set${pascal(code)}Uncontrolled] = useState<${union}${prop.default === undefined && prop.bindings.code.initial?.default === undefined ? ' | undefined' : ''}>(${reactInitialValue(contract,prop)});`,
       `  const ${code} = ${code}Prop ?? ${code}Uncontrolled;`,
     );
   }
@@ -584,9 +614,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
       const code = prop.bindings.code.prop;
       const [off, on] = ev.toggles.between;
-      body.push(`set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
+      body.push(`${prop.bindings.code.initial ? `if (${code}Prop === undefined) ` : ''}set${pascal(code)}Uncontrolled(${code} === '${on}' ? '${off}' : '${on}');`);
     }
-    body.push(`${ev.bindings.code.prop}?.();`);
+    body.push(reactEventCallbackCall(contract, ev));
     prelude.push(`  const handle${pascal(ev.name)} = () => { ${body.join(' ')} };`);
   }
 
@@ -613,15 +643,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     let s = partEl === 'button' ? ' type="button"' : '';
     s += ` onClick={handle${pascal(ev.name)}}`;
-    if (ev.toggles?.aria) {
-      const prop = contract.props.find((p) => p.name === ev.toggles!.prop)!;
-      const code = prop.bindings.code.prop;
-      const [off, on] = ev.toggles.between;
-      const others = (prop.type as { enum: string[] }).enum.filter((v) => v !== off && v !== on);
-      s += others.length
-        ? ` aria-${ev.toggles.aria}={${code} === '${on}' ? true : ${code} === '${off}' ? false : 'mixed'}`
-        : ` aria-${ev.toggles.aria}={${code} === '${on}'}`;
-    }
+    s += reactToggleAria(contract, ev);
     return s;
   };
 
@@ -692,16 +714,24 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   // Icon assets (fixed names + enum expansions), same table as the CSS-Module emitter.
   const neededIcons = new Map<string, string>();
+  const sizedIcons = new Map<number, Map<string, string>>();
   for (const { part } of walkAnatomy(contract)) {
     if (!part.icon) continue;
     const m = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
-    if (m) {
+    if (m && !part.icon.size) {
       const enumProp = contract.props.find((p) => p.name === m[1]);
       if (enumProp && isEnum(enumProp)) {
         for (const v of enumProp.type.enum) neededIcons.set(v, ctx.icons.get(v) ?? '');
       }
-    } else {
+    } else if (!part.icon.size) {
       neededIcons.set(part.icon.asset, ctx.icons.get(part.icon.asset) ?? '');
+    }
+    if (part.icon.size) {
+      const assets = m ? contract.props.find(p => p.name === m[1]) : undefined;
+      const keys = m ? (assets && isEnum(assets) ? assets.type.enum : []) : [part.icon.asset];
+      const table = sizedIcons.get(part.icon.size) ?? new Map<string, string>();
+      for (const key of keys) table.set(key, svgIconViewport(ctx.icons.get(key) ?? '', part.icon.size));
+      sizedIcons.set(part.icon.size, table);
     }
   }
 
@@ -725,7 +755,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         const chain = Object.entries(value.map)
           .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
           .join('');
-        parts.push(` ${codeName}={${chain}undefined}`);
+        parts.push(` ${codeName}={${codeValueExpression(depProp, chain + 'undefined')}}`);
         continue;
       }
       if (typeof value === 'boolean') {
@@ -749,9 +779,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       }
       if (parentRef) {
         const parentProp = contract.props.find((p) => p.name === parentRef[1]);
-        parts.push(` ${codeName}={${parentProp?.bindings.code.prop ?? parentRef[1]}}`);
+        parts.push(` ${codeName}={${codeValueExpression(depProp, parentProp?.bindings.code.prop ?? parentRef[1])}}`);
       } else {
-        parts.push(` ${codeName}="${value}"`);
+        parts.push(depProp && hasCodeValues(depProp) ? ` ${codeName}={${codeValueLiteral(depProp,value)}}` : ` ${codeName}="${value}"`);
       }
     }
     return parts.join('');
@@ -761,7 +791,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     if (part.icon) {
       const ref = part.icon.asset.match(/^\{([a-z][\w-]*)\}$/);
       const keyExpr = ref ? codePropOf(ref[1]) : JSON.stringify(part.icon.asset);
-      const glyph = `dangerouslySetInnerHTML={{ __html: ${ref ? whenProvided(ref[1], `ICONS[${keyExpr}]`, "''") : `ICONS[${keyExpr}]`} }}`;
+      const table = part.icon.size ? `SIZED_ICONS[${part.icon.size}]` : 'ICONS';
+      const glyph = `dangerouslySetInnerHTML={{ __html: ${ref ? whenProvided(ref[1], `${table}[${keyExpr}]`, "''") : `${table}[${keyExpr}]`} }}`;
       const node = part.element
         ? `<${part.element} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, part.element)}><span aria-hidden="true" style={{ display: 'inline-flex' }} ${glyph} /></${part.element}>`
         : `<span style=${styleExpr(partName, false, stylesWhenExprs(part))} aria-hidden="true" ${glyph} />`;
@@ -784,6 +815,8 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
               const codeName = depProp?.bindings.code.prop ?? field;
               if (typeof v === 'string' && codeName === 'children') {
                 itemText = v;
+              } else if (depProp && hasCodeValues(depProp) && typeof v === 'string') {
+                fieldAttrs += ` ${codeName}={${codeValueLiteral(depProp,v)}}`;
               } else if (typeof v === 'boolean') {
                 fieldAttrs += v ? ` ${codeName}` : '';
               } else if (typeof v === 'number') {
@@ -802,7 +835,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.component) {
       const dep = ctx.contracts.get(part.component.id)!;
-      const attrs = depAttrString(dep, part.component.props ?? {});
+      const attrs = depAttrString(dep, part.component.props ?? {}) + reactInitialAttributes(contract, dep, part.component);
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       // ROUND 3 — see emit-react: an APPLIED children prop must not be
       // clobbered by the child's default re-emitted as JSX children.
@@ -813,19 +846,21 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         (!childrenApplied && !depSelfDefaults && typeof depChildren?.default === 'string'
           ? depChildren.default
           : undefined);
-      const instance = text !== undefined
-        ? `<${dep.name}${attrs}>${text}</${dep.name}>`
+      const instance = part.parts !== undefined
+        ? `<${dep.name}${attrs}><>\n${Object.entries(part.parts).map(([childName, child]) => renderPart(childName, child)).join('\n')}\n</></${dep.name}>`
+        : text !== undefined
+        ? `<${dep.name}${attrs}>${literalTextJsx(text)}</${dep.name}>`
         : `<${dep.name}${attrs} />`;
       // A2 grid (G3/P12): an instance cell rides a wrapper span whose style
       // carries the placement (see the baseStyles entries above).
-      return gridPlan.wrappedInstances.has(partName)
+      return wrapVisibleWhen(part, gridPlan.wrappedInstances.has(partName)
         ? `<span style=${styleExpr(partName, false, [])}>${instance}</span>`
-        : instance;
+        : instance);
     }
     if (part.slot) {
       const el = part.element ?? 'div';
       const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
-      const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>{${expr}}</${el}>`;
+      const node = `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>{${expr}}</${el}>`;
       return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
     if (part.content) {
@@ -846,10 +881,10 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         ? `{${Object.entries(tb.map)
             .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
             .join('')}${JSON.stringify(part.text)}}`
-        : part.text;
+        : literalTextJsx(part.text);
       return wrapVisibleWhen(
         part,
-        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>${inner}</${el}>`,
+        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>${inner}</${el}>`,
       );
     }
     if (part.meter) {
@@ -879,15 +914,17 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // is unused in that case (the isMultiRoot branch returns before the template
   // is assembled), so these reads are guarded rather than duplicated.
   const root = contract.anatomy.root;
+  const explicitRootContent = rootContentJsx(root, codePropOf);
   const rootInner = root?.parts || gridPlan.placeholders.has('root')
     ? [
+        ...(explicitRootContent !== undefined ? [explicitRootContent] : []),
         ...Object.entries(root?.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
         // A2 grid (G4): empty root-grid areas render placeholders too.
         ...(gridPlan.placeholders.get('root') ?? []).map(
           (area) => `<div style=${styleExpr(area, false, [])} />`,
         ),
       ].join('\n')
-    : '{children}';
+    : explicitRootContent ?? '{children}';
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;
   if (elementByProp) {
@@ -928,7 +965,12 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     elementMapConst = `const ELEMENT_MAP: Record<string, ElementType> = ${JSON.stringify(elementByProp.map)};\n\n`;
   }
   const rootEvent = events.find((e) => e.trigger === 'root');
-  if (rootEvent) elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
+  if (rootEvent) {
+    if (contract.semantics.element === 'button' && rootAttrs.type === undefined) elementAttrs.push('type="button"');
+    elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
+    const aria = reactToggleAria(contract, rootEvent);
+    if (aria) elementAttrs.push(aria.trim());
+  }
   elementAttrs.push('{...rest}');
 
   // Flatten variant styles into a single lookup: `${prop}-${value}:${part}`.
@@ -945,6 +987,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           .map(([kk, v]) => `  ${JSON.stringify(kk)}: ${JSON.stringify(v)},`)
           .join('\n')}\n};\n\n`
       : '';
+  const sizedIconsConst = sizedIcons.size
+    ? `const SIZED_ICONS: Record<number, Record<string, string>> = ${JSON.stringify(Object.fromEntries([...sizedIcons].map(([size, icons]) => [size, Object.fromEntries(icons)])), null, 2)};\n\n`
+    : '';
   const keyframes: string[] = [];
   if (usedAnimations.has('spin')) keyframes.push('@keyframes ds-inline-spin { to { transform: rotate(360deg); } }');
   if (usedAnimations.has('pulse')) keyframes.push('@keyframes ds-inline-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }');
@@ -1032,7 +1077,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
@@ -1043,7 +1088,7 @@ ${propLines.join('\n')}
 
 /** ${contract.description}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
 export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
-  return (
+${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  return (
     <>
       ${keyframesNode}${rootsJsx}
     </>
@@ -1068,7 +1113,7 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
-${iconsConst}${roleMapConst}${elementMapConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
+${iconsConst}${sizedIconsConst}${roleMapConst}${elementMapConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.stringify(baseStyles, null, 2)};
 
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};

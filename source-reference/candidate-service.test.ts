@@ -42,9 +42,86 @@ const listen = (server: Server) =>
 const originOf = (server: Server) =>
   `http://127.0.0.1:${(server.address() as { port: number }).port}`;
 
+test("Checkbox candidate route fixes its component and baseline, ignores Button supplement and exposes scoped recovery", async () => {
+  const f = fixture("checkbox"),
+    runner = candidateStub(f);
+  const service = createReferenceService(
+    f.repo,
+    undefined,
+    undefined,
+    runner.options,
+  );
+  const server = createServer((req, res) => {
+    void service.handle(req, res);
+  });
+  await listen(server);
+  const base = originOf(server) + "/api/source-reference";
+  const post = (body: unknown = {}, headers: Record<string, string> = {}) =>
+    fetch(`${base}/${f.request.baseline.id}/checkbox-candidate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...headers },
+      body: JSON.stringify(body),
+    });
+  try {
+    assert.equal(
+      (await post({}, { Origin: "https://attacker.invalid" })).status,
+      403,
+    );
+    for (const body of [
+      { component: "al-button" },
+      { runtime: "/tmp" },
+      { baseline: "chosen" },
+      { retry: false },
+    ])
+      assert.equal((await post(body)).status, 400);
+    const response = await post();
+    assert.equal(
+      response.status,
+      202,
+      JSON.stringify(await response.clone().json()),
+    );
+    assert.equal(runner.calls.length, 1);
+    const record = JSON.parse(
+      readFileSync(
+        path.join(
+          f.repo,
+          "private/source-candidate-app",
+          runner.calls[0].args.at(-1)!,
+          "job.json",
+        ),
+        "utf8",
+      ),
+    );
+    assert.deepEqual(record.request, f.request);
+    assert.equal(record.request.supplement, undefined);
+    runner.finish();
+    const state = await (
+      await fetch(`${base}/${f.request.baseline.id}`)
+    ).json();
+    assert.equal(state.candidatePreparations[0].component, "al-checkbox");
+    assert.equal(state.candidatePreparations[0].phase, "prepared");
+    assert.equal((await post()).status, 202);
+    assert.equal(runner.calls.length, 1);
+    assert.equal(
+      (
+        await fetch(`${base}/${f.request.baseline.id}/button-candidate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: "{}",
+        })
+      ).status,
+      409,
+    );
+  } finally {
+    service.close();
+    await closeServer(server);
+    f.close();
+  }
+});
+
 /** Real recorded source bytes with explicitly refused observation rows. This
  * fixture proves HTTP/job isolation, never a qualified source candidate. */
-function fixture() {
+function fixture(component: "button" | "checkbox" = "button") {
   const directory = mkdtempSync(path.join(tmpdir(), "candidate-service-"));
   const repo = path.join(directory, "repo");
   const put = (file: string, bytes: string | Buffer) => {
@@ -75,6 +152,15 @@ function fixture() {
       "utf8",
     ),
   );
+  if (component === "checkbox") {
+    // Explicitly synthetic entry for HTTP routing only. Every source row below
+    // stays refused; this class cannot establish source/runtime qualification.
+    const text = "export class ALCheckbox {}\n";
+    program.files["libs/al-web-components/components/checkbox/checkbox.ts"] = {
+      text,
+      sha256: sha(text),
+    };
+  }
   const sourceHashes: Record<string, string> = {
     [program.manifestPath]: sha(manifest),
   };
@@ -129,7 +215,10 @@ function fixture() {
     true,
     baseline,
   );
-  const request: BindingEvidenceRequest = { version: 1, baseline, supplement };
+  const request: BindingEvidenceRequest =
+    component === "checkbox"
+      ? { version: 2, component: "al-checkbox", baseline }
+      : { version: 1, baseline, supplement };
   const evidence = loadBindingEvidence(repo, request);
   const report: BindingTraceReport = {
     version: 1,

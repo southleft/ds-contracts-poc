@@ -395,7 +395,7 @@ list (part, kind, channel, value, reason, variant coverage), `figma bundle` writ
 beside `contracts` and prints a per-contract summary, the built set is stamped
 `ds_contracts/codeOnlyFacts`, the plugin's run report lists the facts under the set,
 and the set description keeps one trailing `†` with the count. Across 10 committed
-corpora there are **120** daggered contracts naming **3,269** facts, and both
+corpora there are **120** daggered contracts naming **3,262** facts, and both
 counts are pinned **exactly** — in both directions.
 Fewer receipts is not automatically progress: it is either a real fix or a
 refusal path that quietly stopped firing, and both require a human to look.
@@ -407,12 +407,12 @@ refusal path that quietly stopped firing, and both require a human to look.
 | `antd` | 12 | 12 | 502 | `extract/figma/dagger-census.json` |
 | `astryx` | 12 | 12 | 245 | `extract/figma/dagger-census.json` |
 | `polaris` | 12 | 12 | 673 | `extract/figma/dagger-census.json` |
-| `shadcn` | 11 | 11 | 213 | `extract/figma/dagger-census.json` |
+| `shadcn` | 11 | 11 | 206 | `extract/figma/dagger-census.json` |
 | `carbon` | 10 | 10 | 532 | `extract/figma/dagger-census.json` |
 | `altitude` | 8 | 8 | 61 | `extract/figma/dagger-census.json` |
 | `tailwind` | 8 | 8 | 56 | `extract/figma/dagger-census.json` |
 | `eventz-vars` | 0 | 0 | 0 | `extract/figma/dagger-census.json` |
-| **total** | **120** |  | **3,269** |  |
+| **total** | **120** |  | **3,262** |  |
 
 ### 6.2 Named refusals — the construct vocabularies
 
@@ -583,13 +583,13 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `1bd005488b35` | 147,316 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `0c11a57c6fed` | 74,519 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `0b1230b0898d` | 32,256 | generated-source golden manifest |
+| `evals/golden.json` | `75de59bfe5c4` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `4ad8a2a2600f` | 1,895,688 | capture counts + determinism receipts — 269 files |
 | `extract/computed/out/**/scorecard.json` | `163f22a2cc42` | 23,439,940 | computed-equality per component — 268 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
-| `extract/figma/dagger-census.json` | `4708222bebfc` | 6,968 | dropped-fact receipt census |
+| `extract/figma/dagger-census.json` | `1bb1566d06d2` | 6,968 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 
 Same bytes in, same file out: this build reads no clock, no git state and no

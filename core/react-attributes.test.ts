@@ -10,6 +10,7 @@ import {
 import { emitReact } from "./emit-react.js";
 import { emitReactInline } from "./emit-react-inline.js";
 import { reactPartAttrList } from "./react-attributes.js";
+import { generatedTypeErrors } from "./react-test-runtime.js";
 
 const bool = (name: string) => ({
   name,
@@ -455,7 +456,7 @@ test("shared lowering preserves numeric expressions and optional string-valued a
     ),
     [
       "tabIndex={-1}",
-      "aria-checked={isChecked === undefined ? undefined : String(isChecked)}",
+      "aria-checked={isChecked}",
       "data-order={tabOrder === undefined ? undefined : String(tabOrder)}",
       'aria-disabled="false"',
     ],
@@ -482,4 +483,36 @@ test("shared lowering preserves numeric expressions and optional string-valued a
       reactPartAttrList(contract, { attrs: { readonly: "{tabOrder}" } }, bind),
     /native boolean attribute "readOnly" requires a boolean prop/,
   );
+});
+
+test('generated label associations follow changing consumer IDs on both React surfaces', async t => {
+  const browser = await chromium.launch(); t.after(() => browser.close());
+  for (const inline of [false, true]) {
+    const contract = fixture(true);
+    contract.props.push({ name: 'target', type: 'text', bindings: {
+      code: { prop: 'controlId' }, figma: { kind: 'TEXT', property: 'Target' },
+    } });
+    contract.anatomy.root.parts!.control.attrs!.id = '{target}';
+    // A normal text input has no checkable overlay covering its parent box.
+    contract.anatomy.root.parts!.control.attrs!.type = 'text';
+    // A DOM reader supplies `for`; a source reader may supply `htmlFor`.
+    contract.anatomy.root.parts!.caption = { element: 'label', text: 'Toggle selection', attrs: { for: '{target}' } };
+    const generated = emit(contract, inline);
+    assert.deepEqual(generatedTypeErrors(contract.name, generated), []);
+    const page = await mount(browser, contract, inline);
+    try {
+      for (const controlId of ['first-control', 'rebound-control', undefined]) {
+        await page.evaluate(props => (window as unknown as { renderProbe(props: unknown): void }).renderProbe(props), { controlId });
+        await page.waitForFunction(id => document.querySelector('input')?.getAttribute('id') === (id ?? null), controlId);
+        const association = await page.locator('label').evaluate(el => ({ target: el.getAttribute('for'),
+          control: (el as HTMLLabelElement).control?.id ?? null }));
+        assert.deepEqual(association, { target: controlId ?? null, control: controlId ?? null });
+        if (controlId) {
+          await page.locator('label').click();
+          assert.equal(await page.locator('input').evaluate(el => document.activeElement === el), true);
+        }
+      }
+    } finally { await page.close(); }
+    assert.throws(() => reactPartAttrList(contract, { attrs: { for: 'one', htmlFor: 'two' } }, name => name), /duplicate native attribute aliases/);
+  }
 });

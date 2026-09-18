@@ -6,6 +6,9 @@ export interface SourceProfile {
   path: string[];
   /** A painted text witness may live inside a slotted child's shadow root. */
   fontPath?: string[];
+  /** For a textless labelable control, use its one native associated label.
+   * Arbitrary nearby text is never a substitute for this relationship. */
+  associatedLabelText?: string;
   probes?: Record<string, {
     path: string[];
     styles?: Record<string, string>;
@@ -22,6 +25,7 @@ export interface SourceObservation {
   width: number;
   height: number;
   text: string;
+  associatedLabel?: { text: string; visible: boolean; associated: boolean };
   styles: Record<string, string>;
   tokens: Record<string, string>;
   fontsReady: boolean;
@@ -45,6 +49,12 @@ export function checkSource(profile: SourceProfile, observed: SourceObservation)
   if (!observed.found) problems.push('component-missing');
   if (!observed.visible || !(observed.width > 0) || !(observed.height > 0)) problems.push('component-not-visible');
   if (!observed.text.trim()) problems.push('text-witness-missing');
+  if (profile.associatedLabelText !== undefined) {
+    if (!profile.associatedLabelText.trim()) problems.push('profile-incomplete');
+    if (!observed.associatedLabel?.associated) problems.push('label-association-invalid');
+    if (!observed.associatedLabel?.visible) problems.push('label-not-visible');
+    if (observed.associatedLabel?.text !== profile.associatedLabelText) problems.push('label-text-mismatch');
+  }
   for (const [property, expected] of Object.entries(profile.requiredStyles)) {
     if (observed.styles[property] !== expected) problems.push(`style-mismatch:${property}`);
   }

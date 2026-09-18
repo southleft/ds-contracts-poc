@@ -1,0 +1,79 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (ds.badge v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.variant-neutral {
+  background-color: var(--imported-badge-root-background-color-neutral);
+}
+
+.variant-danger {
+  background-color: var(--imported-badge-root-background-color-danger);
+}
+
+.variant-info {
+  background-color: var(--imported-badge-root-background-color-info);
+}
+
+.variant-success {
+  background-color: var(--imported-badge-root-background-color-success);
+}
+
+.variant-warning {
+  background-color: var(--imported-badge-root-background-color-warning);
+}
+
+.shape-label {
+  padding-inline: var(--imported-badge-root-padding-inline-label);
+  border-radius: var(--imported-badge-root-border-radius-label);
+  width: var(--imported-badge-root-width-label);
+  height: var(--imported-badge-root-height-label);
+}
+
+.shape-dot {
+  padding-inline: var(--imported-badge-root-padding-inline-dot);
+  border-radius: var(--imported-badge-root-border-radius-dot);
+  width: var(--imported-badge-root-width-dot);
+  height: var(--imported-badge-root-height-dot);
+}
+
+.Badge {
+  font-size: var(--imported-text-typography-body-xs-semibold-font-size);
+  font-weight: var(--imported-text-typography-body-xs-semibold-font-weight);
+  line-height: var(--imported-text-typography-body-xs-semibold-line-height);
+  font-family: Public Sans;
+}
+
+.variant-neutral .Badge {
+  color: var(--imported-badge-badge-color-neutral);
+}
+
+.variant-danger .Badge {
+  color: var(--imported-badge-badge-color-danger);
+}
+
+.variant-info .Badge {
+  color: var(--imported-badge-badge-color-info);
+}
+
+.variant-success .Badge {
+  color: var(--imported-badge-badge-color-success);
+}
+
+.variant-warning .Badge {
+  color: var(--imported-badge-badge-color-warning);
+}

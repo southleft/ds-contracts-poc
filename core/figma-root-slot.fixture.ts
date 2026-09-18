@@ -1,0 +1,4 @@
+import {ContractSchema, type Contract} from '../scripts/contract-schema.js';
+export const primitives={blue:{$type:'color',$value:'#0055ff'},gray:{$type:'color',$value:'#889999'},gap8:{$type:'dimension',$value:'8px'}};
+export const tokens={primitives,semantic:{},light:{},dark:{},brands:{default:{}}};
+export const rootSlotSeed=():Contract=>ContractSchema.parse({id:'check.root-content',name:'ReactRootContentGenerated',version:'0.1.0',status:'draft',description:'Compiler root content fixture; not source qualification',props:[],states:[],semantics:{element:'div'},anatomy:{root:{layout:{display:'flex',direction:'column',align:'start'},slot:{name:'children'},tokens:{gap:'{gap8}','padding-inline':'{gap8}','padding-block':'{gap8}'},literals:{width:'300px',height:'180px'}}},bindings:{figma:{anchors:{fileKey:null,componentSetKey:null}},code:{anchors:{importPath:'check/root-content',export:'ReactRootContentGenerated'}}}});

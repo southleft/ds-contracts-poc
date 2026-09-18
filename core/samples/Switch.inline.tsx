@@ -19,6 +19,7 @@ import type { CSSProperties, LabelHTMLAttributes } from 'react';
 
 const S: Record<string, CSSProperties> = {
   "root": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flexDirection": "row",
     "alignItems": "flex-start",
@@ -28,6 +29,7 @@ const S: Record<string, CSSProperties> = {
     "color": "#111827"
   },
   "track": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flexDirection": "row",
     "alignItems": "center",
@@ -39,6 +41,7 @@ const S: Record<string, CSSProperties> = {
     "paddingBlock": "2px"
   },
   "input": {
+    "boxSizing": "border-box",
     "position": "absolute",
     "inset": 0,
     "width": "100%",
@@ -49,22 +52,26 @@ const S: Record<string, CSSProperties> = {
     "cursor": "pointer"
   },
   "spacerStart": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flex": "1 1 auto",
     "minWidth": 0
   },
   "thumb": {
+    "boxSizing": "border-box",
     "width": "16px",
     "height": "16px",
     "backgroundColor": "#FFFFFF",
     "borderRadius": "999px"
   },
   "spacerEnd": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flex": "1 1 auto",
     "minWidth": 0
   },
   "textCol": {
+    "boxSizing": "border-box",
     "display": "flex",
     "flexDirection": "column",
     "flex": "1 1 auto",
@@ -72,10 +79,12 @@ const S: Record<string, CSSProperties> = {
     "gap": "2px"
   },
   "labelText": {
+    "boxSizing": "border-box",
     "fontSize": "14px",
     "fontWeight": 500
   },
   "descriptionText": {
+    "boxSizing": "border-box",
     "fontSize": "14px",
     "color": "#4B5563",
     "fontWeight": 400
