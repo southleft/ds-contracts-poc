@@ -105,8 +105,9 @@ test('a top-level grid root takes the child lowering only on its own fixed width
  const browser=await chromium.launch();
  try{
   const page=await browser.newPage();
-  const observe=async(css:string)=>{
-   await page.setContent(`<style>*{box-sizing:border-box}#source{display:grid;width:320px;row-gap:2px;${css}}</style><div id="stage"><div id="source"><div>Title</div><div>A description long enough to wrap onto a second line inside the fixed column.</div></div></div>`);
+  // One winning declaration per channel: two `width`s in one rule are a cascade tie, not a fixture.
+  const observe=async(css:string,own='width:320px')=>{
+   await page.setContent(`<style>*{box-sizing:border-box}#source{display:grid;${own};row-gap:2px;${css}}</style><div id="stage"><div id="source"><div>Title</div><div>A description long enough to wrap onto a second line inside the fixed column.</div></div></div>`);
    await page.evaluate(()=>{(window as unknown as {__ALL_PROPS:string[]}).__ALL_PROPS=[...getComputedStyle(document.documentElement)];});
    const tree=await page.evaluate(captureJs('#stage',undefined,'',['#source'])) as CapturedNode;
    // The style-origin reader needs only the component-root paths and their tags.
@@ -132,11 +133,21 @@ test('a top-level grid root takes the child lowering only on its own fixed width
    const denied=await observe(css);assert.equal(denied.evidence.status,'observed',css);
    assert.throws(()=>reactRootGrid(denied.tree,denied.origin,denied.evidence,width(denied.origin)),/^Error: react-root-grid-constraints-unqualified$/,css);
   }
-  for(const css of ['width:100%','width:auto','width:min(320px, 100%)']){
-   const indefinite=await observe(css);
+  for(const css of ['width:auto','width:min(320px, 100%)']){
+   const indefinite=await observe('',css);
    assert.throws(()=>reactRootGrid(indefinite.tree,indefinite.origin,indefinite.evidence,width(indefinite.origin)),/^Error: react-root-grid-width-unqualified$/,css);
   }
   assert.throws(()=>reactRootGrid(f.tree,f.origin,f.evidence,undefined),/react-root-grid-width-unqualified/);
+  // The component's own `width:100%` is the child path's stretch with the parent supplied later: same lowering.
+  const filled=await observe('','width:100%');
+  assert.equal(width(filled.origin)!.status,'fill');
+  assert.deepEqual(reactRootGrid(filled.tree,filled.origin,filled.evidence,width(filled.origin)),layout);
+  assert.throws(()=>reactRootGrid(filled.tree,filled.origin,filled.evidence,{...width(filled.origin)!,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}),/react-root-grid-width-unqualified/);
+  for(const [own,css] of [['width:calc(100% - 8px)',''],['width:50%',''],['width:100%','max-width:200px'],['width:100%','max-width:900px'],['width:100%','min-width:40px'],
+    ['width:100%','box-sizing:content-box'],['width:100%','margin-left:8px'],['width:100%','position:absolute'],['width:100%','transform:translateX(1px)']]){
+   const other=await observe(css,own);
+   assert.throws(()=>reactRootGrid(other.tree,other.origin,other.evidence,width(other.origin)),/^Error: react-root-grid-width-unqualified$/,css);
+  }
   assert.throws(()=>reactRootGrid(f.tree,f.origin,f.evidence,{...width(f.origin)!,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}),/react-root-grid-width-unqualified/);
   assert.throws(()=>reactRootGrid(f.tree,f.origin,{...f.evidence,status:'refused',rows:[],problems:['grid-constraints-typed-om-unavailable']},width(f.origin)),/react-root-grid-constraints-unobserved/);
   assert.throws(()=>reactRootGrid(f.tree,f.origin,{...f.evidence,treeRevision:revisionOf('substituted tree')},width(f.origin)),/grid-constraints-evidence-changed/);

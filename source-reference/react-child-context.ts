@@ -49,10 +49,11 @@ export function reactChildContextGrid(tree: CapturedNode, origin: ReactStyleOrig
 }
 
 /** The same lowering for the traced top-level root. No parent proves its width,
- * so the definite content width must be the component's OWN fixed declaration:
- * a caller `style`/`className`, a percentage or an automatic width stays a named
- * refusal, and a measured pixel box is never promoted. `width` is the root's
- * sizing fact AFTER caller-input ownership has been judged. */
+ * so the definite content width must be the component's OWN declaration, fixed
+ * or exactly `100%`: a caller `style`/`className`, another percentage, calc()
+ * or an automatic width stays a named refusal, and a measured pixel box is
+ * never promoted. `width` is the root's sizing fact AFTER caller-input
+ * ownership has been judged. */
 export function reactRootGrid(tree: CapturedNode, origin: ReactStyleOrigin,
   evidence: GridConstraintEvidence, width: ReactSizeOrigin | undefined): RowFlowGrid | undefined {
   if (evidence.status !== 'observed') throw Error('react-root-grid-constraints-unobserved');
@@ -61,7 +62,14 @@ export function reactRootGrid(tree: CapturedNode, origin: ReactStyleOrigin,
   // or ratio would give the auto rows surplus height to stretch into.
   if (layout && (!['auto', '0px'].includes(tree.style['min-height']) || tree.style['max-height'] !== 'none' ||
       tree.style['aspect-ratio'] !== 'auto')) throw Error('react-root-grid-constraints-unqualified');
-  if (layout && (width?.channel !== 'width' || width.status !== 'fixed' || !/^\d+(?:\.\d+)?px$/.test(width.value ?? '')))
+  // An own `width:100%` is the child path's stretch with the parent supplied
+  // later by the caller: the column takes whatever definite width that parent
+  // gives, under the same box constraints the stretch proof demands.
+  const s = tree.style, fills = width?.status === 'fill' && width.value === '100%' &&
+    ['static', 'relative'].includes(s.position) && s['box-sizing'] === 'border-box' &&
+    ['auto', '0px'].includes(s['min-width']) && s['max-width'] === 'none' &&
+    ['margin-left', 'margin-right'].every(key => s[key] === '0px') && s.transform === 'none';
+  if (layout && (width?.channel !== 'width' || !(fills || width.status === 'fixed' && /^\d+(?:\.\d+)?px$/.test(width.value ?? ''))))
     throw Error('react-root-grid-width-unqualified');
   return layout;
 }

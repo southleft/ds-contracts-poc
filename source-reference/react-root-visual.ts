@@ -168,8 +168,9 @@ export function projectReactRootVisual(
         // The single observation carries the same authenticated fixed width the
         // matrix sizing assembly retains; it is never the measured box.
         if (grid && !sizing) {
-          enriched.anatomy.root.literals={...enriched.anatomy.root.literals,width:sourceSizing!.find(size=>size.channel==='width')!.value!};
-          result.limitations.push('root-grid-own-fixed-width-current-case-only');
+          const width=sourceSizing!.find(size=>size.channel==='width')!;
+          enriched.anatomy.root.literals={...enriched.anatomy.root.literals,width:width.value!};
+          result.limitations.push(width.status==='fill'?'root-grid-fill-width-parent-supplied-by-caller':'root-grid-own-fixed-width-current-case-only');
         }
         const bindings = observeReactSourceBindings(root, enriched.anatomy.root, tokens, styleOrigin, instance.roots[0].path);
         result.sourceBindings = bindings.sourceBindings;

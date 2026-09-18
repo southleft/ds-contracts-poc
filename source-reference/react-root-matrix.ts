@@ -79,12 +79,14 @@ export function assembleReactRootMatrix(program:ReactSourceProgram,ownership:Rea
    const gridRefusal=planes.flatMap(p=>p.problems).find(p=>p.startsWith('react-root-grid-'));
    const grids=planes.map(p=>p.contract!.anatomy.root.layout?.display==='grid'?p.contract!.anatomy.root.layout:undefined),grid=gridRefusal?undefined:grids[0];
    if(!gridRefusal&&grids.some(g=>JSON.stringify(g)!==JSON.stringify(grid)))throw Error('react-root-matrix-grid-layout-differs');
-   if(grid&&!sizing.channels.has('width'))throw Error('react-root-grid-width-unqualified');
+   const fills=!!grid&&sizing.fill.has('width');
+   if(grid&&!fills&&!sizing.channels.has('width'))throw Error('react-root-grid-width-unqualified');
+   if(fills)result.sizing=sizing.reports.map(r=>r.channel==='width'?{channel:'width',status:'fill'}:r);
    if(grid)result.limitations.push('intrinsic-row-lowering-observed-block-content-only');
    const suffix=revisionOf({sizing:[...projections].map(([key,p])=>[key,p.sourceSizing]),source:matrix.source,properties:result.properties,planes:[...roots].map(([value,root])=>({value,tag:root.tag,style:Object.fromEntries(Object.entries(root.style).filter(([channel])=>!reactRootStyleExclusion(channel)))}))}).slice(7,23),name=`RootMatrix${suffix}`;
    const contract=ContractSchema.parse({id:`observed.react-matrix-${suffix}`,name,version:'0.1.0',status:'draft',description:`Observed ${source.exportName} root style matrix; other APIs and composition remain unqualified.`,
     props:definitions.map(({property,prop,classified,values,defaultKey})=>({name:property,type:{enum:values},...(defaultKey===undefined?{}:{default:defaultKey}),...(!prop.optional?{required:true}:{}),bindings:{code:{prop:property,...(classified.codeValues?{values:classified.codeValues}:{})},figma:{kind:'VARIANT',property,values:Object.fromEntries(values.map(v=>[v,v])),...(defaultKey===undefined&&prop.optional?{unsetValue:'(unset)'}:{})}}})),
-    states:[],semantics:{element:[...roots.values()][0].tag},anatomy:{root:{slot:{name:'children'},...(grid?{layout:grid,literals:{height:'fit-content'}}:{})}},bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
+    states:[],semantics:{element:[...roots.values()][0].tag},anatomy:{root:{slot:{name:'children'},...(grid?{layout:grid,literals:{...(fills?{width:'100%'}:{}),height:'fit-content'}}:{})}},bindings:{code:{anchors:{importPath:`observed/${suffix}`,export:name}},figma:{anchors:{fileKey:null,componentSetKey:null}}}});
    const {enriched,tokens,residuals}=compileReactRootSweep(contract,axes,baseAxisValues,roots,sizing.channels);sizing.apply(enriched,tokens);retainReactRootSourceBindings(enriched,tokens,axes,baseAxisValues,projections);sizing.verify(enriched,tokens);
    if(enriched.anatomy.root.parts||enriched.anatomy.root.content||enriched.anatomy.root.slot?.name!=='children')throw Error('react-root-matrix-content-boundary-changed');
    const errors:string[]=[];validateContract(enriched,new Map([[enriched.id,enriched]]),errors,new Map());if(errors.length)throw Error('react-root-matrix-invalid:'+errors.join(';'));

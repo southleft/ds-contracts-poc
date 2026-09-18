@@ -67,5 +67,22 @@ test('typed size provenance distinguishes authored constraints from measured aut
   assert.equal(rows.find(r=>r.channel==='width')!.reason,'cascade-order-tie');
   rows=await read('.subject{--unit:10vw;width:calc(var(--unit) * 2)}');
   assert.equal(rows.find(r=>r.channel==='width')!.reason,'responsive-or-unsupported-size-expression');
+  // An own `width:100%` that really takes its containing width is a declared
+  // fill: its own status, never fixed or automatic. Anything near it is not.
+  const fill=async(css:string,host='')=>{
+   await page.setContent(`<style>body{margin:0}#host{box-sizing:border-box;width:360px;padding:0 20px;border:2px solid;${host}}.subject{display:grid;box-sizing:border-box;${css}}</style><div id="host"><button id="subject" class="subject">Replaceable content</button><i>sibling</i></div>`);
+   return (await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(r=>r.channel==='width')!;
+  };
+  assert.deepEqual(await fill('width:100%'),{channel:'width',selectors:['.subject'],authoredValue:'100%',status:'fill',value:'100%'});
+  assert.equal((await fill('width:100%','box-sizing:content-box')).status,'fill','the containing width is the parent content box either way');
+  await fill('height:100%','height:200px');
+  assert.deepEqual((await readReactStyleOrigin(page,'#subject',ownership)).roots[0].sizes!.find(r=>r.channel==='height'),
+   {channel:'height',selectors:['.subject'],authoredValue:'100%',status:'unresolved',reason:'responsive-or-unsupported-size-expression'},'only the inline axis has a fill rule');
+  for(const css of ['width:calc(100% - 8px)','width:50%','width:calc(100%)','width:100vw','--w:100%;width:var(--w)']){
+   const row=await fill(css);assert.equal(row.status,'unresolved',css);assert.equal(row.reason,'responsive-or-unsupported-size-expression',css);
+  }
+  for(const [css,host] of [['width:100%;max-width:200px',''],['width:100%;min-width:500px',''],['width:100%','display:flex'],['width:100%;box-sizing:content-box;padding:0 4px','']]){
+   const row=await fill(css,host);assert.equal(row.status,'unresolved',css+host);assert.equal(row.reason,'declared-fill-width-not-used',css+host);
+  }
  }finally{await browser.close()}
 });

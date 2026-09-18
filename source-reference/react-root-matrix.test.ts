@@ -101,7 +101,7 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},density='roomy',chil
 });
 
 
-test('a top-level grid root with its own fixed width compiles the bounded row-flow lowering; caller width, differing planes and archives without the witness keep named outcomes',async()=>{
+for(const own of ['fixed','fill'] as const)test(`a top-level grid root with its own ${own==='fixed'?'fixed width':'100% width'} compiles the bounded row-flow lowering; caller width, differing planes and archives without the witness keep named outcomes`,async()=>{
  mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
  const dir=mkdtempSync(path.join(process.cwd(),'private/root-matrix-grid-fixture-')),browser=await chromium.launch();
  try{
@@ -109,7 +109,7 @@ test('a top-level grid root with its own fixed width compiles the bounded row-fl
 export function NoticeTitle({children}:{children?:React.ReactNode}){return <div style={{fontWeight:600}}>{children}</div>;}
 export function NoticeBody({children}:{children?:React.ReactNode}){return <div>{children}</div>;}
 export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';children?:React.ReactNode;style?:React.CSSProperties}){
- return <div role="alert" style={{display:'grid',boxSizing:'border-box',width:320,rowGap:2,padding:tone==='loud'?16:12,backgroundColor:tone==='loud'?'var(--accent)':'var(--base)',...style}}>{children}</div>;
+ return <div role="alert" style={{display:'grid',boxSizing:'border-box',width:${own==='fixed'?320:"'100%'"},rowGap:2,padding:tone==='loud'?16:12,backgroundColor:tone==='loud'?'var(--accent)':'var(--base)',...style}}>{children}</div>;
 }`;
   writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
   writeFileSync(path.join(dir,'notice.tsx'),source);
@@ -130,7 +130,7 @@ export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';child
   // Each plane's own single-observation projection already compiles, on the declared width and never the measured box.
   for(const snap of Object.values(snapshots) as Array<ReactPropertySnapshot&{projection:ReturnType<typeof projectReactRootVisual>}>){
    const single=snap.projection.roots.find(r=>r.instanceId===instanceId)!;assert.equal(single.status,'native-compiled',single.problems.join(';'));
-   assert.deepEqual(single.contract!.anatomy.root.literals,{height:'fit-content',width:'320px'});
+   assert.deepEqual(single.contract!.anatomy.root.literals,{height:'fit-content',width:own==='fixed'?'320px':'100%'});
    assert.deepEqual(JSON.parse(JSON.stringify(projectReactRootVisual(program,snap.ownership,snap.tree,snap.styleOrigin,undefined,undefined,snap.gridConstraints))),snap.projection,'the sealed plane reprojects identically');
   }
   const result=assembleReactRootMatrix(program,ownership,tree,effects,snapshots);assert.deepEqual(result.problems,[]);
@@ -142,12 +142,13 @@ export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';child
   const auto=(channel:'width'|'height')=>({channel,status:'auto' as const,value:'auto',selectors:[]});
   assert.deepEqual(reactChildContextGrid(parent,{version:1,roots:plane.styleOrigin.roots.map(row=>({...row,path:row.path?'0.'+row.path:'0',...(row.path?{}:{sizes:[auto('width'),auto('height')]})}))},'0',
    {gridConstraints:{...plane.gridConstraints!,treeRevision:revisionOf(parent),rows:plane.gridConstraints!.rows.map(row=>({...row,path:'0'}))}}),layout);
-  assert.equal(draft.contract!.anatomy.root.literals?.height,'fit-content');assert.equal(draft.contract!.anatomy.root.literals?.width,undefined,'width is the retained source declaration, never a literal box');
-  assert.deepEqual(draft.sizing?.map(s=>[s.channel,s.status]),[['width','retained'],['height','intrinsic']]);
+  assert.equal(draft.contract!.anatomy.root.literals?.height,'fit-content');assert.equal(draft.contract!.anatomy.root.literals?.width,own==='fixed'?undefined:'100%','a fixed width is the retained source token; a declared fill is the parent-width literal; neither is the measured box');
+  assert.deepEqual(draft.sizing,[{channel:'width',status:own==='fixed'?'retained':'fill'},{channel:'height',status:'intrinsic'}]);
   assert.deepEqual(draft.contract!.anatomy.root.slot,{name:'children'});assert.equal(JSON.stringify(draft.contract).includes('Heads up'),false);
   assert.equal(draft.native!.rootSlot?.display,'grid');assert.equal(draft.native!.variants.length,2);
   for(const variant of draft.native!.variants){
-   assert.equal(variant.spec.fixedWidth?.px,320,variant.name);
+   assert.equal(variant.spec.fixedWidth?.px,own==='fixed'?320:undefined,variant.name);assert.equal(variant.spec.rootFillWidth,own==='fixed'?undefined:true,variant.name);
+   assert.equal(JSON.stringify(variant.spec).includes('"width":'+(await page.evaluate(()=>document.querySelector('#root > div')!.getBoundingClientRect().width))),false,'the measured box is nowhere in the plan');
    const carrier=variant.spec.children![0].children![0];
    assert.equal(carrier.layout?.mode,'GRID',variant.name);assert.equal(carrier.layout?.grid?.columns.length,1);assert.equal(carrier.layout?.grid?.flow,'ROW_AUTO_FLOW');
   }
@@ -176,6 +177,19 @@ export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';child
   const substituted=structuredClone(snapshots);substituted[effects.rows[0].id].gridConstraints!.treeRevision=revisionOf('another tree');
   assert.equal(assembleReactRootMatrix(program,ownership,tree,effects,substituted).draft!.status,'refused');
  }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}
+});
+
+test('an own declared fill is never sized as fixed or automatic; only a layout that qualifies it may project it',()=>{
+ const values=['quiet','loud'],axes=[{prop:'tone',values}],base={tone:'quiet'},combos=enumerate(axes,[],10,base).combos;
+ const fact=(status:'fill'|'fixed'|'auto')=>({sourceSizing:[{channel:'width',status,value:status==='fill'?'100%':status==='fixed'?'40px':'auto',selectors:[]},{channel:'height',status:'auto',value:'auto',selectors:[]}]} as Pick<ReactRootVisual['roots'][number],'sourceSizing'>);
+ const every=prepareReactRootSizing(axes,base,new Map(),new Map(combos.map(c=>[c.key,fact('fill')])));
+ assert.deepEqual(every.reports[0],{channel:'width',status:'unresolved',reason:'own-declared-fill-needs-layout-qualification'});
+ assert.deepEqual([[...every.fill],[...every.channels]],[['width'],[]]);
+ for(const other of ['fixed','auto'] as const){
+  const mixed=prepareReactRootSizing(axes,base,new Map(),new Map(combos.map((c,i)=>[c.key,fact(i?other:'fill')])));
+  assert.deepEqual(mixed.reports[0],{channel:'width',status:'unresolved',reason:'fill-size-presence-needs-joint-mapping'});
+  assert.deepEqual([[...mixed.fill],[...mixed.channels]],[[],[]]);
+ }
 });
 
 test('conditional size bindings preserve prototype-like enum values as own keys',()=>{
