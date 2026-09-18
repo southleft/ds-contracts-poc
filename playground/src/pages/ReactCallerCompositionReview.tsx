@@ -160,6 +160,7 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
         <button type="button" disabled={busy} onClick={() => void compileNative()}>Check native composition</button>
         {native && <section aria-label="Native composition compilation">
           <h5>{native.unsupportedPropertyBindings?.length ? 'Native composition blocked · unsupported property bindings'
+            : delivery?.operation?.phase === 'component-structure-observed' && !delivery.operation.sourceCurrent ? 'Native component graph read back from a changed or unavailable source · saved evidence only'
             : delivery?.operation?.phase === 'component-structure-observed' ? 'Native component graph created and read back'
               : 'Native composition compiled · ready for delivery'}</h5>
           <p>{native.components.length} components compiled at the observed {native.observedWidth} px width, with separate token and asset identities for each component. This check creates no Figma objects.</p>
@@ -180,7 +181,7 @@ export function ReactCallerCompositionReview({ root, operationId }: { root: stri
               {delivery.connection?.paired && !delivery.connection.started && <button type="button" disabled={busy} onClick={() => void deliveryAction('start')}>Create and inspect native graph</button>}
               {!delivery.operation.pendingPhase && (delivery.operation.phase === 'component-observation-refused' || delivery.operation.phase === 'components-created') &&
                 <button type="button" disabled={busy} onClick={() => void deliveryAction('retry-observation')}>Inspect native graph again</button>}
-              {delivery.operation.structuralObservation && <p>Structure: {delivery.operation.structuralObservation.status.replaceAll('-', ' ')}.</p>}
+              {delivery.operation.structuralObservation && <p>Structure: {delivery.operation.structuralObservation.status.replaceAll('-', ' ')}.{delivery.operation.sourceCurrent ? '' : ' The source or graph has changed since this readback; the saved evidence below describes the delivered graph, not the current compilation.'}</p>}
               {!!delivery.operation.problems.length && <p role="alert">{delivery.operation.problems.join(', ')}</p>}
               {delivery.operation.phase === 'component-structure-observed' && delivery.operation.imageObservation?.images.length && <section aria-label="React and native visual review">
                 <h6>Review the unchanged React source and native result</h6>
