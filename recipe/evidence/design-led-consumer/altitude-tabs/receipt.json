@@ -12,8 +12,8 @@
     "TabPanel/TabPanel.module.css": "59d528d2893d1d23839f375793f84ccfe9f9a7bb8cfd91d2d72bca1282f2594b",
     "TabPanel/TabPanel.tsx": "6cfdf56c5b1157179f752cdd195923b44391fe6a0faeb71422a30897e90a4373",
     "TabPanel/index.ts": "a6745842bea16805eb7da97d4e8dad856392724b5f49af531355ba6116e39850",
-    "Tabs/Tabs.module.css": "9563ce3be5c5781416bf2c1bd5de5393bc8a488f68fb35d58dd0fd58bbe18753",
-    "Tabs/Tabs.tsx": "0300f4078c792a14b18bd02a2c24731a7c32d411eae089bd6c5a5adb8f51ce7d",
+    "Tabs/Tabs.module.css": "ca18eb69b185c859c6182f24129759941b825334db291fb7785429a6dbfebaae",
+    "Tabs/Tabs.tsx": "f3a052842c61d770c1210f61bfa9d7e628d4cdc0e54a768fb76f40f975089e2b",
     "Tabs/index.ts": "5fc7f516604355ec7efbfcccbbf07a65c71e1e4de28da56cf84dd01b3fcba833",
     "index.ts": "25e7ac738b17998e667231e3df3f250944878c59895f4bde53199c3b3d2c3032",
     "tokens.css": "5feaf0812b2976d1a9113df7a7a6cace30040c1eef144c03fd28c47a1446aa76"
@@ -118,7 +118,9 @@
         "cellsExpectedToChange": [
           "variant-stretch"
         ],
-        "cellsChanged": []
+        "cellsChanged": [
+          "variant-stretch"
+        ]
       }
     ]
   },
@@ -192,7 +194,6 @@
   },
   "problems": [
     "children-accepted-but-discarded",
-    "variant-axis-inert-ledgered:variant",
     "image-difference-above-limit:variant-default:5.33%",
     "image-difference-above-limit:variant-stretch:5.00%"
   ],
@@ -218,7 +219,7 @@
   },
   "package": {
     "name": "@ds-contracts-generated/tabs",
-    "tarballSha256": "92051109c830fd037d46151d17a95bf0499c27ef2f82259f684917b6165ec936",
+    "tarballSha256": "1bc1d321105e05564c74eb4132624cd9c3dc6df17dbdce320185afba83fa3882",
     "distFiles": [
       "Tab",
       "Tab/Tab.d.ts",
@@ -246,11 +247,11 @@
   "consumer": {
     "react": ">=18",
     "installedVersion": "0.0.0-generated",
-    "lockfileSha256": "a80961aca8161a9169237216fbebffb4e35958801aefa00f37ad70817e448bd2",
+    "lockfileSha256": "6b2ce5a5ad8a27800b9e334dbe1f04bf3b24e187bd68807b065c2cf00788baef",
     "repoPathInLockfile": false,
     "repoPathInInstalledFiles": [],
     "builtCss": {
-      "bytes": 15320,
+      "bytes": 15392,
       "tokenDefinitions": 287,
       "tokenDefinitionsExpected": 287
     }
