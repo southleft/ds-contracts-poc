@@ -1,5 +1,6 @@
 /** Source identity and compiler correspondence, never name/paint matching. */
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
+import { authoredLengthIsUsed } from './layout-unit.js';
 import { verifyNativeContractReadback, type NativeContractObservationInput, type NativeSourceReadback } from '../core/native-source-observation.js';
 import type { NativeContractComparisonReference } from '../core/native-contract-comparison.js';
 import type { Contract } from '../scripts/contract-schema.js';
@@ -109,7 +110,7 @@ export function matchReactComposition(program: ReactSourceProgram, ownership: Re
         if (size.status !== 'fixed') continue;
         const spec = variants[0].spec;
         const actual = spec[size.channel === 'height' ? 'fixedHeight' : 'fixedWidth']?.px ?? spec.lits?.[size.channel];
-        if (!size.value || actual === undefined || normalizeValue(`${actual}px`) !== normalizeValue(size.value))
+        if (!size.value || actual === undefined || !authoredLengthIsUsed(size.value, `${actual}px`))
           throw Error('react-composition-declared-size-not-preserved');
       }
       const slots: number[][] = [];

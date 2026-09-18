@@ -25,7 +25,7 @@ export interface ReactPropertyEffects {
  planned:number;
  skipped:Array<{property:string;reason:string}>;
  rows:Array<{id:string;property:string;requested:ReactPropertyValue;status:'observed'|'refused';
-  image?:string;treeSha256?:string;visibleChange?:boolean;treeChange?:boolean;restored?:boolean;
+  image?:string;treeSha256?:string;visibleChange?:boolean;treeChange?:boolean;restored?:boolean;restoredAfterLayoutRebuild?:boolean;
   changedInstances?:Array<{instanceId:string;name:string;channels:string[]}>;problem?:string}>;
  problems:string[];
 }
@@ -105,10 +105,21 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   if(!usable){row.problem='prior-observation-invalidated-context';continue;}
   try{
    const probe=await (args.observationMode==='initial-mount'?probeReactInitialProperties:probeReactProperties)(page,selector,program,instanceId,entry.changes,observe);
+   // After any style change Chromium can rasterize an unchanged rounded edge
+   // one 8-bit level apart from its first paint, and keeps doing so; rebuilding
+   // the document's layout tree returns the first-paint raster exactly. When
+   // the restored TREE already equals the original, capture once more after
+   // that rebuild. The comparison stays exact and the row records the rebuild.
+   let restored=probe.restored,layoutRebuilt=false;
+   if(probe.ownershipRestored&&restored.treeSha256===originalTree&&restored.image!==args.image){
+    await page.evaluate(()=>new Promise<void>(done=>{const html=document.documentElement,display=html.style.display;html.style.display='none';void html.offsetHeight;
+     requestAnimationFrame(()=>{html.style.display=display;requestAnimationFrame(()=>done());});}));
+    restored=await observe();layoutRebuilt=true;
+   }
    // Name WHICH witness disagreed: a probe page that never matched the sealed
    // original is a different defect from a render that did not come back.
    const unrestored=[!probe.ownershipRestored&&'ownership',probe.before.treeSha256!==originalTree&&'before-tree',probe.before.image!==args.image&&'before-image',
-    probe.restored.treeSha256!==originalTree&&'restored-tree',probe.restored.image!==args.image&&'restored-image'].filter(Boolean);
+    restored.treeSha256!==originalTree&&'restored-tree',restored.image!==args.image&&'restored-image'].filter(Boolean);
    if(unrestored.length)throw Error('react-property-effects-original-not-restored:'+unrestored.join(';'));
    const before=linkReactSourceAnatomy(program,probe.before.ownership,probe.before.tree);
    const changed=linkReactSourceAnatomy(program,probe.changed.ownership,probe.changed.tree);
@@ -129,7 +140,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
    writeFileSync(path.join(dir,row.id+'.json'),JSON.stringify(snapshot,null,2)+'\n',{flag:'wx'});
    writeFileSync(path.join(dir,row.id+'.png'),probe.changed.png,{flag:'wx'});
    Object.assign(row,{status:'observed',image:probe.changed.image,treeSha256:probe.changed.treeSha256,
-    visibleChange:probe.changed.image!==args.image,treeChange:probe.changed.treeSha256!==originalTree,restored:true,changedInstances});
+    visibleChange:probe.changed.image!==args.image,treeChange:probe.changed.treeSha256!==originalTree,restored:true,...(layoutRebuilt?{restoredAfterLayoutRebuild:true}:{}),changedInstances});
   }catch(error){
    row.problem=error instanceof Error?error.message:String(error);
    // Do not carry a failed or unrestored page into another measurement.

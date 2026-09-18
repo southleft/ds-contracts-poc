@@ -1,6 +1,7 @@
 /** Read-only CSS provenance for the React source path. Refuse unresolved
  * cascade ties rather than choosing a variable by equal rendered values. */
 import type {CDPSession, Page} from 'playwright-core';
+import { authoredLengthIsUsed } from './layout-unit.js';
 import type {ReactOwnership} from './react-ownership.js';
 
 const matchedStyles = (cdp: CDPSession, nodeId: number) => cdp.send('CSS.getMatchedStylesForNode', {nodeId});
@@ -131,7 +132,8 @@ export async function readReactStyleOrigin(page: Page, selector: string, ownersh
           if(declaration.status!=='resolved')return {...base,status:'unresolved',reason:'no-own-fixed-size-declaration'};
           if(!fixedSizeExpression(declaration.value,value.variables))return {...base,status:'unresolved',reason:'responsive-or-unsupported-size-expression'};
           if(typed.unit!=='px'||!Number.isFinite(typed.value)||typed.value!<0)return {...base,status:'unresolved',reason:'fixed-size-not-pixels'};
-          if(Math.abs(parseFloat(value.values[channel])-typed.value!)>0.001)return {...base,status:'unresolved',reason:'size-clamped-or-layout-dependent'};
+          // The used length may be the declared one in 1/64 px layout units (18.4px reads 18.3906px).
+          if(Math.abs(parseFloat(value.values[channel])-typed.value!)>0.001&&!authoredLengthIsUsed(typed.value+'px',value.values[channel]))return {...base,status:'unresolved',reason:'size-clamped-or-layout-dependent'};
           return {...base,status:'fixed',value:value.values[channel]};
         });
         out.roots.push({path,tag:value.tag,sizes,channels:channels.map(c=>value.animated
