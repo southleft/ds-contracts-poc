@@ -5,7 +5,7 @@ import { mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createNativeUpdatePlans } from '../source-reference/native-update-plans.js';
-import { prepareNativeContractUpdate, emitNativeContractUpdateScript, verifyNativeContractUpdate, nativeContractUpdateMatches } from './native-contract-update.js';
+import { prepareNativeContractUpdate, emitNativeContractUpdateScript, verifyNativeContractUpdate, nativeContractUpdateMatches, nativeContractUpdateAfter } from './native-contract-update.js';
 
 async function shadowFixture() {
   const f = await fixture(), input = structuredClone(f.input);
@@ -154,4 +154,35 @@ test('a failed postcondition restores only the attempted opacity changes and pre
   assert.ok(result.problems.includes('native-update-postcondition-conflict'));
   assert.ok(f.nodes.every((n:any)=>n.opacity===0.5));
   assert.equal(f.nodes[1].width,originalWidth+1);
+});
+
+// Found live on 2026-09-18: a source change to opacity 0.4 wrote the value, read
+// back 0.4000000059604645, called that a conflict and then declined to roll back.
+test('an opacity that float32 cannot hold exactly is written, verified, repeated and rolled back', async () => {
+  const f = await fixture();
+  // The Plugin API stores opacity as IEEE-754 float32.
+  for (const node of f.nodes) {
+    let value = Math.fround(node.opacity);
+    Object.defineProperty(node, 'opacity', { get: () => value, set: next => { value = Math.fround(next); }, enumerable: true, configurable: true });
+  }
+  const input = structuredClone(f.input);
+  input.baseline = await f.run((await import('./native-source-observation.js')).emitNativeContractReadbackScript(input.before));
+  for (const variant of input.desired.component.variants) variant.spec.opacity = 0.4;
+  const { plan } = prepareNativeContractUpdate(input);
+  assert.ok(plan.kind === 'native-contract-opacity-update' && plan.changes.length && plan.changes.every(c => c.after === 0.4));
+  const applied = await f.run(emitNativeContractUpdateScript(plan));
+  assert.equal(applied.status, 'updated', JSON.stringify(applied.problems));
+  assert.ok(f.nodes.every(node => node.opacity === Math.fround(0.4) && node.opacity !== 0.4));
+  assert.ok(nativeContractUpdateMatches(plan, applied.observation, true));
+  assert.equal(verifyNativeContractUpdate(plan, applied.observation).status, 'supported-structure-observed');
+  assert.equal((await f.run(emitNativeContractUpdateScript(plan))).status, 'no-op', 'the stored float32 value is already the target');
+  // The next plan starts from the stored value and proposes nothing for it.
+  assert.equal(prepareNativeContractUpdate({ ...input, baseline: applied.observation, before: nativeContractUpdateAfter(plan, applied.observation) }).plan.changes.length, 0);
+  // A value that is neither side of the change is still a conflict.
+  f.nodes[0].opacity = 0.41;
+  assert.deepEqual((await f.run(emitNativeContractUpdateScript(plan, 'apply', true))).problems, ['native-update-opacity-conflict:' + f.nodes[0].id]);
+  f.nodes[0].opacity = 0.4;
+  const rolledBack = await f.run(emitNativeContractUpdateScript(plan, 'rollback'));
+  assert.equal(rolledBack.status, 'updated', JSON.stringify(rolledBack.problems));
+  assert.ok(f.nodes.every(node => node.opacity === 0.5));
 });

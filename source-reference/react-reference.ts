@@ -12,6 +12,7 @@ import { restoreReactOwnership } from './react-ownership-restore.js';
 import type { ReactInitialNativeRequest } from './react-initial-native-request.js';
 import type { createNativeUpdatePlans } from './native-update-plans.js';
 import type { createNativeUpdateJobs } from './native-update-jobs.js';
+import type { createNativeSourceSuccessions } from './native-source-succession.js';
 import { selectReactComparisonRequest, readReactComparisonEvidence, refreshReactComparisonEvidence } from './react-comparison-evidence.js';
 import { createReactSourceFramingStore, loadReactFrameInput, measureReactSourceTypography } from './react-source-framing.js';
 import { createReactCallbackInspectionStore } from './react-callback-inspection.js';
@@ -166,7 +167,7 @@ export function createReactReferenceService(
       repoRoot,
       "../ds-contracts-poc/examples/shadcn/.shadcn-sandbox",
     ),
-  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans>; updateJobs?: ReturnType<typeof createNativeUpdateJobs>; updateTransport?: ReturnType<typeof createNativeOperationTransport> },
+  native?: () => { jobs: ReturnType<typeof createNativeOperationJobs>; transport: ReturnType<typeof createNativeOperationTransport>; updates?: ReturnType<typeof createNativeUpdatePlans>; updateJobs?: ReturnType<typeof createNativeUpdateJobs>; successions?: ReturnType<typeof createNativeSourceSuccessions>; updateTransport?: ReturnType<typeof createNativeOperationTransport> },
 ) {
   let reference: ReactReference | undefined;
   const frames = createReactSourceFramingStore(repoRoot, (referenceId, operationId) => {
@@ -179,12 +180,20 @@ export function createReactReferenceService(
     // operation. No fresh property matrix or browser-supplied evidence paths.
     const selected = withEvidenceReadSnapshot(() => native!().jobs.withReadSnapshot(() => {
       const roots = native!().jobs.listReact(referenceId, 'root').filter(r => r.kind === 'root');
-      const current = roots.filter(r => r.operation.sourceCurrent)
-        .map(r => native!().jobs.reactRequest(r.operation.id)).sort((a,b) => a.ownership.id.localeCompare(b.ownership.id));
+      // A root that follows this source through a recorded succession anchors
+      // the sealed observation it follows, not its creation pin. Its creation
+      // plan is rightly stale; the followed archive must still read unchanged.
+      const followed = (id: string) => {
+        const pin = native!().jobs.reactEffectiveRequest(id);
+        if (revisionOf(pin.ownership) === revisionOf(native!().jobs.reactRequest(id).ownership)) return undefined;
+        try { readReactNativeEvidence(repoRoot, reference!, pin); return pin; } catch { return undefined; }
+      };
+      const current = roots.flatMap(r => r.operation.sourceCurrent ? [native!().jobs.reactRequest(r.operation.id)] : followed(r.operation.id) ?? [])
+        .sort((a,b) => a.ownership.id.localeCompare(b.ownership.id));
       // Native plan compatibility is not source freshness. Initial-state reads
       // independently authenticate the old source archive, without authorizing
       // a native write or replacing that operation's pinned compiler output.
-      return { anchor: current[0], anchors: roots.map(r => native!().jobs.reactRequest(r.operation.id)) };
+      return { anchor: current[0], anchors: roots.map(r => native!().jobs.reactEffectiveRequest(r.operation.id)) };
     }));
     const { anchor, anchors } = selected;
     if (!anchor) throw Error('react-initial-saved-observation-required');
@@ -425,8 +434,8 @@ export function createReactReferenceService(
     const nativeRoute = /^react\/([a-f0-9]{64})\/native(?:\/([a-z-]+))?$/.exec(route);
     const childRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/child\/([a-z][a-z0-9-]{0,79})$/.exec(route);
     const caseComparisonRoute = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/compare-case\/([a-z-]+)$/.exec(route);
-    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison)$/.exec(route);
-    const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation)$/.exec(route);
+    const nativeAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/(connection|start|retry-observation|content|comparison|source-frame|update-plan|resume-comparison|repair-comparison|adopt-source)$/.exec(route);
+    const updateAction = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/(prepare|connection|start|retry-observation|resolve-write|rearm-write|observe-design)$/.exec(route);
     const updateImage = /^react\/([a-f0-9]{64})\/native-operation\/([a-f0-9-]{36})\/update\/([a-f0-9]{64})\/images\/([a-f0-9]{64})\.png$/.exec(route);
     if (nativeRoute || nativeAction || initialNativeRoute || updateAction || updateImage || childRoute || caseComparisonRoute) {
       try {
@@ -490,6 +499,9 @@ export function createReactReferenceService(
             }
             if(action==='start') updateTransport.start(update.id);
             if(action==='retry-observation') updateTransport.retryObservation(update.id);
+            if(action==='resolve-write') updateTransport.resolveWriteOutcome(update.id);
+            if(action==='rearm-write') updateTransport.rearmWrite(update.id);
+            if(action==='observe-design') updateTransport.observeDesign(update.id);
           } else if (initialNativeRoute) {
             jobs.prepare(initialStates.nativeRequest(reference.id, initialNativeRoute[2]));
           } else if (nativeRoute?.[2]) {
@@ -499,6 +511,28 @@ export function createReactReferenceService(
             const existing = jobs.listReact(reference.id).find(row => row.kind === 'root' && row.caseId === nativeRoute[2] && row.ownershipId === report.id);
             if (existing) jobs.get(existing.operation.id);
             else jobs.prepare({ ...selectReactNativeRequest(repoRoot, report, nativeRoute[2]), compilation: 'current' });
+          } else if (nativeAction?.[3] === 'adopt-source') {
+            // The one action addressed to an operation that follows ANOTHER
+            // source revision: record that it now follows this one. Nothing is
+            // written to Figma; the next update review compiles the difference.
+            const id = nativeAction[2], { successions, updateJobs } = native();
+            if (!successions || !updateJobs) throw Error('react-source-succession-unavailable');
+            const original = jobs.reactSuccessionSubject(id);
+            // A written correction must settle against the inputs it was planned from.
+            if (updateJobs.updateHistory(id).some(entry => entry.pending || entry.phase !== 'update-verified'))
+              throw Error('react-source-succession-update-unresolved');
+            let successor: ReactNativeRequest | ReactInitialNativeRequest;
+            if (original.kind === 'react-initial-draft')
+              successor = initialStates.nativeRequest(reference.id, original.caseId, original.version === 2 ? original.instanceId : undefined);
+            else {
+              const job = ownershipJobs.get(reference.id);
+              if (!job) throw Error('react-native-observation-required');
+              successor = selectReactNativeRequest(repoRoot, job.report(), original.caseId);
+            }
+            // Only a sealed observation readable from the live, unchanged source qualifies.
+            if (successor.kind === 'react-initial-draft') initialStates.nativeEvidence(reference, successor);
+            else readReactNativeEvidence(repoRoot, reference, successor);
+            successions.adopt(id, original, successor);
           } else if (nativeAction) {
             const id = nativeAction[2];
             if (jobs.reactIdentity(id).referenceId !== reference.id) throw Error('react-native-operation-mismatch');
@@ -523,12 +557,20 @@ export function createReactReferenceService(
               jobs.prepare(selectReactComparisonRequest(repoRoot, reference, jobs.reactRequest(id), id, readReactCompositionEvidence(repoRoot, reference, jobs.reactRequest(id), id, jobs, undefined, initialStates.nativeEvidence)));
             } else if (nativeAction[3] === 'repair-comparison') jobs.dispatch(id,'comparison-repair-preflight-readback');
             else if (nativeAction[3] === 'resume-comparison') jobs.dispatch(id,'comparison-recovery-readback');
-            else if (nativeAction[3] === 'retry-observation') transport.retryObservation(id);
+            else if (nativeAction[3] === 'retry-observation') {
+              // A correction chain pins the journal of the operation it corrects, and
+              // the creation reader judges the corrected canvas against the creation
+              // plan. Re-reading the parent after a written correction would therefore
+              // call correct nodes "refused" and strand every later update. The latest
+              // correction carries the independent readback; inspect that instead.
+              if (native().updateJobs?.updateHistory(id).length) throw Error('react-parent-observation-superseded-by-correction');
+              transport.retryObservation(id);
+            }
             else transport.start(id);
           } else throw Error('react-native-action-invalid');
         } else if (req.method !== 'GET' || !nativeRoute || nativeRoute[2]) throw Error('react-native-action-invalid');
         const observedAt = Date.now();
-        json(res, 200, { operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
+        json(res, 200, { moved: jobs.listReactMoved(reference.id), operations: withEvidenceReadSnapshot(() => jobs.withReadSnapshot(() => jobs.listReact(reference!.id).map(row => {
           let content;
           let composition, compositionProblem;
           let sourceFrame, sourceFrameProblem, initialStates: Array<{ observation: string; variant: string; frame?: import('./source-framing.js').SourceFrame }> | undefined;
@@ -562,14 +604,22 @@ export function createReactReferenceService(
               }
             } catch { content = { phase: 'failed', sourceUnchanged: false, problems: ['react-content-evidence-unavailable'] }; }
           }
-          return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates,
+          let sourceRevisions: string[] | undefined;
+          if (row.kind === 'root' || row.kind === 'initial')
+            try { sourceRevisions = native().successions?.history(row.operation.id, jobs.reactSuccessionSubject(row.operation.id)); }
+            catch { /* An unreadable succession journal already fails identity above. */ }
+          return { ...row, content, composition, compositionProblem, sourceFrame, sourceFrameProblem, initialStates, sourceRevisions,
             updates: (native().updates?.list(row.operation.id) ?? []).map(proposal => {
               const operation=native().updateJobs?.forProposal(row.operation.id,proposal.id);
               return {...proposal, operation, connection:operation?native().updateTransport?.status(operation.id,observedAt):undefined};
             }), connection: transport.status(row.operation.id, observedAt) };
         }))) });
-      } catch {
-        json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.' });
+      } catch (error) {
+        // Refuse by name. Only identifier-shaped reasons leave the host: no
+        // paths, no file contents, no free text from a dependency.
+        const message = error instanceof Error ? error.message : '';
+        const reason = /^[a-z][a-z0-9-]{2,100}(?::[A-Za-z0-9:;._-]{1,80})?$/.test(message) ? message : undefined;
+        json(res, 409, { error: 'Native inspection unavailable. Load unchanged originals and complete a sealed structure observation before preparing a new draft. Existing operations retain their identity; inspect their state before retrying.', ...(reason ? { reason } : {}) });
       }
       return;
     }
@@ -920,9 +970,9 @@ export function createReactReferenceService(
     res.end(reactReferenceHtml(reference));
   };
   return Object.assign(handle, {
-    initialNativeEvidence(request: ReactInitialNativeRequest) {
+    initialNativeEvidence(request: ReactInitialNativeRequest, identity?: string) {
       if (!reference) throw Error('react-initial-native-reference-unavailable');
-      return initialStates.nativeEvidence(reference, request);
+      return initialStates.nativeEvidence(reference, request, identity);
     },
     refreshComparisonEvidence(request: ReactComparisonRequest, parent: Parameters<typeof readReactComparisonEvidence>[3]) {
       if (!reference) throw Error('react-native-reference-unavailable');

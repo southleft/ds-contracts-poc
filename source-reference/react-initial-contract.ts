@@ -29,7 +29,11 @@ export function reactInitialObservedRoot(snapshot: Snapshot, instanceId: string)
   return { rootPath, root: structuredClone(root) };
 }
 export function compileReactInitialContract(program: ReactSourceProgram, ownership: ReactOwnership, tree: CapturedNode,
-  observation: Awaited<ReturnType<typeof observeReactInitialStates>>, snapshots: Record<string, Snapshot>) {
+  observation: Awaited<ReturnType<typeof observeReactInitialStates>>, snapshots: Record<string, Snapshot>,
+  /** Contract id of an EXISTING native component. Its name and token namespace
+   * are that component's identity; a later observation of the same source case
+   * compiles under them instead of minting a name from its own content. */
+  identity?: string) {
   const result = { version: 1 as const, qualification: 'observed-initial-state-contract' as const,
     acceptedContract: null, nativeQualification: 'unqualified' as const, status: 'refused' as 'refused' | 'compiled-draft',
     problems: [] as string[], limitations: ['observed-initial-inputs-only', 'runtime-interactions-not-projected',
@@ -127,7 +131,9 @@ export function compileReactInitialContract(program: ReactSourceProgram, ownersh
     }
     if (enumeration.combos.some(c => !roots.has(c.key)) || new Set([...roots.values()].map(r => r.tag)).size !== 1)
       throw Error('react-initial-contract-host-or-domain-changed');
-    const suffix = revisionOf({ source: expected.source, axes, observations: observation.rows }).slice(7, 23), name = `InitialStates${suffix}`;
+    const existing = identity === undefined ? undefined : /^observed\.react-initial-([a-f0-9]{16})$/.exec(identity)?.[1];
+    if (identity !== undefined && !existing) throw Error('react-initial-contract-identity-invalid');
+    const suffix = existing ?? revisionOf({ source: expected.source, axes, observations: observation.rows }).slice(7, 23), name = `InitialStates${suffix}`;
     const contract = ContractSchema.parse({ id: `observed.react-initial-${suffix}`, name, version: '0.1.0', status: 'draft',
       description: 'Observed finite React initial states; runtime behavior and reusable child mappings remain unqualified.',
       props: definitions.map(d => ({ name: d.property, type: d.classified.kind === 'boolean' ? 'boolean' : { enum: d.values },

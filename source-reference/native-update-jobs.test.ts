@@ -38,8 +38,9 @@ async function fixture(t:test.TestContext, make: typeof nativeUpdateFixture | ty
     assert(url.startsWith(`http://localhost:5181/api/source-reference/native/${id}/`));
     const payload=JSON.parse(init.body),supplied=init.headers.Authorization.slice(7);
     let response;
+    if(url.endsWith('/begin')) return {ok:true,json:async()=>transport.begin(id,supplied,payload.attemptId)};
     if(url.endsWith('/claim')) {
-      response=transport.claim(id,supplied,payload.fileKey,payload.replaceReadbackAttemptId);
+      response=transport.claim(id,supplied,payload.fileKey,payload.replaceReadbackAttemptId,payload.resolveWriteAttemptId,payload.protocol);
       if('command' in response) delivered.push(response.command);
     } else response=transport.accept(id,supplied,payload);
     if(lose===(url.endsWith('/claim')?'claim':'result')){lose='';throw Error('response lost');}
@@ -302,4 +303,50 @@ test('read-only framing enrichment preserves current structural evidence and nev
   f.transport().retryObservation(f.id);await f.poll();
   assert.equal(f.jobs().get(f.id).phase,'update-recovery-required','moving export bounds during rasterization refuse observation');
   assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+});
+
+// The live case of 2026-09-18: the app died after journaling the write and
+// before the companion received it.
+test('the actual companion settles a write it never received through a canvas read, and only an operator sends another',async t=>{
+  const f=await fixture(t);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-preflight-observed');
+  f.lose('claim');await f.poll();
+  assert.equal(f.jobs().get(f.id).pendingPhase,'update-apply');
+  assert.ok(f.nodes.every((n:any)=>n.opacity===0.5),'the write never ran');
+  f.restart();await f.poll();
+  assert.equal(f.jobs().get(f.id).pendingPhase,'update-apply','reconnecting does not resend it');
+  f.transport().resolveWriteOutcome(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-write-untouched');
+  for(let i=0;i<3;i++)await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-write-untouched','polling alone never sends another write');
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,1);
+  f.transport().rearmWrite(f.id);for(let i=0;i<3;i++)await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-verified');
+  assert.ok(f.nodes.every((n:any)=>n.opacity===0.25));
+  assert.equal(f.delivered.filter(c=>!c.readOnly).length,2,'one dead write, one operator-approved write');
+});
+
+test('the actual companion that died holding a write marker takes only the read that settles that write',async t=>{
+  const f=await fixture(t);await f.poll();f.lose('claim');await f.poll();
+  const write=f.jobs().pendingCommand(f.id)!;
+  // The plugin had saved its "received" marker and then died before executing.
+  f.storage.set('ds_native_receipt:'+f.id,{stage:'received',identity:{operationId:f.id,phase:write.phase,attemptId:write.attemptId}});
+  f.restart();await f.poll();
+  assert.equal(f.messages.at(-1).status,'unknown','it runs nothing while the app has not dispatched a settling read');
+  assert.equal(f.jobs().get(f.id).pendingPhase,'update-apply');
+  f.transport().resolveWriteOutcome(f.id);await f.poll();
+  assert.equal(f.jobs().get(f.id).phase,'update-write-untouched');
+  assert.equal(f.storage.has('ds_native_receipt:'+f.id),false,'the settled marker is released');
+  assert.ok(f.nodes.every((n:any)=>n.opacity===0.5));
+});
+
+test('the actual companion does not execute a write the app refuses to let it begin',async t=>{
+  const f=await fixture(t);await f.poll();
+  // The app has already dispatched a read to judge this write; a held-up holder asks too late.
+  const refuse=f.transport().begin;(f.transport() as any).begin=()=>{throw Error('native-update-write-begin-refused');};
+  await f.poll();
+  assert.equal(f.messages.at(-1).status,'refused');
+  assert.ok(f.nodes.every((n:any)=>n.opacity===0.5),'nothing executed');
+  assert.equal(f.storage.has('ds_native_receipt:'+f.id),false,'and no marker was left behind');
+  (f.transport() as any).begin=refuse;
 });
