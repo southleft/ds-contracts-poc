@@ -879,11 +879,14 @@
       ? { type: 'native-connect', connection: connection }
       : { type: 'native-poll' } }, '*');
     $('native-connection').value = '';
+    startNativePolling();
+  };
+  function startNativePolling() {
     if (nativeTimer) clearInterval(nativeTimer);
     nativeTimer = setInterval(function () {
       parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
     }, 3000);
-  };
+  }
   $('native-disconnect').onclick = function () {
     if (nativeTimer) clearInterval(nativeTimer);
     nativeTimer = null;
@@ -2024,6 +2027,12 @@
     if (msg.type === 'init') {
       currentFileKey = msg.fileKey || '';
       syncSurfaces();
+      // A reopened or reloaded plugin resumes a saved local-app connection by
+      // itself. Polling only ever takes commands the app has started for that
+      // paired operation; with nothing saved the first poll reports
+      // "disconnected" and the timer below is cleared again.
+      parent.postMessage({ pluginMessage: { type: 'native-poll' } }, '*');
+      startNativePolling();
       // The remembered "drift last checked" line is per FILE — a timestamp
       // from another file would be a small lie.
       parent.postMessage({ pluginMessage: { type: 'ui-state-load', key: DRIFT_STATE_KEY + ':' + currentFileKey } }, '*');
