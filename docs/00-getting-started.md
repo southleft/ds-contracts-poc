@@ -163,7 +163,7 @@ Before the per-role advice below, find your situation. These are genuinely diffe
 | **B — code-first** | *"I have components in **code**. I want them in **Figma**."* — `onboard` → review the drafted capture config → `onboard --continue`; the capture step **requires a Chromium** (`npm i playwright-core && npx playwright-core install chromium`, or `PLAYWRIGHT_CHROMIUM_PATH`) | A designer clicks **Check for updates** in the plugin's Changes tab and your real components land on their canvas, token-bound |
 | **C — reconcile** | *"I already have a mature Figma library **and** a mature codebase."* — today this means running A and B where each applies and reconciling **by hand**; the merge phase has no tooling ([docs/11](./11-brownfield-adoption.md)) | A property-by-property disagreement report, and a gate that stops the gap growing |
 
-Also walked, with every CLI line rendered from the eval-executed manifest: **[the get-started journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/)** and the [README](../README.md#which-journey-are-you-on). The same loop written as two people actually live it, hour by hour, with every step tagged built-or-missing: [docs/18 — User Flows](./18-user-flows.md).
+Also walked: **[the get-started journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/)**, which renders [docs/USER-JOURNEYS.md](./USER-JOURNEYS.md), and the journey table in the [README](../README.md#what-you-should-be-able-to-do). The CLI lines rendered from the eval-executed manifest are on the site's CLI page (`site/src/pages/cli.ts`). The same loop written as two people actually live it, hour by hour, with every step tagged built-or-missing: [docs/18 — User Flows](./18-user-flows.md).
 
 ### Three things to know before you start the code-first path (B)
 
@@ -197,7 +197,7 @@ Three known gaps you will meet, written down rather than discovered: overlay com
 
 ```bash
 git clone https://github.com/southleft/ds-contracts-poc.git && cd ds-contracts-poc
-npm install
+npm ci               # not npm install, which rewrites the tracked package-lock.json under npm 10.8.2
 npm run build        # tokens → schema → generated components (validated)
 ```
 
@@ -211,9 +211,9 @@ npm run dashboard    # the Contract Hub, http://localhost:5180 — blocks
 npm run storybook    # the generated component library — blocks
 ```
 
-Then prove the loop to yourself in about two minutes:
+Then prove the loop to yourself. Steps 1–4 are the loop. Step 5 re-runs the whole eval suite, which takes 15 to 20 minutes on a recent laptop (933 s and 1,141 s in two runs on 2026-09-18), and it first needs the workspace package builds listed in [CONTRIBUTING § The gates](../CONTRIBUTING.md#the-gates):
 
-1. `npm run parity` — code and tokens check **clean** against the contracts. (On a fresh clone the canvas half likely reports `snapshot-stale` instead of green — the committed Figma snapshots age out past 14 days **by design**, and the output says so when that is the only finding class. See [README §Working in this repository](../README.md).)
+1. `npm run parity` — code and tokens check **clean** against the contracts. (On a fresh clone the canvas half likely reports `snapshot-stale` instead of green — the committed Figma snapshots age out past 14 days **by design**, and the output says so when that is the only finding class. The output still cites “README §Working in this repository”; that section has moved to [CONTRIBUTING § The gates](../CONTRIBUTING.md#the-gates). Every run also rewrites the tracked `parity/report.json`; if you did not mean to update it, discard the change with `git restore parity/report.json`.)
 2. Open a contract in `contracts/` and change something small. A verified one: in
    `badge.contract.json`, change the `children` prop's default from `Badge` to `Status`.
    (Adding an **enum value** is the interesting other case — a variant-keyed prop demands

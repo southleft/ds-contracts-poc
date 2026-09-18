@@ -33,7 +33,9 @@ An approved, linted set is a good input. Approval establishes design intent; the
 
 **Clean consumer check (from this checkout):** `npm run design:consumer:check -- --dump <rest-dump.json> --contract <proposed contract> --generated <generated dir> --component <Name> --out <evidence dir>` packages the generated output as an installable library, installs it into a temporary Vite consumer with no path back to this repository, mounts every Figma variant in Chromium, replaces the TEXT-bound prop and switches variants at runtime, checks whether children the contract does not declare are refused or silently discarded, and scores each variant against Figma's own render. The first run on the designer-authored Altitude Badge set installed and behaved, except that React `children` are accepted by the generated type and discarded at render, a named failure (the emitter rule that refuses them by type is a separate change); its five dot variants scored 0% under the 5% limit (root box 9 × 8 px against Figma's 8 × 8), while its five text variants scored 15.8–18.8%: the same font family and weight are available in the consumer, yet the rendered label box is 53 px wide against Figma's 57 px, and the dump names five `text-channel-unsupported` degradations. A second run on the composed Altitude Tabs set, with its two auto-proposed child stubs, also installed and rendered its three items from the design's own sample and replaced their text at runtime; but undeclared children are again accepted and discarded, the reader had ledgered the Stretch axis as style-inert, per-side header strokes were dropped by name, the panel's sample content is not carried by a stub, and both variants scored 5.67% and 6.14% against the 5% limit while drawing 1.4% ink against the design's 12.7%. Both receipts live in `recipe/evidence/design-led-consumer/`; each records the dump's named degradations, the stub contracts used and the ink coverage of both renders, because a mostly white surface can score near the limit while missing most of the design.
 
-**Where this currently stops:** the check covers one component set read through the REST API; composition, instance swaps, declared behavior beyond text and variant props, and the in-app review remain unfinished. The full readiness/API review, target packaging, native comparison, repository update and repeat-update journey above remain to be integrated and qualified. Existing manual CLI/plugin workflows are available as [technical reference](https://ds-contracts-spec.pages.dev/operator-guide/).
+**Before you run it:** the check drives Chromium through `playwright-core`. Without the browser revision `playwright-core` pins, the receipt records `check-failed: browserType.launch: Executable doesn't exist …` and the command exits non-zero; `npx playwright-core install chromium` installs it. Image scoring needs a Figma personal access token, passed as `--token` or in the `FIGMA_TOKEN` environment variable. Without one the packaging, mount and behavior steps still run, the receipt names `figma-images-unavailable` as a problem and the command exits non-zero; it never reports a pass. Runnable inputs for both sets are committed under `recipe/evidence/design-led-consumer/<set>/inputs/`: `rest-dump.json`, the proposed contract and `generated/`. Pass that committed `generated/` directory as `--generated`. Running `ds-contracts generate` on the proposed contract alone refuses it by name, because the `imported.*` tokens the contract references are not in the token set it is given. Point `--out` at a scratch directory unless you mean to replace the committed receipt. [What needs a Figma token](#figma-token) lists the other commands that read one.
+
+**Where this currently stops:** the check covers one component set read through the REST API; composition, instance swaps, declared behavior beyond text and variant props, and the in-app review remain unfinished. The full readiness/API review, target packaging, native comparison, repository update and repeat-update journey above remain to be integrated and qualified. Existing manual CLI/plugin workflows are available as [technical reference](https://ds-contracts-spec.pages.dev/operator-guide/). The hosted site is deployed separately and may lag this repository; on 2026-09-18 that address answered 404. To read the same page from a checkout, run `npm run site:build` and open `site/dist/operator-guide/index.html`; its source is `site/src/pages/operator-guide.ts`.
 
 ### Example: a data table
 
@@ -54,6 +56,8 @@ Sorting, pagination, keyboard navigation and data fetching are not established b
 | 4 · Choose Figma | Select the destination file and operation scope. | Check access and plan exactly what will be created or changed. |
 | 5 · Generate and verify | Choose **Create design components**. | Create native components, variants, variables and editable properties. Fill separate instances for comparison while keeping reusable main content empty where appropriate. |
 | 6 · Use and maintain | Place instances, edit supported properties and run again after a source change. | Independently read back native structure and exported images. Verify that supported changes survive and an unchanged repeat makes no writes. |
+
+**What the `/sources` steps need first:** they do not run from a fresh clone. They need a prepared shadcn React source sandbox with its installed dependencies, and that sandbox is not in the repository. Without it, **Load React originals** answers 409, “React originals unavailable or changed”, and names `DS_CONTRACTS_REACT_SOURCE_ROOT`. Set that environment variable on the `npm run playground` process to the sandbox directory; the default is a git-ignored directory in a sibling checkout, `../ds-contracts-poc/examples/shadcn/.shadcn-sandbox` ([source-reference/README.md](../source-reference/README.md)). The only recreate recipe is [examples/shadcn/RECON.md](../examples/shadcn/RECON.md) §1. It is manual: the host files are written by hand, and §2.2 of the same file records that the `shadcn add` registry fetch is not reproducible, so a rebuilt sandbox may vendor different source bytes. Without the sandbox, the static code import under **Try today** below and **Demo import (Badge fixture)** on the Figma import view both run on a fresh clone with no credentials.
 
 **Inspect original React sources locally:** open `/sources`, choose **Load React originals**, then **Validate React sources** for the configured ten-case Button, Checkbox and composed Card cohort. **Inspect React APIs** reads its installed declarations and shows incomplete contract proposals. Expand **Original Checkbox interactions** in the validation results to review label activation and Space-key transitions for the four original Checkbox states. Each probe starts from a fresh mount and checks restoration afterward. These source checks do not qualify generated Figma or React behavior; unsupported APIs remain visible. This preset is not a general repository picker.
 
@@ -94,7 +98,7 @@ When another selected case has the same observed family, the app offers **Compar
 6. **Apply, reobserve and verify.** Preserve operation state, check the actual result on both sides, then advance the baseline. On failure, retain the known state and recover or roll back under checked preconditions.
 7. **Repeat.** No changes means no writes. Concurrent incompatible changes produce a named conflict rather than a guessed winner.
 
-**Try today:** the repository has diff and planning foundations. The [current status](https://ds-contracts-spec.pages.dev/system/) describes their boundaries. There is no complete **Compare libraries → repair both sides** application action yet. Starting from two existing libraries must not silently become “overwrite one with the other.”
+**Try today:** the repository has diff and planning foundations. The [current status](https://ds-contracts-spec.pages.dev/system/) describes their boundaries. The hosted copy may lag this repository (on 2026-09-18 it answered 404); the same document is [docs/CURRENT.md](../docs/CURRENT.md), and the local app serves it at `/system`. There is no complete **Compare libraries → repair both sides** application action yet. Starting from two existing libraries must not silently become “overwrite one with the other.”
 
 <a id="install"></a>
 ## Install and try it today
@@ -105,19 +109,38 @@ Use the [hosted engine explorer](https://ds-contracts-playground.pages.dev/playg
 
 ### Run the current source locally
 
-Requires Node.js 20 or later and npm:
+Requires npm and Node.js 20.19 or later on the 20.x line, or 22.12 or later: the range Vite 8.3.0 declares (`^20.19.0 || >=22.12.0`). CI runs 20.19.4, and `.nvmrc` pins the same version.
 
 ```bash
 git clone https://github.com/southleft/ds-contracts-poc.git
 cd ds-contracts-poc
-npm install
+npm ci
 npm run prep:schema
 npm run playground
 ```
 
-Open [the local start guide](http://localhost:5181/start). The main branch contains merged work; an open PR is a separate revision. Start a React experiment from code import. The React `/sources` preset and archived Lit flow each require their configured source library; the React path does not depend on the Lit setup. Worker development has its own dependency install, documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
+Use `npm ci`, as CI does: it installs exactly what `package-lock.json` records. `npm install` under npm 10.8.2 rewrites that tracked lockfile (it drops the `libc` fields); `git restore package-lock.json` discards the change.
+
+The app must run on port 5181: the port is strict, and the companion plugin's local connection is fixed to `http://localhost:5181`. If the port is busy, stop the other process. `npm run playground -- --port <n>` starts the app on another port for browsing, but the plugin will not reach it.
+
+Open [the local start guide](http://localhost:5181/start). The main branch contains merged work; an open PR is a separate revision. Start a React experiment from code import. The React `/sources` preset and archived Lit flow each require their configured source library; the React path does not depend on the Lit setup. The code-first section above states what the React `/sources` steps need first. `npm run test:worker` and `npm run typecheck:worker` run from the root install. Only the Worker's `wrangler` dev server and deploy need `npm --prefix workers/assist install`; see [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 For native Figma operations from this checkout, build the companion development plugin with `npm run plugin:zip` and import `figma-sync/plugin-dist/manifest.json` through **Plugins → Development → Import plugin from manifest** in Figma desktop. The local app must use port 5181 and the plugin must be open in the authorized target shown by the app. The React root-inspection flow uses **Prepare … for Figma**, **Get connection code**, then **Create and inspect native draft**. In the plugin use **Build → Connect the local source workflow → Connect / resume**. If an older development registration has the same plugin ID, remove that obsolete registration and import the current manifest; this does not delete source files or canvas content. This development flow is not a completed React component-family import. Keep it private; it grants delivery and result access for that operation.
+
+<a id="figma-token"></a>
+### What needs a Figma token
+
+Nothing in the install steps above does. `npm ci`, `npm run prep:schema`, `npm run playground`, the static code import and **Demo import (Badge fixture)** run without credentials, and `npm run eval` and `npm run docs:check` do not read one.
+
+Reading a real Figma file needs a Figma personal access token:
+
+- **Figma import in the app:** enter the token in the import form, next to the component URL.
+- **`npm run design:consumer:check`:** `--token` or the `FIGMA_TOKEN` environment variable, for the image comparison only.
+- **`npm run extract:figma:rest`:** `--token` or `FIGMA_TOKEN`.
+- **Live `sync` observe and pull** (`sync/cli.ts`): `FIGMA_TOKEN`; their `--fixture` path runs offline.
+- **The visual-parity, visual-truth and Figma export scripts** under `scripts/` and `extract/figma/`: `FIGMA_TOKEN` from the environment, or from a git-ignored `.env.local` in the checkout (`extract/figma/visual-parity/env.ts`).
+
+Keep the token out of committed files.
 
 **Recommended v1 onboarding, still planned:** one setup flow that connects the workspace, selects the code target, pairs the plugin when needed, and checks permissions/dependencies before the first import. A designer should not need to understand operation journals or assemble JSON by hand.
 
@@ -156,4 +179,4 @@ Development should produce a demonstrable user flow. Tests are acceptance checks
 
 After that: complete design-only React library delivery in a clean consumer, connect safe two-way repair for an existing React/Figma pair, then run an independently selected supported cohort. Advanced composition remains a V1 requirement. Lit/Web Components integration resumes for planned V1.1 after these exits, reusing the shared rules.
 
-**Timing:** there is no evidence-backed V1 date yet. Forecast from completed journeys and observed remaining blockers, not eval counts. The next deliverable is an imported React component family reaching verified, editable native Figma output. See the [status and milestone exits](https://ds-contracts-spec.pages.dev/system/).
+**Timing:** there is no evidence-backed V1 date yet. Forecast from completed journeys and observed remaining blockers, not eval counts. The next deliverable is an imported React component family reaching verified, editable native Figma output. See the [status and milestone exits](https://ds-contracts-spec.pages.dev/system/), or [docs/CURRENT.md](../docs/CURRENT.md) when the hosted copy is unavailable.
