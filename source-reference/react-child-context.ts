@@ -1,6 +1,6 @@
 /** Source constraints for an observed child, never its measured pixel box. */
 import { flatten, type CapturedNode } from '../extract/computed/lib.js';
-import type { ReactStyleOrigin } from './react-style-origin.js';
+import type { ReactStyleOrigin, ReactSizeOrigin } from './react-style-origin.js';
 import { verifiedGridConstraints, type GridConstraintEvidence } from './grid-constraints.js';
 import type { Contract } from '../scripts/contract-schema.js';
 
@@ -44,19 +44,43 @@ export function reactChildContextSizing(tree: CapturedNode, origin: ReactStyleOr
  * https://www.w3.org/TR/css-grid-2/#track-sizing
  * Never derive declarations from the witness's `used` pixel tracks. */
 export function reactChildContextGrid(tree: CapturedNode, origin: ReactStyleOrigin,
-  path: string, context: ReactChildContext): NonNullable<Contract['anatomy']['root']['layout']> | undefined {
-  const witness = verifiedGridConstraints(tree, context.gridConstraints).find(row => row.path === path);
+  path: string, context: ReactChildContext): RowFlowGrid | undefined {
+  return rowFlowGrid(tree, origin, path, context.gridConstraints, ['width', 'height'], 'react-child-context-grid-constraints-unqualified');
+}
+
+/** The same lowering for the traced top-level root. No parent proves its width,
+ * so the definite content width must be the component's OWN fixed declaration:
+ * a caller `style`/`className`, a percentage or an automatic width stays a named
+ * refusal, and a measured pixel box is never promoted. `width` is the root's
+ * sizing fact AFTER caller-input ownership has been judged. */
+export function reactRootGrid(tree: CapturedNode, origin: ReactStyleOrigin,
+  evidence: GridConstraintEvidence, width: ReactSizeOrigin | undefined): RowFlowGrid | undefined {
+  if (evidence.status !== 'observed') throw Error('react-root-grid-constraints-unobserved');
+  const layout = rowFlowGrid(tree, origin, '', evidence, ['height'], 'react-root-grid-constraints-unqualified');
+  // The child path gets these from its stretch proof: a block-axis floor, cap
+  // or ratio would give the auto rows surplus height to stretch into.
+  if (layout && (!['auto', '0px'].includes(tree.style['min-height']) || tree.style['max-height'] !== 'none' ||
+      tree.style['aspect-ratio'] !== 'auto')) throw Error('react-root-grid-constraints-unqualified');
+  if (layout && (width?.channel !== 'width' || width.status !== 'fixed' || !/^\d+(?:\.\d+)?px$/.test(width.value ?? '')))
+    throw Error('react-root-grid-width-unqualified');
+  return layout;
+}
+
+type RowFlowGrid = NonNullable<Contract['anatomy']['root']['layout']>;
+function rowFlowGrid(tree: CapturedNode, origin: ReactStyleOrigin, path: string, evidence: GridConstraintEvidence,
+  ownAutomatic: Array<'width' | 'height'>, refusal: string): RowFlowGrid | undefined {
+  const witness = verifiedGridConstraints(tree, evidence).find(row => row.path === path);
   if (!witness) return;
-  const fail = (): never => { throw Error('react-child-context-grid-constraints-unqualified'); };
+  const fail = (): never => { throw Error(refusal); };
   const node = flatten(tree).find(row => row.path === path)?.node;
   if (!node) return fail();
   const c = witness.computed, s = node.style;
   const rows = c['grid-template-rows'] === 'none' ? [] : c['grid-template-rows'].split(/\s+/);
   const intrinsic = (value: string) => ['auto', 'min-content'].includes(value);
-  const automatic = (p: string) => ['width', 'height'].every(channel =>
+  const automatic = (p: string, channels: Array<'width' | 'height'> = ['width', 'height']) => channels.every(channel =>
     origin.roots.find(row => row.path === p)?.sizes?.find(size => size.channel === channel)?.status === 'auto');
   if (s.display !== 'grid' || s['writing-mode'] !== 'horizontal-tb' || s.direction !== 'ltr' ||
-      !automatic(path) || c['grid-template-columns'] !== 'none' || c['grid-auto-columns'] !== 'auto' ||
+      !automatic(path, ownAutomatic) || c['grid-template-columns'] !== 'none' || c['grid-auto-columns'] !== 'auto' ||
       c['grid-template-areas'] !== 'none' || c['grid-auto-flow'] !== 'row' ||
       !rows.every(intrinsic) || !intrinsic(c['grid-auto-rows']) ||
       !['normal', 'start'].includes(c['align-content']) ||

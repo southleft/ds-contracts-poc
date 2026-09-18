@@ -13,6 +13,7 @@ import {observeTextFonts} from './text-fonts.js';
 import {observeSvgViewports} from './svg-viewports.js';
 import {sourceBounds} from './source-framing.js';
 import {readReactStyleOrigin} from './react-style-origin.js';
+import {observeGridConstraints,hasGridContainer} from './grid-constraints.js';
 import {projectReactRootVisual} from './react-root-visual.js';
 import {evidenceSha} from './react-validation-evidence.js';
 
@@ -78,6 +79,8 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   const current=await read(),png=await page.screenshot({fullPage:true,caret:'initial'});
   const own=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
   const styles=await readReactStyleOrigin(page,selector,own);
+  // Declared tracks exist only before layout; a plane without a grid container records nothing.
+  const grids=current&&hasGridContainer(current)?{gridConstraints:await observeGridConstraints(page,[selector],current)}:{};
   const contentEvidence=args.observationMode==='initial-mount'?{
    fonts:await observeTextFonts(page,[selector],current),svg:await observeSvgViewports(page,[selector],current),
    bounds:await sourceBounds(page,{path:[selector]}),
@@ -97,7 +100,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
   if(args.failures.runtimeErrors.length||args.failures.failedResources.length)throw Error('react-property-effects-source-failed');
   if(own.problems.length)throw Error('react-property-effects-ownership-unqualified');
   args.assertCurrent();
-  return {tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,...contentEvidence,...(initialSelection?{initialSelection}:{})};
+  return {tree:current,treeSha256:evidenceSha(JSON.stringify(current)),image:evidenceSha(png),png,ownership:own,styleOrigin:styles,...grids,...contentEvidence,...(initialSelection?{initialSelection}:{})};
  };
  let usable=true;
  for(const [index,entry] of plan.entries()){
@@ -124,7 +127,7 @@ export async function observeReactPropertyPlan<P extends {changes:ReactPropertyC
    const before=linkReactSourceAnatomy(program,probe.before.ownership,probe.before.tree);
    const changed=linkReactSourceAnatomy(program,probe.changed.ownership,probe.changed.tree);
    if(before.status!=='linked'||changed.status!=='linked')throw Error('react-property-effects-anatomy-unqualified');
-   const projection=projectReactRootVisual(program,probe.changed.ownership,probe.changed.tree,probe.changed.styleOrigin);
+   const projection=projectReactRootVisual(program,probe.changed.ownership,probe.changed.tree,probe.changed.styleOrigin,undefined,undefined,probe.changed.gridConstraints);
    const changedInstances=changed.instances.map(i=>{
     const prior=before.instances.find(b=>b.instanceId===i.instanceId);
     if(!prior||JSON.stringify(prior.source)!==JSON.stringify(i.source))throw Error('react-property-effects-instance-changed');

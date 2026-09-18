@@ -12,6 +12,9 @@ import {readReactSourceProgram} from './react-source-program.js';
 import {reactOwnershipHook,reactOwnershipRead,type ReactOwnership} from './react-ownership.js';
 import {observeReactPropertyMatrix} from './react-property-matrix.js';
 import {assembleReactRootMatrix} from './react-root-matrix.js';
+import {reactChildContextGrid} from './react-child-context.js';
+import {projectReactRootVisual} from './react-root-visual.js';
+import {revisionOf} from '../core/contract-provenance.js';
 import {type ReactPropertySnapshot} from './react-root-variants.js';
 import {captureJs} from '../extract/computed/capture.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
@@ -97,6 +100,83 @@ export function Surface({${defaulted?"tone='quiet'":'tone'},density='roomy',chil
  }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}
 });
 
+
+test('a top-level grid root with its own fixed width compiles the bounded row-flow lowering; caller width, differing planes and archives without the witness keep named outcomes',async()=>{
+ mkdirSync(path.join(process.cwd(),'private'),{recursive:true});
+ const dir=mkdtempSync(path.join(process.cwd(),'private/root-matrix-grid-fixture-')),browser=await chromium.launch();
+ try{
+  const source=`import React from 'react';
+export function NoticeTitle({children}:{children?:React.ReactNode}){return <div style={{fontWeight:600}}>{children}</div>;}
+export function NoticeBody({children}:{children?:React.ReactNode}){return <div>{children}</div>;}
+export function Notice({tone='quiet',children,style}:{tone?:'quiet'|'loud';children?:React.ReactNode;style?:React.CSSProperties}){
+ return <div role="alert" style={{display:'grid',boxSizing:'border-box',width:320,rowGap:2,padding:tone==='loud'?16:12,backgroundColor:tone==='loud'?'var(--accent)':'var(--base)',...style}}>{children}</div>;
+}`;
+  writeFileSync(path.join(dir,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,skipLibCheck:true,jsx:'react-jsx',target:'ES2022',module:'ESNext',moduleResolution:'Bundler'}}));
+  writeFileSync(path.join(dir,'notice.tsx'),source);
+  const program=readReactSourceProgram(dir,['notice.tsx']);assert.deepEqual(program.problems,[]);
+  const exportsList=program.components.map(c=>`{identity:${JSON.stringify({module:c.module,exportName:c.exportName,sourceSha256:c.sourceSha256,span:c.span})},value:${c.exportName}}`).join(',');
+  const bundle=await build({stdin:{contents:source+`;import {createRoot} from 'react-dom/client';import {flushSync} from 'react-dom';window.__DSC_REACT_EXPORTS=[${exportsList}];flushSync(()=>createRoot(document.getElementById('root')).render(<Notice><NoticeTitle>Heads up</NoticeTitle><NoticeBody>A description long enough to wrap onto a second line inside the fixed column.</NoticeBody></Notice>));`,resolveDir:dir,loader:'tsx'},bundle:true,write:false,format:'iife'});
+  const context=await browser.newContext();await context.addInitScript(reactOwnershipHook);const page=await context.newPage();
+  await page.setContent('<style>:root{--base:rgb(10, 20, 30);--accent:rgb(40, 50, 60)}body{margin:0;font:14px/20px Arial}</style><div id="root"></div>');await page.addScriptTag({content:bundle.outputFiles[0].text});
+  await page.evaluate(()=>(window as any).__ALL_PROPS=[...getComputedStyle(document.documentElement)].sort());
+  const selector='#root > div',ownership=await page.evaluate(reactOwnershipRead(selector)) as ReactOwnership;
+  const tree=await page.evaluate(captureJs('#root',undefined,'--',[selector])) as CapturedNode;
+  const image=evidenceSha(await page.screenshot({fullPage:true,caret:'initial'}));
+  const instanceId=ownership.components.find(c=>c.source.exportName==='Notice')!.id;
+  const effects=await observeReactPropertyMatrix({page,program,ownership,tree,image,selector,instanceId,dir:path.join(dir,'effects'),assertCurrent:()=>{},failures:{runtimeErrors:[],failedResources:[]}});
+  assert.ok(effects.rows.every(r=>r.status==='observed'),JSON.stringify(effects));
+  const snapshots:Record<string,ReactPropertySnapshot>=Object.fromEntries(effects.rows.map(r=>[r.id,JSON.parse(readFileSync(path.join(dir,'effects',r.id+'.json'),'utf8'))]));
+  assert.ok(Object.values(snapshots).every(s=>s.gridConstraints?.status==='observed'&&s.gridConstraints.rows.length===1&&s.gridConstraints.rows[0].computed['grid-template-columns']==='none'),'every plane seals its own declared-track witness');
+  // Each plane's own single-observation projection already compiles, on the declared width and never the measured box.
+  for(const snap of Object.values(snapshots) as Array<ReactPropertySnapshot&{projection:ReturnType<typeof projectReactRootVisual>}>){
+   const single=snap.projection.roots.find(r=>r.instanceId===instanceId)!;assert.equal(single.status,'native-compiled',single.problems.join(';'));
+   assert.deepEqual(single.contract!.anatomy.root.literals,{height:'fit-content',width:'320px'});
+   assert.deepEqual(JSON.parse(JSON.stringify(projectReactRootVisual(program,snap.ownership,snap.tree,snap.styleOrigin,undefined,undefined,snap.gridConstraints))),snap.projection,'the sealed plane reprojects identically');
+  }
+  const result=assembleReactRootMatrix(program,ownership,tree,effects,snapshots);assert.deepEqual(result.problems,[]);
+  const draft=result.draft!;assert.equal(draft.status,'native-compiled',draft.problems.join(';'));
+  const layout={display:'grid',columns:[{fr:1}],autoRows:{fit:true},flow:'row',gap:{row:2,column:0}};
+  assert.deepEqual(draft.contract!.anatomy.root.layout,layout);
+  // The same DOM and witness seen as a composed child of a fixed-width column lowers identically.
+  const plane=Object.values(snapshots)[0],parent:CapturedNode={tag:'section',classes:[],pseudo:{},style:{...plane.tree.style,display:'flex','flex-direction':'column'},nodes:[{t:'el',el:plane.tree}]};
+  const auto=(channel:'width'|'height')=>({channel,status:'auto' as const,value:'auto',selectors:[]});
+  assert.deepEqual(reactChildContextGrid(parent,{version:1,roots:plane.styleOrigin.roots.map(row=>({...row,path:row.path?'0.'+row.path:'0',...(row.path?{}:{sizes:[auto('width'),auto('height')]})}))},'0',
+   {gridConstraints:{...plane.gridConstraints!,treeRevision:revisionOf(parent),rows:plane.gridConstraints!.rows.map(row=>({...row,path:'0'}))}}),layout);
+  assert.equal(draft.contract!.anatomy.root.literals?.height,'fit-content');assert.equal(draft.contract!.anatomy.root.literals?.width,undefined,'width is the retained source declaration, never a literal box');
+  assert.deepEqual(draft.sizing?.map(s=>[s.channel,s.status]),[['width','retained'],['height','intrinsic']]);
+  assert.deepEqual(draft.contract!.anatomy.root.slot,{name:'children'});assert.equal(JSON.stringify(draft.contract).includes('Heads up'),false);
+  assert.equal(draft.native!.rootSlot?.display,'grid');assert.equal(draft.native!.variants.length,2);
+  for(const variant of draft.native!.variants){
+   assert.equal(variant.spec.fixedWidth?.px,320,variant.name);
+   const carrier=variant.spec.children![0].children![0];
+   assert.equal(carrier.layout?.mode,'GRID',variant.name);assert.equal(carrier.layout?.grid?.columns.length,1);assert.equal(carrier.layout?.grid?.flow,'ROW_AUTO_FLOW');
+  }
+  assert.ok(draft.limitations.includes('intrinsic-row-lowering-observed-block-content-only'));
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,snapshots),result,'repeat assembly is deterministic');
+
+  // An archive sealed before this witness existed reads exactly as it always did.
+  const archived=structuredClone(snapshots);for(const snap of Object.values(archived))delete snap.gridConstraints;
+  const old=assembleReactRootMatrix(program,ownership,tree,effects,archived).draft!;
+  assert.equal(old.status,'style-prepared');assert.deepEqual(old.problems,['FIGMA_ROOT_SLOT_LAYOUT_UNSUPPORTED: root slots require supported forward flex or grid layout']);
+  assert.equal(old.contract!.anatomy.root.layout,undefined);assert.equal(old.native,undefined);
+
+  // A caller `style`/`className` owns the width: styles stay prepared, the lowering refuses by name.
+  const caller={ownership:structuredClone(ownership),effects:structuredClone(effects),snapshots:structuredClone(snapshots)};
+  caller.ownership.components.find(c=>c.id===instanceId)!.props.style={kind:'object'};caller.effects.heldProps.style={kind:'object'};
+  for(const snap of Object.values(caller.snapshots))snap.ownership.components.find(c=>c.id===instanceId)!.props.style={kind:'object'};
+  const refused=assembleReactRootMatrix(program,caller.ownership,tree,caller.effects,caller.snapshots).draft!;
+  assert.equal(refused.status,'style-prepared');assert.deepEqual(refused.problems,['react-root-grid-width-unqualified']);
+  assert.equal(refused.contract!.anatomy.root.layout,undefined);assert.equal(refused.native,undefined);
+  assert.deepEqual(refused.sizing?.find(s=>s.channel==='width'),{channel:'width',status:'unresolved',reason:'caller-style-input-needs-ownership-proof'});
+
+  const differs=structuredClone(snapshots);differs[effects.rows[0].id].gridConstraints!.rows[0].computed['row-gap']='6px';
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,differs).draft!.problems,['react-root-matrix-grid-layout-differs']);
+  const columns=structuredClone(snapshots);columns[effects.rows[0].id].gridConstraints!.rows[0].computed['grid-template-columns']='1fr 1fr';
+  assert.deepEqual(assembleReactRootMatrix(program,ownership,tree,effects,columns).draft!.problems,['react-root-grid-constraints-unqualified']);
+  const substituted=structuredClone(snapshots);substituted[effects.rows[0].id].gridConstraints!.treeRevision=revisionOf('another tree');
+  assert.equal(assembleReactRootMatrix(program,ownership,tree,effects,substituted).draft!.status,'refused');
+ }finally{await browser.close();rmSync(dir,{recursive:true,force:true})}
+});
 
 test('conditional size bindings preserve prototype-like enum values as own keys',()=>{
  const values=['small','__proto__','auto'],axes=[{prop:'size',values}],base={size:'small'};

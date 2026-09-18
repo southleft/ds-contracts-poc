@@ -3,9 +3,12 @@ import test from 'node:test';
 import {chromium} from 'playwright-core';
 import {revisionOf} from '../core/contract-provenance.js';
 import type {CapturedNode} from '../extract/computed/lib.js';
-import {reactChildContextGrid, reactChildContextSizing} from './react-child-context.js';
+import {reactChildContextGrid, reactChildContextSizing, reactRootGrid} from './react-child-context.js';
+import {readReactStyleOrigin} from './react-style-origin.js';
+import type {ReactOwnership} from './react-ownership.js';
+import {captureJs} from '../extract/computed/capture.js';
 import type {ReactStyleOrigin} from './react-style-origin.js';
-import {gridConstraintChannels, type GridConstraintEvidence} from './grid-constraints.js';
+import {gridConstraintChannels, observeGridConstraints, type GridConstraintEvidence} from './grid-constraints.js';
 import {rootSlotSeed} from '../core/figma-root-slot.fixture.js';
 import {generateCss} from '../core/emit-react.js';
 
@@ -96,4 +99,48 @@ test('text block sizing follows a qualified grid parent to its definite containi
   const changed=fixture();mutate(changed);changed.context.gridConstraints.treeRevision=revisionOf(changed.tree);
   assert.throws(()=>reactChildContextSizing(changed.tree,changed.origin,'0.0',changed.context),/grid-constraints-unqualified/);
  }
+});
+
+test('a top-level grid root takes the child lowering only on its own fixed width; other tracks, flow, block constraints and writing modes refuse by name',async()=>{
+ const browser=await chromium.launch();
+ try{
+  const page=await browser.newPage();
+  const observe=async(css:string)=>{
+   await page.setContent(`<style>*{box-sizing:border-box}#source{display:grid;width:320px;row-gap:2px;${css}}</style><div id="stage"><div id="source"><div>Title</div><div>A description long enough to wrap onto a second line inside the fixed column.</div></div></div>`);
+   await page.evaluate(()=>{(window as unknown as {__ALL_PROPS:string[]}).__ALL_PROPS=[...getComputedStyle(document.documentElement)];});
+   const tree=await page.evaluate(captureJs('#stage',undefined,'',['#source'])) as CapturedNode;
+   // The style-origin reader needs only the component-root paths and their tags.
+   const ownership={version:1,rendererVersions:[],components:['','0','1'].map(root=>({id:'i'+root,roots:[root]})),nodes:['','0','1'].map(path=>({path,tag:'div'})),problems:[]} as unknown as ReactOwnership;
+   return {tree,origin:await readReactStyleOrigin(page,'#source',ownership),evidence:await observeGridConstraints(page,['#source'],tree)};
+  };
+  const width=(o:ReactStyleOrigin)=>o.roots[0].sizes!.find(size=>size.channel==='width');
+  const f=await observe(''),before=structuredClone(f);
+  assert.equal(f.evidence.status,'observed',f.evidence.problems.join(';'));
+  const layout=reactRootGrid(f.tree,f.origin,f.evidence,width(f.origin));
+  assert.deepEqual(layout,{display:'grid',columns:[{fr:1}],autoRows:{fit:true},flow:'row',gap:{row:2,column:0}});
+  assert.deepEqual(f,before);
+  // The same DOM and witness as a composed child of a fixed-width column: one lowering, two proofs of width.
+  const parent:CapturedNode={tag:'section',classes:[],pseudo:{},style:{...f.tree.style,display:'flex','flex-direction':'column'},nodes:[{t:'el',el:f.tree}]};
+  const auto=(channel:'width'|'height')=>({channel,status:'auto' as const,value:'auto',selectors:[]});
+  const childOrigin:ReactStyleOrigin={version:1,roots:[{path:'',tag:'section',channels:[],sizes:[width(f.origin)!,auto('height')]},
+   ...f.origin.roots.map(row=>({...row,path:row.path?'0.'+row.path:'0',...(row.path?{}:{sizes:[auto('width'),auto('height')]})}))]};
+  const childEvidence:GridConstraintEvidence={...f.evidence,treeRevision:revisionOf(parent),rows:f.evidence.rows.map(row=>({...row,path:'0'}))};
+  assert.deepEqual(reactChildContextGrid(parent,childOrigin,'0',{gridConstraints:childEvidence}),layout);
+
+  for(const css of ['grid-template-columns:1fr 1fr','grid-template-columns:120px',"grid-template-areas:'title' 'body'",'grid-auto-flow:row dense','grid-auto-flow:column',
+    'grid-template-rows:40px auto','grid-auto-rows:40px','direction:rtl','writing-mode:vertical-rl','min-height:200px','max-height:20px','height:200px','display:inline-grid','overflow:hidden']){
+   const denied=await observe(css);assert.equal(denied.evidence.status,'observed',css);
+   assert.throws(()=>reactRootGrid(denied.tree,denied.origin,denied.evidence,width(denied.origin)),/^Error: react-root-grid-constraints-unqualified$/,css);
+  }
+  for(const css of ['width:100%','width:auto','width:min(320px, 100%)']){
+   const indefinite=await observe(css);
+   assert.throws(()=>reactRootGrid(indefinite.tree,indefinite.origin,indefinite.evidence,width(indefinite.origin)),/^Error: react-root-grid-width-unqualified$/,css);
+  }
+  assert.throws(()=>reactRootGrid(f.tree,f.origin,f.evidence,undefined),/react-root-grid-width-unqualified/);
+  assert.throws(()=>reactRootGrid(f.tree,f.origin,f.evidence,{...width(f.origin)!,status:'unresolved',reason:'caller-style-input-needs-ownership-proof'}),/react-root-grid-width-unqualified/);
+  assert.throws(()=>reactRootGrid(f.tree,f.origin,{...f.evidence,status:'refused',rows:[],problems:['grid-constraints-typed-om-unavailable']},width(f.origin)),/react-root-grid-constraints-unobserved/);
+  assert.throws(()=>reactRootGrid(f.tree,f.origin,{...f.evidence,treeRevision:revisionOf('substituted tree')},width(f.origin)),/grid-constraints-evidence-changed/);
+  const block=await observe('display:block');
+  assert.equal(reactRootGrid(block.tree,block.origin,{...block.evidence},width(block.origin)),undefined,'a root that is not a grid has no grid lowering');
+ }finally{await browser.close();}
 });
