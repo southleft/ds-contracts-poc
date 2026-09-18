@@ -225,14 +225,10 @@
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
   --imported-stub-tab-2-root-background-color: #00000000;
-  --imported-stub-tab-2-root-border-color-no: #00000000;
-  --imported-stub-tab-2-root-border-color-yes: #8ea6ff;
-  --imported-stub-tab-2-root-border-width: 0px;
   --imported-stub-tab-2-root-height: 38px;
   --imported-stub-tab-panel-root-height: 136px;
   --imported-stub-tab-panel-root-width: 439px;
   --imported-tabs-al-c-tabs-header-border-color: #3c3c35;
-  --imported-tabs-al-c-tabs-header-border-width: 0px;
   --opacity-disabled: 0.5;
   --radius-100: 4px;
   --radius-200: 8px;
@@ -313,29 +309,20 @@
  * Regenerate with: npm run generate
  */
 
-._root_1cwa4_6,
-._root_1cwa4_6 *,
-._root_1cwa4_6 *::before,
-._root_1cwa4_6 *::after {
+._root_1cy4r_6,
+._root_1cy4r_6 *,
+._root_1cy4r_6 *::before,
+._root_1cy4r_6 *::after {
   box-sizing: border-box;
 }
 
-._root_1cwa4_6 {
+._root_1cy4r_6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-style: solid;
+  border: 0;
   height: var(--imported-stub-tab-2-root-height);
   background-color: var(--imported-stub-tab-2-root-background-color);
-  border-width: var(--imported-stub-tab-2-root-border-width);
-}
-
-._active-yes_1cwa4_23 {
-  border-color: var(--imported-stub-tab-2-root-border-color-yes);
-}
-
-._active-no_1cwa4_27 {
-  border-color: var(--imported-stub-tab-2-root-border-color-no);
 }
 /* GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/tab-panel.contract.json (ds.tab-panel v0.1.0)
@@ -362,14 +349,14 @@
  * Regenerate with: npm run generate
  */
 
-._root_19y6t_6,
-._root_19y6t_6 *,
-._root_19y6t_6 *::before,
-._root_19y6t_6 *::after {
+._root_13tpd_6,
+._root_13tpd_6 *,
+._root_13tpd_6 *::before,
+._root_13tpd_6 *::after {
   box-sizing: border-box;
 }
 
-._root_19y6t_6 {
+._root_13tpd_6 {
   display: flex;
   flex-direction: column;
   border: 0;
@@ -377,20 +364,24 @@
   height: fit-content;
 }
 
-._alCTabsHeader_19y6t_21 {
+._alCTabsHeader_13tpd_21 {
   display: flex;
   flex-direction: row;
   border-color: var(--imported-tabs-al-c-tabs-header-border-color);
-  border-width: var(--imported-tabs-al-c-tabs-header-border-width);
-  border-style: solid;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-right-width: 0px;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
 }
 
-._alCTabsList_19y6t_29 {
+._alCTabsList_13tpd_33 {
   display: flex;
   flex-direction: row;
 }
 
-._alCTabsBody_19y6t_34 {
+._alCTabsBody_13tpd_38 {
   display: flex;
   flex-direction: column;
 }
