@@ -270,7 +270,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "anticon-exception",
-                          "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z\" fill=\"#ff4d4f\" fill-rule=\"evenodd\"/></svg>",
+                          "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 759.4 64 960 264.6 960 512 S 759.4 960 512 960 S 64 759.4 64 512 S 264.6 64 512 64 Z M 639.98 338.82 H 639.94 L 639.86 338.88 L 512 466.75 L 384.14 338.88 C 384.1 338.83 384.08 338.82 384.06 338.82 A 0.12 0.12 0 0 0 383.99 338.82 C 383.96 338.82 383.94 338.83 383.9 338.87 L 338.88 383.89 A 0.2 0.2 0 0 0 338.83 383.98 A 0.12 0.12 0 0 0 338.83 384.05 V 384.07 A 0.27 0.27 0 0 0 338.89 384.13 L 466.75 512 L 338.88 639.86 C 338.83 639.9 338.82 639.92 338.82 639.94 A 0.12 0.12 0 0 0 338.82 640.01 C 338.82 640.04 338.83 640.06 338.87 640.1 L 383.89 685.12 A 0.2 0.2 0 0 0 383.98 685.17 A 0.12 0.12 0 0 0 384.05 685.17 C 384.07 685.17 384.09 685.16 384.13 685.12 L 512 557.25 L 639.86 685.12 C 639.9 685.16 639.92 685.17 639.94 685.17 A 0.12 0.12 0 0 0 640.01 685.17 C 640.04 685.17 640.06 685.16 640.1 685.12 L 685.12 640.1 A 0.2 0.2 0 0 0 685.17 640.01 A 0.12 0.12 0 0 0 685.17 639.94 V 639.92 A 0.27 0.27 0 0 0 685.12 639.86 L 557.25 512 L 685.12 384.14 C 685.16 384.1 685.17 384.08 685.17 384.06 A 0.12 0.12 0 0 0 685.17 383.99 C 685.17 383.96 685.16 383.94 685.12 383.9 L 640.1 338.88 A 0.2 0.2 0 0 0 640.01 338.83 A 0.12 0.12 0 0 0 639.94 338.83 Z\" fill=\"#ff4d4f\" fill-rule=\"evenodd\"/></svg>",
                           "svgPaintVar": "imported/progress/label/color/exception",
                           "iconSize": 14
                         }
@@ -528,7 +528,7 @@ const COMPONENTS = [
                         {
                           "type": "svg",
                           "name": "anticon-success",
-                          "svg": "<svg viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z\" fill=\"#52c41a\"/></svg>",
+                          "svg": "<svg height=\"14\" width=\"14\" viewBox=\"0 0 960 960\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 512 64 C 264.6 64 64 264.6 64 512 S 264.6 960 512 960 S 960 759.4 960 512 S 759.4 64 512 64 Z M 705.5 365.7 L 494.9 657.7 A 31.8 31.8 0 0 1 443.2 657.7 L 318.5 484.9 C 314.7 479.6 318.5 472.2 325 472.2 H 371.9 C 382.1 472.2 391.8 477.1 397.8 485.5 L 469 584.3 L 626.2 366.3 C 632.2 358 641.8 353 652.1 353 H 699 C 705.5 353 709.3 360.4 705.5 365.7 Z\" fill=\"#52c41a\"/></svg>",
                           "svgPaintVar": "imported/progress/label/color/success",
                           "iconSize": 14
                         }
@@ -1331,12 +1331,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -1751,7 +1758,8 @@ async function buildNode(spec, registry) {
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+      Boolean(spec.rootFillWidth || spec.fixedWidth || (spec.lits && spec.lits.width !== undefined)),
+      Boolean(spec.fixedHeight || (spec.lits && spec.lits.height !== undefined)));
   }
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
@@ -1963,7 +1971,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2031,6 +2039,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -2176,7 +2185,8 @@ async function amendSet(set, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
       report.rebuiltVariants++;
     }
@@ -2315,6 +2325,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -2400,7 +2411,8 @@ async function amendComponent(comp, C) {
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
+      Boolean(v.spec.rootFillWidth || v.spec.fixedWidth || (v.spec.lits && v.spec.lits.width !== undefined)),
+      Boolean(v.spec.fixedHeight || (v.spec.lits && v.spec.lits.height !== undefined)));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -2495,6 +2507,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -2638,6 +2664,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

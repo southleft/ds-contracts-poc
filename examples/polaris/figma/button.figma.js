@@ -126,7 +126,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -205,7 +205,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -330,7 +330,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -415,7 +415,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -494,7 +494,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -618,7 +618,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -697,7 +697,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -822,7 +822,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -907,7 +907,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -986,7 +986,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1110,7 +1110,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1189,7 +1189,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1314,7 +1314,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1399,7 +1399,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1478,7 +1478,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1602,7 +1602,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1681,7 +1681,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1806,7 +1806,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1891,7 +1891,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -1970,7 +1970,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2094,7 +2094,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2173,7 +2173,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2298,7 +2298,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2383,7 +2383,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2462,7 +2462,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2586,7 +2586,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2665,7 +2665,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2790,7 +2790,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2875,7 +2875,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -2954,7 +2954,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3078,7 +3078,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3157,7 +3157,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3282,7 +3282,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3367,7 +3367,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3446,7 +3446,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3570,7 +3570,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3649,7 +3649,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3774,7 +3774,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3859,7 +3859,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -3938,7 +3938,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4062,7 +4062,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4141,7 +4141,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4266,7 +4266,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4351,7 +4351,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4430,7 +4430,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4554,7 +4554,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4633,7 +4633,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4758,7 +4758,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4843,7 +4843,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -4922,7 +4922,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5046,7 +5046,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5125,7 +5125,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5250,7 +5250,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5335,7 +5335,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5414,7 +5414,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5538,7 +5538,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5617,7 +5617,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5742,7 +5742,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5827,7 +5827,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -5906,7 +5906,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6030,7 +6030,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6109,7 +6109,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6234,7 +6234,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6319,7 +6319,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6398,7 +6398,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6522,7 +6522,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6601,7 +6601,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6726,7 +6726,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6811,7 +6811,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -6890,7 +6890,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7014,7 +7014,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7093,7 +7093,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7218,7 +7218,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7303,7 +7303,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7382,7 +7382,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7506,7 +7506,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7585,7 +7585,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7710,7 +7710,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7795,7 +7795,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7874,7 +7874,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -7998,7 +7998,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8077,7 +8077,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8202,7 +8202,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8287,7 +8287,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8366,7 +8366,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8490,7 +8490,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8569,7 +8569,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8694,7 +8694,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8779,7 +8779,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8858,7 +8858,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -8982,7 +8982,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9061,7 +9061,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9186,7 +9186,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9271,7 +9271,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9350,7 +9350,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9474,7 +9474,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9553,7 +9553,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9678,7 +9678,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9763,7 +9763,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9842,7 +9842,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -9966,7 +9966,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10045,7 +10045,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10170,7 +10170,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10255,7 +10255,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10334,7 +10334,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10458,7 +10458,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10537,7 +10537,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10662,7 +10662,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10747,7 +10747,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10826,7 +10826,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -10950,7 +10950,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11029,7 +11029,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11154,7 +11154,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11239,7 +11239,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11318,7 +11318,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11442,7 +11442,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11521,7 +11521,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11646,7 +11646,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11731,7 +11731,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11810,7 +11810,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -11934,7 +11934,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12013,7 +12013,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12138,7 +12138,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12223,7 +12223,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12302,7 +12302,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12426,7 +12426,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12505,7 +12505,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12630,7 +12630,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12715,7 +12715,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12794,7 +12794,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12918,7 +12918,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -12997,7 +12997,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13122,7 +13122,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13207,7 +13207,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13286,7 +13286,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13410,7 +13410,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13489,7 +13489,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13614,7 +13614,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13699,7 +13699,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13778,7 +13778,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13902,7 +13902,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -13981,7 +13981,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14106,7 +14106,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14191,7 +14191,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14270,7 +14270,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14394,7 +14394,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14473,7 +14473,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14598,7 +14598,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14683,7 +14683,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14762,7 +14762,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14886,7 +14886,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -14965,7 +14965,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15090,7 +15090,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15175,7 +15175,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15254,7 +15254,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15378,7 +15378,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15457,7 +15457,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15582,7 +15582,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15667,7 +15667,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15746,7 +15746,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15870,7 +15870,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -15949,7 +15949,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16074,7 +16074,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16159,7 +16159,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16238,7 +16238,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16362,7 +16362,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16441,7 +16441,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16566,7 +16566,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16651,7 +16651,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16730,7 +16730,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16854,7 +16854,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -16933,7 +16933,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17058,7 +17058,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17143,7 +17143,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17222,7 +17222,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17346,7 +17346,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17425,7 +17425,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17550,7 +17550,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17635,7 +17635,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17714,7 +17714,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17838,7 +17838,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -17917,7 +17917,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18042,7 +18042,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18127,7 +18127,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18206,7 +18206,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18330,7 +18330,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18409,7 +18409,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18534,7 +18534,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18619,7 +18619,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18698,7 +18698,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18822,7 +18822,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -18901,7 +18901,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19026,7 +19026,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19111,7 +19111,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19190,7 +19190,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19314,7 +19314,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19393,7 +19393,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19518,7 +19518,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19603,7 +19603,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19682,7 +19682,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19806,7 +19806,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -19885,7 +19885,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20010,7 +20010,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20095,7 +20095,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20174,7 +20174,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20298,7 +20298,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20377,7 +20377,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20502,7 +20502,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20587,7 +20587,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20666,7 +20666,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20790,7 +20790,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20869,7 +20869,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -20994,7 +20994,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21079,7 +21079,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21158,7 +21158,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21282,7 +21282,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21361,7 +21361,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21486,7 +21486,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21571,7 +21571,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21650,7 +21650,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21774,7 +21774,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21853,7 +21853,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -21978,7 +21978,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22063,7 +22063,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22142,7 +22142,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22266,7 +22266,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22345,7 +22345,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22470,7 +22470,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22555,7 +22555,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22634,7 +22634,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22758,7 +22758,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22837,7 +22837,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -22962,7 +22962,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23047,7 +23047,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23126,7 +23126,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23250,7 +23250,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23329,7 +23329,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23454,7 +23454,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23539,7 +23539,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23618,7 +23618,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23742,7 +23742,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23821,7 +23821,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -23946,7 +23946,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24031,7 +24031,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24110,7 +24110,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24234,7 +24234,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24313,7 +24313,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24438,7 +24438,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24523,7 +24523,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24602,7 +24602,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24726,7 +24726,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24805,7 +24805,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -24930,7 +24930,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25015,7 +25015,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25094,7 +25094,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25218,7 +25218,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25297,7 +25297,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25422,7 +25422,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25507,7 +25507,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25586,7 +25586,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25710,7 +25710,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25789,7 +25789,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25914,7 +25914,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -25999,7 +25999,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26078,7 +26078,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26202,7 +26202,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26281,7 +26281,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26406,7 +26406,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26491,7 +26491,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26570,7 +26570,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26694,7 +26694,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26773,7 +26773,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26898,7 +26898,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -26983,7 +26983,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27062,7 +27062,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27186,7 +27186,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27265,7 +27265,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27390,7 +27390,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27475,7 +27475,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27554,7 +27554,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27678,7 +27678,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27757,7 +27757,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27882,7 +27882,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -27967,7 +27967,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28046,7 +28046,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28170,7 +28170,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28249,7 +28249,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(0, 91, 211, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28374,7 +28374,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28459,7 +28459,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28538,7 +28538,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28662,7 +28662,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28741,7 +28741,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28866,7 +28866,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -28951,7 +28951,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(142, 11, 33, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29030,7 +29030,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/critical",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29154,7 +29154,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/secondary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29233,7 +29233,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/plain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29358,7 +29358,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/primary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29443,7 +29443,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(1, 75, 64, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/tertiary/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29522,7 +29522,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color/monochromePlain/success",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29622,7 +29622,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "p/color-icon-disabled",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29701,7 +29701,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "p/color-icon-disabled",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29786,7 +29786,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "p/color-icon-disabled",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29871,7 +29871,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "p/color-icon-disabled",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -29950,7 +29950,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(204, 204, 204, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "p/color-icon-disabled",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30077,7 +30077,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-focus-visible/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30159,7 +30159,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#004299\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#004299\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-focus-visible/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30287,7 +30287,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-focus-visible/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30375,7 +30375,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-focus-visible/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30457,7 +30457,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-focus-visible/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30579,7 +30579,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#4a4a4a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#4a4a4a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/fill-state-active/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30658,7 +30658,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#002e6a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#002e6a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/fill-state-active/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30756,7 +30756,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#ffffff\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/fill-state-active/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30841,7 +30841,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#4a4a4a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#4a4a4a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/fill-state-active/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -30920,7 +30920,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/fill-state-active/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -31044,7 +31044,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-hover/secondary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -31123,7 +31123,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#004299\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#004299\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-hover/plain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -31248,7 +31248,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(255, 255, 255, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-hover/primary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -31333,7 +31333,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"rgba(48, 48, 48, 1)\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-hover/tertiary/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -31412,7 +31412,7 @@ const COMPONENTS = [
                 {
                   "type": "svg",
                   "name": "icon-2",
-                  "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
+                  "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6.25 10 A 0.75 0.75 0 0 1 7 9.25 H 9.25 V 7 A 0.75 0.75 0 0 1 10.75 7 V 9.25 H 13 A 0.75 0.75 0 0 1 13 10.75 H 10.75 V 13 A 0.75 0.75 0 0 1 9.25 13 V 10.75 H 7 A 0.75 0.75 0 0 1 6.25 10 Z\"/><path d=\"M 10 17 A 7 7 0 1 0 10 3 A 7 7 0 0 0 10 17 Z M 10 15.5 A 5.5 5.5 0 1 0 10 4.5 A 5.5 5.5 0 0 0 10 15.5 Z\" fill-rule=\"evenodd\"/></svg>",
                   "svgPaintVar": "imported/button/root/color-state-hover/monochromePlain/none",
                   "iconSize": 20,
                   "visibleProp": "Show WithIcon",
@@ -33021,12 +33021,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -33624,7 +33631,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -33692,6 +33699,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -33953,6 +33961,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -34109,6 +34118,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -34252,6 +34275,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

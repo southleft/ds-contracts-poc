@@ -14,10 +14,19 @@ import {
   matchLitRender,
   type LitRenderGuard,
   type LitRenderNode,
+  type LitRenderInput,
+  type LitRenderText,
 } from "./lit-render-match.js";
-import type { TopologyNode } from "./topology.js";
+import {
+  topologyPseudoProblems,
+  type TopologyNode,
+  type TopologyPseudoPlane,
+} from "./topology.js";
 
 export interface SourceBoundAnatomyInput {
+  /** Explicit richer projection. Legacy consumers must not interpret v2 as v1. */
+  version?: 2;
+  staticRender?: LitRenderInput["staticRender"];
   /** Supplied independently by the authenticated host's fixed case manifest. */
   expectedCaseId: string;
   sourceProgramSha256: string;
@@ -75,9 +84,13 @@ export interface SourceSlotSample {
    * promoted into a main component asset or newly inferred code default. */
   element?: CapturedNode;
   text?: string;
+  /** v2: exact authored text and custom-host boundaries inside this sample.
+   * A tag alone is not a qualified imported component identity. */
+  sourceTexts?: LitRenderText[];
+  nestedHosts?: LitRenderNode[];
 }
 export interface SourceBoundAnatomy {
-  version: 1;
+  version: 1 | 2;
   status: "structural-projection" | "refused";
   acceptedContract: null;
   caseId: string;
@@ -92,6 +105,9 @@ export interface SourceBoundAnatomy {
   slots: SourceSlotBoundary[];
   samples: SourceSlotSample[];
   guards: LitRenderGuard[];
+  /** v2 planes retain their actual element owner; no fake DOM node is added. */
+  pseudoPlanes?: Array<TopologyPseudoPlane & { owner: SourceAnatomyIdentity }>;
+  sourceTexts?: LitRenderText[];
   problems: string[];
   limitations: string[];
 }
@@ -137,7 +153,7 @@ export function projectSourceBoundAnatomy(
   input: SourceBoundAnatomyInput,
 ): SourceBoundAnatomy {
   const result: SourceBoundAnatomy = {
-    version: 1,
+    version: input?.version === 2 ? 2 : 1,
     status: "refused",
     acceptedContract: null,
     caseId:
@@ -168,6 +184,13 @@ export function projectSourceBoundAnatomy(
   };
   try {
     if (
+      (input.version !== undefined && input.version !== 2) ||
+      (input.version === 2
+        ? !input.staticRender
+        : input.staticRender !== undefined)
+    )
+      fail("projection-version-invalid");
+    if (
       !object(input) ||
       !input.expectedCaseId ||
       !hash.test(input.sourceProgramSha256) ||
@@ -187,6 +210,7 @@ export function projectSourceBoundAnatomy(
       source: input.source,
       semantics: input.semantics,
       boundTopology: input.boundTopology,
+      ...(input.version === 2 ? { staticRender: input.staticRender } : {}),
     });
     if (
       match.status !== "structure-matched" ||
@@ -200,6 +224,8 @@ export function projectSourceBoundAnatomy(
     )
       fail("case-correspondence-mismatch");
     const topology = input.boundTopology.topology!.observation!;
+    if (input.version === 2 && topologyPseudoProblems(topology).length)
+      fail("pseudo-ownership-invalid");
     const rootMatch = match.nodes.filter(
       (node) => node.domPath === topology.rootDomPath,
     );
@@ -236,7 +262,7 @@ export function projectSourceBoundAnatomy(
         !strings(node.classes) ||
         !stringMap(node.style) ||
         !object(node.pseudo) ||
-        Object.keys(node.pseudo).length ||
+        (input.version !== 2 && Object.keys(node.pseudo).length) ||
         !Array.isArray(node.nodes) ||
         "closedShadowRootSuspect" in node
       )
@@ -248,6 +274,20 @@ export function projectSourceBoundAnatomy(
         flatPath,
         element: node,
       });
+      if (input.version === 2) {
+        const planes =
+          topology.pseudoPlanes?.filter(
+            (plane) => plane.ownerVisualPath === pointer,
+          ) ?? [];
+        if (
+          !same(
+            Object.keys(node.pseudo).sort(),
+            planes.map((plane) => plane.pseudo).sort(),
+          ) ||
+          planes.some((plane) => !same(node.pseudo[plane.pseudo], plane.style))
+        )
+          fail("pseudo-style-or-census-mismatch");
+      }
       let elementIndex = 0;
       node.nodes.forEach((child, index) => {
         const childPath = `${pointer}/nodes/${index}`;
@@ -470,6 +510,20 @@ export function projectSourceBoundAnatomy(
           sourceNodes: terminalDescendants
             .filter((node) => below(node.domPath, domPath))
             .map(identity),
+          ...(input.version === 2
+            ? {
+                sourceTexts: (match.texts ?? [])
+                  .filter((text) => below(text.domPath, domPath))
+                  .map((text) => structuredClone(text)),
+                nestedHosts: terminalDescendants
+                  .filter(
+                    (source) =>
+                      below(source.domPath, domPath) &&
+                      source.tag.includes("-"),
+                  )
+                  .map((source) => structuredClone(source)),
+              }
+            : {}),
           ...(raw
             ? {
                 visualPath: raw.pointer,
@@ -528,7 +582,17 @@ export function projectSourceBoundAnatomy(
           if (!parent || parentDom(mapped.domPath) !== parent.domPath)
             fail("owned-parent-mismatch");
         }
-      } else if (!/^[\t\n\f\r ]*$/.test(raw.text!)) fail("owned-text-unproven");
+      } else if (!/^[\t\n\f\r ]*$/.test(raw.text!)) {
+        const sourceText =
+          input.version === 2
+            ? (match.texts ?? []).filter(
+                (text) =>
+                  text.domPath === node.domPath && text.visualPath === pointer,
+              )
+            : [];
+        if (sourceText.length !== 1 || sourceText[0].value !== raw.text)
+          fail("owned-text-unproven");
+      }
     }
     const elements: SourceOwnedElement[] = [];
     function prune(pointer: string, projectionFlatPath: string): CapturedNode {
@@ -564,6 +628,27 @@ export function projectSourceBoundAnatomy(
       return copy;
     }
     const root = prune("", "");
+    // Finish all potentially refusing checks before publishing a projection.
+    let pseudoPlanes: SourceBoundAnatomy["pseudoPlanes"];
+    if (input.version === 2) {
+      pseudoPlanes = (topology.pseudoPlanes ?? []).map((plane) => {
+        const owner = match.nodes.find(
+          (node) =>
+            node.domPath === plane.ownerDomPath &&
+            node.visualPath === plane.ownerVisualPath,
+        );
+        // Nested implementation internals need their own source correspondence;
+        // do not adopt them merely because the enclosing custom host is known.
+        if (!owner) fail("pseudo-source-owner-unmapped");
+        return { ...structuredClone(plane), owner: identity(owner) };
+      });
+      result.limitations = result.limitations.filter(
+        (text) => !text.includes("static non-whitespace text refuses"),
+      );
+      result.limitations.push(
+        "Version 2 preserves source-correspondent text, pseudo planes and nested fallback-host boundaries. Pseudo planes are not DOM elements. Nested hosts require qualified component dependencies before target lowering; a matching tag is not that proof.",
+      );
+    }
     Object.assign(result, {
       status: "structural-projection",
       root,
@@ -573,6 +658,9 @@ export function projectSourceBoundAnatomy(
       slots,
       samples,
       guards: structuredClone(match.guards),
+      ...(input.version === 2
+        ? { pseudoPlanes, sourceTexts: structuredClone(match.texts ?? []) }
+        : {}),
     });
     if (samples.some((sample) => sample.distribution === "fallback"))
       result.limitations.push(

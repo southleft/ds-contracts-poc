@@ -278,6 +278,43 @@
                 "properties": {
                   "prop": {
                     "type": "string"
+                  },
+                  "initial": {
+                    "type": "object",
+                    "properties": {
+                      "prop": {
+                        "type": "string"
+                      },
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "prop"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "values": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
                   }
                 },
                 "required": [
@@ -322,6 +359,10 @@
                   "prop": {
                     "type": "string",
                     "pattern": "^on[A-Z][a-zA-Z0-9]*$"
+                  },
+                  "argument": {
+                    "type": "string",
+                    "const": "next-value"
                   }
                 },
                 "required": [
@@ -781,6 +822,49 @@
                   }
                 ]
               }
+            },
+            "autoRows": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "px": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    }
+                  },
+                  "required": [
+                    "px"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "fr": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    }
+                  },
+                  "required": [
+                    "fr"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "fit": {
+                      "type": "boolean",
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "fit"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
             },
             "gap": {
               "type": "object",
@@ -1503,6 +1587,15 @@
                     "additionalProperties": false
                   }
                 ]
+              }
+            },
+            "initialProps": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
               }
             },
             "text": {

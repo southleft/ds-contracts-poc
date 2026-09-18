@@ -14,7 +14,8 @@ import { mapRestToDump } from '../extract/figma/rest/map.js';
 import { emitReact } from './emit-react.js';
 import { emitReactInline } from './emit-react-inline.js';
 import { tokenInventoryFromJson } from './tokens.js';
-import { generatedTypeErrors } from './react-test-runtime.js';
+import { generatedTypeErrors, mountGenerated } from './react-test-runtime.js';
+import { chromium } from 'playwright-core';
 
 const primitives = {
   blue: { $type: 'color', $value: '#0055ff' },
@@ -47,6 +48,95 @@ const seed = (): Contract => ContractSchema.parse({
   bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'check/omitted', export: 'OmittedButton' } } },
 });
 const compile = (c: Contract) => engine.compileComponentData(c, new Map([[c.id, c]]));
+
+function booleanSeed(): Contract {
+  const c = seed();
+  c.props = [PropSchema.parse({ name: 'checked', type: 'boolean', bindings: {
+    code: { prop: 'isChecked' }, figma: { kind: 'VARIANT', property: 'Checked',
+      unsetValue: '(unset)', values: { false: 'Off', true: 'On' } },
+  } })];
+  c.anatomy.root.tokensByProp = [{ prop: 'checked', map: {
+    false: { 'background-color': '{gray}' }, true: { 'background-color': '{red}' },
+  } }];
+  return ContractSchema.parse(c);
+}
+
+test('optional boolean has three native planes and round-trips its typed API without inventing false', async () => {
+  const c = booleanSeed(), compiled = compile(c);
+  assert.deepEqual(compiled.variants.map(v => [v.name, v.spec.fill]), [
+    ['Checked=(unset)', 'blue'], ['Checked=Off', 'gray'], ['Checked=On', 'red'],
+  ]);
+  assert.equal(compiled.unsetVariantAxes!.version, 2);
+  assert.equal(compiled.unsetVariantAxes!.axes[0].valueType, 'boolean');
+  const live = await roundTrip(c), back = ContractSchema.parse(propose(live.set).contract);
+  assert.equal(back.props[0].type, 'boolean');
+  assert.equal(back.props[0].bindings.code.prop, 'isChecked');
+  assert.equal(Object.hasOwn(back.props[0], 'default'), false);
+  assert.deepEqual(compile(back).variants.map(v => [v.name, v.spec.fill]), compiled.variants.map(v => [v.name, v.spec.fill]));
+  const browser = await chromium.launch();
+  try {
+    for (const inline of [false, true]) {
+      const output = inline ? { ...emitReactInline(back, { tokens, contracts: new Map([[back.id, back]]), icons: new Map() }), css: '' }
+        : emitReact(back, { tokens: tokenInventoryFromJson([primitives]), contracts: new Map([[back.id, back]]), icons: new Map() });
+      assert.deepEqual(generatedTypeErrors(back.name, output.tsx), []);
+      const page = await browser.newPage();
+      try {
+        const render = await mountGenerated(page, back.name, output.tsx,
+          ':root { --blue: #0055ff; --gray: #889999; --red: #ee0011; --gap8: 8px; --gap16: 16px; }\n' + output.css);
+        for (const [props, paint] of [[{}, 'rgb(0, 85, 255)'], [{ isChecked: false }, 'rgb(136, 153, 153)'], [{ isChecked: true }, 'rgb(238, 0, 17)'], [{}, 'rgb(0, 85, 255)']] as const) {
+          await render(props);
+          assert.equal(await page.locator('#root > :first-child').evaluate(el => getComputedStyle(el).backgroundColor), paint);
+        }
+      } finally { await page.close(); }
+    }
+  } finally { await browser.close(); }
+  const original = JSON.stringify(live.set);
+  await live.run(live.script);
+  assert.equal(JSON.stringify(await live.dump()), original, 'repeat has identical nodes, properties and dump');
+});
+
+test('mixed omitted axes retain explicit types and reject in-place boolean retirement', async () => {
+  const c = booleanSeed();
+  c.props.push(PropSchema.parse(prop()));
+  const live = await roundTrip(c), data = compile(c);
+  assert.equal(data.variants.length, 15);
+  assert.deepEqual(data.unsetVariantAxes!.axes.map(a => a.valueType), ['boolean', 'enum']);
+  const back = ContractSchema.parse(propose(live.set).contract);
+  assert.equal(back.props.find(p => p.name === 'checked')!.type, 'boolean');
+  assert.deepEqual(back.props.find(p => p.name === 'variant')!.type, c.props[1].type);
+  assert.deepEqual(compile(back).variants.map(v => v.name), data.variants.map(v => v.name));
+  const missing = structuredClone(live.set) as any;
+  delete missing.unsetVariantAxes.axes[1].valueType;
+  refusal(() => propose(missing));
+  const retyped = structuredClone(c);
+  retyped.props[0].type = { enum: ['false', 'true'] };
+  await assert.rejects(live.run(engine.buildComponentScript(retyped, new Map([[retyped.id, retyped]]))), /FIGMA_UNSET_RETIREMENT_REFUSED/);
+  assert.deepEqual(await live.dump(), live.set, 'type migration refusal preserves the existing canvas');
+});
+
+test('boolean omission metadata refuses invented types, missing planes and ambiguous public values', async () => {
+  const c = booleanSeed(), live = await roundTrip(c);
+  for (const mutate of [
+    (s: any) => { s.unsetVariantAxes.version = 1; },
+    (s: any) => { delete s.unsetVariantAxes.axes[0].valueType; },
+    (s: any) => { s.unsetVariantAxes.axes[0].valueType = 'text'; },
+    (s: any) => { s.unsetVariantAxes.axes[0].values[0].value = false; },
+    (s: any) => { s.unsetVariantAxes.axes[0].values.pop(); },
+    (s: any) => { s.variants = s.variants.filter((v: any) => v.variantProperties.Checked !== 'Off'); },
+  ]) {
+    const changed = structuredClone(live.set); mutate(changed);
+    refusal(() => propose(changed));
+  }
+  for (const mutate of [
+    (p: any) => { p.default = false; }, (p: any) => { p.required = true; },
+    (p: any) => { p.bindings.figma.kind = 'BOOLEAN'; },
+    (p: any) => { p.bindings.figma.values.other = 'Other'; },
+    (p: any) => { p.bindings.figma.unsetValue = 'Off'; },
+  ]) {
+    const p = structuredClone(c.props[0]); mutate(p);
+    assert.equal(PropSchema.safeParse(p).success, false);
+  }
+});
 
 async function roundTrip(c: Contract) {
   const { figma, root } = createFigmaMock();

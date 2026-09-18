@@ -25,7 +25,7 @@ export interface RuntimeFileDigest {
 }
 export interface RuntimeInputManifest {
   version: 1;
-  adapter: "altitude-button-v1";
+  adapter: "altitude-button-v1" | "altitude-checkbox-v1";
   sourceRevision: string;
   files: Array<
     RuntimeFileDigest & { kind: "source" | "dependency" | "config-discovery" }
@@ -36,7 +36,7 @@ export interface RuntimeInputManifest {
     version: string;
     dependencies: Array<{ name: string; path: string | null }>;
   }>;
-  tools: { vite: string; sass: string; typescript: string };
+  tools: { vite: string; sass: string; typescript: string; nodeTypes?: string };
   inputRevision: string;
 }
 export interface RuntimeProperty {
@@ -106,6 +106,20 @@ export interface PrepareAltitudeRuntimeRequest {
   sourceApproval: RuntimeSourceApproval;
   /** Existing, private, host-owned directory. Never the source checkout. */
   outputRoot: string;
+}
+
+export type AltitudeRuntimeComponent = "button" | "checkbox";
+function runtimeTarget(component: AltitudeRuntimeComponent) {
+  if (component !== "button" && component !== "checkbox")
+    refusal("component-unsupported");
+  return {
+    component,
+    className: component === "button" ? "ALButton" : "ALCheckbox",
+    tagName: `al-${component}`,
+    modulePath: `components/${component}/${component}.ts`,
+    declarationPath: `components/${component}/${component}.d.ts`,
+    adapter: `altitude-${component}-v1` as const,
+  };
 }
 
 const LIBRARY = "libs/al-web-components";
@@ -199,6 +213,13 @@ function packageRoot(
 export function inspectAltitudeButtonRuntimeInputs(
   checkoutPath: string,
 ): RuntimeInputManifest {
+  return inspectAltitudeRuntimeInputs(checkoutPath, "button");
+}
+export function inspectAltitudeRuntimeInputs(
+  checkoutPath: string,
+  component: AltitudeRuntimeComponent,
+): RuntimeInputManifest {
+  const target = runtimeTarget(component);
   const checkout = canonicalDirectory(checkoutPath);
   const git = (...args: string[]) =>
     execFileSync("git", ["-C", checkout, ...args], {
@@ -282,10 +303,29 @@ export function inspectAltitudeButtonRuntimeInputs(
   if (!object(lock) || !object(lock.packages)) refusal("lock-invalid");
   const packages: RuntimeInputManifest["packages"] = [];
   const roots = new Map<string, string>();
-  for (const name of ["vite", "sass", "typescript", "lit", "lit-html"]) {
+  for (const name of [
+    "vite",
+    "sass",
+    "typescript",
+    "lit",
+    "lit-html",
+    ...(component === "checkbox" ? ["nanoid"] : []),
+  ]) {
     const found = packageRoot(checkout, path.join(checkout, LIBRARY), name);
     if (!found) refusal("dependency-missing");
     roots.set(name, found!);
+  }
+  // The source registry uses process.env. Restrict ambient types to Vite's
+  // lock-verified Node types; their buffer import can resolve a real package.
+  const nodeTypes =
+    component === "checkbox"
+      ? packageRoot(checkout, roots.get("vite")!, "@types/node")
+      : null;
+  if (component === "checkbox") {
+    if (!nodeTypes) refusal("node-types-unrecorded");
+    roots.set("nodeTypes", nodeTypes!);
+    const bufferTypes = packageRoot(checkout, nodeTypes!, "buffer");
+    if (bufferTypes) roots.set("bufferTypes", bufferTypes);
   }
   const queue = [...roots.values()],
     seen = new Set<string>();
@@ -358,7 +398,7 @@ export function inspectAltitudeButtonRuntimeInputs(
   }
   const body: Omit<RuntimeInputManifest, "inputRevision"> = {
     version: 1,
-    adapter: "altitude-button-v1",
+    adapter: target.adapter,
     sourceRevision: revision,
     files: files.sort((a, b) => a.path.localeCompare(b.path)),
     packages: packages.sort((a, b) => a.path.localeCompare(b.path)),
@@ -366,15 +406,28 @@ export function inspectAltitudeButtonRuntimeInputs(
       vite: path.relative(checkout, roots.get("vite")!),
       sass: path.relative(checkout, roots.get("sass")!),
       typescript: path.relative(checkout, roots.get("typescript")!),
+      ...(nodeTypes ? { nodeTypes: path.relative(checkout, nodeTypes) } : {}),
     },
   };
   return { ...body, inputRevision: sha(encode(body)) };
 }
 
+/** Trusted package code, kept separate so collision refusal is tested without
+ * needing the private source checkout. Uses the source constructor and version. */
+export const ALTITUDE_CHECKBOX_REGISTRATION_GUARD = String.raw`
+const suffix = PackageJson.version.replace(/[\W_]/g, "-");
+const childTag = ALFieldNote.el + (suffix ? "-" + suffix : "");
+const existing = customElements.get(childTag);
+if (existing && existing !== ALFieldNote) throw new Error("RUNTIME-ARTIFACT-NESTED-REGISTRY-COLLISION");
+if (!existing) customElements.define(childTag, ALFieldNote);
+`;
+
 // Executed in a fresh process only AFTER the entire local input inventory has
 // been approved. No source build script, env file, install, network fetch, cache
 // write, public asset copy or default output directory is invoked.
-const BUILD_RECIPE = String.raw`
+function buildRecipe(component: AltitudeRuntimeComponent) {
+  const target = runtimeTarget(component);
+  return String.raw`
 import assert from 'node:assert/strict';
 import {readFileSync,realpathSync} from 'node:fs';
 import path from 'node:path';
@@ -389,31 +442,31 @@ const warnings=[],logger={hasWarned:false,info(){},clearScreen(){},hasErrorLogge
 const entry='runtime-original-entry',guard='runtime-registration-guard';
 const guardPlugin={name:'trusted-original-runtime-guard',resolveId(id){if([entry,guard].includes(id))return String.fromCharCode(0)+id},load(id){
  if(id===String.fromCharCode(0)+guard)return 'export const admitted = (() => { if (globalThis.alAutoRegistry === true) throw new Error("RUNTIME-ARTIFACT-AUTO-REGISTRY-REFUSED"); return true; })();';
- if(id===String.fromCharCode(0)+entry)return 'import {admitted} from '+JSON.stringify(guard)+'; import {ALButton} from '+JSON.stringify(path.join(lib,'components/button/button.ts'))+'; if (!admitted) throw new Error("RUNTIME-ARTIFACT-IMPORT-REFUSED"); export {ALButton};';
+${component === "button" ? String.raw` if(id===String.fromCharCode(0)+entry)return 'import {admitted} from '+JSON.stringify(guard)+'; import {${target.className}} from '+JSON.stringify(path.join(lib,'components/${component}/${component}.ts'))+'; if (!admitted) throw new Error("RUNTIME-ARTIFACT-IMPORT-REFUSED"); export {${target.className}};';` : String.raw` if(id===String.fromCharCode(0)+entry)return 'import {admitted} from '+JSON.stringify(guard)+'; import {ALCheckbox} from '+JSON.stringify(path.join(lib,'components/checkbox/checkbox.ts'))+'; import {ALFieldNote} from '+JSON.stringify(path.join(lib,'components/field-note/field-note.ts'))+'; import PackageJson from '+JSON.stringify(path.join(lib,'package.json'))+'; if (!admitted) throw new Error("RUNTIME-ARTIFACT-IMPORT-REFUSED"); ' + ${JSON.stringify(ALTITUDE_CHECKBOX_REGISTRATION_GUARD)} + ' export {ALCheckbox};';`}
 }};
 const options={...config,configFile:false,envFile:false,root:lib,mode:'production',customLogger:logger,
  plugins:[...config.plugins,guardPlugin],
  css:{...config.css,postcss:{plugins:[]}},
  resolve:{conditions:['browser','module','production'],mainFields:['browser','module','jsnext:main','jsnext']},
  build:{...config.build,write:false,emptyOutDir:false,copyPublicDir:false,sourcemap:false,
- rollupOptions:{...config.build.rollupOptions,external:[],input:{button:entry,theme:path.join(lib,'styles/theme.ts')}}}};
+ rollupOptions:{...config.build.rollupOptions,external:[],input:{${component}:entry,theme:path.join(lib,'styles/theme.ts')}}}};
 const rows=result=>(Array.isArray(result)?result.flatMap(x=>x.output):result.output).map(x=>({path:x.fileName,body:Buffer.from(x.code??x.source).toString('base64'),kind:x.type==='chunk'?'module':'stylesheet',imports:x.type==='chunk'?[...x.imports,...x.dynamicImports]:[],exports:x.type==='chunk'?x.exports:[],modules:x.type==='chunk'?Object.keys(x.modules).filter(p=>p.charCodeAt(0)!==0).map(p=>realpathSync(p.split('?')[0])):[]})).sort((a,b)=>a.path.localeCompare(b.path));
 const outputs=rows(await vite.build(options));assert.deepEqual(rows(await vite.build(options)),outputs);assert.deepEqual(warnings,[]);
 const stylePaths=new Set();
-for(const file of ['components/button/button.scss','styles/shadow-utilities.scss','styles/main.scss']){
+for(const file of ['components/${component}/${component}.scss',${component === "checkbox" ? "'components/field-note/field-note.scss'," : ""}'styles/shadow-utilities.scss','styles/main.scss']){
  const result=sass.compile(path.join(lib,file),{logger:{warn(){}}});
  for(const url of result.loadedUrls){assert.equal(url.protocol,'file:');stylePaths.add(realpathSync(fileURLToPath(url)))}
 }
 const raw=ts.readConfigFile(path.join(lib,'tsconfig.json'),ts.sys.readFile);assert.equal(raw.error,undefined);
 const parsed=ts.parseJsonConfigFileContent(raw.config,ts.sys,lib);assert.equal(parsed.errors.length,0);
-const compilerOptions={...parsed.options,moduleResolution:ts.ModuleResolutionKind.Bundler,types:[],declaration:true,declarationMap:false,emitDeclarationOnly:true,noEmitOnError:true};
+const compilerOptions={...parsed.options,moduleResolution:ts.ModuleResolutionKind.Bundler,types:${component === "button" ? "[]" : "['node'],typeRoots:[path.dirname(path.join(root,input.tools.nodeTypes))]"},declaration:true,declarationMap:false,emitDeclarationOnly:true,noEmitOnError:true};
 const host=ts.createCompilerHost(compilerOptions),declarations=[];
 host.writeFile=(file,text)=>{const relative=path.relative(path.join(lib,'dist'),file);assert.ok(!relative.startsWith('..')&&!path.isAbsolute(relative));declarations.push({path:relative,body:Buffer.from(text).toString('base64'),kind:'declaration'})};
-const program=ts.createProgram(['components/button/button.ts','global.d.ts'].map(file=>path.join(lib,file)),compilerOptions,host);
+const program=ts.createProgram(['components/${component}/${component}.ts','global.d.ts'].map(file=>path.join(lib,file)),compilerOptions,host);
 assert.deepEqual(ts.getPreEmitDiagnostics(program).map(d=>ts.flattenDiagnosticMessageText(d.messageText,'\n')),[]);
-assert.equal(program.emit().emitSkipped,false);
+${component === "button" ? "assert.equal(program.emit().emitSkipped,false);" : "// JSON inputs have no declaration output; TypeScript marks their declaration-only emit skipped. Every actual TS implementation must emit with zero diagnostics.\nfor(const file of program.getSourceFiles().filter(file=>!file.isDeclarationFile&&!ts.isJsonSourceFile(file))){const emitted=program.emit(file);assert.deepEqual(emitted.diagnostics.map(d=>ts.flattenDiagnosticMessageText(d.messageText,'\\n')),[]);assert.equal(emitted.emitSkipped,false);}"}
 const checker=program.getTypeChecker(),properties=[];
-for(const [file,className] of [['components/button/button.ts','ALButton'],['components/ALElement.ts','ALElement']]){
+for(const [file,className] of [['components/${component}/${component}.ts','${target.className}'],['components/ALElement.ts','ALElement']]){
  const sf=program.getSourceFile(path.join(lib,file));assert.ok(sf);
  const cls=sf.statements.find(node=>ts.isClassDeclaration(node)&&node.name?.text===className);assert.ok(cls);
  const declared=declarations.find(row=>row.path===file.replace(/\.ts$/,'.d.ts'));assert.ok(declared);
@@ -436,6 +489,8 @@ for(const [file,className] of [['components/button/button.ts','ALButton'],['comp
 const consumed=[...new Set([...outputs.flatMap(row=>row.modules),...program.getSourceFiles().map(file=>realpathSync(file.fileName))])].sort();
 console.log(JSON.stringify({outputs:outputs.map(({modules,...row})=>row),declarations,consumed,styles:[...stylePaths].sort(),properties,versions:{vite:vite.version,typescript:ts.version}}));
 `;
+}
+const BUILD_RECIPE = buildRecipe("button");
 
 interface BuildOutput {
   outputs: Array<{
@@ -455,11 +510,14 @@ interface BuildOutput {
 function validateApproval(
   request: PrepareAltitudeRuntimeRequest,
   checkout: string,
+  component: AltitudeRuntimeComponent = "button",
 ) {
+  const target = runtimeTarget(component);
   const expected = request.expectedInputManifest,
     approval = request.sourceApproval;
   if (
     !expected ||
+    expected.adapter !== target.adapter ||
     !approval ||
     approval.kind !== "local-source-build" ||
     approval.checkout !== checkout ||
@@ -488,7 +546,8 @@ function validateApproval(
   )
     refusal("baseline-invalid");
   const rows = baseline.rows.filter(
-    (row: unknown) => object(row) && row.story === "atoms-button--default",
+    (row: unknown) =>
+      object(row) && row.story === `atoms-${component}--default`,
   );
   if (rows.length !== 1 || rows[0].qualified !== true)
     refusal("baseline-original-refused");
@@ -505,8 +564,9 @@ function validateApproval(
     refusal("baseline-images-invalid");
   for (const name of ["source", "replay"]) {
     if (
-      sha(regularRead(baselineRoot, `atoms-button--default/${name}.png`)) !==
-      row.source.sha256
+      sha(
+        regularRead(baselineRoot, `atoms-${component}--default/${name}.png`),
+      ) !== row.source.sha256
     )
       refusal("baseline-image-changed");
   }
@@ -524,9 +584,17 @@ function validateApproval(
 /** Read-only identity of the fixed trusted recipe, not source execution or an
  * authorization token. Used when reopening an application-owned preparation. */
 export function altitudeButtonRuntimeRecipeIdentity() {
+  return altitudeRuntimeRecipeIdentity("button");
+}
+export function altitudeRuntimeRecipeIdentity(
+  component: AltitudeRuntimeComponent,
+) {
   return {
-    version: "altitude-vite-memory-v1",
-    sha256: sha(BUILD_RECIPE),
+    version:
+      component === "button"
+        ? "altitude-vite-memory-v1"
+        : "altitude-checkbox-vite-memory-v1",
+    sha256: sha(component === "button" ? BUILD_RECIPE : buildRecipe(component)),
     conditions: ["browser", "module", "production"],
   };
 }
@@ -536,9 +604,17 @@ export function altitudeButtonRuntimeRecipeIdentity() {
 export function prepareAltitudeButtonRuntime(
   request: PrepareAltitudeRuntimeRequest,
 ): VerifiedRuntimeArtifact {
+  return prepareAltitudeRuntime(request, "button");
+}
+export function prepareAltitudeRuntime(
+  request: PrepareAltitudeRuntimeRequest,
+  component: AltitudeRuntimeComponent,
+): VerifiedRuntimeArtifact {
+  const target = runtimeTarget(component);
+  const recipe = altitudeRuntimeRecipeIdentity(component);
   const checkout = canonicalDirectory(request.checkout);
-  validateApproval(request, checkout);
-  const before = inspectAltitudeButtonRuntimeInputs(checkout);
+  validateApproval(request, checkout, component);
+  const before = inspectAltitudeRuntimeInputs(checkout, component);
   if (encode(before) !== encode(request.expectedInputManifest))
     refusal("inputs-changed");
   const outputRoot = canonicalDirectory(request.outputRoot);
@@ -547,7 +623,11 @@ export function prepareAltitudeButtonRuntime(
   const build = JSON.parse(
     execFileSync(
       process.execPath,
-      ["--input-type=module", "--eval", BUILD_RECIPE],
+      [
+        "--input-type=module",
+        "--eval",
+        component === "button" ? BUILD_RECIPE : buildRecipe(component),
+      ],
       {
         cwd: checkout,
         input: encode({ checkout, tools: before.tools }),
@@ -562,9 +642,11 @@ export function prepareAltitudeButtonRuntime(
       },
     ),
   ) as BuildOutput;
-  if (encode(inspectAltitudeButtonRuntimeInputs(checkout)) !== encode(before))
+  if (
+    encode(inspectAltitudeRuntimeInputs(checkout, component)) !== encode(before)
+  )
     refusal("inputs-changed-during-build");
-  validateApproval(request, checkout);
+  validateApproval(request, checkout, component);
   const known = new Map(before.files.map((file) => [file.path, file]));
   const consumed = (paths: string[]) =>
     paths
@@ -609,9 +691,9 @@ export function prepareAltitudeButtonRuntime(
       if (!files.has(imported)) refusal("external-runtime-dependency");
     }
   const entry = build.outputs.filter((output) =>
-    output.exports.includes("ALButton"),
+    output.exports.includes(target.className),
   );
-  if (entry.length !== 1 || !files.has("components/button/button.d.ts"))
+  if (entry.length !== 1 || !files.has(target.declarationPath))
     refusal("entry-missing");
   const rawCem = JSON.parse(
     regularRead(checkout, `${LIBRARY}/custom-elements.json`).toString(),
@@ -621,21 +703,20 @@ export function prepareAltitudeButtonRuntime(
   const cem = readCemDeclarations({
     ...rawCem,
     modules: rawCem.modules.filter(
-      (module: unknown) =>
-        object(module) && module.path === "components/button/button.ts",
+      (module: unknown) => object(module) && module.path === target.modulePath,
     ),
   });
   if (cem.problems.length) refusal("cem-declaration-invalid");
   const declarations = cem.declarations.filter((declaration) =>
-    ["ALButton", "ALElement"].includes(declaration.className),
+    [target.className, "ALElement"].includes(declaration.className),
   );
-  const button = declarations.filter(
-    (declaration) => declaration.className === "ALButton",
+  const rootDeclarations = declarations.filter(
+    (declaration) => declaration.className === target.className,
   );
   if (
-    button.length !== 1 ||
-    button[0].modulePath !== "components/button/button.ts" ||
-    button[0].tagName !== "al-button"
+    rootDeclarations.length !== 1 ||
+    rootDeclarations[0].modulePath !== target.modulePath ||
+    rootDeclarations[0].tagName !== target.tagName
   )
     refusal("cem-identity-invalid");
   // Derived-class members precede base members in the compiler inventory.
@@ -650,18 +731,18 @@ export function prepareAltitudeButtonRuntime(
   ].sort((a, b) => a.name.localeCompare(b.name));
   const iface: RuntimeArtifactInterface = {
     version: 1,
-    module: { path: entry[0].path, exportName: "ALButton" },
+    module: { path: entry[0].path, exportName: target.className },
     declaration: {
-      path: "components/button/button.d.ts",
-      exportName: "ALButton",
+      path: target.declarationPath,
+      exportName: target.className,
     },
-    tagBase: button[0].tagName,
+    tagBase: rootDeclarations[0].tagName,
     writableProperties: properties
       .filter((property) => property.writable)
       .map((property) => property.name),
     properties,
-    slots: button[0].slots,
-    events: button[0].events,
+    slots: rootDeclarations[0].slots,
+    events: rootDeclarations[0].events,
     originalDeclarations: declarations,
     typeDependencies: before.packages
       .filter(
@@ -690,10 +771,10 @@ export function prepareAltitudeButtonRuntime(
       baselineSha256: request.sourceApproval.baseline.sha256,
     },
     recipe: {
-      version: altitudeButtonRuntimeRecipeIdentity().version,
-      sha256: altitudeButtonRuntimeRecipeIdentity().sha256,
+      version: recipe.version,
+      sha256: recipe.sha256,
       node: process.version,
-      conditions: altitudeButtonRuntimeRecipeIdentity().conditions,
+      conditions: recipe.conditions,
       repeatedBuildIdentical: true,
     },
     interface: iface,
@@ -706,6 +787,12 @@ export function prepareAltitudeButtonRuntime(
       "Private original runtime artifact, not accepted contract, source fidelity, Figma qualification or redistribution permission.",
       "React 19 direct custom-element mounting is required. Existing @lit/react wrapper initialization is not substituted.",
       "A used first-dependency guard refuses alAutoRegistry=true before original class evaluation; original source is unmodified. Consumer registration must also refuse constructor/tag collisions.",
+      ...(component === "checkbox"
+        ? [
+            "Before export, the Checkbox package reserves the original versioned FieldNote tag with its original constructor and refuses a different existing constructor. Keep alAutoRegistry unset or false for the lifetime of this package; changing that global after import is unsupported.",
+            "Checkbox declaration emission requires the recorded Node ambient types with restricted type roots. JSON inputs remain recorded but have no declaration output; every TypeScript implementation must emit without diagnostics.",
+          ]
+        : []),
       "Fresh original declarations use Bundler module resolution against pinned package exports, not the source config's legacy Node resolution; no declaration strings are rewritten. Listed type dependencies are required.",
       "The original theme CSS still references external fonts. Approved recorded font assets and readiness validation are required; no font is fetched here.",
       "Styling edits are not qualified by this artifact; exact source projection must remain fixed until explicit supported style hooks are verified.",

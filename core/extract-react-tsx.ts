@@ -679,40 +679,65 @@ function findComponents(sf: ts.SourceFile): Map<string, PropsTypeRef> {
 
 function collectDefaults(sf: ts.SourceFile, componentName: string): Map<string, string | number | boolean> {
   const defaults = new Map<string, string | number | boolean>();
-  const visit = (node: ts.Node) => {
-    if (ts.isObjectBindingPattern(node)) {
-      for (const el of node.elements) {
-        if (el.initializer && ts.isIdentifier(el.name)) {
-          const init = el.initializer;
-          if (ts.isStringLiteral(init)) defaults.set(el.name.text, init.text);
-          else if (ts.isNumericLiteral(init)) defaults.set(el.name.text, Number(init.text));
-          else if (init.kind === ts.SyntaxKind.TrueKeyword) defaults.set(el.name.text, true);
-          else if (init.kind === ts.SyntaxKind.FalseKeyword) defaults.set(el.name.text, false);
-        }
-      }
-    }
-    // Legacy: Component.defaultProps = { size: 'md' }
-    if (
-      ts.isBinaryExpression(node) &&
-      ts.isPropertyAccessExpression(node.left) &&
-      node.left.name.text === 'defaultProps' &&
-      ts.isIdentifier(node.left.expression) &&
-      node.left.expression.text === componentName &&
-      ts.isObjectLiteralExpression(node.right)
-    ) {
-      for (const prop of node.right.properties) {
-        if (ts.isPropertyAssignment(prop) && ts.isIdentifier(prop.name)) {
-          const init = prop.initializer;
-          if (ts.isStringLiteral(init)) defaults.set(prop.name.text, init.text);
-          else if (ts.isNumericLiteral(init)) defaults.set(prop.name.text, Number(init.text));
-          else if (init.kind === ts.SyntaxKind.TrueKeyword) defaults.set(prop.name.text, true);
-          else if (init.kind === ts.SyntaxKind.FalseKeyword) defaults.set(prop.name.text, false);
-        }
-      }
-    }
-    ts.forEachChild(node, visit);
+  const literal = (name: string, init: ts.Expression | undefined) => {
+    if (!init) return;
+    if (ts.isStringLiteral(init)) defaults.set(name, init.text);
+    else if (ts.isNumericLiteral(init)) defaults.set(name, Number(init.text));
+    else if (init.kind === ts.SyntaxKind.TrueKeyword) defaults.set(name, true);
+    else if (init.kind === ts.SyntaxKind.FalseKeyword) defaults.set(name, false);
   };
-  visit(sf);
+  const pattern = (binding: ts.BindingName) => {
+    if (!ts.isObjectBindingPattern(binding)) return;
+    for (const element of binding.elements) {
+      const key = element.propertyName ?? element.name;
+      if (ts.isIdentifier(key) || ts.isStringLiteral(key)) literal(key.text, element.initializer);
+    }
+  };
+  // Defaults belong to this component's props input, not every destructuring
+  // expression in the module. In a family file, the former whole-file walk
+  // let a child's defaults overwrite its parent's (including omitted booleans).
+  const declarations = new Map<string, ts.FunctionDeclaration | ts.Expression>();
+  for (const statement of sf.statements) {
+    if (ts.isFunctionDeclaration(statement) && statement.name) declarations.set(statement.name.text, statement);
+    if (ts.isVariableStatement(statement)) for (const decl of statement.declarationList.declarations) {
+      if (ts.isIdentifier(decl.name) && decl.initializer) declarations.set(decl.name.text, decl.initializer);
+    }
+  }
+  const seen = new Set<ts.Node>();
+  const resolve = (node: ts.Node | undefined): ts.FunctionDeclaration | ts.FunctionExpression | ts.ArrowFunction | undefined => {
+    if (!node || seen.has(node)) return;
+    seen.add(node);
+    if (ts.isFunctionDeclaration(node) || ts.isFunctionExpression(node) || ts.isArrowFunction(node)) return node;
+    if (ts.isAsExpression(node) || ts.isSatisfiesExpression(node) || ts.isParenthesizedExpression(node)) return resolve(node.expression);
+    if (ts.isCallExpression(node)) return resolve(node.arguments[0]);
+    if (ts.isIdentifier(node)) return resolve(declarations.get(node.text));
+  };
+  const fn = resolve(declarations.get(componentName));
+  const input = fn?.parameters[0];
+  if (input) {
+    pattern(input.name);
+    if (ts.isIdentifier(input.name) && fn?.body && ts.isBlock(fn.body)) {
+      for (const statement of fn.body.statements) {
+        if (!ts.isVariableStatement(statement)) continue;
+        for (const decl of statement.declarationList.declarations) {
+          if (decl.initializer && ts.isIdentifier(decl.initializer) && decl.initializer.text === input.name.text) pattern(decl.name);
+        }
+      }
+    }
+  }
+  // Legacy assignments remain scoped to the named component at module level.
+  for (const statement of sf.statements) {
+    if (!ts.isExpressionStatement(statement)) continue;
+    const node = statement.expression;
+    if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+        ts.isPropertyAccessExpression(node.left) && node.left.name.text === 'defaultProps' &&
+        ts.isIdentifier(node.left.expression) && node.left.expression.text === componentName &&
+        ts.isObjectLiteralExpression(node.right)) {
+      for (const prop of node.right.properties) {
+        if (ts.isPropertyAssignment(prop) && (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name))) literal(prop.name.text, prop.initializer);
+      }
+    }
+  }
   return defaults;
 }
 
@@ -728,6 +753,10 @@ export interface SourceFileInput {
   sourcePath: string;
   /** The .tsx/.ts source text. */
   source: string;
+  /** Optional installed-program API facts. The host reader must verify these
+   * against this exact source and declaration bytes. Syntax-only callers keep
+   * their existing behavior; anatomy is still read from the original JSX. */
+  resolvedComponents?: Record<string, { props: ExtractedProp[]; notes: string[]; rootChildrenSlot?: boolean }>;
   /** Co-located *.module.css text, when one exists — unlocks anatomy. */
   css?: string;
   /** Sibling type files (`<basename>.types.ts` convention) whose interface/
@@ -760,6 +789,11 @@ export function extractFromSource(
   const cvaTables = collectCvaTables(sf);
   for (const [componentName, propsType] of findComponents(sf)) {
     if (seen.has(componentName)) continue;
+    const installed = input.resolvedComponents?.[componentName];
+    if (input.resolvedComponents && !installed) {
+      skipped?.push({ name: componentName, source: input.sourcePath, reason: 'component has no verified installed-program API facts' });
+      continue;
+    }
     const { resolved, members, unresolved, heritage, forceOptional, unionNote } = membersOf(propsType, table);
     const typeNode = typeNodeOf(propsType, table);
     const cvaProps = typeNode ? cvaPropsFrom(typeNode, cvaTables) : [];
@@ -768,7 +802,7 @@ export function extractFromSource(
     const unresolvedRefs = [...new Set(unresolved)].filter(
       (u) => !(cvaProps.length > 0 && u.startsWith('VariantProps<')),
     );
-    if (members.length === 0 && cvaProps.length === 0) {
+    if (!installed && members.length === 0 && cvaProps.length === 0) {
       if (!resolved) {
         // A component we can SEE but cannot READ is reported, never
         // silently dropped — silent omission is the failure mode this
@@ -799,76 +833,82 @@ export function extractFromSource(
     seen.add(componentName);
     // Receipts a hollow or partially-read API must carry (extraction
     // proposes, never decides — and never claims silently).
-    const componentNotes: string[] = [];
-    if (members.length === 0 && cvaProps.length === 0) {
-      componentNotes.push(
-        heritage.length > 0
-          ? `props type has NO OWN members (extends ${heritage.join(', ')} — parent members are outside single-file extraction): zero own props is what this module declares — review`
-          : 'props type resolved with NO members — a zero-prop API is what this module declares; review',
-      );
-    } else if (unresolvedRefs.length > 0) {
-      componentNotes.push(
-        `props type composes named reference(s) [${unresolvedRefs.join(', ')}] whose members are outside module scope — those props are NOT carried (single-file extraction)`,
-      );
-    }
-    if (unionNote) componentNotes.push(unionNote);
-    // HERITAGE RECEIPT (Astryx round — found by the .doc.mjs referee): an
-    // interface WITH own members used to name its `extends` parents only in
-    // the zero-own-members receipt; a partially-read surface (`MoreMenuProps
-    // extends Pick<BaseProps, 'xstyle' | …>`) dropped them silently. Parent
-    // members are outside single-file extraction BY DESIGN — but the
-    // omission must be receipted, never silent.
-    if (heritage.length > 0 && (members.length > 0 || cvaProps.length > 0)) {
-      componentNotes.push(
-        `props type extends ${heritage.join(', ')} — parent members are outside single-file extraction and are NOT carried`,
-      );
-    }
-    const defaults = collectDefaults(sf, componentName);
-    const props: ExtractedProp[] = [...cvaProps];
-    for (const [i, p] of cvaProps.entries()) {
-      if (defaults.has(p.name) && p.default === undefined) {
-        props[i] = { ...p, default: defaults.get(p.name) };
+    const componentNotes: string[] = [...(installed?.notes ?? [])];
+    if (!installed) {
+      if (members.length === 0 && cvaProps.length === 0) {
+        componentNotes.push(
+          heritage.length > 0
+            ? `props type has NO OWN members (extends ${heritage.join(', ')} — parent members are outside single-file extraction): zero own props is what this module declares — review`
+            : 'props type resolved with NO members — a zero-prop API is what this module declares; review',
+        );
+      } else if (unresolvedRefs.length > 0) {
+        componentNotes.push(
+          `props type composes named reference(s) [${unresolvedRefs.join(', ')}] whose members are outside module scope — those props are NOT carried (single-file extraction)`,
+        );
+      }
+      if (unionNote) componentNotes.push(unionNote);
+      // HERITAGE RECEIPT (Astryx round — found by the .doc.mjs referee): an
+      // interface WITH own members used to name its `extends` parents only in
+      // the zero-own-members receipt; a partially-read surface (`MoreMenuProps
+      // extends Pick<BaseProps, 'xstyle' | …>`) dropped them silently. Parent
+      // members are outside single-file extraction BY DESIGN — but the
+      // omission must be receipted, never silent.
+      if (heritage.length > 0 && (members.length > 0 || cvaProps.length > 0)) {
+        componentNotes.push(
+          `props type extends ${heritage.join(', ')} — parent members are outside single-file extraction and are NOT carried`,
+        );
       }
     }
-    for (const m of members) {
-      if (!m.name || !ts.isIdentifier(m.name)) continue;
-      if (props.some((x) => x.name === (m.name as ts.Identifier).text)) continue;
-      const propName = m.name.text;
-      const cls = classifyMember(m, table, (note) => componentNotes.push(`prop \`${propName}\`: ${note}`));
-      if (!cls) continue;
-      // DEFAULT PRECEDENCE, and the disagreement is RECEIPTED, never merged.
-      // An initializer/defaultProps value is what the component RUNS; a JSDoc
-      // tag is what the library SAYS. When both exist and differ, the runtime
-      // fact wins and the documentation gap is named — silently reconciling
-      // them would hide a real drift between a library's docs and its code.
-      const runtimeDefault = defaults.has(propName) ? defaults.get(propName) : undefined;
-      const doc = jsDocDefault(m);
-      let docDefault: string | number | boolean | undefined;
-      if (doc) {
-        if ('unparsed' in doc) {
-          componentNotes.push(
-            `prop \`${propName}\`: JSDoc @${doc.tag} carries PROSE, not a literal ("${doc.unparsed}") — no default carried (a documented default is only read when it is a single literal token)`,
-          );
-        } else if (cls.kind === 'enum' && cls.values !== undefined && !cls.values.includes(String(doc.value))) {
-          componentNotes.push(
-            `prop \`${propName}\`: JSDoc @${doc.tag} documents "${String(doc.value)}", which is NOT one of the declared enum values [${cls.values.join(', ')}] — not carried as the default (a default outside its own value set is a contradiction, named rather than absorbed)`,
-          );
-        } else if (runtimeDefault !== undefined && runtimeDefault !== doc.value) {
-          componentNotes.push(
-            `prop \`${propName}\`: JSDoc @${doc.tag} documents ${JSON.stringify(doc.value)} but the initializer/defaultProps sets ${JSON.stringify(runtimeDefault)} — the INITIALIZER wins (it is what the component runs); the documented default is recorded here, never silently reconciled`,
-          );
-        } else {
-          docDefault = doc.value;
+    const props: ExtractedProp[] = installed ? structuredClone(installed.props) : readSyntacticProps();
+    function readSyntacticProps(): ExtractedProp[] {
+      const defaults = collectDefaults(sf, componentName);
+      const props: ExtractedProp[] = [...cvaProps];
+      for (const [i, p] of cvaProps.entries()) {
+        if (defaults.has(p.name) && p.default === undefined) {
+          props[i] = { ...p, default: defaults.get(p.name) };
         }
       }
-      const propDefault = runtimeDefault !== undefined ? runtimeDefault : docDefault;
-      props.push({
-        name: m.name.text,
-        optional: !!m.questionToken || (forceOptional?.has(m.name.text) ?? false),
-        ...(jsDocText(m) ? { description: jsDocText(m) } : {}),
-        ...cls,
-        ...(propDefault !== undefined ? { default: propDefault } : {}),
-      });
+      for (const m of members) {
+        if (!m.name || !ts.isIdentifier(m.name)) continue;
+        if (props.some((x) => x.name === (m.name as ts.Identifier).text)) continue;
+        const propName = m.name.text;
+        const cls = classifyMember(m, table, (note) => componentNotes.push(`prop \`${propName}\`: ${note}`));
+        if (!cls) continue;
+        // DEFAULT PRECEDENCE, and the disagreement is RECEIPTED, never merged.
+        // An initializer/defaultProps value is what the component RUNS; a JSDoc
+        // tag is what the library SAYS. When both exist and differ, the runtime
+        // fact wins and the documentation gap is named — silently reconciling
+        // them would hide a real drift between a library's docs and its code.
+        const runtimeDefault = defaults.has(propName) ? defaults.get(propName) : undefined;
+        const doc = jsDocDefault(m);
+        let docDefault: string | number | boolean | undefined;
+        if (doc) {
+          if ('unparsed' in doc) {
+            componentNotes.push(
+              `prop \`${propName}\`: JSDoc @${doc.tag} carries PROSE, not a literal ("${doc.unparsed}") — no default carried (a documented default is only read when it is a single literal token)`,
+            );
+          } else if (cls.kind === 'enum' && cls.values !== undefined && !cls.values.includes(String(doc.value))) {
+            componentNotes.push(
+              `prop \`${propName}\`: JSDoc @${doc.tag} documents "${String(doc.value)}", which is NOT one of the declared enum values [${cls.values.join(', ')}] — not carried as the default (a default outside its own value set is a contradiction, named rather than absorbed)`,
+            );
+          } else if (runtimeDefault !== undefined && runtimeDefault !== doc.value) {
+            componentNotes.push(
+              `prop \`${propName}\`: JSDoc @${doc.tag} documents ${JSON.stringify(doc.value)} but the initializer/defaultProps sets ${JSON.stringify(runtimeDefault)} — the INITIALIZER wins (it is what the component runs); the documented default is recorded here, never silently reconciled`,
+            );
+          } else {
+            docDefault = doc.value;
+          }
+        }
+        const propDefault = runtimeDefault !== undefined ? runtimeDefault : docDefault;
+        props.push({
+          name: m.name.text,
+          optional: !!m.questionToken || (forceOptional?.has(m.name.text) ?? false),
+          ...(jsDocText(m) ? { description: jsDocText(m) } : {}),
+          ...cls,
+          ...(propDefault !== undefined ? { default: propDefault } : {}),
+        });
+      }
+      return props;
     }
     let cssVars: string[] | undefined;
     let anatomy: ExtractedComponent['anatomy'];
@@ -885,6 +925,14 @@ export function extractFromSource(
       // identity read from stylex.props spreads. Rule styling (tokens,
       // layout) is a named review item until the StyleX token round.
       anatomy = extractAnatomy({ sf, src, componentName, props, css: '', tokens: tokens(), stylex: true, helpers: input.helpers }) ?? undefined;
+    }
+    if (installed?.rootChildrenSlot) {
+      if (anatomy && !anatomy.root.component && !anatomy.root.parts &&
+          !anatomy.root.content && anatomy.root.text === undefined) {
+        anatomy.root.slot = { name: 'children' };
+        anatomy.notes = anatomy.notes.filter(n => !n.startsWith('jsx: root renders {children} directly'));
+        anatomy.notes.push('jsx: installed source proves caller children reach the host root unchanged; preserved as a reusable default slot, without sample content');
+      } else componentNotes.push('children-slot-anatomy-conflict: source proof could not attach to a plain host root');
     }
     out.push({
       name: componentName,

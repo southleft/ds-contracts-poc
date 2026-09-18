@@ -194,7 +194,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-info",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 14 A 0.75 0.75 0 0 1 9.25 13.25 V 9.75 A 0.75 0.75 0 0 1 10.75 9.75 V 13.25 A 0.75 0.75 0 0 1 10 14 Z\" fill=\"#002133\"/><path d=\"M 9 7 A 1 1 0 1 1 11 7 A 1 1 0 0 1 9 7 Z\" fill=\"#002133\"/><path d=\"M 17 10 A 7 7 0 1 1 3 10 A 7 7 0 0 1 17 10 Z M 15.5 10 A 5.5 5.5 0 1 1 4.5 10 A 5.5 5.5 0 0 1 15.5 10 Z\" fill=\"#002133\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 14 A 0.75 0.75 0 0 1 9.25 13.25 V 9.75 A 0.75 0.75 0 0 1 10.75 9.75 V 13.25 A 0.75 0.75 0 0 1 10 14 Z\" fill=\"#002133\"/><path d=\"M 9 7 A 1 1 0 1 1 11 7 A 1 1 0 0 1 9 7 Z\" fill=\"#002133\"/><path d=\"M 17 10 A 7 7 0 1 1 3 10 A 7 7 0 0 1 17 10 Z M 15.5 10 A 5.5 5.5 0 1 1 4.5 10 A 5.5 5.5 0 0 1 15.5 10 Z\" fill=\"#002133\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/info",
                                           "iconSize": 20
                                         }
@@ -294,7 +294,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -708,7 +708,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-success",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.78 5.97 A 0.75 0.75 0 0 1 15.78 7.03 L 9.28 13.53 A 0.75 0.75 0 0 1 8.22 13.53 L 4.97 10.28 A 0.75 0.75 0 1 1 6.03 9.22 L 8.75 11.94 L 14.72 5.97 A 0.75 0.75 0 0 1 15.78 5.97 Z\" fill=\"#fafffb\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.78 5.97 A 0.75 0.75 0 0 1 15.78 7.03 L 9.28 13.53 A 0.75 0.75 0 0 1 8.22 13.53 L 4.97 10.28 A 0.75 0.75 0 1 1 6.03 9.22 L 8.75 11.94 L 14.72 5.97 A 0.75 0.75 0 0 1 15.78 5.97 Z\" fill=\"#fafffb\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/success",
                                           "iconSize": 20
                                         }
@@ -808,7 +808,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -1222,7 +1222,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-warning",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6.75 A 0.75 0.75 0 0 1 10.75 7.5 V 11 A 0.75 0.75 0 1 1 9.25 11 V 7.5 A 0.75 0.75 0 0 1 10 6.75 Z\" fill=\"#251a00\"/><path d=\"M 11 13.5 A 1 1 0 1 1 9 13.5 A 1 1 0 0 1 11 13.5 Z\" fill=\"#251a00\"/><path d=\"M 10 3.5 C 8.955 3.5 8.216 4.202 7.848 4.947 A 449.26 449.26 0 0 1 5.843 8.794 L 5.815 8.846 A 403.426 403.426 0 0 0 3.807 12.702 C 3.435 13.454 3.329 14.452 3.9 15.316 C 4.47 16.179 5.442 16.5 6.364 16.5 H 13.636 C 14.558 16.5 15.531 16.18 16.1 15.316 C 16.67 14.452 16.565 13.454 16.193 12.702 C 15.983 12.278 15.08 10.555 14.189 8.855 L 14.157 8.794 A 429.497 429.497 0 0 1 12.152 4.947 C 11.784 4.202 11.045 3.5 10 3.5 Z M 9.192 5.612 C 9.596 4.796 10.404 4.796 10.808 5.612 C 11.01 6.021 11.92 7.757 12.83 9.492 A 418.904 418.904 0 0 1 14.848 13.367 C 15.252 14.184 14.848 15 13.636 15 H 6.364 C 5.152 15 4.747 14.184 5.152 13.367 C 5.354 12.959 6.265 11.22 7.175 9.484 A 421.932 421.932 0 0 0 9.192 5.612 Z\" fill=\"#251a00\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6.75 A 0.75 0.75 0 0 1 10.75 7.5 V 11 A 0.75 0.75 0 1 1 9.25 11 V 7.5 A 0.75 0.75 0 0 1 10 6.75 Z\" fill=\"#251a00\"/><path d=\"M 11 13.5 A 1 1 0 1 1 9 13.5 A 1 1 0 0 1 11 13.5 Z\" fill=\"#251a00\"/><path d=\"M 10 3.5 C 8.955 3.5 8.216 4.202 7.848 4.947 A 449.26 449.26 0 0 1 5.843 8.794 L 5.815 8.846 A 403.426 403.426 0 0 0 3.807 12.702 C 3.435 13.454 3.329 14.452 3.9 15.316 C 4.47 16.179 5.442 16.5 6.364 16.5 H 13.636 C 14.558 16.5 15.531 16.18 16.1 15.316 C 16.67 14.452 16.565 13.454 16.193 12.702 C 15.983 12.278 15.08 10.555 14.189 8.855 L 14.157 8.794 A 429.497 429.497 0 0 1 12.152 4.947 C 11.784 4.202 11.045 3.5 10 3.5 Z M 9.192 5.612 C 9.596 4.796 10.404 4.796 10.808 5.612 C 11.01 6.021 11.92 7.757 12.83 9.492 A 418.904 418.904 0 0 1 14.848 13.367 C 15.252 14.184 14.848 15 13.636 15 H 6.364 C 5.152 15 4.747 14.184 5.152 13.367 C 5.354 12.959 6.265 11.22 7.175 9.484 A 421.932 421.932 0 0 0 9.192 5.612 Z\" fill=\"#251a00\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/warning",
                                           "iconSize": 20
                                         }
@@ -1322,7 +1322,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -1736,7 +1736,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-critical",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6 A 0.75 0.75 0 0 1 10.75 6.75 V 10.25 A 0.75 0.75 0 0 1 9.25 10.25 V 6.75 A 0.75 0.75 0 0 1 10 6 Z\" fill=\"#fffafb\"/><path d=\"M 11 13 A 1 1 0 1 1 9 13 A 1 1 0 0 1 11 13 Z\" fill=\"#fffafb\"/><path d=\"M 11.237 3.177 A 1.75 1.75 0 0 0 8.763 3.177 L 3.177 8.762 A 1.75 1.75 0 0 0 3.177 11.237 L 8.763 16.823 A 1.75 1.75 0 0 0 11.237 16.823 L 16.823 11.237 A 1.75 1.75 0 0 0 16.823 8.762 L 11.237 3.177 Z M 9.823 4.237 A 0.25 0.25 0 0 1 10.177 4.237 L 15.763 9.823 A 0.25 0.25 0 0 1 15.763 10.177 L 10.177 15.762 A 0.25 0.25 0 0 1 9.823 15.762 L 4.237 10.177 A 0.25 0.25 0 0 1 4.237 9.823 L 9.823 4.237 Z\" fill=\"#fffafb\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6 A 0.75 0.75 0 0 1 10.75 6.75 V 10.25 A 0.75 0.75 0 0 1 9.25 10.25 V 6.75 A 0.75 0.75 0 0 1 10 6 Z\" fill=\"#fffafb\"/><path d=\"M 11 13 A 1 1 0 1 1 9 13 A 1 1 0 0 1 11 13 Z\" fill=\"#fffafb\"/><path d=\"M 11.237 3.177 A 1.75 1.75 0 0 0 8.763 3.177 L 3.177 8.762 A 1.75 1.75 0 0 0 3.177 11.237 L 8.763 16.823 A 1.75 1.75 0 0 0 11.237 16.823 L 16.823 11.237 A 1.75 1.75 0 0 0 16.823 8.762 L 11.237 3.177 Z M 9.823 4.237 A 0.25 0.25 0 0 1 10.177 4.237 L 15.763 9.823 A 0.25 0.25 0 0 1 15.763 10.177 L 10.177 15.762 A 0.25 0.25 0 0 1 9.823 15.762 L 4.237 10.177 A 0.25 0.25 0 0 1 4.237 9.823 L 9.823 4.237 Z\" fill=\"#fffafb\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/critical",
                                           "iconSize": 20
                                         }
@@ -1836,7 +1836,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -2268,7 +2268,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-info",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 14 A 0.75 0.75 0 0 1 9.25 13.25 V 9.75 A 0.75 0.75 0 0 1 10.75 9.75 V 13.25 A 0.75 0.75 0 0 1 10 14 Z\" fill=\"#002133\"/><path d=\"M 9 7 A 1 1 0 1 1 11 7 A 1 1 0 0 1 9 7 Z\" fill=\"#002133\"/><path d=\"M 17 10 A 7 7 0 1 1 3 10 A 7 7 0 0 1 17 10 Z M 15.5 10 A 5.5 5.5 0 1 1 4.5 10 A 5.5 5.5 0 0 1 15.5 10 Z\" fill=\"#002133\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 14 A 0.75 0.75 0 0 1 9.25 13.25 V 9.75 A 0.75 0.75 0 0 1 10.75 9.75 V 13.25 A 0.75 0.75 0 0 1 10 14 Z\" fill=\"#002133\"/><path d=\"M 9 7 A 1 1 0 1 1 11 7 A 1 1 0 0 1 9 7 Z\" fill=\"#002133\"/><path d=\"M 17 10 A 7 7 0 1 1 3 10 A 7 7 0 0 1 17 10 Z M 15.5 10 A 5.5 5.5 0 1 1 4.5 10 A 5.5 5.5 0 0 1 15.5 10 Z\" fill=\"#002133\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/info",
                                           "iconSize": 20
                                         }
@@ -2368,7 +2368,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -2785,7 +2785,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-success",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.78 5.97 A 0.75 0.75 0 0 1 15.78 7.03 L 9.28 13.53 A 0.75 0.75 0 0 1 8.22 13.53 L 4.97 10.28 A 0.75 0.75 0 1 1 6.03 9.22 L 8.75 11.94 L 14.72 5.97 A 0.75 0.75 0 0 1 15.78 5.97 Z\" fill=\"#fafffb\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.78 5.97 A 0.75 0.75 0 0 1 15.78 7.03 L 9.28 13.53 A 0.75 0.75 0 0 1 8.22 13.53 L 4.97 10.28 A 0.75 0.75 0 1 1 6.03 9.22 L 8.75 11.94 L 14.72 5.97 A 0.75 0.75 0 0 1 15.78 5.97 Z\" fill=\"#fafffb\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/success",
                                           "iconSize": 20
                                         }
@@ -2885,7 +2885,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -3302,7 +3302,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-warning",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6.75 A 0.75 0.75 0 0 1 10.75 7.5 V 11 A 0.75 0.75 0 1 1 9.25 11 V 7.5 A 0.75 0.75 0 0 1 10 6.75 Z\" fill=\"#251a00\"/><path d=\"M 11 13.5 A 1 1 0 1 1 9 13.5 A 1 1 0 0 1 11 13.5 Z\" fill=\"#251a00\"/><path d=\"M 10 3.5 C 8.955 3.5 8.216 4.202 7.848 4.947 A 449.26 449.26 0 0 1 5.843 8.794 L 5.815 8.846 A 403.426 403.426 0 0 0 3.807 12.702 C 3.435 13.454 3.329 14.452 3.9 15.316 C 4.47 16.179 5.442 16.5 6.364 16.5 H 13.636 C 14.558 16.5 15.531 16.18 16.1 15.316 C 16.67 14.452 16.565 13.454 16.193 12.702 C 15.983 12.278 15.08 10.555 14.189 8.855 L 14.157 8.794 A 429.497 429.497 0 0 1 12.152 4.947 C 11.784 4.202 11.045 3.5 10 3.5 Z M 9.192 5.612 C 9.596 4.796 10.404 4.796 10.808 5.612 C 11.01 6.021 11.92 7.757 12.83 9.492 A 418.904 418.904 0 0 1 14.848 13.367 C 15.252 14.184 14.848 15 13.636 15 H 6.364 C 5.152 15 4.747 14.184 5.152 13.367 C 5.354 12.959 6.265 11.22 7.175 9.484 A 421.932 421.932 0 0 0 9.192 5.612 Z\" fill=\"#251a00\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6.75 A 0.75 0.75 0 0 1 10.75 7.5 V 11 A 0.75 0.75 0 1 1 9.25 11 V 7.5 A 0.75 0.75 0 0 1 10 6.75 Z\" fill=\"#251a00\"/><path d=\"M 11 13.5 A 1 1 0 1 1 9 13.5 A 1 1 0 0 1 11 13.5 Z\" fill=\"#251a00\"/><path d=\"M 10 3.5 C 8.955 3.5 8.216 4.202 7.848 4.947 A 449.26 449.26 0 0 1 5.843 8.794 L 5.815 8.846 A 403.426 403.426 0 0 0 3.807 12.702 C 3.435 13.454 3.329 14.452 3.9 15.316 C 4.47 16.179 5.442 16.5 6.364 16.5 H 13.636 C 14.558 16.5 15.531 16.18 16.1 15.316 C 16.67 14.452 16.565 13.454 16.193 12.702 C 15.983 12.278 15.08 10.555 14.189 8.855 L 14.157 8.794 A 429.497 429.497 0 0 1 12.152 4.947 C 11.784 4.202 11.045 3.5 10 3.5 Z M 9.192 5.612 C 9.596 4.796 10.404 4.796 10.808 5.612 C 11.01 6.021 11.92 7.757 12.83 9.492 A 418.904 418.904 0 0 1 14.848 13.367 C 15.252 14.184 14.848 15 13.636 15 H 6.364 C 5.152 15 4.747 14.184 5.152 13.367 C 5.354 12.959 6.265 11.22 7.175 9.484 A 421.932 421.932 0 0 0 9.192 5.612 Z\" fill=\"#251a00\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/warning",
                                           "iconSize": 20
                                         }
@@ -3402,7 +3402,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -3819,7 +3819,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-critical",
-                                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6 A 0.75 0.75 0 0 1 10.75 6.75 V 10.25 A 0.75 0.75 0 0 1 9.25 10.25 V 6.75 A 0.75 0.75 0 0 1 10 6 Z\" fill=\"#fffafb\"/><path d=\"M 11 13 A 1 1 0 1 1 9 13 A 1 1 0 0 1 11 13 Z\" fill=\"#fffafb\"/><path d=\"M 11.237 3.177 A 1.75 1.75 0 0 0 8.763 3.177 L 3.177 8.762 A 1.75 1.75 0 0 0 3.177 11.237 L 8.763 16.823 A 1.75 1.75 0 0 0 11.237 16.823 L 16.823 11.237 A 1.75 1.75 0 0 0 16.823 8.762 L 11.237 3.177 Z M 9.823 4.237 A 0.25 0.25 0 0 1 10.177 4.237 L 15.763 9.823 A 0.25 0.25 0 0 1 15.763 10.177 L 10.177 15.762 A 0.25 0.25 0 0 1 9.823 15.762 L 4.237 10.177 A 0.25 0.25 0 0 1 4.237 9.823 L 9.823 4.237 Z\" fill=\"#fffafb\" fill-rule=\"evenodd\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 6 A 0.75 0.75 0 0 1 10.75 6.75 V 10.25 A 0.75 0.75 0 0 1 9.25 10.25 V 6.75 A 0.75 0.75 0 0 1 10 6 Z\" fill=\"#fffafb\"/><path d=\"M 11 13 A 1 1 0 1 1 9 13 A 1 1 0 0 1 11 13 Z\" fill=\"#fffafb\"/><path d=\"M 11.237 3.177 A 1.75 1.75 0 0 0 8.763 3.177 L 3.177 8.762 A 1.75 1.75 0 0 0 3.177 11.237 L 8.763 16.823 A 1.75 1.75 0 0 0 11.237 16.823 L 16.823 11.237 A 1.75 1.75 0 0 0 16.823 8.762 L 11.237 3.177 Z M 9.823 4.237 A 0.25 0.25 0 0 1 10.177 4.237 L 15.763 9.823 A 0.25 0.25 0 0 1 15.763 10.177 L 10.177 15.762 A 0.25 0.25 0 0 1 9.823 15.762 L 4.237 10.177 A 0.25 0.25 0 0 1 4.237 9.823 L 9.823 4.237 Z\" fill=\"#fffafb\" fill-rule=\"evenodd\"/></svg>",
                                           "svgPaintVar": "imported/banner/icon/color/critical",
                                           "iconSize": 20
                                         }
@@ -3919,7 +3919,7 @@ const COMPONENTS = [
                                         {
                                           "type": "svg",
                                           "name": "icon-3",
-                                          "svg": "<svg fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
+                                          "svg": "<svg height=\"20\" width=\"20\" fill=\"#303030\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 13.97 15.03 A 0.75 0.75 0 1 0 15.03 13.97 L 11.06 10 L 15.03 6.03 A 0.75 0.75 0 0 0 13.97 4.97 L 10 8.94 L 6.03 4.97 A 0.75 0.75 0 0 0 4.97 6.03 L 8.94 10 L 4.97 13.97 A 0.75 0.75 0 1 0 6.03 15.03 L 10 11.06 L 13.97 15.03 Z\"/></svg>",
                                           "svgPaintVar": "imported/shared/color-303030",
                                           "iconSize": 20,
                                           "visibleProp": "Show Dismissible",
@@ -5398,12 +5398,19 @@ function dsDeclaredClipStops(n) {
   return dsDeclaredClip.has(n.id);
 }
 function applyFrameSpec(node, spec) {
+  const fillPreviewWidth = spec.rootFillWidth ? Math.max(1, node.width) : undefined;
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  if (spec.rootFillWidth) {
+    node.resize(fillPreviewWidth, Math.max(1, node.height));
+    node.primaryAxisSizingMode = l.mode === 'HORIZONTAL' ? 'FIXED' : 'AUTO';
+    node.counterAxisSizingMode = l.mode === 'HORIZONTAL' ? 'AUTO' : 'FIXED';
+    node.layoutSizingHorizontal = 'FIXED';
+  }
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
   // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
@@ -6001,7 +6008,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt16-host-section-no-collision';
+const RUNTIME_EMIT_REV = 'rt19-parent-relative-root-width';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -6069,6 +6076,7 @@ async function amendSet(set, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   set.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  set.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   // The named receipt — refreshed BEFORE the specHash early return, like the
   // markers above, so an unchanged set still carries a current one.
   set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
@@ -6330,6 +6338,7 @@ async function amendComponent(comp, C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   comp.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // FIXED POINT — the host section is adopted and re-fitted BEFORE the
   // specHash early return, exactly like the identity markers above.
@@ -6486,6 +6495,20 @@ async function syncOne(C) {
   // history eligible to become a public enum option. Refuse before ANY writes
   // to this target. A new lineage is required; owner history is never deleted.
   if (existing) {
+    const previousRootSlot = existing.getSharedPluginData('ds_contracts', 'rootSlot');
+    if (previousRootSlot && previousRootSlot !== JSON.stringify(C.rootSlot))
+      throw new Error('FIGMA_ROOT_SLOT_RETIREMENT_REFUSED: changing or removing a native root content mapping needs a verified migration');
+    const previousCodeValues = existing.getSharedPluginData('ds_contracts', 'codeValueAxes');
+    if (previousCodeValues) {
+      let previous;
+      try { previous = JSON.parse(previousCodeValues); } catch (_) { throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: malformed prior metadata'); }
+      const signature = axis => JSON.stringify([axis.property, axis.propName, axis.codeProp,
+        axis.values && axis.values.map(v => [v.value, v.code]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)]);
+      if (previous.version !== 1 || !Array.isArray(previous.axes) || !previous.axes.length ||
+          new Set(previous.axes.map(a => a && a.property)).size !== previous.axes.length ||
+          previous.axes.some(old => !old || !Array.isArray(old.values) || !(C.codeValueAxes && C.codeValueAxes.axes.some(next => signature(next) === signature(old)))))
+        throw new Error('FIGMA_CODE_VALUES_RETIREMENT_REFUSED: changing or removing a typed API mapping requires a fresh lineage');
+    }
     const previousRaw = existing.getSharedPluginData('ds_contracts', 'unsetVariantAxes');
     if (previousRaw) {
       let previous;
@@ -6629,6 +6652,7 @@ async function syncOne(C) {
     C.propNames ? JSON.stringify(C.propNames) : '');
   target.setSharedPluginData('ds_contracts', 'unsetVariantAxes',
     C.unsetVariantAxes ? JSON.stringify(C.unsetVariantAxes) : '');
+  target.setSharedPluginData('ds_contracts', 'codeValueAxes', C.codeValueAxes ? JSON.stringify(C.codeValueAxes) : '');
   target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);

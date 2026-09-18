@@ -41,6 +41,14 @@ const NUMERIC_ATTRS = new Set([
   "colSpan",
   "rowSpan",
 ]);
+// React types these ARIA states as Booleanish (with additional string states
+// for checked/pressed). Preserve a declared boolean instead of widening it to
+// arbitrary string; React still serializes false as the attribute "false".
+const ARIA_BOOLEAN_ATTRS = new Set([
+  'aria-atomic', 'aria-busy', 'aria-checked', 'aria-disabled', 'aria-expanded',
+  'aria-hidden', 'aria-modal', 'aria-multiline', 'aria-multiselectable',
+  'aria-pressed', 'aria-readonly', 'aria-required', 'aria-selected',
+]);
 // DOM observations use HTML's lowercase attribute names. Normalize only this
 // finite native type table, not arbitrary attributes, ARIA/data, or prop names.
 const NATIVE_REACT_NAMES = new Map(
@@ -49,6 +57,10 @@ const NATIVE_REACT_NAMES = new Map(
     name,
   ]),
 );
+// HTML label associations are spelled `for` in a DOM read, but React's
+// typed property is htmlFor. Treat both spellings as one attribute.
+NATIVE_REACT_NAMES.set("for", "htmlFor");
+NATIVE_REACT_NAMES.set("htmlfor", "htmlFor");
 
 /** Shared attribute projection for both existing React emitters. This does not
  * infer native state from source prop names: the declared attribute target
@@ -84,6 +96,7 @@ export function reactPartAttrList(
       }
       if (
         bound.type === "text" ||
+        (ARIA_BOOLEAN_ATTRS.has(attr) && bound.type === "boolean") ||
         (NUMERIC_ATTRS.has(attr) && bound.type === "number")
       ) {
         return `${attr}={${codeName}}`;

@@ -406,14 +406,16 @@ function propsPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
       fieldList(bindings, {
         figma:
           "How the prop appears on the canvas: property kind, property name, and the canonical-value → variant-value spelling map.",
-        code: "The React prop name.",
+        code: "The React prop name and optional typed value mapping.",
       }) +
         codeBlock(
           `figma: ${typeText(bindingsShape.figma)}\ncode:  ${typeText(bindingsShape.code)}`,
           "ts",
           "prop.bindings — rendered from the schema at build time",
         ) +
-        `<p><code>bindings.figma.unsetValue</code> explicitly reserves a canvas-only option for an omitted, defaultless enum prop. For example, a code API can declare only <code>secondary | danger</code> while omission draws its base appearance; <code>unsetValue: "(unset)"</code> draws that base as a separate Figma variant without adding a public enum value or a code default. The label must be nonempty, unambiguous and distinct from every mapped public value, and is legal only for a defaultless <code>VARIANT</code> enum. Readback removes this canvas-only option only when versioned metadata, property definitions, structured variant rows and the exact matrix corroborate it. Invalid, retired or unsupported omission mappings refuse instead of becoming a new public value. Changing or removing the binding on an existing set requires a fresh lineage; the writer refuses before changing that target and preserves its history. This boundary has offline conformance tests; it is not a claim of live Figma or end-to-end source qualification.</p>` +
+        `<p><code>bindings.code.initial</code> declares a separate React initializer for an optional enum state axis with exactly one toggle event. For example, <code>{"prop":"defaultChecked","default":"off"}</code> reads the public <code>defaultChecked</code> input once at mount, using the same typed mapping as <code>checked</code>. Its optional default is a canonical enum key; omission otherwise uses the prop default or stays unset. A supplied controlled value takes precedence, and controlled activations do not change the hidden uncontrolled state. Later initializer changes are ignored. This binding does not add another canvas axis. Initial inputs must not collide with props, slots, events or generated names. Both React emitters implement this declaration; Web Component emission refuses it. Source admission and native round-trip preservation require separate evidence.</p>` +
+        `<p><code>bindings.code.values</code> maps every canonical enum member to its actual React scalar: a string, finite number, boolean or null. For example, <code>{"none": null, "literal-null": "null"}</code> keeps null distinct from the string “null” while Figma uses named variants. The map must cover the enum exactly, with unique typed values; missing or extra keys, duplicate values and negative zero refuse. This mapping is only valid for enum props. Defaults and conditional rules use canonical enum members; generated React accepts the mapped values. Omission remains separate and uses the optional-prop/unset rules below. Versioned canvas metadata carries the typed mapping; labels alone cannot recover it. Typed values do not establish rendered fidelity or behavior.</p>` +
+        `<p><code>bindings.figma.unsetValue</code> explicitly reserves a canvas-only option for an omitted, defaultless enum or boolean prop. For example, a code API can declare only <code>secondary | danger</code> while omission draws its base appearance; <code>unsetValue: "(unset)"</code> draws that base as a separate Figma variant without adding a public enum value or a code default. The label must be nonempty, unambiguous and distinct from every mapped public value, and is legal only for an optional defaultless <code>VARIANT</code> enum or boolean. A boolean has three distinct canvas options: omitted, false and true. Explicit version-2 type metadata restores the boolean API; labels such as “Off” and “On” never infer a type. Boolean omission supports token and literal overrides; it does not extend enum-only layout/text/state maps or explicit boolean equality conditions. Readback removes this canvas-only option only when versioned metadata, property definitions, structured variant rows and the exact matrix corroborate it. Invalid, retired or unsupported omission mappings refuse instead of becoming a new public value. Changing its type or omission label, or removing the binding on an existing set requires a fresh lineage; the writer refuses before changing that target and preserves its history. This boundary has offline and real Figma round-trip checks, including a repeat with unchanged node identities. It does not qualify a complete source-to-canvas journey.</p>` +
         refusals("Refusal rules on props and bindings:", [
           "duplicate prop names; duplicate <em>code</em> bindings across props, slots, and events (the git-merge attack)",
           "two props binding the same design property — the canvas cannot host both",
@@ -620,6 +622,7 @@ function layoutPage(): { route: string; html: string } {
           rows: 'G1: declared row track list. Each track is exactly one of <code>{px}</code>, <code>{fr}</code>, or <code>{fit: true}</code> — the three spellings the Plugin API round-trips (FIXED / FLEX / HUG). Required on a grid unless <code>flow: "row"</code> lets the emitter derive them.',
           columns:
             "G1: declared column track list — required on every <code>display: grid</code>. Same track spellings as <code>rows</code>.",
+          autoRows: 'Optional sizing for extra rows, requiring <code>flow: "row"</code>. One positive <code>{px}</code>, positive <code>{fr}</code>, or <code>{fit: true}</code> track; declared rows keep their sizes. Managed native writes recompute the required row count from content, rather than relying on automatic canvas overflow.',
           gap: "G1: independent <code>row</code> / <code>column</code> gaps (px or token refs). There is no single-value shorthand — proposers normalize CSS <code>gap</code> into the pair.",
           areas:
             "G4: named areas as slot anchors. The key is simultaneously a slot name and a placement rect (row/column/spans). A part with the same name takes the area; declaring both an area and an explicit <code>placement</code> for one name is schema-invalid.",
@@ -641,6 +644,7 @@ function layoutPage(): { route: string; html: string } {
       "Grid — declared tracks, areas, flow",
       ["generated", "curated"],
       `<p>A2 grid is a first-class layout mode, not a flex fallback. <code>display: "grid"</code> requires a declared <code>columns</code> track list; <code>rows</code> are required unless <code>flow: "row"</code> lets the emitter derive them. Flex facts (<code>direction</code>, <code>align</code>, <code>justify</code>, <code>wrap</code>, <code>overlap</code>) are schema-invalid on a grid. Both surfaces carry the same tracks, gap pair, and cell rects — Figma has no native area names, so the contract owns them.</p>` +
+        `<p><code>layout.autoRows</code> supplies one repeated track for rows beyond the declared list: <code>{px: 24}</code> fixes their height, <code>{fr: 1}</code> shares available space, and <code>{fit: true}</code> hugs content. It requires <code>flow: "row"</code>; existing sizing constraints still apply. The code emitter carries the extra-row sizing rule, while managed Figma writes materialize enough rows for the current content and retain the rule for checked reverse extraction. Arbitrary manual canvas insertion does not trigger this managed update. Multiple alternating extra-row tracks, column flow and dense flow remain unsupported.</p>` +
         refusals("Refusals:", [
           "<code>display: grid</code> without <code>columns</code>",
           "flex-only fields together with <code>display: grid</code>",
@@ -1149,10 +1153,13 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): {
           id: "The child contract’s id, e.g. <code>ds.avatar</code>.",
           props:
             'Fixed prop values; <code>"{parentProp}"</code> threads a parent enum through.',
+          initialProps:
+            'React mount-only inputs, keyed by canonical child enum property. Canonical literals or <code>"{parentEnum}"</code> references target the child’s <code>bindings.code.initial.prop</code>; changes after mounting do not reset state. A controlled input supplied through <code>props</code> takes priority. Figma can select finite fresh-mount design variants, preserving initializer omission/defaults and controlled precedence; this does not implement mount-time state on the canvas or qualify reverse reconstruction. Root/repeated references, HTML and Web Components emission still refuse this field.',
           text: "Overrides the child’s <code>children</code> text prop (code: JSX children; canvas: text override on the instance).",
           overrides:
             'Per-instance channel overrides — see <a href="#ref-overrides">below</a>.',
         }) +
+        `<p>On a nested component ref, <code>parts</code> can supply caller-owned React content through the child’s unique, unconstrained <code>children</code> slot. Bindings remain in parent scope while each child keeps its implementation and state. The native generator can populate the child’s existing slot without changing its main; test-host checks cover flex/grid layouts and nested slot locations; caller text inside a slot stays canvas-editable because Figma cannot bind it to a parent TEXT property. Live native behavior, automatic source integration and reverse reconstruction still require verification.</p>` +
         refusals("Refusals:", [
           "unknown child contracts; cycles (<code>a contract cannot compose itself</code>)",
           "setting an unknown child prop, or an <code>arrayOf</code> child prop — structured values cannot be fixed in anatomy",
@@ -1243,7 +1250,7 @@ function eventsPage(): { route: string; html: string } {
         name: "Event name, lowerCamel.",
         description: "Flows into JSDoc and the canvas component description.",
         bindings:
-          "Code-only by declared fidelity limit: the callback prop, which must be <code>on*</code>.",
+          "Code-only by declared fidelity limit: <code>code.prop</code> names the callback and must be <code>on*</code>. Optional <code>code.argument: next-value</code> makes both React emitters pass the next toggled value, using the prop's public <code>bindings.code.values</code> mapping when present. It requires a toggle between two distinct enum values. For example, an internal off/on axis mapped to false/true calls <code>onCheckedChange(true)</code>, not the internal axis key. A controlled value remains owned by the caller; the callback reports the requested next value. Omit <code>argument</code> to keep the existing zero-argument callback. This declaration does not infer behavior from a drawing or source type and does not change the Web Component CustomEvent API.",
         trigger:
           "The anatomy part (by name) whose activation fires the event; <code>root</code> allowed.",
         toggles: "See below.",

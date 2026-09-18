@@ -1,0 +1,463 @@
+{
+  "purpose": "Unqualified native Lit render observations from the unchanged source; not accepted contracts or behavior evidence.",
+  "sourceRevision": "0639eccd15bfedc4fa9713d9545a64cef2c0f0a5",
+  "sourceSha256": "d2625be0fdcbdd55a5c5df62c9c7cc76cd5a4a9c6f22eb5a3b4bfe72486dc478",
+  "rows": [
+    {
+      "story": "atoms-checkbox--checked",
+      "sourcePngSha256": "f852f7c3678e028946a732407c82d70a3520942facd858db24c78ea98401fe4e",
+      "observation": {
+        "version": 1,
+        "policy": {
+          "version": 1,
+          "sourceSha256": "d2625be0fdcbdd55a5c5df62c9c7cc76cd5a4a9c6f22eb5a3b4bfe72486dc478",
+          "className": "ALCheckbox",
+          "tagName": "al-checkbox"
+        },
+        "status": "captured",
+        "renders": 3,
+        "problems": [],
+        "last": {
+          "value": {
+            "kind": "template",
+            "strings": [
+              "\n      <div class=\"",
+              "\">\n        <div class=\"al-c-checkbox__container\">\n          <div class=\"al-c-checkbox__checkbox\">\n            <input\n              class=\"al-c-checkbox__input\"\n              type=\"checkbox\"\n              id=\"",
+              "\"\n              name=\"",
+              "\"\n              .value=\"",
+              "\"\n              .checked=\"",
+              "\"\n              ?disabled=\"",
+              "\"\n              ?required=",
+              "\n              @change=",
+              "\n              @keydown=",
+              "\n              aria-describedby=\"",
+              "\"\n              tabindex=\"0\"\n            />\n            <span class=\"al-c-checkbox__custom-check\"></span>\n            <span class=\"al-c-checkbox__ripple\"></span>\n          </div>\n          <label class=\"al-c-checkbox__label\" for=\"",
+              "\">\n            <slot></slot>\n          </label>\n        </div>\n        ",
+              "\n        ",
+              "\n      </div>\n    "
+            ],
+            "values": [
+              {
+                "kind": "opaque"
+              },
+              {
+                "kind": "scalar",
+                "value": "K9UmVPsvT3NHU6VsKp_s_"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-name"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-value"
+              },
+              {
+                "kind": "scalar",
+                "value": true
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "scalar",
+                "value": "S8kcdxuuPN2aokjsC0O4n"
+              },
+              {
+                "kind": "scalar",
+                "value": "K9UmVPsvT3NHU6VsKp_s_"
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  "\n              <slot name=\"field-note\">\n                <al-field-note ?isDisabled=",
+                  " id=",
+                  "> ",
+                  " </al-field-note>\n              </slot>\n            "
+                ],
+                "values": [
+                  {
+                    "kind": "undefined"
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "S8kcdxuuPN2aokjsC0O4n"
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "This is a field note."
+                  }
+                ]
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  ""
+                ],
+                "values": []
+              }
+            ]
+          },
+          "staticFields": [
+            {
+              "property": "fieldNoteEl",
+              "value": "al-field-note"
+            }
+          ]
+        }
+      },
+      "observationSha256": "afcaee6cc15338bece0955a3d484d3ee54da6380e139859a040911f1fc16be97"
+    },
+    {
+      "story": "atoms-checkbox--default",
+      "sourcePngSha256": "871bd242ab009b6db6564fe4073c46097a840517e04b8c7bc9353dfb043f66b2",
+      "observation": {
+        "version": 1,
+        "policy": {
+          "version": 1,
+          "sourceSha256": "d2625be0fdcbdd55a5c5df62c9c7cc76cd5a4a9c6f22eb5a3b4bfe72486dc478",
+          "className": "ALCheckbox",
+          "tagName": "al-checkbox"
+        },
+        "status": "captured",
+        "renders": 1,
+        "problems": [],
+        "last": {
+          "value": {
+            "kind": "template",
+            "strings": [
+              "\n      <div class=\"",
+              "\">\n        <div class=\"al-c-checkbox__container\">\n          <div class=\"al-c-checkbox__checkbox\">\n            <input\n              class=\"al-c-checkbox__input\"\n              type=\"checkbox\"\n              id=\"",
+              "\"\n              name=\"",
+              "\"\n              .value=\"",
+              "\"\n              .checked=\"",
+              "\"\n              ?disabled=\"",
+              "\"\n              ?required=",
+              "\n              @change=",
+              "\n              @keydown=",
+              "\n              aria-describedby=\"",
+              "\"\n              tabindex=\"0\"\n            />\n            <span class=\"al-c-checkbox__custom-check\"></span>\n            <span class=\"al-c-checkbox__ripple\"></span>\n          </div>\n          <label class=\"al-c-checkbox__label\" for=\"",
+              "\">\n            <slot></slot>\n          </label>\n        </div>\n        ",
+              "\n        ",
+              "\n      </div>\n    "
+            ],
+            "values": [
+              {
+                "kind": "opaque"
+              },
+              {
+                "kind": "scalar",
+                "value": "lE9KuLcYmQO8ZUspcBRmW"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-name"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-value"
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "scalar",
+                "value": "t_BnqaGbykgBahyX5JDPt"
+              },
+              {
+                "kind": "scalar",
+                "value": "lE9KuLcYmQO8ZUspcBRmW"
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  "\n              <slot name=\"field-note\">\n                <al-field-note ?isDisabled=",
+                  " id=",
+                  "> ",
+                  " </al-field-note>\n              </slot>\n            "
+                ],
+                "values": [
+                  {
+                    "kind": "undefined"
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "t_BnqaGbykgBahyX5JDPt"
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "This is a field note."
+                  }
+                ]
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  ""
+                ],
+                "values": []
+              }
+            ]
+          },
+          "staticFields": [
+            {
+              "property": "fieldNoteEl",
+              "value": "al-field-note"
+            }
+          ]
+        }
+      },
+      "observationSha256": "e888fc6f8600388e51e55573c9ff8ae546b5af8e3407292dc4ef92e594e12913"
+    },
+    {
+      "story": "atoms-checkbox--disabled",
+      "sourcePngSha256": "99fa3f08f4fd0140d4f5bc7a9511e7c2cfa624e8a737d20ec2178e8d16bd9b26",
+      "observation": {
+        "version": 1,
+        "policy": {
+          "version": 1,
+          "sourceSha256": "d2625be0fdcbdd55a5c5df62c9c7cc76cd5a4a9c6f22eb5a3b4bfe72486dc478",
+          "className": "ALCheckbox",
+          "tagName": "al-checkbox"
+        },
+        "status": "captured",
+        "renders": 1,
+        "problems": [],
+        "last": {
+          "value": {
+            "kind": "template",
+            "strings": [
+              "\n      <div class=\"",
+              "\">\n        <div class=\"al-c-checkbox__container\">\n          <div class=\"al-c-checkbox__checkbox\">\n            <input\n              class=\"al-c-checkbox__input\"\n              type=\"checkbox\"\n              id=\"",
+              "\"\n              name=\"",
+              "\"\n              .value=\"",
+              "\"\n              .checked=\"",
+              "\"\n              ?disabled=\"",
+              "\"\n              ?required=",
+              "\n              @change=",
+              "\n              @keydown=",
+              "\n              aria-describedby=\"",
+              "\"\n              tabindex=\"0\"\n            />\n            <span class=\"al-c-checkbox__custom-check\"></span>\n            <span class=\"al-c-checkbox__ripple\"></span>\n          </div>\n          <label class=\"al-c-checkbox__label\" for=\"",
+              "\">\n            <slot></slot>\n          </label>\n        </div>\n        ",
+              "\n        ",
+              "\n      </div>\n    "
+            ],
+            "values": [
+              {
+                "kind": "opaque"
+              },
+              {
+                "kind": "scalar",
+                "value": "8e04gp6569xwyPkDFa4Vf"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-name"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-value"
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "scalar",
+                "value": true
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "scalar",
+                "value": "Jwt2UUTEDgRhzzhWTmSmv"
+              },
+              {
+                "kind": "scalar",
+                "value": "8e04gp6569xwyPkDFa4Vf"
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  "\n              <slot name=\"field-note\">\n                <al-field-note ?isDisabled=",
+                  " id=",
+                  "> ",
+                  " </al-field-note>\n              </slot>\n            "
+                ],
+                "values": [
+                  {
+                    "kind": "scalar",
+                    "value": true
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "Jwt2UUTEDgRhzzhWTmSmv"
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "This is a field note."
+                  }
+                ]
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  ""
+                ],
+                "values": []
+              }
+            ]
+          },
+          "staticFields": [
+            {
+              "property": "fieldNoteEl",
+              "value": "al-field-note"
+            }
+          ]
+        }
+      },
+      "observationSha256": "1d8bcb4321460c1e1b32c501063b7641ed33a579d70d08d35d045f7488e2c4b0"
+    },
+    {
+      "story": "atoms-checkbox--indeterminate",
+      "sourcePngSha256": "d5e6ed0c78aa546bdfcc14529c89ae1ee5b08184821e5934f3fde075856f6bdf",
+      "observation": {
+        "version": 1,
+        "policy": {
+          "version": 1,
+          "sourceSha256": "d2625be0fdcbdd55a5c5df62c9c7cc76cd5a4a9c6f22eb5a3b4bfe72486dc478",
+          "className": "ALCheckbox",
+          "tagName": "al-checkbox"
+        },
+        "status": "captured",
+        "renders": 3,
+        "problems": [],
+        "last": {
+          "value": {
+            "kind": "template",
+            "strings": [
+              "\n      <div class=\"",
+              "\">\n        <div class=\"al-c-checkbox__container\">\n          <div class=\"al-c-checkbox__checkbox\">\n            <input\n              class=\"al-c-checkbox__input\"\n              type=\"checkbox\"\n              id=\"",
+              "\"\n              name=\"",
+              "\"\n              .value=\"",
+              "\"\n              .checked=\"",
+              "\"\n              ?disabled=\"",
+              "\"\n              ?required=",
+              "\n              @change=",
+              "\n              @keydown=",
+              "\n              aria-describedby=\"",
+              "\"\n              tabindex=\"0\"\n            />\n            <span class=\"al-c-checkbox__custom-check\"></span>\n            <span class=\"al-c-checkbox__ripple\"></span>\n          </div>\n          <label class=\"al-c-checkbox__label\" for=\"",
+              "\">\n            <slot></slot>\n          </label>\n        </div>\n        ",
+              "\n        ",
+              "\n      </div>\n    "
+            ],
+            "values": [
+              {
+                "kind": "opaque"
+              },
+              {
+                "kind": "scalar",
+                "value": "xV9JLqmtgn7mXGWEi3P9O"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-name"
+              },
+              {
+                "kind": "scalar",
+                "value": "checkbox-value"
+              },
+              {
+                "kind": "scalar",
+                "value": true
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "undefined"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "function"
+              },
+              {
+                "kind": "scalar",
+                "value": "ICSN537qP-UgPO6i5Nfn0"
+              },
+              {
+                "kind": "scalar",
+                "value": "xV9JLqmtgn7mXGWEi3P9O"
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  "\n              <slot name=\"field-note\">\n                <al-field-note ?isDisabled=",
+                  " id=",
+                  "> ",
+                  " </al-field-note>\n              </slot>\n            "
+                ],
+                "values": [
+                  {
+                    "kind": "undefined"
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "ICSN537qP-UgPO6i5Nfn0"
+                  },
+                  {
+                    "kind": "scalar",
+                    "value": "This is a field note."
+                  }
+                ]
+              },
+              {
+                "kind": "template",
+                "strings": [
+                  ""
+                ],
+                "values": []
+              }
+            ]
+          },
+          "staticFields": [
+            {
+              "property": "fieldNoteEl",
+              "value": "al-field-note"
+            }
+          ]
+        }
+      },
+      "observationSha256": "e6bffda3ecaa2d1ee699e7080b33b320853c3cbe2a09428162633cb5a163bdc9"
+    }
+  ]
+}
