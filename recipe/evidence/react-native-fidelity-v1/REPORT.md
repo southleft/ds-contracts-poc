@@ -119,6 +119,8 @@ The retained Button family: 63 native mains (size × variant). NOT MEASURED — 
 
 `size=default, variant=default`, `size=default, variant=null`, `size=default, variant=outline`, `size=default, variant=secondary`, `size=default, variant=ghost`, `size=default, variant=destructive`, `size=default, variant=link`, `size=null, variant=default`, `size=null, variant=null`, `size=null, variant=outline`, `size=null, variant=secondary`, `size=null, variant=ghost`, `size=null, variant=destructive`, `size=null, variant=link`, `size=xs, variant=default`, `size=xs, variant=null`, `size=xs, variant=outline`, `size=xs, variant=secondary`, `size=xs, variant=ghost`, `size=xs, variant=destructive`, `size=xs, variant=link`, `size=sm, variant=default`, `size=sm, variant=null`, `size=sm, variant=outline`, `size=sm, variant=secondary`, `size=sm, variant=ghost`, `size=sm, variant=destructive`, `size=sm, variant=link`, `size=lg, variant=default`, `size=lg, variant=null`, `size=lg, variant=outline`, `size=lg, variant=secondary`, `size=lg, variant=ghost`, `size=lg, variant=destructive`, `size=lg, variant=link`, `size=icon, variant=default`, `size=icon, variant=null`, `size=icon, variant=outline`, `size=icon, variant=secondary`, `size=icon, variant=ghost`, `size=icon, variant=destructive`, `size=icon, variant=link`, `size=icon-xs, variant=default`, `size=icon-xs, variant=null`, `size=icon-xs, variant=outline`, `size=icon-xs, variant=secondary`, `size=icon-xs, variant=ghost`, `size=icon-xs, variant=destructive`, `size=icon-xs, variant=link`, `size=icon-sm, variant=default`, `size=icon-sm, variant=null`, `size=icon-sm, variant=outline`, `size=icon-sm, variant=secondary`, `size=icon-sm, variant=ghost`, `size=icon-sm, variant=destructive`, `size=icon-sm, variant=link`, `size=icon-lg, variant=default`, `size=icon-lg, variant=null`, `size=icon-lg, variant=outline`, `size=icon-lg, variant=secondary`, `size=icon-lg, variant=ghost`, `size=icon-lg, variant=destructive`, `size=icon-lg, variant=link`
 
+Pixels stay not-measured for these mains. Their non-content box facts (declared size, padding, border, radius, paints, opacity, gap, shadow) are measured separately — see **Root geometry (no pixels)** below.
+
 ## Named rows (KNOWN-FAILURES.json)
 
 - `button-initial/disabled=false, variant=null` — **named-font-residual** [font-substrate] historical 9.195 %: 9.195 % historical. The variant paints no background, so the ink trim reduces the pair to the label alone (native 92x14, source 94x14): the 1 px antialiasing fringe Chromium paints at the glyph edges becomes the whole denominator. Typography is identical on both sides (Inter Medium 14/20, letter-spacing 0). Placed by the recorded layout origins the pair differs by 1.646 % (113 of 6864 px) with 0 differing pixels outside the native text box; Chromium lays down 1.133x Figma's ink for the same glyphs. The native text box covers the whole trimmed cell, so the glyph-masked pass has nothing left to score (the text-only row branch).
@@ -133,9 +135,155 @@ The retained Button family: 63 native mains (size × variant). NOT MEASURED — 
 
 Inside the native text boxes (placed by layout origin) Chromium lays down 1.123×–1.359× the ink Figma does for the same glyphs (median 1.143×, 32 rows with text). Ink mass = Σ |pixel − the box's modal background| / 255. It is supplementary and never part of a verdict.
 
+## Root geometry (no pixels)
+
+The 63 `button-root-matrix` mains stay **not-measured for pixels** (above). Their NON-CONTENT BOX FACTS are measured separately here: for every main, what the sealed React observation measured on the root (computed style of the pinned property-matrix row) against what the native readback returned for the main carrying the same property assignment. Recomputed from `root-geometry/facts.json` by `source-reference/react-root-geometry.ts`.
+
+**This proves non-content box facts only — NOT the width of a content-sized box, NOT text, fonts, antialiasing or any pixel.** It is measured, not graded.
+
+What a `match` here is, and is not: the native plan was compiled from these same source observations, so this table measures CARRIAGE — that a measured value survived the mint, the variables, the writer and Figma and came back in an independent readback — not a second, independent measurement of the React root. The native side is the node's STORED properties in a dated readback, not rendered geometry (a radius larger than a 3 px hugging main is stored, and clamped by either renderer). The background's clip is carried as evidence (source `background-clip` against the native carrier) and refuses a `match` when the carrier differs; the inset geometry of a padding-box plane is the readback verifier's check, not this table's.
+
+- Numbers: exact, or the float32 of the source value (the readback verifier's own `numeric` policy). No tolerance and no rounding — the writer applies none to a px fact.
+- Colours: both sides on the sRGB 8-bit grid. The source value is lowered by the mint's own `kindOf` (one OKLab conversion, alpha `Math.round(a × 255)`); a native float is `Math.round(c × 255)`. A bound native paint resolves through the variables the same readback returned and must agree with the inline paint. A paint whose 8-bit alpha is 0 paints nothing and equals `none`.
+- Gap: a flex container's `normal` gap is its used value 0 px (the root-matrix assembler's own lowering `flex-normal-gap-used-value`).
+- Shadow: compared only when `parseCssBoxShadow` accepts the source value and every native effect is a plain visible drop/inner shadow.
+- A DIMENSION is comparable only when DECLARED: the source's `styleOrigin` size status is `fixed` (an authored size) and the native main is FIXED with a plan-declared size. `auto` against HUG is content-derived on both sides — `not-comparable`, both numbers printed. One side declaring what the other derives is a `mismatch`.
+
+**The join.** The plan's code-value axes (`size`: 9 values, default `default`; `variant`: 7 values, default `default`) map each source row's property changes to a variant value; a native main is paired by its own `variantProperties`. 63 of the 80 source observations SET every axis and pair one-to-one with the 63 mains. The other 17 OMIT a prop: the contract maps an omission to the prop's default, so they have no variant of their own — each collapses onto the explicit-default variant and carries that row's tree hash (listed at the end of this section).
+
+### Totals per fact kind
+
+| fact | match | mismatch | not-comparable | reasons |
+| --- | ---: | ---: | ---: | --- |
+| width | 28 | 0 | 35 | content-derived-width-empty-slot × 35 |
+| height | 56 | 0 | 7 | content-derived-height-empty-slot × 7 |
+| padding-top | 63 | 0 | 0 | — |
+| padding-right | 63 | 0 | 0 | — |
+| padding-bottom | 63 | 0 | 0 | — |
+| padding-left | 63 | 0 | 0 | — |
+| border-width-top | 63 | 0 | 0 | — |
+| border-width-right | 63 | 0 | 0 | — |
+| border-width-bottom | 63 | 0 | 0 | — |
+| border-width-left | 63 | 0 | 0 | — |
+| radius-top-left | 63 | 0 | 0 | — |
+| radius-top-right | 63 | 0 | 0 | — |
+| radius-bottom-right | 63 | 0 | 0 | — |
+| radius-bottom-left | 63 | 0 | 0 | — |
+| background | 63 | 0 | 0 | — |
+| border-paint | 63 | 0 | 0 | — |
+| opacity | 63 | 0 | 0 | — |
+| gap | 63 | 0 | 0 | — |
+| shadow | 63 | 0 | 0 | — |
+| **all 19 kinds × 63 mains** | 1155 | 0 | 42 | |
+
+### Per variant
+
+A bare value is carried by both sides (`match`); `a = b` is a match spelled differently; **`a ≠ b`** is a `mismatch`; `a ∥ b` is `not-comparable` (source ∥ native). Sides are top / right / bottom / left, corners top-left / top-right / bottom-right / bottom-left.
+
+| variant | row | width | height | padding | border width | radius | background | border paint | opacity | gap | shadow |
+| --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| size=default, variant=default | 9 | 115.812 ∥ 23 | 36 | 0 / 10 / 0 / 10 | 1 | 8 | #171717ff | #00000000 | 1 | 6 | none |
+| size=default, variant=null | 8 | 115.812 ∥ 23 | 36 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 6 | none |
+| size=default, variant=outline | 10 | 115.812 ∥ 23 | 36 | 0 / 10 / 0 / 10 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 6 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=default, variant=secondary | 11 | 115.812 ∥ 23 | 36 | 0 / 10 / 0 / 10 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 6 | none |
+| size=default, variant=ghost | 12 | 115.812 ∥ 23 | 36 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 6 | none |
+| size=default, variant=destructive | 13 | 115.812 ∥ 23 | 36 | 0 / 10 / 0 / 10 | 1 | 8 | #e7000b1a | #00000000 | 1 | 6 | none |
+| size=default, variant=link | 14 | 115.812 ∥ 23 | 36 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 6 | none |
+| size=null, variant=default | 1 | 95.8125 ∥ 3 | 22 ∥ 3 | 0 | 1 | 8 | #171717ff | #00000000 | 1 | 0 | none |
+| size=null, variant=null | 0 | 95.8125 ∥ 3 | 22 ∥ 3 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=null, variant=outline | 2 | 95.8125 ∥ 3 | 22 ∥ 3 | 0 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 0 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=null, variant=secondary | 3 | 95.8125 ∥ 3 | 22 ∥ 3 | 0 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 0 | none |
+| size=null, variant=ghost | 4 | 95.8125 ∥ 3 | 22 ∥ 3 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=null, variant=destructive | 5 | 95.8125 ∥ 3 | 22 ∥ 3 | 0 | 1 | 8 | #e7000b1a | #00000000 | 1 | 0 | none |
+| size=null, variant=link | 6 | 95.8125 ∥ 3 | 22 ∥ 3 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=xs, variant=default | 17 | 98.4219 ∥ 19 | 24 | 0 / 8 / 0 / 8 | 1 | 8 | #171717ff | #00000000 | 1 | 4 | none |
+| size=xs, variant=null | 16 | 98.4219 ∥ 19 | 24 | 0 / 8 / 0 / 8 | 1 | 8 | #00000000 | #00000000 | 1 | 4 | none |
+| size=xs, variant=outline | 18 | 98.4219 ∥ 19 | 24 | 0 / 8 / 0 / 8 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 4 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=xs, variant=secondary | 19 | 98.4219 ∥ 19 | 24 | 0 / 8 / 0 / 8 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 4 | none |
+| size=xs, variant=ghost | 20 | 98.4219 ∥ 19 | 24 | 0 / 8 / 0 / 8 | 1 | 8 | #00000000 | #00000000 | 1 | 4 | none |
+| size=xs, variant=destructive | 21 | 98.4219 ∥ 19 | 24 | 0 / 8 / 0 / 8 | 1 | 8 | #e7000b1a | #00000000 | 1 | 4 | none |
+| size=xs, variant=link | 22 | 98.4219 ∥ 19 | 24 | 0 / 8 / 0 / 8 | 1 | 8 | #00000000 | #00000000 | 1 | 4 | none |
+| size=sm, variant=default | 25 | 115.812 ∥ 23 | 32 | 0 / 10 / 0 / 10 | 1 | 8 | #171717ff | #00000000 | 1 | 4 | none |
+| size=sm, variant=null | 24 | 115.812 ∥ 23 | 32 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 4 | none |
+| size=sm, variant=outline | 26 | 115.812 ∥ 23 | 32 | 0 / 10 / 0 / 10 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 4 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=sm, variant=secondary | 27 | 115.812 ∥ 23 | 32 | 0 / 10 / 0 / 10 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 4 | none |
+| size=sm, variant=ghost | 28 | 115.812 ∥ 23 | 32 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 4 | none |
+| size=sm, variant=destructive | 29 | 115.812 ∥ 23 | 32 | 0 / 10 / 0 / 10 | 1 | 8 | #e7000b1a | #00000000 | 1 | 4 | none |
+| size=sm, variant=link | 30 | 115.812 ∥ 23 | 32 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 4 | none |
+| size=lg, variant=default | 33 | 115.812 ∥ 23 | 40 | 0 / 10 / 0 / 10 | 1 | 8 | #171717ff | #00000000 | 1 | 6 | none |
+| size=lg, variant=null | 32 | 115.812 ∥ 23 | 40 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 6 | none |
+| size=lg, variant=outline | 34 | 115.812 ∥ 23 | 40 | 0 / 10 / 0 / 10 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 6 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=lg, variant=secondary | 35 | 115.812 ∥ 23 | 40 | 0 / 10 / 0 / 10 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 6 | none |
+| size=lg, variant=ghost | 36 | 115.812 ∥ 23 | 40 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 6 | none |
+| size=lg, variant=destructive | 37 | 115.812 ∥ 23 | 40 | 0 / 10 / 0 / 10 | 1 | 8 | #e7000b1a | #00000000 | 1 | 6 | none |
+| size=lg, variant=link | 38 | 115.812 ∥ 23 | 40 | 0 / 10 / 0 / 10 | 1 | 8 | #00000000 | #00000000 | 1 | 6 | none |
+| size=icon, variant=default | 41 | 36 | 36 | 0 | 1 | 8 | #171717ff | #00000000 | 1 | 0 | none |
+| size=icon, variant=null | 40 | 36 | 36 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon, variant=outline | 42 | 36 | 36 | 0 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 0 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=icon, variant=secondary | 43 | 36 | 36 | 0 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 0 | none |
+| size=icon, variant=ghost | 44 | 36 | 36 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon, variant=destructive | 45 | 36 | 36 | 0 | 1 | 8 | #e7000b1a | #00000000 | 1 | 0 | none |
+| size=icon, variant=link | 46 | 36 | 36 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-xs, variant=default | 49 | 24 | 24 | 0 | 1 | 8 | #171717ff | #00000000 | 1 | 0 | none |
+| size=icon-xs, variant=null | 48 | 24 | 24 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-xs, variant=outline | 50 | 24 | 24 | 0 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 0 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=icon-xs, variant=secondary | 51 | 24 | 24 | 0 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 0 | none |
+| size=icon-xs, variant=ghost | 52 | 24 | 24 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-xs, variant=destructive | 53 | 24 | 24 | 0 | 1 | 8 | #e7000b1a | #00000000 | 1 | 0 | none |
+| size=icon-xs, variant=link | 54 | 24 | 24 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-sm, variant=default | 57 | 32 | 32 | 0 | 1 | 8 | #171717ff | #00000000 | 1 | 0 | none |
+| size=icon-sm, variant=null | 56 | 32 | 32 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-sm, variant=outline | 58 | 32 | 32 | 0 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 0 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=icon-sm, variant=secondary | 59 | 32 | 32 | 0 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 0 | none |
+| size=icon-sm, variant=ghost | 60 | 32 | 32 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-sm, variant=destructive | 61 | 32 | 32 | 0 | 1 | 8 | #e7000b1a | #00000000 | 1 | 0 | none |
+| size=icon-sm, variant=link | 62 | 32 | 32 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-lg, variant=default | 65 | 40 | 40 | 0 | 1 | 8 | #171717ff | #00000000 | 1 | 0 | none |
+| size=icon-lg, variant=null | 64 | 40 | 40 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-lg, variant=outline | 66 | 40 | 40 | 0 | 1 | 8 | #ffffffff | #e5e5e5ff | 1 | 0 | 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 0 0 0 #00000000, 0 1 2 0 #0000000d |
+| size=icon-lg, variant=secondary | 67 | 40 | 40 | 0 | 1 | 8 | #f5f5f5ff | #00000000 | 1 | 0 | none |
+| size=icon-lg, variant=ghost | 68 | 40 | 40 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+| size=icon-lg, variant=destructive | 69 | 40 | 40 | 0 | 1 | 8 | #e7000b1a | #00000000 | 1 | 0 | none |
+| size=icon-lg, variant=link | 70 | 40 | 40 | 0 | 1 | 8 | #00000000 | #00000000 | 1 | 0 | none |
+
+### Not comparable
+
+- **width** `not-comparable:content-derived-width-empty-slot` — source 115.812, native 23 (21 mains). Evidence: source width origin auto; native sizing HUG, plan declares no fixed size; native content empty-slot. Mains: `size=default, variant=default`, `size=default, variant=null`, `size=default, variant=outline`, `size=default, variant=secondary`, `size=default, variant=ghost`, `size=default, variant=destructive`, `size=default, variant=link`, `size=sm, variant=default`, `size=sm, variant=null`, `size=sm, variant=outline`, `size=sm, variant=secondary`, `size=sm, variant=ghost`, `size=sm, variant=destructive`, `size=sm, variant=link`, `size=lg, variant=default`, `size=lg, variant=null`, `size=lg, variant=outline`, `size=lg, variant=secondary`, `size=lg, variant=ghost`, `size=lg, variant=destructive`, `size=lg, variant=link`
+- **width** `not-comparable:content-derived-width-empty-slot` — source 95.8125, native 3 (7 mains). Evidence: source width origin auto; native sizing HUG, plan declares no fixed size; native content empty-slot. Mains: `size=null, variant=default`, `size=null, variant=null`, `size=null, variant=outline`, `size=null, variant=secondary`, `size=null, variant=ghost`, `size=null, variant=destructive`, `size=null, variant=link`
+- **height** `not-comparable:content-derived-height-empty-slot` — source 22, native 3 (7 mains). Evidence: source height origin auto; native sizing HUG, plan declares no fixed size; native content empty-slot. Mains: `size=null, variant=default`, `size=null, variant=null`, `size=null, variant=outline`, `size=null, variant=secondary`, `size=null, variant=ghost`, `size=null, variant=destructive`, `size=null, variant=link`
+- **width** `not-comparable:content-derived-width-empty-slot` — source 98.4219, native 19 (7 mains). Evidence: source width origin auto; native sizing HUG, plan declares no fixed size; native content empty-slot. Mains: `size=xs, variant=default`, `size=xs, variant=null`, `size=xs, variant=outline`, `size=xs, variant=secondary`, `size=xs, variant=ghost`, `size=xs, variant=destructive`, `size=xs, variant=link`
+
+### Mismatches
+
+None. `KNOWN-FAILURES.json` `rootGeometry` names no row.
+
+### Source observations with no variant of their own (17)
+
+| row | omits | collapses onto | that variant's row | same tree hash |
+| ---: | --- | --- | ---: | --- |
+| 7 | `variant` | size=null, variant=default | 1 | `a6217a2f1533…` = `a6217a2f1533…` |
+| 15 | `variant` | size=default, variant=default | 9 | `6c01c34c5ac5…` = `6c01c34c5ac5…` |
+| 23 | `variant` | size=xs, variant=default | 17 | `70ebbde44a30…` = `70ebbde44a30…` |
+| 31 | `variant` | size=sm, variant=default | 25 | `96ab56f07eb1…` = `96ab56f07eb1…` |
+| 39 | `variant` | size=lg, variant=default | 33 | `b6ab7d1a3637…` = `b6ab7d1a3637…` |
+| 47 | `variant` | size=icon, variant=default | 41 | `3a3f6963f255…` = `3a3f6963f255…` |
+| 55 | `variant` | size=icon-xs, variant=default | 49 | `df94187e6403…` = `df94187e6403…` |
+| 63 | `variant` | size=icon-sm, variant=default | 57 | `0b8f6ad7b890…` = `0b8f6ad7b890…` |
+| 71 | `variant` | size=icon-lg, variant=default | 65 | `d25fb10973b4…` = `d25fb10973b4…` |
+| 72 | `size` | size=default, variant=null | 8 | `c1f99743d818…` = `c1f99743d818…` |
+| 73 | `size` | size=default, variant=default | 9 | `6c01c34c5ac5…` = `6c01c34c5ac5…` |
+| 74 | `size` | size=default, variant=outline | 10 | `fdb714ae94d7…` = `fdb714ae94d7…` |
+| 75 | `size` | size=default, variant=secondary | 11 | `73ad90d1ddcb…` = `73ad90d1ddcb…` |
+| 76 | `size` | size=default, variant=ghost | 12 | `1fbf40a61223…` = `1fbf40a61223…` |
+| 77 | `size` | size=default, variant=destructive | 13 | `7bca67bd3c9e…` = `7bca67bd3c9e…` |
+| 78 | `size` | size=default, variant=link | 14 | `9b6b7f611593…` = `9b6b7f611593…` |
+| 79 | `size`, `variant` | size=default, variant=default | 9 | `6c01c34c5ac5…` = `6c01c34c5ac5…` |
+
+These observations OMIT a property. The root-matrix assembler maps an omitted prop to the contract's default value for it and refuses unless the omission renders the very tree of the explicit default (source-reference/react-root-matrix.ts: react-root-matrix-omission-or-default-changes-render), so an omission has no variant of its own: it collapses onto the explicit-default variant, whose tree hash it shares.
+
 ## What this does not measure
 
 - One mount, one initial state per variant, light scheme, one image pixel per CSS pixel. No interaction, hover, focus, responsive or dark-mode state.
 - The native side is a dated readback export, not a claim about the live file today.
-- Variants listed as not-measured above have no honest like-for-like pair; nothing was substituted for them.
+- Variants listed as not-measured above have no honest like-for-like pair; nothing was substituted for them. The root-geometry table compares their recorded box facts, never an image: it says nothing about the width of a content-sized main, text, fonts, antialiasing or any pixel.
 - Appearance only: structure, bindings and editability are qualified elsewhere.

@@ -5388,5 +5388,12 @@
       ],
       "notMeasuredReason": "A per-variant ORIGINAL React image exists for 63 of the 63 variants (the ownership archive's 80-observation property matrix), but no honest pair can be built: (1) every one of the 63 native mains is a Button root whose Children slot is EMPTY (component + background rectangle + slot, no text), while every original mount renders the caller's label, so an image comparison would measure the absent caller content, not the root; (2) 0 of the matrix originals record layout bounds and 0 of the 63 native exports record export bounds, so neither side has a recorded layout origin. No image was committed for this cohort and nothing was substituted."
     }
-  ]
+  ],
+  "rootGeometry": {
+    "cohort": "button-root-matrix",
+    "facts": {
+      "path": "root-geometry/facts.json",
+      "sha256": "cb78d22861781b0c31483bb4aa0f650168a14d1d50f21be7e0bdd4faecbf6a5e"
+    }
+  }
 }

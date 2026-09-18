@@ -28,24 +28,42 @@
  *
  * A variant with no honest like-for-like pair is recorded `not-measured` with
  * the exact reason. No image is reused for another variant.
+ *
+ * ROOT GEOMETRY. For the not-measured root family it also writes
+ * `root-geometry/facts.json`: per variant, ONLY the normalized box facts of
+ * both sides (source-reference/react-root-geometry.ts) plus provenance — the
+ * sealed archive file's sha256, the journal event, the node id, the property
+ * assignment and the join evidence. The native plan is authenticated by the
+ * operation header's `planSha256` and must carry the readback's plan
+ * revision. No journal bytes, no absolute path and no file key leave the
+ * private archive.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 import { PNG } from "pngjs";
 
+import { joinAxesOfPlan, joinSourceRowsToNativeMains, nativeRootFacts, sourceRootFacts, type NativeNode, type NativeVariable } from "../source-reference/react-root-geometry.js";
 import { cropSourceFrame } from "../source-reference/source-framing.js";
 import {
   EVIDENCE,
   QUALIFICATION,
   REPO,
+  ROOT_GEOMETRY_FACTS,
+  ROOT_GEOMETRY_VERDICTS,
   SOURCE_HARNESS,
+  assertNumericPolicyPin,
   assertScorerPins,
   buildScorecard,
   framingCrop,
+  measureRootGeometry,
   ratchetProblems,
   readJson,
   renderReport,
+  rootGeometryCoverageProblems,
+  rootGeometryRatchetProblems,
+  rootGeometryVerdicts,
+  serializeRootGeometryVerdicts,
   sha256,
   verifyBytes,
   type Box,
@@ -54,6 +72,7 @@ import {
   type Manifest,
   type NotMeasured,
   type Pair,
+  type RootGeometryFacts,
   type TextRect,
 } from "./react-native-fidelity-check.js";
 
@@ -303,16 +322,21 @@ function frameCohort(spec: FrameSpec): Cohort {
   };
 }
 
+/** Secrets and journal identifiers that must never reach a committed file. */
+const neverCommitted = new Set<string>();
+
 /** The 63 retained Button roots: original images exist per variant, but the native mains are content-less. */
-function buttonRootMatrix(): Cohort {
+function buttonRootMatrix(): { cohort: Cohort; geometry: RootGeometryFacts } {
   const operation = "e9bd4394-5801-4afc-8fde-b6c1807161a4", update = "source-native-updates/c620c0e9-dc6f-7e2a-3008-0896399a0a86", event = "00000007.json";
   const journal = readJournal(update, event), readback = journal.result;
   if (journal.header.parentId !== operation) refuse("update-journal-parent-mismatch", update);
   const header = readJournal(`source-native-app/operations/${operation}`, null).header;
   assertReadback(readback, operation, `${update}/events/${event}`);
   const archive = readArchive(`react-source-ownership/${REFERENCE}/${OWNERSHIP}`, header.request.inventorySha256);
-  const matrix = JSON.parse(archive.file("button-default/matrix/report.json").toString("utf8"));
+  const matrixReportBytes = archive.file("button-default/matrix/report.json");
+  const matrix = JSON.parse(matrixReportBytes.toString("utf8"));
   const nodes = new Map<string, any>(readback.nodes.map((n: any) => [n.id, n]));
+  if (typeof readback.fileKey === "string") neverCommitted.add(readback.fileKey);
   let withOriginal = 0, withBounds = 0, contentless = 0, exportBounds = 0;
   const notMeasured: NotMeasured[] = readback.images.map((image: any) => {
     const variant = String(image.caseId).replace(/^variant:/, "");
@@ -330,7 +354,7 @@ function buttonRootMatrix(): Cohort {
   });
   const total = readback.images.length;
   if (contentless !== total) refuse("button-root-matrix-premise-changed", `${contentless}/${total} native mains are content-less; re-examine whether the family became measurable`);
-  return {
+  const cohort: Cohort = {
     id: "button-root-matrix",
     component: "Button",
     description: `The retained Button family: ${total} native mains (size × variant). NOT MEASURED — see the reason below.`,
@@ -340,14 +364,64 @@ function buttonRootMatrix(): Cohort {
     notMeasured,
     notMeasuredReason: `A per-variant ORIGINAL React image exists for ${withOriginal} of the ${total} variants (the ownership archive's ${matrix.rows.length}-observation property matrix), but no honest pair can be built: (1) every one of the ${total} native mains is a Button root whose Children slot is EMPTY (component + background rectangle + slot, no text), while every original mount renders the caller's label, so an image comparison would measure the absent caller content, not the root; (2) ${withBounds} of the matrix originals record layout bounds and ${exportBounds} of the ${total} native exports record export bounds, so neither side has a recorded layout origin. No image was committed for this cohort and nothing was substituted.`,
   };
+
+  // ROOT GEOMETRY: the same mains, fact by fact. The plan is the one the operation header pins and the readback answers.
+  const planBytes = bytesOf(`source-native-app/operations/${operation}/plan.json`, "native-plan-missing");
+  if (sha256(planBytes) !== header.planSha256) refuse("native-plan-changed", `${operation}/plan.json is not the plan the operation header pins`);
+  const plan = JSON.parse(planBytes.toString("utf8"));
+  if (plan.revision !== readback.planRevision || plan.revision !== header.planRevision) refuse("native-plan-revision-mismatch", `the readback answers ${readback.planRevision}, the pinned plan is ${plan.revision}`);
+  if (header.request.caseId !== "button-default" || matrix.qualification !== "full-finite-style-matrix" || matrix.problems.length > 0 || matrix.rows.length !== matrix.planned) refuse("source-matrix-unverified", "button-default/matrix/report.json");
+  const variables = new Map<string, NativeVariable>((readback.tokens?.receipt?.variables ?? []).map((v: NativeVariable) => [v.id, v]));
+  const axes = joinAxesOfPlan(plan.plan.component);
+  const observations = matrix.rows.map((row: any) => {
+    if (row.status !== "observed" || row.restored !== true) refuse("source-state-not-observed", `button-default/matrix row ${row.id}`);
+    const file = `button-default/matrix/${row.id}.json`, bytes = archive.file(file), observed = JSON.parse(bytes.toString("utf8"));
+    if (observed.treeSha256 !== row.treeSha256 || observed.image !== row.image || sha256(JSON.stringify(observed.tree)) !== row.treeSha256) refuse("source-tree-changed", file);
+    const instance = observed.ownership?.components?.find((c: any) => c.id === matrix.instanceId);
+    if (!instance || instance.roots?.length !== 1 || instance.roots[0] !== "") refuse("source-root-not-the-observed-tree", file);
+    const origin = (observed.styleOrigin?.roots ?? []).filter((r: any) => r.path === instance.roots[0]);
+    if (origin.length !== 1) refuse("source-style-origin-not-recorded", file);
+    return { id: String(row.id), changes: row.changes, treeSha256: String(row.treeSha256), file, sha256: sha256(bytes), facts: sourceRootFacts(observed.tree.style, origin[0].sizes) };
+  });
+  const mains: NativeNode[] = readback.images.map((image: any) => {
+    const node = nodes.get(image.nodeId);
+    if (!node || node.type !== "COMPONENT" || `variant:${node.name}` !== image.caseId || !node.variantProperties) refuse("native-main-missing", String(image.caseId));
+    return node;
+  });
+  const { joined, collapsed } = joinSourceRowsToNativeMains(axes, observations, mains);
+  const geometry: RootGeometryFacts = {
+    artifactVersion: "react-native-root-geometry-facts-v1",
+    qualification: QUALIFICATION,
+    acceptedContract: null,
+    note: "Normalized NON-CONTENT box facts of the not-measured root mains: what the sealed React property-matrix observation measured on the root, and what the native readback returned for the main with the same property assignment. Measurements only — no pixel, no text, no grade. Verdicts are never stored here: scripts/react-native-fidelity-check.ts recomputes them. `file` paths are relative to the sealed ownership archive, whose inventory sha256 the native operation header pins; every sha256 was verified against that inventory when this was recorded.",
+    cohort: cohort.id,
+    provenance: {
+      source: { referenceId: REFERENCE, ownershipId: OWNERSHIP, caseId: header.request.caseId, inventorySha256: archive.inventorySha256, matrixReport: { file: "button-default/matrix/report.json", sha256: sha256(matrixReportBytes) }, matrixObservations: matrix.rows.length },
+      native: { operationId: operation, updateId: journal.header.id, journalEvent: `${path.basename(update)}/events/${event}`, journalEventSha256: journal.eventSha256, journalHeadSha256: journal.headSha256, planRevision: readback.planRevision, planSha256: header.planSha256, tokenVariables: variables.size },
+    },
+    axes,
+    rows: joined.map((j) => {
+      const main = nodes.get(j.nativeNodeId), observed = observations.find((o: any) => o.id === j.sourceRow)!;
+      const part = JSON.parse(main.metadata?.nativeContractPart || "null");
+      const planned = plan.plan.component.variants.filter((v: any) => part && v.name === part.variant && Array.isArray(part.specPath) && part.specPath.length === 0);
+      if (planned.length !== 1) refuse("native-main-not-in-the-plan", String(main.name));
+      return { variant: String(main.name), join: { sourceRow: j.sourceRow, changes: j.changes, assignment: j.assignment, nativeVariantProperties: j.nativeVariantProperties }, provenance: { source: { file: observed.file, sha256: observed.sha256, treeSha256: observed.treeSha256 }, native: { nodeId: j.nativeNodeId } }, source: observed.facts, native: nativeRootFacts(main, nodes, variables, planned[0].spec) };
+    }),
+    collapsed: collapsed.map((c) => {
+      const observed = observations.find((o: any) => o.id === c.sourceRow)!, target = joined.find((j) => j.sourceRow === c.canonicalRow)!;
+      return { ...c, collapsedOnto: String(nodes.get(target.nativeNodeId).name), file: observed.file, sha256: observed.sha256, reason: "These observations OMIT a property. The root-matrix assembler maps an omitted prop to the contract's default value for it and refuses unless the omission renders the very tree of the explicit default (source-reference/react-root-matrix.ts: react-root-matrix-omission-or-default-changes-render), so an omission has no variant of its own: it collapses onto the explicit-default variant, whose tree hash it shares." };
+    }),
+  };
+  return { cohort, geometry };
 }
 
 // ---------------------------------------------------------------------------
 assertScorerPins();
+assertNumericPolicyPin();
 const knownPath = path.join(outDir, "KNOWN-FAILURES.json");
 const keptKnown = existsSync(knownPath) ? readFileSync(knownPath) : null;
 // Only this lane's own cohort directories are ever removed — never the directory it was pointed at.
-for (const id of ["button-initial", "checkbox-initial", "card-composed-variants", "card-composed-frame", "card-content-frame", "button-root-matrix"]) rmSync(path.join(outDir, id), { recursive: true, force: true });
+for (const id of ["button-initial", "checkbox-initial", "card-composed-variants", "card-composed-frame", "card-content-frame", "button-root-matrix", "root-geometry"]) rmSync(path.join(outDir, id), { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 
 const cohorts: Cohort[] = [
@@ -401,8 +475,16 @@ const cohorts: Cohort[] = [
     event: "00000007.json",
     caseId: "card-content",
   }),
-  buttonRootMatrix(),
 ];
+const rootMatrix = buttonRootMatrix();
+cohorts.push(rootMatrix.cohort);
+
+/** Top level pretty, one variant per line: small, and a changed fact is a one-line diff. */
+const geometryBytes = `{\n${(Object.keys(rootMatrix.geometry) as Array<keyof RootGeometryFacts>).map((key) => {
+  const value = rootMatrix.geometry[key];
+  return key === "rows" || key === "collapsed" || key === "axes" ? `  ${JSON.stringify(key)}: [\n${(value as unknown[]).map((row) => `    ${JSON.stringify(row)}`).join(",\n")}\n  ]` : `  ${JSON.stringify(key)}: ${JSON.stringify(value, null, 2).replace(/\n/g, "\n  ")}`;
+}).join(",\n")}\n}\n`;
+emit(ROOT_GEOMETRY_FACTS, geometryBytes);
 
 const manifest: Manifest = {
   artifactVersion: "react-native-fidelity-manifest-v1",
@@ -412,6 +494,7 @@ const manifest: Manifest = {
   sourceReferenceId: REFERENCE,
   harness: SOURCE_HARNESS,
   cohorts,
+  rootGeometry: { cohort: rootMatrix.cohort.id, facts: { path: ROOT_GEOMETRY_FACTS, sha256: sha256(geometryBytes) } },
 };
 emit("manifest.json", `${JSON.stringify(manifest, null, 2)}\n`);
 
@@ -423,12 +506,14 @@ emit("KNOWN-FAILURES.json", keptKnown ?? `${JSON.stringify(known, null, 2)}\n`);
 verifyBytes(outDir, manifest);
 const scorecard = buildScorecard(outDir, manifest, known);
 emit("SCORECARD.json", `${JSON.stringify(scorecard, null, 2)}\n`);
-emit("REPORT.md", renderReport(manifest, scorecard, known));
+const geometry = measureRootGeometry(outDir, manifest);
+emit(ROOT_GEOMETRY_VERDICTS, serializeRootGeometryVerdicts(rootGeometryVerdicts(geometry)));
+emit("REPORT.md", renderReport(manifest, scorecard, known, geometry));
 
-const leak = written.filter((f) => /\.(json|md)$/.test(f)).filter((f) => /\/Users\/|\/home\/|figd_|FIGMA_TOKEN|pngBase64/.test(readFileSync(path.join(outDir, f), "utf8")));
-if (leak.length) refuse("evidence-leak", `${leak.join(", ")} carries a local path, a token or journal bytes`);
+const leak = written.filter((f) => /\.(json|md)$/.test(f)).filter((f) => { const text = readFileSync(path.join(outDir, f), "utf8"); return /\/Users\/|\/home\/|figd_|FIGMA_TOKEN|pngBase64/.test(text) || [...neverCommitted].some((secret) => text.includes(secret)); });
+if (leak.length) refuse("evidence-leak", `${leak.join(", ")} carries a local path, a token, a file key or journal bytes`);
 
 for (const cohort of cohorts) console.log(`${cohort.id.padEnd(26)} pairs ${String(cohort.pairs.length).padStart(2)} · not-measured ${cohort.notMeasured.length}`);
-const problems = ratchetProblems(scorecard, known);
+const problems = [...ratchetProblems(scorecard, known), ...rootGeometryRatchetProblems(geometry, known), ...rootGeometryCoverageProblems(geometry)];
 for (const p of problems) console.log(`  ratchet: ${p}`);
 console.log(`\nrecorded ${written.length} files into ${path.relative(REPO, outDir) || outDir}${problems.length ? " — the ratchet is RED until KNOWN-FAILURES.json names what the measurements support" : ""}`);
